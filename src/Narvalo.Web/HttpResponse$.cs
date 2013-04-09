@@ -3,7 +3,6 @@
     using System.Net;
     using System.Text;
     using System.Web;
-    using Narvalo.Diagnostics;
     using Newtonsoft.Json;
 
     public static class HttpResponseExtensions

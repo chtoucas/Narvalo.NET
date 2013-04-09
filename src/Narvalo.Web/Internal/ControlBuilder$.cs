@@ -4,7 +4,6 @@
     using System.Collections;
     using System.Reflection;
     using System.Web.UI;
-    using Narvalo.Diagnostics;
 
     // This class relies on the internal implementation details of ASP.NET.
     // Tested for ASP.NET 2.0, 3.5 , 4.0

@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Collections
 {
     using System.Collections.Generic;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
 
     public static class DictionaryExtensions

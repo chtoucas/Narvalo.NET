@@ -183,7 +183,7 @@
     <None Include="..\..\Etc\Keys\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Minification\README" />
+    <None Include="Minification\README.md" />
     <None Include="Narvalo.Web.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>

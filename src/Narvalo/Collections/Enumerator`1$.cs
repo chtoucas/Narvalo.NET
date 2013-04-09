@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Narvalo.Diagnostics;
 
     public static class EnumeratorExtensions
     {

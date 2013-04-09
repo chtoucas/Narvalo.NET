@@ -4,7 +4,6 @@
     using System.Collections.Specialized;
     using System.Globalization;
     using System.Web;
-    using Narvalo.Diagnostics;
 
     public static class NameValueCollectionExtensions
     {

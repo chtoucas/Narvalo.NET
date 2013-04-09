@@ -29,7 +29,6 @@
             IDictionary<string, object> attributes)
         {
             Requires.NotNull(linkUri, "linkUri");
-            //Requires.NotNullOrEmpty(linkType, "linkType");
 
             var tag = new TagBuilder("link");
             tag.MergeAttribute("href", linkUri.ToString());

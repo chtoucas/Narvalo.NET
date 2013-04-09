@@ -2,7 +2,6 @@
 {
     using System.Net;
     using Narvalo.Fx;
-    using Narvalo.Net.Mail;
 
     public static class IPAddressUtility
     {

@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
     public static partial class Maybe

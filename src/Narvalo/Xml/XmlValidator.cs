@@ -17,6 +17,8 @@ namespace Narvalo.Xml
 
         public XmlValidator(XmlReaderSettings settings)
         {
+            Requires.NotNull(settings, "settings");
+
             _settings = settings;
             _settings.ValidationEventHandler += (object sender, ValidationEventArgs e) => {
                 _isValid = false;

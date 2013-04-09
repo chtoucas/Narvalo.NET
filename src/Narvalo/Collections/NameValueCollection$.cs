@@ -3,7 +3,6 @@
     using System.Collections.Specialized;
     using System.Diagnostics.CodeAnalysis;
     using Narvalo;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
 
     public static class NameValueCollectionExtensions

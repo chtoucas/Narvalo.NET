@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Diagnostics;
 
     public static class MayFuncExtensions
     {

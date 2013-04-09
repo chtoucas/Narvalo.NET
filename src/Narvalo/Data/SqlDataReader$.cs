@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.SqlClient;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
 
     public static class SqlDataReaderExtensions

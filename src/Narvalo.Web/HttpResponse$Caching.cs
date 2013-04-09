@@ -2,7 +2,6 @@
 {
     using System;
     using System.Web;
-    using Narvalo.Diagnostics;
 
     public static class HttpResponseCachingExtensions
     {
