@@ -5,7 +5,7 @@
 
     public class AssetSection : ConfigurationSection
     {
-        #region Champs
+        #region > Champs <
 
         public const string DefaultName = "asset";
 
@@ -18,7 +18,7 @@
 
         // Configuration des propriétés.
         static ConfigurationProperty DefaultProviderProperty
-			= new ConfigurationProperty(
+            = new ConfigurationProperty(
                DefaultProviderPropertyName,
                typeof(String),
                DefaultProviderDefaultValue,
@@ -26,7 +26,7 @@
                new StringValidator(1),
                ConfigurationPropertyOptions.None);
         static ConfigurationProperty ProvidersProperty
-			= new ConfigurationProperty(ProvidersPropertyName, typeof(ProviderSettingsCollection));
+            = new ConfigurationProperty(ProvidersPropertyName, typeof(ProviderSettingsCollection));
 
         // Champs pour utiliser manuellement les accesseurs.
         string _defaultProvider;

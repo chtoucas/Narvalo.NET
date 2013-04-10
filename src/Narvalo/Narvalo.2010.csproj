@@ -199,7 +199,7 @@
     <Compile Include="EnumStyles.cs" />
     <Compile Include="EnumUtility.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="Failure.cs" />
+    <Compile Include="Fault.cs" />
     <Compile Include="Fx\Either`2%24.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Maybe.Array.cs" />
