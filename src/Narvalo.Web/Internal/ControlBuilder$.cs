@@ -14,7 +14,7 @@
 
         public static ArrayList GetComplexPropertyEntries(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             ICollection cpes = (ICollection)
                 controlBuilder
@@ -32,7 +32,7 @@
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             PropertyInfo pi = null;
             Type type = controlBuilder.GetType();
@@ -47,7 +47,7 @@
 
         public static ArrayList GetSimplePropertyEntries(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             ICollection cpes = (ICollection)
                 controlBuilder
@@ -65,7 +65,7 @@
 
         public static ArrayList GetChildBuilders(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             return (ArrayList)
                 controlBuilder
@@ -76,7 +76,7 @@
 
         public static ArrayList GetTemplatePropertyEntries(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             ICollection tpes = (ICollection)
                 controlBuilder
@@ -94,7 +94,7 @@
 
         public static ControlBuilder GetParentBuilder(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             return (ControlBuilder)
                 controlBuilder
@@ -105,7 +105,7 @@
 
         public static ControlBuilder GetRootBuilder(this ControlBuilder controlBuilder)
         {
-            Requires.NotNull(controlBuilder);
+            Requires.Object(controlBuilder);
 
             while (GetParentBuilder(controlBuilder) != null) {
                 controlBuilder = GetParentBuilder(controlBuilder);

@@ -9,7 +9,7 @@
     {
         public static Maybe<string> MayGetValue(this NameValueCollection nvc, string param)
         {
-            Requires.NotNull(nvc);
+            Requires.Object(nvc);
 
             return nvc.MayGetValues(param)
                 // On ne s'attend à ne récupérer qu'une seule valeur.
@@ -20,7 +20,7 @@
 
         public static Maybe<string[]> MayGetValues(this NameValueCollection nvc, string param)
         {
-            Requires.NotNull(nvc);
+            Requires.Object(nvc);
 
             return Maybe.Create(nvc.GetValues(param));
         }
@@ -31,7 +31,7 @@
             string param,
             MayFunc<string, T> parser)
         {
-            Requires.NotNull(nvc);
+            Requires.Object(nvc);
 
             return nvc.MayGetValues(param).Bind(@_ => Maybe.Collect(@_, parser));
         }
@@ -42,8 +42,8 @@
             string param,
             MayFunc<string, T> parser)
         {
+            Requires.Object(nvc);
             Requires.NotNull(parser, "parser");
-            Requires.NotNull(nvc);
 
             return nvc.MayGetValue(param).Bind(_ => parser(_));
         }
@@ -54,7 +54,7 @@
             string param,
             MayFunc<string, T> parser)
         {
-            Requires.NotNull(nvc);
+            Requires.Object(nvc);
 
             return nvc.MayGetValues(param).Bind(@_ => Maybe.Map(@_, parser));
         }

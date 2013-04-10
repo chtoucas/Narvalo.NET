@@ -30,7 +30,7 @@
             get
             {
                 if (!_isSome) {
-                    throw new InvalidOperationException(Strings.Maybe_NoneHasNoValue);
+                    throw new InvalidOperationException(SR.Maybe_NoneHasNoValue);
                 }
                 return _value;
             }

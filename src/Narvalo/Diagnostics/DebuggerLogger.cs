@@ -31,7 +31,7 @@
             if (exception != null) {
                 string debuggerMessage = String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.DebuggerLogger_MessageFormat,
+                    SR.DebuggerLogger_MessageFormat,
                     exception.GetType().FullName,
                     exception.Message,
                     exception.StackTrace);

@@ -18,7 +18,7 @@
 
             if (section == null) {
                 throw Failure.ConfigurationErrors(
-                    Strings.Configuration_MissingSection,
+                    SR.Configuration_MissingSection,
                     sectionName);
             }
 
@@ -35,7 +35,7 @@
 
             if (section == null) {
                 throw Failure.ConfigurationErrors(
-                    Strings.Configuration_MissingSection,
+                    SR.Configuration_MissingSection,
                     sectionName);
             }
 
@@ -70,7 +70,7 @@
 
             if (section == null) {
                 throw Failure.ConfigurationErrors(
-                    Strings.Configuration_MissingSection,
+                    SR.Configuration_MissingSection,
                     sectionName);
             }
 

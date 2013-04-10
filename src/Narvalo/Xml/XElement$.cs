@@ -11,7 +11,7 @@
     {
         public static Maybe<XAttribute> AttributeOrNone(this XElement element, string name)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var attr = element.Attribute(name);
             return attr == null ? Maybe<XAttribute>.None : Maybe.Create(attr);
@@ -19,13 +19,13 @@
 
         public static XAttribute AttributeOrThrow(this XElement element, string name)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var attr = element.Attribute(name);
             if (attr == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.XElement_AttributeNotFound,
+                    SR.XElement_AttributeNotFound,
                     element.Name.LocalName,
                     name));
             }
@@ -34,7 +34,7 @@
 
         public static Maybe<XElement> ElementOrNone(this XElement element, string name)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var child = element.Element(name);
             return child == null ? Maybe<XElement>.None : Maybe.Create(child);
@@ -42,13 +42,13 @@
 
         public static XElement ElementOrThrow(this XElement element, string name)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var child = element.Element(name);
             if (child == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.XElement_FirstChildNotFound,
+                    SR.XElement_FirstChildNotFound,
                     element.Name.LocalName,
                     name));
             }
@@ -57,36 +57,36 @@
 
         public static T ParseValue<T>(this XElement element, Func<string, T> fun)
         {
+            Requires.Object(element);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(element);
 
             return fun(element.Value);
         }
 
         public static T ParseValue<T>(this XElement element, MayFunc<string, T> fun)
         {
+            Requires.Object(element);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(element);
 
             return fun(element.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.XElement_MalformedElementValue,
+                    SR.XElement_MalformedElementValue,
                     element.Name.LocalName,
                     ((IXmlLineInfo)element).LineNumber)));
         }
 
         public static Maybe<T> MayParseValue<T>(this XElement element, MayFunc<string, T> fun)
         {
+            Requires.Object(element);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(element);
 
             return fun(element.Value);
         }
 
         public static Maybe<XElement> NextElementOrNone(this XElement element)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var nextElement = element.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
@@ -98,7 +98,7 @@
 
         public static XElement NextElementOrThrow(this XElement element)
         {
-            Requires.NotNull(element);
+            Requires.Object(element);
 
             var nextElement = element.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
@@ -107,7 +107,7 @@
             if (nextElement == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.XElement_NextElementNotFound,
+                    SR.XElement_NextElementNotFound,
                     element.Name.LocalName));
             }
 

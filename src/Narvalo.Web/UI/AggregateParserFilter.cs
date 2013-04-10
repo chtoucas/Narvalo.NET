@@ -9,7 +9,7 @@
 
     public class AggregateParserFilter : PageParserFilter
     {
-        const BindingFlags InstPubNonpub 
+        const BindingFlags InstPubNonpub_ 
             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
         List<PageParserFilter> _filters = new List<PageParserFilter>();
@@ -192,9 +192,9 @@
         protected override void Initialize()
         {
             MethodInfo initializeInternalMethod 
-                = typeof(PageParserFilter).GetMethod("InitializeInternal", InstPubNonpub);
-            object parser = typeof(PageParserFilter).GetField("_parser", InstPubNonpub).GetValue(this);
-            object virtualPath = typeof(PageParserFilter).GetField("_virtualPath", InstPubNonpub).GetValue(this);
+                = typeof(PageParserFilter).GetMethod("InitializeInternal", InstPubNonpub_);
+            object parser = typeof(PageParserFilter).GetField("_parser", InstPubNonpub_).GetValue(this);
+            object virtualPath = typeof(PageParserFilter).GetField("_virtualPath", InstPubNonpub_).GetValue(this);
 
             LoadFilters_();
 

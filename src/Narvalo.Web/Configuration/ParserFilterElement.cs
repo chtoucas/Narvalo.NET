@@ -10,21 +10,21 @@ namespace Narvalo.Web.Configuration
         #region Fields
 
         // Nom des propriétés.
-        private const string ElementTypeName = "type";
+        const string ElementTypeName = "type";
 
         // Configuration des propriétés.
-        private static readonly ConfigurationProperty ElementTypeProperty
-			= new ConfigurationProperty(
-                ElementTypeName,
-                typeof(Type),
-                null,
-                new TypeNameConverter(),
-                new SubclassTypeValidator(typeof(PageParserFilter)),
-                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static readonly ConfigurationProperty ElementTypeProperty
+           = new ConfigurationProperty(
+               ElementTypeName,
+               typeof(Type),
+               null,
+               new TypeNameConverter(),
+               new SubclassTypeValidator(typeof(PageParserFilter)),
+               ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
 
         // Champs pour utiliser manuellement les accesseurs.
-        private Type _elementType;
-        private bool _elementTypeSet = false;
+        Type _elementType;
+        bool _elementTypeSet = false;
 
         // Stockage des propriétés.
         private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();

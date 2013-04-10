@@ -16,7 +16,7 @@
 
         public static void SendJson(this HttpResponse response, object content)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.ContentType = "application/json";
             response.ContentEncoding = Encoding.UTF8;
@@ -28,7 +28,7 @@
 
         public static void SendPlainText(this HttpResponse response, string content)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.ContentType = "text/plain";
             response.Write(content);
@@ -38,7 +38,7 @@
 
         public static void SetStatusCode(this HttpResponse response, HttpStatusCode statusCode)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.StatusCode = (int)statusCode;
         }

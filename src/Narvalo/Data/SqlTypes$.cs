@@ -23,14 +23,14 @@
 
         public static Maybe<byte[]> ToMaybe(this SqlBytes @this)
         {
-            Requires.NotNull(@this);
+            Requires.Object(@this);
 
             return @this.IsNull ? Maybe<byte[]>.None : Maybe.Create(@this.Value);
         }
 
         public static Maybe<char[]> ToMaybe(this SqlChars @this)
         {
-            Requires.NotNull(@this);
+            Requires.Object(@this);
 
             return @this.IsNull ? Maybe<char[]>.None : Maybe.Create(@this.Value);
         }
@@ -87,7 +87,7 @@
 
         public static Maybe<string> ToMaybe(this SqlXml @this)
         {
-            Requires.NotNull(@this);
+            Requires.Object(@this);
 
             return @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
         }

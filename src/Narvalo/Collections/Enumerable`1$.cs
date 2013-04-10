@@ -11,7 +11,7 @@
 
         public static ICollection<T> ToCollection<T>(this IEnumerable<T> source)
         {
-            Requires.NotNull(source);
+            Requires.Object(source);
 
             var result = new Collection<T>();
 
@@ -24,7 +24,7 @@
 
         public static IList<T> ToList<T>(this IEnumerable<T> source)
         {
-            Requires.NotNull(source);
+            Requires.Object(source);
 
             var result = new List<T>();
 

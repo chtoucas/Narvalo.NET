@@ -7,7 +7,7 @@
     {
         public static Collection<T> ToCollection<T>(this IEnumerator<T> source)
         {
-            Requires.NotNull(source);
+            Requires.Object(source);
 
             var result = new Collection<T>();
 

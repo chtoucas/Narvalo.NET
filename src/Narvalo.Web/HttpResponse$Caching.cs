@@ -7,21 +7,21 @@
     {
         public static void NoCache(this HttpResponse response)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.Cache.SetCacheability(HttpCacheability.NoCache);
         }
 
         public static void PubliclyCacheFor(this HttpResponse response, int days, int hours, int minutes)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.PubliclyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PubliclyCacheFor(this HttpResponse response, TimeSpan duration)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.Cache.SetCacheability(HttpCacheability.Public);
             response.CacheFor_(duration);
@@ -29,14 +29,14 @@
 
         public static void PrivatelyCacheFor(this HttpResponse response, int days, int hours, int minutes)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.PrivatelyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PrivatelyCacheFor(this HttpResponse response, TimeSpan duration)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.Cache.SetCacheability(HttpCacheability.Private);
             response.CacheFor_(duration);
@@ -44,7 +44,7 @@
 
         public static void CacheFor(this HttpResponse response, bool publicly, HttpVersions versions, TimeSpan duration)
         {
-            Requires.NotNull(response);
+            Requires.Object(response);
 
             response.Cache.SetCacheability(publicly ? HttpCacheability.Public : HttpCacheability.Private);
 

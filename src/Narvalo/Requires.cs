@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using Narvalo.Fx;
     using Narvalo.Internal;
     using Narvalo.Resources;
 
@@ -12,26 +11,9 @@
     {
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static void IsSome<T>(Maybe<T> value, string parameterName)
-        {
-            if (value.IsNone) {
-                throw Failure.Argument(parameterName, Strings.Requires_IsSome);
-            }
-            Contract.EndContractBlock();
-        }
-
-        [DebuggerStepThrough]
-        [ContractArgumentValidator]
-        public static void NotNull<T>([ValidatedNotNull]T value) where T : class
+        public static void Object<T>([ValidatedNotNull]T value) where T : class
         {
             NotNull(value, "this");
-        }
-
-        [DebuggerStepThrough]
-        [ContractArgumentValidator]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value)
-        {
-            NotNullOrEmpty(value, "this");
         }
 
         [DebuggerStepThrough]
@@ -65,7 +47,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotInRange,
+                    SR.Requires_IsNotInRange,
                     range.LowerEnd,
                     range.UpperEnd);
             }
@@ -80,7 +62,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotInRange,
+                    SR.Requires_IsNotInRange,
                     minValue,
                     maxValue);
             }
@@ -95,7 +77,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotInRange,
+                    SR.Requires_IsNotInRange,
                     minValue,
                     maxValue);
             }
@@ -110,7 +92,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotGreaterThanOrEqualTo,
+                    SR.Requires_IsNotGreaterThanOrEqualTo,
                     minValue);
             }
             Contract.EndContractBlock();
@@ -124,7 +106,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotGreaterThanOrEqualTo,
+                    SR.Requires_IsNotGreaterThanOrEqualTo,
                     minValue);
             }
             Contract.EndContractBlock();
@@ -139,7 +121,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotGreaterThanOrEqualTo,
+                    SR.Requires_IsNotGreaterThanOrEqualTo,
                     minValue);
             }
             Contract.EndContractBlock();
@@ -153,7 +135,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotLessThanOrEqualTo,
+                    SR.Requires_IsNotLessThanOrEqualTo,
                     maxValue);
             }
             Contract.EndContractBlock();
@@ -167,7 +149,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotLessThanOrEqualTo,
+                    SR.Requires_IsNotLessThanOrEqualTo,
                     maxValue);
             }
             Contract.EndContractBlock();
@@ -182,7 +164,7 @@
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    Strings.Requires_IsNotLessThanOrEqualTo,
+                    SR.Requires_IsNotLessThanOrEqualTo,
                     maxValue);
             }
             Contract.EndContractBlock();

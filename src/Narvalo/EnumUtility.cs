@@ -30,7 +30,7 @@
             }
             return Maybe.Create(result);
         }
-        
+
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {

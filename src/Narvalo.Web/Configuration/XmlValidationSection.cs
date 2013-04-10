@@ -10,26 +10,26 @@ namespace Narvalo.Web.Configuration
         public const string DefaultName = "xmlValidation";
 
         // Noms des attributs.
-        private const string RendererTypePropertyName = "rendererType";
-        private const string ValidationHeaderPropertyName = "validationHeader";
+        const string RendererTypePropertyName = "rendererType";
+        const string ValidationHeaderPropertyName = "validationHeader";
 
         // Configuration des attributs.
-        private static ConfigurationProperty RendererTypeProperty
-			= new ConfigurationProperty(
-                RendererTypePropertyName, typeof(String), null, ConfigurationPropertyOptions.IsRequired);
+        static ConfigurationProperty RendererTypeProperty
+           = new ConfigurationProperty(
+               RendererTypePropertyName, typeof(String), null, ConfigurationPropertyOptions.IsRequired);
 
-        private static ConfigurationProperty ValidationHeaderProperty
-			= new ConfigurationProperty(
-                ValidationHeaderPropertyName, typeof(String), null, ConfigurationPropertyOptions.IsRequired);
+        static ConfigurationProperty ValidationHeaderProperty
+           = new ConfigurationProperty(
+               ValidationHeaderPropertyName, typeof(String), null, ConfigurationPropertyOptions.IsRequired);
 
         // Champs pour utiliser manuellement les accesseurs.
-        private string _renderType;
-        private bool _renderTypeSet = false;
-        private string _validationHeader;
-        private bool _validationHeaderSet = false;
+        string _renderType;
+        bool _renderTypeSet = false;
+        string _validationHeader;
+        bool _validationHeaderSet = false;
 
         // Stockage des propriétés.
-        private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         #endregion
 

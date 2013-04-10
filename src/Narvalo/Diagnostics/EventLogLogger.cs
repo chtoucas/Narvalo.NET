@@ -48,14 +48,14 @@
             if (exception == null) {
                 eventMessage = String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.EventLogLogger_MessageFormat,
+                    SR.EventLogLogger_MessageFormat,
                     level,
                     message);
             }
             else {
                 eventMessage = String.Format(
                     CultureInfo.CurrentCulture,
-                    Strings.EventLogLogger_ExceptionFormat,
+                    SR.EventLogLogger_ExceptionFormat,
                     level,
                     message,
                     exception.GetType().FullName,

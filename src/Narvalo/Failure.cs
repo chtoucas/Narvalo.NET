@@ -81,7 +81,7 @@
         /// <returns>The logged <see cref="Exception"/>.</returns>
         public static ArgumentException ArgumentEmpty(string parameterName)
         {
-            return Failure.Argument(parameterName, Strings.Failure_IsEmpty, parameterName);
+            return Failure.Argument(parameterName, SR.Failure_IsEmpty, parameterName);
         }
 
         /// <summary>

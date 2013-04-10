@@ -9,7 +9,7 @@
             this IDictionary<TKey, TValue> dict,
             TKey key)
         {
-            Requires.NotNull(dict);
+            Requires.Object(dict);
 
             if (key == null) { return Maybe<TValue>.None; }
 

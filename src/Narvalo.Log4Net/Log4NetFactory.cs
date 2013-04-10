@@ -12,7 +12,7 @@
         {
             Requires.NotNull(type, "type");
 
-            // Use the config found in AppDomain.CurrentDomain.BaseDirectory
+            // On utilise la configuration telle que trouvée dans l'AppDomain.CurrentDomain.BaseDirectory
             return Log4NetProxy.Create(LogManager.GetLogger(type));
         }
 
