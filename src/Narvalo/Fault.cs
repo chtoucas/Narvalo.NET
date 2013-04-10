@@ -139,9 +139,13 @@
             return new NotSupportedException(Format_(messageFormat, messageArgs));
         }
 
+        #region Membres privés
+
         static string Format_(string format, params object[] args)
         {
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
+
+        #endregion
     }
 }
