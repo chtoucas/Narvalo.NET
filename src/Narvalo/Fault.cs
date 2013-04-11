@@ -20,8 +20,6 @@
             _exception = new FaultException(errorMessage);
         }
 
-        public string Message { get { return _exception.Message; } }
-
         public Exception Exception { get { return _exception; } }
 
         [Serializable]

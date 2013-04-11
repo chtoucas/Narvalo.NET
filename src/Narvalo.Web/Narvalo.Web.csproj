@@ -167,7 +167,6 @@
     <Compile Include="UI\AggregateParserFilter.cs" />
     <Compile Include="Minification\MinifyLevel.cs" />
     <Compile Include="Minification\MinifyParserFilter.cs" />
-    <Compile Include="UI\NoScriptTagParserFilter.cs" />
     <Compile Include="UI\UnrestrictedParserFilterBase.cs" />
     <Compile Include="NameValueCollection%24.cs" />
     <Compile Include="UnhandledErrorType.cs" />
