@@ -86,11 +86,11 @@
             return new Either<TLeft, TRight>.RightImpl(right);
         }
 
-        public sealed class LeftImpl : Either<TLeft, TRight>, IEquatable<LeftImpl>
+        sealed class LeftImpl : Either<TLeft, TRight>, IEquatable<LeftImpl>
         {
             public LeftImpl(TLeft value) : base(value) { }
 
-            public TLeft Value { get { return LeftValue; } }
+            //public TLeft Value { get { return LeftValue; } }
 
             public override TResult Switch<TResult>(
                 Func<TLeft, TResult> caseLeft,
@@ -134,11 +134,11 @@
             }
         }
 
-        public sealed class RightImpl : Either<TLeft, TRight>, IEquatable<RightImpl>
+        sealed class RightImpl : Either<TLeft, TRight>, IEquatable<RightImpl>
         {
             public RightImpl(TRight value) : base(value) { }
 
-            public TRight Value { get { return RightValue; } }
+            //public TRight Value { get { return RightValue; } }
 
             public override TResult Switch<TResult>(
                 Func<TLeft, TResult> caseLeft,

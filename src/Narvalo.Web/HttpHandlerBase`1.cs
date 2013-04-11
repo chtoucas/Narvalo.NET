@@ -19,7 +19,7 @@
 
             // Liaison du modèle.
             var outcome = Bind(context.Request);
-            if (outcome.Failed) {
+            if (outcome.Unsuccessful) {
                 //ProcessFailure(outcome.Error);
                 return;
             }

@@ -17,7 +17,7 @@
             T section = ConfigurationManager.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Fault.ConfigurationErrors(
+                throw ExceptionFactory.ConfigurationErrors(
                     SR.Configuration_MissingSection,
                     sectionName);
             }
@@ -34,7 +34,7 @@
             T section = config.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Fault.ConfigurationErrors(
+                throw ExceptionFactory.ConfigurationErrors(
                     SR.Configuration_MissingSection,
                     sectionName);
             }
@@ -69,7 +69,7 @@
             var section = configuration.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Fault.ConfigurationErrors(
+                throw ExceptionFactory.ConfigurationErrors(
                     SR.Configuration_MissingSection,
                     sectionName);
             }

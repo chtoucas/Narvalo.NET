@@ -200,7 +200,7 @@
     <Compile Include="Diagnostics\EventLogLogger.cs" />
     <Compile Include="Diagnostics\__Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
-    <Compile Include="Error.cs" />
+    <Compile Include="ExceptionFactory.cs" />
     <Compile Include="Fault.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
     <Compile Include="Fx\Either`2%24.cs" />

@@ -40,7 +40,7 @@
         protected override void LogCore(LoggerLevel level, string message, Exception exception)
         {
             if (_disposed) {
-                throw Fault.ObjectDisposed(typeof(EventLogLogger));
+                throw ExceptionFactory.ObjectDisposed(typeof(EventLogLogger));
             }
 
             string eventMessage;

@@ -14,7 +14,8 @@
         public static void Object<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
-                throw Fault.ObjectNull();
+                throw new ArgumentNullException("this");
+                //throw ExceptionFactory.ObjectNull();
             }
             Contract.EndContractBlock();
         }
@@ -24,7 +25,8 @@
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
-                throw Fault.ArgumentNull(parameterName);
+                throw new ArgumentNullException(parameterName); 
+                //throw ExceptionFactory.ArgumentNull(parameterName);
             }
             Contract.EndContractBlock();
         }
@@ -37,7 +39,7 @@
             NotNull(value, parameterName);
 
             if (value.Length == 0) {
-                throw Fault.ArgumentEmpty(parameterName);
+                throw ExceptionFactory.ArgumentEmpty(parameterName);
             }
             Contract.EndContractBlock();
         }
@@ -48,7 +50,7 @@
             where T : IComparable<T>, IEquatable<T>
         {
             if (!range.Includes(value)) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotInRange,
@@ -63,7 +65,7 @@
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotInRange,
@@ -78,7 +80,7 @@
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotInRange,
@@ -93,7 +95,7 @@
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotGreaterThanOrEqualTo,
@@ -107,7 +109,7 @@
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotGreaterThanOrEqualTo,
@@ -122,7 +124,7 @@
             where T : IComparable<T>
         {
             if (value.CompareTo(minValue) < 0) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotGreaterThanOrEqualTo,
@@ -136,7 +138,7 @@
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotLessThanOrEqualTo,
@@ -150,7 +152,7 @@
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotLessThanOrEqualTo,
@@ -165,7 +167,7 @@
             where T : IComparable<T>
         {
             if (value.CompareTo(maxValue) > 0) {
-                throw Fault.ArgumentOutOfRange(
+                throw ExceptionFactory.ArgumentOutOfRange(
                     parameterName,
                     value,
                     SR.Requires_IsNotLessThanOrEqualTo,

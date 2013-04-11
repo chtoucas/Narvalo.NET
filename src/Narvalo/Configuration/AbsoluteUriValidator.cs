@@ -15,7 +15,7 @@
         {
             string uriString = (string)value;
             if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute)) {
-                throw Fault.ConfigurationErrors(
+                throw ExceptionFactory.ConfigurationErrors(
                     SR.Configuration_UriIsNotAbsolute,
                     uriString);
             }

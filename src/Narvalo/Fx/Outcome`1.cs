@@ -8,10 +8,10 @@
     public abstract class Outcome<T> : IEquatable<Outcome<T>>
     {
         readonly bool _successful;
-        readonly Error _error;
+        readonly Fault _error;
         readonly T _value;
 
-        Outcome(Error error)
+        Outcome(Fault error)
         {
             _successful = false;
             _error = error;
@@ -21,15 +21,15 @@
         Outcome(T value)
         {
             _successful = true;
-            _error = default(Error);
+            _error = default(Fault);
             _value = value;
         }
 
-        public bool Failed { get { return !_successful; } }
-
         public bool Successful { get { return _successful; } }
 
-        public Error Error
+        public bool Unsuccessful { get { return !_successful; } }
+
+        public Fault Error
         {
             get
             {
@@ -52,26 +52,26 @@
         }
 
         public abstract TResult Switch<TResult>(
-            Func<Error, TResult> caseLeft,
+            Func<Fault, TResult> caseLeft,
             Func<T, TResult> caseRight);
 
         public abstract void Switch(
-            Action<Error> caseLeft,
+            Action<Fault> caseLeft,
             Action<T> caseRight);
 
         #region > Opérations monadiques <
 
         public static Outcome<T> Failure(string errorMessage)
         {
-            return new Outcome<T>.FailureImpl(new Error(errorMessage));
+            return new Outcome<T>.FailureImpl(new Fault(errorMessage));
         }
 
         public static Outcome<T> Failure(Exception exception)
         {
-            return new Outcome<T>.FailureImpl(new Error(exception));
+            return new Outcome<T>.FailureImpl(new Fault(exception));
         }
 
-        public static Outcome<T> Failure(Error error)
+        public static Outcome<T> Failure(Fault error)
         {
             return new Outcome<T>.FailureImpl(error);
         }
@@ -105,21 +105,21 @@
 
         #endregion
 
-        public sealed class FailureImpl : Outcome<T>, IEquatable<FailureImpl>
+        sealed class FailureImpl : Outcome<T>, IEquatable<FailureImpl>
         {
-            public FailureImpl(Error error) : base(error) { }
+            public FailureImpl(Fault fault) : base(fault) { }
 
-            public Error Result { get { return Error; } }
+            //public Fault Result { get { return Error; } }
 
             public override TResult Switch<TResult>(
-                Func<Error, TResult> caseLeft,
+                Func<Fault, TResult> caseLeft,
                 Func<T, TResult> caseRight)
             {
                 return caseLeft(Error);
             }
 
             public override void Switch(
-                Action<Error> caseLeft,
+                Action<Fault> caseLeft,
                 Action<T> caseRight)
             {
                 caseLeft(Error);
@@ -132,19 +132,19 @@
                 if (other == this) { return true; }
                 if (other == null) { return false; }
 
-                return EqualityComparer<Error>.Default.Equals(Error, other.Error);
+                return EqualityComparer<Fault>.Default.Equals(Error, other.Error);
             }
 
             #endregion
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as Error);
+                return Equals(obj as Fault);
             }
 
             public override int GetHashCode()
             {
-                return EqualityComparer<Error>.Default.GetHashCode(Error);
+                return EqualityComparer<Fault>.Default.GetHashCode(Error);
             }
 
             public override string ToString()
@@ -153,21 +153,21 @@
             }
         }
 
-        public sealed class SuccessImpl : Outcome<T>, IEquatable<SuccessImpl>
+        sealed class SuccessImpl : Outcome<T>, IEquatable<SuccessImpl>
         {
             public SuccessImpl(T value) : base(value) { }
 
-            public T Result { get { return Value; } }
+            //public T Result { get { return Value; } }
 
             public override TResult Switch<TResult>(
-                Func<Error, TResult> caseLeft,
+                Func<Fault, TResult> caseLeft,
                 Func<T, TResult> caseRight)
             {
                 return caseRight(Value);
             }
 
             public override void Switch(
-                Action<Error> caseLeft,
+                Action<Fault> caseLeft,
                 Action<T> caseRight)
             {
                 caseRight(Value);
