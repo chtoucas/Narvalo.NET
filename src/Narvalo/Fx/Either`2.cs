@@ -5,22 +5,20 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    // NB: par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
-    // incorrecte, Left contient la valeur en cas d'erreur, et Right contient la valeur en cas de succès.
     public abstract class Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
     {
         readonly bool _isLeft;
         readonly TLeft _left;
         readonly TRight _right;
 
-        Either(TLeft left)
+        protected Either(TLeft left)
         {
             _isLeft = true;
             _left = left;
             _right = default(TRight);
         }
 
-        Either(TRight right)
+        protected Either(TRight right)
         {
             _isLeft = false;
             _left = default(TLeft);
@@ -31,17 +29,27 @@
 
         public bool IsRight { get { return !_isLeft; } }
 
-        public TLeft LeftValue { get { return _left; } }
+        public TLeft LeftValue
+        {
+            get
+            {
+                if (!_isLeft) {
+                    throw new InvalidOperationException("XXX");
+                }
+                return _left;
+            }
+        }
 
-        public TRight RightValue { get { return _right; } }
-
-        public abstract TResult Switch<TResult>(
-            Func<TLeft, TResult> caseLeft,
-            Func<TRight, TResult> caseRight);
-
-        public abstract void Switch(
-            Action<TLeft> caseLeft,
-            Action<TRight> caseRight);
+        public TRight RightValue
+        {
+            get
+            {
+                if (_isLeft) {
+                    throw new InvalidOperationException("XXX");
+                }
+                return _right;
+            }
+        }
 
         #region > Opérations monadiques <
 
@@ -78,12 +86,12 @@
 
         public static Either<TLeft, TRight> Left(TLeft left)
         {
-            return new Either<TLeft, TRight>.LeftImpl(left);
+            return new LeftImpl(left);
         }
 
         public static Either<TLeft, TRight> Right(TRight right)
         {
-            return new Either<TLeft, TRight>.RightImpl(right);
+            return new RightImpl(right);
         }
 
         sealed class LeftImpl : Either<TLeft, TRight>, IEquatable<LeftImpl>
@@ -92,19 +100,19 @@
 
             //public TLeft Value { get { return LeftValue; } }
 
-            public override TResult Switch<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight)
-            {
-                return caseLeft(LeftValue);
-            }
+            //public override TResult Switch<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight)
+            //{
+            //    return caseLeft(LeftValue);
+            //}
 
-            public override void Switch(
-                Action<TLeft> caseLeft,
-                Action<TRight> caseRight)
-            {
-                caseLeft(LeftValue);
-            }
+            //public override void Switch(
+            //    Action<TLeft> caseLeft,
+            //    Action<TRight> caseRight)
+            //{
+            //    caseLeft(LeftValue);
+            //}
 
             #region IEquatable<Left>
 
@@ -140,19 +148,19 @@
 
             //public TRight Value { get { return RightValue; } }
 
-            public override TResult Switch<TResult>(
-                Func<TLeft, TResult> caseLeft,
-                Func<TRight, TResult> caseRight)
-            {
-                return caseRight(RightValue);
-            }
+            //public override TResult Switch<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight)
+            //{
+            //    return caseRight(RightValue);
+            //}
 
-            public override void Switch(
-                Action<TLeft> caseLeft,
-                Action<TRight> caseRight)
-            {
-                caseRight(RightValue);
-            }
+            //public override void Switch(
+            //    Action<TLeft> caseLeft,
+            //    Action<TRight> caseRight)
+            //{
+            //    caseRight(RightValue);
+            //}
 
             #region IEquatable<Right>
 

@@ -168,7 +168,7 @@
             [Fact]
             public static void ThrowsNotImplementedException_ForHtmlInput()
             {
-                // Act &&  Assert
+                // Act && Assert
                 Assert.Throws<NotImplementedException>(
                     () => MayParse.ToBoolean("on", BooleanStyles.HtmlInput));
             }

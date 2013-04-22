@@ -3,5 +3,5 @@
     using System;
 
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-    internal sealed class ValidatedNotNullAttribute : global::System.Attribute { }
+    sealed class ValidatedNotNullAttribute : global::System.Attribute { }
 }

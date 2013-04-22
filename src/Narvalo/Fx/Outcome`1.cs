@@ -1,84 +1,40 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
 
-    public abstract class Outcome<T> : IEquatable<Outcome<T>>
+    public abstract class Outcome<T> : EitherBase<Error, T>, IEquatable<Outcome<T>>
     {
-        readonly bool _successful;
-        readonly Fault _error;
-        readonly T _value;
+        protected Outcome(Error error) : base(error) { }
 
-        Outcome(Fault error)
+        protected Outcome(T value) : base(value) { }
+
+        public bool Successful { get { return IsRight; } }
+
+        public bool Unsuccessful { get { return IsLeft; } }
+
+        public Error Error { get { return LeftValue; } }
+
+        public T Value { get { return RightValue; } }
+
+        public T ValueOrThrow()
         {
-            _successful = false;
-            _error = error;
-            _value = default(T);
-        }
-
-        Outcome(T value)
-        {
-            _successful = true;
-            _error = default(Fault);
-            _value = value;
-        }
-
-        public bool Successful { get { return _successful; } }
-
-        public bool Unsuccessful { get { return !_successful; } }
-
-        public Fault Error
-        {
-            get
-            {
-                if (_successful) {
-                    throw new InvalidOperationException("XXX");
-                }
-                return _error;
+            if (Unsuccessful) {
+                Error.Throw();
             }
+            return Value;
         }
-
-        public T Value
-        {
-            get
-            {
-                if (!_successful) {
-                    throw new InvalidOperationException("XXX");
-                }
-                return _value;
-            }
-        }
-
-        public abstract TResult Switch<TResult>(
-            Func<Fault, TResult> caseLeft,
-            Func<T, TResult> caseRight);
-
-        public abstract void Switch(
-            Action<Fault> caseLeft,
-            Action<T> caseRight);
 
         #region > Opérations monadiques <
 
-        public static Outcome<T> Failure(string errorMessage)
+        public static Outcome<T> Failure(Error error)
         {
-            return new Outcome<T>.FailureImpl(new Fault(errorMessage));
-        }
-
-        public static Outcome<T> Failure(Exception exception)
-        {
-            return new Outcome<T>.FailureImpl(new Fault(exception));
-        }
-
-        public static Outcome<T> Failure(Fault error)
-        {
-            return new Outcome<T>.FailureImpl(error);
+            return new FailureImpl(error);
         }
 
         public static Outcome<T> Success(T value)
         {
-            return new Outcome<T>.SuccessImpl(value);
+            return new SuccessImpl(value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
@@ -86,16 +42,16 @@
         {
             Requires.NotNull(kun, "kun");
 
-            return !_successful ? Outcome<TResult>.Failure(_error) : kun(_value);
+            return Unsuccessful ? Outcome<TResult>.Failure(Error) : kun(Value);
         }
 
         public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
         {
             Requires.NotNull(selector, "selector");
 
-            return !_successful
-               ? Outcome<TResult>.Failure(_error)
-               : Outcome<TResult>.Success(selector(_value));
+            return Unsuccessful
+               ? Outcome<TResult>.Failure(Error)
+               : Outcome<TResult>.Success(selector(Value));
         }
 
         public Outcome<TResult> Forget<TResult>()
@@ -107,101 +63,33 @@
 
         sealed class FailureImpl : Outcome<T>, IEquatable<FailureImpl>
         {
-            public FailureImpl(Fault fault) : base(fault) { }
+            public FailureImpl(Error error) : base(error) { }
 
-            //public Fault Result { get { return Error; } }
-
-            public override TResult Switch<TResult>(
-                Func<Fault, TResult> caseLeft,
-                Func<T, TResult> caseRight)
-            {
-                return caseLeft(Error);
-            }
-
-            public override void Switch(
-                Action<Fault> caseLeft,
-                Action<T> caseRight)
-            {
-                caseLeft(Error);
-            }
-
-            #region IEquatable<Left>
+            #region IEquatable<FailureImpl>
 
             public bool Equals(FailureImpl other)
             {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return EqualityComparer<Fault>.Default.Equals(Error, other.Error);
+                throw new NotImplementedException();
             }
 
             #endregion
-
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Fault);
-            }
-
-            public override int GetHashCode()
-            {
-                return EqualityComparer<Fault>.Default.GetHashCode(Error);
-            }
-
-            public override string ToString()
-            {
-                return String.Format(CultureInfo.CurrentCulture, "Failure({0})", Value);
-            }
         }
 
         sealed class SuccessImpl : Outcome<T>, IEquatable<SuccessImpl>
         {
             public SuccessImpl(T value) : base(value) { }
 
-            //public T Result { get { return Value; } }
-
-            public override TResult Switch<TResult>(
-                Func<Fault, TResult> caseLeft,
-                Func<T, TResult> caseRight)
-            {
-                return caseRight(Value);
-            }
-
-            public override void Switch(
-                Action<Fault> caseLeft,
-                Action<T> caseRight)
-            {
-                caseRight(Value);
-            }
-
-            #region IEquatable<Right>
+            #region IEquatable<SuccessImpl>
 
             public bool Equals(SuccessImpl other)
             {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return EqualityComparer<T>.Default.Equals(Value, other.Value);
+                throw new NotImplementedException();
             }
 
             #endregion
-
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as SuccessImpl);
-            }
-
-            public override int GetHashCode()
-            {
-                return EqualityComparer<T>.Default.GetHashCode(Value);
-            }
-
-            public override string ToString()
-            {
-                return String.Format(CultureInfo.CurrentCulture, "Success({0})", Value);
-            }
         }
 
-        #region IEquatable<Error<T>>
+        #region IEquatable<Outcome<T>>
 
         public bool Equals(Outcome<T> other)
         {

@@ -1,7 +1,7 @@
 ﻿namespace Narvalo.Collections
 {
+    using System;
     using System.Collections.Specialized;
-    using System.Diagnostics.CodeAnalysis;
     using Narvalo;
     using Narvalo.Fx;
 
@@ -25,7 +25,6 @@
             return Maybe.Create(nvc.GetValues(param));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T[]> MayParseAnyValue<T>(
             this NameValueCollection nvc,
             string param,
@@ -36,7 +35,6 @@
             return nvc.MayGetValues(param).Bind(@_ => Maybe.Collect(@_, parser));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T> MayParseValue<T>(
             this NameValueCollection nvc,
             string param,
@@ -48,7 +46,6 @@
             return nvc.MayGetValue(param).Bind(_ => parser(_));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T[]> MayParseValues<T>(
             this NameValueCollection nvc,
             string param,

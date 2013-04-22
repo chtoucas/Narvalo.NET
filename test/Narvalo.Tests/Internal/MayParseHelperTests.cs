@@ -1,14 +1,14 @@
-﻿namespace Narvalo
+﻿namespace Narvalo.Internal
 {
     using System;
     using Narvalo.Fx;
     using Xunit;
 
-    public static class MayParseTests
+    public static class MayParseHelperTests
     {
-        #region + MayParseHelper +
+        #region + Parse +
 
-        public static class MayParseHelper
+        public static class Parse
         {
             [Fact]
             public static void ReturnsNone_ForNullString()
@@ -44,7 +44,7 @@
 
             static Maybe<string> MayParse_(string value)
             {
-                return MayParse.MayParseHelper<string>(
+                return MayParseHelper.Parse<string>(
                     value,
                     (string val, out string result) => {
                         if (value.Length > 0) {

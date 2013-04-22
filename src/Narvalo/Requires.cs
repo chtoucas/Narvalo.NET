@@ -22,6 +22,17 @@
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
+        public static void Property<T>([ValidatedNotNull]T value) where T : class
+        {
+            if (value == null) {
+                throw new ArgumentNullException("value");
+                //throw ExceptionFactory.ObjectNull();
+            }
+            Contract.EndContractBlock();
+        }
+
+        [DebuggerStepThrough]
+        [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
