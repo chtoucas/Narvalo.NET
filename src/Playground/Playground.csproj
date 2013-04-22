@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{A7170884-2992-40DB-A4C0-7F43CAFC4912}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Narvalo.Playground</RootNamespace>
+    <AssemblyName>Playground</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\merlyn\AppData\Roaming\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\etc\Keys\Narvalo.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <StartupObject>Narvalo.Playground.Program</StartupObject>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.0.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.0.1\lib\net40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.0\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfos\AssemblyInfo.Narvalo.cs">
+      <Link>Properties\AssemblyInfo.Narvalo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs">
+      <Link>Properties\AssemblyInfo.Narvalo.Version.cs</Link>
+    </Compile>
+    <Compile Include="AppModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppService.cs" />
+    <Compile Include="AppPresenter.cs" />
+    <Compile Include="Incubator\Autofac\AutofacProgram.cs" />
+    <Compile Include="Incubator\Fx\Theory\Kunc.cs" />
+    <Compile Include="Incubator\Fx\Theory\KuncStubs.cs" />
+    <Compile Include="Incubator\Fx\Theory\KuncStubs`1.cs" />
+    <Compile Include="Incubator\Fx\Theory\Kunc`%24.cs" />
+    <Compile Include="Incubator\Fx\Theory\Kunc`.cs" />
+    <Compile Include="Incubator\Fx\Theory\Monad.cs" />
+    <Compile Include="Incubator\Fx\Theory\MonadLaws.cs" />
+    <Compile Include="Incubator\Fx\Theory\Monad`1.cs" />
+    <Compile Include="Incubator\Fx\Theory\Monad`1.Language.cs" />
+    <Compile Include="Incubator\TermView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IAppService.cs" />
+    <Compile Include="Incubator\ITermView.cs" />
+    <Compile Include="Incubator\Internal\Enumerable%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Incubator\Presentation\Mvp\Simple\AttributeBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Incubator\Autofac\AutofacPresenterFactory.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\DefaultPresenterFactory.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\IPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\IPresenterFactory.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBinding.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterCreatedEventArgs.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterDiscoveryResult.cs" />
+    <Compile Include="Incubator\Presenter.cs" />
+    <Compile Include="Incubator\Internal\Dictionary%24.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\IPresenter.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\IPresenter`1.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\IView.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\IView`1.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBindingAttribute.cs" />
+    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBinder.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Tmp\LogOnOptions.cs" />
+    <Compile Include="Tmp\LogOnQuery.cs" />
+    <Compile Include="Tmp\LogOnQueryBinder.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\github\Narvalo.NET\src\Narvalo\Narvalo.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Log4Net\Narvalo.Log4Net.csproj">
+      <Project>{ca453491-4e22-4b71-9697-ba15548c398d}</Project>
+      <Name>Narvalo.Log4Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Playground.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Incubator\Presentation\Mvp\README.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+</Project>

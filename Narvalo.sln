@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{218340
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playground\Playground.csproj", "{A7170884-2992-40DB-A4C0-7F43CAFC4912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|Any CPU = CodeAnalysis|Any CPU
@@ -112,6 +114,24 @@ Global
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x64.ActiveCfg = Release|Any CPU
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|Any CPU.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|Mixed Platforms.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|Mixed Platforms.Build.0 = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|x64.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|x86.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.CodeAnalysis|x86.Build.0 = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|x64.ActiveCfg = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|x86.ActiveCfg = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Debug|x86.Build.0 = Debug|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|Any CPU.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x64.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x86.ActiveCfg = Release|x86
+		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
