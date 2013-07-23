@@ -67,7 +67,6 @@
     </Compile>
     <Compile Include="EnumUtilityTests.cs" />
     <Compile Include="Fx\MaybeTests.cs" />
-    <Compile Include="MayParseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\StringManipTests.cs" />
   </ItemGroup>

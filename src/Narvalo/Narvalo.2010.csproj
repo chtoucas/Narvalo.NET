@@ -198,10 +198,11 @@
     <Compile Include="Diagnostics\__Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="EnumUtility.cs" />
-    <Compile Include="Fault.cs" />
     <Compile Include="ExceptionFactory.cs" />
+    <Compile Include="Fx\EitherBase`2.cs" />
     <Compile Include="Fx\Either`2%24.cs" />
     <Compile Include="Fx\Either`2.cs" />
+    <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Maybe.Array.cs" />
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe.Enumerable.cs" />
@@ -211,8 +212,12 @@
     <Compile Include="Fx\Maybe`1.Monad.cs" />
     <Compile Include="Fx\MayFunc`%24.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
-    <Compile Include="Fx\Outcome`1.cs" />
+    <Compile Include="Fx\Outcome.cs" />
+    <Compile Include="Fx\Outcome`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="Internal\MayParseHelper.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="MayParse.cs" />
     <Compile Include="Net\IPAddressUtility.cs" />
