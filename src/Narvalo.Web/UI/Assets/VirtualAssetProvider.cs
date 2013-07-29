@@ -31,7 +31,7 @@
             Requires.NotNull(config, "config");
 
             if (String.IsNullOrEmpty(name)) {
-                name = "CdnAssetProvider";
+                name = "VirtualAssetProvider";
             }
 
             if (String.IsNullOrEmpty(config["description"])) {

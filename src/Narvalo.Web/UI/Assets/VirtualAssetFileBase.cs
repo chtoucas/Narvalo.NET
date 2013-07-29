@@ -30,7 +30,9 @@
             get
             {
                 if (_url == null) {
-                    _url = new Uri(_baseUrl, VirtualPath);
+                    // FIXME: http://stackoverflow.com/questions/372865/path-combine-for-urls
+                    // http://stackoverflow.com/questions/4925468/combine-relative-baseuri-with-relative-path
+                    _url = _baseUrl.IsAbsoluteUri ? new Uri(_baseUrl, VirtualPath) : new Uri(VirtualPath);
                 }
 
                 return _url;

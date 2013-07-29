@@ -63,7 +63,8 @@
                 }
 
                 // FIXME: est-ce la bonne manière de faire ?
-                var section = NarvaloWebConfigurationManager.GetSectionGroup().AssetSection;
+                //var section = NarvaloWebConfigurationManager.GetSectionGroup().AssetSection;
+                var section = NarvaloWebConfigurationManager.GetAssetSection();
 
                 InitProviders(section);
                 InitDefaultProvider(section);

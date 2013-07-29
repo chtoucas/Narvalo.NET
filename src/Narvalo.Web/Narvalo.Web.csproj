@@ -207,7 +207,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Narvalo\Narvalo.csproj">
       <Project>{7B564B3C-CCCC-43CA-94B6-D375AA40F085}</Project>
-      <Name>Narvalo</Name>
+      <Name>Narvalo %28Narvalo\Narvalo%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
