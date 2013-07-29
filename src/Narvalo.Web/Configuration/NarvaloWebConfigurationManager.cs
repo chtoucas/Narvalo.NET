@@ -13,7 +13,7 @@
         
         public static NarvaloWebSectionGroup GetSectionGroup(Configuration config)
         {
-            Requires.NotNull<Configuration>(config, "config");
+            Requires.NotNull(config, "config");
             
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }

@@ -47,7 +47,7 @@
 
         #endregion
 
-        public static void AutoRegister()
+        public static void SelfRegister()
         {
             DynamicModuleUtility.RegisterModule(typeof(HttpHeaderCleanupModule));
         }

@@ -19,13 +19,13 @@
                             incomingCodeGenerator.SourceFileName,
                             incomingCodeGenerator.Host);
             }
-            else if (incomingCodeGenerator is VBRazorCodeGenerator) {
-                return new MinifiedMvcVBRazorCodeGenerator(
-                            incomingCodeGenerator.ClassName,
-                            incomingCodeGenerator.RootNamespaceName,
-                            incomingCodeGenerator.SourceFileName,
-                            incomingCodeGenerator.Host);
-            }
+            //else if (incomingCodeGenerator is VBRazorCodeGenerator) {
+            //    return new MinifiedMvcVBRazorCodeGenerator(
+            //                incomingCodeGenerator.ClassName,
+            //                incomingCodeGenerator.RootNamespaceName,
+            //                incomingCodeGenerator.SourceFileName,
+            //                incomingCodeGenerator.Host);
+            //}
             else {
                 return base.DecorateCodeGenerator(incomingCodeGenerator);
             }
