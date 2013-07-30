@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Specialized;
+    using System.Web;
 
     public class DefaultAssetProvider : AssetProviderBase
     {
@@ -25,17 +26,17 @@
 
         public override AssetFile GetImage(string relativePath)
         {
-            return new AssetFile("/Content/" + relativePath);
+            return new AssetFile("/assets/img/" + relativePath);
         }
 
         public override AssetFile GetScript(string relativePath)
         {
-            return new AssetFile("/Scripts/" + relativePath);
+            return new AssetFile("/assets/js/" + relativePath);
         }
 
         public override AssetFile GetStyle(string relativePath)
         {
-            return new AssetFile("/Styles/" + relativePath);
+            return new AssetFile("/assets/css/" + relativePath);
         }
     }
 }

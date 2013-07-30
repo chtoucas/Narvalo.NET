@@ -30,7 +30,7 @@
             Requires.NotNull(scriptUri, "scriptUri");
 
             var tag = new TagBuilder("script");
-            tag.MergeAttribute("src", scriptUri.ToString());
+            tag.MergeAttribute("src", ToProtocolLessUriString_(scriptUri));
 
             if (!String.IsNullOrEmpty(scriptType)) {
                 tag.MergeAttribute("type", scriptType);

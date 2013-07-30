@@ -5,20 +5,21 @@
 
     public static class Minifier
     {
-        static readonly Regex MultipleTabsOrSpacesRegex_ 
+        static readonly Regex MultipleTabsOrSpacesRegex_
             = new Regex(@"[\x09\x20]{2,}", RegexOptions.Compiled);
-        static readonly Regex MultipleNewlinesRegex_ 
+        static readonly Regex MultipleNewlinesRegex_
             = new Regex(@"([\x0A\x0D]+\x20*){2,}", RegexOptions.Compiled);
+
         // Pour rappel, \s correspond au schéma [\f\n\r\t\v]
-        static readonly Regex MutipleWhitespacesRegex_ 
+        static readonly Regex MutipleWhitespacesRegex_
             = new Regex(@"\s{2,}", RegexOptions.Compiled);
-        static readonly Regex LeadingLeftAngleBracketRegex_ 
-            = new Regex(@"^\x20+<", RegexOptions.Compiled);
-        static readonly Regex TrailingRightAngleBracketRegex_ 
-            = new Regex(@">\x20+$", RegexOptions.Compiled);
-        //static readonly Regex RegexLeadingLeftAngleBracket 
+        static readonly Regex LeadingLeftAngleBracketRegex_
+            = new Regex(@"^\s+<", RegexOptions.Compiled);
+        static readonly Regex TrailingRightAngleBracketRegex_
+            = new Regex(@">\s+$", RegexOptions.Compiled);
+        //static readonly Regex LeadingLeftAngleBracketRegex_
         //  = new Regex(@"([\n\s])+?(?<= {2,})<", RegexOptions.Compiled);
-        //static readonly Regex RegexTrailingRightAngleBracket 
+        //static readonly Regex TrailingRightAngleBracketRegex_
         //  = new Regex(@">(?! )\s+", RegexOptions.Compiled);
 
         public static string RemoveWhiteSpaces(string literal, MinifyLevel level)
@@ -83,10 +84,12 @@
         {
             string result = literal;
 
+            // On supprime tous les caractères CR & LF.
+            //result = literal.Replace("\x0D", String.Empty).Replace("\x0A", String.Empty);
             // WARNING: l'ordre est important car les regex suivantes tiennent compte
             // du fait que les espaces et tabs sont remplacés par un espace simple.
             // On remplace tous les caractères blancs en un espace simple.
-            result = MutipleWhitespacesRegex_.Replace(result, String.Empty); // "\x20");
+            result = MutipleWhitespacesRegex_.Replace(literal, String.Empty);
             // On remplace tous les crochets ouvrants en début de ligne par un crochet ouvrant simple.
             result = LeadingLeftAngleBracketRegex_.Replace(result, "<");
             // On remplace tous les crochets fermants en fin de ligne par un crochet fermant simple.

@@ -147,6 +147,12 @@
     <Compile Include="Internal\TagBuilder.cs" />
     <Compile Include="Internal\TagRenderMode.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
+    <Compile Include="Minification\Minifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Minification\MinifyParserFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
     <Compile Include="Configuration\FacebookSection.cs" />
     <Compile Include="Social\FacebookCookie.cs" />
@@ -159,7 +165,6 @@
     <Compile Include="UI\Assets\AssetFile.cs" />
     <Compile Include="UI\Assets\DefaultAssetProvider.cs" />
     <Compile Include="HttpResponse%24Caching.cs" />
-    <Compile Include="Minification\Minifier.cs" />
     <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
     <Compile Include="Security\FormsAuthenticationService.cs" />
     <Compile Include="Security\IFormsAuthenticationService.cs" />
@@ -183,7 +188,6 @@
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="UI\AggregateParserFilter.cs" />
     <Compile Include="Minification\MinifyLevel.cs" />
-    <Compile Include="Minification\MinifyParserFilter.cs" />
     <Compile Include="UI\UnrestrictedParserFilterBase.cs" />
     <Compile Include="NameValueCollection%24.cs" />
     <Compile Include="UnhandledErrorType.cs" />

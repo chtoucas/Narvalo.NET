@@ -1,17 +1,24 @@
 ﻿namespace Narvalo.Web.Minification
 {
+    using System;
     using System.CodeDom;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc.Razor;
     using System.Web.Razor;
     using System.Web.Razor.Generator;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Tokenizer.Symbols;
 
+    // NB: Cf. MvcCSharpRazorCodeGenerator
     internal class MinifiedMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
     {
         const string DefaultModelTypeName_ = "dynamic";
 
-        // NB: Cf. MvcCSharpRazorCodeGenerator
+        static readonly Regex MutipleWhitespacesRegex_
+            = new Regex(@"\s{2,}", RegexOptions.Compiled);
+        static readonly Regex TrailingWhitespaceRegex_
+            = new Regex(@"^\s$", RegexOptions.Compiled);
+
         public MinifiedMvcCSharpRazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
             : base(className, rootNamespaceName, sourceFileName, host)
         {
@@ -30,10 +37,18 @@
             if (span.Kind == SpanKind.Markup) {
                 var builder = new SpanBuilder(span);
                 builder.ClearSymbols();
+                var prevType = HtmlSymbolType.Unknown;
+
                 foreach (ISymbol item in span.Symbols) {
                     var sym = item as HtmlSymbol;
                     if (sym != null) {
-                        builder.Accept(new HtmlSymbol(sym.Start, AdvancedMinify_(sym.Content), sym.Type, sym.Errors));
+                        if (IsIrrelevant_(sym, prevType)) {
+                            builder.Accept(new HtmlSymbol(sym.Start, String.Empty, sym.Type, sym.Errors));
+                        }
+                        else {
+                            builder.Accept(new HtmlSymbol(sym.Start, MinifyContent_(sym.Content), sym.Type, sym.Errors));
+                        }
+                        prevType = sym.Type;
                     }
                     else {
                         builder.Accept(item);
@@ -45,9 +60,15 @@
             base.VisitSpan(span);
         }
 
-        static string AdvancedMinify_(string literal)
+        static bool IsIrrelevant_(HtmlSymbol sym, HtmlSymbolType prevType)
         {
-            return Minifier.RemoveWhiteSpaces(literal, MinifyLevel.Advanced);
+            return sym.Type == HtmlSymbolType.NewLine
+                || (sym.Type == HtmlSymbolType.WhiteSpace && prevType == HtmlSymbolType.NewLine);
+        }
+
+        static string MinifyContent_(string literal)
+        {
+            return MutipleWhitespacesRegex_.Replace(literal, String.Empty);
         }
 
         void SetBaseType_(string modelTypeName)
@@ -56,33 +77,14 @@
             Context.GeneratedClass.BaseTypes.Clear();
             Context.GeneratedClass.BaseTypes.Add(baseType);
         }
+
+        //    //private bool IsDebuggingEnabled() {
+        //    //    if (HttpContext.Current != null) {
+        //    //        return HttpContext.Current.IsDebuggingEnabled;
+        //    //    }
+
+        //    //    string virtualPath = ((WebPageRazorHost)Host).VirtualPath;
+        //    //    return ((CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", virtualPath)).Debug;
+        //    //}
     }
-
-    //internal class MinifiedMvcCSharpRazorCodeGenerator : MvcCSharpRazorCodeGenerator
-    //{
-    //    public MinifiedMvcCSharpRazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
-    //        : base(className, rootNamespaceName, sourceFileName, host)
-    //    {
-    //    }
-
-    //    public override void VisitSpan(Span span)
-    //    {
-    //        Requires.NotNull(span, "span");
-
-    //        if (span.Kind == SpanKind.Markup) {
-    //            span.Content = Minifier.RemoveWhiteSpaces(span.Content, MinifyLevel.Advanced);
-    //        }
-
-    //        base.VisitSpan(span);
-    //    }
-
-    //    //private bool IsDebuggingEnabled() {
-    //    //    if (HttpContext.Current != null) {
-    //    //        return HttpContext.Current.IsDebuggingEnabled;
-    //    //    }
-
-    //    //    string virtualPath = ((WebPageRazorHost)Host).VirtualPath;
-    //    //    return ((CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", virtualPath)).Debug;
-    //    //}
-    //}
 }

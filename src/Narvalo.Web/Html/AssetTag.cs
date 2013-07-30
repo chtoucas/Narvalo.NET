@@ -11,6 +11,12 @@
             return Tag.Link(asset.Url, null /* linkType */, "stylesheet");
         }
 
+        public static IHtmlString Css(string relativePath, string media)
+        {
+            var asset = AssetManager.GetStyle(relativePath);
+            return Tag.Link(asset.Url, null /* linkType */, "stylesheet", new { media = media });
+        }
+
         public static IHtmlString Image(string relativePath, string alt)
         {
             var asset = AssetManager.GetImage(relativePath);

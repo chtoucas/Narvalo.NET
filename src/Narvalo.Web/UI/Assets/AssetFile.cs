@@ -26,7 +26,7 @@
             get
             {
                 if (_url == null) {
-                    _url = new Uri(_relativePath);
+                    _url = new Uri(_relativePath, UriKind.Relative);
                 }
                 return _url;
             }

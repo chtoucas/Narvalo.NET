@@ -61,7 +61,7 @@
             base.PreprocessDirective(directiveName, attrs);
         }
 
-        #region Membres privés
+        #region > Membres privés <
 
         void RecursivelyMinifyControl_(ControlBuilder cb)
         {
