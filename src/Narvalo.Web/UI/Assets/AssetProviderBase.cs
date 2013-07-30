@@ -6,10 +6,10 @@
     {
         protected AssetProviderBase() { }
 
-        public abstract AssetFile GetImage(string relativePath);
+        public abstract VirtualAssetFile GetImage(string relativePath);
 
-        public abstract AssetFile GetScript(string relativePath);
+        public abstract VirtualAssetFile GetScript(string relativePath);
 
-        public abstract AssetFile GetStyle(string relativePath);
+        public abstract VirtualAssetFile GetStyle(string relativePath);
     }
 }

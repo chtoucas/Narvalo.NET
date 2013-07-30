@@ -2,13 +2,13 @@
 {
     using System;
 
-    public class AssetFile
+    public class VirtualAssetFile
     {
         readonly string _relativePath;
 
         Uri _url;
 
-        public AssetFile(string relativePath)
+        public VirtualAssetFile(string relativePath)
             : base()
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");

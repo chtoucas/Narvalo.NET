@@ -3,9 +3,9 @@
     using System;
     using System.Globalization;
 
-    public class VirtualStyleFile : VirtualAssetFileBase
+    public class RemoteStyleFile : RemoteAssetFileBase
     {
-        public VirtualStyleFile(Uri baseUrl, string relativePath, string version)
+        public RemoteStyleFile(Uri baseUrl, string relativePath, string version)
             : base(baseUrl, relativePath, version) { }
 
         protected override string VirtualPath

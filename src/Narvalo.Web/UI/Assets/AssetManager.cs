@@ -33,19 +33,19 @@
             }
         }
 
-        public static AssetFile GetImage(string relativePath)
+        public static VirtualAssetFile GetImage(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetImage(relativePath);
         }
 
-        public static AssetFile GetScript(string relativePath)
+        public static VirtualAssetFile GetScript(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetScript(relativePath);
         }
 
-        public static AssetFile GetStyle(string relativePath)
+        public static VirtualAssetFile GetStyle(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetStyle(relativePath);
