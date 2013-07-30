@@ -7,7 +7,7 @@
     {
         #region > Champs <
 
-        public const string DefaultName = "asset";
+        public const string DefaultName = "assets";
 
         // Noms des propriétés.
         const string DefaultProviderPropertyName = "defaultProvider";

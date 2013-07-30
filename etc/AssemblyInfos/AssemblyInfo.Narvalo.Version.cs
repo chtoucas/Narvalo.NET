@@ -23,7 +23,7 @@
 //#endif
 
 // Version utilisée par le runtime.
-[assembly: AssemblyVersion("0.1.*")]
+[assembly: AssemblyVersion("0.1.1.1")]
 // Version visible dans l'explorateur.
 [assembly: AssemblyFileVersion("0.1.1.1")]
 // Version utilisée par NuGet.

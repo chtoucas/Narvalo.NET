@@ -4,7 +4,7 @@
 
     public class NarvaloWebSectionGroup : ConfigurationSectionGroup
     {
-        #region Fields
+        #region > Champs <
 
         // Nom des sections.
         internal const string GroupName = "narvalo.web";

@@ -206,11 +206,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo\Narvalo.csproj">
-      <Project>{7B564B3C-CCCC-43CA-94B6-D375AA40F085}</Project>
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo %28Narvalo\Narvalo%29</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
