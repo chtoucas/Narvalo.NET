@@ -108,7 +108,7 @@
     </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeAnalysis|AnyCPU'">
+  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeAnalysis|AnyCPU'">
     <DebugSymbols>True</DebugSymbols>
     <OutputPath>bin\CodeAnalysis\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
@@ -160,7 +160,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>False</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
@@ -162,18 +163,13 @@
     <Compile Include="UI\Assets\AssetProviderCollection.cs" />
     <Compile Include="UI\Assets\AssetManager.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
-    <Compile Include="UI\Assets\RemoteAssetFileBase.cs" />
-    <Compile Include="UI\Assets\RemoteAssetProvider.cs" />
-    <Compile Include="UI\Assets\VirtualAssetFile.cs" />
+    <Compile Include="UI\Assets\AssetFile.cs" />
     <Compile Include="UI\Assets\VirtualAssetProvider.cs" />
     <Compile Include="HttpResponse%24Caching.cs" />
     <Compile Include="Security\FormsAuthenticationService.cs" />
     <Compile Include="Security\IFormsAuthenticationService.cs" />
     <Compile Include="Security\IMembershipService.cs" />
     <Compile Include="Security\MembershipService.cs" />
-    <Compile Include="UI\Assets\RemoteImageFile.cs" />
-    <Compile Include="UI\Assets\RemoteScriptFile.cs" />
-    <Compile Include="UI\Assets\RemoteStyleFile.cs" />
     <Compile Include="Optimization\MinifiedMvcCSharpRazorCodeGenerator.cs">
       <SubType>Code</SubType>
     </Compile>

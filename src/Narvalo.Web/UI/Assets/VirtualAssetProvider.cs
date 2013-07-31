@@ -24,19 +24,19 @@
             base.Initialize(name, config);
         }
 
-        public override VirtualAssetFile GetImage(string relativePath)
+        public override AssetFile GetImage(string relativePath)
         {
-            return new VirtualAssetFile("/assets/img/" + relativePath);
+            return new AssetFile("/Images/" + relativePath);
         }
 
-        public override VirtualAssetFile GetScript(string relativePath)
+        public override AssetFile GetScript(string relativePath)
         {
-            return new VirtualAssetFile("/assets/js/" + relativePath);
+            return new AssetFile("/Scripts/" + relativePath);
         }
 
-        public override VirtualAssetFile GetStyle(string relativePath)
+        public override AssetFile GetStyle(string relativePath)
         {
-            return new VirtualAssetFile("/assets/css/" + relativePath);
+            return new AssetFile("/Content/" + relativePath);
         }
     }
 }
