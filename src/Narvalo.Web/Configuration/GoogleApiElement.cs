@@ -5,7 +5,7 @@
 
     public class GoogleApiElement : ConfigurationElement
     {
-        #region Fields
+        #region > Champs <
 
         // Nom des attributs.
         private const string ApiKeyPropertyName = "apiKey";

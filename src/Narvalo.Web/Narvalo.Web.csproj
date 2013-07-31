@@ -129,9 +129,15 @@
     <Compile Include="..\..\etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs">
       <Link>Properties\AssemblyInfo.Narvalo.Version.cs</Link>
     </Compile>
-    <Compile Include="Configuration\GoogleApiElement.cs" />
-    <Compile Include="Configuration\GoogleSection.cs" />
-    <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
+    <Compile Include="Configuration\FacebookSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\GoogleApiElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Configuration\GoogleSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Configuration\ParserFilterElement.cs" />
     <Compile Include="Configuration\ParserFilterElementCollection.cs" />
     <Compile Include="Configuration\ParserFiltersSection.cs" />
@@ -154,7 +160,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
-    <Compile Include="Configuration\FacebookSection.cs" />
     <Compile Include="Social\FacebookCookie.cs" />
     <Compile Include="Social\FacebookContext.cs" />
     <Compile Include="UI\Assets\AssetProviderCollection.cs" />
@@ -165,7 +170,6 @@
     <Compile Include="UI\Assets\VirtualAssetFile.cs" />
     <Compile Include="UI\Assets\VirtualAssetProvider.cs" />
     <Compile Include="HttpResponse%24Caching.cs" />
-    <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
     <Compile Include="Security\FormsAuthenticationService.cs" />
     <Compile Include="Security\IFormsAuthenticationService.cs" />
     <Compile Include="Security\IMembershipService.cs" />
