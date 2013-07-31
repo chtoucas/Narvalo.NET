@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Web.Minification
+﻿namespace Narvalo.Web.Optimization
 {
     using System.Web.Mvc;
     using System.Web.WebPages.Razor;

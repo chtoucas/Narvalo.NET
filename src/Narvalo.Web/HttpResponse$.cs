@@ -3,7 +3,7 @@
     using System.Net;
     using System.Text;
     using System.Web;
-    using Newtonsoft.Json;
+    //using Newtonsoft.Json;
 
     public static class HttpResponseExtensions
     {
@@ -14,17 +14,17 @@
 
         #region Content-type shortcuts
 
-        public static void SendJson(this HttpResponse response, object content)
-        {
-            Requires.Object(response);
+        //public static void SendJson(this HttpResponse response, object content)
+        //{
+        //    Requires.Object(response);
 
-            response.ContentType = "application/json";
-            response.ContentEncoding = Encoding.UTF8;
-            response.Write(
-                JsonConvert.SerializeObject(
-                    content,
-                    new JsonSerializerSettings { Formatting = Formatting.None }));
-        }
+        //    response.ContentType = "application/json";
+        //    response.ContentEncoding = Encoding.UTF8;
+        //    response.Write(
+        //        JsonConvert.SerializeObject(
+        //            content,
+        //            new JsonSerializerSettings { Formatting = Formatting.None }));
+        //}
 
         public static void SendPlainText(this HttpResponse response, string content)
         {

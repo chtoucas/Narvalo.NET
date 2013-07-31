@@ -83,9 +83,6 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -153,10 +150,10 @@
     <Compile Include="Internal\TagBuilder.cs" />
     <Compile Include="Internal\TagRenderMode.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
-    <Compile Include="Minification\Minifier.cs">
+    <Compile Include="Optimization\Minifier.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Minification\MinifyParserFilter.cs">
+    <Compile Include="Optimization\MinifyParserFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
@@ -177,13 +174,13 @@
     <Compile Include="UI\Assets\RemoteImageFile.cs" />
     <Compile Include="UI\Assets\RemoteScriptFile.cs" />
     <Compile Include="UI\Assets\RemoteStyleFile.cs" />
-    <Compile Include="Minification\MinifiedMvcCSharpRazorCodeGenerator.cs">
+    <Compile Include="Optimization\MinifiedMvcCSharpRazorCodeGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Minification\MinifiedMvcWebPageRazorHost.cs">
+    <Compile Include="Optimization\MinifiedMvcWebPageRazorHost.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Minification\MinifiedMvcWebRazorHostFactory.cs">
+    <Compile Include="Optimization\MinifiedMvcWebRazorHostFactory.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HttpRequestBase%24.cs" />
@@ -191,7 +188,7 @@
     <Compile Include="HttpHeaderCleanupModule.cs" />
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="UI\AggregateParserFilter.cs" />
-    <Compile Include="Minification\MinifyLevel.cs" />
+    <Compile Include="Optimization\MinifyLevel.cs" />
     <Compile Include="UI\UnrestrictedParserFilterBase.cs" />
     <Compile Include="NameValueCollection%24.cs" />
     <Compile Include="UnhandledErrorType.cs" />
@@ -208,7 +205,7 @@
     <None Include="..\..\Etc\Keys\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Minification\README.md" />
+    <None Include="Optimization\README.md" />
     <None Include="Narvalo.Web.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
