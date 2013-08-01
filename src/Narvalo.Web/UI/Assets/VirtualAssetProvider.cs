@@ -24,6 +24,8 @@
             base.Initialize(name, config);
         }
 
+        // FIXME: Use VirtualPathUtility
+
         public override AssetFile GetImage(string relativePath)
         {
             return new AssetFile("/Images/" + relativePath);
