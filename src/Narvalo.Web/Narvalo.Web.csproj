@@ -190,7 +190,6 @@
     <Compile Include="UnhandledErrorType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HttpVerbs%24.cs" />
-    <Compile Include="Validation\ModelValidationState.cs" />
     <Compile Include="HttpHandlerBase.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -208,7 +207,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Narvalo\Narvalo.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo %28Narvalo\Narvalo%29</Name>
+      <Name>Narvalo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

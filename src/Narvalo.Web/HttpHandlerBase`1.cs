@@ -1,12 +1,11 @@
 ﻿namespace Narvalo.Web
 {
-    //using System.Collections.Generic;
-    //using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Net;
     using System.Web;
     using Narvalo;
     using Narvalo.Fx;
-    //using Narvalo.Web.Validation;
 
     public abstract class HttpHandlerBase<TQuery> : HttpHandlerBase
     {
@@ -14,11 +13,20 @@
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void ProcessBindingFailure(HttpResponse response, Error error)
+        protected virtual void HandleBindingFailure(HttpResponse response, Error error)
         {
-            // XXX: est-ce le bon code ?
+            // XXX: Est-ce le bon code HTTP ?
             response.SetStatusCode(HttpStatusCode.NotFound);
             response.Write(error.Message);
+        }
+
+        protected virtual void HandleValidationFailure(
+            HttpResponse response,
+            IEnumerable<ValidationResult> errors)
+        {
+            // XXX: Est-ce le bon code HTTP ?
+            response.SetStatusCode(HttpStatusCode.NotFound);
+            response.Write("XXX Invalid request received.");
         }
 
         protected override void ProcessRequestCore(HttpContext context)
@@ -28,30 +36,29 @@
             // Liaison du modèle.
             var outcome = Bind(context.Request);
             if (outcome.Unsuccessful) {
-                ProcessBindingFailure(context.Response, outcome.Error);
+                HandleBindingFailure(context.Response, outcome.Error);
                 return;
             }
             var query = outcome.Value;
 
             // Validation du modèle.
-            //var succeed = model.Match(_ => ValidateModel(context, _), false /* defaultValue */);
-            //var validationState = ValidateQuery(query);
-            //if (!validationState.IsValid) {
-            //    //ProcessFailure(validationState.ValidationResults);
-            //    return;
-            //}
+            var validationErrors = ValidateQuery_(query);
+            if (validationErrors.IsSome) {
+                HandleValidationFailure(context.Response, validationErrors.Value);
+                return;
+            }
 
             ProcessRequestCore(context, query);
         }
 
-        //protected ModelValidationState ValidateQuery(TQuery query)
-        //{
-        //    var validationResults = new List<ValidationResult>();
-        //    var validationContext = new ValidationContext(query, null /* serviceProvider */, null /* items */);
-        //    var succeed = Validator.TryValidateObject(
-        //        query, validationContext, validationResults, true /* validateAllProperties */);
+        Maybe<List<ValidationResult>> ValidateQuery_(TQuery query)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(query, null /* serviceProvider */, null /* items */);
+            var succeed = Validator.TryValidateObject(
+                query, validationContext, validationResults, true /* validateAllProperties */);
 
-        //    return new ModelValidationState(succeed, validationResults);
-        //}
+            return succeed ? Maybe<List<ValidationResult>>.None : Maybe.Create(validationResults);
+        }
     }
 }

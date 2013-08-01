@@ -12,9 +12,10 @@
 
         protected abstract void ProcessRequestCore(HttpContext context);
 
-        protected virtual void ProcessInvalidHttpMethod(HttpResponse response)
+        protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
         {
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
+            response.Write("XXX Invalid HTTP method: " + httpMethod);
         }
 
         #region IHttpHandler
@@ -24,8 +25,10 @@
         public void ProcessRequest(HttpContext context)
         {
             // Validation de la méthode HTTP.
-            if (!AcceptedVerbs.Contains(context.Request.HttpMethod)) {
-                ProcessInvalidHttpMethod(context.Response);
+            var httpMethod = context.Request.HttpMethod;
+
+            if (!AcceptedVerbs.Contains(httpMethod)) {
+                HandleInvalidHttpMethod(context.Response, httpMethod);
                 return;
             }
 
