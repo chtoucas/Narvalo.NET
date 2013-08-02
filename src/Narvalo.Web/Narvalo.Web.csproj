@@ -163,8 +163,7 @@
     <Compile Include="UI\Assets\AssetProviderCollection.cs" />
     <Compile Include="UI\Assets\AssetManager.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
-    <Compile Include="UI\Assets\AssetFile.cs" />
-    <Compile Include="UI\Assets\VirtualAssetProvider.cs" />
+    <Compile Include="UI\Assets\DefaultAssetProvider.cs" />
     <Compile Include="HttpResponse%24Caching.cs" />
     <Compile Include="Optimization\MinifiedMvcCSharpRazorCodeGenerator.cs">
       <SubType>Code</SubType>

@@ -19,7 +19,7 @@
         {
             get
             {
-                EnsureInitialized();
+                EnsureInitialized_();
                 return Provider_;
             }
         }
@@ -28,30 +28,30 @@
         {
             get
             {
-                EnsureInitialized();
+                EnsureInitialized_();
                 return Providers_;
             }
         }
 
-        public static AssetFile GetImage(string relativePath)
+        public static Uri GetImage(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetImage(relativePath);
         }
 
-        public static AssetFile GetScript(string relativePath)
+        public static Uri GetScript(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetScript(relativePath);
         }
 
-        public static AssetFile GetStyle(string relativePath)
+        public static Uri GetStyle(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetStyle(relativePath);
         }
 
-        private static void EnsureInitialized()
+        static void EnsureInitialized_()
         {
             if (InitializedProviders_ && InitializedDefaultProvider_) {
                 return;
@@ -64,12 +64,12 @@
 
                 var section = WebConfigurationManager<AssetSection>.GetSection(AssetSection.DefaultName);
 
-                InitProviders(section);
-                InitDefaultProvider(section);
+                InitProviders_(section);
+                InitDefaultProvider_(section);
             }
         }
 
-        private static void InitProviders(AssetSection section)
+        static void InitProviders_(AssetSection section)
         {
             if (InitializedProviders_) {
                 return;
@@ -86,7 +86,7 @@
             InitializedProviders_ = true;
         }
 
-        private static void InitDefaultProvider(AssetSection section)
+        static void InitDefaultProvider_(AssetSection section)
         {
             if (InitializedDefaultProvider_) {
                 return;

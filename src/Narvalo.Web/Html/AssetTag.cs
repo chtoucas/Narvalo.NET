@@ -7,26 +7,26 @@
     {
         public static IHtmlString Css(string relativePath)
         {
-            var asset = AssetManager.GetStyle(relativePath);
-            return Tag.Link(asset.Url, null /* linkType */, "stylesheet");
+            var assetUri = AssetManager.GetStyle(relativePath);
+            return Tag.Link(assetUri, null /* linkType */, "stylesheet");
         }
 
         public static IHtmlString Css(string relativePath, string media)
         {
-            var asset = AssetManager.GetStyle(relativePath);
-            return Tag.Link(asset.Url, null /* linkType */, "stylesheet", new { media = media });
+            var assetUri = AssetManager.GetStyle(relativePath);
+            return Tag.Link(assetUri, null /* linkType */, "stylesheet", new { media = media });
         }
 
         public static IHtmlString Image(string relativePath, string alt)
         {
-            var asset = AssetManager.GetImage(relativePath);
-            return Tag.Image(asset.Url, alt);
+            var assetUri = AssetManager.GetImage(relativePath);
+            return Tag.Image(assetUri, alt);
         }
 
         public static IHtmlString JavaScript(string relativePath)
         {
-            var asset = AssetManager.GetScript(relativePath);
-            return Tag.Script(asset.Url);
+            var assetUri = AssetManager.GetScript(relativePath);
+            return Tag.Script(assetUri);
         }
     }
 }
