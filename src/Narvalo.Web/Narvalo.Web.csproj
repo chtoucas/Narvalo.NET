@@ -154,7 +154,7 @@
     <Compile Include="Optimization\Minifier.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Optimization\MinifyParserFilter.cs">
+    <Compile Include="Optimization\MinifyingParserFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
@@ -166,10 +166,6 @@
     <Compile Include="UI\Assets\AssetFile.cs" />
     <Compile Include="UI\Assets\VirtualAssetProvider.cs" />
     <Compile Include="HttpResponse%24Caching.cs" />
-    <Compile Include="Security\FormsAuthenticationService.cs" />
-    <Compile Include="Security\IFormsAuthenticationService.cs" />
-    <Compile Include="Security\IMembershipService.cs" />
-    <Compile Include="Security\MembershipService.cs" />
     <Compile Include="Optimization\MinifiedMvcCSharpRazorCodeGenerator.cs">
       <SubType>Code</SubType>
     </Compile>

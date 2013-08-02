@@ -19,10 +19,7 @@
 
         public int MinRequiredPasswordLength
         {
-            get
-            {
-                return _provider.MinRequiredPasswordLength;
-            }
+            get { return _provider.MinRequiredPasswordLength; }
         }
 
         public bool ValidateUser(string userName, string password)

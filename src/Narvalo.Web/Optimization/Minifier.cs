@@ -21,6 +21,8 @@
         //  = new Regex(@"([\n\s])+?(?<= {2,})<", RegexOptions.Compiled);
         //static readonly Regex TrailingRightAngleBracketRegex_
         //  = new Regex(@">(?! )\s+", RegexOptions.Compiled);
+        //static readonly Regex TrailingWhitespaceRegex_
+        //    = new Regex(@"^\s$", RegexOptions.Compiled);
 
         public static string RemoveWhiteSpaces(string literal, MinifyLevel level)
         {

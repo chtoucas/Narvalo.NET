@@ -22,19 +22,13 @@
     /// contenu sans la moindre information contextuelle. On ne peut donc pas prendre
     /// de mesures trop extrèmes.
     /// </remarks>
-    public class MinifyParserFilter : UnrestrictedParserFilterBase
+    public class MinifyingParserFilter : UnrestrictedParserFilterBase
     {
-        const string LevelDirectiveName = "Minify";
+        const string LevelDirectiveName_ = "Minify";
 
         MinifyLevel _minifyLevel = MinifyLevel.None;
 
-        protected bool IsEnabled
-        {
-            get
-            {
-                return _minifyLevel != MinifyLevel.None;
-            }
-        }
+        protected bool IsEnabled { get { return _minifyLevel != MinifyLevel.None; } }
 
         public override void ParseComplete(ControlBuilder rootBuilder)
         {
@@ -51,11 +45,11 @@
         {
             Requires.NotNull(attrs, "attributes");
 
-            if (attrs.Contains(LevelDirectiveName)) {
-                MayParse.ToEnum<MinifyLevel>((string)attrs[LevelDirectiveName])
+            if (attrs.Contains(LevelDirectiveName_)) {
+                MayParse.ToEnum<MinifyLevel>((string)attrs[LevelDirectiveName_])
                     .WhenSome(_ => _minifyLevel = _);
 
-                attrs.Remove(LevelDirectiveName);
+                attrs.Remove(LevelDirectiveName_);
             }
 
             base.PreprocessDirective(directiveName, attrs);
@@ -98,12 +92,5 @@
         }
 
         #endregion
-
-        //private bool IsDebuggingEnabled() {
-        //    if (HttpContext.Current != null)
-        //        return HttpContext.Current.IsDebuggingEnabled;
-
-        //    return ((CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", VirtualPath)).Debug;
-        //}
     }
 }

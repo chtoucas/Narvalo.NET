@@ -14,10 +14,7 @@
     {
         const string DefaultModelTypeName_ = "dynamic";
 
-        static readonly Regex MutipleWhitespacesRegex_
-            = new Regex(@"\s{2,}", RegexOptions.Compiled);
-        static readonly Regex TrailingWhitespaceRegex_
-            = new Regex(@"^\s$", RegexOptions.Compiled);
+        static readonly Regex MutipleWhitespacesRegex_ = new Regex(@"\s{2,}", RegexOptions.Compiled);
 
         public MinifiedMvcCSharpRazorCodeGenerator(string className, string rootNamespaceName, string sourceFileName, RazorEngineHost host)
             : base(className, rootNamespaceName, sourceFileName, host)
@@ -77,14 +74,5 @@
             Context.GeneratedClass.BaseTypes.Clear();
             Context.GeneratedClass.BaseTypes.Add(baseType);
         }
-
-        //    //private bool IsDebuggingEnabled() {
-        //    //    if (HttpContext.Current != null) {
-        //    //        return HttpContext.Current.IsDebuggingEnabled;
-        //    //    }
-
-        //    //    string virtualPath = ((WebPageRazorHost)Host).VirtualPath;
-        //    //    return ((CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", virtualPath)).Debug;
-        //    //}
     }
 }
