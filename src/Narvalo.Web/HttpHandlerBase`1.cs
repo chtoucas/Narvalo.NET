@@ -1,7 +1,7 @@
 ﻿namespace Narvalo.Web
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    //using System.Collections.Generic;
+    //using System.ComponentModel.DataAnnotations;
     using System.Net;
     using System.Web;
     using Narvalo;
@@ -20,14 +20,14 @@
             response.Write(error.Message);
         }
 
-        protected virtual void HandleValidationFailure(
-            HttpResponse response,
-            IEnumerable<ValidationResult> errors)
-        {
-            // XXX: Est-ce le bon code HTTP ?
-            response.SetStatusCode(HttpStatusCode.NotFound);
-            response.Write("XXX Invalid request received.");
-        }
+        //protected virtual void HandleValidationFailure(
+        //    HttpResponse response,
+        //    IEnumerable<ValidationResult> errors)
+        //{
+        //    // XXX: Est-ce le bon code HTTP ?
+        //    response.SetStatusCode(HttpStatusCode.NotFound);
+        //    response.Write("XXX Invalid request received.");
+        //}
 
         protected override void ProcessRequestCore(HttpContext context)
         {
@@ -41,24 +41,24 @@
             }
             var query = outcome.Value;
 
-            // Validation du modèle.
-            var validationErrors = ValidateQuery_(query);
-            if (validationErrors.IsSome) {
-                HandleValidationFailure(context.Response, validationErrors.Value);
-                return;
-            }
+            //// Validation du modèle.
+            //var validationErrors = ValidateQuery_(query);
+            //if (validationErrors.IsSome) {
+            //    HandleValidationFailure(context.Response, validationErrors.Value);
+            //    return;
+            //}
 
             ProcessRequestCore(context, query);
         }
 
-        Maybe<List<ValidationResult>> ValidateQuery_(TQuery query)
-        {
-            var validationResults = new List<ValidationResult>();
-            var validationContext = new ValidationContext(query, null /* serviceProvider */, null /* items */);
-            var succeed = Validator.TryValidateObject(
-                query, validationContext, validationResults, true /* validateAllProperties */);
+        //Maybe<List<ValidationResult>> ValidateQuery_(TQuery query)
+        //{
+        //    var validationResults = new List<ValidationResult>();
+        //    var validationContext = new ValidationContext(query, null /* serviceProvider */, null /* items */);
+        //    var succeed = Validator.TryValidateObject(
+        //        query, validationContext, validationResults, true /* validateAllProperties */);
 
-            return succeed ? Maybe<List<ValidationResult>>.None : Maybe.Create(validationResults);
-        }
+        //    return succeed ? Maybe<List<ValidationResult>>.None : Maybe.Create(validationResults);
+        //}
     }
 }

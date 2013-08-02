@@ -37,24 +37,27 @@
 
         public override Uri GetImage(string relativePath)
         {
-            return CombineToUri_("~/Images/", relativePath);
+            return MakeUri_("~/Images/", relativePath);
         }
 
         public override Uri GetScript(string relativePath)
         {
-            return CombineToUri_("~/Scripts/", relativePath);
+            return MakeUri_("~/Scripts/", relativePath);
         }
 
         public override Uri GetStyle(string relativePath)
         {
-            return CombineToUri_("~/Content/", relativePath);
+            return MakeUri_("~/Content/", relativePath);
         }
 
-        static Uri CombineToUri_(string basePath, string relativePath)
+        static Uri MakeUri_(string basePath, string relativePath)
         {
-            return new Uri(
-                VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath)),
-                UriKind.Relative);
+            return new Uri(Combine_(basePath, relativePath), UriKind.Relative);
+        }
+
+        static string Combine_(string basePath, string relativePath)
+        {
+            return VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath));
         }
     }
 }
