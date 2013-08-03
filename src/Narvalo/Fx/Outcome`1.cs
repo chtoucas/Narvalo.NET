@@ -32,6 +32,11 @@
             return new FailureImpl(error);
         }
 
+        public static Outcome<T> Failure(Exception ex)
+        {
+            return new FailureImpl(Error.Create(ex));
+        }
+
         public static Outcome<T> Failure(string errorMessage)
         {
             return new FailureImpl(Error.Create(errorMessage));

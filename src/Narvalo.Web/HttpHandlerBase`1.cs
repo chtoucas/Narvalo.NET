@@ -1,11 +1,14 @@
 ﻿namespace Narvalo.Web
 {
+    using System;
     //using System.Collections.Generic;
     //using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.Net;
     using System.Web;
     using Narvalo;
     using Narvalo.Fx;
+    using Narvalo.Web.Resources;
 
     public abstract class HttpHandlerBase<TQuery> : HttpHandlerBase
     {
@@ -18,6 +21,15 @@
             // XXX: Est-ce le bon code HTTP ?
             response.SetStatusCode(HttpStatusCode.NotFound);
             response.Write(error.Message);
+        }
+
+        protected Outcome<TQuery> MissingOrInvalidParameterOutcome(string paramName)
+        {
+            return Outcome<TQuery>.Failure(
+                String.Format(
+                    CultureInfo.CurrentCulture, 
+                    SR.HttpHandlerBase_MissingOrInvalidParameter,
+                    paramName));
         }
 
         //protected virtual void HandleValidationFailure(
