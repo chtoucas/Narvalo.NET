@@ -61,7 +61,7 @@ namespace Narvalo.Web.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Missing or invalid parameter &apos;{0}&apos;..
+        ///   Recherche une chaîne localisée semblable à Missing or invalid query parameter &apos;{0}&apos;..
         /// </summary>
         internal static string HttpHandlerBase_MissingOrInvalidParameter {
             get {

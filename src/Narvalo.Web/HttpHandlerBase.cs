@@ -10,6 +10,8 @@
 
         protected abstract HttpVerbs AcceptedVerbs { get; }
 
+        protected virtual bool TrySkipIisCustomErrors { get { return true; } }
+
         protected abstract void ProcessRequestCore(HttpContext context);
 
         protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
@@ -24,6 +26,8 @@
 
         public void ProcessRequest(HttpContext context)
         {
+            context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
+
             // Validation de la méthode HTTP.
             var httpMethod = context.Request.HttpMethod;
 

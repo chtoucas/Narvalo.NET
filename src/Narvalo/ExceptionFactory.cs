@@ -139,7 +139,7 @@
             return new NotSupportedException(Format_(messageFormat, messageArgs));
         }
 
-        #region Membres privés
+        #region > Membres privés <
 
         static string Format_(string format, params object[] args)
         {
