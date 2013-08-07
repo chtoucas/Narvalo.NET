@@ -2,10 +2,272 @@
 {
     using System;
     using System.Data.SqlClient;
+    using Narvalo;
     using Narvalo.Fx;
 
     public static class SqlDataReaderExtensions
     {
+        #region > Accès simple par nom <
+
+        public static bool GetBooleanColumn(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlBoolean(ordinal);
+            return value.IsNull ? false : value.Value;
+        }
+
+        public static bool GetBooleanColumn(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlBoolean(rdr.GetOrdinal(name));
+            return value.IsNull ? false : value.Value;
+        }
+
+        //public static DateTime? GetDateTimeColumn(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetDateTime(ordinal);
+        //    }
+        //}
+
+        public static DateTime GetDateTimeColumn(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            return rdr.GetDateTime(rdr.GetOrdinal(name));
+        }
+
+        public static decimal GetDecimalColumn(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlDecimal(ordinal);
+            return value.IsNull ? default(decimal) : value.Value;
+        }
+
+        public static decimal GetDecimalColumn(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlDecimal(rdr.GetOrdinal(name));
+            return value.IsNull ? default(decimal) : value.Value;
+        }
+
+        public static double GetDoubleColumn(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlDouble(ordinal);
+            return value.IsNull ? default(double) : value.Value;
+        }
+
+        public static double GetDoubleColumn(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlDouble(rdr.GetOrdinal(name));
+
+            return value.IsNull ? default(double) : value.Value;
+        }
+
+        public static int GetInt16Column(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlInt16(ordinal);
+            return value.IsNull ? default(int) : value.Value;
+        }
+
+        public static int GetInt16Column(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlInt16(rdr.GetOrdinal(name));
+
+            return value.IsNull ? default(int) : value.Value;
+        }
+
+        public static int GetInt32Column(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlInt32(ordinal);
+
+            return value.IsNull ? default(int) : value.Value;
+        }
+
+        public static int GetInt32Column(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlInt32(rdr.GetOrdinal(name));
+
+            return value.IsNull ? default(int) : value.Value;
+        }
+
+        public static string GetStringColumn(this SqlDataReader rdr, int ordinal)
+        {
+            Requires.Object(rdr);
+
+            var value = rdr.GetSqlString(ordinal);
+
+            return value.IsNull ? String.Empty : value.Value;
+        }
+
+        public static string GetStringColumn(this SqlDataReader rdr, string name)
+        {
+            Requires.Object(rdr);
+            Requires.NotNullOrEmpty(name, "name");
+
+            var value = rdr.GetSqlString(rdr.GetOrdinal(name));
+
+            return value.IsNull ? String.Empty : value.Value;
+        }
+
+        //public static bool? GetNullableBooleanColumn(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlBoolean(ordinal).Value;
+        //    }
+        //}
+
+        //public static bool? GetNullableBooleanColumn(this SqlDataReader rdr, string name)
+        //{
+        //    Requires.Object(rdr);
+        //    Requires.NotNullOrEmpty(name, "name");
+
+        //    int ordinal = rdr.GetOrdinal(name);
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlBoolean(ordinal).Value;
+        //    }
+        //}
+
+        //public static DateTime? GetDateTimeColumn(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetDateTime(ordinal);
+        //    }
+        //}
+
+        //public static DateTime? GetDateTimeColumn(this SqlDataReader rdr, string name)
+        //{
+        //    Requires.Object(rdr);
+        //    Requires.NotNullOrEmpty(name, "name");
+
+        //    int ordinal = rdr.GetOrdinal(name);
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetDateTime(ordinal);
+        //    }
+        //}
+
+        //public static decimal? GetNullableDecimalColumn(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlDecimal(ordinal).Value;
+        //    }
+        //}
+
+        //public static decimal? GetNullableDecimalColumn(this SqlDataReader rdr, string name)
+        //{
+        //    Requires.Object(rdr);
+
+        //    int ordinal = rdr.GetOrdinal(name);
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlDecimal(ordinal).Value;
+        //    }
+        //}
+
+        //public static int? GetNullableInt16Column(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlInt16(ordinal).Value;
+        //    }
+        //}
+
+        //public static int? GetNullableInt16Column(this SqlDataReader rdr, string name)
+        //{
+        //    Requires.Object(rdr);
+        //    Requires.NotNullOrEmpty(name, "name");
+
+        //    int ordinal = rdr.GetOrdinal(name);
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlInt16(ordinal).Value;
+        //    }
+        //}
+
+        //public static int? GetNullableInt32Column(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
+
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlInt32(ordinal).Value;
+        //    }
+        //}
+
+        //public static int? GetNullableInt32Column(this SqlDataReader rdr, string name)
+        //{
+        //    Requires.Object(rdr);
+        //    Requires.NotNullOrEmpty(name, "name");
+
+        //    int ordinal = rdr.GetOrdinal(name);
+        //    if (rdr.IsDBNull(ordinal)) {
+        //        return null;
+        //    }
+        //    else {
+        //        return rdr.GetSqlInt32(ordinal).Value;
+        //    }
+        //}
+
+        #endregion
+
         #region > Accès par position <
 
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader rdr, int ordinal)
