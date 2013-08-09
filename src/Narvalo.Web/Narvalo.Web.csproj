@@ -162,6 +162,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
     </Compile>
+    <Compile Include="RouteCollection%24.cs" />
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
     <Compile Include="Social\FacebookCookie.cs" />
     <Compile Include="Social\FacebookContext.cs" />
