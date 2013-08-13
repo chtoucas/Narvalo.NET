@@ -62,10 +62,13 @@
         static void CacheFor_(this HttpResponse response, TimeSpan duration)
         {
             // En-tête HTTP 1.0
-            response.Cache.SetExpires(DateTime.Now.Add(duration));
+            // FIXME: Now ou UtcNow ?
+            response.Cache.SetExpires(DateTime.UtcNow.Add(duration));
             // En-tête HTTP 1.1
             response.Cache.SetMaxAge(duration);
             response.Cache.AppendCacheExtension("must-revalidate, proxy-revalidate");
+            // FIXME
+            response.Cache.SetLastModified(DateTime.Now);
         }
     }
 }
