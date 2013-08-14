@@ -259,6 +259,7 @@
     <Compile Include="Text\StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="Uri%24.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />

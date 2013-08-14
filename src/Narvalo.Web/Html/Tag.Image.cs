@@ -37,7 +37,7 @@
             Requires.NotNull(imageUri, "imageUri");
 
             var tag = new TagBuilder("img");
-            tag.MergeAttribute("src", ToProtocolLessUriString_(imageUri));
+            tag.MergeAttribute("src", imageUri.ToProtocolLessString());
 
             if (!String.IsNullOrEmpty(alt)) {
                 tag.MergeAttribute("alt", alt);

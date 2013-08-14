@@ -31,7 +31,7 @@
             Requires.NotNull(linkUri, "linkUri");
 
             var tag = new TagBuilder("link");
-            tag.MergeAttribute("href", ToProtocolLessUriString_(linkUri));
+            tag.MergeAttribute("href", linkUri.ToProtocolLessString());
 
             if (!String.IsNullOrEmpty(linkType)) {
                 tag.MergeAttribute("type", linkType);
