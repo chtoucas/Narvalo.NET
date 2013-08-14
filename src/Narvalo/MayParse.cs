@@ -195,6 +195,11 @@
 
         public static Maybe<Uri> ToUri(string value, UriKind uriKind)
         {
+            // NB: Uri.TryCreate accepte les chaînes vides.
+            if (String.IsNullOrEmpty(value)) {
+                return Maybe<Uri>.None;
+            }
+
             return MayParseHelper.Parse<Uri>(
                 value,
                 (string val, out Uri result) => Uri.TryCreate(val, uriKind, out result)
