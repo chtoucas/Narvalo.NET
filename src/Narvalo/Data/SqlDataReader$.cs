@@ -9,15 +9,15 @@
     {
         #region > Accès simple par nom <
 
-        public static bool GetBooleanColumn(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static bool GetBooleanByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlBoolean(ordinal);
-            return value.IsNull ? false : value.Value;
-        }
+        //    var value = rdr.GetSqlBoolean(ordinal);
+        //    return value.IsNull ? false : value.Value;
+        //}
 
-        public static bool GetBooleanColumn(this SqlDataReader rdr, string name)
+        public static bool GetBoolean(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -26,7 +26,7 @@
             return value.IsNull ? false : value.Value;
         }
 
-        //public static DateTime? GetDateTimeColumn(this SqlDataReader rdr, int ordinal)
+        //public static DateTime? GetDateTimeByName(this SqlDataReader rdr, int ordinal)
         //{
         //    Requires.Object(rdr);
 
@@ -38,7 +38,7 @@
         //    }
         //}
 
-        public static DateTime GetDateTimeColumn(this SqlDataReader rdr, string name)
+        public static DateTime GetDateTime(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -46,15 +46,15 @@
             return rdr.GetDateTime(rdr.GetOrdinal(name));
         }
 
-        public static decimal GetDecimalColumn(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static decimal GetDecimalByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlDecimal(ordinal);
-            return value.IsNull ? default(decimal) : value.Value;
-        }
+        //    var value = rdr.GetSqlDecimal(ordinal);
+        //    return value.IsNull ? default(decimal) : value.Value;
+        //}
 
-        public static decimal GetDecimalColumn(this SqlDataReader rdr, string name)
+        public static decimal GetDecimal(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -63,15 +63,15 @@
             return value.IsNull ? default(decimal) : value.Value;
         }
 
-        public static double GetDoubleColumn(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static double GetDoubleByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlDouble(ordinal);
-            return value.IsNull ? default(double) : value.Value;
-        }
+        //    var value = rdr.GetSqlDouble(ordinal);
+        //    return value.IsNull ? default(double) : value.Value;
+        //}
 
-        public static double GetDoubleColumn(this SqlDataReader rdr, string name)
+        public static double GetDouble(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -81,15 +81,15 @@
             return value.IsNull ? default(double) : value.Value;
         }
 
-        public static int GetInt16Column(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static int GetInt16ByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlInt16(ordinal);
-            return value.IsNull ? default(int) : value.Value;
-        }
+        //    var value = rdr.GetSqlInt16(ordinal);
+        //    return value.IsNull ? default(int) : value.Value;
+        //}
 
-        public static int GetInt16Column(this SqlDataReader rdr, string name)
+        public static int GetInt16(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -99,16 +99,16 @@
             return value.IsNull ? default(int) : value.Value;
         }
 
-        public static int GetInt32Column(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static int GetInt32ByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlInt32(ordinal);
+        //    var value = rdr.GetSqlInt32(ordinal);
 
-            return value.IsNull ? default(int) : value.Value;
-        }
+        //    return value.IsNull ? default(int) : value.Value;
+        //}
 
-        public static int GetInt32Column(this SqlDataReader rdr, string name)
+        public static int GetInt32(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");
@@ -118,16 +118,16 @@
             return value.IsNull ? default(int) : value.Value;
         }
 
-        public static string GetStringColumn(this SqlDataReader rdr, int ordinal)
-        {
-            Requires.Object(rdr);
+        //public static string GetStringByName(this SqlDataReader rdr, int ordinal)
+        //{
+        //    Requires.Object(rdr);
 
-            var value = rdr.GetSqlString(ordinal);
+        //    var value = rdr.GetSqlString(ordinal);
 
-            return value.IsNull ? String.Empty : value.Value;
-        }
+        //    return value.IsNull ? String.Empty : value.Value;
+        //}
 
-        public static string GetStringColumn(this SqlDataReader rdr, string name)
+        public static string GetString(this SqlDataReader rdr, string name)
         {
             Requires.Object(rdr);
             Requires.NotNullOrEmpty(name, "name");

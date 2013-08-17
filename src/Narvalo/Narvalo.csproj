@@ -192,6 +192,7 @@
     <Compile Include="Collections\NameValueCollection%24.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\SqlCommand%24.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
