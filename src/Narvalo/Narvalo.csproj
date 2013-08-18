@@ -195,6 +195,7 @@
     <Compile Include="Data\SqlCommand%24.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
+    <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="Diagnostics\ConsoleLogger.cs" />
     <Compile Include="Diagnostics\DebuggerLogger.cs" />
     <Compile Include="Diagnostics\DebuggerWriter.cs" />
