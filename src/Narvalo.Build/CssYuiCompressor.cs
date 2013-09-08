@@ -1,5 +1,6 @@
 ﻿namespace Narvalo.Build
 {
+    using System.Globalization;
     using System.Text;
 
     /// <example>
@@ -23,11 +24,11 @@
 
         protected override string GenerateCommandLineArguments(string inFile, string outFile)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" --type css --charset utf8", JarPath);
 
             if (LineBreak > 0) {
-                sb.AppendFormat(" --line-break {0}", LineBreak);
+                sb.AppendFormat(" --line-break {0}", LineBreak.ToString(CultureInfo.InvariantCulture));
             }
 
             if (Verbose) {

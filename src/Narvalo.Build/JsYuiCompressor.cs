@@ -49,7 +49,7 @@
 
         protected override string GenerateCommandLineArguments(string inFile, string outFile)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" --type js --charset utf8", JarPath);
 
             if (DisableOptimizations) {

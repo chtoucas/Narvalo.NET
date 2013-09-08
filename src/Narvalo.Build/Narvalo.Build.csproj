@@ -81,7 +81,6 @@
     <Compile Include="ClosureCompiler.cs" />
     <Compile Include="FxCop.cs" />
     <Compile Include="FxCop10.cs" />
-    <Compile Include="FxCopProject.cs" />
     <Compile Include="JavaTaskBase.cs" />
     <Compile Include="MergeFiles.cs" />
     <Compile Include="PrepareForContentDeliveryNetwork.cs" />

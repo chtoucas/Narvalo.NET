@@ -54,12 +54,12 @@
         {
             if (Files.Length == 0) {
                 Log.LogMessage(MessageImportance.High,
-                    "You supplied an empty list of files to be merged.");
+                    "The list of files to merge can not be empty.");
                 return true;
             }
 
             try {
-                using (StreamWriter writer = new StreamWriter(OutFile)) {
+                using (var writer = new StreamWriter(OutFile)) {
                     foreach (ITaskItem file in Files) {
                         if (!File.Exists(file.ItemSpec)) {
                             Log.LogMessage(MessageImportance.High,

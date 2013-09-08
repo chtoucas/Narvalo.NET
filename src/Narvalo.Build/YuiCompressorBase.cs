@@ -41,7 +41,7 @@
 
         public override bool Execute()
         {
-            List<ITaskItem> compressedFiles = new List<ITaskItem>(Files.Length);
+            var compressedFiles = new List<ITaskItem>(Files.Length);
 
             string javaExe = GenerateFullPathToTool();
 
