@@ -10,17 +10,25 @@
 
     public class ClosureCompiler : JavaTaskBase
     {
+        int _processTimeout = 5000;
+
         [Required]
         public ITaskItem[] Files { get; set; }
 
         [Output]
         public ITaskItem[] CompressedFiles { get; protected set; }
 
-        public ITaskItem[] Externs { get; set; }
+        //public ITaskItem[] Externs { get; set; }
 
         public string CompilationLevel { get; set; }
 
         public string OutDir { get; set; }
+
+        public int ProcessTimeout
+        {
+            get { return _processTimeout; }
+            set { _processTimeout = value; }
+        }
 
         protected string CompilationLevelString
         {
@@ -49,20 +57,19 @@
                 string inFile = file.ItemSpec;
 
                 if (!File.Exists(inFile)) {
-                    Log.LogMessage(MessageImportance.High, "The file " + inFile + " does not exist");
-                    continue;
+                    Log.LogError("The file " + inFile + " does not exist");
+                    break;
                 }
 
                 string outFile = GetCompressedFilePath(inFile);
 
-                Log.LogMessage(MessageImportance.High,
-                    "Closure Compiler processing file: " + inFile + " -> " + outFile);
+                Log.LogMessage(MessageImportance.High, "Closure Compiler: " + inFile + " -> " + outFile);
 
                 if (File.Exists(outFile)) {
                     File.Delete(outFile);
                 }
 
-                using (Process process = new Process()) {
+                using (var process = new Process()) {
                     process.StartInfo = new ProcessStartInfo {
                         FileName = fullPathToTool,
                         Arguments = GetCommandLineArguments(inFile, outFile),
@@ -72,7 +79,7 @@
                         RedirectStandardError = true
                     };
                     process.Start();
-                    process.WaitForExit(5000);
+                    process.WaitForExit(ProcessTimeout);
 
                     // FIXME: Terminer le processus sinon on n'a pas accès au code ExitCode.
                     if (process.ExitCode != 0) {

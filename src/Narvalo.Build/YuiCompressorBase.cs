@@ -11,6 +11,7 @@
     public abstract class YuiCompressorBase : JavaTaskBase
     {
         int _lineBreak = 0;
+        int _processTimeout = 5000;
         bool _verbose = false;
 
         protected YuiCompressorBase() : base() { }
@@ -28,6 +29,12 @@
         }
 
         public string OutDir { get; set; }
+
+        public int ProcessTimeout
+        {
+            get { return _processTimeout; }
+            set { _processTimeout = value; }
+        }
 
         public bool Verbose
         {
@@ -49,9 +56,8 @@
                 string inFile = file.ItemSpec;
 
                 if (!File.Exists(inFile)) {
-                    Log.LogMessage(MessageImportance.High, "The file " + inFile + " does not exist");
-
-                    continue;
+                    Log.LogError("The file " + inFile + " does not exist");
+                    break;
                 }
 
                 string outFile = GenerateCompressedFilePath(inFile);
@@ -62,7 +68,7 @@
                     File.Delete(outFile);
                 }
 
-                using (Process process = new Process()) {
+                using (var process = new Process()) {
                     process.StartInfo = new ProcessStartInfo {
                         FileName = javaExe,
                         Arguments = GenerateCommandLineArguments(inFile, outFile),
@@ -73,7 +79,7 @@
                         WindowStyle = ProcessWindowStyle.Hidden,
                     };
                     process.Start();
-                    process.WaitForExit(5000);
+                    process.WaitForExit(ProcessTimeout);
 
                     if (process.ExitCode != 0) {
                         LogJavaFailure(process);

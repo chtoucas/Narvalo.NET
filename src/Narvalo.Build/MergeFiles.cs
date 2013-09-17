@@ -53,8 +53,7 @@
         public override bool Execute()
         {
             if (Files.Length == 0) {
-                Log.LogMessage(MessageImportance.High,
-                    "The list of files to merge can not be empty.");
+                Log.LogMessage(MessageImportance.High, "The list of files to merge can not be empty.");
                 return true;
             }
 
@@ -62,20 +61,18 @@
                 using (var writer = new StreamWriter(OutFile)) {
                     foreach (ITaskItem file in Files) {
                         if (!File.Exists(file.ItemSpec)) {
-                            Log.LogMessage(MessageImportance.High,
-                                "The file " + file.ItemSpec + " does not exist.");
-                            continue;
+                            Log.LogError("The file " + file.ItemSpec + " does not exist.");
+                            break;
                         }
 
-                        using (StreamReader reader = new StreamReader(file.ItemSpec)) {
+                        using (var reader = new StreamReader(file.ItemSpec)) {
                             writer.Write(reader.ReadToEnd());
                         }
                     }
                 }
             }
             catch (IOException ex) {
-                Log.LogErrorFromException(ex);
-
+                Log.LogErrorFromException(ex, false /* showStackTrace */);
                 throw;
             }
 
