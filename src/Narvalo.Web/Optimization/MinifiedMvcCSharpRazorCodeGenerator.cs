@@ -65,7 +65,7 @@
 
         static string MinifyContent_(string literal)
         {
-            return MutipleWhitespacesRegex_.Replace(literal, String.Empty);
+            return MutipleWhitespacesRegex_.Replace(literal, " ");
         }
 
         void SetBaseType_(string modelTypeName)
