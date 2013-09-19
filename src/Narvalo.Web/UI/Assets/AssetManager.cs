@@ -33,6 +33,12 @@
             }
         }
 
+        public static Uri ImageBase { get { return Provider.GetImage(String.Empty); } }
+
+        public static Uri ScriptBase { get { return Provider.GetScript(String.Empty); } }
+
+        public static Uri StyleBase { get { return Provider.GetStyle(String.Empty); } }
+
         public static Uri GetImage(string relativePath)
         {
             Requires.NotNullOrEmpty(relativePath, "relativePath");
