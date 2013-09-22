@@ -9,7 +9,6 @@
     public class HttpHeaderCleanupModule : IHttpModule
     {
         readonly static List<string> HeadersToRemove_ = new List<string> {
-			"Etag",
 			"Server",
             // X-AspNet-Version peut être aussi supprimé dans le Web.config : 
             // <system.web>
