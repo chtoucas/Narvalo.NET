@@ -40,7 +40,7 @@
                     var sym = item as HtmlSymbol;
                     if (sym != null) {
                         if (IsIrrelevant_(sym, prevType)) {
-                            builder.Accept(new HtmlSymbol(sym.Start, String.Empty, sym.Type, sym.Errors));
+                            builder.Accept(new HtmlSymbol(sym.Start, " ", sym.Type, sym.Errors));
                         }
                         else {
                             builder.Accept(new HtmlSymbol(sym.Start, MinifyContent_(sym.Content), sym.Type, sym.Errors));
