@@ -39,12 +39,14 @@
                 foreach (ISymbol item in span.Symbols) {
                     var sym = item as HtmlSymbol;
                     if (sym != null) {
-                        if (IsIrrelevant_(sym, prevType)) {
-                            builder.Accept(new HtmlSymbol(sym.Start, " ", sym.Type, sym.Errors));
+                        string content;
+                        if (sym.Type == HtmlSymbolType.WhiteSpace && prevType == HtmlSymbolType.NewLine) {
+                            content = String.Empty;
                         }
                         else {
-                            builder.Accept(new HtmlSymbol(sym.Start, MinifyContent_(sym.Content), sym.Type, sym.Errors));
+                            content = MinifyContent_(sym.Content);
                         }
+                        builder.Accept(new HtmlSymbol(sym.Start, content, sym.Type, sym.Errors));
                         prevType = sym.Type;
                     }
                     else {
@@ -55,12 +57,6 @@
             }
 
             base.VisitSpan(span);
-        }
-
-        static bool IsIrrelevant_(HtmlSymbol sym, HtmlSymbolType prevType)
-        {
-            return sym.Type == HtmlSymbolType.NewLine
-                || (sym.Type == HtmlSymbolType.WhiteSpace && prevType == HtmlSymbolType.NewLine);
         }
 
         static string MinifyContent_(string literal)
