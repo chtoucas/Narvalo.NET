@@ -88,7 +88,7 @@
 
         public static string FindJavaPathInCommonLocations(string toolName)
         {
-            // FIXME: programFilesPath dépend du type de compilation (AnyCPU, x64, x32), 
+            // FIXME: programFilesPath dépend du type de compilation (AnyCPU, x64, x32),
             // de la plate-forme, du processus courant :
             // - pour un système x32 on obtient "C:\Program Files"
             // - pour un système x64 avec compilation AnyCPU ou x64, on obtient "C:\Program Files"
@@ -96,8 +96,12 @@
             // Peut-être Environment.ExpandEnvironmentVariables("%ProgramFiles%")
             string programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             string[] commonLocations = {
+                // JRE/JDK v6
                 Path.Combine(programFilesPath, @"\Java\jre6\bin"),
                 @"C:\Program Files\Java\jre6\bin",
+                // JRE/JDK v7
+                Path.Combine(programFilesPath, @"\Java\jre7\bin"),
+                @"C:\Program Files\Java\jre7\bin",
             };
 
             return FindJavaPathInDirectories(commonLocations, toolName);
@@ -156,9 +160,9 @@
 
         // IntPtr.Size won't return the correct value if running in 32-bit .NET Framework 2.0
         // on 64-bit Windows (it would return 32-bit).
-        // As Microsoft's Raymond Chen describes, you have to first check if running in a 
-        // 64-bit process (I think in .NET you can do so by checking IntPtr.Size), and if 
-        // you are running in a 32-bit process, you still have to call the Win API function 
+        // As Microsoft's Raymond Chen describes, you have to first check if running in a
+        // 64-bit process (I think in .NET you can do so by checking IntPtr.Size), and if
+        // you are running in a 32-bit process, you still have to call the Win API function
         // IsWow64Process. If this returns true, you are running in a 32-bit process on 64-bit Windows.
         // See : How to detect programmatically whether you are running on 64-bit Windows
         // http://blogs.msdn.com/b/oldnewthing/archive/2005/02/01/364563.aspx
@@ -176,7 +180,7 @@
 
         //[MethodImpl(MethodImplOptions.NoInlining)]
         //private static bool InternalCheckIsWow64() {
-        //    if ((Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1) 
+        //    if ((Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1)
         //        || Environment.OSVersion.Version.Major >= 6) {
         //        using (Process p = Process.GetCurrentProcess()) {
         //            bool retVal;
