@@ -63,7 +63,8 @@
 
                 string outFile = GetCompressedFilePath(inFile);
 
-                Log.LogMessage(MessageImportance.High, "Closure Compiler: " + inFile + " -> " + outFile);
+                Log.LogMessage(MessageImportance.Normal,
+                    "Closure Compiler processing " + new FileInfo(inFile).Name);
 
                 if (File.Exists(outFile)) {
                     File.Delete(outFile);

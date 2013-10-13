@@ -62,7 +62,8 @@
 
                 string outFile = GenerateCompressedFilePath(inFile);
 
-                Log.LogMessage(MessageImportance.High, "YUI Compressor: " + inFile + " -> " + outFile);
+                Log.LogMessage(MessageImportance.Normal,
+                    "YUI Compressor processing " + new FileInfo(inFile).Name);
 
                 if (File.Exists(outFile)) {
                     File.Delete(outFile);
