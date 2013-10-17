@@ -81,7 +81,7 @@
 
         public static string FindJavaPathInPathLocations(string toolName)
         {
-            string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
+            string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? String.Empty;
             string[] paths = pathEnv.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
             return FindJavaPathInDirectories(paths, toolName);
         }
