@@ -16,5 +16,6 @@
   </metadata>
   <files>
     <file src="bin\$configuration$\Narvalo.Build.tasks" target="tools" />
+    <file src="bin\$configuration$\Narvalo.Build.dll" target="tools" />
   </files>
 </package>
