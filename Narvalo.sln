@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		etc\AssemblyInfos\AssemblyInfo.Narvalo.cs = etc\AssemblyInfos\AssemblyInfo.Narvalo.cs
 		etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs = etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs
+		NuPack.cmd = NuPack.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librairies", "Librairies", "{D25F7302-3F48-4218-9A0F-E0753CBA688A}"

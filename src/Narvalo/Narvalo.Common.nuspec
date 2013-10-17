@@ -7,7 +7,7 @@
     <owners>$author$</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright 2013</copyright>

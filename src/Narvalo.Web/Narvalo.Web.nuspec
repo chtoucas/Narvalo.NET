@@ -7,7 +7,7 @@
     <owners>$author$</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright 2013</copyright>
@@ -15,7 +15,6 @@
     <language>en-US</language>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="4.0.30506.0" />
-      <dependency id="Microsoft.Web.Infrastructure" version="1.0.0" />
       <dependency id="Narvalo.Common" version="0.2.0" />
     </dependencies>
   </metadata>

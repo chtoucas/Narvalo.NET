@@ -132,7 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\github\Narvalo.NET\src\Narvalo\Narvalo.csproj">
+    <ProjectReference Include="..\Narvalo\Narvalo.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo</Name>
     </ProjectReference>
@@ -167,5 +167,4 @@
     <None Include="Incubator\Presentation\Mvp\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

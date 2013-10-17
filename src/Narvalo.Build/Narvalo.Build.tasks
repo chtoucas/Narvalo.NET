@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyFile>$(MSBuildThisFileDirectory)Narvalo.Build.dll</AssemblyFile>
+  </PropertyGroup>
+
+  <UsingTask TaskName="Narvalo.Build.ClosureCompiler" AssemblyFile="$(AssemblyFile)" />
+  <UsingTask TaskName="Narvalo.Build.CssYuiCompressor" AssemblyFile="$(AssemblyFile)" />
+  <UsingTask TaskName="Narvalo.Build.MergeFiles" AssemblyFile="$(AssemblyFile)" />
+</Project>

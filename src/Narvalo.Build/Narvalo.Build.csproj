@@ -91,9 +91,12 @@
       <Link>Properties\Narvalo.snk</Link>
     </None>
     <None Include="Narvalo.Build.nuspec" />
+    <None Include="Narvalo.Build.tasks">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthorNotes.txt" />
+    <None Include="AuthorNotes.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -107,5 +110,4 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
 </Project>
