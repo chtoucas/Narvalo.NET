@@ -6,8 +6,12 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
-    <projectUrl>http://narvalo.org/</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>MSBuild</tags>
+    <language>en-US</language>
   </metadata>
 </package>
