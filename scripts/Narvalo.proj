@@ -33,8 +33,7 @@
 
   <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
-  <Target Name="Milestone"
-          DependsOnTargets="_ValidateMilestone;_UpdateVersionNumber;Rebuild;_NuPack" />
+  <Target Name="Milestone" DependsOnTargets="_ValidateMilestone;_UpdateVersionNumber" />
 
   <Target Name="Package" DependsOnTargets="_UpdateVersionNumber;Rebuild;_NuPack" />
 
@@ -66,82 +65,55 @@
 
   <PropertyGroup>
     <_NuPackDependsOn>
-      _NuPackNarvaloBuild;
-      _NuPackNarvaloCommon;
-      _NuPackNarvaloWeb
+      CreatePackageDir;
+      CreateStageDir;
+      _Package
     </_NuPackDependsOn>
   </PropertyGroup>
 
-  <Target Name="_NuPackNarvaloBuild" DependsOnTargets="CreatePackageDir;CreateStageDir;GetVersionNumber">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)Narvalo.Build\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)Narvalo.Build.nuspec</_PackageSpec>
-    </PropertyGroup>
-    <ItemGroup>
-      <_NarvaloBuildTools Include="$(_OutDir)Narvalo.Build.dll" />
-      <_NarvaloBuildTools Include="$(_OutDir)Narvalo.Build.pdb" />
-      <_NarvaloBuildTools Include="$(_OutDir)Narvalo.Build.tasks" />
-    </ItemGroup>
+  <ItemGroup>
+    <_Packages Include="Narvalo.Build">
+      <Tools>
+        $(_OutDir)Narvalo.Build.dll;
+        $(_OutDir)Narvalo.Build.pdb;
+        $(_OutDir)Narvalo.Build.tasks
+      </Tools>
+    </_Packages>
+    <_Packages Include="Narvalo.Common">
+      <Libs>
+        $(_OutDir)Narvalo.Common.dll;
+        $(_OutDir)Narvalo.Common.pdb
+      </Libs>
+    </_Packages>
+    <_Packages Include="Narvalo.Web">
+      <Libs>
+        $(_OutDir)Narvalo.Web.dll;
+        $(_OutDir)Narvalo.Web.pdb
+      </Libs>
+    </_Packages>
+  </ItemGroup>
 
-    <MakeDir Directories="$(_PackageStageDir)" />
-    <MakeDir Directories="$(_PackageStageDir)tools" />
-    <Copy SourceFiles="@(_NarvaloBuildTools)" DestinationFolder="$(_PackageStageDir)tools" />
-    <Copy SourceFiles="$(_EtcDir)Narvalo.Build.nuspec" DestinationFolder="$(_PackageStageDir)" />
+  <Target Name="_Package" DependsOnTargets="GetVersionNumber"
+          Outputs="%(_Packages.Identity)">
+    <PropertyGroup>
+      <_PackageStageDir>$(_StageDir)%(_Packages.Identity)\</_PackageStageDir>
+      <_PackageSpec>$(_PackageStageDir)%(_Packages.Identity).nuspec</_PackageSpec>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_PackageStageDir)lib\net45"
+             Condition="'%(_Packages.Libs)' != ''" />
+    <Copy SourceFiles="%(_Packages.Libs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
+    <MakeDir Directories="$(_PackageStageDir)tools"
+             Condition="'%(_Packages.Tools)' != ''" />
+    <Copy SourceFiles="%(_Packages.Tools)" DestinationFolder="$(_PackageStageDir)tools" />
 
     <CreatePackageSpec
-      TemplateFile="$(_EtcDir)Narvalo.Build.nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir) -Verbosity quiet" />
-  </Target>
-
-  <Target Name="_NuPackNarvaloCommon" DependsOnTargets="CreatePackageDir;CreateStageDir;GetVersionNumber">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)Narvalo.Common\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)Narvalo.Common.nuspec</_PackageSpec>
-    </PropertyGroup>
-    <ItemGroup>
-      <_NarvaloCommonLibs Include="$(_OutDir)Narvalo.Common.dll" />
-      <_NarvaloCommonLibs Include="$(_OutDir)Narvalo.Common.pdb" />
-    </ItemGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)" />
-    <MakeDir Directories="$(_PackageStageDir)lib\net45" />
-    <Copy SourceFiles="@(_NarvaloCommonLibs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
-    <Copy SourceFiles="$(_EtcDir)Narvalo.Common.nuspec" DestinationFolder="$(_PackageStageDir)" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)Narvalo.Common.nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
-  </Target>
-
-  <Target Name="_NuPackNarvaloWeb" DependsOnTargets="CreatePackageDir;CreateStageDir;GetVersionNumber">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)Narvalo.Web\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)Narvalo.Web.nuspec</_PackageSpec>
-    </PropertyGroup>
-    <ItemGroup>
-      <_NarvaloWebLibs Include="$(_OutDir)Narvalo.Web.dll" />
-      <_NarvaloWebLibs Include="$(_OutDir)Narvalo.Web.pdb" />
-    </ItemGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)" />
-    <MakeDir Directories="$(_PackageStageDir)lib\net45" />
-    <Copy SourceFiles="@(_NarvaloWebLibs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
-    <Copy SourceFiles="$(_EtcDir)Narvalo.Web.nuspec" DestinationFolder="$(_PackageStageDir)" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)Narvalo.Web.nuspec"
+      TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
       VersionNumber="$(_VersionNumber)"
       SpecFile="$(_PackageSpec)" />
 
     <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
   </Target>
-
 
   <UsingTask TaskName="CreatePackageSpec" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
     <ParameterGroup>
