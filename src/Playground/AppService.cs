@@ -1,6 +1,6 @@
 ﻿namespace Narvalo.Playground
 {
-    using Narvalo.Diagnostics;
+    using Serilog;
 
     public class AppService/*Impl*/ : IAppService
     {

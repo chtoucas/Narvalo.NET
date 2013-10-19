@@ -7,12 +7,27 @@
     <_buildTimeFile>$(_BuildDir).buildTime</_buildTimeFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <_TempBuildFiles Include="$(_XunitXmlReport)"/>
-    <_TempBuildFiles Include="$(_buildTimeFile)"/>
-  </ItemGroup>
+
+  <!-- ### Vérifications ### -->
+
+  <Target Name="Verify" DependsOnTargets="VerifyBuildOutputs" />
+
+  <Target Name="VerifyBuildOutputs" DependsOnTargets="GetPEVerify"
+          Inputs="@(_BuildOutputs)"
+          Outputs="$(_buildTimeFile)">
+    <Message Text="Verifying build outputs with PEVerify." Importance="Low" />
+
+    <Exec Command="$(PEVerifyExe) &quot;%(_BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+          ContinueOnError="false" />
+
+    <!-- NB: Garder cette commande en fin de directive au cas où une vérification échoue -->
+    <Touch Files="$(_buildTimeFile)" AlwaysCreate="true" />
+  </Target>
+
 
   <!-- ### Tests (White-box) ### -->
+
+  <Target Name="RunUnitTests" DependsOnTargets="RunXunitTests" />
 
   <!-- Tests unitaires via Xunit. -->
   <Target Name="RunXunitTests" DependsOnTargets="CreateReportsDir"
@@ -26,21 +41,6 @@
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)" Xml="$(_XunitXmlReport)" />
-  </Target>
-
-
-  <!-- ### Analyses ### -->
-
-  <Target Name="VerifyBuildOutputs" DependsOnTargets="GetPEVerify"
-          Inputs="@(_BuildOutputs)"
-          Outputs="$(_buildTimeFile)">
-    <Message Text="Verifying build outputs with PEVerify." Importance="Low" />
-
-    <Exec Command="$(PEVerifyExe) &quot;%(_BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
-          ContinueOnError="false" />
-
-    <!-- NB: Garder cette commande en fin de directive au cas où une vérification échoue -->
-    <Touch Files="$(_buildTimeFile)" AlwaysCreate="true" />
   </Target>
 
 </Project>

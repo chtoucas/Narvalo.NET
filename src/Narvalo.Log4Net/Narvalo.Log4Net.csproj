@@ -65,8 +65,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Log4NetFactory.cs" />
-    <Compile Include="Log4NetProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

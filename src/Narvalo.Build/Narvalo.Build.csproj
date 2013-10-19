@@ -90,7 +90,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Narvalo.Build.nuspec" />
     <None Include="Narvalo.Build.tasks">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

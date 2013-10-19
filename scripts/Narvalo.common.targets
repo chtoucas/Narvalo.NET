@@ -41,11 +41,6 @@
     </BuildProperties>
   </PropertyGroup>
 
-  <!-- Supprime tous les fichiers temporaires créés au cours d'une compilation. -->
-  <Target Name="DeleteTempBuildFiles">
-    <Delete Files="@(_TempBuildFiles)" />
-  </Target>
-
   <Target Name="DeleteBuildDir">
     <ItemGroup>
       <_FilesToRemove Include="$(_BuildDir)**\*"/>

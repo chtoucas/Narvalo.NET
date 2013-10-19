@@ -6,11 +6,12 @@ namespace Narvalo.Playground
     using Narvalo.Autofac;
     using Narvalo.Diagnostics;
     using Narvalo.Playground.Properties;
+    using Serilog;
 
     public class Program : AutofacProgram
     {
-        static readonly Lazy<ILogger> Logger_
-            = new Lazy<ILogger>(() => Logger.Create(typeof(Program).Namespace));
+        //static readonly Lazy<ILogger> Logger_
+        //    = new Lazy<ILogger>(() => Logger.Create(typeof(Program).Namespace));
 
         Program() : base() { }
 
@@ -19,9 +20,9 @@ namespace Narvalo.Playground
         {
             InitializeRuntime_();
 
-            var logger = Logger_.Value;
+            //var logger = Logger_.Value;
 
-            logger.Log(LoggerLevel.Informational, Resources.Starting);
+            //logger.Log(LoggerLevel.Informational, Resources.Starting);
 
             try {
                 new Program().Run();
@@ -30,7 +31,7 @@ namespace Narvalo.Playground
                 LogUnhandledException_(ex);
             }
 
-            logger.Log(LoggerLevel.Informational, Resources.Ending);
+            //logger.Log(LoggerLevel.Informational, Resources.Ending);
         }
 
         protected override IContainer CreateContainer()
@@ -54,16 +55,16 @@ namespace Narvalo.Playground
 
         static void InitializeRuntime_()
         {
-            log4net.Config.XmlConfigurator.Configure();
+            //log4net.Config.XmlConfigurator.Configure();
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
         }
 
         static void LogUnhandledException_(Exception ex)
         {
-            if (Logger_.IsValueCreated) {
-                Logger_.Value.Log(LoggerLevel.Fatal, Resources.UnhandledException, ex);
-            }
+            //if (Logger_.IsValueCreated) {
+            //    Logger_.Value.Log(LoggerLevel.Fatal, Resources.UnhandledException, ex);
+            //}
         }
 
         #endregion

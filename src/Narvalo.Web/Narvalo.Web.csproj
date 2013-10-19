@@ -204,7 +204,6 @@
       <Link>Properties\Narvalo.snk</Link>
     </None>
     <None Include="Optimization\README.md" />
-    <None Include="Narvalo.Web.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
