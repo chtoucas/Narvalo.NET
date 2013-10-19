@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+    On demande à MSBuild de sauvegarder le résultat de la transformation
+    d'une solution en un fichier projet.
+  -->
+  <Target Name="EmitProjectSolution">
+    <SetEnv Variable="msbuildemitsolution" Value="1"/>
+  </Target>
+
+  <Target Name="GetPEVerify">
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="FrameworkSdkVersion40Path" PropertyName="_SdkPath" />
+    </GetFrameworkSdkPath>
+
+    <PropertyGroup>
+      <_NetFxTools>$(_SdkPath)Bin\NETFX 4.0 Tools\</_NetFxTools>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <PEVerifyExe>&quot;$(_NetFxTools)peverify.exe&quot;</PEVerifyExe>
+    </PropertyGroup>
+  </Target>
+
+</Project>

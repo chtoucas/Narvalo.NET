@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="SetEnv" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <Variable ParameterType="System.String" Required="true" />
+      <Value ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+Environment.SetEnvironmentVariable(Variable, Value);
+return true;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="GetVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <VersionInfoXml ParameterType="System.String" Required="true" />
+      <VersionNumber ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq" />
+      <Using Namespace="System" />
+      <Using Namespace="System.Globalization" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Xml" />
+      <Using Namespace="System.Xml.Linq" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (VersionInfoXml.Length == 0) {
+    Log.LogMessage(MessageImportance.High, "You must supply a version file.");
+    return false;
+}
+
+try {
+    XDocument xdoc;
+    using (var reader = new StreamReader(VersionInfoXml)) {
+        xdoc = XDocument.Load(reader);
+    }
+
+    var root = xdoc.Root;
+
+    var major = Int16.Parse(root.Element("Major").Value);
+    var minor = Int16.Parse(root.Element("Minor").Value);
+    var build = Int16.Parse(root.Element("Build").Value);
+    var revision = Int16.Parse(root.Element("Revision").Value);
+
+    VersionNumber = String.Format(CultureInfo.InvariantCulture, "{0}.{1}.{2}.{3}",
+      major, minor, build, revision);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="UpdateVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <VersionInfoXml ParameterType="System.String" Required="true" />
+      <AssemblyInfoTemplate ParameterType="System.String" Required="true" />
+      <AssemblyInfoFile ParameterType="System.String" Required="true" />
+      <Milestone ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq" />
+      <Using Namespace="System" />
+      <Using Namespace="System.Globalization" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Xml" />
+      <Using Namespace="System.Xml.Linq" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (VersionInfoXml.Length == 0) {
+    Log.LogMessage(MessageImportance.High, "You must supply a version file.");
+    return false;
+}
+
+try {
+    XDocument xdoc;
+    using (var reader = new StreamReader(VersionInfoXml)) {
+        xdoc = XDocument.Load(reader);
+    }
+
+    var root = xdoc.Root;
+
+    var major = Int16.Parse(root.Element("Major").Value);
+    var minor = Int16.Parse(root.Element("Minor").Value);
+    var build = Int16.Parse(root.Element("Build").Value);
+    var revision = Int16.Parse(root.Element("Revision").Value);
+    var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm K");
+
+    switch (Milestone) {
+      case "Major":
+        // Nouvelle version majeure : [Major].0.0.0
+        major++;
+        minor = 0;
+        build = 0;
+        revision = 0;
+        break;
+      case "Minor":
+        // Nouvelle version mineure : Major.[Minor].0.0
+        minor++;
+        build = 0;
+        revision = 0;
+        break;
+      case "Patch":
+        // Révision d'une version existante : Major.Minor.[Patch].0
+        // NB: "Patch" prend la place du champs "Build" dans le numéro de version .NET.
+        build++;
+        revision = 0;
+        break;
+      case "Build":
+        // Recompilation du même code : Major.Minor.Patch.[Build]
+        // NB: "Build" prend la place du champs "Revision" dans le numéro de version .NET.
+        revision++;
+        break;
+      default:
+        Log.LogError("The requested mode '" + Milestone + "' is not valid.");
+        return false;
+    }
+
+    root.Element("Major").Value = major.ToString(CultureInfo.InvariantCulture);
+    root.Element("Minor").Value = minor.ToString(CultureInfo.InvariantCulture);
+    root.Element("Build").Value = build.ToString(CultureInfo.InvariantCulture);
+    root.Element("Revision").Value = revision.ToString(CultureInfo.InvariantCulture);
+    root.Element("Timestamp").Value = timestamp;
+
+    using (var writer = new StreamWriter(VersionInfoXml)) {
+        xdoc.Save(writer);
+    }
+
+    // Mise à jour des informations d'assemblée.
+    string template = File.ReadAllText(AssemblyInfoTemplate)
+        .Replace("$Major$", major.ToString(CultureInfo.InvariantCulture))
+        .Replace("$Minor$", minor.ToString(CultureInfo.InvariantCulture))
+        .Replace("$Build$", build.ToString(CultureInfo.InvariantCulture))
+        .Replace("$Revision$", revision.ToString(CultureInfo.InvariantCulture))
+        .Replace("$Timestamp$", timestamp);
+    File.WriteAllText(AssemblyInfoFile, template);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

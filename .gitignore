@@ -1,7 +1,11 @@
+_build/
+_work/
+msbuild.log
+Narvalo.sln.metaproj*
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
-_build/
 
 # mstest test results
 TestResults

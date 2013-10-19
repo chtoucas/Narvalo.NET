@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Narvalo.Common</id>
+    <version>$version$</version>
+    <authors>Narvalo.Org</authors>
+    <owners>chtoucas</owners>
+    <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
+    <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains the Narvalo.Org common utilities.</description>
+    <!--<releaseNotes>Initial release.</releaseNotes>-->
+    <copyright>Copyright 2013</copyright>
+    <tags>Maybe</tags>
+    <language>en-US</language>
+  </metadata>
+</package>

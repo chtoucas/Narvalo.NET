@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Ce fichier contient toutes les directives communes.
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project=".\Narvalo.props" />
+  <Import Project=".\Narvalo.helpers.targets" />
+  <Import Project=".\Narvalo.common.tasks" />
+
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">Any CPU</Platform>
+    <!-- TODO: À vérifier -->
+    <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
+    <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
+
+    <RunTests Condition="'$(RunTests)' != 'false'">true</RunTests>
+    <Analyze Condition="'$(Analyze)' != 'false'">true</Analyze>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_OutDir>$(_BaseOutDir)$(Configuration)\</_OutDir>
+  </PropertyGroup>
+
+  <!--
+    On essaie au mieux d'isoler l'environnement de compilation, ie de définir
+    des répertoires complètement séparés de ceux utilisés par VS.
+  -->
+  <PropertyGroup>
+    <BuildProperties>
+      Configuration=$(Configuration);
+      OutDir=$(_OutDir);
+      <!-- NB: D'après Microsoft.Common.targets, on doit utiliser "OutDir" plutôt qu'"OutputPath".
+           Pour les projets Web, choisir la même valeur pour "OutDir" et "OutputPath" permet
+           aussi d'éviter la création de "_PublishedWebsites". -->
+      OutputPath=$(_OutDir);
+      BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
+      Platform=$(Platform);
+      BuildInParallel=$(BuildInParallel)
+    </BuildProperties>
+  </PropertyGroup>
+
+  <!-- Supprime tous les fichiers temporaires créés au cours d'une compilation. -->
+  <Target Name="DeleteTempBuildFiles">
+    <Delete Files="@(_TempBuildFiles)" />
+  </Target>
+
+  <Target Name="DeleteBuildDir">
+    <ItemGroup>
+      <_FilesToRemove Include="$(_BuildDir)**\*"/>
+    </ItemGroup>
+
+    <Delete Files="@(_FilesToRemove)" />
+
+    <RemoveDir Directories="$(_BuildDir)" Condition="Exists($(_BuildDir))" />
+  </Target>
+
+  <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
+  <Target Name="CreateReportsDir">
+    <MakeDir Directories="$(_ReportsDir)" Condition="!Exists($(_ReportsDir))" />
+  </Target>
+
+  <!-- Création du répertoire contenant les packages NuGet. -->
+  <Target Name="CreatePackageDir">
+    <MakeDir Directories="$(_PackageDir)" Condition="!Exists($(_PackageDir))" />
+  </Target>
+
+  <Target Name="CreateStageDir">
+    <MakeDir Directories="$(_StageDir)" Condition="!Exists($(_StageDir))" />
+  </Target>
+
+  <!-- Récupération du numéro de version des assemblées .NET. -->
+  <Target Name="GetVersionNumber">
+    <GetVersion VersionInfoXml="$(_EtcDir)VersionInfo.xml">
+      <Output TaskParameter="VersionNumber" PropertyName="_VersionNumber" />
+    </GetVersion>
+  </Target>
+
+</Project>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project=".\xunit.runner.tasks" />
+
+  <PropertyGroup>
+    <_XunitXmlReport>$(_ReportsDir)xunit.xml</_XunitXmlReport>
+    <_buildTimeFile>$(_BuildDir).buildTime</_buildTimeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_TempBuildFiles Include="$(_XunitXmlReport)"/>
+    <_TempBuildFiles Include="$(_buildTimeFile)"/>
+  </ItemGroup>
+
+  <!-- ### Tests (White-box) ### -->
+
+  <!-- Tests unitaires via Xunit. -->
+  <Target Name="RunXunitTests" DependsOnTargets="CreateReportsDir"
+          Inputs="@(_BuildOutputs)"
+          Outputs="$(_XunitXmlReport)">
+    <Message Text="Running Xunit tests." Importance="Low" />
+
+    <ItemGroup>
+      <_TestAssemblies Include="%(_BuildOutputs.Identity)"
+                       Condition="'@(_BuildOutputs->EndsWith('Tests.dll'))' == 'true'" />
+    </ItemGroup>
+
+    <xunit Assemblies="@(_TestAssemblies)" Xml="$(_XunitXmlReport)" />
+  </Target>
+
+
+  <!-- ### Analyses ### -->
+
+  <Target Name="VerifyBuildOutputs" DependsOnTargets="GetPEVerify"
+          Inputs="@(_BuildOutputs)"
+          Outputs="$(_buildTimeFile)">
+    <Message Text="Verifying build outputs with PEVerify." Importance="Low" />
+
+    <Exec Command="$(PEVerifyExe) &quot;%(_BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+          ContinueOnError="false" />
+
+    <!-- NB: Garder cette commande en fin de directive au cas où une vérification échoue -->
+    <Touch Files="$(_buildTimeFile)" AlwaysCreate="true" />
+  </Target>
+
+</Project>

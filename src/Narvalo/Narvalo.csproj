@@ -12,7 +12,7 @@
     <AssemblyName>Narvalo.Common</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\Etc\Keys\Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -176,11 +176,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Etc\AssemblyInfos\AssemblyInfo.Narvalo.cs">
-      <Link>Properties\AssemblyInfo.Narvalo.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs">
-      <Link>Properties\AssemblyInfo.Narvalo.Version.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="..\Common\System\Diagnostics\Contracts\ContractExtensions.cs">
       <Link>_Aliens\System.Diagnostics.Contracts\ContractExtensions.cs</Link>
@@ -268,7 +268,7 @@
     <Compile Include="Xml\XmlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Etc\Keys\Narvalo.snk">
+    <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
     <None Include="Narvalo.Common.nuspec" />

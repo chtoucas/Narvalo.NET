@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 [assembly: AssemblyTitle("Narvalo")]
-[assembly: AssemblyDescription("Narvalo General Utilies.")]
+[assembly: AssemblyDescription("Narvalo.Org common utilities.")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyProduct("Narvalo Libraries")]
+[assembly: AssemblyProduct("Narvalo.Org libraries.")]
 
 [assembly: Guid("8cd3c522-030f-49b4-bd87-285e2b35425b")]
 
@@ -15,6 +15,7 @@ using System.Security;
 
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: SecurityTransparent]
+
 //[assembly: SecurityRules(System.Security.SecurityRuleSet.Level2)]
 
 //[assembly: ContractVerification(false)]

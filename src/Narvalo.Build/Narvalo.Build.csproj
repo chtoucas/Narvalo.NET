@@ -43,7 +43,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\..\Etc\Keys\Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeAnalysis|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -72,11 +72,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Etc\AssemblyInfos\AssemblyInfo.Narvalo.cs">
-      <Link>Properties\AssemblyInfo.Narvalo.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs">
-      <Link>Properties\AssemblyInfo.Narvalo.Version.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="ClosureCompiler.cs" />
     <Compile Include="JavaTaskBase.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="JsYuiCompressor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Etc\Keys\Narvalo.snk">
+    <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
     <None Include="Narvalo.Build.nuspec" />

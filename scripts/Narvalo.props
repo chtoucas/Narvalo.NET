@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Ce fichier définit toutes les propriétés globales en lecture seule.
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_RootDir>$(MSBuildThisFileDirectory)..\</_RootDir>
+
+    <_EtcDir>$(_RootDir)etc\</_EtcDir>
+    <_SourceDir>$(_RootDir)src\</_SourceDir>
+    <_TestDir>$(_RootDir)test\</_TestDir>
+    <_ToolsDir>$(_RootDir)tools\</_ToolsDir>
+    <_NuGetPackageDir>$(_RootDir)packages\</_NuGetPackageDir>
+    <_PackageDir>$(_RootDir)_build\</_PackageDir>
+
+    <_PublishProfileDir>$(MSBuildThisFileDirectory)</_PublishProfileDir>
+  </PropertyGroup>
+
+  <!-- Répertoires temporaires créés au cours de la compilation. -->
+  <PropertyGroup>
+    <_BuildDir>$(_RootDir)_work\</_BuildDir>
+    <_BaseOutDir>$(_BuildDir)bin\</_BaseOutDir>
+    <_BaseIntermediateOutDir>$(_BuildDir)obj\</_BaseIntermediateOutDir>
+    <_ReportsDir>$(_BuildDir)reports\</_ReportsDir>
+    <_StageDir>$(_BuildDir)stage\</_StageDir>
+  </PropertyGroup>
+
+  <!-- Outils locaux (exe ou jar). -->
+  <PropertyGroup>
+    <_NuGetExe>$(_ToolsDir)nuget.exe</_NuGetExe>
+  </PropertyGroup>
+
+</Project>
