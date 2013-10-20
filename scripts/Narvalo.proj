@@ -20,7 +20,16 @@
     <Exec Command="&quot;$(_NuGetExe)&quot; restore &quot;%(ProjectsToBuild.Identity)&quot; -Verbosity quiet" />
   </Target>
 
-  <Target Name="Clean" DependsOnTargets="DeleteBuildDir" />
+  <Target Name="Clean">
+    <ItemGroup>
+      <_FilesToRemove Include="$(_BuildDir)**\*"/>
+      <_FilesToRemove Include="$(_PackageDir)**\*"/>
+    </ItemGroup>
+
+    <Delete Files="@(_FilesToRemove)" />
+
+    <RemoveDir Directories="$(_BuildDir);$(_PackageDir)" />
+  </Target>
 
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" StopOnFirstFailure="true">
@@ -33,9 +42,9 @@
 
   <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
-  <Target Name="Milestone" DependsOnTargets="_ValidateMilestone;_UpdateVersionNumber" />
+  <Target Name="Milestone" DependsOnTargets="ValidateMilestone;UpdateVersionNumber" />
 
-  <Target Name="Package" DependsOnTargets="_UpdateVersionNumber;Rebuild;_NuPack" />
+  <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
 
   <ItemGroup>
     <_AfterBuildTargets Include="Verify" />
@@ -46,104 +55,13 @@
     <AfterBuildDependsOnTarget>@(_AfterBuildTargets)</AfterBuildDependsOnTarget>
   </PropertyGroup>
 
-  <Target Name="_ValidateMilestone">
-    <Error Text="The parameter 'Milestone' must not be set to 'Build'."
-           Condition="'$(Milestone)' == 'Build'" />
-  </Target>
-
-  <!-- Mise à jour du numéro de version des assemblées .NET. -->
-  <Target Name="_UpdateVersionNumber">
-    <UpdateVersion
-      VersionInfoXml="$(_EtcDir)VersionInfo.xml"
-      AssemblyInfoTemplate="$(_EtcDir)AssemblyInfo.Template.cs"
-      AssemblyInfoFile="$(_EtcDir)AssemblyInfo.Version.cs"
-      Milestone="$(Milestone)">
-    </UpdateVersion>
-  </Target>
-
-  <Target Name="_NuPack" DependsOnTargets="$(_NuPackDependsOn)" />
-
   <PropertyGroup>
-    <_NuPackDependsOn>
+    <PackageDependsOn>
       CreatePackageDir;
       CreateStageDir;
-      _Package
-    </_NuPackDependsOn>
+      UpdateVersionNumber;
+      Rebuild;
+      NuGetPackage
+    </PackageDependsOn>
   </PropertyGroup>
-
-  <ItemGroup>
-    <_Packages Include="Narvalo.Build">
-      <Tools>
-        $(_OutDir)Narvalo.Build.dll;
-        $(_OutDir)Narvalo.Build.pdb;
-        $(_OutDir)Narvalo.Build.tasks
-      </Tools>
-    </_Packages>
-    <_Packages Include="Narvalo.Common">
-      <Libs>
-        $(_OutDir)Narvalo.Common.dll;
-        $(_OutDir)Narvalo.Common.pdb
-      </Libs>
-    </_Packages>
-    <_Packages Include="Narvalo.Web">
-      <Libs>
-        $(_OutDir)Narvalo.Web.dll;
-        $(_OutDir)Narvalo.Web.pdb
-      </Libs>
-    </_Packages>
-  </ItemGroup>
-
-  <Target Name="_Package" DependsOnTargets="GetVersionNumber"
-          Outputs="%(_Packages.Identity)">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)%(_Packages.Identity)\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)%(_Packages.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)lib\net45"
-             Condition="'%(_Packages.Libs)' != ''" />
-    <Copy SourceFiles="%(_Packages.Libs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
-    <MakeDir Directories="$(_PackageStageDir)tools"
-             Condition="'%(_Packages.Tools)' != ''" />
-    <Copy SourceFiles="%(_Packages.Tools)" DestinationFolder="$(_PackageStageDir)tools" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
-  </Target>
-
-  <UsingTask TaskName="CreatePackageSpec" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <TemplateFile ParameterType="System.String" Required="true" />
-      <VersionNumber ParameterType="System.String" Required="true" />
-      <SpecFile ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-if (TemplateFile.Length == 0) {
-    Log.LogMessage(MessageImportance.High, "You must supply a template file.");
-    return false;
-}
-
-try {
-    string template = File.ReadAllText(TemplateFile).Replace("$version$", VersionNumber);
-    File.WriteAllText(SpecFile, template);
-}
-catch (IOException ex) {
-    Log.LogErrorFromException(ex);
-}
-
-return !Log.HasLoggedErrors;
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask>
 </Project>

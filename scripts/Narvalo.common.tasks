@@ -162,4 +162,36 @@ return !Log.HasLoggedErrors;
       </Code>
     </Task>
   </UsingTask>
+
+  <UsingTask TaskName="CreatePackageSpec" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <TemplateFile ParameterType="System.String" Required="true" />
+      <VersionNumber ParameterType="System.String" Required="true" />
+      <SpecFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (TemplateFile.Length == 0) {
+    Log.LogMessage(MessageImportance.High, "You must supply a template file.");
+    return false;
+}
+
+try {
+    string template = File.ReadAllText(TemplateFile).Replace("$version$", VersionNumber);
+    File.WriteAllText(SpecFile, template);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 </Project>
