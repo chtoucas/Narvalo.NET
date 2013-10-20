@@ -38,7 +38,7 @@ Task Package {
 }
 
 Task ReadMilestoneConfig {
-  $configPath = $(Get-Location).Path + "\..\etc\Milestone.config"
+  $configPath = $(Get-Location).Path + '\..\etc\Milestone.config'
 
   [xml] $configXml = Get-Content -Path $configPath
 

@@ -57,8 +57,8 @@
 
   <PropertyGroup>
     <PackageDependsOn>
-      CreatePackageDir;
       CreateStageDir;
+      CreatePackageDir;
       UpdateVersionNumber;
       Rebuild;
       NuGetPackage

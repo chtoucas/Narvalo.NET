@@ -1,4 +1,4 @@
-# On télécharge la dernière version de NuGet.exe
+# On télécharge la dernière version de NuGet.exe.
 
 Write-Host "Downloading last version of NuGet.exe"
 $wc = New-Object System.Net.WebClient
