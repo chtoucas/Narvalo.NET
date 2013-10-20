@@ -57,10 +57,10 @@
 
   <PropertyGroup>
     <PackageDependsOn>
-      CreateStageDir;
-      CreatePackageDir;
       UpdateVersionNumber;
       Rebuild;
+      CreateStageDir;
+      CreatePackageDir;
       NuGetPackage
     </PackageDependsOn>
   </PropertyGroup>
