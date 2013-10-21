@@ -8,11 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web", "src\Narvalo.Web\Narvalo.Web.csproj", "{56E3969F-5066-4702-A670-4C35FBD97201}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C12F79C9-1453-412C-A50C-BD887C2C15AE}"
-	ProjectSection(SolutionItems) = preProject
-		etc\AssemblyInfos\AssemblyInfo.Narvalo.cs = etc\AssemblyInfos\AssemblyInfo.Narvalo.cs
-		etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs = etc\AssemblyInfos\AssemblyInfo.Narvalo.Version.cs
-		NuPack.cmd = NuPack.cmd
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librairies", "Librairies", "{D25F7302-3F48-4218-9A0F-E0753CBA688A}"
 EndProject
