@@ -147,16 +147,9 @@
     <Compile Include="Html\Tag.cs" />
     <Compile Include="HttpRequestPathException.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Internal\ControlBuilder%24.cs" />
     <Compile Include="Internal\TagBuilder.cs" />
     <Compile Include="Internal\TagRenderMode.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
-    <Compile Include="Optimization\Minifier.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Optimization\MinifyingParserFilter.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Resources\SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,7 +180,6 @@
     <Compile Include="HttpHeaderCleanupModule.cs" />
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="UI\AggregateParserFilter.cs" />
-    <Compile Include="Optimization\MinifyLevel.cs" />
     <Compile Include="UI\UnrestrictedParserFilterBase.cs" />
     <Compile Include="NameValueCollection%24.cs" />
     <Compile Include="UnhandledErrorType.cs" />
@@ -203,7 +195,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Optimization\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
