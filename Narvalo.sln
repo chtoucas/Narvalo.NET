@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo", "src\Narvalo\Narvalo.csproj", "{7B564B3C-CCCC-43CA-94B6-D375AA40F085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Log4Net", "src\Narvalo.Log4Net\Narvalo.Log4Net.csproj", "{CA453491-4E22-4B71-9697-BA15548C398D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web", "src\Narvalo.Web\Narvalo.Web.csproj", "{56E3969F-5066-4702-A670-4C35FBD97201}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C12F79C9-1453-412C-A50C-BD887C2C15AE}"
@@ -58,24 +56,6 @@ Global
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085}.Release|x64.ActiveCfg = Release|Any CPU
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085}.Release|x86.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|Mixed Platforms.Build.0 = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|x64.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.CodeAnalysis|x86.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|x64.ActiveCfg = Release|Any CPU
-		{CA453491-4E22-4B71-9697-BA15548C398D}.Release|x86.ActiveCfg = Release|Any CPU
 		{56E3969F-5066-4702-A670-4C35FBD97201}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
 		{56E3969F-5066-4702-A670-4C35FBD97201}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{56E3969F-5066-4702-A670-4C35FBD97201}.CodeAnalysis|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -153,7 +133,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CA453491-4E22-4B71-9697-BA15548C398D} = {D25F7302-3F48-4218-9A0F-E0753CBA688A}
 		{56E3969F-5066-4702-A670-4C35FBD97201} = {D25F7302-3F48-4218-9A0F-E0753CBA688A}
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085} = {D25F7302-3F48-4218-9A0F-E0753CBA688A}
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7} = {D25F7302-3F48-4218-9A0F-E0753CBA688A}

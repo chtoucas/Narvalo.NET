@@ -137,10 +137,6 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Log4Net\Narvalo.Log4Net.csproj">
-      <Project>{ca453491-4e22-4b71-9697-ba15548c398d}</Project>
-      <Name>Narvalo.Log4Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>
