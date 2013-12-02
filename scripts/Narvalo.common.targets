@@ -3,7 +3,7 @@
   Ce fichier contient toutes les directives communes.
 -->
 
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project=".\Narvalo.props" />
   <Import Project=".\Narvalo.helpers.targets" />
   <Import Project=".\Narvalo.common.tasks" />

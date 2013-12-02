@@ -3,7 +3,7 @@
   Ce fichier définit toutes les propriétés globales en lecture seule.
 -->
 
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_RootDir>$(MSBuildThisFileDirectory)..\</_RootDir>
 
