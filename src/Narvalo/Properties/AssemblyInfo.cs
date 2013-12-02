@@ -13,8 +13,8 @@ using System.Security;
 
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AllowPartiallyTrustedCallers]
-[assembly: SecurityTransparent]
+//[assembly: AllowPartiallyTrustedCallers]
+//[assembly: SecurityTransparent]
 
 //[assembly: SecurityRules(System.Security.SecurityRuleSet.Level2)]
 
