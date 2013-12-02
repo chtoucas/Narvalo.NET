@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo", "src\Narvalo\Narvalo.csproj", "{7B564B3C-CCCC-43CA-94B6-D375AA40F085}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web", "src\Narvalo.Web\Narvalo.Web.csproj", "{56E3969F-5066-4702-A670-4C35FBD97201}"
