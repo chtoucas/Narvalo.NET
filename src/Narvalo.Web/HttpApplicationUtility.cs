@@ -1,40 +1,40 @@
 ﻿namespace Narvalo.Web
 {
     using System;
-    using System.Security;
+    //using System.Security;
     using System.Net;
     using System.Web;
     using System.Web.UI;
 
     public static class HttpApplicationUtility
     {
-        static readonly AspNetHostingPermissionLevel[] TrustLevels_ = {
-            AspNetHostingPermissionLevel.Unrestricted,
-            AspNetHostingPermissionLevel.High,
-            AspNetHostingPermissionLevel.Medium,
-            AspNetHostingPermissionLevel.Low,
-            AspNetHostingPermissionLevel.Minimal
-        };
+        //static readonly AspNetHostingPermissionLevel[] TrustLevels_ = {
+        //    AspNetHostingPermissionLevel.Unrestricted,
+        //    AspNetHostingPermissionLevel.High,
+        //    AspNetHostingPermissionLevel.Medium,
+        //    AspNetHostingPermissionLevel.Low,
+        //    AspNetHostingPermissionLevel.Minimal
+        //};
 
-        /// <summary>
-        /// Récupération du niveau de confiance AspNet.
-        /// </summary>
-        /// <returns></returns>
-        public static AspNetHostingPermissionLevel FindCurrentTrustLevel()
-        {
-            foreach (var trustLevel in TrustLevels_) {
-                try {
-                    new AspNetHostingPermission(trustLevel).Demand();
-                }
-                catch (SecurityException) {
-                    continue;
-                }
+        ///// <summary>
+        ///// Récupération du niveau de confiance AspNet.
+        ///// </summary>
+        ///// <returns></returns>
+        //public static AspNetHostingPermissionLevel FindCurrentTrustLevel()
+        //{
+        //    foreach (var trustLevel in TrustLevels_) {
+        //        try {
+        //            new AspNetHostingPermission(trustLevel).Demand();
+        //        }
+        //        catch (SecurityException) {
+        //            continue;
+        //        }
 
-                return trustLevel;
-            }
+        //        return trustLevel;
+        //    }
 
-            return AspNetHostingPermissionLevel.None;
-        }
+        //    return AspNetHostingPermissionLevel.None;
+        //}
 
         ///// <see cref="SquishIt"/> et <see cref="http://www.encosia.com"/>
         //public static bool IsDebuggingEnabled()

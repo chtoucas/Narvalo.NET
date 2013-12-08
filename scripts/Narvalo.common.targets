@@ -37,7 +37,8 @@
       OutputPath=$(_OutDir);
       BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
       Platform=$(Platform);
-      BuildInParallel=$(BuildInParallel)
+      BuildInParallel=$(BuildInParallel);
+      VisualStudioVersion=12.0
     </BuildProperties>
   </PropertyGroup>
 
