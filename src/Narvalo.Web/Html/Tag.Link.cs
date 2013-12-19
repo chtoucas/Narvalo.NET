@@ -5,24 +5,24 @@
     using System.Web;
     using Narvalo.Web.Internal;
 
-    public static partial class Tag
+    public partial class Tag
     {
-        public static IHtmlString Link(Uri linkUri, string linkType)
+        public IHtmlString Link(Uri linkUri, string linkType)
         {
             return Link(linkUri, linkType, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Link(Uri linkUri, string linkType, string relation)
+        public IHtmlString Link(Uri linkUri, string linkType, string relation)
         {
             return Link(linkUri, linkType, relation, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Link(Uri linkUri, string linkType, string relation, object attributes)
+        public IHtmlString Link(Uri linkUri, string linkType, string relation, object attributes)
         {
             return Link(linkUri, linkType, relation, TypeHelpers.ObjectToDictionary(attributes));
         }
 
-        public static IHtmlString Link(
+        public IHtmlString Link(
             Uri linkUri,
             string linkType,
             string relation,

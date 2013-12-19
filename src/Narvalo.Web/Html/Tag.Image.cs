@@ -5,34 +5,34 @@
     using System.Web;
     using Narvalo.Web.Internal;
 
-    public static partial class Tag
+    public partial class Tag
     {
-        public static IHtmlString Image(Uri imageUri)
+        public IHtmlString Image(Uri imageUri)
         {
             return Image(imageUri, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt)
+        public IHtmlString Image(Uri imageUri, string alt)
         {
             return Image(imageUri, alt, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(Uri imageUri, object attributes)
+        public IHtmlString Image(Uri imageUri, object attributes)
         {
             return Image(imageUri, null, TypeHelpers.ObjectToDictionary(attributes));
         }
 
-        public static IHtmlString Image(Uri imageUri, IDictionary<string, object> attributes)
+        public IHtmlString Image(Uri imageUri, IDictionary<string, object> attributes)
         {
             return Image(imageUri, null, attributes);
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt, object attributes)
+        public IHtmlString Image(Uri imageUri, string alt, object attributes)
         {
             return Image(imageUri, alt, TypeHelpers.ObjectToDictionary(attributes));
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt, IDictionary<string, object> attributes)
+        public IHtmlString Image(Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             Requires.NotNull(imageUri, "imageUri");
 

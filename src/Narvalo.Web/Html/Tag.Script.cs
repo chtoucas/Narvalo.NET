@@ -5,24 +5,24 @@
     using System.Web;
     using Narvalo.Web.Internal;
 
-    public static partial class Tag
+    public partial class Tag
     {
-        public static IHtmlString Script(Uri scriptUri)
+        public IHtmlString Script(Uri scriptUri)
         {
             return Script(scriptUri, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Script(Uri scriptUri, string scriptType)
+        public IHtmlString Script(Uri scriptUri, string scriptType)
         {
             return Script(scriptUri, scriptType, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Script(Uri scriptUri, string scriptType, object attributes)
+        public IHtmlString Script(Uri scriptUri, string scriptType, object attributes)
         {
             return Script(scriptUri, scriptType, TypeHelpers.ObjectToDictionary(attributes));
         }
 
-        public static IHtmlString Script(
+        public IHtmlString Script(
             Uri scriptUri,
             string scriptType,
             IDictionary<string, object> attributes)

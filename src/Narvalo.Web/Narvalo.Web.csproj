@@ -142,7 +142,8 @@
     <Compile Include="Configuration\ParserFilterElementCollection.cs" />
     <Compile Include="Configuration\ParserFiltersSection.cs" />
     <Compile Include="Configuration\XmlValidationSection.cs" />
-    <Compile Include="Html\AssetTag.cs" />
+    <Compile Include="EmptyPartialViewResult.cs" />
+    <Compile Include="Html\Tag.Asset.cs" />
     <Compile Include="Html\Tag.Script.cs" />
     <Compile Include="Html\Tag.Link.cs" />
     <Compile Include="Html\Tag.Image.cs" />
@@ -157,11 +158,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
     </Compile>
+    <Compile Include="RobotsDirectiveBuilder.cs" />
     <Compile Include="RouteCollection%24.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Security\FormsAuthenticationService.cs" />
     <Compile Include="Security\IFormsAuthenticationService.cs" />
+    <Compile Include="Semantic\IOpenGraphMetadata.cs" />
+    <Compile Include="Semantic\Ontology.cs" />
+    <Compile Include="Semantic\OpenGraphImage.cs" />
+    <Compile Include="Semantic\OpenGraphJpeg.cs" />
+    <Compile Include="Semantic\OpenGraphLocale.cs" />
+    <Compile Include="Semantic\OpenGraphMetadata.cs" />
+    <Compile Include="Semantic\OpenGraphPng.cs" />
+    <Compile Include="Semantic\OpenGraphType.cs" />
+    <Compile Include="Semantic\Relationships.cs" />
+    <Compile Include="Semantic\SchemaOrgType.cs" />
+    <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
     <Compile Include="Social\FacebookCookie.cs" />
     <Compile Include="Social\FacebookContext.cs" />
@@ -194,6 +207,8 @@
     </Compile>
     <Compile Include="HttpHandlerBase`1.cs" />
     <Compile Include="Configuration\WebConfigurationManager`1.cs" />
+    <Compile Include="UrlHelper%24.cs" />
+    <Compile Include="UrlNormalizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
