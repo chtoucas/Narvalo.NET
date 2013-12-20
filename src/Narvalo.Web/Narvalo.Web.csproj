@@ -143,15 +143,14 @@
     <Compile Include="Configuration\ParserFiltersSection.cs" />
     <Compile Include="Configuration\XmlValidationSection.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="Html\Tag.Asset.cs" />
-    <Compile Include="Html\Tag.Script.cs" />
-    <Compile Include="Html\Tag.Link.cs" />
-    <Compile Include="Html\Tag.Image.cs" />
-    <Compile Include="Html\Tag.cs" />
+    <Compile Include="Html\AssetHelper.cs" />
+    <Compile Include="Html\HtmlHelper%24.Script.cs" />
+    <Compile Include="Html\HtmlHelper%24.Link.cs" />
+    <Compile Include="Html\HtmlHelper%24.Image.cs" />
+    <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="HttpRequestPathException.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Internal\TagBuilder.cs" />
-    <Compile Include="Internal\TagRenderMode.cs" />
+    <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="Internal\TypeHelpers.cs" />
     <Compile Include="Resources\SR.Designer.cs">
       <AutoGen>True</AutoGen>
