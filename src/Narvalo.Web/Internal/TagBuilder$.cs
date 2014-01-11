@@ -3,7 +3,7 @@
     using System.Web;
     using System.Web.Mvc;
 
-    internal static class TagBuilderExtensions
+    static class TagBuilderExtensions
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
