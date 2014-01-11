@@ -1,0 +1,168 @@
+﻿namespace Narvalo.Web.Optimization
+{
+    using System;
+    using System.Text;
+    using System.Web.Razor.Parser.SyntaxTree;
+    using System.Web.Razor.Text;
+    using System.Web.Razor.Tokenizer.Symbols;
+
+    public class RazorOptimizer
+    {
+        readonly IWhiteSpaceBuster _buster;
+
+        public RazorOptimizer(IWhiteSpaceBuster buster)
+        {
+            Requires.NotNull(buster, "buster");
+
+            _buster = buster;
+        }
+
+        public void OptimizeBlock(BlockBuilder block)
+        {
+            for (int i = 0; i < block.Children.Count; i++) {
+                var span = block.Children[i] as Span;
+
+                if (!IsMarkup_(span)) {
+                    // On ne touche pas les éléments qui ne sont pas de type Markup.
+                    continue;
+                }
+
+                // Si on est déjà arrivé à la dernière position, on récupère le contenu directement.
+                string content
+                    = i == block.Children.Count - 1
+                    ? span.Content
+                    : RemoveMarkupAndMergeContentAfter_(block, span.Content, ref i);
+
+                if (String.IsNullOrWhiteSpace(content)) {
+                    // Le contenu n'est constitué que d'espaces blancs.
+                    block.Children.RemoveAt(i);
+                    continue;
+                }
+
+                // On optimise le contenu et on recrée l'élément.
+                var builder = new SpanBuilder(span);
+                builder.ClearSymbols();
+
+                // FIXME: On perd toute information contextuelle.
+                builder.Accept(new OptimizedSymbol { Content = BustWhiteSpaces_(content) });
+                span.ReplaceWith(builder);
+            }
+        }
+
+        public void OptimizeSpan(Span span)
+        {
+            var builder = new SpanBuilder(span);
+            builder.ClearSymbols();
+
+            var prevType = HtmlSymbolType.Unknown;
+
+            foreach (ISymbol item in span.Symbols) {
+                var sym = item as HtmlSymbol;
+
+                if (sym == null) {
+                    // On ne touche pas les éléments qui ne sont pas de type HtmlSymbol.
+                    builder.Accept(item);
+                    continue;
+                }
+
+                // FIXME: On perd toute information contextuelle
+                //builder.Accept(new HtmlSymbol(
+                //    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
+                builder.Accept(new OptimizedSymbol { Content = OptimizeContent_(sym, prevType) });
+                prevType = sym.Type;
+            }
+
+            span.ReplaceWith(builder);
+        }
+
+        #region > Membres privés <
+
+        class OptimizedSymbol : ISymbol
+        {
+            string _content;
+            SourceLocation _start = SourceLocation.Zero;
+
+            #region ISymbol
+
+            public void ChangeStart(SourceLocation newStart)
+            {
+                _start = newStart;
+            }
+
+            public string Content
+            {
+                get { return _content; }
+                set { _content = value; }
+            }
+
+            public void OffsetStart(SourceLocation documentStart)
+            {
+                _start = documentStart;
+            }
+
+            public SourceLocation Start { get { return _start; } }
+
+            #endregion
+        }
+
+        static bool IsMarkup_(Span span)
+        {
+            return span != null && span.Kind == SpanKind.Markup;
+        }
+
+        static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int i)
+        {
+            var sb = new StringBuilder(content);
+
+            // WARNING: On est succeptible de modifier la collection currentBlock.Children,
+            // on ne peut donc pas mettre en cache la valeur de currentBlock.Children.Count.
+            var j = i + 1;
+            while (j < block.Children.Count) {
+                var nextSpan = block.Children[j] as Span;
+
+                // On s'arrête dès qu'on rencontre un Span qui n'est pas de type Markup.
+                if (!IsMarkup_(nextSpan)) {
+                    break;
+                }
+
+                // On ajoute le contenu de l'élément si il n'est pas vide.
+                var nextContent = nextSpan.Content;
+                if (!String.IsNullOrWhiteSpace(nextContent)) {
+                    sb.Append(nextContent);
+                }
+
+                // On supprime l'élément.
+                block.Children.RemoveAt(j);
+
+                // On incrémente la position.
+                i = j;
+                j++;
+            }
+
+            return sb.ToString();
+        }
+
+        string BustWhiteSpaces_(string content)
+        {
+            return _buster.Bust(content);
+        }
+
+        string OptimizeContent_(HtmlSymbol sym, HtmlSymbolType prevType)
+        {
+            string content;
+
+            if (sym.Type == HtmlSymbolType.WhiteSpace && prevType == HtmlSymbolType.NewLine) {
+                // Si le symbole n'est constitué que d'espace blancs et le symbole
+                // précédent est un retour à la ligne, on peut vider son contenu.
+                content = String.Empty;
+            }
+            else {
+                content = BustWhiteSpaces_(sym.Content);
+            }
+
+            return content;
+        }
+
+        #endregion
+    }
+}

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo</RootNamespace>
+    <AssemblyName>Narvalo.Incubator</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Build\FxCop.cs" />
+    <Compile Include="Build\FxCop10.cs" />
+    <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
+    <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
+    <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\NamedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\NameValueConfigurationElement.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\EventLogLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\Log4NetFactory.cs" />
+    <Compile Include="Diagnostics\Log4NetProxy.cs" />
+    <Compile Include="Diagnostics\LoggerBase.cs" />
+    <Compile Include="Diagnostics\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\SR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Configuration\FacebookSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\GoogleApiElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\GoogleSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\NarvaloWebConfigurationManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\NarvaloWebSectionGroup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFilterElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFilterElementCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFiltersSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\XmlValidationSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Html\AssetHelper%24.cs" />
+    <Compile Include="Web\Internal\ControlBuilder%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Internal\HttpApplicationUtility.cs" />
+    <Compile Include="Web\Internal\TagBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Internal\TagRenderMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\RawHttpEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\FormsAuthenticationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\IFormsAuthenticationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\IMembershipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\MembershipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Social\FacebookContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Social\FacebookCookie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Assets\AssetBundle.cs" />
+    <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
+    <Compile Include="Web\WebPageBase%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo\Narvalo.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

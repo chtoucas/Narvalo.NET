@@ -1,6 +1,6 @@
 ﻿namespace Narvalo.Web.Internal
 {
-    internal enum TagRenderMode
+    enum TagRenderMode
     {
         Normal = 0,
         StartTag = 1,

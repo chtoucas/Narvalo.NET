@@ -6,7 +6,7 @@
     using System.Text;
     using System.Web;
 
-    internal class TagBuilder
+    class TagBuilder
     {
         readonly static string DefaultIdAttributeDotReplacement = "_";
         //= WebPages.Html.HtmlHelper.IdAttributeDotReplacement;
