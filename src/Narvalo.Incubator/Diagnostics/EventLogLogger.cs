@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics;
     using System.Globalization;
-    using Narvalo.Resources;
 
     public class EventLogLogger : LoggerBase, IDisposable
     {

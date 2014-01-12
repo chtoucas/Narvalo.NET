@@ -2,7 +2,6 @@
 {
     using System;
     using System.Configuration;
-    using Narvalo.Resources;
 
     public class AbsoluteUriValidator : ConfigurationValidatorBase
     {

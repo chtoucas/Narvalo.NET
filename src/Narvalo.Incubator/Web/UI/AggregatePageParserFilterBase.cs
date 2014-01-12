@@ -7,7 +7,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.UI;
-    using Narvalo.Web.Internal;
 
     /// <summary>
     /// Représente un filtre composé d'une collection de <see cref="System.Web.UI.PageParserFilter"/>.

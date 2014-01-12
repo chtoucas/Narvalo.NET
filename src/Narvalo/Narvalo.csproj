@@ -232,7 +232,7 @@
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
-    <Compile Include="Resources\SR.Designer.cs">
+    <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
@@ -256,7 +256,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\SR.resx">
+    <EmbeddedResource Include="SR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>

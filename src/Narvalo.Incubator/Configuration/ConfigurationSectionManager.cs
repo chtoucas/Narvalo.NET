@@ -3,7 +3,6 @@
     using System;
     using System.Configuration;
     using System.IO;
-    using Narvalo.Resources;
 
     public static class ConfigurationSectionManager
     {

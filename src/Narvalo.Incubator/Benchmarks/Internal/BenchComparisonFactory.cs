@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using Narvalo.Benchmarks.Resources;
     using Narvalo.Fx;
 
     internal static class BenchComparisonFactory

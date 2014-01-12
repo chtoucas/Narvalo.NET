@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Narvalo.Resources;
 
     public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {

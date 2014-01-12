@@ -151,12 +151,11 @@
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebPageRazorHost.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebRazorHostFactory.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterPageParserFilter.cs" />
-    <Compile Include="Resources\SR.Designer.cs">
+    <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
     </Compile>
-    <Compile Include="RobotsDirectiveBuilder.cs" />
     <Compile Include="RouteCollection%24.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -194,7 +193,6 @@
     <Compile Include="HttpHandlerBase`1.cs" />
     <Compile Include="Configuration\WebConfigurationManager`1.cs" />
     <Compile Include="UrlHelper%24.cs" />
-    <Compile Include="UrlNormalizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
@@ -209,7 +207,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\SR.resx">
+    <EmbeddedResource Include="SR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>

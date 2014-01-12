@@ -5,7 +5,6 @@
     using System.Xml;
     using System.Xml.Linq;
     using Narvalo.Fx;
-    using Narvalo.Resources;
 
     public static class XElementExtensions
     {

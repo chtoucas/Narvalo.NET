@@ -3,7 +3,6 @@
     using System;
     using System.Globalization;
     using System.Linq;
-    using Narvalo.Benchmarks.Resources;
 
     public class BenchMetricFormatter : BenchMetricFormatterBase
     {

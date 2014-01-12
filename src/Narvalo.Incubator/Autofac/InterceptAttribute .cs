@@ -1,10 +1,10 @@
 ﻿using Autofac.Core;
+using Castle.DynamicProxy;
 
 namespace Narvalo.Autofac
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Castle.DynamicProxy;
 
     [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]

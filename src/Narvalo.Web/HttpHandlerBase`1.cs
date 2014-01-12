@@ -6,7 +6,6 @@
     using System.Web;
     using Narvalo;
     using Narvalo.Fx;
-    using Narvalo.Web.Resources;
 
     public abstract class HttpHandlerBase<TQuery> : HttpHandlerBase
     {

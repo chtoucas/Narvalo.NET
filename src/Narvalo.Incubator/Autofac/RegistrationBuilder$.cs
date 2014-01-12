@@ -2,6 +2,7 @@
 using Autofac.Builder;
 using Autofac.Core;
 using Autofac.Features.Scanning;
+using Castle.DynamicProxy;
 
 namespace Narvalo.Autofac
 {
@@ -9,8 +10,6 @@ namespace Narvalo.Autofac
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using Castle.DynamicProxy;
-    using Narvalo.Autofac.Resources;
 
     public static class RegistrationBuilderExtensions
     {

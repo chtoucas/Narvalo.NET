@@ -1,2 +1,10 @@
 ﻿http://codepaste.net/cnmgnd
 http://codingcockerel.codeplex.com/releases/view/12739
+
+Use OutputFiles
+    http://codepaste.net/cnmgnd
+    http://codingcockerel.co.uk/2008/05/11/a-custom-msbuild-task-for-merging-config-files/
+    http://codingcockerel.codeplex.com/releases/view/12739
+    http://stackoverflow.com/questions/2426494/run-and-kill-a-selenium-server-singleton-process-for-duration-of-c-dll-lifetime
+    http://stackoverflow.com/questions/1085584/how-do-i-programatically-retrieve-the-actual-path-to-program-files-folder
+

@@ -1,4 +1,4 @@
-﻿namespace Wibilong.Ala.Tasks.Bot.GhostScript {
+﻿namespace Narvalo.GhostScript {
 	//using System;
 	//using System.Collections.Generic;
 	//using System.ComponentModel;
