@@ -2,7 +2,6 @@
 {
     using System.Net;
     using System.Web;
-    using System.Web.Mvc;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {

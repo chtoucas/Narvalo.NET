@@ -11,10 +11,10 @@ namespace Narvalo.Web.Validation
     public class InlineCommentRenderer : IValidationRenderer
     {
         /// <summary>
-        /// Renders the report in HTML comments added to the source
+        /// Renders the report in HTML comments added to the @this
         /// </summary>
-        /// <param name="response">The response object which maybe used to write/output the report</param>
-        /// <param name="errors">The source data for the report</param>
+        /// <param name="@this">The @this object which maybe used to write/output the report</param>
+        /// <param name="errors">The @this data for the report</param>
         /// <param name="validationDuration">The time taken to generate the validation data</param>
         public void Render(HttpContext context, IList<ValidationEventArgs> errors) //, TimeSpan validationDuration)
         {

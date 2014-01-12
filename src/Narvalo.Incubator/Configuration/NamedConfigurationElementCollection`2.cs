@@ -57,11 +57,11 @@
         }
     }
 
-    //protected override object GetElementKey(ConfigurationElement element)
+    //protected override object GetElementKey(ConfigurationElement @this)
     //{
-    //    Requires.NotNull(element, "element");
+    //    Requires.NotNull(@this, "@this");
 
-    //    return (string)element.ElementInformation.Properties[_elementKey].Value;
+    //    return (string)@this.ElementInformation.Properties[_elementKey].Value;
     //}
 
     //    <configSections>  
@@ -106,9 +106,9 @@
     //        return (elementName == "apple" || elementName == "orange");
     //    }
 
-    //    protected override object GetElementKey(ConfigurationElement element)
+    //    protected override object GetElementKey(ConfigurationElement @this)
     //    {
-    //        return element;
+    //        return @this;
     //    }
 
     //    protected override ConfigurationElement CreateNewElement()

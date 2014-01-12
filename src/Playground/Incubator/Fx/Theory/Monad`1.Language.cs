@@ -42,14 +42,14 @@
 
         public Monad<Unit> When(bool predicate, Kunc<Unit> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Requires.NotNull(kun, "@this");
 
             return Bind(_ => kun.When(predicate).Invoke());
         }
 
         public Monad<Unit> When(bool predicate, Kunc<T, Unit> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Requires.NotNull(kun, "@this");
 
             return Bind(kun.When(predicate));
         }

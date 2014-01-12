@@ -13,7 +13,7 @@
         /// <summary>
         /// Writes trace information to the trace log.
         /// </summary>
-        /// <param name="source">The object writing the trace message.</param>
+        /// <param name="@this">The object writing the trace message.</param>
         /// <param name="messageCallback">A callback that builds the trace message to write to the log.</param>
         void Write(object source, Func<string> messageCallback);
 

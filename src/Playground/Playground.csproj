@@ -135,9 +135,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo\Narvalo.csproj">
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo</Name>
+      <Name>Narvalo.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>

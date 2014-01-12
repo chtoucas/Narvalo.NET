@@ -14,33 +14,33 @@
 
         #region Content-type shortcuts
 
-        //public static void SendJson(this HttpResponse response, object content)
+        //public static void SendJson(this HttpResponse @this, object content)
         //{
-        //    Requires.Object(response);
+        //    Requires.Object(@this);
 
-        //    response.ContentType = "application/json";
-        //    response.ContentEncoding = Encoding.UTF8;
-        //    response.Write(
+        //    @this.ContentType = "application/json";
+        //    @this.ContentEncoding = Encoding.UTF8;
+        //    @this.Write(
         //        JsonConvert.SerializeObject(
         //            content,
         //            new JsonSerializerSettings { Formatting = Formatting.None }));
         //}
 
-        public static void SendPlainText(this HttpResponse response, string content)
+        public static void SendPlainText(this HttpResponse @this, string content)
         {
-            Requires.Object(response);
+            Requires.Object(@this);
 
-            response.ContentType = "text/plain";
-            response.Write(content);
+            @this.ContentType = "text/plain";
+            @this.Write(content);
         }
 
         #endregion
 
-        public static void SetStatusCode(this HttpResponse response, HttpStatusCode statusCode)
+        public static void SetStatusCode(this HttpResponse @this, HttpStatusCode statusCode)
         {
-            Requires.Object(response);
+            Requires.Object(@this);
 
-            response.StatusCode = (int)statusCode;
+            @this.StatusCode = (int)statusCode;
         }
     }
 }

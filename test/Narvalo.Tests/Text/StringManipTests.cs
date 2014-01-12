@@ -7,7 +7,7 @@
 
     public static class StringManipTests
     {
-        #region + Reverse +
+        #region > Reverse <
 
         public static class Reverse
         {

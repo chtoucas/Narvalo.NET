@@ -24,7 +24,7 @@
         public EventLogLogger(string name, LoggerLevel level, string source, string machineName)
             : base(name, level)
         {
-            Requires.NotNullOrEmpty(source, "source");
+            Requires.NotNullOrEmpty(source, "@this");
             Requires.NotNull(machineName, "machineName");
 
             _source = source;

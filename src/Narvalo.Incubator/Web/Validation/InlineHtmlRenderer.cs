@@ -22,8 +22,8 @@ namespace Narvalo.Web.Validation
         /// <summary>
         /// Renders the report in HTML format
         /// </summary>
-        /// <param name="response">The response object which maybe used to write/output the report</param>
-        /// <param name="errors">The source data for the report</param>
+        /// <param name="@this">The @this object which maybe used to write/output the report</param>
+        /// <param name="errors">The @this data for the report</param>
         /// <param name="validationDuration">The time taken to generate the validation data</param>
         public void Render(HttpContext context, IList<ValidationEventArgs> errors) //, TimeSpan validationDuration)
         {
@@ -32,7 +32,7 @@ namespace Narvalo.Web.Validation
             body.AppendLine();
             body.AppendLine();
 
-            body.AppendLine("<!-- START OF VALIDATOR REPORT || this html would not appear in the original document and, unfortunately, this paradoxically invalidates your source :\\ -->");
+            body.AppendLine("<!-- START OF VALIDATOR REPORT || this html would not appear in the original document and, unfortunately, this paradoxically invalidates your @this :\\ -->");
 
             body.AppendLine();
             body.AppendLine();

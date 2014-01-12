@@ -9,29 +9,29 @@
 
     public static class NameValueCollectionExtensions
     {
-        public static void Clear(this NameValueCollection nvc, IEnumerable<string> keys)
+        public static void Clear(this NameValueCollection @this, IEnumerable<string> keys)
         {
-            Requires.NotNull(nvc, "nvc");
+            Requires.Object("@this");
             Requires.NotNull(keys, "keys");
 
             foreach (var key in keys) {
-                nvc.Remove(key);
+                @this.Remove(key);
             }
         }
 
-        public static T Feed<T>(this NameValueCollection nvc) where T : new()
+        public static T Feed<T>(this NameValueCollection @this) where T : new()
         {
-            Requires.NotNull(nvc, "nvc");
+            Requires.Object("@this");
 
             var t = new T();
             Type type = t.GetType();
 
-            foreach (var key in nvc.AllKeys) {
+            foreach (var key in @this.AllKeys) {
                 PropertyInfo pi = type.GetProperty(key);
                 if (pi != null) {
                     pi.SetValue(
                         t,
-                        Convert.ChangeType(nvc[key], pi.PropertyType, CultureInfo.InvariantCulture),
+                        Convert.ChangeType(@this[key], pi.PropertyType, CultureInfo.InvariantCulture),
                         null);
                 }
             }

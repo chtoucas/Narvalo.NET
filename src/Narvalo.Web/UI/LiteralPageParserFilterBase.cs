@@ -4,7 +4,6 @@
 
     using System.Collections;
     using System.Web.UI;
-    using Narvalo.Web.Internal;
 
     public abstract class LiteralPageParserFilterBase : UnrestrictedPageParserFilter
     {

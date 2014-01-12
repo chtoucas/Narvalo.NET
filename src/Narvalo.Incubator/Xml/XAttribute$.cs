@@ -12,7 +12,7 @@
         public static T ParseValue<T>(this XAttribute attr, Func<string, T> fun)
         {
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "attr");
+            Requires.NotNull(attr, "@this");
 
             return fun(attr.Value);
         }
@@ -20,7 +20,7 @@
         public static T ParseValue<T>(this XAttribute attr, MayFunc<string, T> fun)
         {
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "attr");
+            Requires.NotNull(attr, "@this");
 
             return fun(attr.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
@@ -33,7 +33,7 @@
         public static Maybe<T> MayParseValue<T>(this XAttribute attr, MayFunc<string, T> fun)
         {
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "attr");
+            Requires.NotNull(attr, "@this");
 
             return fun(attr.Value);
         }

@@ -62,19 +62,19 @@
         }
 
         //public static Outcome<TResult> Match<TSource, TResult>(
-        //    this Maybe<TSource> option,
+        //    this Maybe<TSource> @this,
         //    Func<TSource, Outcome<TResult>> fun,
         //    string errorMessage)
         //{
-        //    return option.Map(fun).ValueOrElse(Outcome.Failure<TResult>(errorMessage));
+        //    return @this.Map(fun).ValueOrElse(Outcome.Failure<TResult>(errorMessage));
         //}
 
         //public static Outcome<TResult> Match<TSource, TResult>(
-        //    this Maybe<TSource> option,
+        //    this Maybe<TSource> @this,
         //    Func<TSource, Outcome<TResult>> fun,
         //    Func<string> errorMessageFactory)
         //{
-        //    return option.Map(fun).ValueOrElse(Outcome.Failure<TResult>(errorMessageFactory()));
+        //    return @this.Map(fun).ValueOrElse(Outcome.Failure<TResult>(errorMessageFactory()));
         //}
     }
 

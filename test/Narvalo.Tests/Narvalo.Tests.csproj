@@ -160,17 +160,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Incubator\Narvalo.Incubator.csproj">
       <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
       <Name>Narvalo.Incubator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Web.Supplements\Narvalo.Web.Supplements.csproj">
+      <Project>{2bfea55c-1aad-48e9-b61d-2daaf56090ca}</Project>
+      <Name>Narvalo.Web.Supplements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo\Narvalo.csproj">
-      <Project>{7B564B3C-CCCC-43CA-94B6-D375AA40F085}</Project>
-      <Name>Narvalo</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

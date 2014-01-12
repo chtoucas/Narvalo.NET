@@ -66,8 +66,8 @@
         //    request.Proxy = new WebProxy(proxy.Server, proxy.Port);
         //    request.Proxy.Credentials = new NetworkCredential(proxy.Username, proxy.Password, proxy.Domain);
 
-        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        //    return response.GetResponseStream();
+        //    HttpWebResponse @this = (HttpWebResponse)request.GetResponse();
+        //    return @this.GetResponseStream();
         //}
     }
 }

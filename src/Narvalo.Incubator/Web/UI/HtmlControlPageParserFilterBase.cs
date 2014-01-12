@@ -4,7 +4,6 @@
     using System.Collections;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
-    using Narvalo.Web.Internal;
 
     public abstract class HtmlControlPageParserFilterBase<TControl> : UnrestrictedPageParserFilter
         where TControl : HtmlControl

@@ -97,6 +97,60 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid result: duration was 0 ({0} iterations).
+        /// </summary>
+        internal static string InvalidMetricFormat {
+            get {
+                return ResourceManager.GetString("InvalidMetricFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0}; fastest result:.
+        /// </summary>
+        internal static string MetricCollectionFormat {
+            get {
+                return ResourceManager.GetString("MetricCollectionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
+        /// </summary>
+        internal static string MetricFormat {
+            get {
+                return ResourceManager.GetString("MetricFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string MissingBenchComparativeAttribute {
+            get {
+                return ResourceManager.GetString("MissingBenchComparativeAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string MissingBenchComparisonAttribute {
+            get {
+                return ResourceManager.GetString("MissingBenchComparisonAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string MissingBenchmarkAttribute {
+            get {
+                return ResourceManager.GetString("MissingBenchmarkAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to parse attribute &apos;{0}&apos;, line {1}..
         /// </summary>
         internal static string XElement_MalformedAttributeValue {

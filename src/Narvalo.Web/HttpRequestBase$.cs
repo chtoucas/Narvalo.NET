@@ -8,11 +8,11 @@
 
     public static class HttpRequestBaseExtensions
     {
-        public static NameValueCollection DecodeKeyValuePost(HttpRequestBase request)
+        public static NameValueCollection DecodeKeyValuePost(this HttpRequestBase @this)
         {
-            Requires.NotNull(request, "request");
+            Requires.Object(@this);
 
-            return HttpUtility.ParseQueryString(SlurpBody_(request));
+            return HttpUtility.ParseQueryString(SlurpBody_(@this));
         }
 
         //        public static NameValueCollection DecodeJsonAjaxRequest(HttpRequestBase request) {

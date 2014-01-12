@@ -82,45 +82,12 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
@@ -130,34 +97,21 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Configuration\NarvaloWebConfig.cs" />
-    <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="Html\AssetHelper.cs" />
-    <Compile Include="Html\HtmlHelper%24.Script.cs" />
-    <Compile Include="Html\HtmlHelper%24.Link.cs" />
-    <Compile Include="Html\HtmlHelper%24.Image.cs" />
-    <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="HttpRequestPathException.cs" />
+    <Compile Include="HttpVerbs%24.cs" />
+    <Compile Include="HttpVerbs.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Internal\ControlBuilder%24.cs" />
-    <Compile Include="Internal\TagBuilder%24.cs" />
-    <Compile Include="Internal\TypeHelpers.cs" />
+    <Compile Include="UI\ControlBuilder%24.cs" />
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
-    <Compile Include="Optimization\RazorOptimizer.cs" />
     <Compile Include="Optimization\WhiteSpaceBuster.cs" />
-    <Compile Include="Optimization\WhiteSpaceBusterHtmlMarkupParser.cs" />
-    <Compile Include="Optimization\WhiteSpaceBusterMvcCSharpRazorCodeGenerator.cs" />
-    <Compile Include="Optimization\WhiteSpaceBusterMvcWebPageRazorHost.cs" />
-    <Compile Include="Optimization\WhiteSpaceBusterMvcWebRazorHostFactory.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterPageParserFilter.cs" />
+    <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RouteCollection%24.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Semantic\IOpenGraphMetadata.cs" />
     <Compile Include="Semantic\Ontology.cs" />
@@ -178,33 +132,23 @@
     <Compile Include="HttpResponse%24Caching.cs" />
     <Compile Include="HttpRequestBase%24.cs" />
     <Compile Include="HttpApplicationUtility.cs" />
-    <Compile Include="HttpHeaderCleanupModule.cs" />
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="UI\LiteralPageParserFilterBase.cs" />
-    <Compile Include="Internal\PageParserFilterConstants.cs" />
+    <Compile Include="UI\PageParserFilterConstants.cs" />
     <Compile Include="UI\UnrestrictedPageParserFilter.cs" />
     <Compile Include="NameValueCollection%24.cs" />
     <Compile Include="UnhandledErrorType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpHandlerBase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HttpHandlerBase`1.cs" />
     <Compile Include="Configuration\WebConfigurationManager`1.cs" />
-    <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo\Narvalo.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SR.resx">
@@ -212,6 +156,13 @@
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

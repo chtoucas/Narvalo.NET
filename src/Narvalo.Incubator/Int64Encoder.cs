@@ -5,25 +5,25 @@
 
     public static class Int64Encoder
     {
-        const int Base25AlphabetLength = 25;
-        const int Base34AlphabetLength = 34;
-        const int Base58AlphabetLength = 58;
-        const int FlickrBase58AlphabetLength = 58;
+        const int Base25AlphabetLength_ = 25;
+        const int Base34AlphabetLength_ = 34;
+        const int Base58AlphabetLength_ = 58;
+        const int FlickrBase58AlphabetLength_ = 58;
 
-        const int Base25MaxLength = 14;
-        const int Base34MaxLength = 13;
-        const int Base58MaxLength = 11;
-        const int FlickrBase58MaxLength = 11;
+        const int Base25MaxLength_ = 14;
+        const int Base34MaxLength_ = 13;
+        const int Base58MaxLength_ = 11;
+        const int FlickrBase58MaxLength_ = 11;
 
         // On exclue la lettre "l".
-        static readonly char[] Base25Alphabet = new char[] {
+        static readonly char[] Base25Alphabet_ = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
             'v', 'w', 'x', 'y', 'z', 
         };
 
         // On exclue le chiffre zéro et la lettre "l".
-        static readonly char[] Base34Alphabet = new char[] {
+        static readonly char[] Base34Alphabet_ = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
@@ -31,7 +31,7 @@
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] Base58Alphabet = new char[] {
+        static readonly char[] Base58Alphabet_ = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 
             'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
@@ -42,7 +42,7 @@
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] FlickrBase58Alphabet = new char[] {
+        static readonly char[] FlickrBase58Alphabet_ = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -62,7 +62,7 @@
         {
             Requires.GreaterThanOrEqualTo(value, 0, "value");
 
-            return Encode(value, Base25Alphabet, Base25AlphabetLength);
+            return Encode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@
         {
             Requires.GreaterThanOrEqualTo(value, 0, "value");
 
-            return Encode(value, Base34Alphabet, Base34AlphabetLength);
+            return Encode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@
         {
             Requires.GreaterThanOrEqualTo(value, 0, "value");
 
-            return Encode(value, Base58Alphabet, Base58AlphabetLength);
+            return Encode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
 
         public static string ToFlickrBase58String(long value)
@@ -98,9 +98,9 @@
             string result = String.Empty;
 
             while (value > 0) {
-                long r = value % FlickrBase58AlphabetLength;
-                result = FlickrBase58Alphabet[r] + result;
-                value /= FlickrBase58AlphabetLength;
+                long r = value % FlickrBase58AlphabetLength_;
+                result = FlickrBase58Alphabet_[r] + result;
+                value /= FlickrBase58AlphabetLength_;
             }
 
             return result;
@@ -117,9 +117,9 @@
         public static long FromBase25String(string value)
         {
             Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base25MaxLength, "value");
+            Requires.LessThanOrEqualTo(value.Length, Base25MaxLength_, "value");
 
-            return Decode(value, Base25Alphabet, Base25AlphabetLength);
+            return Decode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
 
         /// <summary>
@@ -133,9 +133,9 @@
         public static long FromBase34String(string value)
         {
             Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base34MaxLength, "value");
+            Requires.LessThanOrEqualTo(value.Length, Base34MaxLength_, "value");
 
-            return Decode(value, Base34Alphabet, Base34AlphabetLength);
+            return Decode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
 
         /// <summary>
@@ -149,28 +149,28 @@
         public static long FromBase58String(string value)
         {
             Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base58MaxLength, "value");
+            Requires.LessThanOrEqualTo(value.Length, Base58MaxLength_, "value");
 
-            return Decode(value, Base58Alphabet, Base58AlphabetLength);
+            return Decode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
 
         public static long FromFlickrBase58String(string value)
         {
             Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength, "value");
+            Requires.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength_, "value");
 
             long result = 0;
             long multiplier  = 1;
 
             for (int i = value.Length - 1; i >= 0; i--) {
-                int index = Array.IndexOf(FlickrBase58Alphabet, value[i]);
+                int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
                 if (index == -1) {
                     throw new ArgumentException("Illegal character " + value[i] + " at " + i);
                 }
                 checked {
                     result += multiplier * index;
                     if (i != 0) {
-                        multiplier *= FlickrBase58AlphabetLength;
+                        multiplier *= FlickrBase58AlphabetLength_;
                     }
                 }
             }

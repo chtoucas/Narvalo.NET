@@ -51,13 +51,13 @@
                 var defaultLevel = ToSourceLevels_(Level);
                 _traceSource = new TraceSource(Name, defaultLevel);
 
-                // no further action necessary when the named source is configured
+                // no further action necessary when the named @this is configured
                 if (IsSourceConfigured_(_traceSource)) {
                     Cache_.Add(Name, _traceSource);
                     return;
                 }
 
-                // otherwise hunt for a shorter source that been configured            
+                // otherwise hunt for a shorter @this that been configured            
                 var foundSource = new TraceSource("Default", defaultLevel);
 
                 var searchName = ShortenName_(Name);
@@ -71,7 +71,7 @@
                     searchName = ShortenName_(searchName);
                 }
 
-                // reconfigure the created source to act like the found source
+                // reconfigure the created @this to act like the found @this
                 _traceSource.Switch = foundSource.Switch;
                 _traceSource.Listeners.Clear();
                 foreach (TraceListener listener in foundSource.Listeners) {

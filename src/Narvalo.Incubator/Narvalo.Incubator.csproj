@@ -37,12 +37,6 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -56,17 +50,10 @@
     <Reference Include="NodaTime">
       <HintPath>..\..\packages\NodaTime.1.2.0\lib\net35-Client\NodaTime.dll</HintPath>
     </Reference>
-    <Reference Include="StyleCop">
-      <HintPath>..\..\packages\StyleCop.4.7.44.0\lib\net35\StyleCop.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.CSharp">
-      <HintPath>..\..\packages\StyleCop.4.7.44.0\lib\net35\StyleCop.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -94,7 +81,6 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -105,16 +91,6 @@
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
-    </Compile>
-    <Compile Include="Autofac\InterceptAttribute .cs" />
-    <Compile Include="Autofac\LoggingModule.cs" />
-    <Compile Include="Autofac\RegistrationBuilder%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Autofac\SR.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SR.resx</DependentUpon>
     </Compile>
     <Compile Include="Base34Encoding.cs" />
     <Compile Include="Benchmarks\BenchComparative.cs" />
@@ -144,15 +120,8 @@
     <Compile Include="Benchmarks\Internal\BenchmarkFactory.cs" />
     <Compile Include="Benchmarks\Internal\BenchmarkFinder.cs" />
     <Compile Include="Benchmarks\Internal\ReflectionExtensions.cs" />
-    <Compile Include="Benchmarks\SR.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SR.resx</DependentUpon>
-    </Compile>
     <Compile Include="Build\FxCop.cs" />
     <Compile Include="Build\FxCop10.cs" />
-    <Compile Include="Castle\DynamicProxy\SqlExceptionInterceptor.cs" />
-    <Compile Include="Castle\DynamicProxy\XmlExceptionInterceptor.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
@@ -175,48 +144,6 @@
     <Compile Include="Diagnostics\NoopLogger.cs" />
     <Compile Include="Diagnostics\TraceLogger.cs" />
     <Compile Include="FlickrBase58.cs" />
-    <Compile Include="Ghostscript\GhostScriptApiFactory.cs" />
-    <Compile Include="Ghostscript\GhostScriptCriticalStateException.cs" />
-    <Compile Include="Ghostscript\GhostScriptException.cs" />
-    <Compile Include="Ghostscript\GhostScriptHelper.cs" />
-    <Compile Include="Ghostscript\IGhostScriptApi.cs" />
-    <Compile Include="Ghostscript\Internal\GhostScriptApiBase.cs" />
-    <Compile Include="Ghostscript\Internal\NativeMethodsUtil.cs" />
-    <Compile Include="Ghostscript\Internal\Win32GhostScriptApi.cs" />
-    <Compile Include="Ghostscript\Internal\Win32GhostScriptSafeHandle.cs" />
-    <Compile Include="Ghostscript\Internal\Win32NativeMethods.cs" />
-    <Compile Include="Ghostscript\Internal\Win64GhostScriptApi.cs" />
-    <Compile Include="Ghostscript\Internal\Win64GhostScriptSafeHandle.cs" />
-    <Compile Include="Ghostscript\Internal\Win64NativeMethods.cs" />
-    <Compile Include="Ghostscript\Options\AntiAliasMode.cs" />
-    <Compile Include="Ghostscript\Options\Device.cs" />
-    <Compile Include="Ghostscript\Options\Display.cs" />
-    <Compile Include="Ghostscript\Options\Eps.cs" />
-    <Compile Include="Ghostscript\Options\Font.cs" />
-    <Compile Include="Ghostscript\Options\GhostScriptArgs.cs" />
-    <Compile Include="Ghostscript\Options\GridFitMode.cs" />
-    <Compile Include="Ghostscript\Options\Icc.cs" />
-    <Compile Include="Ghostscript\Options\ImageArgs.cs" />
-    <Compile Include="Ghostscript\Options\ImageDevice.cs" />
-    <Compile Include="Ghostscript\Options\ImageFormat.cs" />
-    <Compile Include="Ghostscript\Options\Interactions.cs" />
-    <Compile Include="Ghostscript\Options\Miscs.cs" />
-    <Compile Include="Ghostscript\Options\NoDevice.cs" />
-    <Compile Include="Ghostscript\Options\OptionsExtensions.cs" />
-    <Compile Include="Ghostscript\Options\OutputDevice.cs" />
-    <Compile Include="Ghostscript\Options\PageSizeMode.cs" />
-    <Compile Include="Ghostscript\Options\PaperSize.cs" />
-    <Compile Include="Ghostscript\Options\Pdf.cs" />
-    <Compile Include="Ghostscript\Options\PdfArgs.cs" />
-    <Compile Include="Ghostscript\Options\PdfDevice.cs" />
-    <Compile Include="Ghostscript\Options\PrinterArgs.cs" />
-    <Compile Include="Ghostscript\Options\PrinterDevice.cs" />
-    <Compile Include="Ghostscript\Options\Rendering.cs" />
-    <Compile Include="Ghostscript\Options\Resource.cs" />
-    <Compile Include="Ghostscript\Options\Size.cs" />
-    <Compile Include="Ghostscript\Options\TextArgs.cs" />
-    <Compile Include="Ghostscript\Options\TextDevice.cs" />
-    <Compile Include="Ghostscript\XXX.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\Dictionary%24.cs" />
     <Compile Include="Internal\StreamUtility.cs" />
@@ -268,7 +195,6 @@
     <Compile Include="Runtime\Reliability\RetryGuard.cs" />
     <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
-    <Compile Include="StyleCop.CSharp\NarvaloRules.cs" />
     <Compile Include="Web\Configuration\FacebookSection.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -296,12 +222,12 @@
     <Compile Include="Web\Configuration\XmlValidationSection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Html\AssetHelper%24.cs" />
-    <Compile Include="Web\Internal\CaptureStream.cs" />
-    <Compile Include="Web\Internal\ControlBuilder%24.cs">
+    <Compile Include="IO\CaptureStream.cs" />
+    <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs" />
+    <Compile Include="Web\UI\ControlBuilder%24.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Internal\HttpApplicationUtility.cs" />
+    <Compile Include="Web\HttpApplicationUtility.cs" />
     <Compile Include="Web\Internal\TagBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -334,9 +260,8 @@
     <Compile Include="Web\StringModel.cs" />
     <Compile Include="Web\UI\AggregatePageParserFilter.cs" />
     <Compile Include="Web\UI\AggregatePageParserFilterBase.cs" />
-    <Compile Include="Web\UI\Assets\AssetBundle.cs" />
+    <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs" />
     <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
-    <Compile Include="Web\UI\PageParserFilterConstants.cs" />
     <Compile Include="Web\UrlNormalizer.cs" />
     <Compile Include="Web\Validation\FloatingHtmlRenderer.cs" />
     <Compile Include="Web\Validation\InlineCommentRenderer.cs" />
@@ -355,40 +280,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
-      <Link>Narvalo.snk</Link>
+      <Link>Properties\Narvalo.snk</Link>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Web.Supplements\Narvalo.Web.Supplements.csproj">
+      <Project>{2bfea55c-1aad-48e9-b61d-2daaf56090ca}</Project>
+      <Name>Narvalo.Web.Supplements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo\Narvalo.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Autofac\SR.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Benchmarks\SR.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="SR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Ghostscript\AuthorNotes.md" />
     <None Include="Runtime\Reliability\AuthorNotes.md" />
-    <None Include="StyleCop.CSharp\AuthorNotes.md" />
     <None Include="Presentation\Mvp\AuthorNotes.md" />
-    <Content Include="StyleCop.CSharp\NarvaloRules.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
