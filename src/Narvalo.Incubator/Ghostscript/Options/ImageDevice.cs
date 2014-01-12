@@ -1,0 +1,88 @@
+﻿namespace Narvalo.GhostScript.Options
+{
+    using System;
+    using System.Collections.Generic;
+
+    public class ImageDevice : OutputDevice
+    {
+        #region Fields
+
+        private readonly ImageFormat _format;
+
+        private Display _display;
+
+        #endregion
+
+        #region Ctor
+
+        public ImageDevice(ImageFormat format)
+            : base()
+        {
+            _format = format;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public override bool CanDisplay { get { return true; } }
+
+        public override string DeviceName
+        {
+            get
+            {
+                return GetDeviceName(ImageFormat);
+            }
+        }
+
+        public Display Display { get { return _display; } set { _display = value; } }
+
+        public ImageFormat ImageFormat { get { return _format; } }
+
+        #endregion
+
+        #region Public methods
+
+        public override void AddDisplayTo(ICollection<string> args)
+        {
+            if (Display != null) {
+                Display.AddTo(args);
+            }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private static string GetDeviceName(ImageFormat format)
+        {
+            switch (format) {
+                case ImageFormat.Bitmap8:
+                    return "bmp256";
+                case ImageFormat.Bitmap24:
+                    return "bmp16m";
+                case ImageFormat.BitmapMono:
+                    return "bmpgray";
+                case ImageFormat.Jpeg:
+                    return "jpeg";
+                case ImageFormat.Png8:
+                    return "png256";
+                case ImageFormat.Png24:
+                    return "png16m";
+                case ImageFormat.PngMono:
+                    return "pnggray";
+                case ImageFormat.Tiff24:
+                    return "tiff24nc";
+                case ImageFormat.TiffMono:
+                    return "tiffgray";
+
+                case ImageFormat.None:
+                default:
+                    throw new ArgumentException("Invalid format.", "format");
+            }
+        }
+
+        #endregion
+    }
+}
+

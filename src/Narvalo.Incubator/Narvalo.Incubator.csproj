@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -41,9 +47,19 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="NodaTime">
+      <HintPath>..\..\packages\NodaTime.1.2.0\lib\net35-Client\NodaTime.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop">
+      <HintPath>..\..\packages\StyleCop.4.7.44.0\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\..\packages\StyleCop.4.7.44.0\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -77,6 +93,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autofac\InterceptAttribute .cs" />
+    <Compile Include="Autofac\LoggingModule.cs" />
+    <Compile Include="Autofac\RegistrationBuilder%24.cs" />
+    <Compile Include="Autofac\Resources\SR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Benchmarks\BenchComparative.cs" />
+    <Compile Include="Benchmarks\BenchComparativeAttribute.cs" />
+    <Compile Include="Benchmarks\BenchComparison.cs" />
+    <Compile Include="Benchmarks\BenchComparisonAttribute.cs" />
+    <Compile Include="Benchmarks\BenchComparisonProcessor.cs" />
+    <Compile Include="Benchmarks\BenchComparisonRunner.cs" />
+    <Compile Include="Benchmarks\BenchException.cs" />
+    <Compile Include="Benchmarks\Benchmark.cs" />
+    <Compile Include="Benchmarks\BenchmarkAttribute.cs" />
+    <Compile Include="Benchmarks\BenchmarkProcessor.cs" />
+    <Compile Include="Benchmarks\BenchmarkRunner.cs" />
+    <Compile Include="Benchmarks\BenchMetric.cs" />
+    <Compile Include="Benchmarks\BenchMetricCollection.cs" />
+    <Compile Include="Benchmarks\BenchMetricFormatter.cs" />
+    <Compile Include="Benchmarks\BenchMetricFormatterBase.cs" />
+    <Compile Include="Benchmarks\BenchTimer.cs" />
+    <Compile Include="Benchmarks\IBenchMetricFormatter.cs" />
+    <Compile Include="Benchmarks\IBenchTimer.cs" />
+    <Compile Include="Benchmarks\Internal\ActionFactory.cs" />
+    <Compile Include="Benchmarks\Internal\BenchComparativeFactory.cs" />
+    <Compile Include="Benchmarks\Internal\BenchComparativeFinder.cs" />
+    <Compile Include="Benchmarks\Internal\BenchComparator.cs" />
+    <Compile Include="Benchmarks\Internal\BenchComparisonFactory.cs" />
+    <Compile Include="Benchmarks\Internal\Benchmarker.cs" />
+    <Compile Include="Benchmarks\Internal\BenchmarkFactory.cs" />
+    <Compile Include="Benchmarks\Internal\BenchmarkFinder.cs" />
+    <Compile Include="Benchmarks\Internal\ReflectionExtensions.cs" />
+    <Compile Include="Benchmarks\Resources\SR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Build\FxCop.cs" />
     <Compile Include="Build\FxCop10.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
@@ -97,12 +153,81 @@
     <Compile Include="Diagnostics\LoggerBase.cs" />
     <Compile Include="Diagnostics\LoggerLevel.cs" />
     <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Ghostscript\GhostScriptApiFactory.cs" />
+    <Compile Include="Ghostscript\GhostScriptCriticalStateException.cs" />
+    <Compile Include="Ghostscript\GhostScriptException.cs" />
+    <Compile Include="Ghostscript\GhostScriptHelper.cs" />
+    <Compile Include="Ghostscript\IGhostScriptApi.cs" />
+    <Compile Include="Ghostscript\Internal\GhostScriptApiBase.cs" />
+    <Compile Include="Ghostscript\Internal\NativeMethodsUtil.cs" />
+    <Compile Include="Ghostscript\Internal\Win32GhostScriptApi.cs" />
+    <Compile Include="Ghostscript\Internal\Win32GhostScriptSafeHandle.cs" />
+    <Compile Include="Ghostscript\Internal\Win32NativeMethods.cs" />
+    <Compile Include="Ghostscript\Internal\Win64GhostScriptApi.cs" />
+    <Compile Include="Ghostscript\Internal\Win64GhostScriptSafeHandle.cs" />
+    <Compile Include="Ghostscript\Internal\Win64NativeMethods.cs" />
+    <Compile Include="Ghostscript\Options\AntiAliasMode.cs" />
+    <Compile Include="Ghostscript\Options\Device.cs" />
+    <Compile Include="Ghostscript\Options\Display.cs" />
+    <Compile Include="Ghostscript\Options\Eps.cs" />
+    <Compile Include="Ghostscript\Options\Font.cs" />
+    <Compile Include="Ghostscript\Options\GhostScriptArgs.cs" />
+    <Compile Include="Ghostscript\Options\GridFitMode.cs" />
+    <Compile Include="Ghostscript\Options\Icc.cs" />
+    <Compile Include="Ghostscript\Options\ImageArgs.cs" />
+    <Compile Include="Ghostscript\Options\ImageDevice.cs" />
+    <Compile Include="Ghostscript\Options\ImageFormat.cs" />
+    <Compile Include="Ghostscript\Options\Interactions.cs" />
+    <Compile Include="Ghostscript\Options\Miscs.cs" />
+    <Compile Include="Ghostscript\Options\NoDevice.cs" />
+    <Compile Include="Ghostscript\Options\OptionsExtensions.cs" />
+    <Compile Include="Ghostscript\Options\OutputDevice.cs" />
+    <Compile Include="Ghostscript\Options\PageSizeMode.cs" />
+    <Compile Include="Ghostscript\Options\PaperSize.cs" />
+    <Compile Include="Ghostscript\Options\Pdf.cs" />
+    <Compile Include="Ghostscript\Options\PdfArgs.cs" />
+    <Compile Include="Ghostscript\Options\PdfDevice.cs" />
+    <Compile Include="Ghostscript\Options\PrinterArgs.cs" />
+    <Compile Include="Ghostscript\Options\PrinterDevice.cs" />
+    <Compile Include="Ghostscript\Options\Rendering.cs" />
+    <Compile Include="Ghostscript\Options\Resource.cs" />
+    <Compile Include="Ghostscript\Options\Size.cs" />
+    <Compile Include="Ghostscript\Options\TextArgs.cs" />
+    <Compile Include="Ghostscript\Options\TextDevice.cs" />
+    <Compile Include="Ghostscript\XXX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
+    <Compile Include="Runtime\Reliability\BarrierException.cs" />
+    <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
+    <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
+    <Compile Include="Runtime\Reliability\ConcurrencyThrottle.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateBarrier.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateExceededException.cs" />
+    <Compile Include="Runtime\Reliability\GuardChain.cs" />
+    <Compile Include="Runtime\Reliability\GuardChainBuilder.cs" />
+    <Compile Include="Runtime\Reliability\GuardException.cs" />
+    <Compile Include="Runtime\Reliability\GuardStatus.cs" />
+    <Compile Include="Runtime\Reliability\GuardType.cs" />
+    <Compile Include="Runtime\Reliability\IBarrier.cs" />
+    <Compile Include="Runtime\Reliability\IGuard.cs" />
+    <Compile Include="Runtime\Reliability\IMonitorableGuard.cs" />
+    <Compile Include="Runtime\Reliability\IReliabilityMonitor.cs" />
+    <Compile Include="Runtime\Reliability\IThrottle.cs" />
+    <Compile Include="Runtime\Reliability\NoopGuard.cs" />
+    <Compile Include="Runtime\Reliability\ReliabilityWrapper.cs" />
+    <Compile Include="Runtime\Reliability\RequestCounter.cs" />
+    <Compile Include="Runtime\Reliability\RetryGuard.cs" />
+    <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
+    <Compile Include="Runtime\Reliability\ThrottleException.cs" />
+    <Compile Include="StyleCop.CSharp\NarvaloRules.cs" />
     <Compile Include="Web\Configuration\FacebookSection.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -182,10 +307,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Autofac\Resources\SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Benchmarks\Resources\SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\SR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ghostscript\Readme.txt" />
+    <Content Include="Runtime\Reliability\AuthorNotes.txt" />
+    <Content Include="StyleCop.CSharp\AuthorNotes.txt" />
+    <Content Include="StyleCop.CSharp\NarvaloRules.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
