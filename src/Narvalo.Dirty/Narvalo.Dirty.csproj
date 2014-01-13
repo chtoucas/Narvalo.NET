@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E383354-3181-4FA2-A67B-97B320295F0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo</RootNamespace>
+    <AssemblyName>Narvalo.Lazy</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\..\packages\AjaxMin.5.7.5124.21499\lib\net40\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\..\packages\Autofac.Mvc5.3.1.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO">
+      <HintPath>..\..\packages\LumenWorks.Framework.IO.3.8.0\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx">
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
+      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyUtility.cs" />
+    <Compile Include="BinaryEncoder.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="Autofac\InterceptAttribute .cs" />
+    <Compile Include="Autofac\LoggerModule.cs" />
+    <Compile Include="Autofac\RegistrationBuilder%24.DynamicProxy.cs" />
+    <Compile Include="Castle\DynamicProxy\SqlExceptionInterceptor.cs" />
+    <Compile Include="Castle\DynamicProxy\XmlExceptionInterceptor.cs" />
+    <Compile Include="Collections\Enumerable`1%24.cs" />
+    <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
+    <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
+    <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValueConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationElement`2.cs" />
+    <Compile Include="Configuration\NamedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\NameObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\NameValueConfigurationElement.cs" />
+    <Compile Include="Configuration\ObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\ValueConfigurationElement.cs" />
+    <Compile Include="DesCryptoEngine.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\EventLogLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\Log4Net\Log4NetFactory.cs" />
+    <Compile Include="Diagnostics\Log4Net\Log4NetProxy.cs" />
+    <Compile Include="Diagnostics\LoggerBase.cs" />
+    <Compile Include="Diagnostics\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Diagnostics\TraceLogger.cs" />
+    <Compile Include="Fx\Expando.cs" />
+    <Compile Include="Fx\Identity.cs" />
+    <Compile Include="Fx\Identity`1%24.cs" />
+    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Fx\IOActionUtility.cs" />
+    <Compile Include="Fx\IOAction`%24.cs" />
+    <Compile Include="Fx\IOAction`.cs" />
+    <Compile Include="Fx\Internal\Kunc.cs" />
+    <Compile Include="Fx\Internal\KuncStubs.cs" />
+    <Compile Include="Fx\Internal\KuncStubs`1.cs" />
+    <Compile Include="Fx\Internal\Kunc`%24.cs" />
+    <Compile Include="Fx\Internal\Kunc`.cs" />
+    <Compile Include="Fx\Lazy.cs" />
+    <Compile Include="Fx\Lazy`1%24.cs" />
+    <Compile Include="Fx\MaybeM.cs" />
+    <Compile Include="Fx\Maybe[Outcome]%24.cs" />
+    <Compile Include="Fx\Maybe`1%24.Outcome.cs" />
+    <Compile Include="Fx\MayFunc.cs" />
+    <Compile Include="Fx\Internal\Monad.cs" />
+    <Compile Include="Fx\Internal\MonadLaws.cs" />
+    <Compile Include="Fx\Internal\Monad`1.cs" />
+    <Compile Include="Fx\Internal\Monad`1.Language.cs" />
+    <Compile Include="Fx\NameValueCollection%24.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="IBidirectionalCryptoEngine.cs" />
+    <Compile Include="ImageUtility.cs" />
+    <Compile Include="IO\CsvSlurp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Net\Mail\AttachmentCollection.cs" />
+    <Compile Include="Net\Mail\Constants.cs" />
+    <Compile Include="Net\Mail\Fcl\FclSmtpClient.cs" />
+    <Compile Include="Net\Mail\Fcl\MailObject%24.cs" />
+    <Compile Include="Net\Mail\ISmtpClient.cs" />
+    <Compile Include="Net\Mail\MailObject.cs" />
+    <Compile Include="Net\Mail\SendCompletedEventArgs.cs" />
+    <Compile Include="Net\Mail\SmtpClientException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumber.cs" />
+    <Compile Include="SR.Designer.cs">
+      <DependentUpon>SR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Web\Configuration\NarvaloWebConfigurationManager.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebSectionGroup.cs" />
+    <Compile Include="Web\Configuration\ParserFilterElement.cs" />
+    <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />
+    <Compile Include="Web\Configuration\ParserFiltersSection.cs" />
+    <Compile Include="Web\Configuration\XmlValidationSection.cs" />
+    <Compile Include="Web\HttpApplicationUtility.cs" />
+    <Compile Include="Web\HttpCompressionModule.cs" />
+    <Compile Include="Web\HttpHeaderCleanupModule.cs" />
+    <Compile Include="Web\JScriptCompiler.cs" />
+    <Compile Include="Web\Log4NetContextModule.cs" />
+    <Compile Include="Web\NameValueCollection%24.cs" />
+    <Compile Include="Web\PrincipalModelBinder.cs" />
+    <Compile Include="Web\Profile\AuthenticatedOnlyProfileProvider.cs" />
+    <Compile Include="Web\Profile\NarvaloProfile.cs" />
+    <Compile Include="Web\Profile\NarvaloProfileProvider.cs" />
+    <Compile Include="Web\Profile\NarvaloProfileRepository.cs" />
+    <Compile Include="Web\RawHttpEncoder.cs" />
+    <Compile Include="Web\RobotsDirectiveBuilder.cs" />
+    <Compile Include="Web\Security\FormsAuthenticationService.cs" />
+    <Compile Include="Web\Security\IFormsAuthenticationService.cs" />
+    <Compile Include="Web\Security\IMembershipService.cs" />
+    <Compile Include="Web\Security\MembershipService.cs" />
+    <Compile Include="Web\Security\NarvaloMembershipProvider.cs" />
+    <Compile Include="Web\Security\NarvaloMembershipUser.cs" />
+    <Compile Include="Web\Social\FacebookContext.cs" />
+    <Compile Include="Web\Social\FacebookCookie.cs" />
+    <Compile Include="Web\StaticFileHandler.cs" />
+    <Compile Include="Web\UI\AggregatePageParserFilter.cs" />
+    <Compile Include="Web\UI\AggregatePageParserFilterBase.cs" />
+    <Compile Include="Web\UI\Assets\AssetBundleHandler.cs" />
+    <Compile Include="Web\UI\Assets\Bundler.cs" />
+    <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs" />
+    <Compile Include="Web\UI\ControlBuilder%24.cs" />
+    <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs" />
+    <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
+    <Compile Include="Web\UrlNormalizer.cs" />
+    <Compile Include="Web\Validation\IValidationRenderer.cs" />
+    <Compile Include="Web\Validation\SerilogValidationRenderer.cs" />
+    <Compile Include="Web\Validation\XmlValidationModule.cs" />
+    <Compile Include="Web\WebPageBase%24.cs" />
+    <Compile Include="Xml\CachingXmlResolver.cs" />
+    <Compile Include="_Aliens\NHibernate\GuidComb.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
+      <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
+      <Name>Narvalo.Incubator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Diagnostics\Serilog\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

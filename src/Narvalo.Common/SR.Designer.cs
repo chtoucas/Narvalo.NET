@@ -160,6 +160,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unable to parse attribute &apos;{0}&apos;, line {1}..
+        /// </summary>
+        internal static string XElement_MalformedAttributeValue {
+            get {
+                return ResourceManager.GetString("XElement_MalformedAttributeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to parse element &apos;{0}&apos;, line {1}..
         /// </summary>
         internal static string XElement_MalformedElementValue {

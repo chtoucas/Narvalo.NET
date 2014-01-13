@@ -156,4 +156,7 @@
   <data name="HttpHandlerBase_MissingOrInvalidParameter" xml:space="preserve">
     <value>Missing or invalid query parameter '{0}'.</value>
   </data>
+  <data name="XElement_MalformedAttributeValue" xml:space="preserve">
+    <value>Unable to parse attribute '{0}', line {1}.</value>
+  </data>
 </root>

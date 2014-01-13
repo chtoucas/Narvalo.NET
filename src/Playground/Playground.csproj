@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Narvalo.Playground</RootNamespace>
+    <RootNamespace>Playground</RootNamespace>
     <AssemblyName>Playground</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -16,7 +16,7 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
-    <StartupObject>Narvalo.Playground.Program</StartupObject>
+    <StartupObject>Playground.Program</StartupObject>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -62,20 +62,12 @@
       <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
@@ -84,16 +76,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="AppModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AppService.cs" />
-    <Compile Include="AppPresenter.cs" />
-    <Compile Include="Experimental\TestExtensions.cs" />
-    <Compile Include="IAppService.cs" />
-    <Compile Include="Experimental\LogOnOptions.cs" />
-    <Compile Include="Experimental\LogOnQuery.cs" />
-    <Compile Include="Experimental\LogOnQueryBinder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,17 +89,13 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Experimental\Narvalo.Experimental.csproj">
+    <ProjectReference Include="..\Narvalo.Dirty\Narvalo.Dirty.csproj">
       <Project>{7e383354-3181-4fa2-a67b-97b320295f0b}</Project>
-      <Name>Narvalo.Experimental</Name>
+      <Name>Narvalo.Dirty</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
       <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
       <Name>Narvalo.Incubator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
-      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
-      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

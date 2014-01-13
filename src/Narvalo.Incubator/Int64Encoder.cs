@@ -160,7 +160,7 @@
             Requires.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength_, "value");
 
             long result = 0;
-            long multiplier  = 1;
+            long multiplier = 1;
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
@@ -183,7 +183,7 @@
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             long result = 0;
-            long multiplier  = 1;
+            long multiplier = 1;
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.BinarySearch(alphabet, value[i]);
@@ -191,8 +191,18 @@
                     throw new ArgumentException("Illegal character " + value[i] + " at " + i);
                 }
                 checked {
+                    //// TODO
+                    //if (result > Int64.MaxValue - multiplier * index) {
+                    //    throw new ArgumentException("Illegal sequence of chars");
+                    //}
+
                     result += multiplier * index;
+
                     if (i != 0) {
+                        //// TODO
+                        //if (multiplier > MaxMultiplier) {
+                        //    throw new ArgumentException("Illegal sequence of chars");
+                        //}
                         multiplier *= alphabetLength;
                     }
                 }

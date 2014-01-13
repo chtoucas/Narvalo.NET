@@ -1,28 +1,21 @@
 ﻿using Autofac;
 
-namespace Narvalo.Playground
+namespace Playground
 {
     using System;
-    using Narvalo.Autofac;
-    using Narvalo.Diagnostics;
-    using Narvalo.Playground.Properties;
+    using Playground.Properties;
     using Serilog;
 
-    public class Program : AutofacProgram
+    public class Program
     {
-        //static readonly Lazy<ILogger> Logger_
-        //    = new Lazy<ILogger>(() => Logger.Create(typeof(Program).Namespace));
-
-        Program() : base() { }
+        Program() { }
 
         [STAThread]
         static void Main(string[] args)
         {
             InitializeRuntime_();
 
-            //var logger = Logger_.Value;
-
-            //logger.Log(LoggerLevel.Informational, Resources.Starting);
+            Log.Information(Resources.Starting);
 
             try {
                 new Program().Run();
@@ -31,17 +24,23 @@ namespace Narvalo.Playground
                 LogUnhandledException_(ex);
             }
 
-            //logger.Log(LoggerLevel.Informational, Resources.Ending);
+            Log.Information(Resources.Ending);
         }
 
-        protected override IContainer CreateContainer()
+        public void Run()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new AppModule());
-            return builder.Build();
+            using (var container = CreateContainer_()) {
+            }
         }
 
         #region Membres privés
+
+        static IContainer CreateContainer_()
+        {
+            var builder = new ContainerBuilder();
+
+            return builder.Build();
+        }
 
         static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
         {
@@ -55,16 +54,12 @@ namespace Narvalo.Playground
 
         static void InitializeRuntime_()
         {
-            //log4net.Config.XmlConfigurator.Configure();
-
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
         }
 
         static void LogUnhandledException_(Exception ex)
         {
-            //if (Logger_.IsValueCreated) {
-            //    Logger_.Value.Log(LoggerLevel.Fatal, Resources.UnhandledException, ex);
-            //}
+            Log.Fatal(Resources.UnhandledException, ex);
         }
 
         #endregion

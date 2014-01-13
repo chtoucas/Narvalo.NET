@@ -4,8 +4,6 @@
 
     public partial struct Maybe<T>
     {
-        #region > Monad (méthodes publiques) <
-
         public Maybe<X> Bind<X>(MayFunc<T, X> kun)
         {
             Requires.NotNull(kun, "kun");
@@ -20,9 +18,7 @@
             return _isSome ? Maybe<X>.η(fun(_value)) : Maybe<X>.None;
         }
 
-        #endregion
-
-        #region > Monad (méthodes internes) <
+        #region > Monad <
 
         internal static Maybe<T> η(T value)
         {

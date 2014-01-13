@@ -285,6 +285,7 @@
     <Compile Include="Web\UnhandledErrorType.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />
+    <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
     <Compile Include="Xml\XmlValidator.cs" />
   </ItemGroup>
