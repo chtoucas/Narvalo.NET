@@ -2,9 +2,11 @@ namespace Narvalo.Web.Validation
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Web;
+    using System.Xml;
     using System.Xml.Schema;
-    using Narvalo.IO;
+    using Narvalo.Xml;
 
     public class XmlValidationModule : IHttpModule
     {
@@ -57,15 +59,17 @@ namespace Narvalo.Web.Validation
 
             captureStream.Rewind();
 
-            IList<ValidationEventArgs> errors = new List<ValidationEventArgs>();
-            // FIXME
-            //using (var reader = new StreamReader(captureStream.StreamCopy)) {
-            //    using (var validator = new XmlValidator(reader)) {
-            //        errors = validator.Validate();
-            //    }
-            //}
+            IList<ValidationEventArgs> errors = null;
 
-            if (errors.Count == 0) {
+            using (var reader = new StreamReader(captureStream.StreamCopy)) {
+                // FIXME: Créer les bons paramètres.
+                var validator = new XmlValidator(new XmlReaderSettings());
+                if (!validator.Validate(reader)) {
+                    errors = validator.ValidationErrors;
+                }
+            }
+
+            if (errors == null) {
                 return;
             }
 
@@ -88,6 +92,86 @@ namespace Narvalo.Web.Validation
             }
 
             return renderer;
+        }
+
+        class CaptureStream : Stream
+        {
+            Stream _inner;
+            Stream _streamCopy;
+
+            public CaptureStream(Stream inner)
+            {
+                _streamCopy = new MemoryStream();
+                _inner = inner;
+            }
+
+            public Stream StreamCopy
+            {
+                get { return _streamCopy; }
+            }
+
+            public override bool CanRead
+            {
+                get { return _inner.CanRead; }
+            }
+
+            public override bool CanSeek
+            {
+                get { return _inner.CanSeek; }
+            }
+
+            public override bool CanWrite
+            {
+                get { return _inner.CanWrite; }
+            }
+
+            public override void Flush()
+            {
+                _inner.Flush();
+            }
+
+            public override long Length
+            {
+                get { return _inner.Length; }
+            }
+
+            public override long Position
+            {
+                get
+                {
+                    return _inner.Position;
+                }
+                set
+                {
+                    _inner.Position = value;
+                }
+            }
+
+            public void Rewind()
+            {
+                _streamCopy.Position = 0;
+            }
+
+            public override int Read(byte[] buffer, int offset, int count)
+            {
+                return _inner.Read(buffer, offset, count);
+            }
+
+            public override long Seek(long offset, SeekOrigin origin)
+            {
+                return _inner.Seek(offset, origin);
+            }
+
+            public override void SetLength(long value)
+            {
+                _inner.SetLength(value);
+            }
+
+            public override void Write(byte[] buffer, int offset, int count)
+            {
+                _streamCopy.Write(buffer, offset, count);
+                _inner.Write(buffer, offset, count);
+            }
         }
     }
 }

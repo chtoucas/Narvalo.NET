@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E383354-3181-4FA2-A67B-97B320295F0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo</RootNamespace>
+    <AssemblyName>Narvalo.Experimental</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin">
+      <HintPath>..\..\packages\AjaxMin.5.7.5124.21499\lib\net40\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\..\packages\Autofac.Mvc5.3.1.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Web">
+      <HintPath>..\..\packages\Autofac.Web.3.1.0\lib\net40\Autofac.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO">
+      <HintPath>..\..\packages\LumenWorks.Framework.IO.3.8.0\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching">
+      <HintPath>..\..\packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
+      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyUtility.cs" />
+    <Compile Include="Autofac\AutofacPresenterFactory.cs" />
+    <Compile Include="Autofac\AutofacProgram.cs" />
+    <Compile Include="BinaryEncoder.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="Autofac\InterceptAttribute .cs" />
+    <Compile Include="Autofac\LoggingModule.cs" />
+    <Compile Include="Autofac\RegistrationBuilder%24.DynamicProxy.cs" />
+    <Compile Include="Base34Encoding.cs" />
+    <Compile Include="Build\FxCop.cs" />
+    <Compile Include="Build\FxCop10.cs" />
+    <Compile Include="Castle\DynamicProxy\SqlExceptionInterceptor.cs" />
+    <Compile Include="Castle\DynamicProxy\XmlExceptionInterceptor.cs" />
+    <Compile Include="Collections\Dictionary`2%24.cs" />
+    <Compile Include="Collections\Enumerable`1%24.cs" />
+    <Compile Include="Collections\ForEachItem`1.cs" />
+    <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
+    <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
+    <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValueConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationElement`2.cs" />
+    <Compile Include="Configuration\NamedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\NameObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\NameValueConfigurationElement.cs" />
+    <Compile Include="Configuration\ObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\ValueConfigurationElement.cs" />
+    <Compile Include="DesCryptoEngine.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\EventLogLogger.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\Log4Net\Log4NetFactory.cs" />
+    <Compile Include="Diagnostics\Log4Net\Log4NetProxy.cs" />
+    <Compile Include="Diagnostics\Log4Net\DesktopMongoDBAppender.cs" />
+    <Compile Include="Diagnostics\Log4Net\MongoDBAppenderBase.cs" />
+    <Compile Include="Diagnostics\Log4Net\WebMongoDBAppender.cs" />
+    <Compile Include="Diagnostics\LoggerBase.cs" />
+    <Compile Include="Diagnostics\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Diagnostics\TraceLogger.cs" />
+    <Compile Include="FlickrBase58.cs" />
+    <Compile Include="Fx\Fuzzy`2.cs" />
+    <Compile Include="Fx\Identity.cs" />
+    <Compile Include="Fx\Identity`1%24.cs" />
+    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Fx\IOActionUtility.cs" />
+    <Compile Include="Fx\IOAction`%24.cs" />
+    <Compile Include="Fx\IOAction`.cs" />
+    <Compile Include="Fx\Lazy.cs" />
+    <Compile Include="Fx\Lazy`1%24.cs" />
+    <Compile Include="Fx\Linq\AndSpecification`1.cs" />
+    <Compile Include="Fx\Linq\ISpecification`1.cs" />
+    <Compile Include="Fx\Linq\NotSpecification`1.cs" />
+    <Compile Include="Fx\Linq\OrSpecification`1.cs" />
+    <Compile Include="Fx\Linq\SpecificationBase`1.cs" />
+    <Compile Include="Fx\MayFunc.cs" />
+    <Compile Include="Fx\Task`1%24.cs" />
+    <Compile Include="Fx\Theory\Kunc.cs" />
+    <Compile Include="Fx\Theory\KuncStubs.cs" />
+    <Compile Include="Fx\Theory\KuncStubs`1.cs" />
+    <Compile Include="Fx\Theory\Kunc`%24.cs" />
+    <Compile Include="Fx\Theory\Kunc`.cs" />
+    <Compile Include="Fx\Theory\Monad.cs" />
+    <Compile Include="Fx\Theory\MonadLaws.cs" />
+    <Compile Include="Fx\Theory\Monad`1.cs" />
+    <Compile Include="Fx\Theory\Monad`1.Language.cs" />
+    <Compile Include="Glyphs.cs" />
+    <Compile Include="IBidirectionalCryptoEngine.cs" />
+    <Compile Include="ImageUtility.cs" />
+    <Compile Include="Internal\Assembly%24.cs" />
+    <Compile Include="Internal\BooleanStylesMethods.cs" />
+    <Compile Include="Collections\Collection`1%24.cs" />
+    <Compile Include="Internal\LazyMonad`1.cs" />
+    <Compile Include="Internal\MaybeM.cs" />
+    <Compile Include="Internal\MaybeMonad`1.cs" />
+    <Compile Include="Internal\String%24.cs" />
+    <Compile Include="Internal\Stubs.cs" />
+    <Compile Include="Internal\Stubs`1.cs" />
+    <Compile Include="Internal\Type%24.cs" />
+    <Compile Include="Internal\TypeListComparer.cs" />
+    <Compile Include="IO\CsvSlurp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Net\Mail\AttachmentCollection.cs" />
+    <Compile Include="Net\Mail\Fcl\FclSmtpClient.cs" />
+    <Compile Include="Net\Mail\Fcl\MailObjectExtensions.cs" />
+    <Compile Include="Net\Mail\IImapClient.cs" />
+    <Compile Include="Net\Mail\IPop3Client.cs" />
+    <Compile Include="Net\Mail\ISmtpClient.cs" />
+    <Compile Include="Net\Mail\MailObject.cs" />
+    <Compile Include="Net\Mail\MailObjectProperties.cs" />
+    <Compile Include="Net\Mail\Pop3ClientException.cs" />
+    <Compile Include="Net\Mail\SendCompletedEventArgs.cs" />
+    <Compile Include="Net\Mail\Smtp.cs" />
+    <Compile Include="Net\Mail\SmtpClientException.cs" />
+    <Compile Include="Net\Mail\SmtpClientSettings.cs" />
+    <Compile Include="Net\Mail\SmtpCommand.cs" />
+    <Compile Include="ParallelUtility.cs" />
+    <Compile Include="Presentation\Mvp\IPresenter.cs" />
+    <Compile Include="Presentation\Mvp\IPresenterFactory.cs" />
+    <Compile Include="Presentation\Mvp\IPresenter`1.cs" />
+    <Compile Include="Presentation\Mvp\ITermPresenter.cs" />
+    <Compile Include="Presentation\Mvp\ITermView.cs" />
+    <Compile Include="Presentation\Mvp\IView.cs" />
+    <Compile Include="Presentation\Mvp\IView`1.cs" />
+    <Compile Include="Presentation\Mvp\Presenter`1.cs" />
+    <Compile Include="Presentation\Mvp\Simple\AttributeBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Presentation\Mvp\Simple\DefaultPresenterFactory.cs" />
+    <Compile Include="Presentation\Mvp\Simple\IPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Presentation\Mvp\Simple\PresenterBinder.cs" />
+    <Compile Include="Presentation\Mvp\Simple\PresenterBinding.cs" />
+    <Compile Include="Presentation\Mvp\Simple\PresenterBindingAttribute.cs" />
+    <Compile Include="Presentation\Mvp\Simple\PresenterCreatedEventArgs.cs" />
+    <Compile Include="Presentation\Mvp\Simple\PresenterDiscoveryResult.cs" />
+    <Compile Include="Presentation\Mvp\TermPresenter.cs" />
+    <Compile Include="Presentation\Mvp\TermView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumber.cs" />
+    <Compile Include="Singleton`1.cs" />
+    <Compile Include="SR.Designer.cs">
+      <DependentUpon>SR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Web\Configuration\FacebookSection.cs" />
+    <Compile Include="Web\Configuration\GoogleApiElement.cs" />
+    <Compile Include="Web\Configuration\GoogleSection.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebConfigurationManager.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebSectionGroup.cs" />
+    <Compile Include="Web\Configuration\ParserFilterElement.cs" />
+    <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />
+    <Compile Include="Web\Configuration\ParserFiltersSection.cs" />
+    <Compile Include="Web\Html\RepeaterExtensions.cs" />
+    <Compile Include="Web\HttpApplicationUtility.cs" />
+    <Compile Include="Web\HttpCompressionModule.cs" />
+    <Compile Include="Web\HttpHeaderCleanupModule.cs" />
+    <Compile Include="Web\Internal\TagBuilder.cs" />
+    <Compile Include="Web\Internal\TagRenderMode.cs" />
+    <Compile Include="Web\JScriptCompiler.cs" />
+    <Compile Include="Web\Log4NetContextModule.cs" />
+    <Compile Include="Web\NameValueCollection%24.cs" />
+    <Compile Include="Web\PrincipalModelBinder.cs" />
+    <Compile Include="Web\Profile\NarvaloProfileProvider.cs" />
+    <Compile Include="Web\Profile\NarvaloProfileRepository.cs" />
+    <Compile Include="Web\Profile\NarvaloProfile.cs" />
+    <Compile Include="Web\Profile\RegisteredOnlyProfileProvider.cs" />
+    <Compile Include="Web\RawHttpEncoder.cs" />
+    <Compile Include="Web\Security\FormsAuthenticationService.cs" />
+    <Compile Include="Web\Security\IFormsAuthenticationService.cs" />
+    <Compile Include="Web\Security\IMembershipService.cs" />
+    <Compile Include="Web\Security\MembershipService.cs" />
+    <Compile Include="Web\Security\NarvaloMembershipProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\NarvaloMembershipUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\StaticFileHandler.cs" />
+    <Compile Include="Web\UI\AggregatePageParserFilter.cs" />
+    <Compile Include="Web\UI\AggregatePageParserFilterBase.cs" />
+    <Compile Include="Web\UI\Assets\AssetBundleHandler.cs" />
+    <Compile Include="Web\UI\Assets\Bundler.cs" />
+    <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs" />
+    <Compile Include="Web\UI\ControlBuilder%24.cs" />
+    <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs" />
+    <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
+    <Compile Include="Web\UrlNormalizer.cs" />
+    <Compile Include="Internal\CompletedAsyncResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Internal\DefaultModelValidator`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Internal\IModelValidator`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\WebPageBase%24.cs" />
+    <Compile Include="_Aliens\NHibernate\GuidComb.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

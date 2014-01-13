@@ -52,12 +52,13 @@
         public string SessionKey { get { return _sessionKey; } }
         public long UserId { get { return _userId; } }
 
-        public static FacebookContext ResolveContext(HttpContextBase httpContext, FacebookSection section)
+        public static FacebookContext ResolveContext(HttpContextBase httpContext, string appId, string appSecret)
         {
             Requires.NotNull(httpContext, "httpContext");
-            Requires.NotNull(section, "section");
+            Requires.NotNullOrEmpty(appId, "appId");
+            Requires.NotNullOrEmpty(appSecret, "appSecret");
 
-            return FacebookCookie.MayGet(httpContext, section.AppId, section.AppSecret)
+            return FacebookCookie.MayGet(httpContext, appId, appSecret)
                 .Match(_ => new FacebookContext(_), AnonymousContext_);
         }
 

@@ -37,18 +37,17 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Build" />
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="NodaTime">
-      <HintPath>..\..\packages\NodaTime.1.2.0\lib\net35-Client\NodaTime.dll</HintPath>
+    <Reference Include="Serilog, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.FullNetFx, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -89,81 +88,14 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
+      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Base34Encoding.cs" />
-    <Compile Include="Benchmarks\BenchComparative.cs" />
-    <Compile Include="Benchmarks\BenchComparativeAttribute.cs" />
-    <Compile Include="Benchmarks\BenchComparison.cs" />
-    <Compile Include="Benchmarks\BenchComparisonAttribute.cs" />
-    <Compile Include="Benchmarks\BenchComparisonProcessor.cs" />
-    <Compile Include="Benchmarks\BenchComparisonRunner.cs" />
-    <Compile Include="Benchmarks\BenchException.cs" />
-    <Compile Include="Benchmarks\Benchmark.cs" />
-    <Compile Include="Benchmarks\BenchmarkAttribute.cs" />
-    <Compile Include="Benchmarks\BenchmarkProcessor.cs" />
-    <Compile Include="Benchmarks\BenchmarkRunner.cs" />
-    <Compile Include="Benchmarks\BenchMetric.cs" />
-    <Compile Include="Benchmarks\BenchMetricCollection.cs" />
-    <Compile Include="Benchmarks\BenchMetricFormatter.cs" />
-    <Compile Include="Benchmarks\BenchMetricFormatterBase.cs" />
-    <Compile Include="Benchmarks\BenchTimer.cs" />
-    <Compile Include="Benchmarks\IBenchMetricFormatter.cs" />
-    <Compile Include="Benchmarks\IBenchTimer.cs" />
-    <Compile Include="Benchmarks\Internal\ActionFactory.cs" />
-    <Compile Include="Benchmarks\Internal\BenchComparativeFactory.cs" />
-    <Compile Include="Benchmarks\Internal\BenchComparativeFinder.cs" />
-    <Compile Include="Benchmarks\Internal\BenchComparator.cs" />
-    <Compile Include="Benchmarks\Internal\BenchComparisonFactory.cs" />
-    <Compile Include="Benchmarks\Internal\Benchmarker.cs" />
-    <Compile Include="Benchmarks\Internal\BenchmarkFactory.cs" />
-    <Compile Include="Benchmarks\Internal\BenchmarkFinder.cs" />
-    <Compile Include="Benchmarks\Internal\ReflectionExtensions.cs" />
-    <Compile Include="Build\FxCop.cs" />
-    <Compile Include="Build\FxCop10.cs" />
-    <Compile Include="Collections\Enumerable`1%24.cs" />
-    <Compile Include="Collections\NameValueCollection%24.cs" />
-    <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
-    <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
-    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
-    <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
-    <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
-    <Compile Include="Configuration\NamedConfigurationElementCollection`2.cs" />
-    <Compile Include="Configuration\NameValueConfigurationElement.cs" />
-    <Compile Include="Diagnostics\ConsoleLogger.cs" />
-    <Compile Include="Diagnostics\DebuggerLogger.cs" />
-    <Compile Include="Diagnostics\DebuggerWriter.cs" />
-    <Compile Include="Diagnostics\EventLogLogger.cs" />
-    <Compile Include="Diagnostics\ILogger.cs" />
-    <Compile Include="Diagnostics\ILoggerFactory.cs" />
-    <Compile Include="Diagnostics\Log4NetFactory.cs" />
-    <Compile Include="Diagnostics\Log4NetProxy.cs" />
-    <Compile Include="Diagnostics\LoggerBase.cs" />
-    <Compile Include="Diagnostics\LoggerLevel.cs" />
-    <Compile Include="Diagnostics\NoopLogger.cs" />
-    <Compile Include="Diagnostics\TraceLogger.cs" />
-    <Compile Include="FlickrBase58.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Internal\Dictionary%24.cs" />
-    <Compile Include="Internal\StreamUtility.cs" />
-    <Compile Include="Internal\Stubs.cs" />
-    <Compile Include="Internal\Stubs`1.cs" />
-    <Compile Include="Presentation\Mvp\BindingMode.cs" />
-    <Compile Include="Presentation\Mvp\CompositeView`1.cs" />
-    <Compile Include="Presentation\Mvp\ICompositeView.cs" />
-    <Compile Include="Presentation\Mvp\IMessageBus.cs" />
-    <Compile Include="Presentation\Mvp\IMessageCoordinator.cs" />
-    <Compile Include="Presentation\Mvp\IPresenter.cs" />
-    <Compile Include="Presentation\Mvp\IPresenter`1.cs" />
-    <Compile Include="Presentation\Mvp\ITraceContext.cs" />
-    <Compile Include="Presentation\Mvp\IView.cs" />
-    <Compile Include="Presentation\Mvp\IView`1.cs" />
-    <Compile Include="Presentation\Mvp\MessageCoordinator.cs" />
-    <Compile Include="Presentation\Mvp\PresenterBindingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
-    <Compile Include="Singleton`1.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,84 +127,19 @@
     <Compile Include="Runtime\Reliability\RetryGuard.cs" />
     <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
-    <Compile Include="Web\Configuration\FacebookSection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\GoogleApiElement.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\GoogleSection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\NarvaloWebConfigurationManager.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\NarvaloWebSectionGroup.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\ParserFilterElement.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\ParserFilterElementCollection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Configuration\ParserFiltersSection.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\Configuration\XmlValidationSection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IO\CaptureStream.cs" />
-    <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs" />
-    <Compile Include="Web\UI\ControlBuilder%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\HttpApplicationUtility.cs" />
-    <Compile Include="Web\Internal\TagBuilder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Internal\TagRenderMode.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Log4NetContextModule.cs" />
-    <Compile Include="Web\RawHttpEncoder.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\RobotsDirectiveBuilder.cs" />
-    <Compile Include="Web\Security\FormsAuthenticationService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Security\IFormsAuthenticationService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Security\IMembershipService.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\Security\MembershipService.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\Social\FacebookContext.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\Social\FacebookCookie.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\StringModel.cs" />
-    <Compile Include="Web\UI\AggregatePageParserFilter.cs" />
-    <Compile Include="Web\UI\AggregatePageParserFilterBase.cs" />
-    <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs" />
-    <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
-    <Compile Include="Web\UrlNormalizer.cs" />
-    <Compile Include="Web\Validation\FloatingHtmlRenderer.cs" />
-    <Compile Include="Web\Validation\InlineCommentRenderer.cs" />
-    <Compile Include="Web\Validation\InlineHtmlRenderer.cs" />
     <Compile Include="Web\Validation\IValidationRenderer.cs" />
-    <Compile Include="Web\Validation\LoggingRenderer.cs" />
+    <Compile Include="Web\Validation\SerilogValidationRenderer.cs" />
     <Compile Include="Web\Validation\XmlValidationModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\ValueModel`1.cs" />
-    <Compile Include="Web\WebPageBase%24.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Xml\CachingXmlResolver.cs" />
@@ -289,10 +156,6 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Web.Supplements\Narvalo.Web.Supplements.csproj">
-      <Project>{2bfea55c-1aad-48e9-b61d-2daaf56090ca}</Project>
-      <Name>Narvalo.Web.Supplements</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>
@@ -303,10 +166,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Runtime\Reliability\AuthorNotes.md" />
-    <None Include="Presentation\Mvp\AuthorNotes.md" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

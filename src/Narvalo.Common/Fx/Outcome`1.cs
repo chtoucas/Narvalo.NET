@@ -50,7 +50,7 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
-            Requires.NotNull(kun, "@this");
+            Requires.NotNull(kun, "kun");
 
             return Unsuccessful ? Outcome<TResult>.Failure(Error) : kun(Value);
         }

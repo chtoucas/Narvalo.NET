@@ -8,7 +8,7 @@
 
         public Maybe<X> Bind<X>(MayFunc<T, X> kun)
         {
-            Requires.NotNull(kun, "@this");
+            Requires.NotNull(kun, "kun");
 
             return _isSome ? kun(_value) : Maybe<X>.None;
         }

@@ -22,18 +22,19 @@
             return result;
         }
 
-        public static IList<T> ToList<T>(this IEnumerable<T> @this)
-        {
-            Requires.Object(@this);
+        // Une méthode semblable est fournie par System.Linq.
+        //public static IList<T> ToList<T>(this IEnumerable<T> @this)
+        //{
+        //    Requires.Object(@this);
 
-            var result = new List<T>();
+        //    var result = new List<T>();
 
-            foreach (T item in @this) {
-                result.Add(item);
-            }
+        //    foreach (T item in @this) {
+        //        result.Add(item);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         #endregion
 

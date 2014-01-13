@@ -153,4 +153,7 @@
   <data name="XElement_AttributeNotFound" xml:space="preserve">
     <value>Unable to find attribute for '{0}' with name '{1}'.</value>
   </data>
+  <data name="HttpHandlerBase_MissingOrInvalidParameter" xml:space="preserve">
+    <value>Missing or invalid query parameter '{0}'.</value>
+  </data>
 </root>

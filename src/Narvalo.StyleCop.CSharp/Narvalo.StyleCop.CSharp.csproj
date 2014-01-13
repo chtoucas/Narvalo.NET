@@ -51,10 +51,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
+      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="NarvaloRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,7 +64,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="AuthorNotes.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

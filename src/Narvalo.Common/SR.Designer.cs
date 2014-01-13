@@ -18,7 +18,7 @@ namespace Narvalo {
     // Cette classe a été générée automatiquement par la classe StronglyTypedResourceBuilder
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
-    // avec l'@this /str ou régénérez votre projet VS.
+    // avec l'option /str ou régénérez votre projet VS.
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -75,6 +75,15 @@ namespace Narvalo {
         internal static string Failure_IsEmpty {
             get {
                 return ResourceManager.GetString("Failure_IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Missing or invalid query parameter &apos;{0}&apos;..
+        /// </summary>
+        internal static string HttpHandlerBase_MissingOrInvalidParameter {
+            get {
+                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameter", resourceCulture);
             }
         }
         
@@ -151,7 +160,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Unable to parse @this &apos;{0}&apos;, line {1}..
+        ///   Recherche une chaîne localisée semblable à Unable to parse element &apos;{0}&apos;, line {1}..
         /// </summary>
         internal static string XElement_MalformedElementValue {
             get {
@@ -160,7 +169,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Unable to find next @this after {0}..
+        ///   Recherche une chaîne localisée semblable à Unable to find next element after {0}..
         /// </summary>
         internal static string XElement_NextElementNotFound {
             get {

@@ -31,7 +31,7 @@
 
         public static Maybe<T> FirstOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
@@ -42,7 +42,7 @@
 
         public static Maybe<T> LastOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
@@ -60,7 +60,7 @@
 
         public static Maybe<T> SingleOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
@@ -78,7 +78,7 @@
             IEnumerable<TSource> source,
             MayFunc<TSource, bool> predicateM)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(predicateM, "predicateM");
 
             var list = from item in source
@@ -95,7 +95,7 @@
             TAccumulate seed,
             MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(accumulatorM, "accumulatorM");
 
             Maybe<TAccumulate> option = Create(seed);
@@ -112,7 +112,7 @@
             TAccumulate seed,
             MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(accumulatorM, "accumulatorM");
 
             return FoldLeft(source.Reverse(), seed, accumulatorM);
@@ -122,7 +122,7 @@
             IEnumerable<TSource> source,
             MayFunc<TSource, TSource, TSource> accumulatorM)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
 
             // FIXME
             return Reduce(source.ToArray(), accumulatorM);
@@ -135,8 +135,8 @@
             IEnumerable<TSource> source,
             MayFunc<TSource, TResult> kun)
         {
-            Requires.NotNull(source, "@this");
-            Requires.NotNull(kun, "@this");
+            Requires.NotNull(source, "source");
+            Requires.NotNull(kun, "kun");
 
             var list = from item in source select kun(item);
 
@@ -146,7 +146,7 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IList<TSource>> Sequence<TSource>(IEnumerable<Maybe<TSource>> source)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
 
             IList<TSource> list = new List<TSource>();
 

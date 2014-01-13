@@ -14,7 +14,3 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
-
-//using System.Resources;
-//[assembly: AssemblyCulture("")]
-//[assembly: NeutralResourcesLanguage("en-US")]

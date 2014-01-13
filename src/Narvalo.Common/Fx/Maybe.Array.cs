@@ -52,13 +52,13 @@
             TResult seed,
             MayFunc<TResult, TSource, TResult> accumulatorM)
         {
-            Requires.NotNull(source, "@this");
+            Requires.NotNull(source, "source");
             Requires.NotNull(accumulatorM, "accumulatorM");
 
             Maybe<TResult> option = Create(seed);
 
             int length = source.Length;
-            // FIXME if (length == 0) { return @this; }
+            // FIXME if (length == 0) { return source; }
 
             for (int i = 0; i < length; i++) {
                 option = option.Bind(_ => accumulatorM(_, source[i]));

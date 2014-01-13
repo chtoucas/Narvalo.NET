@@ -55,11 +55,11 @@
     </Reference>
     <Reference Include="Serilog, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.5\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.5\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.7\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -89,43 +89,11 @@
     </Compile>
     <Compile Include="AppService.cs" />
     <Compile Include="AppPresenter.cs" />
-    <Compile Include="Incubator\Autofac\AutofacProgram.cs" />
-    <Compile Include="Incubator\Fx\Theory\Kunc.cs" />
-    <Compile Include="Incubator\Fx\Theory\KuncStubs.cs" />
-    <Compile Include="Incubator\Fx\Theory\KuncStubs`1.cs" />
-    <Compile Include="Incubator\Fx\Theory\Kunc`%24.cs" />
-    <Compile Include="Incubator\Fx\Theory\Kunc`.cs" />
-    <Compile Include="Incubator\Fx\Theory\Monad.cs" />
-    <Compile Include="Incubator\Fx\Theory\MonadLaws.cs" />
-    <Compile Include="Incubator\Fx\Theory\Monad`1.cs" />
-    <Compile Include="Incubator\Fx\Theory\Monad`1.Language.cs" />
-    <Compile Include="Incubator\TermView.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Experimental\TestExtensions.cs" />
     <Compile Include="IAppService.cs" />
-    <Compile Include="Incubator\ITermView.cs" />
-    <Compile Include="Incubator\Internal\Enumerable%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Incubator\Presentation\Mvp\Simple\AttributeBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Incubator\Autofac\AutofacPresenterFactory.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\DefaultPresenterFactory.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\IPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\IPresenterFactory.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBinding.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterCreatedEventArgs.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterDiscoveryResult.cs" />
-    <Compile Include="Incubator\Presenter.cs" />
-    <Compile Include="Incubator\Internal\Dictionary%24.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\IPresenter.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\IPresenter`1.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\IView.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\IView`1.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBindingAttribute.cs" />
-    <Compile Include="Incubator\Presentation\Mvp\Simple\PresenterBinder.cs" />
-    <Compile Include="Tmp\LogOnOptions.cs" />
-    <Compile Include="Tmp\LogOnQuery.cs" />
-    <Compile Include="Tmp\LogOnQueryBinder.cs" />
+    <Compile Include="Experimental\LogOnOptions.cs" />
+    <Compile Include="Experimental\LogOnQuery.cs" />
+    <Compile Include="Experimental\LogOnQueryBinder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,6 +106,14 @@
     <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Experimental\Narvalo.Experimental.csproj">
+      <Project>{7e383354-3181-4fa2-a67b-97b320295f0b}</Project>
+      <Name>Narvalo.Experimental</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
+      <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
+      <Name>Narvalo.Incubator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
@@ -156,17 +132,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Incubator\Presentation\Mvp\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

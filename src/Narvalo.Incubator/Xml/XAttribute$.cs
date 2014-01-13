@@ -9,33 +9,33 @@
 
     public static class XAttributeExtensions
     {
-        public static T ParseValue<T>(this XAttribute attr, Func<string, T> fun)
+        public static T ParseValue<T>(this XAttribute @this, Func<string, T> fun)
         {
+            Requires.Object(@this);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "@this");
 
-            return fun(attr.Value);
+            return fun(@this.Value);
         }
 
-        public static T ParseValue<T>(this XAttribute attr, MayFunc<string, T> fun)
+        public static T ParseValue<T>(this XAttribute @this, MayFunc<string, T> fun)
         {
+            Requires.Object(@this);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "@this");
 
-            return fun(attr.Value).ValueOrThrow(() => new XmlException(
+            return fun(@this.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
                     CultureInfo.CurrentCulture,
                     SR.XElement_MalformedAttributeValue,
-                    attr.Name.LocalName,
-                    ((IXmlLineInfo)attr).LineNumber)));
+                    @this.Name.LocalName,
+                    ((IXmlLineInfo)@this).LineNumber)));
         }
 
-        public static Maybe<T> MayParseValue<T>(this XAttribute attr, MayFunc<string, T> fun)
+        public static Maybe<T> MayParseValue<T>(this XAttribute @this, MayFunc<string, T> fun)
         {
+            Requires.Object(@this);
             Requires.NotNull(fun, "fun");
-            Requires.NotNull(attr, "@this");
 
-            return fun(attr.Value);
+            return fun(@this.Value);
         }
     }
 }

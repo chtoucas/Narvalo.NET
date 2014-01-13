@@ -2,6 +2,7 @@ namespace Narvalo.Xml
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using System.Xml;
     using System.Xml.Schema;
 
@@ -20,7 +21,7 @@ namespace Narvalo.Xml
             Requires.NotNull(settings, "settings");
 
             _settings = settings;
-            _settings.ValidationEventHandler += (object sender, ValidationEventArgs e) => {
+            _settings.ValidationEventHandler += (sender, e) => {
                 _isValid = false;
                 _errors.Add(e);
             };
@@ -36,6 +37,17 @@ namespace Narvalo.Xml
             Reset_();
 
             using (var reader = XmlReader.Create(file, _settings)) {
+                while (reader.Read()) { ; }
+            }
+
+            return _isValid;
+        }
+
+        public bool Validate(TextReader input)
+        {
+            Reset_();
+
+            using (var reader = XmlReader.Create(input, _settings)) {
                 while (reader.Read()) { ; }
             }
 
