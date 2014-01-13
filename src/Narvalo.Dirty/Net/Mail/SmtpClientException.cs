@@ -1,9 +1,11 @@
-﻿namespace Narvalo.Mail {
+﻿namespace Narvalo.Mail
+{
     using System;
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class SmtpClientException : Exception {
+    public class SmtpClientException : Exception
+    {
         public SmtpClientException() : base() { ; }
 
         public SmtpClientException(string message) : base(message) { ; }

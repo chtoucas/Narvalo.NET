@@ -3,6 +3,10 @@
     using System;
     using System.Web;
 
+    //@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
+    //@this.Cache.SetOmitVaryStar(true);
+    //@this.Cache.SetValidUntilExpires(true);
+
     public static class HttpResponseCachingExtensions
     {
         public static void NoCache(this HttpResponse @this)
@@ -38,6 +42,7 @@
         {
             Requires.Object(@this);
 
+            //@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             @this.Cache.SetCacheability(HttpCacheability.Private);
             @this.CacheFor_(duration);
         }

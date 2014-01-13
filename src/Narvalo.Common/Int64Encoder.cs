@@ -1,7 +1,6 @@
 ﻿namespace Narvalo
 {
     using System;
-    using Narvalo.Diagnostics;
 
     public static class Int64Encoder
     {
@@ -178,7 +177,7 @@
             return result;
         }
 
-        #region Membres internes.
+        #region > Membres internes <
 
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {

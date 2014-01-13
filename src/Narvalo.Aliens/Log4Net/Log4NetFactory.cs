@@ -1,7 +1,8 @@
-﻿namespace Narvalo.Diagnostics.Log4Net
+﻿namespace Narvalo.Log4Net
 {
     using System;
     using log4net;
+    using Narvalo.Diagnostics;
 
     public class Log4NetFactory : ILoggerFactory
     {
@@ -11,15 +12,14 @@
         {
             Requires.NotNull(type, "type");
 
-            // On utilise la configuration telle que trouvée dans l'AppDomain.CurrentDomain.BaseDirectory
-            return Log4NetProxy.Create(LogManager.GetLogger(type));
+            return Log4NetLogger.Create(LogManager.GetLogger(type));
         }
 
         public ILogger CreateLogger(string name)
         {
             Requires.NotNullOrEmpty(name, "name");
 
-            return Log4NetProxy.Create(LogManager.GetLogger(name));
+            return Log4NetLogger.Create(LogManager.GetLogger(name));
         }
 
         #endregion

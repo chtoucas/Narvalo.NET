@@ -7,8 +7,8 @@
 
     public class GuardChainBuilder
     {
-        private bool _closed = false;
-        private IList<IGuard> _guards = new List<IGuard>();
+        bool _closed = false;
+        IList<IGuard> _guards = new List<IGuard>();
 
         public GuardChainBuilder(IGuard guard)
         {
@@ -17,7 +17,7 @@
             Add(guard);
         }
 
-        public ReadOnlyCollection<IGuard> Guards
+        public IReadOnlyCollection<IGuard> Guards
         {
             get { return new ReadOnlyCollection<IGuard>(_guards); }
         }

@@ -12,9 +12,9 @@
     /// <see cref="http://madskristensen.net/post/Verify-JavaScript-syntax-using-C.aspx"/>
     public class JScriptCompiler : IDisposable
     {
-        private JScriptCodeProvider _provider = new JScriptCodeProvider();
-        private CompilerParameters _parameters = new CompilerParameters();
-        private StringBuilder _errorMessages = new StringBuilder();
+        JScriptCodeProvider _provider = new JScriptCodeProvider();
+        CompilerParameters _parameters = new CompilerParameters();
+        StringBuilder _errorMessages = new StringBuilder();
 
         /// <summary>
         /// A list of error codes to ignore.
@@ -22,7 +22,7 @@
         /// <remarks>
         /// See all error codes at http://msdn.microsoft.com/en-us/library/9c5scey5(VS.71).aspx
         /// </remarks>
-        private string[] ignoredRules = new string[] {
+        string[] ignoredRules = new string[] {
             "JS1135", "JS1028", "JS1234", "JS5040", "JS1151", "JS0438", "JS1204"
         };
 
@@ -58,7 +58,7 @@
                     CompilerResults results = _provider.CompileAssemblyFromSource(_parameters, source);
 
                     foreach (CompilerError error in results.Errors) {
-                        if (Array.IndexOf(this.ignoredRules, error.ErrorNumber) == -1)
+                        if (Array.IndexOf(ignoredRules, error.ErrorNumber) == -1)
                             WriteError(file, error);
                     }
                 }
@@ -67,11 +67,11 @@
 
         private void WriteError(string file, CompilerError error)
         {
-            this._errorMessages.AppendLine("JavaScript compilation failed");
-            this._errorMessages.AppendLine("\tError code: " + error.ErrorNumber);
-            this._errorMessages.AppendLine("\t" + error.ErrorText);
-            this._errorMessages.AppendLine("\t" + file + "(" + error.Line + ", " + error.Column + ")");
-            this._errorMessages.AppendLine();
+            _errorMessages.AppendLine("JavaScript compilation failed");
+            _errorMessages.AppendLine("\tError code: " + error.ErrorNumber);
+            _errorMessages.AppendLine("\t" + error.ErrorText);
+            _errorMessages.AppendLine("\t" + file + "(" + error.Line + ", " + error.Column + ")");
+            _errorMessages.AppendLine();
         }
 
         #region IDisposable
@@ -79,14 +79,14 @@
         private void Dispose(bool disposing)
         {
             if (disposing) {
-                this._provider.Dispose();
+                _provider.Dispose();
             }
         }
 
         public void Dispose()
         {
             GC.SuppressFinalize(this);
-            this.Dispose(true);
+            Dispose(true);
         }
 
         #endregion

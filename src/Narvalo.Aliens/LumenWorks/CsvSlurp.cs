@@ -1,10 +1,11 @@
-﻿namespace Narvalo.IO
+﻿using LumenWorks.Framework.IO.Csv;
+
+namespace Narvalo.LumenWorks
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
-    using LumenWorks.Framework.IO.Csv;
 
     /// <summary>
     /// Classe permettant de lire d'un coup toutes les lignes d'un fichier CSV.

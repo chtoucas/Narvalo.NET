@@ -117,49 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Configuration_UriIsNotAbsolute" xml:space="preserve">
-    <value>The supplied value {0} is not a well-formed absolute URI.</value>
-  </data>
-  <data name="Failure_IsEmpty" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Requires_IsNotGreaterThanOrEqualTo" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Requires_IsNotLessThanOrEqualTo" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Maybe_CannotCastSomeToNone" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Maybe_NoneHasNoValue" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Requires_IsNotInRange" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Requires_IsSome" xml:space="preserve">
-    <value />
-  </data>
-  <data name="XElement_MalformedElementValue" xml:space="preserve">
-    <value>Unable to parse element '{0}', line {1}.</value>
-  </data>
-  <data name="XElement_FirstChildNotFound" xml:space="preserve">
-    <value>Unable to find first child for '{0}' with name '{1}'.</value>
-  </data>
-  <data name="XElement_NextElementNotFound" xml:space="preserve">
-    <value>Unable to find next element after {0}.</value>
-  </data>
-  <data name="XElement_AttributeNotFound" xml:space="preserve">
-    <value>Unable to find attribute for '{0}' with name '{1}'.</value>
-  </data>
-  <data name="HttpHandlerBase_MissingOrInvalidParameter" xml:space="preserve">
-    <value>Missing or invalid query parameter '{0}'.</value>
-  </data>
-  <data name="XElement_MalformedAttributeValue" xml:space="preserve">
-    <value>Unable to parse attribute '{0}', line {1}.</value>
-  </data>
-  <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
-    <value>Exception: {0} {1} {2}</value>
+  <data name="InterfaceProxyingOnlySupportsInterfaceServices" xml:space="preserve">
+    <value>The component {0} cannot use interface interception as it provides services that are not interfaces.</value>
   </data>
 </root>

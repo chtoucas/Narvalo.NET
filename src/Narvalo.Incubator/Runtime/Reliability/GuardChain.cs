@@ -8,16 +8,16 @@
 
     public class GuardChain : IGuard
     {
-        //private readonly Lazy<int> _multiplicityThunk;
-        private readonly IEnumerable<IGuard> _guards;
-        private readonly Lazy<ReadOnlyCollection<IGuard>> _guardsThunk;
+        //readonly Lazy<int> _multiplicityThunk;
+        readonly IEnumerable<IGuard> _guards;
+        readonly Lazy<IReadOnlyCollection<IGuard>> _guardsThunk;
 
         public GuardChain(IEnumerable<IGuard> guards)
         {
             Requires.NotNull(guards, "guards");
 
             _guards = guards;
-            _guardsThunk = new Lazy<ReadOnlyCollection<IGuard>>(() =>
+            _guardsThunk = new Lazy<IReadOnlyCollection<IGuard>>(() =>
                 new ReadOnlyCollection<IGuard>(_guards.ToList())
             );
 
@@ -25,7 +25,7 @@
             //    = new Lazy<int>(() => _guards.Aggregate(1 /* seed */, (a, g) => { return a * g.Multiplicity; }));
         }
 
-        public ReadOnlyCollection<IGuard> Guards
+        public IReadOnlyCollection<IGuard> Guards
         {
             get { return _guardsThunk.Value; }
         }

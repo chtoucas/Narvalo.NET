@@ -5,7 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    public abstract class Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
+    public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
     {
         readonly bool _isLeft;
         readonly TLeft _left;

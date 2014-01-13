@@ -6,9 +6,9 @@
 
     public class DebuggerLogger : LoggerBase
     {
-        const int _Informational = 0;
-        const int _Warning = 1;
-        const int _Error = 2;
+        const int Informational_ = 0;
+        const int Warning_ = 1;
+        const int Error_ = 2;
 
         public DebuggerLogger()
             : base(Debugger.DefaultCategory /* name */) { }
@@ -39,7 +39,7 @@
             }
         }
 
-        #region Membres privés
+        #region > Membres privés <
 
         static int ToDebuggerLevel_(LoggerLevel level)
         {
@@ -47,18 +47,18 @@
                 case LoggerLevel.Debug:
                 case LoggerLevel.Informational:
                 case LoggerLevel.Notice:
-                    return _Informational;
+                    return Informational_;
                 case LoggerLevel.Warning:
-                    return _Warning;
+                    return Warning_;
                 case LoggerLevel.Error:
                 case LoggerLevel.Critical:
                 case LoggerLevel.Alert:
                 case LoggerLevel.Fatal:
-                    return _Error;
+                    return Error_;
                 case LoggerLevel.None:
                 default:
-                    // NB: normalement on n'arrive jamais là.
-                    throw new NotSupportedException();
+                    // NB: Normalement on n'arrive jamais là.
+                    throw new InvalidOperationException();
             }
         }
 

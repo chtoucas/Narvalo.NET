@@ -70,6 +70,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}.
+        /// </summary>
+        internal static string DebuggerLogger_MessageFormat {
+            get {
+                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à .
         /// </summary>
         internal static string Failure_IsEmpty {

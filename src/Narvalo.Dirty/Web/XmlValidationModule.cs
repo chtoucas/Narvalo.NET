@@ -1,4 +1,4 @@
-namespace Narvalo.Web.Validation
+namespace Narvalo.Web
 {
     using System;
     using System.Collections.Generic;
@@ -6,11 +6,12 @@ namespace Narvalo.Web.Validation
     using System.Web;
     using System.Xml;
     using System.Xml.Schema;
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Narvalo.Xml;
 
     public class XmlValidationModule : IHttpModule
     {
-        private static readonly string HeaderName = "X-Narvalo-Validate";
+        static readonly string HeaderName_ = "X-Narvalo-Validate";
 
         #region IHttpModule
 
@@ -18,8 +19,8 @@ namespace Narvalo.Web.Validation
         {
             Requires.NotNull(context, "context");
 
-            context.BeginRequest += OnBeginRequest;
-            context.EndRequest += OnEndRequest;
+            context.BeginRequest += OnBeginRequest_;
+            context.EndRequest += OnEndRequest_;
         }
 
         public void Dispose()
@@ -29,23 +30,28 @@ namespace Narvalo.Web.Validation
 
         #endregion
 
-        protected void OnBeginRequest(object sender, EventArgs e)
+        public static void Register()
+        {
+            DynamicModuleUtility.RegisterModule(typeof(XmlValidationModule));
+        }
+
+        void OnBeginRequest_(object sender, EventArgs e)
         {
             var application = sender as HttpApplication;
             var context = application.Context;
 
-            bool validate = context.Request.Headers[HeaderName] != null;
+            bool validate = context.Request.Headers[HeaderName_] != null;
             if (validate) {
                 context.Response.Filter = new CaptureStream(context.Response.Filter);
             }
         }
 
-        protected void OnEndRequest(object sender, EventArgs e)
+        void OnEndRequest_(object sender, EventArgs e)
         {
             var application = sender as HttpApplication;
             var context = application.Context;
 
-            var rendererType = context.Request.Headers[HeaderName];
+            var rendererType = context.Request.Headers[HeaderName_];
             if (rendererType == null) {
                 return;
             }
@@ -59,7 +65,7 @@ namespace Narvalo.Web.Validation
 
             captureStream.Rewind();
 
-            IList<ValidationEventArgs> errors = null;
+            IReadOnlyCollection<ValidationEventArgs> errors = null;
 
             using (var reader = new StreamReader(captureStream.StreamCopy)) {
                 // FIXME: Créer les bons paramètres.
@@ -77,18 +83,18 @@ namespace Narvalo.Web.Validation
         }
 
         // FIXME
-        public static IValidationRenderer CreateRenderer(string typeName)
+        public static IXmlValidationRenderer CreateRenderer(string typeName)
         {
             Requires.NotNullOrEmpty(typeName, "typeName");
 
             Type rendererType = Type.GetType(typeName, true /* throwOnError */);
-            var renderer = Activator.CreateInstance(rendererType) as IValidationRenderer;
+            var renderer = Activator.CreateInstance(rendererType) as IXmlValidationRenderer;
 
             if (renderer == null) {
                 throw ExceptionFactory.Argument(typeName,
                     "The specified custom renderer type '{0}' must implement the '{1}' interface",
                     typeName,
-                    typeof(IValidationRenderer).FullName);
+                    typeof(IXmlValidationRenderer).FullName);
             }
 
             return renderer;

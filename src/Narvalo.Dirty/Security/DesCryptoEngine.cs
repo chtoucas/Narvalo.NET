@@ -1,4 +1,4 @@
-﻿namespace Narvalo
+﻿namespace Narvalo.Security
 {
     using System;
     using System.IO;
@@ -8,12 +8,12 @@
     //[ContractVerification(true)]
     public class DesCryptoEngine : IBidirectionalCryptoEngine
     {
-        private readonly static TripleDESCryptoServiceProvider Provider
+        readonly static TripleDESCryptoServiceProvider Provider
             = new TripleDESCryptoServiceProvider();
-        private readonly static UTF8Encoding Encoding = new UTF8Encoding();
+        readonly static UTF8Encoding Encoding = new UTF8Encoding();
 
-        private readonly byte[] _key;
-        private readonly byte[] _iv;
+        readonly byte[] _key;
+        readonly byte[] _iv;
 
         public DesCryptoEngine(byte[] key, byte[] iv)
         {

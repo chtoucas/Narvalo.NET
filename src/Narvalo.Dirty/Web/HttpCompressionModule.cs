@@ -15,32 +15,32 @@
 
         void IHttpModule.Init(HttpApplication context)
         {
-            context.PostAcquireRequestState += new EventHandler(context_PostAcquireRequestState);
-            context.EndRequest += new EventHandler(context_EndRequest);
+            context.PostAcquireRequestState += OnPostAcquireRequestState_;
+            context.EndRequest += OnEndRequest_;
         }
 
-        void context_EndRequest(object sender, EventArgs e)
+        void OnEndRequest_(object sender, EventArgs e)
         {
-            HttpApplication context = sender as HttpApplication;
-            context.PostAcquireRequestState -= new EventHandler(context_PostAcquireRequestState);
-            context.EndRequest -= new EventHandler(context_EndRequest);
+            var application = sender as HttpApplication;
+            application.PostAcquireRequestState -= OnPostAcquireRequestState_;
+            application.EndRequest -= OnEndRequest_;
         }
 
-        void context_PostAcquireRequestState(object sender, EventArgs e)
+        void OnPostAcquireRequestState_(object sender, EventArgs e)
         {
-            RegisterCompressFilter();
+            var application = sender as HttpApplication;
+
+            RegisterCompressFilter_(application.Context);
         }
 
-        private static void RegisterCompressFilter()
+        static void RegisterCompressFilter_(HttpContext context)
         {
-            HttpContext context = HttpContext.Current;
-
             if (context.Handler is StaticFileHandler
                 || context.Handler is DefaultHttpHandler) {
                 return;
             }
 
-            HttpRequest request = context.Request;
+            var request = context.Request;
 
             string acceptEncoding = request.Headers["Accept-Encoding"];
             if (string.IsNullOrEmpty(acceptEncoding)) {
@@ -49,7 +49,7 @@
 
             acceptEncoding = acceptEncoding.ToUpperInvariant();
 
-            HttpResponse response = HttpContext.Current.Response;
+            HttpResponse response = context.Response;
 
             if (acceptEncoding.Contains("GZIP")) {
                 response.AppendHeader("Content-encoding", "gzip");

@@ -61,11 +61,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your config file!.
+        ///   Recherche une chaîne localisée semblable à The component {0} cannot use interface interception as it provides services that are not interfaces..
         /// </summary>
-        internal static string Configuration_MissingSection {
+        internal static string InterfaceProxyingOnlySupportsInterfaceServices {
             get {
-                return ResourceManager.GetString("Configuration_MissingSection", resourceCulture);
+                return ResourceManager.GetString("InterfaceProxyingOnlySupportsInterfaceServices", resourceCulture);
             }
         }
     }

@@ -13,7 +13,7 @@
             return !@this.Any();
         }
 
-        #region > Reduce <
+        #region > Aggregate <
 
         public static TAccumulate FoldLeft<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -23,17 +23,8 @@
             Requires.Object(@this);
 
             return @this.Aggregate(seed, accumulator);
-
-            //TAccumulate acc = seed;
-
-            //foreach (TSource item in @this) {
-            //    acc = fun(acc, item);
-            //}
-
-            //return acc;
         }
 
-        // foldBack en F# ou foldR en Haskell.
         public static TAccumulate FoldRight<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

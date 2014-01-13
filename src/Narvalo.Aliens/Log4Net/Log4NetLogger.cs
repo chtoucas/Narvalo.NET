@@ -1,23 +1,24 @@
-﻿namespace Narvalo.Diagnostics.Log4Net
+﻿namespace Narvalo.Log4Net
 {
     using System;
     using log4net;
+    using Narvalo.Diagnostics;
 
-    public sealed class Log4NetProxy : LoggerBase
+    public sealed class Log4NetLogger : LoggerBase
     {
         readonly ILog _inner;
 
-        Log4NetProxy(ILog inner)
+        Log4NetLogger(ILog inner)
             : base(inner.Logger.Name, GetLoggerLevel(inner))
         {
             _inner = inner;
         }
 
-        internal static Log4NetProxy Create(ILog inner)
+        internal static Log4NetLogger Create(ILog inner)
         {
             Requires.NotNull(inner, "inner");
 
-            return new Log4NetProxy(inner);
+            return new Log4NetLogger(inner);
         }
 
         protected override void LogCore(LoggerLevel level, string message, Exception exception)

@@ -27,7 +27,7 @@ namespace Narvalo.Xml
             };
         }
 
-        public ReadOnlyCollection<ValidationEventArgs> ValidationErrors
+        public IReadOnlyCollection<ValidationEventArgs> ValidationErrors
         {
             get { return new ReadOnlyCollection<ValidationEventArgs>(_errors); }
         }

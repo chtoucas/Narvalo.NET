@@ -1,10 +1,10 @@
-﻿namespace Narvalo.Web
+﻿namespace Narvalo.Log4Net
 {
     using System;
     using System.Web;
     using Narvalo;
 
-    public class Log4NetContextModule : IHttpModule
+    public class Log4NetHttpModule : IHttpModule
     {
         #region IHttpModule
 

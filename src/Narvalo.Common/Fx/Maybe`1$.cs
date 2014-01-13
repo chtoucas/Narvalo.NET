@@ -4,13 +4,13 @@
 
     public static class MaybeExtensions
     {
-        // XXX
+        // REVIEW
         public static Maybe<TResult> Cast<T, TResult>(this Maybe<T> @this) where T : TResult
         {
             return @this.Map(_ => (TResult)_);
         }
 
-        // XXX
+        // REVIEW
         public static Maybe<T> ThrowIfNone<T>(this Maybe<T> @this, Exception ex)
         {
             if (@this.IsNone) {
@@ -19,7 +19,7 @@
             return @this;
         }
 
-        // XXX
+        // REVIEW
         public static Maybe<T> ThrowIfNone<T>(this Maybe<T> @this, Func<Exception> exceptionFactory)
         {
             Requires.NotNull(exceptionFactory, "exceptionFactory");

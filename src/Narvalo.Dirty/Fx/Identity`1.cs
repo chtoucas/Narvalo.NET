@@ -2,7 +2,7 @@
 {
     using System;
 
-    public struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
+    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
     {
         readonly T _value;
 

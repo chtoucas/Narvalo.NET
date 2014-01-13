@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Mail
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Net.Mail;
@@ -61,7 +62,7 @@
 
         #region Properties
 
-        public ReadOnlyCollection<Attachment> Attachments
+        public IReadOnlyCollection<Attachment> Attachments
         {
             get { return new ReadOnlyCollection<Attachment>(_attachments); }
         }
@@ -90,7 +91,7 @@
 
         public MailPriority Priority { get { return _priority; } set { _priority = value; } }
 
-        public ReadOnlyCollection<MailAddress> Recipients
+        public IReadOnlyCollection<MailAddress> Recipients
         {
             get { return new ReadOnlyCollection<MailAddress>(_recipients); }
         }

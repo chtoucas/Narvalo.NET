@@ -7,10 +7,10 @@
 
     public class RetryPolicy
     {
-        private readonly int _maxRetries;
-        private readonly TimeSpan _retryInterval;
-        private readonly IList<Type> _retryableExceptionTypes;
-        private readonly Lazy<ReadOnlyCollection<Type>> _retryableExceptionTypesThunk;
+        readonly int _maxRetries;
+        readonly TimeSpan _retryInterval;
+        readonly IList<Type> _retryableExceptionTypes;
+        readonly Lazy<IReadOnlyCollection<Type>> _retryableExceptionTypesThunk;
 
         public RetryPolicy(int maxRetries, TimeSpan retryInterval, IList<Type> retryableExceptionTypes)
         {
@@ -23,11 +23,11 @@
             _retryInterval = retryInterval;
             _retryableExceptionTypes = retryableExceptionTypes;
             _retryableExceptionTypesThunk
-                = new Lazy<ReadOnlyCollection<Type>>(
+                = new Lazy<IReadOnlyCollection<Type>>(
                     () => new ReadOnlyCollection<Type>(retryableExceptionTypes));
         }
 
-        public ReadOnlyCollection<Type> RetryableExceptionTypes
+        public IReadOnlyCollection<Type> RetryableExceptionTypes
         {
             get { return _retryableExceptionTypesThunk.Value; }
         }

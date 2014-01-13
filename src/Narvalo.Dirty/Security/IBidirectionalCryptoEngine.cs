@@ -1,4 +1,4 @@
-﻿namespace Narvalo
+﻿namespace Narvalo.Security
 {
     using System;
     using System.Diagnostics.Contracts;

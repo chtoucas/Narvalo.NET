@@ -1,6 +1,6 @@
 ﻿using Castle.DynamicProxy;
 
-namespace Narvalo.Castle.DynamicProxy
+namespace Narvalo.Castle
 {
     using System;
     using System.Data.SqlClient;

@@ -1,33 +1,37 @@
-﻿namespace Narvalo.Mail.Fcl {
+﻿namespace Narvalo.Mail
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Net;
     using System.Net.Mail;
+    using System.Net.Mime;
     using System.Threading.Tasks;
 
-    public class FclSmtpClient : ISmtpClient {
+    public class FclSmtpClient : ISmtpClient
+    {
         #region Fields
 
         public const int DefaultTimeout = 5000;
 
-        private readonly string _password;
-        private readonly string _serverAddress;
+        readonly string _password;
+        readonly string _serverAddress;
         [ContractPublicPropertyName("ServerPort")]
-        private readonly int _serverPort;
-        private readonly string _userName;
-        private readonly bool _useSsl;
+        readonly int _serverPort;
+        readonly string _userName;
+        readonly bool _useSsl;
 
-        private bool _disposed = false;
-        private SmtpClient _smtpClient;
+        bool _disposed = false;
+        SmtpClient _smtpClient;
         [ContractPublicPropertyName("Timeout")]
-        private int _timeout = DefaultTimeout;
+        int _timeout = DefaultTimeout;
 
         #endregion
 
         #region Ctor
 
-        public FclSmtpClient(string address, int port, string userName, string password, bool useSsl) {
+        public FclSmtpClient(string address, int port, string userName, string password, bool useSsl)
+        {
             Contract.Requires(port >= 0);
             Contract.Requires(port <= 0xffff);
 
@@ -51,8 +55,10 @@
 
         public event EventHandler<SendCompletedEventArgs> SendCompletedEventHandler;
 
-        public bool IsConnected {
-            get {
+        public bool IsConnected
+        {
+            get
+            {
                 return _smtpClient != null && _smtpClient.ServicePoint.CurrentConnections > 0;
             }
         }
@@ -67,7 +73,8 @@
 
         public bool UseSsl { get { return _useSsl; } }
 
-        public void Connect() {
+        public void Connect()
+        {
             if (IsConnected) {
                 throw new InvalidOperationException("You are already connected.");
             }
@@ -83,7 +90,8 @@
             _smtpClient.Timeout = Timeout;
         }
 
-        public void Disconnect() {
+        public void Disconnect()
+        {
             if (IsConnected) {
                 return;
             }
@@ -94,18 +102,21 @@
             _smtpClient = null;
         }
 
-        public void Send(MailObject mail) {
+        public void Send(MailObject mail)
+        {
             ThrowIfNotReadyState();
 
-            _smtpClient.Send(mail.ToMailMessage());
+            _smtpClient.Send(ToMailMessage_(mail));
 
             OnSendCompleted(new SendCompletedEventArgs(mail));
         }
 
-        public void SendAsync(MailObject mail, object userState) {
+        public void SendAsync(MailObject mail, object userState)
+        {
             ThrowIfNotReadyState();
 
-            SendCompletedEventHandler callback = delegate(object sender, AsyncCompletedEventArgs e) {
+            SendCompletedEventHandler callback = delegate(object sender, AsyncCompletedEventArgs e)
+            {
                 if (!e.Cancelled) {
                     OnSendCompleted(new SendCompletedEventArgs(mail));
                 }
@@ -113,10 +124,11 @@
 
             _smtpClient.SendCompleted += callback;
 
-            _smtpClient.SendAsync(mail.ToMailMessage(), userState);
+            _smtpClient.SendAsync(ToMailMessage_(mail), userState);
         }
 
-        public Task SendAsync(MailObject mail) {
+        public Task SendAsync(MailObject mail)
+        {
             throw new NotImplementedException();
 
             //    ThrowIfNotReadyState();
@@ -145,7 +157,8 @@
             //    return tcs.Task;
         }
 
-        public void SendAsyncCancel() {
+        public void SendAsyncCancel()
+        {
             ThrowIfNotReadyState();
 
             _smtpClient.SendAsyncCancel();
@@ -155,7 +168,8 @@
 
         #region IDisposable
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -164,7 +178,8 @@
 
         #region Protected methods
 
-        protected virtual void Dispose(bool disposing) {
+        protected virtual void Dispose(bool disposing)
+        {
             if (!_disposed) {
                 if (disposing) {
                     if (_smtpClient != null) {
@@ -177,7 +192,8 @@
             }
         }
 
-        protected virtual void OnSendCompleted(SendCompletedEventArgs e) {
+        protected virtual void OnSendCompleted(SendCompletedEventArgs e)
+        {
             EventHandler<SendCompletedEventArgs> localHandler = SendCompletedEventHandler;
 
             if (localHandler != null) {
@@ -185,7 +201,8 @@
             }
         }
 
-        protected void ThrowIfNotReadyState() {
+        protected void ThrowIfNotReadyState()
+        {
             if (_disposed) {
                 throw new ObjectDisposedException("FclSmtpClient");
             }
@@ -195,5 +212,82 @@
         }
 
         #endregion
+
+        static MailMessage ToMailMessage_(MailObject mail)
+        {
+            Contract.Requires(mail != null);
+
+            MailMessage message = null;
+            MailMessage tmpMessage = null;
+
+            try {
+                tmpMessage = new MailMessage();
+                tmpMessage.From = mail.Sender;
+                tmpMessage.Subject = mail.Subject;
+                tmpMessage.SubjectEncoding = mail.SubjectEncoding;
+
+                if (mail.ReturnPath != null) {
+                    tmpMessage.Sender = mail.ReturnPath;
+                }
+
+                foreach (var address in mail.Recipients) {
+                    tmpMessage.To.Add(address);
+                }
+                foreach (var address in mail.ReplyToList) {
+                    tmpMessage.ReplyToList.Add(address);
+                }
+                foreach (var address in mail.CarbonCopyList) {
+                    tmpMessage.CC.Add(address);
+                }
+                foreach (var address in mail.BlackCarbonCopyList) {
+                    tmpMessage.Bcc.Add(address);
+                }
+
+                tmpMessage.HeadersEncoding = mail.HeadersEncoding;
+                tmpMessage.Headers.Clear();
+                if (mail.Headers != null) {
+                    tmpMessage.Headers.Add(mail.Headers);
+                }
+
+                foreach (var attachment in mail.Attachments) {
+                    tmpMessage.Attachments.Add(attachment);
+                }
+
+                if (mail.IsBodyHtml) {
+                    // WARNING: don't use tmpMessage.Body or Yahoo! won't understand it
+                    tmpMessage.IsBodyHtml = true;
+
+                    using (AlternateView textView
+                        = AlternateView.CreateAlternateViewFromString(
+                            mail.TextBody, mail.TextBodyEncoding, MediaType.Text)) {
+
+                        textView.TransferEncoding = TransferEncoding.QuotedPrintable;
+                        tmpMessage.AlternateViews.Add(textView);
+                    }
+
+                    using (AlternateView htmlView
+                        = AlternateView.CreateAlternateViewFromString(
+                            mail.HtmlBody, mail.HtmlBodyEncoding, MediaType.Html)) {
+
+                        htmlView.TransferEncoding = TransferEncoding.QuotedPrintable;
+                        tmpMessage.AlternateViews.Add(htmlView);
+                    }
+                }
+                else {
+                    tmpMessage.Body = mail.TextBody;
+                    tmpMessage.BodyEncoding = mail.TextBodyEncoding;
+                }
+
+                message = tmpMessage;
+                tmpMessage = null;
+            }
+            finally {
+                if (tmpMessage != null) {
+                    tmpMessage.Dispose();
+                }
+            }
+
+            return message;
+        }
     }
 }

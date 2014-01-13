@@ -1,15 +1,17 @@
-﻿namespace Narvalo.Web.Validation
+﻿using Serilog;
+
+namespace Narvalo.Serilog
 {
     using System.Collections.Generic;
     using System.Web;
     using System.Xml.Schema;
-    using Serilog;
+    using Narvalo.Web;
 
-    public class SerilogValidationRenderer : IValidationRenderer
+    public class SerilogXmlValidationRenderer : IXmlValidationRenderer
     {
         #region IValidationRenderer
 
-        public void Render(HttpContext context, IList<ValidationEventArgs> errors)
+        public void Render(HttpContext context, IEnumerable<ValidationEventArgs> errors)
         {
             foreach (var err in errors) {
                 switch (err.Severity) {

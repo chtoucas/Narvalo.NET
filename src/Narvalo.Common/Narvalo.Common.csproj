@@ -198,10 +198,19 @@
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\LoggerBase.cs" />
+    <Compile Include="Diagnostics\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\NoopLogger.cs" />
     <Compile Include="Diagnostics\__Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="ExceptionFactory.cs" />
     <Compile Include="Fx\EitherBase`2.cs" />
+    <Compile Include="Fx\Either`2.Monad.cs" />
     <Compile Include="Fx\Error.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -222,6 +231,7 @@
     <Compile Include="Fx\MayFunc`.cs" />
     <Compile Include="Collections\Enumerator`1%24.cs" />
     <Compile Include="EnumUtility.cs" />
+    <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\MayParseHelper.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
