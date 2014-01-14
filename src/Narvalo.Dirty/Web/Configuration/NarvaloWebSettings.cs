@@ -8,20 +8,20 @@
     using Narvalo.Collections;
 
     // FIXME: Ajouter une méthode statique de récupération Current.
-    public class NarvaloWebConfig
+    public class NarvaloWebSettings
     {
         const string SettingPrefix_ = "narvalo:";
 
         const bool DefaultEnableWhiteSpaceBusting_ = true;
 
-        static readonly Lazy<NarvaloWebConfig> Current_ = new Lazy<NarvaloWebConfig>(() =>
+        static readonly Lazy<NarvaloWebSettings> Current_ = new Lazy<NarvaloWebSettings>(() =>
         {
-            return NarvaloWebConfig.FromConfiguration();
+            return NarvaloWebSettings.FromConfiguration();
         });
 
         bool _enableWhiteSpaceBusting = DefaultEnableWhiteSpaceBusting_;
 
-        public static NarvaloWebConfig Current { get { return Current_.Value; } }
+        public static NarvaloWebSettings Current { get { return Current_.Value; } }
 
         public bool EnableWhiteSpaceBusting
         {
@@ -29,12 +29,12 @@
             set { _enableWhiteSpaceBusting = value; }
         }
 
-        public static NarvaloWebConfig FromConfiguration()
+        public static NarvaloWebSettings FromConfiguration()
         {
-            return (new NarvaloWebConfig()).Load();
+            return (new NarvaloWebSettings()).Load();
         }
 
-        public NarvaloWebConfig Load()
+        public NarvaloWebSettings Load()
         {
             LoadSettings_(ConfigurationManager.AppSettings);
 

@@ -8,16 +8,18 @@
     {
         #region IHttpModule
 
-        void IHttpModule.Dispose()
-        {
-            ;
-        }
-
-        void IHttpModule.Init(HttpApplication context)
+        public void Init(HttpApplication context)
         {
             context.PostAcquireRequestState += OnPostAcquireRequestState_;
             context.EndRequest += OnEndRequest_;
         }
+
+        public void Dispose()
+        {
+            ;
+        }
+
+        #endregion
 
         void OnEndRequest_(object sender, EventArgs e)
         {
@@ -60,7 +62,5 @@
                 response.Filter = new DeflateStream(response.Filter, CompressionMode.Compress);
             }
         }
-
-        #endregion
     }
 }

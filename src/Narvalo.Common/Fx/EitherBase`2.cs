@@ -2,7 +2,7 @@
 {
     using System;
 
-    // NB: par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
+    // NB: Par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
     // incorrecte, Left contient la valeur en cas d'erreur, et Right contient la valeur en cas de succès.
     public abstract class EitherBase<TLeft, TRight>
     {

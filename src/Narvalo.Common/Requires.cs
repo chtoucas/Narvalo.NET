@@ -17,7 +17,7 @@ namespace Narvalo
         public static void Object<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
-                throw Failure.ObjectNull();
+                throw new ArgumentNullException("this", SR.Requires_ObjectNull);
             }
             Contract.EndContractBlock();
         }
@@ -27,7 +27,7 @@ namespace Narvalo
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
-                throw Failure.PropertyNull();
+                throw new ArgumentNullException("value", SR.Requires_PropertyNull);
             }
             Contract.EndContractBlock();
         }
@@ -36,11 +36,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
-            if (value == null) {
-                throw Failure.PropertyNull();
-            }
+            Property(value);
+
             if (value.Length == 0) {
-                throw Failure.PropertyEmpty();
+                throw new ArgumentException(SR.Requires_PropertyEmpty, "value");
             }
             Contract.EndContractBlock();
         }
@@ -50,7 +49,7 @@ namespace Narvalo
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
-                throw Failure.ArgumentNull(parameterName);
+                throw Failure.ArgumentNull(parameterName, SR.Requires_ArgumentNullFormat, parameterName);
             }
             Contract.EndContractBlock();
         }
@@ -59,11 +58,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
-            if (value == null) {
-                throw Failure.ArgumentNull(parameterName);
-            }
+            NotNull(value, parameterName);
+
             if (value.Length == 0) {
-                throw Failure.ArgumentEmpty(parameterName);
+                throw Failure.Argument(parameterName, SR.Requires_ArgumentEmptyFormat, parameterName);
             }
             Contract.EndContractBlock();
         }

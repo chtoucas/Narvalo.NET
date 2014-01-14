@@ -43,6 +43,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetBoolean(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -59,6 +60,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableBoolean(@this.GetOrdinal(name));
         }
 
@@ -98,6 +100,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetByte(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -114,6 +117,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableByte(@this.GetOrdinal(name));
         }
 
@@ -131,7 +135,6 @@
 
             return @this.MayGetByte(@this.GetOrdinal(name));
         }
-
 
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
         {
@@ -164,7 +167,6 @@
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
 
-
         public static DateTime GetDateTime(this SqlDataReader @this, string name)
         {
             Requires.Object(@this);
@@ -185,6 +187,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetDateTime(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -201,6 +204,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableDateTime(@this.GetOrdinal(name));
         }
 
@@ -218,7 +222,6 @@
 
             return @this.MayGetDateTime(@this.GetOrdinal(name));
         }
-
 
         public static decimal GetDecimal(this SqlDataReader @this, string name)
         {
@@ -240,6 +243,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetDecimal(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -256,6 +260,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableDecimal(@this.GetOrdinal(name));
         }
 
@@ -295,6 +300,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetDouble(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -311,6 +317,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableDouble(@this.GetOrdinal(name));
         }
 
@@ -350,6 +357,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetGuid(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -366,6 +374,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableGuid(@this.GetOrdinal(name));
         }
 
@@ -383,7 +392,6 @@
 
             return @this.MayGetGuid(@this.GetOrdinal(name));
         }
-
 
         public static short GetInt16(this SqlDataReader @this, string name)
         {
@@ -405,6 +413,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetInt16(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -421,6 +430,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableInt16(@this.GetOrdinal(name));
         }
 
@@ -438,7 +448,6 @@
 
             return @this.MayGetInt16(@this.GetOrdinal(name));
         }
-
 
         public static int GetInt32(this SqlDataReader @this, string name)
         {
@@ -460,6 +469,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetInt32(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -476,6 +486,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableInt32(@this.GetOrdinal(name));
         }
 
@@ -493,7 +504,6 @@
 
             return @this.MayGetInt32(@this.GetOrdinal(name));
         }
-
 
         public static long GetInt64(this SqlDataReader @this, string name)
         {
@@ -564,6 +574,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetMoney(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -580,6 +591,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
 
@@ -598,9 +610,7 @@
             return @this.MayGetMoney(@this.GetOrdinal(name));
         }
 
-
         // > Valeurs de type référence <
-
 
         public static string GetString(this SqlDataReader @this, string name)
         {
@@ -622,6 +632,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetString(@this.GetOrdinal(name), defaultValue);
         }
 
@@ -640,7 +651,6 @@
             return @this.MayGetString(@this.GetOrdinal(name));
         }
 
-
         // NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
@@ -655,6 +665,7 @@
         {
             Requires.Object(@this);
             Requires.NotNullOrEmpty(name, "name");
+
             return @this.GetXml(@this.GetOrdinal(name), defaultValue);
         }
 

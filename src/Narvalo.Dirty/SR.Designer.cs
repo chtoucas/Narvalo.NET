@@ -61,11 +61,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your config file!.
+        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}..
         /// </summary>
-        internal static string Configuration_MissingSection {
+        internal static string DebuggerLogger_MessageFormat {
             get {
-                return ResourceManager.GetString("Configuration_MissingSection", resourceCulture);
+                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
             }
         }
     }

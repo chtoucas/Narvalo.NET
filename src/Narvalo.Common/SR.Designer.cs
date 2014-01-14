@@ -97,56 +97,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}..
+        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
-        internal static string DebuggerLogger_MessageFormat {
+        internal static string ConfigurationManager_MissingSectionFormat {
             get {
-                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Failure_ArgumentEmptyFormat {
-            get {
-                return ResourceManager.GetString("Failure_ArgumentEmptyFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Failure_ArgumentNullFormat {
-            get {
-                return ResourceManager.GetString("Failure_ArgumentNullFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Failure_ObjectNull {
-            get {
-                return ResourceManager.GetString("Failure_ObjectNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Failure_PropertyEmpty {
-            get {
-                return ResourceManager.GetString("Failure_PropertyEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Failure_PropertyNull {
-            get {
-                return ResourceManager.GetString("Failure_PropertyNull", resourceCulture);
+                return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
             }
         }
         
@@ -187,7 +142,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à You can not get the underlying value of an empty maybe..
         /// </summary>
         internal static string Maybe_NoneHasNoValue {
             get {
@@ -196,7 +151,25 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à The parameter {0} is empty..
+        /// </summary>
+        internal static string Requires_ArgumentEmptyFormat {
+            get {
+                return ResourceManager.GetString("Requires_ArgumentEmptyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The parameter {0} is null..
+        /// </summary>
+        internal static string Requires_ArgumentNullFormat {
+            get {
+                return ResourceManager.GetString("Requires_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The value is not greater than or equal to {0}..
         /// </summary>
         internal static string Requires_NotGreaterThanOrEqualToFormat {
             get {
@@ -205,7 +178,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à The value is not in range {0} / {1}..
         /// </summary>
         internal static string Requires_NotInRangeFormat {
             get {
@@ -214,11 +187,47 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à The value is not less than or equal to {0}..
         /// </summary>
         internal static string Requires_NotLessThanOrEqualToFormat {
             get {
                 return ResourceManager.GetString("Requires_NotLessThanOrEqualToFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The object &apos;this&apos; is null..
+        /// </summary>
+        internal static string Requires_ObjectNull {
+            get {
+                return ResourceManager.GetString("Requires_ObjectNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The property value is empty..
+        /// </summary>
+        internal static string Requires_PropertyEmpty {
+            get {
+                return ResourceManager.GetString("Requires_PropertyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The property value is null..
+        /// </summary>
+        internal static string Requires_PropertyNull {
+            get {
+                return ResourceManager.GetString("Requires_PropertyNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The scheme {0} does not support protocol less uri..
+        /// </summary>
+        internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
+            get {
+                return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
             }
         }
         

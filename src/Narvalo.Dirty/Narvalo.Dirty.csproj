@@ -94,7 +94,6 @@
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
-    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
     <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
     <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
     <Compile Include="Configuration\KeyValueConfigurationElementCollection`2.cs" />
@@ -104,6 +103,14 @@
     <Compile Include="Configuration\NameValueConfigurationElement.cs" />
     <Compile Include="Configuration\ObjectConfigurationElement`1.cs" />
     <Compile Include="Configuration\ValueConfigurationElement.cs" />
+    <Compile Include="Diagnostics\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\ILogger.cs" />
+    <Compile Include="Diagnostics\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\LoggerBase.cs" />
+    <Compile Include="Diagnostics\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\NoopLogger.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Fx\Expando.cs" />
     <Compile Include="Fx\Identity.cs" />
@@ -146,7 +153,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Web\Configuration\NarvaloWebConfig.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebSettings.cs" />
     <Compile Include="Web\Configuration\ParserFilterElement.cs" />
     <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />
     <Compile Include="Web\Configuration\ParserFiltersSection.cs" />

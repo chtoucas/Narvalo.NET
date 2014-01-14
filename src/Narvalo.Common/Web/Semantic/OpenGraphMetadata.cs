@@ -27,7 +27,7 @@
         public OpenGraphImage Image
         {
             get { return _image; }
-            set { _image = Check.NotNull(value); }
+            set { _image = Check.Property(value); }
         }
 
         public string Title { get { return _ontology.Title; } }
@@ -35,7 +35,7 @@
         public string Type
         {
             get { return _type; }
-            set { _type = Check.NotNullOrEmpty(value); ; }
+            set { _type = Check.PropertyNotEmpty(value); ; }
         }
 
         public Uri Url { get { return _ontology.Relationships.CanonicalUrl; } }
