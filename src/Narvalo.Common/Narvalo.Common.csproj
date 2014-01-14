@@ -256,8 +256,10 @@
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Uri%24.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebConfigurationManager.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebSectionGroup.cs" />
+    <Compile Include="Web\Configuration\OptimizationSection.cs" />
     <Compile Include="Web\Configuration\AssetSection.cs" />
-    <Compile Include="Web\Configuration\NarvaloWebConfig.cs" />
     <Compile Include="Web\Configuration\WebConfigurationManager`1.cs" />
     <Compile Include="Web\HttpApplicationUtility.cs" />
     <Compile Include="Web\HttpHandlerBase.cs" />

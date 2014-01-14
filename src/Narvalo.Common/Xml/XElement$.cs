@@ -24,7 +24,7 @@
             if (attr == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    SR.XElement_AttributeNotFound,
+                    SR.XElement_AttributeNotFoundFormat,
                     @this.Name.LocalName,
                     name));
             }
@@ -47,7 +47,7 @@
             if (child == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    SR.XElement_FirstChildNotFound,
+                    SR.XElement_FirstChildNotFoundFormat,
                     @this.Name.LocalName,
                     name));
             }
@@ -70,7 +70,7 @@
             return fun(@this.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
                     CultureInfo.CurrentCulture,
-                    SR.XElement_MalformedElementValue,
+                    SR.XElement_MalformedElementValueFormat,
                     @this.Name.LocalName,
                     ((IXmlLineInfo)@this).LineNumber)));
         }
@@ -106,7 +106,7 @@
             if (nextElement == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,
-                    SR.XElement_NextElementNotFound,
+                    SR.XElement_NextElementNotFoundFormat,
                     @this.Name.LocalName));
             }
 

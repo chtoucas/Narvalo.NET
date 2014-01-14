@@ -68,7 +68,7 @@
                     return;
                 }
 
-                var section = WebConfigurationManager<AssetSection>.GetSection(AssetSection.DefaultName);
+                var section = NarvaloWebConfigurationManager.GetAssetSection();
 
                 InitProviders_(section);
                 InitDefaultProvider_(section);
@@ -83,8 +83,7 @@
 
             var tmpProviders = new AssetProviderCollection();
             if (section.Providers != null) {
-                ProvidersHelper.InstantiateProviders(section.Providers, tmpProviders,
-                                                     typeof(AssetProviderBase));
+                ProvidersHelper.InstantiateProviders(section.Providers, tmpProviders, typeof(AssetProviderBase));
                 tmpProviders.SetReadOnly();
             }
 
@@ -100,7 +99,7 @@
 
             if (section.DefaultProvider == null) {
                 throw new ConfigurationErrorsException(
-                    "The default AssetProvider was not specified.",
+                    SR.AssetManager_DefaultProviderNotConfigured,
                     section.ElementInformation.Properties["providers"].Source,
                     section.ElementInformation.Properties["providers"].LineNumber);
             }
@@ -108,7 +107,7 @@
             Provider_ = Providers_[section.DefaultProvider];
 
             if (Provider_ == null) {
-                throw new ProviderException("The default AssetProvider was not found.");
+                throw new ProviderException(SR.AssetManager_DefaultProviderNotFound);
             }
 
             InitializedDefaultProvider_ = true;

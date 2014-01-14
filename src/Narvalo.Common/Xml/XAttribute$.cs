@@ -25,7 +25,7 @@
             return fun(@this.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
                     CultureInfo.CurrentCulture,
-                    SR.XElement_MalformedAttributeValue,
+                    SR.XElement_MalformedAttributeValueFormat,
                     @this.Name.LocalName,
                     ((IXmlLineInfo)@this).LineNumber)));
         }

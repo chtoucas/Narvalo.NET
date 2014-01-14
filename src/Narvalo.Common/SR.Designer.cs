@@ -61,20 +61,38 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The supplied value {0} is not a well-formed absolute URI..
+        /// </summary>
+        internal static string AbsoluteUriValidator_UriIsNotAbsoluteFormat {
+            get {
+                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsoluteFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not specified..
+        /// </summary>
+        internal static string AssetManager_DefaultProviderNotConfigured {
+            get {
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotConfigured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not found..
+        /// </summary>
+        internal static string AssetManager_DefaultProviderNotFound {
+            get {
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Invalid provider type..
         /// </summary>
         internal static string AssetProviderCollection_InvalidProvider {
             get {
                 return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The supplied value {0} is not a well-formed absolute URI..
-        /// </summary>
-        internal static string Configuration_UriIsNotAbsolute {
-            get {
-                return ResourceManager.GetString("Configuration_UriIsNotAbsolute", resourceCulture);
             }
         }
         
@@ -135,9 +153,9 @@ namespace Narvalo {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Missing or invalid query parameter &apos;{0}&apos;..
         /// </summary>
-        internal static string HttpHandlerBase_MissingOrInvalidParameter {
+        internal static string HttpHandlerBase_MissingOrInvalidParameterFormat {
             get {
-                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameter", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameterFormat", resourceCulture);
             }
         }
         
@@ -205,47 +223,65 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config!.
+        /// </summary>
+        internal static string WebConfigurationManager_SectionNotFoundFormat {
+            get {
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!.
+        /// </summary>
+        internal static string WebConfigurationManager_SectionNotFoundInPathFormat {
+            get {
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPathFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to find attribute for &apos;{0}&apos; with name &apos;{1}&apos;..
         /// </summary>
-        internal static string XElement_AttributeNotFound {
+        internal static string XElement_AttributeNotFoundFormat {
             get {
-                return ResourceManager.GetString("XElement_AttributeNotFound", resourceCulture);
+                return ResourceManager.GetString("XElement_AttributeNotFoundFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to find first child for &apos;{0}&apos; with name &apos;{1}&apos;..
         /// </summary>
-        internal static string XElement_FirstChildNotFound {
+        internal static string XElement_FirstChildNotFoundFormat {
             get {
-                return ResourceManager.GetString("XElement_FirstChildNotFound", resourceCulture);
+                return ResourceManager.GetString("XElement_FirstChildNotFoundFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to parse attribute &apos;{0}&apos;, line {1}..
         /// </summary>
-        internal static string XElement_MalformedAttributeValue {
+        internal static string XElement_MalformedAttributeValueFormat {
             get {
-                return ResourceManager.GetString("XElement_MalformedAttributeValue", resourceCulture);
+                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to parse element &apos;{0}&apos;, line {1}..
         /// </summary>
-        internal static string XElement_MalformedElementValue {
+        internal static string XElement_MalformedElementValueFormat {
             get {
-                return ResourceManager.GetString("XElement_MalformedElementValue", resourceCulture);
+                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Unable to find next element after {0}..
         /// </summary>
-        internal static string XElement_NextElementNotFound {
+        internal static string XElement_NextElementNotFoundFormat {
             get {
-                return ResourceManager.GetString("XElement_NextElementNotFound", resourceCulture);
+                return ResourceManager.GetString("XElement_NextElementNotFoundFormat", resourceCulture);
             }
         }
     }

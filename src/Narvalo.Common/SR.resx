@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Configuration_UriIsNotAbsolute" xml:space="preserve">
+  <data name="AbsoluteUriValidator_UriIsNotAbsoluteFormat" xml:space="preserve">
     <value>The supplied value {0} is not a well-formed absolute URI.</value>
   </data>
   <data name="Failure_ArgumentEmptyFormat" xml:space="preserve">
@@ -135,22 +135,22 @@
   <data name="Requires_NotInRangeFormat" xml:space="preserve">
     <value />
   </data>
-  <data name="XElement_MalformedElementValue" xml:space="preserve">
+  <data name="XElement_MalformedElementValueFormat" xml:space="preserve">
     <value>Unable to parse element '{0}', line {1}.</value>
   </data>
-  <data name="XElement_FirstChildNotFound" xml:space="preserve">
+  <data name="XElement_FirstChildNotFoundFormat" xml:space="preserve">
     <value>Unable to find first child for '{0}' with name '{1}'.</value>
   </data>
-  <data name="XElement_NextElementNotFound" xml:space="preserve">
+  <data name="XElement_NextElementNotFoundFormat" xml:space="preserve">
     <value>Unable to find next element after {0}.</value>
   </data>
-  <data name="XElement_AttributeNotFound" xml:space="preserve">
+  <data name="XElement_AttributeNotFoundFormat" xml:space="preserve">
     <value>Unable to find attribute for '{0}' with name '{1}'.</value>
   </data>
-  <data name="HttpHandlerBase_MissingOrInvalidParameter" xml:space="preserve">
+  <data name="HttpHandlerBase_MissingOrInvalidParameterFormat" xml:space="preserve">
     <value>Missing or invalid query parameter '{0}'.</value>
   </data>
-  <data name="XElement_MalformedAttributeValue" xml:space="preserve">
+  <data name="XElement_MalformedAttributeValueFormat" xml:space="preserve">
     <value>Unable to parse attribute '{0}', line {1}.</value>
   </data>
   <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
@@ -179,5 +179,17 @@
   </data>
   <data name="Int64Encoder_IllegalSequence" xml:space="preserve">
     <value>Illegal sequence of chars.</value>
+  </data>
+  <data name="WebConfigurationManager_SectionNotFoundFormat" xml:space="preserve">
+    <value>The &lt;{0}&gt; section is not defined in your web.config!</value>
+  </data>
+  <data name="AssetManager_DefaultProviderNotConfigured" xml:space="preserve">
+    <value>The default AssetProvider was not specified.</value>
+  </data>
+  <data name="AssetManager_DefaultProviderNotFound" xml:space="preserve">
+    <value>The default AssetProvider was not found.</value>
+  </data>
+  <data name="WebConfigurationManager_SectionNotFoundInPathFormat" xml:space="preserve">
+    <value>The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!</value>
   </data>
 </root>

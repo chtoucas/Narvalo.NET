@@ -24,7 +24,7 @@
             return Outcome<TQuery>.Failure(
                 String.Format(
                     CultureInfo.CurrentCulture, 
-                    SR.HttpHandlerBase_MissingOrInvalidParameter,
+                    SR.HttpHandlerBase_MissingOrInvalidParameterFormat,
                     paramName));
         }
 

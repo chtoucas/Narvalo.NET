@@ -4,49 +4,32 @@ namespace Narvalo.Web.Configuration
 
     public class ParserFiltersSection : ConfigurationSection
     {
-        #region Fields
-
         public const string DefaultName = "parserFilters";
+        public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
-        // Nom des propriétés.
-        const string ParserFiltersName = "parserFilters";
-
-        // Configuration des propriétés.
-        static ConfigurationProperty ParserFiltersProperty
+        static ConfigurationProperty ParserFilters_
            = new ConfigurationProperty(
-               ParserFiltersName,
+               "parserFilters",
                typeof(ParserFilterElementCollection),
                null,
                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsDefaultCollection);
 
-        // Champs pour utiliser manuellement les accesseurs.
         ParserFilterElementCollection _parserFilters;
+
         bool _parserFiltersSet = false;
 
-        // Stockage des propriétés.
         ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
-
-        #endregion
 
         public ParserFiltersSection()
             : base()
         {
-            _properties.Add(ParserFiltersProperty);
+            _properties.Add(ParserFilters_);
         }
 
         public ParserFilterElementCollection ParserFilters
         {
-            get
-            {
-                return _parserFiltersSet
-                    ? _parserFilters
-                    : (ParserFilterElementCollection)base[ParserFiltersName];
-            }
-            set
-            {
-                _parserFilters = value;
-                _parserFiltersSet = true;
-            }
+            get { return _parserFiltersSet ? _parserFilters : (ParserFilterElementCollection)base[ParserFilters_]; }
+            set { _parserFilters = value; _parserFiltersSet = true; }
         }
 
         protected override ConfigurationPropertyCollection Properties

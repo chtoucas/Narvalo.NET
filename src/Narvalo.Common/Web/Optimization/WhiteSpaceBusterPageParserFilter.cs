@@ -1,5 +1,6 @@
 ﻿namespace Narvalo.Web.Optimization
 {
+    using System;
     using System.Collections;
     using Narvalo.Web.Configuration;
     using Narvalo.Web.UI;
@@ -17,6 +18,11 @@
     {
         const string DirectiveName_ = "WhiteSpaceBusting";
 
+        static Lazy<bool> EnableWhiteSpaceBusting_ = new Lazy<bool>(() =>
+        {
+            return NarvaloWebConfigurationManager.GetOptimizationSection().EnableWhiteSpaceBusting;
+        });
+
         // Par défaut, le filtre n'est pas actif.
         bool _enabled = false;
 
@@ -27,10 +33,7 @@
         /// </summary>
         public WhiteSpaceBusterPageParserFilter() : base() { }
 
-        protected static bool EnableWhiteSpaceBusting
-        {
-            get { return NarvaloWebConfig.Current.EnableWhiteSpaceBusting; }
-        }
+        protected static bool EnableWhiteSpaceBusting { get { return EnableWhiteSpaceBusting_.Value; } }
 
         /// <summary>
         /// Retourne <code>true</code> si le filtre est actif pour le contrôle, <code>false</code> sinon.

@@ -1,8 +1,6 @@
 ﻿namespace Narvalo.Web.Configuration
 {
-    using System;
     using System.Configuration;
-    using System.Globalization;
     using System.Web.Configuration;
 
     public static class WebConfigurationManager<T> where T : ConfigurationSection
@@ -14,11 +12,21 @@
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw new ConfigurationErrorsException(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The <{0}> section is not defined in your web.config!",
-                        sectionName));
+                throw Failure.ConfigurationErrors(SR.WebConfigurationManager_SectionNotFoundFormat, sectionName);
+            }
+
+            return section;
+        }
+
+        public static T GetSection(string sectionName, string virtualPath)
+        {
+            Requires.NotNullOrEmpty(sectionName, "sectionName");
+            Requires.NotNullOrEmpty(virtualPath, "virtualPath");
+
+            T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
+
+            if (section == null) {
+                throw Failure.ConfigurationErrors(SR.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath);
             }
 
             return section;
