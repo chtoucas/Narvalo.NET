@@ -14,7 +14,7 @@
             // Act
             var html = htmlHelper.Script(new Uri("http://localhost"), "scripttype");
             // Assert
-            Assert.Equal(@"<script src=""newscript"" type=""scripttype""></script>", html.ToHtmlString());
+            Assert.Equal(@"<script src=""//localhost/"" type=""scripttype""></script>", html.ToHtmlString());
         }
 
         #endregion

@@ -124,11 +124,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
+            // FIXME: SR ne marche pas dans les tests ?
             if (value < minValue) {
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    //SR.Requires_NotGreaterThanOrEqualToFormat,
+                    "The value is not greater than or equal to {0}.",
                     minValue);
             }
             Contract.EndContractBlock();
@@ -138,11 +140,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
+            // FIXME: SR ne marche pas dans les tests ?
             if (value < minValue) {
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    //SR.Requires_NotGreaterThanOrEqualToFormat,
+                    "The value is not greater than or equal to {0}.",
                     minValue);
             }
             Contract.EndContractBlock();
@@ -153,11 +157,13 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
+            // FIXME: SR ne marche pas dans les tests ?
             if (value.CompareTo(minValue) < 0) {
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    //SR.Requires_NotGreaterThanOrEqualToFormat,
+                    "The value is not greater than or equal to {0}.",
                     minValue);
             }
             Contract.EndContractBlock();

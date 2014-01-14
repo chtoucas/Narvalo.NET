@@ -11,11 +11,11 @@
     <description>This package contains the Narvalo.Org Web utilities.</description>
     <!--<releaseNotes>Initial release.</releaseNotes>-->
     <copyright>Copyright 2013</copyright>
-    <tags>ASP.Net</tags>
+    <tags>ASP.NET</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Microsoft.AspNet.Mvc" version="4.0" />
-      <dependency id="Narvalo.Common" version="0.2.0" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.0" />
+      <dependency id="Narvalo.Common" version="0.6.0" />
     </dependencies>
   </metadata>
 </package>
