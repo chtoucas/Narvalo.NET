@@ -15,7 +15,7 @@
             Requires.NotNull(provider, "provider");
 
             if (!(provider is AssetProviderBase)) {
-                throw new ArgumentException("Invalid provider type", "provider");
+                throw Failure.Argument("provider", SR.AssetProviderCollection_InvalidProvider);
             }
 
             base.Add(provider);

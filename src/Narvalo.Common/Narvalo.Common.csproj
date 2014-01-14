@@ -188,6 +188,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BooleanUtility.cs" />
+    <Compile Include="Check.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs">
@@ -208,7 +209,7 @@
     <Compile Include="Diagnostics\NoopLogger.cs" />
     <Compile Include="Diagnostics\__Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
-    <Compile Include="ExceptionFactory.cs" />
+    <Compile Include="Failure.cs" />
     <Compile Include="Fx\EitherBase`2.cs" />
     <Compile Include="Fx\Either`2.Monad.cs" />
     <Compile Include="Fx\Error.cs">

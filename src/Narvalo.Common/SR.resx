@@ -120,25 +120,19 @@
   <data name="Configuration_UriIsNotAbsolute" xml:space="preserve">
     <value>The supplied value {0} is not a well-formed absolute URI.</value>
   </data>
-  <data name="Failure_IsEmpty" xml:space="preserve">
+  <data name="Failure_ArgumentEmptyFormat" xml:space="preserve">
     <value />
   </data>
-  <data name="Requires_IsNotGreaterThanOrEqualTo" xml:space="preserve">
+  <data name="Requires_NotGreaterThanOrEqualToFormat" xml:space="preserve">
     <value />
   </data>
-  <data name="Requires_IsNotLessThanOrEqualTo" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Maybe_CannotCastSomeToNone" xml:space="preserve">
+  <data name="Requires_NotLessThanOrEqualToFormat" xml:space="preserve">
     <value />
   </data>
   <data name="Maybe_NoneHasNoValue" xml:space="preserve">
     <value />
   </data>
-  <data name="Requires_IsNotInRange" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Requires_IsSome" xml:space="preserve">
+  <data name="Requires_NotInRangeFormat" xml:space="preserve">
     <value />
   </data>
   <data name="XElement_MalformedElementValue" xml:space="preserve">
@@ -160,6 +154,30 @@
     <value>Unable to parse attribute '{0}', line {1}.</value>
   </data>
   <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
-    <value>Exception: {0} {1} {2}</value>
+    <value>Exception: {0} {1} {2}.</value>
+  </data>
+  <data name="Failure_ArgumentNullFormat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Failure_ObjectNull" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Failure_PropertyNull" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Failure_PropertyEmpty" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
+    <value>Invalid provider type.</value>
+  </data>
+  <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
+    <value>HTTP InputStream too large.</value>
+  </data>
+  <data name="Int64Encoder_IllegalCharacterFormat" xml:space="preserve">
+    <value>Illegal character {0} found at position {1}.</value>
+  </data>
+  <data name="Int64Encoder_IllegalSequence" xml:space="preserve">
+    <value>Illegal sequence of chars.</value>
   </data>
 </root>

@@ -164,7 +164,7 @@
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
                 if (index == -1) {
-                    throw new ArgumentException("Illegal character " + value[i] + " at " + i);
+                    throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
                 }
                 checked {
                     result += multiplier * index;
@@ -187,12 +187,12 @@
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.BinarySearch(alphabet, value[i]);
                 if (index == -1) {
-                    throw new ArgumentException("Illegal character " + value[i] + " at " + i);
+                    throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
                 }
                 checked {
                     //// TODO
                     //if (result > Int64.MaxValue - multiplier * index) {
-                    //    throw new ArgumentException("Illegal sequence of chars");
+                    //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence);
                     //}
 
                     result += multiplier * index;
@@ -200,7 +200,7 @@
                     if (i != 0) {
                         //// TODO
                         //if (multiplier > MaxMultiplier) {
-                        //    throw new ArgumentException("Illegal sequence of chars");
+                        //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence);
                         //}
                         multiplier *= alphabetLength;
                     }

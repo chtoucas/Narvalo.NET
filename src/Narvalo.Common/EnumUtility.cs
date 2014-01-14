@@ -106,7 +106,7 @@
             __Asserts.IsEnum(typeof(TEnum));
 
             //if (Attribute.IsDefined(type, typeof(FlagsAttribute))) {
-            //  throw Failure.ArgumentException();
+            //  throw Failure.Argument();
             //}
 
             result = default(TEnum);

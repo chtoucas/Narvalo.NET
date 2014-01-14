@@ -23,20 +23,20 @@
 
         #endregion
 
-         void OnBeginRequest_(object sender, EventArgs e)
+        void OnBeginRequest_(object sender, EventArgs e)
         {
             var app = sender as HttpApplication;
 
-            var req = app.Request;
+            var request = app.Request;
             var properties = log4net.ThreadContext.Properties;
 
-            properties["domain"] = req.Url.Host;
-            properties["rawUrl"] = req.RawUrl;
-            properties["referrer"] = req.UrlReferrer != null ? req.UrlReferrer.ToString() : String.Empty;
-            properties["ua"] = req.UserAgent;
+            properties["domain"] = request.Url.Host;
+            properties["rawUrl"] = request.RawUrl;
+            properties["referrer"] = request.UrlReferrer != null ? request.UrlReferrer.ToString() : String.Empty;
+            properties["ua"] = request.UserAgent;
         }
 
-         void OnEndRequest_(object sender, EventArgs e)
+        void OnEndRequest_(object sender, EventArgs e)
         {
             log4net.ThreadContext.Properties.Clear();
         }

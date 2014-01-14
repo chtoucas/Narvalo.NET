@@ -9,14 +9,14 @@
         //public static BenchComparative Create(MethodInfo method)
         //{
         //    return MayCreate(method)
-        //        .ValueOrThrow(GetExceptionFactory(method.Name));
+        //        .ValueOrThrow(GetExceptionThunk(method.Name));
         //}
 
         // FIXME: Theory.
         //public static BenchComparative Create<T>(MethodInfo method, T value)
         //{
         //    return MayCreate(method, value)
-        //        .ValueOrThrow(GetExceptionFactory(method.Name));
+        //        .ValueOrThrow(GetExceptionThunk(method.Name));
         //}
 
         public static Maybe<BenchComparative> MayCreate(MethodInfo method)
@@ -42,7 +42,7 @@
 
         #region Membres privés.
 
-        //static Func<BenchException> GetExceptionFactory(string name)
+        //static Func<BenchException> GetExceptionThunk(string name)
         //{
         //    return () => {
         //        var message = String.Format(

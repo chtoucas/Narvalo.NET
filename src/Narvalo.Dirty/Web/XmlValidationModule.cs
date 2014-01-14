@@ -37,28 +37,26 @@ namespace Narvalo.Web
 
         void OnBeginRequest_(object sender, EventArgs e)
         {
-            var application = sender as HttpApplication;
-            var context = application.Context;
+            var app = sender as HttpApplication;
 
-            bool validate = context.Request.Headers[HeaderName_] != null;
+            bool validate = app.Request.Headers[HeaderName_] != null;
             if (validate) {
-                context.Response.Filter = new CaptureStream(context.Response.Filter);
+                app.Response.Filter = new CaptureStream(app.Response.Filter);
             }
         }
 
         void OnEndRequest_(object sender, EventArgs e)
         {
-            var application = sender as HttpApplication;
-            var context = application.Context;
+            var app = sender as HttpApplication;
 
-            var rendererType = context.Request.Headers[HeaderName_];
+            var rendererType = app.Request.Headers[HeaderName_];
             if (rendererType == null) {
                 return;
             }
-            var renderer = CreateRenderer(rendererType);
+            var renderer = CreateRenderer_(rendererType);
 
-            // TODO: peut-on utiliser context.Response.OutputStream ?
-            var captureStream = context.Response.Filter as CaptureStream;
+            // REVIEW: peut-on utiliser context.Response.OutputStream ?
+            var captureStream = app.Response.Filter as CaptureStream;
             if (captureStream == null) {
                 return;
             }
@@ -68,22 +66,20 @@ namespace Narvalo.Web
             IReadOnlyCollection<ValidationEventArgs> errors = null;
 
             using (var reader = new StreamReader(captureStream.StreamCopy)) {
-                // FIXME: Créer les bons paramètres.
+                // FIXME: Utiliser les bons paramètres.
                 var validator = new XmlValidator(new XmlReaderSettings());
                 if (!validator.Validate(reader)) {
                     errors = validator.ValidationErrors;
                 }
             }
 
-            if (errors == null) {
-                return;
+            if (errors != null) {
+                renderer.Render(app.Context, errors);
             }
-
-            renderer.Render(context, errors);
         }
 
         // FIXME
-        public static IXmlValidationRenderer CreateRenderer(string typeName)
+        static IXmlValidationRenderer CreateRenderer_(string typeName)
         {
             Requires.NotNullOrEmpty(typeName, "typeName");
 
@@ -91,7 +87,7 @@ namespace Narvalo.Web
             var renderer = Activator.CreateInstance(rendererType) as IXmlValidationRenderer;
 
             if (renderer == null) {
-                throw ExceptionFactory.Argument(typeName,
+                throw Failure.Argument(typeName,
                     "The specified custom renderer type '{0}' must implement the '{1}' interface",
                     typeName,
                     typeof(IXmlValidationRenderer).FullName);
@@ -111,24 +107,16 @@ namespace Narvalo.Web
                 _inner = inner;
             }
 
-            public Stream StreamCopy
-            {
-                get { return _streamCopy; }
-            }
+            public Stream StreamCopy { get { return _streamCopy; } }
+            public override bool CanRead { get { return _inner.CanRead; } }
+            public override bool CanSeek { get { return _inner.CanSeek; } }
+            public override bool CanWrite { get { return _inner.CanWrite; } }
+            public override long Length { get { return _inner.Length; } }
 
-            public override bool CanRead
+            public override long Position
             {
-                get { return _inner.CanRead; }
-            }
-
-            public override bool CanSeek
-            {
-                get { return _inner.CanSeek; }
-            }
-
-            public override bool CanWrite
-            {
-                get { return _inner.CanWrite; }
+                get { return _inner.Position; }
+                set { _inner.Position = value; }
             }
 
             public override void Flush()
@@ -136,31 +124,14 @@ namespace Narvalo.Web
                 _inner.Flush();
             }
 
-            public override long Length
+            public override int Read(byte[] buffer, int offset, int count)
             {
-                get { return _inner.Length; }
-            }
-
-            public override long Position
-            {
-                get
-                {
-                    return _inner.Position;
-                }
-                set
-                {
-                    _inner.Position = value;
-                }
+                return _inner.Read(buffer, offset, count);
             }
 
             public void Rewind()
             {
                 _streamCopy.Position = 0;
-            }
-
-            public override int Read(byte[] buffer, int offset, int count)
-            {
-                return _inner.Read(buffer, offset, count);
             }
 
             public override long Seek(long offset, SeekOrigin origin)

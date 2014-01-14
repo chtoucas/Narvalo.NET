@@ -6,11 +6,31 @@
     using System.Configuration;
     using System.Globalization;
 
-    public static class ExceptionFactory
+    public static class Failure
     {
-        public static ArgumentException Argument(string messageFormat, params object[] messageArgs)
+        public static ArgumentException ArgumentEmpty(string parameterName)
         {
-            return new ArgumentException(Format_(messageFormat, messageArgs));
+            return Argument(parameterName, SR.Failure_ArgumentEmptyFormat, parameterName);
+        }
+
+        public static ArgumentException PropertyEmpty()
+        {
+            return new ArgumentException(SR.Failure_PropertyEmpty, "value");
+        }
+
+        public static ArgumentNullException ArgumentNull(string parameterName)
+        {
+            return new ArgumentNullException(parameterName, Format_(SR.Failure_ArgumentNullFormat, parameterName));
+        }
+
+        public static ArgumentNullException ObjectNull()
+        {
+            return new ArgumentNullException("this", SR.Failure_ObjectNull);
+        }
+
+        public static ArgumentNullException PropertyNull()
+        {
+            return new ArgumentNullException("value", SR.Failure_PropertyNull);
         }
 
         public static ArgumentException Argument(
@@ -21,36 +41,12 @@
             return new ArgumentException(Format_(messageFormat, messageArgs), parameterName);
         }
 
-        //[SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-        //    Justification = "The purpose of this API is to return an error for extension methods.")]
-        //public static ArgumentNullException ObjectNull()
-        //{
-        //    return new ArgumentNullException("this");
-        //}
-
-        //[SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-        //    Justification = "The purpose of this API is to return an error for properties.")]
-        //public static ArgumentNullException PropertyNull()
-        //{
-        //    return new ArgumentNullException("value");
-        //}
-
-        //public static ArgumentNullException ArgumentNull(string parameterName)
-        //{
-        //    return new ArgumentNullException(parameterName);
-        //}
-
         public static ArgumentNullException ArgumentNull(
             string parameterName,
             string messageFormat,
             params object[] messageArgs)
         {
             return new ArgumentNullException(parameterName, Format_(messageFormat, messageArgs));
-        }
-
-        public static ArgumentException ArgumentEmpty(string parameterName)
-        {
-            return ExceptionFactory.Argument(parameterName, SR.Failure_IsEmpty, parameterName);
         }
 
         public static ArgumentOutOfRangeException ArgumentOutOfRange(

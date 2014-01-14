@@ -106,7 +106,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Autofac\InterceptAttribute .cs" />
     <Compile Include="Autofac\LoggerModule.cs" />
     <Compile Include="Autofac\PrincipalModelBinder.cs" />
     <Compile Include="Castle\SqlExceptionInterceptor.cs" />

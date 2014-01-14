@@ -61,6 +61,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid provider type..
+        /// </summary>
+        internal static string AssetProviderCollection_InvalidProvider {
+            get {
+                return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The supplied value {0} is not a well-formed absolute URI..
         /// </summary>
         internal static string Configuration_UriIsNotAbsolute {
@@ -70,7 +79,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}.
+        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}..
         /// </summary>
         internal static string DebuggerLogger_MessageFormat {
             get {
@@ -81,9 +90,45 @@ namespace Narvalo {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à .
         /// </summary>
-        internal static string Failure_IsEmpty {
+        internal static string Failure_ArgumentEmptyFormat {
             get {
-                return ResourceManager.GetString("Failure_IsEmpty", resourceCulture);
+                return ResourceManager.GetString("Failure_ArgumentEmptyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string Failure_ArgumentNullFormat {
+            get {
+                return ResourceManager.GetString("Failure_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string Failure_ObjectNull {
+            get {
+                return ResourceManager.GetString("Failure_ObjectNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string Failure_PropertyEmpty {
+            get {
+                return ResourceManager.GetString("Failure_PropertyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string Failure_PropertyNull {
+            get {
+                return ResourceManager.GetString("Failure_PropertyNull", resourceCulture);
             }
         }
         
@@ -97,11 +142,29 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
+        ///   Recherche une chaîne localisée semblable à HTTP InputStream too large..
         /// </summary>
-        internal static string Maybe_CannotCastSomeToNone {
+        internal static string HttpRequestBase_InputStreamTooLarge {
             get {
-                return ResourceManager.GetString("Maybe_CannotCastSomeToNone", resourceCulture);
+                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Illegal character {0} found at position {1}..
+        /// </summary>
+        internal static string Int64Encoder_IllegalCharacterFormat {
+            get {
+                return ResourceManager.GetString("Int64Encoder_IllegalCharacterFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Illegal sequence of chars..
+        /// </summary>
+        internal static string Int64Encoder_IllegalSequence {
+            get {
+                return ResourceManager.GetString("Int64Encoder_IllegalSequence", resourceCulture);
             }
         }
         
@@ -117,36 +180,27 @@ namespace Narvalo {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à .
         /// </summary>
-        internal static string Requires_IsNotGreaterThanOrEqualTo {
+        internal static string Requires_NotGreaterThanOrEqualToFormat {
             get {
-                return ResourceManager.GetString("Requires_IsNotGreaterThanOrEqualTo", resourceCulture);
+                return ResourceManager.GetString("Requires_NotGreaterThanOrEqualToFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à .
         /// </summary>
-        internal static string Requires_IsNotInRange {
+        internal static string Requires_NotInRangeFormat {
             get {
-                return ResourceManager.GetString("Requires_IsNotInRange", resourceCulture);
+                return ResourceManager.GetString("Requires_NotInRangeFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à .
         /// </summary>
-        internal static string Requires_IsNotLessThanOrEqualTo {
+        internal static string Requires_NotLessThanOrEqualToFormat {
             get {
-                return ResourceManager.GetString("Requires_IsNotLessThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string Requires_IsSome {
-            get {
-                return ResourceManager.GetString("Requires_IsSome", resourceCulture);
+                return ResourceManager.GetString("Requires_NotLessThanOrEqualToFormat", resourceCulture);
             }
         }
         

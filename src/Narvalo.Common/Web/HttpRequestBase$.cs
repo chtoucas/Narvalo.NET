@@ -25,7 +25,7 @@
 
             // FIXME: cela devrait être Int32.MaxValue
             if (bodyStream.Length > Int64.MaxValue) {
-                throw new ArgumentException("HTTP InputStream too large.");
+                throw Failure.Argument("request", SR.HttpRequestBase_InputStreamTooLarge);
             }
 
             int length = Convert.ToInt32(bodyStream.Length);

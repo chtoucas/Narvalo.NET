@@ -29,7 +29,7 @@
             Requires.NotNull(guard, "guard");
 
             //if (!guard.IsChainable()) {
-            //    throw new ArgumentException("XXX", "guard");
+            //    throw new Failure.Argument("guard");
             //}
 
             _guards.Add(guard);

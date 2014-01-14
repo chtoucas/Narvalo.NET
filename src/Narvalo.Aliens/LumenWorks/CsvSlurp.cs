@@ -6,24 +6,33 @@ namespace Narvalo.LumenWorks
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
+    using Narvalo;
 
     /// <summary>
     /// Classe permettant de lire d'un coup toutes les lignes d'un fichier CSV.
     /// </summary>
     public class CvsSlurp
     {
-        #region Fields
+        public const char DefaultDelimiter = ';';
+        public static readonly Encoding DefaultEncoding = Encoding.GetEncoding(1252);
 
-        private char _delimiter = ';';
-        private Encoding _encoding = Encoding.GetEncoding(1252);
-        private bool _hasHeaders = true;
+        readonly string _fileName;
 
-        #endregion
+        Encoding _encoding = DefaultEncoding;
+        char _delimiter = DefaultDelimiter;
+        bool _hasHeaders = true;
+        IList<string> _headers = new string[] { };
+        IList<Dictionary<string, string>> _records = new List<Dictionary<string, string>>();
 
-        #region Properties
+        public CvsSlurp(string fileName)
+        {
+            Requires.NotNullOrEmpty(fileName, "fileName");
+
+            _fileName = fileName;
+        }
 
         /// <summary>
-        /// Le séparateur utilisé pour distinguer des champs dans une même ligne.
+        /// Le caractère utilisé pour séparer les champs dans une même ligne.
         /// </summary>
         public char Delimiter
         {
@@ -37,7 +46,7 @@ namespace Narvalo.LumenWorks
         public Encoding Encoding
         {
             get { return _encoding; }
-            set { _encoding = value; }
+            set { _encoding = Check.NotNull(value); }
         }
 
         /// <summary>
@@ -50,78 +59,44 @@ namespace Narvalo.LumenWorks
         }
 
         /// <summary>
-        /// Liste des en-têtes si il y en a.
+        /// Liste des en-têtes, si il y en a.
         /// </summary>
-        public IList<string> Headers
-        {
-            get;
-            private set;
-        }
+        public IEnumerable<string> Headers { get { return _headers; } }
 
         /// <summary>
         /// Liste des éléments trouvés.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "FIXME")]
-        public IList<Dictionary<string, string>> Records
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public IEnumerable<Dictionary<string, string>> Records { get { return _records; } }
+
+        public void Parse()
         {
-            get;
-            private set;
-        }
+            using (var streamReader = new StreamReader(_fileName, Encoding)) {
+                using (var reader = new CsvReader(streamReader, HasHeaders, Delimiter)) {
+                    reader.DefaultParseErrorAction = ParseErrorAction.ThrowException;
 
-        #endregion
+                    int fieldCount = reader.FieldCount;
+                    _headers = reader.GetFieldHeaders();
 
-        /// <summary>
-        /// Analyse un fichier CSV.
-        /// </summary>
-        /// <param name="fileName">Nom du fichier CSV</param>
-        public void Parse(string fileName)
-        {
-            EnsureInitialized();
+                    while (reader.ReadNextRecord()) {
+                        var record = new Dictionary<string, string>();
 
-            using (StreamReader streamReader = new StreamReader(fileName, Encoding)) {
-                CsvReader reader = new CsvReader(streamReader, HasHeaders, Delimiter);
+                        for (int i = 0; i < fieldCount; i++) {
+                            record.Add(_headers[i], reader[i]);
+                        }
 
-                // Configure the CSV parser to throw an exception on error
-                reader.DefaultParseErrorAction = ParseErrorAction.ThrowException;
-
-                int fieldCount = reader.FieldCount;
-                Headers = reader.GetFieldHeaders();
-
-                while (reader.ReadNextRecord()) {
-                    Dictionary<string, string> record = new Dictionary<string, string>();
-
-                    for (int i = 0; i < fieldCount; i++) {
-                        record.Add(Headers[i], reader[i]);
+                        _records.Add(record);
                     }
-
-                    Records.Add(record);
                 }
             }
         }
 
-        /// <summary>
-        /// Analyse un fichier CSV et retourne la liste des éléments trouvés.
-        /// </summary>
-        /// <param name="fileName">Nom du fichier CSV</param>
-        /// <returns>Liste des éléments trouvés</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "FIXME")]
-        public IList<Dictionary<string, string>> Read(string fileName)
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public IEnumerable<Dictionary<string, string>> Read()
         {
-            Parse(fileName);
+            Parse();
 
-            return Records;
+            return _records;
         }
-
-        #region Protected methods
-
-        protected void EnsureInitialized()
-        {
-            Headers = new string[] { };
-            Records = new List<Dictionary<string, string>>();
-        }
-
-        #endregion
     }
 }

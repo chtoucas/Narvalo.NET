@@ -57,7 +57,7 @@
 
             var response = app.Response;
             if (response == null) {
-                // Peut arriver si trySkipIisCustomErrors est égal à true.
+                // Peut se produire si trySkipIisCustomErrors est égal à true.
                 return;
             }
 
