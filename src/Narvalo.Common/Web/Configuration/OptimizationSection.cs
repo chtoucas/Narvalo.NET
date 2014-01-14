@@ -9,7 +9,7 @@
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
         static ConfigurationProperty EnableWhiteSpaceBusting_
-            = new ConfigurationProperty("enable", typeof(Boolean), true, ConfigurationPropertyOptions.IsRequired);
+            = new ConfigurationProperty("enableWhiteSpaceBusting", typeof(Boolean), true, ConfigurationPropertyOptions.IsRequired);
 
         bool _enableWhiteSpaceBusting;
 

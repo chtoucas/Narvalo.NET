@@ -6,13 +6,14 @@
     {
         public static string ToProtocolLessString(this Uri uri)
         {
-            if (uri.Scheme == Uri.UriSchemeHttp) {
-                var uriString = uri.ToString();
-                return uri.IsAbsoluteUri ? uriString.Replace("http:", String.Empty) : uriString;
+            if (!uri.IsAbsoluteUri) {
+                return uri.ToString();
+            }
+            else if (uri.Scheme == Uri.UriSchemeHttp) {
+                return uri.ToString().Replace("http:", String.Empty);
             }
             else if (uri.Scheme == Uri.UriSchemeHttps) {
-                var uriString = uri.ToString();
-                return uri.IsAbsoluteUri ? uriString.Replace("https:", String.Empty) : uriString;
+                return uri.ToString().Replace("https:", String.Empty);
             }
             else {
                 throw Failure.NotSupported(SR.Uri_ProtocolLessUnsupportedSchemeFormat, uri.Scheme);
