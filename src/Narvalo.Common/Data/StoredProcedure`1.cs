@@ -11,7 +11,7 @@
 
         CommandBehavior _commandBehavior = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
 
-        public StoredProcedure(string connectionString, string name)
+        protected StoredProcedure(string connectionString, string name)
         {
             Requires.NotNull(connectionString, "connectionString");
             Requires.NotNull(name, "name");

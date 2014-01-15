@@ -50,7 +50,7 @@
 
         public string Description { get; set; }
 
-        public string Keywords { get; set; }
+        public string Keywords { get { return _keywords; } set { _keywords = value; } }
 
         public string Title { get; set; }
     }

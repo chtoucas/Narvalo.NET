@@ -9,7 +9,7 @@
         readonly string _connectionString;
         readonly string _name;
 
-        public NonQueryStoredProcedure(string connectionString, string name)
+        protected NonQueryStoredProcedure(string connectionString, string name)
         {
             Requires.NotNullOrEmpty(connectionString, "connectionString");
             Requires.NotNullOrEmpty(name, "name");
