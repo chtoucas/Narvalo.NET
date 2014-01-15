@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Web {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.SR", typeof(SR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Web.SR", typeof(SR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,56 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}..
+        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not specified..
         /// </summary>
-        internal static string DebuggerLogger_MessageFormat {
+        internal static string AssetManager_DefaultProviderNotConfigured {
             get {
-                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotConfigured", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à HTTP InputStream too large..
+        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not found..
         /// </summary>
-        internal static string HttpRequestBase_InputStreamTooLarge {
+        internal static string AssetManager_DefaultProviderNotFound {
             get {
-                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid provider type..
+        /// </summary>
+        internal static string AssetProviderCollection_InvalidProvider {
+            get {
+                return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Missing or invalid query parameter &apos;{0}&apos;..
+        /// </summary>
+        internal static string HttpHandlerBase_MissingOrInvalidParameterFormat {
+            get {
+                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameterFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config!.
+        /// </summary>
+        internal static string WebConfigurationManager_SectionNotFoundFormat {
+            get {
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!.
+        /// </summary>
+        internal static string WebConfigurationManager_SectionNotFoundInPathFormat {
+            get {
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPathFormat", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Web {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.SR", typeof(SR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Web.SR", typeof(SR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Exception: {0} {1} {2}..
+        ///   Recherche une chaîne localisée semblable à An unhandled error occured but no exception found..
         /// </summary>
-        internal static string DebuggerLogger_MessageFormat {
+        internal static string ApplicationLifecycleModule_UnknownError {
             get {
-                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à HTTP InputStream too large..
-        /// </summary>
-        internal static string HttpRequestBase_InputStreamTooLarge {
-            get {
-                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
+                return ResourceManager.GetString("ApplicationLifecycleModule_UnknownError", resourceCulture);
             }
         }
     }

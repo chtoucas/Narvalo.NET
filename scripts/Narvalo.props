@@ -50,6 +50,12 @@
         $(_OutDir)Narvalo.Web.pdb
       </Libs>
     </_Packages>
+    <_Packages Include="Narvalo.Web.Extras">
+      <Libs>
+        $(_OutDir)Narvalo.Web.Extras.dll;
+        $(_OutDir)Narvalo.Web.Extras.pdb
+      </Libs>
+    </_Packages>
   </ItemGroup>
 
 </Project>

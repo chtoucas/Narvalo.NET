@@ -120,4 +120,7 @@
   <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
     <value>Exception: {0} {1} {2}.</value>
   </data>
+  <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
+    <value>HTTP InputStream too large.</value>
+  </data>
 </root>

@@ -158,9 +158,9 @@
     <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />
     <Compile Include="Web\Configuration\ParserFiltersSection.cs" />
     <Compile Include="Web\Configuration\XmlValidationSection.cs" />
-    <Compile Include="Web\HttpApplicationUtility.cs" />
+    <Compile Include="Web\Hosting.cs" />
     <Compile Include="Web\HttpCompressionModule.cs" />
-    <Compile Include="Web\HttpHeaderCleanupModule.cs" />
+    <Compile Include="Web\HttpRequestBase%24.cs" />
     <Compile Include="Web\IXmlValidationRenderer.cs" />
     <Compile Include="Web\JScriptCompiler.cs" />
     <Compile Include="Web\NameValueCollection%24.cs" />
@@ -186,9 +186,11 @@
     <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs" />
     <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs" />
     <Compile Include="Web\UrlNormalizer.cs" />
+    <Compile Include="Web\WebApplication.cs" />
     <Compile Include="Web\WebPageBase%24.cs" />
     <Compile Include="Web\XmlValidationModule.cs" />
     <Compile Include="Xml\CachingXmlResolver.cs" />
+    <Compile Include="Xml\XmlValidator.cs" />
     <Compile Include="_Aliens\NHibernate\GuidComb.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +208,10 @@
     <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
       <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
       <Name>Narvalo.Incubator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

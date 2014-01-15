@@ -70,56 +70,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not specified..
-        /// </summary>
-        internal static string AssetManager_DefaultProviderNotConfigured {
-            get {
-                return ResourceManager.GetString("AssetManager_DefaultProviderNotConfigured", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The default AssetProvider was not found..
-        /// </summary>
-        internal static string AssetManager_DefaultProviderNotFound {
-            get {
-                return ResourceManager.GetString("AssetManager_DefaultProviderNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Invalid provider type..
-        /// </summary>
-        internal static string AssetProviderCollection_InvalidProvider {
-            get {
-                return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string ConfigurationManager_MissingSectionFormat {
             get {
                 return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Missing or invalid query parameter &apos;{0}&apos;..
-        /// </summary>
-        internal static string HttpHandlerBase_MissingOrInvalidParameterFormat {
-            get {
-                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameterFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à HTTP InputStream too large..
-        /// </summary>
-        internal static string HttpRequestBase_InputStreamTooLarge {
-            get {
-                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
             }
         }
         
@@ -228,24 +183,6 @@ namespace Narvalo {
         internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
             get {
                 return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config!.
-        /// </summary>
-        internal static string WebConfigurationManager_SectionNotFoundFormat {
-            get {
-                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!.
-        /// </summary>
-        internal static string WebConfigurationManager_SectionNotFoundInPathFormat {
-            get {
-                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPathFormat", resourceCulture);
             }
         }
         

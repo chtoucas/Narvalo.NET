@@ -104,6 +104,7 @@
             }
         }
 
+        // CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
         //public static string UppercaseFirstLetter(string value) {
         //    Requires.NotNull(value, "value");
 

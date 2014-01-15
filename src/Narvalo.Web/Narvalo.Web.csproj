@@ -127,21 +127,61 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Configuration\AssetSection.cs" />
+    <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
+    <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
+    <Compile Include="Configuration\OptimizationSection.cs" />
+    <Compile Include="Configuration\WebConfigurationManager`1.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
     <Compile Include="Html\AssetHelper.cs" />
     <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="Html\HtmlHelper%24.Image.cs" />
     <Compile Include="Html\HtmlHelper%24.Link.cs" />
     <Compile Include="Html\HtmlHelper%24.Script.cs" />
+    <Compile Include="HttpHandlerBase.cs" />
+    <Compile Include="HttpHandlerBase`1.cs" />
+    <Compile Include="HttpResponse%24.Caching.cs" />
+    <Compile Include="HttpResponse%24.cs" />
+    <Compile Include="HttpVerbs%24.cs" />
+    <Compile Include="HttpVersions.cs" />
     <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="Internal\TypeUtility.cs" />
+    <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\RazorOptimizer.cs" />
+    <Compile Include="Optimization\WhiteSpaceBuster.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterHtmlMarkupParser.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcCSharpRazorCodeGenerator.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebPageRazorHost.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebRazorHostFactory.cs" />
+    <Compile Include="Optimization\WhiteSpaceBusterPageParserFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteCollection%24.cs" />
+    <Compile Include="Semantic\IOpenGraphMetadata.cs" />
+    <Compile Include="Semantic\Ontology.cs" />
+    <Compile Include="Semantic\OpenGraphImage.cs" />
+    <Compile Include="Semantic\OpenGraphJpeg.cs" />
+    <Compile Include="Semantic\OpenGraphLocale.cs" />
+    <Compile Include="Semantic\OpenGraphMetadata.cs" />
+    <Compile Include="Semantic\OpenGraphPng.cs" />
+    <Compile Include="Semantic\OpenGraphType.cs" />
+    <Compile Include="Semantic\Relationships.cs" />
+    <Compile Include="Semantic\SchemaOrgType.cs" />
+    <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
+    <Compile Include="SR.Designer.cs">
+      <DependentUpon>SR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UI\Assets\AssetManager.cs" />
+    <Compile Include="UI\Assets\AssetProviderBase.cs" />
+    <Compile Include="UI\Assets\AssetProviderCollection.cs" />
+    <Compile Include="UI\Assets\DefaultAssetProvider.cs" />
+    <Compile Include="UI\ControlBuilder%24.cs" />
+    <Compile Include="UI\LiteralPageParserFilterBase.cs" />
+    <Compile Include="UI\PageParserFilterConstants.cs" />
+    <Compile Include="UI\UnrestrictedPageParserFilter.cs" />
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +196,12 @@
       <Name>Narvalo.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
