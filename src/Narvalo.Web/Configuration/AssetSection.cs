@@ -2,6 +2,7 @@
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
 
     public class AssetSection : ConfigurationSection
     {
@@ -35,6 +36,7 @@
             set { _defaultProvider = value; _defaultProviderSet = true; }
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ProviderSettingsCollection Providers
         {
             get { return _providersSet ? _providers : (ProviderSettingsCollection)base[Providers_]; }

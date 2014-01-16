@@ -2,7 +2,9 @@
 {
     using System;
     using System.Configuration.Provider;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
     public class AssetProviderCollection : ProviderCollection
     {
         public new AssetProviderBase this[string name]

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using Narvalo.Web.Internal;
@@ -23,6 +24,7 @@
             return Script(@this, scriptUri, scriptType, TypeUtility.ObjectToDictionary(attributes));
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
             return ScriptHelper_(scriptUri, scriptType, attributes);

@@ -11,7 +11,7 @@
 
         public static bool IsSuccess(int code)
         {
-            // TODO: often if GhostScript fails because you've passed the wrong combination of params etc,
+            // TODO: Often if GhostScript fails because you've passed the wrong combination of params etc,
             // it still returns zero... unhelpful
             return code == SuccessCode_;
         }

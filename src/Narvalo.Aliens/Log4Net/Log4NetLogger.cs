@@ -51,7 +51,7 @@
 
         public static LoggerLevel GetLoggerLevel(ILog log)
         {
-            // TODO: vérifier la correspondance.
+            // REVIEW: Vérifier la correspondance.
             LoggerLevel level = LoggerLevel.None;
 
             if (log.IsFatalEnabled) {

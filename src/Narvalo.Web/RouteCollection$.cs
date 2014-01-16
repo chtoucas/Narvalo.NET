@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Web
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
@@ -33,7 +34,7 @@
                         controllerName = controllerName.Substring(0, controllerName.Length - 10);
                         //}
 
-                        string name = String.Format("ChildAction/{0}/{1}", controllerName, actionName);
+                        string name = String.Format(CultureInfo.InvariantCulture, "ChildAction/{0}/{1}", controllerName, actionName);
                         var constraints = new { controller = controllerName, action = actionName };
 
                         routes.MapRoute(name, String.Empty, null /* defaults */, constraints);

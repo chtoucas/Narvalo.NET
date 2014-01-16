@@ -55,7 +55,7 @@ namespace Narvalo.Web
             }
             var renderer = CreateRenderer_(rendererType);
 
-            // REVIEW: peut-on utiliser context.Response.OutputStream ?
+            // REVIEW: Peut-on utiliser context.Response.OutputStream ?
             var captureStream = app.Response.Filter as CaptureStream;
             if (captureStream == null) {
                 return;

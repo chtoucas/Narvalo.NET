@@ -1,10 +1,12 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
-    using System.Runtime.Serialization;
 
     [Serializable]
+    [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Error")]
     public abstract class Error : EitherBase<Exception, string>, IEquatable<Error>
     {
         protected Error(Exception exception) : base(exception) { }
@@ -13,6 +15,7 @@
 
         public abstract string Message { get; }
 
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Throw")]
         public abstract void Throw();
 
         public static Error Create(Exception exception)
@@ -57,7 +60,11 @@
 
             public bool Equals(LeftImpl other)
             {
-                throw new NotImplementedException();
+                // REVIEW
+                if (other == this) { return true; }
+                if (other == null) { return false; }
+
+                return ReferenceEquals(LeftValue, other.LeftValue);
             }
 
             #endregion
@@ -81,26 +88,14 @@
 
             public bool Equals(RightImpl other)
             {
-                throw new NotImplementedException();
+                if (other == this) { return true; }
+                if (other == null) { return false; }
+
+                return RightValue == other.RightValue;
             }
 
             #endregion
         }
-
-        [Serializable]
-        class ErrorException : Exception
-        {
-            public ErrorException() : base() { }
-
-            public ErrorException(string message) : base(message) { ; }
-
-            public ErrorException(string message, Exception innerException)
-                : base(message, innerException) { ; }
-
-            protected ErrorException(SerializationInfo info, StreamingContext context)
-                : base(info, context) { ; }
-        }
-
 
         #region IEquatable<Error>
 

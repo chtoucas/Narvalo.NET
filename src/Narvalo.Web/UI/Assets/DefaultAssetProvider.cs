@@ -55,7 +55,7 @@
             return new Uri(Combine_(basePath, relativePath), UriKind.Relative);
         }
 
-        // TODO: Cf. http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
+        // REVIEW: Cf. http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
         static string Combine_(string basePath, string relativePath)
         {
             return VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath));

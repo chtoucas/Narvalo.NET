@@ -1,4 +1,7 @@
 
+// http://social.msdn.microsoft.com/Forums/en-US/b26ffe68-1350-4d05-95ca-48c442a833f7/a-better-way-to-resolve-ca1006?forum=vstscode
+// http://reader.feedshow.com/show_items-feed=bf3134fdd71dd85e8c2972a011d216e6
+
 
 Narvalo.Build
 =============

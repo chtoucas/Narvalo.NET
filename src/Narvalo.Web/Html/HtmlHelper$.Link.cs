@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using Narvalo.Web.Internal;
@@ -23,6 +24,7 @@
             return Link(@this, linkUri, linkType, relation, TypeUtility.ObjectToDictionary(attributes));
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
             return LinkHelper_(linkUri, linkType, relation, attributes);

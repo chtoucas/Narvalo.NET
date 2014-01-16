@@ -2,7 +2,7 @@
 {
     using System;
 
-    // TODO: ajouter les variantes async : Task, Begin/End, async.
+    // TODO: Ajouter les variantes async : Task, Begin/End, async ?
     public interface IGuard
     {
         void Execute(Action action);

@@ -23,18 +23,20 @@
             Requires.GreaterThanOrEqualTo(size, 0, "size");
             Requires.LessThanOrEqualTo(size, Int32.MaxValue / 2, "size");
 
-            int length = 2 * size;
+            checked {
+                int length = 2 * size;
 
-            var random = new Random();
-            var byteArray = new byte[length];
+                var random = new Random();
+                var byteArray = new byte[length];
 
-            for (int i = 0; i < length; i += 2) {
-                int chr = random.Next(0xD7FF);
-                byteArray[i + 1] = (byte)((chr & 0xFF00) >> 8);
-                byteArray[i] = (byte)(chr & 0xFF);
+                for (int i = 0; i < length; i += 2) {
+                    int chr = random.Next(0xD7FF);
+                    byteArray[i + 1] = (byte)((chr & 0xFF00) >> 8);
+                    byteArray[i] = (byte)(chr & 0xFF);
+                }
+
+                return Encoding.Unicode.GetString(byteArray);
             }
-
-            return Encoding.Unicode.GetString(byteArray);
         }
     }
 }

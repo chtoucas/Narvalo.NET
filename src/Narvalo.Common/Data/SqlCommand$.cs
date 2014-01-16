@@ -7,11 +7,11 @@
     public static class SqlCommandExtensions
     {
         public static void AddParameter(
-            this SqlCommand @this, string parameterName, SqlDbType sqlDbType, object value)
+            this SqlCommand @this, string parameterName, SqlDbType parameterType, object value)
         {
             Requires.Object(@this);
 
-            @this.Parameters.Add(parameterName, sqlDbType).Value = value;
+            @this.Parameters.Add(parameterName, parameterType).Value = value;
         }
     }
 

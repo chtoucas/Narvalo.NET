@@ -60,7 +60,7 @@
             _enabled = EnableWhiteSpaceBusting && enabled;
 
             if (_enabled) {
-                _buster = WhiteSpaceBuster.Current;
+                _buster = WhiteSpaceBusterBuilder.Current.GetWhiteSpaceBuster();
             }
 
             base.PreprocessDirective(directiveName, attributes);

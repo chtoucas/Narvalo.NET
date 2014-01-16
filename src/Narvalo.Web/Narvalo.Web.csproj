@@ -33,11 +33,19 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisLogFile>bin\Release\Narvalo.Web.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
@@ -133,6 +141,7 @@
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Configuration\WebConfigurationManager`1.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\AssetHelper.cs" />
     <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="Html\HtmlHelper%24.Image.cs" />
@@ -150,7 +159,7 @@
     <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\RazorOptimizer.cs" />
-    <Compile Include="Optimization\WhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\WhiteSpaceBusterBuilder.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterHtmlMarkupParser.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcCSharpRazorCodeGenerator.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebPageRazorHost.cs" />
@@ -206,6 +215,9 @@
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -2,10 +2,12 @@
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
     public static class ConfigurationManager<T> where T : ConfigurationSection
     {
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static T GetSection(string sectionName)
         {
             Requires.NotNullOrEmpty(sectionName, "sectionName");
@@ -19,6 +21,7 @@
             return section;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static T GetSection(Configuration config, string sectionName)
         {
             Requires.NotNull(config, "config");
@@ -33,6 +36,7 @@
             return section;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static T GetSection(
             string sectionName,
             string configFilePath,

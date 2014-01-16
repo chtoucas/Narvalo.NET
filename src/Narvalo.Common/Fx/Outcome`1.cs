@@ -27,26 +27,31 @@
 
         #region > Opérations monadiques <
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Outcome<T> Failure(Error error)
         {
             return new FailureImpl(error);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Outcome<T> Failure(Exception ex)
         {
             return new FailureImpl(Error.Create(ex));
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Outcome<T> Failure(string errorMessage)
         {
             return new FailureImpl(Error.Create(errorMessage));
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Outcome<T> Success(T value)
         {
             return new SuccessImpl(value);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
             Requires.NotNull(kun, "kun");

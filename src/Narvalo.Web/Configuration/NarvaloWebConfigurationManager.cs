@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Web.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Configuration;
 
     public static class NarvaloWebConfigurationManager
@@ -23,11 +24,13 @@
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static AssetSection GetAssetSection()
         {
             return WebConfigurationManager<AssetSection>.GetSection(AssetSection.SectionName);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static OptimizationSection GetOptimizationSection()
         {
             return WebConfigurationManager<OptimizationSection>.GetSection(OptimizationSection.SectionName);

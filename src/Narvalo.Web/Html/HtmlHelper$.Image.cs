@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using Narvalo.Web.Internal;
@@ -33,6 +34,7 @@
             return Image(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             return ImageHelper_(imageUri, alt, TypeUtility.ObjectToDictionary(attributes));

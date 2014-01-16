@@ -14,9 +14,9 @@ namespace Narvalo
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static void Object<T>([ValidatedNotNull]T value) where T : class
+        public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
-            if (value == null) {
+            if (@this == null) {
                 throw new ArgumentNullException("this", SR.Requires_ObjectNull);
             }
             Contract.EndContractBlock();

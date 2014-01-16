@@ -1,5 +1,7 @@
 ﻿namespace Narvalo.Web.Semantic
 {
+    using System.Diagnostics.CodeAnalysis;
+
     public static class OpenGraphType
     {
         public const string Article = "article";
@@ -7,6 +9,7 @@
         public const string Profile = "profile";
         public const string WebSite = "website";
 
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public static class Music
         {
             public const string Album = "music.album";
@@ -15,6 +18,7 @@
             public const string Song = "music.song";
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         public static class Video
         {
             public const string Episode = "video.episode";

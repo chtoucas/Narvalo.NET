@@ -33,7 +33,7 @@
             return new WhiteSpaceBusterMvcWebPageRazorHost(
                 virtualPath,
                 physicalPath,
-                new RazorOptimizer(WhiteSpaceBuster.Current));
+                new RazorOptimizer(WhiteSpaceBusterBuilder.Current.GetWhiteSpaceBuster()));
         }
     }
 }

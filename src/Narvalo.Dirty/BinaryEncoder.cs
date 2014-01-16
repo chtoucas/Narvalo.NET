@@ -3,7 +3,7 @@
     using System;
     using System.Text;
 
-    // TODO: Hexavigesimal
+    // TODO: Créer la version Hexavigesimal.
     public static class BinaryEncoder
     {
         //static string Base32Alphabet =  "abcdefghijklmnopqrstuvwxyz234567";

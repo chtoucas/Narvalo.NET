@@ -4,18 +4,18 @@
 
     public partial struct Maybe<T>
     {
-        public Maybe<X> Bind<X>(MayFunc<T, X> kun)
+        public Maybe<TResult> Bind<TResult>(MayFunc<T, TResult> kun)
         {
             Requires.NotNull(kun, "kun");
 
-            return _isSome ? kun(_value) : Maybe<X>.None;
+            return _isSome ? kun(_value) : Maybe<TResult>.None;
         }
 
-        public Maybe<X> Map<X>(Func<T, X> fun)
+        public Maybe<TResult> Map<TResult>(Func<T, TResult> fun)
         {
             Requires.NotNull(fun, "fun");
 
-            return _isSome ? Maybe<X>.η(fun(_value)) : Maybe<X>.None;
+            return _isSome ? Maybe<TResult>.η(fun(_value)) : Maybe<TResult>.None;
         }
 
         #region > Monad <

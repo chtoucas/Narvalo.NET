@@ -1,10 +1,12 @@
 ﻿namespace Narvalo.Web.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Configuration;
 
     public static class WebConfigurationManager<T> where T : ConfigurationSection
     {
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static T GetSection(string sectionName)
         {
             Requires.NotNullOrEmpty(sectionName, "sectionName");
@@ -18,6 +20,7 @@
             return section;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static T GetSection(string sectionName, string virtualPath)
         {
             Requires.NotNullOrEmpty(sectionName, "sectionName");

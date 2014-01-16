@@ -53,6 +53,7 @@
 
         #region > Opérations monadiques <
 
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Either<TLeft, TResult> Bind<TResult>(
             Func<TRight, Either<TLeft, TResult>> fun)
         {
@@ -83,14 +84,16 @@
 
         #endregion
 
-        public static Either<TLeft, TRight> Left(TLeft left)
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        public static Either<TLeft, TRight> Left(TLeft value)
         {
-            return new LeftImpl(left);
+            return new LeftImpl(value);
         }
 
-        public static Either<TLeft, TRight> Right(TRight right)
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        public static Either<TLeft, TRight> Right(TRight value)
         {
-            return new RightImpl(right);
+            return new RightImpl(value);
         }
 
         sealed class LeftImpl : Either<TLeft, TRight>, IEquatable<LeftImpl>
@@ -127,7 +130,11 @@
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as LeftImpl);
+                //if (!(obj is LeftImpl)) {
+                //    return false;
+                //}
+
+                return Equals((LeftImpl)obj);
             }
 
             public override int GetHashCode()
@@ -165,6 +172,7 @@
 
             public bool Equals(RightImpl other)
             {
+                // REVIEW
                 if (other == this) { return true; }
                 if (other == null) { return false; }
 
@@ -175,7 +183,11 @@
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as RightImpl);
+                //if (!(obj is RightImpl)) {
+                //    return false;
+                //}
+
+                return Equals((RightImpl)obj);
             }
 
             public override int GetHashCode()

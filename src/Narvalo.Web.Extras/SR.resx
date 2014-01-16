@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationLifecycleModule_UnknownError" xml:space="preserve">
-    <value>An unhandled error occured but no exception found.</value>
+    <value>An unhandled error occurred but no exception found.</value>
   </data>
 </root>

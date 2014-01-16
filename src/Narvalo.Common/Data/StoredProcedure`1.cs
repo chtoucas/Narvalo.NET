@@ -29,7 +29,7 @@
         protected string ConnectionString { get { return _connectionString; } }
         protected string Name { get { return _name; } }
 
-        protected abstract TResult Execute(SqlDataReader rdr);
+        protected abstract TResult Execute(SqlDataReader reader);
 
         public TResult Execute()
         {
