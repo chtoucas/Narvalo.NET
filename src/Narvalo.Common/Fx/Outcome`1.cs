@@ -47,7 +47,6 @@
             return new SuccessImpl(value);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
             Requires.NotNull(kun, "kun");

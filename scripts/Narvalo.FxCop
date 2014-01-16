@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FxCopProject Version="10.0" Name="Chiffon FxCop Project">
+<FxCopProject Version="10.0" Name="Narvalo FxCop Project">
  <ProjectOptions>
   <SharedProject>True</SharedProject>
   <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
@@ -15,15 +15,19 @@
   <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
   <Spelling Locale="en-GB" />
   <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
-  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True">
+   <CustomDictionary Path="../etc/CodeAnalysisDictionary.xml" />
+  </CustomDictionaries>
   <SearchGlobalAssemblyCache>True</SearchGlobalAssemblyCache>
   <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
   <IgnoreGeneratedCode>True</IgnoreGeneratedCode>
  </ProjectOptions>
  <Targets>
-  <Target Name="$(ProjectDir)/../_work/bin/Release/Narvalo.Common.dll" Analyze="True" AnalyzeAllChildren="True" />
-  <Target Name="$(ProjectDir)/../_work/bin/Release/Narvalo.Web.dll" Analyze="True" AnalyzeAllChildren="True" />
-  <Target Name="$(ProjectDir)/../_work/bin/Release/Narvalo.Web.Extras.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <AssemblyReferenceDirectories>
+   <Directory>$(ProjectDir)/../src/Narvalo.Common/bin/Debug/</Directory>
+   <Directory>$(ProjectDir)/../src/Narvalo.Common/bin/Debug/</Directory>
+  </AssemblyReferenceDirectories>
+  <Target Name="$(ProjectDir)/../src/Narvalo.Common/bin/Release/Narvalo.Common.dll" Analyze="True" AnalyzeAllChildren="True" />
  </Targets>
  <Rules>
   <RuleFiles>

@@ -10,7 +10,6 @@
     {
         #region Tableaux.
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T[]> Filter<T>(
            T[] source,
            Func<T, Maybe<bool>> predicate)
@@ -25,7 +24,6 @@
             return Maybe.Create(list);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<TResult> FoldLeft<TSource, TResult>(
             TSource[] source,
             TResult seed,
@@ -46,7 +44,6 @@
             return option;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<TResult> FoldRight<TSource, TResult>(
             TSource[] source,
             TResult seed,
@@ -67,7 +64,6 @@
             return option;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<TResult[]> Map<TSource, TResult>(
             TSource[] source,
             Func<TSource, Maybe<TResult>> fun)
@@ -80,7 +76,6 @@
             return Sequence(options);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<TSource> Reduce<TSource>(
             TSource[] source,
             Func<TSource, TSource, Maybe<TSource>> fun)
@@ -130,7 +125,6 @@
 
         #region Collections.
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IEnumerable<T>> Filter<T>(
             IEnumerable<T> source,
             Func<T, Maybe<bool>> predicate)
@@ -146,7 +140,6 @@
             return Maybe.Create(list);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
@@ -164,7 +157,6 @@
             return option;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IList<TResult>> Map<TSource, TResult>(
             IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> fun)
@@ -177,7 +169,6 @@
             return Sequence(list);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IList<T>> Sequence<T>(IEnumerable<Maybe<T>> source)
         {
             Requires.NotNull(source, "source");

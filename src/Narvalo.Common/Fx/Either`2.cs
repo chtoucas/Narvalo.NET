@@ -53,7 +53,6 @@
 
         #region > Opérations monadiques <
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Either<TLeft, TResult> Bind<TResult>(
             Func<TRight, Either<TLeft, TResult>> fun)
         {

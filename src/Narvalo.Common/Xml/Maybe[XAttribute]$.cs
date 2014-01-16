@@ -7,7 +7,6 @@
 
     public static class MaybeXAttributeExtensions
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> fun)
         {
             return @this.Bind(_ => fun(_.Value));

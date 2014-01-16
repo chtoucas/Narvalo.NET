@@ -111,9 +111,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\etc\CodeAnalysisDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </Content>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

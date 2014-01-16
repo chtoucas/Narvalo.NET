@@ -5,7 +5,6 @@
 
     public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> fun)
         {
             Requires.NotNull(fun, "fun");
