@@ -3,6 +3,7 @@
     using System;
 
     [Flags]
+    [Serializable]
     public enum EnumStyles
     {
         None = 0,

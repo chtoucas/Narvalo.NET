@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Net;
     using System.Web;
@@ -14,16 +13,15 @@
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Error")]
-        protected virtual void HandleBindingFailure(HttpResponse response, Error error)
+        protected virtual void HandleBindingFailure(HttpResponse response, Exception exception)
         {
             response.SetStatusCode(HttpStatusCode.BadRequest);
-            response.Write(error.Message);
+            response.Write(exception.Message);
         }
 
         protected Outcome<TQuery> BindingFailure(string parameterName)
         {
-            return Outcome<TQuery>.Failure(
+            return Outcome.Failure<TQuery>(
                 String.Format(
                     CultureInfo.CurrentCulture, 
                     SR.HttpHandlerBase_MissingOrInvalidParameterFormat,
@@ -37,7 +35,7 @@
             // Liaison du modèle.
             var outcome = Bind(context.Request);
             if (outcome.Unsuccessful) {
-                HandleBindingFailure(context.Response, outcome.Error);
+                HandleBindingFailure(context.Response, outcome.Exception);
                 return;
             }
             var query = outcome.Value;

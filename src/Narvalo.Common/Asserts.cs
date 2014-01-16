@@ -1,12 +1,9 @@
-﻿namespace Narvalo.Diagnostics
+﻿namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
-    [CLSCompliant(false)]
-    public static class __Asserts
+    public static class Asserts
     {
         [Conditional("DEBUG")]
         public static void IsEnum(Type type)

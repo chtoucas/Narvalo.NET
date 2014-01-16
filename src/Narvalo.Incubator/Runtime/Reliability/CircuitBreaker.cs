@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading;
-    using Narvalo.Diagnostics;
 
     public class CircuitBreaker : IBarrier, IDisposable
     {

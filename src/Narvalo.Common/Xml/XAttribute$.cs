@@ -4,7 +4,6 @@
     using System.Globalization;
     using System.Xml;
     using System.Xml.Linq;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
 
     public static class XAttributeExtensions

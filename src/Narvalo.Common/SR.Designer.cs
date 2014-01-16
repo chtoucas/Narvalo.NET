@@ -79,24 +79,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A left Either has no right value..
-        /// </summary>
-        internal static string Either_LeftHasNoRightValue {
-            get {
-                return ResourceManager.GetString("Either_LeftHasNoRightValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A right Either has no left value..
-        /// </summary>
-        internal static string Either_RightHasNoLeftValue {
-            get {
-                return ResourceManager.GetString("Either_RightHasNoLeftValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A left EitherBase has no right value..
         /// </summary>
         internal static string EitherBase_LeftHasNoRightValue {
@@ -120,15 +102,6 @@ namespace Narvalo {
         internal static string Int64Encoder_IllegalCharacterFormat {
             get {
                 return ResourceManager.GetString("Int64Encoder_IllegalCharacterFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Illegal sequence of chars..
-        /// </summary>
-        internal static string Int64Encoder_IllegalSequence {
-            get {
-                return ResourceManager.GetString("Int64Encoder_IllegalSequence", resourceCulture);
             }
         }
         

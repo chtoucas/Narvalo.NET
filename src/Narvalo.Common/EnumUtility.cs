@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
 
     /// <example>
@@ -25,27 +24,30 @@
         public static Maybe<TEnum> MayConvert<TEnum>(object value) where TEnum : struct
         {
             TEnum result;
-            if (!TryConvert<TEnum>(value, out result)) {
+            if (!TryConvert<TEnum>(value, out result))
+            {
                 return Maybe<TEnum>.None;
             }
             return Maybe.Create(result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
             // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
             // Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
 
-            __Asserts.IsEnum(typeof(TEnum));
+            Asserts.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 
-            if (Enum.IsDefined(typeof(TEnum), value)) {
+            if (Enum.IsDefined(typeof(TEnum), value))
+            {
                 result = (TEnum)Enum.ToObject(typeof(TEnum), value);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -71,7 +73,7 @@
         /// </example>    	
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            __Asserts.IsEnum(typeof(TEnum));
+            Asserts.IsEnum(typeof(TEnum));
 
             return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase);
         }
@@ -96,8 +98,7 @@
         /// </code>
         /// </example>
         
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
-            Justification = "The method already returns a boolean to indicate failure or success.")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result)
             where TEnum : struct
         {

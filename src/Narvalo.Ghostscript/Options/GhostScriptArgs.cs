@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Diagnostics;
 
     public class GhostScriptArgs<T> where T : Device
     {

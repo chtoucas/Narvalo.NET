@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Runtime.Reliability
 {
     using System;
-    using Narvalo.Diagnostics;
 
     public class NoopGuard : IGuard
     {

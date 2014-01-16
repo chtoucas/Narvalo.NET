@@ -63,7 +63,7 @@
         {
             result = default(MailAddress);
 
-            if (value == null || value.Length == 0) { return false; }
+            if (String.IsNullOrEmpty(value)) { return false; }
 
             try {
                 result = new MailAddress(value);

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using Narvalo.Diagnostics;
 
     /// <remarks>
     /// To force a specific paper size and ignore the paper size specified in the document,
@@ -11,29 +10,19 @@
     /// </remarks>
     public class Display
     {
-        #region Fields
-
-        private PaperSize _defaultPaperSize = PaperSize.None;
-        private bool? _fixedMedia;
-        private bool? _fixedResolution;
-        private Size? _mediaSize;
-        private bool? _orient1;
-        private Size? _pageSize;
-        private PageSizeMode _pageSizeMode = PageSizeMode.None;
-        private PaperSize _paperSize = PaperSize.None;
-        private bool _pdfFitPage = false;
-        private bool? _printed;
-        private Size? _resolution;
-
-        #endregion
-
-        #region Ctor
+        PaperSize _defaultPaperSize = PaperSize.None;
+        bool? _fixedMedia;
+        bool? _fixedResolution;
+        Size? _mediaSize;
+        bool? _orient1;
+        Size? _pageSize;
+        PageSizeMode _pageSizeMode = PageSizeMode.None;
+        PaperSize _paperSize = PaperSize.None;
+        bool _pdfFitPage = false;
+        bool? _printed;
+        Size? _resolution;
 
         public Display() : base() { }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// This value will be used to replace the device default papersize ONLY if the default papersize 
@@ -90,10 +79,6 @@
         public bool PdfFitPage { get { return _pdfFitPage; } set { _pdfFitPage = value; } }
 
         public Size? Resolution { get { return _resolution; } set { _resolution = value; } }
-
-        #endregion
-
-        #region Public methods
 
         public void AddTo(ICollection<string> args)
         {
@@ -167,9 +152,7 @@
             }
         }
 
-        #endregion
-
-        #region Helpers
+        #region Utilitaires
 
         public static string GetPaperSizeName(PaperSize paperSize)
         {

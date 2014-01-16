@@ -7,7 +7,7 @@
 
     public static class ConfigurationManager<T> where T : ConfigurationSection
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
         public static T GetSection(string sectionName)
         {
             Requires.NotNullOrEmpty(sectionName, "sectionName");
@@ -21,7 +21,7 @@
             return section;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
         public static T GetSection(Configuration config, string sectionName)
         {
             Requires.NotNull(config, "config");
@@ -36,7 +36,7 @@
             return section;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
         public static T GetSection(
             string sectionName,
             string configFilePath,

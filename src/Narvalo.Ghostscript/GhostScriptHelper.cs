@@ -3,7 +3,6 @@
     using System;
     using System.Drawing;
     using System.IO;
-    using Narvalo.Diagnostics;
     using Narvalo.GhostScript.Options;
 
     public static class GhostScriptHelper

@@ -2,10 +2,11 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.ExceptionServices;
 
-    public abstract class Outcome<T> : EitherBase<Error, T> 
+    public abstract class Outcome<T> : EitherBase<Exception, T> 
     {
-        protected Outcome(Error error) : base(error) { }
+        protected Outcome(Exception exception) : base(exception) { }
 
         protected Outcome(T value) : base(value) { }
 
@@ -13,40 +14,35 @@
 
         public bool Unsuccessful { get { return IsLeft; } }
 
-        public Error Error { get { return LeftValue; } }
+        public Exception Exception { get { return LeftValue; } }
 
         public T Value { get { return RightValue; } }
 
         public T ValueOrThrow()
         {
             if (Unsuccessful) {
-                Error.ThrowException();
+#if NET_40
+                throw LeftValue;
+#else
+                ExceptionDispatchInfo.Capture(LeftValue).Throw();
+#endif
             }
             return Value;
         }
 
         #region > Opérations monadiques <
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        public static Outcome<T> Failure(Error error)
+        internal static Outcome<T> Failure(Exception ex)
         {
-            return new FailureImpl(error);
+            return new FailureImpl(ex);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        public static Outcome<T> Failure(Exception ex)
+        internal static Outcome<T> Failure(string errorMessage)
         {
-            return new FailureImpl(Error.Create(ex));
+            return new FailureImpl(new OutcomeException(errorMessage));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        public static Outcome<T> Failure(string errorMessage)
-        {
-            return new FailureImpl(Error.Create(errorMessage));
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        public static Outcome<T> Success(T value)
+        internal static Outcome<T> Success(T value)
         {
             return new SuccessImpl(value);
         }
@@ -55,7 +51,7 @@
         {
             Requires.NotNull(kun, "kun");
 
-            return Unsuccessful ? Outcome<TResult>.Failure(Error) : kun(Value);
+            return Unsuccessful ? Outcome<TResult>.Failure(Exception) : kun(Value);
         }
 
         public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
@@ -63,7 +59,7 @@
             Requires.NotNull(selector, "selector");
 
             return Unsuccessful
-               ? Outcome<TResult>.Failure(Error)
+               ? Outcome<TResult>.Failure(Exception)
                : Outcome<TResult>.Success(selector(Value));
         }
 
@@ -76,7 +72,7 @@
 
         sealed class FailureImpl : Outcome<T>
         {
-            public FailureImpl(Error error) : base(error) { }
+            public FailureImpl(Exception exception) : base(exception) { }
         }
 
         sealed class SuccessImpl : Outcome<T>

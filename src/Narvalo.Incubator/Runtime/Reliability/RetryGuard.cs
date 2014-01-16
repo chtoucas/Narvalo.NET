@@ -3,11 +3,10 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Threading;
-	using Narvalo.Diagnostics;
 
 	public class RetryGuard : IGuard
 	{
-		private readonly RetryPolicy _policy;
+		readonly RetryPolicy _policy;
 
 		public RetryGuard(RetryPolicy policy)
 		{

@@ -2,16 +2,15 @@
 {
     using System;
     using System.Threading;
-    using Narvalo.Diagnostics;
 
     public class FlowRateBarrier : IBarrier, IDisposable
     {
-        private readonly TimeSpan _resetInterval;
-        private readonly int _maxRequestsPerInterval;
+        readonly TimeSpan _resetInterval;
+        readonly int _maxRequestsPerInterval;
 
-        private bool _disposed = false;
-        private int _requestCount = 0;
-        private Timer _resetTimer;
+        bool _disposed = false;
+        int _requestCount = 0;
+        Timer _resetTimer;
 
         public FlowRateBarrier(int maxRequestsPerInterval, TimeSpan resetInterval)
         {

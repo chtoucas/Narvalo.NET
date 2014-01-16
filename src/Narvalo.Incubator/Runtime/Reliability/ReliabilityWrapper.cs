@@ -1,11 +1,10 @@
 ﻿namespace Narvalo.Runtime.Reliability
 {
     using System;
-    using Narvalo.Diagnostics;
 
     public class ReliabilityWrapper
     {
-        private readonly IGuard _guard;
+        readonly IGuard _guard;
 
         public ReliabilityWrapper(IGuard guard)
         {

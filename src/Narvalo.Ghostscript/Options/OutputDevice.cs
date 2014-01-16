@@ -1,12 +1,10 @@
 ﻿namespace Narvalo.GhostScript.Options
 {
-    using System;
     using System.Collections.Generic;
-    using Narvalo.Diagnostics;
 
     public abstract class OutputDevice : Device
     {
-        private bool? _ignoreMultipleCopies;
+        bool? _ignoreMultipleCopies;
 
         protected OutputDevice() : base() { }
 

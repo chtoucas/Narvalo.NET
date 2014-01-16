@@ -2,15 +2,14 @@
 {
     using System;
     using System.Threading;
-    using Narvalo.Diagnostics;
 
     public class ConcurrencyThrottle : IGuard, IDisposable
     {
-        private readonly int _maxConcurrentRequests;
-        private readonly TimeSpan _timeout;
+         readonly int _maxConcurrentRequests;
+         readonly TimeSpan _timeout;
 
-        private bool _disposed = false;
-        private SemaphoreSlim _sem;
+         bool _disposed = false;
+         SemaphoreSlim _sem;
 
         // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
         public ConcurrencyThrottle(int maxConcurrentRequests, TimeSpan timeout)

@@ -98,6 +98,22 @@
         {
             public LeftImpl(TLeft value) : base(value) { }
 
+            //public TLeft Value { get { return LeftValue; } }
+
+            //public override TResult Switch<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight)
+            //{
+            //    return caseLeft(LeftValue);
+            //}
+
+            //public override void Switch(
+            //    Action<TLeft> caseLeft,
+            //    Action<TRight> caseRight)
+            //{
+            //    caseLeft(LeftValue);
+            //}
+
             public override string ToString()
             {
                 return String.Format(CultureInfo.CurrentCulture, "Left({0})", LeftValue);
@@ -107,6 +123,22 @@
         sealed class RightImpl : Either<TLeft, TRight> 
         {
             public RightImpl(TRight value) : base(value) { }
+
+            //public TRight Value { get { return RightValue; } }
+
+            //public override TResult Switch<TResult>(
+            //    Func<TLeft, TResult> caseLeft,
+            //    Func<TRight, TResult> caseRight)
+            //{
+            //    return caseRight(RightValue);
+            //}
+
+            //public override void Switch(
+            //    Action<TLeft> caseLeft,
+            //    Action<TRight> caseRight)
+            //{
+            //    caseRight(RightValue);
+            //}
 
             public override string ToString()
             {

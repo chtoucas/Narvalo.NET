@@ -2,7 +2,6 @@
 {
     using System;
     using System.Globalization;
-    using Narvalo.Diagnostics;
     using Narvalo.Fx;
     using Narvalo.Internal;
 
@@ -185,7 +184,7 @@
 
         public static Maybe<TEnum> ToEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            __Asserts.IsEnum(typeof(TEnum));
+            Asserts.IsEnum(typeof(TEnum));
 
             return MayParseHelper.Parse<TEnum>(
                 value,

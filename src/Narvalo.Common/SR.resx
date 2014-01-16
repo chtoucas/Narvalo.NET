@@ -165,9 +165,6 @@
   <data name="Int64Encoder_IllegalCharacterFormat" xml:space="preserve">
     <value>Illegal character {0} found at position {1}.</value>
   </data>
-  <data name="Int64Encoder_IllegalSequence" xml:space="preserve">
-    <value>Illegal sequence of chars.</value>
-  </data>
   <data name="ConfigurationManager_MissingSectionFormat" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
@@ -179,12 +176,6 @@
   </data>
   <data name="EitherBase_RightHasNoLeftValue" xml:space="preserve">
     <value>A right EitherBase has no left value.</value>
-  </data>
-  <data name="Either_LeftHasNoRightValue" xml:space="preserve">
-    <value>A left Either has no right value.</value>
-  </data>
-  <data name="Either_RightHasNoLeftValue" xml:space="preserve">
-    <value>A right Either has no left value.</value>
   </data>
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>

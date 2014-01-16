@@ -189,10 +189,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="..\Common\System\Diagnostics\Contracts\ContractExtensions.cs">
-      <Link>_Aliens\System.Diagnostics.Contracts\ContractExtensions.cs</Link>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="BooleanUtility.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Collections\Enumerable`1%24.Maybe.cs" />
@@ -207,14 +203,10 @@
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
-    <Compile Include="Diagnostics\__Asserts.cs" />
+    <Compile Include="Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Failure.cs" />
     <Compile Include="Fx\EitherBase`2.cs" />
-    <Compile Include="Fx\Either`2.Monad.cs" />
-    <Compile Include="Fx\Error.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -223,8 +215,6 @@
     </Compile>
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
-    <Compile Include="Fx\Either`2%24.cs" />
-    <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs" />
     <Compile Include="Fx\Maybe`1.Monad.cs">
       <SubType>Code</SubType>
@@ -238,7 +228,7 @@
     <Compile Include="EnumUtility.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Fx\ErrorException.cs" />
+    <Compile Include="Fx\OutcomeException.cs" />
     <Compile Include="Internal\MayParseHelper.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
@@ -283,6 +273,7 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

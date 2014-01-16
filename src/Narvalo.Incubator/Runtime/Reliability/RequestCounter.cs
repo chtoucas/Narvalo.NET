@@ -1,13 +1,12 @@
 ﻿namespace Narvalo.Runtime.Reliability
 {
     using System;
-    using Narvalo.Diagnostics;
 
     public class RequestCounter : IGuard, IReliabilityMonitor
     {
-        private long _failureCount = 0;
-        private long _requestCount = 0;
-        private long _successCount = 0;
+        long _failureCount = 0;
+        long _requestCount = 0;
+        long _successCount = 0;
 
         #region IGuard
 

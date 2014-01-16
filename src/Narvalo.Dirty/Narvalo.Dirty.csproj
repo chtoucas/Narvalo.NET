@@ -111,6 +111,13 @@
     <Compile Include="Diagnostics\LoggerBase.cs" />
     <Compile Include="Diagnostics\LoggerLevel.cs" />
     <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Fx\BadOutcome.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fx\EitherBase`2.cs" />
+    <Compile Include="Fx\Either`2%24.cs" />
+    <Compile Include="Fx\Either`2.cs" />
+    <Compile Include="Fx\Either`2.Monad.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Fx\Expando.cs" />

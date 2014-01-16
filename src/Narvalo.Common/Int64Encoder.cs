@@ -192,7 +192,7 @@
                 checked {
                     //// TODO
                     //if (result > Int64.MaxValue - multiplier * index) {
-                    //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence);
+                    //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
                     //}
 
                     result += multiplier * index;
@@ -200,7 +200,7 @@
                     if (i != 0) {
                         //// TODO
                         //if (multiplier > MaxMultiplier) {
-                        //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence);
+                        //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
                         //}
                         multiplier *= alphabetLength;
                     }

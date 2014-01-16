@@ -6,10 +6,10 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Il ne s'agit pas réellement d'une collection.")]
     public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
         public static readonly Maybe<T> None = default(Maybe<T>);
 
         readonly bool _isSome;
@@ -173,7 +173,6 @@
         }
 
         ///// <summary />
-        //[SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         //public static implicit operator Maybe<T>(Maybe<Unit> value)
         //{
         //    return Maybe.None;
