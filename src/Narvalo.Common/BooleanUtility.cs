@@ -30,7 +30,7 @@
             }
 
             if (style.HasFlag(BooleanStyles.Literal)) {
-                // NB: cette méthode n'est pas sensible à la casse de "value".
+                // NB: Cette méthode n'est pas sensible à la casse de "value".
                 if (Boolean.TryParse(val, out result)) {
                     return true;
                 }
@@ -48,7 +48,7 @@
             }
 
             if (style.HasFlag(BooleanStyles.HtmlInput)) {
-                throw new NotImplementedException();
+                return value == "on";
             }
 
             return false;

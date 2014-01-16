@@ -1,11 +1,10 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
+    public abstract partial class Either<TLeft, TRight>
     {
         readonly bool _isLeft;
         readonly TLeft _left;
@@ -34,7 +33,7 @@
             get
             {
                 if (!_isLeft) {
-                    throw new InvalidOperationException("XXX");
+                    throw new InvalidOperationException(SR.Either_RightHasNoLeftValue);
                 }
                 return _left;
             }
@@ -45,7 +44,7 @@
             get
             {
                 if (_isLeft) {
-                    throw new InvalidOperationException("XXX");
+                    throw new InvalidOperationException(SR.Either_LeftHasNoRightValue);
                 }
                 return _right;
             }
@@ -53,7 +52,6 @@
 
         #region > Opérations monadiques <
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Either<TLeft, TResult> Bind<TResult>(
             Func<TRight, Either<TLeft, TResult>> fun)
         {
@@ -96,51 +94,9 @@
             return new RightImpl(value);
         }
 
-        sealed class LeftImpl : Either<TLeft, TRight>, IEquatable<LeftImpl>
+        sealed class LeftImpl : Either<TLeft, TRight>
         {
             public LeftImpl(TLeft value) : base(value) { }
-
-            //public TLeft Value { get { return LeftValue; } }
-
-            //public override TResult Switch<TResult>(
-            //    Func<TLeft, TResult> caseLeft,
-            //    Func<TRight, TResult> caseRight)
-            //{
-            //    return caseLeft(LeftValue);
-            //}
-
-            //public override void Switch(
-            //    Action<TLeft> caseLeft,
-            //    Action<TRight> caseRight)
-            //{
-            //    caseLeft(LeftValue);
-            //}
-
-            #region IEquatable<Left>
-
-            public bool Equals(LeftImpl other)
-            {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return EqualityComparer<TLeft>.Default.Equals(LeftValue, other.LeftValue);
-            }
-
-            #endregion
-
-            public override bool Equals(object obj)
-            {
-                //if (!(obj is LeftImpl)) {
-                //    return false;
-                //}
-
-                return Equals((LeftImpl)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return EqualityComparer<TLeft>.Default.GetHashCode(LeftValue);
-            }
 
             public override string ToString()
             {
@@ -148,66 +104,14 @@
             }
         }
 
-        sealed class RightImpl : Either<TLeft, TRight>, IEquatable<RightImpl>
+        sealed class RightImpl : Either<TLeft, TRight> 
         {
             public RightImpl(TRight value) : base(value) { }
-
-            //public TRight Value { get { return RightValue; } }
-
-            //public override TResult Switch<TResult>(
-            //    Func<TLeft, TResult> caseLeft,
-            //    Func<TRight, TResult> caseRight)
-            //{
-            //    return caseRight(RightValue);
-            //}
-
-            //public override void Switch(
-            //    Action<TLeft> caseLeft,
-            //    Action<TRight> caseRight)
-            //{
-            //    caseRight(RightValue);
-            //}
-
-            #region IEquatable<Right>
-
-            public bool Equals(RightImpl other)
-            {
-                // REVIEW
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return EqualityComparer<TRight>.Default.Equals(RightValue, other.RightValue);
-            }
-
-            #endregion
-
-            public override bool Equals(object obj)
-            {
-                //if (!(obj is RightImpl)) {
-                //    return false;
-                //}
-
-                return Equals((RightImpl)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return EqualityComparer<TRight>.Default.GetHashCode(RightValue);
-            }
 
             public override string ToString()
             {
                 return String.Format(CultureInfo.CurrentCulture, "Right({0})", RightValue);
             }
         }
-
-        #region IEquatable<Either<TLeft,TRight>>
-
-        public bool Equals(Either<TLeft, TRight> other)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

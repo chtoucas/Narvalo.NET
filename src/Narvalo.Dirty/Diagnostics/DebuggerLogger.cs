@@ -58,7 +58,7 @@
                 case LoggerLevel.None:
                 default:
                     // NB: Normalement on n'arrive jamais là.
-                    throw new InvalidOperationException();
+                    throw new NotSupportedException("Unsupported level.");
             }
         }
 

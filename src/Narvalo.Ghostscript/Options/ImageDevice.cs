@@ -78,7 +78,7 @@
 
                 case ImageFormat.None:
                 default:
-                    throw new ArgumentException("Invalid format.", "format");
+                    throw new NotSupportedException("Unsupported format.");
             }
         }
 

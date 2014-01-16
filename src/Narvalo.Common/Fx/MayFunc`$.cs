@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public static class MayFuncExtensions
     {
@@ -19,7 +18,6 @@
             return _ => @this(_);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<T, Maybe<TResult>> AsFunc<T, TResult>(this MayFunc<T, TResult> @this)
         {
             Requires.Object(@this);

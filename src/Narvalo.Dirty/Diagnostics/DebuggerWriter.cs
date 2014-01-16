@@ -6,7 +6,7 @@
     using System.IO;
     using System.Text;
 
-    // TODO: surcharger les autres méthodes de TextWriter ?
+    // TODO: Surcharger les autres méthodes de TextWriter ?
     public class DebuggerWriter : TextWriter
     {
         static readonly UnicodeEncoding Encoding_

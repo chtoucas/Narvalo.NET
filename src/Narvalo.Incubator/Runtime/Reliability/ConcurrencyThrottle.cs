@@ -20,7 +20,7 @@
             _maxConcurrentRequests = maxConcurrentRequests;
             _timeout = timeout;
 
-            // NB: contrairement à un Semaphore, SemaphoreSlim n'est pas partagé par l'ensemble 
+            // NB: Contrairement à un Semaphore, SemaphoreSlim n'est pas partagé par l'ensemble 
             // des processus de l'hôte.
             _sem = new SemaphoreSlim(maxConcurrentRequests);
         }

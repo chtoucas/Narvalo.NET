@@ -22,7 +22,7 @@
         
         protected override ConfigurationElement CreateNewElement()
         {
-            // NB: on n'utilise pas la contrainte générique new() car cette
+            // NB: On n'utilise pas la contrainte générique new() car cette
             // méthode peut-être surchargée dans une classe dérivée.
             return Activator.CreateInstance<TElement>();
         }

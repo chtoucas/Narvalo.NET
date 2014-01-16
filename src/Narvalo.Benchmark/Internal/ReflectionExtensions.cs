@@ -33,7 +33,7 @@
 
         //public static bool IsStatic(Type type)
         //{
-        //    // NB: at IL level any static class is abstract and sealed.
+        //    // NB: At IL level any static class is abstract and sealed.
         //    return MayGetDefaultConstructor(type).IsNone
         //        && type.IsAbstract 
         //        && type.IsSealed;

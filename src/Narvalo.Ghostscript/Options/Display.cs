@@ -163,7 +163,7 @@
                     }
                     break;
                 default:
-                    break;
+                    throw new NotSupportedException("Unsupported page size.");
             }
         }
 
@@ -258,7 +258,7 @@
 
                 case PaperSize.None:
                 default:
-                    throw new ArgumentException("Invalid paper size.", "paperSize");
+                    throw new NotSupportedException("Unsupported paper size.");
             }
         }
 

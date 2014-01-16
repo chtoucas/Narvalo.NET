@@ -5,7 +5,7 @@
 
     public static class BooleanUtilityTests
     {
-        #region + TryParse +
+        #region > TryParse <
 
         public static class TryParse
         {

@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public abstract class Outcome<T> : EitherBase<Error, T>, IEquatable<Outcome<T>>
+    public abstract class Outcome<T> : EitherBase<Error, T> 
     {
         protected Outcome(Error error) : base(error) { }
 
@@ -20,7 +20,7 @@
         public T ValueOrThrow()
         {
             if (Unsuccessful) {
-                Error.Throw();
+                Error.ThrowException();
             }
             return Value;
         }
@@ -51,7 +51,6 @@
             return new SuccessImpl(value);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
             Requires.NotNull(kun, "kun");
@@ -75,41 +74,14 @@
 
         #endregion
 
-        sealed class FailureImpl : Outcome<T>, IEquatable<FailureImpl>
+        sealed class FailureImpl : Outcome<T>
         {
             public FailureImpl(Error error) : base(error) { }
-
-            #region IEquatable<FailureImpl>
-
-            public bool Equals(FailureImpl other)
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
         }
 
-        sealed class SuccessImpl : Outcome<T>, IEquatable<SuccessImpl>
+        sealed class SuccessImpl : Outcome<T>
         {
             public SuccessImpl(T value) : base(value) { }
-
-            #region IEquatable<SuccessImpl>
-
-            public bool Equals(SuccessImpl other)
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
         }
-
-        #region IEquatable<Outcome<T>>
-
-        public bool Equals(Outcome<T> other)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

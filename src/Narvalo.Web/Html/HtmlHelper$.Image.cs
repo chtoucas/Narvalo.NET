@@ -34,13 +34,13 @@
             return Image(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
-            return ImageHelper_(imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
+            return ImageHelper_(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
         }
 
-        static IHtmlString ImageHelper_(Uri imageUri, string alt, IDictionary<string, object> attributes)
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             Requires.NotNull(imageUri, "imageUri");
 

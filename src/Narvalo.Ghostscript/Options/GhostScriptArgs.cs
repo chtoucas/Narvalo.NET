@@ -43,7 +43,7 @@
 
         public Miscs Miscs { get { return _miscs; } set { _miscs = value; } }
 
-        // TODO: ce paramètre ne devrait-il pas être obligatoire ?
+        // TODO: Ce paramètre ne devrait-il pas être obligatoire ?
         public string OutputFile { get { return _outputFile; } set { _outputFile = value; } }
 
         public Pdf Pdf { get { return _pdf; } set { _pdf = value; } }

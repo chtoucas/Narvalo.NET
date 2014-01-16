@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Text
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Text;
 
@@ -43,8 +42,6 @@
             return new String(arr);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Cr")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Lf")]
         public static string StripCrLf(string value) 
         {
             Requires.NotNull(value, "value");

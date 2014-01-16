@@ -1,11 +1,10 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public static partial class Maybe
     {
-        // XXX: Maybe<Unit>.None ?
+        // REVIEW: Maybe<Unit>.None ?
         public static readonly Maybe<Unit> Unit = default(Maybe<Narvalo.Fx.Unit>);
 
         #region + Create +
@@ -15,18 +14,15 @@
             return Maybe<T>.η(value);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix", MessageId = "T")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "S")]
-        public static Maybe<S> Create<S>(S? value) where S : struct
+        public static Maybe<T> Create<T>(T? value) where T : struct
         {
-            return value.HasValue ? Maybe<S>.η(value.Value) : Maybe<S>.None;
+            return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
 
         #endregion
 
         #region + Join +
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<T> Join<T>(Maybe<Maybe<T>> square)
         {
             return Maybe<T>.μ(square);
@@ -51,7 +47,7 @@
 
         #region + Lift +
 
-        // FIXME: optimize vs constructive
+        // REVIEW: Optimize vs constructive
 
         public static Maybe<TResult> Lift<T, TResult>(
             Func<T, TResult> fun,
@@ -139,32 +135,27 @@
 
         #region + Promote +
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<Maybe<T>, Maybe<TResult>> Promote<T, TResult>(Func<T, TResult> fun)
         {
             return m => Lift(fun, m);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>> Promote<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
             return (m1, m2) => Lift(fun, m1, m2);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>> Promote<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
             return (m1, m2, m3) => Lift(fun, m1, m2, m3);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>> Promote<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
             return (m1, m2, m3, m4) => Lift(fun, m1, m2, m3, m4);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>> Promote<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {

@@ -4,15 +4,41 @@
     <Unrecognized>
     </Unrecognized>
     <Recognized>
+      <!-- Packages -->
       <Word>Narvalo</Word>
       <Word>Autofac</Word>
       
+      <!-- Marques -->
+      <Word>Flickr</Word>
+
+      <!-- Serilog -->
+      <Word>Enricher</Word>
+
+      <!-- ASP.NET -->
       <Word>Mvc</Word>
+      
+      <Word>Manip</Word>
+      
+      <Word>Lorem</Word>
+      <Word>Ipsum</Word>
+
+      <Word>Cr</Word>
+      <Word>Lf</Word>
+      <Word>Png</Word>
+      
+      <Word>Tv</Word>
     </Recognized>
+    
     <Deprecated>
     </Deprecated>
+    
     <Compound>
+      <Term CompoundAlternate="WebPage">webpage</Term>
+      <Term CompoundAlternate="WebSite">website</Term>
+      <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
+      <Term CompoundAlternate="PlainText">plaintext</Term>
     </Compound>
+    
     <DiscreteExceptions>
     </DiscreteExceptions>
   </Words>

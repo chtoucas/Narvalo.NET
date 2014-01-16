@@ -11,7 +11,7 @@
 
         public Range(T lowerEnd, T upperEnd)
         {
-            Requires.LessThanOrEqualTo(lowerEnd, upperEnd, "XXX");
+            Requires.LessThanOrEqualTo(lowerEnd, upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;

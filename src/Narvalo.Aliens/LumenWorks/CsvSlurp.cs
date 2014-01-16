@@ -3,7 +3,6 @@
 namespace Narvalo.LumenWorks
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
     using Narvalo;
@@ -66,7 +65,6 @@ namespace Narvalo.LumenWorks
         /// <summary>
         /// Liste des éléments trouvés.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public IEnumerable<Dictionary<string, string>> Records { get { return _records; } }
 
         public void Parse()
@@ -91,7 +89,6 @@ namespace Narvalo.LumenWorks
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public IEnumerable<Dictionary<string, string>> Read()
         {
             Parse();

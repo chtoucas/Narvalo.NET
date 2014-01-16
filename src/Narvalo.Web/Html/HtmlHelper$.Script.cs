@@ -24,13 +24,13 @@
             return Script(@this, scriptUri, scriptType, TypeUtility.ObjectToDictionary(attributes));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
-            return ScriptHelper_(scriptUri, scriptType, attributes);
+            return ScriptHelper_(@this, scriptUri, scriptType, attributes);
         }
 
-        static IHtmlString ScriptHelper_(Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        static IHtmlString ScriptHelper_(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
             Requires.NotNull(scriptUri, "scriptUri");
 

@@ -24,13 +24,13 @@
             return Link(@this, linkUri, linkType, relation, TypeUtility.ObjectToDictionary(attributes));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
-            return LinkHelper_(linkUri, linkType, relation, attributes);
+            return LinkHelper_(@this, linkUri, linkType, relation, attributes);
         }
 
-        static IHtmlString LinkHelper_(Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
             Requires.NotNull(linkUri, "linkUri");
 

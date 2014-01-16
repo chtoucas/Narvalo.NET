@@ -1,13 +1,12 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
     [Serializable]
     [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Error")]
-    public abstract class Error : EitherBase<Exception, string>, IEquatable<Error>
+    public abstract class Error : EitherBase<Exception, string> 
     {
         protected Error(Exception exception) : base(exception) { }
 
@@ -15,8 +14,7 @@
 
         public abstract string Message { get; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Throw")]
-        public abstract void Throw();
+        public abstract void ThrowException();
 
         public static Error Create(Exception exception)
         {
@@ -38,7 +36,7 @@
             return new RightImpl(errorMessageFactory());
         }
 
-        sealed class LeftImpl : Error, IEquatable<LeftImpl>
+        sealed class LeftImpl : Error
         {
             public LeftImpl(Exception exception) : base(exception) { }
 
@@ -47,7 +45,7 @@
                 get { return LeftValue.Message; }
             }
 
-            public override void Throw()
+            public override void ThrowException()
             {
 #if NET_40
                 throw LeftValue;
@@ -55,22 +53,9 @@
                 ExceptionDispatchInfo.Capture(LeftValue).Throw();
 #endif
             }
-
-            #region IEquatable<LeftImpl>
-
-            public bool Equals(LeftImpl other)
-            {
-                // REVIEW
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return ReferenceEquals(LeftValue, other.LeftValue);
-            }
-
-            #endregion
         }
 
-        sealed class RightImpl : Error, IEquatable<RightImpl>
+        sealed class RightImpl : Error
         {
             public RightImpl(string errorMessage) : base(errorMessage) { }
 
@@ -79,31 +64,10 @@
                 get { return RightValue; }
             }
 
-            public override void Throw()
+            public override void ThrowException()
             {
                 throw new ErrorException(RightValue);
             }
-
-            #region IEquatable<RightImpl>
-
-            public bool Equals(RightImpl other)
-            {
-                if (other == this) { return true; }
-                if (other == null) { return false; }
-
-                return RightValue == other.RightValue;
-            }
-
-            #endregion
         }
-
-        #region IEquatable<Error>
-
-        public bool Equals(Error other)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

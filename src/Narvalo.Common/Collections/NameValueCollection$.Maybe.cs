@@ -1,6 +1,5 @@
 ﻿namespace Narvalo.Collections
 {
-    using System;
     using System.Collections.Specialized;
     using Narvalo;
     using Narvalo.Fx;

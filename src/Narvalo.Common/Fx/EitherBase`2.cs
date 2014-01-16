@@ -33,7 +33,7 @@
             get
             {
                 if (!_isLeft) {
-                    throw new InvalidOperationException("XXX");
+                    throw new InvalidOperationException(SR.EitherBase_RightHasNoLeftValue);
                 }
                 return _left;
             }
@@ -44,18 +44,10 @@
             get
             {
                 if (_isLeft) {
-                    throw new InvalidOperationException("XXX");
+                    throw new InvalidOperationException(SR.EitherBase_LeftHasNoRightValue);
                 }
                 return _right;
             }
         }
-
-        //public abstract TResult Switch<TResult>(
-        //    Func<TLeft, TResult> caseLeft,
-        //    Func<TRight, TResult> caseRight);
-
-        //public abstract void Switch(
-        //    Action<TLeft> caseLeft,
-        //    Action<TRight> caseRight);
     }
 }

@@ -2,12 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     public static partial class Maybe
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IEnumerable<TResult>> Collect<TSource, TResult>(
             IEnumerable<TSource> source,
             MayFunc<TSource, TResult> selectorM)
@@ -73,7 +71,6 @@
 
         #endregion
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IEnumerable<TSource>> Filter<TSource>(
             IEnumerable<TSource> source,
             MayFunc<TSource, bool> predicateM)
@@ -130,7 +127,6 @@
 
         #endregion
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IList<TResult>> Map<TSource, TResult>(
             IEnumerable<TSource> source,
             MayFunc<TSource, TResult> kun)
@@ -143,7 +139,6 @@
             return Sequence(list);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public static Maybe<IList<TSource>> Sequence<TSource>(IEnumerable<Maybe<TSource>> source)
         {
             Requires.NotNull(source, "source");
@@ -159,13 +154,5 @@
 
             return Create(list);
         }
-
-        //public static Maybe<IEnumerable<T3>> Zip<T1, T2, T3>(
-        //    IEnumerable<T1> list1,
-        //    IEnumerable<T2> list2,
-        //    Func<T1, T2, Maybe<T3>> fun)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

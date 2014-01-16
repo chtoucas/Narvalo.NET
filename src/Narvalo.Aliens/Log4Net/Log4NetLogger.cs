@@ -44,8 +44,7 @@
                     break;
                 case LoggerLevel.None:
                 default:
-                    // NB: normalement on n'arrive jamais là.
-                    break;
+                    throw new NotSupportedException("Unsupported level.");
             }
         }
 

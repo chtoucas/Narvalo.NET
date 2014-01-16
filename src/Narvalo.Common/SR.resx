@@ -174,4 +174,19 @@
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme {0} does not support protocol less uri.</value>
   </data>
+  <data name="EitherBase_LeftHasNoRightValue" xml:space="preserve">
+    <value>A left EitherBase has no right value.</value>
+  </data>
+  <data name="EitherBase_RightHasNoLeftValue" xml:space="preserve">
+    <value>A right EitherBase has no left value.</value>
+  </data>
+  <data name="Either_LeftHasNoRightValue" xml:space="preserve">
+    <value>A left Either has no right value.</value>
+  </data>
+  <data name="Either_RightHasNoLeftValue" xml:space="preserve">
+    <value>A right Either has no left value.</value>
+  </data>
+  <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
+    <value>The lower end must be lesser than upper end.</value>
+  </data>
 </root>

@@ -128,13 +128,5 @@
 
             return Create(list);
         }
-
-        //public static Maybe<T3[]> Zip<T1, T2, T3>(
-        //    T1[] list1,
-        //    T2[] list2,
-        //    Func<T1, T2, Maybe<T3>> fun)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

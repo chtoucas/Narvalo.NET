@@ -59,7 +59,7 @@
                     return "-dNOEPS";
                 case Eps.None:
                 default:
-                    throw new ArgumentException("Invalid argument.", "arg");
+                    throw new NotSupportedException("Unsupported eps.");
             }
         }
 
@@ -86,7 +86,7 @@
                     return "-dTTYPAUSE";
                 case Interactions.None:
                 default:
-                    throw new ArgumentException("Invalid argument.", "interactions");
+                    throw new NotSupportedException("Unsupported interactions.");
             }
         }
 
@@ -117,7 +117,7 @@
                     return "-dWRITESYSTEMDICT";
                 case Miscs.None:
                 default:
-                    throw new ArgumentException("Invalid argument.", "miscs");
+                    throw new NotSupportedException("Unsupported miscs.");
             }
         }
 

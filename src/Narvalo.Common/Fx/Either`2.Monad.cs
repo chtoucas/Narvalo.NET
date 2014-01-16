@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, TRight>>
+    public abstract partial class Either<TLeft, TRight>
     {
         public Either<TResult, TResult> Map<TResult>(
             Func<TLeft, TResult> leftSelector,
