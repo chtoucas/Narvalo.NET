@@ -3,7 +3,7 @@
     using System.Configuration;
     using System.Web.Configuration;
 
-    public static class WebConfigurationSectionManager
+    public static class WebSectionManager
     {
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {

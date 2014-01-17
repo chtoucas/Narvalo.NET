@@ -34,7 +34,7 @@
             config.Remove("baseUri");
         }
 
-        //// WARNING: Ne pas utiliser "/img/", par exemple car si _baseUri contient déjà un chemin relatif, il sera ignoré.
+        // WARNING: Ne pas utiliser "/img/", par exemple car si _baseUri contient déjà un chemin relatif, il sera ignoré.
 
         public override Uri GetImage(string relativePath)
         {

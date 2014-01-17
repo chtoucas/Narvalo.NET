@@ -8,36 +8,36 @@
     public static class NameValueCollectionExtensions
     {
         public static Outcome<T> ParseValue<T>(
-            this NameValueCollection nvc,
+            this NameValueCollection @this,
             string param,
             Func<string, Outcome<T>> fun,
             Func<string> missingKeyMessage)
         {
-            Require.Object(nvc);
+            Require.Object(@this);
 
-            return nvc.MayGetValue(param)
+            return @this.MayGetValue(param)
                 .Map(fun)
                 .ValueOrElse(Outcome.Failure<T>(missingKeyMessage));
         }
 
         public static Maybe<Outcome<T>> ParseValue<T>(
-            this NameValueCollection nvc,
+            this NameValueCollection @this,
             string param,
             Func<string, Outcome<T>> fun)
         {
-            Require.Object(nvc);
+            Require.Object(@this);
 
-            return nvc.MayGetValue(param).Map(fun);
+            return @this.MayGetValue(param).Map(fun);
         }
 
         public static Outcome<Maybe<T>> ParseSomeValue<T>(
-            this NameValueCollection nvc,
+            this NameValueCollection @this,
             string param,
             MayFunc<string, T> fun)
         {
-            Require.Object(nvc);
+            Require.Object(@this);
 
-            var value = nvc.MayGetValue(param);
+            var value = @this.MayGetValue(param);
 
             if (value.IsNone) {
                 return Outcome.Success(Maybe<T>.None);

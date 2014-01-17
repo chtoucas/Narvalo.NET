@@ -12,7 +12,7 @@
     {
         static Lazy<bool> EnableWhiteSpaceBusting_ = new Lazy<bool>(() =>
         {
-            return NarvaloWebConfigurationManager.GetOptimizationSection().EnableWhiteSpaceBusting;
+            return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting;
         });
 
         /// <summary>

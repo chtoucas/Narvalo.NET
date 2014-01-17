@@ -112,9 +112,9 @@
         {
             if (_isSome != other._isSome) { return false; }
             return
-                //// Les deux options sont vides.
+                // Les deux options sont vides.
                 !_isSome
-                //// Les deux options ont la même valeur.
+                // Les deux options ont la même valeur.
                 || _value.Equals(other._value);
         }
 

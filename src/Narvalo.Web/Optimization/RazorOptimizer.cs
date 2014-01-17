@@ -66,9 +66,9 @@
                     continue;
                 }
 
-                //// FIXME: On perd toute information contextuelle
-                ////builder.Accept(new HtmlSymbol(
-                ////    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
+                // FIXME: On perd toute information contextuelle
+                //builder.Accept(new HtmlSymbol(
+                //    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
                 builder.Accept(new OptimizedSymbol { Content = OptimizeContent_(sym, prevType) });
                 prevType = sym.Type;
             }

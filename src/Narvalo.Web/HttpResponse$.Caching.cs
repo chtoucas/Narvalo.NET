@@ -3,9 +3,9 @@
     using System;
     using System.Web;
 
-    ////@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
-    ////@this.Cache.SetOmitVaryStar(true);
-    ////@this.Cache.SetValidUntilExpires(true);
+    //@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
+    //@this.Cache.SetOmitVaryStar(true);
+    //@this.Cache.SetValidUntilExpires(true);
 
     public static partial class HttpResponseExtensions
     {
@@ -42,7 +42,7 @@
         {
             Require.Object(@this);
 
-            ////@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+            //@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             @this.Cache.SetCacheability(HttpCacheability.Private);
             @this.CacheFor_(duration);
         }

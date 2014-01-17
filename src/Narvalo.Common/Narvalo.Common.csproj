@@ -158,11 +158,12 @@
     <Compile Include="Collections\Enumerable`1%24.Maybe.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\Dictionary`2%24.Maybe.cs" />
+    <Compile Include="Collections\Enumerator`1%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.Maybe.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\Configuration%24.cs" />
-    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
+    <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Data\NonQueryStoredProcedure.cs" />
     <Compile Include="Data\SqlCommand%24.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Fx\Maybe.Enumerable.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Fx\MayFunc.cs" />
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs" />

@@ -32,8 +32,8 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            //// FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
-            //// Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
+            // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
+            // Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
 
             Check.IsEnum(typeof(TEnum));
 
@@ -94,7 +94,7 @@
         public static bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result)
             where TEnum : struct
         {
-            //// FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
+            // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
 
             __Asserts.IsEnum(typeof(TEnum));
 

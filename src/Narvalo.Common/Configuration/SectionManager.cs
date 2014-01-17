@@ -5,9 +5,9 @@
     using System.IO;
 
     /// <summary>
-    /// Fournit des méthodes permettant d'accéder aux fichiers de configuration.
+    /// Fournit des méthodes permettant d'accéder aux sections d'un fichier de configuration.
     /// </summary>
-    public static class ConfigurationSectionManager
+    public static class SectionManager
     {
         /// <summary>
         /// Récupére une section pour la configuration par défaut de l'application courante.

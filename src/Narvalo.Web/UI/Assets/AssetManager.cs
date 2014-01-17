@@ -68,7 +68,7 @@
                     return;
                 }
 
-                var section = NarvaloWebConfigurationManager.GetAssetSection();
+                var section = NarvaloWebConfigurationManager.AssetSection;
 
                 InitProviders_(section);
                 InitDefaultProvider_(section);

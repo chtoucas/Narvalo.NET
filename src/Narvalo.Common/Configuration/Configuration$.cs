@@ -2,6 +2,9 @@
 {
     using System.Configuration;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Configuration.Configuration"/>.
+    /// </summary>
     public static class ConfigurationExtensions
     {
         public static T GetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection

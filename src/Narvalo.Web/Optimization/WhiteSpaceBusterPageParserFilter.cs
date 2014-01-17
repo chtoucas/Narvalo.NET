@@ -20,7 +20,7 @@
 
         static Lazy<bool> EnableWhiteSpaceBusting_ = new Lazy<bool>(() =>
         {
-            return NarvaloWebConfigurationManager.GetOptimizationSection().EnableWhiteSpaceBusting;
+            return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting;
         });
 
         // Par défaut, le filtre n'est pas actif.

@@ -556,7 +556,7 @@
             return @this.MayGetInt64(@this.GetOrdinal(name));
         }
 
-        //// NB: Pas de méthode GetMoney(this SqlDataReader @this, string name)
+        // NB: Pas de méthode GetMoney(this SqlDataReader @this, string name)
 
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
@@ -645,7 +645,7 @@
             return @this.MayGetString(@this.GetOrdinal(name));
         }
 
-        //// NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
+        // NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {

@@ -5,8 +5,6 @@
 
     public interface IOpenGraphMetadata
     {
-        //// > Propriétés obligatoires <
-
         OpenGraphImage Image { get; set; }
         
         string Title { get; }
@@ -14,8 +12,6 @@
         string Type { get; set; }
         
         Uri Url { get; }
-
-        //// > Propriétés facultatives <
 
         string Description { get; }
         
@@ -26,8 +22,6 @@
         IEnumerable<OpenGraphLocale> AlternativeLocales { get; }
 
         string SiteName { get; set; }
-
-        //// > Méthodes <
 
         void AddAlternativeLocale(OpenGraphLocale locale);
         
