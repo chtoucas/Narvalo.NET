@@ -6,6 +6,9 @@
     using System.Xml.Linq;
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Xml.Linq.XAttribute"/>.
+    /// </summary>
     public static class XAttributeExtensions
     {
         public static T ParseValue<T>(this XAttribute @this, Func<string, T> fun)

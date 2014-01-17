@@ -4,6 +4,9 @@
     using System.Data.SqlTypes;
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour les types de données natifs dans SQL Server.
+    /// </summary>
     public static class SqlTypesExtensions
     {
         public static Maybe<byte[]> ToMaybe(this SqlBinary @this)

@@ -3,7 +3,6 @@
     using System;
 
     [Flags]
-    [Serializable]
     public enum BooleanStyles
     {
         None = 0,

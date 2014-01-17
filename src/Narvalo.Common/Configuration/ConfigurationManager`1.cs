@@ -5,6 +5,10 @@
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
+    /// <summary>
+    /// Fournit des méthodes permettant d'accéder aux fichiers de configuration.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public static class ConfigurationManager<T> where T : ConfigurationSection
     {
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]

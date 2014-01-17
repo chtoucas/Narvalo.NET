@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.MayFunc{T}"/>.
+    /// </summary>
     public static class MayFuncExtensions
     {
         public static Action AsAction(this MayFunc<Unit> @this)

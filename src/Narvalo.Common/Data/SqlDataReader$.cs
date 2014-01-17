@@ -5,6 +5,9 @@
     using Narvalo;
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlDataReader"/>.
+    /// </summary>
     public static class SqlDataReaderExtensions
     {
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)

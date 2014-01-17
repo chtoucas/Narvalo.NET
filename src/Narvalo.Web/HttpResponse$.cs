@@ -12,8 +12,6 @@
         //    context.ApplicationInstance.CompleteRequest();
         //}
 
-        #region Content-type shortcuts
-
         //public static void SendJson(this HttpResponse @this, object content)
         //{
         //    Requires.Object(@this);
@@ -33,8 +31,6 @@
             @this.ContentType = "text/plain";
             @this.Write(content);
         }
-
-        #endregion
 
         public static void SetStatusCode(this HttpResponse @this, HttpStatusCode statusCode)
         {

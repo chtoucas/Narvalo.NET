@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.Maybe{T}"/>.
+    /// </summary>
     public static class MaybeExtensions
     {
         // REVIEW

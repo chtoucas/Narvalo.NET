@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Collections.Generic.IEnumerable{T}"/>.
+    /// </summary>
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<T> Append<T>(this IEnumerable<T> @this, T element)

@@ -4,6 +4,9 @@
     using System.Data.SqlClient;
     using Narvalo;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlCommand"/>.
+    /// </summary>
     public static class SqlCommandExtensions
     {
         public static void AddParameter(

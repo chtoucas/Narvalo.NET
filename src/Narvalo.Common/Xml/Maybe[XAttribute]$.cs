@@ -4,6 +4,9 @@
     using System.Xml.Linq;
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour Maybe&lt;XAttribute&gt;.
+    /// </summary>
     public static class MaybeXAttributeExtensions
     {
         public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> fun)

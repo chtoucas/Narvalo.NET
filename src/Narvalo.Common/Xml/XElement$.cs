@@ -6,6 +6,9 @@
     using System.Xml.Linq;
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Fournit des méthodes d'extension pour <see cref="System.Xml.Linq.XElement"/>.
+    /// </summary>
     public static class XElementExtensions
     {
         public static Maybe<XAttribute> AttributeOrNone(this XElement @this, string name)
