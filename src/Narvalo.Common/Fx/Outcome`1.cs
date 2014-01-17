@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
     public abstract class Outcome<T> : EitherBase<Exception, T> 
@@ -34,17 +33,17 @@
 
         internal static Outcome<T> Failure(Exception ex)
         {
-            return new FailureImpl(ex);
+            return new FailureCore(ex);
         }
 
         internal static Outcome<T> Failure(string errorMessage)
         {
-            return new FailureImpl(new OutcomeException(errorMessage));
+            return new FailureCore(new OutcomeException(errorMessage));
         }
 
         internal static Outcome<T> Success(T value)
         {
-            return new SuccessImpl(value);
+            return new SuccessCore(value);
         }
 
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
@@ -70,14 +69,14 @@
 
         #endregion
 
-        sealed class FailureImpl : Outcome<T>
+        sealed class FailureCore : Outcome<T>
         {
-            public FailureImpl(Exception exception) : base(exception) { }
+            public FailureCore(Exception exception) : base(exception) { }
         }
 
-        sealed class SuccessImpl : Outcome<T>
+        sealed class SuccessCore : Outcome<T>
         {
-            public SuccessImpl(T value) : base(value) { }
+            public SuccessCore(T value) : base(value) { }
         }
     }
 }

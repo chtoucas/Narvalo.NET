@@ -24,9 +24,9 @@
             base.ParseComplete(rootBuilder);
         }
 
-        void TransformRecursively_(ControlBuilder cb)
+        void TransformRecursively_(ControlBuilder controlBuilder)
         {
-            ArrayList subBuilders = cb.SubBuilders;
+            ArrayList subBuilders = controlBuilder.SubBuilders;
 
             for (int i = 0; i < subBuilders.Count; i++) {
                 var subBuilder = subBuilders[i];
@@ -39,21 +39,21 @@
                     continue;
                 }
 
-                var controlBuilder = subBuilder as ControlBuilder;
-                if (controlBuilder != null) {
-                    TransformRecursively_(controlBuilder);
+                var controlSubBuilder = subBuilder as ControlBuilder;
+                if (controlSubBuilder != null) {
+                    TransformRecursively_(controlSubBuilder);
                 }
             }
 
-            foreach (TemplatePropertyEntry entry in cb.TemplatePropertyEntries) {
+            foreach (TemplatePropertyEntry entry in controlBuilder.TemplatePropertyEntries) {
                 TransformRecursively_(entry.Builder);
             }
 
-            foreach (ComplexPropertyEntry entry in cb.ComplexPropertyEntries) {
+            foreach (ComplexPropertyEntry entry in controlBuilder.ComplexPropertyEntries) {
                 TransformRecursively_(entry.Builder);
             }
 
-            ControlBuilder defaultPropertyBuilder = cb.GetDefaultPropertyBuilder();
+            ControlBuilder defaultPropertyBuilder = controlBuilder.GetDefaultPropertyBuilder();
             if (defaultPropertyBuilder != null) {
                 TransformRecursively_(defaultPropertyBuilder);
             }

@@ -14,7 +14,7 @@
   <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
   <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
   <Spelling Locale="en-US" />
-  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <OverrideRuleVisibilities>True</OverrideRuleVisibilities>
   <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True">
    <CustomDictionary Path="../etc/CodeAnalysisDictionary.xml" />
   </CustomDictionaries>

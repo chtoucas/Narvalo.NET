@@ -5,21 +5,21 @@
 
     public static partial class EnumerableExtensions
     {
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T element)
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> @this, T element)
         {
-            Requires.NotNull(source, "source");
+            Requires.Object(@this);
 
-            return AppendImpl(source, element);
+            return Append_(@this, element);
         }
 
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> source, T element)
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> @this, T element)
         {
-            Requires.NotNull(source, "source");
+            Requires.Object(@this);
 
-            return PrependImpl(source, element);
+            return Prepend_(@this, element);
         }
 
-        static IEnumerable<T> PrependImpl<T>(IEnumerable<T> source, T element)
+        static IEnumerable<T> Prepend_<T>(IEnumerable<T> source, T element)
         {
             yield return element;
             foreach (var item in source) {
@@ -27,7 +27,7 @@
             }
         }
 
-        static IEnumerable<T> AppendImpl<T>(IEnumerable<T> source, T element)
+        static IEnumerable<T> Append_<T>(IEnumerable<T> source, T element)
         {
             foreach (var item in source) {
                 yield return item;

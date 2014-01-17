@@ -9,7 +9,7 @@
     public class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
     {
         // Pour rappel, \s est un alias pour [\f\n\r\t\v].
-        static readonly Regex MutipleWhiteSpacesRegex_
+        static readonly Regex MultipleWhiteSpacesRegex_
             = new Regex(@"\s{2,}", RegexOptions.Compiled);
         static readonly Regex LeadingWhiteSpacesThenLeftAngleBracketRegex_
             = new Regex(@"^\s+<", RegexOptions.Compiled);
@@ -35,7 +35,7 @@
                 return String.Empty;
             }
 
-            string result = MutipleWhiteSpacesRegex_.Replace(value, String.Empty);
+            string result = MultipleWhiteSpacesRegex_.Replace(value, String.Empty);
             result = LeadingWhiteSpacesThenLeftAngleBracketRegex_.Replace(result, "<");
             result = TrailingRightAngleBracketThenWhiteSpacesRegex_.Replace(result, ">");
 

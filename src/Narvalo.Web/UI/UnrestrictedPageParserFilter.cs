@@ -7,39 +7,39 @@
     {
         protected UnrestrictedPageParserFilter() : base() { }
 
-        public override bool AllowCode { get { return true; } }
+        public sealed override bool AllowCode { get { return true; } }
 
-        public override int NumberOfControlsAllowed
+        public sealed override int NumberOfControlsAllowed
         {
             get { return PageParserFilterConstants.UnlimitedNumber; }
         }
 
-        public override int NumberOfDirectDependenciesAllowed
+        public sealed override int NumberOfDirectDependenciesAllowed
         {
             get { return PageParserFilterConstants.UnlimitedNumber; }
         }
 
-        public override int TotalNumberOfDependenciesAllowed
+        public sealed override int TotalNumberOfDependenciesAllowed
         {
             get { return PageParserFilterConstants.UnlimitedNumber; }
         }
 
-        public override bool AllowBaseType(Type baseType)
+        public sealed override bool AllowBaseType(Type baseType)
         {
             return true;
         }
 
-        public override bool AllowControl(Type controlType, ControlBuilder builder)
+        public sealed override bool AllowControl(Type controlType, ControlBuilder builder)
         {
             return true;
         }
 
-        public override bool AllowServerSideInclude(string includeVirtualPath)
+        public sealed override bool AllowServerSideInclude(string includeVirtualPath)
         {
             return true;
         }
 
-        public override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType)
+        public sealed override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType)
         {
             return true;
         }

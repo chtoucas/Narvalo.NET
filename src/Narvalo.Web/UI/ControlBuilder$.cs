@@ -21,7 +21,7 @@
 
     public static class ControlBuilderExtensions
     {
-        const BindingFlags BindingAttr_
+        const BindingFlags BindingAttribute_
             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder @this)
@@ -32,7 +32,7 @@
             Type type = @this.GetType();
 
             while (type != null
-                   && (pi = type.GetProperty("DefaultPropertyBuilder", BindingAttr_)) == null) {
+                   && (pi = type.GetProperty("DefaultPropertyBuilder", BindingAttribute_)) == null) {
                 type = type.BaseType;
             }
 

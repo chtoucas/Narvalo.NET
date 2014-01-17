@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Dictionary>
   <Words>
     <Unrecognized>
     </Unrecognized>
     <Recognized>
-      <!-- Packages -->
+      <!-- Espaces de noms -->
       <Word>Narvalo</Word>
       <Word>Autofac</Word>
       
@@ -16,16 +16,17 @@
 
       <!-- ASP.NET -->
       <Word>Mvc</Word>
-      
-      <Word>Manip</Word>
-      
-      <Word>Lorem</Word>
-      <Word>Ipsum</Word>
 
+      <!-- Abréviations -->
+      <!--<Word>Impl</Word>-->
+      <Word>Manip</Word>
       <Word>Cr</Word>
       <Word>Lf</Word>
+
+       <!-- Termes communs -->
+      <Word>Ipsum</Word>
+      <Word>Lorem</Word>
       <Word>Png</Word>
-      
       <Word>Tv</Word>
     </Recognized>
     

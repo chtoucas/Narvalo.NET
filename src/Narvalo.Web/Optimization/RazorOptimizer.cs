@@ -110,13 +110,13 @@
             return span != null && span.Kind == SpanKind.Markup;
         }
 
-        static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int i)
+        static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
             var sb = new StringBuilder(content);
 
             // WARNING: On est succeptible de modifier la collection currentBlock.Children,
             // on ne peut donc pas mettre en cache la valeur de currentBlock.Children.Count.
-            var j = i + 1;
+            var j = currentIndex + 1;
             while (j < block.Children.Count) {
                 var nextSpan = block.Children[j] as Span;
 
@@ -135,7 +135,7 @@
                 block.Children.RemoveAt(j);
 
                 // On incrémente la position.
-                i = j;
+                currentIndex = j;
                 j++;
             }
 
@@ -147,11 +147,11 @@
             return _buster.Bust(content);
         }
 
-        string OptimizeContent_(HtmlSymbol sym, HtmlSymbolType prevType)
+        string OptimizeContent_(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
             string content;
 
-            if (sym.Type == HtmlSymbolType.WhiteSpace && prevType == HtmlSymbolType.NewLine) {
+            if (sym.Type == HtmlSymbolType.WhiteSpace && previousType == HtmlSymbolType.NewLine) {
                 // Si le symbole n'est constitué que d'espace blancs et le symbole
                 // précédent est un retour à la ligne, on peut vider son contenu.
                 content = String.Empty;

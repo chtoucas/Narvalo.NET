@@ -38,9 +38,8 @@
                 HandleBindingFailure(context.Response, outcome.Exception);
                 return;
             }
-            var query = outcome.Value;
 
-            ProcessRequestCore(context, query);
+            ProcessRequestCore(context, outcome.Value);
         }
     }
 }
