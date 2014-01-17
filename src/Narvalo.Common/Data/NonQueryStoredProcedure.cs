@@ -19,6 +19,7 @@
         }
 
         protected string ConnectionString { get { return _connectionString; } }
+        
         protected string Name { get { return _name; } }
 
         public int Execute(TParameters parameters)
@@ -37,7 +38,7 @@
             return result;
         }
 
-        protected virtual void PrepareCommand(SqlCommand command, TParameters parameters) { ; }
+        protected virtual void PrepareCommand(SqlCommand command, TParameters parameters) { }
 
         protected virtual SqlConnection CreateConnection()
         {

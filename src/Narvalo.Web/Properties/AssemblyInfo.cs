@@ -6,6 +6,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("88d199e9-8029-4c28-93f2-535bb196b06d")]
 
-//[assembly: TypeForwardedTo(typeof(System.Web.Mvc.TagBuilder))]
-//[assembly: TypeForwardedTo(typeof(System.Web.Mvc.TagRenderMode))]
-//[assembly: TypeForwardedTo(typeof(System.Web.Mvc.HttpAntiForgeryException))]
+////[assembly: TypeForwardedTo(typeof(System.Web.Mvc.TagBuilder))]
+////[assembly: TypeForwardedTo(typeof(System.Web.Mvc.TagRenderMode))]
+////[assembly: TypeForwardedTo(typeof(System.Web.Mvc.HttpAntiForgeryException))]

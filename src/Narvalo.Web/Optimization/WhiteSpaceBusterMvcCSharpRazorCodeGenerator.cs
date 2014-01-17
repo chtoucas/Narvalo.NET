@@ -1,8 +1,8 @@
-﻿namespace Narvalo.Web.Optimization
-{
-    // Cette classe est inspirée de MvcCSharpRazorCodeGenerator.
-    // Il faut donc synchroniser celle-ci à chaque nouvelle version de ASP.NET MVC.
+﻿// Cette classe est inspirée de MvcCSharpRazorCodeGenerator.
+// Il faut donc synchroniser celle-ci à chaque nouvelle version de ASP.NET MVC.
 
+namespace Narvalo.Web.Optimization
+{
     using System.CodeDom;
     using System.Web.Mvc.Razor;
     using System.Web.Razor;

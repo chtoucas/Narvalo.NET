@@ -27,9 +27,11 @@
             if (req.UrlReferrer != null) {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UrlReferrer", req.UrlReferrer.ToString()));
             }
+            
             if (!String.IsNullOrEmpty(req.UserHostAddress)) {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UserHostAddress", req.UserHostAddress));
             }
+            
             logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UserAgent", req.UserAgent));
         }
 

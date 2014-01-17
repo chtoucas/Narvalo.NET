@@ -47,8 +47,6 @@
 
         #region + Lift +
 
-        // REVIEW: Optimize vs constructive
-
         public static Maybe<TResult> Lift<T, TResult>(
             Func<T, TResult> fun,
             Maybe<T> option)
@@ -68,10 +66,6 @@
             return option1.IsSome && option2.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value))
                 : Maybe<TResult>.None;
-
-            //MayFunc<T1, TResult> g = t1 => Lift(t2 => fun(t1, t2), option2);
-
-            //return option1.Bind(g);
         }
 
         public static Maybe<TResult> Lift<T1, T2, T3, TResult>(
@@ -85,11 +79,6 @@
             return option1.IsSome && option2.IsSome && option3.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value))
                 : Maybe<TResult>.None;
-
-            //MayFunc<T1, TResult> g
-            //    = t1 => Lift((y, z) => fun(t1, y, z), option2, option3);
-
-            //return option1.Bind(g);
         }
 
         public static Maybe<TResult> Lift<T1, T2, T3, T4, TResult>(
@@ -104,11 +93,6 @@
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value))
                 : Maybe<TResult>.None;
-
-            //MayFunc<T1, TResult> g
-            //    = t1 => Lift((y, z, t) => fun(t1, y, z, t), option2, option3, option4);
-
-            //return option1.Bind(g);
         }
 
         public static Maybe<TResult> Lift<T1, T2, T3, T4, T5, TResult>(
@@ -124,11 +108,6 @@
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome && option5.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value, option5.Value))
                 : Maybe<TResult>.None;
-
-            //MayFunc<T1, TResult> g
-            //    = t1 => Lift((y, z, t, u) => fun(t1, y, z, t, u), option2, option3, option4, option5);
-
-            //return option1.Bind(g);
         }
 
         #endregion

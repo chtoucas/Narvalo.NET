@@ -10,10 +10,18 @@
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
         static ConfigurationProperty DefaultProvider_
-            = new ConfigurationProperty("defaultProvider", typeof(String), "DefaultAssetProvider",
-               null, new StringValidator(1), ConfigurationPropertyOptions.None);
+            = new ConfigurationProperty(
+                "defaultProvider", 
+                typeof(String), 
+                "DefaultAssetProvider",
+               null, 
+               new StringValidator(1), 
+               ConfigurationPropertyOptions.None);
+        
         static ConfigurationProperty Providers_
-            = new ConfigurationProperty("providers", typeof(ProviderSettingsCollection));
+            = new ConfigurationProperty(
+                "providers", 
+                typeof(ProviderSettingsCollection));
 
         string _defaultProvider;
         ProviderSettingsCollection _providers;
@@ -32,15 +40,27 @@
 
         public string DefaultProvider
         {
-            get { return _defaultProviderSet ? _defaultProvider : (string)base[DefaultProvider_]; }
-            set { _defaultProvider = value; _defaultProviderSet = true; }
+            get { 
+                return _defaultProviderSet ? _defaultProvider : (string)base[DefaultProvider_]; 
+            }
+            
+            set { 
+                _defaultProvider = value; 
+                _defaultProviderSet = true; 
+            }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "ProviderSettingsCollection précède les classes génériques.")]
         public ProviderSettingsCollection Providers
         {
-            get { return _providersSet ? _providers : (ProviderSettingsCollection)base[Providers_]; }
-            set { _providers = value; _providersSet = true; }
+            get { 
+                return _providersSet ? _providers : (ProviderSettingsCollection)base[Providers_];
+            }
+            
+            set { 
+                _providers = value; 
+                _providersSet = true; 
+            }
         }
 
         protected override ConfigurationPropertyCollection Properties

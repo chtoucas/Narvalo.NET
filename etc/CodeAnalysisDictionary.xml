@@ -7,7 +7,7 @@
       <!-- Espaces de noms -->
       <Word>Narvalo</Word>
       <Word>Autofac</Word>
-      
+
       <!-- Marques -->
       <Word>Flickr</Word>
 
@@ -18,33 +18,36 @@
       <Word>Mvc</Word>
 
       <!-- Abréviations -->
-      <!--<Word>Impl</Word>-->
       <Word>Manip</Word>
       <Word>Cr</Word>
       <Word>Lf</Word>
+      <Word>η</Word>
+      <Word>μ</Word>
 
-       <!-- Termes communs -->
+      <!-- Termes communs -->
       <Word>Ipsum</Word>
       <Word>Lorem</Word>
       <Word>Png</Word>
       <Word>Tv</Word>
     </Recognized>
-    
+
     <Deprecated>
     </Deprecated>
-    
+
     <Compound>
       <Term CompoundAlternate="WebPage">webpage</Term>
       <Term CompoundAlternate="WebSite">website</Term>
       <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
       <Term CompoundAlternate="PlainText">plaintext</Term>
     </Compound>
-    
+
     <DiscreteExceptions>
     </DiscreteExceptions>
   </Words>
   <Acronyms>
     <CasingExceptions>
+      <Acronym>η</Acronym>
+      <Acronym>μ</Acronym>
     </CasingExceptions>
   </Acronyms>
 </Dictionary>

@@ -17,6 +17,16 @@
 
         public CultureInfo Culture { get { return _culture; } }
 
+        public static bool operator ==(OpenGraphLocale left, OpenGraphLocale right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(OpenGraphLocale left, OpenGraphLocale right)
+        {
+            return !left.Equals(right);
+        }
+
         public override string ToString()
         {
             return _culture.ToString().Replace('-', '_');
@@ -30,16 +40,6 @@
         }
 
         #endregion
-
-        public static bool operator ==(OpenGraphLocale left, OpenGraphLocale right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(OpenGraphLocale left, OpenGraphLocale right)
-        {
-            return !left.Equals(right);
-        }
 
         public override bool Equals(object obj)
         {

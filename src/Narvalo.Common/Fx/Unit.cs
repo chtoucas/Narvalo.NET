@@ -8,6 +8,22 @@
     {
         public static readonly Unit Single = new Unit();
 
+        /// <summary />
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        public static bool operator ==(Unit left, Unit right)
+        {
+            return true;
+        }
+
+        /// <summary />
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        public static bool operator !=(Unit left, Unit right)
+        {
+            return false;
+        }
+
         #region IEquatable<Unit>
 
         public bool Equals(Unit other)
@@ -18,25 +34,9 @@
         #endregion
 
         /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
-        public static bool operator ==(Unit left, Unit right)
-        {
-            return true;
-        }
-
-        /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
-        public static bool operator !=(Unit left, Unit right)
-        {
-            return false;
-        }
-
-        /// <summary />
         public override bool Equals(object obj)
         {
-            return (obj is Unit);
+            return obj is Unit;
         }
 
         /// <summary />

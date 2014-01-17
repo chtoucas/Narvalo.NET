@@ -7,9 +7,9 @@
     /// <example>
     /// <code>
     /// public enum MyEnum {
-    ///		Default = 0,
-    ///		ActualValue = 1,
-    ///	}
+    ///  Default = 0,
+    ///  ActualValue = 1,
+    /// }
     /// </code>
     /// </example>
     public static class EnumUtility
@@ -18,36 +18,34 @@
 
         /// <example>
         /// <code>
-        ///	Maybe&lt;MyEnum&gt; value = EnumUtility.MayConvert&lt;MyEnum&gt;(1);
+        /// Maybe&lt;MyEnum&gt; value = EnumUtility.MayConvert&lt;MyEnum&gt;(1);
         /// </code>
         /// </example>
         public static Maybe<TEnum> MayConvert<TEnum>(object value) where TEnum : struct
         {
             TEnum result;
-            if (!TryConvert<TEnum>(value, out result))
-            {
+            if (!TryConvert<TEnum>(value, out result)) {
                 return Maybe<TEnum>.None;
             }
+            
             return Maybe.Create(result);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
-            // Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
+            //// FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
+            //// Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
 
             Asserts.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 
-            if (Enum.IsDefined(typeof(TEnum), value))
-            {
+            if (Enum.IsDefined(typeof(TEnum), value)) {
                 result = (TEnum)Enum.ToObject(typeof(TEnum), value);
                 return true;
             }
-            else
-            {
+            else {
                 return false;
             }
         }
@@ -58,7 +56,7 @@
 
         /// <example>
         /// <code>
-        ///	MyEnum value = EnumUtility.Parse&lt;MyEnum&gt;("ActualValue");
+        /// MyEnum value = EnumUtility.Parse&lt;MyEnum&gt;("ActualValue");
         /// </code>
         /// </example>
         public static TEnum Parse<TEnum>(string value) where TEnum : struct
@@ -68,9 +66,9 @@
 
         /// <example>
         /// <code>
-        ///	MyEnum value = EnumUtility.Parse&lt;MyEnum&gt;("actualvalue", true /* ignoreCase */);
+        /// MyEnum value = EnumUtility.Parse&lt;MyEnum&gt;("actualvalue", true /* ignoreCase */);
         /// </code>
-        /// </example>    	
+        /// </example>
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             Asserts.IsEnum(typeof(TEnum));

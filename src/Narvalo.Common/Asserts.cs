@@ -10,7 +10,7 @@
         {
             Requires.NotNull(type, "type");
 
-            Debug.Assert(type.IsEnum);
+            Debug.Assert(type.IsEnum, SR.Asserts_TypeMustBeEnum);
         }
 
         [Conditional("DEBUG")]
@@ -18,7 +18,7 @@
         {
             Requires.NotNull(type, "type");
 
-            Debug.Assert(type.IsValueType);
+            Debug.Assert(type.IsValueType, SR.Asserts_TypeMustBeValueType);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Narvalo
             if (@this == null) {
                 throw new ArgumentNullException("this", SR.Requires_ObjectNull);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -29,6 +30,7 @@ namespace Narvalo
             if (value == null) {
                 throw new ArgumentNullException("value", SR.Requires_PropertyNull);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -41,6 +43,7 @@ namespace Narvalo
             if (value.Length == 0) {
                 throw new ArgumentException(SR.Requires_PropertyEmpty, "value");
             }
+            
             Contract.EndContractBlock();
         }
 
@@ -51,6 +54,7 @@ namespace Narvalo
             if (value == null) {
                 throw Failure.ArgumentNull(parameterName, SR.Requires_ArgumentNullFormat, parameterName);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -63,6 +67,7 @@ namespace Narvalo
             if (value.Length == 0) {
                 throw Failure.Argument(parameterName, SR.Requires_ArgumentEmptyFormat, parameterName);
             }
+            
             Contract.EndContractBlock();
         }
 
@@ -82,6 +87,7 @@ namespace Narvalo
                     minValue,
                     maxValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -97,6 +103,7 @@ namespace Narvalo
                     minValue,
                     maxValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -113,6 +120,7 @@ namespace Narvalo
                     range.LowerEnd,
                     range.UpperEnd);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -131,6 +139,7 @@ namespace Narvalo
                     SR.Requires_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -145,6 +154,7 @@ namespace Narvalo
                     SR.Requires_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -160,6 +170,7 @@ namespace Narvalo
                     SR.Requires_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -178,6 +189,7 @@ namespace Narvalo
                     SR.Requires_NotLessThanOrEqualToFormat,
                     maxValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -192,6 +204,7 @@ namespace Narvalo
                     SR.Requires_NotLessThanOrEqualToFormat,
                     maxValue);
             }
+
             Contract.EndContractBlock();
         }
 
@@ -207,6 +220,7 @@ namespace Narvalo
                     SR.Requires_NotLessThanOrEqualToFormat,
                     maxValue);
             }
+
             Contract.EndContractBlock();
         }
 

@@ -19,6 +19,5 @@
 
             return new HtmlString(@this.ToString(renderMode));
         }
-
     }
 }

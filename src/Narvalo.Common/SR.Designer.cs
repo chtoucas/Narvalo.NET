@@ -70,6 +70,24 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type must be of enum type..
+        /// </summary>
+        internal static string Asserts_TypeMustBeEnum {
+            get {
+                return ResourceManager.GetString("Asserts_TypeMustBeEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type must be a value type..
+        /// </summary>
+        internal static string Asserts_TypeMustBeValueType {
+            get {
+                return ResourceManager.GetString("Asserts_TypeMustBeValueType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string ConfigurationManager_MissingSectionFormat {

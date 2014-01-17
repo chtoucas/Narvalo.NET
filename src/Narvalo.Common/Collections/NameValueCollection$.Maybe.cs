@@ -14,9 +14,9 @@
             Requires.Object(@this);
 
             return @this.MayGetValues(name)
-                // On ne s'attend à ne récupérer qu'une seule valeur.
+                //// On ne s'attend à ne récupérer qu'une seule valeur.
                 .Filter(@_ => @_.Length == 1)
-                // Si la condition précédente est satisfaite, on sélectionne l'unique élément du tableau.
+                //// Si la condition précédente est satisfaite, on sélectionne l'unique élément du tableau.
                 .Map(@_ => @_[0]);
         }
 

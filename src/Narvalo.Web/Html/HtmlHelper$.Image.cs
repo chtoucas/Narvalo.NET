@@ -39,7 +39,7 @@
             return ImageHelper_(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
         static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             Requires.NotNull(imageUri, "imageUri");

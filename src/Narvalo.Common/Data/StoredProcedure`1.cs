@@ -27,9 +27,8 @@
         }
 
         protected string ConnectionString { get { return _connectionString; } }
+        
         protected string Name { get { return _name; } }
-
-        protected abstract TResult Execute(SqlDataReader reader);
 
         public TResult Execute()
         {
@@ -50,7 +49,9 @@
             return result;
         }
 
-        protected virtual void PrepareCommand(SqlCommand command) { ; }
+        protected abstract TResult Execute(SqlDataReader reader);
+
+        protected virtual void PrepareCommand(SqlCommand command) { }
 
         protected virtual SqlConnection CreateConnection()
         {

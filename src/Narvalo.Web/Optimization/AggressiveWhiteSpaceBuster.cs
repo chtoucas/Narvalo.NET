@@ -11,8 +11,10 @@
         // Pour rappel, \s est un alias pour [\f\n\r\t\v].
         static readonly Regex MultipleWhiteSpacesRegex_
             = new Regex(@"\s{2,}", RegexOptions.Compiled);
+        
         static readonly Regex LeadingWhiteSpacesThenLeftAngleBracketRegex_
             = new Regex(@"^\s+<", RegexOptions.Compiled);
+        
         static readonly Regex TrailingRightAngleBracketThenWhiteSpacesRegex_
             = new Regex(@">\s+$", RegexOptions.Compiled);
 

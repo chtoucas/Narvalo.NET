@@ -11,7 +11,7 @@
             var sb = new StringBuilder();
 
             for (int i = 0; i < size; i++) {
-                char chr = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * rnd.NextDouble() + 65)));
+                char chr = Convert.ToChar(Convert.ToInt32(Math.Floor(65 + (26 * rnd.NextDouble()))));
                 sb.Append(chr);
             }
 

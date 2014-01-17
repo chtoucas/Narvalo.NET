@@ -180,4 +180,10 @@
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
   </data>
+  <data name="Asserts_TypeMustBeEnum" xml:space="preserve">
+    <value>The type must be of enum type.</value>
+  </data>
+  <data name="Asserts_TypeMustBeValueType" xml:space="preserve">
+    <value>The type must be a value type.</value>
+  </data>
 </root>

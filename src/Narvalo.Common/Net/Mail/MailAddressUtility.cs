@@ -55,8 +55,7 @@
         {
             return MayParseHelper.Parse<MailAddress>(
                 value,
-                (string val, out MailAddress result) => TryParse(val, out result)
-            );
+                (string val, out MailAddress result) => TryParse(val, out result));
         }
 
         public static bool TryParse(string value, out MailAddress result)

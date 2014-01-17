@@ -5,26 +5,32 @@
 
     public interface IOpenGraphMetadata
     {
-        // > Propriétés obligatoires <
+        //// > Propriétés obligatoires <
 
         OpenGraphImage Image { get; set; }
+        
         string Title { get; }
+        
         string Type { get; set; }
+        
         Uri Url { get; }
 
-        // > Propriétés facultatives <
+        //// > Propriétés facultatives <
 
         string Description { get; }
+        
         string Determiner { get; set; }
+        
         OpenGraphLocale Locale { get; }
 
         IEnumerable<OpenGraphLocale> AlternativeLocales { get; }
 
         string SiteName { get; set; }
 
-        // > Méthodes <
+        //// > Méthodes <
 
         void AddAlternativeLocale(OpenGraphLocale locale);
+        
         void AddAlternativeLocales(IEnumerable<OpenGraphLocale> locales);
     }
 }

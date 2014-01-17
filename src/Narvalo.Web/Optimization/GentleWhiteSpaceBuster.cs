@@ -10,6 +10,7 @@
     {
         static readonly Regex MultipleTabsOrSpacesRegex_
             = new Regex(@"[\x09\x20]{2,}", RegexOptions.Compiled);
+        
         // TODO: Désactiver la capture dans la regex.
         static readonly Regex MultipleEmptyLinesRegex_
             = new Regex(@"([\x0A\x0D]+\x20*){2,}", RegexOptions.Compiled);
@@ -31,8 +32,8 @@
                 return String.Empty;
             }
 
-            // WARNING: L'ordre est important car on prend en compte le fait 
-            // que les espaces et tabulations sont d'abord remplacés par un espace simple.
+            //// WARNING: L'ordre est important car on prend en compte le fait 
+            //// que les espaces et tabulations sont d'abord remplacés par un espace simple.
 
             string result = MultipleTabsOrSpacesRegex_.Replace(value, "\x20");
             result = MultipleEmptyLinesRegex_.Replace(result, "\n");

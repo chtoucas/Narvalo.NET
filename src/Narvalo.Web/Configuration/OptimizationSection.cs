@@ -25,8 +25,14 @@
 
         public bool EnableWhiteSpaceBusting
         {
-            get { return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[EnableWhiteSpaceBusting_]; }
-            set { _enableWhiteSpaceBusting = value; _enableWhiteSpaceBustingSet = true; }
+            get { 
+                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[EnableWhiteSpaceBusting_]; 
+            }
+            
+            set { 
+                _enableWhiteSpaceBusting = value; 
+                _enableWhiteSpaceBustingSet = true;
+            }
         }
 
         protected override ConfigurationPropertyCollection Properties

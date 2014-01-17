@@ -10,7 +10,10 @@
 
     public class ApplicationLifecycleModule : IHttpModule
     {
-        #region IHttpModule
+        public static void Register()
+        {
+            DynamicModuleUtility.RegisterModule(typeof(ApplicationLifecycleModule));
+        }
 
         public void Init(HttpApplication context)
         {
@@ -21,18 +24,27 @@
             context.PreSendRequestHeaders += OnPreSendRequestHeaders_;
         }
 
-        public void Dispose()
+        public void Dispose() { }
+
+        static HttpStatusCode GetStatusCode_(Exception ex)
         {
-            ;
+            Type type = ex.GetType();
+            var httpException = ex as HttpException;
+
+            // Lorsqu'un exception de type ViewStateException ou HttpRequestValidationException est levée,
+            // ASP.NET retourne une erreur HTTP 500, on préfère utiliser une erreur HTTP 400.
+            if (httpException == null) {
+                return type == typeof(ViewStateException)
+                     ? HttpStatusCode.BadRequest
+                     : HttpStatusCode.InternalServerError;
+            }
+            else {
+                return type == typeof(HttpRequestValidationException)
+                    ? HttpStatusCode.BadRequest
+                    : (HttpStatusCode)httpException.GetHttpCode();
+            }
         }
-
-        #endregion
-
-        public static void Register()
-        {
-            DynamicModuleUtility.RegisterModule(typeof(ApplicationLifecycleModule));
-        }
-
+        
         /// <summary>
         /// Se produit lorsque l'application est supprimée.
         /// </summary>
@@ -84,25 +96,6 @@
             }
 
             response.CleanupHeaders();
-        }
-
-        static HttpStatusCode GetStatusCode_(Exception ex)
-        {
-            Type type = ex.GetType();
-            var httpException = ex as HttpException;
-
-            // Lorsqu'un exception de type ViewStateException ou HttpRequestValidationException est levée,
-            // ASP.NET retourne une erreur HTTP 500, on préfère utiliser une erreur HTTP 400.
-            if (httpException == null) {
-                return type == typeof(ViewStateException)
-                     ? HttpStatusCode.BadRequest
-                     : HttpStatusCode.InternalServerError;
-            }
-            else {
-                return type == typeof(HttpRequestValidationException)
-                    ? HttpStatusCode.BadRequest
-                    : (HttpStatusCode)httpException.GetHttpCode();
-            }
         }
     }
 }

@@ -3,9 +3,9 @@
     using System;
     using System.Web;
 
-    //@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
-    //@this.Cache.SetOmitVaryStar(true);
-    //@this.Cache.SetValidUntilExpires(true);
+    ////@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
+    ////@this.Cache.SetOmitVaryStar(true);
+    ////@this.Cache.SetValidUntilExpires(true);
 
     public static partial class HttpResponseExtensions
     {
@@ -42,7 +42,7 @@
         {
             Requires.Object(@this);
 
-            //@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+            ////@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             @this.Cache.SetCacheability(HttpCacheability.Private);
             @this.CacheFor_(duration);
         }
@@ -57,6 +57,7 @@
             if ((versions & HttpVersions.Http_1_0) == HttpVersions.Http_1_0) {
                 @this.Cache.SetExpires(DateTime.Now.Add(duration));
             }
+            
             // En-tête HTTP 1.1
             if ((versions & HttpVersions.Http_1_1) == HttpVersions.Http_1_1) {
                 @this.Cache.SetMaxAge(duration);
@@ -69,9 +70,11 @@
             // En-tête HTTP 1.0
             // FIXME: Now ou UtcNow ?
             @this.Cache.SetExpires(DateTime.UtcNow.Add(duration));
+            
             // En-tête HTTP 1.1
             @this.Cache.SetMaxAge(duration);
             @this.Cache.AppendCacheExtension("must-revalidate, proxy-revalidate");
+            
             // FIXME
             @this.Cache.SetLastModified(DateTime.Now);
         }

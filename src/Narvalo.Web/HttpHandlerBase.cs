@@ -8,21 +8,11 @@
     {
         protected HttpHandlerBase() { }
 
+        public virtual bool IsReusable { get { return true; } }
+
         protected abstract HttpVerbs AcceptedVerbs { get; }
 
         protected virtual bool TrySkipIisCustomErrors { get { return true; } }
-
-        protected abstract void ProcessRequestCore(HttpContext context);
-
-        protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
-        {
-            response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-            response.Write("Invalid HTTP method: " + httpMethod);
-        }
-
-        #region IHttpHandler
-
-        public virtual bool IsReusable { get { return true; } }
 
         public void ProcessRequest(HttpContext context)
         {
@@ -39,6 +29,12 @@
             ProcessRequestCore(context);
         }
 
-        #endregion
+        protected abstract void ProcessRequestCore(HttpContext context);
+
+        protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
+        {
+            response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
+            response.Write("Invalid HTTP method: " + httpMethod);
+        }
     }
 }

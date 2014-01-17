@@ -24,13 +24,13 @@
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "La valeur retournée peut changer entre deux appels.")]
         public static AssetSection GetAssetSection()
         {
             return WebConfigurationManager<AssetSection>.GetSection(AssetSection.SectionName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "La valeur retournée peut changer entre deux appels.")]
         public static OptimizationSection GetOptimizationSection()
         {
             return WebConfigurationManager<OptimizationSection>.GetSection(OptimizationSection.SectionName);

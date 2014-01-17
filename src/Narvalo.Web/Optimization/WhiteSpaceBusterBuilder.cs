@@ -18,7 +18,7 @@
 
         public static WhiteSpaceBusterBuilder Current { get { return Instance_; } }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "La valeur retournée peut changer entre deux appels.")]
         public IWhiteSpaceBuster GetWhiteSpaceBuster()
         {
             return _thunk();

@@ -10,8 +10,7 @@
         {
             return MayParseHelper.Parse<IPAddress>(
                 value,
-                (string val, out IPAddress result) => IPAddress.TryParse(val, out result)
-            );
+                (string val, out IPAddress result) => IPAddress.TryParse(val, out result));
         }
     }
 }

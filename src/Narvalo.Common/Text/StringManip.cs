@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Text
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Text;
 
@@ -42,7 +43,7 @@
             return new String(arr);
         }
 
-        public static string StripCrLf(string value) 
+        public static string StripCrLf(string value)
         {
             Requires.NotNull(value, "value");
 
@@ -53,12 +54,12 @@
             return value.Replace("\n", String.Empty).Replace("\r", String.Empty);
         }
 
-        public static string Substring(string value, int startIndex, int length) 
+        public static string Substring(string value, int startIndex, int length)
         {
             return Substring(value, startIndex, length, "...");
         }
 
-        public static string Substring(string value, int startIndex, int length, string postfix) 
+        public static string Substring(string value, int startIndex, int length, string postfix)
         {
             Requires.NotNull(value, "value");
             Requires.GreaterThanOrEqualTo(startIndex, 0, "startIndex");
@@ -72,12 +73,18 @@
                 if (value.Length < startIndex || value.Length < startIndex + length) {
                     // L'index de début est trop haut
                     // ou l'index de fin est trop haut.
-                    return String.Format(CultureInfo.CurrentCulture,
-                        "{0}{1}", value.Substring(value.Length - length, length - 1), postfix);
+                    return String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}{1}",
+                        value.Substring(value.Length - length, length - 1),
+                        postfix);
                 }
                 else {
-                    return String.Format(CultureInfo.CurrentCulture,
-                        "{0}{1}", value.Substring(startIndex, length - 1), postfix);
+                    return String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}{1}",
+                        value.Substring(startIndex, length - 1),
+                        postfix);
                 }
             }
         }
@@ -87,7 +94,7 @@
             return Truncate(value, length, "...");
         }
 
-        public static string Truncate(string value, int length, string postfix) 
+        public static string Truncate(string value, int length, string postfix)
         {
             Requires.NotNull(value, "value");
             Requires.GreaterThanOrEqualTo(length, 1, "length");
@@ -96,22 +103,30 @@
                 return value;
             }
             else {
-                return String.Format(CultureInfo.CurrentCulture,
-                    "{0}{1}", value.Substring(0, length - 1), postfix);
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}",
+                    value.Substring(0, length - 1),
+                    postfix);
             }
         }
 
-        // CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
-        //public static string UppercaseFirstLetter(string value) {
-        //    Requires.NotNull(value, "value");
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Sans cela la méthode ne remplirait pas sa fonction.")]
+        public static string ToTitleCase(string value)
+        {
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
+        }
 
-        //    if (String.IsNullOrEmpty(value)) {
-        //        return String.Empty;
-        //    }
+        ////public static string UppercaseFirstLetter(string value) {
+        ////    Requires.NotNull(value, "value");
 
-        //    char[] a = value.ToCharArray();
-        //    a[0] = char.ToUpper(a[0], CultureInfo.CurrentUICulture);
-        //    return new String(a);
-        //}
+        ////    if (String.IsNullOrEmpty(value)) {
+        ////        return String.Empty;
+        ////    }
+
+        ////    char[] a = value.ToCharArray();
+        ////    a[0] = char.ToUpper(a[0], CultureInfo.CurrentUICulture);
+        ////    return new String(a);
+        ////}
     }
 }

@@ -18,7 +18,20 @@
         }
 
         public T LowerEnd { get { return _lowerEnd; } }
+        
         public T UpperEnd { get { return _upperEnd; } }
+
+        /// <summary />
+        public static bool operator ==(Range<T> left, Range<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary />
+        public static bool operator !=(Range<T> left, Range<T> right)
+        {
+            return !left.Equals(right);
+        }
 
         public bool Includes(T value)
         {
@@ -43,20 +56,6 @@
 
         #endregion
 
-        #region > Comparaisons <
-
-        /// <summary />
-        public static bool operator ==(Range<T> left, Range<T> right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary />
-        public static bool operator !=(Range<T> left, Range<T> right)
-        {
-            return !left.Equals(right);
-        }
-
         /// <summary />
         public override bool Equals(object obj)
         {
@@ -74,14 +73,15 @@
             return LowerEnd.GetHashCode() ^ UpperEnd.GetHashCode();
         }
 
-        #endregion
-
         /// <summary />
         public override string ToString()
         {
             // FIXME
-            return String.Format(CultureInfo.InvariantCulture,
-                "LowerEnd={0};UpperEnd={1}", LowerEnd.ToString(), UpperEnd.ToString());
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "LowerEnd={0};UpperEnd={1}",
+                LowerEnd.ToString(), 
+                UpperEnd.ToString());
         }
     }
 }

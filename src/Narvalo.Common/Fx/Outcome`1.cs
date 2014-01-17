@@ -26,25 +26,11 @@
                 ExceptionDispatchInfo.Capture(LeftValue).Throw();
 #endif
             }
+
             return Value;
         }
 
         #region > Opérations monadiques <
-
-        internal static Outcome<T> Failure(Exception ex)
-        {
-            return new FailureCore(ex);
-        }
-
-        internal static Outcome<T> Failure(string errorMessage)
-        {
-            return new FailureCore(new OutcomeException(errorMessage));
-        }
-
-        internal static Outcome<T> Success(T value)
-        {
-            return new SuccessCore(value);
-        }
 
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
@@ -68,6 +54,21 @@
         }
 
         #endregion
+
+        internal static Outcome<T> Failure(Exception ex)
+        {
+            return new FailureCore(ex);
+        }
+
+        internal static Outcome<T> Failure(string errorMessage)
+        {
+            return new FailureCore(new OutcomeException(errorMessage));
+        }
+
+        internal static Outcome<T> Success(T value)
+        {
+            return new SuccessCore(value);
+        }
 
         sealed class FailureCore : Outcome<T>
         {

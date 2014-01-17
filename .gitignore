@@ -1,6 +1,7 @@
 _build/
 _work/
 Narvalo.sln.metaproj*
+StyleCopViolations.xml
 
 # La suite est tirée de :
 #   https://github.com/github/gitignore/blob/master/VisualStudio.gitignore

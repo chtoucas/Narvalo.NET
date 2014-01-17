@@ -25,7 +25,6 @@
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
 
-
         public static bool GetBoolean(this SqlDataReader @this, string name)
         {
             Requires.Object(@this);
@@ -81,7 +80,6 @@
 
             return @this.MayGetBoolean(@this.GetOrdinal(name));
         }
-
 
         public static byte GetByte(this SqlDataReader @this, string name)
         {
@@ -153,7 +151,6 @@
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
         }
-
 
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
@@ -282,7 +279,6 @@
             return @this.MayGetDecimal(@this.GetOrdinal(name));
         }
 
-
         public static double GetDouble(this SqlDataReader @this, string name)
         {
             Requires.Object(@this);
@@ -338,7 +334,6 @@
 
             return @this.MayGetDouble(@this.GetOrdinal(name));
         }
-
 
         public static Guid GetGuid(this SqlDataReader @this, string name)
         {
@@ -562,8 +557,7 @@
             return @this.MayGetInt64(@this.GetOrdinal(name));
         }
 
-
-        // NB: Pas de méthode GetMoney(this SqlDataReader @this, string name)
+        //// NB: Pas de méthode GetMoney(this SqlDataReader @this, string name)
 
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
@@ -613,7 +607,7 @@
             return @this.MayGetMoney(@this.GetOrdinal(name));
         }
 
-        // > Valeurs de type référence <
+        //// > Valeurs de type référence <
 
         public static string GetString(this SqlDataReader @this, string name)
         {
@@ -654,7 +648,7 @@
             return @this.MayGetString(@this.GetOrdinal(name));
         }
 
-        // NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
+        //// NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {

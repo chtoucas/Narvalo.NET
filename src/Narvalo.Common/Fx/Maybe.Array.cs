@@ -58,7 +58,8 @@
             Maybe<TResult> option = Create(seed);
 
             int length = source.Length;
-            // FIXME if (length == 0) { return source; }
+
+            //// FIXME if (length == 0) { return source; }
 
             for (int i = 0; i < length; i++) {
                 option = option.Bind(_ => accumulatorM(_, source[i]));
@@ -123,6 +124,7 @@
                 if (m.IsNone) {
                     return Maybe<T[]>.None;
                 }
+                
                 list[i] = m.Value;
             }
 

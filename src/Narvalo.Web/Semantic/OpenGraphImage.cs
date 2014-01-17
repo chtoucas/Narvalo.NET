@@ -18,9 +18,11 @@
         }
 
         public Uri Url { get { return _url; } }
+        
         public string MimeType { get { return _mimeType; } }
 
         public int Height { get; set; }
+        
         public int Width { get; set; }
     }
 }

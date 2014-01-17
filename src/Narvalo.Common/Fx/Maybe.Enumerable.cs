@@ -48,10 +48,12 @@
                 if (!iter.MoveNext()) {
                     return Maybe<T>.None;
                 }
+
                 var value = iter.Current;
                 while (iter.MoveNext()) {
                     value = iter.Current;
                 }
+                
                 return value;
             }
         }
@@ -64,6 +66,7 @@
             var seq = from t in source where predicate(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
                 var result = iter.MoveNext() ? iter.Current : Maybe<T>.None;
+                
                 // On retourne Maybe.None si il y a encore un élément.
                 return iter.MoveNext() ? Maybe<T>.None : result;
             }
@@ -149,6 +152,7 @@
                 if (m.IsNone) {
                     return Maybe<IList<TSource>>.None;
                 }
+
                 list.Add(m.Value);
             }
 

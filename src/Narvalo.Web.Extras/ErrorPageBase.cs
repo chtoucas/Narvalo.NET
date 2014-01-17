@@ -34,9 +34,6 @@
             Page_LoadCore(sender, e);
         }
 
-        protected virtual void Page_LoadCore(object sender, EventArgs e)
-        {
-            ;
-        }
+        protected virtual void Page_LoadCore(object sender, EventArgs e) { }
     }
 }

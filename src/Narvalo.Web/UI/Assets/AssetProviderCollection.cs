@@ -4,7 +4,7 @@
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
+    [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface", Justification = "ProviderCollection précède les classes génériques.")]
     public class AssetProviderCollection : ProviderCollection
     {
         public new AssetProviderBase this[string name]

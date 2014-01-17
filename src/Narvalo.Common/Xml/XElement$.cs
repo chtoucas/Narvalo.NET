@@ -31,6 +31,7 @@
                     @this.Name.LocalName,
                     name));
             }
+            
             return attr;
         }
 
@@ -54,6 +55,7 @@
                     @this.Name.LocalName,
                     name));
             }
+            
             return child;
         }
 
@@ -106,6 +108,7 @@
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
                 nextElement = nextElement.NextNode;
             }
+            
             if (nextElement == null) {
                 throw new XmlException(String.Format(
                     CultureInfo.CurrentCulture,

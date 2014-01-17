@@ -61,13 +61,13 @@
             return new OperationCanceledException(Format.CurrentCulture(messageFormat, messageArgs));
         }
 
-        //public static InvalidEnumArgumentException InvalidEnumArgument(
-        //    string parameterName,
-        //    int invalidValue,
-        //    Type enumClass)
-        //{
-        //    return new InvalidEnumArgumentException(parameterName, invalidValue, enumClass);
-        //}
+        ////public static InvalidEnumArgumentException InvalidEnumArgument(
+        ////    string parameterName,
+        ////    int invalidValue,
+        ////    Type enumClass)
+        ////{
+        ////    return new InvalidEnumArgumentException(parameterName, invalidValue, enumClass);
+        ////}
 
         public static InvalidOperationException InvalidOperation(
             string messageFormat,

@@ -29,7 +29,7 @@
             return LinkHelper_(@this, linkUri, linkType, relation, attributes);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
         static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
             Requires.NotNull(linkUri, "linkUri");
@@ -40,6 +40,7 @@
             if (!String.IsNullOrEmpty(linkType)) {
                 tag.MergeAttribute("type", linkType);
             }
+
             if (!String.IsNullOrEmpty(relation)) {
                 tag.MergeAttribute("rel", relation);
             }

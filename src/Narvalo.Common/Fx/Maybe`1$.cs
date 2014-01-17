@@ -19,6 +19,7 @@
             if (@this.IsNone) {
                 throw ex;
             }
+
             return @this;
         }
 
@@ -30,6 +31,7 @@
             if (@this.IsNone) {
                 throw exceptionFactory();
             }
+            
             return @this;
         }
 

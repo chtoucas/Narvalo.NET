@@ -32,8 +32,21 @@
                 if (!_isSome) {
                     throw new InvalidOperationException(SR.Maybe_NoneHasNoValue);
                 }
+
                 return _value;
             }
+        }
+
+        /// <summary />
+        public static bool operator ==(Maybe<T> left, Maybe<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary />
+        public static bool operator !=(Maybe<T> left, Maybe<T> right)
+        {
+            return !left.Equals(right);
         }
 
         #region > Extraction de la valeur sous-jacente <
@@ -62,6 +75,7 @@
             if (!_isSome) {
                 throw ex;
             }
+            
             return _value;
         }
 
@@ -72,6 +86,7 @@
             if (!_isSome) {
                 throw exceptionFactory();
             }
+            
             return _value;
         }
 
@@ -88,16 +103,6 @@
             else {
                 return new List<T> { _value }.GetEnumerator();
             }
-        }
-
-        #endregion
-
-        #region IEnumerable
-
-        /// <summary />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         #endregion
@@ -121,9 +126,9 @@
         {
             if (_isSome != other._isSome) { return false; }
             return
-                // Les deux options sont vides.
+                //// Les deux options sont vides.
                 !_isSome
-                // Les deux options ont la même valeur.
+                //// Les deux options ont la même valeur.
                 || _value.Equals(other._value);
         }
 
@@ -137,6 +142,7 @@
             if (!_isSome && obj is Unit) {
                 return true;
             }
+
             if (!(obj is Maybe<T>)) {
                 return false;
             }
@@ -158,25 +164,13 @@
 
         #endregion
 
-        #region > Opérateurs <
+        #region IEnumerable
 
         /// <summary />
-        public static bool operator ==(Maybe<T> left, Maybe<T> right)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return left.Equals(right);
+            return GetEnumerator();
         }
-
-        /// <summary />
-        public static bool operator !=(Maybe<T> left, Maybe<T> right)
-        {
-            return !left.Equals(right);
-        }
-
-        ///// <summary />
-        //public static implicit operator Maybe<T>(Maybe<Unit> value)
-        //{
-        //    return Maybe.None;
-        //}
 
         #endregion
     }

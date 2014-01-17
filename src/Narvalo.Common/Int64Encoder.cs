@@ -166,6 +166,7 @@
                 if (index == -1) {
                     throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
                 }
+                
                 checked {
                     result += multiplier * index;
                     if (i != 0) {
@@ -189,19 +190,20 @@
                 if (index == -1) {
                     throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
                 }
+                
                 checked {
                     //// TODO
-                    //if (result > Int64.MaxValue - multiplier * index) {
-                    //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
-                    //}
+                    ////if (result > Int64.MaxValue - multiplier * index) {
+                    ////    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
+                    ////}
 
                     result += multiplier * index;
 
                     if (i != 0) {
                         //// TODO
-                        //if (multiplier > MaxMultiplier) {
-                        //    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
-                        //}
+                        ////if (multiplier > MaxMultiplier) {
+                        ///    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
+                        ////}
                         multiplier *= alphabetLength;
                     }
                 }

@@ -1,7 +1,7 @@
-﻿namespace Narvalo.Web.UI
+﻿// Ce code est inspiré de la classe Omari.Web.UI.WhiteSpaceCleaner.
+    
+namespace Narvalo.Web.UI
 {
-    // Ce code est inspiré de la classe Omari.Web.UI.WhiteSpaceCleaner.
-
     using System.Collections;
     using System.Web.UI;
 
@@ -10,8 +10,6 @@
         protected LiteralPageParserFilterBase() : base() { }
 
         protected abstract bool Enabled { get; }
-
-        protected abstract string TransformLiteral(string literal);
 
         public override void ParseComplete(ControlBuilder rootBuilder)
         {
@@ -23,6 +21,8 @@
 
             base.ParseComplete(rootBuilder);
         }
+
+        protected abstract string TransformLiteral(string literal);
 
         void TransformRecursively_(ControlBuilder controlBuilder)
         {
@@ -36,6 +36,7 @@
                     if (literal.Length != 0) {
                         subBuilders[i] = TransformLiteral(literal);
                     }
+
                     continue;
                 }
 

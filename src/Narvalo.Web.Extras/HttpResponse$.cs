@@ -5,31 +5,31 @@
 
     public static partial class HttpResponseExtensions
     {
-        readonly static List<string> HeadersToRemove_ = new List<string> {
-			"Server",
-            // X-AspNet-Version peut être aussi supprimé dans le Web.config : 
-            // <system.web>
-            //  <httpRuntime enableVersionHeader="false" />
-            // </system.web>
-			//"X-AspNet-Version",			
-            // X-AspNetMvc-Version peut être supprimé via 
-            //  MvcHandler.DisableMvcResponseHeader = true;
-			//"X-AspNetMvc-Version",          
-            // Peut être aussi supprimé dans le Web.config
-            // <system.webServer>
-            //  <httpProtocol>
-            //    <customHeaders>
-            //      <clear />
-            //      <remove name="X-Powered-By" />
-            //    </customHeaders>
-            //   </httpProtocol>
-            // </system.webServer>
-			//"X-Powered-By",				
-		};
+        static readonly List<string> HeadersToRemove_ = new List<string> {
+            "Server",
+            //// X-AspNet-Version peut être aussi supprimé dans le Web.config : 
+            //// <system.web>
+            ////  <httpRuntime enableVersionHeader="false" />
+            //// </system.web>
+            ////"X-AspNet-Version",
+            //// X-AspNetMvc-Version peut être supprimé via 
+            ////  MvcHandler.DisableMvcResponseHeader = true;
+            ////"X-AspNetMvc-Version",          
+            //// Peut être aussi supprimé dans le Web.config
+            //// <system.webServer>
+            ////  <httpProtocol>
+            ////    <customHeaders>
+            ////      <clear />
+            ////      <remove name="X-Powered-By" />
+            ////    </customHeaders>
+            ////   </httpProtocol>
+            //// </system.webServer>
+            ////"X-Powered-By",
+        };
 
         public static void CleanupHeaders(this HttpResponse response)
         {
-            // Cf. aussi http://www.iis.net/learn/extensions/working-with-urlscan/urlscan-3-reference
+            //// Cf. aussi http://www.iis.net/learn/extensions/working-with-urlscan/urlscan-3-reference
 
             HeadersToRemove_.ForEach(_ => response.Headers.Remove(_));
 

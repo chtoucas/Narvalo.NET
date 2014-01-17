@@ -35,6 +35,7 @@
                 if (!_isLeft) {
                     throw new InvalidOperationException(SR.EitherBase_RightHasNoLeftValue);
                 }
+
                 return _left;
             }
         }
@@ -46,6 +47,7 @@
                 if (_isLeft) {
                     throw new InvalidOperationException(SR.EitherBase_LeftHasNoRightValue);
                 }
+
                 return _right;
             }
         }

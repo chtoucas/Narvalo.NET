@@ -8,12 +8,12 @@
     {
         public OutcomeException() : base() { }
 
-        public OutcomeException(string message) : base(message) { ; }
+        public OutcomeException(string message) : base(message) { }
 
         public OutcomeException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected OutcomeException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
     }
 }

@@ -4,9 +4,6 @@
 
     public class EmptyPartialViewResult : PartialViewResult
     {
-        public override void ExecuteResult(ControllerContext context)
-        {
-            ;
-        }
+        public override void ExecuteResult(ControllerContext context) { }
     }
 }

@@ -35,13 +35,15 @@
         public string Type
         {
             get { return _type; }
-            set { _type = Check.PropertyNotEmpty(value); ; }
+            set { _type = Check.PropertyNotEmpty(value); }
         }
 
         public Uri Url { get { return _ontology.Relationships.CanonicalUrl; } }
 
         public string Description { get { return _ontology.Description; } }
+        
         public string Determiner { get; set; }
+        
         public OpenGraphLocale Locale { get { return _locale; } }
 
         public IEnumerable<OpenGraphLocale> AlternativeLocales

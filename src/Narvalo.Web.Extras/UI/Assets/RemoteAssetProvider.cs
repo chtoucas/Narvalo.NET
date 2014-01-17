@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo;
     using Narvalo.Collections;
 
@@ -33,8 +34,7 @@
             config.Remove("baseUri");
         }
 
-        // WARNING: Ne pas utiliser "/img/", par exemple car si _baseUri contient déjà un chemin 
-        // relatif, il sera ignoré.
+        //// WARNING: Ne pas utiliser "/img/", par exemple car si _baseUri contient déjà un chemin relatif, il sera ignoré.
 
         public override Uri GetImage(string relativePath)
         {
@@ -51,6 +51,7 @@
             return MakeUri_("css/", relativePath);
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "Utiliser une URI serait contre productif.")]
         Uri MakeUri_(string basePath, string relativePath)
         {
             return new Uri(_baseUri, basePath + relativePath);

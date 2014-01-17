@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
@@ -65,9 +66,9 @@
                     continue;
                 }
 
-                // FIXME: On perd toute information contextuelle
-                //builder.Accept(new HtmlSymbol(
-                //    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
+                //// FIXME: On perd toute information contextuelle
+                ////builder.Accept(new HtmlSymbol(
+                ////    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
                 builder.Accept(new OptimizedSymbol { Content = OptimizeContent_(sym, prevType) });
                 prevType = sym.Type;
             }
@@ -77,39 +78,12 @@
 
         #region > Membres privés <
 
-        class OptimizedSymbol : ISymbol
-        {
-            string _content;
-            SourceLocation _start = SourceLocation.Zero;
-
-            #region ISymbol
-
-            public void ChangeStart(SourceLocation newStart)
-            {
-                _start = newStart;
-            }
-
-            public string Content
-            {
-                get { return _content; }
-                set { _content = value; }
-            }
-
-            public void OffsetStart(SourceLocation documentStart)
-            {
-                _start = documentStart;
-            }
-
-            public SourceLocation Start { get { return _start; } }
-
-            #endregion
-        }
-
         static bool IsMarkup_(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
         static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
             var sb = new StringBuilder(content);
@@ -163,6 +137,34 @@
             return content;
         }
 
+        class OptimizedSymbol : ISymbol
+        {
+            string _content;
+            SourceLocation _start = SourceLocation.Zero;
+
+            #region ISymbol
+
+            public string Content
+            {
+                get { return _content; }
+                set { _content = value; }
+            }
+
+            public SourceLocation Start { get { return _start; } }
+
+            public void ChangeStart(SourceLocation newStart)
+            {
+                _start = newStart;
+            }
+            
+            public void OffsetStart(SourceLocation documentStart)
+            {
+                _start = documentStart;
+            }
+            
+            #endregion
+        }
+        
         #endregion
     }
 }
