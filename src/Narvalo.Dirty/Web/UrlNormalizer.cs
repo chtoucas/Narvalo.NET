@@ -16,10 +16,10 @@
             Justification = "It is safer to only use lowercase characters in URIs.")]
         public static string NormalizePart(string value)
         {
-            Requires.NotNullOrEmpty(value, "value");
+            Require.NotNullOrEmpty(value, "value");
 
             // TODO: À refaire et remplacer tous les caractères spéciaux d'un traite.
-            // TODO: Supprimer les caractères de contrôle.
+            // FIXME: Supprimer les caractères de contrôle.
             string result = new StringBuilder(
                 value.Trim())
                 // Caractères réservés

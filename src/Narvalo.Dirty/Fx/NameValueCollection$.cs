@@ -13,7 +13,7 @@
             Func<string, Outcome<T>> fun,
             Func<string> missingKeyMessage)
         {
-            Requires.Object(nvc);
+            Require.Object(nvc);
 
             return nvc.MayGetValue(param)
                 .Map(fun)
@@ -25,7 +25,7 @@
             string param,
             Func<string, Outcome<T>> fun)
         {
-            Requires.Object(nvc);
+            Require.Object(nvc);
 
             return nvc.MayGetValue(param).Map(fun);
         }
@@ -35,7 +35,7 @@
             string param,
             MayFunc<string, T> fun)
         {
-            Requires.Object(nvc);
+            Require.Object(nvc);
 
             var value = nvc.MayGetValue(param);
 

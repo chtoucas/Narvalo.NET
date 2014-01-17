@@ -10,7 +10,7 @@
 
         public void Init(HttpApplication context)
         {
-            Requires.NotNull(context, "context");
+            Require.NotNull(context, "context");
 
             context.BeginRequest += OnBeginRequest_;
             context.EndRequest += OnEndRequest_;

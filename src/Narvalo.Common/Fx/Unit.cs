@@ -24,14 +24,10 @@
             return false;
         }
 
-        #region IEquatable<Unit>
-
         public bool Equals(Unit other)
         {
             return true;
         }
-
-        #endregion
 
         /// <summary />
         public override bool Equals(object obj)

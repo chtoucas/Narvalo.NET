@@ -18,7 +18,7 @@
 
         public CircuitBreaker(int threshold, TimeSpan resetInterval)
         {
-            Requires.GreaterThanOrEqualTo(threshold, 1, "threshold");
+            Require.GreaterThanOrEqualTo(threshold, 1, "threshold");
 
             _threshold = threshold;
             _resetInterval = resetInterval;
@@ -74,7 +74,7 @@
 
         public void Execute(Action action)
         {
-            Requires.NotNull(action, "action");
+            Require.NotNull(action, "action");
 
             ThrowIfDisposed();
 

@@ -18,7 +18,7 @@
         public CachingXmlResolver(XmlResolver inner)
             : base()
         {
-            Requires.NotNull(inner, "inner");
+            Require.NotNull(inner, "inner");
 
             _inner = inner;
         }

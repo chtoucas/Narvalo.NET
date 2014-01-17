@@ -22,7 +22,7 @@
 
         public override string Format(CultureInfo cultureInfo, BenchMetricCollection metrics)
         {
-            Requires.NotNull(metrics, "metrics");
+            Require.NotNull(metrics, "metrics");
 
             var fastest = metrics.OrderBy(r => r.Duration).First();
             return String.Format(

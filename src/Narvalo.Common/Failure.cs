@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Globalization;
 
     public static class Failure
     {
@@ -11,7 +12,7 @@
             string messageFormat,
             params object[] messageArgs)
         {
-            return new ArgumentException(Format.CurrentCulture(messageFormat, messageArgs), parameterName);
+            return new ArgumentException(Format_(messageFormat, messageArgs), parameterName);
         }
 
         public static ArgumentNullException ArgumentNull(
@@ -19,7 +20,7 @@
             string messageFormat,
             params object[] messageArgs)
         {
-            return new ArgumentNullException(parameterName, Format.CurrentCulture(messageFormat, messageArgs));
+            return new ArgumentNullException(parameterName, Format_(messageFormat, messageArgs));
         }
 
         public static ArgumentOutOfRangeException ArgumentOutOfRange(
@@ -31,19 +32,19 @@
             return new ArgumentOutOfRangeException(
                 parameterName,
                 actualValue,
-                Format.CurrentCulture(messageFormat, messageArgs));
+                Format_(messageFormat, messageArgs));
         }
 
         public static ConfigurationErrorsException ConfigurationErrors(
             string messageFormat,
             params object[] messageArgs)
         {
-            return new ConfigurationErrorsException(Format.CurrentCulture(messageFormat, messageArgs));
+            return new ConfigurationErrorsException(Format_(messageFormat, messageArgs));
         }
 
         public static KeyNotFoundException KeyNotFound(string messageFormat, params object[] messageArgs)
         {
-            return new KeyNotFoundException(Format.CurrentCulture(messageFormat, messageArgs));
+            return new KeyNotFoundException(Format_(messageFormat, messageArgs));
         }
 
         public static ObjectDisposedException ObjectDisposed(
@@ -51,29 +52,23 @@
             string messageFormat,
             params object[] messageArgs)
         {
-            return new ObjectDisposedException(type.FullName, Format.CurrentCulture(messageFormat, messageArgs));
+            Require.NotNull(type, "type");
+
+            return new ObjectDisposedException(type.FullName, Format_(messageFormat, messageArgs));
         }
 
         public static OperationCanceledException OperationCanceled(
             string messageFormat,
             params object[] messageArgs)
         {
-            return new OperationCanceledException(Format.CurrentCulture(messageFormat, messageArgs));
+            return new OperationCanceledException(Format_(messageFormat, messageArgs));
         }
-
-        ////public static InvalidEnumArgumentException InvalidEnumArgument(
-        ////    string parameterName,
-        ////    int invalidValue,
-        ////    Type enumClass)
-        ////{
-        ////    return new InvalidEnumArgumentException(parameterName, invalidValue, enumClass);
-        ////}
 
         public static InvalidOperationException InvalidOperation(
             string messageFormat,
             params object[] messageArgs)
         {
-            return new InvalidOperationException(Format.CurrentCulture(messageFormat, messageArgs));
+            return new InvalidOperationException(Format_(messageFormat, messageArgs));
         }
 
         public static InvalidOperationException InvalidOperation(
@@ -81,12 +76,17 @@
             string messageFormat,
             params object[] messageArgs)
         {
-            return new InvalidOperationException(Format.CurrentCulture(messageFormat, messageArgs), innerException);
+            return new InvalidOperationException(Format_(messageFormat, messageArgs), innerException);
         }
 
         public static NotSupportedException NotSupported(string messageFormat, params object[] messageArgs)
         {
-            return new NotSupportedException(Format.CurrentCulture(messageFormat, messageArgs));
+            return new NotSupportedException(Format_(messageFormat, messageArgs));
+        }
+
+        static string Format_(string format, params object[] args)
+        {
+            return String.Format(CultureInfo.CurrentCulture, format, args);
         }
     }
 }

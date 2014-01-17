@@ -8,16 +8,14 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using Narvalo.Internal;
 
-    public static class Requires
+    public static class Require
     {
-        #region > Null <
-
         [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
             if (@this == null) {
-                throw new ArgumentNullException("this", SR.Requires_ObjectNull);
+                throw new ArgumentNullException("this", SR.Require_ObjectNull);
             }
 
             Contract.EndContractBlock();
@@ -28,7 +26,7 @@ namespace Narvalo
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
-                throw new ArgumentNullException("value", SR.Requires_PropertyNull);
+                throw new ArgumentNullException("value", SR.Require_PropertyNull);
             }
 
             Contract.EndContractBlock();
@@ -41,7 +39,7 @@ namespace Narvalo
             Property(value);
 
             if (value.Length == 0) {
-                throw new ArgumentException(SR.Requires_PropertyEmpty, "value");
+                throw new ArgumentException(SR.Require_PropertyEmpty, "value");
             }
             
             Contract.EndContractBlock();
@@ -52,7 +50,7 @@ namespace Narvalo
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
-                throw Failure.ArgumentNull(parameterName, SR.Requires_ArgumentNullFormat, parameterName);
+                throw Failure.ArgumentNull(parameterName, SR.Require_ArgumentNullFormat, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -65,15 +63,11 @@ namespace Narvalo
             NotNull(value, parameterName);
 
             if (value.Length == 0) {
-                throw Failure.Argument(parameterName, SR.Requires_ArgumentEmptyFormat, parameterName);
+                throw Failure.Argument(parameterName, SR.Require_ArgumentEmptyFormat, parameterName);
             }
             
             Contract.EndContractBlock();
         }
-
-        #endregion
-
-        #region > InRange <
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
@@ -83,7 +77,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotInRangeFormat,
+                    SR.Require_NotInRangeFormat,
                     minValue,
                     maxValue);
             }
@@ -99,7 +93,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotInRangeFormat,
+                    SR.Require_NotInRangeFormat,
                     minValue,
                     maxValue);
             }
@@ -116,17 +110,13 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotInRangeFormat,
+                    SR.Require_NotInRangeFormat,
                     range.LowerEnd,
                     range.UpperEnd);
             }
 
             Contract.EndContractBlock();
         }
-
-        #endregion
-
-        #region > GreaterThanOrEqualTo <
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
@@ -136,7 +126,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    SR.Require_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
 
@@ -151,7 +141,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    SR.Require_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
 
@@ -167,16 +157,12 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotGreaterThanOrEqualToFormat,
+                    SR.Require_NotGreaterThanOrEqualToFormat,
                     minValue);
             }
 
             Contract.EndContractBlock();
         }
-
-        #endregion
-
-        #region > LessThanOrEqualTo <
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
@@ -186,7 +172,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotLessThanOrEqualToFormat,
+                    SR.Require_NotLessThanOrEqualToFormat,
                     maxValue);
             }
 
@@ -201,7 +187,7 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotLessThanOrEqualToFormat,
+                    SR.Require_NotLessThanOrEqualToFormat,
                     maxValue);
             }
 
@@ -217,13 +203,11 @@ namespace Narvalo
                 throw Failure.ArgumentOutOfRange(
                     parameterName,
                     value,
-                    SR.Requires_NotLessThanOrEqualToFormat,
+                    SR.Require_NotLessThanOrEqualToFormat,
                     maxValue);
             }
 
             Contract.EndContractBlock();
         }
-
-        #endregion
     }
 }

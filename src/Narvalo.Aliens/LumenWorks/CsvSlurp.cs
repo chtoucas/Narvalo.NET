@@ -25,7 +25,7 @@ namespace Narvalo.LumenWorks
 
         public CvsSlurp(string fileName)
         {
-            Requires.NotNullOrEmpty(fileName, "fileName");
+            Require.NotNullOrEmpty(fileName, "fileName");
 
             _fileName = fileName;
         }

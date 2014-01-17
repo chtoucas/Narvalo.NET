@@ -47,10 +47,10 @@
 
         public MailObject(MailAddress sender, MailAddress recipient, string subject, string textBody)
         {
-            Requires.NotNull(sender, "sender");
-            Requires.NotNull(recipient, "recipient");
-            Requires.NotNullOrEmpty(subject, "subject");
-            Requires.NotNullOrEmpty(textBody, "textBody");
+            Require.NotNull(sender, "sender");
+            Require.NotNull(recipient, "recipient");
+            Require.NotNullOrEmpty(subject, "subject");
+            Require.NotNullOrEmpty(textBody, "textBody");
 
             _recipients.Add(recipient);
             _sender = sender;
@@ -126,14 +126,14 @@
 
         public void Attach(Attachment item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             _attachments.Add(item);
         }
 
         public void AddRecipient(MailAddress address)
         {
-            Requires.NotNull(address, "address");
+            Require.NotNull(address, "address");
 
             _recipients.Add(address);
         }
@@ -145,7 +145,7 @@
 
         public void Detach(Attachment item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             _attachments.Remove(item);
         }

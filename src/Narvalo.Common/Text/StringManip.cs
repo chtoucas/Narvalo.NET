@@ -9,7 +9,7 @@
     {
         public static string RemoveDiacritics(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -31,7 +31,7 @@
 
         public static string Reverse(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -45,7 +45,7 @@
 
         public static string StripCrLf(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -61,9 +61,9 @@
 
         public static string Substring(string value, int startIndex, int length, string postfix)
         {
-            Requires.NotNull(value, "value");
-            Requires.GreaterThanOrEqualTo(startIndex, 0, "startIndex");
-            Requires.GreaterThanOrEqualTo(length, 1, "length");
+            Require.NotNull(value, "value");
+            Require.GreaterThanOrEqualTo(startIndex, 0, "startIndex");
+            Require.GreaterThanOrEqualTo(length, 1, "length");
 
             if (value.Length <= length) {
                 // La chaîne d'origine est trop courte.
@@ -96,8 +96,8 @@
 
         public static string Truncate(string value, int length, string postfix)
         {
-            Requires.NotNull(value, "value");
-            Requires.GreaterThanOrEqualTo(length, 1, "length");
+            Require.NotNull(value, "value");
+            Require.GreaterThanOrEqualTo(length, 1, "length");
 
             if (value.Length <= length) {
                 return value;
@@ -116,17 +116,5 @@
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
         }
-
-        ////public static string UppercaseFirstLetter(string value) {
-        ////    Requires.NotNull(value, "value");
-
-        ////    if (String.IsNullOrEmpty(value)) {
-        ////        return String.Empty;
-        ////    }
-
-        ////    char[] a = value.ToCharArray();
-        ////    a[0] = char.ToUpper(a[0], CultureInfo.CurrentUICulture);
-        ////    return new String(a);
-        ////}
     }
 }

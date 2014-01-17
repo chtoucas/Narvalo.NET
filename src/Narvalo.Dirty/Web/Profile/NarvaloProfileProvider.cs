@@ -20,7 +20,7 @@
         /// Initialize values from web.config.
         public override void Initialize(string name, NameValueCollection config)
         {
-            Requires.NotNull(config, "config");
+            Require.NotNull(config, "config");
 
             // Provider infos.
             if (String.IsNullOrEmpty(name)) {
@@ -59,7 +59,7 @@
 
         public override int DeleteProfiles(string[] usernames)
         {
-            Requires.NotNull(usernames, "usernames");
+            Require.NotNull(usernames, "usernames");
 
             if (usernames.Length == 0) {
                 return 0;
@@ -70,7 +70,7 @@
 
         public override int DeleteProfiles(ProfileInfoCollection profiles)
         {
-            Requires.NotNull(profiles, "profiles");
+            Require.NotNull(profiles, "profiles");
 
             var userNames = new List<String>();
 
@@ -130,8 +130,8 @@
         public override SettingsPropertyValueCollection GetPropertyValues(
             SettingsContext context, SettingsPropertyCollection collection)
         {
-            Requires.NotNull(context, "context");
-            Requires.NotNull(collection, "collection");
+            Require.NotNull(context, "context");
+            Require.NotNull(collection, "collection");
 
             var spvc = new SettingsPropertyValueCollection();
 
@@ -158,8 +158,8 @@
 
         public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
         {
-            Requires.NotNull(context, "context");
-            Requires.NotNull(collection, "collection");
+            Require.NotNull(context, "context");
+            Require.NotNull(collection, "collection");
 
             if (!(bool)context["IsAuthenticated"]) {
                 throw new NotSupportedException("This provider doesn't support anonymous profiles.");

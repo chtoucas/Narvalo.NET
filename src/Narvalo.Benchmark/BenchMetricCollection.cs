@@ -13,7 +13,7 @@
             IList<BenchMetric> metrics)
             : base(metrics)
         {
-            Requires.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
 
             _name = name;
         }
@@ -27,7 +27,7 @@
 
         public string ToString(IBenchMetricFormatter fmt)
         {
-            Requires.NotNull(fmt, "fmt");
+            Require.NotNull(fmt, "fmt");
 
             return fmt.Format(CultureInfo.CurrentCulture, this);
         }

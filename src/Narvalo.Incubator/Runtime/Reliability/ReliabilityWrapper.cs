@@ -8,7 +8,7 @@
 
         public ReliabilityWrapper(IGuard guard)
         {
-            Requires.NotNull(guard, "guard");
+            Require.NotNull(guard, "guard");
 
             _guard = guard;
         }

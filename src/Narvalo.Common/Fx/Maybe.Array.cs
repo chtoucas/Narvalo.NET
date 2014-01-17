@@ -16,8 +16,8 @@
             TSource[] source,
             MayFunc<TSource, TResult> selectorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(selectorM, "selectorM");
+            Require.NotNull(source, "source");
+            Require.NotNull(selectorM, "selectorM");
 
             Maybe<TResult>[] options = Array.ConvertAll(source, _ => selectorM(_));
             Maybe<TResult>[] values = Array.FindAll(options, _ => _.IsSome);
@@ -35,8 +35,8 @@
             TSource[] source, 
             MayFunc<TSource, bool> predicateM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicateM, "predicateM");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicateM, "predicateM");
 
             TSource[] list = Array.FindAll(
                 source,
@@ -45,27 +45,25 @@
             return Create(list);
         }
 
-        #region > Aggregate <
-
         public static Maybe<TResult> FoldLeft<TSource, TResult>(
             TSource[] source,
             TResult seed,
             MayFunc<TResult, TSource, TResult> accumulatorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(source, "source");
+            Require.NotNull(accumulatorM, "accumulatorM");
 
-            Maybe<TResult> option = Create(seed);
+            Maybe<TResult> result = Create(seed);
 
             int length = source.Length;
 
-            //// FIXME if (length == 0) { return source; }
+            if (length == 0) { return result; }
 
             for (int i = 0; i < length; i++) {
-                option = option.Bind(_ => accumulatorM(_, source[i]));
+                result = result.Bind(_ => accumulatorM(_, source[i]));
             }
 
-            return option;
+            return result;
         }
 
         public static Maybe<TResult> FoldRight<TSource, TResult>(
@@ -73,8 +71,8 @@
             TResult seed,
             MayFunc<TResult, TSource, TResult> accumulatorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(accumulatorM, "accumulator");
+            Require.NotNull(source, "source");
+            Require.NotNull(accumulatorM, "accumulator");
 
             return FoldLeft(source.Reverse(), seed, accumulatorM);
         }
@@ -83,29 +81,27 @@
             TSource[] source,
             MayFunc<TSource, TSource, TSource> accumulatorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(accumulatorM, "accumulator");
+            Require.NotNull(source, "source");
+            Require.NotNull(accumulatorM, "accumulator");
 
             int length = source.Length;
             if (length == 0) { return Maybe<TSource>.None; }
 
-            Maybe<TSource> option = Create(source[0]);
+            Maybe<TSource> result = Create(source[0]);
 
             for (int i = 1; i < length; i++) {
-                option = option.Bind(_ => accumulatorM(_, source[i]));
+                result = result.Bind(_ => accumulatorM(_, source[i]));
             }
 
-            return option;
+            return result;
         }
-
-        #endregion
 
         public static Maybe<TResult[]> Map<TSource, TResult>(
             TSource[] source,
             MayFunc<TSource, TResult> funM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(funM, "funM");
+            Require.NotNull(source, "source");
+            Require.NotNull(funM, "funM");
 
             Maybe<TResult>[] list = Array.ConvertAll(source, _ => funM(_));
 
@@ -114,7 +110,7 @@
 
         public static Maybe<T[]> Sequence<T>(Maybe<T>[] source)
         {
-            Requires.NotNull(source, "source");
+            Require.NotNull(source, "source");
 
             int length = source.Length;
             T[] list = new T[length];

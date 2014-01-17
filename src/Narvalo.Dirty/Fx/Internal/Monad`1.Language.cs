@@ -8,8 +8,8 @@
             Kunc<T, TMiddle> valueSelector,
             Func<T, TMiddle, TResult> resultSelector)
         {
-            Requires.NotNull(valueSelector, "valueSelector");
-            Requires.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(valueSelector, "valueSelector");
+            Require.NotNull(resultSelector, "resultSelector");
 
             return Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
         }
@@ -21,21 +21,21 @@
 
         public Monad<T> Filter(Predicate<T> predicate)
         {
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, "predicate");
 
             return Map(_ => predicate(_)).Then(this);
         }
 
         public Monad<Unit> When(bool predicate, Kunc<Unit> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Require.NotNull(kun, "kun");
 
             return Bind(_ => kun.When(predicate).Invoke());
         }
 
         public Monad<Unit> When(bool predicate, Kunc<T, Unit> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Require.NotNull(kun, "kun");
 
             return Bind(kun.When(predicate));
         }

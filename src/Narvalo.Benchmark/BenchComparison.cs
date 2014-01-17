@@ -13,8 +13,8 @@
             IEnumerable<BenchComparative> items,
             int iterations)
         {
-            Requires.NotNullOrEmpty(name, "name");
-            Requires.NotNull(items, "items");
+            Require.NotNullOrEmpty(name, "name");
+            Require.NotNull(items, "items");
 
             _name = name;
             _items = items;

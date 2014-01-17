@@ -12,7 +12,7 @@ namespace Narvalo.Autofac
         public object BindModel(ControllerContext controllerContext,
             ModelBindingContext bindingContext)
         {
-            Requires.NotNull(controllerContext, "controllerContext");
+            Require.NotNull(controllerContext, "controllerContext");
 
             return controllerContext.HttpContext.User;
         }

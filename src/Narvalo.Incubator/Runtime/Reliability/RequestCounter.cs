@@ -12,7 +12,7 @@
 
         public void Execute(Action action)
         {
-            Requires.NotNull(action, "action");
+            Require.NotNull(action, "action");
 
             RecordRequest();
 

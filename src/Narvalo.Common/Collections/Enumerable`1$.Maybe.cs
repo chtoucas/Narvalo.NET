@@ -6,8 +6,6 @@
 
     public static partial class EnumerableExtensions
     {
-        #region > Single <
-
         public static Maybe<T> FirstOrNone<T>(this IEnumerable<T> @this)
         {
             return Maybe.FirstOrNone(@this, _ => true);
@@ -37,7 +35,5 @@
         {
             return Maybe.SingleOrNone(@this, predicate);
         }
-
-        #endregion
     }
 }

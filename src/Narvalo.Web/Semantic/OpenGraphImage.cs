@@ -10,8 +10,8 @@
 
         public OpenGraphImage(Uri url, string mimeType)
         {
-            Requires.NotNull(url, "url");
-            Requires.NotNull(mimeType, "mimeType");
+            Require.NotNull(url, "url");
+            Require.NotNull(mimeType, "mimeType");
 
             _url = url;
             _mimeType = mimeType;

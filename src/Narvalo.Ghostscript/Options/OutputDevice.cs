@@ -18,7 +18,7 @@
 
         public override void AddTo(ICollection<string> args)
         {
-            Requires.NotNull(args, "args");
+            Require.NotNull(args, "args");
 
             if (IgnoreMultipleCopies.HasValue && IgnoreMultipleCopies.Value) {
                 args.Add("-d.IgnoreNumCopies=true");

@@ -30,18 +30,16 @@
             return Value;
         }
 
-        #region > Opérations monadiques <
-
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Require.NotNull(kun, "kun");
 
             return Unsuccessful ? Outcome<TResult>.Failure(Exception) : kun(Value);
         }
 
         public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
         {
-            Requires.NotNull(selector, "selector");
+            Require.NotNull(selector, "selector");
 
             return Unsuccessful
                ? Outcome<TResult>.Failure(Exception)
@@ -52,8 +50,6 @@
         {
             return Map(_ => default(TResult));
         }
-
-        #endregion
 
         internal static Outcome<T> Failure(Exception ex)
         {

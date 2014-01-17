@@ -13,14 +13,14 @@
 
         protected TKey GetKeyForItem(KeyValuePairConfigurationElement<TKey, TValue> item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             return item.Key;
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            Requires.NotNull(element, "element");
+            Require.NotNull(element, "element");
 
             return GetKeyForItem(element as KeyValuePairConfigurationElement<TKey, TValue>);
         }

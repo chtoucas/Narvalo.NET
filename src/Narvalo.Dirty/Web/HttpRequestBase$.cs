@@ -10,7 +10,7 @@
     {
         public static NameValueCollection DecodeKeyValuePost(this HttpRequestBase @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return HttpUtility.ParseQueryString(SlurpBody_(@this));
         }

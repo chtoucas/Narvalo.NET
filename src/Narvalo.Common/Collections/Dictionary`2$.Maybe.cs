@@ -9,7 +9,7 @@
     public static class DictionaryExtensions
     {
         /// <summary>
-        /// Version monadique de la méthode <see cref="System.Collections.Generic.IDictionary{T,U}.TryGetValue"/>.
+        /// Version sans passage par référence de la méthode <see cref="System.Collections.Generic.IDictionary{T,U}.TryGetValue"/>.
         /// </summary>
         /// <typeparam name="TKey">Le type des clés du dictionnaire.</typeparam>
         /// <typeparam name="TValue">Le type des valeurs du dictionnaire.</typeparam>
@@ -20,7 +20,7 @@
             this IDictionary<TKey, TValue> @this,
             TKey key)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             if (key == null) { return Maybe<TValue>.None; }
 

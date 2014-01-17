@@ -42,7 +42,7 @@
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
         static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
-            Requires.NotNull(imageUri, "imageUri");
+            Require.NotNull(imageUri, "imageUri");
 
             var tag = new TagBuilder("img");
             tag.MergeAttribute("src", imageUri.ToProtocolLessString());

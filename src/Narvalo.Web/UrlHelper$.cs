@@ -10,14 +10,14 @@
     {
         public static string Current(this UrlHelper @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.RequestContext.HttpContext.Request.RawUrl;
         }
 
         public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, object routeValues)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
             var scheme = @this.RequestContext.HttpContext.Request.Url.Scheme;
@@ -26,7 +26,7 @@
 
         public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, RouteValueDictionary routeValues)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
             var scheme = @this.RequestContext.HttpContext.Request.Url.Scheme;
@@ -36,7 +36,7 @@
         // Voir aussi http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
         public static string AbsoluteContent(this UrlHelper @this, string path)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
 

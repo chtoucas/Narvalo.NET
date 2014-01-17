@@ -31,7 +31,7 @@
         /// <returns>La chaîne de caractères nettoyée.</returns>
         public string Bust(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             if (value.Length == 0) {
                 return String.Empty;

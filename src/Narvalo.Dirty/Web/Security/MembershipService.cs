@@ -24,17 +24,17 @@
 
         public bool ValidateUser(string userName, string password)
         {
-            Requires.NotNullOrEmpty(userName, "userName");
-            Requires.NotNullOrEmpty(password, "password");
+            Require.NotNullOrEmpty(userName, "userName");
+            Require.NotNullOrEmpty(password, "password");
 
             return _provider.ValidateUser(userName, password);
         }
 
         public MembershipCreateStatus CreateUser(string userName, string password, string email)
         {
-            Requires.NotNullOrEmpty(userName, "userName");
-            Requires.NotNullOrEmpty(password, "password");
-            Requires.NotNullOrEmpty(email, "email");
+            Require.NotNullOrEmpty(userName, "userName");
+            Require.NotNullOrEmpty(password, "password");
+            Require.NotNullOrEmpty(email, "email");
 
             MembershipCreateStatus status;
 
@@ -47,9 +47,9 @@
 
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
-            Requires.NotNullOrEmpty(userName, "userName");
-            Requires.NotNullOrEmpty(oldPassword, "oldPassword");
-            Requires.NotNullOrEmpty(newPassword, "newPassword");
+            Require.NotNullOrEmpty(userName, "userName");
+            Require.NotNullOrEmpty(oldPassword, "oldPassword");
+            Require.NotNullOrEmpty(newPassword, "newPassword");
 
             // The underlying ChangePassword() will throw an exception rather
             // than return false in certain failure scenarios.

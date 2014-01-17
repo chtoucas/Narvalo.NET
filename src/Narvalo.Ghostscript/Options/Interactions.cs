@@ -18,7 +18,6 @@
         /// </summary>
         Quiet,
 
-        // XXX
         /// <summary>
         /// Quiet startup: suppress normal startup messages, and also do the equivalent of -dQUIET.
         /// </summary>

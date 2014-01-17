@@ -24,7 +24,7 @@
 
         public IEnumerable<Benchmark> FindBenchmarks(Assembly assembly)
         {
-            Requires.NotNull(assembly, "assembly");
+            Require.NotNull(assembly, "assembly");
 
             return from type in assembly.GetExportedTypes()
                    from benchmark in FindBenchmarks(type)
@@ -33,7 +33,7 @@
 
         public IEnumerable<Benchmark> FindBenchmarks(Type type)
         {
-            Requires.NotNull(type, "type");
+            Require.NotNull(type, "type");
 
             return Maybe.SelectAny(
                 type.GetMethods(_bindings), 

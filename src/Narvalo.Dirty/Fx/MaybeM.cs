@@ -14,8 +14,8 @@
            T[] source,
            Func<T, Maybe<bool>> predicate)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicate, "predicate");
 
             T[] list = Array.FindAll(
                 source,
@@ -29,8 +29,8 @@
             TResult seed,
             Func<TResult, TSource, Maybe<TResult>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             Maybe<TResult> option = Maybe.Create(seed);
 
@@ -49,8 +49,8 @@
             TResult seed,
             Func<TResult, TSource, Maybe<TResult>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             Maybe<TResult> option = Maybe.Create(seed);
 
@@ -68,8 +68,8 @@
             TSource[] source,
             Func<TSource, Maybe<TResult>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             Maybe<TResult>[] options = Array.ConvertAll(source, _ => fun(_));
 
@@ -80,8 +80,8 @@
             TSource[] source,
             Func<TSource, TSource, Maybe<TSource>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             int length = source.Length;
             if (length == 0) { return Maybe<TSource>.None; }
@@ -97,7 +97,7 @@
 
         public static Maybe<T[]> Sequence<T>(Maybe<T>[] source)
         {
-            Requires.NotNull(source, "source");
+            Require.NotNull(source, "source");
 
             int length = source.Length;
             T[] list = new T[length];
@@ -129,8 +129,8 @@
             IEnumerable<T> source,
             Func<T, Maybe<bool>> predicate)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicate, "predicate");
 
             var list = from item in source
                        let m = predicate(item)
@@ -145,8 +145,8 @@
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             Maybe<TAccumulate> option = Maybe.Create(seed);
 
@@ -161,8 +161,8 @@
             IEnumerable<TSource> source,
             Func<TSource, Maybe<TResult>> fun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(source, "source");
+            Require.NotNull(fun, "fun");
 
             var list = from item in source select fun(item);
 
@@ -171,7 +171,7 @@
 
         public static Maybe<IList<T>> Sequence<T>(IEnumerable<Maybe<T>> source)
         {
-            Requires.NotNull(source, "source");
+            Require.NotNull(source, "source");
 
             IList<T> list = new List<T>();
 
@@ -201,7 +201,7 @@
             Func<TSource, TResult> fun,
             Maybe<TSource> option)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option.IsSome ? Maybe.Create(fun(option.Value)) : Maybe<TResult>.None;
         }
@@ -211,7 +211,7 @@
             Maybe<T1> option1,
             Maybe<T2> option2)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value))
@@ -224,7 +224,7 @@
             Maybe<T2> option2,
             Maybe<T3> option3)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value))
@@ -238,7 +238,7 @@
             Maybe<T3> option3,
             Maybe<T4> option4)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value))
@@ -253,7 +253,7 @@
            Maybe<T4> option4,
            Maybe<T5> option5)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome
                     && option4.IsSome && option5.IsSome

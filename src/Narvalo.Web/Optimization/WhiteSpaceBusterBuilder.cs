@@ -26,7 +26,7 @@
 
         public void SetWhiteSpaceBuster(IWhiteSpaceBuster whiteSpaceBuster)
         {
-            Requires.NotNull(whiteSpaceBuster, "whiteSpaceBuster");
+            Require.NotNull(whiteSpaceBuster, "whiteSpaceBuster");
 
             _thunk = () => whiteSpaceBuster;
         }

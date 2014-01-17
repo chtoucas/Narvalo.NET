@@ -11,8 +11,8 @@
 
         protected NonQueryStoredProcedure(string connectionString, string name)
         {
-            Requires.NotNullOrEmpty(connectionString, "connectionString");
-            Requires.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(connectionString, "connectionString");
+            Require.NotNullOrEmpty(name, "name");
 
             _connectionString = connectionString;
             _name = name;

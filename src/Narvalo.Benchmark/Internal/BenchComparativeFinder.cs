@@ -23,7 +23,7 @@
 
         public IEnumerable<BenchComparative> FindComparatives(Type type)
         {
-            Requires.NotNull(type, "type");
+            Require.NotNull(type, "type");
 
             return Maybe.SelectAny(
                 type.GetMethods(_bindings), 
@@ -33,7 +33,7 @@
         // FIXME: Theory.
         public IEnumerable<BenchComparative> FindComparatives<T>(Type type, T value)
         {
-            Requires.NotNull(type, "type");
+            Require.NotNull(type, "type");
 
             return Maybe.SelectAny(
                 type.GetMethods(_bindings), 

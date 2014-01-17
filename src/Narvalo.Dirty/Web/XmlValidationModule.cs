@@ -17,7 +17,7 @@ namespace Narvalo.Web
 
         public void Init(HttpApplication context)
         {
-            Requires.NotNull(context, "context");
+            Require.NotNull(context, "context");
 
             context.BeginRequest += OnBeginRequest_;
             context.EndRequest += OnEndRequest_;
@@ -81,7 +81,7 @@ namespace Narvalo.Web
         // FIXME
         static IXmlValidationRenderer CreateRenderer_(string typeName)
         {
-            Requires.NotNullOrEmpty(typeName, "typeName");
+            Require.NotNullOrEmpty(typeName, "typeName");
 
             Type rendererType = Type.GetType(typeName, true /* throwOnError */);
             var renderer = Activator.CreateInstance(rendererType) as IXmlValidationRenderer;

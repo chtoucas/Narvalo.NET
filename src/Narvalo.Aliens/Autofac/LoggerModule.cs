@@ -13,7 +13,7 @@ namespace Narvalo.Autofac
 
         public LoggerModule(ILoggerFactory factory)
         {
-            Requires.NotNull(factory, "factory");
+            Require.NotNull(factory, "factory");
 
             _factory = factory;
         }
@@ -22,7 +22,7 @@ namespace Narvalo.Autofac
             IComponentRegistry componentRegistry,
             IComponentRegistration registration)
         {
-            Requires.NotNull(componentRegistry, "componentRegistry");
+            Require.NotNull(componentRegistry, "componentRegistry");
 
             registration.Preparing += OnPreparingComponent_;
         }

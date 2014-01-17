@@ -161,13 +161,13 @@
     <Compile Include="Collections\NameValueCollection%24.Maybe.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configuration\ConfigurationManager`1.cs" />
+    <Compile Include="Configuration\Configuration%24.cs" />
+    <Compile Include="Configuration\ConfigurationSectionManager.cs" />
     <Compile Include="Data\NonQueryStoredProcedure.cs" />
     <Compile Include="Data\SqlCommand%24.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
-    <Compile Include="Asserts.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Failure.cs" />
     <Compile Include="Fx\EitherBase`2.cs" />
@@ -188,7 +188,6 @@
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
-    <Compile Include="Collections\Enumerator`1%24.cs" />
     <Compile Include="EnumUtility.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
@@ -209,8 +208,7 @@
       <DependentUpon>SR.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requires.cs" />
-    <Compile Include="Format.cs" />
+    <Compile Include="Require.cs" />
     <Compile Include="Text\StringGenerator.cs" />
     <Compile Include="Text\StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />

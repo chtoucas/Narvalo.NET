@@ -39,7 +39,7 @@
         {
             if (!IsLevelEnabled(level)) { return; }
 
-            Requires.NotNull(exception, "exception");
+            Require.NotNull(exception, "exception");
 
             LogCore(level, exception.Message, exception);
         }
@@ -48,7 +48,7 @@
         {
             if (!IsLevelEnabled(level)) { return; }
 
-            Requires.NotNull(messageFactory, "messageFactory");
+            Require.NotNull(messageFactory, "messageFactory");
 
             LogCore(level, messageFactory(), null /* exception */);
         }
@@ -64,7 +64,7 @@
         {
             if (!IsLevelEnabled(level)) { return; }
 
-            Requires.NotNull(messageFactory, "messageFactory");
+            Require.NotNull(messageFactory, "messageFactory");
 
             LogCore(level, messageFactory(), exception);
         }

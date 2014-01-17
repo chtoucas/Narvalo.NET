@@ -14,8 +14,6 @@
     /// </example>
     public static class EnumUtility
     {
-        #region > Utilitaires de conversion <
-
         /// <example>
         /// <code>
         /// Maybe&lt;MyEnum&gt; value = EnumUtility.MayConvert&lt;MyEnum&gt;(1);
@@ -37,7 +35,7 @@
             //// FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
             //// Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
 
-            Asserts.IsEnum(typeof(TEnum));
+            Check.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 
@@ -49,10 +47,6 @@
                 return false;
             }
         }
-
-        #endregion
-
-        #region > Utilitaires d'analyse <
 
         /// <example>
         /// <code>
@@ -71,7 +65,7 @@
         /// </example>
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            Asserts.IsEnum(typeof(TEnum));
+            Check.IsEnum(typeof(TEnum));
 
             return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase);
         }
@@ -100,7 +94,7 @@
         public static bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result)
             where TEnum : struct
         {
-            // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
+            //// FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
 
             __Asserts.IsEnum(typeof(TEnum));
 
@@ -130,7 +124,5 @@
         }
 
 #endif
-
-        #endregion
     }
 }

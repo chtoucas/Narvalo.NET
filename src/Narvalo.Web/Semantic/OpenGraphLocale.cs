@@ -10,7 +10,7 @@
 
         public OpenGraphLocale(CultureInfo culture)
         {
-            Requires.NotNull(culture, "culture");
+            Require.NotNull(culture, "culture");
 
             _culture = culture;
         }
@@ -32,14 +32,10 @@
             return _culture.ToString().Replace('-', '_');
         }
 
-        #region IEquatable<OpenGraphLocale>
-
         public bool Equals(OpenGraphLocale other)
         {
             return _culture.Equals(other._culture);
         }
-
-        #endregion
 
         public override bool Equals(object obj)
         {

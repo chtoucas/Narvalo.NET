@@ -14,14 +14,14 @@
         // Cf. http://stackoverflow.com/questions/623104/c-sharp-byte-to-hex-string/623184
         public static string ToHexString(byte[] value)
         {
-            Requires.NotNull<byte[]>(value, "value");
+            Require.NotNull<byte[]>(value, "value");
 
             return BitConverter.ToString(value).Replace("-", String.Empty);
         }
 
         public static byte[] FromHexString(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             // FIXME: FormatException quand value.Length est impair ?
             byte[] result = new byte[value.Length / 2];
@@ -37,7 +37,7 @@
 
         public static string ToZBase32String(byte[] value)
         {
-            Requires.NotNull<byte[]>(value, "value");
+            Require.NotNull<byte[]>(value, "value");
 
             int length = value.Length;
             var sb = new StringBuilder((length + 7) * 8 / 5);
@@ -81,7 +81,7 @@
 
         public static byte[] FromZBase32String(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             unchecked {
                 int length = value.Length;

@@ -63,15 +63,15 @@
         }
 
         void ISmtpClient.Send(MailObject mail) {
-            Requires.NotNull(mail, "mail");
+            Require.NotNull(mail, "mail");
         }
 
         void ISmtpClient.SendAsync(MailObject mail, object userState) {
-            Requires.NotNull(mail, "mail");
+            Require.NotNull(mail, "mail");
         }
 
         Task ISmtpClient.SendAsync(MailObject mail) {
-            Requires.NotNull(mail, "mail");
+            Require.NotNull(mail, "mail");
             return null;
         }
 

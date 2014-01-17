@@ -46,7 +46,7 @@
 
         public void AddTo(ICollection<string> args)
         {
-            Requires.NotNull(args, "args");
+            Require.NotNull(args, "args");
 
             if (!String.IsNullOrEmpty(Password)) {
                 args.Add("-sPDFPassword=" + Password);

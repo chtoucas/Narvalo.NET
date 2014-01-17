@@ -10,7 +10,7 @@
 
         BenchComparisonRunner(BenchComparator comparator)
         {
-            Requires.NotNull(comparator, "comparator");
+            Require.NotNull(comparator, "comparator");
 
             _comparator = comparator;
         }
@@ -31,7 +31,7 @@
 
         public BenchMetricCollection Run(BenchComparison comparison)
         {
-            Requires.NotNull(comparison, "comparison");
+            Require.NotNull(comparison, "comparison");
 
             var metrics = _comparator.Compare(comparison);
 

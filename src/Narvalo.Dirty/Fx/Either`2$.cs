@@ -9,8 +9,8 @@
             Func<TLeft, TResult> leftFun,
             Func<TRight, TResult> rightFun)
         {
-            Requires.NotNull(leftFun, "leftFun");
-            Requires.NotNull(rightFun, "rightFun");
+            Require.NotNull(leftFun, "leftFun");
+            Require.NotNull(rightFun, "rightFun");
 
             return @this.IsLeft ? leftFun(@this.LeftValue) : rightFun(@this.RightValue);
         }

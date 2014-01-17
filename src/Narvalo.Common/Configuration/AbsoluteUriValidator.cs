@@ -8,16 +8,13 @@
     /// </summary>
     public class AbsoluteUriValidator : ConfigurationValidatorBase
     {
-        /// <summary>
-        /// Initialise un nouvel objet de type <see cref="Narvalo.Configuration.AbsoluteUriValidator"/>.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <summary />
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);
         }
 
+        /// <summary />
         public override void Validate(object value)
         {
             string uriString = (string)value;

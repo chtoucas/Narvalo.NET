@@ -11,21 +11,21 @@
 
         public Benchmarker(IBenchTimer timer)
         {
-            Requires.NotNull(timer, "timer");
+            Require.NotNull(timer, "timer");
 
             _timer = timer;
         }
 
         public Duration Time(Benchmark benchmark)
         {
-            Requires.NotNull(benchmark, "benchmark");
+            Require.NotNull(benchmark, "benchmark");
 
             return Time(benchmark.Action, benchmark.Iterations);
         }
 
         public Duration Time(Action action, int iterations)
         {
-            Requires.NotNull(action, "action");
+            Require.NotNull(action, "action");
 
             Cleanup();
 

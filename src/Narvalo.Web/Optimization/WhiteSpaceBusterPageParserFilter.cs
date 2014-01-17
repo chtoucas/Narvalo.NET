@@ -42,7 +42,7 @@
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)
         {
-            Requires.NotNull(attributes, "attributes");
+            Require.NotNull(attributes, "attributes");
 
             // NB: Si rien n'est précisé, on considère que le filtre est actif localement.
             bool enabled = true;

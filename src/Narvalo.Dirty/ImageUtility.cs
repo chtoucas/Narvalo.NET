@@ -30,10 +30,10 @@
 
         public static void ResizeImage(string inFile, string outFile, double maxWidth, double maxHeight, long level)
         {
-            Requires.NotNullOrEmpty(inFile, "inFile");
-            Requires.NotNullOrEmpty(outFile, "outFile");
-            Requires.GreaterThanOrEqualTo(level, 0, "level");
-            Requires.LessThanOrEqualTo(level, 100, "level");
+            Require.NotNullOrEmpty(inFile, "inFile");
+            Require.NotNullOrEmpty(outFile, "outFile");
+            Require.GreaterThanOrEqualTo(level, 0, "level");
+            Require.LessThanOrEqualTo(level, 100, "level");
 
             using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None)) {
                 // Load via stream rather than Image.FromFile to release the file handle immediately.
@@ -47,10 +47,10 @@
 
         public static void ResizeImage(Image inImage, string outFile, double maxWidth, double maxHeight, long level)
         {
-            Requires.NotNull(inImage, "inImage");
-            Requires.NotNullOrEmpty(outFile, "outFile");
-            Requires.GreaterThanOrEqualTo(level, 0, "level");
-            Requires.LessThanOrEqualTo(level, 100, "level");
+            Require.NotNull(inImage, "inImage");
+            Require.NotNullOrEmpty(outFile, "outFile");
+            Require.GreaterThanOrEqualTo(level, 0, "level");
+            Require.LessThanOrEqualTo(level, 100, "level");
 
             using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None)) {
                 ResizeImage(inImage, outStream, maxWidth, maxHeight, level);
@@ -59,10 +59,10 @@
 
         public static void ResizeImage(Image inImage, Stream outStream, double maxWidth, double maxHeight, long level)
         {
-            Requires.NotNull(inImage, "inImage");
-            Requires.NotNull(outStream, "outStream");
-            Requires.GreaterThanOrEqualTo(level, 0, "level");
-            Requires.LessThanOrEqualTo(level, 100, "level");
+            Require.NotNull(inImage, "inImage");
+            Require.NotNull(outStream, "outStream");
+            Require.GreaterThanOrEqualTo(level, 0, "level");
+            Require.LessThanOrEqualTo(level, 100, "level");
 
             var dim = GetFitToHeightDimensions(inImage.Width, inImage.Height, maxWidth, maxHeight);
 

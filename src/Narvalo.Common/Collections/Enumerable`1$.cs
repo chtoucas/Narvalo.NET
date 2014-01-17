@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Collections
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Fournit des méthodes d'extension pour <see cref="System.Collections.Generic.IEnumerable{T}"/>.
@@ -10,55 +9,16 @@
     {
         public static IEnumerable<T> Append<T>(this IEnumerable<T> @this, T element)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return Append_(@this, element);
         }
 
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> @this, T element)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return Prepend_(@this, element);
-        }
-
-        #region > Conversions <
-
-        public static ICollection<T> ToCollection<T>(this IEnumerable<T> @this)
-        {
-            Requires.Object(@this);
-
-            var result = new Collection<T>();
-
-            foreach (T item in @this) {
-                result.Add(item);
-            }
-
-            return result;
-        }
-
-        //// Une méthode semblable est fournie par System.Linq.
-        ////public static IList<T> ToList<T>(this IEnumerable<T> @this)
-        ////{
-        ////    Requires.Object(@this);
-
-        ////    var result = new List<T>();
-
-        ////    foreach (T item in @this) {
-        ////        result.Add(item);
-        ////    }
-
-        ////    return result;
-        ////}
-
-        #endregion
-        
-        static IEnumerable<T> Prepend_<T>(IEnumerable<T> source, T element)
-        {
-            yield return element;
-            foreach (var item in source) {
-                yield return item;
-            }
         }
 
         static IEnumerable<T> Append_<T>(IEnumerable<T> source, T element)
@@ -68,6 +28,14 @@
             }
 
             yield return element;
+        }
+
+        static IEnumerable<T> Prepend_<T>(IEnumerable<T> source, T element)
+        {
+            yield return element;
+            foreach (var item in source) {
+                yield return item;
+            }
         }
     }
 }

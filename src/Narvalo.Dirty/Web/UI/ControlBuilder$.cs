@@ -11,7 +11,7 @@
 
         public static ControlBuilder GetParentBuilder(this ControlBuilder @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return (ControlBuilder)@this
                 .GetType()
@@ -21,7 +21,7 @@
 
         public static ICollection GetSimplePropertyEntries(this ControlBuilder @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return (ICollection)@this
                 .GetType()
@@ -31,7 +31,7 @@
 
         public static ControlBuilder GetRootBuilder(this ControlBuilder @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             ControlBuilder result = null;
 

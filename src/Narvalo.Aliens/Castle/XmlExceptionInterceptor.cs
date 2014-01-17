@@ -11,7 +11,7 @@ namespace Narvalo.Castle
 
         public XmlExceptionInterceptor(Action<XmlException> onException)
         {
-            Requires.NotNull(onException, "onException");
+            Require.NotNull(onException, "onException");
 
             _onException = onException;
         }
@@ -20,7 +20,7 @@ namespace Narvalo.Castle
 
         public void Intercept(IInvocation invocation)
         {
-            Requires.NotNull(invocation, "invocation");
+            Require.NotNull(invocation, "invocation");
 
             try {
                 invocation.Proceed();

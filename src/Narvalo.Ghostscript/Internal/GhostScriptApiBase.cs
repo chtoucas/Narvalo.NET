@@ -15,14 +15,14 @@
 
         public void Execute<T>(GhostScriptArgs<T> args) where T : Device
         {
-            Requires.NotNull(args, "args");
+            Require.NotNull(args, "args");
 
             Execute(args.ToParamArray());
         }
 
         public void Execute(string[] args)
         {
-            Requires.NotNull(args, "args");
+            Require.NotNull(args, "args");
 
             string[] tmpArgs = PrepareParams(args);
 

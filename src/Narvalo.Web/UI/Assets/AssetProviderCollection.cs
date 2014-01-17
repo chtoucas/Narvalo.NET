@@ -14,7 +14,7 @@
 
         public override void Add(ProviderBase provider)
         {
-            Requires.NotNull(provider, "provider");
+            Require.NotNull(provider, "provider");
 
             if (!(provider is AssetProviderBase)) {
                 throw new ArgumentException(SR.AssetProviderCollection_InvalidProvider, "provider");

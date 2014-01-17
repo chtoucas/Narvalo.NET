@@ -11,21 +11,21 @@
     {
         public static void NoCache(this HttpResponse @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.Cache.SetCacheability(HttpCacheability.NoCache);
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.PubliclyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.Cache.SetCacheability(HttpCacheability.Public);
             @this.CacheFor_(duration);
@@ -33,14 +33,14 @@
 
         public static void PrivatelyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.PrivatelyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             ////@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             @this.Cache.SetCacheability(HttpCacheability.Private);
@@ -49,7 +49,7 @@
 
         public static void CacheFor(this HttpResponse @this, bool publicly, HttpVersions versions, TimeSpan duration)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.Cache.SetCacheability(publicly ? HttpCacheability.Public : HttpCacheability.Private);
 

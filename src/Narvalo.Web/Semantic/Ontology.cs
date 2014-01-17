@@ -18,7 +18,7 @@
 
         public Ontology(CultureInfo culture)
         {
-            Requires.NotNull(culture, "culture");
+            Require.NotNull(culture, "culture");
 
             _culture = culture;
             _openGraph = new OpenGraphMetadata(this);

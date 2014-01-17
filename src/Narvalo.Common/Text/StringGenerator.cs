@@ -20,8 +20,8 @@
 
         public static string RandomUnicodeString(int size)
         {
-            Requires.GreaterThanOrEqualTo(size, 0, "size");
-            Requires.LessThanOrEqualTo(size, Int32.MaxValue / 2, "size");
+            Require.GreaterThanOrEqualTo(size, 0, "size");
+            Require.LessThanOrEqualTo(size, Int32.MaxValue / 2, "size");
 
             checked {
                 int length = 2 * size;

@@ -13,7 +13,7 @@
     {
         public static Outcome<MailAddress> Create(string value)
         {
-            Requires.NotNullOrEmpty(value, "value");
+            Require.NotNullOrEmpty(value, "value");
 
             try {
                 return Outcome.Success(new MailAddress(value));
@@ -25,7 +25,7 @@
 
         public static Outcome<MailAddress> Create(string value, string displayName)
         {
-            Requires.NotNullOrEmpty(value, "value");
+            Require.NotNullOrEmpty(value, "value");
 
             try {
                 return Outcome.Success(new MailAddress(value, displayName));
@@ -40,8 +40,8 @@
             string displayName, 
             Encoding displayNameEncoding)
         {
-            Requires.NotNullOrEmpty(value, "value");
-            Requires.NotNullOrEmpty(displayName, "displayName");
+            Require.NotNullOrEmpty(value, "value");
+            Require.NotNullOrEmpty(displayName, "displayName");
 
             try {
                 return Outcome.Success(new MailAddress(value, displayName, displayNameEncoding));

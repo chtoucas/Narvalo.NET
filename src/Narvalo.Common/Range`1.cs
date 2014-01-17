@@ -11,7 +11,7 @@
 
         public Range(T lowerEnd, T upperEnd)
         {
-            Requires.LessThanOrEqualTo(lowerEnd, upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
+            Require.LessThanOrEqualTo(lowerEnd, upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
@@ -45,16 +45,12 @@
                 && range.UpperEnd.CompareTo(UpperEnd) <= 0;
         }
 
-        #region IEquatable<Range<T>>
-
         /// <summary />
         public bool Equals(Range<T> other)
         {
             return LowerEnd.Equals(other.LowerEnd)
                 && UpperEnd.Equals(other.UpperEnd);
         }
-
-        #endregion
 
         /// <summary />
         public override bool Equals(object obj)
@@ -69,14 +65,12 @@
         /// <summary />
         public override int GetHashCode()
         {
-            // FIXME
             return LowerEnd.GetHashCode() ^ UpperEnd.GetHashCode();
         }
 
         /// <summary />
         public override string ToString()
         {
-            // FIXME
             return String.Format(
                 CultureInfo.InvariantCulture,
                 "LowerEnd={0};UpperEnd={1}",

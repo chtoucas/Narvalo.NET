@@ -11,7 +11,7 @@
 
         public GuardChainBuilder(IGuard guard)
         {
-            Requires.NotNull(guard, "guard");
+            Require.NotNull(guard, "guard");
 
             Add(guard);
         }
@@ -25,7 +25,7 @@
         {
             ThrowIfClosed();
 
-            Requires.NotNull(guard, "guard");
+            Require.NotNull(guard, "guard");
 
             //if (!guard.IsChainable()) {
             //    throw new Failure.Argument("guard");
@@ -38,7 +38,7 @@
         {
             ThrowIfClosed();
 
-            Requires.NotNull(guards, "guards");
+            Require.NotNull(guards, "guards");
 
             foreach (var proxy in guards) {
                 Add(proxy);
@@ -61,7 +61,7 @@
         {
             ThrowIfClosed();
 
-            Requires.NotNull(guard, "guard");
+            Require.NotNull(guard, "guard");
 
             _guards.Add(guard);
             _closed = true;

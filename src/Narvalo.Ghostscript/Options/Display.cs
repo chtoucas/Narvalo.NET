@@ -82,7 +82,7 @@
 
         public void AddTo(ICollection<string> args)
         {
-            Requires.NotNull(args, "args");
+            Require.NotNull(args, "args");
 
             if (Orient1.HasValue) {
                 if (Orient1.Value) {

@@ -72,18 +72,18 @@ namespace Narvalo {
         /// <summary>
         ///   Looks up a localized string similar to The type must be of enum type..
         /// </summary>
-        internal static string Asserts_TypeMustBeEnum {
+        internal static string Check_TypeMustBeEnum {
             get {
-                return ResourceManager.GetString("Asserts_TypeMustBeEnum", resourceCulture);
+                return ResourceManager.GetString("Check_TypeMustBeEnum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The type must be a value type..
         /// </summary>
-        internal static string Asserts_TypeMustBeValueType {
+        internal static string Check_TypeMustBeValueType {
             get {
-                return ResourceManager.GetString("Asserts_TypeMustBeValueType", resourceCulture);
+                return ResourceManager.GetString("Check_TypeMustBeValueType", resourceCulture);
             }
         }
         
@@ -144,72 +144,72 @@ namespace Narvalo {
         /// <summary>
         ///   Looks up a localized string similar to The parameter {0} is empty..
         /// </summary>
-        internal static string Requires_ArgumentEmptyFormat {
+        internal static string Require_ArgumentEmptyFormat {
             get {
-                return ResourceManager.GetString("Requires_ArgumentEmptyFormat", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentEmptyFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The parameter {0} is null..
         /// </summary>
-        internal static string Requires_ArgumentNullFormat {
+        internal static string Require_ArgumentNullFormat {
             get {
-                return ResourceManager.GetString("Requires_ArgumentNullFormat", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentNullFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value is not greater than or equal to {0}..
         /// </summary>
-        internal static string Requires_NotGreaterThanOrEqualToFormat {
+        internal static string Require_NotGreaterThanOrEqualToFormat {
             get {
-                return ResourceManager.GetString("Requires_NotGreaterThanOrEqualToFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotGreaterThanOrEqualToFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value is not in range {0} / {1}..
         /// </summary>
-        internal static string Requires_NotInRangeFormat {
+        internal static string Require_NotInRangeFormat {
             get {
-                return ResourceManager.GetString("Requires_NotInRangeFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotInRangeFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value is not less than or equal to {0}..
         /// </summary>
-        internal static string Requires_NotLessThanOrEqualToFormat {
+        internal static string Require_NotLessThanOrEqualToFormat {
             get {
-                return ResourceManager.GetString("Requires_NotLessThanOrEqualToFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotLessThanOrEqualToFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The object &apos;this&apos; is null..
         /// </summary>
-        internal static string Requires_ObjectNull {
+        internal static string Require_ObjectNull {
             get {
-                return ResourceManager.GetString("Requires_ObjectNull", resourceCulture);
+                return ResourceManager.GetString("Require_ObjectNull", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The property value is empty..
         /// </summary>
-        internal static string Requires_PropertyEmpty {
+        internal static string Require_PropertyEmpty {
             get {
-                return ResourceManager.GetString("Requires_PropertyEmpty", resourceCulture);
+                return ResourceManager.GetString("Require_PropertyEmpty", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The property value is null..
         /// </summary>
-        internal static string Requires_PropertyNull {
+        internal static string Require_PropertyNull {
             get {
-                return ResourceManager.GetString("Requires_PropertyNull", resourceCulture);
+                return ResourceManager.GetString("Require_PropertyNull", resourceCulture);
             }
         }
         

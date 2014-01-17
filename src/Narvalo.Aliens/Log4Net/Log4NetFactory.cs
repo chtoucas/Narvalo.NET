@@ -10,14 +10,14 @@
 
         public ILogger CreateLogger(Type type)
         {
-            Requires.NotNull(type, "type");
+            Require.NotNull(type, "type");
 
             return Log4NetLogger.Create(LogManager.GetLogger(type));
         }
 
         public ILogger CreateLogger(string name)
         {
-            Requires.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
 
             return Log4NetLogger.Create(LogManager.GetLogger(name));
         }

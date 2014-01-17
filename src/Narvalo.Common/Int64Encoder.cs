@@ -51,48 +51,24 @@
             'W', 'X', 'Y', 'Z',
         };
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         public static string ToBase25String(long value)
         {
-            Requires.GreaterThanOrEqualTo(value, 0, "value");
-
             return Encode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         public static string ToBase34String(long value)
         {
-            Requires.GreaterThanOrEqualTo(value, 0, "value");
-
             return Encode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         public static string ToBase58String(long value)
         {
-            Requires.GreaterThanOrEqualTo(value, 0, "value");
-
             return Encode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
 
         public static string ToFlickrBase58String(long value)
         {
-            Requires.GreaterThanOrEqualTo(value, 0, "value");
+            Require.GreaterThanOrEqualTo(value, 0, "value");
 
             string result = String.Empty;
 
@@ -105,58 +81,34 @@
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
-        /// <exception cref="System.OverflowException"></exception>
         public static long FromBase25String(string value)
         {
-            Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base25MaxLength_, "value");
+            Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, Base25MaxLength_, "value");
 
             return Decode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
-        /// <exception cref="System.OverflowException"></exception>
         public static long FromBase34String(string value)
         {
-            Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base34MaxLength_, "value");
+            Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, Base34MaxLength_, "value");
 
             return Decode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
-        /// <exception cref="System.OverflowException"></exception>
         public static long FromBase58String(string value)
         {
-            Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, Base58MaxLength_, "value");
+            Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, Base58MaxLength_, "value");
 
             return Decode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
 
         public static long FromFlickrBase58String(string value)
         {
-            Requires.NotNull(value, "value");
-            Requires.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength_, "value");
+            Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength_, "value");
 
             long result = 0;
             long multiplier = 1;
@@ -178,8 +130,6 @@
             return result;
         }
 
-        #region > Membres internes <
-
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             long result = 0;
@@ -192,18 +142,8 @@
                 }
                 
                 checked {
-                    //// TODO
-                    ////if (result > Int64.MaxValue - multiplier * index) {
-                    ////    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
-                    ////}
-
                     result += multiplier * index;
-
                     if (i != 0) {
-                        //// TODO
-                        ////if (multiplier > MaxMultiplier) {
-                        ///    throw Failure.Argument("value", SR.Int64Encoder_IllegalSequence); // Illegal sequence of chars.
-                        ////}
                         multiplier *= alphabetLength;
                     }
                 }
@@ -214,6 +154,8 @@
 
         internal static string Encode(long value, char[] alphabet, int alphabetLength)
         {
+            Require.GreaterThanOrEqualTo(value, 0, "value");
+
             string result = String.Empty;
 
             while (value > 0) {
@@ -224,7 +166,5 @@
 
             return result;
         }
-
-        #endregion
     }
 }

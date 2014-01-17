@@ -2,7 +2,6 @@
 {
     using System.Data;
     using System.Data.SqlClient;
-    using Narvalo;
 
     /// <summary>
     /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlCommand"/>.
@@ -12,7 +11,7 @@
         public static void AddParameter(
             this SqlCommand @this, string parameterName, SqlDbType parameterType, object value)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.Parameters.Add(parameterName, parameterType).Value = value;
         }

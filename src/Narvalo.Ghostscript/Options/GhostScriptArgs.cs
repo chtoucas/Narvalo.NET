@@ -21,8 +21,8 @@
 
         public GhostScriptArgs(string inputFile, T device)
         {
-            Requires.NotNullOrEmpty(inputFile, "inputFile");
-            Requires.NotNull(device, "device");
+            Require.NotNullOrEmpty(inputFile, "inputFile");
+            Require.NotNull(device, "device");
 
             _inputFile = inputFile;
             _device = device;
@@ -42,7 +42,7 @@
 
         public Miscs Miscs { get { return _miscs; } set { _miscs = value; } }
 
-        // TODO: Ce paramètre ne devrait-il pas être obligatoire ?
+        // REVIEW: Ce paramètre ne devrait-il pas être obligatoire ?
         public string OutputFile { get { return _outputFile; } set { _outputFile = value; } }
 
         public Pdf Pdf { get { return _pdf; } set { _pdf = value; } }

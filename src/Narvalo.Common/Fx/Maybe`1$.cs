@@ -7,13 +7,11 @@
     /// </summary>
     public static class MaybeExtensions
     {
-        // REVIEW
         public static Maybe<TResult> Cast<T, TResult>(this Maybe<T> @this) where T : TResult
         {
             return @this.Map(_ => (TResult)_);
         }
 
-        // REVIEW
         public static Maybe<T> ThrowIfNone<T>(this Maybe<T> @this, Exception ex)
         {
             if (@this.IsNone) {
@@ -23,10 +21,9 @@
             return @this;
         }
 
-        // REVIEW
         public static Maybe<T> ThrowIfNone<T>(this Maybe<T> @this, Func<Exception> exceptionFactory)
         {
-            Requires.NotNull(exceptionFactory, "exceptionFactory");
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             if (@this.IsNone) {
                 throw exceptionFactory();
@@ -34,8 +31,6 @@
             
             return @this;
         }
-
-        #region + Match +
 
         public static TResult Match<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -53,11 +48,6 @@
             return option.Map(fun).ValueOrElse(defaultValueFactory);
         }
 
-        #endregion
-
-        #region + Run +
-
-        // FIXME
         public static void Run<T>(this Maybe<T> @this, Action<T> onSome, Action onNone)
         {
             Func<T, Unit> fun = _ => { onSome(_); return Unit.Single; };
@@ -75,8 +65,6 @@
         {
             @this.Run(_ => { }, action);
         }
-
-        #endregion
 
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
         {

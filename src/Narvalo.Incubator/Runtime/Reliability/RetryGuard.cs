@@ -10,7 +10,7 @@
 
 		public RetryGuard(RetryPolicy policy)
 		{
-			Requires.NotNull(policy, "policy");
+			Require.NotNull(policy, "policy");
 
 			_policy = policy;
 		}
@@ -23,7 +23,7 @@
 
 		public void Execute(Action action)
 		{
-			Requires.NotNull(action, "action");
+			Require.NotNull(action, "action");
 
 			int attempts = 0;
 			var exceptions = new List<Exception>();

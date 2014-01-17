@@ -19,7 +19,7 @@
 
         public static NarvaloWebSectionGroup GetSectionGroup(Configuration config)
         {
-            Requires.NotNull(config, "config");
+            Require.NotNull(config, "config");
             
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
@@ -27,13 +27,13 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "La valeur retournée peut changer entre deux appels.")]
         public static AssetSection GetAssetSection()
         {
-            return WebConfigurationManager<AssetSection>.GetSection(AssetSection.SectionName);
+            return WebConfigurationSectionManager.GetSection<AssetSection>(AssetSection.SectionName);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "La valeur retournée peut changer entre deux appels.")]
         public static OptimizationSection GetOptimizationSection()
         {
-            return WebConfigurationManager<OptimizationSection>.GetSection(OptimizationSection.SectionName);
+            return WebConfigurationSectionManager.GetSection<OptimizationSection>(OptimizationSection.SectionName);
         }
     }
 }

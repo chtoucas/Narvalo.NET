@@ -7,8 +7,6 @@
         // REVIEW: Maybe<Unit>.None ?
         public static readonly Maybe<Unit> Unit = default(Maybe<Narvalo.Fx.Unit>);
 
-        #region + Create +
-
         public static Maybe<T> Create<T>(T value)
         {
             return Maybe<T>.η(value);
@@ -19,39 +17,27 @@
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
 
-        #endregion
-
-        #region + Join +
-
         public static Maybe<T> Join<T>(Maybe<Maybe<T>> square)
         {
             return Maybe<T>.μ(square);
         }
-
-        #endregion
-
-        #region + Compose +
 
         public static Maybe<TResult> Compose<TSource, TMiddle, TResult>(
             MayFunc<TSource, TMiddle> kunA,
             MayFunc<TMiddle, TResult> kunB,
             TSource value)
         {
-            Requires.NotNull(kunA, "kunA");
-            Requires.NotNull(kunB, "kunB");
+            Require.NotNull(kunA, "kunA");
+            Require.NotNull(kunB, "kunB");
 
             return kunA(value).Bind(kunB);
         }
-
-        #endregion
-
-        #region + Lift +
 
         public static Maybe<TResult> Lift<T, TResult>(
             Func<T, TResult> fun,
             Maybe<T> option)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option.Map(fun);
         }
@@ -61,7 +47,7 @@
             Maybe<T1> option1,
             Maybe<T2> option2)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value))
@@ -74,7 +60,7 @@
             Maybe<T2> option2,
             Maybe<T3> option3)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value))
@@ -88,7 +74,7 @@
             Maybe<T3> option3,
             Maybe<T4> option4)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value))
@@ -103,16 +89,12 @@
            Maybe<T4> option4,
            Maybe<T5> option5)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome && option5.IsSome
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value, option5.Value))
                 : Maybe<TResult>.None;
         }
-
-        #endregion
-
-        #region + Promote +
 
         public static Func<Maybe<T>, Maybe<TResult>> Promote<T, TResult>(Func<T, TResult> fun)
         {
@@ -140,7 +122,5 @@
         {
             return (m1, m2, m3, m4, m5) => Lift(fun, m1, m2, m3, m4, m5);
         }
-
-        #endregion
     }
 }

@@ -16,7 +16,7 @@
 
         public void Add(TElement item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             BaseAdd(item, true /* throwIfExists */);
         }
@@ -28,21 +28,21 @@
 
         public bool Contains(TElement item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             return BaseIndexOf(item) >= 0;
         }
 
         public void CopyTo(TElement[] array, int arrayIndex)
         {
-            Requires.NotNull(array, "array");
+            Require.NotNull(array, "array");
 
             base.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(TElement item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             int index = BaseIndexOf(item);
             if (index >= 0) {
@@ -72,14 +72,14 @@
 
         public int IndexOf(TElement item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             return BaseIndexOf(item);
         }
 
         public void Insert(int index, TElement item)
         {
-            Requires.NotNull(item, "item");
+            Require.NotNull(item, "item");
 
             BaseAdd(index, item);
         }

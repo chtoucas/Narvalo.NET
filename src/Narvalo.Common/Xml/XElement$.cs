@@ -13,7 +13,7 @@
     {
         public static Maybe<XAttribute> AttributeOrNone(this XElement @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var attr = @this.Attribute(name);
             return attr == null ? Maybe<XAttribute>.None : Maybe.Create(attr);
@@ -21,7 +21,7 @@
 
         public static XAttribute AttributeOrThrow(this XElement @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var attr = @this.Attribute(name);
             if (attr == null) {
@@ -37,7 +37,7 @@
 
         public static Maybe<XElement> ElementOrNone(this XElement @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var child = @this.Element(name);
             return child == null ? Maybe<XElement>.None : Maybe.Create(child);
@@ -45,7 +45,7 @@
 
         public static XElement ElementOrThrow(this XElement @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var child = @this.Element(name);
             if (child == null) {
@@ -61,16 +61,16 @@
 
         public static T ParseValue<T>(this XElement @this, Func<string, T> fun)
         {
-            Requires.Object(@this);
-            Requires.NotNull(fun, "fun");
+            Require.Object(@this);
+            Require.NotNull(fun, "fun");
 
             return fun(@this.Value);
         }
 
         public static T ParseValue<T>(this XElement @this, MayFunc<string, T> fun)
         {
-            Requires.Object(@this);
-            Requires.NotNull(fun, "fun");
+            Require.Object(@this);
+            Require.NotNull(fun, "fun");
 
             return fun(@this.Value).ValueOrThrow(() => new XmlException(
                 String.Format(
@@ -82,15 +82,15 @@
 
         public static Maybe<T> MayParseValue<T>(this XElement @this, MayFunc<string, T> fun)
         {
-            Requires.Object(@this);
-            Requires.NotNull(fun, "fun");
+            Require.Object(@this);
+            Require.NotNull(fun, "fun");
 
             return fun(@this.Value);
         }
 
         public static Maybe<XElement> NextElementOrNone(this XElement @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
@@ -102,7 +102,7 @@
 
         public static XElement NextElementOrThrow(this XElement @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {

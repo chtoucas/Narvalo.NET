@@ -11,18 +11,18 @@
     {
         public static Maybe<string> MayGetValue(this NameValueCollection @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.MayGetValues(name)
-                //// On ne s'attend à ne récupérer qu'une seule valeur.
+                // On ne s'attend à récupérer qu'une seule valeur.
                 .Filter(@_ => @_.Length == 1)
-                //// Si la condition précédente est satisfaite, on sélectionne l'unique élément du tableau.
+                // Si la condition précédente est satisfaite, on sélectionne l'unique élément du tableau.
                 .Map(@_ => @_[0]);
         }
 
         public static Maybe<string[]> MayGetValues(this NameValueCollection @this, string name)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return Maybe.Create(@this.GetValues(name));
         }
@@ -32,7 +32,7 @@
             string name,
             MayFunc<string, T> parser)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.MayGetValues(name).Bind(@_ => Maybe.Collect(@_, parser));
         }
@@ -42,8 +42,8 @@
             string name,
             MayFunc<string, T> parser)
         {
-            Requires.Object(@this);
-            Requires.NotNull(parser, "parser");
+            Require.Object(@this);
+            Require.NotNull(parser, "parser");
 
             return @this.MayGetValue(name).Bind(_ => parser(_));
         }
@@ -53,7 +53,7 @@
             string name,
             MayFunc<string, T> parser)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.MayGetValues(name).Bind(@_ => Maybe.Map(@_, parser));
         }

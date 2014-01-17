@@ -17,7 +17,7 @@
             IEnumerable<TSource> source,
             MayFunc<TSource, TResult> selectorM)
         {
-            Requires.NotNull(selectorM, "selectorM");
+            Require.NotNull(selectorM, "selectorM");
 
             return from item in source
                    let m = selectorM(item)
@@ -25,12 +25,10 @@
                    select m.Value;
         }
 
-        #region > Single <
-
         public static Maybe<T> FirstOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
@@ -40,8 +38,8 @@
 
         public static Maybe<T> LastOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
@@ -60,8 +58,8 @@
 
         public static Maybe<T> SingleOrNone<T>(IEnumerable<T> source, Predicate<T> predicate)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicate, "predicate");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicate, "predicate");
 
             var seq = from t in source where predicate(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
@@ -72,14 +70,12 @@
             }
         }
 
-        #endregion
-
         public static Maybe<IEnumerable<TSource>> Filter<TSource>(
             IEnumerable<TSource> source,
             MayFunc<TSource, bool> predicateM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(predicateM, "predicateM");
+            Require.NotNull(source, "source");
+            Require.NotNull(predicateM, "predicateM");
 
             var list = from item in source
                        where predicateM(item).Match(b => b, false)
@@ -88,15 +84,13 @@
             return Create(list);
         }
 
-        #region > Aggregate <
-
         public static Maybe<TAccumulate> FoldLeft<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
             MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(source, "source");
+            Require.NotNull(accumulatorM, "accumulatorM");
 
             Maybe<TAccumulate> option = Create(seed);
 
@@ -112,8 +106,8 @@
             TAccumulate seed,
             MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(source, "source");
+            Require.NotNull(accumulatorM, "accumulatorM");
 
             return FoldLeft(source.Reverse(), seed, accumulatorM);
         }
@@ -122,20 +116,17 @@
             IEnumerable<TSource> source,
             MayFunc<TSource, TSource, TSource> accumulatorM)
         {
-            Requires.NotNull(source, "source");
+            Require.NotNull(source, "source");
 
-            // FIXME
             return Reduce(source.ToArray(), accumulatorM);
         }
-
-        #endregion
 
         public static Maybe<IList<TResult>> Map<TSource, TResult>(
             IEnumerable<TSource> source,
             MayFunc<TSource, TResult> kun)
         {
-            Requires.NotNull(source, "source");
-            Requires.NotNull(kun, "kun");
+            Require.NotNull(source, "source");
+            Require.NotNull(kun, "kun");
 
             var list = from item in source select kun(item);
 
@@ -144,7 +135,7 @@
 
         public static Maybe<IList<TSource>> Sequence<TSource>(IEnumerable<Maybe<TSource>> source)
         {
-            Requires.NotNull(source, "source");
+            Require.NotNull(source, "source");
 
             IList<TSource> list = new List<TSource>();
 

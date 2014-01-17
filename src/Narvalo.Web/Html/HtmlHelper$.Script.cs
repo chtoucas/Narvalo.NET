@@ -32,7 +32,7 @@
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
         static IHtmlString ScriptHelper_(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
-            Requires.NotNull(scriptUri, "scriptUri");
+            Require.NotNull(scriptUri, "scriptUri");
 
             var tag = new TagBuilder("script");
             tag.MergeAttribute("src", scriptUri.ToProtocolLessString());

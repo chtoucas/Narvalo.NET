@@ -32,7 +32,7 @@
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
         static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
-            Requires.NotNull(linkUri, "linkUri");
+            Require.NotNull(linkUri, "linkUri");
 
             var tag = new TagBuilder("link");
             tag.MergeAttribute("href", linkUri.ToProtocolLessString());

@@ -1,0 +1,21 @@
+﻿namespace Narvalo.Configuration
+{
+    using System.Configuration;
+
+    public static class ConfigurationExtensions
+    {
+        public static T GetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
+        {
+            Require.Object(@this);
+            Require.NotNullOrEmpty(sectionName, "sectionName");
+
+            T section = @this.GetSection(sectionName) as T;
+
+            if (section == null) {
+                throw Failure.ConfigurationErrors(SR.ConfigurationManager_MissingSectionFormat, sectionName);
+            }
+
+            return section;
+        }
+    }
+}

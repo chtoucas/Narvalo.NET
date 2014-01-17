@@ -53,9 +53,9 @@
             string appId,
             string appSecret)
         {
-            Requires.NotNull(httpContext, "httpContext");
-            Requires.NotNullOrEmpty(appId, "appId");
-            Requires.NotNullOrEmpty(appSecret, "appSecret");
+            Require.NotNull(httpContext, "httpContext");
+            Require.NotNullOrEmpty(appId, "appId");
+            Require.NotNullOrEmpty(appSecret, "appSecret");
 
             return MayGetHttpCookie_(httpContext, appId)
                 .Bind(_ => MayParseHttpCookie_(_, appSecret));

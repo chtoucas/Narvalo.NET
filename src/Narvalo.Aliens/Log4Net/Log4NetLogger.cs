@@ -16,7 +16,7 @@
 
         internal static Log4NetLogger Create(ILog inner)
         {
-            Requires.NotNull(inner, "inner");
+            Require.NotNull(inner, "inner");
 
             return new Log4NetLogger(inner);
         }

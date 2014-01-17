@@ -11,7 +11,7 @@
         static readonly Regex MultipleTabsOrSpacesRegex_
             = new Regex(@"[\x09\x20]{2,}", RegexOptions.Compiled);
         
-        // TODO: Désactiver la capture dans la regex.
+        // FIXME: Désactiver la capture dans la regex.
         static readonly Regex MultipleEmptyLinesRegex_
             = new Regex(@"([\x0A\x0D]+\x20*){2,}", RegexOptions.Compiled);
 
@@ -26,7 +26,7 @@
         /// <returns>La chaîne de caractères nettoyée.</returns>
         public string Bust(string value)
         {
-            Requires.NotNull(value, "value");
+            Require.NotNull(value, "value");
 
             if (value.Length == 0) {
                 return String.Empty;

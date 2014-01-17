@@ -41,19 +41,19 @@
 
         public static Uri GetImage(string relativePath)
         {
-            Requires.NotNullOrEmpty(relativePath, "relativePath");
+            Require.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetImage(relativePath);
         }
 
         public static Uri GetScript(string relativePath)
         {
-            Requires.NotNullOrEmpty(relativePath, "relativePath");
+            Require.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetScript(relativePath);
         }
 
         public static Uri GetStyle(string relativePath)
         {
-            Requires.NotNullOrEmpty(relativePath, "relativePath");
+            Require.NotNullOrEmpty(relativePath, "relativePath");
             return Provider.GetStyle(relativePath);
         }
 

@@ -11,7 +11,7 @@
 
         public override void Initialize(string name, NameValueCollection config)
         {
-            Requires.NotNull(config, "config");
+            Require.NotNull(config, "config");
 
             if (String.IsNullOrEmpty(name)) {
                 name = "LocalAssetProvider";

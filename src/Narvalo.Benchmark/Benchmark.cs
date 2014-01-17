@@ -10,8 +10,8 @@
 
         public Benchmark(string name, Action action, int iterations)
         {
-            Requires.NotNullOrEmpty(name, "name");
-            Requires.NotNull(action, "action");
+            Require.NotNullOrEmpty(name, "name");
+            Require.NotNull(action, "action");
 
             _name = name;
             _action = action;

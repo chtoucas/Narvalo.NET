@@ -9,8 +9,8 @@
 
         public BenchComparative(string name, Action action)
         {
-            Requires.NotNullOrEmpty(name, "name");
-            Requires.NotNull(action, "action");
+            Require.NotNullOrEmpty(name, "name");
+            Require.NotNull(action, "action");
 
             _name = name;
             _action = action;

@@ -14,7 +14,7 @@
         // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
         public ConcurrencyThrottle(int maxConcurrentRequests, TimeSpan timeout)
         {
-            Requires.GreaterThanOrEqualTo(maxConcurrentRequests, 1, "maxConcurrentRequests");
+            Require.GreaterThanOrEqualTo(maxConcurrentRequests, 1, "maxConcurrentRequests");
 
             _maxConcurrentRequests = maxConcurrentRequests;
             _timeout = timeout;

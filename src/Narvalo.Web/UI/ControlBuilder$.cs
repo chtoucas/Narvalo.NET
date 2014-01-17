@@ -26,7 +26,7 @@ namespace Narvalo.Web.UI
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             PropertyInfo pi = null;
             Type type = @this.GetType();

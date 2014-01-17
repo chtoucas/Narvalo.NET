@@ -13,7 +13,7 @@
 
         public RazorOptimizer(IWhiteSpaceBuster buster)
         {
-            Requires.NotNull(buster, "buster");
+            Require.NotNull(buster, "buster");
 
             _buster = buster;
         }
@@ -75,8 +75,6 @@
 
             span.ReplaceWith(builder);
         }
-
-        #region > Membres privés <
 
         static bool IsMarkup_(Span span)
         {
@@ -142,8 +140,6 @@
             string _content;
             SourceLocation _start = SourceLocation.Zero;
 
-            #region ISymbol
-
             public string Content
             {
                 get { return _content; }
@@ -161,10 +157,6 @@
             {
                 _start = documentStart;
             }
-            
-            #endregion
         }
-        
-        #endregion
     }
 }

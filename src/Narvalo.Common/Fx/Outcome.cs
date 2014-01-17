@@ -6,6 +6,8 @@
     {
         public static Outcome<T> Failure<T>(Func<Exception> exceptionFactory)
         {
+            Require.NotNull(exceptionFactory, "exceptionFactory");
+
             return Failure<T>(exceptionFactory());
         }
 
@@ -16,6 +18,8 @@
 
         public static Outcome<T> Failure<T>(Func<string> errorMessageFactory)
         {
+            Require.NotNull(errorMessageFactory, "errorMessageFactory");
+
             return Failure<T>(new OutcomeException(errorMessageFactory()));
         }
 

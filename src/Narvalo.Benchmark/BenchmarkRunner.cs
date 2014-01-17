@@ -8,7 +8,7 @@
 
         BenchmarkRunner(Benchmarker benchmarker)
         {
-            Requires.NotNull(benchmarker, "benchmarker");
+            Require.NotNull(benchmarker, "benchmarker");
 
             _benchmarker = benchmarker;
         }

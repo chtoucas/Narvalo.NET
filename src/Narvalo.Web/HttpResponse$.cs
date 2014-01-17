@@ -14,7 +14,7 @@
 
         ////public static void SendJson(this HttpResponse @this, object content)
         ////{
-        ////    Requires.Object(@this);
+        ////    Require.Object(@this);
 
         ////    @this.ContentType = "application/json";
         ////    @this.ContentEncoding = Encoding.UTF8;
@@ -26,7 +26,7 @@
 
         public static void SendPlainText(this HttpResponse @this, string content)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.ContentType = "text/plain";
             @this.Write(content);
@@ -34,7 +34,7 @@
 
         public static void SetStatusCode(this HttpResponse @this, HttpStatusCode statusCode)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             @this.StatusCode = (int)statusCode;
         }

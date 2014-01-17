@@ -14,7 +14,7 @@
 
         public FlowRateBarrier(int maxRequestsPerInterval, TimeSpan resetInterval)
         {
-            Requires.GreaterThanOrEqualTo(maxRequestsPerInterval, 1, "maxRequestsPerInterval");
+            Require.GreaterThanOrEqualTo(maxRequestsPerInterval, 1, "maxRequestsPerInterval");
 
             _maxRequestsPerInterval = maxRequestsPerInterval;
             _resetInterval = resetInterval;
@@ -40,7 +40,7 @@
 
         public void Execute(Action action)
         {
-            Requires.NotNull(action, "action");
+            Require.NotNull(action, "action");
 
             ThrowIfDisposed();
 

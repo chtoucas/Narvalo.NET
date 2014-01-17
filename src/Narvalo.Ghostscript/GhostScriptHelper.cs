@@ -9,7 +9,7 @@
     {
         public static Bitmap ExtractCover(string inputFile)
         {
-            Requires.NotNullOrEmpty(inputFile, "inputFile");
+            Require.NotNullOrEmpty(inputFile, "inputFile");
 
             if (!File.Exists(inputFile)) {
                 throw new FileNotFoundException();
@@ -43,7 +43,7 @@
 
         public static string ExtractText(string inputFile)
         {
-            Requires.NotNullOrEmpty(inputFile, "inputFile");
+            Require.NotNullOrEmpty(inputFile, "inputFile");
 
             if (!File.Exists(inputFile)) {
                 throw new FileNotFoundException();

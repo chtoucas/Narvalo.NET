@@ -14,8 +14,8 @@
             BenchComparativeFinder finder,
             BenchComparisonRunner runner)
         {
-            Requires.NotNull(finder, "finder");
-            Requires.NotNull(runner, "runner");
+            Require.NotNull(finder, "finder");
+            Require.NotNull(runner, "runner");
 
             _finder = finder;
             _runner = runner;

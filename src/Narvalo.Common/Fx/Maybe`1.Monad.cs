@@ -6,19 +6,17 @@
     {
         public Maybe<TResult> Bind<TResult>(MayFunc<T, TResult> kun)
         {
-            Requires.NotNull(kun, "kun");
+            Require.NotNull(kun, "kun");
 
             return _isSome ? kun(_value) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> fun)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return _isSome ? Maybe<TResult>.η(fun(_value)) : Maybe<TResult>.None;
         }
-
-        #region > Monad <
 
         internal static Maybe<T> η(T value)
         {
@@ -29,7 +27,5 @@
         {
             return square._isSome ? square._value : Maybe<T>.None;
         }
-
-        #endregion
     }
 }

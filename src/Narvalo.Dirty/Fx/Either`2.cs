@@ -55,7 +55,7 @@
         public Either<TLeft, TResult> Bind<TResult>(
             Func<TRight, Either<TLeft, TResult>> fun)
         {
-            Requires.NotNull(fun, "fun");
+            Require.NotNull(fun, "fun");
 
             return _isLeft ? Either<TLeft, TResult>.Left(_left) : fun(_right);
         }
@@ -63,7 +63,7 @@
         public Either<TResult, TRight> MapLeft<TResult>(
            Func<TLeft, TResult> selector)
         {
-            Requires.NotNull(selector, "selector");
+            Require.NotNull(selector, "selector");
 
             return _isLeft
                ? Either<TResult, TRight>.Left(selector(_left))
@@ -73,7 +73,7 @@
         public Either<TLeft, TResult> MapRight<TResult>(
             Func<TRight, TResult> selector)
         {
-            Requires.NotNull(selector, "selector");
+            Require.NotNull(selector, "selector");
 
             return _isLeft
                 ? Either<TLeft, TResult>.Left(_left)

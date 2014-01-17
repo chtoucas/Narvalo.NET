@@ -7,8 +7,6 @@
 
     public static class MayParse
     {
-        #region > Types élémentaires <
-
         public static Maybe<bool> ToBoolean(string value)
         {
             return ToBoolean(value, BooleanStyles.Default);
@@ -146,8 +144,6 @@
                 (string val, out ulong result) => UInt64.TryParse(val, style, provider, out result));
         }
 
-        #endregion
-
         public static Maybe<DateTime> ToDateTime(string value)
         {
             return ToDateTime(value, "o");
@@ -176,7 +172,7 @@
 
         public static Maybe<TEnum> ToEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            Asserts.IsEnum(typeof(TEnum));
+            Check.IsEnum(typeof(TEnum));
 
             return MayParseHelper.Parse<TEnum>(
                 value,

@@ -140,7 +140,7 @@
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
     <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
     <Compile Include="Configuration\OptimizationSection.cs" />
-    <Compile Include="Configuration\WebConfigurationManager`1.cs" />
+    <Compile Include="Configuration\WebConfigurationManager.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\AssetHelper.cs" />

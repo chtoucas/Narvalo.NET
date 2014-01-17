@@ -13,7 +13,7 @@ namespace Narvalo.Web.UI
 
         public override void ParseComplete(ControlBuilder rootBuilder)
         {
-            Requires.NotNull(rootBuilder, "rootBuilder");
+            Require.NotNull(rootBuilder, "rootBuilder");
 
             if (Enabled) {
                 TransformRecursively_(rootBuilder);

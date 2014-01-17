@@ -13,8 +13,8 @@
 
         protected StoredProcedure(string connectionString, string name)
         {
-            Requires.NotNull(connectionString, "connectionString");
-            Requires.NotNull(name, "name");
+            Require.NotNull(connectionString, "connectionString");
+            Require.NotNull(name, "name");
 
             _connectionString = connectionString;
             _name = name;
@@ -27,7 +27,7 @@
         }
 
         protected string ConnectionString { get { return _connectionString; } }
-        
+
         protected string Name { get { return _name; } }
 
         public TResult Execute()
@@ -40,7 +40,7 @@
 
                     connection.Open();
 
-                    using (var reader = ExecuteCommand(command)) {
+                    using (var reader = ExecuteCommand_(command)) {
                         result = Execute(reader);
                     }
                 }
@@ -63,7 +63,7 @@
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };
         }
 
-        protected SqlDataReader ExecuteCommand(SqlCommand command)
+        SqlDataReader ExecuteCommand_(SqlCommand command)
         {
             return command.ExecuteReader(CommandBehavior);
         }

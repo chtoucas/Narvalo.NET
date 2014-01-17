@@ -12,7 +12,7 @@
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             RegisterHandlers(this ContainerBuilder @this, params Assembly[] handlerAssemblies)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.RegisterAssemblyTypes(handlerAssemblies)
                 .Where(_ => typeof(IHttpHandler).IsAssignableFrom(_)

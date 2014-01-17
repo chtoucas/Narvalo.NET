@@ -13,7 +13,7 @@
 
         public GuardChain(IEnumerable<IGuard> guards)
         {
-            Requires.NotNull(guards, "guards");
+            Require.NotNull(guards, "guards");
 
             _guards = guards;
             _guardsThunk = new Lazy<IReadOnlyCollection<IGuard>>(() =>
@@ -35,7 +35,7 @@
 
         public void Execute(Action action)
         {
-            Requires.NotNull(action, "action");
+            Require.NotNull(action, "action");
 
             Action guardedAction = action;
             foreach (var guard in _guards) {

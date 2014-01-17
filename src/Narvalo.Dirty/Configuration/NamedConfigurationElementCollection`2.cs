@@ -12,7 +12,7 @@
         protected NamedConfigurationElementCollection(string elementName)
             : base()
         {
-            Requires.NotNullOrEmpty(elementName, "elementName");
+            Require.NotNullOrEmpty(elementName, "elementName");
 
             _elementName = elementName;
         }
@@ -39,7 +39,7 @@
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            Requires.NotNull(element, "element");
+            Require.NotNull(element, "element");
 
             return GetElementKey(element as TElement);
         }
@@ -51,7 +51,7 @@
 
         protected TKey GetElementKey(TElement element)
         {
-            Requires.NotNull(element, "element");
+            Require.NotNull(element, "element");
 
             return element.Key;
         }

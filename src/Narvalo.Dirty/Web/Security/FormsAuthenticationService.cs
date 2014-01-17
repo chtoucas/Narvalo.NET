@@ -6,7 +6,7 @@
     {
         public void SignIn(string userName, bool createPersistentCookie)
         {
-            Requires.NotNullOrEmpty(userName, "userName");
+            Require.NotNullOrEmpty(userName, "userName");
 
             FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
         }

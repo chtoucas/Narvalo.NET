@@ -49,8 +49,6 @@
             return !left.Equals(right);
         }
 
-        #region > Extraction de la valeur sous-jacente <
-
         public T ValueOrDefault()
         {
             return _isSome ? _value : default(T);
@@ -63,14 +61,14 @@
 
         public T ValueOrElse(Func<T> defaultValueFactory)
         {
-            Requires.NotNull(defaultValueFactory, "defaultValueFactory");
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
             return _isSome ? _value : defaultValueFactory();
         }
 
         public T ValueOrThrow(Exception ex)
         {
-            Requires.NotNull(ex, "ex");
+            Require.NotNull(ex, "ex");
 
             if (!_isSome) {
                 throw ex;
@@ -81,7 +79,7 @@
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
-            Requires.NotNull(exceptionFactory, "exceptionFactory");
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             if (!_isSome) {
                 throw exceptionFactory();
@@ -89,10 +87,6 @@
             
             return _value;
         }
-
-        #endregion
-
-        #region IEnumerable<T>
 
         /// <summary />
         public IEnumerator<T> GetEnumerator()
@@ -105,10 +99,6 @@
             }
         }
 
-        #endregion
-
-        #region IEquatable<T>
-
         /// <summary />
         public bool Equals(T other)
         {
@@ -116,10 +106,6 @@
 
             return _value.Equals(other);
         }
-
-        #endregion
-
-        #region IEquatable<Maybe<T>>
 
         /// <summary />
         public bool Equals(Maybe<T> other)
@@ -131,10 +117,6 @@
                 //// Les deux options ont la même valeur.
                 || _value.Equals(other._value);
         }
-
-        #endregion
-
-        #region > Surchages d'Object <
 
         /// <summary />
         public override bool Equals(object obj)
@@ -162,16 +144,10 @@
             return _isSome ? _value.ToString() : "None";
         }
 
-        #endregion
-
-        #region IEnumerable
-
         /// <summary />
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
-        #endregion
     }
 }

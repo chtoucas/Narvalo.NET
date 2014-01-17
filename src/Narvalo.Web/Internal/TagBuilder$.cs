@@ -8,14 +8,14 @@
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return @this.ToHtmlString(TagRenderMode.Normal);
         }
 
         public static IHtmlString ToHtmlString(this TagBuilder @this, TagRenderMode renderMode)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             return new HtmlString(@this.ToString(renderMode));
         }

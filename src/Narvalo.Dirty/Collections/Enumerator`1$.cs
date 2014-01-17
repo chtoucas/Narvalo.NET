@@ -10,7 +10,7 @@
     {
         public static Collection<T> ToCollection<T>(this IEnumerator<T> @this)
         {
-            Requires.Object(@this);
+            Require.Object(@this);
 
             var result = new Collection<T>();
 

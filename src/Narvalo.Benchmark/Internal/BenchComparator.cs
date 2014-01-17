@@ -8,14 +8,14 @@
 
         public BenchComparator(Benchmarker benchmarker)
         {
-            Requires.NotNull(benchmarker, "benchmarker");
+            Require.NotNull(benchmarker, "benchmarker");
 
             _benchmarker = benchmarker;
         }
 
         public IEnumerable<BenchMetric> Compare(BenchComparison comparison)
         {
-            Requires.NotNull(comparison, "comparison");
+            Require.NotNull(comparison, "comparison");
 
             return Compare(comparison.Items, comparison.Iterations);
         }
@@ -24,7 +24,7 @@
             IEnumerable<BenchComparative> items,
             int iterations)
         {
-            Requires.NotNull(items, "items");
+            Require.NotNull(items, "items");
 
             foreach (var item in items) {
                 var duration = _benchmarker.Time(item.Action, iterations);

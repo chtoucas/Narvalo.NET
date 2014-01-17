@@ -35,7 +35,7 @@ namespace Narvalo.Web.Optimization
 
         public override void VisitSpan(Span span)
         {
-            Requires.NotNull(span, "span");
+            Require.NotNull(span, "span");
 
             if (span.Kind == SpanKind.Markup) {
                 _optimizer.OptimizeSpan(span);

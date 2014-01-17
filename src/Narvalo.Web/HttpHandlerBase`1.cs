@@ -30,7 +30,7 @@
 
         protected override void ProcessRequestCore(HttpContext context)
         {
-            Requires.NotNull(context, "context");
+            Require.NotNull(context, "context");
 
             // Liaison du modèle.
             var outcome = Bind(context.Request);

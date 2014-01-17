@@ -13,10 +13,10 @@
 
         public RetryPolicy(int maxRetries, TimeSpan retryInterval, IList<Type> retryableExceptionTypes)
         {
-            Requires.GreaterThanOrEqualTo(maxRetries, 1, "maxRetries");
+            Require.GreaterThanOrEqualTo(maxRetries, 1, "maxRetries");
             // FIXME: la comparaison doit être stricte.
-            Requires.GreaterThanOrEqualTo(retryInterval, TimeSpan.Zero, "retryInterval");
-            Requires.NotNull(retryableExceptionTypes, "retryableExceptionTypes");
+            Require.GreaterThanOrEqualTo(retryInterval, TimeSpan.Zero, "retryInterval");
+            Require.NotNull(retryableExceptionTypes, "retryableExceptionTypes");
 
             _maxRetries = maxRetries;
             _retryInterval = retryInterval;
@@ -35,7 +35,7 @@
 
         public bool MayRetryAfter(Exception ex)
         {
-            Requires.NotNull(ex, "ex");
+            Require.NotNull(ex, "ex");
 
             return _retryableExceptionTypes.Contains(ex.GetType());
         }

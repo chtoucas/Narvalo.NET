@@ -16,13 +16,11 @@
 
         public OpenGraphMetadata(Ontology ontology)
         {
-            Requires.NotNull(ontology, "ontology");
+            Require.NotNull(ontology, "ontology");
 
             _ontology = ontology;
             _locale = new OpenGraphLocale(ontology.Culture);
         }
-
-        #region IOpenGraphMetadata
 
         public OpenGraphImage Image
         {
@@ -41,9 +39,9 @@
         public Uri Url { get { return _ontology.Relationships.CanonicalUrl; } }
 
         public string Description { get { return _ontology.Description; } }
-        
+
         public string Determiner { get; set; }
-        
+
         public OpenGraphLocale Locale { get { return _locale; } }
 
         public IEnumerable<OpenGraphLocale> AlternativeLocales
@@ -67,7 +65,5 @@
                 _alternativeLocales.Add(locale);
             }
         }
-
-        #endregion
     }
 }

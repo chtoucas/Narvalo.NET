@@ -9,7 +9,7 @@
     {
         public static string ToQueryString(this NameValueCollection nvc)
         {
-            Requires.Object(nvc);
+            Require.Object(nvc);
 
             if (nvc.Count == 0) {
                 return String.Empty;
@@ -45,7 +45,7 @@
 
         public static string ToQueryStringWithQuestionMark(this NameValueCollection nvc)
         {
-            Requires.Object(nvc);
+            Require.Object(nvc);
 
             return nvc.Count > 0 ? "?" + nvc.ToQueryString() : String.Empty;
         }
