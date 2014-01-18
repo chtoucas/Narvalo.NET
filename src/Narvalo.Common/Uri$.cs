@@ -4,19 +4,23 @@
 
     public static class UriExtensions
     {
-        public static string ToProtocolLessString(this Uri uri)
+        public static string ToProtocolLessString(this Uri @this)
         {
-            if (!uri.IsAbsoluteUri) {
-                return uri.ToString();
+            Require.Object(@this);
+
+            var scheme = @this.Scheme;
+
+            if (!@this.IsAbsoluteUri) {
+                return @this.ToString();
             }
-            else if (uri.Scheme == Uri.UriSchemeHttp) {
-                return uri.ToString().Replace("http:", String.Empty);
+            else if (scheme == Uri.UriSchemeHttp) {
+                return @this.ToString().Replace("http:", String.Empty);
             }
-            else if (uri.Scheme == Uri.UriSchemeHttps) {
-                return uri.ToString().Replace("https:", String.Empty);
+            else if (scheme == Uri.UriSchemeHttps) {
+                return @this.ToString().Replace("https:", String.Empty);
             }
             else {
-                throw Failure.NotSupported(SR.Uri_ProtocolLessUnsupportedSchemeFormat, uri.Scheme);
+                throw Failure.NotSupported(SR.Uri_ProtocolLessUnsupportedSchemeFormat, scheme);
             }
         }
     }

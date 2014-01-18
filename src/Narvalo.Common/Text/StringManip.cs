@@ -114,7 +114,14 @@
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Sans cela la méthode ne remplirait pas sa fonction.")]
         public static string ToTitleCase(string value)
         {
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
+            Require.NotNull(value, "value");
+
+            if (value.Length == 0) {
+                return value;
+            }
+            else {
+                return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
+            }
         }
     }
 }

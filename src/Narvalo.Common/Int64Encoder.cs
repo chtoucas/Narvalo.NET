@@ -74,6 +74,8 @@
 
             while (value > 0) {
                 long r = value % FlickrBase58AlphabetLength_;
+
+                // REVIEW: On devrait peut-être utiliser un StringBuilder ?
                 result = FlickrBase58Alphabet_[r] + result;
                 value /= FlickrBase58AlphabetLength_;
             }
@@ -160,6 +162,8 @@
 
             while (value > 0) {
                 long r = value % alphabetLength;
+
+                // REVIEW: On devrait peut-être utiliser un StringBuilder ?
                 result = alphabet[r] + result;
                 value /= alphabetLength;
             }

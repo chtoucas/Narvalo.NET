@@ -5,7 +5,7 @@
     using System.Configuration;
     using System.Globalization;
 
-    public static class Failure
+    public static class Failure // LocalizedException
     {
         public static ArgumentException Argument(
             string parameterName,

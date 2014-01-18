@@ -49,7 +49,7 @@
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, Successful ? SR.Outcome_Successful : SR.Outcome_Unsuccessful);
+            return Successful ? SR.Outcome_Successful : SR.Outcome_Unsuccessful;
         }
     }
 }
