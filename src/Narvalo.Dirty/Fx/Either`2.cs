@@ -1,9 +1,10 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
+    // NB: Par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
+    // incorrecte, Left contient la valeur en cas d'erreur, et Right contient la valeur en cas de succès.
     public abstract partial class Either<TLeft, TRight>
     {
         readonly bool _isLeft;
@@ -50,8 +51,6 @@
             }
         }
 
-        #region > Opérations monadiques <
-
         public Either<TLeft, TResult> Bind<TResult>(
             Func<TRight, Either<TLeft, TResult>> fun)
         {
@@ -80,15 +79,11 @@
                 : Either<TLeft, TResult>.Right(selector(_right));
         }
 
-        #endregion
-
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Either<TLeft, TRight> Left(TLeft value)
         {
             return new LeftImpl(value);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Either<TLeft, TRight> Right(TRight value)
         {
             return new RightImpl(value);
@@ -120,7 +115,7 @@
             }
         }
 
-        sealed class RightImpl : Either<TLeft, TRight> 
+        sealed class RightImpl : Either<TLeft, TRight>
         {
             public RightImpl(TRight value) : base(value) { }
 
@@ -145,5 +140,13 @@
                 return String.Format(CultureInfo.CurrentCulture, "Right({0})", RightValue);
             }
         }
+
+        //    public abstract TResult Switch<TResult>(
+        //        Func<TLeft, TResult> caseLeft,
+        //        Func<TRight, TResult> caseRight);
+
+        //    public abstract void Switch(
+        //        Action<TLeft> caseLeft,
+        //        Action<TRight> caseRight);
     }
 }

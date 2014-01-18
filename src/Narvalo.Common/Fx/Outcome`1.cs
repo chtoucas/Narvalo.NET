@@ -1,21 +1,54 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Globalization;
     using System.Runtime.ExceptionServices;
 
-    public abstract class Outcome<T> : EitherBase<Exception, T> 
+    public class Outcome<T>
     {
-        protected Outcome(Exception exception) : base(exception) { }
+        readonly bool _successful;
+        readonly Exception _exception;
+        readonly T _value;
 
-        protected Outcome(T value) : base(value) { }
+        Outcome(Exception exception)
+        {
+            _successful = false;
+            _exception = exception;
+        }
 
-        public bool Successful { get { return IsRight; } }
+        Outcome(T value)
+        {
+            _successful = true;
+            _value = value;
+        }
 
-        public bool Unsuccessful { get { return IsLeft; } }
+        public bool Successful { get { return _successful; } }
 
-        public Exception Exception { get { return LeftValue; } }
+        public bool Unsuccessful { get { return !_successful; } }
 
-        public T Value { get { return RightValue; } }
+        public Exception Exception
+        {
+            get
+            {
+                if (Successful) {
+                    throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
+                }
+
+                return _exception;
+            }
+        }
+
+        public T Value
+        {
+            get
+            {
+                if (Unsuccessful) {
+                    throw new InvalidOperationException(SR.Outcome_UnsuccessfulHasNoValue);
+                }
+
+                return _value;
+            }
+        }
 
         public T ValueOrThrow()
         {
@@ -23,7 +56,7 @@
 #if NET_40
                 throw LeftValue;
 #else
-                ExceptionDispatchInfo.Capture(LeftValue).Throw();
+                ExceptionDispatchInfo.Capture(Exception).Throw();
 #endif
             }
 
@@ -51,29 +84,24 @@
             return Map(_ => default(TResult));
         }
 
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, Successful ? SR.Outcome_Successful : SR.Outcome_Unsuccessful);
+        }
+
         internal static Outcome<T> Failure(Exception ex)
         {
-            return new FailureCore(ex);
+            return new Outcome<T>(ex);
         }
 
         internal static Outcome<T> Failure(string errorMessage)
         {
-            return new FailureCore(new OutcomeException(errorMessage));
+            return new Outcome<T>(new OutcomeException(errorMessage));
         }
 
         internal static Outcome<T> Success(T value)
         {
-            return new SuccessCore(value);
-        }
-
-        sealed class FailureCore : Outcome<T>
-        {
-            public FailureCore(Exception exception) : base(exception) { }
-        }
-
-        sealed class SuccessCore : Outcome<T>
-        {
-            public SuccessCore(T value) : base(value) { }
+            return new Outcome<T>(value);
         }
     }
 }

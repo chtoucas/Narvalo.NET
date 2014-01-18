@@ -171,11 +171,11 @@
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme {0} does not support protocol less uri.</value>
   </data>
-  <data name="EitherBase_LeftHasNoRightValue" xml:space="preserve">
-    <value>A left EitherBase has no right value.</value>
+  <data name="Outcome_UnsuccessfulHasNoValue" xml:space="preserve">
+    <value>A bad outcome has no value.</value>
   </data>
-  <data name="EitherBase_RightHasNoLeftValue" xml:space="preserve">
-    <value>A right EitherBase has no left value.</value>
+  <data name="Outcome_SuccessfulHasNoException" xml:space="preserve">
+    <value>A successful outcome has no exception.</value>
   </data>
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
@@ -185,5 +185,11 @@
   </data>
   <data name="Check_TypeIsNotValueType" xml:space="preserve">
     <value>The type must be a value type.</value>
+  </data>
+  <data name="Outcome_Successful" xml:space="preserve">
+    <value>Successful outcome.</value>
+  </data>
+  <data name="Outcome_Unsuccessful" xml:space="preserve">
+    <value>Unsuccessful outcome.</value>
   </data>
 </root>

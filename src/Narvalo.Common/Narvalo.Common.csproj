@@ -171,7 +171,6 @@
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Failure.cs" />
-    <Compile Include="Fx\EitherBase`2.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
     </Compile>

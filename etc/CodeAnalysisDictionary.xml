@@ -39,6 +39,7 @@
       <Term CompoundAlternate="WebSite">website</Term>
       <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
       <Term CompoundAlternate="PlainText">plaintext</Term>
+      <Term CompoundAlternate="SuccessOr">successor</Term>
     </Compound>
 
     <DiscreteExceptions>

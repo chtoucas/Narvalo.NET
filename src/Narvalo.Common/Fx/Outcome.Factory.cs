@@ -4,7 +4,12 @@
 
     public partial class Outcome
     {
-        public static readonly Outcome Success = new Outcome();
+        static readonly Outcome Success_ = new Outcome();
+
+        public static Outcome Success
+        {
+            get { return Success_; }
+        }
 
         public static Outcome Failure(string errorMessage)
         {

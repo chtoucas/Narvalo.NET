@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Globalization;
     using System.Runtime.ExceptionServices;
 
     public partial class Outcome
@@ -10,8 +11,8 @@
 
         Outcome(Exception exception)
         {
-            _exception = exception;
             _successful = false;
+            _exception = exception;
         }
 
         Outcome()
@@ -23,9 +24,19 @@
 
         public bool Unsuccessful { get { return !_successful; } }
 
-        public Exception Exception { get { return _exception; } }
+        public Exception Exception
+        {
+            get
+            {
+                if (Successful) {
+                    throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
+                } 
+                
+                return _exception;
+            }
+        }
 
-        public void SuccessfulOrThrow()
+        public void SuccessOrThrow()
         {
             if (Unsuccessful) {
 #if NET_40
@@ -34,6 +45,11 @@
                 ExceptionDispatchInfo.Capture(Exception).Throw();
 #endif
             }
+        }
+
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, Successful ? SR.Outcome_Successful : SR.Outcome_Unsuccessful);
         }
     }
 }

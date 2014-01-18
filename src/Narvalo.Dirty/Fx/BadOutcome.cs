@@ -4,7 +4,7 @@
     using System.Runtime.ExceptionServices;
 
     [Serializable]
-    public abstract class BadOutcome : EitherBase<Exception, string> 
+    public abstract class BadOutcome : Either<Exception, string> 
     {
         protected BadOutcome(Exception exception) : base(exception) { }
 

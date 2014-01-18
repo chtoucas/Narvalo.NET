@@ -114,7 +114,6 @@
     <Compile Include="Fx\BadOutcome.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fx\EitherBase`2.cs" />
     <Compile Include="Fx\Either`2%24.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Either`2.Monad.cs" />

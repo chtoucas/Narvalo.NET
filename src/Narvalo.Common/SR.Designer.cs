@@ -97,24 +97,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A left EitherBase has no right value..
-        /// </summary>
-        internal static string EitherBase_LeftHasNoRightValue {
-            get {
-                return ResourceManager.GetString("EitherBase_LeftHasNoRightValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A right EitherBase has no left value..
-        /// </summary>
-        internal static string EitherBase_RightHasNoLeftValue {
-            get {
-                return ResourceManager.GetString("EitherBase_RightHasNoLeftValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Illegal character {0} found at position {1}..
         /// </summary>
         internal static string Int64Encoder_IllegalCharacterFormat {
@@ -129,6 +111,42 @@ namespace Narvalo {
         internal static string Maybe_NoneHasNoValue {
             get {
                 return ResourceManager.GetString("Maybe_NoneHasNoValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successful outcome..
+        /// </summary>
+        internal static string Outcome_Successful {
+            get {
+                return ResourceManager.GetString("Outcome_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome has no exception..
+        /// </summary>
+        internal static string Outcome_SuccessfulHasNoException {
+            get {
+                return ResourceManager.GetString("Outcome_SuccessfulHasNoException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsuccessful outcome..
+        /// </summary>
+        internal static string Outcome_Unsuccessful {
+            get {
+                return ResourceManager.GetString("Outcome_Unsuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A bad outcome has no value..
+        /// </summary>
+        internal static string Outcome_UnsuccessfulHasNoValue {
+            get {
+                return ResourceManager.GetString("Outcome_UnsuccessfulHasNoValue", resourceCulture);
             }
         }
         
