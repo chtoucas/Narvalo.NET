@@ -17,7 +17,7 @@
 
             return @this.MayGetValue(param)
                 .Map(fun)
-                .ValueOrElse(Outcome.Failure<T>(missingKeyMessage));
+                .ValueOrElse(Outcome.Failure<T>(missingKeyMessage()));
         }
 
         public static Maybe<Outcome<T>> ParseValue<T>(
@@ -40,12 +40,12 @@
             var value = @this.MayGetValue(param);
 
             if (value.IsNone) {
-                return Outcome.Success(Maybe<T>.None);
+                return Outcome.Create(Maybe<T>.None);
             }
             else {
                 var result = value.Bind(_ => fun(_));
                 if (result.IsSome) {
-                    return Outcome.Success(result);
+                    return Outcome.Create(result);
                 }
                 else {
                     return Outcome.Failure<Maybe<T>>("XXX");

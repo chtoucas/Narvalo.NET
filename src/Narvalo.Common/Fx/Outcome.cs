@@ -1,36 +1,39 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Runtime.ExceptionServices;
 
-    public static class Outcome
+    public partial class Outcome
     {
-        public static Outcome<T> Failure<T>(Func<Exception> exceptionFactory)
-        {
-            Require.NotNull(exceptionFactory, "exceptionFactory");
+        readonly bool _successful;
+        readonly Exception _exception;
 
-            return Failure<T>(exceptionFactory());
+        Outcome(Exception exception)
+        {
+            _exception = exception;
+            _successful = false;
         }
 
-        public static Outcome<T> Failure<T>(string errorMessage)
+        Outcome()
         {
-            return Failure<T>(new OutcomeException(errorMessage));
+            _successful = true;
         }
 
-        public static Outcome<T> Failure<T>(Func<string> errorMessageFactory)
-        {
-            Require.NotNull(errorMessageFactory, "errorMessageFactory");
+        public bool Successful { get { return _successful; } }
 
-            return Failure<T>(new OutcomeException(errorMessageFactory()));
-        }
+        public bool Unsuccessful { get { return !_successful; } }
 
-        public static Outcome<T> Failure<T>(Exception exception)
-        {
-            return Outcome<T>.Failure(exception);
-        }
+        public Exception Exception { get { return _exception; } }
 
-        public static Outcome<T> Success<T>(T value)
+        public void SuccessfulOrThrow()
         {
-            return Outcome<T>.Success(value);
+            if (Unsuccessful) {
+#if NET_40
+                throw Exception;
+#else
+                ExceptionDispatchInfo.Capture(Exception).Throw();
+#endif
+            }
         }
     }
 }

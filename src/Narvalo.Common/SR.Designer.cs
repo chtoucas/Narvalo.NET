@@ -72,18 +72,18 @@ namespace Narvalo {
         /// <summary>
         ///   Looks up a localized string similar to The type must be of enum type..
         /// </summary>
-        internal static string Check_TypeMustBeEnum {
+        internal static string Check_TypeIsNotEnum {
             get {
-                return ResourceManager.GetString("Check_TypeMustBeEnum", resourceCulture);
+                return ResourceManager.GetString("Check_TypeIsNotEnum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The type must be a value type..
         /// </summary>
-        internal static string Check_TypeMustBeValueType {
+        internal static string Check_TypeIsNotValueType {
             get {
-                return ResourceManager.GetString("Check_TypeMustBeValueType", resourceCulture);
+                return ResourceManager.GetString("Check_TypeIsNotValueType", resourceCulture);
             }
         }
         

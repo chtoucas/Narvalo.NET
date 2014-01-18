@@ -29,13 +29,14 @@
             return Maybe.Create(result);
         }
 
+        /// <remarks>
+        /// Ne marche pas de manière cohérente pour les enumérations de type Flags :
+        /// http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
+        /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
-            // Cf. http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
-
-            Check.IsEnum(typeof(TEnum));
+            @Check.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 
@@ -65,7 +66,7 @@
         /// </example>
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
+            @Check.IsEnum(typeof(TEnum));
 
             return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase);
         }

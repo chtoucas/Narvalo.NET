@@ -179,6 +179,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Fx\MayFunc.cs" />
+    <Compile Include="Fx\Outcome.Factory.cs" />
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs" />

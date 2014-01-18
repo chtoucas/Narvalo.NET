@@ -10,7 +10,7 @@
         {
             Require.NotNull(type, "type");
 
-            Debug.Assert(type.IsEnum, SR.Check_TypeMustBeEnum);
+            Debug.Assert(type.IsEnum, type.FullName, SR.Check_TypeIsNotEnum);
         }
 
         [Conditional("DEBUG")]
@@ -18,7 +18,7 @@
         {
             Require.NotNull(type, "type");
 
-            Debug.Assert(type.IsValueType, SR.Check_TypeMustBeValueType);
+            Debug.Assert(type.IsValueType, type.FullName, SR.Check_TypeIsNotValueType);
         }
 
         public static T Property<T>(T value) where T : class
