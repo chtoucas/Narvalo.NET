@@ -20,7 +20,7 @@
             Require.NotNull(context, "context");
 
             context.Error += OnError_;
-            context.Disposed += OnDisposed;
+            context.Disposed += OnDisposed_;
             context.PreSendRequestHeaders += OnPreSendRequestHeaders_;
         }
 
@@ -48,7 +48,7 @@
         /// <summary>
         /// Se produit lorsque l'application est supprimée.
         /// </summary>
-        void OnDisposed(object sender, EventArgs e)
+        void OnDisposed_(object sender, EventArgs e)
         {
             Log.Information("Application disposed.");
         }

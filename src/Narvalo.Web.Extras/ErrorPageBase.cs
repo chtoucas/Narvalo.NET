@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// Retourne le code représentant le statut de la réponse HTTP.
+        /// Retourne le statut de la réponse HTTP.
         /// </summary>
         protected abstract HttpStatusCode StatusCode { get; }
 

@@ -112,10 +112,8 @@
         {
             if (_isSome != other._isSome) { return false; }
             return
-                // Les deux options sont vides.
-                !_isSome
-                // Les deux options ont la même valeur.
-                || _value.Equals(other._value);
+                !_isSome                        // Les deux options sont vides.
+                || _value.Equals(other._value); // Les deux options ont la même valeur.
         }
 
         /// <summary />

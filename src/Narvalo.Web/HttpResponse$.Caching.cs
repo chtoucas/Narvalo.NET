@@ -3,10 +3,6 @@
     using System;
     using System.Web;
 
-    //@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
-    //@this.Cache.SetOmitVaryStar(true);
-    //@this.Cache.SetValidUntilExpires(true);
-
     public static partial class HttpResponseExtensions
     {
         public static void NoCache(this HttpResponse @this)
@@ -42,7 +38,7 @@
         {
             Require.Object(@this);
 
-            //@this.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+            // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
             @this.Cache.SetCacheability(HttpCacheability.Private);
             @this.CacheFor_(duration);
         }
@@ -68,14 +64,14 @@
         static void CacheFor_(this HttpResponse @this, TimeSpan duration)
         {
             // En-tête HTTP 1.0
-            // FIXME: Now ou UtcNow ?
+            // REVIEW: Now ou UtcNow ?
             @this.Cache.SetExpires(DateTime.UtcNow.Add(duration));
             
             // En-tête HTTP 1.1
             @this.Cache.SetMaxAge(duration);
             @this.Cache.AppendCacheExtension("must-revalidate, proxy-revalidate");
             
-            // FIXME
+            // REVIEW: Now ou UtcNow ?
             @this.Cache.SetLastModified(DateTime.Now);
         }
     }

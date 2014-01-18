@@ -5,6 +5,10 @@
     using System.Web;
     ////using Newtonsoft.Json;
 
+    //@this.AddFileDependencies(files.Select(f => f.FullName).ToArray());
+    //@this.Cache.SetOmitVaryStar(true);
+    //@this.Cache.SetValidUntilExpires(true);
+
     public static partial class HttpResponseExtensions
     {
         //// Cf. http://blogs.msdn.com/b/tmarq/archive/2009/06/25/correct-use-of-system-web-httpresponse-redirect.aspx

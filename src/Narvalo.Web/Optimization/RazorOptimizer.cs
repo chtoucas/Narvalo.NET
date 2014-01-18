@@ -66,9 +66,8 @@
                     continue;
                 }
 
-                // FIXME: On perd toute information contextuelle
-                //builder.Accept(new HtmlSymbol(
-                //    sym.Start, OptimizeContent_(sym, prevType), sym.Type, sym.Errors));
+                // FIXME: On perd toute information contextuelle. Peut-être pour remédier à ce problème
+                // on pourrait ré-utiliser un HtmlSymbol.
                 builder.Accept(new OptimizedSymbol { Content = OptimizeContent_(sym, prevType) });
                 prevType = sym.Type;
             }

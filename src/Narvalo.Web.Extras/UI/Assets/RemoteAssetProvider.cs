@@ -34,20 +34,21 @@
             config.Remove("baseUri");
         }
 
-        // WARNING: Ne pas utiliser "/img/", par exemple car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-
         public override Uri GetImage(string relativePath)
         {
+            // WARNING: Ne pas utiliser "/img/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
             return MakeUri_("img/", relativePath);
         }
 
         public override Uri GetScript(string relativePath)
         {
+            // WARNING: Ne pas utiliser "/js/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
             return MakeUri_("js/", relativePath);
         }
 
         public override Uri GetStyle(string relativePath)
         {
+            // WARNING: Ne pas utiliser "/css/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
             return MakeUri_("css/", relativePath);
         }
 

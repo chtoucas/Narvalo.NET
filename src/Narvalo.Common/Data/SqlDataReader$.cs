@@ -1,4 +1,17 @@
-﻿namespace Narvalo.Data
+﻿// Au mieux on implémente les méthodes suivantes :
+// - T GetValue(this SqlDataReader @this, string name)
+// - T GetValue(this SqlDataReader @this, int ordinal, T defaultValue)
+// - T GetValue(this SqlDataReader @this, string name, T defaultValue)
+// - T? GetNullableValue(this SqlDataReader @this, int ordinal)
+// - T? GetNullableValue(this SqlDataReader @this, string name)
+// - Maybe<T> MayGetValue(this SqlDataReader @this, int ordinal)
+// - Maybe<T> MayGetValue(this SqlDataReader @this, string name)
+//
+// Notez que les méthodes suivantes ne sont pas implémentées :
+// - GetMoney(this SqlDataReader @this, string name)
+// - GetXml(this SqlDataReader @this, string name)
+
+namespace Narvalo.Data
 {
     using System;
     using System.Data.SqlClient;
@@ -556,8 +569,6 @@
             return @this.MayGetInt64(@this.GetOrdinal(name));
         }
 
-        // NB: Pas de méthode GetMoney(this SqlDataReader @this, string name)
-
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
             Require.Object(@this);
@@ -644,8 +655,6 @@
 
             return @this.MayGetString(@this.GetOrdinal(name));
         }
-
-        // NB: Pas de méthode GetXml(this SqlDataReader @this, string name)
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {

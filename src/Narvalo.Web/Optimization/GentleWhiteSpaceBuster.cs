@@ -34,7 +34,6 @@
 
             // WARNING: L'ordre est important car on prend en compte le fait 
             // que les espaces et tabulations sont d'abord remplacés par un espace simple.
-
             string result = MultipleTabsOrSpacesRegex_.Replace(value, "\x20");
             result = MultipleEmptyLinesRegex_.Replace(result, "\n");
 
