@@ -21,7 +21,7 @@
 
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, object attributes)
         {
-            return Script(@this, scriptUri, scriptType, TypeUtility.ObjectToDictionary(attributes));
+            return Script(@this, scriptUri, scriptType, ObjectToDictionary_(attributes));
         }
 
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
@@ -29,7 +29,7 @@
             return ScriptHelper_(@this, scriptUri, scriptType, attributes);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
         static IHtmlString ScriptHelper_(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
             Require.NotNull(scriptUri, "scriptUri");

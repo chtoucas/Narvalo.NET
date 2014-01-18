@@ -4,12 +4,11 @@
     using System.Net.Mail;
     using System.Text;
     using Narvalo.Fx;
-    using Narvalo.Internal;
 
     // Cf.
     //  - http://cobisi.com/email-validation/.net-component
     //  - http://msdn.microsoft.com/en-us/library/01escwtf%28v=vs.110%29.aspx
-    public static class MailAddressUtility
+    public static class MailAddressFactory
     {
         public static Outcome<MailAddress> Create(string value)
         {
@@ -48,28 +47,6 @@
             }
             catch (FormatException ex) {
                 return Outcome.Failure<MailAddress>(ex);
-            }
-        }
-
-        public static Maybe<MailAddress> MayParse(string value)
-        {
-            return MayParseHelper.Parse<MailAddress>(
-                value,
-                (string val, out MailAddress result) => TryParse(val, out result));
-        }
-
-        public static bool TryParse(string value, out MailAddress result)
-        {
-            result = default(MailAddress);
-
-            if (String.IsNullOrEmpty(value)) { return false; }
-
-            try {
-                result = new MailAddress(value);
-                return true;
-            }
-            catch (FormatException) {
-                return false;
             }
         }
     }

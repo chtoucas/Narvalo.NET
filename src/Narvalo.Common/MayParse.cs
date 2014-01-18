@@ -2,6 +2,8 @@
 {
     using System;
     using System.Globalization;
+    using System.Net;
+    using System.Net.Mail;
     using Narvalo.Fx;
     using Narvalo.Internal;
 
@@ -189,6 +191,20 @@
             return MayParseHelper.Parse<Uri>(
                 value,
                 (string val, out Uri result) => Uri.TryCreate(val, uriKind, out result));
+        }
+
+        public static Maybe<IPAddress> ToIPAddress(string value)
+        {
+            return MayParseHelper.Parse<IPAddress>(
+                value,
+                (string val, out IPAddress result) => IPAddress.TryParse(val, out result));
+        }
+
+        public static Maybe<MailAddress> ToMailAddress(string value)
+        {
+            return MayParseHelper.Parse<MailAddress>(
+                value,
+                (string val, out MailAddress result) => TryParse.ToMailAddress(val, out result));
         }
     }
 }

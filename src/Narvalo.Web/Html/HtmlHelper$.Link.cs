@@ -21,7 +21,7 @@
 
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation, object attributes)
         {
-            return Link(@this, linkUri, linkType, relation, TypeUtility.ObjectToDictionary(attributes));
+            return Link(@this, linkUri, linkType, relation, ObjectToDictionary_(attributes));
         }
 
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
@@ -29,7 +29,7 @@
             return LinkHelper_(@this, linkUri, linkType, relation, attributes);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
         static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
             Require.NotNull(linkUri, "linkUri");

@@ -155,7 +155,6 @@
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="Internal\TagBuilder%24.cs" />
-    <Compile Include="Internal\TypeUtility.cs" />
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />

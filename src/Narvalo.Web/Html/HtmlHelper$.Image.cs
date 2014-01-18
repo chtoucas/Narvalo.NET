@@ -21,7 +21,7 @@
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, object attributes)
         {
-            return Image(@this, imageUri, null, TypeUtility.ObjectToDictionary(attributes));
+            return Image(@this, imageUri, null, ObjectToDictionary_(attributes));
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, IDictionary<string, object> attributes)
@@ -31,15 +31,15 @@
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, object attributes)
         {
-            return Image(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
+            return Image(@this, imageUri, alt, ObjectToDictionary_(attributes));
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
-            return ImageHelper_(@this, imageUri, alt, TypeUtility.ObjectToDictionary(attributes));
+            return ImageHelper_(@this, imageUri, alt, ObjectToDictionary_(attributes));
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'améliorer son accessibilité.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
         static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             Require.NotNull(imageUri, "imageUri");

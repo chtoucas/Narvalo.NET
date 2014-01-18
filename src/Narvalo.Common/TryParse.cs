@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Net.Mail;
     using Narvalo.Fx;
 
     public static class TryParse
@@ -109,5 +110,21 @@
         }
 
 #endif
+
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
+        public static bool ToMailAddress(string value, out MailAddress result)
+        {
+            result = default(MailAddress);
+
+            if (String.IsNullOrEmpty(value)) { return false; }
+
+            try {
+                result = new MailAddress(value);
+                return true;
+            }
+            catch (FormatException) {
+                return false;
+            }
+        }
     }
 }

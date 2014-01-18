@@ -153,7 +153,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Check.cs" />
+    <Compile Include="DebugCheck.cs" />
     <Compile Include="Collections\Enumerable`1%24.Maybe.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\Dictionary`2%24.Maybe.cs" />
@@ -198,8 +198,7 @@
     <Compile Include="Internal\MayParseHelper.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
-    <Compile Include="Net\Mail\MailAddressUtility.cs" />
-    <Compile Include="Net\IPAddressUtility.cs" />
+    <Compile Include="Net\Mail\MailAddressFactory.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />
