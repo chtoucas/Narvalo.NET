@@ -9,7 +9,7 @@
         public string ItemType
         {
             get { return _itemType; }
-            set { _itemType = Check.PropertyNotEmpty(value); }
+            set { _itemType = Require.PropertyNotEmpty(value); }
         }
     }
 }

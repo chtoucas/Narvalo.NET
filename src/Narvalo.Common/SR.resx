@@ -180,10 +180,10 @@
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
   </data>
-  <data name="Check_TypeIsNotEnum" xml:space="preserve">
+  <data name="DebugCheck_TypeIsNotEnum" xml:space="preserve">
     <value>The type must be of enum type.</value>
   </data>
-  <data name="Check_TypeIsNotValueType" xml:space="preserve">
+  <data name="DebugCheck_TypeIsNotValueType" xml:space="preserve">
     <value>The type must be a value type.</value>
   </data>
   <data name="Outcome_Successful" xml:space="preserve">

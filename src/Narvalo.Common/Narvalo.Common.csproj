@@ -153,7 +153,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="BooleanUtility.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Collections\Enumerable`1%24.Maybe.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
@@ -170,6 +169,8 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="EnumStyles.cs" />
+    <Compile Include="MayConvert.cs" />
+    <Compile Include="Parse.cs" />
     <Compile Include="Failure.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
@@ -190,7 +191,7 @@
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
-    <Compile Include="EnumUtility.cs" />
+    <Compile Include="TryConvert.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Fx\OutcomeException.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Text\StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="TryParse.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />

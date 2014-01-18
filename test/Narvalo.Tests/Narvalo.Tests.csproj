@@ -130,8 +130,9 @@
     <Compile Include="..\..\src\Common\Microsoft\Web\UnitTestUtil\MvcHelper.cs">
       <Link>_Aliens\Microsoft.Web.UnitTestUtil\MvcHelper.cs</Link>
     </Compile>
-    <Compile Include="BooleanUtilityTests.cs" />
-    <Compile Include="EnumUtilityTests.cs" />
+    <Compile Include="ParseTests.cs" />
+    <Compile Include="TryParseTests.cs" />
+    <Compile Include="TryConvertTests.cs" />
     <Compile Include="Fx\MaybeTests.cs" />
     <Compile Include="Int64ConvertTests.FlickrBase58.cs" />
     <Compile Include="Int64EncoderTests.cs" />

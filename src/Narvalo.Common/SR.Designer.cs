@@ -70,29 +70,29 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
+        /// </summary>
+        internal static string ConfigurationManager_MissingSectionFormat {
+            get {
+                return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type must be of enum type..
         /// </summary>
-        internal static string Check_TypeIsNotEnum {
+        internal static string DebugCheck_TypeIsNotEnum {
             get {
-                return ResourceManager.GetString("Check_TypeIsNotEnum", resourceCulture);
+                return ResourceManager.GetString("DebugCheck_TypeIsNotEnum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The type must be a value type..
         /// </summary>
-        internal static string Check_TypeIsNotValueType {
+        internal static string DebugCheck_TypeIsNotValueType {
             get {
-                return ResourceManager.GetString("Check_TypeIsNotValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
-        /// </summary>
-        internal static string ConfigurationManager_MissingSectionFormat {
-            get {
-                return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
+                return ResourceManager.GetString("DebugCheck_TypeIsNotValueType", resourceCulture);
             }
         }
         

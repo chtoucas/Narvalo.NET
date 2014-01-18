@@ -45,7 +45,7 @@ namespace Narvalo.LumenWorks
         public Encoding Encoding
         {
             get { return _encoding; }
-            set { _encoding = Check.Property(value); }
+            set { _encoding = Require.Property(value); }
         }
 
         /// <summary>

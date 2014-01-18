@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class EnumUtilityTests
+    public static class TryConvertTests
     {
         #region > Stubs <
 
@@ -31,89 +31,6 @@
             ActualValue3 = 1 << 2,
             CompositeValue1 = ActualValue1 | ActualValue2,
             CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
-        }
-
-        #endregion
-
-        #region + Parse<T> +
-
-        public static class Parse
-        {
-            #region > Validation du paramètre générique <
-
-            [Fact]
-            public static void ThrowsArgumentException_WithInt32()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => EnumUtility.Parse<int>("Whatever"));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_WithStruct()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => EnumUtility.Parse<StructStub_>("Whatever"));
-            }
-
-            #endregion
-
-            #region > Analyse d'une valeur valide <
-
-            [Fact]
-            public static void ReturnsCorrectMember_ForActualValue()
-            {
-                // Act
-                EnumStub_ result = EnumUtility.Parse<EnumStub_>("ActualValue");
-                // Assert
-                Assert.Equal(EnumStub_.ActualValue, result);
-            }
-
-            [Fact]
-            public static void ReturnsCorrectMember_ForActualValue_WhenIgnoreCase()
-            {
-                // Act
-                EnumStub_ result = EnumUtility.Parse<EnumStub_>("actualvalue", true /* ignoreCase */);
-                // Assert
-                Assert.Equal(EnumStub_.ActualValue, result);
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForActualValueAndBadCase()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(
-                    () => EnumUtility.Parse<EnumStub_>("actualvalue", false /* ignoreCase */));
-            }
-
-            #endregion
-
-            #region > Analyse d'une valeur invalide <
-
-            [Fact]
-            public static void ThrowsArgumentException_ForInvalidValue()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(
-                    () => EnumUtility.Parse<EnumStub_>("InvalidValue"));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForInvalidValue_WhenIgnoreCase()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(
-                    () => EnumUtility.Parse<EnumStub_>("invalidvalue", true /* ignoreCase */));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForInvalidValueAndBadCase()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(
-                    () => EnumUtility.Parse<EnumStub_>("invalidvalue", false /* ignoreCase */));
-            }
-
-            #endregion
         }
 
         #endregion
@@ -359,9 +276,9 @@
 
 #endif
 
-        #region + TryConvert<T> +
+        #region > ToEnum<T> <
 
-        public static class TryConvert
+        public static class ToEnum
         {
             #region > Validation du paramètre générique <
 
@@ -371,7 +288,7 @@
                 // Arrange
                 int result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => EnumUtility.TryConvert<int>(1, out result));
+                Assert.Throws<ArgumentException>(() => TryConvert.ToEnum<int>(1, out result));
             }
 
             [Fact]
@@ -380,7 +297,7 @@
                 // Arrange
                 StructStub_ result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => EnumUtility.TryConvert<StructStub_>(1, out result));
+                Assert.Throws<ArgumentException>(() => TryConvert.ToEnum<StructStub_>(1, out result));
             }
 
             #endregion
@@ -393,7 +310,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryConvert<EnumStub_>(1, out result);
+                var succeed = TryConvert.ToEnum<EnumStub_>(1, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -405,7 +322,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryConvert<EnumFlagStub_>(1 << 0, out result);
+                var succeed = TryConvert.ToEnum<EnumFlagStub_>(1 << 0, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
@@ -421,7 +338,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryConvert<EnumStub_>(2, out result);
+                var succeed = TryConvert.ToEnum<EnumStub_>(2, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);

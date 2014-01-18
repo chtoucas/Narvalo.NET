@@ -33,7 +33,7 @@ namespace Narvalo.Web.Configuration
         public Type ElementType
         {
             get { return _elementTypeSet ? _elementType : (Type)base[ElementType_]; }
-            set { _elementType = Check.Property(value); _elementTypeSet = true; }
+            set { _elementType = Require.Property(value); _elementTypeSet = true; }
         }
 
         protected override ConfigurationPropertyCollection Properties

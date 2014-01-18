@@ -16,7 +16,7 @@
         {
             return MayParseHelper.Parse<bool>(
                 value,
-                (string val, out bool result) => BooleanUtility.TryParse(val, style, out result));
+                (string val, out bool result) => TryParse.ToBoolean(val, style, out result));
         }
 
         public static Maybe<decimal> ToDecimal(string value)
@@ -172,7 +172,7 @@
 
         public static Maybe<TEnum> ToEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            @Check.IsEnum(typeof(TEnum));
+            @DebugCheck.IsEnum(typeof(TEnum));
 
             return MayParseHelper.Parse<TEnum>(
                 value,
