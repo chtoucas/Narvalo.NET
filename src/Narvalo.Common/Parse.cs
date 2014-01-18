@@ -21,7 +21,7 @@
         /// </example>
         public static TEnum ToEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            @DebugCheck.IsEnum(typeof(TEnum));
+            DebugCheck.IsEnum(typeof(TEnum));
 
             return (TEnum)Enum.Parse(typeof(TEnum), value, ignoreCase);
         }

@@ -75,6 +75,8 @@
 
         static IEnumerable<T> Append_<T>(IEnumerable<T> source, T element)
         {
+            DebugCheck.NotNull(source);
+
             foreach (var item in source) {
                 yield return item;
             }
@@ -84,6 +86,8 @@
 
         static IEnumerable<T> Prepend_<T>(IEnumerable<T> source, T element)
         {
+            DebugCheck.NotNull(source);
+
             yield return element;
             foreach (var item in source) {
                 yield return item;

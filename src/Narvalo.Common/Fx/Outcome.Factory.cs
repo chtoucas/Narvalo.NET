@@ -2,9 +2,10 @@
 {
     using System;
 
-    public partial class Outcome
+    public partial struct Outcome
     {
-        static readonly Outcome Success_ = new Outcome();
+        // REVIEW: Utiliser default ici ne revient-il pas à null ?
+        static readonly Outcome Success_ = new Outcome(true, default(OutcomeException));
 
         public static Outcome Success
         {
@@ -13,12 +14,12 @@
 
         public static Outcome Failure(string errorMessage)
         {
-            return new Outcome(new OutcomeException(errorMessage));
+            return new Outcome(false, new OutcomeException(errorMessage));
         }
 
         public static Outcome Failure(Exception ex)
         {
-            return new Outcome(ex);
+            return new Outcome(false, ex);
         }
 
         public static Outcome<T> Failure<T>(string errorMessage)

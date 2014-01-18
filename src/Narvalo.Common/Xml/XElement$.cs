@@ -25,13 +25,12 @@
 
             var attr = @this.Attribute(name);
             if (attr == null) {
-                throw new XmlException(String.Format(
-                    CultureInfo.CurrentCulture,
+                throw Failure.Xml(
                     SR.XElement_AttributeNotFoundFormat,
                     @this.Name.LocalName,
-                    name));
+                    name);
             }
-            
+
             return attr;
         }
 
@@ -49,13 +48,12 @@
 
             var child = @this.Element(name);
             if (child == null) {
-                throw new XmlException(String.Format(
-                    CultureInfo.CurrentCulture,
+                throw Failure.Xml(
                     SR.XElement_FirstChildNotFoundFormat,
                     @this.Name.LocalName,
-                    name));
+                    name);
             }
-            
+
             return child;
         }
 
@@ -72,12 +70,10 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value).ValueOrThrow(() => new XmlException(
-                String.Format(
-                    CultureInfo.CurrentCulture,
-                    SR.XElement_MalformedElementValueFormat,
-                    @this.Name.LocalName,
-                    ((IXmlLineInfo)@this).LineNumber)));
+            return fun(@this.Value).ValueOrThrow(() => Failure.Xml(
+                SR.XElement_MalformedElementValueFormat,
+                @this.Name.LocalName,
+                ((IXmlLineInfo)@this).LineNumber));
         }
 
         public static Maybe<T> MayParseValue<T>(this XElement @this, MayFunc<string, T> fun)
@@ -108,12 +104,11 @@
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
                 nextElement = nextElement.NextNode;
             }
-            
+
             if (nextElement == null) {
-                throw new XmlException(String.Format(
-                    CultureInfo.CurrentCulture,
+                throw Failure.Xml(
                     SR.XElement_NextElementNotFoundFormat,
-                    @this.Name.LocalName));
+                    @this.Name.LocalName);
             }
 
             return nextElement as XElement;

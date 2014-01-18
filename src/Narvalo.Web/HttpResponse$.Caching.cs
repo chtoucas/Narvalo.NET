@@ -63,6 +63,8 @@
 
         static void CacheFor_(this HttpResponse @this, TimeSpan duration)
         {
+            DebugCheck.NotNull(@this);
+
             // En-tête HTTP 1.0
             // REVIEW: Now ou UtcNow ?
             @this.Cache.SetExpires(DateTime.UtcNow.Add(duration));

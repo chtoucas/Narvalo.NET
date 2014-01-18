@@ -12,7 +12,7 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool ToEnum<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            @DebugCheck.IsEnum(typeof(TEnum));
+            DebugCheck.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 

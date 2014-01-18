@@ -1,10 +1,9 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Globalization;
     using System.Runtime.ExceptionServices;
 
-    public class Outcome<T>
+    public partial struct Outcome<T> : IEquatable<Outcome<T>>
     {
         readonly bool _successful;
         readonly Exception _exception;
@@ -14,11 +13,13 @@
         {
             _successful = false;
             _exception = exception;
+            _value = default(T);
         }
 
         Outcome(T value)
         {
             _successful = true;
+            _exception = default(Exception);
             _value = value;
         }
 
@@ -26,7 +27,7 @@
 
         public bool Unsuccessful { get { return !_successful; } }
 
-        public Exception Exception
+        public string ErrorMessage
         {
             get
             {
@@ -34,7 +35,7 @@
                     throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
                 }
 
-                return _exception;
+                return _exception.Message;
             }
         }
 
@@ -56,52 +57,16 @@
 #if NET_40
                 throw LeftValue;
 #else
-                ExceptionDispatchInfo.Capture(Exception).Throw();
+                ExceptionDispatchInfo.Capture(_exception).Throw();
 #endif
             }
 
             return Value;
         }
 
-        public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
-        {
-            Require.NotNull(kun, "kun");
-
-            return Unsuccessful ? Outcome<TResult>.Failure(Exception) : kun(Value);
-        }
-
-        public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return Unsuccessful
-               ? Outcome<TResult>.Failure(Exception)
-               : Outcome<TResult>.Success(selector(Value));
-        }
-
-        public Outcome<TResult> Forget<TResult>()
-        {
-            return Map(_ => default(TResult));
-        }
-
         public override string ToString()
         {
-            return Successful ? SR.Outcome_Successful : SR.Outcome_Unsuccessful;
-        }
-
-        internal static Outcome<T> Failure(Exception ex)
-        {
-            return new Outcome<T>(ex);
-        }
-
-        internal static Outcome<T> Failure(string errorMessage)
-        {
-            return new Outcome<T>(new OutcomeException(errorMessage));
-        }
-
-        internal static Outcome<T> Success(T value)
-        {
-            return new Outcome<T>(value);
+            return Successful ? Value.ToString() : _exception.ToString();
         }
     }
 }

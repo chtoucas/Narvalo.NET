@@ -13,10 +13,10 @@
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void HandleBindingFailure(HttpResponse response, Exception exception)
+        protected virtual void HandleBindingFailure(HttpResponse response, Outcome<TQuery> outcome)
         {
             response.SetStatusCode(HttpStatusCode.BadRequest);
-            response.Write(exception.Message);
+            response.Write(outcome.ErrorMessage);
         }
 
         protected Outcome<TQuery> BindingFailure(string parameterName)
@@ -35,7 +35,7 @@
             // Liaison du modèle.
             var outcome = Bind(context.Request);
             if (outcome.Unsuccessful) {
-                HandleBindingFailure(context.Response, outcome.Exception);
+                HandleBindingFailure(context.Response, outcome);
                 return;
             }
 

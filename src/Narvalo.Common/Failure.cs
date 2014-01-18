@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
+    using System.Xml;
 
     public static class Failure
     {
@@ -82,6 +83,11 @@
         public static NotSupportedException NotSupported(string messageFormat, params object[] messageArgs)
         {
             return new NotSupportedException(Format_(messageFormat, messageArgs));
+        }
+
+        public static XmlException Xml(string messageFormat, params object[] messageArgs)
+        {
+            return new XmlException(Format_(messageFormat, messageArgs));
         }
 
         static string Format_(string format, params object[] args)

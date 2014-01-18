@@ -79,6 +79,24 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value is empty..
+        /// </summary>
+        internal static string DebugCheck_IsEmpty {
+            get {
+                return ResourceManager.GetString("DebugCheck_IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value is null..
+        /// </summary>
+        internal static string DebugCheck_IsNull {
+            get {
+                return ResourceManager.GetString("DebugCheck_IsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type must be of enum type..
         /// </summary>
         internal static string DebugCheck_TypeIsNotEnum {
@@ -129,15 +147,6 @@ namespace Narvalo {
         internal static string Outcome_SuccessfulHasNoException {
             get {
                 return ResourceManager.GetString("Outcome_SuccessfulHasNoException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unsuccessful outcome..
-        /// </summary>
-        internal static string Outcome_Unsuccessful {
-            get {
-                return ResourceManager.GetString("Outcome_Unsuccessful", resourceCulture);
             }
         }
         

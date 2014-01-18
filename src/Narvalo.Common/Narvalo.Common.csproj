@@ -169,6 +169,10 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="EnumStyles.cs" />
+    <Compile Include="Fx\Maybe`1.IEquatable.cs" />
+    <Compile Include="Fx\Outcome.IEquatable.cs" />
+    <Compile Include="Fx\Outcome`1.IEquatable.cs" />
+    <Compile Include="Fx\Outcome`1.Monad.cs" />
     <Compile Include="MayConvert.cs" />
     <Compile Include="Parse.cs" />
     <Compile Include="Failure.cs" />
@@ -191,6 +195,7 @@
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
+    <Compile Include="Range`1.IEquatable.cs" />
     <Compile Include="TryConvert.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
