@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Text
+﻿namespace Narvalo
 {
     using System;
     using System.Text;

@@ -147,7 +147,7 @@
     <Compile Include="Runtime\Reliability\CircuitBreakerTests.Execute.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Text\StringManipTests.cs" />
+    <Compile Include="StringManipTests.cs" />
     <Compile Include="Web\Html\ScriptExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>

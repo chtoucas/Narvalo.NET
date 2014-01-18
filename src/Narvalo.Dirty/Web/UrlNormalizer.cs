@@ -4,7 +4,6 @@
     using System.Text;
     using System.Text.RegularExpressions;
     using Narvalo;
-    using Narvalo.Text;
 
     public static class UrlNormalizer
     {
