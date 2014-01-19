@@ -22,6 +22,8 @@ namespace Narvalo.Data
     /// </summary>
     public static class SqlDataReaderExtensions
     {
+        //// Binary
+
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
@@ -36,6 +38,8 @@ namespace Narvalo.Data
 
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
+
+        //// Boolean
 
         public static bool GetBoolean(this SqlDataReader @this, string name)
         {
@@ -93,6 +97,8 @@ namespace Narvalo.Data
             return @this.MayGetBoolean(@this.GetOrdinal(name));
         }
 
+        //// Byte
+
         public static byte GetByte(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -149,6 +155,8 @@ namespace Narvalo.Data
             return @this.MayGetByte(@this.GetOrdinal(name));
         }
 
+        //// Byte[]
+
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
@@ -164,6 +172,8 @@ namespace Narvalo.Data
             return @this.MayGetBytes(@this.GetOrdinal(name));
         }
 
+        //// Char[]
+
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
@@ -178,6 +188,8 @@ namespace Narvalo.Data
 
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
+
+        //// DateTime
 
         public static DateTime GetDateTime(this SqlDataReader @this, string name)
         {
@@ -235,6 +247,8 @@ namespace Narvalo.Data
             return @this.MayGetDateTime(@this.GetOrdinal(name));
         }
 
+        //// Decimal
+
         public static decimal GetDecimal(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -290,6 +304,8 @@ namespace Narvalo.Data
 
             return @this.MayGetDecimal(@this.GetOrdinal(name));
         }
+
+        //// Double
 
         public static double GetDouble(this SqlDataReader @this, string name)
         {
@@ -347,6 +363,8 @@ namespace Narvalo.Data
             return @this.MayGetDouble(@this.GetOrdinal(name));
         }
 
+        //// Guid
+
         public static Guid GetGuid(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -402,6 +420,8 @@ namespace Narvalo.Data
 
             return @this.MayGetGuid(@this.GetOrdinal(name));
         }
+
+        //// Int16
 
         public static short GetInt16(this SqlDataReader @this, string name)
         {
@@ -459,6 +479,8 @@ namespace Narvalo.Data
             return @this.MayGetInt16(@this.GetOrdinal(name));
         }
 
+        //// Int32
+
         public static int GetInt32(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -515,6 +537,8 @@ namespace Narvalo.Data
             return @this.MayGetInt32(@this.GetOrdinal(name));
         }
 
+        //// Int64
+
         public static long GetInt64(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -569,6 +593,8 @@ namespace Narvalo.Data
             return @this.MayGetInt64(@this.GetOrdinal(name));
         }
 
+        //// Money
+
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
             Require.Object(@this);
@@ -617,6 +643,8 @@ namespace Narvalo.Data
             return @this.MayGetMoney(@this.GetOrdinal(name));
         }
 
+        //// String
+
         public static string GetString(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -655,6 +683,8 @@ namespace Narvalo.Data
 
             return @this.MayGetString(@this.GetOrdinal(name));
         }
+
+        //// Xml
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {

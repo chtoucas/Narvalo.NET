@@ -19,10 +19,10 @@
 
         public static bool DeploymentIsRetail { get { return DeploymentIsRetail_.Value; } }
 
-        ///// <summary>
-        ///// Récupération du niveau de confiance AspNet.
-        ///// </summary>
-        ///// <returns></returns>
+        /// <summary>
+        /// Récupération du niveau de confiance AspNet.
+        /// </summary>
+        /// <returns></returns>
         //public static AspNetHostingPermissionLevel FindCurrentTrustLevel()
         //{
         //    foreach (var trustLevel in TrustLevels_) {

@@ -185,6 +185,7 @@
       <DependentUpon>Outcome`1.cs</DependentUpon>
     </Compile>
     <Compile Include="MayConvert.cs" />
+    <Compile Include="ParseValue.cs" />
     <Compile Include="Parse.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>

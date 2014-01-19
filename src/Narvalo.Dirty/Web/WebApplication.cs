@@ -82,13 +82,13 @@
 
         #endregion
 
-        ///// <summary>
-        ///// Exécute un code d'initialisation personnalisé une fois que tous les modules ont été créés.
-        ///// Demandé une fois pour chaque instance de la classe HttpApplication.
-        ///// </summary>
-        //public override void Init()
-        //{
-        //    base.Init();
-        //}
+        /// <summary>
+        /// Exécute un code d'initialisation personnalisé une fois que tous les modules ont été créés.
+        /// Demandé une fois pour chaque instance de la classe HttpApplication.
+        /// </summary>
+        public override void Init()
+        {
+            base.Init();
+        }
     }
 }
