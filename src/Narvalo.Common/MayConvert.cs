@@ -2,7 +2,7 @@
 {
     using Narvalo.Fx;
 
-    public static class MayConvert
+    public static partial class MayConvert
     {
         public static Maybe<TEnum> ToEnum<TEnum>(object value) where TEnum : struct
         {

@@ -3,10 +3,7 @@
     using System.Collections.Generic;
     using Narvalo.Fx;
 
-    /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Collections.Generic.IDictionary{T,U}"/>.
-    /// </summary>
-    public static class DictionaryExtensions
+    public static partial class DictionaryExtensions
     {
         /// <summary>
         /// Version sans passage par référence de la méthode <see cref="System.Collections.Generic.IDictionary{T,U}.TryGetValue"/>.

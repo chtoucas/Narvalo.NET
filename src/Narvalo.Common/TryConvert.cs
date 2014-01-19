@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public static class TryConvert
+    public static partial class TryConvert
     {
         /// <remarks>
         /// Ne marche pas de manière cohérente pour les enumérations de type Flags :

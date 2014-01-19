@@ -6,7 +6,7 @@
     using System.Net.Mail;
     using Narvalo.Fx;
 
-    public static class TryParse
+    public static partial class TryParse
     {
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
         public static bool ToBoolean(string value, out bool result)

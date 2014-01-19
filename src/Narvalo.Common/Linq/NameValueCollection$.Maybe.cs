@@ -4,10 +4,7 @@
     using Narvalo;
     using Narvalo.Fx;
 
-    /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Collections.Specialized.NameValueCollection"/>.
-    /// </summary>
-    public static class NameValueCollectionExtensions
+    public static partial class NameValueCollectionExtensions
     {
         public static Maybe<string> MayGetValue(this NameValueCollection @this, string name)
         {

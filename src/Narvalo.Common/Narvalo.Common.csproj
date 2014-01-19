@@ -153,16 +153,27 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Create.ValueTypes.cs">
+      <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Create.SimpleTypes.cs">
+      <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugCheck.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Linq\Dictionary`2%24.cs" />
     <Compile Include="Linq\Enumerable`1%24.Maybe.cs">
       <DependentUpon>Enumerable`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Linq\Enumerable`1%24.cs" />
-    <Compile Include="Linq\Dictionary`2%24.Maybe.cs" />
+    <Compile Include="Linq\Dictionary`2%24.Maybe.cs">
+      <DependentUpon>Dictionary`2%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Linq\Enumerator`1%24.cs" />
+    <Compile Include="Linq\NameValueCollection%24.cs" />
     <Compile Include="Linq\NameValueCollection%24.Maybe.cs">
       <SubType>Code</SubType>
+      <DependentUpon>NameValueCollection%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
@@ -185,7 +196,14 @@
       <DependentUpon>Outcome`1.cs</DependentUpon>
     </Compile>
     <Compile Include="MayConvert.cs" />
-    <Compile Include="ParseValue.cs" />
+    <Compile Include="Create.cs" />
+    <Compile Include="MayParse.ReferenceTypes.cs" />
+    <Compile Include="MayParse.ValueTypes.cs">
+      <DependentUpon>MayParse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MayParse.SimpleTypes.cs">
+      <DependentUpon>MayParse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parse.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>

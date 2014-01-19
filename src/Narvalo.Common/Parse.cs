@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static class Parse
+    public static partial class Parse
     {
         public static TEnum ToEnum<TEnum>(string value) where TEnum : struct
         {
