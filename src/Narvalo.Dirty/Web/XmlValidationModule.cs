@@ -87,10 +87,12 @@ namespace Narvalo.Web
             var renderer = Activator.CreateInstance(rendererType) as IXmlValidationRenderer;
 
             if (renderer == null) {
-                throw Failure.Argument(typeName,
-                    "The specified custom renderer type '{0}' must implement the '{1}' interface",
-                    typeName,
-                    typeof(IXmlValidationRenderer).FullName);
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        "The specified custom renderer type '{0}' must implement the '{1}' interface",
+                        typeName,
+                        typeof(IXmlValidationRenderer).FullName),
+                    "typeName");
             }
 
             return renderer;

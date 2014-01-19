@@ -44,7 +44,7 @@
 
             static Maybe<string> MayParse_(string value)
             {
-                return MayParseHelper.Parse<string>(
+                return MayParse.MayParseCore<string>(
                     value,
                     (string val, out string result) => {
                         if (value.Length > 0) {

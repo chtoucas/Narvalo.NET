@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Xml
 {
     using System;
-    using System.Globalization;
     using System.Xml;
     using System.Xml.Linq;
     using Narvalo.Fx;
@@ -25,10 +24,8 @@
 
             var attr = @this.Attribute(name);
             if (attr == null) {
-                throw Failure.Xml(
-                    SR.XElement_AttributeNotFoundFormat,
-                    @this.Name.LocalName,
-                    name);
+                throw new XmlException(
+                    Format.CurrentCulture(SR.XElement_AttributeNotFoundFormat, @this.Name.LocalName, name));
             }
 
             return attr;
@@ -48,10 +45,8 @@
 
             var child = @this.Element(name);
             if (child == null) {
-                throw Failure.Xml(
-                    SR.XElement_FirstChildNotFoundFormat,
-                    @this.Name.LocalName,
-                    name);
+                throw new XmlException(
+                    Format.CurrentCulture(SR.XElement_FirstChildNotFoundFormat, @this.Name.LocalName, name));
             }
 
             return child;
@@ -70,10 +65,11 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value).ValueOrThrow(() => Failure.Xml(
-                SR.XElement_MalformedElementValueFormat,
-                @this.Name.LocalName,
-                ((IXmlLineInfo)@this).LineNumber));
+            return fun(@this.Value).ValueOrThrow(() => new XmlException(
+                Format.CurrentCulture(
+                    SR.XElement_MalformedElementValueFormat,
+                    @this.Name.LocalName,
+                    ((IXmlLineInfo)@this).LineNumber)));
         }
 
         public static Maybe<T> MayParseValue<T>(this XElement @this, MayFunc<string, T> fun)
@@ -106,9 +102,8 @@
             }
 
             if (nextElement == null) {
-                throw Failure.Xml(
-                    SR.XElement_NextElementNotFoundFormat,
-                    @this.Name.LocalName);
+                throw new XmlException(
+                    Format.CurrentCulture(SR.XElement_NextElementNotFoundFormat, @this.Name.LocalName));
             }
 
             return nextElement as XElement;

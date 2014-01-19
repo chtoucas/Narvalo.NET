@@ -5,8 +5,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Narvalo.Org Libraries.")]
 
 [assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("en")]
-////[assembly: NeutralResourcesLanguage("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
 ////[assembly: ContractVerification(false)]
 

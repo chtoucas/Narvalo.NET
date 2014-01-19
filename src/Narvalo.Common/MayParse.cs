@@ -9,6 +9,8 @@
 
     public static class MayParse
     {
+        //// Boolean
+
         public static Maybe<bool> ToBoolean(string value)
         {
             return ToBoolean(value, BooleanStyles.Default);
@@ -16,10 +18,12 @@
 
         public static Maybe<bool> ToBoolean(string value, BooleanStyles style)
         {
-            return MayParseHelper.Parse<bool>(
+            return MayParseCore<bool>(
                 value,
                 (string val, out bool result) => TryParse.ToBoolean(val, style, out result));
         }
+
+        //// Decimal
 
         public static Maybe<decimal> ToDecimal(string value)
         {
@@ -28,13 +32,15 @@
 
         public static Maybe<decimal> ToDecimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<decimal>(
+            return MayParseCore<decimal>(
                 value,
                 (string val, out decimal result) =>
                 {
                     return Decimal.TryParse(val, style, provider, out result);
                 });
         }
+
+        //// Double
 
         public static Maybe<double> ToDouble(string value)
         {
@@ -51,10 +57,12 @@
 
         public static Maybe<double> ToDouble(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<double>(
+            return MayParseCore<double>(
                 value,
                 (string val, out double result) => Double.TryParse(val, style, provider, out result));
         }
+
+        //// Int16
 
         public static Maybe<short> ToInt16(string value)
         {
@@ -63,10 +71,12 @@
 
         public static Maybe<short> ToInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<short>(
+            return MayParseCore<short>(
                 value,
                 (string val, out short result) => Int16.TryParse(val, style, provider, out result));
         }
+
+        //// Int32
 
         public static Maybe<int> ToInt32(string value)
         {
@@ -75,10 +85,12 @@
 
         public static Maybe<int> ToInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<int>(
+            return MayParseCore<int>(
                 value,
                 (string val, out int result) => Int32.TryParse(val, style, provider, out result));
         }
+
+        //// Int64
 
         public static Maybe<long> ToInt64(string value)
         {
@@ -87,10 +99,12 @@
 
         public static Maybe<long> ToInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<long>(
+            return MayParseCore<long>(
                 value,
                 (string val, out long result) => Int64.TryParse(val, style, provider, out result));
         }
+
+        //// Single
 
         public static Maybe<float> ToSingle(string value)
         {
@@ -99,10 +113,12 @@
 
         public static Maybe<float> ToSingle(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<float>(
+            return MayParseCore<float>(
                 value,
                 (string val, out float result) => Single.TryParse(val, style, provider, out result));
         }
+
+        //// UInt16
 
         [CLSCompliant(false)]
         public static Maybe<ushort> ToUInt16(string value)
@@ -113,10 +129,12 @@
         [CLSCompliant(false)]
         public static Maybe<ushort> ToUInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<ushort>(
+            return MayParseCore<ushort>(
                 value,
                 (string val, out ushort result) => UInt16.TryParse(val, style, provider, out result));
         }
+
+        //// UInt32
 
         [CLSCompliant(false)]
         public static Maybe<uint> ToUInt32(string value)
@@ -127,10 +145,12 @@
         [CLSCompliant(false)]
         public static Maybe<uint> ToUInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<uint>(
+            return MayParseCore<uint>(
                 value,
                 (string val, out uint result) => UInt32.TryParse(val, style, provider, out result));
         }
+
+        //// UInt64
 
         [CLSCompliant(false)]
         public static Maybe<ulong> ToUInt64(string value)
@@ -141,10 +161,12 @@
         [CLSCompliant(false)]
         public static Maybe<ulong> ToUInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return MayParseHelper.Parse<ulong>(
+            return MayParseCore<ulong>(
                 value,
                 (string val, out ulong result) => UInt64.TryParse(val, style, provider, out result));
         }
+
+        //// DateTime
 
         public static Maybe<DateTime> ToDateTime(string value)
         {
@@ -162,10 +184,12 @@
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            return MayParseHelper.Parse<DateTime>(
+            return MayParseCore<DateTime>(
                 value,
                 (string val, out DateTime result) => DateTime.TryParseExact(val, format, provider, style, out result));
         }
+
+        //// Enum
 
         public static Maybe<TEnum> ToEnum<TEnum>(string value) where TEnum : struct
         {
@@ -176,10 +200,12 @@
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
-            return MayParseHelper.Parse<TEnum>(
+            return MayParseCore<TEnum>(
                 value,
                 (string val, out TEnum result) => Enum.TryParse<TEnum>(val, ignoreCase, out result));
         }
+
+        //// Uri
 
         public static Maybe<Uri> ToUri(string value, UriKind uriKind)
         {
@@ -188,23 +214,35 @@
                 return Maybe<Uri>.None;
             }
 
-            return MayParseHelper.Parse<Uri>(
+            return MayParseCore<Uri>(
                 value,
                 (string val, out Uri result) => Uri.TryCreate(val, uriKind, out result));
         }
 
+        //// IPAddress
+
         public static Maybe<IPAddress> ToIPAddress(string value)
         {
-            return MayParseHelper.Parse<IPAddress>(
+            return MayParseCore<IPAddress>(
                 value,
                 (string val, out IPAddress result) => IPAddress.TryParse(val, out result));
         }
 
+        //// MailAddress
+
         public static Maybe<MailAddress> ToMailAddress(string value)
         {
-            return MayParseHelper.Parse<MailAddress>(
+            return MayParseCore<MailAddress>(
                 value,
                 (string val, out MailAddress result) => TryParse.ToMailAddress(val, out result));
+        }
+
+        internal static Maybe<T> MayParseCore<T>(string value, TryParse<T> fun)
+        {
+            if (value == null) { return Maybe<T>.None; }
+
+            T result;
+            return fun(value, out result) ? Maybe.Create(result) : Maybe<T>.None;
         }
     }
 }

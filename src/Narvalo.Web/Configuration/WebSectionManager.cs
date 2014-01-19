@@ -12,7 +12,8 @@
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Failure.ConfigurationErrors(SR.WebConfigurationManager_SectionNotFoundFormat, sectionName);
+                throw new ConfigurationErrorsException(
+                    Format.CurrentCulture(SR.WebConfigurationManager_SectionNotFoundFormat, sectionName));
             }
 
             return section;
@@ -26,7 +27,8 @@
             T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
 
             if (section == null) {
-                throw Failure.ConfigurationErrors(SR.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath);
+                throw new ConfigurationErrorsException(
+                    Format.CurrentCulture(SR.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath));
             }
 
             return section;

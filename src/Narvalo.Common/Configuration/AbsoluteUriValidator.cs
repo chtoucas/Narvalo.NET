@@ -19,9 +19,8 @@
         {
             string uriString = (string)value;
             if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute)) {
-                throw Failure.ConfigurationErrors(
-                    SR.AbsoluteUriValidator_UriIsNotAbsoluteFormat,
-                    uriString);
+                throw new ConfigurationErrorsException(
+                    Format.CurrentCulture(SR.AbsoluteUriValidator_UriIsNotAbsoluteFormat, uriString));
             }
         }
     }

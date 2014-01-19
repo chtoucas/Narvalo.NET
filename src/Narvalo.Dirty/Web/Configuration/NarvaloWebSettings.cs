@@ -5,7 +5,7 @@
     using System.Configuration;
     using System.Linq;
     using Narvalo;
-    using Narvalo.Collections;
+    using Narvalo.Linq;
 
     // FIXME: Ajouter une méthode statique de récupération Current.
     public class NarvaloWebSettings

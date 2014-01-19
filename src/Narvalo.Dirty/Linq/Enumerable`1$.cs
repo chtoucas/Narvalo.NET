@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Collections
+﻿namespace Narvalo.Linq
 {
     using System.Collections.Generic;
 

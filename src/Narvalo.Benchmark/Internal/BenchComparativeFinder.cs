@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Collections;
+    using Narvalo.Linq;
     using Narvalo.Fx;
 
     class BenchComparativeFinder

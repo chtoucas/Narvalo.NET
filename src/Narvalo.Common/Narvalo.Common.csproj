@@ -154,11 +154,14 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="DebugCheck.cs" />
-    <Compile Include="Collections\Enumerable`1%24.Maybe.cs" />
-    <Compile Include="Collections\Enumerable`1%24.cs" />
-    <Compile Include="Collections\Dictionary`2%24.Maybe.cs" />
-    <Compile Include="Collections\Enumerator`1%24.cs" />
-    <Compile Include="Collections\NameValueCollection%24.Maybe.cs">
+    <Compile Include="Format.cs" />
+    <Compile Include="Linq\Enumerable`1%24.Maybe.cs">
+      <DependentUpon>Enumerable`1%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Linq\Enumerable`1%24.cs" />
+    <Compile Include="Linq\Dictionary`2%24.Maybe.cs" />
+    <Compile Include="Linq\Enumerator`1%24.cs" />
+    <Compile Include="Linq\NameValueCollection%24.Maybe.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\Configuration%24.cs" />
@@ -169,38 +172,53 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="EnumStyles.cs" />
-    <Compile Include="Fx\Maybe`1.IEquatable.cs" />
-    <Compile Include="Fx\Outcome.IEquatable.cs" />
-    <Compile Include="Fx\Outcome`1.IEquatable.cs" />
-    <Compile Include="Fx\Outcome`1.Monad.cs" />
+    <Compile Include="Fx\Maybe`1.IEquatable.cs">
+      <DependentUpon>Maybe`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Outcome.IEquatable.cs">
+      <DependentUpon>Outcome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Outcome`1.IEquatable.cs">
+      <DependentUpon>Outcome`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Outcome`1.Monad.cs">
+      <DependentUpon>Outcome`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="MayConvert.cs" />
     <Compile Include="Parse.cs" />
-    <Compile Include="Failure.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
+      <DependentUpon>Maybe.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Maybe.Enumerable.cs">
       <SubType>Code</SubType>
+      <DependentUpon>Maybe.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\MayFunc.cs" />
-    <Compile Include="Fx\Outcome.Factory.cs" />
+    <Compile Include="Fx\Outcome.Factory.cs">
+      <DependentUpon>Outcome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
-    <Compile Include="Fx\Maybe`1.Language.cs" />
+    <Compile Include="Fx\Maybe`1.Language.cs">
+      <DependentUpon>Maybe`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Maybe`1.Monad.cs">
       <SubType>Code</SubType>
+      <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\MayFunc`%24.cs" />
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
-    <Compile Include="Range`1.IEquatable.cs" />
+    <Compile Include="Range`1.IEquatable.cs">
+      <DependentUpon>Range`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="TryConvert.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Fx\OutcomeException.cs" />
-    <Compile Include="Internal\MayParseHelper.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
     <Compile Include="Net\Mail\MailAddressFactory.cs" />

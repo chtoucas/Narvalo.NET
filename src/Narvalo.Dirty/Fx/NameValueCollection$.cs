@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Specialized;
     using Narvalo;
-    using Narvalo.Collections;
+    using Narvalo.Linq;
 
     public static class NameValueCollectionExtensions
     {

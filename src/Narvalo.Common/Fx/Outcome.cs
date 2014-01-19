@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using System.Runtime.ExceptionServices;
 
     public partial struct Outcome : IEquatable<Outcome>
     {
@@ -36,11 +35,7 @@
         public void SuccessOrThrow()
         {
             if (Unsuccessful) {
-#if NET_40
-                throw Exception;
-#else
-                ExceptionDispatchInfo.Capture(_exception).Throw();
-#endif
+                throw _exception;
             }
         }
 

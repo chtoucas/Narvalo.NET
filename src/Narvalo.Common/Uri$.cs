@@ -20,7 +20,8 @@
                 return @this.ToString().Replace("https:", String.Empty);
             }
             else {
-                throw Failure.NotSupported(SR.Uri_ProtocolLessUnsupportedSchemeFormat, scheme);
+                throw new NotSupportedException(
+                    Format.CurrentCulture(SR.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
             }
         }
     }

@@ -23,7 +23,8 @@
             T section = ConfigurationManager.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Failure.ConfigurationErrors(SR.ConfigurationManager_MissingSectionFormat, sectionName);
+                throw new ConfigurationErrorsException(
+                    Format.CurrentCulture(SR.ConfigurationManager_MissingSectionFormat, sectionName));
             }
 
             return section;
@@ -55,7 +56,8 @@
             var section = configuration.GetSection(sectionName) as T;
 
             if (section == null) {
-                throw Failure.ConfigurationErrors(SR.ConfigurationManager_MissingSectionFormat, sectionName);
+                throw new ConfigurationErrorsException(
+                    Format.CurrentCulture(SR.ConfigurationManager_MissingSectionFormat, sectionName));
             }
 
             return section;

@@ -24,10 +24,11 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value).ValueOrThrow(() => Failure.Xml(
-                SR.XElement_MalformedAttributeValueFormat,
-                @this.Name.LocalName,
-                ((IXmlLineInfo)@this).LineNumber));
+            return fun(@this.Value).ValueOrThrow(() => new XmlException(
+                Format.CurrentCulture(
+                    SR.XElement_MalformedAttributeValueFormat,
+                    @this.Name.LocalName,
+                    ((IXmlLineInfo)@this).LineNumber)));
         }
 
         public static Maybe<T> MayParseValue<T>(this XAttribute @this, MayFunc<string, T> fun)

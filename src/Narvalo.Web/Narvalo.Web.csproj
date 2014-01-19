@@ -145,9 +145,15 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\AssetHelper.cs" />
     <Compile Include="Html\HtmlHelper%24.cs" />
-    <Compile Include="Html\HtmlHelper%24.Image.cs" />
-    <Compile Include="Html\HtmlHelper%24.Link.cs" />
-    <Compile Include="Html\HtmlHelper%24.Script.cs" />
+    <Compile Include="Html\HtmlHelper%24.Image.cs">
+      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Html\HtmlHelper%24.Link.cs">
+      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Html\HtmlHelper%24.Script.cs">
+      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="HttpHandlerBase.cs" />
     <Compile Include="HttpHandlerBase`1.cs" />
     <Compile Include="HttpResponse%24.Caching.cs" />

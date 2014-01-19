@@ -65,6 +65,8 @@
 
         SqlDataReader ExecuteCommand_(SqlCommand command)
         {
+            DebugCheck.NotNull(command);
+
             return command.ExecuteReader(CommandBehavior);
         }
     }

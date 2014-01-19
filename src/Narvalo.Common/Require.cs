@@ -54,7 +54,7 @@ namespace Narvalo
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
-                throw Failure.ArgumentNull(parameterName, SR.Require_ArgumentNullFormat, parameterName);
+                throw new ArgumentNullException(parameterName, Format.CurrentCulture(SR.Require_ArgumentNullFormat, parameterName));
             }
 
             Contract.EndContractBlock();
@@ -67,7 +67,7 @@ namespace Narvalo
             NotNull(value, parameterName);
 
             if (value.Length == 0) {
-                throw Failure.Argument(parameterName, SR.Require_ArgumentEmptyFormat, parameterName);
+                throw new ArgumentException(Format.CurrentCulture(SR.Require_ArgumentEmptyFormat, parameterName), parameterName);
             }
             
             Contract.EndContractBlock();
@@ -78,12 +78,10 @@ namespace Narvalo
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotInRangeFormat,
-                    minValue,
-                    maxValue);
+                    Format.CurrentCulture(SR.Require_NotInRangeFormat, minValue, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -94,12 +92,10 @@ namespace Narvalo
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotInRangeFormat,
-                    minValue,
-                    maxValue);
+                    Format.CurrentCulture(SR.Require_NotInRangeFormat, minValue, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -111,12 +107,10 @@ namespace Narvalo
             where T : IComparable<T>, IEquatable<T>
         {
             if (!range.Includes(value)) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotInRangeFormat,
-                    range.LowerEnd,
-                    range.UpperEnd);
+                    Format.CurrentCulture(SR.Require_NotInRangeFormat, range.LowerEnd, range.UpperEnd));
             }
 
             Contract.EndContractBlock();
@@ -127,11 +121,10 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotGreaterThanOrEqualToFormat,
-                    minValue);
+                    Format.CurrentCulture(SR.Require_NotGreaterThanOrEqualToFormat, minValue));
             }
 
             Contract.EndContractBlock();
@@ -142,11 +135,10 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotGreaterThanOrEqualToFormat,
-                    minValue);
+                    Format.CurrentCulture(SR.Require_NotGreaterThanOrEqualToFormat, minValue));
             }
 
             Contract.EndContractBlock();
@@ -158,11 +150,10 @@ namespace Narvalo
             where T : IComparable<T>
         {
             if (value.CompareTo(minValue) < 0) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotGreaterThanOrEqualToFormat,
-                    minValue);
+                    Format.CurrentCulture(SR.Require_NotGreaterThanOrEqualToFormat, minValue));
             }
 
             Contract.EndContractBlock();
@@ -173,11 +164,10 @@ namespace Narvalo
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotLessThanOrEqualToFormat,
-                    maxValue);
+                    Format.CurrentCulture(SR.Require_NotLessThanOrEqualToFormat, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -188,11 +178,10 @@ namespace Narvalo
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotLessThanOrEqualToFormat,
-                    maxValue);
+                    Format.CurrentCulture(SR.Require_NotLessThanOrEqualToFormat, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -204,11 +193,10 @@ namespace Narvalo
             where T : IComparable<T>
         {
             if (value.CompareTo(maxValue) > 0) {
-                throw Failure.ArgumentOutOfRange(
+                throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    SR.Require_NotLessThanOrEqualToFormat,
-                    maxValue);
+                    Format.CurrentCulture(SR.Require_NotLessThanOrEqualToFormat, maxValue));
             }
 
             Contract.EndContractBlock();

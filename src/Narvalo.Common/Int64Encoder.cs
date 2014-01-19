@@ -118,7 +118,9 @@
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
                 if (index == -1) {
-                    throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
+                    throw new ArgumentException(
+                        Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        "value");
                 }
                 
                 checked {
@@ -140,7 +142,9 @@
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.BinarySearch(alphabet, value[i]);
                 if (index == -1) {
-                    throw Failure.Argument("value", SR.Int64Encoder_IllegalCharacterFormat, value[i], i);
+                    throw new ArgumentException(
+                        Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        "value");
                 }
                 
                 checked {

@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Collections
+﻿namespace Narvalo.Linq
 {
     using System;
     using System.Collections.Generic;
@@ -63,20 +63,18 @@
         {
             Require.Object(@this);
 
-            return Append_(@this, element);
+            return AppendImpl_(@this, element);
         }
 
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> @this, T element)
         {
             Require.Object(@this);
 
-            return Prepend_(@this, element);
+            return PrependImpl_(@this, element);
         }
 
-        static IEnumerable<T> Append_<T>(IEnumerable<T> source, T element)
+        static IEnumerable<T> AppendImpl_<T>(IEnumerable<T> source, T element)
         {
-            DebugCheck.NotNull(source);
-
             foreach (var item in source) {
                 yield return item;
             }
@@ -84,11 +82,10 @@
             yield return element;
         }
 
-        static IEnumerable<T> Prepend_<T>(IEnumerable<T> source, T element)
+        static IEnumerable<T> PrependImpl_<T>(IEnumerable<T> source, T element)
         {
-            DebugCheck.NotNull(source);
-
             yield return element;
+
             foreach (var item in source) {
                 yield return item;
             }
