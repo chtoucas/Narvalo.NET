@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     public partial struct Failure<T>
     {
@@ -18,6 +19,7 @@
             return Failure<TResult>.η(fun(_exception));
         }
 
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
         internal static Failure<T> η(T ex)
         {
             Require.NotNull(ex, "ex");

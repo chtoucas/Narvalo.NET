@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo.Internal;
 
     public partial struct Outcome<T>
@@ -19,6 +20,7 @@
             return Unsuccessful ? Outcome<TResult>.η(_exception) : Outcome<TResult>.η(fun(Value));
         }
 
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
         internal static Outcome<T> η(Exception ex)
         {
             Require.NotNull(ex, "ex");
@@ -26,6 +28,7 @@
             return new Outcome<T>(ex);
         }
 
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
         internal static Outcome<T> η(T value)
         {
             if (value == null) {

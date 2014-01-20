@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Cf. http://stylecop.soyuz5.com/
+-->
 <Dictionary>
   <Words>
     <Unrecognized>
@@ -21,6 +24,8 @@
       <Word>Manip</Word>
       <Word>Cr</Word>
       <Word>Lf</Word>
+      
+      <!-- Monades -->
       <Word>η</Word>
       <Word>μ</Word>
 
