@@ -8,7 +8,7 @@
     {
         protected HttpHandlerBase() { }
 
-        public virtual bool IsReusable { get { return true; } }
+        public virtual bool IsReusable { get { return false; } }
 
         protected abstract HttpVerbs AcceptedVerbs { get; }
 
