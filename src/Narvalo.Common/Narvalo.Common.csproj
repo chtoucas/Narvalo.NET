@@ -153,14 +153,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Create.ValueTypes.cs">
-      <DependentUpon>Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Create.SimpleTypes.cs">
-      <DependentUpon>Create.cs</DependentUpon>
+    <Compile Include="ParseAs.SimpleTypes.cs">
+      <DependentUpon>ParseAs.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugCheck.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Internal\TryCreate`1.cs" />
     <Compile Include="Linq\Dictionary`2%24.cs" />
     <Compile Include="Linq\Enumerable`1%24.Maybe.cs">
       <DependentUpon>Enumerable`1%24.cs</DependentUpon>
@@ -196,15 +194,11 @@
       <DependentUpon>Outcome`1.cs</DependentUpon>
     </Compile>
     <Compile Include="MayConvert.cs" />
-    <Compile Include="Create.cs" />
-    <Compile Include="MayParse.ReferenceTypes.cs" />
-    <Compile Include="MayParse.ValueTypes.cs">
-      <DependentUpon>MayParse.cs</DependentUpon>
-    </Compile>
+    <Compile Include="MayCreate.cs" />
     <Compile Include="MayParse.SimpleTypes.cs">
       <DependentUpon>MayParse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Parse.cs" />
+    <Compile Include="ParseAs.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
       <DependentUpon>Maybe.cs</DependentUpon>
@@ -231,6 +225,7 @@
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\MayFunc`.cs" />
+    <Compile Include="ParseTo.cs" />
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>
     </Compile>
@@ -240,7 +235,7 @@
     <Compile Include="Fx\OutcomeException.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
-    <Compile Include="Net\Mail\MailAddressFactory.cs" />
+    <Compile Include="Create.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />
@@ -257,12 +252,14 @@
     <Compile Include="StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="TryCreate.cs" />
     <Compile Include="TryParse.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />
     <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\XmlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

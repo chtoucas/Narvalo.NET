@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
 
-    public static partial class Create
+    public static partial class ParseAs
     {
         //// Boolean
 
@@ -14,7 +14,7 @@
 
         public static bool? Boolean(string value, BooleanStyles style)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out bool result) => TryParse.ToBoolean(val, style, out result));
         }
@@ -28,7 +28,7 @@
 
         public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out decimal result) =>
                 {
@@ -53,7 +53,7 @@
 
         public static double? Double(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out double result) => double.TryParse(val, style, provider, out result));
         }
@@ -67,7 +67,7 @@
 
         public static short? Int16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out short result) => short.TryParse(val, style, provider, out result));
         }
@@ -81,7 +81,7 @@
 
         public static int? Int32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out int result) => int.TryParse(val, style, provider, out result));
         }
@@ -95,7 +95,7 @@
 
         public static long? Int64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out long result) => long.TryParse(val, style, provider, out result));
         }
@@ -109,7 +109,7 @@
 
         public static float? Single(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out float result) => float.TryParse(val, style, provider, out result));
         }
@@ -125,7 +125,7 @@
         [CLSCompliant(false)]
         public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out ushort result) => ushort.TryParse(val, style, provider, out result));
         }
@@ -141,7 +141,7 @@
         [CLSCompliant(false)]
         public static uint? UInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out uint result) => uint.TryParse(val, style, provider, out result));
         }
@@ -157,7 +157,7 @@
         [CLSCompliant(false)]
         public static ulong? UInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out ulong result) => ulong.TryParse(val, style, provider, out result));
         }

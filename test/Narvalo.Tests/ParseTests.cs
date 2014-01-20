@@ -45,14 +45,14 @@
             public static void ThrowsArgumentException_WithInt32()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => Parse.ToEnum<int>("Whatever"));
+                Assert.Throws<ArgumentException>(() => ParseTo.Enum<int>("Whatever"));
             }
 
             [Fact]
             public static void ThrowsArgumentException_WithStruct()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => Parse.ToEnum<StructStub_>("Whatever"));
+                Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
             }
 
             #endregion
@@ -63,7 +63,7 @@
             public static void ReturnsCorrectMember_ForActualValue()
             {
                 // Act
-                EnumStub_ result = Parse.ToEnum<EnumStub_>("ActualValue");
+                EnumStub_ result = ParseTo.Enum<EnumStub_>("ActualValue");
                 // Assert
                 Assert.Equal(EnumStub_.ActualValue, result);
             }
@@ -72,7 +72,7 @@
             public static void ReturnsCorrectMember_ForActualValue_WhenIgnoreCase()
             {
                 // Act
-                EnumStub_ result = Parse.ToEnum<EnumStub_>("actualvalue", true /* ignoreCase */);
+                EnumStub_ result = ParseTo.Enum<EnumStub_>("actualvalue", true /* ignoreCase */);
                 // Assert
                 Assert.Equal(EnumStub_.ActualValue, result);
             }
@@ -82,7 +82,7 @@
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => Parse.ToEnum<EnumStub_>("actualvalue", false /* ignoreCase */));
+                    () => ParseTo.Enum<EnumStub_>("actualvalue", false /* ignoreCase */));
             }
 
             #endregion
@@ -94,7 +94,7 @@
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => Parse.ToEnum<EnumStub_>("InvalidValue"));
+                    () => ParseTo.Enum<EnumStub_>("InvalidValue"));
             }
 
             [Fact]
@@ -102,7 +102,7 @@
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => Parse.ToEnum<EnumStub_>("invalidvalue", true /* ignoreCase */));
+                    () => ParseTo.Enum<EnumStub_>("invalidvalue", true /* ignoreCase */));
             }
 
             [Fact]
@@ -110,7 +110,7 @@
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => Parse.ToEnum<EnumStub_>("invalidvalue", false /* ignoreCase */));
+                    () => ParseTo.Enum<EnumStub_>("invalidvalue", false /* ignoreCase */));
             }
 
             #endregion

@@ -199,7 +199,6 @@
     <Compile Include="Web\WebPageBase%24.cs" />
     <Compile Include="Web\XmlValidationModule.cs" />
     <Compile Include="Xml\CachingXmlResolver.cs" />
-    <Compile Include="Xml\XmlValidator.cs" />
     <Compile Include="_Aliens\NHibernate\GuidComb.cs" />
   </ItemGroup>
   <ItemGroup>

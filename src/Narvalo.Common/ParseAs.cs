@@ -2,8 +2,9 @@
 {
     using System;
     using System.Globalization;
+    using Narvalo.Internal;
 
-    public static partial class Create
+    public static partial class ParseAs
     {
         //// Enum
 
@@ -16,7 +17,7 @@
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out TEnum result) => System.Enum.TryParse<TEnum>(val, ignoreCase, out result));
         }
@@ -39,9 +40,19 @@
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            return CreateCore(
+            return ParseAsCore(
                 value,
                 (string val, out DateTime result) => System.DateTime.TryParseExact(val, format, provider, style, out result));
+        }
+
+        //// ParseAsCore
+
+        internal static T? ParseAsCore<T>(string value, TryParse<T> fun) where T : struct
+        {
+            if (value == null) { return null; }
+
+            T result;
+            return fun(value, out result) ? result : (T?)null;
         }
     }
 }
