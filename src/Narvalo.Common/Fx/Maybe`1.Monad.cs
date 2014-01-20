@@ -8,14 +8,14 @@
         {
             Require.NotNull(kun, "kun");
 
-            return _isSome ? kun(_value) : Maybe<TResult>.None;
+            return IsSome ? kun(_value) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> fun)
         {
             Require.NotNull(fun, "fun");
 
-            return _isSome ? Maybe<TResult>.η(fun(_value)) : Maybe<TResult>.None;
+            return IsSome ? Maybe<TResult>.η(fun(_value)) : Maybe<TResult>.None;
         }
 
         internal static Maybe<T> η(T value)
@@ -25,7 +25,7 @@
 
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
-            return square._isSome ? square._value : Maybe<T>.None;
+            return square.IsSome ? square._value : Maybe<T>.None;
         }
     }
 }

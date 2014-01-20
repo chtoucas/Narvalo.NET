@@ -7,6 +7,8 @@
         // REVIEW: Maybe<Unit>.None ?
         public static readonly Maybe<Unit> Unit = default(Maybe<Narvalo.Fx.Unit>);
 
+        //// Create
+
         public static Maybe<T> Create<T>(T value)
         {
             return Maybe<T>.η(value);
@@ -17,10 +19,14 @@
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
 
+        //// Join
+
         public static Maybe<T> Join<T>(Maybe<Maybe<T>> square)
         {
             return Maybe<T>.μ(square);
         }
+
+        //// Compose
 
         public static Maybe<TResult> Compose<TSource, TMiddle, TResult>(
             MayFunc<TSource, TMiddle> kunA,
@@ -32,6 +38,8 @@
 
             return kunA(value).Bind(kunB);
         }
+
+        //// Lift
 
         public static Maybe<TResult> Lift<T, TResult>(
             Func<T, TResult> fun,
@@ -95,6 +103,8 @@
                 ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value, option5.Value))
                 : Maybe<TResult>.None;
         }
+
+        //// Promote
 
         public static Func<Maybe<T>, Maybe<TResult>> Promote<T, TResult>(Func<T, TResult> fun)
         {

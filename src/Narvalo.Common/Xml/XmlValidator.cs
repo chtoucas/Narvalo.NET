@@ -14,8 +14,6 @@ namespace Narvalo.Xml
         bool _isValid = true;
         IList<ValidationEventArgs> _errors = new List<ValidationEventArgs>();
 
-        public bool IsValid { get { return _isValid; } }
-
         public XmlValidator(XmlReaderSettings settings)
         {
             Require.NotNull(settings, "settings");
@@ -27,6 +25,8 @@ namespace Narvalo.Xml
             };
         }
 
+        public bool IsValid { get { return _isValid; } }
+
         public IReadOnlyCollection<ValidationEventArgs> ValidationErrors
         {
             get { return new ReadOnlyCollection<ValidationEventArgs>(_errors); }
@@ -37,7 +37,7 @@ namespace Narvalo.Xml
             Reset_();
 
             using (var reader = XmlReader.Create(file, _settings)) {
-                while (reader.Read()) { ; }
+                while (reader.Read()) { }
             }
 
             return _isValid;
@@ -48,7 +48,7 @@ namespace Narvalo.Xml
             Reset_();
 
             using (var reader = XmlReader.Create(input, _settings)) {
-                while (reader.Read()) { ; }
+                while (reader.Read()) { }
             }
 
             return _isValid;

@@ -2,46 +2,39 @@
 {
     using System;
 
-    public partial struct Outcome : IEquatable<Outcome>
+    public static class Outcome
     {
-        readonly bool _successful;
-        readonly Exception _exception;
+        //// Create
 
-        Outcome(bool successful, Exception exception)
+        public static Outcome<T> Create<T>(Exception ex)
         {
-            // REVIEW: Cf. le commentaire au niveau de Outcome.Success_.
-            DebugCheck.NotNull(exception);
-
-            _successful = successful;
-            _exception = exception;
+            return Outcome<T>.η(ex);
         }
 
-        public bool Successful { get { return _successful; } }
-
-        public bool Unsuccessful { get { return !_successful; } }
-
-        public string ErrorMessage
+        public static Outcome<T> Create<T>(T value)
         {
-            get
-            {
-                if (Successful) {
-                    throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
-                }
-
-                return _exception.Message;
-            }
+            return Outcome<T>.η(value);
         }
 
-        public void SuccessOrThrow()
+        //// Failure
+
+        public static Outcome<T> Failure<T>(string errorMessage)
         {
-            if (Unsuccessful) {
-                throw _exception;
-            }
+            Require.NotNullOrEmpty(errorMessage, "errorMessage");
+
+            return Create<T>(new OutcomeException(errorMessage));
         }
 
-        public override string ToString()
+        public static Outcome<T> Failure<T>(Exception exception)
         {
-            return Successful ? SR.Outcome_Successful : _exception.ToString();
+            return Create<T>(exception);
+        }
+
+        //// Success
+
+        public static Outcome<T> Success<T>(T value)
+        {
+            return Create<T>(value);
         }
     }
 }

@@ -13,6 +13,8 @@
 
         public TResult Match<TResult>(Func<T, TResult> fun, Func<TResult> defaultValueFactory)
         {
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
             return Match(fun, defaultValueFactory());
         }
 

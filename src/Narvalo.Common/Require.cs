@@ -54,7 +54,7 @@ namespace Narvalo
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
-                throw new ArgumentNullException(parameterName, Format.CurrentCulture(SR.Require_ArgumentNullFormat, parameterName));
+                throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
             Contract.EndContractBlock();
@@ -149,6 +149,10 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull("value");
+            }
+
             if (value.CompareTo(minValue) < 0) {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
@@ -192,6 +196,10 @@ namespace Narvalo
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
         {
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull("value");
+            }
+
             if (value.CompareTo(maxValue) > 0) {
                 throw new ArgumentOutOfRangeException(
                     parameterName,

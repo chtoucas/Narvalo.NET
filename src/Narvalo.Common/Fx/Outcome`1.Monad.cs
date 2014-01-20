@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Internal;
 
     public partial struct Outcome<T>
     {
@@ -8,30 +9,29 @@
         {
             Require.NotNull(kun, "kun");
 
-            return Unsuccessful ? Outcome<TResult>.Failure(_exception) : kun(Value);
+            return Unsuccessful ? Outcome<TResult>.η(_exception) : kun(Value);
         }
 
-        public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
+        public Outcome<TResult> Map<TResult>(Func<T, TResult> fun)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(fun, "fun");
 
-            return Unsuccessful
-               ? Outcome<TResult>.Failure(_exception)
-               : Outcome<TResult>.Success(selector(Value));
+            return Unsuccessful ? Outcome<TResult>.η(_exception) : Outcome<TResult>.η(fun(Value));
         }
 
-        internal static Outcome<T> Failure(Exception ex)
+        internal static Outcome<T> η(Exception ex)
         {
+            Require.NotNull(ex, "ex");
+
             return new Outcome<T>(ex);
         }
 
-        internal static Outcome<T> Failure(string errorMessage)
+        internal static Outcome<T> η(T value)
         {
-            return new Outcome<T>(new OutcomeException(errorMessage));
-        }
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull("value");
+            }
 
-        internal static Outcome<T> Success(T value)
-        {
             return new Outcome<T>(value);
         }
     }

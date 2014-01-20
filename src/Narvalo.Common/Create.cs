@@ -15,7 +15,7 @@
             Require.NotNullOrEmpty(value, "value");
 
             try {
-                return Outcome.Create(new MailAddress(value));
+                return Outcome.Success(new MailAddress(value));
             }
             catch (FormatException ex) {
                 return Outcome.Failure<MailAddress>(ex);
@@ -27,7 +27,7 @@
             Require.NotNullOrEmpty(value, "value");
 
             try {
-                return Outcome.Create(new MailAddress(value, displayName));
+                return Outcome.Success(new MailAddress(value, displayName));
             }
             catch (FormatException ex) {
                 return Outcome.Failure<MailAddress>(ex);
@@ -43,7 +43,7 @@
             Require.NotNullOrEmpty(displayName, "displayName");
 
             try {
-                return Outcome.Create(new MailAddress(value, displayName, displayNameEncoding));
+                return Outcome.Success(new MailAddress(value, displayName, displayNameEncoding));
             }
             catch (FormatException ex) {
                 return Outcome.Failure<MailAddress>(ex);

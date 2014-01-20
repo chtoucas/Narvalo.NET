@@ -17,6 +17,8 @@
 
         Maybe(T value)
         {
+            // NB: La seule manière d'appeler le constructeur est via la méthode Maybe<T>.η() 
+            // qui se charge de vérifier que value n'est pas null.
             _value = value;
             _isSome = true;
         }

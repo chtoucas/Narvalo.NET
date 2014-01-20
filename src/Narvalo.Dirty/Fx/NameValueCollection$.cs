@@ -40,12 +40,12 @@
             var value = @this.MayGetValue(param);
 
             if (value.IsNone) {
-                return Outcome.Create(Maybe<T>.None);
+                return Outcome.Success(Maybe<T>.None);
             }
             else {
                 var result = value.Bind(_ => fun(_));
                 if (result.IsSome) {
-                    return Outcome.Create(result);
+                    return Outcome.Success(result);
                 }
                 else {
                     return Outcome.Failure<Maybe<T>>("XXX");

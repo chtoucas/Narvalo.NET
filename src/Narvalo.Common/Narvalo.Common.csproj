@@ -153,6 +153,16 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Fx\Failure.cs" />
+    <Compile Include="Fx\FailureException.cs" />
+    <Compile Include="Fx\Failure`1.cs" />
+    <Compile Include="Fx\Failure`1.IEquatable.cs">
+      <DependentUpon>Failure`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Failure`1.Monad.cs">
+      <DependentUpon>Failure`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="ParseAs.SimpleTypes.cs">
       <DependentUpon>ParseAs.cs</DependentUpon>
     </Compile>
@@ -184,9 +194,6 @@
     <Compile Include="Fx\Maybe`1.IEquatable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Outcome.IEquatable.cs">
-      <DependentUpon>Outcome.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Outcome`1.IEquatable.cs">
       <DependentUpon>Outcome`1.cs</DependentUpon>
     </Compile>
@@ -208,9 +215,6 @@
       <DependentUpon>Maybe.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\MayFunc.cs" />
-    <Compile Include="Fx\Outcome.Factory.cs">
-      <DependentUpon>Outcome.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs">
