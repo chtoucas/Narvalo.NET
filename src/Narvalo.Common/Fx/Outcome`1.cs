@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Internal;
 
     public partial struct Outcome<T> : IEquatable<Outcome<T>>
     {
@@ -11,7 +12,7 @@
         Outcome(Exception exception)
         {
             // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que exception n'est pas null.
+            // qui se charge de vérifier que "exception" n'est pas null.
             _successful = false;
             _exception = exception;
             _value = default(T);
@@ -20,7 +21,7 @@
         Outcome(T value)
         {
             // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que value n'est pas null.
+            // qui se charge de vérifier que "value" n'est pas null.
             _successful = true;
             _exception = default(Exception);
             _value = value;
@@ -57,7 +58,7 @@
         public T ValueOrThrow()
         {
             if (Unsuccessful) {
-                throw _exception;
+                _exception.Throw();
             }
 
             return Value;

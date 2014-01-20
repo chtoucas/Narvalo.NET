@@ -135,4 +135,7 @@
   <data name="WebConfigurationManager_SectionNotFoundInPathFormat" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!</value>
   </data>
+  <data name="HttpHandlerBase_InvalidHttpMethodFormat" xml:space="preserve">
+    <value>Invalid HTTP method: {0}.</value>
+  </data>
 </root>

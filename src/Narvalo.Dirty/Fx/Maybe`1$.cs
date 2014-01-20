@@ -21,5 +21,17 @@
     //    {
     //        throw new NotImplementedException();
     //    }
+
+    //    public Maybe<T> Then(Action<T> onSome, Action onNone)
+    //    {
+    //        return OnSome(onSome).OnNone(onNone);
+
+    //        Func<T, Unit> fun = _ => { onSome(_); return Unit.Single; };
+    //        Func<Unit> factory = () => { onNone(); return Unit.Single; };
+
+    //        Match(fun, factory);
+
+    //        return this;
+    //    }
     //}
 }

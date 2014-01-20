@@ -21,11 +21,11 @@
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
-        internal static Outcome<T> η(Exception ex)
+        internal static Outcome<T> η(Exception exception)
         {
-            Require.NotNull(ex, "ex");
+            Require.NotNull(exception, "exception");
 
-            return new Outcome<T>(ex);
+            return new Outcome<T>(exception);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]

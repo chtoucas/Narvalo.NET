@@ -6,9 +6,9 @@
     {
         //// Create
 
-        public static Failure<T> Create<T>(T ex) where T : Exception
+        public static Failure<T> Create<T>(T exception) where T : Exception
         {
-            return Failure<T>.η(ex);
+            return Failure<T>.η(exception);
         }
     }
 }

@@ -26,10 +26,12 @@
 
         public void Dispose() { }
 
-        static HttpStatusCode GetStatusCode_(Exception ex)
+        static HttpStatusCode GetStatusCode_(Exception exception)
         {
-            Type type = ex.GetType();
-            var httpException = ex as HttpException;
+            DebugCheck.NotNull(exception);
+
+            Type type = exception.GetType();
+            var httpException = exception as HttpException;
 
             // Lorsqu'un exception de type ViewStateException ou HttpRequestValidationException est levée,
             // ASP.NET retourne une erreur HTTP 500, on préfère utiliser une erreur HTTP 400.

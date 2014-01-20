@@ -6,9 +6,9 @@
     {
         //// Create
 
-        public static Outcome<T> Create<T>(Exception ex)
+        public static Outcome<T> Create<T>(Exception exception)
         {
-            return Outcome<T>.η(ex);
+            return Outcome<T>.η(exception);
         }
 
         public static Outcome<T> Create<T>(T value)
@@ -17,13 +17,6 @@
         }
 
         //// Failure
-
-        public static Outcome<T> Failure<T>(string errorMessage)
-        {
-            Require.NotNullOrEmpty(errorMessage, "errorMessage");
-
-            return Create<T>(new OutcomeException(errorMessage));
-        }
 
         public static Outcome<T> Failure<T>(Exception exception)
         {

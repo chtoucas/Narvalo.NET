@@ -111,7 +111,7 @@
 
             public override string ToString()
             {
-                return String.Format(CultureInfo.CurrentCulture, "Left({0})", LeftValue);
+                return Format.CurrentCulture("Left({0})", LeftValue);
             }
         }
 
@@ -137,7 +137,7 @@
 
             public override string ToString()
             {
-                return String.Format(CultureInfo.CurrentCulture, "Right({0})", RightValue);
+                return Format.CurrentCulture("Right({0})", RightValue);
             }
         }
 

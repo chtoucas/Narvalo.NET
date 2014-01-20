@@ -33,11 +33,11 @@
         public int MaxRetries { get { return _maxRetries; } }
         public TimeSpan RetryInterval { get { return _retryInterval; } }
 
-        public bool MayRetryAfter(Exception ex)
+        public bool MayRetryAfter(Exception exception)
         {
-            Require.NotNull(ex, "ex");
+            Require.NotNull(exception, "exception");
 
-            return _retryableExceptionTypes.Contains(ex.GetType());
+            return _retryableExceptionTypes.Contains(exception.GetType());
         }
     }
 }

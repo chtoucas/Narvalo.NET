@@ -34,7 +34,7 @@
         protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
         {
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-            response.Write("Invalid HTTP method: " + httpMethod);
+            response.Write(Format.CurrentCulture(SR.HttpHandlerBase_InvalidHttpMethodFormat, httpMethod));
         }
     }
 }

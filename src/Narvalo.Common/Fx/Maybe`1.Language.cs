@@ -25,6 +25,28 @@
             return Bind(_ => other);
         }
 
+        //// OnSome
+
+        public Maybe<T> OnSome(Action<T> action)
+        {
+            if (IsSome) {
+                action(Value);
+            }
+
+            return this;
+        }
+
+        //// OnNone
+
+        public Maybe<T> OnNone(Action action)
+        {
+            if (IsNone) {
+                action();
+            }
+
+            return this;
+        }
+
         //// Filter
 
         public Maybe<T> Filter(Predicate<T> predicate)
@@ -54,48 +76,6 @@
         public Maybe<Unit> Unless(bool predicate, MayFunc<T, Unit> kun)
         {
             return When(!predicate, kun);
-        }
-
-        //// Run
-
-        public void Run(Action<T> onSome, Action onNone)
-        {
-            Func<T, Unit> fun = _ => { onSome(_); return Unit.Single; };
-            Func<Unit> factory = () => { onNone(); return Unit.Single; };
-
-            Match(fun, factory);
-        }
-
-        //// OnSome
-
-        public void OnSome(Action<T> action)
-        {
-            Run(action, () => { });
-        }
-
-        //// OnNone
-
-        public void OnNone(Action action)
-        {
-            Run(_ => { }, action);
-        }
-
-        //// ThrowIfNone
-
-        public Maybe<T> ThrowIfNone(Exception ex)
-        {
-            if (IsNone) {
-                throw ex;
-            }
-
-            return this;
-        }
-
-        public Maybe<T> ThrowIfNone(Func<Exception> exceptionFactory)
-        {
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-
-            return ThrowIfNone(exceptionFactory());
         }
     }
 }

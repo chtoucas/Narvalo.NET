@@ -5,7 +5,7 @@
     using Narvalo.Web.Configuration;
 
     /// <remarks>
-    /// WARNING: Malheureusement, en utilisant cette classe, on perd l'intellisense.
+    /// Malheureusement, en utilisant cette classe, on perd l'intellisense.
     /// </remarks>
     public class WhiteSpaceBusterMvcWebRazorHostFactory : MvcWebRazorHostFactory
     {
@@ -30,7 +30,7 @@
             return new WhiteSpaceBusterMvcWebPageRazorHost(
                 virtualPath,
                 physicalPath,
-                new RazorOptimizer(WhiteSpaceBusterBuilder.Current.GetWhiteSpaceBuster()));
+                new RazorOptimizer(WhiteSpaceBusterProvider.Current.WhiteSpaceBuster));
         }
     }
 }

@@ -73,18 +73,10 @@
                 if (value.Length < startIndex || value.Length < startIndex + length) {
                     // L'index de début est trop haut
                     // ou l'index de fin est trop haut.
-                    return String.Format(
-                        CultureInfo.CurrentCulture,
-                        "{0}{1}",
-                        value.Substring(value.Length - length, length - 1),
-                        postfix);
+                    return Format.CurrentCulture("{0}{1}", value.Substring(value.Length - length, length - 1), postfix);
                 }
                 else {
-                    return String.Format(
-                        CultureInfo.CurrentCulture,
-                        "{0}{1}",
-                        value.Substring(startIndex, length - 1),
-                        postfix);
+                    return Format.CurrentCulture("{0}{1}", value.Substring(startIndex, length - 1), postfix);
                 }
             }
         }
@@ -103,11 +95,7 @@
                 return value;
             }
             else {
-                return String.Format(
-                    CultureInfo.CurrentCulture,
-                    "{0}{1}",
-                    value.Substring(0, length - 1),
-                    postfix);
+                return Format.CurrentCulture("{0}{1}", value.Substring(0, length - 1), postfix);
             }
         }
 

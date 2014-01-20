@@ -162,7 +162,10 @@
     <Compile Include="Fx\Failure`1.Monad.cs">
       <DependentUpon>Failure`1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Internal\DefaultExceptionServices.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
+    <Compile Include="Internal\Exception%24.cs" />
+    <Compile Include="Internal\IExceptionServices.cs" />
     <Compile Include="Nil.cs" />
     <Compile Include="Nil.IEquatable.cs">
       <DependentUpon>Nil.cs</DependentUpon>
@@ -241,7 +244,6 @@
     <Compile Include="TryConvert.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Fx\OutcomeException.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
     <Compile Include="Create.cs" />

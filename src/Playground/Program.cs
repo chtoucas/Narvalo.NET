@@ -57,9 +57,9 @@ namespace Playground
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
         }
 
-        static void LogUnhandledException_(Exception ex)
+        static void LogUnhandledException_(Exception exception)
         {
-            Log.Fatal(Resources.UnhandledException, ex);
+            Log.Fatal(Resources.UnhandledException, exception);
         }
 
         #endregion

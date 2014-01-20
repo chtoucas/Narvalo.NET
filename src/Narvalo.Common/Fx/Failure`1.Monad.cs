@@ -20,11 +20,11 @@
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
-        internal static Failure<T> η(T ex)
+        internal static Failure<T> η(T exception)
         {
-            Require.NotNull(ex, "ex");
+            Require.NotNull(exception, "exception");
 
-            return new Failure<T>(ex);
+            return new Failure<T>(exception);
         }
     }
 }

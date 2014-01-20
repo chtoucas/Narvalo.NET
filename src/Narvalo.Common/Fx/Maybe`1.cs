@@ -18,7 +18,7 @@
         Maybe(T value)
         {
             // NB: La seule manière d'appeler le constructeur est via la méthode Maybe<T>.η() 
-            // qui se charge de vérifier que value n'est pas null.
+            // qui se charge de vérifier que "value" n'est pas null.
             _value = value;
             _isSome = true;
         }
@@ -56,12 +56,12 @@
             return _isSome ? _value : defaultValueFactory();
         }
 
-        public T ValueOrThrow(Exception ex)
+        public T ValueOrThrow(Exception exception)
         {
-            Require.NotNull(ex, "ex");
+            Require.NotNull(exception, "exception");
 
             if (!_isSome) {
-                throw ex;
+                throw exception;
             }
             
             return _value;

@@ -8,12 +8,13 @@
 
     public static class AssetManager
     {
+        static readonly object Lock_ = new Object();
+
         static AssetProviderBase Provider_;
         static AssetProviderCollection Providers_;
 
         static bool InitializedDefaultProvider_ = false;
         static bool InitializedProviders_ = false;
-        static object Lock_ = new Object();
 
         public static AssetProviderBase Provider
         {

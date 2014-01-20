@@ -165,7 +165,7 @@
     <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\RazorOptimizer.cs" />
-    <Compile Include="Optimization\WhiteSpaceBusterBuilder.cs" />
+    <Compile Include="Optimization\WhiteSpaceBusterProvider.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterHtmlMarkupParser.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcCSharpRazorCodeGenerator.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebPageRazorHost.cs" />

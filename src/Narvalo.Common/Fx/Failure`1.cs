@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Internal;
 
     public partial struct Failure<T> : IEquatable<T>, IEquatable<Failure<T>> where T : Exception
     {
@@ -9,7 +10,7 @@
         Failure(T exception)
         {
             // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que exception n'est pas null.
+            // qui se charge de vérifier que "exception" n'est pas null.
             _exception = exception;
         }
 
@@ -20,7 +21,7 @@
 
         public void Throw()
         {
-            throw _exception;
+            _exception.Throw();
         }
 
         public override string ToString()
