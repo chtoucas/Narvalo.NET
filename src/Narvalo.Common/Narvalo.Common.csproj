@@ -170,7 +170,6 @@
     <Compile Include="Nil.IEquatable.cs">
       <DependentUpon>Nil.cs</DependentUpon>
     </Compile>
-    <Compile Include="NilException.cs" />
     <Compile Include="ParseAs.SimpleTypes.cs">
       <DependentUpon>ParseAs.cs</DependentUpon>
     </Compile>
