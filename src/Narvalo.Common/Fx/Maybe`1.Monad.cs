@@ -9,14 +9,14 @@
         {
             Require.NotNull(kun, "kun");
 
-            return IsSome ? kun(_value) : Maybe<TResult>.None;
+            return IsSome ? kun.Invoke(_value) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> fun)
         {
             Require.NotNull(fun, "fun");
 
-            return IsSome ? Maybe<TResult>.η(fun(_value)) : Maybe<TResult>.None;
+            return IsSome ? Maybe<TResult>.η(fun.Invoke(_value)) : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]

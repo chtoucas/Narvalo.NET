@@ -6,12 +6,12 @@
     {
         public static MayFunc<Unit> FromAction(Action action)
         {
-            return () => { action(); return Maybe<Unit>.None; };
+            return () => { action.Invoke(); return Maybe<Unit>.None; };
         }
 
         public static MayFunc<T, Unit> FromAction<T>(Action<T> action)
         {
-            return _ => { action(_); return Maybe<Unit>.None; };
+            return _ => { action.Invoke(_); return Maybe<Unit>.None; };
         }
     }
 }

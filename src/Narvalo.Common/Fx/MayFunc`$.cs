@@ -11,21 +11,21 @@
         {
             Require.Object(@this);
 
-            return () => @this();
+            return () => @this.Invoke();
         }
 
         public static Action<T> AsAction<T>(this MayFunc<T, Unit> @this)
         {
             Require.Object(@this);
 
-            return _ => @this(_);
+            return _ => @this.Invoke(_);
         }
 
         public static Func<T, Maybe<TResult>> AsFunc<T, TResult>(this MayFunc<T, TResult> @this)
         {
             Require.Object(@this);
 
-            return _ => @this(_);
+            return _ => @this.Invoke(_);
         }
 
         public static MayFunc<Unit> Unless(this MayFunc<Unit> @this, bool predicate)

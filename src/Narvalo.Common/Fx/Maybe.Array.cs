@@ -19,7 +19,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(selectorM, "selectorM");
 
-            Maybe<TResult>[] options = Array.ConvertAll(source, _ => selectorM(_));
+            Maybe<TResult>[] options = Array.ConvertAll(source, _ => selectorM.Invoke(_));
             Maybe<TResult>[] values = Array.FindAll(options, _ => _.IsSome);
 
             int length = values.Length;
@@ -40,7 +40,7 @@
 
             TSource[] list = Array.FindAll(
                 source,
-                _ => predicateM(_).Match(b => b, false));
+                _ => predicateM.Invoke(_).Match(b => b, false));
 
             return Create(list);
         }
@@ -60,7 +60,7 @@
             if (length == 0) { return result; }
 
             for (int i = 0; i < length; i++) {
-                result = result.Bind(_ => accumulatorM(_, source[i]));
+                result = result.Bind(_ => accumulatorM.Invoke(_, source[i]));
             }
 
             return result;
@@ -72,7 +72,6 @@
             MayFunc<TResult, TSource, TResult> accumulatorM)
         {
             Require.NotNull(source, "source");
-            Require.NotNull(accumulatorM, "accumulator");
 
             return FoldLeft(source.Reverse(), seed, accumulatorM);
         }
@@ -90,7 +89,7 @@
             Maybe<TSource> result = Create(source[0]);
 
             for (int i = 1; i < length; i++) {
-                result = result.Bind(_ => accumulatorM(_, source[i]));
+                result = result.Bind(_ => accumulatorM.Invoke(_, source[i]));
             }
 
             return result;
@@ -103,7 +102,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(funM, "funM");
 
-            Maybe<TResult>[] list = Array.ConvertAll(source, _ => funM(_));
+            Maybe<TResult>[] list = Array.ConvertAll(source, _ => funM.Invoke(_));
 
             return Sequence(list);
         }

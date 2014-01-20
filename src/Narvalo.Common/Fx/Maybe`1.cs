@@ -53,7 +53,7 @@
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return _isSome ? _value : defaultValueFactory();
+            return _isSome ? _value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
@@ -72,7 +72,7 @@
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
             if (!_isSome) {
-                throw exceptionFactory();
+                throw exceptionFactory.Invoke();
             }
             
             return _value;

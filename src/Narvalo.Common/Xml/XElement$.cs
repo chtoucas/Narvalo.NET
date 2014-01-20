@@ -57,7 +57,7 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value);
+            return fun.Invoke(@this.Value);
         }
 
         public static T ParseValue<T>(this XElement @this, MayFunc<string, T> fun)
@@ -65,7 +65,7 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value).ValueOrThrow(() => new XmlException(
+            return fun.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
                 Format.CurrentCulture(
                     SR.XElement_MalformedElementValueFormat,
                     @this.Name.LocalName,
@@ -77,7 +77,7 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value);
+            return fun.Invoke(@this.Value);
         }
 
         public static Maybe<XElement> NextElementOrNone(this XElement @this)

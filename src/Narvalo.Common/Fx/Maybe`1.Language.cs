@@ -15,7 +15,7 @@
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return Match(fun, defaultValueFactory());
+            return Match(fun, defaultValueFactory.Invoke());
         }
 
         //// Then
@@ -29,8 +29,10 @@
 
         public Maybe<T> OnSome(Action<T> action)
         {
+            Require.NotNull(action, "action");
+
             if (IsSome) {
-                action(Value);
+                action.Invoke(Value);
             }
 
             return this;
@@ -40,8 +42,10 @@
 
         public Maybe<T> OnNone(Action action)
         {
+            Require.NotNull(action, "action");
+
             if (IsNone) {
-                action();
+                action.Invoke();
             }
 
             return this;
@@ -51,7 +55,7 @@
 
         public Maybe<T> Filter(Predicate<T> predicate)
         {
-            return Map(_ => predicate(_)).Then(this);
+            return Map(_ => predicate.Invoke(_)).Then(this);
         }
 
         //// When

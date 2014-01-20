@@ -9,14 +9,14 @@
         {
             Require.NotNull(kun, "kun");
 
-            return kun(_exception);
+            return kun.Invoke(_exception);
         }
 
         public Failure<TResult> Map<TResult>(Func<T, TResult> fun) where TResult : Exception
         {
             Require.NotNull(fun, "fun");
 
-            return Failure<TResult>.η(fun(_exception));
+            return Failure<TResult>.η(fun.Invoke(_exception));
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]

@@ -40,10 +40,21 @@
             return new Nil(errorMessage);
         }
 
-        public void VoidOrThrow()
+        public void VoidOrThrow(Exception exception)
         {
+            Require.NotNull(exception, "exception");
+
             if (Unsuccessful) {
-                throw new NilException(_message);
+                throw exception;
+            }
+        }
+
+        public void VoidOrThrow(Func<Exception> exceptionFactory)
+        {
+            Require.NotNull(exceptionFactory, "exceptionFactory");
+
+            if (Unsuccessful) {
+                throw exceptionFactory.Invoke();
             }
         }
 

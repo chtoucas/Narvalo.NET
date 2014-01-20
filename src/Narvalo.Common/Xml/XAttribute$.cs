@@ -24,7 +24,7 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value).ValueOrThrow(() => new XmlException(
+            return fun.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
                 Format.CurrentCulture(
                     SR.XElement_MalformedAttributeValueFormat,
                     @this.Name.LocalName,
@@ -36,7 +36,7 @@
             Require.Object(@this);
             Require.NotNull(fun, "fun");
 
-            return fun(@this.Value);
+            return fun.Invoke(@this.Value);
         }
     }
 }

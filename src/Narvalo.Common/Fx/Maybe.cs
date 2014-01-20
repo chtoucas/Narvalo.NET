@@ -36,7 +36,7 @@
             Require.NotNull(kunA, "kunA");
             Require.NotNull(kunB, "kunB");
 
-            return kunA(value).Bind(kunB);
+            return kunA.Invoke(value).Bind(kunB);
         }
 
         //// Lift
@@ -58,7 +58,7 @@
             Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome
-                ? Maybe.Create(fun(option1.Value, option2.Value))
+                ? Maybe.Create(fun.Invoke(option1.Value, option2.Value))
                 : Maybe<TResult>.None;
         }
 
@@ -71,7 +71,7 @@
             Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome
-                ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value))
+                ? Maybe.Create(fun.Invoke(option1.Value, option2.Value, option3.Value))
                 : Maybe<TResult>.None;
         }
 
@@ -85,7 +85,7 @@
             Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome
-                ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value))
+                ? Maybe.Create(fun.Invoke(option1.Value, option2.Value, option3.Value, option4.Value))
                 : Maybe<TResult>.None;
         }
 
@@ -100,7 +100,7 @@
             Require.NotNull(fun, "fun");
 
             return option1.IsSome && option2.IsSome && option3.IsSome && option4.IsSome && option5.IsSome
-                ? Maybe.Create(fun(option1.Value, option2.Value, option3.Value, option4.Value, option5.Value))
+                ? Maybe.Create(fun.Invoke(option1.Value, option2.Value, option3.Value, option4.Value, option5.Value))
                 : Maybe<TResult>.None;
         }
 

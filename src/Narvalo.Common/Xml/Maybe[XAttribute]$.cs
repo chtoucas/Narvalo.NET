@@ -11,12 +11,12 @@
     {
         public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> fun)
         {
-            return @this.Bind(_ => fun(_.Value));
+            return @this.Bind(_ => fun.Invoke(_.Value));
         }
 
         public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> fun)
         {
-            return @this.Map(_ => fun(_.Value));
+            return @this.Map(_ => fun.Invoke(_.Value));
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)

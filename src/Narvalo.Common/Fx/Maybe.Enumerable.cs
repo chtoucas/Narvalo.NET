@@ -20,7 +20,7 @@
             Require.NotNull(selectorM, "selectorM");
 
             return from item in source
-                   let m = selectorM(item)
+                   let m = selectorM.Invoke(item)
                    where m.IsSome
                    select m.Value;
         }
@@ -30,7 +30,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(predicate, "predicate");
 
-            var seq = from t in source where predicate(t) select Create(t);
+            var seq = from t in source where predicate.Invoke(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
                 return iter.MoveNext() ? iter.Current : Maybe<T>.None;
             }
@@ -41,7 +41,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(predicate, "predicate");
 
-            var seq = from t in source where predicate(t) select Create(t);
+            var seq = from t in source where predicate.Invoke(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
                 if (!iter.MoveNext()) {
                     return Maybe<T>.None;
@@ -61,7 +61,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(predicate, "predicate");
 
-            var seq = from t in source where predicate(t) select Create(t);
+            var seq = from t in source where predicate.Invoke(t) select Create(t);
             using (var iter = seq.GetEnumerator()) {
                 var result = iter.MoveNext() ? iter.Current : Maybe<T>.None;
                 
@@ -78,7 +78,7 @@
             Require.NotNull(predicateM, "predicateM");
 
             var list = from item in source
-                       where predicateM(item).Match(b => b, false)
+                       where predicateM.Invoke(item).Match(b => b, false)
                        select item;
 
             return Create(list);
@@ -95,7 +95,7 @@
             Maybe<TAccumulate> option = Create(seed);
 
             foreach (TSource item in source) {
-                option = option.Bind(_ => accumulatorM(_, item));
+                option = option.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
             return option;
@@ -107,7 +107,6 @@
             MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
         {
             Require.NotNull(source, "source");
-            Require.NotNull(accumulatorM, "accumulatorM");
 
             return FoldLeft(source.Reverse(), seed, accumulatorM);
         }
@@ -128,7 +127,7 @@
             Require.NotNull(source, "source");
             Require.NotNull(kun, "kun");
 
-            var list = from item in source select kun(item);
+            var list = from item in source select kun.Invoke(item);
 
             return Sequence(list);
         }
