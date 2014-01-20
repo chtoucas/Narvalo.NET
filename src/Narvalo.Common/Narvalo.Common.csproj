@@ -34,6 +34,7 @@
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <RunCodeAnalysis>False</RunCodeAnalysis>
+    <CodeAnalysisRules>-Microsoft.Design#CA1006</CodeAnalysisRules>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -154,7 +155,6 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Fx\Failure.cs" />
-    <Compile Include="Fx\FailureException.cs" />
     <Compile Include="Fx\Failure`1.cs" />
     <Compile Include="Fx\Failure`1.IEquatable.cs">
       <DependentUpon>Failure`1.cs</DependentUpon>
@@ -163,6 +163,11 @@
       <DependentUpon>Failure`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Internal\ExceptionFactory.cs" />
+    <Compile Include="Nil.cs" />
+    <Compile Include="Nil.IEquatable.cs">
+      <DependentUpon>Nil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NilException.cs" />
     <Compile Include="ParseAs.SimpleTypes.cs">
       <DependentUpon>ParseAs.cs</DependentUpon>
     </Compile>

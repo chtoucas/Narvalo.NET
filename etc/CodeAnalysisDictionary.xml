@@ -40,11 +40,11 @@
     </Deprecated>
 
     <Compound>
-      <Term CompoundAlternate="WebPage">webpage</Term>
-      <Term CompoundAlternate="WebSite">website</Term>
       <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
       <Term CompoundAlternate="PlainText">plaintext</Term>
       <Term CompoundAlternate="SuccessOr">successor</Term>
+      <Term CompoundAlternate="WebPage">webpage</Term>
+      <Term CompoundAlternate="WebSite">website</Term>
     </Compound>
 
     <DiscreteExceptions>
@@ -54,6 +54,9 @@
     <CasingExceptions>
       <Acronym>η</Acronym>
       <Acronym>μ</Acronym>
+        
+      <Acronym>Cr</Acronym>
+      <Acronym>Lf</Acronym>
     </CasingExceptions>
   </Acronyms>
 </Dictionary>

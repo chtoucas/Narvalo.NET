@@ -10,12 +10,5 @@
         {
             return Failure<T>.η(ex);
         }
-
-        public static Failure<FailureException> Create(string errorMessage)
-        {
-            Require.NotNullOrEmpty(errorMessage, "errorMessage");
-
-            return Failure<FailureException>.η(new FailureException(errorMessage));
-        }
     }
 }

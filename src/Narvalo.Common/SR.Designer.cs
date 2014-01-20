@@ -133,6 +133,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A successful nil has no error message..
+        /// </summary>
+        internal static string Nil_SuccessfulHasNoMessage {
+            get {
+                return ResourceManager.GetString("Nil_SuccessfulHasNoMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successful outcome..
         /// </summary>
         internal static string Outcome_Successful {
