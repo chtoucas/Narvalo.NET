@@ -7,7 +7,7 @@
     [Serializable]
     public class QueryBinderException : Exception
     {
-        string _parameterName = String.Empty;
+        string _memberName = String.Empty;
 
         public QueryBinderException() : base() { }
 
@@ -19,14 +19,14 @@
         protected QueryBinderException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public string ParameterName { get { return _parameterName; } set { _parameterName = value; } }
+        public string MemberName { get { return _memberName; } set { _memberName = value; } }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("ParameterName", _parameterName);
+            info.AddValue("MemberName", _memberName);
         }
     }
 }

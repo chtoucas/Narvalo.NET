@@ -15,8 +15,8 @@
     <language>en-US</language>
     <dependencies>
       <dependency id="Autofac.Mvc5" version="3.1" />
-      <dependency id="Microsoft.AspNet.Mvc" version="5.0" />
-      <dependency id="Narvalo.Web" version="0.7" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.1" />
+      <dependency id="Narvalo.Web" version="0.11" />
       <dependency id="Serilog" version="1.2" />
     </dependencies>
   </metadata>

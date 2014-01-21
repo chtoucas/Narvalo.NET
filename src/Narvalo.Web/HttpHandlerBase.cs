@@ -22,7 +22,7 @@
             var httpMethod = context.Request.HttpMethod;
 
             if (!AcceptedVerbs.Contains(httpMethod)) {
-                HandleInvalidHttpMethod(context.Response, httpMethod);
+                HandleInvalidHttpMethod(context, httpMethod);
                 return;
             }
 
@@ -31,8 +31,12 @@
 
         protected abstract void ProcessRequestCore(HttpContext context);
 
-        protected virtual void HandleInvalidHttpMethod(HttpResponse response, string httpMethod)
+        protected virtual void HandleInvalidHttpMethod(HttpContext context, string httpMethod)
         {
+            DebugCheck.NotNull(context);
+
+            var response = context.Response;
+
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
             response.Write(Format.CurrentCulture(SR.HttpHandlerBase_InvalidHttpMethodFormat, httpMethod));
         }
