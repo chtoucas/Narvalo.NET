@@ -8,12 +8,13 @@
         {
             Require.Object(@this);
 
-            var scheme = @this.Scheme;
-
             if (!@this.IsAbsoluteUri) {
                 return @this.ToString();
             }
-            else if (scheme == Uri.UriSchemeHttp) {
+
+            var scheme = @this.Scheme;
+
+            if (scheme == Uri.UriSchemeHttp) {
                 return @this.ToString().Replace("http:", String.Empty);
             }
             else if (scheme == Uri.UriSchemeHttps) {

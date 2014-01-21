@@ -50,12 +50,12 @@
             @this.Cache.SetCacheability(publicly ? HttpCacheability.Public : HttpCacheability.Private);
 
             // En-tête HTTP 1.0
-            if ((versions & HttpVersions.Http_1_0) == HttpVersions.Http_1_0) {
+            if ((versions & HttpVersions.HttpV10) == HttpVersions.HttpV10) {
                 @this.Cache.SetExpires(DateTime.Now.Add(duration));
             }
             
             // En-tête HTTP 1.1
-            if ((versions & HttpVersions.Http_1_1) == HttpVersions.Http_1_1) {
+            if ((versions & HttpVersions.HttpV11) == HttpVersions.HttpV11) {
                 @this.Cache.SetMaxAge(duration);
                 @this.Cache.AppendCacheExtension("must-revalidate, proxy-revalidate");
             }
