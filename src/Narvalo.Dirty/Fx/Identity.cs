@@ -2,9 +2,9 @@
 {
     public static class Identity
     {
-        public static Identity<T> Create<T>(T value)
+        public static Identity<T> Create<T>(T value) where T : class
         {
-            return new Identity<T>(value);
+            return Identity<T>.η(value);
         }
     }
 }

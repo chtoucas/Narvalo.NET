@@ -8,8 +8,6 @@
 
     public static class MaybeM
     {
-        #region Tableaux.
-
         public static Maybe<T[]> Filter<T>(
            T[] source,
            Func<T, Maybe<bool>> predicate)
@@ -76,17 +74,17 @@
             return Sequence(options);
         }
 
-        public static Maybe<TSource> Reduce<TSource>(
-            TSource[] source,
-            Func<TSource, TSource, Maybe<TSource>> fun)
+        public static Maybe<T> Reduce<T>(
+            T[] source,
+            Func<T, T, Maybe<T>> fun)
         {
             Require.NotNull(source, "source");
             Require.NotNull(fun, "fun");
 
             int length = source.Length;
-            if (length == 0) { return Maybe<TSource>.None; }
+            if (length == 0) { return Maybe<T>.None; }
 
-            Maybe<TSource> option = Maybe.Create(source[0]);
+            Maybe<T> option = Maybe.Create(source[0]);
             
             for (int i = 1; i < length; i++) {
                 option = option.Bind(_ => fun(_, source[i]));
@@ -120,8 +118,6 @@
         //{
         //    throw new NotImplementedException();
         //}
-
-        #endregion
 
         #region Collections.
 
@@ -197,9 +193,9 @@
 
         #region Promotion de fonctions.
 
-        public static Maybe<TResult> Lift<TSource, TResult>(
-            Func<TSource, TResult> fun,
-            Maybe<TSource> option)
+        public static Maybe<TResult> Lift<T, TResult>(
+            Func<T, TResult> fun,
+            Maybe<T> option)
         {
             Require.NotNull(fun, "fun");
 

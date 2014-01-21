@@ -154,17 +154,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Fx\Failure.cs" />
-    <Compile Include="Fx\Failure`1.cs" />
-    <Compile Include="Fx\Failure`1.IEquatable.cs">
-      <DependentUpon>Failure`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Failure`1.Monad.cs">
-      <DependentUpon>Failure`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Internal\DefaultExceptionServices.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Internal\Exception%24.cs" />
+    <Compile Include="Exception%24.cs" />
     <Compile Include="Internal\IExceptionServices.cs" />
     <Compile Include="Nil.cs" />
     <Compile Include="Nil.IEquatable.cs">
@@ -231,11 +223,10 @@
       <SubType>Code</SubType>
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\MayFunc`%24.cs" />
+    <Compile Include="Fx\MayFunc%24.cs" />
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
-    <Compile Include="Fx\MayFunc`.cs" />
     <Compile Include="ParseTo.cs" />
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>

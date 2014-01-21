@@ -4,7 +4,7 @@
     {
         public static bool Successful<T>(this Maybe<Outcome<T>> @this)
         {
-            return @this.IsNone || @this.Value.Successful;
+            return @this.IsSome && @this.Value.Successful;
         }
     }
 }

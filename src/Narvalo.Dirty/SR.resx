@@ -129,4 +129,10 @@
   <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
     <value>HTTP InputStream too large.</value>
   </data>
+  <data name="XElement_MalformedAttributeValueFormat" xml:space="preserve">
+    <value>Unable to parse attribute '{0}', line {1}.</value>
+  </data>
+  <data name="XElement_MalformedElementValueFormat" xml:space="preserve">
+    <value>Unable to parse element '{0}', line {1}.</value>
+  </data>
 </root>

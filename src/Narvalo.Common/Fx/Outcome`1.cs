@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Internal;
 
     public partial struct Outcome<T> : IEquatable<Outcome<T>>
     {

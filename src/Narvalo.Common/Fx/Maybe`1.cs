@@ -60,11 +60,7 @@
         {
             Require.NotNull(exception, "exception");
 
-            if (!_isSome) {
-                throw exception;
-            }
-            
-            return _value;
+            return ValueOrThrow(() => exception);
         }
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)

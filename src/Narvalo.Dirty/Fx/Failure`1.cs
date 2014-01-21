@@ -1,7 +1,6 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Internal;
 
     public partial struct Failure<T> : IEquatable<T>, IEquatable<Failure<T>> where T : Exception
     {

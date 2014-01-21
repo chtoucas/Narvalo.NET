@@ -257,50 +257,5 @@ namespace Narvalo {
                 return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to find attribute for &apos;{0}&apos; with name &apos;{1}&apos;..
-        /// </summary>
-        internal static string XElement_AttributeNotFoundFormat {
-            get {
-                return ResourceManager.GetString("XElement_AttributeNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to find first child for &apos;{0}&apos; with name &apos;{1}&apos;..
-        /// </summary>
-        internal static string XElement_FirstChildNotFoundFormat {
-            get {
-                return ResourceManager.GetString("XElement_FirstChildNotFoundFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
-        /// </summary>
-        internal static string XElement_MalformedAttributeValueFormat {
-            get {
-                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to parse element &apos;{0}&apos;, line {1}..
-        /// </summary>
-        internal static string XElement_MalformedElementValueFormat {
-            get {
-                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to find next element after {0}..
-        /// </summary>
-        internal static string XElement_NextElementNotFoundFormat {
-            get {
-                return ResourceManager.GetString("XElement_NextElementNotFoundFormat", resourceCulture);
-            }
-        }
     }
 }

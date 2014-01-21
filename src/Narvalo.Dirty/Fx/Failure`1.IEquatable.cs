@@ -19,15 +19,13 @@
         /// <summary />
         public bool Equals(T other)
         {
-            if (other == null) { return false; }
-
-            return _exception.Equals(other);
+            return ReferenceEquals(_exception, other);
         }
 
         /// <summary />
         public bool Equals(Failure<T> other)
         {
-            return _exception.Equals(other._exception);
+            return ReferenceEquals(_exception, other._exception);
         }
 
         /// <summary />
@@ -43,7 +41,7 @@
         /// <summary />
         public override int GetHashCode()
         {
-            return _exception.GetHashCode();
+            return _exception != null ? _exception.GetHashCode() : 0;
         }
     }
 }

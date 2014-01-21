@@ -17,8 +17,8 @@
         /// <summary />
         public bool Equals(Outcome<T> other)
         {
-            return (Successful && _value.Equals(other._value))
-                || (Unsuccessful && _exception.Equals(other._exception));
+            return (_successful && _value.Equals(other._value))
+                || (!_successful && _exception.Equals(other._exception));
         }
 
         /// <summary />
@@ -34,7 +34,7 @@
         /// <summary />
         public override int GetHashCode()
         {
-            return Successful ? _value.GetHashCode() : _exception.GetHashCode();
+            return _successful ? _value.GetHashCode() : _exception.GetHashCode();
         }
     }
 }

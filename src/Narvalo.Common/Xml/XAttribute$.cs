@@ -1,8 +1,6 @@
 ﻿namespace Narvalo.Xml
 {
     using System;
-    using System.Globalization;
-    using System.Xml;
     using System.Xml.Linq;
     using Narvalo.Fx;
 
@@ -11,32 +9,20 @@
     /// </summary>
     public static class XAttributeExtensions
     {
-        public static T ParseValue<T>(this XAttribute @this, Func<string, T> fun)
+        public static T MapValue<T>(this XAttribute @this, Func<string, T> selector)
         {
             Require.Object(@this);
-            Require.NotNull(fun, "fun");
+            Require.NotNull(selector, "selector");
 
-            return fun(@this.Value);
+            return selector(@this.Value);
         }
 
-        public static T ParseValue<T>(this XAttribute @this, MayFunc<string, T> fun)
+        public static Maybe<T> MayParseValue<T>(this XAttribute @this, Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
-            Require.NotNull(fun, "fun");
+            Require.NotNull(parserM, "fun");
 
-            return fun.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
-                Format.CurrentCulture(
-                    SR.XElement_MalformedAttributeValueFormat,
-                    @this.Name.LocalName,
-                    ((IXmlLineInfo)@this).LineNumber)));
-        }
-
-        public static Maybe<T> MayParseValue<T>(this XAttribute @this, MayFunc<string, T> fun)
-        {
-            Require.Object(@this);
-            Require.NotNull(fun, "fun");
-
-            return fun.Invoke(@this.Value);
+            return parserM.Invoke(@this.Value);
         }
     }
 }

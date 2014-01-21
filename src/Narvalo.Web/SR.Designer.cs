@@ -97,15 +97,6 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing or invalid query parameter &apos;{0}&apos;..
-        /// </summary>
-        internal static string HttpHandlerBase_MissingOrInvalidParameterFormat {
-            get {
-                return ResourceManager.GetString("HttpHandlerBase_MissingOrInvalidParameterFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config!.
         /// </summary>
         internal static string WebConfigurationManager_SectionNotFoundFormat {

@@ -8,14 +8,14 @@
     {
         public static Maybe<IEnumerable<TResult>> Collect<TSource, TResult>(
             IEnumerable<TSource> source,
-            MayFunc<TSource, TResult> selectorM)
+            Func<TSource, Maybe<TResult>> selectorM)
         {
             return Create(SelectAny(source, selectorM));
         }
 
         public static IEnumerable<TResult> SelectAny<TSource, TResult>(
             IEnumerable<TSource> source,
-            MayFunc<TSource, TResult> selectorM)
+            Func<TSource, Maybe<TResult>> selectorM)
         {
             Require.NotNull(selectorM, "selectorM");
 
@@ -70,9 +70,9 @@
             }
         }
 
-        public static Maybe<IEnumerable<TSource>> Filter<TSource>(
-            IEnumerable<TSource> source,
-            MayFunc<TSource, bool> predicateM)
+        public static Maybe<IEnumerable<T>> Filter<T>(
+            IEnumerable<T> source,
+            Func<T, Maybe<bool>> predicateM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(predicateM, "predicateM");
@@ -87,7 +87,7 @@
         public static Maybe<TAccumulate> FoldLeft<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
-            MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -104,7 +104,7 @@
         public static Maybe<TAccumulate> FoldRight<TSource, TAccumulate>(
             IEnumerable<TSource> source,
             TAccumulate seed,
-            MayFunc<TAccumulate, TSource, TAccumulate> accumulatorM)
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.NotNull(source, "source");
 
@@ -113,7 +113,7 @@
 
         public static Maybe<TSource> Reduce<TSource>(
             IEnumerable<TSource> source,
-            MayFunc<TSource, TSource, TSource> accumulatorM)
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
             Require.NotNull(source, "source");
 
@@ -122,7 +122,7 @@
 
         public static Maybe<IList<TResult>> Map<TSource, TResult>(
             IEnumerable<TSource> source,
-            MayFunc<TSource, TResult> kun)
+            Func<TSource, Maybe<TResult>> kun)
         {
             Require.NotNull(source, "source");
             Require.NotNull(kun, "kun");
@@ -132,15 +132,15 @@
             return Sequence(list);
         }
 
-        public static Maybe<IList<TSource>> Sequence<TSource>(IEnumerable<Maybe<TSource>> source)
+        public static Maybe<IList<T>> Sequence<T>(IEnumerable<Maybe<T>> source)
         {
             Require.NotNull(source, "source");
 
-            IList<TSource> list = new List<TSource>();
+            IList<T> list = new List<T>();
 
             foreach (var m in source) {
                 if (m.IsNone) {
-                    return Maybe<IList<TSource>>.None;
+                    return Maybe<IList<T>>.None;
                 }
 
                 list.Add(m.Value);

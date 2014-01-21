@@ -1,6 +1,5 @@
 ﻿namespace Narvalo.Web
 {
-    using System;
     using System.Net;
     using System.Web;
     using Narvalo;
@@ -8,14 +7,6 @@
 
     public abstract class HttpHandlerBase<TQuery> : HttpHandlerBase
     {
-        protected static Outcome<TQuery> CreateFailure(string parameterName)
-        {
-            return Outcome.Failure<TQuery>(
-                new ArgumentException(
-                    Format.CurrentCulture(SR.HttpHandlerBase_MissingOrInvalidParameterFormat, parameterName),
-                    parameterName));
-        }
-        
         protected abstract Outcome<TQuery> Bind(HttpRequest request);
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);

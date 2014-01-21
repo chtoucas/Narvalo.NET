@@ -135,21 +135,6 @@
   <data name="Require_NotInRangeFormat" xml:space="preserve">
     <value>The value is not in range {0} / {1}.</value>
   </data>
-  <data name="XElement_MalformedElementValueFormat" xml:space="preserve">
-    <value>Unable to parse element '{0}', line {1}.</value>
-  </data>
-  <data name="XElement_FirstChildNotFoundFormat" xml:space="preserve">
-    <value>Unable to find first child for '{0}' with name '{1}'.</value>
-  </data>
-  <data name="XElement_NextElementNotFoundFormat" xml:space="preserve">
-    <value>Unable to find next element after {0}.</value>
-  </data>
-  <data name="XElement_AttributeNotFoundFormat" xml:space="preserve">
-    <value>Unable to find attribute for '{0}' with name '{1}'.</value>
-  </data>
-  <data name="XElement_MalformedAttributeValueFormat" xml:space="preserve">
-    <value>Unable to parse attribute '{0}', line {1}.</value>
-  </data>
   <data name="Require_ArgumentNullFormat" xml:space="preserve">
     <value>The parameter {0} is null.</value>
   </data>

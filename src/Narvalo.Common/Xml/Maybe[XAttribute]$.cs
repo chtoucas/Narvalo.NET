@@ -9,14 +9,18 @@
     /// </summary>
     public static class MaybeXAttributeExtensions
     {
-        public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> fun)
+        public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> kun)
         {
-            return @this.Bind(_ => fun.Invoke(_.Value));
+            Require.NotNull(kun, "kun");
+
+            return @this.Bind(_ => kun.Invoke(_.Value));
         }
 
-        public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> fun)
+        public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)
         {
-            return @this.Map(_ => fun.Invoke(_.Value));
+            Require.NotNull(selector, "selector");
+
+            return @this.Map(_ => selector.Invoke(_.Value));
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)

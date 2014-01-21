@@ -44,9 +44,7 @@
         {
             Require.NotNull(exception, "exception");
 
-            if (Unsuccessful) {
-                throw exception;
-            }
+            VoidOrThrow(() => exception);
         }
 
         public void VoidOrThrow(Func<Exception> exceptionFactory)

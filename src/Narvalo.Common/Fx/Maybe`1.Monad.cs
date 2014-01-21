@@ -5,18 +5,18 @@
 
     public partial struct Maybe<T>
     {
-        public Maybe<TResult> Bind<TResult>(MayFunc<T, TResult> kun)
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> kun)
         {
             Require.NotNull(kun, "kun");
 
             return IsSome ? kun.Invoke(_value) : Maybe<TResult>.None;
         }
 
-        public Maybe<TResult> Map<TResult>(Func<T, TResult> fun)
+        public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
         {
-            Require.NotNull(fun, "fun");
+            Require.NotNull(selector, "selector");
 
-            return IsSome ? Maybe<TResult>.η(fun.Invoke(_value)) : Maybe<TResult>.None;
+            return IsSome ? Maybe<TResult>.η(selector.Invoke(_value)) : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]

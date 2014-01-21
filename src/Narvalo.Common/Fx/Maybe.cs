@@ -29,8 +29,8 @@
         //// Compose
 
         public static Maybe<TResult> Compose<TSource, TMiddle, TResult>(
-            MayFunc<TSource, TMiddle> kunA,
-            MayFunc<TMiddle, TResult> kunB,
+            Func<TSource, Maybe<TMiddle>> kunA,
+            Func<TMiddle, Maybe<TResult>> kunB,
             TSource value)
         {
             Require.NotNull(kunA, "kunA");
@@ -41,9 +41,9 @@
 
         //// Lift
 
-        public static Maybe<TResult> Lift<T, TResult>(
-            Func<T, TResult> fun,
-            Maybe<T> option)
+        public static Maybe<TResult> Lift<TSource, TResult>(
+            Func<TSource, TResult> fun,
+            Maybe<TSource> option)
         {
             Require.NotNull(fun, "fun");
 
@@ -106,7 +106,7 @@
 
         //// Promote
 
-        public static Func<Maybe<T>, Maybe<TResult>> Promote<T, TResult>(Func<T, TResult> fun)
+        public static Func<Maybe<TSource>, Maybe<TResult>> Promote<TSource, TResult>(Func<TSource, TResult> fun)
         {
             return m => Lift(fun, m);
         }

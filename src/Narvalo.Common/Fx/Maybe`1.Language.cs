@@ -6,16 +6,16 @@
     {
         //// Match
 
-        public TResult Match<TResult>(Func<T, TResult> fun, TResult defaultValue)
+        public TResult Match<TResult>(Func<T, TResult> selector, TResult defaultValue)
         {
-            return Map(fun).ValueOrElse(defaultValue);
+            return Map(selector).ValueOrElse(defaultValue);
         }
 
-        public TResult Match<TResult>(Func<T, TResult> fun, Func<TResult> defaultValueFactory)
+        public TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> defaultValueFactory)
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return Match(fun, defaultValueFactory.Invoke());
+            return Match(selector, defaultValueFactory.Invoke());
         }
 
         //// Then
@@ -60,24 +60,24 @@
 
         //// When
 
-        public Maybe<Unit> When(bool predicate, MayFunc<Unit> kun)
+        public Maybe<Unit> When(bool predicate, Func<Maybe<Unit>> kun)
         {
             return Bind(_ => kun.When(predicate).Invoke());
         }
 
-        public Maybe<Unit> When(bool predicate, MayFunc<T, Unit> kun)
+        public Maybe<Unit> When(bool predicate, Func<T, Maybe<Unit>> kun)
         {
             return Bind(kun.When(predicate));
         }
 
         //// Unless
 
-        public Maybe<Unit> Unless(bool predicate, MayFunc<Unit> kun)
+        public Maybe<Unit> Unless(bool predicate, Func<Maybe<Unit>> kun)
         {
             return When(!predicate, kun);
         }
 
-        public Maybe<Unit> Unless(bool predicate, MayFunc<T, Unit> kun)
+        public Maybe<Unit> Unless(bool predicate, Func<T, Maybe<Unit>> kun)
         {
             return When(!predicate, kun);
         }

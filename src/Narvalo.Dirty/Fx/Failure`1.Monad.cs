@@ -12,11 +12,11 @@
             return kun.Invoke(_exception);
         }
 
-        public Failure<TResult> Map<TResult>(Func<T, TResult> fun) where TResult : Exception
+        public Failure<TResult> Map<TResult>(Func<T, TResult> selector) where TResult : Exception
         {
-            Require.NotNull(fun, "fun");
+            Require.NotNull(selector, "selector");
 
-            return Failure<TResult>.η(fun.Invoke(_exception));
+            return Failure<TResult>.η(selector.Invoke(_exception));
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]

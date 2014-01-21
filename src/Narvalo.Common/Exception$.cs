@@ -1,10 +1,11 @@
 ﻿// Emprunté à Rx.NET.
 
-namespace Narvalo.Internal
+namespace Narvalo
 {
     using System;
+    using Narvalo.Internal;
 
-    static class ExceptionExtensions
+    public static class ExceptionExtensions
     {
         static Lazy<IExceptionServices> Services_ = new Lazy<IExceptionServices>(Initialize);
 

@@ -1,5 +1,6 @@
 ﻿namespace Narvalo.Linq
 {
+    using System;
     using System.Collections.Specialized;
     using Narvalo;
     using Narvalo.Fx;
@@ -25,32 +26,32 @@
         public static Maybe<T[]> MayParseAnyValue<T>(
             this NameValueCollection @this,
             string name,
-            MayFunc<string, T> parser)
+            Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
 
-            return @this.MayGetValues(name).Bind(@_ => Maybe.Collect(@_, parser));
+            return @this.MayGetValues(name).Bind(@_ => Maybe.Collect(@_, parserM));
         }
 
         public static Maybe<T> MayParseValue<T>(
             this NameValueCollection @this,
             string name,
-            MayFunc<string, T> parser)
+            Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
-            Require.NotNull(parser, "parser");
+            Require.NotNull(parserM, "parserM");
 
-            return @this.MayGetValue(name).Bind(_ => parser.Invoke(_));
+            return @this.MayGetValue(name).Bind(_ => parserM.Invoke(_));
         }
 
         public static Maybe<T[]> MayParseValues<T>(
             this NameValueCollection @this,
             string name,
-            MayFunc<string, T> parser)
+            Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
 
-            return @this.MayGetValues(name).Bind(@_ => Maybe.Map(@_, parser));
+            return @this.MayGetValues(name).Bind(@_ => Maybe.Map(@_, parserM));
         }
     }
 }

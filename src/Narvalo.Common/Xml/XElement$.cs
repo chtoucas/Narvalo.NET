@@ -18,14 +18,21 @@
             return attr == null ? Maybe<XAttribute>.None : Maybe.Create(attr);
         }
 
-        public static XAttribute AttributeOrThrow(this XElement @this, string name)
+        public static XAttribute AttributeOrThrow(this XElement @this, string name, XmlException exception)
+        {
+            Require.NotNull(exception, "exception");
+
+            return AttributeOrThrow(@this, name, () => exception);
+        }
+
+        public static XAttribute AttributeOrThrow(this XElement @this, string name, Func<XmlException> exceptionFactory)
         {
             Require.Object(@this);
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             var attr = @this.Attribute(name);
             if (attr == null) {
-                throw new XmlException(
-                    Format.CurrentCulture(SR.XElement_AttributeNotFoundFormat, @this.Name.LocalName, name));
+                throw exceptionFactory.Invoke();
             }
 
             return attr;
@@ -39,45 +46,40 @@
             return child == null ? Maybe<XElement>.None : Maybe.Create(child);
         }
 
-        public static XElement ElementOrThrow(this XElement @this, string name)
+        public static XElement ElementOrThrow(this XElement @this, string name, XmlException exception)
+        {
+            Require.NotNull(exception, "exception");
+
+            return ElementOrThrow(@this, name, () => exception);
+        }
+
+        public static XElement ElementOrThrow(this XElement @this, string name, Func<XmlException> exceptionFactory)
         {
             Require.Object(@this);
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             var child = @this.Element(name);
             if (child == null) {
-                throw new XmlException(
-                    Format.CurrentCulture(SR.XElement_FirstChildNotFoundFormat, @this.Name.LocalName, name));
+                throw exceptionFactory.Invoke();
             }
 
             return child;
         }
 
-        public static T ParseValue<T>(this XElement @this, Func<string, T> fun)
+        public static T MapValue<T>(this XElement @this, Func<string, T> selector)
         {
             Require.Object(@this);
-            Require.NotNull(fun, "fun");
+            Require.NotNull(selector, "selector");
 
-            return fun.Invoke(@this.Value);
+            return selector.Invoke(@this.Value);
         }
 
-        public static T ParseValue<T>(this XElement @this, MayFunc<string, T> fun)
+        public static Maybe<T> MayParseValue<T>(this XElement @this, Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
-            Require.NotNull(fun, "fun");
+            Require.NotNull(parserM, "parserM");
 
-            return fun.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
-                Format.CurrentCulture(
-                    SR.XElement_MalformedElementValueFormat,
-                    @this.Name.LocalName,
-                    ((IXmlLineInfo)@this).LineNumber)));
-        }
-
-        public static Maybe<T> MayParseValue<T>(this XElement @this, MayFunc<string, T> fun)
-        {
-            Require.Object(@this);
-            Require.NotNull(fun, "fun");
-
-            return fun.Invoke(@this.Value);
+            return parserM.Invoke(@this.Value);
         }
 
         public static Maybe<XElement> NextElementOrNone(this XElement @this)
@@ -92,9 +94,17 @@
             return Maybe.Create(nextElement as XElement);
         }
 
-        public static XElement NextElementOrThrow(this XElement @this)
+        public static XElement NextElementOrThrow(this XElement @this, XmlException exception)
+        {
+            Require.NotNull(exception, "exception");
+
+            return NextElementOrThrow(@this, () => exception);
+        }
+
+        public static XElement NextElementOrThrow(this XElement @this, Func<XmlException> exceptionFactory)
         {
             Require.Object(@this);
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             var nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
@@ -102,8 +112,7 @@
             }
 
             if (nextElement == null) {
-                throw new XmlException(
-                    Format.CurrentCulture(SR.XElement_NextElementNotFoundFormat, @this.Name.LocalName));
+                throw exceptionFactory.Invoke();
             }
 
             return nextElement as XElement;

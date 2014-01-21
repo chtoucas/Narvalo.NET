@@ -95,5 +95,23 @@ namespace Narvalo {
                 return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
+        /// </summary>
+        internal static string XElement_MalformedAttributeValueFormat {
+            get {
+                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to parse element &apos;{0}&apos;, line {1}..
+        /// </summary>
+        internal static string XElement_MalformedElementValueFormat {
+            get {
+                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
+            }
+        }
     }
 }

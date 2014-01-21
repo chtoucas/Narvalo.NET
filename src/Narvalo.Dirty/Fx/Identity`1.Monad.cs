@@ -3,20 +3,28 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
+    public partial struct Identity<T>
     {
-        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> fun)
+        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> kun) where TResult : class
         {
-            Require.NotNull(fun, "fun");
+            Require.NotNull(kun, "kun");
 
-            return fun(Value);
+            return kun.Invoke(Value);
         }
 
-        public Identity<TResult> Map<TResult>(Func<T, TResult> selector)
+        public Identity<TResult> Map<TResult>(Func<T, TResult> selector) where TResult : class
         {
             Require.NotNull(selector, "selector");
 
-            return Identity.Create(selector(Value));
+            return Identity.Create(selector.Invoke(Value));
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
+        internal static Identity<T> η(T exception)
+        {
+            Require.NotNull(exception, "exception");
+
+            return new Identity<T>(exception);
         }
     }
 }

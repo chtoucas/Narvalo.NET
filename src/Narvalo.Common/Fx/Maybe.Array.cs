@@ -7,14 +7,14 @@
     {
         public static Maybe<TResult[]> Collect<TSource, TResult>(
             TSource[] source,
-            MayFunc<TSource, TResult> selectorM)
+            Func<TSource, Maybe<TResult>> selectorM)
         {
             return Create(SelectAny(source, selectorM));
         }
 
         public static TResult[] SelectAny<TSource, TResult>(
             TSource[] source,
-            MayFunc<TSource, TResult> selectorM)
+            Func<TSource, Maybe<TResult>> selectorM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(selectorM, "selectorM");
@@ -31,14 +31,14 @@
             return list;
         }
 
-        public static Maybe<TSource[]> Filter<TSource>(
-            TSource[] source, 
-            MayFunc<TSource, bool> predicateM)
+        public static Maybe<T[]> Filter<T>(
+            T[] source, 
+            Func<T, Maybe<bool>> predicateM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(predicateM, "predicateM");
 
-            TSource[] list = Array.FindAll(
+            T[] list = Array.FindAll(
                 source,
                 _ => predicateM.Invoke(_).Match(b => b, false));
 
@@ -48,7 +48,7 @@
         public static Maybe<TResult> FoldLeft<TSource, TResult>(
             TSource[] source,
             TResult seed,
-            MayFunc<TResult, TSource, TResult> accumulatorM)
+            Func<TResult, TSource, Maybe<TResult>> accumulatorM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -69,7 +69,7 @@
         public static Maybe<TResult> FoldRight<TSource, TResult>(
             TSource[] source,
             TResult seed,
-            MayFunc<TResult, TSource, TResult> accumulatorM)
+            Func<TResult, TSource, Maybe<TResult>> accumulatorM)
         {
             Require.NotNull(source, "source");
 
@@ -78,7 +78,7 @@
 
         public static Maybe<TSource> Reduce<TSource>(
             TSource[] source,
-            MayFunc<TSource, TSource, TSource> accumulatorM)
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(accumulatorM, "accumulator");
@@ -97,12 +97,12 @@
 
         public static Maybe<TResult[]> Map<TSource, TResult>(
             TSource[] source,
-            MayFunc<TSource, TResult> funM)
+            Func<TSource, Maybe<TResult>> kun)
         {
             Require.NotNull(source, "source");
-            Require.NotNull(funM, "funM");
+            Require.NotNull(kun, "kun");
 
-            Maybe<TResult>[] list = Array.ConvertAll(source, _ => funM.Invoke(_));
+            Maybe<TResult>[] list = Array.ConvertAll(source, _ => kun.Invoke(_));
 
             return Sequence(list);
         }

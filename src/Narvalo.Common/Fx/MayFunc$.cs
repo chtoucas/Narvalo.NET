@@ -7,49 +7,49 @@
     /// </summary>
     public static class MayFuncExtensions
     {
-        public static Action AsAction(this MayFunc<Unit> @this)
+        public static Action AsAction(this Func<Maybe<Unit>> @this)
         {
             Require.Object(@this);
 
             return () => @this.Invoke();
         }
 
-        public static Action<T> AsAction<T>(this MayFunc<T, Unit> @this)
+        public static Action<T> AsAction<T>(this Func<T, Maybe<Unit>> @this)
         {
             Require.Object(@this);
 
             return _ => @this.Invoke(_);
         }
 
-        public static Func<T, Maybe<TResult>> AsFunc<T, TResult>(this MayFunc<T, TResult> @this)
+        public static Func<T, Maybe<TResult>> AsFunc<T, TResult>(this Func<T, Maybe<TResult>> @this)
         {
             Require.Object(@this);
 
             return _ => @this.Invoke(_);
         }
 
-        public static MayFunc<Unit> Unless(this MayFunc<Unit> @this, bool predicate)
+        public static Func<Maybe<Unit>> Unless(this Func<Maybe<Unit>> @this, bool predicate)
         {
             Require.Object(@this);
 
             return @this.When(!predicate);
         }
 
-        public static MayFunc<T, Unit> Unless<T>(this MayFunc<T, Unit> @this, bool predicate)
+        public static Func<T, Maybe<Unit>> Unless<T>(this Func<T, Maybe<Unit>> @this, bool predicate)
         {
             Require.Object(@this);
 
             return @this.When(!predicate);
         }
 
-        public static MayFunc<Unit> When(this MayFunc<Unit> @this, bool predicate)
+        public static Func<Maybe<Unit>> When(this Func<Maybe<Unit>> @this, bool predicate)
         {
             Require.Object(@this);
 
             return predicate ? @this : () => Maybe.Unit;
         }
 
-        public static MayFunc<T, Unit> When<T>(this MayFunc<T, Unit> @this, bool predicate)
+        public static Func<T, Maybe<Unit>> When<T>(this Func<T, Maybe<Unit>> @this, bool predicate)
         {
             Require.Object(@this);
 
