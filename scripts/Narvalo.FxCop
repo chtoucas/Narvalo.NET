@@ -130,50 +130,5 @@
   <Groups />
   <Settings />
  </Rules>
- <FxCopReport Version="10.0">
-  <Targets>
-   <Target Name="$(ProjectDir)/../src/Narvalo.Web.Extras/bin/Release/Narvalo.Web.Extras.dll">
-    <Modules>
-     <Module Name="narvalo.web.extras.dll">
-      <Namespaces>
-       <Namespace Name="Narvalo.Web.UI.Assets">
-        <Types>
-         <Type Name="RemoteAssetProvider">
-          <Members>
-           <Member Name="#MakeUri_(System.String,System.String)">
-            <Messages>
-             <Message TypeName="PassSystemUriObjectsInsteadOfStrings" Category="Microsoft.Usage" CheckId="CA2234" Status="Excluded" Created="2014-01-18 09:47:43Z">
-              <Issue>
-               <Item>'RemoteAssetProvider.MakeUri_(string, string)'</Item>
-               <Item>'Uri.Uri(Uri, Uri)'</Item>
-               <Item>'Uri.Uri(Uri, string)'</Item>
-              </Issue>
-              <Notes>
-               <User Name="merlyn">
-                <Note Id="0" />
-               </User>
-              </Notes>
-             </Message>
-            </Messages>
-           </Member>
-          </Members>
-         </Type>
-        </Types>
-       </Namespace>
-      </Namespaces>
-     </Module>
-    </Modules>
-   </Target>
-  </Targets>
-  <Notes>
-   <User Name="merlyn">
-    <Note Id="0" Modified="2014-01-18 10:17:05Z">Already marked in source code.</Note>
-   </User>
-  </Notes>
-  <Rules>
-   <Rule TypeName="PassSystemUriObjectsInsteadOfStrings" Category="Microsoft.Usage" CheckId="CA2234">
-    <Resolution Name="Default">Modify {0} to call {1} instead of {2}.</Resolution>
-   </Rule>
-  </Rules>
- </FxCopReport>
+ <FxCopReport Version="10.0" />
 </FxCopProject>
