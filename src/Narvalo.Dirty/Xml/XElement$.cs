@@ -11,12 +11,12 @@
     public static class XElementExtensions
     {
         [Obsolete]
-        public static T ParseValue<T>(this XElement @this, Func<string, Maybe<T>> fun)
+        public static T ParseValue<T>(this XElement @this, Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
-            Require.NotNull(fun, "fun");
+            Require.NotNull(parserM, "parserM");
 
-            return fun.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
+            return parserM.Invoke(@this.Value).ValueOrThrow(() => new XmlException(
                 Format.CurrentCulture(
                     SR.XElement_MalformedElementValueFormat,
                     @this.Name.LocalName,

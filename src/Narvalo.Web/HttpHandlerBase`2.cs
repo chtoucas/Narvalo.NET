@@ -1,31 +1,35 @@
 ﻿namespace Narvalo.Web
 {
+    using System;
+    using System.Net;
     using System.Web;
-    using Narvalo;
 
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IQueryBinder<TQuery>, new()
     {
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected abstract void HandleBindingFailure(HttpResponse response, string errorMessage);
+        protected virtual void HandleBindingFailure(HttpResponse response, QueryBinderException exception)
+        {
+            response.SetStatusCode(HttpStatusCode.BadRequest);
+            response.Write(exception.Message);
+        }
 
         protected override void ProcessRequestCore(HttpContext context)
         {
             DebugCheck.NotNull(context);
 
-            // Liaison du modèle.
             var binder = new TBinder();
 
-            var query = binder.Bind(context.Request);
-
-            if (binder.Validate()) {
-                HandleBindingFailure(context.Response, "FIXME");
+            TQuery query = binder.Bind(context.Request);
+            
+            if (!binder.Successful) {
+                var exception = new QueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(binder.BindingErrors));
+                HandleBindingFailure(context.Response, exception);
                 return;
             }
 
             ProcessRequestCore(context, query);
         }
     }
-
 }

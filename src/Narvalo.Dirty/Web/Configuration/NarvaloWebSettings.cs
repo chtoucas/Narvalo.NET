@@ -14,10 +14,7 @@
 
         const bool DefaultEnableWhiteSpaceBusting_ = true;
 
-        static readonly Lazy<NarvaloWebSettings> Current_ = new Lazy<NarvaloWebSettings>(() =>
-        {
-            return NarvaloWebSettings.FromConfiguration();
-        });
+        static readonly Lazy<NarvaloWebSettings> Current_ = new Lazy<NarvaloWebSettings>(Initialize_);
 
         bool _enableWhiteSpaceBusting = DefaultEnableWhiteSpaceBusting_;
 
@@ -39,6 +36,11 @@
             LoadSettings_(ConfigurationManager.AppSettings);
 
             return this;
+        }
+
+        static NarvaloWebSettings Initialize_()
+        {
+            return NarvaloWebSettings.FromConfiguration();
         }
 
         void LoadSettings_(NameValueCollection appSettings)

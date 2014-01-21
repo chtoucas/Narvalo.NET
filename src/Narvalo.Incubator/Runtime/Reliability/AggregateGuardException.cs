@@ -2,6 +2,7 @@
 {
     using System;
 
+    [Serializable]
     public class AggregateGuardException : GuardException
     {
         public AggregateGuardException(string message) : base(message) { }

@@ -1,12 +1,14 @@
 ﻿namespace Narvalo.Web
 {
+    using System.Collections.Generic;
     using System.Web;
 
     public interface IQueryBinder<TQuery>
     {
-        bool CanValidate { get; }
+        IReadOnlyCollection<QueryBinderException> BindingErrors { get; }
+        
+        bool Successful { get; }
 
         TQuery Bind(HttpRequest request);
-        bool Validate();
     }
 }

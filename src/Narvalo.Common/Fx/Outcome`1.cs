@@ -28,9 +28,7 @@
 
         public bool Successful { get { return _successful; } }
 
-        public bool Unsuccessful { get { return !_successful; } }
-
-        public string ErrorMessage
+        public Exception Exception
         {
             get
             {
@@ -38,7 +36,7 @@
                     throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
                 }
 
-                return _exception.Message;
+                return _exception;
             }
         }
 
@@ -46,7 +44,7 @@
         {
             get
             {
-                if (Unsuccessful) {
+                if (!Successful) {
                     throw new InvalidOperationException(SR.Outcome_UnsuccessfulHasNoValue);
                 }
 
@@ -56,7 +54,7 @@
 
         public T ValueOrThrow()
         {
-            if (Unsuccessful) {
+            if (!Successful) {
                 _exception.Throw();
             }
 

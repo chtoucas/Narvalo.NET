@@ -7,7 +7,7 @@ namespace Narvalo
 
     public static class ExceptionExtensions
     {
-        static Lazy<IExceptionServices> Services_ = new Lazy<IExceptionServices>(Initialize);
+        static Lazy<IExceptionServices> Services_ = new Lazy<IExceptionServices>(Initialize_);
 
         public static void Throw(this Exception exception)
         {
@@ -21,7 +21,7 @@ namespace Narvalo
             }
         }
 
-        static IExceptionServices Initialize()
+        static IExceptionServices Initialize_()
         {
             return new DefaultExceptionServices();
         }

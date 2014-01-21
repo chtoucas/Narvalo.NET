@@ -10,14 +10,14 @@
         {
             Require.NotNull(kun, "kun");
 
-            return Unsuccessful ? Outcome<TResult>.η(_exception) : kun.Invoke(Value);
+            return !Successful ? Outcome<TResult>.η(Exception) : kun.Invoke(Value);
         }
 
         public Outcome<TResult> Map<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
 
-            return Unsuccessful ? Outcome<TResult>.η(_exception) : Outcome<TResult>.η(selector.Invoke(Value));
+            return !Successful ? Outcome<TResult>.η(Exception) : Outcome<TResult>.η(selector.Invoke(Value));
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]

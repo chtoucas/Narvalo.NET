@@ -97,6 +97,15 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid request..
+        /// </summary>
+        internal static string HttpHandlerBase_InvalidRequest {
+            get {
+                return ResourceManager.GetString("HttpHandlerBase_InvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config!.
         /// </summary>
         internal static string WebConfigurationManager_SectionNotFoundFormat {

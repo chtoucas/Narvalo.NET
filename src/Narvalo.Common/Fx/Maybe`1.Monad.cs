@@ -9,14 +9,14 @@
         {
             Require.NotNull(kun, "kun");
 
-            return IsSome ? kun.Invoke(_value) : Maybe<TResult>.None;
+            return IsSome ? kun.Invoke(Value) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
 
-            return IsSome ? Maybe<TResult>.η(selector.Invoke(_value)) : Maybe<TResult>.None;
+            return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
@@ -28,7 +28,7 @@
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
-            return square.IsSome ? square._value : Maybe<T>.None;
+            return square.IsSome ? square.Value : Maybe<T>.None;
         }
     }
 }

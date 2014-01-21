@@ -1,5 +1,6 @@
 ﻿namespace Narvalo.Web
 {
+    using System;
     using System.Net;
     using System.Web;
     using Narvalo;
@@ -11,20 +12,19 @@
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void HandleBindingFailure(HttpResponse response, Outcome<TQuery> outcome)
+        protected virtual void HandleBindingFailure(HttpResponse response, Exception exception)
         {
             response.SetStatusCode(HttpStatusCode.BadRequest);
-            response.Write(outcome.ErrorMessage);
+            response.Write(exception.Message);
         }
 
         protected override void ProcessRequestCore(HttpContext context)
         {
             DebugCheck.NotNull(context);
 
-            // Liaison du modèle.
             var outcome = Bind(context.Request);
-            if (outcome.Unsuccessful) {
-                HandleBindingFailure(context.Response, outcome);
+            if (!outcome.Successful) {
+                HandleBindingFailure(context.Response, outcome.Exception);
                 return;
             }
 
