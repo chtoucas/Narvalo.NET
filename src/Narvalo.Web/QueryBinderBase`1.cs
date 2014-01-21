@@ -42,7 +42,7 @@
                 throw new ArgumentNullException("query");
             }
 
-            return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
+            return !(from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
                     from attribute in prop.Attributes.OfType<ValidationAttribute>()
                     where !attribute.IsValid(prop.GetValue(query))
                     select attribute).Any();
