@@ -2,16 +2,22 @@
 {
     using System;
 
-    public static class LazyExtensions
+    public static partial class LazyExtensions
     {
         public static Lazy<X> Bind<T, X>(this Lazy<T> @this, Func<T, Lazy<X>> kun)
         {
-            return new Lazy<X>(() => kun(@this.Value).Value);
+            Require.Object(@this);
+            Require.NotNull(kun, "kun");
+
+            return new Lazy<X>(() => kun.Invoke(@this.Value).Value);
         }
 
-        public static Lazy<X> Map<T, X>(this Lazy<T> @this, Func<T, X> fun)
+        public static Lazy<X> Map<T, X>(this Lazy<T> @this, Func<T, X> selector)
         {
-            return new Lazy<X>(() => fun(@this.Value));
+            Require.Object(@this);
+            Require.NotNull(selector, "selector");
+
+            return new Lazy<X>(() => selector.Invoke(@this.Value));
         }
     }
 }

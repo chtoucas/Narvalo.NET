@@ -114,6 +114,10 @@
     <Compile Include="Fx\Identity`1.Monad.cs">
       <DependentUpon>Identity`1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\Lazy.Monad.cs">
+      <DependentUpon>Lazy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Lazy`1%24.cs" />
     <Compile Include="Fx\Maybe[Outcome]%24.cs" />
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
@@ -137,9 +141,8 @@
     <Compile Include="Diagnostics\LoggerBase.cs" />
     <Compile Include="Diagnostics\LoggerLevel.cs" />
     <Compile Include="Diagnostics\NoopLogger.cs" />
-    <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
-    <Compile Include="Fx\Expando.cs" />
+    <Compile Include="Expando.cs" />
     <Compile Include="Fx\IOAction.cs" />
     <Compile Include="Fx\IOAction%24.cs" />
     <Compile Include="Fx\Internal\Kunc.cs" />
@@ -148,7 +151,9 @@
     <Compile Include="Fx\Internal\Kunc`%24.cs" />
     <Compile Include="Fx\Internal\Kunc`.cs" />
     <Compile Include="Fx\Lazy.cs" />
-    <Compile Include="Fx\Lazy`1%24.Monad.cs" />
+    <Compile Include="Fx\Lazy`1%24.Monad.cs">
+      <DependentUpon>Lazy`1%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\MaybeM.cs" />
     <Compile Include="Fx\Internal\Monad.cs" />
     <Compile Include="Fx\Internal\MonadLaws.cs" />
