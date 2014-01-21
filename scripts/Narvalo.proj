@@ -47,7 +47,7 @@
   <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
 
   <ItemGroup>
-    <_AfterBuildTargets Include="Verify" />
+    <!-- FIXME <_AfterBuildTargets Include="Verify" /> -->
     <_AfterBuildTargets Include="RunUnitTests" Condition="'$(RunTests)' == 'true'" />
   </ItemGroup>
 
