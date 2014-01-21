@@ -11,7 +11,7 @@
 
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void HandleBindingFailure(HttpContext context, QueryBinderException exception)
+        protected virtual void HandleBindingFailure(HttpContext context, HttpQueryBinderException exception)
         {
             DebugCheck.NotNull(context);
 
@@ -21,18 +21,19 @@
             response.Write(exception.Message);
         }
 
-        protected override void ProcessRequestCore(HttpContext context)
+        protected sealed override void ProcessRequestCore(HttpContext context)
         {
             DebugCheck.NotNull(context);
 
             var outcome = Bind(context.Request);
 
-            if (!outcome.Successful) {
-                HandleBindingFailure(context, new QueryBinderException(outcome.Exception.Message, outcome.Exception));
-                return;
+            if (outcome.Successful) {
+                ProcessRequestCore(context, outcome.Value);
             }
-
-            ProcessRequestCore(context, outcome.Value);
+            else {
+                var exception = new HttpQueryBinderException(outcome.Exception.Message, outcome.Exception);
+                HandleBindingFailure(context, exception);
+            }
         }
     }
 }

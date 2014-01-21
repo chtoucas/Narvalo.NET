@@ -6,11 +6,11 @@
     using System.Web;
 
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
-        where TBinder : IQueryBinder<TQuery>, new()
+        where TBinder : IHttpQueryBinder<TQuery>, new()
     {
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void HandleBindingFailure(HttpContext context, QueryBinderException exception)
+        protected virtual void HandleBindingFailure(HttpContext context, HttpQueryBinderException exception)
         {
             DebugCheck.NotNull(context);
 
@@ -20,7 +20,7 @@
             response.Write(exception.Message);
         }
 
-        protected override void ProcessRequestCore(HttpContext context)
+        protected sealed override void ProcessRequestCore(HttpContext context)
         {
             DebugCheck.NotNull(context);
 
@@ -28,25 +28,27 @@
 
             TQuery query = binder.Bind(context.Request);
 
-            if (!binder.Successful) {
+            if (binder.Successful) {
+                ProcessRequestCore(context, query);
+            }
+            else {
                 var errors = binder.BindingErrors;
-                QueryBinderException exception;
+                HttpQueryBinderException exception;
 
-                if (errors.Count > 1) {
-                   exception = new QueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
+                var errorsCount = errors.Count();
+
+                if (errorsCount > 1) {
+                   exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
                 }
-                else if (errors.Count == 1) {
+                else if (errorsCount == 1) {
                     exception = errors.First();
                 }
                 else {
-                    exception = new QueryBinderException(SR.HttpHandlerBase_InvalidRequest);
+                    exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest);
                 }
 
                 HandleBindingFailure(context, exception);
-                return;
             }
-
-            ProcessRequestCore(context, query);
         }
     }
 }

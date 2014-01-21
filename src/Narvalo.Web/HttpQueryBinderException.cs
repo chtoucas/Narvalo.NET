@@ -5,18 +5,18 @@
     using System.Security.Permissions;
 
     [Serializable]
-    public class QueryBinderException : Exception
+    public class HttpQueryBinderException : Exception
     {
         string _memberName = String.Empty;
 
-        public QueryBinderException() : base() { }
+        public HttpQueryBinderException() : base() { }
 
-        public QueryBinderException(string message) : base(message) { }
+        public HttpQueryBinderException(string message) : base(message) { }
 
-        public QueryBinderException(string message, Exception innerException)
+        public HttpQueryBinderException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        protected QueryBinderException(SerializationInfo info, StreamingContext context)
+        protected HttpQueryBinderException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
         public string MemberName { get { return _memberName; } set { _memberName = value; } }

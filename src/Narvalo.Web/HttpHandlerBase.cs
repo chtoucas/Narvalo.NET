@@ -18,27 +18,34 @@
         {
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
-            // Validation de la méthode HTTP.
             var httpMethod = context.Request.HttpMethod;
 
-            if (!AcceptedVerbs.Contains(httpMethod)) {
-                HandleInvalidHttpMethod(context, httpMethod);
-                return;
+            if (ValidateHttpMethod(httpMethod)) {
+                ProcessRequestCore(context);
             }
-
-            ProcessRequestCore(context);
+            else {
+                HandleInvalidHttpMethod(context);
+            }
         }
 
         protected abstract void ProcessRequestCore(HttpContext context);
 
-        protected virtual void HandleInvalidHttpMethod(HttpContext context, string httpMethod)
+        protected virtual bool ValidateHttpMethod(string httpMethod)
+        {
+            DebugCheck.NotNullOrEmpty(httpMethod);
+
+            return AcceptedVerbs.Contains(httpMethod);
+        }
+
+        protected virtual void HandleInvalidHttpMethod(HttpContext context)
         {
             DebugCheck.NotNull(context);
 
             var response = context.Response;
 
+            // TODO: Indiquer les méthodes autorisées dans la réponse.
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-            response.Write(Format.CurrentCulture(SR.HttpHandlerBase_InvalidHttpMethodFormat, httpMethod));
+            response.Write(Format.CurrentCulture(SR.HttpHandlerBase_InvalidHttpMethodFormat, context.Request.HttpMethod));
         }
     }
 }

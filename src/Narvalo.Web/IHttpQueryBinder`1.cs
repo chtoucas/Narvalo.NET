@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Web;
 
-    public interface IQueryBinder<TQuery>
+    public interface IHttpQueryBinder<TQuery>
     {
-        IReadOnlyCollection<QueryBinderException> BindingErrors { get; }
+        IEnumerable<HttpQueryBinderException> BindingErrors { get; }
         
         bool Successful { get; }
 

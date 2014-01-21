@@ -91,7 +91,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="QueryBinderBase`1.cs" />
+    <Compile Include="HttpQueryBinderBase`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
     <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="Internal\TagBuilder%24.cs" />
-    <Compile Include="IQueryBinder`1.cs" />
+    <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Optimization\WhiteSpaceBusterMvcWebRazorHostFactory.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterPageParserFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBinderException.cs" />
+    <Compile Include="HttpQueryBinderException.cs" />
     <Compile Include="RouteCollection%24.cs" />
     <Compile Include="Semantic\IOpenGraphMetadata.cs" />
     <Compile Include="Semantic\Ontology.cs" />

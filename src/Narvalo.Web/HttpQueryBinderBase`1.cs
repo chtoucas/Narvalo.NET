@@ -1,25 +1,21 @@
 ﻿namespace Narvalo.Web
 {
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web;
+    using Narvalo.Linq;
 
-    public abstract class QueryBinderBase<TQuery> : IQueryBinder<TQuery>
+    public abstract class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
     {
-        readonly IList<QueryBinderException> _errors = new List<QueryBinderException>();
+        readonly IList<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
 
         bool _successful = false;
 
-        protected QueryBinderBase() { }
+        protected HttpQueryBinderBase() { }
 
-        public IReadOnlyCollection<QueryBinderException> BindingErrors
-        {
-            get { return new ReadOnlyCollection<QueryBinderException>(_errors); }
-        }
+        public IEnumerable<HttpQueryBinderException> BindingErrors { get { return _errors; } }
 
         public bool Successful { get { return _successful; } }
 
@@ -38,17 +34,15 @@
 
         protected virtual bool Validate(TQuery query)
         {
-            if (query == null) {
-                throw new ArgumentNullException("query");
-            }
+            DebugCheck.NotNull(query);
 
-            return !(from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
+            return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
                     from attribute in prop.Attributes.OfType<ValidationAttribute>()
                     where !attribute.IsValid(prop.GetValue(query))
-                    select attribute).Any();
+                    select attribute).IsEmpty();
         }
 
-        protected void AddError(QueryBinderException exception)
+        protected void AddError(HttpQueryBinderException exception)
         {
             _errors.Add(exception);
         }
