@@ -5,7 +5,7 @@
     using Narvalo.Internal;
 
     public partial struct Range<T> : IEquatable<Range<T>>
-        where T : IEquatable<T>, IComparable<T>
+        where T : struct, IEquatable<T>, IComparable<T>
     {
         readonly T _lowerEnd;
         readonly T _upperEnd;
@@ -24,10 +24,6 @@
 
         public bool Includes(T value)
         {
-            if (value == null) {
-                throw ExceptionFactory.ArgumentNull("value");
-            }
-
             return value.CompareTo(LowerEnd) >= 0
                 && value.CompareTo(UpperEnd) <= 0;
         }

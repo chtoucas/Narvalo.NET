@@ -18,9 +18,7 @@
         {
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
-            var httpMethod = context.Request.HttpMethod;
-
-            if (ValidateHttpMethod(httpMethod)) {
+            if (ValidateHttpMethod(context.Request)) {
                 ProcessRequestCore(context);
             }
             else {
@@ -30,11 +28,13 @@
 
         protected abstract void ProcessRequestCore(HttpContext context);
 
-        protected virtual bool ValidateHttpMethod(string httpMethod)
+        protected virtual bool ValidateHttpMethod(HttpRequest request)
         {
-            DebugCheck.NotNullOrEmpty(httpMethod);
+            DebugCheck.NotNull(request);
 
-            return AcceptedVerbs.Contains(httpMethod);
+            var httpVerb = MayParse.ToEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */);
+
+            return httpVerb.Map(_ => AcceptedVerbs.HasFlag(_)).ValueOrElse(false);
         }
 
         protected virtual void HandleInvalidHttpMethod(HttpContext context)

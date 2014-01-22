@@ -104,7 +104,7 @@ namespace Narvalo
         [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void InRange<T>(T value, Range<T> range, string parameterName)
-            where T : IComparable<T>, IEquatable<T>
+            where T : struct, IComparable<T>, IEquatable<T>
         {
             if (!range.Includes(value)) {
                 throw new ArgumentOutOfRangeException(

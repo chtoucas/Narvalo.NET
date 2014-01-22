@@ -32,7 +32,7 @@
         internal static Outcome<T> η(T value)
         {
             if (value == null) {
-                throw ExceptionFactory.ArgumentNull("value");
+                throw new ArgumentNullException("value");
             }
 
             return new Outcome<T>(value);

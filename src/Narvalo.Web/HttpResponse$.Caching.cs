@@ -23,7 +23,7 @@
         {
             Require.Object(@this);
 
-            @this.CacheFor(duration, true /* publicly */);
+            @this.CacheFor(duration, HttpCacheability.Public);
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
@@ -37,22 +37,22 @@
         {
             Require.Object(@this);
 
-            @this.CacheFor(duration, false /* publicly */);
+            // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
+            @this.CacheFor(duration, HttpCacheability.Private);
         }
 
-        public static void CacheFor(this HttpResponse @this, TimeSpan duration, bool publicly)
+        public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability)
         {
             DebugCheck.NotNull(@this);
 
-            @this.CacheFor(duration, publicly, HttpVersions.All);
+            @this.CacheFor(duration, cacheability, HttpVersions.All);
         }
 
-        public static void CacheFor(this HttpResponse @this, TimeSpan duration, bool publicly, HttpVersions versions)
+        public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability, HttpVersions versions)
         {
             Require.Object(@this);
 
-            // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
-            @this.Cache.SetCacheability(publicly ? HttpCacheability.Public : HttpCacheability.Private);
+            @this.Cache.SetCacheability(cacheability);
 
             // En-tête HTTP 1.0
             if (versions.HasFlag(HttpVersions.HttpV10)) {

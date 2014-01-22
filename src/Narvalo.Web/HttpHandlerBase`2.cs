@@ -10,16 +10,6 @@
     {
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
 
-        protected virtual void HandleBindingFailure(HttpContext context, HttpQueryBinderException exception)
-        {
-            DebugCheck.NotNull(context);
-
-            var response = context.Response;
-
-            response.SetStatusCode(HttpStatusCode.BadRequest);
-            response.Write(exception.Message);
-        }
-
         protected sealed override void ProcessRequestCore(HttpContext context)
         {
             DebugCheck.NotNull(context);
@@ -49,6 +39,16 @@
 
                 HandleBindingFailure(context, exception);
             }
+        }
+
+        protected virtual void HandleBindingFailure(HttpContext context, HttpQueryBinderException exception)
+        {
+            DebugCheck.NotNull(context);
+
+            var response = context.Response;
+
+            response.SetStatusCode(HttpStatusCode.BadRequest);
+            response.Write(exception.Message);
         }
     }
 }

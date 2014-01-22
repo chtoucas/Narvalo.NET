@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="BinaryEncoder.cs" />
+    <Compile Include="Create.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Either`2.Language.cs">
       <DependentUpon>Either`2.cs</DependentUpon>
@@ -119,6 +120,14 @@
     </Compile>
     <Compile Include="Fx\Lazy`1%24.cs" />
     <Compile Include="Fx\Maybe[Outcome]%24.cs" />
+    <Compile Include="Fx\Outcome.cs" />
+    <Compile Include="Fx\Outcome`1.cs" />
+    <Compile Include="Fx\Outcome`1.IEquatable.cs">
+      <DependentUpon>Outcome`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Outcome`1.Monad.cs">
+      <DependentUpon>Outcome`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
@@ -183,6 +192,7 @@
     <Compile Include="Web\Configuration\XmlValidationSection.cs" />
     <Compile Include="Web\Hosting.cs" />
     <Compile Include="Web\HttpCompressionModule.cs" />
+    <Compile Include="Web\HttpHandlerBase`1.cs" />
     <Compile Include="Web\HttpRequestBase%24.cs" />
     <Compile Include="Web\HttpResponse%24.cs" />
     <Compile Include="Web\HttpVerbs%24.cs" />

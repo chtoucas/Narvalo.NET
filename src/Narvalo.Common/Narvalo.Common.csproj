@@ -124,12 +124,6 @@
     <Compile Include="Fx\Maybe`1.IEquatable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Outcome`1.IEquatable.cs">
-      <DependentUpon>Outcome`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Outcome`1.Monad.cs">
-      <DependentUpon>Outcome`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="MayConvert.cs" />
     <Compile Include="MayCreate.cs" />
     <Compile Include="MayParse.SimpleTypes.cs">
@@ -145,8 +139,6 @@
       <DependentUpon>Maybe.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\MayFunc.cs" />
-    <Compile Include="Fx\Outcome.cs" />
-    <Compile Include="Fx\Outcome`1.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
@@ -167,7 +159,6 @@
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
     <Compile Include="MayParse.cs" />
-    <Compile Include="Create.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />

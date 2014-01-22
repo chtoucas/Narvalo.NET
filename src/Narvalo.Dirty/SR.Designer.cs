@@ -97,6 +97,33 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successful outcome..
+        /// </summary>
+        internal static string Outcome_Successful {
+            get {
+                return ResourceManager.GetString("Outcome_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome has no exception..
+        /// </summary>
+        internal static string Outcome_SuccessfulHasNoException {
+            get {
+                return ResourceManager.GetString("Outcome_SuccessfulHasNoException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A bad outcome has no value..
+        /// </summary>
+        internal static string Outcome_UnsuccessfulHasNoValue {
+            get {
+                return ResourceManager.GetString("Outcome_UnsuccessfulHasNoValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
         /// </summary>
         internal static string XElement_MalformedAttributeValueFormat {

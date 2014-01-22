@@ -111,9 +111,10 @@
       <DependentUpon>HtmlHelper%24.cs</DependentUpon>
     </Compile>
     <Compile Include="HttpHandlerBase.cs" />
-    <Compile Include="HttpHandlerBase`1.cs" />
     <Compile Include="HttpHandlerBase`2.cs" />
-    <Compile Include="HttpResponse%24.Caching.cs" />
+    <Compile Include="HttpResponse%24.Caching.cs">
+      <DependentUpon>HttpResponse%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />

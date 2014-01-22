@@ -115,6 +115,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter {0} is null..
+        /// </summary>
+        internal static string ExceptionFactory_ArgumentNullFormat {
+            get {
+                return ResourceManager.GetString("ExceptionFactory_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Illegal character {0} found at position {1}..
         /// </summary>
         internal static string Int64Encoder_IllegalCharacterFormat {
@@ -142,33 +151,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Successful outcome..
-        /// </summary>
-        internal static string Outcome_Successful {
-            get {
-                return ResourceManager.GetString("Outcome_Successful", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception..
-        /// </summary>
-        internal static string Outcome_SuccessfulHasNoException {
-            get {
-                return ResourceManager.GetString("Outcome_SuccessfulHasNoException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A bad outcome has no value..
-        /// </summary>
-        internal static string Outcome_UnsuccessfulHasNoValue {
-            get {
-                return ResourceManager.GetString("Outcome_UnsuccessfulHasNoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The lower end must be lesser than upper end..
         /// </summary>
         internal static string Range_LowerEndNotLesserThanUpperEnd {
@@ -183,15 +165,6 @@ namespace Narvalo {
         internal static string Require_ArgumentEmptyFormat {
             get {
                 return ResourceManager.GetString("Require_ArgumentEmptyFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is null..
-        /// </summary>
-        internal static string Require_ArgumentNullFormat {
-            get {
-                return ResourceManager.GetString("Require_ArgumentNullFormat", resourceCulture);
             }
         }
         

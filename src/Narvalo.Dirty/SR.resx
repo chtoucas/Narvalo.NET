@@ -129,6 +129,15 @@
   <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
     <value>HTTP InputStream too large.</value>
   </data>
+  <data name="Outcome_Successful" xml:space="preserve">
+    <value>Successful outcome.</value>
+  </data>
+  <data name="Outcome_SuccessfulHasNoException" xml:space="preserve">
+    <value>A successful outcome has no exception.</value>
+  </data>
+  <data name="Outcome_UnsuccessfulHasNoValue" xml:space="preserve">
+    <value>A bad outcome has no value.</value>
+  </data>
   <data name="XElement_MalformedAttributeValueFormat" xml:space="preserve">
     <value>Unable to parse attribute '{0}', line {1}.</value>
   </data>

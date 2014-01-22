@@ -5,7 +5,7 @@
     public static class Range
     {
         public static Range<T> Create<T>(T lowerEnd, T upperEnd)
-            where T : IEquatable<T>, IComparable<T>
+            where T : struct, IEquatable<T>, IComparable<T>
         {
             return new Range<T>(lowerEnd, upperEnd);
         }
