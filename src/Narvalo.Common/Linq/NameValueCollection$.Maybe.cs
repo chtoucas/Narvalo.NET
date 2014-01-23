@@ -41,7 +41,7 @@
             Require.Object(@this);
             Require.NotNull(parserM, "parserM");
 
-            return @this.MayGetValue(name).Bind(_ => parserM.Invoke(_));
+            return @this.MayGetValue(name).Bind(parserM);
         }
 
         public static Maybe<T[]> MayParseValues<T>(

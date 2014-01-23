@@ -116,7 +116,6 @@
       <DependentUpon>HttpResponse%24.cs</DependentUpon>
     </Compile>
     <Compile Include="HttpResponse%24.cs" />
-    <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />

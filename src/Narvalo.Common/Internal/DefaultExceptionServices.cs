@@ -1,10 +1,9 @@
-﻿// Emprunté à Rx.NET.
-
-namespace Narvalo.Internal
+﻿namespace Narvalo.Internal
 {
     using System;
     using System.Runtime.ExceptionServices;
 
+    [Alien("System.Reactive.PlatformServices.DefaultExceptionServices")]
     class DefaultExceptionServices/*Impl*/ : IExceptionServices
     {
         public void Rethrow(Exception exception)

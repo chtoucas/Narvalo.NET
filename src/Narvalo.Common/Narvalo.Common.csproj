@@ -85,6 +85,14 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="AlienAttribute.cs" />
+    <Compile Include="Fx\Nullable`1%24.Language.cs">
+      <DependentUpon>Nullable`1%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Nullable`1%24.Monad.cs">
+      <DependentUpon>Nullable`1%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Internal\DefaultExceptionServices.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="Exception%24.cs" />
@@ -93,8 +101,8 @@
     <Compile Include="Nil.IEquatable.cs">
       <DependentUpon>Nil.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParseAs.SimpleTypes.cs">
-      <DependentUpon>ParseAs.cs</DependentUpon>
+    <Compile Include="ParseTo.SimpleTypes.cs">
+      <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugCheck.cs" />
     <Compile Include="Format.cs" />
@@ -124,12 +132,12 @@
     <Compile Include="Fx\Maybe`1.IEquatable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MayConvert.cs" />
+    <Compile Include="MayConvertTo.cs" />
     <Compile Include="MayCreate.cs" />
-    <Compile Include="MayParse.SimpleTypes.cs">
-      <DependentUpon>MayParse.cs</DependentUpon>
+    <Compile Include="MayParseTo.SimpleTypes.cs">
+      <DependentUpon>MayParseTo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParseAs.cs" />
+    <Compile Include="ParseTo.cs" />
     <Compile Include="Fx\Maybe.Array.cs">
       <SubType>Code</SubType>
       <DependentUpon>Maybe.cs</DependentUpon>
@@ -150,15 +158,14 @@
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
-    <Compile Include="ParseTo.cs" />
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="TryConvert.cs" />
+    <Compile Include="TryConvertTo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParse`1.cs" />
-    <Compile Include="MayParse.cs" />
+    <Compile Include="MayParseTo.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />
@@ -171,12 +178,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Require.cs" />
-    <Compile Include="StringGenerator.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="TryCreate.cs" />
-    <Compile Include="TryParse.cs" />
+    <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />

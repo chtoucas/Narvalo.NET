@@ -48,7 +48,7 @@
         public string SessionKey { get { return _sessionKey; } }
         public long UserId { get { return _userId; } }
 
-        public static Maybe<FacebookCookie> MayGet(
+        public static FacebookCookie? Create(
             HttpContextBase httpContext,
             string appId,
             string appSecret)
@@ -58,16 +58,8 @@
             Require.NotNullOrEmpty(appSecret, "appSecret");
 
             return MayGetHttpCookie_(httpContext, appId)
-                .Bind(_ => MayParseHttpCookie_(_, appSecret));
-        }
-
-        public static bool TryGet(
-            HttpContextBase httpContext,
-            string appId,
-            string appSecret,
-            out FacebookCookie cookie)
-        {
-            return MayGet(httpContext, appId, appSecret).TrySet(out cookie);
+                .Map(_ => ParseHttpCookie_(_, appSecret))
+                .ValueOrDefault();
         }
 
         #region Membres privés
@@ -106,11 +98,6 @@
             return HttpUtility.ParseQueryString(httpCookie.Value.Replace("\"", String.Empty));
         }
 
-        static string GetHttpCookieName_(string appId)
-        {
-            return String.Format(CultureInfo.InvariantCulture, CookieNameFormat_, appId);
-        }
-
         static Maybe<HttpCookie> MayGetHttpCookie_(HttpContextBase httpContext, string appId)
         {
             HttpRequestBase request = httpContext.Request;
@@ -118,12 +105,12 @@
                 return Maybe<HttpCookie>.None;
             }
 
-            string cookieName = GetHttpCookieName_(appId);
+            string cookieName = Format.InvariantCulture(CookieNameFormat_, appId);
 
             return Maybe.Create(request.Cookies[cookieName]);
         }
 
-        static Maybe<FacebookCookie> MayParseHttpCookie_(HttpCookie httpCookie, string appSecret)
+        static FacebookCookie? ParseHttpCookie_(HttpCookie httpCookie, string appSecret)
         {
             NameValueCollection nvc = GetArguments_(httpCookie);
 
@@ -131,21 +118,19 @@
                 throw new SecurityException("Invalid signature found for facebook cookie.");
             }
 
-            var expiresOn = MayParse.ToDateTime(nvc[ExpiresOnKey_]);
-            if (expiresOn.IsNone) { return Maybe<FacebookCookie>.None; }
+            var expiresOn = ParseTo.NullableDateTime(nvc[ExpiresOnKey_]);
+            if (expiresOn.HasValue) { return null; }
 
-            var userId = MayParse.ToInt64(nvc[UserIdKey_]);
-            if (userId.IsNone) { return Maybe<FacebookCookie>.None; }
+            var userId = ParseTo.NullableInt64(nvc[UserIdKey_]);
+            if (userId.HasValue) { return null; }
 
-            var cookie = new FacebookCookie(
+            return new FacebookCookie(
                 nvc[AccessTokenKey_],
                 expiresOn.Value,
                 nvc[SecretKey_],
                 nvc[SessionKeyKey_],
                 userId.Value
             );
-
-            return Maybe.Create(cookie);
         }
 
         #endregion

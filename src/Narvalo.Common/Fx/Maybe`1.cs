@@ -70,7 +70,7 @@
             if (!_isSome) {
                 throw exceptionFactory.Invoke();
             }
-            
+
             return _value;
         }
 

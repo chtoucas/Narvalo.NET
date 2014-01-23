@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Web.Optimization
 {
     using System.Collections;
+    using Narvalo.Fx;
     using Narvalo.Web.Configuration;
     using Narvalo.Web.UI;
 
@@ -45,7 +46,7 @@
             bool enabled = true;
 
             if (attributes.Contains(DirectiveName_)) {
-                enabled = MayParse.ToBoolean((string)attributes[DirectiveName_], BooleanStyles.Literal)
+                enabled = ParseTo.NullableBoolean((string)attributes[DirectiveName_], BooleanStyles.Literal)
                     .ValueOrElse(enabled);
 
                 // On supprime la directive afin de ne pas perturber le fonctionnement de ASP.NET.

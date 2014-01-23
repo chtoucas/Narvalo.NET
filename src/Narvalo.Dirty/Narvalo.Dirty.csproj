@@ -185,6 +185,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="RandomString.cs" />
     <Compile Include="Web\Configuration\NarvaloWebSettings.cs" />
     <Compile Include="Web\Configuration\ParserFilterElement.cs" />
     <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />

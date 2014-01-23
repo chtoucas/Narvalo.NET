@@ -5,7 +5,7 @@
 
     public static class RandomNumber
     {
-        // Cf. http://blogs.msdn.com/b/ericlippert/archive/2012/02/21/generating-random-non-uniform-data-in-c.aspx
+        [Alien("http://blogs.msdn.com/b/ericlippert/archive/2012/02/21/generating-random-non-uniform-data-in-c.aspx")]
         static Random Random_ = new Random();
 
         public static IEnumerable<double> UniformDistribution()

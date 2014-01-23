@@ -2,12 +2,12 @@
 {
     using Narvalo.Fx;
 
-    public static partial class MayConvert
+    public static partial class MayConvertTo
     {
-        public static Maybe<TEnum> ToEnum<TEnum>(object value) where TEnum : struct
+        public static Maybe<TEnum> Enum<TEnum>(object value) where TEnum : struct
         {
             TEnum result;
-            if (!TryConvert.ToEnum<TEnum>(value, out result)) {
+            if (!TryConvertTo.Enum<TEnum>(value, out result)) {
                 return Maybe<TEnum>.None;
             }
             

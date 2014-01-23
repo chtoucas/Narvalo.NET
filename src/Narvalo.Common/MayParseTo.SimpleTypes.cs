@@ -2,33 +2,34 @@
 {
     using System;
     using System.Globalization;
+    using Narvalo.Fx;
 
-    public static partial class ParseAs
+    public static partial class MayParseTo
     {
         //// Boolean
 
-        public static bool? Boolean(string value)
+        public static Maybe<bool> Boolean(string value)
         {
             return Boolean(value, BooleanStyles.Default);
         }
 
-        public static bool? Boolean(string value, BooleanStyles style)
+        public static Maybe<bool> Boolean(string value, BooleanStyles style)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
-                (string val, out bool result) => TryParse.ToBoolean(val, style, out result));
+                (string val, out bool result) => TryParseTo.Boolean(val, style, out result));
         }
 
         //// Decimal
 
-        public static decimal? Decimal(string value)
+        public static Maybe<decimal> Decimal(string value)
         {
             return Decimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
         }
 
-        public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<decimal> Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out decimal result) =>
                 {
@@ -38,7 +39,7 @@
 
         //// Double
 
-        public static double? Double(string value)
+        public static Maybe<double> Double(string value)
         {
             var style
                 = NumberStyles.AllowLeadingWhite
@@ -51,65 +52,65 @@
             return Double(value, style, NumberFormatInfo.CurrentInfo);
         }
 
-        public static double? Double(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<double> Double(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out double result) => double.TryParse(val, style, provider, out result));
         }
 
         //// Int16
 
-        public static short? Int16(string value)
+        public static Maybe<short> Int16(string value)
         {
             return Int16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static short? Int16(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<short> Int16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out short result) => short.TryParse(val, style, provider, out result));
         }
 
         //// Int32
 
-        public static int? Int32(string value)
+        public static Maybe<int> Int32(string value)
         {
             return Int32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static int? Int32(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<int> Int32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out int result) => int.TryParse(val, style, provider, out result));
         }
 
         //// Int64
 
-        public static long? Int64(string value)
+        public static Maybe<long> Int64(string value)
         {
             return Int64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static long? Int64(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<long> Int64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out long result) => long.TryParse(val, style, provider, out result));
         }
 
         //// Single
 
-        public static float? Single(string value)
+        public static Maybe<float> Single(string value)
         {
             return Single(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
         }
 
-        public static float? Single(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<float> Single(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out float result) => float.TryParse(val, style, provider, out result));
         }
@@ -117,15 +118,15 @@
         //// UInt16
 
         [CLSCompliant(false)]
-        public static ushort? UInt16(string value)
+        public static Maybe<ushort> UInt16(string value)
         {
             return UInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<ushort> UInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out ushort result) => ushort.TryParse(val, style, provider, out result));
         }
@@ -133,15 +134,15 @@
         //// UInt32
 
         [CLSCompliant(false)]
-        public static uint? UInt32(string value)
+        public static Maybe<uint> UInt32(string value)
         {
             return UInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static uint? UInt32(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<uint> UInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out uint result) => uint.TryParse(val, style, provider, out result));
         }
@@ -149,15 +150,15 @@
         //// UInt64
 
         [CLSCompliant(false)]
-        public static ulong? UInt64(string value)
+        public static Maybe<ulong> UInt64(string value)
         {
             return UInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static ulong? UInt64(string value, NumberStyles style, IFormatProvider provider)
+        public static Maybe<ulong> UInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out ulong result) => ulong.TryParse(val, style, provider, out result));
         }

@@ -1,10 +1,9 @@
-﻿// Emprunté à Rx.NET.
-
-namespace Narvalo.Internal
+﻿namespace Narvalo.Internal
 {
     using System;
     using System.ComponentModel;
 
+    [Alien("System.Reactive.IExceptionServices")]
     [EditorBrowsable(EditorBrowsableState.Never)]
     interface IExceptionServices
     {

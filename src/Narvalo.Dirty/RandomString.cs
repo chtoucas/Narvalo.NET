@@ -3,22 +3,24 @@
     using System;
     using System.Text;
 
-    public static class StringGenerator
+    public static class RandomString
     {
-        public static string RandomString(int size)
+        const string Alphabet_ = "abcdefghijklmnopqrstuvwyxz";
+
+        [Alien("http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters")]
+        public static string GenerateString(int size, Random rng)
         {
-            var rnd = new Random();
-            var sb = new StringBuilder();
+            var chars = new char[size];
 
             for (int i = 0; i < size; i++) {
-                char chr = Convert.ToChar(Convert.ToInt32(Math.Floor(65 + (26 * rnd.NextDouble()))));
-                sb.Append(chr);
+                chars[i] = Alphabet_[rng.Next(Alphabet_.Length)];
             }
 
-            return sb.ToString();
+            return new String(chars);
         }
 
-        public static string RandomUnicodeString(int size)
+        [Alien("http://www.bonf.net/2009/01/14/generating-random-unicode-strings-in-c/")]
+        public static string GenerateUnicodeString(int size, Random rng)
         {
             Require.GreaterThanOrEqualTo(size, 0, "size");
             Require.LessThanOrEqualTo(size, Int32.MaxValue / 2, "size");
@@ -26,11 +28,10 @@
             checked {
                 int length = 2 * size;
 
-                var random = new Random();
                 var byteArray = new byte[length];
 
                 for (int i = 0; i < length; i += 2) {
-                    int chr = random.Next(0xD7FF);
+                    int chr = rng.Next(0xD7FF);
                     byteArray[i + 1] = (byte)((chr & 0xFF00) >> 8);
                     byteArray[i] = (byte)(chr & 0xFF);
                 }

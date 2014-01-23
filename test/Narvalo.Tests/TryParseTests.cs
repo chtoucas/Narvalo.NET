@@ -16,7 +16,7 @@
                 string value = " une chaîne quelconque ";
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean(value, out result);
+                bool succeed = TryParseTo.Boolean(value, out result);
                 // Assert
                 Assert.Equal(value, " une chaîne quelconque ");
             }
@@ -27,7 +27,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean(null, BooleanStyles.None, out result);
+                bool succeed = TryParseTo.Boolean(null, BooleanStyles.None, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(Boolean), result);
@@ -39,7 +39,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean(String.Empty, BooleanStyles.None, out result);
+                bool succeed = TryParseTo.Boolean(String.Empty, BooleanStyles.None, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(Boolean), result);
@@ -51,7 +51,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean(String.Empty, BooleanStyles.EmptyIsFalse, out result);
+                bool succeed = TryParseTo.Boolean(String.Empty, BooleanStyles.EmptyIsFalse, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(false, result);
@@ -63,7 +63,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("true", BooleanStyles.Literal, out result);
+                bool succeed = TryParseTo.Boolean("true", BooleanStyles.Literal, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(true, result);
@@ -75,7 +75,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("TrUe", BooleanStyles.Literal, out result);
+                bool succeed = TryParseTo.Boolean("TrUe", BooleanStyles.Literal, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(true, result);
@@ -87,7 +87,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("false", BooleanStyles.Literal, out result);
+                bool succeed = TryParseTo.Boolean("false", BooleanStyles.Literal, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(false, result);
@@ -99,7 +99,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("fAlSe", BooleanStyles.Literal, out result);
+                bool succeed = TryParseTo.Boolean("fAlSe", BooleanStyles.Literal, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(false, result);
@@ -111,7 +111,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean(" true ", BooleanStyles.Literal, out result);
+                bool succeed = TryParseTo.Boolean(" true ", BooleanStyles.Literal, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(true, result);
@@ -123,7 +123,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("10", BooleanStyles.Integer, out result);
+                bool succeed = TryParseTo.Boolean("10", BooleanStyles.Integer, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(true, result);
@@ -135,7 +135,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("0", BooleanStyles.Integer, out result);
+                bool succeed = TryParseTo.Boolean("0", BooleanStyles.Integer, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(false, result);
@@ -147,7 +147,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("-10", BooleanStyles.Integer, out result);
+                bool succeed = TryParseTo.Boolean("-10", BooleanStyles.Integer, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(false, result);
@@ -159,7 +159,7 @@
                 // Arrange
                 bool result;
                 // Act
-                bool succeed = TryParse.ToBoolean("-10.1", BooleanStyles.Integer, out result);
+                bool succeed = TryParseTo.Boolean("-10.1", BooleanStyles.Integer, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(Boolean), result);

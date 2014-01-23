@@ -2,57 +2,58 @@
 {
     using System;
     using System.Globalization;
+    using Narvalo.Fx;
     using Narvalo.Internal;
 
-    public static partial class ParseAs
+    public static partial class MayParseTo
     {
         //// Enum
 
-        public static TEnum? Enum<TEnum>(string value) where TEnum : struct
+        public static Maybe<TEnum> Enum<TEnum>(string value) where TEnum : struct
         {
             return Enum<TEnum>(value, true /* ignoreCase */);
         }
 
-        public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
+        public static Maybe<TEnum> Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out TEnum result) => System.Enum.TryParse<TEnum>(val, ignoreCase, out result));
         }
 
         //// DateTime
 
-        public static DateTime? DateTime(string value)
+        public static Maybe<DateTime> DateTime(string value)
         {
             return DateTime(value, "o");
         }
 
-        public static DateTime? DateTime(string value, string format)
+        public static Maybe<DateTime> DateTime(string value, string format)
         {
             return DateTime(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
         }
 
-        public static DateTime? DateTime(
+        public static Maybe<DateTime> DateTime(
             string value,
             string format,
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            return ParseAsCore(
+            return MayParseCore(
                 value,
                 (string val, out DateTime result) => System.DateTime.TryParseExact(val, format, provider, style, out result));
         }
 
-        //// ParseAsCore
+        //// MayParseCore
 
-        internal static T? ParseAsCore<T>(string value, TryParse<T> fun) where T : struct
+        internal static Maybe<T> MayParseCore<T>(string value, TryParse<T> fun) where T : struct
         {
-            if (value == null) { return null; }
+            if (value == null) { return Maybe<T>.None; }
 
             T result;
-            return fun(value, out result) ? result : (T?)null;
+            return fun(value, out result) ? Maybe.Create(result) : Maybe<T>.None;
         }
     }
 }

@@ -5,6 +5,7 @@
     using System.Configuration;
     using System.Linq;
     using Narvalo;
+    using Narvalo.Fx;
     using Narvalo.Linq;
 
     // FIXME: Ajouter une méthode statique de récupération Current.
@@ -60,7 +61,7 @@
         void Initialize_(NameValueCollection source)
         {
             _enableWhiteSpaceBusting
-                = source.MayParseValue("narvalo:enableWhiteSpaceBusting", _ => MayParse.ToBoolean(_, BooleanStyles.Literal))
+                = source.ParseValue("narvalo:enableWhiteSpaceBusting", _ => ParseTo.NullableBoolean(_, BooleanStyles.Literal))
                     .ValueOrElse(DefaultEnableWhiteSpaceBusting_);
         }
     }

@@ -12,6 +12,13 @@
             return String.Format(CultureInfo.CurrentCulture, format, args == null ? arg0 : GetArguments_(arg0, args));
         }
 
+        public static string InvariantCulture(string format, object arg0, params object[] args)
+        {
+            Require.NotNull(arg0, "arg0");
+
+            return String.Format(CultureInfo.InvariantCulture, format, args == null ? arg0 : GetArguments_(arg0, args));
+        }
+
         static object[] GetArguments_(object arg0, params object[] args)
         {
             DebugCheck.NotNull(args);

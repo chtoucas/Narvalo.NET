@@ -9,12 +9,14 @@
     public class AbsoluteUriValidator : ConfigurationValidatorBase
     {
         /// <summary />
+        /// <see cref="ConfigurationValidatorBase.ConfigurationValidatorBase.CanValidate"/>
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);
         }
 
         /// <summary />
+        /// <see cref="ConfigurationValidatorBase.ConfigurationValidatorBase.Validate"/>
         public override void Validate(object value)
         {
             string uriString = (string)value;

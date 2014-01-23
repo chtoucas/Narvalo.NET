@@ -2,8 +2,6 @@
 {
     using System;
     using System.Web;
-    using Narvalo.Fx;
-    using Narvalo.Web.Configuration;
 
     public class FacebookContext
     {
@@ -54,8 +52,9 @@
 
         public static FacebookContext ResolveContext(HttpContextBase httpContext, string appId, string appSecret)
         {
-            return FacebookCookie.MayGet(httpContext, appId, appSecret)
-                .Match(_ => new FacebookContext(_), AnonymousContext_);
+            var cookie = FacebookCookie.Create(httpContext, appId, appSecret);
+
+            return cookie.HasValue ? new FacebookContext(cookie.Value) : AnonymousContext_;
         }
 
         //static FacebookContext GetCurrentContext(HttpContextBase httpContext)

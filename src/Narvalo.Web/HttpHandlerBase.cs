@@ -3,6 +3,7 @@
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
+    using Narvalo.Fx;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {
@@ -32,7 +33,7 @@
         {
             DebugCheck.NotNull(request);
 
-            var httpVerb = MayParse.ToEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */);
+            var httpVerb = ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */);
 
             return httpVerb.Map(_ => AcceptedVerbs.HasFlag(_)).ValueOrElse(false);
         }

@@ -288,7 +288,7 @@
                 // Arrange
                 int result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => TryConvert.ToEnum<int>(1, out result));
+                Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<int>(1, out result));
             }
 
             [Fact]
@@ -297,7 +297,7 @@
                 // Arrange
                 StructStub_ result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => TryConvert.ToEnum<StructStub_>(1, out result));
+                Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<StructStub_>(1, out result));
             }
 
             #endregion
@@ -310,7 +310,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = TryConvert.ToEnum<EnumStub_>(1, out result);
+                var succeed = TryConvertTo.Enum<EnumStub_>(1, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -322,7 +322,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = TryConvert.ToEnum<EnumFlagStub_>(1 << 0, out result);
+                var succeed = TryConvertTo.Enum<EnumFlagStub_>(1 << 0, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
@@ -338,7 +338,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = TryConvert.ToEnum<EnumStub_>(2, out result);
+                var succeed = TryConvertTo.Enum<EnumStub_>(2, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
