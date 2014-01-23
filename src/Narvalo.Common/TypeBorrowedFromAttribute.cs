@@ -16,7 +16,6 @@
             _genuineName = genuineName;
         }
 
-
         public string GenuineName
         {
             get { return _genuineName; }
