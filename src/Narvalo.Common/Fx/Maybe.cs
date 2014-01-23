@@ -106,13 +106,13 @@
 
         //// Promote
 
-        public static Func<Maybe<TSource>, Maybe<TResult>> 
+        public static Func<Maybe<TSource>, Maybe<TResult>>
             Promote<TSource, TResult>(Func<TSource, TResult> fun)
         {
             return m => Lift(fun, m);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>> 
+        public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Promote<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
             return (m1, m2) => Lift(fun, m1, m2);
@@ -130,7 +130,7 @@
             return (m1, m2, m3, m4) => Lift(fun, m1, m2, m3, m4);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>> 
+        public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Promote<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> fun)
         {
             return (m1, m2, m3, m4, m5) => Lift(fun, m1, m2, m3, m4, m5);

@@ -14,7 +14,7 @@
         bool _disposed = false;
         int _failureCount = 0;
         Timer _resetTimer;
-        CircuitBreakerState _state = CircuitBreakerState.Closed;
+        CircuitBreakerState _currentState = CircuitBreakerState.Closed;
 
         public CircuitBreaker(int threshold, TimeSpan resetInterval)
         {
@@ -45,9 +45,9 @@
             get { return 100 * (Threshold - FailureCount) / Threshold; }
         }
 
-        public CircuitBreakerState CurrentState { get { return _state; } private set { _state = value; } }
+        public CircuitBreakerState CurrentState { get { return _currentState; } }
 
-        public int FailureCount { get { return _failureCount; } private set { _failureCount = value; } }
+        public int FailureCount { get { return _failureCount; } }
 
         public bool IsClosed { get { return CurrentState == CircuitBreakerState.Closed; } }
 
@@ -64,8 +64,8 @@
         public void Reset()
         {
             StopTimer();
-            SetState(CircuitBreakerState.Closed);
-            FailureCount = 0;
+            SetState_(CircuitBreakerState.Closed);
+            _failureCount = 0;
         }
 
         #region IBarrier
@@ -76,7 +76,7 @@
         {
             Require.NotNull(action, "action");
 
-            ThrowIfDisposed();
+            ThrowIfDisposed_();
 
             if (!CanExecute) {
                 throw new CircuitOpenException();
@@ -89,11 +89,11 @@
                 throw;
             }
             catch {
-                RecordFailure();
+                RecordFailure_();
                 throw;
             }
 
-            RecordSuccess();
+            RecordSuccess_();
         }
 
         #endregion
@@ -130,7 +130,7 @@
                 throw new InvalidOperationException();
             }
 
-            SetState(CircuitBreakerState.Closed);
+            SetState_(CircuitBreakerState.Closed);
 
             // FIXME: trop tard si _setState échoue.
             if (AutoReset) {
@@ -144,7 +144,7 @@
                 throw new InvalidOperationException();
             }
 
-            SetState(CircuitBreakerState.HalfOpen);
+            SetState_(CircuitBreakerState.HalfOpen);
 
             // FIXME: trop tard si _setState échoue.
             if (AutoReset) {
@@ -158,7 +158,7 @@
                 throw new InvalidOperationException();
             }
 
-            SetState(CircuitBreakerState.Open);
+            SetState_(CircuitBreakerState.Open);
 
             // FIXME: trop tard si _setState échoue.
             if (executing && AutoReset) {
@@ -233,11 +233,11 @@
 
         #region Membres privés.
 
-        private void RecordFailure()
+        void RecordFailure_()
         {
             if (FailureCount < _threshold) {
                 // Tant qu'on n'a pas atteint le seuil maximum d'erreurs, on incrémente le compteur.
-                FailureCount++;
+                _failureCount++;
             }
 
             bool openCircuit = CurrentState == CircuitBreakerState.HalfOpen
@@ -248,10 +248,10 @@
             }
         }
 
-        private void RecordSuccess()
+        void RecordSuccess_()
         {
             if (FailureCount > 0) {
-                FailureCount++;
+                _failureCount++;
             }
 
             if (IsHalfOpen) {
@@ -259,14 +259,14 @@
             }
         }
 
-        private void SetState(CircuitBreakerState newState)
+        void SetState_(CircuitBreakerState newState)
         {
             var lastState = CurrentState;
-            CurrentState = newState;
+            _currentState = newState;
             OnStateChanged(new CircuitBreakerStateChangedEventArgs(lastState, newState));
         }
 
-        private void ThrowIfDisposed()
+        void ThrowIfDisposed_()
         {
             if (_disposed) {
                 throw new ObjectDisposedException(typeof(CircuitBreaker).FullName);

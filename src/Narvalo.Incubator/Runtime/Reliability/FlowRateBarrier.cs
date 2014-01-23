@@ -78,7 +78,7 @@
             }
         }
 
-        private void ThrowIfDisposed()
+        void ThrowIfDisposed()
         {
             if (_disposed) {
                 throw new ObjectDisposedException(typeof(FlowRateBarrier).FullName);

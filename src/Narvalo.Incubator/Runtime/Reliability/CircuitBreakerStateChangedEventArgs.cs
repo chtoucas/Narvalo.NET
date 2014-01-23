@@ -4,11 +4,11 @@
 
     public class CircuitBreakerStateChangedEventArgs : EventArgs
     {
-        private readonly CircuitBreakerState _lastState;
-        private readonly CircuitBreakerState _newState;
+        readonly CircuitBreakerState _lastState;
+        readonly CircuitBreakerState _newState;
 
         public CircuitBreakerStateChangedEventArgs(
-            CircuitBreakerState lastState, 
+            CircuitBreakerState lastState,
             CircuitBreakerState newState)
         {
             _lastState = lastState;

@@ -17,7 +17,7 @@
             RecordRequest();
 
             try {
-                action();
+                action.Invoke();
             }
             catch (GuardException) {
                 throw;
@@ -37,34 +37,31 @@
         public long FailureCount
         {
             get { return _failureCount; }
-            private set { _failureCount = value; }
         }
 
         public long RequestCount
         {
             get { return _requestCount; }
-            private set { _requestCount = value; }
         }
 
         public long SuccessCount
         {
             get { return _successCount; }
-            private set { _successCount = value; }
         }
 
         public void RecordFailure()
         {
-            FailureCount++;
+            _failureCount++;
         }
 
         public void RecordRequest()
         {
-            RequestCount++;
+            _requestCount++;
         }
 
         public void RecordSuccess()
         {
-            SuccessCount++;
+            _successCount++;
         }
 
         #endregion

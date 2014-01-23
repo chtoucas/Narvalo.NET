@@ -67,7 +67,7 @@
             _closed = true;
         }
 
-        private void ThrowIfClosed()
+        void ThrowIfClosed()
         {
             if (_closed) {
                 throw new InvalidOperationException("XXX");

@@ -37,7 +37,7 @@
 
         public void Execute(Action action)
         {
-            ThrowIfDisposed();
+            ThrowIfDisposed_();
 
             if (_sem.Wait(_timeout)) {
                 try {
@@ -78,7 +78,7 @@
             }
         }
 
-        void ThrowIfDisposed()
+        void ThrowIfDisposed_()
         {
             if (_disposed) {
                 throw new ObjectDisposedException(typeof(ConcurrencyThrottle).FullName);
