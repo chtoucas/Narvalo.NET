@@ -6,8 +6,7 @@
 
     public static class StringManipIncubated
     {
-        [Alien(AlienSource.Informal,
-            Link = "http://stackoverflow.com/questions/249087/how-do-i-remove-diacritics-accents-from-a-string-in-net")]
+        // Cf. http://stackoverflow.com/questions/249087/how-do-i-remove-diacritics-accents-from-a-string-in-net
         public static string RemoveDiacritics(string value)
         {
             Require.NotNull(value, "value");

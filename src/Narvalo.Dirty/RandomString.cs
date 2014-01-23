@@ -7,8 +7,7 @@
     {
         const string Alphabet_ = "abcdefghijklmnopqrstuvwyxz";
 
-        [Alien(AlienSource.Informal,
-            Link = "http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters")]
+        // Cf. http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters
         public static string GenerateString(int size, Random rng)
         {
             var chars = new char[size];
@@ -20,8 +19,7 @@
             return new String(chars);
         }
 
-        [Alien(AlienSource.Informal,
-            Link = "http://www.bonf.net/2009/01/14/generating-random-unicode-strings-in-c/")]
+        // Cf. http://www.bonf.net/2009/01/14/generating-random-unicode-strings-in-c/
         public static string GenerateUnicodeString(int size, Random rng)
         {
             Require.GreaterThanOrEqualTo(size, 0, "size");

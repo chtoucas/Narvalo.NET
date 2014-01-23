@@ -9,8 +9,7 @@
 
     public static class RouteCollectionExtensions
     {
-        [Alien(AlienSource.Informal,
-            Link = "http://www.make-awesome.com/2012/07/perfectionist-routing-in-asp-net-mvc/")]
+        // Cf. http://www.make-awesome.com/2012/07/perfectionist-routing-in-asp-net-mvc/
         public static void MapChildOnlyActionRoutesFrom(this RouteCollection routes, Assembly assembly)
         {
             var controllerTypes = assembly.GetTypes()

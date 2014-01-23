@@ -3,9 +3,7 @@
     using System;
     using System.ComponentModel;
 
-    [Alien(AlienSource.Library, 
-        GenuineName = "System.Reactive.IExceptionServices",
-        Link = "https://github.com/Reactive-Extensions/Rx.NET")]
+    [TypeBorrowedFrom("System.Reactive.IExceptionServices")]
     [EditorBrowsable(EditorBrowsableState.Never)]
     interface IExceptionServices
     {
