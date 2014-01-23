@@ -20,6 +20,7 @@
             return new String(arr);
         }
 
+        [SuppressMessage("Gendarme.Rules.Portability", "NewLineLiteralRule", Justification = "Sans cela la méthode ne remplirait pas sa fonction.")]
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, "value");

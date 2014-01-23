@@ -92,6 +92,7 @@
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Create.cs" />
+    <Compile Include="EnumStyles.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Either`2.Language.cs">
       <DependentUpon>Either`2.cs</DependentUpon>

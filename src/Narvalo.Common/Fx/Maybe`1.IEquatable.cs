@@ -34,6 +34,10 @@
         /// <summary />
         public override bool Equals(object obj)
         {
+            if (obj == null) {
+                return false;
+            }
+
             if (!_isSome && obj is Unit) {
                 return true;
             }

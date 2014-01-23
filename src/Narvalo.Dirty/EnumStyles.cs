@@ -1,9 +1,11 @@
 ﻿namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     [Flags]
     [Serializable]
+    [SuppressMessage("Gendarme.Rules.Design", "FlagsShouldNotDefineAZeroValueRule")]
     public enum EnumStyles
     {
         None = 0,

@@ -1,6 +1,7 @@
 ﻿namespace Narvalo
 {
     using System;
+    using System.Text;
 
     public static class Int64Encoder
     {
@@ -76,7 +77,7 @@
                 long r = value % FlickrBase58AlphabetLength_;
 
                 // REVIEW: On devrait peut-être utiliser un StringBuilder ?
-                result = FlickrBase58Alphabet_[r] + result;
+                result = FlickrBase58Alphabet_[r].ToString() + result;
                 value /= FlickrBase58AlphabetLength_;
             }
 
@@ -168,7 +169,7 @@
                 long r = value % alphabetLength;
 
                 // REVIEW: On devrait peut-être utiliser un StringBuilder ?
-                result = alphabet[r] + result;
+                result = alphabet[r].ToString() + result;
                 value /= alphabetLength;
             }
 

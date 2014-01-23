@@ -6,7 +6,6 @@
     [Serializable]
     public enum BooleanStyles
     {
-        None = 0,
         Literal = 1 << 0,
         Integer = 1 << 1,
         EmptyIsFalse = 1 << 2,

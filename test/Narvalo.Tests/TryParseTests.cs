@@ -21,29 +21,29 @@
                 Assert.Equal(value, " une chaîne quelconque ");
             }
 
-            [Fact]
-            public static void ReturnsFalseAndPicksDefaultBoolean_ForNullString()
-            {
-                // Arrange
-                bool result;
-                // Act
-                bool succeed = TryParseTo.Boolean(null, BooleanStyles.None, out result);
-                // Assert
-                Assert.False(succeed);
-                Assert.Equal(default(Boolean), result);
-            }
+            //[Fact]
+            //public static void ReturnsFalseAndPicksDefaultBoolean_ForNullString()
+            //{
+            //    // Arrange
+            //    bool result;
+            //    // Act
+            //    bool succeed = TryParseTo.Boolean(null, BooleanStyles.None, out result);
+            //    // Assert
+            //    Assert.False(succeed);
+            //    Assert.Equal(default(Boolean), result);
+            //}
 
-            [Fact]
-            public static void ReturnsFalseAndPicksDefaultBoolean_ForEmptyString()
-            {
-                // Arrange
-                bool result;
-                // Act
-                bool succeed = TryParseTo.Boolean(String.Empty, BooleanStyles.None, out result);
-                // Assert
-                Assert.False(succeed);
-                Assert.Equal(default(Boolean), result);
-            }
+            //[Fact]
+            //public static void ReturnsFalseAndPicksDefaultBoolean_ForEmptyString()
+            //{
+            //    // Arrange
+            //    bool result;
+            //    // Act
+            //    bool succeed = TryParseTo.Boolean(String.Empty, BooleanStyles.None, out result);
+            //    // Assert
+            //    Assert.False(succeed);
+            //    Assert.Equal(default(Boolean), result);
+            //}
 
             [Fact]
             public static void ReturnsTrueAndPicksFalse_ForEmptyString_WhenEmptyIsFalse()
