@@ -31,9 +31,7 @@
             return list;
         }
 
-        public static Maybe<T[]> Filter<T>(
-            T[] source, 
-            Func<T, Maybe<bool>> predicateM)
+        public static Maybe<T[]> Filter<T>(T[] source, Func<T, Maybe<bool>> predicateM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(predicateM, "predicateM");

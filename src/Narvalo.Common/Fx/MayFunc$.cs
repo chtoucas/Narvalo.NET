@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.MayFunc{T}"/>.
+    /// Fournit des méthodes d'extension pour Narvalo.Fx.Func&lt;Maybe&lt;T&gt;&gt;.
     /// </summary>
     public static class MayFuncExtensions
     {

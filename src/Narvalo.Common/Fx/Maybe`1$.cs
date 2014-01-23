@@ -12,15 +12,16 @@
 
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
         {
-            return @this.Match(_ => _, () => (T?)null);
+            // NB: Une manière plus compliquée, mais dans un style plus constructif, 
+            // d'écrire les choses :
+            // return @this.Match(_ => _, () => (T?)null);
+            return @this.IsSome ? @this.Value : (T?)null;
         }
 
         public static bool TrySet<T>(this Maybe<T> @this, out T value) where T : struct
         {
-            T? tmp = @this.ToNullable();
-
-            if (tmp.HasValue) {
-                value = tmp.Value;
+            if (@this.IsSome) {
+                value = @this.Value;
                 return true;
             }
             else {

@@ -18,37 +18,25 @@
             return Match(selector, defaultValueFactory.Invoke());
         }
 
+        //// SelectMany
+
+        public Maybe<TResult> SelectMany<TMiddle, TResult>(
+            Func<T, Maybe<TMiddle>> valueSelector,
+            Func<T, TMiddle, Maybe<TResult>> resultSelector)
+        {
+            Require.NotNull(valueSelector, "valueSelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            Maybe<Maybe<TResult>> result = Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+
+            return Maybe.Join(result);
+        }
+
         //// Then
 
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             return Bind(_ => other);
-        }
-
-        //// OnSome
-
-        public Maybe<T> OnSome(Action<T> action)
-        {
-            Require.NotNull(action, "action");
-
-            if (IsSome) {
-                action.Invoke(Value);
-            }
-
-            return this;
-        }
-
-        //// OnNone
-
-        public Maybe<T> OnNone(Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (IsNone) {
-                action.Invoke();
-            }
-
-            return this;
         }
 
         //// Filter
@@ -80,6 +68,32 @@
         public Maybe<Unit> Unless(bool predicate, Func<T, Maybe<Unit>> kun)
         {
             return When(!predicate, kun);
+        }
+
+        //// OnSome
+
+        public Maybe<T> OnSome(Action<T> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsSome) {
+                action.Invoke(Value);
+            }
+
+            return this;
+        }
+
+        //// OnNone
+
+        public Maybe<T> OnNone(Action action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsNone) {
+                action.Invoke();
+            }
+
+            return this;
         }
     }
 }

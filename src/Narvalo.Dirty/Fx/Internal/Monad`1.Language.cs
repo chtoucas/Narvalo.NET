@@ -4,6 +4,8 @@
 
     partial class Monad<T>
     {
+        //// SelectMany
+
         public Monad<TResult> SelectMany<TMiddle, TResult>(
             Kunc<T, TMiddle> valueSelector,
             Func<T, TMiddle, TResult> resultSelector)
@@ -14,10 +16,14 @@
             return Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
         }
 
+        //// Then
+
         public Monad<TResult> Then<TResult>(Monad<TResult> other)
         {
             return Bind(_ => other);
         }
+
+        //// Filter
 
         public Monad<T> Filter(Predicate<T> predicate)
         {
@@ -25,6 +31,8 @@
 
             return Map(_ => predicate(_)).Then(this);
         }
+
+        //// When
 
         public Monad<Unit> When(bool predicate, Kunc<Unit> kun)
         {
@@ -39,6 +47,8 @@
 
             return Bind(kun.When(predicate));
         }
+
+        //// Unless
 
         public Monad<Unit> Unless(bool predicate, Kunc<Unit> kun)
         {
