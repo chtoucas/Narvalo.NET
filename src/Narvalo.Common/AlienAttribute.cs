@@ -5,20 +5,32 @@
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
     public sealed class AlienAttribute : Attribute
     {
-        readonly string _origin;
+        readonly AlienSource _source;
 
+        string _link = String.Empty;
+        string _genuineName = String.Empty;
         string _remark = String.Empty;
 
-        public AlienAttribute(string origin)
+        public AlienAttribute(AlienSource source)
         {
-            Require.NotNullOrEmpty(origin, "origin");
-
-            _origin = origin;
+            _source = source;
         }
 
-        public string Origin
+        public AlienSource Source
         {
-            get { return _origin; }
+            get { return _source; }
+        }
+
+        public string GenuineName
+        {
+            get { return _genuineName; }
+            set { _genuineName = value; }
+        }
+
+        public string Link
+        {
+            get { return _link; }
+            set { _link = value; }
         }
 
         public string Remark

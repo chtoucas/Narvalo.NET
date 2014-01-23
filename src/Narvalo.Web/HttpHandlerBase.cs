@@ -33,9 +33,9 @@
         {
             DebugCheck.NotNull(request);
 
-            var httpVerb = ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */);
-
-            return httpVerb.Map(_ => AcceptedVerbs.HasFlag(_)).ValueOrElse(false);
+            return ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */)
+                .Map(_ => AcceptedVerbs.HasFlag(_))
+                .ValueOrElse(false);
         }
 
         protected virtual void HandleInvalidHttpMethod(HttpContext context)
