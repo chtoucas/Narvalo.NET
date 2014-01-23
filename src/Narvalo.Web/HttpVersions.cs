@@ -3,6 +3,7 @@
     using System;
 
     [Flags]
+    [Serializable]
     public enum HttpVersions
     {
         HttpV10 = 1 << 0,

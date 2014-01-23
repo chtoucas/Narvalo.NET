@@ -60,7 +60,7 @@
 
                 .ToString();
 
-            result = MultipleDashRegex_.Replace(StringManip.RemoveDiacritics(result), NormalizationChar_.ToString());
+            result = MultipleDashRegex_.Replace(StringManipIncubated.RemoveDiacritics(result), NormalizationChar_.ToString());
 
             return result.ToLowerInvariant();
         }

@@ -186,6 +186,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="RandomString.cs" />
+    <Compile Include="StringManip.cs" />
     <Compile Include="Web\Configuration\NarvaloWebSettings.cs" />
     <Compile Include="Web\Configuration\ParserFilterElement.cs" />
     <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />

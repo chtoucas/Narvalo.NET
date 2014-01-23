@@ -21,7 +21,7 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.Web;
 
-    public static partial class HttpResponseExtensions
+    public static class HttpResponseExtraExtensions
     {
         static readonly List<string> HeadersToRemove_ = new List<string> {
             "Server",

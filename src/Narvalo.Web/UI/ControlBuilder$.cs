@@ -12,7 +12,7 @@
 //   - GetSimplePropertyEntries() qui donne accès à la propriété interne SimplePropertyEntries ;
 //   - GetRootBuilder().
 // WARNING: Cette classe dépend de l'API non publique de ControlBuilder.
-    
+
 namespace Narvalo.Web.UI
 {
     using System;
