@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class TryParseTests
+    public static class TryParseToTests
     {
         #region > ToBoolean <
 

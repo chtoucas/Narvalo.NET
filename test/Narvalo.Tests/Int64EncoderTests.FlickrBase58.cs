@@ -5,7 +5,7 @@
     using Xunit;
     using Xunit.Extensions;
 
-    public partial class Int64ConvertTests 
+    public partial class Int64EncoderTests 
     {
         
         /// <summary>

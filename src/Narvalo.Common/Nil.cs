@@ -12,7 +12,7 @@
         Nil(string message)
         {
             _message = message;
-            _successful = message.Length > 0;
+            _successful = message.Length == 0;
         }
 
         public static Nil Success { get { return Success_; } }

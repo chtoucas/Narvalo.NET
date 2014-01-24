@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class TryConvertTests
+    public static class TryConvertToTests
     {
         #region > Stubs <
 

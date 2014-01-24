@@ -19,7 +19,7 @@
             return Failure<TResult>.η(selector.Invoke(_exception));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention mathématique.")]
         internal static Failure<T> η(T exception)
         {
             Require.NotNull(exception, "exception");

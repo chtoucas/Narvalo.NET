@@ -19,7 +19,7 @@
             return Identity.Create(selector.Invoke(Value));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention mathématique.")]
         internal static Identity<T> η(T exception)
         {
             Require.NotNull(exception, "exception");

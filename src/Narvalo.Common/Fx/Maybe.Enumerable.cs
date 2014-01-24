@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    // TODO: Déplacer ces méthodes dans Narvalo.Linq.
     public static partial class Maybe
     {
         public static Maybe<IEnumerable<TResult>> Collect<TSource, TResult>(

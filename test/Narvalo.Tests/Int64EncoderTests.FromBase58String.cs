@@ -4,7 +4,7 @@
 	using Xunit;
 	using Xunit.Extensions;
 	
-	public partial class Int64ConvertTests {
+	public partial class Int64EncoderTests {
         [Fact(DisplayName = "Int64Encoder.FromBase58String() null throws.")]
         public void Decode_Null_Throws() {
             // Act & Assert

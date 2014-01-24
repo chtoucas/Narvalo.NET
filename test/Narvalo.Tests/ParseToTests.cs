@@ -3,9 +3,9 @@
     using System;
     using Xunit;
 
-    public static class ParseTests
+    public static class ParseToTests
     {
-        #region > Stubs <
+        #region Stubs
 
         struct StructStub_ { }
 
@@ -35,11 +35,11 @@
 
         #endregion
 
-        #region > ToEnum <
+        #region Enum
 
         public static class ToEnum
         {
-            #region > Validation du paramètre générique <
+            //// Validation du paramètre générique
 
             [Fact]
             public static void ThrowsArgumentException_WithInt32()
@@ -55,9 +55,7 @@
                 Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
             }
 
-            #endregion
-
-            #region > Analyse d'une valeur valide <
+            //// Analyse d'une valeur valide
 
             [Fact]
             public static void ReturnsCorrectMember_ForActualValue()
@@ -85,9 +83,7 @@
                     () => ParseTo.Enum<EnumStub_>("actualvalue", false /* ignoreCase */));
             }
 
-            #endregion
-
-            #region > Analyse d'une valeur invalide <
+            //// Analyse d'une valeur invalide
 
             [Fact]
             public static void ThrowsArgumentException_ForInvalidValue()
@@ -112,8 +108,6 @@
                 Assert.Throws<ArgumentException>(
                     () => ParseTo.Enum<EnumStub_>("invalidvalue", false /* ignoreCase */));
             }
-
-            #endregion
         }
 
         #endregion

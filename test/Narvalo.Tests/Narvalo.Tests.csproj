@@ -130,11 +130,11 @@
     <Compile Include="..\..\src\Common\Microsoft\Web\UnitTestUtil\MvcHelper.cs">
       <Link>_Aliens\Microsoft.Web.UnitTestUtil\MvcHelper.cs</Link>
     </Compile>
-    <Compile Include="ParseTests.cs" />
-    <Compile Include="TryParseTests.cs" />
-    <Compile Include="TryConvertTests.cs" />
+    <Compile Include="ParseToTests.cs" />
+    <Compile Include="TryParseToTests.cs" />
+    <Compile Include="TryConvertToTests.cs" />
     <Compile Include="Fx\MaybeTests.cs" />
-    <Compile Include="Int64ConvertTests.FlickrBase58.cs" />
+    <Compile Include="Int64EncoderTests.FlickrBase58.cs" />
     <Compile Include="Int64EncoderTests.cs" />
     <Compile Include="Int64EncoderTests.FromBase58String.cs" />
     <Compile Include="Int64EncoderTests.ToBase58String.cs" />

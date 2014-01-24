@@ -4,6 +4,8 @@
 
     public partial struct Maybe<T>
     {
+        #region Standard
+
         //// Match
 
         public TResult Match<TResult>(Func<T, TResult> selector, TResult defaultValue)
@@ -70,6 +72,8 @@
             return When(!predicate, kun);
         }
 
+        #endregion
+
         //// OnSome
 
         public Maybe<T> OnSome(Action<T> action)
@@ -94,6 +98,20 @@
             }
 
             return this;
+        }
+
+        //// TrySet
+
+        public bool TrySet(out T value)
+        {
+            if (IsSome) {
+                value = Value;
+                return true;
+            }
+            else {
+                value = default(T);
+                return false;
+            }
         }
     }
 }

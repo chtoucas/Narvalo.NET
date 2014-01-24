@@ -20,7 +20,7 @@
             return !Successful ? Outcome<TResult>.η(Exception) : Outcome<TResult>.η(selector.Invoke(Value));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention mathématique.")]
         internal static Outcome<T> η(Exception exception)
         {
             Require.NotNull(exception, "exception");
@@ -28,7 +28,7 @@
             return new Outcome<T>(exception);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention utilisée en mathématiques")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Convention mathématique.")]
         internal static Outcome<T> η(T value)
         {
             if (value == null) {
