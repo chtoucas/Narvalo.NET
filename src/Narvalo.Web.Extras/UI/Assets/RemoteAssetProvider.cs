@@ -5,7 +5,7 @@
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
     using Narvalo;
-    using Narvalo.Linq;
+    using Narvalo.Collections;
 
     public class RemoteAssetProvider : AssetProviderBase
     {

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using Narvalo;
-    using Narvalo.Linq;
+    using Narvalo.Collections;
 
     public static class NameValueCollectionExtensions
     {

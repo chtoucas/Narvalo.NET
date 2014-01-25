@@ -10,7 +10,7 @@
     public static class SectionManager
     {
         /// <summary>
-        /// Récupére une section pour la configuration par défaut de l'application courante.
+        /// Récupère une section pour la configuration par défaut de l'application courante.
         /// </summary>
         /// <typeparam name="T">La classe représentant la section de configuration.</typeparam>
         /// <param name="sectionName">Nom de la section.</param>

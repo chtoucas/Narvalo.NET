@@ -5,6 +5,27 @@
 
     public static class MaybeTests
     {
+        public static class Equality
+        {
+            [Fact]
+            public static void WithNone_ForNull_ReturnsFalse()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.False(option.Equals(null));
+            }
+
+            [Fact]
+            public static void WithNone_ForUnit_ReturnsTrue()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.True(option.Equals(Unit.Single));
+            }
+        }
+
         public static class Create
         {
             [Fact]
@@ -13,7 +34,7 @@
                 // Arrange
                 int value = 1290;
                 // Act
-                Maybe<int> result = Maybe.Create<int>(value);
+                Maybe<int> result = Maybe.Create(value);
                 // Assert
                 Assert.True(result.IsSome);
                 Assert.Equal(value, result.Value);
@@ -25,7 +46,7 @@
                 // Arrange
                 int? value = 1718;
                 // Act
-                Maybe<int> result = Maybe.Create<int>(value);
+                Maybe<int> result = Maybe.Create(value);
                 // Assert
                 Assert.True(result.IsSome);
                 Assert.Equal(value.Value, result.Value);
@@ -48,7 +69,7 @@
                 // Arrange
                 string value = null;
                 // Act
-                Maybe<string> result = Maybe.Create<string>(value);
+                Maybe<string> result = Maybe.Create(value);
                 // Assert
                 Assert.True(result.IsNone);
             }

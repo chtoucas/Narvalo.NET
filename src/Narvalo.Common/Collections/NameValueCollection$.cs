@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Linq
+﻿namespace Narvalo.Collections
 {
     using System;
     using System.Collections.Specialized;

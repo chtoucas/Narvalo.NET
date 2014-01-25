@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Linq
+﻿namespace Narvalo.Collections
 {
     using System.Collections.Generic;
     using Narvalo.Fx;

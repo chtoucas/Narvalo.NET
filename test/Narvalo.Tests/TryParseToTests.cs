@@ -5,8 +5,6 @@
 
     public static class TryParseToTests
     {
-        #region > ToBoolean <
-
         public static class ToBoolean
         {
             [Fact]
@@ -173,7 +171,5 @@
             //        () => MayParse.ToBoolean("on", BooleanStyles.HtmlInput));
             //}
         }
-
-        #endregion
     }
 }

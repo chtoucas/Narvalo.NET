@@ -14,6 +14,10 @@
     <ProjectsToBuild Include="$(_RootDir)Narvalo.sln">
       <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
     </ProjectsToBuild>
+
+    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
+      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+    </SourcesToAnalyze>
   </ItemGroup>
 
   <Target Name="RestorePackages">
@@ -31,13 +35,17 @@
     <RemoveDir Directories="$(_BuildDir);$(_PackageDir)" />
   </Target>
 
+  <Target Name="StyleCop" Condition="'$(AnalyzeSource)' == 'true'">
+    <MSBuild Projects="@(SourcesToAnalyze)" Targets="StyleCop" StopOnFirstFailure="true" />
+  </Target>
+
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" StopOnFirstFailure="true">
       <Output ItemName="_BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
   <Target Name="BeforeBuild" BeforeTargets="Build"
-          DependsOnTargets="EmitProjectSolution;RestorePackages" />
+          DependsOnTargets="EmitProjectSolution;RestorePackages;StyleCop" />
   <Target Name="AfterBuild" AfterTargets="Build" DependsOnTargets="$(AfterBuildDependsOnTarget)" />
 
   <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
@@ -47,7 +55,7 @@
   <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
 
   <ItemGroup>
-    <!-- FIXME <_AfterBuildTargets Include="Verify" /> -->
+    <_AfterBuildTargets Include="Verify" Condition="'$(Analyze)' == 'true'"  />
     <_AfterBuildTargets Include="RunUnitTests" Condition="'$(RunTests)' == 'true'" />
   </ItemGroup>
 

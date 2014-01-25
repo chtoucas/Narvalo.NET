@@ -10,20 +10,20 @@
 
     public partial class CircuitBreakerTests
     {
-        private static readonly IList<Type> RetryableExceptions
-            = new List<Type>(1) { typeof(RetryableException), };
+        static readonly IList<Type> RetryableExceptions
+           = new List<Type>(1) { typeof(RetryableException), };
 
-        private static CircuitBreaker NewCircuitBreaker()
+        static CircuitBreaker NewCircuitBreaker()
         {
             return new CircuitBreaker(1, TimeSpan.Zero);
         }
 
-        private static CircuitBreaker NewCircuitBreaker(int threshold)
+        static CircuitBreaker NewCircuitBreaker(int threshold)
         {
             return new CircuitBreaker(threshold, TimeSpan.MaxValue);
         }
 
-        private static RetryPolicy NewRetryPolicy(int maxRetries)
+        static RetryPolicy NewRetryPolicy(int maxRetries)
         {
             return new RetryPolicy(maxRetries, TimeSpan.Zero, RetryableExceptions);
         }

@@ -5,9 +5,8 @@
     using Xunit;
     using Xunit.Extensions;
 
-    public partial class Int64EncoderTests 
+    public static partial class Int64EncoderTests 
     {
-        
         /// <summary>
         /// Test data borrowed from the Encode-Base58 Perl module.
         /// </summary>
@@ -522,21 +521,21 @@
         }
         
         [Fact(DisplayName = "Int64Encoder.ToFlickrBase58String() a negative long throws")]
-        public void ToFlickrBase58String_NegativeValue_Throws()
+        public static void ToFlickrBase58String_NegativeValue_Throws()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(delegate { Int64Encoder.ToFlickrBase58String(-1); });
         }
 
         [Fact(DisplayName = "Int64Encoder.FromFlickrBase58String() null throws")]
-        public void FromFlickrBase58String_Null_Throws()
+        public static void FromFlickrBase58String_Null_Throws()
         {
             // Act & Assert
             Assert.Throws<ArgumentNullException>(delegate { Int64Encoder.FromFlickrBase58String(null); });
         }
 
         [Fact(DisplayName = "Int64Encoder ToFlickrBase58String() then FromFlickrBase58String() is invariant")]
-        public void RoundTripFlickrBase58String_Succeeds()
+        public static void RoundTripFlickrBase58String_Succeeds()
         {
             // Arrange
             long value = 3471391110;
@@ -546,7 +545,7 @@
 
         [Theory(DisplayName = "Int64Encoder.ToFlickrBase58String() on sample data")]
         [PropertyData("FlickrBase58SampleData")]
-        public void ToFlickrBase58String_SampleData_Succeeds(string expectedValue, long value) 
+        public static void ToFlickrBase58String_SampleData_Succeeds(string expectedValue, long value) 
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
@@ -554,7 +553,7 @@
 
         [Theory(DisplayName = "Int64Encoder.FromFlickrBase58String() on sample data")]
         [PropertyData("FlickrBase58SampleData")]
-        public void FromFlickrBase58String_SampleData_Succeeds(string value, long expectedValue) 
+        public static void FromFlickrBase58String_SampleData_Succeeds(string value, long expectedValue) 
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));

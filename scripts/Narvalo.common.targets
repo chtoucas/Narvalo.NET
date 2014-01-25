@@ -17,6 +17,7 @@
 
     <RunTests Condition="'$(RunTests)' != 'false'">true</RunTests>
     <Analyze Condition="'$(Analyze)' != 'false'">true</Analyze>
+    <AnalyzeSource Condition="'$(AnalyzeSource)' != 'false'">true</AnalyzeSource>
   </PropertyGroup>
 
   <PropertyGroup>

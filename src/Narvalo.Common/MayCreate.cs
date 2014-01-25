@@ -8,8 +8,7 @@
 
     public static class MayCreate
     {
-        public static Maybe<IPAddress> IPAddress(string value)
-        {
+        public static Maybe<IPAddress> IPAddress(string value) {
             return MayCreateCore(
                 value,
                 (string val, out IPAddress result) => System.Net.IPAddress.TryParse(val, out result));
