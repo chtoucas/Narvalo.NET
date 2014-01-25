@@ -18,6 +18,12 @@
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
       <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
     </SourcesToAnalyze>
+    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web\Narvalo.Web.csproj">
+      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+    </SourcesToAnalyze>
+    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web.Extras\Narvalo.Web.Extras.csproj">
+      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+    </SourcesToAnalyze>
   </ItemGroup>
 
   <Target Name="RestorePackages">

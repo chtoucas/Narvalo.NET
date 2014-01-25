@@ -251,7 +251,7 @@
         void RecordSuccess_()
         {
             if (FailureCount > 0) {
-                _failureCount++;
+                _failureCount--;
             }
 
             if (IsHalfOpen) {

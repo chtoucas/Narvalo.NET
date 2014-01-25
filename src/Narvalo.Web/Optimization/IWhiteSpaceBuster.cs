@@ -14,12 +14,12 @@
         /// Par exemple, on pourrait avoir le code suivant :
         /// <code>
         /// bla bla
-        /// <%= Url.Encode("~/") %>
+        /// &lt;%= Url.Encode("~/") %&gt;
         /// </code>,
         /// mais rien ne nous dit que nous allons recevoir ce fragment d'un seul bloc, ainsi si
         /// on n'y fait pas attention on peut remplacer les sauts de ligne par des espaces blancs
         /// et aussi décider de supprimer tous les espaces en début et fin de ligne. Cela ne marchera pas
-        /// car on pourrait obtenir au final : <code>bla bla<%= Url.Encode("~/") %>/code>.
+        /// car on pourrait obtenir au final : <code>bla bla&lt;%= Url.Encode("~/") %&gt;</code>.
         /// </remarks>
         /// <param name="value">La chaîne de caractères à nettoyer.</param>
         /// <returns>La chaîne de caractères nettoyée.</returns>

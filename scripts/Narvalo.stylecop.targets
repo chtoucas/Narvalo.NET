@@ -3,6 +3,6 @@
   <Import Project=".\stylecop.targets" />
 
   <Target Name="BeforeStyleCop" BeforeTargets="StyleCop">
-    <Message Text="Running StyleCop Analysis..." Importance="High" />
+    <Message Text="Running StyleCop Analysis on $(ProjectName)..." Importance="High" />
   </Target>
 </Project>
