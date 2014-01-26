@@ -1,6 +1,7 @@
 ﻿namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
     using Xunit;
 
     public static class ParseToTests
@@ -35,11 +36,11 @@
 
         #endregion
 
-        #region Enum
-
         public static class ToEnum
         {
             //// Validation du paramètre générique
+
+#if !DEBUG
 
             [Fact]
             public static void ThrowsArgumentException_WithInt32()
@@ -49,11 +50,14 @@
             }
 
             [Fact]
+            [Conditional("RELEASE")]
             public static void ThrowsArgumentException_WithStruct()
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
             }
+
+#endif
 
             //// Analyse d'une valeur valide
 
@@ -109,7 +113,5 @@
                     () => ParseTo.Enum<EnumStub_>("invalidvalue", false /* ignoreCase */));
             }
         }
-
-        #endregion
     }
 }

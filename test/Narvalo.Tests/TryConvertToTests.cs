@@ -276,11 +276,10 @@
 
 #endif
 
-        #region > ToEnum<T> <
-
         public static class ToEnum
         {
             #region > Validation du paramètre générique <
+#if !DEBUG
 
             [Fact]
             public static void ThrowsArgumentException_WithInt32()
@@ -300,6 +299,7 @@
                 Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<StructStub_>(1, out result));
             }
 
+#endif
             #endregion
 
             #region > Conversion d'une valeur valide <
@@ -346,7 +346,5 @@
 
             #endregion
         }
-
-        #endregion
     }
 }

@@ -1,16 +1,21 @@
-﻿namespace Microsoft.Web.UnitTestUtil {
-    using System;
-    using System.Collections;
-    using System.IO;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Moq;
+﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-    public static class MvcHelper {
+using System;
+using System.Collections;
+using System.IO;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Moq;
+
+namespace Microsoft.Web.UnitTestUtil
+{
+    public static class MvcHelper
+    {
         public const string AppPathModifier = "/$(SESSION)";
 
-        public static HtmlHelper<object> GetHtmlHelper() {
+        public static HtmlHelper<object> GetHtmlHelper()
+        {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null);
             RouteCollection rt = new RouteCollection();
             rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
@@ -21,7 +26,8 @@
 
             ViewDataDictionary vdd = new ViewDataDictionary();
 
-            ViewContext viewContext = new ViewContext() {
+            ViewContext viewContext = new ViewContext()
+            {
                 HttpContext = httpcontext,
                 RouteData = rd,
                 ViewData = vdd
@@ -33,7 +39,8 @@
             return htmlHelper;
         }
 
-        public static HtmlHelper GetHtmlHelper(string protocol, int port) {
+        public static HtmlHelper GetHtmlHelper(string protocol, int port)
+        {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port);
             RouteCollection rt = new RouteCollection();
             rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
@@ -55,7 +62,8 @@
             return htmlHelper;
         }
 
-        public static HtmlHelper GetHtmlHelper(ViewDataDictionary viewData) {
+        public static HtmlHelper GetHtmlHelper(ViewDataDictionary viewData)
+        {
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { CallBase = true };
             mockViewContext.Setup(c => c.ViewData).Returns(viewData);
             mockViewContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
@@ -63,7 +71,8 @@
             return new HtmlHelper(mockViewContext.Object, container);
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelper<TModel>(ViewDataDictionary<TModel> viewData) {
+        public static HtmlHelper<TModel> GetHtmlHelper<TModel>(ViewDataDictionary<TModel> viewData)
+        {
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { CallBase = true };
             mockViewContext.Setup(c => c.ViewData).Returns(viewData);
             mockViewContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
@@ -71,11 +80,13 @@
             return new HtmlHelper<TModel>(mockViewContext.Object, container);
         }
 
-        public static HtmlHelper GetHtmlHelperWithPath(ViewDataDictionary viewData) {
+        public static HtmlHelper GetHtmlHelperWithPath(ViewDataDictionary viewData)
+        {
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
-        public static HtmlHelper GetHtmlHelperWithPath(ViewDataDictionary viewData, string appPath) {
+        public static HtmlHelper GetHtmlHelperWithPath(ViewDataDictionary viewData, string appPath)
+        {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
             mockContainer.Setup(c => c.ViewData).Returns(viewData);
@@ -83,7 +94,8 @@
             return new HtmlHelper(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData, string appPath) {
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData, string appPath)
+        {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
             mockContainer.Setup(c => c.ViewData).Returns(viewData);
@@ -91,15 +103,18 @@
             return new HtmlHelper<TModel>(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData) {
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData)
+        {
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
-        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod, string protocol, int port) {
+        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod, string protocol, int port)
+        {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
 
             if (!String.IsNullOrEmpty(appPath)) {
                 mockHttpContext.Setup(o => o.Request.ApplicationPath).Returns(appPath);
+                mockHttpContext.Setup(o => o.Request.RawUrl).Returns(appPath);
             }
             if (!String.IsNullOrEmpty(requestPath)) {
                 mockHttpContext.Setup(o => o.Request.AppRelativeCurrentExecutionFilePath).Returns(requestPath);
@@ -126,12 +141,14 @@
             return mockHttpContext.Object;
         }
 
-        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod) {
+        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod)
+        {
             return GetHttpContext(appPath, requestPath, httpMethod, Uri.UriSchemeHttp.ToString(), -1);
         }
 
-        public static ViewContext GetViewContextWithPath(string appPath, ViewDataDictionary viewData) {
-            HttpContextBase httpContext = MvcHelper.GetHttpContext(appPath, "/request", "GET");
+        public static ViewContext GetViewContextWithPath(string appPath, ViewDataDictionary viewData)
+        {
+            HttpContextBase httpContext = GetHttpContext(appPath, "/request", "GET");
 
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { DefaultValue = DefaultValue.Mock };
             mockViewContext.Setup(c => c.HttpContext).Returns(httpContext);
@@ -140,11 +157,13 @@
             return mockViewContext.Object;
         }
 
-        public static ViewContext GetViewContextWithPath(ViewDataDictionary viewData) {
+        public static ViewContext GetViewContextWithPath(ViewDataDictionary viewData)
+        {
             return GetViewContextWithPath("/", viewData);
         }
 
-        public static IViewDataContainer GetViewDataContainer(ViewDataDictionary viewData) {
+        public static IViewDataContainer GetViewDataContainer(ViewDataDictionary viewData)
+        {
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
             mockContainer.Setup(c => c.ViewData).Returns(viewData);
             return mockContainer.Object;

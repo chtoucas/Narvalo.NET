@@ -82,20 +82,20 @@ namespace Narvalo.Data
             return @this.GetNullableBoolean(@this.GetOrdinal(name));
         }
 
-        public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlBoolean(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlBoolean(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetBoolean(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetBoolean(@this.GetOrdinal(name));
+        //}
 
         //// Byte
 
@@ -140,20 +140,20 @@ namespace Narvalo.Data
             return @this.GetNullableByte(@this.GetOrdinal(name));
         }
 
-        public static Maybe<byte> MayGetByte(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<byte> MayGetByte(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlByte(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlByte(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<byte> MayGetByte(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<byte> MayGetByte(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetByte(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetByte(@this.GetOrdinal(name));
+        //}
 
         //// Byte[]
 
@@ -232,20 +232,20 @@ namespace Narvalo.Data
             return @this.GetNullableDateTime(@this.GetOrdinal(name));
         }
 
-        public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlDateTime(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlDateTime(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetDateTime(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetDateTime(@this.GetOrdinal(name));
+        //}
 
         //// Decimal
 
@@ -290,20 +290,20 @@ namespace Narvalo.Data
             return @this.GetNullableDecimal(@this.GetOrdinal(name));
         }
 
-        public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlDecimal(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlDecimal(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetDecimal(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetDecimal(@this.GetOrdinal(name));
+        //}
 
         //// Double
 
@@ -348,20 +348,20 @@ namespace Narvalo.Data
             return @this.GetNullableDouble(@this.GetOrdinal(name));
         }
 
-        public static Maybe<double> MayGetDouble(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<double> MayGetDouble(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlDouble(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlDouble(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<double> MayGetDouble(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<double> MayGetDouble(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetDouble(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetDouble(@this.GetOrdinal(name));
+        //}
 
         //// Guid
 
@@ -406,20 +406,20 @@ namespace Narvalo.Data
             return @this.GetNullableGuid(@this.GetOrdinal(name));
         }
 
-        public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlGuid(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlGuid(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetGuid(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetGuid(@this.GetOrdinal(name));
+        //}
 
         //// Int16
 
@@ -464,20 +464,20 @@ namespace Narvalo.Data
             return @this.GetNullableInt16(@this.GetOrdinal(name));
         }
 
-        public static Maybe<short> MayGetInt16(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<short> MayGetInt16(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlInt16(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlInt16(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<short> MayGetInt16(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<short> MayGetInt16(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetInt16(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetInt16(@this.GetOrdinal(name));
+        //}
 
         //// Int32
 
@@ -522,20 +522,20 @@ namespace Narvalo.Data
             return @this.GetNullableInt32(@this.GetOrdinal(name));
         }
 
-        public static Maybe<int> MayGetInt32(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<int> MayGetInt32(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlInt32(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlInt32(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<int> MayGetInt32(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<int> MayGetInt32(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetInt32(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetInt32(@this.GetOrdinal(name));
+        //}
 
         //// Int64
 
@@ -578,20 +578,20 @@ namespace Narvalo.Data
             return @this.GetNullableInt64(@this.GetOrdinal(name));
         }
 
-        public static Maybe<long> MayGetInt64(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<long> MayGetInt64(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlInt64(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlInt64(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<long> MayGetInt64(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<long> MayGetInt64(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetInt64(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetInt64(@this.GetOrdinal(name));
+        //}
 
         //// Money
 
@@ -628,20 +628,20 @@ namespace Narvalo.Data
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
 
-        public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
+        //public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, int ordinal)
+        //{
+        //    Require.Object(@this);
 
-            return @this.GetSqlMoney(ordinal).ToMaybe();
-        }
+        //    return @this.GetSqlMoney(ordinal).ToMaybe();
+        //}
 
-        public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
+        //public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, string name)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNullOrEmpty(name, "name");
 
-            return @this.MayGetMoney(@this.GetOrdinal(name));
-        }
+        //    return @this.MayGetMoney(@this.GetOrdinal(name));
+        //}
 
         //// String
 
