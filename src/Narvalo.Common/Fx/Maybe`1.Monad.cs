@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public partial struct Maybe<T>
+    public partial class Maybe<T>
     {
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> kun)
         {

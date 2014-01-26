@@ -4,8 +4,9 @@
 
     public static partial class Maybe
     {
-        // REVIEW: Maybe<Unit>.None ?
-        public static readonly Maybe<Unit> Unit = default(Maybe<Narvalo.Fx.Unit>);
+        static readonly Maybe<Unit> Unit_ = Maybe<Unit>.None;
+
+        public static Maybe<Unit> Unit { get { return Unit_; } }
 
         //// Create
 

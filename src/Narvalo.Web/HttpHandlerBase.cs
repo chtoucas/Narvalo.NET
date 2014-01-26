@@ -35,7 +35,7 @@
 
             return ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */)
                 .Map(_ => AcceptedVerbs.HasFlag(_))
-                .ValueOrElse(false);
+                ?? false;
         }
 
         protected virtual void HandleInvalidHttpMethod(HttpContext context)

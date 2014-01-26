@@ -15,18 +15,17 @@
      * J'hésite encore concernant les deux points suivants.
      * 
      * ### Classe vs structure ###
-     * Il me semble que je devrais utiliser une classe à la place d'une structure.
      * 
-     * Arguments en faveur d'une structure :
-     * - C# garantit qu'une instance Maybe n'est jamais nulle, ce qui me semble être une bonne chose ici.
-     *   N'est-ce-pas, au départ, la raison d'exister de cette classe ?
+     * Arguments en faveur de l'utilisation d'une structure :
+     * C# garantit qu'une instance Maybe n'est jamais nulle, ce qui me semble être une bonne chose ici.
+     * N'est-ce-pas, au départ, la raison d'exister de cette classe ?
      * 
-     * Arguments en défaveur d'une structure :
-     * - une instance n'est pas immuable si `T` n'est pas de type valeur. Comme on construit cette classe 
-     *   principalement pour les types référence, on a un GROS problème ; 
+     * Arguments en défaveur de l'utilisation d'une structure :
+     * Une instance n'est pas immuable si `T` n'est pas de type valeur. Comme on construit cette classe 
+     * principalement pour les types référence, on a un GROS problème ; 
      *   
-     * Conclusion provisoire : le fait de créer une structure non immuable me semble être un argument très convainquant
-     * pour ne pas persister dans cette voie.
+     * Conclusion provisoire : 
+     * Créer une structure non immuable me semble être suffisamment dangereux pour ne pas choisir cette voie.
      *   
      * ### Ajouter une contrainte sur le type générique ###
      * Pour les types valeur, `T?` fournit une bien meilleure alternative.
@@ -36,13 +35,17 @@
      */
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Il ne s'agit pas réellement d'une collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
+    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
-        public static readonly Maybe<T> None = default(Maybe<T>);
+        static readonly Maybe<T> None_ = new Maybe<T>();
 
         readonly bool _isSome;
         readonly T _value;
+
+        Maybe()
+        {
+            _isSome = false;
+        }
 
         Maybe(T value)
         {
@@ -51,6 +54,9 @@
             _value = value;
             _isSome = true;
         }
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "Une version non générique n'améliorerait pas la compréhension de la méthode.")]
+        public static Maybe<T> None { get { return None_; } }
 
         public bool IsNone { get { return !_isSome; } }
 

@@ -8,7 +8,25 @@
         public static class Equality
         {
             [Fact]
-            public static void WithNone_ForNull_ReturnsFalse()
+            public static void Equals_WithNull_ForNull_ReturnsFalse()
+            {
+                // Arrange
+                var option = (Maybe<int>)null;
+                // Act & Assert
+                Assert.True(option == null);
+            }
+
+            [Fact]
+            public static void IndirectEquals_WithNone_ForNull_ReturnsFalse()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.False(option == null);
+            }
+
+            [Fact]
+            public static void Equals_WithNone_ForNull_ReturnsFalse()
             {
                 // Arrange
                 var option = Maybe<int>.None;
@@ -17,7 +35,7 @@
             }
 
             [Fact]
-            public static void WithNone_ForUnit_ReturnsTrue()
+            public static void Equals_WithNone_ForUnit_ReturnsTrue()
             {
                 // Arrange
                 var option = Maybe<int>.None;

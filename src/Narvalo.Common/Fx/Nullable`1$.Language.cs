@@ -10,7 +10,7 @@
             where T : struct
             where TResult : struct
         {
-            return @this.Map(selector).ValueOrElse(defaultValue);
+            return @this.Map(selector) ?? defaultValue;
         }
 
         public static TResult Match<T, TResult>(this T? @this, Func<T, TResult> selector, Func<TResult> defaultValueFactory)

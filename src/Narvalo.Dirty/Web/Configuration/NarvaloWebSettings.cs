@@ -62,7 +62,7 @@
         {
             _enableWhiteSpaceBusting
                 = source.ParseValue("narvalo:enableWhiteSpaceBusting", _ => ParseTo.NullableBoolean(_, BooleanStyles.Literal))
-                    .ValueOrElse(DefaultEnableWhiteSpaceBusting_);
+                    ?? DefaultEnableWhiteSpaceBusting_;
         }
     }
 }

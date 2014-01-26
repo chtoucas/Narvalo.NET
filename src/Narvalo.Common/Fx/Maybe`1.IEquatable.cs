@@ -2,42 +2,43 @@
 {
     using System.Collections.Generic;
 
-    public partial struct Maybe<T>
+    // FIXME: C'est incorrect.
+    public partial class Maybe<T>
     {
         /// <summary />
         public static bool operator ==(Maybe<T> left, T right)
         {
-            return left.Equals(right);
+            return !ReferenceEquals(left, null) || left.Equals(right);
         }
 
         /// <summary />
         public static bool operator ==(T left, Maybe<T> right)
         {
-            return left.Equals(right);
+            return !ReferenceEquals(left, null) && left.Equals(right);
         }
 
         /// <summary />
         public static bool operator ==(Maybe<T> left, Maybe<T> right)
         {
-            return left.Equals(right);
+            return !ReferenceEquals(left, null) && left.Equals(right);
         }
 
         /// <summary />
         public static bool operator !=(Maybe<T> left, T right)
         {
-            return !left.Equals(right);
+            return ReferenceEquals(left, null) || !left.Equals(right);
         }
 
         /// <summary />
         public static bool operator !=(T left, Maybe<T> right)
         {
-            return !left.Equals(right);
+            return ReferenceEquals(left, null) || !left.Equals(right);
         }
 
         /// <summary />
         public static bool operator !=(Maybe<T> left, Maybe<T> right)
         {
-            return !left.Equals(right);
+            return ReferenceEquals(left, null) || !left.Equals(right);
         }
 
         /// <summary />
@@ -67,7 +68,13 @@
         {
             Require.NotNull(comparer, "comparer");
 
-            if (_isSome != other._isSome) { return false; }
+            if (ReferenceEquals(other, null)) {
+                return false;
+            }
+
+            if (_isSome != other._isSome) {
+                return false;
+            }
 
             return
                 !_isSome                                  // Les deux options sont vides.
@@ -77,21 +84,24 @@
         /// <summary />
         public override bool Equals(object obj)
         {
-            if (obj == null) {
+            if (ReferenceEquals(obj, null)) {
                 return false;
             }
-            else if (obj is Unit) {
+
+            if (obj is Unit) {
                 return !_isSome;
             }
-            else if (obj is Maybe<T>) {
-                return Equals((Maybe<T>)obj);
+
+            var option = obj as Maybe<T>;
+            if (ReferenceEquals(option, null)) {
+                return Equals(option);
             }
-            else if (obj is T) {
+
+            if (obj is T) {
                 return Equals((T)obj);
             }
-            else {
-                return false;
-            }
+
+            return false;
         }
 
         /// <summary />

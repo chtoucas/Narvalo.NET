@@ -46,8 +46,7 @@
             bool enabled = true;
 
             if (attributes.Contains(DirectiveName_)) {
-                enabled = ParseTo.NullableBoolean((string)attributes[DirectiveName_], BooleanStyles.Literal)
-                    .ValueOrElse(enabled);
+                enabled = ParseTo.NullableBoolean((string)attributes[DirectiveName_], BooleanStyles.Literal) ?? enabled;
 
                 // On supprime la directive afin de ne pas perturber le fonctionnement de ASP.NET.
                 attributes.Remove(DirectiveName_);

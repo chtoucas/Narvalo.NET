@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial struct Maybe<T>
+    public partial class Maybe<T>
     {
         #region Standard
 
