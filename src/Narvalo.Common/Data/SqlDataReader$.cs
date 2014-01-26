@@ -1,160 +1,44 @@
-﻿// Au mieux on implémente les méthodes suivantes :
-// - T GetValue(this SqlDataReader @this, string name)
-// - T GetValue(this SqlDataReader @this, int ordinal, T defaultValue)
-// - T GetValue(this SqlDataReader @this, string name, T defaultValue)
-// - T? GetNullableValue(this SqlDataReader @this, int ordinal)
-// - T? GetNullableValue(this SqlDataReader @this, string name)
-// - Maybe<T> MayGetValue(this SqlDataReader @this, int ordinal)
-// - Maybe<T> MayGetValue(this SqlDataReader @this, string name)
-//
-// Notez que les méthodes suivantes ne sont pas implémentées :
-// - GetMoney(this SqlDataReader @this, string name)
-// - GetXml(this SqlDataReader @this, string name)
-
-namespace Narvalo.Data
+﻿namespace Narvalo.Data
 {
-    using System;
     using System.Data.SqlClient;
     using Narvalo.Fx;
+
+    /* Méthodes d'extension pour `SqlDataReader` 
+     * =========================================
+     * 
+     * Objets de type valeur
+     * ---------------------
+     * 
+     * On implémente les méthodes suivantes :
+     * ```
+     * T GetValue(this SqlDataReader @this, string name)
+     * T GetValue(this SqlDataReader @this, int ordinal, T defaultValue)
+     * T GetValue(this SqlDataReader @this, string name, T defaultValue)
+     * T? GetNullableValue(this SqlDataReader @this, int ordinal)
+     * T? GetNullableValue(this SqlDataReader @this, string name)
+     * ```
+     *     
+     * Objets de type référence
+     * ------------------------
+     * 
+     * On implémente les méthodes suivantes :
+     * ```
+     * Maybe<T> MayGetReference(this SqlDataReader @this, int ordinal)
+     * Maybe<T> MayGetReference(this SqlDataReader @this, string name)
+     * ```
+     * et si cela a du sens :
+     * ```
+     * T GetReference(this SqlDataReader @this, string name)
+     * T GetReference(this SqlDataReader @this, int ordinal, T defaultValue)
+     * T GetReference(this SqlDataReader @this, string name, T defaultValue)
+     * ```
+     */
 
     /// <summary>
     /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlDataReader"/>.
     /// </summary>
-    public static class SqlDataReaderExtensions
+    public static partial class SqlDataReaderExtensions
     {
-        //// Binary
-
-        public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            return @this.GetSqlBinary(ordinal).ToMaybe();
-        }
-
-        public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.MayGetBinary(@this.GetOrdinal(name));
-        }
-
-        //// Boolean
-
-        public static bool GetBoolean(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetBoolean(@this.GetOrdinal(name));
-        }
-
-        public static bool GetBoolean(this SqlDataReader @this, int ordinal, bool defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlBoolean(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static bool GetBoolean(this SqlDataReader @this, string name, bool defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetBoolean(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static bool? GetNullableBoolean(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlBoolean(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static bool? GetNullableBoolean(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableBoolean(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlBoolean(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<bool> MayGetBoolean(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetBoolean(@this.GetOrdinal(name));
-        //}
-
-        //// Byte
-
-        public static byte GetByte(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetByte(@this.GetOrdinal(name));
-        }
-
-        public static byte GetByte(this SqlDataReader @this, int ordinal, byte defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlByte(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static byte GetByte(this SqlDataReader @this, string name, byte defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetByte(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static byte? GetNullableByte(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlByte(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static byte? GetNullableByte(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableByte(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<byte> MayGetByte(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlByte(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<byte> MayGetByte(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetByte(@this.GetOrdinal(name));
-        //}
-
         //// Byte[]
 
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
@@ -170,6 +54,23 @@ namespace Narvalo.Data
             Require.NotNullOrEmpty(name, "name");
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
+        }
+
+        //// Binary
+
+        public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
+        {
+            Require.Object(@this);
+
+            return @this.GetSqlBinary(ordinal).ToMaybe();
+        }
+
+        public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, string name)
+        {
+            Require.Object(@this);
+            Require.NotNullOrEmpty(name, "name");
+
+            return @this.MayGetBinary(@this.GetOrdinal(name));
         }
 
         //// Char[]
@@ -189,409 +90,46 @@ namespace Narvalo.Data
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
 
-        //// DateTime
+        //// String
 
-        public static DateTime GetDateTime(this SqlDataReader @this, string name)
+        public static string GetString(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
             Require.NotNullOrEmpty(name, "name");
 
-            return @this.GetDateTime(@this.GetOrdinal(name));
+            return @this.GetString(@this.GetOrdinal(name));
         }
 
-        public static DateTime GetDateTime(this SqlDataReader @this, int ordinal, DateTime defaultValue)
+        public static string GetString(this SqlDataReader @this, int ordinal, string defaultValue)
         {
             Require.Object(@this);
 
-            var value = @this.GetSqlDateTime(ordinal);
+            var value = @this.GetSqlString(ordinal);
             return value.IsNull ? defaultValue : value.Value;
         }
 
-        public static DateTime GetDateTime(this SqlDataReader @this, string name, DateTime defaultValue)
+        public static string GetString(this SqlDataReader @this, string name, string defaultValue)
         {
             Require.Object(@this);
             Require.NotNullOrEmpty(name, "name");
 
-            return @this.GetDateTime(@this.GetOrdinal(name), defaultValue);
+            return @this.GetString(@this.GetOrdinal(name), defaultValue);
         }
 
-        public static DateTime? GetNullableDateTime(this SqlDataReader @this, int ordinal)
+        public static Maybe<string> MayGetString(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
 
-            var value = @this.GetSqlDateTime(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
+            return @this.GetSqlString(ordinal).ToMaybe();
         }
 
-        public static DateTime? GetNullableDateTime(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableDateTime(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlDateTime(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<DateTime> MayGetDateTime(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetDateTime(@this.GetOrdinal(name));
-        //}
-
-        //// Decimal
-
-        public static decimal GetDecimal(this SqlDataReader @this, string name)
+        public static Maybe<string> MayGetString(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
             Require.NotNullOrEmpty(name, "name");
 
-            return @this.GetDecimal(@this.GetOrdinal(name));
+            return @this.MayGetString(@this.GetOrdinal(name));
         }
-
-        public static decimal GetDecimal(this SqlDataReader @this, int ordinal, decimal defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlDecimal(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static decimal GetDecimal(this SqlDataReader @this, string name, decimal defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetDecimal(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static decimal? GetNullableDecimal(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlDecimal(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static decimal? GetNullableDecimal(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableDecimal(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlDecimal(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<decimal> MayGetDecimal(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetDecimal(@this.GetOrdinal(name));
-        //}
-
-        //// Double
-
-        public static double GetDouble(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetDouble(@this.GetOrdinal(name));
-        }
-
-        public static double GetDouble(this SqlDataReader @this, int ordinal, double defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlDouble(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static double GetDouble(this SqlDataReader @this, string name, double defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetDouble(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static double? GetNullableDouble(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlDouble(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static double? GetNullableDouble(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableDouble(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<double> MayGetDouble(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlDouble(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<double> MayGetDouble(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetDouble(@this.GetOrdinal(name));
-        //}
-
-        //// Guid
-
-        public static Guid GetGuid(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetGuid(@this.GetOrdinal(name));
-        }
-
-        public static Guid GetGuid(this SqlDataReader @this, int ordinal, Guid defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlGuid(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static Guid GetGuid(this SqlDataReader @this, string name, Guid defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetGuid(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static Guid? GetNullableGuid(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlGuid(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static Guid? GetNullableGuid(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableGuid(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlGuid(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<Guid> MayGetGuid(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetGuid(@this.GetOrdinal(name));
-        //}
-
-        //// Int16
-
-        public static short GetInt16(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetInt16(@this.GetOrdinal(name));
-        }
-
-        public static short GetInt16(this SqlDataReader @this, int ordinal, short defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlInt16(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static short GetInt16(this SqlDataReader @this, string name, short defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetInt16(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static short? GetNullableInt16(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlInt16(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static short? GetNullableInt16(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableInt16(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<short> MayGetInt16(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlInt16(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<short> MayGetInt16(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetInt16(@this.GetOrdinal(name));
-        //}
-
-        //// Int32
-
-        public static int GetInt32(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetInt32(@this.GetOrdinal(name));
-        }
-
-        public static int GetInt32(this SqlDataReader @this, int ordinal, int defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlInt32(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static int GetInt32(this SqlDataReader @this, string name, int defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetInt32(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static int? GetNullableInt32(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-             var value = @this.GetSqlInt32(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static int? GetNullableInt32(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetNullableInt32(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<int> MayGetInt32(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlInt32(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<int> MayGetInt32(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetInt32(@this.GetOrdinal(name));
-        //}
-
-        //// Int64
-
-        public static long GetInt64(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetInt64(@this.GetOrdinal(name));
-        }
-
-        public static long GetInt64(this SqlDataReader @this, int ordinal, long defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlInt64(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static long GetInt64(this SqlDataReader @this, string name, long defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-            return @this.GetInt64(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static long? GetNullableInt64(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlInt64(ordinal);
-            if (value.IsNull) { return null; }
-            else { return value.Value; }
-        }
-
-        public static long? GetNullableInt64(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-            return @this.GetNullableInt64(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<long> MayGetInt64(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlInt64(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<long> MayGetInt64(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetInt64(@this.GetOrdinal(name));
-        //}
 
         //// Money
 
@@ -626,62 +164,6 @@ namespace Narvalo.Data
             Require.NotNullOrEmpty(name, "name");
 
             return @this.GetNullableMoney(@this.GetOrdinal(name));
-        }
-
-        //public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, int ordinal)
-        //{
-        //    Require.Object(@this);
-
-        //    return @this.GetSqlMoney(ordinal).ToMaybe();
-        //}
-
-        //public static Maybe<decimal> MayGetMoney(this SqlDataReader @this, string name)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNullOrEmpty(name, "name");
-
-        //    return @this.MayGetMoney(@this.GetOrdinal(name));
-        //}
-
-        //// String
-
-        public static string GetString(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-            
-            return @this.GetString(@this.GetOrdinal(name));
-        }
-
-        public static string GetString(this SqlDataReader @this, int ordinal, string defaultValue)
-        {
-            Require.Object(@this);
-
-            var value = @this.GetSqlString(ordinal);
-            return value.IsNull ? defaultValue : value.Value;
-        }
-
-        public static string GetString(this SqlDataReader @this, string name, string defaultValue)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.GetString(@this.GetOrdinal(name), defaultValue);
-        }
-
-        public static Maybe<string> MayGetString(this SqlDataReader @this, int ordinal)
-        {
-            Require.Object(@this);
-
-            return @this.GetSqlString(ordinal).ToMaybe();
-        }
-
-        public static Maybe<string> MayGetString(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-            Require.NotNullOrEmpty(name, "name");
-
-            return @this.MayGetString(@this.GetOrdinal(name));
         }
 
         //// Xml

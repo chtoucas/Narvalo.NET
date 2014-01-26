@@ -80,7 +80,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
+    <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="TypeBorrowedFromAttribute.cs" />
     <Compile Include="Fx\Nullable`1%24.Language.cs">
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
@@ -89,10 +91,6 @@
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
-    <Compile Include="Internal\DefaultExceptionServices.cs" />
-    <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Exception%24.cs" />
-    <Compile Include="Internal\IExceptionServices.cs" />
     <Compile Include="Nil.cs" />
     <Compile Include="Nil.IEquatable.cs">
       <DependentUpon>Nil.cs</DependentUpon>
