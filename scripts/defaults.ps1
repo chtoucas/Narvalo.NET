@@ -26,15 +26,15 @@ Task Rebuild {
 }
 
 Task FastBuild {
-  MSBuild $options $project /t:Build '/p:RunTests=false;Analyze=false;AnalyzeSource=false'
+  MSBuild $options $project /t:Build '/p:AnalyzeSource=false;Analyze=false;RunTests=false'
 }
 
 Task StyleCop {
-  MSBuild $options $project /t:StyleCop
+  MSBuild $options $project /t:StyleCop '/p:AnalyzeSource=true;Analyze=false;RunTests=false'
 }
 
 Task Test {
-  MSBuild $options $project /t:Build '/p:RunTests=true;Analyze=false;AnalyzeSource=false'
+  MSBuild $options $project /t:Build '/p:AnalyzeSource=false;Analyze=false;RunTests=true'
 }
 
 Task Milestone -depends ReadMilestoneConfig {

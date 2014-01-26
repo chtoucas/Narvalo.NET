@@ -16,13 +16,13 @@
     </ProjectsToBuild>
 
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
-      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
     </SourcesToAnalyze>
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web\Narvalo.Web.csproj">
-      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
     </SourcesToAnalyze>
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web.Extras\Narvalo.Web.Extras.csproj">
-      <AdditionalProperties>StyleCopEnabled=true</AdditionalProperties>
+      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
     </SourcesToAnalyze>
   </ItemGroup>
 
@@ -41,7 +41,8 @@
     <RemoveDir Directories="$(_BuildDir);$(_PackageDir)" />
   </Target>
 
-  <Target Name="StyleCop" Condition="'$(AnalyzeSource)' == 'true'">
+  <Target Name="StyleCop" Condition="'$(AnalyzeSource)' == 'true'"
+    DependsOnTargets="CreateReportsDir">
     <MSBuild Projects="@(SourcesToAnalyze)" Targets="StyleCop" StopOnFirstFailure="true" />
   </Target>
 

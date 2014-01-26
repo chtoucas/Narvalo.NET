@@ -3,6 +3,7 @@
     using System;
     using System.Threading;
 
+    // IMPORTANT: Implémenter Thread-Safety
     public class CircuitBreaker : IBarrier, IDisposable
     {
         public event EventHandler<CircuitBreakerStateChangedEventArgs> StateChangedEventHandler;

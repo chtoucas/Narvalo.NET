@@ -7,7 +7,7 @@
     <_buildTimeFile>$(_BuildDir).buildTime</_buildTimeFile>
   </PropertyGroup>
 
-  <!-- ### Vérifications ### -->
+  <!-- ### Vérifications du résultat ### -->
 
   <Target Name="Verify" DependsOnTargets="VerifyBuildOutputs" />
 
