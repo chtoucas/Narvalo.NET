@@ -151,6 +151,7 @@
     <Compile Include="Diagnostics\LoggerBase.cs" />
     <Compile Include="Diagnostics\LoggerLevel.cs" />
     <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="MayConvertTo.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Expando.cs" />
     <Compile Include="Fx\IOAction.cs" />
