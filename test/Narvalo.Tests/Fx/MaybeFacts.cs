@@ -3,12 +3,14 @@
     using System;
     using Xunit;
 
-    public static class MaybeTests
+    public static class MaybeFacts
     {
         public static class Equality
         {
+            //// Tests sur les opérateurs == et !=
+
             [Fact]
-            public static void Equals_WithNull_ForNull_ReturnsFalse()
+            public static void MaybeNull_Equals_Null_Succeeds()
             {
                 // Arrange
                 var option = (Maybe<int>)null;
@@ -17,7 +19,16 @@
             }
 
             [Fact]
-            public static void IndirectEquals_WithNone_ForNull_ReturnsFalse()
+            public static void Null_Equals_MaybeNull_Succeeds()
+            {
+                // Arrange
+                var option = (Maybe<int>)null;
+                // Act & Assert
+                Assert.True(null == option);
+            }
+
+            [Fact]
+            public static void MaybeNone_Equals_Null_Fails()
             {
                 // Arrange
                 var option = Maybe<int>.None;
@@ -26,7 +37,36 @@
             }
 
             [Fact]
-            public static void Equals_WithNone_ForNull_ReturnsFalse()
+            public static void MaybeNone_DoNotEqual_Null_Succeeds()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.True(option != null);
+            }
+
+            [Fact]
+            public static void Null_Equals_MaybeNone_Fails()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.False(null == option);
+            }
+
+            [Fact]
+            public static void Null_DoNotEqual_MaybeNone_Succeeds()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.True(null != option);
+            }
+
+            //// Tests sur les méthodes Equals
+
+            [Fact]
+            public static void Equals_MaybeNone_And_Null_ReturnsFalse()
             {
                 // Arrange
                 var option = Maybe<int>.None;
@@ -35,12 +75,21 @@
             }
 
             [Fact]
-            public static void Equals_WithNone_ForUnit_ReturnsTrue()
+            public static void Equals_MaybeNone_And_Unit_ReturnsTrue()
             {
                 // Arrange
                 var option = Maybe<int>.None;
                 // Act & Assert
-                Assert.True(option.Equals(Unit.Single));
+                Assert.False(option.Equals(Unit.Single));
+            }
+
+            [Fact]
+            public static void Equals_Unit_And_MaybeNone_ReturnsTrue()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.False(Unit.Single.Equals(option));
             }
         }
 

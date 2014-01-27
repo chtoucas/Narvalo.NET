@@ -76,7 +76,7 @@
             while (value > 0) {
                 long r = value % FlickrBase58AlphabetLength_;
 
-                // REVIEW: On devrait peut-être utiliser un StringBuilder ?
+                // TODO: Optimiser en évitant la concaténation.
                 result = FlickrBase58Alphabet_[r].ToString() + result;
                 value /= FlickrBase58AlphabetLength_;
             }
@@ -168,7 +168,7 @@
             while (value > 0) {
                 long r = value % alphabetLength;
 
-                // REVIEW: On devrait peut-être utiliser un StringBuilder ?
+                // TODO: Optimiser en évitant la concaténation.
                 result = alphabet[r].ToString() + result;
                 value /= alphabetLength;
             }

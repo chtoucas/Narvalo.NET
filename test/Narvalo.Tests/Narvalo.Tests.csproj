@@ -133,7 +133,7 @@
     <Compile Include="ParseToTests.cs" />
     <Compile Include="TryParseToTests.cs" />
     <Compile Include="TryConvertToTests.cs" />
-    <Compile Include="Fx\MaybeTests.cs" />
+    <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Int64EncoderTests.FlickrBase58.cs" />
     <Compile Include="Int64EncoderTests.cs" />
     <Compile Include="Internal\MayParseHelperTests.cs" />

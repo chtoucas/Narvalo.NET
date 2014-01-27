@@ -2,43 +2,54 @@
 {
     using System.Collections.Generic;
 
-    // FIXME: C'est incorrect.
     public partial class Maybe<T>
     {
         /// <summary />
         public static bool operator ==(Maybe<T> left, T right)
         {
-            return !ReferenceEquals(left, null) || left.Equals(right);
+            if (ReferenceEquals(left, null)) {
+                return ReferenceEquals(right, null);
+            }
+
+            return left.Equals(right);
         }
 
         /// <summary />
         public static bool operator ==(T left, Maybe<T> right)
         {
-            return !ReferenceEquals(left, null) && left.Equals(right);
+            if (ReferenceEquals(left, null)) {
+                return ReferenceEquals(right, null);
+            }
+
+            return left.Equals(right);
         }
 
         /// <summary />
         public static bool operator ==(Maybe<T> left, Maybe<T> right)
         {
-            return !ReferenceEquals(left, null) && left.Equals(right);
+            if (ReferenceEquals(left, null)) {
+                return ReferenceEquals(right, null);
+            }
+
+            return left.Equals(right);
         }
 
         /// <summary />
         public static bool operator !=(Maybe<T> left, T right)
         {
-            return ReferenceEquals(left, null) || !left.Equals(right);
+            return !(left == right);
         }
 
         /// <summary />
         public static bool operator !=(T left, Maybe<T> right)
         {
-            return ReferenceEquals(left, null) || !left.Equals(right);
+            return !(left == right);
         }
 
         /// <summary />
         public static bool operator !=(Maybe<T> left, Maybe<T> right)
         {
-            return ReferenceEquals(left, null) || !left.Equals(right);
+            return !(left == right);
         }
 
         /// <summary />
@@ -52,8 +63,17 @@
         {
             Require.NotNull(comparer, "comparer");
 
-            if (!_isSome) { return false; }
+            // "this" n'est jamais null si on arrive ici.
+            if (ReferenceEquals(other, null)) {
+                return false;
+            }
 
+            // "this" ne contient pas de valeur.
+            if (!_isSome) {
+                return false;
+            }
+
+            // Retourne vrai si "this" contient la valeur "other".
             return comparer.Equals(_value, other);
         }
 
@@ -68,29 +88,37 @@
         {
             Require.NotNull(comparer, "comparer");
 
+            // "this" n'est jamais null si on arrive ici.
             if (ReferenceEquals(other, null)) {
                 return false;
             }
 
+            // "this" et "other" sont différents car l'un est vide et l'autre ne l'est pas.
             if (_isSome != other._isSome) {
                 return false;
             }
 
-            return
-                !_isSome                                  // Les deux options sont vides.
-                || comparer.Equals(_value, other._value); // Les deux options ont la même valeur.
+            // Les deux options sont vides.
+            if (!_isSome) {
+                return true;
+            }
+
+            // Les deux options contiennent la même valeur.
+            return comparer.Equals(_value, other._value);
         }
 
         /// <summary />
         public override bool Equals(object obj)
         {
+            // "this" n'est jamais null si on arrive ici.
             if (ReferenceEquals(obj, null)) {
                 return false;
             }
 
-            if (obj is Unit) {
-                return !_isSome;
-            }
+            // REVIEW: Une option vide est toujours égale à l'unité.
+            //if (obj is Unit) {
+            //    return !_isSome;
+            //}
 
             var option = obj as Maybe<T>;
             if (ReferenceEquals(option, null)) {
