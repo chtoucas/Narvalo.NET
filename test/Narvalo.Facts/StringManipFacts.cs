@@ -5,10 +5,8 @@
     using Xunit;
     using Xunit.Extensions;
 
-    public static class StringManipTests
+    public static class StringManipFacts
     {
-        #region > Reverse <
-
         public static class Reverse
         {
             public static IEnumerable<object[]> SampleData
@@ -36,7 +34,5 @@
                 Assert.Equal(expectedValue, StringManip.Reverse(value));
             }
         }
-
-        #endregion
     }
 }

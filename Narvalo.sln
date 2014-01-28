@@ -41,9 +41,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Aliens", "src\Narva
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{1745EB1B-1227-4C17-A03E-B4DDEE760172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Tests", "test\Narvalo.Tests\Narvalo.Tests.csproj", "{967FD938-F4FF-452B-9F9B-426D1F250BEB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.ComparativeTests", "test\Narvalo.ComparativeTests\Narvalo.ComparativeTests.csproj", "{63BD10EF-9E46-40AB-9005-E19C87F90843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "test\Narvalo.Facts\Narvalo.Facts.csproj", "{967FD938-F4FF-452B-9F9B-426D1F250BEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,18 +189,6 @@ Global
 		{94C7645A-F332-4CA9-AA6D-62A339868E10}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{94C7645A-F332-4CA9-AA6D-62A339868E10}.Release|x64.ActiveCfg = Release|Any CPU
 		{94C7645A-F332-4CA9-AA6D-62A339868E10}.Release|x86.ActiveCfg = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x64.ActiveCfg = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x86.ActiveCfg = Release|Any CPU
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -213,6 +201,18 @@ Global
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Release|x64.ActiveCfg = Release|x86
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Release|x86.ActiveCfg = Release|x86
 		{63BD10EF-9E46-40AB-9005-E19C87F90843}.Release|x86.Build.0 = Release|x86
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x64.ActiveCfg = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,8 +229,8 @@ Global
 		{F17367AD-0265-4F9B-AD6C-AC0EAD63A25F} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
 		{7E383354-3181-4FA2-A67B-97B320295F0B} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
 		{94C7645A-F332-4CA9-AA6D-62A339868E10} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 		{63BD10EF-9E46-40AB-9005-E19C87F90843} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45

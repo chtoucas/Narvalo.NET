@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class TryConvertToTests
+    public static class TryConvertToFacts
     {
         #region > Stubs <
 
@@ -279,9 +279,12 @@
         public static class ToEnum
         {
             #region > Validation du paramètre générique <
-#if !DEBUG
 
+#if DEBUG
+            [Fact(Skip = Constants.SkipReleaseOnly)]
+#else
             [Fact]
+#endif
             public static void ThrowsArgumentException_WithInt32()
             {
                 // Arrange
@@ -290,7 +293,12 @@
                 Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<int>(1, out result));
             }
 
+
+#if DEBUG
+            [Fact(Skip = "Disponible uniquement en mode RELEASE.")]
+#else
             [Fact]
+#endif
             public static void ThrowsArgumentException_WithStruct()
             {
                 // Arrange
@@ -299,7 +307,6 @@
                 Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<StructStub_>(1, out result));
             }
 
-#endif
             #endregion
 
             #region > Conversion d'une valeur valide <

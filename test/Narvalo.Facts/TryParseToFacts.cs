@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class TryParseToTests
+    public static class TryParseToFacts
     {
         public static class ToBoolean
         {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xunit>
   <assemblies>
-    <assembly filename="..\test\Narvalo.Tests\bin\Debug\Narvalo.Tests.dll" shadow-copy="true" />
+    <assembly filename="..\test\Narvalo.Facts\bin\Debug\Narvalo.Facts.dll" shadow-copy="true" />
   </assemblies>
 </xunit>

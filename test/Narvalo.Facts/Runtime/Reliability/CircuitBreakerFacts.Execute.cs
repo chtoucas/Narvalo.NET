@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public partial class CircuitBreakerTests
+    public partial class CircuitBreakerFacts
     {
         #region Closed circuit
 

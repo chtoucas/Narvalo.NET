@@ -4,7 +4,7 @@
     using System.Diagnostics;
     using Xunit;
 
-    public static class ParseToTests
+    public static class ParseToFacts
     {
         #region Stubs
 
@@ -39,25 +39,29 @@
         public static class ToEnum
         {
             //// Validation du paramètre générique
-
-#if !DEBUG
-
+            
+#if DEBUG
+            [Fact(Skip = Constants.SkipReleaseOnly)]
+#else
             [Fact]
+#endif
             public static void ThrowsArgumentException_WithInt32()
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => ParseTo.Enum<int>("Whatever"));
             }
 
+            
+#if DEBUG
+            [Fact(Skip = Constants.SkipReleaseOnly)]
+#else
             [Fact]
-            [Conditional("RELEASE")]
+#endif
             public static void ThrowsArgumentException_WithStruct()
             {
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
             }
-
-#endif
 
             //// Analyse d'une valeur valide
 

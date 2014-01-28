@@ -142,6 +142,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The underlying value has changed..
+        /// </summary>
+        internal static string Maybe_UnderlyingValueHasChanged {
+            get {
+                return ResourceManager.GetString("Maybe_UnderlyingValueHasChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A successful nil has no error message..
         /// </summary>
         internal static string Nil_SuccessfulHasNoMessage {

@@ -1,13 +1,14 @@
-﻿namespace Narvalo.Web.Html {
+﻿namespace Narvalo.Web.Html
+{
     using System;
     using Microsoft.Web.UnitTestUtil;
     using Xunit;
 
-    public class ScriptExtensionsTests {
-        #region ScriptLink()
-
-        [Fact(DisplayName = "ScriptExtensions.ScriptLink() should create a minimal script tag")]
-        public void ScriptLink() {
+    public class HtmlHelperFacts
+    {
+        [Fact]
+        public void ScriptLink()
+        {
             // Arrange
             var htmlHelper = MvcHelper.GetHtmlHelper();
             // Act
@@ -15,7 +16,5 @@
             // Assert
             Assert.Equal(@"<script src=""//localhost/"" type=""scripttype""></script>", html.ToHtmlString());
         }
-
-        #endregion
     }
 }

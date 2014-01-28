@@ -2,7 +2,7 @@
 {
     using Xunit;
 
-    public partial class CircuitBreakerTests
+    public partial class CircuitBreakerFacts
     {
         [Fact]
         public void WhenClosed_CanExecute_ReturnsTrue()

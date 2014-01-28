@@ -5,6 +5,5 @@
     /// </summary>
     public static partial class NullableExtensions
     {
-
     }
 }

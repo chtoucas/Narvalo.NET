@@ -174,4 +174,7 @@
   <data name="Nil_SuccessfulHasNoMessage" xml:space="preserve">
     <value>A successful nil has no error message.</value>
   </data>
+  <data name="Maybe_UnderlyingValueHasChanged" xml:space="preserve">
+    <value>The underlying value has changed.</value>
+  </data>
 </root>

@@ -8,7 +8,7 @@
     // http://www.codeproject.com/Articles/37549/CLR-Injection-Runtime-Method-Replacer
     // http://blog.stevensanderson.com/2009/08/24/writing-great-unit-tests-best-and-worst-practises/
 
-    public partial class CircuitBreakerTests
+    public partial class CircuitBreakerFacts
     {
         static readonly IList<Type> RetryableExceptions
            = new List<Type>(1) { typeof(RetryableException), };

@@ -4,7 +4,7 @@
     using Narvalo.Fx;
     using Xunit;
 
-    public static class MayParseHelperTests
+    public static class MayParseHelperFacts
     {
         public static class Parse
         {

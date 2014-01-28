@@ -28,9 +28,7 @@
      *   
      * ### Ajout d'une contrainte de type référence ###
      * 
-     * Pour les types valeur, `T?` fournit une bien meilleure alternative.
-     * Je ne pense pas non plus que cela soit une bonne idée de rajouter une contrainte aussi restrictive.
-     * Par exemple, on ne pourrait plus transformer un `Maybe<string>` en `Maybe<int>`. Afin de ne pas encourager 
+     * Pour les types valeur, le plus souvent `T?` fournit une bien meilleure alternative. Afin de ne pas encourager 
      * l'utilisation d'un type Maybe quand un type nullable serait préférable, il faudrait créer une nouvelle règle FxCop.
      * 
      * Références
@@ -44,7 +42,7 @@
      */
 
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Il ne s'agit pas réellement d'une collection.")]
-    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
+    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>> //, IEquatable<T>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
 
@@ -81,12 +79,27 @@
         /// <summary>
         /// Retourne vrai si l'objet est vide, faux sinon.
         /// </summary>
-        public bool IsNone { get { return !_isSome; } }
+        public bool IsNone { get { return !IsSome; } }
 
         /// <summary>
         /// Retourne vrai si l'objet contient une valeur, faux sinon.
         /// </summary>
-        public bool IsSome { get { return _isSome; } }
+        /// <exception cref="System.InvalidOperationException">L'objet ne contient pas de valeur.</exception>
+        public bool IsSome
+        {
+            get
+            {
+                if (_isSome) {
+                    if (_value == null) {
+                        throw new InvalidOperationException(SR.Maybe_UnderlyingValueHasChanged);
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
 
         /// <summary>
         /// Retourne la valeur encapsulée.
@@ -96,7 +109,7 @@
         {
             get
             {
-                if (!_isSome) {
+                if (!IsSome) {
                     throw new InvalidOperationException(SR.Maybe_NoneHasNoValue);
                 }
 
@@ -110,7 +123,7 @@
         /// <returns>La valeur sous-jacente ou la valeur par défaut.</returns>
         public T ValueOrDefault()
         {
-            return _isSome ? _value : default(T);
+            return IsSome ? _value : default(T);
         }
 
         /// <summary>
@@ -120,14 +133,14 @@
         /// <returns>La valeur sous-jacente ou defaultValue.</returns>
         public T ValueOrElse(T defaultValue)
         {
-            return _isSome ? _value : defaultValue;
+            return IsSome ? _value : defaultValue;
         }
 
         public T ValueOrElse(Func<T> defaultValueFactory)
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return _isSome ? _value : defaultValueFactory.Invoke();
+            return IsSome ? _value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
@@ -141,7 +154,7 @@
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
-            if (!_isSome) {
+            if (IsNone) {
                 throw exceptionFactory.Invoke();
             }
 
@@ -151,11 +164,11 @@
         /// <summary />
         public IEnumerator<T> GetEnumerator()
         {
-            if (!_isSome) {
+            if (IsNone) {
                 return Enumerable.Empty<T>().GetEnumerator();
             }
             else {
-                return new List<T> { _value }.GetEnumerator();
+                return new List<T> { Value }.GetEnumerator();
             }
         }
 
@@ -168,7 +181,7 @@
         /// <summary />
         public override String ToString()
         {
-            return _isSome ? _value.ToString() : "None";
+            return IsSome ? _value.ToString() : "None";
         }
     }
 }
