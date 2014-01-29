@@ -41,8 +41,12 @@
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons
      */
 
+    /// <summary>
+    /// Represents a value that is either a single value of type T, or no value at all.
+    /// </summary>
+    /// <typeparam name="T">The type of the underlying value.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Il ne s'agit pas réellement d'une collection.")]
-    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>> //, IEquatable<T>
+    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
 
@@ -61,11 +65,18 @@
          * + `Maybe<T>.None` qui est un alias pour `Maybe.Maybe()`.
          */
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe{T}" /> that does not hold any value.
+        /// </summary>
         Maybe()
         {
             _isSome = false;
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe{T}" /> using the specified value. 
+        /// </summary>
+        /// <param name="value">The underlying value.</param>
         Maybe(T value)
         {
             _value = value;
@@ -77,14 +88,14 @@
         public static Maybe<T> None { get { return None_; } }
 
         /// <summary>
-        /// Retourne vrai si l'objet est vide, faux sinon.
+        /// Returns true if the object does not have an underlying value, false otherwise.
         /// </summary>
         public bool IsNone { get { return !IsSome; } }
 
         /// <summary>
-        /// Retourne vrai si l'objet contient une valeur, faux sinon.
+        /// Returns true if the object contains a value, false otherwise.
         /// </summary>
-        /// <exception cref="System.InvalidOperationException">L'objet ne contient pas de valeur.</exception>
+        /// <exception cref="System.InvalidOperationException">The object does not contain any value.</exception>
         public bool IsSome
         {
             get
@@ -102,9 +113,9 @@
         }
 
         /// <summary>
-        /// Retourne la valeur encapsulée.
+        /// Returns the underlying value.
         /// </summary>
-        /// <exception cref="System.InvalidOperationException">L'objet ne contient pas de valeur.</exception>
+        /// <exception cref="System.InvalidOperationException">The object does not contain any value.</exception>
         public T Value
         {
             get
@@ -118,19 +129,19 @@
         }
 
         /// <summary>
-        /// Récupère la valeur encapsulée si elle existe, la valeur par défaut du type T sinon.
+        /// Returns the underlying value if any, the default value of the type T otherwise.
         /// </summary>
-        /// <returns>La valeur sous-jacente ou la valeur par défaut.</returns>
+        /// <returns>The underlying value or the default value of the type T.</returns>
         public T ValueOrDefault()
         {
             return IsSome ? _value : default(T);
         }
 
         /// <summary>
-        /// Récupère la valeur encapsulée si elle existe, defaultValue sinon.
+        /// Returns the underlying value if any, defaultValue otherwise.
         /// </summary>
-        /// <param name="defaultValue">Valeur à utiliser si l'objet ne contient pas de valeur.</param>
-        /// <returns>La valeur sous-jacente ou defaultValue.</returns>
+        /// <param name="defaultValue">A default value to be used if if there is no underlying value.</param>
+        /// <returns>The underlying value or defaultValue.</returns>
         public T ValueOrElse(T defaultValue)
         {
             return IsSome ? _value : defaultValue;

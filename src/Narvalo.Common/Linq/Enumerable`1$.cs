@@ -6,7 +6,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Collections.Generic.IEnumerable{T}"/>.
+    /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
     /// </summary>
     public static partial class EnumerableExtensions
     {

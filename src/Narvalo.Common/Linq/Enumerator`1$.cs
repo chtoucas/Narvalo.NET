@@ -4,7 +4,7 @@
     using System.Collections.ObjectModel;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Collections.Generic.IEnumerator{T}"/>.
+    /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerator{T}"/>.
     /// </summary>
     public static partial class EnumeratorExtensions
     {

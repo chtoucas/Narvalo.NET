@@ -1,87 +1,42 @@
 ﻿namespace Narvalo.Fx
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
+
+    /* Egalité
+     * -------
+     * 
+     * On redéfinit la méthode Equals() afin qu'elle suive les mêmes règles que les objets de type valeur.
+     * Par contre, on ne touche pas aux opérateurs d'égalité (== et !=), qui continuent donc à tester l'égalité 
+     * référentielle comme pour tout autre objet .NET.
+     * Une autre possibilité, abandonnée, aurait été d'implémenter l'interface IStructuralEquatable.
+     * 
+     * J'ai pensé aussi à implémenter l'interface IEquatable<T> mais le rapport coût / gain semble défavorable.
+     * On aurait eu :
+     * '''
+     * public bool Equals(T other, IEqualityComparer<T> comparer)
+     * {
+     *   // NB: Maybe<T>.None.Equals((T)null) retourne false. Pour un object de type valeur, c'est normal.
+     *   // Par contre, pour un objet de type référence, cela peut paraître incohérent puisque Maybe<T>.None
+     *   // encapsule la valeur null...
+     *   if (ReferenceEquals(other, null)) {
+     *     return false;
+     *   }
+     *
+     *   return Equals(new Maybe<T>(other));
+     * }
+     * '''
+     * et il aurait aussi fallu modifier Equals(object obj) en intercalant un test dans le genre :
+     * '''
+     * if (obj is T) {
+     *   return Equals((T)obj);
+     * }
+     * '''
+     */
 
     public partial class Maybe<T>
     {
-        /* Egalité
-         * -------
-         * 
-         * On ne vérifie pas si obj == this, car on veut prétendre que Maybe<T> est immuable. 
-         */
-
-        ///// <summary />
-        //public static bool operator ==(Maybe<T> left, T right)
-        //{
-        //    if (ReferenceEquals(left, null)) {
-        //        return right == null;
-        //    }
-
-        //    return left.Equals(right);
-        //}
-
-        ///// <summary />
-        //public static bool operator ==(T left, Maybe<T> right)
-        //{
-        //    if (ReferenceEquals(right, null)) {
-        //        return left == null;
-        //    }
-
-        //    return right.Equals(left);
-        //}
-
-        /// <summary />
-        public static bool operator ==(Maybe<T> left, Maybe<T> right)
-        {
-            if (ReferenceEquals(left, null)) {
-                return ReferenceEquals(right, null);
-            }
-
-            return left.Equals(right);
-        }
-
-        ///// <summary />
-        //public static bool operator !=(Maybe<T> left, T right)
-        //{
-        //    return !(left == right);
-        //}
-
-        ///// <summary />
-        //public static bool operator !=(T left, Maybe<T> right)
-        //{
-        //    return !(left == right);
-        //}
-
-        /// <summary />
-        public static bool operator !=(Maybe<T> left, Maybe<T> right)
-        {
-            return !(left == right);
-        }
-
-        ///// <summary />
-        //public bool Equals(T other)
-        //{
-        //    return Equals(other, EqualityComparer<T>.Default);
-        //}
-
-        ///// <summary />
-        //public bool Equals(T other, IEqualityComparer<T> comparer)
-        //{
-        //    Require.NotNull(comparer, "comparer");
-
-        //    // "this" n'est jamais null si on arrive ici.
-        //    if (other == null) {
-        //        return false;
-        //    }
-
-        //    if (_value == null) {
-        //        return false;
-        //    }
-
-        //    // Retourne vrai si "this" contient la valeur "other".
-        //    return comparer.Equals(_value, other);
-        //}
-
         /// <summary />
         public bool Equals(Maybe<T> other)
         {
@@ -91,43 +46,36 @@
         /// <summary />
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
-
+            // "this" n'est jamais null.
             if (ReferenceEquals(other, null)) {
                 return false;
             }
 
-            //// "this" et "other" sont différents car l'un est vide et l'autre ne l'est pas.
-            //if (_isSome != other._isSome) {
-            //    return false;
-            //}
-
-            //// Les deux options sont vides.
-            //if (IsNone) {
-            //    return true;
-            //}
-
-            // Les deux options contiennent la même valeur.
+            // REVIEW: Et si la valeur sous-jacente a changée entre temps ? Ne devrions-nous pas vérifier aussi _isSome ?
+            // Les deux options contiennent la même valeur, éventuellement nulle.
             return comparer.Equals(_value, other._value);
         }
 
         /// <summary />
         public override bool Equals(object obj)
         {
-            if (obj == null) {
+            return Equals(obj, EqualityComparer<T>.Default);
+        }
+
+        /// <summary />
+        public bool Equals(object other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            // "this" n'est jamais null.
+            if (ReferenceEquals(other, null)) {
                 return false;
             }
 
-            var option = obj as Maybe<T>;
-            if (!ReferenceEquals(option, null)) {
-                return Equals(option);
-            }
-
-            //if (obj is T) {
-            //    return Equals((T)obj);
-            //}
-
-            return false;
+            // Habituellement, on teste obj.GetType() == this.GetType() pour éviter des bugs subtiles au cas où
+            // "this" ou "obj" serait une instance d'une classe dérivée. Comme Maybe<T> est fermée à l'extensibilité, 
+            // on n'a pas ce problème.
+            return Equals(other as Maybe<T>);
         }
 
         /// <summary />

@@ -172,36 +172,22 @@
 
         public static class Equality
         {
-            //// Réflexive : x == x
+            //// Réflexivité : x == x
 
             [Fact]
-            public static void IsReflexive_ForSimpleType()
+            public static void IsReflexive()
             {
                 // Arrange
-                var option = Maybe.Create(1000);
+                var option1 = Maybe.Create(1000);
+                var option2 = Maybe.Create(new StructStub_(3141));
+                var option3 = Maybe.Create(new ClassStub_ { Value = "π" });
                 // Act & Assert
-                Assert.True(option.Equals(option));
+                Assert.True(option1.Equals(option1));
+                Assert.True(option2.Equals(option2));
+                Assert.True(option3.Equals(option3));
             }
 
-            [Fact]
-            public static void IsReflexive_ForStruct()
-            {
-                // Arrange
-                var option = Maybe.Create(new StructStub_(3141));
-                // Act & Assert
-                Assert.True(option.Equals(option));
-            }
-
-            [Fact]
-            public static void IsReflexive_ForClass()
-            {
-                // Arrange
-                var option = Maybe.Create(new ClassStub_ { Value = "π" });
-                // Act & Assert
-                Assert.True(option.Equals(option));
-            }
-
-            //// Symétrique :  x == y <=> y == x
+            //// Commutativité :  x == y <=> y == x
 
             [Fact]
             public static void IsSymmetric_ForSimpleType()
@@ -336,15 +322,6 @@
                 var option = Maybe<int>.None;
                 // Act & Assert
                 Assert.False(Unit.Single.Equals(option));
-            }
-
-            [Fact(Skip = "En attente de la réécriture des règles d'égalité.")]
-            public static void Equals_MaybeInt32_And_Int32_ReturnsTrue()
-            {
-                // Arrange
-                var option = Maybe.Create(1);
-                // Act & Assert
-                Assert.True(option.Equals(1));
             }
         }
 
