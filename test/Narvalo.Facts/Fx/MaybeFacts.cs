@@ -1,41 +1,34 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using Xunit;
 
     public static class MaybeFacts
     {
+        static readonly Uri SampleUri_ = new Uri("http://localhost");
+        static readonly Uri AnotherUri_ = new Uri("http://narvalo.org");
+
         #region Stubs
 
-        struct StructStub_
+        struct ValueStub_ : IEquatable<ValueStub_>
         {
             int _value;
 
-            public StructStub_(int value) { _value = value; }
-        }
+            public ValueStub_(int value) { _value = value; }
 
-        class ClassStub_
-        {
-            public string Value { get; set; }
-        }
-
-        struct ComplexStructStub_ : IEquatable<ComplexStructStub_>
-        {
-            int _value;
-
-            public ComplexStructStub_(int value) { _value = value; }
-
-            public static bool operator ==(ComplexStructStub_ left, ComplexStructStub_ right)
+            public static bool operator ==(ValueStub_ left, ValueStub_ right)
             {
                 return left.Equals(right);
             }
 
-            public static bool operator !=(ComplexStructStub_ left, ComplexStructStub_ right)
+            public static bool operator !=(ValueStub_ left, ValueStub_ right)
             {
-                return !(left == right);
+                return !left.Equals(right);
             }
 
-            public bool Equals(ComplexStructStub_ other)
+            public bool Equals(ValueStub_ other)
             {
                 return _value == other._value;
             }
@@ -46,11 +39,11 @@
                     return false;
                 }
 
-                if (!(obj is ComplexStructStub_)) {
+                if (!(obj is ValueStub_)) {
                     return false;
                 }
 
-                return Equals((ComplexStructStub_)obj);
+                return Equals((ValueStub_)obj);
             }
 
             public override int GetHashCode()
@@ -59,25 +52,16 @@
             }
         }
 
-        class ComplexClassStub_ : IEquatable<ComplexClassStub_>
+        class ClassStub_
+        {
+            public Uri Url { get; set; }
+        }
+
+        class AlmostValueStub_ : IEquatable<AlmostValueStub_>
         {
             public string Value { get; set; }
 
-            public static bool operator ==(ComplexClassStub_ left, ComplexClassStub_ right)
-            {
-                if (ReferenceEquals(left, null)) {
-                    return ReferenceEquals(right, null);
-                }
-
-                return left.Equals(right);
-            }
-
-            public static bool operator !=(ComplexClassStub_ left, ComplexClassStub_ right)
-            {
-                return !(left == right);
-            }
-
-            public bool Equals(ComplexClassStub_ other)
+            public bool Equals(AlmostValueStub_ other)
             {
                 if (ReferenceEquals(other, null)) {
                     return false;
@@ -88,7 +72,7 @@
 
             public override bool Equals(object obj)
             {
-                if (obj == null) {
+                if (ReferenceEquals(obj, null)) {
                     return false;
                 }
 
@@ -96,12 +80,11 @@
                     return true;
                 }
 
-                var other = obj as ComplexClassStub_;
-                if (ReferenceEquals(other, null)) {
+                if (obj.GetType() != this.GetType()) {
                     return false;
                 }
 
-                return Equals(other);
+                return Equals((AlmostValueStub_)obj);
             }
 
             public override int GetHashCode()
@@ -112,65 +95,84 @@
 
         #endregion
 
-        #region Opérateurs == et !=
+        //[Fact]
+        //public static void Maybe_ForValueType_IsImmutable()
+        //{
+        //    // Arrange
+        //    var option1 = Maybe.Create(new ValueStub_(3141));
+        //    var option2 = Maybe.Create(new ValueStub_(3141));
 
-        [Fact]
-        public static void MaybeNull_Equals_Null_Succeeds()
-        {
-            // Arrange
-            var option = (Maybe<int>)null;
-            // Act & Assert
-            Assert.True(option == null);
-        }
+        //    // Act & Assert
+        //    Assert.True(option1 != option2);
+        //    Assert.True(option1.Equals(option2));
+        //}
 
-        [Fact]
-        public static void Null_Equals_MaybeNull_Succeeds()
-        {
-            // Arrange
-            var option = (Maybe<int>)null;
-            // Act & Assert
-            Assert.True(null == option);
-        }
+        //[Fact]
+        //public static void Maybe_ForValueType()
+        //{
+        //    // Arrange
+        //    var value = SampleUri_;
+        //    // Act
+        //    var option1 = Maybe.Create(new ClassStub_ { Url = value });
+        //    value = AnotherUri_;
+        //    var option2 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
+        //    // Assert
+        //    //Assert.True(option1.Value == AnotherUri_);
+        //    Assert.False(option1.Equals(option2));
+        //}
 
-        [Fact]
-        public static void MaybeNone_Equals_Null_Fails()
-        {
-            // Arrange
-            var option = Maybe<int>.None;
-            // Act & Assert
-            Assert.False(option == null);
-        }
+        //[Fact]
+        //public static void Maybe_ForValueType_List()
+        //{
+        //    // Arrange
+        //    IList<int> list = new List<int>();
+        //    list.Add(0);
+        //    // Act
+        //    var option = Maybe.Create(list);
 
-        [Fact]
-        public static void MaybeNone_DoNotEqual_Null_Succeeds()
-        {
-            // Arrange
-            var option = Maybe<int>.None;
-            // Act & Assert
-            Assert.True(option != null);
-        }
+        //    // Assert
+        //    Assert.True(option.IsSome);
 
-        [Fact]
-        public static void Null_Equals_MaybeNone_Fails()
-        {
-            // Arrange
-            var option = Maybe<int>.None;
-            // Act & Assert
-            Assert.False(null == option);
-        }
+        //    Assert.True(option.Value[0] == 0);
 
-        [Fact]
-        public static void Null_DoNotEqual_MaybeNone_Succeeds()
-        {
-            // Arrange
-            var option = Maybe<int>.None;
-            // Act & Assert
-            Assert.True(null != option);
-        }
+        //    list.Add(1);
+        //    Assert.True(option.Value[1] == 1);
 
-        #endregion
+        //    list.Remove(1);
+        //    Assert.Throws<ArgumentOutOfRangeException>(() => option.Value[1] == 1);
+
+        //    option.Value.Add(1);
+        //    Assert.True(option.Value[1] == 1);
+
+        //    list = null;
+        //    Assert.False(ReferenceEquals(option.Value, null));
+        //    Assert.False(option.Equals(Maybe<IList<int>>.None));
+        //}
 
         public static class Equality
+        {
+            [Fact]
+            public static void MaybeNull_Equals_Null_Succeeds()
+            {
+                // Arrange
+                var option = (Maybe<int>)null;
+                // Act & Assert
+                Assert.True(option == null);
+                Assert.False(option != null);
+            }
+
+            [Fact]
+            public static void MaybeNone_Equals_Null_Fails()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+                // Act & Assert
+                Assert.False(option == null);
+                Assert.True(option != null);
+            }
+        }
+
+        public static class StructuralEquality
         {
             //// Réflexivité : x == x
 
@@ -179,8 +181,8 @@
             {
                 // Arrange
                 var option1 = Maybe.Create(1000);
-                var option2 = Maybe.Create(new StructStub_(3141));
-                var option3 = Maybe.Create(new ClassStub_ { Value = "π" });
+                var option2 = Maybe.Create(new ValueStub_(3141));
+                var option3 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
                 // Act & Assert
                 Assert.True(option1.Equals(option1));
                 Assert.True(option2.Equals(option2));
@@ -206,9 +208,9 @@
             public static void IsSymmetric_ForStruct()
             {
                 // Arrange
-                var option1 = Maybe.Create(new StructStub_(3141));
-                var option2 = Maybe.Create(new StructStub_(3141));
-                var option3 = Maybe.Create(new StructStub_(1570));
+                var option1 = Maybe.Create(new ValueStub_(3141));
+                var option2 = Maybe.Create(new ValueStub_(3141));
+                var option3 = Maybe.Create(new ValueStub_(1570));
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2), option2.Equals(option1));
@@ -219,9 +221,9 @@
             public static void IsSymmetric_ForComplexStruct()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ComplexStructStub_(3141));
-                var option2 = Maybe.Create(new ComplexStructStub_(3141));
-                var option3 = Maybe.Create(new ComplexStructStub_(1570));
+                var option1 = Maybe.Create(new ValueStub_(3141));
+                var option2 = Maybe.Create(new ValueStub_(3141));
+                var option3 = Maybe.Create(new ValueStub_(1570));
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2), option2.Equals(option1));
@@ -232,9 +234,9 @@
             public static void IsSymmetric_ForClass()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ClassStub_ { Value = "π" });
-                var option2 = Maybe.Create(new ClassStub_ { Value = "π" });
-                var option3 = Maybe.Create(new ClassStub_ { Value = "pi" });
+                var option1 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
+                var option2 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
+                var option3 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2), option2.Equals(option1));
@@ -245,9 +247,9 @@
             public static void IsSymmetric_ForComplexClass()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ComplexClassStub_ { Value = "π" });
-                var option2 = Maybe.Create(new ComplexClassStub_ { Value = "π" });
-                var option3 = Maybe.Create(new ComplexClassStub_ { Value = "pi" });
+                var option1 = Maybe.Create(new AlmostValueStub_ { Value = "π" });
+                var option2 = Maybe.Create(new AlmostValueStub_ { Value = "π" });
+                var option3 = Maybe.Create(new AlmostValueStub_ { Value = "pi" });
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2), option2.Equals(option1));
@@ -273,10 +275,10 @@
             public static void IsTransitive_ForStruct()
             {
                 // Arrange
-                var option1 = Maybe.Create(new StructStub_(3141));
-                var option2 = Maybe.Create(new StructStub_(3141));
-                var option3 = Maybe.Create(new StructStub_(3141));
-                var option4 = Maybe.Create(new StructStub_(1570));
+                var option1 = Maybe.Create(new ValueStub_(3141));
+                var option2 = Maybe.Create(new ValueStub_(3141));
+                var option3 = Maybe.Create(new ValueStub_(3141));
+                var option4 = Maybe.Create(new ValueStub_(1570));
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2) && option2.Equals(option3), option1.Equals(option3));
@@ -286,10 +288,10 @@
             public static void IsTransitive_ForClass()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ClassStub_ { Value = "π" });
-                var option2 = Maybe.Create(new ClassStub_ { Value = "π" });
-                var option3 = Maybe.Create(new ClassStub_ { Value = "π" });
-                var option4 = Maybe.Create(new ClassStub_ { Value = "pi" });
+                var option1 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
+                var option2 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
+                var option3 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
+                var option4 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
 
                 // Act & Assert
                 Assert.Equal(option1.Equals(option2) && option2.Equals(option3), option1.Equals(option3));

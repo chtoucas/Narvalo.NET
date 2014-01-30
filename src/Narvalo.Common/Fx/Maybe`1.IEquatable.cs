@@ -4,16 +4,16 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    /* Egalité
-     * -------
+    /* Egalité référentielle et égalité structurelle
+     * ---------------------------------------------
      * 
      * On redéfinit la méthode Equals() afin qu'elle suive les mêmes règles que les objets de type valeur.
-     * Par contre, on ne touche pas aux opérateurs d'égalité (== et !=), qui continuent donc à tester l'égalité 
-     * référentielle comme pour tout autre objet .NET.
-     * Une autre possibilité, abandonnée, aurait été d'implémenter l'interface IStructuralEquatable.
+     * Par contre, on ne touche pas aux opérateurs d'égalité (== et !=) qui continuent donc à tester l'égalité 
+     * référentielle, comportement attendu par le framework .NET.
+     * Une autre possibilité, abandonnée, aurait été d'utiliser l'interface IStructuralEquatable.
      * 
-     * J'ai pensé aussi à implémenter l'interface IEquatable<T> mais le rapport coût / gain semble défavorable.
-     * On aurait eu :
+     * J'ai pensé implémenter l'interface IEquatable<T> mais cela pose plus de problème qu'autre chose.
+     * On aurait créé une méthode qui aurait ressembler à ce qui suit :
      * '''
      * public bool Equals(T other, IEqualityComparer<T> comparer)
      * {
@@ -51,8 +51,11 @@
                 return false;
             }
 
-            // REVIEW: Et si la valeur sous-jacente a changée entre temps ? Ne devrions-nous pas vérifier aussi _isSome ?
-            // Les deux options contiennent la même valeur, éventuellement nulle.
+            if (IsNone) {
+                return other.IsNone;
+            }
+
+            // Les deux options contiennent la même valeur.
             return comparer.Equals(_value, other._value);
         }
 
@@ -72,8 +75,8 @@
                 return false;
             }
 
-            // Habituellement, on teste obj.GetType() == this.GetType() pour éviter des bugs subtiles au cas où
-            // "this" ou "obj" serait une instance d'une classe dérivée. Comme Maybe<T> est fermée à l'extensibilité, 
+            // Habituellement, on teste obj.GetType() == this.GetType() au cas où "this" ou "obj" 
+            // serait une instance d'une classe dérivée. Comme Maybe<T> est fermée à l'extensibilité, 
             // on n'a pas ce problème.
             return Equals(other as Maybe<T>);
         }
