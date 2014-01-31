@@ -6,15 +6,18 @@
 
     public class HtmlHelperFacts
     {
-        [Fact]
-        public void ScriptLink()
+        public static class TheScriptMethod
         {
-            // Arrange
-            var htmlHelper = MvcHelper.GetHtmlHelper();
-            // Act
-            var html = htmlHelper.Script(new Uri("http://localhost"), "scripttype");
-            // Assert
-            Assert.Equal(@"<script src=""//localhost/"" type=""scripttype""></script>", html.ToHtmlString());
+            [Fact]
+            public static void ScriptLink()
+            {
+                // Arrange
+                var htmlHelper = MvcHelper.GetHtmlHelper();
+                // Act
+                var html = htmlHelper.Script(new Uri("http://localhost"), "scripttype");
+                // Assert
+                Assert.Equal(@"<script src=""//localhost/"" type=""scripttype""></script>", html.ToHtmlString());
+            }
         }
     }
 }

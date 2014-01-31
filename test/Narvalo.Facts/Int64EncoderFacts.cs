@@ -5,9 +5,9 @@
     using Xunit;
     using Xunit.Extensions;
 
-    public static partial class Int64EncoderFacts
+    public static class Int64EncoderFacts
     {
-        public static IEnumerable<object[]> SampleData
+        public static IEnumerable<object[]> Base58SampleData
         {
             get
             {
@@ -531,90 +531,104 @@
             }
         }
 
-        #region Base58
-
         [Fact]
-        public static void FromBase58String_Null_Throws()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Int64Encoder.FromBase58String(null));
-        }
-
-        [Fact]
-        public static void ToBase58String_NegativeValue_Throws()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Int64Encoder.ToBase58String(-1));
-        }
-
-        [Theory]
-        [PropertyData("SampleData")]
-        public static void FromBase58String_SampleData_Succeeds(string value, long expectedValue)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.FromBase58String(value));
-        }
-
-        [Theory]
-        [PropertyData("SampleData")]
-        public static void ToBase58String_SampleData_Succeeds(string expectedValue, long value)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
-        }
-
-        [Fact]
-        public static void RoundTripBase58_Succeeds()
+        public static void RoundTripBase58()
         {
             // Arrange
             long value = 3471391110;
+
             // Act & Assert
             Assert.Equal(value, Int64Encoder.FromBase58String(Int64Encoder.ToBase58String(value)));
         }
 
-        #endregion
-
-        #region FlickrBase58
-
         [Fact]
-        public static void ToFlickrBase58String_NegativeValue_Throws()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(delegate { Int64Encoder.ToFlickrBase58String(-1); });
-        }
-
-        [Fact]
-        public static void FromFlickrBase58String_Null_Throws()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(delegate { Int64Encoder.FromFlickrBase58String(null); });
-        }
-
-        [Fact]
-        public static void RoundTripFlickrBase58String_Succeeds()
+        public static void RoundTripFlickrBase58String()
         {
             // Arrange
             long value = 3471391110;
+
             // Act & Assert
             Assert.Equal(value, Int64Encoder.FromFlickrBase58String(Int64Encoder.ToFlickrBase58String(value)));
         }
 
-        [Theory]
-        [PropertyData("FlickrBase58SampleData")]
-        public static void ToFlickrBase58String_SampleData_Succeeds(string expectedValue, long value)
+        public static class TheFromBase58StringMethod
         {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
+            public static IEnumerable<object[]> SampleData { get { return Int64EncoderFacts.Base58SampleData; } }
+
+            [Fact]
+            public static void ThrowsArgumentNullException_ForNull()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>(() => Int64Encoder.FromBase58String(null));
+            }
+
+            [Theory]
+            [PropertyData("SampleData")]
+            public static void Succeeds_ForSampleData(string value, long expectedValue)
+            {
+                // Act & Assert
+                Assert.Equal(expectedValue, Int64Encoder.FromBase58String(value));
+            }
         }
 
-        [Theory]
-        [PropertyData("FlickrBase58SampleData")]
-        public static void FromFlickrBase58String_SampleData_Succeeds(string value, long expectedValue)
+        public static class TheFromFlickrBase58StringMethod
         {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
+            public static IEnumerable<object[]> SampleData { get { return Int64EncoderFacts.FlickrBase58SampleData; } }
+
+            [Fact]
+            public static void ThrowsArgumentNullException_ForNull()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>(delegate { Int64Encoder.FromFlickrBase58String(null); });
+            }
+
+            [Theory]
+            [PropertyData("SampleData")]
+            public static void Succeeds_ForSampleData(string value, long expectedValue)
+            {
+                // Act & Assert
+                Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
+            }
         }
 
-        #endregion
+        public static class TheToBase58StringMethod
+        {
+            public static IEnumerable<object[]> SampleData { get { return Int64EncoderFacts.Base58SampleData; } }
+
+            [Fact]
+            public static void ThrowsArgumentOutOfRangeException_ForNegativeValue()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentOutOfRangeException>(() => Int64Encoder.ToBase58String(-1));
+            }
+
+            [Theory]
+            [PropertyData("SampleData")]
+            public static void Succeeds_ForSampleData(string expectedValue, long value)
+            {
+                // Act & Assert
+                Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
+            }
+        }
+
+        public static class TheToFlickrBase58StringMethod
+        {
+            public static IEnumerable<object[]> SampleData { get { return Int64EncoderFacts.FlickrBase58SampleData; } }
+
+            [Fact]
+            public static void ThrowsArgumentOutOfRangeException_ForNegativeValue()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentOutOfRangeException>(delegate { Int64Encoder.ToFlickrBase58String(-1); });
+            }
+
+            [Theory]
+            [PropertyData("SampleData")]
+            public static void Succeeds_ForSampleData(string expectedValue, long value)
+            {
+                // Act & Assert
+                Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
+            }
+        }
     }
 }

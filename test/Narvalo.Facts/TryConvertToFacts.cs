@@ -276,10 +276,8 @@
 
 #endif
 
-        public static class ToEnum
+        public static class TheEnumMethod
         {
-            #region > Validation du paramètre générique <
-
 #if DEBUG
             [Fact(Skip = Constants.SkipReleaseOnly)]
 #else
@@ -307,10 +305,6 @@
                 Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<StructStub_>(1, out result));
             }
 
-            #endregion
-
-            #region > Conversion d'une valeur valide <
-
             [Fact]
             public static void ReturnsTrueAndPicksCorrectMember_ForActualValue()
             {
@@ -335,10 +329,6 @@
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
             }
 
-            #endregion
-
-            #region > Conversion d'une valeur invalide <
-
             [Fact]
             public static void ReturnsFalseAndPicksDefaultMember_ForInvalidValue()
             {
@@ -350,8 +340,6 @@
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
             }
-
-            #endregion
         }
     }
 }

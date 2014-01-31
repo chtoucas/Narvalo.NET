@@ -90,7 +90,7 @@
         public static class TheIsSomePropery
         {
             [Fact]
-            public static void IsImmutableOnceTrue()
+            public static void IsImmutable_OnceTrue()
             {
                 // Arrange
                 var list = new List<int>();
@@ -104,7 +104,7 @@
             }
 
             [Fact]
-            public static void IsImmutableOnceFalse()
+            public static void IsImmutable_OnceFalse()
             {
                 // Arrange
                 List<int> list = null;
@@ -121,7 +121,7 @@
         public static class TheValueProperty
         {
             [Fact]
-            public static void ThrowsInvalidOperationException_WithNone()
+            public static void ThrowsInvalidOperationException_WhenNone()
             {
                 // Arrange
                 var option = Maybe<int>.None;
@@ -131,7 +131,7 @@
             }
 
             [Fact]
-            public static void HoldsTheValue_ForSome()
+            public static void ReturnsTheOriginalValue_WhenSome()
             {
                 // Arrange
                 var simple = 3141;
@@ -156,7 +156,7 @@
         public static class TheEqualityOperator
         {
             [Fact]
-            public static void ReturnsTrue_WithMaybeNullAndNull()
+            public static void ReturnsTrue_ForMaybeNullAndNull()
             {
                 // Arrange
                 var simple = (Maybe<int>)null;
@@ -170,7 +170,7 @@
             }
 
             [Fact]
-            public static void ReturnsFalse_WithMaybeNoneAndNull()
+            public static void ReturnsFalse_ForMaybeNoneAndNull()
             {
                 // Arrange
                 var simple = Maybe<int>.None;
@@ -187,7 +187,7 @@
         public static class TheInequalityOperator
         {
             [Fact]
-            public static void ReturnsFalse_WithMaybeNullAndNull()
+            public static void ReturnsFalse_ForMaybeNullAndNull()
             {
                 // Arrange
                 var simple = (Maybe<int>)null;
@@ -201,7 +201,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrue_WithMaybeNoneAndNull()
+            public static void ReturnsTrue_ForMaybeNoneAndNull()
             {
                 // Arrange
                 var simple = Maybe<int>.None;
@@ -279,7 +279,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrue_ForMaybeNone_WithNull()
+            public static void ReturnsTrue_WhenNone_ForNull()
             {
                 // Arrange
                 var simple = Maybe<int>.None;
@@ -295,7 +295,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrue_WithOriginalValue()
+            public static void ReturnsTrue_ForOriginalValue()
             {
                 // Arrange
                 var simple = 3141;
@@ -314,7 +314,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrue_WithOriginalValueCastedToObject()
+            public static void ReturnsTrue_ForOriginalValueCastedToObject()
             {
                 // Arrange
                 var simple = 3141;

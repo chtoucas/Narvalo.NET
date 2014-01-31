@@ -36,7 +36,7 @@
 
         #endregion
 
-        public static class ToEnum
+        public static class TheEnumMethod
         {
             //// Validation du paramètre générique
             

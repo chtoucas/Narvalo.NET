@@ -5,7 +5,7 @@
 
     public static class TryParseToFacts
     {
-        public static class ToBoolean
+        public static class TheBooleanMethod
         {
             [Fact]
             public static void DoesNotAlterInputValue()
@@ -44,7 +44,7 @@
             //}
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForEmptyString_WhenEmptyIsFalse()
+            public static void ReturnsTrueAndPicksFalse_ForEmptyStringAndEmptyIsFalse()
             {
                 // Arrange
                 bool result;
@@ -56,7 +56,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksTrue_ForLiteralTrue_WhenLiteralStyle()
+            public static void ReturnsTrueAndPicksTrue_ForLiteralTrueAndLiteralStyle()
             {
                 // Arrange
                 bool result;
@@ -68,7 +68,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksTrue_ForLiteralMixedCaseTrue_WhenLiteralStyle()
+            public static void ReturnsTrueAndPicksTrue_ForLiteralMixedCaseTrueAndLiteralStyle()
             {
                 // Arrange
                 bool result;
@@ -80,7 +80,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForLiteralFalse_WhenLiteralStyle()
+            public static void ReturnsTrueAndPicksFalse_ForLiteralFalseAndLiteralStyle()
             {
                 // Arrange
                 bool result;
@@ -92,7 +92,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForLiteralMixedCaseFalse_WhenLiteralStyle()
+            public static void ReturnsTrueAndPicksFalse_ForLiteralMixedCaseFalseAndLiteralStyle()
             {
                 // Arrange
                 bool result;
@@ -104,7 +104,7 @@
             }
 
             [Fact]
-            public static void ReturnsFalseAndPicksDefaultBoolean_ForLiteralTrueAndWhitespaces_WhenLiteralStyle()
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForLiteralTrueAndWhitespacesAndLiteralStyle()
             {
                 // Arrange
                 bool result;
@@ -116,7 +116,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksTrue_ForPositiveInt32_WhenIntegerStyle()
+            public static void ReturnsTrueAndPicksTrue_ForPositiveInt32AndIntegerStyle()
             {
                 // Arrange
                 bool result;
@@ -128,7 +128,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForZero_WhenIntegerStyle()
+            public static void ReturnsTrueAndPicksFalse_ForZeroAndIntegerStyle()
             {
                 // Arrange
                 bool result;
@@ -140,7 +140,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForNegativeInt32_WhenIntegerStyle()
+            public static void ReturnsTrueAndPicksFalse_ForNegativeInt32AndIntegerStyle()
             {
                 // Arrange
                 bool result;
@@ -152,7 +152,7 @@
             }
 
             [Fact]
-            public static void ReturnsFalseAndPicksDefaultBoolean_ForDecimal_WhenIntegerStyle()
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForDecimalAndIntegerStyle()
             {
                 // Arrange
                 bool result;

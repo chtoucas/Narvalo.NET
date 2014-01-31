@@ -7,7 +7,7 @@
 
     public static class StringManipFacts
     {
-        public static class Reverse
+        public static class TheReverseMethod
         {
             public static IEnumerable<object[]> SampleData
             {
