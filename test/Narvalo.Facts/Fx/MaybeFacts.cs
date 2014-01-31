@@ -7,28 +7,25 @@
 
     public static class MaybeFacts
     {
-        static readonly Uri SampleUri_ = new Uri("http://localhost");
-        static readonly Uri AnotherUri_ = new Uri("http://narvalo.org");
-
         #region Stubs
 
-        struct ValueStub_ : IEquatable<ValueStub_>
+        struct ValueStub : IEquatable<ValueStub>
         {
             int _value;
 
-            public ValueStub_(int value) { _value = value; }
+            public ValueStub(int value) { _value = value; }
 
-            public static bool operator ==(ValueStub_ left, ValueStub_ right)
+            public static bool operator ==(ValueStub left, ValueStub right)
             {
                 return left.Equals(right);
             }
 
-            public static bool operator !=(ValueStub_ left, ValueStub_ right)
+            public static bool operator !=(ValueStub left, ValueStub right)
             {
                 return !left.Equals(right);
             }
 
-            public bool Equals(ValueStub_ other)
+            public bool Equals(ValueStub other)
             {
                 return _value == other._value;
             }
@@ -39,11 +36,11 @@
                     return false;
                 }
 
-                if (!(obj is ValueStub_)) {
+                if (!(obj is ValueStub)) {
                     return false;
                 }
 
-                return Equals((ValueStub_)obj);
+                return Equals((ValueStub)obj);
             }
 
             public override int GetHashCode()
@@ -52,16 +49,11 @@
             }
         }
 
-        class ClassStub_
-        {
-            public Uri Url { get; set; }
-        }
-
-        class AlmostValueStub_ : IEquatable<AlmostValueStub_>
+        class AlmostValueStub : IEquatable<AlmostValueStub>
         {
             public string Value { get; set; }
 
-            public bool Equals(AlmostValueStub_ other)
+            public bool Equals(AlmostValueStub other)
             {
                 if (ReferenceEquals(other, null)) {
                     return false;
@@ -84,7 +76,7 @@
                     return false;
                 }
 
-                return Equals((AlmostValueStub_)obj);
+                return Equals((AlmostValueStub)obj);
             }
 
             public override int GetHashCode()
@@ -95,308 +87,328 @@
 
         #endregion
 
-        //[Fact]
-        //public static void Maybe_ForValueType_IsImmutable()
-        //{
-        //    // Arrange
-        //    var option1 = Maybe.Create(new ValueStub_(3141));
-        //    var option2 = Maybe.Create(new ValueStub_(3141));
-
-        //    // Act & Assert
-        //    Assert.True(option1 != option2);
-        //    Assert.True(option1.Equals(option2));
-        //}
-
-        //[Fact]
-        //public static void Maybe_ForValueType()
-        //{
-        //    // Arrange
-        //    var value = SampleUri_;
-        //    // Act
-        //    var option1 = Maybe.Create(new ClassStub_ { Url = value });
-        //    value = AnotherUri_;
-        //    var option2 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
-        //    // Assert
-        //    //Assert.True(option1.Value == AnotherUri_);
-        //    Assert.False(option1.Equals(option2));
-        //}
-
-        //[Fact]
-        //public static void Maybe_ForValueType_List()
-        //{
-        //    // Arrange
-        //    IList<int> list = new List<int>();
-        //    list.Add(0);
-        //    // Act
-        //    var option = Maybe.Create(list);
-
-        //    // Assert
-        //    Assert.True(option.IsSome);
-
-        //    Assert.True(option.Value[0] == 0);
-
-        //    list.Add(1);
-        //    Assert.True(option.Value[1] == 1);
-
-        //    list.Remove(1);
-        //    Assert.Throws<ArgumentOutOfRangeException>(() => option.Value[1] == 1);
-
-        //    option.Value.Add(1);
-        //    Assert.True(option.Value[1] == 1);
-
-        //    list = null;
-        //    Assert.False(ReferenceEquals(option.Value, null));
-        //    Assert.False(option.Equals(Maybe<IList<int>>.None));
-        //}
-
-        public static class Equality
+        public static class TheIsSomePropery
         {
             [Fact]
-            public static void MaybeNull_Equals_Null_Succeeds()
+            public static void IsImmutableOnceTrue()
             {
                 // Arrange
-                var option = (Maybe<int>)null;
+                var list = new List<int>();
+
+                // Act
+                var option = Maybe.Create(list);
+                list = null;
+
                 // Act & Assert
-                Assert.True(option == null);
-                Assert.False(option != null);
+                Assert.True(option.IsSome);
             }
 
             [Fact]
-            public static void MaybeNone_Equals_Null_Fails()
+            public static void IsImmutableOnceFalse()
             {
                 // Arrange
-                var option = Maybe<int>.None;
+                List<int> list = null;
+
+                // Act
+                var option = Maybe.Create(list);
+                list = new List<int>();
+
                 // Act & Assert
-                Assert.False(option == null);
-                Assert.True(option != null);
+                Assert.True(!option.IsSome);
             }
         }
 
-        public static class StructuralEquality
+        public static class TheValueProperty
         {
-            //// Réflexivité : x == x
+            [Fact]
+            public static void ThrowsInvalidOperationException_WithNone()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
 
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => option.Value);
+            }
+
+            [Fact]
+            public static void HoldsTheValue_ForSome()
+            {
+                // Arrange
+                var simple = 3141;
+                var value = new ValueStub(3141);
+                ValueStub? nullableValue = new ValueStub(3141);
+                var reference = new List<int>();
+
+                // Act
+                var simpleOpt = Maybe.Create(simple);
+                var valueOpt = Maybe.Create(value);
+                var nullableValueOpt = Maybe.Create(nullableValue);
+                var referenceOpt = Maybe.Create(reference);
+
+                // Assert
+                Assert.True(simpleOpt.Value == simple);
+                Assert.True(valueOpt.Value == value);
+                Assert.True(nullableValueOpt.Value == nullableValue.Value);
+                Assert.True(referenceOpt.Value == reference);
+            }
+        }
+
+        public static class TheEqualityOperator
+        {
+            [Fact]
+            public static void ReturnsTrue_WithMaybeNullAndNull()
+            {
+                // Arrange
+                var simple = (Maybe<int>)null;
+                var value = (Maybe<ValueStub>)null;
+                var reference = (Maybe<List<int>>)null;
+
+                // Act & Assert
+                Assert.True(simple == null);
+                Assert.True(value == null);
+                Assert.True(reference == null);
+            }
+
+            [Fact]
+            public static void ReturnsFalse_WithMaybeNoneAndNull()
+            {
+                // Arrange
+                var simple = Maybe<int>.None;
+                var value = Maybe<ValueStub>.None;
+                var reference = Maybe<List<int>>.None;
+
+                // Act & Assert
+                Assert.False(simple == null);
+                Assert.False(value == null);
+                Assert.False(reference == null);
+            }
+        }
+
+        public static class TheInequalityOperator
+        {
+            [Fact]
+            public static void ReturnsFalse_WithMaybeNullAndNull()
+            {
+                // Arrange
+                var simple = (Maybe<int>)null;
+                var value = (Maybe<ValueStub>)null;
+                var reference = (Maybe<List<int>>)null;
+
+                // Act & Assert
+                Assert.False(simple != null);
+                Assert.False(value != null);
+                Assert.False(reference != null);
+            }
+
+            [Fact]
+            public static void ReturnsTrue_WithMaybeNoneAndNull()
+            {
+                // Arrange
+                var simple = Maybe<int>.None;
+                var value = Maybe<ValueStub>.None;
+                var reference = Maybe<List<int>>.None;
+
+                // Act & Assert
+                Assert.True(simple != null);
+                Assert.True(value != null);
+                Assert.True(reference != null);
+            }
+        }
+
+        public static class TheEqualsMethod
+        {
             [Fact]
             public static void IsReflexive()
             {
                 // Arrange
-                var option1 = Maybe.Create(1000);
-                var option2 = Maybe.Create(new ValueStub_(3141));
-                var option3 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                // Act & Assert
-                Assert.True(option1.Equals(option1));
-                Assert.True(option2.Equals(option2));
-                Assert.True(option3.Equals(option3));
-            }
-
-            //// Commutativité :  x == y <=> y == x
-
-            [Fact]
-            public static void IsSymmetric_ForSimpleType()
-            {
-                // Arrange
-                var option1 = Maybe.Create(3141);
-                var option2 = Maybe.Create(3141);
-                var option3 = Maybe.Create(1570);
+                var simple = Maybe.Create(3141);
+                var value = Maybe.Create(new ValueStub(3141));
+                var reference = Maybe.Create(new List<int>());
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2), option2.Equals(option1));
-                Assert.Equal(option1.Equals(option3), option3.Equals(option1));
+                Assert.True(simple.Equals(simple));
+                Assert.True(value.Equals(value));
+                Assert.True(reference.Equals(reference));
             }
 
             [Fact]
-            public static void IsSymmetric_ForStruct()
+            public static void IsAbelian()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ValueStub_(3141));
-                var option2 = Maybe.Create(new ValueStub_(3141));
-                var option3 = Maybe.Create(new ValueStub_(1570));
+                var simpleA0 = Maybe.Create(3141);
+                var simpleA1 = Maybe.Create(3141);
+                var simple = Maybe.Create(1570);
+
+                var valueA0 = Maybe.Create(new ValueStub(3141));
+                var valueA1 = Maybe.Create(new ValueStub(3141));
+                var value = Maybe.Create(new ValueStub(1570));
+
+                var referenceA0 = Maybe.Create(new List<int>());
+                var referenceA1 = Maybe.Create(new List<int>());
+                var reference = Maybe.Create(new List<int>() { 0 });
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2), option2.Equals(option1));
-                Assert.Equal(option1.Equals(option3), option3.Equals(option1));
+                Assert.Equal(simpleA0.Equals(simpleA1), simpleA1.Equals(simpleA0));
+                Assert.Equal(simpleA0.Equals(simple), simple.Equals(simpleA0));
+                Assert.Equal(valueA0.Equals(valueA1), valueA1.Equals(valueA0));
+                Assert.Equal(valueA0.Equals(value), value.Equals(valueA0));
+                Assert.Equal(referenceA0.Equals(referenceA1), referenceA1.Equals(referenceA0));
+                Assert.Equal(referenceA0.Equals(reference), reference.Equals(referenceA0));
             }
 
             [Fact]
-            public static void IsSymmetric_ForComplexStruct()
+            public static void IsTransitive()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ValueStub_(3141));
-                var option2 = Maybe.Create(new ValueStub_(3141));
-                var option3 = Maybe.Create(new ValueStub_(1570));
+                var simple1 = Maybe.Create(3141);
+                var simple2 = Maybe.Create(3141);
+                var simple3 = Maybe.Create(3141);
+
+                var value1 = Maybe.Create(new ValueStub(3141));
+                var value2 = Maybe.Create(new ValueStub(3141));
+                var value3 = Maybe.Create(new ValueStub(3141));
+
+                var reference1 = Maybe.Create(new List<int>());
+                var reference2 = Maybe.Create(new List<int>());
+                var reference3 = Maybe.Create(new List<int>());
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2), option2.Equals(option1));
-                Assert.Equal(option1.Equals(option3), option3.Equals(option1));
+                Assert.Equal(simple1.Equals(simple2) && simple2.Equals(simple3), simple1.Equals(simple3));
+                Assert.Equal(value1.Equals(value2) && value2.Equals(value3), value1.Equals(value3));
+                Assert.Equal(reference1.Equals(reference2) && reference2.Equals(reference3), reference1.Equals(reference3));
             }
 
             [Fact]
-            public static void IsSymmetric_ForClass()
+            public static void ReturnsTrue_ForMaybeNone_WithNull()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                var option2 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                var option3 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
+                var simple = Maybe<int>.None;
+                var value = Maybe<ValueStub>.None;
+                var reference = Maybe<List<int>>.None;
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2), option2.Equals(option1));
-                Assert.Equal(option1.Equals(option3), option3.Equals(option1));
+                Assert.True(simple.Equals(null));
+                Assert.True(value.Equals(null));
+                Assert.True(reference.Equals((object)null));
+                Assert.True(reference.Equals((List<int>)null));
+                Assert.True(reference.Equals((Maybe<List<int>>)null));
             }
 
             [Fact]
-            public static void IsSymmetric_ForComplexClass()
+            public static void ReturnsTrue_WithOriginalValue()
             {
                 // Arrange
-                var option1 = Maybe.Create(new AlmostValueStub_ { Value = "π" });
-                var option2 = Maybe.Create(new AlmostValueStub_ { Value = "π" });
-                var option3 = Maybe.Create(new AlmostValueStub_ { Value = "pi" });
+                var simple = 3141;
+                var simpleOpt = Maybe.Create(simple);
+
+                var value = new ValueStub(3141);
+                var valueOpt = Maybe.Create(value);
+
+                var reference = new List<int>();
+                var referenceOpt = Maybe.Create(reference);
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2), option2.Equals(option1));
-                Assert.Equal(option1.Equals(option3), option3.Equals(option1));
-            }
-
-            //// Transitive : x == y && y == z => x == z
-
-            [Fact]
-            public static void IsTransitive_ForSimpleType()
-            {
-                // Arrange
-                var option1 = Maybe.Create(3141);
-                var option2 = Maybe.Create(3141);
-                var option3 = Maybe.Create(3141);
-                var option4 = Maybe.Create(1570);
-
-                // Act & Assert
-                Assert.Equal(option1.Equals(option2) && option2.Equals(option3), option1.Equals(option3));
+                Assert.True(simpleOpt.Equals(simple));
+                Assert.True(valueOpt.Equals(value));
+                Assert.True(referenceOpt.Equals(reference));
             }
 
             [Fact]
-            public static void IsTransitive_ForStruct()
+            public static void ReturnsTrue_WithOriginalValueCastedToObject()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ValueStub_(3141));
-                var option2 = Maybe.Create(new ValueStub_(3141));
-                var option3 = Maybe.Create(new ValueStub_(3141));
-                var option4 = Maybe.Create(new ValueStub_(1570));
+                var simple = 3141;
+                var simpleOpt = Maybe.Create(simple);
+
+                var value = new ValueStub(3141);
+                var valueOpt = Maybe.Create(value);
+
+                var reference = new List<int>();
+                var referenceOpt = Maybe.Create(reference);
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2) && option2.Equals(option3), option1.Equals(option3));
+                Assert.True(simpleOpt.Equals((object)simple));
+                Assert.True(valueOpt.Equals((object)value));
+                Assert.True(referenceOpt.Equals((object)reference));
             }
 
             [Fact]
-            public static void IsTransitive_ForClass()
+            public static void FollowsStructuralEqualityRules()
             {
                 // Arrange
-                var option1 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                var option2 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                var option3 = Maybe.Create(new ClassStub_ { Url = SampleUri_ });
-                var option4 = Maybe.Create(new ClassStub_ { Url = AnotherUri_ });
+                var simpleA0 = Maybe.Create(3141);
+                var simpleA1 = Maybe.Create(3141);
+
+                var valueA0 = Maybe.Create(new ValueStub(3141));
+                var valueA1 = Maybe.Create(new ValueStub(3141));
+
+                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
                 // Act & Assert
-                Assert.Equal(option1.Equals(option2) && option2.Equals(option3), option1.Equals(option3));
-            }
-
-            //// 
-
-            [Fact]
-            public static void Equals_MaybeNone_And_Null_ReturnsFalse()
-            {
-                // Arrange
-                var option = Maybe<int>.None;
-                // Act & Assert
-                Assert.False(option.Equals(null));
+                Assert.True(simpleA0.Equals(simpleA1));
+                Assert.True(valueA0.Equals(valueA1));
+                Assert.True(almostValueA0.Equals(almostValueA1));
             }
 
             [Fact]
-            public static void Equals_MaybeNone_And_Unit_ReturnsFalse()
+            public static void FollowsStructuralEqualityRulesAfterCastToObject()
             {
                 // Arrange
-                var option = Maybe<int>.None;
-                // Act & Assert
-                Assert.False(option.Equals(Unit.Single));
-            }
+                var simpleA0 = Maybe.Create(3141);
+                var simpleA1 = Maybe.Create(3141);
 
-            [Fact]
-            public static void Equals_Unit_And_MaybeNone_RReturnsFalse()
-            {
-                // Arrange
-                var option = Maybe<int>.None;
+                var valueA0 = Maybe.Create(new ValueStub(3141));
+                var valueA1 = Maybe.Create(new ValueStub(3141));
+
+                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+
                 // Act & Assert
-                Assert.False(Unit.Single.Equals(option));
+                Assert.True(simpleA0.Equals((object)simpleA1));
+                Assert.True(valueA0.Equals((object)valueA1));
+                Assert.True(almostValueA0.Equals((object)almostValueA1));
             }
         }
 
-        public static class Create
+        public static class TheCreateMethod
         {
             [Fact]
-            public static void ReturnsSome_ForInt32()
+            public static void ReturnsSome_ForNotNull()
             {
                 // Arrange
-                int value = 3141;
+                var simple = 3141;
+                var value = new ValueStub(3141);
+                ValueStub? nullableValue = new ValueStub(3141);
+                var reference = new List<int>();
+
                 // Act
-                Maybe<int> result = Maybe.Create(value);
+                var simpleOpt = Maybe.Create(simple);
+                var valueOpt = Maybe.Create(value);
+                var nullableValueOpt = Maybe.Create(nullableValue);
+                var referenceOpt = Maybe.Create(reference);
+
                 // Assert
-                Assert.True(result.IsSome);
-                Assert.Equal(value, result.Value);
+                Assert.True(simpleOpt.IsSome);
+                Assert.True(valueOpt.IsSome);
+                Assert.True(nullableValueOpt.IsSome);
+                Assert.True(referenceOpt.IsSome);
             }
 
             [Fact]
-            public static void ReturnsSome_ForNullableInt32WithValue()
+            public static void ReturnsNone_ForNull()
             {
                 // Arrange
-                int? value = 3141;
-                // Act
-                Maybe<int> result = Maybe.Create(value);
-                // Assert
-                Assert.True(result.IsSome);
-                Assert.Equal(value.Value, result.Value);
-            }
+                ValueStub? value = null;
+                List<int> reference = null;
 
-            [Fact]
-            public static void ReturnsNone_ForNullableInt32WithoutValue()
-            {
-                // Arrange
-                int? value = null;
                 // Act
-                Maybe<int> result = Maybe.Create(value);
-                // Assert
-                Assert.True(result.IsNone);
-            }
+                var valueOpt = Maybe.Create(value);
+                var referenceOpt = Maybe.Create(reference);
 
-            [Fact]
-            public static void ReturnsNone_ForNullString()
-            {
-                // Arrange
-                string value = null;
-                // Act
-                Maybe<string> result = Maybe.Create(value);
                 // Assert
-                Assert.True(result.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsSome_ForEmptyString()
-            {
-                // Arrange
-                string value = String.Empty;
-                // Act
-                Maybe<string> result = Maybe.Create(value);
-                // Assert
-                Assert.True(result.IsSome);
-                Assert.Equal(value, result.Value);
-            }
-
-            [Fact]
-            public static void ReturnsSome_ForNotNullOrEmptyString()
-            {
-                // Arrange
-                string value = "Une chaîne de caractère";
-                // Act
-                Maybe<string> result = Maybe.Create(value);
-                // Assert
-                Assert.True(result.IsSome);
-                Assert.Equal(value, result.Value);
+                Assert.True(valueOpt.IsNone);
+                Assert.True(referenceOpt.IsNone);
             }
         }
     }

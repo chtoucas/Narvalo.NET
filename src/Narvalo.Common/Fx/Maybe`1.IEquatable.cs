@@ -1,38 +1,15 @@
 ﻿namespace Narvalo.Fx
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
 
     /* Egalité référentielle et égalité structurelle
      * ---------------------------------------------
      * 
-     * On redéfinit la méthode Equals() afin qu'elle suive les mêmes règles que les objets de type valeur.
+     * On redéfinit la méthode Equals() afin qu'elle suive les règles d'égalité structurelle.
      * Par contre, on ne touche pas aux opérateurs d'égalité (== et !=) qui continuent donc à tester l'égalité 
-     * référentielle, comportement attendu par le framework .NET.
-     * Une autre possibilité, abandonnée, aurait été d'utiliser l'interface IStructuralEquatable.
-     * 
-     * J'ai pensé implémenter l'interface IEquatable<T> mais cela pose plus de problème qu'autre chose.
-     * On aurait créé une méthode qui aurait ressembler à ce qui suit :
-     * '''
-     * public bool Equals(T other, IEqualityComparer<T> comparer)
-     * {
-     *   // NB: Maybe<T>.None.Equals((T)null) retourne false. Pour un object de type valeur, c'est normal.
-     *   // Par contre, pour un objet de type référence, cela peut paraître incohérent puisque Maybe<T>.None
-     *   // encapsule la valeur null...
-     *   if (ReferenceEquals(other, null)) {
-     *     return false;
-     *   }
-     *
-     *   return Equals(new Maybe<T>(other));
-     * }
-     * '''
-     * et il aurait aussi fallu modifier Equals(object obj) en intercalant un test dans le genre :
-     * '''
-     * if (obj is T) {
-     *   return Equals((T)obj);
-     * }
-     * '''
+     * référentielle, comportement en ligne avec celui du framework .NET, d'autant plus qu'un Maybe<T> n'est
+     * en général pas immuable.
+     * Une autre possibilité, abandonnée, aurait été d'implémenter l'interface IStructuralEquatable.
      */
 
     public partial class Maybe<T>
@@ -46,9 +23,8 @@
         /// <summary />
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
-            // "this" n'est jamais null.
             if (ReferenceEquals(other, null)) {
-                return false;
+                return IsNone;
             }
 
             if (IsNone) {
@@ -57,6 +33,16 @@
 
             // Les deux options contiennent la même valeur.
             return comparer.Equals(_value, other._value);
+        }
+
+        public bool Equals(T other)
+        {
+            return Equals(other, EqualityComparer<T>.Default);
+        }
+
+        public bool Equals(T other, IEqualityComparer<T> comparer)
+        {
+            return Equals(Maybe.Create(other), comparer);
         }
 
         /// <summary />
@@ -70,15 +56,18 @@
         {
             Require.NotNull(comparer, "comparer");
 
-            // "this" n'est jamais null.
-            if (ReferenceEquals(other, null)) {
-                return false;
+            if (other == null) {
+                return IsNone;
+            }
+
+            if (other is T) {
+                return Equals((T)other, comparer);
             }
 
             // Habituellement, on teste obj.GetType() == this.GetType() au cas où "this" ou "obj" 
             // serait une instance d'une classe dérivée. Comme Maybe<T> est fermée à l'extensibilité, 
             // on n'a pas ce problème.
-            return Equals(other as Maybe<T>);
+            return Equals(other as Maybe<T>, comparer);
         }
 
         /// <summary />
