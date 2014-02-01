@@ -2,7 +2,8 @@
 {
     using System.Runtime.CompilerServices;
 
-    /* A note on monads
+    /*!
+     * A note on monads
      * ----------------
      * 
      * You shouldn't be afraid of the monad! You don't need to understand the theory behind to make good use of it, really.

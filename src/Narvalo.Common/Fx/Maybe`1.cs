@@ -1,16 +1,16 @@
 ﻿// Copyright (c) 2014, Narvalo.Org
 // All rights reserved.
-
+//
 // Redistribution and use in source and binary forms, with or without 
 // modification, are permitted provided that the following conditions are met:
-
+//
 // 1. Redistributions of source code must retain the above copyright notice,
 // this list of conditions and the following disclaimer.
-
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice,
 // this list of conditions and the following disclaimer in the documentation 
 // and/or other materials provided with the distribution.
-
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -31,20 +31,31 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    /* The Maybe Monad
+    /*!
+     * The Maybe Monad
      * ===============
      * 
-     * The `Maybe<T>` class is kind of like the `Nullable<T>` class without any restriction on the underlying type :
+     * The `Maybe<T>` class is kind of like the `Nullable<T>` class but without any restriction on the underlying type :
      * _it provides a way to tell the absence or the presence of a value_. Taken alone, it might not look that useful,
      * we could simply use a nullable for value types and a `null` for reference types. That's where the monad
      * comes into play. The `Maybe<T>` satisfies a very simple grammar, known as the monad laws, from which 
      * we can construct a rich vocabulary.
      * 
-     * What I like the most about this class is that it helps to state clearly our intent with a very clean syntax.
+     * What I like the most about this class is that it helps to clearly express our intent with a very clean syntax.
+     * For instance, considering the following methods
+     * '''
+     * string GetPhoneNumber() { ... }
+     * Maybe<string> MayGetPhoneNumber() { ... }
+     * '''
+     * I believe that the second version makes it clear that we might actually not know the phone number.
+     * It then makes easy to write what we do in either cases:
+     * '''
+     * MayGetPhoneNumber().OnNone( ... ).OnSome( ... );
+     * '''
      * 
-     * The main weakness of the Maybe monad is that it is all black or all white. In some circumstances, I might like 
-     * to be able to be able to give an explanation for the absence of a value. In fact, that's one of the purpose
-     * of the Either monad.
+     * The most obvious weakness of the Maybe monad is that it is all black or all white. In some circumstances,
+     * I might like to be able to be able to give an explanation for the absence of a value. In fact, that's one
+     * of the purpose of the Either monad.
      * 
      * The main defects of this implementation are :
      * + It is a reference type,
@@ -52,6 +63,11 @@ namespace Narvalo.Fx
      * + (more to be added later, I am sure there are other problems)
      * 
      * This class is sometimes referred to as the Option type.
+     * 
+     * ### Naming convention ###
+     * 
+     * We prefix with "May" all methods that return a Maybe instance.
+     * 
      * 
      * Design of `Maybe<T>`
      * --------------------
@@ -71,6 +87,7 @@ namespace Narvalo.Fx
      * 
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the use
      * of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
+     * 
      * 
      * References
      * ----------
@@ -95,7 +112,8 @@ namespace Narvalo.Fx
         readonly bool _isSome;
         readonly T _value;
 
-        /* Constructor
+        /*!
+         * Constructor
          * -----------
          * 
          * All constructors are made private. Having complete control over the creation of an instance
@@ -133,7 +151,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Returns true if the object does not have an underlying value, false otherwise.
         /// </summary>
-        public bool IsNone { get { return !IsSome; } }
+        public bool IsNone { get { return !_isSome; } }
 
         /// <summary>
         /// Returns true if the object contains a value, false otherwise.
@@ -148,7 +166,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                if (!IsSome) {
+                if (!_isSome) {
                     throw new InvalidOperationException(SR.Maybe_NoneHasNoValue);
                 }
 
@@ -162,7 +180,7 @@ namespace Narvalo.Fx
         /// <returns>The underlying value or the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return IsSome ? _value : default(T);
+            return _isSome ? _value : default(T);
         }
 
         /// <summary>
@@ -172,14 +190,14 @@ namespace Narvalo.Fx
         /// <returns>The underlying value or defaultValue.</returns>
         public T ValueOrElse(T defaultValue)
         {
-            return IsSome ? _value : defaultValue;
+            return _isSome ? _value : defaultValue;
         }
 
         public T ValueOrElse(Func<T> defaultValueFactory)
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return IsSome ? _value : defaultValueFactory.Invoke();
+            return _isSome ? _value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
@@ -193,7 +211,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
-            if (IsNone) {
+            if (!_isSome) {
                 throw exceptionFactory.Invoke();
             }
 
@@ -203,11 +221,11 @@ namespace Narvalo.Fx
         /// <summary />
         public IEnumerator<T> GetEnumerator()
         {
-            if (IsNone) {
-                return Enumerable.Empty<T>().GetEnumerator();
+            if (_isSome) {
+                return new List<T> { _value }.GetEnumerator();
             }
             else {
-                return new List<T> { Value }.GetEnumerator();
+                return Enumerable.Empty<T>().GetEnumerator();
             }
         }
 
@@ -220,7 +238,7 @@ namespace Narvalo.Fx
         /// <summary />
         public override String ToString()
         {
-            return IsSome ? _value.ToString() : "None";
+            return _isSome ? _value.ToString() : "{None}";
         }
     }
 }
