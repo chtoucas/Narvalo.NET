@@ -1,14 +1,52 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org
+// All rights reserved.
+
+// Redistribution and use in source and binary forms, with or without 
+// modification, are permitted provided that the following conditions are met:
+
+// 1. Redistributions of source code must retain the above copyright notice,
+// this list of conditions and the following disclaimer.
+
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+// this list of conditions and the following disclaimer in the documentation 
+// and/or other materials provided with the distribution.
+
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+// THE POSSIBILITY OF SUCH DAMAGE.
+
+namespace Narvalo.Fx
 {
     using System.Collections.Generic;
 
     /* Referential equality and structural equality
      * --------------------------------------------
      * 
-     * We redefine the `Equals()` method to allow for structural equality.
-     * Nevertheless, we do not change the meaning of the equality operators (== and !=) which continue 
-     * to test the referential equality, behaviour expected by the .NET framework for all reference types.
-     * Another (abandonned) possibility would have been to implement the IStructuralEquatable interface.
+     * We redefine the `Equals()` method to allow for structural equality for reference types that follow
+     * value type semantics. Nevertheless, we do not change the meaning of the equality operators (== and !=)
+     * which continue to test referential equality, behaviour expected by the .NET framework for all reference types.
+     * I might change my mind on this and try to make `Maybe<T>` behave like `Nullable<T>`.
+     * As a matter of convenience, we also implement the `IEquatable<T>` interface.
+     * Another (abandonned) possibility has been to implement the IStructuralEquatable interface.
+     * 
+     * '''
+     * Maybe<T>.None != null
+     * Maybe<T>.None.Equals(null)
+     *   
+     * Maybe.Create(1) != Maybe.Create(1)
+     * Maybe.Create(1).Equals(Maybe.Create(1))
+     *   
+     * Maybe.Create(1) != 1
+     * Maybe.Create(1).Equals(1)
+     * '''
      */
 
     public partial class Maybe<T>
@@ -106,7 +144,7 @@
                 return Equals((T)other, comparer);
             }
 
-            // Usually, we test the condition obj.GetType() == this.GetType() in case of "this" or "obj" 
+            // Usually, we test the condition obj.GetType() == this.GetType(), in case "this" or "obj" 
             // is an instance of a derived type, something that can not happen here because Maybe is sealed.
             return Equals(other as Maybe<T>, comparer);
         }

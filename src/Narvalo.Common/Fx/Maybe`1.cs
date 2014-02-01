@@ -40,16 +40,16 @@ namespace Narvalo.Fx
      * comes into play. The `Maybe<T>` satisfies a very simple grammar, known as the monad laws, from which 
      * we can construct a rich vocabulary.
      * 
-     * What I like the most in this class is that it helps to state clearly our intent with a very clean syntax.
+     * What I like the most about this class is that it helps to state clearly our intent with a very clean syntax.
      * 
      * The main weakness of the Maybe monad is that it is all black or all white. In some circumstances, I might like 
      * to be able to be able to give an explanation for the absence of a value. In fact, that's one of the purpose
      * of the Either monad.
      * 
      * The main defects of this implementation are :
-     * + it is a reference type,
-     * + an instance is mutable for reference types,
-     * + (more to be added here, I am sure there are other problems)
+     * + It is a reference type,
+     * + An instance is mutable for reference types,
+     * + (more to be added later, I am sure there are other problems)
      * 
      * This class is sometimes referred to as the Option type.
      * 
@@ -69,24 +69,14 @@ namespace Narvalo.Fx
      *   
      * ### Maybe<T> vs Nullable<T> ###
      * 
-     * _Most of the time_, for value types, `T?` offers a much better alternative. To discourage the use
+     * Most of the time, for value types, `T?` offers a much better alternative. To discourage the use
      * of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
-     * 
-     * A note on monads
-     * ----------------
-     * 
-     * You shouldn't be afraid of the monad! You don't have to understand the theory behind to make good use of it, really.
-     * In fact, I guess that the monad theory, or more precisely category theory, has influenced the design of many
-     * parts of the .NET framework ; Linq and the Reactive Extensions being the most obvious proofs of that.
-     * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
-     * access to some powerful (untold) monadic concepts in a very friendly way.
      * 
      * References
      * ----------
      * 
      * + [Wikipedia]: http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad
      * + [Haskell]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html
-     * + [Lippert]: http://ericlippert.com/category/monads/
      * 
      * Alternative implementations in C#:
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons

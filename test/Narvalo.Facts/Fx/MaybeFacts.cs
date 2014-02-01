@@ -232,7 +232,6 @@
                 Assert.False(almostValueA0 == almostValueA1);
                 Assert.False(referenceA0 == referenceA1);
             }
-
         }
 
         public static class TheInequalityOperator
