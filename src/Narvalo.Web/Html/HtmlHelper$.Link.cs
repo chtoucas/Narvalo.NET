@@ -45,7 +45,7 @@
                 tag.MergeAttribute("rel", relation);
             }
 
-            tag.MergeAttributes(attributes, true /* replaceExisting */);
+            tag.MergeAttributes(attributes, replaceExisting: true);
 
             return tag.ToHtmlString(TagRenderMode.SelfClosing);
         }

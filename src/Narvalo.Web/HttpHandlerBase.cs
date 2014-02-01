@@ -33,7 +33,7 @@
         {
             DebugCheck.NotNull(request);
 
-            return ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, true /* ignoreCase */)
+            return ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, ignoreCase: true)
                 .Map(_ => AcceptedVerbs.HasFlag(_))
                 ?? false;
         }

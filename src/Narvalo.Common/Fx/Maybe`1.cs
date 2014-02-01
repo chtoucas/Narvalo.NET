@@ -31,40 +31,64 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    /* Monade Maybe
-     * ============
+    /* The Maybe Monad
+     * ===============
      * 
-     * Design de `Maybe<T>`
+     * The `Maybe<T>` class is kind of like the `Nullable<T>` class without any restriction on the underlying type :
+     * _it provides a way to tell the absence or the presence of a value_. Taken alone, it might not look that useful,
+     * we could simply use a nullable for value types and a `null` for reference types. That's where the monad
+     * comes into play. The `Maybe<T>` satisfies a very simple grammar, known as the monad laws, from which 
+     * we can construct a rich vocabulary.
+     * 
+     * What I like the most in this class is that it helps to state clearly our intent with a very clean syntax.
+     * 
+     * The main weakness of the Maybe monad is that it is all black or all white. In some circumstances, I might like 
+     * to be able to be able to give an explanation for the absence of a value. In fact, that's one of the purpose
+     * of the Either monad.
+     * 
+     * The main defects of this implementation are :
+     * + it is a reference type,
+     * + an instance is mutable for reference types,
+     * + (more to be added here, I am sure there are other problems)
+     * 
+     * This class is sometimes referred to as the Option type.
+     * 
+     * Design of `Maybe<T>`
      * --------------------
      * 
-     * ### Classe vs structure ###
+     * ### Class vs structure ###
      * 
-     * + _Argument en faveur de l'utilisation d'une structure :_
-     * C# garantirait qu'une instance Maybe n'est jamais nulle, ce qui me semble être une bonne chose ici.
-     * N'est-ce-pas, au départ, une des raisons d'exister de cette classe ?
+     * + _Argument towards a structure:_
+     * C# then guarantees that an instance is never null, which seems like a good thing here.
+     * Isn't it one of the reasons why we decided in the first place to create such a class?
      * 
-     * + _Argument en défaveur de l'utilisation d'une structure :_
-     * Une instance n'est pas immuable si `T` n'est pas de type valeur. On a un **gros** problème : 
-     * une structure non immuable ouvre presque systématiquement la porte à la création de bugs difficiles à tracer.
+     * + _Argument against a structure:_
+     * An instance is mutable if `T` is a reference type. This should always raise a big warning.
      *   
-     * Au final, créer une structure non immuable me semble être suffisamment dangereux 
-     * pour ne pas poursuivre dans cette voie.
+     * In the end, creating a mutable structure seems way too hazardous.
      *   
-     * ### Contrainte de type ###
+     * ### Maybe<T> vs Nullable<T> ###
      * 
-     * Pour les types valeur, `T?` fournit _le plus souvent_ une bien meilleure alternative. Afin de ne pas encourager 
-     * l'utilisation d'un type Maybe quand un type nullable serait préférable, il faudrait créer une nouvelle règle FxCop.
+     * _Most of the time_, for value types, `T?` offers a much better alternative. To discourage the use
+     * of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
      * 
-     * ### Egalité structurelle ###
-     * Se reporter à la section dédiée à ce sujet.
+     * A note on monads
+     * ----------------
      * 
-     * Références
+     * You shouldn't be afraid of the monad! You don't have to understand the theory behind to make good use of it, really.
+     * In fact, I guess that the monad theory, or more precisely category theory, has influenced the design of many
+     * parts of the .NET framework ; Linq and the Reactive Extensions being the most obvious proofs of that.
+     * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
+     * access to some powerful (untold) monadic concepts in a very friendly way.
+     * 
+     * References
      * ----------
      * 
      * + [Wikipedia]: http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad
      * + [Haskell]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html
+     * + [Lippert]: http://ericlippert.com/category/monads/
      * 
-     * Autres implémentations :
+     * Alternative implementations in C#:
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons
      */
 
@@ -72,7 +96,8 @@ namespace Narvalo.Fx
     /// Represents a value that is either a single value of type T, or no value at all.
     /// </summary>
     /// <typeparam name="T">The type of the underlying value.</typeparam>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Il ne s'agit pas réellement d'une collection.")]
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
@@ -80,16 +105,17 @@ namespace Narvalo.Fx
         readonly bool _isSome;
         readonly T _value;
 
-        /* Constructeur
-         * ------------
+        /* Constructor
+         * -----------
          * 
-         * La seule manière d'appeler le constructeur est via la méthode statique interne `Maybe<T>.η(value)` qui
-         * garantit que `value` n'est jamais `null` quand on appelle le constructeur `Maybe.Maybe(value)`.
+         * All constructors are made private. Having complete control over the creation of an instance
+         * helps us to ensure that `value` is never `null` when passed to the constructor. This is exactly
+         * what we do in the static method `Maybe<T>.η(value)`.
          * 
-         * On expose deux méthodes et une propriété créationnelles :
-         * + `Maybe.Create<T>(value)` qui est juste un alias pour `Maybe<T>.η(value)` ;
-         * + `Maybe.Create<T?>(value)` pour les types nullable ;
-         * + `Maybe<T>.None` qui est un alias pour `Maybe.Maybe()`.
+         * To make things simpler, we provide two public factory methods:
+         * + `Maybe.Create<T>(value)`,
+         * + `Maybe.Create<T?>(value)`,
+         * and one static property `Maybe<T>.None` to reference a Maybe that has no value.
          */
 
         /// <summary>
@@ -111,7 +137,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "Une version non générique n'améliorerait pas la lisibilité.")]
+            Justification = "A generic version would not improve the readability.")]
         public static Maybe<T> None { get { return None_; } }
 
         /// <summary>

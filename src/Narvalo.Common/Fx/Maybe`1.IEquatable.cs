@@ -2,18 +2,61 @@
 {
     using System.Collections.Generic;
 
-    /* Egalité référentielle et égalité structurelle
-     * ---------------------------------------------
+    /* Referential equality and structural equality
+     * --------------------------------------------
      * 
-     * On redéfinit la méthode Equals() afin qu'elle suive les règles d'égalité structurelle.
-     * Par contre, on ne touche pas aux opérateurs d'égalité (== et !=) qui continuent donc à tester l'égalité 
-     * référentielle, comportement en ligne avec celui du framework .NET, d'autant plus qu'un Maybe<T> n'est
-     * en général pas immuable.
-     * Une autre possibilité, abandonnée, aurait été d'implémenter l'interface IStructuralEquatable.
+     * We redefine the `Equals()` method to allow for structural equality.
+     * Nevertheless, we do not change the meaning of the equality operators (== and !=) which continue 
+     * to test the referential equality, behaviour expected by the .NET framework for all reference types.
+     * Another (abandonned) possibility would have been to implement the IStructuralEquatable interface.
      */
 
     public partial class Maybe<T>
     {
+        /////// <summary />
+        ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
+        ////{
+        ////    if (ReferenceEquals(left, null)) {
+        ////        return ReferenceEquals(right, null) ? true : right.IsNone;
+        ////    }
+
+        ////    return left.Equals(right);
+        ////}
+
+        /////// <summary />
+        ////public static bool operator ==(Maybe<T> left, T right)
+        ////{
+        ////    if (ReferenceEquals(left, null)) {
+        ////        return ReferenceEquals(right, null);
+        ////    }
+
+        ////    return left.Equals(right);
+        ////}
+
+        /////// <summary />
+        ////public static bool operator ==(T left, Maybe<T> right)
+        ////{
+        ////    return right == left;
+        ////}
+
+        /////// <summary />
+        ////public static bool operator !=(Maybe<T> left, Maybe<T> right)
+        ////{
+        ////    return !(left == right);
+        ////}
+
+        /////// <summary />
+        ////public static bool operator !=(Maybe<T> left, T right)
+        ////{
+        ////    return !(left == right);
+        ////}
+
+        /////// <summary />
+        ////public static bool operator !=(T left, Maybe<T> right)
+        ////{
+        ////    return !(right == left);
+        ////}
+
         /// <summary />
         public bool Equals(Maybe<T> other)
         {
@@ -31,7 +74,6 @@
                 return other.IsNone;
             }
 
-            // Les deux options contiennent la même valeur.
             return comparer.Equals(_value, other._value);
         }
 
@@ -64,9 +106,8 @@
                 return Equals((T)other, comparer);
             }
 
-            // Habituellement, on teste obj.GetType() == this.GetType() au cas où "this" ou "obj" 
-            // serait une instance d'une classe dérivée. Comme Maybe<T> est fermée à l'extensibilité, 
-            // on n'a pas ce problème.
+            // Usually, we test the condition obj.GetType() == this.GetType() in case of "this" or "obj" 
+            // is an instance of a derived type, something that can not happen here because Maybe is sealed.
             return Equals(other as Maybe<T>, comparer);
         }
 
@@ -81,7 +122,7 @@
         {
             Require.NotNull(comparer, "comparer");
 
-            return ReferenceEquals(_value, null) ? 0 : comparer.GetHashCode(_value);
+            return _value == null ? 0 : comparer.GetHashCode(_value);
         }
     }
 }

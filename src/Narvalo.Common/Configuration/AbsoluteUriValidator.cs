@@ -4,7 +4,7 @@
     using System.Configuration;
 
     /// <summary>
-    /// Classe permettant de valider qu'une valeur représente bien une URI absolue.
+    /// Represents a class that provides validation of an absolute URI value.
     /// </summary>
     public class AbsoluteUriValidator : ConfigurationValidatorBase
     {

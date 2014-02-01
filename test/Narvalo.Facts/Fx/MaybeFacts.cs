@@ -90,16 +90,44 @@
         public static class TheIsSomePropery
         {
             [Fact]
+            public static void IsFalse_WhenNone()
+            {
+                // Arrange
+                var simple = Maybe<int>.None;
+                var value = Maybe<ValueStub>.None;
+                var reference = Maybe<List<int>>.None;
+
+                // Act & Assert
+                Assert.False(simple.IsSome);
+                Assert.False(value.IsSome);
+                Assert.False(reference.IsSome);
+            }
+
+            [Fact]
+            public static void IsTrue_WhenSome()
+            {
+                // Arrange
+                var simple = Maybe.Create(3141);
+                var value = Maybe.Create(new ValueStub(3141));
+                var reference = Maybe.Create(new List<int>());
+
+                // Act & Assert
+                Assert.True(simple.IsSome);
+                Assert.True(value.IsSome);
+                Assert.True(reference.IsSome);
+            }
+
+            [Fact]
             public static void IsImmutable_OnceTrue()
             {
                 // Arrange
                 var list = new List<int>();
+                var option = Maybe.Create(list);
 
                 // Act
-                var option = Maybe.Create(list);
                 list = null;
 
-                // Act & Assert
+                // Assert
                 Assert.True(option.IsSome);
             }
 
@@ -108,12 +136,12 @@
             {
                 // Arrange
                 List<int> list = null;
+                var option = Maybe.Create(list);
 
                 // Act
-                var option = Maybe.Create(list);
                 list = new List<int>();
 
-                // Act & Assert
+                // Assert
                 Assert.True(!option.IsSome);
             }
         }
@@ -139,13 +167,12 @@
                 ValueStub? nullableValue = new ValueStub(3141);
                 var reference = new List<int>();
 
-                // Act
                 var simpleOpt = Maybe.Create(simple);
                 var valueOpt = Maybe.Create(value);
                 var nullableValueOpt = Maybe.Create(nullableValue);
                 var referenceOpt = Maybe.Create(reference);
 
-                // Assert
+                // Act & Assert
                 Assert.True(simpleOpt.Value == simple);
                 Assert.True(valueOpt.Value == value);
                 Assert.True(nullableValueOpt.Value == nullableValue.Value);
@@ -156,7 +183,7 @@
         public static class TheEqualityOperator
         {
             [Fact]
-            public static void ReturnsTrue_ForMaybeNullAndNull()
+            public static void ReturnsTrue_ForNullAsMaybeAndNull()
             {
                 // Arrange
                 var simple = (Maybe<int>)null;
@@ -182,12 +209,36 @@
                 Assert.False(value == null);
                 Assert.False(reference == null);
             }
+
+            [Fact]
+            public static void FollowsReferentialEqualityRules()
+            {
+                // Arrange
+                var simpleA0 = Maybe.Create(3141);
+                var simpleA1 = Maybe.Create(3141);
+
+                var valueA0 = Maybe.Create(new ValueStub(3141));
+                var valueA1 = Maybe.Create(new ValueStub(3141));
+
+                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+
+                var referenceA0 = Maybe.Create(new List<int>());
+                var referenceA1 = Maybe.Create(new List<int>());
+
+                // Act & Assert
+                Assert.False(simpleA0 == simpleA1);
+                Assert.False(valueA0 == valueA1);
+                Assert.False(almostValueA0 == almostValueA1);
+                Assert.False(referenceA0 == referenceA1);
+            }
+
         }
 
         public static class TheInequalityOperator
         {
             [Fact]
-            public static void ReturnsFalse_ForMaybeNullAndNull()
+            public static void ReturnsFalse_ForNullAsMaybeAndNull()
             {
                 // Arrange
                 var simple = (Maybe<int>)null;
@@ -212,6 +263,29 @@
                 Assert.True(simple != null);
                 Assert.True(value != null);
                 Assert.True(reference != null);
+            }
+
+            [Fact]
+            public static void FollowsReferentialEqualityRules()
+            {
+                // Arrange
+                var simpleA0 = Maybe.Create(3141);
+                var simpleA1 = Maybe.Create(3141);
+
+                var valueA0 = Maybe.Create(new ValueStub(3141));
+                var valueA1 = Maybe.Create(new ValueStub(3141));
+
+                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+
+                var referenceA0 = Maybe.Create(new List<int>());
+                var referenceA1 = Maybe.Create(new List<int>());
+
+                // Act & Assert
+                Assert.True(simpleA0 != simpleA1);
+                Assert.True(valueA0 != valueA1);
+                Assert.True(almostValueA0 != almostValueA1);
+                Assert.True(referenceA0 != referenceA1);
             }
         }
 

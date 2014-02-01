@@ -10,7 +10,7 @@
 
         public static TEnum Enum<TEnum>(string value) where TEnum : struct
         {
-            return Enum<TEnum>(value, false /* ignoreCase */);
+            return Enum<TEnum>(value, ignoreCase: false);
         }
 
         public static TEnum Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
@@ -22,7 +22,7 @@
 
         public static TEnum? NullableEnum<TEnum>(string value) where TEnum : struct
         {
-            return NullableEnum<TEnum>(value, true /* ignoreCase */);
+            return NullableEnum<TEnum>(value, ignoreCase: true);
         }
 
         public static TEnum? NullableEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
@@ -57,7 +57,7 @@
                 (string val, out DateTime result) => System.DateTime.TryParseExact(val, format, provider, style, out result));
         }
 
-        //// ParseAsCore
+        //// ParseCore
 
         internal static T? ParseCore<T>(string value, TryParse<T> fun) where T : struct
         {

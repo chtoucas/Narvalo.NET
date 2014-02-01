@@ -72,7 +72,7 @@
                 }
             }
             catch (IOException ex) {
-                Log.LogErrorFromException(ex, false /* showStackTrace */);
+                Log.LogErrorFromException(ex, showStackTrace: false);
                 throw;
             }
 

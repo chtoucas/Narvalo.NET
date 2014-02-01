@@ -14,6 +14,7 @@
                 return String.Empty;
             }
 
+            // FIXME: Ne marche pas toujours...
             char[] arr = value.ToCharArray();
             Array.Reverse(arr);
 

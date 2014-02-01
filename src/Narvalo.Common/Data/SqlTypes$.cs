@@ -4,7 +4,7 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour les types de données natifs SQL Server.
+    /// Provides extension methods for native SQL server data types.
     /// </summary>
     public static class SqlTypesExtensions
     {

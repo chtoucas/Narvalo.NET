@@ -5,7 +5,7 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Xml.Linq.XAttribute"/>.
+    /// Provides extension methods for <see cref="System.Xml.Linq.XAttribute"/>.
     /// </summary>
     public static class XAttributeExtensions
     {

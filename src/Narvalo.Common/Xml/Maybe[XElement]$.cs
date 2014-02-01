@@ -5,7 +5,7 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour Maybe&lt;XElement&gt;.
+    /// Provides extension methods for Maybe&lt;XElement&gt;.
     /// </summary>
     public static class MaybeXElementExtensions
     {

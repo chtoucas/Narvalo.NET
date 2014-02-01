@@ -4,7 +4,7 @@
     using System.Data.SqlClient;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlCommand"/>.
+    /// Provides extension methods for <see cref="System.Data.SqlClient.SqlCommand"/>.
     /// </summary>
     public static class SqlCommandExtensions
     {

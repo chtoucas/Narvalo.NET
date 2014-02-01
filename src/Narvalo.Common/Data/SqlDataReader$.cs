@@ -35,7 +35,7 @@
      */
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Data.SqlClient.SqlDataReader"/>.
+    /// Provides extension methods for <see cref="System.Data.SqlClient.SqlDataReader"/>.
     /// </summary>
     public static partial class SqlDataReaderExtensions
     {

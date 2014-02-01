@@ -5,7 +5,7 @@
     using System.IO;
 
     /// <summary>
-    /// Fournit des méthodes permettant d'accéder aux sections d'un fichier de configuration.
+    /// Provides methods to stronly-typed access to configuration sections.
     /// </summary>
     public static class SectionManager
     {

@@ -6,7 +6,7 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Xml.Linq.XElement"/>.
+    /// Provides extension methods for <see cref="System.Xml.Linq.XElement"/>.
     /// </summary>
     public static class XElementExtensions
     {

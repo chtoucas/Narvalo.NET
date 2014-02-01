@@ -16,12 +16,12 @@
                 .Where(t => !t.IsAbstract && typeof(IController).IsAssignableFrom(t));
 
             foreach (Type t in controllerTypes) {
-                bool childOnlyController = t.GetCustomAttributes(typeof(ChildActionOnlyAttribute), true /* inherit */).Any();
+                bool childOnlyController = t.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
                 foreach (MethodInfo m in t.GetMethods()) {
                     if (m.IsPublic && typeof(ActionResult).IsAssignableFrom(m.ReturnType)) {
                         if (!childOnlyController) {
-                            bool childOnlyAction = m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), true).Any();
+                            bool childOnlyAction = m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
                             if (!childOnlyAction) { continue; }
                         }

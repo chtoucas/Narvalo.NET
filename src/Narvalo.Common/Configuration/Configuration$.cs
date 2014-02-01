@@ -3,7 +3,7 @@
     using System.Configuration;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="System.Configuration.Configuration"/>.
+    /// Provides extension methods for <see cref="System.Configuration.Configuration"/>.
     /// </summary>
     public static class ConfigurationExtensions
     {

@@ -36,7 +36,7 @@ namespace Narvalo.Web.UI
                 type = type.BaseType;
             }
 
-            return (ControlBuilder)pi.GetValue(@this, null /* index */);
+            return (ControlBuilder)pi.GetValue(@this, index: null);
         }
     }
 }
