@@ -5,7 +5,7 @@
     using System.Configuration.Provider;
     using System.Web;
 
-    public class DefaultAssetProvider : AssetProviderBase
+    public sealed class DefaultAssetProvider : AssetProviderBase
     {
         public DefaultAssetProvider() : base() { }
 

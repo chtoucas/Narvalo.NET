@@ -7,7 +7,7 @@
     using Narvalo;
     using Narvalo.Collections;
 
-    public class RemoteAssetProvider : AssetProviderBase
+    public sealed class RemoteAssetProvider : AssetProviderBase
     {
         Uri _baseUri;
 

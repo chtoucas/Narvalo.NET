@@ -80,7 +80,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs" />
+    <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
+      <DependentUpon>SqlDataReader%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="TypeBorrowedFromAttribute.cs" />

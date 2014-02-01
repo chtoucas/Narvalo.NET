@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial struct Outcome<T> : IEquatable<Outcome<T>>
+    public sealed partial class Outcome<T>
     {
         readonly bool _successful;
         readonly Exception _exception;
@@ -10,8 +10,6 @@
 
         Outcome(Exception exception)
         {
-            // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que "exception" n'est pas null.
             _successful = false;
             _exception = exception;
             _value = default(T);
@@ -19,8 +17,6 @@
 
         Outcome(T value)
         {
-            // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que "value" n'est pas null.
             _successful = true;
             _exception = default(Exception);
             _value = value;
@@ -32,7 +28,7 @@
         {
             get
             {
-                if (Successful) {
+                if (_successful) {
                     throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
                 }
 
@@ -44,7 +40,7 @@
         {
             get
             {
-                if (!Successful) {
+                if (!_successful) {
                     throw new InvalidOperationException(SR.Outcome_UnsuccessfulHasNoValue);
                 }
 
@@ -54,7 +50,7 @@
 
         public T ValueOrThrow()
         {
-            if (!Successful) {
+            if (!_successful) {
                 _exception.Throw();
             }
 
@@ -63,7 +59,7 @@
 
         public override string ToString()
         {
-            return Successful ? Value.ToString() : _exception.ToString();
+            return _successful ? Value.ToString() : _exception.ToString();
         }
     }
 }

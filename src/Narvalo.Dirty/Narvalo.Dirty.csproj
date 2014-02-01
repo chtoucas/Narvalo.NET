@@ -126,9 +126,6 @@
     <Compile Include="Fx\Maybe[Outcome]%24.cs" />
     <Compile Include="Fx\Outcome.cs" />
     <Compile Include="Fx\Outcome`1.cs" />
-    <Compile Include="Fx\Outcome`1.IEquatable.cs">
-      <DependentUpon>Outcome`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Outcome`1.Monad.cs">
       <DependentUpon>Outcome`1.cs</DependentUpon>
     </Compile>

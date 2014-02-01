@@ -11,7 +11,7 @@ namespace Narvalo.Web.UI
 
         protected abstract bool Enabled { get; }
 
-        public override void ParseComplete(ControlBuilder rootBuilder)
+        public sealed override void ParseComplete(ControlBuilder rootBuilder)
         {
             Require.NotNull(rootBuilder, "rootBuilder");
 

@@ -39,7 +39,7 @@ namespace Narvalo.Fx
      * _it provides a way to tell the absence or the presence of a value_. Taken alone, it might not look that useful,
      * we could simply use a nullable for value types and a `null` for reference types. That's where the monad
      * comes into play. The `Maybe<T>` satisfies a very simple grammar, known as the monad laws, from which 
-     * we can construct a rich vocabulary.
+     * derives a rich vocabulary.
      * 
      * What I like the most about this class is that it helps to clearly express our intent with a very clean syntax.
      * For instance, considering the following methods
@@ -47,7 +47,7 @@ namespace Narvalo.Fx
      * string GetPhoneNumber() { ... }
      * Maybe<string> MayGetPhoneNumber() { ... }
      * '''
-     * I believe that the second version makes it clear that we might actually not know the phone number.
+     * I believe that the second version makes it clearer that we might actually not know the phone number.
      * It then makes easy to write what we do in either cases:
      * '''
      * MayGetPhoneNumber().OnNone( ... ).OnSome( ... );
@@ -127,7 +127,7 @@ namespace Narvalo.Fx
          */
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe{T}" /> that does not hold any value.
+        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
         /// </summary>
         Maybe()
         {
@@ -135,7 +135,7 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe{T}" /> using the specified value. 
+        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> using the specified value. 
         /// </summary>
         /// <param name="value">The underlying value.</param>
         Maybe(T value)
@@ -144,6 +144,9 @@ namespace Narvalo.Fx
             _isSome = true;
         }
 
+        /// <summary>
+        /// Returns an instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
+        /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "A generic version would not improve the readability.")]
         public static Maybe<T> None { get { return None_; } }

@@ -11,14 +11,14 @@
         readonly TLeft _left;
         readonly TRight _right;
 
-        protected Either(TLeft left)
+        Either(TLeft left)
         {
             _isLeft = true;
             _left = left;
             _right = default(TRight);
         }
 
-        protected Either(TRight right)
+        Either(TRight right)
         {
             _isLeft = false;
             _left = default(TLeft);

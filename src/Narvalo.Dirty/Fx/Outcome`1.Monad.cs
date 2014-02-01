@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Internal;
 
-    public partial struct Outcome<T>
+    public partial class Outcome<T>
     {
         public Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> kun)
         {

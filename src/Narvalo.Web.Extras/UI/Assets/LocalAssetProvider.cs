@@ -5,7 +5,7 @@
     using System.Web;
     using Narvalo;
 
-    public class LocalAssetProvider : AssetProviderBase
+    public sealed class LocalAssetProvider : AssetProviderBase
     {
         public LocalAssetProvider() : base() { }
 

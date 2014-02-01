@@ -8,7 +8,7 @@
     using Narvalo;
     using Serilog;
 
-    public class ApplicationLifecycleModule : IHttpModule
+    public sealed class ApplicationLifecycleModule : IHttpModule
     {
         public static void Register()
         {

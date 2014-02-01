@@ -8,8 +8,6 @@
 
         Identity(T value)
         {
-            // NB: La seule manière d'appeler le constructeur est via la méthode Outcome<T>.η() 
-            // qui se charge de vérifier que "value" n'est pas null.
             _value = value;
         }
 
