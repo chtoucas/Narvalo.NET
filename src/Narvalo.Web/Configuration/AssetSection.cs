@@ -4,7 +4,7 @@
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
 
-    public class AssetSection : ConfigurationSection
+    public sealed class AssetSection : ConfigurationSection
     {
         public const string DefaultName = "assets";
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;

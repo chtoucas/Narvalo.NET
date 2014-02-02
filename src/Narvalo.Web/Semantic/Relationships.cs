@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Relationships
+    public sealed class Relationships
     {
         Uri _humansTxtUrl = new Uri("/human.txt", UriKind.Relative);
 

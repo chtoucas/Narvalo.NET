@@ -2,7 +2,7 @@
 {
     using Narvalo;
 
-    public class SchemaOrgVocabulary
+    public sealed class SchemaOrgVocabulary
     {
         string _itemType = SchemaOrgType.WebPage;
 

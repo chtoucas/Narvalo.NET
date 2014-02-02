@@ -14,7 +14,7 @@
     /// contenu sans la moindre information contextuelle. On ne peut donc pas prendre
     /// de mesures trop extrèmes.
     /// </remarks>
-    public class WhiteSpaceBusterPageParserFilter : LiteralPageParserFilterBase
+    public sealed class WhiteSpaceBusterPageParserFilter : LiteralPageParserFilterBase
     {
         const string DirectiveName_ = "WhiteSpaceBusting";
 
@@ -28,7 +28,7 @@
         /// </summary>
         public WhiteSpaceBusterPageParserFilter() : base() { }
 
-        protected static bool EnableWhiteSpaceBusting
+        static bool EnableWhiteSpaceBusting_
         {
             get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
         }
@@ -54,7 +54,7 @@
 
             // Si le filtre est activé globalement (valeur par défaut), on vérifie la directive locale, sinon on 
             // considère que le filtre ne doit pas être utilisé quelque soit la directive locale.
-            _enabled = EnableWhiteSpaceBusting && enabled;
+            _enabled = EnableWhiteSpaceBusting_ && enabled;
 
             if (_enabled) {
                 _buster = WhiteSpaceBusterProvider.Current.WhiteSpaceBuster;

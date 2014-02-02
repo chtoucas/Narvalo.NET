@@ -6,7 +6,7 @@
     /// <summary>
     /// Représente un nettoyeur simple d'espaces blancs.
     /// </summary>
-    public class GentleWhiteSpaceBuster : IWhiteSpaceBuster
+    public sealed class GentleWhiteSpaceBuster : IWhiteSpaceBuster
     {
         static readonly Regex MultipleTabsOrSpacesRegex_
             = new Regex(@"[\x09\x20]{2,}", RegexOptions.Compiled);

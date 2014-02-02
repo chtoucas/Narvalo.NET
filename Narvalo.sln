@@ -1,12 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-# SharpDevelop 4.4
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C12F79C9-1453-412C-A50C-BD887C2C15AE}"
-	ProjectSection(SolutionItems) = postProject
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2183403F-6794-4547-BEDA-A9A555CBB726}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{218340
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Libraries", "1. Libraries", "{4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}"
-	ProjectSection(SolutionItems) = postProject
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Common", "src\Narvalo.Common\Narvalo.Common.csproj", "{7B564B3C-CCCC-43CA-94B6-D375AA40F085}"
 EndProject
@@ -25,14 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web.Extras", "src\Narvalo.Web.Extras\Narvalo.Web.Extras.csproj", "{A73E8D05-8E5F-4DE6-B047-C943A39212A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Developer Toolbox", "2. Developer Toolbox", "{74903B74-654E-4579-BA5A-FF39D85482E1}"
-	ProjectSection(SolutionItems) = postProject
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Build", "src\Narvalo.Build\Narvalo.Build.csproj", "{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Experimental", "3. Experimental", "{F6D644EC-5C23-4D95-894C-3B698AC43DB4}"
-	ProjectSection(SolutionItems) = postProject
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Incubator", "src\Narvalo.Incubator\Narvalo.Incubator.csproj", "{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}"
 EndProject
@@ -49,8 +40,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Aliens", "src\Narvalo.Aliens\Narvalo.Aliens.csproj", "{94C7645A-F332-4CA9-AA6D-62A339868E10}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{1745EB1B-1227-4C17-A03E-B4DDEE760172}"
-	ProjectSection(SolutionItems) = postProject
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.ComparativeTests", "test\Narvalo.ComparativeTests\Narvalo.ComparativeTests.csproj", "{63BD10EF-9E46-40AB-9005-E19C87F90843}"
 EndProject
@@ -228,10 +217,6 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
 		{56E3969F-5066-4702-A670-4C35FBD97201} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
@@ -246,5 +231,9 @@ Global
 		{94C7645A-F332-4CA9-AA6D-62A339868E10} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
 		{63BD10EF-9E46-40AB-9005-E19C87F90843} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class WhiteSpaceBusterProvider
+    public sealed class WhiteSpaceBusterProvider
     {
         static readonly object Lock_ = new Object();
         static WhiteSpaceBusterProvider Instance_ = new WhiteSpaceBusterProvider();

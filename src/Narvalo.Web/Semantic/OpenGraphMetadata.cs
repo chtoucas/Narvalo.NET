@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Narvalo;
 
-    public class OpenGraphMetadata : IOpenGraphMetadata
+    public sealed class OpenGraphMetadata : IOpenGraphMetadata
     {
         readonly IList<OpenGraphLocale> _alternativeLocales = new List<OpenGraphLocale>();
         readonly OpenGraphLocale _locale;

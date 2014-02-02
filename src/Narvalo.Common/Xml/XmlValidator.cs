@@ -7,7 +7,7 @@ namespace Narvalo.Xml
     using System.Xml.Schema;
 
     // Cf. http://www.cafeconleche.org/books/xmljava/chapters/ch06s10.html
-    public class XmlValidator
+    public sealed class XmlValidator
     {
         readonly XmlReaderSettings _settings;
 

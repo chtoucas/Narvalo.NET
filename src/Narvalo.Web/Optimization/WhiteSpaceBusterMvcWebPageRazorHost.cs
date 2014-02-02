@@ -4,7 +4,7 @@
     using System.Web.Razor.Generator;
     using System.Web.Razor.Parser;
 
-    public class WhiteSpaceBusterMvcWebPageRazorHost : MvcWebPageRazorHost
+    public sealed class WhiteSpaceBusterMvcWebPageRazorHost : MvcWebPageRazorHost
     {
         readonly RazorOptimizer _optimizer;
 

@@ -2,7 +2,7 @@
 {
     using System.Configuration;
 
-    public class NarvaloWebSectionGroup : ConfigurationSectionGroup
+    public sealed class NarvaloWebSectionGroup : ConfigurationSectionGroup
     {
         public const string GroupName = "narvalo.web";
 

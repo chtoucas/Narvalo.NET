@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class OpenGraphJpeg : OpenGraphImage
+    public sealed class OpenGraphJpeg : OpenGraphImage
     {
         public OpenGraphJpeg(Uri url) : base(url, "image/jpeg") { }
     }

@@ -4,7 +4,7 @@
     using System.Web.Mvc;
     using Narvalo.Web.UI.Assets;
 
-    public class AssetHelper
+    public sealed class AssetHelper
     {
         HtmlHelper _htmlHelper;
 

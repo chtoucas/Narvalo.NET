@@ -6,7 +6,7 @@
     /// <summary>
     /// Représente un nettoyeur agressif d'espaces blancs.
     /// </summary>
-    public class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
+    public sealed class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
     {
         // Pour rappel, \s est un alias pour [\f\n\r\t\v].
         static readonly Regex MultipleWhiteSpacesRegex_

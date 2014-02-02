@@ -7,7 +7,7 @@
     using Serilog.Events;
 
     [CLSCompliant(false)]
-    public class HttpLogEventEnricher : ILogEventEnricher
+    public sealed class HttpLogEventEnricher : ILogEventEnricher
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {

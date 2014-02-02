@@ -9,7 +9,7 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Generator;
     using System.Web.Razor.Parser.SyntaxTree;
 
-    public class WhiteSpaceBusterMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
+    public sealed class WhiteSpaceBusterMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
     {
         readonly RazorOptimizer _optimizer;
 

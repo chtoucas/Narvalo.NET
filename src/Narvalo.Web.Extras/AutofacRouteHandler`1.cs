@@ -6,7 +6,7 @@
     using Autofac.Integration.Mvc;
 
     // Cf. https://groups.google.com/forum/#!msg/autofac/BkY4s4tusUc/micDCB0YiN8J
-    public class AutofacRouteHandler<THandler> : IRouteHandler where THandler : IHttpHandler
+    public sealed class AutofacRouteHandler<THandler> : IRouteHandler where THandler : IHttpHandler
     {
         public IHttpHandler GetHttpHandler(RequestContext requestContext)
         {

@@ -3,7 +3,7 @@
     using System.Globalization;
     using Narvalo;
 
-    public class OpenGraphLocale
+    public sealed class OpenGraphLocale
     {
         CultureInfo _culture;
 

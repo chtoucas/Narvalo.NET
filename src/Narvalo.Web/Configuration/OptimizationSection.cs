@@ -3,7 +3,7 @@
     using System;
     using System.Configuration;
 
-    public class OptimizationSection : ConfigurationSection
+    public sealed class OptimizationSection : ConfigurationSection
     {
         public const string DefaultName = "optimization";
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;

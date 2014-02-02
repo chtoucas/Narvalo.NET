@@ -7,7 +7,7 @@
     using System.Web.Razor.Text;
     using System.Web.Razor.Tokenizer.Symbols;
 
-    public class RazorOptimizer
+    public sealed class RazorOptimizer
     {
         readonly IWhiteSpaceBuster _buster;
 

@@ -5,7 +5,7 @@
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
 
-    public class WhiteSpaceBusterHtmlMarkupParser : ParserBase
+    public sealed class WhiteSpaceBusterHtmlMarkupParser : ParserBase
     {
         readonly RazorOptimizer _optimizer;
         readonly ParserBase _inner;

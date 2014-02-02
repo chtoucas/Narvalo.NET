@@ -4,7 +4,7 @@
     using System.Globalization;
     using Narvalo;
 
-    public class Ontology
+    public sealed class Ontology
     {
         public const string OpenGraphNamespace = "og: http://ogp.me/ns#";
 

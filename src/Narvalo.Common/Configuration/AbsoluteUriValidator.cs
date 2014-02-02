@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a class that provides validation of an absolute URI value.
     /// </summary>
-    public class AbsoluteUriValidator : ConfigurationValidatorBase
+    public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
         /// <summary />
         /// <see cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
