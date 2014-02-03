@@ -17,7 +17,7 @@
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Filter(_ => predicate.Invoke(_));
+            return @this.Filter(predicate);
         }
 
         //// Projection Operators

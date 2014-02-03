@@ -1,10 +1,8 @@
 ﻿namespace Narvalo.Linq
 {
-    using System;
-    using Narvalo.Fx;
     using Xunit;
 
-    public static class MaybeFacts
+    public static class NullableFacts
     {
         public static class TheWhereOperator
         {
@@ -12,15 +10,15 @@
             public static void ReturnsSome_WhenSome()
             {
                 // Arrange
-                var source = Maybe.Create(1);
+                int? source = 1;
 
                 // Act
                 var m = source.Where(_ => _ == 1);
                 var q = from _ in source where _ == 1 select _;
 
                 // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
+                Assert.True(m.HasValue);
+                Assert.True(q.HasValue);
                 Assert.Equal(m.Value, 1);
                 Assert.Equal(q.Value, 1);
             }
@@ -29,58 +27,48 @@
             public static void ReturnsNone_WhenNone()
             {
                 // Arrange
-                var source = Maybe.Create(1);
+                int? source = 1;
 
                 // Act
                 var m = source.Where(_ => _ == 2);
                 var q = from _ in source where _ == 2 select _;
 
                 // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
+                Assert.False(m.HasValue);
+                Assert.False(q.HasValue);
             }
         }
 
         public static class TheSelectOperator
         {
             [Fact]
-            public static void ThrowsArgumentNullException_WhenSourceIsNull()
-            {
-                // Arrange
-                var source = (Maybe<int>)null;
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => from _ in source select _);
-            }
-
-            [Fact]
             public static void ReturnsNone_WhenNone()
             {
                 // Arrange
-                var source = Maybe<int>.None;
+                int? source = null;
 
                 // Act
                 var m = source.Select(_ => _);
                 var q = from _ in source select _;
 
                 // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
+                Assert.False(m.HasValue);
+                Assert.False(q.HasValue);
             }
 
             [Fact]
             public static void ReturnsSome_WhenSome()
             {
                 // Arrange
-                var source = Maybe.Create(1);
+                int? source = 1;
 
                 // Act
                 var m = source.Select(_ => _);
                 var q = from _ in source select _;
 
                 // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
+                Assert.True(m.HasValue);
+                Assert.True(q.HasValue);
             }
         }
 
@@ -90,13 +78,13 @@
             public static void ReturnsSome_WhenSome()
             {
                 // Arrange
-                var source = Maybe.Create(1);
+                int? source = 1;
 
                 // Act
-                var m = source.SelectMany(_ => Maybe.Create(2 * _));
+                var m = source.SelectMany(_ => (int?)(2 * _));
 
                 // Assert
-                Assert.True(m.IsSome);
+                Assert.True(m.HasValue);
                 Assert.Equal(m.Value, 2);
             }
 
@@ -104,8 +92,8 @@
             public static void ReturnsSome_WhenSomeX()
             {
                 // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe.Create(2);
+                int? source = 1;
+                int? middle = 2;
 
                 // Act
                 var m = source.SelectMany(_ => middle, (i, j) => i + j);
@@ -114,8 +102,8 @@
                         select i + j;
 
                 // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
+                Assert.True(m.HasValue);
+                Assert.True(q.HasValue);
                 Assert.Equal(m.Value, 3);
                 Assert.Equal(q.Value, 3);
             }

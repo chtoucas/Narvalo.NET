@@ -6,18 +6,17 @@
     {
         #region Standard
 
-        //// Match
+        //// Filter
 
-        public TResult Match<TResult>(Func<T, TResult> selector, TResult defaultValue)
+        ////public Maybe<T> Filter(Predicate<T> predicate)
+        ////{
+        ////    return Bind(_ => predicate.Invoke(_) ? this : Maybe<T>.None);
+        ////    //return Map(_ => predicate.Invoke(_)).Then(this);
+        ////}
+
+        public Maybe<T> Filter(Func<T, bool> predicate)
         {
-            return Map(selector).ValueOrElse(defaultValue);
-        }
-
-        public TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> defaultValueFactory)
-        {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return Match(selector, defaultValueFactory.Invoke());
+            return Bind(_ => predicate.Invoke(_) ? this : Maybe<T>.None);
         }
 
         //// Then
@@ -25,13 +24,6 @@
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             return Bind(_ => other);
-        }
-
-        //// Filter
-
-        public Maybe<T> Filter(Predicate<T> predicate)
-        {
-            return Map(_ => predicate.Invoke(_)).Then(this);
         }
 
         //// When
@@ -59,6 +51,20 @@
         }
 
         #endregion
+
+        //// Match
+
+        public TResult Match<TResult>(Func<T, TResult> selector, TResult defaultValue)
+        {
+            return Map(selector).ValueOrElse(defaultValue);
+        }
+
+        public TResult Match<TResult>(Func<T, TResult> selector, Func<TResult> defaultValueFactory)
+        {
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
+            return Match(selector, defaultValueFactory.Invoke());
+        }
 
         //// OnSome
 

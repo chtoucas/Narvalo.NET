@@ -4,6 +4,14 @@
 
     public static partial class NullableExtensions
     {
+        //// Filter
+
+        public static T? Filter<T>(this T? @this, Func<T, bool> predicate)
+            where T : struct
+        {
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
+        }
+
         //// Match
 
         public static TResult Match<T, TResult>(this T? @this, Func<T, TResult> selector, TResult defaultValue)
@@ -29,14 +37,6 @@
             where TResult : struct
         {
             return @this.Bind(_ => other);
-        }
-
-        //// Filter
-
-        public static T? Filter<T>(this T? @this, Predicate<T> predicate)
-            where T : struct
-        {
-            return @this.Map(_ => predicate.Invoke(_)).Then(@this);
         }
     }
 }

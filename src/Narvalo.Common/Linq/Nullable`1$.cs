@@ -4,14 +4,26 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Nullable{T}"/> in order to support Linq.
+    /// Provides extension methods for <see cref="System.Nullable&lt;T&gt;"/> in order to support Linq.
     /// </summary>
     public static partial class NullableExtensions
     {
-        //// Select
+        //// Restriction Operators
 
-        public static Nullable<TResult> Select<TSource, TResult>(
-            this Nullable<TSource> @this,
+        public static TSource? Where<TSource>(
+            this TSource? @this,
+            Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Filter(predicate);
+        }
+
+        //// Projection Operators
+
+        public static TResult? Select<TSource, TResult>(
+            this TSource? @this,
             Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
@@ -19,20 +31,18 @@
             return @this.Map(selector);
         }
 
-        //// SelectMany
-
-        public static Nullable<TResult> SelectMany<TSource, TResult>(
-            this Nullable<TSource> @this,
-            Func<TSource, Nullable<TResult>> selector)
+        public static TResult? SelectMany<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, TResult?> selector)
             where TSource : struct
             where TResult : struct
         {
             return @this.Bind(selector);
         }
 
-        public static Nullable<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Nullable<TSource> @this,
-            Func<TSource, Nullable<TMiddle>> valueSelector,
+        public static TResult? SelectMany<TSource, TMiddle, TResult>(
+            this TSource? @this,
+            Func<TSource, TMiddle?> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
             where TSource : struct
             where TMiddle : struct

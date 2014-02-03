@@ -28,15 +28,15 @@
         /// </summary>
         public WhiteSpaceBusterPageParserFilter() : base() { }
 
-        static bool EnableWhiteSpaceBusting_
-        {
-            get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
-        }
-
         /// <summary>
         /// Retourne <code>true</code> si le filtre est actif pour le contrôle, <code>false</code> sinon.
         /// </summary>
         protected override bool Enabled { get { return _enabled; } }
+
+        static bool EnableWhiteSpaceBusting_
+        {
+            get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
+        }
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)
         {
