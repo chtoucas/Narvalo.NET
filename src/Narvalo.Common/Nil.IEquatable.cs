@@ -17,7 +17,7 @@
         /// <summary />
         public bool Equals(Nil other)
         {
-            return _successful || _message.Equals(other._message);
+            return _successful || _errorMessage.Equals(other._errorMessage);
         }
 
         /// <summary />
@@ -33,7 +33,7 @@
         /// <summary />
         public override int GetHashCode()
         {
-            return _successful ? 0 : _message.GetHashCode();
+            return _successful ? 0 : _errorMessage.GetHashCode();
         }
     }
 }

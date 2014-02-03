@@ -42,7 +42,7 @@
     /// the Output element. Then WriteLinesToFile takes the generated list and spits
     /// them out to a file.
     /// </remarks>
-    public class MergeFiles : Task
+    public sealed class MergeFiles : Task
     {
         [Required]
         public ITaskItem[] Files { get; set; }

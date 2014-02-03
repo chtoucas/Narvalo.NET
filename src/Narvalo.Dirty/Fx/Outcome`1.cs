@@ -12,13 +12,11 @@
         {
             _successful = false;
             _exception = exception;
-            _value = default(T);
         }
 
         Outcome(T value)
         {
             _successful = true;
-            _exception = default(Exception);
             _value = value;
         }
 

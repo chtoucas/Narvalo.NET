@@ -20,20 +20,6 @@
             return Match(selector, defaultValueFactory.Invoke());
         }
 
-        //// SelectMany
-
-        public Maybe<TResult> SelectMany<TMiddle, TResult>(
-            Func<T, Maybe<TMiddle>> valueSelector,
-            Func<T, TMiddle, Maybe<TResult>> resultSelector)
-        {
-            Require.NotNull(valueSelector, "valueSelector");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Maybe<Maybe<TResult>> result = Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
-
-            return Maybe.Join(result);
-        }
-
         //// Then
 
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)

@@ -16,7 +16,7 @@ namespace Narvalo.StyleCop.CSharp
 
         public override void AnalyzeDocument(CodeDocument document)
         {
-            CsDocument csdocument  = (CsDocument)document;
+            var csdocument  = (CsDocument)document;
 
             if (csdocument.RootElement != null && !csdocument.RootElement.Generated) {
                 csdocument.WalkDocument(new CodeWalkerElementVisitor<object>(VisitElement_), null, null);

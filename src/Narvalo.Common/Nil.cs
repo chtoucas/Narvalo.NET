@@ -6,13 +6,13 @@
     {
         static readonly Nil Success_ = new Nil(String.Empty);
 
-        readonly string _message;
+        readonly string _errorMessage;
         readonly bool _successful;
 
-        Nil(string message)
+        Nil(string errorMessage)
         {
-            _message = message;
-            _successful = message.Length == 0;
+            _errorMessage = errorMessage;
+            _successful = errorMessage.Length == 0;
         }
 
         public static Nil Success { get { return Success_; } }
@@ -21,15 +21,15 @@
 
         public bool Unsuccessful { get { return !_successful; } }
 
-        public string Message
+        public string ErrorMessage
         {
             get
             {
-                if (Successful) {
+                if (_successful) {
                     throw new InvalidOperationException(SR.Nil_SuccessfulHasNoMessage);
                 }
 
-                return _message;
+                return _errorMessage;
             }
         }
 
@@ -51,14 +51,14 @@
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
-            if (Unsuccessful) {
+            if (!_successful) {
                 throw exceptionFactory.Invoke();
             }
         }
 
         public override string ToString()
         {
-            return Successful ? String.Empty : _message;
+            return _successful ? String.Empty : _errorMessage;
         }
     }
 }

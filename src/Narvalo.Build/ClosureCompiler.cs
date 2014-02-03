@@ -8,7 +8,7 @@
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
 
-    public class ClosureCompiler : JavaTaskBase
+    public sealed class ClosureCompiler : JavaTaskBase
     {
         int _processTimeout = 5000;
 
@@ -16,7 +16,7 @@
         public ITaskItem[] Files { get; set; }
 
         [Output]
-        public ITaskItem[] CompressedFiles { get; protected set; }
+        public ITaskItem[] CompressedFiles { get; private set; }
 
         //public ITaskItem[] Externs { get; set; }
 
@@ -30,7 +30,7 @@
             set { _processTimeout = value; }
         }
 
-        protected string CompilationLevelString
+        string CompilationLevelString_
         {
             get
             {
@@ -61,7 +61,7 @@
                     break;
                 }
 
-                string outFile = GetCompressedFilePath(inFile);
+                string outFile = GetCompressedFilePath_(inFile);
 
                 Log.LogMessage(MessageImportance.Normal,
                     "Closure Compiler processing " + new FileInfo(inFile).Name);
@@ -71,9 +71,10 @@
                 }
 
                 using (var process = new Process()) {
-                    process.StartInfo = new ProcessStartInfo {
+                    process.StartInfo = new ProcessStartInfo
+                    {
                         FileName = fullPathToTool,
-                        Arguments = GetCommandLineArguments(inFile, outFile),
+                        Arguments = GetCommandLineArguments_(inFile, outFile),
                         UseShellExecute = false,
                         CreateNoWindow = true,
                         RedirectStandardOutput = true,
@@ -97,20 +98,20 @@
             return !Log.HasLoggedErrors;
         }
 
-        protected string GetCommandLineArguments(string inFile, string outFile)
+        string GetCommandLineArguments_(string inFile, string outFile)
         {
             var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" ", JarPath);
 
-            if (!String.IsNullOrEmpty(CompilationLevelString)) {
-                sb.AppendFormat(" --compilation_level {0}", CompilationLevelString);
+            if (!String.IsNullOrEmpty(CompilationLevelString_)) {
+                sb.AppendFormat(" --compilation_level {0}", CompilationLevelString_);
             }
 
             sb.AppendFormat(@" --js ""{0}"" --js_output_file ""{1}""", inFile, outFile);
             return sb.ToString();
         }
 
-        protected string GetCompressedFilePath(string fileName)
+        string GetCompressedFilePath_(string fileName)
         {
             string name = fileName.Replace(".js", ".min.js");
             return String.IsNullOrEmpty(OutDir) ? name : Path.Combine(OutDir, new FileInfo(name).Name);

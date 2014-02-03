@@ -18,7 +18,7 @@
     /// </example>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "Js is not an acronym.")]
-    public class JsYuiCompressor : YuiCompressorBase
+    public sealed class JsYuiCompressor : YuiCompressorBase
     {
          bool _disableOptimizations = false;
          bool _noMunge = false;

@@ -26,10 +26,8 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /*!
      * The Maybe Monad
@@ -96,7 +94,7 @@ namespace Narvalo.Fx
      * + [Haskell]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html
      * 
      * Alternative implementations in C#:
-     * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons
+     * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs
      */
 
     /// <summary>
@@ -105,7 +103,7 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The type of the underlying value.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "Maybe<T> only pretends to be a collection.")]
-    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
+    public sealed partial class Maybe<T> : IEquatable<Maybe<T>>, IEquatable<T>, IEnumerable<T>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
 
@@ -219,23 +217,6 @@ namespace Narvalo.Fx
             }
 
             return _value;
-        }
-
-        /// <summary />
-        public IEnumerator<T> GetEnumerator()
-        {
-            if (_isSome) {
-                return new List<T> { _value }.GetEnumerator();
-            }
-            else {
-                return Enumerable.Empty<T>().GetEnumerator();
-            }
-        }
-
-        /// <summary />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         /// <summary />

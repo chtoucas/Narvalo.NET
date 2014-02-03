@@ -4,9 +4,9 @@
 
     static class Monad
     {
-        public static readonly Monad<Unit> Unit = Monad.Create(Narvalo.Fx.Unit.Single);
+        public static readonly Monad<Unit> Unit = Monad.Return(Narvalo.Fx.Unit.Single);
 
-        public static Monad<T> Create<T>(T value)
+        public static Monad<T> Return<T>(T value)
         {
             return Monad<T>.η(value);
         }

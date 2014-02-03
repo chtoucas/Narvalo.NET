@@ -5,7 +5,7 @@
     // Cf. http://www.haskell.org/onlinereport/monad.html
     // Postfix M = function in the Kleisli category.
 
-    // WARNING: il s'agit d'une implémentation par défaut, pour démonstration.
+    // WARNING: Il s'agit d'une implémentation par défaut, pour démonstration.
     partial class Monad<T>
     {
         readonly T _value;

@@ -4,7 +4,7 @@
 
     /*!
      * On Monads
-     * ---------
+     * =========
      * 
      * You shouldn't be afraid of the monad! You don't need to understand the theory behind to make good use of it, really.
      * In fact, I guess that the monad theory, or more precisely category theory, has influenced the design of many
@@ -12,18 +12,24 @@
      * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
      * access to some powerful (untold) monadic concepts in a very friendly way.
      * 
-     * Implemented monads:
-     * + Maybe<T>
+     * Sample signature
+     * ----------------
      * 
-     * Planned monads:
-     * + Either<T1, T2>
-     * + Outcome<T>
-     * + State
+     * Core monadic methods:
+     * + Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
+     * + Monad<TResult> Map<TResult>(Func<T, TResult> selector)
+     * + static Monad<T> η(T value)
+     * + static Monad<T> μ(Monad<Monad<T>> square)
      * 
      * References
      * ----------
      * 
+     * + [Wes Dyer]: http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx
      * + [Lippert]: http://ericlippert.com/category/monads/
+     * 
+     * Implementations in .NET:
+     * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons
+     * + [SharpMaLib]: http://sharpmalib.codeplex.com/
      */
 
     /// <summary>

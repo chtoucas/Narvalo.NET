@@ -83,8 +83,14 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\Maybe`1.IEnumerable.cs">
+      <DependentUpon>Maybe`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
+    <Compile Include="Linq\Maybe`1%24.cs" />
+    <Compile Include="Linq\NamespaceDoc.cs" />
+    <Compile Include="Linq\Nullable`1%24.cs" />
     <Compile Include="TypeBorrowedFromAttribute.cs" />
     <Compile Include="Fx\Nullable`1%24.Language.cs">
       <DependentUpon>Nullable`1%24.cs</DependentUpon>

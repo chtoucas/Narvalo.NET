@@ -4,18 +4,28 @@
 
     public static class Outcome
     {
-        //// Failure
-
         public static Outcome<T> Failure<T>(Exception exception)
         {
             return Outcome<T>.η(exception);
         }
 
-        //// Success
-
         public static Outcome<T> Success<T>(T value)
         {
             return Outcome<T>.η(value);
+        }
+
+        public static Outcome<T> Create<T>(Func<T> fun)
+        {
+            // FIXME: Return Outcome<ArgumentNullException>.
+            Require.NotNull(fun, "fun");
+
+            try {
+                T value = fun.Invoke();
+                return Outcome.Success(value);
+            }
+            catch (Exception ex) {
+                return Outcome.Failure<T>(ex);
+            }
         }
     }
 }

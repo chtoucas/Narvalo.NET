@@ -8,14 +8,14 @@
         //      return x >>= f      ==  f x
         static bool FirstLaw<X, Y>(Kunc<X, Y> f, X value)
         {
-            return Monad.Create(value).Bind(f) == f(value);
+            return Monad.Return(value).Bind(f) == f(value);
         }
 
         // Deuxième loi (identité à droite):
         //     m >>= return        ==  m
         static bool SecondLaw<X>(Monad<X> m)
         {
-            return m.Bind(Monad.Create) == m;
+            return m.Bind(Monad.Return) == m;
         }
 
         // Troisième loi (associativité):
@@ -37,13 +37,13 @@
         // Unit * f = f
         static bool LeftIdentity<X, Y>(Kunc<X, Y> f, X value)
         {
-            return Monad.Compose(Monad.Create, f, value) == f(value);
+            return Monad.Compose(Monad.Return, f, value) == f(value);
         }
 
         // f * Unit = f
         static bool RightIdentity<X, Y>(Kunc<X, Y> f, X value)
         {
-            return Monad.Compose(f, Monad.Create, value) == f(value);
+            return Monad.Compose(f, Monad.Return, value) == f(value);
         }
 
         // h * (g * f) = (h * g) * f
