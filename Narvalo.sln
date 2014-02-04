@@ -219,8 +219,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
-		{A73E8D05-8E5F-4DE6-B047-C943A39212A2} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
 		{56E3969F-5066-4702-A670-4C35FBD97201} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
+		{A73E8D05-8E5F-4DE6-B047-C943A39212A2} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7} = {74903B74-654E-4579-BA5A-FF39D85482E1}
 		{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
@@ -233,7 +233,7 @@ Global
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

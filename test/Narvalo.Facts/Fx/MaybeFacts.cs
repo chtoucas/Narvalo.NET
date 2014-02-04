@@ -483,5 +483,23 @@
                 Assert.True(referenceOpt.IsNone);
             }
         }
+
+        public static class TheBindMethod
+        {
+            [Fact]
+            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, Maybe<int>> kun = _ => Maybe.Create(2 * _);
+
+                // Act
+                var m = source.Bind(kun);
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.Equal(2, m.Value);
+            }
+        }
     }
 }

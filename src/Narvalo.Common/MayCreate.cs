@@ -23,8 +23,8 @@
 
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
-            // NB: Uri.TryCreate accepte les chaînes vides.
-            if (String.IsNullOrEmpty(value)) {
+            // REVIEW: Uri.TryCreate accepts empty strings.
+            if (String.IsNullOrWhiteSpace(value)) {
                 return Maybe<Uri>.None;
             }
 

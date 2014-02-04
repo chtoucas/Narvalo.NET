@@ -4,7 +4,7 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Narvalo.Fx.Maybe&lt;T&gt;"/> in order to support Linq.
+    /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Fx.Maybe&lt;T&gt;"/>.
     /// </summary>
     public static class MaybeExtensions
     {
@@ -35,6 +35,7 @@
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TResult>> selector)
         {
+            // NB: Added only for completeness but this is not necessary in order to support the QEP.
             return @this.Bind(selector);
         }
 
@@ -43,6 +44,7 @@
             Func<TSource, Maybe<TMiddle>> valueSelector,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
+            Require.Object(@this);
             Require.NotNull(valueSelector, "valueSelector");
             Require.NotNull(resultSelector, "resultSelector");
 

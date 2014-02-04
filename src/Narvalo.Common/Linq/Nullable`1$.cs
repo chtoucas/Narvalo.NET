@@ -4,9 +4,9 @@
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Nullable&lt;T&gt;"/> in order to support Linq.
+    /// Provides limited support for the Query Expression Pattern with <see cref="System.Nullable&lt;T&gt;"/>.
     /// </summary>
-    public static partial class NullableExtensions
+    public static class NullableExtensions
     {
         //// Restriction Operators
 
@@ -37,6 +37,7 @@
             where TSource : struct
             where TResult : struct
         {
+            // NB: Added only for completeness but this is not necessary in order to support the QEP.
             return @this.Bind(selector);
         }
 

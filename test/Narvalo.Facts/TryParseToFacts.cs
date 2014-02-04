@@ -16,7 +16,7 @@
                 // Act
                 bool succeed = TryParseTo.Boolean(value, out result);
                 // Assert
-                Assert.Equal(value, " une chaîne quelconque ");
+                Assert.Equal(" une chaîne quelconque ", value);
             }
 
             //[Fact]

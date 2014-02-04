@@ -8,14 +8,10 @@
 
         //// Filter
 
-        ////public Maybe<T> Filter(Predicate<T> predicate)
-        ////{
-        ////    return Bind(_ => predicate.Invoke(_) ? this : Maybe<T>.None);
-        ////    //return Map(_ => predicate.Invoke(_)).Then(this);
-        ////}
-
         public Maybe<T> Filter(Func<T, bool> predicate)
         {
+            Require.NotNull(predicate, "predicate");
+
             return Bind(_ => predicate.Invoke(_) ? this : Maybe<T>.None);
         }
 
