@@ -1,20 +1,21 @@
 ﻿namespace Narvalo.Fx
 {
     using System;
+    using System.Runtime.ExceptionServices;
 
-    public sealed partial class Outcome<T>
+    public sealed partial class Output<T>
     {
         readonly bool _successful;
-        readonly Exception _exception;
+        readonly ExceptionDispatchInfo _exceptionInfo;
         readonly T _value;
 
-        Outcome(Exception exception)
+        Output(ExceptionDispatchInfo exceptionInfo)
         {
             _successful = false;
-            _exception = exception;
+            _exceptionInfo = exceptionInfo;
         }
 
-        Outcome(T value)
+        Output(T value)
         {
             _successful = true;
             _value = value;
@@ -22,15 +23,17 @@
 
         public bool Successful { get { return _successful; } }
 
-        public Exception Exception
+        public bool Unsuccessful { get { return !Successful; } }
+
+        public ExceptionDispatchInfo ExceptionInfo
         {
             get
             {
                 if (_successful) {
-                    throw new InvalidOperationException(SR.Outcome_SuccessfulHasNoException);
+                    throw new InvalidOperationException(SR.Output_SuccessfulHasNoException);
                 }
 
-                return _exception;
+                return _exceptionInfo;
             }
         }
 
@@ -39,7 +42,7 @@
             get
             {
                 if (!_successful) {
-                    throw new InvalidOperationException(SR.Outcome_UnsuccessfulHasNoValue);
+                    throw new InvalidOperationException(SR.Output_UnsuccessfulHasNoValue);
                 }
 
                 return _value;
@@ -49,7 +52,7 @@
         public T ValueOrThrow()
         {
             if (!_successful) {
-                _exception.Throw();
+                _exceptionInfo.Throw();
             }
 
             return Value;
@@ -57,7 +60,7 @@
 
         public override string ToString()
         {
-            return _successful ? Value.ToString() : _exception.ToString();
+            return _successful ? Value.ToString() : _exceptionInfo.ToString();
         }
     }
 }

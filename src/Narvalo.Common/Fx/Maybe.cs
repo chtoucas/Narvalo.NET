@@ -8,6 +8,11 @@
 
         public static Maybe<Unit> Unit { get { return Unit_; } }
 
+        public static Maybe<T> None<T>()
+        {
+            return Maybe<T>.None;
+        }
+
         //// Create
 
         public static Maybe<T> Create<T>(T value)

@@ -3,6 +3,16 @@
     using System.Runtime.CompilerServices;
 
     /*!
+     * Monad and Linq
+     * --------------
+     * 
+     * ### Table of correspondance ###
+     * 
+     * Where            Filter
+     * Select           Map
+     * SelectMany       Bind
+     * 
+     * 
      * References
      * ----------
      * 

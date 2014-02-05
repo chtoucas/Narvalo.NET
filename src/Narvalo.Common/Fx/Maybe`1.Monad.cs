@@ -5,11 +5,11 @@
 
     public partial class Maybe<T>
     {
-        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> kun)
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
-            Require.NotNull(kun, "kun");
+            Require.NotNull(selector, "selector");
 
-            return IsSome ? kun.Invoke(Value) : Maybe<TResult>.None;
+            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
@@ -30,6 +30,8 @@
             Justification = "Standard name used in mathematics.")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
+            Require.NotNull(square, "square");
+
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
     }

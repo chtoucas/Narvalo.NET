@@ -86,6 +86,55 @@
 
         #endregion
 
+        #region Monad laws
+
+        [Fact]
+        public static void SatisfiesFirstMonadLaw()
+        {
+            // Arrange
+            var value = 1;
+            Func<int, Maybe<int>> kun = _ => Maybe.Create(2 * _);
+
+            // Act
+            var left = Maybe.Create(value).Bind(kun);
+            var right = kun(value);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void SatisfiesSecondMonadLaw()
+        {
+            // Arrange
+            Func<int, Maybe<int>> create = _ => Maybe.Create(_);
+
+            // Act
+            var right = Maybe.Create(1);
+            var left = right.Bind(create);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void SatisfiesThirdMonadLaw()
+        {
+            // Arrange
+            var m = Maybe.Create(1);
+            Func<int, Maybe<int>> f = _ => Maybe.Create(2 * _);
+            Func<int, Maybe<int>> g = _ => Maybe.Create(3 * _);
+
+            // Act
+            var left = m.Bind(g).Bind(f);
+            var right = m.Bind(_ => g(_).Bind(f));
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        #endregion
+
         public static class TheIsSomePropery
         {
             [Fact]
@@ -491,10 +540,10 @@
             {
                 // Arrange
                 var source = Maybe.Create(1);
-                Func<int, Maybe<int>> kun = _ => Maybe.Create(2 * _);
+                Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
 
                 // Act
-                var m = source.Bind(kun);
+                var m = source.Bind(selector);
 
                 // Assert
                 Assert.True(m.IsSome);

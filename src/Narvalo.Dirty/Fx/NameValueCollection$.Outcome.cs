@@ -11,14 +11,14 @@
         public static Outcome<T> ParseValue<T>(
             this NameValueCollection @this,
             string param,
-            Func<string, Outcome<T>> fun,
+            Func<string, T> fun,
             Func<string> missingKeyMessage)
         {
             Require.Object(@this);
 
-            return @this.MayGetValue(param)
+            return Outcome.Capture(() => @this.MayGetValue(param)
                 .Map(fun)
-                .ValueOrElse(Outcome.Failure<T>(new KeyNotFoundException(missingKeyMessage())));
+                .ValueOrThrow(new KeyNotFoundException(missingKeyMessage.Invoke())));
         }
 
         public static Maybe<Outcome<T>> ParseValue<T>(

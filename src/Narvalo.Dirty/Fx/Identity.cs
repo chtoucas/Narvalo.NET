@@ -2,7 +2,7 @@
 {
     public static class Identity
     {
-        public static Identity<T> Create<T>(T value) where T : class
+        public static Identity<T> Create<T>(T value)
         {
             return Identity<T>.η(value);
         }

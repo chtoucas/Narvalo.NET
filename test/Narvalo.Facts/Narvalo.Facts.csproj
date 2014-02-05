@@ -139,13 +139,6 @@
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerFacts.CanExecute.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Runtime\Reliability\CircuitBreakerFacts.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerFacts.Execute.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="StringManipFacts.cs" />
     <Compile Include="Web\Html\HtmlHelperFacts.cs" />
   </ItemGroup>

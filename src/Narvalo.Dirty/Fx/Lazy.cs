@@ -4,10 +4,10 @@
 
     public static partial class Lazy
     {
-        public static Lazy<T> Create<T>(T value)
-        {
-            return η(value);
-        }
+        //public static Lazy<T> Create<T>(T value)
+        //{
+        //    return η(value);
+        //}
 
         public static Lazy<T> Join<T>(Lazy<Lazy<T>> square)
         {

@@ -1,47 +1,76 @@
 ﻿namespace Narvalo.Fx
 {
-    using System;
+    using System.Collections.Generic;
 
-    public partial struct Identity<T>
+    public partial class Identity<T>
     {
-        /// <summary />
-        public static bool operator ==(Identity<T> left, Identity<T> right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary />
-        public static bool operator !=(Identity<T> left, Identity<T> right)
-        {
-            return !left.Equals(right);
-        }
-
-        /// <summary />
-        public bool Equals(T other)
-        {
-            return ReferenceEquals(_value, other);
-        }
-
         /// <summary />
         public bool Equals(Identity<T> other)
         {
-            return ReferenceEquals(_value, other._value);
+            return Equals(other, EqualityComparer<T>.Default);
+        }
+
+        /// <summary />
+        public bool Equals(Identity<T> other, IEqualityComparer<T> comparer)
+        {
+            if (ReferenceEquals(other, null)) {
+                return _value == null;
+            }
+
+            if (_value == null) {
+                return other._value == null;
+            }
+
+            return comparer.Equals(_value, other._value);
+        }
+
+        public bool Equals(T other)
+        {
+            return Equals(other, EqualityComparer<T>.Default);
+        }
+
+        public bool Equals(T other, IEqualityComparer<T> comparer)
+        {
+            return Equals(η(other), comparer);
         }
 
         /// <summary />
         public override bool Equals(object obj)
         {
-            if (!(obj is Identity<T>)) {
-                return false;
+            return Equals(obj, EqualityComparer<T>.Default);
+        }
+
+        /// <summary />
+        public bool Equals(object other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            if (other == null) {
+                return _value == null;
             }
 
-            return Equals((Identity<T>)obj);
+            if (other is T) {
+                return Equals((T)other, comparer);
+            }
+
+            // Usually, we test the condition obj.GetType() == this.GetType(), in case "this" or "obj" 
+            // is an instance of a derived type, something that can not happen here because Identity is sealed.
+            return Equals(other as Identity<T>, comparer);
         }
 
         /// <summary />
         public override int GetHashCode()
         {
-            return _value != null ? _value.GetHashCode() : 0;    
+            return GetHashCode(EqualityComparer<T>.Default);
         }
+
+        /// <summary />
+        public int GetHashCode(IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            return _value != null ? comparer.GetHashCode(_value) : 0;
+        }
+
     }
 }

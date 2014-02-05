@@ -4,13 +4,13 @@
 
     public static partial class NullableExtensions
     {
-        public static TResult? Bind<T, TResult>(this T? @this, Func<T, TResult?> kun)
+        public static TResult? Bind<T, TResult>(this T? @this, Func<T, TResult?> selector)
             where T : struct
             where TResult : struct
         {
-            Require.NotNull(kun, "kun");
+            Require.NotNull(selector, "selector");
 
-            return @this.HasValue ? kun.Invoke(@this.Value) : null;
+            return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
 
         public static TResult? Map<T, TResult>(this T? @this, Func<T, TResult> selector)

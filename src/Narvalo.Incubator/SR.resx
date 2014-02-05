@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Output_SuccessfulHasNoException" xml:space="preserve">
+    <value>A successful outcome has no exception.</value>
+  </data>
+  <data name="Output_UnsuccessfulHasNoValue" xml:space="preserve">
+    <value>A bad outcome has no value.</value>
+  </data>
 </root>

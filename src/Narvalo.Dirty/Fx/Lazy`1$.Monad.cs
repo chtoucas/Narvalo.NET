@@ -4,20 +4,20 @@
 
     public static partial class LazyExtensions
     {
-        public static Lazy<X> Bind<T, X>(this Lazy<T> @this, Func<T, Lazy<X>> kun)
+        public static Lazy<TResult> Bind<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, Lazy<TResult>> kun)
         {
             Require.Object(@this);
             Require.NotNull(kun, "kun");
 
-            return new Lazy<X>(() => kun.Invoke(@this.Value).Value);
+            return new Lazy<TResult>(() => kun.Invoke(@this.Value).Value);
         }
 
-        public static Lazy<X> Map<T, X>(this Lazy<T> @this, Func<T, X> selector)
+        public static Lazy<TResult> Map<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
 
-            return new Lazy<X>(() => selector.Invoke(@this.Value));
+            return new Lazy<TResult>(() => selector.Invoke(@this.Value));
         }
     }
 }

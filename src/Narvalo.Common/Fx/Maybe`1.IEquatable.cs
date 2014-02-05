@@ -81,7 +81,7 @@ namespace Narvalo.Fx
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
-            return Equals(Maybe.Create(other), comparer);
+            return Equals(η(other), comparer);
         }
 
         /// <summary />

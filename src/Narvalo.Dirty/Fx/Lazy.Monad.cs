@@ -4,14 +4,14 @@
 
     public static partial class Lazy
     {
-        internal static Lazy<T> η<T>(T value)
-        {
-            return new Lazy<T>(() => value);
-        }
+        //internal static Lazy<T> η<T>(T value)
+        //{
+        //    return new Lazy<T>(() => value);
+        //}
 
         internal static Lazy<T> μ<T>(Lazy<Lazy<T>> square)
         {
-            return new Lazy<T>(() => square.Value.Value);
+            return square.Value;
         }
     }
 }
