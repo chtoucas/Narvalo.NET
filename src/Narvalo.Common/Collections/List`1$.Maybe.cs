@@ -18,10 +18,10 @@ namespace Narvalo.Collections
 
             var seq = from value in @this select converterM(value);
 
-            return seq.ToList().MayKeepAll();
+            return seq.ToList().MayPullback();
         }
 
-        public static Maybe<IList<TSource>> MayKeepAll<TSource>(
+        public static Maybe<IList<TSource>> MayPullback<TSource>(
             this IList<Maybe<TSource>> @this)
         {
             Require.Object(@this);

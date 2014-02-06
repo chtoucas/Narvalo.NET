@@ -114,6 +114,9 @@
     </Compile>
     <Compile Include="Fx\Lazy`1%24.cs" />
     <Compile Include="Fx\Maybe.Array.cs" />
+    <Compile Include="Fx\Maybe`1%24.cs" />
+    <Compile Include="Fx\MayFunc%24.cs" />
+    <Compile Include="Fx\MayFunc.cs" />
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
@@ -240,8 +243,11 @@
     <Compile Include="Web\WebPageBase%24.cs" />
     <Compile Include="Web\XmlValidationModule.cs" />
     <Compile Include="Xml\CachingXmlResolver.cs" />
+    <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
+    <Compile Include="Xml\Maybe[XElement]%24.cs" />
     <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\XmlValidator.cs" />
     <Compile Include="_Aliens\NHibernate\GuidComb.cs" />
   </ItemGroup>
   <ItemGroup>

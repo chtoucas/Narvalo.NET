@@ -5,7 +5,6 @@
     using System.Reflection;
     using Narvalo;
     using Narvalo.Linq;
-    using Narvalo.Fx;
 
     class BenchComparativeFinder
     {
@@ -25,7 +24,7 @@
         {
             Require.NotNull(type, "type");
 
-            return type.GetMethods(_bindings).SelectAny(BenchComparativeFactory.MayCreate);
+            return type.GetMethods(_bindings).ConvertAny(BenchComparativeFactory.MayCreate);
         }
 
         // FIXME: Theory.
@@ -33,7 +32,7 @@
         {
             Require.NotNull(type, "type");
 
-            return type.GetMethods(_bindings).SelectAny(_ => BenchComparativeFactory.MayCreate(_, value));
+            return type.GetMethods(_bindings).ConvertAny(_ => BenchComparativeFactory.MayCreate(_, value));
         }
     }
 }

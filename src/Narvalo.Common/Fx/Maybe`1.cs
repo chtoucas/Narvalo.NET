@@ -80,7 +80,7 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The type of the underlying value.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "Maybe<T> only pretends to be a collection.")]
-    public sealed partial class Maybe<T> : IMaybe<T>, IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T> 
+    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T> 
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
 

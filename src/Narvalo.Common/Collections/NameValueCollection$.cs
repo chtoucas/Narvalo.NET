@@ -12,12 +12,13 @@ namespace Narvalo.Collections
     /// </summary>
     public static partial class NameValueCollectionExtensions
     {
-        public static T? ParseValue<T>(this NameValueCollection @this, string name, Func<string, T?> parser)
+        public static T? ParseValue<T>(this NameValueCollection @this, string name, Func<string, T?> parserM)
             where T : struct
         {
             Require.Object(@this);
+            Require.NotNull(parserM, "parserM");
 
-            return (from _ in @this.MayGetSingle(name) select parser.Invoke(_)).ValueOrDefault();
+            return (from _ in @this.MayGetSingle(name) select parserM.Invoke(_)).ValueOrDefault();
         }
     }
 }

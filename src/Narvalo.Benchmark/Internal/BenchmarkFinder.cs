@@ -6,7 +6,6 @@
     using System.Reflection;
     using Narvalo;
     using Narvalo.Linq;
-    using Narvalo.Fx;
 
     class BenchmarkFinder
     {
@@ -35,7 +34,7 @@
         {
             Require.NotNull(type, "type");
 
-            return type.GetMethods(_bindings).SelectAny(BenchmarkFactory.MayCreate);
+            return type.GetMethods(_bindings).ConvertAny(BenchmarkFactory.MayCreate);
         }
     }
 }

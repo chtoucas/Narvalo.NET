@@ -61,20 +61,20 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception..
+        ///   Looks up a localized string similar to A non fatal outcome has no exception info..
         /// </summary>
-        internal static string Output_SuccessfulHasNoException {
+        internal static string VoidOrError_NotFatal {
             get {
-                return ResourceManager.GetString("Output_SuccessfulHasNoException", resourceCulture);
+                return ResourceManager.GetString("VoidOrError_NotFatal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A bad outcome has no value..
+        ///   Looks up a localized string similar to A non warning outcome has no error message..
         /// </summary>
-        internal static string Output_UnsuccessfulHasNoValue {
+        internal static string VoidOrError_NotWarning {
             get {
-                return ResourceManager.GetString("Output_UnsuccessfulHasNoValue", resourceCulture);
+                return ResourceManager.GetString("VoidOrError_NotWarning", resourceCulture);
             }
         }
     }

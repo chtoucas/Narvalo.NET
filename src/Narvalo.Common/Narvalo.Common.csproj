@@ -87,11 +87,16 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\IMaybe`1.cs" />
+    <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.IEnumerable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\NamespaceDoc.cs" />
+    <Compile Include="Fx\Output.cs" />
+    <Compile Include="Fx\Output`1.cs" />
+    <Compile Include="Fx\Output`1.Monad.cs">
+      <DependentUpon>Output`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
@@ -103,7 +108,7 @@
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
-    <Compile Include="VoidOrError.cs" />
+    <Compile Include="Linq\Output`1%24.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>
@@ -136,9 +141,6 @@
     </Compile>
     <Compile Include="MayCreate.cs" />
     <Compile Include="ParseTo.cs" />
-    <Compile Include="Fx\Maybe`1.Language.cs">
-      <DependentUpon>Maybe`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Maybe`1.Monad.cs">
       <SubType>Code</SubType>
       <DependentUpon>Maybe`1.cs</DependentUpon>
@@ -170,11 +172,6 @@
     <Compile Include="TryCreate.cs" />
     <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
-    <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
-    <Compile Include="Xml\Maybe[XElement]%24.cs" />
-    <Compile Include="Xml\XAttribute%24.cs" />
-    <Compile Include="Xml\XElement%24.cs" />
-    <Compile Include="Xml\XmlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

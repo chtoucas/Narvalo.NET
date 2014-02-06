@@ -3,7 +3,7 @@
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
-    using Narvalo.Fx;
+    using Narvalo.Linq;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {
@@ -33,9 +33,8 @@
         {
             DebugCheck.NotNull(request);
 
-            return ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, ignoreCase: true)
-                .Map(_ => AcceptedVerbs.HasFlag(_))
-                ?? false;
+            return (from _ in ParseTo.NullableEnum<HttpVerbs>(request.HttpMethod, ignoreCase: true)
+                    select AcceptedVerbs.HasFlag(_)) ?? false;
         }
 
         protected virtual void HandleInvalidHttpMethod(HttpContext context)

@@ -37,9 +37,9 @@
             DebugCheck.NotNull(query);
 
             return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
-                    from attribute in prop.Attributes.OfType<ValidationAttribute>()
-                    where !attribute.IsValid(prop.GetValue(query))
-                    select attribute).IsEmpty();
+                    from attr in prop.Attributes.OfType<ValidationAttribute>()
+                    where !attr.IsValid(prop.GetValue(query))
+                    select attr).IsEmpty();
         }
 
         protected void AddError(HttpQueryBinderException exception)

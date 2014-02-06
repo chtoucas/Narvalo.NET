@@ -5,20 +5,27 @@ namespace Narvalo.Linq
     using System.Runtime.CompilerServices;
 
     /*!
-     * Monad and Linq
-     * --------------
+     * Aliases
+     * -------
      * 
-     * ### Table of correspondance ###
+     * Linq            | Monad
+     * ----------------+----------------
+     * Where (*)       | Filter
+     * Select (*)      | Map
+     * SelectMany (*)  | Bind
      * 
-     * Where            Filter
-     * Select           Map
-     * SelectMany       Bind
+     * Linq            | List           |
+     * ----------------+----------------+----------------------------------------------
+     * Aggregate       | FoldLeft       | Fold ou Recuce (sans valeur initiale)
+     *                 | FoldRight      | FoldBack ou RecuceBack (sans valeur initiale)
+     *                 | Cons           | Prepend
+     *                 | Scons          | Append
      * 
      * 
      * References
      * ----------
      * 
-     * + C# 5.0 Language Specification / Section 7.16.3
+     * + Query Expression Pattern / C# 5.0 Language Specification. Section 7.16.3
      *   http://www.microsoft.com/en-us/download/details.aspx?id=7029
      * + The .NET Standard Query Operators
      *   http://msdn.microsoft.com/en-us/library/bb394939.aspx

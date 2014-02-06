@@ -11,8 +11,7 @@ namespace Narvalo.Linq
     {
         //// Restriction Operators
 
-        // REVIEW: Rename to Where?
-        public static IEnumerable<T> Filter<T>(
+        public static IEnumerable<T> Where<T>(
             this IEnumerable<T> @this,
             Func<T, Maybe<bool>> predicateM)
         {
@@ -24,18 +23,17 @@ namespace Narvalo.Linq
                    select item;
         }
 
-        //// Projection Operators
+        //// Conversion Operators
 
-        // REVIEW: Rename to Collect?
-        public static IEnumerable<TResult> SelectAny<TSource, TResult>(
+        public static IEnumerable<TResult> ConvertAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> selectorM)
+            Func<TSource, Maybe<TResult>> converterM)
         {
             Require.Object(@this);
-            Require.NotNull(selectorM, "selectorM");
+            Require.NotNull(converterM, "converterM");
 
             return from item in @this
-                   let m = selectorM.Invoke(item)
+                   let m = converterM.Invoke(item)
                    where m.IsSome
                    select m.Value;
         }
@@ -104,7 +102,6 @@ namespace Narvalo.Linq
 
         //// Aggregate Operators
 
-        // REVIEW: Rename to Aggregate?
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
@@ -127,7 +124,16 @@ namespace Narvalo.Linq
             }
         }
 
-        public static Maybe<TAccumulate> FoldLeft<TSource, TAccumulate>(
+        public static Maybe<TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Reduce(accumulatorM);
+        }
+
+        public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
@@ -144,14 +150,14 @@ namespace Narvalo.Linq
             return result;
         }
 
-        public static Maybe<TAccumulate> FoldRight<TSource, TAccumulate>(
+        public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
 
-            return @this.Reverse().FoldLeft(seed, accumulatorM);
+            return @this.Reverse().Fold(seed, accumulatorM);
         }
     }
 }

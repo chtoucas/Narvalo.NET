@@ -67,7 +67,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(source, "source");
 
-            return source.Reverse().FoldLeft(seed, accumulatorM);
+            return FoldLeft(source.Reverse().ToArray(), seed, accumulatorM);
         }
 
         public static Maybe<TSource> Reduce<TSource>(

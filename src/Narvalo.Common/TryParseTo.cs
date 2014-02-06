@@ -5,7 +5,7 @@ namespace Narvalo
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using Narvalo.Fx;
+    using Narvalo.Linq;
 
     public static class TryParseTo
     {
@@ -42,8 +42,8 @@ namespace Narvalo
             }
 
             if (style.HasFlag(BooleanStyles.Integer)) {
-                bool? b = ParseTo.NullableInt32(val, NumberStyles.Integer, CultureInfo.InvariantCulture)
-                    .Map(_ => _ > 0);
+                bool? b = from _ in ParseTo.NullableInt32(val, NumberStyles.Integer, CultureInfo.InvariantCulture)
+                          select _ > 0;
 
                 if (b.HasValue) {
                     result = b.Value;

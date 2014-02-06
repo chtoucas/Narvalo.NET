@@ -3,6 +3,7 @@
 namespace Narvalo.Collections
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Linq;
     using Narvalo;
@@ -27,39 +28,24 @@ namespace Narvalo.Collections
             return Maybe.Create(@this.GetValues(name));
         }
 
-        public static Maybe<T[]> MayParseAny<T>(
+        public static IEnumerable<T> ParseAny<T>(
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
 
-            return from values in @this.MayGetValues(name)
-                   let result = values.SelectAny(parserM).ToArray()
-                   where result.Length > 0
-                   select result;
+            return (from @_ in @this.MayGetValues(name) select @_.ConvertAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }
 
-        public static Maybe<T[]> MayParseAll<T>(
+        public static Maybe<IList<T>> MayParseAll<T>(
             this NameValueCollection @this,
             string name,
             Func<string, Maybe<T>> parserM)
         {
             Require.Object(@this);
 
-            var list = @this.MayGetValues(name).Bind(@_ => @_.MayConvertAll(parserM));
-
-            return from values in list select values.ToArray();
-        }
-
-        public static Maybe<T> MayParseSingle<T>(
-            this NameValueCollection @this,
-            string name,
-            Func<string, Maybe<T>> parserM)
-        {
-            Require.Object(@this);
-
-            return @this.MayGetSingle(name).Bind(parserM);
+            return @this.MayGetValues(name).Bind(@_ => @_.MayConvertAll(parserM));
         }
     }
 }
