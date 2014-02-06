@@ -1,35 +1,35 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
     using System.Runtime.ExceptionServices;
 
     public sealed partial class Output<T>
     {
-        readonly bool _successful;
+        readonly bool _isSuccess;
         readonly ExceptionDispatchInfo _exceptionInfo;
         readonly T _value;
 
         Output(ExceptionDispatchInfo exceptionInfo)
         {
-            _successful = false;
+            _isSuccess = false;
             _exceptionInfo = exceptionInfo;
         }
 
         Output(T value)
         {
-            _successful = true;
+            _isSuccess = true;
             _value = value;
         }
 
-        public bool Successful { get { return _successful; } }
-
-        public bool Unsuccessful { get { return !Successful; } }
+        public bool IsSuccess { get { return _isSuccess; } }
 
         public ExceptionDispatchInfo ExceptionInfo
         {
             get
             {
-                if (_successful) {
+                if (_isSuccess) {
                     throw new InvalidOperationException(SR.Output_SuccessfulHasNoException);
                 }
 
@@ -41,7 +41,7 @@
         {
             get
             {
-                if (!_successful) {
+                if (!_isSuccess) {
                     throw new InvalidOperationException(SR.Output_UnsuccessfulHasNoValue);
                 }
 
@@ -51,7 +51,7 @@
 
         public T ValueOrThrow()
         {
-            if (!_successful) {
+            if (!_isSuccess) {
                 _exceptionInfo.Throw();
             }
 
@@ -60,7 +60,7 @@
 
         public override string ToString()
         {
-            return _successful ? Value.ToString() : _exceptionInfo.ToString();
+            return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
         }
     }
 }

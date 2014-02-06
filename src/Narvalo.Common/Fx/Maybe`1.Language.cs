@@ -1,11 +1,11 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
 
     public partial class Maybe<T>
     {
-        #region Standard
-
         //// Filter
 
         public Maybe<T> Filter(Func<T, bool> predicate)
@@ -14,39 +14,6 @@
 
             return Bind(_ => predicate.Invoke(_) ? this : Maybe<T>.None);
         }
-
-        //// Then
-
-        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
-        {
-            return Bind(_ => other);
-        }
-
-        //// When
-
-        public Maybe<Unit> When(bool predicate, Func<Maybe<Unit>> kun)
-        {
-            return Bind(_ => kun.When(predicate).Invoke());
-        }
-
-        public Maybe<Unit> When(bool predicate, Func<T, Maybe<Unit>> kun)
-        {
-            return Bind(kun.When(predicate));
-        }
-
-        //// Unless
-
-        public Maybe<Unit> Unless(bool predicate, Func<Maybe<Unit>> kun)
-        {
-            return When(!predicate, kun);
-        }
-
-        public Maybe<Unit> Unless(bool predicate, Func<T, Maybe<Unit>> kun)
-        {
-            return When(!predicate, kun);
-        }
-
-        #endregion
 
         //// Match
 
@@ -86,20 +53,6 @@
             }
 
             return this;
-        }
-
-        //// TrySet
-
-        public bool TrySet(out T value)
-        {
-            if (IsSome) {
-                value = Value;
-                return true;
-            }
-            else {
-                value = default(T);
-                return false;
-            }
         }
     }
 }

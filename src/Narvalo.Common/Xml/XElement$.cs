@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Xml
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Xml
 {
     using System;
     using System.Xml;
@@ -14,8 +16,7 @@
         {
             Require.Object(@this);
 
-            var attr = @this.Attribute(name);
-            return attr == null ? Maybe<XAttribute>.None : Maybe.Create(attr);
+            return Maybe.Create(@this.Attribute(name));
         }
 
         public static XAttribute AttributeOrThrow(this XElement @this, string name, XmlException exception)
@@ -42,8 +43,7 @@
         {
             Require.Object(@this);
 
-            var child = @this.Element(name);
-            return child == null ? Maybe<XElement>.None : Maybe.Create(child);
+            return Maybe.Create(@this.Element(name));
         }
 
         public static XElement ElementOrThrow(this XElement @this, string name, XmlException exception)

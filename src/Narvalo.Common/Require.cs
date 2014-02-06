@@ -1,4 +1,6 @@
-﻿// Cette classe est inspirée de :
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Cette classe est inspirée de :
 // http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx
 
 namespace Narvalo

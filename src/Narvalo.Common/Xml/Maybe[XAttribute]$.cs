@@ -1,8 +1,11 @@
-﻿namespace Narvalo.Xml
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Xml
 {
     using System;
     using System.Xml.Linq;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for Maybe&lt;XAttribute&gt;.
@@ -20,7 +23,7 @@
         {
             Require.NotNull(selector, "selector");
 
-            return @this.Map(_ => selector.Invoke(_.Value));
+            return from _ in @this select selector.Invoke(_.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)

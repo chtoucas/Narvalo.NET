@@ -1,5 +1,8 @@
-﻿namespace Narvalo
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo
 {
+    using System;
     using System.Net.Mail;
     using System.Text;
     using Narvalo.Fx;
@@ -11,12 +14,12 @@
     {
         public static Output<MailAddress> MailAddress(string value)
         {
-            return Output.Return(() => new MailAddress(value));
+            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value));
         }
 
         public static Output<MailAddress> MailAddress(string value, string displayName)
         {
-            return Output.Return(() => new MailAddress(value, displayName));
+            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName));
         }
 
         public static Output<MailAddress> MailAddress(
@@ -24,7 +27,7 @@
             string displayName,
             Encoding displayNameEncoding)
         {
-            return Output.Return(() => new MailAddress(value, displayName, displayNameEncoding));
+            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName, displayNameEncoding));
         }
     }
 }

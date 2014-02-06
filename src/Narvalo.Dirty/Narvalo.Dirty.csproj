@@ -113,6 +113,7 @@
       <DependentUpon>Lazy.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Lazy`1%24.cs" />
+    <Compile Include="Fx\Maybe.Array.cs" />
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
@@ -198,6 +199,7 @@
     </Compile>
     <Compile Include="RandomString.cs" />
     <Compile Include="StringManip.cs" />
+    <Compile Include="TypeBorrowedFromAttribute.cs" />
     <Compile Include="Web\Configuration\NarvaloWebSettings.cs" />
     <Compile Include="Web\Configuration\ParserFilterElement.cs" />
     <Compile Include="Web\Configuration\ParserFilterElementCollection.cs" />

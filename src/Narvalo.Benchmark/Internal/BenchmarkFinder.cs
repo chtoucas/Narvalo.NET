@@ -35,9 +35,7 @@
         {
             Require.NotNull(type, "type");
 
-            return Maybe.SelectAny(
-                type.GetMethods(_bindings), 
-                BenchmarkFactory.MayCreate);
+            return type.GetMethods(_bindings).SelectAny(BenchmarkFactory.MayCreate);
         }
     }
 }

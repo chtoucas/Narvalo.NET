@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     static class BenchmarkFactory
     {
@@ -22,14 +23,11 @@
 
         public static Maybe<Benchmark> MayCreate(MethodInfo method)
         {
-            return method
-                .MayGetCustomAttribute<BenchmarkAttribute>(false /* inherit */)
-                .Map(
-                    attr => new Benchmark(
-                        GetName(method, attr),
-                        ActionFactory.Create(method),
-                        attr.Iterations)
-                );
+            return from attr in method.MayGetCustomAttribute<BenchmarkAttribute>(false /* inherit */)
+                   select new Benchmark(
+                       GetName(method, attr),
+                       ActionFactory.Create(method),
+                       attr.Iterations);
         }
 
         #region Membres privés.

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Globalization;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     static class BenchComparisonFactory
     {
@@ -11,7 +12,8 @@
         {
             return MayCreate(type, items)
                 .ValueOrThrow(
-                    () => {
+                    () =>
+                    {
                         var message = String.Format(
                             CultureInfo.CurrentCulture,
                             SR.MissingBenchComparisonAttribute,
@@ -25,14 +27,11 @@
             Type type,
             IEnumerable<BenchComparative> items)
         {
-            return type
-                .MayGetCustomAttribute<BenchComparisonAttribute>(false /* inherit */)
-                .Map(
-                    attr => new BenchComparison(
-                        GetName(type, attr),
-                        items,
-                        attr.Iterations)
-                );
+            return from attr in type.MayGetCustomAttribute<BenchComparisonAttribute>(inherit: false)
+                   select new BenchComparison(
+                       GetName(type, attr),
+                       items,
+                       attr.Iterations);
         }
 
         #region Membres privés.

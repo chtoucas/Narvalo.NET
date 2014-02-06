@@ -9,6 +9,7 @@
     using System.Web;
     using Narvalo;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     public struct FacebookCookie
     {
@@ -57,8 +58,7 @@
             Require.NotNullOrEmpty(appId, "appId");
             Require.NotNullOrEmpty(appSecret, "appSecret");
 
-            return MayGetHttpCookie_(httpContext, appId)
-                .Map(_ => ParseHttpCookie_(_, appSecret))
+            return (from _ in MayGetHttpCookie_(httpContext, appId) select ParseHttpCookie_(_, appSecret))
                 .ValueOrDefault();
         }
 

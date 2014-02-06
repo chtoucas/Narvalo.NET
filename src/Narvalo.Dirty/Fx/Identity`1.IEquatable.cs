@@ -24,11 +24,13 @@
             return comparer.Equals(_value, other._value);
         }
 
+        /// <summary />
         public bool Equals(T other)
         {
             return Equals(other, EqualityComparer<T>.Default);
         }
 
+        /// <summary />
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
             return Equals(η(other), comparer);

@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     static class BenchComparativeFactory
     {
@@ -21,23 +22,19 @@
 
         public static Maybe<BenchComparative> MayCreate(MethodInfo method)
         {
-            return MayGetAttribute(method)
-                .Map(
-                    attr => new BenchComparative(
-                        GetName(method, attr),
-                        ActionFactory.Create(method))
-                );
+            return from attr in MayGetAttribute(method)
+                   select new BenchComparative(
+                       GetName(method, attr),
+                       ActionFactory.Create(method));
         }
 
         // FIXME: Theory.
         public static Maybe<BenchComparative> MayCreate<T>(MethodInfo method, T value)
         {
-            return MayGetAttribute(method)
-                .Map(
-                    attr => new BenchComparative(
-                        GetName(method, attr),
-                        () => ActionFactory.Create<T>(method).Invoke(value))
-                );
+            return from attr in MayGetAttribute(method)
+                   select new BenchComparative(
+                       GetName(method, attr),
+                       () => ActionFactory.Create<T>(method).Invoke(value));
         }
 
         #region Membres privés.

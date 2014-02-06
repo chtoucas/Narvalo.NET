@@ -142,15 +142,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful nil has no error message..
-        /// </summary>
-        internal static string Nil_SuccessfulHasNoMessage {
-            get {
-                return ResourceManager.GetString("Nil_SuccessfulHasNoMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The lower end must be lesser than upper end..
         /// </summary>
         internal static string Range_LowerEndNotLesserThanUpperEnd {
@@ -228,6 +219,24 @@ namespace Narvalo {
         internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
             get {
                 return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A non fatal outcome has no exception info..
+        /// </summary>
+        internal static string VoidOrError_NotFatal {
+            get {
+                return ResourceManager.GetString("VoidOrError_NotFatal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A non warning outcome has no error message..
+        /// </summary>
+        internal static string VoidOrError_NotWarning {
+            get {
+                return ResourceManager.GetString("VoidOrError_NotWarning", resourceCulture);
             }
         }
     }

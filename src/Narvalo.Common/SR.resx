@@ -171,7 +171,10 @@
   <data name="DebugCheck_IsEmpty" xml:space="preserve">
     <value>The value is empty.</value>
   </data>
-  <data name="Nil_SuccessfulHasNoMessage" xml:space="preserve">
-    <value>A successful nil has no error message.</value>
+  <data name="VoidOrError_NotFatal" xml:space="preserve">
+    <value>A non fatal outcome has no exception info.</value>
+  </data>
+  <data name="VoidOrError_NotWarning" xml:space="preserve">
+    <value>A non warning outcome has no error message.</value>
   </data>
 </root>

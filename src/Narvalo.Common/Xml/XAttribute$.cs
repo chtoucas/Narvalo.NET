@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Xml
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Xml
 {
     using System;
     using System.Xml.Linq;
@@ -14,7 +16,7 @@
             Require.Object(@this);
             Require.NotNull(selector, "selector");
 
-            return selector(@this.Value);
+            return selector.Invoke(@this.Value);
         }
 
         public static Maybe<T> MayParseValue<T>(this XAttribute @this, Func<string, Maybe<T>> parserM)

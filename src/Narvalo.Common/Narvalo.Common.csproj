@@ -80,9 +80,14 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Collections\List`1%24.cs" />
+    <Compile Include="Collections\List`1%24.Maybe.cs">
+      <DependentUpon>List`1%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\IMaybe`1.cs" />
     <Compile Include="Fx\Maybe`1.IEnumerable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
@@ -91,7 +96,6 @@
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
-    <Compile Include="TypeBorrowedFromAttribute.cs" />
     <Compile Include="Fx\Nullable`1%24.Language.cs">
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
     </Compile>
@@ -99,10 +103,7 @@
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
-    <Compile Include="Nil.cs" />
-    <Compile Include="Nil.IEquatable.cs">
-      <DependentUpon>Nil.cs</DependentUpon>
-    </Compile>
+    <Compile Include="VoidOrError.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>
@@ -135,15 +136,6 @@
     </Compile>
     <Compile Include="MayCreate.cs" />
     <Compile Include="ParseTo.cs" />
-    <Compile Include="Fx\Maybe.Array.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>Maybe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Maybe.Enumerable.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>Maybe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\MayFunc.cs" />
     <Compile Include="Fx\Maybe`1.Language.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
@@ -151,9 +143,7 @@
       <SubType>Code</SubType>
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\MayFunc%24.cs" />
     <Compile Include="Fx\Maybe.cs" />
-    <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>

@@ -25,9 +25,7 @@
         {
             Require.NotNull(type, "type");
 
-            return Maybe.SelectAny(
-                type.GetMethods(_bindings), 
-                BenchComparativeFactory.MayCreate);
+            return type.GetMethods(_bindings).SelectAny(BenchComparativeFactory.MayCreate);
         }
 
         // FIXME: Theory.
@@ -35,9 +33,7 @@
         {
             Require.NotNull(type, "type");
 
-            return Maybe.SelectAny(
-                type.GetMethods(_bindings), 
-                m => BenchComparativeFactory.MayCreate(m, value));
+            return type.GetMethods(_bindings).SelectAny(_ => BenchComparativeFactory.MayCreate(_, value));
         }
     }
 }

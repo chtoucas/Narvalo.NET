@@ -29,7 +29,7 @@
             base.Initialize(name, config);
 
             // Initialisation du champs baseUri.
-            _baseUri = config.MayParseValue("baseUri", _ => MayCreate.Uri(_, UriKind.RelativeOrAbsolute))
+            _baseUri = config.MayParseSingle("baseUri", _ => MayCreate.Uri(_, UriKind.RelativeOrAbsolute))
                .ValueOrThrow(() => new ProviderException("Missing or invalid config 'baseUri'."));
             config.Remove("baseUri");
         }

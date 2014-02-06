@@ -1,17 +1,13 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
     using System.Linq;
+    using Narvalo.Linq;
 
-    public static partial class Maybe
+    public static class MaybeArray
     {
-        public static Maybe<TResult[]> Collect<TSource, TResult>(
-            TSource[] source,
-            Func<TSource, Maybe<TResult>> selectorM)
-        {
-            return Create(SelectAny(source, selectorM));
-        }
-
         public static TResult[] SelectAny<TSource, TResult>(
             TSource[] source,
             Func<TSource, Maybe<TResult>> selectorM)
@@ -40,18 +36,18 @@
                 source,
                 _ => predicateM.Invoke(_).Match(b => b, false));
 
-            return Create(list);
+            return Maybe.Create(list);
         }
 
-        public static Maybe<TResult> FoldLeft<TSource, TResult>(
+        public static Maybe<TAccumulate> FoldLeft<TSource, TAccumulate>(
             TSource[] source,
-            TResult seed,
-            Func<TResult, TSource, Maybe<TResult>> accumulatorM)
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.NotNull(source, "source");
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            Maybe<TResult> result = Create(seed);
+            Maybe<TAccumulate> result = Maybe.Create(seed);
 
             int length = source.Length;
 
@@ -64,14 +60,14 @@
             return result;
         }
 
-        public static Maybe<TResult> FoldRight<TSource, TResult>(
+        public static Maybe<TAccumulate> FoldRight<TSource, TAccumulate>(
             TSource[] source,
-            TResult seed,
-            Func<TResult, TSource, Maybe<TResult>> accumulatorM)
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.NotNull(source, "source");
 
-            return FoldLeft(source.Reverse(), seed, accumulatorM);
+            return source.Reverse().FoldLeft(seed, accumulatorM);
         }
 
         public static Maybe<TSource> Reduce<TSource>(
@@ -84,44 +80,13 @@
             int length = source.Length;
             if (length == 0) { return Maybe<TSource>.None; }
 
-            Maybe<TSource> result = Create(source[0]);
+            Maybe<TSource> result = Maybe.Create(source[0]);
 
             for (int i = 1; i < length; i++) {
                 result = result.Bind(_ => accumulatorM.Invoke(_, source[i]));
             }
 
             return result;
-        }
-
-        public static Maybe<TResult[]> Map<TSource, TResult>(
-            TSource[] source,
-            Func<TSource, Maybe<TResult>> kun)
-        {
-            Require.NotNull(source, "source");
-            Require.NotNull(kun, "kun");
-
-            Maybe<TResult>[] list = Array.ConvertAll(source, _ => kun.Invoke(_));
-
-            return Sequence(list);
-        }
-
-        public static Maybe<T[]> Sequence<T>(Maybe<T>[] source)
-        {
-            Require.NotNull(source, "source");
-
-            int length = source.Length;
-            T[] list = new T[length];
-
-            for (int i = 0; i < length; i++) {
-                Maybe<T> m = source[i];
-                if (m.IsNone) {
-                    return Maybe<T[]>.None;
-                }
-                
-                list[i] = m.Value;
-            }
-
-            return Create(list);
         }
     }
 }

@@ -1,17 +1,15 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
 
     public static partial class Maybe
     {
         static readonly Maybe<Unit> Unit_ = Maybe<Unit>.None;
 
         public static Maybe<Unit> Unit { get { return Unit_; } }
-
-        public static Maybe<T> None<T>()
-        {
-            return Maybe<T>.None;
-        }
 
         //// Create
 
