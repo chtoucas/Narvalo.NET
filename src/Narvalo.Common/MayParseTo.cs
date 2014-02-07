@@ -11,7 +11,7 @@ namespace Narvalo
     {
         public static Maybe<IPAddress> IPAddress(string value)
         {
-            return MayParseCore_(
+            return TryParseInvoker.MayInvoke(
                 value,
                 (string val, out IPAddress result) => System.Net.IPAddress.TryParse(val, out result));
         }
@@ -23,19 +23,9 @@ namespace Narvalo
                 return Maybe<Uri>.None;
             }
 
-            return MayParseCore_(
+            return TryParseInvoker.MayInvoke(
                 value,
                 (string val, out Uri result) => System.Uri.TryCreate(val, uriKind, out result));
-        }
-
-        //// MayParseCore
-
-        static Maybe<T> MayParseCore_<T>(string value, TryParse<T> tryParser) where T : class
-        {
-            if (value == null) { return Maybe<T>.None; }
-
-            T result;
-            return tryParser(value, out result) ? Maybe.Create(result) : Maybe<T>.None;
         }
     }
 }

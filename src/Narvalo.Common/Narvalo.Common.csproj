@@ -87,7 +87,6 @@
     </Compile>
     <Compile Include="Collections\NamespaceDoc.cs" />
     <Compile Include="Configuration\NamespaceDoc.cs" />
-    <Compile Include="Create.cs" />
     <Compile Include="Data\NamespaceDoc.cs" />
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
@@ -103,6 +102,7 @@
       <DependentUpon>Output`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Internal\ExceptionFactory.cs" />
+    <Compile Include="Internal\TryParseInvoker.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
@@ -111,7 +111,7 @@
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Linq\Output`1%24.cs" />
-    <Compile Include="Apply`1.cs" />
+    <Compile Include="Make`1.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>

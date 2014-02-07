@@ -140,6 +140,7 @@
     <Compile Include="Diagnostics\LoggerLevel.cs" />
     <Compile Include="Diagnostics\NoopLogger.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
+    <Compile Include="Net\Mail\MailAddressFactory.cs" />
     <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
     <Compile Include="Runtime\Reliability\BarrierException.cs" />
     <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />

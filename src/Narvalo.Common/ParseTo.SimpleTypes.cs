@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Globalization;
+    using Narvalo.Internal;
 
     public static partial class ParseTo
     {
@@ -16,7 +17,7 @@ namespace Narvalo
 
         public static bool? NullableBoolean(string value, BooleanStyles style)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out bool result) => TryParseTo.Boolean(val, style, out result));
         }
@@ -30,7 +31,7 @@ namespace Narvalo
 
         public static decimal? NullableDecimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out decimal result) =>
                 {
@@ -55,7 +56,7 @@ namespace Narvalo
 
         public static double? NullableDouble(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out double result) => double.TryParse(val, style, provider, out result));
         }
@@ -69,7 +70,7 @@ namespace Narvalo
 
         public static short? NullableInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out short result) => short.TryParse(val, style, provider, out result));
         }
@@ -83,7 +84,7 @@ namespace Narvalo
 
         public static int? NullableInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out int result) => int.TryParse(val, style, provider, out result));
         }
@@ -97,7 +98,7 @@ namespace Narvalo
 
         public static long? NullableInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out long result) => long.TryParse(val, style, provider, out result));
         }
@@ -111,7 +112,7 @@ namespace Narvalo
 
         public static float? NullableSingle(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out float result) => float.TryParse(val, style, provider, out result));
         }
@@ -127,7 +128,7 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static ushort? NullableUInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out ushort result) => ushort.TryParse(val, style, provider, out result));
         }
@@ -143,7 +144,7 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static uint? NullableUInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out uint result) => uint.TryParse(val, style, provider, out result));
         }
@@ -159,7 +160,7 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static ulong? NullableUInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return ParseCore_(
+            return TryParseInvoker.Invoke(
                 value,
                 (string val, out ulong result) => ulong.TryParse(val, style, provider, out result));
         }

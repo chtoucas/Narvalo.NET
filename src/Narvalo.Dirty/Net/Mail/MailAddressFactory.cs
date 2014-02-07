@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Net.Mail
 {
     using System;
     using System.Net.Mail;
@@ -14,19 +14,19 @@ namespace Narvalo
      * + http://msdn.microsoft.com/en-us/library/01escwtf%28v=vs.110%29.aspx
      */
 
-    public static class Create
+    public static class MailAddressFactory
     {
-        public static Output<MailAddress> MailAddress(string value)
+        public static Output<MailAddress> Create(string value)
         {
             return Make<MailAddress>.Catch<FormatException>(() => new MailAddress(value));
         }
 
-        public static Output<MailAddress> MailAddress(string value, string displayName)
+        public static Output<MailAddress> Create(string value, string displayName)
         {
             return Make<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName));
         }
 
-        public static Output<MailAddress> MailAddress(
+        public static Output<MailAddress> Create(
             string value,
             string displayName,
             Encoding displayNameEncoding)
