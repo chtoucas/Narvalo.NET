@@ -8,15 +8,19 @@
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>This package contains the Narvalo.Org Web extra utilities.</description>
-    <!--<releaseNotes>Initial release.</releaseNotes>-->
+    <description>
+This package contains the utilities that do not fit well within the Narvalo.Web package.
+
+*** Until we reached version 1.0, backward compatibility is not guaranteed ***
+      </description>
+    <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>
     <tags>ASP.NET</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Autofac.Mvc5" version="3.1" />
+      <dependency id="Autofac.Mvc5" version="3.2" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.1" />
-      <dependency id="Narvalo.Web" version="0.12" />
+      <dependency id="Narvalo.Web" version="0.13" />
       <dependency id="Serilog" version="1.2.7" />
     </dependencies>
   </metadata>

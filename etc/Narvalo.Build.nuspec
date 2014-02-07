@@ -8,8 +8,12 @@
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>This package contains the Narvalo.Org MSBuild tasks.</description>
-    <!--<releaseNotes>Initial release.</releaseNotes>-->
+    <description>
+This package contains the Narvalo.Org MSBuild tasks.
+
+*** Until we reached version 1.0, backward compatibility is not guaranteed ***
+    </description>
+    <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>
     <tags>MSBuild</tags>
     <language>en-US</language>
