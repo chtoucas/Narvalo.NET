@@ -9,13 +9,15 @@ namespace Narvalo
 
     public static class TryParseTo
     {
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
+            Justification = "The method already returns a boolean to indicate the result.")]
         public static bool Boolean(string value, out bool result)
         {
             return Boolean(value, BooleanStyles.Default, out result);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
+            Justification = "The method already returns a boolean to indicate the result.")]
         public static bool Boolean(string value, BooleanStyles style, out bool result)
         {
             result = default(Boolean);
@@ -82,7 +84,7 @@ namespace Narvalo
             where TEnum : struct
         {
             // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
-            @DebugCheck.IsEnum(typeof(TEnum));
+            DebugCheck.IsEnum(typeof(TEnum));
 
             //if (Attribute.IsDefined(type, typeof(FlagsAttribute))) {
             //  throw Failure.Argument();

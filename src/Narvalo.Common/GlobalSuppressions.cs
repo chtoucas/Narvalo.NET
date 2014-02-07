@@ -2,6 +2,3 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", 
-    Scope = "namespace", Target = "Narvalo.Collections",
-    Justification = "Hopefully there is more to come.")]

@@ -85,7 +85,10 @@
     <Compile Include="Collections\List`1%24.Maybe.cs">
       <DependentUpon>List`1%24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Collections\NamespaceDoc.cs" />
+    <Compile Include="Configuration\NamespaceDoc.cs" />
     <Compile Include="Create.cs" />
+    <Compile Include="Data\NamespaceDoc.cs" />
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
@@ -108,13 +111,13 @@
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Linq\Output`1%24.cs" />
-    <Compile Include="Make`1.cs" />
+    <Compile Include="Apply`1.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>
     <Compile Include="DebugCheck.cs" />
     <Compile Include="Format.cs" />
-    <Compile Include="Internal\TryCreate`1.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Linq\Enumerable`1%24.Maybe.cs">
       <DependentUpon>Enumerable`1%24.cs</DependentUpon>
@@ -139,7 +142,7 @@
     <Compile Include="Fx\Maybe`1.IEquatable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MayCreate.cs" />
+    <Compile Include="MayParseTo.cs" />
     <Compile Include="ParseTo.cs" />
     <Compile Include="Fx\Maybe`1.Monad.cs">
       <SubType>Code</SubType>
@@ -169,7 +172,6 @@
     <Compile Include="StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
-    <Compile Include="TryCreate.cs" />
     <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="VoidOrError.cs" />

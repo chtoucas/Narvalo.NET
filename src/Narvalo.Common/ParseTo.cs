@@ -31,7 +31,7 @@ namespace Narvalo
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
-            return ParseCore(
+            return ParseCore_(
                 value,
                 (string val, out TEnum result) => System.Enum.TryParse<TEnum>(val, ignoreCase, out result));
         }
@@ -54,19 +54,19 @@ namespace Narvalo
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            return ParseCore(
+            return ParseCore_(
                 value,
                 (string val, out DateTime result) => System.DateTime.TryParseExact(val, format, provider, style, out result));
         }
 
         //// ParseCore
 
-        internal static T? ParseCore<T>(string value, TryParse<T> fun) where T : struct
+        static T? ParseCore_<T>(string value, TryParse<T> tryParser) where T : struct
         {
             if (value == null) { return null; }
 
             T result;
-            return fun(value, out result) ? result : (T?)null;
+            return tryParser.Invoke(value, out result) ? result : (T?)null;
         }
     }
 }
