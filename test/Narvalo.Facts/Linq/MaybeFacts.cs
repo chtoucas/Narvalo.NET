@@ -253,45 +253,45 @@
             }
         }
 
-        //public static class TheJoinOperator
-        //{
-        //    [Fact]
-        //    public static void ReturnsSome_WhenSomeX()
-        //    {
-        //        // Arrange
-        //        var source = Maybe.Create(1);
-        //        var inner = Maybe.Create(2);
+        public static class TheJoinOperator
+        {
+            [Fact]
+            public static void ReturnsNone_WhenJoinFailed()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var inner = Maybe.Create(2);
 
-        //        // Act
-        //        var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
-        //        var q = from i in source
-        //                join j in inner on i equals j
-        //                select i + j;
+                // Act
+                var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
+                var q = from i in source
+                        join j in inner on i equals j
+                        select i + j;
 
-        //        // Assert
-        //        Assert.True(m.IsNone);
-        //        Assert.True(q.IsNone);
-        //    }
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
 
-        //    [Fact]
-        //    public static void ReturnsSome_WhenSome()
-        //    {
-        //        // Arrange
-        //        var source = Maybe.Create(1);
-        //        var inner = Maybe.Create(2);
+            [Fact]
+            public static void ReturnsSome_WhenJoinSucceed()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var inner = Maybe.Create(2);
 
-        //        // Act
-        //        var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
-        //        var q = from i in source
-        //                join j in inner on 2 * i equals j
-        //                select i + j;
+                // Act
+                var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
+                var q = from i in source
+                        join j in inner on 2 * i equals j
+                        select i + j;
 
-        //        // Assert
-        //        Assert.True(m.IsSome);
-        //        Assert.True(q.IsSome);
-        //        Assert.Equal(3, m.Value);
-        //        Assert.Equal(3, q.Value);
-        //    }
-        //}
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.True(q.IsSome);
+                Assert.Equal(3, m.Value);
+                Assert.Equal(3, q.Value);
+            }
+        }
     }
 }

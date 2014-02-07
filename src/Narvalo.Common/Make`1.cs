@@ -10,7 +10,7 @@ namespace Narvalo
     public static class Make<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<TException>(Func<T> valueFactory) where TException : Exception
@@ -30,7 +30,7 @@ namespace Narvalo
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception>(Func<T> valueFactory)
@@ -53,7 +53,7 @@ namespace Narvalo
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception>(Func<T> valueFactory)
@@ -78,7 +78,7 @@ namespace Narvalo
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Func<T> valueFactory)

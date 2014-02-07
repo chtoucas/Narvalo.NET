@@ -133,6 +133,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not cast a none maybe to its underlying value type..
+        /// </summary>
+        internal static string Maybe_CannotCastNoneToValue {
+            get {
+                return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can not get the underlying value of an empty maybe..
         /// </summary>
         internal static string Maybe_NoneHasNoValue {

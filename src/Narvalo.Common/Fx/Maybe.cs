@@ -3,11 +3,13 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
 
     public static partial class Maybe
     {
-        static readonly Maybe<Unit> Unit_ = Maybe<Unit>.None;
+        static readonly Maybe<Unit?> None_ = Maybe<Unit?>.None;
+        static readonly Maybe<Unit> Unit_ = Maybe.Create(Narvalo.Fx.Unit.Single);
+
+        public static Maybe<Unit?> None { get { return None_; } }
 
         public static Maybe<Unit> Unit { get { return Unit_; } }
 

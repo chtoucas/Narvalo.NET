@@ -80,7 +80,7 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The type of the underlying value.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "Maybe<T> only pretends to be a collection.")]
-    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T> 
+    public sealed partial class Maybe<T> : IMaybe<T>, IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
 
@@ -123,7 +123,7 @@ namespace Narvalo.Fx
         /// Returns an instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve usability.")]
         public static Maybe<T> None { get { return None_; } }
 
         /// <summary>
@@ -150,6 +150,22 @@ namespace Narvalo.Fx
 
                 return _value;
             }
+        }
+
+        /// <summary />
+        public static explicit operator Maybe<T>(T value)
+        {
+            return η(value);
+        }
+
+        /// <summary />
+        public static explicit operator T(Maybe<T> value)
+        {
+            if (value.IsNone) {
+                throw new InvalidCastException(SR.Maybe_CannotCastNoneToValue);
+            }
+
+            return value.Value;
         }
 
         /// <summary>

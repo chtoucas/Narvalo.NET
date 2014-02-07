@@ -135,7 +135,28 @@
 
         #endregion
 
-        public static class TheIsSomePropery
+        public static class TheUnitProperty
+        {
+            [Fact]
+            public static void IsSome()
+            {
+                // Act & Assert
+                Assert.True(Maybe.Unit.IsSome);
+                Assert.Equal(Unit.Single, Maybe.Unit.Value);
+            }
+        }
+
+        public static class TheNoneProperty
+        {
+            [Fact]
+            public static void IsNone()
+            {
+                // Act & Assert
+                Assert.True(Maybe.None.IsNone);
+            }
+        }
+
+        public static class TheIsSomeProperty
         {
             [Fact]
             public static void IsFalse_WhenNone()

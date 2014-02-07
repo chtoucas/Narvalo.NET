@@ -36,11 +36,32 @@ namespace Narvalo.Fx
 
         //// Then
 
+        public static Maybe<TResult> ThenOtherwise<T, TResult>(
+            this Maybe<T> @this, 
+            Maybe<TResult> whenSome,
+            Maybe<TResult> whenNone)
+        {
+            Require.Object(@this);
+
+            return @this.IsSome ? whenSome : whenNone;
+        }
+
+        //// Then
+
         public static Maybe<TResult> Then<T, TResult>(this Maybe<T> @this, Maybe<TResult> other)
         {
             Require.Object(@this);
 
-            return @this.Bind(_ => other);
+            return @this.IsSome ? other : Maybe<TResult>.None;
+        }
+
+        //// Otherwise
+
+        public static Maybe<TResult> Otherwise<T, TResult>(this Maybe<T> @this, Maybe<TResult> other)
+        {
+            Require.Object(@this);
+
+            return @this.IsSome ? Maybe<TResult>.None : other;
         }
 
         //// OnSome

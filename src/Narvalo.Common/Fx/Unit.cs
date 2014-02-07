@@ -11,16 +11,20 @@ namespace Narvalo.Fx
         public static readonly Unit Single = new Unit();
 
         /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
+            Justification = "This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
+            Justification = "This method always returns the same result.")]
         public static bool operator ==(Unit left, Unit right)
         {
             return true;
         }
 
         /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right", Justification = "Cette méthode renvoie toujours la même valeur quelques soient les paramètres.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
+            Justification = "This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
+            Justification = "This method always returns the same result.")]
         public static bool operator !=(Unit left, Unit right)
         {
             return false;

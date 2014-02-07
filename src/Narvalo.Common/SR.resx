@@ -183,4 +183,7 @@
   <data name="VoidOrError_NotWarning" xml:space="preserve">
     <value>A non warning outcome has no error message.</value>
   </data>
+  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
+    <value>Can not cast a none maybe to its underlying value type.</value>
+  </data>
 </root>

@@ -91,6 +91,7 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\IMaybe`1.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.IEnumerable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
