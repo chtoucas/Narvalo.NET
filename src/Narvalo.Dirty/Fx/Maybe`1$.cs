@@ -10,13 +10,6 @@ namespace Narvalo.Fx
     /// </summary>
     public static class MaybeExtensions
     {
-        public static Maybe<TResult> Cast<T, TResult>(this Maybe<T> @this) where T : TResult
-        {
-            Require.Object(@this);
-
-            return from _ in @this select (TResult)_;
-        }
-
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
         {
             Require.Object(@this);
@@ -31,15 +24,6 @@ namespace Narvalo.Fx
             Require.Object(@this);
 
             return @this.IsSome ? @this.Value : null;
-        }
-
-        //// Then
-
-        public static Maybe<TResult> Then<T, TResult>(this Maybe<T> @this, Maybe<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.Bind(_ => other);
         }
 
         //// When

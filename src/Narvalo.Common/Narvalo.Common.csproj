@@ -80,10 +80,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Apply.cs" />
     <Compile Include="Collections\List`1%24.cs" />
     <Compile Include="Collections\List`1%24.Maybe.cs">
       <DependentUpon>List`1%24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Create.cs" />
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
@@ -101,14 +103,12 @@
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
-    <Compile Include="Fx\Nullable`1%24.Language.cs">
-      <DependentUpon>Nullable`1%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Nullable`1%24.Monad.cs">
       <DependentUpon>Nullable`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Linq\Output`1%24.cs" />
+    <Compile Include="Make`1.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>
@@ -172,6 +172,8 @@
     <Compile Include="TryCreate.cs" />
     <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
+    <Compile Include="VoidOrError.cs" />
+    <Compile Include="VoidOrWarning.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

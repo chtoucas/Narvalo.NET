@@ -117,10 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="VoidOrError_NotFatal" xml:space="preserve">
-    <value>A non fatal outcome has no exception info.</value>
-  </data>
-  <data name="VoidOrError_NotWarning" xml:space="preserve">
-    <value>A non warning outcome has no error message.</value>
-  </data>
 </root>

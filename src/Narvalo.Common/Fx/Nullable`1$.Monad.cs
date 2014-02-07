@@ -6,8 +6,8 @@ namespace Narvalo.Fx
 
     public static partial class NullableExtensions
     {
-        public static TResult? Bind<T, TResult>(this T? @this, Func<T, TResult?> selector)
-            where T : struct
+        public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
+            where TSource : struct
             where TResult : struct
         {
             Require.NotNull(selector, "selector");
@@ -15,8 +15,8 @@ namespace Narvalo.Fx
             return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
 
-        public static TResult? Map<T, TResult>(this T? @this, Func<T, TResult> selector)
-            where T : struct
+        public static TResult? Map<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
+            where TSource : struct
             where TResult : struct
         {
             Require.NotNull(selector, "selector");

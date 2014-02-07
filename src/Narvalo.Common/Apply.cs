@@ -6,9 +6,10 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    public static class CatchGuard
+    public static class Apply
     {
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static VoidOrError Catch<TException>(Action action) where TException : Exception
         {
             Require.NotNull(action, "action");
@@ -16,7 +17,7 @@ namespace Narvalo
             try {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrError.Success;
             }
             catch (TException ex) {
                 var edi = ExceptionDispatchInfo.Capture(ex);
@@ -25,7 +26,8 @@ namespace Narvalo
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static VoidOrError Catch<T1Exception, T2Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -37,7 +39,7 @@ namespace Narvalo
             try {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrError.Success;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
@@ -45,7 +47,8 @@ namespace Narvalo
             return VoidOrError.Failure(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -58,7 +61,7 @@ namespace Narvalo
             try {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrError.Success;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
@@ -67,7 +70,8 @@ namespace Narvalo
             return VoidOrError.Failure(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -81,7 +85,7 @@ namespace Narvalo
             try {
                 action.Invoke();
 
-                return VoidOrError.Void;
+                return VoidOrError.Success;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }

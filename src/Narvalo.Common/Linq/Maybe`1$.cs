@@ -19,7 +19,7 @@ namespace Narvalo.Linq
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Filter(predicate);
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
         }
 
         //// Projection Operators
@@ -51,6 +51,15 @@ namespace Narvalo.Linq
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+        }
+
+        //// Conversions Operators
+
+        public static Maybe<TResult> Cast<TSource, TResult>(this Maybe<TSource> @this) where TSource : TResult
+        {
+            Require.Object(@this);
+
+            return from _ in @this select (TResult)_;
         }
     }
 }

@@ -9,33 +9,37 @@ namespace Narvalo.Fx
     /// </summary>
     public static class MaybeExtensions
     {
-        //// Filter
-
-        public static Maybe<T> Filter<T>(this Maybe<T> @this, Func<T, bool> predicate)
-        {
-            Require.Object(@this);
-
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<T>.None);
-        }
-
         //// Match
 
-        public static TResult Match<T, TResult>(this Maybe<T> @this, Func<T, TResult> selector, TResult defaultValue)
+        public static TResult Match<TSource, TResult>(
+            this Maybe<TSource> @this, 
+            Func<TSource, TResult> selector,
+            TResult defaultValue)
         {
             Require.Object(@this);
 
             return @this.Map(selector).ValueOrElse(defaultValue);
         }
 
-        public static TResult Match<T, TResult>(this Maybe<T> @this, Func<T, TResult> selector, Func<TResult> defaultValueFactory)
+        public static TResult Match<TSource, TResult>(
+            this Maybe<TSource> @this, 
+            Func<TSource, TResult> selector, 
+            Func<TResult> defaultValueFactory)
         {
             Require.Object(@this);
 
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
             return @this.Match(selector, defaultValueFactory.Invoke());
+        }
+
+        //// Then
+
+        public static Maybe<TResult> Then<T, TResult>(this Maybe<T> @this, Maybe<TResult> other)
+        {
+            Require.Object(@this);
+
+            return @this.Bind(_ => other);
         }
 
         //// OnSome

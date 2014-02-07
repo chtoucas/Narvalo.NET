@@ -7,10 +7,12 @@ namespace Narvalo
     using System.Runtime.ExceptionServices;
     using Narvalo.Fx;
 
-    public static class Result<T>
+    public static class Make<T>
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "A non-generic version would not improve the readability.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<TException>(Func<T> valueFactory) where TException : Exception
         {
             Require.NotNull(valueFactory, "valueFactory");
@@ -27,8 +29,10 @@ namespace Narvalo
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "A non-generic version would not improve the readability.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception>(Func<T> valueFactory)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -48,8 +52,10 @@ namespace Narvalo
             return Output.Failure<T>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "A non-generic version would not improve the readability.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception>(Func<T> valueFactory)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -71,8 +77,10 @@ namespace Narvalo
             return Output.Failure<T>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "A non-generic version would not improve the readability.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "There is no way we can achieve the same thing with type inference.")]
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Func<T> valueFactory)
             where T1Exception : Exception
             where T2Exception : Exception

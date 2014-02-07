@@ -19,7 +19,7 @@ namespace Narvalo.Linq
         {
             Require.NotNull(predicate, "predicate");
 
-            return @this.Filter(predicate);
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
         }
 
         //// Projection Operators

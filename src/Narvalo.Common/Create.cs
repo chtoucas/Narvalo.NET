@@ -14,12 +14,12 @@ namespace Narvalo
     {
         public static Output<MailAddress> MailAddress(string value)
         {
-            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value));
+            return Make<MailAddress>.Catch<FormatException>(() => new MailAddress(value));
         }
 
         public static Output<MailAddress> MailAddress(string value, string displayName)
         {
-            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName));
+            return Make<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName));
         }
 
         public static Output<MailAddress> MailAddress(
@@ -27,7 +27,7 @@ namespace Narvalo
             string displayName,
             Encoding displayNameEncoding)
         {
-            return Result<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName, displayNameEncoding));
+            return Make<MailAddress>.Catch<FormatException>(() => new MailAddress(value, displayName, displayNameEncoding));
         }
     }
 }

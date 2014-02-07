@@ -123,7 +123,7 @@ namespace Narvalo.Fx
         /// Returns an instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A generic version would not improve the readability.")]
+            Justification = "A non-generic version would not improve the readability.")]
         public static Maybe<T> None { get { return None_; } }
 
         /// <summary>
