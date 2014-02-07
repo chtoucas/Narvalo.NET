@@ -2,13 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Web;
+    using Narvalo.Fx;
 
     public interface IHttpQueryBinder<TQuery>
     {
         IEnumerable<HttpQueryBinderException> BindingErrors { get; }
         
-        bool Successful { get; }
-
-        TQuery Bind(HttpRequest request);
+        Maybe<TQuery> Bind(HttpRequest request);
     }
 }

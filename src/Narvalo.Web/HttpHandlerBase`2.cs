@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Net;
     using System.Web;
+    using Narvalo.Fx;
 
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()
@@ -16,10 +17,10 @@
 
             var binder = new TBinder();
 
-            TQuery query = binder.Bind(context.Request);
+            Maybe<TQuery> query = binder.Bind(context.Request);
 
-            if (binder.Successful) {
-                ProcessRequestCore(context, query);
+            if (query.IsSome) {
+                ProcessRequestCore(context, query.Value);
             }
             else {
                 var errors = binder.BindingErrors;
@@ -28,7 +29,7 @@
                 var errorsCount = errors.Count();
 
                 if (errorsCount > 1) {
-                   exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
+                    exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
                 }
                 else if (errorsCount == 1) {
                     exception = errors.First();
