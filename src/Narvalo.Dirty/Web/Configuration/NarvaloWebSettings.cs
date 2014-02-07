@@ -7,6 +7,7 @@
     using Narvalo;
     using Narvalo.Collections;
     using Narvalo.Fx;
+    using Narvalo.Linq;
 
     // FIXME: Ajouter une méthode statique de récupération Current.
     public class NarvaloWebSettings
@@ -61,8 +62,9 @@
         void Initialize_(NameValueCollection source)
         {
             _enableWhiteSpaceBusting
-                = source.ParseValue("narvalo:enableWhiteSpaceBusting", _ => ParseTo.NullableBoolean(_, BooleanStyles.Literal))
-                    ?? DefaultEnableWhiteSpaceBusting_;
+                = (from _ in source.MayGetSingle("narvalo:enableWhiteSpaceBusting")
+                   select ParseTo.NullableBoolean(_))
+                   .UnpackOrElse(DefaultEnableWhiteSpaceBusting_);
         }
     }
 }

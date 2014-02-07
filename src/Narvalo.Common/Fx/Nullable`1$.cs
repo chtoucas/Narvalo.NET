@@ -9,6 +9,28 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class NullableExtensions
     {
+        //// ValueOrThrow
+
+        public static T ValueOrThrow<T>(this T? @this, Exception exception)
+            where T : struct
+        {
+            Require.NotNull(exception, "exception");
+
+            return @this.ValueOrThrow(() => exception);
+        }
+
+        public static T ValueOrThrow<T>(this T? @this, Func<Exception> exceptionFactory)
+            where T : struct
+        {
+            Require.NotNull(exceptionFactory, "exceptionFactory");
+
+            if (!@this.HasValue) {
+                throw exceptionFactory.Invoke();
+            }
+
+            return @this.Value;
+        }
+
         //// Match
 
         public static TResult Match<TSource, TResult>(
@@ -40,6 +62,34 @@ namespace Narvalo.Fx
             where TResult : struct
         {
             return @this.Bind(_ => other);
+        }
+
+        //// OnSome
+
+        public static T? OnValue<T>(this T? @this, Action<T> action)
+            where T : struct
+        {
+            Require.NotNull(action, "action");
+
+            if (@this.HasValue) {
+                action.Invoke(@this.Value);
+            }
+
+            return @this;
+        }
+
+        //// OnNone
+
+        public static T? OnNothing<T>(this T? @this, Action action)
+            where T : struct
+        {
+            Require.NotNull(action, "action");
+
+            if (@this.HasValue) {
+                action.Invoke();
+            }
+
+            return @this;
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Linq;
 
     /// <summary>
     /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.Maybe{T}"/>.
@@ -12,7 +13,7 @@ namespace Narvalo.Fx
         //// Match
 
         public static TResult Match<TSource, TResult>(
-            this Maybe<TSource> @this, 
+            this Maybe<TSource> @this,
             Func<TSource, TResult> selector,
             TResult defaultValue)
         {
@@ -22,8 +23,8 @@ namespace Narvalo.Fx
         }
 
         public static TResult Match<TSource, TResult>(
-            this Maybe<TSource> @this, 
-            Func<TSource, TResult> selector, 
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector,
             Func<TResult> defaultValueFactory)
         {
             Require.Object(@this);
@@ -70,6 +71,58 @@ namespace Narvalo.Fx
             }
 
             return @this;
+        }
+
+        //// 
+
+        public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
+        {
+            return UnpackOrElse(@this, default(T));
+        }
+
+        public static T UnpackOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
+        {
+            return UnpackOrElse(@this, () => defaultValue);
+        }
+
+        public static T UnpackOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
+        {
+            Require.Object(@this);
+
+            return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
+        }
+
+        public static T UnpackOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
+        {
+            return UnpackOrThrow(@this, () => exception);
+        }
+
+        public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
+        {
+            return ToNullable(@this).OnNothing(() => { exceptionFactory.Invoke(); }).Value;
+        }
+
+        public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
+        {
+            Require.Object(@this);
+
+            return @this.ValueOrDefault();
+        }
+
+        public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
+        {
+            Require.Object(@this);
+
+            return @this.IsSome ? (T?)@this.Value : null;
+        }
+
+        //// Conversions Operators
+
+        public static Maybe<TResult> Cast<TSource, TResult>(this Maybe<TSource> @this) where TSource : TResult
+        {
+            Require.Object(@this);
+
+            return from _ in @this select (TResult)_;
         }
     }
 }

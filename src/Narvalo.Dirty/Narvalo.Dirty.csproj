@@ -113,7 +113,6 @@
       <DependentUpon>Lazy.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Lazy`1%24.cs" />
-    <Compile Include="Fx\Maybe.Array.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\MayFunc%24.cs" />
     <Compile Include="Fx\MayFunc.cs" />

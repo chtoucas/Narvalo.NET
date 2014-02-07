@@ -52,14 +52,5 @@ namespace Narvalo.Linq
 
             return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
         }
-
-        //// Conversions Operators
-
-        public static Maybe<TResult> Cast<TSource, TResult>(this Maybe<TSource> @this) where TSource : TResult
-        {
-            Require.Object(@this);
-
-            return from _ in @this select (TResult)_;
-        }
     }
 }

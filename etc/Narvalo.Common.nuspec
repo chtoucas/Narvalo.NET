@@ -15,7 +15,7 @@ This package contains the Narvalo.Org common utilities.
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>
-    <tags>Maybe, Linq</tags>
+    <tags>Maybe, Option, Linq, Monad</tags>
     <language>en-US</language>
   </metadata>
 </package>

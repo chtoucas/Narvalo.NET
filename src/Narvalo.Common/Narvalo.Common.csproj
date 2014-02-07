@@ -175,7 +175,7 @@
     <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="VoidOrError.cs" />
-    <Compile Include="VoidOrWarning.cs" />
+    <Compile Include="VoidOrBreak.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
