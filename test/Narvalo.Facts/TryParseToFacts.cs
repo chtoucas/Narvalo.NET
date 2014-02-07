@@ -116,12 +116,24 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksTrue_ForPositiveInt32AndIntegerStyle()
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForStrictlyPositiveInt32AndIntegerStyle()
             {
                 // Arrange
                 bool result;
                 // Act
                 bool succeed = TryParseTo.Boolean("10", BooleanStyles.Integer, out result);
+                // Assert
+                Assert.False(succeed);
+                Assert.Equal(default(Boolean), result);
+            }
+
+            [Fact]
+            public static void ReturnsTrueAndPicksTrue_ForOneAndIntegerStyle()
+            {
+                // Arrange
+                bool result;
+                // Act
+                bool succeed = TryParseTo.Boolean("1", BooleanStyles.Integer, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(true, result);
@@ -140,15 +152,27 @@
             }
 
             [Fact]
-            public static void ReturnsTrueAndPicksFalse_ForNegativeInt32AndIntegerStyle()
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForMinusOneAndIntegerStyle()
+            {
+                // Arrange
+                bool result;
+                // Act
+                bool succeed = TryParseTo.Boolean("-1", BooleanStyles.Integer, out result);
+                // Assert
+                Assert.False(succeed);
+                Assert.Equal(default(Boolean), result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForNegativeInt32AndIntegerStyle()
             {
                 // Arrange
                 bool result;
                 // Act
                 bool succeed = TryParseTo.Boolean("-10", BooleanStyles.Integer, out result);
                 // Assert
-                Assert.True(succeed);
-                Assert.Equal(false, result);
+                Assert.False(succeed);
+                Assert.Equal(default(Boolean), result);
             }
 
             [Fact]

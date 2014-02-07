@@ -13,7 +13,7 @@ namespace Narvalo
         EmptyIsFalse = 1 << 2,
         HtmlInput = 1 << 3,
 
-        Default = Literal | Integer | EmptyIsFalse,
+        Default = Literal | Integer,
         Any = Literal | Integer | EmptyIsFalse | HtmlInput,
     }
 }

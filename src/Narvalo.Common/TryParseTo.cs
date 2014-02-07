@@ -44,11 +44,12 @@ namespace Narvalo
             }
 
             if (style.HasFlag(BooleanStyles.Integer)) {
-                bool? b = from _ in ParseTo.NullableInt32(val, NumberStyles.Integer, CultureInfo.InvariantCulture)
-                          select _ > 0;
+                int? intValue = from _ in ParseTo.NullableInt32(val, NumberStyles.Integer, CultureInfo.InvariantCulture)
+                                where _ == 0 || _ == 1
+                                select _;
 
-                if (b.HasValue) {
-                    result = b.Value;
+                if (intValue.HasValue) {
+                    result = intValue.Value == 1;
                     return true;
                 }
             }
