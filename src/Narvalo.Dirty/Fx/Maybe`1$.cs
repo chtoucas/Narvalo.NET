@@ -3,42 +3,29 @@
 namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Linq;
 
-    /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.Maybe{T}"/>.
-    /// </summary>
     public static class MaybeExtensions
     {
-        //// When
+        //// Cast
 
-        public static Maybe<Unit> When<T>(this Maybe<T> @this, bool predicate, Func<Maybe<Unit>> kun)
+        public static Maybe<TResult> Cast<TSource, TResult>(this Maybe<TSource> @this) where TSource : TResult
         {
             Require.Object(@this);
 
-            return @this.Bind(_ => kun.When(predicate).Invoke());
+            return from _ in @this select (TResult)_;
         }
 
-        public static Maybe<Unit> When<T>(this Maybe<T> @this, bool predicate, Func<T, Maybe<Unit>> kun)
+        public static Maybe<TResult> OfType<TSource, TResult>(this Maybe<TSource> @this)
+            where TSource : class
+            where TResult : class
         {
             Require.Object(@this);
 
-            return @this.Bind(kun.When(predicate));
-        }
-
-        //// Unless
-
-        public static Maybe<Unit> Unless<T>(this Maybe<T> @this, bool predicate, Func<Maybe<Unit>> kun)
-        {
-            Require.Object(@this);
-
-            return @this.When(!predicate, kun);
-        }
-
-        public static Maybe<Unit> Unless<T>(this Maybe<T> @this, bool predicate, Func<T, Maybe<Unit>> kun)
-        {
-            Require.Object(@this);
-
-            return @this.When(!predicate, kun);
+            return from _ in @this
+                   let result = _ as TResult
+                   where result != null
+                   select result;
         }
 
         //// TrySet

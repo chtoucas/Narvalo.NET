@@ -2,8 +2,17 @@
 {
     using System;
 
-    static class Kunc
+    static class KuncAction
     {
+        static readonly Kunc<Unit> Noop_ = () => Monad.Unit;
+
+        public static Kunc<Unit> Noop { get { return Noop_; } }
+
+        public static Kunc<T, Unit> Ignore<T>()
+        {
+            return _ => Monad.Unit;
+        }
+
         public static Kunc<Unit> FromAction(Action action)
         {
             return () => { action(); return Monad.Unit; };

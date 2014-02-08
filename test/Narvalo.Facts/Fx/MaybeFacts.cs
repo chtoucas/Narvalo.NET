@@ -146,15 +146,15 @@
             }
         }
 
-        public static class TheNoneProperty
-        {
-            [Fact]
-            public static void IsNone()
-            {
-                // Act & Assert
-                Assert.True(Maybe.None.IsNone);
-            }
-        }
+        //public static class TheNoneProperty
+        //{
+        //    [Fact]
+        //    public static void IsNone()
+        //    {
+        //        // Act & Assert
+        //        Assert.True(Maybe.None.IsNone);
+        //    }
+        //}
 
         public static class TheIsSomeProperty
         {

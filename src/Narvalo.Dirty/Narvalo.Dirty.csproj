@@ -114,10 +114,6 @@
     </Compile>
     <Compile Include="Fx\Lazy`1%24.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
-    <Compile Include="Fx\MayFunc%24.cs" />
-    <Compile Include="Fx\MayFunc.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
@@ -167,12 +163,8 @@
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\IOAction.cs" />
-    <Compile Include="Fx\IOAction%24.cs" />
-    <Compile Include="Fx\Internal\Kunc.cs" />
-    <Compile Include="Fx\Internal\KuncStubs.cs" />
-    <Compile Include="Fx\Internal\KuncStubs`1.cs" />
-    <Compile Include="Fx\Internal\Kunc`%24.cs" />
+    <Compile Include="Fx\Internal\KuncAction.cs" />
+    <Compile Include="Fx\Internal\KuncAction%24.cs" />
     <Compile Include="Fx\Internal\Kunc`.cs" />
     <Compile Include="Fx\Lazy.cs" />
     <Compile Include="Fx\Lazy`1%24.Monad.cs">

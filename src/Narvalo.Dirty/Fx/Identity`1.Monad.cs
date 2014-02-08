@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -20,13 +22,9 @@
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Convention mathématique.")]
+            Justification = "Standard name used in mathematics.")]
         internal static Identity<T> η(T value)
         {
-            if (value == null) {
-                throw new ArgumentNullException("value");
-            }
-
             return new Identity<T>(value);
         }
 

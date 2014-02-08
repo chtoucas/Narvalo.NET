@@ -2,7 +2,7 @@
 {
     using System;
 
-    static class KuncExtensions
+    static class KuncActionExtensions
     {
         public static Action AsAction(this Kunc<Unit> kun)
         {

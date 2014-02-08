@@ -91,7 +91,6 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\IMaybe`1.cs" />
     <Compile Include="Fx\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1.IEnumerable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
@@ -102,9 +101,16 @@
     <Compile Include="Fx\Output`1.Monad.cs">
       <DependentUpon>Output`1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
+    <Compile Include="Internal\Action`%24.cs" />
+    <Compile Include="Internal\Stubs`1.cs" />
+    <Compile Include="Internal\Sub`.cs" />
     <Compile Include="Internal\TryParseInvoker.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
+    <Compile Include="Fx\Maybe`1%24.Nullable.cs">
+      <DependentUpon>Maybe`1%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
     <Compile Include="Fx\Nullable`1%24.Monad.cs">

@@ -1,11 +1,10 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Internal
 {
-    public interface IMaybe<out T>
-    {
-        bool IsSome { get; }
+    using Narvalo.Fx;
 
-        T Value { get; }
-    }
+    internal delegate Unit Sub();
+
+    internal delegate Unit Sub<T>(T arg);
 }

@@ -10,7 +10,8 @@ namespace Narvalo
         /// Does not work consstently with Flags enums:
         /// http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
+            Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool Enum<TEnum>(object value, out TEnum result) where TEnum : struct
         {
             DebugCheck.IsEnum(typeof(TEnum));

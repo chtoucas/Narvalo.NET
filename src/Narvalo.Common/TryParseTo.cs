@@ -10,14 +10,14 @@ namespace Narvalo
     public static class TryParseTo
     {
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
-            Justification = "The method already returns a boolean to indicate the result.")]
+            Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool Boolean(string value, out bool result)
         {
             return Boolean(value, BooleanStyles.Default, out result);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters",
-            Justification = "The method already returns a boolean to indicate the result.")]
+            Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool Boolean(string value, BooleanStyles style, out bool result)
         {
             result = default(Boolean);
@@ -80,7 +80,8 @@ namespace Narvalo
         /// TryParseTo.Enum&lt;MyEnum&gt;("actualvalue", out result, true /* ignoreCase */);
         /// </code>
         /// </example>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "La méthode retourne un booléen pour indiquer le succès ou l'échec.")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", 
+            Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool Enum<TEnum>(string value, bool ignoreCase, out TEnum result)
             where TEnum : struct
         {

@@ -19,7 +19,7 @@ namespace Narvalo.Linq
             Require.NotNull(predicateM, "predicateM");
 
             return from item in @this
-                   where predicateM.Invoke(item).Match(_ => _, false)
+                   where predicateM.Invoke(item).Match(_ => _, defaultValue: false)
                    select item;
         }
 

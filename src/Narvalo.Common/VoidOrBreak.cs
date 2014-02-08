@@ -38,7 +38,7 @@ namespace Narvalo
             }
         }
 
-        public static VoidOrBreak Interrupt(string reason)
+        public static VoidOrBreak Abort(string reason)
         {
             Require.NotNullOrEmpty(reason, "reason");
 

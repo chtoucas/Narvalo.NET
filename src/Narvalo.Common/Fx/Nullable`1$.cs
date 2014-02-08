@@ -55,16 +55,7 @@ namespace Narvalo.Fx
             return @this.Match(selector, defaultValueFactory.Invoke());
         }
 
-        //// Then
-
-        public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.Bind(_ => other);
-        }
-
-        //// OnSome
+        //// OnValue & OnNothing
 
         public static T? OnValue<T>(this T? @this, Action<T> action)
             where T : struct
@@ -78,8 +69,6 @@ namespace Narvalo.Fx
             return @this;
         }
 
-        //// OnNone
-
         public static T? OnNothing<T>(this T? @this, Action action)
             where T : struct
         {
@@ -90,6 +79,36 @@ namespace Narvalo.Fx
             }
 
             return @this;
+        }
+
+        //// If...Then...Else
+
+        public static TResult? ThenOtherwise<TSource, TResult>(this TSource? @this, TResult? whenSome, TResult? whenNone)
+            where TSource : struct
+            where TResult : struct
+        {
+            return @this.HasValue ? whenSome : whenNone;
+        }
+
+        public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
+            where TSource : struct
+            where TResult : struct
+        {
+            return @this.HasValue ? other : null;
+        }
+
+        public static TResult? Otherwise<TSource, TResult>(this TSource? @this, TResult? other)
+            where TSource : struct
+            where TResult : struct
+        {
+            return @this.HasValue ? null : other;
+        }
+
+        //// ToMaybe
+
+        public static Maybe<T> ToMaybe<T>(this T? @this) where T : struct
+        {
+            return Maybe.Create(@this);
         }
     }
 }
