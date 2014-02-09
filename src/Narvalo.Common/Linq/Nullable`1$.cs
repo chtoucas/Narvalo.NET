@@ -33,16 +33,6 @@ namespace Narvalo.Linq
             return @this.Map(selector);
         }
 
-        public static TResult? SelectMany<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult?> selector)
-            where TSource : struct
-            where TResult : struct
-        {
-            // NB: Added only for completeness but this is not necessary in order to support the QEP.
-            return @this.Bind(selector);
-        }
-
         public static TResult? SelectMany<TSource, TMiddle, TResult>(
             this TSource? @this,
             Func<TSource, TMiddle?> valueSelector,

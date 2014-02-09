@@ -12,7 +12,8 @@ namespace Narvalo.Linq
      * ----------------+----------------
      * Where (*)       | Filter
      * Select (*)      | Map
-     * SelectMany (*)  | Bind
+     * SelectMany      | Bind (*)
+     * SelectMany (*)  |
      * 
      * Linq            | List           |
      * ----------------+----------------+----------------------------------------------

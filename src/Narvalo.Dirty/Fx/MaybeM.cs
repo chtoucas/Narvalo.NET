@@ -3,18 +3,9 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
 
     public static class MaybeM
     {
-        public static IEnumerable<T3> Zip<T1, T2, T3>(
-            IEnumerable<T1> list1,
-            IEnumerable<T2> list2,
-            Func<T1, T2, Maybe<T3>> fun)
-        {
-            throw new NotImplementedException();
-        }
-
         public static TResult[] SelectAny<TSource, TResult>(
             TSource[] source,
             Func<TSource, Maybe<TResult>> selectorM)

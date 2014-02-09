@@ -6,6 +6,7 @@ namespace Narvalo.Linq
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Fx;
+    using Narvalo.Internal;
 
     public static partial class EnumerableExtensions
     {
@@ -19,7 +20,7 @@ namespace Narvalo.Linq
             Require.NotNull(predicateM, "predicateM");
 
             return from item in @this
-                   where predicateM.Invoke(item).Match(_ => _, defaultValue: false)
+                   where predicateM.Invoke(item).Match(Stubs<bool>.Identity, defaultValue: false)
                    select item;
         }
 
@@ -42,7 +43,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNone(@this, _ => true);
+            return FirstOrNone(@this, Stubs<TSource>.True);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -58,7 +59,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNone(@this, _ => true);
+            return LastOrNone(@this, Stubs<TSource>.True);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -83,7 +84,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNone(@this, _ => true);
+            return SingleOrNone(@this, Stubs<TSource>.True);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -117,7 +118,7 @@ namespace Narvalo.Linq
                 Maybe<TSource> result = Maybe.Create(iter.Current);
 
                 while (iter.MoveNext()) {
-                    result = result.SelectMany(_ => accumulatorM.Invoke(_, iter.Current));
+                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
                 return result;
@@ -144,7 +145,7 @@ namespace Narvalo.Linq
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
             foreach (TSource item in @this) {
-                result = result.SelectMany(_ => accumulatorM.Invoke(_, item));
+                result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
             return result;

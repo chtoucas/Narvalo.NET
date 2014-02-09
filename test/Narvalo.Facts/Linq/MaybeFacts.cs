@@ -2,6 +2,7 @@
 {
     using System;
     using Narvalo.Fx;
+    using Narvalo.Internal;
     using Xunit;
 
     public static class MaybeFacts

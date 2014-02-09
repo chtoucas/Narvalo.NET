@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     public static class Maybe
     {
         static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
-        static readonly Maybe<Unit> Unit_ = Maybe.Create(Narvalo.Fx.Unit.Single);
+        static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
 
         public static Maybe<Unit> None { get { return None_; } }
 

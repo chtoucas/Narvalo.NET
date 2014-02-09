@@ -22,14 +22,14 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard name used in mathematics.")]
+            Justification = "Standard naming convention from mathematics.")]
         internal static Identity<T> η(T value)
         {
             return new Identity<T>(value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard name used in mathematics.")]
+            Justification = "Standard naming convention from mathematics.")]
         internal static Identity<T> μ(Identity<Identity<T>> square)
         {
             Require.NotNull(square, "square");

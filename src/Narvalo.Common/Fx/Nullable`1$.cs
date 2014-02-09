@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Nullable{T}"/>.
@@ -11,16 +12,16 @@ namespace Narvalo.Fx
     {
         //// ValueOrThrow
 
-        public static T ValueOrThrow<T>(this T? @this, Exception exception)
-            where T : struct
+        public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
+            where TSource : struct
         {
             Require.NotNull(exception, "exception");
 
             return @this.ValueOrThrow(() => exception);
         }
 
-        public static T ValueOrThrow<T>(this T? @this, Func<Exception> exceptionFactory)
-            where T : struct
+        public static TSource ValueOrThrow<TSource>(this TSource? @this, Func<Exception> exceptionFactory)
+            where TSource : struct
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
@@ -55,10 +56,31 @@ namespace Narvalo.Fx
             return @this.Match(selector, defaultValueFactory.Invoke());
         }
 
+        //// Zip
+
+        public static TResult? Zip<TFirst, TSecond, TResult>(
+            this TFirst? @this,
+            TSecond? second,
+            Func<TFirst, TSecond, TResult> resultSelector)
+            where TFirst : struct
+            where TSecond : struct
+            where TResult : struct
+        {
+            return @this.HasValue && second.HasValue ? (TResult?)resultSelector.Invoke(@this.Value, second.Value) : null;
+        }
+
+        //// Run
+
+        public static TSource? Run<TSource>(this TSource? @this, Action<TSource> action)
+            where TSource : struct
+        {
+            return OnValue(@this, action);
+        }
+
         //// OnValue & OnNothing
 
-        public static T? OnValue<T>(this T? @this, Action<T> action)
-            where T : struct
+        public static TSource? OnValue<TSource>(this TSource? @this, Action<TSource> action)
+            where TSource : struct
         {
             Require.NotNull(action, "action");
 
@@ -69,44 +91,21 @@ namespace Narvalo.Fx
             return @this;
         }
 
-        public static T? OnNothing<T>(this T? @this, Action action)
-            where T : struct
+        public static TSource? OnNull<TSource>(this TSource? @this, Action action)
+            where TSource : struct
         {
             Require.NotNull(action, "action");
 
-            if (@this.HasValue) {
+            if (!@this.HasValue) {
                 action.Invoke();
             }
 
             return @this;
         }
 
-        //// If...Then...Else
-
-        public static TResult? ThenOtherwise<TSource, TResult>(this TSource? @this, TResult? whenSome, TResult? whenNone)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.HasValue ? whenSome : whenNone;
-        }
-
-        public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.HasValue ? other : null;
-        }
-
-        public static TResult? Otherwise<TSource, TResult>(this TSource? @this, TResult? other)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.HasValue ? null : other;
-        }
-
         //// ToMaybe
 
-        public static Maybe<T> ToMaybe<T>(this T? @this) where T : struct
+        public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
         {
             return Maybe.Create(@this);
         }

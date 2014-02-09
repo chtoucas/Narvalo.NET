@@ -34,14 +34,6 @@ namespace Narvalo.Linq
             return @this.Map(selector);
         }
 
-        public static Maybe<TResult> SelectMany<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, Maybe<TResult>> selector)
-        {
-            // NB: Added only for completeness but this is not necessary in order to support the QEP.
-            return @this.Bind(selector);
-        }
-
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> valueSelector,

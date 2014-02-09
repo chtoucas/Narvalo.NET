@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using Narvalo.Linq;
 
     /// <summary>
     /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.Maybe{T}"/>.
@@ -33,73 +34,28 @@ namespace Narvalo.Fx
             return @this.Match(selector, defaultValueFactory.Invoke());
         }
 
-        //// OnSome & OnNone
+        //// Zip
 
-        public static Maybe<T> OnSome<T>(this Maybe<T> @this, Action<T> action)
+        public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
+            this Maybe<TFirst> @this,
+            Maybe<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector)
         {
-            Require.Object(@this);
-
-            Require.NotNull(action, "action");
-
-            if (@this.IsSome) {
-                action.Invoke(@this.Value);
-            }
-
-            return @this;
+            return @this.IsSome && second.IsSome
+                ? Maybe.Create(resultSelector.Invoke(@this.Value, second.Value))
+                : Maybe<TResult>.None;
         }
 
-        public static Maybe<T> OnNone<T>(this Maybe<T> @this, Action action)
+        //// Run
+
+        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
         {
-            Require.Object(@this);
-
-            Require.NotNull(action, "action");
-
-            if (@this.IsNone) {
-                action.Invoke();
-            }
-
-            return @this;
+            return OnSome(@this, action);
         }
 
-        //// When
+        //// Coalescing
 
-        public static Maybe<T> When<T>(this Maybe<T> @this, bool predicate, Action action)
-        {
-            Require.Object(@this);
-
-            if (predicate && @this.IsSome) {
-                action.Invoke();
-            }
-
-            return @this;
-        }
-
-        public static Maybe<T> When<T>(this Maybe<T> @this, bool predicate, Action<T> action)
-        {
-            Require.Object(@this);
-
-            if (predicate && @this.IsSome) {
-                action.Invoke(@this.Value);
-            }
-
-            return @this;
-        }
-
-        //// Unless
-
-        public static Maybe<T> Unless<T>(this Maybe<T> @this, bool predicate, Action action)
-        {
-            return When(@this, !predicate, action);
-        }
-
-        public static Maybe<T> Unless<T>(this Maybe<T> @this, bool predicate, Action<T> action)
-        {
-            return When(@this, !predicate, action);
-        }
-
-        //// If...Then...Else
-
-        public static Maybe<TResult> ThenOtherwise<TSource, TResult>(
+        public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
             Maybe<TResult> whenSome,
             Maybe<TResult> whenNone)
@@ -121,6 +77,32 @@ namespace Narvalo.Fx
             Require.Object(@this);
 
             return @this.IsSome ? Maybe<TResult>.None : other;
+        }
+
+        //// OnSome & OnNone
+
+        public static Maybe<TSource> OnSome<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            if (@this.IsSome) {
+                action.Invoke(@this.Value);
+            }
+
+            return @this;
+        }
+
+        public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            if (@this.IsNone) {
+                action.Invoke();
+            }
+
+            return @this;
         }
     }
 }

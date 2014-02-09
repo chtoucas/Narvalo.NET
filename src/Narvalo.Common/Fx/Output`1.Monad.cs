@@ -23,7 +23,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard name used in mathematics.")]
+            Justification = "Standard naming convention from mathematics.")]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
@@ -32,14 +32,14 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard name used in mathematics.")]
+            Justification = "Standard naming convention from mathematics.")]
         internal static Output<T> η(T value)
         {
             return new Output<T>(value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard name used in mathematics.")]
+            Justification = "Standard naming convention from mathematics.")]
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");

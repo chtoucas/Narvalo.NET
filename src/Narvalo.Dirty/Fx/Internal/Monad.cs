@@ -1,22 +1,34 @@
-﻿namespace Narvalo.Fx.Internal
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx.Internal
 {
     using System;
 
     static class Monad
     {
-        public static readonly Monad<Unit> Unit = Monad.Return(Narvalo.Fx.Unit.Single);
+        static readonly Monad<Unit> Zero_ = Monad<Unit>.Zero;
+        static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+
+        public static Monad<Unit> Zero { get { return Zero_; } }
+
+        public static Monad<Unit> Unit { get { return Unit_; } }
+
+        //// Return
 
         public static Monad<T> Return<T>(T value)
         {
             return Monad<T>.η(value);
         }
 
+        //// Join
+
         public static Monad<T> Join<T>(Monad<Monad<T>> square)
         {
             return Monad<T>.μ(square);
         }
 
-        // Composition de Kleisli.
+        //// Compose
+
         public static Monad<TResult> Compose<TSource, TMiddle, TResult>(
             Kunc<TSource, TMiddle> kunA,
             Kunc<TMiddle, TResult> kunB,
@@ -24,6 +36,8 @@
         {
             return kunA(value).Bind(kunB);
         }
+
+        //// Lift
 
         public static Monad<TResult> Lift<T, TResult>(
             Func<T, TResult> fun,
@@ -80,6 +94,8 @@
 
             return monad1.Bind(g);
         }
+
+        //// Promote
 
         public static Func<Monad<T>, Monad<TResult>> Promote<T, TResult>(Func<T, TResult> fun)
         {

@@ -80,6 +80,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Func`%24.cs" />
+    <Compile Include="Internal\Stubs`1.cs" />
+    <Compile Include="Predicate`%24.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="Collections\List`1%24.cs" />
     <Compile Include="Collections\List`1%24.Maybe.cs">
@@ -103,9 +106,6 @@
     </Compile>
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Internal\Action`%24.cs" />
-    <Compile Include="Internal\Stubs`1.cs" />
-    <Compile Include="Internal\Sub`.cs" />
     <Compile Include="Internal\TryParseInvoker.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1%24.Nullable.cs">
