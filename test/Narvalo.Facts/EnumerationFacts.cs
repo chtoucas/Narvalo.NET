@@ -272,7 +272,7 @@
                 // Arrange
                 int result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => Enumeration.Convert<int>(1, out result));
+                Assert.Throws<ArgumentException>(() => Enumeration.TryConvert<int>(1, out result));
             }
 
 
@@ -286,7 +286,7 @@
                 // Arrange
                 StructStub_ result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => Enumeration.Convert<StructStub_>(1, out result));
+                Assert.Throws<ArgumentException>(() => Enumeration.TryConvert<StructStub_>(1, out result));
             }
 
             [Fact]
@@ -295,7 +295,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = Enumeration.Convert<EnumStub_>(1, out result);
+                var succeed = Enumeration.TryConvert<EnumStub_>(1, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -307,7 +307,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = Enumeration.Convert<EnumFlagStub_>(1 << 0, out result);
+                var succeed = Enumeration.TryConvert<EnumFlagStub_>(1 << 0, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
@@ -319,7 +319,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = Enumeration.Convert<EnumStub_>(2, out result);
+                var succeed = Enumeration.TryConvert<EnumStub_>(2, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);

@@ -21,14 +21,6 @@ namespace Narvalo.Linq
             return @this.Map(selector);
         }
 
-        public static Output<TResult> SelectMany<TSource, TResult>(
-            this Output<TSource> @this,
-            Func<TSource, Output<TResult>> selector)
-        {
-            // NB: Added only for completeness but this is not necessary in order to support the QEP.
-            return @this.Bind(selector);
-        }
-
         public static Output<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Output<TSource> @this,
             Func<TSource, Output<TMiddle>> valueSelector,

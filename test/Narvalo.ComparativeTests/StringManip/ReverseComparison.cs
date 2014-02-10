@@ -20,6 +20,7 @@
         //}
 
         /// <summary>
+        /// See also http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
         /// See http://weblogs.asp.net/justin_rogers/archive/2004/06/10/153175.aspx
         /// 1. string.ToCharArray - Note, this function is equivalent to net char[] + an internal memory copy.  Most users have this as the basis of their algorithm and I'll show you why this in turn hurts perf.  In effect you are copying the data twice when you don't need to. 
         /// 2. new char[] -This is probably the best buffer you could use.  It has no data in it yet, but strings are immutable and you'll have the original string around the entire time as you do the reversal. 
@@ -133,7 +134,7 @@
         [BenchComparative]
         public string StringBuilderInline(string value)
         {
-            StringBuilder sb = new StringBuilder(value);
+            var sb = new StringBuilder(value);
             for (int i = 0, j = value.Length - 1; i <= j; i++, j--) {
                 sb[i] = value[j];
                 sb[j] = value[i];
@@ -151,7 +152,7 @@
         [BenchComparative]
         public string StringBuilderCopy(string value)
         {
-            StringBuilder sb = new StringBuilder(value.Length);
+            var sb = new StringBuilder(value.Length);
             char[] buffer = new char[Math.Min(value.Length, 1024)];
 
             int fullBuffers = value.Length / 1024;
@@ -173,7 +174,7 @@
             return sb.ToString();
         }
 
-        //[BenchCompare]
+        //[BenchComparative]
         //public unsafe string Unsafe(string value) {
         //    string output = string.Copy(value);
         //    fixed (char* pStr = output) {
@@ -188,6 +189,21 @@
         //    }
         //    return output;
         //}
-    }
 
+        // Cf. http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
+        [BenchComparative]
+        public static string CharArrayXor(string value)
+        {
+            char[] arr = value.ToCharArray();
+            int len = value.Length - 1;
+
+            for (int i = 0; i < len; i++, len--) {
+                arr[i] ^= arr[len];
+                arr[len] ^= arr[i];
+                arr[i] ^= arr[len];
+            }
+
+            return new String(arr);
+        }
+    }
 }

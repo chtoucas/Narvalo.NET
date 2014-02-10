@@ -93,6 +93,7 @@
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
+    <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Either`2.Language.cs">

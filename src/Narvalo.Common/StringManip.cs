@@ -8,6 +8,14 @@ namespace Narvalo
 
     public static class StringManip
     {
+        /// <summary>
+        /// Reverses a string.
+        /// </summary>
+        /// <param name="value">The string to reverse.</param>
+        /// <returns>The reversed string.</returns>
+        /// <remarks>
+        /// This method does work for strings containing surrogate pairs or combining character sequences.
+        /// </remarks>
         public static string Reverse(string value)
         {
             Require.NotNull(value, "value");
@@ -16,14 +24,14 @@ namespace Narvalo
                 return String.Empty;
             }
 
-            // FIXME: Ne marche pas toujours...
             char[] arr = value.ToCharArray();
             Array.Reverse(arr);
 
             return new String(arr);
         }
 
-        [SuppressMessage("Gendarme.Rules.Portability", "NewLineLiteralRule", Justification = "Sans cela la méthode ne remplirait pas sa fonction.")]
+        [SuppressMessage("Gendarme.Rules.Portability", "NewLineLiteralRule",
+            Justification = "This method does not depend on platform specific rules.")]
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, "value");
@@ -47,13 +55,12 @@ namespace Narvalo
             Require.GreaterThanOrEqualTo(length, 1, "length");
 
             if (value.Length <= length) {
-                // La chaîne d'origine est trop courte.
+                // The input string is too short.
                 return value;
             }
             else {
                 if (value.Length < startIndex || value.Length < startIndex + length) {
-                    // L'index de début est trop haut
-                    // ou l'index de fin est trop haut.
+                    // The start index ot the end index is too big.
                     return Format.CurrentCulture("{0}{1}", value.Substring(value.Length - length, length - 1), postfix);
                 }
                 else {
@@ -64,7 +71,7 @@ namespace Narvalo
 
         public static string Truncate(string value, int length)
         {
-            return Truncate(value, length, "...");
+            return Truncate(value, length, postfix: "...");
         }
 
         public static string Truncate(string value, int length, string postfix)
@@ -80,8 +87,8 @@ namespace Narvalo
             }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", 
-            Justification = "That's the way this method is supposed to work.")]
+        //[SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
+        //    Justification = "That's the way this method is supposed to work.")]
         public static string ToTitleCase(string value)
         {
             Require.NotNull(value, "value");
@@ -90,7 +97,8 @@ namespace Narvalo
                 return value;
             }
             else {
-                return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLowerInvariant());
+                // REVIEW: First value.ToLowerInvariant()?
+                return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
             }
         }
     }

@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Globalization;
+    using Narvalo.Internal;
 
     public static partial class ParseTo
     {
@@ -33,7 +34,7 @@ namespace Narvalo
                 }
             }
 
-            if (style.HasFlag(BooleanStyles.OneOrZero) && (val == "0" || val == "1")) {
+            if (style.HasFlag(BooleanStyles.ZeroOrOne) && (val == "0" || val == "1")) {
                 return val == "1";
             }
 

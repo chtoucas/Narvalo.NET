@@ -80,9 +80,10 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Internal\Stubs`1.cs" />
-    <Compile Include="TryConverter`1.cs" />
+    <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Predicate`%24.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="Collections\List`1%24.cs" />
@@ -159,10 +160,9 @@
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enumeration.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="TryParser`1.cs" />
+    <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />

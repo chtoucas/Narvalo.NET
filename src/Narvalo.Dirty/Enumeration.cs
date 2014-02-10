@@ -2,7 +2,9 @@
 
 namespace Narvalo
 {
+#if NET_35
     using System;
+#endif
     using System.Diagnostics.CodeAnalysis;
 
     public static class Enumeration
@@ -13,7 +15,7 @@ namespace Narvalo
         /// </remarks>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
             Justification = "The method already returns a boolean to indicate the outcome.")]
-        public static bool Convert<TEnum>(object value, out TEnum result) where TEnum : struct
+        public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
             DebugCheck.IsEnum(typeof(TEnum));
 

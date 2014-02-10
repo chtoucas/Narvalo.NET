@@ -6,6 +6,7 @@ namespace Narvalo
     using System.Globalization;
     using System.Net;
     using Narvalo.Fx;
+    using Narvalo.Internal;
 
     public static partial class ParseTo
     {
@@ -49,15 +50,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// IPAddress
-
-        public static Maybe<IPAddress> IPAddress(string value)
-        {
-            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
-
-            return parser.MayInvoke(value);
-        }
-
         //// Uri
 
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
@@ -68,6 +60,15 @@ namespace Narvalo
             }
 
             TryParser<Uri> parser = (string _, out Uri result) => System.Uri.TryCreate(_, uriKind, out result);
+
+            return parser.MayInvoke(value);
+        }
+
+        //// IPAddress
+
+        public static Maybe<IPAddress> IPAddress(string value)
+        {
+            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
 
             return parser.MayInvoke(value);
         }
