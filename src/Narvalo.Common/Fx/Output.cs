@@ -6,6 +6,10 @@ namespace Narvalo.Fx
 
     public static class Output
     {
+        static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
+
+        public static Output<Unit> Unit { get { return Unit_; } }
+
         //// Return
 
         public static Output<T> Success<T>(T value)

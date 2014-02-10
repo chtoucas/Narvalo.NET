@@ -7,9 +7,9 @@ namespace Narvalo.Internal
 
     [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
         Justification = "The method already returns a boolean to indicate the outcome.")]
-    public delegate bool TryParser<TResult>(string value, out TResult result);
+    delegate bool TryParser<TResult>(string value, out TResult result);
 
-    public static class TryParserExtensions
+    static class TryParserExtensions
     {
         public static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {

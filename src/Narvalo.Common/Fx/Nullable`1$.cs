@@ -3,13 +3,34 @@
 namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Nullable{T}"/>.
     /// </summary>
     public static partial class NullableExtensions
     {
+        //// Bind
+
+        public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
+            where TSource : struct
+            where TResult : struct
+        {
+            Require.NotNull(selector, "selector");
+
+            return @this.HasValue ? selector.Invoke(@this.Value) : null;
+        }
+
+        //// Map
+
+        public static TResult? Map<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
+            where TSource : struct
+            where TResult : struct
+        {
+            Require.NotNull(selector, "selector");
+
+            return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
+        }
+        
         //// ValueOrThrow
 
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
@@ -37,51 +58,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
         {
             return Maybe.Create(@this);
-        }
-
-        //// Match
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            TResult defaultValue)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.Map(selector) ?? defaultValue;
-        }
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            Func<TResult> defaultValueFactory)
-            where TSource : struct
-            where TResult : struct
-        {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return @this.Match(selector, defaultValueFactory.Invoke());
-        }
-
-        //// Zip
-
-        public static TResult? Zip<TFirst, TSecond, TResult>(
-            this TFirst? @this,
-            TSecond? second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-            where TFirst : struct
-            where TSecond : struct
-            where TResult : struct
-        {
-            return @this.HasValue && second.HasValue ? (TResult?)resultSelector.Invoke(@this.Value, second.Value) : null;
-        }
-
-        //// Run
-
-        public static TSource? Run<TSource>(this TSource? @this, Action<TSource> action)
-            where TSource : struct
-        {
-            return OnValue(@this, action);
         }
 
         //// OnValue & OnNothing

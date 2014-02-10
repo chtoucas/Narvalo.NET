@@ -29,23 +29,27 @@ namespace Narvalo.Fx.Internal
 
         //// Lift
 
+        [Obsolete]
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return _ => _.Map(fun);
         }
 
+        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
             return (m1, m2) => m1.Zip(m2, fun);
         }
 
+        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
             return (m1, m2, m3) => m1.Zip(m2, m3, fun);
         }
 
+        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -53,6 +57,7 @@ namespace Narvalo.Fx.Internal
             return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
         }
 
+        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)

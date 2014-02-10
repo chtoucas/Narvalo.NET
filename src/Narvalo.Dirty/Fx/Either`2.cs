@@ -17,13 +17,11 @@ namespace Narvalo.Fx
         {
             _isLeft = true;
             _left = left;
-            _right = default(TRight);
         }
 
         Either(TRight right)
         {
             _isLeft = false;
-            _left = default(TLeft);
             _right = right;
         }
 
@@ -38,6 +36,7 @@ namespace Narvalo.Fx
                 if (!_isLeft) {
                     throw new InvalidOperationException(SR.Either_RightHasNoLeftValue);
                 }
+
                 return _left;
             }
         }
@@ -49,6 +48,7 @@ namespace Narvalo.Fx
                 if (_isLeft) {
                     throw new InvalidOperationException(SR.Either_LeftHasNoRightValue);
                 }
+
                 return _right;
             }
         }
@@ -58,7 +58,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(fun, "fun");
 
-            return _isLeft ? Either<TLeft, TResult>.Left(_left) : fun(_right);
+            return _isLeft ? Either<TLeft, TResult>.Left(_left) : fun.Invoke(_right);
         }
 
         public Either<TResult, TRight> MapLeft<TResult>(
@@ -67,7 +67,7 @@ namespace Narvalo.Fx
             Require.NotNull(selector, "selector");
 
             return _isLeft
-               ? Either<TResult, TRight>.Left(selector(_left))
+               ? Either<TResult, TRight>.Left(selector.Invoke(_left))
                : Either<TResult, TRight>.Right(_right);
         }
 
@@ -78,7 +78,7 @@ namespace Narvalo.Fx
 
             return _isLeft
                 ? Either<TLeft, TResult>.Left(_left)
-                : Either<TLeft, TResult>.Right(selector(_right));
+                : Either<TLeft, TResult>.Right(selector.Invoke(_right));
         }
 
         public static Either<TLeft, TRight> Left(TLeft value)

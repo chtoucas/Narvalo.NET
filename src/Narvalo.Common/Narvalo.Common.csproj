@@ -83,7 +83,16 @@
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Fx\Func`%24.cs" />
+    <Compile Include="Fx\Maybe`1%24.Language.cs">
+      <DependentUpon>Maybe`1%24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fx\Nullable`1%24.Language.cs">
+      <DependentUpon>Nullable`1%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Output`1%24.cs" />
+    <Compile Include="Fx\Output`1%24.Language.cs">
+      <DependentUpon>Output`1%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Internal\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Predicate`%24.cs" />
@@ -111,14 +120,8 @@
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
-    <Compile Include="Fx\Maybe`1%24.Nullable.cs">
-      <DependentUpon>Maybe`1%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
-    <Compile Include="Fx\Nullable`1%24.Monad.cs">
-      <DependentUpon>Nullable`1%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Linq\Output`1%24.cs" />
     <Compile Include="Make`1.cs" />

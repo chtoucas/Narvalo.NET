@@ -12,14 +12,14 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, "selector");
 
-            return !IsSuccess ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
         }
 
         public Output<TResult> Map<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
 
-            return !IsSuccess ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",

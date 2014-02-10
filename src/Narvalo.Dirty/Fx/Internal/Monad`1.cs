@@ -30,6 +30,23 @@ namespace Narvalo.Fx.Internal
 
         public static Monad<T> Zero { get { return Zero_; } }
 
+        public T ValueOrDefault()
+        {
+            return _isZero ? default(T) : _value;
+        }
+
+        public T ValueOrElse(T defaultValue)
+        {
+            return _isZero ? defaultValue : _value;
+        }
+
+        public T ValueOrElse(Func<T> defaultValueFactory)
+        {
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
+            return _isZero ? defaultValueFactory.Invoke() : _value;
+        }
+
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
 #if MONAD_VIA_MAP_MULTIPLY
