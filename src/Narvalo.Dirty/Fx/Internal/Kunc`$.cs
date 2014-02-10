@@ -4,6 +4,19 @@ namespace Narvalo.Fx.Internal
 {
     static class KuncExtensions
     {
+        //// Compose
+
+        public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
+            this Kunc<TSource, TMiddle> @this,
+            Kunc<TMiddle, TResult> kun)
+        {
+            Require.Object(@this);
+
+            return _ => @this.Invoke(_).Bind(kun);
+        }
+
+        //// Filter
+
         public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
         {
             return predicate ? @this : Stubs.Noop;

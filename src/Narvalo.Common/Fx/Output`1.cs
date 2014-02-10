@@ -23,6 +23,8 @@ namespace Narvalo.Fx
             _value = value;
         }
 
+        public bool IsFailure { get { return !_isSuccess; } }
+
         public bool IsSuccess { get { return _isSuccess; } }
 
         public ExceptionDispatchInfo ExceptionInfo
@@ -47,6 +49,32 @@ namespace Narvalo.Fx
 
                 return _value;
             }
+        }
+
+        /// <summary>
+        /// Returns the underlying value if any, the default value of the type T otherwise.
+        /// </summary>
+        /// <returns>The underlying value or the default value of the type T.</returns>
+        public T ValueOrDefault()
+        {
+            return _isSuccess ? _value : default(T);
+        }
+
+        /// <summary>
+        /// Returns the underlying value if any, defaultValue otherwise.
+        /// </summary>
+        /// <param name="defaultValue">A default value to be used if if there is no underlying value.</param>
+        /// <returns>The underlying value or defaultValue.</returns>
+        public T ValueOrElse(T defaultValue)
+        {
+            return _isSuccess ? _value : defaultValue;
+        }
+
+        public T ValueOrElse(Func<T> defaultValueFactory)
+        {
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
+            return _isSuccess ? _value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow()

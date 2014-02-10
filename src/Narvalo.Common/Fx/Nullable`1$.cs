@@ -32,6 +32,13 @@ namespace Narvalo.Fx
             return @this.Value;
         }
 
+        //// ToMaybe
+
+        public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
+        {
+            return Maybe.Create(@this);
+        }
+
         //// Match
 
         public static TResult Match<TSource, TResult>(
@@ -101,13 +108,6 @@ namespace Narvalo.Fx
             }
 
             return @this;
-        }
-
-        //// ToMaybe
-
-        public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
-        {
-            return Maybe.Create(@this);
         }
     }
 }

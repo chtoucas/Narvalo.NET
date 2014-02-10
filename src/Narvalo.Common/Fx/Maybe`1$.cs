@@ -3,10 +3,9 @@
 namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Linq;
 
     /// <summary>
-    /// Fournit des méthodes d'extension pour <see cref="Narvalo.Fx.Maybe{T}"/>.
+    /// Provides extension methods for <see cref="Narvalo.Fx.Maybe{T}"/>.
     /// </summary>
     public static partial class MaybeExtensions
     {

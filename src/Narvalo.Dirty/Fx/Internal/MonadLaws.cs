@@ -39,13 +39,16 @@ namespace Narvalo.Fx.Internal
         // Unit * f = f
         static bool LeftIdentity<X, Y>(Kunc<X, Y> f, X value)
         {
-            return Monad.Compose(Monad.Return, f, value) == f(value);
+            Kunc<X, X> id = _ => Monad.Return(_);
+            return id.Compose(f).Invoke(value) == f(value);
+            //return Compose(Monad.Return, f, value) == f(value);
         }
 
         // f * Unit = f
         static bool RightIdentity<X, Y>(Kunc<X, Y> f, X value)
         {
-            return Monad.Compose(f, Monad.Return, value) == f(value);
+            return f.Compose(Monad.Return).Invoke(value) == f(value);
+            //return Compose(f, Monad.Return, value) == f(value);
         }
 
         // h * (g * f) = (h * g) * f
@@ -55,9 +58,20 @@ namespace Narvalo.Fx.Internal
             Kunc<Z, T> h,
             X value)
         {
-            return Monad.Compose(_ => Monad.Compose(f, g, _), h, value)
-                == Monad.Compose(f, _ => Monad.Compose(g, h, _), value);
+            return f.Compose(g).Compose(h).Invoke(value)
+                == f.Compose(g.Compose(h)).Invoke(value);
+
+            //return Compose(_ => Compose(f, g, _), h, value)
+            //    == Compose(f, _ => Compose(g, h, _), value);
         }
+
+        //public static Monad<TResult> Compose<TSource, TMiddle, TResult>(
+        //    Kunc<TSource, TMiddle> kunA,
+        //    Kunc<TMiddle, TResult> kunB,
+        //    TSource value)
+        //{
+        //    return kunA.Compose(kunB).Invoke(value);
+        //}
 
         #endregion
     }

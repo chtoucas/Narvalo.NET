@@ -6,6 +6,8 @@ namespace Narvalo.Fx
 
     public static class Output
     {
+        //// Return
+
         public static Output<T> Success<T>(T value)
         {
             return Output<T>.η(value);
@@ -14,6 +16,13 @@ namespace Narvalo.Fx
         public static Output<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
             return Output<T>.η(exceptionInfo);
+        }
+
+        //// Join
+
+        public static Output<T> Join<T>(Output<Output<T>> square)
+        {
+            return Output<T>.μ(square);
         }
     }
 }

@@ -166,7 +166,7 @@
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\Internal\Kunc%24.cs" />
+    <Compile Include="Fx\Internal\Kunc`%24.cs" />
     <Compile Include="Fx\Internal\Kunc`.cs" />
     <Compile Include="Fx\Lazy.cs" />
     <Compile Include="Fx\Lazy`1%24.Monad.cs">

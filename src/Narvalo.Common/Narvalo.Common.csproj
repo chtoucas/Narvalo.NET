@@ -82,6 +82,8 @@
     </Compile>
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
+    <Compile Include="Fx\Func`%24.cs" />
+    <Compile Include="Fx\Output`1%24.cs" />
     <Compile Include="Internal\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Predicate`%24.cs" />
