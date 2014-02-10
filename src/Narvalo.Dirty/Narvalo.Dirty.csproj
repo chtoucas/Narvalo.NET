@@ -96,6 +96,7 @@
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Fx\Action`%24.cs" />
+    <Compile Include="Fx\Cokunc`.cs" />
     <Compile Include="Fx\Monad`1%24.Linq.cs">
       <DependentUpon>Monad`1%24.cs</DependentUpon>
     </Compile>
@@ -154,7 +155,6 @@
     <Compile Include="Expando.cs" />
     <Compile Include="Fx\Kunc`%24.cs" />
     <Compile Include="Fx\Kunc`.cs" />
-    <Compile Include="Array%24.cs" />
     <Compile Include="Fx\Monad.cs" />
     <Compile Include="Fx\MonadLaws.cs" />
     <Compile Include="Fx\Monad`1.cs" />

@@ -7,7 +7,7 @@ namespace Narvalo.Internal
 
     [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
         Justification = "The method already returns a boolean to indicate the outcome.")]
-    delegate bool TryConverter<TSource, TResult>(TSource value, out TResult result);
+    delegate bool TryConverter<in TSource, TResult>(TSource value, out TResult result);
 
     static class TryConverterExtensions
     {

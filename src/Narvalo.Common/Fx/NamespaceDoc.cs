@@ -28,6 +28,9 @@ namespace Narvalo.Fx
      * 
      * + [Wes Dyer]: http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx
      * + [Lippert]: http://ericlippert.com/category/monads/
+     * + [Meijer]: http://laser.inf.ethz.ch/2012/slides/Meijer/
+     * + Stephen Toub on the Task Comonad:
+     *   http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx
      * 
      * Implementations in .NET:
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons

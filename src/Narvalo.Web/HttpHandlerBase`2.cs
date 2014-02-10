@@ -17,32 +17,32 @@
 
             var binder = new TBinder();
 
-            Maybe<TQuery> query = binder.Bind(context.Request);
-
-            if (query.IsSome) {
-                ProcessRequestCore(context, query.Value);
-            }
-            else {
-                var errors = binder.BindingErrors;
-                HttpQueryBinderException exception;
-
-                var errorsCount = errors.Count();
-
-                if (errorsCount > 1) {
-                    exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
-                }
-                else if (errorsCount == 1) {
-                    exception = errors.First();
-                }
-                else {
-                    exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest);
-                }
-
-                HandleBindingFailure(context, exception);
-            }
+            binder.Bind(context.Request)
+                .OnSome(_ => ProcessRequestCore(context, _))
+                .OnNone(() => OnBindingFailure(context, binder));
         }
 
-        protected virtual void HandleBindingFailure(HttpContext context, HttpQueryBinderException exception)
+        protected void OnBindingFailure(HttpContext context, TBinder binder)
+        {
+            var errors = binder.BindingErrors;
+            HttpQueryBinderException exception;
+
+            var errorsCount = errors.Count();
+
+            if (errorsCount > 1) {
+                exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
+            }
+            else if (errorsCount == 1) {
+                exception = errors.First();
+            }
+            else {
+                exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest);
+            }
+
+            OnBindingFailureCore(context, exception);
+        }
+
+        protected virtual void OnBindingFailureCore(HttpContext context, HttpQueryBinderException exception)
         {
             DebugCheck.NotNull(context);
 

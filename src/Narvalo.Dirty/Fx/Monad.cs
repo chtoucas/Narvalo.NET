@@ -11,13 +11,21 @@ namespace Narvalo.Fx
 
         public static Monad<Unit> Zero { get { return Zero_; } }
 
+        // WARNING: À ne pas confondre avec l'unité (Return).
         public static Monad<Unit> Unit { get { return Unit_; } }
 
-        //// Return
+        //// Return (Unit). Personaly, I prefer Create.
 
         public static Monad<T> Return<T>(T value)
         {
             return Monad<T>.η(value);
+        }
+
+        //// Extract (Counit, Coreturn)
+
+        public static T Extract<T>(Monad<T> monad)
+        {
+            return Monad<T>.ε(monad);
         }
 
         //// Join
@@ -25,6 +33,13 @@ namespace Narvalo.Fx
         public static Monad<T> Join<T>(Monad<Monad<T>> square)
         {
             return Monad<T>.μ(square);
+        }
+
+        //// Duplicate
+
+        public static Monad<Monad<T>> Duplicate<T>(Monad<T> monad)
+        {
+            return Monad<T>.δ(monad);
         }
 
         //// Lift

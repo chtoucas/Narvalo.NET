@@ -9,24 +9,24 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class LazyExtensions
     {
-        //// Bind
+        ////// Bind
 
-        public static Lazy<TResult> Bind<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, Lazy<TResult>> selector)
-        {
-            Require.Object(@this);
-            Require.NotNull(selector, "selector");
+        //public static Lazy<TResult> Bind<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, Lazy<TResult>> selector)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNull(selector, "selector");
 
-            return Lazy.Create(() => selector.Invoke(@this.Value).Value);
-        }
+        //    return Lazy.Create(() => selector.Invoke(@this.Value).Value);
+        //}
 
-        //// Map
+        ////// Map
 
-        public static Lazy<TResult> Map<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, TResult> selector)
-        {
-            Require.Object(@this);
-            Require.NotNull(selector, "selector");
+        //public static Lazy<TResult> Map<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, TResult> selector)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNull(selector, "selector");
 
-            return Lazy.Create(() => selector.Invoke(@this.Value));
-        }
+        //    return Lazy.Create(() => selector.Invoke(@this.Value));
+        //}
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Narvalo.Fx
 {
-    delegate Monad<T> Kunc<T>();
+    delegate T Cokunc<T>(Monad<T> arg);
 
-    delegate Monad<TResult> Kunc<in T, TResult>(T arg);
+    delegate TResult Cokunc<T, out TResult>(Monad<T> arg);
 }

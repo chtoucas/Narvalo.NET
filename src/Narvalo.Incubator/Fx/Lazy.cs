@@ -6,14 +6,14 @@ namespace Narvalo.Fx
 
     public static class Lazy
     {
-        public static Lazy<T> Create<T>(Func<T> valueFactory)
-        {
-            return new Lazy<T>(valueFactory);
-        }
+        //public static Lazy<T> Create<T>(Func<T> valueFactory)
+        //{
+        //    return new Lazy<T>(valueFactory);
+        //}
 
-        public static Lazy<T> Join<T>(Lazy<Lazy<T>> square)
-        {
-            return square.Value;
-        }
+        //public static Lazy<T> Join<T>(Lazy<Lazy<T>> square)
+        //{
+        //    return square.Value;
+        //}
     }
 }

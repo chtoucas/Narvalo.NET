@@ -23,7 +23,7 @@
                 ProcessRequestCore(context);
             }
             else {
-                HandleInvalidHttpMethod(context);
+                OnInvalidHttpMethod(context);
             }
         }
 
@@ -36,7 +36,7 @@
             return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod) select AcceptedVerbs.HasFlag(_)) ?? false;
         }
 
-        protected virtual void HandleInvalidHttpMethod(HttpContext context)
+        protected virtual void OnInvalidHttpMethod(HttpContext context)
         {
             DebugCheck.NotNull(context);
 

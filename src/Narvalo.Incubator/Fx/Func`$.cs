@@ -6,15 +6,15 @@ namespace Narvalo.Fx
 
     public static partial class FuncExtensions
     {
-        //// Compose (Lazy)
+        ////// Compose (Lazy)
 
-        public static Func<TSource, Lazy<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Lazy<TMiddle>> @this,
-            Func<TMiddle, Lazy<TResult>> kun)
-        {
-            Require.Object(@this);
+        //public static Func<TSource, Lazy<TResult>> Compose<TSource, TMiddle, TResult>(
+        //    this Func<TSource, Lazy<TMiddle>> @this,
+        //    Func<TMiddle, Lazy<TResult>> kun)
+        //{
+        //    Require.Object(@this);
 
-            return _ => @this.Invoke(_).Bind(kun);
-        }
+        //    return _ => @this.Invoke(_).Bind(kun);
+        //}
     }
 }
