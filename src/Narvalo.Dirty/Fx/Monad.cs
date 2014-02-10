@@ -21,25 +21,11 @@ namespace Narvalo.Fx
             return Monad<T>.η(value);
         }
 
-        //// Extract (Counit, Coreturn)
-
-        public static T Extract<T>(Monad<T> monad)
-        {
-            return Monad<T>.ε(monad);
-        }
-
         //// Join
 
         public static Monad<T> Join<T>(Monad<Monad<T>> square)
         {
             return Monad<T>.μ(square);
-        }
-
-        //// Duplicate
-
-        public static Monad<Monad<T>> Duplicate<T>(Monad<T> monad)
-        {
-            return Monad<T>.δ(monad);
         }
 
         //// Lift

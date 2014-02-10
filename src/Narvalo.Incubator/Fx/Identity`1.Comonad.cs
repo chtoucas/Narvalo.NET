@@ -7,34 +7,27 @@ namespace Narvalo.Fx
 
     public partial class Identity<T>
     {
-        public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
+        public Identity<TResult> Cobind<TResult>(Func<Identity<T>, TResult> fun)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(fun, "fun");
 
-            return selector.Invoke(_value);
-        }
-
-        public Identity<TResult> Map<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return new Identity<TResult>(selector.Invoke(_value));
+            return new Identity<TResult>(fun.Invoke(this));
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
-        internal static Identity<T> η(T value)
+        internal static T ε(Identity<T> monad)
         {
-            return new Identity<T>(value);
+            Require.NotNull(monad, "monad");
+
+            return monad._value;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
-        internal static Identity<T> μ(Identity<Identity<T>> square)
+        internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
-            Require.NotNull(square, "square");
-
-            return square._value;
+            return new Identity<Identity<T>>(monad);
         }
     }
 }

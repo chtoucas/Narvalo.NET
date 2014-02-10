@@ -13,6 +13,6 @@ namespace Narvalo.Fx
             _value = value;
         }
 
-        public T Value { get { return _value; } }
+        //public T Value { get { return _value; } }
     }
 }

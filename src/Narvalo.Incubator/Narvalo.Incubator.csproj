@@ -77,6 +77,7 @@
     </Compile>
     <Compile Include="Fx\Func`%24.cs" />
     <Compile Include="Fx\Identity.cs" />
+    <Compile Include="Fx\Identity`1.Comonad.cs" />
     <Compile Include="Fx\Identity`1.cs" />
     <Compile Include="Fx\Identity`1.IEquatable.cs">
       <DependentUpon>Identity`1.cs</DependentUpon>

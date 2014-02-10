@@ -4,9 +4,23 @@ namespace Narvalo.Fx
 {
     public static class Identity
     {
-        public static Identity<T> Create<T>(T value)
+        static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+
+        public static Identity<Unit> Unit { get { return Unit_; } }
+
+        //// Return
+
+        public static Identity<T> Return<T>(T value)
         {
             return Identity<T>.η(value);
         }
+
+        //// Join
+
+        public static Identity<T> Join<T>(Identity<Identity<T>> square)
+        {
+            return Identity<T>.μ(square);
+        }
+
     }
 }
