@@ -10,6 +10,42 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class OutputExtensions
     {
+        //// Coalesce (without using Zero)
+
+        public static Output<TResult> Coalesce<TSource, TResult>(
+            this Output<TSource> @this,
+            Output<TResult> whenSuccess,
+            Output<TResult> whenFailure)
+        {
+            Require.Object(@this);
+
+            return @this.IsSuccess ? whenSuccess : whenFailure;
+        }
+
+        //// Match
+
+        public static TResult Match<TSource, TResult>(
+            this Output<TSource> @this,
+            Func<TSource, TResult> selector,
+            TResult defaultValue)
+        {
+            Require.Object(@this);
+
+            return @this.Map(selector).ValueOrElse(defaultValue);
+        }
+
+        public static TResult Match<TSource, TResult>(
+            this Output<TSource> @this,
+            Func<TSource, TResult> selector,
+            Func<TResult> defaultValueFactory)
+        {
+            Require.Object(@this);
+
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
+            return @this.Match(selector, defaultValueFactory.Invoke());
+        }
+
         //// OnSuccess & OnFailure
 
         public static Output<TSource> OnSuccess<TSource>(this Output<TSource> @this, Action<TSource> action)

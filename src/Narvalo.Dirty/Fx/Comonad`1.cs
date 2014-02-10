@@ -4,13 +4,24 @@ namespace Narvalo.Fx
 {
     using System;
 
-    // WARNING: Il s'agit d'une implémentation pour "démonstration".
-    // On peut définir une comonade de deux manières équivalents :
-    // - Counit & Cobind 
-    // - Counit, Map & Comultiply
+    /* WARNING: This is not meant to be a generic monad implementation.
+     *
+     * There are two equivalent ways to define a comonad:
+     * - Haskell: Counit, Cobind (Extend)
+     * - Category: Counit, Map, Comultiply (δ)
+     *
+     * Aliases:
+     *
+      * Name       | Maths | Haskell   | HERE
+     * -----------+-------+-----------+
+     * Counit     | ε     | Extract   | Extract
+     * Cobind     |       | Extend    | Cobind
+     * Map        |       |           | Map
+     * Comultiply | δ     | Duplicate | Duplicate
+     */
+
     sealed partial class Comonad<T>
     {
-        // On utilise aussi Extend
         public Comonad<TResult> Cobind<TResult>(Cokunc<T, TResult> cokun)
         {
 #if COMONAD_VIA_COBIND
@@ -29,13 +40,11 @@ namespace Narvalo.Fx
 #endif
         }
 
-        // Counité
         internal static T ε(Comonad<T> monad)
         {
             throw new NotImplementedException();
         }
 
-        // Comultiplication
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY

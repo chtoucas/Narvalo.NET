@@ -97,12 +97,8 @@
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Fx\Action`%24.cs" />
     <Compile Include="Fx\Cokunc`.cs" />
-    <Compile Include="Fx\Comonad.cs" />
     <Compile Include="Fx\Comonad`1.cs" />
     <Compile Include="Fx\Monad`1%24.Linq.cs">
-      <DependentUpon>Monad`1%24.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Monad`1%24.Language.cs">
       <DependentUpon>Monad`1%24.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Monad`1%24.cs" />

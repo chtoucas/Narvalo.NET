@@ -4,49 +4,33 @@ namespace Narvalo.Fx
 {
     using System;
 
-    // Cf. http://www.haskell.org/onlinereport/monad.html
-    // Postfix M = function in the Kleisli category.
+    /* WARNING: This is not meant to be a generic monad implementation.
+     *
+     * There are two equivalent ways to define a monad:
+     * - Haskell: Unit, Bind
+     * - Category: Unit, Map, Multiply
+     *
+     * Aliases:
+     *
+     * Name     | Maths | Haskell | HERE
+     * ---------+-------+---------+
+     * Unit     | η     | Return  | Return (or a more appropriate name)
+     * Bind     |       | Bind    | Bind
+     * Map      |       | LiftM   | Map
+     * Multiply | μ     |         | Join
+     *          |       | LiftM2  | Zip
+     *
+     * NB: This is an additive monad + ValueOrElse
+     */
 
-    // WARNING: Il s'agit d'une implémentation de  monade additive pour "démonstration".
-    // On peut définir une monade de deux manières équivalents :
-    // - Unit & Bind (point de vue pris par Haskell)
-    // - Unit, Map & Multiply (plus en ligne avec la définition dans le cadre des catégories)
     sealed partial class Monad<T>
     {
-        static readonly Monad<T> Zero_ = new Monad<T>();
+        public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
-        readonly bool _isZero;
-        readonly T _value;
-
-        Monad()
+        // REVIEW
+        internal T ExtractOrElse(T defaultValue)
         {
-            _isZero = true;
-        }
-
-        Monad(T value)
-        {
-            _isZero = false;
-            _value = value;
-        }
-
-        public static Monad<T> Zero { get { return Zero_; } }
-
-        public T ValueOrDefault()
-        {
-            return ValueOrElse(default(T));
-        }
-
-        public T ValueOrElse(T defaultValue)
-        {
-            return ValueOrElse(defaultValue);
-        }
-
-        public T ValueOrElse(Func<T> defaultValueFactory)
-        {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            // FAKE
-            return _isZero ? defaultValueFactory.Invoke() : _value;
+            throw new NotImplementedException();
         }
 
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
@@ -58,7 +42,6 @@ namespace Narvalo.Fx
 #endif
         }
 
-        // Opération fonctorielle sur les morphismes
         public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -68,13 +51,11 @@ namespace Narvalo.Fx
 #endif
         }
 
-        // Unité
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
-        // Multiplication
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY

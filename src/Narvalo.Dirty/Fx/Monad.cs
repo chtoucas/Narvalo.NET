@@ -9,12 +9,15 @@ namespace Narvalo.Fx
         static readonly Monad<Unit> Zero_ = Monad<Unit>.Zero;
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
+        // Additive monads only
         public static Monad<Unit> Zero { get { return Zero_; } }
 
-        // WARNING: À ne pas confondre avec l'unité (Return).
+        // Monads only
         public static Monad<Unit> Unit { get { return Unit_; } }
 
-        //// Return (Unit). Personaly, I prefer Create.
+        #region Monads
+
+        //// Return
 
         public static Monad<T> Return<T>(T value)
         {
@@ -28,29 +31,45 @@ namespace Narvalo.Fx
             return Monad<T>.μ(square);
         }
 
-        //// Lift
+        #endregion
 
-        [Obsolete]
-        public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        #region Comonads
+
+        //// Extract
+
+        public static T Extract<T>(Comonad<T> monad)
         {
-            return _ => _.Map(fun);
+            return Comonad<T>.ε(monad);
         }
 
-        [Obsolete]
+        //// Duplicate
+
+        public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
+        {
+            return Comonad<T>.δ(monad);
+        }
+
+        #endregion
+
+        //// Lift
+
+        public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        {
+            return m => m.Map(fun);
+        }
+
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
             return (m1, m2) => m1.Zip(m2, fun);
         }
 
-        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
             return (m1, m2, m3) => m1.Zip(m2, m3, fun);
         }
 
-        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -58,7 +77,6 @@ namespace Narvalo.Fx
             return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
         }
 
-        [Obsolete]
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)

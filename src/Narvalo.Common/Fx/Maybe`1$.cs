@@ -9,6 +9,29 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class MaybeExtensions
     {
+        //// Match
+
+        public static TResult Match<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector,
+            TResult defaultValue)
+        {
+            Require.Object(@this);
+
+            return @this.Map(selector).ValueOrElse(defaultValue);
+        }
+
+        public static TResult Match<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector,
+            Func<TResult> defaultValueFactory)
+        {
+            Require.Object(@this);
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+
+            return @this.Match(selector, defaultValueFactory.Invoke());
+        }
+
         //// OnSome & OnNone
 
         public static Maybe<TSource> OnSome<TSource>(this Maybe<TSource> @this, Action<TSource> action)

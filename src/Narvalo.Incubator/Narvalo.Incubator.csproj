@@ -77,7 +77,10 @@
     </Compile>
     <Compile Include="Fx\Func`%24.cs" />
     <Compile Include="Fx\Identity.cs" />
-    <Compile Include="Fx\Identity`1.Comonad.cs" />
+    <Compile Include="Fx\Identity`1%24.cs" />
+    <Compile Include="Fx\Identity`1.Comonad.cs">
+      <DependentUpon>Identity`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Identity`1.cs" />
     <Compile Include="Fx\Identity`1.IEquatable.cs">
       <DependentUpon>Identity`1.cs</DependentUpon>
@@ -117,7 +120,9 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Linq\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -29,32 +29,6 @@ namespace Narvalo.Fx
 
         //// Then (C# has direct support for this)
 
-        #region Optional methods.
-
-        //// Match
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            TResult defaultValue)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.Map(selector) ?? defaultValue;
-        }
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            Func<TResult> defaultValueFactory)
-            where TSource : struct
-            where TResult : struct
-        {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return @this.Match(selector, defaultValueFactory.Invoke());
-        }
-
         //// Coalesce (C# has direct support for this)
 
         //// Otherwise (C# has direct support for this)
@@ -66,7 +40,5 @@ namespace Narvalo.Fx
         {
             return OnNull(@this, action);
         }
-
-        #endregion
     }
 }

@@ -22,5 +22,18 @@ namespace Narvalo.Fx
             return Identity<T>.μ(square);
         }
 
+        //// Extract
+
+        public static T Extract<T>(Identity<T> monad)
+        {
+            return Identity<T>.ε(monad);
+        }
+
+        //// Duplicate
+
+        public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
+        {
+            return Identity<T>.δ(monad);
+        }
     }
 }

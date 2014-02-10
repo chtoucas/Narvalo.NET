@@ -17,11 +17,17 @@ namespace Narvalo.Fx
      * Sample signature
      * ----------------
      * 
-     * Core monadic methods:
+     * Core monad methods:
      * + Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
      * + Monad<TResult> Map<TResult>(Func<T, TResult> selector)
-     * + static Monad<T> η(T value)
-     * + static Monad<T> μ(Monad<Monad<T>> square)
+     * + static Monad<T> Return(T value)
+     * + static Monad<T> Join(Monad<Monad<T>> square)
+     * 
+     * Core comonad methods:
+     * + Comonad<TResult> Cobind<TResult>(Func<Comonad<T>, TResult> kun)
+     * + Comonad<TResult> Map<TResult>(Func<T, TResult> selector)
+     * + static T Extract(Comonad<T> comonad)
+     * + static Comonad<Comonad<T>> Duplicate(Comonad<T> comonad)
      * 
      * References
      * ----------
@@ -31,6 +37,7 @@ namespace Narvalo.Fx
      * + [Meijer]: http://laser.inf.ethz.ch/2012/slides/Meijer/
      * + Stephen Toub on the Task Comonad:
      *   http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx
+     * + [Haskell] http://www.haskell.org/onlinereport/monad.html
      * 
      * Implementations in .NET:
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons

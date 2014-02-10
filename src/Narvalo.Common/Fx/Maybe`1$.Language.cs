@@ -34,31 +34,6 @@ namespace Narvalo.Fx
             return @this.IsSome ? other : Maybe<TResult>.None;
         }
 
-        #region Optional methods.
-
-        //// Match
-
-        public static TResult Match<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, TResult> selector,
-            TResult defaultValue)
-        {
-            Require.Object(@this);
-
-            return @this.Map(selector).ValueOrElse(defaultValue);
-        }
-
-        public static TResult Match<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, TResult> selector,
-            Func<TResult> defaultValueFactory)
-        {
-            Require.Object(@this);
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return @this.Match(selector, defaultValueFactory.Invoke());
-        }
-
         //// Coalesce
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(
@@ -86,7 +61,5 @@ namespace Narvalo.Fx
         {
             return OnNone(@this, action);
         }
-
-        #endregion
     }
 }
