@@ -10,6 +10,18 @@ namespace Narvalo.Linq
     /// </summary>
     public static class OutputExtensions
     {
+        //// Restriction Operators
+
+        public static Output<TSource> Where<TSource>(
+            this Output<TSource> @this,
+            Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Map(predicate).Then(@this);
+        }
+
         //// Projection Operators
 
         public static Output<TResult> Select<TSource, TResult>(

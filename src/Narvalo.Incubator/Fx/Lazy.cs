@@ -4,14 +4,14 @@ namespace Narvalo.Fx
 {
     using System;
 
-    public static partial class Lazy
+    public static class Lazy
     {
-        //internal static Lazy<T> η<T>(T value)
-        //{
-        //    return new Lazy<T>(() => value);
-        //}
+        public static Lazy<T> Create<T>(Func<T> valueFactory)
+        {
+            return new Lazy<T>(valueFactory);
+        }
 
-        internal static Lazy<T> μ<T>(Lazy<Lazy<T>> square)
+        public static Lazy<T> Join<T>(Lazy<Lazy<T>> square)
         {
             return square.Value;
         }

@@ -95,34 +95,15 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
-    <Compile Include="Fx\Either`2.cs" />
-    <Compile Include="Fx\Either`2.Language.cs">
-      <DependentUpon>Either`2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Either`2.Monad.cs">
-      <DependentUpon>Either`2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity.cs" />
-    <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\Identity`1.IEquatable.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.Monad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Internal\Action`%24.cs" />
-    <Compile Include="Fx\Internal\Monad`1%24.Linq.cs">
+    <Compile Include="Fx\Action`%24.cs" />
+    <Compile Include="Fx\Monad`1%24.Linq.cs">
       <DependentUpon>Monad`1%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Internal\Monad`1%24.Language.cs">
+    <Compile Include="Fx\Monad`1%24.Language.cs">
       <DependentUpon>Monad`1%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Internal\Monad`1%24.cs" />
-    <Compile Include="Fx\Internal\Stubs`.cs" />
-    <Compile Include="Fx\Lazy.Monad.cs">
-      <DependentUpon>Lazy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Lazy`1%24.cs" />
+    <Compile Include="Fx\Monad`1%24.cs" />
+    <Compile Include="Fx\Stubs`.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
@@ -171,16 +152,12 @@
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\Internal\Kunc`%24.cs" />
-    <Compile Include="Fx\Internal\Kunc`.cs" />
-    <Compile Include="Fx\Lazy.cs" />
-    <Compile Include="Fx\Lazy`1%24.Monad.cs">
-      <DependentUpon>Lazy`1%24.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Array%24.cs" />
-    <Compile Include="Fx\Internal\Monad.cs" />
-    <Compile Include="Fx\Internal\MonadLaws.cs" />
-    <Compile Include="Fx\Internal\Monad`1.cs" />
+    <Compile Include="Fx\Kunc`%24.cs" />
+    <Compile Include="Fx\Kunc`.cs" />
+    <Compile Include="Array%24.cs" />
+    <Compile Include="Fx\Monad.cs" />
+    <Compile Include="Fx\MonadLaws.cs" />
+    <Compile Include="Fx\Monad`1.cs" />
     <Compile Include="Security\IBidirectionalCryptoEngine.cs" />
     <Compile Include="ImageUtility.cs" />
     <Compile Include="Net\Mail\AttachmentCollection.cs" />

@@ -72,6 +72,7 @@ namespace Narvalo.Linq
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
+            // REVIEW
             if (@this.IsNone || inner.IsNone) {
                 return Maybe<TResult>.None;
             }

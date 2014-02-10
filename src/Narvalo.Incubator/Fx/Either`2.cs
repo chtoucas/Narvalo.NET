@@ -3,7 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
 
     // NB: Par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
     // incorrecte, Left contient la valeur en cas d'erreur, et Right contient la valeur en cas de succès.
@@ -81,11 +81,13 @@ namespace Narvalo.Fx
                 : Either<TLeft, TResult>.Right(selector.Invoke(_right));
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Either<TLeft, TRight> Left(TLeft value)
         {
             return new LeftImpl(value);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Either<TLeft, TRight> Right(TRight value)
         {
             return new RightImpl(value);

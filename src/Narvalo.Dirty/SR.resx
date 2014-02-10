@@ -120,12 +120,6 @@
   <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
     <value>Exception: {0} {1} {2}.</value>
   </data>
-  <data name="Either_LeftHasNoRightValue" xml:space="preserve">
-    <value>A left Either has no right value.</value>
-  </data>
-  <data name="Either_RightHasNoLeftValue" xml:space="preserve">
-    <value>A right Either has no left value.</value>
-  </data>
   <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
     <value>HTTP InputStream too large.</value>
   </data>

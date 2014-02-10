@@ -59,5 +59,23 @@ namespace Narvalo {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A left Either has no right value..
+        /// </summary>
+        internal static string Either_LeftHasNoRightValue {
+            get {
+                return ResourceManager.GetString("Either_LeftHasNoRightValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A right Either has no left value..
+        /// </summary>
+        internal static string Either_RightHasNoLeftValue {
+            get {
+                return ResourceManager.GetString("Either_RightHasNoLeftValue", resourceCulture);
+            }
+        }
     }
 }
