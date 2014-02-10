@@ -4,59 +4,72 @@ namespace Narvalo
 {
     using System;
     using System.Globalization;
-    using Narvalo.Internal;
+    using System.Net;
+    using Narvalo.Fx;
 
     public static partial class ParseTo
     {
         //// Enum
 
-        public static TEnum Enum<TEnum>(string value) where TEnum : struct
+        public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
-            return Enum<TEnum>(value, ignoreCase: false);
+            return Enum<TEnum>(value, ignoreCase: true);
         }
 
-        public static TEnum Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
+        public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
-            return (TEnum)System.Enum.Parse(typeof(TEnum), value, ignoreCase);
-        }
+            TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
 
-        public static TEnum? NullableEnum<TEnum>(string value) where TEnum : struct
-        {
-            return NullableEnum<TEnum>(value, ignoreCase: true);
-        }
-
-        public static TEnum? NullableEnum<TEnum>(string value, bool ignoreCase) where TEnum : struct
-        {
-            DebugCheck.IsEnum(typeof(TEnum));
-
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out TEnum result) => System.Enum.TryParse<TEnum>(val, ignoreCase, out result));
+            return parser.NullInvoke(value);
         }
 
         //// DateTime
 
-        public static DateTime? NullableDateTime(string value)
+        public static DateTime? DateTime(string value)
         {
-            return NullableDateTime(value, "o");
+            return DateTime(value, "o");
         }
 
-        public static DateTime? NullableDateTime(string value, string format)
+        public static DateTime? DateTime(string value, string format)
         {
-            return NullableDateTime(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            return DateTime(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
         }
 
-        public static DateTime? NullableDateTime(
+        public static DateTime? DateTime(
             string value,
             string format,
             IFormatProvider provider,
             DateTimeStyles style)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out DateTime result) => System.DateTime.TryParseExact(val, format, provider, style, out result));
+            TryParser<DateTime> parser = (string _, out DateTime result)
+                => System.DateTime.TryParseExact(_, format, provider, style, out result);
+
+            return parser.NullInvoke(value);
+        }
+
+        //// IPAddress
+
+        public static Maybe<IPAddress> IPAddress(string value)
+        {
+            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
+
+            return parser.MayInvoke(value);
+        }
+
+        //// Uri
+
+        public static Maybe<Uri> Uri(string value, UriKind uriKind)
+        {
+            // REVIEW: Uri.TryCreate accepts empty strings.
+            if (String.IsNullOrWhiteSpace(value)) {
+                return Maybe<Uri>.None;
+            }
+
+            TryParser<Uri> parser = (string _, out Uri result) => System.Uri.TryCreate(_, uriKind, out result);
+
+            return parser.MayInvoke(value);
         }
     }
 }

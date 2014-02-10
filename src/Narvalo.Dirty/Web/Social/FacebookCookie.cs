@@ -118,8 +118,8 @@
                 throw new SecurityException("Invalid signature found for facebook cookie.");
             }
 
-            return from expiresOn in ParseTo.NullableDateTime(nvc[ExpiresOnKey_])
-                   from userId in ParseTo.NullableInt64(nvc[UserIdKey_])
+            return from expiresOn in ParseTo.DateTime(nvc[ExpiresOnKey_])
+                   from userId in ParseTo.Int64(nvc[UserIdKey_])
                    select new FacebookCookie(
                        nvc[AccessTokenKey_],
                        expiresOn,

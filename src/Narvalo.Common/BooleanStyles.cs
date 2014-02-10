@@ -9,11 +9,11 @@ namespace Narvalo
     public enum BooleanStyles
     {
         Literal = 1 << 0,
-        Integer = 1 << 1,
+        OneOrZero = 1 << 1,
         EmptyIsFalse = 1 << 2,
         HtmlInput = 1 << 3,
 
-        Default = Literal | Integer,
-        Any = Literal | Integer | EmptyIsFalse | HtmlInput,
+        Default = Literal | OneOrZero,
+        Any = Literal | OneOrZero | EmptyIsFalse | HtmlInput,
     }
 }

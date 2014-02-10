@@ -62,9 +62,8 @@
         void Initialize_(NameValueCollection source)
         {
             _enableWhiteSpaceBusting
-                = (from _ in source.MayGetSingle("narvalo:enableWhiteSpaceBusting")
-                   select ParseTo.NullableBoolean(_))
-                   .UnpackOrElse(DefaultEnableWhiteSpaceBusting_);
+                = (from _ in source.MayGetSingle("narvalo:enableWhiteSpaceBusting") select ParseTo.Boolean(_))
+                .UnpackOrElse(DefaultEnableWhiteSpaceBusting_);
         }
     }
 }

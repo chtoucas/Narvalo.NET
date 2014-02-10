@@ -4,44 +4,63 @@ namespace Narvalo
 {
     using System;
     using System.Globalization;
-    using Narvalo.Internal;
 
     public static partial class ParseTo
     {
         //// Boolean
 
-        public static bool? NullableBoolean(string value)
+        public static bool? Boolean(string value)
         {
-            return NullableBoolean(value, BooleanStyles.Default);
+            return Boolean(value, BooleanStyles.Default);
         }
 
-        public static bool? NullableBoolean(string value, BooleanStyles style)
+        public static bool? Boolean(string value, BooleanStyles style)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out bool result) => TryParseTo.Boolean(val, style, out result));
+            if (value == null) { return null; }
+
+            var val = value.Trim();
+
+            if (val.Length == 0) {
+                return style.HasFlag(BooleanStyles.EmptyIsFalse) ? (bool?)false : null;
+            }
+
+            if (style.HasFlag(BooleanStyles.Literal)) {
+                bool result;
+
+                // NB: Cette méthode n'est pas sensible à la casse de "value".
+                if (System.Boolean.TryParse(val, out result)) {
+                    return result;
+                }
+            }
+
+            if (style.HasFlag(BooleanStyles.OneOrZero) && (val == "0" || val == "1")) {
+                return val == "1";
+            }
+
+            if (style.HasFlag(BooleanStyles.HtmlInput) && value == "on") {
+                return true;
+            }
+
+            return null;
         }
 
         //// Decimal
 
-        public static decimal? NullableDecimal(string value)
+        public static decimal? Decimal(string value)
         {
-            return NullableDecimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
+            return Decimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
         }
 
-        public static decimal? NullableDecimal(string value, NumberStyles style, IFormatProvider provider)
+        public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out decimal result) =>
-                {
-                    return decimal.TryParse(val, style, provider, out result);
-                });
+            TryParser<decimal> parser = (string _, out decimal result) => decimal.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// Double
 
-        public static double? NullableDouble(string value)
+        public static double? Double(string value)
         {
             var style
                 = NumberStyles.AllowLeadingWhite
@@ -51,118 +70,118 @@ namespace Narvalo
                 | NumberStyles.AllowThousands
                 | NumberStyles.AllowExponent;
 
-            return NullableDouble(value, style, NumberFormatInfo.CurrentInfo);
+            return Double(value, style, NumberFormatInfo.CurrentInfo);
         }
 
-        public static double? NullableDouble(string value, NumberStyles style, IFormatProvider provider)
+        public static double? Double(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out double result) => double.TryParse(val, style, provider, out result));
+            TryParser<double> parser = (string _, out double result) => double.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// Int16
 
-        public static short? NullableInt16(string value)
+        public static short? Int16(string value)
         {
-            return NullableInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return Int16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static short? NullableInt16(string value, NumberStyles style, IFormatProvider provider)
+        public static short? Int16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out short result) => short.TryParse(val, style, provider, out result));
+            TryParser<short> parser = (string _, out short result) => short.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// Int32
 
-        public static int? NullableInt32(string value)
+        public static int? Int32(string value)
         {
-            return NullableInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return Int32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static int? NullableInt32(string value, NumberStyles style, IFormatProvider provider)
+        public static int? Int32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out int result) => int.TryParse(val, style, provider, out result));
+            TryParser<int> parser = (string _, out int result) => int.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// Int64
 
-        public static long? NullableInt64(string value)
+        public static long? Int64(string value)
         {
-            return NullableInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return Int64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
-        public static long? NullableInt64(string value, NumberStyles style, IFormatProvider provider)
+        public static long? Int64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out long result) => long.TryParse(val, style, provider, out result));
+            TryParser<long> parser = (string _, out long result) => long.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// Single
 
-        public static float? NullableSingle(string value)
+        public static float? Single(string value)
         {
-            return NullableSingle(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
+            return Single(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
         }
 
-        public static float? NullableSingle(string value, NumberStyles style, IFormatProvider provider)
+        public static float? Single(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out float result) => float.TryParse(val, style, provider, out result));
+            TryParser<float> parser = (string _, out float result) => float.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// UInt16
 
         [CLSCompliant(false)]
-        public static ushort? NullableUInt16(string value)
+        public static ushort? UInt16(string value)
         {
-            return NullableUInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return UInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static ushort? NullableUInt16(string value, NumberStyles style, IFormatProvider provider)
+        public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out ushort result) => ushort.TryParse(val, style, provider, out result));
+            TryParser<ushort> parser = (string _, out ushort result) => ushort.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// UInt32
 
         [CLSCompliant(false)]
-        public static uint? NullableUInt32(string value)
+        public static uint? UInt32(string value)
         {
-            return NullableUInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return UInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static uint? NullableUInt32(string value, NumberStyles style, IFormatProvider provider)
+        public static uint? UInt32(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out uint result) => uint.TryParse(val, style, provider, out result));
+            TryParser<uint> parser = (string _, out uint result) => uint.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
 
         //// UInt64
 
         [CLSCompliant(false)]
-        public static ulong? NullableUInt64(string value)
+        public static ulong? UInt64(string value)
         {
-            return NullableUInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
+            return UInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         [CLSCompliant(false)]
-        public static ulong? NullableUInt64(string value, NumberStyles style, IFormatProvider provider)
+        public static ulong? UInt64(string value, NumberStyles style, IFormatProvider provider)
         {
-            return TryParseInvoker.Invoke(
-                value,
-                (string val, out ulong result) => ulong.TryParse(val, style, provider, out result));
+            TryParser<ulong> parser = (string _, out ulong result) => ulong.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
         }
     }
 }

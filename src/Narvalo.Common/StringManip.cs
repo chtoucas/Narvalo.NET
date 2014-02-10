@@ -80,7 +80,8 @@ namespace Narvalo
             }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Sans cela la méthode ne remplirait pas sa fonction.")]
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", 
+            Justification = "That's the way this method is supposed to work.")]
         public static string ToTitleCase(string value)
         {
             Require.NotNull(value, "value");

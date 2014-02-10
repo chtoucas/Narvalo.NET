@@ -1,116 +1,150 @@
 ﻿namespace Narvalo
 {
     using System;
-    using System.Diagnostics;
     using Xunit;
 
     public static class ParseToFacts
     {
-        #region Stubs
-
-        struct StructStub_ { }
-
-        enum EnumStub_
+        public static class TheBooleanMethod
         {
-            None = 0,
-            ActualValue = 1,
-            AliasValue = ActualValue,
-        }
+            //[Fact]
+            //public static void ReturnsFalseAndPicksDefaultBoolean_ForNullString()
+            //{
+            //    // Act
+            //    bool? result = ParseTo.Boolean(null, BooleanStyles.None);
+            //    // Assert
+            //    Assert.False(result.HasValue);
+            //    Assert.Equal(default(Boolean), result);
+            //}
 
-        enum EnumWithoutDefaultStub_
-        {
-            ActualValue1 = 1,
-            ActualValue2 = 2,
-        }
-
-        [Flags]
-        enum EnumFlagStub_
-        {
-            None = 0,
-            ActualValue1 = 1 << 0,
-            ActualValue2 = 1 << 1,
-            ActualValue3 = 1 << 2,
-            CompositeValue1 = ActualValue1 | ActualValue2,
-            CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
-        }
-
-        #endregion
-
-        public static class TheEnumMethod
-        {
-            //// Validation du paramètre générique
-            
-#if DEBUG
-            [Fact(Skip = Constants.SkipReleaseOnly)]
-#else
-            [Fact]
-#endif
-            public static void ThrowsArgumentException_ForInt32()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<int>("Whatever"));
-            }
-
-            
-#if DEBUG
-            [Fact(Skip = Constants.SkipReleaseOnly)]
-#else
-            [Fact]
-#endif
-            public static void ThrowsArgumentException_ForStruct()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
-            }
-
-            //// Analyse d'une valeur valide
+            //[Fact]
+            //public static void ReturnsFalseAndPicksDefaultBoolean_ForEmptyString()
+            //{
+            //    // Act
+            //    bool? result = ParseTo.Boolean(String.Empty, BooleanStyles.None);
+            //    // Assert
+            //    Assert.False(result.HasValue);
+            //    Assert.Equal(default(Boolean), result);
+            //}
 
             [Fact]
-            public static void ReturnsCorrectMember_ForActualValue()
+            public static void ReturnsTrueAndPicksFalse_ForEmptyStringAndEmptyIsFalse()
             {
                 // Act
-                EnumStub_ result = ParseTo.Enum<EnumStub_>("ActualValue");
+                bool? result = ParseTo.Boolean(String.Empty, BooleanStyles.EmptyIsFalse);
                 // Assert
-                Assert.Equal(EnumStub_.ActualValue, result);
+                Assert.True(result.HasValue);
+                Assert.Equal(false, result);
             }
 
             [Fact]
-            public static void ReturnsCorrectMember_ForActualValue_WhenIgnoreCase()
+            public static void ReturnsTrueAndPicksTrue_ForLiteralTrueAndLiteralStyle()
             {
                 // Act
-                EnumStub_ result = ParseTo.Enum<EnumStub_>("actualvalue", ignoreCase: true);
+                bool? result = ParseTo.Boolean("true", BooleanStyles.Literal);
                 // Assert
-                Assert.Equal(EnumStub_.ActualValue, result);
+                Assert.True(result.HasValue);
+                Assert.Equal(true, result);
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForActualValueAndBadCase()
+            public static void ReturnsTrueAndPicksTrue_ForLiteralMixedCaseTrueAndLiteralStyle()
             {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<EnumStub_>("actualvalue", ignoreCase: false));
-            }
-
-            //// Analyse d'une valeur invalide
-
-            [Fact]
-            public static void ThrowsArgumentException_ForInvalidValue()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<EnumStub_>("InvalidValue"));
+                // Act
+                bool? result = ParseTo.Boolean("TrUe", BooleanStyles.Literal);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(true, result);
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForInvalidValue_WhenIgnoreCase()
+            public static void ReturnsTrueAndPicksFalse_ForLiteralFalseAndLiteralStyle()
             {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<EnumStub_>("invalidvalue", ignoreCase: true));
+                // Act
+                bool? result = ParseTo.Boolean("false", BooleanStyles.Literal);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(false, result);
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForInvalidValueAndBadCase()
+            public static void ReturnsTrueAndPicksFalse_ForLiteralMixedCaseFalseAndLiteralStyle()
             {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => ParseTo.Enum<EnumStub_>("invalidvalue", ignoreCase: false));
+                // Act
+                bool? result = ParseTo.Boolean("fAlSe", BooleanStyles.Literal);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(false, result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForLiteralTrueAndWhitespacesAndLiteralStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean(" true ", BooleanStyles.Literal);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(true, result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForStrictlyPositiveInt32AndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("10", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.False(result.HasValue);
+                Assert.Equal(default(Boolean), result);
+            }
+
+            [Fact]
+            public static void ReturnsTrueAndPicksTrue_ForOneAndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("1", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(true, result);
+            }
+
+            [Fact]
+            public static void ReturnsTrueAndPicksFalse_ForZeroAndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("0", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.True(result.HasValue);
+                Assert.Equal(false, result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForMinusOneAndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("-1", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.False(result.HasValue);
+                Assert.Equal(default(Boolean), result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForNegativeInt32AndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("-10", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.False(result.HasValue);
+                Assert.Equal(default(Boolean), result);
+            }
+
+            [Fact]
+            public static void ReturnsFalseAndPicksDefaultBoolean_ForDecimalAndIntegerStyle()
+            {
+                // Act
+                bool? result = ParseTo.Boolean("-10.1", BooleanStyles.OneOrZero);
+                // Assert
+                Assert.False(result.HasValue);
+                Assert.Equal(default(Boolean), result);
             }
         }
     }

@@ -30,7 +30,7 @@
 
             // Initialisation du champs baseUri.
             _baseUri = config.MayGetSingle("baseUri")
-                .Bind(_ => MayParseTo.Uri(_, UriKind.RelativeOrAbsolute))
+                .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
                 .ValueOrThrow(() => new ProviderException("Missing or invalid config 'baseUri'."));
             config.Remove("baseUri");
         }

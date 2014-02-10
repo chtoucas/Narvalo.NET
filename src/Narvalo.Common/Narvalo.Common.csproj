@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Func`%24.cs" />
     <Compile Include="Internal\Stubs`1.cs" />
+    <Compile Include="TryConverter`1.cs" />
     <Compile Include="Predicate`%24.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="Collections\List`1%24.cs" />
@@ -106,7 +107,6 @@
     </Compile>
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Internal\TryParseInvoker.cs" />
     <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Fx\Maybe`1%24.Nullable.cs">
       <DependentUpon>Maybe`1%24.cs</DependentUpon>
@@ -149,7 +149,6 @@
     <Compile Include="Fx\Maybe`1.IEquatable.cs">
       <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MayParseTo.cs" />
     <Compile Include="ParseTo.cs" />
     <Compile Include="Fx\Maybe`1.Monad.cs">
       <SubType>Code</SubType>
@@ -160,10 +159,10 @@
     <Compile Include="Range`1.IEquatable.cs">
       <DependentUpon>Range`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="TryConvertTo.cs" />
+    <Compile Include="Enumeration.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Internal\TryParse`1.cs" />
+    <Compile Include="TryParser`1.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="BooleanStyles.cs" />
@@ -179,7 +178,6 @@
     <Compile Include="StringManip.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Unit.cs" />
-    <Compile Include="TryParseTo.cs" />
     <Compile Include="Uri%24.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOrBreak.cs" />

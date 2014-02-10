@@ -75,10 +75,10 @@ namespace Narvalo
 
             string result = String.Empty;
 
+            // TODO: Optimiser.
             while (value > 0) {
                 long r = value % FlickrBase58AlphabetLength_;
 
-                // TODO: Optimiser en évitant la concaténation.
                 result = FlickrBase58Alphabet_[r].ToString() + result;
                 value /= FlickrBase58AlphabetLength_;
             }
@@ -167,10 +167,10 @@ namespace Narvalo
 
             string result = String.Empty;
 
+            // TODO: Optimiser.
             while (value > 0) {
                 long r = value % alphabetLength;
 
-                // TODO: Optimiser en évitant la concaténation.
                 result = alphabet[r].ToString() + result;
                 value /= alphabetLength;
             }

@@ -3,7 +3,7 @@
     using System;
     using Xunit;
 
-    public static class TryConvertToFacts
+    public static class EnumerationFacts
     {
         #region > Stubs <
 
@@ -37,12 +37,8 @@
 
 #if NET_35
 
-        #region + TryParse<T> +
-
-        public static class TryParse
+        public static class TheTryParseMethod
         {
-            #region > Validation du paramètre générique <
-
             [Fact]
             public static void ThrowsArgumentException_WithInt32()
             {
@@ -50,7 +46,7 @@
                 int result;
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => EnumUtility.TryParse<int>("Whatever", out result));
+                    () => Enumeration.TryParse<int>("Whatever", out result));
             }
 
             [Fact]
@@ -60,12 +56,8 @@
                 StructStub_ result;
                 // Act & Assert
                 Assert.Throws<ArgumentException>(
-                    () => EnumUtility.TryParse<StructStub_>("Whatever", out result));
+                    () => Enumeration.TryParse<StructStub_>("Whatever", out result));
             }
-
-            #endregion
-
-            #region > Analyse d'une valeur valide <
 
             [Fact]
             public static void ReturnsTrueAndPicksCorrectMember_ForActualValue()
@@ -73,7 +65,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>("ActualValue", out result);
+                var succeed = Enumeration.TryParse<EnumStub_>("ActualValue", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -85,7 +77,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>(" ActualValue  ", out result);
+                var succeed = Enumeration.TryParse<EnumStub_>(" ActualValue  ", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -97,7 +89,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>(
+                var succeed = Enumeration.TryParse<EnumStub_>(
                     "actualvalue", true /* ignoreCase */, out result);
                 // Assert
                 Assert.True(succeed);
@@ -110,7 +102,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>(
+                var succeed = Enumeration.TryParse<EnumStub_>(
                     "  actualvalue   ", true /* ignoreCase */, out result);
                 // Assert
                 Assert.True(succeed);
@@ -123,7 +115,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>(
+                var succeed = Enumeration.TryParse<EnumStub_>(
                     "actualvalue", false /* ignoreCase */, out result);
                 // Assert
                 Assert.False(succeed);
@@ -137,7 +129,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>("AliasValue", out result);
+                var succeed = Enumeration.TryParse<EnumStub_>("AliasValue", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.AliasValue, result);
@@ -149,7 +141,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>("ActualValue1", out result);
+                var succeed = Enumeration.TryParse<EnumFlagStub_>("ActualValue1", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
@@ -161,7 +153,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>("CompositeValue1", out result);
+                var succeed = Enumeration.TryParse<EnumFlagStub_>("CompositeValue1", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.CompositeValue1, result);
@@ -173,7 +165,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>("ActualValue1, ActualValue2", out result);
+                var succeed = Enumeration.TryParse<EnumFlagStub_>("ActualValue1, ActualValue2", out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.CompositeValue1, result);
@@ -185,7 +177,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>(
+                var succeed = Enumeration.TryParse<EnumFlagStub_>(
                     "  ActualValue1,  ActualValue2,ActualValue3  ", out result);
                 // Assert
                 Assert.True(succeed);
@@ -198,16 +190,12 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>(
+                var succeed = Enumeration.TryParse<EnumFlagStub_>(
                     "  actualvalue1,  ActualValue2,actualVAlue3  ", true /* ignoreCase */, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.CompositeValue2, result);
             }
-
-            #endregion
-
-            #region > Analyse d'une valeur invalide <
 
             [Fact]
             public static void ReturnsFalseAndPicksDefaultMember_ForInvalidValue()
@@ -215,7 +203,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>("InvalidValue", out result);
+                var succeed = Enumeration.TryParse<EnumStub_>("InvalidValue", out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
@@ -227,7 +215,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>("invalidvalue", true /* ignoreCase */, out result);
+                var succeed = Enumeration.TryParse<EnumStub_>("invalidvalue", true /* ignoreCase */, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
@@ -239,7 +227,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumStub_>("invalidvalue", false /* ignoreCase */, out result);
+                var succeed = Enumeration.TryParse<EnumStub_>("invalidvalue", false /* ignoreCase */, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
@@ -251,7 +239,7 @@
                 // Arrange
                 EnumWithoutDefaultStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumWithoutDefaultStub_>("InvalidValue", out result);
+                var succeed = Enumeration.TryParse<EnumWithoutDefaultStub_>("InvalidValue", out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumWithoutDefaultStub_), result);
@@ -263,20 +251,16 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = EnumUtility.TryParse<EnumFlagStub_>("  InvalidValue,  ActualValue2,ActualValue3  ", out result);
+                var succeed = Enumeration.TryParse<EnumFlagStub_>("  InvalidValue,  ActualValue2,ActualValue3  ", out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumFlagStub_), result);
             }
-
-            #endregion
         }
-
-        #endregion
 
 #endif
 
-        public static class TheEnumMethod
+        public static class TheConvertMethod
         {
 #if DEBUG
             [Fact(Skip = Constants.SkipReleaseOnly)]
@@ -288,7 +272,7 @@
                 // Arrange
                 int result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<int>(1, out result));
+                Assert.Throws<ArgumentException>(() => Enumeration.Convert<int>(1, out result));
             }
 
 
@@ -302,7 +286,7 @@
                 // Arrange
                 StructStub_ result;
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => TryConvertTo.Enum<StructStub_>(1, out result));
+                Assert.Throws<ArgumentException>(() => Enumeration.Convert<StructStub_>(1, out result));
             }
 
             [Fact]
@@ -311,7 +295,7 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = TryConvertTo.Enum<EnumStub_>(1, out result);
+                var succeed = Enumeration.Convert<EnumStub_>(1, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumStub_.ActualValue, result);
@@ -323,7 +307,7 @@
                 // Arrange
                 EnumFlagStub_ result;
                 // Act
-                var succeed = TryConvertTo.Enum<EnumFlagStub_>(1 << 0, out result);
+                var succeed = Enumeration.Convert<EnumFlagStub_>(1 << 0, out result);
                 // Assert
                 Assert.True(succeed);
                 Assert.Equal(EnumFlagStub_.ActualValue1, result);
@@ -335,10 +319,88 @@
                 // Arrange
                 EnumStub_ result;
                 // Act
-                var succeed = TryConvertTo.Enum<EnumStub_>(2, out result);
+                var succeed = Enumeration.Convert<EnumStub_>(2, out result);
                 // Assert
                 Assert.False(succeed);
                 Assert.Equal(default(EnumStub_), result);
+            }
+        }
+
+        public static class TheParseMethod
+        {
+            //// Validation du paramètre générique
+
+#if DEBUG
+            [Fact(Skip = Constants.SkipReleaseOnly)]
+#else
+            [Fact]
+#endif
+            public static void ThrowsArgumentException_ForInt32()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<int>("Whatever"));
+            }
+
+
+#if DEBUG
+            [Fact(Skip = Constants.SkipReleaseOnly)]
+#else
+            [Fact]
+#endif
+            public static void ThrowsArgumentException_ForStruct()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<StructStub_>("Whatever"));
+            }
+
+            //// Analyse d'une valeur valide
+
+            [Fact]
+            public static void ReturnsCorrectMember_ForActualValue()
+            {
+                // Act
+                EnumStub_ result = Enumeration.Parse<EnumStub_>("ActualValue");
+                // Assert
+                Assert.Equal(EnumStub_.ActualValue, result);
+            }
+
+            [Fact]
+            public static void ReturnsCorrectMember_ForActualValue_WhenIgnoreCase()
+            {
+                // Act
+                EnumStub_ result = Enumeration.Parse<EnumStub_>("actualvalue", ignoreCase: true);
+                // Assert
+                Assert.Equal(EnumStub_.ActualValue, result);
+            }
+
+            [Fact]
+            public static void ThrowsArgumentException_ForActualValueAndBadCase()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<EnumStub_>("actualvalue", ignoreCase: false));
+            }
+
+            //// Analyse d'une valeur invalide
+
+            [Fact]
+            public static void ThrowsArgumentException_ForInvalidValue()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<EnumStub_>("InvalidValue"));
+            }
+
+            [Fact]
+            public static void ThrowsArgumentException_ForInvalidValue_WhenIgnoreCase()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<EnumStub_>("invalidvalue", ignoreCase: true));
+            }
+
+            [Fact]
+            public static void ThrowsArgumentException_ForInvalidValueAndBadCase()
+            {
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => Enumeration.Parse<EnumStub_>("invalidvalue", ignoreCase: false));
             }
         }
     }
