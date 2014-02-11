@@ -25,13 +25,6 @@ namespace Narvalo.Fx
             return OnSuccess(@this, action);
         }
 
-        public static Output<TResult> Then<TSource, TResult>(this Output<TSource> @this, Output<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.Bind(_ => other);
-        }
-
         #endregion
 
         //// Coalesce

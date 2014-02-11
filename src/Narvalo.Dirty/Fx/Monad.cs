@@ -6,25 +6,16 @@ namespace Narvalo.Fx
 
     static class Monad
     {
-        static readonly Monad<Unit> Zero_ = Monad<Unit>.Zero;
-        static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
-
-        // Additive monads only
-        public static Monad<Unit> Zero { get { return Zero_; } }
-
-        // Monads only
-        public static Monad<Unit> Unit { get { return Unit_; } }
-
         #region Monads
 
-        //// Return
+        static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+
+        public static Monad<Unit> Unit { get { return Unit_; } }
 
         public static Monad<T> Return<T>(T value)
         {
             return Monad<T>.η(value);
         }
-
-        //// Join
 
         public static Monad<T> Join<T>(Monad<Monad<T>> square)
         {
@@ -33,16 +24,20 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Comonads
+        #region Additive monads
 
-        //// Extract
+        static readonly Monad<Unit> Zero_ = Monad<Unit>.Zero;
+
+        public static Monad<Unit> Zero { get { return Zero_; } }
+
+        #endregion
+
+        #region Comonads
 
         public static T Extract<T>(Comonad<T> monad)
         {
             return Comonad<T>.ε(monad);
         }
-
-        //// Duplicate
 
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
         {

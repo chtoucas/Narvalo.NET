@@ -19,7 +19,7 @@ namespace Narvalo.Linq
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Map(predicate).Then(@this);
+            return @this.Map(predicate).Bind(_ => @this);
         }
 
         //// Projection Operators

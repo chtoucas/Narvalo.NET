@@ -12,7 +12,7 @@ namespace Narvalo.Fx
      *
      * Aliases:
      *
-      * Name       | Maths | Haskell   | HERE
+     * Name       | Maths | Haskell   | What we will use
      * -----------+-------+-----------+
      * Counit     | ε     | Extract   | Extract
      * Cobind     |       | Extend    | Cobind

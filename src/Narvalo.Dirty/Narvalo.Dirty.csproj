@@ -98,9 +98,6 @@
     <Compile Include="Fx\Action`%24.cs" />
     <Compile Include="Fx\Cokunc`.cs" />
     <Compile Include="Fx\Comonad`1.cs" />
-    <Compile Include="Fx\Monad`1%24.Linq.cs">
-      <DependentUpon>Monad`1%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Monad`1%24.cs" />
     <Compile Include="Fx\Stubs`.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />

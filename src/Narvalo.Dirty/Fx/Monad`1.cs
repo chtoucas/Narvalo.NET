@@ -12,20 +12,36 @@ namespace Narvalo.Fx
      *
      * Aliases:
      *
-     * Name     | Maths | Haskell | HERE
+     * Name     | Maths | Haskell | What we will use
      * ---------+-------+---------+
-     * Unit     | η     | Return  | Return (or a more appropriate name)
+     * Unit     | η     | Return  | Return (NB: sometimes we prefer to use a more appropriate name, like Create)
      * Bind     |       | Bind    | Bind
-     * Map      |       | LiftM   | Map
-     * Multiply | μ     |         | Join
+     * Map      |       | Fmap    | Map    (NB: this is the very Select of Linq. In Haskell this is also called LiftM)
+     * Multiply | μ     | Join    | Join
+     * 
+     * Additional methods
      *          |       | LiftM2  | Zip
+     *          
+     * For MonadPlus        
+     *          |       | Mplus   | Plus
      *
-     * NB: This is an additive monad
+     * NB: For the purpose of demonstration we define an additive monad (a MonadPlus): 
+     * - Zero.Plus(other) = other
+     * - other.Plus(Zero) = other
+     * or
+     * - Zero.Bind(kun) = Zero
+     * - other.Bind(_ => Zero) = Zero
+     * TODO: Match? Fail? Sum, Guard for MonadPlus? Then (Bind) and Where
      */
 
     sealed partial class Monad<T>
     {
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
+
+        public Monad<T> Plus(Monad<T> other)
+        {
+            throw new NotImplementedException();
+        }
 
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {

@@ -24,14 +24,9 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return Identity.Unit; }).Then(@this);
-        }
+            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
 
-        public static Identity<TResult> Then<TSource, TResult>(this Identity<TSource> @this, Identity<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.Bind(_ => other);
+            return @this;
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace Narvalo.Fx
 
         public static Maybe<Unit> Unit { get { return Unit_; } }
 
-        //// Create
+        //// Return
 
         public static Maybe<T> Create<T>(T value)
         {

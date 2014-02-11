@@ -26,16 +26,23 @@ namespace Narvalo.Fx
             return OnSome(@this, action);
         }
 
+        #endregion
+
+        #region Additive monad extensions
+
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
         {
             Require.Object(@this);
 
-            return @this.IsSome ? other : Maybe<TResult>.None;
+            return @this.IsNone ? Maybe<TResult>.None : other;
         }
 
-        #endregion
+        public static Maybe<TResult> Otherwise<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
+        {
+            Require.Object(@this);
 
-        #region Additive monad extensions
+            return @this.IsNone ? other : Maybe<TResult>.None;
+        }
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -45,13 +52,6 @@ namespace Narvalo.Fx
             Require.Object(@this);
 
             return @this.IsSome ? whenSome : whenNone;
-        }
-
-        public static Maybe<TResult> Otherwise<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.IsSome ? Maybe<TResult>.None : other;
         }
 
         public static Maybe<TSource> OnZero<TSource>(this Maybe<TSource> @this, Action action)

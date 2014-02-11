@@ -14,16 +14,31 @@ namespace Narvalo.Fx
      * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
      * access to some powerful (untold) monadic concepts in a very friendly way.
      * 
-     * Sample signature
-     * ----------------
+     * Sample monads
+     * -------------
      * 
-     * Core monad methods:
+     * + Nullable<T>, an additive monad
+     * + Maybe<T>, an additive monad
+     * + Identity<T>, a (co)monad
+     * + Output<T>
+     * + Either<TLeft, TRight>
+     * 
+     * Other monads:
+     * + Func<T>
+     * + Lazy<T>
+     * + Task<T>
+     * + IEnumerable<T>
+     * 
+     * Sample signatures
+     * -----------------
+     * 
+     * Monad definition:
      * + Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
      * + Monad<TResult> Map<TResult>(Func<T, TResult> selector)
      * + static Monad<T> Return(T value)
      * + static Monad<T> Join(Monad<Monad<T>> square)
      * 
-     * Core comonad methods:
+     * Comonad definition:
      * + Comonad<TResult> Cobind<TResult>(Func<Comonad<T>, TResult> kun)
      * + Comonad<TResult> Map<TResult>(Func<T, TResult> selector)
      * + static T Extract(Comonad<T> comonad)
@@ -37,7 +52,7 @@ namespace Narvalo.Fx
      * + [Meijer]: http://laser.inf.ethz.ch/2012/slides/Meijer/
      * + Stephen Toub on the Task Comonad:
      *   http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx
-     * + [Haskell] http://www.haskell.org/onlinereport/monad.html
+     * + [Haskell]: http://www.haskell.org/onlinereport/monad.html
      * 
      * Implementations in .NET:
      * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons

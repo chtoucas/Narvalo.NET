@@ -33,8 +33,6 @@ namespace Narvalo.Fx
 
         #region Monad extensions
 
-        /* NB: C# has native support for "Then" */
-
         public static TResult? Zip<TFirst, TSecond, TResult>(
             this TFirst? @this,
             TSecond? second,
@@ -58,7 +56,7 @@ namespace Narvalo.Fx
 
         #region Additive monad extensions
 
-        /* C# has native support for "Coalesce" and "Otherwise" */
+        /* C# has native support for "Coalesce", "Then" and "Otherwise" */
 
         public static TSource? OnZero<TSource>(this TSource? @this, Action action)
             where TSource : struct
