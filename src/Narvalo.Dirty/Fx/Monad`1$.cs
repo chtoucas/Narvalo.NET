@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     static partial class MonadExtensions
     {
-        #region Monads
+        #region Monad extensions
 
         //// Zip
 
@@ -29,7 +29,9 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(action.ToKunc()).Then(@this);
+            @this.Bind(action.ToKunc());
+
+            return @this;
         }
 
         //// Then
@@ -43,7 +45,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Additive Monads
+        #region Additive monad extensions
 
         //// Coalesce
 
@@ -76,40 +78,14 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
 
             // REVIEW
-            return @this.Otherwise(Monad.Unit).Bind(action.ToKunc()).Then(@this);
+            @this.Otherwise(Monad.Unit).Bind(action.ToKunc());
+
+             return @this;
         }
 
         #endregion
 
-        #region Monads w/ExtractOrElse
-
-        //// Match
-
-        public static TResult Match<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, TResult> selector,
-            TResult defaultValue)
-        {
-            Require.Object(@this);
-
-            // REVIEW
-            return @this.Map(selector).ExtractOrElse(defaultValue);
-        }
-
-        public static TResult Match<TSource, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, TResult> selector,
-            Func<TResult> defaultValueFactory)
-        {
-            Require.Object(@this);
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return @this.Match(selector, defaultValueFactory.Invoke());
-        }
-
-        #endregion
-
-        #region Monads: Higher forms of Zip (LiftM3...5)
+        #region Optional monad extensions: higher forms of Zip (LiftM3...5)
 
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
              this Monad<T1> @this,

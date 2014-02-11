@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class NullableExtensions
     {
-        //// Bind
+        #region Monad definition
 
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
@@ -20,8 +20,6 @@ namespace Narvalo.Fx
             return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
 
-        //// Map
-
         public static TResult? Map<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
@@ -30,7 +28,46 @@ namespace Narvalo.Fx
 
             return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
         }
-        
+
+        #endregion
+
+        #region Monad extensions
+
+        /* NB: C# has native support for "Then" */
+
+        public static TResult? Zip<TFirst, TSecond, TResult>(
+            this TFirst? @this,
+            TSecond? second,
+            Func<TFirst, TSecond, TResult> resultSelector)
+            where TFirst : struct
+            where TSecond : struct
+            where TResult : struct
+        {
+            return @this.HasValue && second.HasValue
+                ? (TResult?)resultSelector.Invoke(@this.Value, second.Value)
+                : null;
+        }
+
+        public static TSource? Run<TSource>(this TSource? @this, Action<TSource> action)
+            where TSource : struct
+        {
+            return OnValue(@this, action);
+        }
+
+        #endregion
+
+        #region Additive monad extensions
+
+        /* C# has native support for "Coalesce" and "Otherwise" */
+
+        public static TSource? OnZero<TSource>(this TSource? @this, Action action)
+            where TSource : struct
+        {
+            return OnNull(@this, action);
+        }
+
+        #endregion
+
         //// ValueOrThrow
 
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
@@ -53,30 +90,6 @@ namespace Narvalo.Fx
             return @this.Value;
         }
 
-        //// Match
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            TResult defaultValue)
-            where TSource : struct
-            where TResult : struct
-        {
-            return @this.Map(selector) ?? defaultValue;
-        }
-
-        public static TResult Match<TSource, TResult>(
-            this TSource? @this,
-            Func<TSource, TResult> selector,
-            Func<TResult> defaultValueFactory)
-            where TSource : struct
-            where TResult : struct
-        {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
-
-            return @this.Match(selector, defaultValueFactory.Invoke());
-        }
-
         //// ToMaybe
 
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
@@ -84,7 +97,7 @@ namespace Narvalo.Fx
             return Maybe.Create(@this);
         }
 
-        //// OnValue & OnNothing
+        //// OnValue & OnNull
 
         public static TSource? OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct

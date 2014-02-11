@@ -4,23 +4,23 @@ namespace Narvalo.Fx
 {
     static class MonadLaws
     {
-        #region > Les trois lois monadiques <
+        #region The three monadic laws
 
-        // Première loi (identité à gauche):
+        // First law: left identity
         //      return x >>= f      ==  f x
         static bool FirstLaw<X, Y>(Kunc<X, Y> f, X value)
         {
             return Monad.Return(value).Bind(f) == f(value);
         }
 
-        // Deuxième loi (identité à droite):
+        // Second law: right identity
         //     m >>= return        ==  m
         static bool SecondLaw<X>(Monad<X> m)
         {
             return m.Bind(Monad.Return) == m;
         }
 
-        // Troisième loi (associativité):
+        // Third law: associativity
         //      (m >>= f) >>= g     ==  m >>= (\x -> f x >>= g)
         static bool ThirdLaw<X, Y, Z>(Kunc<X, Y> g, Kunc<Y, Z> f, Monad<X> m)
         {
@@ -30,7 +30,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region > Catégorie de Kleisli <
+        #region Kleisli Category
 
         // Même si cela ne semble pas évident, cela équivaut à dire :
         //  - Unit est l'élément neutre

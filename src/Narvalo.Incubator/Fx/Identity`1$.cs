@@ -4,9 +4,12 @@ namespace Narvalo.Fx
 {
     using System;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="Narvalo.Fx.Identity{T}"/>.
+    /// </summary>
     static partial class IdentityExtensions
     {
-        //// Zip
+        #region Monad extensions
 
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
@@ -16,8 +19,6 @@ namespace Narvalo.Fx
             return @this.Bind(m1 => second.Map(m2 => resultSelector.Invoke(m1, m2)));
         }
 
-        //// Run
-
         public static Identity<TSource> Run<TSource>(this Identity<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
@@ -26,13 +27,13 @@ namespace Narvalo.Fx
             return @this.Bind(_ => { action.Invoke(_); return Identity.Unit; }).Then(@this);
         }
 
-        //// Then
-
         public static Identity<TResult> Then<TSource, TResult>(this Identity<TSource> @this, Identity<TResult> other)
         {
             Require.Object(@this);
 
             return @this.Bind(_ => other);
         }
+
+        #endregion
     }
 }

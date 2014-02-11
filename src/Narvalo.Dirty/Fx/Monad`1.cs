@@ -20,18 +20,12 @@ namespace Narvalo.Fx
      * Multiply | μ     |         | Join
      *          |       | LiftM2  | Zip
      *
-     * NB: This is an additive monad + ValueOrElse
+     * NB: This is an additive monad
      */
 
     sealed partial class Monad<T>
     {
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
-
-        // REVIEW
-        internal T ExtractOrElse(T defaultValue)
-        {
-            throw new NotImplementedException();
-        }
 
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
