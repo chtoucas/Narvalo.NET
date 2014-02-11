@@ -90,6 +90,20 @@
     </Compile>
     <Compile Include="Fx\Lazy.cs" />
     <Compile Include="Fx\Lazy`1%24.cs" />
+    <Compile Include="Fx\Skeleton\Action`%24.cs" />
+    <Compile Include="Fx\Skeleton\Cokunc`.cs" />
+    <Compile Include="Fx\Skeleton\Comonad.cs" />
+    <Compile Include="Fx\Skeleton\Comonad`1.cs" />
+    <Compile Include="Fx\Skeleton\Func`%24.cs" />
+    <Compile Include="Fx\Skeleton\Kunc`%24.cs" />
+    <Compile Include="Fx\Skeleton\Kunc`.cs" />
+    <Compile Include="Fx\Skeleton\Monad.cs" />
+    <Compile Include="Fx\Skeleton\MonadLaws.cs" />
+    <Compile Include="Fx\Skeleton\Monad`1%24.cs" />
+    <Compile Include="Fx\Skeleton\Monad`1.cs" />
+    <Compile Include="Fx\Skeleton\NamespaceDoc.cs" />
+    <Compile Include="Fx\Skeleton\Prelude.cs" />
+    <Compile Include="Fx\Skeleton\Stubs`.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SR.Designer.cs">

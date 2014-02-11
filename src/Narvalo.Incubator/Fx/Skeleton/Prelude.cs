@@ -1,11 +1,14 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Fx.Skeleton
 {
     using System;
 
-    // * TODO: http://www.haskell.org/onlinereport/monad.html
-    // * TODO: Match? Fail?
+    /*!
+     * References:
+     * + http://www.haskell.org/onlinereport/monad.html
+     */
+
     static class Prelude
     {
         #region Monad

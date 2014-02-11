@@ -1,40 +1,15 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+#define MONAD_VIA_BIND
+
+namespace Narvalo.Fx.Skeleton
 {
     using System;
 
-    /* WARNING: This is not meant to be a generic monad implementation.
-     *
-     * There are two equivalent ways to define a monad:
-     * - Haskell: Unit, Bind
-     * - Category: Unit, Map, Multiply
-     *
-     * Aliases:
-     *
-     * Name     | Maths | Haskell | What we will use
-     * ---------+-------+---------+
-     * Unit     | η     | Return  | Return (NB: sometimes we prefer to use a more appropriate name, like Create)
-     * Bind     |       | >>=     | Bind
-     * Map      |       | >>      | Map    (NB: this is the very Select of Linq)
-     * Multiply | μ     | Join    | Join
-     * 
-     * Additional methods
-     *          |       | LiftM2  | Zip
-     *          
-     * For MonadPlus        
-     *          |       | Mplus   | Plus
-     *
-     * NB: For the purpose of demonstration we define an additive monad (a MonadPlus): 
-     * - Zero.Plus(other) = other
-     * - other.Plus(Zero) = other
-     * or
-     * - Zero.Bind(kun) = Zero
-     * - other.Bind(_ => Zero) = Zero
-     */
-
     sealed class Monad<T>
     {
+        #region Monoid
+
         // mzero :: m a
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
@@ -43,6 +18,8 @@ namespace Narvalo.Fx
         {
             throw new NotImplementedException();
         }
+
+        #endregion
 
         // >>= :: m a -> (a -> m b) -> m b
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
@@ -59,10 +36,10 @@ namespace Narvalo.Fx
         // fmap :: Functor f => (a -> b) -> f a -> f b
         public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
-#if MONAD_VIA_MAP_MULTIPLY
-            throw new NotImplementedException();
-#else
+#if MONAD_VIA_BIND
             return Bind(_ => Monad<TResult>.η(fun.Invoke(_)));
+#else
+            throw new NotImplementedException();
 #endif
         }
 
@@ -75,11 +52,17 @@ namespace Narvalo.Fx
         // join :: Monad m => m (m a) -> m a
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
-#if MONAD_VIA_MAP_MULTIPLY
-            throw new NotImplementedException();
-#else
+#if MONAD_VIA_BIND
             return square.Bind(_ => _);
+#else
+            throw new NotImplementedException();
 #endif
+        }
+
+        // fail :: String -> m a
+        internal static Monad<T> Fail(string reason)
+        {
+            throw new NotImplementedException();
         }
     }
 }

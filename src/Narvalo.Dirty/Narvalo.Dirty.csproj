@@ -95,14 +95,6 @@
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
-    <Compile Include="Fx\Action`%24.cs" />
-    <Compile Include="Fx\Cokunc`.cs" />
-    <Compile Include="Fx\Comonad`1.cs" />
-    <Compile Include="Fx\Func`%24.cs" />
-    <Compile Include="Fx\Comonad.cs" />
-    <Compile Include="Fx\Prelude.cs" />
-    <Compile Include="Fx\Monad`1%24.cs" />
-    <Compile Include="Fx\Stubs`.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
@@ -151,11 +143,6 @@
     <Compile Include="Runtime\Reliability\ThrottleException.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\Kunc`%24.cs" />
-    <Compile Include="Fx\Kunc`.cs" />
-    <Compile Include="Fx\Monad.cs" />
-    <Compile Include="Fx\MonadLaws.cs" />
-    <Compile Include="Fx\Monad`1.cs" />
     <Compile Include="Security\IBidirectionalCryptoEngine.cs" />
     <Compile Include="ImageUtility.cs" />
     <Compile Include="Net\Mail\AttachmentCollection.cs" />
@@ -254,6 +241,7 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

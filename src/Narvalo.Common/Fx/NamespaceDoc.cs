@@ -17,9 +17,9 @@ namespace Narvalo.Fx
      * Sample monads
      * -------------
      * 
-     * + Nullable<T>, an additive monad
-     * + Maybe<T>, an additive monad
-     * + Identity<T>, a (co)monad
+     * + Nullable<T>        MonadOr & MonadZero
+     * + Maybe<T>           MonadOr & MonadZero
+     * + Identity<T>        Monad & Comonad
      * + Output<T>
      * + Either<TLeft, TRight>
      * 
@@ -27,18 +27,18 @@ namespace Narvalo.Fx
      * + Func<T>
      * + Lazy<T>
      * + Task<T>
-     * + IEnumerable<T>
+     * + IEnumerable<T>     MonadPlus & MonadZero
      * 
      * Sample signatures
      * -----------------
      * 
-     * Monad definition:
+     * Monad signature:
      * + Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
      * + Monad<TResult> Map<TResult>(Func<T, TResult> selector)
      * + static Monad<T> Return(T value)
      * + static Monad<T> Join(Monad<Monad<T>> square)
      * 
-     * Comonad definition:
+     * Comonad signature:
      * + Comonad<TResult> Cobind<TResult>(Func<Comonad<T>, TResult> kun)
      * + Comonad<TResult> Map<TResult>(Func<T, TResult> selector)
      * + static T Extract(Comonad<T> comonad)
