@@ -4,6 +4,10 @@ namespace Narvalo.Fx
 {
     using System;
 
+    /*!
+     * The tautologic monad. Useless in the context of C# but useful for the purpose of demonstration.
+     */
+
     public sealed partial class Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
     {
         readonly T _value;

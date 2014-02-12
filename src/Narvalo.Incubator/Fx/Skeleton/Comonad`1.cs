@@ -8,7 +8,7 @@ namespace Narvalo.Fx.Skeleton
 
     sealed class Comonad<T>
     {
-        public Comonad<TResult> Cobind<TResult>(Cokunc<T, TResult> cokun)
+        public Comonad<TResult> Extend<TResult>(Cokunc<T, TResult> cokun)
         {
 #if COMONAD_VIA_COBIND
             throw new NotImplementedException();
@@ -20,7 +20,7 @@ namespace Narvalo.Fx.Skeleton
         public Comonad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_COBIND
-            return Cobind(_ => fun(ε(_)));
+            return Extend(_ => fun(ε(_)));
 #else
             throw new NotImplementedException();
 #endif
@@ -34,7 +34,7 @@ namespace Narvalo.Fx.Skeleton
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
 #if COMONAD_VIA_COBIND
-            return monad.Cobind(_ => _);
+            return monad.Extend(_ => _);
 #else
             throw new NotImplementedException();
 #endif

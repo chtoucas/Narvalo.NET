@@ -7,7 +7,7 @@ namespace Narvalo.Fx
 
     public partial class Identity<T>
     {
-        public Identity<TResult> Cobind<TResult>(Func<Identity<T>, TResult> fun)
+        public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> fun)
         {
             Require.NotNull(fun, "fun");
 

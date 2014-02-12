@@ -10,14 +10,23 @@ namespace Narvalo.Fx.Skeleton
     {
         #region Monad with a Zero
 
-        // mzero :: m a
+        // [Haskell] mzero
+        // The identity of mplus.
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
         public bool IsZero { get { throw new NotImplementedException(); } }
 
+        // [Haskell] mplus
+        // An associative operation.
+        public Monad<T> Plus(Monad<T> other)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
-        // >>= :: m a -> (a -> m b) -> m b
+        // [Haskell] >>=
+        // Sequentially compose two actions, passing any value produced by the first as an argument to the second.
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
 #if MONAD_VIA_BIND
@@ -27,9 +36,9 @@ namespace Narvalo.Fx.Skeleton
 #endif
         }
 
-        // >> :: m a -> m b -> m b
-        // liftM :: Monad m => (a -> b) -> (m a -> m b)
-        // fmap :: Functor f => (a -> b) -> f a -> f b
+        // [Haskell] >>
+        // Sequentially compose two actions, discarding any value produced by the first, 
+        // like sequencing operators (such as the semicolon) in imperative languages.
         public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if MONAD_VIA_BIND
@@ -39,19 +48,24 @@ namespace Narvalo.Fx.Skeleton
 #endif
         }
 
-        // fail :: String -> m a
+        // [Haskell] fail
+        // Fail with a message. This operation is not part of the mathematical definition of a monad,
+        // but is invoked on pattern-match failure in a do expression.
         public Monad<T> Otherwise()
         {
             throw new NotImplementedException();
         }
 
-        // return :: Monad m => a -> m a
+        // [Haskell] return
+        // Inject a value into the monadic type.
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
-        // join :: Monad m => m (m a) -> m a
+        // [Haskell] join
+        // The join function is the conventional monad join operator. It is used to remove 
+        // one level of monadic structure, projecting its bound argument into the outer level.
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_BIND

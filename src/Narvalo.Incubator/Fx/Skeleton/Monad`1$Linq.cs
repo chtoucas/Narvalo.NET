@@ -7,7 +7,7 @@ namespace Narvalo.Fx.Skeleton
 
     static partial class MonadExtensions
     {
-        //// Restriction Operators
+        #region Restriction Operators
 
         public static Monad<TSource> Where<TSource>(this Monad<TSource> @this, Func<TSource, bool> predicate)
         {
@@ -17,7 +17,9 @@ namespace Narvalo.Fx.Skeleton
             return @this.Bind(_ => predicate.Invoke(_) ? @this : @this.Otherwise());
         }
 
-        //// Projection Operators
+        #endregion
+
+        #region Projection Operators
 
         public static Monad<TResult> Select<TSource, TResult>(this Monad<TSource> @this, Func<TSource, TResult> selector)
         {
@@ -38,7 +40,9 @@ namespace Narvalo.Fx.Skeleton
             return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
         }
 
-        //// Join Operators
+        #endregion
+
+        #region Join Operators
 
         public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
             this Monad<TSource> @this,
@@ -66,5 +70,7 @@ namespace Narvalo.Fx.Skeleton
 
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

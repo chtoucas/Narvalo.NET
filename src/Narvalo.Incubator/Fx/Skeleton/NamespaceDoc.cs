@@ -10,63 +10,18 @@ namespace Narvalo.Fx.Skeleton
      *
      * A word of caution
      * -----------------
-     *
      * The classes found here exist for the sole purpose of demonstration.
-     * It is NOT meant to be a generic monad implementation.
-     * In the future I might use this work as a base for writing T4 templates.
+     * It is NOT meant to be a generic monad implementation, anyway this is not possible in C#.
+     * I did this as a learning exercise, but I might use this work as a base for writing T4 templates.
      *
-     *
-     * A useful picture
-     * ----------------
-     * 
-     * In the remaining of the discussion, we shall use two simple pictures to illustrate the discussion.
-     * 
-     * From the Arithmetic,
-     * - Bind is *
-     * - Zero is 0
-     * - Plus is +
-     * 
-     * From the Boolean Algebra,
-     * - Bind is ∧, the logical conjunction AND
-     * - Zero is False
-     * - Unit is True
-     * - Plus is ∨, the logical disjunction OR
-     * 
      * 
      * Monoid
      * ======
      *
-     * A Monoid has a Zero and a Plus operation that satisfy the Monoid laws:
-     * - Zero is a left identity for Plus
-     *      Zero.Plus(monad) = monad
-     * - Zero is a right identity for Plus
-     *      monad.Plus(Zero) = monad
-     * - Plus is associative
-     *      one.Plus(two.Plus(three)) = (one.Plus(two)).Plus(three)
-     *
-     * Arithmetic correspondence:
-     * - 0 + x = x
-     * - x + 0 = x
-     * - x + (y + z) = (x + y) + z
-     *
-     * Boolean Algebra correspondence:
-     * - False ∨ P = P
-     * - P ∨ False = P
-     * - P ∨ (Q ∨ R) = (P ∨ Q) ∨ z
-     *
-     * Terminology
-     * -----------
-     * 
-     * Name     | Haskell | Terminology used here
-     * ---------+---------+----------------------
-     * Zero     | mzero   | Zero    (NB: Sometimes we prefer to use a more appropriate name, like None, Failure,...)
-     * Plus     | mplus   | Compose
-     *
-     * Signatures
-     * ----------
-     * static Monoid<T> Zero
-     *        Monoid<T> Compose(Monoid<T> other)
-     * 
+     * A Monoid has an Empty element and an Append operation that satisfy the Monoid laws:
+     * - Empty is the identity for Append
+     * - Append is associative
+     * Haskell also includes a Concat operation which in fact derives from Empty and Append: FoldR Append Empty.
      * 
      * Monad
      * =====
@@ -77,32 +32,13 @@ namespace Narvalo.Fx.Skeleton
      * NB: The constant MONAD_VIA_BIND allows to switch between both approachs.
      *
      * The Unit and Bind operations must satisfy the three monad laws: 
-     * - Unit is a left and right identity for Bind
+     * - Unit is the identity for Bind
      * - Bind is associative
      * 
      * NB: Haskell also defines a fail method that is not part of the standard definition.
      * Here we will provide a similar function but named Otherwise to emphasize its use
      * in pattern matching failure. Contrary to the Haskell convention, the signature of
-     * the method shall depend on the particular monad under consideration.
-     * 
-     * Terminology
-     * -----------
-     *
-     * Name     | Maths | Haskell | Terminology used here
-     * ---------+-------+---------+----------------------
-     * Unit     | η     | return  | Return    (NB: Sometimes we prefer to use a more appropriate name, like Create, Success,...)
-     * Bind     |       | >>=     | Bind
-     * Map      |       | >>      | Map       (NB: The Select of Linq)
-     * Multiply | μ     | join    | Flatten   (NB: We do not use Join to not conflict with the Linq Join)
-     *          |       | fail    | Otherwise
-     * 
-     * Signatures
-     * ----------
-     * 
-     * static Monad<T>        Return(T value)
-     *        Monad<TResult>  Bind<TResult>(Func<T, Monad<TResult>> kun)
-     *        Monad<TResult>  Map<TResult>(Func<T, TResult> selector)
-     * static Monad<T>        Flatten(Monad<Monad<T>> square)
+     * the method will depend on the particular monad under consideration.
      * 
      *
      * Comonad
@@ -111,100 +47,236 @@ namespace Narvalo.Fx.Skeleton
      * There are two equivalent ways to define a comonad:
      * - Haskell: Counit, Cobind
      * - Category: Counit, Map, Comultiply
-     *
-     * Terminology
-     * -----------
-     *
-     * Name       | Maths | Haskell   | Terminology used here
-     * -----------+-------+-----------+----------------------
-     * Counit     | ε     | Extract   | Extract
-     * Cobind     |       | Extend    | Cobind
-     * Map        |       |           | Map
-     * Comultiply | δ     | Duplicate | Duplicate
-     *
-     * Signatures
-     * ----------
-     * 
-     * static T                   Extract(Comonad<T> comonad)
-     *        Comonad<TResult>    Cobind<TResult>(Func<Comonad<T>, TResult> kun)
-     *        Comonad<TResult>    Map<TResult>(Func<T, TResult> selector)
-     * static Comonad<Comonad<T>> Duplicate(Comonad<T> comonad)
+     * NB: The constant COMONAD_VIA_COBIND allows to switch between both approachs.
      * 
      *
      * MonadZero
      * =========
      *
-     * A MonadZero is a Monad and Zero is a left zero for Bind:
-     *      Zero.Bind(kun) = Zero
+     * A MonadZero is a Monad with a left zero for Bind.
      *
-     * Arithmetic correspondence:
-     *      0 * x = 0
-     * Boolean Algebra correspondence:
-     *      False ∧ P = False
-     *
-     *
-     * AdditiveMonad
+     * 
+     * Monad + Monoid
      * ==============
+     * 
+     * We follow (mostly) the proposed new terminology from the MonadPlus Reform.
+     * 
+     * MonadMore
+     * ---------
+     * A MonadMore is a Monad which is also a Monoid.
      *
-     * An Additive Monad, AdditiveMonad, is a Monad that is also a Monoid.
-     * It appears that most Additive Monads are also MonadZero.
-     *
-     *
+     * 
+     * MonadMost
+     * ---------
+     * A MonadMore for which Zero is a zero for Bind too.
+     * This is what Haskell normaly calls a MonadPlus.
+     * 
      * MonadPlus
-     * =========
-     *
-     * A MonadPlus is an Additive Monad for which Bind is right distributive over Plus:
-     *      one.Plus(second).Bind(kun) = one.Bind(kun).Plus(second.Bind(kun))
-     *
-     * Arithmetic correspondence:
-     *      (x + y) * z = (x * z) + (x * z)
-     *
-     *
+     * ---------
+     * A MonadPlus is a MonadMore for which Bind is right distributive over Plus.
+     * REVIEW: Haskell uses the term left distributive. Am I missing something?
+     * 
      * MonadOr
-     * =======
-     *
-     * A MonadOr is an Additive Monad for which Unit is a left zero for Plus:
-     *      Unit(value).Plus(other) = Unit(value)
-     *
-     * Boolean Algebra correspondence:
-     *      True ∨ P = True
-     *
-     *
+     * -------
+     * A MonadOr is a MonadMore for which Unit is a left zero for Plus, in which case we prefer 
+     * to use OrElse instead of Plus.
+     *                    
+     * 
      * Summary
      * =======
      *
-     * Haskell uses the term MonadPlus for what we call an Additive Monad.
-     * We follow (mostly) the proposed new terminology from the MonadPlus Reform.
+     * - Monoid                     (Plus + Zero)
+     * - Monad                      (Bind + Unit)
+     * - Comonad                    (Cobind + Counit)
+     * - MonadZero                  Monad + Left zero for Bind
+     * - MonadMore                  Monad + Monoid
+     * - MonadMost                  MonadMore + Zero for Bind 
+     * - MonadPlus                  MonadMore + Right distributivity
+     * - MonadOr                    MonadMore + Left zero for Plus
      * 
-     * - Monoid:        Plus + Zero
-     * - Monad:         Bind + Unit
-     * - Comonad:       Cobind + Counit
-     * - MonadZero:     Monad + Zero = Left Zero for Bind
-     * - AdditiveMonad: Monad + Monoid
-     * - MonadPlus:     AdditiveMonad + Right Distribution
-     * - MonadOr:       AdditiveMonad + Unit = Left Zero for Plus
      *
      * Sample monads
-     * -------------
+     * =============
      * 
-     * + Nullable<T>                MonadOr + MonadZero
-     * + Maybe<T>                   MonadOr + MonadZero
-     * + Identity<T>                Monad + Comonad
-     * + Output<T>                  Monad
-     * + Either<TLeft, TRight>      Monad
+     * Already in the Framework:
+     * - Nullable<T>                MonadOr + MonadZero
+     * - Func<T>
+     * - Lazy<T>                    Monad + Comonad (?)       
+     * - Task<T>                    Monad + Comonad (?)       
+     * - IEnumerable<T>             MonadPlus + MonadZero (?)       
      * 
-     * Other monads:
-     * + Func<T>
-     * + Lazy<T>
-     * + Task<T>
-     * + IEnumerable<T>             MonadPlus + MonadZero
+     * Things I am working on:
+     * - Identity<T>                Monad + Comonad
+     * - Maybe<T>                   MonadOr + MonadZero
+     * - Output<T>                  Monad
+     * - Either<TLeft, TRight>      Monad
+     * 
+     * 
+     * Illustration
+     * ============
+     * 
+     * We provide two simple analogies to illustrate the rules.
+     * 
+     * From the Arithmetic,
+     * - Bind is *
+     * - Plus is +
+     * - Unit is 1
+     * - Zero is 0
+     * 
+     * From the Boolean Algebra,
+     * - Bind is ∧, the logical conjunction AND
+     * - Plus is ∨, the logical disjunction OR
+     * - Unit is True
+     * - Zero is False
+     * 
+     * .NET
+     * ----
+     * - Zero.Plus(m) = m                                       [Monoid] Left identity
+     * - m.Plus(Zero) = m                                       [Monoid] Right identity
+     * - m.Plus(p.Plus(q)) = (m.Plus(p)).Plus(q)                [Monoid] Associativity
+     * - Unit(_).Bind(f) = f(_)                                 [Monad] Left identity
+     * - m.Bind(Unit) == m                                      [Monad] Right identity
+     * - m.Bind(f).Bind(g) == m.Bind(_ => f(_).Bind(g))         [Monad] Associativity
+     * - Zero.Bind(f) = Zero                                    [MonadZero] Left zero
+     * - m.Bind(_ => Zero) = Zero                               [MonodMost] Right zero
+     * - m.Plus(p).Bind(kun) = m.Bind(kun).Plus(p.Bind(kun))    [MonadPlus] Right distributivity
+     * -                                                        [...] Left distributivity
+     * - Unit(_).Plus(other) = Unit(_)                          [MonadOr] Left zero
+     * - other.Plus(Unit(_)) = Unit(_)                          [...] Right zero
+     *      
+     * Haskell
+     * -------
+     * - mplus mzero m = m                                      [Monoid] Left identity
+     * - mplus m mzero = m                                      [Monoid] Right identity
+     * - mplus a (mplus b c) = mplus (mplus a b) c              [Monoid] Associativity
+     * - return x >>= f = f x                                   [Monad] Left identity               First Monad law
+     *   return >=> g ≡ g                                                                           Kleisli version
+     * - m >>= return = m                                       [Monad] Right identity              Second Monad law
+     *   f >=> return ≡ f                                                                           Kleisli version
+     * - (m >>= f) >>= g = m >>= (\x -> f x >>= g)              [Monad] Associativity               Third Monad law
+     *   (f >=> g) >=> h ≡ f >=> (g >=> h)                                                          Kleisli version
+     * - mzero >>= f = mzero                                    [MonadZero] Left zero
+     * - m >>= (\x -> mzero) = mzero                            [MonadMost] Right zero
+     * - mplus a b >>= f = mplus (a >>= f) (b >>= f)            [MonadPlus] Right distributivity
+     * -                                                        [...] Left distributivity
+     * - morelse (return a) b ≡ return a                        [MonadOr] Left zero
+     * - morelse a (return b) ≡ return b                        [...] Right zero
+     *      
+     * Arithmetic
+     * ----------
+     * - 0 + x = x                                              [Monoid] Left identity
+     * - x + 0 = x                                              [Monoid] Right identity
+     * - x + (y + z) = (x + y) + z                              [Monoid] Associativity
+     * - 1 * x = x                                              [Monad] Left identity
+     * - x * 1 = x                                              [Monad] Right identity
+     * - x * (y * z) = (x * y) * z                              [Monad] Associativity
+     * - 0 * x = 0                                              [MonadZero] Left zero
+     * - x * 0 = 0                                              [MonadMost] Right zero
+     * - (x + y) * z = x * z + x * z                            [MonadPlus] Right distributivity
+     * - x * (y + z) = x * y + x * z                            [...] Left distributivity
+     * - (not available)                                        [MonadOr] Left zero
+     * - (not available)                                        [...] Right zero
+     * 
+     * Boolean Algebra
+     * ---------------
+     * - False ∨ P = P                                          [Monoid] Left identity
+     * - P ∨ False = P                                          [Monoid] Right identity
+     * - P ∨ (Q ∨ R) = (P ∨ Q) ∨ z                            [Monoid] Associativity
+     * - True ∧ P = P                                           [Monad] Left identity
+     * - P ∧ True = P                                           [Monad] Right identity
+     * - P ∧ (Q ∧ R) = (P ∧ Q) ∧ z                            [Monad] Associativity
+     * - False ∧ P = False                                      [MonadZero] Left zero
+     * - P ∧ False = False                                      [MonadMost] Right zero
+     * -                                                        [MonadPlus] Right distributivity
+     * - P ∧ (Q ∨ R) = (P ∧ Q) ∨ (P ∧ R)                      [...] Left distributivity
+     * - True ∨ P = True                                        [MonadOr] Left zero
+     * - P ∨ True = True                                        [...] Right zero
      *
+     * 
+     * Terminology
+     * ===========
+     * 
+     * Name           | Haskell       | Terminology used here
+     * ---------------+---------------+------------------------------------
+     * Unit (η)       | return        | Return      or Create, Success,...
+     * Bind           | >>=           | Bind
+     * Map            | >>            | Map
+     * Multiply (μ)   | join          | Flatten
+     *                | fail          | Otherwise
+     * ---------------+---------------+------------------------------------
+     * Zero           | mzero         | Zero        or None, Failure,...
+     * Plus           | mplus         | Plus        or OrElse,...
+     * ---------------+---------------+------------------------------------
+     * Counit (ε)     | extract       | Extract
+     * Cobind         | extend        | Extend
+     * Map            |               | Map
+     * Comultiply (δ) | duplicate     | Duplicate
+     * 
+     * NB:
+     * - Sometimes we choose a more appropriate name than the default one
+     * - Map is the Select found in Linq
+     * 
+     * 
+     * File Organization
+     * =================
+     * 
+     * Monad
+     *      Monad<T>.Bind           (>>=) :: forall a b. m a -> (a -> m b) -> m b
+     *      Monad<T>.Map            (>>) :: forall a b. m a -> m b -> m b
+     *      Monad.Return            return :: a -> m a
+     *      Monad<T>.Otherwise      fail :: String -> m a
+     * 
+     * MonadPlus
+     *      Monad<T>.Zero           mzero :: m a
+     *      Monad<T>.Compose        mplus :: m a -> m a -> m a
+     *      
+     * Basic Monad functions
+     *                              mapM :: Monad m => (a -> m b) -> [a] -> m [b]
+     *                              mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
+     *                              forM :: Monad m => [a] -> (a -> m b) -> m [b]
+     *                              forM_ :: Monad m => [a] -> (a -> m b) -> m ()
+     *                              sequence :: Monad m => [m a] -> m [a]
+     *                              sequence_ :: Monad m => [m a] -> m ()
+     *                              (=<<) :: Monad m => (a -> m b) -> m a -> m b
+     *      @Kunc<T>.Compose        (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+     *      @Kunc<T>.ComposeBack    (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+     *                              forever :: Monad m => m a -> m b
+     *                              void :: Functor f => f a -> f ()
+     *                          
+     * Generalisations of list functions
+     *      Monad.Flatten           join :: Monad m => m (m a) -> m a
+     *                              msum :: MonadPlus m => [m a] -> m a
+     *                              mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
+     *                              filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
+     *                              mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
+     *                              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
+     *                              zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()
+     *                              foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
+     *                              foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()
+     *                              replicateM :: Monad m => Int -> m a -> m [a]
+     *                              replicateM_ :: Monad m => Int -> m a -> m ()
+     * 
+     * Conditional execution of monadic expressions
+     *      @Monad<T>.Guard         guard :: MonadPlus m => Bool -> m ()
+     *      @Monad<T>.When          when :: Monad m => Bool -> m () -> m ()
+     *      @Monad<T>.Unless        unless :: Monad m => Bool -> m () -> m ()
+     *      
+     * Monadic lifting operators
+     *      @Monad<T>.Zip           liftM :: Monad m => (a1 -> r) -> m a1 -> m r
+     *      @Monad<T>.Zip           liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
+     *      @Monad<T>.Zip           liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
+     *      @Monad<T>.Zip           liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
+     *      @Monad<T>.Zip           liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
+     *                              ap :: Monad m => m (a -> b) -> m a -> m b
+     *       
      * 
      * References
      * ==========
      *
+     * + [Haskell]: http://www.haskell.org/onlinereport/monad.html
      * + [MonadPlus]: http://www.haskell.org/haskellwiki/MonadPlus
      * + [MonadPlus Reform]: http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal
+     * + [Control.Monad]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html
      */
 
     [CompilerGeneratedAttribute]

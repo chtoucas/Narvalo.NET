@@ -4,6 +4,8 @@ namespace Narvalo.Fx.Skeleton
 {
     static class KuncExtensions
     {
+        // [Haskell] >=>
+        // Left-to-right Kleisli composition of monads.
         public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
             this Kunc<TSource, TMiddle> @this,
             Kunc<TMiddle, TResult> kun)
@@ -11,6 +13,17 @@ namespace Narvalo.Fx.Skeleton
             Require.Object(@this);
 
             return _ => @this.Invoke(_).Bind(kun);
+        }
+
+        // [Haskell] <=<
+        // Right-to-left Kleisli composition of monads. (>=>), with the arguments flipped.
+        public static Kunc<TSource, TResult> ComposeBack<TSource, TMiddle, TResult>(
+            this Kunc<TMiddle, TResult> @this,
+            Kunc<TSource, TMiddle> kun)
+        {
+            Require.Object(kun);
+
+            return _ => kun.Invoke(_).Bind(@this);
         }
 
         public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
