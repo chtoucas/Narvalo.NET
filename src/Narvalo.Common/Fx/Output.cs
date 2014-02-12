@@ -22,9 +22,9 @@ namespace Narvalo.Fx
             return Output<T>.η(exceptionInfo);
         }
 
-        //// Join
+        //// Flatten
 
-        public static Output<T> Join<T>(Output<Output<T>> square)
+        public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             return Output<T>.μ(square);
         }

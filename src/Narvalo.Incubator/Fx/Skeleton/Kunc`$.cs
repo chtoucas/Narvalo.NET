@@ -4,8 +4,6 @@ namespace Narvalo.Fx.Skeleton
 {
     static class KuncExtensions
     {
-        //// Compose
-
         public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
             this Kunc<TSource, TMiddle> @this,
             Kunc<TMiddle, TResult> kun)
@@ -14,8 +12,6 @@ namespace Narvalo.Fx.Skeleton
 
             return _ => @this.Invoke(_).Bind(kun);
         }
-
-        //// Filter
 
         public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
         {

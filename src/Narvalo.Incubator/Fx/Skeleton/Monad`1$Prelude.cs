@@ -4,12 +4,7 @@ namespace Narvalo.Fx.Skeleton
 {
     using System;
 
-    /*!
-     * References:
-     * + http://www.haskell.org/onlinereport/monad.html
-     */
-
-    static class Prelude
+    static partial class MonadExtensions
     {
         #region Monad
 
@@ -96,7 +91,7 @@ namespace Narvalo.Fx.Skeleton
 
         #endregion
 
-        #region MonadPlus
+        #region AdditiveMonad
 
         // guard :: :: MonadPlus m => Bool -> m ()
         public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)

@@ -36,5 +36,10 @@ namespace Narvalo.Fx
 
             return square._value;
         }
+
+        internal static Identity<T> Fail(string reason)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

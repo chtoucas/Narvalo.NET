@@ -23,9 +23,9 @@ namespace Narvalo.Fx
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
 
-        //// Join
+        //// Flatten
 
-        public static Maybe<T> Join<T>(Maybe<Maybe<T>> square)
+        public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
         {
             return Maybe<T>.μ(square);
         }

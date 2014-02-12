@@ -3,13 +3,14 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Nullable{T}"/>.
     /// </summary>
     public static partial class NullableExtensions
     {
-        #region Monad definition
+        #region Monad
 
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
@@ -29,9 +30,16 @@ namespace Narvalo.Fx
             return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        public static Maybe<TSource> Otherwise<TSource>(this TSource? @this)
+            where TSource : struct
+        {
+            return null;
+        }
+
         #endregion
 
-        #region Monad extensions
+        #region Monad Prelude
 
         public static TResult? Zip<TFirst, TSecond, TResult>(
             this TFirst? @this,
@@ -46,23 +54,23 @@ namespace Narvalo.Fx
                 : null;
         }
 
+        #endregion
+
+        #region MonadZero
+
         public static TSource? Run<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
             return OnValue(@this, action);
         }
 
-        #endregion
-
-        #region Additive monad extensions
-
-        /* C# has native support for "Coalesce", "Then" and "Otherwise" */
-
         public static TSource? OnZero<TSource>(this TSource? @this, Action action)
             where TSource : struct
         {
             return OnNull(@this, action);
         }
+
+        /* C# has native support for "Then", "Otherwise" and "Coalesce" */
 
         #endregion
 

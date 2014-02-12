@@ -11,7 +11,7 @@ namespace Narvalo.Fx
         //    return new Lazy<T>(valueFactory);
         //}
 
-        //public static Lazy<T> Join<T>(Lazy<Lazy<T>> square)
+        //public static Lazy<T> Flatten<T>(Lazy<Lazy<T>> square)
         //{
         //    return square.Value;
         //}

@@ -14,35 +14,6 @@ namespace Narvalo.Fx
      * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
      * access to some powerful (untold) monadic concepts in a very friendly way.
      * 
-     * Sample monads
-     * -------------
-     * 
-     * + Nullable<T>        MonadOr & MonadZero
-     * + Maybe<T>           MonadOr & MonadZero
-     * + Identity<T>        Monad & Comonad
-     * + Output<T>
-     * + Either<TLeft, TRight>
-     * 
-     * Other monads:
-     * + Func<T>
-     * + Lazy<T>
-     * + Task<T>
-     * + IEnumerable<T>     MonadPlus & MonadZero
-     * 
-     * Sample signatures
-     * -----------------
-     * 
-     * Monad signature:
-     * + Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
-     * + Monad<TResult> Map<TResult>(Func<T, TResult> selector)
-     * + static Monad<T> Return(T value)
-     * + static Monad<T> Join(Monad<Monad<T>> square)
-     * 
-     * Comonad signature:
-     * + Comonad<TResult> Cobind<TResult>(Func<Comonad<T>, TResult> kun)
-     * + Comonad<TResult> Map<TResult>(Func<T, TResult> selector)
-     * + static T Extract(Comonad<T> comonad)
-     * + static Comonad<Comonad<T>> Duplicate(Comonad<T> comonad)
      * 
      * References
      * ----------

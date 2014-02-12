@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Skeleton
             return Monad<T>.η(value);
         }
 
-        public static Monad<T> Join<T>(Monad<Monad<T>> square)
+        public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
         {
             return Monad<T>.μ(square);
         }

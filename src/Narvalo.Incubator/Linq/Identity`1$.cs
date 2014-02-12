@@ -8,7 +8,7 @@ namespace Narvalo.Linq
     /// <summary>
     /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Fx.Identity&lt;T&gt;"/>.
     /// </summary>
-    public static class NullableExtensions
+    public static class IdentityExtensions
     {
        //// Restriction Operators
 
@@ -19,7 +19,7 @@ namespace Narvalo.Linq
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Map(predicate).Then(@this);
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : Identity<TSource>.Fail(reason: String.Empty));
         }
 
         //// Projection Operators

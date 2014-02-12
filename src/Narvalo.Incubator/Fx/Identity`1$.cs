@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     /// </summary>
     static partial class IdentityExtensions
     {
-        #region Monad extensions
+        #region Monad Prelude
 
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
@@ -18,6 +18,8 @@ namespace Narvalo.Fx
         {
             return @this.Bind(m1 => second.Map(m2 => resultSelector.Invoke(m1, m2)));
         }
+
+        #endregion
 
         public static Identity<TSource> Run<TSource>(this Identity<TSource> @this, Action<TSource> action)
         {
@@ -28,7 +30,5 @@ namespace Narvalo.Fx
 
             return @this;
         }
-
-        #endregion
     }
 }

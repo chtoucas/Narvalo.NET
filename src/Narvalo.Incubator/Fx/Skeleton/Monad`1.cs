@@ -8,16 +8,12 @@ namespace Narvalo.Fx.Skeleton
 
     sealed class Monad<T>
     {
-        #region Monoid
+        #region Monad with a Zero
 
         // mzero :: m a
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
-        // mplus :: m a -> m a -> m a
-        public Monad<T> Plus(Monad<T> other)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsZero { get { throw new NotImplementedException(); } }
 
         #endregion
 
@@ -43,6 +39,12 @@ namespace Narvalo.Fx.Skeleton
 #endif
         }
 
+        // fail :: String -> m a
+        public Monad<T> Otherwise()
+        {
+            throw new NotImplementedException();
+        }
+
         // return :: Monad m => a -> m a
         internal static Monad<T> η(T value)
         {
@@ -57,12 +59,6 @@ namespace Narvalo.Fx.Skeleton
 #else
             throw new NotImplementedException();
 #endif
-        }
-
-        // fail :: String -> m a
-        internal static Monad<T> Fail(string reason)
-        {
-            throw new NotImplementedException();
         }
     }
 }

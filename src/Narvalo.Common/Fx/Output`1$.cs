@@ -10,7 +10,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class OutputExtensions
     {
-        #region Monad extensions
+        #region Monad Prelude
 
         public static Output<TResult> Zip<TFirst, TSecond, TResult>(
             this Output<TFirst> @this,
@@ -20,14 +20,19 @@ namespace Narvalo.Fx
             return @this.Bind(firstValue => second.Map(secondValue => resultSelector.Invoke(firstValue, secondValue)));
         }
 
+        #endregion
+
+        #region Weak MonadZero
+
         public static Output<TSource> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
         {
             return OnSuccess(@this, action);
         }
 
-        #endregion
-
-        //// Coalesce
+        public static Output<TSource> OnZero<TSource>(this Output<TSource> @this, Action<ExceptionDispatchInfo> action)
+        {
+            return OnFailure(@this, action);
+        }
 
         public static Output<TResult> Coalesce<TSource, TResult>(
             this Output<TSource> @this,
@@ -38,6 +43,8 @@ namespace Narvalo.Fx
 
             return @this.IsSuccess ? whenSuccess : whenFailure;
         }
+
+        #endregion
 
         //// OnSuccess & OnFailure
 

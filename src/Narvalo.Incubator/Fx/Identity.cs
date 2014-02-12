@@ -15,9 +15,9 @@ namespace Narvalo.Fx
             return Identity<T>.η(value);
         }
 
-        //// Join
+        //// Flatten
 
-        public static Identity<T> Join<T>(Identity<Identity<T>> square)
+        public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
         {
             return Identity<T>.μ(square);
         }
