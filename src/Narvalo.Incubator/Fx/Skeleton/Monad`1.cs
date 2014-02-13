@@ -8,13 +8,11 @@ namespace Narvalo.Fx.Skeleton
 
     sealed class Monad<T>
     {
-        #region Monad with a Zero
+        #region MonadMore
 
         // [Haskell] mzero
         // The identity of mplus.
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
-
-        public bool IsZero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
         // An associative operation.

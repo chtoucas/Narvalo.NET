@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Fx
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
@@ -86,14 +88,62 @@
 
         #endregion
 
+        #region Monoid Laws
+
+        [Fact]
+        public static void SatisfiesFirstMonoidLaw()
+        {
+            // Arrange
+            var option = Maybe.Create(1);
+
+            // Act
+            var left = Maybe<int>.None.OrElse(option);
+            var right = option;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void SatisfiesSecondMonoidLaw()
+        {
+            // Arrange
+            var option = Maybe.Create(1);
+
+            // Act
+            var left = option.OrElse(Maybe<int>.None);
+            var right = option;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void SatisfiesThirdMonoidLaw()
+        {
+            // Arrange
+            var optionA = Maybe.Create(1);
+            var optionB = Maybe.Create(2);
+            var optionC = Maybe.Create(3);
+
+            // Act
+            var left = optionA.OrElse(optionB.OrElse(optionC));
+            var right = optionA.OrElse(optionB).OrElse(optionC);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        #endregion
+
         #region Monad laws
 
         [Fact]
         public static void SatisfiesFirstMonadLaw()
         {
             // Arrange
-            var value = 1;
-            Func<int, Maybe<int>> kun = _ => Maybe.Create(2 * _);
+            int value = 1;
+            Func<int, Maybe<long>> kun = _ => Maybe.Create((long)2 * _);
 
             // Act
             var left = Maybe.Create(value).Bind(kun);
@@ -108,10 +158,11 @@
         {
             // Arrange
             Func<int, Maybe<int>> create = _ => Maybe.Create(_);
+            var option = Maybe.Create(1);
 
             // Act
-            var right = Maybe.Create(1);
-            var left = right.Bind(create);
+            var left = option.Bind(create);
+            var right = option;
 
             // Assert
             Assert.True(left.Equals(right));
@@ -121,16 +172,87 @@
         public static void SatisfiesThirdMonadLaw()
         {
             // Arrange
-            var m = Maybe.Create(1);
-            Func<int, Maybe<int>> f = _ => Maybe.Create(2 * _);
-            Func<int, Maybe<int>> g = _ => Maybe.Create(3 * _);
+            Maybe<short> m = Maybe.Create((short)1);
+            Func<short, Maybe<int>> f = _ => Maybe.Create((int)3 * _);
+            Func<int, Maybe<long>> g = _ => Maybe.Create((long)2 * _);
 
             // Act
-            var left = m.Bind(g).Bind(f);
-            var right = m.Bind(_ => g(_).Bind(f));
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(_ => f(_).Bind(g));
 
             // Assert
             Assert.True(left.Equals(right));
+        }
+
+        #endregion
+
+        #region MonadZero rule
+
+        [Fact]
+        public static void SatisfiesMonadZeroRule()
+        {
+            // Arrange
+            Func<int, Maybe<long>> kun = _ => Maybe.Create((long)2 * _);
+
+            // Act
+            var left = Maybe<int>.None.Bind(kun);
+            var right = Maybe<long>.None;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        #endregion
+
+        #region MonadMore rule
+
+        [Fact]
+        public static void SatisfiesMonadMoreRule()
+        {
+            // Act
+            var leftSome = Maybe.Create(1).Bind(_ => Maybe<int>.None);
+            var leftNone = Maybe<int>.None.Bind(_ => Maybe<int>.None);
+            var right = Maybe<int>.None;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        #endregion
+
+        #region MonadOr rule
+
+        [Fact]
+        public static void SatisfiesMonadOrRule()
+        {
+            // Arrange
+            var option = Maybe.Create(2);
+
+            // Act
+            var leftSome = option.OrElse(Maybe.Create(1));
+            var leftNone = option.OrElse(Maybe<int>.None);
+            var right = option;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        [Fact]
+        public static void DoesNotSatisfyRightZeroForPlus()
+        {
+            // Arrange
+            var option = Maybe.Create(2);
+
+            // Act
+            var leftSome = Maybe.Create(1).OrElse(option);
+            var leftNone = Maybe<int>.None.OrElse(option);
+            var right = option;
+
+            // Assert
+            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
+            Assert.True(leftNone.Equals(right));
         }
 
         #endregion

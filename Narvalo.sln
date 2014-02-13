@@ -21,11 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web.Extras", "src\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Incubator", "src\Narvalo.Incubator\Narvalo.Incubator.csproj", "{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Developer Toolbox", "2. Developer Toolbox", "{74903B74-654E-4579-BA5A-FF39D85482E1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Developer Toolbox", "3. Developer Toolbox", "{74903B74-654E-4579-BA5A-FF39D85482E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Build", "src\Narvalo.Build\Narvalo.Build.csproj", "{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Experimental", "3. Experimental", "{F6D644EC-5C23-4D95-894C-3B698AC43DB4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Experimental", "4. Experimental", "{F6D644EC-5C23-4D95-894C-3B698AC43DB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Ghostscript", "src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj", "{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}"
 EndProject
@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Dirty", "src\Narval
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Aliens", "src\Narvalo.Aliens\Narvalo.Aliens.csproj", "{94C7645A-F332-4CA9-AA6D-62A339868E10}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{1745EB1B-1227-4C17-A03E-B4DDEE760172}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Tests", "2. Tests", "{1745EB1B-1227-4C17-A03E-B4DDEE760172}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.ComparativeTests", "test\Narvalo.ComparativeTests\Narvalo.ComparativeTests.csproj", "{63BD10EF-9E46-40AB-9005-E19C87F90843}"
 EndProject
@@ -233,7 +233,7 @@ Global
 		{967FD938-F4FF-452B-9F9B-426D1F250BEB} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

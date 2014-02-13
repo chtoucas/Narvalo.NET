@@ -131,6 +131,7 @@
       <Link>_Aliens\Microsoft.Web.UnitTestUtil\MvcHelper.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Fx\Skeleton\Rules.cs" />
     <Compile Include="Linq\NullableFacts.cs" />
     <Compile Include="Linq\MaybeFacts.cs" />
     <Compile Include="ParseToFacts.cs" />

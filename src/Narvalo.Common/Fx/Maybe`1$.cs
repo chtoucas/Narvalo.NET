@@ -3,13 +3,43 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Provides extension methods for <see cref="Narvalo.Fx.Maybe{T}"/>.
     /// </summary>
     public static partial class MaybeExtensions
     {
-        #region Monad Prelude
+        #region Conditional execution of monadic expressions
+
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "Only here to have a complete Monad implementation.")]
+        public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
+        {
+            return predicate ? Maybe.Unit : Maybe.None;
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "Only here to have a complete Monad implementation.")]
+        public static Maybe<Unit> When<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        {
+            Require.NotNull(action, "action");
+
+            if (predicate) {
+                action.Invoke();
+            }
+
+            return Maybe.Unit;
+        }
+
+        public static Maybe<Unit> Unless<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        {
+            return When(@this, !predicate, action);
+        }
+
+        #endregion
+
+        #region Monadic lifting operators
 
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
@@ -74,15 +104,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Additive Monad
-
-        public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
-        {
-            return predicate ? Maybe.Unit : Maybe.None;
-        }
-
-        #endregion
-
         #region MonadZero
 
         public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
@@ -90,16 +111,18 @@ namespace Narvalo.Fx
             return OnSome(@this, action);
         }
 
-        public static Maybe<TSource> OnZero<TSource>(this Maybe<TSource> @this, Action action)
-        {
-            return OnNone(@this, action);
-        }
-
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
         {
             Require.Object(@this);
 
             return @this.IsSome ? other : Maybe<TResult>.None;
+        }
+
+        #endregion
+
+        public static Maybe<TSource> OnZero<TSource>(this Maybe<TSource> @this, Action action)
+        {
+            return OnNone(@this, action);
         }
 
         public static Maybe<TResult> Otherwise<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
@@ -118,8 +141,6 @@ namespace Narvalo.Fx
 
             return @this.IsSome ? whenSome : whenNone;
         }
-
-        #endregion
 
         //// OnSome & OnNone
 

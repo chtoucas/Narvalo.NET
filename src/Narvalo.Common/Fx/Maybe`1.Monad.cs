@@ -41,5 +41,14 @@ namespace Narvalo.Fx
 
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
+
+        #region MonadOr
+
+        public Maybe<T> OrElse(Maybe<T> other)
+        {
+            return IsNone ? other : this;
+        }
+
+        #endregion
     }
 }

@@ -109,6 +109,7 @@ namespace Narvalo.Fx
 
         #region Additive Monad
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Unit? Guard<TSource>(this TSource? @this, bool predicate)
             where TSource : struct
         {

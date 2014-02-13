@@ -6,12 +6,22 @@ namespace Narvalo.Fx.Skeleton
 
     static partial class MonadExtensions
     {
-        #region Monad Prelude
-
         #region Conditional execution of monadic expressions
+
+        // [Haskell] guard
+        // guard b is return () if b is True, and mzero if b is False.
+        // WARNING: Only for Monads with a Zero.
+        // REVIEW: Do we really need this?!
+        public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)
+        {
+            Require.Object(@this);
+
+            return predicate ? Monad.Unit : Monad.Zero;
+        }
 
         // [Haskell] when
         // Conditional execution of monadic expressions.
+        // REVIEW: Do we really need this?!
         public static Monad<Unit> When<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
         {
             Require.NotNull(action, "action");
@@ -21,6 +31,7 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] unless
         // The reverse of when.
+        // REVIEW: Do we really need this?!
         public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
         {
             return When(@this, !predicate, action);
@@ -111,25 +122,6 @@ namespace Narvalo.Fx.Skeleton
 
             return @this.Bind(g);
         }
-
-        #endregion
-
-        #endregion
-
-        #region Additive Monad
-
-        #region Conditional execution of monadic expressions
-
-        // [Haskell] guard
-        // guard b is return () if b is True, and mzero if b is False.
-        public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)
-        {
-            Require.Object(@this);
-
-            return predicate ? Monad.Unit : Monad.Zero;
-        }
-
-        #endregion
 
         #endregion
     }
