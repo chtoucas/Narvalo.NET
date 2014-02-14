@@ -6,7 +6,7 @@ namespace Narvalo
 
     public static class PredicateExtensions
     {
-        public static Func<TSource, bool> Negation<TSource>(this Func<TSource, bool> @this)
+        public static Func<TSource, bool> Negate<TSource>(this Func<TSource, bool> @this)
         {
             return _ => !@this.Invoke(_);
         }

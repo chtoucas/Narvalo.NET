@@ -6,46 +6,14 @@ namespace Narvalo.Fx.Skeleton
 
     static partial class MonadExtensions
     {
-        #region Conditional execution of monadic expressions
-
-        // [Haskell] guard
-        // guard b is return () if b is True, and mzero if b is False.
-        // WARNING: Only for Monads with a Zero.
-        // REVIEW: Do we really need this?!
-        public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)
-        {
-            Require.Object(@this);
-
-            return predicate ? Monad.Unit : Monad.Zero;
-        }
-
-        // [Haskell] when
-        // Conditional execution of monadic expressions.
-        // REVIEW: Do we really need this?!
-        public static Monad<Unit> When<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
-        {
-            Require.NotNull(action, "action");
-
-            return predicate ? action.Invoke(Unit.Single) : Monad.Unit;
-        }
-
-        // [Haskell] unless
-        // The reverse of when.
-        // REVIEW: Do we really need this?!
-        public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
-        {
-            return When(@this, !predicate, action);
-        }
-
-        #endregion
-
         #region Monadic lifting operators
 
         // [Haskell] liftM
         // Promote a function to a monad.
-        public static Monad<TResult> Zip<TFirst, TResult>(
-            this Monad<TFirst> @this,
-            Func<TFirst, TResult> resultSelector)
+        // WARNING: Private since it won't be implemented for a concrete Monad (this is just Map).
+        static Monad<TResult> Zip<TFirst, TResult>(
+           this Monad<TFirst> @this,
+           Func<TFirst, TResult> resultSelector)
         {
             Require.Object(@this);
 
@@ -63,7 +31,7 @@ namespace Narvalo.Fx.Skeleton
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(m1 => second.Map(m2 => resultSelector.Invoke(m1, m2)));
+            return @this.Bind(_ => second.Map(v2 => resultSelector.Invoke(_, v2)));
         }
 
         // [Haskell] liftM3

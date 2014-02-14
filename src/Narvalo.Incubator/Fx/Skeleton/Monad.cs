@@ -17,39 +17,42 @@ namespace Narvalo.Fx.Skeleton
             return Monad<T>.η(value);
         }
 
-        #region Basic Monad functions
-
-        // [Haskell] >=>
-        // Left-to-right Kleisli composition of monads.
-        public static Monad<TResult> Compose<TSource, TMiddle, TResult>(
-            Kunc<TSource, TMiddle> kunA,
-            Kunc<TMiddle, TResult> kunB,
-            TSource value)
-        {
-            Require.NotNull(kunA, "kunA");
-
-            return kunA.Invoke(value).Bind(kunB);
-        }
-
-        // [Haskell] <=<
-        // Right-to-left Kleisli composition of monads. (>=>), with the arguments flipped.
-        public static Monad<TResult> ComposeBack<TSource, TMiddle, TResult>(
-            Kunc<TMiddle, TResult> kunA,
-            Kunc<TSource, TMiddle> kunB,
-            TSource value)
-        {
-            Require.NotNull(kunB, "kunB");
-
-            return kunB.Invoke(value).Bind(kunA);
-        }
-
-        #endregion
-
         #region Generalisations of list functions
 
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
         {
             return Monad<T>.μ(square);
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+        // [Haskell] guard
+        // guard b is return () if b is True, and mzero if b is False.
+        // WARNING: Private since it won't be implemented for a concrete Monad.
+        // WARNING: Only for Monads with a Zero.
+        static Monad<Unit> Guard<TSource>(bool predicate)
+        {
+            return predicate ? Unit : Zero;
+        }
+
+        // [Haskell] when
+        // Conditional execution of monadic expressions.
+        // WARNING: Private since it won't be implemented for a concrete Monad.
+        static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
+        {
+            Require.NotNull(action, "action");
+
+            return predicate ? action.Invoke(Narvalo.Fx.Unit.Single) : Unit;
+        }
+
+        // [Haskell] unless
+        // The reverse of when.
+        // WARNING: Private since it won't be implemented for a concrete Monad.
+        static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
+        {
+            return When<TSource>(!predicate, action);
         }
 
         #endregion

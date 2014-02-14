@@ -9,18 +9,23 @@ namespace Narvalo.Fx.Skeleton
     {
         #region Restriction Operators
 
+        // If exists, it is used by Query Expression Pattern.
+        // WARNING: Only for Monads with a Zero.
         public static Monad<TSource> Where<TSource>(this Monad<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : @this.Otherwise());
+            // Or simply: @this.Then(predicate, @this);
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : Monad<TSource>.Zero);
         }
 
         #endregion
 
         #region Projection Operators
 
+        // This is just Map / Zip, or liftM in Haskell.
+        // If exists, it is used by Query Expression Pattern.
         public static Monad<TResult> Select<TSource, TResult>(this Monad<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
@@ -28,6 +33,19 @@ namespace Narvalo.Fx.Skeleton
             return @this.Map(selector);
         }
 
+        // Alias for Bind.
+        // WARNING: Private since it won't be implemented for a concrete Monad (not used by the Query Expression Pattern).
+        static Monad<TResult> SelectMany<TSource, TResult>(
+           this Monad<TSource> @this,
+           Kunc<TSource, TResult> selector)
+        {
+            Require.Object(@this);
+
+            return @this.Bind(selector);
+        }
+
+        // Generalisation of Zip, or liftM2 in Haskell.
+        // If exists, it is used by Query Expression Pattern.
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> valueSelector,
@@ -37,13 +55,14 @@ namespace Narvalo.Fx.Skeleton
             Require.NotNull(valueSelector, "valueSelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+            return @this.Bind(_ => valueSelector.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
 
         #endregion
 
         #region Join Operators
 
+        // If exists, it is used by Query Expression Pattern.
         public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
             this Monad<TSource> @this,
             Monad<TInner> inner,
@@ -54,6 +73,7 @@ namespace Narvalo.Fx.Skeleton
             return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
+        // If exists, it is used by Query Expression Pattern.
         public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
             this Monad<TSource> @this,
             Monad<TInner> inner,

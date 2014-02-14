@@ -2,13 +2,6 @@
 
 namespace Narvalo.Fx.Skeleton
 {
-    static class Stubs
-    {
-        static readonly Kunc<Unit, Unit> Noop_ = _ => Monad.Unit;
-
-        public static Kunc<Unit, Unit> Noop { get { return Noop_; } }
-    }
-
     static class Stubs<T>
     {
         static readonly Kunc<T, Unit> Ignore_ = _ => Monad.Unit;

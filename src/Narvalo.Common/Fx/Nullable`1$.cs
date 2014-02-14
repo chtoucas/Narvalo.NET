@@ -12,6 +12,13 @@ namespace Narvalo.Fx
     {
         #region Monad
 
+        /*
+         * What's not found here:
+         * - Return is simply casting: (T?)value
+         * - Nullable does not support the Join operation; there is no Nullable<Nullable<T>>
+         * - Zero is null
+         */
+
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
             where TResult : struct
@@ -30,16 +37,16 @@ namespace Narvalo.Fx
             return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Maybe<TSource> Otherwise<TSource>(this TSource? @this)
+        public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
             where TSource : struct
+            where TResult : struct
         {
-            return null;
+            return @this.HasValue ? other : null;
         }
 
         #endregion
 
-        #region Monad Prelude
+        #region Monadic lifting operators
 
         public static TResult? Zip<TFirst, TSecond, TResult>(
             this TFirst? @this,
@@ -107,31 +114,47 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Additive Monad
+        #region Additional methods
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Unit? Guard<TSource>(this TSource? @this, bool predicate)
+        public static TResult? Coalesce<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, bool> predicate,
+            TResult? then,
+            TResult? otherwise)
             where TSource : struct
+            where TResult : struct
         {
-            return predicate ? (Unit?)Unit.Single : null;
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-        #endregion
-
-        #region MonadZero
-
-        /* C# has native support for "Then", "Otherwise" and "Coalesce" */
-
-        public static TSource? Run<TSource>(this TSource? @this, Action<TSource> action)
+        public static TResult? Then<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, bool> predicate,
+            TResult? other)
             where TSource : struct
+            where TResult : struct
         {
-            return OnValue(@this, action);
+            return Coalesce(@this, predicate, other, null);
         }
 
-        public static TSource? OnZero<TSource>(this TSource? @this, Action action)
+        public static TResult? Otherwise<TSource, TResult>(
+            this TSource? @this,
+            Func<TSource, bool> predicate,
+            TResult? other)
+            where TSource : struct
+            where TResult : struct
+        {
+            return Coalesce(@this, predicate, null, other);
+        }
+
+        public static Unit? Run<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            return OnNull(@this, action);
+            OnValue(@this, action);
+
+            return (Unit?)Unit.Single;
         }
 
         #endregion

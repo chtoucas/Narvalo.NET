@@ -38,9 +38,6 @@ namespace Narvalo.Fx.Skeleton
      * NB: The constant MONAD_VIA_BIND allows to switch between both approachs.
      *
      * NB: Haskell also defines a fail method that is not part of the standard definition.
-     * Here we will provide a similar function but named Otherwise to emphasize its usefulness
-     * in pattern matching failure. Contrary to the Haskell convention, the signature of
-     * the method will vary depending on the particular monad under consideration.
      *
      *
      * Comonad
@@ -121,13 +118,24 @@ namespace Narvalo.Fx.Skeleton
      * - Unit is True
      * - Zero is False
      *
-     * We write the rules using the Haskell syntax. 
+     * We write the definitions and rules using the Haskell syntax. 
      * For a translation to .NET, see Narvalo.Facts\Fx\Skeleton\Rules.cs
-     *
-     * Haskell
-     * -------
+     * 
+     * Core definitions (see src\Narvalo.Common\Fx\Skeleton\Monad`1.cs):
+     * - m >>= g = join (fmap g m)                              Bind defined via Multiply and Map
+     * - fmap f x = x >>= (return . f)                          Map defined by Bind & Unit
+     * - join x = x >>= id                                      Multiply defined by Bind
+     * - m >> n = m >>= \_ -> n                                 Then defined by Bind
+     * 
+     * Core rules (see src\Narvalo.Facts\Fx\Skeleton\Rules.cs):
+     * - fmap id == id                                          [Map]
+     * - fmap (f . g) == fmap f . fmap g                        [Map]
+     * - (m >> n) >> o = m >> (n >> o)                          [Then]      Associativity
+     * 
+     * Haskell (see src\Narvalo.Facts\Fx\Skeleton\Rules.cs)
+     * ------------------------------------------------
      * - mplus mzero m = m                                      [Monoid]    Left identity
-     * - mplus m mzero = m                                      [Monoid]    Right identity
+     * - mplus m mzero = m                                      [Monoid]    Right identity 
      * - mplus a (mplus b c) = mplus (mplus a b) c              [Monoid]    Associativity
      * - return x >>= f = f x                                   [Monad]     Left identity
      *   return >=> g ≡ g
@@ -136,7 +144,8 @@ namespace Narvalo.Fx.Skeleton
      * - (m >>= f) >>= g = m >>= (\x -> f x >>= g)              [Monad]     Associativity
      *   (f >=> g) >=> h ≡ f >=> (g >=> h)
      * - mzero >>= f = mzero                                    [MonadZero] Left zero
-     * - m >>= (\x -> mzero) = mzero                            [MonadMore] Right zero
+     * - v >> mzero = mzero                                     [MonadMore] Right zero
+     * - m >>= (\x -> mzero) = mzero
      * - mplus a b >>= f = mplus (a >>= f) (b >>= f)            [MonadPlus] Right distributivity
      * -                                                        [...]       Left distributivity
      * - morelse (return a) b ≡ return a                        [MonadOr]   Left zero
@@ -180,9 +189,10 @@ namespace Narvalo.Fx.Skeleton
      * ---------------+---------------+------------------------------------
      * Unit (η)       | return        | Return      or Create, Success,...
      * Bind           | >>=           | Bind
-     * Map            | >>            | Map
+     * Map            | fmap          | Map
      * Multiply (μ)   | join          | Flatten
-     *                | fail          | Otherwise
+     * Then           | >>            | Then
+     *                | fail          | 
      * ---------------+---------------+------------------------------------
      * Zero           | mzero         | Zero        or None, Failure,...
      * Plus           | mplus         | Plus        or OrElse,...
@@ -203,10 +213,11 @@ namespace Narvalo.Fx.Skeleton
      * We prefix with a @ the .NET methods provided as extension methods.
      *
      * Monad
+     *      Monad<T>.Map            fmap :: (a -> b) -> m a -> m b
      *      Monad<T>.Bind           (>>=) :: forall a b. m a -> (a -> m b) -> m b
-     *      Monad<T>.Map            (>>) :: forall a b. m a -> m b -> m b
+     *      Monad<T>.Then           (>>) :: forall a b. m a -> m b -> m b
      *      Monad.Return            return :: a -> m a
-     *      Monad<T>.Otherwise      fail :: String -> m a
+     *      (not implemented)       fail :: String -> m a
      *
      * MonadPlus
      *      Monad<T>.Zero           mzero :: m a
@@ -239,9 +250,9 @@ namespace Narvalo.Fx.Skeleton
      *                              replicateM_ :: Monad m => Int -> m a -> m ()
      *
      * Conditional execution of monadic expressions
-     *      @Monad<T>.Guard         guard :: MonadPlus m => Bool -> m ()
-     *      @Monad<T>.When          when :: Monad m => Bool -> m () -> m ()
-     *      @Monad<T>.Unless        unless :: Monad m => Bool -> m () -> m ()
+     *      Monad.Guard             guard :: MonadPlus m => Bool -> m ()
+     *      Monad.When              when :: Monad m => Bool -> m () -> m ()
+     *      Monad.Unless            unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
      *      @Monad<T>.Zip           liftM :: Monad m => (a1 -> r) -> m a1 -> m r

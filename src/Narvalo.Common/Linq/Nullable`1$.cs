@@ -10,7 +10,7 @@ namespace Narvalo.Linq
     /// </summary>
     public static class NullableExtensions
     {
-        //// Restriction Operators
+        #region Restriction Operators
 
         public static TSource? Where<TSource>(
             this TSource? @this,
@@ -22,7 +22,9 @@ namespace Narvalo.Linq
             return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
         }
 
-        //// Projection Operators
+        #endregion
+
+        #region Projection Operators
 
         public static TResult? Select<TSource, TResult>(
             this TSource? @this,
@@ -44,7 +46,9 @@ namespace Narvalo.Linq
             Require.NotNull(valueSelector, "valueSelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+            return @this.Bind(_ => valueSelector(_).Map(middle => resultSelector(_, middle)));
         }
+
+        #endregion
     }
 }

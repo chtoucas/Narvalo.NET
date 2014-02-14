@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     public static partial class FuncExtensions
     {
-        //// Compose (Nullable)
+        #region Basic Monad functions for Nullable
 
         public static Func<TSource, TResult?> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, TMiddle?> @this,
@@ -20,7 +20,9 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(kun);
         }
 
-        //// Compose (Maybe)
+        #endregion
+
+        #region Basic Monad functions for Maybe
 
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Maybe<TMiddle>> @this,
@@ -31,7 +33,9 @@ namespace Narvalo.Fx
             return _ => @this.Invoke(_).Bind(kun);
         }
 
-        //// Compose (Output)
+        #endregion
+
+        #region Basic Monad functions for Output
 
         public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Output<TMiddle>> @this,
@@ -41,5 +45,7 @@ namespace Narvalo.Fx
 
             return _ => @this.Invoke(_).Bind(kun);
         }
+
+        #endregion
     }
 }

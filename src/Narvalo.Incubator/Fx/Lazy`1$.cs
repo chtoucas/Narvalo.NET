@@ -9,8 +9,6 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class LazyExtensions
     {
-        ////// Bind
-
         //public static Lazy<TResult> Bind<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, Lazy<TResult>> selector)
         //{
         //    Require.Object(@this);
@@ -18,8 +16,6 @@ namespace Narvalo.Fx
 
         //    return Lazy.Create(() => selector.Invoke(@this.Value).Value);
         //}
-
-        ////// Map
 
         //public static Lazy<TResult> Map<TSource, TResult>(this Lazy<TSource> @this, Func<TSource, TResult> selector)
         //{

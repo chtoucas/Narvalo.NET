@@ -2,8 +2,6 @@
 
 namespace Narvalo.Fx
 {
-    using System;
-
     public static class Maybe
     {
         static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
@@ -22,30 +20,6 @@ namespace Narvalo.Fx
         {
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
-
-        #region Basic Monad functions
-
-        public static Maybe<TResult> Compose<TSource, TMiddle, TResult>(
-            Func<TSource, Maybe<TMiddle>> kunA,
-            Func<TMiddle, Maybe<TResult>> kunB,
-            TSource value)
-        {
-            Require.NotNull(kunA, "kunA");
-
-            return kunA.Invoke(value).Bind(kunB);
-        }
-
-        public static Maybe<TResult> ComposeBack<TSource, TMiddle, TResult>(
-            Func<TMiddle, Maybe<TResult>> kunA,
-            Func<TSource, Maybe<TMiddle>> kunB,
-            TSource value)
-        {
-            Require.NotNull(kunB, "kunB");
-
-            return kunB.Invoke(value).Bind(kunA);
-        }
-
-        #endregion
 
         #region Generalisations of list functions
 

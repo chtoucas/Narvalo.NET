@@ -22,9 +22,9 @@ namespace Narvalo.Fx
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
         }
 
-        public Output<T> Otherwise()
+        public Output<TResult> Then<TResult>(Output<TResult> other)
         {
-            throw new NotImplementedException();
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : other;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",

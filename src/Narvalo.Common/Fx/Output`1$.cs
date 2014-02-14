@@ -10,7 +10,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class OutputExtensions
     {
-        #region Monad Prelude
+        #region Monadic lifting operators
 
         public static Output<TResult> Zip<TFirst, TSecond, TResult>(
             this Output<TFirst> @this,
@@ -22,26 +22,25 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Weak MonadZero
-
-        public static Output<TSource> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
-        {
-            return OnSuccess(@this, action);
-        }
-
-        public static Output<TSource> OnZero<TSource>(this Output<TSource> @this, Action<ExceptionDispatchInfo> action)
-        {
-            return OnFailure(@this, action);
-        }
+        #region Additional methods
 
         public static Output<TResult> Coalesce<TSource, TResult>(
             this Output<TSource> @this,
-            Output<TResult> whenSuccess,
-            Output<TResult> whenFailure)
+            Func<TSource, bool> predicate,
+            Output<TResult> then,
+            Output<TResult> otherwise)
         {
             Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
 
-            return @this.IsSuccess ? whenSuccess : whenFailure;
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+        public static Output<Unit> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
+        {
+            OnSuccess(@this, action);
+
+            return Output.Unit;
         }
 
         #endregion

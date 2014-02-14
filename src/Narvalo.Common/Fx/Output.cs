@@ -10,8 +10,6 @@ namespace Narvalo.Fx
 
         public static Output<Unit> Unit { get { return Unit_; } }
 
-        //// Return
-
         public static Output<T> Success<T>(T value)
         {
             return Output<T>.η(value);
@@ -22,11 +20,13 @@ namespace Narvalo.Fx
             return Output<T>.η(exceptionInfo);
         }
 
-        //// Flatten
+        #region Generalisations of list functions
 
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             return Output<T>.μ(square);
         }
+
+        #endregion
     }
 }

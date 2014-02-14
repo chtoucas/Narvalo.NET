@@ -10,19 +10,7 @@ namespace Narvalo.Linq
     /// </summary>
     public static class OutputExtensions
     {
-        //// Restriction Operators
-
-        public static Output<TSource> Where<TSource>(
-            this Output<TSource> @this,
-            Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : @this.Otherwise());
-        }
-
-        //// Projection Operators
+        #region Projection Operators
 
         public static Output<TResult> Select<TSource, TResult>(
             this Output<TSource> @this,
@@ -42,7 +30,9 @@ namespace Narvalo.Linq
             Require.NotNull(valueSelector, "valueSelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+            return @this.Bind(_ => valueSelector(_).Map(middle => resultSelector(_, middle)));
         }
+
+        #endregion
     }
 }

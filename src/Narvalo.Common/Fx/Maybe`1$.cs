@@ -10,35 +10,6 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class MaybeExtensions
     {
-        #region Conditional execution of monadic expressions
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Only here to have a complete Monad implementation.")]
-        public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
-        {
-            return predicate ? Maybe.Unit : Maybe.None;
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Only here to have a complete Monad implementation.")]
-        public static Maybe<Unit> When<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (predicate) {
-                action.Invoke();
-            }
-
-            return Maybe.Unit;
-        }
-
-        public static Maybe<Unit> Unless<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
-        {
-            return When(@this, !predicate, action);
-        }
-
-        #endregion
-
         #region Monadic lifting operators
 
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
@@ -104,43 +75,44 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region MonadZero
-
-        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
-        {
-            return OnSome(@this, action);
-        }
-
-        public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.IsSome ? other : Maybe<TResult>.None;
-        }
-
-        #endregion
-
-        public static Maybe<TSource> OnZero<TSource>(this Maybe<TSource> @this, Action action)
-        {
-            return OnNone(@this, action);
-        }
-
-        public static Maybe<TResult> Otherwise<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
-        {
-            Require.Object(@this);
-
-            return @this.IsSome ? Maybe<TResult>.None : other;
-        }
+        #region Additional methods
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
-            Maybe<TResult> whenSome,
-            Maybe<TResult> whenNone)
+            Func<TSource, bool> predicate,
+            Maybe<TResult> then,
+            Maybe<TResult> otherwise)
         {
             Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
 
-            return @this.IsSome ? whenSome : whenNone;
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
+
+        public static Maybe<TResult> Then<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+        {
+            return Coalesce(@this, predicate, other, Maybe<TResult>.None);
+        }
+
+        public static Maybe<TResult> Otherwise<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+        {
+            return Coalesce(@this, predicate, Maybe<TResult>.None, other);
+        }
+
+        public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        {
+            OnSome(@this, action);
+
+            return Maybe.Unit;
+        }
+
+        #endregion
 
         //// OnSome & OnNone
 

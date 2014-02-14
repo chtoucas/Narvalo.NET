@@ -9,26 +9,42 @@ namespace Narvalo.Fx
     /// </summary>
     static partial class IdentityExtensions
     {
-        #region Monad Prelude
+        #region Monadic lifting operators
 
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
             Identity<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
-            return @this.Bind(m1 => second.Map(m2 => resultSelector.Invoke(m1, m2)));
+            return @this.Bind(_ => second.Map(middle => resultSelector.Invoke(_, middle)));
         }
 
         #endregion
 
-        public static Identity<TSource> Run<TSource>(this Identity<TSource> @this, Action<TSource> action)
+        #region Additional methods
+
+        public static Identity<TResult> Coalesce<TSource, TResult>(
+            this Identity<TSource> @this,
+            Func<TSource, bool> predicate,
+            Identity<TResult> then,
+            Identity<TResult> otherwise)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            return predicate.Invoke(@this.Value) ? then : otherwise;
+        }
+
+        public static Identity<Unit> Run<TSource>(this Identity<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return Identity.Unit; });
+            action.Invoke(@this.Value); 
 
-            return @this;
+            return Identity.Unit;
         }
+
+        #endregion
     }
 }

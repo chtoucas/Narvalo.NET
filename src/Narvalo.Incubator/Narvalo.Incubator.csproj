@@ -98,13 +98,14 @@
     <Compile Include="Fx\Skeleton\Kunc`%24.cs" />
     <Compile Include="Fx\Skeleton\Kunc`.cs" />
     <Compile Include="Fx\Skeleton\Monad.cs" />
-    <Compile Include="Fx\Skeleton\Monad`1%24Linq.cs" />
+    <Compile Include="Fx\Skeleton\Monad`1%24.Linq.cs" />
     <Compile Include="Fx\Skeleton\Monoid`1.cs" />
     <Compile Include="Fx\Skeleton\Monad`1%24.cs" />
     <Compile Include="Fx\Skeleton\Monad`1.cs" />
     <Compile Include="Fx\Skeleton\NamespaceDoc.cs" />
-    <Compile Include="Fx\Skeleton\Monad`1%24Prelude.cs" />
-    <Compile Include="Fx\Skeleton\Stubs`.cs" />
+    <Compile Include="Fx\Skeleton\Monad`1%24.Prelude.cs" />
+    <Compile Include="Fx\Skeleton\Stubs.cs" />
+    <Compile Include="Fx\Skeleton\Stubs`1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\Identity`1%24.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

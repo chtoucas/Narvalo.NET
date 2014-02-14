@@ -8,28 +8,24 @@ namespace Narvalo.Fx
 
         public static Identity<Unit> Unit { get { return Unit_; } }
 
-        //// Return
-
         public static Identity<T> Return<T>(T value)
         {
             return Identity<T>.η(value);
         }
 
-        //// Flatten
+        #region Generalisations of list functions
 
         public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
         {
-            return Identity<T>.μ(square);
+            return square.Value;
         }
 
-        //// Extract
+        #endregion
 
         public static T Extract<T>(Identity<T> monad)
         {
-            return Identity<T>.ε(monad);
+            return monad.Value;
         }
-
-        //// Duplicate
 
         public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
         {

@@ -11,7 +11,7 @@ namespace Narvalo.Linq
     /// </summary>
     public static class MaybeExtensions
     {
-        //// Restriction Operators
+        #region Restriction Operators
 
         public static Maybe<TSource> Where<TSource>(
             this Maybe<TSource> @this,
@@ -23,7 +23,9 @@ namespace Narvalo.Linq
             return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
         }
 
-        //// Projection Operators
+        #endregion
+
+        #region Projection Operators
 
         public static Maybe<TResult> Select<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -43,10 +45,12 @@ namespace Narvalo.Linq
             Require.NotNull(valueSelector, "valueSelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
+            return @this.Bind(_ => valueSelector(_).Map(middle => resultSelector(_, middle)));
         }
 
-        //// Join Operators
+        #endregion
+
+        #region Join Operators
 
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
@@ -84,5 +88,7 @@ namespace Narvalo.Linq
                 ? Maybe.Create(resultSelector.Invoke(@this.Value, inner.Value))
                 : Maybe<TResult>.None;
         }
+
+        #endregion
     }
 }

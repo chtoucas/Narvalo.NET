@@ -8,7 +8,7 @@ namespace Narvalo.Fx.Skeleton
 
     sealed class Monad<T>
     {
-        #region MonadMore
+        #region Monoid
 
         // [Haskell] mzero
         // The identity of mplus.
@@ -34,9 +34,7 @@ namespace Narvalo.Fx.Skeleton
 #endif
         }
 
-        // [Haskell] >>
-        // Sequentially compose two actions, discarding any value produced by the first, 
-        // like sequencing operators (such as the semicolon) in imperative languages.
+        // [Haskell] fmap
         public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if MONAD_VIA_BIND
@@ -46,12 +44,12 @@ namespace Narvalo.Fx.Skeleton
 #endif
         }
 
-        // [Haskell] fail
-        // Fail with a message. This operation is not part of the mathematical definition of a monad,
-        // but is invoked on pattern-match failure in a do expression.
-        public Monad<T> Otherwise()
+        // [Haskell] >>
+        // Sequentially compose two actions, discarding any value produced by the first, 
+        // like sequencing operators (such as the semicolon) in imperative languages.
+        public Monad<TResult> Then<TResult>(Monad<TResult> other)
         {
-            throw new NotImplementedException();
+            return Bind(_ => other);
         }
 
         // [Haskell] return

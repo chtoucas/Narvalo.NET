@@ -21,9 +21,9 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-        public Maybe<T> Otherwise()
+        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
-            return None;
+            return IsSome ? other : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",

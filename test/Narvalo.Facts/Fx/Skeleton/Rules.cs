@@ -2,6 +2,8 @@
 
 namespace Narvalo.Fx.Skeleton
 {
+    using System;
+
     public static class Rules
     {
         #region Monoid Laws
@@ -9,19 +11,19 @@ namespace Narvalo.Fx.Skeleton
         /// <summary>
         /// First Monoid Law: Zero is a left identity for Plus.
         /// </summary>
-        static bool Monoid_FirstLaw<X>(Monad<X> monad)
+        static bool Monoid_FirstLaw<X>(Monad<X> m)
         {
             // mplus mzero m = m
-            return Monad<X>.Zero.Plus(monad) == monad;
+            return Monad<X>.Zero.Plus(m) == m;
         }
 
         /// <summary>
         /// Second Monoid Law: Zero is a right identity for Plus.
         /// </summary>
-        static bool Monoid_SecondLaw<X>(Monad<X> monad)
+        static bool Monoid_SecondLaw<X>(Monad<X> m)
         {
             // mplus m mzero = m
-            return monad.Plus(Monad<X>.Zero) == monad;
+            return m.Plus(Monad<X>.Zero) == m;
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace Narvalo.Fx.Skeleton
         static bool Monad_ThirdLaw<X, Y, Z>(Monad<X> m, Kunc<X, Y> f, Kunc<Y, Z> g)
         {
             // (m >>= f) >>= g = m >>= (\x -> f x >>= g)
-            return (m.Bind(f)).Bind(g) == m.Bind(_ => f(_).Bind(g));
+            return m.Bind(f).Bind(g) == m.Bind(_ => f(_).Bind(g));
         }
 
         //// Same rules but in the Kleisli Category.
@@ -99,30 +101,71 @@ namespace Narvalo.Fx.Skeleton
             return (f.Compose(g)).Compose(h).Invoke(value) == f.Compose(g.Compose(h)).Invoke(value);
         }
 
+        //// Other rules automatically satisfied.
+
+        /// <summary>
+        /// First rule satisfied by Map, implied by the definition of Map and the second monad law:
+        ///     fmap id x = x >>= (return . id) = x >>= return = x
+        /// </summary>
+        static bool Map_FirstRule<X>(Monad<X> m)
+        {
+            Func<Monad<X>, Monad<X>> idM = _ => _;
+
+            // fmap id  ==  id
+            return m.Map(_ => _) == idM.Invoke(m);
+        }
+
+        /// <summary>
+        /// Second rule satisfied by Map.
+        /// </summary>
+        static bool Map_SecondRule<X, Y, Z>(Monad<X> m, Func<Y, Z> f, Func<X, Y> g)
+        {
+            // fmap (f . g) == fmap f . fmap g
+            return m.Map(_ => f(g(_))) == m.Map(g).Map(f);
+        }
+
+        /// <summary>
+        /// Then is associative, implied by the definition of Then and the third monad law.
+        /// </summary>
+        static bool Then_Rule<X, Y, Z>(Monad<X> a, Monad<Y> b, Monad<Z> c)
+        {
+            // (m >> n) >> o = m >> (n >> o)
+            return a.Then(b).Then(c) == a.Then(b.Then(c));
+        }
+
         #endregion
 
         /// <summary>
         /// MonadZero: Zero is a left zero for Bind.
         /// </summary>
-        static bool MonadZero_LeftZero_Bind<X, Y>(Kunc<X, Y> f, X value)
+        static bool MonadZero_Rule<X, Y>(Kunc<X, Y> f, X value)
         {
             // mzero >>= f = mzero
             return Monad<X>.Zero.Bind(f) == Monad<Y>.Zero;
         }
 
         /// <summary>
-        /// MonadMore: Zero is a right zero for Bind.
+        /// MonadMore: Zero is a right zero for Bind or equivalently Zero is a right zero for Then.
         /// </summary>
-        static bool MonadMore_RightZero_Bind<X>(Monad<X> m)
+        static bool MonadMore_Rule<X>(Monad<X> m)
         {
             // m >>= (\x -> mzero) = mzero
             return m.Bind(_ => Monad<X>.Zero) == Monad<X>.Zero;
         }
 
         /// <summary>
+        /// MonadMore: Zero is a right zero for Then, implied by the definition of then and the MonadMore rule.
+        /// </summary>
+        static bool MonadMore_Rule_Variant<X>(Monad<X> m)
+        {
+            // v >> mzero = mzero
+            return m.Then(Monad<X>.Zero) == Monad<X>.Zero;
+        }
+
+        /// <summary>
         /// MonadPlus: Bind is right distributive over Plus.
         /// </summary>
-        static bool MonadPlus_RightDistributivity<X>(Monad<X> a, Monad<X> b, Kunc<X, X> f)
+        static bool MonadPlus_Rule<X>(Monad<X> a, Monad<X> b, Kunc<X, X> f)
         {
             // mplus a b >>= f = mplus (a >>= f) (b >>= f)
             return a.Plus(b).Bind(f) == a.Bind(f).Plus(b.Bind(f));
@@ -131,7 +174,7 @@ namespace Narvalo.Fx.Skeleton
         /// <summary>
         /// MonadOr: Unit is a left zero for Plus.
         /// </summary>
-        static bool MonadOr_LeftZero_Plus<X>(X a, Monad<X> b)
+        static bool MonadOr_Rule<X>(X a, Monad<X> b)
         {
             // morelse (return a) b ≡ return a
             return Monad.Return(a).Plus(b) == Monad.Return(a);

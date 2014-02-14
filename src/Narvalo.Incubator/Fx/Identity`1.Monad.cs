@@ -21,6 +21,11 @@ namespace Narvalo.Fx
             return new Identity<TResult>(selector.Invoke(_value));
         }
 
+        public Identity<TResult> Then<TResult>(Identity<TResult> other)
+        {
+            return other;
+        }
+
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Identity<T> η(T value)
@@ -35,11 +40,6 @@ namespace Narvalo.Fx
             Require.NotNull(square, "square");
 
             return square._value;
-        }
-
-        internal static Identity<T> Fail(string reason)
-        {
-            throw new NotImplementedException();
         }
     }
 }
