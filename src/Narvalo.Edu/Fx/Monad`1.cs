@@ -2,7 +2,7 @@
 
 #define MONAD_VIA_BIND
 
-namespace Narvalo.Fx.Skeleton
+namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

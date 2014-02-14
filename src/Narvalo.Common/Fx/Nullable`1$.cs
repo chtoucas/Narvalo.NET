@@ -12,8 +12,8 @@ namespace Narvalo.Fx
     {
         #region Monad
 
-        /*
-         * What's not found here:
+        /*!
+         * What's not to be found here:
          * - Return is simply casting: (T?)value
          * - Nullable does not support the Join operation; there is no Nullable<Nullable<T>>
          * - Zero is null
@@ -58,57 +58,6 @@ namespace Narvalo.Fx
         {
             return @this.HasValue && second.HasValue
                 ? (TResult?)resultSelector.Invoke(@this.Value, second.Value)
-                : null;
-        }
-
-        public static TResult? Zip<T1, T2, T3, TResult>(
-            this T1? @this,
-            T2? second,
-            T3? third,
-            Func<T1, T2, T3, TResult> resultSelector)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where TResult : struct
-        {
-            return @this.HasValue && second.HasValue && third.HasValue
-                ? (TResult?)resultSelector.Invoke(@this.Value, second.Value, third.Value)
-                : null;
-        }
-
-        public static TResult? Zip<T1, T2, T3, T4, TResult>(
-            this T1? @this,
-            T2? second,
-            T3? third,
-            T4? fourth,
-            Func<T1, T2, T3, T4, TResult> resultSelector)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where TResult : struct
-        {
-            return @this.HasValue && second.HasValue && third.HasValue && fourth.HasValue
-                ? (TResult?)resultSelector.Invoke(@this.Value, second.Value, third.Value, fourth.Value)
-                : null;
-        }
-
-        public static TResult? Zip<T1, T2, T3, T4, T5, TResult>(
-            this T1? @this,
-            T2? second,
-            T3? third,
-            T4? fourth,
-            T5? fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-            where T1 : struct
-            where T2 : struct
-            where T3 : struct
-            where T4 : struct
-            where T5 : struct
-            where TResult : struct
-        {
-            return @this.HasValue && second.HasValue && third.HasValue && fourth.HasValue && fifth.HasValue
-                ? (TResult?)resultSelector.Invoke(@this.Value, second.Value, third.Value, fourth.Value, fifth.Value)
                 : null;
         }
 

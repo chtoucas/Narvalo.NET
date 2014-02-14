@@ -25,54 +25,6 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
-        public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
-             this Maybe<T1> @this,
-             Maybe<T2> second,
-             Maybe<T3> third,
-             Func<T1, T2, T3, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            return @this.IsSome && second.IsSome && third.IsSome
-                ? Maybe.Create(resultSelector.Invoke(@this.Value, second.Value, third.Value))
-                : Maybe<TResult>.None;
-        }
-
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
-              this Maybe<T1> @this,
-              Maybe<T2> second,
-              Maybe<T3> third,
-              Maybe<T4> fourth,
-              Func<T1, T2, T3, T4, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            return @this.IsSome && second.IsSome && third.IsSome && fourth.IsSome
-                ? Maybe.Create(resultSelector.Invoke(@this.Value, second.Value, third.Value, fourth.Value))
-                : Maybe<TResult>.None;
-        }
-
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-             this Maybe<T1> @this,
-             Maybe<T2> second,
-             Maybe<T3> third,
-             Maybe<T4> fourth,
-             Maybe<T5> fifth,
-             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            return @this.IsSome && second.IsSome && third.IsSome && fourth.IsSome && fifth.IsSome
-                ? Maybe.Create(resultSelector.Invoke(@this.Value, second.Value, third.Value, fourth.Value, fifth.Value))
-                : Maybe<TResult>.None;
-        }
-
         #endregion
 
         #region Additional methods

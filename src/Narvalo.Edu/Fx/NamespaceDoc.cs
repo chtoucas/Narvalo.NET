@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.Skeleton
+namespace Narvalo.Fx
 {
     using System.Runtime.CompilerServices;
 
@@ -37,7 +37,7 @@ namespace Narvalo.Fx.Skeleton
      *
      * NB: The constant MONAD_VIA_BIND allows to switch between both approachs.
      *
-     * NB: Haskell also defines a fail method that is not part of the standard definition.
+     * NB: Haskell also provides a fail method that is not part of the standard definition.
      *
      *
      * Comonad
@@ -57,15 +57,15 @@ namespace Narvalo.Fx.Skeleton
      *
      * + MonadZero:
      *   A MonadZero is a Monad with a left zero for Bind.
-     *   
+     *
      * + MonadMore:
      *   A MonadMore is a Monad which is also a Monoid and for which Zero is a zero for Bind.
      *   This is what Haskell calls a MonadPlus.
-     *   
+     *
      * + MonadPlus:
      *   A MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
      *   REVIEW: Haskell uses the term left distributive. Am I missing something?
-     *   
+     *
      * + MonadOr:
      *   A MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
      *   Here, we prefer to use OrElse instead of Plus for the Monoid composition operation.
@@ -118,24 +118,24 @@ namespace Narvalo.Fx.Skeleton
      * - Unit is True
      * - Zero is False
      *
-     * We write the definitions and rules using the Haskell syntax. 
-     * For a translation to .NET, see Narvalo.Facts\Fx\Skeleton\Rules.cs
-     * 
-     * Core definitions (see src\Narvalo.Common\Fx\Skeleton\Monad`1.cs):
+     * We write the definitions and rules using the Haskell syntax.
+     * For a translation to .NET, see Rules.cs
+     *
+     * Core definitions (see Monad`1.cs):
      * - m >>= g = join (fmap g m)                              Bind defined via Multiply and Map
      * - fmap f x = x >>= (return . f)                          Map defined by Bind & Unit
      * - join x = x >>= id                                      Multiply defined by Bind
      * - m >> n = m >>= \_ -> n                                 Then defined by Bind
-     * 
-     * Core rules (see src\Narvalo.Facts\Fx\Skeleton\Rules.cs):
+     *
+     * Core rules (see Rules.cs):
      * - fmap id == id                                          [Map]
      * - fmap (f . g) == fmap f . fmap g                        [Map]
      * - (m >> n) >> o = m >> (n >> o)                          [Then]      Associativity
-     * 
-     * Haskell (see src\Narvalo.Facts\Fx\Skeleton\Rules.cs)
+     *
+     * Haskell (see Rules.cs)
      * ------------------------------------------------
      * - mplus mzero m = m                                      [Monoid]    Left identity
-     * - mplus m mzero = m                                      [Monoid]    Right identity 
+     * - mplus m mzero = m                                      [Monoid]    Right identity
      * - mplus a (mplus b c) = mplus (mplus a b) c              [Monoid]    Associativity
      * - return x >>= f = f x                                   [Monad]     Left identity
      *   return >=> g ≡ g
@@ -192,7 +192,7 @@ namespace Narvalo.Fx.Skeleton
      * Map            | fmap          | Map
      * Multiply (μ)   | join          | Flatten
      * Then           | >>            | Then
-     *                | fail          | 
+     *                | fail          |
      * ---------------+---------------+------------------------------------
      * Zero           | mzero         | Zero        or None, Failure,...
      * Plus           | mplus         | Plus        or OrElse,...
@@ -209,7 +209,7 @@ namespace Narvalo.Fx.Skeleton
      *
      * .NET <-> Haskell
      * ================
-     * 
+     *
      * We prefix with a @ the .NET methods provided as extension methods.
      *
      * Monad
@@ -231,8 +231,8 @@ namespace Narvalo.Fx.Skeleton
      *                              sequence :: Monad m => [m a] -> m [a]
      *                              sequence_ :: Monad m => [m a] -> m ()
      *                              (=<<) :: Monad m => (a -> m b) -> m a -> m b
-     *      Monad.Compose           (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
-     *      Monad.ComposeBack       (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+     *      @Kunc.Compose           (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+     *      @Kunc.ComposeBack       (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
      *                              forever :: Monad m => m a -> m b
      *                              void :: Functor f => f a -> f ()
      *
@@ -244,7 +244,7 @@ namespace Narvalo.Fx.Skeleton
      *                              mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
      *                              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
      *                              zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()
-     *                              foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
+     *      @Enumerable<T>.Fold     foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
      *                              foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()
      *                              replicateM :: Monad m => Int -> m a -> m [a]
      *                              replicateM_ :: Monad m => Int -> m a -> m ()
@@ -260,7 +260,7 @@ namespace Narvalo.Fx.Skeleton
      *      @Monad<T>.Zip           liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
      *      @Monad<T>.Zip           liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
      *      @Monad<T>.Zip           liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
-     *                              ap :: Monad m => m (a -> b) -> m a -> m b
+     *      (not implemented)       ap :: Monad m => m (a -> b) -> m a -> m b
      *
      *
      * References

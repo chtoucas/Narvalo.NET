@@ -131,7 +131,6 @@
       <Link>_Aliens\Microsoft.Web.UnitTestUtil\MvcHelper.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="Fx\Skeleton\Rules.cs" />
     <Compile Include="Linq\NullableFacts.cs" />
     <Compile Include="Linq\MaybeFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
@@ -171,6 +170,7 @@
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

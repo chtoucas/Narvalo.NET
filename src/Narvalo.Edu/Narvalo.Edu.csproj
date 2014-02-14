@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}</ProjectGuid>
+    <ProjectGuid>{71B69787-365A-4C07-8449-497CA60135DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Incubator</AssemblyName>
+    <RootNamespace>Narvalo.Edu</RootNamespace>
+    <AssemblyName>Narvalo.Edu</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -27,7 +27,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -53,10 +53,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
@@ -68,36 +69,29 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Fx\Either`2.cs" />
-    <Compile Include="Fx\Either`2.Language.cs">
-      <DependentUpon>Either`2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Either`2.Monad.cs">
-      <DependentUpon>Either`2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Func`%24.cs" />
-    <Compile Include="Fx\Identity.cs" />
-    <Compile Include="Fx\Identity`1%24.cs" />
-    <Compile Include="Fx\Identity`1.Comonad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\Identity`1.IEquatable.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.Monad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Lazy.cs" />
-    <Compile Include="Fx\Lazy`1%24.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Linq\Identity`1%24.cs" />
+    <Compile Include="Fx\Enumerable`1%24.cs" />
+    <Compile Include="Fx\Rules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SR.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SR.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Fx\Action`%24.cs" />
+    <Compile Include="Fx\Cokunc`.cs" />
+    <Compile Include="Fx\Comonad.cs" />
+    <Compile Include="Fx\Comonad`1.cs" />
+    <Compile Include="Fx\Kunc`%24.cs" />
+    <Compile Include="Fx\Kunc`.cs" />
+    <Compile Include="Fx\Monad.cs" />
+    <Compile Include="Fx\Monad`1%24.cs" />
+    <Compile Include="Fx\Monad`1%24.Linq.cs" />
+    <Compile Include="Fx\Monad`1%24.Prelude.cs" />
+    <Compile Include="Fx\Monad`1.cs" />
+    <Compile Include="Fx\Monoid`1.cs" />
+    <Compile Include="Fx\NamespaceDoc.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
@@ -110,21 +104,8 @@
       <Name>Narvalo.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SR.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

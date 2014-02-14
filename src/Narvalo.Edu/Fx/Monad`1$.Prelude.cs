@@ -1,8 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx.Skeleton
+namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     static partial class MonadExtensions
@@ -34,11 +35,12 @@ namespace Narvalo.Fx.Skeleton
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => second.Map(v2 => resultSelector.Invoke(_, v2)));
+            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         // [Haskell] liftM3
         // Promote a function to a monad, scanning the monadic arguments from left to right.
+        // NB: Optional.
         public static Monad<TResult> Zip<T1, T2, T3, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
@@ -57,6 +59,7 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] liftM4
         // Promote a function to a monad, scanning the monadic arguments from left to right.
+        // NB: Optional.
         public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
               this Monad<T1> @this,
               Monad<T2> second,
@@ -76,6 +79,7 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] liftM5
         // Promote a function to a monad, scanning the monadic arguments from left to right.
+        // NB: Optional.
         public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,

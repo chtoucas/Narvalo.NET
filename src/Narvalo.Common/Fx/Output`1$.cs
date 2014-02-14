@@ -17,7 +17,7 @@ namespace Narvalo.Fx
             Output<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
-            return @this.Bind(firstValue => second.Map(secondValue => resultSelector.Invoke(firstValue, secondValue)));
+            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         #endregion

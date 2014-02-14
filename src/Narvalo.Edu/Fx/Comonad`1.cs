@@ -2,7 +2,7 @@
 
 #define COMONAD_VIA_COBIND
 
-namespace Narvalo.Fx.Skeleton
+namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
