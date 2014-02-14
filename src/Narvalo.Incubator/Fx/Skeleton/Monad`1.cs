@@ -5,6 +5,7 @@
 namespace Narvalo.Fx.Skeleton
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     sealed class Monad<T>
     {
@@ -16,6 +17,10 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] mplus
         // An associative operation.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other",
+            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "Monad template definition.")]
         public Monad<T> Plus(Monad<T> other)
         {
             throw new NotImplementedException();
@@ -25,6 +30,10 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] >>=
         // Sequentially compose two actions, passing any value produced by the first as an argument to the second.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "kun",
+            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "Monad template definition.")]
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
 #if MONAD_VIA_BIND
@@ -35,6 +44,10 @@ namespace Narvalo.Fx.Skeleton
         }
 
         // [Haskell] fmap
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun",
+            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "Monad template definition.")]
         public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if MONAD_VIA_BIND
@@ -54,6 +67,8 @@ namespace Narvalo.Fx.Skeleton
 
         // [Haskell] return
         // Inject a value into the monadic type.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value",
+            Justification = "Monad template definition.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
@@ -62,6 +77,8 @@ namespace Narvalo.Fx.Skeleton
         // [Haskell] join
         // The join function is the conventional monad join operator. It is used to remove 
         // one level of monadic structure, projecting its bound argument into the outer level.
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square",
+            Justification = "Monad template definition.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_BIND

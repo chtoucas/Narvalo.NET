@@ -10,19 +10,7 @@ namespace Narvalo.Linq
     /// </summary>
     public static class IdentityExtensions
     {
-       //// Restriction Operators
-
-        public static Identity<TSource> Where<TSource>(
-            this Identity<TSource> @this,
-            Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : Identity<TSource>.Fail(reason: String.Empty));
-        }
-
-        //// Projection Operators
+        #region Projection Operators
 
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this,
@@ -44,5 +32,7 @@ namespace Narvalo.Linq
 
             return @this.Bind(_ => valueSelector(_).Map(m => resultSelector(_, m)));
         }
+
+        #endregion
     }
 }

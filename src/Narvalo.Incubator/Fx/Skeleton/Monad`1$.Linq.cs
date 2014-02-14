@@ -4,6 +4,7 @@ namespace Narvalo.Fx.Skeleton
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     static partial class MonadExtensions
     {
@@ -35,6 +36,7 @@ namespace Narvalo.Fx.Skeleton
 
         // Alias for Bind.
         // WARNING: Private since it won't be implemented for a concrete Monad (not used by the Query Expression Pattern).
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         static Monad<TResult> SelectMany<TSource, TResult>(
            this Monad<TSource> @this,
            Kunc<TSource, TResult> selector)
@@ -62,34 +64,34 @@ namespace Narvalo.Fx.Skeleton
 
         #region Join Operators
 
-        // If exists, it is used by Query Expression Pattern.
-        public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
-            this Monad<TSource> @this,
-            Monad<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector)
-        {
-            return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
-        }
+        ////// If exists, it is used by Query Expression Pattern.
+        ////public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
+        ////    this Monad<TSource> @this,
+        ////    Monad<TInner> inner,
+        ////    Func<TSource, TKey> outerKeySelector,
+        ////    Func<TInner, TKey> innerKeySelector,
+        ////    Func<TSource, TInner, TResult> resultSelector)
+        ////{
+        ////    return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+        ////}
 
-        // If exists, it is used by Query Expression Pattern.
-        public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
-            this Monad<TSource> @this,
-            Monad<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+        ////// If exists, it is used by Query Expression Pattern.
+        ////public static Monad<TResult> Join<TSource, TInner, TKey, TResult>(
+        ////    this Monad<TSource> @this,
+        ////    Monad<TInner> inner,
+        ////    Func<TSource, TKey> outerKeySelector,
+        ////    Func<TInner, TKey> innerKeySelector,
+        ////    Func<TSource, TInner, TResult> resultSelector,
+        ////    IEqualityComparer<TKey> comparer)
+        ////{
+        ////    Require.Object(@this);
+        ////    Require.NotNull(inner, "inner");
+        ////    Require.NotNull(outerKeySelector, "valueSelector");
+        ////    Require.NotNull(innerKeySelector, "innerKeySelector");
+        ////    Require.NotNull(resultSelector, "resultSelector");
 
-            throw new NotImplementedException();
-        }
+        ////    throw new NotImplementedException();
+        ////}
 
         #endregion
     }

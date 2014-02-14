@@ -7,6 +7,15 @@ namespace Narvalo.Fx
 
     public partial class Maybe<T>
     {
+        #region MonadOr
+
+        public Maybe<T> OrElse(Maybe<T> other)
+        {
+            return IsNone ? other : this;
+        }
+
+        #endregion
+
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
@@ -41,14 +50,5 @@ namespace Narvalo.Fx
 
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
-
-        #region MonadOr
-
-        public Maybe<T> OrElse(Maybe<T> other)
-        {
-            return IsNone ? other : this;
-        }
-
-        #endregion
     }
 }

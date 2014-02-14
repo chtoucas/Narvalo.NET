@@ -2,6 +2,8 @@
 
 namespace Narvalo.Fx.Skeleton
 {
+    using System.Diagnostics.CodeAnalysis;
+
     static class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -32,6 +34,8 @@ namespace Narvalo.Fx.Skeleton
         // guard b is return () if b is True, and mzero if b is False.
         // WARNING: Private since it won't be implemented for a concrete Monad.
         // WARNING: Only for Monads with a Zero.
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Monad template definition.")]
         static Monad<Unit> Guard<TSource>(bool predicate)
         {
             return predicate ? Unit : Zero;
@@ -40,6 +44,8 @@ namespace Narvalo.Fx.Skeleton
         // [Haskell] when
         // Conditional execution of monadic expressions.
         // WARNING: Private since it won't be implemented for a concrete Monad.
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Monad template definition.")]
         static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             Require.NotNull(action, "action");
@@ -50,6 +56,8 @@ namespace Narvalo.Fx.Skeleton
         // [Haskell] unless
         // The reverse of when.
         // WARNING: Private since it won't be implemented for a concrete Monad.
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Monad template definition.")]
         static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             return When<TSource>(!predicate, action);

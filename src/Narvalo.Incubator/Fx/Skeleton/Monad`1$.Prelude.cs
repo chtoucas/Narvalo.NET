@@ -3,6 +3,7 @@
 namespace Narvalo.Fx.Skeleton
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     static partial class MonadExtensions
     {
@@ -11,6 +12,8 @@ namespace Narvalo.Fx.Skeleton
         // [Haskell] liftM
         // Promote a function to a monad.
         // WARNING: Private since it won't be implemented for a concrete Monad (this is just Map).
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Monad template definition.")]
         static Monad<TResult> Zip<TFirst, TResult>(
            this Monad<TFirst> @this,
            Func<TFirst, TResult> resultSelector)
