@@ -6,10 +6,13 @@ namespace Narvalo.Edu.Linq
 
     interface IQuerySyntax<T> : IQuerySyntax
     {
+        // Natively supported by any Monad with a Zero.
         IQuerySyntax<T> Where(Func<T, bool> predicate);
 
+        // Natively supported by any Monad.
         IQuerySyntax<U> Select<U>(Func<T, U> selector);
 
+        // Kind of generalisation of Zip (liftM2).
         IQuerySyntax<TResult> SelectMany<TMiddle, TResult>(
             Func<T, IQuerySyntax<TMiddle>> selector,
             Func<T, TMiddle, TResult> resultSelector);

@@ -8,71 +8,75 @@ namespace Narvalo.Edu.Linq
      * The .NET Standard Query Operators
      * =================================
      * 
-     * Restriction Operators
-     * - Where
-     * Projection Operators
-     * - Select
-     * - SelectMany
-     * Partitioning Operators
-     * - Take
-     * - Skip
-     * - TakeWhile
-     * - SkipWhile
-     * Join Operators
-     * - Join
-     * - GroupJoin
-     * Concatenation Operator
-     * - Concat
-     * Ordering Operators
-     * - OrderBy
-     * - OrderByDescending
-     * - ThenBy
-     * - ThenByDescending 
-     * - Reverse
-     * Grouping Operators
-     * - GroupBy
-     * Set Operators
-     * - Distinct
-     * - Union
-     * - Intersect
-     * - Except
-     * Conversion Operators
-     * - AsEnumerable
-     * - ToArray
-     * - ToList
-     * - ToDictionary
-     * - ToLookup
-     * - OfType
-     * - Cast
-     * Equality Operator
-     * - SequenceEqual
-     * Element Operators
-     * - First
-     * - FirstOrDefault
-     * - Last
-     * - LastOrDefault
-     * - Single
-     * - SingleOrDefault
-     * - ElementAt
-     * - ElementAtOrDefault
-     * - DefaultIfEmpty
-     * Generation Operators
-     * - Range
-     * - Repeat
-     * - Empty
-     * Quantifiers
-     * - Any
-     * - All
-     * - Contains
-     * Aggregate Operators
-     * - Count
-     * - LongCount
-     * - Sum
-     * - Min
-     * - Max
-     * - Average
-     * - Aggregate
+     * ### Restriction Operators
+     * - Where (*)                      Monad<T>.Where
+     * ### Projection Operators
+     * - Select (*)                     Monad<T>.Select
+     * - SelectMany (*)                 Monad<T>.Bind
+     *                                  @Monad<T>.SelectMany
+     * ### Partitioning Operators
+     * - Take                           -
+     * - Skip                           -
+     * - TakeWhile                      -
+     * - SkipWhile                      -
+     * ### Join Operators
+     * - Join (*)                       @Monad<T>.Join
+     * - GroupJoin (*)                  @Monad<T>.GroupJoin
+     * ### Concatenation Operator
+     * - Concat                         ??? @Monad<T>.Plus
+     * ### Ordering Operators
+     * - OrderBy (*)                    @Monad<T>.OrderBy
+     * - OrderByDescending (*)          @Monad<T>.OrderByDescending
+     * - ThenBy                         ???
+     * - ThenByDescending               ???
+     * - Reverse                        -
+     * ### Grouping Operators
+     * - GroupBy (*)                    @Monad<T>.GroupBy
+     * ### Set Operators
+     * - Distinct                       -
+     * - Union                          -
+     * - Intersect                      -
+     * - Except                         -
+     * ### Conversion Operators
+     * - AsEnumerable                   -
+     * - ToArray                        -
+     * - ToList                         -
+     * - ToDictionary                   -
+     * - ToLookup                       -
+     * - OfType                         ???
+     * - Cast                           ???
+     * ### Equality Operator
+     * - SequenceEqual                  ??? Equals
+     * ### Element Operators
+     * - First                          -
+     * - FirstOrDefault                 -
+     * - Last                           -
+     * - LastOrDefault                  -
+     * - Single                         -
+     * - SingleOrDefault                -
+     * - ElementAt                      -
+     * - ElementAtOrDefault             -
+     * - DefaultIfEmpty                 ??? For Monad with a Zero
+     * ### Generation Operators
+     * - Range                          -
+     * - Repeat                         -
+     * - Empty                          Monad<T>.Zero
+     * ### Quantifiers
+     * - Any                            ???
+     * - All                            ???
+     * - Contains                       ???
+     * ### Aggregate Operators
+     * - Count                          -
+     * - LongCount                      -
+     * - Sum                            -
+     * - Min                            -
+     * - Max                            -
+     * - Average                        -
+     * - Aggregate                      -
      * 
+     * 
+     * Monadic extensions to List operations
+     * =====================================
      * 
      * Linq            | List           | Terminology used here
      * ----------------+----------------+-----------------------------------------

@@ -38,6 +38,7 @@ namespace Narvalo.Edu.Fx
 #endif
         }
 
+        // [Haskell] fmap
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun",
             Justification = "Monad template definition.")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
@@ -49,12 +50,6 @@ namespace Narvalo.Edu.Fx
 #else
             return Bind(_ => Monad<TResult>.η(selector.Invoke(_)));
 #endif
-        }
-
-        // [Haskell] fmap
-        public Monad<TResult> Map<TResult>(Func<T, TResult> fun)
-        {
-            return Select(fun);
         }
 
         // [Haskell] >>

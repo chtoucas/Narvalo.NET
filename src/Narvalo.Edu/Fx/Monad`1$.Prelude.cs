@@ -54,7 +54,7 @@ namespace Narvalo.Edu.Fx
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
+            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         // [Haskell] liftM3

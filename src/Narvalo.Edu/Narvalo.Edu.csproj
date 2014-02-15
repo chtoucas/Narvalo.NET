@@ -71,6 +71,8 @@
     <Compile Include="Common\Enumerable`1%24.cs" />
     <Compile Include="Common\Require.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="Linq\Enumerable[Monad]%24.cs" />
+    <Compile Include="Linq\Enumerable`1%24.Prelude.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
     <Compile Include="Fx\Rules.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />

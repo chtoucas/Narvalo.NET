@@ -39,7 +39,7 @@ namespace Narvalo.Edu.Fx
      * - Empty is the identity for Append
      * - Append is associative
      * Haskell also includes a Concat operation which in fact derives from Empty and Append:
-     * FoldR Append Empty.
+     *      FoldR Append Empty.
      *
      *
      * Monad
@@ -53,6 +53,7 @@ namespace Narvalo.Edu.Fx
      * defines with a Unit element and two operations Map and Multiply.
      *
      * NB: Haskell also provides a fail method that is not part of the standard definition.
+     * It is mostly used for pattern matching failure, something we do not have in .NET.
      *
      *
      * Comonad
@@ -205,87 +206,86 @@ namespace Narvalo.Edu.Fx
      * This is similar to the do syntaxic sugar of Haskell.
      * 
      * 
-     * Name           | Haskell       | QEP           | Terminology used here
-     * ---------------+---------------+---------------+------------------------------------
-     * Monad
-     * ---------------+---------------+---------------+------------------------------------
-     * Unit (η)       | return        |               | Return      or Create, Success,...
-     * Bind           | >>=           |               | Bind
-     * Map            | fmap / liftM  | Select        | Map
-     * Multiply (μ)   | join          |               | Flatten
-     * Then           | >>            |               | Then
-     *                | fail          |               |
-     * ---------------+---------------+---------------+------------------------------------
+     * Name           | Haskell       | Terminology used here
+     * ---------------+---------------+------------------------------------
      * Monoid
-     * ---------------+---------------+---------------+------------------------------------
-     * Zero           | mzero         |               | Zero        or None, Empty, Failure,...
-     * Plus           | mplus         |               | Plus        or OrElse,...
-     * ---------------+---------------+---------------+------------------------------------
+     * ---------------+---------------+------------------------------------
+     * Zero           | mzero         | Zero        or None, Empty, Failure,...
+     * Plus           | mplus         | Plus        or OrElse,...
+     * ---------------+---------------+------------------------------------
+     * Monad
+     * ---------------+---------------+------------------------------------
+     * Unit (η)       | return        | Return      or Create, Success,...
+     * Bind           | >>=           | Bind
+     * Map            | fmap / liftM  | Select
+     * Multiply (μ)   | join          | Flatten
+     * Then           | >>            | Then
+     *                | fail          | -
+     * ---------------+---------------+------------------------------------
      * Comonad
-     * ---------------+---------------+---------------+------------------------------------
-     * Counit (ε)     | extract       |               | Extract
-     * Cobind         | extend        |               | Extend
-     * Comultiply (δ) | duplicate     |               | Duplicate
-     * ---------------+---------------+---------------+------------------------------------
-     * Extensions
-     * ---------------+---------------+---------------+------------------------------------
-     *                | mfilter       | Where         | Where
+     * ---------------+---------------+------------------------------------
+     * Counit (ε)     | extract       | Extract
+     * Cobind         | extend        | Extend
+     * Comultiply (δ) | duplicate     | Duplicate
+     * ---------------+---------------+------------------------------------
      *              
      *
      * .NET <-> Haskell
      * ================
      *
      * We prefix with a @ the .NET methods provided as extension methods.
+     * Lines starting with a ? flag method that I considered optional, either because they're too complicated
+     * or they do not really make sense in .NET.
      *
      * Monad
-     *      Monad<T>.Map            fmap :: (a -> b) -> m a -> m b
-     *      Monad<T>.Bind           (>>=) :: forall a b. m a -> (a -> m b) -> m b
-     *      Monad<T>.Then           (>>) :: forall a b. m a -> m b -> m b
-     *      Monad.Return            return :: a -> m a
-     *      (not implemented)       fail :: String -> m a
+     *      Monad<T>.Select                 fmap :: (a -> b) -> m a -> m b
+     *      Monad<T>.Bind                   (>>=) :: forall a b. m a -> (a -> m b) -> m b
+     *      Monad<T>.Then                   (>>) :: forall a b. m a -> m b -> m b
+     *      Monad.Return                    return :: a -> m a
+     *      -                               fail :: String -> m a                               NB: See discussion above.
      *
      * MonadPlus
-     *      Monad<T>.Zero           mzero :: m a
-     *      Monad<T>.Plus           mplus :: m a -> m a -> m a
+     *      Monad<T>.Zero                   mzero :: m a
+     *      Monad<T>.Plus                   mplus :: m a -> m a -> m a
      *
      * Basic Monad functions
-     *      (not implemented)       mapM :: Monad m => (a -> m b) -> [a] -> m [b]
-     *      (not implemented)       mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
-     *      @Enumerable<T>.ForEach  forM :: Monad m => [a] -> (a -> m b) -> m [b]
-     *      (not implemented)       forM_ :: Monad m => [a] -> (a -> m b) -> m ()
-     *      @Enumerable<T>.Collect  sequence :: Monad m => [m a] -> m [a]
-     *      (not implemented)       sequence_ :: Monad m => [m a] -> m ()
-     *      @Kunc.Invoke            (=<<) :: Monad m => (a -> m b) -> m a -> m b
-     *      @Kunc.Compose           (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
-     *      @Kunc.ComposeBack       (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
-     *                              forever :: Monad m => m a -> m b
-     *                              void :: Functor f => f a -> f ()
+     *      -                               mapM :: Monad m => (a -> m b) -> [a] -> m [b]       NB: For us, same as forM
+     *      -                               mapM_ :: Monad m => (a -> m b) -> [a] -> m ()       NB: Same as mapM but returns Monad.Unit
+     *      @Enumerable<T>.ForEach          forM :: Monad m => [a] -> (a -> m b) -> m [b]
+     *      -                               forM_ :: Monad m => [a] -> (a -> m b) -> m ()       NB: Same as forM but returns Monad.Unit
+     *      @Enumerable<Monad<T>>.Collect   sequence :: Monad m => [m a] -> m [a]
+     *      -                               sequence_ :: Monad m => [m a] -> m ()               NB: Same as sequence but returns Monad.Unit
+     *      @Kunc.Invoke                    (=<<) :: Monad m => (a -> m b) -> m a -> m b
+     *      @Kunc.Compose                   (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+     *      @Kunc.ComposeBack               (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+     *      ??? Not supported               forever :: Monad m => m a -> m b
+     *      ??? Not supported               void :: Functor f => f a -> f ()
      *
      * Generalisations of list functions
-     *      Monad.Flatten           join :: Monad m => m (m a) -> m a
-     *      @Enumerable<T>.Sum      msum :: MonadPlus m => [m a] -> m a
-     *      @Monad<T>.Where         mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
-     *      @Enumerable<T>.Where    filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
-     *      @Enumerable<T>.MapAndUnzip      mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
-     *      @Enumerable<T>.Filter   zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-     *      (not implemented)       zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()
-     *      @Enumerable<T>.Fold     foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
-     *      (not implemented)       foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()
-     *      @Monad<T>.Repeat        replicateM :: Monad m => Int -> m a -> m [a]
-     *      (not implemented)       replicateM_ :: Monad m => Int -> m a -> m ()
+     *      Monad.Flatten                   join :: Monad m => m (m a) -> m a
+     *      @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
+     *      @Monad<T>.Where                 mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
+     *      @Enumerable<T>.Where            filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
+     * ?    @Enumerable<T>.SelectAndUnzip   mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
+     *      @Enumerable<T>.Zip              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
+     *      -                               zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()   NB: Same as zipWithM but returns Monad.Unit            
+     *      @Enumerable<T>.Fold             foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
+     *      -                               foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()        NB: Same as foldM but returns Monad.Unit
+     *      @Monad<T>.Repeat                replicateM :: Monad m => Int -> m a -> m [a]
+     *      -                               replicateM_ :: Monad m => Int -> m a -> m ()                    NB: Same as replicateM but returns Monad.Unit            
      *
      * Conditional execution of monadic expressions
-     *      Monad.Guard             guard :: MonadPlus m => Bool -> m ()
-     *      Monad.When              when :: Monad m => Bool -> m () -> m ()
-     *      Monad.Unless            unless :: Monad m => Bool -> m () -> m ()
+     * ?    Monad.Guard                     guard :: MonadPlus m => Bool -> m ()
+     * ?    Monad.When                      when :: Monad m => Bool -> m () -> m ()
+     * ?    Monad.Unless                    unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
-     *      @Monad<T>.Zip           liftM :: Monad m => (a1 -> r) -> m a1 -> m r
-     *      @Monad<T>.Zip           liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
-     *      @Monad<T>.Zip           liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
-     *      @Monad<T>.Zip           liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
-     *      @Monad<T>.Zip           liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
-     *      (not supported)         ap :: Monad m => m (a -> b) -> m a -> m b
+     * ?    @Monad<T>.Zip                   liftM :: Monad m => (a1 -> r) -> m a1 -> m r
+     *      @Monad<T>.Zip                   liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
+     * ?    @Monad<T>.Zip                   liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
+     * ?    @Monad<T>.Zip                   liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
+     * ?    @Monad<T>.Zip                   liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
+     *      ??? Not supported               ap :: Monad m => m (a -> b) -> m a -> m b
      *
      *
      * References
