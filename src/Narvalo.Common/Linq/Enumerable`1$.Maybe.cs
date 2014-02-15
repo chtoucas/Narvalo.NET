@@ -43,7 +43,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNone(@this, Stubs<TSource>.True);
+            return FirstOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -59,7 +59,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNone(@this, Stubs<TSource>.True);
+            return LastOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -84,7 +84,7 @@ namespace Narvalo.Linq
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNone(@this, Stubs<TSource>.True);
+            return SingleOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)

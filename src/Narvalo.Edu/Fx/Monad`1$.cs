@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Edu.Fx
 {
     using System;
 
@@ -18,7 +18,7 @@ namespace Narvalo.Fx
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-        // WARNING: Only for Monads with a Zero.
+#if !MONAD_DISABLE_ZERO
         public static Monad<TResult> Then<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,
@@ -27,7 +27,6 @@ namespace Narvalo.Fx
             return Coalesce(@this, predicate, other, Monad<TResult>.Zero);
         }
 
-        // WARNING: Only for Monads with a Zero.
         public static Monad<TResult> Otherwise<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,
@@ -35,6 +34,7 @@ namespace Narvalo.Fx
         {
             return Coalesce(@this, predicate, Monad<TResult>.Zero, other);
         }
+#endif
 
         public static Monad<Unit> Run<TSource>(this Monad<TSource> @this, Kunc<TSource, Unit> action)
         {

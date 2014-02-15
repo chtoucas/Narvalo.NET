@@ -1,31 +1,50 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Edu.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     static partial class MonadExtensions
     {
+        #region Generalisations of list functions
+
+#if !MONAD_DISABLE_ZERO
+        // [Haskell] mfilter
+        public static Monad<TSource> Where<TSource>(this Monad<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : Monad<TSource>.Zero);
+        }
+#endif
+
+        // [Haskell] replicateM
+        public static Monad<IEnumerable<T>> Repeat<T>(this Monad<T> @this, int count)
+        {
+            return from _ in @this select Enumerable.Repeat(_, count);
+        }
+
+        #endregion
+
         #region Monadic lifting operators
 
         // [Haskell] liftM
-        // Promote a function to a monad.
-        // WARNING: Private since it won't be implemented for a concrete Monad (this is just Map).
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Monad template definition.")]
+            Justification = "Optional extension. This is just the Map / Select method.")]
         static Monad<TResult> Zip<TFirst, TResult>(
            this Monad<TFirst> @this,
            Func<TFirst, TResult> resultSelector)
         {
             Require.Object(@this);
 
-            return @this.Map(resultSelector);
+            return @this.Select(resultSelector);
         }
 
         // [Haskell] liftM2
-        // Promote a function to a monad, scanning the monadic arguments from left to right.
         public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
             this Monad<TFirst> @this,
             Monad<TSecond> second,
@@ -39,13 +58,12 @@ namespace Narvalo.Fx
         }
 
         // [Haskell] liftM3
-        // Promote a function to a monad, scanning the monadic arguments from left to right.
-        // NB: Optional.
-        public static Monad<TResult> Zip<T1, T2, T3, TResult>(
-             this Monad<T1> @this,
-             Monad<T2> second,
-             Monad<T3> third,
-             Func<T1, T2, T3, TResult> resultSelector)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
+        static Monad<TResult> Zip<T1, T2, T3, TResult>(
+            this Monad<T1> @this,
+            Monad<T2> second,
+            Monad<T3> third,
+            Func<T1, T2, T3, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -58,14 +76,13 @@ namespace Narvalo.Fx
         }
 
         // [Haskell] liftM4
-        // Promote a function to a monad, scanning the monadic arguments from left to right.
-        // NB: Optional.
-        public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
-              this Monad<T1> @this,
-              Monad<T2> second,
-              Monad<T3> third,
-              Monad<T4> fourth,
-              Func<T1, T2, T3, T4, TResult> resultSelector)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
+        static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Monad<T1> @this,
+             Monad<T2> second,
+             Monad<T3> third,
+             Monad<T4> fourth,
+             Func<T1, T2, T3, T4, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -78,15 +95,14 @@ namespace Narvalo.Fx
         }
 
         // [Haskell] liftM5
-        // Promote a function to a monad, scanning the monadic arguments from left to right.
-        // NB: Optional.
-        public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-             this Monad<T1> @this,
-             Monad<T2> second,
-             Monad<T3> third,
-             Monad<T4> fourth,
-             Monad<T5> fifth,
-             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
+        static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Monad<T1> @this,
+            Monad<T2> second,
+            Monad<T3> third,
+            Monad<T4> fourth,
+            Monad<T5> fifth,
+            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Edu.Fx
 {
     using System.Runtime.CompilerServices;
 
@@ -14,6 +14,23 @@ namespace Narvalo.Fx
      * It is NOT meant to be a generic monad implementation, anyway this is not possible in C#.
      * I did this as a learning exercise, but I might use this work as a base for writing T4 templates.
      *
+     * 
+     * Compiler switches
+     * =================
+     * 
+     * See sections below for a complete explanation.
+     *
+     * - MONAD_VIA_MAP_MULTIPLY
+     *   The default behaviour is to define Monads via Bind.
+     *   
+     * - MONAD_DISABLE_ZERO
+     * - MONAD_DISABLE_PLUS
+     *   A Monad does not necessary have a Zero and a Plus operation.
+     *   NB: Disabling Zero automatically disables Plus.
+     * 
+     * - COMONAD_VIA_MAP_COMULTIPLY
+     *   The default behaviour is to define Comonads via cobind.
+     * 
      *
      * Monoid
      * ======
@@ -35,8 +52,6 @@ namespace Narvalo.Fx
      * If one wishes to stay close to the Category roots of Monads, a Monad is equivalently
      * defines with a Unit element and two operations Map and Multiply.
      *
-     * NB: The constant MONAD_VIA_BIND allows to switch between both approachs.
-     *
      * NB: Haskell also provides a fail method that is not part of the standard definition.
      *
      *
@@ -46,8 +61,6 @@ namespace Narvalo.Fx
      * There are two equivalent ways to define a comonad:
      * - Counit, Cobind
      * - Counit, Map, Comultiply
-     *
-     * NB: The constant COMONAD_VIA_COBIND allows to switch between both approachs.
      *
      *
      * Richer Monads
@@ -182,30 +195,42 @@ namespace Narvalo.Fx
      * - P ∨ True = True                                        [...]       Right zero
      *
      *
-     * Terminology
-     * ===========
-     *
-     * Name           | Haskell       | Terminology used here
-     * ---------------+---------------+------------------------------------
-     * Unit (η)       | return        | Return      or Create, Success,...
-     * Bind           | >>=           | Bind
-     * Map            | fmap          | Map
-     * Multiply (μ)   | join          | Flatten
-     * Then           | >>            | Then
-     *                | fail          |
-     * ---------------+---------------+------------------------------------
-     * Zero           | mzero         | Zero        or None, Failure,...
-     * Plus           | mplus         | Plus        or OrElse,...
-     * ---------------+---------------+------------------------------------
-     * Counit (ε)     | extract       | Extract
-     * Cobind         | extend        | Extend
-     * Map            |               | Map
-     * Comultiply (δ) | duplicate     | Duplicate
-     *
-     * NB:
-     * - Sometimes we choose a more appropriate name than the default one
-     * - Map is the Select found in Linq
-     *
+     * Implementation
+     * ==============
+     * 
+     * Sometimes we choose a more appropriate name than the default one.
+     * 
+     * We also prefer to use the name expected by the Query Expression Pattern (QEP).
+     * The immediate benefit is that we can use query expressions (from, select, where).
+     * This is similar to the do syntaxic sugar of Haskell.
+     * 
+     * 
+     * Name           | Haskell       | QEP           | Terminology used here
+     * ---------------+---------------+---------------+------------------------------------
+     * Monad
+     * ---------------+---------------+---------------+------------------------------------
+     * Unit (η)       | return        |               | Return      or Create, Success,...
+     * Bind           | >>=           |               | Bind
+     * Map            | fmap / liftM  | Select        | Map
+     * Multiply (μ)   | join          |               | Flatten
+     * Then           | >>            |               | Then
+     *                | fail          |               |
+     * ---------------+---------------+---------------+------------------------------------
+     * Monoid
+     * ---------------+---------------+---------------+------------------------------------
+     * Zero           | mzero         |               | Zero        or None, Empty, Failure,...
+     * Plus           | mplus         |               | Plus        or OrElse,...
+     * ---------------+---------------+---------------+------------------------------------
+     * Comonad
+     * ---------------+---------------+---------------+------------------------------------
+     * Counit (ε)     | extract       |               | Extract
+     * Cobind         | extend        |               | Extend
+     * Comultiply (δ) | duplicate     |               | Duplicate
+     * ---------------+---------------+---------------+------------------------------------
+     * Extensions
+     * ---------------+---------------+---------------+------------------------------------
+     *                | mfilter       | Where         | Where
+     *              
      *
      * .NET <-> Haskell
      * ================
@@ -224,13 +249,13 @@ namespace Narvalo.Fx
      *      Monad<T>.Plus           mplus :: m a -> m a -> m a
      *
      * Basic Monad functions
-     *                              mapM :: Monad m => (a -> m b) -> [a] -> m [b]
-     *                              mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
-     *                              forM :: Monad m => [a] -> (a -> m b) -> m [b]
-     *                              forM_ :: Monad m => [a] -> (a -> m b) -> m ()
-     *                              sequence :: Monad m => [m a] -> m [a]
-     *                              sequence_ :: Monad m => [m a] -> m ()
-     *                              (=<<) :: Monad m => (a -> m b) -> m a -> m b
+     *      (not implemented)       mapM :: Monad m => (a -> m b) -> [a] -> m [b]
+     *      (not implemented)       mapM_ :: Monad m => (a -> m b) -> [a] -> m ()
+     *      @Enumerable<T>.ForEach  forM :: Monad m => [a] -> (a -> m b) -> m [b]
+     *      (not implemented)       forM_ :: Monad m => [a] -> (a -> m b) -> m ()
+     *      @Enumerable<T>.Collect  sequence :: Monad m => [m a] -> m [a]
+     *      (not implemented)       sequence_ :: Monad m => [m a] -> m ()
+     *      @Kunc.Invoke            (=<<) :: Monad m => (a -> m b) -> m a -> m b
      *      @Kunc.Compose           (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
      *      @Kunc.ComposeBack       (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
      *                              forever :: Monad m => m a -> m b
@@ -238,16 +263,16 @@ namespace Narvalo.Fx
      *
      * Generalisations of list functions
      *      Monad.Flatten           join :: Monad m => m (m a) -> m a
-     *                              msum :: MonadPlus m => [m a] -> m a
-     *                              mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
-     *                              filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
-     *                              mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
-     *                              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-     *                              zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()
+     *      @Enumerable<T>.Sum      msum :: MonadPlus m => [m a] -> m a
+     *      @Monad<T>.Where         mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
+     *      @Enumerable<T>.Where    filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
+     *      @Enumerable<T>.MapAndUnzip      mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
+     *      @Enumerable<T>.Filter   zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
+     *      (not implemented)       zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()
      *      @Enumerable<T>.Fold     foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
-     *                              foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()
-     *                              replicateM :: Monad m => Int -> m a -> m [a]
-     *                              replicateM_ :: Monad m => Int -> m a -> m ()
+     *      (not implemented)       foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()
+     *      @Monad<T>.Repeat        replicateM :: Monad m => Int -> m a -> m [a]
+     *      (not implemented)       replicateM_ :: Monad m => Int -> m a -> m ()
      *
      * Conditional execution of monadic expressions
      *      Monad.Guard             guard :: MonadPlus m => Bool -> m ()
@@ -260,7 +285,7 @@ namespace Narvalo.Fx
      *      @Monad<T>.Zip           liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
      *      @Monad<T>.Zip           liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
      *      @Monad<T>.Zip           liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
-     *      (not implemented)       ap :: Monad m => m (a -> b) -> m a -> m b
+     *      (not supported)         ap :: Monad m => m (a -> b) -> m a -> m b
      *
      *
      * References

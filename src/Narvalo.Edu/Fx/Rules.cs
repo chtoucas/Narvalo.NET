@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Edu.Fx
 {
     using System;
 
@@ -8,6 +8,7 @@ namespace Narvalo.Fx
     {
         #region Monoid Laws
 
+#if !MONAD_DISABLE_ZERO && !MONAD_DISABLE_PLUS
         /// <summary>
         /// First Monoid Law: Zero is a left identity for Plus.
         /// </summary>
@@ -34,6 +35,7 @@ namespace Narvalo.Fx
             // mplus a (mplus b c) = mplus (mplus a b) c 
             return a.Plus(b.Plus(c)) == (a.Plus(b)).Plus(c);
         }
+#endif
 
         #endregion
 
@@ -120,6 +122,7 @@ namespace Narvalo.Fx
         /// </summary>
         public static bool Map_SecondRule<X, Y, Z>(Monad<X> m, Func<Y, Z> f, Func<X, Y> g)
         {
+            // REVIEW: Is this obvious?
             // fmap (f . g) == fmap f . fmap g
             return m.Map(_ => f(g(_))) == m.Map(g).Map(f);
         }
@@ -135,6 +138,7 @@ namespace Narvalo.Fx
 
         #endregion
 
+#if !MONAD_DISABLE_ZERO
         /// <summary>
         /// MonadZero: Zero is a left zero for Bind.
         /// </summary>
@@ -161,7 +165,9 @@ namespace Narvalo.Fx
             // v >> mzero = mzero
             return m.Then(Monad<X>.Zero) == Monad<X>.Zero;
         }
+#endif
 
+#if !MONAD_DISABLE_ZERO && !MONAD_DISABLE_PLUS
         /// <summary>
         /// MonadPlus: Bind is right distributive over Plus.
         /// </summary>
@@ -188,5 +194,7 @@ namespace Narvalo.Fx
             // morelse a (return b) ≡ return b
             return a.Plus(Monad.Return(b)) == Monad.Return(b);
         }
+#endif
+
     }
 }

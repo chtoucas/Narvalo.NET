@@ -45,7 +45,7 @@ namespace Narvalo
             if (value.Length == 0) {
                 throw new ArgumentException(SR.Require_PropertyEmpty, "value");
             }
-            
+
             Contract.EndContractBlock();
 
             return value;
@@ -71,7 +71,7 @@ namespace Narvalo
             if (value.Length == 0) {
                 throw new ArgumentException(Format.CurrentCulture(SR.Require_ArgumentEmptyFormat, parameterName), parameterName);
             }
-            
+
             Contract.EndContractBlock();
         }
 
