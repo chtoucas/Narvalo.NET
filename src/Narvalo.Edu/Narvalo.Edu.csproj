@@ -70,8 +70,25 @@
     </Compile>
     <Compile Include="Common\Enumerable`1%24.cs" />
     <Compile Include="Common\Require.cs" />
+    <Compile Include="Fx\Func`%24.cs" />
+    <Compile Include="Fx\Obsolete\Kunc`%24.cs" />
+    <Compile Include="Samples\Func`%24.cs" />
+    <Compile Include="Samples\Identity.cs" />
+    <Compile Include="Samples\Identity`1%24.cs" />
+    <Compile Include="Samples\Identity`1%24.Linq.cs" />
+    <Compile Include="Samples\Identity`1.Comonad.cs">
+      <DependentUpon>Identity`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Identity`1.cs" />
+    <Compile Include="Samples\Identity`1.IEquatable.cs">
+      <DependentUpon>Identity`1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\Identity`1.Monad.cs">
+      <DependentUpon>Identity`1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Linq\Enumerable[Monad]%24.cs" />
+    <Compile Include="Linq\Enumerable`1%24.Cata.cs" />
     <Compile Include="Linq\Enumerable`1%24.Prelude.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
     <Compile Include="Fx\Rules.cs" />
@@ -81,7 +98,7 @@
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fx\Action`%24.cs" />
+    <Compile Include="Fx\Obsolete\Action`%24.cs" />
     <Compile Include="Fx\Cokunc`.cs" />
     <Compile Include="Fx\Comonad.cs" />
     <Compile Include="Fx\Comonad`1.cs" />

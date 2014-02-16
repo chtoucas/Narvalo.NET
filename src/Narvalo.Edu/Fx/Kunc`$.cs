@@ -2,9 +2,7 @@
 
 namespace Narvalo.Edu.Fx
 {
-    using System;
-
-    static class KuncExtensions
+    static partial class KuncExtensions
     {
         #region Basic Monad functions
 
@@ -39,17 +37,5 @@ namespace Narvalo.Edu.Fx
         }
 
         #endregion
-
-        [Obsolete]
-        public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
-        {
-            return predicate ? @this : Stubs.Noop;
-        }
-
-        [Obsolete]
-        public static Kunc<TSource, Unit> Filter<TSource>(this Kunc<TSource, Unit> @this, bool predicate)
-        {
-            return predicate ? @this : Stubs<TSource>.Ignore;
-        }
     }
 }

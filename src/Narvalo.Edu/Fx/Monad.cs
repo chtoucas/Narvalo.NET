@@ -2,8 +2,6 @@
 
 namespace Narvalo.Edu.Fx
 {
-    using System.Diagnostics.CodeAnalysis;
-
     static class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Edu.Fx.Unit.Single);
@@ -38,16 +36,14 @@ namespace Narvalo.Edu.Fx
 
 #if !MONAD_DISABLE_ZERO
         // [Haskell] guard
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional method.")]
-        static Monad<Unit> Guard<TSource>(bool predicate)
+        public static Monad<Unit> Guard<TSource>(bool predicate)
         {
             return predicate ? Unit : Zero;
         }
 #endif
 
         // [Haskell] when
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional method.")]
-        static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
+        public static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             Require.NotNull(action, "action");
 
@@ -55,8 +51,7 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] unless
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional method.")]
-        static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
+        public static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             return When<TSource>(!predicate, action);
         }

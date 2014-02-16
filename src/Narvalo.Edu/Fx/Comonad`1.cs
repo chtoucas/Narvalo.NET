@@ -24,7 +24,7 @@ namespace Narvalo.Edu.Fx
             Justification = "Monad template definition.")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
             Justification = "Monad template definition.")]
-        public Comonad<TResult> Map<TResult>(Func<T, TResult> fun)
+        public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new NotImplementedException();

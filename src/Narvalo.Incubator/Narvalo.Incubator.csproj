@@ -75,23 +75,7 @@
     <Compile Include="Fx\Either`2.Monad.cs">
       <DependentUpon>Either`2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Func`%24.cs" />
-    <Compile Include="Fx\Identity.cs" />
-    <Compile Include="Fx\Identity`1%24.cs" />
-    <Compile Include="Fx\Identity`1.Comonad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\Identity`1.IEquatable.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.Monad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Lazy.cs" />
-    <Compile Include="Fx\Lazy`1%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Linq\Identity`1%24.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SR.Designer.cs">
       <AutoGen>True</AutoGen>

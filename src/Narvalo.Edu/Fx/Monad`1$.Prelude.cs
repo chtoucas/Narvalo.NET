@@ -4,7 +4,6 @@ namespace Narvalo.Edu.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     static partial class MonadExtensions
@@ -46,8 +45,7 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] liftM3
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
-        static Monad<TResult> Zip<T1, T2, T3, TResult>(
+        public static Monad<TResult> Zip<T1, T2, T3, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
             Monad<T3> third,
@@ -64,8 +62,7 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] liftM4
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
-        static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
+        public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Monad<T1> @this,
              Monad<T2> second,
              Monad<T3> third,
@@ -83,8 +80,7 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] liftM5
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
-        static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+        public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Monad<T1> @this,
             Monad<T2> second,
             Monad<T3> third,

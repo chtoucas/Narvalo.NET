@@ -18,14 +18,14 @@ namespace Narvalo.Edu.Linq
             Require.Object(@this);
 
             var seed = Monad.Return(Enumerable.Empty<TSource>());
-            Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> func
+            Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> fun
                 = (m, n) =>
                     m.Bind(list =>
                     {
                         return n.Bind(item => Monad.Return(list.Append(item)));
                     });
 
-            return @this.Aggregate(seed, func);
+            return @this.Aggregate(seed, fun);
         }
 
         #endregion

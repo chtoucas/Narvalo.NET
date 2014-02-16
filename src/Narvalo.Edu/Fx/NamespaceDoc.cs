@@ -249,9 +249,9 @@ namespace Narvalo.Edu.Fx
      *      Monad<T>.Plus                   mplus :: m a -> m a -> m a
      *
      * Basic Monad functions
-     *      -                               mapM :: Monad m => (a -> m b) -> [a] -> m [b]       NB: For us, same as forM
+     *      @Enumerable<T>.Map              mapM :: Monad m => (a -> m b) -> [a] -> m [b] 
      *      -                               mapM_ :: Monad m => (a -> m b) -> [a] -> m ()       NB: Same as mapM but returns Monad.Unit
-     *      @Enumerable<T>.ForEach          forM :: Monad m => [a] -> (a -> m b) -> m [b]
+     *      -                               forM :: Monad m => [a] -> (a -> m b) -> m [b]       NB: For us, same as mapM
      *      -                               forM_ :: Monad m => [a] -> (a -> m b) -> m ()       NB: Same as forM but returns Monad.Unit
      *      @Enumerable<Monad<T>>.Collect   sequence :: Monad m => [m a] -> m [a]
      *      -                               sequence_ :: Monad m => [m a] -> m ()               NB: Same as sequence but returns Monad.Unit

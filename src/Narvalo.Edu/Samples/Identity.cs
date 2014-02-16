@@ -1,10 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Edu.Samples
 {
+    using Narvalo.Edu.Fx;
+
     public static class Identity
     {
-        static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+        static readonly Identity<Unit> Unit_ = Return(Narvalo.Edu.Fx.Unit.Single);
 
         public static Identity<Unit> Unit { get { return Unit_; } }
 

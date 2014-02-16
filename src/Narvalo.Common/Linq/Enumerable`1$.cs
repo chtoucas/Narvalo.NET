@@ -35,32 +35,34 @@ namespace Narvalo.Linq
         {
             Require.Object(@this);
 
-            return AppendCore_(@this, element);
+            return @this.Concat(Enumerable.Repeat(element, 1));
+            //return AppendCore_(@this, element);
         }
 
         public static IEnumerable<T> Prepend<T>(this IEnumerable<T> @this, T element)
         {
             Require.Object(@this);
 
-            return PrependCore_(@this, element);
+            return Enumerable.Repeat(element, 1).Concat(@this);
+            //return PrependCore_(@this, element);
         }
 
-        static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
-        {
-            foreach (var item in source) {
-                yield return item;
-            }
+        ////static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
+        ////{
+        ////    foreach (var item in source) {
+        ////        yield return item;
+        ////    }
 
-            yield return element;
-        }
+        ////    yield return element;
+        ////}
 
-        static IEnumerable<T> PrependCore_<T>(IEnumerable<T> source, T element)
-        {
-            yield return element;
+        ////static IEnumerable<T> PrependCore_<T>(IEnumerable<T> source, T element)
+        ////{
+        ////    yield return element;
 
-            foreach (var item in source) {
-                yield return item;
-            }
-        }
+        ////    foreach (var item in source) {
+        ////        yield return item;
+        ////    }
+        ////}
     }
 }

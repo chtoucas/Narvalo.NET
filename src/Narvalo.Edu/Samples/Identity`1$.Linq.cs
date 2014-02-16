@@ -1,14 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Linq
+namespace Narvalo.Edu.Samples
 {
     using System;
-    using Narvalo.Fx;
 
     /// <summary>
     /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Fx.Identity&lt;T&gt;"/>.
     /// </summary>
-    public static class IdentityExtensions
+    static partial class IdentityExtensions
     {
         #region Projection Operators
 

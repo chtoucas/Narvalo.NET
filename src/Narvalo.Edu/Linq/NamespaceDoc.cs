@@ -16,7 +16,7 @@ namespace Narvalo.Edu.Linq
      * ----------------------+----------------------+-------------------------------------------
      * ### Projection Operators
      * ----------------------+----------------------+-------------------------------------------
-     * Select (*)            | Monad<T>.Select      | ??? @Enumerable<T>.ForEach
+     * Select (*)            | Monad<T>.Select      | @Enumerable<T>.Map
      * SelectMany (*)        | Monad<T>.Bind        | 
      *                       | @Monad<T>.SelectMany | 
      * ----------------------+----------------------+-------------------------------------------
@@ -104,6 +104,9 @@ namespace Narvalo.Edu.Linq
      * Aggregate             | -                    | @Enumerable<T>.Fold
      *                       | -                    | @Enumerable<T>.Reduce
      * ----------------------+----------------------+-------------------------------------------
+     * ### New Operators in .NET 4
+     * ----------------------+----------------------+-------------------------------------------
+     * Zip                   |                      | @Enumerable<T>.Zip
      * 
      * 
      * Extensions to Linq
@@ -116,19 +119,21 @@ namespace Narvalo.Edu.Linq
      * AggregateBack         |                      | @Enumerable<T>.FoldBack
      *                       |                      | @Enumerable<T>.Reduceback
      * Collect               |                      | @Enumerable<Monad<T>>.Collect
-     * Zip                   |                      | @Enumerable<T>.Zip
      * 
      * 
      * References
      * ----------
      * 
+     * + LINQ (Language-Integrated Query)
+     *   http://msdn.microsoft.com/en-us/library/bb397926(v=vs.120).aspx
      * + Query Expression Pattern / C# 5.0 Language Specification. Section 7.16.3
      *   http://www.microsoft.com/en-us/download/details.aspx?id=7029
      * + The .NET Standard Query Operators
      *   http://msdn.microsoft.com/en-us/library/bb394939.aspx
      * + Classification of Standard Query Operators by Manner of Execution
      *   http://msdn.microsoft.com/en-us/library/bb882641.aspx
-     * + http://en.wikipedia.org/wiki/Language_Integrated_Query
+     * + Wikipedia
+     *   http://en.wikipedia.org/wiki/Language_Integrated_Query
      */
 
     [CompilerGeneratedAttribute]

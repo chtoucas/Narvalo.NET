@@ -12,8 +12,8 @@ namespace Narvalo.Edu.Linq
     {
         #region Basic Monad functions
 
-        // [Haskell] forM
-        public static Monad<IEnumerable<TResult>> ForEach<TSource, TResult>(
+        // [Haskell] mapM
+        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Kunc<TSource, TResult> kun)
         {
@@ -35,7 +35,7 @@ namespace Narvalo.Edu.Linq
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
 
-            // NB: Haskell uses tail recursion, we don't .
+            // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
             foreach (var item in @this) {
@@ -81,7 +81,7 @@ namespace Narvalo.Edu.Linq
 
             Func<TFirst, TSecond, Monad<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            return (@this.Zip(second, resultSelector)).Collect();
+            return @this.Zip(second, resultSelector).Collect();
         }
 
         // [Haskell] foldM
