@@ -35,22 +35,22 @@ namespace Narvalo.Edu.Linq
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
 
-            //var ya = from item in @this
-            //         select Monad.Return(item);
+            // NB: Haskell uses tail recursion, we don't .
+            var list = new List<TSource>();
 
-            //var ya2 = from item in ya
-            //          from b in predicateM(item)
-            //          select 0;
+            foreach (var item in @this) {
+                predicateM.Invoke(item)
+                    .Run(_ =>
+                    {
+                        if (_ == true) {
+                            list.Add(item);
+                        }
 
-            //var list = new List<TSource>();
+                        return Monad.Unit;
+                    });
+            }
 
-            //foreach (var item in @this) {
-            //    predicateM.Invoke(item)
-            //        .Run(_ => { list.Add(item); return Monad.Unit; });
-            //}
-
-            //return Monad.Return(list.AsEnumerable());
-            throw new NotImplementedException();
+            return Monad.Return(list.AsEnumerable());
         }
 
         // [Haskell] mapAndUnzipM
