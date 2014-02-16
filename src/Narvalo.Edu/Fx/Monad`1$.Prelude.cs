@@ -32,18 +32,6 @@ namespace Narvalo.Edu.Fx
 
         #region Monadic lifting operators
 
-        // [Haskell] liftM
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Optional extension. This is just the Map / Select method.")]
-        static Monad<TResult> Zip<TFirst, TResult>(
-           this Monad<TFirst> @this,
-           Func<TFirst, TResult> resultSelector)
-        {
-            Require.Object(@this);
-
-            return @this.Select(resultSelector);
-        }
-
         // [Haskell] liftM2
         public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
             this Monad<TFirst> @this,

@@ -8,82 +8,115 @@ namespace Narvalo.Edu.Linq
      * The .NET Standard Query Operators
      * =================================
      * 
+     * Linq                  | Monad<T>             | Monadic generalisation of list operations
+     * ----------------------+----------------------+-------------------------------------------
      * ### Restriction Operators
-     * - Where (*)                      Monad<T>.Where
+     * ----------------------+----------------------+-------------------------------------------
+     * Where (*)             | Monad<T>.Where       | @Enumerable<T>.Filter
+     * ----------------------+----------------------+-------------------------------------------
      * ### Projection Operators
-     * - Select (*)                     Monad<T>.Select
-     * - SelectMany (*)                 Monad<T>.Bind
-     *                                  @Monad<T>.SelectMany
+     * ----------------------+----------------------+-------------------------------------------
+     * Select (*)            | Monad<T>.Select      | ??? @Enumerable<T>.ForEach
+     * SelectMany (*)        | Monad<T>.Bind        | 
+     *                       | @Monad<T>.SelectMany | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Partitioning Operators
-     * - Take                           -
-     * - Skip                           -
-     * - TakeWhile                      -
-     * - SkipWhile                      -
+     * ----------------------+----------------------+-------------------------------------------
+     * Take                  | -                    |
+     * Skip                  | -                    |
+     * TakeWhile             | -                    |
+     * SkipWhile             | -                    |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Join Operators
-     * - Join (*)                       @Monad<T>.Join
-     * - GroupJoin (*)                  @Monad<T>.GroupJoin
+     * ----------------------+----------------------+-------------------------------------------
+     * Join (*)              | @Monad<T>.Join       | 
+     * GroupJoin (*)         | @Monad<T>.GroupJoin  | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Concatenation Operator
-     * - Concat                         ??? @Monad<T>.Plus
+     * ----------------------+----------------------+-------------------------------------------
+     * Concat                | @Monad<T>.Plus       | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Ordering Operators
-     * - OrderBy (*)                    @Monad<T>.OrderBy
-     * - OrderByDescending (*)          @Monad<T>.OrderByDescending
-     * - ThenBy                         ???
-     * - ThenByDescending               ???
-     * - Reverse                        -
+     * ----------------------+----------------------+-------------------------------------------
+     * OrderBy (*)           | ???                  | 
+     * OrderByDescending (*) | ???                  |
+     * ThenBy                | ???                  |
+     * ThenByDescending      | ???                  |
+     * Reverse               | -                    | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Grouping Operators
-     * - GroupBy (*)                    @Monad<T>.GroupBy
+     * ----------------------+----------------------+-------------------------------------------
+     * GroupBy (*)           | ???                  |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Set Operators
-     * - Distinct                       -
-     * - Union                          -
-     * - Intersect                      -
-     * - Except                         -
+     * ----------------------+----------------------+-------------------------------------------
+     * Distinct              | -                    |
+     * Union                 | -                    |
+     * Intersect             | -                    |
+     * Except                | -                    |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Conversion Operators
-     * - AsEnumerable                   -
-     * - ToArray                        -
-     * - ToList                         -
-     * - ToDictionary                   -
-     * - ToLookup                       -
-     * - OfType                         ???
-     * - Cast                           ???
+     * ----------------------+----------------------+-------------------------------------------
+     * AsEnumerable          | -                    |
+     * ToArray               | -                    |
+     * ToList                | -                    |
+     * ToDictionary          | -                    |
+     * ToLookup              | -                    |
+     * OfType                | ???                  |
+     * Cast                  | ???                  |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Equality Operator
-     * - SequenceEqual                  ??? Equals
+     * ----------------------+----------------------+-------------------------------------------
+     * SequenceEqual         | ??? Equals           |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Element Operators
-     * - First                          -
-     * - FirstOrDefault                 -
-     * - Last                           -
-     * - LastOrDefault                  -
-     * - Single                         -
-     * - SingleOrDefault                -
-     * - ElementAt                      -
-     * - ElementAtOrDefault             -
-     * - DefaultIfEmpty                 ??? For Monad with a Zero
+     * ----------------------+----------------------+-------------------------------------------
+     * First                 | -                    | @Enumerable<T>.FirstOrZero
+     * FirstOrDefault        | -                    | @Enumerable<T>.FirstOrZero
+     * Last                  | -                    | @Enumerable<T>.LastOrZero
+     * LastOrDefault         | -                    | @Enumerable<T>.LastOrZero
+     * Single                | -                    | @Enumerable<T>.SingleOrZero
+     * SingleOrDefault       | -                    | @Enumerable<T>.SingleOrZero
+     * ElementAt             | -                    |
+     * ElementAtOrDefault    | -                    |
+     * DefaultIfEmpty        | ??? Monad w/Zero     | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Generation Operators
-     * - Range                          -
-     * - Repeat                         -
-     * - Empty                          Monad<T>.Zero
+     * ----------------------+----------------------+-------------------------------------------
+     * Range                 | -                    |
+     * Repeat                | @Monad<T>.Repeat     |
+     * Empty                 | Monad<T>.Zero        | 
+     * ----------------------+----------------------+-------------------------------------------
      * ### Quantifiers
-     * - Any                            ???
-     * - All                            ???
-     * - Contains                       ???
+     * ----------------------+----------------------+-------------------------------------------
+     * Any                   | ???                  |
+     * All                   | ???                  |
+     * Contains              | ???                  |
+     * ----------------------+----------------------+-------------------------------------------
      * ### Aggregate Operators
-     * - Count                          -
-     * - LongCount                      -
-     * - Sum                            -
-     * - Min                            -
-     * - Max                            -
-     * - Average                        -
-     * - Aggregate                      -
+     * ----------------------+----------------------+-------------------------------------------
+     * Count                 | -                    | 
+     * LongCount             | -                    |
+     * Sum                   | -                    | @Enumerable<Monad<T>>.Sum
+     * Min                   | -                    |
+     * Max                   | -                    |
+     * Average               | -                    |
+     * Aggregate             | -                    | @Enumerable<T>.Fold
+     *                       | -                    | @Enumerable<T>.Reduce
+     * ----------------------+----------------------+-------------------------------------------
      * 
      * 
-     * Monadic extensions to List operations
-     * =====================================
+     * Extensions to Linq
+     * ==================
      * 
-     * Linq            | List           | Terminology used here
-     * ----------------+----------------+-----------------------------------------
-     * Aggregate       | FoldLeft       | Fold or Reduce (if no initial value)
-     *                 | FoldRight      | FoldBack or ReduceBack (if no initial value)
-     *                 | Cons           | Prepend
-     *                 | Scons          | Append
+     * Linq                  | Monad<T>             | Monadic generalisation of list operations     
+     * ----------------------+----------------------+-------------------------------------------
+     * Append                |                      | -
+     * Prepend               |                      | -
+     * AggregateBack         |                      | @Enumerable<T>.FoldBack
+     *                       |                      | @Enumerable<T>.Reduceback
+     * Collect               |                      | @Enumerable<Monad<T>>.Collect
+     * Zip                   |                      | @Enumerable<T>.Zip
      * 
      * 
      * References

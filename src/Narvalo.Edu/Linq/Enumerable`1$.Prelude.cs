@@ -28,29 +28,34 @@ namespace Narvalo.Edu.Linq
         #region Generalisations of list functions
 
         // [Haskell] filterM
-        public static Monad<IEnumerable<TSource>> Where<TSource>(
+        public static Monad<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Kunc<TSource, bool> predicateM)
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
 
+            //var ya = from item in @this
+            //         select Monad.Return(item);
+
+            //var ya2 = from item in ya
+            //          from b in predicateM(item)
+            //          select 0;
+
+            //var list = new List<TSource>();
+
+            //foreach (var item in @this) {
+            //    predicateM.Invoke(item)
+            //        .Run(_ => { list.Add(item); return Monad.Unit; });
+            //}
+
+            //return Monad.Return(list.AsEnumerable());
             throw new NotImplementedException();
-
-            //var list = from item in @this
-            //           let b = predicateM(item)
-            //           select item;
-
-            //var list = from item in @this
-            //           where predicateM(item).Match(b => b, false)
-            //           select item;
-
-            //return Monad.Return(list);
         }
 
         // [Haskell] mapAndUnzipM
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
-        static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> SelectAndUnzip<TSource, TFirst, TSecond>(
+        static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Kunc<TSource, Tuple<TFirst, TSecond>> kun)
         {
@@ -58,7 +63,7 @@ namespace Narvalo.Edu.Linq
             Require.NotNull(kun, "kun");
 
             return from _ in
-                       (from _ in @this select kun(_)).Collect()
+                       (from _ in @this select kun.Invoke(_)).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);

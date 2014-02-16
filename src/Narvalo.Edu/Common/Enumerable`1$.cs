@@ -3,8 +3,6 @@
 namespace Narvalo.Linq
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.

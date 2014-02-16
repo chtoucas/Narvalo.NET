@@ -202,18 +202,18 @@ namespace Narvalo.Edu.Fx
      * Sometimes we choose a more appropriate name than the default one.
      * 
      * We also prefer to use the name expected by the Query Expression Pattern (QEP).
-     * The immediate benefit is that we can use query expressions (from, select, where).
+     * The immediate benefit is that we can use the query expression syntax (from, select, where).
      * This is similar to the do syntaxic sugar of Haskell.
      * 
      * 
      * Name           | Haskell       | Terminology used here
      * ---------------+---------------+------------------------------------
-     * Monoid
+     * ### Monoid
      * ---------------+---------------+------------------------------------
      * Zero           | mzero         | Zero        or None, Empty, Failure,...
      * Plus           | mplus         | Plus        or OrElse,...
      * ---------------+---------------+------------------------------------
-     * Monad
+     * ### Monad
      * ---------------+---------------+------------------------------------
      * Unit (η)       | return        | Return      or Create, Success,...
      * Bind           | >>=           | Bind
@@ -222,7 +222,7 @@ namespace Narvalo.Edu.Fx
      * Then           | >>            | Then
      *                | fail          | -
      * ---------------+---------------+------------------------------------
-     * Comonad
+     * ### Comonad
      * ---------------+---------------+------------------------------------
      * Counit (ε)     | extract       | Extract
      * Cobind         | extend        | Extend
@@ -265,8 +265,8 @@ namespace Narvalo.Edu.Fx
      *      Monad.Flatten                   join :: Monad m => m (m a) -> m a
      *      @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
      *      @Monad<T>.Where                 mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
-     *      @Enumerable<T>.Where            filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
-     * ?    @Enumerable<T>.SelectAndUnzip   mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
+     *      @Enumerable<T>.Filter           filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
+     * ?    @Enumerable<T>.MapAndUnzip      mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
      *      @Enumerable<T>.Zip              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
      *      -                               zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()   NB: Same as zipWithM but returns Monad.Unit            
      *      @Enumerable<T>.Fold             foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
@@ -280,7 +280,7 @@ namespace Narvalo.Edu.Fx
      * ?    Monad.Unless                    unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
-     * ?    @Monad<T>.Zip                   liftM :: Monad m => (a1 -> r) -> m a1 -> m r
+     *      Monad<T>.Select                 liftM :: Monad m => (a1 -> r) -> m a1 -> m r
      *      @Monad<T>.Zip                   liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
      * ?    @Monad<T>.Zip                   liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
      * ?    @Monad<T>.Zip                   liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r

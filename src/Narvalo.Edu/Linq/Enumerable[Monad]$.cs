@@ -34,6 +34,7 @@ namespace Narvalo.Edu.Linq
 
 #if !MONAD_DISABLE_ZERO && !MONAD_DISABLE_PLUS
         // [Haskell] msum
+        // FIXME: Conflicts with the Sum from Linq.
         public static Monad<TSource> Sum<TSource>(this IEnumerable<Monad<TSource>> @this)
         {
             Require.Object(@this);

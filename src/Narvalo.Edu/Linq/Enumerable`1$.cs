@@ -57,12 +57,14 @@ namespace Narvalo.Edu.Linq
         #region Element Operators
 
 #if !MONAD_DISABLE_ZERO
-        public static Monad<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+        // FIXME: 
+        public static Monad<TSource> FirstOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNone(@this, _ => true);
+            return FirstOrZero(@this, _ => true);
         }
 
-        public static Monad<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        // FIXME: Kunc<TSource, bool>
+        public static Monad<TSource> FirstOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -73,12 +75,14 @@ namespace Narvalo.Edu.Linq
             }
         }
 
-        public static Monad<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+        // FIXME: 
+        public static Monad<TSource> LastOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNone(@this, _ => true);
+            return LastOrZero(@this, _ => true);
         }
 
-        public static Monad<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        // FIXME: Kunc<TSource, bool>
+        public static Monad<TSource> LastOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -98,12 +102,14 @@ namespace Narvalo.Edu.Linq
             }
         }
 
-        public static Monad<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        // FIXME: 
+        public static Monad<TSource> SingleOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNone(@this, _ => true);
+            return SingleOrZero(@this, _ => true);
         }
 
-        public static Monad<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        // FIXME: Kunc<TSource, bool>
+        public static Monad<TSource> SingleOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");

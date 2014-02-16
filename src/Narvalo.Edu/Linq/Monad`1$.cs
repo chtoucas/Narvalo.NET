@@ -66,5 +66,13 @@ namespace Narvalo.Edu.Linq
 
             throw new NotImplementedException();
         }
+
+        public static bool Any<TSource>(
+            this Monad<TSource> source,
+	        Func<TSource, bool> predicate
+        )
+        {
+            throw new NotImplementedException();
+        }
     }
 }
