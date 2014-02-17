@@ -11,20 +11,16 @@ namespace Narvalo.Edu.Fx
         public static readonly Unit Single = new Unit();
 
         /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "This method always returns the same result.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
         public static bool operator ==(Unit left, Unit right)
         {
             return true;
         }
 
         /// <summary />
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "This method always returns the same result.")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
         public static bool operator !=(Unit left, Unit right)
         {
             return false;

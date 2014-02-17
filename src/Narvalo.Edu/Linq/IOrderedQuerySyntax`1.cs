@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Linq
 {
     using System;
 
-    interface IOrderedQuerySyntax<T> : IQuerySyntax<T>
+    public interface IOrderedQuerySyntax<T> : IQuerySyntax<T>
     {
         IOrderedQuerySyntax<T> ThenBy<TKey>(Func<T, TKey> keySelector);
 

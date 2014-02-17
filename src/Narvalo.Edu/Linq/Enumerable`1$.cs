@@ -7,7 +7,7 @@ namespace Narvalo.Edu.Linq
     using System.Linq;
     using Narvalo.Edu.Fx;
 
-    static partial class EnumerableExtensions
+    public static partial class EnumerableExtensions
     {
         #region Aggregate Operators
 

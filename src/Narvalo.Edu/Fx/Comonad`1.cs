@@ -5,12 +5,10 @@ namespace Narvalo.Edu.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Comonad<T>
+    public sealed class Comonad<T>
     {
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cokun",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cokun")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Comonad<TResult> Extend<TResult>(Cokunc<T, TResult> cokun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
@@ -20,10 +18,8 @@ namespace Narvalo.Edu.Fx
 #endif
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
@@ -33,15 +29,13 @@ namespace Narvalo.Edu.Fx
 #endif
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "monad",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "monad")]
         internal static T ε(Comonad<T> monad)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "monad",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "monad")]
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY

@@ -17,8 +17,8 @@ namespace Narvalo.Edu.Linq
      * ### Projection Operators
      * ----------------------+----------------------+-------------------------------------------
      * Select (*)            | Monad<T>.Select      | @Enumerable<T>.Map
-     * SelectMany (*)        | Monad<T>.Bind        | 
-     *                       | @Monad<T>.SelectMany | 
+     * SelectMany            | Monad<T>.Bind        | 
+     * (*)                   | @Monad<T>.SelectMany | 
      * ----------------------+----------------------+-------------------------------------------
      * ### Partitioning Operators
      * ----------------------+----------------------+-------------------------------------------

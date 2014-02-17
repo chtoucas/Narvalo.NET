@@ -6,7 +6,7 @@ namespace Narvalo.Edu.Samples
     using Narvalo.Edu.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Narvalo.Fx.Identity{T}"/>.
+    /// Provides extension methods for <see cref="Narvalo.Edu.Samples.Identity{T}"/>.
     /// </summary>
     static partial class IdentityExtensions
     {

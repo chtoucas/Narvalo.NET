@@ -2,10 +2,13 @@
 
 namespace Narvalo.Edu.Fx
 {
-    static class Stubs<T>
+    using System.Diagnostics.CodeAnalysis;
+
+    public static class Stubs<T>
     {
         static readonly Kunc<T, Unit> Ignore_ = _ => Monad.Unit;
 
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static Kunc<T, Unit> Ignore { get { return Ignore_; } }
     }
 }

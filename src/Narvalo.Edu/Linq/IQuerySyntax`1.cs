@@ -3,14 +3,16 @@
 namespace Narvalo.Edu.Linq
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
-    interface IQuerySyntax<T> : IQuerySyntax
+    public interface IQuerySyntax<T> : IQuerySyntax
     {
         // Natively supported by any Monad with a Zero.
         IQuerySyntax<T> Where(Func<T, bool> predicate);
 
         // Natively supported by any Monad.
-        IQuerySyntax<U> Select<U>(Func<T, U> selector);
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select")]
+        IQuerySyntax<TResult> Select<TResult>(Func<T, TResult> selector);
 
         // Kind of generalisation of Zip (liftM2).
         IQuerySyntax<TResult> SelectMany<TMiddle, TResult>(

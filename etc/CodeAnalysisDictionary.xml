@@ -29,6 +29,12 @@
       <!-- Monades -->
       <Word>η</Word>
       <Word>μ</Word>
+      <Word>Kunc</Word>
+      <Word>Cokun</Word>
+      <Word>Cokunc</Word>
+      <Word>Monoid</Word>
+      <Word>Monad</Word>
+      <Word>Comonad</Word>
 
       <!-- Termes communs -->
       <Word>Edu</Word>

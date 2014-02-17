@@ -14,8 +14,7 @@ namespace Narvalo.Edu.Samples
             return new Identity<TResult>(fun.Invoke(this));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
         internal static T ε(Identity<T> monad)
         {
             Require.NotNull(monad, "monad");
@@ -23,8 +22,7 @@ namespace Narvalo.Edu.Samples
             return monad._value;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
             return new Identity<Identity<T>>(monad);

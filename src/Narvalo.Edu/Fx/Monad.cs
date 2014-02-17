@@ -2,7 +2,10 @@
 
 namespace Narvalo.Edu.Fx
 {
-    static class Monad
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+
+    public static class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Edu.Fx.Unit.Single);
 #if !MONAD_DISABLE_ZERO
@@ -32,10 +35,46 @@ namespace Narvalo.Edu.Fx
 
         #endregion
 
+        #region Monadic lifting operators
+
+        public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        {
+            return m => m.Select(fun);
+        }
+
+        public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+        {
+            return (m1, m2) => m1.Zip(m2, fun);
+        }
+
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+        {
+            return (m1, m2, m3) => m1.Zip(m2, m3, fun);
+        }
+
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
+            Lift<T1, T2, T3, T4, TResult>(
+            Func<T1, T2, T3, T4, TResult> fun)
+        {
+            return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
+        }
+
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
+            Lift<T1, T2, T3, T4, T5, TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> fun)
+        {
+            return (m1, m2, m3, m4, m5) => m1.Zip(m2, m3, m4, m5, fun);
+        }
+
+        #endregion
+
         #region Conditional execution of monadic expressions
 
 #if !MONAD_DISABLE_ZERO
         // [Haskell] guard
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static Monad<Unit> Guard<TSource>(bool predicate)
         {
             return predicate ? Unit : Zero;
@@ -43,6 +82,7 @@ namespace Narvalo.Edu.Fx
 #endif
 
         // [Haskell] when
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             Require.NotNull(action, "action");
@@ -51,6 +91,7 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] unless
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
         public static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
         {
             return When<TSource>(!predicate, action);

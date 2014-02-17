@@ -8,7 +8,7 @@ namespace Narvalo.Edu.Linq
     using Narvalo.Edu.Fx;
     using Narvalo.Linq;
 
-    static class EnumerableMonadExtensions
+    public static class EnumerableMonadExtensions
     {
         #region Basic Monad functions
 

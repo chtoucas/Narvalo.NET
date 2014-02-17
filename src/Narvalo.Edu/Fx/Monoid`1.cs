@@ -5,16 +5,16 @@ namespace Narvalo.Edu.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Monoid<T>
+    public sealed class Monoid<T>
     {
         // [Haskell] mempty
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public static Monoid<T> Empty { get { throw new NotImplementedException(); } }
 
         // [Haskell] mappend
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monoid<T> Append(Monoid<T> other)
         {
             throw new NotImplementedException();

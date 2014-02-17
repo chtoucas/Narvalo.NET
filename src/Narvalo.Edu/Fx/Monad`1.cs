@@ -5,18 +5,18 @@ namespace Narvalo.Edu.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Monad<T>
+    public sealed class Monad<T>
     {
 #if !MONAD_DISABLE_ZERO
         // [Haskell] mzero
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
 #if !MONAD_DISABLE_PLUS
         // [Haskell] mplus
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<T> Plus(Monad<T> other)
         {
             throw new NotImplementedException();
@@ -25,10 +25,8 @@ namespace Narvalo.Edu.Fx
 #endif
 
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "kun",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "kun")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -39,10 +37,8 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] fmap
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun",
-            Justification = "Monad template definition.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<TResult> Select<TResult>(Func<T, TResult> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -59,16 +55,14 @@ namespace Narvalo.Edu.Fx
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square",
-            Justification = "Monad template definition.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY

@@ -2,7 +2,7 @@
 
 namespace Narvalo.Edu.Linq
 {
-    interface IQuerySyntax
+    public interface IQuerySyntax
     {
         IQuerySyntax<T> Cast<T>();
     }

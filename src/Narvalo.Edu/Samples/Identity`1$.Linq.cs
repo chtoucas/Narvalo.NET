@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Samples
     using System;
 
     /// <summary>
-    /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Fx.Identity&lt;T&gt;"/>.
+    /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Edu.Samples.Identity&lt;T&gt;"/>.
     /// </summary>
     static partial class IdentityExtensions
     {

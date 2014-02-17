@@ -2,7 +2,7 @@
 
 namespace Narvalo.Edu.Fx
 {
-    static class Comonad
+    public static class Comonad
     {
         public static T Extract<T>(Comonad<T> monad)
         {

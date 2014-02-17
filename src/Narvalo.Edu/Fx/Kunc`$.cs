@@ -2,7 +2,7 @@
 
 namespace Narvalo.Edu.Fx
 {
-    static partial class KuncExtensions
+    public static partial class KuncExtensions
     {
         #region Basic Monad functions
 

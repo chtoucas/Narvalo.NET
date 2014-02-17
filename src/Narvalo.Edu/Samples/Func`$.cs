@@ -3,20 +3,7 @@
 namespace Narvalo.Edu.Samples
 {
     using System;
-
-    public static class FuncMonad
-    {
-        public static Func<T> Return<T>(T value)
-        {
-            return () => value;
-        }
-
-        public static Func<T> Flatten<T>(Func<Func<T>> square)
-        {
-            return () => square.Invoke().Invoke();
-            //return square.Bind(_ => _);
-        }
-    }
+    using System.Diagnostics.CodeAnalysis;
 
     public static partial class FuncExtensions
     {
@@ -36,6 +23,7 @@ namespace Narvalo.Edu.Samples
             return () => selector.Invoke(@this.Invoke());
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Func<TResult> Then<TSource, TResult>(this Func<TSource> @this, Func<TResult> other)
         {
             return other;

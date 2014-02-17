@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Fx
 {
     using System;
 
-    static partial class MonadExtensions
+    public static partial class MonadExtensions
     {
         public static Monad<TResult> Coalesce<TSource, TResult>(
             this Monad<TSource> @this,

@@ -2,7 +2,7 @@
 
 namespace Narvalo.Edu.Linq
 {
-    interface IGroupingQuerySyntax<TKey, T> : IQuerySyntax<T>
+    public interface IGroupingQuerySyntax<TKey, T> : IQuerySyntax<T>
     {
         TKey Key { get; }
     }

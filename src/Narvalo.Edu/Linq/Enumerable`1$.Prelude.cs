@@ -8,7 +8,7 @@ namespace Narvalo.Edu.Linq
     using System.Linq;
     using Narvalo.Edu.Fx;
 
-    static partial class EnumerableExtensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions
 
@@ -54,8 +54,7 @@ namespace Narvalo.Edu.Linq
         }
 
         // [Haskell] mapAndUnzipM
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Optional extension.")]
-        static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
+        public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Kunc<TSource, Tuple<TFirst, TSecond>> kun)
         {

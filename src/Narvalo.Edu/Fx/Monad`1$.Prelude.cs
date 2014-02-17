@@ -6,7 +6,7 @@ namespace Narvalo.Edu.Fx
     using System.Collections.Generic;
     using System.Linq;
 
-    static partial class MonadExtensions
+    public static partial class MonadExtensions
     {
         #region Generalisations of list functions
 

@@ -26,15 +26,13 @@ namespace Narvalo.Edu.Samples
             return other;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
         internal static Identity<T> η(T value)
         {
             return new Identity<T>(value);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
         internal static Identity<T> μ(Identity<Identity<T>> square)
         {
             Require.NotNull(square, "square");

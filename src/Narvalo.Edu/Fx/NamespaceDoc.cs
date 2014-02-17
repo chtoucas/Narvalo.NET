@@ -133,7 +133,7 @@ namespace Narvalo.Edu.Fx
      * - Zero is False
      *
      * We write the definitions and rules using the Haskell syntax.
-     * For a translation to .NET, see Rules.cs
+     * For a translation to .NET, see Internal\Rules.cs
      *
      * Core definitions (see Monad`1.cs):
      * - m >>= g = join (fmap g m)                              Bind defined via Multiply and Map
@@ -141,12 +141,12 @@ namespace Narvalo.Edu.Fx
      * - join x = x >>= id                                      Multiply defined by Bind
      * - m >> n = m >>= \_ -> n                                 Then defined by Bind
      *
-     * Core rules (see Rules.cs):
+     * Core rules (see Internal\Rules.cs):
      * - fmap id == id                                          [Map]
      * - fmap (f . g) == fmap f . fmap g                        [Map]
      * - (m >> n) >> o = m >> (n >> o)                          [Then]      Associativity
      *
-     * Haskell (see Rules.cs)
+     * Haskell (see Internal\Rules.cs)
      * ------------------------------------------------
      * - mplus mzero m = m                                      [Monoid]    Left identity
      * - mplus m mzero = m                                      [Monoid]    Right identity
@@ -280,11 +280,11 @@ namespace Narvalo.Edu.Fx
      * ?    Monad.Unless                    unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
-     *      Monad<T>.Select                 liftM :: Monad m => (a1 -> r) -> m a1 -> m r
-     *      @Monad<T>.Zip                   liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
-     * ?    @Monad<T>.Zip                   liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
-     * ?    @Monad<T>.Zip                   liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
-     * ?    @Monad<T>.Zip                   liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
+     *      Monad<T>.Select / Monad.Lift    liftM :: Monad m => (a1 -> r) -> m a1 -> m r
+     *      @Monad<T>.Zip / Monad.Lift      liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
+     * ?    @Monad<T>.Zip / Monad.Lift      liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
+     * ?    @Monad<T>.Zip / Monad.Lift      liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
+     * ?    @Monad<T>.Zip  / Monad.Lift     liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
      *      ??? Not supported               ap :: Monad m => m (a -> b) -> m a -> m b
      *
      *

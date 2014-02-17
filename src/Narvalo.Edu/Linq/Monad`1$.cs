@@ -6,7 +6,7 @@ namespace Narvalo.Edu.Linq
     using System.Collections.Generic;
     using Narvalo.Edu.Fx;
 
-    static class MonadExtensions
+    public static class MonadExtensions
     {
         #region Query Expression Pattern
 
@@ -64,14 +64,6 @@ namespace Narvalo.Edu.Linq
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            throw new NotImplementedException();
-        }
-
-        public static bool Any<TSource>(
-            this Monad<TSource> source,
-	        Func<TSource, bool> predicate
-        )
-        {
             throw new NotImplementedException();
         }
     }
