@@ -114,7 +114,7 @@ namespace Narvalo.Edu.Fx.Internal
             Func<Monad<X>, Monad<X>> idM = _ => _;
 
             // fmap id  ==  id
-            return m.Select(_ => _) == idM.Invoke(m);
+            return m.Map(_ => _) == idM.Invoke(m);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Narvalo.Edu.Fx.Internal
         {
             // REVIEW: Is this obvious?
             // fmap (f . g) == fmap f . fmap g
-            return m.Select(_ => f(g(_))) == m.Select(g).Select(f);
+            return m.Map(_ => f(g(_))) == m.Map(g).Map(f);
         }
 
         /// <summary>

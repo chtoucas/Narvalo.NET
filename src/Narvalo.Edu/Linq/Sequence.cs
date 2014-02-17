@@ -12,7 +12,11 @@ namespace Narvalo.Edu.Linq
             Func<T, bool> predicate,
             Func<T, TResult> selector)
         {
-            throw new NotImplementedException();
+            if (predicate.Invoke(seed)) {
+                return Ana(succ, succ.Invoke(seed), predicate, selector);
+            }
+
+            return Return(selector.Invoke(seed));
         }
 
         public static Sequence<TResult> Ana<T, TResult>(
@@ -20,12 +24,13 @@ namespace Narvalo.Edu.Linq
             T seed,
             Func<T, TResult> selector)
         {
-            return Ana(succ, seed, predicate: _ => true, selector: selector);
+            return Ana(succ, seed, _ => true, selector);
         }
 
         public static Sequence<T> Return<T>(T value)
         {
-            return Repeat(value, 1);
+            //return Repeat(value, 1);
+            throw new NotImplementedException();
         }
 
         #region Generation Operators

@@ -12,7 +12,7 @@ namespace Narvalo.Edu.Fx
 
 #if !MONAD_DISABLE_ZERO
         // [Haskell] mfilter
-        public static Monad<TSource> Where<TSource>(this Monad<TSource> @this, Func<TSource, bool> predicate)
+        public static Monad<TSource> Filter<TSource>(this Monad<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -24,7 +24,7 @@ namespace Narvalo.Edu.Fx
         // [Haskell] replicateM
         public static Monad<IEnumerable<T>> Repeat<T>(this Monad<T> @this, int count)
         {
-            return from _ in @this select Enumerable.Repeat(_, count);
+            return @this.Map(_ => Enumerable.Repeat(_, count));
         }
 
         #endregion
@@ -41,7 +41,7 @@ namespace Narvalo.Edu.Fx
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
+            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         // [Haskell] liftM3

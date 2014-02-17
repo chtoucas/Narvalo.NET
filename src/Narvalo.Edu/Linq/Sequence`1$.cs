@@ -67,8 +67,8 @@ namespace Narvalo.Edu.Linq
 
         public static IEnumerable<T> AsEnumerable<T>(this Sequence<T> seq)
         {
-            while (true) {
-                yield return seq.Iterator.Invoke();
+            while (seq.HasNext()) {
+                yield return seq.Next();
             }
         }
 

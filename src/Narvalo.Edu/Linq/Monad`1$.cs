@@ -10,6 +10,25 @@ namespace Narvalo.Edu.Linq
     {
         #region Query Expression Pattern
 
+        public static Monad<TSource> Where<TSource>(
+            this Monad<TSource> @this, 
+            Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+
+            return @this.Filter(predicate);
+        }
+
+        public static Monad<TResult> Select<TSource, TResult>(
+            this Monad<TSource> @this, 
+            Func<TSource, TResult> selector)
+        {
+            Require.Object(@this);
+
+            return @this.Map(selector);
+        }
+
+        // Kind of generalisation of Zip (liftM2).
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> valueSelector,

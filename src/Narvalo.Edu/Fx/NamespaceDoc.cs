@@ -217,7 +217,7 @@ namespace Narvalo.Edu.Fx
      * ---------------+---------------+------------------------------------
      * Unit (η)       | return        | Return      or Create, Success,...
      * Bind           | >>=           | Bind
-     * Map            | fmap / liftM  | Select
+     * Map            | fmap / liftM  | Map
      * Multiply (μ)   | join          | Flatten
      * Then           | >>            | Then
      *                | fail          | -
@@ -238,7 +238,7 @@ namespace Narvalo.Edu.Fx
      * or they do not really make sense in .NET.
      *
      * Monad
-     *      Monad<T>.Select                 fmap :: (a -> b) -> m a -> m b
+     *      Monad<T>.Map                    fmap :: (a -> b) -> m a -> m b
      *      Monad<T>.Bind                   (>>=) :: forall a b. m a -> (a -> m b) -> m b
      *      Monad<T>.Then                   (>>) :: forall a b. m a -> m b -> m b
      *      Monad.Return                    return :: a -> m a
@@ -264,7 +264,7 @@ namespace Narvalo.Edu.Fx
      * Generalisations of list functions
      *      Monad.Flatten                   join :: Monad m => m (m a) -> m a
      *      @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
-     *      @Monad<T>.Where                 mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
+     *      @Monad<T>.Filter                mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
      *      @Enumerable<T>.Filter           filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
      * ?    @Enumerable<T>.MapAndUnzip      mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
      *      @Enumerable<T>.Zip              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]

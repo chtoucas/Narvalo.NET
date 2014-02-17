@@ -3,6 +3,7 @@
 namespace Narvalo.Edu.Linq
 {
     using System;
+    using System.Collections.Generic;
 
     // Exploring http://blogs.bartdesmet.net/blogs/bart/archive/2010/01/01/the-essence-of-linq-minlinq.aspx
 
@@ -28,16 +29,13 @@ namespace Narvalo.Edu.Linq
      * M<T> -> (T -> bool) -> (T -> M<C>) -> (T -> C -> TResult) -> M<TResult>
      */
 
-    public sealed class Sequence<T>
+    public abstract class Sequence<T>
     {
-        readonly Func<T> _iter;
+        protected Sequence() { }
 
-        public Sequence(Func<T> iter)
-        {
-            _iter = iter;
-        }
+        public abstract bool HasNext();
 
-        internal Func<T> Iterator { get { return _iter; } }
+        public abstract T Next();
 
         public TResult Cata<TResult>(
             TResult seed,
@@ -46,11 +44,56 @@ namespace Narvalo.Edu.Linq
         {
             TResult result = seed;
 
-            while (predicate.Invoke(result)) {
-                result = accumulator.Invoke(result, _iter.Invoke());
+            while (predicate.Invoke(result) && HasNext()) {
+                result = accumulator.Invoke(result, Next());
             }
 
             return result;
+        }
+    }
+
+    public sealed class SimpleSequence<T> : Sequence<T>, IDisposable
+    {
+        readonly IEnumerator<T> _inner;
+
+        public SimpleSequence(IEnumerable<T> list)
+        {
+            _inner = list.GetEnumerator();
+        }
+
+        public override bool HasNext()
+        {
+            return _inner.MoveNext();
+        }
+
+        public override T Next()
+        {
+            return _inner.Current;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public sealed class InfiniteSequence<T> : Sequence<T>
+    {
+        readonly Func<T> _iter;
+
+        public InfiniteSequence(Func<T> iter)
+        {
+            _iter = iter;
+        }
+
+        public sealed override bool HasNext()
+        {
+            return true;
+        }
+
+        public override T Next()
+        {
+            return _iter.Invoke();
         }
     }
 }

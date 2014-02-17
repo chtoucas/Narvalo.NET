@@ -39,7 +39,7 @@ namespace Narvalo.Edu.Fx
 
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
-            return m => m.Select(fun);
+            return m => m.Map(fun);
         }
 
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>

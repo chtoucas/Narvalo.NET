@@ -39,7 +39,7 @@ namespace Narvalo.Edu.Fx
         // [Haskell] fmap
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Monad<TResult> Select<TResult>(Func<T, TResult> selector)
+        public Monad<TResult> Map<TResult>(Func<T, TResult> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
             throw new NotImplementedException();

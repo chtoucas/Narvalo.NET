@@ -12,7 +12,7 @@ namespace Narvalo.Edu.Linq
             T seed,
             Func<T, TResult> selector)
         {
-            return Ana(succ, seed, predicate: _ => true, selector: selector);
+            return Ana(succ, seed, _ => true, selector);
         }
 
         public static IEnumerable<TResult> Ana<T, TResult>(
