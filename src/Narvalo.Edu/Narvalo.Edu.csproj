@@ -70,13 +70,13 @@
     </Compile>
     <Compile Include="Common\Enumerable`1%24.cs" />
     <Compile Include="Common\Require.cs" />
-    <Compile Include="Linq\Sequence.cs" />
-    <Compile Include="Linq\Sequence`1.cs" />
-    <Compile Include="Linq\Sequence.Monad.cs" />
+    <Compile Include="Fx\Recursion\Miscs.cs" />
+    <Compile Include="Fx\Recursion\NamespaceDoc.cs" />
+    <Compile Include="Fx\Recursion\Sequence`1.cs" />
     <Compile Include="Fx\Internal\Kunc`%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Linq\Bananas.cs" />
-    <Compile Include="Linq\Lenses.cs" />
+    <Compile Include="Fx\Recursion\Bananas.cs" />
+    <Compile Include="Fx\Recursion\Lenses.cs" />
     <Compile Include="Samples\Fun.cs" />
     <Compile Include="Samples\Func`%24.cs" />
     <Compile Include="Samples\Identity.cs" />
@@ -94,7 +94,6 @@
     </Compile>
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Linq\Enumerable[Monad]%24.cs" />
-    <Compile Include="Linq\Sequence`1%24.cs" />
     <Compile Include="Linq\Enumerable`1%24.Prelude.cs" />
     <Compile Include="Linq\Enumerable`1%24.cs" />
     <Compile Include="Fx\Internal\Rules.cs" />
