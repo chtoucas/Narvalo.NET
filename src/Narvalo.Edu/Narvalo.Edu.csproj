@@ -40,7 +40,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;CODE_ANALYSIS;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -65,18 +65,16 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="..\Narvalo.Common\Internal\ValidatedNotNullAttribute.cs">
-      <Link>Common\ValidatedNotNullAttribute.cs</Link>
-    </Compile>
-    <Compile Include="Common\Enumerable`1%24.cs" />
-    <Compile Include="Common\Require.cs" />
-    <Compile Include="Fx\Recursion\Miscs.cs" />
-    <Compile Include="Fx\Recursion\NamespaceDoc.cs" />
-    <Compile Include="Fx\Recursion\Sequence`1.cs" />
+    <Compile Include="Samples\Iteration.cs" />
+    <Compile Include="Samples\Iteration`2.cs" />
+    <Compile Include="Collections\Recursion\YCombinator.cs" />
+    <Compile Include="Samples\Miscs.cs" />
+    <Compile Include="Collections\Recursion\NamespaceDoc.cs" />
     <Compile Include="Fx\Internal\Kunc`%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Fx\Recursion\Bananas.cs" />
-    <Compile Include="Fx\Recursion\Lenses.cs" />
+    <Compile Include="Collections\Recursion\Bananas.cs" />
+    <Compile Include="Collections\Recursion\Lenses.cs" />
+    <Compile Include="Samples\Fibonacci.cs" />
     <Compile Include="Samples\Fun.cs" />
     <Compile Include="Samples\Func`%24.cs" />
     <Compile Include="Samples\Identity.cs" />
@@ -118,6 +116,7 @@
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Samples\Anamorphism.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
@@ -128,6 +127,12 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

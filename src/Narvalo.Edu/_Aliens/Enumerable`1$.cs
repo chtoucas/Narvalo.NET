@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Linq
+namespace Narvalo
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    static partial class EnumerableExtensions
+    static class EnumerableExtensions
     {
         public static IEnumerable<T> Append<T>(this IEnumerable<T> @this, T element)
         {

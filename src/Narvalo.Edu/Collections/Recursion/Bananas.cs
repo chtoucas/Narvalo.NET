@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Fx.Recursion
+namespace Narvalo.Edu.Collections.Recursion
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +11,8 @@ namespace Narvalo.Edu.Fx.Recursion
         public static TResult Cata<TSource, TResult>(
             this IEnumerable<TSource> @this,
             TResult seed,
-            Func<TResult, bool> predicate,
-            Func<TResult, TSource, TResult> accumulator)
+            Func<TResult, TSource, TResult> accumulator,
+            Func<TResult, bool> predicate)
         {
             TResult result = seed;
 
@@ -28,8 +28,8 @@ namespace Narvalo.Edu.Fx.Recursion
         public static Monad<TResult> CataM<TSource, TResult>(
             this IEnumerable<TSource> @this,
             TResult seed,
-            Func<Monad<TResult>, bool> predicate,
-            Kunc<TResult, TSource, TResult> accumulatorM)
+            Kunc<TResult, TSource, TResult> accumulatorM,
+            Func<Monad<TResult>, bool> predicate)
         {
             Monad<TResult> result = Monad.Return(seed);
 
@@ -46,12 +46,12 @@ namespace Narvalo.Edu.Fx.Recursion
 
         public static bool Any<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return @this.Cata(true, acc => !acc, (acc, item) => acc || predicate.Invoke(item));
+            return Cata(@this, true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
         }
 
         public static bool All<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return @this.Cata(true, acc => acc, (acc, item) => acc && predicate.Invoke(item));
+            return Cata(@this, true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
         }
 
         public static bool Contains<T>(this IEnumerable<T> @this, T value)
@@ -93,7 +93,7 @@ namespace Narvalo.Edu.Fx.Recursion
             TResult seed,
             Func<TResult, T, TResult> accumulator)
         {
-            return @this.Cata(seed, _ => true, accumulator);
+            return Cata(@this, seed, accumulator, _ => true);
         }
 
         public static Monad<TResult> AggregateM<T, TResult>(
@@ -101,7 +101,7 @@ namespace Narvalo.Edu.Fx.Recursion
             TResult seed,
             Kunc<TResult, T, TResult> accumulatorM)
         {
-            return CataM(@this, seed, _ => true, accumulatorM);
+            return CataM(@this, seed, accumulatorM, _ => true);
         }
 
         #endregion

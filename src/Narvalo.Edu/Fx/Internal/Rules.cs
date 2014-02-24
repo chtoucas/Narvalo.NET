@@ -109,7 +109,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// First rule satisfied by Map, implied by the definition of Map and the second monad law:
         ///     fmap id x = x >>= (return . id) = x >>= return = x
         /// </summary>
-        public static bool Map_FirstRule<X>(Monad<X> m)
+        public static bool Functor_FirstRule<X>(Monad<X> m)
         {
             Func<Monad<X>, Monad<X>> idM = _ => _;
 
@@ -120,7 +120,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// Second rule satisfied by Map.
         /// </summary>
-        public static bool Map_SecondRule<X, Y, Z>(Monad<X> m, Func<Y, Z> f, Func<X, Y> g)
+        public static bool Functor_SecondRule<X, Y, Z>(Monad<X> m, Func<Y, Z> f, Func<X, Y> g)
         {
             // REVIEW: Is this obvious?
             // fmap (f . g) == fmap f . fmap g
