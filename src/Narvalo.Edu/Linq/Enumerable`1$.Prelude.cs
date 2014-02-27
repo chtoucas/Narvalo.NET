@@ -4,7 +4,6 @@ namespace Narvalo.Edu.Linq
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo.Edu.Fx;
 

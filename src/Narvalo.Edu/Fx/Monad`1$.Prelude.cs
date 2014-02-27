@@ -4,6 +4,7 @@ namespace Narvalo.Edu.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     public static partial class MonadExtensions
@@ -25,6 +26,32 @@ namespace Narvalo.Edu.Fx
         public static Monad<IEnumerable<T>> Repeat<T>(this Monad<T> @this, int count)
         {
             return @this.Map(_ => Enumerable.Repeat(_, count));
+        }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions
+
+#if !MONAD_DISABLE_ZERO
+        // [Haskell] guard
+        public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)
+        {
+            return predicate ? Monad.Unit : Monad.Zero;
+        }
+#endif
+
+        // [Haskell] when
+        public static Monad<Unit> When<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
+        {
+            Require.NotNull(action, "action");
+
+            return predicate ? action.Invoke(Narvalo.Edu.Fx.Unit.Single) : Monad.Unit;
+        }
+
+        // [Haskell] unless
+        public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Kunc<Unit, Unit> action)
+        {
+            return When<TSource>(@this, !predicate, action);
         }
 
         #endregion

@@ -69,34 +69,5 @@ namespace Narvalo.Edu.Fx
         }
 
         #endregion
-
-        #region Conditional execution of monadic expressions
-
-#if !MONAD_DISABLE_ZERO
-        // [Haskell] guard
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public static Monad<Unit> Guard<TSource>(bool predicate)
-        {
-            return predicate ? Unit : Zero;
-        }
-#endif
-
-        // [Haskell] when
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public static Monad<Unit> When<TSource>(bool predicate, Kunc<Unit, Unit> action)
-        {
-            Require.NotNull(action, "action");
-
-            return predicate ? action.Invoke(Narvalo.Edu.Fx.Unit.Single) : Unit;
-        }
-
-        // [Haskell] unless
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public static Monad<Unit> Unless<TSource>(bool predicate, Kunc<Unit, Unit> action)
-        {
-            return When<TSource>(!predicate, action);
-        }
-
-        #endregion
     }
 }

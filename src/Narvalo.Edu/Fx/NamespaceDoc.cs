@@ -275,9 +275,9 @@ namespace Narvalo.Edu.Fx
      *      -                               replicateM_ :: Monad m => Int -> m a -> m ()                    NB: Same as replicateM but returns Monad.Unit            
      *
      * Conditional execution of monadic expressions
-     * ?    Monad.Guard                     guard :: MonadPlus m => Bool -> m ()
-     * ?    Monad.When                      when :: Monad m => Bool -> m () -> m ()
-     * ?    Monad.Unless                    unless :: Monad m => Bool -> m () -> m ()
+     * ?    @Monad<T>.Guard                 guard :: MonadPlus m => Bool -> m ()
+     * ?    @Monad<T>.When                  when :: Monad m => Bool -> m () -> m ()
+     * ?    @Monad<T>.Unless                unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
      *      Monad<T>.Select / Monad.Lift    liftM :: Monad m => (a1 -> r) -> m a1 -> m r

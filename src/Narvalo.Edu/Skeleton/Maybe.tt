@@ -1,0 +1,19 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".g.cs" #>
+<#@ include file=".\CodeTemplates\Monad.tt" #>
+// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+<# 
+
+Namespace = "Narvalo.Fx";
+
+Complete = true;
+PreferLinqDialect = false;
+ReturnName = "Create";
+
+EnableZero("None");
+EnablePlus("OrElse");
+
+WriteMonad(); 
+
+#>

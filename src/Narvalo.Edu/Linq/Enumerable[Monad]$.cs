@@ -6,7 +6,6 @@ namespace Narvalo.Edu.Linq
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Edu.Fx;
-    using Narvalo.Linq;
 
     public static class EnumerableMonadExtensions
     {
@@ -22,7 +21,7 @@ namespace Narvalo.Edu.Linq
                 = (m, n) =>
                     m.Bind(list =>
                     {
-                        return n.Bind(item => Monad.Return(list.Append(item)));
+                        return n.Bind(item => Monad.Return(list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun);
@@ -34,7 +33,6 @@ namespace Narvalo.Edu.Linq
 
 #if !MONAD_DISABLE_ZERO && !MONAD_DISABLE_PLUS
         // [Haskell] msum
-        // FIXME: Conflicts with the Sum from Linq.
         public static Monad<TSource> Sum<TSource>(this IEnumerable<Monad<TSource>> @this)
         {
             Require.Object(@this);
