@@ -10,9 +10,11 @@
 namespace Narvalo.Edu.Fx {
 	using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 	using Narvalo.Fx;
 
+	// Monadic methods.
     public static partial class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -116,13 +118,14 @@ namespace Narvalo.Edu.Fx {
         #region Conditional execution of monadic expressions (Prelude)
 
         // [Haskell] guard
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Monad<Unit> Guard<TSource>(this Monad<TSource> @this, bool predicate)
         {
             return predicate ? Monad.Unit : Monad.Zero;
         }
 
         // [Haskell] when
-        //public static Monad<Unit> When<TSource>(this Monad<TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Monad<Unit> When<TSource>(this Monad<TSource> @this, bool predicate, Action action)
         {
             Require.NotNull(action, "action");
@@ -135,7 +138,6 @@ namespace Narvalo.Edu.Fx {
         }
 
         // [Haskell] unless
-        //public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
         public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Action action)
         {
             return @this.When(!predicate, action);
@@ -230,6 +232,14 @@ namespace Narvalo.Edu.Fx {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+        public static Monad<TSource> Run<TSource>(this Monad<TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
+
         public static Monad<TResult> Then<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, bool> predicate,
@@ -246,21 +256,13 @@ namespace Narvalo.Edu.Fx {
             return @this.Coalesce(predicate, Monad<TResult>.Zero, other);
         }
 
-        public static Monad<Unit> Run<TSource>(this Monad<TSource> @this, Func<TSource, Monad<Unit>> actionM)
+        public static Monad<TSource> OnZero<TSource>(this Monad<TSource> @this, Action action)
         {
             Require.Object(@this);
-            Require.NotNull(actionM, "actionM");
+            Require.NotNull(action, "action");
 
-            return @this.Bind(actionM);
+            throw new NotImplementedException();
         }
-
-        //public static Monad<Unit> OnZero<TSource>(this Monad<TSource> @this, Func<Unit, Monad<Unit>> actionM)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNull(actionM, "actionM");
-
-        //    throw new NotImplementedException();
-        //}
 	}
 
 	// Kleisli extensions for Func<T, Monad<TResult>>.

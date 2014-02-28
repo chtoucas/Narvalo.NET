@@ -26,11 +26,13 @@
       <Word>Cr</Word>
       <Word>Lf</Word>
       
-      <!-- Monades -->
+      <!-- Functional -->
       <Word>η</Word>
       <Word>μ</Word>
+      <Word>Anamorphism</Word>
+      <Word>Cata</Word>
+      <Word>Iter</Word>
       <Word>Kunc</Word>
-      <Word>Cokun</Word>
       <Word>Cokunc</Word>
       <Word>Monoid</Word>
       <Word>Monad</Word>

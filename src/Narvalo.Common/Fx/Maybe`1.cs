@@ -82,8 +82,6 @@ namespace Narvalo.Fx
         Justification = "Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
-        static readonly Maybe<T> None_ = new Maybe<T>();
-
         readonly bool _isSome;
         readonly T _value;
 
@@ -118,17 +116,6 @@ namespace Narvalo.Fx
             _value = value;
             _isSome = true;
         }
-
-        #region MonadMore
-
-        /// <summary>
-        /// Returns an instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
-        public static Maybe<T> None { get { return None_; } }
-
-        #endregion
 
         /// <summary>
         /// Returns true if the object does not have an underlying value, false otherwise.

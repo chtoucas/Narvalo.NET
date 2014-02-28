@@ -3,6 +3,7 @@
 namespace Narvalo.Edu.Fx.Internal
 {
     using System;
+    using Narvalo.Fx;
 
     static class ActionExtensions
     {

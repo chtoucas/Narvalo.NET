@@ -1,8 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Fx
+namespace Narvalo.Edu.Fx.Internal
 {
     using System.Diagnostics.CodeAnalysis;
+    using Narvalo.Fx;
 
     public static class Stubs<T>
     {

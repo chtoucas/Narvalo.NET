@@ -4,6 +4,7 @@ namespace Narvalo.Edu.Collections.Recursion
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo.Edu.Fx;
 
     public static class Bananas
@@ -73,6 +74,7 @@ namespace Narvalo.Edu.Collections.Recursion
             return Aggregate(@this, 0, (acc, item) => checked(acc + 1));
         }
 
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "long")]
         public static long LongCount<T>(this IEnumerable<T> @this)
         {
             return Aggregate(@this, 0L, (acc, item) => checked(acc + 1));

@@ -1,0 +1,8 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="..\..\Narvalo.Common\CodeTemplates\Monad.tt" #>
+// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+<# EmitMonad(); #>
+<# EmitComonad(warningHeader: false); #>
+<# EmitLinq(warningHeader: false); #>

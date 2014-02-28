@@ -238,9 +238,9 @@ namespace Narvalo.Edu.Fx
      * or they do not really make sense in .NET.
      *
      * Monad
-     *      Monad<T>.Map                    fmap :: (a -> b) -> m a -> m b
+     *      @Monad<T>.Map                   fmap :: (a -> b) -> m a -> m b
      *      Monad<T>.Bind                   (>>=) :: forall a b. m a -> (a -> m b) -> m b
-     *      Monad<T>.Then                   (>>) :: forall a b. m a -> m b -> m b
+     *      @Monad<T>.Then                  (>>) :: forall a b. m a -> m b -> m b
      *      Monad.Return                    return :: a -> m a
      *      -                               fail :: String -> m a                               NB: See discussion above.
      *
@@ -255,9 +255,9 @@ namespace Narvalo.Edu.Fx
      *      -                               forM_ :: Monad m => [a] -> (a -> m b) -> m ()       NB: Same as forM but returns Monad.Unit
      *      @Enumerable<Monad<T>>.Collect   sequence :: Monad m => [m a] -> m [a]
      *      -                               sequence_ :: Monad m => [m a] -> m ()               NB: Same as sequence but returns Monad.Unit
-     *      @Kunc.Invoke                    (=<<) :: Monad m => (a -> m b) -> m a -> m b
-     *      @Kunc.Compose                   (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
-     *      @Kunc.ComposeBack               (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+     *      @Func.Invoke                    (=<<) :: Monad m => (a -> m b) -> m a -> m b
+     *      @Func.Compose                   (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+     *      @Func.ComposeBack               (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
      *      ??? Not supported               forever :: Monad m => m a -> m b
      *      ??? Not supported               void :: Functor f => f a -> f ()
      *
@@ -280,7 +280,7 @@ namespace Narvalo.Edu.Fx
      * ?    @Monad<T>.Unless                unless :: Monad m => Bool -> m () -> m ()
      *
      * Monadic lifting operators
-     *      Monad<T>.Select / Monad.Lift    liftM :: Monad m => (a1 -> r) -> m a1 -> m r
+     *      Monad<T>.Map / Monad.Lift       liftM :: Monad m => (a1 -> r) -> m a1 -> m r
      *      @Monad<T>.Zip / Monad.Lift      liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
      * ?    @Monad<T>.Zip / Monad.Lift      liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
      * ?    @Monad<T>.Zip / Monad.Lift      liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r

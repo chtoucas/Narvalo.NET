@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Fx
+namespace Narvalo.Edu.Fx.Internal
 {
     public delegate T Cokunc<T>(Comonad<T> arg);
 

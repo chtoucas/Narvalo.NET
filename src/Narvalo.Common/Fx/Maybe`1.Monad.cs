@@ -8,7 +8,16 @@ namespace Narvalo.Fx
 
     public partial class Maybe<T>
     {
-        #region MonadOr
+        static readonly Maybe<T> None_ = new Maybe<T>();
+
+        #region Monoid
+
+        /// <summary>
+        /// Returns an instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "A non-generic version would not improve usability.")]
+        public static Maybe<T> None { get { return None_; } }
 
         public Maybe<T> OrElse(Maybe<T> other)
         {
@@ -44,7 +53,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Native methods (MaybeExtensions)
+        #region Prelude extensions for Maybe<T>.
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
         {
@@ -71,7 +80,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region 
+        #region Linq extensions for Maybe<T>.
 
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -96,6 +105,37 @@ namespace Narvalo.Fx
             return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
                 ? Maybe.Create(resultSelector.Invoke(Value, inner.Value))
                 : Maybe<TResult>.None;
+        }
+
+        #endregion
+
+        #region Additional methods
+
+        public Maybe<T> Run(Action<T> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsSome) {
+                action.Invoke(Value);
+            }
+
+            return this;
+        }
+
+        public Maybe<T> OnSome(Action<T> action)
+        {
+            return Run(action);
+        }
+
+        public Maybe<T> OnNone(Action action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsNone) {
+                action.Invoke();
+            }
+
+            return this;
         }
 
         #endregion

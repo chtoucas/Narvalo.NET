@@ -7,12 +7,12 @@ namespace Narvalo.Edu.Fx
 
     public sealed class Comonad<T>
     {
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cokun")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Comonad<TResult> Extend<TResult>(Cokunc<T, TResult> cokun)
+        public Comonad<TResult> Extend<TResult>(Func<Comonad<T>, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
-            return δ(this).Map(_ => cokun.Invoke(_));
+            return δ(this).Map(_ => fun.Invoke(_));
 #else
             throw new NotImplementedException();
 #endif
@@ -20,7 +20,7 @@ namespace Narvalo.Edu.Fx
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Comonad<TResult> Select<TResult>(Func<T, TResult> fun)
+        public Comonad<TResult> Map<TResult>(Func<T, TResult> fun)
         {
 #if COMONAD_VIA_MAP_COMULTIPLY
             throw new NotImplementedException();

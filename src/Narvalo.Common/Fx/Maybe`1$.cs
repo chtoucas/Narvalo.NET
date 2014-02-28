@@ -6,43 +6,6 @@ namespace Narvalo.Fx
 
     public static partial class MaybeExtensions
     {
-        #region Additional methods
-
-        //public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
-        //{
-        //    OnSome(@this, action);
-
-        //    return Maybe.Unit;
-        //}
-
-        #endregion
-
-        //// OnSome & OnNone
-
-        public static Maybe<TSource> OnSome<TSource>(this Maybe<TSource> @this, Action<TSource> action)
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            if (@this.IsSome) {
-                action.Invoke(@this.Value);
-            }
-
-            return @this;
-        }
-
-        public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            if (@this.IsNone) {
-                action.Invoke();
-            }
-
-            return @this;
-        }
-
         //// ToNullable
 
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct

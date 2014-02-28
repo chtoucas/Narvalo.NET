@@ -4,6 +4,7 @@ namespace Narvalo.Edu.Samples
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Narvalo.Fx;
 
     public partial class Identity<T>
     {
@@ -39,5 +40,28 @@ namespace Narvalo.Edu.Samples
 
             return square._value;
         }
+
+        #region Additional methods
+
+        public Identity<TResult> Coalesce<TResult>(
+            Func<T, bool> predicate,
+            Identity<TResult> then,
+            Identity<TResult> otherwise)
+        {
+            Require.NotNull(predicate, "predicate");
+
+            return predicate.Invoke(Value) ? then : otherwise;
+        }
+
+        public Identity<T> Run(Action<T> action)
+        {
+            Require.NotNull(action, "action");
+
+            action.Invoke(Value);
+
+            return this;
+        }
+
+        #endregion
     }
 }

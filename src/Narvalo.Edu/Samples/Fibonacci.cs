@@ -4,15 +4,18 @@ namespace Narvalo.Edu.Samples
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo.Edu.Collections.Recursion;
 
     public static class Fibonacci
     {
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         static Func<int, int> CreateYCombinator()
         {
             return YCombinator.Fix<int, int>(iter => i => i > 1 ? iter(i - 1) + iter(i - 2) : i);
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         static IEnumerable<int> CreateViaAna0()
         {
             return Anamorphism.Ana(
@@ -20,6 +23,7 @@ namespace Narvalo.Edu.Samples
                 Tuple.Create(1, 1));
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         static IEnumerable<int> CreateViaAna1()
         {
             return Lenses.Ana<Tuple<int, int>, int>(

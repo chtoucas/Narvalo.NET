@@ -65,9 +65,19 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Fx\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Internal\Action`%24.cs" />
+    <Compile Include="Fx\Internal\Kunc`%24.cs" />
+    <Compile Include="Fx\Internal\Kunc`.cs" />
     <Compile Include="Fx\Internal\Rules.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Fx\Internal\Stubs.cs" />
+    <Compile Include="Fx\Internal\Stubs`1.cs" />
     <Compile Include="Fx\Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -89,9 +99,6 @@
     <Compile Include="Samples\Fibonacci.cs" />
     <Compile Include="Samples\Fun.cs" />
     <Compile Include="Samples\Func`%24.cs" />
-    <Compile Include="Samples\Identity.cs" />
-    <Compile Include="Samples\Identity`1%24.cs" />
-    <Compile Include="Samples\Identity`1%24.Linq.cs" />
     <Compile Include="Samples\Identity`1.Comonad.cs">
       <DependentUpon>Identity`1.cs</DependentUpon>
     </Compile>
@@ -108,13 +115,17 @@
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fx\Cokunc`.cs" />
-    <Compile Include="Fx\Comonad.cs" />
+    <Compile Include="Fx\Internal\Cokunc`.cs" />
     <Compile Include="Fx\Comonad`1.cs" />
     <Compile Include="Fx\Monad`1.cs" />
     <Compile Include="Fx\Monoid`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Samples\Anamorphism.cs" />
+    <Compile Include="Samples\Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="SR.Designer.cs">
       <DependentUpon>SR.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -130,6 +141,10 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="Fx\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </None>
     <None Include="Fx\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
@@ -137,6 +152,10 @@
     <None Include="Linq\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Samples\Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

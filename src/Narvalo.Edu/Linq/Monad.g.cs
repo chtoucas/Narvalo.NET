@@ -87,9 +87,10 @@ namespace Narvalo.Edu.Linq {
         {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(comparer, "comparer");
 
             throw new NotImplementedException();
         }

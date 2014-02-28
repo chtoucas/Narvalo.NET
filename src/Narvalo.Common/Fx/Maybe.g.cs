@@ -10,8 +10,11 @@
 namespace Narvalo.Fx {
 	using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+	using Narvalo.Fx;
 
+	// Monadic methods.
     public static partial class Maybe
     {
         static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
@@ -77,13 +80,15 @@ namespace Narvalo.Fx {
 	// Prelude extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
-		#region Basic monadic functions
+		#region Basic monadic functions (Prelude)
 
+        // [Haskell] fmap
         public static Maybe<TResult> Map<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
         {
             return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
         }
 
+		// [Haskell] >>
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
         {
             return @this.Bind(_ => other);
@@ -113,12 +118,14 @@ namespace Narvalo.Fx {
         #region Conditional execution of monadic expressions (Prelude)
 
         // [Haskell] guard
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
         {
             return predicate ? Maybe.Unit : Maybe.None;
         }
 
         // [Haskell] when
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Maybe<Unit> When<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
         {
             Require.NotNull(action, "action");
@@ -225,6 +232,14 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
+
         public static Maybe<TResult> Then<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate,
@@ -241,21 +256,13 @@ namespace Narvalo.Fx {
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
-        public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Func<TSource, Maybe<Unit>> actionM)
+        public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)
         {
             Require.Object(@this);
-            Require.NotNull(actionM, "actionM");
+            Require.NotNull(action, "action");
 
-            return @this.Bind(actionM);
+            throw new NotImplementedException();
         }
-
-        //public static Maybe<Unit> OnZero<TSource>(this Maybe<TSource> @this, Func<Unit, Maybe<Unit>> actionM)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNull(actionM, "actionM");
-
-        //    throw new NotImplementedException();
-        //}
 	}
 
 	// Kleisli extensions for Func<T, Maybe<TResult>>.

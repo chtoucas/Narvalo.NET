@@ -157,14 +157,17 @@
 		PlusName = plusName;
 	}
 
-    protected void EmitMonad()
+    protected void EmitMonad(bool warningHeader = true)
     {
-		WriteWarning_();
+		if (warningHeader) {
+			WriteWarningHeader_();
+		}
 #>
 
 namespace <#= Namespace #> {
 	using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 	using Narvalo.Fx;
 
@@ -178,10 +181,25 @@ namespace <#= Namespace #> {
 }
 <#+
 	}	// End of EmitMonad
-
-    protected void EmitLinq()
+	
+    protected void EmitComonad(bool warningHeader = true)
     {
-		WriteWarning_();
+		if (warningHeader) {
+			WriteWarningHeader_();
+		}
+#>
+
+namespace <#= Namespace #> {
+<#+ EmitCoreComonadClass(); #>
+}
+<#+
+	}	// End of EmitMonad
+
+    protected void EmitLinq(bool warningHeader = true)
+    {
+		if (warningHeader) {
+			WriteWarningHeader_();
+		}
 #>
 
 namespace <#= LinqNamespace #> {
@@ -206,6 +224,7 @@ namespace <#= LinqNamespace #> {
 	protected void EmitCoreClass() 
 	{
 #>
+	// Monadic methods.
     public static partial class <#= Name #>
     {
         static readonly <#= Name #><Unit> Unit_ = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
@@ -275,6 +294,27 @@ namespace <#= LinqNamespace #> {
     }
 <#+
 	}	// End of EmitCoreClass
+	
+	protected void EmitCoreComonadClass() 
+	{
+#>
+	// Comonadic methods.
+    public static partial class <#= Name #>
+    {
+        // [Haskell] extract
+        public static T Extract<T>(<#= Name #><T> monad)
+        {
+            return <#= Name #><T>.ε(monad);
+        }
+
+        // [Haskell] duplicate
+        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
+        {
+            return <#= Name #><T>.δ(monad);
+        }
+    }
+<#+
+	}	// End of EmitCoreComonadClass
 
 	protected void EmitCoreExtensions()
 	{
@@ -324,6 +364,7 @@ namespace <#= LinqNamespace #> {
 <#+ if (HasZero) { #>
 <#+ NewLine_(); #>
         // [Haskell] guard
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static <#= Name #><Unit> Guard<TSource>(this <#= Name #><TSource> @this, bool predicate)
         {
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
@@ -331,7 +372,7 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 
         // [Haskell] when
-        //public static <#= Name #><Unit> When<TSource>(this <#= Name #><TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static <#= Name #><Unit> When<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
         {
             Require.NotNull(action, "action");
@@ -344,7 +385,6 @@ namespace <#= LinqNamespace #> {
         }
 
         // [Haskell] unless
-        //public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
         public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
         {
             return @this.When(!predicate, action);
@@ -446,6 +486,14 @@ namespace <#= LinqNamespace #> {
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
+
+        public static <#= Name #><TSource> Run<TSource>(this <#= Name #><TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
 <#+ if (HasZero) { #>
 <#+ NewLine_(); #>
         public static <#= Name #><TResult> Then<TSource, TResult>(
@@ -463,23 +511,15 @@ namespace <#= LinqNamespace #> {
         {
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
-<#+ } #>
 
-        public static <#= Name #><Unit> Run<TSource>(this <#= Name #><TSource> @this, Func<TSource, <#= Name #><Unit>> actionM)
+        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(this <#= Name #><TSource> @this, Action action)
         {
             Require.Object(@this);
-            Require.NotNull(actionM, "actionM");
+            Require.NotNull(action, "action");
 
-            return @this.Bind(actionM);
+            throw new NotImplementedException();
         }
-
-        //public static <#= Name #><Unit> OnZero<TSource>(this <#= Name #><TSource> @this, Func<Unit, <#= Name #><Unit>> actionM)
-        //{
-        //    Require.Object(@this);
-        //    Require.NotNull(actionM, "actionM");
-
-        //    throw new NotImplementedException();
-        //}
+<#+ } #>
 	}
 <#+
 	}	// End of EmitExtensions
@@ -614,9 +654,10 @@ namespace <#= LinqNamespace #> {
         {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(comparer, "comparer");
 
             throw new NotImplementedException();
         }
@@ -898,7 +939,7 @@ namespace <#= LinqNamespace #> {
 	// Private Methods
 	//
 	
-    protected void WriteWarning_()
+    protected void WriteWarningHeader_()
     {
 #>
 //------------------------------------------------------------------------------
