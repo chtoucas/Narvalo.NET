@@ -85,14 +85,40 @@ namespace Narvalo.Linq {
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            return JoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+		
+        static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "outerKeySelector");
+            Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-            Require.NotNull(comparer, "comparer");
+			
+            Func<TSource, Maybe<TInner>> valueSelectorM = _ =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(_);
 
-            throw new NotImplementedException();
+				// FIXME: Requires Zero?
+                return inner.Map(v => innerKeySelector.Invoke(v))
+                    .Filter(innerKey => comparer.Equals(innerKey, outerKey))
+                    .Then(inner);
+            };
+
+			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 	}
 
@@ -231,7 +257,7 @@ namespace Narvalo.Linq {
         #endregion
     }
 
-	// More extensions for IEnumerable<T>.
+	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators

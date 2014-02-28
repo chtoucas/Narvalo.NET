@@ -231,7 +231,7 @@ namespace Narvalo.Edu.Linq {
         #endregion
     }
 
-	// More extensions for IEnumerable<T>.
+	// Narvalo extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators

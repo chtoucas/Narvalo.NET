@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using Narvalo.Linq;
 
     public partial class Maybe<T>
     {
@@ -53,7 +54,9 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Prelude extensions for Maybe<T>.
+        #region Specialised overrides.
+
+        #region Prelude extensions.
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
         {
@@ -74,13 +77,13 @@ namespace Narvalo.Fx
             Require.NotNull(second, "second");
 
             return IsSome && second.IsSome
-                ? Maybe.Create(resultSelector.Invoke(Value, second.Value))
+                ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))
                 : Maybe<TResult>.None;
         }
 
         #endregion
 
-        #region Linq extensions for Maybe<T>.
+        #region Linq extensions.
 
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -94,7 +97,7 @@ namespace Narvalo.Fx
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            // REVIEW
+            //// REVIEW
             if (IsNone || inner.IsNone) {
                 return Maybe<TResult>.None;
             }
@@ -103,13 +106,13 @@ namespace Narvalo.Fx
             var innerKey = innerKeySelector.Invoke(inner.Value);
 
             return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
-                ? Maybe.Create(resultSelector.Invoke(Value, inner.Value))
+                ? Maybe<TResult>.η(resultSelector.Invoke(Value, inner.Value))
                 : Maybe<TResult>.None;
         }
 
         #endregion
 
-        #region Additional methods
+        #region Non-standard extensions.
 
         public Maybe<T> Run(Action<T> action)
         {
@@ -120,11 +123,6 @@ namespace Narvalo.Fx
             }
 
             return this;
-        }
-
-        public Maybe<T> OnSome(Action<T> action)
-        {
-            return Run(action);
         }
 
         public Maybe<T> OnNone(Action action)
@@ -139,5 +137,12 @@ namespace Narvalo.Fx
         }
 
         #endregion
+
+        #endregion
+
+        public Maybe<T> OnSome(Action<T> action)
+        {
+            return Run(action);
+        }
     }
 }

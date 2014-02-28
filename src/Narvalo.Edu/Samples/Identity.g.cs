@@ -197,7 +197,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
     }
 
-	// More extensions for Identity<T>.
+	// Narvalo extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
         public static Identity<TResult> Coalesce<TSource, TResult>(
@@ -479,7 +479,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
     }
 
-	// More extensions for IEnumerable<T>.
+	// Narvalo extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators

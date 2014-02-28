@@ -80,7 +80,7 @@ namespace Narvalo.Fx {
 	// Prelude extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
-		#region Basic monadic functions (Prelude)
+		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Maybe<TResult> Map<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
@@ -217,7 +217,7 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-	// More extensions for Maybe<T>.
+	// Non-standard extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
         public static Maybe<TResult> Coalesce<TSource, TResult>(
@@ -230,14 +230,6 @@ namespace Narvalo.Fx {
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
         public static Maybe<TResult> Then<TSource, TResult>(
@@ -254,6 +246,14 @@ namespace Narvalo.Fx {
             Maybe<TResult> other)
         {
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
+        }
+
+        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
         public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)

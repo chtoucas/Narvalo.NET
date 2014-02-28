@@ -217,7 +217,7 @@ namespace Narvalo.Edu.Fx {
         #endregion
     }
 
-	// More extensions for Monad<T>.
+	// Narvalo extensions for Monad<T>.
     public static partial class MonadExtensions
     {
         public static Monad<TResult> Coalesce<TSource, TResult>(

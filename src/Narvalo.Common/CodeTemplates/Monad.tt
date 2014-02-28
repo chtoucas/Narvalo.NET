@@ -322,7 +322,7 @@ namespace <#= LinqNamespace #> {
 	// Prelude extensions for <#= Name #><T>.
     public static partial class <#= Name #>Extensions
     {
-		#region Basic monadic functions (Prelude)
+		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(this <#= Name #><TSource> @this, Func<TSource, TResult> selector)
@@ -472,7 +472,7 @@ namespace <#= LinqNamespace #> {
 	protected void EmitExtensions()
 	{
 #>
-	// More extensions for <#= Name #><T>.
+	// Non-standard extensions for <#= Name #><T>.
     public static partial class <#= Name #>Extensions
     {
         public static <#= Name #><TResult> Coalesce<TSource, TResult>(
@@ -485,14 +485,6 @@ namespace <#= LinqNamespace #> {
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static <#= Name #><TSource> Run<TSource>(this <#= Name #><TSource> @this, Action<TSource> action)
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 <#+ if (HasZero) { #>
 <#+ NewLine_(); #>
@@ -511,7 +503,17 @@ namespace <#= LinqNamespace #> {
         {
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
+<#+ } #>
 
+        public static <#= Name #><TSource> Run<TSource>(this <#= Name #><TSource> @this, Action<TSource> action)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
+<#+ if (HasZero) { #>
+<#+ NewLine_(); #>
         public static <#= Name #><TSource> On<#= ZeroName #><TSource>(this <#= Name #><TSource> @this, Action action)
         {
             Require.Object(@this);
@@ -652,14 +654,40 @@ namespace <#= LinqNamespace #> {
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            return JoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+		
+        static <#= Name #><TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "outerKeySelector");
+            Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-            Require.NotNull(comparer, "comparer");
+			
+            Func<TSource, Maybe<TInner>> valueSelectorM = _ =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(_);
 
-            throw new NotImplementedException();
+				// FIXME: Requires Zero?
+                return inner.Map(v => innerKeySelector.Invoke(v))
+                    .Filter(innerKey => comparer.Equals(innerKey, outerKey))
+                    .Then(inner);
+            };
+
+			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 	}
 <#+
@@ -812,7 +840,7 @@ namespace <#= LinqNamespace #> {
 	protected void EmitEnumerableExtensions()
 	{
 #>
-	// More extensions for IEnumerable<T>.
+	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators
