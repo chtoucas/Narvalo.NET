@@ -134,23 +134,6 @@ namespace Narvalo.Linq
             return @this.Reverse().Reduce(accumulatorM);
         }
 
-        public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
-        {
-            Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
-
-            Maybe<TAccumulate> result = Maybe.Create(seed);
-
-            foreach (TSource item in @this) {
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
-            }
-
-            return result;
-        }
-
         public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

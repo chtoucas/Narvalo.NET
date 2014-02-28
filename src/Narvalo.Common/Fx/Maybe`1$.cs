@@ -5,28 +5,8 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Provides extension methods for <see cref="Narvalo.Fx.Maybe{T}"/>.
-    /// </summary>
     public static partial class MaybeExtensions
     {
-        #region Monadic lifting operators
-
-        public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
-            this Maybe<TFirst> @this,
-            Maybe<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-
-            return @this.IsSome && second.IsSome
-                ? Maybe.Create(resultSelector.Invoke(@this.Value, second.Value))
-                : Maybe<TResult>.None;
-        }
-
-        #endregion
-
         #region Additional methods
 
         public static Maybe<TResult> Coalesce<TSource, TResult>(

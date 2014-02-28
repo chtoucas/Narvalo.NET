@@ -16,23 +16,13 @@ namespace Narvalo.Fx
 
         #endregion
 
+        #region Monad
+
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
 
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
-        }
-
-        public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
-        }
-
-        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
-        {
-            return IsSome ? other : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
@@ -50,5 +40,34 @@ namespace Narvalo.Fx
 
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
+
+        #endregion
+
+        #region Native methods (MaybeExtensions)
+
+        public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
+        {
+            Require.NotNull(selector, "selector");
+
+            return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
+        }
+
+        public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
+        {
+            return IsSome ? other : Maybe<TResult>.None;
+        }
+
+        public Maybe<TResult> Zip<TSecond, TResult>(
+            Maybe<TSecond> second,
+            Func<T, TSecond, TResult> resultSelector)
+        {
+            Require.NotNull(second, "second");
+
+            return IsSome && second.IsSome
+                ? Maybe.Create(resultSelector.Invoke(Value, second.Value))
+                : Maybe<TResult>.None;
+        }
+
+        #endregion
     }
 }

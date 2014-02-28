@@ -35,29 +35,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Basic Monad functions for Maybe
-
-        public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Maybe<TMiddle>> @this,
-            Func<TMiddle, Maybe<TResult>> kun)
-        {
-            Require.Object(@this);
-
-            return _ => @this.Invoke(_).Bind(kun);
-        }
-
-        public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Maybe<TResult>> @this,
-            Func<TSource, Maybe<TMiddle>> kun)
-        {
-            Require.Object(@this);
-            Require.NotNull(kun, "kun");
-
-            return _ => kun.Invoke(_).Bind(@this);
-        }
-
-        #endregion
-
         #region Basic Monad functions for Output
 
         public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
