@@ -65,16 +65,24 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Fx\Monad.cs">
+    <Compile Include="Fx\Internal\Rules.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fx\Monad`1%24.Prelude.cs" />
+    <Compile Include="Fx\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Linq\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Samples\Iteration.cs" />
     <Compile Include="Samples\Iteration`2.cs" />
     <Compile Include="Collections\Recursion\YCombinator.cs" />
     <Compile Include="Samples\Miscs.cs" />
     <Compile Include="Collections\Recursion\NamespaceDoc.cs" />
-    <Compile Include="Fx\Internal\Kunc`%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Collections\Recursion\Bananas.cs" />
     <Compile Include="Collections\Recursion\Lenses.cs" />
@@ -94,30 +102,18 @@
     <Compile Include="Samples\Identity`1.Monad.cs">
       <DependentUpon>Identity`1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Unit.cs" />
-    <Compile Include="Linq\Enumerable[Monad]%24.cs" />
-    <Compile Include="Linq\Enumerable`1%24.Prelude.cs" />
-    <Compile Include="Linq\Enumerable`1%24.cs" />
-    <Compile Include="Fx\Internal\Rules.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fx\Internal\Action`%24.cs" />
     <Compile Include="Fx\Cokunc`.cs" />
     <Compile Include="Fx\Comonad.cs" />
     <Compile Include="Fx\Comonad`1.cs" />
-    <Compile Include="Fx\Kunc`%24.cs" />
-    <Compile Include="Fx\Kunc`.cs" />
-    <Compile Include="Fx\Monad`1%24.cs" />
-    <Compile Include="Linq\Monad`1%24.cs" />
     <Compile Include="Fx\Monad`1.cs" />
     <Compile Include="Fx\Monoid`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Samples\Anamorphism.cs" />
     <Compile Include="SR.Designer.cs">
       <DependentUpon>SR.resx</DependentUpon>
@@ -133,6 +129,14 @@
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
+    </None>
+    <None Include="Fx\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Linq\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

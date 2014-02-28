@@ -3,7 +3,7 @@
 namespace Narvalo.Edu.Samples
 {
     using System;
-    using Narvalo.Edu.Fx;
+    using Narvalo.Fx;
 
     /// <summary>
     /// Provides extension methods for <see cref="Narvalo.Edu.Samples.Identity{T}"/>.

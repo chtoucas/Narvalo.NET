@@ -2,11 +2,11 @@
 
 namespace Narvalo.Edu.Samples
 {
-    using Narvalo.Edu.Fx;
+    using Narvalo.Fx;
 
     public static class Identity
     {
-        static readonly Identity<Unit> Unit_ = Return(Narvalo.Edu.Fx.Unit.Single);
+        static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
         public static Identity<Unit> Unit { get { return Unit_; } }
 

@@ -166,10 +166,8 @@ namespace <#= Namespace #> {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
-<#+ if (Namespace != InferNamespace_()) { #>
 	using Narvalo.Fx;
-<#+ } #>
-<#+ NewLine_(); #>
+
 <#+ EmitCoreClass(); #>
 <#+ NewLine_(); #>
 <#+ EmitCoreExtensions(); #>
@@ -284,13 +282,15 @@ namespace <#= LinqNamespace #> {
 	// Prelude extensions for <#= Name #><T>.
     public static partial class <#= Name #>Extensions
     {
-		#region Basic monadic functions
+		#region Basic monadic functions (Prelude)
 
+        // [Haskell] fmap
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(this <#= Name #><TSource> @this, Func<TSource, TResult> selector)
         {
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
+		// [Haskell] >>
         public static <#= Name #><TResult> Then<TSource, TResult>(this <#= Name #><TSource> @this, <#= Name #><TResult> other)
         {
             return @this.Bind(_ => other);
@@ -331,6 +331,7 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 
         // [Haskell] when
+        //public static <#= Name #><Unit> When<TSource>(this <#= Name #><TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
         public static <#= Name #><Unit> When<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
         {
             Require.NotNull(action, "action");
@@ -343,6 +344,7 @@ namespace <#= LinqNamespace #> {
         }
 
         // [Haskell] unless
+        //public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Func<Unit, Monad<Unit>> action)
         public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
         {
             return @this.When(!predicate, action);

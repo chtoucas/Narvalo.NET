@@ -28,7 +28,7 @@ namespace Narvalo.Edu.Collections.Recursion
         public static Monad<TResult> CataM<TSource, TResult>(
             this IEnumerable<TSource> @this,
             TResult seed,
-            Kunc<TResult, TSource, TResult> accumulatorM,
+            Func<TResult, TSource, Monad<TResult>> accumulatorM,
             Func<Monad<TResult>, bool> predicate)
         {
             Monad<TResult> result = Monad.Return(seed);
@@ -99,7 +99,7 @@ namespace Narvalo.Edu.Collections.Recursion
         public static Monad<TResult> AggregateM<T, TResult>(
             this IEnumerable<T> @this,
             TResult seed,
-            Kunc<TResult, T, TResult> accumulatorM)
+            Func<TResult, T, Monad<TResult>> accumulatorM)
         {
             return CataM(@this, seed, accumulatorM, _ => true);
         }
