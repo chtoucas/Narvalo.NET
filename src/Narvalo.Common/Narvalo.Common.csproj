@@ -116,7 +116,6 @@
     </Compile>
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Linq\Maybe`1%24.cs" />
     <Compile Include="Linq\Nullable`1%24.cs" />
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Linq\Output`1%24.cs" />
@@ -183,7 +182,7 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Fx\CodeTemplates\Monad.tt" />
+    <None Include="CodeTemplates\Monad.tt" />
     <None Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>

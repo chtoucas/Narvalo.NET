@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     public partial class Maybe<T>
@@ -65,6 +66,35 @@ namespace Narvalo.Fx
 
             return IsSome && second.IsSome
                 ? Maybe.Create(resultSelector.Invoke(Value, second.Value))
+                : Maybe<TResult>.None;
+        }
+
+        #endregion
+
+        #region 
+
+        public Maybe<TResult> Join<TInner, TKey, TResult>(
+            Maybe<TInner> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            // REVIEW
+            if (IsNone || inner.IsNone) {
+                return Maybe<TResult>.None;
+            }
+
+            var outerKey = outerKeySelector.Invoke(Value);
+            var innerKey = innerKeySelector.Invoke(inner.Value);
+
+            return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
+                ? Maybe.Create(resultSelector.Invoke(Value, inner.Value))
                 : Maybe<TResult>.None;
         }
 

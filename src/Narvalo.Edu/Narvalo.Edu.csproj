@@ -65,6 +65,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Fx\Monad.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Monad`1%24.Prelude.cs" />
     <Compile Include="Samples\Iteration.cs" />
     <Compile Include="Samples\Iteration`2.cs" />
@@ -108,7 +111,6 @@
     <Compile Include="Fx\Comonad`1.cs" />
     <Compile Include="Fx\Kunc`%24.cs" />
     <Compile Include="Fx\Kunc`.cs" />
-    <Compile Include="Fx\Monad.cs" />
     <Compile Include="Fx\Monad`1%24.cs" />
     <Compile Include="Linq\Monad`1%24.cs" />
     <Compile Include="Fx\Monad`1.cs" />

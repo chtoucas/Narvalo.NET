@@ -150,7 +150,7 @@
 		PlusName = plusName;
 	}
 
-    protected void WriteMonad()
+    protected void EmitMonad()
     {
 #>
 //------------------------------------------------------------------------------
@@ -166,11 +166,13 @@ namespace <#= Namespace #> {
     using System.Linq;
 	using Narvalo.Fx;
 
-<#+ WriteCoreClass(); #>
+<#+ EmitCoreClass(); #>
 <#+ NewLine_(); #>
-<#+ WritePreludeExtensions(); #>
+<#+ EmitCoreExtensions(); #>
 <#+ NewLine_(); #>
-<#+ WriteKleisliExtensions(); #>
+<#+ EmitExtensions(); #>
+<#+ NewLine_(); #>
+<#+ EmitKleisliExtensions(); #>
 }
 
 namespace <#= LinqNamespace #> {
@@ -179,29 +181,33 @@ namespace <#= LinqNamespace #> {
     using System.Linq;
     using <#= Namespace #>;
 
-<#+ WriteQepExtensions(); #>
+<#+ EmitQepExtensions(); #>
 <#+ NewLine_(); #>
-<#+ WriteEnumerableExtensions(); #>
+<#+ EmitLinqExtensions(); #>
+<#+ NewLine_(); #>
+<#+ EmitCoreEnumerableExtensions(); #>
+<#+ NewLine_(); #>
+<#+ EmitEnumerableExtensions(); #>
 }
 <#+
     }
 	
-	protected void WriteCoreClass() 
+	protected void EmitCoreClass() 
 	{
 #>
     public static partial class <#= Name #>
     {
+        static readonly <#= Name #><Unit> Unit_ = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
 <#+ if (HasZero) { #>
         static readonly <#= Name #><Unit> <#= ZeroName #>_ = <#= Name #><Unit>.<#= ZeroName #>;
 <#+ } #>
-        static readonly <#= Name #><Unit> Unit_ = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
 
+        public static <#= Name #><Unit> Unit { get { return Unit_; } }
 <#+ if (HasZero) { #>
+<#+ NewLine_(); #>
         // [Haskell] mzero
         public static <#= Name #><Unit> <#= ZeroName #> { get { return <#= ZeroName #>_; } }
-<#+ NewLine_(); #>
 <#+ } #>
-        public static <#= Name #><Unit> Unit { get { return Unit_; } }
 
         // [Haskell] return
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
@@ -209,7 +215,7 @@ namespace <#= LinqNamespace #> {
             return <#= Name #><T>.η(value);
         }
 		
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
@@ -218,10 +224,10 @@ namespace <#= LinqNamespace #> {
         }
 
         #endregion
+
+		#region Monadic lifting operators
 <#+ if (Complete) { #>
 <#+ NewLine_(); #>
-		#region Monadic lifting operators
-
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m => m.<#= MapName #>(fun);
@@ -257,14 +263,12 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
     }
 <#+
-	}	// End of WriteCoreClass
+	}	// End of EmitCoreClass
 
-	protected void WritePreludeExtensions()
+	protected void EmitCoreExtensions()
 	{
 #>
-	/// <summary>
-    /// Provides extension methods for <see cref="<#= Namespace #>.<#= Name #>{T}"/>.
-    /// </summary>
+	// Prelude extensions for <#= Name #><T>.
     public static partial class <#= Name #>Extensions
     {
 		#region Basic monadic functions
@@ -281,7 +285,7 @@ namespace <#= LinqNamespace #> {
 		
         #endregion
 
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 <#+ if (HasZero) { #>
 <#+ NewLine_(); #>
         // [Haskell] mfilter
@@ -295,7 +299,7 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 
         // [Haskell] replicateM
-        public static <#= Name #><IEnumerable<T>> Repeat<T>(this <#= Name #><T> @this, int count)
+        public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(this <#= Name #><TSource> @this, int count)
         {
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
@@ -303,7 +307,7 @@ namespace <#= LinqNamespace #> {
         #endregion
 <#+ if (Complete) { #>
 <#+ NewLine_(); #>
-        #region Conditional execution of monadic expressions
+        #region Conditional execution of monadic expressions (Prelude)
 <#+ if (HasZero) { #>
 <#+ NewLine_(); #>
         // [Haskell] guard
@@ -334,7 +338,7 @@ namespace <#= LinqNamespace #> {
         #endregion
 <#+ } #>
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
         // [Haskell] liftM2
         public static <#= Name #><TResult> Zip<TFirst, TSecond, TResult>(
@@ -408,14 +412,70 @@ namespace <#= LinqNamespace #> {
         #endregion
     }
 <#+
-	}	// End of WritePreludeExtensions
+	}	// End of EmitCoreExtensions
 	
-    public void WriteKleisliExtensions()
+	protected void EmitExtensions()
+	{
+#>
+	// Narvalo extensions for <#= Name #><T>.
+    public static partial class <#= Name #>Extensions
+    {
+        public static <#= Name #><TResult> Coalesce<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> then,
+            <#= Name #><TResult> otherwise)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+<#+ if (HasZero) { #>
+<#+ NewLine_(); #>
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+        {
+            return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+        public static <#= Name #><TResult> Otherwise<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+        {
+            return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
+        }
+<#+ } #>
+
+        public static <#= Name #><Unit> Run<TSource>(this <#= Name #><TSource> @this, Func<TSource, <#= Name #><Unit>> actionM)
+        {
+            Require.Object(@this);
+            Require.NotNull(actionM, "actionM");
+
+            return @this.Bind(actionM);
+        }
+
+        //public static <#= Name #><Unit> OnZero<TSource>(this <#= Name #><TSource> @this, Func<Unit, <#= Name #><Unit>> actionM)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNull(actionM, "actionM");
+
+        //    throw new NotImplementedException();
+        //}
+	}
+<#+
+	}	// End of EmitExtensions
+
+    public void EmitKleisliExtensions()
     {
 #>
-	public static partial class KleisliExtensions
+	// Kleisli extensions for Func<T, <#= Name #><TResult>>.
+	public static partial class FuncExtensions
     {
-        #region Basic Monad functions
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] =<<
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
@@ -428,43 +488,39 @@ namespace <#= LinqNamespace #> {
         // [Haskell] >=>
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
-            Func<TMiddle, <#= Name #><TResult>> kun)
+            Func<TMiddle, <#= Name #><TResult>> funM)
         {
             Require.Object(@this);
 
-            return _ => @this.Invoke(_).Bind(kun);
+            return _ => @this.Invoke(_).Bind(funM);
         }
 <#+ if (Complete) { #>
 <#+ NewLine_(); #>
         // [Haskell] <=<
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
-            Func<TSource, <#= Name #><TMiddle>> kun)
+            Func<TSource, <#= Name #><TMiddle>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
-            return _ => kun.Invoke(_).Bind(@this);
+            return _ => funM.Invoke(_).Bind(@this);
         }
 <#+ } #>
 
         #endregion
     }
 <#+
-    }	// End of WriteKleisliExtensions
+    }	// End of EmitKleisliExtensions
 
-	protected void WriteQepExtensions()
+	protected void EmitQepExtensions()
 	{
 #>
-	/// <summary>
-    /// Provides limited support for the Query Expression Pattern with <see cref="<#= Namespace #>.<#= Name #>{T}"/>.
-    /// </summary>
+	// Query Expression Pattern for <#= Name #><T>.
 	public static partial class <#= Name #>Extensions
     {
-        #region Query Expression Pattern
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         public static <#= Name #><TSource> Where<TSource>(
             this <#= Name #><TSource> @this, 
             Func<TSource, bool> predicate)
@@ -473,8 +529,8 @@ namespace <#= LinqNamespace #> {
 
             return @this.Filter(predicate);
         }
+<#+ NewLine_(); #>
 <#+ } #>
-
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this, 
             Func<TSource, TResult> selector)
@@ -488,14 +544,14 @@ namespace <#= LinqNamespace #> {
         // Kind of generalisation of Zip (liftM2).
         public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
             this <#= Name #><TSource> @this,
-            Func<TSource, <#= Name #><TMiddle>> valueSelector,
+            Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(valueSelector, "valueSelector");
+            Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
+            return @this.Bind(_ => valueSelectorM.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
         }
 
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
@@ -513,19 +569,26 @@ namespace <#= LinqNamespace #> {
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelectorM)
         {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelectorM, "resultSelectorM");
 
             throw new NotImplementedException();
         }
-
-        #endregion
-
+	}
+<#+
+	}	// End of EmitQepExtensions
+	
+	protected void EmitLinqExtensions()
+	{
+#>
+	// Linq extensions for <#= Name #><T>.
+	public static partial class <#= Name #>Extensions
+    {
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -544,14 +607,15 @@ namespace <#= LinqNamespace #> {
         }
 	}
 <#+
-	}	// End of WriteQepExtensions
+	}	// End of EmitLinqExtensions
 
-	protected void WriteEnumerableExtensions()
+	protected void EmitCoreEnumerableExtensions()
 	{
 #>
-	public static class EnumerableMonadExtensions
+	// Prelude extensions for IEnumerable<<#= Name #><T>>.
+	public static partial class Enumerable<#= Name #>Extensions
     {
-        #region Basic Monad functions
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] sequence
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
@@ -572,7 +636,7 @@ namespace <#= LinqNamespace #> {
         #endregion
 <#+ if (HasZero && HasPlus) { #>
 <#+ NewLine_(); #>
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] msum
         public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
@@ -586,24 +650,25 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 	}
 
+	// Prelude extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
-        #region Basic Monad functions
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] mapM
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, <#= Name #><TResult>> kun)
+            Func<TSource, <#= Name #><TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select kun.Invoke(_)).Collect();
+            return (from _ in @this select funM.Invoke(_)).Collect();
         }
 		
         #endregion
 
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
         public static <#= Name #><IEnumerable<TSource>> Filter<TSource>(
@@ -635,13 +700,13 @@ namespace <#= LinqNamespace #> {
         // [Haskell] mapAndUnzipM
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
-           Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> kun)
+           Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
             return from _ in
-                       (from _ in @this select kun.Invoke(_)).Collect()
+                       (from _ in @this select funM.Invoke(_)).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -686,7 +751,133 @@ namespace <#= LinqNamespace #> {
         #endregion
     }
 <#+
-	}	// End of WriteEnumerableExtensions
+	}	// End of EmitCoreEnumerableExtensions
+
+	protected void EmitEnumerableExtensions()
+	{
+#>
+	// Narvalo extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
+        #region Aggregate Operators
+
+        public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Fold(seed, accumulatorM);
+        }
+
+        public static <#= Name #><TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+            Require.NotNull(accumulatorM, "accumulatorM");
+
+            using (var iter = @this.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
+
+                while (iter.MoveNext()) {
+                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+
+                return result;
+            }
+        }
+
+        public static <#= Name #><TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Reduce(accumulatorM);
+        }
+
+        #endregion
+<#+ if (HasZero) { #>
+<#+ NewLine_(); #>
+        #region Element Operators
+
+        // FIXME: 
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        {
+            return FirstOr<#= ZeroName #>(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, <#= Name #><bool>>
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
+            using (var iter = seq.GetEnumerator()) {
+                return iter.MoveNext() ? iter.Current : <#= Name #><TSource>.<#= ZeroName #>;
+            }
+        }
+
+        // FIXME: 
+        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        {
+            return LastOr<#= ZeroName #>(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, <#= Name #><bool>>
+        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
+            using (var iter = seq.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    return <#= Name #><TSource>.<#= ZeroName #>;
+                }
+
+                var value = iter.Current;
+                while (iter.MoveNext()) {
+                    value = iter.Current;
+                }
+
+                return value;
+            }
+        }
+
+        // FIXME: 
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        {
+            return SingleOr<#= ZeroName #>(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, <#= Name #><bool>>
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
+            using (var iter = seq.GetEnumerator()) {
+                var result = iter.MoveNext() ? iter.Current : <#= Name #><TSource>.<#= ZeroName #>;
+
+                // On retourne <#= Name #>.<#= ZeroName #> si il y a encore un élément.
+                return iter.MoveNext() ? <#= Name #><TSource>.<#= ZeroName #> : result;
+            }
+        }
+
+        #endregion
+<#+ } #>
+	}
+<#+
+	}	// End of EmitEnumerableExtensions
 
 	//
 	// Private Methods

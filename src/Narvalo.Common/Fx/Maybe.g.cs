@@ -15,13 +15,13 @@ namespace Narvalo.Fx {
 
     public static partial class Maybe
     {
-        static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
         static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
+        static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
+
+        public static Maybe<Unit> Unit { get { return Unit_; } }
 
         // [Haskell] mzero
         public static Maybe<Unit> None { get { return None_; } }
-
-        public static Maybe<Unit> Unit { get { return Unit_; } }
 
         // [Haskell] return
         public static Maybe<T> Create<T>(T value)
@@ -29,7 +29,7 @@ namespace Narvalo.Fx {
             return Maybe<T>.η(value);
         }
 		
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
@@ -75,9 +75,7 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-	/// <summary>
-    /// Provides extension methods for <see cref="Narvalo.Fx.Maybe{T}"/>.
-    /// </summary>
+	// Prelude extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
 		#region Basic monadic functions
@@ -94,7 +92,7 @@ namespace Narvalo.Fx {
 		
         #endregion
 
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] mfilter
         public static Maybe<TSource> Filter<TSource>(this Maybe<TSource> @this, Func<TSource, bool> predicate)
@@ -106,14 +104,14 @@ namespace Narvalo.Fx {
         }
 
         // [Haskell] replicateM
-        public static Maybe<IEnumerable<T>> Repeat<T>(this Maybe<T> @this, int count)
+        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
         {
             return @this.Map(_ => Enumerable.Repeat(_, count));
         }
 		
         #endregion
 
-        #region Conditional execution of monadic expressions
+        #region Conditional execution of monadic expressions (Prelude)
 
         // [Haskell] guard
         public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
@@ -141,7 +139,7 @@ namespace Narvalo.Fx {
 
         #endregion
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
         // [Haskell] liftM2
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
@@ -213,9 +211,58 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-	public static partial class KleisliExtensions
+	// Narvalo extensions for Maybe<T>.
+    public static partial class MaybeExtensions
     {
-        #region Basic Monad functions
+        public static Maybe<TResult> Coalesce<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> then,
+            Maybe<TResult> otherwise)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+        public static Maybe<TResult> Then<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+        {
+            return @this.Coalesce(predicate, other, Maybe<TResult>.None);
+        }
+
+        public static Maybe<TResult> Otherwise<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate,
+            Maybe<TResult> other)
+        {
+            return @this.Coalesce(predicate, Maybe<TResult>.None, other);
+        }
+
+        public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Func<TSource, Maybe<Unit>> actionM)
+        {
+            Require.Object(@this);
+            Require.NotNull(actionM, "actionM");
+
+            return @this.Bind(actionM);
+        }
+
+        //public static Maybe<Unit> OnZero<TSource>(this Maybe<TSource> @this, Func<Unit, Maybe<Unit>> actionM)
+        //{
+        //    Require.Object(@this);
+        //    Require.NotNull(actionM, "actionM");
+
+        //    throw new NotImplementedException();
+        //}
+	}
+
+	// Kleisli extensions for Func<T, Maybe<TResult>>.
+	public static partial class FuncExtensions
+    {
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] =<<
         public static Maybe<TResult> Invoke<TSource, TResult>(
@@ -228,22 +275,22 @@ namespace Narvalo.Fx {
         // [Haskell] >=>
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Maybe<TMiddle>> @this,
-            Func<TMiddle, Maybe<TResult>> kun)
+            Func<TMiddle, Maybe<TResult>> funM)
         {
             Require.Object(@this);
 
-            return _ => @this.Invoke(_).Bind(kun);
+            return _ => @this.Invoke(_).Bind(funM);
         }
 
         // [Haskell] <=<
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Maybe<TResult>> @this,
-            Func<TSource, Maybe<TMiddle>> kun)
+            Func<TSource, Maybe<TMiddle>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
-            return _ => kun.Invoke(_).Bind(@this);
+            return _ => funM.Invoke(_).Bind(@this);
         }
 
         #endregion
@@ -256,13 +303,9 @@ namespace Narvalo.Linq {
     using System.Linq;
     using Narvalo.Fx;
 
-	/// <summary>
-    /// Provides limited support for the Query Expression Pattern with <see cref="Narvalo.Fx.Maybe{T}"/>.
-    /// </summary>
+	// Query Expression Pattern for Maybe<T>.
 	public static partial class MaybeExtensions
     {
-        #region Query Expression Pattern
-
         public static Maybe<TSource> Where<TSource>(
             this Maybe<TSource> @this, 
             Func<TSource, bool> predicate)
@@ -284,14 +327,14 @@ namespace Narvalo.Linq {
         // Kind of generalisation of Zip (liftM2).
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
-            Func<TSource, Maybe<TMiddle>> valueSelector,
+            Func<TSource, Maybe<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(valueSelector, "valueSelector");
+            Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelector.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
+            return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
 
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
@@ -309,19 +352,21 @@ namespace Narvalo.Linq {
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Maybe<TInner>, TResult> resultSelector)
+            Func<TSource, Maybe<TInner>, TResult> resultSelectorM)
         {
             Require.Object(@this);
             Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelectorM, "resultSelectorM");
 
             throw new NotImplementedException();
         }
+	}
 
-        #endregion
-
+	// Linq extensions for Maybe<T>.
+	public static partial class MaybeExtensions
+    {
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
             Maybe<TInner> inner,
@@ -340,9 +385,10 @@ namespace Narvalo.Linq {
         }
 	}
 
-	public static class EnumerableMonadExtensions
+	// Prelude extensions for IEnumerable<Maybe<T>>.
+	public static partial class EnumerableMaybeExtensions
     {
-        #region Basic Monad functions
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] sequence
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Maybe<TSource>> @this)
@@ -362,7 +408,7 @@ namespace Narvalo.Linq {
 		
         #endregion
 
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] msum
         public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> @this)
@@ -375,24 +421,25 @@ namespace Narvalo.Linq {
         #endregion
 	}
 
+	// Prelude extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
-        #region Basic Monad functions
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] mapM
         public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> kun)
+            Func<TSource, Maybe<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select kun.Invoke(_)).Collect();
+            return (from _ in @this select funM.Invoke(_)).Collect();
         }
 		
         #endregion
 
-        #region Generalisations of list functions
+        #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
         public static Maybe<IEnumerable<TSource>> Filter<TSource>(
@@ -423,13 +470,13 @@ namespace Narvalo.Linq {
         // [Haskell] mapAndUnzipM
         public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
-           Func<TSource, Maybe<Tuple<TFirst, TSecond>>> kun)
+           Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(kun, "kun");
+            Require.NotNull(funM, "funM");
 
             return from _ in
-                       (from _ in @this select kun.Invoke(_)).Collect()
+                       (from _ in @this select funM.Invoke(_)).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -472,4 +519,123 @@ namespace Narvalo.Linq {
 
         #endregion
     }
+
+	// Narvalo extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
+        #region Aggregate Operators
+
+        public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Fold(seed, accumulatorM);
+        }
+
+        public static Maybe<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+            Require.NotNull(accumulatorM, "accumulatorM");
+
+            using (var iter = @this.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Maybe<TSource> result = Maybe.Create(iter.Current);
+
+                while (iter.MoveNext()) {
+                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+
+                return result;
+            }
+        }
+
+        public static Maybe<TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Reduce(accumulatorM);
+        }
+
+        #endregion
+
+        #region Element Operators
+
+        // FIXME: 
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return FirstOrNone(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, Maybe<bool>>
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+            }
+        }
+
+        // FIXME: 
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return LastOrNone(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, Maybe<bool>>
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    return Maybe<TSource>.None;
+                }
+
+                var value = iter.Current;
+                while (iter.MoveNext()) {
+                    value = iter.Current;
+                }
+
+                return value;
+            }
+        }
+
+        // FIXME: 
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return SingleOrNone(@this, _ => true);
+        }
+
+        // FIXME: Func<TSource, Maybe<bool>>
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+
+                // On retourne Maybe.None si il y a encore un élément.
+                return iter.MoveNext() ? Maybe<TSource>.None : result;
+            }
+        }
+
+        #endregion
+	}
 }

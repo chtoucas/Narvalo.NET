@@ -3,46 +3,17 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public static partial class MaybeExtensions
     {
         #region Additional methods
 
-        public static Maybe<TResult> Coalesce<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> then,
-            Maybe<TResult> otherwise)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
+        //public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        //{
+        //    OnSome(@this, action);
 
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static Maybe<TResult> Then<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-        {
-            return Coalesce(@this, predicate, other, Maybe<TResult>.None);
-        }
-
-        public static Maybe<TResult> Otherwise<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-        {
-            return Coalesce(@this, predicate, Maybe<TResult>.None, other);
-        }
-
-        public static Maybe<Unit> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
-        {
-            OnSome(@this, action);
-
-            return Maybe.Unit;
-        }
+        //    return Maybe.Unit;
+        //}
 
         #endregion
 
