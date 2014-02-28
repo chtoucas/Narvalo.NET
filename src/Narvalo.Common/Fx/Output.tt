@@ -1,5 +1,4 @@
-﻿<#@ include file=".\..\CodeTemplates\Monad.Maybe.tt" #>
-<# Namespace = "Narvalo.Fx"; #>
+﻿<#@ include file=".\..\CodeTemplates\Monad.Output.tt" #>
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-<# EmitLinq(); #>
+<# EmitMonad(); #>

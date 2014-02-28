@@ -14,7 +14,7 @@ namespace Narvalo.Edu.Samples {
     using System.Linq;
 	using Narvalo.Fx;
 
-	// Monadic methods.
+	// Monad methods.
     public static partial class Identity
     {
         static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -76,7 +76,7 @@ namespace Narvalo.Edu.Samples {
 	// Prelude extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
-		#region Basic monadic functions (Prelude)
+		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Identity<TResult> Map<TSource, TResult>(this Identity<TSource> @this, Func<TSource, TResult> selector)
@@ -197,7 +197,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
     }
 
-	// Narvalo extensions for Identity<T>.
+	// Non-standard extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
         public static Identity<TResult> Coalesce<TSource, TResult>(
@@ -260,7 +260,7 @@ namespace Narvalo.Edu.Samples {
 }
 
 namespace Narvalo.Edu.Samples {
-	// Comonadic methods.
+	// Comonad methods.
     public static partial class Identity
     {
         // [Haskell] extract
@@ -306,54 +306,11 @@ namespace Narvalo.Edu.Samples {
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
-
-        public static Identity<TResult> Join<TSource, TInner, TKey, TResult>(
-            this Identity<TSource> @this,
-            Identity<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector)
-        {
-            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
-        }
-
-        public static Identity<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this Identity<TSource> @this,
-            Identity<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Identity<TInner>, TResult> resultSelectorM)
-        {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelectorM, "resultSelectorM");
-
-            throw new NotImplementedException();
-        }
 	}
 
 	// Linq extensions for Identity<T>.
 	public static partial class IdentityExtensions
     {
-        public static Identity<TResult> Join<TSource, TInner, TKey, TResult>(
-            this Identity<TSource> @this,
-            Identity<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "outerKeySelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
-            Require.NotNull(comparer, "comparer");
-
-            throw new NotImplementedException();
-        }
 	}
 
 	// Prelude extensions for IEnumerable<Identity<T>>.
@@ -479,7 +436,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
     }
 
-	// Narvalo extensions for IEnumerable<T>.
+	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators

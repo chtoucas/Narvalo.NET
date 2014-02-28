@@ -34,28 +34,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-
-        #region Basic Monad functions for Output
-
-        public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Output<TMiddle>> @this,
-            Func<TMiddle, Output<TResult>> kun)
-        {
-            Require.Object(@this);
-
-            return _ => @this.Invoke(_).Bind(kun);
-        }
-
-        public static Func<TSource, Output<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Output<TResult>> @this,
-            Func<TSource, Output<TMiddle>> kun)
-        {
-            Require.Object(@this);
-            Require.NotNull(kun, "kun");
-
-            return _ => kun.Invoke(_).Bind(@this);
-        }
-
-        #endregion
     }
 }

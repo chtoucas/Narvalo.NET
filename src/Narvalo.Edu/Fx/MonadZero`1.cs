@@ -5,26 +5,31 @@ namespace Narvalo.Edu.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class Monad<T>
+    public sealed class MonadZero<T>
     {
+        // [Haskell] mzero
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public static MonadZero<T> Zero { get { throw new NotImplementedException(); } }
+
         // [Haskell] >>=
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "funM")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> funM)
+        public MonadZero<TResult> Bind<TResult>(Func<T, MonadZero<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
-        internal static Monad<T> η(T value)
+        internal static MonadZero<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
-        internal static Monad<T> μ(Monad<Monad<T>> square)
+        internal static MonadZero<T> μ(MonadZero<MonadZero<T>> square)
         {
             return square.Bind(_ => _);
         }

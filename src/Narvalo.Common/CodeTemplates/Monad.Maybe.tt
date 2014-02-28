@@ -2,6 +2,5 @@
 <# 
 	ReturnName = "Create";
 
-	EnableZero("None");
-	EnablePlus("OrElse");
+	InitializeOr("None");
 #>

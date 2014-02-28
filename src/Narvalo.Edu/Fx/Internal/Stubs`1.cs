@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Fx.Internal
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Fx;
 
-    public static class Stubs<T>
+    static class Stubs<T>
     {
         static readonly Kunc<T, Unit> Ignore_ = _ => Monad.Unit;
 

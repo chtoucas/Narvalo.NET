@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Fx {
-	// Comonadic methods.
+	// Comonad methods.
     public static partial class Comonad
     {
         // [Haskell] extract

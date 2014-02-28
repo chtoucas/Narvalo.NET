@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Fx
+namespace Narvalo.Edu.Fx.Internal
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class Monoid<T>
+    sealed class Monoid<T>
     {
         // [Haskell] mempty
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]

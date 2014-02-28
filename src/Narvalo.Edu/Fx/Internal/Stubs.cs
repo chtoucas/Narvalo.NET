@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Fx.Internal
 {
     using Narvalo.Fx;
 
-    public static class Stubs
+    static class Stubs
     {
         static readonly Kunc<Unit, Unit> Noop_ = _ => Monad.Unit;
 

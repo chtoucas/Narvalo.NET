@@ -5,47 +5,14 @@ namespace Narvalo.Fx
     using System;
     using System.Runtime.ExceptionServices;
 
-    /// <summary>
-    /// Provides extension methods for <see cref="Narvalo.Fx.Maybe{T}"/>.
-    /// </summary>
     public static partial class OutputExtensions
     {
-        #region Monadic lifting operators
+        //public static Output<Unit> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
+        //{
+        //    OnSuccess(@this, action);
 
-        public static Output<TResult> Zip<TFirst, TSecond, TResult>(
-            this Output<TFirst> @this,
-            Output<TSecond> second,
-            Func<TFirst, TSecond, TResult> resultSelector)
-        {
-            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
-        }
-
-        #endregion
-
-        #region Additional methods
-
-        public static Output<TResult> Coalesce<TSource, TResult>(
-            this Output<TSource> @this,
-            Func<TSource, bool> predicate,
-            Output<TResult> then,
-            Output<TResult> otherwise)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
-        }
-
-        public static Output<Unit> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
-        {
-            OnSuccess(@this, action);
-
-            return Output.Unit;
-        }
-
-        #endregion
-
-        //// OnSuccess & OnFailure
+        //    return Output.Unit;
+        //}
 
         public static Output<TSource> OnSuccess<TSource>(this Output<TSource> @this, Action<TSource> action)
         {

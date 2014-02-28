@@ -44,7 +44,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// First Monad Law: Unit is a left identity for Bind.
         /// </summary>
-        public static bool Monad_FirstLaw<X, Y>(Func<X, Monad<Y>> f, X value)
+        public static bool Monad_FirstLaw<X, Y>(Kunc<X, Y> f, X value)
         {
             // return x >>= f = f x
             return Monad.Return(value).Bind(f) == f(value);
@@ -62,7 +62,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// Third Monad Law: Bind is associative.
         /// </summary>
-        public static bool Monad_ThirdLaw<X, Y, Z>(Monad<X> m, Func<X, Monad<Y>> f, Func<Y, Monad<Z>> g)
+        public static bool Monad_ThirdLaw<X, Y, Z>(Monad<X> m, Kunc<X, Y> f, Kunc<Y, Z> g)
         {
             // (m >>= f) >>= g = m >>= (\x -> f x >>= g)
             return m.Bind(f).Bind(g) == m.Bind(_ => f(_).Bind(g));
@@ -73,9 +73,9 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// First Monad Law.
         /// </summary>
-        public static bool Kleisli_FirstLaw<X, Y>(Func<X, Monad<Y>> g, X value)
+        public static bool Kleisli_FirstLaw<X, Y>(Kunc<X, Y> g, X value)
         {
-            Func<X, Monad<X>> id = _ => Monad.Return(_);
+            Kunc<X, X> id = _ => Monad.Return(_);
 
             // return >=> g ≡ g
             return id.Compose(g).Invoke(value) == g(value);
@@ -84,7 +84,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// Second Monad Law.
         /// </summary>
-        public static bool Kleisli_SecondLaw<X, Y>(Func<X, Monad<Y>> f, X value)
+        public static bool Kleisli_SecondLaw<X, Y>(Kunc<X, Y> f, X value)
         {
             // f >=> return ≡ f
             return f.Compose(Monad.Return).Invoke(value) == f(value);
@@ -94,9 +94,9 @@ namespace Narvalo.Edu.Fx.Internal
         /// Third Monad Law.
         /// </summary>
         public static bool Kleisli_ThirdLaw<X, Y, Z, T>(
-           Func<X, Monad<Y>> f,
-           Func<Y, Monad<Z>> g,
-           Func<Z, Monad<T>> h,
+           Kunc<X, Y> f,
+           Kunc<Y, Z> g,
+           Kunc<Z, T> h,
            X value)
         {
             // (f >=> g) >=> h ≡ f >=> (g >=> h)
@@ -142,7 +142,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// MonadZero: Zero is a left zero for Bind.
         /// </summary>
-        public static bool MonadZero_Rule<X, Y>(Func<X, Monad<Y>> f)
+        public static bool MonadZero_Rule<X, Y>(Kunc<X, Y> f)
         {
             // mzero >>= f = mzero
             return Monad<X>.Zero.Bind(f) == Monad<Y>.Zero;
@@ -171,7 +171,7 @@ namespace Narvalo.Edu.Fx.Internal
         /// <summary>
         /// MonadPlus: Bind is right distributive over Plus.
         /// </summary>
-        public static bool MonadPlus_Rule<X>(Monad<X> a, Monad<X> b, Func<X, Monad<X>> f)
+        public static bool MonadPlus_Rule<X>(Monad<X> a, Monad<X> b, Kunc<X, X> f)
         {
             // mplus a b >>= f = mplus (a >>= f) (b >>= f)
             return a.Plus(b).Bind(f) == a.Bind(f).Plus(b.Bind(f));

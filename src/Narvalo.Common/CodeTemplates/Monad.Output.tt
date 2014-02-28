@@ -1,0 +1,4 @@
+﻿<#@ include file="Monad.tt" #>
+<# 
+	ReturnName = "Success";
+#>

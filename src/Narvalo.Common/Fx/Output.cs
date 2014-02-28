@@ -4,29 +4,11 @@ namespace Narvalo.Fx
 {
     using System.Runtime.ExceptionServices;
 
-    public static class Output
+    public static partial class Output
     {
-        static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
-
-        public static Output<Unit> Unit { get { return Unit_; } }
-
-        public static Output<T> Success<T>(T value)
-        {
-            return Output<T>.η(value);
-        }
-
         public static Output<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
             return Output<T>.η(exceptionInfo);
         }
-
-        #region Generalisations of list functions
-
-        public static Output<T> Flatten<T>(Output<Output<T>> square)
-        {
-            return Output<T>.μ(square);
-        }
-
-        #endregion
     }
 }

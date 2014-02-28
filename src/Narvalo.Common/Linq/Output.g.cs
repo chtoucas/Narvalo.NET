@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Edu.Linq {
+namespace Narvalo.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Narvalo.Edu.Fx;
+    using Narvalo.Fx;
 
-	// Query Expression Pattern for Monad<T>.
-	public static partial class MonadExtensions
+	// Query Expression Pattern for Output<T>.
+	public static partial class OutputExtensions
     {
-        public static Monad<TResult> Select<TSource, TResult>(
-            this Monad<TSource> @this, 
+        public static Output<TResult> Select<TSource, TResult>(
+            this Output<TSource> @this, 
             Func<TSource, TResult> selector)
         {
             Require.Object(@this);
@@ -26,9 +26,9 @@ namespace Narvalo.Edu.Linq {
         }
 
         // Kind of generalisation of Zip (liftM2).
-        public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Monad<TSource> @this,
-            Func<TSource, Monad<TMiddle>> valueSelectorM,
+        public static Output<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Output<TSource> @this,
+            Func<TSource, Output<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
             Require.Object(@this);
@@ -39,27 +39,27 @@ namespace Narvalo.Edu.Linq {
         }
 	}
 
-	// Linq extensions for Monad<T>.
-	public static partial class MonadExtensions
+	// Linq extensions for Output<T>.
+	public static partial class OutputExtensions
     {
 	}
 
-	// Prelude extensions for IEnumerable<Monad<T>>.
-	public static partial class EnumerableMonadExtensions
+	// Prelude extensions for IEnumerable<Output<T>>.
+	public static partial class EnumerableOutputExtensions
     {
         #region Basic Monad functions (Prelude)
 
         // [Haskell] sequence
-        public static Monad<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Monad<TSource>> @this)
+        public static Output<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Output<TSource>> @this)
         {
             Require.Object(@this);
 
-            var seed = Monad.Return(Enumerable.Empty<TSource>());
-            Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> fun
+            var seed = Output.Success(Enumerable.Empty<TSource>());
+            Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
                 = (m, n) =>
                     m.Bind(list =>
                     {
-                        return n.Bind(item => Monad.Return(list.Concat(Enumerable.Repeat(item, 1))));
+                        return n.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun);
@@ -74,9 +74,9 @@ namespace Narvalo.Edu.Linq {
         #region Basic Monad functions (Prelude)
 
         // [Haskell] mapM
-        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Output<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<TResult>> funM)
+            Func<TSource, Output<TResult>> funM)
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");
@@ -89,9 +89,9 @@ namespace Narvalo.Edu.Linq {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
-        public static Monad<IEnumerable<TSource>> Filter<TSource>(
+        public static Output<IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Monad<bool>> predicateM)
+            Func<TSource, Output<bool>> predicateM)
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
@@ -107,17 +107,17 @@ namespace Narvalo.Edu.Linq {
                             list.Add(item);
                         }
 
-                        return Monad.Unit;
+                        return Output.Unit;
                     });
             }
 
-            return Monad.Return(list.AsEnumerable());
+            return Output.Success(list.AsEnumerable());
         }
 
         // [Haskell] mapAndUnzipM
-        public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
+        public static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
-           Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
+           Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");
@@ -130,16 +130,16 @@ namespace Narvalo.Edu.Linq {
         }
 
         // [Haskell] zipWithM
-        public static Monad<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
-            Func<TFirst, TSecond, Monad<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, Output<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
 			// WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
 			// instead of using the Zip from Linq.
@@ -147,15 +147,15 @@ namespace Narvalo.Edu.Linq {
         }
 
         // [Haskell] foldM
-        public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            Monad<TAccumulate> result = Monad.Return(seed);
+            Output<TAccumulate> result = Output.Success(seed);
 
             foreach (TSource item in @this) {
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
@@ -172,19 +172,19 @@ namespace Narvalo.Edu.Linq {
     {
         #region Aggregate Operators
 
-        public static Monad<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static Output<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
 
-        public static Monad<TSource> Reduce<TSource>(
+        public static Output<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -194,7 +194,7 @@ namespace Narvalo.Edu.Linq {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Monad<TSource> result = Monad.Return(iter.Current);
+                Output<TSource> result = Output.Success(iter.Current);
 
                 while (iter.MoveNext()) {
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
@@ -204,9 +204,9 @@ namespace Narvalo.Edu.Linq {
             }
         }
 
-        public static Monad<TSource> ReduceBack<TSource>(
+        public static Output<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Monad<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Require.Object(@this);
 

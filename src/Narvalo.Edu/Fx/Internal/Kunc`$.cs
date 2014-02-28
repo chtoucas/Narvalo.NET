@@ -7,6 +7,35 @@ namespace Narvalo.Edu.Fx.Internal
 
     static partial class KuncExtensions
     {
+        // [Haskell] =<<
+        public static Monad<TResult> Invoke<TSource, TResult>(
+           this Kunc<TSource, TResult> @this,
+           Monad<TSource> monad)
+        {
+            return monad.Bind(@this);
+        }
+
+        // [Haskell] >=>
+        public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
+            this Kunc<TSource, TMiddle> @this,
+            Kunc<TMiddle, TResult> kun)
+        {
+            Require.Object(@this);
+
+            return _ => @this.Invoke(_).Bind(kun);
+        }
+
+        // [Haskell] <=<
+        public static Kunc<TSource, TResult> ComposeBack<TSource, TMiddle, TResult>(
+            this Kunc<TMiddle, TResult> @this,
+            Kunc<TSource, TMiddle> kun)
+        {
+            Require.Object(@this);
+            Require.NotNull(kun, "kun");
+
+            return _ => kun.Invoke(_).Bind(@this);
+        }
+
         public static Kunc<Unit, Unit> Filter(this Kunc<Unit, Unit> @this, bool predicate)
         {
             return predicate ? @this : Stubs.Noop;

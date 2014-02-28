@@ -1,12 +1,10 @@
-﻿<#+
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".g.cs" #><#+
 	//
 	// Fields
 	//
 
-	public const string DefaultPlusName = "Plus";
-	public const string DefaultReturnName = "Return";
-	public const string DefaultZeroName = "Zero";
-
+    bool _initialized = false;
 	string _name;
 	string _namespace;
 	string _linqNamespace;
@@ -14,7 +12,7 @@
 	string _zeroName;
 	bool _hasPlus = false;
 	string _plusName;
-	string _returnName = DefaultReturnName;
+	string _returnName = "Return";
 	bool _complete = true;
 	bool _preferLinqDialect = false;
 
@@ -90,7 +88,15 @@
 	protected bool HasZero { get { return _hasZero; } private set { _hasZero = value; } }
 
 	protected string ZeroName { 
-		get { return _zeroName; }  
+		get 
+		{ 
+			if (!HasZero) {
+				throw new InvalidOperationException();
+			}
+			
+			return _zeroName; 
+		}  
+
 		private set
 		{
 			if (String.IsNullOrEmpty(value)) {
@@ -103,7 +109,15 @@
 	
 	protected string PlusName
 	{
-		get { return _plusName; }
+		get
+		{ 
+			if (!HasPlus) {
+				throw new InvalidOperationException();
+			}
+
+			return _plusName; 
+		}
+
 		private set
 		{
 			if (String.IsNullOrEmpty(value)) {
@@ -120,7 +134,14 @@
 
 	protected string FilterName
 	{
-		get { return PreferLinqDialect ? "Where" : "Filter"; }
+		get 
+        { 
+			if (!HasZero) {
+				throw new InvalidOperationException();
+			}
+
+			return PreferLinqDialect ? "Where" : "Filter";
+        }
 	}
 	
 	protected string MapName
@@ -142,22 +163,50 @@
 	}
 	
 	//
-	// Protected Methods
+	// "Constructors"
 	//
 
-	protected void EnableZero(string zeroName = DefaultZeroName)
+	public void InitializeZero(string zeroName = "Zero")
 	{
-		HasZero = true;
+        ThrowIfInitialized_();
+		
+        HasZero = true;
 		ZeroName = zeroName;
+
+        _initialized = true;
 	}
 	
-	protected void EnablePlus(string plusName = DefaultPlusName)
+	public void InitializePlus(string zeroName = "Zero", string plusName = "Plus")
 	{
+        ThrowIfInitialized_();
+		
+        HasZero = true;
+		ZeroName = zeroName;
+
 		HasPlus = true;
 		PlusName = plusName;
-	}
 
-    protected void EmitMonad(bool warningHeader = true)
+        _initialized = true;
+	}
+	
+	public void InitializeOr(string zeroName = "None", string plusName = "OrElse")
+	{
+        ThrowIfInitialized_();
+		
+        HasZero = true;
+		ZeroName = zeroName;
+
+		HasPlus = true;
+		PlusName = plusName;
+
+        _initialized = true;
+	}
+    
+	//
+	// Public Methods
+	//
+
+    public void EmitMonad(bool warningHeader = true)
     {
 		if (warningHeader) {
 			WriteWarningHeader_();
@@ -182,7 +231,7 @@ namespace <#= Namespace #> {
 <#+
 	}	// End of EmitMonad
 	
-    protected void EmitComonad(bool warningHeader = true)
+    public void EmitComonad(bool warningHeader = true)
     {
 		if (warningHeader) {
 			WriteWarningHeader_();
@@ -195,7 +244,7 @@ namespace <#= Namespace #> {
 <#+
 	}	// End of EmitMonad
 
-    protected void EmitLinq(bool warningHeader = true)
+    public void EmitLinq(bool warningHeader = true)
     {
 		if (warningHeader) {
 			WriteWarningHeader_();
@@ -221,10 +270,14 @@ namespace <#= LinqNamespace #> {
 <#+
     }	// End of EmitLinq
 	
+	//
+	// Protected Methods
+	//
+
 	protected void EmitCoreClass() 
 	{
 #>
-	// Monadic methods.
+	// Monad methods.
     public static partial class <#= Name #>
     {
         static readonly <#= Name #><Unit> Unit_ = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
@@ -298,7 +351,7 @@ namespace <#= LinqNamespace #> {
 	protected void EmitCoreComonadClass() 
 	{
 #>
-	// Comonadic methods.
+	// Comonad methods.
     public static partial class <#= Name #>
     {
         // [Haskell] extract
@@ -610,7 +663,8 @@ namespace <#= LinqNamespace #> {
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
         }
-
+<#+ if (HasZero) { #>
+<#+ NewLine_(); #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -636,6 +690,7 @@ namespace <#= LinqNamespace #> {
 
             throw new NotImplementedException();
         }
+<#+ } #>
 	}
 <#+
 	}	// End of EmitQepExtensions
@@ -646,6 +701,7 @@ namespace <#= LinqNamespace #> {
 	// Linq extensions for <#= Name #><T>.
 	public static partial class <#= Name #>Extensions
     {
+<#+ if (HasZero) { #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -677,18 +733,18 @@ namespace <#= LinqNamespace #> {
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 			
-            Func<TSource, Maybe<TInner>> valueSelectorM = _ =>
+            Func<TSource, <#= Name #><TInner>> valueSelectorM = _ =>
             {
                 TKey outerKey = outerKeySelector.Invoke(_);
 
-				// FIXME: Requires Zero?
                 return inner.Map(v => innerKeySelector.Invoke(v))
-                    .Filter(innerKey => comparer.Equals(innerKey, outerKey))
+                    .<#= FilterName #>(innerKey => comparer.Equals(innerKey, outerKey))
                     .Then(inner);
             };
 
 			return @this.SelectMany(valueSelectorM, resultSelector);
         }
+<#+ } #>
 	}
 <#+
 	}	// End of EmitLinqExtensions
@@ -891,14 +947,12 @@ namespace <#= LinqNamespace #> {
 <#+ NewLine_(); #>
         #region Element Operators
 
-        // FIXME: 
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOr<#= ZeroName #>(@this, _ => true);
+            return FirstOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
         }
 
-        // FIXME: Func<TSource, <#= Name #><bool>>
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -909,14 +963,12 @@ namespace <#= LinqNamespace #> {
             }
         }
 
-        // FIXME: 
-        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> LastOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOr<#= ZeroName #>(@this, _ => true);
+            return LastOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
         }
 
-        // FIXME: Func<TSource, <#= Name #><bool>>
-        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> LastOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -936,14 +988,12 @@ namespace <#= LinqNamespace #> {
             }
         }
 
-        // FIXME: 
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOr<#= ZeroName #>(@this, _ => true);
+            return SingleOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
         }
 
-        // FIXME: Func<TSource, <#= Name #><bool>>
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -993,4 +1043,11 @@ namespace <#= LinqNamespace #> {
 	{
 		WriteLine("");
 	}
+
+    void ThrowIfInitialized_() 
+    {
+        if (_initialized) {
+            throw new InvalidOperationException();
+        }
+    }
 #>

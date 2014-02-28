@@ -70,16 +70,65 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\Internal\Action`%24.cs" />
-    <Compile Include="Fx\Internal\Kunc`%24.cs" />
+    <Compile Include="Fx\Internal\Action`%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fx\Internal\Cokunc`.cs" />
+    <Compile Include="Fx\Internal\Comonad`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fx\Internal\Kunc`%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Internal\Kunc`.cs" />
+    <Compile Include="Fx\Internal\Monad.cs" />
+    <Compile Include="Fx\Internal\Monad`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Internal\Rules.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fx\Internal\Stubs.cs" />
-    <Compile Include="Fx\Internal\Stubs`1.cs" />
+    <Compile Include="Fx\Internal\Stubs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fx\Internal\Stubs`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fx\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Fx\Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\MonadOr`1.cs" />
+    <Compile Include="Fx\MonadPlus`1.cs" />
+    <Compile Include="Fx\MonadZero`1.cs" />
+    <Compile Include="Linq\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Linq\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Linq\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -115,10 +164,9 @@
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Fx\Internal\Cokunc`.cs" />
     <Compile Include="Fx\Comonad`1.cs" />
     <Compile Include="Fx\Monad`1.cs" />
-    <Compile Include="Fx\Monoid`1.cs" />
+    <Compile Include="Fx\Internal\Monoid`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Samples\Anamorphism.cs" />
     <Compile Include="Samples\Identity.g.cs">
@@ -145,9 +193,33 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
     </None>
+    <None Include="Fx\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
     <None Include="Fx\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Linq\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </None>
+    <None Include="Linq\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
+    <None Include="Linq\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
     </None>
     <None Include="Linq\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

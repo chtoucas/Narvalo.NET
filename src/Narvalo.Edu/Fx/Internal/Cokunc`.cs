@@ -2,7 +2,7 @@
 
 namespace Narvalo.Edu.Fx.Internal
 {
-    public delegate T Cokunc<T>(Comonad<T> arg);
+    delegate T Cokunc<T>(Comonad<T> arg);
 
-    public delegate TResult Cokunc<T, out TResult>(Comonad<T> arg);
+    delegate TResult Cokunc<T, out TResult>(Comonad<T> arg);
 }
