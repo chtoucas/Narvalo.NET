@@ -27,7 +27,7 @@ namespace Narvalo.Edu.Fx
         // [Haskell] >>=
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "kun")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
+        public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun)
         {
 #if MONAD_VIA_MAP_MULTIPLY
             return Monad<TResult>.μ(Map(_ => kun.Invoke(_)));
@@ -46,12 +46,6 @@ namespace Narvalo.Edu.Fx
 #else
             return Bind(_ => Monad<TResult>.η(selector.Invoke(_)));
 #endif
-        }
-
-        // [Haskell] >>
-        public Monad<TResult> Then<TResult>(Monad<TResult> other)
-        {
-            return Bind(_ => other);
         }
 
         // [Haskell] return
