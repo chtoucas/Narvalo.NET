@@ -1,0 +1,7 @@
+﻿<#@ include file="Monad.tt" #>
+<# 
+	ReturnName = "Create";
+
+	EnableZero("None");
+	EnablePlus("OrElse");
+#>
