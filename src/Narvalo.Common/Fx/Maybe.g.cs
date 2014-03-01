@@ -12,8 +12,8 @@ namespace Narvalo.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Narvalo;
-	using Narvalo.Fx;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
 
 	// Monad methods.
     public static partial class Maybe
@@ -46,7 +46,7 @@ namespace Narvalo.Fx {
 
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
-            return m => m.Map(fun);
+            return m => m.Select(fun);
         }
 
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
@@ -77,19 +77,20 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Prelude extensions for Maybe<T>.
+	// Extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
 		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
-        public static Maybe<TResult> Map<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
+        public static Maybe<TResult> Select<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
         {
             return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
         }
 
 		// [Haskell] >>
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
+        
         {
             return @this.Bind(_ => other);
         }
@@ -99,7 +100,7 @@ namespace Narvalo.Fx {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] mfilter
-        public static Maybe<TSource> Filter<TSource>(this Maybe<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> Where<TSource>(this Maybe<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -110,7 +111,7 @@ namespace Narvalo.Fx {
         // [Haskell] replicateM
         public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
         {
-            return @this.Map(_ => Enumerable.Repeat(_, count));
+            return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 		
         #endregion
@@ -157,7 +158,7 @@ namespace Narvalo.Fx {
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
+            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         // [Haskell] liftM3
@@ -215,10 +216,100 @@ namespace Narvalo.Fx {
         }
 
         #endregion
-    }
-	// Non-standard extensions for Maybe<T>.
-    public static partial class MaybeExtensions
-    {
+
+        #region Query Expression Pattern
+
+
+        // Kind of generalisation of Zip (liftM2).
+        public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, Maybe<TMiddle>> valueSelectorM,
+            Func<TSource, TMiddle, TResult> resultSelector)
+        {
+            Require.Object(@this);
+            Require.NotNull(valueSelectorM, "valueSelectorM");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            return @this.Bind(_ => valueSelectorM.Invoke(_).Select(middle => resultSelector.Invoke(_, middle)));
+        }
+
+        public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector)
+        {
+            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+        }
+
+        public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Maybe<TInner>, TResult> resultSelectorM)
+        {
+            Require.Object(@this);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelectorM, "resultSelectorM");
+
+            throw new NotImplementedException();
+        }
+
+        #endregion
+        
+        #region Linq extensions
+
+        public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            return JoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+		
+        static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.Object(@this);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+			
+            Func<TSource, Maybe<TInner>> valueSelectorM = _ =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(_);
+
+                return inner.Select(v => innerKeySelector.Invoke(v))
+                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
+                    .Then(inner);
+            };
+
+			return @this.SelectMany(valueSelectorM, resultSelector);
+        }
+
+        #endregion
+
+        #region Non-standard extensions
+        
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate,
@@ -262,8 +353,10 @@ namespace Narvalo.Fx {
 
             throw new NotImplementedException();
         }
-	}
-	// Kleisli extensions for Func<T, Maybe<TResult>>.
+
+        #endregion
+    }
+	// Extensions for Func<T, Maybe<TResult>>.
 	public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)

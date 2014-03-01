@@ -3,7 +3,7 @@
 namespace Narvalo.Edu.Collections.Recursion
 {
     using System;
-    using Narvalo.Edu.Fx;
+    using Narvalo.Edu.Monads;
 
     class Mu
     {
@@ -16,12 +16,12 @@ namespace Narvalo.Edu.Collections.Recursion
 
         public TResult Cata<TResult>(Func<Monad<TResult>, TResult> phi)
         {
-            return phi(Out.Map(_ => _.Cata(phi)));
+            return phi(Out.Select(_ => _.Cata(phi)));
         }
 
         public static Mu Ana<TResult>(Func<TResult, Monad<TResult>> psi, TResult seed)
         {
-            return new Mu(psi(seed).Map(_ => Mu.Ana(psi, _)));
+            return new Mu(psi(seed).Select(_ => Mu.Ana(psi, _)));
         }
 
         public static T2 Hylo<T1, T2>(

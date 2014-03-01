@@ -12,8 +12,8 @@ namespace Narvalo.Edu.Samples {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Narvalo;
-	using Narvalo.Fx;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
 
 	// Monad methods.
     public static partial class Identity
@@ -40,19 +40,20 @@ namespace Narvalo.Edu.Samples {
         #endregion
 
     }
-	// Prelude extensions for Identity<T>.
+	// Extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
 		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
-        public static Identity<TResult> Map<TSource, TResult>(this Identity<TSource> @this, Func<TSource, TResult> selector)
+        public static Identity<TResult> Select<TSource, TResult>(this Identity<TSource> @this, Func<TSource, TResult> selector)
         {
             return @this.Bind(_ => Identity.Return(selector.Invoke(_)));
         }
 
 		// [Haskell] >>
         public static Identity<TResult> Then<TSource, TResult>(this Identity<TSource> @this, Identity<TResult> other)
+        
         {
             return @this.Bind(_ => other);
         }
@@ -65,7 +66,7 @@ namespace Narvalo.Edu.Samples {
         // [Haskell] replicateM
         public static Identity<IEnumerable<TSource>> Repeat<TSource>(this Identity<TSource> @this, int count)
         {
-            return @this.Map(_ => Enumerable.Repeat(_, count));
+            return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 		
         #endregion
@@ -83,15 +84,38 @@ namespace Narvalo.Edu.Samples {
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
+            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
 
         #endregion
-    }
-	// Non-standard extensions for Identity<T>.
-    public static partial class IdentityExtensions
-    {
+
+        #region Query Expression Pattern
+
+
+        // Kind of generalisation of Zip (liftM2).
+        public static Identity<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Identity<TSource> @this,
+            Func<TSource, Identity<TMiddle>> valueSelectorM,
+            Func<TSource, TMiddle, TResult> resultSelector)
+        {
+            Require.Object(@this);
+            Require.NotNull(valueSelectorM, "valueSelectorM");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            return @this.Bind(_ => valueSelectorM.Invoke(_).Select(middle => resultSelector.Invoke(_, middle)));
+        }
+
+
+        #endregion
+        
+        #region Linq extensions
+
+
+        #endregion
+
+        #region Non-standard extensions
+        
         public static Identity<TResult> Coalesce<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, bool> predicate,
@@ -113,8 +137,10 @@ namespace Narvalo.Edu.Samples {
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-	}
-	// Kleisli extensions for Func<T, Identity<TResult>>.
+
+        #endregion
+    }
+	// Extensions for Func<T, Identity<TResult>>.
 	public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -160,43 +186,14 @@ namespace Narvalo.Edu.Samples {
     }
 }
 
-namespace Narvalo.Edu.Samples {
+namespace Narvalo.Edu.Samples.IdentityEx {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Narvalo;
-	// Query Expression Pattern for Identity<T>.
-	public static partial class IdentityExtensions
-    {
-
-        public static Identity<TResult> Select<TSource, TResult>(
-            this Identity<TSource> @this, 
-            Func<TSource, TResult> selector)
-        {
-            Require.Object(@this);
-
-            return @this.Map(selector);
-        }
-
-        // Kind of generalisation of Zip (liftM2).
-        public static Identity<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Identity<TSource> @this,
-            Func<TSource, Identity<TMiddle>> valueSelectorM,
-            Func<TSource, TMiddle, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(valueSelectorM, "valueSelectorM");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
-        }
-
-	}
-	// Linq extensions for Identity<T>.
-	public static partial class IdentityExtensions
-    {
-	}
-	// Prelude extensions for IEnumerable<Identity<T>>.
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Samples;
+	// Extensions for IEnumerable<Identity<T>>.
 	public static partial class EnumerableIdentityExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -220,8 +217,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
 
 	}
-
-	// Prelude extensions for IEnumerable<T>.
+	// Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -304,10 +300,7 @@ namespace Narvalo.Edu.Samples {
         }
 
         #endregion
-    }
-	// Non-standard extensions for IEnumerable<T>.
-	public static partial class EnumerableExtensions
-    {
+	    
         #region Aggregate Operators
 
 
@@ -335,6 +328,5 @@ namespace Narvalo.Edu.Samples {
 
 
         #endregion
-	}
+    }
 }
-

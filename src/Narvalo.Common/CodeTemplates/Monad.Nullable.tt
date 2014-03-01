@@ -1,4 +1,0 @@
-﻿<#@ include file="Monad.tt" #>
-<# 
-    IsNullable = false;
-#>

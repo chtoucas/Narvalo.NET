@@ -8,23 +8,13 @@ namespace Narvalo.Fx
 
     public partial class Output<T>
     {
+        #region Monad
+
         public Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
 
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
-        }
-
-        public Output<TResult> Map<TResult>(Func<T, TResult> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
-        }
-
-        public Output<TResult> Then<TResult>(Output<TResult> other)
-        {
-            return IsFailure ? Output<TResult>.η(ExceptionInfo) : other;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
@@ -50,6 +40,59 @@ namespace Narvalo.Fx
             Require.NotNull(square, "square");
 
             return square.IsSuccess ? square.Value : η(square.ExceptionInfo);
+        }
+
+        #endregion
+
+        #region Overrides default implementation.
+
+        #region Prelude extensions.
+
+        public Output<TResult> Map<TResult>(Func<T, TResult> selector)
+        {
+            Require.NotNull(selector, "selector");
+
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
+        }
+
+        public Output<TResult> Then<TResult>(Output<TResult> other)
+        {
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : other;
+        }
+
+        #endregion
+
+        #region Non-standard extensions.
+
+        public Output<T> Run(Action<T> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsSuccess) {
+                action.Invoke(Value);
+            }
+
+            return this;
+        }
+
+        #endregion
+
+        #endregion
+
+        public Output<T> OnSuccess(Action<T> action)
+        {
+            return Run(action);
+        }
+
+        public Output<T> OnFailure(Action<ExceptionDispatchInfo> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsFailure) {
+                action.Invoke(ExceptionInfo);
+            }
+
+            return this;
         }
     }
 }

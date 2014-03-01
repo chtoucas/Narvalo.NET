@@ -12,8 +12,8 @@ namespace Narvalo.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Narvalo;
-	using Narvalo.Fx;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
 
 	// Monad methods.
     public static partial class Output
@@ -40,19 +40,20 @@ namespace Narvalo.Fx {
         #endregion
 
     }
-	// Prelude extensions for Output<T>.
+	// Extensions for Output<T>.
     public static partial class OutputExtensions
     {
 		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
-        public static Output<TResult> Map<TSource, TResult>(this Output<TSource> @this, Func<TSource, TResult> selector)
+        public static Output<TResult> Select<TSource, TResult>(this Output<TSource> @this, Func<TSource, TResult> selector)
         {
             return @this.Bind(_ => Output.Success(selector.Invoke(_)));
         }
 
 		// [Haskell] >>
         public static Output<TResult> Then<TSource, TResult>(this Output<TSource> @this, Output<TResult> other)
+        
         {
             return @this.Bind(_ => other);
         }
@@ -65,7 +66,7 @@ namespace Narvalo.Fx {
         // [Haskell] replicateM
         public static Output<IEnumerable<TSource>> Repeat<TSource>(this Output<TSource> @this, int count)
         {
-            return @this.Map(_ => Enumerable.Repeat(_, count));
+            return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 		
         #endregion
@@ -83,15 +84,38 @@ namespace Narvalo.Fx {
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
+            return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
 
         #endregion
-    }
-	// Non-standard extensions for Output<T>.
-    public static partial class OutputExtensions
-    {
+
+        #region Query Expression Pattern
+
+
+        // Kind of generalisation of Zip (liftM2).
+        public static Output<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Output<TSource> @this,
+            Func<TSource, Output<TMiddle>> valueSelectorM,
+            Func<TSource, TMiddle, TResult> resultSelector)
+        {
+            Require.Object(@this);
+            Require.NotNull(valueSelectorM, "valueSelectorM");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            return @this.Bind(_ => valueSelectorM.Invoke(_).Select(middle => resultSelector.Invoke(_, middle)));
+        }
+
+
+        #endregion
+        
+        #region Linq extensions
+
+
+        #endregion
+
+        #region Non-standard extensions
+        
         public static Output<TResult> Coalesce<TSource, TResult>(
             this Output<TSource> @this,
             Func<TSource, bool> predicate,
@@ -113,8 +137,10 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-	}
-	// Kleisli extensions for Func<T, Output<TResult>>.
+
+        #endregion
+    }
+	// Extensions for Func<T, Output<TResult>>.
 	public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)

@@ -6,7 +6,7 @@ namespace Narvalo.Fx
 
     public static partial class MaybeExtensions
     {
-        //// ToNullable
+        #region ToNullable
 
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
         {
@@ -22,7 +22,9 @@ namespace Narvalo.Fx
             return @this.IsSome ? (T?)@this.Value : null;
         }
 
-        //// UnpackOr...
+        #endregion
+
+        #region UnpackOr...
 
         public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
         {
@@ -48,7 +50,17 @@ namespace Narvalo.Fx
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
-            return ToNullable(@this).OnNull(() => { exceptionFactory.Invoke(); }).Value;
+            //return ToNullable(@this).OnNull(() => { exceptionFactory.Invoke(); }).Value;
+            var value = ToNullable(@this);
+
+            if (value.HasValue) {
+                return value.Value;
+            }
+            else {
+                throw exceptionFactory.Invoke(); 
+            }
         }
+
+        #endregion
     }
 }

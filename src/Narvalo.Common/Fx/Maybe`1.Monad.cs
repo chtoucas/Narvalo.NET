@@ -54,7 +54,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Specialised overrides.
+        #region Overrides default implementation.
 
         #region Prelude extensions.
 
