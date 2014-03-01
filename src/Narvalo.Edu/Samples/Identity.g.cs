@@ -40,6 +40,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
 
     }
+
     // Extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
@@ -139,6 +140,7 @@ namespace Narvalo.Edu.Samples {
 
         #endregion
     }
+
     // Extensions for Func<T, Identity<TResult>>.
     public static partial class FuncExtensions
     {
@@ -185,13 +187,14 @@ namespace Narvalo.Edu.Samples {
     }
 }
 
-namespace Narvalo.Edu.Samples {
+namespace Narvalo.Edu.Samples.IdentityEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Samples;
+
     // Extensions for IEnumerable<Identity<T>>.
     public static partial class EnumerableIdentityExtensions
     {
@@ -216,15 +219,7 @@ namespace Narvalo.Edu.Samples {
         #endregion
 
     }
-}
 
-namespace Narvalo.Edu.Samples.IdentityEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-    using Narvalo.Edu.Samples;
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -258,16 +253,15 @@ namespace Narvalo.Edu.Samples.IdentityEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return Identity.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return Identity.Return(list.AsEnumerable());
         }
 
@@ -284,8 +278,8 @@ namespace Narvalo.Edu.Samples.IdentityEx {
 
             Func<TFirst, TSecond, Identity<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -337,4 +331,5 @@ namespace Narvalo.Edu.Samples.IdentityEx {
 
         #endregion
     }
+
 }

@@ -99,6 +99,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
+
     // Extensions for MonadValue<T>.
     public static partial class MonadValueExtensions
     {
@@ -454,12 +455,12 @@ namespace Narvalo.Edu.Monads {
         {
             Require.NotNull(action, "action");
 
-            // REVIEW
             return @this.Then(MonadValue.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion
     }
+
     // Extensions for Func<T, MonadValue<TResult>>.
     public static partial class FuncExtensions
     {
@@ -504,13 +505,14 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads {
+namespace Narvalo.Edu.Monads.MonadValueEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+
     // Extensions for IEnumerable<MonadValue<T>>.
     public static partial class EnumerableMonadValueExtensions
     {
@@ -531,15 +533,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-}
 
-namespace Narvalo.Edu.Monads.MonadValueEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-    using Narvalo.Edu.Monads;
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -618,6 +612,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
 
         #endregion
     }
+
     // Possibly conflicting extensions for IEnumerable<T>.
     public static partial class UnsafeEnumerableExtensions
     {

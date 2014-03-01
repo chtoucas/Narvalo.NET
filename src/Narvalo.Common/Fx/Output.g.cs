@@ -40,6 +40,7 @@ namespace Narvalo.Fx {
         #endregion
 
     }
+
     // Extensions for Output<T>.
     public static partial class OutputExtensions
     {
@@ -139,6 +140,7 @@ namespace Narvalo.Fx {
 
         #endregion
     }
+
     // Extensions for Func<T, Output<TResult>>.
     public static partial class FuncExtensions
     {

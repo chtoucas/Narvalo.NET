@@ -74,6 +74,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
+
     // Extensions for Monad<T>.
     public static partial class MonadExtensions
     {
@@ -249,6 +250,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
+
     // Extensions for Func<T, Monad<TResult>>.
     public static partial class FuncExtensions
     {
@@ -287,13 +289,14 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads {
+namespace Narvalo.Edu.Monads.MonadEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+
     // Extensions for IEnumerable<Monad<T>>.
     public static partial class EnumerableMonadExtensions
     {
@@ -318,15 +321,7 @@ namespace Narvalo.Edu.Monads {
         #endregion
 
     }
-}
 
-namespace Narvalo.Edu.Monads.MonadEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-    using Narvalo.Edu.Monads;
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -360,16 +355,15 @@ namespace Narvalo.Edu.Monads.MonadEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return Monad.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return Monad.Return(list.AsEnumerable());
         }
 
@@ -400,8 +394,8 @@ namespace Narvalo.Edu.Monads.MonadEx {
 
             Func<TFirst, TSecond, Monad<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -470,4 +464,5 @@ namespace Narvalo.Edu.Monads.MonadEx {
 
         #endregion
     }
+
 }

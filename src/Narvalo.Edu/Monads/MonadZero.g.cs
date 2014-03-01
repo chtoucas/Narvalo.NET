@@ -77,6 +77,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
+
     // Extensions for MonadZero<T>.
     public static partial class MonadZeroExtensions
     {
@@ -390,12 +391,12 @@ namespace Narvalo.Edu.Monads {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            // REVIEW
             return @this.Then(MonadZero.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion
     }
+
     // Extensions for Func<T, MonadZero<TResult>>.
     public static partial class FuncExtensions
     {
@@ -434,13 +435,14 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads {
+namespace Narvalo.Edu.Monads.MonadZeroEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+
     // Extensions for IEnumerable<MonadZero<T>>.
     public static partial class EnumerableMonadZeroExtensions
     {
@@ -465,15 +467,7 @@ namespace Narvalo.Edu.Monads {
         #endregion
 
     }
-}
 
-namespace Narvalo.Edu.Monads.MonadZeroEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-    using Narvalo.Edu.Monads;
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -507,16 +501,15 @@ namespace Narvalo.Edu.Monads.MonadZeroEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return MonadZero.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return MonadZero.Return(list.AsEnumerable());
         }
 
@@ -547,8 +540,8 @@ namespace Narvalo.Edu.Monads.MonadZeroEx {
 
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -617,6 +610,7 @@ namespace Narvalo.Edu.Monads.MonadZeroEx {
 
         #endregion
     }
+
     // Possibly conflicting extensions for IEnumerable<T>.
     public static partial class UnsafeEnumerableExtensions
     {

@@ -77,6 +77,7 @@ namespace Narvalo.Fx {
 
         #endregion
     }
+
     // Extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
@@ -390,12 +391,12 @@ namespace Narvalo.Fx {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            // REVIEW
             return @this.Then(Maybe.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion
     }
+
     // Extensions for Func<T, Maybe<TResult>>.
     public static partial class FuncExtensions
     {

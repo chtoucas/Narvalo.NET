@@ -44,9 +44,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Overrides default implementation.
-
-        #region Prelude extensions.
+        #region Basic Monad functions
 
         public Output<TResult> Map<TResult>(Func<T, TResult> selector)
         {
@@ -62,7 +60,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Non-standard extensions
 
         public Output<T> Run(Action<T> action)
         {
@@ -74,8 +72,6 @@ namespace Narvalo.Fx
 
             return this;
         }
-
-        #endregion
 
         #endregion
 

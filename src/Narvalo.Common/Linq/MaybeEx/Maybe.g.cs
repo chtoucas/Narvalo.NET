@@ -7,12 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Linq {
+namespace Narvalo.Linq.MaybeEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
+
     // Extensions for IEnumerable<Maybe<T>>.
     public static partial class EnumerableMaybeExtensions
     {
@@ -48,14 +49,7 @@ namespace Narvalo.Linq {
 
         #endregion
     }
-}
 
-namespace Narvalo.Linq.MaybeEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -89,16 +83,15 @@ namespace Narvalo.Linq.MaybeEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return Maybe.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return Maybe.Create(list.AsEnumerable());
         }
 
@@ -129,8 +122,8 @@ namespace Narvalo.Linq.MaybeEx {
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -199,6 +192,7 @@ namespace Narvalo.Linq.MaybeEx {
 
         #endregion
     }
+
     // Possibly conflicting extensions for IEnumerable<T>.
     public static partial class UnsafeEnumerableExtensions
     {

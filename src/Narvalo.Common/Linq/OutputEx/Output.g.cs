@@ -7,12 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Linq {
+namespace Narvalo.Linq.OutputEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
+
     // Extensions for IEnumerable<Output<T>>.
     public static partial class EnumerableOutputExtensions
     {
@@ -37,14 +38,7 @@ namespace Narvalo.Linq {
         #endregion
 
     }
-}
 
-namespace Narvalo.Linq.OutputEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -78,16 +72,15 @@ namespace Narvalo.Linq.OutputEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return Output.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return Output.Success(list.AsEnumerable());
         }
 
@@ -104,8 +97,8 @@ namespace Narvalo.Linq.OutputEx {
 
             Func<TFirst, TSecond, Output<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -157,4 +150,5 @@ namespace Narvalo.Linq.OutputEx {
 
         #endregion
     }
+
 }

@@ -49,19 +49,31 @@ namespace Narvalo.Linq
             //return PrependCore_(@this, element);
         }
 
-        ////public static IEnumerable<T> Where<T>(
-        ////    this IEnumerable<T> @this,
-        ////    Func<T, Maybe<bool>> predicateM)
-        ////{
-        ////    Require.Object(@this);
-        ////    Require.NotNull(predicateM, "predicateM");
+        #region Maybe extensions
 
-        ////    return from item in @this
-        ////           where predicateM.Invoke(item).ValueOrElse(false)
-        ////           select item;
-        ////}
+        // REVIEW: Signature?
+        public static IEnumerable<TSource> Filter<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<bool>> predicateM)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicateM, "predicateM");
 
-        //// Conversion Operators
+            return from item in @this
+                   where predicateM.Invoke(item).ValueOrElse(false)
+                   select item;
+        }
+
+        // REVIEW: MayConvertAll?
+        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<TResult>> converterM)
+        {
+            Require.Object(@this);
+            Require.NotNull(converterM, "converterM");
+
+            return (from value in @this select converterM.Invoke(value)).Collect();
+        }
 
         public static IEnumerable<TResult> ConvertAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -75,6 +87,8 @@ namespace Narvalo.Linq
                    where m.IsSome
                    select m.Value;
         }
+
+        #endregion
 
         ////static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
         ////{

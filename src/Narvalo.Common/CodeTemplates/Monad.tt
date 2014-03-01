@@ -52,6 +52,10 @@
         {
             if (_linqNamespace == null) {
                 _linqNamespace = InferNamespace_();
+
+                if (_linqNamespace == Namespace) {
+                    _linqNamespace = Namespace + "." + Name + "Ex";
+                }
             }
 
             return _linqNamespace;
@@ -161,6 +165,7 @@
     protected string ReturnName
     {
         get { return _returnName; }
+
         set 
         {
             if (String.IsNullOrEmpty(value)) {
@@ -231,9 +236,9 @@ namespace <#= Namespace #> {
     using Narvalo.Fx;   // For Unit
 
 <#+ EmitCoreClass(); #>
-
+<#+ NewLine_(); #>
 <#+ EmitExtensions(); #>
-
+<#+ NewLine_(); #>
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
@@ -254,13 +259,9 @@ namespace <#= Namespace #> {
 
     // EmitLinq ----------------------------------------------------------------
     
-    public void EmitLinq(string namespacePostfix = "")
+    public void EmitLinq()
     {
         WriteHeader_();
-
-        if (namespacePostfix.Length == 0) {
-            namespacePostfix = Name + "Ex";
-        }
 #>
 
 namespace <#= LinqNamespace #> {
@@ -273,21 +274,11 @@ namespace <#= LinqNamespace #> {
     using <#= Namespace #>;
 <#+ } #>
 
+<#+ NewLine_(); #>
 <#+ EmitEnumerableMonadExtensions(); #>
-}
-
-namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-<#+ if (Namespace != "Narvalo.Fx") { #>
-    using <#= Namespace #>;
-<#+ } #>
-
+<#+ NewLine_(); #>
 <#+ EmitEnumerableExtensions(); #>
-
+<#+ NewLine_(); #>
 <#+ EmitUnsafeEnumerableExtensions(); #>
 }
 <#+
@@ -844,7 +835,6 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 <#+ ObjectNotNull_(); #>
             Require.NotNull(action, "action");
 
-            // REVIEW
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 <#+ } #>
@@ -1001,16 +991,15 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return <#= Name #>.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
         }
 
@@ -1049,8 +1038,8 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 <#+ } #>
@@ -1279,5 +1268,10 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         if (_initialized) {
             throw new InvalidOperationException();
         }
+    }
+
+    void NewLine_()
+    {
+        WriteLine(String.Empty);
     }
 #>

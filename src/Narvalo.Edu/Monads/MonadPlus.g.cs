@@ -77,6 +77,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
+
     // Extensions for MonadPlus<T>.
     public static partial class MonadPlusExtensions
     {
@@ -390,12 +391,12 @@ namespace Narvalo.Edu.Monads {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            // REVIEW
             return @this.Then(MonadPlus.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion
     }
+
     // Extensions for Func<T, MonadPlus<TResult>>.
     public static partial class FuncExtensions
     {
@@ -434,13 +435,14 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads {
+namespace Narvalo.Edu.Monads.MonadPlusEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+
     // Extensions for IEnumerable<MonadPlus<T>>.
     public static partial class EnumerableMonadPlusExtensions
     {
@@ -476,15 +478,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-}
 
-namespace Narvalo.Edu.Monads.MonadPlusEx {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-    using Narvalo.Edu.Monads;
     // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
@@ -518,16 +512,15 @@ namespace Narvalo.Edu.Monads.MonadPlusEx {
 
             foreach (var item in @this) {
                 predicateM.Invoke(item)
-                    .Bind(_ =>
+                    .Run(_ =>
                     {
                         if (_ == true) {
                             list.Add(item);
                         }
-
-                        return MonadPlus.Unit;
                     });
             }
 
+            // REVIEW: Why do we create a Monad here?
             return MonadPlus.Return(list.AsEnumerable());
         }
 
@@ -558,8 +551,8 @@ namespace Narvalo.Edu.Monads.MonadPlusEx {
 
             Func<TFirst, TSecond, MonadPlus<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -628,6 +621,7 @@ namespace Narvalo.Edu.Monads.MonadPlusEx {
 
         #endregion
     }
+
     // Possibly conflicting extensions for IEnumerable<T>.
     public static partial class UnsafeEnumerableExtensions
     {

@@ -53,9 +53,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Overrides for default implementation
-
-        #region Prelude extensions.
+        #region Basic Monad functions
 
         public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
         {
@@ -68,6 +66,10 @@ namespace Narvalo.Fx
         {
             return IsSome ? other : Maybe<TResult>.None;
         }
+        
+        #endregion
+
+        #region Monadic lifting operators
 
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
@@ -82,7 +84,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Linq extensions.
+        #region Linq extensions
 
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -96,7 +98,6 @@ namespace Narvalo.Fx
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
-            //// REVIEW
             if (IsNone || inner.IsNone) {
                 return Maybe<TResult>.None;
             }
@@ -106,6 +107,30 @@ namespace Narvalo.Fx
 
             return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
                 ? Maybe<TResult>.η(resultSelector.Invoke(Value, inner.Value))
+                : Maybe<TResult>.None;
+        }
+
+        public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
+            Maybe<TInner> inner,
+            Func<T, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<T, Maybe<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            if (IsNone) {
+                return Maybe<TResult>.None;
+            }
+
+            var outerKey = outerKeySelector.Invoke(Value);
+            var innerKey = innerKeySelector.Invoke(inner.Value);
+
+            return (comparer ?? EqualityComparer<TKey>.Default).Equals(outerKey, innerKey)
+                ? Maybe<TResult>.η(resultSelector.Invoke(Value, inner))
                 : Maybe<TResult>.None;
         }
 
@@ -134,8 +159,6 @@ namespace Narvalo.Fx
 
             return this;
         }
-
-        #endregion
 
         #endregion
 
