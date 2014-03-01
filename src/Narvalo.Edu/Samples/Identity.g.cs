@@ -62,7 +62,6 @@ namespace Narvalo.Edu.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-
         // [Haskell] replicateM
         public static Identity<IEnumerable<TSource>> Repeat<TSource>(this Identity<TSource> @this, int count)
         {
@@ -186,7 +185,7 @@ namespace Narvalo.Edu.Samples {
     }
 }
 
-namespace Narvalo.Edu.Samples.IdentityEx {
+namespace Narvalo.Edu.Samples {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -217,6 +216,15 @@ namespace Narvalo.Edu.Samples.IdentityEx {
         #endregion
 
 	}
+}
+
+namespace Narvalo.Edu.Samples.IdentityEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Samples;
 	// Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {

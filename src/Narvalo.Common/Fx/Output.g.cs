@@ -62,7 +62,6 @@ namespace Narvalo.Fx {
 
         #region Generalisations of list functions (Prelude)
 
-
         // [Haskell] replicateM
         public static Output<IEnumerable<TSource>> Repeat<TSource>(this Output<TSource> @this, int count)
         {

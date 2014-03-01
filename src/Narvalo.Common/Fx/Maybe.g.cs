@@ -107,7 +107,6 @@ namespace Narvalo.Fx {
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
         }
-
         // [Haskell] replicateM
         public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
         {
@@ -248,15 +247,9 @@ namespace Narvalo.Fx {
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, Maybe<TInner>, TResult> resultSelectorM)
+            Func<TSource, Maybe<TInner>, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelectorM, "resultSelectorM");
-
-            throw new NotImplementedException();
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -279,7 +272,24 @@ namespace Narvalo.Fx {
 				resultSelector,
 				comparer ?? EqualityComparer<TKey>.Default);
         }
-		
+
+        public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Maybe<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            return GroupJoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+
         static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
             Maybe<TInner> inner,
@@ -293,17 +303,46 @@ namespace Narvalo.Fx {
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-			
-            Func<TSource, Maybe<TInner>> valueSelectorM = _ =>
+            
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+        
+        static Maybe<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Maybe<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.Object(@this);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        static Func<TSource, Maybe<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+            Maybe<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            return source =>
             {
-                TKey outerKey = outerKeySelector.Invoke(_);
-
-                return inner.Select(v => innerKeySelector.Invoke(v))
-                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
-                    .Then(inner);
+                TKey outerKey = outerKeySelector.Invoke(source);
+            
+                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
             };
-
-			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 
         #endregion
@@ -351,7 +390,8 @@ namespace Narvalo.Fx {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            throw new NotImplementedException();
+            // REVIEW
+            return @this.Then(Maybe.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion

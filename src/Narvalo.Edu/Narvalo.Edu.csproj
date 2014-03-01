@@ -94,6 +94,12 @@
     <Compile Include="Monads\Internal\Stubs`1.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Monads\MonadValue`1.cs" />
+    <Compile Include="Monads\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Monads\MonadZero.g.cs">
       <DependentUpon>MonadZero.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -172,6 +178,10 @@
     <None Include="Monads\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
     </None>
     <None Include="Monads\MonadZero.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

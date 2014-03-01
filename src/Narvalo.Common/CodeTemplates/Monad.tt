@@ -11,7 +11,8 @@
 	string _namespace;
 	string _linqNamespace;
 
-    bool _isNullable = false;
+    bool _isNullable = true;
+    bool _requireStruct = false;
 	bool _hasZero = false;
 	string _zeroName;
 	bool _hasPlus = false;
@@ -89,6 +90,8 @@
     
 	protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
+	protected bool RequireStruct { get { return _requireStruct; } set { _requireStruct = value; } }
+    
 	protected bool HasPlus { get { return _hasPlus; } private set { _hasPlus = value; } }
 
 	protected bool HasZero { get { return _hasZero; } private set { _hasZero = value; } }
@@ -255,15 +258,12 @@ namespace <#= Namespace #> {
     {
 		WriteHeader_();
 
-        if (Namespace == LinqNamespace) {
-            if (namespacePostfix.Length == 0) {
-                // We need to use a different name to avoid conflicts.
-                namespacePostfix = "." + Name + "Ex";
-            }
+        if (namespacePostfix.Length == 0) {
+            namespacePostfix = Name + "Ex";
         }
 #>
 
-namespace <#= LinqNamespace #><#= namespacePostfix #> {
+namespace <#= LinqNamespace #> {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -274,6 +274,17 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 <#+ } #>
 
 <#+ EmitEnumerableMonadExtensions(); #>
+}
+
+namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
+<#+ if (Namespace != "Narvalo.Fx") { #>
+    using <#= Namespace #>;
+<#+ } #>
 
 <#+ EmitEnumerableExtensions(); #>
 
@@ -451,12 +462,14 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
         }
 <#+ } #>
 
+<#+ if (!RequireStruct) { #>
         // [Haskell] replicateM
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(this <#= Name #><TSource> @this, int count)
 <#+ StructConstraint_("TSource"); #>
         {
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
+<#+ } #>
 		
         #endregion
 
@@ -651,19 +664,13 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, <#= Name #><TInner>, TResult> resultSelectorM)
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TInner"); #>
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("inner"); #>
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelectorM, "resultSelectorM");
-
-            throw new NotImplementedException();
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 <#+ } #>
 
@@ -692,7 +699,28 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 				resultSelector,
 				comparer ?? EqualityComparer<TKey>.Default);
         }
-		
+
+        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TInner"); #>
+<#+ StructConstraint_("TKey"); #>
+<#+ StructConstraint_("TResult"); #>
+        {
+            return GroupJoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+        
         static <#= Name #><TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -700,23 +728,63 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TInner"); #>
+<#+ StructConstraint_("TKey"); #>
+<#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("inner"); #>
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-			
-            Func<TSource, <#= Name #><TInner>> valueSelectorM = _ =>
+            
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+        
+        static <#= Name #><TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TInner"); #>
+<#+ StructConstraint_("TKey"); #>
+<#+ StructConstraint_("TResult"); #>
+        {
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("inner"); #>
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        static Func<TSource, <#= Name #><TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TInner"); #>
+<#+ StructConstraint_("TKey"); #>
+        {
+            return source =>
             {
-                TKey outerKey = outerKeySelector.Invoke(_);
-
-                return inner.<#= MapName #>(v => innerKeySelector.Invoke(v))
-                    .<#= FilterName #>(innerKey => comparer.Equals(innerKey, outerKey))
-                    .Then(inner);
+                TKey outerKey = outerKeySelector.Invoke(source);
+            
+                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
             };
-
-			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 <#+ } #>
 
@@ -776,7 +844,8 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 <#+ ObjectNotNull_(); #>
             Require.NotNull(action, "action");
 
-            throw new NotImplementedException();
+            // REVIEW
+            return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 <#+ } #>
 
@@ -849,6 +918,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
     {
         #region Basic Monad functions (Prelude)
 
+<#+ if (!RequireStruct) { #>
         // [Haskell] sequence
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
@@ -865,6 +935,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 
             return @this.Aggregate(seed, fun);
         }
+<#+ } #>
 		
         #endregion
 
@@ -896,6 +967,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
     {
         #region Basic Monad functions (Prelude)
 
+<#+ if (!RequireStruct) { #>
         // [Haskell] mapM
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -908,11 +980,13 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 
             return (from _ in @this select funM.Invoke(_)).Collect();
         }
+<#+ } #>
 		
         #endregion
 
         #region Generalisations of list functions (Prelude)
 
+<#+ if (!RequireStruct) { #>
         // [Haskell] filterM
         public static <#= Name #><IEnumerable<TSource>> Filter<TSource>(
             this IEnumerable<TSource> @this,
@@ -979,6 +1053,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 			// instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
+<#+ } #>
 
         // [Haskell] foldM
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
@@ -1174,7 +1249,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
     
     void StructConstraint_(string name)
     {
-        if (IsNullable) {
+        if (RequireStruct) {
 #>
             where <#= name #> : struct
 <#+
@@ -1183,7 +1258,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 
     void ObjectNotNull_() 
     {
-        if (!IsNullable) {
+        if (IsNullable) {
 #>
             Require.Object(@this);
 <#+
@@ -1192,7 +1267,7 @@ namespace <#= LinqNamespace #><#= namespacePostfix #> {
 
     void NotNull_(string name) 
     {
-        if (!IsNullable) {
+        if (IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>");
 <#+

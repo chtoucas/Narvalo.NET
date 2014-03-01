@@ -28,7 +28,7 @@ namespace Narvalo.Fx
             return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
 
-        public static TResult? Map<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
+        public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
         {
@@ -63,7 +63,35 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Additional methods
+        #region Query Expression Pattern
+
+        public static TSource? Where<TSource>(
+            this TSource? @this,
+            Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
+        }
+
+        public static TResult? SelectMany<TSource, TMiddle, TResult>(
+            this TSource? @this,
+            Func<TSource, TMiddle?> valueSelector,
+            Func<TSource, TMiddle, TResult> resultSelector)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Require.NotNull(valueSelector, "valueSelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            return @this.Bind(_ => valueSelector(_).Select(middle => resultSelector(_, middle)));
+        }
+
+        #endregion
+
+        #region Non-standard extensions
 
         public static TResult? Coalesce<TSource, TResult>(
             this TSource? @this,

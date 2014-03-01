@@ -3,7 +3,7 @@
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
-    using Narvalo.Linq;
+    using Narvalo.Fx;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {

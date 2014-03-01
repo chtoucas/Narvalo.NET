@@ -96,7 +96,6 @@ namespace Narvalo.Edu.Monads {
 
         #region Generalisations of list functions (Prelude)
 
-
         // [Haskell] replicateM
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(this Monad<TSource> @this, int count)
         {
@@ -288,7 +287,7 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads.MonadEx {
+namespace Narvalo.Edu.Monads {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -319,6 +318,15 @@ namespace Narvalo.Edu.Monads.MonadEx {
         #endregion
 
 	}
+}
+
+namespace Narvalo.Edu.Monads.MonadEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Monads;
 	// Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {

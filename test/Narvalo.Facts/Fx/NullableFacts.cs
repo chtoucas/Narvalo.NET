@@ -1,4 +1,4 @@
-﻿namespace Narvalo.Linq
+﻿namespace Narvalo.Fx
 {
     using System;
     using Xunit;

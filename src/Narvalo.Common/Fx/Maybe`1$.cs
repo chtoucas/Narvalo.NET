@@ -50,15 +50,7 @@ namespace Narvalo.Fx
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
-            //return ToNullable(@this).OnNull(() => { exceptionFactory.Invoke(); }).Value;
-            var value = ToNullable(@this);
-
-            if (value.HasValue) {
-                return value.Value;
-            }
-            else {
-                throw exceptionFactory.Invoke(); 
-            }
+            return ToNullable(@this).OnNull(() => { exceptionFactory.Invoke(); }).Value;
         }
 
         #endregion

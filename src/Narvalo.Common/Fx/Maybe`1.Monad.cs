@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Narvalo.Linq;
 
     public partial class Maybe<T>
     {
@@ -54,7 +53,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Overrides default implementation.
+        #region Overrides for default implementation
 
         #region Prelude extensions.
 
@@ -112,7 +111,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Non-standard extensions.
+        #region Non-standard extensions
 
         public Maybe<T> Run(Action<T> action)
         {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Linq.Maybe {
+namespace Narvalo.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -48,6 +48,14 @@ namespace Narvalo.Linq.Maybe {
 
         #endregion
 	}
+}
+
+namespace Narvalo.Linq.MaybeEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
 	// Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {

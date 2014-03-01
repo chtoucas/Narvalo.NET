@@ -107,7 +107,6 @@ namespace Narvalo.Edu.Monads {
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : MonadOr<TSource>.None);
         }
-
         // [Haskell] replicateM
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(this MonadOr<TSource> @this, int count)
         {
@@ -248,15 +247,9 @@ namespace Narvalo.Edu.Monads {
             MonadOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadOr<TInner>, TResult> resultSelectorM)
+            Func<TSource, MonadOr<TInner>, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelectorM, "resultSelectorM");
-
-            throw new NotImplementedException();
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -279,7 +272,24 @@ namespace Narvalo.Edu.Monads {
 				resultSelector,
 				comparer ?? EqualityComparer<TKey>.Default);
         }
-		
+
+        public static MonadOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this MonadOr<TSource> @this,
+            MonadOr<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, MonadOr<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            return GroupJoinCore_(
+				@this,
+				inner,
+				outerKeySelector,
+				innerKeySelector,
+				resultSelector,
+				comparer ?? EqualityComparer<TKey>.Default);
+        }
+
         static MonadOr<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             this MonadOr<TSource> @this,
             MonadOr<TInner> inner,
@@ -293,17 +303,46 @@ namespace Narvalo.Edu.Monads {
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-			
-            Func<TSource, MonadOr<TInner>> valueSelectorM = _ =>
+            
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+        
+        static MonadOr<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+            this MonadOr<TSource> @this,
+            MonadOr<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, MonadOr<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.Object(@this);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "valueSelector");
+            Require.NotNull(innerKeySelector, "innerKeySelector");
+            Require.NotNull(resultSelector, "resultSelector");
+
+            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in @this
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        static Func<TSource, MonadOr<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+            MonadOr<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            return source =>
             {
-                TKey outerKey = outerKeySelector.Invoke(_);
-
-                return inner.Select(v => innerKeySelector.Invoke(v))
-                    .Where(innerKey => comparer.Equals(innerKey, outerKey))
-                    .Then(inner);
+                TKey outerKey = outerKeySelector.Invoke(source);
+            
+                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
             };
-
-			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 
         #endregion
@@ -351,7 +390,8 @@ namespace Narvalo.Edu.Monads {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            throw new NotImplementedException();
+            // REVIEW
+            return @this.Then(MonadOr.Unit).Run(_ => action.Invoke()).Then(@this);
         }
 
         #endregion
@@ -394,7 +434,7 @@ namespace Narvalo.Edu.Monads {
     }
 }
 
-namespace Narvalo.Edu.Monads.MonadOrEx {
+namespace Narvalo.Edu.Monads {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -436,6 +476,15 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
 
         #endregion
 	}
+}
+
+namespace Narvalo.Edu.Monads.MonadOrEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+	using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Monads;
 	// Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
