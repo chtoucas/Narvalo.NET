@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Monads {
-	// Comonad methods.
+    // Comonad methods.
     public static partial class Comonad
     {
         // [Haskell] extract

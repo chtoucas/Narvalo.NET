@@ -8,14 +8,14 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Fx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
-	// Monad methods.
+    // Monad methods.
     public static partial class Output
     {
         static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
@@ -28,7 +28,7 @@ namespace Narvalo.Fx {
         {
             return Output<T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -40,10 +40,10 @@ namespace Narvalo.Fx {
         #endregion
 
     }
-	// Extensions for Output<T>.
+    // Extensions for Output<T>.
     public static partial class OutputExtensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Output<TResult> Select<TSource, TResult>(this Output<TSource> @this, Func<TSource, TResult> selector)
@@ -51,13 +51,13 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => Output.Success(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static Output<TResult> Then<TSource, TResult>(this Output<TSource> @this, Output<TResult> other)
         
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -67,7 +67,7 @@ namespace Narvalo.Fx {
         {
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
-		
+        
         #endregion
 
 
@@ -139,8 +139,8 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Extensions for Func<T, Output<TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, Output<TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 

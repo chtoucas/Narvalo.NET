@@ -8,14 +8,14 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Monads {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
-	// Monad methods.
+    // Monad methods.
     public static partial class MonadValue
     {
         static readonly MonadValue<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -32,7 +32,7 @@ namespace Narvalo.Edu.Monads {
         {
             return MonadValue<T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -44,7 +44,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
 
-		#region Monadic lifting operators
+        #region Monadic lifting operators
 
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
             where T : struct
@@ -99,10 +99,10 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-	// Extensions for MonadValue<T>.
+    // Extensions for MonadValue<T>.
     public static partial class MonadValueExtensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static MonadValue<TResult> Select<TSource, TResult>(this MonadValue<TSource> @this, Func<TSource, TResult> selector)
@@ -112,7 +112,7 @@ namespace Narvalo.Edu.Monads {
             return @this.Bind(_ => MonadValue.Return(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static MonadValue<TResult> Then<TSource, TResult>(this MonadValue<TSource> @this, MonadValue<TResult> other)
             where TSource : struct
             where TResult : struct
@@ -120,7 +120,7 @@ namespace Narvalo.Edu.Monads {
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -133,7 +133,7 @@ namespace Narvalo.Edu.Monads {
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : MonadValue<TSource>.None);
         }
-		
+        
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -153,9 +153,9 @@ namespace Narvalo.Edu.Monads {
         {
             Require.NotNull(action, "action");
 
-			if (predicate) {
-				action.Invoke();
-			}
+            if (predicate) {
+                action.Invoke();
+            }
 
             return MonadValue.Unit;
         }
@@ -313,12 +313,12 @@ namespace Narvalo.Edu.Monads {
             where TResult : struct
         {
             return JoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
 
         public static MonadValue<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -334,12 +334,12 @@ namespace Narvalo.Edu.Monads {
             where TResult : struct
         {
             return GroupJoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
         
         static MonadValue<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
@@ -460,8 +460,8 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-	// Extensions for Func<T, MonadValue<TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, MonadValue<TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -505,18 +505,18 @@ namespace Narvalo.Edu.Monads {
 }
 
 namespace Narvalo.Edu.Monads {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
-	// Extensions for IEnumerable<MonadValue<T>>.
-	public static partial class EnumerableMonadValueExtensions
+    // Extensions for IEnumerable<MonadValue<T>>.
+    public static partial class EnumerableMonadValueExtensions
     {
         #region Basic Monad functions (Prelude)
 
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -530,22 +530,22 @@ namespace Narvalo.Edu.Monads {
         }
 
         #endregion
-	}
+    }
 }
 
 namespace Narvalo.Edu.Monads.MonadValueEx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
-	// Extensions for IEnumerable<T>.
+    // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -571,7 +571,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
         }
 
         #endregion
-	    
+        
         #region Aggregate Operators
 
         public static MonadValue<TAccumulate> FoldBack<TSource, TAccumulate>(
@@ -618,8 +618,8 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
 
         #endregion
     }
-	// Possibly conflicting extensions for IEnumerable<T>.
-	public static partial class UnsafeEnumerableExtensions
+    // Possibly conflicting extensions for IEnumerable<T>.
+    public static partial class UnsafeEnumerableExtensions
     {
         #region Element Operators
 
@@ -687,5 +687,5 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
         }
 
         #endregion
-	}
+    }
 }

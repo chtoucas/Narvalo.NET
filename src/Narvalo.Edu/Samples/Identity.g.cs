@@ -8,14 +8,14 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Samples {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
-	// Monad methods.
+    // Monad methods.
     public static partial class Identity
     {
         static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -28,7 +28,7 @@ namespace Narvalo.Edu.Samples {
         {
             return Identity<T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -40,10 +40,10 @@ namespace Narvalo.Edu.Samples {
         #endregion
 
     }
-	// Extensions for Identity<T>.
+    // Extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Identity<TResult> Select<TSource, TResult>(this Identity<TSource> @this, Func<TSource, TResult> selector)
@@ -51,13 +51,13 @@ namespace Narvalo.Edu.Samples {
             return @this.Bind(_ => Identity.Return(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static Identity<TResult> Then<TSource, TResult>(this Identity<TSource> @this, Identity<TResult> other)
         
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -67,7 +67,7 @@ namespace Narvalo.Edu.Samples {
         {
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
-		
+        
         #endregion
 
 
@@ -139,8 +139,8 @@ namespace Narvalo.Edu.Samples {
 
         #endregion
     }
-	// Extensions for Func<T, Identity<TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, Identity<TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -168,7 +168,7 @@ namespace Narvalo.Edu.Samples {
 }
 
 namespace Narvalo.Edu.Samples {
-	// Comonad methods.
+    // Comonad methods.
     public static partial class Identity
     {
         // [Haskell] extract
@@ -186,14 +186,14 @@ namespace Narvalo.Edu.Samples {
 }
 
 namespace Narvalo.Edu.Samples {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Samples;
-	// Extensions for IEnumerable<Identity<T>>.
-	public static partial class EnumerableIdentityExtensions
+    // Extensions for IEnumerable<Identity<T>>.
+    public static partial class EnumerableIdentityExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -212,20 +212,20 @@ namespace Narvalo.Edu.Samples {
 
             return @this.Aggregate(seed, fun);
         }
-		
+        
         #endregion
 
-	}
+    }
 }
 
 namespace Narvalo.Edu.Samples.IdentityEx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Samples;
-	// Extensions for IEnumerable<T>.
+    // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -240,7 +240,7 @@ namespace Narvalo.Edu.Samples.IdentityEx {
 
             return (from _ in @this select funM.Invoke(_)).Collect();
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -284,8 +284,8 @@ namespace Narvalo.Edu.Samples.IdentityEx {
 
             Func<TFirst, TSecond, Identity<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-			// WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-			// instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
+            // instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -308,7 +308,7 @@ namespace Narvalo.Edu.Samples.IdentityEx {
         }
 
         #endregion
-	    
+        
         #region Aggregate Operators
 
 

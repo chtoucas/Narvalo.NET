@@ -8,13 +8,13 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Linq {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
-	// Extensions for IEnumerable<Maybe<T>>.
-	public static partial class EnumerableMaybeExtensions
+    using Narvalo.Fx;   // For Unit
+    // Extensions for IEnumerable<Maybe<T>>.
+    public static partial class EnumerableMaybeExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -33,7 +33,7 @@ namespace Narvalo.Linq {
 
             return @this.Aggregate(seed, fun);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -47,16 +47,16 @@ namespace Narvalo.Linq {
         }
 
         #endregion
-	}
+    }
 }
 
 namespace Narvalo.Linq.MaybeEx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
-	// Extensions for IEnumerable<T>.
+    using Narvalo.Fx;   // For Unit
+    // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -71,7 +71,7 @@ namespace Narvalo.Linq.MaybeEx {
 
             return (from _ in @this select funM.Invoke(_)).Collect();
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -129,8 +129,8 @@ namespace Narvalo.Linq.MaybeEx {
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-			// WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-			// instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
+            // instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -153,7 +153,7 @@ namespace Narvalo.Linq.MaybeEx {
         }
 
         #endregion
-	    
+        
         #region Aggregate Operators
 
         public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
@@ -199,8 +199,8 @@ namespace Narvalo.Linq.MaybeEx {
 
         #endregion
     }
-	// Possibly conflicting extensions for IEnumerable<T>.
-	public static partial class UnsafeEnumerableExtensions
+    // Possibly conflicting extensions for IEnumerable<T>.
+    public static partial class UnsafeEnumerableExtensions
     {
         #region Element Operators
 
@@ -265,5 +265,5 @@ namespace Narvalo.Linq.MaybeEx {
         }
 
         #endregion
-	}
+    }
 }

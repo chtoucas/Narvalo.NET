@@ -1,234 +1,234 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ output extension=".g.cs" #><#+
 
-	/* ====================================================================== *
-	 * Fields
-	 * ====================================================================== */
+    /* ====================================================================== *
+     * Fields
+     * ====================================================================== */
 
     bool _initialized = false;
     bool _headerWritten = false;
-	string _name;
-	string _namespace;
-	string _linqNamespace;
+    string _name;
+    string _namespace;
+    string _linqNamespace;
 
     bool _isNullable = true;
     bool _requireStruct = false;
-	bool _hasZero = false;
-	string _zeroName;
-	bool _hasPlus = false;
-	string _plusName;
-	string _returnName = "Return";
-	bool _full = true;
-	bool _preferLinqDialect = true;
+    bool _hasZero = false;
+    string _zeroName;
+    bool _hasPlus = false;
+    string _plusName;
+    string _returnName = "Return";
+    bool _full = true;
+    bool _preferLinqDialect = true;
 
-	/* ====================================================================== *
-	 * Properties
-	 * ====================================================================== */
+    /* ====================================================================== *
+     * Properties
+     * ====================================================================== */
 
     protected string Namespace
-	{
-		get
-		{
-			if (_namespace == null) {
-				_namespace = InferNamespace_();
-			}
+    {
+        get
+        {
+            if (_namespace == null) {
+                _namespace = InferNamespace_();
+            }
 
-			return _namespace;
-		}
+            return _namespace;
+        }
 
-		set
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
+        set
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
 
-			_namespace = value;
-		}
-	}
-	
+            _namespace = value;
+        }
+    }
+    
     protected string LinqNamespace
-	{
-		get
-		{
-			if (_linqNamespace == null) {
-				_linqNamespace = InferNamespace_();
-			}
+    {
+        get
+        {
+            if (_linqNamespace == null) {
+                _linqNamespace = InferNamespace_();
+            }
 
-			return _linqNamespace;
-		}
+            return _linqNamespace;
+        }
 
-		set
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
+        set
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
 
-			_linqNamespace = value;
-		}
-	}
+            _linqNamespace = value;
+        }
+    }
 
     protected string Name
-	{
-		get
-		{
-			if (_name == null) {
-				_name = InferName_();
-			}
+    {
+        get
+        {
+            if (_name == null) {
+                _name = InferName_();
+            }
 
-			return _name;
-		}
-
-		set
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
-
-			_name = value;
-		}
-	}
-    
-	protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
-
-	protected bool RequireStruct { get { return _requireStruct; } set { _requireStruct = value; } }
-    
-	protected bool HasPlus { get { return _hasPlus; } private set { _hasPlus = value; } }
-
-	protected bool HasZero { get { return _hasZero; } private set { _hasZero = value; } }
-
-	protected string ZeroName { 
-		get 
-		{ 
-			if (!HasZero) {
-				throw new InvalidOperationException();
-			}
-			
-			return _zeroName; 
-		}  
-
-		set
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
-			
-			_zeroName = value;
-		} 
-	}
-	
-	protected string PlusName
-	{
-		get
-		{ 
-			if (!HasPlus) {
-				throw new InvalidOperationException();
-			}
-
-			return _plusName; 
-		}
-
-		set
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
-			
-			_plusName = value;
-		} 
-	}
-
-	protected bool Full { get { return _full; } set { _full = value; } }
-
-	protected bool PreferLinqDialect { get { return _preferLinqDialect; } set { _preferLinqDialect = value; } }
-
-	protected string FilterName
-	{
-		get 
-        { 
-			if (!HasZero) {
-				throw new InvalidOperationException();
-			}
-
-			return PreferLinqDialect ? "Where" : "Filter";
+            return _name;
         }
-	}
-	
-	protected string MapName
-	{
-		get { return PreferLinqDialect ? "Select" : "Map"; }
-	}
-	
-	protected string ReturnName
-	{
-		get { return _returnName; }
-		set 
-		{
-			if (String.IsNullOrEmpty(value)) {
-				throw new ArgumentException();
-			}
-			
-			_returnName = value; 
-		}
-	}
-	
-	/* ====================================================================== *
-	 * "Constructors"
-	 * ====================================================================== */
 
-	public void InitializeZero()
-	{
-        ThrowIfInitialized_();
-		
-        HasZero = true;
-		ZeroName = "Zero";
+        set
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
 
-        _initialized = true;
-	}
-	
-	public void InitializePlus()
-	{
-        ThrowIfInitialized_();
-		
-        HasZero = true;
-		ZeroName = "Zero";
-
-		HasPlus = true;
-		PlusName = "Plus";
-
-        _initialized = true;
-	}
-	
-	public void InitializeOr()
-	{
-        ThrowIfInitialized_();
-		
-        HasZero = true;
-		ZeroName = "None";
-
-		HasPlus = true;
-		PlusName = "OrElse";
-
-        _initialized = true;
-	}
+            _name = value;
+        }
+    }
     
-	/* ====================================================================== *
-	 * Public Methods
-	 * ====================================================================== */
+    protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
+
+    protected bool RequireStruct { get { return _requireStruct; } set { _requireStruct = value; } }
+    
+    protected bool HasPlus { get { return _hasPlus; } private set { _hasPlus = value; } }
+
+    protected bool HasZero { get { return _hasZero; } private set { _hasZero = value; } }
+
+    protected string ZeroName { 
+        get 
+        { 
+            if (!HasZero) {
+                throw new InvalidOperationException();
+            }
+            
+            return _zeroName; 
+        }  
+
+        set
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
+            
+            _zeroName = value;
+        } 
+    }
+    
+    protected string PlusName
+    {
+        get
+        { 
+            if (!HasPlus) {
+                throw new InvalidOperationException();
+            }
+
+            return _plusName; 
+        }
+
+        set
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
+            
+            _plusName = value;
+        } 
+    }
+
+    protected bool Full { get { return _full; } set { _full = value; } }
+
+    protected bool PreferLinqDialect { get { return _preferLinqDialect; } set { _preferLinqDialect = value; } }
+
+    protected string FilterName
+    {
+        get 
+        { 
+            if (!HasZero) {
+                throw new InvalidOperationException();
+            }
+
+            return PreferLinqDialect ? "Where" : "Filter";
+        }
+    }
+    
+    protected string MapName
+    {
+        get { return PreferLinqDialect ? "Select" : "Map"; }
+    }
+    
+    protected string ReturnName
+    {
+        get { return _returnName; }
+        set 
+        {
+            if (String.IsNullOrEmpty(value)) {
+                throw new ArgumentException();
+            }
+            
+            _returnName = value; 
+        }
+    }
+    
+    /* ====================================================================== *
+     * "Constructors"
+     * ====================================================================== */
+
+    public void InitializeZero()
+    {
+        ThrowIfInitialized_();
+        
+        HasZero = true;
+        ZeroName = "Zero";
+
+        _initialized = true;
+    }
+    
+    public void InitializePlus()
+    {
+        ThrowIfInitialized_();
+        
+        HasZero = true;
+        ZeroName = "Zero";
+
+        HasPlus = true;
+        PlusName = "Plus";
+
+        _initialized = true;
+    }
+    
+    public void InitializeOr()
+    {
+        ThrowIfInitialized_();
+        
+        HasZero = true;
+        ZeroName = "None";
+
+        HasPlus = true;
+        PlusName = "OrElse";
+
+        _initialized = true;
+    }
+    
+    /* ====================================================================== *
+     * Public Methods
+     * ====================================================================== */
 
     // EmitMonad ---------------------------------------------------------------
 
     public void EmitMonad()
     {
-		WriteHeader_();
+        WriteHeader_();
 #>
 
 namespace <#= Namespace #> {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
 <#+ EmitCoreClass(); #>
 
@@ -237,26 +237,26 @@ namespace <#= Namespace #> {
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
-	}
+    }
 
     // EmitComonad -------------------------------------------------------------
-	
+    
     public void EmitComonad()
     {
-		WriteHeader_();
+        WriteHeader_();
 #>
 
 namespace <#= Namespace #> {
 <#+ EmitCoreComonad(); #>
 }
 <#+
-	}
+    }
 
     // EmitLinq ----------------------------------------------------------------
     
     public void EmitLinq(string namespacePostfix = "")
     {
-		WriteHeader_();
+        WriteHeader_();
 
         if (namespacePostfix.Length == 0) {
             namespacePostfix = Name + "Ex";
@@ -264,11 +264,11 @@ namespace <#= Namespace #> {
 #>
 
 namespace <#= LinqNamespace #> {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
@@ -277,11 +277,11 @@ namespace <#= LinqNamespace #> {
 }
 
 namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
@@ -292,17 +292,17 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 }
 <#+
     }
-	
-	/* ====================================================================== *
-	 * Protected Methods
-	 * ====================================================================== */
+    
+    /* ====================================================================== *
+     * Protected Methods
+     * ====================================================================== */
 
     // EmitCoreClass -----------------------------------------------------------
 
-	protected void EmitCoreClass() 
-	{
+    protected void EmitCoreClass() 
+    {
 #>
-	// Monad methods.
+    // Monad methods.
     public static partial class <#= Name #>
     {
         static readonly <#= Name #><Unit> Unit_ = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
@@ -323,7 +323,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         {
             return <#= Name #><T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -336,7 +336,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         #endregion
 
 <#+ if (Full) { #>
-		#region Monadic lifting operators
+        #region Monadic lifting operators
 
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(Func<T, TResult> fun)
 <#+ StructConstraint_("T"); #>
@@ -393,14 +393,14 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 <#+ } #>
     }
 <#+
-	}
-	
+    }
+    
     // EmitCoreComonad -------------------------------------------------------------
 
-	protected void EmitCoreComonad() 
-	{
+    protected void EmitCoreComonad() 
+    {
 #>
-	// Comonad methods.
+    // Comonad methods.
     public static partial class <#= Name #>
     {
         // [Haskell] extract
@@ -418,17 +418,17 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         }
     }
 <#+
-	}
+    }
 
     // EmitExtensions ----------------------------------------------------------
 
-	protected void EmitExtensions()
-	{
+    protected void EmitExtensions()
+    {
 #>
-	// Extensions for <#= Name #><T>.
+    // Extensions for <#= Name #><T>.
     public static partial class <#= Name #>Extensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(this <#= Name #><TSource> @this, Func<TSource, TResult> selector)
@@ -438,14 +438,14 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static <#= Name #><TResult> Then<TSource, TResult>(this <#= Name #><TSource> @this, <#= Name #><TResult> other)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>        
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -470,7 +470,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
 <#+ } #>
-		
+        
         #endregion
 
 <#+ if (Full) { #>
@@ -493,9 +493,9 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         {
             Require.NotNull(action, "action");
 
-			if (predicate) {
-				action.Invoke();
-			}
+            if (predicate) {
+                action.Invoke();
+            }
 
             return <#= Name #>.Unit;
         }
@@ -692,12 +692,12 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 <#+ StructConstraint_("TResult"); #>
         {
             return JoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -713,12 +713,12 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 <#+ StructConstraint_("TResult"); #>
         {
             return GroupJoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
         
         static <#= Name #><TResult> JoinCore_<TSource, TInner, TKey, TResult>(
@@ -852,15 +852,15 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         #endregion
     }
 <#+
-	}
-	
+    }
+    
     // EmitKleisliExtensions ---------------------------------------------------
 
     public void EmitKleisliExtensions()
     {
 #>
-	// Extensions for Func<T, <#= Name #><TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, <#= Name #><TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -910,11 +910,11 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 
     // EmitEnumerableMonadExtensions -------------------------------------------
 
-	protected void EmitEnumerableMonadExtensions()
-	{
+    protected void EmitEnumerableMonadExtensions()
+    {
 #>
-	// Extensions for IEnumerable<<#= Name #><T>>.
-	public static partial class Enumerable<#= Name #>Extensions
+    // Extensions for IEnumerable<<#= Name #><T>>.
+    public static partial class Enumerable<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -936,7 +936,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
             return @this.Aggregate(seed, fun);
         }
 <#+ } #>
-		
+        
         #endregion
 
 <#+ if (HasZero && HasPlus) { #>
@@ -953,16 +953,16 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 
         #endregion
 <#+ } #>
-	}
+    }
 <#+
     }
 
     // EmitEnumerableExtensions ------------------------------------------------
 
-	protected void EmitEnumerableExtensions()
-	{
+    protected void EmitEnumerableExtensions()
+    {
 #>
-	// Extensions for IEnumerable<T>.
+    // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -981,7 +981,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
             return (from _ in @this select funM.Invoke(_)).Collect();
         }
 <#+ } #>
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -1049,8 +1049,8 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-			// WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-			// instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
+            // instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 <#+ } #>
@@ -1076,7 +1076,7 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         }
 
         #endregion
-	    
+        
         #region Aggregate Operators
 
 <#+ if (Full) { #>
@@ -1131,18 +1131,18 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         #endregion
     }
 <#+
-	}
+    }
 
     // EmitUnsafeEnumerableExtensions ------------------------------------------
 
-	protected void EmitUnsafeEnumerableExtensions()
-	{
+    protected void EmitUnsafeEnumerableExtensions()
+    {
         if (!HasZero) { 
             return;
         }
 #>
-	// Possibly conflicting extensions for IEnumerable<T>.
-	public static partial class UnsafeEnumerableExtensions
+    // Possibly conflicting extensions for IEnumerable<T>.
+    public static partial class UnsafeEnumerableExtensions
     {
         #region Element Operators
 
@@ -1213,14 +1213,14 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
         }
 
         #endregion
-	}
+    }
 <#+
-	}
+    }
 
-	/* ====================================================================== *
-	 * Private Methods
-	 * ====================================================================== */
-	
+    /* ====================================================================== *
+     * Private Methods
+     * ====================================================================== */
+    
     protected void WriteHeader_()
     {
         if (_headerWritten) {
@@ -1235,17 +1235,17 @@ namespace <#= LinqNamespace #>.<#= namespacePostfix #> {
 //------------------------------------------------------------------------------
 <#+
         _headerWritten = true;
-	}
-	
-	string InferName_() 
-	{
-		return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
-	}
-	
-	string InferNamespace_() 
-	{
-		return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString();
-	}
+    }
+    
+    string InferName_() 
+    {
+        return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
+    }
+    
+    string InferNamespace_() 
+    {
+        return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString();
+    }
     
     void StructConstraint_(string name)
     {

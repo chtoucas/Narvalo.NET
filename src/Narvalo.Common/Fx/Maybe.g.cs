@@ -8,14 +8,14 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Fx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
-	// Monad methods.
+    // Monad methods.
     public static partial class Maybe
     {
         static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
@@ -31,7 +31,7 @@ namespace Narvalo.Fx {
         {
             return Maybe<T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -42,7 +42,7 @@ namespace Narvalo.Fx {
 
         #endregion
 
-		#region Monadic lifting operators
+        #region Monadic lifting operators
 
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
@@ -77,10 +77,10 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Extensions for Maybe<T>.
+    // Extensions for Maybe<T>.
     public static partial class MaybeExtensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Maybe<TResult> Select<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
@@ -88,13 +88,13 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
         
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -112,7 +112,7 @@ namespace Narvalo.Fx {
         {
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
-		
+        
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -130,9 +130,9 @@ namespace Narvalo.Fx {
         {
             Require.NotNull(action, "action");
 
-			if (predicate) {
-				action.Invoke();
-			}
+            if (predicate) {
+                action.Invoke();
+            }
 
             return Maybe.Unit;
         }
@@ -265,12 +265,12 @@ namespace Narvalo.Fx {
             IEqualityComparer<TKey> comparer)
         {
             return JoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
 
         public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -282,14 +282,14 @@ namespace Narvalo.Fx {
             IEqualityComparer<TKey> comparer)
         {
             return GroupJoinCore_(
-				@this,
-				inner,
-				outerKeySelector,
-				innerKeySelector,
-				resultSelector,
-				comparer ?? EqualityComparer<TKey>.Default);
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
         }
-
+        
         static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
             Maybe<TInner> inner,
@@ -396,8 +396,8 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Extensions for Func<T, Maybe<TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, Maybe<TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 

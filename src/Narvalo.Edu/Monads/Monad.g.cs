@@ -8,14 +8,14 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Monads {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
 
-	// Monad methods.
+    // Monad methods.
     public static partial class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
@@ -28,7 +28,7 @@ namespace Narvalo.Edu.Monads {
         {
             return Monad<T>.η(value);
         }
-		
+        
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
@@ -39,7 +39,7 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
 
-		#region Monadic lifting operators
+        #region Monadic lifting operators
 
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
@@ -74,10 +74,10 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-	// Extensions for Monad<T>.
+    // Extensions for Monad<T>.
     public static partial class MonadExtensions
     {
-		#region Basic Monad functions (Prelude)
+        #region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
         public static Monad<TResult> Select<TSource, TResult>(this Monad<TSource> @this, Func<TSource, TResult> selector)
@@ -85,13 +85,13 @@ namespace Narvalo.Edu.Monads {
             return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
         }
 
-		// [Haskell] >>
+        // [Haskell] >>
         public static Monad<TResult> Then<TSource, TResult>(this Monad<TSource> @this, Monad<TResult> other)
         
         {
             return @this.Bind(_ => other);
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -101,7 +101,7 @@ namespace Narvalo.Edu.Monads {
         {
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
-		
+        
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -113,9 +113,9 @@ namespace Narvalo.Edu.Monads {
         {
             Require.NotNull(action, "action");
 
-			if (predicate) {
-				action.Invoke();
-			}
+            if (predicate) {
+                action.Invoke();
+            }
 
             return Monad.Unit;
         }
@@ -249,8 +249,8 @@ namespace Narvalo.Edu.Monads {
 
         #endregion
     }
-	// Extensions for Func<T, Monad<TResult>>.
-	public static partial class FuncExtensions
+    // Extensions for Func<T, Monad<TResult>>.
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -288,14 +288,14 @@ namespace Narvalo.Edu.Monads {
 }
 
 namespace Narvalo.Edu.Monads {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
-	// Extensions for IEnumerable<Monad<T>>.
-	public static partial class EnumerableMonadExtensions
+    // Extensions for IEnumerable<Monad<T>>.
+    public static partial class EnumerableMonadExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -314,20 +314,20 @@ namespace Narvalo.Edu.Monads {
 
             return @this.Aggregate(seed, fun);
         }
-		
+        
         #endregion
 
-	}
+    }
 }
 
 namespace Narvalo.Edu.Monads.MonadEx {
-	using System;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo;      // For Require
-	using Narvalo.Fx;   // For Unit
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
-	// Extensions for IEnumerable<T>.
+    // Extensions for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -342,7 +342,7 @@ namespace Narvalo.Edu.Monads.MonadEx {
 
             return (from _ in @this select funM.Invoke(_)).Collect();
         }
-		
+        
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -400,8 +400,8 @@ namespace Narvalo.Edu.Monads.MonadEx {
 
             Func<TFirst, TSecond, Monad<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-			// WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
-			// instead of using the Zip from Linq.
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call to Zip 
+            // instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
@@ -424,7 +424,7 @@ namespace Narvalo.Edu.Monads.MonadEx {
         }
 
         #endregion
-	    
+        
         #region Aggregate Operators
 
         public static Monad<TAccumulate> FoldBack<TSource, TAccumulate>(
