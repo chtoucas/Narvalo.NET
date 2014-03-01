@@ -5,9 +5,12 @@
 	//
 
     bool _initialized = false;
+    bool _headerWritten = false;
 	string _name;
 	string _namespace;
 	string _linqNamespace;
+
+    bool _isNullable = true;
 	bool _hasZero = false;
 	string _zeroName;
 	bool _hasPlus = false;
@@ -82,6 +85,8 @@
 			_name = value;
 		}
 	}
+    
+	protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
 	protected bool HasPlus { get { return _hasPlus; } private set { _hasPlus = value; } }
 
@@ -97,7 +102,7 @@
 			return _zeroName; 
 		}  
 
-		private set
+		set
 		{
 			if (String.IsNullOrEmpty(value)) {
 				throw new ArgumentException();
@@ -118,7 +123,7 @@
 			return _plusName; 
 		}
 
-		private set
+		set
 		{
 			if (String.IsNullOrEmpty(value)) {
 				throw new ArgumentException();
@@ -166,38 +171,38 @@
 	// "Constructors"
 	//
 
-	public void InitializeZero(string zeroName = "Zero")
+	public void InitializeZero()
 	{
         ThrowIfInitialized_();
 		
         HasZero = true;
-		ZeroName = zeroName;
+		ZeroName = "Zero";
 
         _initialized = true;
 	}
 	
-	public void InitializePlus(string zeroName = "Zero", string plusName = "Plus")
+	public void InitializePlus()
 	{
         ThrowIfInitialized_();
 		
         HasZero = true;
-		ZeroName = zeroName;
+		ZeroName = "Zero";
 
 		HasPlus = true;
-		PlusName = plusName;
+		PlusName = "Plus";
 
         _initialized = true;
 	}
 	
-	public void InitializeOr(string zeroName = "None", string plusName = "OrElse")
+	public void InitializeOr()
 	{
         ThrowIfInitialized_();
 		
         HasZero = true;
-		ZeroName = zeroName;
+		ZeroName = "None";
 
 		HasPlus = true;
-		PlusName = plusName;
+		PlusName = "OrElse";
 
         _initialized = true;
 	}
@@ -206,11 +211,9 @@
 	// Public Methods
 	//
 
-    public void EmitMonad(bool warningHeader = true)
+    public void EmitMonad()
     {
-		if (warningHeader) {
-			WriteWarningHeader_();
-		}
+		WriteHeader_();
 #>
 
 namespace <#= Namespace #> {
@@ -218,14 +221,15 @@ namespace <#= Namespace #> {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Narvalo;
 	using Narvalo.Fx;
 
 <#+ EmitCoreClass(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitCoreExtensions(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitExtensions(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
@@ -233,9 +237,7 @@ namespace <#= Namespace #> {
 	
     public void EmitComonad(bool warningHeader = true)
     {
-		if (warningHeader) {
-			WriteWarningHeader_();
-		}
+		WriteHeader_();
 #>
 
 namespace <#= Namespace #> {
@@ -246,27 +248,40 @@ namespace <#= Namespace #> {
 
     public void EmitLinq(bool warningHeader = true)
     {
-		if (warningHeader) {
-			WriteWarningHeader_();
-		}
+		WriteHeader_();
 #>
 
 namespace <#= LinqNamespace #> {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
 <#+ if (LinqNamespace != Namespace) { #>
     using <#= Namespace #>;
 <#+ } #>
-<#+ NewLine_(); #>
+
 <#+ EmitQepExtensions(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitLinqExtensions(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitCoreEnumerableExtensions(); #>
-<#+ NewLine_(); #>
+
 <#+ EmitEnumerableExtensions(); #>
 }
+
+<#+ if (Complete) { #>
+namespace <#= LinqNamespace #>.<#= Name #>Ex {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;
+<#+ if (LinqNamespace != Namespace) { #>
+    using <#= Namespace #>;
+<#+ } #>
+
+<#+ EmitCustomEnumerableExtensions(); #>
+}
+<#+ } #>
 <#+
     }	// End of EmitLinq
 	
@@ -286,8 +301,8 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 
         public static <#= Name #><Unit> Unit { get { return Unit_; } }
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         // [Haskell] mzero
         public static <#= Name #><Unit> <#= ZeroName #> { get { return <#= ZeroName #>_; } }
 <#+ } #>
@@ -308,9 +323,9 @@ namespace <#= LinqNamespace #> {
 
         #endregion
 
-		#region Monadic lifting operators
 <#+ if (Complete) { #>
-<#+ NewLine_(); #>
+		#region Monadic lifting operators
+
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m => m.<#= MapName #>(fun);
@@ -392,12 +407,12 @@ namespace <#= LinqNamespace #> {
         #endregion
 
         #region Generalisations of list functions (Prelude)
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         // [Haskell] mfilter
         public static <#= Name #><TSource> <#= FilterName #><TSource>(this <#= Name #><TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
@@ -411,11 +426,11 @@ namespace <#= LinqNamespace #> {
         }
 		
         #endregion
+
 <#+ if (Complete) { #>
-<#+ NewLine_(); #>
         #region Conditional execution of monadic expressions (Prelude)
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         // [Haskell] guard
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static <#= Name #><Unit> Guard<TSource>(this <#= Name #><TSource> @this, bool predicate)
@@ -454,14 +469,14 @@ namespace <#= LinqNamespace #> {
             <#= Name #><TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
+
 <#+ if (Complete) { #>
-<#+ NewLine_(); #>
         // [Haskell] liftM3
         public static <#= Name #><TResult> Zip<T1, T2, T3, TResult>(
             this <#= Name #><T1> @this,
@@ -469,8 +484,8 @@ namespace <#= LinqNamespace #> {
             <#= Name #><T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, <#= Name #><TResult>> g
@@ -487,8 +502,8 @@ namespace <#= LinqNamespace #> {
              <#= Name #><T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, <#= Name #><TResult>> g
@@ -506,8 +521,8 @@ namespace <#= LinqNamespace #> {
             <#= Name #><T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, <#= Name #><TResult>> g
@@ -534,13 +549,13 @@ namespace <#= LinqNamespace #> {
             <#= Name #><TResult> then,
             <#= Name #><TResult> otherwise)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
@@ -560,16 +575,16 @@ namespace <#= LinqNamespace #> {
 
         public static <#= Name #><TSource> Run<TSource>(this <#= Name #><TSource> @this, Action<TSource> action)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(action, "action");
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         public static <#= Name #><TSource> On<#= ZeroName #><TSource>(this <#= Name #><TSource> @this, Action action)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(action, "action");
 
             throw new NotImplementedException();
@@ -600,18 +615,18 @@ namespace <#= LinqNamespace #> {
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             return _ => @this.Invoke(_).Bind(funM);
         }
+
 <#+ if (Complete) { #>
-<#+ NewLine_(); #>
         // [Haskell] <=<
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -635,17 +650,17 @@ namespace <#= LinqNamespace #> {
             this <#= Name #><TSource> @this, 
             Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             return @this.Filter(predicate);
         }
-<#+ NewLine_(); #>
 <#+ } #>
+
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this, 
             Func<TSource, TResult> selector)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             return @this.Map(selector);
         }
@@ -657,14 +672,14 @@ namespace <#= LinqNamespace #> {
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
         }
+
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -682,8 +697,8 @@ namespace <#= LinqNamespace #> {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelectorM)
         {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("inner"); #>
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelectorM, "resultSelectorM");
@@ -727,8 +742,8 @@ namespace <#= LinqNamespace #> {
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.Object(@this);
-            Require.NotNull(inner, "inner");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("inner"); #>
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
@@ -760,7 +775,7 @@ namespace <#= LinqNamespace #> {
         // [Haskell] sequence
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
@@ -774,14 +789,14 @@ namespace <#= LinqNamespace #> {
         }
 		
         #endregion
+
 <#+ if (HasZero && HasPlus) { #>
-<#+ NewLine_(); #>
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] msum
         public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
@@ -800,7 +815,7 @@ namespace <#= LinqNamespace #> {
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(funM, "funM");
 
             return (from _ in @this select funM.Invoke(_)).Collect();
@@ -815,7 +830,7 @@ namespace <#= LinqNamespace #> {
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -835,14 +850,14 @@ namespace <#= LinqNamespace #> {
 
             return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
         }
+
 <#+ if (Complete) { #>
-<#+ NewLine_(); #>
         // [Haskell] mapAndUnzipM
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(funM, "funM");
 
             return from _ in
@@ -859,8 +874,8 @@ namespace <#= LinqNamespace #> {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("second"); #>
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -876,7 +891,7 @@ namespace <#= LinqNamespace #> {
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
@@ -901,21 +916,23 @@ namespace <#= LinqNamespace #> {
     {
         #region Aggregate Operators
 
+<#+ if (Complete) { #>
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+ <#+ ObjectNotNull_(); #>
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
+<#+ } #>
 
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
@@ -933,28 +950,39 @@ namespace <#= LinqNamespace #> {
             }
         }
 
+<#+ if (Complete) { #>
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
 
             return @this.Reverse().Reduce(accumulatorM);
         }
+<#+ } #>
 
         #endregion
+	}
+<#+
+	}	// End of EmitEnumerableExtensions
+    
+	protected void EmitCustomEnumerableExtensions()
+	{
+#>
+	// Isolated non-standard extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
 <#+ if (HasZero) { #>
-<#+ NewLine_(); #>
         #region Element Operators
 
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
+            return FirstOr<#= ZeroName #>(@this, _ => true);
         }
 
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
@@ -963,14 +991,14 @@ namespace <#= LinqNamespace #> {
             }
         }
 
-        public static <#= Name #><TSource> LastOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
+            return LastOr<#= ZeroName #>(@this, _ => true);
         }
 
-        public static <#= Name #><TSource> LastOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
@@ -988,14 +1016,14 @@ namespace <#= LinqNamespace #> {
             }
         }
 
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this)
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOr<#= ZeroName #>As<#= Name #>(@this, _ => true);
+            return SingleOr<#= ZeroName #>(@this, _ => true);
         }
 
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #>As<#= Name #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+<#+ ObjectNotNull_(); #>
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
@@ -1011,14 +1039,17 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 	}
 <#+
-	}	// End of EmitEnumerableExtensions
+	}	// End of EmitCustomEnumerableExtensions
 
 	//
 	// Private Methods
 	//
 	
-    protected void WriteWarningHeader_()
+    protected void WriteHeader_()
     {
+        if (_headerWritten) {
+            return;
+        }
 #>
 //------------------------------------------------------------------------------
 // <auto-generated>
@@ -1027,6 +1058,7 @@ namespace <#= LinqNamespace #> {
 // </auto-generated>
 //------------------------------------------------------------------------------
 <#+
+        _headerWritten = true;
 	}
 	
 	string InferName_() 
@@ -1039,10 +1071,23 @@ namespace <#= LinqNamespace #> {
 		return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString();
 	}
 
-	void NewLine_()
-	{
-		WriteLine("");
-	}
+    void ObjectNotNull_() 
+    {
+        if (IsNullable) {
+#>
+            Require.Object(@this);
+<#+
+        }
+    }
+
+    void NotNull_(string name) 
+    {
+        if (IsNullable) {
+#>
+            Require.NotNull(<#= name #>, "<#= name #>");
+<#+
+        }
+    }
 
     void ThrowIfInitialized_() 
     {

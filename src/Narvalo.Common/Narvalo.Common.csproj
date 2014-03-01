@@ -195,6 +195,7 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="CodeTemplates\Monad.Nullable.tt" />
     <None Include="CodeTemplates\Monad.Output.tt" />
     <None Include="CodeTemplates\Monad.Maybe.tt" />
     <None Include="CodeTemplates\Monad.tt" />

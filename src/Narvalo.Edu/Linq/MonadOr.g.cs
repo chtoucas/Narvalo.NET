@@ -11,8 +11,8 @@ namespace Narvalo.Edu.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
     using Narvalo.Edu.Fx;
-
 	// Query Expression Pattern for MonadOr<T>.
 	public static partial class MonadOrExtensions
     {
@@ -73,7 +73,6 @@ namespace Narvalo.Edu.Linq {
             throw new NotImplementedException();
         }
 	}
-
 	// Linq extensions for MonadOr<T>.
 	public static partial class MonadOrExtensions
     {
@@ -120,7 +119,6 @@ namespace Narvalo.Edu.Linq {
 			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 	}
-
 	// Prelude extensions for IEnumerable<MonadOr<T>>.
 	public static partial class EnumerableMonadOrExtensions
     {
@@ -255,7 +253,6 @@ namespace Narvalo.Edu.Linq {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
@@ -266,7 +263,7 @@ namespace Narvalo.Edu.Linq {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+             Require.Object(@this);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -303,15 +300,26 @@ namespace Narvalo.Edu.Linq {
         }
 
         #endregion
+	}
+}
 
+namespace Narvalo.Edu.Linq.MonadOrEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;
+    using Narvalo.Edu.Fx;
+	// Isolated non-standard extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
         #region Element Operators
 
-        public static MonadOr<TSource> FirstOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNoneAsMonadOr(@this, _ => true);
+            return FirstOrNone(@this, _ => true);
         }
 
-        public static MonadOr<TSource> FirstOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -322,12 +330,12 @@ namespace Narvalo.Edu.Linq {
             }
         }
 
-        public static MonadOr<TSource> LastOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNoneAsMonadOr(@this, _ => true);
+            return LastOrNone(@this, _ => true);
         }
 
-        public static MonadOr<TSource> LastOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -347,12 +355,12 @@ namespace Narvalo.Edu.Linq {
             }
         }
 
-        public static MonadOr<TSource> SingleOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNoneAsMonadOr(@this, _ => true);
+            return SingleOrNone(@this, _ => true);
         }
 
-        public static MonadOr<TSource> SingleOrNoneAsMonadOr<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");

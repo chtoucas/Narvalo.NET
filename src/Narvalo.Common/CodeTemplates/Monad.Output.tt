@@ -1,4 +1,5 @@
 ﻿<#@ include file="Monad.tt" #>
 <# 
+    Complete = false;
 	ReturnName = "Success";
 #>

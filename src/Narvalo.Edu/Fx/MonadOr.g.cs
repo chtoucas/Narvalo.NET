@@ -12,6 +12,7 @@ namespace Narvalo.Edu.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Narvalo;
 	using Narvalo.Fx;
 
 	// Monad methods.
@@ -76,7 +77,6 @@ namespace Narvalo.Edu.Fx {
 
         #endregion
     }
-
 	// Prelude extensions for MonadOr<T>.
     public static partial class MonadOrExtensions
     {
@@ -216,7 +216,6 @@ namespace Narvalo.Edu.Fx {
 
         #endregion
     }
-
 	// Non-standard extensions for MonadOr<T>.
     public static partial class MonadOrExtensions
     {
@@ -264,7 +263,6 @@ namespace Narvalo.Edu.Fx {
             throw new NotImplementedException();
         }
 	}
-
 	// Kleisli extensions for Func<T, MonadOr<TResult>>.
 	public static partial class FuncExtensions
     {

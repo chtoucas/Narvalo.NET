@@ -11,8 +11,8 @@ namespace Narvalo.Edu.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
     using Narvalo.Edu.Fx;
-
 	// Query Expression Pattern for MonadZero<T>.
 	public static partial class MonadZeroExtensions
     {
@@ -73,7 +73,6 @@ namespace Narvalo.Edu.Linq {
             throw new NotImplementedException();
         }
 	}
-
 	// Linq extensions for MonadZero<T>.
 	public static partial class MonadZeroExtensions
     {
@@ -120,7 +119,6 @@ namespace Narvalo.Edu.Linq {
 			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 	}
-
 	// Prelude extensions for IEnumerable<MonadZero<T>>.
 	public static partial class EnumerableMonadZeroExtensions
     {
@@ -143,6 +141,7 @@ namespace Narvalo.Edu.Linq {
         }
 		
         #endregion
+
 	}
 
 	// Prelude extensions for IEnumerable<T>.
@@ -243,7 +242,6 @@ namespace Narvalo.Edu.Linq {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
@@ -254,7 +252,7 @@ namespace Narvalo.Edu.Linq {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+             Require.Object(@this);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -291,15 +289,26 @@ namespace Narvalo.Edu.Linq {
         }
 
         #endregion
+	}
+}
 
+namespace Narvalo.Edu.Linq.MonadZeroEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;
+    using Narvalo.Edu.Fx;
+	// Isolated non-standard extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
         #region Element Operators
 
-        public static MonadZero<TSource> FirstOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this)
+        public static MonadZero<TSource> FirstOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrZeroAsMonadZero(@this, _ => true);
+            return FirstOrZero(@this, _ => true);
         }
 
-        public static MonadZero<TSource> FirstOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadZero<TSource> FirstOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -310,12 +319,12 @@ namespace Narvalo.Edu.Linq {
             }
         }
 
-        public static MonadZero<TSource> LastOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this)
+        public static MonadZero<TSource> LastOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrZeroAsMonadZero(@this, _ => true);
+            return LastOrZero(@this, _ => true);
         }
 
-        public static MonadZero<TSource> LastOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadZero<TSource> LastOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -335,12 +344,12 @@ namespace Narvalo.Edu.Linq {
             }
         }
 
-        public static MonadZero<TSource> SingleOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this)
+        public static MonadZero<TSource> SingleOrZero<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrZeroAsMonadZero(@this, _ => true);
+            return SingleOrZero(@this, _ => true);
         }
 
-        public static MonadZero<TSource> SingleOrZeroAsMonadZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadZero<TSource> SingleOrZero<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");

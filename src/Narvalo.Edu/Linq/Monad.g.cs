@@ -11,11 +11,12 @@ namespace Narvalo.Edu.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
     using Narvalo.Edu.Fx;
-
 	// Query Expression Pattern for Monad<T>.
 	public static partial class MonadExtensions
     {
+
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this, 
             Func<TSource, TResult> selector)
@@ -37,13 +38,12 @@ namespace Narvalo.Edu.Linq {
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
-	}
 
+	}
 	// Linq extensions for Monad<T>.
 	public static partial class MonadExtensions
     {
 	}
-
 	// Prelude extensions for IEnumerable<Monad<T>>.
 	public static partial class EnumerableMonadExtensions
     {
@@ -66,6 +66,7 @@ namespace Narvalo.Edu.Linq {
         }
 		
         #endregion
+
 	}
 
 	// Prelude extensions for IEnumerable<T>.
@@ -166,7 +167,6 @@ namespace Narvalo.Edu.Linq {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
@@ -177,7 +177,7 @@ namespace Narvalo.Edu.Linq {
             TAccumulate seed,
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+             Require.Object(@this);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -214,5 +214,17 @@ namespace Narvalo.Edu.Linq {
         }
 
         #endregion
+	}
+}
+
+namespace Narvalo.Edu.Linq.MonadEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;
+    using Narvalo.Edu.Fx;
+	// Isolated non-standard extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
 	}
 }

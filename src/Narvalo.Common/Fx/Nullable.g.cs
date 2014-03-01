@@ -12,63 +12,58 @@ namespace Narvalo.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Narvalo;
 	using Narvalo.Fx;
 
 	// Monad methods.
-    public static partial class Maybe
+    public static partial class Nullable
     {
-        static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
-        static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
+        static readonly Nullable<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
-        public static Maybe<Unit> Unit { get { return Unit_; } }
-
-        // [Haskell] mzero
-        public static Maybe<Unit> None { get { return None_; } }
+        public static Nullable<Unit> Unit { get { return Unit_; } }
 
         // [Haskell] return
-        public static Maybe<T> Create<T>(T value)
+        public static Nullable<T> Return<T>(T value)
         {
-            return Maybe<T>.η(value);
+            return Nullable<T>.η(value);
         }
 		
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] join
-        public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
+        public static Nullable<T> Flatten<T>(Nullable<Nullable<T>> square)
         {
-            return Maybe<T>.μ(square);
+            return Nullable<T>.μ(square);
         }
 
         #endregion
 
 		#region Monadic lifting operators
 
-        public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        public static Func<Nullable<T>, Nullable<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m => m.Map(fun);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
+        public static Func<Nullable<T1>, Nullable<T2>, Nullable<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
             return (m1, m2) => m1.Zip(m2, fun);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
+        public static Func<Nullable<T1>, Nullable<T2>, Nullable<T3>, Nullable<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
             return (m1, m2, m3) => m1.Zip(m2, m3, fun);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
+        public static Func<Nullable<T1>, Nullable<T2>, Nullable<T3>, Nullable<T4>, Nullable<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
             return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
         }
 
-        public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
+        public static Func<Nullable<T1>, Nullable<T2>, Nullable<T3>, Nullable<T4>, Nullable<T5>, Nullable<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
@@ -77,19 +72,20 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Prelude extensions for Maybe<T>.
-    public static partial class MaybeExtensions
+
+	// Prelude extensions for Nullable<T>.
+    public static partial class NullableExtensions
     {
 		#region Basic Monad functions (Prelude)
 
         // [Haskell] fmap
-        public static Maybe<TResult> Map<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
+        public static Nullable<TResult> Map<TSource, TResult>(this Nullable<TSource> @this, Func<TSource, TResult> selector)
         {
-            return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
+            return @this.Bind(_ => Nullable.Return(selector.Invoke(_)));
         }
 
 		// [Haskell] >>
-        public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
+        public static Nullable<TResult> Then<TSource, TResult>(this Nullable<TSource> @this, Nullable<TResult> other)
         {
             return @this.Bind(_ => other);
         }
@@ -98,17 +94,8 @@ namespace Narvalo.Fx {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] mfilter
-        public static Maybe<TSource> Filter<TSource>(this Maybe<TSource> @this, Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
-        }
-
         // [Haskell] replicateM
-        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
+        public static Nullable<IEnumerable<TSource>> Repeat<TSource>(this Nullable<TSource> @this, int count)
         {
             return @this.Map(_ => Enumerable.Repeat(_, count));
         }
@@ -117,16 +104,9 @@ namespace Narvalo.Fx {
 
         #region Conditional execution of monadic expressions (Prelude)
 
-        // [Haskell] guard
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
-        {
-            return predicate ? Maybe.Unit : Maybe.None;
-        }
-
         // [Haskell] when
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Maybe<Unit> When<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        public static Nullable<Unit> When<TSource>(this Nullable<TSource> @this, bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -134,11 +114,11 @@ namespace Narvalo.Fx {
 				action.Invoke();
 			}
 
-            return Maybe.Unit;
+            return Nullable.Unit;
         }
 
         // [Haskell] unless
-        public static Maybe<Unit> Unless<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        public static Nullable<Unit> Unless<TSource>(this Nullable<TSource> @this, bool predicate, Action action)
         {
             return @this.When(!predicate, action);
         }
@@ -148,9 +128,9 @@ namespace Narvalo.Fx {
         #region Monadic lifting operators (Prelude)
 
         // [Haskell] liftM2
-        public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
-            this Maybe<TFirst> @this,
-            Maybe<TSecond> second,
+        public static Nullable<TResult> Zip<TFirst, TSecond, TResult>(
+            this Nullable<TFirst> @this,
+            Nullable<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
             Require.Object(@this);
@@ -161,54 +141,54 @@ namespace Narvalo.Fx {
         }
 
         // [Haskell] liftM3
-        public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
-            this Maybe<T1> @this,
-            Maybe<T2> second,
-            Maybe<T3> third,
+        public static Nullable<TResult> Zip<T1, T2, T3, TResult>(
+            this Nullable<T1> @this,
+            Nullable<T2> second,
+            Nullable<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Maybe<TResult>> g
+            Func<T1, Nullable<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
 
             return @this.Bind(g);
         }
 
         // [Haskell] liftM4
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Maybe<T1> @this,
-             Maybe<T2> second,
-             Maybe<T3> third,
-             Maybe<T4> fourth,
+        public static Nullable<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Nullable<T1> @this,
+             Nullable<T2> second,
+             Nullable<T3> third,
+             Nullable<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Maybe<TResult>> g
+            Func<T1, Nullable<TResult>> g
                 = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
         }
 
         // [Haskell] liftM5
-        public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Maybe<T1> @this,
-            Maybe<T2> second,
-            Maybe<T3> third,
-            Maybe<T4> fourth,
-            Maybe<T5> fifth,
+        public static Nullable<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Nullable<T1> @this,
+            Nullable<T2> second,
+            Nullable<T3> third,
+            Nullable<T4> fourth,
+            Nullable<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Maybe<TResult>> g
+            Func<T1, Nullable<TResult>> g
                 = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
             return @this.Bind(g);
@@ -216,14 +196,15 @@ namespace Narvalo.Fx {
 
         #endregion
     }
-	// Non-standard extensions for Maybe<T>.
-    public static partial class MaybeExtensions
+
+	// Non-standard extensions for Nullable<T>.
+    public static partial class NullableExtensions
     {
-        public static Maybe<TResult> Coalesce<TSource, TResult>(
-            this Maybe<TSource> @this,
+        public static Nullable<TResult> Coalesce<TSource, TResult>(
+            this Nullable<TSource> @this,
             Func<TSource, bool> predicate,
-            Maybe<TResult> then,
-            Maybe<TResult> otherwise)
+            Nullable<TResult> then,
+            Nullable<TResult> otherwise)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -231,55 +212,32 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
-        public static Maybe<TResult> Then<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-        {
-            return @this.Coalesce(predicate, other, Maybe<TResult>.None);
-        }
-
-        public static Maybe<TResult> Otherwise<TSource, TResult>(
-            this Maybe<TSource> @this,
-            Func<TSource, bool> predicate,
-            Maybe<TResult> other)
-        {
-            return @this.Coalesce(predicate, Maybe<TResult>.None, other);
-        }
-
-        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        public static Nullable<TSource> Run<TSource>(this Nullable<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
-
-        public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            throw new NotImplementedException();
-        }
 	}
-	// Kleisli extensions for Func<T, Maybe<TResult>>.
+
+	// Kleisli extensions for Func<T, Nullable<TResult>>.
 	public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
         // [Haskell] =<<
-        public static Maybe<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, Maybe<TResult>> @this,
-            Maybe<TSource> monad)
+        public static Nullable<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Nullable<TResult>> @this,
+            Nullable<TSource> monad)
         {
             return monad.Bind(@this);
         }
 
         // [Haskell] >=>
-        public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Maybe<TMiddle>> @this,
-            Func<TMiddle, Maybe<TResult>> funM)
+        public static Func<TSource, Nullable<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Nullable<TMiddle>> @this,
+            Func<TMiddle, Nullable<TResult>> funM)
         {
             Require.Object(@this);
 
@@ -287,9 +245,9 @@ namespace Narvalo.Fx {
         }
 
         // [Haskell] <=<
-        public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Maybe<TResult>> @this,
-            Func<TSource, Maybe<TMiddle>> funM)
+        public static Func<TSource, Nullable<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Nullable<TResult>> @this,
+            Func<TSource, Nullable<TMiddle>> funM)
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");

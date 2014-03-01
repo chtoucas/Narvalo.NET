@@ -12,6 +12,7 @@ namespace Narvalo.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Narvalo;
 	using Narvalo.Fx;
 
 	// Monad methods.
@@ -20,6 +21,7 @@ namespace Narvalo.Fx {
         static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
 
         public static Output<Unit> Unit { get { return Unit_; } }
+
 
         // [Haskell] return
         public static Output<T> Success<T>(T value)
@@ -37,42 +39,7 @@ namespace Narvalo.Fx {
 
         #endregion
 
-		#region Monadic lifting operators
-
-        public static Func<Output<T>, Output<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
-        {
-            return m => m.Map(fun);
-        }
-
-        public static Func<Output<T1>, Output<T2>, Output<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
-        {
-            return (m1, m2) => m1.Zip(m2, fun);
-        }
-
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
-        {
-            return (m1, m2, m3) => m1.Zip(m2, m3, fun);
-        }
-
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>
-            Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> fun)
-        {
-            return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
-        }
-
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>
-            Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> fun)
-        {
-            return (m1, m2, m3, m4, m5) => m1.Zip(m2, m3, m4, m5, fun);
-        }
-
-        #endregion
     }
-
 	// Prelude extensions for Output<T>.
     public static partial class OutputExtensions
     {
@@ -94,6 +61,7 @@ namespace Narvalo.Fx {
 
         #region Generalisations of list functions (Prelude)
 
+
         // [Haskell] replicateM
         public static Output<IEnumerable<TSource>> Repeat<TSource>(this Output<TSource> @this, int count)
         {
@@ -102,28 +70,6 @@ namespace Narvalo.Fx {
 		
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-        // [Haskell] when
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Output<Unit> When<TSource>(this Output<TSource> @this, bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-			if (predicate) {
-				action.Invoke();
-			}
-
-            return Output.Unit;
-        }
-
-        // [Haskell] unless
-        public static Output<Unit> Unless<TSource>(this Output<TSource> @this, bool predicate, Action action)
-        {
-            return @this.When(!predicate, action);
-        }
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -140,63 +86,9 @@ namespace Narvalo.Fx {
             return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
-        public static Output<TResult> Zip<T1, T2, T3, TResult>(
-            this Output<T1> @this,
-            Output<T2> second,
-            Output<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Output<TResult>> g
-                = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
-
-            return @this.Bind(g);
-        }
-
-        // [Haskell] liftM4
-        public static Output<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Output<T1> @this,
-             Output<T2> second,
-             Output<T3> third,
-             Output<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Output<TResult>> g
-                = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
-
-            return @this.Bind(g);
-        }
-
-        // [Haskell] liftM5
-        public static Output<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Output<T1> @this,
-            Output<T2> second,
-            Output<T3> third,
-            Output<T4> fourth,
-            Output<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Output<TResult>> g
-                = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
-
-            return @this.Bind(g);
-        }
 
         #endregion
     }
-
 	// Non-standard extensions for Output<T>.
     public static partial class OutputExtensions
     {
@@ -212,6 +104,7 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+
         public static Output<TSource> Run<TSource>(this Output<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
@@ -219,8 +112,8 @@ namespace Narvalo.Fx {
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
-	}
 
+	}
 	// Kleisli extensions for Func<T, Output<TResult>>.
 	public static partial class FuncExtensions
     {
@@ -244,16 +137,6 @@ namespace Narvalo.Fx {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
-        public static Func<TSource, Output<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Output<TResult>> @this,
-            Func<TSource, Output<TMiddle>> funM)
-        {
-            Require.Object(@this);
-            Require.NotNull(funM, "funM");
-
-            return _ => funM.Invoke(_).Bind(@this);
-        }
 
         #endregion
     }

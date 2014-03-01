@@ -11,8 +11,8 @@ namespace Narvalo.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
     using Narvalo.Fx;
-
 	// Query Expression Pattern for Maybe<T>.
 	public static partial class MaybeExtensions
     {
@@ -73,7 +73,6 @@ namespace Narvalo.Linq {
             throw new NotImplementedException();
         }
 	}
-
 	// Linq extensions for Maybe<T>.
 	public static partial class MaybeExtensions
     {
@@ -120,7 +119,6 @@ namespace Narvalo.Linq {
 			return @this.SelectMany(valueSelectorM, resultSelector);
         }
 	}
-
 	// Prelude extensions for IEnumerable<Maybe<T>>.
 	public static partial class EnumerableMaybeExtensions
     {
@@ -255,7 +253,6 @@ namespace Narvalo.Linq {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
@@ -266,7 +263,7 @@ namespace Narvalo.Linq {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+             Require.Object(@this);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -303,15 +300,26 @@ namespace Narvalo.Linq {
         }
 
         #endregion
+	}
+}
 
+namespace Narvalo.Linq.MaybeEx {
+	using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;
+    using Narvalo.Fx;
+	// Isolated non-standard extensions for IEnumerable<T>.
+	public static partial class EnumerableExtensions
+    {
         #region Element Operators
 
-        public static Maybe<TSource> FirstOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this)
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNoneAsMaybe(@this, _ => true);
+            return FirstOrNone(@this, _ => true);
         }
 
-        public static Maybe<TSource> FirstOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -322,12 +330,12 @@ namespace Narvalo.Linq {
             }
         }
 
-        public static Maybe<TSource> LastOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this)
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNoneAsMaybe(@this, _ => true);
+            return LastOrNone(@this, _ => true);
         }
 
-        public static Maybe<TSource> LastOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -347,12 +355,12 @@ namespace Narvalo.Linq {
             }
         }
 
-        public static Maybe<TSource> SingleOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this)
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNoneAsMaybe(@this, _ => true);
+            return SingleOrNone(@this, _ => true);
         }
 
-        public static Maybe<TSource> SingleOrNoneAsMaybe<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");

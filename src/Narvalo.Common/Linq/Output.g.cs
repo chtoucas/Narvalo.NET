@@ -11,11 +11,12 @@ namespace Narvalo.Linq {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Narvalo;
     using Narvalo.Fx;
-
 	// Query Expression Pattern for Output<T>.
 	public static partial class OutputExtensions
     {
+
         public static Output<TResult> Select<TSource, TResult>(
             this Output<TSource> @this, 
             Func<TSource, TResult> selector)
@@ -37,13 +38,12 @@ namespace Narvalo.Linq {
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
-	}
 
+	}
 	// Linq extensions for Output<T>.
 	public static partial class OutputExtensions
     {
 	}
-
 	// Prelude extensions for IEnumerable<Output<T>>.
 	public static partial class EnumerableOutputExtensions
     {
@@ -66,6 +66,7 @@ namespace Narvalo.Linq {
         }
 		
         #endregion
+
 	}
 
 	// Prelude extensions for IEnumerable<T>.
@@ -114,20 +115,6 @@ namespace Narvalo.Linq {
             return Output.Success(list.AsEnumerable());
         }
 
-        // [Haskell] mapAndUnzipM
-        public static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
-        {
-            Require.Object(@this);
-            Require.NotNull(funM, "funM");
-
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
-                   let item1 = from item in _ select item.Item1
-                   let item2 = from item in _ select item.Item2
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
-        }
 
         // [Haskell] zipWithM
         public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
@@ -166,21 +153,11 @@ namespace Narvalo.Linq {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators
 
-        public static Output<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
-        {
-            Require.Object(@this);
-
-            return @this.Reverse().Fold(seed, accumulatorM);
-        }
 
         public static Output<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -204,15 +181,8 @@ namespace Narvalo.Linq {
             }
         }
 
-        public static Output<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM)
-        {
-            Require.Object(@this);
-
-            return @this.Reverse().Reduce(accumulatorM);
-        }
 
         #endregion
 	}
 }
+

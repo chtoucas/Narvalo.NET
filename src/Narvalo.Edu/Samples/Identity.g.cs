@@ -12,6 +12,7 @@ namespace Narvalo.Edu.Samples {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Narvalo;
 	using Narvalo.Fx;
 
 	// Monad methods.
@@ -20,6 +21,7 @@ namespace Narvalo.Edu.Samples {
         static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
         public static Identity<Unit> Unit { get { return Unit_; } }
+
 
         // [Haskell] return
         public static Identity<T> Return<T>(T value)
@@ -37,42 +39,7 @@ namespace Narvalo.Edu.Samples {
 
         #endregion
 
-		#region Monadic lifting operators
-
-        public static Func<Identity<T>, Identity<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
-        {
-            return m => m.Map(fun);
-        }
-
-        public static Func<Identity<T1>, Identity<T2>, Identity<TResult>>
-            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
-        {
-            return (m1, m2) => m1.Zip(m2, fun);
-        }
-
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>
-            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
-        {
-            return (m1, m2, m3) => m1.Zip(m2, m3, fun);
-        }
-
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>
-            Lift<T1, T2, T3, T4, TResult>(
-            Func<T1, T2, T3, T4, TResult> fun)
-        {
-            return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
-        }
-
-        public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>
-            Lift<T1, T2, T3, T4, T5, TResult>(
-            Func<T1, T2, T3, T4, T5, TResult> fun)
-        {
-            return (m1, m2, m3, m4, m5) => m1.Zip(m2, m3, m4, m5, fun);
-        }
-
-        #endregion
     }
-
 	// Prelude extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
@@ -94,6 +61,7 @@ namespace Narvalo.Edu.Samples {
 
         #region Generalisations of list functions (Prelude)
 
+
         // [Haskell] replicateM
         public static Identity<IEnumerable<TSource>> Repeat<TSource>(this Identity<TSource> @this, int count)
         {
@@ -102,28 +70,6 @@ namespace Narvalo.Edu.Samples {
 		
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-        // [Haskell] when
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Identity<Unit> When<TSource>(this Identity<TSource> @this, bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-			if (predicate) {
-				action.Invoke();
-			}
-
-            return Identity.Unit;
-        }
-
-        // [Haskell] unless
-        public static Identity<Unit> Unless<TSource>(this Identity<TSource> @this, bool predicate, Action action)
-        {
-            return @this.When(!predicate, action);
-        }
-
-        #endregion
 
         #region Monadic lifting operators (Prelude)
 
@@ -140,63 +86,9 @@ namespace Narvalo.Edu.Samples {
             return @this.Bind(v1 => second.Map(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
-        public static Identity<TResult> Zip<T1, T2, T3, TResult>(
-            this Identity<T1> @this,
-            Identity<T2> second,
-            Identity<T3> third,
-            Func<T1, T2, T3, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Identity<TResult>> g
-                = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
-
-            return @this.Bind(g);
-        }
-
-        // [Haskell] liftM4
-        public static Identity<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Identity<T1> @this,
-             Identity<T2> second,
-             Identity<T3> third,
-             Identity<T4> fourth,
-             Func<T1, T2, T3, T4, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Identity<TResult>> g
-                = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
-
-            return @this.Bind(g);
-        }
-
-        // [Haskell] liftM5
-        public static Identity<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Identity<T1> @this,
-            Identity<T2> second,
-            Identity<T3> third,
-            Identity<T4> fourth,
-            Identity<T5> fifth,
-            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-        {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
-
-            Func<T1, Identity<TResult>> g
-                = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
-
-            return @this.Bind(g);
-        }
 
         #endregion
     }
-
 	// Non-standard extensions for Identity<T>.
     public static partial class IdentityExtensions
     {
@@ -212,6 +104,7 @@ namespace Narvalo.Edu.Samples {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+
         public static Identity<TSource> Run<TSource>(this Identity<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
@@ -219,8 +112,8 @@ namespace Narvalo.Edu.Samples {
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
-	}
 
+	}
 	// Kleisli extensions for Func<T, Identity<TResult>>.
 	public static partial class FuncExtensions
     {
@@ -244,16 +137,6 @@ namespace Narvalo.Edu.Samples {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
-        public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Identity<TResult>> @this,
-            Func<TSource, Identity<TMiddle>> funM)
-        {
-            Require.Object(@this);
-            Require.NotNull(funM, "funM");
-
-            return _ => funM.Invoke(_).Bind(@this);
-        }
 
         #endregion
     }
@@ -281,10 +164,11 @@ namespace Narvalo.Edu.Samples {
 	using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using Narvalo;
 	// Query Expression Pattern for Identity<T>.
 	public static partial class IdentityExtensions
     {
+
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this, 
             Func<TSource, TResult> selector)
@@ -306,13 +190,12 @@ namespace Narvalo.Edu.Samples {
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).Map(middle => resultSelector.Invoke(_, middle)));
         }
-	}
 
+	}
 	// Linq extensions for Identity<T>.
 	public static partial class IdentityExtensions
     {
 	}
-
 	// Prelude extensions for IEnumerable<Identity<T>>.
 	public static partial class EnumerableIdentityExtensions
     {
@@ -335,6 +218,7 @@ namespace Narvalo.Edu.Samples {
         }
 		
         #endregion
+
 	}
 
 	// Prelude extensions for IEnumerable<T>.
@@ -383,20 +267,6 @@ namespace Narvalo.Edu.Samples {
             return Identity.Return(list.AsEnumerable());
         }
 
-        // [Haskell] mapAndUnzipM
-        public static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
-        {
-            Require.Object(@this);
-            Require.NotNull(funM, "funM");
-
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
-                   let item1 = from item in _ select item.Item1
-                   let item2 = from item in _ select item.Item2
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
-        }
 
         // [Haskell] zipWithM
         public static Identity<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
@@ -435,21 +305,11 @@ namespace Narvalo.Edu.Samples {
 
         #endregion
     }
-
 	// Non-standard extensions for IEnumerable<T>.
 	public static partial class EnumerableExtensions
     {
         #region Aggregate Operators
 
-        public static Identity<TAccumulate> FoldBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
-        {
-            Require.Object(@this);
-
-            return @this.Reverse().Fold(seed, accumulatorM);
-        }
 
         public static Identity<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -473,15 +333,8 @@ namespace Narvalo.Edu.Samples {
             }
         }
 
-        public static Identity<TSource> ReduceBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Identity<TSource>> accumulatorM)
-        {
-            Require.Object(@this);
-
-            return @this.Reverse().Reduce(accumulatorM);
-        }
 
         #endregion
 	}
 }
+

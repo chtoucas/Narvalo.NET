@@ -12,6 +12,7 @@ namespace Narvalo.Edu.Fx {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Narvalo;
 	using Narvalo.Fx;
 
 	// Monad methods.
@@ -20,6 +21,7 @@ namespace Narvalo.Edu.Fx {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
         public static Monad<Unit> Unit { get { return Unit_; } }
+
 
         // [Haskell] return
         public static Monad<T> Return<T>(T value)
@@ -72,7 +74,6 @@ namespace Narvalo.Edu.Fx {
 
         #endregion
     }
-
 	// Prelude extensions for Monad<T>.
     public static partial class MonadExtensions
     {
@@ -94,6 +95,7 @@ namespace Narvalo.Edu.Fx {
 
         #region Generalisations of list functions (Prelude)
 
+
         // [Haskell] replicateM
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(this Monad<TSource> @this, int count)
         {
@@ -103,6 +105,7 @@ namespace Narvalo.Edu.Fx {
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
+
 
         // [Haskell] when
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
@@ -196,7 +199,6 @@ namespace Narvalo.Edu.Fx {
 
         #endregion
     }
-
 	// Non-standard extensions for Monad<T>.
     public static partial class MonadExtensions
     {
@@ -212,6 +214,7 @@ namespace Narvalo.Edu.Fx {
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+
         public static Monad<TSource> Run<TSource>(this Monad<TSource> @this, Action<TSource> action)
         {
             Require.Object(@this);
@@ -219,8 +222,8 @@ namespace Narvalo.Edu.Fx {
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
-	}
 
+	}
 	// Kleisli extensions for Func<T, Monad<TResult>>.
 	public static partial class FuncExtensions
     {
