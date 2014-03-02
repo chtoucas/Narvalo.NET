@@ -80,6 +80,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Collections\MaybeEx\Enumerable[Maybe]%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collections\MaybeEx\Enumerable`1%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Fx\Maybe.g.cs">
@@ -98,7 +104,6 @@
     </Compile>
     <Compile Include="Internal\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
-    <Compile Include="Collections\Enumerable[Maybe]%24.cs" />
     <Compile Include="Collections\OutputEx\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
       <AutoGen>True</AutoGen>

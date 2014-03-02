@@ -273,13 +273,29 @@ namespace <#= LinqNamespace #> {
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
+    using <#= LinqNamespace #>.Interrnal;
 
-<#+ NewLine_(); #>
 <#+ EmitEnumerableMonadExtensions(); #>
 <#+ NewLine_(); #>
 <#+ EmitEnumerableExtensions(); #>
 <#+ NewLine_(); #>
 <#+ EmitUnsafeEnumerableExtensions(); #>
+}
+
+namespace <#= LinqNamespace #>.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+<#+ if (Namespace != "Narvalo.Fx") { #>
+    using <#= Namespace #>;
+<#+ } #>
+
+<#+ NewLine_(); #>
+<#+ EmitEnumerableMonadInternalExtensions(); #>
+<#+ NewLine_(); #>
+<#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+
     }
@@ -915,15 +931,7 @@ namespace <#= LinqNamespace #> {
         {
 <#+ ObjectNotNull_(); #>
 
-            var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
-            Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list =>
-                    {
-                        return n.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
-                    });
-
-            return @this.Aggregate(seed, fun);
+            return @this.CollectCore();
         }
 <#+ } #>
         
@@ -942,6 +950,35 @@ namespace <#= LinqNamespace #> {
         }
 
         #endregion
+<#+ } #>
+    }
+<#+
+    }
+
+    // EmitEnumerableMonadInternalExtensions -------------------------------------------
+
+    protected void EmitEnumerableMonadInternalExtensions()
+    {
+#>
+    // Internal extensions for IEnumerable<<#= Name #><T>>.
+    static partial class Enumerable<#= Name #>Extensions
+    {
+<#+ if (!RequireStruct) { #>
+        public static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+<#+ StructConstraint_("TSource"); #>
+        {
+<#+ ObjectNotNull_(); #>
+
+            var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
+            Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
+                = (m, n) =>
+                    m.Bind(list =>
+                    {
+                        return n.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
+                    });
+
+            return @this.Aggregate(seed, fun);
+        }
 <#+ } #>
     }
 <#+
@@ -984,23 +1021,8 @@ namespace <#= LinqNamespace #> {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
-            Require.NotNull(predicateM, "predicateM");
 
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
-
-            foreach (var item in @this) {
-                predicateM.Invoke(item)
-                    .Run(_ =>
-                    {
-                        if (_ == true) {
-                            list.Add(item);
-                        }
-                    });
-            }
-
-            // REVIEW: Why do we create a Monad here?
-            return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
+            return @this.FilterCore(predicateM);
         }
 
 <#+ if (Full) { #>
@@ -1118,6 +1140,45 @@ namespace <#= LinqNamespace #> {
 <#+ } #>
 
         #endregion
+    }
+<#+
+    }
+    
+    // EmitEnumerableInternalExtensions ------------------------------------------------
+
+    protected void EmitEnumerableInternalExtensions()
+    {
+#>
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+<#+ if (!RequireStruct) { #>
+        // [Haskell] filterM
+        public static <#= Name #><IEnumerable<TSource>> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><bool>> predicateM)
+<#+ StructConstraint_("TSource"); #>
+        {
+<#+ ObjectNotNull_(); #>
+            Require.NotNull(predicateM, "predicateM");
+
+            // NB: Haskell uses tail recursion, we don't.
+            var list = new List<TSource>();
+
+            foreach (var item in @this) {
+                predicateM.Invoke(item)
+                    .Run(_ =>
+                    {
+                        if (_ == true) {
+                            list.Add(item);
+                        }
+                    });
+            }
+
+            // REVIEW: Why do we create a Monad here?
+            return <#= Name #>.<#= ReturnName #>(list.AsEnumerable());
+        }
+<#+ } #>
     }
 <#+
     }

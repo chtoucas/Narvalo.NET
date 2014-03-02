@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Collections;
+    using Narvalo.Collections.MaybeEx;
 
     class BenchmarkFinder
     {
@@ -34,7 +34,7 @@
         {
             Require.NotNull(type, "type");
 
-            return type.GetMethods(_bindings).ConvertAny(BenchmarkFactory.MayCreate);
+            return type.GetMethods(_bindings).MapAny(BenchmarkFactory.MayCreate);
         }
     }
 }

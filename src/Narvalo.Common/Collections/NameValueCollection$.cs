@@ -7,6 +7,7 @@ namespace Narvalo.Collections
     using System.Collections.Specialized;
     using System.Linq;
     using Narvalo;
+    using Narvalo.Collections.MaybeEx;
     using Narvalo.Fx;
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            return (from @_ in @this.MayGetValues(name) select @_.ConvertAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
+            return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }
 
         public static Maybe<IEnumerable<T>> MayParseAll<T>(

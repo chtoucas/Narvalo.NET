@@ -13,6 +13,7 @@ namespace Narvalo.Collections.MaybeEx {
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
+    using Narvalo.Collections.MaybeEx.Interrnal;
 
     // Extensions for IEnumerable<Maybe<T>>.
     public static partial class EnumerableMaybeExtensions
@@ -24,15 +25,7 @@ namespace Narvalo.Collections.MaybeEx {
         {
             Require.Object(@this);
 
-            var seed = Maybe.Create(Enumerable.Empty<TSource>());
-            Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list =>
-                    {
-                        return n.Bind(item => Maybe.Create(list.Concat(Enumerable.Repeat(item, 1))));
-                    });
-
-            return @this.Aggregate(seed, fun);
+            return @this.CollectCore();
         }
         
         #endregion
@@ -76,23 +69,8 @@ namespace Narvalo.Collections.MaybeEx {
             Func<TSource, Maybe<bool>> predicateM)
         {
             Require.Object(@this);
-            Require.NotNull(predicateM, "predicateM");
 
-            // NB: Haskell uses tail recursion, we don't.
-            var list = new List<TSource>();
-
-            foreach (var item in @this) {
-                predicateM.Invoke(item)
-                    .Run(_ =>
-                    {
-                        if (_ == true) {
-                            list.Add(item);
-                        }
-                    });
-            }
-
-            // REVIEW: Why do we create a Monad here?
-            return Maybe.Create(list.AsEnumerable());
+            return @this.FilterCore(predicateM);
         }
 
         // [Haskell] mapAndUnzipM
@@ -259,5 +237,61 @@ namespace Narvalo.Collections.MaybeEx {
         }
 
         #endregion
+    }
+}
+
+namespace Narvalo.Collections.MaybeEx.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+
+    // Internal extensions for IEnumerable<Maybe<T>>.
+    static partial class EnumerableMaybeExtensions
+    {
+        public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        {
+            Require.Object(@this);
+
+            var seed = Maybe.Create(Enumerable.Empty<TSource>());
+            Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
+                = (m, n) =>
+                    m.Bind(list =>
+                    {
+                        return n.Bind(item => Maybe.Create(list.Concat(Enumerable.Repeat(item, 1))));
+                    });
+
+            return @this.Aggregate(seed, fun);
+        }
+    }
+
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+        // [Haskell] filterM
+        public static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<bool>> predicateM)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicateM, "predicateM");
+
+            // NB: Haskell uses tail recursion, we don't.
+            var list = new List<TSource>();
+
+            foreach (var item in @this) {
+                predicateM.Invoke(item)
+                    .Run(_ =>
+                    {
+                        if (_ == true) {
+                            list.Add(item);
+                        }
+                    });
+            }
+
+            // REVIEW: Why do we create a Monad here?
+            return Maybe.Create(list.AsEnumerable());
+        }
     }
 }

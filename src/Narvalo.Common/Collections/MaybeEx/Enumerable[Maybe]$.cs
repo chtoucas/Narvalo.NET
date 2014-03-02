@@ -1,16 +1,14 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Collections.MaybeEx
 {
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Fx;
 
-    // REVIEW
     public static partial class EnumerableExtensions
     {
-        public static Maybe<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
+        public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);
 

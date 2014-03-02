@@ -2,11 +2,9 @@
 
 namespace Narvalo.Collections
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Narvalo.Fx;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
@@ -48,47 +46,6 @@ namespace Narvalo.Collections
             return Enumerable.Repeat(element, 1).Concat(@this);
             //return PrependCore_(@this, element);
         }
-
-        #region Maybe extensions
-
-        // REVIEW: Signature?
-        public static IEnumerable<TSource> Filter<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicateM, "predicateM");
-
-            return from item in @this
-                   where predicateM.Invoke(item).ValueOrElse(false)
-                   select item;
-        }
-
-        // REVIEW: MayConvertAll?
-        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> converterM)
-        {
-            Require.Object(@this);
-            Require.NotNull(converterM, "converterM");
-
-            return (from value in @this select converterM.Invoke(value)).Collect();
-        }
-
-        public static IEnumerable<TResult> ConvertAny<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> converterM)
-        {
-            Require.Object(@this);
-            Require.NotNull(converterM, "converterM");
-
-            return from item in @this
-                   let m = converterM.Invoke(item)
-                   where m.IsSome
-                   select m.Value;
-        }
-
-        #endregion
 
         ////static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
         ////{
