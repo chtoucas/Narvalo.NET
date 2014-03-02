@@ -59,7 +59,7 @@ namespace Narvalo.Fx
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
-            return ToNullable(@this).OnNull(() => { exceptionFactory.Invoke(); }).Value;
+            return @this.ValueOrDefault().OnNull(() => { throw exceptionFactory.Invoke(); }).Value;
         }
 
         #endregion

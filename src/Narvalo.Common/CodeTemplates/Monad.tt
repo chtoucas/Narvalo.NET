@@ -1086,7 +1086,7 @@ namespace <#= LinqNamespace #>.Internal {
         #endregion
         
         #region Aggregate Operators
-
+        
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1120,6 +1120,27 @@ namespace <#= LinqNamespace #>.Internal {
         }
 
         #endregion
+
+<#+ if (HasZero) { #>
+        #region Catamorphism
+
+        // General form of catamorphism.
+        // REVIEW: Signature.
+        public static <#= Name #><TAccumulate> Collapse<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<TAccumulate, <#= Name #><bool>> predicateM)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TAccumulate"); #>
+        {
+ <#+ ObjectNotNull_(); #>
+
+            return @this.CollapseCore(seed, accumulatorM, predicateM);
+        }
+
+        #endregion
+<#+ } #>
     }
 <#+
     }
@@ -1261,6 +1282,34 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return @this.Reverse().Reduce(accumulatorM);
         }
+
+<#+ if (HasZero) { #>
+        public static <#= Name #><TAccumulate> CollapseCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<TAccumulate, <#= Name #><bool>> predicateM)
+<#+ StructConstraint_("TSource"); #>
+<#+ StructConstraint_("TAccumulate"); #>
+        {
+            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(predicateM, "predicateM");
+
+            throw new NotImplementedException();
+
+            /*
+            <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
+
+            using (var iter = @this.GetEnumerator()) {
+                while (predicateM.Invoke(result) && iter.MoveNext()) {
+                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+            }
+
+            return result;
+            */
+        }
+<#+ } #>
     }
 <#+
     }

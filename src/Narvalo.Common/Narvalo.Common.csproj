@@ -80,6 +80,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Collections\Enumerable[Output]%24.cs" />
     <Compile Include="Collections\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
@@ -89,6 +90,8 @@
     <Compile Include="Collections\Enumerable[Maybe]%24.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Fx\Identity.g.cs">
@@ -102,12 +105,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\Nullable`1%24.cs" />
+    <Compile Include="Fx\Nullable`1%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Internal\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Collections\Output.g.cs">

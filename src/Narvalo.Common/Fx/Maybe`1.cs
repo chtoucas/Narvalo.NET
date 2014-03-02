@@ -160,18 +160,18 @@ namespace Narvalo.Fx
         /// <summary>
         /// Returns true if the object does not have an underlying value, false otherwise.
         /// </summary>
-        public bool IsNone { get { return !_isSome; } }
+        internal bool IsNone { get { return !_isSome; } }
 
         /// <summary>
         /// Returns true if the object contains a value, false otherwise.
         /// </summary>
-        public bool IsSome { get { return _isSome; } }
+        internal bool IsSome { get { return _isSome; } }
 
         /// <summary>
         /// Returns the underlying value.
         /// </summary>
         /// <exception cref="System.InvalidOperationException">The object does not contain any value.</exception>
-        public T Value
+        internal T Value
         {
             get
             {
@@ -436,7 +436,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Monad optimized methods.
+    // Monad optimized extensions.
     public partial class Maybe<T>
     {
         #region Basic Monad functions

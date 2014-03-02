@@ -13,27 +13,16 @@ namespace Narvalo.Collections
     /// </summary>
     public static partial class EnumerableExtensions
     {
-        public static ICollection<T> ToCollection<T>(this IEnumerable<T> @this)
-        {
-            Require.Object(@this);
-
-            var result = new Collection<T>();
-
-            foreach (T item in @this) {
-                result.Add(item);
-            }
-
-            return result;
-        }
-
-        public static bool IsEmpty<T>(this IEnumerable<T> @this)
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
             Require.Object(@this);
 
             return !@this.Any();
         }
 
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> @this, T element)
+        #region Concatenation Operators
+
+        public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Require.Object(@this);
 
@@ -41,13 +30,57 @@ namespace Narvalo.Collections
             return @this.Concat(Enumerable.Repeat(element, 1));
         }
 
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> @this, T element)
+        public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Require.Object(@this);
 
             // return PrependCore_(@this, element);
             return Enumerable.Repeat(element, 1).Concat(@this);
         }
+
+        #endregion
+
+        #region Conversion Operators
+
+        public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
+        {
+            Require.Object(@this);
+
+            var result = new Collection<TSource>();
+
+            foreach (TSource item in @this) {
+                result.Add(item);
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region Catamorphism
+
+        public static TResult Collapse<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            TResult seed,
+            Func<TResult, TSource, TResult> accumulator,
+            Func<TResult, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(accumulator, "accumulator");
+            Require.NotNull(predicate, "predicate");
+
+            TResult result = seed;
+
+            using (var iter = @this.GetEnumerator()) {
+                while (predicate.Invoke(result) && iter.MoveNext()) {
+                    result = accumulator.Invoke(result, iter.Current);
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
 
         ////static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
         ////{

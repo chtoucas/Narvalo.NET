@@ -5,19 +5,19 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    /*!
+     * What's not to be found here:
+     * - Return is simply casting: (T?)value
+     * - Nullable does not support the Join operation; there is no Nullable<Nullable<T>>
+     * - Zero is null
+     */
+
     /// <summary>
     /// Provides extension methods for <see cref="System.Nullable{T}"/>.
     /// </summary>
     public static partial class NullableExtensions
     {
         #region Monad
-
-        /*!
-         * What's not to be found here:
-         * - Return is simply casting: (T?)value
-         * - Nullable does not support the Join operation; there is no Nullable<Nullable<T>>
-         * - Zero is null
-         */
 
         public static TResult? Bind<TSource, TResult>(this TSource? @this, Func<TSource, TResult?> selector)
             where TSource : struct
@@ -27,6 +27,10 @@ namespace Narvalo.Fx
 
             return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
+
+        #endregion
+
+        #region Basic Monad functions
 
         public static TResult? Select<TSource, TResult>(this TSource? @this, Func<TSource, TResult> selector)
             where TSource : struct

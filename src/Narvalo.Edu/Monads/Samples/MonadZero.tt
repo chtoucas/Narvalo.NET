@@ -1,10 +1,5 @@
-﻿<#@ include file="..\..\Narvalo.Common\CodeTemplates\Monad.tt" #>
-<# 
-    InitializeOr();
-
-    RequireStruct = true;
-    IsNullable = false;
-#>
+﻿<#@ include file="..\..\..\Narvalo.Common\CodeTemplates\Monad.tt" #>
+<# InitializeZero(); #>
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 <# EmitMonad(); #>

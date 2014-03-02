@@ -75,6 +75,7 @@
     <Compile Include="Fx\Either`2.Monad.cs">
       <DependentUpon>Either`2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fx\Fun.cs" />
     <Compile Include="Fx\Func`%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

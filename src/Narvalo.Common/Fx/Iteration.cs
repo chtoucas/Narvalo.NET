@@ -1,9 +1,8 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Samples
+namespace Narvalo.Fx
 {
     using System;
-    using Narvalo.Fx;
 
     public static class Iteration
     {

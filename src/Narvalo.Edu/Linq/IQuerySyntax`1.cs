@@ -38,5 +38,4 @@ namespace Narvalo.Edu.Linq
             Func<T, TKey> keySelector,
             Func<T, TElement> elementSelector);
     }
-
 }

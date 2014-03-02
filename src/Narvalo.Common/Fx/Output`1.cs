@@ -24,11 +24,11 @@ namespace Narvalo.Fx
             _value = value;
         }
 
-        public bool IsFailure { get { return !_isSuccess; } }
+        internal bool IsFailure { get { return !_isSuccess; } }
 
-        public bool IsSuccess { get { return _isSuccess; } }
+        internal bool IsSuccess { get { return _isSuccess; } }
 
-        public ExceptionDispatchInfo ExceptionInfo
+        internal ExceptionDispatchInfo ExceptionInfo
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public T Value
+        internal T Value
         {
             get
             {
@@ -145,7 +145,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Monad optimized methods.
+    // Monad optimized extensions.
     public partial class Output<T>
     {
         #region Basic Monad functions

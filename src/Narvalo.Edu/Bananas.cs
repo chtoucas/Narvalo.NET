@@ -1,38 +1,22 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Collections.Recursion
+namespace Narvalo.Edu
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Narvalo.Edu.Samples;
+    using Narvalo.Collections;
+    using Narvalo.Edu.Monads;
 
     public static class Bananas
     {
-        public static TResult Cata<TSource, TResult>(
+        public static Monad<TAccumulate> Collapse<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
-            TResult seed,
-            Func<TResult, TSource, TResult> accumulator,
-            Func<TResult, bool> predicate)
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
+            Func<Monad<TAccumulate>, bool> predicate)
         {
-            TResult result = seed;
-
-            using (var iter = @this.GetEnumerator()) {
-                while (predicate.Invoke(result) && iter.MoveNext()) {
-                    result = accumulator.Invoke(result, iter.Current);
-                }
-            }
-
-            return result;
-        }
-
-        public static Monad<TResult> CataM<TSource, TResult>(
-            this IEnumerable<TSource> @this,
-            TResult seed,
-            Func<TResult, TSource, Monad<TResult>> accumulatorM,
-            Func<Monad<TResult>, bool> predicate)
-        {
-            Monad<TResult> result = Monad.Return(seed);
+            Monad<TAccumulate> result = Monad.Return(seed);
 
             using (var iter = @this.GetEnumerator()) {
                 while (predicate.Invoke(result) && iter.MoveNext()) {
@@ -47,12 +31,12 @@ namespace Narvalo.Edu.Collections.Recursion
 
         public static bool Any<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return Cata(@this, true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
+            return @this.Collapse(true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
         }
 
         public static bool All<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return Cata(@this, true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
+            return @this.Collapse(true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
         }
 
         public static bool Contains<T>(this IEnumerable<T> @this, T value)
@@ -95,7 +79,7 @@ namespace Narvalo.Edu.Collections.Recursion
             TResult seed,
             Func<TResult, T, TResult> accumulator)
         {
-            return Cata(@this, seed, accumulator, _ => true);
+            return @this.Collapse(seed, accumulator, _ => true);
         }
 
         public static Monad<TResult> AggregateM<T, TResult>(
@@ -103,7 +87,7 @@ namespace Narvalo.Edu.Collections.Recursion
             TResult seed,
             Func<TResult, T, Monad<TResult>> accumulatorM)
         {
-            return CataM(@this, seed, accumulatorM, _ => true);
+            return @this.Collapse(seed, accumulatorM, _ => true);
         }
 
         #endregion
