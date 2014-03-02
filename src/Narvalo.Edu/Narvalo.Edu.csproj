@@ -65,64 +65,64 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Monads\Comonad.g.cs">
+    <Compile Include="Samples\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\Internal\Action`%24.cs">
+    <Compile Include="Monads\Action`%24.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Cokunc`.cs" />
-    <Compile Include="Monads\Internal\Comonad`1.cs">
+    <Compile Include="Monads\Cokunc`.cs" />
+    <Compile Include="Monads\Comonad`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Kunc`%24.cs">
+    <Compile Include="Monads\Kunc`%24.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Kunc`.cs" />
-    <Compile Include="Monads\Internal\Monad.cs" />
-    <Compile Include="Monads\Internal\Monad`1.cs">
+    <Compile Include="Monads\Kunc`.cs" />
+    <Compile Include="Monads\Monad.cs" />
+    <Compile Include="Monads\Monad`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Rules.cs">
+    <Compile Include="Monads\Rules.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Stubs.cs">
+    <Compile Include="Monads\Stubs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Internal\Stubs`1.cs">
+    <Compile Include="Monads\Stubs`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\MonadValue`1.cs" />
-    <Compile Include="Monads\MonadValue.g.cs">
+    <Compile Include="Samples\MonadValue`1.cs" />
+    <Compile Include="Samples\MonadValue.g.cs">
       <DependentUpon>MonadValue.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\MonadZero.g.cs">
+    <Compile Include="Samples\MonadZero.g.cs">
       <DependentUpon>MonadZero.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\MonadPlus.g.cs">
+    <Compile Include="Samples\MonadPlus.g.cs">
       <DependentUpon>MonadPlus.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\MonadOr.g.cs">
+    <Compile Include="Samples\MonadOr.g.cs">
       <DependentUpon>MonadOr.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\Monad.g.cs">
+    <Compile Include="Samples\Monad.g.cs">
       <DependentUpon>Monad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Monads\MonadOr`1.cs" />
-    <Compile Include="Monads\MonadPlus`1.cs" />
-    <Compile Include="Monads\MonadZero`1.cs" />
+    <Compile Include="Samples\MonadOr`1.cs" />
+    <Compile Include="Samples\MonadPlus`1.cs" />
+    <Compile Include="Samples\MonadZero`1.cs" />
     <Compile Include="Samples\Iteration.cs" />
     <Compile Include="Samples\Iteration`2.cs" />
     <Compile Include="Collections\Recursion\YCombinator.cs" />
@@ -134,32 +134,17 @@
     <Compile Include="Samples\Fibonacci.cs" />
     <Compile Include="Samples\Fun.cs" />
     <Compile Include="Samples\Func`%24.cs" />
-    <Compile Include="Samples\Identity`1.Comonad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\Identity`1.cs" />
-    <Compile Include="Samples\Identity`1.IEquatable.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\Identity`1.Monad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
     <Compile Include="Linq\IQuerySyntax.cs" />
     <Compile Include="Linq\IQuerySyntax`1.cs" />
     <Compile Include="Linq\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Monads\Comonad`1.cs" />
-    <Compile Include="Monads\Monad`1.cs" />
-    <Compile Include="Monads\Internal\Monoid`1.cs" />
+    <Compile Include="Samples\Comonad`1.cs" />
+    <Compile Include="Samples\Monad`1.cs" />
+    <Compile Include="Monads\Monoid`1.cs" />
     <Compile Include="Monads\NamespaceDoc.cs" />
     <Compile Include="Samples\Anamorphism.cs" />
-    <Compile Include="Samples\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="SR.Designer.cs">
       <DependentUpon>SR.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -175,33 +160,29 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="Monads\Comonad.tt">
+    <None Include="Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
     </None>
-    <None Include="Monads\MonadValue.tt">
+    <None Include="Samples\MonadValue.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadValue.g.cs</LastGenOutput>
     </None>
-    <None Include="Monads\MonadZero.tt">
+    <None Include="Samples\MonadZero.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </None>
-    <None Include="Monads\MonadPlus.tt">
+    <None Include="Samples\MonadPlus.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
     </None>
-    <None Include="Monads\MonadOr.tt">
+    <None Include="Samples\MonadOr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadOr.g.cs</LastGenOutput>
     </None>
-    <None Include="Monads\Monad.tt">
+    <None Include="Samples\Monad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Monad.g.cs</LastGenOutput>
-    </None>
-    <None Include="Samples\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

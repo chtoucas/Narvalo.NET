@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Collections.Recursion
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Narvalo.Edu.Monads;
+    using Narvalo.Edu.Samples;
 
     public static class Bananas
     {

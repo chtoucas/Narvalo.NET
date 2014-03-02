@@ -107,7 +107,11 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Linq\" />
+    <Folder Include="CodeTemplates\" />
+    <Folder Include="Collections\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />

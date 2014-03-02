@@ -1,7 +1,5 @@
-﻿<#@ include file="..\..\Narvalo.Common\CodeTemplates\Monad.tt" #>
-<# Full = false; #>
+﻿<#@ include file="..\..\CodeTemplates\Monad.tt" #>
+<# Namespace = "Narvalo.Fx"; #>
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-<# EmitMonad(); #>
-<# EmitComonad(); #>
 <# EmitLinq(); #>
