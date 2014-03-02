@@ -3,7 +3,6 @@
     using System;
     using System.Reflection;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     static class BenchmarkFactory
     {

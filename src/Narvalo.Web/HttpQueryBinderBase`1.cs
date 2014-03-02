@@ -5,8 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web;
+    using Narvalo.Collections;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     public abstract class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
     {

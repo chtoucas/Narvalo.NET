@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Globalization;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     static class BenchComparisonFactory
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Linq.OutputEx {
+namespace Narvalo.Collections.OutputEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;

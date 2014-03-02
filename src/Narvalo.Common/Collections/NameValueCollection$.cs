@@ -8,7 +8,6 @@ namespace Narvalo.Collections
     using System.Linq;
     using Narvalo;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Collections.Specialized.NameValueCollection"/>.

@@ -9,7 +9,6 @@
     using System.Web;
     using Narvalo;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     public struct FacebookCookie
     {

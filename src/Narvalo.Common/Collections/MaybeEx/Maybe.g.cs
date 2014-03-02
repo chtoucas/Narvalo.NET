@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Linq.MaybeEx {
+namespace Narvalo.Collections.MaybeEx {
     using System;
     using System.Collections.Generic;
     using System.Linq;

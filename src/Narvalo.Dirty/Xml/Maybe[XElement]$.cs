@@ -5,7 +5,6 @@ namespace Narvalo.Xml
     using System;
     using System.Xml.Linq;
     using Narvalo.Fx;
-    using Narvalo.Linq;
 
     /// <summary>
     /// Provides extension methods for Maybe&lt;XElement&gt;.
