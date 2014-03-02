@@ -17,31 +17,6 @@ namespace Narvalo.Fx
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
-        internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
-        {
-            Require.NotNull(exceptionInfo, "exceptionInfo");
-
-            return new Output<T>(exceptionInfo);
-        }
-
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
-        internal static Output<T> η(T value)
-        {
-            return new Output<T>(value);
-        }
-
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
-        internal static Output<T> μ(Output<Output<T>> square)
-        {
-            Require.NotNull(square, "square");
-
-            return square.IsSuccess ? square.Value : η(square.ExceptionInfo);
-        }
-
         #endregion
 
         #region Basic Monad functions
@@ -90,5 +65,34 @@ namespace Narvalo.Fx
 
             return this;
         }
+
+        #region Monad
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
+        internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
+        {
+            Require.NotNull(exceptionInfo, "exceptionInfo");
+
+            return new Output<T>(exceptionInfo);
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
+        internal static Output<T> η(T value)
+        {
+            return new Output<T>(value);
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
+        internal static Output<T> μ(Output<Output<T>> square)
+        {
+            Require.NotNull(square, "square");
+
+            return square.IsSuccess ? square.Value : η(square.ExceptionInfo);
+        }
+
+        #endregion
     }
 }

@@ -86,6 +86,9 @@ namespace Narvalo.Fx {
         // [Haskell] fmap
         public static Maybe<TResult> Select<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
         {
+            Require.Object(@this);
+            Require.NotNull(selector, "selector");
+
             return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
         }
 
@@ -93,6 +96,8 @@ namespace Narvalo.Fx {
         public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
         
         {
+            Require.Object(@this);
+
             return @this.Bind(_ => other);
         }
         

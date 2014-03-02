@@ -444,6 +444,9 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ ObjectNotNull_(); #>
+<#+ NotNull_("selector"); #>
+
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
@@ -452,6 +455,8 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>        
         {
+<#+ ObjectNotNull_(); #>
+
             return @this.Bind(_ => other);
         }
         

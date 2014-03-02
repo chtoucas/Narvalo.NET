@@ -35,27 +35,11 @@ namespace Narvalo.Fx
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
-        internal static Maybe<T> η(T value)
-        {
-            return value != null ? new Maybe<T>(value) : Maybe<T>.None;
-        }
-
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
-        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
-        {
-            Require.NotNull(square, "square");
-
-            return square.IsSome ? square.Value : Maybe<T>.None;
-        }
-
         #endregion
 
         #region Basic Monad functions
 
-        public Maybe<TResult> Map<TResult>(Func<T, TResult> selector)
+        public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
 
@@ -166,5 +150,25 @@ namespace Narvalo.Fx
         {
             return Run(action);
         }
+
+        #region Monad (Internal)
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
+        internal static Maybe<T> η(T value)
+        {
+            return value != null ? new Maybe<T>(value) : Maybe<T>.None;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
+        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
+        {
+            Require.NotNull(square, "square");
+
+            return square.IsSome ? square.Value : Maybe<T>.None;
+        }
+
+        #endregion
     }
 }

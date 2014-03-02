@@ -764,8 +764,11 @@ namespace Narvalo.Fx
                 Func<int, int> selector = _ => _;
 
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-                Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
+                // NB: Apply only if Select is provided by an extension method.
+                //Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+                //Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
+                Assert.Throws<NullReferenceException>(() => source.Select(selector));
+                Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
             }
 
             [Fact]
