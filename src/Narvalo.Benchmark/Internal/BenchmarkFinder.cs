@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Collections.MaybeEx;
+    using Narvalo.Collections;
 
     class BenchmarkFinder
     {

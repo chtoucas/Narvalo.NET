@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Monads
     using System;
     using Narvalo.Fx;
 
-    static partial class KuncExtensions
+    public static partial class KuncExtensions
     {
         // [Haskell] =<<
         public static Monad<TResult> Invoke<TSource, TResult>(

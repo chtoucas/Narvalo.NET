@@ -12,7 +12,6 @@ namespace Narvalo.Edu.Monads
      * -----------------
      * The classes found here exist for the sole purpose of demonstration.
      * It is NOT meant to be a generic monad implementation, anyway this is not possible in C#.
-     * I did this as a learning exercise, but I might use this work as a base for writing T4 templates.
      *
      * 
      * Compiler switches

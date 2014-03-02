@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Monads
 {
     using Narvalo.Fx;
 
-    static partial class Monad
+    public static partial class Monad
     {
         static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 

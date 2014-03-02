@@ -80,15 +80,13 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Collections\IdentityEx\Identity.g.cs">
+    <Compile Include="Collections\Enumerable[Output]%24.cs" />
+    <Compile Include="Collections\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Collections\MaybeEx\Enumerable[Maybe]%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Collections\MaybeEx\Enumerable`1%24.cs">
+    <Compile Include="Collections\Enumerable[Maybe]%24.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ConvertTo.cs" />
@@ -98,23 +96,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\Identity`1.Comonad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="Fx\Identity`1.IEquatable.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fx\Identity`1.Monad.cs">
-      <DependentUpon>Identity`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Maybe`1.Monad.cs">
-      <DependentUpon>Maybe`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Fx\Output.g.cs">
@@ -124,12 +110,12 @@
     </Compile>
     <Compile Include="Internal\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
-    <Compile Include="Collections\OutputEx\Output.g.cs">
+    <Compile Include="Collections\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Collections\MaybeEx\Maybe.g.cs">
+    <Compile Include="Collections\Maybe.g.cs">
       <DependentUpon>Maybe.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,16 +128,9 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Maybe`1%24.cs" />
-    <Compile Include="Fx\Maybe`1.IEnumerable.cs">
-      <DependentUpon>Maybe`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Output.cs" />
     <Compile Include="Fx\Output`1.cs" />
-    <Compile Include="Fx\Output`1.Monad.cs">
-      <DependentUpon>Output`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="Make`1.cs" />
@@ -172,9 +151,6 @@
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
-    <Compile Include="Fx\Maybe`1.IEquatable.cs">
-      <DependentUpon>Maybe`1.cs</DependentUpon>
-    </Compile>
     <Compile Include="ParseTo.cs" />
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe`1.cs" />
@@ -210,7 +186,7 @@
     <None Include="CodeTemplates\Monad.Output.tt" />
     <None Include="CodeTemplates\Monad.Maybe.tt" />
     <None Include="CodeTemplates\Monad.tt" />
-    <None Include="Collections\IdentityEx\Identity.tt">
+    <None Include="Collections\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
@@ -226,11 +202,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
     </None>
-    <None Include="Collections\OutputEx\Output.tt">
+    <None Include="Collections\Output.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
     </None>
-    <None Include="Collections\MaybeEx\Maybe.tt">
+    <None Include="Collections\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </None>

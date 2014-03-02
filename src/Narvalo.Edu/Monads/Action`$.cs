@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Monads
     using System;
     using Narvalo.Fx;
 
-    static class ActionExtensions
+    public static class ActionExtensions
     {
         public static Kunc<Unit, Unit> ToKunc(this Action @this)
         {

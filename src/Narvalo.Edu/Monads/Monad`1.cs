@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Monads
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Monad<T>
+    public sealed class Monad<T>
     {
 #if !MONAD_DISABLE_ZERO
         // [Haskell] mzero

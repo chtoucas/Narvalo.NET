@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Monads
 {
     using System;
 
-    static class Rules
+    public static class Rules
     {
         #region Monoid Laws
 

@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Monads
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Monoid<T>
+    public sealed class Monoid<T>
     {
         // [Haskell] mempty
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]

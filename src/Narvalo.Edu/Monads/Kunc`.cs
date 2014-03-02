@@ -4,10 +4,10 @@ namespace Narvalo.Edu.Monads
 {
     using System.Diagnostics.CodeAnalysis;
 
-    delegate Monad<T> Kunc<T>();
+    public delegate Monad<T> Kunc<T>();
 
-    delegate Monad<TResult> Kunc<in T, TResult>(T arg);
+    public delegate Monad<TResult> Kunc<in T, TResult>(T arg);
 
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes")]
-    delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
+    public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
 }

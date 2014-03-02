@@ -7,7 +7,6 @@ namespace Narvalo.Collections
     using System.Collections.Specialized;
     using System.Linq;
     using Narvalo;
-    using Narvalo.Collections.MaybeEx;
     using Narvalo.Fx;
 
     /// <summary>

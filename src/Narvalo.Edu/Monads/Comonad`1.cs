@@ -5,7 +5,7 @@ namespace Narvalo.Edu.Monads
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    sealed class Comonad<T>
+    public sealed class Comonad<T>
     {
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cokun")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]

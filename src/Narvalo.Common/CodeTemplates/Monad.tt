@@ -1,4 +1,4 @@
-﻿<#@ template debug="true" hostspecific="true" language="C#" culture="en-US" #>
+﻿<#@ template debug="true" hostspecific="true" #>
 <#@ output extension=".g.cs" #><#+
 
     /* ====================================================================== *
@@ -7,19 +7,19 @@
 
     bool _initialized = false;
     bool _headerWritten = false;
+    
     string _name;
     string _namespace;
     string _linqNamespace;
-
-    bool _isNullable = true;
-    bool _requireStruct = false;
-    bool _hasZero = false;
-    string _zeroName;
+    
     bool _hasPlus = false;
+    bool _hasZero = false;
+    bool _isNullable = true;
     string _plusName;
-    string _returnName = "Return";
-    bool _full = true;
     bool _preferLinqDialect = true;
+    bool _requireStruct = false;
+    string _returnName = "Return";
+    string _zeroName;
 
     /* ====================================================================== *
      * Properties
@@ -52,10 +52,6 @@
         {
             if (_linqNamespace == null) {
                 _linqNamespace = InferNamespace_();
-
-                if (_linqNamespace == Namespace) {
-                    _linqNamespace = Namespace + "." + Name + "Ex";
-                }
             }
 
             return _linqNamespace;
@@ -140,8 +136,6 @@
             _plusName = value;
         } 
     }
-
-    protected bool Full { get { return _full; } set { _full = value; } }
 
     protected bool PreferLinqDialect { get { return _preferLinqDialect; } set { _preferLinqDialect = value; } }
 
@@ -273,16 +267,14 @@ namespace <#= LinqNamespace #> {
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
-    using <#= LinqNamespace #>.Interrnal;
+    using <#= LinqNamespace #>.Internal;
 
 <#+ EmitEnumerableMonadExtensions(); #>
 <#+ NewLine_(); #>
 <#+ EmitEnumerableExtensions(); #>
-<#+ NewLine_(); #>
-<#+ EmitUnsafeEnumerableExtensions(); #>
 }
 
-namespace <#= LinqNamespace #>.Interrnal {
+namespace <#= LinqNamespace #>.Internal {
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -296,8 +288,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ EmitEnumerableMonadInternalExtensions(); #>
 <#+ NewLine_(); #>
 <#+ EmitEnumerableInternalExtensions(); #>
-<#+ NewLine_(); #>
-<#+ EmitUnsafeEnumerableInternalExtensions(); #>
 }
 <#+
     }
@@ -344,14 +334,17 @@ namespace <#= LinqNamespace #>.Interrnal {
 
         #endregion
 
-<#+ if (Full) { #>
         #region Monadic lifting operators
 
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(Func<T, TResult> fun)
 <#+ StructConstraint_("T"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return m => m.<#= MapName #>(fun);
+            return m =>
+            {
+<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m"); PopIndent(); }  #>
+                return m.<#= MapName #>(fun);
+            };
         }
 
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
@@ -360,7 +353,11 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("T2"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2) => m1.Zip(m2, fun);
+            return (m1, m2) => 
+            {
+<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, fun);
+            };
         }
 
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
@@ -370,7 +367,11 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("T3"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3) => m1.Zip(m2, m3, fun);
+            return (m1, m2, m3) =>
+            {
+<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, fun);
+            };
         }
 
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
@@ -382,7 +383,11 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("T4"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3, m4) => m1.Zip(m2, m3, m4, fun);
+            return (m1, m2, m3, m4) =>
+            {
+<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, m4, fun);
+            };
         }
 
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
@@ -395,11 +400,14 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ StructConstraint_("T5"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3, m4, m5) => m1.Zip(m2, m3, m4, m5, fun);
+            return (m1, m2, m3, m4, m5) =>
+            {
+<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, m4, m5, fun);
+            };
         }
 
         #endregion
-<#+ } #>
     }
 <#+
     }
@@ -435,7 +443,7 @@ namespace <#= LinqNamespace #>.Interrnal {
     {
 #>
     // Extensions for <#= Name #><T>.
-    public static partial class <#= Name #>Extensions
+    public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
 
@@ -453,7 +461,7 @@ namespace <#= LinqNamespace #>.Interrnal {
         // [Haskell] >>
         public static <#= Name #><TResult> Then<TSource, TResult>(this <#= Name #><TSource> @this, <#= Name #><TResult> other)
 <#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>        
+<#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
 
@@ -477,6 +485,7 @@ namespace <#= LinqNamespace #>.Interrnal {
 <#+ } #>
 
 <#+ if (!RequireStruct) { #>
+
         // [Haskell] replicateM
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(this <#= Name #><TSource> @this, int count)
 <#+ StructConstraint_("TSource"); #>
@@ -487,7 +496,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         
         #endregion
 
-<#+ if (Full) { #>
         #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
@@ -522,7 +530,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         }
 
         #endregion
-<#+ } #>
 
         #region Monadic lifting operators (Prelude)
 
@@ -542,7 +549,6 @@ namespace <#= LinqNamespace #>.Interrnal {
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-<#+ if (Full) { #>
         // [Haskell] liftM3
         public static <#= Name #><TResult> Zip<T1, T2, T3, TResult>(
             this <#= Name #><T1> @this,
@@ -611,7 +617,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 
             return @this.Bind(g);
         }
-<#+ } #>
 
         #endregion
 
@@ -880,11 +885,11 @@ namespace <#= LinqNamespace #>.Interrnal {
         // [Haskell] =<<
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
-            <#= Name #><TSource> monad)
+            <#= Name #><TSource> value)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return monad.Bind(@this);
+            return value.Bind(@this);
         }
 
         // [Haskell] >=>
@@ -900,7 +905,6 @@ namespace <#= LinqNamespace #>.Interrnal {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-<#+ if (Full) { #>
         // [Haskell] <=<
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
@@ -914,7 +918,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 
             return _ => funM.Invoke(_).Bind(@this);
         }
-<#+ } #>
 
         #endregion
     }
@@ -1039,7 +1042,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         }
 
 <#+ if (!RequireStruct) { #>
-<#+ if (Full) { #>
         // [Haskell] mapAndUnzipM
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
@@ -1052,7 +1054,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 
             return @this.MapAndUnzipCore(funM);
         }
-<#+ } #>
 
         // [Haskell] zipWithM
         public static <#= Name #><IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
@@ -1086,7 +1087,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         
         #region Aggregate Operators
 
-<#+ if (Full) { #>
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1098,7 +1098,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
-<#+ } #>
 
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -1110,7 +1109,6 @@ namespace <#= LinqNamespace #>.Interrnal {
             return @this.ReduceCore(accumulatorM);
         }
 
-<#+ if (Full) { #>
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
@@ -1120,7 +1118,6 @@ namespace <#= LinqNamespace #>.Interrnal {
 
             return @this.ReduceBackCore(accumulatorM);
         }
-<#+ } #>
 
         #endregion
     }
@@ -1172,7 +1169,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         }
 
 <#+ if (!RequireStruct) { #>
-<#+ if (Full) { #>
         public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
@@ -1188,7 +1184,6 @@ namespace <#= LinqNamespace #>.Interrnal {
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
         }
-<#+ } #>
 
         public static <#= Name #><IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
@@ -1227,7 +1222,6 @@ namespace <#= LinqNamespace #>.Interrnal {
             return result;
         }
 
-<#+ if (Full) { #>
         public static <#= Name #><TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1237,7 +1231,6 @@ namespace <#= LinqNamespace #>.Interrnal {
         {
             return @this.Reverse().Fold(seed, accumulatorM);
         }
-<#+ } #>
 
         public static <#= Name #><TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -1261,133 +1254,12 @@ namespace <#= LinqNamespace #>.Interrnal {
             }
         }
 
-<#+ if (Full) { #>
         public static <#= Name #><TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
             return @this.Reverse().Reduce(accumulatorM);
-        }
-<#+ } #>
-    }
-<#+
-    }
-
-    // EmitUnsafeEnumerableExtensions ------------------------------------------
-
-    protected void EmitUnsafeEnumerableExtensions()
-    {
-        if (!HasZero) { 
-            return;
-        }
-#>
-    // Possibly conflicting extensions for IEnumerable<T>.
-    public static partial class UnsafeEnumerableExtensions
-    {
-        #region Element Operators
-
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
-<#+ StructConstraint_("TSource"); #>
-        {
-            return @this.FirstOr<#= ZeroName #>Core(_ => true);
-        }
-
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-<#+ ObjectNotNull_(); #>
-
-            return @this.FirstOr<#= ZeroName #>Core(predicate);
-        }
-
-        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
-<#+ StructConstraint_("TSource"); #>
-        {
-            return @this.LastOr<#= ZeroName #>Core(_ => true);
-        }
-
-        public static <#= Name #><TSource> LastOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-<#+ ObjectNotNull_(); #>
-
-            return @this.LastOr<#= ZeroName #>Core(predicate);
-        }
-
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this)
-<#+ StructConstraint_("TSource"); #>
-        {
-            return @this.SingleOr<#= ZeroName #>Core(_ => true);
-        }
-
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #><TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-<#+ ObjectNotNull_(); #>
-
-            return @this.SingleOr<#= ZeroName #>Core(predicate);
-        }
-
-        #endregion
-    }
-<#+
-    }
-
-    // EmitUnsafeEnumerableInternalExtensions ------------------------------------------
-
-    protected void EmitUnsafeEnumerableInternalExtensions()
-    {
-        if (!HasZero) { 
-            return;
-        }
-#>
-    // Possibly conflicting internal extensions for IEnumerable<T>.
-    static partial class UnsafeEnumerableExtensions
-    {
-        public static <#= Name #><TSource> FirstOr<#= ZeroName #>Core<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-            Require.NotNull(predicate, "predicate");
-
-            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
-            using (var iter = seq.GetEnumerator()) {
-                return iter.MoveNext() ? iter.Current : <#= Name #><TSource>.<#= ZeroName #>;
-            }
-        }
-
-        public static <#= Name #><TSource> LastOr<#= ZeroName #>Core<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-            Require.NotNull(predicate, "predicate");
-
-            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
-            using (var iter = seq.GetEnumerator()) {
-                if (!iter.MoveNext()) {
-                    return <#= Name #><TSource>.<#= ZeroName #>;
-                }
-
-                var value = iter.Current;
-                while (iter.MoveNext()) {
-                    value = iter.Current;
-                }
-
-                return value;
-            }
-        }
-
-        public static <#= Name #><TSource> SingleOr<#= ZeroName #>Core<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-        {
-            Require.NotNull(predicate, "predicate");
-
-            var seq = from t in @this where predicate.Invoke(t) select <#= Name #>.<#= ReturnName #>(t);
-            using (var iter = seq.GetEnumerator()) {
-                var result = iter.MoveNext() ? iter.Current : <#= Name #><TSource>.<#= ZeroName #>;
-
-                // On retourne <#= Name #>.<#= ZeroName #> si il y a encore un élément.
-                return iter.MoveNext() ? <#= Name #><TSource>.<#= ZeroName #> : result;
-            }
         }
     }
 <#+
@@ -1408,7 +1280,7 @@ namespace <#= LinqNamespace #>.Interrnal {
 // This code was generated by a tool. Changes to this file may cause incorrect
 // behavior and will be lost if the code is regenerated.
 //
-// Generation Time: <#= DateTime.Now #>
+// Creation Time: <#= DateTime.Now #>
 // Runtime Version: <#= System.Environment.Version #>
 // </auto-generated>
 //------------------------------------------------------------------------------
