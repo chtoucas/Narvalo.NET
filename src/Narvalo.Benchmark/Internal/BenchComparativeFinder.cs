@@ -27,7 +27,6 @@
             return type.GetMethods(_bindings).MapAny(BenchComparativeFactory.MayCreate);
         }
 
-        // FIXME: Theory.
         public IEnumerable<BenchComparative> FindComparatives<T>(Type type, T value)
         {
             Require.NotNull(type, "type");

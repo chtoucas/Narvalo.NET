@@ -37,7 +37,7 @@ namespace Narvalo.Collections.MaybeEx {
         {
             Require.Object(@this);
 
-            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+            return @this.SumCore();
         }
 
         #endregion
@@ -54,9 +54,8 @@ namespace Narvalo.Collections.MaybeEx {
             Func<TSource, Maybe<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select funM.Invoke(_)).Collect();
+            return @this.MapCore(funM);
         }
         
         #endregion
@@ -64,7 +63,8 @@ namespace Narvalo.Collections.MaybeEx {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
-        public static Maybe<IEnumerable<TSource>> Filter<TSource>(
+        // REVIEW: Haskell use a differente signature.
+        public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
@@ -79,13 +79,8 @@ namespace Narvalo.Collections.MaybeEx {
            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
 
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
-                   let item1 = from item in _ select item.Item1
-                   let item2 = from item in _ select item.Item2
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+            return @this.MapAndUnzipCore(funM);
         }
 
         // [Haskell] zipWithM
@@ -95,14 +90,8 @@ namespace Narvalo.Collections.MaybeEx {
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelectorM, "resultSelectorM");
 
-            Func<TFirst, TSecond, Maybe<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
-
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
-            // to this method instead of using the Zip from Linq.
-            return @this.Zip(second, resultSelector: resultSelector).Collect();
+            return @this.ZipCore(second, resultSelectorM);
         }
 
         // [Haskell] foldM
@@ -112,15 +101,8 @@ namespace Narvalo.Collections.MaybeEx {
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
 
-            Maybe<TAccumulate> result = Maybe.Create(seed);
-
-            foreach (TSource item in @this) {
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
-            }
-
-            return result;
+            return @this.FoldCore(seed, accumulatorM);
         }
 
         #endregion
@@ -134,7 +116,7 @@ namespace Narvalo.Collections.MaybeEx {
         {
              Require.Object(@this);
 
-            return @this.Reverse().Fold(seed, accumulatorM);
+            return @this.FoldBackCore(seed, accumulatorM);
         }
 
         public static Maybe<TSource> Reduce<TSource>(
@@ -142,21 +124,8 @@ namespace Narvalo.Collections.MaybeEx {
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
-
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
-                    throw new InvalidOperationException("Source sequence was empty.");
-                }
-
-                Maybe<TSource> result = Maybe.Create(iter.Current);
-
-                while (iter.MoveNext()) {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
-                }
-
-                return result;
-            }
+            
+            return @this.ReduceCore(accumulatorM);
         }
 
         public static Maybe<TSource> ReduceBack<TSource>(
@@ -165,7 +134,7 @@ namespace Narvalo.Collections.MaybeEx {
         {
             Require.Object(@this);
 
-            return @this.Reverse().Reduce(accumulatorM);
+            return @this.ReduceBackCore(accumulatorM);
         }
 
         #endregion
@@ -178,62 +147,38 @@ namespace Narvalo.Collections.MaybeEx {
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return FirstOrNone(@this, _ => true);
+            return @this.FirstOrNoneCore(_ => true);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
-                return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
-            }
+            return @this.FirstOrNoneCore(predicate);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return LastOrNone(@this, _ => true);
+            return @this.LastOrNoneCore(_ => true);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
-                if (!iter.MoveNext()) {
-                    return Maybe<TSource>.None;
-                }
-
-                var value = iter.Current;
-                while (iter.MoveNext()) {
-                    value = iter.Current;
-                }
-
-                return value;
-            }
+            return @this.LastOrNoneCore(predicate);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            return SingleOrNone(@this, _ => true);
+            return @this.SingleOrNoneCore(_ => true);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
-                var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
-
-                // On retourne Maybe.None si il y a encore un élément.
-                return iter.MoveNext() ? Maybe<TSource>.None : result;
-            }
+            return @this.SingleOrNoneCore(predicate);
         }
 
         #endregion
@@ -252,8 +197,6 @@ namespace Narvalo.Collections.MaybeEx.Interrnal {
     {
         public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.Object(@this);
-
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) =>
@@ -264,17 +207,29 @@ namespace Narvalo.Collections.MaybeEx.Interrnal {
 
             return @this.Aggregate(seed, fun);
         }
+
+        public static Maybe<TSource> SumCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        {
+            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+        }
     }
 
     // Internal extensions for IEnumerable<T>.
     static partial class EnumerableExtensions
     {
-        // [Haskell] filterM
-        public static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
+        public static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<TResult>> funM)
+        {
+            Require.NotNull(funM, "funM");
+
+            return (from _ in @this select funM.Invoke(_)).Collect();
+        }
+
+        public static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -290,8 +245,134 @@ namespace Narvalo.Collections.MaybeEx.Interrnal {
                     });
             }
 
-            // REVIEW: Why do we create a Monad here?
-            return Maybe.Create(list.AsEnumerable());
+            return list;
+        }
+
+
+        public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
+           this IEnumerable<TSource> @this,
+           Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+        {
+            Require.NotNull(funM, "funM");
+
+            return from _ in
+                       (from _ in @this select funM.Invoke(_)).Collect()
+                   let item1 = from item in _ select item.Item1
+                   let item2 = from item in _ select item.Item2
+                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+        }
+
+        public static Maybe<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
+        {
+            Require.NotNull(second, "second");
+            Require.NotNull(resultSelectorM, "resultSelectorM");
+
+            Func<TFirst, TSecond, Maybe<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+
+            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
+            // to this method instead of using the Zip from Linq.
+            return @this.Zip(second, resultSelector: resultSelector).Collect();
+        }
+
+        public static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+        {
+            Require.NotNull(accumulatorM, "accumulatorM");
+
+            Maybe<TAccumulate> result = Maybe.Create(seed);
+
+            foreach (TSource item in @this) {
+                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+            }
+
+            return result;
+        }
+
+        public static Maybe<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+        {
+            return @this.Reverse().Fold(seed, accumulatorM);
+        }
+
+        public static Maybe<TSource> ReduceCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+        {
+            Require.NotNull(accumulatorM, "accumulatorM");
+
+            using (var iter = @this.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                Maybe<TSource> result = Maybe.Create(iter.Current);
+
+                while (iter.MoveNext()) {
+                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+
+                return result;
+            }
+        }
+
+        public static Maybe<TSource> ReduceBackCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+        {
+            return @this.Reverse().Reduce(accumulatorM);
+        }
+    }
+
+    // Possibly conflicting internal extensions for IEnumerable<T>.
+    static partial class UnsafeEnumerableExtensions
+    {
+        public static Maybe<TSource> FirstOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+            }
+        }
+
+        public static Maybe<TSource> LastOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    return Maybe<TSource>.None;
+                }
+
+                var value = iter.Current;
+                while (iter.MoveNext()) {
+                    value = iter.Current;
+                }
+
+                return value;
+            }
+        }
+
+        public static Maybe<TSource> SingleOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.NotNull(predicate, "predicate");
+
+            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            using (var iter = seq.GetEnumerator()) {
+                var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+
+                // On retourne Maybe.None si il y a encore un élément.
+                return iter.MoveNext() ? Maybe<TSource>.None : result;
+            }
         }
     }
 }

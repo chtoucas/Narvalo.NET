@@ -442,6 +442,7 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+    using Narvalo.Edu.Monads.MonadOrEx.Interrnal;
 
     // Extensions for IEnumerable<MonadOr<T>>.
     public static partial class EnumerableMonadOrExtensions
@@ -453,15 +454,7 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
         {
             Require.Object(@this);
 
-            var seed = MonadOr.Return(Enumerable.Empty<TSource>());
-            Func<MonadOr<IEnumerable<TSource>>, MonadOr<TSource>, MonadOr<IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list =>
-                    {
-                        return n.Bind(item => MonadOr.Return(list.Concat(Enumerable.Repeat(item, 1))));
-                    });
-
-            return @this.Aggregate(seed, fun);
+            return @this.CollectCore();
         }
         
         #endregion
@@ -473,7 +466,7 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
         {
             Require.Object(@this);
 
-            return @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
+            return @this.SumCore();
         }
 
         #endregion
@@ -490,9 +483,8 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             Func<TSource, MonadOr<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select funM.Invoke(_)).Collect();
+            return @this.MapCore(funM);
         }
         
         #endregion
@@ -500,11 +492,174 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
-        public static MonadOr<IEnumerable<TSource>> Filter<TSource>(
+        // REVIEW: Haskell use a differente signature.
+        public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicateM)
         {
             Require.Object(@this);
+
+            return @this.FilterCore(predicateM);
+        }
+
+        // [Haskell] mapAndUnzipM
+        public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
+           this IEnumerable<TSource> @this,
+           Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
+        {
+            Require.Object(@this);
+
+            return @this.MapAndUnzipCore(funM);
+        }
+
+        // [Haskell] zipWithM
+        public static MonadOr<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
+        {
+            Require.Object(@this);
+
+            return @this.ZipCore(second, resultSelectorM);
+        }
+
+        // [Haskell] foldM
+        public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.FoldCore(seed, accumulatorM);
+        }
+
+        #endregion
+        
+        #region Aggregate Operators
+
+        public static MonadOr<TAccumulate> FoldBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
+        {
+             Require.Object(@this);
+
+            return @this.FoldBackCore(seed, accumulatorM);
+        }
+
+        public static MonadOr<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+            
+            return @this.ReduceCore(accumulatorM);
+        }
+
+        public static MonadOr<TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.ReduceBackCore(accumulatorM);
+        }
+
+        #endregion
+    }
+
+    // Possibly conflicting extensions for IEnumerable<T>.
+    public static partial class UnsafeEnumerableExtensions
+    {
+        #region Element Operators
+
+        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return @this.FirstOrNoneCore(_ => true);
+        }
+
+        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+
+            return @this.FirstOrNoneCore(predicate);
+        }
+
+        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return @this.LastOrNoneCore(_ => true);
+        }
+
+        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+
+            return @this.LastOrNoneCore(predicate);
+        }
+
+        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            return @this.SingleOrNoneCore(_ => true);
+        }
+
+        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+
+            return @this.SingleOrNoneCore(predicate);
+        }
+
+        #endregion
+    }
+}
+
+namespace Narvalo.Edu.Monads.MonadOrEx.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Monads;
+
+    // Internal extensions for IEnumerable<MonadOr<T>>.
+    static partial class EnumerableMonadOrExtensions
+    {
+        public static MonadOr<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<MonadOr<TSource>> @this)
+        {
+            var seed = MonadOr.Return(Enumerable.Empty<TSource>());
+            Func<MonadOr<IEnumerable<TSource>>, MonadOr<TSource>, MonadOr<IEnumerable<TSource>>> fun
+                = (m, n) =>
+                    m.Bind(list =>
+                    {
+                        return n.Bind(item => MonadOr.Return(list.Concat(Enumerable.Repeat(item, 1))));
+                    });
+
+            return @this.Aggregate(seed, fun);
+        }
+
+        public static MonadOr<TSource> SumCore<TSource>(this IEnumerable<MonadOr<TSource>> @this)
+        {
+            return @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
+        }
+    }
+
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+        public static MonadOr<IEnumerable<TResult>> MapCore<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadOr<TResult>> funM)
+        {
+            Require.NotNull(funM, "funM");
+
+            return (from _ in @this select funM.Invoke(_)).Collect();
+        }
+
+        public static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadOr<bool>> predicateM)
+        {
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -520,16 +675,14 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
                     });
             }
 
-            // REVIEW: Why do we create a Monad here?
-            return MonadOr.Return(list.AsEnumerable());
+            return list;
         }
 
-        // [Haskell] mapAndUnzipM
-        public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
+
+        public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
         {
-            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return from _ in
@@ -539,13 +692,11 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
         }
 
-        // [Haskell] zipWithM
-        public static MonadOr<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static MonadOr<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
         {
-            Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
@@ -556,13 +707,11 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
-        // [Haskell] foldM
-        public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
+        public static MonadOr<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             MonadOr<TAccumulate> result = MonadOr.Return(seed);
@@ -574,25 +723,18 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             return result;
         }
 
-        #endregion
-        
-        #region Aggregate Operators
-
-        public static MonadOr<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static MonadOr<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
-             Require.Object(@this);
-
             return @this.Reverse().Fold(seed, accumulatorM);
         }
 
-        public static MonadOr<TSource> Reduce<TSource>(
+        public static MonadOr<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
@@ -610,31 +752,19 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             }
         }
 
-        public static MonadOr<TSource> ReduceBack<TSource>(
+        public static MonadOr<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
-            Require.Object(@this);
-
             return @this.Reverse().Reduce(accumulatorM);
         }
-
-        #endregion
     }
 
-    // Possibly conflicting extensions for IEnumerable<T>.
-    public static partial class UnsafeEnumerableExtensions
+    // Possibly conflicting internal extensions for IEnumerable<T>.
+    static partial class UnsafeEnumerableExtensions
     {
-        #region Element Operators
-
-        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> FirstOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            return FirstOrNone(@this, _ => true);
-        }
-
-        public static MonadOr<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select MonadOr.Return(t);
@@ -643,14 +773,8 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             }
         }
 
-        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> LastOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            return LastOrNone(@this, _ => true);
-        }
-
-        public static MonadOr<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select MonadOr.Return(t);
@@ -668,14 +792,8 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
             }
         }
 
-        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        public static MonadOr<TSource> SingleOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            return SingleOrNone(@this, _ => true);
-        }
-
-        public static MonadOr<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select MonadOr.Return(t);
@@ -686,7 +804,5 @@ namespace Narvalo.Edu.Monads.MonadOrEx {
                 return iter.MoveNext() ? MonadOr<TSource>.None : result;
             }
         }
-
-        #endregion
     }
 }

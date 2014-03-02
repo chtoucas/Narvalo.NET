@@ -9,18 +9,16 @@ namespace Narvalo.Collections.MaybeEx
 
     public static partial class EnumerableExtensions
     {
-        public static Maybe<IEnumerable<TSource>> FilterCore<TSource>(
+        public static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
 
-            var seq = from item in @this
-                      where predicateM.Invoke(item).ValueOrElse(false)
-                      select item;
-
-            return Maybe.Create(seq);
+            return from item in @this
+                   where predicateM.Invoke(item).ValueOrElse(false)
+                   select item;
         }
 
         public static IEnumerable<TResult> MapAny<TSource, TResult>(

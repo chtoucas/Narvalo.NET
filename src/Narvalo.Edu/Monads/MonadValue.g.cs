@@ -512,6 +512,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads;
+    using Narvalo.Edu.Monads.MonadValueEx.Interrnal;
 
     // Extensions for IEnumerable<MonadValue<T>>.
     public static partial class EnumerableMonadValueExtensions
@@ -528,7 +529,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
             where TSource : struct
         {
 
-            return @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
+            return @this.SumCore();
         }
 
         #endregion
@@ -544,9 +545,162 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
 
         #region Generalisations of list functions (Prelude)
 
+        // [Haskell] filterM
+        // REVIEW: Haskell use a differente signature.
+        public static IEnumerable<TSource> Filter<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<bool>> predicateM)
+            where TSource : struct
+        {
+
+            return @this.FilterCore(predicateM);
+        }
+
 
         // [Haskell] foldM
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulatorM)
+            where TSource : struct
+            where TAccumulate : struct
+        {
+
+            return @this.FoldCore(seed, accumulatorM);
+        }
+
+        #endregion
+        
+        #region Aggregate Operators
+
+        public static MonadValue<TAccumulate> FoldBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulatorM)
+            where TSource : struct
+            where TAccumulate : struct
+        {
+ 
+            return @this.FoldBackCore(seed, accumulatorM);
+        }
+
+        public static MonadValue<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
+            where TSource : struct
+        {
+            
+            return @this.ReduceCore(accumulatorM);
+        }
+
+        public static MonadValue<TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
+            where TSource : struct
+        {
+
+            return @this.ReduceBackCore(accumulatorM);
+        }
+
+        #endregion
+    }
+
+    // Possibly conflicting extensions for IEnumerable<T>.
+    public static partial class UnsafeEnumerableExtensions
+    {
+        #region Element Operators
+
+        public static MonadValue<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+            where TSource : struct
+        {
+            return @this.FirstOrNoneCore(_ => true);
+        }
+
+        public static MonadValue<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+
+            return @this.FirstOrNoneCore(predicate);
+        }
+
+        public static MonadValue<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+            where TSource : struct
+        {
+            return @this.LastOrNoneCore(_ => true);
+        }
+
+        public static MonadValue<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+
+            return @this.LastOrNoneCore(predicate);
+        }
+
+        public static MonadValue<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+            where TSource : struct
+        {
+            return @this.SingleOrNoneCore(_ => true);
+        }
+
+        public static MonadValue<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+            where TSource : struct
+        {
+
+            return @this.SingleOrNoneCore(predicate);
+        }
+
+        #endregion
+    }
+}
+
+namespace Narvalo.Edu.Monads.MonadValueEx.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Monads;
+
+    // Internal extensions for IEnumerable<MonadValue<T>>.
+    static partial class EnumerableMonadValueExtensions
+    {
+
+        public static MonadValue<TSource> SumCore<TSource>(this IEnumerable<MonadValue<TSource>> @this)
+            where TSource : struct
+        {
+            return @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
+        }
+    }
+
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+
+        public static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, MonadValue<bool>> predicateM)
+            where TSource : struct
+        {
+            Require.NotNull(predicateM, "predicateM");
+
+            // NB: Haskell uses tail recursion, we don't.
+            var list = new List<TSource>();
+
+            foreach (var item in @this) {
+                predicateM.Invoke(item)
+                    .Run(_ =>
+                    {
+                        if (_ == true) {
+                            list.Add(item);
+                        }
+                    });
+            }
+
+            return list;
+        }
+
+
+        public static MonadValue<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulatorM)
@@ -564,22 +718,17 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
             return result;
         }
 
-        #endregion
-        
-        #region Aggregate Operators
-
-        public static MonadValue<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static MonadValue<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadValue<TAccumulate>> accumulatorM)
             where TSource : struct
             where TAccumulate : struct
         {
- 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
 
-        public static MonadValue<TSource> Reduce<TSource>(
+        public static MonadValue<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
@@ -601,30 +750,19 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
             }
         }
 
-        public static MonadValue<TSource> ReduceBack<TSource>(
+        public static MonadValue<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-
             return @this.Reverse().Reduce(accumulatorM);
         }
-
-        #endregion
     }
 
-    // Possibly conflicting extensions for IEnumerable<T>.
-    public static partial class UnsafeEnumerableExtensions
+    // Possibly conflicting internal extensions for IEnumerable<T>.
+    static partial class UnsafeEnumerableExtensions
     {
-        #region Element Operators
-
-        public static MonadValue<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
-            where TSource : struct
-        {
-            return FirstOrNone(@this, _ => true);
-        }
-
-        public static MonadValue<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadValue<TSource> FirstOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
             where TSource : struct
         {
             Require.NotNull(predicate, "predicate");
@@ -635,13 +773,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
             }
         }
 
-        public static MonadValue<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
-            where TSource : struct
-        {
-            return LastOrNone(@this, _ => true);
-        }
-
-        public static MonadValue<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadValue<TSource> LastOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
             where TSource : struct
         {
             Require.NotNull(predicate, "predicate");
@@ -661,13 +793,7 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
             }
         }
 
-        public static MonadValue<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
-            where TSource : struct
-        {
-            return SingleOrNone(@this, _ => true);
-        }
-
-        public static MonadValue<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static MonadValue<TSource> SingleOrNoneCore<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
             where TSource : struct
         {
             Require.NotNull(predicate, "predicate");
@@ -680,7 +806,5 @@ namespace Narvalo.Edu.Monads.MonadValueEx {
                 return iter.MoveNext() ? MonadValue<TSource>.None : result;
             }
         }
-
-        #endregion
     }
 }

@@ -194,6 +194,7 @@ namespace Narvalo.Edu.Samples.IdentityEx {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Samples;
+    using Narvalo.Edu.Samples.IdentityEx.Interrnal;
 
     // Extensions for IEnumerable<Identity<T>>.
     public static partial class EnumerableIdentityExtensions
@@ -205,15 +206,7 @@ namespace Narvalo.Edu.Samples.IdentityEx {
         {
             Require.Object(@this);
 
-            var seed = Identity.Return(Enumerable.Empty<TSource>());
-            Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list =>
-                    {
-                        return n.Bind(item => Identity.Return(list.Concat(Enumerable.Repeat(item, 1))));
-                    });
-
-            return @this.Aggregate(seed, fun);
+            return @this.CollectCore();
         }
         
         #endregion
@@ -231,9 +224,8 @@ namespace Narvalo.Edu.Samples.IdentityEx {
             Func<TSource, Identity<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select funM.Invoke(_)).Collect();
+            return @this.MapCore(funM);
         }
         
         #endregion
@@ -241,11 +233,100 @@ namespace Narvalo.Edu.Samples.IdentityEx {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
-        public static Identity<IEnumerable<TSource>> Filter<TSource>(
+        // REVIEW: Haskell use a differente signature.
+        public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<bool>> predicateM)
         {
             Require.Object(@this);
+
+            return @this.FilterCore(predicateM);
+        }
+
+
+        // [Haskell] zipWithM
+        public static Identity<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
+        {
+            Require.Object(@this);
+
+            return @this.ZipCore(second, resultSelectorM);
+        }
+
+        // [Haskell] foldM
+        public static Identity<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.FoldCore(seed, accumulatorM);
+        }
+
+        #endregion
+        
+        #region Aggregate Operators
+
+
+        public static Identity<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Identity<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+            
+            return @this.ReduceCore(accumulatorM);
+        }
+
+
+        #endregion
+    }
+
+}
+
+namespace Narvalo.Edu.Samples.IdentityEx.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+    using Narvalo.Edu.Samples;
+
+    // Internal extensions for IEnumerable<Identity<T>>.
+    static partial class EnumerableIdentityExtensions
+    {
+        public static Identity<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Identity<TSource>> @this)
+        {
+            var seed = Identity.Return(Enumerable.Empty<TSource>());
+            Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> fun
+                = (m, n) =>
+                    m.Bind(list =>
+                    {
+                        return n.Bind(item => Identity.Return(list.Concat(Enumerable.Repeat(item, 1))));
+                    });
+
+            return @this.Aggregate(seed, fun);
+        }
+    }
+
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+        public static Identity<IEnumerable<TResult>> MapCore<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Identity<TResult>> funM)
+        {
+            Require.NotNull(funM, "funM");
+
+            return (from _ in @this select funM.Invoke(_)).Collect();
+        }
+
+        public static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Identity<bool>> predicateM)
+        {
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -261,18 +342,15 @@ namespace Narvalo.Edu.Samples.IdentityEx {
                     });
             }
 
-            // REVIEW: Why do we create a Monad here?
-            return Identity.Return(list.AsEnumerable());
+            return list;
         }
 
 
-        // [Haskell] zipWithM
-        public static Identity<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Identity<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
         {
-            Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
@@ -283,13 +361,11 @@ namespace Narvalo.Edu.Samples.IdentityEx {
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
-        // [Haskell] foldM
-        public static Identity<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Identity<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             Identity<TAccumulate> result = Identity.Return(seed);
@@ -301,16 +377,11 @@ namespace Narvalo.Edu.Samples.IdentityEx {
             return result;
         }
 
-        #endregion
-        
-        #region Aggregate Operators
 
-
-        public static Identity<TSource> Reduce<TSource>(
+        public static Identity<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
@@ -328,8 +399,6 @@ namespace Narvalo.Edu.Samples.IdentityEx {
             }
         }
 
-
-        #endregion
     }
 
 }

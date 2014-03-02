@@ -13,6 +13,7 @@ namespace Narvalo.Collections.OutputEx {
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
+    using Narvalo.Collections.OutputEx.Interrnal;
 
     // Extensions for IEnumerable<Output<T>>.
     public static partial class EnumerableOutputExtensions
@@ -24,15 +25,7 @@ namespace Narvalo.Collections.OutputEx {
         {
             Require.Object(@this);
 
-            var seed = Output.Success(Enumerable.Empty<TSource>());
-            Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list =>
-                    {
-                        return n.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
-                    });
-
-            return @this.Aggregate(seed, fun);
+            return @this.CollectCore();
         }
         
         #endregion
@@ -50,9 +43,8 @@ namespace Narvalo.Collections.OutputEx {
             Func<TSource, Output<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
 
-            return (from _ in @this select funM.Invoke(_)).Collect();
+            return @this.MapCore(funM);
         }
         
         #endregion
@@ -60,11 +52,99 @@ namespace Narvalo.Collections.OutputEx {
         #region Generalisations of list functions (Prelude)
 
         // [Haskell] filterM
-        public static Output<IEnumerable<TSource>> Filter<TSource>(
+        // REVIEW: Haskell use a differente signature.
+        public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Output<bool>> predicateM)
         {
             Require.Object(@this);
+
+            return @this.FilterCore(predicateM);
+        }
+
+
+        // [Haskell] zipWithM
+        public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
+        {
+            Require.Object(@this);
+
+            return @this.ZipCore(second, resultSelectorM);
+        }
+
+        // [Haskell] foldM
+        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
+        {
+            Require.Object(@this);
+
+            return @this.FoldCore(seed, accumulatorM);
+        }
+
+        #endregion
+        
+        #region Aggregate Operators
+
+
+        public static Output<TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
+        {
+            Require.Object(@this);
+            
+            return @this.ReduceCore(accumulatorM);
+        }
+
+
+        #endregion
+    }
+
+}
+
+namespace Narvalo.Collections.OutputEx.Interrnal {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
+
+    // Internal extensions for IEnumerable<Output<T>>.
+    static partial class EnumerableOutputExtensions
+    {
+        public static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
+        {
+            var seed = Output.Success(Enumerable.Empty<TSource>());
+            Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
+                = (m, n) =>
+                    m.Bind(list =>
+                    {
+                        return n.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
+                    });
+
+            return @this.Aggregate(seed, fun);
+        }
+    }
+
+    // Internal extensions for IEnumerable<T>.
+    static partial class EnumerableExtensions
+    {
+        public static Output<IEnumerable<TResult>> MapCore<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Output<TResult>> funM)
+        {
+            Require.NotNull(funM, "funM");
+
+            return (from _ in @this select funM.Invoke(_)).Collect();
+        }
+
+        public static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Output<bool>> predicateM)
+        {
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -80,18 +160,15 @@ namespace Narvalo.Collections.OutputEx {
                     });
             }
 
-            // REVIEW: Why do we create a Monad here?
-            return Output.Success(list.AsEnumerable());
+            return list;
         }
 
 
-        // [Haskell] zipWithM
-        public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Output<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
-            Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
@@ -102,13 +179,11 @@ namespace Narvalo.Collections.OutputEx {
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 
-        // [Haskell] foldM
-        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Output<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             Output<TAccumulate> result = Output.Success(seed);
@@ -120,16 +195,11 @@ namespace Narvalo.Collections.OutputEx {
             return result;
         }
 
-        #endregion
-        
-        #region Aggregate Operators
 
-
-        public static Output<TSource> Reduce<TSource>(
+        public static Output<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
-            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
@@ -147,8 +217,6 @@ namespace Narvalo.Collections.OutputEx {
             }
         }
 
-
-        #endregion
     }
 
 }
