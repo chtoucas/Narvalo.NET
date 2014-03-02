@@ -138,7 +138,7 @@ namespace Narvalo.Collections.OutputEx.Interrnal {
         {
             Require.NotNull(funM, "funM");
 
-            return (from _ in @this select funM.Invoke(_)).Collect();
+            return @this.Select(funM).Collect();
         }
 
         public static IEnumerable<TSource> FilterCore<TSource>(
@@ -175,7 +175,7 @@ namespace Narvalo.Collections.OutputEx.Interrnal {
             Func<TFirst, TSecond, Output<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
-            // to this method instead of using the Zip from Linq.
+            // instead of using the Zip from Linq.
             return @this.Zip(second, resultSelector: resultSelector).Collect();
         }
 

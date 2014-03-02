@@ -8,10 +8,8 @@ namespace Narvalo.Collections.MaybeEx
 
     public static partial class EnumerableExtensions
     {
-        public static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.Object(@this);
-
             IList<TSource> list = new List<TSource>();
 
             foreach (var m in @this) {

@@ -41,8 +41,6 @@ namespace Narvalo.Edu.Samples
             return square._value;
         }
 
-        #region Additional methods
-
         public Identity<TResult> Coalesce<TResult>(
             Func<T, bool> predicate,
             Identity<TResult> then,
@@ -61,7 +59,5 @@ namespace Narvalo.Edu.Samples
 
             return this;
         }
-
-        #endregion
     }
 }
