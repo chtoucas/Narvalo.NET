@@ -31,8 +31,6 @@ namespace Narvalo.Collections
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Require.Object(@this);
-
             return Enumerable.Repeat(element, 1).Concat(@this);
         }
 
@@ -163,7 +161,7 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            return @this.FirstOrNone(_ => true);
+            return FirstOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -181,7 +179,7 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            return @this.LastOrNone(_ => true);
+            return LastOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -208,7 +206,7 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            return @this.SingleOrNone(_ => true);
+            return SingleOrNone(@this, _ => true);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)

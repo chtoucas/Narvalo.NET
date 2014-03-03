@@ -138,6 +138,9 @@ namespace Narvalo.Fx {
         // [Haskell] replicateM
         public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
         {
+            Require.Object(@this);
+            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
         
@@ -168,6 +171,8 @@ namespace Narvalo.Fx {
         // [Haskell] unless
         public static Maybe<Unit> Unless<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
         {
+            Require.Object(@this);
+
             return @this.When(!predicate, action);
         }
 
@@ -267,7 +272,9 @@ namespace Narvalo.Fx {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
         {
-            return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            Require.Object(@this);
+
+            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -277,7 +284,9 @@ namespace Narvalo.Fx {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector)
         {
-            return GroupJoin(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            Require.Object(@this);
+
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -327,9 +336,6 @@ namespace Narvalo.Fx {
             IEqualityComparer<TKey> comparer)
         {
             Require.NotNull(seq, "seq");
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -348,9 +354,6 @@ namespace Narvalo.Fx {
             IEqualityComparer<TKey> comparer)
         {
             Require.NotNull(seq, "seq");
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -365,6 +368,10 @@ namespace Narvalo.Fx {
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
+            DebugCheck.NotNull(comparer);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "outerKeySelector");
+
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -394,6 +401,8 @@ namespace Narvalo.Fx {
             Func<TSource, bool> predicate,
             Maybe<TResult> other)
         {
+            Require.Object(@this);
+
             return @this.Coalesce(predicate, other, Maybe<TResult>.None);
         }
 
@@ -402,7 +411,9 @@ namespace Narvalo.Fx {
             Func<TSource, bool> predicate,
             Maybe<TResult> other)
         {
-            return @this.Coalesce(predicate, Maybe<TResult>.None, other);
+            Require.Object(@this);
+
+            return  @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
         public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
@@ -434,6 +445,8 @@ namespace Narvalo.Fx {
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
         {
+            Require.NotNull(value, "value");
+
             return value.Bind(@this);
         }
 
@@ -452,7 +465,6 @@ namespace Narvalo.Fx {
             this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> funM)
         {
-            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);

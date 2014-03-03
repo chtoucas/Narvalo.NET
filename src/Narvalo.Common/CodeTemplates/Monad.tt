@@ -478,7 +478,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
-            Require.NotNull(predicate, "predicate");
+<#+ NotNull_("predicate"); #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
         }
@@ -490,6 +490,9 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(this <#= Name #><TSource> @this, int count)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ ObjectNotNull_(); #>
+            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
 <#+ } #>
@@ -526,6 +529,8 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ ObjectNotNull_(); #>
+
             return @this.When(!predicate, action);
         }
 
@@ -544,7 +549,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -562,7 +567,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -585,7 +590,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
@@ -610,7 +615,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
@@ -657,8 +662,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
-            Require.NotNull(valueSelectorM, "valueSelectorM");
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("valueSelectorM"); #>
+<#+ NotNull_("resultSelector"); #>
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
         }
@@ -675,7 +680,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+<#+ ObjectNotNull_(); #>
+
+            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -689,7 +696,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return GroupJoin(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+<#+ ObjectNotNull_(); #>
+
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 <#+ } #>
 
@@ -753,10 +762,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ NotNull_("seq"); #>
-<#+ NotNull_("inner"); #>
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -778,10 +784,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ NotNull_("seq"); #>
-<#+ NotNull_("inner"); #>
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+<#+ NotNull_("resultSelector"); #>
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -798,6 +801,10 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TInner"); #>
 <#+ StructConstraint_("TKey"); #>
         {
+<#+ DebugNotNull_("comparer"); #>
+<#+ NotNull_("inner"); #>
+<#+ NotNull_("outerKeySelector"); #>
+
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -820,7 +827,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
-            Require.NotNull(predicate, "predicate");
+<#+ NotNull_("predicate"); #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -833,6 +840,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ ObjectNotNull_(); #>
+
             return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
         }
 
@@ -843,7 +852,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
+<#+ ObjectNotNull_(); #>
+
+            return  @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
 <#+ } #>
 
@@ -861,7 +872,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
-            Require.NotNull(action, "action");
+<#+ NotNull_("action"); #>
 
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
@@ -889,6 +900,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ NotNull_("value"); #>
+
             return value.Bind(@this);
         }
 
@@ -913,8 +926,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TMiddle"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-            Require.NotNull(funM, "funM");
+<#+ NotNull_("funM"); #>
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -1136,7 +1148,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
- <#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(); #>
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1148,7 +1160,7 @@ namespace <#= LinqNamespace #>.Internal {
             Func<<#= Name #><TSource>, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
- <#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(); #>
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1174,7 +1186,6 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(funM, "funM");
 
             return @this.Select(funM).Collect();
         }
@@ -1186,7 +1197,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(predicateM, "predicateM");
+<#+ NotNull_("predicateM"); #>
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1213,10 +1224,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSecond"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(funM, "funM");
 
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
+            return from _ in @this.Select(funM).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -1231,8 +1240,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-<#+ NotNull_("second"); #>
-            Require.NotNull(resultSelectorM, "resultSelectorM");
+<#+ NotNull_("resultSelectorM"); #>
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
@@ -1250,7 +1258,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
+<#+ NotNull_("accumulatorM"); #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1279,7 +1287,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
+<#+ NotNull_("accumulatorM"); #>
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -1315,8 +1323,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+<#+ NotNull_("accumulatorM"); #>
+<#+ NotNull_("predicate"); #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1336,8 +1344,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+<#+ NotNull_("accumulatorM"); #>
+<#+ NotNull_("predicate"); #>
 
             using (var iter = @this.GetEnumerator()) {if (!iter.MoveNext()) {
                     throw new InvalidOperationException("Source sequence was empty.");

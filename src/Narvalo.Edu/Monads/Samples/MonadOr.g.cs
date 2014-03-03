@@ -138,6 +138,9 @@ namespace Narvalo.Edu.Monads.Samples {
         // [Haskell] replicateM
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(this MonadOr<TSource> @this, int count)
         {
+            Require.Object(@this);
+            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
         
@@ -168,6 +171,8 @@ namespace Narvalo.Edu.Monads.Samples {
         // [Haskell] unless
         public static MonadOr<Unit> Unless<TSource>(this MonadOr<TSource> @this, bool predicate, Action action)
         {
+            Require.Object(@this);
+
             return @this.When(!predicate, action);
         }
 
@@ -267,7 +272,9 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
         {
-            return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            Require.Object(@this);
+
+            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static MonadOr<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -277,7 +284,9 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, MonadOr<TInner>, TResult> resultSelector)
         {
-            return GroupJoin(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            Require.Object(@this);
+
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -327,9 +336,6 @@ namespace Narvalo.Edu.Monads.Samples {
             IEqualityComparer<TKey> comparer)
         {
             Require.NotNull(seq, "seq");
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -348,9 +354,6 @@ namespace Narvalo.Edu.Monads.Samples {
             IEqualityComparer<TKey> comparer)
         {
             Require.NotNull(seq, "seq");
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -365,6 +368,10 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
+            DebugCheck.NotNull(comparer);
+            Require.NotNull(inner, "inner");
+            Require.NotNull(outerKeySelector, "outerKeySelector");
+
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -394,6 +401,8 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, bool> predicate,
             MonadOr<TResult> other)
         {
+            Require.Object(@this);
+
             return @this.Coalesce(predicate, other, MonadOr<TResult>.None);
         }
 
@@ -402,7 +411,9 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, bool> predicate,
             MonadOr<TResult> other)
         {
-            return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
+            Require.Object(@this);
+
+            return  @this.Coalesce(predicate, MonadOr<TResult>.None, other);
         }
 
         public static MonadOr<TSource> Run<TSource>(this MonadOr<TSource> @this, Action<TSource> action)
@@ -434,6 +445,8 @@ namespace Narvalo.Edu.Monads.Samples {
             this Func<TSource, MonadOr<TResult>> @this,
             MonadOr<TSource> value)
         {
+            Require.NotNull(value, "value");
+
             return value.Bind(@this);
         }
 
@@ -452,7 +465,6 @@ namespace Narvalo.Edu.Monads.Samples {
             this Func<TMiddle, MonadOr<TResult>> @this,
             Func<TSource, MonadOr<TMiddle>> funM)
         {
-            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -604,7 +616,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM,
             Func<MonadOr<TAccumulate>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -615,7 +627,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM,
             Func<MonadOr<TSource>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -666,7 +678,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, MonadOr<TResult>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
             return @this.Select(funM).Collect();
         }
@@ -699,10 +710,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
            Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
+            return from _ in @this.Select(funM).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -714,7 +723,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);

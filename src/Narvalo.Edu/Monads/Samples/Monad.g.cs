@@ -127,6 +127,9 @@ namespace Narvalo.Edu.Monads.Samples {
         // [Haskell] replicateM
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(this Monad<TSource> @this, int count)
         {
+            Require.Object(@this);
+            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
         
@@ -151,6 +154,8 @@ namespace Narvalo.Edu.Monads.Samples {
         // [Haskell] unless
         public static Monad<Unit> Unless<TSource>(this Monad<TSource> @this, bool predicate, Action action)
         {
+            Require.Object(@this);
+
             return @this.When(!predicate, action);
         }
 
@@ -288,6 +293,8 @@ namespace Narvalo.Edu.Monads.Samples {
             this Func<TSource, Monad<TResult>> @this,
             Monad<TSource> value)
         {
+            Require.NotNull(value, "value");
+
             return value.Bind(@this);
         }
 
@@ -306,7 +313,6 @@ namespace Narvalo.Edu.Monads.Samples {
             this Func<TMiddle, Monad<TResult>> @this,
             Func<TSource, Monad<TMiddle>> funM)
         {
-            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -447,7 +453,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
             Func<Monad<TAccumulate>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -458,7 +464,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, Monad<TSource>> accumulatorM,
             Func<Monad<TSource>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -502,7 +508,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, Monad<TResult>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
             return @this.Select(funM).Collect();
         }
@@ -535,10 +540,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
            Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
+            return from _ in @this.Select(funM).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -550,7 +553,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Func<TFirst, TSecond, Monad<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);

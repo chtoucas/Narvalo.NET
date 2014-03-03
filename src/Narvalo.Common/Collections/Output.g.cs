@@ -139,7 +139,7 @@ namespace Narvalo.Collections {
             Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
             Func<Output<TAccumulate>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -150,7 +150,7 @@ namespace Narvalo.Collections {
             Func<TSource, TSource, Output<TSource>> accumulatorM,
             Func<Output<TSource>, bool> predicate)
         {
-             Require.Object(@this);
+            Require.Object(@this);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -193,7 +193,6 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, Output<TResult>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
             return @this.Select(funM).Collect();
         }
@@ -226,10 +225,8 @@ namespace Narvalo.Collections.Internal {
            Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(funM, "funM");
 
-            return from _ in
-                       (from _ in @this select funM.Invoke(_)).Collect()
+            return from _ in @this.Select(funM).Collect()
                    let item1 = from item in _ select item.Item1
                    let item2 = from item in _ select item.Item2
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -241,7 +238,6 @@ namespace Narvalo.Collections.Internal {
             Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
             DebugCheck.NotNull(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Func<TFirst, TSecond, Output<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);

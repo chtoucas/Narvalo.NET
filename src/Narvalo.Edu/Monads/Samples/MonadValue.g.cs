@@ -148,7 +148,6 @@ namespace Narvalo.Edu.Monads.Samples {
         public static MonadValue<TSource> Where<TSource>(this MonadValue<TSource> @this, Func<TSource, bool> predicate)
             where TSource : struct
         {
-            Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : MonadValue<TSource>.None);
         }
@@ -183,6 +182,7 @@ namespace Narvalo.Edu.Monads.Samples {
         public static MonadValue<Unit> Unless<TSource>(this MonadValue<TSource> @this, bool predicate, Action action)
             where TSource : struct
         {
+
             return @this.When(!predicate, action);
         }
 
@@ -199,7 +199,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSecond : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -215,7 +214,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where T3 : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -236,7 +234,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where T4 : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
                 = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
@@ -259,7 +256,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where T5 : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
                 = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
@@ -281,8 +277,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TMiddle : struct
             where TResult : struct
         {
-            Require.NotNull(valueSelectorM, "valueSelectorM");
-            Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(_ => valueSelectorM.Invoke(_).Select(middle => resultSelector.Invoke(_, middle)));
         }
@@ -298,7 +292,8 @@ namespace Narvalo.Edu.Monads.Samples {
             where TKey : struct
             where TResult : struct
         {
-            return Join(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+
+            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         public static MonadValue<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -312,7 +307,8 @@ namespace Narvalo.Edu.Monads.Samples {
             where TKey : struct
             where TResult : struct
         {
-            return GroupJoin(@this, inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+
+            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -373,9 +369,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TKey : struct
             where TResult : struct
         {
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -396,9 +389,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TKey : struct
             where TResult : struct
         {
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -415,6 +405,7 @@ namespace Narvalo.Edu.Monads.Samples {
             where TInner : struct
             where TKey : struct
         {
+
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -435,7 +426,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSource : struct
             where TResult : struct
         {
-            Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -447,6 +437,7 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSource : struct
             where TResult : struct
         {
+
             return @this.Coalesce(predicate, other, MonadValue<TResult>.None);
         }
 
@@ -457,7 +448,8 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSource : struct
             where TResult : struct
         {
-            return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
+
+            return  @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
 
         public static MonadValue<TSource> Run<TSource>(this MonadValue<TSource> @this, Action<TSource> action)
@@ -471,7 +463,6 @@ namespace Narvalo.Edu.Monads.Samples {
         public static MonadValue<TSource> OnNone<TSource>(this MonadValue<TSource> @this, Action action)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
 
             return @this.Then(MonadValue.Unit).Run(_ => action.Invoke()).Then(@this);
         }
@@ -491,6 +482,7 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSource : struct
             where TResult : struct
         {
+
             return value.Bind(@this);
         }
 
@@ -514,7 +506,6 @@ namespace Narvalo.Edu.Monads.Samples {
             where TMiddle : struct
             where TResult : struct
         {
-            Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -633,7 +624,7 @@ namespace Narvalo.Edu.Monads.Samples {
             where TSource : struct
             where TAccumulate : struct
         {
- 
+
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
         
@@ -644,7 +635,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
- 
+
             return @this.ReduceCore(accumulatorM, predicate);
         }
 
@@ -681,7 +672,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -707,7 +697,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             where TSource : struct
             where TAccumulate : struct
         {
-            Require.NotNull(accumulatorM, "accumulatorM");
 
             MonadValue<TAccumulate> result = MonadValue.Return(seed);
 
@@ -734,7 +723,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -768,8 +756,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             where TSource : struct
             where TAccumulate : struct
         {
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
 
             MonadValue<TAccumulate> result = MonadValue.Return(seed);
 
@@ -788,8 +774,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
 
             using (var iter = @this.GetEnumerator()) {if (!iter.MoveNext()) {
                     throw new InvalidOperationException("Source sequence was empty.");

@@ -127,6 +127,9 @@ namespace Narvalo.Fx {
         // [Haskell] replicateM
         public static Output<IEnumerable<TSource>> Repeat<TSource>(this Output<TSource> @this, int count)
         {
+            Require.Object(@this);
+            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
         
@@ -151,6 +154,8 @@ namespace Narvalo.Fx {
         // [Haskell] unless
         public static Output<Unit> Unless<TSource>(this Output<TSource> @this, bool predicate, Action action)
         {
+            Require.Object(@this);
+
             return @this.When(!predicate, action);
         }
 
@@ -288,6 +293,8 @@ namespace Narvalo.Fx {
             this Func<TSource, Output<TResult>> @this,
             Output<TSource> value)
         {
+            Require.NotNull(value, "value");
+
             return value.Bind(@this);
         }
 
@@ -306,7 +313,6 @@ namespace Narvalo.Fx {
             this Func<TMiddle, Output<TResult>> @this,
             Func<TSource, Output<TMiddle>> funM)
         {
-            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return _ => funM.Invoke(_).Bind(@this);
