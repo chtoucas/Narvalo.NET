@@ -90,8 +90,6 @@
     <Compile Include="Collections\Enumerable[Maybe]%24.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fx\Iteration.cs" />
-    <Compile Include="Fx\Iteration`2.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Fx\Identity.g.cs">

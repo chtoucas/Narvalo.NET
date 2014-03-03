@@ -3,16 +3,16 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public static class Recursion
     {
-        public static Func<TSource, TResult> Fix<TSource, TResult>(Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
+        public static Func<TSource, TResult> Fix<TSource, TResult>(
+            Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
             Func<TSource, TResult> g = null;
-            return generator.Invoke(_ => g.Invoke(_));
 
-            //return g;
+            // return g;
+            return generator.Invoke(_ => g.Invoke(_));
         }
     }
 }

@@ -65,6 +65,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
+    <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Monads\Samples\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -85,9 +88,7 @@
     <Compile Include="Monads\Monad`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Monads\Rules.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Monads\Samples\Enumerable`1%24.cs" />
     <Compile Include="Monads\Stubs.cs">
       <SubType>Code</SubType>
     </Compile>

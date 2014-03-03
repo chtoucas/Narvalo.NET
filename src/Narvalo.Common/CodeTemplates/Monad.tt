@@ -1121,7 +1121,7 @@ namespace <#= LinqNamespace #>.Internal {
 
         #endregion
 
-        #region Catamorphism
+        #region Catamorphisms
 
         // REVIEW: Signature.
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(

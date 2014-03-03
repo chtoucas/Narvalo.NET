@@ -12,6 +12,14 @@ namespace Narvalo.Fx
         public static IEnumerable<TResult> Create<TSource, TResult>(
             Func<TSource, TSource> iter,
             TSource seed,
+            Func<TSource, TResult> resultSelector)
+        {
+            return Create(iter, seed, resultSelector, _ => true);
+        }
+
+        public static IEnumerable<TResult> Create<TSource, TResult>(
+            Func<TSource, TSource> iter,
+            TSource seed,
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
@@ -21,48 +29,6 @@ namespace Narvalo.Fx
                 yield return resultSelector.Invoke(next);
 
                 next = iter.Invoke(next);
-            }
-        }
-
-        public static IEnumerable<TResult> Create<TSource, TResult>(
-            Func<TSource, Maybe<Iteration<TResult, TSource>>> generator,
-            TSource seed)
-        {
-            TSource next = seed;
-
-            while (true) {
-                var iter = generator.Invoke(next);
-
-                if (iter.IsNone) {
-                    yield break;
-                }
-
-                yield return iter.Value.Result;
-
-                next = iter.Value.Next;
-            }
-        }
-
-        public static IEnumerable<TResult> Create<TSource, TResult>(
-            Func<TSource, TSource> iter,
-            TSource seed,
-            Func<TSource, TResult> resultSelector)
-        {
-            return Create(iter, seed, resultSelector, _ => true);
-        }
-
-        public static IEnumerable<TResult> Create<TSource, TResult>(
-            Func<TSource, Iteration<TResult, TSource>> generator,
-            TSource seed)
-        {
-            TSource next = seed;
-
-            while (true) {
-                var iter = generator.Invoke(next);
-
-                yield return iter.Result;
-
-                next = iter.Next;
             }
         }
 

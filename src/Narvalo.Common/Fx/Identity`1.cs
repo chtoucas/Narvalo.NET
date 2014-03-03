@@ -92,7 +92,6 @@ namespace Narvalo.Fx
 
             return _value != null ? comparer.GetHashCode(_value) : 0;
         }
-
     }
 
     // Monad definition.
@@ -105,13 +104,15 @@ namespace Narvalo.Fx
             return selector.Invoke(_value);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Identity<T> η(T value)
         {
             return new Identity<T>(value);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Identity<T> μ(Identity<Identity<T>> square)
         {
             Require.NotNull(square, "square");
@@ -130,7 +131,8 @@ namespace Narvalo.Fx
             return new Identity<TResult>(fun.Invoke(this));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static T ε(Identity<T> monad)
         {
             Require.NotNull(monad, "monad");
@@ -138,7 +140,8 @@ namespace Narvalo.Fx
             return monad._value;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
             return new Identity<Identity<T>>(monad);

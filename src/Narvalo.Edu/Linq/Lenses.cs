@@ -2,38 +2,12 @@
 
 namespace Narvalo.Edu.Linq
 {
-    using System;
     using System.Collections.Generic;
     using Narvalo.Fx;
 
     // Linq from scratch.
     public static class Lenses
     {
-        #region Correspondence between the various definitions of Anamorphism.
-
-        public static IEnumerable<TResult> Infinite<TSource, TResult>(
-            Func<TSource, TSource> iter,
-            TSource seed,
-            Func<TSource, TResult> resultSelector)
-        {
-            return Sequence.Create(_ => Iteration.Create(resultSelector.Invoke(_), iter.Invoke(_)), seed);
-        }
-
-        public static IEnumerable<TResult> Finite<TSource, TResult>(
-            Func<TSource, TSource> iter,
-            TSource seed,
-            Func<TSource, TResult> resultSelector,
-            Func<TSource, bool> predicate)
-        {
-            return Sequence.Create(
-                _ => predicate.Invoke(_)
-                    ? Iteration.MayCreate(resultSelector.Invoke(_), iter.Invoke(_))
-                    : Maybe<Iteration<TResult, TSource>>.None,
-                seed);
-        }
-
-        #endregion
-
         #region Generation Operators
 
         public static IEnumerable<int> Range(int start, int count)

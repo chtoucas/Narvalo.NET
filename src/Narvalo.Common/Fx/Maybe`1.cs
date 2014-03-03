@@ -401,6 +401,7 @@ namespace Narvalo.Fx
 
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
+
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Maybe<T> η(T value)

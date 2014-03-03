@@ -57,7 +57,7 @@ namespace Narvalo.Collections
 
         #endregion
 
-        #region Catamorphism
+        #region Catamorphisms
 
         public static TAccumulate Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,

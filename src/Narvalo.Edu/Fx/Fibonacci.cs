@@ -7,7 +7,7 @@ namespace Narvalo.Edu.Fx
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Fx;
 
-    // WARNING: Do not run, these sequence never end!
+    // WARNING: These sequences are infinite!
     public static class Fibonacci
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -15,8 +15,6 @@ namespace Narvalo.Edu.Fx
         {
             int i = 1;
             int j = 1;
-
-            yield return 1;
 
             while (true) {
                 int result = i + j;
@@ -34,20 +32,20 @@ namespace Narvalo.Edu.Fx
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        static IEnumerable<int> CreateViaAna0()
+        static IEnumerable<int> CreateViaAnamorphism()
         {
-            return Sequence.Create(
-                _ => Iteration.MayCreate(_.Item1, Tuple.Create(_.Item2, _.Item1 + _.Item2)),
-                Tuple.Create(1, 1));
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        static IEnumerable<int> CreateViaAna1()
-        {
-            return Sequence.Create<Tuple<int, int>, int>(
+            return Narvalo.Fx.Sequence.Create<Tuple<int, int>, int>(
                 iter: _ => Tuple.Create(_.Item2, _.Item1 + _.Item2),
                 seed: Tuple.Create(1, 1),
                 resultSelector: _ => _.Item1);
         }
+
+        //[SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        //static IEnumerable<int> CreateViaAnamorphismAlternate()
+        //{
+        //    return Sequence.Create(
+        //        _ => Iteration.MayCreate(_.Item1, Tuple.Create(_.Item2, _.Item1 + _.Item2)),
+        //        Tuple.Create(1, 1));
+        //}
     }
 }
