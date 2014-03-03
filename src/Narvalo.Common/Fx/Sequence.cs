@@ -9,7 +9,21 @@ namespace Narvalo.Fx
     {
         #region Anamorphims
 
-        // Finite sequence.
+        public static IEnumerable<TResult> Create<TSource, TResult>(
+            Func<TSource, TSource> iter,
+            TSource seed,
+            Func<TSource, TResult> resultSelector,
+            Func<TSource, bool> predicate)
+        {
+            TSource next = seed;
+
+            while (predicate.Invoke(next)) {
+                yield return resultSelector.Invoke(next);
+
+                next = iter.Invoke(next);
+            }
+        }
+
         public static IEnumerable<TResult> Create<TSource, TResult>(
             Func<TSource, Maybe<Iteration<TResult, TSource>>> generator,
             TSource seed)
@@ -29,7 +43,14 @@ namespace Narvalo.Fx
             }
         }
 
-        // Infinite sequence (1st version).
+        public static IEnumerable<TResult> Create<TSource, TResult>(
+            Func<TSource, TSource> iter,
+            TSource seed,
+            Func<TSource, TResult> resultSelector)
+        {
+            return Create(iter, seed, resultSelector, _ => true);
+        }
+
         public static IEnumerable<TResult> Create<TSource, TResult>(
             Func<TSource, Iteration<TResult, TSource>> generator,
             TSource seed)
@@ -42,31 +63,6 @@ namespace Narvalo.Fx
                 yield return iter.Result;
 
                 next = iter.Next;
-            }
-        }
-
-        // Infinite sequence (2nd version).
-        public static IEnumerable<TResult> Create<TSource, TResult>(
-            Func<TSource, TSource> iter,
-            TSource seed,
-            Func<TSource, TResult> resultSelector)
-        {
-            return Create(iter, seed, resultSelector, _ => true);
-        }
-
-        // Sequence of any size.
-        public static IEnumerable<TResult> Create<TSource, TResult>(
-            Func<TSource, TSource> iter,
-            TSource seed,
-            Func<TSource, TResult> resultSelector,
-            Func<TSource, bool> predicate)
-        {
-            TSource next = seed;
-
-            while (predicate.Invoke(next)) {
-                yield return resultSelector.Invoke(next);
-
-                next = iter.Invoke(next);
             }
         }
 

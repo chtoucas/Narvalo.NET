@@ -94,7 +94,7 @@
     <Compile Include="Monads\Stubs`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Fibonacci.cs">
+    <Compile Include="Fx\Fibonacci.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Monads\Samples\MonadValue`1.cs" />
@@ -126,11 +126,11 @@
     <Compile Include="Monads\Samples\MonadOr`1.cs" />
     <Compile Include="Monads\Samples\MonadPlus`1.cs" />
     <Compile Include="Monads\Samples\MonadZero`1.cs" />
-    <Compile Include="YCombinator.cs" />
+    <Compile Include="Fx\YCombinator.cs" />
     <Compile Include="Miscs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Bananas.cs" />
-    <Compile Include="Lenses.cs" />
+    <Compile Include="Linq\Bananas.cs" />
+    <Compile Include="Linq\Lenses.cs" />
     <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
     <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
     <Compile Include="Linq\IQuerySyntax.cs" />

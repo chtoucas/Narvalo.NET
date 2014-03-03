@@ -1,42 +1,25 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu
+namespace Narvalo.Edu.Linq
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Collections;
-    using Narvalo.Edu.Monads;
 
+    // Linq from scratch.
     public static class Bananas
     {
-        public static Monad<TAccumulate> Collapse<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
-            Func<Monad<TAccumulate>, bool> predicate)
-        {
-            Monad<TAccumulate> result = Monad.Return(seed);
-
-            using (var iter = @this.GetEnumerator()) {
-                while (predicate.Invoke(result) && iter.MoveNext()) {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
-                }
-            }
-
-            return result;
-        }
-
         #region Quantifiers
 
         public static bool Any<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return @this.Collapse(true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
+            return @this.Fold(true, (acc, item) => acc || predicate.Invoke(item), acc => !acc);
         }
 
         public static bool All<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
         {
-            return @this.Collapse(true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
+            return @this.Fold(true, (acc, item) => acc && predicate.Invoke(item), acc => acc);
         }
 
         public static bool Contains<T>(this IEnumerable<T> @this, T value)
@@ -79,15 +62,7 @@ namespace Narvalo.Edu
             TResult seed,
             Func<TResult, T, TResult> accumulator)
         {
-            return @this.Collapse(seed, accumulator, _ => true);
-        }
-
-        public static Monad<TResult> AggregateM<T, TResult>(
-            this IEnumerable<T> @this,
-            TResult seed,
-            Func<TResult, T, Monad<TResult>> accumulatorM)
-        {
-            return @this.Collapse(seed, accumulatorM, _ => true);
+            return @this.Fold(seed, accumulator, _ => true);
         }
 
         #endregion

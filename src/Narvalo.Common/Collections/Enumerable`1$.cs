@@ -59,17 +59,17 @@ namespace Narvalo.Collections
 
         #region Catamorphism
 
-        public static TResult Collapse<TSource, TResult>(
+        public static TAccumulate Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
-            TResult seed,
-            Func<TResult, TSource, TResult> accumulator,
-            Func<TResult, bool> predicate)
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> accumulator,
+            Func<TAccumulate, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(accumulator, "accumulator");
             Require.NotNull(predicate, "predicate");
 
-            TResult result = seed;
+            TAccumulate result = seed;
 
             using (var iter = @this.GetEnumerator()) {
                 while (predicate.Invoke(result) && iter.MoveNext()) {
@@ -78,6 +78,30 @@ namespace Narvalo.Collections
             }
 
             return result;
+        }
+
+        public static TSource Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, TSource> accumulator,
+            Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(accumulator, "accumulator");
+            Require.NotNull(predicate, "predicate");
+
+            using (var iter = @this.GetEnumerator()) {
+                if (!iter.MoveNext()) {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                TSource result = iter.Current;
+
+                while (predicate.Invoke(result) && iter.MoveNext()) {
+                    result = accumulator.Invoke(result, iter.Current);
+                }
+
+                return result;
+            }
         }
 
         #endregion
