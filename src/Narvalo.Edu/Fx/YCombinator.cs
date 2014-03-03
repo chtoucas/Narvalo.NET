@@ -12,17 +12,28 @@ namespace Narvalo.Edu.Fx
     {
         public static Func<TSource, TResult> Y0<TSource, TResult>(Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
-            Recursive<TSource, TResult> rec = r => _ => generator(r(r))(_);
-            return rec(rec);
+            Recursive<TSource, TResult> rec = r => _ => generator.Invoke(r.Invoke(r)).Invoke(_);
+
+            return rec.Invoke(rec);
         }
 
         public static Func<TSource, TResult> Y1<TSource, TResult>(Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
             Func<TSource, TResult> g = null;
-            g = _ => generator(g)(_);
+            g = _ => generator.Invoke(g).Invoke(_);
 
             return g;
 
+        }
+
+        public static Func<TSource, TResult> Y2<TSource, TResult>(
+            Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
+        {
+            Func<TSource, TResult> g = null;
+
+            g = generator.Invoke(_ => g.Invoke(_));
+
+            return g;
         }
     }
 }

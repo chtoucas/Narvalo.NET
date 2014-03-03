@@ -6,7 +6,7 @@ namespace Narvalo.Internal
 
     static class ExceptionFactory
     {
-        public static ArgumentNullException ArgumentNull(string parameterName)
+        internal static ArgumentNullException ArgumentNull(string parameterName)
         {
             return new ArgumentNullException(parameterName, Format.CurrentCulture(SR.ExceptionFactory_ArgumentNullFormat, parameterName));
         }

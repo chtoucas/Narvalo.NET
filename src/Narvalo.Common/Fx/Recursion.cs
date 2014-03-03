@@ -11,7 +11,6 @@ namespace Narvalo.Fx
         {
             Func<TSource, TResult> g = null;
 
-            // return g;
             return generator.Invoke(_ => g.Invoke(_));
         }
     }

@@ -8,6 +8,6 @@ namespace Narvalo.Internal
     {
         static readonly Action Noop_ = () => { };
 
-        public static Action Noop { get { return Noop_; } }
+        internal static Action Noop { get { return Noop_; } }
     }
 }

@@ -8,6 +8,6 @@ namespace Narvalo.Internal
     {
         static readonly Action<T> Ignore_ = _ => { };
 
-        public static Action<T> Ignore { get { return Ignore_; } }
+        internal static Action<T> Ignore { get { return Ignore_; } }
     }
 }

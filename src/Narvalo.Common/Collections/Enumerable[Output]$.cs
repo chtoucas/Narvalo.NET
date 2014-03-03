@@ -11,6 +11,8 @@ namespace Narvalo.Collections
     {
         internal static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
         {
+            DebugCheck.NotNull(@this);
+
             IList<TSource> list = new List<TSource>();
 
             foreach (var m in @this) {

@@ -974,9 +974,11 @@ namespace <#= LinqNamespace #>.Internal {
     static partial class Enumerable<#= Name #>Extensions
     {
 <#+ if (!RequireStruct) { #>
-        public static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
+
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
                 = (m, n) =>
@@ -991,9 +993,11 @@ namespace <#= LinqNamespace #>.Internal {
 
 <#+ if (HasZero && HasPlus) { #>
 
-        public static <#= Name #><TSource> SumCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        internal static <#= Name #><TSource> SumCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
+
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
 <#+ } #>
@@ -1163,23 +1167,25 @@ namespace <#= LinqNamespace #>.Internal {
     static partial class EnumerableExtensions
     {
 <#+ if (!RequireStruct) { #>
-        public static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(funM, "funM");
 
             return @this.Select(funM).Collect();
         }
 <#+ } #>
 
-        public static IEnumerable<TSource> FilterCore<TSource>(
+        internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(predicateM, "predicateM");
 
             // NB: Haskell uses tail recursion, we don't.
@@ -1199,13 +1205,14 @@ namespace <#= LinqNamespace #>.Internal {
         }
 
 <#+ if (!RequireStruct) { #>
-        public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
+        internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(funM, "funM");
 
             return from _ in
@@ -1215,7 +1222,7 @@ namespace <#= LinqNamespace #>.Internal {
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
         }
 
-        public static <#= Name #><IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static <#= Name #><IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
@@ -1223,6 +1230,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSecond"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ DebugNotNull_("@this"); #>
 <#+ NotNull_("second"); #>
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
@@ -1234,13 +1242,14 @@ namespace <#= LinqNamespace #>.Internal {
         }
 <#+ } #>
 
-        public static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
@@ -1252,21 +1261,24 @@ namespace <#= LinqNamespace #>.Internal {
             return result;
         }
 
-        public static <#= Name #><TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static <#= Name #><TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
+<#+ DebugNotNull_("@this"); #>
+
             return @this.Reverse().Fold(seed, accumulatorM);
         }
 
-        public static <#= Name #><TSource> ReduceCore<TSource>(
+        internal static <#= Name #><TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 
             using (var iter = @this.GetEnumerator()) {
@@ -1284,15 +1296,17 @@ namespace <#= LinqNamespace #>.Internal {
             }
         }
 
-        public static <#= Name #><TSource> ReduceBackCore<TSource>(
+        internal static <#= Name #><TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
+
             return @this.Reverse().Reduce(accumulatorM);
         }
 
-        public static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
@@ -1300,6 +1314,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
@@ -1314,12 +1329,13 @@ namespace <#= LinqNamespace #>.Internal {
             return result;
         }
 
-        public static <#= Name #><TSource> ReduceCore<TSource>(
+        internal static <#= Name #><TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
             Func<<#= Name #><TSource>, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ DebugNotNull_("@this"); #>
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
@@ -1399,7 +1415,16 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
         }
     }
-
+    
+    void DebugNotNull_(string value) 
+    {
+        if (IsNullable) {
+#>
+            DebugCheck.NotNull(<#= value #>);
+<#+
+        }
+    }
+    
     void ThrowIfInitialized_() 
     {
         if (_initialized) {

@@ -26,7 +26,6 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            // return AppendCore_(@this, element);
             return @this.Concat(Enumerable.Repeat(element, 1));
         }
 
@@ -34,7 +33,6 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
 
-            // return PrependCore_(@this, element);
             return Enumerable.Repeat(element, 1).Concat(@this);
         }
 
@@ -53,6 +51,29 @@ namespace Narvalo.Collections
             }
 
             return result;
+        }
+
+        #endregion
+
+        #region Aggregate Operators
+
+        public static TAccumulate AggregateBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, TAccumulate> accumulator)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Aggregate(seed, accumulator);
+        }
+
+        public static TSource AggregateBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, TSource> accumulator)
+        {
+            Require.Object(@this);
+
+            return @this.Reverse().Aggregate(accumulator);
         }
 
         #endregion
@@ -105,24 +126,6 @@ namespace Narvalo.Collections
         }
 
         #endregion
-
-        ////static IEnumerable<T> AppendCore_<T>(IEnumerable<T> source, T element)
-        ////{
-        ////    foreach (var item in source) {
-        ////        yield return item;
-        ////    }
-
-        ////    yield return element;
-        ////}
-
-        ////static IEnumerable<T> PrependCore_<T>(IEnumerable<T> source, T element)
-        ////{
-        ////    yield return element;
-
-        ////    foreach (var item in source) {
-        ////        yield return item;
-        ////    }
-        ////}
     }
 
     // Extensions using monadic classes.
@@ -132,6 +135,7 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
+            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return from _ in @this
@@ -144,6 +148,7 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, Output<TResult>> funM)
         {
+            Require.Object(@this);
             Require.NotNull(funM, "funM");
 
             return from _ in @this
@@ -156,11 +161,14 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Require.Object(@this);
+
             return @this.FirstOrNone(_ => true);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
@@ -171,11 +179,14 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Require.Object(@this);
+
             return @this.LastOrNone(_ => true);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
@@ -195,18 +206,21 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Require.Object(@this);
+
             return @this.SingleOrNone(_ => true);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
             using (var iter = seq.GetEnumerator()) {
                 var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
 
-                // On retourne Maybe.None si il y a encore un élément.
+                // Return Maybe.None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
             }
         }
@@ -221,6 +235,7 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
+            DebugCheck.NotNull(@this);
             Require.NotNull(predicateM, "predicateM");
 
             return from _ in @this

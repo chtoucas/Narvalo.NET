@@ -11,7 +11,7 @@ namespace Narvalo.Internal
 
     static class TryParserExtensions
     {
-        public static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
+        internal static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {
             Require.Object(@this);
 
@@ -21,7 +21,7 @@ namespace Narvalo.Internal
             return @this.Invoke(value, out result) ? result : (T?)null;
         }
 
-        public static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
+        internal static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
         {
             Require.Object(@this);
 
