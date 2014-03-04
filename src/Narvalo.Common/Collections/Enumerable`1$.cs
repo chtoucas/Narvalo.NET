@@ -159,8 +159,6 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
-
             return FirstOrNone(@this, _ => true);
         }
 
@@ -177,8 +175,6 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
-
             return LastOrNone(@this, _ => true);
         }
 
@@ -204,8 +200,6 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
-
             return SingleOrNone(@this, _ => true);
         }
 

@@ -13,13 +13,17 @@ namespace Narvalo.Edu.Monads.Samples {
     // Comonad methods.
     public static partial class Comonad
     {
-        // [Haskell] extract
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
         public static T Extract<T>(Comonad<T> monad)
         {
             return Comonad<T>.ε(monad);
         }
 
-        // [Haskell] duplicate
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
         {
             return Comonad<T>.δ(monad);

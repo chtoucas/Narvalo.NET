@@ -7,13 +7,13 @@ namespace Narvalo.Collections
     using Narvalo.Fx;
 
     // Optimized extensions.
-    public static partial class EnumerableExtensions
+    public static partial class EnumerableMaybeExtensions
     {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
 
-            IList<TSource> list = new List<TSource>();
+            var list = new List<TSource>();
 
             foreach (var m in @this) {
                 if (m.IsNone) {

@@ -17,15 +17,25 @@ namespace Narvalo.Fx {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Monad methods.
+    /// <summary>
+    /// Provides a set of static methods and extension methods for <see cref="Output{T}"/>.
+    /// </summary>
     public static partial class Output
     {
         static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
 
+        /// <summary>
+        /// Returns the unique object of type <c>Output&lt;Unit&gt;</c>.
+        /// </summary>
         public static Output<Unit> Unit { get { return Unit_; } }
 
 
-        // [Haskell] return
+        /// <summary>
+        /// Returns a new instance of <see cref="Output{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static Output<T> Success<T>(T value)
         {
             return Output<T>.η(value);
@@ -33,7 +43,12 @@ namespace Narvalo.Fx {
         
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] join
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             return Output<T>.μ(square);
@@ -41,8 +56,14 @@ namespace Narvalo.Fx {
 
         #endregion
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Output{T}"/> values.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T>, Output<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m =>
@@ -52,6 +73,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Output{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
@@ -62,6 +90,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Output{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
@@ -72,6 +107,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Output{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -83,6 +125,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Output{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -97,12 +146,14 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions for Output<T>.
+    // Extensions methods for Output<T>.
     public static partial class Output
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] fmap
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Select<TSource, TResult>(this Output<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
@@ -111,7 +162,9 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => Output.Success(selector.Invoke(_)));
         }
 
-        // [Haskell] >>
+        /// <remarks>
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Then<TSource, TResult>(this Output<TSource> @this, Output<TResult> other)
         {
             Require.Object(@this);
@@ -124,7 +177,9 @@ namespace Narvalo.Fx {
         #region Generalisations of list functions (Prelude)
 
 
-        // [Haskell] replicateM
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static Output<IEnumerable<TSource>> Repeat<TSource>(this Output<TSource> @this, int count)
         {
             Require.Object(@this);
@@ -138,7 +193,9 @@ namespace Narvalo.Fx {
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        // [Haskell] when
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Output<Unit> When<TSource>(this Output<TSource> @this, bool predicate, Action action)
         {
@@ -151,7 +208,9 @@ namespace Narvalo.Fx {
             return Output.Unit;
         }
 
-        // [Haskell] unless
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static Output<Unit> Unless<TSource>(this Output<TSource> @this, bool predicate, Action action)
         {
             Require.Object(@this);
@@ -163,7 +222,9 @@ namespace Narvalo.Fx {
 
         #region Monadic lifting operators (Prelude)
 
-        // [Haskell] liftM2
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Zip<TFirst, TSecond, TResult>(
             this Output<TFirst> @this,
             Output<TSecond> second,
@@ -176,7 +237,9 @@ namespace Narvalo.Fx {
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Zip<T1, T2, T3, TResult>(
             this Output<T1> @this,
             Output<T2> second,
@@ -193,7 +256,9 @@ namespace Narvalo.Fx {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM4
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Output<T1> @this,
              Output<T2> second,
@@ -211,7 +276,9 @@ namespace Narvalo.Fx {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM5
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Output<T1> @this,
             Output<T2> second,
@@ -283,12 +350,14 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions for Func<T, Output<TResult>>.
+    // Extensions methods for Func<TSource, Output<TResult>>.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] =<<
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Output<TResult>> @this,
             Output<TSource> value)
@@ -298,7 +367,9 @@ namespace Narvalo.Fx {
             return value.Bind(@this);
         }
 
-        // [Haskell] >=>
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Output<TMiddle>> @this,
             Func<TMiddle, Output<TResult>> funM)
@@ -308,7 +379,9 @@ namespace Narvalo.Fx {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Output<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Output<TResult>> @this,
             Func<TSource, Output<TMiddle>> funM)

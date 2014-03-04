@@ -17,18 +17,33 @@ namespace Narvalo.Edu.Monads.Samples {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Monad methods.
+    /// <summary>
+    /// Provides a set of static methods and extension methods for <see cref="MonadValue{T}"/>.
+    /// </summary>
     public static partial class MonadValue
     {
         static readonly MonadValue<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
         static readonly MonadValue<Unit> None_ = MonadValue<Unit>.None;
 
+        /// <summary>
+        /// Returns the unique object of type <c>MonadValue&lt;Unit&gt;</c>.
+        /// </summary>
         public static MonadValue<Unit> Unit { get { return Unit_; } }
 
-        // [Haskell] mzero
+        /// <summary>
+        /// Returns the zero of type <c>MonadValue&lt;Unit&gt;.None</c>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<Unit> None { get { return None_; } }
 
-        // [Haskell] return
+        /// <summary>
+        /// Returns a new instance of <see cref="MonadValue{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<T> Return<T>(T value)
             where T : struct
         {
@@ -37,7 +52,12 @@ namespace Narvalo.Edu.Monads.Samples {
         
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] join
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<T> Flatten<T>(MonadValue<MonadValue<T>> square)
             where T : struct
         {
@@ -46,8 +66,14 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #endregion
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadValue{T}"/> values.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadValue<T>, MonadValue<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
             where T : struct
             where TResult : struct
@@ -58,6 +84,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadValue{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             where T1 : struct
@@ -70,6 +103,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadValue{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             where T1 : struct
@@ -83,6 +123,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadValue{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -98,6 +145,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadValue{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -117,12 +171,14 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    // Extensions for MonadValue<T>.
+    // Extensions methods for MonadValue<T>.
     public static partial class MonadValue
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] fmap
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Select<TSource, TResult>(this MonadValue<TSource> @this, Func<TSource, TResult> selector)
             where TSource : struct
             where TResult : struct
@@ -131,7 +187,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(_ => MonadValue.Return(selector.Invoke(_)));
         }
 
-        // [Haskell] >>
+        /// <remarks>
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Then<TSource, TResult>(this MonadValue<TSource> @this, MonadValue<TResult> other)
             where TSource : struct
             where TResult : struct
@@ -144,7 +202,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] mfilter
+        /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TSource> Where<TSource>(this MonadValue<TSource> @this, Func<TSource, bool> predicate)
             where TSource : struct
         {
@@ -156,7 +216,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Conditional execution of monadic expressions (Prelude)
 
-        // [Haskell] guard
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static MonadValue<Unit> Guard<TSource>(this MonadValue<TSource> @this, bool predicate)
             where TSource : struct
@@ -164,7 +226,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return predicate ? MonadValue.Unit : MonadValue.None;
         }
 
-        // [Haskell] when
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static MonadValue<Unit> When<TSource>(this MonadValue<TSource> @this, bool predicate, Action action)
             where TSource : struct
@@ -178,7 +242,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return MonadValue.Unit;
         }
 
-        // [Haskell] unless
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<Unit> Unless<TSource>(this MonadValue<TSource> @this, bool predicate, Action action)
             where TSource : struct
         {
@@ -190,7 +256,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Monadic lifting operators (Prelude)
 
-        // [Haskell] liftM2
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadValue<TFirst> @this,
             MonadValue<TSecond> second,
@@ -203,7 +271,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Zip<T1, T2, T3, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -221,7 +291,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM4
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadValue<T1> @this,
              MonadValue<T2> second,
@@ -241,7 +313,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM5
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadValue<T1> @this,
             MonadValue<T2> second,
@@ -470,12 +544,14 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    // Extensions for Func<T, MonadValue<TResult>>.
+    // Extensions methods for Func<TSource, MonadValue<TResult>>.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] =<<
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadValue<TResult>> @this,
             MonadValue<TSource> value)
@@ -486,7 +562,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return value.Bind(@this);
         }
 
-        // [Haskell] >=>
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadValue<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadValue<TMiddle>> @this,
             Func<TMiddle, MonadValue<TResult>> funM)
@@ -498,7 +576,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadValue<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadValue<TResult>> @this,
             Func<TSource, MonadValue<TMiddle>> funM)
@@ -533,7 +613,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] msum
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TSource> Sum<TSource>(this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
@@ -554,7 +636,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] filterM
+        /// <remarks>
+        /// Named <c>filterM</c> in Haskell parlance.
+        /// </remarks>
         // REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
@@ -566,7 +650,9 @@ namespace Narvalo.Edu.Monads.Samples {
         }
 
 
-        // [Haskell] foldM
+        /// <remarks>
+        /// Named <c>foldM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadValue<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,

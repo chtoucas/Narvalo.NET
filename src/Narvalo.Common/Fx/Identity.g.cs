@@ -17,15 +17,25 @@ namespace Narvalo.Fx {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Monad methods.
+    /// <summary>
+    /// Provides a set of static methods and extension methods for <see cref="Identity{T}"/>.
+    /// </summary>
     public static partial class Identity
     {
         static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
 
+        /// <summary>
+        /// Returns the unique object of type <c>Identity&lt;Unit&gt;</c>.
+        /// </summary>
         public static Identity<Unit> Unit { get { return Unit_; } }
 
 
-        // [Haskell] return
+        /// <summary>
+        /// Returns a new instance of <see cref="Identity{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<T> Return<T>(T value)
         {
             return Identity<T>.η(value);
@@ -33,7 +43,12 @@ namespace Narvalo.Fx {
         
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] join
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
         {
             return Identity<T>.μ(square);
@@ -41,8 +56,14 @@ namespace Narvalo.Fx {
 
         #endregion
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Identity{T}"/> values.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Identity<T>, Identity<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m =>
@@ -52,6 +73,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Identity{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
@@ -62,6 +90,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Identity{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
@@ -72,6 +107,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Identity{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -83,6 +125,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="Identity{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -97,12 +146,14 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions for Identity<T>.
+    // Extensions methods for Identity<T>.
     public static partial class Identity
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] fmap
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Select<TSource, TResult>(this Identity<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
@@ -111,7 +162,9 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => Identity.Return(selector.Invoke(_)));
         }
 
-        // [Haskell] >>
+        /// <remarks>
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Then<TSource, TResult>(this Identity<TSource> @this, Identity<TResult> other)
         {
             Require.Object(@this);
@@ -124,7 +177,9 @@ namespace Narvalo.Fx {
         #region Generalisations of list functions (Prelude)
 
 
-        // [Haskell] replicateM
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<IEnumerable<TSource>> Repeat<TSource>(this Identity<TSource> @this, int count)
         {
             Require.Object(@this);
@@ -138,7 +193,9 @@ namespace Narvalo.Fx {
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        // [Haskell] when
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static Identity<Unit> When<TSource>(this Identity<TSource> @this, bool predicate, Action action)
         {
@@ -151,7 +208,9 @@ namespace Narvalo.Fx {
             return Identity.Unit;
         }
 
-        // [Haskell] unless
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<Unit> Unless<TSource>(this Identity<TSource> @this, bool predicate, Action action)
         {
             Require.Object(@this);
@@ -163,7 +222,9 @@ namespace Narvalo.Fx {
 
         #region Monadic lifting operators (Prelude)
 
-        // [Haskell] liftM2
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Zip<TFirst, TSecond, TResult>(
             this Identity<TFirst> @this,
             Identity<TSecond> second,
@@ -176,7 +237,9 @@ namespace Narvalo.Fx {
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Zip<T1, T2, T3, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,
@@ -193,7 +256,9 @@ namespace Narvalo.Fx {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM4
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Identity<T1> @this,
              Identity<T2> second,
@@ -211,7 +276,9 @@ namespace Narvalo.Fx {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM5
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Identity<T1> @this,
             Identity<T2> second,
@@ -283,12 +350,14 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions for Func<T, Identity<TResult>>.
+    // Extensions methods for Func<TSource, Identity<TResult>>.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] =<<
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Identity<TResult>> @this,
             Identity<TSource> value)
@@ -298,7 +367,9 @@ namespace Narvalo.Fx {
             return value.Bind(@this);
         }
 
-        // [Haskell] >=>
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Identity<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Identity<TMiddle>> @this,
             Func<TMiddle, Identity<TResult>> funM)
@@ -308,7 +379,9 @@ namespace Narvalo.Fx {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Identity<TResult>> @this,
             Func<TSource, Identity<TMiddle>> funM)
@@ -326,13 +399,17 @@ namespace Narvalo.Fx {
     // Comonad methods.
     public static partial class Identity
     {
-        // [Haskell] extract
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
         public static T Extract<T>(Identity<T> monad)
         {
             return Identity<T>.ε(monad);
         }
 
-        // [Haskell] duplicate
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
         {
             return Identity<T>.δ(monad);

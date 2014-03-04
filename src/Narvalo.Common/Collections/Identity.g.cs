@@ -22,7 +22,9 @@ namespace Narvalo.Collections {
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] sequence
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Identity<TSource>> @this)
         {
             Require.Object(@this);
@@ -39,7 +41,9 @@ namespace Narvalo.Collections {
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] mapM
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
@@ -53,7 +57,9 @@ namespace Narvalo.Collections {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] filterM
+        /// <remarks>
+        /// Named <c>filterM</c> in Haskell parlance.
+        /// </remarks>
         // REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
@@ -64,7 +70,9 @@ namespace Narvalo.Collections {
             return @this.FilterCore(predicateM);
         }
 
-        // [Haskell] mapAndUnzipM
+        /// <remarks>
+        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
@@ -74,7 +82,9 @@ namespace Narvalo.Collections {
             return @this.MapAndUnzipCore(funM);
         }
 
-        // [Haskell] zipWithM
+        /// <remarks>
+        /// Named <c>zipWithM</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -85,7 +95,9 @@ namespace Narvalo.Collections {
             return @this.ZipCore(second, resultSelectorM);
         }
 
-        // [Haskell] foldM
+        /// <remarks>
+        /// Named <c>foldM</c> in Haskell parlance.
+        /// </remarks>
         public static Identity<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -226,9 +238,9 @@ namespace Narvalo.Collections.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return from _ in @this.Select(funM).Collect()
-                   let item1 = from item in _ select item.Item1
-                   let item2 = from item in _ select item.Item2
+            return from tuple in @this.Select(funM).Collect()
+                   let item1 = tuple.Select(_ => _.Item1)
+                   let item2 = tuple.Select(_ => _.Item2)
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
         }
 

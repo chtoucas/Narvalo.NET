@@ -17,18 +17,33 @@ namespace Narvalo.Edu.Monads.Samples {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Monad methods.
+    /// <summary>
+    /// Provides a set of static methods and extension methods for <see cref="MonadOr{T}"/>.
+    /// </summary>
     public static partial class MonadOr
     {
         static readonly MonadOr<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
         static readonly MonadOr<Unit> None_ = MonadOr<Unit>.None;
 
+        /// <summary>
+        /// Returns the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
+        /// </summary>
         public static MonadOr<Unit> Unit { get { return Unit_; } }
 
-        // [Haskell] mzero
+        /// <summary>
+        /// Returns the zero of type <c>MonadOr&lt;Unit&gt;.None</c>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<Unit> None { get { return None_; } }
 
-        // [Haskell] return
+        /// <summary>
+        /// Returns a new instance of <see cref="MonadOr{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<T> Return<T>(T value)
         {
             return MonadOr<T>.η(value);
@@ -36,7 +51,12 @@ namespace Narvalo.Edu.Monads.Samples {
         
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] join
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
         {
             return MonadOr<T>.μ(square);
@@ -44,8 +64,14 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #endregion
 
-        #region Monadic lifting operators
+        #region Monadic lifting operators (Prelude)
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadOr{T}"/> values.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadOr<T>, MonadOr<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
         {
             return m =>
@@ -55,6 +81,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadOr{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
@@ -65,6 +98,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadOr{T}"/> values, 
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
@@ -75,6 +115,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadOr{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -86,6 +133,13 @@ namespace Narvalo.Edu.Monads.Samples {
             };
         }
 
+        /// <summary>
+        /// Promotes a function to use and return <see cref="MonadOr{T}"/> values,
+        /// scanning the monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<MonadOr<T1>, MonadOr<T2>, MonadOr<T3>, MonadOr<T4>, MonadOr<T5>, MonadOr<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -100,12 +154,14 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    // Extensions for MonadOr<T>.
+    // Extensions methods for MonadOr<T>.
     public static partial class MonadOr
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] fmap
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Select<TSource, TResult>(this MonadOr<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
@@ -114,7 +170,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(_ => MonadOr.Return(selector.Invoke(_)));
         }
 
-        // [Haskell] >>
+        /// <remarks>
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Then<TSource, TResult>(this MonadOr<TSource> @this, MonadOr<TResult> other)
         {
             Require.Object(@this);
@@ -126,7 +184,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] mfilter
+        /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TSource> Where<TSource>(this MonadOr<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
@@ -135,7 +195,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(_ => predicate.Invoke(_) ? @this : MonadOr<TSource>.None);
         }
 
-        // [Haskell] replicateM
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<IEnumerable<TSource>> Repeat<TSource>(this MonadOr<TSource> @this, int count)
         {
             Require.Object(@this);
@@ -148,14 +210,18 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Conditional execution of monadic expressions (Prelude)
 
-        // [Haskell] guard
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static MonadOr<Unit> Guard<TSource>(this MonadOr<TSource> @this, bool predicate)
         {
             return predicate ? MonadOr.Unit : MonadOr.None;
         }
 
-        // [Haskell] when
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
         public static MonadOr<Unit> When<TSource>(this MonadOr<TSource> @this, bool predicate, Action action)
         {
@@ -168,7 +234,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return MonadOr.Unit;
         }
 
-        // [Haskell] unless
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<Unit> Unless<TSource>(this MonadOr<TSource> @this, bool predicate, Action action)
         {
             Require.Object(@this);
@@ -180,7 +248,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Monadic lifting operators (Prelude)
 
-        // [Haskell] liftM2
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Zip<TFirst, TSecond, TResult>(
             this MonadOr<TFirst> @this,
             MonadOr<TSecond> second,
@@ -193,7 +263,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        // [Haskell] liftM3
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Zip<T1, T2, T3, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -210,7 +282,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM4
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, TResult>(
              this MonadOr<T1> @this,
              MonadOr<T2> second,
@@ -228,7 +302,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.Bind(g);
         }
 
-        // [Haskell] liftM5
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this MonadOr<T1> @this,
             MonadOr<T2> second,
@@ -435,12 +511,14 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    // Extensions for Func<T, MonadOr<TResult>>.
+    // Extensions methods for Func<TSource, MonadOr<TResult>>.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] =<<
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadOr<TResult>> @this,
             MonadOr<TSource> value)
@@ -450,7 +528,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return value.Bind(@this);
         }
 
-        // [Haskell] >=>
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadOr<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadOr<TMiddle>> @this,
             Func<TMiddle, MonadOr<TResult>> funM)
@@ -460,7 +540,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        // [Haskell] <=<
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadOr<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadOr<TResult>> @this,
             Func<TSource, MonadOr<TMiddle>> funM)
@@ -488,7 +570,9 @@ namespace Narvalo.Edu.Monads.Samples {
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] sequence
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<MonadOr<TSource>> @this)
         {
             Require.Object(@this);
@@ -500,7 +584,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] msum
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TSource> Sum<TSource>(this IEnumerable<MonadOr<TSource>> @this)
         {
             Require.Object(@this);
@@ -516,7 +602,9 @@ namespace Narvalo.Edu.Monads.Samples {
     {
         #region Basic Monad functions (Prelude)
 
-        // [Haskell] mapM
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> funM)
@@ -530,7 +618,9 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Generalisations of list functions (Prelude)
 
-        // [Haskell] filterM
+        /// <remarks>
+        /// Named <c>filterM</c> in Haskell parlance.
+        /// </remarks>
         // REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
@@ -541,7 +631,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.FilterCore(predicateM);
         }
 
-        // [Haskell] mapAndUnzipM
+        /// <remarks>
+        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
            this IEnumerable<TSource> @this,
            Func<TSource, MonadOr<Tuple<TFirst, TSecond>>> funM)
@@ -551,7 +643,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.MapAndUnzipCore(funM);
         }
 
-        // [Haskell] zipWithM
+        /// <remarks>
+        /// Named <c>zipWithM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -562,7 +656,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.ZipCore(second, resultSelectorM);
         }
 
-        // [Haskell] foldM
+        /// <remarks>
+        /// Named <c>foldM</c> in Haskell parlance.
+        /// </remarks>
         public static MonadOr<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -711,9 +807,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return from _ in @this.Select(funM).Collect()
-                   let item1 = from item in _ select item.Item1
-                   let item2 = from item in _ select item.Item2
+            return from tuple in @this.Select(funM).Collect()
+                   let item1 = tuple.Select(_ => _.Item1)
+                   let item2 = tuple.Select(_ => _.Item2)
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
         }
 

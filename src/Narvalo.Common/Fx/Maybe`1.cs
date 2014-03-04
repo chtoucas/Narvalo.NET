@@ -140,7 +140,7 @@ namespace Narvalo.Fx
          */
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> that does not hold any value.
+        /// Initializes a new instance of <see cref="Maybe{T}" /> that does not hold any value.
         /// </summary>
         Maybe()
         {
@@ -148,7 +148,7 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Narvalo.Fx.Maybe&lt;T&gt;" /> using the specified value. 
+        /// Initializes a new instance of <see cref="Maybe{T}" /> using the specified value. 
         /// </summary>
         /// <param name="value">The underlying value.</param>
         Maybe(T value)
@@ -170,7 +170,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Returns the underlying value.
         /// </summary>
-        /// <exception cref="System.InvalidOperationException">The object does not contain any value.</exception>
+        /// <exception cref="InvalidOperationException">The object does not contain any value.</exception>
         internal T Value
         {
             get
