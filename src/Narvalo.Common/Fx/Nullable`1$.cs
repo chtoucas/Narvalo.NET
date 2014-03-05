@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /*!
      * What's not to be found here:

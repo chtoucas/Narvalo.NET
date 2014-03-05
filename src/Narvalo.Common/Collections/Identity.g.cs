@@ -17,15 +17,18 @@ namespace Narvalo.Collections {
     using Narvalo.Fx;   // For Unit
     using Narvalo.Collections.Internal;
 
-    // Extensions for IEnumerable<Identity<T>>.
+    /*!
+     * Extensions for IEnumerable<Identity<T>>.
+     */
     public static partial class EnumerableIdentityExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
-        public static Identity<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Identity<TSource>> @this)
+        /*!
+         * Named `sequence` in Haskell parlance.
+         */
+        public static Identity<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Identity<TSource>> @this)
         {
             Require.Object(@this);
 
@@ -73,9 +76,10 @@ namespace Narvalo.Collections {
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
+        public static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzip<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
 
@@ -178,10 +182,13 @@ namespace Narvalo.Collections.Internal {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Internal extensions for IEnumerable<Identity<T>>.
+    /*!
+     * Internal extensions for IEnumerable<Identity<T>>.
+     */
     static partial class EnumerableIdentityExtensions
     {
-        internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Identity<TSource>> @this)
+        internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<Identity<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
 
@@ -190,7 +197,8 @@ namespace Narvalo.Collections.Internal {
                 = (m, n) =>
                     m.Bind(list =>
                     {
-                        return n.Bind(item => Identity.Return(list.Concat(Enumerable.Repeat(item, 1))));
+                        return n.Bind(item => Identity.Return(
+                            list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun);
@@ -232,9 +240,10 @@ namespace Narvalo.Collections.Internal {
             return list;
         }
 
-        internal static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
+        internal static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
             DebugCheck.NotNull(@this);
 
@@ -252,7 +261,8 @@ namespace Narvalo.Collections.Internal {
             DebugCheck.NotNull(@this);
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
-            Func<TFirst, TSecond, Identity<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, Identity<TResult>> resultSelector
+                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
             // instead of using the Zip from Linq.

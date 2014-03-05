@@ -18,7 +18,7 @@ namespace Narvalo.Fx {
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods and extension methods for <see cref="Maybe{T}"/>.
+    /// Provides a set of static methods and extension methods for <see cref="Maybe{T}" />.
     /// </summary>
     public static partial class Maybe
     {
@@ -30,20 +30,20 @@ namespace Narvalo.Fx {
         /// </summary>
         public static Maybe<Unit> Unit { get { return Unit_; } }
 
+        /*!
+         * Named `mzero` in Haskell parlance.
+         */
         /// <summary>
         /// Returns the zero of type <c>Maybe&lt;Unit&gt;.None</c>.
         /// </summary>
-        /// <remarks>
-        /// Named <c>mzero</c> in Haskell parlance.
-        /// </remarks>
         public static Maybe<Unit> None { get { return None_; } }
 
+        /*!
+         * Named `return` in Haskell parlance.
+         */
         /// <summary>
-        /// Returns a new instance of <see cref="Maybe{T}"/>.
+        /// Returns a new instance of <see cref="Maybe{T}" />.
         /// </summary>
-        /// <remarks>
-        /// Named <c>return</c> in Haskell parlance.
-        /// </remarks>
         public static Maybe<T> Create<T>(T value)
         {
             return Maybe<T>.η(value);
@@ -51,12 +51,12 @@ namespace Narvalo.Fx {
         
         #region Generalisations of list functions (Prelude)
 
+        /*!
+         * Named `join` in Haskell parlance.
+         */
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        /// <remarks>
-        /// Named <c>join</c> in Haskell parlance.
-        /// </remarks>
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
         {
             return Maybe<T>.μ(square);
@@ -66,13 +66,14 @@ namespace Narvalo.Fx {
 
         #region Monadic lifting operators (Prelude)
 
+        /*!
+         * Named `liftM` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="Maybe{T}"/> values.
+        /// Promotes a function to use and return <see cref="Maybe{T}" /> values.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM</c> in Haskell parlance.
-        /// </remarks>
-        public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
+            Func<T, TResult> fun)
         {
             return m =>
             {
@@ -81,13 +82,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /*!
+         * Named `liftM2` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="Maybe{T}"/> values, 
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Maybe{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
@@ -98,13 +99,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /*!
+         * Named `liftM3` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="Maybe{T}"/> values, 
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Maybe{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
@@ -115,13 +116,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /*!
+         * Named `liftM4` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="Maybe{T}"/> values,
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Maybe{T}" /> values, scanning the
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -133,13 +134,13 @@ namespace Narvalo.Fx {
             };
         }
 
+        /*!
+         * Named `liftM5` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="Maybe{T}"/> values,
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="Maybe{T}" /> values, scanning the
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -154,15 +155,19 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions methods for Maybe<T>.
+    /*!
+     * Extensions methods for Maybe<T>.
+     */
     public static partial class Maybe
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<TResult> Select<TSource, TResult>(this Maybe<TSource> @this, Func<TSource, TResult> selector)
+        /*!
+         * Named `fmap` in Haskell parlance.
+         */
+        public static Maybe<TResult> Select<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<TSource, TResult> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
@@ -170,10 +175,12 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<TResult> Then<TSource, TResult>(this Maybe<TSource> @this, Maybe<TResult> other)
+        /*!
+         * Named `>>` in Haskell parlance.
+         */
+        public static Maybe<TResult> Then<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Maybe<TResult> other)
         {
             Require.Object(@this);
 
@@ -184,21 +191,27 @@ namespace Narvalo.Fx {
 
         #region Generalisations of list functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>mfilter</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<TSource> Where<TSource>(this Maybe<TSource> @this, Func<TSource, bool> predicate)
+        /*!
+         * Named `mfilter` in Haskell parlance.
+         */
+        public static Maybe<TSource> Where<TSource>(
+            this Maybe<TSource> @this,
+            Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
+            return @this.Bind(_ => predicate.Invoke(_) 
+                ? @this
+                : Maybe<TSource>.None);
         }
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(this Maybe<TSource> @this, int count)
+        /*!
+         * Named `replicateM` in Haskell parlance.
+         */
+        public static Maybe<IEnumerable<TSource>> Repeat<TSource>(
+            this Maybe<TSource> @this,
+            int count)
         {
             Require.Object(@this);
             Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
@@ -210,20 +223,25 @@ namespace Narvalo.Fx {
 
         #region Conditional execution of monadic expressions (Prelude)
 
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `guard` in Haskell parlance.
+         */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Maybe<Unit> Guard<TSource>(this Maybe<TSource> @this, bool predicate)
+        public static Maybe<Unit> Guard<TSource>(
+            this Maybe<TSource> @this,
+            bool predicate)
         {
             return predicate ? Maybe.Unit : Maybe.None;
         }
 
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `when` in Haskell parlance.
+         */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Maybe<Unit> When<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        public static Maybe<Unit> When<TSource>(
+            this Maybe<TSource> @this, 
+            bool predicate, 
+            Action action)
         {
             Require.NotNull(action, "action");
 
@@ -234,10 +252,13 @@ namespace Narvalo.Fx {
             return Maybe.Unit;
         }
 
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<Unit> Unless<TSource>(this Maybe<TSource> @this, bool predicate, Action action)
+        /*!
+         * Named `unless` in Haskell parlance.
+         */
+        public static Maybe<Unit> Unless<TSource>(
+            this Maybe<TSource> @this,
+            bool predicate,
+            Action action)
         {
             Require.Object(@this);
 
@@ -248,9 +269,7 @@ namespace Narvalo.Fx {
 
         #region Monadic lifting operators (Prelude)
 
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3}" />
         public static Maybe<TResult> Zip<TFirst, TSecond, TResult>(
             this Maybe<TFirst> @this,
             Maybe<TSecond> second,
@@ -263,9 +282,7 @@ namespace Narvalo.Fx {
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4}" />
         public static Maybe<TResult> Zip<T1, T2, T3, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -282,9 +299,7 @@ namespace Narvalo.Fx {
             return @this.Bind(g);
         }
 
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, TResult>(
              this Maybe<T1> @this,
              Maybe<T2> second,
@@ -297,14 +312,15 @@ namespace Narvalo.Fx {
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Maybe<TResult>> g
-                = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
+                = t1 => second.Zip(
+                    third,
+                    fourth, 
+                    (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
         }
 
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
         public static Maybe<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this Maybe<T1> @this,
             Maybe<T2> second,
@@ -318,7 +334,11 @@ namespace Narvalo.Fx {
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Maybe<TResult>> g
-                = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
+                = t1 => second.Zip(
+                    third,
+                    fourth, 
+                    fifth,
+                    (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
             return @this.Bind(g);
         }
@@ -328,7 +348,9 @@ namespace Narvalo.Fx {
         #region Query Expression Pattern
 
 
-        // Kind of generalisation of Zip (liftM2).
+        /*!
+         * Kind of generalisation of Zip (liftM2).
+         */
         public static Maybe<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, Maybe<TMiddle>> valueSelectorM,
@@ -338,7 +360,9 @@ namespace Narvalo.Fx {
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
-            return @this.Bind(_ => valueSelectorM.Invoke(_).Select(middle => resultSelector.Invoke(_, middle)));
+            return @this.Bind(
+                _ => valueSelectorM.Invoke(_).Select(
+                    middle => resultSelector.Invoke(_, middle)));
         }
 
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
@@ -350,7 +374,12 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this);
 
-            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            return @this.Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
         }
 
         public static Maybe<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -362,7 +391,12 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this);
 
-            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            return @this.GroupJoin(
+                inner, 
+                outerKeySelector,
+                innerKeySelector, 
+                resultSelector, 
+                EqualityComparer<TKey>.Default);
         }
 
         #endregion
@@ -435,7 +469,8 @@ namespace Narvalo.Fx {
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue)
+                       .Then(inner));
         }
 
         static Func<TSource, Maybe<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
@@ -492,7 +527,9 @@ namespace Narvalo.Fx {
             return  @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
-        public static Maybe<TSource> Run<TSource>(this Maybe<TSource> @this, Action<TSource> action)
+        public static Maybe<TSource> Run<TSource>(
+            this Maybe<TSource> @this,
+            Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
@@ -500,7 +537,9 @@ namespace Narvalo.Fx {
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-        public static Maybe<TSource> OnNone<TSource>(this Maybe<TSource> @this, Action action)
+        public static Maybe<TSource> OnNone<TSource>(
+            this Maybe<TSource> @this,
+            Action action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
@@ -511,14 +550,16 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    // Extensions methods for Func<TSource, Maybe<TResult>>.
+    /*!
+     * Extensions methods for Func<TSource, Maybe<TResult>>.
+     */
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `=<<` in Haskell parlance.
+         */
         public static Maybe<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
@@ -528,9 +569,9 @@ namespace Narvalo.Fx {
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `>=>` in Haskell parlance.
+         */
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Maybe<TMiddle>> @this,
             Func<TMiddle, Maybe<TResult>> funM)
@@ -540,9 +581,9 @@ namespace Narvalo.Fx {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `<=<` in Haskell parlance.
+         */
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> funM)

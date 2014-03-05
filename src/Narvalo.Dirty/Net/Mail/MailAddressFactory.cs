@@ -7,7 +7,7 @@ namespace Narvalo.Net.Mail
     using System.Text;
     using Narvalo.Fx;
 
-    /*!
+    /*
      * References
      * ----------
      * + http://cobisi.com/email-validation/.net-component

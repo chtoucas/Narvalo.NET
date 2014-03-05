@@ -17,15 +17,18 @@ namespace Narvalo.Collections {
     using Narvalo.Fx;   // For Unit
     using Narvalo.Collections.Internal;
 
-    // Extensions for IEnumerable<Maybe<T>>.
+    /*!
+     * Extensions for IEnumerable<Maybe<T>>.
+     */
     public static partial class EnumerableMaybeExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<IEnumerable<TSource>> Collect<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        /*!
+         * Named `sequence` in Haskell parlance.
+         */
+        public static Maybe<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);
 
@@ -36,10 +39,11 @@ namespace Narvalo.Collections {
 
         #region Generalisations of list functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<TSource> Sum<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        /*!
+         * Named `msum` in Haskell parlance.
+         */
+        public static Maybe<TSource> Sum<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);
 
@@ -86,9 +90,10 @@ namespace Narvalo.Collections {
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+        public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzip<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
             Require.Object(@this);
 
@@ -191,10 +196,13 @@ namespace Narvalo.Collections.Internal {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    // Internal extensions for IEnumerable<Maybe<T>>.
+    /*!
+     * Internal extensions for IEnumerable<Maybe<T>>.
+     */
     static partial class EnumerableMaybeExtensions
     {
-        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
 
@@ -203,13 +211,15 @@ namespace Narvalo.Collections.Internal {
                 = (m, n) =>
                     m.Bind(list =>
                     {
-                        return n.Bind(item => Maybe.Create(list.Concat(Enumerable.Repeat(item, 1))));
+                        return n.Bind(item => Maybe.Create(
+                            list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun);
         }
 
-        internal static Maybe<TSource> SumCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        internal static Maybe<TSource> SumCore<TSource>(
+            this IEnumerable<Maybe<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
 
@@ -252,9 +262,10 @@ namespace Narvalo.Collections.Internal {
             return list;
         }
 
-        internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+        internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
             DebugCheck.NotNull(@this);
 
@@ -272,7 +283,8 @@ namespace Narvalo.Collections.Internal {
             DebugCheck.NotNull(@this);
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
-            Func<TFirst, TSecond, Maybe<TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, Maybe<TResult>> resultSelector
+                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
             // instead of using the Zip from Linq.

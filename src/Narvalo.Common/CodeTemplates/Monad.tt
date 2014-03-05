@@ -3,9 +3,9 @@
 
     // NB: Documentation is almost blindly copied from Haskell.
 
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * Fields
-     * ====================================================================== */
+     * ========================================================================================== */
 
     bool _initialized = false;
     bool _headerWritten = false;
@@ -23,9 +23,9 @@
     string _returnName = "Return";
     string _zeroName;
 
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * Properties
-     * ====================================================================== */
+     * ========================================================================================== */
 
     protected string Namespace
     {
@@ -139,7 +139,10 @@
         } 
     }
 
-    protected bool PreferLinqDialect { get { return _preferLinqDialect; } set { _preferLinqDialect = value; } }
+    protected bool PreferLinqDialect { 
+        get { return _preferLinqDialect; }
+        set { _preferLinqDialect = value; }
+    }
 
     protected string FilterName
     {
@@ -172,9 +175,9 @@
         }
     }
     
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * "Constructors"
-     * ====================================================================== */
+     * ========================================================================================== */
 
     public void InitializeZero()
     {
@@ -212,11 +215,11 @@
         _initialized = true;
     }
     
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * Public Methods
-     * ====================================================================== */
+     * ========================================================================================== */
 
-    // EmitMonad ---------------------------------------------------------------
+    // EmitMonad -----------------------------------------------------------------------------------
 
     public void EmitMonad()
     {
@@ -240,7 +243,7 @@ namespace <#= Namespace #> {
 <#+
     }
 
-    // EmitComonad -------------------------------------------------------------
+    // EmitComonad ---------------------------------------------------------------------------------
     
     public void EmitComonad()
     {
@@ -253,7 +256,7 @@ namespace <#= Namespace #> {
 <#+
     }
 
-    // EmitLinq ----------------------------------------------------------------
+    // EmitLinq ------------------------------------------------------------------------------------
     
     public void EmitLinq()
     {
@@ -294,17 +297,17 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
     
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * Protected Methods
-     * ====================================================================== */
+     * ========================================================================================== */
 
-    // EmitCoreClass -----------------------------------------------------------
+    // EmitCoreClass -------------------------------------------------------------------------------
 
     protected void EmitCoreClass() 
     {
 #>
     /// <summary>
-    /// Provides a set of static methods and extension methods for <see cref="<#= Name #>{T}"/>.
+    /// Provides a set of static methods and extension methods for <see cref="<#= Name #>{T}" />.
     /// </summary>
     public static partial class <#= Name #>
     {
@@ -319,21 +322,21 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><Unit> Unit { get { return Unit_; } }
 
 <#+ if (HasZero) { #>
+        /*!
+         * Named `mzero` in Haskell parlance.
+         */
         /// <summary>
         /// Returns the zero of type <c><#= Name #>&lt;Unit&gt;.<#= ZeroName #></c>.
         /// </summary>
-        /// <remarks>
-        /// Named <c>mzero</c> in Haskell parlance.
-        /// </remarks>
         public static <#= Name #><Unit> <#= ZeroName #> { get { return <#= ZeroName #>_; } }
 <#+ } #>
 
+        /*!
+         * Named `return` in Haskell parlance.
+         */
         /// <summary>
-        /// Returns a new instance of <see cref="<#= Name #>{T}"/>.
+        /// Returns a new instance of <see cref="<#= Name #>{T}" />.
         /// </summary>
-        /// <remarks>
-        /// Named <c>return</c> in Haskell parlance.
-        /// </remarks>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
 <#+ StructConstraint_("T"); #>
         {
@@ -342,12 +345,12 @@ namespace <#= LinqNamespace #>.Internal {
         
         #region Generalisations of list functions (Prelude)
 
+        /*!
+         * Named `join` in Haskell parlance.
+         */
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
-        /// <remarks>
-        /// Named <c>join</c> in Haskell parlance.
-        /// </remarks>
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
 <#+ StructConstraint_("T"); #>
         {
@@ -358,13 +361,14 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Monadic lifting operators (Prelude)
 
+        /*!
+         * Named `liftM` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}"/> values.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM</c> in Haskell parlance.
-        /// </remarks>
-        public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(Func<T, TResult> fun)
+        public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
+            Func<T, TResult> fun)
 <#+ StructConstraint_("T"); #>
 <#+ StructConstraint_("TResult"); #>
         {
@@ -375,13 +379,13 @@ namespace <#= LinqNamespace #>.Internal {
             };
         }
 
+        /*!
+         * Named `liftM2` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}"/> values, 
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
 <#+ StructConstraint_("T1"); #>
@@ -395,13 +399,13 @@ namespace <#= LinqNamespace #>.Internal {
             };
         }
 
+        /*!
+         * Named `liftM3` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}"/> values, 
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
 <#+ StructConstraint_("T1"); #>
@@ -416,13 +420,13 @@ namespace <#= LinqNamespace #>.Internal {
             };
         }
 
+        /*!
+         * Named `liftM4` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}"/> values,
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -439,13 +443,13 @@ namespace <#= LinqNamespace #>.Internal {
             };
         }
 
+        /*!
+         * Named `liftM5` in Haskell parlance.
+         */
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}"/> values,
-        /// scanning the monadic arguments from left to right.
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// monadic arguments from left to right.
         /// </summary>
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -468,26 +472,28 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
     
-    // EmitCoreComonad -------------------------------------------------------------
+    // EmitCoreComonad -----------------------------------------------------------------------------
 
     protected void EmitCoreComonad() 
     {
 #>
-    // Comonad methods.
+    /*!
+     * Comonad methods.
+     */
     public static partial class <#= Name #>
     {
-        /// <remarks>
-        /// Named <c>extract</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `extract` in Haskell parlance.
+         */
         public static T Extract<T>(<#= Name #><T> monad)
 <#+ StructConstraint_("T"); #>
         {
             return <#= Name #><T>.ε(monad);
         }
 
-        /// <remarks>
-        /// Named <c>duplicate</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `duplicate` in Haskell parlance.
+         */
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
 <#+ StructConstraint_("T"); #>
         {
@@ -497,20 +503,24 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
 
-    // EmitExtensions ----------------------------------------------------------
+    // EmitExtensions ------------------------------------------------------------------------------
 
     protected void EmitExtensions()
     {
 #>
-    // Extensions methods for <#= Name #><T>.
+    /*!
+     * Extensions methods for <#= Name #><T>.
+     */
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>fmap</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(this <#= Name #><TSource> @this, Func<TSource, TResult> selector)
+        /*!
+         * Named `fmap` in Haskell parlance.
+         */
+        public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, TResult> selector)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
@@ -520,10 +530,12 @@ namespace <#= LinqNamespace #>.Internal {
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
-        /// <remarks>
-        /// Named <c>&gt;&gt;</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><TResult> Then<TSource, TResult>(this <#= Name #><TSource> @this, <#= Name #><TResult> other)
+        /*!
+         * Named `>>` in Haskell parlance.
+         */
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TResult> other)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
@@ -537,25 +549,31 @@ namespace <#= LinqNamespace #>.Internal {
         #region Generalisations of list functions (Prelude)
 
 <#+ if (HasZero) { #>
-        /// <remarks>
-        /// Named <c>mfilter</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><TSource> <#= FilterName #><TSource>(this <#= Name #><TSource> @this, Func<TSource, bool> predicate)
+        /*!
+         * Named `mfilter` in Haskell parlance.
+         */
+        public static <#= Name #><TSource> <#= FilterName #><TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("predicate"); #>
 
-            return @this.Bind(_ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
+            return @this.Bind(_ => predicate.Invoke(_) 
+                ? @this
+                : <#= Name #><TSource>.<#= ZeroName #>);
         }
 <#+ } #>
 
 <#+ if (!RequireStruct) { #>
 
-        /// <remarks>
-        /// Named <c>replicateM</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(this <#= Name #><TSource> @this, int count)
+        /*!
+         * Named `replicateM` in Haskell parlance.
+         */
+        public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
+            this <#= Name #><TSource> @this,
+            int count)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -570,22 +588,27 @@ namespace <#= LinqNamespace #>.Internal {
         #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `guard` in Haskell parlance.
+         */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static <#= Name #><Unit> Guard<TSource>(this <#= Name #><TSource> @this, bool predicate)
+        public static <#= Name #><Unit> Guard<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate)
 <#+ StructConstraint_("TSource"); #>
         {
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }
 <#+ } #>
 
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `when` in Haskell parlance.
+         */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static <#= Name #><Unit> When<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
+        public static <#= Name #><Unit> When<TSource>(
+            this <#= Name #><TSource> @this, 
+            bool predicate, 
+            Action action)
 <#+ StructConstraint_("TSource"); #>
         {
             Require.NotNull(action, "action");
@@ -597,10 +620,13 @@ namespace <#= LinqNamespace #>.Internal {
             return <#= Name #>.Unit;
         }
 
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><Unit> Unless<TSource>(this <#= Name #><TSource> @this, bool predicate, Action action)
+        /*!
+         * Named `unless` in Haskell parlance.
+         */
+        public static <#= Name #><Unit> Unless<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate,
+            Action action)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -612,9 +638,7 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Monadic lifting operators (Prelude)
 
-        /// <remarks>
-        /// Named <c>liftM2</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3}" />
         public static <#= Name #><TResult> Zip<TFirst, TSecond, TResult>(
             this <#= Name #><TFirst> @this,
             <#= Name #><TSecond> second,
@@ -630,9 +654,7 @@ namespace <#= LinqNamespace #>.Internal {
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
 
-        /// <remarks>
-        /// Named <c>liftM3</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4}" />
         public static <#= Name #><TResult> Zip<T1, T2, T3, TResult>(
             this <#= Name #><T1> @this,
             <#= Name #><T2> second,
@@ -653,9 +675,7 @@ namespace <#= LinqNamespace #>.Internal {
             return @this.Bind(g);
         }
 
-        /// <remarks>
-        /// Named <c>liftM4</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
         public static <#= Name #><TResult> Zip<T1, T2, T3, T4, TResult>(
              this <#= Name #><T1> @this,
              <#= Name #><T2> second,
@@ -673,14 +693,15 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ NotNull_("resultSelector"); #>
 
             Func<T1, <#= Name #><TResult>> g
-                = t1 => second.Zip(third, fourth, (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
+                = t1 => second.Zip(
+                    third,
+                    fourth, 
+                    (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
         }
 
-        /// <remarks>
-        /// Named <c>liftM5</c> in Haskell parlance.
-        /// </remarks>
+        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
         public static <#= Name #><TResult> Zip<T1, T2, T3, T4, T5, TResult>(
             this <#= Name #><T1> @this,
             <#= Name #><T2> second,
@@ -700,7 +721,11 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ NotNull_("resultSelector"); #>
 
             Func<T1, <#= Name #><TResult>> g
-                = t1 => second.Zip(third, fourth, fifth, (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
+                = t1 => second.Zip(
+                    third,
+                    fourth, 
+                    fifth,
+                    (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
             return @this.Bind(g);
         }
@@ -734,7 +759,9 @@ namespace <#= LinqNamespace #>.Internal {
         }
 <#+ } #>
 
-        // Kind of generalisation of Zip (liftM2).
+        /*!
+         * Kind of generalisation of Zip (liftM2).
+         */
         public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
@@ -747,7 +774,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ NotNull_("valueSelectorM"); #>
 <#+ NotNull_("resultSelector"); #>
 
-            return @this.Bind(_ => valueSelectorM.Invoke(_).<#= MapName #>(middle => resultSelector.Invoke(_, middle)));
+            return @this.Bind(
+                _ => valueSelectorM.Invoke(_).<#= MapName #>(
+                    middle => resultSelector.Invoke(_, middle)));
         }
 
 <#+ if (HasZero) { #>
@@ -764,7 +793,12 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 
-            return @this.Join(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            return @this.Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
         }
 
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
@@ -780,7 +814,12 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 
-            return @this.GroupJoin(inner, outerKeySelector, innerKeySelector, resultSelector, EqualityComparer<TKey>.Default);
+            return @this.GroupJoin(
+                inner, 
+                outerKeySelector,
+                innerKeySelector, 
+                resultSelector, 
+                EqualityComparer<TKey>.Default);
         }
 <#+ } #>
 
@@ -871,7 +910,8 @@ namespace <#= LinqNamespace #>.Internal {
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue)
+                       .Then(inner));
         }
 
         static Func<TSource, <#= Name #><TKey>> GetKeyLookup_<TSource, TInner, TKey>(
@@ -940,7 +980,9 @@ namespace <#= LinqNamespace #>.Internal {
         }
 <#+ } #>
 
-        public static <#= Name #><TSource> Run<TSource>(this <#= Name #><TSource> @this, Action<TSource> action)
+        public static <#= Name #><TSource> Run<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -950,7 +992,9 @@ namespace <#= LinqNamespace #>.Internal {
         }
 
 <#+ if (HasZero) { #>
-        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(this <#= Name #><TSource> @this, Action action)
+        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
+            this <#= Name #><TSource> @this,
+            Action action)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -965,19 +1009,21 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
     
-    // EmitKleisliExtensions ---------------------------------------------------
+    // EmitKleisliExtensions -----------------------------------------------------------------------
 
     public void EmitKleisliExtensions()
     {
 #>
-    // Extensions methods for Func<TSource, <#= Name #><TResult>>.
+    /*!
+     * Extensions methods for Func<TSource, <#= Name #><TResult>>.
+     */
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `=<<` in Haskell parlance.
+         */
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             <#= Name #><TSource> value)
@@ -989,9 +1035,9 @@ namespace <#= LinqNamespace #>.Internal {
             return value.Bind(@this);
         }
 
-        /// <remarks>
-        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `>=>` in Haskell parlance.
+         */
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
@@ -1004,9 +1050,9 @@ namespace <#= LinqNamespace #>.Internal {
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /// <remarks>
-        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `<=<` in Haskell parlance.
+         */
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)
@@ -1024,21 +1070,24 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
 
-    // EmitEnumerableMonadExtensions -------------------------------------------
+    // EmitEnumerableMonadExtensions ---------------------------------------------------------------
 
     protected void EmitEnumerableMonadExtensions()
     {
 #>
-    // Extensions for IEnumerable<<#= Name #><T>>.
+    /*!
+     * Extensions for IEnumerable<<#= Name #><T>>.
+     */
     public static partial class Enumerable<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
 <#+ if (!RequireStruct) { #>
-        /// <remarks>
-        /// Named <c>sequence</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        /*!
+         * Named `sequence` in Haskell parlance.
+         */
+        public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -1052,10 +1101,11 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ if (HasZero && HasPlus) { #>
         #region Generalisations of list functions (Prelude)
 
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><TSource> Sum<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        /*!
+         * Named `msum` in Haskell parlance.
+         */
+        public static <#= Name #><TSource> Sum<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
@@ -1069,16 +1119,19 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
 
-    // EmitEnumerableMonadInternalExtensions -------------------------------------------
+    // EmitEnumerableMonadInternalExtensions -------------------------------------------------------
 
     protected void EmitEnumerableMonadInternalExtensions()
     {
 #>
-    // Internal extensions for IEnumerable<<#= Name #><T>>.
+    /*!
+     * Internal extensions for IEnumerable<<#= Name #><T>>.
+     */
     static partial class Enumerable<#= Name #>Extensions
     {
 <#+ if (!RequireStruct) { #>
-        internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
@@ -1088,7 +1141,8 @@ namespace <#= LinqNamespace #>.Internal {
                 = (m, n) =>
                     m.Bind(list =>
                     {
-                        return n.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
+                        return n.Bind(item => <#= Name #>.<#= ReturnName #>(
+                            list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun);
@@ -1097,7 +1151,8 @@ namespace <#= LinqNamespace #>.Internal {
 
 <#+ if (HasZero && HasPlus) { #>
 
-        internal static <#= Name #><TSource> SumCore<TSource>(this IEnumerable<<#= Name #><TSource>> @this)
+        internal static <#= Name #><TSource> SumCore<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
@@ -1109,7 +1164,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
 
-    // EmitEnumerableExtensions ------------------------------------------------
+    // EmitEnumerableExtensions --------------------------------------------------------------------
 
     protected void EmitEnumerableExtensions()
     {
@@ -1157,9 +1212,10 @@ namespace <#= LinqNamespace #>.Internal {
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzip<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+        public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzip<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
@@ -1272,7 +1328,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
     
-    // EmitEnumerableInternalExtensions ------------------------------------------------
+    // EmitEnumerableInternalExtensions ------------------------------------------------------------
 
     protected void EmitEnumerableInternalExtensions()
     {
@@ -1318,9 +1374,10 @@ namespace <#= LinqNamespace #>.Internal {
         }
 
 <#+ if (!RequireStruct) { #>
-        internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>> MapAndUnzipCore<TSource, TFirst, TSecond>(
-           this IEnumerable<TSource> @this,
-           Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+        internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
@@ -1344,7 +1401,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ DebugNotNull_("@this"); #>
 <#+ NotNull_("resultSelectorM"); #>
 
-            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
+                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
             // instead of using the Zip from Linq.
@@ -1466,9 +1524,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+
     }
 
-    /* ====================================================================== *
+    /* ========================================================================================== *
      * Private Methods
-     * ====================================================================== */
+     * ========================================================================================== */
     
     protected void WriteHeader_()
     {
@@ -1495,7 +1553,9 @@ namespace <#= LinqNamespace #>.Internal {
     
     string InferNamespace_() 
     {
-        return System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString();
+        return System.Runtime.Remoting.Messaging.CallContext
+            .LogicalGetData("NamespaceHint")
+            .ToString();
     }
     
     void StructConstraint_(string name)

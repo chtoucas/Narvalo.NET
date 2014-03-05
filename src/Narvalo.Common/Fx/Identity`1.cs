@@ -7,6 +7,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
 
     /*!
+     * The Identity Monad
+     * ==================
+     * 
      * The trivial monad. Useless in the context of C#.
      */
 

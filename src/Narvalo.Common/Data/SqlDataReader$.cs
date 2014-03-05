@@ -5,7 +5,8 @@ namespace Narvalo.Data
     using System.Data.SqlClient;
     using Narvalo.Fx;
 
-    /* Méthodes d'extension pour `SqlDataReader` 
+    /*!
+     * Méthodes d'extension pour `SqlDataReader` 
      * =========================================
      * 
      * Objets de type valeur

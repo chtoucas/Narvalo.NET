@@ -10,20 +10,22 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo.Edu.Monads.Samples {
-    // Comonad methods.
+    /*!
+     * Comonad methods.
+     */
     public static partial class Comonad
     {
-        /// <remarks>
-        /// Named <c>extract</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `extract` in Haskell parlance.
+         */
         public static T Extract<T>(Comonad<T> monad)
         {
             return Comonad<T>.ε(monad);
         }
 
-        /// <remarks>
-        /// Named <c>duplicate</c> in Haskell parlance.
-        /// </remarks>
+        /*!
+         * Named `duplicate` in Haskell parlance.
+         */
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
         {
             return Comonad<T>.δ(monad);
