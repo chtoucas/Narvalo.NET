@@ -13,9 +13,9 @@ namespace Narvalo.Fx
      * ===============
      * 
      * The `Maybe<T>` class is kind of like the `Nullable<T>` class but without any restriction on 
-     * the underlying type: _it provides a way to tell the absence or the presence of a value_.
+     * the underlying type: *it provides a way to tell the absence or the presence of a value*.
      * Taken alone, it might not look that useful, we could simply use a nullable for value types 
-     * and a `null` for reference types. That's where the monad comes into play. The `Maybe<T>`
+     * and `null` for reference types. That's where the monad comes into play. The `Maybe<T>`
      * satisfies a very simple grammar, known as the monad laws, from which derives a rich 
      * vocabulary.
      * 
@@ -51,12 +51,12 @@ namespace Narvalo.Fx
      * 
      * ### Class vs structure ###
      * 
-     * + _Argument towards a structure:_
-     * C# then guarantees that an instance is never null, which seems like a good thing here.
-     * Isn't it one of the reasons why we decided in the first place to create such a class?
+     * Argument _towards_ a structure
+     * : C# then guarantees that an instance is never null, which seems like a good thing here.
+     *   Isn't it one of the reasons why we decided in the first place to create such a class?
      * 
-     * + _Argument against a structure:_
-     * An instance is mutable if `T` is a reference type. This should always raise a big warning.
+     * Argument _against_ a structure
+     * : An instance is mutable if `T` is a reference type. This should always raise a big warning.
      *   
      * In the end, creating a mutable structure seems way too hazardous.
      *   
@@ -65,6 +65,8 @@ namespace Narvalo.Fx
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
      * use of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
      * 
+     * Implementation
+     * --------------
      */
 
     /// <summary>
@@ -79,12 +81,11 @@ namespace Narvalo.Fx
         readonly T _value;
 
         /*!
-         * Constructor
-         * -----------
+         * ### Constructor ###
          * 
-         * All constructors are made private. Having complete control over the creation of an instance
-         * helps us to ensure that `value` is never `null` when passed to the constructor. This is exactly
-         * what we do in the static method `Maybe<T>.η(value)`.
+         * All constructors are made private. Having complete control over the creation of an 
+         * instance helps us to ensure that `value` is never `null` when passed to the constructor.
+         * This is exactly what we do in the static method `Maybe<T>.η(value)`.
          * 
          * To make things simpler, we provide two public factory methods:
          * 
@@ -111,6 +112,10 @@ namespace Narvalo.Fx
             _value = value;
             _isSome = true;
         }
+
+        /*!
+         * ### Properties ###
+         */
 
         /// <summary>
         /// Returns true if the object does not have an underlying value, false otherwise.
@@ -140,6 +145,10 @@ namespace Narvalo.Fx
             }
         }
 
+        /*!
+         * ### Cast operators ###
+         */
+
         /// <summary />
         public static explicit operator Maybe<T>(T value)
         {
@@ -155,6 +164,10 @@ namespace Narvalo.Fx
 
             return value.Value;
         }
+
+        /*!
+         * ### Public methods ###
+         */
 
         public Maybe<T> OnSome(Action<T> action)
         {
@@ -215,8 +228,8 @@ namespace Narvalo.Fx
     }
 
     /*!
-     * Connection to Linq
-     * ------------------
+     * IEnumerable interface
+     * ---------------------
      * 
      * To support Linq we only need to create the appropriate methods and the C# compiler will work
      * its magic. Actually, this is something that we have almost already done. Indeed, this is just
@@ -229,7 +242,6 @@ namespace Narvalo.Fx
      * Nevertheless, since this might look a bit too unusual we also explicitely implement the
      * `IEnumerable<T>` interface.
      */
-    // IEnumerable interface.
     public partial class Maybe<T>
     {
         /// <summary />
@@ -251,13 +263,15 @@ namespace Narvalo.Fx
     }
 
     /*!
-     * Referential equality and structural equality
-     * --------------------------------------------
+     * IEquatable interface
+     * --------------------
+     * 
+     * ### Referential equality and structural equality ###
      * 
      * We redefine the `Equals()` method to allow for structural equality for reference types that
      * follow value type semantics. Nevertheless, we do not change the meaning of the equality
-     * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by the
-     * .NET framework for all reference types. I might change my mind on this and try to make
+     * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by
+     * the .NET framework for all reference types. I might change my mind on this and try to make
      * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
      * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
      * `IStructuralEquatable` interface.
@@ -323,8 +337,8 @@ namespace Narvalo.Fx
                 return Equals((T)other, comparer);
             }
 
-            // Usually, we test the condition obj.GetType() == this.GetType(), in case "this" or
-            // "obj" is an instance of a derived type, something that can not happen here because
+            // Usually, we test the condition `obj.GetType() == this.GetType()`, in case `this` or
+            // `obj` is an instance of a derived type, something that can not happen here because
             // Maybe is sealed.
             return Equals(other as Maybe<T>, comparer);
         }

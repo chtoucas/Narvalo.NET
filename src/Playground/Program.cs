@@ -33,8 +33,6 @@ namespace Playground
             }
         }
 
-        #region Membres privés
-
         static IContainer CreateContainer_()
         {
             var builder = new ContainerBuilder();
@@ -61,7 +59,5 @@ namespace Playground
         {
             Log.Fatal(Resources.UnhandledException, exception);
         }
-
-        #endregion
     }
 }

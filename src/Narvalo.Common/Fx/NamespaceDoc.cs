@@ -14,21 +14,22 @@ namespace Narvalo.Fx
      * The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
      * access to some powerful monadic concepts in a very friendly way.
      * 
-     * 
      * Monoid
-     * ======
+     * ------
      *
      * A Monoid has an Empty element and an Append operation that satisfy the Monoid laws:
+     * 
      * - Empty is the identity for Append
      * - Append is associative
+     * 
      * Haskell also includes a Concat operation which in fact derives from Empty and Append:
      *      FoldR Append Empty.
      *
-     *
      * Monad
-     * =====
+     * -----
      *
      * A Monad has a Unit element and a Bind operation must satisfy the three monad laws:
+     * 
      * - Unit is the identity for Bind
      * - Bind is associative
      *
@@ -38,38 +39,36 @@ namespace Narvalo.Fx
      * NB: Haskell also provides a fail method that is not part of the standard definition.
      * It is mostly used for pattern matching failure, something we do not have in .NET.
      *
-     *
      * Comonad
-     * =======
+     * -------
      *
      * There are two equivalent ways to define a comonad:
+     * 
      * - Counit, Cobind
      * - Counit, Map, Comultiply
      *
-     *
      * Richer Monads
-     * =============
+     * -------------
      *
      * We follow (mostly) the proposed new terminology from the MonadPlus Reform.
      *
-     * + MonadZero:
-     *   A MonadZero is a Monad with a left zero for Bind.
+     * MonadZero
+     * : A MonadZero is a Monad with a left zero for Bind.
      *
-     * + MonadMore:
-     *   A MonadMore is a Monad which is also a Monoid and for which Zero is a zero for Bind.
+     * MonadMore
+     * : A MonadMore is a Monad which is also a Monoid and for which Zero is a zero for Bind.
      *   This is what Haskell calls a MonadPlus.
      *
-     * + MonadPlus:
-     *   A MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
+     * MonadPlus
+     * : A MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
      *   REVIEW: Haskell uses the term left distributive. Am I missing something?
      *
-     * + MonadOr:
-     *   A MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
+     * MonadOr
+     * : A MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
      *   Here, we prefer to use OrElse instead of Plus for the Monoid composition operation.
      *
-     *
      * Summary
-     * =======
+     * -------
      *
      * - Monoid                     (Plus, Zero) + Monoid Laws
      * - Monad                      (Bind, Unit) + Monad Laws
@@ -79,37 +78,39 @@ namespace Narvalo.Fx
      * - MonadPlus                  Monad + Monoid + Right distributivity
      * - MonadOr                    Monad + Monoid + Unit = left zero for Plus
      *
-     *
      * Sample monads
-     * =============
+     * -------------
      *
      * Already found in the Framework:
-     * - Nullable<T>                MonadMore, MonadOr (?)
-     * - Func<T>
-     * - Lazy<T>                    Monad, Comonad (?)
-     * - Task<T>                    Monad, Comonad (?)
-     * - IEnumerable<T>             MonadZero, MonadPlus (?)
+     * 
+     * - `Nullable<T>`                MonadMore, MonadOr (?)
+     * - `Func<T>`
+     * - `Lazy<T>`                    Monad, Comonad (?)
+     * - `Task<T>`                    Monad, Comonad (?)
+     * - `IEnumerable<T>`             MonadZero, MonadPlus (?)
      *
      * Things I am working on:
-     * - Identity<T>                Monad, Comonad (?)
-     * - Maybe<T>                   MonadMore, MonadOr
-     * - Output<T>                  Monad (?)
-     * - Either<TLeft, TRight>      Monad (?)
-     *
+     * 
+     * - `Identity<T>`                Monad, Comonad (?)
+     * - `Maybe<T>`                   MonadMore, MonadOr
+     * - `Output<T>`                  Monad (?)
+     * - `Either<TLeft, TRight>`      Monad (?)
      *
      * Illustration
-     * ============
+     * ------------
      *
      * We provide two analogies to illustrate the rules. Beware they are not accurate,
      * but they give a fairly simple way to understand the rules.
      *
      * From the Arithmetic,
+     * 
      * - Bind is *
      * - Plus is +
      * - Unit is 1
      * - Zero is 0
      *
      * From the Boolean Algebra,
+     * 
      * - Bind is ∧, the logical conjunction AND
      * - Plus is ∨, the logical disjunction OR
      * - Unit is True
@@ -119,19 +120,21 @@ namespace Narvalo.Fx
      * For a translation to .NET, see Internal\Rules.cs
      *
      * Core definitions (see Monad`1.cs):
-     * - m >>= g = join (fmap g m)                              Bind defined via Multiply and Map
-     * - fmap f x = x >>= (return . f)                          Map defined by Bind & Unit
-     * - join x = x >>= id                                      Multiply defined by Bind
-     * - m >> n = m >>= \_ -> n                                 Then defined by Bind
+     * 
+     * - `m >>= g = join (fmap g m)`                              Bind defined via Multiply and Map
+     * - `fmap f x = x >>= (return . f)`                          Map defined by Bind & Unit
+     * - `join x = x >>= id`                                      Multiply defined by Bind
+     * - `m >> n = m >>= \_ -> n`                                 Then defined by Bind
      *
      * Core rules (see Internal\Rules.cs):
-     * - fmap id == id                                          [Map]
-     * - fmap (f . g) == fmap f . fmap g                        [Map]
-     * - (m >> n) >> o = m >> (n >> o)                          [Then]      Associativity
+     * 
+     * - `fmap id == id`                                          [Map]
+     * - `fmap (f . g) == fmap f . fmap g`                        [Map]
+     * - `(m >> n) >> o = m >> (n >> o)`                          [Then]      Associativity
      *
-     * Haskell (see Internal\Rules.cs)
-     * ------------------------------------------------
-     * - mplus mzero m = m                                      [Monoid]    Left identity
+     * ### Haskell (see Internal\Rules.cs)
+     * 
+     * - `mplus mzero m = m`                                      [Monoid]    Left identity
      * - mplus m mzero = m                                      [Monoid]    Right identity
      * - mplus a (mplus b c) = mplus (mplus a b) c              [Monoid]    Associativity
      * - return x >>= f = f x                                   [Monad]     Left identity
@@ -148,8 +151,8 @@ namespace Narvalo.Fx
      * - morelse (return a) b ≡ return a                        [MonadOr]   Left zero
      * - morelse a (return b) ≡ return b                        [...]       Right zero
      *
-     * Arithmetic
-     * ----------
+     * ### Arithmetic
+     * 
      * - 0 + x = x                                              [Monoid]    Left identity
      * - x + 0 = x                                              [Monoid]    Right identity
      * - x + (y + z) = (x + y) + z                              [Monoid]    Associativity
@@ -163,8 +166,8 @@ namespace Narvalo.Fx
      * - (not available)                                        [MonadOr]   Left zero
      * - (not available)                                        [...]       Right zero
      *
-     * Boolean Algebra
-     * ---------------
+     * ### Boolean Algebra
+     * 
      * - False ∨ P = P                                          [Monoid]    Left identity
      * - P ∨ False = P                                          [Monoid]    Right identity
      * - P ∨ (Q ∨ R) = (P ∨ Q) ∨ z                            [Monoid]    Associativity
@@ -178,9 +181,8 @@ namespace Narvalo.Fx
      * - True ∨ P = True                                        [MonadOr]   Left zero
      * - P ∨ True = True                                        [...]       Right zero
      *
-     *
      * Implementation
-     * ==============
+     * --------------
      * 
      * Sometimes we choose a more appropriate name than the default one.
      * 
@@ -188,50 +190,46 @@ namespace Narvalo.Fx
      * The immediate benefit is that we can use the query expression syntax (from, select, where).
      * This is similar to the do syntaxic sugar of Haskell.
      * 
-     * 
-     * Name           | Haskell       | Terminology used here
-     * ---------------+---------------+------------------------------------
-     * ### Monoid
-     * ---------------+---------------+------------------------------------
-     * Zero           | mzero         | Zero        or None, Empty, Failure,...
-     * Plus           | mplus         | Plus        or OrElse,...
-     * ---------------+---------------+------------------------------------
-     * ### Monad
-     * ---------------+---------------+------------------------------------
-     * Unit (η)       | return        | Return      or Create, Success,...
-     * Bind           | >>=           | Bind
-     * Map            | fmap / liftM  | Map
-     * Multiply (μ)   | join          | Flatten
-     * Then           | >>            | Then
-     *                | fail          | -
-     * ---------------+---------------+------------------------------------
-     * ### Comonad
-     * ---------------+---------------+------------------------------------
-     * Counit (ε)     | extract       | Extract
-     * Cobind         | extend        | Extend
-     * Comultiply (δ) | duplicate     | Duplicate
-     * ---------------+---------------+------------------------------------
+     * Name               | Haskell           | Terminology used here
+     * -------------------|-------------------|------------------------------------
+     * _Monoid_           |                   |
+     * `Zero`             | `mzero`           | `Zero` or `None`, `Empty`, `Failure`,...
+     * `Plus`             | `mplus`           | `Plus` or `OrElse`,...
+     * _Monad_            |                   |
+     * `Unit` (`η`)       | `return`          | `Return` or `Create`, `Success`,...
+     * `Bind`             | `>>=`             | `Bind`
+     * `Map`              | `fmap` or `liftM` | `Map`
+     * `Multiply` (`μ`)   | `join`            | `Flatten`
+     * `Then`             | `>>`              | `Then`
+     *                    | `fail`            | 
+     * _Comonad_          |                   |
+     * `Counit` (`ε`)     | `extract`         | `Extract`
+     * `Cobind`           | `extend`          | `Extend`
+     * `Comultiply` (`δ`) | `duplicate`       | `Duplicate`
      *              
-     *
-     * .NET <-> Haskell
-     * ================
+     * From Haskell to C#
+     * ------------------
      *
      * We prefix with a @ the .NET methods provided as extension methods.
      * Lines starting with a ? flag method that I considered optional, either because they're too complicated
      * or they do not really make sense in .NET.
      *
-     * Monad
-     *      @Monad<T>.Map                   fmap :: (a -> b) -> m a -> m b
-     *      Monad<T>.Bind                   (>>=) :: forall a b. m a -> (a -> m b) -> m b
-     *      @Monad<T>.Then                  (>>) :: forall a b. m a -> m b -> m b
-     *      Monad.Return                    return :: a -> m a
-     *      -                               fail :: String -> m a                               NB: See discussion above.
+     * ### Monad
+     *   | C#                | Haskell                                         | Notes
+     * - | ----------------- | ----------------------------------------------- | --------------------
+     * * | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
+     *   | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
+     * * | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
+     *   | `Monad.Return`    | `return :: a -> m a`                            | 
+     *   | -                 | `fail :: String -> m a`                         | See discussion above
      *
-     * MonadPlus
-     *      Monad<T>.Zero                   mzero :: m a
-     *      Monad<T>.Plus                   mplus :: m a -> m a -> m a
+     * ### MonadPlus  
+     *   | C#                | Haskell                                         
+     * - | ----------------- | -----------------------------------------------
+     *   | `Monad<T>.Zero`   | `mzero :: m a`
+     *   | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
      *
-     * Basic Monad functions
+     * ### Basic Monad functions
      *      @Enumerable<T>.Map              mapM :: Monad m => (a -> m b) -> [a] -> m [b] 
      *      -                               mapM_ :: Monad m => (a -> m b) -> [a] -> m ()       NB: Same as mapM but returns Monad.Unit
      *      -                               forM :: Monad m => [a] -> (a -> m b) -> m [b]       NB: For us, same as mapM
@@ -244,7 +242,7 @@ namespace Narvalo.Fx
      *      ??? Not supported               forever :: Monad m => m a -> m b
      *      ??? Not supported               void :: Functor f => f a -> f ()
      *
-     * Generalisations of list functions
+     * ### Generalisations of list functions
      *      Monad.Flatten                   join :: Monad m => m (m a) -> m a
      *      @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
      *      @Monad<T>.Filter                mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
@@ -257,12 +255,12 @@ namespace Narvalo.Fx
      *      @Monad<T>.Repeat                replicateM :: Monad m => Int -> m a -> m [a]
      *      -                               replicateM_ :: Monad m => Int -> m a -> m ()                    NB: Same as replicateM but returns Monad.Unit            
      *
-     * Conditional execution of monadic expressions
+     * ### Conditional execution of monadic expressions
      * ?    @Monad<T>.Guard                 guard :: MonadPlus m => Bool -> m ()
      * ?    @Monad<T>.When                  when :: Monad m => Bool -> m () -> m ()
      * ?    @Monad<T>.Unless                unless :: Monad m => Bool -> m () -> m ()
      *
-     * Monadic lifting operators
+     * ### Monadic lifting operators
      *      Monad<T>.Map / Monad.Lift       liftM :: Monad m => (a1 -> r) -> m a1 -> m r
      *      @Monad<T>.Zip / Monad.Lift      liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
      * ?    @Monad<T>.Zip / Monad.Lift      liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
@@ -270,24 +268,23 @@ namespace Narvalo.Fx
      * ?    @Monad<T>.Zip  / Monad.Lift     liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
      *      ??? Not supported               ap :: Monad m => m (a -> b) -> m a -> m b
      *
-     *
      * References
      * ----------
      * 
-     * + [Wes Dyer]: http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx
-     * + [Lippert]: http://ericlippert.com/category/monads/
-     * + [Meijer]: http://laser.inf.ethz.ch/2012/slides/Meijer/
-     * + Stephen Toub on the Task Comonad:
-     *   http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx
+     * + [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx)
+     * + [Lippert](http://ericlippert.com/category/monads/)
+     * + [Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
+     * + [Stephen Toub on the Task Comonad](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
      * 
-     * + [Haskell]: http://www.haskell.org/onlinereport/monad.html
-     * + [MonadPlus]: http://www.haskell.org/haskellwiki/MonadPlus
-     * + [MonadPlus Reform]: http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal
-     * + [Control.Monad]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html
+     * + [Haskell](http://www.haskell.org/onlinereport/monad.html)
+     * + [MonadPlus](http://www.haskell.org/haskellwiki/MonadPlus)
+     * + [MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal)
+     * + [Control.Monad](http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html)
      * 
      * Implementations in .NET:
-     * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons
-     * + [SharpMaLib]: http://sharpmalib.codeplex.com/
+     * 
+     * + [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons)
+     * + [SharpMaLib](http://sharpmalib.codeplex.com/)
      */
 
     /// <summary>
