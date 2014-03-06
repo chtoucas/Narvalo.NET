@@ -560,9 +560,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ ObjectNotNull_(); #>
 <#+ NotNull_("predicate"); #>
 
-            return @this.Bind(_ => predicate.Invoke(_) 
-                ? @this
-                : <#= Name #><TSource>.<#= ZeroName #>);
+            return @this.Bind(
+                _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
         }
 <#+ } #>
 

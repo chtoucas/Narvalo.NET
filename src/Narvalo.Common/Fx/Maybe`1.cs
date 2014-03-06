@@ -13,40 +13,38 @@ namespace Narvalo.Fx
      * ===============
      * 
      * The `Maybe<T>` class is kind of like the `Nullable<T>` class but without any restriction on 
-     * the underlying type : _it provides a way to tell the absence or the presence of a value_.
-     * Taken alone, it might not look that useful,
-     * we could simply use a nullable for value types and a `null` for reference types. That's where
-     * the monad comes into play. The `Maybe<T>` satisfies a very simple grammar, known as the monad
-     * laws, from which derives a rich vocabulary.
+     * the underlying type: _it provides a way to tell the absence or the presence of a value_.
+     * Taken alone, it might not look that useful, we could simply use a nullable for value types 
+     * and a `null` for reference types. That's where the monad comes into play. The `Maybe<T>`
+     * satisfies a very simple grammar, known as the monad laws, from which derives a rich 
+     * vocabulary.
      * 
      * What I like the most about this class is that it helps to clearly express our intent with a 
-     * very clean syntax. For instance, considering the following methods
-     * '''
-     * string GetPhoneNumber() { ... }
-     * Maybe<string> MayGetPhoneNumber() { ... }
-     * '''
+     * very clean syntax. For instance, consider the following methods
+     * 
+     *     string GetPhoneNumber() { ... }
+     *     Maybe<string> MayGetPhoneNumber() { ... }
+     * 
      * I believe that the second version makes it clearer that we might actually not know the phone 
      * number. It then makes easy to write what we do in either cases:
-     * '''
-     * MayGetPhoneNumber().OnNone( ... ).OnSome( ... );
-     * '''
+     * 
+     *     MayGetPhoneNumber().OnNone( ... ).OnSome( ... )
      * 
      * The most obvious weakness of the Maybe monad is that it is all black or all white. In some
-     * circumstances, I might like to be able to be able to give an explanation for the absence of a
-     * value. In fact, that's one
-     * of the purpose of the Either monad.
+     * circumstances, I might like to be able to give an explanation for the absence of a value. 
+     * In fact, that's one of the purpose of the Either monad.
      * 
      * The main defects of this implementation are :
-     * + It is a reference type,
-     * + An instance is mutable for reference types,
+     * 
+     * + It is a reference type
+     * + An instance is mutable for reference types
      * + (more to be added later, I am sure there are other problems)
      * 
      * This class is sometimes referred to as the Option type.
      * 
      * ### Naming convention ###
      * 
-     * We prefix with "May" all methods that return a Maybe instance.
-     * 
+     * We prefix with _May_ all methods that return a Maybe instance.
      * 
      * Design of `Maybe<T>`
      * --------------------
@@ -67,55 +65,6 @@ namespace Narvalo.Fx
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
      * use of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
      * 
-     * 
-     * Connection to Linq
-     * ------------------
-     * 
-     * To support Linq we only need to create the appropriate methods and the C# compiler will work
-     * its magic. Actually, this is something that we have almost already done. Indeed, this is just
-     * a matter of using the right terminology :
-     * + Select is the Linq name for the Map method from monads,
-     * + SelectMany is the Linq name for the Bind method from monads,
-     * + ...
-     * We provide the correct aliases inside the Narvalo.Linq namespace.
-     * 
-     * Nevertheless, since this might look a bit too unusual we also explicitely implement the
-     * `IEnumerable<T>` interface.
-     * 
-     * 
-     * Referential equality and structural equality
-     * --------------------------------------------
-     * 
-     * We redefine the `Equals()` method to allow for structural equality for reference types that
-     * follow value type semantics. Nevertheless, we do not change the meaning of the equality
-     * operators (== and !=) which continue to test referential equality, behaviour expected by the
-     * .NET framework for all reference types. I might change my mind on this and try to make
-     * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
-     * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
-     * IStructuralEquatable interface.
-     * 
-     * ### Sample rules ###
-     * 
-     * '''
-     * Maybe<T>.None != null
-     * Maybe<T>.None.Equals(null)
-     *   
-     * Maybe.Create(1) != Maybe.Create(1)
-     * Maybe.Create(1).Equals(Maybe.Create(1))
-     *   
-     * Maybe.Create(1) != 1
-     * Maybe.Create(1).Equals(1)
-     * '''
-     * 
-     * 
-     * References
-     * ----------
-     * 
-     * + [Wikipedia]: http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad
-     * + [Haskell]: http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html
-     * 
-     * Alternative implementations in C#:
-     * + [iSynaptic.Commons]: https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs
      */
 
     /// <summary>
@@ -138,8 +87,10 @@ namespace Narvalo.Fx
          * what we do in the static method `Maybe<T>.η(value)`.
          * 
          * To make things simpler, we provide two public factory methods:
-         * + `Maybe.Create<T>(value)`,
-         * + `Maybe.Create<T?>(value)`,
+         * 
+         * + `Maybe.Create<T>(value)`
+         * + `Maybe.Create<T?>(value)`
+         * 
          * and one static property `Maybe<T>.None` to reference a Maybe that has no value.
          */
 
@@ -263,6 +214,21 @@ namespace Narvalo.Fx
         }
     }
 
+    /*!
+     * Connection to Linq
+     * ------------------
+     * 
+     * To support Linq we only need to create the appropriate methods and the C# compiler will work
+     * its magic. Actually, this is something that we have almost already done. Indeed, this is just
+     * a matter of using the right terminology :
+     * 
+     * + `Select` is the Linq name for the `Map` method from monads
+     * + `SelectMany` is the Linq name for the `Bind` method from monads
+     * + ...
+     * 
+     * Nevertheless, since this might look a bit too unusual we also explicitely implement the
+     * `IEnumerable<T>` interface.
+     */
     // IEnumerable interface.
     public partial class Maybe<T>
     {
@@ -284,7 +250,28 @@ namespace Narvalo.Fx
         }
     }
 
-    // IEquatable interfaces.
+    /*!
+     * Referential equality and structural equality
+     * --------------------------------------------
+     * 
+     * We redefine the `Equals()` method to allow for structural equality for reference types that
+     * follow value type semantics. Nevertheless, we do not change the meaning of the equality
+     * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by the
+     * .NET framework for all reference types. I might change my mind on this and try to make
+     * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
+     * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
+     * `IStructuralEquatable` interface.
+     * 
+     * ### Sample rules ###
+     * 
+     *     Maybe<T>.None != null
+     *     Maybe<T>.None.Equals(null)
+     *   
+     *     Maybe.Create(1) != Maybe.Create(1)
+     *     Maybe.Create(1).Equals(Maybe.Create(1))
+     *     Maybe.Create(1) != 1
+     *     Maybe.Create(1).Equals(1)
+     */
     public partial class Maybe<T>
     {
         /// <summary />
@@ -401,7 +388,10 @@ namespace Narvalo.Fx
         ////}
     }
 
-    // Monad definition.
+    /*!
+     * Monad definition
+     * ----------------
+     */
     public partial class Maybe<T>
     {
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
@@ -411,7 +401,7 @@ namespace Narvalo.Fx
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", 
+        [SuppressMessage("StyleCop.CSharp.NamingRules",
             "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Maybe<T> η(T value)
@@ -419,7 +409,7 @@ namespace Narvalo.Fx
             return value != null ? new Maybe<T>(value) : Maybe<T>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", 
+        [SuppressMessage("StyleCop.CSharp.NamingRules",
             "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
@@ -430,7 +420,10 @@ namespace Narvalo.Fx
         }
     }
 
-    // MonadOr definition.
+    /*!
+     * MonadOr definition
+     * ------------------
+     */
     public partial class Maybe<T>
     {
         static readonly Maybe<T> None_ = new Maybe<T>();
@@ -448,7 +441,10 @@ namespace Narvalo.Fx
         }
     }
 
-    // Monad optimized extensions.
+    /*!
+     * Monad optimized extensions
+     * --------------------------
+     */
     public partial class Maybe<T>
     {
         #region Basic Monad functions
@@ -560,4 +556,17 @@ namespace Narvalo.Fx
 
         #endregion
     }
+
+    /*!
+     * References
+     * ----------
+     * 
+     * + [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
+     * + [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
+     * 
+     * Alternative implementations in C#:
+     * 
+     * + [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
+     * 
+     */
 }
