@@ -47,9 +47,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.ComparativeTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "test\Narvalo.Facts\Narvalo.Facts.csproj", "{967FD938-F4FF-452B-9F9B-426D1F250BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Oueb", "src\Narvalo.Oueb\Narvalo.Oueb.csproj", "{2C68DE13-A415-4F65-A4E4-FEB06551C873}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Narrative", "src\Narvalo.Narrative\Narvalo.Narrative.csproj", "{2C68DE13-A415-4F65-A4E4-FEB06551C873}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oueb", "src\Oueb\Oueb.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Narrative.Console", "src\Narvalo.Narrative.Console\Narvalo.Narrative.Console.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

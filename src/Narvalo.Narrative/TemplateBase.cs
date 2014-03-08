@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Oueb
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Narrative
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +9,10 @@
     using System.Web.WebPages;
     using System.Web.WebPages.Instrumentation;
 
+    // A mix of codes borrowed from Nocco and RazorEngine.
+    // Cf.
+    // https://github.com/Antaris/RazorEngine/blob/master/src/Core/RazorEngine.Core/Templating/TemplateBase.cs
+
     public abstract class TemplateBase
     {
         protected TemplateBase()
@@ -14,17 +20,10 @@
             Buffer = new StringBuilder();
         }
 
-        // Properties available from within the template
         public string Title { get; set; }
-        public string PathToCss { get; set; }
-        public string PathToJs { get; set; }
-        public Func<string, string> GetSourcePath { get; set; }
-        public List<Section> Sections { get; set; }
-        public List<string> Sources { get; set; }
+        public IEnumerable<Section> Sections { get; set; }
         public StringBuilder Buffer { get; set; }
 
-        // This `Execute` function will be defined in the inheriting template
-        // class. It generates the HTML by calling `Write` and `WriteLiteral`.
         public abstract void Execute();
 
         public virtual void Write(object value)
@@ -37,8 +36,11 @@
             Buffer.Append(value);
         }
 
-        public virtual void WriteAttribute(string name, PositionTagged<string> prefix,
-                                           PositionTagged<string> suffix, params AttributeValue[] values)
+        public virtual void WriteAttribute(
+            string name,
+            PositionTagged<string> prefix,
+            PositionTagged<string> suffix,
+            params AttributeValue[] values)
         {
             bool first = true;
             bool wroteSomething = false;

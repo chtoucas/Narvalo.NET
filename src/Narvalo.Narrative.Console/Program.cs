@@ -1,8 +1,8 @@
-﻿namespace Oueb
+﻿namespace Narvalo.Narrative
 {
     using System;
     using Autofac;
-    using Oueb.Properties;
+    using Narvalo.Narrative.Properties;
     using Serilog;
 
     public class Program
@@ -29,13 +29,15 @@
         public void Run()
         {
             using (var container = CreateContainer_()) {
-                //
+                // ...
             }
         }
 
         static IContainer CreateContainer_()
         {
             var builder = new ContainerBuilder();
+
+            // ...
 
             return builder.Build();
         }

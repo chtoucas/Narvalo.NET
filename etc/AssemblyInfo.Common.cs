@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Narvalo.Org")]
-[assembly: AssemblyCopyright("Copyright © 2010 Narvalo.Org")]
+[assembly: AssemblyCopyright("Copyright © 2010-2014 Narvalo.Org")]
 [assembly: AssemblyTrademark("")]
 
 #if DEBUG

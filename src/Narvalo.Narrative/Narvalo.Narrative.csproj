@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{475B9410-296D-47CB-BB58-BC57BFA8F8AB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{2C68DE13-A415-4F65-A4E4-FEB06551C873}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Oueb</RootNamespace>
-    <AssemblyName>Oueb</AssemblyName>
+    <RootNamespace>Narvalo.Narrative</RootNamespace>
+    <AssemblyName>Narvalo.Narrative</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,69 +37,55 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog">
-      <HintPath>..\..\packages\Serilog.1.2.25\lib\net45\Serilog.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.FullNetFx">
-      <HintPath>..\..\packages\Serilog.1.2.25\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\..\packages\MarkdownDeep.NET-StrongName.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.1.1\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
+      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="CSharpSource.cs" />
+    <Compile Include="TemplateCreator.cs" />
+    <Compile Include="CSharpSourceFormatter.cs" />
+    <Compile Include="IMarkdownEngine.cs" />
+    <Compile Include="MarkdownDeepEngine.cs" />
+    <Compile Include="MarkdownSharpEngine.cs" />
+    <Compile Include="CodeEssay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Section.cs" />
+    <Compile Include="TemplateBase.cs" />
+    <Compile Include="_Aliens\aspnetwebstack\AttributeValue.cs" />
+    <Compile Include="_Aliens\aspnetwebstack\HashCodeCombiner.cs" />
+    <Compile Include="_Aliens\aspnetwebstack\PositionTagged.cs" />
+    <Compile Include="_Aliens\MarkdownSharp\Markdown.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="App.config" />
-    <None Include="Oueb.ini" />
     <None Include="packages.config" />
-    <None Include="Resources\linear.cshtml" />
-    <None Include="Resources\parallel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\linear.css" />
-    <Content Include="Resources\normalize.css" />
-    <Content Include="Resources\parallel.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Oueb\Narvalo.Oueb.csproj">
-      <Project>{2c68de13-a415-4f65-a4e4-feb06551c873}</Project>
-      <Name>Narvalo.Oueb</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
