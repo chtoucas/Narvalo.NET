@@ -24,22 +24,22 @@ namespace Narvalo.Narrative
         static Regex RegionRegex_ = new Regex(@"^\s*#region");
 
         readonly List<Section> _sections = new List<Section>();
-        readonly string _source;
+        readonly string _fileName;
 
-        public CSharpSource(string source)
+        public CSharpSource(string fileName)
         {
-            _source = source;
+            _fileName = fileName;
         }
 
         public IEnumerable<Section> Sections { get { return _sections; } }
 
-        public string Source { get { return _source; } }
+        public string FileName { get { return _fileName; } }
 
         public void Parse()
         {
             // FIXME: Completely inefficient.
 
-            var lines = ReadDiscardingMultiBlankLines(_source);
+            var lines = ReadDiscardingMultiBlankLines(_fileName);
 
             var hasCode = false;
             var docsText = new StringBuilder();
@@ -80,6 +80,12 @@ namespace Narvalo.Narrative
             AddSection_(docsText, codeText);
         }
 
+        public IEnumerable<Section> Format(CSharpSourceFormatter formatter)
+        {
+            foreach (var section in Sections) {
+                yield return formatter.Format(section.HtmlDoc, section.HtmlCode);
+            }
+        }
 
         static IEnumerable<string> ReadDiscardingMultiBlankLines(string fileName)
         {

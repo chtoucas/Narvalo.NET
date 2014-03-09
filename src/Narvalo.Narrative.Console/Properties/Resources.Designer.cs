@@ -61,7 +61,7 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &gt;&gt;&gt; FIN DE L&apos;APPLICATION &lt;&lt;&lt;.
         /// </summary>
         internal static string Ending {
             get {
@@ -70,7 +70,16 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Appuyer sur une touche du clavier pour sortir de l&apos;application..
+        /// </summary>
+        internal static string PressAnyKeyToExit {
+            get {
+                return ResourceManager.GetString("PressAnyKeyToExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &gt;&gt;&gt; DEMARRAGE DE L&apos;APPLICATION &lt;&lt;&lt;.
         /// </summary>
         internal static string Starting {
             get {
@@ -79,7 +88,7 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Une exception non gérée est intervenue: {Exception}..
         /// </summary>
         internal static string UnhandledException {
             get {

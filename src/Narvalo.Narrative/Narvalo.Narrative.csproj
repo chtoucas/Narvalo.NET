@@ -67,7 +67,7 @@
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="MarkdownSharpEngine.cs" />
-    <Compile Include="CodeEssay.cs" />
+    <Compile Include="CSharpEssay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="TemplateBase.cs" />

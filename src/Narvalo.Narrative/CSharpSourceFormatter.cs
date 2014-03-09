@@ -14,18 +14,13 @@ namespace Narvalo.Narrative
             _markdown = markdown;
         }
 
-        public IEnumerable<Section> Format(string source)
+        public Section Format(string doc, string code)
         {
-            var cSharpCode = new CSharpSource(source);
-            cSharpCode.Parse();
-
-            foreach (var section in cSharpCode.Sections) {
-                yield return new Section
-                {
-                    HtmlCode = HttpUtility.HtmlEncode(section.HtmlCode),
-                    HtmlDoc = _markdown.Transform(section.HtmlDoc)
-                };
-            }
+            return new Section
+            {
+                HtmlCode = HttpUtility.HtmlEncode(code),
+                HtmlDoc = _markdown.Transform(doc)
+            };
         }
     }
 }

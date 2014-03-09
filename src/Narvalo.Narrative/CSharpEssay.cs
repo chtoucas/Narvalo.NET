@@ -5,23 +5,28 @@ namespace Narvalo.Narrative
     using System.Collections.Generic;
     using System.IO;
 
-    public class CodeEssay
+    public class CSharpEssay
     {
-        IMarkdownEngine _markdown;
         TemplateBase _template;
+        CSharpSourceFormatter _formatter;
 
-        public CodeEssay(TemplateBase template, IMarkdownEngine markdown)
+        public CSharpEssay(TemplateBase template, IMarkdownEngine markdown)
+            : this(template, new CSharpSourceFormatter(markdown)) { }
+
+        public CSharpEssay(TemplateBase template, CSharpSourceFormatter formatter)
         {
             _template = template;
-            _markdown = markdown;
+            _formatter = formatter;
         }
 
-        public string Process(string source)
+        public string Build(string fileName)
         {
-            var formatter = new CSharpSourceFormatter(_markdown);
-            var sections = formatter.Format(source);
+            var cSharpSource = new CSharpSource(fileName);
+            cSharpSource.Parse();
 
-            return GenerateHtml_(source, sections);
+            var sections = cSharpSource.Format(_formatter);
+
+            return GenerateHtml_(fileName, sections);
         }
 
         string GenerateHtml_(string source, IEnumerable<Section> sections)
