@@ -2,6 +2,7 @@
 
 namespace Narvalo.Narrative
 {
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -29,26 +30,43 @@ namespace Narvalo.Narrative
 
             PrepareEnvironment_();
 
+            var template = new RazorTemplate("Resources/linear.cshtml");
+            template.OnCompilerError += OnCompilerError_;
+            template.Compile();
+
             var sources = from path in paths
-                          from source in FindSources_(path)
+                          from source in FindCSharpSources_(path)
                           select source;
 
-            foreach (var source in sources) {
-                Log.Debug("Processing {Source}", source);
+            foreach (var fileName in sources) {
+                ProcessSource_(template, fileName);
                 break;
             }
+        }
 
-            //return;
+        void OnCompilerError_(object sender, CompilerErrorEventArgs e)
+        {
+            var errors = e.CompilerErrors.OfType<CompilerError>().Where(error => !error.IsWarning);
 
-            //var templateCreator = new TemplateCreator();
-            //var razorTemplate = templateCreator.Create("XXX");
+            foreach (var error in errors) {
+                Log.Error(
+                    "Error Compiling Template: ({Line}, {Column}) {ErrorText}",
+                    error.Line,
+                    error.Column,
+                    error.ErrorText);
+            }
+        }
 
-            //var essay = new CSharpEssay(razorTemplate, new MarkdownDeepEngine());
+        void ProcessSource_(RazorTemplate template, string fileName)
+        {
+            Log.Debug("Processing {Source}", fileName);
 
-            //foreach (var file in sources) {
-            //    var text = essay.Build(file);
-            //    SaveResult_(file, text);
-            //}
+            var source = new CSharpSource(fileName);
+            source.Parse();
+
+            var output = template.Execute(fileName, source.Sections);
+
+            System.Console.Write(output);
         }
 
         void PrepareEnvironment_()
@@ -56,13 +74,13 @@ namespace Narvalo.Narrative
             var outputPath = _settings.OutputDirectory;
 
             if (!Directory.Exists(outputPath)) {
-                Log.Debug("Creating output path: {Path}", outputPath);
+                Log.Debug("Creating output path: {Path}.", outputPath);
 
                 Directory.CreateDirectory(outputPath);
             }
         }
 
-        IEnumerable<string> FindSources_(string path)
+        IEnumerable<string> FindCSharpSources_(string path)
         {
             return Directory.GetFiles(path, "*.cs", SearchOption.AllDirectories)
                 .Where(filename => !FilesToIgnore_.Any(_ => filename.EndsWith(_)));

@@ -4,8 +4,8 @@
 <head>
  <title>@Title</title>
  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
- <link rel="stylesheet" media="all" href="../../Resources/normalize.css" />
- <link rel="stylesheet" media="all" href="../../Resources/linear.css" />
+ <link rel="stylesheet" media="all" href="../Resources/normalize.css" />
+ <link rel="stylesheet" media="all" href="../Resources/linear.css" />
  <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css" />
  <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
  <script>hljs.initHighlightingOnLoad();</script>
@@ -13,9 +13,9 @@
 <body>
  <div class="container">
   <div class="page">
-   @for (var i = 0; i < Sections.Count; i++) {
-    @Sections[i].DocsHtml
-   }
+    @foreach (var section in Sections) {
+      <span>@(section.HtmlDoc)</span>
+    }
   </div>
  </div>
 </body>

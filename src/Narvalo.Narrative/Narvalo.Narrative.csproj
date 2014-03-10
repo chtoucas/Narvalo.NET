@@ -61,8 +61,10 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="CompilerErrorEventArgs.cs" />
     <Compile Include="CSharpSource.cs" />
-    <Compile Include="TemplateCreator.cs" />
+    <Compile Include="NarrativeException.cs" />
+    <Compile Include="RazorTemplate.cs" />
     <Compile Include="CSharpSourceFormatter.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />

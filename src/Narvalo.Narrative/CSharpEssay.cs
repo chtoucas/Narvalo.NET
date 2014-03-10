@@ -29,9 +29,9 @@ namespace Narvalo.Narrative
             return GenerateHtml_(fileName, sections);
         }
 
-        string GenerateHtml_(string source, IEnumerable<Section> sections)
+        string GenerateHtml_(string fileName, IEnumerable<Section> sections)
         {
-            _template.Title = Path.GetFileName(source);
+            _template.Title = Path.GetFileName(fileName);
             _template.Sections = sections;
 
             _template.Execute();

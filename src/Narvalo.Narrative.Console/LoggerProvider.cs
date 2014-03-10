@@ -11,10 +11,10 @@ namespace Narvalo.Narrative
     public sealed class LoggerProvider : ILoggerProvider
     {
         [CLSCompliant(false)]
-        public ILogger GetLogger(LogEventLevel minimumLevel)
+        public ILogger GetLogger()
         {
             return new LoggerConfiguration()
-               .MinimumLevel.Is(minimumLevel)
+               .MinimumLevel.Is(LogEventLevel.Verbose)
                .WriteTo.ColoredConsole()
                .CreateLogger();
         }

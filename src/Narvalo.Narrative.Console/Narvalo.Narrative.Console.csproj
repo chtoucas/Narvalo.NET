@@ -88,7 +88,9 @@
     <None Include="App.config" />
     <None Include="Narrative.ini" />
     <None Include="packages.config" />
-    <None Include="Resources\linear.cshtml" />
+    <None Include="Resources\linear.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\parallel.cshtml" />
   </ItemGroup>
   <ItemGroup>

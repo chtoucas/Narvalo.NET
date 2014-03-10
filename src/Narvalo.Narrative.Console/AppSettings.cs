@@ -8,64 +8,53 @@ namespace Narvalo.Narrative
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using Narvalo;
     using Narvalo.Collections;
-    using Narvalo.Fx;
-    using Serilog.Events;
 
     public sealed class AppSettings
     {
-        const string SettingPrefix_ = "narrative:";
-
-        static readonly string ExecutingDirectory_
-            = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-        public string LogProfile { get; set; }
-        [CLSCompliant(false)]
-        public LogEventLevel LogMinimumLevel { get; set; }
-        public string OutputDirectory { get; set; }
+        static readonly Func<string> DefaultOutputDirectory_
+            = () =>
+            {
+                var execDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                return Path.Combine(execDirectory, "docs");
+            };
 
         AppSettings() { }
 
+        public string OutputDirectory { get; private set; }
+
         public static AppSettings FromConfiguration()
         {
-            return (new AppSettings()).Load();
+            var nvc = Filter_(ConfigurationManager.AppSettings);
+
+            return Create(nvc);
         }
 
-        public AppSettings Load()
+        internal static AppSettings Create(NameValueCollection nvc)
         {
-            LoadSettings_(ConfigurationManager.AppSettings);
-
-            return this;
+            var self = new AppSettings();
+            self.Initialize_(nvc);
+            return self;
         }
 
-        void LoadSettings_(NameValueCollection appSettings)
+        static NameValueCollection Filter_(NameValueCollection settings)
         {
-            var keys = appSettings.AllKeys
-                .Where(_ => _.StartsWith(SettingPrefix_, StringComparison.OrdinalIgnoreCase));
+            var keys = settings.AllKeys
+                .Where(_ => _.StartsWith("narrative:", StringComparison.OrdinalIgnoreCase));
 
-            var settings = new NameValueCollection(StringComparer.OrdinalIgnoreCase);
+            var nvc = new NameValueCollection(StringComparer.OrdinalIgnoreCase);
 
             foreach (var key in keys) {
-                settings[key] = appSettings[key];
+                nvc[key] = settings[key];
             }
 
-            Initialize_(settings);
+            return nvc;
         }
 
-        void Initialize_(NameValueCollection source)
+        void Initialize_(NameValueCollection nvc)
         {
-            LogProfile = source.MayGetSingle("narrative:LogProfile")
-                .ValueOrThrow(() => new ConfigurationErrorsException(
-                    "Missing or invalid config 'narrative:LogProfile'."));
-
-            LogMinimumLevel = source.MayGetSingle("narrative:LogMinimumLevel")
-                .Select(ParseTo.Enum<LogEventLevel>)
-                .UnpackOrThrow(
-                    () => new ConfigurationErrorsException("Missing or invalid config 'narrative:LogMinimumLevel'."));
-
-            OutputDirectory = source.MayGetSingle("narrative:OutputDirectory")
-                .ValueOrElse(Path.Combine(ExecutingDirectory_, "docs"));
+            OutputDirectory = nvc.MayGetSingle("narrative:OutputDirectory")
+                .ValueOrElse(DefaultOutputDirectory_);
         }
     }
 }

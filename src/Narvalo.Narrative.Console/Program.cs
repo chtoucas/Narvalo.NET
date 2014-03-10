@@ -3,11 +3,9 @@
 namespace Narvalo.Narrative
 {
     using System;
-    using System.ComponentModel.Composition.Hosting;
     using Autofac;
     using Narvalo.Narrative.Properties;
     using Serilog;
-    using Serilog.Events;
 
     public sealed class Program
     {
@@ -21,14 +19,14 @@ namespace Narvalo.Narrative
         [STAThread]
         static void Main(string[] args)
         {
-            var settings = AppSettings.FromConfiguration();
-
-            InitializeRuntime_(settings);
+            InitializeLogging_();
 
             Log.Information(Resources.Starting);
 
             try {
+                var settings = AppSettings.FromConfiguration();
                 var options = ParseArguments_(args);
+
                 new Program(settings).Run(options);
             }
             catch (Exception ex) {
@@ -47,15 +45,15 @@ namespace Narvalo.Narrative
 
         static AppOptions ParseArguments_(string[] args)
         {
-            var options = new AppOptions();
+            var result = new AppOptions();
 
             var parser = new CommandLine.Parser();
             parser.ParseArgumentsStrict(
                 args,
-                options,
-                () => { throw new ApplicationException("Failed to process arguments."); });
+                result,
+                () => { throw new ApplicationException("Failed to parse the cmdline arguments."); });
 
-            return options;
+            return result;
         }
 
         static IContainer CreateContainer_(AppSettings settings)
@@ -66,7 +64,16 @@ namespace Narvalo.Narrative
 
             builder.RegisterType<AppService>().AsSelf();
 
+            builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
+
             return builder.Build();
+        }
+
+        static void InitializeLogging_()
+        {
+            Log.Logger = new LoggerProvider().GetLogger();
+
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
         }
 
         static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
@@ -77,26 +84,6 @@ namespace Narvalo.Narrative
             finally {
                 Environment.Exit(1);
             }
-        }
-
-        static void InitializeRuntime_(AppSettings settings)
-        {
-            ConfigureLogger_(settings.LogProfile, settings.LogMinimumLevel);
-
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
-        }
-
-        static void ConfigureLogger_(string profile, LogEventLevel minimumLevel)
-        {
-            ILoggerProvider provider;
-
-            using (var catalog = new AssemblyCatalog(typeof(Program).Assembly)) {
-                using (var container = new CompositionContainer(catalog)) {
-                    provider = container.GetExportedValue<ILoggerProvider>(profile);
-                }
-            }
-
-            Log.Logger = provider.GetLogger(minimumLevel);
         }
 
         static void LogUnhandledException_(Exception exception)
