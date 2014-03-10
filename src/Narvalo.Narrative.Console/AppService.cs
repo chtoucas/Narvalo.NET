@@ -2,10 +2,12 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Web;
     using Serilog;
 
     public sealed class AppService
@@ -15,10 +17,12 @@ namespace Narvalo.Narrative
 		};
 
         readonly AppSettings _settings;
+        readonly IMarkdownEngine _markdown;
 
-        public AppService(AppSettings settings)
+        public AppService(AppSettings settings, IMarkdownEngine markdown)
         {
             _settings = settings;
+            _markdown = markdown;
         }
 
         public void Process(string[] paths)
@@ -34,13 +38,12 @@ namespace Narvalo.Narrative
             template.OnCompilerError += OnCompilerError_;
             template.Compile();
 
-            var sources = from path in paths
-                          from source in FindCSharpSources_(path)
-                          select source;
+            var sources = from directoryPath in paths
+                          from fileName in FindCSharpFilesInDirectory_(directoryPath)
+                          select Tuple.Create(directoryPath, fileName);
 
-            foreach (var fileName in sources) {
-                ProcessSource_(template, fileName);
-                break;
+            foreach (var source in sources) {
+                ProcessSource_(template, source.Item1, source.Item2);
             }
         }
 
@@ -57,16 +60,37 @@ namespace Narvalo.Narrative
             }
         }
 
-        void ProcessSource_(RazorTemplate template, string fileName)
+        void ProcessSource_(RazorTemplate template, string directoryPath, string fileName)
         {
-            Log.Debug("Processing {Source}", fileName);
+            Log.Debug("Processing {File}...", fileName);
 
-            var source = new CSharpSource(fileName);
-            source.Parse();
+            var filePath = Path.Combine(directoryPath, fileName);
+            var source = new CSharpSource(filePath);
+            source.ReadAndParse();
 
-            var output = template.Execute(fileName, source.Sections);
+            var output = template.Execute(fileName, source.Blocks.Select(_ => CreateHtmlBlock_(_)));
 
-            System.Console.Write(output);
+            SaveOutput_(fileName, output);
+        }
+
+        HtmlBlock CreateHtmlBlock_(Block block)
+        {
+            switch (block.BlockType) {
+                case BlockType.Code:
+                    return new HtmlBlock
+                    {
+                        BlockType = block.BlockType,
+                        Content = new HtmlString(HttpUtility.HtmlEncode(block.Content))
+                    };
+                case BlockType.Markdown:
+                    return new HtmlBlock
+                    {
+                        BlockType = block.BlockType,
+                        Content = new HtmlString(_markdown.Transform(block.Content))
+                    };
+                default:
+                    throw new InvalidOperationException();
+            }
         }
 
         void PrepareEnvironment_()
@@ -80,31 +104,19 @@ namespace Narvalo.Narrative
             }
         }
 
-        IEnumerable<string> FindCSharpSources_(string path)
+        IEnumerable<string> FindCSharpFilesInDirectory_(string directoryPath)
         {
-            return Directory.GetFiles(path, "*.cs", SearchOption.AllDirectories)
-                .Where(filename => !FilesToIgnore_.Any(_ => filename.EndsWith(_)));
+            return Directory.GetFiles(directoryPath, "*.cs", SearchOption.TopDirectoryOnly)
+                .Where(_ => !FilesToIgnore_.Any(v => _.EndsWith(v)))
+                .Select(_ => new FileInfo(_).Name);
         }
 
-        //void SaveResult_(string source, string text)
-        //{
-        //    int depth;
-        //    var destination = GetDestination_(source, out depth);
+        void SaveOutput_(string fileName, string text)
+        {
+            var outputFileName = Path.ChangeExtension(fileName, "html");
+            var destination = Path.Combine(_settings.OutputDirectory, outputFileName);
 
-        //    string pathToRoot = string.Concat(Enumerable.Repeat(".." + Path.DirectorySeparatorChar, depth));
-
-        //    File.WriteAllText(destination, text);
-        //}
-
-        //string GetDestination_(string filepath, out int depth)
-        //{
-        //    var dirs = Path.GetDirectoryName(filepath).Substring(1).Split(new[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
-        //    depth = dirs.Length;
-
-        //    var dest = Path.Combine("docs", string.Join(Path.DirectorySeparatorChar.ToString(), dirs)).ToLower();
-        //    Directory.CreateDirectory(dest);
-
-        //    return Path.Combine("docs", Path.ChangeExtension(filepath, "html").ToLower());
-        //}
+            File.WriteAllText(destination, text);
+        }
     }
 }

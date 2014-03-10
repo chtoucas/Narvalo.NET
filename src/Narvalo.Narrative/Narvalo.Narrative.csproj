@@ -61,17 +61,17 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="Block.cs" />
+    <Compile Include="BlockType.cs" />
     <Compile Include="CompilerErrorEventArgs.cs" />
     <Compile Include="CSharpSource.cs" />
+    <Compile Include="HtmlBlock.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="RazorTemplate.cs" />
-    <Compile Include="CSharpSourceFormatter.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="MarkdownSharpEngine.cs" />
-    <Compile Include="CSharpEssay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Section.cs" />
     <Compile Include="TemplateBase.cs" />
     <Compile Include="_Aliens\aspnetwebstack\AttributeValue.cs" />
     <Compile Include="_Aliens\aspnetwebstack\HashCodeCombiner.cs" />

@@ -15,7 +15,7 @@ namespace Narvalo.Narrative
 
         readonly string _path;
 
-        TemplateBase _template;
+        Type _templateType;
 
         public RazorTemplate(string path)
         {
@@ -24,26 +24,25 @@ namespace Narvalo.Narrative
 
         public event EventHandler<CompilerErrorEventArgs> OnCompilerError;
 
-        public string Execute(string fileName, IEnumerable<Section> sections)
+        public string Execute(string title, IEnumerable<HtmlBlock> blocks)
         {
-            _template.Title = Path.GetFileName(fileName);
-            _template.Sections = sections;
-
-            _template.Execute();
-
-            return _template.Buffer.ToString();
-        }
-
-        public void Compile()
-        {
-            var templateType = Compile_(_path);
-            var template = Activator.CreateInstance(templateType) as TemplateBase;
+            var template = Activator.CreateInstance(_templateType) as TemplateBase;
             if (template == null) {
                 throw new NarrativeException(
                     "The template does not inherit from TemplateBase.");
             }
 
-            _template = template;
+            template.Title = title;
+            template.Blocks = blocks;
+
+            template.Execute();
+
+            return template.Buffer.ToString();
+        }
+
+        public void Compile()
+        {
+            _templateType = Compile_(_path);
         }
 
         string CreateClassName_()
@@ -60,6 +59,8 @@ namespace Narvalo.Narrative
             host.DefaultNamespace = Namespace_;
             host.DefaultClassName = tmpClassName;
             host.NamespaceImports.Add("System");
+            host.NamespaceImports.Add("System.Web");
+            host.NamespaceImports.Add("Narvalo.Narrative");
 
             var generator = new RazorTemplateEngine(host);
 
@@ -81,6 +82,7 @@ namespace Narvalo.Narrative
                 .Replace("/", "\\");
 
             compilerParams.ReferencedAssemblies.Add(templateAssembly);
+            compilerParams.ReferencedAssemblies.Add("System.Web.dll");
 
             var compilerResults = new CSharpCodeProvider()
                 .CompileAssemblyFromDom(compilerParams, generatorResults.GeneratedCode);

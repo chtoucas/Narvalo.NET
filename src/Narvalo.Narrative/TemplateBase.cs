@@ -21,7 +21,8 @@ namespace Narvalo.Narrative
         }
 
         public string Title { get; set; }
-        public IEnumerable<Section> Sections { get; set; }
+        public IEnumerable<HtmlBlock> Blocks { get; set; }
+
         public StringBuilder Buffer { get; set; }
 
         public abstract void Execute();

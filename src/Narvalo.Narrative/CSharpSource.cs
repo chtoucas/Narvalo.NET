@@ -2,7 +2,6 @@
 
 namespace Narvalo.Narrative
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
@@ -19,30 +18,41 @@ namespace Narvalo.Narrative
     {
         static Regex CommentFilter_ { get { return new Regex(@"(^#![/]|^\s*#\{)"); } }
 
-        static Regex CommentRegex_ { get { return new Regex(@"^\s*(\*|//)\s"); } }
+        static Regex MarkdownRegex_ { get { return new Regex(@"^\s*\*\s"); } }
         static Regex IgnoreRegex_ = new Regex(@"^\s*(/\*|\*/|////)");
-        static Regex RegionRegex_ = new Regex(@"^\s*#region");
 
-        readonly List<Section> _sections = new List<Section>();
-        readonly string _fileName;
+        readonly List<Block> _blocks = new List<Block>();
+        readonly string _path;
 
-        public CSharpSource(string fileName)
+        public CSharpSource(string path)
         {
-            _fileName = fileName;
+            _path = path;
         }
 
-        public IEnumerable<Section> Sections { get { return _sections; } }
+        public IEnumerable<Block> Blocks { get { return _blocks; } }
 
-        public string FileName { get { return _fileName; } }
+        public string Path { get { return _path; } }
 
-        public void Parse()
+        public void ReadAndParse()
         {
-            // FIXME: Completely inefficient.
+            Parse(Read());
+        }
 
-            var lines = ReadDiscardingMultiBlankLines(_fileName);
+        public IEnumerable<string> Read()
+        {
+            string line;
 
+            using (var reader = new StreamReader(_path)) {
+                while ((line = reader.ReadLine()) != null) {
+                    yield return line;
+                }
+            }
+        }
+
+        public void Parse(IEnumerable<string> lines)
+        {
             var hasCode = false;
-            var docsText = new StringBuilder();
+            var markdownText = new StringBuilder();
             var codeText = new StringBuilder();
 
             foreach (var line in lines) {
@@ -50,69 +60,47 @@ namespace Narvalo.Narrative
                     continue;
                 }
 
-                if (RegionRegex_.IsMatch(line)) {
+                if (MarkdownRegex_.IsMatch(line)) {
                     if (hasCode) {
-                        AddSection_(docsText, codeText);
-                        hasCode = false;
-                        docsText = new StringBuilder();
+                        AddCodeBlock_(codeText);
                         codeText = new StringBuilder();
                     }
 
-                    docsText.AppendLine(RegionRegex_.Replace(line, "####"));
-                }
-
-                if (CommentRegex_.IsMatch(line) && !CommentFilter_.IsMatch(line)) {
-                    if (hasCode) {
-                        AddSection_(docsText, codeText);
-                        hasCode = false;
-                        docsText = new StringBuilder();
-                        codeText = new StringBuilder();
-                    }
-
-                    docsText.AppendLine(CommentRegex_.Replace(line, ""));
+                    hasCode = false;
+                    markdownText.AppendLine(MarkdownRegex_.Replace(line, ""));
                 }
                 else {
+                    if (!hasCode) {
+                        AddMarkdownBlock_(markdownText);
+                        markdownText = new StringBuilder();
+                    }
+
                     hasCode = true;
                     codeText.AppendLine(line);
                 }
             }
 
-            AddSection_(docsText, codeText);
-        }
-
-        public IEnumerable<Section> Format(CSharpSourceFormatter formatter)
-        {
-            foreach (var section in Sections) {
-                yield return formatter.Format(section.HtmlDoc, section.HtmlCode);
+            if (hasCode) {
+                AddCodeBlock_(codeText);
+            }
+            else {
+                AddMarkdownBlock_(markdownText);
             }
         }
 
-        static IEnumerable<string> ReadDiscardingMultiBlankLines(string fileName)
+        void AddBlock_(BlockType blockType, StringBuilder content)
         {
-            bool previousLineWasBlank = false;
-            string line;
-
-            using (var reader = new StreamReader(fileName)) {
-                while ((line = reader.ReadLine()) != null) {
-                    if (String.IsNullOrWhiteSpace(line)) {
-                        previousLineWasBlank = true;
-                    }
-                    else {
-                        if (previousLineWasBlank) {
-                            previousLineWasBlank = false;
-                            yield return Environment.NewLine + line;
-                        }
-                        else {
-                            yield return line;
-                        }
-                    }
-                }
-            }
+            _blocks.Add(new Block { BlockType = blockType, Content = content.ToString() });
         }
 
-        void AddSection_(StringBuilder htmlDoc, StringBuilder htmlCode)
+        void AddCodeBlock_(StringBuilder content)
         {
-            _sections.Add(new Section { HtmlDoc = htmlDoc.ToString(), HtmlCode = htmlCode.ToString() });
+            AddBlock_(BlockType.Code, content);
+        }
+
+        void AddMarkdownBlock_(StringBuilder content)
+        {
+            AddBlock_(BlockType.Markdown, content);
         }
     }
 }

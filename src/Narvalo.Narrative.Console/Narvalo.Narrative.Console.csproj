@@ -55,6 +55,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -91,7 +92,6 @@
     <None Include="Resources\linear.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\parallel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
@@ -101,7 +101,6 @@
   <ItemGroup>
     <Content Include="Resources\linear.css" />
     <Content Include="Resources\normalize.css" />
-    <Content Include="Resources\parallel.css" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">

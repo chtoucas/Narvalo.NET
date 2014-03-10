@@ -2,9 +2,11 @@
 
 namespace Narvalo.Narrative
 {
-    public class Section
+    public enum BlockType
     {
-        public string HtmlCode { get; set; }
-        public string HtmlDoc { get; set; }
+        Code = 0,
+        Markdown = 1,
+        //Region = 2,
+        //Comment = 3,
     }
 }
