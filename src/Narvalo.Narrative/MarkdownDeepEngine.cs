@@ -4,7 +4,7 @@ namespace Narvalo.Narrative
 {
     using Markdown = MarkdownDeep.Markdown;
 
-    public class MarkdownDeepEngine : IMarkdownEngine
+    public sealed class MarkdownDeepEngine : IMarkdownEngine
     {
         readonly Markdown _inner;
 
@@ -19,6 +19,8 @@ namespace Narvalo.Narrative
 
         public string Transform(string text)
         {
+            Require.NotNullOrEmpty(text, "text");
+
             return _inner.Transform(text);
         }
     }

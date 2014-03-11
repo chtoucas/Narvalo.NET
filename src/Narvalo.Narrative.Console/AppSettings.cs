@@ -32,6 +32,8 @@ namespace Narvalo.Narrative
 
         internal static AppSettings Create(NameValueCollection nvc)
         {
+            Require.NotNull(nvc, "nvc");
+
             var self = new AppSettings();
             self.Initialize_(nvc);
             return self;

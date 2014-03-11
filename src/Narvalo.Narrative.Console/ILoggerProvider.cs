@@ -3,11 +3,13 @@
 namespace Narvalo.Narrative
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Serilog;
 
     [CLSCompliant(false)]
     public interface ILoggerProvider
     {
+        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         ILogger GetLogger();
     }
 }

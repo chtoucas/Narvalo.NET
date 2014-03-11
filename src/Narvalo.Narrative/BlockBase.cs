@@ -2,9 +2,11 @@
 
 namespace Narvalo.Narrative
 {
-    public class Block
+    public abstract class BlockBase
     {
-        public BlockType BlockType { get; set; }
+        protected BlockBase() { }
+
+        public abstract BlockType BlockType { get; }
 
         public string Content { get; set; }
     }

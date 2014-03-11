@@ -2,7 +2,6 @@
 
 namespace Narvalo.Narrative
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
@@ -15,15 +14,18 @@ namespace Narvalo.Narrative
 
     public abstract class TemplateBase
     {
+        readonly StringBuilder _buffer;
+
         protected TemplateBase()
         {
-            Buffer = new StringBuilder();
+            _buffer = new StringBuilder();
         }
 
         public string Title { get; set; }
+
         public IEnumerable<HtmlBlock> Blocks { get; set; }
 
-        public StringBuilder Buffer { get; set; }
+        public StringBuilder Buffer { get { return _buffer; } }
 
         public abstract void Execute();
 
@@ -34,7 +36,7 @@ namespace Narvalo.Narrative
 
         public virtual void WriteLiteral(object value)
         {
-            Buffer.Append(value);
+            _buffer.Append(value);
         }
 
         public virtual void WriteAttribute(
@@ -47,16 +49,16 @@ namespace Narvalo.Narrative
             bool wroteSomething = false;
             if (values.Length == 0) {
                 // Explicitly empty attribute, so write the prefix and suffix
-                WritePositionTaggedLiteral(prefix);
-                WritePositionTaggedLiteral(suffix);
+                WritePositionTaggedLiteral_(prefix);
+                WritePositionTaggedLiteral_(suffix);
             }
             else {
                 for (int i = 0; i < values.Length; i++) {
                     AttributeValue attrVal = values[i];
                     PositionTagged<object> val = attrVal.Value;
-                    PositionTagged<string> next = i == values.Length - 1 ?
-                        suffix : // End of the list, grab the suffix
-                        values[i + 1].Prefix; // Still in the list, grab the next prefix
+                    //PositionTagged<string> next = i == values.Length - 1 ?
+                    //    suffix : // End of the list, grab the suffix
+                    //    values[i + 1].Prefix; // Still in the list, grab the next prefix
 
                     bool? boolVal = null;
                     if (val.Value is bool) {
@@ -74,15 +76,15 @@ namespace Narvalo.Narrative
                         }
 
                         if (first) {
-                            WritePositionTaggedLiteral(prefix);
+                            WritePositionTaggedLiteral_(prefix);
                             first = false;
                         }
                         else {
-                            WritePositionTaggedLiteral(attrVal.Prefix);
+                            WritePositionTaggedLiteral_(attrVal.Prefix);
                         }
 
                         // Calculate length of the source span by the position of the next value (or suffix)
-                        int sourceLength = next.Position - attrVal.Value.Position;
+                        //int sourceLength = next.Position - attrVal.Value.Position;
 
                         if (attrVal.Literal) {
                             WriteLiteral(valStr);
@@ -94,18 +96,18 @@ namespace Narvalo.Narrative
                     }
                 }
                 if (wroteSomething)
-                    WritePositionTaggedLiteral(suffix);
+                    WritePositionTaggedLiteral_(suffix);
             }
         }
 
-        void WritePositionTaggedLiteral(string value, int position)
+        void WritePositionTaggedLiteral_(string value)
         {
             WriteLiteral(value);
         }
 
-        void WritePositionTaggedLiteral(PositionTagged<string> value)
+        void WritePositionTaggedLiteral_(PositionTagged<string> value)
         {
-            WritePositionTaggedLiteral(value.Value, value.Position);
+            WritePositionTaggedLiteral_(value.Value);
         }
     }
 }

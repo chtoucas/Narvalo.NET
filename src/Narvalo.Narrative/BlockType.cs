@@ -5,8 +5,7 @@ namespace Narvalo.Narrative
     public enum BlockType
     {
         Code = 0,
+
         Markdown = 1,
-        //Region = 2,
-        //Comment = 3,
     }
 }

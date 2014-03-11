@@ -2,12 +2,10 @@
 
 namespace Narvalo.Narrative
 {
-    using System.Web;
-
-    public sealed class HtmlBlock
+    public sealed class CodeBlock : BlockBase
     {
-        public BlockType BlockType { get; set; }
+        public CodeBlock() : base() { }
 
-        public IHtmlString Content { get; set; }
+        public override BlockType BlockType { get { return BlockType.Code; } }
     }
 }

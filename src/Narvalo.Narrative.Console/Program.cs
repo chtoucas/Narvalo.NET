@@ -51,7 +51,7 @@ namespace Narvalo.Narrative
             parser.ParseArgumentsStrict(
                 args,
                 result,
-                () => { throw new ApplicationException("Failed to parse the cmdline arguments."); });
+                () => { throw new NarrativeException("Failed to parse the cmdline arguments."); });
 
             return result;
         }
@@ -59,13 +59,7 @@ namespace Narvalo.Narrative
         static IContainer CreateContainer_(AppSettings settings)
         {
             var builder = new ContainerBuilder();
-
-            builder.Register(_ => settings).AsSelf().SingleInstance();
-
-            builder.RegisterType<AppService>().AsSelf();
-
-            builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
-
+            builder.RegisterModule(new AppModule(settings));
             return builder.Build();
         }
 
