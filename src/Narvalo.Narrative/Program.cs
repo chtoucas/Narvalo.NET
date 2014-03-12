@@ -15,7 +15,7 @@ namespace Narvalo.Narrative
         {
             var settings = AppSettings.FromConfiguration();
 
-            ConfigureLogging_(settings.LogMinimumLevel);
+            SetupLogging_(settings.LogMinimumLevel);
 
             Log.Information(Resources.Starting);
 
@@ -40,7 +40,7 @@ namespace Narvalo.Narrative
             return builder.Build();
         }
 
-        static void ConfigureLogging_(LogEventLevel mimimumLevel)
+        static void SetupLogging_(LogEventLevel mimimumLevel)
         {
             Log.Logger = CreateLogger_(mimimumLevel);
 

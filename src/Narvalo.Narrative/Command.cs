@@ -32,7 +32,7 @@ namespace Narvalo.Narrative
                 return;
             }
 
-            var sources = new SourceDirectory(path).Find();
+            var sources = new SourceDirectory(path).FindSources();
 
             PrepareOutput_(sources);
 
@@ -51,7 +51,7 @@ namespace Narvalo.Narrative
 
             var data = new TemplateData(blocks)
             {
-                Title = "FIXME",
+                Title = source.RelativePath,
             };
 
             var output = _template.Render(data);
@@ -67,8 +67,13 @@ namespace Narvalo.Narrative
                    .Distinct()
                    .Select(_ => Path.Combine(_settings.OutputDirectory, _));
 
-            foreach (var dir in directories) {
-                Directory.CreateDirectory(dir);
+            CreateMissingDirectories_(directories);
+        }
+
+        void CreateMissingDirectories_(IEnumerable<string> directories)
+        {
+            foreach (var directory in directories) {
+                Directory.CreateDirectory(directory);
             }
         }
 

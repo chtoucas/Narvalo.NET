@@ -6,12 +6,24 @@ namespace Narvalo.Narrative
 
     public sealed class SourceFile
     {
-        public string Directory { get; set; }
-        public string FileName { get; set; }
+        readonly string _directory;
+        readonly string _name;
+
+        public SourceFile(string directory, string name)
+        {
+            Require.NotNullOrEmpty(directory, "directory");
+            Require.NotNullOrEmpty(name, "name");
+
+            _directory = directory;
+            _name = name;
+        }
+
+        public string Directory { get { return _directory; } }
+        public string Name { get { return _name; } }
 
         public string RelativePath
         {
-            get { return Path.Combine(Directory, FileName); }
+            get { return Path.Combine(Directory, Name); }
         }
     }
 }

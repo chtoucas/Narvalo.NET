@@ -27,18 +27,14 @@ namespace Narvalo.Narrative
             _path = path;
         }
 
-        public IEnumerable<SourceFile> Find()
+        public IEnumerable<SourceFile> FindSources()
         {
-            return from dir in FindSubDirectories_()
-                   from file in FindSources_(Path.Combine(_path, dir))
-                   select new SourceFile
-                   {
-                       Directory = dir,
-                       FileName = file
-                   };
+            return from directory in FindDirectories_()
+                   from name in FindSources_(Path.Combine(_path, directory))
+                   select new SourceFile(directory, name);
         }
 
-        IEnumerable<string> FindSubDirectories_()
+        IEnumerable<string> FindDirectories_()
         {
             var path = new FileInfo(_path).FullName;
 
