@@ -5,53 +5,50 @@ namespace Narvalo.Narrative
     using System;
     using System.Linq;
     using System.Web;
-    using Narvalo.Narrative.Internal;
 
-    public sealed class Template
+    public sealed class RazorTemplate
     {
         readonly IMarkdownEngine _markdown;
         readonly Lazy<Type> _templateType;
 
-        public Template(string path, IMarkdownEngine markdown)
+        public RazorTemplate(string input, IMarkdownEngine markdown)
         {
-            Require.NotNullOrEmpty(path, "path");
+            Require.NotNull(input, "input");
             Require.NotNull(markdown, "markdown");
 
             _markdown = markdown;
 
-            _templateType = new Lazy<Type>(() => TemplateCompiler.Compile(path));
+            _templateType = new Lazy<Type>(() => new RazorTemplateCompiler(input).Compile());
         }
 
-        public string Render(TemplateModel model)
+        public string Render(TemplateData data)
         {
-            Require.NotNull(model, "model");
+            Require.NotNull(data, "data");
 
-            var template = Activator.CreateInstance(_templateType.Value) as TemplateBase;
+            var template = Activator.CreateInstance(_templateType.Value) as RazorTemplateBase;
             if (template == null) {
-                throw new NarrativeException("The template does not inherit from TemplateBase.");
+                throw new NarrativeException("The template does not inherit from RazorTemplateBase.");
             }
 
-            template.Title = model.FileName;
-            template.Blocks = model.Blocks.Select(_ => Transform_(_));
+            template.Title = data.Title;
+            template.Blocks = data.Blocks.Select(_ => Transform_(_));
 
             template.Execute();
 
             return template.Buffer.ToString();
         }
 
-        HtmlBlock Transform_(BlockBase block)
+        RazorTemplateBlock Transform_(Block block)
         {
             switch (block.BlockType) {
                 case BlockType.Code:
-                    return new HtmlBlock
+                    return new RazorTemplateBlock(block.BlockType)
                     {
-                        BlockType = block.BlockType,
                         Content = new HtmlString(HttpUtility.HtmlEncode(block.Content))
                     };
                 case BlockType.Markdown:
-                    return new HtmlBlock
+                    return new RazorTemplateBlock(block.BlockType)
                     {
-                        BlockType = block.BlockType,
                         Content = new HtmlString(_markdown.Transform(block.Content))
                     };
                 default:

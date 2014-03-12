@@ -2,6 +2,7 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
@@ -14,14 +15,14 @@ namespace Narvalo.Narrative
     // http://ccimetadata.codeplex.com/
     // http://www.mono-project.com/Cecil
 
-    public sealed class CSharpFile
+    public sealed class SourceParser
     {
         static readonly Regex IgnoreRegex_ = new Regex(@"^\s*(?:/\*|\*/|////)", RegexOptions.Compiled);
         static readonly Regex MarkdownRegex_ = new Regex(@"^\s*\*\s", RegexOptions.Compiled);
 
         readonly string _path;
 
-        public CSharpFile(string path)
+        public SourceParser(string path)
         {
             Require.NotNullOrEmpty(path, "path");
 
@@ -30,14 +31,16 @@ namespace Narvalo.Narrative
 
         public string Path { get { return _path; } }
 
-        public IEnumerable<BlockBase> Parse()
+        public IEnumerable<Block> Parse()
         {
-            return Parse_(Read_());
+            var lines = Read_();
+            
+            return Parse_(lines);
         }
 
-        IEnumerable<BlockBase> Parse_(IEnumerable<string> lines)
+        IEnumerable<Block> Parse_(IEnumerable<string> lines)
         {
-            var hasCode = false;
+            var inCode = false;
             var markdownText = new StringBuilder();
             var codeText = new StringBuilder();
 
@@ -46,45 +49,34 @@ namespace Narvalo.Narrative
                     continue;
                 }
 
+                // FIXME: Inefficient.
                 if (MarkdownRegex_.IsMatch(line)) {
-                    if (hasCode) {
-                        yield return new CodeBlock
-                        {
-                            Content = codeText.ToString()
-                        };
+                    if (inCode) {
+                        yield return Block.Code(codeText);
 
                         codeText.Clear();
                     }
 
-                    hasCode = false;
-                    markdownText.AppendLine(MarkdownRegex_.Replace(line, ""));
+                    inCode = false;
+                    markdownText.AppendLine(MarkdownRegex_.Replace(line, String.Empty));
                 }
                 else {
-                    if (!hasCode) {
-                        yield return new MarkdownBlock
-                        {
-                            Content = markdownText.ToString()
-                        };
+                    if (!inCode) {
+                        yield return Block.Markdown(markdownText);
 
                         markdownText.Clear();
                     }
 
-                    hasCode = true;
+                    inCode = true;
                     codeText.AppendLine(line);
                 }
             }
 
-            if (hasCode) {
-                yield return new CodeBlock
-                {
-                    Content = codeText.ToString()
-                };
+            if (inCode) {
+                yield return Block.Code(codeText);
             }
             else {
-                yield return new MarkdownBlock
-                {
-                    Content = markdownText.ToString()
-                };
+                yield return Block.Markdown(markdownText);
             }
         }
 

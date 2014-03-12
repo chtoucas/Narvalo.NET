@@ -9,7 +9,7 @@
  <div class="container">
   <div class="page">
   @foreach (var block in Blocks) {
-    if (block.BlockType == BlockType.Code) {
+    if (block.IsCode) {
       <pre><code>@(block.Content)</code></pre>
     } else {
       <div>@(block.Content)</div>

@@ -1,37 +1,60 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Internal
+namespace Narvalo.Narrative
 {
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Razor;
     using Microsoft.CSharp;
 
-    public static class TemplateCompiler
+    public sealed class RazorTemplateCompiler
     {
         const string Namespace_ = "RazorOutput";
 
-        public static Type Compile(string path)
+        string _input;
+        string _className;
+
+        public RazorTemplateCompiler(string input)
         {
-            var className = CreateUniqueClassName_(path);
-            var codeCompileUnit = GenerateCode_(path, className);
-            var compilerResults = Compile_(codeCompileUnit);
+            Require.NotNullOrEmpty(input, "input");
 
-            var typeName = Namespace_ + "." + className;
-
-            return compilerResults.CompiledAssembly.GetType(typeName);
+            _input = input;
         }
 
-        static string CreateUniqueClassName_(string path)
+        string ClassName_
         {
-            return Path.GetFileNameWithoutExtension(path) + "_" + Guid.NewGuid().ToString("N");
+            get
+            {
+                if (_className == null) {
+                    _className = GenerateUniqueClassName_();
+                }
+
+                return _className;
+            }
         }
 
-        static CompilerResults Compile_(CodeCompileUnit codeCompileUnit)
+        string TypeFullName_
+        {
+            get { return Namespace_ + "." + ClassName_; }
+        }
+
+        public Type Compile()
+        {
+            var codeCompileUnit = GenerateCode_();
+            var compilerResults = CompileCode_(codeCompileUnit);
+
+            return compilerResults.CompiledAssembly.GetType(TypeFullName_);
+        }
+
+        static string GenerateUniqueClassName_()
+        {
+            return "Template" + Guid.NewGuid().ToString("N");
+        }
+
+        static CompilerResults CompileCode_(CodeCompileUnit codeCompileUnit)
         {
             var compilerParams = new CompilerParameters
             {
@@ -41,7 +64,7 @@ namespace Narvalo.Narrative.Internal
                 IncludeDebugInformation = false,
             };
 
-            var templateAssembly = typeof(TemplateBase).Assembly
+            var templateAssembly = typeof(RazorTemplateBase).Assembly
                 .CodeBase.Replace("file:///", "");
 
             compilerParams.ReferencedAssemblies.Add(templateAssembly);
@@ -52,17 +75,14 @@ namespace Narvalo.Narrative.Internal
                 .CompileAssemblyFromDom(compilerParams, codeCompileUnit);
 
             if (compilerResults.Errors.HasErrors) {
-                var exceptions = new List<CompilerException>();
-
-                var errors = compilerResults.Errors.OfType<CompilerError>().Where(error => !error.IsWarning);
-
-                foreach (var error in errors) {
-                    exceptions.Add(new CompilerException(error.ErrorText)
+                var exceptions = compilerResults.Errors
+                    .OfType<CompilerError>()
+                    .Where(error => !error.IsWarning)
+                    .Select(error => new RazorTemplateException(error.ErrorText)
                     {
                         Column = error.Column,
                         Line = error.Line,
                     });
-                }
 
                 throw new NarrativeException(
                     "Failed to compile the template.",
@@ -72,19 +92,19 @@ namespace Narvalo.Narrative.Internal
             return compilerResults;
         }
 
-        static CodeCompileUnit GenerateCode_(string path, string className)
+        CodeCompileUnit GenerateCode_()
         {
             var host = new RazorEngineHost(new CSharpRazorCodeLanguage());
             host.DefaultNamespace = Namespace_;
-            host.DefaultBaseClass = typeof(TemplateBase).FullName;
-            host.DefaultClassName = className;
+            host.DefaultBaseClass = typeof(RazorTemplateBase).FullName;
+            host.DefaultClassName = ClassName_;
             host.NamespaceImports.Add("System");
             host.NamespaceImports.Add("Narvalo.Narrative");
 
             var generator = new RazorTemplateEngine(host);
 
             GeneratorResults generatorResults = null;
-            using (var reader = new StreamReader(path)) {
+            using (var reader = new StringReader(_input)) {
                 generatorResults = generator.GenerateCode(reader);
             }
 

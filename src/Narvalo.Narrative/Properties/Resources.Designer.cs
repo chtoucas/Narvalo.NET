@@ -70,6 +70,15 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Une erreur interne est intervenue: {Exception}..
+        /// </summary>
+        internal static string NarrativeException {
+            get {
+                return ResourceManager.GetString("NarrativeException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appuyer sur une touche du clavier pour sortir de l&apos;application..
         /// </summary>
         internal static string PressAnyKeyToExit {
@@ -88,7 +97,35 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Une exception non gérée est intervenue: {Exception}..
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        /// &lt;title&gt;@Title&lt;/title&gt;
+        /// &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        /// &lt;link rel=&quot;stylesheet&quot; href=&quot;http://yandex.st/highlightjs/8.0/styles/default.min.css&quot; /&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        /// &lt;div class=&quot;container&quot;&gt;
+        ///  &lt;div class=&quot;page&quot;&gt;
+        ///  @foreach (var block in Blocks) {
+        ///    if (block.IsCode) {
+        ///      &lt;pre&gt;&lt;code&gt;@(block.Content)&lt;/code&gt;&lt;/pre&gt;
+        ///    } else {
+        ///      &lt;div&gt;@(block.Content)&lt;/div&gt;
+        ///    }
+        ///  }
+        ///  &lt;/div&gt;
+        /// &lt;/div&gt;
+        /// &lt;script src=&quot;http://yandex.st/highlig [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Template {
+            get {
+                return ResourceManager.GetString("Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une erreur inattendue est intervenue: {Exception}..
         /// </summary>
         internal static string UnhandledException {
             get {

@@ -120,13 +120,20 @@
   <data name="Ending" xml:space="preserve">
     <value>&gt;&gt;&gt; FIN DE L'APPLICATION &lt;&lt;&lt;</value>
   </data>
+  <data name="NarrativeException" xml:space="preserve">
+    <value>Une erreur interne est intervenue: {Exception}.</value>
+  </data>
   <data name="PressAnyKeyToExit" xml:space="preserve">
     <value>Appuyer sur une touche du clavier pour sortir de l'application.</value>
   </data>
   <data name="Starting" xml:space="preserve">
     <value>&gt;&gt;&gt; DEMARRAGE DE L'APPLICATION &lt;&lt;&lt;</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\template.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="UnhandledException" xml:space="preserve">
-    <value>Une exception non gérée est intervenue: {Exception}.</value>
+    <value>Une erreur inattendue est intervenue: {Exception}.</value>
   </data>
 </root>

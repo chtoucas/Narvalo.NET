@@ -2,6 +2,7 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using Markdown = MarkdownDeep.Markdown;
 
     public sealed class MarkdownDeepEngine : IMarkdownEngine
@@ -19,9 +20,9 @@ namespace Narvalo.Narrative
 
         public string Transform(string text)
         {
-            Require.NotNullOrEmpty(text, "text");
+            Require.NotNull(text, "text");
 
-            return _inner.Transform(text);
+            return text.Length == 0 ? String.Empty : _inner.Transform(text);
         }
     }
 }

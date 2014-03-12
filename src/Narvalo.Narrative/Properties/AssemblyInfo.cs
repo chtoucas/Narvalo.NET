@@ -1,7 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Narvalo.Narrative")]
+[assembly: AssemblyTitle("Narrative")]
 [assembly: AssemblyDescription("")]
+[assembly: AssemblyCulture("")]
+[assembly: AssemblyProduct("Narvalo.Narrative")]
 
-[assembly: Guid("7d6b9f78-c58d-4617-a113-c63ff5bc3923")]
+[assembly: Guid("dee7420c-124b-480f-9f50-6d97860c170c")]
+
+[assembly: NeutralResourcesLanguage("fr-FR")]

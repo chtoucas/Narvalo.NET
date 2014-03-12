@@ -9,6 +9,8 @@ namespace Narvalo.Narrative
     using System.Linq;
     using System.Reflection;
     using Narvalo.Collections;
+    using Narvalo.Fx;
+    using Serilog.Events;
 
     public sealed class AppSettings
     {
@@ -19,9 +21,14 @@ namespace Narvalo.Narrative
                 return Path.Combine(execDirectory, "docs");
             };
 
+        static readonly LogEventLevel DefaultLogMinimumLevel_ = LogEventLevel.Information;
+
         AppSettings() { }
 
         public string OutputDirectory { get; private set; }
+
+        [CLSCompliant(false)]
+        public LogEventLevel LogMinimumLevel { get; private set; }
 
         public static AppSettings FromConfiguration()
         {
@@ -57,6 +64,11 @@ namespace Narvalo.Narrative
         {
             OutputDirectory = nvc.MayGetSingle("narrative:OutputDirectory")
                 .ValueOrElse(DefaultOutputDirectory_);
+
+            LogMinimumLevel = nvc.MayGetSingle("narrative:LogMinimumLevel")
+                .Select(ParseTo.Enum<LogEventLevel>)
+                .ToNullable()
+                ?? DefaultLogMinimumLevel_;
         }
     }
 }
