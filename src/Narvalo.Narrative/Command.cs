@@ -2,6 +2,7 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -9,6 +10,12 @@ namespace Narvalo.Narrative
 
     public sealed class Command
     {
+        static readonly List<string> DirectoriesToIgnore_ = new List<string> { "bin", "obj", "_Aliens" };
+        static readonly Func<DirectoryInfo, bool> DirectoryFilter_
+             = _ => !DirectoriesToIgnore_.Any(s => _.Name.Equals(s, StringComparison.OrdinalIgnoreCase));
+        static readonly Func<FileInfo, bool> FileFilter_
+             = _ => !_.Name.EndsWith("Designer.cs", StringComparison.OrdinalIgnoreCase);
+
         readonly AppSettings _settings;
         readonly RazorTemplate _template;
 
@@ -25,59 +32,52 @@ namespace Narvalo.Narrative
         {
             Require.NotNull(options, "options");
 
-            var path = options.Directory;
+            var rootPath = options.Directory;
 
-            if (path.Length == 0) {
+            if (rootPath.Length == 0) {
                 Log.Warning("No path given.");
                 return;
             }
 
-            var sources = new SourceDirectory(path).FindSources();
+            var rootDirectory = new DirectoryInfo(rootPath);
 
-            PrepareOutput_(sources);
-
-            foreach (var source in sources) {
-                ProcessSource_(path, source);
-            }
-        }
-
-        void ProcessSource_(string directory, SourceFile source)
-        {
-            Log.Debug("Processing {File}...", source.RelativePath);
-
-            var filePath = Path.Combine(directory, source.RelativePath);
-            var parser = new SourceParser(filePath);
-            var blocks = parser.Parse();
-
-            var data = new TemplateData(blocks)
+            var walker = new DirectoryWalker(DirectoryFilter_, FileFilter_);
+            walker.OnSubfolder += (sender, e) =>
             {
-                Title = source.RelativePath,
+                var folderPath = Path.Combine(_settings.OutputDirectory, e.RelativePath);
+                Directory.CreateDirectory(folderPath);
             };
 
-            var output = _template.Render(data);
+            var files = walker.Walk(rootDirectory, "*.cs");
 
-            SaveOutput_(source.RelativePath, output);
-        }
+            foreach (var file in files) {
+                Log.Debug("Processing {RelativePath}...", file.RelativePath);
 
-        void PrepareOutput_(IEnumerable<SourceFile> sources)
-        {
-            var directories
-                = (from source in sources
-                   select source.Directory)
-                   .Distinct()
-                   .Select(_ => Path.Combine(_settings.OutputDirectory, _));
+                var blocks = Parse_(rootPath, file);
+                var output = Render_(blocks, file);
 
-            CreateMissingDirectories_(directories);
-        }
-
-        void CreateMissingDirectories_(IEnumerable<string> directories)
-        {
-            foreach (var directory in directories) {
-                Directory.CreateDirectory(directory);
+                //Save_(file.RelativePath, output);
             }
         }
 
-        void SaveOutput_(string relativePath, string text)
+        IEnumerable<Block> Parse_(string rootPath, FileItem item)
+        {
+            var filePath = Path.Combine(rootPath, item.RelativePath);
+            var parser = new SourceParser(filePath);
+            return parser.Parse();
+        }
+
+        string Render_(IEnumerable<Block> blocks, FileItem item)
+        {
+            var data = new TemplateData(blocks)
+            {
+                Title = item.RelativePath,
+            };
+
+            return _template.Render(data);
+        }
+
+        void Save_(string relativePath, string text)
         {
             var fileName = Path.ChangeExtension(relativePath, "html");
             var destination = Path.Combine(_settings.OutputDirectory, fileName);

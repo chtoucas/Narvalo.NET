@@ -133,8 +133,11 @@
     <Compile Include="CommandModule.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
-    <Compile Include="SourceFile.cs" />
-    <Compile Include="SourceDirectory.cs" />
+    <Compile Include="ConcurrentDirectoryWalker.cs" />
+    <Compile Include="SubfolderEventArgs.cs" />
+    <Compile Include="FileItem.cs" />
+    <Compile Include="DirectoryWalker.cs" />
+    <Compile Include="DirectoryInfo%24.cs" />
     <Compile Include="SourceParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />

@@ -4,14 +4,14 @@ namespace Narvalo.Narrative
 {
     using System.IO;
 
-    public sealed class SourceFile
+    public sealed class FileItem
     {
         readonly string _directory;
         readonly string _name;
 
-        public SourceFile(string directory, string name)
+        public FileItem(string directory, string name)
         {
-            Require.NotNullOrEmpty(directory, "directory");
+            Require.NotNull(directory, "directory");
             Require.NotNullOrEmpty(name, "name");
 
             _directory = directory;
