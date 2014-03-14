@@ -1,29 +1,28 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.IO
 {
     using System.IO;
 
     public sealed class FileItem
     {
         readonly string _directory;
-        readonly string _name;
+        readonly FileInfo _file;
 
-        public FileItem(string directory, string name)
+        public FileItem(string directory, FileInfo file)
         {
             Require.NotNull(directory, "directory");
-            Require.NotNullOrEmpty(name, "name");
+            Require.NotNull(file, "file");
 
             _directory = directory;
-            _name = name;
+            _file = file;
         }
 
-        public string Directory { get { return _directory; } }
-        public string Name { get { return _name; } }
+        public FileInfo File { get { return _file; } }
 
         public string RelativePath
         {
-            get { return Path.Combine(Directory, Name); }
+            get { return Path.Combine(_directory, _file.Name); }
         }
     }
 }

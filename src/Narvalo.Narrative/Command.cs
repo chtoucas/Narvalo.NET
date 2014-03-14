@@ -6,6 +6,7 @@ namespace Narvalo.Narrative
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Narvalo.IO;
     using Serilog;
 
     public sealed class Command
@@ -41,20 +42,26 @@ namespace Narvalo.Narrative
 
             var rootDirectory = new DirectoryInfo(rootPath);
 
-            var walker = new DirectoryWalker(DirectoryFilter_, FileFilter_);
-            walker.OnSubfolder += (sender, e) =>
+            if (!rootDirectory.Exists) {
+                throw new DirectoryNotFoundException("FIXME");
+            }
+
+            var finder = new FileFinder(DirectoryFilter_, FileFilter_);
+            finder.EnteringSubfolder += (sender, e) =>
             {
+                Log.Debug("Entering {RelativePath}", e.RelativePath);
+
                 var folderPath = Path.Combine(_settings.OutputDirectory, e.RelativePath);
-                Directory.CreateDirectory(folderPath);
+                //Directory.CreateDirectory(folderPath);
             };
 
-            var files = walker.Walk(rootDirectory, "*.cs");
+            var files = finder.Find(rootDirectory, "*.cs");
 
             foreach (var file in files) {
-                Log.Debug("Processing {RelativePath}...", file.RelativePath);
+                Log.Debug("Processing {RelativePath}", file.RelativePath);
 
-                var blocks = Parse_(rootPath, file);
-                var output = Render_(blocks, file);
+                //var blocks = Parse_(rootPath, file);
+                //var output = Render_(blocks, file);
 
                 //Save_(file.RelativePath, output);
             }

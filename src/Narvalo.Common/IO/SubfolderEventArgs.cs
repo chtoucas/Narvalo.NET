@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.IO
 {
     using System;
 
@@ -10,6 +10,8 @@ namespace Narvalo.Narrative
 
         public SubfolderEventArgs(string relativePath)
         {
+            Require.NotNull(relativePath, "relativePath");
+
             _relativePath = relativePath;
         }
 
@@ -18,5 +20,4 @@ namespace Narvalo.Narrative
             get { return _relativePath; }
         }
     }
-
 }
