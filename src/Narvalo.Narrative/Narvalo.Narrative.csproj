@@ -131,15 +131,15 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Command.cs" />
+    <Compile Include="CmdLine.cs" />
     <Compile Include="AppSettings.cs" />
-    <Compile Include="CommandModule.cs" />
+    <Compile Include="CmdLineModule.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
     <Compile Include="SourceParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />
-    <Compile Include="CommandOptions.cs" />
+    <Compile Include="CmdLineOptions.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="Program.cs" />

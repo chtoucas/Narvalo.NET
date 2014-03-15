@@ -5,15 +5,15 @@ namespace Narvalo.Narrative
     using Autofac;
     using Narvalo.Narrative.Properties;
 
-    public sealed class CommandModule : Module
+    public sealed class CmdLineModule : Module
     {
-        readonly AppSettings _settings;
+        readonly CmdLineOptions _options;
 
-        public CommandModule(AppSettings settings)
+        public CmdLineModule(CmdLineOptions options)
         {
-            Require.NotNull(settings, "settings");
+            Require.NotNull(options, "options");
 
-            _settings = settings;
+            _options = options;
         }
 
         protected override void Load(ContainerBuilder builder)
@@ -22,8 +22,8 @@ namespace Narvalo.Narrative
 
             builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
 
-            builder.Register(_ => _settings).AsSelf();
-            builder.RegisterType<Command>().AsSelf();
+            builder.Register(_ => _options).AsSelf();
+            builder.RegisterType<CmdLine>().AsSelf();
             builder.Register(CreateRazorTemplate_).AsSelf();
         }
 

@@ -15,7 +15,7 @@ namespace Narvalo.IO
         readonly Func<FileInfo, bool> _fileFilter;
 
         public ConcurrentFileFinder(
-            Func<DirectoryInfo, bool> directoryFilter, 
+            Func<DirectoryInfo, bool> directoryFilter,
             Func<FileInfo, bool> fileFilter)
         {
             Require.NotNull(directoryFilter, "directoryFilter");
@@ -38,10 +38,16 @@ namespace Narvalo.IO
             var stack = new ConcurrentStack<DirectoryInfo>();
             stack.Push(new DirectoryInfo(rootPath));
 
-            DirectoryInfo directory;
+            while (!stack.IsEmpty) {
+                DirectoryInfo directory;
+                if (!stack.TryPop(out directory)) {
+                    // REVIEW: What are the conditions that might cause TryPop to fail.
+                    // Is it safe to use stack.TryPop with while?
+                    yield break;
+                }
 
-            while (stack.TryPop(out directory)) {
-                var relativeDirectoryName = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
+                var relativeDirectoryName 
+                    = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
                 OnTraversingDirectory(new RelativeDirectoryEventArgs(relativeDirectory));
@@ -66,6 +72,8 @@ namespace Narvalo.IO
 
         protected virtual void OnTraversingDirectory(RelativeDirectoryEventArgs e)
         {
+            // NB: Not really necessary to use Interlocked.CompareExchange as the .NET
+            // compiler understands this pattern.
             EventHandler<RelativeDirectoryEventArgs> localHandler
                 = Interlocked.CompareExchange(ref TraversingDirectory, null, null);
 

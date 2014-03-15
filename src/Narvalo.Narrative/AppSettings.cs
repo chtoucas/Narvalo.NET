@@ -5,27 +5,16 @@ namespace Narvalo.Narrative
     using System;
     using System.Collections.Specialized;
     using System.Configuration;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using Narvalo.Collections;
     using Narvalo.Fx;
     using Serilog.Events;
 
     public sealed class AppSettings
     {
-        static readonly Func<string> DefaultOutputDirectory_
-            = () =>
-            {
-                var execDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                return Path.Combine(execDirectory, "docs");
-            };
-
         static readonly LogEventLevel DefaultLogMinimumLevel_ = LogEventLevel.Information;
 
         AppSettings() { }
-
-        public string OutputDirectory { get; private set; }
 
         [CLSCompliant(false)]
         public LogEventLevel LogMinimumLevel { get; private set; }
@@ -62,9 +51,6 @@ namespace Narvalo.Narrative
 
         void Initialize_(NameValueCollection nvc)
         {
-            OutputDirectory = nvc.MayGetSingle("narrative:OutputDirectory")
-                .ValueOrElse(DefaultOutputDirectory_);
-
             LogMinimumLevel = nvc.MayGetSingle("narrative:LogMinimumLevel")
                 .Select(ParseTo.Enum<LogEventLevel>)
                 .ToNullable()

@@ -7,22 +7,17 @@ namespace Narvalo.Narrative
 
     public sealed class MarkdownDeepEngine : IMarkdownEngine
     {
-        readonly Markdown _inner;
-
-        public MarkdownDeepEngine()
-        {
-            _inner = new Markdown
-            {
-                ExtraMode = true,
-                SafeMode = false
-            };
-        }
-
         public string Transform(string text)
         {
             Require.NotNull(text, "text");
 
-            return text.Length == 0 ? String.Empty : _inner.Transform(text);
+            Markdown inner = new Markdown
+            {
+                ExtraMode = true,
+                SafeMode = false
+            };
+
+            return text.Length == 0 ? String.Empty : inner.Transform(text);
         }
     }
 }

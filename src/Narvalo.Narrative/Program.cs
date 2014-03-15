@@ -20,10 +20,10 @@ namespace Narvalo.Narrative
             Log.Information(Resources.Starting);
 
             try {
-                var options = CommandOptions.Parse(args);
+                var options = CmdLineOptions.Parse(args);
 
-                using (var container = CreateContainer_(settings)) {
-                    container.Resolve<Command>().Run(options);
+                using (var container = CreateContainer_(options)) {
+                    container.Resolve<CmdLine>().Run();
                 }
             }
             catch (NarrativeException ex) {
@@ -33,10 +33,10 @@ namespace Narvalo.Narrative
             Log.Information(Resources.Ending);
         }
 
-        static IContainer CreateContainer_(AppSettings settings)
+        static IContainer CreateContainer_(CmdLineOptions options)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new CommandModule(settings));
+            builder.RegisterModule(new CmdLineModule(options));
             return builder.Build();
         }
 

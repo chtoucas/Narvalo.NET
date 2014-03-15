@@ -38,7 +38,9 @@ namespace Narvalo.IO
 
             while (stack.Count > 0) {
                 var directory = stack.Pop();
-                var relativeDirectoryName = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
+
+                var relativeDirectoryName 
+                    = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
                 OnTraversingDirectory(new RelativeDirectoryEventArgs(relativeDirectory));
