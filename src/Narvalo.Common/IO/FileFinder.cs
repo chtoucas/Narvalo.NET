@@ -9,8 +9,8 @@ namespace Narvalo.IO
 
     public class FileFinder
     {
-        readonly Func<FileInfo, bool> _fileFilter;
         readonly Func<DirectoryInfo, bool> _directoryFilter;
+        readonly Func<FileInfo, bool> _fileFilter;
 
         public FileFinder(
             Func<DirectoryInfo, bool> directoryFilter,
@@ -23,53 +23,50 @@ namespace Narvalo.IO
             _fileFilter = fileFilter;
         }
 
-        public event EventHandler<SubfolderEventArgs> EnteringSubfolder;
+        public event EventHandler<RelativeDirectoryEventArgs> TraversingDirectory;
 
-        public IEnumerable<FileItem> Find(DirectoryInfo startDirectory, string searchPattern)
+        public IEnumerable<RelativeFile> Find(DirectoryInfo startDirectory, string searchPattern)
         {
             Require.NotNull(startDirectory, "startDirectory");
             Require.NotNullOrEmpty(searchPattern, "searchPattern");
 
-            return FindCore_(new DirectoryInfo(startDirectory.GetNormalizedPath()), searchPattern);
-        }
-
-        protected virtual void OnEnteringSubfolder(SubfolderEventArgs e)
-        {
-            EventHandler<SubfolderEventArgs> localHandler = EnteringSubfolder;
-
-            if (localHandler != null) {
-                localHandler(this, e);
-            }
-        }
-
-        IEnumerable<FileItem> FindCore_(DirectoryInfo startDirectory, string searchPattern)
-        {
-            var startUri = new Uri(startDirectory.FullName);
+            var rootPath = PathUtility.GetNormalizedPath(startDirectory);
+            var rootUri = new Uri(rootPath);
 
             var stack = new Stack<DirectoryInfo>();
-            stack.Push(startDirectory);
+            stack.Push(new DirectoryInfo(rootPath));
 
             while (stack.Count > 0) {
-                var subfolder = stack.Pop();
-                var subfolderPath = subfolder.GetRelativePathTo(startUri);
+                var directory = stack.Pop();
+                var relativeDirectoryName = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
+                var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
-                OnEnteringSubfolder(new SubfolderEventArgs(subfolderPath));
+                OnTraversingDirectory(new RelativeDirectoryEventArgs(relativeDirectory));
 
-                var files = subfolder
+                var files = directory
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
                     .Where(_fileFilter);
 
                 foreach (var file in files) {
-                    yield return new FileItem(subfolderPath, file);
+                    yield return new RelativeFile(file, relativeDirectoryName);
                 }
 
-                var folders = subfolder
+                var subdirs = directory
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                     .Where(_directoryFilter);
 
-                foreach (var folder in folders) {
-                    stack.Push(folder);
+                foreach (var dir in subdirs) {
+                    stack.Push(dir);
                 }
+            }
+        }
+
+        protected virtual void OnTraversingDirectory(RelativeDirectoryEventArgs e)
+        {
+            EventHandler<RelativeDirectoryEventArgs> localHandler = TraversingDirectory;
+
+            if (localHandler != null) {
+                localHandler(this, e);
             }
         }
     }

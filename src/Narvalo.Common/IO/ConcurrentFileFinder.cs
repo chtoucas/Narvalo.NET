@@ -11,8 +11,8 @@ namespace Narvalo.IO
 
     public class ConcurrentFileFinder
     {
-        readonly Func<FileInfo, bool> _fileFilter;
         readonly Func<DirectoryInfo, bool> _directoryFilter;
+        readonly Func<FileInfo, bool> _fileFilter;
 
         public ConcurrentFileFinder(
             Func<DirectoryInfo, bool> directoryFilter, 
@@ -25,55 +25,52 @@ namespace Narvalo.IO
             _fileFilter = fileFilter;
         }
 
-        public event EventHandler<SubfolderEventArgs> EnteringSubfolder;
+        public event EventHandler<RelativeDirectoryEventArgs> TraversingDirectory;
 
-        public IEnumerable<FileItem> Find(DirectoryInfo startDirectory, string searchPattern)
+        public IEnumerable<RelativeFile> Find(DirectoryInfo startDirectory, string searchPattern)
         {
             Require.NotNull(startDirectory, "startDirectory");
             Require.NotNullOrEmpty(searchPattern, "searchPattern");
 
-            return FindCore_(new DirectoryInfo(startDirectory.GetNormalizedPath()), searchPattern);
-        }
-
-        protected virtual void OnEnteringSubfolder(SubfolderEventArgs e)
-        {
-            EventHandler<SubfolderEventArgs> localHandler
-                = Interlocked.CompareExchange(ref EnteringSubfolder, null, null);
-
-            if (localHandler != null) {
-                localHandler(this, e);
-            }
-        }
-
-        IEnumerable<FileItem> FindCore_(DirectoryInfo startDirectory, string searchPattern)
-        {
-            var startUri = new Uri(startDirectory.FullName);
+            var rootPath = PathUtility.GetNormalizedPath(startDirectory);
+            var rootUri = new Uri(rootPath);
 
             var stack = new ConcurrentStack<DirectoryInfo>();
-            stack.Push(startDirectory);
+            stack.Push(new DirectoryInfo(rootPath));
 
-            DirectoryInfo subfolder;
+            DirectoryInfo directory;
 
-            while (stack.TryPop(out subfolder)) {
-                var subfolderPath = subfolder.GetRelativePathTo(startUri);
+            while (stack.TryPop(out directory)) {
+                var relativeDirectoryName = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
+                var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
-                OnEnteringSubfolder(new SubfolderEventArgs(subfolderPath));
+                OnTraversingDirectory(new RelativeDirectoryEventArgs(relativeDirectory));
 
-                var files = subfolder
+                var files = directory
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
                     .Where(_fileFilter);
 
                 foreach (var file in files) {
-                    yield return new FileItem(subfolderPath, file);
+                    yield return new RelativeFile(file, relativeDirectoryName);
                 }
 
-                var folders = subfolder
+                var subdirs = directory
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                     .Where(_directoryFilter);
 
-                foreach (var folder in folders) {
-                    stack.Push(folder);
+                foreach (var dir in subdirs) {
+                    stack.Push(dir);
                 }
+            }
+        }
+
+        protected virtual void OnTraversingDirectory(RelativeDirectoryEventArgs e)
+        {
+            EventHandler<RelativeDirectoryEventArgs> localHandler
+                = Interlocked.CompareExchange(ref TraversingDirectory, null, null);
+
+            if (localHandler != null) {
+                localHandler(this, e);
             }
         }
     }

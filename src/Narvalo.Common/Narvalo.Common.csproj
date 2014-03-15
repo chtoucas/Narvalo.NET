@@ -125,11 +125,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="IO\ConcurrentFileFinder.cs" />
-    <Compile Include="IO\DirectoryInfo%24.cs" />
+    <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
     <Compile Include="IO\FileFinder.cs" />
-    <Compile Include="IO\FileItem.cs" />
-    <Compile Include="IO\SubfolderEventArgs.cs" />
+    <Compile Include="IO\RelativeDirectory.cs" />
+    <Compile Include="IO\RelativeFile.cs" />
+    <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
     <Compile Include="Predicate`%24.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="Collections\NamespaceDoc.cs" />

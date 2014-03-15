@@ -9,8 +9,8 @@ namespace Narvalo.IO
 
     public abstract class DirectoryWalker
     {
-        readonly Func<FileInfo, bool> _fileFilter;
         readonly Func<DirectoryInfo, bool> _directoryFilter;
+        readonly Func<FileInfo, bool> _fileFilter;
 
         protected DirectoryWalker(
             Func<DirectoryInfo, bool> directoryFilter,
@@ -50,8 +50,8 @@ namespace Narvalo.IO
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                     .Where(_directoryFilter);
 
-                foreach (var subdir in subdirs) {
-                    stack.Push(subdir);
+                foreach (var dir in subdirs) {
+                    stack.Push(dir);
                 }
             }
         }

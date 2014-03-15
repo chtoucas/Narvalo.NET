@@ -6,6 +6,7 @@ namespace Narvalo.Narrative
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using Narvalo.IO;
     using Serilog;
 
@@ -33,63 +34,82 @@ namespace Narvalo.Narrative
         {
             Require.NotNull(options, "options");
 
-            var rootPath = options.Directory;
+            var path = options.Directory;
 
-            if (rootPath.Length == 0) {
+            if (path.Length == 0) {
                 Log.Warning("No path given.");
                 return;
             }
 
-            var rootDirectory = new DirectoryInfo(rootPath);
+            var directory = new DirectoryInfo(path);
 
-            if (!rootDirectory.Exists) {
+            if (!directory.Exists) {
                 throw new DirectoryNotFoundException("FIXME");
             }
 
+            //RunSequential_(directory);
+            RunParallel_(directory);
+        }
+
+        void RunSequential_(DirectoryInfo directory)
+        {
             var finder = new FileFinder(DirectoryFilter_, FileFilter_);
-            finder.EnteringSubfolder += (sender, e) =>
-            {
-                Log.Debug("Entering {RelativePath}", e.RelativePath);
+            finder.TraversingDirectory += OnTraversingDirectory;
 
-                var folderPath = Path.Combine(_settings.OutputDirectory, e.RelativePath);
-                //Directory.CreateDirectory(folderPath);
-            };
-
-            var files = finder.Find(rootDirectory, "*.cs");
+            var files = finder.Find(directory, "*.cs");
 
             foreach (var file in files) {
-                Log.Debug("Processing {RelativePath}", file.RelativePath);
-
-                //var blocks = Parse_(rootPath, file);
-                //var output = Render_(blocks, file);
-
-                //Save_(file.RelativePath, output);
+                ProcessFile_(file);
             }
+
+            //finder.TraversingDirectory -= OnTraversingDirectory;
         }
 
-        IEnumerable<Block> Parse_(string rootPath, FileItem item)
+        void RunParallel_(DirectoryInfo directory)
         {
-            var filePath = Path.Combine(rootPath, item.RelativePath);
-            var parser = new SourceParser(filePath);
-            return parser.Parse();
+            var finder = new ConcurrentFileFinder(DirectoryFilter_, FileFilter_);
+            finder.TraversingDirectory += OnTraversingDirectory;
+
+            var files = finder.Find(directory, "*.cs");
+
+            Parallel.ForEach(files, ProcessFile_);
+
+            //finder.TraversingDirectory -= OnTraversingDirectory;
         }
 
-        string Render_(IEnumerable<Block> blocks, FileItem item)
+        void ProcessFile_(RelativeFile file)
         {
+            Log.Debug("Processing file {RelativeName}", file.RelativeName);
+
+            var parser = new SourceParser(file.File.FullName);
+            var blocks = parser.Parse();
+
             var data = new TemplateData(blocks)
             {
-                Title = item.RelativePath,
+                Title = file.RelativeName,
             };
 
-            return _template.Render(data);
+            //var output = _template.Render(data);
+
+            //var destination = GetOutputPath_(file);
+
+            //File.WriteAllText(destination, output);
         }
 
-        void Save_(string relativePath, string text)
+        void OnTraversingDirectory(object sender, RelativeDirectoryEventArgs e)
         {
-            var fileName = Path.ChangeExtension(relativePath, "html");
-            var destination = Path.Combine(_settings.OutputDirectory, fileName);
+            Log.Debug("Entering directory {RelativeName}", e.RelativeDirectory.RelativeName);
 
-            File.WriteAllText(destination, text);
+            //var newPath = Path.Combine(_settings.OutputDirectory, e.RelativeDirectory.RelativeName);
+
+            //Directory.CreateDirectory(newPath);
+        }
+
+        string GetOutputPath_(RelativeFile file)
+        {
+            var newPath = Path.Combine(_settings.OutputDirectory, file.RelativeName);
+
+            return Path.ChangeExtension(newPath, "html");
         }
     }
 }
