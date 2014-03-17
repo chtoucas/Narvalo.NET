@@ -2,8 +2,10 @@
 
 namespace Narvalo.Narrative
 {
-    interface IMarkdownEngine
+    using System.IO;
+
+    public interface IWeaver
     {
-        string Transform(string text);
+        void Weave(FileInfo file, string outputPath);
     }
 }

@@ -10,13 +10,12 @@ namespace Narvalo.Narrative
     using Narvalo.Fx;
     using Serilog.Events;
 
-    public sealed class AppSettings
+    sealed class AppSettings
     {
         static readonly LogEventLevel DefaultLogMinimumLevel_ = LogEventLevel.Information;
 
         AppSettings() { }
 
-        [CLSCompliant(false)]
         public LogEventLevel LogMinimumLevel { get; private set; }
 
         public static AppSettings FromConfiguration()

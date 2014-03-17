@@ -23,14 +23,16 @@ namespace Narvalo.IO
             _fileFilter = fileFilter;
         }
 
-        public event EventHandler<RelativeDirectoryEventArgs> TraversingDirectory;
+        public event EventHandler<RelativeDirectoryEventArgs> DirectoryStart;
+
+        public event EventHandler<RelativeDirectoryEventArgs> DirectoryEnd;
 
         public IEnumerable<RelativeFile> Find(DirectoryInfo startDirectory, string searchPattern)
         {
             Require.NotNull(startDirectory, "startDirectory");
             Require.NotNullOrEmpty(searchPattern, "searchPattern");
 
-            var rootPath = PathUtility.GetNormalizedPath(startDirectory);
+            var rootPath = PathUtility.AppendDirectorySeparator(startDirectory.FullName);
             var rootUri = new Uri(rootPath);
 
             var stack = new Stack<DirectoryInfo>();
@@ -43,7 +45,7 @@ namespace Narvalo.IO
                     = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
-                OnTraversingDirectory(new RelativeDirectoryEventArgs(relativeDirectory));
+                OnDirectoryStart(new RelativeDirectoryEventArgs(relativeDirectory));
 
                 var files = directory
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
@@ -52,6 +54,8 @@ namespace Narvalo.IO
                 foreach (var file in files) {
                     yield return new RelativeFile(file, relativeDirectoryName);
                 }
+
+                OnDirectoryEnd(new RelativeDirectoryEventArgs(relativeDirectory));
 
                 var subdirs = directory
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
@@ -63,9 +67,18 @@ namespace Narvalo.IO
             }
         }
 
-        protected virtual void OnTraversingDirectory(RelativeDirectoryEventArgs e)
+        protected virtual void OnDirectoryStart(RelativeDirectoryEventArgs e)
         {
-            EventHandler<RelativeDirectoryEventArgs> localHandler = TraversingDirectory;
+            EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryStart;
+
+            if (localHandler != null) {
+                localHandler(this, e);
+            }
+        }
+
+        protected virtual void OnDirectoryEnd(RelativeDirectoryEventArgs e)
+        {
+            EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryEnd;
 
             if (localHandler != null) {
                 localHandler(this, e);

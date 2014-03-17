@@ -4,10 +4,11 @@ namespace Narvalo.Narrative
 {
     using System.Reflection;
     using CommandLine;
+    using Narvalo.Narrative.Properties;
 
     using IO = System.IO;
 
-    public sealed class CmdLineOptions
+    sealed class Arguments
     {
         [Option('p', Required = true)]
         public string Path { get; set; }
@@ -24,15 +25,15 @@ namespace Narvalo.Narrative
         [Option('v', Required = false, DefaultValue = false)]
         public bool Verbose { get; set; }
 
-        public static CmdLineOptions Parse(string[] args)
+        public static Arguments Parse(string[] args)
         {
-            var self = new CmdLineOptions();
+            var self = new Arguments();
 
             var parser = new CommandLine.Parser();
             parser.ParseArgumentsStrict(
                 args,
                 self,
-                () => { throw new NarrativeException("Failed to parse the cmdline arguments."); });
+                () => { throw new NarrativeException(Resources.CommandLineException); });
 
             self.PostProcess_();
 

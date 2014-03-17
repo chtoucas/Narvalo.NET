@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Narrative</RootNamespace>
-    <AssemblyName>Narrative</AssemblyName>
+    <AssemblyName>Narrator</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -63,8 +63,11 @@
     <Prefer32Bit>false</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Narrator.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Narvalo.Narrative.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -86,11 +89,11 @@
     </Reference>
     <Reference Include="Serilog, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.27\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.29\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.27\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.29\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -131,15 +134,23 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="CmdLine.cs" />
     <Compile Include="AppSettings.cs" />
-    <Compile Include="CmdLineModule.cs" />
+    <Compile Include="DryRunWeaver.cs" />
+    <Compile Include="IRunner.cs" />
+    <Compile Include="ParallelRunner.cs" />
+    <Compile Include="Runner.cs" />
+    <Compile Include="DirectoryRunnerBase.cs" />
+    <Compile Include="SequentialRunner.cs" />
+    <Compile Include="Weaver.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
+    <Compile Include="ISourceFinder.cs" />
+    <Compile Include="ITemplate.cs" />
+    <Compile Include="IWeaver.cs" />
     <Compile Include="SourceParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />
-    <Compile Include="CmdLineOptions.cs" />
+    <Compile Include="Arguments.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="Program.cs" />
@@ -152,7 +163,7 @@
     <Compile Include="RazorTemplate.cs" />
     <Compile Include="RazorTemplateBase.cs" />
     <Compile Include="RazorTemplateBlock.cs" />
-    <Compile Include="RazorTemplateException.cs" />
+    <Compile Include="TemplateException.cs" />
     <Compile Include="TemplateData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +186,10 @@
     <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
+      <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
+      <Name>Narvalo.Incubator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +215,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

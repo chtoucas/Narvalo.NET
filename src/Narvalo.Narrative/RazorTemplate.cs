@@ -6,7 +6,7 @@ namespace Narvalo.Narrative
     using System.Linq;
     using System.Web;
 
-    public sealed class RazorTemplate
+    sealed class RazorTemplate : ITemplate
     {
         readonly IMarkdownEngine _markdown;
         readonly Lazy<Type> _templateType;

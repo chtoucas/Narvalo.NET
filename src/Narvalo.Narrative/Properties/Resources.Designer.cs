@@ -61,20 +61,38 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Les arguments passés en ligne de commande sont invalides..
+        /// </summary>
+        internal static string CommandLineException {
+            get {
+                return ResourceManager.GetString("CommandLineException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simulation de l&apos;exécution du programme..
+        /// </summary>
+        internal static string DryRun {
+            get {
+                return ResourceManager.GetString("DryRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temps écoulé : {ElapsedTime}..
+        /// </summary>
+        internal static string ElapsedTime {
+            get {
+                return ResourceManager.GetString("ElapsedTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &gt;&gt;&gt; FIN DE L&apos;APPLICATION &lt;&lt;&lt;.
         /// </summary>
         internal static string Ending {
             get {
                 return ResourceManager.GetString("Ending", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Une erreur interne est intervenue: {Exception}..
-        /// </summary>
-        internal static string NarrativeException {
-            get {
-                return ResourceManager.GetString("NarrativeException", resourceCulture);
             }
         }
         
@@ -125,11 +143,20 @@ namespace Narvalo.Narrative.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Une erreur inattendue est intervenue: {Exception}..
+        ///   Looks up a localized string similar to Une erreur inattendue est intervenue : {Exception}..
         /// </summary>
         internal static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une erreur interne est intervenue : {Exception}..
+        /// </summary>
+        internal static string UnhandledNarrativeException {
+            get {
+                return ResourceManager.GetString("UnhandledNarrativeException", resourceCulture);
             }
         }
     }

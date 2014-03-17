@@ -10,7 +10,7 @@ namespace Narvalo.Narrative
     using System.Web.Razor;
     using Microsoft.CSharp;
 
-    public sealed class RazorTemplateCompiler
+    sealed class RazorTemplateCompiler
     {
         const string Namespace_ = "RazorOutput";
 
@@ -78,7 +78,7 @@ namespace Narvalo.Narrative
                 var exceptions = compilerResults.Errors
                     .OfType<CompilerError>()
                     .Where(error => !error.IsWarning)
-                    .Select(error => new RazorTemplateException(error.ErrorText)
+                    .Select(error => new TemplateException(error.ErrorText)
                     {
                         Column = error.Column,
                         Line = error.Line,

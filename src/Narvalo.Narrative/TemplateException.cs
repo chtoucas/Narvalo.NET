@@ -7,16 +7,16 @@ namespace Narvalo.Narrative
     using System.Security.Permissions;
 
     [Serializable]
-    public class RazorTemplateException : NarrativeException
+    public class TemplateException : NarrativeException
     {
-        public RazorTemplateException() : base() { ; }
+        public TemplateException() : base() { ; }
 
-        public RazorTemplateException(string message) : base(message) { ; }
+        public TemplateException(string message) : base(message) { ; }
 
-        public RazorTemplateException(string message, Exception innerException)
+        public TemplateException(string message, Exception innerException)
             : base(message, innerException) { ; }
 
-        protected RazorTemplateException(SerializationInfo info, StreamingContext context)
+        protected TemplateException(SerializationInfo info, StreamingContext context)
             : base(info, context) { ; }
 
         public int Column { get; set; }

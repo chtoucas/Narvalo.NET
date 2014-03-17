@@ -2,8 +2,8 @@
 
 namespace Narvalo.Narrative
 {
-    interface IMarkdownEngine
+    public interface ITemplate
     {
-        string Transform(string text);
+        string Render(TemplateData data);
     }
 }

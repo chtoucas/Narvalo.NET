@@ -2,8 +2,10 @@
 
 namespace Narvalo.Narrative
 {
-    interface IMarkdownEngine
+    public interface IRunner
     {
-        string Transform(string text);
+        bool DryRun { get; set; }
+
+        void Run();
     }
 }
