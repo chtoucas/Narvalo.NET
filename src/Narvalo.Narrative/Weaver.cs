@@ -4,7 +4,7 @@ namespace Narvalo.Narrative
 {
     using System.IO;
 
-    public sealed class Weaver : IWeaver
+    public class Weaver : IWeaver
     {
         readonly ITemplate _template;
 
@@ -15,7 +15,7 @@ namespace Narvalo.Narrative
             _template = template;
         }
 
-        public void Weave(FileInfo file, string outputPath)
+        public string Weave(FileInfo file)
         {
             var parser = new SourceParser(file.FullName);
             var blocks = parser.Parse();
@@ -25,9 +25,7 @@ namespace Narvalo.Narrative
                 //Title = file.RelativeName,
             };
 
-            var output = _template.Render(data);
-
-            File.WriteAllText(outputPath, output);
+            return _template.Render(data);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Narvalo.Narrative
     // Cf.
     // https://github.com/Antaris/RazorEngine/blob/master/src/Core/RazorEngine.Core/Templating/TemplateBase.cs
 
-    abstract class RazorTemplateBase
+    public abstract class RazorTemplateBase
     {
         readonly StringBuilder _buffer;
 

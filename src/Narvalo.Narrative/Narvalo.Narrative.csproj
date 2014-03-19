@@ -73,6 +73,12 @@
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Extras.DynamicProxy2">
+      <HintPath>..\..\packages\Autofac.Extras.DynamicProxy2.3.0.3\lib\net40\Autofac.Extras.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CommandLine">
       <HintPath>..\..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
@@ -134,23 +140,27 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="AppModule.cs" />
     <Compile Include="AppSettings.cs" />
-    <Compile Include="DryRunWeaver.cs" />
+    <Compile Include="IOutputWriter.cs" />
+    <Compile Include="IPathProvider.cs" />
     <Compile Include="IRunner.cs" />
+    <Compile Include="NoopWriter.cs" />
+    <Compile Include="OutputWriter.cs" />
     <Compile Include="ParallelRunner.cs" />
+    <Compile Include="PathProvider.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="DirectoryRunnerBase.cs" />
     <Compile Include="SequentialRunner.cs" />
     <Compile Include="Weaver.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
-    <Compile Include="ISourceFinder.cs" />
     <Compile Include="ITemplate.cs" />
     <Compile Include="IWeaver.cs" />
     <Compile Include="SourceParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />
-    <Compile Include="Arguments.cs" />
+    <Compile Include="AppArguments.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="Program.cs" />
@@ -165,6 +175,7 @@
     <Compile Include="RazorTemplateBlock.cs" />
     <Compile Include="TemplateException.cs" />
     <Compile Include="TemplateData.cs" />
+    <Compile Include="WeavingInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

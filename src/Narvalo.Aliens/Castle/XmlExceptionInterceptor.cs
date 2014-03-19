@@ -16,8 +16,6 @@ namespace Narvalo.Castle
             _onException = onException;
         }
 
-        #region IInterceptor
-
         public void Intercept(IInvocation invocation)
         {
             Require.NotNull(invocation, "invocation");
@@ -30,7 +28,5 @@ namespace Narvalo.Castle
                 throw;
             }
         }
-
-        #endregion
     }
 }

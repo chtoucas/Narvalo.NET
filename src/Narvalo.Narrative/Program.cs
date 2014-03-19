@@ -4,27 +4,31 @@ namespace Narvalo.Narrative
 {
     using System;
     using System.Diagnostics;
-    using System.IO;
     using Autofac;
     using Narvalo.Narrative.Properties;
     using NodaTime;
     using Serilog;
     using Serilog.Events;
 
-    sealed class Program : CommandLine<Arguments>
+    public sealed class Program : CommandLine<AppArguments>
     {
-        public Program(Arguments arguments) : base(arguments) { }
+        public Program(AppArguments arguments)
+            : base(arguments) { }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var settings = AppSettings.FromConfiguration();
 
             SetupLogging_(settings.LogMinimumLevel);
 
-            Log.Information(Resources.Starting);
+            Log.Verbose(Resources.Starting);
 
             try {
-                var arguments = Narvalo.Narrative.Arguments.Parse(args);
+                var arguments = AppArguments.Parse(args);
+
+                if (arguments.DryRun) {
+                    Log.Warning(Resources.DryRun);
+                }
 
                 new Program(arguments).Run();
             }
@@ -32,83 +36,22 @@ namespace Narvalo.Narrative
                 Log.Fatal(Resources.UnhandledNarrativeException, ex);
             }
 
-            Log.Information(Resources.Ending);
+            Log.Verbose(Resources.Ending);
         }
 
         public override void Run()
         {
-            if (Arguments.DryRun) {
-                Log.Warning(Resources.DryRun);
-            }
-
-            var stopWatch = Stopwatch.StartNew();
-
-            using (var container = CreateContainer_()) {
-                container.Resolve<IRunner>().Run();
-            }
-
-            var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
-            Log.Information(Resources.ElapsedTime, elapsedTime);
-        }
-
-        IContainer CreateContainer_()
-        {
             var builder = new ContainerBuilder();
+            builder.RegisterModule(new AppModule(Arguments));
 
-            builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
-            builder.Register(CreateTemplate_).As<ITemplate>();
+            using (var container = builder.Build()) {
+                var stopWatch = Stopwatch.StartNew();
 
-            if (Arguments.DryRun) {
-                builder.RegisterType<DryRunWeaver>().As<IWeaver>();
+                container.Resolve<IRunner>().Run();
+
+                var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
+                Log.Verbose(Resources.ElapsedTime, elapsedTime);
             }
-            else {
-                builder.RegisterType<Weaver>().As<IWeaver>();
-            }
-
-            builder.Register(CreateRunner_).As<IRunner>();
-
-            return builder.Build();
-        }
-
-        static RazorTemplate CreateTemplate_(IComponentContext context)
-        {
-            return new RazorTemplate(Resources.Template, context.Resolve<IMarkdownEngine>());
-        }
-
-        IRunner CreateRunner_(IComponentContext context)
-        {
-            IRunner runner;
-
-            var attrs = File.GetAttributes(Arguments.Path);
-
-            if (attrs.HasFlag(FileAttributes.Directory)) {
-                var directory = new DirectoryInfo(Arguments.Path);
-
-                if (Arguments.RunInParallel) {
-                    runner = new ParallelRunner(
-                        context.Resolve<IWeaver>(),
-                        directory,
-                        Arguments.OutputDirectory);
-                }
-                else {
-                    runner = new SequentialRunner(
-                        context.Resolve<IWeaver>(),
-                        directory,
-                        Arguments.OutputDirectory);
-                }
-            }
-            else {
-                runner = new Runner(
-                    context.Resolve<IWeaver>(),
-                    new FileInfo(Arguments.Path),
-                    Arguments.OutputDirectory);
-            }
-
-            if (Arguments.DryRun) {
-                runner.DryRun = true;
-            }
-
-            return runner;
         }
 
         static void SetupLogging_(LogEventLevel mimimumLevel)

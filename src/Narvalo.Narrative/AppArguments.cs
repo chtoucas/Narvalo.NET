@@ -2,18 +2,24 @@
 
 namespace Narvalo.Narrative
 {
+    using System.IO;
     using System.Reflection;
     using CommandLine;
     using Narvalo.Narrative.Properties;
 
     using IO = System.IO;
 
-    sealed class Arguments
+    public sealed class AppArguments
     {
+        public bool IsDirectory { get; private set; }
+
         [Option('p', Required = true)]
         public string Path { get; set; }
 
-        [Option('n', Required = false, DefaultValue = false)]
+        /// <summary>
+        /// Perform a trial run with no change commited.
+        /// </summary>
+        [Option('n', "dry-run", Required = false, DefaultValue = false)]
         public bool DryRun { get; set; }
 
         [Option('o', Required = false)]
@@ -22,12 +28,9 @@ namespace Narvalo.Narrative
         [Option('m', Required = false, DefaultValue = false)]
         public bool RunInParallel { get; set; }
 
-        [Option('v', Required = false, DefaultValue = false)]
-        public bool Verbose { get; set; }
-
-        public static Arguments Parse(string[] args)
+        public static AppArguments Parse(string[] args)
         {
-            var self = new Arguments();
+            var self = new AppArguments();
 
             var parser = new CommandLine.Parser();
             parser.ParseArgumentsStrict(
@@ -47,6 +50,8 @@ namespace Narvalo.Narrative
 
                 OutputDirectory = IO.Path.Combine(execDirectory, "docs");
             }
+
+            IsDirectory = File.GetAttributes(Path).HasFlag(FileAttributes.Directory);
         }
     }
 }

@@ -18,18 +18,15 @@ namespace Narvalo.Narrative
              = _ => !_.Name.EndsWith("Designer.cs", StringComparison.OrdinalIgnoreCase);
 
         readonly IWeaver _weaver;
+        readonly IOutputWriter _writer;
         readonly DirectoryInfo _directory;
-        readonly string _outputDirectory;
-        bool _dryRun = false;
 
-        protected DirectoryRunnerBase(IWeaver weaver, DirectoryInfo directory, string outputDirectory)
+        protected DirectoryRunnerBase(IWeaver weaver, IOutputWriter writer, DirectoryInfo directory)
         {
             _weaver = weaver;
+            _writer = writer;
             _directory = directory;
-            _outputDirectory = outputDirectory;
         }
-
-        public bool DryRun { get { return _dryRun; } set { _dryRun = value; } }
 
         protected DirectoryInfo Directory { get { return _directory; } }
 
@@ -37,19 +34,14 @@ namespace Narvalo.Narrative
 
         protected void RunCore(RelativeFile file)
         {
-            var outputPath = Path.Combine(_outputDirectory, file.RelativeName);
-            var outputFile = Path.ChangeExtension(outputPath, "html");
+            var content = _weaver.Weave(file.File);
 
-            _weaver.Weave(file.File, outputFile);
+            _writer.Write(file, content);
         }
 
         protected void OnDirectoryStart(object sender, RelativeDirectoryEventArgs e)
         {
-            var targetDirectoryPath = Path.Combine(_outputDirectory, e.RelativeDirectory.RelativeName);
-
-            if (!DryRun) {
-                System.IO.Directory.CreateDirectory(targetDirectoryPath);
-            }
+            _writer.CreateDirectory(e.RelativeDirectory);
         }
     }
 }

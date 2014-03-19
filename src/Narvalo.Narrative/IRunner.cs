@@ -4,8 +4,6 @@ namespace Narvalo.Narrative
 {
     public interface IRunner
     {
-        bool DryRun { get; set; }
-
         void Run();
     }
 }

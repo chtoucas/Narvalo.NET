@@ -3,10 +3,10 @@
 namespace Narvalo.Narrative
 {
     using System;
-    
+
     using Markdown = MarkdownDeep.Markdown;
 
-    sealed class MarkdownDeepEngine : IMarkdownEngine
+    public sealed class MarkdownDeepEngine : IMarkdownEngine
     {
         public string Transform(string text)
         {

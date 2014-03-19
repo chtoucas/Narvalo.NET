@@ -8,8 +8,8 @@ namespace Narvalo.Narrative
 
     public sealed class ParallelRunner : DirectoryRunnerBase
     {
-        public ParallelRunner(IWeaver weaver, DirectoryInfo directory, string outputDirectory)
-            : base(weaver, directory, outputDirectory) { }
+        public ParallelRunner(IWeaver weaver, IOutputWriter writer, DirectoryInfo directory)
+            : base(weaver, writer, directory) { }
 
         public override void Run()
         {

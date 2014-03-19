@@ -2,29 +2,28 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using System.IO;
+    using Narvalo.IO;
 
     public sealed class Runner : IRunner
     {
         readonly IWeaver _weaver;
+        readonly IOutputWriter _writer;
         readonly FileInfo _file;
-        readonly string _outputDirectory;
-        bool _dryRun = false;
 
-        public Runner(IWeaver weaver, FileInfo file, string outputDirectory)
+        public Runner(IWeaver weaver, IOutputWriter writer, FileInfo file)
         {
             _weaver = weaver;
+            _writer = writer;
             _file = file;
-            _outputDirectory = outputDirectory;
         }
-
-        public bool DryRun { get { return _dryRun; } set { _dryRun = value; } }
 
         public void Run()
         {
-            var outputPath = Path.Combine(_outputDirectory, _file.Name);
+            var content = _weaver.Weave(_file);
 
-            _weaver.Weave(_file, outputPath);
+            _writer.Write(new RelativeFile(_file, String.Empty), content);
         }
     }
 }

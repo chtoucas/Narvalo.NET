@@ -4,7 +4,7 @@ namespace Narvalo.Narrative
 {
     using System.Web;
 
-    sealed class RazorTemplateBlock
+    public sealed class RazorTemplateBlock
     {
         public RazorTemplateBlock(BlockType blockType)
             : this(blockType == BlockType.Code) { }

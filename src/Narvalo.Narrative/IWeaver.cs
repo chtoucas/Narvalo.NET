@@ -3,9 +3,11 @@
 namespace Narvalo.Narrative
 {
     using System.IO;
+    using Autofac.Extras.DynamicProxy2;
 
+    [Intercept(typeof(WeavingInterceptor))]
     public interface IWeaver
     {
-        void Weave(FileInfo file, string outputPath);
+        string Weave(FileInfo file);
     }
 }
