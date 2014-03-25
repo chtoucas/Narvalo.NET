@@ -3,25 +3,22 @@
 namespace Narvalo.Narrative.Runtime
 {
     using System;
-    using Narvalo.Narrative.Configuration;
-    using Narvalo.Narrative.Properties;
     using Serilog;
     using Serilog.Events;
 
     public sealed class SerilogConfig
     {
-        readonly Settings _settings;
+        readonly LogEventLevel _level;
 
-        public SerilogConfig(Settings settings)
+        [CLSCompliant(false)]
+        public SerilogConfig(LogEventLevel level)
         {
-            _settings = settings;
+            _level = level;
         }
 
         public void Configure()
         {
-            Log.Logger = CreateLogger_(_settings.LogMinimumLevel);
-
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
+            Log.Logger = CreateLogger_(_level);
         }
 
         static ILogger CreateLogger_(LogEventLevel mimimumLevel)
@@ -30,16 +27,6 @@ namespace Narvalo.Narrative.Runtime
                .MinimumLevel.Is(mimimumLevel)
                .WriteTo.ColoredConsole()
                .CreateLogger();
-        }
-
-        static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
-        {
-            try {
-                Log.Fatal(Resources.UnhandledException, (Exception)args.ExceptionObject);
-            }
-            finally {
-                Environment.Exit(1);
-            }
         }
     }
 }

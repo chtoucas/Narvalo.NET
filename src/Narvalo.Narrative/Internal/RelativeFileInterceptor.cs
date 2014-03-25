@@ -1,20 +1,20 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.Internal
 {
-    using System.IO;
     using Castle.DynamicProxy;
+    using Narvalo.IO;
     using Serilog;
 
-    public sealed class WeavingInterceptor : IInterceptor
+    internal sealed class RelativeFileInterceptor : IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {
             Require.NotNull(invocation, "invocation");
 
-            var file = invocation.Arguments[0] as FileInfo;
+            var info = invocation.Arguments[0] as RelativeFile;
 
-            Log.Debug("Weaving {Name}", file.FullName);
+            Log.Debug("Processing {Name}", info.RelativeName);
 
             invocation.Proceed();
         }

@@ -1,23 +1,26 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Processors
+namespace Narvalo.Narrative.Weaving
 {
     using System;
     using System.IO;
     using Narvalo.IO;
 
-    public sealed class FileProcessor
+    public sealed class FileWeaver : IWeaver<FileInfo>
     {
-        readonly IWeaver _weaver;
+        readonly IWeaverEngine _weaver;
         readonly IOutputWriter _writer;
 
-        public FileProcessor(IWeaver weaver, IOutputWriter writer)
+        public FileWeaver(IWeaverEngine weaver, IOutputWriter writer)
         {
+            Require.NotNull(weaver, "weaver");
+            Require.NotNull(writer, "writer");
+
             _weaver = weaver;
             _writer = writer;
         }
 
-        public void Process(FileInfo file)
+        public void Weave(FileInfo file)
         {
             string content;
 

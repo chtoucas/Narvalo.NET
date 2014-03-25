@@ -157,26 +157,33 @@
     </Compile>
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
-    <Compile Include="ProgramFacade.cs" />
+    <Compile Include="Internal\LineReader.cs" />
+    <Compile Include="Internal\RelativeFileInterceptor.cs" />
+    <Compile Include="Internal\RegistrationBuilder%24.cs" />
+    <Compile Include="Runtime\FileFinderModule.cs" />
+    <Compile Include="Weaving\RelativeFileWeaver.cs" />
+    <Compile Include="Weaving\IWeaver`1.cs" />
+    <Compile Include="Runtime\Runner.cs" />
+    <Compile Include="Runtime\DirectoryWeaverFacade.cs" />
+    <Compile Include="Runtime\ParallelExecutionMetadata.cs" />
     <Compile Include="Runtime\WriterModule.cs" />
-    <Compile Include="Runtime\WeaverModule.cs" />
+    <Compile Include="Runtime\WeaverEngineModule.cs" />
     <Compile Include="IOutputWriter.cs" />
     <Compile Include="IPathProvider.cs" />
     <Compile Include="NoopWriter.cs" />
     <Compile Include="OutputWriter.cs" />
-    <Compile Include="Processors\ParallelDirectoryProcessor.cs" />
+    <Compile Include="Weaving\ParallelDirectoryWeaver.cs" />
     <Compile Include="PathProvider.cs" />
-    <Compile Include="Processors\FileProcessor.cs" />
-    <Compile Include="Processors\DirectoryProcessorBase.cs" />
-    <Compile Include="Runtime\ProcessorModule.cs" />
-    <Compile Include="Processors\SequentialDirectoryProcessor.cs" />
+    <Compile Include="Weaving\FileWeaver.cs" />
+    <Compile Include="Runtime\WeaverModule.cs" />
+    <Compile Include="Weaving\SequentialDirectoryWeaver.cs" />
     <Compile Include="Runtime\SerilogConfig.cs" />
-    <Compile Include="Weaver.cs" />
+    <Compile Include="Weaving\WeaverEngine.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
     <Compile Include="ITemplate.cs" />
-    <Compile Include="IWeaver.cs" />
-    <Compile Include="CSharpParser.cs" />
+    <Compile Include="Weaving\IWeaverEngine.cs" />
+    <Compile Include="SimpleParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />
     <Compile Include="Configuration\Arguments.cs" />
@@ -194,7 +201,7 @@
     <Compile Include="RazorTemplateBlock.cs" />
     <Compile Include="TemplateException.cs" />
     <Compile Include="TemplateData.cs" />
-    <Compile Include="WeavingInterceptor.cs" />
+    <Compile Include="Internal\FileSystemInfoInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

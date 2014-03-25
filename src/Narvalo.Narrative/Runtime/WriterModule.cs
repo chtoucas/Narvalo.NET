@@ -7,17 +7,19 @@ namespace Narvalo.Narrative.Runtime
 
     public sealed class WriterModule : Module
     {
-        public Settings Settings { get; set; }
+        public bool DryRun { get; set; }
+
+        public string OutputDirectory { get; set; }
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(_ => new PathProvider(Settings.OutputDirectory)).As<IPathProvider>();
+            builder.Register(_ => new PathProvider(OutputDirectory)).As<IPathProvider>();
 
-            if (Settings.DryRun) {
-                builder.RegisterType<NoopWriter>().As<IOutputWriter>();
+            if (DryRun) {
+                builder.RegisterType<NoopWriter>().As<IOutputWriter>().InstancePerLifetimeScope();
             }
             else {
-                builder.RegisterType<OutputWriter>().As<IOutputWriter>();
+                builder.RegisterType<OutputWriter>().As<IOutputWriter>().InstancePerLifetimeScope();
             }
         }
     }

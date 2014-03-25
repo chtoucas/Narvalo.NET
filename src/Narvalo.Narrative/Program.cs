@@ -2,8 +2,8 @@
 
 namespace Narvalo.Narrative
 {
+    using System;
     using System.Diagnostics;
-    using Autofac;
     using Narvalo.Narrative.Configuration;
     using Narvalo.Narrative.Properties;
     using Narvalo.Narrative.Runtime;
@@ -12,6 +12,10 @@ namespace Narvalo.Narrative
 
     public sealed class Program
     {
+        const int SuccesfulExitCode_ = 0;
+        const int ErrorExitCode_ = 1;
+        const int FatalExitCode_ = 2;
+
         readonly Settings _settings;
 
         public Program(Settings settings)
@@ -19,11 +23,15 @@ namespace Narvalo.Narrative
             _settings = settings;
         }
 
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
+            // Resolve settings.
             var settings = SettingsManager.Resolve();
 
-            (new SerilogConfig(settings)).Configure();
+            // Configure logging.
+            (new SerilogConfig(settings.LogMinimumLevel)).Configure();
+
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
 
             Log.Information(Resources.Starting);
 
@@ -31,10 +39,14 @@ namespace Narvalo.Narrative
                 new Program(settings).Run();
             }
             catch (NarrativeException ex) {
-                Log.Fatal(Resources.UnhandledNarrativeException, ex);
+                Log.Error(Resources.UnhandledNarrativeException, ex);
+
+                return ErrorExitCode_;
             }
 
             Log.Information(Resources.Ending);
+
+            return SuccesfulExitCode_;
         }
 
         public void Run()
@@ -45,20 +57,20 @@ namespace Narvalo.Narrative
 
             var stopWatch = Stopwatch.StartNew();
 
-            // Configure builder.
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new WriterModule { Settings = _settings });
-            builder.RegisterModule(new WeaverModule());
-            builder.RegisterModule(new ProcessorModule());
-
-            using (var container = builder.Build()) {
-                var facade = new ProgramFacade(_settings, container);
-
-                facade.Process(@"..\..\..\Narvalo.Common\Apply.cs");
-            }
+            new Runner(_settings).Run(@"..\..\..\Narvalo.Common\", _settings.RunInParallel);
 
             var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
             Log.Information(Resources.ElapsedTime, elapsedTime);
+        }
+
+        static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
+        {
+            try {
+                Log.Fatal(Resources.UnhandledException, (Exception)args.ExceptionObject);
+            }
+            finally {
+                Environment.Exit(FatalExitCode_);
+            }
         }
     }
 }

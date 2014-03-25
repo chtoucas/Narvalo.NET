@@ -2,32 +2,40 @@
 
 namespace Narvalo.Narrative.Runtime
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
     using Autofac;
-    using Autofac.Extras.DynamicProxy2;
-    using Narvalo.Narrative.Properties;
-    using Serilog;
-    using Serilog.Events;
+    using Narvalo.IO;
+    using Narvalo.Narrative.Internal;
+    using Narvalo.Narrative.Weaving;
 
     public sealed class WeaverModule : Module
     {
-        public bool IsDebuggingEnabled
-        {
-            get { return Log.IsEnabled(LogEventLevel.Debug); }
-        }
-
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
-            builder.RegisterType<RazorTemplate>().As<ITemplate>()
-                .WithParameter("input", Resources.Template);
+            // FIXME: Automation for interception.
+            builder.RegisterType<FileSystemInfoInterceptor>().AsSelf();
+            builder.RegisterType<RelativeFileInterceptor>().AsSelf();
 
-            var weaver = builder.RegisterType<Weaver>().As<IWeaver>();
+            builder.RegisterType<RelativeFileWeaver>()
+                .As<IWeaver<RelativeFile>>()
+                .InterfaceDebuggedBy(typeof(RelativeFileInterceptor));
 
-            //if (IsDebuggingEnabled) {
-            //    builder.RegisterType<WeavingInterceptor>().AsSelf();
+            builder.RegisterType<FileWeaver>()
+                .As<IWeaver<FileInfo>>()
+                .InterfaceDebuggedBy(typeof(FileSystemInfoInterceptor));
 
-            //    weaver.EnableInterfaceInterceptors();
-            //}
+            builder.RegisterType<SequentialDirectoryWeaver>()
+                .As<IWeaver<DirectoryInfo>>()
+                .WithMetadata<ParallelExecutionMetadata>(_ => _.For(pe => pe.RunInParallel, false));
+
+            builder.RegisterType<ParallelDirectoryWeaver>()
+                .As<IWeaver<DirectoryInfo>>()
+                .WithMetadata<ParallelExecutionMetadata>(_ => _.For(pe => pe.RunInParallel, true));
+
+            builder.Register(c => new DirectoryWeaverFacade(
+                c.Resolve<IEnumerable<Lazy<IWeaver<DirectoryInfo>, ParallelExecutionMetadata>>>()));
         }
     }
 }
