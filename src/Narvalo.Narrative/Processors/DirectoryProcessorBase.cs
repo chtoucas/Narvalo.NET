@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.Processors
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Narvalo.Narrative
     using System.Linq;
     using Narvalo.IO;
 
-    public abstract class DirectoryRunnerBase : IRunner
+    public abstract class DirectoryProcessorBase
     {
         static readonly List<string> DirectoriesToIgnore_ = new List<string> { "bin", "obj", "_Aliens" };
 
@@ -19,22 +19,22 @@ namespace Narvalo.Narrative
 
         readonly IWeaver _weaver;
         readonly IOutputWriter _writer;
-        readonly DirectoryInfo _directory;
 
-        protected DirectoryRunnerBase(IWeaver weaver, IOutputWriter writer, DirectoryInfo directory)
+        protected DirectoryProcessorBase(IWeaver weaver, IOutputWriter writer)
         {
             _weaver = weaver;
             _writer = writer;
-            _directory = directory;
         }
 
-        protected DirectoryInfo Directory { get { return _directory; } }
+        public abstract void Process(DirectoryInfo directory);
 
-        public abstract void Run();
-
-        protected void RunCore(RelativeFile file)
+        protected void ProcessFile(RelativeFile file)
         {
-            var content = _weaver.Weave(file.File);
+            string content;
+
+            using (var reader = new StreamReader(file.File.FullName)) {
+                content = _weaver.Weave(reader);
+            }
 
             _writer.Write(file, content);
         }

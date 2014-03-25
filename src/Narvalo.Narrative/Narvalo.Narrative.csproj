@@ -93,6 +93,21 @@
     <Reference Include="NodaTime">
       <HintPath>..\..\packages\NodaTime.1.2.0\lib\net35-Client\NodaTime.dll</HintPath>
     </Reference>
+    <Reference Include="Roslyn.Compilers">
+      <HintPath>..\..\packages\Roslyn.Compilers.Common.1.2.20906.2\lib\net45\Roslyn.Compilers.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Compilers.CSharp">
+      <HintPath>..\..\packages\Roslyn.Compilers.CSharp.1.2.20906.2\lib\net45\Roslyn.Compilers.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Services">
+      <HintPath>..\..\packages\Roslyn.Services.Common.1.2.20906.2\lib\net45\Roslyn.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Services.CSharp">
+      <HintPath>..\..\packages\Roslyn.Services.CSharp.1.2.20906.2\lib\net45\Roslyn.Services.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Utilities">
+      <HintPath>..\..\packages\Roslyn.Services.Common.1.2.20906.2\lib\net45\Roslyn.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Serilog.1.2.29\lib\net45\Serilog.dll</HintPath>
@@ -140,27 +155,31 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="AppModule.cs" />
-    <Compile Include="AppSettings.cs" />
+    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="ProgramFacade.cs" />
+    <Compile Include="Runtime\WriterModule.cs" />
+    <Compile Include="Runtime\WeaverModule.cs" />
     <Compile Include="IOutputWriter.cs" />
     <Compile Include="IPathProvider.cs" />
-    <Compile Include="IRunner.cs" />
     <Compile Include="NoopWriter.cs" />
     <Compile Include="OutputWriter.cs" />
-    <Compile Include="ParallelRunner.cs" />
+    <Compile Include="Processors\ParallelDirectoryProcessor.cs" />
     <Compile Include="PathProvider.cs" />
-    <Compile Include="Runner.cs" />
-    <Compile Include="DirectoryRunnerBase.cs" />
-    <Compile Include="SequentialRunner.cs" />
+    <Compile Include="Processors\FileProcessor.cs" />
+    <Compile Include="Processors\DirectoryProcessorBase.cs" />
+    <Compile Include="Runtime\ProcessorModule.cs" />
+    <Compile Include="Processors\SequentialDirectoryProcessor.cs" />
+    <Compile Include="Runtime\SerilogConfig.cs" />
     <Compile Include="Weaver.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="BlockType.cs" />
     <Compile Include="ITemplate.cs" />
     <Compile Include="IWeaver.cs" />
-    <Compile Include="SourceParser.cs" />
+    <Compile Include="CSharpParser.cs" />
     <Compile Include="IMarkdownEngine.cs" />
     <Compile Include="RazorTemplateCompiler.cs" />
-    <Compile Include="AppArguments.cs" />
+    <Compile Include="Configuration\Arguments.cs" />
     <Compile Include="MarkdownDeepEngine.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="Program.cs" />

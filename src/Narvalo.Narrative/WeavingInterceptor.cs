@@ -14,7 +14,7 @@ namespace Narvalo.Narrative
 
             var file = invocation.Arguments[0] as FileInfo;
 
-            Log.Information("Weaving {Name}", file.FullName);
+            Log.Debug("Weaving {Name}", file.FullName);
 
             invocation.Proceed();
         }

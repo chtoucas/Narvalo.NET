@@ -8,6 +8,6 @@ namespace Narvalo.Narrative
     [Intercept(typeof(WeavingInterceptor))]
     public interface IWeaver
     {
-        string Weave(FileInfo file);
+        string Weave(TextReader reader);
     }
 }

@@ -68,7 +68,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="CommandLine`1.cs" />
     <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Either`2.Language.cs">
       <DependentUpon>Either`2.cs</DependentUpon>

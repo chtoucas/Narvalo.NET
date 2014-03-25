@@ -2,81 +2,63 @@
 
 namespace Narvalo.Narrative
 {
-    using System;
     using System.Diagnostics;
     using Autofac;
+    using Narvalo.Narrative.Configuration;
     using Narvalo.Narrative.Properties;
+    using Narvalo.Narrative.Runtime;
     using NodaTime;
     using Serilog;
-    using Serilog.Events;
 
-    public sealed class Program : CommandLine<AppArguments>
+    public sealed class Program
     {
-        public Program(AppArguments arguments)
-            : base(arguments) { }
+        readonly Settings _settings;
+
+        public Program(Settings settings)
+        {
+            _settings = settings;
+        }
 
         public static void Main(string[] args)
         {
-            var settings = AppSettings.FromConfiguration();
+            var settings = SettingsManager.Resolve();
 
-            SetupLogging_(settings.LogMinimumLevel);
+            (new SerilogConfig(settings)).Configure();
 
-            Log.Verbose(Resources.Starting);
+            Log.Information(Resources.Starting);
 
             try {
-                var arguments = AppArguments.Parse(args);
-
-                if (arguments.DryRun) {
-                    Log.Warning(Resources.DryRun);
-                }
-
-                new Program(arguments).Run();
+                new Program(settings).Run();
             }
             catch (NarrativeException ex) {
                 Log.Fatal(Resources.UnhandledNarrativeException, ex);
             }
 
-            Log.Verbose(Resources.Ending);
+            Log.Information(Resources.Ending);
         }
 
-        public override void Run()
+        public void Run()
         {
+            if (_settings.DryRun) {
+                Log.Warning(Resources.DryRun);
+            }
+
+            var stopWatch = Stopwatch.StartNew();
+
+            // Configure builder.
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new AppModule(Arguments));
+            builder.RegisterModule(new WriterModule { Settings = _settings });
+            builder.RegisterModule(new WeaverModule());
+            builder.RegisterModule(new ProcessorModule());
 
             using (var container = builder.Build()) {
-                var stopWatch = Stopwatch.StartNew();
+                var facade = new ProgramFacade(_settings, container);
 
-                container.Resolve<IRunner>().Run();
-
-                var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
-                Log.Verbose(Resources.ElapsedTime, elapsedTime);
+                facade.Process(@"..\..\..\Narvalo.Common\Apply.cs");
             }
-        }
 
-        static void SetupLogging_(LogEventLevel mimimumLevel)
-        {
-            Log.Logger = CreateLogger_(mimimumLevel);
-
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
-        }
-
-        static ILogger CreateLogger_(LogEventLevel mimimumLevel)
-        {
-            return new LoggerConfiguration()
-               .MinimumLevel.Is(mimimumLevel)
-               .WriteTo.ColoredConsole()
-               .CreateLogger();
-        }
-
-        static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
-        {
-            try {
-                Log.Fatal(Resources.UnhandledException, (Exception)args.ExceptionObject);
-            }
-            finally {
-                Environment.Exit(1);
-            }
+            var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
+            Log.Information(Resources.ElapsedTime, elapsedTime);
         }
     }
 }

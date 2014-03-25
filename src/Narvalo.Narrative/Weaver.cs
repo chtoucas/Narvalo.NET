@@ -2,6 +2,7 @@
 
 namespace Narvalo.Narrative
 {
+    using System.Collections.Generic;
     using System.IO;
 
     public class Weaver : IWeaver
@@ -15,10 +16,12 @@ namespace Narvalo.Narrative
             _template = template;
         }
 
-        public string Weave(FileInfo file)
+        public string Weave(TextReader reader)
         {
-            var parser = new SourceParser(file.FullName);
-            var blocks = parser.Parse();
+            Require.NotNull(reader, "reader");
+
+            var parser = new CSharpParser();
+            IEnumerable<Block> blocks = parser.Parse(reader);
 
             var data = new TemplateData(blocks)
             {
