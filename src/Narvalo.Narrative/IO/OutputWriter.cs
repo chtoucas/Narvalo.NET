@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.IO
 {
     using System.IO;
     using Narvalo.IO;
@@ -24,6 +24,13 @@ namespace Narvalo.Narrative
         }
 
         public void Write(RelativeFile file, string content)
+        {
+            var path = _pathProvider.GetFilePath(file);
+
+            File.WriteAllText(path, content);
+        }
+
+        public void Write(FileInfo file, string content)
         {
             var path = _pathProvider.GetFilePath(file);
 

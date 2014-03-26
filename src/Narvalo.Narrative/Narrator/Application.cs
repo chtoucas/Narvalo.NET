@@ -5,22 +5,23 @@ namespace Narvalo.Narrative.Narrator
     using System.Diagnostics;
     using System.IO;
     using Autofac;
-    using Narvalo.Narrative.Configuration;
     using Narvalo.Narrative.Properties;
     using Narvalo.Narrative.Weaving;
     using NodaTime;
     using Serilog;
 
-    public sealed class Runner
+    public sealed class Application
     {
         readonly Settings _settings;
 
-        public Runner(Settings settings)
+        public Application(Settings settings)
         {
+            Require.NotNull(settings, "settings");
+
             _settings = settings;
         }
 
-        public void Run(string path, bool runInParallel)
+        public void Execute()
         {
             Log.Information(Resources.Starting);
 
@@ -30,14 +31,7 @@ namespace Narvalo.Narrative.Narrator
 
             var stopWatch = Stopwatch.StartNew();
 
-            var isDirectory = File.GetAttributes(path).HasFlag(FileAttributes.Directory);
-
-            if (isDirectory) {
-                ProcessDirectory_(new DirectoryInfo(path), runInParallel);
-            }
-            else {
-                ProcessFile_(new FileInfo(path));
-            }
+            Weave_(_settings.SourcePath);
 
             var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
             Log.Information(Resources.ElapsedTime, elapsedTime);
@@ -45,14 +39,26 @@ namespace Narvalo.Narrative.Narrator
             Log.Information(Resources.Ending);
         }
 
-        void ProcessDirectory_(DirectoryInfo directory, bool runInParallel)
+        void Weave_(string path)
         {
-            using (var container = CreateContainer_()) {
-                container.Resolve<DirectoryWeaverFacade>().Process(directory, runInParallel);
+            var isDirectory = File.GetAttributes(path).HasFlag(FileAttributes.Directory);
+
+            if (isDirectory) {
+                Weave_(new DirectoryInfo(path));
+            }
+            else {
+                Weave_(new FileInfo(path));
             }
         }
 
-        void ProcessFile_(FileInfo file)
+        void Weave_(DirectoryInfo directory)
+        {
+            using (var container = CreateContainer_()) {
+                container.Resolve<DirectoryWeaverFacade>().Process(directory, _settings.RunInParallel);
+            }
+        }
+
+        void Weave_(FileInfo file)
         {
             using (var container = CreateContainer_()) {
                 container.Resolve<IWeaver<FileInfo>>().Weave(file);
@@ -70,6 +76,7 @@ namespace Narvalo.Narrative.Narrator
             });
 
             builder.RegisterModule(new FileFinderModule());
+            builder.RegisterModule(new ParserModule());
             builder.RegisterModule(new WeaverEngineModule());
             builder.RegisterModule(new WeaverModule());
 

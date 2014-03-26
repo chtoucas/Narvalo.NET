@@ -20,7 +20,7 @@ namespace Narvalo.Narrative.Internal
             this IRegistrationBuilder<TLimit, TActivatorData, TSingleRegistrationStyle> @this,
             Type interceptorType)
         {
-            Require.Object(@this);
+            DebugCheck.NotNull(@this);
 
             if (!IsDebuggingEnabled) {
                 return @this;

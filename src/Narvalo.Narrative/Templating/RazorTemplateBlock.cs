@@ -3,6 +3,7 @@
 namespace Narvalo.Narrative.Templating
 {
     using System.Web;
+    using Narvalo.Narrative.Parsing;
 
     public sealed class RazorTemplateBlock
     {

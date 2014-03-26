@@ -84,7 +84,7 @@ namespace Narvalo.Narrative.Templating
                         Line = error.Line,
                     });
 
-                throw new NarrativeException(
+                throw new TemplateException(
                     "Failed to compile the template.",
                     new AggregateException(exceptions));
             }

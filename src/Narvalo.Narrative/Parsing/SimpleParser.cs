@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.Parsing
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace Narvalo.Narrative
     // http://ccimetadata.codeplex.com/
     // http://www.mono-project.com/Cecil
 
-    public class SimpleParser
+    public class SimpleParser : IParser
     {
         static readonly Regex IgnoreRegex_ = new Regex(@"^\s*(?:/\*|\*/|////)", RegexOptions.Compiled);
         static readonly Regex MarkdownRegex_ = new Regex(@"^\s*\*\s", RegexOptions.Compiled);

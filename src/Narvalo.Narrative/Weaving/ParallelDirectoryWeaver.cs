@@ -22,8 +22,6 @@ namespace Narvalo.Narrative.Weaving
 
         public void Weave(DirectoryInfo directory)
         {
-            Require.NotNull(directory, "directory");
-
             var sources = _finder.Find(directory, "*.cs");
 
             Parallel.ForEach(sources, _processor.Weave);

@@ -10,7 +10,7 @@ namespace Narvalo.Narrative.Internal
     {
         public void Intercept(IInvocation invocation)
         {
-            Require.NotNull(invocation, "invocation");
+            DebugCheck.NotNull(invocation);
 
             var info = invocation.Arguments[0] as RelativeFile;
 

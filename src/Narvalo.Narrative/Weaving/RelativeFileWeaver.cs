@@ -4,6 +4,7 @@ namespace Narvalo.Narrative.Weaving
 {
     using System.IO;
     using Narvalo.IO;
+    using Narvalo.Narrative.IO;
 
     public sealed class RelativeFileWeaver : IWeaver<RelativeFile>
     {

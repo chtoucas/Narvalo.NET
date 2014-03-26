@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.IO
 {
     using System.IO;
     using Narvalo.IO;
@@ -24,6 +24,11 @@ namespace Narvalo.Narrative
         public string GetFilePath(RelativeFile file)
         {
             return Path.ChangeExtension(Path.Combine(_outputDirectory, file.RelativeName), "html");
+        }
+
+        public string GetFilePath(FileInfo file)
+        {
+            return Path.ChangeExtension(Path.Combine(_outputDirectory, file.Name), "html");
         }
     }
 }

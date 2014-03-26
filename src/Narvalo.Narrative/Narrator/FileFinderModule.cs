@@ -9,6 +9,7 @@ namespace Narvalo.Narrative.Narrator
     using Autofac;
     using Autofac.Core;
     using Narvalo.IO;
+    using Narvalo.Narrative.IO;
 
     public sealed class FileFinderModule : Module
     {

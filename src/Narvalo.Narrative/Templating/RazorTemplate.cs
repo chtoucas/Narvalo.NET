@@ -5,6 +5,7 @@ namespace Narvalo.Narrative.Templating
     using System;
     using System.Linq;
     using System.Web;
+    using Narvalo.Narrative.Parsing;
 
     public sealed class RazorTemplate : ITemplate
     {
@@ -27,7 +28,7 @@ namespace Narvalo.Narrative.Templating
 
             var template = Activator.CreateInstance(_templateType.Value) as RazorTemplateBase;
             if (template == null) {
-                throw new NarrativeException("The template does not inherit from RazorTemplateBase.");
+                throw new TemplateException("The template does not inherit from RazorTemplateBase.");
             }
 
             template.Title = data.Title;

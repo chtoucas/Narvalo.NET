@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Configuration
+namespace Narvalo.Narrative.Narrator
 {
     using System;
     using System.IO;
@@ -44,6 +44,8 @@ namespace Narvalo.Narrative.Configuration
 
             internal set { _outputDirectory = value; }
         }
+
+        public string SourcePath { get; set; }
 
         public bool RunInParallel
         {

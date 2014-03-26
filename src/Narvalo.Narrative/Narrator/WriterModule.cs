@@ -3,6 +3,7 @@
 namespace Narvalo.Narrative.Narrator
 {
     using Autofac;
+    using Narvalo.Narrative.IO;
 
     public sealed class WriterModule : Module
     {

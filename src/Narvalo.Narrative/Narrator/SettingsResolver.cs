@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Configuration
+namespace Narvalo.Narrative.Narrator
 {
     using System;
     using System.Collections.Specialized;
@@ -10,25 +10,14 @@ namespace Narvalo.Narrative.Configuration
     using Narvalo.Fx;
     using Serilog.Events;
 
-    public static class SettingsManager
+    public static class SettingsResolver
     {
-        [CLSCompliant(false)]
         public static Settings Resolve()
         {
             var settings = new Settings();
 
             Amend(settings, GetAppSettings_());
             Amend(settings, GetArguments_());
-
-            return settings;
-        }
-
-        [CLSCompliant(false)]
-        public static Settings FromConfiguration()
-        {
-            var settings = new Settings();
-
-            Amend(settings, GetAppSettings_());
 
             return settings;
         }
@@ -52,15 +41,20 @@ namespace Narvalo.Narrative.Configuration
                 .OnSome(_ => { settings.OutputDirectory = _; });
         }
 
-        // FIXME
         internal static void Amend(Settings settings, Arguments arguments)
         {
             DebugCheck.NotNull(settings);
             DebugCheck.NotNull(arguments);
 
-            if (arguments.DryRun) {
+            if (arguments.DryRunSet) {
                 settings.DryRun = arguments.DryRun;
             }
+
+            if (arguments.RunInParallelSet) {
+                settings.RunInParallel = arguments.RunInParallel;
+            }
+
+            settings.SourcePath = arguments.Path;
         }
 
         static Arguments GetArguments_()
@@ -69,14 +63,16 @@ namespace Narvalo.Narrative.Configuration
             var args = Environment.GetCommandLineArgs();
 
             var parser = new CommandLine.Parser();
-            parser.ParseArguments(args, self);
+            if (!parser.ParseArgumentsStrict(args, self)) {
+                throw new NarrativeException("Parsing command line arguments failed.");
+            }
 
             return self;
         }
 
         static NameValueCollection GetAppSettings_()
         {
-           return Filter_(ConfigurationManager.AppSettings);
+            return Filter_(ConfigurationManager.AppSettings);
         }
 
         static NameValueCollection Filter_(NameValueCollection settings)

@@ -3,7 +3,6 @@
 namespace Narvalo.Narrative
 {
     using System;
-    using Narvalo.Narrative.Configuration;
     using Narvalo.Narrative.Narrator;
     using Narvalo.Narrative.Properties;
     using Serilog;
@@ -17,7 +16,7 @@ namespace Narvalo.Narrative
         public static int Main(string[] args)
         {
             // Resolve settings.
-            var settings = SettingsManager.Resolve();
+            var settings = SettingsResolver.Resolve();
 
             // Configure logging.
             (new SerilogConfig(settings.LogMinimumLevel)).Configure();
@@ -25,7 +24,7 @@ namespace Narvalo.Narrative
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
 
             try {
-                new Runner(settings).Run(@"..\..\..\Narvalo.Common\", settings.RunInParallel);
+                new Application(settings).Execute();
             }
             catch (NarrativeException ex) {
                 Log.Error(Resources.UnhandledNarrativeException, ex);

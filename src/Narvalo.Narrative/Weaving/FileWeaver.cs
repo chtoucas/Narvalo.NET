@@ -2,9 +2,8 @@
 
 namespace Narvalo.Narrative.Weaving
 {
-    using System;
     using System.IO;
-    using Narvalo.IO;
+    using Narvalo.Narrative.IO;
 
     public sealed class FileWeaver : IWeaver<FileInfo>
     {
@@ -30,7 +29,7 @@ namespace Narvalo.Narrative.Weaving
                 content = _weaver.Weave(reader);
             }
 
-            _writer.Write(new RelativeFile(file, String.Empty), content);
+            _writer.Write(file, content);
         }
     }
 }

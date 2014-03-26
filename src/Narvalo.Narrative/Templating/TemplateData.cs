@@ -3,6 +3,7 @@
 namespace Narvalo.Narrative.Templating
 {
     using System.Collections.Generic;
+    using Narvalo.Narrative.Parsing;
 
     public sealed class TemplateData
     {
