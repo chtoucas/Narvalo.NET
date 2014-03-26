@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.Templating
 {
     using System;
     using System.Linq;
     using System.Web;
 
-    sealed class RazorTemplate : ITemplate
+    public sealed class RazorTemplate : ITemplate
     {
         readonly IMarkdownEngine _markdown;
         readonly Lazy<Type> _templateType;

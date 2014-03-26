@@ -7,8 +7,8 @@ namespace Narvalo.Narrative.Weaving
 
     public sealed class SequentialDirectoryWeaver : IWeaver<DirectoryInfo>
     {
-        readonly IWeaver<RelativeFile> _processor;
         readonly FileFinder _finder;
+        readonly IWeaver<RelativeFile> _processor;
 
         public SequentialDirectoryWeaver(IWeaver<RelativeFile> processor, FileFinder finder)
         {
@@ -21,6 +21,8 @@ namespace Narvalo.Narrative.Weaving
 
         public void Weave(DirectoryInfo directory)
         {
+            Require.NotNull(directory, "directory");
+
             var sources = _finder.Find(directory, "*.cs");
 
             foreach (var source in sources) {

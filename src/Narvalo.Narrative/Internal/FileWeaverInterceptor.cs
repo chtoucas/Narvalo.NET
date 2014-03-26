@@ -6,7 +6,7 @@ namespace Narvalo.Narrative.Internal
     using Castle.DynamicProxy;
     using Serilog;
 
-    internal sealed class FileSystemInfoInterceptor : IInterceptor
+    internal sealed class FileWeaverInterceptor : IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {

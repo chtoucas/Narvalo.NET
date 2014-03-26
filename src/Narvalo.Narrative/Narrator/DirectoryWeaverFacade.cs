@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Runtime
+namespace Narvalo.Narrative.Narrator
 {
     using System;
     using System.Collections.Generic;
@@ -10,17 +10,21 @@ namespace Narvalo.Narrative.Runtime
 
     public sealed class DirectoryWeaverFacade
     {
-        readonly IEnumerable<Lazy<IWeaver<DirectoryInfo>, ParallelExecutionMetadata>> _processors;
+        readonly IEnumerable<Lazy<IWeaver<DirectoryInfo>, ParallelExecutionMetadata>> _weavers;
 
         public DirectoryWeaverFacade(
-            IEnumerable<Lazy<IWeaver<DirectoryInfo>, ParallelExecutionMetadata>> processors)
+            IEnumerable<Lazy<IWeaver<DirectoryInfo>, ParallelExecutionMetadata>> weavers)
         {
-            _processors = processors;
+            Require.NotNull(weavers, "weavers");
+
+            _weavers = weavers;
         }
 
         public void Process(DirectoryInfo directory, bool runInParallel)
         {
-            var processor = _processors.Single(e => e.Metadata.RunInParallel == runInParallel);
+            Require.NotNull(directory, "directory");
+
+            var processor = _weavers.Single(e => e.Metadata.RunInParallel == runInParallel);
 
             processor.Value.Weave(directory);
         }

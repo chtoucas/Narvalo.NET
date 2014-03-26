@@ -4,6 +4,7 @@ namespace Narvalo.Narrative.Weaving
 {
     using System.Collections.Generic;
     using System.IO;
+    using Narvalo.Narrative.Templating;
 
     public class WeaverEngine : IWeaverEngine
     {

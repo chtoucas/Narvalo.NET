@@ -6,7 +6,7 @@ namespace Narvalo.Narrative.Internal
     using Narvalo.IO;
     using Serilog;
 
-    internal sealed class RelativeFileInterceptor : IInterceptor
+    internal sealed class RelativeFileWeaverInterceptor : IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {

@@ -21,6 +21,8 @@ namespace Narvalo.Narrative.Weaving
 
         public void Weave(RelativeFile file)
         {
+            Require.NotNull(file, "file");
+
             string content;
 
             using (var reader = new StreamReader(file.File.FullName)) {

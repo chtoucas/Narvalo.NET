@@ -3,25 +3,16 @@
 namespace Narvalo.Narrative
 {
     using System;
-    using System.Diagnostics;
     using Narvalo.Narrative.Configuration;
+    using Narvalo.Narrative.Narrator;
     using Narvalo.Narrative.Properties;
-    using Narvalo.Narrative.Runtime;
-    using NodaTime;
     using Serilog;
 
-    public sealed class Program
+    public static class Program
     {
-        const int SuccesfulExitCode_ = 0;
+        const int SuccessfulExitCode_ = 0;
         const int ErrorExitCode_ = 1;
         const int FatalExitCode_ = 2;
-
-        readonly Settings _settings;
-
-        public Program(Settings settings)
-        {
-            _settings = settings;
-        }
 
         public static int Main(string[] args)
         {
@@ -33,10 +24,8 @@ namespace Narvalo.Narrative
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
 
-            Log.Information(Resources.Starting);
-
             try {
-                new Program(settings).Run();
+                new Runner(settings).Run(@"..\..\..\Narvalo.Common\", settings.RunInParallel);
             }
             catch (NarrativeException ex) {
                 Log.Error(Resources.UnhandledNarrativeException, ex);
@@ -44,23 +33,7 @@ namespace Narvalo.Narrative
                 return ErrorExitCode_;
             }
 
-            Log.Information(Resources.Ending);
-
-            return SuccesfulExitCode_;
-        }
-
-        public void Run()
-        {
-            if (_settings.DryRun) {
-                Log.Warning(Resources.DryRun);
-            }
-
-            var stopWatch = Stopwatch.StartNew();
-
-            new Runner(_settings).Run(@"..\..\..\Narvalo.Common\", _settings.RunInParallel);
-
-            var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
-            Log.Information(Resources.ElapsedTime, elapsedTime);
+            return SuccessfulExitCode_;
         }
 
         static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)

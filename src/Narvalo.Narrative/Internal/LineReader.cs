@@ -8,7 +8,7 @@
 
     // Borrowed from Jon Skeet.
     // Cf. http://csharpindepth.com/articles/chapter6/iteratorblockimplementation.aspx
-    public sealed class LineReader : IEnumerable<string>
+    internal sealed class LineReader : IEnumerable<string>
     {
         /// <summary>
         /// Means of creating a TextReader to read from.

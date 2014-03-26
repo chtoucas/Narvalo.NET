@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative
+namespace Narvalo.Narrative.Templating
 {
     using System;
     using System.CodeDom;
@@ -10,7 +10,7 @@ namespace Narvalo.Narrative
     using System.Web.Razor;
     using Microsoft.CSharp;
 
-    sealed class RazorTemplateCompiler
+    public sealed class RazorTemplateCompiler
     {
         const string Namespace_ = "RazorOutput";
 
