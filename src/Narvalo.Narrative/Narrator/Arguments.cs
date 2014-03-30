@@ -4,9 +4,7 @@ namespace Narvalo.Narrative.Narrator
 {
     using CommandLine;
 
-    // Cf. 
-    // - http://testapi.codeplex.com/
-    // - http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
+    // Cf. http://testapi.codeplex.com/
     public sealed class Arguments
     {
         bool _dryRun = false;

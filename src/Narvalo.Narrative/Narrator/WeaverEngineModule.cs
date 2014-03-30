@@ -4,8 +4,8 @@ namespace Narvalo.Narrative.Narrator
 {
     using Autofac;
     using Narvalo.Narrative.Properties;
-    using Narvalo.Narrative.Templating;
-    using Narvalo.Narrative.Weaving;
+    using Narvalo.Narrative.Templates;
+    using Narvalo.Narrative.Weavers;
 
     public sealed class WeaverEngineModule : Module
     {
@@ -15,9 +15,10 @@ namespace Narvalo.Narrative.Narrator
 
             builder.RegisterType<MarkdownDeepEngine>().As<IMarkdownEngine>();
             builder.Register(
-                _ => new RazorTemplate(Resources.Template, _.Resolve<IMarkdownEngine>())).As<ITemplate>();
+                _ => new Template(Resources.Template, _.Resolve<IMarkdownEngine>()))
+                .As<ITemplate<TemplateModel>>();
 
-            builder.RegisterType<WeaverEngine>().As<IWeaverEngine>();
+            builder.RegisterGeneric(typeof(WeaverEngine<>)).As(typeof(IWeaverEngine<>));
         }
     }
 }

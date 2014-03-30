@@ -1,42 +1,42 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Templating
+namespace Narvalo.Narrative.Templates
 {
     using System;
     using System.Linq;
     using System.Web;
-    using Narvalo.Narrative.Parsing;
+    using Narvalo.Narrative.Parsers;
 
-    public sealed class RazorTemplate : ITemplate
+    public sealed class Template : ITemplate<TemplateModel>
     {
         readonly IMarkdownEngine _markdown;
-        readonly Lazy<Type> _templateType;
+        readonly Lazy<Type> _razorTemplateType;
 
-        public RazorTemplate(string input, IMarkdownEngine markdown)
+        public Template(string input, IMarkdownEngine markdown)
         {
             Require.NotNull(input, "input");
             Require.NotNull(markdown, "markdown");
 
             _markdown = markdown;
 
-            _templateType = new Lazy<Type>(() => new RazorTemplateCompiler(input).Compile());
+            _razorTemplateType = new Lazy<Type>(() => new RazorTemplateCompiler(input).Compile());
         }
 
-        public string Render(TemplateData data)
+        public string Render(TemplateModel model)
         {
-            Require.NotNull(data, "data");
+            Require.NotNull(model, "model");
 
-            var template = Activator.CreateInstance(_templateType.Value) as RazorTemplateBase;
-            if (template == null) {
+            var razorTemplate = Activator.CreateInstance(_razorTemplateType.Value) as RazorTemplateBase;
+            if (razorTemplate == null) {
                 throw new TemplateException("The template does not inherit from RazorTemplateBase.");
             }
 
-            template.Title = data.Title;
-            template.Blocks = data.Blocks.Select(_ => Transform_(_));
+            razorTemplate.Title = model.Title;
+            razorTemplate.Blocks = model.Blocks.Select(_ => Transform_(_));
 
-            template.Execute();
+            razorTemplate.Execute();
 
-            return template.Buffer.ToString();
+            return razorTemplate.Buffer.ToString();
         }
 
         RazorTemplateBlock Transform_(Block block)

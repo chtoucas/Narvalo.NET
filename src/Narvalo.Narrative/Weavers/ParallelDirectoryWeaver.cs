@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Weaving
+namespace Narvalo.Narrative.Weavers
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -20,9 +20,9 @@ namespace Narvalo.Narrative.Weaving
             _finder = finder;
         }
 
-        public void Weave(DirectoryInfo directory)
+        public void Weave(DirectoryInfo source)
         {
-            var sources = _finder.Find(directory, "*.cs");
+            var sources = _finder.Find(source, "*.cs");
 
             Parallel.ForEach(sources, _processor.Weave);
         }

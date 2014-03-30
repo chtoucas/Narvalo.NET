@@ -1,9 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Templating
+namespace Narvalo.Narrative.Parsers
 {
-    public interface ITemplate
+    public enum BlockType
     {
-        string Render(TemplateData data);
+        Code = 0,
+
+        Markdown = 1,
     }
 }

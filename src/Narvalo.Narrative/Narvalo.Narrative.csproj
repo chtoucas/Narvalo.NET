@@ -70,11 +70,13 @@
     <StartupObject>Narvalo.Narrative.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Extras.DynamicProxy2">
-      <HintPath>..\..\packages\Autofac.Extras.DynamicProxy2.3.0.3\lib\net40\Autofac.Extras.DynamicProxy2.dll</HintPath>
+    <Reference Include="Autofac.Extras.DynamicProxy2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.Extras.DynamicProxy2.3.0.4\lib\net40\Autofac.Extras.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
@@ -110,11 +112,11 @@
     </Reference>
     <Reference Include="Serilog, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.29\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.39\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.2.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.2.29\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.2.39\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -157,14 +159,15 @@
     </Compile>
     <Compile Include="Narrator\Settings.cs" />
     <Compile Include="Narrator\SettingsResolver.cs" />
-    <Compile Include="Internal\LineReader.cs" />
     <Compile Include="Internal\RelativeFileWeaverInterceptor.cs" />
     <Compile Include="Internal\RegistrationBuilder%24.cs" />
     <Compile Include="Narrator\FileFinderModule.cs" />
     <Compile Include="Narrator\ParserModule.cs" />
-    <Compile Include="Parsing\IParser.cs" />
-    <Compile Include="Weaving\RelativeFileWeaver.cs" />
-    <Compile Include="Weaving\IWeaver`1.cs" />
+    <Compile Include="Narrator\FileWeaverModule.cs" />
+    <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Templates\ITemplateModel.cs" />
+    <Compile Include="Weavers\RelativeFileWeaver.cs" />
+    <Compile Include="Weavers\IWeaver`1.cs" />
     <Compile Include="Narrator\Application.cs" />
     <Compile Include="Narrator\DirectoryWeaverFacade.cs" />
     <Compile Include="Narrator\ParallelExecutionMetadata.cs" />
@@ -174,22 +177,21 @@
     <Compile Include="IO\IPathProvider.cs" />
     <Compile Include="IO\NoopWriter.cs" />
     <Compile Include="IO\OutputWriter.cs" />
-    <Compile Include="Weaving\ParallelDirectoryWeaver.cs" />
+    <Compile Include="Weavers\ParallelDirectoryWeaver.cs" />
     <Compile Include="IO\PathProvider.cs" />
-    <Compile Include="Weaving\FileWeaver.cs" />
-    <Compile Include="Narrator\WeaverModule.cs" />
-    <Compile Include="Weaving\SequentialDirectoryWeaver.cs" />
-    <Compile Include="Narrator\SerilogConfig.cs" />
-    <Compile Include="Weaving\WeaverEngine.cs" />
-    <Compile Include="Parsing\Block.cs" />
-    <Compile Include="Parsing\BlockType.cs" />
-    <Compile Include="Templating\ITemplate.cs" />
-    <Compile Include="Weaving\IWeaverEngine.cs" />
-    <Compile Include="Parsing\SimpleParser.cs" />
-    <Compile Include="Templating\IMarkdownEngine.cs" />
-    <Compile Include="Templating\RazorTemplateCompiler.cs" />
+    <Compile Include="Weavers\FileWeaver.cs" />
+    <Compile Include="Narrator\DirectoryWeaverModule.cs" />
+    <Compile Include="Weavers\SequentialDirectoryWeaver.cs" />
+    <Compile Include="Weavers\WeaverEngine.cs" />
+    <Compile Include="Parsers\Block.cs" />
+    <Compile Include="Parsers\BlockType.cs" />
+    <Compile Include="Templates\ITemplate`1.cs" />
+    <Compile Include="Weavers\IWeaverEngine`1.cs" />
+    <Compile Include="Parsers\SimpleParser.cs" />
+    <Compile Include="Templates\IMarkdownEngine.cs" />
+    <Compile Include="Templates\RazorTemplateCompiler.cs" />
     <Compile Include="Narrator\Arguments.cs" />
-    <Compile Include="Templating\MarkdownDeepEngine.cs" />
+    <Compile Include="Templates\MarkdownDeepEngine.cs" />
     <Compile Include="NarrativeException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,11 +200,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Templating\RazorTemplate.cs" />
-    <Compile Include="Templating\RazorTemplateBase.cs" />
-    <Compile Include="Templating\RazorTemplateBlock.cs" />
-    <Compile Include="Templating\TemplateException.cs" />
-    <Compile Include="Templating\TemplateData.cs" />
+    <Compile Include="Templates\Template.cs" />
+    <Compile Include="Templates\RazorTemplateBase.cs" />
+    <Compile Include="Templates\RazorTemplateBlock.cs" />
+    <Compile Include="Templates\TemplateException.cs" />
+    <Compile Include="Templates\TemplateModel.cs" />
     <Compile Include="Internal\FileWeaverInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>

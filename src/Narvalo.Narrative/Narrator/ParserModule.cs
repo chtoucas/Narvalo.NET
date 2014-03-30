@@ -3,7 +3,7 @@
 namespace Narvalo.Narrative.Narrator
 {
     using Autofac;
-    using Narvalo.Narrative.Parsing;
+    using Narvalo.Narrative.Parsers;
 
     public sealed class ParserModule : Module
     {

@@ -1,11 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Weaving
+namespace Narvalo.Narrative.Templates
 {
-    using System.IO;
-
-    public interface IWeaverEngine
+    public interface IMarkdownEngine
     {
-        string Weave(TextReader reader);
+        string Transform(string text);
     }
 }

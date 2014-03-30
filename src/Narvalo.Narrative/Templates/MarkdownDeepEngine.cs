@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Templating
+namespace Narvalo.Narrative.Templates
 {
     using System;
 
@@ -12,7 +12,7 @@ namespace Narvalo.Narrative.Templating
         {
             Require.NotNull(text, "text");
 
-            Markdown inner = new Markdown
+            var inner = new Markdown
             {
                 ExtraMode = true,
                 SafeMode = false

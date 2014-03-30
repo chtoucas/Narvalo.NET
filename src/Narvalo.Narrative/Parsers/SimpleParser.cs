@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Parsing
+namespace Narvalo.Narrative.Parsers
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Narvalo.Narrative.Internal;
 
     // Cf.
     // https://github.com/icsharpcode/NRefactory/
@@ -25,9 +25,9 @@ namespace Narvalo.Narrative.Parsing
         {
             Require.NotNull(reader, "reader");
 
-            var lineReader = new LineReader(() => reader);
+            var lines = new TextLineCollection(() => reader);
 
-            return Parse_(lineReader);
+            return Parse_(lines);
         }
 
         IEnumerable<Block> Parse_(IEnumerable<string> lines)
@@ -72,13 +72,32 @@ namespace Narvalo.Narrative.Parsing
             }
         }
 
-        //IEnumerable<string> Read_()
-        //{
-        //    string line;
+        // Borrowed from Jon Skeet.
+        // Cf. http://csharpindepth.com/articles/chapter6/iteratorblockimplementation.aspx
+        sealed class TextLineCollection : IEnumerable<string>
+        {
+            readonly Func<TextReader> _readerThunk;
 
-        //    while ((line = _reader.ReadLine()) != null) {
-        //        yield return line;
-        //    }
-        //}
+            public TextLineCollection(Func<TextReader> readerThunk)
+            {
+                _readerThunk = readerThunk;
+            }
+
+            public IEnumerator<string> GetEnumerator()
+            {
+                using (var reader = _readerThunk.Invoke()) {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null) {
+                        yield return line;
+                    }
+                }
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
     }
 }

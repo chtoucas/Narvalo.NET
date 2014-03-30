@@ -1,18 +1,18 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Narrative.Weaving
+namespace Narvalo.Narrative.Weavers
 {
     using System.Collections.Generic;
     using System.IO;
-    using Narvalo.Narrative.Parsing;
-    using Narvalo.Narrative.Templating;
+    using Narvalo.Narrative.Parsers;
+    using Narvalo.Narrative.Templates;
 
-    public class WeaverEngine : IWeaverEngine
+    public class WeaverEngine<TModel> : IWeaverEngine<TModel> where TModel : ITemplateModel
     {
         readonly IParser _parser;
-        readonly ITemplate _template;
+        readonly ITemplate<TModel> _template;
 
-        public WeaverEngine(IParser parser, ITemplate template)
+        public WeaverEngine(IParser parser, ITemplate<TModel> template)
         {
             Require.NotNull(parser, "parser");
             Require.NotNull(template, "template");
@@ -21,16 +21,13 @@ namespace Narvalo.Narrative.Weaving
             _template = template;
         }
 
-        public string Weave(TextReader reader)
+        public string Weave(TextReader reader, TModel model)
         {
             IEnumerable<Block> blocks = _parser.Parse(reader);
 
-            var data = new TemplateData(blocks)
-            {
-                //Title = file.RelativeName,
-            };
+            model.Blocks = blocks;
 
-            return _template.Render(data);
+            return _template.Render(model);
         }
     }
 }

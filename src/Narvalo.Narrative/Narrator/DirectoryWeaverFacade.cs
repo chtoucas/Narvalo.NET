@@ -6,7 +6,7 @@ namespace Narvalo.Narrative.Narrator
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Narvalo.Narrative.Weaving;
+    using Narvalo.Narrative.Weavers;
 
     public sealed class DirectoryWeaverFacade
     {

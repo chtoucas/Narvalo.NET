@@ -5,9 +5,12 @@ namespace Narvalo.Narrative.Narrator
     using System;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Narvalo.Collections;
     using Narvalo.Fx;
+    using Narvalo.Narrative.Properties;
     using Serilog.Events;
 
     public static class SettingsResolver
@@ -16,15 +19,22 @@ namespace Narvalo.Narrative.Narrator
         {
             var settings = new Settings();
 
-            Amend(settings, GetAppSettings_());
-            Amend(settings, GetArguments_());
+            AmendWithAppSettings_(settings, ParseAppSettings_());
+            AmendWithCmdLineArguments_(settings, ParseCmdLineArguments_());
+            AddDefaultValuesIfNeeded_(settings);
 
             return settings;
         }
 
-        internal static void Amend(Settings settings, NameValueCollection nvc)
+        static void AddDefaultValuesIfNeeded_(Settings settings)
         {
-            DebugCheck.NotNull(settings);
+            if (String.IsNullOrWhiteSpace(settings.OutputDirectory)) {
+                settings.OutputDirectory = GetDefaultOutputDirectory_();
+            }
+        }
+
+        static void AmendWithAppSettings_(Settings settings, NameValueCollection nvc)
+        {
             DebugCheck.NotNull(nvc);
 
             nvc.MayGetSingle("narrative:RunInParallel")
@@ -41,9 +51,8 @@ namespace Narvalo.Narrative.Narrator
                 .OnSome(_ => { settings.OutputDirectory = _; });
         }
 
-        internal static void Amend(Settings settings, Arguments arguments)
+        static void AmendWithCmdLineArguments_(Settings settings, Arguments arguments)
         {
-            DebugCheck.NotNull(settings);
             DebugCheck.NotNull(arguments);
 
             if (arguments.DryRunSet) {
@@ -54,25 +63,32 @@ namespace Narvalo.Narrative.Narrator
                 settings.RunInParallel = arguments.RunInParallel;
             }
 
-            settings.SourcePath = arguments.Path;
+            settings.Path = arguments.Path;
         }
 
-        static Arguments GetArguments_()
+        static string GetDefaultOutputDirectory_()
+        {
+            var execDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            return Path.Combine(execDirectory, "docs");
+        }
+
+        static NameValueCollection ParseAppSettings_()
+        {
+            return Filter_(ConfigurationManager.AppSettings);
+        }
+
+        static Arguments ParseCmdLineArguments_()
         {
             var self = new Arguments();
             var args = Environment.GetCommandLineArgs();
 
             var parser = new CommandLine.Parser();
             if (!parser.ParseArgumentsStrict(args, self)) {
-                throw new NarrativeException("Parsing command line arguments failed.");
+                throw new NarrativeException(Resources.CommandLineException);
             }
 
             return self;
-        }
-
-        static NameValueCollection GetAppSettings_()
-        {
-            return Filter_(ConfigurationManager.AppSettings);
         }
 
         static NameValueCollection Filter_(NameValueCollection settings)

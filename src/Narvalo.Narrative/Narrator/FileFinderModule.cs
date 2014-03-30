@@ -34,6 +34,11 @@ namespace Narvalo.Narrative.Narrator
                 .OnActivating(OnActivatingThunk_);
         }
 
+        static EventHandler<RelativeDirectoryEventArgs> OnDirectoryStartThunk_(IOutputWriter writer)
+        {
+            return (sender, e) => writer.CreateDirectory(e.RelativeDirectory);
+        }
+
         void OnActivatingThunk_(IActivatingEventArgs<ConcurrentFileFinder> handler)
         {
             var writer = handler.Context.Resolve<IOutputWriter>();
@@ -46,11 +51,6 @@ namespace Narvalo.Narrative.Narrator
             var writer = handler.Context.Resolve<IOutputWriter>();
 
             handler.Instance.DirectoryStart += OnDirectoryStartThunk_(writer);
-        }
-
-        EventHandler<RelativeDirectoryEventArgs> OnDirectoryStartThunk_(IOutputWriter writer)
-        {
-            return (sender, e) => writer.CreateDirectory(e.RelativeDirectory);
         }
     }
 }

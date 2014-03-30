@@ -6,7 +6,7 @@ namespace Narvalo.Narrative.Narrator
     using System.IO;
     using Autofac;
     using Narvalo.Narrative.Properties;
-    using Narvalo.Narrative.Weaving;
+    using Narvalo.Narrative.Weavers;
     using NodaTime;
     using Serilog;
 
@@ -31,7 +31,7 @@ namespace Narvalo.Narrative.Narrator
 
             var stopWatch = Stopwatch.StartNew();
 
-            Weave_(_settings.SourcePath);
+            Weave_(_settings.Path);
 
             var elapsedTime = Duration.FromTicks(stopWatch.Elapsed.Ticks);
             Log.Information(Resources.ElapsedTime, elapsedTime);
@@ -78,7 +78,8 @@ namespace Narvalo.Narrative.Narrator
             builder.RegisterModule(new FileFinderModule());
             builder.RegisterModule(new ParserModule());
             builder.RegisterModule(new WeaverEngineModule());
-            builder.RegisterModule(new WeaverModule());
+            builder.RegisterModule(new FileWeaverModule());
+            builder.RegisterModule(new DirectoryWeaverModule());
 
             return builder.Build();
         }

@@ -18,17 +18,27 @@ namespace Narvalo.Narrative.IO
 
         public string GetDirectoryPath(RelativeDirectory directory)
         {
-            return Path.Combine(_outputDirectory, directory.RelativeName);
+            return GetPath_(directory.RelativeName);
         }
 
         public string GetFilePath(RelativeFile file)
         {
-            return Path.ChangeExtension(Path.Combine(_outputDirectory, file.RelativeName), "html");
+            return GetFilePath_(file.RelativeName);
         }
 
         public string GetFilePath(FileInfo file)
         {
-            return Path.ChangeExtension(Path.Combine(_outputDirectory, file.Name), "html");
+            return GetFilePath_(file.Name);
+        }
+
+        string GetFilePath_(string fileName)
+        {
+            return Path.ChangeExtension(GetPath_(fileName), "html");
+        }
+
+        string GetPath_(string path)
+        {
+            return Path.Combine(_outputDirectory, path);
         }
     }
 }
