@@ -8,7 +8,7 @@ namespace Narvalo
         /// Does not work consistently for Flags enums:
         /// http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
         /// </remarks>
-        public static TEnum? Convert<TEnum>(object value) where TEnum : struct
+        public static TEnum? Enum<TEnum>(object value) where TEnum : struct
         {
             DebugCheck.IsEnum(typeof(TEnum));
 
