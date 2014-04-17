@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Narvalo.Web.Extras</id>
+    <id>Narvalo.Mvp</id>
     <version>$version$</version>
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
@@ -9,19 +9,13 @@
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-This package contains the utilities that do not fit well within the Narvalo.Web package.
+This package contains a port of webformsmvp to Windows.
 
 *** Until we reached version 1.0, backward compatibility is not guaranteed ***
-      </description>
+    </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>
-    <tags>ASP.NET</tags>
+    <tags>Maybe, Option, Linq, Monad</tags>
     <language>en-US</language>
-    <dependencies>
-      <dependency id="Autofac.Mvc5" version="3.2" />
-      <dependency id="Microsoft.AspNet.Mvc" version="5.1" />
-      <dependency id="Narvalo.Web" version="0.17" />
-      <dependency id="Serilog" version="1.2" />
-    </dependencies>
   </metadata>
 </package>

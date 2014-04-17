@@ -19,7 +19,7 @@ This package contains the Narvalo.Org Web utilities.
     <language>en-US</language>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="5.1" />
-      <dependency id="Narvalo.Common" version="0.16" />
+      <dependency id="Narvalo.Common" version="0.17" />
     </dependencies>
   </metadata>
 </package>
