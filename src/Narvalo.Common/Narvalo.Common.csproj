@@ -189,6 +189,9 @@
     <Compile Include="Uri%24.cs" />
     <Compile Include="VoidOrError.cs" />
     <Compile Include="VoidOrBreak.cs" />
+    <Compile Include="Xml\XAttribute%24.cs" />
+    <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\XmlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

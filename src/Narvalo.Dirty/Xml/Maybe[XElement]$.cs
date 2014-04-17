@@ -18,11 +18,11 @@ namespace Narvalo.Xml
             return @this.Bind(_ => kun.Invoke(_.Value));
         }
 
-        public static Maybe<T> MapValue<T>(this Maybe<XElement> @this, Func<string, T> selector)
+        public static Maybe<T> SelectValue<T>(this Maybe<XElement> @this, Func<string, T> selector)
         {
             Require.NotNull(selector, "selector");
 
-            return from _ in @this select selector.Invoke(_.Value);
+            return @this.Select(_ => selector.Invoke(_.Value));
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XElement> @this)
