@@ -15,7 +15,7 @@ This package contains a port of webformsmvp to Windows.
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>
-    <tags>Maybe, Option, Linq, Monad</tags>
+    <tags>MVP</tags>
     <language>en-US</language>
   </metadata>
 </package>

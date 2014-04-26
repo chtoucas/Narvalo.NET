@@ -23,6 +23,8 @@ namespace Narvalo.Mvp.Binder
             var ctor = GetConstructor_(presenterType, viewType);
 
             try {
+                // REVIEW: This is problematic as it requires the presenter to have
+                // a constructor with view as a parameter.
                 return (IPresenter)ctor.Invoke(null, new[] { view });
             }
             catch (Exception ex) {

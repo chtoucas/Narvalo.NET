@@ -71,6 +71,7 @@ namespace Narvalo.Mvp.Binder
 
                 yield return new PresenterDiscoveryResult(boundViews, bindings);
 
+                // BUG: Here boundViews might have been enumerated outside this method.
                 foreach (var item in boundViews) {
                     pendingViews.Remove(item);
                 }

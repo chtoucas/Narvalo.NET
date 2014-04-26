@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Binder
 
         readonly IEnumerable<object> _hosts;
 
-        bool _bindingDone = false;
+        bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
             : this(new[] { host }, null, null) { }
@@ -77,7 +77,7 @@ namespace Narvalo.Mvp.Binder
                 }
             }
             finally {
-                _bindingDone = true;
+                _bindingCompleted = true;
             }
         }
 
@@ -87,7 +87,7 @@ namespace Narvalo.Mvp.Binder
 
             _viewsToBind.Add(view);
 
-            if (_bindingDone) {
+            if (_bindingCompleted) {
                 PerformBinding();
             }
         }

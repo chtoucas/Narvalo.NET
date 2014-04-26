@@ -2,16 +2,17 @@
 
 namespace Narvalo.Mvp
 {
-    //using System;
-    //using System.Linq;
+    using System;
+    using System.Linq;
 
-    public class Presenter<TView> : IPresenter<TView> where TView : IView
+    // FIXME: Add TView new() and class constraint
+    public abstract class Presenter<TView> : IPresenter<TView> where TView : IView
     {
         readonly TView _view;
 
-        public Presenter(TView view)
+        protected Presenter(TView view)
         {
-            //InitializeDefaultModel_(view);
+            InitializeDefaultModel(view);
 
             _view = view;
         }
@@ -20,23 +21,22 @@ namespace Narvalo.Mvp
 
         public TView View { get { return _view; } }
 
-        //static void InitializeDefaultModel_(TView view)
-        //{
-        //    var modelType = view.GetType()
-        //        .GetInterfaces()
-        //        .Where(t => t.IsGenericType)
-        //        .Where(t => t.GetGenericTypeDefinition() == typeof(IView<>))
-        //        .Select(t => t.GetGenericArguments().Single())
-        //        .FirstOrDefault();
+        static void InitializeDefaultModel(TView view)
+        {
+            var modelType = (from t in view.GetType().GetInterfaces()
+                             where t.IsGenericType
+                                && t.GetGenericTypeDefinition() == typeof(IView<>)
+                             select t.GetGenericArguments().Single()).FirstOrDefault();
 
-        //    if (modelType == null) { return; }
+            if (modelType == null) return;
 
-        //    var defaultModel = Activator.CreateInstance(modelType);
+            // REVIEW: This requires TModel : class, new()
+            var defaultModel = Activator.CreateInstance(modelType);
 
-        //    typeof(IView<>)
-        //        .MakeGenericType(modelType)
-        //        .GetProperty("Model")
-        //        .SetValue(view, defaultModel, null);
-        //}
+            typeof(IView<>)
+                .MakeGenericType(modelType)
+                .GetProperty("Model")
+                .SetValue(view, defaultModel, null);
+        }
     }
 }
