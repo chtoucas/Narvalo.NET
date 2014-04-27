@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
+    <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
     <Compile Include="Binder\IPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\IPresenterFactory.cs" />
@@ -79,16 +80,14 @@
     <Compile Include="Binder\PresenterBuilder.cs" />
     <Compile Include="Binder\PresenterCreatedEventArgs.cs" />
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
-    <Compile Include="Binder\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\PresenterDiscoveryStrategyBuilder.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
     <Compile Include="IMessageBus.cs" />
     <Compile Include="CompositeView.cs" />
-    <Compile Include="Binder\DefaultCompositeViewTypeFactory.cs" />
+    <Compile Include="Internal\CompositeViewFactory.cs" />
     <Compile Include="ICompositeView.cs" />
-    <Compile Include="Binder\ICompositeViewTypeFactory.cs" />
     <Compile Include="Internal\MessageBus.cs" />
     <Compile Include="Internal\WeakEquality.cs" />
     <Compile Include="Internal\WeakEqualityComparer`1.cs" />

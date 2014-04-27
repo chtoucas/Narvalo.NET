@@ -7,6 +7,7 @@ namespace Narvalo.Mvp
     using System.Globalization;
     using Narvalo;
 
+    // NB: Must stay public for "CompositeViewTypeBuilder" to work.
     public abstract class CompositeView<TView> : ICompositeView where TView : IView
     {
         readonly ICollection<TView> _views = new List<TView>();

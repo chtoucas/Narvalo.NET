@@ -4,7 +4,6 @@ namespace Narvalo.Mvp.Binder
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using Narvalo;
@@ -17,7 +16,6 @@ namespace Narvalo.Mvp.Binder
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
 
-        readonly ICompositeViewTypeFactory _compositeViewTypeFactory;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
 
@@ -26,27 +24,24 @@ namespace Narvalo.Mvp.Binder
         bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
-            : this(new[] { host }, null, null, null) { }
+            : this(new[] { host }, null, null) { }
 
         public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, null, null, null) { }
+            : this(hosts, null, null) { }
 
         internal PresenterBinder(
             object host,
             IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
-            ICompositeViewTypeFactory compositeViewTypeFactory)
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
             : this(
                 new[] { host },
                 presenterFactory,
-                presenterDiscoveryStrategy,
-                compositeViewTypeFactory) { }
+                presenterDiscoveryStrategy) { }
 
         internal PresenterBinder(
             IEnumerable<object> hosts,
             IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
-            ICompositeViewTypeFactory compositeViewTypeFactory)
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
         {
             Require.NotNull(hosts, "hosts");
 
@@ -54,8 +49,6 @@ namespace Narvalo.Mvp.Binder
             _presenterFactory = presenterFactory ?? PresenterBuilder.Current.Factory;
             _presenterDiscoveryStrategy
                 = presenterDiscoveryStrategy ?? PresenterDiscoveryStrategyBuilder.Current.Factory;
-            _compositeViewTypeFactory
-                = compositeViewTypeFactory ?? CompositeViewTypeBuilder.Current.Factory;
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -110,6 +103,32 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
+        static IEnumerable<IView> GetViews_(PresenterBinding binding)
+        {
+            IEnumerable<IView> views;
+
+            switch (binding.BindingMode) {
+                case PresenterBindingMode.Default:
+                    views = binding.Views;
+                    break;
+
+                case PresenterBindingMode.SharedPresenter:
+                    views = new[]
+                    {
+                        CompositeViewFactory.CreateCompositeView(binding)
+                    };
+                    break;
+
+                default:
+                    throw new NotSupportedException(String.Format(
+                        CultureInfo.InvariantCulture,
+                        "Binding mode {0} is not supported by this method.",
+                        binding.BindingMode));
+            }
+
+            return views;
+        }
+
         void OnPresenterCreated_(PresenterCreatedEventArgs args)
         {
             EventHandler<PresenterCreatedEventArgs> localHandler = PresenterCreated;
@@ -117,20 +136,6 @@ namespace Narvalo.Mvp.Binder
             if (localHandler != null) {
                 localHandler(this, args);
             }
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Keeps this until we fix SharedPresenter binding mode.")]
-        IView CreateCompositeView_(Type viewType, IEnumerable<IView> childViews)
-        {
-            var compositeViewType = _compositeViewTypeFactory.CreateCompositeViewType(viewType);
-            var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
-
-            foreach (var item in childViews) {
-                view.Add(item);
-            }
-
-            return view;
         }
 
         IPresenter CreatePresenter_(PresenterBinding binding, IView view)
@@ -163,36 +168,6 @@ namespace Narvalo.Mvp.Binder
             return from result in results
                    from binding in result.Bindings
                    select binding;
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "Keeps this until we fix SharedPresenter binding mode.")]
-        IEnumerable<IView> GetViews_(PresenterBinding binding)
-        {
-            IEnumerable<IView> views;
-
-            switch (binding.BindingMode) {
-                case PresenterBindingMode.Default:
-                    views = binding.Views;
-                    break;
-
-                case PresenterBindingMode.SharedPresenter:
-                    throw new NotImplementedException("SharedPresenter binding mode is currently broken.");
-
-                //views = new[]
-                //{
-                //    CreateCompositeView_(binding.ViewType, binding.Views)
-                //};
-                //break;
-
-                default:
-                    throw new NotSupportedException(String.Format(
-                        CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported by this method.",
-                        binding.BindingMode));
-            }
-
-            return views;
         }
     }
 }

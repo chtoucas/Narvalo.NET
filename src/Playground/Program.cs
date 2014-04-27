@@ -46,7 +46,12 @@ namespace Playground
 
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
-                Log.Fatal(Resources.UnhandledException, (Exception)e.ExceptionObject);
+                try {
+                    Log.Fatal(Resources.UnhandledException, (Exception)e.ExceptionObject);
+                }
+                finally {
+                    Environment.Exit(1);
+                }
             };
         }
     }
