@@ -5,7 +5,6 @@ namespace Narvalo.Mvp
     using System;
     using System.Linq;
 
-    // FIXME: Add TView new() and class constraint
     public abstract class Presenter<TView> : IPresenter<TView> where TView : IView
     {
         readonly TView _view;
@@ -30,7 +29,7 @@ namespace Narvalo.Mvp
 
             if (modelType == null) return;
 
-            // REVIEW: This requires TModel : class, new()
+            // FIXME: This requires TModel : class, new()
             var defaultModel = Activator.CreateInstance(modelType);
 
             typeof(IView<>)

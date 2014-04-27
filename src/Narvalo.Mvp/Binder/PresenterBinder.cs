@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Binder
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using Narvalo;
@@ -12,12 +13,11 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class PresenterBinder
     {
-        readonly ICompositeViewTypeFactory _compositeViewTypeFactory
-            = new CompositeViewTypeFactory();
         readonly IMessageBus _messages = new MessageBus();
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
 
+        readonly ICompositeViewTypeFactory _compositeViewTypeFactory;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
 
@@ -26,24 +26,27 @@ namespace Narvalo.Mvp.Binder
         bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
-            : this(new[] { host }, null, null) { }
+            : this(new[] { host }, null, null, null) { }
 
-        public PresenterBinder(
+        public PresenterBinder(IEnumerable<object> hosts)
+            : this(hosts, null, null, null) { }
+
+        internal PresenterBinder(
             object host,
             IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
+            ICompositeViewTypeFactory compositeViewTypeFactory)
             : this(
                 new[] { host },
                 presenterFactory,
-                presenterDiscoveryStrategy) { }
+                presenterDiscoveryStrategy,
+                compositeViewTypeFactory) { }
 
-        public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, null, null) { }
-
-        public PresenterBinder(
+        internal PresenterBinder(
             IEnumerable<object> hosts,
             IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
+            ICompositeViewTypeFactory compositeViewTypeFactory)
         {
             Require.NotNull(hosts, "hosts");
 
@@ -51,6 +54,8 @@ namespace Narvalo.Mvp.Binder
             _presenterFactory = presenterFactory ?? PresenterBuilder.Current.Factory;
             _presenterDiscoveryStrategy
                 = presenterDiscoveryStrategy ?? PresenterDiscoveryStrategyBuilder.Current.Factory;
+            _compositeViewTypeFactory
+                = compositeViewTypeFactory ?? CompositeViewTypeBuilder.Current.Factory;
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -114,6 +119,8 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Keeps this until we fix SharedPresenter binding mode.")]
         IView CreateCompositeView_(Type viewType, IEnumerable<IView> childViews)
         {
             var compositeViewType = _compositeViewTypeFactory.CreateCompositeViewType(viewType);
@@ -158,6 +165,8 @@ namespace Narvalo.Mvp.Binder
                    select binding;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "Keeps this until we fix SharedPresenter binding mode.")]
         IEnumerable<IView> GetViews_(PresenterBinding binding)
         {
             IEnumerable<IView> views;
@@ -168,11 +177,13 @@ namespace Narvalo.Mvp.Binder
                     break;
 
                 case PresenterBindingMode.SharedPresenter:
-                    views = new[]
-                    {
-                        CreateCompositeView_(binding.ViewType, binding.Views)
-                    };
-                    break;
+                    throw new NotImplementedException("SharedPresenter binding mode is currently broken.");
+
+                //views = new[]
+                //{
+                //    CreateCompositeView_(binding.ViewType, binding.Views)
+                //};
+                //break;
 
                 default:
                     throw new NotSupportedException(String.Format(

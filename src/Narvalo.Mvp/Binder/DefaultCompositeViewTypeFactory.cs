@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp.Binder
 {
     using System;
     using System.Collections;
@@ -12,8 +12,13 @@ namespace Narvalo.Mvp.Internal
     using System.Reflection.Emit;
     using System.Security;
 
-    internal sealed class CompositeViewTypeFactory : ICompositeViewTypeFactory
+    // FIXME: Broken. 
+    public sealed class DefaultCompositeViewTypeFactory : ICompositeViewTypeFactory
     {
+        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        // and to only do very few updates. Also note that, in most cases, the ICompositeViewTypeFactory
+        // instance shall be unique during the lifetime of the application: PresenterBinder uses the 
+        // static property CompositeViewTypeBuilder.Current.Factory.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
 

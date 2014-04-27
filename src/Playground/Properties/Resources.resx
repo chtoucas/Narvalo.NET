@@ -120,13 +120,10 @@
   <data name="Ending" xml:space="preserve">
     <value>&gt;&gt;&gt; FIN DE L'APPLICATION &lt;&lt;&lt;</value>
   </data>
-  <data name="PressAnyKeyToExit" xml:space="preserve">
-    <value>Appuyer sur une touche du clavier pour sortir de l'application.</value>
-  </data>
   <data name="Starting" xml:space="preserve">
     <value>&gt;&gt;&gt; DEMARRAGE DE L'APPLICATION &lt;&lt;&lt;</value>
   </data>
   <data name="UnhandledException" xml:space="preserve">
-    <value>Une exception non gérée est intervenue.</value>
+    <value>Une exception non gérée est intervenue: {Exception}.</value>
   </data>
 </root>

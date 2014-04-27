@@ -1,15 +1,16 @@
-﻿using Autofac;
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 namespace Playground
 {
     using System;
+    using Autofac;
+    using Narvalo.Mvp;
     using Playground.Properties;
     using Serilog;
+    using Serilog.Events;
 
-    public class Program
+    public static class Program
     {
-        Program() { }
-
         [STAThread]
         static void Main(string[] args)
         {
@@ -17,47 +18,36 @@ namespace Playground
 
             Log.Information(Resources.Starting);
 
-            try {
-                new Program().Run();
-            }
-            catch (Exception ex) {
-                LogUnhandledException_(ex);
+            using (var container = CreateContainer_()) {
+                new AutofacPresenterFactory(container).SelfRegister();
+
+                new TestCommand().Execute();
             }
 
             Log.Information(Resources.Ending);
-        }
-
-        public void Run()
-        {
-            using (var container = CreateContainer_()) {
-            }
         }
 
         static IContainer CreateContainer_()
         {
             var builder = new ContainerBuilder();
 
-            return builder.Build();
-        }
+            builder.RegisterPresenters(typeof(Program).Assembly).AsSelf();
 
-        static void OnUnhandledException_(object sender, UnhandledExceptionEventArgs args)
-        {
-            try {
-                LogUnhandledException_((Exception)args.ExceptionObject);
-            }
-            finally {
-                Environment.Exit(1);
-            }
+            return builder.Build();
         }
 
         static void InitializeRuntime_()
         {
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException_;
-        }
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Is(LogEventLevel.Verbose)
+               .WriteTo.Trace()
+               .WriteTo.ColoredConsole()
+               .CreateLogger();
 
-        static void LogUnhandledException_(Exception exception)
-        {
-            Log.Fatal(Resources.UnhandledException, exception);
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                Log.Fatal(Resources.UnhandledException, (Exception)e.ExceptionObject);
+            };
         }
     }
 }

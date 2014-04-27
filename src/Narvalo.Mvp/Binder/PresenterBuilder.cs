@@ -30,7 +30,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(factory, "factory");
 
             if (_factory.IsValueCreated) {
-                throw new InvalidOperationException("FIXME");
+                throw new InvalidOperationException("You can only choose a IPresenterFactory once.");
             }
 
             _factoryThunk = () => factory;

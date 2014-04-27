@@ -11,6 +11,10 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
+        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
+        // instance shall be unique during the lifetime of the application: PresenterBinder uses
+        // the static property CompositeViewTypeBuilder.Current.Factory.
         static readonly ConcurrentDictionary<string, DynamicMethod> Cache_
             = new ConcurrentDictionary<string, DynamicMethod>();
        
@@ -23,7 +27,7 @@ namespace Narvalo.Mvp.Binder
             var ctor = GetConstructor_(presenterType, viewType);
 
             try {
-                // REVIEW: This is problematic as it requires the presenter to have
+                // FIXME: This is problematic as it requires the presenter to have
                 // a constructor with view as a parameter.
                 return (IPresenter)ctor.Invoke(null, new[] { view });
             }

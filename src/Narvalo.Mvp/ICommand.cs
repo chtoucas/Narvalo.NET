@@ -2,8 +2,8 @@
 
 namespace Narvalo.Mvp
 {
-    public interface IPresenter<out TView> : IPresenter where TView : IView
+    public interface ICommand
     {
-        TView View { get; }
+        void Execute();
     }
 }

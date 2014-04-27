@@ -11,6 +11,10 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
+        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        // and to only do very few updates. Also note that, in most cases, the IPresenterDiscoveryStrategy
+        // instance shall be unique during the lifetime of the application: PresenterBinder uses the static
+        // property PresenterDiscoveryStrategyBuilder.Current.Factory.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>>();
 
@@ -71,8 +75,8 @@ namespace Narvalo.Mvp.Binder
 
                 yield return new PresenterDiscoveryResult(boundViews, bindings);
 
-                // BUG: Here boundViews might have been enumerated outside this method.
-                foreach (var item in boundViews) {
+                // FIXME: Why does it fail when boundViews has been modified outside? Partial fix : ToList().
+                foreach (var item in boundViews.ToList()) {
                     pendingViews.Remove(item);
                 }
 

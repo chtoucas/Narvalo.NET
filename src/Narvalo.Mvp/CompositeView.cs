@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using Narvalo;
 
-    internal abstract class CompositeView<TView> : ICompositeView where TView : IView
+    public abstract class CompositeView<TView> : ICompositeView where TView : IView
     {
         readonly ICollection<TView> _views = new List<TView>();
 
