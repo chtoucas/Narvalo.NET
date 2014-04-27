@@ -10,9 +10,49 @@ namespace Narvalo.Mvp.Internal
     using System.Reflection;
     using System.Reflection.Emit;
 
-    internal sealed class CompositeViewTypeBuilder
+    internal sealed class CompositeViewBuilder
     {
-        const string AssemblyName_ = "Narvalo.Mvp.CompositeViewTypes";
+        /*
+         * To support composite views, we dynamically emit a type which
+         * takes multiple views, and exposes them as a single view of
+         * the same interface. It's something like this:
+         * 
+public class TestViewComposite
+: CompositeView<ITestView>, ITestView
+{
+public TestViewModel Model
+{
+    get
+    {
+        return Views.First().Model;
+    }
+    set
+    {
+        foreach(var view in Views)
+            view.Model = value;
+    }
+}
+    
+public event EventHandler Searching
+{
+    add
+    {
+        foreach (var view in Views)
+        {
+            view.Searching += value;
+        }
+    }
+    remove
+    {
+        foreach (var view in Views)
+        {
+            view.Searching -= value;
+        }
+    }
+}
+}
+         * 
+         */
 
         static readonly MethodAttributes MethodAttributes_
             = MethodAttributes.Public
@@ -23,19 +63,10 @@ namespace Narvalo.Mvp.Internal
         readonly TypeBuilder _typeBuilder;
         readonly Type _viewType;
 
-        CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
+        public CompositeViewBuilder(Type viewType, TypeBuilder typeBuilder)
         {
             _viewType = viewType;
             _typeBuilder = typeBuilder;
-        }
-
-        public static CompositeViewTypeBuilder Create(Type viewType)
-        {
-            var module = BuildModule_(AppDomain.CurrentDomain);
-
-            var typeBuilder = BuildTypeBuilder_(module, viewType);
-
-            return new CompositeViewTypeBuilder(viewType, typeBuilder);
         }
 
         public Type Build()
@@ -83,41 +114,6 @@ namespace Narvalo.Mvp.Internal
                 var setter = DefineSetter_(propertyInfo);
                 property.SetSetMethod(setter);
             }
-        }
-
-        static ModuleBuilder BuildModule_(AppDomain appDomain)
-        {
-            var assemblyName = new AssemblyName(AssemblyName_);
-            var attributeBuilders = new CustomAttributeBuilder[]
-            {
-                // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
-                //    new CustomAttributeBuilder(
-                //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
-                //        new Object[0])
-            };
-
-            var assembly = appDomain.DefineDynamicAssembly
-            (
-                assemblyName,
-                AssemblyBuilderAccess.Run,
-                attributeBuilders
-            );
-
-            return assembly.DefineDynamicModule(assemblyName.Name);
-        }
-
-        static TypeBuilder BuildTypeBuilder_(ModuleBuilder module, Type viewType)
-        {
-            // Create a generic type of type "CompositeView<ITestView>".
-            var parentType = typeof(CompositeView<>).MakeGenericType(viewType);
-
-            var interfaces = new[] { viewType };
-
-            return module.DefineType(
-                viewType.FullName + "__@CompositeView",
-                TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
-                parentType,
-                interfaces);
         }
 
         MethodBuilder DefineAddMethod_(EventInfo eventInfo)

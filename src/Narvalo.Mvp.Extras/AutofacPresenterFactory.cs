@@ -50,12 +50,12 @@ namespace Narvalo.Mvp
 
         public void Release(IPresenter presenter)
         {
-            var presenterType = presenter.GetHashCode();
+            var presenterKey = presenter.GetHashCode();
 
-            var lifetimeScope = _lifetimeScopes[presenterType];
+            var lifetimeScope = _lifetimeScopes[presenterKey];
 
             lock (_lock) {
-                _lifetimeScopes.Remove(presenterType);
+                _lifetimeScopes.Remove(presenterKey);
             }
 
             lifetimeScope.Dispose();

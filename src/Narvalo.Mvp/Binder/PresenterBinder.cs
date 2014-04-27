@@ -12,6 +12,9 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class PresenterBinder
     {
+        static readonly ICompositeViewFactory CompositeViewFactory_
+            = new CompositeViewFactory();
+
         readonly IMessageBus _messages = new MessageBus();
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
@@ -115,7 +118,7 @@ namespace Narvalo.Mvp.Binder
                 case PresenterBindingMode.SharedPresenter:
                     views = new[]
                     {
-                        CompositeViewFactory.CreateCompositeView(binding)
+                        CompositeViewFactory_.Create(binding)
                     };
                     break;
 

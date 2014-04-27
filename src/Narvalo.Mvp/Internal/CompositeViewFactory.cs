@@ -10,16 +10,15 @@ namespace Narvalo.Mvp.Internal
     using System.Reflection;
     using Narvalo.Mvp.Binder;
 
-    internal static class CompositeViewFactory
+    internal sealed class CompositeViewFactory : ICompositeViewFactory
     {
         // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
-        // and to only do very few updates. Also note that, in most cases, the ICompositeViewTypeFactory
-        // instance shall be unique during the lifetime of the application: PresenterBinder uses the 
-        // static property CompositeViewTypeBuilder.Current.Factory.
+        // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
+        // instance shall be unique during the lifetime of the application.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
 
-        public static IView CreateCompositeView(PresenterBinding binding)
+        public IView Create(PresenterBinding binding)
         {
             var compositeViewType = GetCompositeViewType_(binding.ViewType);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
@@ -38,51 +37,10 @@ namespace Narvalo.Mvp.Internal
 
         static Type CreateCompositeViewType_(Type viewType)
         {
-            /*
-             * To support composite views, we dynamically emit a type which
-             * takes multiple views, and exposes them as a single view of
-             * the same interface. It's something like this:
-             * 
-public class TestViewComposite
-    : CompositeView<ITestView>, ITestView
-{
-    public TestViewModel Model
-    {
-        get
-        {
-            return Views.First().Model;
-        }
-        set
-        {
-            foreach(var view in Views)
-                view.Model = value;
-        }
-    }
-    
-    public event EventHandler Searching
-    {
-        add
-        {
-            foreach (var view in Views)
-            {
-                view.Searching += value;
-            }
-        }
-        remove
-        {
-            foreach (var view in Views)
-            {
-                view.Searching -= value;
-            }
-        }
-    }
-}
-             * 
-             */
-
             ValidateViewType_(viewType);
 
-            var builder = CompositeViewTypeBuilder.Create(viewType);
+            var typeBuilder = CompositeViewAssembly.DefineType(viewType);
+            var builder = new CompositeViewBuilder(viewType, typeBuilder);
 
             var properties = FindProperties_(viewType);
             foreach (var propertyInfo in properties) {

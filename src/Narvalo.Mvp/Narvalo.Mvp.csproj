@@ -71,7 +71,8 @@
     </Compile>
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
-    <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
+    <Compile Include="Internal\CompositeViewAssembly.cs" />
+    <Compile Include="Internal\CompositeViewBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
     <Compile Include="Binder\IPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\IPresenterFactory.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
     <Compile Include="Binder\PresenterDiscoveryStrategyBuilder.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="Internal\ICompositeViewFactory.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
     <Compile Include="IMessageBus.cs" />

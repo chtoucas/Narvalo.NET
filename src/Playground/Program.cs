@@ -17,12 +17,14 @@ namespace Playground
             InitializeRuntime_();
 
             Log.Information(Resources.Starting);
+            
+            new TestCommand().Execute();
 
-            using (var container = CreateContainer_()) {
-                new AutofacPresenterFactory(container).SelfRegister();
+            //using (var container = CreateContainer_()) {
+            //    new AutofacPresenterFactory(container).SelfRegister();
 
-                new TestCommand().Execute();
-            }
+            //    new TestCommand().Execute();
+            //}
 
             Log.Information(Resources.Ending);
         }

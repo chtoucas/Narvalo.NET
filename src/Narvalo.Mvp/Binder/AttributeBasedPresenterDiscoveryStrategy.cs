@@ -13,8 +13,8 @@ namespace Narvalo.Mvp.Binder
     {
         // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
         // and to only do very few updates. Also note that, in most cases, the IPresenterDiscoveryStrategy
-        // instance shall be unique during the lifetime of the application: PresenterBinder uses the static
-        // property PresenterDiscoveryStrategyBuilder.Current.Factory.
+        // instance shall be unique during the entire lifetime of the application: PresenterBinder 
+        // uses the static property PresenterDiscoveryStrategyBuilder.Current.Factory.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>>();
 
