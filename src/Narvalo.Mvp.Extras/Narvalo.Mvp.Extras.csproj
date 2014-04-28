@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="AutofacPresenterFactory.cs" />
     <Compile Include="ContainerBuilder%24.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Presenter`1.cs" />
     <Compile Include="Presenter`2.cs" />
