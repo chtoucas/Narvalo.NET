@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.Binder
     // accepting the view as a single parameter.
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
         // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
         // instance shall be unique during the entire lifetime of the application: PresenterBinder uses
         // the static property CompositeViewTypeBuilder.Current.Factory.

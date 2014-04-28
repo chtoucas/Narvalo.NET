@@ -11,7 +11,7 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
         // and to only do very few updates. Also note that, in most cases, the IPresenterDiscoveryStrategy
         // instance shall be unique during the entire lifetime of the application: PresenterBinder 
         // uses the static property PresenterDiscoveryStrategyBuilder.Current.Factory.
@@ -75,7 +75,8 @@ namespace Narvalo.Mvp.Binder
 
                 yield return new PresenterDiscoveryResult(boundViews, bindings);
 
-                // FIXME: Why does it fail when boundViews has been modified outside? Partial fix : ToList().
+                // FIXME: Why does it fail when boundViews has been modified outside? 
+                // Temporary fix: call ToList().
                 foreach (var item in boundViews.ToList()) {
                     pendingViews.Remove(item);
                 }

@@ -51,6 +51,10 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Narvalo.Common, Version=0.18.0.1, Culture=neutral, PublicKeyToken=48027043888c7f5e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,8 +75,8 @@
     </Compile>
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
-    <Compile Include="Internal\CompositeViewAssembly.cs" />
-    <Compile Include="Internal\CompositeViewBuilder.cs" />
+    <Compile Include="Internal\CompositeViewModuleBuilder.cs" />
+    <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
     <Compile Include="Binder\IPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\IPresenterFactory.cs" />
@@ -89,7 +93,7 @@
     <Compile Include="IMessageBus.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="Internal\CompositeViewFactory.cs" />
-    <Compile Include="ICompositeView.cs" />
+    <Compile Include="Internal\ICompositeView.cs" />
     <Compile Include="Internal\MessageBus.cs" />
     <Compile Include="Internal\WeakEquality.cs" />
     <Compile Include="Internal\WeakEqualityComparer`1.cs" />
@@ -105,13 +109,8 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="packages.config" />
     <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">

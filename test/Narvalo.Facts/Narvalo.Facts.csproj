@@ -138,7 +138,6 @@
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
-    <Compile Include="Web\Html\HtmlHelperFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
@@ -159,10 +158,6 @@
     <ProjectReference Include="..\..\src\Narvalo.Incubator\Narvalo.Incubator.csproj">
       <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
       <Name>Narvalo.Incubator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
-      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
-      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

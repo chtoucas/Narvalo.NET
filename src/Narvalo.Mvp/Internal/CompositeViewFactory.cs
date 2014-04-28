@@ -8,51 +8,74 @@ namespace Narvalo.Mvp.Internal
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using Narvalo.Mvp.Binder;
+    using System.Reflection.Emit;
+    using Narvalo;
 
     internal sealed class CompositeViewFactory : ICompositeViewFactory
     {
-        // REVIEW: We use a concurrent dictionary as we expect to deal mostly with read operations
+        const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
+
+        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
         // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
-        // instance shall be unique during the lifetime of the application.
+        // instance shall be unique during the entire lifetime of the application.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
 
-        public IView Create(PresenterBinding binding)
+        static readonly CompositeViewModuleBuilder ModuleBuilder_ 
+            = new CompositeViewModuleBuilder(CreateModuleBuilder_());
+
+        public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
-            var compositeViewType = GetCompositeViewType_(binding.ViewType);
+            DebugCheck.NotNull(viewType);
+            DebugCheck.NotNull(views);
+
+            var compositeViewType = GetCompositeViewType_(viewType);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
 
-            foreach (var item in binding.Views) {
+            foreach (var item in views) {
                 view.Add(item);
             }
 
             return view;
         }
 
-        static Type GetCompositeViewType_(Type viewType)
-        {
-            return Cache_.GetOrAdd(viewType.TypeHandle, _ => CreateCompositeViewType_(viewType));
-        }
-
         static Type CreateCompositeViewType_(Type viewType)
         {
             ValidateViewType_(viewType);
 
-            var typeBuilder = CompositeViewAssembly.DefineType(viewType);
-            var builder = new CompositeViewBuilder(viewType, typeBuilder);
+            var typeBuilder = new CompositeViewTypeBuilder(viewType, ModuleBuilder_.DefineType(viewType));
 
             var properties = FindProperties_(viewType);
             foreach (var propertyInfo in properties) {
-                builder.AddProperty(propertyInfo);
+                typeBuilder.AddProperty(propertyInfo);
             }
 
             var events = FindEvents_(viewType);
             foreach (var eventInfo in events) {
-                builder.AddEvent(eventInfo);
+                typeBuilder.AddEvent(eventInfo);
             }
 
-            return builder.Build();
+            return typeBuilder.Build();
+        }
+
+        static ModuleBuilder CreateModuleBuilder_()
+        {
+            var assemblyName = new AssemblyName(AssemblyName_);
+            // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
+            //var attributeBuilders = new CustomAttributeBuilder[] {
+            //    new CustomAttributeBuilder(
+            //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
+            //        new Object[0])
+            //};
+
+            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly
+            (
+                assemblyName,
+                AssemblyBuilderAccess.Run
+                //, attributeBuilders
+            );
+
+            return assembly.DefineDynamicModule(assemblyName.Name);
         }
 
         static IEnumerable<EventInfo> FindEvents_(Type viewType)
@@ -82,6 +105,11 @@ namespace Narvalo.Mvp.Internal
                         && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null)
                 )
                 .Select(p => p.PropertyInfo);
+        }
+
+        static Type GetCompositeViewType_(Type viewType)
+        {
+            return Cache_.GetOrAdd(viewType.TypeHandle, _ => CreateCompositeViewType_(viewType));
         }
 
         static void ValidateViewType_(Type viewType)

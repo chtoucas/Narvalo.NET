@@ -118,7 +118,7 @@ namespace Narvalo.Mvp.Binder
                 case PresenterBindingMode.SharedPresenter:
                     views = new[]
                     {
-                        CompositeViewFactory_.Create(binding)
+                        CompositeViewFactory_.Create(binding.ViewType, binding.Views)
                     };
                     break;
 

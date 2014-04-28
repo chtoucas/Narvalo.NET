@@ -2,15 +2,15 @@
 
 namespace Narvalo.Mvp.CommandLine
 {
-    public abstract class Presenter<TView, TModel> : IPresenter<TView>
-        where TView : IView<TModel>
-        where TModel : class, new()
+    public abstract class Presenter<TView, TViewModel> : IPresenter<TView>
+        where TView : IView<TViewModel>
+        where TViewModel : class, new()
     {
         readonly TView _view;
 
         protected Presenter(TView view)
         {
-            view.Model = new TModel();
+            view.Model = new TViewModel();
 
             _view = view;
         }

@@ -10,46 +10,41 @@ namespace Narvalo.Mvp.Internal
     using System.Reflection;
     using System.Reflection.Emit;
 
-    internal sealed class CompositeViewBuilder
+    internal sealed class CompositeViewTypeBuilder
     {
         /*
          * To support composite views, we dynamically emit a type which
          * takes multiple views, and exposes them as a single view of
          * the same interface. It's something like this:
          * 
-public class TestViewComposite
-: CompositeView<ITestView>, ITestView
+public class TestViewComposite : CompositeView<ITestView>, ITestView
 {
-public TestViewModel Model
-{
-    get
+    public TestViewModel Model
     {
-        return Views.First().Model;
+        get { return Views.First().Model; }
+        set
+        {
+            foreach(var view in Views) {
+                view.Model = value;
+            }
+        }
     }
-    set
-    {
-        foreach(var view in Views)
-            view.Model = value;
-    }
-}
     
-public event EventHandler Searching
-{
-    add
+    public event EventHandler Searching
     {
-        foreach (var view in Views)
+        add
         {
-            view.Searching += value;
+            foreach (var view in Views) {
+                view.Searching += value;
+            }
+        }
+        remove
+        {
+            foreach (var view in Views) {
+                view.Searching -= value;
+            }
         }
     }
-    remove
-    {
-        foreach (var view in Views)
-        {
-            view.Searching -= value;
-        }
-    }
-}
 }
          * 
          */
@@ -63,8 +58,11 @@ public event EventHandler Searching
         readonly TypeBuilder _typeBuilder;
         readonly Type _viewType;
 
-        public CompositeViewBuilder(Type viewType, TypeBuilder typeBuilder)
+        public CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
         {
+            DebugCheck.NotNull(viewType);
+            DebugCheck.NotNull(typeBuilder);
+
             _viewType = viewType;
             _typeBuilder = typeBuilder;
         }
@@ -76,6 +74,8 @@ public event EventHandler Searching
 
         public void AddEvent(EventInfo eventInfo)
         {
+            DebugCheck.NotNull(eventInfo);
+
             if (eventInfo.EventHandlerType == null) {
                 throw new ArgumentException(string.Format(
                     CultureInfo.InvariantCulture,
@@ -99,6 +99,8 @@ public event EventHandler Searching
 
         public void AddProperty(PropertyInfo propertyInfo)
         {
+            DebugCheck.NotNull(propertyInfo);
+
             var property = _typeBuilder.DefineProperty(
                 propertyInfo.Name,
                 propertyInfo.Attributes,

@@ -7,17 +7,16 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using Autofac;
-    using Autofac.Core;
     using Narvalo.Mvp.Binder;
 
 #if TEST
 
     public sealed class AutofacPresenterFactory : IPresenterFactory
     {
+        static readonly Object Lock_ = new Object();
+
         readonly IDictionary<int, ILifetimeScope> _lifetimeScopes
            = new Dictionary<int, ILifetimeScope>();
-
-        readonly object _lock = new Object();
 
         readonly IContainer _container;
 
@@ -41,7 +40,7 @@ namespace Narvalo.Mvp
                 presenterType,
                 new LooselyTypedParameter(viewType, view));
 
-            lock (_lock) {
+            lock (Lock_) {
                 _lifetimeScopes[presenter.GetHashCode()] = innerScope;
             }
 
@@ -54,20 +53,11 @@ namespace Narvalo.Mvp
 
             var lifetimeScope = _lifetimeScopes[presenterKey];
 
-            lock (_lock) {
+            lock (Lock_) {
                 _lifetimeScopes.Remove(presenterKey);
             }
 
             lifetimeScope.Dispose();
-        }
-
-        class LooselyTypedParameter : ConstantParameter
-        {
-            public LooselyTypedParameter(Type type, object value)
-                : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
-            {
-                Require.NotNull(type, "type");
-            }
         }
     }
 
@@ -98,9 +88,7 @@ namespace Narvalo.Mvp
         {
             var lifetimeScope = _container.BeginLifetimeScope(builder =>
             {
-                // We dynamically register the presenter type.
-                //builder.RegisterType(presenterType).AsSelf();
-                // REVIEW: I don't think this is necessary.
+                builder.RegisterType(presenterType).AsSelf();
                 builder.RegisterInstance((object)view).As(viewType);
             });
 
@@ -123,18 +111,7 @@ namespace Narvalo.Mvp
                 _presentersToLifetimeScopes.Remove(presenter);
             }
 
-            // Disposing the container will dispose any of the components
-            // created within its lifetime scope.
             lifetimeScope.Dispose();
-        }
-
-        class LooselyTypedParameter : ConstantParameter
-        {
-            public LooselyTypedParameter(Type type, object value)
-                : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
-            {
-                Require.NotNull(type, "type");
-            }
         }
     }
 

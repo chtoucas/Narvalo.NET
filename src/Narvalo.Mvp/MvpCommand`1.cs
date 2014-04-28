@@ -4,11 +4,11 @@ namespace Narvalo.Mvp
 {
     using System;
 
-    public abstract class MvpCommand<TModel> : MvpCommand, IView<TModel>
+    public abstract class MvpCommand<TViewModel> : MvpCommand, IView<TViewModel>
     {
-        TModel _model;
+        TViewModel _model;
 
-        public TModel Model
+        public TViewModel Model
         {
             get
             {

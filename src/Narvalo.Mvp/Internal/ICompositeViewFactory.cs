@@ -2,10 +2,11 @@
 
 namespace Narvalo.Mvp.Internal
 {
-    using Narvalo.Mvp.Binder;
+    using System;
+    using System.Collections.Generic;
 
     internal interface ICompositeViewFactory
     {
-        IView Create(PresenterBinding binding);
+        ICompositeView Create(Type viewType, IEnumerable<IView> views);
     }
 }
