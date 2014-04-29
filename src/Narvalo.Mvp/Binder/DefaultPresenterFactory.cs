@@ -3,11 +3,11 @@
 namespace Narvalo.Mvp.Binder
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Globalization;
     using System.Reflection;
     using System.Reflection.Emit;
     using Narvalo;
+    using Narvalo.Mvp.Internal;
 
     /// <remarks>
     /// WARNING: This class can not be used for presenters that do not have a constructor
@@ -15,20 +15,23 @@ namespace Narvalo.Mvp.Binder
     /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
-        // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
-        // instance shall be unique during the entire lifetime of the application: PresenterBinder uses
-        // the static property CompositeViewTypeBuilder.Current.Factory.
-        static readonly ConcurrentDictionary<string, DynamicMethod> Cache_
-            = new ConcurrentDictionary<string, DynamicMethod>();
-       
+        readonly InMemoryCache<Type, Type, string, DynamicMethod> _contructorCache
+           = new InMemoryCache<Type, Type, string, DynamicMethod>((t1, t2) => String.Join("__:__", new[]
+            {
+                t1.AssemblyQualifiedName,
+                t2.AssemblyQualifiedName
+            }));
+
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
             Require.NotNull(presenterType, "presenterType");
             Require.NotNull(viewType, "viewType");
             Require.NotNull(view, "view");
 
-            var ctor = GetConstructor_(presenterType, viewType);
+            var ctor = _contructorCache.GetOrAdd(
+                presenterType,
+                viewType,
+                CreateConstructor_);
 
             try {
                 return (IPresenter)ctor.Invoke(null, new[] { view });
@@ -58,18 +61,6 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
-        static DynamicMethod GetConstructor_(Type presenterType, Type viewType)
-        {
-            // We need to scope the cache against both the presenter type and the view type.
-            var cacheKey = String.Join("__:__", new[]
-            {
-                presenterType.AssemblyQualifiedName,
-                viewType.AssemblyQualifiedName
-            });
-
-            return Cache_.GetOrAdd(cacheKey, _ => CreateConstructor_(presenterType, viewType));
-        }
-
         static DynamicMethod CreateConstructor_(Type presenterType, Type viewType)
         {
             if (presenterType.IsNotPublic) {
@@ -96,10 +87,10 @@ namespace Narvalo.Mvp.Binder
             // performance improvement over basic reflection in applications
             // that create lots of presenters, which is common.
             var dynamicMethod = new DynamicMethod(
-                "DynamicConstructor", 
-                presenterType, 
-                new[] { viewType }, 
-                presenterType.Module, 
+                "DynamicConstructor",
+                presenterType,
+                new[] { viewType },
+                presenterType.Module,
                 false /* skipVisibility */);
 
             var ilGenerator = dynamicMethod.GetILGenerator();

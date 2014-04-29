@@ -9,18 +9,12 @@ Changes from the original "Web Forms Mvp"
 - removed all code related to System.Web: HttpContext, TraceContext...
 - an API easier to follow (to me at least) by preferring object methods to static methods
 - no more constraints on the ViewModel; namely the class and new() constraints
-- use ConcurrentDictionary instead of Dictionary for type caching (maybe I should rollback on this),
-  this affects:
-    - AttributeBasedPresenterDiscoveryStrategy
-    - CompositeViewFactory
-    - ConventionBasedPresenterDiscoveryStrategy
-    - DefaultPresenterFactory
-    - ViewInterfacesCache
+- use ConcurrentDictionary instead of Dictionary for type caching (maybe I should rollback on this)
+  We expect to mostly deal with read operations and to only do very few updates. 
 - configuration of IPresenterDiscoveryStrategy is done via PresenterDiscoveryStrategyBuilder.SetFactory()
 - configuration of IPresenterFactory is done via PresenterBuilder.SetFactory()
 
-Dropped functionalities
------------------------
+### Dropped functionalities
 
 - AsyncTaskManager
 - Tracing

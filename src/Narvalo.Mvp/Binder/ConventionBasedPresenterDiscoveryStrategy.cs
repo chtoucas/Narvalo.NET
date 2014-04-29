@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Binder
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -27,8 +26,11 @@ namespace Narvalo.Mvp.Binder
             "{namespace}.{presenter}",
         };
 
-        static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
-            = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
+        readonly InMemoryCache<Type> _presenterTypeCache
+           = new InMemoryCache<Type>();
+
+        readonly InMemoryCache<IEnumerable<Type>> _viewInterfacesCache
+           = new InMemoryCache<IEnumerable<Type>>();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
             IEnumerable<object> hosts,
@@ -38,60 +40,6 @@ namespace Narvalo.Mvp.Binder
 
             // REVIEW: hosts is ignored.
             return views.Select(FindBinding_).ToArray();
-        }
-
-        static PresenterDiscoveryResult FindBinding_(IView view)
-        {
-            var viewType = view.GetType();
-
-            var presenterType = GetPresenterType_(viewType);
-
-            return new PresenterDiscoveryResult(
-                new[] { view },
-                presenterType == null
-                    ? new PresenterBinding[0]
-                    : new[] { 
-                        new PresenterBinding(
-                            presenterType,
-                            viewType, 
-                            PresenterBindingMode.Default, 
-                            new[] { view }) }
-            );
-        }
-
-        static Type GetPresenterType_(Type viewType)
-        {
-            return Cache_.GetOrAdd(viewType.TypeHandle, _ => CreatePresenterType_(viewType));
-        }
-
-        static Type CreatePresenterType_(Type viewType)
-        {
-            var candidateNames = GetCandidateFullNames_(viewType);
-
-            foreach (var name in candidateNames.Distinct()) {
-                var presenterType = viewType.Assembly.GetType(
-                    name,
-                    false /* throwOnError */,
-                    true /* ignoreCase */);
-
-                if (presenterType != null && typeof(IPresenter).IsAssignableFrom(presenterType)) {
-                    return presenterType;
-                }
-            }
-
-            return null;
-        }
-
-        static IEnumerable<string> GetCandidateFullNames_(Type viewType)
-        {
-            var candidateNames = new List<string> { 
-                GetCandidateNameFromViewType_(viewType) 
-            };
-
-            // Get presenter type names from implemented IView interfaces
-            candidateNames.AddRange(GetCandidateNamesFromViewInterfaces_(viewType));
-
-            return GenerateCandidateFullNames_(viewType, candidateNames);
         }
 
         static string GetCandidateNameFromViewType_(Type viewType)
@@ -106,14 +54,6 @@ namespace Narvalo.Mvp.Binder
                    select TrimEnd_(viewType.Name, suffix)).FirstOrDefault();
 
             return (String.IsNullOrEmpty(presenterTypeName) ? viewType.Name : presenterTypeName) + "Presenter";
-        }
-
-        static IEnumerable<string> GetCandidateNamesFromViewInterfaces_(Type viewType)
-        {
-            // Trim the "I" and "View" from the start & end respectively of the interface names.
-            return from i in ViewInterfacesCache.GetViewInterfaces(viewType)
-                   where i.Name != "IView" && i.Name != "IView`1"
-                   select TrimEnd_(i.Name.TrimStart('I'), "View");
         }
 
         static IEnumerable<string> GenerateCandidateFullNames_(
@@ -145,6 +85,67 @@ namespace Narvalo.Mvp.Binder
             var length = source.LastIndexOf(suffix, StringComparison.OrdinalIgnoreCase);
 
             return length > 0 ? source.Substring(0, length) : source;
+        }
+
+        PresenterDiscoveryResult FindBinding_(IView view)
+        {
+            var viewType = view.GetType();
+
+            var presenterType = _presenterTypeCache.GetOrAdd(viewType, CreatePresenterType_);
+
+            return new PresenterDiscoveryResult(
+                new[] { view },
+                presenterType == null
+                    ? new PresenterBinding[0]
+                    : new[] { 
+                        new PresenterBinding(
+                            presenterType,
+                            viewType, 
+                            PresenterBindingMode.Default, 
+                            new[] { view }) }
+            );
+        }
+
+        Type CreatePresenterType_(Type viewType)
+        {
+            var candidateNames = GetCandidateFullNames_(viewType);
+
+            foreach (var name in candidateNames.Distinct()) {
+                var presenterType = viewType.Assembly.GetType(
+                    name,
+                    false /* throwOnError */,
+                    true /* ignoreCase */);
+
+                if (presenterType != null && typeof(IPresenter).IsAssignableFrom(presenterType)) {
+                    return presenterType;
+                }
+            }
+
+            return null;
+        }
+
+        IEnumerable<string> GetCandidateFullNames_(Type viewType)
+        {
+            var candidateNames = new List<string> { 
+                GetCandidateNameFromViewType_(viewType) 
+            };
+
+            // Get presenter type names from implemented IView interfaces
+            candidateNames.AddRange(GetCandidateNamesFromViewInterfaces_(viewType));
+
+            return GenerateCandidateFullNames_(viewType, candidateNames);
+        }
+
+        IEnumerable<string> GetCandidateNamesFromViewInterfaces_(Type viewType)
+        {
+            var viewInterfaces = _viewInterfacesCache.GetOrAdd(
+                viewType,
+                _ => _.GetInterfaces().Where(typeof(IView).IsAssignableFrom).ToArray());
+
+            // Trim the "I" and "View" from the start & end respectively of the interface names.
+            return from i in viewInterfaces
+                   where i.Name != "IView" && i.Name != "IView`1"
+                   select TrimEnd_(i.Name.TrimStart('I'), "View");
         }
     }
 }

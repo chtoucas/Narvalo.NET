@@ -3,20 +3,16 @@
 namespace Narvalo.Mvp.Binder
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using Narvalo;
+    using Narvalo.Mvp.Internal;
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
-        // and to only do very few updates. Also note that, in most cases, the IPresenterDiscoveryStrategy
-        // instance shall be unique during the entire lifetime of the application: PresenterBinder 
-        // uses the static property PresenterDiscoveryStrategyBuilder.Current.Factory.
-        static readonly ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>> Cache_
-            = new ConcurrentDictionary<RuntimeTypeHandle, IEnumerable<PresenterBindingAttribute>>();
+        readonly InMemoryCache<IEnumerable<PresenterBindingAttribute>> _attributesCache
+           = new InMemoryCache<IEnumerable<PresenterBindingAttribute>>();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
             IEnumerable<object> hosts,
@@ -88,6 +84,11 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
+        IEnumerable<PresenterBindingAttribute> GetAttributes_(Type sourceType)
+        {
+            return _attributesCache.GetOrAdd(sourceType, CreateAttributes_);
+        }
+
         static IEnumerable<IView> GetViewsToBind_(
             IEnumerable<IView> pendingViews,
             IView view,
@@ -108,16 +109,11 @@ namespace Narvalo.Mvp.Binder
                 default:
                     throw new NotSupportedException(String.Format(
                         CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported", 
+                        "Binding mode {0} is not supported",
                         attribute.BindingMode));
             }
 
             return viewsToBind;
-        }
-
-        static IEnumerable<PresenterBindingAttribute> GetAttributes_(Type sourceType)
-        {
-            return Cache_.GetOrAdd(sourceType.TypeHandle, _ => CreateAttributes_(sourceType));
         }
 
         static IEnumerable<PresenterBindingAttribute> CreateAttributes_(Type sourceType)

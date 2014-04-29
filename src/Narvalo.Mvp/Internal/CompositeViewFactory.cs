@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Internal
 {
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
@@ -12,21 +11,17 @@ namespace Narvalo.Mvp.Internal
 
     internal sealed class CompositeViewFactory : ICompositeViewFactory
     {
-        // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
-        // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
-        // instance shall be unique during the entire lifetime of the application.
-        static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
-            = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
+        readonly CompositeViewModuleBuilder _moduleBuilder
+           = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
-        static readonly CompositeViewModuleBuilder ModuleBuilder_
-            = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
+        readonly InMemoryCache<Type> _typeCache = new InMemoryCache<Type>();
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
             DebugCheck.NotNull(viewType);
             DebugCheck.NotNull(views);
 
-            var compositeViewType = GetCompositeViewType_(viewType);
+            var compositeViewType = _typeCache.GetOrAdd(viewType, CreateCompositeViewType_);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
 
             foreach (var item in views) {
@@ -36,11 +31,11 @@ namespace Narvalo.Mvp.Internal
             return view;
         }
 
-        static Type CreateCompositeViewType_(Type viewType)
+        Type CreateCompositeViewType_(Type viewType)
         {
             ValidateViewType_(viewType);
 
-            var typeBuilder = new CompositeViewTypeBuilder(viewType, ModuleBuilder_.DefineType(viewType));
+            var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
 
             var properties = FindProperties_(viewType);
             foreach (var propertyInfo in properties) {
@@ -82,11 +77,6 @@ namespace Narvalo.Mvp.Internal
                         && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null)
                 )
                 .Select(p => p.PropertyInfo);
-        }
-
-        static Type GetCompositeViewType_(Type viewType)
-        {
-            return Cache_.GetOrAdd(viewType.TypeHandle, _ => CreateCompositeViewType_(viewType));
         }
 
         static void ValidateViewType_(Type viewType)

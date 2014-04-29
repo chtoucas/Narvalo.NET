@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Binder
 
         Func<IPresenterDiscoveryStrategy> _factoryThunk;
 
-        PresenterDiscoveryStrategyBuilder() : this(() => new AttributeBasedPresenterDiscoveryStrategy()) { }
+        PresenterDiscoveryStrategyBuilder() : this(() => new ConventionBasedPresenterDiscoveryStrategy()) { }
 
         PresenterDiscoveryStrategyBuilder(Func<IPresenterDiscoveryStrategy> factoryThunk)
         {
@@ -29,6 +29,10 @@ namespace Narvalo.Mvp.Binder
         public void SetFactory(IPresenterDiscoveryStrategy factory)
         {
             Require.NotNull(factory, "factory");
+
+            if (_factory.IsValueCreated) {
+                throw new InvalidOperationException("You can only set a IPresenterDiscoveryStrategy once.");
+            }
 
             _factoryThunk = () => factory;
         }
