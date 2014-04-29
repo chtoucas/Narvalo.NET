@@ -10,7 +10,7 @@ namespace Narvalo.Mvp
         public LooselyTypedParameter(Type type, object value)
             : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
         {
-            Require.NotNull(type, "type");
+            DebugCheck.NotNull(type);
         }
     }
 }

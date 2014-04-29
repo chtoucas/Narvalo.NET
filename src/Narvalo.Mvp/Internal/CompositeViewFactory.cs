@@ -8,21 +8,18 @@ namespace Narvalo.Mvp.Internal
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using System.Reflection.Emit;
     using Narvalo;
 
     internal sealed class CompositeViewFactory : ICompositeViewFactory
     {
-        const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
-
         // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations
         // and to only do very few updates. Also note that, in most cases, the IPresenterFactory 
         // instance shall be unique during the entire lifetime of the application.
         static readonly ConcurrentDictionary<RuntimeTypeHandle, Type> Cache_
             = new ConcurrentDictionary<RuntimeTypeHandle, Type>();
 
-        static readonly CompositeViewModuleBuilder ModuleBuilder_ 
-            = new CompositeViewModuleBuilder(CreateModuleBuilder_());
+        static readonly CompositeViewModuleBuilder ModuleBuilder_
+            = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
@@ -56,26 +53,6 @@ namespace Narvalo.Mvp.Internal
             }
 
             return typeBuilder.Build();
-        }
-
-        static ModuleBuilder CreateModuleBuilder_()
-        {
-            var assemblyName = new AssemblyName(AssemblyName_);
-            // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
-            //var attributeBuilders = new CustomAttributeBuilder[] {
-            //    new CustomAttributeBuilder(
-            //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
-            //        new Object[0])
-            //};
-
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly
-            (
-                assemblyName,
-                AssemblyBuilderAccess.Run
-                //, attributeBuilders
-            );
-
-            return assembly.DefineDynamicModule(assemblyName.Name);
         }
 
         static IEnumerable<EventInfo> FindEvents_(Type viewType)

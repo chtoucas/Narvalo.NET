@@ -15,10 +15,10 @@ namespace Narvalo.Mvp
             _presenterBinder = new PresenterBinder(this);
             _presenterBinder.PerformBinding();
         }
-        
+
         public event EventHandler Completed;
         public event EventHandler Load;
-        
+
         public void Execute()
         {
             OnLoad();
@@ -31,7 +31,7 @@ namespace Narvalo.Mvp
             Dispose(true /* disposing */);
             GC.SuppressFinalize(this);
         }
-        
+
         protected virtual void ExecuteCore() { }
 
         protected virtual void Dispose(bool disposing)

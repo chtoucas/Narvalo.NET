@@ -8,13 +8,17 @@ namespace Narvalo.Mvp.Internal
 
     internal sealed class CompositeViewModuleBuilder
     {
+        const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
+
+        readonly string _assemblyName;
         readonly ModuleBuilder _moduleBuilder;
 
-        public CompositeViewModuleBuilder(ModuleBuilder moduleBuilder)
+        public CompositeViewModuleBuilder(string assemblyName)
         {
-            DebugCheck.NotNull(moduleBuilder);
+            DebugCheck.NotNullOrEmpty(assemblyName);
 
-            _moduleBuilder = moduleBuilder;
+            _assemblyName = assemblyName;
+            _moduleBuilder = CreateModuleBuilder_();
         }
 
         public TypeBuilder DefineType(Type viewType)
@@ -31,6 +35,26 @@ namespace Narvalo.Mvp.Internal
                 TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
                 parentType,
                 interfaces);
+        }
+
+        ModuleBuilder CreateModuleBuilder_()
+        {
+            var assemblyName = new AssemblyName(_assemblyName);
+            // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
+            //var attributeBuilders = new CustomAttributeBuilder[] {
+            //    new CustomAttributeBuilder(
+            //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
+            //        new Object[0])
+            //};
+
+            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly
+            (
+                assemblyName,
+                AssemblyBuilderAccess.Run
+                //, attributeBuilders
+            );
+
+            return assembly.DefineDynamicModule(assemblyName.Name);
         }
     }
 }

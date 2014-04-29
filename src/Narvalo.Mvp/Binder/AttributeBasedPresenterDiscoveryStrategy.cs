@@ -75,7 +75,7 @@ namespace Narvalo.Mvp.Binder
 
                 yield return new PresenterDiscoveryResult(boundViews, bindings);
 
-                // FIXME: Why does it fail when boundViews has been modified outside? 
+                // FIXME: It fail when boundViews has been modified outside? Where does it occur? 
                 // Temporary fix: call ToList().
                 foreach (var item in boundViews.ToList()) {
                     pendingViews.Remove(item);

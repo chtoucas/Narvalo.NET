@@ -54,8 +54,8 @@ namespace Narvalo.Mvp.Binder
         }
 
         static PresenterDiscoveryResult CreateResult_(
-            IGrouping<IEnumerable<IView>, PresenterDiscoveryResult> results
-           )
+            IGrouping<IEnumerable<IView>, 
+            PresenterDiscoveryResult> results)
         {
             return new PresenterDiscoveryResult(
                 results.Key,

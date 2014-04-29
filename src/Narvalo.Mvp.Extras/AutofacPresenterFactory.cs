@@ -34,11 +34,16 @@ namespace Narvalo.Mvp
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
+            // REVIEW: I would prefer to register the view as a dependency and then resolve
+            // the presenter.
             var innerScope = _container.BeginLifetimeScope();
 
             var presenter = (IPresenter)innerScope.Resolve(
                 presenterType,
                 new LooselyTypedParameter(viewType, view));
+
+            // TODO: Inject IMessageBus.
+            //presenter.Messages = innerScope.Resolve<IMessageBus>();
 
             lock (Lock_) {
                 _lifetimeScopes[presenter.GetHashCode()] = innerScope;

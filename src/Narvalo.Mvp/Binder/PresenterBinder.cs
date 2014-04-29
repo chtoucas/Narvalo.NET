@@ -16,6 +16,7 @@ namespace Narvalo.Mvp.Binder
             = new CompositeViewFactory();
 
         readonly IMessageBus _messages = new MessageBus();
+
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
 
@@ -60,7 +61,8 @@ namespace Narvalo.Mvp.Binder
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
 
-        public IMessageBus Messages { get { return _messages; } }
+        // TODO: On the way to remove MessageBus from PresenterBinder in favor of DI.
+        //public IMessageBus Messages { get { return _messages; } }
 
         public void PerformBinding()
         {
@@ -144,6 +146,8 @@ namespace Narvalo.Mvp.Binder
         IPresenter CreatePresenter_(PresenterBinding binding, IView view)
         {
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
+
+            // TODO: On the way to remove MessageBus from PresenterBinder in favor of DI.
             presenter.Messages = _messages;
 
             OnPresenterCreated_(new PresenterCreatedEventArgs(presenter));
@@ -155,6 +159,7 @@ namespace Narvalo.Mvp.Binder
         {
             var results = _presenterDiscoveryStrategy.FindBindings(hosts, _viewsToBind.Distinct());
 
+            // REVIEW: There is something fishy here...
             var unboundViews = from result in results
                                from view in result.Views
                                where result.Bindings.IsEmpty()

@@ -9,8 +9,10 @@ namespace Narvalo.Mvp.Binder
     using System.Reflection.Emit;
     using Narvalo;
 
-    // WARNING: This class can only be used for presenters with a constructor
-    // accepting the view as a single parameter.
+    /// <remarks>
+    /// WARNING: This class can not be used for presenters that do not have a constructor
+    /// accepting the view as a single parameter.
+    /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
         // REVIEW: We use a concurrent dictionary as we expect to mostly deal with read operations

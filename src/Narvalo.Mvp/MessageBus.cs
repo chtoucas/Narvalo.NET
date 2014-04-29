@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp
 {
     using System;
     using System.Collections;
@@ -8,7 +8,9 @@ namespace Narvalo.Mvp.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    internal sealed class MessageBus : IMessageBus
+    // TODO: To be entirely rewritten.
+    // TODO: Make it available to DI.
+    public sealed class MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
@@ -17,19 +19,10 @@ namespace Narvalo.Mvp.Internal
         readonly ConcurrentDictionary<Type, IList<Action>> _neverReceivedCallbacks
             = new ConcurrentDictionary<Type, IList<Action>>();
 
-        readonly object _lock = new Object();
+        readonly Object _lock = new Object();
 
         bool _closed;
 
-        public MessageBus() { }
-
-        /// <summary>
-        /// Publishes a message to the bus. Any existing subscriptions to this type,
-        /// or an assignable type such as a base class or an interface, will be notified
-        /// at this time.
-        /// </summary>
-        /// <typeparam name="TMessage">The type of the message to publish</typeparam>
-        /// <param name="message">The message to publish</param>
         public void Publish<TMessage>(TMessage message)
         {
             ThrowIfClosed_();

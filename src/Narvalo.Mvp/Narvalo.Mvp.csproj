@@ -57,11 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
@@ -75,6 +71,7 @@
     </Compile>
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
+    <Compile Include="Binder\ConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\CompositeViewModuleBuilder.cs" />
     <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
@@ -88,13 +85,14 @@
     <Compile Include="Binder\PresenterDiscoveryStrategyBuilder.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Internal\ICompositeViewFactory.cs" />
+    <Compile Include="Internal\ViewInterfacesCache.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
     <Compile Include="IMessageBus.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="Internal\CompositeViewFactory.cs" />
     <Compile Include="Internal\ICompositeView.cs" />
-    <Compile Include="Internal\MessageBus.cs" />
+    <Compile Include="MessageBus.cs" />
     <Compile Include="Internal\WeakEquality.cs" />
     <Compile Include="Internal\WeakEqualityComparer`1.cs" />
     <Compile Include="IPresenter.cs" />
