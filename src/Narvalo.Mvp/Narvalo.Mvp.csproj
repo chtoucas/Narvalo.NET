@@ -73,7 +73,7 @@
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\ConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\InMemoryCache`1.cs" />
-    <Compile Include="Internal\InMemoryCache`4.cs" />
+    <Compile Include="Internal\InMemoryCache`3.cs" />
     <Compile Include="Internal\CompositeViewModuleBuilder.cs" />
     <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
@@ -86,13 +86,13 @@
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
     <Compile Include="Binder\PresenterDiscoveryStrategyBuilder.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="Internal\ICompositeViewFactory.cs" />
+    <Compile Include="Binder\ICompositeViewFactory.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
     <Compile Include="IMessageBus.cs" />
     <Compile Include="CompositeView.cs" />
-    <Compile Include="Internal\CompositeViewFactory.cs" />
-    <Compile Include="Internal\ICompositeView.cs" />
+    <Compile Include="Binder\DefaultCompositeViewFactory.cs" />
+    <Compile Include="ICompositeView.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="Internal\WeakEquality.cs" />
     <Compile Include="Internal\WeakEqualityComparer`1.cs" />

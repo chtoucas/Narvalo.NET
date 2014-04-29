@@ -3,19 +3,10 @@
 namespace Narvalo.Mvp.Internal
 {
     using System;
-    using System.Collections.Concurrent;
 
-    internal sealed class InMemoryCache<TValue>
+    internal sealed class ReflectionCache<TValue>
+        : InMemoryCache<Type, RuntimeTypeHandle, TValue>
     {
-        readonly ConcurrentDictionary<RuntimeTypeHandle, TValue> _cache
-           = new ConcurrentDictionary<RuntimeTypeHandle, TValue>();
-
-        public TValue GetOrAdd(Type type, Func<Type, TValue> valueFactory)
-        {
-            DebugCheck.NotNull(type);
-            DebugCheck.NotNull(valueFactory);
-
-            return _cache.GetOrAdd(type.TypeHandle, _ => valueFactory(type));
-        }
+        public ReflectionCache() : base(_ => _.TypeHandle) { }
     }
 }

@@ -8,12 +8,11 @@ namespace Narvalo.Mvp.Binder
     using System.Linq;
     using Narvalo;
     using Narvalo.Collections;
-    using Narvalo.Mvp.Internal;
 
     public sealed class PresenterBinder
     {
         static readonly ICompositeViewFactory CompositeViewFactory_
-            = new CompositeViewFactory();
+            = new DefaultCompositeViewFactory();
 
         readonly IMessageBus _messages = new MessageBus();
 

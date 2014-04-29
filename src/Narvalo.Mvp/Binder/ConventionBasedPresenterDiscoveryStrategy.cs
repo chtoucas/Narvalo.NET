@@ -26,11 +26,11 @@ namespace Narvalo.Mvp.Binder
             "{namespace}.{presenter}",
         };
 
-        readonly InMemoryCache<Type> _presenterTypeCache
-           = new InMemoryCache<Type>();
+        readonly ReflectionCache<Type> _presenterTypeCache
+           = new ReflectionCache<Type>();
 
-        readonly InMemoryCache<IEnumerable<Type>> _viewInterfacesCache
-           = new InMemoryCache<IEnumerable<Type>>();
+        readonly ReflectionCache<IEnumerable<Type>> _viewInterfacesCache
+           = new ReflectionCache<IEnumerable<Type>>();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
             IEnumerable<object> hosts,

@@ -15,11 +15,11 @@ namespace Narvalo.Mvp.Binder
     /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        readonly InMemoryCache<Type, Type, string, DynamicMethod> _contructorCache
-           = new InMemoryCache<Type, Type, string, DynamicMethod>((t1, t2) => String.Join("__:__", new[]
+        readonly InMemoryCache<Tuple<Type, Type>, string, DynamicMethod> _contructorCache
+           = new InMemoryCache<Tuple<Type, Type>, string, DynamicMethod>(_ => String.Join("__:__", new[]
             {
-                t1.AssemblyQualifiedName,
-                t2.AssemblyQualifiedName
+                _.Item1.AssemblyQualifiedName,
+                _.Item2.AssemblyQualifiedName
             }));
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
@@ -29,8 +29,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(view, "view");
 
             var ctor = _contructorCache.GetOrAdd(
-                presenterType,
-                viewType,
+                Tuple.Create(presenterType, viewType),
                 CreateConstructor_);
 
             try {
@@ -61,8 +60,11 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
-        static DynamicMethod CreateConstructor_(Type presenterType, Type viewType)
+        static DynamicMethod CreateConstructor_(Tuple<Type, Type> tuple)
         {
+            var presenterType = tuple.Item1;
+            var viewType = tuple.Item2;
+
             if (presenterType.IsNotPublic) {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,

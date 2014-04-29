@@ -40,8 +40,8 @@ namespace Narvalo.Mvp.Windows
             _presenterBinder.RegisterView(view);
         }
 
-        public static void Register<T>(T control)
-            where T : Control, IView
+        public static void Register<TControl>(TControl control)
+            where TControl : Control, IView
         {
             DebugCheck.NotNull(control);
 

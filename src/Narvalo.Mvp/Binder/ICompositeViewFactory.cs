@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp.Binder
 {
     using System;
     using System.Collections.Generic;
 
-    internal interface ICompositeViewFactory
+    public interface ICompositeViewFactory
     {
         ICompositeView Create(Type viewType, IEnumerable<IView> views);
     }

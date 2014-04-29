@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp.Binder
 {
     using System;
     using System.Collections.Generic;
@@ -8,18 +8,19 @@ namespace Narvalo.Mvp.Internal
     using System.Linq;
     using System.Reflection;
     using Narvalo;
+    using Narvalo.Mvp.Internal;
 
-    internal sealed class CompositeViewFactory : ICompositeViewFactory
+    public sealed class DefaultCompositeViewFactory : ICompositeViewFactory
     {
         readonly CompositeViewModuleBuilder _moduleBuilder
            = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
-        readonly InMemoryCache<Type> _typeCache = new InMemoryCache<Type>();
+        readonly ReflectionCache<Type> _typeCache = new ReflectionCache<Type>();
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
-            DebugCheck.NotNull(viewType);
-            DebugCheck.NotNull(views);
+            Require.NotNull(viewType, "viewType");
+            Require.NotNull(views, "views");
 
             var compositeViewType = _typeCache.GetOrAdd(viewType, CreateCompositeViewType_);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
@@ -29,25 +30,6 @@ namespace Narvalo.Mvp.Internal
             }
 
             return view;
-        }
-
-        Type CreateCompositeViewType_(Type viewType)
-        {
-            ValidateViewType_(viewType);
-
-            var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
-
-            var properties = FindProperties_(viewType);
-            foreach (var propertyInfo in properties) {
-                typeBuilder.AddProperty(propertyInfo);
-            }
-
-            var events = FindEvents_(viewType);
-            foreach (var eventInfo in events) {
-                typeBuilder.AddEvent(eventInfo);
-            }
-
-            return typeBuilder.Build();
         }
 
         static IEnumerable<EventInfo> FindEvents_(Type viewType)
@@ -109,6 +91,25 @@ namespace Narvalo.Mvp.Internal
                     "To be used with shared presenters, the view type must not define public methods. The supplied type ({0}) is not.",
                     viewType.FullName));
             }
+        }
+
+        Type CreateCompositeViewType_(Type viewType)
+        {
+            ValidateViewType_(viewType);
+
+            var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
+
+            var properties = FindProperties_(viewType);
+            foreach (var propertyInfo in properties) {
+                typeBuilder.AddProperty(propertyInfo);
+            }
+
+            var events = FindEvents_(viewType);
+            foreach (var eventInfo in events) {
+                typeBuilder.AddEvent(eventInfo);
+            }
+
+            return typeBuilder.Build();
         }
     }
 }

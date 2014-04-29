@@ -11,8 +11,8 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly InMemoryCache<IEnumerable<PresenterBindingAttribute>> _attributesCache
-           = new InMemoryCache<IEnumerable<PresenterBindingAttribute>>();
+        readonly ReflectionCache<IEnumerable<PresenterBindingAttribute>> _attributesCache
+           = new ReflectionCache<IEnumerable<PresenterBindingAttribute>>();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
             IEnumerable<object> hosts,
