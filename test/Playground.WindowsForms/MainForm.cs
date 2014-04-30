@@ -4,8 +4,9 @@
     using Narvalo.Mvp;
     using Narvalo.Mvp.Windows;
 
-    //[PresenterBinding(typeof(MainPresenter),
-    //    ViewType = typeof(IMainView), 
+    [PresenterBinding(typeof(MainPresenter),
+        ViewType = typeof(IMainView))]
+    //,
     //    BindingMode = PresenterBindingMode.SharedPresenter)]
     public partial class MainForm : MvpForm, IMainView
     {

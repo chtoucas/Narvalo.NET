@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Binder
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
 
-    public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly IEnumerable<string> ViewInstanceSuffixes_ = new[] 
         {
@@ -26,8 +26,7 @@ namespace Narvalo.Mvp.Binder
             "{namespace}.{presenter}",
         };
 
-        readonly ReflectionCache<Type> _presenterTypeCache
-           = new ReflectionCache<Type>();
+        readonly ReflectionCache<Type> _presenterTypeCache = new ReflectionCache<Type>();
 
         readonly ReflectionCache<IEnumerable<Type>> _viewInterfacesCache
            = new ReflectionCache<IEnumerable<Type>>();

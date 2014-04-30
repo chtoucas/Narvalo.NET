@@ -7,6 +7,11 @@ namespace Playground.WindowsForms
     using Narvalo;
     using Narvalo.Mvp;
 
+    public sealed class TestMessage
+    {
+        public string Text { get; set; }
+    }
+
     public interface IMainView : IView
     {
         event EventHandler TextBoxTextChanged;
@@ -40,11 +45,6 @@ namespace Playground.WindowsForms
         }
     }
 
-    public sealed class TestMessage
-    {
-        public string Text { get; set; }
-    }
-
     public sealed class MainPresenter : IPresenter<IMainView>, IDisposable
     {
         readonly IMainView _view;
@@ -64,7 +64,7 @@ namespace Playground.WindowsForms
 
         public void TextChanged(object sender, EventArgs e)
         {
-            Messages.Publish(new TestMessage { Text = "Hello from MainPresenter." });
+            Messages.Publish(new TestMessage { Text = (sender as TextBox).Text });
         }
 
         public void Dispose()

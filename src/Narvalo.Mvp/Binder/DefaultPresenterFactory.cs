@@ -15,8 +15,8 @@ namespace Narvalo.Mvp.Binder
     /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        readonly InMemoryCache<Tuple<Type, Type>, string, DynamicMethod> _contructorCache
-           = new InMemoryCache<Tuple<Type, Type>, string, DynamicMethod>(_ => String.Join("__:__", new[]
+        readonly KeyValueStore<Tuple<Type, Type>, string, DynamicMethod> _contructorCache
+           = new KeyValueStore<Tuple<Type, Type>, string, DynamicMethod>(_ => String.Join("__:__", new[]
             {
                 _.Item1.AssemblyQualifiedName,
                 _.Item2.AssemblyQualifiedName
@@ -42,7 +42,7 @@ namespace Narvalo.Mvp.Binder
                     originalException = ex.InnerException;
                 }
 
-                throw new InvalidOperationException(String.Format(
+                throw new MvpException(String.Format(
                         CultureInfo.InvariantCulture,
                         "An exception was thrown whilst trying to create an instance of {0}. Check the InnerException for more information.",
                         presenterType.FullName),
@@ -70,7 +70,7 @@ namespace Narvalo.Mvp.Binder
                     CultureInfo.InvariantCulture,
                     "{0} does not meet accessibility requirements. For the WebFormsMvp framework to be able to call it, it must be public. Make the type public, or set PresenterBinder.Factory to an implementation that can access this type.",
                     presenterType.FullName),
-                    "presenterType");
+                    "tuple");
             }
 
             var ctor = presenterType.GetConstructor(new[] { viewType });
@@ -80,7 +80,7 @@ namespace Narvalo.Mvp.Binder
                     "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or set PresenterBinder.Factory to an implementation that can supply constructor dependencies.",
                     presenterType.FullName,
                     viewType.FullName),
-                    "presenterType");
+                    "tuple");
             }
 
             // Using DynamicMethod and ILGenerator allows us to hold on to a

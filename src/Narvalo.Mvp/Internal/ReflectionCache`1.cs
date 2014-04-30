@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Internal
     using System;
 
     internal sealed class ReflectionCache<TValue>
-        : InMemoryCache<Type, RuntimeTypeHandle, TValue>
+        : KeyValueStore<Type, RuntimeTypeHandle, TValue>
     {
         public ReflectionCache() : base(_ => _.TypeHandle) { }
     }

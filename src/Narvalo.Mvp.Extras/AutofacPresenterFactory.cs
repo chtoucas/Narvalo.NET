@@ -27,10 +27,10 @@ namespace Narvalo.Mvp
             _container = container;
         }
 
-        public void SelfRegister()
-        {
-            PresenterBuilder.Current.SetFactory(new AutofacPresenterFactory(_container));
-        }
+        //public void SelfRegister()
+        //{
+        //    PresenterFactoryProvider.Current.SetService(new AutofacPresenterFactory(_container));
+        //}
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {

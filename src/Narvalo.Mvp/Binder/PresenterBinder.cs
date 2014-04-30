@@ -12,46 +12,28 @@ namespace Narvalo.Mvp.Binder
     public sealed class PresenterBinder
     {
         static readonly ICompositeViewFactory CompositeViewFactory_
-            = new DefaultCompositeViewFactory();
-
-        readonly IMessageBus _messages = new MessageBus();
+            = CompositeViewFactoryProvider.Current.Service;
+        static readonly IPresenterDiscoveryStrategy PresenterDiscoveryStrategy_
+            = PresenterDiscoveryStrategyProvider.Current.Service;
+        static readonly IPresenterFactory PresenterFactory_
+            = PresenterFactoryProvider.Current.Service;
+        static readonly IMessageBus Messages_
+            = MessageBusProvider.Current.Service;
 
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
-
-        readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
-        readonly IPresenterFactory _presenterFactory;
 
         readonly IEnumerable<object> _hosts;
 
         bool _bindingCompleted = false;
 
-        public PresenterBinder(object host)
-            : this(new[] { host }, null, null) { }
+        public PresenterBinder(object host) : this(new[] { host }) { }
 
         public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, null, null) { }
-
-        internal PresenterBinder(
-            object host,
-            IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
-            : this(
-                new[] { host },
-                presenterFactory,
-                presenterDiscoveryStrategy) { }
-
-        internal PresenterBinder(
-            IEnumerable<object> hosts,
-            IPresenterFactory presenterFactory,
-            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
         {
             Require.NotNull(hosts, "hosts");
 
             _hosts = hosts;
-            _presenterFactory = presenterFactory ?? PresenterBuilder.Current.Factory;
-            _presenterDiscoveryStrategy
-                = presenterDiscoveryStrategy ?? PresenterDiscoveryStrategyBuilder.Current.Factory;
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -96,11 +78,11 @@ namespace Narvalo.Mvp.Binder
 
         public void Release()
         {
-            _messages.Close();
+            Messages_.Close();
 
             lock (_presenters) {
                 foreach (var presenter in _presenters) {
-                    _presenterFactory.Release(presenter);
+                    PresenterFactory_.Release(presenter);
                 }
 
                 _presenters.Clear();
@@ -124,7 +106,7 @@ namespace Narvalo.Mvp.Binder
                     break;
 
                 default:
-                    throw new NotSupportedException(String.Format(
+                    throw new MvpException(String.Format(
                         CultureInfo.InvariantCulture,
                         "Binding mode {0} is not supported by this method.",
                         binding.BindingMode));
@@ -144,10 +126,10 @@ namespace Narvalo.Mvp.Binder
 
         IPresenter CreatePresenter_(PresenterBinding binding, IView view)
         {
-            var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
+            var presenter = PresenterFactory_.Create(binding.PresenterType, binding.ViewType, view);
 
             // TODO: On the way to remove MessageBus from PresenterBinder in favor of DI.
-            presenter.Messages = _messages;
+            presenter.Messages = Messages_;
 
             OnPresenterCreated_(new PresenterCreatedEventArgs(presenter));
 
@@ -156,7 +138,7 @@ namespace Narvalo.Mvp.Binder
 
         IEnumerable<PresenterBinding> FindBindings_(IEnumerable<Object> hosts)
         {
-            var results = _presenterDiscoveryStrategy.FindBindings(hosts, _viewsToBind.Distinct());
+            var results = PresenterDiscoveryStrategy_.FindBindings(hosts, _viewsToBind.Distinct());
 
             // REVIEW: There is something fishy here...
             var unboundViews = from result in results
@@ -165,7 +147,7 @@ namespace Narvalo.Mvp.Binder
                                select view;
 
             if (unboundViews.Any()) {
-                throw new InvalidOperationException(String.Format(
+                throw new MvpException(String.Format(
                     CultureInfo.InvariantCulture,
                     @"Failed to find presenter for view instance of type {0}.",
                     unboundViews.First().GetType().FullName

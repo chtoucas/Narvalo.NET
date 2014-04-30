@@ -71,9 +71,11 @@
     </Compile>
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
-    <Compile Include="Binder\ConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Internal\InMemoryCache`1.cs" />
-    <Compile Include="Internal\InMemoryCache`3.cs" />
+    <Compile Include="Binder\DefaultPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Binder\CompositeViewFactoryProvider.cs" />
+    <Compile Include="Binder\MessageBusProvider.cs" />
+    <Compile Include="Internal\ReflectionCache`1.cs" />
+    <Compile Include="Internal\KeyValueStore`3.cs" />
     <Compile Include="Internal\CompositeViewModuleBuilder.cs" />
     <Compile Include="Internal\CompositeViewTypeBuilder.cs" />
     <Compile Include="Binder\DefaultPresenterFactory.cs" />
@@ -81,12 +83,14 @@
     <Compile Include="Binder\IPresenterFactory.cs" />
     <Compile Include="Binder\PresenterBinder.cs" />
     <Compile Include="Binder\PresenterBinding.cs" />
-    <Compile Include="Binder\PresenterBuilder.cs" />
+    <Compile Include="Binder\PresenterFactoryProvider.cs" />
     <Compile Include="Binder\PresenterCreatedEventArgs.cs" />
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
-    <Compile Include="Binder\PresenterDiscoveryStrategyBuilder.cs" />
+    <Compile Include="Binder\PresenterDiscoveryStrategyProvider.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Binder\ICompositeViewFactory.cs" />
+    <Compile Include="Internal\ServiceProvider`1.cs" />
+    <Compile Include="Internal\__Trace.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
     <Compile Include="IMessageBus.cs" />
@@ -100,6 +104,8 @@
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IView`1.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
+    <Compile Include="MvpException.cs" />
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="PresenterBindingMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

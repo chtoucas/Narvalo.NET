@@ -21,6 +21,8 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(hosts, "hosts");
             Require.NotNull(views, "views");
 
+            var result = new List<PresenterDiscoveryResult>();
+
             var pendingViews = views.ToList();
 
             var iterations = 0;
@@ -33,12 +35,19 @@ namespace Narvalo.Mvp.Binder
                 var viewType = view.GetType();
 
                 var viewAttributes = GetAttributes_(viewType)
-                    .Where(_ => _.ViewType.IsAssignableFrom(viewType))
-                    .OrderBy(_ => _.PresenterType.Name);
+                    .Where(_ => _.ViewType.IsAssignableFrom(viewType));
+                    //.OrderBy(_ => _.PresenterType.Name);
 
                 foreach (var attribute in viewAttributes) {
-                    var viewsToBind = GetViewsToBind_(
-                        pendingViews, view, viewType, attribute);
+                    var viewsToBind = GetViewsToBind_(pendingViews, view, viewType, attribute);
+
+                    __Trace.Write(
+                        "Found [PresenterBinding] attribute on view {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
+                        viewType.FullName,
+                        attribute.PresenterType.FullName,
+                        attribute.ViewType.FullName,
+                        attribute.BindingMode.ToString()
+                    );
 
                     bindings.Add(new PresenterBinding(
                         attribute.PresenterType,
@@ -50,13 +59,24 @@ namespace Narvalo.Mvp.Binder
 
                 var hostAttributes = hosts
                     .Except(views.OfType<Object>())
-                    .SelectMany(h => GetAttributes_(h.GetType()))
-                    .Where(_ => _.ViewType.IsAssignableFrom(viewType))
-                    .OrderBy(_ => _.PresenterType.Name);
+                    .SelectMany(h => GetAttributes_(h.GetType())
+                        .Select(a => new { Host = h, Attribute = a }))
+                    .Where(_ => _.Attribute.ViewType.IsAssignableFrom(viewType));
+                    //.OrderBy(_ => _.Attribute.PresenterType.Name);
 
-                foreach (var attribute in hostAttributes) {
+                foreach (var hostAttribute in hostAttributes) {
+                    var attribute = hostAttribute.Attribute;
+
                     var viewsToBind = GetViewsToBind_(
-                        pendingViews, view, viewType, attribute);
+                        pendingViews, view, viewType, hostAttribute.Attribute);
+
+                    __Trace.Write(
+                        "Found [PresenterBinding] attribute on host {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
+                        hostAttribute.Host.GetType().FullName,
+                        attribute.PresenterType.FullName,
+                        attribute.ViewType.FullName,
+                        attribute.BindingMode.ToString()
+                    );
 
                     bindings.Add(new PresenterBinding(
                         attribute.PresenterType,
@@ -69,19 +89,21 @@ namespace Narvalo.Mvp.Binder
                 var boundViews
                     = bindings.SelectMany(b => b.Views).Concat(new[] { view }).Distinct();
 
-                yield return new PresenterDiscoveryResult(boundViews, bindings);
+                result.Add(new PresenterDiscoveryResult(boundViews, bindings));
 
-                // FIXME: It fail when boundViews has been modified outside? Where does it occur? 
-                // Temporary fix: call ToList().
+                // FIXME: It fails when "boundViews" has been modified outside.
+                // Temporary fix: Call ToList().
                 foreach (var item in boundViews.ToList()) {
                     pendingViews.Remove(item);
                 }
 
                 if (iterations++ > maxIterations) {
-                    throw new ApplicationException(
+                    throw new MvpException(
                         "The loop has executed too many times. An exit condition is failing and needs to be investigated.");
                 }
             }
+
+            return result;
         }
 
         IEnumerable<PresenterBindingAttribute> GetAttributes_(Type sourceType)
@@ -107,9 +129,9 @@ namespace Narvalo.Mvp.Binder
                     break;
 
                 default:
-                    throw new NotSupportedException(String.Format(
+                    throw new MvpException(String.Format(
                         CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported",
+                        "Binding mode {0} is not supported.",
                         attribute.BindingMode));
             }
 
@@ -126,7 +148,7 @@ namespace Narvalo.Mvp.Binder
             if (attributes.Any(a =>
                     a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null
                 )) {
-                throw new NotSupportedException(string.Format(
+                throw new MvpException(String.Format(
                     CultureInfo.InvariantCulture,
                     "When a {1} is applied with BindingMode={2}, the ViewType must be explicitly specified. One of the bindings on {0} violates this restriction.",
                     sourceType.FullName,

@@ -1,24 +1,19 @@
 ﻿namespace Playground.WindowsForms
 {
     using System;
-    using System.Collections.Generic;
     using System.Windows.Forms;
+    using Narvalo.Mvp;
     using Narvalo.Mvp.Binder;
 
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            var strategies = new List<IPresenterDiscoveryStrategy>();
-            strategies.Add(new ConventionBasedPresenterDiscoveryStrategy());
-            strategies.Add(new AttributeBasedPresenterDiscoveryStrategy());
-
-            PresenterDiscoveryStrategyBuilder.Current.SetFactory(
-                new CompositePresenterDiscoveryStrategy(strategies));
+            new MvpBootstrapper()
+                .Append(new DefaultPresenterDiscoveryStrategy())
+                .Append(new AttributeBasedPresenterDiscoveryStrategy())
+                .Run();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

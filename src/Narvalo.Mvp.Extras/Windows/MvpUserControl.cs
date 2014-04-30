@@ -2,43 +2,38 @@
 
 namespace Narvalo.Mvp.Windows
 {
-    using System;
     using System.Windows.Forms;
     using Narvalo.Mvp.Binder;
 
     public partial class MvpUserControl : UserControl, IView
     {
-        //bool _disposed = false;
-        //PresenterBinder _presenterBinder;
+        bool _disposed = false;
+        PresenterBinder _presenterBinder;
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnCreateControl()
         {
-            // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
             if (!DesignMode) {
-                // FIXME: Must use something similar to what can be found with webformsmvp
-                // otherwise cross-presenter messenging won't work.
-                //_presenterBinder = new PresenterBinder(this);
-                //_presenterBinder.PerformBinding();
-                FormViewHost.Register(this);
+                _presenterBinder = new PresenterBinder(this);
+                _presenterBinder.PerformBinding();
             }
 
-            base.OnLoad(e);
+            base.OnCreateControl();
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (!_disposed) {
-        //        if (disposing) {
-        //            if (_presenterBinder != null) {
-        //                _presenterBinder.Release();
-        //                _presenterBinder = null;
-        //            }
-        //        }
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed) {
+                if (disposing) {
+                    if (_presenterBinder != null) {
+                        _presenterBinder.Release();
+                        _presenterBinder = null;
+                    }
+                }
 
-        //        _disposed = true;
-        //    }
+                _disposed = true;
+            }
 
-        //    base.Dispose(disposing);
-        //}
+            base.Dispose(disposing);
+        }
     }
 }
