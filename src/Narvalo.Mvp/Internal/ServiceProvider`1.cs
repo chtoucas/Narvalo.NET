@@ -1,17 +1,17 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Binder
+namespace Narvalo.Mvp.Internal
 {
     using System;
     using Narvalo;
 
-    public class ServiceProvider<TService> where TService : class
+    internal class ServiceProvider<TService> where TService : class
     {
         readonly Lazy<TService> _service;
 
         Func<TService> _serviceFactory;
 
-        internal protected ServiceProvider(Func<TService> serviceFactory)
+        public ServiceProvider(Func<TService> serviceFactory)
         {
             DebugCheck.NotNull(serviceFactory);
 
@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Binder
 
         public void SetService(TService service)
         {
-            Require.NotNull(service, "service");
+            DebugCheck.NotNull(service);
 
             if (_service.IsValueCreated) {
                 throw new InvalidOperationException(

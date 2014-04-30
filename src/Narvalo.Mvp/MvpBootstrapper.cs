@@ -4,6 +4,7 @@ namespace Narvalo.Mvp
 {
     using System.Collections.Generic;
     using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.Internal;
 
     public sealed class MvpBootstrapper
     {
@@ -23,29 +24,28 @@ namespace Narvalo.Mvp
 
         public void Run()
         {
+            var bindingServices = BindingServices.Current;
+
             if (CompositeViewFactory != null) {
-                CompositeViewFactoryProvider.Current.SetService(CompositeViewFactory);
+                bindingServices.CompositeViewFactory = CompositeViewFactory;
+            }
+
+            if (PresenterFactory != null) {
+                bindingServices.PresenterFactory = PresenterFactory;
+            }
+
+            var count = _presenterDiscoveryStrategies.Count;
+
+            if (count == 1) {
+                bindingServices.PresenterDiscoveryStrategy = _presenterDiscoveryStrategies[0];
+            }
+            else if (count > 1) {
+                bindingServices.PresenterDiscoveryStrategy
+                    = new CompositePresenterDiscoveryStrategy(_presenterDiscoveryStrategies);
             }
 
             if (MessageBus != null) {
                 MessageBusProvider.Current.SetService(MessageBus);
-            }
-
-            if (PresenterFactory != null) {
-                PresenterFactoryProvider.Current.SetService(PresenterFactory);
-            }
-
-            IPresenterDiscoveryStrategy strategy = null;
-
-            if (_presenterDiscoveryStrategies.Count > 1) {
-                strategy = new CompositePresenterDiscoveryStrategy(_presenterDiscoveryStrategies);
-            }
-            else if (_presenterDiscoveryStrategies.Count == 1) {
-                strategy = _presenterDiscoveryStrategies[0];
-            }
-
-            if (strategy != null) {
-                PresenterDiscoveryStrategyProvider.Current.SetService(strategy);
             }
         }
     }

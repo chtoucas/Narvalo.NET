@@ -8,17 +8,20 @@ namespace Narvalo.Mvp.Binder
     using System.Linq;
     using Narvalo;
     using Narvalo.Collections;
+    using Narvalo.Mvp.Internal;
 
     public sealed class PresenterBinder
     {
+        static readonly BindingServices BindingServices_ = BindingServices.Current;
+
         static readonly ICompositeViewFactory CompositeViewFactory_
-            = CompositeViewFactoryProvider.Current.Service;
+            = BindingServices_.CompositeViewFactory;
         static readonly IPresenterDiscoveryStrategy PresenterDiscoveryStrategy_
-            = PresenterDiscoveryStrategyProvider.Current.Service;
+            = BindingServices_.PresenterDiscoveryStrategy;
         static readonly IPresenterFactory PresenterFactory_
-            = PresenterFactoryProvider.Current.Service;
-        static readonly IMessageBus Messages_
-            = MessageBusProvider.Current.Service;
+            = BindingServices_.PresenterFactory;
+
+        static readonly IMessageBus MessageBus_ = MessageBusProvider.Current.Service;
 
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
@@ -41,9 +44,6 @@ namespace Narvalo.Mvp.Binder
         }
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
-
-        // TODO: On the way to remove MessageBus from PresenterBinder in favor of DI.
-        //public IMessageBus Messages { get { return _messages; } }
 
         public void PerformBinding()
         {
@@ -78,7 +78,7 @@ namespace Narvalo.Mvp.Binder
 
         public void Release()
         {
-            Messages_.Close();
+            MessageBus_.Close();
 
             lock (_presenters) {
                 foreach (var presenter in _presenters) {
@@ -128,8 +128,8 @@ namespace Narvalo.Mvp.Binder
         {
             var presenter = PresenterFactory_.Create(binding.PresenterType, binding.ViewType, view);
 
-            // TODO: On the way to remove MessageBus from PresenterBinder in favor of DI.
-            presenter.Messages = Messages_;
+            // TODO: On the way to remove MessageBus from PresenterBinder.
+            presenter.Messages = MessageBus_;
 
             OnPresenterCreated_(new PresenterCreatedEventArgs(presenter));
 

@@ -72,8 +72,7 @@
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\DefaultPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Binder\CompositeViewFactoryProvider.cs" />
-    <Compile Include="Binder\MessageBusProvider.cs" />
+    <Compile Include="Internal\MessageBusProvider.cs" />
     <Compile Include="Internal\ReflectionCache`1.cs" />
     <Compile Include="Internal\KeyValueStore`3.cs" />
     <Compile Include="Internal\CompositeViewModuleBuilder.cs" />
@@ -83,13 +82,12 @@
     <Compile Include="Binder\IPresenterFactory.cs" />
     <Compile Include="Binder\PresenterBinder.cs" />
     <Compile Include="Binder\PresenterBinding.cs" />
-    <Compile Include="Binder\PresenterFactoryProvider.cs" />
     <Compile Include="Binder\PresenterCreatedEventArgs.cs" />
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
-    <Compile Include="Binder\PresenterDiscoveryStrategyProvider.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Binder\ICompositeViewFactory.cs" />
-    <Compile Include="Binder\ServiceProvider`1.cs" />
+    <Compile Include="Internal\BindingServices.cs" />
+    <Compile Include="Internal\ServiceProvider`1.cs" />
     <Compile Include="Internal\__Trace.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />
