@@ -2,8 +2,6 @@
 
 namespace Narvalo.Mvp.Binder
 {
-    using Narvalo.Mvp.Internal;
-
     public sealed class PresenterFactoryProvider : ServiceProvider<IPresenterFactory>
     {
         static readonly PresenterFactoryProvider Instance_ = new PresenterFactoryProvider();

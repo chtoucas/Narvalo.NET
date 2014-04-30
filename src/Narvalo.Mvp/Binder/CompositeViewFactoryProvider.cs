@@ -2,8 +2,6 @@
 
 namespace Narvalo.Mvp.Binder
 {
-    using Narvalo.Mvp.Internal;
-
     public sealed class CompositeViewFactoryProvider : ServiceProvider<ICompositeViewFactory>
     {
         static readonly CompositeViewFactoryProvider Instance_ = new CompositeViewFactoryProvider();

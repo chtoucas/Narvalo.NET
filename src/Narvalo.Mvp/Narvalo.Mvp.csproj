@@ -89,7 +89,7 @@
     <Compile Include="Binder\PresenterDiscoveryStrategyProvider.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Binder\ICompositeViewFactory.cs" />
-    <Compile Include="Internal\ServiceProvider`1.cs" />
+    <Compile Include="Binder\ServiceProvider`1.cs" />
     <Compile Include="Internal\__Trace.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />

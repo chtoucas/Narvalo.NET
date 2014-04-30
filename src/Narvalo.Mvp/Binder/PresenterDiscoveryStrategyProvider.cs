@@ -2,8 +2,6 @@
 
 namespace Narvalo.Mvp.Binder
 {
-    using Narvalo.Mvp.Internal;
-
     public sealed class PresenterDiscoveryStrategyProvider : ServiceProvider<IPresenterDiscoveryStrategy>
     {
         static readonly PresenterDiscoveryStrategyProvider Instance_

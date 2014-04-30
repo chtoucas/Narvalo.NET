@@ -2,8 +2,6 @@
 
 namespace Narvalo.Mvp.Binder
 {
-    using Narvalo.Mvp.Internal;
-
     public sealed class MessageBusProvider : ServiceProvider<IMessageBus>
     {
         static readonly MessageBusProvider Instance_ = new MessageBusProvider();
