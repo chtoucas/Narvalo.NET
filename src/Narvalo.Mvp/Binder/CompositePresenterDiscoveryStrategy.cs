@@ -5,19 +5,17 @@ namespace Narvalo.Mvp.Binder
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Narvalo.Mvp.Internal;
 
     public sealed class CompositePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         readonly IEnumerable<IPresenterDiscoveryStrategy> _strategies;
-        readonly IEqualityComparer<IEnumerable<IView>> _comparer = new WeakEqualityComparer<IView>();
 
         public CompositePresenterDiscoveryStrategy(IEnumerable<IPresenterDiscoveryStrategy> strategies)
         {
             Require.NotNull(strategies, "strategies");
 
-            // Force the strategies to be enumerated once, just in case somebody gave us an expensive
-            // and uncached list.
+            // Force the strategies to be enumerated once, just in case somebody gave us 
+            // an expensive and uncached list.
             _strategies = strategies.ToArray();
 
             if (!strategies.Any()) {
@@ -25,11 +23,12 @@ namespace Narvalo.Mvp.Binder
             }
         }
 
-        public IEnumerable<PresenterDiscoveryResult> FindBindings(
+        public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
-            var results = new List<PresenterDiscoveryResult>();
+            var bindings = new List<PresenterBinding>();
+            var boundViews = new List<IView>();
 
             var pendingViews = views;
 
@@ -38,29 +37,15 @@ namespace Narvalo.Mvp.Binder
                     break;
                 }
 
-                var resultsThisRound = strategy.FindBindings(hosts, pendingViews);
+                var result = strategy.FindBindings(hosts, pendingViews);
 
-                results.AddRange(resultsThisRound);
+                bindings.AddRange(result.Bindings);
+                boundViews.AddRange(result.BoundViews);
 
-                var boundViews = from result in resultsThisRound
-                                 from view in result.Views
-                                 where result.Bindings.Any()
-                                 select view;
-
-                pendingViews = pendingViews.Except(boundViews.Distinct());
+                pendingViews = pendingViews.Except(result.BoundViews);
             }
 
-            return results.GroupBy(_ => _.Views, _comparer).Select(CreateResult_);
-        }
-
-        static PresenterDiscoveryResult CreateResult_(
-            IGrouping<IEnumerable<IView>, 
-            PresenterDiscoveryResult> results)
-        {
-            return new PresenterDiscoveryResult(
-                results.Key,
-                results.SelectMany(_ => _.Bindings)
-            );
+            return new PresenterDiscoveryResult(boundViews, bindings);
         }
     }
 }

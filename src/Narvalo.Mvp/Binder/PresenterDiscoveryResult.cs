@@ -3,44 +3,22 @@
 namespace Narvalo.Mvp.Binder
 {
     using System.Collections.Generic;
-    using Narvalo.Mvp.Internal;
 
     public sealed class PresenterDiscoveryResult
     {
-        readonly IEnumerable<IView> _views;
-        readonly IEnumerable<PresenterBinding> _bindings;
+        readonly IList<IView> _boundViews;
+        readonly IList<PresenterBinding> _bindings;
 
         public PresenterDiscoveryResult(
-            IEnumerable<IView> views,
-            IEnumerable<PresenterBinding> bindings)
+            IList<IView> boundViews,
+            IList<PresenterBinding> bindings)
         {
-            _views = views;
+            _boundViews = boundViews;
             _bindings = bindings;
         }
 
-        public IEnumerable<IView> Views { get { return _views; } }
+        public IList<IView> BoundViews { get { return _boundViews; } }
 
-        public IEnumerable<PresenterBinding> Bindings { get { return _bindings; } }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null) {
-                return false;
-            }
-
-            var other = obj as PresenterDiscoveryResult;
-            if (other == null) {
-                return false;
-            }
-
-            return WeakEquality.AreEqual(Views, other.Views)
-                && WeakEquality.AreEqual(Bindings, other.Bindings);
-        }
-
-        public override int GetHashCode()
-        {
-            return Views.GetHashCode()
-                | Bindings.GetHashCode();
-        }
+        public IList<PresenterBinding> Bindings { get { return _bindings; } }
     }
 }

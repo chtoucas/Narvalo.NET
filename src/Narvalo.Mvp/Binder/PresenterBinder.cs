@@ -106,7 +106,7 @@ namespace Narvalo.Mvp.Binder
                 default:
                     throw new BindingException(String.Format(
                         CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported by this method.",
+                        "Binding mode {0} is not supported.",
                         binding.BindingMode));
             }
 
@@ -136,14 +136,11 @@ namespace Narvalo.Mvp.Binder
 
         IEnumerable<PresenterBinding> FindBindings_(IEnumerable<Object> hosts)
         {
-            var results = PresenterDiscoveryStrategy_
-                .FindBindings(hosts, _viewsToBind.Distinct())
-                .ToList();
+            var viewsToBind = _viewsToBind.Distinct();
 
-            var unboundViews = from result in results
-                               from view in result.Views
-                               where result.Bindings.IsEmpty()
-                               select view;
+            var result = PresenterDiscoveryStrategy_.FindBindings(hosts, viewsToBind);
+
+            var unboundViews = viewsToBind.Except(result.BoundViews);
 
             if (unboundViews.Any()) {
                 throw new BindingException(String.Format(
@@ -153,9 +150,7 @@ namespace Narvalo.Mvp.Binder
                 ));
             }
 
-            return from result in results
-                   from binding in result.Bindings
-                   select binding;
+            return result.Bindings;
         }
     }
 }

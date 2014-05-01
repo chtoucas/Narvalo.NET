@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Binder
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal.Providers;
@@ -39,33 +38,32 @@ namespace Narvalo.Mvp.Binder
                 candidatePresenterNames);
         }
 
-        public IEnumerable<PresenterDiscoveryResult> FindBindings(
+        public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
             Require.NotNull(views, "views");
 
-            // REVIEW: hosts is ignored.
-            return views.Select(FindBinding_).ToArray();
-        }
+            var boundViews = new List<IView>();
+            var bindings = new List<PresenterBinding>();
 
-        PresenterDiscoveryResult FindBinding_(IView view)
-        {
-            var viewType = view.GetType();
+            foreach (var view in views) {
+                var viewType = view.GetType();
+                var presenterType = _typeProvider.GetComponent(viewType);
 
-            var presenterType = _typeProvider.GetComponent(viewType);
+                if (presenterType != null) {
+                    var binding = new PresenterBinding(
+                        presenterType,
+                        viewType,
+                        PresenterBindingMode.Default,
+                        new[] { view });
 
-            return new PresenterDiscoveryResult(
-                new[] { view },
-                presenterType == null
-                    ? new PresenterBinding[0]
-                    : new[] { 
-                        new PresenterBinding(
-                            presenterType,
-                            viewType, 
-                            PresenterBindingMode.Default, 
-                            new[] { view }) }
-            );
+                    bindings.Add(binding);
+                    boundViews.Add(view);
+                }
+            }
+
+            return new PresenterDiscoveryResult(boundViews, bindings);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Binder
 
     public interface IPresenterDiscoveryStrategy
     {
-        IEnumerable<PresenterDiscoveryResult> FindBindings(
+        PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
             IEnumerable<IView> views);
     }

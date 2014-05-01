@@ -15,7 +15,7 @@ namespace Narvalo.Mvp.Binder
         readonly PresenterBindingAttributesProvider _attributesProvider
             = new CachedPresenterBindingAttributesProvider();
 
-        public IEnumerable<PresenterDiscoveryResult> FindBindings(
+        public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
@@ -26,17 +26,16 @@ namespace Narvalo.Mvp.Binder
                 .SelectMany(_ => _attributesProvider.GetComponent(_.GetType()))
                 .ToList();
 
-            var pendingViews = views.ToList();
-            // REVIEW: I think it is simply not possible to go beyond pendingViews.Count() iterations.
-            //var maxIterations = 10 * pendingViews.Count();
-            var maxIterations = pendingViews.Count();
-            var iterations = 0;
+            var boundViews = new List<IView>();
+            var bindings = new List<PresenterBinding>();
+
+            var pendingViews = views;
 
             while (pendingViews.Any()) {
                 var view = pendingViews.First();
                 var viewType = view.GetType();
 
-                var bindings
+                var bindingsThisRound
                     = (from attr in
                            _attributesProvider.GetComponent(viewType).Concat(hostAttributes)
                        where attr.ViewType.IsAssignableFrom(viewType)
@@ -47,23 +46,18 @@ namespace Narvalo.Mvp.Binder
                            GetViewsToBind_(attr, view, viewType, pendingViews)
                        )).ToList();
 
-                var boundViews = bindings.SelectMany(_ => _.Views)
-                    // Concat with currently inspected view in case "bindings" is empty.
-                    .Concat(new[] { view })
-                    .Distinct()
-                    .ToList();
+                bindings.AddRange(bindingsThisRound);
 
-                yield return new PresenterDiscoveryResult(boundViews, bindings);
+                var boundViewsThisRound = bindingsThisRound.SelectMany(_ => _.Views).ToList();
 
-                foreach (var item in boundViews) {
-                    pendingViews.Remove(item);
-                }
+                boundViews.AddRange(boundViewsThisRound);
 
-                if (iterations++ > maxIterations) {
-                    throw new MvpException(
-                        "The loop has executed too many times. An exit condition is failing and needs to be investigated.");
-                }
+                // In case "boundViewsThisRound" is empty, we always add the currently inspected view 
+                // to the list of views to remove.
+                pendingViews = pendingViews.Except(boundViewsThisRound.Concat(new[] { view }));
             }
+
+            return new PresenterDiscoveryResult(boundViews, bindings);
         }
 
         static IEnumerable<IView> GetViewsToBind_(

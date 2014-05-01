@@ -110,7 +110,6 @@
     <Compile Include="ICompositeView.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="Internal\WeakEquality.cs" />
-    <Compile Include="Internal\WeakEqualityComparer`1.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />
