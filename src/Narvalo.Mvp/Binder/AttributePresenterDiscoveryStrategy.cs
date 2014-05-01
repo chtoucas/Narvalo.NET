@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Binder
     using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Internal.Providers;
 
-    public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class AttributePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         readonly PresenterBindingAttributesProvider _attributesProvider
             = new CachedPresenterBindingAttributesProvider();

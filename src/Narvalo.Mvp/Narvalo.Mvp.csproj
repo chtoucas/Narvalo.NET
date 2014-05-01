@@ -69,16 +69,14 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Binder\AttributePresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\DefaultPresenterDiscoveryStrategy.cs" />
     <Compile Include="Configuration\Appender`1.cs" />
     <Compile Include="Configuration\Setter`1.cs" />
     <Compile Include="Internal\MessageBusContainer.cs" />
     <Compile Include="Internal\Providers\CachedPresenterTypeProvider.cs" />
-    <Compile Include="Internal\Providers\CachedViewInterfacesProvider.cs" />
     <Compile Include="Internal\Providers\PresenterTypeProvider.cs" />
-    <Compile Include="Internal\Providers\ViewInterfacesProvider.cs" />
     <Compile Include="Internal\Providers\TypeKeyedProviderCache`1.cs" />
     <Compile Include="Internal\Providers\ProviderCache`3.cs" />
     <Compile Include="Internal\Providers\CompositeViewModuleBuilder.cs" />

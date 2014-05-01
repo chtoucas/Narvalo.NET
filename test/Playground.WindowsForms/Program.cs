@@ -12,8 +12,8 @@
         {
             new MvpBootstrapper()
                 .DiscoverPresenter.With(
-                    new AttributeBasedPresenterDiscoveryStrategy(),
-                    new DefaultPresenterDiscoveryStrategy())
+                    new DefaultPresenterDiscoveryStrategy(),
+                    new AttributePresenterDiscoveryStrategy())
                 .Run();
 
             Application.EnableVisualStyles();

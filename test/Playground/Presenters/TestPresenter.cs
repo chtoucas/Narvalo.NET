@@ -1,16 +1,9 @@
-﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
-
-namespace Playground
+﻿namespace Playground.Presenters
 {
     using System;
     using Narvalo;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Binder;
-
-    public interface ITestView : IView
-    {
-        event EventHandler Completed;
-    }
+    using Playground.Views;
 
     public sealed class TestPresenter : IPresenter<ITestView>, IDisposable
     {
@@ -44,24 +37,6 @@ namespace Playground
         {
             View.Completed -= Completed;
             View.Load -= Load;
-        }
-    }
-
-    [PresenterBinding(typeof(TestPresenter),
-        ViewType = typeof(ITestView),
-        BindingMode = PresenterBindingMode.SharedPresenter)]
-    public sealed class TestCommand : MvpCommand, ITestView
-    {
-        protected override void ExecuteCore()
-        {
-            DisplayText();
-        }
-
-        public void DisplayText()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Help");
-            Console.WriteLine();
         }
     }
 }

@@ -5,19 +5,27 @@ namespace Narvalo.Mvp.Binder
     using System.Collections.Generic;
     using Narvalo;
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Internal.Providers;
 
-    public sealed class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly IEnumerable<string> ViewInstanceSuffixes_ = new[] 
+        static readonly IList<string> ViewSuffixes_ = new[] 
         {
             "UserControl",
             "Control",
-            "View",
+            // Windows Forms
             "Form",
+            // Web Forms
+            "Page",
+            "Handler",
+            "WebService",
+            "Service",
+            // Last chance
+            "View",
         };
 
-        static readonly IEnumerable<string> CandidatePresenterNames_ = new[]
+        static readonly IList<string> PresenterNameTemplates_ = new[]
         {
             "{namespace}.Presenters.{presenter}",
             "{namespace}.{presenter}",
@@ -26,16 +34,13 @@ namespace Narvalo.Mvp.Binder
         readonly PresenterTypeProvider _typeProvider;
 
         public DefaultPresenterDiscoveryStrategy()
-            : this(ViewInstanceSuffixes_, CandidatePresenterNames_) { }
+            : this(ViewSuffixes_, PresenterNameTemplates_) { }
 
         public DefaultPresenterDiscoveryStrategy(
-            IEnumerable<string> viewInstanceSuffixes,
-            IEnumerable<string> candidatePresenterNames)
+            IList<string> viewSuffixes,
+            IList<string> presenterNameTemplates)
         {
-            _typeProvider = new CachedPresenterTypeProvider(
-                new CachedViewInterfacesProvider(),
-                viewInstanceSuffixes,
-                candidatePresenterNames);
+            _typeProvider = new CachedPresenterTypeProvider(viewSuffixes, presenterNameTemplates);
         }
 
         public PresenterDiscoveryResult FindBindings(
@@ -52,6 +57,12 @@ namespace Narvalo.Mvp.Binder
                 var presenterType = _typeProvider.GetComponent(viewType);
 
                 if (presenterType != null) {
+                    __Trace.Write(
+                        "Found a default presenter type: {0} for view type: {1})",
+                        presenterType.FullName,
+                        viewType.FullName
+                    );
+
                     var binding = new PresenterBinding(
                         presenterType,
                         viewType,
@@ -60,6 +71,12 @@ namespace Narvalo.Mvp.Binder
 
                     bindings.Add(binding);
                     boundViews.Add(view);
+                }
+                else {
+                    __Trace.Write(
+                        "No default presenter type found for view type: {0})",
+                        viewType.FullName
+                    );
                 }
             }
 

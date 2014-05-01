@@ -10,10 +10,9 @@ namespace Narvalo.Mvp.Internal.Providers
         readonly TypeKeyedProviderCache<Type> _cache = new TypeKeyedProviderCache<Type>();
 
         public CachedPresenterTypeProvider(
-            ViewInterfacesProvider viewInterfacesProvider,
-            IEnumerable<string> viewInstanceSuffixes,
-            IEnumerable<string> candidatePresenterNames)
-            : base(viewInterfacesProvider, viewInstanceSuffixes, candidatePresenterNames) { }
+            IList<string> viewInstanceSuffixes,
+            IList<string> candidatePresenterNames)
+            : base(viewInstanceSuffixes, candidatePresenterNames) { }
 
         public override Type GetComponent(Type input)
         {
