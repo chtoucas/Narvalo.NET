@@ -31,16 +31,15 @@ namespace Narvalo.Mvp.Internal.Providers
                 ));
             }
 
-            attributes = attributes
+            return attributes
                 .Select(pba =>
                     new PresenterBindingAttribute(pba.PresenterType)
                     {
                         ViewType = pba.ViewType ?? input,
-                        BindingMode = pba.BindingMode
+                        BindingMode = pba.BindingMode,
+                        Origin = input,
                     })
                 .ToArray();
-
-            return attributes;
         }
     }
 }

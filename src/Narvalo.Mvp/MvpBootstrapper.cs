@@ -58,14 +58,14 @@ namespace Narvalo.Mvp
 
         public void Run()
         {
-            var bindingServices = BindingServicesContainer.Current;
+            var container = BindingServicesContainer.Current;
 
             if (_compositeViewFactory != null) {
-                bindingServices.CompositeViewFactory = _compositeViewFactory;
+                container.CompositeViewFactory = _compositeViewFactory;
             }
 
             if (_presenterFactory != null) {
-                bindingServices.PresenterFactory = _presenterFactory;
+                container.PresenterFactory = _presenterFactory;
             }
 
             var strategies = _presenterDiscoveryStrategies.Where(_ => _ != null).Distinct();
@@ -73,10 +73,10 @@ namespace Narvalo.Mvp
             var count = strategies.Count();
 
             if (count == 1) {
-                bindingServices.PresenterDiscoveryStrategy = strategies.First();
+                container.PresenterDiscoveryStrategy = strategies.First();
             }
             else if (count > 1) {
-                bindingServices.PresenterDiscoveryStrategy
+                container.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
             }
 

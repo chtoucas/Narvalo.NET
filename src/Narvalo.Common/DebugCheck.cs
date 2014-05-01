@@ -7,12 +7,14 @@ namespace Narvalo
 
     public static class DebugCheck
     {
+        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value)
         {
             Debug.Assert(value != null, SR.DebugCheck_IsNull);
         }
 
+        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNullOrEmpty(string value)
         {
@@ -20,6 +22,7 @@ namespace Narvalo
             Debug.Assert(value.Length != 0, SR.DebugCheck_IsEmpty);
         }
 
+        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void IsEnum(Type type)
         {
@@ -27,6 +30,7 @@ namespace Narvalo
             Debug.Assert(type.IsEnum, type.FullName, SR.DebugCheck_TypeIsNotEnum);
         }
 
+        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void IsValueType(Type type)
         {

@@ -16,7 +16,9 @@ namespace Narvalo.Mvp.Internal
             DebugCheck.NotNull(valueFactory);
 
             _valueFactory = valueFactory;
-            _lazyValue = new Lazy<TValue>(_valueFactory);
+            // WARNING: Do not change the following line for 
+            // _lazyValue = new Lazy<TValue>(_valueFactory);
+            _lazyValue = new Lazy<TValue>(() => _valueFactory());
         }
 
         public TValue Value { get { return _lazyValue.Value; } }

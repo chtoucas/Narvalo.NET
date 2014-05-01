@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly PresenterBindingAttributesProvider _presenterBindingAttributesProvider 
+        readonly PresenterBindingAttributesProvider _attributesProvider
             = new CachedPresenterBindingAttributesProvider();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
@@ -22,112 +22,70 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(hosts, "hosts");
             Require.NotNull(views, "views");
 
-            var result = new List<PresenterDiscoveryResult>();
+            var hostAttributes = hosts.Except(views.OfType<Object>())
+                .SelectMany(_ => _attributesProvider.GetComponent(_.GetType()))
+                .ToList();
 
             var pendingViews = views.ToList();
-
+            // REVIEW: I think it is simply not possible to go beyond pendingViews.Count() iterations.
+            //var maxIterations = 10 * pendingViews.Count();
+            var maxIterations = pendingViews.Count();
             var iterations = 0;
-            var maxIterations = 10 * pendingViews.Count();
 
             while (pendingViews.Any()) {
-                var bindings = new List<PresenterBinding>();
-
                 var view = pendingViews.First();
                 var viewType = view.GetType();
 
-                var viewAttributes = GetAttributes_(viewType)
-                    .Where(_ => _.ViewType.IsAssignableFrom(viewType));
-                //.OrderBy(_ => _.PresenterType.Name);
+                var bindings
+                    = (from attr in
+                           _attributesProvider.GetComponent(viewType).Concat(hostAttributes)
+                       where attr.ViewType.IsAssignableFrom(viewType)
+                       select new PresenterBinding(
+                           attr.PresenterType,
+                           attr.ViewType,
+                           attr.BindingMode,
+                           GetViewsToBind_(attr, view, viewType, pendingViews)
+                       )).ToList();
 
-                foreach (var attribute in viewAttributes) {
-                    var viewsToBind = GetViewsToBind_(pendingViews, view, viewType, attribute);
+                var boundViews = bindings.SelectMany(_ => _.Views)
+                    // Concat with currently inspected view in case "bindings" is empty.
+                    .Concat(new[] { view })
+                    .Distinct()
+                    .ToList();
 
-                    __Trace.Write(
-                        "Found [PresenterBinding] attribute on view {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
-                        viewType.FullName,
-                        attribute.PresenterType.FullName,
-                        attribute.ViewType.FullName,
-                        attribute.BindingMode.ToString()
-                    );
+                yield return new PresenterDiscoveryResult(boundViews, bindings);
 
-                    bindings.Add(new PresenterBinding(
-                        attribute.PresenterType,
-                        attribute.ViewType,
-                        attribute.BindingMode,
-                        viewsToBind
-                    ));
-                }
-
-                var hostAttributes = hosts
-                    .Except(views.OfType<Object>())
-                    .SelectMany(h => GetAttributes_(h.GetType())
-                        .Select(a => new { Host = h, Attribute = a }))
-                    .Where(_ => _.Attribute.ViewType.IsAssignableFrom(viewType));
-                //.OrderBy(_ => _.Attribute.PresenterType.Name);
-
-                foreach (var hostAttribute in hostAttributes) {
-                    var attribute = hostAttribute.Attribute;
-
-                    var viewsToBind = GetViewsToBind_(
-                        pendingViews, view, viewType, hostAttribute.Attribute);
-
-                    __Trace.Write(
-                        "Found [PresenterBinding] attribute on host {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
-                        hostAttribute.Host.GetType().FullName,
-                        attribute.PresenterType.FullName,
-                        attribute.ViewType.FullName,
-                        attribute.BindingMode.ToString()
-                    );
-
-                    bindings.Add(new PresenterBinding(
-                        attribute.PresenterType,
-                        attribute.ViewType,
-                        attribute.BindingMode,
-                        viewsToBind
-                    ));
-                }
-
-                var boundViews
-                    = bindings.SelectMany(b => b.Views).Concat(new[] { view }).Distinct();
-
-                result.Add(new PresenterDiscoveryResult(boundViews, bindings));
-
-                // FIXME: It fails when "boundViews" has been modified outside.
-                // Temporary fix: Call ToList().
-                foreach (var item in boundViews.ToList()) {
+                foreach (var item in boundViews) {
                     pendingViews.Remove(item);
                 }
 
                 if (iterations++ > maxIterations) {
-                    throw new BindingException(
+                    throw new MvpException(
                         "The loop has executed too many times. An exit condition is failing and needs to be investigated.");
                 }
             }
-
-            return result;
-        }
-
-        IEnumerable<PresenterBindingAttribute> GetAttributes_(Type sourceType)
-        {
-            return _presenterBindingAttributesProvider.GetComponent(sourceType);
         }
 
         static IEnumerable<IView> GetViewsToBind_(
-            IEnumerable<IView> pendingViews,
+            PresenterBindingAttribute attribute,
             IView view,
             Type viewType,
-            PresenterBindingAttribute attribute)
+            IEnumerable<IView> pendingViews)
         {
-            IEnumerable<IView> viewsToBind;
+            __Trace.Write(
+                "Found [PresenterBinding] attribute on {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
+                attribute.Origin.FullName,
+                attribute.PresenterType.FullName,
+                attribute.ViewType.FullName,
+                attribute.BindingMode.ToString()
+            );
 
             switch (attribute.BindingMode) {
                 case PresenterBindingMode.Default:
-                    viewsToBind = new[] { view };
-                    break;
+                    return new[] { view };
 
                 case PresenterBindingMode.SharedPresenter:
-                    viewsToBind = pendingViews.Where(viewType.IsInstanceOfType);
-                    break;
+                    return pendingViews.Where(viewType.IsInstanceOfType);
 
                 default:
                     throw new BindingException(String.Format(
@@ -135,8 +93,6 @@ namespace Narvalo.Mvp.Binder
                         "Binding mode {0} is not supported.",
                         attribute.BindingMode));
             }
-
-            return viewsToBind;
         }
     }
 }

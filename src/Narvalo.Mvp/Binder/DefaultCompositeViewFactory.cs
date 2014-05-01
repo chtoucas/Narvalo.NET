@@ -9,15 +9,14 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class DefaultCompositeViewFactory : ICompositeViewFactory
     {
-        readonly CompositeViewTypeProvider _compositeViewTypeProvider
-            = new CachedCompositeViewTypeProvider();
+        readonly CompositeViewTypeProvider _typeProvider = new CachedCompositeViewTypeProvider();
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
             Require.NotNull(viewType, "viewType");
             Require.NotNull(views, "views");
 
-            var compositeViewType = _compositeViewTypeProvider.GetComponent(viewType);
+            var compositeViewType = _typeProvider.GetComponent(viewType);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
 
             foreach (var item in views) {

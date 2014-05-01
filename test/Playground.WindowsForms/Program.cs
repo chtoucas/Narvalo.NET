@@ -12,7 +12,7 @@
         {
             new MvpBootstrapper()
                 .DiscoverPresenter.With(
-                    new DefaultPresenterDiscoveryStrategy(), 
+                    //new DefaultPresenterDiscoveryStrategy(), 
                     new AttributeBasedPresenterDiscoveryStrategy())
                 .Run();
 

@@ -136,9 +136,10 @@ namespace Narvalo.Mvp.Binder
 
         IEnumerable<PresenterBinding> FindBindings_(IEnumerable<Object> hosts)
         {
-            var results = PresenterDiscoveryStrategy_.FindBindings(hosts, _viewsToBind.Distinct());
+            var results = PresenterDiscoveryStrategy_
+                .FindBindings(hosts, _viewsToBind.Distinct())
+                .ToList();
 
-            // REVIEW: There is something fishy here...
             var unboundViews = from result in results
                                from view in result.Views
                                where result.Bindings.IsEmpty()

@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Binder
     /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        readonly PresenterConstructorProvider _presenterConstructorProvider
+        readonly PresenterConstructorProvider _constructorProvider
             = new CachedPresenterConstructorProvider();
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
@@ -23,8 +23,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(viewType, "viewType");
             Require.NotNull(view, "view");
 
-            var ctor = _presenterConstructorProvider.GetComponent(
-                Tuple.Create(presenterType, viewType));
+            var ctor = _constructorProvider.GetComponent(Tuple.Create(presenterType, viewType));
 
             try {
                 return (IPresenter)ctor.Invoke(null, new[] { view });

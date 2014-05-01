@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.Binder
             "{namespace}.{presenter}",
         };
 
-        readonly PresenterTypeProvider _presenterTypeProvider;
+        readonly PresenterTypeProvider _typeProvider;
 
         public DefaultPresenterDiscoveryStrategy()
             : this(ViewInstanceSuffixes_, CandidatePresenterNames_) { }
@@ -33,7 +33,7 @@ namespace Narvalo.Mvp.Binder
             IEnumerable<string> viewInstanceSuffixes,
             IEnumerable<string> candidatePresenterNames)
         {
-            _presenterTypeProvider = new CachedPresenterTypeProvider(
+            _typeProvider = new CachedPresenterTypeProvider(
                 new CachedViewInterfacesProvider(),
                 viewInstanceSuffixes,
                 candidatePresenterNames);
@@ -53,7 +53,7 @@ namespace Narvalo.Mvp.Binder
         {
             var viewType = view.GetType();
 
-            var presenterType = _presenterTypeProvider.GetComponent(viewType);
+            var presenterType = _typeProvider.GetComponent(viewType);
 
             return new PresenterDiscoveryResult(
                 new[] { view },
