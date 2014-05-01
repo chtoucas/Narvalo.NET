@@ -8,11 +8,12 @@ namespace Narvalo.Mvp.Binder
     using System.Linq;
     using Narvalo;
     using Narvalo.Mvp.Internal;
+    using Narvalo.Mvp.Internal.Providers;
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly ReflectionCache<IEnumerable<PresenterBindingAttribute>> _attributesCache
-           = new ReflectionCache<IEnumerable<PresenterBindingAttribute>>();
+        readonly PresenterBindingAttributesProvider _presenterBindingAttributesProvider 
+            = new CachedPresenterBindingAttributesProvider();
 
         public IEnumerable<PresenterDiscoveryResult> FindBindings(
             IEnumerable<object> hosts,
@@ -36,7 +37,7 @@ namespace Narvalo.Mvp.Binder
 
                 var viewAttributes = GetAttributes_(viewType)
                     .Where(_ => _.ViewType.IsAssignableFrom(viewType));
-                    //.OrderBy(_ => _.PresenterType.Name);
+                //.OrderBy(_ => _.PresenterType.Name);
 
                 foreach (var attribute in viewAttributes) {
                     var viewsToBind = GetViewsToBind_(pendingViews, view, viewType, attribute);
@@ -62,7 +63,7 @@ namespace Narvalo.Mvp.Binder
                     .SelectMany(h => GetAttributes_(h.GetType())
                         .Select(a => new { Host = h, Attribute = a }))
                     .Where(_ => _.Attribute.ViewType.IsAssignableFrom(viewType));
-                    //.OrderBy(_ => _.Attribute.PresenterType.Name);
+                //.OrderBy(_ => _.Attribute.PresenterType.Name);
 
                 foreach (var hostAttribute in hostAttributes) {
                     var attribute = hostAttribute.Attribute;
@@ -98,7 +99,7 @@ namespace Narvalo.Mvp.Binder
                 }
 
                 if (iterations++ > maxIterations) {
-                    throw new MvpException(
+                    throw new BindingException(
                         "The loop has executed too many times. An exit condition is failing and needs to be investigated.");
                 }
             }
@@ -108,7 +109,7 @@ namespace Narvalo.Mvp.Binder
 
         IEnumerable<PresenterBindingAttribute> GetAttributes_(Type sourceType)
         {
-            return _attributesCache.GetOrAdd(sourceType, CreateAttributes_);
+            return _presenterBindingAttributesProvider.GetComponent(sourceType);
         }
 
         static IEnumerable<IView> GetViewsToBind_(
@@ -129,44 +130,13 @@ namespace Narvalo.Mvp.Binder
                     break;
 
                 default:
-                    throw new MvpException(String.Format(
+                    throw new BindingException(String.Format(
                         CultureInfo.InvariantCulture,
                         "Binding mode {0} is not supported.",
                         attribute.BindingMode));
             }
 
             return viewsToBind;
-        }
-
-        static IEnumerable<PresenterBindingAttribute> CreateAttributes_(Type sourceType)
-        {
-            var attributes = sourceType
-                .GetCustomAttributes(typeof(PresenterBindingAttribute), true /* inherit */)
-                .OfType<PresenterBindingAttribute>()
-                .ToArray();
-
-            if (attributes.Any(a =>
-                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null
-                )) {
-                throw new MvpException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    "When a {1} is applied with BindingMode={2}, the ViewType must be explicitly specified. One of the bindings on {0} violates this restriction.",
-                    sourceType.FullName,
-                    typeof(PresenterBindingAttribute).Name,
-                    Enum.GetName(typeof(PresenterBindingMode), PresenterBindingMode.SharedPresenter)
-                ));
-            }
-
-            attributes = attributes
-                .Select(pba =>
-                    new PresenterBindingAttribute(pba.PresenterType)
-                    {
-                        ViewType = pba.ViewType ?? sourceType,
-                        BindingMode = pba.BindingMode
-                    })
-                .ToArray();
-
-            return attributes;
         }
     }
 }

@@ -27,11 +27,6 @@ namespace Narvalo.Mvp
             _container = container;
         }
 
-        //public void SelfRegister()
-        //{
-        //    PresenterFactoryProvider.Current.SetService(new AutofacPresenterFactory(_container));
-        //}
-
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
             // REVIEW: I would prefer to register the view as a dependency and then resolve
@@ -82,11 +77,6 @@ namespace Narvalo.Mvp
             Require.NotNull(container, "container");
 
             _container = container;
-        }
-
-        public void SelfRegister()
-        {
-            PresenterBuilder.Current.SetFactory(new AutofacPresenterFactory(_container));
         }
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)

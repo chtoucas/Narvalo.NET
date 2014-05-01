@@ -22,12 +22,9 @@ namespace Playground
             //new TestCommand().Execute();
 
             using (var container = CreateContainer_()) {
-                new MvpBootstrapper
-                {
-                    PresenterFactory = new AutofacPresenterFactory(container)
-                }.Run();
-
-                //new AutofacPresenterFactory(container).SelfRegister();
+                new MvpBootstrapper()
+                    .PresenterFactory.Is(new AutofacPresenterFactory(container))
+                    .Run();
 
                 new TestCommand().Execute();
                 new TestCommand().Execute();

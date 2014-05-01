@@ -3,49 +3,85 @@
 namespace Narvalo.Mvp
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Internal;
 
+    /// <summary>
+    /// Provides a single entry point to configure Narvalo.Mvp.
+    /// </summary>
     public sealed class MvpBootstrapper
     {
         readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
 
-        public ICompositeViewFactory CompositeViewFactory { get; set; }
-        public IMessageBus MessageBus { get; set; }
-        public IPresenterFactory PresenterFactory { get; set; }
+        ICompositeViewFactory _compositeViewFactory;
+        IMessageBus _messageBus;
+        IPresenterFactory _presenterFactory;
 
-        public MvpBootstrapper Append(IPresenterDiscoveryStrategy value)
+        public Setter<MvpBootstrapper, ICompositeViewFactory> CompositeViewFactory
         {
-            _presenterDiscoveryStrategies.Add(value);
+            get
+            {
+                return new Setter<MvpBootstrapper, ICompositeViewFactory>(
+                    this, _ => _compositeViewFactory = _);
+            }
+        }
 
-            return this;
+        public Setter<MvpBootstrapper, IMessageBus> MessageBus
+        {
+            get
+            {
+                return new Setter<MvpBootstrapper, IMessageBus>(
+                    this, _ => _messageBus = _);
+            }
+        }
+
+        public Setter<MvpBootstrapper, IPresenterFactory> PresenterFactory
+        {
+            get
+            {
+                return new Setter<MvpBootstrapper, IPresenterFactory>(
+                    this, _ => _presenterFactory = _);
+            }
+        }
+
+        public Appender<MvpBootstrapper, IPresenterDiscoveryStrategy> DiscoverPresenter
+        {
+            get
+            {
+                return new Appender<MvpBootstrapper, IPresenterDiscoveryStrategy>(
+                    this, _ => _presenterDiscoveryStrategies.Add(_));
+            }
         }
 
         public void Run()
         {
-            var bindingServices = BindingServices.Current;
+            var bindingServices = BindingServicesContainer.Current;
 
-            if (CompositeViewFactory != null) {
-                bindingServices.CompositeViewFactory = CompositeViewFactory;
+            if (_compositeViewFactory != null) {
+                bindingServices.CompositeViewFactory = _compositeViewFactory;
             }
 
-            if (PresenterFactory != null) {
-                bindingServices.PresenterFactory = PresenterFactory;
+            if (_presenterFactory != null) {
+                bindingServices.PresenterFactory = _presenterFactory;
             }
 
-            var count = _presenterDiscoveryStrategies.Count;
+            var strategies = _presenterDiscoveryStrategies.Where(_ => _ != null).Distinct();
+
+            var count = strategies.Count();
 
             if (count == 1) {
-                bindingServices.PresenterDiscoveryStrategy = _presenterDiscoveryStrategies[0];
+                bindingServices.PresenterDiscoveryStrategy = strategies.First();
             }
             else if (count > 1) {
                 bindingServices.PresenterDiscoveryStrategy
-                    = new CompositePresenterDiscoveryStrategy(_presenterDiscoveryStrategies);
+                    = new CompositePresenterDiscoveryStrategy(strategies);
             }
 
-            if (MessageBus != null) {
-                MessageBusProvider.Current.SetService(MessageBus);
+            if (_messageBus != null) {
+                MessageBusContainer.Current.Reset(_messageBus);
             }
         }
     }

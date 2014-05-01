@@ -12,16 +12,14 @@ namespace Narvalo.Mvp.Binder
 
     public sealed class PresenterBinder
     {
-        static readonly BindingServices BindingServices_ = BindingServices.Current;
-
         static readonly ICompositeViewFactory CompositeViewFactory_
-            = BindingServices_.CompositeViewFactory;
+            = BindingServicesContainer.Current.CompositeViewFactory;
         static readonly IPresenterDiscoveryStrategy PresenterDiscoveryStrategy_
-            = BindingServices_.PresenterDiscoveryStrategy;
+            = BindingServicesContainer.Current.PresenterDiscoveryStrategy;
         static readonly IPresenterFactory PresenterFactory_
-            = BindingServices_.PresenterFactory;
+            = BindingServicesContainer.Current.PresenterFactory;
 
-        static readonly IMessageBus MessageBus_ = MessageBusProvider.Current.Service;
+        static readonly IMessageBus MessageBus_ = MessageBusContainer.Current.Value;
 
         readonly IList<IPresenter> _presenters = new List<IPresenter>();
         readonly IList<IView> _viewsToBind = new List<IView>();
@@ -106,7 +104,7 @@ namespace Narvalo.Mvp.Binder
                     break;
 
                 default:
-                    throw new MvpException(String.Format(
+                    throw new BindingException(String.Format(
                         CultureInfo.InvariantCulture,
                         "Binding mode {0} is not supported by this method.",
                         binding.BindingMode));
@@ -147,7 +145,7 @@ namespace Narvalo.Mvp.Binder
                                select view;
 
             if (unboundViews.Any()) {
-                throw new MvpException(String.Format(
+                throw new BindingException(String.Format(
                     CultureInfo.InvariantCulture,
                     @"Failed to find presenter for view instance of type {0}.",
                     unboundViews.First().GetType().FullName

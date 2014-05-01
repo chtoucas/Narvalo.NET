@@ -17,6 +17,9 @@
 
       <!-- Serilog -->
       <Word>Enricher</Word>
+      
+      <!--  -->
+      <Word>Appender</Word>
 
       <!-- ASP.NET -->
       <Word>Mvc</Word>

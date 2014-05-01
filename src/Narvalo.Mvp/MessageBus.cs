@@ -9,8 +9,7 @@ namespace Narvalo.Mvp
     using System.Linq;
 
     // TODO: To be entirely rewritten.
-    // TODO: Make it available to DI.
-    // TODO: Rollback on ConcurrentDictionary.
+    // TODO: Rollback on ConcurrentDictionary?
     public sealed class MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList> _messages
