@@ -1,16 +1,16 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
 
-    internal class PresenterBindingAttributesProvider
-        : IComponentProvider<Type, IEnumerable<PresenterBindingAttribute>>
+    internal class PresenterBindingAttributesResolver
+        : IComponentResolver<Type, IEnumerable<PresenterBindingAttribute>>
     {
-        public virtual IEnumerable<PresenterBindingAttribute> GetComponent(Type input)
+        public virtual IEnumerable<PresenterBindingAttribute> Resolve(Type input)
         {
             DebugCheck.NotNull(input);
 

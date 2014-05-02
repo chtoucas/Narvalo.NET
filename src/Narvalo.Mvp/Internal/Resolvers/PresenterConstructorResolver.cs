@@ -1,15 +1,15 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Globalization;
     using System.Reflection.Emit;
 
-    internal class PresenterConstructorProvider
-        : IComponentProvider<Tuple<Type, Type>, DynamicMethod>
+    internal class PresenterConstructorResolver
+        : IComponentResolver<Tuple<Type, Type>, DynamicMethod>
     {
-        public virtual DynamicMethod GetComponent(Tuple<Type, Type> input)
+        public virtual DynamicMethod Resolve(Tuple<Type, Type> input)
         {
             DebugCheck.NotNull(input);
 

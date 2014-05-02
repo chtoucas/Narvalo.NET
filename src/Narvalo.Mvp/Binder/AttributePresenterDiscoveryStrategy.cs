@@ -8,12 +8,12 @@ namespace Narvalo.Mvp.Binder
     using System.Linq;
     using Narvalo;
     using Narvalo.Mvp.Internal;
-    using Narvalo.Mvp.Internal.Providers;
+    using Narvalo.Mvp.Internal.Resolvers;
 
     public sealed class AttributePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly PresenterBindingAttributesProvider _attributesProvider
-            = new CachedPresenterBindingAttributesProvider();
+        readonly PresenterBindingAttributesResolver _attributesResolver
+            = new CachedPresenterBindingAttributesResolver();
 
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(views, "views");
 
             var hostAttributes = hosts.Except(views.OfType<Object>())
-                .SelectMany(_ => _attributesProvider.GetComponent(_.GetType()))
+                .SelectMany(_ => _attributesResolver.Resolve(_.GetType()))
                 .ToList();
 
             var boundViews = new List<IView>();
@@ -37,7 +37,7 @@ namespace Narvalo.Mvp.Binder
 
                 var bindingsThisRound
                     = (from attr in
-                           _attributesProvider.GetComponent(viewType).Concat(hostAttributes)
+                           _attributesResolver.Resolve(viewType).Concat(hostAttributes)
                        where attr.ViewType.IsAssignableFrom(viewType)
                        select new PresenterBinding(
                            attr.PresenterType,

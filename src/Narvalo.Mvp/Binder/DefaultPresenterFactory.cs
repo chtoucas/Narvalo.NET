@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Binder
     using System.Globalization;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Mvp.Internal.Providers;
+    using Narvalo.Mvp.Internal.Resolvers;
 
     /// <remarks>
     /// WARNING: This class can not be used for presenters that do not have a constructor
@@ -14,8 +14,8 @@ namespace Narvalo.Mvp.Binder
     /// </remarks>
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
-        readonly PresenterConstructorProvider _constructorProvider
-            = new CachedPresenterConstructorProvider();
+        readonly PresenterConstructorResolver _constructorResolver
+            = new CachedPresenterConstructorResolver();
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(viewType, "viewType");
             Require.NotNull(view, "view");
 
-            var ctor = _constructorProvider.GetComponent(Tuple.Create(presenterType, viewType));
+            var ctor = _constructorResolver.Resolve(Tuple.Create(presenterType, viewType));
 
             try {
                 return (IPresenter)ctor.Invoke(null, new[] { view });

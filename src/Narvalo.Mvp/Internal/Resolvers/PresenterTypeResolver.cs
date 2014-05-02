@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Collections.Generic;
@@ -9,12 +9,12 @@ namespace Narvalo.Mvp.Internal.Providers
     using Narvalo.Collections;
     using Narvalo.Mvp;
 
-    internal class PresenterTypeProvider : IComponentProvider<Type, Type>
+    internal class PresenterTypeResolver : IComponentResolver<Type, Type>
     {
         readonly IList<string> _presenterNameTemplates;
         readonly IList<string> _viewSuffixes;
 
-        public PresenterTypeProvider(
+        public PresenterTypeResolver(
             IList<string> viewSuffixes,
             IList<string> presenterNameTemplates)
         {
@@ -25,7 +25,7 @@ namespace Narvalo.Mvp.Internal.Providers
             _presenterNameTemplates = presenterNameTemplates;
         }
 
-        public virtual Type GetComponent(Type input)
+        public virtual Type Resolve(Type input)
         {
             DebugCheck.NotNull(input);
 

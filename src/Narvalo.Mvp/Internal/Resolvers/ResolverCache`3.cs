@@ -1,18 +1,18 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Collections.Concurrent;
 
-    internal class ProviderCache<TKey, TCacheKey, TValue>
+    internal class ResolverCache<TKey, TCacheKey, TValue>
     {
         readonly ConcurrentDictionary<TCacheKey, TValue> _dictionary
            = new ConcurrentDictionary<TCacheKey, TValue>();
 
         readonly Func<TKey, TCacheKey> _cacheKeyProvider;
 
-        public ProviderCache(Func<TKey, TCacheKey> cacheKeyProvider)
+        public ResolverCache(Func<TKey, TCacheKey> cacheKeyProvider)
         {
             DebugCheck.NotNull(cacheKeyProvider);
 

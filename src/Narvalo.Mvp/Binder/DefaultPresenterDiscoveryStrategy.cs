@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Binder
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
-    using Narvalo.Mvp.Internal.Providers;
+    using Narvalo.Mvp.Internal.Resolvers;
 
     public class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
@@ -31,7 +31,7 @@ namespace Narvalo.Mvp.Binder
             "{namespace}.{presenter}",
         };
 
-        readonly PresenterTypeProvider _typeProvider;
+        readonly PresenterTypeResolver _typeResolver;
 
         public DefaultPresenterDiscoveryStrategy()
             : this(ViewSuffixes_, PresenterNameTemplates_) { }
@@ -40,7 +40,7 @@ namespace Narvalo.Mvp.Binder
             IList<string> viewSuffixes,
             IList<string> presenterNameTemplates)
         {
-            _typeProvider = new CachedPresenterTypeProvider(viewSuffixes, presenterNameTemplates);
+            _typeResolver = new CachedPresenterTypeResolver(viewSuffixes, presenterNameTemplates);
         }
 
         public PresenterDiscoveryResult FindBindings(
@@ -54,7 +54,7 @@ namespace Narvalo.Mvp.Binder
 
             foreach (var view in views) {
                 var viewType = view.GetType();
-                var presenterType = _typeProvider.GetComponent(viewType);
+                var presenterType = _typeResolver.Resolve(viewType);
 
                 if (presenterType != null) {
                     __Trace.Write(

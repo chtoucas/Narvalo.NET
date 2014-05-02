@@ -1,22 +1,22 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Collections.Generic;
 
-    internal sealed class CachedPresenterTypeProvider : PresenterTypeProvider
+    internal sealed class CachedPresenterTypeResolver : PresenterTypeResolver
     {
-        readonly TypeKeyedProviderCache<Type> _cache = new TypeKeyedProviderCache<Type>();
+        readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
-        public CachedPresenterTypeProvider(
+        public CachedPresenterTypeResolver(
             IList<string> viewInstanceSuffixes,
             IList<string> candidatePresenterNames)
             : base(viewInstanceSuffixes, candidatePresenterNames) { }
 
-        public override Type GetComponent(Type input)
+        public override Type Resolve(Type input)
         {
-            return _cache.GetOrAdd(input, base.GetComponent);
+            return _cache.GetOrAdd(input, base.Resolve);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Providers
+namespace Narvalo.Mvp.Internal.Resolvers
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +8,12 @@ namespace Narvalo.Mvp.Internal.Providers
     using System.Linq;
     using System.Reflection;
 
-    internal class CompositeViewTypeProvider : IComponentProvider<Type, Type>
+    internal class CompositeViewTypeResolver : IComponentResolver<Type, Type>
     {
         readonly CompositeViewModuleBuilder _moduleBuilder
               = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
-        public virtual Type GetComponent(Type input)
+        public virtual Type Resolve(Type input)
         {
             DebugCheck.NotNull(input);
 
