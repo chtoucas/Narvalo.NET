@@ -11,7 +11,7 @@ namespace Narvalo.Mvp.Internal
             = new Delayed<ICompositeViewFactory>(() => new DefaultCompositeViewFactory());
 
         readonly Delayed<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategy
-            = new Delayed<IPresenterDiscoveryStrategy>(() => new DefaultPresenterDiscoveryStrategy());
+            = new Delayed<IPresenterDiscoveryStrategy>(() => new AttributeBasedPresenterDiscoveryStrategy());
 
         readonly Delayed<IPresenterFactory> _presenterFactory
             = new Delayed<IPresenterFactory>(() => new DefaultPresenterFactory());

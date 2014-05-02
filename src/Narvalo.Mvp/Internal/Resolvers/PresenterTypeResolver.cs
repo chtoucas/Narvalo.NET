@@ -11,16 +11,24 @@ namespace Narvalo.Mvp.Internal.Resolvers
 
     internal class PresenterTypeResolver : IComponentResolver<Type, Type>
     {
-        readonly IList<string> _presenterNameTemplates;
-        readonly IList<string> _viewSuffixes;
+        readonly IBuildManager _buildManager;
+        readonly IEnumerable<string> _defaultNamespaces;
+        readonly string[] _presenterNameTemplates;
+        readonly string[] _viewSuffixes;
 
         public PresenterTypeResolver(
-            IList<string> viewSuffixes,
-            IList<string> presenterNameTemplates)
+            IBuildManager buildManager,
+            IEnumerable<string> defaultNamespaces,
+            string[] viewSuffixes,
+            string[] presenterNameTemplates)
         {
+            DebugCheck.NotNull(buildManager);
+            DebugCheck.NotNull(defaultNamespaces);
             DebugCheck.NotNull(viewSuffixes);
             DebugCheck.NotNull(presenterNameTemplates);
 
+            _buildManager = buildManager;
+            _defaultNamespaces = defaultNamespaces;
             _viewSuffixes = viewSuffixes;
             _presenterNameTemplates = presenterNameTemplates;
         }
@@ -29,38 +37,33 @@ namespace Narvalo.Mvp.Internal.Resolvers
         {
             DebugCheck.NotNull(input);
 
-            var shortNames = GetNamesFromInterfaces_(input)
-                .Append(GetNameFromType_(input));
+            var shortNames = GetShortNamesFromInterfaces_(input)
+                .Append(GetShortNameFromType_(input));
 
-            // TODO: We could allow to specify a custom namespace.
-            var nameSpaces = new[] 
-            { 
-                input.Namespace,
-                new AssemblyName(input.Assembly.FullName).Name
-            };
+            var nameSpaces = _defaultNamespaces
+                // We also look into the view namespace 
+                // and into the assembly where the view is defined.
+                .Append(input.Namespace)
+                .Append(new AssemblyName(input.Assembly.FullName).Name);
 
-            var names = from name in shortNames.Distinct()
-                        from template in
-                            (from nameSpace in nameSpaces.Distinct()
-                             from template in _presenterNameTemplates
-                             select template.Replace("{namespace}", nameSpace))
-                        select template.Replace("{presenter}", name + "Presenter");
+            var presenterTypes
+                = from shortName in shortNames.Distinct()
+                  from template in
+                      (from nameSpace in nameSpaces.Distinct()
+                       from template in _presenterNameTemplates
+                       select template.Replace("{namespace}", nameSpace))
+                  let typeName = template.Replace("{presenter}", shortName + "Presenter")
+                  let presenterType = _buildManager.GetType(
+                      typeName,
+                      throwOnError: false,
+                      ignoreCase: true)
+                  where presenterType != null && typeof(IPresenter).IsAssignableFrom(presenterType)
+                  select presenterType;
 
-            foreach (var name in names) {
-                var presenterType = input.Assembly.GetType(
-                    name,
-                    throwOnError: false,
-                    ignoreCase: true);
-
-                if (presenterType != null && typeof(IPresenter).IsAssignableFrom(presenterType)) {
-                    return presenterType;
-                }
-            }
-
-            return null;
+            return presenterTypes.FirstOrDefault();
         }
 
-        static IEnumerable<string> GetNamesFromInterfaces_(Type viewType)
+        static IEnumerable<string> GetShortNamesFromInterfaces_(Type viewType)
         {
             // Trim the "I" and "View" from the start & end respectively of the interface names.
             return
@@ -73,7 +76,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
                 select length > 0 ? name.Substring(0, length) : name;
         }
 
-        string GetNameFromType_(Type viewType)
+        string GetShortNameFromType_(Type viewType)
         {
             var viewName = viewType.Name;
 

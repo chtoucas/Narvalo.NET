@@ -10,9 +10,11 @@ namespace Narvalo.Mvp.Internal.Resolvers
         readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
         public CachedPresenterTypeResolver(
-            IList<string> viewInstanceSuffixes,
-            IList<string> candidatePresenterNames)
-            : base(viewInstanceSuffixes, candidatePresenterNames) { }
+            IBuildManager buildManager,
+            IEnumerable<string> defaultNamespaces,
+            string[] viewInstanceSuffixes,
+            string[] candidatePresenterNames)
+            : base(buildManager, defaultNamespaces, viewInstanceSuffixes, candidatePresenterNames) { }
 
         public override Type Resolve(Type input)
         {

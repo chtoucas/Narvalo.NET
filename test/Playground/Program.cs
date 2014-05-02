@@ -25,7 +25,7 @@ namespace Playground
 
             using (var container = CreateContainer_()) {
                 new MvpBootstrapper()
-                    .DiscoverPresenter.With(new DefaultPresenterDiscoveryStrategy())
+                    .DiscoverPresenter.With(new ConventionBasedPresenterDiscoveryStrategy())
                     .PresenterFactory.Is(new AutofacPresenterFactory(container))
                     .Run();
 

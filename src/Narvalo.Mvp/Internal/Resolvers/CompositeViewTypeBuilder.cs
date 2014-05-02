@@ -24,7 +24,7 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
         get { return Views.First().Model; }
         set
         {
-            foreach(var view in Views) {
+            foreach (var view in Views) {
                 view.Model = value;
             }
         }

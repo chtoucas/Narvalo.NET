@@ -3,29 +3,30 @@
 namespace Narvalo.Mvp.Binder
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Internal.Resolvers;
 
-    public class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly IList<string> ViewSuffixes_ = new[] 
+        static readonly string[] ViewSuffixes_ = new[] 
         {
+            // Command Line
+            "Command",
+
+            // Windows Forms
             "UserControl",
             "Control",
-            // Windows Forms
             "Form",
-            // Web Forms
-            "Page",
-            "Handler",
-            "WebService",
-            "Service",
+
             // Last chance
             "View",
         };
 
-        static readonly IList<string> PresenterNameTemplates_ = new[]
+        static readonly string[] PresenterNameTemplates_ = new[]
         {
             "{namespace}.Presenters.{presenter}",
             "{namespace}.{presenter}",
@@ -33,14 +34,47 @@ namespace Narvalo.Mvp.Binder
 
         readonly PresenterTypeResolver _typeResolver;
 
-        public DefaultPresenterDiscoveryStrategy()
-            : this(ViewSuffixes_, PresenterNameTemplates_) { }
+        public ConventionBasedPresenterDiscoveryStrategy()
+            : this(
+               new[] { Assembly.GetEntryAssembly() },
+                ViewSuffixes_,
+                PresenterNameTemplates_) { }
 
-        public DefaultPresenterDiscoveryStrategy(
-            IList<string> viewSuffixes,
-            IList<string> presenterNameTemplates)
+        public ConventionBasedPresenterDiscoveryStrategy(
+            Assembly[] assemblies,
+            string[] viewSuffixes,
+            string[] presenterNameTemplates)
         {
-            _typeResolver = new CachedPresenterTypeResolver(viewSuffixes, presenterNameTemplates);
+            Require.NotNull(assemblies, "assemblies");
+            Require.NotNull(viewSuffixes, "viewSuffixes");
+            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
+
+            var buildManager = new BuildManager(assemblies);
+            var defaultNamespaces = assemblies.Select(_ => new AssemblyName(_.FullName).Name);
+
+            _typeResolver = new CachedPresenterTypeResolver(
+                buildManager,
+                defaultNamespaces,
+                viewSuffixes,
+                presenterNameTemplates);
+        }
+
+        public ConventionBasedPresenterDiscoveryStrategy(
+            IBuildManager buildManager,
+            IEnumerable<string> defaultNamespaces,
+            string[] viewSuffixes,
+            string[] presenterNameTemplates)
+        {
+            Require.NotNull(buildManager, "buildManager");
+            Require.NotNull(defaultNamespaces, "defaultNamespaces");
+            Require.NotNull(viewSuffixes, "viewSuffixes");
+            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
+
+            _typeResolver = new CachedPresenterTypeResolver(
+                buildManager,
+                defaultNamespaces,
+                viewSuffixes,
+                presenterNameTemplates);
         }
 
         public PresenterDiscoveryResult FindBindings(
