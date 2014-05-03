@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Binder
+namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.Binder
                 .ToList();
 
             var boundViews = new List<IView>();
-            var bindings = new List<PresenterBinding>();
+            var bindings = new List<PresenterBindingParameter>();
 
             var pendingViews = views;
 
@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.Binder
                     = (from attr in
                            _attributesResolver.Resolve(viewType).Concat(hostAttributes)
                        where attr.ViewType.IsAssignableFrom(viewType)
-                       select new PresenterBinding(
+                       select new PresenterBindingParameter(
                            attr.PresenterType,
                            attr.ViewType,
                            attr.BindingMode,
@@ -67,7 +67,7 @@ namespace Narvalo.Mvp.Binder
             IEnumerable<IView> pendingViews)
         {
             __Trace.Write(
-                "Found [PresenterBinding] attribute on {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
+                "[AttributeBasedPresenterDiscoveryStrategy] Found presenter type: {1}, view type: {2}, binding mode: {3}.",
                 attribute.Origin.FullName,
                 attribute.PresenterType.FullName,
                 attribute.ViewType.FullName,
@@ -82,7 +82,7 @@ namespace Narvalo.Mvp.Binder
                     return pendingViews.Where(viewType.IsInstanceOfType);
 
                 default:
-                    throw new BindingException(String.Format(
+                    throw new PresenterBindingException(String.Format(
                         CultureInfo.InvariantCulture,
                         "Binding mode {0} is not supported.",
                         attribute.BindingMode));

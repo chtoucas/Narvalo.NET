@@ -13,6 +13,8 @@ namespace Narvalo.Mvp.Internal.Resolvers
         {
             DebugCheck.NotNull(input);
 
+            __Trace.Write("[PresenterConstructorResolver] Attempting to resolve: " + input.Item1.FullName);
+
             var presenterType = input.Item1;
             var viewType = input.Item2;
 

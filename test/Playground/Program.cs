@@ -5,7 +5,8 @@ namespace Playground
     using System;
     using Autofac;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.CommandLine;
+    using Narvalo.Mvp.PresenterBinding;
     using Playground.Commands;
     using Playground.Properties;
     using Serilog;
@@ -24,10 +25,13 @@ namespace Playground
             //new TestCommand().Execute();
 
             using (var container = CreateContainer_()) {
-                new MvpBootstrapper()
-                    .DiscoverPresenter.With(new ConventionBasedPresenterDiscoveryStrategy())
-                    .PresenterFactory.Is(new AutofacPresenterFactory(container))
-                    .Run();
+                var bootstrapper = new CommandsBootstrapper();
+
+                bootstrapper.Configuration
+                    .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
+                    .PresenterFactory.Is(new AutofacPresenterFactory(container));
+
+                bootstrapper.Run();
 
                 new TestCommand().Execute();
                 new TestCommand().Execute();

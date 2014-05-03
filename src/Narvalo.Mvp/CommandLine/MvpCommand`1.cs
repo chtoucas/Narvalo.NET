@@ -1,15 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows
+namespace Narvalo.Mvp.CommandLine
 {
     using System;
-    using System.ComponentModel;
 
-    public partial class MvpUserControl<TViewModel> : MvpUserControl, IView<TViewModel>
+    public abstract class MvpCommand<TViewModel> : MvpCommand, IView<TViewModel>
     {
         TViewModel _model;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TViewModel Model
         {
             get

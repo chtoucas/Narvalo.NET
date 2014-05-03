@@ -1,19 +1,21 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Binder
+namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Mvp.Internal;
+    using System.Linq;
+    using Narvalo;
+    using Narvalo.Collections;
 
-    public sealed class PresenterBinding
+    public sealed class PresenterBindingParameter
     {
         readonly Type _presenterType;
         readonly Type _viewType;
         readonly PresenterBindingMode _bindingMode;
         readonly IEnumerable<IView> _views;
 
-        public PresenterBinding(
+        public PresenterBindingParameter(
             Type presenterType,
             Type viewType,
             PresenterBindingMode bindingMode,
@@ -39,7 +41,7 @@ namespace Narvalo.Mvp.Binder
                 return false;
             }
 
-            var other = obj as PresenterBinding;
+            var other = obj as PresenterBindingParameter;
             if (other == null) {
                 return false;
             }
@@ -47,7 +49,7 @@ namespace Narvalo.Mvp.Binder
             return PresenterType == other.PresenterType
                 && ViewType == other.ViewType
                 && BindingMode == other.BindingMode
-                && WeakEquality.AreEqual(Views, other.Views);
+                && SequenceEqual_(Views, other.Views);
         }
 
         public override int GetHashCode()
@@ -56,6 +58,32 @@ namespace Narvalo.Mvp.Binder
                 | ViewType.GetHashCode()
                 | BindingMode.GetHashCode()
                 | Views.GetHashCode();
+        }
+
+        /// <summary>
+        /// An order independent version of Enumerable.SequenceEqual.
+        /// </summary>
+        static bool SequenceEqual_<T>(IEnumerable<T> left, IEnumerable<T> right)
+        {
+            Require.NotNull(left, "left");
+            Require.NotNull(right, "right");
+
+            var leftObjects = left.ToList();
+            var rightObjects = right.ToList();
+
+            if (leftObjects.Count != rightObjects.Count) {
+                return false;
+            }
+
+            foreach (var item in rightObjects) {
+                if (!leftObjects.Contains(item)) {
+                    return false;
+                }
+
+                leftObjects.Remove(item);
+            }
+
+            return leftObjects.IsEmpty();
         }
     }
 }

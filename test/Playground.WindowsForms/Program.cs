@@ -2,19 +2,22 @@
 {
     using System;
     using System.Windows.Forms;
-    using Narvalo.Mvp;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Windows.Forms;
 
     static class Program
     {
         [STAThread]
         static void Main()
         {
-            new MvpBootstrapper()
+            var bootstrapper = new FormsBootstrapper();
+
+            bootstrapper.Configuration
                 .DiscoverPresenter.With(
-                    new ConventionBasedPresenterDiscoveryStrategy(),
-                    new AttributeBasedPresenterDiscoveryStrategy())
-                .Run();
+                    new DefaultFormPresenterDiscoveryStrategy(),
+                    new AttributeBasedPresenterDiscoveryStrategy());
+
+            bootstrapper.Run();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

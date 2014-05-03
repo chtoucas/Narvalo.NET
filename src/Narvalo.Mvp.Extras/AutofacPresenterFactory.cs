@@ -7,7 +7,7 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using Autofac;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.PresenterBinding;
 
 #if TEST
 

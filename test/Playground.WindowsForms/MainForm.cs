@@ -2,7 +2,7 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Windows;
+    using Narvalo.Mvp.Windows.Forms;
 
     [PresenterBinding(typeof(MainPresenter),
         ViewType = typeof(IMainView))]

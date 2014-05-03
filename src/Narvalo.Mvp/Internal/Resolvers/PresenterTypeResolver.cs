@@ -37,6 +37,8 @@ namespace Narvalo.Mvp.Internal.Resolvers
         {
             DebugCheck.NotNull(input);
 
+            __Trace.Write("[PresenterTypeResolver] Attempting to resolve: " + input.FullName);
+
             var shortNames = GetShortNamesFromInterfaces_(input)
                 .Append(GetShortNameFromType_(input));
 

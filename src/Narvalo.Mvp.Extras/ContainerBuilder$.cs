@@ -7,6 +7,7 @@ namespace Narvalo.Mvp
     using Autofac;
     using Autofac.Builder;
     using Autofac.Features.Scanning;
+    using Narvalo.Mvp.CommandLine;
 
     public static class ContainerBuilderExtensions
     {

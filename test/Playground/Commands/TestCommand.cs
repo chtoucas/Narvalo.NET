@@ -4,7 +4,8 @@ namespace Playground.Commands
 {
     using System;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.CommandLine;
     using Playground.Presenters;
     using Playground.Views;
 

@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Web.Compilation;
 
-    public class BuildManagerWrapper : IBuildManager
+    public class AspNetBuildManager : IBuildManager
     {
         public Type GetType(string typeName, bool throwOnError, bool ignoreCase)
         {

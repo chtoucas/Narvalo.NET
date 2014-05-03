@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp
+namespace Narvalo.Mvp.CommandLine
 {
     using System;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.PresenterBinding;
 
     public abstract class MvpCommand : IView, ICommand, IDisposable
     {

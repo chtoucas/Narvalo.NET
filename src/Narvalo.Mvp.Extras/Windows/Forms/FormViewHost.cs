@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows
+namespace Narvalo.Mvp.Windows.Forms
 {
     using System;
     using System.Collections.Generic;
     using System.Windows.Forms;
     using Narvalo;
-    using Narvalo.Mvp.Binder;
+    using Narvalo.Mvp.PresenterBinding;
 
     internal sealed class FormViewHost
     {
@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Windows
         {
             DebugCheck.NotNull(form);
 
-            _presenterBinder = new PresenterBinder(form);
+            _presenterBinder = new PresenterBinder(this);
 
             form.Load += Form_Load;
             form.Disposed += Form_Disposed;

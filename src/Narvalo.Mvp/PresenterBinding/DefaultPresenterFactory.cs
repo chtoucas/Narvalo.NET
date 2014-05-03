@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Binder
+namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Globalization;
@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.Binder
                     originalException = ex.InnerException;
                 }
 
-                throw new BindingException(String.Format(
+                throw new PresenterBindingException(String.Format(
                         CultureInfo.InvariantCulture,
                         "An exception was thrown whilst trying to create an instance of {0}. Check the InnerException for more information.",
                         presenterType.FullName),

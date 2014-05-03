@@ -1,7 +1,7 @@
 ﻿namespace Playground.WindowsForms
 {
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Windows;
+    using Narvalo.Mvp.Windows.Forms;
 
     [PresenterBinding(typeof(SamplePresenter),
          ViewType = typeof(IView))]

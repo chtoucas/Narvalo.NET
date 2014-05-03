@@ -14,6 +14,8 @@ namespace Narvalo.Mvp.Internal.Resolvers
         {
             DebugCheck.NotNull(input);
 
+            __Trace.Write("[PresenterBindingAttributesResolver] Attempting to resolve: " + input.FullName);
+
             var attributes = input
                 .GetCustomAttributes(typeof(PresenterBindingAttribute), true /* inherit */)
                 .OfType<PresenterBindingAttribute>()
@@ -22,7 +24,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
             if (attributes.Any(a =>
                     a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null
                 )) {
-                throw new BindingException(String.Format(
+                throw new PresenterBindingException(String.Format(
                     CultureInfo.InvariantCulture,
                     "When a {1} is applied with BindingMode={2}, the ViewType must be explicitly specified. One of the bindings on {0} violates this restriction.",
                     input.FullName,

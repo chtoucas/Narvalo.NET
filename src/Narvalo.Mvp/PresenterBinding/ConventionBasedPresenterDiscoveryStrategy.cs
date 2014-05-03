@@ -1,63 +1,16 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Binder
+namespace Narvalo.Mvp.PresenterBinding
 {
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Internal.Resolvers;
 
-    public class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly string[] ViewSuffixes_ = new[] 
-        {
-            // Command Line
-            "Command",
-
-            // Windows Forms
-            "UserControl",
-            "Control",
-            "Form",
-
-            // Last chance
-            "View",
-        };
-
-        static readonly string[] PresenterNameTemplates_ = new[]
-        {
-            "{namespace}.Presenters.{presenter}",
-            "{namespace}.{presenter}",
-        };
-
         readonly PresenterTypeResolver _typeResolver;
-
-        public ConventionBasedPresenterDiscoveryStrategy()
-            : this(
-               new[] { Assembly.GetEntryAssembly() },
-                ViewSuffixes_,
-                PresenterNameTemplates_) { }
-
-        public ConventionBasedPresenterDiscoveryStrategy(
-            Assembly[] assemblies,
-            string[] viewSuffixes,
-            string[] presenterNameTemplates)
-        {
-            Require.NotNull(assemblies, "assemblies");
-            Require.NotNull(viewSuffixes, "viewSuffixes");
-            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
-
-            var buildManager = new BuildManager(assemblies);
-            var defaultNamespaces = assemblies.Select(_ => new AssemblyName(_.FullName).Name);
-
-            _typeResolver = new CachedPresenterTypeResolver(
-                buildManager,
-                defaultNamespaces,
-                viewSuffixes,
-                presenterNameTemplates);
-        }
 
         public ConventionBasedPresenterDiscoveryStrategy(
             IBuildManager buildManager,
@@ -84,7 +37,7 @@ namespace Narvalo.Mvp.Binder
             Require.NotNull(views, "views");
 
             var boundViews = new List<IView>();
-            var bindings = new List<PresenterBinding>();
+            var bindings = new List<PresenterBindingParameter>();
 
             foreach (var view in views) {
                 var viewType = view.GetType();
@@ -92,12 +45,13 @@ namespace Narvalo.Mvp.Binder
 
                 if (presenterType != null) {
                     __Trace.Write(
-                        "Found a default presenter type: {0} for view type: {1})",
+                        "[{0}] Found a default presenter type: {1} for view type: {2})",
+                        this.GetType().Name,
                         presenterType.FullName,
                         viewType.FullName
                     );
 
-                    var binding = new PresenterBinding(
+                    var binding = new PresenterBindingParameter(
                         presenterType,
                         viewType,
                         PresenterBindingMode.Default,
@@ -108,7 +62,8 @@ namespace Narvalo.Mvp.Binder
                 }
                 else {
                     __Trace.Write(
-                        "No default presenter type found for view type: {0})",
+                        "[{0}] No default presenter type found for view type: {1})",
+                        this.GetType().Name,
                         viewType.FullName
                     );
                 }
