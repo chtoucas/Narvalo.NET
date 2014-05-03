@@ -69,12 +69,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="CommandLine\CommandsBootstrapper.cs" />
+    <Compile Include="CommandLine\CommandsMvpBootstrapper.cs" />
     <Compile Include="CommandLine\DefaultCommandPresenterDiscoveryStrategy.cs" />
     <Compile Include="CommandLine\ICommand.cs" />
     <Compile Include="CommandLine\MvpCommand.cs" />
     <Compile Include="CommandLine\MvpCommand`1.cs" />
-    <Compile Include="Internal\Delayed`1.cs" />
+    <Compile Include="DefaultServicesCreatedEventArgs.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="Internal\ServicesContainer.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="PresenterBindingMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesContainerCreatedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

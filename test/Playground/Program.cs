@@ -6,7 +6,6 @@ namespace Playground
     using Autofac;
     using Narvalo.Mvp;
     using Narvalo.Mvp.CommandLine;
-    using Narvalo.Mvp.PresenterBinding;
     using Playground.Commands;
     using Playground.Properties;
     using Serilog;
@@ -17,22 +16,15 @@ namespace Playground
         [STAThread]
         static void Main(string[] args)
         {
-            InitializeRuntime_();
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
+            Log.Logger = CreateLogger_();
             Log.Information(Resources.Starting);
 
-            //new TestCommand().Execute();
-            //new TestCommand().Execute();
-
             using (var container = CreateContainer_()) {
-                var bootstrapper = new CommandsBootstrapper();
+                ConfigureMvp_(container);
 
-                bootstrapper.Configuration
-                    .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
-                    .PresenterFactory.Is(new AutofacPresenterFactory(container));
-
-                bootstrapper.Run();
-
+                new TestCommand().Execute();
                 new TestCommand().Execute();
                 new TestCommand().Execute();
             }
@@ -40,33 +32,38 @@ namespace Playground
             Log.Information(Resources.Ending);
         }
 
+        static void ConfigureMvp_(IContainer container)
+        {
+            var mvp = new CommandsMvpBootstrapper();
+            mvp.Configuration
+                .PresenterFactory.Is(new AutofacPresenterFactory(container));
+            mvp.Run();
+        }
+
         static IContainer CreateContainer_()
         {
             var builder = new ContainerBuilder();
-
             builder.RegisterPresenters(typeof(Program).Assembly).AsSelf();
-            builder.RegisterType<MessageBus>().As<IMessageBus>();
-
             return builder.Build();
         }
 
-        static void InitializeRuntime_()
+        static ILogger CreateLogger_()
         {
-            Log.Logger = new LoggerConfiguration()
-               .MinimumLevel.Is(LogEventLevel.Verbose)
-               .WriteTo.Trace()
-               .WriteTo.ColoredConsole()
-               .CreateLogger();
+            return new LoggerConfiguration()
+                .MinimumLevel.Is(LogEventLevel.Verbose)
+                .WriteTo.Trace()
+                .WriteTo.ColoredConsole()
+                .CreateLogger();
+        }
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
-            {
-                try {
-                    Log.Fatal(Resources.UnhandledException, (Exception)e.ExceptionObject);
-                }
-                finally {
-                    Environment.Exit(1);
-                }
-            };
+        public static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            try {
+                Log.Fatal(Resources.UnhandledException, (Exception)e.ExceptionObject);
+            }
+            finally {
+                Environment.Exit(1);
+            }
         }
     }
 }

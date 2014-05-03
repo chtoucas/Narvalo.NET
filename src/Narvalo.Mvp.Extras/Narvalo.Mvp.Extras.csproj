@@ -82,11 +82,11 @@
     <Compile Include="Presenter`2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\AspNetBuildManager.cs" />
-    <Compile Include="Web\AspNetBootstrapper.cs" />
+    <Compile Include="Web\AspNetMvpBootstrapper.cs" />
     <Compile Include="Web\DefaultAspNetPresenterDiscoveryStrategy.cs" />
     <Compile Include="Windows\Forms\DefaultFormPresenterDiscoveryStrategy.cs" />
     <Compile Include="Windows\Forms\FormViewHost.cs" />
-    <Compile Include="Windows\Forms\FormsBootstrapper.cs" />
+    <Compile Include="Windows\Forms\FormsMvpBootstrapper.cs" />
     <Compile Include="Windows\Forms\MvpForm.cs">
       <SubType>Form</SubType>
     </Compile>

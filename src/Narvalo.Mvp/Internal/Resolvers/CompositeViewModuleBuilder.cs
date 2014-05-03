@@ -11,14 +11,14 @@ namespace Narvalo.Mvp.Internal.Resolvers
         const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
 
         readonly string _assemblyName;
-        readonly ModuleBuilder _moduleBuilder;
+        readonly Lazy<ModuleBuilder> _moduleBuilder;
 
         public CompositeViewModuleBuilder(string assemblyName)
         {
             DebugCheck.NotNullOrEmpty(assemblyName);
 
             _assemblyName = assemblyName;
-            _moduleBuilder = CreateModuleBuilder_();
+            _moduleBuilder = new Lazy<ModuleBuilder>(CreateModuleBuilder_);
         }
 
         public TypeBuilder DefineType(Type viewType)
@@ -30,7 +30,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
 
             var interfaces = new[] { viewType };
 
-            return _moduleBuilder.DefineType(
+            return _moduleBuilder.Value.DefineType(
                 viewType.FullName + "__@CompositeView",
                 TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
                 parentType,

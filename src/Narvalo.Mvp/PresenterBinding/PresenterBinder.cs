@@ -25,10 +25,10 @@ namespace Narvalo.Mvp.PresenterBinding
         bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
-            : this(new[] { host }, new ServicesContainer()) { }
+            : this(new[] { host }, ServicesContainer.Current) { }
 
         public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, new ServicesContainer()) { }
+            : this(hosts, ServicesContainer.Current) { }
 
         internal PresenterBinder(IEnumerable<object> hosts, IServicesContainer servicesContainer)
             : this(
