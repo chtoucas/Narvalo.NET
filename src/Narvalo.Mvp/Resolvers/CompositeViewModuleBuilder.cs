@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Reflection;
     using System.Reflection.Emit;
 
-    internal sealed class CompositeViewModuleBuilder
+    public sealed class CompositeViewModuleBuilder
     {
         const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
 
@@ -15,7 +15,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
 
         public CompositeViewModuleBuilder(string assemblyName)
         {
-            DebugCheck.NotNullOrEmpty(assemblyName);
+            Require.NotNullOrEmpty(assemblyName, "assemblyName");
 
             _assemblyName = assemblyName;
             _moduleBuilder = new Lazy<ModuleBuilder>(CreateModuleBuilder_);
@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
 
         public TypeBuilder DefineType(Type viewType)
         {
-            DebugCheck.NotNull(viewType);
+            Require.NotNull(viewType, "viewType");
 
             // Create a generic type of type "CompositeView<ITestView>".
             var parentType = typeof(CompositeView<>).MakeGenericType(viewType);

@@ -1,18 +1,19 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using Narvalo.Mvp.Internal;
 
-    internal class PresenterBindingAttributesResolver
+    public class PresenterBindingAttributesResolver
         : IComponentResolver<Type, IEnumerable<PresenterBindingAttribute>>
     {
         public virtual IEnumerable<PresenterBindingAttribute> Resolve(Type input)
         {
-            DebugCheck.NotNull(input);
+            Require.NotNull(input, "input");
 
             __Trace.Write("[PresenterBindingAttributesResolver] Attempting to resolve: " + input.FullName);
 

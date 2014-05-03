@@ -3,13 +3,15 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
-    using System.Web.Compilation;
+    using Narvalo.Mvp.Resolvers;
+
+    using Compilation = System.Web.Compilation;
 
     public class AspNetBuildManager : IBuildManager
     {
         public Type GetType(string typeName, bool throwOnError, bool ignoreCase)
         {
-            return BuildManager.GetType(typeName, throwOnError, ignoreCase);
+            return Compilation.BuildManager.GetType(typeName, throwOnError, ignoreCase);
         }
     }
 }

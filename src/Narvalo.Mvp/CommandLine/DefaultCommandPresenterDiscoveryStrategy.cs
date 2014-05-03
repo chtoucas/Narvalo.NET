@@ -7,6 +7,7 @@ namespace Narvalo.Mvp.CommandLine
     using System.Reflection;
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Resolvers;
 
     public sealed class DefaultCommandPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {

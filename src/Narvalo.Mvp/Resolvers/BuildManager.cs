@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Linq;
     using System.Reflection;
 
-    public class BuildManager : IBuildManager
+    public sealed class BuildManager : IBuildManager
     {
         readonly Assembly[] _assemblies;
 

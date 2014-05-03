@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections;
@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
     using System.Reflection;
     using System.Reflection.Emit;
 
-    internal sealed class CompositeViewTypeBuilder
+    public sealed class CompositeViewTypeBuilder
     {
         /*
          * To support composite views, we dynamically emit a type which
@@ -60,8 +60,8 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 
         public CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
         {
-            DebugCheck.NotNull(viewType);
-            DebugCheck.NotNull(typeBuilder);
+            Require.NotNull(viewType, "viewType");
+            Require.NotNull(typeBuilder, "typeBuilder");
 
             _viewType = viewType;
             _typeBuilder = typeBuilder;
@@ -74,7 +74,7 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 
         public void AddEvent(EventInfo eventInfo)
         {
-            DebugCheck.NotNull(eventInfo);
+            Require.NotNull(eventInfo, "eventInfo");
 
             if (eventInfo.EventHandlerType == null) {
                 throw new ArgumentException(string.Format(
@@ -99,7 +99,7 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 
         public void AddProperty(PropertyInfo propertyInfo)
         {
-            DebugCheck.NotNull(propertyInfo);
+            Require.NotNull(propertyInfo, "propertyInfo");
 
             var property = _typeBuilder.DefineProperty(
                 propertyInfo.Name,

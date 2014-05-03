@@ -4,7 +4,6 @@ namespace Playground.WindowsForms
 {
     using System;
     using System.Windows.Forms;
-    using Narvalo;
     using Narvalo.Mvp;
 
     public sealed class TestMessage
@@ -17,22 +16,13 @@ namespace Playground.WindowsForms
         event EventHandler TextBoxTextChanged;
     }
 
-    public sealed class SamplePresenter : IPresenter<IView>, IDisposable
+    public sealed class SamplePresenter : Presenter<IView>, IDisposable
     {
-        readonly IView _view;
-
         public SamplePresenter(IView view)
+            : base(view)
         {
-            Require.NotNull(view, "view");
-
-            _view = view;
-
             View.Load += Load;
         }
-
-        public IView View { get { return _view; } }
-
-        public IMessageBus Messages { get; set; }
 
         public void Load(object sender, EventArgs e)
         {
@@ -45,22 +35,13 @@ namespace Playground.WindowsForms
         }
     }
 
-    public sealed class MainPresenter : IPresenter<IMainView>, IDisposable
+    public sealed class MainPresenter : Presenter<IMainView>, IDisposable
     {
-        readonly IMainView _view;
-
         public MainPresenter(IMainView view)
+            : base(view)
         {
-            Require.NotNull(view, "view");
-
-            _view = view;
-
             View.TextBoxTextChanged += TextChanged;
         }
-
-        public IMainView View { get { return _view; } }
-
-        public IMessageBus Messages { get; set; }
 
         public void TextChanged(object sender, EventArgs e)
         {

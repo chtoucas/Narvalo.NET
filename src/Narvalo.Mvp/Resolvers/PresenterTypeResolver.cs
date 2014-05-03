@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,9 @@ namespace Narvalo.Mvp.Internal.Resolvers
     using System.Reflection;
     using Narvalo.Collections;
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Internal;
 
-    internal class PresenterTypeResolver : IComponentResolver<Type, Type>
+    public class PresenterTypeResolver : IComponentResolver<Type, Type>
     {
         readonly IBuildManager _buildManager;
         readonly IEnumerable<string> _defaultNamespaces;
@@ -22,10 +23,10 @@ namespace Narvalo.Mvp.Internal.Resolvers
             string[] viewSuffixes,
             string[] presenterNameTemplates)
         {
-            DebugCheck.NotNull(buildManager);
-            DebugCheck.NotNull(defaultNamespaces);
-            DebugCheck.NotNull(viewSuffixes);
-            DebugCheck.NotNull(presenterNameTemplates);
+            Require.NotNull(buildManager, "buildManager");
+            Require.NotNull(defaultNamespaces, "defaultNamespaces");
+            Require.NotNull(viewSuffixes, "viewSuffixes");
+            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
 
             _buildManager = buildManager;
             _defaultNamespaces = defaultNamespaces;
@@ -35,7 +36,7 @@ namespace Narvalo.Mvp.Internal.Resolvers
 
         public virtual Type Resolve(Type input)
         {
-            DebugCheck.NotNull(input);
+            Require.NotNull(input, "input");
 
             __Trace.Write("[PresenterTypeResolver] Attempting to resolve: " + input.FullName);
 

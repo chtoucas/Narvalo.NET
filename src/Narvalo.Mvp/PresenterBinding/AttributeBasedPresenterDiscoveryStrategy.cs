@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Linq;
     using Narvalo;
     using Narvalo.Mvp.Internal;
-    using Narvalo.Mvp.Internal.Resolvers;
+    using Narvalo.Mvp.Resolvers;
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {

@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Configuration
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Services;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.

@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Mvp.Internal.Resolvers;
+    using Narvalo.Mvp.Resolvers;
 
     /// <remarks>
     /// WARNING: This class can not be used for presenters that do not have a constructor

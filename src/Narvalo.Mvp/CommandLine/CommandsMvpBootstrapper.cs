@@ -2,6 +2,8 @@
 
 namespace Narvalo.Mvp.CommandLine
 {
+    using Narvalo.Mvp.Services;
+
     public sealed class CommandsMvpBootstrapper : MvpBootstrapper
     {
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)

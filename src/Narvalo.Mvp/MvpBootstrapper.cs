@@ -4,7 +4,7 @@ namespace Narvalo.Mvp
 {
     using System;
     using Narvalo.Mvp.Configuration;
-    using Narvalo.Mvp.Internal;
+    using Narvalo.Mvp.Services;
 
     public class MvpBootstrapper
     {

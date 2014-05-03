@@ -1,17 +1,18 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Globalization;
     using System.Reflection.Emit;
+    using Narvalo.Mvp.Internal;
 
-    internal class PresenterConstructorResolver
+    public class PresenterConstructorResolver
         : IComponentResolver<Tuple<Type, Type>, DynamicMethod>
     {
         public virtual DynamicMethod Resolve(Tuple<Type, Type> input)
         {
-            DebugCheck.NotNull(input);
+            Require.NotNull(input, "input");
 
             __Trace.Write("[PresenterConstructorResolver] Attempting to resolve: " + input.Item1.FullName);
 

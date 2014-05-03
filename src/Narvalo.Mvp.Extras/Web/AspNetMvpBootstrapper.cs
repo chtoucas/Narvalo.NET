@@ -2,6 +2,8 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using Narvalo.Mvp.Services;
+
     public sealed class AspNetMvpBootstrapper : MvpBootstrapper
     {
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)

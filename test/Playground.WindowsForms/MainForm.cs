@@ -1,13 +1,8 @@
 ﻿namespace Playground.WindowsForms
 {
     using System;
-    using Narvalo.Mvp;
     using Narvalo.Mvp.Windows.Forms;
 
-    [PresenterBinding(typeof(MainPresenter),
-        ViewType = typeof(IMainView))]
-    //,
-    //    BindingMode = PresenterBindingMode.SharedPresenter)]
     public partial class MainForm : MvpForm, IMainView
     {
         public MainForm()

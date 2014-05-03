@@ -1,21 +1,24 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal.Resolvers
+namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using Narvalo.Mvp.Internal;
 
-    internal class CompositeViewTypeResolver : IComponentResolver<Type, Type>
+    public class CompositeViewTypeResolver : IComponentResolver<Type, Type>
     {
         readonly CompositeViewModuleBuilder _moduleBuilder
               = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
         public virtual Type Resolve(Type input)
         {
-            DebugCheck.NotNull(input);
+            Require.NotNull(input, "input");
+
+            __Trace.Write("[PresenterConstructorResolver] Attempting to resolve: " + input.FullName);
 
             ValidateViewType_(input);
 

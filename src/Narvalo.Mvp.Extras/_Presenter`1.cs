@@ -5,7 +5,7 @@ namespace Narvalo.Mvp
     using System;
     using System.Linq;
 
-    // WARNING: This requires TModel : class, new()
+    // WARNING: This requires the generic constraint "class, new()" on TModel.
     public abstract class Presenter<TView> : IPresenter<TView> where TView : IView
     {
         readonly TView _view;

@@ -2,6 +2,8 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
+    using Narvalo.Mvp.Services;
+
     public sealed class FormsMvpBootstrapper : MvpBootstrapper
     {
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)

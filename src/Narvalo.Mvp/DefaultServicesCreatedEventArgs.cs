@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp
 {
     using System;
+    using Narvalo.Mvp.Services;
 
     public sealed class DefaultServicesCreatedEventArgs : EventArgs
     {

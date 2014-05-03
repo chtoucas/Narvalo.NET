@@ -1,11 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Internal
+namespace Narvalo.Mvp.Services
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo.Mvp.PresenterBinding;
 
-    internal sealed class ServicesContainer : IServicesContainer
+    public sealed class ServicesContainer : IServicesContainer
     {
         LazyLazy<IServicesContainer> _inner
             = new LazyLazy<IServicesContainer>(() => new DefaultServices());
@@ -40,9 +41,13 @@ namespace Narvalo.Mvp.Internal
         }
 
         // Cf. http://csharpindepth.com/articles/general/singleton.aspx
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+            Justification = "Singleton pattern.")]
         class Singleton
         {
             // Explicit static constructor to tell C# compiler not to mark type as "beforefieldinit".
+            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
+                Justification = "Singleton pattern.")]
             static Singleton() { }
 
             internal static readonly ServicesContainer Instance_ = new ServicesContainer();
