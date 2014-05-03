@@ -74,8 +74,9 @@
     <Compile Include="CommandLine\ICommand.cs" />
     <Compile Include="CommandLine\MvpCommand.cs" />
     <Compile Include="CommandLine\MvpCommand`1.cs" />
+    <Compile Include="Internal\Delayed`1.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="ServicesContainer.cs" />
+    <Compile Include="Internal\ServicesContainer.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />

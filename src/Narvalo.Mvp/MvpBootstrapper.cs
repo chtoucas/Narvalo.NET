@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp
 {
     using Narvalo.Mvp.Configuration;
+    using Narvalo.Mvp.Internal;
 
     public class MvpBootstrapper
     {
@@ -24,7 +25,7 @@ namespace Narvalo.Mvp
 
             var servicesContainer = _configuration.CreateServicesContainer(defaultServices);
 
-            ServicesContainer.Current.Initialize(servicesContainer);
+            ServicesContainer.SetContainer(servicesContainer);
         }
     }
 }

@@ -7,108 +7,78 @@ namespace Narvalo.Mvp
 
     public sealed class DefaultServices : IServicesContainer
     {
-        readonly Delayed<ICompositeViewFactory> _compositeViewFactory
-            = new Delayed<ICompositeViewFactory>(() => new DefaultCompositeViewFactory());
+        Func<ICompositeViewFactory> _compositeViewFactoryThunk
+           = () => new DefaultCompositeViewFactory();
+        Func<IMessageBus> _messageBusThunk
+           = () => new MessageBus();
+        Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
+           = () => new AttributeBasedPresenterDiscoveryStrategy();
+        Func<IPresenterFactory> _presenterFactoryThunk
+           = () => new DefaultPresenterFactory();
 
-        readonly Delayed<IMessageBus> _messageBus
-            = new Delayed<IMessageBus>(() => new MessageBus());
-
-        readonly Delayed<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategy
-            = new Delayed<IPresenterDiscoveryStrategy>(() => new AttributeBasedPresenterDiscoveryStrategy());
-
-        readonly Delayed<IPresenterFactory> _presenterFactory
-            = new Delayed<IPresenterFactory>(() => new DefaultPresenterFactory());
+        ICompositeViewFactory _compositeViewFactory;
+        IMessageBus _messageBus;
+        IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
+        IPresenterFactory _presenterFactory;
 
         public ICompositeViewFactory CompositeViewFactory
         {
-            get { return _compositeViewFactory.Value; }
-            set { Require.Property(value); _compositeViewFactory.Reset(value); }
+            get
+            {
+                return _compositeViewFactory
+                    ?? (_compositeViewFactory = _compositeViewFactoryThunk());
+            }
         }
 
         public IMessageBus MessageBus
         {
-            get { return _messageBus.Value; }
-            set { Require.Property(value); _messageBus.Reset(value); }
+            get { return _messageBus ?? (_messageBus = _messageBusThunk()); }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
         {
-            get { return _presenterDiscoveryStrategy.Value; }
-            set { Require.Property(value); _presenterDiscoveryStrategy.Reset(value); }
+            get
+            {
+                return _presenterDiscoveryStrategy
+                    ?? (_presenterDiscoveryStrategy = _presenterDiscoveryStrategyThunk());
+            }
         }
 
         public IPresenterFactory PresenterFactory
         {
-            get { return _presenterFactory.Value; }
-            set { Require.Property(value); _presenterFactory.Reset(value); }
-        }
-
-        public void SetCompositeViewFactory(Func<ICompositeViewFactory> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _compositeViewFactory.Reset(thunk);
-        }
-
-        public void SetMessageBus(Func<IMessageBus> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _messageBus.Reset(thunk);
-        }
-
-        public void SetPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _presenterDiscoveryStrategy.Reset(thunk);
-        }
-
-        public void SetPresenterFactory(Func<IPresenterFactory> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _presenterFactory.Reset(thunk);
-        }
-
-        class Delayed<TValue>
-        {
-            readonly Lazy<TValue> _lazyValue;
-
-            Func<TValue> _valueFactory;
-
-            public Delayed(Func<TValue> valueFactory)
+            get
             {
-                DebugCheck.NotNull(valueFactory);
-
-                _valueFactory = valueFactory;
-                // WARNING: Do not change the following line for:
-                // _lazyValue = new Lazy<TValue>(_valueFactory);
-                // as it will fail to capture the variable "_valueFactory".
-                _lazyValue = new Lazy<TValue>(() => _valueFactory());
+                return _presenterFactory
+                    ?? (_presenterFactory = _presenterFactoryThunk());
             }
+        }
 
-            public TValue Value { get { return _lazyValue.Value; } }
+        public void SetDefaultCompositeViewFactory(Func<ICompositeViewFactory> thunk)
+        {
+            Require.NotNull(thunk, "thunk");
 
-            public bool CanReset { get { return !_lazyValue.IsValueCreated; } }
+            _compositeViewFactoryThunk = thunk;
+        }
 
-            public void Reset(TValue value)
-            {
-                Reset(() => value);
-            }
+        public void SetDefaultMessageBus(Func<IMessageBus> thunk)
+        {
+            Require.NotNull(thunk, "thunk");
 
-            public void Reset(Func<TValue> valueFactory)
-            {
-                DebugCheck.NotNull(valueFactory);
+            _messageBusThunk = thunk;
+        }
 
-                if (!CanReset) {
-                    throw new InvalidOperationException(
-                        "Once accessed, you can no longer change the underlying value factory.");
-                }
+        public void SetDefaultPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)
+        {
+            Require.NotNull(thunk, "thunk");
 
-                // REVIEW: We break thread-safety here, but does it matter for our use case?
-                _valueFactory = valueFactory;
-            }
+            _presenterDiscoveryStrategyThunk = thunk;
+        }
+
+        public void SetDefaultPresenterFactory(Func<IPresenterFactory> thunk)
+        {
+            Require.NotNull(thunk, "thunk");
+
+            _presenterFactoryThunk = thunk;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.CommandLine
     {
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)
         {
-            defaultServices.SetPresenterDiscoveryStrategy(
+            defaultServices.SetDefaultPresenterDiscoveryStrategy(
                 () => new DefaultCommandPresenterDiscoveryStrategy());
         }
     }

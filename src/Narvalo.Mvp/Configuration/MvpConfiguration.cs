@@ -59,33 +59,48 @@ namespace Narvalo.Mvp.Configuration
             return CreateServicesContainer(new DefaultServices());
         }
 
-        public IServicesContainer CreateServicesContainer(DefaultServices container)
+        public IServicesContainer CreateServicesContainer(DefaultServices defaultServices)
         {
-            if (_compositeViewFactory != null) {
-                container.CompositeViewFactory = _compositeViewFactory;
-            }
+            var result = new ServicesContainer_();
 
-            if (_presenterFactory != null) {
-                container.PresenterFactory = _presenterFactory;
-            }
+            result.CompositeViewFactory = _compositeViewFactory != null
+                ? _compositeViewFactory
+                : defaultServices.CompositeViewFactory;
+
+            result.MessageBus = _messageBus != null
+                ? _messageBus
+                : defaultServices.MessageBus;
+
+            result.PresenterFactory = _presenterFactory != null
+                ? _presenterFactory
+                : defaultServices.PresenterFactory;
 
             var strategies = _presenterDiscoveryStrategies.Where(_ => _ != null).Distinct();
-
             var count = strategies.Count();
 
-            if (count == 1) {
-                container.PresenterDiscoveryStrategy = strategies.First();
+            if (count == 0) {
+                result.PresenterDiscoveryStrategy = defaultServices.PresenterDiscoveryStrategy;
+            }
+            else if (count == 1) {
+                result.PresenterDiscoveryStrategy = strategies.First();
             }
             else if (count > 1) {
-                container.PresenterDiscoveryStrategy
+                result.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
             }
 
-            if (_messageBus != null) {
-                container.MessageBus = _messageBus;
-            }
+            return result;
+        }
 
-            return container;
+        class ServicesContainer_ : IServicesContainer
+        {
+            public ICompositeViewFactory CompositeViewFactory { get; set; }
+
+            public IMessageBus MessageBus { get; set; }
+
+            public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy { get; set; }
+
+            public IPresenterFactory PresenterFactory { get; set; }
         }
     }
 }

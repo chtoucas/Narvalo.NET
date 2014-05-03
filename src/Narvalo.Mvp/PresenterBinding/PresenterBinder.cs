@@ -7,6 +7,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Linq;
     using Narvalo;
+    using Narvalo.Mvp.Internal;
 
     public class PresenterBinder
     {
@@ -24,10 +25,10 @@ namespace Narvalo.Mvp.PresenterBinding
         bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
-            : this(new[] { host }, ServicesContainer.Current) { }
+            : this(new[] { host }, new ServicesContainer()) { }
 
         public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, ServicesContainer.Current) { }
+            : this(hosts, new ServicesContainer()) { }
 
         internal PresenterBinder(IEnumerable<object> hosts, IServicesContainer servicesContainer)
             : this(
