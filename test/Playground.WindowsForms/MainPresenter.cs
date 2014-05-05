@@ -5,6 +5,7 @@ namespace Playground.WindowsForms
     using System;
     using System.Windows.Forms;
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Windows.Forms;
 
     public sealed class TestMessage
     {
@@ -16,22 +17,14 @@ namespace Playground.WindowsForms
         event EventHandler TextBoxTextChanged;
     }
 
-    public sealed class SamplePresenter : Presenter<IView>, IDisposable
+    public sealed class SamplePresenter : Presenter<IView>, IRequiresActivation
     {
         public SamplePresenter(IView view)
-            : base(view)
-        {
-            View.Load += Load;
-        }
+            : base(view) { }
 
-        public void Load(object sender, EventArgs e)
+        public void OnActivated()
         {
             Messages.Subscribe<TestMessage>(_ => MessageBox.Show(_.Text));
-        }
-
-        public void Dispose()
-        {
-            View.Load -= Load;
         }
     }
 

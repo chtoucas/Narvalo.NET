@@ -21,6 +21,14 @@ namespace Narvalo.Mvp.Windows.Forms
 
             _presenterBinder = new PresenterBinder(this);
 
+            _presenterBinder.PresenterCreated += (sender, e) =>
+            {
+                var presenter = e.Presenter as IRequiresActivation;
+                if (presenter != null) {
+                    presenter.OnActivated();
+                }
+            };
+
             form.Load += Form_Load;
             form.Disposed += Form_Disposed;
         }
@@ -40,18 +48,21 @@ namespace Narvalo.Mvp.Windows.Forms
             _presenterBinder.RegisterView(view);
         }
 
-        public static void Register<TControl>(TControl control)
+        public static FormViewHost Register<TControl>(TControl control)
             where TControl : Control, IView
         {
             DebugCheck.NotNull(control);
 
             var form = control.FindForm();
 
-            if (form == null)
+            if (form == null) {
                 throw new InvalidOperationException("Controls can only be registered once they have been added to the live control tree. The best place to register them is within the control's Init event.");
+            }
 
             var viewHost = FindViewHost_(control, form);
             viewHost.RegisterView_(control);
+
+            return viewHost;
         }
 
         static FormViewHost FindViewHost_(Control control, Form form)

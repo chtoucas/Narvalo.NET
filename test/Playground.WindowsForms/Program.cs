@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows.Forms;
+    using Narvalo.Mvp;
     using Narvalo.Mvp.Windows.Forms;
 
     static class Program
@@ -9,7 +10,9 @@
         [STAThread]
         static void Main()
         {
-            new FormsMvpBootstrapper().Run();
+            var bootstrapper = new FormsMvpBootstrapper();
+            bootstrapper.Configuration.MessageBusFactory.Is(new ReactiveMessageBusFactory());
+            bootstrapper.Run();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

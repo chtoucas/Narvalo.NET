@@ -6,12 +6,10 @@ namespace Narvalo.Mvp
 
     public interface IMessageBus
     {
-        void Close();
+        void Publish<T>(T message);
 
-        void Publish<TMessage>(TMessage message);
+        IObservable<T> Register<T>();
 
-        void Subscribe<TMessage>(Action<TMessage> messageReceivedCallback);
-
-        void Subscribe<TMessage>(Action<TMessage> messageReceivedCallback, Action neverReceivedCallback);
+        void Subscribe<T>(Action<T> onNext);
     }
 }

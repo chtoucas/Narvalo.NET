@@ -16,7 +16,7 @@ namespace Narvalo.Mvp.Windows.Forms
             {
                 if (_model == null) {
                     throw new InvalidOperationException(
-                        "The Model property is currently null, however it should have been automatically initialized by the presenter.");
+                        "The Model property is currently null, however it should have been initialized by the presenter.");
                 }
 
                 return _model;

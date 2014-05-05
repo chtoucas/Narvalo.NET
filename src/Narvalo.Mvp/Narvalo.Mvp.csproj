@@ -76,7 +76,10 @@
     <Compile Include="CommandLine\MvpCommand`1.cs" />
     <Compile Include="DefaultServicesCreatedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MessageBus.cs" />
     <Compile Include="MvpBootstrapper.cs" />
+    <Compile Include="PresenterBinding\DefaultMessageBusFactory.cs" />
+    <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
     <Compile Include="Services\ServicesContainer.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
@@ -114,7 +117,6 @@
     <Compile Include="CompositeView.cs" />
     <Compile Include="PresenterBinding\DefaultCompositeViewFactory.cs" />
     <Compile Include="ICompositeView.cs" />
-    <Compile Include="MessageBus.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />

@@ -8,144 +8,77 @@ namespace Narvalo.Mvp
     using System.Collections.Generic;
     using System.Linq;
 
-    // TODO: To be entirely rewritten.
-    // TODO: Rollback on ConcurrentDictionary?
     public sealed class MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
-        readonly ConcurrentDictionary<Type, IList<Action<object>>> _messageReceivedCallbacks
+        readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
-        readonly ConcurrentDictionary<Type, IList<Action>> _neverReceivedCallbacks
-            = new ConcurrentDictionary<Type, IList<Action>>();
 
         readonly Object _lock = new Object();
 
-        bool _closed;
-
-        public void Publish<TMessage>(TMessage message)
+        public void Publish<T>(T message)
         {
-            ThrowIfClosed_();
-
             AddMessage_(message);
             PushMessage_(message);
         }
 
-        public void Subscribe<TMessage>(Action<TMessage> messageReceivedCallback)
+        public IObservable<T> Register<T>()
         {
-            Subscribe(messageReceivedCallback, null);
+            throw new NotSupportedException("FIXME");
         }
 
-        public void Subscribe<TMessage>(Action<TMessage> messageReceivedCallback, Action neverReceivedCallback)
+        public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfClosed_();
+            Require.NotNull(onNext, "onNext");
 
-            Require.NotNull(messageReceivedCallback, "messageReceivedCallback");
-
-            AddMessageReceivedCallback_(messageReceivedCallback);
-            AddNeverReceivedCallback_<TMessage>(neverReceivedCallback);
-            PushPreviousMessages_(messageReceivedCallback);
+            AddHandler_(onNext);
+            PushPreviousMessages_(onNext);
         }
 
-        public void Close()
+        void AddMessage_<T>(T message)
         {
-            if (_closed) { return; }
+            var messages = _messages.GetOrAdd(typeof(T), _ => new List<T>());
 
-            lock (_lock) {
-                if (_closed) { return; }
-
-                _closed = true;
-            }
-
-            FireNeverReceivedCallbacks_();
-        }
-
-        void AddMessage_<TMessage>(TMessage message)
-        {
-            var messageList = _messages.GetOrAdd(typeof(TMessage), _ => new List<TMessage>());
-
-            lock (messageList) {
-                messageList.Add(message);
+            lock (messages) {
+                messages.Add(message);
             }
         }
 
-        void PushMessage_<TMessage>(TMessage message)
+        void AddHandler_<T>(Action<T> onNext)
         {
-            var messageType = typeof(TMessage);
+            var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
 
-            var callbackTypes = _messageReceivedCallbacks
-                .Keys
-                .Where(k => k.IsAssignableFrom(messageType));
-
-            var callbacks = callbackTypes
-                .SelectMany(t => _messageReceivedCallbacks[t])
-                .ToArray();
-
-            foreach (var callback in callbacks) {
-                callback(message);
+            lock (handlersOfT) {
+                handlersOfT.Add(_ => onNext((T)_));
             }
         }
 
-        void AddMessageReceivedCallback_<TMessage>(Action<TMessage> messageReceivedCallback)
+        void PushMessage_<T>(T message)
         {
-            var intermediateReceivedCallback = new Action<object>(m =>
-                messageReceivedCallback((TMessage)m));
+            var messageType = typeof(T);
 
-            var receivedList = _messageReceivedCallbacks
-                .GetOrAdd(typeof(TMessage), _ => new List<Action<object>>());
+            var handlersOfT = from t in _handlers.Keys
+                              where t.IsAssignableFrom(messageType)
+                              from handler in _handlers[t]
+                              select handler;
 
-            lock (receivedList) {
-                receivedList.Add(intermediateReceivedCallback);
+            foreach (var handler in handlersOfT) {
+                handler(message);
             }
         }
 
-        void AddNeverReceivedCallback_<TMessage>(Action neverReceivedCallback)
+        void PushPreviousMessages_<T>(Action<T> onNext)
         {
-            if (neverReceivedCallback == null) { return; }
+            var messageType = typeof(T);
 
-            var neverReceivedList = _neverReceivedCallbacks
-                .GetOrAdd(typeof(TMessage), _ => new List<Action>());
+            var messages = from t in _messages.Keys
+                           where messageType.IsAssignableFrom(t)
+                           from m in _messages[t].Cast<T>()
+                           select m;
 
-            lock (neverReceivedList) {
-                neverReceivedList.Add(neverReceivedCallback);
-            }
-        }
-
-        void PushPreviousMessages_<TMessage>(Action<TMessage> messageReceivedCallback)
-        {
-            var previousMessageTypes = _messages
-                .Keys
-                .Where(mt => typeof(TMessage).IsAssignableFrom(mt));
-
-            var previousMessages = previousMessageTypes
-                .SelectMany(t => _messages[t].Cast<TMessage>())
-                .ToArray();
-
-            foreach (var previousMessage in previousMessages) {
-                messageReceivedCallback(previousMessage);
-            }
-        }
-
-        void ThrowIfClosed_()
-        {
-            if (_closed) {
-                throw new InvalidOperationException(
-                    "Messages can't be published or subscribed to after the message bus has been closed.");
-            }
-        }
-
-        void FireNeverReceivedCallbacks_()
-        {
-            var neverReceivedMessageTypes = _neverReceivedCallbacks
-                .Keys
-                .Where(neverReceivedMessageType =>
-                    !_messages.Keys.Any(neverReceivedMessageType.IsAssignableFrom));
-
-            var callbacks = neverReceivedMessageTypes
-                .SelectMany(t => _neverReceivedCallbacks[t]);
-
-            foreach (var callback in callbacks) {
-                callback();
+            foreach (var message in messages) {
+                onNext(message);
             }
         }
     }

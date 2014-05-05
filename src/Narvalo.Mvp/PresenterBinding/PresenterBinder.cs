@@ -30,32 +30,33 @@ namespace Narvalo.Mvp.PresenterBinding
         public PresenterBinder(IEnumerable<object> hosts)
             : this(hosts, ServicesContainer.Current) { }
 
-        internal PresenterBinder(IEnumerable<object> hosts, IServicesContainer servicesContainer)
+        public PresenterBinder(IEnumerable<object> hosts, IServicesContainer servicesContainer)
             : this(
                 hosts,
                 servicesContainer.PresenterDiscoveryStrategy,
                 servicesContainer.PresenterFactory,
                 servicesContainer.CompositeViewFactory,
-                servicesContainer.MessageBus) { }
+                servicesContainer.MessageBusFactory) { }
 
-        internal PresenterBinder(
+        public PresenterBinder(
             IEnumerable<object> hosts,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
             ICompositeViewFactory compositeViewFactory,
-            IMessageBus messageBus)
+            IMessageBusFactory messageBusFactory)
         {
             Require.NotNull(hosts, "hosts");
             Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
             Require.NotNull(presenterFactory, "presenterFactory");
             Require.NotNull(compositeViewFactory, "compositeViewFactory");
-            Require.NotNull(messageBus, "messageBus");
+            Require.NotNull(messageBusFactory, "messageBusFactory");
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
             _presenterFactory = presenterFactory;
             _compositeViewFactory = compositeViewFactory;
-            _messageBus = messageBus;
+
+            _messageBus = messageBusFactory.Create();
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -70,7 +71,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 if (_viewsToBind.Any()) {
                     var presenters = from binding in FindBindings_(_hosts)
                                      from view in GetViews_(binding)
-                                     select CreatePresenter_(binding, view);
+                                     select CreatePresenter(binding, view);
 
                     foreach (var presenter in presenters) {
                         _presenters.Add(presenter);
@@ -97,7 +98,10 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public void Release()
         {
-            _messageBus.Close();
+            var disposableMessageBus = _messageBus as IDisposable;
+            if (disposableMessageBus != null) {
+                disposableMessageBus.Dispose();
+            }
 
             lock (_presenters) {
                 foreach (var presenter in _presenters) {
@@ -108,6 +112,17 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
+        protected virtual IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
+        {
+            var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
+
+            presenter.Messages = _messageBus;
+
+            OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
+
+            return presenter;
+        }
+
         protected virtual void OnPresenterCreated(PresenterCreatedEventArgs args)
         {
             EventHandler<PresenterCreatedEventArgs> localHandler = PresenterCreated;
@@ -115,18 +130,6 @@ namespace Narvalo.Mvp.PresenterBinding
             if (localHandler != null) {
                 localHandler(this, args);
             }
-        }
-
-        IPresenter CreatePresenter_(PresenterBindingParameter binding, IView view)
-        {
-            var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
-
-            // TODO: On the way to remove MessageBus from PresenterBinder.
-            presenter.Messages = _messageBus;
-
-            OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
-
-            return presenter;
         }
 
         IEnumerable<PresenterBindingParameter> FindBindings_(IEnumerable<Object> hosts)

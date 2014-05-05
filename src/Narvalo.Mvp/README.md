@@ -15,12 +15,12 @@ Changes from the original "Web Forms Mvp"
 ### Dropped functionalities
 
 - AsyncTaskManager
-- Tracing
+- throwExceptionIfNoPresenterBound
+- enableAutomaticDataBinding
 
 Planned changes
 ---------------
 
-- Re-enable tracing
-- Make IMessageBus more flexible
-- Alternative implementation of IMessageBus (Rx)
+- Completely re-design IMessageBus. Check out the ReactiveUI way of handling this problem.
+- More tracing
 

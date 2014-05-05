@@ -20,9 +20,9 @@ namespace Narvalo.Mvp.Services
             get { return _inner.Value.CompositeViewFactory; }
         }
 
-        public IMessageBus MessageBus
+        public IMessageBusFactory MessageBusFactory
         {
-            get { return _inner.Value.MessageBus; }
+            get { return _inner.Value.MessageBusFactory; }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
