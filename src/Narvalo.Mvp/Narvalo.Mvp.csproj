@@ -80,7 +80,7 @@
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="PresenterBinding\DefaultMessageBusFactory.cs" />
     <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
-    <Compile Include="Services\ServicesContainer.cs" />
+    <Compile Include="Services\GlobalServicesContainer.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />

@@ -6,11 +6,12 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpForm : Form, IView
     {
+        // REVIEW: Use a different execution point in the windows forms lifecycle.
         protected override void OnCreateControl()
         {
             // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
             if (!DesignMode) {
-                FormViewHost.Register(this);
+                FormHost.Register(this);
             }
 
             base.OnCreateControl();

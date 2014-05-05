@@ -6,10 +6,11 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpUserControl : UserControl, IView
     {
+        // REVIEW: Use a different execution point in the windows forms lifecycle.
         protected override void OnCreateControl()
         {
             if (!DesignMode) {
-                FormViewHost.Register(this);
+                FormHost.Register(this);
             }
 
             base.OnCreateControl();

@@ -12,15 +12,10 @@ Changes from the original "Web Forms Mvp"
 - Use ConcurrentDictionary instead of Dictionary for type caching
 - MVP configuration is done via MvpConfiguration
 
-### Dropped functionalities
+### Dropped functionalities for now
 
 - AsyncTaskManager
 - throwExceptionIfNoPresenterBound
 - enableAutomaticDataBinding
 
-Planned changes
----------------
-
-- Completely re-design IMessageBus. Check out the ReactiveUI way of handling this problem.
-- More tracing
 

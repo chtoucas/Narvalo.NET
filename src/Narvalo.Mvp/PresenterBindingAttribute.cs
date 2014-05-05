@@ -16,9 +16,9 @@ namespace Narvalo.Mvp
 
         public Type PresenterType { get; private set; }
 
-        public Type ViewType { get; set; }
-
         public PresenterBindingMode BindingMode { get; set; }
+
+        public Type ViewType { get; set; }
 
         internal Type Origin { get; set; }
     }

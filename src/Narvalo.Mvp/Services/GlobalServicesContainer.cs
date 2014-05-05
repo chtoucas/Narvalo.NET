@@ -6,38 +6,38 @@ namespace Narvalo.Mvp.Services
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class ServicesContainer : IServicesContainer
+    public sealed class GlobalServicesContainer : IServicesContainer
     {
         LazyLazy<IServicesContainer> _inner
             = new LazyLazy<IServicesContainer>(() => new DefaultServices());
 
-        ServicesContainer() { }
+        public GlobalServicesContainer() { }
 
-        public static ServicesContainer Current { get { return Singleton.Instance_; } }
+        static GlobalServicesContainer Current_ { get { return Singleton.Instance_; } }
 
         public ICompositeViewFactory CompositeViewFactory
         {
-            get { return _inner.Value.CompositeViewFactory; }
+            get { return Current_._inner.Value.CompositeViewFactory; }
         }
 
         public IMessageBusFactory MessageBusFactory
         {
-            get { return _inner.Value.MessageBusFactory; }
+            get { return Current_._inner.Value.MessageBusFactory; }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
         {
-            get { return _inner.Value.PresenterDiscoveryStrategy; }
+            get { return Current_._inner.Value.PresenterDiscoveryStrategy; }
         }
 
         public IPresenterFactory PresenterFactory
         {
-            get { return _inner.Value.PresenterFactory; }
+            get { return Current_._inner.Value.PresenterFactory; }
         }
 
         public static void InnerSet(IServicesContainer servicesContainer)
         {
-            Current._inner.Reset(servicesContainer);
+            Current_._inner.Reset(servicesContainer);
         }
 
         // Cf. http://csharpindepth.com/articles/general/singleton.aspx
@@ -50,7 +50,7 @@ namespace Narvalo.Mvp.Services
                 Justification = "Singleton pattern.")]
             static Singleton() { }
 
-            internal static readonly ServicesContainer Instance_ = new ServicesContainer();
+            internal static readonly GlobalServicesContainer Instance_ = new GlobalServicesContainer();
         }
 
         class LazyLazy<TValue>

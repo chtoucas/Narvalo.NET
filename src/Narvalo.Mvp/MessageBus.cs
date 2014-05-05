@@ -15,8 +15,6 @@ namespace Narvalo.Mvp
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
 
-        readonly Object _lock = new Object();
-
         public void Publish<T>(T message)
         {
             AddMessage_(message);
@@ -38,19 +36,19 @@ namespace Narvalo.Mvp
 
         void AddMessage_<T>(T message)
         {
-            var messages = _messages.GetOrAdd(typeof(T), _ => new List<T>());
+            var messagesOfT = _messages.GetOrAdd(typeof(T), _ => new List<T>());
 
-            lock (messages) {
-                messages.Add(message);
+            lock (messagesOfT) {
+                messagesOfT.Add(message);
             }
         }
 
         void AddHandler_<T>(Action<T> onNext)
         {
-            var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
+            var handlersForT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
 
-            lock (handlersOfT) {
-                handlersOfT.Add(_ => onNext((T)_));
+            lock (handlersForT) {
+                handlersForT.Add(_ => onNext((T)_));
             }
         }
 
@@ -58,12 +56,12 @@ namespace Narvalo.Mvp
         {
             var messageType = typeof(T);
 
-            var handlersOfT = from t in _handlers.Keys
-                              where t.IsAssignableFrom(messageType)
-                              from handler in _handlers[t]
-                              select handler;
+            var handlersForT = from t in _handlers.Keys
+                               where t.IsAssignableFrom(messageType)
+                               from handler in _handlers[t]
+                               select handler;
 
-            foreach (var handler in handlersOfT) {
+            foreach (var handler in handlersForT) {
                 handler(message);
             }
         }
@@ -72,12 +70,12 @@ namespace Narvalo.Mvp
         {
             var messageType = typeof(T);
 
-            var messages = from t in _messages.Keys
-                           where messageType.IsAssignableFrom(t)
-                           from m in _messages[t].Cast<T>()
-                           select m;
+            var messagesOfT = from t in _messages.Keys
+                              where messageType.IsAssignableFrom(t)
+                              from m in _messages[t].Cast<T>()
+                              select m;
 
-            foreach (var message in messages) {
+            foreach (var message in messagesOfT) {
                 onNext(message);
             }
         }

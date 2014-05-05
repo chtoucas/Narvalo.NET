@@ -25,18 +25,19 @@ namespace Narvalo.Mvp.PresenterBinding
         bool _bindingCompleted = false;
 
         public PresenterBinder(object host)
-            : this(new[] { host }, ServicesContainer.Current) { }
+            : this(new[] { host }, new GlobalServicesContainer()) { }
 
         public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, ServicesContainer.Current) { }
+            : this(hosts, new GlobalServicesContainer()) { }
 
-        public PresenterBinder(IEnumerable<object> hosts, IServicesContainer servicesContainer)
+        // REVIEW: How to handle the case where "container" is null.
+        public PresenterBinder(IEnumerable<object> hosts, IServicesContainer container)
             : this(
                 hosts,
-                servicesContainer.PresenterDiscoveryStrategy,
-                servicesContainer.PresenterFactory,
-                servicesContainer.CompositeViewFactory,
-                servicesContainer.MessageBusFactory) { }
+                container.PresenterDiscoveryStrategy,
+                container.PresenterFactory,
+                container.CompositeViewFactory,
+                container.MessageBusFactory) { }
 
         public PresenterBinder(
             IEnumerable<object> hosts,

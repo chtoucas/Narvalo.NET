@@ -25,7 +25,7 @@ namespace Narvalo.Mvp
             var servicesContainer = _configuration.CreateServicesContainer(defaultServices);
             OnContainerCreated(servicesContainer);
 
-            ServicesContainer.InnerSet(servicesContainer);
+            GlobalServicesContainer.InnerSet(servicesContainer);
         }
 
         protected virtual void OnDefaultServicesCreated(DefaultServices defaultServices)
