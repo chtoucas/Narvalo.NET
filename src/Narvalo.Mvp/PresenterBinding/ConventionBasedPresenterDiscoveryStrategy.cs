@@ -10,24 +10,24 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly PresenterTypeResolver _typeResolver;
+        readonly IPresenterTypeResolver _typeResolver;
 
         public ConventionBasedPresenterDiscoveryStrategy(
             IBuildManager buildManager,
             IEnumerable<string> defaultNamespaces,
             string[] viewSuffixes,
             string[] presenterNameTemplates)
-        {
-            Require.NotNull(buildManager, "buildManager");
-            Require.NotNull(defaultNamespaces, "defaultNamespaces");
-            Require.NotNull(viewSuffixes, "viewSuffixes");
-            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
-
-            _typeResolver = new CachedPresenterTypeResolver(
+            : this(new PresenterTypeResolver(
                 buildManager,
                 defaultNamespaces,
                 viewSuffixes,
-                presenterNameTemplates);
+                presenterNameTemplates)) { }
+
+        public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
+        {
+            Require.NotNull(typeResolver, "typeResolver");
+
+            _typeResolver = new CachedPresenterTypeResolver(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(

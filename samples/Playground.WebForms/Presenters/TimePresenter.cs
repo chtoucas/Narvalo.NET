@@ -1,0 +1,20 @@
+﻿namespace Playground.WebForms.Presenters
+{
+    using System;
+    using Narvalo.Mvp;
+    using Narvalo.Mvp.Web;
+
+    public class TimePresenter : HttpPresenter<IView>
+    {
+        public TimePresenter(IView view) : base(view)
+        {
+            view.Load += Load;
+        }
+
+        void Load(object sender, EventArgs e)
+        {
+            var timeText = "Current time is: " + DateTimeOffset.Now;
+            HttpContext.Response.Write(timeText);
+        }
+    }
+}

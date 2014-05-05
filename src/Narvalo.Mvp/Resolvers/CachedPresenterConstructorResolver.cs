@@ -5,8 +5,7 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Reflection.Emit;
 
-    public sealed class CachedPresenterConstructorResolver
-        : PresenterConstructorResolver
+    public sealed class CachedPresenterConstructorResolver : IPresenterConstructorResolver
     {
         readonly ResolverCache<Tuple<Type, Type>, string, DynamicMethod> _cache
            = new ResolverCache<Tuple<Type, Type>, string, DynamicMethod>(_ => String.Join("__:__", new[]
@@ -15,9 +14,18 @@ namespace Narvalo.Mvp.Resolvers
                 _.Item2.AssemblyQualifiedName
             }));
 
-        public override DynamicMethod Resolve(Tuple<Type, Type> input)
+        readonly IPresenterConstructorResolver _inner;
+
+        public CachedPresenterConstructorResolver(IPresenterConstructorResolver inner)
         {
-            return _cache.GetOrAdd(input, base.Resolve);
+            Require.NotNull(inner, "inner");
+
+            _inner = inner;
+        }
+
+        public DynamicMethod Resolve(Tuple<Type, Type> input)
+        {
+            return _cache.GetOrAdd(input, _inner.Resolve);
         }
     }
 }

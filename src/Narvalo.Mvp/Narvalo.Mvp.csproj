@@ -80,6 +80,10 @@
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="PresenterBinding\DefaultMessageBusFactory.cs" />
     <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
+    <Compile Include="Resolvers\ICompositeViewTypeResolver.cs" />
+    <Compile Include="Resolvers\IPresenterBindingAttributesResolver.cs" />
+    <Compile Include="Resolvers\IPresenterConstructorResolver.cs" />
+    <Compile Include="Resolvers\IPresenterTypeResolver.cs" />
     <Compile Include="Services\GlobalServicesContainer.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />

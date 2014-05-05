@@ -95,6 +95,7 @@
     <Compile Include="ReactiveMessageBusFactory.cs" />
     <Compile Include="Web\AspNetBuildManager.cs" />
     <Compile Include="Web\AspNetMvpBootstrapper.cs" />
+    <Compile Include="Web\AspNetPresenterTypeResolver.cs" />
     <Compile Include="Web\DefaultAspNetPresenterDiscoveryStrategy.cs" />
     <Compile Include="Web\IHttpPresenter.cs" />
     <Compile Include="Web\IHttpPresenter`1.cs" />

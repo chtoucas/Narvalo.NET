@@ -12,8 +12,17 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly PresenterBindingAttributesResolver _attributesResolver
-            = new CachedPresenterBindingAttributesResolver();
+        readonly IPresenterBindingAttributesResolver _attributesResolver;
+        
+        public AttributeBasedPresenterDiscoveryStrategy()
+            : this(new PresenterBindingAttributesResolver()) { }
+
+        public AttributeBasedPresenterDiscoveryStrategy(IPresenterBindingAttributesResolver attributesResolver)
+        {
+            Require.NotNull(attributesResolver, "attributesResolver");
+
+            _attributesResolver = new CachedPresenterBindingAttributesResolver(attributesResolver);
+        }
 
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,

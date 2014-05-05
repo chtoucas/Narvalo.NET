@@ -144,7 +144,7 @@ namespace Narvalo.Mvp.PresenterBinding
             if (unboundViews.Any()) {
                 throw new PresenterBindingException(String.Format(
                     CultureInfo.InvariantCulture,
-                    @"Failed to find presenter for view instance of type {0}.",
+                    @"Failed to find presenter for view of type {0}.",
                     unboundViews.First().GetType().FullName
                 ));
             }

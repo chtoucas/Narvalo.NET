@@ -4,13 +4,22 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
 
-    public sealed class CachedCompositeViewTypeResolver : CompositeViewTypeResolver
+    public sealed class CachedCompositeViewTypeResolver : ICompositeViewTypeResolver
     {
         readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
-        public override Type Resolve(Type input)
+        readonly ICompositeViewTypeResolver _inner;
+
+        public CachedCompositeViewTypeResolver(ICompositeViewTypeResolver inner)
         {
-            return _cache.GetOrAdd(input, base.Resolve);
+            Require.NotNull(inner, "inner");
+
+            _inner = inner;
+        }
+
+        public Type Resolve(Type input)
+        {
+            return _cache.GetOrAdd(input, _inner.Resolve);
         }
     }
 }

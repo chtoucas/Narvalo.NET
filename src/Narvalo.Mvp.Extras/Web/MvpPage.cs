@@ -11,7 +11,7 @@ namespace Narvalo.Mvp.Web
 
         protected override void OnInit(EventArgs e)
         {
-            PageHost.RegisterControl(this, Context);
+            PageHost.RegisterPage(this, Context);
 
             base.OnInit(e);
         }

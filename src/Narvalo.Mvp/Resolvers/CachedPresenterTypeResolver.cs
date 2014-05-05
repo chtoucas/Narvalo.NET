@@ -3,22 +3,23 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-    using System.Collections.Generic;
 
-    public sealed class CachedPresenterTypeResolver : PresenterTypeResolver
+    public sealed class CachedPresenterTypeResolver : IPresenterTypeResolver
     {
         readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
-        public CachedPresenterTypeResolver(
-            IBuildManager buildManager,
-            IEnumerable<string> defaultNamespaces,
-            string[] viewInstanceSuffixes,
-            string[] candidatePresenterNames)
-            : base(buildManager, defaultNamespaces, viewInstanceSuffixes, candidatePresenterNames) { }
+        readonly IPresenterTypeResolver _inner;
 
-        public override Type Resolve(Type input)
+        public CachedPresenterTypeResolver(IPresenterTypeResolver inner)
         {
-            return _cache.GetOrAdd(input, base.Resolve);
+            Require.NotNull(inner, "inner");
+
+            _inner = inner;
+        }
+
+        public Type Resolve(Type input)
+        {
+            return _cache.GetOrAdd(input, _inner.Resolve);
         }
     }
 }

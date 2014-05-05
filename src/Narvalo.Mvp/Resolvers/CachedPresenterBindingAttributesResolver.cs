@@ -6,14 +6,23 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
 
     public sealed class CachedPresenterBindingAttributesResolver
-        : PresenterBindingAttributesResolver
+        : IPresenterBindingAttributesResolver
     {
         readonly TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>> _cache
            = new TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>>();
 
-        public override IEnumerable<PresenterBindingAttribute> Resolve(Type input)
+        readonly IPresenterBindingAttributesResolver _inner;
+
+        public CachedPresenterBindingAttributesResolver(IPresenterBindingAttributesResolver inner)
         {
-            return _cache.GetOrAdd(input, base.Resolve);
+            Require.NotNull(inner, "inner");
+
+            _inner = inner;
+        }
+
+        public IEnumerable<PresenterBindingAttribute> Resolve(Type input)
+        {
+            return _cache.GetOrAdd(input, _inner.Resolve);
         }
     }
 }

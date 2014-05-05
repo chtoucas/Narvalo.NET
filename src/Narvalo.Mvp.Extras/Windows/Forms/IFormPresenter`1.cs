@@ -3,7 +3,5 @@
 namespace Narvalo.Mvp.Windows.Forms
 {
     public interface IFormPresenter<TView>
-        : IPresenter<TView>, IFormPresenter where TView : IView
-    {
-    }
+        : IPresenter<TView>, IFormPresenter where TView : IView { }
 }

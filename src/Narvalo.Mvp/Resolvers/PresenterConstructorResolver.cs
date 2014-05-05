@@ -7,8 +7,7 @@ namespace Narvalo.Mvp.Resolvers
     using System.Reflection.Emit;
     using Narvalo.Mvp.Internal;
 
-    public class PresenterConstructorResolver
-        : IComponentResolver<Tuple<Type, Type>, DynamicMethod>
+    public class PresenterConstructorResolver : IPresenterConstructorResolver
     {
         public virtual DynamicMethod Resolve(Tuple<Type, Type> input)
         {

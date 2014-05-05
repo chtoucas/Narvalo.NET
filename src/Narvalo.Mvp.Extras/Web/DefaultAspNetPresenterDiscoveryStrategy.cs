@@ -34,16 +34,18 @@ namespace Narvalo.Mvp.Web
 
         public DefaultAspNetPresenterDiscoveryStrategy()
         {
-             _inner = new ConventionBasedPresenterDiscoveryStrategy(
+            var typeResolver = new AspNetPresenterTypeResolver(
                 new AspNetBuildManager(),
                 // REVIEW
                 Enumerable.Empty<string>(),
                 ViewSuffixes_,
                 PresenterNameTemplates_);
+
+            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts, 
+            IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);
