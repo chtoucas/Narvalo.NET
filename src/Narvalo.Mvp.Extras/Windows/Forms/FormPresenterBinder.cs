@@ -3,18 +3,15 @@
 namespace Narvalo.Mvp.Windows.Forms
 {
     using System.Windows.Forms;
-    using Narvalo;
     using Narvalo.Mvp.PresenterBinding;
 
-    internal sealed class FormBinder
+    internal sealed class FormPresenterBinder
     {
         readonly PresenterBinder _presenterBinder;
 
-        public FormBinder(Form form)
+        public FormPresenterBinder(Form form)
         {
-            DebugCheck.NotNull(form);
-
-            _presenterBinder = new PresenterBinder(this);
+            _presenterBinder = new PresenterBinder(form);
             _presenterBinder.PresenterCreated += (sender, e) =>
             {
                 var presenter = e.Presenter as IFormPresenter;
@@ -22,16 +19,21 @@ namespace Narvalo.Mvp.Windows.Forms
                     presenter.OnBindingComplete();
                 }
             };
+        }
 
-            form.Load += (sender, e) => _presenterBinder.PerformBinding();
-            form.Disposed += (sender, e) => _presenterBinder.Release();
+        public void PerformBinding()
+        {
+            _presenterBinder.PerformBinding();
         }
 
         public void RegisterView(IView view)
         {
-            DebugCheck.NotNull(view);
-
             _presenterBinder.RegisterView(view);
+        }
+
+        public void Release()
+        {
+            _presenterBinder.Release();
         }
     }
 }

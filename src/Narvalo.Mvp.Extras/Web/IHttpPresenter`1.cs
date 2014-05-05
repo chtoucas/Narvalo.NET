@@ -3,7 +3,5 @@
 namespace Narvalo.Mvp.Web
 {
     public interface IHttpPresenter<out TView> 
-        : IPresenter<TView>, IHttpPresenter where TView : IView
-    {
-    }
+        : IPresenter<TView>, IHttpPresenter where TView : IView { }
 }

@@ -111,13 +111,15 @@
     <Compile Include="Web\MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Web\Page%24.cs" />
     <Compile Include="Web\PageHost.cs" />
-    <Compile Include="Web\PageBinder.cs" />
+    <Compile Include="Web\HttpPresenterBinder.cs" />
     <Compile Include="Web\HttpPresenter`1.cs" />
     <Compile Include="Windows\Forms\DefaultFormPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Windows\Forms\Form%24.cs" />
     <Compile Include="Windows\Forms\FormHost.cs" />
     <Compile Include="Windows\Forms\IFormPresenter.cs" />
-    <Compile Include="Windows\Forms\FormBinder.cs" />
+    <Compile Include="Windows\Forms\FormPresenterBinder.cs" />
     <Compile Include="Windows\Forms\FormsMvpBootstrapper.cs" />
     <Compile Include="Windows\Forms\IFormPresenter`1.cs" />
     <Compile Include="Windows\Forms\MvpForm.cs">

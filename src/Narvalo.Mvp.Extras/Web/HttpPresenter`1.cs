@@ -25,14 +25,14 @@ namespace Narvalo.Mvp.Web
 
         public HttpApplicationStateBase Application { get { return HttpContext.Application; } }
 
+        public Cache Cache { get { return HttpContext.Cache; } }
+
         public HttpRequestBase Request { get { return HttpContext.Request; } }
 
         public HttpResponseBase Response { get { return HttpContext.Response; } }
 
-        public HttpSessionStateBase Session { get { return HttpContext.Session; } }
-
         public HttpServerUtilityBase Server { get { return HttpContext.Server; } }
 
-        public Cache Cache { get { return HttpContext.Cache; } }
+        public HttpSessionStateBase Session { get { return HttpContext.Session; } }
     }
 }

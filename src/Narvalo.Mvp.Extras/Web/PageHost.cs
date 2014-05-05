@@ -6,42 +6,45 @@ namespace Narvalo.Mvp.Web
     using System.Web;
     using System.Web.UI;
 
-    internal static class PageHost
+    internal class PageHost
     {
-        readonly static string CacheKey_ = typeof(PageHost).FullName;
+        readonly HttpPresenterBinder _presenterBinder;
 
-        public static void Register<T>(T control, HttpContext httpContext)
-            where T : Control, IView
+        public PageHost(Page page, HttpContext context)
         {
-            Require.NotNull(control, "control");
-            Require.NotNull(httpContext, "httpContext");
+            _presenterBinder = new HttpPresenterBinder(page.FindHosts(), context);
+
+            page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();
+            page.Unload += (sender, e) => _presenterBinder.Release();
+        }
+
+        public static void RegisterControl<T>(T control, HttpContext context)
+             where T : Control, IView
+        {
+            DebugCheck.NotNull(control);
 
             var page = control.Page;
 
             if (page == null) {
                 throw new InvalidOperationException(
-                    "Controls can only be registered once they have been added to the live control tree. The best place to register them is within the control's Init event.");
+                    "Controls can only be registered once they have been added to the live control tree.");
             }
 
-            var host = GetOrAddBinder_(page, httpContext);
+            var host = page.GetOrAddHost(context); 
+
             host.RegisterView(control);
         }
 
-        static PageBinder GetOrAddBinder_(Page page, HttpContext httpContext)
+        public static void RegisterPage(Page page, HttpContext context)
         {
             DebugCheck.NotNull(page);
 
-            var pageContext = page.Items;
+            page.GetOrAddHost(context);
+        }
 
-            if (pageContext.Contains(CacheKey_)) {
-                return (PageBinder)pageContext[CacheKey_];
-            }
-
-            var binder = new PageBinder(page, httpContext);
-
-            pageContext[CacheKey_] = binder;
-
-            return binder;
+        public void RegisterView(IView view)
+        {
+            _presenterBinder.RegisterView(view);
         }
     }
 }

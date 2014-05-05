@@ -8,6 +8,8 @@ namespace Narvalo.Mvp.Web
     {
         TViewModel _model;
 
+        protected MvpUserControl() { }
+
         public TViewModel Model
         {
             get

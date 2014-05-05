@@ -3,17 +3,23 @@
 namespace Narvalo.Mvp.Windows.Forms
 {
     using System;
-    using System.Collections.Generic;
     using System.Windows.Forms;
     using Narvalo;
 
-    internal static class FormHost
+    internal class FormHost
     {
-        static readonly IDictionary<int, FormBinder> _cache
-           = new Dictionary<int, FormBinder>();
+        readonly FormPresenterBinder _presenterBinder;
 
-        public static void Register<TControl>(TControl control)
-            where TControl : Control, IView
+        public FormHost(Form form)
+        {
+            _presenterBinder = new FormPresenterBinder(form);
+
+            form.Load += (sender, e) => _presenterBinder.PerformBinding();
+            form.Disposed += (sender, e) => _presenterBinder.Release();
+        }
+
+        public static void RegisterControl<T>(T control)
+             where T : Control, IView
         {
             DebugCheck.NotNull(control);
 
@@ -24,26 +30,21 @@ namespace Narvalo.Mvp.Windows.Forms
                     "Controls can only be registered once they have been added to the live control tree.");
             }
 
-            var host = GetOrAddHost_(form);
+            var host = form.GetOrAddHost();
+
             host.RegisterView(control);
         }
 
-        static FormBinder GetOrAddHost_(Form form)
+        public static void RegisterForm(Form form)
         {
             DebugCheck.NotNull(form);
 
-            var cacheKey = form.GetHashCode();
+            form.GetOrAddHost();
+        }
 
-            if (_cache.ContainsKey(cacheKey)) {
-                return _cache[cacheKey];
-            }
-
-            var host = new FormBinder(form);
-
-            _cache[cacheKey] = host;
-
-            return host;
+        public void RegisterView(IView view)
+        {
+            _presenterBinder.RegisterView(view);
         }
     }
-
 }

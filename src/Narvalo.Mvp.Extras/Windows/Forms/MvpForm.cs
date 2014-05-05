@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
+    using System;
     using System.Windows.Forms;
 
     public partial class MvpForm : Form, IView
@@ -11,7 +12,7 @@ namespace Narvalo.Mvp.Windows.Forms
         {
             // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
             if (!DesignMode) {
-                FormHost.Register(this);
+                FormHost.RegisterForm(this);
             }
 
             base.OnCreateControl();

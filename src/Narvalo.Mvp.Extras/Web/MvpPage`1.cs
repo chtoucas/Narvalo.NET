@@ -4,9 +4,11 @@ namespace Narvalo.Mvp.Web
 {
     using System;
 
-    public class MvpPage<TViewModel> : MvpPage, IView<TViewModel>
+    public abstract class MvpPage<TViewModel> : MvpPage, IView<TViewModel>
     {
         TViewModel _model;
+
+        protected MvpPage() { }
 
         public TViewModel Model
         {

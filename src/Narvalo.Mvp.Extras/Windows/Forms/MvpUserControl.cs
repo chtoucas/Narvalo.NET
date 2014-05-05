@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
+    using System;
     using System.Windows.Forms;
 
     public partial class MvpUserControl : UserControl, IView
@@ -10,7 +11,7 @@ namespace Narvalo.Mvp.Windows.Forms
         protected override void OnCreateControl()
         {
             if (!DesignMode) {
-                FormHost.Register(this);
+                FormHost.RegisterControl(this);
             }
 
             base.OnCreateControl();

@@ -4,7 +4,6 @@ namespace Narvalo.Mvp.Web
 {
     using System;
     using System.Web;
-    using Narvalo.Mvp.PresenterBinding;
 
     public abstract class MvpHttpHandler : IHttpHandler, IView
     {
@@ -12,15 +11,7 @@ namespace Narvalo.Mvp.Web
 
         public void ProcessRequest(HttpContext context)
         {
-            var presenterBinder = new PresenterBinder(this);
-            presenterBinder.PresenterCreated += (sender, e) =>
-            {
-                var presenter = e.Presenter as IHttpPresenter;
-                if (presenter != null) {
-                    presenter.HttpContext = new HttpContextWrapper(context);
-                }
-            };
-
+            var presenterBinder = new HttpPresenterBinder(this, context);
             presenterBinder.PerformBinding();
 
             OnLoad();

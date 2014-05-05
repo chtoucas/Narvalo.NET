@@ -4,7 +4,7 @@
     using Narvalo.Mvp;
     using Playground.Views;
 
-    public sealed class TestPresenter : Presenter<ITestView>, IDisposable
+    public sealed class TestPresenter : Presenter<ITestView>
     {
         public TestPresenter(ITestView view)
             : base(view)
@@ -21,12 +21,6 @@
         public void Load(object sender, EventArgs e)
         {
             Console.WriteLine("Load.");
-        }
-
-        public void Dispose()
-        {
-            View.Completed -= Completed;
-            View.Load -= Load;
         }
     }
 }
