@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Services;
 
     public sealed class AspNetMvpBootstrapper : MvpBootstrapper
@@ -9,7 +10,10 @@ namespace Narvalo.Mvp.Web
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)
         {
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
-                () => new DefaultAspNetPresenterDiscoveryStrategy());
+                () => new CompositePresenterDiscoveryStrategy(
+                    new IPresenterDiscoveryStrategy[] {
+                        new DefaultAspNetPresenterDiscoveryStrategy(),
+                        new AttributeBasedPresenterDiscoveryStrategy()}));
 
             base.OnDefaultServicesCreated(defaultServices);
         }

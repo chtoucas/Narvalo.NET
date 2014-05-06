@@ -2,7 +2,7 @@
 {
     using System.Web.UI;
 
-    public partial class Default : Page
+    public partial class SharedPresenter : Page
     {
     }
 }

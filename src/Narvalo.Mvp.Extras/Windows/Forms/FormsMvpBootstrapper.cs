@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
+    using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Services;
 
     public sealed class FormsMvpBootstrapper : MvpBootstrapper
@@ -9,7 +10,10 @@ namespace Narvalo.Mvp.Windows.Forms
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)
         {
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
-                () => new DefaultFormPresenterDiscoveryStrategy());
+                () => new CompositePresenterDiscoveryStrategy(
+                    new IPresenterDiscoveryStrategy[] {
+                        new DefaultFormPresenterDiscoveryStrategy(),
+                        new AttributeBasedPresenterDiscoveryStrategy()}));
 
             base.OnDefaultServicesCreated(defaultServices);
         }

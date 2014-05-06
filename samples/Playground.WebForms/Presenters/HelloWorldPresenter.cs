@@ -10,6 +10,8 @@
         public HelloWorldPresenter(IView<HelloWorldModel> view)
             : base(view)
         {
+            View.Model = new HelloWorldModel();
+
             View.Load += Load;
         }
 

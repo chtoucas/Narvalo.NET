@@ -10,6 +10,8 @@
         public SharedPresenter(IView<SharedPresenterViewModel> view)
             : base(view)
         {
+            View.Model = new SharedPresenterViewModel();
+
             View.Load += Load;
         }
 
