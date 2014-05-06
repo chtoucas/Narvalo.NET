@@ -2,6 +2,8 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
+    // FIXME: Find a better way of handling this problem, for instance by doing
+    // the binding operation earlier.
     /// <summary>
     /// Workaround to enable registration to events not available to the presenter constructor.
     /// It applies to any event occurring before or during a form loading.

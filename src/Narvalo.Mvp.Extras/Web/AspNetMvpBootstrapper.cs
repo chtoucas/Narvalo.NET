@@ -12,8 +12,10 @@ namespace Narvalo.Mvp.Web
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
                 () => new CompositePresenterDiscoveryStrategy(
                     new IPresenterDiscoveryStrategy[] {
-                        new AspNetAttributeBasedPresenterDiscoveryStrategy(),
+                        new AttributeBasedPresenterDiscoveryStrategy(),
                         new AspNetConventionBasedPresenterDiscoveryStrategy()}));
+
+            defaultServices.SetDefaultMessageBusFactory(() => new AspNetMessageBusFactory());
 
             base.OnDefaultServicesCreated(defaultServices);
         }

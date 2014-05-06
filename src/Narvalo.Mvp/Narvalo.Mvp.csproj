@@ -69,11 +69,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="CommandLine\CommandsMvpBootstrapper.cs" />
-    <Compile Include="CommandLine\CommandConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="CommandLine\ICommand.cs" />
-    <Compile Include="CommandLine\MvpCommand.cs" />
-    <Compile Include="CommandLine\MvpCommand`1.cs" />
     <Compile Include="DefaultServicesCreatedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MessageBus.cs" />

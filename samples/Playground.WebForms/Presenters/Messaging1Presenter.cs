@@ -20,9 +20,8 @@
                 Name = "Awesome widget!"
             };
 
-            View.Model.DisplayText = String.Format("Presenter A published widget {0}.", widget.Id);
+            View.Model.DisplayText = String.Format("Presenter 1 publishes widget {0}.", widget.Id);
 
-            // This publishes the widget to the bus.
             Messages.Publish(widget);
         }
     }

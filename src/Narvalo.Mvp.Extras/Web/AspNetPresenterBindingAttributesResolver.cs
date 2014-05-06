@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.Web
     using System.Collections.Generic;
     using Narvalo.Mvp.Resolvers;
 
+    // TO BE REMOVED
     public sealed class AspNetPresenterBindingAttributesResolver : PresenterBindingAttributesResolver
     {
         public AspNetPresenterBindingAttributesResolver() { }

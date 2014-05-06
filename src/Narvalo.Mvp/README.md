@@ -7,6 +7,7 @@ Changes from the original "Web Forms Mvp"
 -----------------------------------------
 
 - Removed all code related to System.Web: HttpContext, TraceContext...
+  (Support MVP for ASP.Net is available in a separate package)
 - An API easier to follow (to me at least) by preferring object methods to static methods
 - No more constraints on the ViewModel; namely the class and new() constraints
 - Use ConcurrentDictionary instead of Dictionary for type caching
@@ -14,6 +15,12 @@ Changes from the original "Web Forms Mvp"
 
 ### Dropped functionalities for now
 
-- MessageBus should process messages published before any subscription?
 - enableAutomaticDataBinding
 - AsyncTaskManager
+
+### TODO
+
+- Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
+  is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
+  that seems fine but I would prefer a better solution.
+

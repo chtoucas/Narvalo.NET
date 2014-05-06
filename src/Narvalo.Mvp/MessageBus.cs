@@ -7,6 +7,8 @@ namespace Narvalo.Mvp
     using System.Collections.Generic;
     using System.Linq;
 
+    // WARNING: Does not keep track of messages, only publishes to the 
+    // *current* list of handlers.
     public sealed class MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers

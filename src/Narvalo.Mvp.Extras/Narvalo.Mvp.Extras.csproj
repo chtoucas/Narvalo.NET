@@ -88,22 +88,27 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="AutofacPresenterFactory.cs" />
+    <Compile Include="CommandLine\CommandConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="CommandLine\CommandsMvpBootstrapper.cs" />
+    <Compile Include="CommandLine\ICommand.cs" />
+    <Compile Include="CommandLine\MvpCommand.cs" />
+    <Compile Include="CommandLine\MvpCommand`1.cs" />
     <Compile Include="ContainerBuilder%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveMessageBus.cs" />
     <Compile Include="ReactiveMessageBusFactory.cs" />
-    <Compile Include="Web\AspNetAttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Web\AspNetBuildManager.cs" />
     <Compile Include="Web\AspNetMvpBootstrapper.cs" />
-    <Compile Include="Web\AspNetPresenterBindingAttributesResolver.cs" />
     <Compile Include="Web\AspNetPresenterTypeResolver.cs" />
     <Compile Include="Web\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Web\DefaultMessageBusFactory.cs" />
     <Compile Include="Web\HttpPresenterOf`1.cs" />
     <Compile Include="Web\HttpPresenterOf`2.cs" />
     <Compile Include="Web\IHttpPresenter.cs" />
     <Compile Include="Web\IHttpPresenter`1.cs" />
+    <Compile Include="Web\AspNetMessageBus.cs" />
     <Compile Include="Web\MvpHttpHandler.cs" />
     <Compile Include="Web\MvpUserControl`1.cs">
       <SubType>ASPXCodeBehind</SubType>

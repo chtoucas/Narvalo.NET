@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web
     using System.Collections.Generic;
     using Narvalo.Mvp.PresenterBinding;
 
+    // TO BE REMOVED
     public sealed class AspNetAttributeBasedPresenterDiscoveryStrategy
         : IPresenterDiscoveryStrategy
     {

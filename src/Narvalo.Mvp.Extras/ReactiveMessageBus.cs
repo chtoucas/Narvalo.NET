@@ -6,7 +6,9 @@ namespace Narvalo.Mvp
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
 
-    public class ReactiveMessageBus : IMessageBus, IDisposable
+    // WARNING: Does not keep track of messages, only publishes to the 
+    // *current* list of handlers.
+    public sealed class ReactiveMessageBus : IMessageBus, IDisposable
     {
         Subject<object> _subject;
 
@@ -42,11 +44,11 @@ namespace Narvalo.Mvp
 
         public void Dispose()
         {
-            Dispose(true /* disposing */);
+            Dispose_(true /* disposing */);
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        void Dispose_(bool disposing)
         {
             if (!_disposed) {
                 if (disposing) {

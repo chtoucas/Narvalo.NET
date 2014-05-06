@@ -30,15 +30,6 @@ namespace Narvalo.Mvp.PresenterBinding
         public PresenterBinder(IEnumerable<object> hosts)
             : this(hosts, new GlobalServicesContainer()) { }
 
-        // REVIEW: How to handle the case where "container" is null.
-        public PresenterBinder(IEnumerable<object> hosts, IServicesContainer container)
-            : this(
-                hosts,
-                container.PresenterDiscoveryStrategy,
-                container.PresenterFactory,
-                container.CompositeViewFactory,
-                container.MessageBusFactory) { }
-
         public PresenterBinder(
             IEnumerable<object> hosts,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
@@ -63,6 +54,14 @@ namespace Narvalo.Mvp.PresenterBinding
                 RegisterView(selfHostedView);
             }
         }
+
+        internal PresenterBinder(IEnumerable<object> hosts, IServicesContainer container)
+            : this(
+                hosts,
+                container.PresenterDiscoveryStrategy,
+                container.PresenterFactory,
+                container.CompositeViewFactory,
+                container.MessageBusFactory) { }
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
 
