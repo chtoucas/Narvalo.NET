@@ -88,6 +88,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="SharedPresenter.aspx" />
+    <Content Include="TimeService.asmx" />
     <Content Include="ViewsAddedInPageInit.aspx" />
     <Content Include="Web.sitemap" />
   </ItemGroup>
@@ -244,6 +245,10 @@
     </Compile>
     <Compile Include="SharedPresenter.aspx.designer.cs">
       <DependentUpon>SharedPresenter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeService.asmx.cs">
+      <DependentUpon>TimeService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ViewsAddedInPageInit.aspx.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>

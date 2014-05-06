@@ -7,7 +7,19 @@ namespace Narvalo.Mvp.Web
 
     public abstract class MvpPage : Page, IView
     {
-        protected MvpPage() { }
+        readonly bool _throwIfNoPresenterBound;
+
+        protected MvpPage() : this(true) { }
+
+        protected MvpPage(bool throwIfNoPresenterBound)
+        {
+            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+        }
+
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
 
         protected override void OnInit(EventArgs e)
         {

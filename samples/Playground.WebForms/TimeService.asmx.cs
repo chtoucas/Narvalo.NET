@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Web.Services;
-using WebFormsMvp.FeatureDemos.Logic.Presenters;
-using WebFormsMvp.FeatureDemos.Logic.Views;
-using WebFormsMvp.Web;
-using System.ComponentModel;
-
-namespace WebFormsMvp.FeatureDemos.Web
+﻿namespace Playground.WebForms
 {
+    using System;
+    using System.ComponentModel;
+    using System.Web.Services;
+    using Narvalo.Mvp;
+    using Narvalo.Mvp.Web;
+    using Playground.WebForms.Presenters;
+    using Playground.WebForms.Views;
+
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]

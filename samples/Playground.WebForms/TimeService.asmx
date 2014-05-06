@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="TimeService.asmx.cs" Class="WebFormsMvp.FeatureDemos.Web.TimeService" %>
+﻿<%@ WebService Language="C#" CodeBehind="TimeService.asmx.cs" Class="Playground.WebForms.TimeService" %>

@@ -74,6 +74,7 @@
       <HintPath>..\..\packages\Rx-PlatformServices.2.2.4\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,9 @@
     </Compile>
     <Compile Include="Web\MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\MvpWebService.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Web\Page%24.cs" />
     <Compile Include="Web\PageHost.cs" />

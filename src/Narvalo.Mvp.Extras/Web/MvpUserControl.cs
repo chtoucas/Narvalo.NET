@@ -7,7 +7,19 @@ namespace Narvalo.Mvp.Web
 
     public abstract class MvpUserControl : UserControl, IView
     {
-        protected MvpUserControl() { }
+        readonly bool _throwIfNoPresenterBound;
+
+        protected MvpUserControl() : this(true) { }
+
+        protected MvpUserControl(bool throwIfNoPresenterBound)
+        {
+            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+        }
+
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
 
         protected override void OnInit(EventArgs e)
         {

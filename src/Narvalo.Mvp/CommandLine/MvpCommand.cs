@@ -7,17 +7,28 @@ namespace Narvalo.Mvp.CommandLine
 
     public abstract class MvpCommand : IView, ICommand, IDisposable
     {
+        readonly bool _throwIfNoPresenterBound;
+
         bool _disposed = false;
         PresenterBinder _presenterBinder;
 
-        protected MvpCommand()
+        protected MvpCommand() : this(true) { }
+
+        protected MvpCommand(bool throwIfNoPresenterBound)
         {
+            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+
             _presenterBinder = new PresenterBinder(this);
             _presenterBinder.PerformBinding();
         }
 
         public event EventHandler Completed;
         public event EventHandler Load;
+
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
 
         public void Execute()
         {

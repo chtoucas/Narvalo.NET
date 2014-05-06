@@ -10,12 +10,13 @@ Changes from the original "Web Forms Mvp"
 - An API easier to follow (to me at least) by preferring object methods to static methods
 - No more constraints on the ViewModel; namely the class and new() constraints
 - Use ConcurrentDictionary instead of Dictionary for type caching
-- MVP configuration is done via MvpConfiguration
+- MVP configuration is done via MvpBootstrapper
 
 ### Dropped functionalities for now
 
-- AsyncTaskManager
-- throwExceptionIfNoPresenterBound
+- Automatically create a model
+- MessageBus should process messages published before any subscription?
 - enableAutomaticDataBinding
+- AsyncTaskManager
 
 

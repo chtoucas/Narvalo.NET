@@ -14,6 +14,11 @@ namespace Narvalo.Mvp
 
         public abstract event EventHandler Load;
 
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return true; }
+        }
+
         /// <summary>
         /// Gets the list of individual views represented by this composite view.
         /// </summary>

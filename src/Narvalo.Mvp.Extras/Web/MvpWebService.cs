@@ -4,16 +4,21 @@ namespace Narvalo.Mvp.Web
 {
     using System;
     using System.Web;
+    using System.Web.Services;
+    using Narvalo.Mvp.PresenterBinding;
 
-    public abstract class MvpHttpHandler : IHttpHandler, IView
+    public abstract class MvpWebService : WebService, IView
     {
+        readonly HttpPresenterBinder _presenterBinder;
         readonly bool _throwIfNoPresenterBound;
 
-        protected MvpHttpHandler() : this(true) { }
+        protected MvpWebService() : this(true) { }
 
-        protected MvpHttpHandler(bool throwIfNoPresenterBound)
+        protected MvpWebService(bool throwIfNoPresenterBound)
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
+            _presenterBinder = new HttpPresenterBinder(this, HttpContext.Current);
+            _presenterBinder.PerformBinding();
         }
 
         public bool ThrowIfNoPresenterBound
@@ -21,21 +26,12 @@ namespace Narvalo.Mvp.Web
             get { return _throwIfNoPresenterBound; }
         }
 
-        public void ProcessRequest(HttpContext context)
-        {
-            var presenterBinder = new HttpPresenterBinder(this, context);
-            presenterBinder.PerformBinding();
-
-            OnLoad();
-
-            presenterBinder.Release();
-        }
-
         public event EventHandler Load;
 
-        public virtual bool IsReusable
+        protected void ReleaseView()
         {
-            get { return false; }
+            // REVIEW: When is it called? Overrides Dispose?
+            _presenterBinder.Release();
         }
 
         protected virtual void OnLoad()

@@ -7,6 +7,20 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpForm : Form, IView
     {
+        readonly bool _throwIfNoPresenterBound;
+
+        protected MvpForm() : this(true) { }
+
+        protected MvpForm(bool throwIfNoPresenterBound)
+        {
+            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+        }
+
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
+
         // REVIEW: Use a different execution point in the windows forms lifecycle.
         protected override void OnCreateControl()
         {

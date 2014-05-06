@@ -139,7 +139,9 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var result = _presenterDiscoveryStrategy.FindBindings(hosts, viewsToBind);
 
-            var unboundViews = viewsToBind.Except(result.BoundViews);
+            var unboundViews = from _ in viewsToBind.Except(result.BoundViews)
+                               where _.ThrowIfNoPresenterBound
+                               select _;
 
             if (unboundViews.Any()) {
                 throw new PresenterBindingException(String.Format(
