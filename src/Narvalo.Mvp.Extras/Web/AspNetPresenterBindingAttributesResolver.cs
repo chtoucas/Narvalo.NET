@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Web
 
     public sealed class AspNetPresenterBindingAttributesResolver : PresenterBindingAttributesResolver
     {
-        public AspNetPresenterBindingAttributesResolver() : base() { }
+        public AspNetPresenterBindingAttributesResolver() { }
 
         public override IEnumerable<PresenterBindingAttribute> Resolve(Type input)
         {
