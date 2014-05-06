@@ -15,17 +15,22 @@ namespace Narvalo.Mvp.PresenterBinding
     public sealed class DefaultPresenterFactory : IPresenterFactory
     {
         readonly IPresenterConstructorResolver _constructorResolver;
-        
+
         public DefaultPresenterFactory()
-            : this(
-                new CachedPresenterConstructorResolver(
-                    new PresenterConstructorResolver())) { }
+            : this(new PresenterConstructorResolver()) { }
 
         public DefaultPresenterFactory(IPresenterConstructorResolver constructorResolver)
+            : this(constructorResolver, true) { }
+
+        public DefaultPresenterFactory(
+            IPresenterConstructorResolver constructorResolver,
+            bool enableCache)
         {
             Require.NotNull(constructorResolver, "constructorResolver");
 
-            _constructorResolver = constructorResolver;
+            _constructorResolver = enableCache
+                 ? new CachedPresenterConstructorResolver(constructorResolver)
+                 : constructorResolver;
         }
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)

@@ -15,15 +15,21 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IPresenterBindingAttributesResolver _attributesResolver;
 
         public AttributeBasedPresenterDiscoveryStrategy()
-            : this(
-                new CachedPresenterBindingAttributesResolver(
-                    new PresenterBindingAttributesResolver())) { }
+            : this(new PresenterBindingAttributesResolver()) { }
 
-        public AttributeBasedPresenterDiscoveryStrategy(IPresenterBindingAttributesResolver attributesResolver)
+        public AttributeBasedPresenterDiscoveryStrategy(
+            IPresenterBindingAttributesResolver attributesResolver)
+            : this(attributesResolver, true) { }
+
+        public AttributeBasedPresenterDiscoveryStrategy(
+            IPresenterBindingAttributesResolver attributesResolver,
+            bool enableCache)
         {
             Require.NotNull(attributesResolver, "attributesResolver");
 
-            _attributesResolver = attributesResolver;
+            _attributesResolver = enableCache
+                 ? new CachedPresenterBindingAttributesResolver(attributesResolver)
+                 : attributesResolver;
         }
 
         public PresenterDiscoveryResult FindBindings(

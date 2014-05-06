@@ -18,18 +18,24 @@ namespace Narvalo.Mvp.PresenterBinding
             string[] viewSuffixes,
             string[] presenterNameTemplates)
             : this(
-                new CachedPresenterTypeResolver(
-                    new PresenterTypeResolver(
-                        buildManager,
-                        defaultNamespaces,
-                        viewSuffixes,
-                        presenterNameTemplates))) { }
+                new PresenterTypeResolver(
+                    buildManager,
+                    defaultNamespaces,
+                    viewSuffixes,
+                    presenterNameTemplates)) { }
 
         public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
+            : this(typeResolver, true) { }
+
+        public ConventionBasedPresenterDiscoveryStrategy(
+            IPresenterTypeResolver typeResolver,
+            bool enableCache)
         {
             Require.NotNull(typeResolver, "typeResolver");
 
-            _typeResolver = typeResolver;
+            _typeResolver = enableCache
+                 ? new CachedPresenterTypeResolver(typeResolver)
+                 : typeResolver;
         }
 
         public PresenterDiscoveryResult FindBindings(

@@ -4,7 +4,6 @@ namespace Narvalo.Mvp.Web
 {
     using System.Collections.Generic;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Resolvers;
 
     public sealed class AspNetAttributeBasedPresenterDiscoveryStrategy
         : IPresenterDiscoveryStrategy
@@ -13,10 +12,8 @@ namespace Narvalo.Mvp.Web
 
         public AspNetAttributeBasedPresenterDiscoveryStrategy()
         {
-            var typeResolver = new CachedPresenterBindingAttributesResolver(
+            _inner = new AttributeBasedPresenterDiscoveryStrategy(
                 new AspNetPresenterBindingAttributesResolver());
-
-            _inner = new AttributeBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)
