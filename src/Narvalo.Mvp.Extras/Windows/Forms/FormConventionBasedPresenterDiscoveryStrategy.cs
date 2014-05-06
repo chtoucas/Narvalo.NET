@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Windows.Forms
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class DefaultFormPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class FormConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
@@ -27,16 +27,18 @@ namespace Narvalo.Mvp.Windows.Forms
 
         readonly IPresenterDiscoveryStrategy _inner;
 
-        public DefaultFormPresenterDiscoveryStrategy()
+        public FormConventionBasedPresenterDiscoveryStrategy()
             : this(new[] { Assembly.GetEntryAssembly() }) { }
 
-        public DefaultFormPresenterDiscoveryStrategy(Assembly[] assemblies)
+        public FormConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
-            _inner = new ConventionBasedPresenterDiscoveryStrategy(
-                new BuildManager(assemblies),
-                assemblies.Select(_ => new AssemblyName(_.FullName).Name),
-                ViewSuffixes_,
-                PresenterNameTemplates_);
+            var typeResolver = new PresenterTypeResolver(
+                   new BuildManager(assemblies),
+                   assemblies.Select(_ => new AssemblyName(_.FullName).Name),
+                   ViewSuffixes_,
+                   PresenterNameTemplates_);
+
+            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(

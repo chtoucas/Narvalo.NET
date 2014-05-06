@@ -12,18 +12,6 @@ namespace Narvalo.Mvp.PresenterBinding
     {
         readonly IPresenterTypeResolver _typeResolver;
 
-        public ConventionBasedPresenterDiscoveryStrategy(
-            IBuildManager buildManager,
-            IEnumerable<string> defaultNamespaces,
-            string[] viewSuffixes,
-            string[] presenterNameTemplates)
-            : this(
-                new PresenterTypeResolver(
-                    buildManager,
-                    defaultNamespaces,
-                    viewSuffixes,
-                    presenterNameTemplates)) { }
-
         public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
             : this(typeResolver, true) { }
 

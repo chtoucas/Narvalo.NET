@@ -52,7 +52,6 @@ namespace Narvalo.Mvp.PresenterBinding
                 var view = pendingViews.First();
                 var viewType = view.GetType();
 
-                // FIXME: Problem with ASP.Net dynamic view types.
                 var bindingsThisRound
                     = (from attr in
                            _attributesResolver.Resolve(viewType).Concat(hostAttributes)
@@ -61,7 +60,7 @@ namespace Narvalo.Mvp.PresenterBinding
                            attr.PresenterType,
                            attr.ViewType,
                            attr.BindingMode,
-                           GetViewsToBind_(attr, view, viewType, pendingViews)
+                           GetViewsToBind_(attr, view, pendingViews)
                        )).ToList();
 
                 bindings.AddRange(bindingsThisRound);
@@ -81,7 +80,6 @@ namespace Narvalo.Mvp.PresenterBinding
         static IEnumerable<IView> GetViewsToBind_(
             PresenterBindingAttribute attribute,
             IView view,
-            Type viewType,
             IEnumerable<IView> pendingViews)
         {
             __Trace.Write(
@@ -97,7 +95,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     return new[] { view };
 
                 case PresenterBindingMode.SharedPresenter:
-                    return pendingViews.Where(viewType.IsInstanceOfType);
+                    return pendingViews.Where(attribute.ViewType.IsInstanceOfType);
 
                 default:
                     throw new PresenterBindingException(String.Format(

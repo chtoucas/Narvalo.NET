@@ -70,7 +70,7 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="CommandLine\CommandsMvpBootstrapper.cs" />
-    <Compile Include="CommandLine\DefaultCommandPresenterDiscoveryStrategy.cs" />
+    <Compile Include="CommandLine\CommandConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="CommandLine\ICommand.cs" />
     <Compile Include="CommandLine\MvpCommand.cs" />
     <Compile Include="CommandLine\MvpCommand`1.cs" />

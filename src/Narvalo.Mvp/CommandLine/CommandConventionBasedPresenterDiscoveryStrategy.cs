@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.CommandLine
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class DefaultCommandPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class CommandConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
@@ -25,16 +25,18 @@ namespace Narvalo.Mvp.CommandLine
 
         readonly IPresenterDiscoveryStrategy _inner;
 
-        public DefaultCommandPresenterDiscoveryStrategy()
+        public CommandConventionBasedPresenterDiscoveryStrategy()
             : this(new[] { Assembly.GetEntryAssembly() }) { }
 
-        public DefaultCommandPresenterDiscoveryStrategy(Assembly[] assemblies)
+        public CommandConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
-            _inner = new ConventionBasedPresenterDiscoveryStrategy(
-                new BuildManager(assemblies),
-                assemblies.Select(_ => new AssemblyName(_.FullName).Name),
-                ViewSuffixes_,
-                PresenterNameTemplates_);
+            var typeResolver = new PresenterTypeResolver(
+                   new BuildManager(assemblies),
+                   assemblies.Select(_ => new AssemblyName(_.FullName).Name),
+                   ViewSuffixes_,
+                   PresenterNameTemplates_);
+
+            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(

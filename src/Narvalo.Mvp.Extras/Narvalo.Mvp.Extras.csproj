@@ -99,7 +99,7 @@
     <Compile Include="Web\AspNetMvpBootstrapper.cs" />
     <Compile Include="Web\AspNetPresenterBindingAttributesResolver.cs" />
     <Compile Include="Web\AspNetPresenterTypeResolver.cs" />
-    <Compile Include="Web\DefaultAspNetPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Web\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Web\HttpPresenterOf`1.cs" />
     <Compile Include="Web\HttpPresenterOf`2.cs" />
     <Compile Include="Web\IHttpPresenter.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="Web\HttpPresenterBinder.cs" />
     <Compile Include="Web\HttpPresenter`1.cs" />
     <Compile Include="Web\Type%24.cs" />
-    <Compile Include="Windows\Forms\DefaultFormPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Windows\Forms\FormConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Windows\Forms\Form%24.cs" />
     <Compile Include="Windows\Forms\FormHost.cs" />
     <Compile Include="Windows\Forms\FormPresenterOf`1.cs" />

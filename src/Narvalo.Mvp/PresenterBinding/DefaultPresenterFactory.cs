@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Reflection;
     using Narvalo;
+    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     /// <remarks>
@@ -40,6 +41,13 @@ namespace Narvalo.Mvp.PresenterBinding
             Require.NotNull(view, "view");
 
             var ctor = _constructorResolver.Resolve(Tuple.Create(presenterType, viewType));
+
+            __Trace.Write(
+                "[DefaultPresenterFactory] Constructing presenter type: {0}, view type: {1}, view: {2}.",
+                presenterType.FullName,
+                viewType.FullName,
+                view.GetType().FullName
+            );
 
             try {
                 return (IPresenter)ctor.Invoke(null, new[] { view });

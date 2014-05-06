@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Web
 {
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Resolvers;
     using Narvalo.Mvp.Services;
 
     public sealed class AspNetMvpBootstrapper : MvpBootstrapper
@@ -13,8 +12,8 @@ namespace Narvalo.Mvp.Web
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
                 () => new CompositePresenterDiscoveryStrategy(
                     new IPresenterDiscoveryStrategy[] {
-                        new DefaultAspNetPresenterDiscoveryStrategy(),
-                        new AspNetAttributeBasedPresenterDiscoveryStrategy()}));
+                        new AspNetAttributeBasedPresenterDiscoveryStrategy(),
+                        new AspNetConventionBasedPresenterDiscoveryStrategy()}));
 
             base.OnDefaultServicesCreated(defaultServices);
         }

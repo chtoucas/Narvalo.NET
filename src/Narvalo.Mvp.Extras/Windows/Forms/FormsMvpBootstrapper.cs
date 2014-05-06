@@ -12,8 +12,8 @@ namespace Narvalo.Mvp.Windows.Forms
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
                 () => new CompositePresenterDiscoveryStrategy(
                     new IPresenterDiscoveryStrategy[] {
-                        new DefaultFormPresenterDiscoveryStrategy(),
-                        new AttributeBasedPresenterDiscoveryStrategy()}));
+                        new AttributeBasedPresenterDiscoveryStrategy(),
+                        new FormConventionBasedPresenterDiscoveryStrategy()}));
 
             base.OnDefaultServicesCreated(defaultServices);
         }

@@ -9,7 +9,7 @@
     [PresenterBinding(typeof(CompositeDemoPresenter),
         ViewType = typeof(ICompositeDemoView),
         BindingMode = PresenterBindingMode.SharedPresenter)]
-    public partial class CompositeView : MvpPage<CompositeDemoViewModel>
+    public partial class CompositeView : MvpPage<CompositeDemoViewModel>, ICompositeDemoView
     {
     }
 }

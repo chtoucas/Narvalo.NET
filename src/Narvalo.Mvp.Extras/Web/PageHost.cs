@@ -12,6 +12,8 @@ namespace Narvalo.Mvp.Web
 
         public PageHost(Page page, HttpContext context)
         {
+            System.Diagnostics.Trace.TraceInformation("[HttpPresenterBinder] " + page.GetType().FullName);
+
             _presenterBinder = new HttpPresenterBinder(page.FindHosts(), context);
 
             page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();
