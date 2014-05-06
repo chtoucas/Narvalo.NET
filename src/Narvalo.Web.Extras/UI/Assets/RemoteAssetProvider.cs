@@ -11,7 +11,7 @@
     {
         Uri _baseUri;
 
-        public RemoteAssetProvider() : base() { }
+        public RemoteAssetProvider() { }
 
         public override void Initialize(string name, NameValueCollection config)
         {

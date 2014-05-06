@@ -6,6 +6,6 @@
 
     public partial class CompositeControl :
         MvpUserControl<CompositeDemoViewModel>, ICompositeDemoView
-    {   
+    {
     }
 }

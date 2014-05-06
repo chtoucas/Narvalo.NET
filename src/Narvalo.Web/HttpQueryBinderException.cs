@@ -9,7 +9,7 @@
     {
         string _memberName = String.Empty;
 
-        public HttpQueryBinderException() : base() { }
+        public HttpQueryBinderException() { }
 
         public HttpQueryBinderException(string message) : base(message) { }
 

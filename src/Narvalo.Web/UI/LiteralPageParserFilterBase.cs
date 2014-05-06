@@ -7,7 +7,7 @@ namespace Narvalo.Web.UI
 
     public abstract class LiteralPageParserFilterBase : UnrestrictedPageParserFilter
     {
-        protected LiteralPageParserFilterBase() : base() { }
+        protected LiteralPageParserFilterBase() { }
 
         protected abstract bool Enabled { get; }
 

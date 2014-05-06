@@ -4,10 +4,11 @@ namespace Narvalo.Mvp.Windows.Forms
 {
     using Narvalo.Mvp;
 
-    public abstract class FormPresenter<TView> : Presenter<TView>, IFormPresenter<TView> 
-        where TView : class, IView
+    public abstract class FormPresenterOf<TViewModel>
+        : PresenterOf<TViewModel>, IFormPresenter<IView<TViewModel>>
+        where TViewModel : class, new()
     {
-        protected FormPresenter(TView view) : base(view) { }
+        protected FormPresenterOf(IView<TViewModel> view) : base(view) { }
 
         public abstract void OnBindingComplete();
     }

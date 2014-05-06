@@ -8,14 +8,14 @@ namespace Narvalo.Mvp
     [Serializable]
     public class MvpException : Exception
     {
-        public MvpException() : base() { ; }
+        public MvpException() { }
 
-        public MvpException(string message) : base(message) { ; }
+        public MvpException(string message) : base(message) { }
 
         public MvpException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected MvpException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
     }
 }

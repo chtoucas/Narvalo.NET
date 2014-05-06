@@ -6,7 +6,8 @@
 
     public class TimeServicePresenter : Presenter<ITimeServiceView>
     {
-        public TimeServicePresenter(ITimeServiceView view) : base(view)
+        public TimeServicePresenter(ITimeServiceView view)
+            : base(view)
         {
             View.GetCurrentTimeCalled += GetCurrentTimeCalled;
         }

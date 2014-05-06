@@ -7,7 +7,7 @@
 
     public sealed class LocalAssetProvider : AssetProviderBase
     {
-        public LocalAssetProvider() : base() { }
+        public LocalAssetProvider() { }
 
         public override void Initialize(string name, NameValueCollection config)
         {

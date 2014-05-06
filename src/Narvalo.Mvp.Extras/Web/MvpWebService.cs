@@ -5,12 +5,13 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Web;
     using System.Web.Services;
-    using Narvalo.Mvp.PresenterBinding;
 
     public abstract class MvpWebService : WebService, IView
     {
-        readonly HttpPresenterBinder _presenterBinder;
         readonly bool _throwIfNoPresenterBound;
+
+        bool _disposed = false;
+        HttpPresenterBinder _presenterBinder;
 
         protected MvpWebService() : this(true) { }
 
@@ -28,10 +29,18 @@ namespace Narvalo.Mvp.Web
 
         public event EventHandler Load;
 
-        protected void ReleaseView()
+        protected override void Dispose(bool disposing)
         {
-            // REVIEW: When is it called? Overrides Dispose?
-            _presenterBinder.Release();
+            if (!_disposed) {
+                if (disposing) {
+                    _presenterBinder.Release();
+                    _presenterBinder = null;
+                }
+
+                _disposed = true;
+            }
+
+            base.Dispose(disposing);
         }
 
         protected virtual void OnLoad()

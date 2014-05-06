@@ -5,14 +5,11 @@
     using Narvalo.Mvp;
     using Playground.WebForms.Domain;
     using Playground.WebForms.Views;
+    using Playground.WebForms.Views.Models;
 
-    public class EditWidgetPresenter : Presenter<IEditWidgetView>
+    public class EditWidgetPresenter : PresenterOf<IEditWidgetView, EditWidgetModel>
     {
         readonly IWidgetRepository widgets;
-
-        public EditWidgetPresenter(IEditWidgetView view)
-            : this(view, null)
-        { }
 
         public EditWidgetPresenter(IEditWidgetView view, IWidgetRepository widgetRepository)
             : base(view)

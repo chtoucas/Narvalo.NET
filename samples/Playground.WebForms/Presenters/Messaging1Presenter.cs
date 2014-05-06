@@ -5,13 +5,11 @@
     using Playground.WebForms.Domain;
     using Playground.WebForms.Views.Models;
 
-    public class Messaging1Presenter : Presenter<IView<MessagingModel>>
+    public class Messaging1Presenter : PresenterOf<MessagingModel>
     {
         public Messaging1Presenter(IView<MessagingModel> view)
             : base(view)
         {
-            View.Model = new MessagingModel();
-
             View.Load += Load;
         }
 

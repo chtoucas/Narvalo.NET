@@ -32,7 +32,6 @@
         ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public AssetSection()
-            : base()
         {
             _properties.Add(DefaultProvider_);
             _properties.Add(Providers_);

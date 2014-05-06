@@ -94,10 +94,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveMessageBus.cs" />
     <Compile Include="ReactiveMessageBusFactory.cs" />
+    <Compile Include="Web\AspNetAttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Web\AspNetBuildManager.cs" />
     <Compile Include="Web\AspNetMvpBootstrapper.cs" />
+    <Compile Include="Web\AspNetPresenterBindingAttributesResolver.cs" />
     <Compile Include="Web\AspNetPresenterTypeResolver.cs" />
     <Compile Include="Web\DefaultAspNetPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Web\HttpPresenterOf`1.cs" />
+    <Compile Include="Web\HttpPresenterOf`2.cs" />
     <Compile Include="Web\IHttpPresenter.cs" />
     <Compile Include="Web\IHttpPresenter`1.cs" />
     <Compile Include="Web\MvpHttpHandler.cs" />
@@ -120,9 +124,12 @@
     <Compile Include="Web\PageHost.cs" />
     <Compile Include="Web\HttpPresenterBinder.cs" />
     <Compile Include="Web\HttpPresenter`1.cs" />
+    <Compile Include="Web\Type%24.cs" />
     <Compile Include="Windows\Forms\DefaultFormPresenterDiscoveryStrategy.cs" />
     <Compile Include="Windows\Forms\Form%24.cs" />
     <Compile Include="Windows\Forms\FormHost.cs" />
+    <Compile Include="Windows\Forms\FormPresenterOf`1.cs" />
+    <Compile Include="Windows\Forms\FormPresenterOf`2.cs" />
     <Compile Include="Windows\Forms\IFormPresenter.cs" />
     <Compile Include="Windows\Forms\FormPresenterBinder.cs" />
     <Compile Include="Windows\Forms\FormsMvpBootstrapper.cs" />

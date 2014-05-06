@@ -12,13 +12,15 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly ICompositeViewTypeResolver _typeResolver;
 
         public DefaultCompositeViewFactory()
-            : this(new CompositeViewTypeResolver()) { }
+            : this(
+                new CachedCompositeViewTypeResolver(
+                    new CompositeViewTypeResolver())) { }
 
         public DefaultCompositeViewFactory(ICompositeViewTypeResolver typeResolver)
         {
             Require.NotNull(typeResolver, "typeResolver");
 
-            _typeResolver = new CachedCompositeViewTypeResolver(typeResolver);
+            _typeResolver = typeResolver;
         }
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)

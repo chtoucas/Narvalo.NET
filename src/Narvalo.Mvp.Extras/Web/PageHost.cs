@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Web
     using System.Web;
     using System.Web.UI;
 
-    internal class PageHost
+    internal sealed class PageHost
     {
         readonly HttpPresenterBinder _presenterBinder;
 

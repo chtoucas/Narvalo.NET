@@ -9,6 +9,10 @@ namespace Narvalo.Mvp.Windows.Forms
     {
         TViewModel _model;
 
+        protected MvpUserControl() { }
+
+        protected MvpUserControl(bool throwIfNoPresenterBound) : base(throwIfNoPresenterBound) { }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TViewModel Model
         {

@@ -5,7 +5,7 @@
 
     public abstract class UnrestrictedPageParserFilter : PageParserFilter
     {
-        protected UnrestrictedPageParserFilter() : base() { }
+        protected UnrestrictedPageParserFilter() { }
 
         public sealed override bool AllowCode { get { return true; } }
 

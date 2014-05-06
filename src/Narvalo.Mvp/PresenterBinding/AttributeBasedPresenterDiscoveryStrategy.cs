@@ -13,15 +13,17 @@ namespace Narvalo.Mvp.PresenterBinding
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         readonly IPresenterBindingAttributesResolver _attributesResolver;
-        
+
         public AttributeBasedPresenterDiscoveryStrategy()
-            : this(new PresenterBindingAttributesResolver()) { }
+            : this(
+                new CachedPresenterBindingAttributesResolver(
+                    new PresenterBindingAttributesResolver())) { }
 
         public AttributeBasedPresenterDiscoveryStrategy(IPresenterBindingAttributesResolver attributesResolver)
         {
             Require.NotNull(attributesResolver, "attributesResolver");
 
-            _attributesResolver = new CachedPresenterBindingAttributesResolver(attributesResolver);
+            _attributesResolver = attributesResolver;
         }
 
         public PresenterDiscoveryResult FindBindings(
@@ -44,6 +46,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 var view = pendingViews.First();
                 var viewType = view.GetType();
 
+                // FIXME: Problem with ASP.Net dynamic view types.
                 var bindingsThisRound
                     = (from attr in
                            _attributesResolver.Resolve(viewType).Concat(hostAttributes)

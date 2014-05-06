@@ -13,7 +13,6 @@
         /// Initialise un nouvel objet de type <see cref="Narvalo.Web.ErrorPageBase"/>.
         /// </summary>
         protected ErrorPageBase()
-            : base()
         {
             Load += Page_Load;
         }

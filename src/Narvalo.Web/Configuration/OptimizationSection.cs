@@ -18,7 +18,6 @@
         ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public OptimizationSection()
-            : base()
         {
             _properties.Add(EnableWhiteSpaceBusting_);
         }

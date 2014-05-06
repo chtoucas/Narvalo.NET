@@ -5,26 +5,25 @@
     using Narvalo.Mvp;
     using Playground.WebForms.Views.Models;
 
-    public class AsyncMessagesPresenter
-        : Presenter<IView<AsyncMessagesModel>>
+    public class AsyncMessagesPresenter : PresenterOf<AsyncMessagesModel>
     {
-        public AsyncMessagesPresenter(IView<AsyncMessagesModel> view)
-            : base(view)
-        {
-            View.Load += Load;
-        }
-
-        private readonly Func<string> doStuff1 = () =>
+        static readonly Func<string> _doStuff1 = () =>
         {
             Thread.Sleep(3000);
             return ThreadMessage("Async task doStuff1 processed");
         };
 
-        private readonly Func<string> doStuff2 = () =>
+        static readonly Func<string> _doStuff2 = () =>
         {
             Thread.Sleep(1500);
             return ThreadMessage("Async task doStuff2 processed");
         };
+
+        public AsyncMessagesPresenter(IView<AsyncMessagesModel> view)
+            : base(view)
+        {
+            View.Load += Load;
+        }
 
         void Load(object sender, EventArgs e)
         {
@@ -67,7 +66,7 @@
             //);
         }
 
-        private static string ThreadMessage(string prefix)
+        static string ThreadMessage(string prefix)
         {
             return String.Format("{0} on thread {1} at {2}", prefix, Thread.CurrentThread.ManagedThreadId, DateTime.Now.ToString("HH:mm:ss.ss"));
         }

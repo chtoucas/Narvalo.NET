@@ -12,7 +12,7 @@
         /// <summary>
         /// Initialise un nouvel objet de type <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterMvcWebRazorHostFactory"/>.
         /// </summary>
-        public WhiteSpaceBusterMvcWebRazorHostFactory() : base() { }
+        public WhiteSpaceBusterMvcWebRazorHostFactory() { }
 
         static bool EnableWhiteSpaceBusting_
         {

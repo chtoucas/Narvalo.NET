@@ -7,7 +7,7 @@
 
     public sealed class DefaultAssetProvider : AssetProviderBase
     {
-        public DefaultAssetProvider() : base() { }
+        public DefaultAssetProvider() { }
 
         public override void Initialize(string name, NameValueCollection config)
         {

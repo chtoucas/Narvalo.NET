@@ -6,16 +6,11 @@ namespace Narvalo.Mvp.Web
     using System.Collections.Generic;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class AspNetPresenterTypeResolver : PresenterTypeResolver
+    public sealed class AspNetPresenterBindingAttributesResolver : PresenterBindingAttributesResolver
     {
-        public AspNetPresenterTypeResolver(
-            IBuildManager buildManager,
-            IEnumerable<string> defaultNamespaces,
-            string[] viewSuffixes,
-            string[] presenterNameTemplates)
-            : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates) { }
+        public AspNetPresenterBindingAttributesResolver() : base() { }
 
-        public override Type Resolve(Type input)
+        public override IEnumerable<PresenterBindingAttribute> Resolve(Type input)
         {
             if (input.IsAspNetDynamicType()) {
                 return base.Resolve(input.BaseType);

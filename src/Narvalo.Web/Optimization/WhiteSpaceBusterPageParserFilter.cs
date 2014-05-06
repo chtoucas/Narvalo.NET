@@ -26,7 +26,7 @@
         /// <summary>
         /// Initialise un nouvel objet de type <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterPageParserFilter"/>.
         /// </summary>
-        public WhiteSpaceBusterPageParserFilter() : base() { }
+        public WhiteSpaceBusterPageParserFilter() { }
 
         /// <summary>
         /// Retourne <code>true</code> si le filtre est actif pour le contrôle, <code>false</code> sinon.

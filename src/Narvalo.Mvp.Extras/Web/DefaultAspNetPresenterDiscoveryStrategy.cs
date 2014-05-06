@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Resolvers;
 
     public sealed class DefaultAspNetPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
@@ -34,12 +35,12 @@ namespace Narvalo.Mvp.Web
 
         public DefaultAspNetPresenterDiscoveryStrategy()
         {
-            var typeResolver = new AspNetPresenterTypeResolver(
+            var typeResolver = new CachedPresenterTypeResolver(new AspNetPresenterTypeResolver(
                 new AspNetBuildManager(),
                 // REVIEW
                 Enumerable.Empty<string>(),
                 ViewSuffixes_,
-                PresenterNameTemplates_);
+                PresenterNameTemplates_));
 
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }

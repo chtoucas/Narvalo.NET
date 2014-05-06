@@ -6,10 +6,11 @@ namespace Narvalo.Mvp.Web
     using System.Web.Caching;
     using Narvalo.Mvp;
 
-    public abstract class HttpPresenter<TView> : Presenter<TView>, IHttpPresenter<TView>
-        where TView : class, IView
+    public abstract class HttpPresenterOf<TViewModel>
+        : PresenterOf<TViewModel>, IHttpPresenter<IView<TViewModel>>
+        where TViewModel : class, new()
     {
-        protected HttpPresenter(TView view) : base(view) { }
+        protected HttpPresenterOf(IView<TViewModel> view) : base(view) { }
 
         public HttpContextBase HttpContext { get; set; }
 

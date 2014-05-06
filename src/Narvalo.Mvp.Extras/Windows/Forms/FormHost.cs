@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.Windows.Forms;
     using Narvalo;
 
-    internal class FormHost
+    internal sealed class FormHost
     {
         readonly FormPresenterBinder _presenterBinder;
 

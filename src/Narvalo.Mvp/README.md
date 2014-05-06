@@ -14,9 +14,6 @@ Changes from the original "Web Forms Mvp"
 
 ### Dropped functionalities for now
 
-- Automatically create a model
 - MessageBus should process messages published before any subscription?
 - enableAutomaticDataBinding
 - AsyncTaskManager
-
-

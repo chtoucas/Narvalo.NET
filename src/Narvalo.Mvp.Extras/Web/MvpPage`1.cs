@@ -10,6 +10,8 @@ namespace Narvalo.Mvp.Web
 
         protected MvpPage() { }
 
+        protected MvpPage(bool throwIfNoPresenterBound) : base(throwIfNoPresenterBound) { }
+
         public TViewModel Model
         {
             get

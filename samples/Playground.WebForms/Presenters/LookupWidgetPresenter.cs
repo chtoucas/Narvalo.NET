@@ -5,10 +5,11 @@
     using Narvalo.Mvp;
     using Playground.WebForms.Domain;
     using Playground.WebForms.Views;
+    using Playground.WebForms.Views.Models;
 
-    public class LookupWidgetPresenter : Presenter<ILookupWidgetView>
+    public class LookupWidgetPresenter : PresenterOf<ILookupWidgetView, LookupWidgetModel>
     {
-        private readonly IWidgetRepository widgetRepository;
+        readonly IWidgetRepository widgetRepository;
 
         public LookupWidgetPresenter(ILookupWidgetView view, IWidgetRepository widgetRepository)
             : base(view)
@@ -24,8 +25,7 @@
             if ((!e.Id.HasValue || e.Id <= 0) && String.IsNullOrEmpty(e.Name))
                 return;
 
-            if (e.Id.HasValue && e.Id > 0)
-            {
+            if (e.Id.HasValue && e.Id > 0) {
                 //AsyncManager.RegisterAsyncTask(
                 //    (asyncSender, ea, callback, state) => // Begin
                 //        widgetRepository.BeginFind(e.Id.Value, callback, state),
@@ -40,8 +40,7 @@
                 //    result => { }, // Timeout
                 //    null, false);
             }
-            else
-            {
+            else {
                 //AsyncManager.RegisterAsyncTask(
                 //    (asyncSender, ea, callback, state) => // Begin
                 //        widgetRepository.BeginFindByName(e.Name, callback, state),
