@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp.Resolvers;
+    using Narvalo.Mvp.Web.Internal;
 
     public sealed class AspNetPresenterTypeResolver : PresenterTypeResolver
     {

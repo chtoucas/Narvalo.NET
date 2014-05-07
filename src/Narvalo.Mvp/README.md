@@ -20,6 +20,8 @@ Changes from the original "Web Forms Mvp"
 
 ### TODO
 
+- Not yet satisfied by the various implementations of IPresenter
+
 - Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
   is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
   that seems fine but I would prefer a better solution.

@@ -8,7 +8,8 @@ namespace Narvalo.Mvp
 
         /// <remarks>
         /// WARNING: This mode can only be used if the underlying view interface
-        /// only defines properties or events.
+        /// only defines properties or events. Also only applies to views that 
+        /// use the "AttributeBasedPresenterDiscoveryStrategy" statregy.
         /// </remarks>
         SharedPresenter
     }

@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Web;
     using System.Web.Services;
+    using Narvalo.Mvp.Web.Internal;
 
     public abstract class MvpWebService : WebService, IView
     {
