@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Resolvers
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
 
-    public class PresenterTypeResolver : IPresenterTypeResolver
+    public class /* Default */PresenterTypeResolver : IPresenterTypeResolver
     {
         readonly IBuildManager _buildManager;
         readonly IEnumerable<string> _defaultNamespaces;

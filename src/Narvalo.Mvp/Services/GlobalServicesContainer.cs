@@ -3,9 +3,11 @@
 namespace Narvalo.Mvp.Services
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using Narvalo.Mvp.PresenterBinding;
 
+    [EditorBrowsableAttribute(EditorBrowsableState.Never)]
     public sealed class GlobalServicesContainer : IServicesContainer
     {
         LazyLazy<IServicesContainer> _inner

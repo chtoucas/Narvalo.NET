@@ -4,10 +4,12 @@ namespace Narvalo.Mvp
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Globalization;
     using Narvalo;
 
     // NB: Must stay public for "CompositeViewTypeBuilder" to work.
+    [EditorBrowsableAttribute(EditorBrowsableState.Never)]
     public abstract class CompositeView<TView> : ICompositeView where TView : IView
     {
         readonly IList<TView> _views = new List<TView>();

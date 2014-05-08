@@ -29,6 +29,7 @@ Changes from the original "Web Forms Mvp"
 - Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
   is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
   that seems fine but I would prefer a better solution.
+  * Removed IMessageBus from Narvalo.Mvp?
   * Buffer then send all remaining messages when Close() is called (see MessageCoordinator)
   * Review all consumers of PresenderBinder
 

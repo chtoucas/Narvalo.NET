@@ -10,7 +10,7 @@ namespace Narvalo.Mvp
     {
         void Publish<T>(T message);
 
-        IObservable<T> Register<T>();
+        //IObservable<T> Register<T>();
 
         void Subscribe<T>(Action<T> onNext);
     }

@@ -23,10 +23,5 @@ namespace Narvalo.Mvp.Internal
 
             return @this.Concat(Enumerable.Repeat(element, 1));
         }
-
-        public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
-        {
-            return Enumerable.Repeat(element, 1).Concat(@this);
-        }
     }
 }
