@@ -1,22 +1,29 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms.Internal
+namespace Narvalo.Mvp.Web
 {
-    using System.Windows.Forms;
+    using System.Collections.Generic;
+    using System.Web;
     using Narvalo.Mvp.PresenterBinding;
 
-    internal sealed class FormPresenterBinder
+    public sealed class HttpPresenterBinder
     {
         readonly PresenterBinder _presenterBinder;
 
-        public FormPresenterBinder(Form form)
+        public HttpPresenterBinder(object host, HttpContext context)
+            : this(new[] { host }, context) { }
+
+        public HttpPresenterBinder(IEnumerable<object> hosts, HttpContext context)
         {
-            _presenterBinder = new PresenterBinder(form);
+            DebugCheck.NotNull(hosts);
+            DebugCheck.NotNull(context);
+
+            _presenterBinder = new PresenterBinder(hosts);
             _presenterBinder.PresenterCreated += (sender, e) =>
             {
-                var presenter = e.Presenter as IFormPresenter;
+                var presenter = e.Presenter as IHttpPresenter;
                 if (presenter != null) {
-                    presenter.OnBindingComplete();
+                    presenter.HttpContext = new HttpContextWrapper(context);
                 }
             };
         }

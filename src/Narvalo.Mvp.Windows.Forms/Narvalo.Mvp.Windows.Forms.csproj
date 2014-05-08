@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp.Windows.Forms</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Windows.Forms</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,10 +37,6 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Narvalo.Common, Version=0.18.0.1, Culture=neutral, PublicKeyToken=48027043888c7f5e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,10 +52,13 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
     <Compile Include="Internal\Form%24.cs" />
     <Compile Include="FormConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\FormHost.cs" />
-    <Compile Include="Internal\FormPresenterBinder.cs" />
+    <Compile Include="FormPresenterBinder.cs" />
     <Compile Include="FormPresenterOf`1.cs" />
     <Compile Include="FormPresenterOf`2.cs" />
     <Compile Include="FormPresenter`1.cs" />
@@ -95,7 +94,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

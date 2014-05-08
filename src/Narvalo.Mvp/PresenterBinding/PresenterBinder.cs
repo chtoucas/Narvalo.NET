@@ -65,6 +65,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
 
+        public IMessageBus Messages { get { return _messageBus; } }
+
         public void PerformBinding()
         {
             try {

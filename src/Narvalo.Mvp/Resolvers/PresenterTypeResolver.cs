@@ -6,7 +6,6 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Narvalo.Collections;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
 

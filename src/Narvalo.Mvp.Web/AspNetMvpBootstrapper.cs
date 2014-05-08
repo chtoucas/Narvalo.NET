@@ -9,6 +9,8 @@ namespace Narvalo.Mvp.Web
     {
         protected override void OnDefaultServicesCreated(DefaultServices defaultServices)
         {
+            // We keep "AttributeBasedPresenterDiscoveryStrategy" on top of the list
+            // since it is the most complete implementation.
             defaultServices.SetDefaultPresenterDiscoveryStrategy(
                 () => new CompositePresenterDiscoveryStrategy(
                     new IPresenterDiscoveryStrategy[] {

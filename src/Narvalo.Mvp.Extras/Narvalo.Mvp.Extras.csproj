@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Extras</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SignAssembly>true</SignAssembly>
@@ -54,10 +54,6 @@
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Narvalo.Common, Version=0.18.0.1, Culture=neutral, PublicKeyToken=48027043888c7f5e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +79,9 @@
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="AutofacPresenterFactory.cs" />
     <Compile Include="CommandLine\CommandConventionBasedPresenterDiscoveryStrategy.cs" />

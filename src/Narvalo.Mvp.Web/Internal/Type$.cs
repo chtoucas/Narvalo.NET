@@ -11,6 +11,7 @@ namespace Narvalo.Mvp.Web.Internal
         {
             DebugCheck.NotNull(@this);
 
+            // REVIEW: The following remarks are taken from the original WebFormsMvp code.
             // Use the base type for pages & user controls as that is the code-behind file.
             // TODO: Ensure using BaseType still works in WebSite projects with code-beside files
             // instead of code-behind files.

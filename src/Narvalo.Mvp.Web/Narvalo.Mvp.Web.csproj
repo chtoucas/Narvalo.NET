@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,10 +37,6 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Narvalo.Common, Version=0.18.0.1, Culture=neutral, PublicKeyToken=48027043888c7f5e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -57,13 +53,16 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
     <Compile Include="AspNetBuildManager.cs" />
     <Compile Include="AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="AspNetMessageBus.cs" />
     <Compile Include="AspNetMvpBootstrapper.cs" />
     <Compile Include="AspNetPresenterTypeResolver.cs" />
     <Compile Include="DefaultMessageBusFactory.cs" />
-    <Compile Include="Internal\HttpPresenterBinder.cs" />
+    <Compile Include="HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenterOf`2.cs" />
     <Compile Include="HttpPresenter`1.cs" />
@@ -105,7 +104,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

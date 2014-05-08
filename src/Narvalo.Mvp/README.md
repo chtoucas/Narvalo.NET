@@ -20,9 +20,17 @@ Changes from the original "Web Forms Mvp"
 
 ### TODO
 
+- Incorporate TraceAdapter from WebFormsMvp
+
 - Not yet satisfied by the various implementations of IPresenter
+
+- There must be a more transparent way to initialize GlobalServices / host
 
 - Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
   is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
   that seems fine but I would prefer a better solution.
+  * Buffer then send all remaining messages when Close() is called (see MessageCoordinator)
+  * Review all consumers of PresenderBinder
+
+- Incorporate ideas from MVCSharp (Task, Navigator) and maybe Caliburn.Micro / ReactiveUI / MVVM Light ?
 

@@ -9,10 +9,13 @@ namespace Narvalo.Mvp.Services
     {
         Func<ICompositeViewFactory> _compositeViewFactoryThunk
            = () => new DefaultCompositeViewFactory();
+
         Func<IMessageBusFactory> _messageBusFactoryThunk
            = () => new DefaultMessageBusFactory();
+
         Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
            = () => new AttributeBasedPresenterDiscoveryStrategy();
+
         Func<IPresenterFactory> _presenterFactoryThunk
            = () => new DefaultPresenterFactory();
 

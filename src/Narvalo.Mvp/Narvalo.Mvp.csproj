@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp</RootNamespace>
     <AssemblyName>Narvalo.Mvp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SignAssembly>true</SignAssembly>
@@ -51,10 +51,6 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Narvalo.Common, Version=0.18.0.1, Culture=neutral, PublicKeyToken=48027043888c7f5e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,8 +65,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
     <Compile Include="DefaultServicesCreatedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="PresenterBinding\DefaultMessageBusFactory.cs" />
@@ -134,7 +134,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +144,6 @@
   <ItemGroup>
     <Content Include="LICENSE-WebFormsMvp.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
