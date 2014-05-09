@@ -11,7 +11,7 @@
         static void Main()
         {
             var bootstrapper = new FormsMvpBootstrapper();
-            bootstrapper.Configuration.MessageBusFactory.Is(new ReactiveMessageBusFactory());
+            //bootstrapper.Configuration.MessageBusFactory.Is(new ReactiveMessageBusFactory());
             bootstrapper.Run();
 
             Application.EnableVisualStyles();

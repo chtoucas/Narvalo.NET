@@ -10,13 +10,12 @@ namespace Narvalo.Mvp.Configuration
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.
     /// </summary>
-    public sealed class MvpConfiguration
+    public class MvpConfiguration
     {
         readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
 
         ICompositeViewFactory _compositeViewFactory;
-        IMessageBusFactory _messageBusFactory;
         IPresenterFactory _presenterFactory;
 
         public Setter<MvpConfiguration, ICompositeViewFactory> CompositeViewFactory
@@ -34,15 +33,6 @@ namespace Narvalo.Mvp.Configuration
             {
                 return new Appender<MvpConfiguration, IPresenterDiscoveryStrategy>(
                     this, _ => _presenterDiscoveryStrategies.Add(_));
-            }
-        }
-
-        public Setter<MvpConfiguration, IMessageBusFactory> MessageBusFactory
-        {
-            get
-            {
-                return new Setter<MvpConfiguration, IMessageBusFactory>(
-                    this, _ => _messageBusFactory = _);
             }
         }
 
@@ -68,10 +58,6 @@ namespace Narvalo.Mvp.Configuration
                 ? _compositeViewFactory
                 : defaultServices.CompositeViewFactory;
 
-            result.MessageBusFactory = _messageBusFactory != null
-                ? _messageBusFactory
-                : defaultServices.MessageBusFactory;
-
             result.PresenterFactory = _presenterFactory != null
                 ? _presenterFactory
                 : defaultServices.PresenterFactory;
@@ -96,8 +82,6 @@ namespace Narvalo.Mvp.Configuration
         class ServicesContainer_ : IServicesContainer
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }
-
-            public IMessageBusFactory MessageBusFactory { get; set; }
 
             public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy { get; set; }
 

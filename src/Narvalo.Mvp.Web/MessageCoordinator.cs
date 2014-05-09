@@ -6,28 +6,37 @@ namespace Narvalo.Mvp.Web
     using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
-    public sealed class AspNetMessageBus : IMessageBus
+    public sealed class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
 
+        bool _disposed = false;
+
+        public void Close()
+        {
+            __TraceNeverReceivedMessages();
+
+            Dispose_(true);
+        }
+
         public void Publish<T>(T message)
         {
+            ThrowIfDisposed_();
+
             AddMessage_(message);
             PushMessage_(message);
         }
 
-        public IObservable<T> Register<T>()
-        {
-            throw new NotSupportedException("FIXME");
-        }
-
         public void Subscribe<T>(Action<T> onNext)
         {
+            ThrowIfDisposed_();
+
             Require.NotNull(onNext, "onNext");
 
             AddHandler_(onNext);
@@ -71,12 +80,51 @@ namespace Narvalo.Mvp.Web
             var messageType = typeof(T);
 
             var messagesOfT = from t in _messages.Keys
-                           where messageType.IsAssignableFrom(t)
-                           from m in _messages[t].Cast<T>()
-                           select m;
+                              where messageType.IsAssignableFrom(t)
+                              from m in _messages[t].Cast<T>()
+                              select m;
 
             foreach (var message in messagesOfT) {
                 onNext(message);
+            }
+        }
+
+        [Conditional("TRACE")]
+        void __TraceNeverReceivedMessages()
+        {
+            var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
+
+            foreach (var type in neverReceivedMessages) {
+                Trace.TraceInformation("You published a message of type " + type.FullName 
+                    + " but you did not registered a handler for it.");
+            }
+        }
+
+        public void ThrowIfDisposed_()
+        {
+            if (_disposed) {
+                throw new ObjectDisposedException(
+                    typeof(MessageCoordinator).FullName,
+                    "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose_(true /* disposing */);
+            GC.SuppressFinalize(this);
+        }
+
+        void Dispose_(bool disposing)
+        {
+            if (!_disposed) {
+                if (disposing) {
+                    // REVIEW
+                    _handlers.Clear();
+                    _messages.Clear();
+                }
+
+                _disposed = true;
             }
         }
     }

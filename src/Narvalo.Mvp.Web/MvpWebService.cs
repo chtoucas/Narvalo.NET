@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.Web
     using System.Web;
     using System.Web.Services;
 
+    // REVIEW
     public abstract class MvpWebService : WebService, IView
     {
         readonly bool _throwIfNoPresenterBound;
@@ -18,7 +19,8 @@ namespace Narvalo.Mvp.Web
         protected MvpWebService(bool throwIfNoPresenterBound)
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
-            _presenterBinder = new HttpPresenterBinder(this, HttpContext.Current);
+
+            _presenterBinder = HttpPresenterBinderFactory.Create(this, HttpContext.Current);
             _presenterBinder.PerformBinding();
         }
 

@@ -2,51 +2,69 @@
 
 namespace Narvalo.Mvp.Web.Internal
 {
-    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Web;
     using System.Web.UI;
 
     internal sealed class PageHost
     {
+        readonly static string PageHostKey_ = typeof(PageHost).FullName;
+
         readonly HttpPresenterBinder _presenterBinder;
 
         public PageHost(Page page, HttpContext context)
         {
-            System.Diagnostics.Trace.TraceInformation("[HttpPresenterBinder] " + page.GetType().FullName);
+            DebugCheck.NotNull(page);
 
-            _presenterBinder = new HttpPresenterBinder(page.FindHosts(), context);
+            Trace.TraceInformation("[HttpPresenterBinder] " + page.GetType().FullName);
 
+            var hosts = FindHosts_(page);
+
+            _presenterBinder = HttpPresenterBinderFactory.Create(hosts, context);
+
+            // On page's initialization, bind the presenter.
             page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();
+
+            // Ensures that any attempt to use the message coordinator fails after pre-rendering completed.
+            page.PreRenderComplete += (sender, e) => _presenterBinder.MessageCoordinator.Close();
+
+            // On unloadng the page, release the binder.
             page.Unload += (sender, e) => _presenterBinder.Release();
         }
 
-        public static void RegisterControl<T>(T control, HttpContext context)
-             where T : Control, IView
-        {
-            DebugCheck.NotNull(control);
-
-            var page = control.Page;
-
-            if (page == null) {
-                throw new InvalidOperationException(
-                    "Controls can only be registered once they have been added to the live control tree.");
-            }
-
-            var host = page.GetOrAddHost(context); 
-
-            host.RegisterView(control);
-        }
-
-        public static void RegisterPage(Page page, HttpContext context)
+        public static PageHost Register(Page page, HttpContext context)
         {
             DebugCheck.NotNull(page);
 
-            page.GetOrAddHost(context);
+            var pageContext = page.Items;
+
+            if (pageContext.Contains(PageHostKey_)) {
+                return (PageHost)pageContext[PageHostKey_];
+            }
+            else {
+                var host = new PageHost(page, context);
+                pageContext[PageHostKey_] = host;
+                return host;
+            }
         }
 
         public void RegisterView(IView view)
         {
             _presenterBinder.RegisterView(view);
+        }
+
+        static IEnumerable<object> FindHosts_(Page page)
+        {
+            yield return page;
+
+            var masterHost = page.Master;
+
+            while (masterHost != null) {
+                yield return masterHost;
+
+                masterHost = masterHost.Master;
+            }
         }
     }
 }

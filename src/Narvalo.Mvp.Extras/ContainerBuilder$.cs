@@ -7,19 +7,19 @@ namespace Narvalo.Mvp
     using Autofac;
     using Autofac.Builder;
     using Autofac.Features.Scanning;
-    using Narvalo.Mvp.CommandLine;
+    //using Narvalo.Mvp.CommandLine;
 
     public static class ContainerBuilderExtensions
     {
-        public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
-            RegisterCommands(
-                this ContainerBuilder builder,
-                params Assembly[] controllerAssemblies)
-        {
-            return builder.RegisterAssemblyTypes(controllerAssemblies)
-                .Where(t => typeof(ICommand).IsAssignableFrom(t) &&
-                    t.Name.EndsWith("Command", StringComparison.Ordinal));
-        }
+        //public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
+        //    RegisterCommands(
+        //        this ContainerBuilder builder,
+        //        params Assembly[] controllerAssemblies)
+        //{
+        //    return builder.RegisterAssemblyTypes(controllerAssemblies)
+        //        .Where(t => typeof(ICommand).IsAssignableFrom(t) &&
+        //            t.Name.EndsWith("Command", StringComparison.Ordinal));
+        //}
 
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             RegisterPresenters(

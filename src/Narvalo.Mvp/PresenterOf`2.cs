@@ -16,8 +16,6 @@ namespace Narvalo.Mvp
             _view.Model = new TViewModel();
         }
 
-        public IMessageBus Messages { get; set; }
-
         public TView View { get { return _view; } }
     }
 }

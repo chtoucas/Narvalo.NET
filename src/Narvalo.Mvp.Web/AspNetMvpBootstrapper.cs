@@ -2,24 +2,41 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using System.ComponentModel;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Services;
 
-    public sealed class AspNetMvpBootstrapper : MvpBootstrapper
+    public sealed class AspNetMvpBootstrapper
     {
-        protected override void OnDefaultServicesCreated(DefaultServices defaultServices)
+        readonly AspNetMvpConfiguration _configuration;
+        readonly MvpBootstrapper _inner;
+
+        public AspNetMvpBootstrapper() : this(new AspNetMvpConfiguration()) { }
+
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public AspNetMvpBootstrapper(AspNetMvpConfiguration configuration)
         {
-            // We keep "AttributeBasedPresenterDiscoveryStrategy" on top of the list
-            // since it is the most complete implementation.
-            defaultServices.SetDefaultPresenterDiscoveryStrategy(
-                () => new CompositePresenterDiscoveryStrategy(
-                    new IPresenterDiscoveryStrategy[] {
-                        new AttributeBasedPresenterDiscoveryStrategy(),
-                        new AspNetConventionBasedPresenterDiscoveryStrategy()}));
+            Require.NotNull(configuration, "configuration");
 
-            defaultServices.SetDefaultMessageBusFactory(() => new AspNetMessageBusFactory());
+            _configuration = configuration;
+            _inner = new MvpBootstrapper(configuration);
 
-            base.OnDefaultServicesCreated(defaultServices);
+            _inner.DefaultServicesCreated += (sender, e) =>
+            {
+                // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
+                // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
+                e.DefaultServices.SetDefaultPresenterDiscoveryStrategy(
+                    () => new CompositePresenterDiscoveryStrategy(
+                        new IPresenterDiscoveryStrategy[] {
+                            new AttributeBasedPresenterDiscoveryStrategy(),
+                            new AspNetConventionBasedPresenterDiscoveryStrategy()}));
+            };
+        }
+
+        public AspNetMvpConfiguration Configuration { get { return _configuration; } }
+
+        public void Run()
+        {
+            _inner.Run();
         }
     }
 }

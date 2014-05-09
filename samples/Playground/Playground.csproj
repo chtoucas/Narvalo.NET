@@ -82,6 +82,10 @@
     <Compile Include="Views\ITestView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp.CommandLine\Narvalo.Mvp.CommandLine.csproj">
+      <Project>{400611c4-c02e-4ec0-88ce-28c6da9309d5}</Project>
+      <Name>Narvalo.Mvp.CommandLine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj">
       <Project>{a1e58486-bcb8-43c9-bb77-2ce98cb3f57f}</Project>
       <Name>Narvalo.Mvp.Extras</Name>

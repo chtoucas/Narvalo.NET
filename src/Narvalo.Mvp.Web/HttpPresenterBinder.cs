@@ -2,45 +2,57 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using System;
     using System.Collections.Generic;
     using System.Web;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class HttpPresenterBinder
+    public sealed class HttpPresenterBinder : PresenterBinder
     {
-        readonly PresenterBinder _presenterBinder;
+        readonly HttpContext _context;
+        readonly IMessageCoordinator _messageCoordinator;
 
-        public HttpPresenterBinder(object host, HttpContext context)
-            : this(new[] { host }, context) { }
-
-        public HttpPresenterBinder(IEnumerable<object> hosts, HttpContext context)
+        public HttpPresenterBinder(
+            IEnumerable<object> hosts,
+            HttpContext context,
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
+            IPresenterFactory presenterFactory,
+            ICompositeViewFactory compositeViewFactory,
+            IMessageCoordinatorFactory messageCoordinatorFactory)
+            : base(
+                hosts,
+                presenterDiscoveryStrategy,
+                presenterFactory,
+                compositeViewFactory)
         {
-            DebugCheck.NotNull(hosts);
-            DebugCheck.NotNull(context);
+            Require.NotNull(context, "context");
+            Require.NotNull(messageCoordinatorFactory, "messageCoordinatorFactory");
 
-            _presenterBinder = new PresenterBinder(hosts);
-            _presenterBinder.PresenterCreated += (sender, e) =>
-            {
-                var presenter = e.Presenter as IHttpPresenter;
-                if (presenter != null) {
-                    presenter.HttpContext = new HttpContextWrapper(context);
-                }
-            };
+            _context = context;
+            _messageCoordinator = messageCoordinatorFactory.Create();
         }
 
-        public void PerformBinding()
+        public IMessageCoordinator MessageCoordinator { get { return _messageCoordinator; } }
+
+        public override void Release()
         {
-            _presenterBinder.PerformBinding();
+            var disposableMessageCoordinator = _messageCoordinator as IDisposable;
+            if (disposableMessageCoordinator != null) {
+                disposableMessageCoordinator.Dispose();
+            }
+
+            base.Release();
         }
 
-        public void RegisterView(IView view)
+        protected override void OnPresenterCreated(PresenterCreatedEventArgs args)
         {
-            _presenterBinder.RegisterView(view);
-        }
+            var presenter = args.Presenter as IHttpPresenter;
+            if (presenter != null) {
+                presenter.HttpContext = new HttpContextWrapper(_context);
+                presenter.Messages = _messageCoordinator;
+            }
 
-        public void Release()
-        {
-            _presenterBinder.Release();
+            base.OnPresenterCreated(args);
         }
     }
 }

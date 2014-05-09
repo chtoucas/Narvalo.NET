@@ -3,19 +3,28 @@
 namespace Narvalo.Mvp
 {
     using System;
+    using System.ComponentModel;
     using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Services;
 
     public class MvpBootstrapper
     {
-        readonly MvpConfiguration _configuration = new MvpConfiguration();
-
-        public MvpBootstrapper() { }
+        readonly MvpConfiguration _configuration;
 
         public event EventHandler<DefaultServicesCreatedEventArgs> DefaultServicesCreated;
         public event EventHandler<ServicesContainerCreatedEventArgs> ServicesContainerCreated;
 
-        public virtual MvpConfiguration Configuration { get { return _configuration; } }
+        public MvpBootstrapper() : this(new MvpConfiguration()) { }
+
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public MvpBootstrapper(MvpConfiguration configuration)
+        {
+            Require.NotNull(configuration, "configuration");
+
+            _configuration = configuration;
+        }
+
+        public MvpConfiguration Configuration { get { return _configuration; } }
 
         public void Run()
         {

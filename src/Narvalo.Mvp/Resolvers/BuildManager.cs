@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Resolvers
     using System.Linq;
     using System.Reflection;
 
-    public sealed class /* Default */BuildManager : IBuildManager
+    public sealed class /*Default*/BuildManager : IBuildManager
     {
         readonly Assembly[] _assemblies;
 

@@ -71,10 +71,8 @@
     <Compile Include="DefaultServicesCreatedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
-    <Compile Include="MessageBus.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="PresenterBinding\DefaultMessageBusFactory.cs" />
-    <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
+    <Compile Include="PresenterBinding\PresenterBinderFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
     <Compile Include="PresenterOf`2.cs" />
     <Compile Include="Resolvers\ICompositeViewTypeResolver.cs" />
@@ -96,7 +94,7 @@
     <Compile Include="Resolvers\ResolverCache`3.cs" />
     <Compile Include="Resolvers\CompositeViewModuleBuilder.cs" />
     <Compile Include="Resolvers\CompositeViewTypeBuilder.cs" />
-    <Compile Include="PresenterBinding\DefaultPresenterFactory.cs" />
+    <Compile Include="PresenterBinding\PresenterFactory.cs" />
     <Compile Include="PresenterBinding\IPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\IPresenterFactory.cs" />
     <Compile Include="PresenterBinding\PresenterBinder.cs" />
@@ -114,9 +112,8 @@
     <Compile Include="Resolvers\PresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\CachedPresenterBindingAttributesResolver.cs" />
     <Compile Include="Internal\__Trace.cs" />
-    <Compile Include="IMessageBus.cs" />
     <Compile Include="CompositeView.cs" />
-    <Compile Include="PresenterBinding\DefaultCompositeViewFactory.cs" />
+    <Compile Include="PresenterBinding\CompositeViewFactory.cs" />
     <Compile Include="ICompositeView.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IPresenter`1.cs" />

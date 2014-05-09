@@ -54,8 +54,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
@@ -72,16 +72,22 @@
     </Compile>
     <Compile Include="AspNetBuildManager.cs" />
     <Compile Include="AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="AspNetMessageBus.cs" />
+    <Compile Include="AspNetDefaultServices.cs" />
+    <Compile Include="AspNetMvpConfiguration.cs" />
+    <Compile Include="HttpPresenterBinderFactory.cs" />
+    <Compile Include="IAspNetServicesContainer.cs" />
+    <Compile Include="MessageCoordinatorFactory.cs" />
+    <Compile Include="IMessageCoordinatorFactory.cs" />
+    <Compile Include="MessageCoordinator.cs" />
     <Compile Include="AspNetMvpBootstrapper.cs" />
     <Compile Include="AspNetPresenterTypeResolver.cs" />
-    <Compile Include="DefaultMessageBusFactory.cs" />
     <Compile Include="HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenterOf`2.cs" />
     <Compile Include="HttpPresenter`1.cs" />
     <Compile Include="IHttpPresenter.cs" />
     <Compile Include="IHttpPresenter`1.cs" />
+    <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="MvpHttpHandler.cs" />
     <Compile Include="MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -95,11 +101,10 @@
     <Compile Include="MvpUserControl`1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Internal\PageHost.cs" />
     <Compile Include="MvpWebService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Internal\Page%24.cs" />
-    <Compile Include="Internal\PageHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\Type%24.cs" />
   </ItemGroup>

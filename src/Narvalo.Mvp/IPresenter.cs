@@ -2,8 +2,8 @@
 
 namespace Narvalo.Mvp
 {
-    public interface IPresenter
-    {
-        IMessageBus Messages { get; set; }
-    }
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces")]
+    public interface IPresenter { }
 }

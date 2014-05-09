@@ -69,6 +69,7 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
+    <Compile Include="IMessageBus.cs" />
     <Compile Include="Internal\Form%24.cs" />
     <Compile Include="FormConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\FormHost.cs" />

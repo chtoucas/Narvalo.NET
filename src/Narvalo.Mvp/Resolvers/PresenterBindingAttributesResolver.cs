@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Resolvers
     using System.Linq;
     using Narvalo.Mvp.Internal;
 
-    public class /* Default */PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
+    public class /*Default*/PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
     {
         public virtual IEnumerable<PresenterBindingAttribute> Resolve(Type input)
         {

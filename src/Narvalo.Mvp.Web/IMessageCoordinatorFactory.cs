@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.PresenterBinding
+namespace Narvalo.Mvp.Web
 {
-    public interface IMessageBusFactory
+    public interface IMessageCoordinatorFactory
     {
-        IMessageBus Create();
+        IMessageCoordinator Create();
     }
 }

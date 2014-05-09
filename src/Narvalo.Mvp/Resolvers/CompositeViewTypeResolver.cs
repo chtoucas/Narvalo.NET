@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Resolvers
     using System.Reflection;
     using Narvalo.Mvp.Internal;
 
-    public class /* Default */CompositeViewTypeResolver : ICompositeViewTypeResolver
+    public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
         readonly CompositeViewModuleBuilder _moduleBuilder
               = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");

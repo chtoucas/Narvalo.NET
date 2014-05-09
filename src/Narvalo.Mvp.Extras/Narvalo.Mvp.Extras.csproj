@@ -51,8 +51,9 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,16 +87,12 @@
     <Compile Include="AutofacPresenterFactory.cs" />
     <Compile Include="ContainerBuilder%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IMessageBus.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveMessageBus.cs" />
-    <Compile Include="ReactiveMessageBusFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Mvp.CommandLine\Narvalo.Mvp.CommandLine.csproj">
-      <Project>{400611c4-c02e-4ec0-88ce-28c6da9309d5}</Project>
-      <Name>Narvalo.Mvp.CommandLine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
       <Name>Narvalo.Mvp</Name>

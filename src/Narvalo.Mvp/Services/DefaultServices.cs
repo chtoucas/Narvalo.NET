@@ -5,22 +5,18 @@ namespace Narvalo.Mvp.Services
     using System;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class DefaultServices : IServicesContainer
+    public class DefaultServices : IServicesContainer
     {
         Func<ICompositeViewFactory> _compositeViewFactoryThunk
-           = () => new DefaultCompositeViewFactory();
-
-        Func<IMessageBusFactory> _messageBusFactoryThunk
-           = () => new DefaultMessageBusFactory();
+           = () => new CompositeViewFactory();
 
         Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
            = () => new AttributeBasedPresenterDiscoveryStrategy();
 
         Func<IPresenterFactory> _presenterFactoryThunk
-           = () => new DefaultPresenterFactory();
+           = () => new PresenterFactory();
 
         ICompositeViewFactory _compositeViewFactory;
-        IMessageBusFactory _messageBusFactory;
         IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         IPresenterFactory _presenterFactory;
 
@@ -31,11 +27,6 @@ namespace Narvalo.Mvp.Services
                 return _compositeViewFactory
                     ?? (_compositeViewFactory = _compositeViewFactoryThunk());
             }
-        }
-
-        public IMessageBusFactory MessageBusFactory
-        {
-            get { return _messageBusFactory ?? (_messageBusFactory = _messageBusFactoryThunk()); }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
@@ -61,13 +52,6 @@ namespace Narvalo.Mvp.Services
             Require.NotNull(thunk, "thunk");
 
             _compositeViewFactoryThunk = thunk;
-        }
-
-        public void SetDefaultMessageBusFactory(Func<IMessageBusFactory> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _messageBusFactoryThunk = thunk;
         }
 
         public void SetDefaultPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)

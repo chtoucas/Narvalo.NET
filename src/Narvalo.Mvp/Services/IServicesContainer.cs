@@ -8,8 +8,6 @@ namespace Narvalo.Mvp.Services
     {
         ICompositeViewFactory CompositeViewFactory { get; }
 
-        IMessageBusFactory MessageBusFactory { get; }
-
         IPresenterDiscoveryStrategy PresenterDiscoveryStrategy { get; }
 
         IPresenterFactory PresenterFactory { get; }

@@ -15,6 +15,8 @@ namespace Narvalo.Mvp.Web
 
         public HttpContextBase HttpContext { get; set; }
 
+        public IMessageCoordinator Messages { get; set; }
+
         public HttpApplicationStateBase Application { get { return HttpContext.Application; } }
 
         public Cache Cache { get { return HttpContext.Cache; } }

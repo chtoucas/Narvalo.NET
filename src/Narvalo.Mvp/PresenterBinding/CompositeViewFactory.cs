@@ -7,17 +7,17 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class DefaultCompositeViewFactory : ICompositeViewFactory
+    public sealed class /*Default*/CompositeViewFactory : ICompositeViewFactory
     {
         readonly ICompositeViewTypeResolver _typeResolver;
 
-        public DefaultCompositeViewFactory()
+        public CompositeViewFactory()
             : this(new CompositeViewTypeResolver()) { }
 
-        public DefaultCompositeViewFactory(ICompositeViewTypeResolver typeResolver)
+        public CompositeViewFactory(ICompositeViewTypeResolver typeResolver)
             : this(typeResolver, true) { }
 
-        public DefaultCompositeViewFactory(
+        public CompositeViewFactory(
             ICompositeViewTypeResolver typeResolver,
             bool enableCache)
         {

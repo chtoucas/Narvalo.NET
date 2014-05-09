@@ -24,7 +24,13 @@ namespace Narvalo.Mvp.Web
 
         protected override void OnInit(EventArgs e)
         {
-            PageHost.RegisterControl(this, Context);
+            // REVIEW: Remove the following check.
+            if (Page == null) {
+                throw new InvalidOperationException(
+                    "Controls can only be registered once they have been added to the live control tree.");
+            }
+
+            PageHost.Register(Page, Context).RegisterView(this);
 
             base.OnInit(e);
         }

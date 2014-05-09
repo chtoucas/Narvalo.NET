@@ -1,6 +1,6 @@
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-// Cette classe est inspirée de :
+// The "Require" class is largely taken from:
 // http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx
 
 namespace Narvalo
@@ -104,7 +104,10 @@ namespace Narvalo
 
             if (value.Length == 0) {
                 throw new ArgumentException(
-                    String.Format(CultureInfo.InvariantCulture, "The parameter {0} is empty.", parameterName),
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The parameter {0} is empty.", 
+                        parameterName),
                     parameterName);
             }
 
@@ -119,7 +122,11 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not in range {0} / {1}.", minValue, maxValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not in range {0} / {1}.", 
+                        minValue, 
+                        maxValue));
             }
 
             Contract.EndContractBlock();
@@ -133,7 +140,11 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not in range {0} / {1}.", minValue, maxValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not in range {0} / {1}.",
+                        minValue, 
+                        maxValue));
             }
 
             Contract.EndContractBlock();
@@ -147,7 +158,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not greater than or equal to {0}.", minValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not greater than or equal to {0}.", 
+                        minValue));
             }
 
             Contract.EndContractBlock();
@@ -161,7 +175,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not greater than or equal to {0}.", minValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "The value is not greater than or equal to {0}.",
+                        minValue));
             }
 
             Contract.EndContractBlock();
@@ -180,7 +197,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not greater than or equal to {0}.", minValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not greater than or equal to {0}.",
+                        minValue));
             }
 
             Contract.EndContractBlock();
@@ -194,7 +214,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not less than or equal to {0}.", maxValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not less than or equal to {0}.",
+                        maxValue));
             }
 
             Contract.EndContractBlock();
@@ -208,7 +231,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not less than or equal to {0}.", maxValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "The value is not less than or equal to {0}.",
+                        maxValue));
             }
 
             Contract.EndContractBlock();
@@ -227,7 +253,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    String.Format(CultureInfo.InvariantCulture, "The value is not less than or equal to {0}.", maxValue));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The value is not less than or equal to {0}.",
+                        maxValue));
             }
 
             Contract.EndContractBlock();
@@ -239,7 +268,10 @@ namespace Narvalo
             {
                 return new ArgumentNullException(
                     parameterName,
-                    String.Format(CultureInfo.InvariantCulture, "The parameter {0} is null.", parameterName));
+                    String.Format(
+                        CultureInfo.InvariantCulture, 
+                        "The parameter {0} is null.", 
+                        parameterName));
             }
         }
 

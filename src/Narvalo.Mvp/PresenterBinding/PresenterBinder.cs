@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Linq;
     using Narvalo;
-    using Narvalo.Mvp.Services;
 
     public class PresenterBinder
     {
@@ -20,52 +19,30 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
 
-        readonly IMessageBus _messageBus;
-
         bool _bindingCompleted = false;
-
-        public PresenterBinder(object host)
-            : this(new[] { host }, new GlobalServicesContainer()) { }
-
-        public PresenterBinder(IEnumerable<object> hosts)
-            : this(hosts, new GlobalServicesContainer()) { }
 
         public PresenterBinder(
             IEnumerable<object> hosts,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
-            ICompositeViewFactory compositeViewFactory,
-            IMessageBusFactory messageBusFactory)
+            ICompositeViewFactory compositeViewFactory)
         {
             Require.NotNull(hosts, "hosts");
             Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
             Require.NotNull(presenterFactory, "presenterFactory");
             Require.NotNull(compositeViewFactory, "compositeViewFactory");
-            Require.NotNull(messageBusFactory, "messageBusFactory");
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
             _presenterFactory = presenterFactory;
             _compositeViewFactory = compositeViewFactory;
 
-            _messageBus = messageBusFactory.Create();
-
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
             }
         }
 
-        internal PresenterBinder(IEnumerable<object> hosts, IServicesContainer container)
-            : this(
-                hosts,
-                container.PresenterDiscoveryStrategy,
-                container.PresenterFactory,
-                container.CompositeViewFactory,
-                container.MessageBusFactory) { }
-
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
-
-        public IMessageBus Messages { get { return _messageBus; } }
 
         public void PerformBinding()
         {
@@ -98,13 +75,8 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public void Release()
+        public virtual void Release()
         {
-            var disposableMessageBus = _messageBus as IDisposable;
-            if (disposableMessageBus != null) {
-                disposableMessageBus.Dispose();
-            }
-
             lock (_presenters) {
                 foreach (var presenter in _presenters) {
                     _presenterFactory.Release(presenter);
@@ -114,11 +86,9 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        protected virtual IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
+        protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
-
-            presenter.Messages = _messageBus;
 
             OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
 

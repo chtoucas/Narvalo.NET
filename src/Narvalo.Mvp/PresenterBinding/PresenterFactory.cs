@@ -13,17 +13,17 @@ namespace Narvalo.Mvp.PresenterBinding
     /// WARNING: This class can not be used for presenters that do not have a constructor
     /// accepting the view as a single parameter.
     /// </remarks>
-    public sealed class DefaultPresenterFactory : IPresenterFactory
+    public sealed class /*Default*/PresenterFactory : IPresenterFactory
     {
         readonly IPresenterConstructorResolver _constructorResolver;
 
-        public DefaultPresenterFactory()
+        public PresenterFactory()
             : this(new PresenterConstructorResolver()) { }
 
-        public DefaultPresenterFactory(IPresenterConstructorResolver constructorResolver)
+        public PresenterFactory(IPresenterConstructorResolver constructorResolver)
             : this(constructorResolver, true) { }
 
-        public DefaultPresenterFactory(
+        public PresenterFactory(
             IPresenterConstructorResolver constructorResolver,
             bool enableCache)
         {
