@@ -1,10 +1,11 @@
-﻿using System;
-using WebFormsMvp.FeatureDemos.Logic.Presenters;
-using WebFormsMvp.FeatureDemos.Logic.Views.Models;
-using WebFormsMvp.Web;
-
-namespace WebFormsMvp.FeatureDemos.Web
+﻿namespace Playground.WebForms
 {
+    using System;
+    using Narvalo.Mvp;
+    using Narvalo.Mvp.Web;
+    using Playground.WebForms.Presenters;
+    using Playground.WebForms.Views.Models;
+
     [PresenterBinding(typeof(HelloWorldPresenter))]
     public partial class PageView : MvpPage<HelloWorldModel>
     {

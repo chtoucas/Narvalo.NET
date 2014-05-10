@@ -40,10 +40,5 @@ namespace Playground.WindowsForms
         {
             Messages.Publish(new TestMessage { Text = (sender as TextBox).Text });
         }
-
-        public override void OnBindingComplete()
-        {
-            ;
-        }
     }
 }

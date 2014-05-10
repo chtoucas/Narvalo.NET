@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Narvalo.Mvp</id>
+    <id>Narvalo.Mvp.Web</id>
     <version>$version$</version>
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
@@ -9,13 +9,17 @@
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-This package contains a simple MVP framework inspired by webformsmvp.
+This package enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
+Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsmvp codebase.
 
 *** Until we reached version 1.0, backward compatibility is not guaranteed ***
     </description>
     <!--<releaseNotes></releaseNotes>-->
-    <copyright>Copyright 2013</copyright>
-    <tags>MVP</tags>
+    <copyright>Copyright 2014</copyright>
+    <tags>MVP, ASP.NET</tags>
     <language>en-US</language>
+    <dependencies>
+      <dependency id="Narvalo.Mvp" version="0.21" />
+    </dependencies>
   </metadata>
 </package>

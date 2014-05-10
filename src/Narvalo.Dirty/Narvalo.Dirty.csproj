@@ -124,7 +124,7 @@
     <Compile Include="Diagnostics\ILoggerFactory.cs" />
     <Compile Include="Diagnostics\LoggerBase.cs" />
     <Compile Include="Diagnostics\LoggerLevel.cs" />
-    <Compile Include="Diagnostics\NoopLogger.cs" />
+    <Compile Include="Diagnostics\SilentLogger.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Fx\Either`2.cs" />

@@ -6,8 +6,8 @@ namespace Narvalo.Mvp.Web
 
     public interface IHttpPresenter : IPresenter
     {
-        HttpContextBase HttpContext { get; set; }
+        HttpContextBase HttpContext { get; }
 
-        IMessageCoordinator Messages { get; set; }
+        IMessageCoordinator Messages { get; }
     }
 }

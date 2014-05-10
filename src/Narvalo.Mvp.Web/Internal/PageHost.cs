@@ -17,8 +17,6 @@ namespace Narvalo.Mvp.Web.Internal
         {
             DebugCheck.NotNull(page);
 
-            Trace.TraceInformation("[HttpPresenterBinder] " + page.GetType().FullName);
-
             var hosts = FindHosts_(page);
 
             _presenterBinder = HttpPresenterBinderFactory.Create(hosts, context);

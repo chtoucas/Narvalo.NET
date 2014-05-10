@@ -40,11 +40,11 @@ namespace Narvalo.Mvp.PresenterBinding
                 var presenterType = _typeResolver.Resolve(viewType);
 
                 if (presenterType != null) {
-                    __Trace.Write(
-                        "[ConventionBasedPresenterDiscoveryStrategy] Found presenter type: {0} for view type: {1}.",
+                    __Trace.Info(
+                        this,
+                        @"Found presenter ""{0}"" for view ""{1}"".",
                         presenterType.FullName,
-                        viewType.FullName
-                    );
+                        viewType.FullName);
 
                     var binding = new PresenterBindingParameter(
                         presenterType,
@@ -56,10 +56,11 @@ namespace Narvalo.Mvp.PresenterBinding
                     boundViews.Add(view);
                 }
                 else {
-                    __Trace.Write(
-                        "[ConventionBasedPresenterDiscoveryStrategy] No presenter type found for view type: {0}.",
-                        viewType.FullName
-                    );
+                    __Trace.Info(
+                        this,
+                        @"No presenter found for view ""{0}"".",
+                        typeof(ConventionBasedPresenterDiscoveryStrategy).Name,
+                        viewType.FullName);
                 }
             }
 

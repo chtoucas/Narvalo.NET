@@ -26,11 +26,6 @@ namespace Narvalo.Mvp.Windows.Forms
             }
         }
 
-        //public IObservable<T> Register<T>()
-        //{
-        //    throw new NotSupportedException("FIXME");
-        //}
-
         public void Subscribe<T>(Action<T> onNext)
         {
             Require.NotNull(onNext, "onNext");

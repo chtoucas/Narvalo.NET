@@ -10,9 +10,17 @@ namespace Narvalo.Mvp.Internal
     {
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Write(string format, params string[] messages)
+        public static void Info(object source, string format, params string[] messages)
         {
-            Trace.TraceInformation(String.Format(CultureInfo.InvariantCulture, format, messages));
+            Info(source.GetType(), format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Info(Type sourceType, string format, params string[] messages)
+        {
+            Trace.WriteLine("[" + sourceType.Name + "] " 
+                + String.Format(CultureInfo.InvariantCulture, format, messages));
         }
     }
 }

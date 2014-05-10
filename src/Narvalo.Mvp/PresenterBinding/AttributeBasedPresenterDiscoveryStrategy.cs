@@ -82,11 +82,12 @@ namespace Narvalo.Mvp.PresenterBinding
             IView view,
             IEnumerable<IView> pendingViews)
         {
-            __Trace.Write(
-                "[AttributeBasedPresenterDiscoveryStrategy] Found presenter type: {1}, view type: {2}, binding mode: {3}.",
-                attribute.Origin.FullName,
+            __Trace.Info(
+                typeof(AttributeBasedPresenterDiscoveryStrategy),
+                @"Found presenter ""{0}"" view ""{1}"", origin ""{2}"", binding mode ""{3}"".",
                 attribute.PresenterType.FullName,
                 attribute.ViewType.FullName,
+                attribute.Origin.FullName,
                 attribute.BindingMode.ToString()
             );
 

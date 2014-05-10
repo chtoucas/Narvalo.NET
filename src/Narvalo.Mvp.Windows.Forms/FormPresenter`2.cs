@@ -5,14 +5,19 @@ namespace Narvalo.Mvp.Windows.Forms
     using Narvalo.Mvp;
 
     public abstract class FormPresenter<TView, TViewModel>
-        : Presenter<TView, TViewModel>, IFormPresenter<TView>
+        : Presenter<TView, TViewModel>, IFormPresenter, Internal.IFormPresenter
         where TView : class, IView<TViewModel>
         where TViewModel : class, new()
     {
         protected FormPresenter(TView view) : base(view) { }
 
-        public IMessageBus Messages { get; set; }
+        public IMessageBus Messages { get; private set; }
 
-        public abstract void OnBindingComplete();
+        public virtual void OnBindingComplete() { }
+
+        IMessageBus Internal.IFormPresenter.Messages
+        {
+            set { Messages = value; }
+        }
     }
 }

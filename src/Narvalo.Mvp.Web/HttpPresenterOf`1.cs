@@ -7,14 +7,14 @@ namespace Narvalo.Mvp.Web
     using Narvalo.Mvp;
 
     public abstract class HttpPresenterOf<TViewModel>
-        : PresenterOf<TViewModel>, IHttpPresenter<IView<TViewModel>>
+        : PresenterOf<TViewModel>, IHttpPresenter, Internal.IHttpPresenter
         where TViewModel : class, new()
     {
         protected HttpPresenterOf(IView<TViewModel> view) : base(view) { }
 
-        public HttpContextBase HttpContext { get; set; }
+        public HttpContextBase HttpContext { get; private set; }
 
-        public IMessageCoordinator Messages { get; set; }
+        public IMessageCoordinator Messages { get; private set; }
 
         public HttpApplicationStateBase Application { get { return HttpContext.Application; } }
 
@@ -27,5 +27,15 @@ namespace Narvalo.Mvp.Web
         public HttpServerUtilityBase Server { get { return HttpContext.Server; } }
 
         public HttpSessionStateBase Session { get { return HttpContext.Session; } }
+
+        HttpContextBase Internal.IHttpPresenter.HttpContext
+        {
+            set { HttpContext = value; }
+        }
+
+        IMessageCoordinator Internal.IHttpPresenter.Messages
+        {
+            set { Messages = value; }
+        }
     }
 }

@@ -28,11 +28,14 @@ namespace Narvalo.Mvp.Windows.Forms
 
         protected override void OnPresenterCreated(PresenterCreatedEventArgs args)
         {
-            var presenter = args.Presenter as IFormPresenter;
+            var presenter = args.Presenter as Internal.IFormPresenter;
             if (presenter != null) {
                 presenter.Messages = _messageBus;
+            }
 
-                presenter.OnBindingComplete();
+            var tmpPresenter = args.Presenter as IFormPresenter;
+            if (tmpPresenter != null) {
+                tmpPresenter.OnBindingComplete();
             }
 
             base.OnPresenterCreated(args);

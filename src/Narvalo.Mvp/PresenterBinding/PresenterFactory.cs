@@ -42,8 +42,9 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var ctor = _constructorResolver.Resolve(Tuple.Create(presenterType, viewType));
 
-            __Trace.Write(
-                "[DefaultPresenterFactory] Constructing presenter type: {0}, view type: {1}, view: {2}.",
+            __Trace.Info(
+                this,
+                @"Constructing presenter ""{0}"" for view ""{1}"", view ""{2}"".",
                 presenterType.FullName,
                 viewType.FullName,
                 view.GetType().FullName

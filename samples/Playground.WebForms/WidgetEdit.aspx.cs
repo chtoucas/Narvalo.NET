@@ -1,7 +1,7 @@
-﻿using System.Web.UI;
-
-namespace WebFormsMvp.FeatureDemos.Web
+﻿namespace Playground.WebForms
 {
+    using System.Web.UI;
+
     public partial class WidgetEdit : Page
     {
     }

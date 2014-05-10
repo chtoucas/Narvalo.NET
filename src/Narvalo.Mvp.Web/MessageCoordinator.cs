@@ -95,8 +95,9 @@ namespace Narvalo.Mvp.Web
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 
             foreach (var type in neverReceivedMessages) {
-                Trace.TraceInformation("You published a message of type " + type.FullName 
-                    + " but you did not registered any handler for it.");
+                Trace.TraceWarning(
+                    @"You published a message of type ""{0}"" but you did not registered any handler for it.", 
+                    type.FullName);
             }
         }
 

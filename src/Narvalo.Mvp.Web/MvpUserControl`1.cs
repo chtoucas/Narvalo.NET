@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Web
     {
         TViewModel _model;
 
-        protected MvpUserControl() { }
+        protected MvpUserControl() : base(true) { }
 
         protected MvpUserControl(bool throwIfNoPresenterBound) : base(throwIfNoPresenterBound) { }
 

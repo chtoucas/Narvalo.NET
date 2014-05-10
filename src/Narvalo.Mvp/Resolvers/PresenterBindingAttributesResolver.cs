@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Write("[PresenterBindingAttributesResolver] Attempting to resolve: " + input.FullName);
+            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
 
             var attributes = input
                 .GetCustomAttributes(typeof(PresenterBindingAttribute), true /* inherit */)
@@ -37,9 +37,9 @@ namespace Narvalo.Mvp.Resolvers
                 .Select(pba =>
                     new PresenterBindingAttribute(pba.PresenterType)
                     {
-                        ViewType = pba.ViewType ?? input,
                         BindingMode = pba.BindingMode,
                         Origin = input,
+                        ViewType = pba.ViewType ?? input,
                     })
                 .ToArray();
         }

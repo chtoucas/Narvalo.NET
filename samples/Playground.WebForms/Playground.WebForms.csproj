@@ -81,14 +81,17 @@
     <Content Include="Handlers\TimeHandler.ashx" />
     <Content Include="Layouts\Site.Master" />
     <Content Include="App_Themes\SiteTheme\Controls.skin" />
+    <Content Include="WidgetEdit.aspx" />
+    <Content Include="WidgetLookup.aspx" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="PageView.aspx" />
     <Content Include="SharedPresenter.aspx" />
-    <Content Include="TimeService.asmx" />
     <Content Include="ViewsAddedInPageInit.aspx" />
     <Content Include="Web.sitemap" />
   </ItemGroup>
@@ -185,6 +188,7 @@
     </Compile>
     <Compile Include="Domain\IWidgetRepository.cs" />
     <Compile Include="Domain\Widget.cs" />
+    <Compile Include="Domain\WidgetRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +215,13 @@
     </Compile>
     <Compile Include="Messaging.aspx.designer.cs">
       <DependentUpon>Messaging.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageView.aspx.cs">
+      <DependentUpon>PageView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageView.aspx.designer.cs">
+      <DependentUpon>PageView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Presenters\AsyncMessagesPresenter.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
@@ -246,10 +257,6 @@
     <Compile Include="SharedPresenter.aspx.designer.cs">
       <DependentUpon>SharedPresenter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TimeService.asmx.cs">
-      <DependentUpon>TimeService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ViewsAddedInPageInit.aspx.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -271,6 +278,20 @@
     <Compile Include="Views\Models\LookupWidgetModel.cs" />
     <Compile Include="Views\Models\MessagingModel.cs" />
     <Compile Include="Views\Models\SharedPresenterViewModel.cs" />
+    <Compile Include="WidgetEdit.aspx.cs">
+      <DependentUpon>WidgetEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WidgetEdit.aspx.designer.cs">
+      <DependentUpon>WidgetEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WidgetLookup.aspx.cs">
+      <DependentUpon>WidgetLookup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WidgetLookup.aspx.designer.cs">
+      <DependentUpon>WidgetLookup.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

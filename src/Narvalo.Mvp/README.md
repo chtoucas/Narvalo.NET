@@ -7,28 +7,17 @@ Changes from the original "Web Forms Mvp"
 -----------------------------------------
 
 - Removed all code related to System.Web: HttpContext, TraceContext...
-  (Support MVP for ASP.Net is available in a separate package)
-- An API easier to follow (to me at least) by preferring object methods to static methods
-- No more constraints on the ViewModel; namely the class and new() constraints
+  (support for ASP.NET / Windows Forms will be posted in separate packages)
+- An API easier to follow (to me at least)
+- No more generic constraint on the ViewModel; namely the class and new() constraints
 - Use ConcurrentDictionary instead of Dictionary for type caching
-- MVP configuration is done via MvpBootstrapper
+- Several possibilities of customization via MvpConfiguration
 
 ### Dropped functionalities for now
 
-- enableAutomaticDataBinding
 - AsyncTaskManager
 
 ### TODO
-
-- Incorporate TraceAdapter from WebFormsMvp
-
-- Not yet satisfied by the various implementations of IPresenter
-
-- Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
-  is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
-  that seems fine but I would prefer a better solution.
-  * Buffer then send all remaining messages when Close() is called (see MessageCoordinator)
-  * Review all consumers of PresenderBinder
 
 - Incorporate ideas from MVCSharp (Task, Navigator) and maybe Caliburn.Micro / ReactiveUI / MVVM Light ?
 

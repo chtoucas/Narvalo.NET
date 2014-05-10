@@ -75,6 +75,7 @@
     <Compile Include="DefaultFormsPlatformServices.cs" />
     <Compile Include="FormsPresenterBinderFactory.cs" />
     <Compile Include="IFormsPlatformServices.cs" />
+    <Compile Include="Internal\IFormPresenter.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="IMessageBus.cs" />
     <Compile Include="FormsConventionBasedPresenterDiscoveryStrategy.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="FormPresenter`2.cs" />
     <Compile Include="FormPresenter`1.cs" />
     <Compile Include="IFormPresenter.cs" />
-    <Compile Include="IFormPresenter`1.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="MvpForm.cs">
       <SubType>Form</SubType>

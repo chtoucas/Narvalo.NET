@@ -23,8 +23,8 @@ namespace Narvalo.Mvp.Web
 
         public void ProcessRequest(HttpContext context)
         {
-            // NB: There is no need to close the message coordinator (does not seems 
-            // to make sense to use messaging in this context).
+            // NB: There is no need to close the message coordinator (it simply does not seem
+            // to make sense to use cross-presenter messaging in this context).
             var presenterBinder = HttpPresenterBinderFactory.Create(this, context);
             presenterBinder.PerformBinding();
 

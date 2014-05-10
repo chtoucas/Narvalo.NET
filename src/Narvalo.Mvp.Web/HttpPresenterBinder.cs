@@ -46,7 +46,7 @@ namespace Narvalo.Mvp.Web
 
         protected override void OnPresenterCreated(PresenterCreatedEventArgs args)
         {
-            var presenter = args.Presenter as IHttpPresenter;
+            var presenter = args.Presenter as Internal.IHttpPresenter;
             if (presenter != null) {
                 presenter.HttpContext = new HttpContextWrapper(_context);
                 presenter.Messages = _messageCoordinator;

@@ -4,8 +4,13 @@ namespace Narvalo.Mvp.Web
 {
     using System;
 
-    // IMPORTANT: This is not meant to be be used as a global message bus.
     // Only views bound by the same "HttpPresenteBinder" will share this message bus.
+    // In practice, cross-presenter communication is applicable to all presenters
+    // activated during the same HTTP request.
+    // When a message is published, it will be handled by all present AND future handlers.
+    // You then do not have to worry about the order of the pub/sub events.
+    // A good rule of thumb is to subscribe or publish messages during the Load event. 
+    // IMPORTANT: After pre-render completes, the message bus is closed.
     public interface IMessageCoordinator : IDisposable
     {
         void Close();

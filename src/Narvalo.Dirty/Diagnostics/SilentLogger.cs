@@ -2,12 +2,12 @@
 {
     using System;
 
-    public class NoopLogger : LoggerBase
+    public class SilentLogger : LoggerBase
     {
-        public NoopLogger(string name)
+        public SilentLogger(string name)
             : base(name) { }
 
-        public NoopLogger(string name, LoggerLevel level)
+        public SilentLogger(string name, LoggerLevel level)
             : base(name, level) { }
 
         public override bool IsLevelEnabled(LoggerLevel level)

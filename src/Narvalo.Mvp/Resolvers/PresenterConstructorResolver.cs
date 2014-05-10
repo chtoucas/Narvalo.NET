@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Write("[PresenterConstructorResolver] Attempting to resolve: " + input.Item1.FullName);
+            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.Item1.FullName);
 
             var presenterType = input.Item1;
             var viewType = input.Item2;
