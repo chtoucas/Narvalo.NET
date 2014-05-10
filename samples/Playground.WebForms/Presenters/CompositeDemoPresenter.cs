@@ -5,7 +5,7 @@
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public class CompositeDemoPresenter : PresenterOf<ICompositeDemoView, CompositeDemoViewModel>
+    public class CompositeDemoPresenter : Presenter<ICompositeDemoView, CompositeDemoViewModel>
     {
         public CompositeDemoPresenter(ICompositeDemoView view)
             : base(view)

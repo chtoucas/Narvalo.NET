@@ -10,6 +10,8 @@ namespace Narvalo.Mvp.Windows.Forms
     {
         protected FormPresenterOf(IView<TViewModel> view) : base(view) { }
 
+        public IMessageBus Messages { get; set; }
+
         public abstract void OnBindingComplete();
     }
 }

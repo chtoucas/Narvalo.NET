@@ -12,6 +12,8 @@ namespace Narvalo.Mvp.Windows.Forms
     /// </summary>
     public interface IFormPresenter : IPresenter
     {
+        IMessageBus Messages { get; set; }
+
         /// <summary>
         /// Will be automatically called *during* the form Load event
         /// and *after* the presenter has been fully constructed.

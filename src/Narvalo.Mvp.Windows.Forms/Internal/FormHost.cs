@@ -2,44 +2,51 @@
 
 namespace Narvalo.Mvp.Windows.Forms.Internal
 {
-    using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
     using Narvalo;
 
     internal sealed class FormHost
     {
-        readonly FormPresenterBinder _presenterBinder;
+        // REVIEW
+        static readonly IDictionary<int, FormHost> _hosts
+           = new Dictionary<int, FormHost>();
+
+        readonly FormsPresenterBinder _presenterBinder;
 
         public FormHost(Form form)
         {
-            _presenterBinder = new FormPresenterBinder(form);
+            DebugCheck.NotNull(form);
 
+            _presenterBinder = FormsPresenterBinderFactory.Create(form);
+
+            // NB: Since we create the host during the CreateControl event, 
+            // the binding operation must occur afterwards.
             form.Load += (sender, e) => _presenterBinder.PerformBinding();
-            form.Disposed += (sender, e) => _presenterBinder.Release();
+
+            form.Disposed += (sender, e) =>
+            {
+                var hostKey = sender.GetHashCode();
+                _hosts.Remove(hostKey);
+
+                _presenterBinder.Release();
+            };
         }
 
-        public static void RegisterControl<T>(T control)
-             where T : Control, IView
-        {
-            DebugCheck.NotNull(control);
-
-            var form = control.FindForm();
-
-            if (form == null) {
-                throw new InvalidOperationException(
-                    "Controls can only be registered once they have been added to the live control tree.");
-            }
-
-            var host = form.GetOrAddHost();
-
-            host.RegisterView(control);
-        }
-
-        public static void RegisterForm(Form form)
+        public static FormHost Register(Form form)
         {
             DebugCheck.NotNull(form);
 
-            form.GetOrAddHost();
+            var hostKey = form.GetHashCode();
+
+            if (_hosts.ContainsKey(hostKey)) {
+                return _hosts[hostKey];
+            }
+            else {
+                var host = new FormHost(form);
+                _hosts[hostKey] = host;
+                return host;
+            }
         }
 
         public void RegisterView(IView view)

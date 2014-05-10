@@ -7,7 +7,7 @@
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public class EditWidgetPresenter : PresenterOf<IEditWidgetView, EditWidgetModel>
+    public class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
         readonly IWidgetRepository widgets;
 

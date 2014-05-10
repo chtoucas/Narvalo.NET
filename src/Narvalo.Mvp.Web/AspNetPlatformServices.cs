@@ -4,12 +4,12 @@ namespace Narvalo.Mvp.Web
 {
     public static class AspNetPlatformServices
     {
-        static readonly AspNetPlatformServicesProxy Instance_ = new AspNetPlatformServicesProxy();
+        static readonly AspNetPlatformServicesVirtualProxy Instance_ = new AspNetPlatformServicesVirtualProxy();
 
         public static IAspNetPlatformServices Current
         {
             get { return Instance_; }
-            set { Instance_.InnerSet(value); }
+            set { Instance_.Reset(value); }
         }
     }
 }

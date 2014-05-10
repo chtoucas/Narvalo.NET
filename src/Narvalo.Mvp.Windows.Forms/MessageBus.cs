@@ -7,8 +7,6 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.Collections.Generic;
     using System.Linq;
 
-    // WARNING: Does not keep track of messages, only publishes to the 
-    // *current* list of handlers.
     public sealed class MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
@@ -28,10 +26,10 @@ namespace Narvalo.Mvp.Windows.Forms
             }
         }
 
-        public IObservable<T> Register<T>()
-        {
-            throw new NotSupportedException("FIXME");
-        }
+        //public IObservable<T> Register<T>()
+        //{
+        //    throw new NotSupportedException("FIXME");
+        //}
 
         public void Subscribe<T>(Action<T> onNext)
         {

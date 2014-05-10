@@ -7,9 +7,10 @@ namespace Narvalo.Mvp.Web
     using Narvalo.Mvp.PresenterBinding;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class AspNetPlatformServicesProxy : LazyLazy<IAspNetPlatformServices>, IAspNetPlatformServices
+    public class AspNetPlatformServicesVirtualProxy 
+        : LazyValueHolder<IAspNetPlatformServices>, IAspNetPlatformServices
     {
-        public AspNetPlatformServicesProxy() : base(() => new DefaultAspNetPlatformServices()) { }
+        public AspNetPlatformServicesVirtualProxy() : base(() => new DefaultAspNetPlatformServices()) { }
 
         public ICompositeViewFactory CompositeViewFactory
         {

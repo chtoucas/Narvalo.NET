@@ -7,7 +7,7 @@
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public class LookupWidgetPresenter : PresenterOf<ILookupWidgetView, LookupWidgetModel>
+    public class LookupWidgetPresenter : Presenter<ILookupWidgetView, LookupWidgetModel>
     {
         readonly IWidgetRepository widgetRepository;
 

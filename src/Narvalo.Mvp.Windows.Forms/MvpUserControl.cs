@@ -26,7 +26,14 @@ namespace Narvalo.Mvp.Windows.Forms
         protected override void OnCreateControl()
         {
             if (!DesignMode) {
-                FormHost.RegisterControl(this);
+                var form = FindForm();
+
+                if (form == null) {
+                    throw new InvalidOperationException(
+                        "Controls can only be registered once they have been added to the live control tree.");
+                }
+
+                FormHost.Register(form).RegisterView(this);
             }
 
             base.OnCreateControl();

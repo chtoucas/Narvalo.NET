@@ -6,6 +6,6 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public interface IFormsPlatformServices : IPlatformServices
     {
-        IMessageBusFactory MessageBusFactory { get; }
+        IMessageBus MessageBus { get; }
     }
 }

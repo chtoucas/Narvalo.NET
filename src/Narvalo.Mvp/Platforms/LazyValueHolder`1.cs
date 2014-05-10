@@ -6,13 +6,13 @@ namespace Narvalo.Mvp.Platforms
     using System.ComponentModel;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LazyLazy<TValue>
+    public class LazyValueHolder<TValue>
     {
         readonly Lazy<TValue> _lazyValue;
 
         Func<TValue> _valueFactory;
 
-        public LazyLazy(Func<TValue> valueFactory)
+        public LazyValueHolder(Func<TValue> valueFactory)
         {
             DebugCheck.NotNull(valueFactory);
 
@@ -20,25 +20,25 @@ namespace Narvalo.Mvp.Platforms
             // WARNING: Do not change the following line for:
             // _lazyValue = new Lazy<TValue>(_valueFactory);
             // as it will fail to capture the variable "_valueFactory".
-            _lazyValue = new Lazy<TValue>(() => _valueFactory());
+            _lazyValue = new Lazy<TValue>(() => _valueFactory.Invoke());
         }
 
         public TValue Value { get { return _lazyValue.Value; } }
 
-        public bool CanSet { get { return !_lazyValue.IsValueCreated; } }
+        public bool CanReset { get { return !_lazyValue.IsValueCreated; } }
 
-        public void InnerSet(TValue value)
+        public void Reset(TValue value)
         {
-            InnerSet(() => value);
+            Reset(() => value);
         }
 
-        public void InnerSet(Func<TValue> valueFactory)
+        public void Reset(Func<TValue> valueFactory)
         {
             DebugCheck.NotNull(valueFactory);
 
-            if (!CanSet) {
+            if (!CanReset) {
                 throw new InvalidOperationException(
-                    "Once accessed, you can no longer change the underlying value factory.");
+                    "Once the value has been accessed, you can no longer change the underlying value factory.");
             }
 
             // REVIEW: We break thread-safety here, but does it matter for our use case?

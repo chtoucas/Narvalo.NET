@@ -3,14 +3,14 @@
 namespace Narvalo.Mvp.Windows.Forms
 {
     using System;
-    using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Platforms;
+    using Narvalo.Mvp.PresenterBinding;
 
     public sealed class DefaultFormsPlatformServices : DefaultPlatformServices, IFormsPlatformServices 
     {
-        Func<IMessageBusFactory> _messageBusFactoryThunk = () => new MessageBusFactory();
+        Func<IMessageBus> _messageBusThunk = () => new MessageBus();
 
-        IMessageBusFactory _messageBusFactory;
+        IMessageBus _messageBus;
 
         public DefaultFormsPlatformServices()
         {
@@ -23,20 +23,19 @@ namespace Narvalo.Mvp.Windows.Forms
                         new FormsConventionBasedPresenterDiscoveryStrategy()}));
         }
 
-        public IMessageBusFactory MessageBusFactory
+        public IMessageBus MessageBus
         {
             get
             {
-                return _messageBusFactory
-                    ?? (_messageBusFactory = _messageBusFactoryThunk());
+                return _messageBus ?? (_messageBus = _messageBusThunk());
             }
         }
 
-        public void SetMessageCoordinatorFactory(Func<IMessageBusFactory> thunk)
+        public void SetMessageBus(Func<IMessageBus> thunk)
         {
             Require.NotNull(thunk, "thunk");
 
-            _messageBusFactoryThunk = thunk;
+            _messageBusThunk = thunk;
         }
     }
 }

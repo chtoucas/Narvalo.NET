@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.Windows.Forms
     {
         readonly IFormsPlatformServices _defaultServices;
 
-        IMessageBusFactory _messageBusFactory;
+        IMessageBus _messageBus;
 
         public FormsMvpConfiguration() : this(new DefaultFormsPlatformServices()) { }
 
@@ -25,12 +25,12 @@ namespace Narvalo.Mvp.Windows.Forms
             _defaultServices = defaultServices;
         }
 
-        public Setter<MvpConfiguration, IMessageBusFactory> MessageBusFactory
+        public Setter<MvpConfiguration, IMessageBus> MessageBusFactory
         {
             get
             {
-                return new Setter<MvpConfiguration, IMessageBusFactory>(
-                    this, _ => _messageBusFactory = _);
+                return new Setter<MvpConfiguration, IMessageBus>(
+                    this, _ => _messageBus = _);
             }
         }
 
@@ -38,9 +38,9 @@ namespace Narvalo.Mvp.Windows.Forms
         {
             var result = new FormsPlatformServices_(CreatePlatformServices());
 
-            result.MessageBusFactory = _messageBusFactory != null
-                ? _messageBusFactory
-                : _defaultServices.MessageBusFactory;
+            result.MessageBus = _messageBus != null
+                ? _messageBus
+                : _defaultServices.MessageBus;
 
             return result;
         }
@@ -59,7 +59,7 @@ namespace Narvalo.Mvp.Windows.Forms
                 get { return _inner.CompositeViewFactory; }
             }
 
-            public IMessageBusFactory MessageBusFactory { get; set; }
+            public IMessageBus MessageBus { get; set; }
 
             public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
             {

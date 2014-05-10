@@ -28,7 +28,7 @@ namespace Playground.WindowsForms
         }
     }
 
-    public sealed class MainPresenter : Presenter<IMainView>
+    public sealed class MainPresenter : FormPresenter<IMainView>
     {
         public MainPresenter(IMainView view)
             : base(view)
@@ -39,6 +39,11 @@ namespace Playground.WindowsForms
         public void TextChanged(object sender, EventArgs e)
         {
             Messages.Publish(new TestMessage { Text = (sender as TextBox).Text });
+        }
+
+        public override void OnBindingComplete()
+        {
+            ;
         }
     }
 }

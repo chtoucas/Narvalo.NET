@@ -4,12 +4,12 @@ namespace Narvalo.Mvp.Platforms
 {
     public static class PlatformServices
     {
-        static readonly PlatformServicesProxy Instance_ = new PlatformServicesProxy();
+        static readonly PlatformServicesVirtualProxy Instance_ = new PlatformServicesVirtualProxy();
 
         public static IPlatformServices Current
         {
             get { return Instance_; }
-            set { Instance_.InnerSet(value); }
+            set { Instance_.Reset(value); }
         }
     }
 }

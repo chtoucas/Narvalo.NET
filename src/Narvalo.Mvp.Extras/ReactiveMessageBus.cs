@@ -6,8 +6,7 @@ namespace Narvalo.Mvp
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
 
-    // WARNING: Does not keep track of messages, only publishes to the 
-    // *current* list of handlers.
+    // TODO: Scheduler
     public sealed class ReactiveMessageBus : IMessageBus, IDisposable
     {
         Subject<object> _subject;

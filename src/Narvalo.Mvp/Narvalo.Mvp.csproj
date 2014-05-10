@@ -69,22 +69,24 @@
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="Internal\Enumerable`1%24.cs" />
-    <Compile Include="Platforms\LazyLazy`1.cs" />
+    <Compile Include="Platforms\LazyValueHolder`1.cs" />
     <Compile Include="Platforms\PlatformServices.cs" />
     <Compile Include="PresenterBinding\PresenterBinderFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
-    <Compile Include="PresenterOf`2.cs" />
+    <Compile Include="Presenter`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presenter`2.cs" />
     <Compile Include="Resolvers\ICompositeViewTypeResolver.cs" />
     <Compile Include="Resolvers\IPresenterBindingAttributesResolver.cs" />
     <Compile Include="Resolvers\IPresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\IPresenterTypeResolver.cs" />
-    <Compile Include="Platforms\PlatformServicesProxy.cs" />
+    <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Configuration\Appender`1.cs" />
     <Compile Include="Configuration\Setter`1.cs" />
-    <Compile Include="Presenter`1.cs" />
     <Compile Include="Resolvers\BuildManager.cs" />
     <Compile Include="Resolvers\IBuildManager.cs" />
     <Compile Include="Resolvers\CachedPresenterTypeResolver.cs" />

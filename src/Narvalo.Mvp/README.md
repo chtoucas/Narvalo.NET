@@ -24,8 +24,6 @@ Changes from the original "Web Forms Mvp"
 
 - Not yet satisfied by the various implementations of IPresenter
 
-- There must be a more transparent way to initialize GlobalServices / host
-
 - Re-design MessageBus: if Publish occurs before Subscribe, messages are lost. The way this problem
   is solved in WebFormsMvp is by keeping the list of messages in memory. For short-lived containers
   that seems fine but I would prefer a better solution.

@@ -2,13 +2,13 @@
 
 namespace Narvalo.Mvp
 {
-    public abstract class PresenterOf<TView, TViewModel> : IPresenter<TView>
+    public abstract class Presenter<TView, TViewModel> : IPresenter<TView>
         where TView : class, IView<TViewModel>
         where TViewModel : class, new()
     {
         readonly TView _view;
 
-        protected PresenterOf(TView view)
+        protected Presenter(TView view)
         {
             Require.NotNull(view, "view");
 

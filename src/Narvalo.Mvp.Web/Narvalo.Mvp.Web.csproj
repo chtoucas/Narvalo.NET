@@ -75,8 +75,11 @@
     <Compile Include="AspNetPlatformServices.cs" />
     <Compile Include="DefaultAspNetPlatformServices.cs" />
     <Compile Include="AspNetMvpConfiguration.cs" />
-    <Compile Include="AspNetPlatformServicesProxy.cs" />
+    <Compile Include="AspNetPlatformServicesVirtualProxy.cs" />
     <Compile Include="HttpPresenterBinderFactory.cs" />
+    <Compile Include="HttpPresenter`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IAspNetPlatformServices.cs" />
     <Compile Include="MessageCoordinatorFactory.cs" />
     <Compile Include="IMessageCoordinatorFactory.cs" />
@@ -85,8 +88,7 @@
     <Compile Include="AspNetPresenterTypeResolver.cs" />
     <Compile Include="HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
-    <Compile Include="HttpPresenterOf`2.cs" />
-    <Compile Include="HttpPresenter`1.cs" />
+    <Compile Include="HttpPresenter`2.cs" />
     <Compile Include="IHttpPresenter.cs" />
     <Compile Include="IHttpPresenter`1.cs" />
     <Compile Include="IMessageCoordinator.cs" />

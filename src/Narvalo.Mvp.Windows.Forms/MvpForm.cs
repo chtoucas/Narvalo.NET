@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.Windows.Forms
         {
             // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
             if (!DesignMode) {
-                FormHost.RegisterForm(this);
+                FormHost.Register(this);
             }
 
             base.OnCreateControl();
