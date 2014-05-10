@@ -65,8 +65,8 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="CommandConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="CommandsMvpBootstrapper.cs" />
+    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="MvpCommand.cs" />
     <Compile Include="MvpCommand`1.cs" />

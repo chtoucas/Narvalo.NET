@@ -17,8 +17,5 @@ This package contains a port of webformsmvp to Windows.
     <copyright>Copyright 2013</copyright>
     <tags>MVP</tags>
     <language>en-US</language>
-    <dependencies>
-      <dependency id="Narvalo.Common" version="0.17" />
-    </dependencies>
   </metadata>
 </package>

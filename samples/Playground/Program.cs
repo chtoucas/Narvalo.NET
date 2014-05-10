@@ -19,7 +19,7 @@ namespace Playground
             Log.Logger = CreateLogger_();
             Log.Information(Resources.Starting);
 
-            new CommandsMvpBootstrapper().Run();
+            new MvpBootstrapper().Run();
 
             new TestCommand().Execute();
             new TestCommand().Execute();

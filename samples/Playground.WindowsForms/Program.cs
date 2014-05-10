@@ -10,9 +10,7 @@
         [STAThread]
         static void Main()
         {
-            var bootstrapper = new FormsMvpBootstrapper();
-            //bootstrapper.Configuration.MessageBusFactory.Is(new ReactiveMessageBusFactory());
-            bootstrapper.Run();
+            new MvpBootstrapper().Run();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

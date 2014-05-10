@@ -96,11 +96,11 @@ namespace Narvalo.Mvp.Web
 
             foreach (var type in neverReceivedMessages) {
                 Trace.TraceInformation("You published a message of type " + type.FullName 
-                    + " but you did not registered a handler for it.");
+                    + " but you did not registered any handler for it.");
             }
         }
 
-        public void ThrowIfDisposed_()
+        void ThrowIfDisposed_()
         {
             if (_disposed) {
                 throw new ObjectDisposedException(

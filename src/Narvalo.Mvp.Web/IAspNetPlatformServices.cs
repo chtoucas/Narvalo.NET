@@ -2,9 +2,9 @@
 
 namespace Narvalo.Mvp.Web
 {
-    using Narvalo.Mvp.Services;
+    using Narvalo.Mvp.Platforms;
 
-    public interface IAspNetServicesContainer : IServicesContainer
+    public interface IAspNetPlatformServices : IPlatformServices
     {
         IMessageCoordinatorFactory MessageCoordinatorFactory { get; }
     }

@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Windows.Forms
 {
     using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Services;
+    using Narvalo.Mvp.Platforms;
 
     public sealed class FormPresenterBinder
     {
@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.Windows.Forms
 
         public FormPresenterBinder(Form form)
         {
-            _presenterBinder = PresenterBinderFactory.Create(new[] { form });
+            _presenterBinder = PresenterBinderFactory.Create(new[] { form }, PlatformServices.Current);
             _presenterBinder.PresenterCreated += (sender, e) =>
             {
                 var presenter = e.Presenter as IFormPresenter;

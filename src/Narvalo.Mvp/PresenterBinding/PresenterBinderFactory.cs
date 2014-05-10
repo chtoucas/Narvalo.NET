@@ -2,21 +2,15 @@
 
 namespace Narvalo.Mvp.PresenterBinding
 {
-    using System;
     using System.Collections.Generic;
     using Narvalo;
-    using Narvalo.Mvp.Services;
+    using Narvalo.Mvp.Platforms;
 
     public static class PresenterBinderFactory
     {
-        public static PresenterBinder Create(IEnumerable<object> hosts)
-        {
-            throw new NotImplementedException();
-        }
-
         public static PresenterBinder Create(
             IEnumerable<object> hosts,
-            IServicesContainer container)
+            IPlatformServices container)
         {
             Require.NotNull(container, "container");
 

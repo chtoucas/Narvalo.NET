@@ -68,10 +68,9 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="DefaultServicesCreatedEventArgs.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
-    <Compile Include="MvpBootstrapper.cs" />
+    <Compile Include="Platforms\LazyLazy`1.cs" />
+    <Compile Include="Platforms\PlatformServices.cs" />
     <Compile Include="PresenterBinding\PresenterBinderFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
     <Compile Include="PresenterOf`2.cs" />
@@ -79,7 +78,7 @@
     <Compile Include="Resolvers\IPresenterBindingAttributesResolver.cs" />
     <Compile Include="Resolvers\IPresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\IPresenterTypeResolver.cs" />
-    <Compile Include="Services\GlobalServicesContainer.cs" />
+    <Compile Include="Platforms\PlatformServicesProxy.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
@@ -102,8 +101,8 @@
     <Compile Include="PresenterBinding\PresenterCreatedEventArgs.cs" />
     <Compile Include="PresenterBinding\PresenterDiscoveryResult.cs" />
     <Compile Include="PresenterBinding\ICompositeViewFactory.cs" />
-    <Compile Include="Services\IServicesContainer.cs" />
-    <Compile Include="Services\DefaultServices.cs" />
+    <Compile Include="Platforms\IPlatformServices.cs" />
+    <Compile Include="Platforms\DefaultPlatformServices.cs" />
     <Compile Include="Resolvers\CachedCompositeViewTypeResolver.cs" />
     <Compile Include="Resolvers\CachedPresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\CompositeViewTypeResolver.cs" />
@@ -125,7 +124,6 @@
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="PresenterBindingMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesContainerCreatedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">

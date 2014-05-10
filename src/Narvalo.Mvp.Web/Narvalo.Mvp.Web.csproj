@@ -72,14 +72,16 @@
     </Compile>
     <Compile Include="AspNetBuildManager.cs" />
     <Compile Include="AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="AspNetDefaultServices.cs" />
+    <Compile Include="AspNetPlatformServices.cs" />
+    <Compile Include="DefaultAspNetPlatformServices.cs" />
     <Compile Include="AspNetMvpConfiguration.cs" />
+    <Compile Include="AspNetPlatformServicesProxy.cs" />
     <Compile Include="HttpPresenterBinderFactory.cs" />
-    <Compile Include="IAspNetServicesContainer.cs" />
+    <Compile Include="IAspNetPlatformServices.cs" />
     <Compile Include="MessageCoordinatorFactory.cs" />
     <Compile Include="IMessageCoordinatorFactory.cs" />
     <Compile Include="MessageCoordinator.cs" />
-    <Compile Include="AspNetMvpBootstrapper.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="AspNetPresenterTypeResolver.cs" />
     <Compile Include="HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />

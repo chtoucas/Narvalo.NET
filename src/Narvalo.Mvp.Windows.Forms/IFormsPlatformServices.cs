@@ -1,0 +1,11 @@
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Mvp.Windows.Forms
+{
+    using Narvalo.Mvp.Platforms;
+
+    public interface IFormsPlatformServices : IPlatformServices
+    {
+        IMessageBusFactory MessageBusFactory { get; }
+    }
+}

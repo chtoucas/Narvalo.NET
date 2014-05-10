@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Configuration
     using System.Collections.Generic;
     using System.Linq;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Services;
+    using Narvalo.Mvp.Platforms;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.
@@ -15,8 +15,19 @@ namespace Narvalo.Mvp.Configuration
         readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
 
+        readonly IPlatformServices _defaultServices;
+
         ICompositeViewFactory _compositeViewFactory;
         IPresenterFactory _presenterFactory;
+
+        public MvpConfiguration() : this(new DefaultPlatformServices()) { }
+
+        public MvpConfiguration(IPlatformServices defaultServices)
+        {
+            Require.NotNull(defaultServices, "defaultServices");
+
+            _defaultServices = defaultServices;
+        }
 
         public Setter<MvpConfiguration, ICompositeViewFactory> CompositeViewFactory
         {
@@ -45,28 +56,23 @@ namespace Narvalo.Mvp.Configuration
             }
         }
 
-        public IServicesContainer CreateServicesContainer()
+        public IPlatformServices CreatePlatformServices()
         {
-            return CreateServicesContainer(new DefaultServices());
-        }
-
-        public IServicesContainer CreateServicesContainer(DefaultServices defaultServices)
-        {
-            var result = new ServicesContainer_();
+            var result = new PlatformServices_();
 
             result.CompositeViewFactory = _compositeViewFactory != null
                 ? _compositeViewFactory
-                : defaultServices.CompositeViewFactory;
+                : _defaultServices.CompositeViewFactory;
 
             result.PresenterFactory = _presenterFactory != null
                 ? _presenterFactory
-                : defaultServices.PresenterFactory;
+                : _defaultServices.PresenterFactory;
 
             var strategies = _presenterDiscoveryStrategies.Where(_ => _ != null).Distinct();
             var count = strategies.Count();
 
             if (count == 0) {
-                result.PresenterDiscoveryStrategy = defaultServices.PresenterDiscoveryStrategy;
+                result.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
             }
             else if (count == 1) {
                 result.PresenterDiscoveryStrategy = strategies.First();
@@ -79,7 +85,7 @@ namespace Narvalo.Mvp.Configuration
             return result;
         }
 
-        class ServicesContainer_ : IServicesContainer
+        class PlatformServices_ : IPlatformServices
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }
 

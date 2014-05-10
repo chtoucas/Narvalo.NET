@@ -6,9 +6,9 @@
 
     public class Global : HttpApplication
     {
-        protected void Application_Start(object sender, EventArgs e)
-        {
-            new AspNetMvpBootstrapper().Run();
-        }
+        //protected void Application_Start(object sender, EventArgs e)
+        //{
+        //    new MvpBootstrapper().Run();
+        //}
     }
 }

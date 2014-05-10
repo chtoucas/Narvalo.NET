@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.CommandLine
 {
     using System;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Services;
+    using Narvalo.Mvp.Platforms;
 
     public abstract class MvpCommand : IView, ICommand, IDisposable
     {
@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.CommandLine
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
 
-            _presenterBinder = PresenterBinderFactory.Create(new[] { this });
+            _presenterBinder = PresenterBinderFactory.Create(new[] { this }, PlatformServices.Current);
             _presenterBinder.PerformBinding();
         }
 

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Services
+namespace Narvalo.Mvp.Platforms
 {
     using System;
     using Narvalo.Mvp.PresenterBinding;
 
-    public class DefaultServices : IServicesContainer
+    public class DefaultPlatformServices : IPlatformServices
     {
         Func<ICompositeViewFactory> _compositeViewFactoryThunk
            = () => new CompositeViewFactory();
@@ -47,21 +47,21 @@ namespace Narvalo.Mvp.Services
             }
         }
 
-        public void SetDefaultCompositeViewFactory(Func<ICompositeViewFactory> thunk)
+        public void SetCompositeViewFactory(Func<ICompositeViewFactory> thunk)
         {
             Require.NotNull(thunk, "thunk");
 
             _compositeViewFactoryThunk = thunk;
         }
 
-        public void SetDefaultPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)
+        public void SetPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)
         {
             Require.NotNull(thunk, "thunk");
 
             _presenterDiscoveryStrategyThunk = thunk;
         }
 
-        public void SetDefaultPresenterFactory(Func<IPresenterFactory> thunk)
+        public void SetPresenterFactory(Func<IPresenterFactory> thunk)
         {
             Require.NotNull(thunk, "thunk");
 

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms
+namespace Narvalo.Mvp.CommandLine
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,13 +9,11 @@ namespace Narvalo.Mvp.Windows.Forms
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class FormConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
-            "UserControl",
-            "Control",
-            "Form",
+            "Command",
             "View",
         };
 
@@ -27,10 +25,10 @@ namespace Narvalo.Mvp.Windows.Forms
 
         readonly IPresenterDiscoveryStrategy _inner;
 
-        public FormConventionBasedPresenterDiscoveryStrategy()
+        public DefaultConventionBasedPresenterDiscoveryStrategy()
             : this(new[] { Assembly.GetEntryAssembly() }) { }
 
-        public FormConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
+        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
             var typeResolver = new PresenterTypeResolver(
                    new BuildManager(assemblies),
@@ -42,7 +40,7 @@ namespace Narvalo.Mvp.Windows.Forms
         }
 
         public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts, 
+            IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);

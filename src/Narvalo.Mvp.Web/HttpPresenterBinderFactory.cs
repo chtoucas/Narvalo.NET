@@ -2,7 +2,6 @@
 
 namespace Narvalo.Mvp.Web
 {
-    using System;
     using System.Collections.Generic;
     using System.Web;
 
@@ -12,20 +11,20 @@ namespace Narvalo.Mvp.Web
             object host,
             HttpContext context)
         {
-            throw new NotImplementedException();
+            return Create(new[] { host }, context, AspNetPlatformServices.Current);
         }
 
         public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
             HttpContext context)
         {
-            throw new NotImplementedException();
+            return Create(hosts, context, AspNetPlatformServices.Current);
         }
 
         public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
             HttpContext context,
-            IAspNetServicesContainer container)
+            IAspNetPlatformServices container)
         {
             Require.NotNull(container, "container");
 
