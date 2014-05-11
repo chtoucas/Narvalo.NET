@@ -3,14 +3,12 @@
 namespace Narvalo.Mvp.Configuration
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
-    using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Platforms;
+    using Narvalo.Mvp.PresenterBinding;
 
-    /// <summary>
-    /// Provides a single entry point to configure Narvalo.Mvp.
-    /// </summary>
-    public class MvpConfiguration
+    public class MvpConfiguration<T> where T : MvpConfiguration<T>
     {
         readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
@@ -29,33 +27,34 @@ namespace Narvalo.Mvp.Configuration
             _defaultServices = defaultServices;
         }
 
-        public Setter<MvpConfiguration, ICompositeViewFactory> CompositeViewFactory
+        public Setter<T, ICompositeViewFactory> CompositeViewFactory
         {
             get
             {
-                return new Setter<MvpConfiguration, ICompositeViewFactory>(
-                    this, _ => _compositeViewFactory = _);
+                return new Setter<T, ICompositeViewFactory>(
+                    (T)this, _ => _compositeViewFactory = _);
             }
         }
 
-        public Appender<MvpConfiguration, IPresenterDiscoveryStrategy> DiscoverPresenter
+        public Appender<T, IPresenterDiscoveryStrategy> DiscoverPresenter
         {
             get
             {
-                return new Appender<MvpConfiguration, IPresenterDiscoveryStrategy>(
-                    this, _ => _presenterDiscoveryStrategies.Add(_));
+                return new Appender<T, IPresenterDiscoveryStrategy>(
+                    (T)this, _ => _presenterDiscoveryStrategies.Add(_));
             }
         }
 
-        public Setter<MvpConfiguration, IPresenterFactory> PresenterFactory
+        public Setter<T, IPresenterFactory> PresenterFactory
         {
             get
             {
-                return new Setter<MvpConfiguration, IPresenterFactory>(
-                    this, _ => _presenterFactory = _);
+                return new Setter<T, IPresenterFactory>(
+                    (T)this, _ => _presenterFactory = _);
             }
         }
 
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IPlatformServices CreatePlatformServices()
         {
             var result = new PlatformServices_();

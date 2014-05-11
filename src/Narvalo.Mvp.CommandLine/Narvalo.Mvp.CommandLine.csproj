@@ -66,6 +66,10 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="DefaultCommandsPlatformServices.cs" />
+    <Compile Include="CommandsPlatformServices.cs" />
+    <Compile Include="CommandsPlatformServicesVirtualProxy.cs" />
+    <Compile Include="PresenterBinderFactory.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="MvpCommand.cs" />

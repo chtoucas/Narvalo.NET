@@ -21,7 +21,7 @@ namespace Narvalo.Mvp.Web
                 () => new CompositePresenterDiscoveryStrategy(
                     new IPresenterDiscoveryStrategy[] {
                         new AttributeBasedPresenterDiscoveryStrategy(),
-                        new AspNetConventionBasedPresenterDiscoveryStrategy()}));
+                        new DefaultConventionBasedPresenterDiscoveryStrategy()}));
         }
 
         public IMessageCoordinatorFactory MessageCoordinatorFactory

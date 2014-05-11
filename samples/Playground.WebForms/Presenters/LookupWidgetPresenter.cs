@@ -2,14 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Mvp;
+    using Narvalo.Mvp.Web;
     using Playground.WebForms.Domain;
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public class LookupWidgetPresenter : Presenter<ILookupWidgetView, LookupWidgetModel>
+    public class LookupWidgetPresenter : HttpPresenter<ILookupWidgetView, LookupWidgetModel>
     {
         readonly IWidgetRepository widgetRepository;
+
+        // NB: Prefer IOC if available.
+        public LookupWidgetPresenter(ILookupWidgetView view)
+            : this(view, new WidgetRepository()) { }
 
         public LookupWidgetPresenter(ILookupWidgetView view, IWidgetRepository widgetRepository)
             : base(view)
@@ -26,36 +30,38 @@
                 return;
 
             if (e.Id.HasValue && e.Id > 0) {
-                //AsyncManager.RegisterAsyncTask(
-                //    (asyncSender, ea, callback, state) => // Begin
-                //        widgetRepository.BeginFind(e.Id.Value, callback, state),
-                //    result => // End
-                //    {
-                //        var widget = widgetRepository.EndFind(result);
-                //        if (widget != null)
-                //        {
-                //            View.Model.Widgets.Add(widget);
-                //        }
-                //    },
-                //    result => { }, // Timeout
-                //    null, false);
+                AsyncManager.RegisterAsyncTask(
+                    beginHandler: (asyncSender, ea, callback, state) =>
+                        widgetRepository.BeginFind(e.Id.Value, callback, state),
+                    endHandler: result =>
+                    {
+                        var widget = widgetRepository.EndFind(result);
+                        if (widget != null) {
+                            View.Model.Widgets.Add(widget);
+                        }
+                    },
+                    timeoutHandler: result => { },
+                    state: null,
+                    executeInParallel: false);
             }
             else {
-                //AsyncManager.RegisterAsyncTask(
-                //    (asyncSender, ea, callback, state) => // Begin
-                //        widgetRepository.BeginFindByName(e.Name, callback, state),
-                //    result => // End
-                //    {
-                //        var widget = widgetRepository.EndFindByName(result);
-                //        if (widget != null)
-                //        {
-                //            View.Model.Widgets.Add(widget);
-                //        }
-                //    },
-                //    result => { }, // Timeout
-                //    null, false);
+                AsyncManager.RegisterAsyncTask(
+                    beginHandler: (asyncSender, ea, callback, state) =>
+                        widgetRepository.BeginFindByName(e.Name, callback, state),
+                        endHandler: result =>
+                    {
+                        var widget = widgetRepository.EndFindByName(result);
+                        if (widget != null) {
+                            View.Model.Widgets.Add(widget);
+                        }
+                    },
+                    timeoutHandler: result => { },
+                    state: null,
+                    executeInParallel: false);
             }
-            //AsyncManager.ExecuteRegisteredAsyncTasks();
+
+            AsyncManager.ExecuteRegisteredAsyncTasks();
+
             View.Model.ShowResults = true;
         }
     }

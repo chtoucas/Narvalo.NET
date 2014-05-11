@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Web.Internal
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Web;
     using System.Web.UI;
 
@@ -20,6 +19,15 @@ namespace Narvalo.Mvp.Web.Internal
             var hosts = FindHosts_(page);
 
             _presenterBinder = HttpPresenterBinderFactory.Create(hosts, context);
+
+            var asyncManager = new PageAsyncTaskManager(page);
+            _presenterBinder.PresenterCreated += (sender, e) =>
+            {
+                var presenter = e.Presenter as Internal.IHttpPresenter;
+                if (presenter != null) {
+                    presenter.AsyncManager = asyncManager;
+                }
+            };
 
             // On page's initialization, bind the presenter.
             page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();

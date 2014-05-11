@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Windows.Forms
 {
     using System;
 
+    // TODO: Unsubscribe & co
     public interface IMessageBus
     {
         void Publish<T>(T message);

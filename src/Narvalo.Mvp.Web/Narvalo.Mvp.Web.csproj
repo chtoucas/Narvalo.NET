@@ -70,10 +70,11 @@
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="AspNetBuildManager.cs" />
-    <Compile Include="AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="AspNetPlatformServices.cs" />
     <Compile Include="DefaultAspNetPlatformServices.cs" />
-    <Compile Include="AspNetMvpConfiguration.cs" />
+    <Compile Include="IAsyncTaskManager.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="AspNetPlatformServicesVirtualProxy.cs" />
     <Compile Include="HttpPresenterBinderFactory.cs" />
     <Compile Include="HttpPresenter`1.cs">
@@ -84,7 +85,6 @@
     <Compile Include="MessageCoordinatorFactory.cs" />
     <Compile Include="IMessageCoordinatorFactory.cs" />
     <Compile Include="MessageCoordinator.cs" />
-    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="AspNetPresenterTypeResolver.cs" />
     <Compile Include="HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
@@ -105,6 +105,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Internal\PageHost.cs" />
+    <Compile Include="PageAsyncTaskManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\Type%24.cs" />
   </ItemGroup>
@@ -123,6 +124,10 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE-WebFormsMvp.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

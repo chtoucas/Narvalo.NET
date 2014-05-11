@@ -3,7 +3,5 @@
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Views.Models;
 
-    public partial class AsyncMessagesControl : MvpUserControl<AsyncMessagesModel>
-    {        
-    }
+    public partial class AsyncMessagesControl : MvpUserControl<AsyncMessagesModel> { }
 }

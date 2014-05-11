@@ -8,6 +8,8 @@ namespace Narvalo.Mvp.Web.Internal
     {
         HttpContextBase HttpContext { set; }
 
+        IAsyncTaskManager AsyncManager { set; }
+
         IMessageCoordinator Messages { set; }
     }
 }

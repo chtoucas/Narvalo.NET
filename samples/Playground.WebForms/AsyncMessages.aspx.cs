@@ -1,8 +1,6 @@
-﻿using System.Web.UI;
-
-namespace WebFormsMvp.FeatureDemos.Web
+﻿namespace Playground.WebForms
 {
-    public partial class AsyncMessages : Page
-    {
-    }
+    using System.Web.UI;
+
+    public partial class AsyncMessages : Page { }
 }

@@ -5,6 +5,5 @@ See _LICENSE-WebFormsMvp.txt_ for license information.
 
 ### TODO
 
-- Implements the async stuff.
-- Implements the database stuff.
+- Implements the database stuff (IWidgetRepository)
 

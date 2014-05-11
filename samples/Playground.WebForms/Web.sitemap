@@ -3,9 +3,11 @@
   <siteMapNode url="~/Default.aspx" title="Home" description="">
     <siteMapNode url="~/HelloWorld.aspx" title="Hello World Demo" description="" />
     <siteMapNode url="~/Redirect.aspx" title="Redirect Demo" description="" />
-    <!--<siteMapNode url="~/WidgetLookup.aspx" title="Simple Data Demo" description="" />
+    <!--
+    <siteMapNode url="~/WidgetLookup.aspx" title="Simple Data Demo" description="" />
     <siteMapNode url="~/WidgetEdit.aspx?id=1" title="2-Way Data-binding Demo" description="" />
-    <siteMapNode url="~/AsyncMessages.aspx" title="Async Tasks Demo" description="" />-->
+    -->
+    <siteMapNode url="~/AsyncMessages.aspx" title="Async Tasks Demo" description="" />
     <siteMapNode url="~/Handlers/TimeHandler.ashx" title="IHttpHandler Demo" description="" />
     <siteMapNode url="~/SharedPresenter.aspx" title="Shared Presenter Demo" description="" />
     <siteMapNode url="~/CompositeView.aspx" title="Composite View Demo" description="" />

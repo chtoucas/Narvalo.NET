@@ -68,6 +68,7 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
+    <Compile Include="Configuration\MvpBootstrapper.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="Platforms\LazyValueHolder`1.cs" />
     <Compile Include="Platforms\PlatformServices.cs" />

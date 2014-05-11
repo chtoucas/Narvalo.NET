@@ -3,7 +3,6 @@
 namespace Playground
 {
     using System;
-    using Narvalo.Mvp.CommandLine;
     using Playground.Commands;
     using Playground.Properties;
     using Serilog;
@@ -18,8 +17,6 @@ namespace Playground
 
             Log.Logger = CreateLogger_();
             Log.Information(Resources.Starting);
-
-            new MvpBootstrapper().Run();
 
             new TestCommand().Execute();
             new TestCommand().Execute();

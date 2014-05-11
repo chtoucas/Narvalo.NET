@@ -71,14 +71,13 @@
     </Compile>
     <Compile Include="FormsPlatformServicesVirtualProxy.cs" />
     <Compile Include="FormsPlatformServices.cs" />
-    <Compile Include="FormsMvpConfiguration.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="DefaultFormsPlatformServices.cs" />
     <Compile Include="FormsPresenterBinderFactory.cs" />
     <Compile Include="IFormsPlatformServices.cs" />
     <Compile Include="Internal\IFormPresenter.cs" />
-    <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="IMessageBus.cs" />
-    <Compile Include="FormsConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\FormHost.cs" />
     <Compile Include="FormsPresenterBinder.cs" />
     <Compile Include="FormPresenterOf`1.cs" />

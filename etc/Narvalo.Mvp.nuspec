@@ -10,8 +10,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
 This package contains a simple MVP framework inspired by webformsmvp.
-
-*** Until we reached version 1.0, backward compatibility is not guaranteed ***
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>

@@ -4,7 +4,8 @@ namespace Narvalo.Mvp.Web
 {
     public static class AspNetPlatformServices
     {
-        static readonly AspNetPlatformServicesVirtualProxy Instance_ = new AspNetPlatformServicesVirtualProxy();
+        static readonly AspNetPlatformServicesVirtualProxy Instance_ 
+            = new AspNetPlatformServicesVirtualProxy();
 
         public static IAspNetPlatformServices Current
         {

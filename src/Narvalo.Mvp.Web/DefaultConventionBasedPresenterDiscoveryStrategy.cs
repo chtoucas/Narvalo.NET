@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Web
     using System.Linq;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
@@ -32,7 +32,7 @@ namespace Narvalo.Mvp.Web
 
         readonly IPresenterDiscoveryStrategy _inner;
 
-        public AspNetConventionBasedPresenterDiscoveryStrategy()
+        public DefaultConventionBasedPresenterDiscoveryStrategy()
         {
             var typeResolver = new AspNetPresenterTypeResolver(
                 new AspNetBuildManager(),

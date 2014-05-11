@@ -11,6 +11,10 @@
     {
         readonly IWidgetRepository widgets;
 
+        // NB: Prefer IOC if available.
+        public EditWidgetPresenter(IEditWidgetView view)
+            : this(view, new WidgetRepository()) { }
+
         public EditWidgetPresenter(IEditWidgetView view, IWidgetRepository widgetRepository)
             : base(view)
         {
@@ -46,7 +50,7 @@
 
         static void DeletingWidget(object sender, EditWidgetEventArgs e)
         {
-            // TODO: Delete widget
+            throw new NotImplementedException();
         }
     }
 }

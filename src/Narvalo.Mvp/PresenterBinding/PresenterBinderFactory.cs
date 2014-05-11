@@ -8,6 +8,11 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public static class PresenterBinderFactory
     {
+        public static PresenterBinder Create(IEnumerable<object> hosts)
+        {
+            return PresenterBinderFactory.Create(hosts, PlatformServices.Current);
+        }
+
         public static PresenterBinder Create(
             IEnumerable<object> hosts,
             IPlatformServices container)

@@ -2,11 +2,8 @@
 
 namespace Narvalo.Mvp.Windows.Forms.Internal
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    public interface IFormPresenter : IPresenter
+    internal interface IFormPresenter : IPresenter
     {
-        [SuppressMessage("Microsoft.Design", "CA1044:PropertiesShouldNotBeWriteOnly")]
         IMessageBus Messages { set; }
     }
 }

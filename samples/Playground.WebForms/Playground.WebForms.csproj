@@ -44,6 +44,7 @@
       <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,6 +63,7 @@
   <ItemGroup>
     <Content Include="App_Themes\SiteTheme\print.css" />
     <Content Include="App_Themes\SiteTheme\_styles.css" />
+    <Content Include="AsyncMessages.aspx" />
     <Content Include="CompositeView.aspx" />
     <Content Include="Controls\AsyncMessagesControl.ascx" />
     <Content Include="Controls\CompositeControl.ascx" />
@@ -102,6 +104,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncMessages.aspx.cs">
+      <DependentUpon>AsyncMessages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AsyncMessages.aspx.designer.cs">
+      <DependentUpon>AsyncMessages.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

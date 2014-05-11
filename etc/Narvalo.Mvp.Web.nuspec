@@ -11,15 +11,13 @@
     <description>
 This package enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
 Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsmvp codebase.
-
-*** Until we reached version 1.0, backward compatibility is not guaranteed ***
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2014</copyright>
     <tags>MVP, ASP.NET</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Narvalo.Mvp" version="0.21" />
+      <dependency id="Narvalo.Mvp" version="0.22" />
     </dependencies>
   </metadata>
 </package>

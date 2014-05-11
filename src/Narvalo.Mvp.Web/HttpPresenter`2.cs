@@ -13,6 +13,8 @@ namespace Narvalo.Mvp.Web
     {
         protected HttpPresenter(TView view) : base(view) { }
 
+        public IAsyncTaskManager AsyncManager { get; private set; }
+
         public HttpContextBase HttpContext { get; private set; }
 
         public IMessageCoordinator Messages { get; private set; }
@@ -28,6 +30,11 @@ namespace Narvalo.Mvp.Web
         public HttpServerUtilityBase Server { get { return HttpContext.Server; } }
 
         public HttpSessionStateBase Session { get { return HttpContext.Session; } }
+
+        IAsyncTaskManager Internal.IHttpPresenter.AsyncManager
+        {
+            set { AsyncManager = value; }
+        }
 
         HttpContextBase Internal.IHttpPresenter.HttpContext
         {
