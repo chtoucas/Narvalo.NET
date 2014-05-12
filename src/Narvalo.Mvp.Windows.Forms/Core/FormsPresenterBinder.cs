@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Windows.Forms.Core
 {
+    using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
 
     public sealed class FormsPresenterBinder : PresenterBinder
@@ -9,13 +10,13 @@ namespace Narvalo.Mvp.Windows.Forms.Core
         readonly IMessageBus _messageBus;
 
         public FormsPresenterBinder(
-            object host,
+            Control control,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
             ICompositeViewFactory compositeViewFactory,
             IMessageBus messageBus)
             : base(
-                new[] { host },
+                new[] { control },
                 presenterDiscoveryStrategy,
                 presenterFactory,
                 compositeViewFactory)

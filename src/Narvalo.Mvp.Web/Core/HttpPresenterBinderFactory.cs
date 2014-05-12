@@ -4,37 +4,38 @@ namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
     using System.Web;
+    using System.Web.UI;
 
     public static class HttpPresenterBinderFactory
     {
         public static HttpPresenterBinder Create(
-            object host,
+            IHttpHandler httpHandler,
             HttpContext context)
         {
-            return Create(new[] { host }, context, AspNetPlatformServices.Current);
+            return Create(new[] { httpHandler }, context, AspNetPlatformServices.Current);
         }
 
         public static HttpPresenterBinder Create(
-            IEnumerable<object> hosts,
+            IEnumerable<Control> controls,
             HttpContext context)
         {
-            return Create(hosts, context, AspNetPlatformServices.Current);
+            return Create(controls, context, AspNetPlatformServices.Current);
         }
 
         public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
             HttpContext context,
-            IAspNetPlatformServices container)
+            IAspNetPlatformServices platformServices)
         {
-            Require.NotNull(container, "container");
+            Require.NotNull(platformServices, "platformServices");
 
             return new HttpPresenterBinder(
                 hosts,
                 context,
-                container.PresenterDiscoveryStrategy,
-                container.PresenterFactory,
-                container.CompositeViewFactory,
-                container.MessageCoordinatorFactory);
+                platformServices.PresenterDiscoveryStrategy,
+                platformServices.PresenterFactory,
+                platformServices.CompositeViewFactory,
+                platformServices.MessageCoordinatorFactory);
         }
     }
 }

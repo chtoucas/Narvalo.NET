@@ -13,8 +13,6 @@ namespace Narvalo.Mvp.Windows.Forms
 
         public IMessageBus Messages { get; private set; }
 
-        public virtual void OnBindingComplete() { }
-
         IMessageBus Internal.IFormPresenter.Messages
         {
             set { Messages = value; }

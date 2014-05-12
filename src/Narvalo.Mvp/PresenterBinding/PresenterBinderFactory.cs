@@ -15,15 +15,15 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public static PresenterBinder Create(
             IEnumerable<object> hosts,
-            IPlatformServices container)
+            IPlatformServices platformServices)
         {
-            Require.NotNull(container, "container");
+            Require.NotNull(platformServices, "platformServices");
 
             return new PresenterBinder(
                 hosts,
-                container.PresenterDiscoveryStrategy,
-                container.PresenterFactory,
-                container.CompositeViewFactory);
+                platformServices.PresenterDiscoveryStrategy,
+                platformServices.PresenterFactory,
+                platformServices.CompositeViewFactory);
         }
     }
 }

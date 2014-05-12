@@ -19,13 +19,14 @@ Changes from the original "Web Forms Mvp"
 - Tests. We can start by porting the tests from WebFormsMvp.
 
 - Add support for 
-  * ASP.NET WebForms. Cf. src/Narvalo.Mvp.Web, already functional.
-  * Windows Forms. Cf. src/Narvalo.Mvp.Windows.Forms, work in progress.
+  * ASP.NET WebForms, cf. src/Narvalo.Mvp.Web, almost done.
+  * CommandLine, cf. src/Narvalo.Mvp.CommandLine, already functional.
+  * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, already functional.
   * WPF.
 
 - Add support for Autofac (Cf. src/Narvalo.Mvp.Extras) / Structuremap / Castle / Unity.
 
-- Samples. Cf. samples/Playground.WebForms.
+- Samples, cf. samples/Playground.WebForms.
 
 - Incorporate ideas from MVCSharp and maybe GWT / Caliburn.Micro / ReactiveUI / MVVM Light?
   AppController, Navigator, Task

@@ -6,10 +6,10 @@ namespace Narvalo.Mvp.CommandLine.Core
 
     public static class CommandsPresenterBinderFactory
     {
-        public static PresenterBinder Create(object host)
+        public static PresenterBinder Create(ICommand command)
         {
             return PresenterBinding.PresenterBinderFactory
-                .Create(new[] { host }, CommandsPlatformServices.Current);
+                .Create(new[] { command }, CommandsPlatformServices.Current);
         }
     }
 }

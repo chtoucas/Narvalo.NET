@@ -60,7 +60,7 @@ namespace Narvalo.Mvp.Web.Core
             _presenterBinder.RegisterView(view);
         }
 
-        static IEnumerable<object> FindHosts_(Page page)
+        static IEnumerable<Control> FindHosts_(Page page)
         {
             yield return page;
 
