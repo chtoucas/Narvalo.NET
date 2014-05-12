@@ -3,7 +3,7 @@
     using System;
     using System.Web.UI;
 
-    public partial class ViewsAddedInPageInit : Page
+    public partial class ViewsAddedInPageInitPage : Page
     {
         protected void Page_Init(object sender, EventArgs e)
         {

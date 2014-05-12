@@ -10,7 +10,7 @@
 namespace Playground.WebForms {
     
     
-    public partial class ViewsAddedInPageInit {
+    public partial class ViewsAddedInPageInitPage {
         
         /// <summary>
         /// Contrôle dynamicallyLoadedControlsPlaceholder.

@@ -1,5 +1,5 @@
 ﻿<%@ Page Async="true" Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="WidgetLookup.aspx.cs"
- Inherits="Playground.WebForms.WidgetLookup" %>
+ Inherits="Playground.WebForms.WidgetLookupPage" %>
 
 <%@ Register Src="~/Controls/LookupWidgetControl.ascx" TagPrefix="uc" TagName="LookupWidget" %>
 <asp:Content ContentPlaceHolderID="content" runat="server">

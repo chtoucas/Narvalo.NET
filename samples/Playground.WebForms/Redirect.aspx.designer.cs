@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class Redirect {
+    public partial class RedirectPage {
     }
 }

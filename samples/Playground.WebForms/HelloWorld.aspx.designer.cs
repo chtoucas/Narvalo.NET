@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class HelloWorld {
+    public partial class HelloWorldPage {
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="Default.aspx.cs"
- Inherits="Playground.WebForms.Default" %>
+ Inherits="Playground.WebForms.DefaultPage" %>
 
 <asp:Content ID="content" ContentPlaceHolderID="content" runat="server">
  <h1>ASP.NET Web Forms Model View Presenter</h1>

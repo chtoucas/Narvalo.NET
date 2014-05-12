@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class HelloWorld : Page
-    {
-    }
+    public partial class HelloWorldPage : Page { }
 }

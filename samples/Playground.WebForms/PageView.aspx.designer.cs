@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class PageView {
+    public partial class PageViewPage {
     }
 }

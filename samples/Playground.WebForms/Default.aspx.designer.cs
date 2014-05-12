@@ -10,7 +10,7 @@
 namespace Playground.WebForms {
     
     
-    public partial class Default {
+    public partial class DefaultPage {
         
         /// <summary>
         /// Contrôle sitemap.

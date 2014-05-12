@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class Messaging : Page
-    {
-    }
+    public partial class MessagingPage : Page { }
 }

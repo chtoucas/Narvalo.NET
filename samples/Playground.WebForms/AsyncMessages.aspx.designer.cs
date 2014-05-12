@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class AsyncMessages {
+    public partial class AsyncMessagesPage {
     }
 }

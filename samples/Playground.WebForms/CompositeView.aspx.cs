@@ -6,10 +6,9 @@
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    [PresenterBinding(typeof(CompositeDemoPresenter),
+    [PresenterBinding(
+        typeof(CompositeDemoPresenter),
         ViewType = typeof(ICompositeDemoView),
         BindingMode = PresenterBindingMode.SharedPresenter)]
-    public partial class CompositeView : MvpPage<CompositeDemoViewModel>, ICompositeDemoView
-    {
-    }
+    public partial class CompositeViewPage : MvpPage<CompositeDemoViewModel>, ICompositeDemoView { }
 }

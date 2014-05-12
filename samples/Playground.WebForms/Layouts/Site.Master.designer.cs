@@ -10,7 +10,7 @@
 namespace Playground.WebForms.Layouts {
     
     
-    public partial class Site {
+    public partial class SiteMasterPage {
         
         /// <summary>
         /// Contrôle head.

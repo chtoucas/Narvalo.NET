@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class WidgetLookup : Page
-    {
-    }
+    public partial class WidgetLookupPage : Page { }
 }

@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class Redirect : Page
-    {
-    }
+    public partial class RedirectPage : Page { }
 }

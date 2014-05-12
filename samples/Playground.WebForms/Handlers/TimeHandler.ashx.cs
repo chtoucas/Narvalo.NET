@@ -2,7 +2,5 @@
 {
     using Narvalo.Mvp.Web;
 
-    public class TimeHandler : MvpHttpHandler
-    {
-    }
+    public class TimeHandler : MvpHttpHandler { }
 }

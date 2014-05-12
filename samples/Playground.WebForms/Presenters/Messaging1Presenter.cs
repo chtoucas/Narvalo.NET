@@ -24,6 +24,7 @@
             View.Model.DisplayText = String.Format("Presenter 1 publishes widget {0}.", widget.Id);
 
             Messages.Publish(widget);
+            Messages.Publish(123456);
         }
     }
 }

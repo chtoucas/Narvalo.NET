@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class Messaging {
+    public partial class MessagingPage {
     }
 }

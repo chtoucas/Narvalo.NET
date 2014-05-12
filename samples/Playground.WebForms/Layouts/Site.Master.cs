@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class Site : MasterPage
-    {
-    }
+    public partial class SiteMasterPage : MasterPage { }
 }

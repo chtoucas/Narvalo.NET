@@ -2,7 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class WidgetEdit : Page
-    {
-    }
+    public partial class WidgetEditPage : Page { }
 }

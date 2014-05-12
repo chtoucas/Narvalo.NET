@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class SharedPresenter {
+    public partial class SharedPresenterPage {
     }
 }

@@ -17,6 +17,8 @@ Changes from the original "Web Forms Mvp"
 ### Remarks
 
 - Cross-presenter communication is provided on a per platform basis.
+  In the end, it might have been a mistake to remove this functionality from the core,
+  see below.
 
 - Support for IOC (Autofac) is provided in src/Narvalo.Mvp.Extras. Since
   it is identical to what is done in WebFormsMvp, I do not intend to make it 
@@ -33,6 +35,12 @@ TODO (by order of priority)
   * CommandLine, cf. src/Narvalo.Mvp.CommandLine, already functional.
   * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, already functional.
   * WPF, not yet started.
+
+- Rollback on custom IPresenter's like HttpPresenter and bring back IMessageBus
+  to the core? Using custom presenter types per platform prevents the reuse
+  of presenters across different platforms. But what about AsyncManager 
+  (this should be the easy one)	and HttpContext (for the navigation part like redirect,
+  a solution might be in the Navigator (see below), but for the rest???).
 
 - Samples, cf. samples/Playground.WebForms.
 

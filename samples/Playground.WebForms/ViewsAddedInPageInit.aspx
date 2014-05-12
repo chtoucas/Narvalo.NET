@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="ViewsAddedInPageInit.aspx.cs"
- Inherits="Playground.WebForms.ViewsAddedInPageInit" %>
+ Inherits="Playground.WebForms.ViewsAddedInPageInitPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

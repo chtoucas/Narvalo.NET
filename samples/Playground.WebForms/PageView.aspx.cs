@@ -6,5 +6,5 @@
     using Playground.WebForms.Views.Models;
 
     [PresenterBinding(typeof(HelloWorldPresenter))]
-    public partial class PageView : MvpPage<HelloWorldModel> { }
+    public partial class PageViewPage : MvpPage<HelloWorldModel> { }
 }

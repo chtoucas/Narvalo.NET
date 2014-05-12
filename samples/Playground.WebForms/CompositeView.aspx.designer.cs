@@ -10,6 +10,6 @@
 namespace Playground.WebForms {
     
     
-    public partial class CompositeView {
+    public partial class CompositeViewPage {
     }
 }
