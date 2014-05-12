@@ -14,7 +14,17 @@ Changes from the original "Web Forms Mvp"
 - Use ConcurrentDictionary instead of Dictionary for type caching.
 - Several possibilities of customization via Configuration/MvpBootstrapper.
 
-### TODO by order of priority
+### Remarks
+
+- Cross-presenter communication is provided on a per platform basis.
+
+- Support for IOC (Autofac) is provided in src/Narvalo.Mvp.Extras. Since
+  it is identical to what is done in WebFormsMvp, I do not intend to make it 
+  an official package. Just copy and adapt the code from WebFormsMvp. The same
+  applies to StructureMap, Castle or Unity.
+
+TODO (by order of priority)
+---------------------------
 
 - Tests. We can start by porting the tests from WebFormsMvp.
 
@@ -22,9 +32,7 @@ Changes from the original "Web Forms Mvp"
   * ASP.NET WebForms, cf. src/Narvalo.Mvp.Web, almost done.
   * CommandLine, cf. src/Narvalo.Mvp.CommandLine, already functional.
   * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, already functional.
-  * WPF.
-
-- Add support for Autofac (Cf. src/Narvalo.Mvp.Extras) / Structuremap / Castle / Unity.
+  * WPF, not yet started.
 
 - Samples, cf. samples/Playground.WebForms.
 
