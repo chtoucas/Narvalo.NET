@@ -6,7 +6,6 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
     {
@@ -14,10 +13,10 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
 
             var attributes = input
-                .GetCustomAttributes(typeof(PresenterBindingAttribute), true /* inherit */)
+                .GetCustomAttributes(typeof(PresenterBindingAttribute), inherit: true)
                 .OfType<PresenterBindingAttribute>()
                 .ToArray();
 
@@ -26,11 +25,8 @@ namespace Narvalo.Mvp.Resolvers
                 )) {
                 throw new PresenterBindingException(String.Format(
                     CultureInfo.InvariantCulture,
-                    "When a {1} is applied with BindingMode={2}, the ViewType must be explicitly specified. One of the bindings on {0} violates this restriction.",
-                    input.FullName,
-                    typeof(PresenterBindingAttribute).Name,
-                    Enum.GetName(typeof(PresenterBindingMode), PresenterBindingMode.SharedPresenter)
-                ));
+                    @"When shared presenter binding is requested, the ""ViewType"" must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
+                    input.FullName));
             }
 
             return attributes

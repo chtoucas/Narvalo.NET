@@ -37,7 +37,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
 
             var shortNames = GetShortNamesFromInterfaces_(input)
                 .Append(GetShortNameFromType_(input));

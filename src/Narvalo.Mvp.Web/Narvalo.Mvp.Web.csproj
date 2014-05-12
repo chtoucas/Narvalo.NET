@@ -69,24 +69,24 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="AspNetBuildManager.cs" />
-    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="AspNetPlatformServices.cs" />
-    <Compile Include="DefaultAspNetPlatformServices.cs" />
+    <Compile Include="Core\AspNetBuildManager.cs" />
+    <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\AspNetPlatformServices.cs" />
+    <Compile Include="Core\DefaultAspNetPlatformServices.cs" />
     <Compile Include="IAsyncTaskManager.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="AspNetPlatformServicesVirtualProxy.cs" />
-    <Compile Include="HttpPresenterBinderFactory.cs" />
+    <Compile Include="Core\AspNetPlatformServicesVirtualProxy.cs" />
+    <Compile Include="Core\HttpPresenterBinderFactory.cs" />
     <Compile Include="HttpPresenter`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IAspNetPlatformServices.cs" />
+    <Compile Include="Core\IAspNetPlatformServices.cs" />
     <Compile Include="Internal\IHttpPresenter.cs" />
-    <Compile Include="MessageCoordinatorFactory.cs" />
-    <Compile Include="IMessageCoordinatorFactory.cs" />
-    <Compile Include="MessageCoordinator.cs" />
-    <Compile Include="AspNetPresenterTypeResolver.cs" />
-    <Compile Include="HttpPresenterBinder.cs" />
+    <Compile Include="Core\MessageCoordinatorFactory.cs" />
+    <Compile Include="Core\IMessageCoordinatorFactory.cs" />
+    <Compile Include="Core\MessageCoordinator.cs" />
+    <Compile Include="Core\AspNetPresenterTypeResolver.cs" />
+    <Compile Include="Core\HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenter`2.cs" />
     <Compile Include="IHttpPresenter.cs" />
@@ -105,7 +105,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Internal\PageHost.cs" />
-    <Compile Include="PageAsyncTaskManager.cs" />
+    <Compile Include="Core\PageAsyncTaskManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\Type%24.cs" />
   </ItemGroup>

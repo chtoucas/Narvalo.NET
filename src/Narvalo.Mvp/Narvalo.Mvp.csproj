@@ -113,7 +113,6 @@
     <Compile Include="Resolvers\PresenterBindingAttributesResolver.cs" />
     <Compile Include="Resolvers\PresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\CachedPresenterBindingAttributesResolver.cs" />
-    <Compile Include="Internal\__Trace.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="PresenterBinding\CompositeViewFactory.cs" />
     <Compile Include="ICompositeView.cs" />

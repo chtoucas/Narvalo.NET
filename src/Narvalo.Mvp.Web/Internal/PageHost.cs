@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web.Internal
     using System.Collections.Generic;
     using System.Web;
     using System.Web.UI;
+    using Narvalo.Mvp.Web.Core;
 
     internal sealed class PageHost
     {

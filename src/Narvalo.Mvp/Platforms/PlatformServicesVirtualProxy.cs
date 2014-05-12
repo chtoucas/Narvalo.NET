@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Platforms
     using Narvalo.Mvp.PresenterBinding;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class PlatformServicesVirtualProxy : LazyValueHolder<IPlatformServices>, IPlatformServices
+    public sealed class PlatformServicesVirtualProxy : LazyValueHolder<IPlatformServices>, IPlatformServices
     {
         public PlatformServicesVirtualProxy() : base(() => new DefaultPlatformServices()) { }
 

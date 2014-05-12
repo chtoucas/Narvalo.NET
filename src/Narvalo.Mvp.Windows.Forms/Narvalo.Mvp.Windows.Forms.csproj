@@ -69,22 +69,22 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="FormsPlatformServicesVirtualProxy.cs" />
-    <Compile Include="FormsPlatformServices.cs" />
+    <Compile Include="Core\FormsPlatformServicesVirtualProxy.cs" />
+    <Compile Include="Core\FormsPlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="DefaultFormsPlatformServices.cs" />
-    <Compile Include="FormsPresenterBinderFactory.cs" />
-    <Compile Include="IFormsPlatformServices.cs" />
+    <Compile Include="Core\DefaultFormsPlatformServices.cs" />
+    <Compile Include="Core\FormsPresenterBinderFactory.cs" />
+    <Compile Include="Core\IFormsPlatformServices.cs" />
     <Compile Include="Internal\IFormPresenter.cs" />
     <Compile Include="IMessageBus.cs" />
-    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Internal\FormHost.cs" />
-    <Compile Include="FormsPresenterBinder.cs" />
+    <Compile Include="Core\FormsPresenterBinder.cs" />
     <Compile Include="FormPresenterOf`1.cs" />
     <Compile Include="FormPresenter`2.cs" />
     <Compile Include="FormPresenter`1.cs" />
     <Compile Include="IFormPresenter.cs" />
-    <Compile Include="MessageBus.cs" />
+    <Compile Include="Core\MessageBus.cs" />
     <Compile Include="MvpForm.cs">
       <SubType>Form</SubType>
     </Compile>

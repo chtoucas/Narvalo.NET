@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.Windows.Forms
     using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Windows.Forms.Core;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.WindowsForms.

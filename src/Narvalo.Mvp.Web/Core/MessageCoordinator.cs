@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Web
+namespace Narvalo.Mvp.Web.Core
 {
     using System;
     using System.Collections;
@@ -95,8 +95,9 @@ namespace Narvalo.Mvp.Web
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 
             foreach (var type in neverReceivedMessages) {
-                Trace.TraceWarning(
-                    @"You published a message of type ""{0}"" but you did not registered any handler for it.", 
+                __Tracer.Warning(
+                    typeof(MessageCoordinator),
+                    @"You published a message of type ""{0}"" but you did not registered any handler for it.",
                     type.FullName);
             }
         }

@@ -16,7 +16,7 @@ namespace Playground.Commands
         public void DisplayText()
         {
             Console.WriteLine();
-            Console.WriteLine("Help");
+            Console.WriteLine("I am a test command.");
             Console.WriteLine();
         }
     }

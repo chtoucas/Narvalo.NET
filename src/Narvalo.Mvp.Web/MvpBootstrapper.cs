@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.Web
     using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Web.Core;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.Web.

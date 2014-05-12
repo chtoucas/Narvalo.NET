@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.CommandLine
+namespace Narvalo.Mvp.Windows.Forms.Core
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -13,7 +13,9 @@ namespace Narvalo.Mvp.CommandLine
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
-            "Command",
+            "UserControl",
+            "Control",
+            "Form",
             "View",
         };
 
@@ -40,7 +42,7 @@ namespace Narvalo.Mvp.CommandLine
         }
 
         public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts,
+            IEnumerable<object> hosts, 
             IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);

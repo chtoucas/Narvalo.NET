@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Web
 {
     using System;
     using System.Web;
+    using Narvalo.Mvp.Web.Core;
 
     public abstract class MvpHttpHandler : IHttpHandler, IView
     {

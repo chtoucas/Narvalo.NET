@@ -10,40 +10,6 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    internal static class DebugCheck
-    {
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void NotNull<T>(T value)
-        {
-            Debug.Assert(value != null, "The value is null.");
-        }
-
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void NotNullOrEmpty(string value)
-        {
-            NotNull(value);
-            Debug.Assert(value.Length != 0, "The value is empty.");
-        }
-
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void IsEnum(Type type)
-        {
-            NotNull(type);
-            Debug.Assert(type.IsEnum, type.FullName, "The type must be of enum type.");
-        }
-
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void IsValueType(Type type)
-        {
-            NotNull(type);
-            Debug.Assert(type.IsValueType, type.FullName, "The type must be a value type.");
-        }
-    }
-
     internal static class Require
     {
         [DebuggerStepThrough]
@@ -105,8 +71,8 @@ namespace Narvalo
             if (value.Length == 0) {
                 throw new ArgumentException(
                     String.Format(
-                        CultureInfo.InvariantCulture, 
-                        "The parameter {0} is empty.", 
+                        CultureInfo.InvariantCulture,
+                        "The parameter {0} is empty.",
                         parameterName),
                     parameterName);
             }
@@ -123,9 +89,9 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
-                        "The value is not in range {0} / {1}.", 
-                        minValue, 
+                        CultureInfo.InvariantCulture,
+                        "The value is not in range {0} / {1}.",
+                        minValue,
                         maxValue));
             }
 
@@ -141,9 +107,9 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
+                        CultureInfo.InvariantCulture,
                         "The value is not in range {0} / {1}.",
-                        minValue, 
+                        minValue,
                         maxValue));
             }
 
@@ -159,8 +125,8 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
-                        "The value is not greater than or equal to {0}.", 
+                        CultureInfo.InvariantCulture,
+                        "The value is not greater than or equal to {0}.",
                         minValue));
             }
 
@@ -198,7 +164,7 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
+                        CultureInfo.InvariantCulture,
                         "The value is not greater than or equal to {0}.",
                         minValue));
             }
@@ -215,7 +181,7 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
+                        CultureInfo.InvariantCulture,
                         "The value is not less than or equal to {0}.",
                         maxValue));
             }
@@ -254,7 +220,7 @@ namespace Narvalo
                     parameterName,
                     value,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
+                        CultureInfo.InvariantCulture,
                         "The value is not less than or equal to {0}.",
                         maxValue));
             }
@@ -269,13 +235,174 @@ namespace Narvalo
                 return new ArgumentNullException(
                     parameterName,
                     String.Format(
-                        CultureInfo.InvariantCulture, 
-                        "The parameter {0} is null.", 
+                        CultureInfo.InvariantCulture,
+                        "The parameter {0} is null.",
                         parameterName));
             }
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
         sealed class ValidatedNotNullAttribute : Attribute { }
+    }
+
+    internal static class DebugCheck
+    {
+        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
+        public static void NotNull<T>(T value)
+        {
+            Debug.Assert(value != null, "The value is null.");
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
+        public static void NotNullOrEmpty(string value)
+        {
+            NotNull(value);
+            Debug.Assert(value.Length != 0, "The value is empty.");
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
+        public static void IsEnum(Type type)
+        {
+            NotNull(type);
+            Debug.Assert(type.IsEnum, type.FullName, "The type must be of enum type.");
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
+        public static void IsValueType(Type type)
+        {
+            NotNull(type);
+            Debug.Assert(type.IsValueType, type.FullName, "The type must be a value type.");
+        }
+    }
+
+    internal static class __Tracer
+    {
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Info(object source, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Info, source, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Info(Type sourceType, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Info, sourceType, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Info(object source, string message)
+        {
+            Trace_(TraceLevel.Info, source, message);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Info(Type sourceType, string message)
+        {
+            Trace_(TraceLevel.Info, sourceType, message);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Warning(object source, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Warning, source, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Warning(Type sourceType, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Warning, sourceType, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Warning(object source, string message)
+        {
+            Trace_(TraceLevel.Warning, source, message);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Warning(Type sourceType, string message)
+        {
+            Trace_(TraceLevel.Warning, sourceType, message);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Error(object source, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Error, source, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Error(Type sourceType, string format, params string[] messages)
+        {
+            Trace_(TraceLevel.Error, sourceType, format, messages);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Error(object source, string message)
+        {
+            Trace_(TraceLevel.Error, source, message);
+        }
+
+        [DebuggerStepThrough]
+        [Conditional("TRACE")]
+        public static void Error(Type sourceType, string message)
+        {
+            Trace_(TraceLevel.Error, sourceType, message);
+        }
+
+        static void Trace_(TraceLevel level, object source, string format, params string[] messages)
+        {
+            Trace_(level, source.GetType(), format, messages);
+        }
+
+        static void Trace_(TraceLevel level, Type sourceType, string format, params string[] messages)
+        {
+            Trace_(level, sourceType, String.Format(CultureInfo.InvariantCulture, format, messages));
+        }
+
+        static void Trace_(TraceLevel level, object source, string message)
+        {
+            Trace_(level, source.GetType(), message);
+        }
+
+        static void Trace_(TraceLevel level, Type sourceType, string message)
+        {
+            var msg = String.Format(
+                CultureInfo.InvariantCulture,
+                "[{0}] {1}",
+                sourceType.Name,
+                message);
+
+            switch (level) {
+                case TraceLevel.Error:
+                    Trace.TraceError(msg);
+                    break;
+
+                case TraceLevel.Warning:
+                    Trace.TraceWarning(msg);
+                    break;
+
+                case TraceLevel.Info:
+                case TraceLevel.Verbose:
+                default:
+                    Trace.TraceInformation(msg);
+                    break;
+            }
+        }
     }
 }

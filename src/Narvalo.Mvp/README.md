@@ -7,14 +7,16 @@ Changes from the original "Web Forms Mvp"
 -----------------------------------------
 
 - Removed all code related to System.Web: HttpContext, TraceContext...
-  (support for ASP.NET or Windows Forms is available in separate packages)
+  (support for ASP.NET or Windows Forms is available in separate packages).
 - Removed cross-presenter communication from the core.
-- An API easier to follow (to me at least)
-- No more generic constraint on the ViewModel; namely the class and new() constraints
-- Use ConcurrentDictionary instead of Dictionary for type caching
-- Several possibilities of customization via MvpConfiguration
+- An API easier to follow (to me at least).
+- No more generic constraint on the ViewModel; namely the class and new() constraints.
+- Use ConcurrentDictionary instead of Dictionary for type caching.
+- Several possibilities of customization via Configuration/MvpBootstrapper.
 
 ### TODO
+
+- Tests.
 
 - Documentation and userguide.
 

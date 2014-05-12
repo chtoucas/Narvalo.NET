@@ -1,18 +1,19 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms
+namespace Narvalo.Mvp.Web.Core
 {
     using System;
-    using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Platforms;
 
-    public sealed class DefaultFormsPlatformServices : DefaultPlatformServices, IFormsPlatformServices 
+    public sealed class DefaultAspNetPlatformServices : DefaultPlatformServices, IAspNetPlatformServices 
     {
-        Func<IMessageBus> _messageBusThunk = () => new MessageBus();
+        Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
+           = () => new MessageCoordinatorFactory();
 
-        IMessageBus _messageBus;
+        IMessageCoordinatorFactory _messageCoordinatorFactory;
 
-        public DefaultFormsPlatformServices()
+        public DefaultAspNetPlatformServices()
         {
             // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
             // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
@@ -23,19 +24,20 @@ namespace Narvalo.Mvp.Windows.Forms
                         new DefaultConventionBasedPresenterDiscoveryStrategy()}));
         }
 
-        public IMessageBus MessageBus
+        public IMessageCoordinatorFactory MessageCoordinatorFactory
         {
             get
             {
-                return _messageBus ?? (_messageBus = _messageBusThunk());
+                return _messageCoordinatorFactory
+                    ?? (_messageCoordinatorFactory = _messageCoordinatorFactoryThunk());
             }
         }
 
-        public void SetMessageBus(Func<IMessageBus> thunk)
+        public void SetMessageCoordinatorFactory(Func<IMessageCoordinatorFactory> thunk)
         {
             Require.NotNull(thunk, "thunk");
 
-            _messageBusThunk = thunk;
+            _messageCoordinatorFactoryThunk = thunk;
         }
     }
 }

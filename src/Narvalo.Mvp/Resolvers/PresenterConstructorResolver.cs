@@ -5,7 +5,6 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Globalization;
     using System.Reflection.Emit;
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
     {
@@ -13,7 +12,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.Item1.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.Item1.FullName);
 
             var presenterType = input.Item1;
             var viewType = input.Item2;

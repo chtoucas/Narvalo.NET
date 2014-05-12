@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Windows.Forms.Internal
     using System.Collections.Generic;
     using System.Windows.Forms;
     using Narvalo;
+    using Narvalo.Mvp.Windows.Forms.Core;
 
     internal sealed class FormHost
     {

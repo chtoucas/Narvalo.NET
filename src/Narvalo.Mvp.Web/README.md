@@ -10,4 +10,4 @@ See _LICENSE-WebFormsMvp.txt_ for license information.
 
 ### TODO
 
-- Review the async stuff
+- Review and enhance the async stuff (IHttpAsyncHandler, HttpTaskAsyncHandler, new async keyword)

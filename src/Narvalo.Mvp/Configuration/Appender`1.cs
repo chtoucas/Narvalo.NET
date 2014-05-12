@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Configuration
 {
     using System;
 
-    public class Appender<TSource, T> where TSource : class
+    public sealed class Appender<TSource, T> where TSource : class
     {
         readonly TSource _source;
         readonly Action<T> _append;

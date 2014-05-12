@@ -20,7 +20,6 @@ namespace Playground
 
             new TestCommand().Execute();
             new TestCommand().Execute();
-            new TestCommand().Execute();
 
             Log.Information(Resources.Ending);
         }

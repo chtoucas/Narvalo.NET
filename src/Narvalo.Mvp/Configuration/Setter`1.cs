@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Configuration
 {
     using System;
 
-    public class Setter<TSource, T> where TSource : class
+    public sealed class Setter<TSource, T> where TSource : class
     {
         readonly TSource _source;
         readonly Action<T> _set;

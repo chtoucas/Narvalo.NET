@@ -65,11 +65,11 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="DefaultCommandsPlatformServices.cs" />
-    <Compile Include="CommandsPlatformServices.cs" />
-    <Compile Include="CommandsPlatformServicesVirtualProxy.cs" />
-    <Compile Include="PresenterBinderFactory.cs" />
+    <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\DefaultCommandsPlatformServices.cs" />
+    <Compile Include="Core\CommandsPlatformServices.cs" />
+    <Compile Include="Core\CommandsPlatformServicesVirtualProxy.cs" />
+    <Compile Include="Core\CommandsPresenterBinderFactory.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="MvpCommand.cs" />

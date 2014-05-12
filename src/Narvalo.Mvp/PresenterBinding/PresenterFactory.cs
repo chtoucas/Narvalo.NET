@@ -6,7 +6,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Reflection;
     using Narvalo;
-    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     /// <remarks>
@@ -42,7 +41,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var ctor = _constructorResolver.Resolve(Tuple.Create(presenterType, viewType));
 
-            __Trace.Info(
+            __Tracer.Info(
                 this,
                 @"Constructing presenter ""{0}"" for view ""{1}"", view ""{2}"".",
                 presenterType.FullName,

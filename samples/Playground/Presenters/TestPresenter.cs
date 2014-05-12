@@ -15,12 +15,12 @@
 
         public void Completed(object sender, EventArgs e)
         {
-            Console.WriteLine("Completed.");
+            Console.WriteLine("Presenter say Completed.");
         }
 
         public void Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Load.");
+            Console.WriteLine("Presenter say Load.");
         }
     }
 }

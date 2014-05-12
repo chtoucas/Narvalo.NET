@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms
+namespace Narvalo.Mvp.Windows.Forms.Core
 {
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class MessageBus : IMessageBus
+    public sealed class /*Default*/MessageBus : IMessageBus
     {
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();

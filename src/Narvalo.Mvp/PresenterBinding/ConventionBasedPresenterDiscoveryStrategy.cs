@@ -5,7 +5,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Collections.Generic;
     using Narvalo;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
@@ -40,7 +39,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 var presenterType = _typeResolver.Resolve(viewType);
 
                 if (presenterType != null) {
-                    __Trace.Info(
+                    __Tracer.Info(
                         this,
                         @"Found presenter ""{0}"" for view ""{1}"".",
                         presenterType.FullName,
@@ -56,10 +55,9 @@ namespace Narvalo.Mvp.PresenterBinding
                     boundViews.Add(view);
                 }
                 else {
-                    __Trace.Info(
+                    __Tracer.Info(
                         this,
                         @"No presenter found for view ""{0}"".",
-                        typeof(ConventionBasedPresenterDiscoveryStrategy).Name,
                         viewType.FullName);
                 }
             }

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Web
+namespace Narvalo.Mvp.Windows.Forms.Core
 {
     using Narvalo.Mvp.Platforms;
 
-    public interface IAspNetPlatformServices : IPlatformServices
+    public interface IFormsPlatformServices : IPlatformServices
     {
-        IMessageCoordinatorFactory MessageCoordinatorFactory { get; }
+        IMessageBus MessageBus { get; }
     }
 }

@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Globalization;
     using System.Linq;
     using Narvalo;
-    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
@@ -69,8 +68,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
                 boundViews.AddRange(boundViewsThisRound);
 
-                // In case "boundViewsThisRound" is empty, we always add the currently inspected view 
-                // to the list of views to remove.
+                // In case "boundViewsThisRound" is empty, we always add the currently 
+                // inspected view to the list of views to remove.
                 pendingViews = pendingViews.Except(boundViewsThisRound.Concat(new[] { view }));
             }
 
@@ -82,9 +81,9 @@ namespace Narvalo.Mvp.PresenterBinding
             IView view,
             IEnumerable<IView> pendingViews)
         {
-            __Trace.Info(
+            __Tracer.Info(
                 typeof(AttributeBasedPresenterDiscoveryStrategy),
-                @"Found presenter ""{0}"" view ""{1}"", origin ""{2}"", binding mode ""{3}"".",
+                @"Found presenter ""{0}"" for view ""{1}"", origin=""{2}"", binding mode=""{3}"".",
                 attribute.PresenterType.FullName,
                 attribute.ViewType.FullName,
                 attribute.Origin.FullName,

@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.Resolvers
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
@@ -18,7 +17,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(input, "input");
 
-            __Trace.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
 
             ValidateViewType_(input);
 

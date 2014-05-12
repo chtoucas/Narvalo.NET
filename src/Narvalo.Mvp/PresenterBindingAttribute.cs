@@ -14,9 +14,9 @@ namespace Narvalo.Mvp
             BindingMode = PresenterBindingMode.Default;
         }
 
-        public Type PresenterType { get; private set; }
-
         public PresenterBindingMode BindingMode { get; set; }
+
+        public Type PresenterType { get; private set; }
 
         public Type ViewType { get; set; }
 
