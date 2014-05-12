@@ -2,19 +2,30 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
-    using System;
+    using System.ComponentModel;
     using System.Windows.Forms;
-    using Narvalo.Mvp.Windows.Forms.Internal;
+    using Narvalo.Mvp.Windows.Forms.Core;
 
     public partial class MvpForm : Form, IView
     {
         readonly bool _throwIfNoPresenterBound;
+
+        bool _disposed = false;
+        FormsPresenterBinder _presenterBinder;
 
         protected MvpForm() : this(true) { }
 
         protected MvpForm(bool throwIfNoPresenterBound)
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
+
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) {
+                // Remark: We can not use the "DesignMode" property in the constructor.
+                // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
+
+                _presenterBinder = FormsPresenterBinderFactory.Create(this);
+                _presenterBinder.PerformBinding();
+            }
         }
 
         public bool ThrowIfNoPresenterBound
@@ -22,16 +33,18 @@ namespace Narvalo.Mvp.Windows.Forms
             get { return _throwIfNoPresenterBound; }
         }
 
-        // REVIEW: Use a different execution point in the windows forms lifecycle.
-        // NB: During construction, this conflicts with the design-mode in Visual Studio
-        protected override void OnCreateControl()
+        protected override void Dispose(bool disposing)
         {
-            // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
-            if (!DesignMode) {
-                FormHost.Register(this);
+            if (!_disposed) {
+                if (disposing) {
+                    _presenterBinder.Release();
+                    _presenterBinder = null;
+                }
+
+                _disposed = true;
             }
 
-            base.OnCreateControl();
+            base.Dispose(disposing);
         }
     }
 }

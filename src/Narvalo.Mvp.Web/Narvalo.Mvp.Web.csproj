@@ -104,7 +104,7 @@
     <Compile Include="MvpUserControl`1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Internal\PageHost.cs" />
+    <Compile Include="Core\PageHost.cs" />
     <Compile Include="Core\PageAsyncTaskManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\Type%24.cs" />

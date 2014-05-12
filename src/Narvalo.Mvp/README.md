@@ -14,11 +14,21 @@ Changes from the original "Web Forms Mvp"
 - Use ConcurrentDictionary instead of Dictionary for type caching.
 - Several possibilities of customization via Configuration/MvpBootstrapper.
 
-### TODO
+### TODO by order of priority
 
-- Tests.
+- Tests. We can start by porting the tests from WebFormsMvp.
+
+- Add support for 
+  * ASP.NET WebForms. Cf. src/Narvalo.Mvp.Web, already functional.
+  * Windows Forms. Cf. src/Narvalo.Mvp.Windows.Forms, work in progress.
+  * WPF.
+
+- Add support for Autofac (Cf. src/Narvalo.Mvp.Extras) / Structuremap / Castle / Unity.
+
+- Samples. Cf. samples/Playground.WebForms.
+
+- Incorporate ideas from MVCSharp and maybe GWT / Caliburn.Micro / ReactiveUI / MVVM Light?
+  AppController, Navigator, Task
 
 - Documentation and userguide.
-
-- Incorporate ideas from MVCSharp (Task, Navigator) and maybe Caliburn.Micro / ReactiveUI / MVVM Light?
 

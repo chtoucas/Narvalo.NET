@@ -6,19 +6,21 @@ namespace Narvalo.Mvp.Windows.Forms.Core
 
     public static class FormsPresenterBinderFactory
     {
-        public static FormsPresenterBinder Create(Form form)
+        public static FormsPresenterBinder Create<T>(T host)
+            where T : Control
         {
-            return Create(form, FormsPlatformServices.Current);
+            return Create(host, FormsPlatformServices.Current);
         }
 
-        public static FormsPresenterBinder Create(
-            Form form,
+        public static FormsPresenterBinder Create<T>(
+            T host,
             IFormsPlatformServices container)
+            where T : Control
         {
             Require.NotNull(container, "container");
 
             return new FormsPresenterBinder(
-                form,
+                host,
                 container.PresenterDiscoveryStrategy,
                 container.PresenterFactory,
                 container.CompositeViewFactory,

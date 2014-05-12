@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Web
 {
     using System;
     using System.Web.UI;
-    using Narvalo.Mvp.Web.Internal;
+    using Narvalo.Mvp.Web.Core;
 
     public abstract class MvpPage : Page, IView
     {

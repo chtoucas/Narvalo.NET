@@ -1,13 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms.Internal
+namespace Narvalo.Mvp.Windows.Forms.Core
 {
     using System.Collections.Generic;
     using System.Windows.Forms;
     using Narvalo;
-    using Narvalo.Mvp.Windows.Forms.Core;
 
-    internal sealed class FormHost
+    public sealed class FormHost
     {
         // REVIEW
         static readonly IDictionary<int, FormHost> _hosts

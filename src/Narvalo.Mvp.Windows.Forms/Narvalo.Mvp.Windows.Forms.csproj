@@ -78,7 +78,6 @@
     <Compile Include="Internal\IFormPresenter.cs" />
     <Compile Include="IMessageBus.cs" />
     <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Internal\FormHost.cs" />
     <Compile Include="Core\FormsPresenterBinder.cs" />
     <Compile Include="FormPresenterOf`1.cs" />
     <Compile Include="FormPresenter`2.cs" />

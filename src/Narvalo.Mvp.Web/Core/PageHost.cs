@@ -1,13 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Web.Internal
+namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
     using System.Web;
     using System.Web.UI;
-    using Narvalo.Mvp.Web.Core;
 
-    internal sealed class PageHost
+    public sealed class PageHost
     {
         readonly static string PageHostKey_ = typeof(PageHost).FullName;
 

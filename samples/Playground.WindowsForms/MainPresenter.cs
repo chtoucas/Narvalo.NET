@@ -17,12 +17,15 @@ namespace Playground.WindowsForms
         event EventHandler TextBoxTextChanged;
     }
 
-    public sealed class SamplePresenter : FormPresenter<IView>
+    public class SamplePresenter : FormPresenter<IView>
     {
         public SamplePresenter(IView view)
-            : base(view) { }
+            : base(view)
+        {
+            View.Load += Load;
+        }
 
-        public override void OnBindingComplete()
+        public void Load(object sender, EventArgs e)
         {
             Messages.Subscribe<TestMessage>(_ => MessageBox.Show(_.Text));
         }
