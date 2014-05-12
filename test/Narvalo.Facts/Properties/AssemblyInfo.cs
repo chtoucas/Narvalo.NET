@@ -3,7 +3,7 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Narvalo.Facts")]
-[assembly: AssemblyDescription("Narvalo Facts")]
+[assembly: AssemblyDescription("Narvalo Facts.")]
 [assembly: AssemblyProduct("Narvalo.Org Libraries.")]
 
 [assembly: AssemblyCulture("")]

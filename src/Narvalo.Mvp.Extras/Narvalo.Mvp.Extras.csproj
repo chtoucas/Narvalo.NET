@@ -88,10 +88,8 @@
     <Compile Include="AutofacPresenterFactory.cs" />
     <Compile Include="ContainerBuilder%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IMessageBus.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReactiveMessageBus.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
