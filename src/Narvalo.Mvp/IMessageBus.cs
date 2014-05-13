@@ -4,17 +4,17 @@ namespace Narvalo.Mvp
 {
     using System;
 
+    // Meant to be a message bus to enable cross-presenter communication.
+    // Depending on the underlying platform, the message bus will be either global
+    // or shared only by the presenters bound during the same binding operation.
+    // The default behaviour is to use a global one.
     public interface IMessageBus
     {
-        //bool CanClose { get; }
+        //void Unsubscribe();
 
-        //bool Closed { get; }
-
-        //void Close();
+        //IObservable<T> Register<T>();
 
         void Publish<T>(T message);
-
-        IObservable<T> Register<T>();
 
         void Subscribe<T>(Action<T> onNext);
     }

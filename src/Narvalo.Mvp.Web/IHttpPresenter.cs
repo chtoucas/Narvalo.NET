@@ -9,7 +9,5 @@ namespace Narvalo.Mvp.Web
         HttpContextBase HttpContext { get; }
 
         IAsyncTaskManager AsyncManager { get; }
-
-        IMessageCoordinator Messages { get; }
     }
 }

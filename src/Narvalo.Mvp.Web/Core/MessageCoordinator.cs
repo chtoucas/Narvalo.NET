@@ -9,25 +9,43 @@ namespace Narvalo.Mvp.Web.Core
     using System.Diagnostics;
     using System.Linq;
 
-    public sealed class /*Default*/MessageCoordinator : IMessageCoordinator
+    // Only views bound by the same "HttpPresenteBinder" will share this message bus.
+    // In practice, cross-presenter communication is applicable to all presenters
+    // activated during the same HTTP request.
+    // When a message is published, it will be handled by all present AND future handlers.
+    // You then do not have to worry about the order of the pub/sub events.
+    // A good rule of thumb is to subscribe or publish messages during the Load event. 
+    // IMPORTANT: After pre-render completes, the message bus is closed.
+    public sealed class MessageCoordinator : IMessageCoordinator
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
 
-        bool _disposed = false;
+        bool _closed = false;
+
+        public bool Closed
+        {
+            get { return _closed; }
+        }
 
         public void Close()
         {
-            __TraceNeverReceivedMessages();
+            if (!_closed) {
+                __TraceNeverReceivedMessages();
 
-            Dispose_(true);
+                // REVIEW
+                _handlers.Clear();
+                _messages.Clear();
+
+                _closed = true;
+            }
         }
 
         public void Publish<T>(T message)
         {
-            ThrowIfDisposed_();
+            ThrowIfClosed_();
 
             AddMessage_(message);
             PushMessage_(message);
@@ -35,7 +53,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfDisposed_();
+            ThrowIfClosed_();
 
             Require.NotNull(onNext, "onNext");
 
@@ -102,31 +120,11 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        void ThrowIfDisposed_()
+        void ThrowIfClosed_()
         {
-            if (_disposed) {
-                throw new ObjectDisposedException(
-                    typeof(MessageCoordinator).FullName,
+            if (_closed) {
+                throw new InvalidOperationException(
                     "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose_(true /* disposing */);
-            GC.SuppressFinalize(this);
-        }
-
-        void Dispose_(bool disposing)
-        {
-            if (!_disposed) {
-                if (disposing) {
-                    // REVIEW
-                    _handlers.Clear();
-                    _messages.Clear();
-                }
-
-                _disposed = true;
             }
         }
     }

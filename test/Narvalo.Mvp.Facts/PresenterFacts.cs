@@ -8,7 +8,7 @@
         public static class TheConstructor
         {
             [Fact]
-            public void InitializesDefaultViewModelForViewTypesThatImplementIViewTModel()
+            public static void InitializesDefaultViewModelForViewTypesThatImplementIViewTModel()
             {
                 // Arrange
                 var view = new TestViewWithModel();

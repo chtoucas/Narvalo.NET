@@ -5,7 +5,6 @@ namespace Playground.WindowsForms
     using System;
     using System.Windows.Forms;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Windows.Forms;
 
     public sealed class TestMessage
     {
@@ -17,7 +16,7 @@ namespace Playground.WindowsForms
         event EventHandler TextBoxTextChanged;
     }
 
-    public class SamplePresenter : FormPresenter<IView>
+    public class SamplePresenter : Presenter<IView>
     {
         public SamplePresenter(IView view)
             : base(view)
@@ -31,7 +30,7 @@ namespace Playground.WindowsForms
         }
     }
 
-    public sealed class MainPresenter : FormPresenter<IMainView>
+    public sealed class MainPresenter : Presenter<IMainView>
     {
         public MainPresenter(IMainView view)
             : base(view)

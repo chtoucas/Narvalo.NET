@@ -23,7 +23,8 @@ namespace Narvalo.Mvp.PresenterBinding
                 hosts,
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
-                platformServices.CompositeViewFactory);
+                platformServices.CompositeViewFactory,
+                platformServices.MessageBusFactory);
         }
     }
 }

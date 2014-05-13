@@ -80,17 +80,14 @@
     <Compile Include="HttpPresenter`1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\IAspNetPlatformServices.cs" />
     <Compile Include="Internal\IHttpPresenter.cs" />
-    <Compile Include="Core\MessageCoordinatorFactory.cs" />
-    <Compile Include="Core\IMessageCoordinatorFactory.cs" />
+    <Compile Include="Core\DefaultMessageBusFactory.cs" />
     <Compile Include="Core\MessageCoordinator.cs" />
     <Compile Include="Core\AspNetPresenterTypeResolver.cs" />
     <Compile Include="Core\HttpPresenterBinder.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenter`2.cs" />
     <Compile Include="IHttpPresenter.cs" />
-    <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="MvpHttpHandler.cs" />
     <Compile Include="MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>

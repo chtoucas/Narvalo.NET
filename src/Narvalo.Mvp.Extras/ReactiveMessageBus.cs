@@ -18,6 +18,16 @@ namespace Narvalo.Mvp
             _subject = new Subject<object>();
         }
 
+        public bool Closed
+        {
+            get { return !_disposed; }
+        }
+
+        public void Close()
+        {
+            Dispose_(true);
+        }
+
         public void Publish<T>(T message)
         {
             ThrowIfDisposed_();

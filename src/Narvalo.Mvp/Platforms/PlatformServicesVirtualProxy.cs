@@ -15,6 +15,11 @@ namespace Narvalo.Mvp.Platforms
             get { return Value.CompositeViewFactory; }
         }
 
+        public IMessageBusFactory MessageBusFactory
+        {
+            get { return Value.MessageBusFactory; }
+        }
+
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
         {
             get { return Value.PresenterDiscoveryStrategy; }

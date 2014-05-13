@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public PageHost(Page page, HttpContext context)
         {
-            DebugCheck.NotNull(page);
+            Require.NotNull(page, "page");
 
             var hosts = FindHosts_(page);
 
@@ -32,16 +32,16 @@ namespace Narvalo.Mvp.Web.Core
             // On page's initialization, bind the presenter.
             page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();
 
-            // Ensures that any attempt to use the message coordinator fails after pre-rendering completed.
+            // Ensures that any attempt to use the message bus fails after pre-rendering completes.
             page.PreRenderComplete += (sender, e) => _presenterBinder.MessageCoordinator.Close();
 
-            // On unloadng the page, release the binder.
+            // On unloading the page, release the binder.
             page.Unload += (sender, e) => _presenterBinder.Release();
         }
 
         public static PageHost Register(Page page, HttpContext context)
         {
-            DebugCheck.NotNull(page);
+            Require.NotNull(page, "page");
 
             var pageContext = page.Items;
 

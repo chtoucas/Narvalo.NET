@@ -17,6 +17,11 @@ namespace Narvalo.Mvp.CommandLine.Core
             get { return Value.CompositeViewFactory; }
         }
 
+        public IMessageBusFactory MessageBusFactory
+        {
+            get { return Value.MessageBusFactory; }
+        }
+
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy
         {
             get { return Value.PresenterDiscoveryStrategy; }

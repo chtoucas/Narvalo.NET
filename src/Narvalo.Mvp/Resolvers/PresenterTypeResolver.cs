@@ -59,7 +59,7 @@ namespace Narvalo.Mvp.Resolvers
                       typeName,
                       throwOnError: false,
                       ignoreCase: true)
-                  where presenterType != null && typeof(IPresenter).IsAssignableFrom(presenterType)
+                  where presenterType != null && typeof(Narvalo.Mvp.IPresenter).IsAssignableFrom(presenterType)
                   select presenterType;
 
             return presenterTypes.FirstOrDefault();

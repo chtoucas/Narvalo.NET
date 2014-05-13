@@ -16,8 +16,11 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IEnumerable<object> _hosts;
 
         readonly ICompositeViewFactory _compositeViewFactory;
+        readonly IMessageBusFactory _messageBusFactory;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
+
+        readonly IMessageBus _messageBus;
 
         bool _bindingCompleted = false;
 
@@ -25,17 +28,22 @@ namespace Narvalo.Mvp.PresenterBinding
             IEnumerable<object> hosts,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
-            ICompositeViewFactory compositeViewFactory)
+            ICompositeViewFactory compositeViewFactory,
+            IMessageBusFactory messageBusFactory)
         {
             Require.NotNull(hosts, "hosts");
             Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
             Require.NotNull(presenterFactory, "presenterFactory");
             Require.NotNull(compositeViewFactory, "compositeViewFactory");
+            Require.NotNull(messageBusFactory, "messageBusFactory");
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
             _presenterFactory = presenterFactory;
             _compositeViewFactory = compositeViewFactory;
+            _messageBusFactory = messageBusFactory;
+
+            _messageBus = _messageBusFactory.Create();
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -43,6 +51,8 @@ namespace Narvalo.Mvp.PresenterBinding
         }
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
+
+        public IMessageBus MessageBus { get { return _messageBus; } }
 
         public void PerformBinding()
         {
@@ -89,6 +99,11 @@ namespace Narvalo.Mvp.PresenterBinding
         protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
+
+            var ipresenter = presenter as Internal.IPresenter;
+            if (ipresenter != null) {
+                ipresenter.Messages = _messageBus;
+            }
 
             OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
 

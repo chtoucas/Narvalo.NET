@@ -2,9 +2,13 @@
 
 namespace Narvalo.Mvp.Web.Core
 {
-    public sealed class /*Default*/MessageCoordinatorFactory : IMessageCoordinatorFactory
+    using Narvalo.Mvp.PresenterBinding;
+
+    public sealed class DefaultMessageBusFactory : IMessageBusFactory
     {
-        public IMessageCoordinator Create()
+        public bool IsStatic { get { return false; } }
+
+        public IMessageBus Create()
         {
             return new MessageCoordinator();
         }

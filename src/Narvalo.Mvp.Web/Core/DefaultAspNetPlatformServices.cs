@@ -2,19 +2,15 @@
 
 namespace Narvalo.Mvp.Web.Core
 {
-    using System;
-    using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Platforms;
+    using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class DefaultAspNetPlatformServices : DefaultPlatformServices, IAspNetPlatformServices 
+    public sealed class DefaultAspNetPlatformServices : DefaultPlatformServices
     {
-        Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
-           = () => new MessageCoordinatorFactory();
-
-        IMessageCoordinatorFactory _messageCoordinatorFactory;
-
         public DefaultAspNetPlatformServices()
         {
+            SetMessageBusFactory(() => new DefaultMessageBusFactory());
+
             // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
             // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
             SetPresenterDiscoveryStrategy(
@@ -22,22 +18,6 @@ namespace Narvalo.Mvp.Web.Core
                     new IPresenterDiscoveryStrategy[] {
                         new AttributeBasedPresenterDiscoveryStrategy(),
                         new DefaultConventionBasedPresenterDiscoveryStrategy()}));
-        }
-
-        public IMessageCoordinatorFactory MessageCoordinatorFactory
-        {
-            get
-            {
-                return _messageCoordinatorFactory
-                    ?? (_messageCoordinatorFactory = _messageCoordinatorFactoryThunk());
-            }
-        }
-
-        public void SetMessageCoordinatorFactory(Func<IMessageCoordinatorFactory> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _messageCoordinatorFactoryThunk = thunk;
         }
     }
 }

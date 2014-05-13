@@ -70,9 +70,14 @@
     </Compile>
     <Compile Include="Configuration\MvpBootstrapper.cs" />
     <Compile Include="IMessageBus.cs" />
+    <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
+    <Compile Include="Internal\IPresenter.cs" />
+    <Compile Include="MessageBus.cs" />
     <Compile Include="Platforms\LazyValueHolder`1.cs" />
     <Compile Include="Platforms\PlatformServices.cs" />
+    <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
+    <Compile Include="PresenterBinding\MessageBusFactory.cs" />
     <Compile Include="PresenterBinding\PresenterBinderFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
     <Compile Include="Presenter`1.cs">

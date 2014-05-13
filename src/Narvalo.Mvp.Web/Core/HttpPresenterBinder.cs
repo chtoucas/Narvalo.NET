@@ -18,28 +18,38 @@ namespace Narvalo.Mvp.Web.Core
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
             ICompositeViewFactory compositeViewFactory,
-            IMessageCoordinatorFactory messageCoordinatorFactory)
+            IMessageBusFactory messageBusFactory)
             : base(
                 hosts,
                 presenterDiscoveryStrategy,
                 presenterFactory,
-                compositeViewFactory)
+                compositeViewFactory,
+                messageBusFactory)
         {
             Require.NotNull(context, "context");
-            Require.NotNull(messageCoordinatorFactory, "messageCoordinatorFactory");
+
+            if (messageBusFactory.IsStatic) {
+                throw new ArgumentException(
+                    "The HTTP presenter binder requires a factory that creates transient message bus.",
+                    "messageBusFactory");
+            }
 
             _context = context;
-            _messageCoordinator = messageCoordinatorFactory.Create();
+
+            var messageCoordinator = MessageBus as IMessageCoordinator;
+            if (messageCoordinator == null) {
+                throw new NotSupportedException(
+                    "The HTTP presenter binder requires the message bus to implement IMessageCoordinator.");
+            }
+
+            _messageCoordinator = messageCoordinator;
         }
 
         public IMessageCoordinator MessageCoordinator { get { return _messageCoordinator; } }
 
         public override void Release()
         {
-            var disposableMessageCoordinator = _messageCoordinator as IDisposable;
-            if (disposableMessageCoordinator != null) {
-                disposableMessageCoordinator.Dispose();
-            }
+            MessageCoordinator.Close();
 
             base.Release();
         }
@@ -49,7 +59,6 @@ namespace Narvalo.Mvp.Web.Core
             var presenter = args.Presenter as Internal.IHttpPresenter;
             if (presenter != null) {
                 presenter.HttpContext = new HttpContextWrapper(_context);
-                presenter.Messages = _messageCoordinator;
             }
 
             base.OnPresenterCreated(args);

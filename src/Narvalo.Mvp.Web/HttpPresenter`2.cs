@@ -17,8 +17,6 @@ namespace Narvalo.Mvp.Web
 
         public HttpContextBase HttpContext { get; private set; }
 
-        public IMessageCoordinator Messages { get; private set; }
-
         public HttpApplicationStateBase Application { get { return HttpContext.Application; } }
 
         public Cache Cache { get { return HttpContext.Cache; } }
@@ -39,11 +37,6 @@ namespace Narvalo.Mvp.Web
         HttpContextBase Internal.IHttpPresenter.HttpContext
         {
             set { HttpContext = value; }
-        }
-
-        IMessageCoordinator Internal.IHttpPresenter.Messages
-        {
-            set { Messages = value; }
         }
     }
 }

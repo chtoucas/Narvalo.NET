@@ -7,8 +7,8 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp.PresenterBinding;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public sealed class AspNetPlatformServicesVirtualProxy 
-        : LazyValueHolder<IAspNetPlatformServices>, IAspNetPlatformServices
+    public sealed class AspNetPlatformServicesVirtualProxy
+        : LazyValueHolder<IPlatformServices>, IPlatformServices
     {
         public AspNetPlatformServicesVirtualProxy() : base(() => new DefaultAspNetPlatformServices()) { }
 
@@ -16,10 +16,10 @@ namespace Narvalo.Mvp.Web.Core
         {
             get { return Value.CompositeViewFactory; }
         }
-
-        public IMessageCoordinatorFactory MessageCoordinatorFactory
+        
+        public IMessageBusFactory MessageBusFactory
         {
-            get { return Value.MessageCoordinatorFactory; }
+            get { return Value.MessageBusFactory; }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy

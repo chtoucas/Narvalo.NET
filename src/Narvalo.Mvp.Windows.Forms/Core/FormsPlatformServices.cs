@@ -2,11 +2,14 @@
 
 namespace Narvalo.Mvp.Windows.Forms.Core
 {
+    using Narvalo.Mvp.Platforms;
+
     public static class FormsPlatformServices
     {
-        static readonly FormsPlatformServicesVirtualProxy Instance_ = new FormsPlatformServicesVirtualProxy();
+        static readonly FormsPlatformServicesVirtualProxy Instance_
+            = new FormsPlatformServicesVirtualProxy();
 
-        public static IFormsPlatformServices Current
+        public static IPlatformServices Current
         {
             get { return Instance_; }
             set { Instance_.Reset(value); }

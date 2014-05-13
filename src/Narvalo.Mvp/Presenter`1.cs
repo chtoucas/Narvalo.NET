@@ -2,7 +2,7 @@
 
 namespace Narvalo.Mvp
 {
-    public abstract class Presenter<TView> : IPresenter<TView>
+    public abstract class Presenter<TView> : IPresenter<TView>, Internal.IPresenter
         where TView : class, IView
     {
         readonly TView _view;
@@ -14,6 +14,13 @@ namespace Narvalo.Mvp
             _view = view;
         }
 
+        public IMessageBus Messages { get; private set; }
+
         public TView View { get { return _view; } }
+
+        IMessageBus Internal.IPresenter.Messages
+        {
+            set { Messages = value; }
+        }
     }
 }

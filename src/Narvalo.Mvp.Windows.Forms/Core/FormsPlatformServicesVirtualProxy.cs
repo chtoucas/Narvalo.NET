@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Windows.Forms.Core
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class FormsPlatformServicesVirtualProxy
-        : LazyValueHolder<IFormsPlatformServices>, IFormsPlatformServices
+        : LazyValueHolder<IPlatformServices>, IPlatformServices
     {
         public FormsPlatformServicesVirtualProxy() : base(() => new DefaultFormsPlatformServices()) { }
 
@@ -17,9 +17,9 @@ namespace Narvalo.Mvp.Windows.Forms.Core
             get { return Value.CompositeViewFactory; }
         }
 
-        public IMessageBus MessageBus
+        public IMessageBusFactory MessageBusFactory
         {
-            get { return Value.MessageBus; }
+            get { return Value.MessageBusFactory; }
         }
 
         public IPresenterDiscoveryStrategy PresenterDiscoveryStrategy

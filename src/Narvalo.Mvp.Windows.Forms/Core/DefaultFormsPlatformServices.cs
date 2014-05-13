@@ -6,12 +6,8 @@ namespace Narvalo.Mvp.Windows.Forms.Core
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class DefaultFormsPlatformServices : DefaultPlatformServices, IFormsPlatformServices 
+    public sealed class DefaultFormsPlatformServices : DefaultPlatformServices, IPlatformServices 
     {
-        Func<IMessageBus> _messageBusThunk = () => new MessageBus();
-
-        IMessageBus _messageBus;
-
         public DefaultFormsPlatformServices()
         {
             // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
@@ -21,21 +17,6 @@ namespace Narvalo.Mvp.Windows.Forms.Core
                     new IPresenterDiscoveryStrategy[] {
                         new AttributeBasedPresenterDiscoveryStrategy(),
                         new DefaultConventionBasedPresenterDiscoveryStrategy()}));
-        }
-
-        public IMessageBus MessageBus
-        {
-            get
-            {
-                return _messageBus ?? (_messageBus = _messageBusThunk());
-            }
-        }
-
-        public void SetMessageBus(Func<IMessageBus> thunk)
-        {
-            Require.NotNull(thunk, "thunk");
-
-            _messageBusThunk = thunk;
         }
     }
 }

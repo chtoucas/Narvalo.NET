@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Web.Core
     using System.Collections.Generic;
     using System.Web;
     using System.Web.UI;
+    using Narvalo.Mvp.Platforms;
 
     public static class HttpPresenterBinderFactory
     {
@@ -25,7 +26,7 @@ namespace Narvalo.Mvp.Web.Core
         public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
             HttpContext context,
-            IAspNetPlatformServices platformServices)
+            IPlatformServices platformServices)
         {
             Require.NotNull(platformServices, "platformServices");
 
@@ -35,7 +36,7 @@ namespace Narvalo.Mvp.Web.Core
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
-                platformServices.MessageCoordinatorFactory);
+                platformServices.MessageBusFactory);
         }
     }
 }

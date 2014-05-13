@@ -11,12 +11,8 @@ namespace Narvalo.Mvp.Web
     // You then do not have to worry about the order of the pub/sub events.
     // A good rule of thumb is to subscribe or publish messages during the Load event. 
     // IMPORTANT: After pre-render completes, the message bus is closed.
-    public interface IMessageCoordinator : IDisposable
+    public interface IMessageCoordinator : IMessageBus, IDisposable
     {
-        void Close();
-
-        void Publish<T>(T message);
-
-        void Subscribe<T>(Action<T> onNext);
+        //void Close();
     }
 }
