@@ -2,24 +2,18 @@
 
 namespace Narvalo.Mvp.CommandLine
 {
-    using System.ComponentModel;
-    using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Platforms;
-    using Narvalo.Mvp.CommandLine.Core;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.CommandLine.
     /// </summary>
-    public sealed class MvpBootstrapper : MvpConfiguration<MvpBootstrapper>
+    public sealed class MvpBootstrapper : MvpBootstrapper<MvpBootstrapper>
     {
-        public MvpBootstrapper() : this(new DefaultCommandsPlatformServices()) { }
-
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public MvpBootstrapper(IPlatformServices defaultServices) : base(defaultServices) { }
+        public MvpBootstrapper() : base(PlatformServices.Default) { }
 
         public void Run()
         {
-            CommandsPlatformServices.Current = CreatePlatformServices();
+            PlatformServices.Current = CreatePlatformServices();
         }
     }
 }

@@ -4,10 +4,8 @@ namespace Narvalo.Mvp.Web.Core
 {
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class DefaultMessageBusFactory : IMessageBusFactory
+    public sealed class AspNetMessageBusFactory : IMessageBusFactory
     {
-        public bool IsStatic { get { return false; } }
-
         public IMessageBus Create()
         {
             return new MessageCoordinator();

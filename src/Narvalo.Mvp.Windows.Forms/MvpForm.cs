@@ -5,7 +5,6 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.ComponentModel;
     using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Windows.Forms.Core;
 
     public partial class MvpForm : Form, IView
     {
@@ -24,7 +23,7 @@ namespace Narvalo.Mvp.Windows.Forms
                 // Remark: We can not use the "DesignMode" property in the constructor.
                 // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
 
-                _presenterBinder = FormsPresenterBinderFactory.Create(this);
+                _presenterBinder = PresenterBinderFactory.Create(this);
                 _presenterBinder.PerformBinding();
             }
         }

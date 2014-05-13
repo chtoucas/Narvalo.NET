@@ -23,29 +23,11 @@ namespace Narvalo.Mvp.Web.Core
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
 
-        bool _closed = false;
-
-        public bool Closed
-        {
-            get { return _closed; }
-        }
-
-        public void Close()
-        {
-            if (!_closed) {
-                __TraceNeverReceivedMessages();
-
-                // REVIEW
-                _handlers.Clear();
-                _messages.Clear();
-
-                _closed = true;
-            }
-        }
+        bool _disposed = false;
 
         public void Publish<T>(T message)
         {
-            ThrowIfClosed_();
+            ThrowIfDisposed_();
 
             AddMessage_(message);
             PushMessage_(message);
@@ -53,7 +35,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfClosed_();
+            ThrowIfDisposed_();
 
             Require.NotNull(onNext, "onNext");
 
@@ -107,6 +89,26 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
+        public void Dispose()
+        {
+            Dispose(true /* disposing */);
+            GC.SuppressFinalize(this);
+        }
+
+        void Dispose(bool disposing)
+        {
+            if (!_disposed) {
+                if (disposing) {
+                    __TraceNeverReceivedMessages();
+
+                    _handlers.Clear();
+                    _messages.Clear();
+                }
+
+                _disposed = true;
+            }
+        }
+
         [Conditional("TRACE")]
         void __TraceNeverReceivedMessages()
         {
@@ -120,9 +122,9 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        void ThrowIfClosed_()
+        void ThrowIfDisposed_()
         {
-            if (_closed) {
+            if (_disposed) {
                 throw new InvalidOperationException(
                     "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
             }

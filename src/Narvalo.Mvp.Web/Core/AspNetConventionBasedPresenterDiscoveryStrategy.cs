@@ -1,21 +1,26 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms.Core
+namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
-    using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Mvp.Resolvers;
 
-    public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
+            // Web Forms
             "UserControl",
             "Control",
-            "Form",
+            "Page",
+
+            // Core ASP.NET
+            "Handler",
+            "WebService",
+            "Service",
+
+            // Generic
             "View",
         };
 
@@ -27,22 +32,20 @@ namespace Narvalo.Mvp.Windows.Forms.Core
 
         readonly IPresenterDiscoveryStrategy _inner;
 
-        public DefaultConventionBasedPresenterDiscoveryStrategy()
-            : this(new[] { Assembly.GetEntryAssembly() }) { }
-
-        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
+        public AspNetConventionBasedPresenterDiscoveryStrategy()
         {
-            var typeResolver = new PresenterTypeResolver(
-                   new BuildManager(assemblies),
-                   assemblies.Select(_ => new AssemblyName(_.FullName).Name),
-                   ViewSuffixes_,
-                   PresenterNameTemplates_);
+            var typeResolver = new AspNetPresenterTypeResolver(
+                new AspNetBuildManager(),
+                // REVIEW
+                Enumerable.Empty<string>(),
+                ViewSuffixes_,
+                PresenterNameTemplates_);
 
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts, 
+            IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);

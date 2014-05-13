@@ -2,15 +2,11 @@
 
 namespace Narvalo.Mvp.PresenterBinding
 {
-    public class /*Default*/MessageBusFactory : IMessageBusFactory
+    public sealed class /*Default*/MessageBusFactory : IMessageBusFactory
     {
-        static readonly IMessageBus Unique_ = new MessageBus();
-
-        public bool IsStatic { get { return true; } }
-
         public IMessageBus Create()
         {
-            return Unique_;
+            return new MessageBus();
         }
     }
 }

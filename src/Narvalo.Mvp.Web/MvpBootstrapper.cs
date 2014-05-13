@@ -2,24 +2,19 @@
 
 namespace Narvalo.Mvp.Web
 {
-    using System.ComponentModel;
-    using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.Web.Core;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.Web.
     /// </summary>
-    public sealed class MvpBootstrapper : MvpConfiguration<MvpBootstrapper>
+    public sealed class MvpBootstrapper : MvpBootstrapper<MvpBootstrapper>
     {
-        public MvpBootstrapper() : this(new DefaultAspNetPlatformServices()) { }
-
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public MvpBootstrapper(IPlatformServices defaultServices) : base(defaultServices) { }
+        public MvpBootstrapper() : base(PlatformServices.Default) { }
 
         public void Run()
         {
-            AspNetPlatformServices.Current = CreatePlatformServices();
+            PlatformServices.Current = CreatePlatformServices();
         }
     }
 }

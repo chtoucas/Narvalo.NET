@@ -2,24 +2,18 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
-    using System.ComponentModel;
-    using Narvalo.Mvp.Configuration;
     using Narvalo.Mvp.Platforms;
-    using Narvalo.Mvp.Windows.Forms.Core;
 
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.WindowsForms.
     /// </summary>
-    public sealed class MvpBootstrapper : MvpConfiguration<MvpBootstrapper>
+    public sealed class MvpBootstrapper : MvpBootstrapper<MvpBootstrapper>
     {
-        public MvpBootstrapper() : this(new DefaultFormsPlatformServices()) { }
-
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public MvpBootstrapper(IPlatformServices defaultServices) : base(defaultServices) { }
+        public MvpBootstrapper() : base(PlatformServices.Default) { }
 
         public void Run()
         {
-            FormsPlatformServices.Current = CreatePlatformServices();
+            PlatformServices.Current = CreatePlatformServices();
         }
     }
 }

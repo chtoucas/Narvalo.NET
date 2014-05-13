@@ -1,30 +1,30 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.PresenterBinding
+namespace Narvalo.Mvp.CommandLine
 {
-    using System.Collections.Generic;
     using Narvalo;
     using Narvalo.Mvp.Platforms;
+    using Narvalo.Mvp.PresenterBinding;
 
     public static class PresenterBinderFactory
     {
-        public static PresenterBinder Create(IEnumerable<object> hosts)
+        public static PresenterBinder Create(ICommand command)
         {
-            return PresenterBinderFactory.Create(hosts, PlatformServices.Current);
+            return Create(command, PlatformServices.Current);
         }
 
-        public static PresenterBinder Create(
-            IEnumerable<object> hosts,
+        internal static PresenterBinder Create(
+            ICommand command,
             IPlatformServices platformServices)
         {
-            Require.NotNull(platformServices, "platformServices");
+            DebugCheck.NotNull(platformServices);
 
             return new PresenterBinder(
-                hosts,
+                new[] { command },
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
-                platformServices.MessageBusFactory);
+                MessageBusBlackhole.Instance);
         }
     }
 }

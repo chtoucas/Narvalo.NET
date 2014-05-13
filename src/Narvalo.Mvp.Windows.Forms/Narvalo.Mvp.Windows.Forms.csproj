@@ -69,12 +69,10 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="Core\FormsPlatformServicesVirtualProxy.cs" />
-    <Compile Include="Core\FormsPlatformServices.cs" />
+    <Compile Include="PlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="Core\DefaultFormsPlatformServices.cs" />
-    <Compile Include="Core\FormsPresenterBinderFactory.cs" />
-    <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinderFactory.cs" />
+    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="MvpForm.cs">
       <SubType>Form</SubType>
     </Compile>

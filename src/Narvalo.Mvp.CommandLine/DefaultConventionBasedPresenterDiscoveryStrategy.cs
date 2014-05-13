@@ -1,26 +1,19 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Web.Core
+namespace Narvalo.Mvp.CommandLine
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
+    using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Resolvers;
 
     public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
-            // Web Forms
-            "UserControl",
-            "Control",
-            "Page",
-
-            // Core ASP.NET
-            "Handler",
-            "WebService",
-            "Service",
-
-            // Generic
+            "Command",
             "View",
         };
 
@@ -33,13 +26,18 @@ namespace Narvalo.Mvp.Web.Core
         readonly IPresenterDiscoveryStrategy _inner;
 
         public DefaultConventionBasedPresenterDiscoveryStrategy()
+            : this(Assembly.GetEntryAssembly()) { }
+
+        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly assembly)
+            : this(new[] { assembly }) { }
+
+        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
-            var typeResolver = new AspNetPresenterTypeResolver(
-                new AspNetBuildManager(),
-                // REVIEW
-                Enumerable.Empty<string>(),
-                ViewSuffixes_,
-                PresenterNameTemplates_);
+            var typeResolver = new PresenterTypeResolver(
+                   new BuildManager(assemblies),
+                   assemblies.Select(_ => new AssemblyName(_.FullName).Name),
+                   ViewSuffixes_,
+                   PresenterNameTemplates_);
 
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }

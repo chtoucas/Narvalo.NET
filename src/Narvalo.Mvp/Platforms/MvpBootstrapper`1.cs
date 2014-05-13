@@ -1,14 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Configuration
+namespace Narvalo.Mvp.Platforms
 {
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
-    public class MvpConfiguration<T> where T : MvpConfiguration<T>
+    public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>
     {
         readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
@@ -19,9 +18,7 @@ namespace Narvalo.Mvp.Configuration
         IMessageBusFactory _messageBusFactory;
         IPresenterFactory _presenterFactory;
 
-        public MvpConfiguration() : this(new DefaultPlatformServices()) { }
-
-        public MvpConfiguration(IPlatformServices defaultServices)
+        protected MvpBootstrapper(IPlatformServices defaultServices)
         {
             Require.NotNull(defaultServices, "defaultServices");
 

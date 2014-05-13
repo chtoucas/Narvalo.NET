@@ -16,7 +16,7 @@ Changes from the original "Web Forms Mvp"
 
 - Use ConcurrentDictionary instead of Dictionary for type caching.
 
-- Several possibilities of customization via Configuration/MvpBootstrapper.
+- Several points of extensibility.
 
 ### Remarks
 

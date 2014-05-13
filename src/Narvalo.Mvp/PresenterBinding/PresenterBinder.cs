@@ -16,11 +16,9 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IEnumerable<object> _hosts;
 
         readonly ICompositeViewFactory _compositeViewFactory;
-        readonly IMessageBusFactory _messageBusFactory;
+        readonly IMessageBus _messageBus;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
-
-        readonly IMessageBus _messageBus;
 
         bool _bindingCompleted = false;
 
@@ -29,21 +27,19 @@ namespace Narvalo.Mvp.PresenterBinding
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
             ICompositeViewFactory compositeViewFactory,
-            IMessageBusFactory messageBusFactory)
+            IMessageBus messageBus)
         {
             Require.NotNull(hosts, "hosts");
             Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
             Require.NotNull(presenterFactory, "presenterFactory");
             Require.NotNull(compositeViewFactory, "compositeViewFactory");
-            Require.NotNull(messageBusFactory, "messageBusFactory");
+            Require.NotNull(messageBus, "messageBus");
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
             _presenterFactory = presenterFactory;
             _compositeViewFactory = compositeViewFactory;
-            _messageBusFactory = messageBusFactory;
-
-            _messageBus = _messageBusFactory.Create();
+            _messageBus = messageBus;
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);

@@ -68,17 +68,15 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="Configuration\MvpBootstrapper.cs" />
     <Compile Include="IMessageBus.cs" />
-    <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="Internal\IPresenter.cs" />
     <Compile Include="MessageBus.cs" />
+    <Compile Include="MessageBusBlackhole.cs" />
     <Compile Include="Platforms\LazyValueHolder`1.cs" />
-    <Compile Include="Platforms\PlatformServices.cs" />
+    <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
     <Compile Include="PresenterBinding\IMessageBusFactory.cs" />
     <Compile Include="PresenterBinding\MessageBusFactory.cs" />
-    <Compile Include="PresenterBinding\PresenterBinderFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
     <Compile Include="Presenter`1.cs">
       <SubType>Code</SubType>
@@ -88,12 +86,11 @@
     <Compile Include="Resolvers\IPresenterBindingAttributesResolver.cs" />
     <Compile Include="Resolvers\IPresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\IPresenterTypeResolver.cs" />
-    <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
     <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Configuration\Appender`1.cs" />
-    <Compile Include="Configuration\Setter`1.cs" />
+    <Compile Include="Platforms\Appender`1.cs" />
+    <Compile Include="Platforms\Setter`1.cs" />
     <Compile Include="Resolvers\BuildManager.cs" />
     <Compile Include="Resolvers\IBuildManager.cs" />
     <Compile Include="Resolvers\CachedPresenterTypeResolver.cs" />
@@ -126,7 +123,7 @@
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IView`1.cs" />
-    <Compile Include="Configuration\MvpConfiguration.cs" />
+    <Compile Include="Platforms\MvpBootstrapper`1.cs" />
     <Compile Include="PresenterBindingException.cs" />
     <Compile Include="MvpException.cs" />
     <Compile Include="PresenterBindingAttribute.cs" />

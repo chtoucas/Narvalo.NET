@@ -70,18 +70,17 @@
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="Core\AspNetBuildManager.cs" />
-    <Compile Include="Core\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Core\AspNetPlatformServices.cs" />
-    <Compile Include="Core\DefaultAspNetPlatformServices.cs" />
+    <Compile Include="Core\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\IMessageCoordinator.cs" />
+    <Compile Include="Core\PlatformServices.cs" />
     <Compile Include="IAsyncTaskManager.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="Core\AspNetPlatformServicesVirtualProxy.cs" />
     <Compile Include="Core\HttpPresenterBinderFactory.cs" />
     <Compile Include="HttpPresenter`1.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Internal\IHttpPresenter.cs" />
-    <Compile Include="Core\DefaultMessageBusFactory.cs" />
+    <Compile Include="Core\AspNetMessageBusFactory.cs" />
     <Compile Include="Core\MessageCoordinator.cs" />
     <Compile Include="Core\AspNetPresenterTypeResolver.cs" />
     <Compile Include="Core\HttpPresenterBinder.cs" />
