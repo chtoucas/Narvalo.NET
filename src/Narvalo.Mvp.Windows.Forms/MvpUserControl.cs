@@ -2,7 +2,7 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
-    using System.ComponentModel;
+    using System;
     using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
 
@@ -18,14 +18,6 @@ namespace Narvalo.Mvp.Windows.Forms
         protected MvpUserControl(bool throwIfNoPresenterBound)
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
-
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) {
-                // Remark: We can not use the "DesignMode" property in the constructor.
-                // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
-
-                _presenterBinder = PresenterBinderFactory.Create(this);
-                _presenterBinder.PerformBinding();
-            }
         }
 
         public bool ThrowIfNoPresenterBound
@@ -33,10 +25,24 @@ namespace Narvalo.Mvp.Windows.Forms
             get { return _throwIfNoPresenterBound; }
         }
 
+        protected override void OnCreateControl()
+        {
+            if (!DesignMode) {
+                var form = FindForm();
+
+                if (!(form is MvpForm)) {
+                    _presenterBinder = PresenterBinderFactory.Create(this);
+                    _presenterBinder.PerformBinding();
+                }
+            }
+
+            base.OnCreateControl();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (!_disposed) {
-                if (disposing) {
+                if (disposing && _presenterBinder != null) {
                     _presenterBinder.Release();
                     _presenterBinder = null;
                 }
@@ -46,22 +52,5 @@ namespace Narvalo.Mvp.Windows.Forms
 
             base.Dispose(disposing);
         }
-
-        //// REVIEW: Use a different execution point in the windows forms lifecycle.
-        //protected override void OnCreateControl()
-        //{
-        //    if (!DesignMode) {
-        //        var form = FindForm();
-
-        //        if (form == null) {
-        //            throw new InvalidOperationException(
-        //                "Controls can only be registered once they have been added to the live control tree.");
-        //        }
-
-        //        FormHost.Register(form).RegisterView(this);
-        //    }
-
-        //    base.OnCreateControl();
-        //}
     }
 }

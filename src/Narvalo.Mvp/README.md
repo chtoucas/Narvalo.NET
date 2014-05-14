@@ -28,14 +28,12 @@ Changes from the original "Web Forms Mvp"
 TODO (by order of priority)
 ---------------------------
 
-- MessageCoordinator per binding operation for the Desktop.
-
 - Tests. We can start by porting the tests from WebFormsMvp.
 
 - Add support for
   * ASP.NET WebForms, cf. src/Narvalo.Mvp.Web, almost done.
   * CommandLine, cf. src/Narvalo.Mvp.CommandLine, already functional.
-  * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, already functional.
+  * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, not yet ready.
   * WPF, not yet started.
 
 - Using custom presenter types per platform prevents the reuse

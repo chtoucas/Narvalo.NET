@@ -33,6 +33,16 @@ namespace Narvalo.Mvp.Windows.Forms
             get { return _throwIfNoPresenterBound; }
         }
 
+        protected override void OnControlAdded(ControlEventArgs e)
+        {
+            var view = e.Control as IView;
+            if (!DesignMode && view != null) {
+                _presenterBinder.RegisterView(view);
+            }
+
+            base.OnControlAdded(e);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (!_disposed) {

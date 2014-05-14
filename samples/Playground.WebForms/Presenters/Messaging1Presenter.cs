@@ -2,11 +2,10 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Web;
     using Playground.WebForms.Domain;
     using Playground.WebForms.Views.Models;
 
-    public class Messaging1Presenter : HttpPresenterOf<MessagingModel>
+    public class Messaging1Presenter : PresenterOf<MessagingModel>
     {
         public Messaging1Presenter(IView<MessagingModel> view)
             : base(view)
