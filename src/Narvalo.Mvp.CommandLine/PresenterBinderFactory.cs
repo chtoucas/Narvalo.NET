@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.CommandLine
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
-                MessageCoordinatorBlackHole.Instance);
+                MessageCoordinator.BlackHole);
         }
     }
 }

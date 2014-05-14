@@ -3,21 +3,27 @@
 namespace Narvalo.Mvp
 {
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics.CodeAnalysis;
 
-    public sealed class /*Default*/MessageCoordinator : IMessageCoordinator
+    public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
-        readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
-            = new ConcurrentDictionary<Type, IList<Action<object>>>();
+        readonly bool _closeable;
         readonly Object _lock = new Object();
 
         bool _closed = false;
 
+        public MessageCoordinator() : this(closeable: true) { }
+
+        protected MessageCoordinator(bool closeable)
+        {
+            _closeable = closeable;
+        }
+
+        public static MessageCoordinator BlackHole { get { return BlackHole_.Instance; } }
+
         public void Close()
         {
-            if (_closed) { return; }
+            if (!_closeable || _closed) { return; }
 
             lock (_lock) {
                 if (_closed) { return; }
@@ -30,36 +36,58 @@ namespace Narvalo.Mvp
         {
             ThrowIfClosed_();
 
-            var messageType = typeof(T);
-
-            var handlersForT = from t in _handlers.Keys
-                               where t.IsAssignableFrom(messageType)
-                               from handler in _handlers[t]
-                               select handler;
-
-            foreach (var handler in handlersForT) {
-                handler(message);
-            }
+            PublishCore(message);
         }
 
         public void Subscribe<T>(Action<T> onNext)
         {
             ThrowIfClosed_();
 
-            Require.NotNull(onNext, "onNext");
+            SubscribeCore(onNext);
+        }
 
-            var handlersForT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
+        protected virtual void PublishCore<T>(T message)
+        {
+            __Tracer.Warning(typeof(MessageCoordinator),
+                "All messages published to this bus are dropped.");
+        }
 
-            lock (handlersForT) {
-                handlersForT.Add(_ => onNext((T)_));
-            }
+        protected virtual void SubscribeCore<T>(Action<T> onNext)
+        {
+            __Tracer.Warning(typeof(MessageCoordinator),
+                "Even if subscription is allowed, no messages will be ever received.");
         }
 
         void ThrowIfClosed_()
         {
             if (_closed) {
                 throw new InvalidOperationException(
-                    "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
+                    "Messages can't be published or subscribed to after the message bus has been closed.");
+            }
+        }
+
+        class BlackHole_ : MessageCoordinator
+        {
+            // NB: Since we choose a singleton, we disable the ability to close this message bus.
+            BlackHole_() : base(closeable: false) { }
+
+            public static BlackHole_ Instance { get { return Singleton.Instance; } }
+
+            protected override void PublishCore<T>(T message) { }
+
+            protected override void SubscribeCore<T>(Action<T> onNext) { }
+
+            [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+                Justification = "Implementation of lazy initialized singleton.")]
+            class Singleton
+            {
+                // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
+                [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
+                   Justification = "Implementation of lazy initialized singleton.")]
+                static Singleton() { }
+
+                internal static readonly BlackHole_ Instance
+                    = new BlackHole_();
             }
         }
     }

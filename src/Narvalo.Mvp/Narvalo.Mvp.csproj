@@ -72,7 +72,6 @@
     <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="Internal\IPresenter.cs" />
     <Compile Include="MessageCoordinator.cs" />
-    <Compile Include="MessageCoordinatorBlackHole.cs" />
     <Compile Include="Platforms\LazyValueHolder`1.cs" />
     <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
     <Compile Include="PresenterBinding\IMessageCoordinatorFactory.cs" />

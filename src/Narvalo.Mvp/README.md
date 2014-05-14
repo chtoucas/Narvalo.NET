@@ -20,10 +20,10 @@ Changes from the original "Web Forms Mvp"
 
 ### Remarks
 
-- Support for IOC (Autofac) is provided in src/Narvalo.Mvp.Extras. Since
-  it is identical to what is done in WebFormsMvp, I do not intend to make it
-  an official package. Just copy and adapt the code from WebFormsMvp. The same
-  applies to StructureMap, Castle or Unity.
+- Support for IOC (at least Autofac) is provided in src/Narvalo.Mvp.Extras. 
+  Since it is identical to what is done in WebFormsMvp, I do not intend to make
+  it an official package. Just copy and adapt the code from WebFormsMvp.
+  The same applies to StructureMap, Castle or Unity.
 
 TODO (by order of priority)
 ---------------------------
@@ -42,7 +42,8 @@ TODO (by order of priority)
   redirect, a solution might be in the Navigator (see below), but for the
   rest???). Maybe is it a necessary evil...?
 
-- Add support for AppController, Navigator.
+- Add support for AppController, Navigator, EventAggregator (not the same
+  as cross-presenter communication).
 
 - Samples, cf. samples/Playground.WebForms.
 

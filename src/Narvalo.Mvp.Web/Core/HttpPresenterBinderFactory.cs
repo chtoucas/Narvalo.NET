@@ -17,7 +17,7 @@ namespace Narvalo.Mvp.Web.Core
                 new[] { httpHandler },
                 context,
                 PlatformServices.Current,
-                MessageCoordinatorBlackHole.Instance);
+                MessageCoordinator.BlackHole);
         }
 
         public static HttpPresenterBinder Create(

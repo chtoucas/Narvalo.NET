@@ -5,8 +5,8 @@ namespace Narvalo.Mvp
     using System;
 
     // Meant to be a message bus to enable cross-presenter communication.
-    // The message bus will be shared only by the presenters bound during 
-    // the same binding operation and it will automatically closed when 
+    // The message bus is shared only by the presenters bound during 
+    // the same binding operation. It is automatically closed when 
     // the binder is released.
     public interface IMessageCoordinator
     {
