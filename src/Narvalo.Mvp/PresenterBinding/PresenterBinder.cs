@@ -16,10 +16,9 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IEnumerable<object> _hosts;
 
         readonly ICompositeViewFactory _compositeViewFactory;
+        readonly IMessageCoordinator _messageCoordinator;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
-
-        IMessageCoordinator _messageCoordinator;
 
         bool _bindingCompleted = false;
 

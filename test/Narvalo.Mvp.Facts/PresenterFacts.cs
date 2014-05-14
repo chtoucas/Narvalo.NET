@@ -1,6 +1,7 @@
 ﻿namespace Narvalo.Mvp
 {
     using System;
+    using Moq;
     using Xunit;
 
     public static class PresenterFacts
@@ -17,19 +18,20 @@
                 // Assert
                 Assert.Null(view.Model);
             }
+
+            [Fact]
+            public static void ShouldSupportNonModelBasedViews()
+            {
+                // Arrange
+                var view = new Mock<IView>().Object;
+
+                // Act
+                var presenter = new TestPresenter(view);
+
+                // Assert
+                Assert.Same(view, presenter.View);
+            }
         }
-
-        //[Fact]
-        //public void Presenter_Constructor_ShouldSupportNonModelBasedViews()
-        //{
-        //    // Arrange
-        //    IView view = null; // MockRepository.GenerateMock<IView>();
-
-        //    // Act
-        //    new TestPresenter(view);
-
-        //    // Assert
-        //}
 
         //[Fact]
         //public void Presenter_Cache_ReturnsCacheFromHttpContext()
