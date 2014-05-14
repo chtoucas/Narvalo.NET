@@ -8,14 +8,26 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public static class PresenterBinderFactory
     {
-        public static PresenterBinder Create(Control control)
+        public static PresenterBinder Create(MvpForm form)
         {
-            return Create(control, PlatformServices.Current);
+            return Create(
+                form,
+                PlatformServices.Current,
+                PlatformServices.Current.MessageCoordinatorFactory.Create());
+        }
+
+        public static PresenterBinder Create(MvpUserControl control)
+        {
+            return Create(
+                control, 
+                PlatformServices.Current, 
+                MessageCoordinatorBlackHole.Instance);
         }
 
         internal static PresenterBinder Create(
             Control control,
-            IPlatformServices platformServices)
+            IPlatformServices platformServices,
+            IMessageCoordinator messageCoordinator)
         {
             DebugCheck.NotNull(platformServices);
 
@@ -24,7 +36,7 @@ namespace Narvalo.Mvp.Windows.Forms
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
-                PlatformServices.Current.MessageCoordinatorFactory.Create());
+                messageCoordinator);
         }
     }
 }

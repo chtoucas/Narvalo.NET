@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Web.Core
     public static class HttpPresenterBinderFactory
     {
         public static HttpPresenterBinder Create(
-            IHttpHandler httpHandler,
+            MvpHttpHandler httpHandler,
             HttpContext context)
         {
             return Create(

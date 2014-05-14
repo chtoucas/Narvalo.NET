@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.CommandLine
 
     public static class PresenterBinderFactory
     {
-        public static PresenterBinder Create(ICommand command)
+        public static PresenterBinder Create(MvpCommand command)
         {
             return Create(command, PlatformServices.Current);
         }
