@@ -2,8 +2,8 @@
 
 namespace Narvalo.Mvp.PresenterBinding
 {
-    public interface IMessageBusFactory
+    public interface IMessageCoordinatorFactory
     {
-        IMessageBus Create();
+        IMessageCoordinator Create();
     }
 }

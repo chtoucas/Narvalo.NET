@@ -4,6 +4,6 @@ namespace Narvalo.Mvp
 {
     public interface IPresenter
     {
-        IMessageBus Messages { get; }
+        IMessageCoordinator Messages { get; }
     }
 }

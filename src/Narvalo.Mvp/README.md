@@ -28,6 +28,8 @@ Changes from the original "Web Forms Mvp"
 TODO (by order of priority)
 ---------------------------
 
+- MessageCoordinator per binding operation for the Desktop.
+
 - Tests. We can start by porting the tests from WebFormsMvp.
 
 - Add support for

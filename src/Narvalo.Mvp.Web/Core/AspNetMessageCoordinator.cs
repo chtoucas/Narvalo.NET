@@ -15,19 +15,33 @@ namespace Narvalo.Mvp.Web.Core
     // When a message is published, it will be handled by all present AND future handlers.
     // You then do not have to worry about the order of the pub/sub events.
     // A good rule of thumb is to subscribe or publish messages during the Load event. 
-    // IMPORTANT: After pre-render completes, the message bus is closed.
-    public sealed class MessageCoordinator : IMessageCoordinator
+    // NB: After pre-render completes, the message bus is closed.
+    public sealed class AspNetMessageCoordinator : IMessageCoordinator
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
+        readonly Object _lock = new Object();
 
-        bool _disposed = false;
+        bool _closed = false;
+
+        public void Close()
+        {
+            if (_closed) { return; }
+
+            lock (_lock) {
+                if (_closed) { return; }
+
+                _closed = true;
+            }
+
+            __TraceNeverReceivedMessages();
+        }
 
         public void Publish<T>(T message)
         {
-            ThrowIfDisposed_();
+            ThrowIfClosed_();
 
             AddMessage_(message);
             PushMessage_(message);
@@ -35,7 +49,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfDisposed_();
+            ThrowIfClosed_();
 
             Require.NotNull(onNext, "onNext");
 
@@ -89,26 +103,6 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true /* disposing */);
-            GC.SuppressFinalize(this);
-        }
-
-        void Dispose(bool disposing)
-        {
-            if (!_disposed) {
-                if (disposing) {
-                    __TraceNeverReceivedMessages();
-
-                    _handlers.Clear();
-                    _messages.Clear();
-                }
-
-                _disposed = true;
-            }
-        }
-
         [Conditional("TRACE")]
         void __TraceNeverReceivedMessages()
         {
@@ -116,15 +110,15 @@ namespace Narvalo.Mvp.Web.Core
 
             foreach (var type in neverReceivedMessages) {
                 __Tracer.Warning(
-                    typeof(MessageCoordinator),
+                    typeof(AspNetMessageCoordinator),
                     @"You published a message of type ""{0}"" but you did not registered any handler for it.",
                     type.FullName);
             }
         }
 
-        void ThrowIfDisposed_()
+        void ThrowIfClosed_()
         {
-            if (_disposed) {
+            if (_closed) {
                 throw new InvalidOperationException(
                     "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
             }

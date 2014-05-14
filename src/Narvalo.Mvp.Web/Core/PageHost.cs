@@ -33,7 +33,7 @@ namespace Narvalo.Mvp.Web.Core
             page.InitComplete += (sender, e) => _presenterBinder.PerformBinding();
 
             // Ensures that any attempt to use the message bus fails after pre-rendering completes.
-            page.PreRenderComplete += (sender, e) => _presenterBinder.CloseMessageBus();
+            page.PreRenderComplete += (sender, e) => _presenterBinder.MessageCoordinator.Close();
 
             // On unloading the page, release the binder.
             page.Unload += (sender, e) => _presenterBinder.Release();

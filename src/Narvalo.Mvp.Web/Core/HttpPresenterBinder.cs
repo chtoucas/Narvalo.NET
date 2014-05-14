@@ -9,9 +9,8 @@ namespace Narvalo.Mvp.Web.Core
     public sealed class HttpPresenterBinder : PresenterBinder
     {
         readonly HttpContext _context;
-        readonly IMessageCoordinator _messageCoordinator;
 
-        internal HttpPresenterBinder(
+        public HttpPresenterBinder(
             IEnumerable<object> hosts,
             HttpContext context,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
@@ -28,20 +27,6 @@ namespace Narvalo.Mvp.Web.Core
             Require.NotNull(context, "context");
 
             _context = context;
-
-            _messageCoordinator = messageCoordinator;
-        }
-
-        public override void Release()
-        {
-            CloseMessageBus();
-
-            base.Release();
-        }
-
-        internal void CloseMessageBus()
-        {
-            _messageCoordinator.Dispose();
         }
 
         protected override void OnPresenterCreated(PresenterCreatedEventArgs args)

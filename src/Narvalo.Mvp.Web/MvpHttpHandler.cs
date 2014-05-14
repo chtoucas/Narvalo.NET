@@ -17,6 +17,13 @@ namespace Narvalo.Mvp.Web
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
+        public event EventHandler Load;
+
+        public virtual bool IsReusable
+        {
+            get { return false; }
+        }
+
         public bool ThrowIfNoPresenterBound
         {
             get { return _throwIfNoPresenterBound; }
@@ -30,13 +37,6 @@ namespace Narvalo.Mvp.Web
             OnLoad();
 
             presenterBinder.Release();
-        }
-
-        public event EventHandler Load;
-
-        public virtual bool IsReusable
-        {
-            get { return false; }
         }
 
         protected virtual void OnLoad()

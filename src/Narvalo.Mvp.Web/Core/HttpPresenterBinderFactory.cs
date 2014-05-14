@@ -2,7 +2,6 @@
 
 namespace Narvalo.Mvp.Web.Core
 {
-    using System;
     using System.Collections.Generic;
     using System.Web;
     using System.Web.UI;
@@ -18,25 +17,18 @@ namespace Narvalo.Mvp.Web.Core
                 new[] { httpHandler },
                 context,
                 PlatformServices.Current,
-                MessageCoordinatorBlackhole_.Instance);
+                MessageCoordinatorBlackHole.Instance);
         }
 
         public static HttpPresenterBinder Create(
             IEnumerable<Control> controls,
             HttpContext context)
         {
-            var messageBus = PlatformServices.Current.MessageBusFactory.Create();
-            var messageCoordinator = messageBus as IMessageCoordinator;
-            if (messageCoordinator == null) {
-                throw new NotSupportedException(
-                    "The HTTP presenter binder requires the message bus to implement IMessageCoordinator.");
-            }
-
             return Create(
                 controls,
                 context,
                 PlatformServices.Current,
-                messageCoordinator);
+                PlatformServices.Current.MessageCoordinatorFactory.Create());
         }
 
         internal static HttpPresenterBinder Create(
@@ -54,25 +46,6 @@ namespace Narvalo.Mvp.Web.Core
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
                 messageCoordinator);
-        }
-
-        class MessageCoordinatorBlackhole_ : IMessageCoordinator
-        {
-            static readonly IMessageCoordinator Instance_ = new MessageCoordinatorBlackhole_();
-
-            public static IMessageCoordinator Instance { get { return Instance_; } }
-
-            public void Publish<T>(T message)
-            {
-                throw new NotSupportedException();
-            }
-
-            public void Subscribe<T>(Action<T> onNext)
-            {
-                throw new NotSupportedException();
-            }
-
-            public void Dispose() { }
         }
     }
 }

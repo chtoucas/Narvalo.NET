@@ -14,11 +14,11 @@ namespace Narvalo.Mvp
             _view = view;
         }
 
-        public IMessageBus Messages { get; private set; }
+        public IMessageCoordinator Messages { get; private set; }
 
         public TView View { get { return _view; } }
 
-        IMessageBus Internal.IPresenter.Messages
+        IMessageCoordinator Internal.IPresenter.Messages
         {
             set { Messages = value; }
         }

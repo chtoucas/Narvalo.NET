@@ -4,6 +4,6 @@ namespace Narvalo.Mvp.Internal
 {
     internal interface IPresenter
     {
-        IMessageBus Messages { set; }
+        IMessageCoordinator Messages { set; }
     }
 }

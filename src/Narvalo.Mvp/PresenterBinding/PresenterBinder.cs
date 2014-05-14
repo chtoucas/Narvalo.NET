@@ -16,9 +16,10 @@ namespace Narvalo.Mvp.PresenterBinding
         readonly IEnumerable<object> _hosts;
 
         readonly ICompositeViewFactory _compositeViewFactory;
-        readonly IMessageBus _messageBus;
         readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         readonly IPresenterFactory _presenterFactory;
+
+        IMessageCoordinator _messageCoordinator;
 
         bool _bindingCompleted = false;
 
@@ -27,19 +28,19 @@ namespace Narvalo.Mvp.PresenterBinding
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IPresenterFactory presenterFactory,
             ICompositeViewFactory compositeViewFactory,
-            IMessageBus messageBus)
+            IMessageCoordinator messageCoordinator)
         {
             Require.NotNull(hosts, "hosts");
             Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
             Require.NotNull(presenterFactory, "presenterFactory");
             Require.NotNull(compositeViewFactory, "compositeViewFactory");
-            Require.NotNull(messageBus, "messageBus");
+            Require.NotNull(messageCoordinator, "messageCoordinator");
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
             _presenterFactory = presenterFactory;
             _compositeViewFactory = compositeViewFactory;
-            _messageBus = messageBus;
+            _messageCoordinator = messageCoordinator;
 
             foreach (var selfHostedView in hosts.OfType<IView>()) {
                 RegisterView(selfHostedView);
@@ -48,7 +49,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
 
-        public IMessageBus MessageBus { get { return _messageBus; } }
+        public IMessageCoordinator MessageCoordinator { get { return _messageCoordinator; } }
 
         public void PerformBinding()
         {
@@ -83,6 +84,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public virtual void Release()
         {
+            MessageCoordinator.Close();
+
             lock (_presenters) {
                 foreach (var presenter in _presenters) {
                     _presenterFactory.Release(presenter);
@@ -98,7 +101,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var ipresenter = presenter as Internal.IPresenter;
             if (ipresenter != null) {
-                ipresenter.Messages = _messageBus;
+                ipresenter.Messages = _messageCoordinator;
             }
 
             OnPresenterCreated(new PresenterCreatedEventArgs(presenter));

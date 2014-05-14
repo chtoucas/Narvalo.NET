@@ -8,9 +8,6 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public static class PresenterBinderFactory
     {
-        readonly static IMessageBus MessageBus_
-            = PlatformServices.Current.MessageBusFactory.Create();
-
         public static PresenterBinder Create(Control control)
         {
             return Create(control, PlatformServices.Current);
@@ -27,7 +24,7 @@ namespace Narvalo.Mvp.Windows.Forms
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
-                MessageBus_);
+                PlatformServices.Current.MessageCoordinatorFactory.Create());
         }
     }
 }

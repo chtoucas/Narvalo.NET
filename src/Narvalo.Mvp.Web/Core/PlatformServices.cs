@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             public DefaultPlatformServices_()
             {
-                SetMessageBusFactory(() => new AspNetMessageBusFactory());
+                SetMessageCoordinatorFactory(() => new AspNetMessageCoordinatorFactory());
 
                 // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
                 // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.

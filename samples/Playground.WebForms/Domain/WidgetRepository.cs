@@ -2,115 +2,57 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Linq;
-    using System.Data.SqlClient;
-    using System.Linq;
-
-    // Temporary fake class.
-    public class SiteDbDataContext : DataContext
-    {
-        public SiteDbDataContext() : base(String.Empty) { }
-
-        public IQueryable<Widget> Widgets { get { throw new NotImplementedException(); } }
-    }
 
     public class WidgetRepository : IWidgetRepository
     {
-        SqlCommand _beginFindCmd = null;
-
-        SiteDbDataContext DataContext { get { throw new NotImplementedException(); } }
-
         public Widget Find(int id)
         {
-            Widget widget = (from w in DataContext.Widgets where w.Id == id select w).SingleOrDefault();
-
-            return widget;
+            throw new NotImplementedException();
         }
 
-        public IAsyncResult BeginFind(int id, AsyncCallback callback, Object asyncState)
+        public IAsyncResult BeginFind(int id, AsyncCallback callback, object asyncState)
         {
-            var query = from w in DataContext.Widgets where w.Id == id select w;
-            _beginFindCmd = DataContext.GetCommand(query) as SqlCommand;
-            DataContext.Connection.Open();
-
-            return _beginFindCmd.BeginExecuteReader(callback, asyncState, CommandBehavior.CloseConnection);
+            throw new NotImplementedException();
         }
 
         public Widget EndFind(IAsyncResult result)
         {
-            var rdr = _beginFindCmd.EndExecuteReader(result);
-            var widget = (from w in DataContext.Translate<Widget>(rdr) select w).SingleOrDefault();
-            rdr.Close();
-
-            return widget;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Widget> FindAll()
         {
-            return from w in DataContext.Widgets select w;
+            throw new NotImplementedException();
         }
 
-        SqlCommand _beginFindAllCmd = null;
-
-        public IAsyncResult BeginFindAll(AsyncCallback callback, Object asyncState)
+        public IAsyncResult BeginFindAll(AsyncCallback callback, object asyncState)
         {
-            var query = from w in DataContext.Widgets select w;
-            _beginFindAllCmd = DataContext.GetCommand(query) as SqlCommand;
-            DataContext.Connection.Open();
-
-            return _beginFindAllCmd.BeginExecuteReader(callback, asyncState, CommandBehavior.CloseConnection);
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Widget> EndFindAll(IAsyncResult result)
         {
-            var rdr = _beginFindAllCmd.EndExecuteReader(result);
-            var widgets = (from w in DataContext.Translate<Widget>(rdr) select w).ToList();
-            rdr.Close();
-            return widgets;
+            throw new NotImplementedException();
         }
 
         public Widget FindByName(string name)
         {
-            Widget widget = (from w in DataContext.Widgets where w.Name == name select w).SingleOrDefault();
-
-            return widget;
+            throw new NotImplementedException();
         }
 
-        SqlCommand _beginFindByNameCmd = null;
-
-        public IAsyncResult BeginFindByName(string name, AsyncCallback callback, Object asyncState)
+        public IAsyncResult BeginFindByName(string name, AsyncCallback callback, object asyncState)
         {
-            var query = from w in DataContext.Widgets where w.Name == name select w;
-            _beginFindByNameCmd = DataContext.GetCommand(query) as SqlCommand;
-            DataContext.Connection.Open();
-
-            return _beginFindByNameCmd.BeginExecuteReader(callback, asyncState, CommandBehavior.CloseConnection);
+            throw new NotImplementedException();
         }
 
         public Widget EndFindByName(IAsyncResult result)
         {
-            var rdr = _beginFindByNameCmd.EndExecuteReader(result);
-            var widget = (from w in DataContext.Translate<Widget>(rdr) select w).SingleOrDefault();
-            rdr.Close();
-
-            return widget;
+            throw new NotImplementedException();
         }
 
         public void Save(Widget widget, Widget originalWidget)
         {
             throw new NotImplementedException();
-
-            //if (widget.Id > 0) {
-            //    // Update
-            //    DataContext.Widgets.Attach(widget, originalWidget);
-            //}
-            //else {
-            //    // Create
-            //    DataContext.Widgets.InsertOnSubmit(widget);
-            //}
-
-            //DataContext.SubmitChanges();
         }
     }
 }
