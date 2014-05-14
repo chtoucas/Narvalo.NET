@@ -4,7 +4,5 @@
     using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public partial class CompositeControl : MvpUserControl<CompositeDemoViewModel>, ICompositeDemoView
-    {
-    }
+    public partial class CompositeControl : MvpUserControl<CompositeDemoViewModel>, ICompositeDemoView { }
 }

@@ -9,7 +9,5 @@
         typeof(SharedPresenter),
         ViewType = typeof(IView<SharedPresenterViewModel>),
         BindingMode = PresenterBindingMode.SharedPresenter)]
-    public partial class SharedPresenterControl : MvpUserControl<SharedPresenterViewModel>
-    {
-    }
+    public partial class SharedPresenterControl : MvpUserControl<SharedPresenterViewModel> { }
 }

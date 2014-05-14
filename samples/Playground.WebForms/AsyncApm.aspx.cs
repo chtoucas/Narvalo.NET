@@ -2,5 +2,5 @@
 {
     using System.Web.UI;
 
-    public partial class AsyncMessagesPage : Page { }
+    public partial class AsyncApmPage : Page { }
 }

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="Messaging.aspx.cs"
- Inherits="Playground.WebForms.MessagingPage" %>
+﻿<%@ Page Language="C#" CodeBehind="Messaging.aspx.cs" Inherits="Playground.WebForms.MessagingPage" %>
 
 <%@ Register Src="~/Controls/Messaging1Control.ascx" TagPrefix="uc" TagName="Messaging1" %>
 <%@ Register Src="~/Controls/Messaging2Control.ascx" TagPrefix="uc" TagName="Messaging2" %>

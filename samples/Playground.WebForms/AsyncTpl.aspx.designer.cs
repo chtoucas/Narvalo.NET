@@ -7,9 +7,9 @@
 // </généré automatiquement>
 //------------------------------------------------------------------------------
 
-namespace Playground.WebForms.Controls {
+namespace Playground.WebForms {
     
     
-    public partial class Messaging1Control {
+    public partial class AsyncTplPage {
     }
 }

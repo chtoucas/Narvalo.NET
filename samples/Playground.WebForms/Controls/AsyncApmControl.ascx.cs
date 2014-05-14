@@ -3,5 +3,5 @@
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Views.Models;
 
-    public partial class Messaging2Control : MvpUserControl<MessagingModel> { }
+    public partial class AsyncApmControl : MvpUserControl<AsyncMessagesModel> { }
 }

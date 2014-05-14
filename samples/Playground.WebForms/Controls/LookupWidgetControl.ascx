@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" CodeBehind="LookupWidgetControl.ascx.cs" Inherits="Playground.WebForms.Controls.LookupWidgetControl" %>
+﻿<%@ Control Language="C#" CodeBehind="LookupWidgetControl.ascx.cs"
+ Inherits="Playground.WebForms.Controls.LookupWidgetControl" %>
 <div class="lookup-widget">
  <fieldset>
   <legend>Enter ID or Name of widget</legend>

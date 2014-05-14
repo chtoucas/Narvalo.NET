@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="CompositeView.aspx.cs"
- Inherits="Playground.WebForms.CompositeViewPage" %>
+﻿<%@ Page Language="C#" CodeBehind="CompositeView.aspx.cs" Inherits="Playground.WebForms.CompositeViewPage" %>
 
 <%@ Register Src="~/Controls/CompositeControl.ascx" TagPrefix="uc" TagName="Composite" %>
 <asp:Content ContentPlaceHolderID="content" runat="server">

@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" CodeBehind="EditWidgetControl.ascx.cs" Inherits="Playground.WebForms.Controls.EditWidgetControl" %>
+﻿<%@ Control Language="C#" CodeBehind="EditWidgetControl.ascx.cs"
+ Inherits="Playground.WebForms.Controls.EditWidgetControl" %>
 <div class="edit-widget">
  <asp:FormView runat="server" DataSourceID="widgetDataSource" DefaultMode="ReadOnly"
   DataKeyNames="Id" AllowPaging="true">
@@ -34,7 +35,8 @@
      </li>
      <li class="widget-name">
       <asp:Label runat="server" AssociatedControlID="widgetDescription">Description:</asp:Label>
-      <asp:TextBox runat="server" ID="widgetDescription" Text='<%# Bind("Description") %>' TextMode="MultiLine" />
+      <asp:TextBox runat="server" ID="widgetDescription" Text='<%# Bind("Description") %>'
+       TextMode="MultiLine" />
       <div class="validation">
        <asp:RequiredFieldValidator runat="server" ValidationGroup="Edit"
         ControlToValidate="widgetDescription" Display="Dynamic"
@@ -60,7 +62,8 @@
      </li>
      <li class="widget-name">
       <asp:Label runat="server" AssociatedControlID="widgetDescription">Description:</asp:Label>
-      <asp:TextBox runat="server" ID="widgetDescription" Text='<%# Bind("Description") %>' TextMode="MultiLine" />
+      <asp:TextBox runat="server" ID="widgetDescription" Text='<%# Bind("Description") %>'
+       TextMode="MultiLine" />
      </li>
      <li class="action save">
       <asp:Button runat="server" CommandName="Insert" Text="Save" />

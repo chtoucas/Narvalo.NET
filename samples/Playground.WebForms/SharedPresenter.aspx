@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="SharedPresenter.aspx.cs"
- Inherits="Playground.WebForms.SharedPresenterPage" %>
+﻿<%@ Page Language="C#" CodeBehind="SharedPresenter.aspx.cs" Inherits="Playground.WebForms.SharedPresenterPage" %>
 
 <%@ Register Src="~/Controls/SharedPresenterControl.ascx" TagPrefix="uc" TagName="Shared" %>
 <asp:Content ContentPlaceHolderID="content" runat="server">

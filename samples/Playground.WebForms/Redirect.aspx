@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="Redirect.aspx.cs" 
- Inherits="Playground.WebForms.RedirectPage" %>
+﻿<%@ Page Language="C#" CodeBehind="Redirect.aspx.cs" Inherits="Playground.WebForms.RedirectPage" %>
 
 <%@ Register Src="~/Controls/RedirectControl.ascx" TagPrefix="uc" TagName="Redirect" %>
 <asp:content contentplaceholderid="content" runat="server">

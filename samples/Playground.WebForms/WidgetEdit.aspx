@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Layouts/Site.Master" CodeBehind="WidgetEdit.aspx.cs"
- Inherits="Playground.WebForms.WidgetEditPage" %>
+﻿<%@ Page Language="C#" CodeBehind="WidgetEdit.aspx.cs" Inherits="Playground.WebForms.WidgetEditPage" %>
 
 <%@ Register Src="~/Controls/EditWidgetControl.ascx" TagPrefix="uc" TagName="EditWidget" %>
 <asp:Content ContentPlaceHolderID="content" runat="server">

@@ -50,9 +50,11 @@
   <ItemGroup>
     <Content Include="App_Themes\SiteTheme\print.css" />
     <Content Include="App_Themes\SiteTheme\_styles.css" />
-    <Content Include="AsyncMessages.aspx" />
+    <Content Include="AsyncTpl.aspx" />
+    <Content Include="AsyncApm.aspx" />
     <Content Include="CompositeView.aspx" />
-    <Content Include="Controls\AsyncMessagesControl.ascx" />
+    <Content Include="Controls\AsyncTplControl.ascx" />
+    <Content Include="Controls\AsyncApmControl.ascx" />
     <Content Include="Controls\CompositeControl.ascx" />
     <Content Include="Controls\DynamicallyLoadedControl.ascx" />
     <Content Include="Controls\EditWidgetControl.ascx" />
@@ -91,13 +93,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncMessages.aspx.cs">
-      <DependentUpon>AsyncMessages.aspx</DependentUpon>
+    <Compile Include="AsyncTpl.aspx.cs">
+      <DependentUpon>AsyncTpl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AsyncMessages.aspx.designer.cs">
-      <DependentUpon>AsyncMessages.aspx</DependentUpon>
+    <Compile Include="AsyncTpl.aspx.designer.cs">
+      <DependentUpon>AsyncTpl.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AsyncApm.aspx.cs">
+      <DependentUpon>AsyncApm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AsyncApm.aspx.designer.cs">
+      <DependentUpon>AsyncApm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\AsyncThunk.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -105,12 +115,19 @@
     <Compile Include="CompositeView.aspx.designer.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AsyncMessagesControl.ascx.cs">
-      <DependentUpon>AsyncMessagesControl.ascx</DependentUpon>
+    <Compile Include="Controls\AsyncTplControl.ascx.cs">
+      <DependentUpon>AsyncTplControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\AsyncMessagesControl.ascx.designer.cs">
-      <DependentUpon>AsyncMessagesControl.ascx</DependentUpon>
+    <Compile Include="Controls\AsyncTplControl.ascx.designer.cs">
+      <DependentUpon>AsyncTplControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AsyncApmControl.ascx.cs">
+      <DependentUpon>AsyncApmControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AsyncApmControl.ascx.designer.cs">
+      <DependentUpon>AsyncApmControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
@@ -219,7 +236,8 @@
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\AsyncMessagesPresenter.cs" />
+    <Compile Include="Presenters\AsyncApmPresenter.cs" />
+    <Compile Include="Presenters\AsyncTplPresenter.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
     <Compile Include="Presenters\EditWidgetPresenter.cs" />

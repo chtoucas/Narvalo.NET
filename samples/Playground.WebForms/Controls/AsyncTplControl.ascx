@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" CodeBehind="AsyncMessagesControl.ascx.cs" Inherits="Playground.WebForms.Controls.AsyncMessagesControl" %>
+﻿<%@ Control Language="C#" CodeBehind="AsyncTplControl.ascx.cs"
+ Inherits="Playground.WebForms.Controls.AsyncTplControl" %>
 <div class="async-messages">
  <asp:Repeater runat="server" DataSource="<%# Model.Messages %>">
   <HeaderTemplate>
@@ -7,6 +8,8 @@
   <ItemTemplate>
    <li><%# Container.DataItem %></li>
   </ItemTemplate>
-  <FooterTemplate></ol></FooterTemplate>
+  <FooterTemplate>
+   </ol>
+  </FooterTemplate>
  </asp:Repeater>
 </div>

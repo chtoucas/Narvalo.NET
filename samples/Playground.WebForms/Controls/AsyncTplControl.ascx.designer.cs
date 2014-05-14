@@ -10,6 +10,6 @@
 namespace Playground.WebForms.Controls {
     
     
-    public partial class Messaging1Control {
+    public partial class AsyncTplControl {
     }
 }
