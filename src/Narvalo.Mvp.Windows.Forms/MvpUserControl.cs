@@ -2,9 +2,9 @@
 
 namespace Narvalo.Mvp.Windows.Forms
 {
-    using System;
     using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Windows.Forms.Internal;
 
     public partial class MvpUserControl : UserControl, IView
     {

@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.ComponentModel;
     using System.Windows.Forms;
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Windows.Forms.Internal;
 
     public partial class MvpForm : Form, IView
     {

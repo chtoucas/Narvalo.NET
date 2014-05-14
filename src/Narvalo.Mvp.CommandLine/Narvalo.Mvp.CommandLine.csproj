@@ -70,7 +70,7 @@
     </Compile>
     <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PlatformServices.cs" />
-    <Compile Include="PresenterBinderFactory.cs" />
+    <Compile Include="Internal\PresenterBinderFactory.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="MvpCommand.cs" />

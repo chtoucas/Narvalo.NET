@@ -35,8 +35,8 @@ namespace Narvalo.Mvp.Web.Core
                 SetPresenterDiscoveryStrategy(
                     () => new CompositePresenterDiscoveryStrategy(
                         new IPresenterDiscoveryStrategy[] {
-                        new AttributeBasedPresenterDiscoveryStrategy(),
-                        new AspNetConventionBasedPresenterDiscoveryStrategy()}));
+                            new AttributeBasedPresenterDiscoveryStrategy(),
+                            new AspNetConventionBasedPresenterDiscoveryStrategy()}));
             }
         }
     }

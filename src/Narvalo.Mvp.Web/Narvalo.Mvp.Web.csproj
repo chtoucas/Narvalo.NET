@@ -74,7 +74,7 @@
     <Compile Include="Core\PlatformServices.cs" />
     <Compile Include="IAsyncTaskManager.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="Core\HttpPresenterBinderFactory.cs" />
+    <Compile Include="Internal\HttpPresenterBinderFactory.cs" />
     <Compile Include="HttpPresenter`1.cs">
       <SubType>Code</SubType>
     </Compile>

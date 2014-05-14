@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms
+namespace Narvalo.Mvp.Windows.Forms.Internal
 {
     using System.Windows.Forms;
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
-    public static class PresenterBinderFactory
+    internal static class PresenterBinderFactory
     {
         public static PresenterBinder Create(MvpForm form)
         {
@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.Windows.Forms
                 MessageCoordinator.BlackHole);
         }
 
-        internal static PresenterBinder Create(
+        public static PresenterBinder Create(
             Control control,
             IPlatformServices platformServices,
             IMessageCoordinator messageCoordinator)

@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
+    using Narvalo.Mvp.CommandLine.Internal;
     using Narvalo.Mvp.PresenterBinding;
 
     public abstract class MvpCommand : IView, ICommand, IDisposable

@@ -1,13 +1,14 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Web.Core
+namespace Narvalo.Mvp.Web.Internal
 {
     using System.Collections.Generic;
     using System.Web;
     using System.Web.UI;
     using Narvalo.Mvp.Platforms;
+    using Narvalo.Mvp.Web.Core;
 
-    public static class HttpPresenterBinderFactory
+    internal static class HttpPresenterBinderFactory
     {
         public static HttpPresenterBinder Create(
             MvpHttpHandler httpHandler,
@@ -31,7 +32,7 @@ namespace Narvalo.Mvp.Web.Core
                 PlatformServices.Current.MessageCoordinatorFactory.Create());
         }
 
-        internal static HttpPresenterBinder Create(
+        public static HttpPresenterBinder Create(
             IEnumerable<object> hosts,
             HttpContext context,
             IPlatformServices platformServices,

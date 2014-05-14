@@ -55,7 +55,7 @@ namespace Narvalo.Mvp
         protected virtual void SubscribeCore<T>(Action<T> onNext)
         {
             __Tracer.Warning(typeof(MessageCoordinator),
-                "Even if subscription is allowed, no messages will be ever received.");
+                "Even if subscription is allowed, no messages will ever be received.");
         }
 
         void ThrowIfClosed_()
@@ -86,8 +86,7 @@ namespace Narvalo.Mvp
                    Justification = "Implementation of lazy initialized singleton.")]
                 static Singleton() { }
 
-                internal static readonly BlackHole_ Instance
-                    = new BlackHole_();
+                internal static readonly BlackHole_ Instance = new BlackHole_();
             }
         }
     }
