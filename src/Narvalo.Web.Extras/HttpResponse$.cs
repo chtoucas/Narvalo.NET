@@ -1,4 +1,6 @@
-﻿// La plupart des en-têtes peuvent être supprimées sans passer par cette classe.
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// La plupart des en-têtes peuvent être supprimées sans passer par cette classe.
 // "X-AspNet-Version" & "X-Powered-By" via le Web.config : 
 //  <system.web>
 //      <httpRuntime enableVersionHeader="false" />

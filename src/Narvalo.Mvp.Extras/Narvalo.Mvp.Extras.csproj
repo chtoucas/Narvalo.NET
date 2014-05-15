@@ -90,8 +90,13 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ErrorPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
+      <Project>{fdadb21a-c99f-4d78-bdcc-a09a6ef97215}</Project>
+      <Name>Narvalo.Mvp.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
       <Name>Narvalo.Mvp</Name>

@@ -1,4 +1,6 @@
-﻿// Ce code est inspiré de la classe Omari.Web.UI.ControlBuilderExtensions.
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Ce code est inspiré de la classe Omari.Web.UI.ControlBuilderExtensions.
 // Par rapport au code d'origine, on a effectué les changements suivants :
 // - passage en méthodes d'extension ;
 // - certaines propriétés étant maintenant publiques, on a supprimé les méthodes

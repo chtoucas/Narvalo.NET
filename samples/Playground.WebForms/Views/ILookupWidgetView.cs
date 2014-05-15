@@ -14,8 +14,7 @@
         public int? Id { get; set; }
         public string Name { get; set; }
 
-        public FindingWidgetEventArgs()
-        { }
+        public FindingWidgetEventArgs() { }
 
         public FindingWidgetEventArgs(int id, string name)
             : this()

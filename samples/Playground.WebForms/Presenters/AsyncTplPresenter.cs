@@ -16,6 +16,8 @@
     // - http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx
     // - http://msdn.microsoft.com/en-us/library/hh975440.aspx for UseTaskFriendlySynchronizationContext
 
+    // Using the TPL allows to reuse the presenter in a non web context (we do not inherit from HttpPresenter).
+
     public class AsyncTplPresenter : PresenterOf<AsyncMessagesModel>
     {
         static readonly Func<string, string> Thunk_ = (string name) =>

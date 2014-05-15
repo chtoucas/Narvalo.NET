@@ -1,4 +1,6 @@
-﻿// Cette classe est inspirée de MvcCSharpRazorCodeGenerator.
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Cette classe est inspirée de MvcCSharpRazorCodeGenerator.
 // Il faut donc synchroniser celle-ci à chaque nouvelle version de ASP.NET MVC.
 
 namespace Narvalo.Web.Optimization

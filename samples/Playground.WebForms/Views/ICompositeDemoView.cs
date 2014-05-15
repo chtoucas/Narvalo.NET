@@ -3,7 +3,5 @@
     using Narvalo.Mvp;
     using Playground.WebForms.Views.Models;
 
-    public interface ICompositeDemoView : IView<CompositeDemoViewModel>
-    {
-    }
+    public interface ICompositeDemoView : IView<CompositeDemoViewModel> { }
 }

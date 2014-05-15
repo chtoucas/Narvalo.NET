@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Web.Configuration
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Web.Configuration
 {
     using System.Configuration;
     using System.Web.Configuration;

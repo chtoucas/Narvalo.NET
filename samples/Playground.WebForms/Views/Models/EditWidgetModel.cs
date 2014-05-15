@@ -6,6 +6,7 @@
     public class EditWidgetModel
     {
         public int TotalCount { get; set; }
+
         public IEnumerable<Widget> Widgets { get; set; }
     }
 }

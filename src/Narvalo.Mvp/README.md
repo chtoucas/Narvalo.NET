@@ -11,12 +11,7 @@ Changes from the original "Web Forms Mvp"
 
 - An API easier to follow (to me at least).
 
-- No more generic constraint on the ViewModel; namely the class and new()
-  constraints.
-
 - Use ConcurrentDictionary instead of Dictionary for type caching.
-
-- Several points of extensibility.
 
 ### Remarks
 
@@ -32,20 +27,21 @@ TODO (by order of priority)
 
 - Add support for
   * ASP.NET WebForms, cf. src/Narvalo.Mvp.Web, almost done.
-  * CommandLine, cf. src/Narvalo.Mvp.CommandLine, already functional.
-  * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, not yet ready.
+  * CommandLine, cf. src/Narvalo.Mvp.CommandLine, basic but functional.
+  * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, not ready.
   * WPF, not yet started.
 
 - Using custom presenter types per platform prevents the reuse
-  of presenters across different platforms. But what about AsyncManager
-  (this should be the easy one)	and HttpContext (for the navigation part like
-  redirect, a solution might be in the Navigator (see below), but for the
-  rest???). Maybe is it a necessary evil...?
+  of presenters across different platforms. 
+  For WebForms, we add an async manager (but we can avoid using with the TPL)	
+  and HttpContext (for the navigation part like redirect, a solution might be 
+  in the Navigator (see below), but for the rest???). 
+  Maybe it is a necessary evil...?
 
-- Add support for AppController, Navigator, EventAggregator (not the same
+- Add support for Appication Controller, Navigator, EventAggregator (not the same
   as cross-presenter communication).
 
-- Samples, cf. samples/Playground.WebForms.
+- Samples, finish samples/Playground.WebForms.
 
 - Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
   / ReactiveUI / MVVM Light?

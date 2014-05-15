@@ -9,7 +9,7 @@
 
     public class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
-        readonly IWidgetRepository widgets;
+        readonly IWidgetRepository _widgetRepository;
 
         // NB: Prefer IOC if available.
         public EditWidgetPresenter(IEditWidgetView view)
@@ -18,7 +18,8 @@
         public EditWidgetPresenter(IEditWidgetView view, IWidgetRepository widgetRepository)
             : base(view)
         {
-            widgets = widgetRepository;
+            _widgetRepository = widgetRepository;
+
             View.GettingWidgets += GettingWidgets;
             View.GettingWidgetsTotalCount += GettingWidgetsTotalCount;
             View.UpdatingWidget += UpdatingWidget;
@@ -28,24 +29,24 @@
 
         void GettingWidgets(object sender, GettingWidgetEventArgs e)
         {
-            View.Model.Widgets = widgets.FindAll()
+            View.Model.Widgets = _widgetRepository.FindAll()
                 .Skip(e.StartRowIndex * e.MaximumRows)
                 .Take(e.MaximumRows);
         }
 
         void GettingWidgetsTotalCount(object sender, EventArgs e)
         {
-            View.Model.TotalCount = widgets.FindAll().Count();
+            View.Model.TotalCount = _widgetRepository.FindAll().Count();
         }
 
         void UpdatingWidget(object sender, UpdateWidgetEventArgs e)
         {
-            widgets.Save(e.Widget, e.OriginalWidget);
+            _widgetRepository.Save(e.Widget, e.OriginalWidget);
         }
 
         void InsertingWidget(object sender, EditWidgetEventArgs e)
         {
-            widgets.Save(e.Widget, null);
+            _widgetRepository.Save(e.Widget, null);
         }
 
         static void DeletingWidget(object sender, EditWidgetEventArgs e)

@@ -1,4 +1,6 @@
-﻿// Ce code est inspiré de la classe Omari.Web.UI.WhiteSpaceCleaner.
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Ce code est inspiré de la classe Omari.Web.UI.WhiteSpaceCleaner.
     
 namespace Narvalo.Web.UI
 {
