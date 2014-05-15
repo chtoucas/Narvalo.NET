@@ -4,7 +4,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views.Models;
+    using Playground.WebForms.Views;
 
     // WARNING: DO NOT use async on void event handlers like Load().
     // Don't forget to mark the page with Async="true".

@@ -3,7 +3,7 @@
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Presenters;
-    using Playground.WebForms.Views.Models;
+    using Playground.WebForms.Views;
 
     [PresenterBinding(
         typeof(CompositeDemoPresenter),

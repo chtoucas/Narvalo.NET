@@ -2,7 +2,7 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views.Models;
+    using Playground.WebForms.Views;
 
     public class HelloWorldPresenter : PresenterOf<StringModel>
     {

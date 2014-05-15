@@ -18,7 +18,7 @@
    <asp:HyperLink NavigateUrl="~/Messaging.aspx" runat=server>Cross-Presenter Communication</asp:HyperLink>
   </li>     
   <li>
-   <asp:HyperLink NavigateUrl="~/Redirect.aspx" runat=server>Redirect from Presenter</asp:HyperLink>
+   <asp:HyperLink NavigateUrl="~/Redirect.aspx" runat=server>Redirect from Presenter on user request</asp:HyperLink>
   </li>
   <li>
    <asp:HyperLink NavigateUrl="~/ViewsAddedInPageInit.aspx" runat=server>Views Dynamically Loaded in Page_Init</asp:HyperLink>
@@ -31,7 +31,7 @@
   </li>
   <li>
    <asp:HyperLink NavigateUrl="~/Handlers/TimeHandler.ashx" runat=server>IHttpHandler</asp:HyperLink>
-  </li>
+  </li>  
   <%--<li><asp:HyperLink NavigateUrl="~/WidgetEdit.aspx" runat=server>Async APM Demo</asp:HyperLink></li>
   <li><asp:HyperLink NavigateUrl="~/WidgetLookup.aspx" runat=server>Async APM Demo</asp:HyperLink></li>--%>
  </ul>

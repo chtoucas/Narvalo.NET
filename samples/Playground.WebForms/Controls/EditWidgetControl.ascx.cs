@@ -5,7 +5,6 @@
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Services;
     using Playground.WebForms.Views;
-    using Playground.WebForms.Views.Models;
 
     public partial class EditWidgetControl : MvpUserControl<EditWidgetModel>, IEditWidgetView
     {

@@ -6,9 +6,10 @@
 
     public class TimePresenter : HttpPresenter<IView>
     {
-        public TimePresenter(IView view) : base(view)
+        public TimePresenter(IView view)
+            : base(view)
         {
-            view.Load += (sender, e) => HttpContext.Response.Write("Current time is: " + DateTimeOffset.Now);
+            View.Load += (sender, e) => HttpContext.Response.Write("Current time is: " + DateTimeOffset.Now);
         }
     }
 }

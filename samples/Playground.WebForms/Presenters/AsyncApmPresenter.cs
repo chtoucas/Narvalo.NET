@@ -4,7 +4,7 @@
     using System.Threading;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views.Models;
+    using Playground.WebForms.Views;
 
     public class AsyncApmPresenter : HttpPresenterOf<AsyncMessagesModel>
     {

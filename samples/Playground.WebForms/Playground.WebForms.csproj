@@ -41,14 +41,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Default\screen.css" />
@@ -70,12 +64,12 @@
     <Content Include="HelloWorld.aspx" />
     <Content Include="License-WebFormsMvp.txt" />
     <Content Include="Messaging.aspx" />
-    <Content Include="Handlers\TimeHandler.ashx" />
     <Content Include="Layouts\Site.Master" />
     <Content Include="App_Themes\Default\Controls.skin" />
     <Content Include="WidgetEdit.aspx" />
     <Content Include="WidgetLookup.aspx" />
     <Content Include="README.md" />
+    <Content Include="Handlers\TimeHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -198,14 +192,14 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\TimeHandler.ashx.cs">
+      <DependentUpon>TimeHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Services\IWidgetRepository.cs" />
     <Compile Include="Services\Widget.cs" />
     <Compile Include="Services\WidgetRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Handlers\TimeHandler.ashx.cs">
-      <DependentUpon>TimeHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="HelloWorld.aspx.cs">
       <DependentUpon>HelloWorld.aspx</DependentUpon>
@@ -282,10 +276,10 @@
     <Compile Include="Views\ILookupWidgetView.cs" />
     <Compile Include="Views\IRedirectView.cs" />
     <Compile Include="Views\ITimeServiceView.cs" />
-    <Compile Include="Views\Models\AsyncMessagesModel.cs" />
-    <Compile Include="Views\Models\EditWidgetModel.cs" />
-    <Compile Include="Views\Models\StringModel.cs" />
-    <Compile Include="Views\Models\LookupWidgetModel.cs" />
+    <Compile Include="Views\AsyncMessagesModel.cs" />
+    <Compile Include="Views\EditWidgetModel.cs" />
+    <Compile Include="Views\StringModel.cs" />
+    <Compile Include="Views\LookupWidgetModel.cs" />
     <Compile Include="WidgetEdit.aspx.cs">
       <DependentUpon>WidgetEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

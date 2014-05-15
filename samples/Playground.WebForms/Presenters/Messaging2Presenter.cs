@@ -3,7 +3,7 @@
     using System;
     using Narvalo.Mvp;
     using Playground.WebForms.Services;
-    using Playground.WebForms.Views.Models;
+    using Playground.WebForms.Views;
 
     public class Messaging2Presenter : PresenterOf<StringModel>
     {

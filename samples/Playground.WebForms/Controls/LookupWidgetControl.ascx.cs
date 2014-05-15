@@ -3,7 +3,6 @@
     using System;
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Views;
-    using Playground.WebForms.Views.Models;
 
     public partial class LookupWidgetControl : MvpUserControl<LookupWidgetModel>, ILookupWidgetView
     {

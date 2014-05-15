@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Views.Models
+﻿namespace Playground.WebForms.Views
 {
     using System.Collections.Generic;
     using Playground.WebForms.Services;

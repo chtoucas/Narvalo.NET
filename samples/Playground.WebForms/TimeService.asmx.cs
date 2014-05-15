@@ -11,8 +11,8 @@
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
-    [PresenterBinding(typeof(TimeServicePresenter), ViewType = typeof(ITimeServiceView))]
-    public class TimeService : MvpWebService, ITimeServiceView
+    [PresenterBinding(typeof(TimeServicePresenter), ViewType = typeof(ITimeView))]
+    public class TimeService : MvpWebService, ITimeView
     {
         public event EventHandler<GetCurrentTimeCalledEventArgs> GetCurrentTimeCalled;
 

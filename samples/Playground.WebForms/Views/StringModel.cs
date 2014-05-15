@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Views.Models
+﻿namespace Playground.WebForms.Views
 {
     public class StringModel
     {
