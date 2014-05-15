@@ -25,10 +25,10 @@
         static string Format_(string message)
         {
             return String.Format(
-                "{0} on thread {1} at {2}",
+                "{2} [Thread={1}] {0}.",
                 message,
                 Thread.CurrentThread.ManagedThreadId,
-                DateTime.Now.ToString("HH:mm:ss.ss.fff"));
+                DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]"));
         }
     }
 }

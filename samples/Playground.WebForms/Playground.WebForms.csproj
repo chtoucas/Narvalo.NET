@@ -107,7 +107,6 @@
     <Compile Include="AsyncApm.aspx.designer.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Common\AsyncThunk.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

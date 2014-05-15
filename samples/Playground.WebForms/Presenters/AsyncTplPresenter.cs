@@ -1,13 +1,30 @@
 ﻿namespace Playground.WebForms.Presenters
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Narvalo.Mvp;
-    using Playground.WebForms.Common;
     using Playground.WebForms.Views.Models;
+
+    // WARNING: DO NOT use async on void event handlers like Load().
+    // Don't forget to mark the page with Async="true".
+    // In the Web.config, (this is the default)
+    // <appSettings>
+    //   <add key="aspnet:UseTaskFriendlySynchronizationContext" value="false" />
+    // </appSettings>
+    // References:
+    // - http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx
+    // - http://msdn.microsoft.com/en-us/library/hh975440.aspx for UseTaskFriendlySynchronizationContext
 
     public class AsyncTplPresenter : PresenterOf<AsyncMessagesModel>
     {
+        static readonly Func<string, string> Thunk_ = (string name) =>
+        {
+            Thread.Sleep(100);
+
+            return String.Format("Task {0} processed", name);
+        };
+
         public AsyncTplPresenter(IView<AsyncMessagesModel> view)
             : base(view)
         {
@@ -18,44 +35,33 @@
         {
             View.Model.Append("View.Load");
 
-            TaskA();
-            TaskB();
+            RunTask("A");
+            RunTask("B");
+
+            // NB: To use the following we must enable UseTaskFriendlySynchronizationContext, but 
+            // this conflicts with the APM style of doing async stuff.
+            //AsyncManager.RegisterAsyncTask(TaskA);
+            //AsyncManager.RegisterAsyncTask(TaskB);
         }
 
-        async void TaskA()
+        async void RunTask(string state)
         {
-            await Task.Factory.FromAsync(BeginAsyncA, EndAsyncA, null);
+            await Task.Factory.FromAsync(BeginAsync, EndAsync, state);
         }
 
-        async void TaskB()
+        IAsyncResult BeginAsync(AsyncCallback cb, object state)
         {
-            await Task.Factory.FromAsync(BeginAsyncB, EndAsyncB, null);
+            View.Model.Append(String.Format("Task {0} started", state));
+
+            return Thunk_.BeginInvoke((string)state, cb, state);
         }
 
-        IAsyncResult BeginAsyncA(AsyncCallback cb, object state)
+        void EndAsync(IAsyncResult ar)
         {
-            View.Model.Append("Async task A started");
-            return AsyncThunk.A.BeginInvoke(cb, state);
-        }
+            var result = Thunk_.EndInvoke(ar);
 
-        void EndAsyncA(IAsyncResult ar)
-        {
-            var msg = AsyncThunk.A.EndInvoke(ar);
-            View.Model.Append(msg);
-            View.Model.Append("Async task A ended");
-        }
-
-        IAsyncResult BeginAsyncB(AsyncCallback cb, object state)
-        {
-            View.Model.Append("Async task B started");
-            return AsyncThunk.B.BeginInvoke(cb, state);
-        }
-
-        void EndAsyncB(IAsyncResult ar)
-        {
-            var msg = AsyncThunk.B.EndInvoke(ar);
-            View.Model.Append(msg);
-            View.Model.Append("Async task B ended");
+            View.Model.Append(result);
+            View.Model.Append(String.Format("Task {0} ended", ar.AsyncState));
         }
     }
 }

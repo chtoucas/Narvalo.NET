@@ -10,10 +10,10 @@
         public CompositeDemoPresenter(ICompositeDemoView view)
             : base(view)
         {
-            View.Load += View_Load;
+            View.Load += Load;
         }
 
-        void View_Load(object sender, EventArgs e)
+        void Load(object sender, EventArgs e)
         {
             View.Model.Message = String.Format(
                 "This message was set by the presenter. Here's a new guid to demonstrate that all views are sharing the one presenter instance: {0}",

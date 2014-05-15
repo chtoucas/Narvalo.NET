@@ -1,9 +1,4 @@
-﻿* {
-  /* Zero-out margins & padding */
-  margin: 0;
-  padding: 0;
-}
-
+﻿
 body {
   font-family: Calibri, Arial, Helvetica, Sans-Serif;
   font-size: 1.4em;
@@ -22,6 +17,13 @@ body {
 h1 {
   font-family: Cambria;
   font-size: 28px;
+  margin: 0 0 0.5em;
+  color: #851928;
+}
+
+h2 {
+  font-family: Cambria;
+  font-size: 24px;
   margin: 0 0 0.5em;
   color: #851928;
 }
