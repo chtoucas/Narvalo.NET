@@ -85,7 +85,6 @@
     <Content Include="PageView.aspx" />
     <Content Include="SharedPresenter.aspx" />
     <Content Include="ViewsAddedInPageInit.aspx" />
-    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

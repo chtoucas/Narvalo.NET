@@ -3,6 +3,6 @@
 <%@ Register Src="~/Controls/HelloWorldControl.ascx" TagPrefix="uc" TagName="HelloWorld" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
- <h2>Hello World Demo</h2>
+ <h2>Hello World</h2>
  <uc:HelloWorld runat="server" />
 </asp:Content>

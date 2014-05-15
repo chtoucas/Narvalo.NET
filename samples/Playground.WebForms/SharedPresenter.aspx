@@ -3,7 +3,7 @@
 <%@ Register Src="~/Controls/SharedPresenterControl.ascx" TagPrefix="uc" TagName="Shared" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
- <h2>Shared Presenter Demo</h2>
+ <h2>Shared Presenter</h2>
  <p>
   Normally, each control instance would have their own presenter instance.
   Shared Presenters lets you attach one presenter instance to multiple

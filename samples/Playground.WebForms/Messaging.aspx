@@ -4,7 +4,7 @@
 <%@ Register Src="~/Controls/Messaging2Control.ascx" TagPrefix="uc" TagName="Messaging2" %>
 
 <asp:content contentplaceholderid="MainContent" runat="server">
- <h2>Cross Presenter Messaging Demo</h2>
+ <h2>Cross-Presenter Communication</h2>
  <uc:Messaging1 runat="server" />
  <uc:Messaging2 runat="server" />
 </asp:content>

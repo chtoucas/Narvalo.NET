@@ -8,8 +8,6 @@
         public DynamicallyLoadedPresenter(IDynamicallyLoadedView view)
             : base(view)
         {
-            View.PresenterWasBound = false;
-
             View.Load += (sender, e) => View.PresenterWasBound = true;
         }
     }
