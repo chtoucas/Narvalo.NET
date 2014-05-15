@@ -2,12 +2,12 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Domain;
+    using Playground.WebForms.Services;
     using Playground.WebForms.Views.Models;
 
-    public class Messaging2Presenter : PresenterOf<MessagingModel>
+    public class Messaging2Presenter : PresenterOf<StringModel>
     {
-        public Messaging2Presenter(IView<MessagingModel> view)
+        public Messaging2Presenter(IView<StringModel> view)
             : base(view)
         {
             View.Load += Load;
@@ -17,12 +17,12 @@
         {
             Messages.Subscribe<Widget>(_ =>
             {
-                View.Model.DisplayText += String.Format("Presenter 2 received widget {0}.", _.Id);
+                View.Model.Message += String.Format("Presenter 2 received widget {0}.", _.Id);
             });
 
             Messages.Subscribe<Guid>(_ =>
             {
-                View.Model.DisplayText += " Presenter 2 received an unexpected GUID message! Oops.";
+                View.Model.Message += " Presenter 2 received an unexpected GUID message! Oops.";
             });
         }
     }

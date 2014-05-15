@@ -1,6 +1,6 @@
 ﻿namespace Playground.WebForms.Views.Models
 {
-    public class CompositeDemoViewModel
+    public class StringModel
     {
         public string Message { get; set; }
     }

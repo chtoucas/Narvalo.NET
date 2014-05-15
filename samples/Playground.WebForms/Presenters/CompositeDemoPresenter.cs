@@ -2,12 +2,11 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views;
     using Playground.WebForms.Views.Models;
 
-    public class CompositeDemoPresenter : Presenter<ICompositeDemoView, CompositeDemoViewModel>
+    public class CompositeDemoPresenter : PresenterOf<StringModel>
     {
-        public CompositeDemoPresenter(ICompositeDemoView view)
+        public CompositeDemoPresenter(IView<StringModel> view)
             : base(view)
         {
             View.Load += Load;

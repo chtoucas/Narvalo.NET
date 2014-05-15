@@ -2,7 +2,7 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Domain;
+    using Playground.WebForms.Services;
     using Playground.WebForms.Views.Models;
 
     public interface IEditWidgetView : IView<EditWidgetModel>

@@ -8,13 +8,7 @@
     {
         public TimePresenter(IView view) : base(view)
         {
-            view.Load += Load;
-        }
-
-        void Load(object sender, EventArgs e)
-        {
-            var timeText = "Current time is: " + DateTimeOffset.Now;
-            HttpContext.Response.Write(timeText);
+            view.Load += (sender, e) => HttpContext.Response.Write("Current time is: " + DateTimeOffset.Now);
         }
     }
 }

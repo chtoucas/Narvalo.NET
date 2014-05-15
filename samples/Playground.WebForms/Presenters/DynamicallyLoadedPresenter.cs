@@ -1,6 +1,5 @@
 ﻿namespace Playground.WebForms.Presenters
 {
-    using System;
     using Narvalo.Mvp;
     using Playground.WebForms.Views;
 
@@ -11,12 +10,7 @@
         {
             View.PresenterWasBound = false;
 
-            View.Load += Load;
-        }
-
-        void Load(object sender, EventArgs e)
-        {
-            View.PresenterWasBound = true;
+            View.Load += (sender, e) => View.PresenterWasBound = true;
         }
     }
 }

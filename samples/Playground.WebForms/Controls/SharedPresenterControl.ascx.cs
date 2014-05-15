@@ -7,7 +7,7 @@
 
     [PresenterBinding(
         typeof(SharedPresenter),
-        ViewType = typeof(IView<SharedPresenterViewModel>),
+        ViewType = typeof(IView<StringModel>),
         BindingMode = PresenterBindingMode.SharedPresenter)]
-    public partial class SharedPresenterControl : MvpUserControl<SharedPresenterViewModel> { }
+    public partial class SharedPresenterControl : MvpUserControl<StringModel> { }
 }

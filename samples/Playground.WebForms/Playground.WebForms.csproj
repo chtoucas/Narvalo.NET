@@ -40,9 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Narvalo.Common">
-      <HintPath>..\..\packages\Narvalo.Common.0.18.0.1\lib\net45\Narvalo.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
@@ -54,8 +51,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Themes\SiteTheme\print.css" />
-    <Content Include="App_Themes\SiteTheme\_styles.css" />
+    <Content Include="App_Themes\Default\screen.css" />
     <Content Include="AsyncTpl.aspx" />
     <Content Include="AsyncApm.aspx" />
     <Content Include="CompositeView.aspx" />
@@ -74,10 +70,9 @@
     <Content Include="HelloWorld.aspx" />
     <Content Include="License-WebFormsMvp.txt" />
     <Content Include="Messaging.aspx" />
-    <Content Include="packages.config" />
     <Content Include="Handlers\TimeHandler.ashx" />
     <Content Include="Layouts\Site.Master" />
-    <Content Include="App_Themes\SiteTheme\Controls.skin" />
+    <Content Include="App_Themes\Default\Controls.skin" />
     <Content Include="WidgetEdit.aspx" />
     <Content Include="WidgetLookup.aspx" />
     <Content Include="README.md" />
@@ -204,9 +199,9 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IWidgetRepository.cs" />
-    <Compile Include="Domain\Widget.cs" />
-    <Compile Include="Domain\WidgetRepository.cs" />
+    <Compile Include="Services\IWidgetRepository.cs" />
+    <Compile Include="Services\Widget.cs" />
+    <Compile Include="Services\WidgetRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,20 +278,15 @@
     <Compile Include="ViewsAddedInPageInit.aspx.designer.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ICompositeDemoView.cs" />
     <Compile Include="Views\IDynamicallyLoadedView.cs" />
     <Compile Include="Views\IEditWidgetView.cs" />
     <Compile Include="Views\ILookupWidgetView.cs" />
     <Compile Include="Views\IRedirectView.cs" />
     <Compile Include="Views\ITimeServiceView.cs" />
     <Compile Include="Views\Models\AsyncMessagesModel.cs" />
-    <Compile Include="Views\Models\CompositeDemoViewModel.cs" />
-    <Compile Include="Views\Models\DynamicallyLoadedViewModel.cs" />
     <Compile Include="Views\Models\EditWidgetModel.cs" />
-    <Compile Include="Views\Models\HelloWorldModel.cs" />
+    <Compile Include="Views\Models\StringModel.cs" />
     <Compile Include="Views\Models\LookupWidgetModel.cs" />
-    <Compile Include="Views\Models\MessagingModel.cs" />
-    <Compile Include="Views\Models\SharedPresenterViewModel.cs" />
     <Compile Include="WidgetEdit.aspx.cs">
       <DependentUpon>WidgetEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

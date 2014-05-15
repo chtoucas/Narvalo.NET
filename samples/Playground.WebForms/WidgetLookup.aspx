@@ -3,6 +3,6 @@
 <%@ Register Src="~/Controls/LookupWidgetControl.ascx" TagPrefix="uc" TagName="LookupWidget" %>
 
 <asp:content contentplaceholderid="MainContent" runat="server">
- <h1>Simple Data Demo: Lookup Widget</h1>
+ <h2>Simple Data Demo: Lookup Widget</h2>
  <uc:LookupWidget runat="server" />
 </asp:content>

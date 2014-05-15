@@ -1,9 +1,11 @@
-﻿namespace Playground.WebForms.Domain
+﻿namespace Playground.WebForms.Services
 {
     public class Widget
     {
         public int? Id { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
     }
 }

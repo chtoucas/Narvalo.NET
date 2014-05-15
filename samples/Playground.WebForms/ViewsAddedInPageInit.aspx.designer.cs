@@ -13,12 +13,12 @@ namespace Playground.WebForms {
     public partial class ViewsAddedInPageInitPage {
         
         /// <summary>
-        /// Contrôle dynamicallyLoadedControlsPlaceholder.
+        /// Contrôle DynamicPanel.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel dynamicallyLoadedControlsPlaceholder;
+        protected global::System.Web.UI.WebControls.Panel DynamicPanel;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Domain
+﻿namespace Playground.WebForms.Services
 {
     using System;
     using System.Collections.Generic;

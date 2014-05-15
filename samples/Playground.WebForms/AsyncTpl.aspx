@@ -3,8 +3,8 @@
 <%@ Register Src="~/Controls/AsyncTplControl.ascx" TagPrefix="uc" TagName="AsyncMessages" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
- <h1>Async TPL Demo</h1>
+ <h2>Async TPL Demo</h2>
  <p>Each task take 100ms to complete, but the overall time spent is under 200ms.</p>
- <h2>Chronology</h2>
+ <h3>Chronology</h3>
  <uc:AsyncMessages runat="server" />
 </asp:Content>

@@ -4,17 +4,13 @@
     using Narvalo.Mvp;
     using Playground.WebForms.Views.Models;
 
-    public class SharedPresenter : PresenterOf<SharedPresenterViewModel>
+    public class SharedPresenter : PresenterOf<StringModel>
     {
-        public SharedPresenter(IView<SharedPresenterViewModel> view)
+        public SharedPresenter(IView<StringModel> view)
             : base(view)
         {
-            View.Load += Load;
-        }
-
-        void Load(object sender, EventArgs e)
-        {
-            View.Model.Message = String.Format(@"Presenter instance: {0}", Guid.NewGuid());
+            View.Load += (sender, e) =>
+                View.Model.Message = String.Format(@"Presenter instance: {0}", Guid.NewGuid());
         }
     }
 }

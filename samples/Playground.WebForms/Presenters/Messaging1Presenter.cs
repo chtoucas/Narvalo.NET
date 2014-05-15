@@ -2,12 +2,12 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Domain;
+    using Playground.WebForms.Services;
     using Playground.WebForms.Views.Models;
 
-    public class Messaging1Presenter : PresenterOf<MessagingModel>
+    public class Messaging1Presenter : PresenterOf<StringModel>
     {
-        public Messaging1Presenter(IView<MessagingModel> view)
+        public Messaging1Presenter(IView<StringModel> view)
             : base(view)
         {
             View.Load += Load;
@@ -20,7 +20,7 @@
                 Name = "Awesome widget!"
             };
 
-            View.Model.DisplayText = String.Format("Presenter 1 publishes widget {0}.", widget.Id);
+            View.Model.Message = String.Format("Presenter 1 publishes widget {0}.", widget.Id);
 
             Messages.Publish(widget);
             Messages.Publish(123456);

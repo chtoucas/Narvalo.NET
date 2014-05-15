@@ -6,8 +6,6 @@
 
     public class AsyncMessagesModel
     {
-        readonly Object Lock_ = new Object();
-
         public IList<string> Messages { get; private set; }
 
         public AsyncMessagesModel()
@@ -17,7 +15,7 @@
 
         public void Append(string message)
         {
-            lock (Lock_) {
+            lock (Messages) {
                 Messages.Add(Format_(message));
             }
         }

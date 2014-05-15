@@ -1,13 +1,15 @@
 ﻿<%@ Master Language="C#" CodeBehind="Site.master.cs"
  Inherits="Playground.WebForms.Layouts.SiteMasterPage" %>
 
+<!DOCTYPE html>
 <html lang="en">
-<head runat="server" enableviewstate="false">
- <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<head runat="server">
+ <meta charset="utf-8" />
  <title>Narvalo.Mvp.Web Demo Site.</title>
 </head>
 <body>
- <div id="pageContainer">
+ <div id="content">
+  <h1>ASP.NET Web Forms MVP Samples</h1>
   <asp:ContentPlaceHolder ID="MainContent" runat="server" />
  </div>
 </body>

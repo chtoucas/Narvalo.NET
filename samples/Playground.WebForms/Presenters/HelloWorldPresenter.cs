@@ -5,9 +5,9 @@
     using Narvalo.Mvp.Web;
     using Playground.WebForms.Views.Models;
 
-    public class HelloWorldPresenter : HttpPresenterOf<HelloWorldModel>
+    public class HelloWorldPresenter : HttpPresenterOf<StringModel>
     {
-        public HelloWorldPresenter(IView<HelloWorldModel> view)
+        public HelloWorldPresenter(IView<StringModel> view)
             : base(view)
         {
             View.Model.Message = "If you see this message, something went wrong.";
