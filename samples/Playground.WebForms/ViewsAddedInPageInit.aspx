@@ -1,8 +1,6 @@
 ﻿<%@ Page Language="C#" CodeBehind="ViewsAddedInPageInit.aspx.cs" Inherits="Playground.WebForms.ViewsAddedInPageInitPage" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <h1>View User Controls Being Added in Page_Init</h1>
  <p>
   This page demonstrates a user control with a declared presenter binding being dynamically loaded

@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" CodeBehind="SharedPresenter.aspx.cs" Inherits="Playground.WebForms.SharedPresenterPage" %>
 
 <%@ Register Src="~/Controls/SharedPresenterControl.ascx" TagPrefix="uc" TagName="Shared" %>
-<asp:Content ContentPlaceHolderID="content" runat="server">
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <h1>Shared Presenter Demo</h1>
  <p>
   Normally, each control instance would have their own presenter instance.

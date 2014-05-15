@@ -1,20 +1,14 @@
-﻿<%@ Master Language="C#" CodeBehind="Site.master.cs" 
+﻿<%@ Master Language="C#" CodeBehind="Site.master.cs"
  Inherits="Playground.WebForms.Layouts.SiteMasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
+<html lang="en">
 <head runat="server" enableviewstate="false">
  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
- <title>New Page</title>
- <asp:ContentPlaceHolder ID="head" runat="server" />
+ <title>Narvalo.Mvp.Web Demo Site.</title>
 </head>
 <body>
  <div id="pageContainer">
-  <form id="form1" runat="server">
-   <div>
-    <asp:ContentPlaceHolder ID="content" runat="server" />
-   </div>
-  </form>
+  <asp:ContentPlaceHolder ID="MainContent" runat="server" />
  </div>
 </body>
 </html>
