@@ -4,19 +4,16 @@
     using System.Collections.Generic;
     using System.Threading;
 
-    public class AsyncMessagesModel
+    public sealed class AsyncMessagesModel
     {
-        public IList<string> Messages { get; private set; }
+        readonly IList<string> _messages = new List<string>();
 
-        public AsyncMessagesModel()
-        {
-            Messages = new List<string>();
-        }
+        public IList<string> Messages { get { return _messages; } }
 
         public void Append(string message)
         {
-            lock (Messages) {
-                Messages.Add(Format_(message));
+            lock (_messages) {
+                _messages.Add(Format_(message));
             }
         }
 

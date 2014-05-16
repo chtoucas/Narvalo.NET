@@ -58,15 +58,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Data\IWidgetRepository.cs" />
-    <Compile Include="Data\WidgetRepository.cs" />
     <Compile Include="Views\AsyncMessagesModel.cs" />
-    <Compile Include="Views\EditWidgetModel.cs" />
     <Compile Include="Views\IDynamicallyLoadedView.cs" />
     <Compile Include="Views\IEditWidgetView.cs" />
     <Compile Include="Views\ILookupWidgetView.cs" />
     <Compile Include="Views\IRedirectView.cs" />
-    <Compile Include="Views\LookupWidgetModel.cs" />
     <Compile Include="Views\StringModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@
 
             Messages.Subscribe<Guid>(_ =>
             {
-                View.Model.Message += " Presenter 2 received an unexpected GUID message! Oops.";
+                View.Model.Message += " Oops. Presenter 2 received an unexpected GUID message! ";
             });
         }
     }

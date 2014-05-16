@@ -8,17 +8,12 @@
 
     public sealed class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
-        readonly IWidgetRepository _widgetRepository;
+        // NB: This is quick and dirty...
+        readonly PlaygroundDataContext _dataContext = new PlaygroundDataContext();
 
-        // NB: Prefer IOC if available.
         public EditWidgetPresenter(IEditWidgetView view)
-            : this(view, new WidgetRepository()) { }
-
-        public EditWidgetPresenter(IEditWidgetView view, IWidgetRepository widgetRepository)
             : base(view)
         {
-            _widgetRepository = widgetRepository;
-
             View.GettingWidgets += GettingWidgets;
             View.CountingWidgets += CountingWidgets;
             View.UpdatingWidget += UpdatingWidget;
@@ -28,29 +23,37 @@
 
         void CountingWidgets(object sender, EventArgs e)
         {
-            View.Model.WidgetCount = _widgetRepository.FindAll().Count();
+            View.Model.WidgetCount = _dataContext.Widget.Count();
         }
 
-        void GettingWidgets(object sender, GettingWidgetEventArgs e)
+        void GettingWidgets(object sender, GettingWidgetsEventArgs e)
         {
-            View.Model.Widgets = _widgetRepository.FindAll()
+            View.Model.Widgets = _dataContext.Widget
                 .Skip(e.StartRowIndex * e.MaximumRows)
                 .Take(e.MaximumRows);
         }
 
-        void InsertingWidget(object sender, EditingWidgetEventArgs e)
+        void InsertingWidget(object sender, InsertingWidgettEventArgs e)
         {
-            _widgetRepository.Create(e.Widget);
+            _dataContext.Widget.InsertOnSubmit(e.Widget);
+            _dataContext.SubmitChanges();
         }
 
         void UpdatingWidget(object sender, UpdatingWidgetEventArgs e)
         {
-            _widgetRepository.Update(e.Widget, e.OriginalWidget);
+            _dataContext.Widget.Attach(e.Widget, e.OriginalWidget);
+            _dataContext.SubmitChanges();
         }
 
-        void DeletingWidget(object sender, EditingWidgetEventArgs e)
+        void DeletingWidget(object sender, WidgetIdEventArgs e)
         {
-            _widgetRepository.Delete(e.Widget);
+            var q = from _ in _dataContext.Widget where _.Id == e.Id select _;
+            var widget = q.SingleOrDefault();
+
+            if (widget != null) {
+                _dataContext.Widget.DeleteOnSubmit(widget);
+                _dataContext.SubmitChanges();
+            }
         }
     }
 }

@@ -6,19 +6,15 @@
    <asp:Label runat="server" AssociatedControlID="WidgetId">ID</asp:Label>
    <asp:TextBox runat="server" ID="WidgetId" MaxLength="3" />
    <div class="validators">
-          <asp:CompareValidator runat="server" ControlToValidate="widgetId"
-            ValidationGroup="LookupWidget"
-            Display="Dynamic" Type="Integer" Operator="DataTypeCheck"
-            ErrorMessage="ID must be a valid whole number" />
-          <asp:RangeValidator runat="server" ControlToValidate="widgetId"
-            ValidationGroup="LookupWidget"
-            Display="Dynamic" Type="Integer" MinimumValue="1" MaximumValue="999"
-            ErrorMessage="ID must be a positive whole number" />
-        </div>
-  </p>
-  <p>
-   <asp:Label runat="server" AssociatedControlID="WidgetName">Name</asp:Label>
-   <asp:TextBox runat="server" ID="WidgetName" MaxLength="256" />
+    <asp:CompareValidator runat="server" ControlToValidate="widgetId"
+     ValidationGroup="LookupWidget"
+     Display="Dynamic" Type="Integer" Operator="DataTypeCheck"
+     ErrorMessage="ID must be a valid whole number" />
+    <asp:RangeValidator runat="server" ControlToValidate="widgetId"
+     ValidationGroup="LookupWidget"
+     Display="Dynamic" Type="Integer" MinimumValue="1" MaximumValue="999"
+     ErrorMessage="ID must be a positive whole number" />
+   </div>
   </p>
   <p>
    <asp:Button runat="server" Text="Find" ValidationGroup="LookupWidget" OnClick="Find_Click" />

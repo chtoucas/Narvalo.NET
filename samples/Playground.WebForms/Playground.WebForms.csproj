@@ -106,7 +106,7 @@
     <Compile Include="AsyncApm.aspx.designer.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PageDataSource.cs" />
+    <Compile Include="Common\PageDataSource.cs" />
     <Compile Include="Presenters\AsyncApmPresenter.cs" />
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">

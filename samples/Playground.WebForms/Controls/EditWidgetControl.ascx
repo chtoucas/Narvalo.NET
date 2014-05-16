@@ -76,8 +76,8 @@
   </EmptyDataTemplate>
  </asp:FormView>
 
- <mvp:PageDataSource 
-  ID="WidgetDataSource" 
+ <mvp:PageDataSource
+  ID="WidgetDataSource"
   runat="server"
   EnablePaging="true"
   DataObjectTypeName="Playground.Data.Widget"

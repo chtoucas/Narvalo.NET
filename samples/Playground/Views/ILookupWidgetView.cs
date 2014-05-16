@@ -1,26 +1,31 @@
 ﻿namespace Playground.Views
 {
     using System;
+    using System.Collections.Generic;
     using Narvalo.Mvp;
-    using Playground.Views;
+    using Playground.Data;
 
     public interface ILookupWidgetView : IView<LookupWidgetModel>
     {
-        event EventHandler<FindingWidgetEventArgs> Finding;
+        event EventHandler<WidgetIdEventArgs> Finding;
     }
 
-    public class FindingWidgetEventArgs : EventArgs
+    public sealed class LookupWidgetModel
     {
-        public int? Id { get; set; }
-        public string Name { get; set; }
+        readonly IList<Widget> _widgets = new List<Widget>();
 
-        public FindingWidgetEventArgs() { }
+        public bool ShowResults { get; set; }
 
-        public FindingWidgetEventArgs(int id, string name)
-            : this()
+        public IList<Widget> Widgets { get { return _widgets; } }
+    }
+
+    public sealed class WidgetIdEventArgs : EventArgs
+    {
+        public WidgetIdEventArgs(int id)
         {
             Id = id;
-            Name = name;
         }
+
+        public int Id { get; private set; }
     }
 }

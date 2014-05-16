@@ -6,7 +6,7 @@
 
     public partial class LookupWidgetControl : MvpUserControl<LookupWidgetModel>, ILookupWidgetView
     {
-        public event EventHandler<FindingWidgetEventArgs> Finding;
+        public event EventHandler<WidgetIdEventArgs> Finding;
 
         protected void Find_Click(object sender, EventArgs e)
         {
@@ -14,15 +14,14 @@
                 ? (int?)null
                 : Convert.ToInt32(WidgetId.Text);
 
-            OnFinding(id, WidgetName.Text);
+            if (id.HasValue)
+                OnFinding(id.Value);
         }
 
-        void OnFinding(int? id, string name)
+        void OnFinding(int id)
         {
-            var localHandler = Finding;
-
-            if (localHandler != null) {
-                localHandler(this, new FindingWidgetEventArgs { Id = id, Name = name });
+            if (Finding != null) {
+                Finding(this, new WidgetIdEventArgs(id));
             }
         }
     }

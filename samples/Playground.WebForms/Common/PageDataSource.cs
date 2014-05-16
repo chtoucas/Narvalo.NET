@@ -1,4 +1,4 @@
-﻿namespace Playground
+﻿namespace Playground.Common
 {
     using System;
     using System.Reflection;

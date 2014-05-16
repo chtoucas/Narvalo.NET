@@ -14,9 +14,9 @@
         }
 
         public event EventHandler CountingWidgets;
-        public event EventHandler<EditingWidgetEventArgs> DeletingWidget;
-        public event EventHandler<GettingWidgetEventArgs> GettingWidgets;
-        public event EventHandler<EditingWidgetEventArgs> InsertingWidget;
+        public event EventHandler<WidgetIdEventArgs> DeletingWidget;
+        public event EventHandler<GettingWidgetsEventArgs> GettingWidgets;
+        public event EventHandler<InsertingWidgettEventArgs> InsertingWidget;
         public event EventHandler<UpdatingWidgetEventArgs> UpdatingWidget;
 
         public IEnumerable<Widget> GetWidgets(int maximumRows, int startRowIndex)
@@ -49,7 +49,7 @@
         void OnGettingWidgets(int maximumRows, int startRowIndex)
         {
             if (GettingWidgets != null) {
-                GettingWidgets(this, new GettingWidgetEventArgs(maximumRows, startRowIndex));
+                GettingWidgets(this, new GettingWidgetsEventArgs(maximumRows, startRowIndex));
             }
         }
 
@@ -70,14 +70,14 @@
         void OnInsertingWidget(Widget widget)
         {
             if (InsertingWidget != null) {
-                InsertingWidget(this, new EditingWidgetEventArgs(widget));
+                InsertingWidget(this, new InsertingWidgettEventArgs(widget));
             }
         }
 
         void OnDeletingWidget(Widget widget)
         {
             if (DeletingWidget != null) {
-                DeletingWidget(this, new EditingWidgetEventArgs(widget));
+                DeletingWidget(this, new WidgetIdEventArgs(widget.Id));
             }
         }
     }
