@@ -4,7 +4,7 @@
     using Narvalo.Mvp;
     using Playground.Views;
 
-    public class HelloWorldPresenter : PresenterOf<StringModel>
+    public sealed class HelloWorldPresenter : PresenterOf<StringModel>
     {
         public HelloWorldPresenter(IView<StringModel> view)
             : base(view)

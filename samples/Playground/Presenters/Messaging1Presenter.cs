@@ -2,10 +2,9 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.Services;
     using Playground.Views;
 
-    public class Messaging1Presenter : PresenterOf<StringModel>
+    public sealed class Messaging1Presenter : PresenterOf<StringModel>
     {
         public Messaging1Presenter(IView<StringModel> view)
             : base(view)
@@ -15,14 +14,13 @@
 
         void Load(object sender, EventArgs e)
         {
-            var widget = new Widget {
-                Id = 123,
-                Name = "Awesome widget!"
+            var message = new StringMessage {
+                Content = "Awesome widget!"
             };
 
-            View.Model.Message = String.Format("Presenter 1 publishes widget {0}.", widget.Id);
+            View.Model.Message = String.Format("Presenter 1 publishes message: {0}", message.Content);
 
-            Messages.Publish(widget);
+            Messages.Publish(message);
             Messages.Publish(123456);
         }
     }

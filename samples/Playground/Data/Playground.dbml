@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Playground" Class="PlaygroundDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\opt\code-github\Narvalo.NET\samples\Playground.WebForms\App_Data\Playground.mdf;Integrated Security=True" SettingsObjectName="Playground.Properties.Settings" SettingsPropertyName="PlaygroundConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Widgets" Member="Widget">
+    <Type Name="Widget">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

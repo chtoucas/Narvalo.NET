@@ -2,10 +2,9 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.Services;
     using Playground.Views;
 
-    public class Messaging2Presenter : PresenterOf<StringModel>
+    public sealed class Messaging2Presenter : PresenterOf<StringModel>
     {
         public Messaging2Presenter(IView<StringModel> view)
             : base(view)
@@ -15,9 +14,9 @@
 
         void Load(object sender, EventArgs e)
         {
-            Messages.Subscribe<Widget>(_ =>
+            Messages.Subscribe<StringMessage>(_ =>
             {
-                View.Model.Message += String.Format("Presenter 2 received widget {0}.", _.Id);
+                View.Model.Message += String.Format("Presenter 2 received message: {0}", _.Content);
             });
 
             Messages.Subscribe<Guid>(_ =>

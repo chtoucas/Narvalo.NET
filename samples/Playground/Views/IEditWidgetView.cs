@@ -2,7 +2,7 @@
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.Services;
+    using Playground.Data;
 
     public interface IEditWidgetView : IView<EditWidgetModel>
     {

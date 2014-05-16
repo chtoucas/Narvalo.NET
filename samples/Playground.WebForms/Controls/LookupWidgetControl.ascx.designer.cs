@@ -13,30 +13,21 @@ namespace Playground.Controls {
     public partial class LookupWidgetControl {
         
         /// <summary>
-        /// Contrôle widgetId.
+        /// Contrôle WidgetId.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox widgetId;
+        protected global::System.Web.UI.WebControls.TextBox WidgetId;
         
         /// <summary>
-        /// Contrôle widgetName.
+        /// Contrôle WidgetName.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox widgetName;
-        
-        /// <summary>
-        /// Contrôle results.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView results;
+        protected global::System.Web.UI.WebControls.TextBox WidgetName;
     }
 }

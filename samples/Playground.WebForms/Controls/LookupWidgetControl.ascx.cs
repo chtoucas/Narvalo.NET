@@ -10,11 +10,11 @@
 
         protected void Find_Click(object sender, EventArgs e)
         {
-            var id = String.IsNullOrEmpty(widgetId.Text)
+            var id = String.IsNullOrEmpty(WidgetId.Text)
                 ? (int?)null
-                : Convert.ToInt32(widgetId.Text);
+                : Convert.ToInt32(WidgetId.Text);
 
-            OnFinding(id, widgetName.Text);
+            OnFinding(id, WidgetName.Text);
         }
 
         void OnFinding(int? id, string name)

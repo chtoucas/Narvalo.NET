@@ -1,16 +1,13 @@
 ﻿<%@ Control Language="C#" CodeBehind="EditWidgetControl.ascx.cs" Inherits="Playground.Controls.EditWidgetControl" %>
 <div class="edit-widget">
- <asp:FormView runat="server" DataSourceID="widgetDataSource" DefaultMode="ReadOnly"
+ <asp:FormView runat="server" DataSourceID="WidgetDataSource" DefaultMode="ReadOnly"
   DataKeyNames="Id" AllowPaging="true">
   <ItemTemplate>
-   <dl>
-    <dt>ID:</dt>
-    <dd><%# Eval("Id") %></dd>
-    <dt>Name:</dt>
-    <dd><%# Eval("Name") %></dd>
-    <dt>Description:</dt>
-    <dd><%# Eval("Description") %></dd>
-   </dl>
+   <ul>
+    <li>ID: <%# Eval("Id") %></li>
+    <li>Name: <%# Eval("Name") %></li>
+    <li>Description: <%# Eval("Description") %></li>
+   </ul>
    <asp:Button runat="server" CommandName="New" Text="New" />
    <asp:Button runat="server" CommandName="Edit" Text="Edit" />
    <asp:Button runat="server" CommandName="Delete" Text="Delete" />
@@ -74,19 +71,22 @@
    </fieldset>
   </InsertItemTemplate>
   <EmptyDataTemplate>
-   <p class="empty">Widget could not be found</p>
+   <p class="empty">No widget could be found</p>
+   <asp:Button runat="server" CommandName="New" Text="New" />
   </EmptyDataTemplate>
  </asp:FormView>
 
- <mvp:pagedatasource id="widgetDataSource" runat="server"
-  enablepaging="true"
-  dataobjecttypename="Playground.Services.Widget"
-  conflictdetection="CompareAllValues"
-  oldvaluesparameterformatstring="original{0}"
-  selectmethod="GetWidgets"
-  selectcountmethod="CountWidgets"
-  updatemethod="UpdateWidget"
-  insertmethod="InsertWidget"
-  deletemethod="DeleteWidget">
-    </mvp:pagedatasource>
+ <mvp:PageDataSource 
+  ID="WidgetDataSource" 
+  runat="server"
+  EnablePaging="true"
+  DataObjectTypeName="Playground.Data.Widget"
+  ConflictDetection="CompareAllValues"
+  OldValuesParameterFormatString="original{0}"
+  SelectMethod="GetWidgets"
+  SelectCountMethod="CountWidgets"
+  UpdateMethod="UpdateWidget"
+  InsertMethod="InsertWidget"
+  DeleteMethod="DeleteWidget">
+ </mvp:PageDataSource>
 </div>

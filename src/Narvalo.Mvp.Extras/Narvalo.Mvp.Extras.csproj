@@ -91,7 +91,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\ErrorPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">

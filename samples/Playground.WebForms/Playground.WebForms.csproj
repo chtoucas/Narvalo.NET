@@ -41,10 +41,16 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Playground.mdf" />
+    <Content Include="App_Data\Playground_log.ldf">
+      <DependentUpon>Playground.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Themes\Default\screen.css" />
     <Content Include="AsyncTpl.aspx" />
     <Content Include="AsyncApm.aspx" />
@@ -100,8 +106,8 @@
     <Compile Include="AsyncApm.aspx.designer.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PageDataSource.cs" />
     <Compile Include="Presenters\AsyncApmPresenter.cs" />
-    <Compile Include="Presenters\LookupWidgetPresenter.cs" />
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
@@ -269,9 +275,7 @@
       <DependentUpon>WidgetLookup.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
       <Project>{fdadb21a-c99f-4d78-bdcc-a09a6ef97215}</Project>

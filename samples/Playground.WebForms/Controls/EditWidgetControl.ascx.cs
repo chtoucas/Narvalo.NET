@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp.Web;
-    using Playground.Services;
+    using Playground.Data;
     using Playground.Views;
 
     public partial class EditWidgetControl : MvpUserControl<EditWidgetModel>, IEditWidgetView

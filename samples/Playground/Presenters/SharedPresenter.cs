@@ -4,7 +4,7 @@
     using Narvalo.Mvp;
     using Playground.Views;
 
-    public class SharedPresenter : PresenterOf<StringModel>
+    public sealed class SharedPresenter : PresenterOf<StringModel>
     {
         public SharedPresenter(IView<StringModel> view)
             : base(view)

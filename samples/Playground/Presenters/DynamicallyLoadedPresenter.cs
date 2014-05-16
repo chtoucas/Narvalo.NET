@@ -3,7 +3,7 @@
     using Narvalo.Mvp;
     using Playground.Views;
 
-    public class DynamicallyLoadedPresenter : Presenter<IDynamicallyLoadedView>
+    public sealed class DynamicallyLoadedPresenter : Presenter<IDynamicallyLoadedView>
     {
         public DynamicallyLoadedPresenter(IDynamicallyLoadedView view)
             : base(view)

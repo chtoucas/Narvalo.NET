@@ -4,7 +4,7 @@
     using Narvalo.Mvp;
     using Playground.Views;
 
-    public class CompositeDemoPresenter : PresenterOf<StringModel>
+    public sealed class CompositeDemoPresenter : PresenterOf<StringModel>
     {
         public CompositeDemoPresenter(IView<StringModel> view)
             : base(view)

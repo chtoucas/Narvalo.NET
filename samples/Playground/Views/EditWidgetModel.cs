@@ -1,7 +1,7 @@
 ﻿namespace Playground.Views
 {
     using System.Collections.Generic;
-    using Playground.Services;
+    using Playground.Data;
 
     public class EditWidgetModel
     {

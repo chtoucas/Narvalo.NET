@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
     using Narvalo.Mvp;
-    using Playground.Services;
+    using Playground.Data;
     using Playground.Views;
 
-    public class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
+    public sealed class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
         readonly IWidgetRepository _widgetRepository;
 
@@ -40,17 +40,17 @@
 
         void InsertingWidget(object sender, EditingWidgetEventArgs e)
         {
-            _widgetRepository.Save(e.Widget, null);
+            _widgetRepository.Create(e.Widget);
         }
 
         void UpdatingWidget(object sender, UpdatingWidgetEventArgs e)
         {
-            _widgetRepository.Save(e.Widget, e.OriginalWidget);
+            _widgetRepository.Update(e.Widget, e.OriginalWidget);
         }
 
-        static void DeletingWidget(object sender, EditingWidgetEventArgs e)
+        void DeletingWidget(object sender, EditingWidgetEventArgs e)
         {
-            throw new NotImplementedException();
+            _widgetRepository.Delete(e.Widget);
         }
     }
 }

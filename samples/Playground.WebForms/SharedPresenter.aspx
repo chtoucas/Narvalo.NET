@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" CodeBehind="SharedPresenter.aspx.cs" Inherits="Playground.SharedPresenterPage" %>
 
-<%@ Register Src="~/Controls/SharedPresenterControl.ascx" TagPrefix="uc" TagName="Shared" %>
-
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <h2>Shared Presenter</h2>
  <p>
@@ -15,6 +13,6 @@
  <p>
   If this is working, these two GUIDs will match:
  </p>
- <uc:Shared runat="server" />
- <uc:Shared runat="server" />
+ <uc:SharedPresenter runat="server" />
+ <uc:SharedPresenter runat="server" />
 </asp:Content>
