@@ -1,8 +1,8 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public class CompositeDemoPresenter : PresenterOf<StringModel>
     {

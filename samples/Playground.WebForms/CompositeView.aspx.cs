@@ -1,9 +1,9 @@
-﻿namespace Playground.WebForms
+﻿namespace Playground
 {
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Presenters;
-    using Playground.WebForms.Views;
+    using Playground.Presenters;
+    using Playground.Views;
 
     [PresenterBinding(
         typeof(CompositeDemoPresenter),

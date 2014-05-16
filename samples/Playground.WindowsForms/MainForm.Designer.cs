@@ -1,4 +1,4 @@
-﻿namespace Playground.WindowsForms
+﻿namespace Playground
 {
     partial class MainForm
     {
@@ -28,12 +28,12 @@
         private void InitializeComponent()
         {
             this.TextBox = new System.Windows.Forms.TextBox();
-            this.sampleUserControl1 = new Playground.WindowsForms.SampleUserControl();
+            this.sampleUserControl1 = new Playground.SampleUserControl();
             this.SuspendLayout();
             // 
             // TextBox
             // 
-            this.TextBox.Location = new System.Drawing.Point(88, 55);
+            this.TextBox.Location = new System.Drawing.Point(76, 60);
             this.TextBox.Name = "TextBox";
             this.TextBox.Size = new System.Drawing.Size(203, 20);
             this.TextBox.TabIndex = 0;

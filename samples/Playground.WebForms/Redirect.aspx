@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="Redirect.aspx.cs" Inherits="Playground.WebForms.RedirectPage" %>
+﻿<%@ Page Language="C#" CodeBehind="Redirect.aspx.cs" Inherits="Playground.RedirectPage" %>
 
 <%@ Register Src="~/Controls/RedirectControl.ascx" TagPrefix="uc" TagName="Redirect" %>
 

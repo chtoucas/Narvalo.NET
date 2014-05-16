@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="CompositeView.aspx.cs" Inherits="Playground.WebForms.CompositeViewPage" %>
+﻿<%@ Page Language="C#" CodeBehind="CompositeView.aspx.cs" Inherits="Playground.CompositeViewPage" %>
 
 <%@ Register Src="~/Controls/CompositeControl.ascx" TagPrefix="uc" TagName="Composite" %>
 

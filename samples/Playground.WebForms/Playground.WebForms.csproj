@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Playground.WebForms</RootNamespace>
+    <RootNamespace>Playground</RootNamespace>
     <AssemblyName>Playground.WebForms</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
@@ -69,7 +69,6 @@
     <Content Include="WidgetEdit.aspx" />
     <Content Include="WidgetLookup.aspx" />
     <Content Include="README.md" />
-    <Content Include="Handlers\TimeHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,6 +100,9 @@
     <Compile Include="AsyncApm.aspx.designer.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\AsyncApmPresenter.cs" />
+    <Compile Include="Presenters\LookupWidgetPresenter.cs" />
+    <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,12 +194,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\TimeHandler.ashx.cs">
-      <DependentUpon>TimeHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\IWidgetRepository.cs" />
-    <Compile Include="Services\Widget.cs" />
-    <Compile Include="Services\WidgetRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,19 +225,6 @@
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\AsyncApmPresenter.cs" />
-    <Compile Include="Presenters\AsyncTplPresenter.cs" />
-    <Compile Include="Presenters\CompositeDemoPresenter.cs" />
-    <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
-    <Compile Include="Presenters\EditWidgetPresenter.cs" />
-    <Compile Include="Presenters\HelloWorldPresenter.cs" />
-    <Compile Include="Presenters\LookupWidgetPresenter.cs" />
-    <Compile Include="Presenters\Messaging1Presenter.cs" />
-    <Compile Include="Presenters\Messaging2Presenter.cs" />
-    <Compile Include="Presenters\RedirectPresenter.cs" />
-    <Compile Include="Presenters\SharedPresenter.cs" />
-    <Compile Include="Presenters\TimePresenter.cs" />
-    <Compile Include="Presenters\TimeServicePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.aspx.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
@@ -271,15 +254,6 @@
     <Compile Include="ViewsAddedInPageInit.aspx.designer.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\IDynamicallyLoadedView.cs" />
-    <Compile Include="Views\IEditWidgetView.cs" />
-    <Compile Include="Views\ILookupWidgetView.cs" />
-    <Compile Include="Views\IRedirectView.cs" />
-    <Compile Include="Views\ITimeServiceView.cs" />
-    <Compile Include="Views\AsyncMessagesModel.cs" />
-    <Compile Include="Views\EditWidgetModel.cs" />
-    <Compile Include="Views\StringModel.cs" />
-    <Compile Include="Views\LookupWidgetModel.cs" />
     <Compile Include="WidgetEdit.aspx.cs">
       <DependentUpon>WidgetEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -306,6 +280,10 @@
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
       <Name>Narvalo.Mvp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Playground\Playground.csproj">
+      <Project>{2a0f777d-62b8-4509-836f-f6e2cb67e0d8}</Project>
+      <Name>Playground</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

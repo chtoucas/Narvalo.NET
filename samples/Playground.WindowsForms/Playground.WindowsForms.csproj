@@ -7,7 +7,7 @@
     <ProjectGuid>{DCF06FC7-3FB6-49E8-96C9-7AB2E88FF053}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Playground.WindowsForms</RootNamespace>
+    <RootNamespace>Playground</RootNamespace>
     <AssemblyName>Playground.WindowsForms</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

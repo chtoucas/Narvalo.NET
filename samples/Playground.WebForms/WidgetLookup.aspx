@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Language="C#" CodeBehind="WidgetLookup.aspx.cs" Inherits="Playground.WebForms.WidgetLookupPage" %>
+﻿<%@ Page Async="true" Language="C#" CodeBehind="WidgetLookup.aspx.cs" Inherits="Playground.WidgetLookupPage" %>
 
 <%@ Register Src="~/Controls/LookupWidgetControl.ascx" TagPrefix="uc" TagName="LookupWidget" %>
 

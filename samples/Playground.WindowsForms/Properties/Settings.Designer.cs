@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Playground.WindowsForms.Properties {
+namespace Playground.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

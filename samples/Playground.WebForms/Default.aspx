@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="Default.aspx.cs" Inherits="Playground.WebForms.DefaultPage" %>
+﻿<%@ Page Language="C#" CodeBehind="Default.aspx.cs" Inherits="Playground.DefaultPage" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <ul>      
@@ -29,9 +29,6 @@
   <li>
    <asp:HyperLink NavigateUrl="~/AsyncTpl.aspx" runat=server>Async TPL</asp:HyperLink>
   </li>
-  <li>
-   <asp:HyperLink NavigateUrl="~/Handlers/TimeHandler.ashx" runat=server>IHttpHandler</asp:HyperLink>
-  </li>  
   <%--<li><asp:HyperLink NavigateUrl="~/WidgetEdit.aspx" runat=server>Async APM Demo</asp:HyperLink></li>
   <li><asp:HyperLink NavigateUrl="~/WidgetLookup.aspx" runat=server>Async APM Demo</asp:HyperLink></li>--%>
  </ul>

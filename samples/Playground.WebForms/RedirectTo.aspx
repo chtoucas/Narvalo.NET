@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="RedirectTo.aspx.cs" Inherits="Playground.WebForms.RedirectToPage" %>
+﻿<%@ Page Language="C#" CodeBehind="RedirectTo.aspx.cs" Inherits="Playground.RedirectToPage" %>
 
 <asp:content contentplaceholderid="MainContent" runat="server">
  <h2>Redirect Result</h2>

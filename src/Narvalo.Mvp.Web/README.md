@@ -4,10 +4,6 @@ Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsm
 
 See _LICENSE-WebFormsMvp.txt_ for license information.
 
-### Dropped functionalities for now
+### Dropped functionalities
 
-- MvpWebService
-
-### TODO
-
-- Review and enhance the async stuff (IHttpAsyncHandler, HttpTaskAsyncHandler, new async keyword)
+Since I don't see value in MvpHttpHandler and MvpWebService, I removed both.

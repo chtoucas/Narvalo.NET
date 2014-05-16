@@ -1,10 +1,10 @@
-﻿namespace Playground.WebForms.Controls
+﻿namespace Playground.Controls
 {
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Services;
-    using Playground.WebForms.Views;
+    using Playground.Services;
+    using Playground.Views;
 
     public partial class EditWidgetControl : MvpUserControl<EditWidgetModel>, IEditWidgetView
     {
@@ -13,16 +13,22 @@
             AutoDataBind = false;
         }
 
+        public event EventHandler CountingWidgets;
+        public event EventHandler<EditingWidgetEventArgs> DeletingWidget;
+        public event EventHandler<GettingWidgetEventArgs> GettingWidgets;
+        public event EventHandler<EditingWidgetEventArgs> InsertingWidget;
+        public event EventHandler<UpdatingWidgetEventArgs> UpdatingWidget;
+
         public IEnumerable<Widget> GetWidgets(int maximumRows, int startRowIndex)
         {
             OnGettingWidgets(maximumRows, startRowIndex);
             return Model.Widgets;
         }
 
-        public int GetWidgetsCount()
+        public int CountWidgets()
         {
-            OnGettingWidgetsTotalCount();
-            return Model.TotalCount;
+            OnCountingWidgets();
+            return Model.WidgetCount;
         }
 
         public void UpdateWidget(Widget widget, Widget originalWidget)
@@ -40,43 +46,38 @@
             OnDeletingWidget(widget);
         }
 
-        public event EventHandler<GettingWidgetEventArgs> GettingWidgets;
-        private void OnGettingWidgets(int maximumRows, int startRowIndex)
+        void OnGettingWidgets(int maximumRows, int startRowIndex)
         {
             if (GettingWidgets != null) {
                 GettingWidgets(this, new GettingWidgetEventArgs(maximumRows, startRowIndex));
             }
         }
 
-        public event EventHandler GettingWidgetsTotalCount;
-        private void OnGettingWidgetsTotalCount()
+        void OnCountingWidgets()
         {
-            if (GettingWidgetsTotalCount != null) {
-                GettingWidgetsTotalCount(this, EventArgs.Empty);
+            if (CountingWidgets != null) {
+                CountingWidgets(this, EventArgs.Empty);
             }
         }
 
-        public event EventHandler<UpdateWidgetEventArgs> UpdatingWidget;
-        private void OnUpdatingWidget(Widget widget, Widget originalWidget)
+        void OnUpdatingWidget(Widget widget, Widget originalWidget)
         {
             if (UpdatingWidget != null) {
-                UpdatingWidget(this, new UpdateWidgetEventArgs(widget, originalWidget));
+                UpdatingWidget(this, new UpdatingWidgetEventArgs(widget, originalWidget));
             }
         }
 
-        public event EventHandler<EditWidgetEventArgs> InsertingWidget;
-        private void OnInsertingWidget(Widget widget)
+        void OnInsertingWidget(Widget widget)
         {
             if (InsertingWidget != null) {
-                InsertingWidget(this, new EditWidgetEventArgs(widget));
+                InsertingWidget(this, new EditingWidgetEventArgs(widget));
             }
         }
 
-        public event EventHandler<EditWidgetEventArgs> DeletingWidget;
-        private void OnDeletingWidget(Widget widget)
+        void OnDeletingWidget(Widget widget)
         {
             if (DeletingWidget != null) {
-                DeletingWidget(this, new EditWidgetEventArgs(widget));
+                DeletingWidget(this, new EditingWidgetEventArgs(widget));
             }
         }
     }

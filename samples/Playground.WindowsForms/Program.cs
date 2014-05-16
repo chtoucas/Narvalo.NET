@@ -1,4 +1,4 @@
-﻿namespace Playground.WindowsForms
+﻿namespace Playground
 {
     using System;
     using System.Windows.Forms;

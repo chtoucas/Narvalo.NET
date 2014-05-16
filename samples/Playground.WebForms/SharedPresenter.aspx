@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="SharedPresenter.aspx.cs" Inherits="Playground.WebForms.SharedPresenterPage" %>
+﻿<%@ Page Language="C#" CodeBehind="SharedPresenter.aspx.cs" Inherits="Playground.SharedPresenterPage" %>
 
 <%@ Register Src="~/Controls/SharedPresenterControl.ascx" TagPrefix="uc" TagName="Shared" %>
 

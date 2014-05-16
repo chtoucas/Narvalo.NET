@@ -1,7 +1,7 @@
-﻿namespace Playground.WebForms.Views
+﻿namespace Playground.Views
 {
     using System.Collections.Generic;
-    using Playground.WebForms.Services;
+    using Playground.Services;
 
     public class LookupWidgetModel
     {

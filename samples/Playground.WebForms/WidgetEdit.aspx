@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="WidgetEdit.aspx.cs" Inherits="Playground.WebForms.WidgetEditPage" %>
+﻿<%@ Page Language="C#" CodeBehind="WidgetEdit.aspx.cs" Inherits="Playground.WidgetEditPage" %>
 
 <%@ Register Src="~/Controls/EditWidgetControl.ascx" TagPrefix="uc" TagName="EditWidget" %>
 

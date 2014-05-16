@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Language="C#" CodeBehind="AsyncApm.aspx.cs" Inherits="Playground.WebForms.AsyncApmPage" %>
+﻿<%@ Page Async="true" Language="C#" CodeBehind="AsyncApm.aspx.cs" Inherits="Playground.AsyncApmPage" %>
 
 <%@ Register Src="~/Controls/AsyncApmControl.ascx" TagPrefix="uc" TagName="AsyncMessages" %>
 

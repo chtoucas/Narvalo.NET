@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Playground.WebForms")]
+[assembly: AssemblyTitle("Playground")]
 [assembly: AssemblyDescription("Sample demo website for Narvalo.Mvp.Web.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Playground.WebForms")]
+[assembly: AssemblyProduct("Playground")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

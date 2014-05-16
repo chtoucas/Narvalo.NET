@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms
+﻿namespace Playground
 {
     using System;
     using System.Web.UI;

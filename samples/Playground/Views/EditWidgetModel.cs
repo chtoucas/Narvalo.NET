@@ -1,11 +1,11 @@
-﻿namespace Playground.WebForms.Views
+﻿namespace Playground.Views
 {
     using System.Collections.Generic;
-    using Playground.WebForms.Services;
+    using Playground.Services;
 
     public class EditWidgetModel
     {
-        public int TotalCount { get; set; }
+        public int WidgetCount { get; set; }
 
         public IEnumerable<Widget> Widgets { get; set; }
     }

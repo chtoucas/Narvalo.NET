@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="PageView.aspx.cs" Inherits="Playground.WebForms.PageViewPage" %>
+﻿<%@ Page Language="C#" CodeBehind="PageView.aspx.cs" Inherits="Playground.PageViewPage" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <h2>Page as View</h2>

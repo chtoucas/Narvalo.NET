@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Layouts
+﻿namespace Playground.Layouts
 {
     using System.Web.UI;
 

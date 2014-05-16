@@ -1,8 +1,8 @@
-﻿namespace Playground.WebForms.Views
+﻿namespace Playground.Views
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public interface ILookupWidgetView : IView<LookupWidgetModel>
     {

@@ -1,4 +1,4 @@
-﻿namespace Playground.WindowsForms
+﻿namespace Playground
 {
     partial class SampleUserControl
     {

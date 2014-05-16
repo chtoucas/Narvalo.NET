@@ -1,7 +1,7 @@
-﻿namespace Playground.WebForms.Controls
+﻿namespace Playground.Controls
 {
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public partial class AsyncApmControl : MvpUserControl<AsyncMessagesModel> { }
 }

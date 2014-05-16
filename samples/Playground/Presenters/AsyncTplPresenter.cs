@@ -1,10 +1,10 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Narvalo.Mvp;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     // WARNING: DO NOT use async on void event handlers like Load().
     // Don't forget to mark the page with Async="true".

@@ -1,7 +1,7 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using Narvalo.Mvp;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public class DynamicallyLoadedPresenter : Presenter<IDynamicallyLoadedView>
     {

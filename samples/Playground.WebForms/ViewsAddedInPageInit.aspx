@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="ViewsAddedInPageInit.aspx.cs" Inherits="Playground.WebForms.ViewsAddedInPageInitPage" %>
+﻿<%@ Page Language="C#" CodeBehind="ViewsAddedInPageInit.aspx.cs" Inherits="Playground.ViewsAddedInPageInitPage" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
  <h2>View User Controls Being Added in Page_Init</h2>

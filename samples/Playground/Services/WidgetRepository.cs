@@ -1,7 +1,8 @@
-﻿namespace Playground.WebForms.Services
+﻿namespace Playground.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public class WidgetRepository : IWidgetRepository
     {
@@ -51,6 +52,16 @@
         }
 
         public void Save(Widget widget, Widget originalWidget)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Widget>> FindAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Widget> FindByNameAsync(string name)
         {
             throw new NotImplementedException();
         }

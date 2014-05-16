@@ -1,11 +1,10 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
-    using System.Collections.Generic;
     using System.Web;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Services;
-    using Playground.WebForms.Views;
+    using Playground.Services;
+    using Playground.Views;
 
     public class LookupWidgetPresenter : HttpPresenter<ILookupWidgetView, LookupWidgetModel>
     {

@@ -1,17 +1,16 @@
-﻿namespace Playground.WebForms.Views
+﻿namespace Playground.Views
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Services;
-    using Playground.WebForms.Views;
+    using Playground.Services;
 
     public interface IEditWidgetView : IView<EditWidgetModel>
     {
+        event EventHandler CountingWidgets;
+        event EventHandler<EditingWidgetEventArgs> DeletingWidget;
         event EventHandler<GettingWidgetEventArgs> GettingWidgets;
-        event EventHandler GettingWidgetsTotalCount;
-        event EventHandler<UpdateWidgetEventArgs> UpdatingWidget;
-        event EventHandler<EditWidgetEventArgs> InsertingWidget;
-        event EventHandler<EditWidgetEventArgs> DeletingWidget;
+        event EventHandler<EditingWidgetEventArgs> InsertingWidget;
+        event EventHandler<UpdatingWidgetEventArgs> UpdatingWidget;
     }
 
     public class GettingWidgetEventArgs : EventArgs
@@ -26,23 +25,23 @@
         }
     }
 
-    public class UpdateWidgetEventArgs : EventArgs
+    public class UpdatingWidgetEventArgs : EventArgs
     {
         public Widget Widget { get; private set; }
         public Widget OriginalWidget { get; private set; }
 
-        public UpdateWidgetEventArgs(Widget widget, Widget originalWidget)
+        public UpdatingWidgetEventArgs(Widget widget, Widget originalWidget)
         {
             Widget = widget;
             OriginalWidget = originalWidget;
         }
     }
 
-    public class EditWidgetEventArgs : EventArgs
+    public class EditingWidgetEventArgs : EventArgs
     {
         public Widget Widget { get; private set; }
 
-        public EditWidgetEventArgs(Widget widget)
+        public EditingWidgetEventArgs(Widget widget)
         {
             Widget = widget;
         }

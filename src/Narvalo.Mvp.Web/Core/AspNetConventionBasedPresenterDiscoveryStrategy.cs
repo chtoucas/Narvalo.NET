@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Web.Core
     using System.Linq;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         static readonly string[] ViewSuffixes_ = new[] 
         {
@@ -38,10 +38,20 @@ namespace Narvalo.Mvp.Web.Core
                 new AspNetBuildManager(),
                 // REVIEW
                 Enumerable.Empty<string>(),
-                ViewSuffixes_,
-                PresenterNameTemplates_);
+                ViewSuffixes,
+                PresenterNameTemplates);
 
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
+        }
+
+        protected virtual string[] PresenterNameTemplates
+        {
+            get { return PresenterNameTemplates_; }
+        }
+
+        protected virtual string[] ViewSuffixes
+        {
+            get { return ViewSuffixes_; }
         }
 
         public PresenterDiscoveryResult FindBindings(

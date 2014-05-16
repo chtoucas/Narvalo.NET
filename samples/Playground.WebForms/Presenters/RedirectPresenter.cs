@@ -1,7 +1,7 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public class RedirectPresenter : HttpPresenter<IRedirectView>
     {

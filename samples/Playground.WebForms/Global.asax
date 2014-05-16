@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Playground.WebForms.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Playground.Global" Language="C#" %>

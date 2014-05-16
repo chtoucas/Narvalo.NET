@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Services
+﻿namespace Playground.Services
 {
     public class Widget
     {

@@ -1,4 +1,4 @@
-﻿namespace Playground.WindowsForms
+﻿namespace Playground
 {
     using System;
     using Narvalo.Mvp.Windows.Forms;

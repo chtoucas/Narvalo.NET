@@ -1,4 +1,4 @@
-﻿namespace Playground.WebForms.Views
+﻿namespace Playground.Views
 {
     using Narvalo.Mvp;
 

@@ -86,7 +86,6 @@
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenter`2.cs" />
     <Compile Include="IHttpPresenter.cs" />
-    <Compile Include="MvpHttpHandler.cs" />
     <Compile Include="MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

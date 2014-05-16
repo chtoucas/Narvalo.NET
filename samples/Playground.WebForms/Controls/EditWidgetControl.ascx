@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="EditWidgetControl.ascx.cs"
- Inherits="Playground.WebForms.Controls.EditWidgetControl" %>
+﻿<%@ Control Language="C#" CodeBehind="EditWidgetControl.ascx.cs" Inherits="Playground.Controls.EditWidgetControl" %>
 <div class="edit-widget">
  <asp:FormView runat="server" DataSourceID="widgetDataSource" DefaultMode="ReadOnly"
   DataKeyNames="Id" AllowPaging="true">
@@ -81,11 +80,11 @@
 
  <mvp:pagedatasource id="widgetDataSource" runat="server"
   enablepaging="true"
-  dataobjecttypename="WebFormsMvp.FeatureDemos.Domain.Widget"
+  dataobjecttypename="Playground.Services.Widget"
   conflictdetection="CompareAllValues"
   oldvaluesparameterformatstring="original{0}"
   selectmethod="GetWidgets"
-  selectcountmethod="GetWidgetsCount"
+  selectcountmethod="CountWidgets"
   updatemethod="UpdateWidget"
   insertmethod="InsertWidget"
   deletemethod="DeleteWidget">

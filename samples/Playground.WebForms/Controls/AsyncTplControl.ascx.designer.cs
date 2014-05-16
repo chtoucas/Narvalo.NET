@@ -7,7 +7,7 @@
 // </généré automatiquement>
 //------------------------------------------------------------------------------
 
-namespace Playground.WebForms.Controls {
+namespace Playground.Controls {
     
     
     public partial class AsyncTplControl {

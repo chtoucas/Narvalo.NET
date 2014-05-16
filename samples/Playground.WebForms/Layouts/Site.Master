@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" CodeBehind="Site.master.cs"
- Inherits="Playground.WebForms.Layouts.SiteMasterPage" %>
+ Inherits="Playground.Layouts.SiteMasterPage" %>
 
 <!DOCTYPE html>
 <html lang="en">

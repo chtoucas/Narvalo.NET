@@ -1,8 +1,8 @@
-﻿namespace Playground.WebForms.Controls
+﻿namespace Playground.Controls
 {
     using System;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public partial class RedirectControl : MvpUserControl, IRedirectView
     {
@@ -15,10 +15,8 @@
 
         void OnActionAccepted()
         {
-            var localHandler = ActionAccepted;
-
-            if (localHandler != null) {
-                localHandler(this, EventArgs.Empty);
+            if (ActionAccepted != null) {
+                ActionAccepted(this, EventArgs.Empty);
             }
         }
     }

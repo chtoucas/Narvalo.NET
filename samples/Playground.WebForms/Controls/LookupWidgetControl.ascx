@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="LookupWidgetControl.ascx.cs"
- Inherits="Playground.WebForms.Controls.LookupWidgetControl" %>
+﻿<%@ Control Language="C#" CodeBehind="LookupWidgetControl.ascx.cs" Inherits="Playground.Controls.LookupWidgetControl" %>
 <div class="lookup-widget">
  <fieldset>
   <legend>Enter ID or Name of widget</legend>
@@ -24,8 +23,7 @@
    </li>
   </ol>
   <p>
-   <asp:Button runat="server" Text="Find" ValidationGroup="LookupWidget"
-    OnClick="Find_Click" />
+   <asp:Button runat="server" Text="Find" ValidationGroup="LookupWidget" OnClick="Find_Click" />
   </p>
  </fieldset>
  <div class="results">

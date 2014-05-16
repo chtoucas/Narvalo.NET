@@ -1,10 +1,10 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
     using System.Threading;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public class AsyncApmPresenter : HttpPresenterOf<AsyncMessagesModel>
     {

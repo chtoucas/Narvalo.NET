@@ -1,9 +1,9 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.WebForms.Services;
-    using Playground.WebForms.Views;
+    using Playground.Services;
+    using Playground.Views;
 
     public class Messaging2Presenter : PresenterOf<StringModel>
     {

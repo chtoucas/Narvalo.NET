@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="AsyncApmControl.ascx.cs"
- Inherits="Playground.WebForms.Controls.AsyncApmControl" %>
+﻿<%@ Control Language="C#" CodeBehind="AsyncApmControl.ascx.cs" Inherits="Playground.Controls.AsyncApmControl" %>
 <div class="async-messages">
  <asp:Repeater runat="server" DataSource="<%# Model.Messages %>">
   <HeaderTemplate>

@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="DynamicallyLoadedControl.ascx.cs"
- Inherits="Playground.WebForms.Controls.DynamicallyLoadedControl" %>
+﻿<%@ Control Language="C#" CodeBehind="DynamicallyLoadedControl.ascx.cs" Inherits="Playground.Controls.DynamicallyLoadedControl" %>
 <div class="dynamically-loaded">
  <asp:PlaceHolder ID=cph1 runat="server" Visible=false>
   <p class="success">

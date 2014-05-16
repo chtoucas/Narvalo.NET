@@ -1,8 +1,8 @@
-﻿namespace Playground.WebForms.Controls
+﻿namespace Playground.Controls
 {
     using System;
     using Narvalo.Mvp.Web;
-    using Playground.WebForms.Views;
+    using Playground.Views;
 
     public partial class LookupWidgetControl : MvpUserControl<LookupWidgetModel>, ILookupWidgetView
     {
@@ -10,7 +10,7 @@
 
         protected void Find_Click(object sender, EventArgs e)
         {
-            var id = string.IsNullOrEmpty(widgetId.Text)
+            var id = String.IsNullOrEmpty(widgetId.Text)
                 ? (int?)null
                 : Convert.ToInt32(widgetId.Text);
 

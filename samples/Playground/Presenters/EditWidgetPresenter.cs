@@ -1,10 +1,10 @@
-﻿namespace Playground.WebForms.Presenters
+﻿namespace Playground.Presenters
 {
     using System;
     using System.Linq;
     using Narvalo.Mvp;
-    using Playground.WebForms.Services;
-    using Playground.WebForms.Views;
+    using Playground.Services;
+    using Playground.Views;
 
     public class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
@@ -20,10 +20,15 @@
             _widgetRepository = widgetRepository;
 
             View.GettingWidgets += GettingWidgets;
-            View.GettingWidgetsTotalCount += GettingWidgetsTotalCount;
+            View.CountingWidgets += CountingWidgets;
             View.UpdatingWidget += UpdatingWidget;
             View.InsertingWidget += InsertingWidget;
             View.DeletingWidget += DeletingWidget;
+        }
+
+        void CountingWidgets(object sender, EventArgs e)
+        {
+            View.Model.WidgetCount = _widgetRepository.FindAll().Count();
         }
 
         void GettingWidgets(object sender, GettingWidgetEventArgs e)
@@ -33,22 +38,17 @@
                 .Take(e.MaximumRows);
         }
 
-        void GettingWidgetsTotalCount(object sender, EventArgs e)
-        {
-            View.Model.TotalCount = _widgetRepository.FindAll().Count();
-        }
-
-        void UpdatingWidget(object sender, UpdateWidgetEventArgs e)
-        {
-            _widgetRepository.Save(e.Widget, e.OriginalWidget);
-        }
-
-        void InsertingWidget(object sender, EditWidgetEventArgs e)
+        void InsertingWidget(object sender, EditingWidgetEventArgs e)
         {
             _widgetRepository.Save(e.Widget, null);
         }
 
-        static void DeletingWidget(object sender, EditWidgetEventArgs e)
+        void UpdatingWidget(object sender, UpdatingWidgetEventArgs e)
+        {
+            _widgetRepository.Save(e.Widget, e.OriginalWidget);
+        }
+
+        static void DeletingWidget(object sender, EditingWidgetEventArgs e)
         {
             throw new NotImplementedException();
         }

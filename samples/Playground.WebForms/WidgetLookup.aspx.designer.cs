@@ -7,7 +7,7 @@
 // </généré automatiquement>
 //------------------------------------------------------------------------------
 
-namespace Playground.WebForms {
+namespace Playground {
     
     
     public partial class WidgetLookupPage {

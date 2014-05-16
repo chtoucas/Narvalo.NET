@@ -7,7 +7,7 @@
 // </généré automatiquement>
 //------------------------------------------------------------------------------
 
-namespace Playground.WebForms.Layouts {
+namespace Playground.Layouts {
     
     
     public partial class SiteMasterPage {
