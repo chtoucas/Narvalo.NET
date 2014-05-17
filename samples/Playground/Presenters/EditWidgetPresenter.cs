@@ -1,15 +1,17 @@
 ﻿namespace Playground.Presenters
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Narvalo.Mvp;
     using Playground.Data;
     using Playground.Views;
 
+    // NB: Just to make thinks simpler I removed all the async stuff found in the original code.
+    // You can still see async at work width EntityFramework in LookupWidgetPresenter.
     public sealed class EditWidgetPresenter : Presenter<IEditWidgetView, EditWidgetModel>
     {
-        // NB: This is quick and dirty...
-        readonly PlaygroundDataContext _dataContext = new PlaygroundDataContext();
+        readonly PlaygroundContext _dbContext = new PlaygroundContext();
 
         public EditWidgetPresenter(IEditWidgetView view)
             : base(view)
@@ -23,36 +25,35 @@
 
         void CountingWidgets(object sender, EventArgs e)
         {
-            View.Model.WidgetCount = _dataContext.Widget.Count();
+            View.Model.WidgetCount = _dbContext.Widgets.Count();
         }
 
         void GettingWidgets(object sender, GettingWidgetsEventArgs e)
         {
-            View.Model.Widgets = _dataContext.Widget
+            View.Model.Widgets = _dbContext.Widgets
+                .OrderBy(_ => _.Id)
                 .Skip(e.StartRowIndex * e.MaximumRows)
                 .Take(e.MaximumRows);
         }
 
-        void InsertingWidget(object sender, InsertingWidgettEventArgs e)
+        void InsertingWidget(object sender, WidgetEventArgs e)
         {
-            _dataContext.Widget.InsertOnSubmit(e.Widget);
-            _dataContext.SubmitChanges();
+            _dbContext.Widgets.Add(e.Widget);
+            _dbContext.SaveChanges();
         }
 
-        void UpdatingWidget(object sender, UpdatingWidgetEventArgs e)
+        void UpdatingWidget(object sender, WidgetEventArgs e)
         {
-            _dataContext.Widget.Attach(e.Widget, e.OriginalWidget);
-            _dataContext.SubmitChanges();
+            _dbContext.Entry(e.Widget).State = EntityState.Modified;
+            _dbContext.SaveChanges();
         }
 
         void DeletingWidget(object sender, WidgetIdEventArgs e)
         {
-            var q = from _ in _dataContext.Widget where _.Id == e.Id select _;
-            var widget = q.SingleOrDefault();
-
+            var widget = _dbContext.Widgets.Find(e.Id);
             if (widget != null) {
-                _dataContext.Widget.DeleteOnSubmit(widget);
-                _dataContext.SubmitChanges();
+                _dbContext.Widgets.Remove(widget);
+                _dbContext.SaveChanges();
             }
         }
     }

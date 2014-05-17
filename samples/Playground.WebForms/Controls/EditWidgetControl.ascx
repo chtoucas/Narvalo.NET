@@ -80,7 +80,7 @@
   ID="WidgetDataSource"
   runat="server"
   EnablePaging="true"
-  DataObjectTypeName="Playground.Data.Widget"
+  DataObjectTypeName="Playground.Entities.Widget"
   ConflictDetection="CompareAllValues"
   OldValuesParameterFormatString="original{0}"
   SelectMethod="GetWidgets"

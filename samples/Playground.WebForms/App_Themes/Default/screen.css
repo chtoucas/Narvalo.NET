@@ -8,18 +8,7 @@ html {
 body {
   background: #4f6db0;
   font-size: 1.1em;
-}
-
-body {
   margin: 0;
-}
-
-#content {
-  background: #fff;
-  width: 600px;
-  min-height: 500px;
-  margin: 0 auto;
-  padding: 1em 2em;
 }
 
 h1 {
@@ -41,6 +30,14 @@ h3 {
   font-style: italic;
 }
 
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
 a {
   color: orange;
   text-decoration: none;
@@ -50,6 +47,14 @@ a {
     color: blue;
     text-decoration: none;
   }
+         
+#content {
+  background: #fff;
+  width: 600px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 1em 2em;
+}
 
 .dynamically-loaded {
   margin: 10px;

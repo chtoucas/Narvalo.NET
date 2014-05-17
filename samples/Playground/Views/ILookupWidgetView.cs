@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp;
-    using Playground.Data;
+    using Playground.Entities;
 
     public interface ILookupWidgetView : IView<LookupWidgetModel>
     {

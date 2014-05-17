@@ -1,5 +1,4 @@
-﻿<%@ Master Language="C#" CodeBehind="Site.master.cs"
- Inherits="Playground.Layouts.SiteMasterPage" %>
+﻿<%@ Master Language="C#" CodeBehind="Site.master.cs" Inherits="Playground.Layouts.SiteMasterPage" %>
 
 <!DOCTYPE html>
 <html lang="en">

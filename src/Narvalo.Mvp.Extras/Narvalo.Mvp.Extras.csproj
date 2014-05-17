@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Extras</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SignAssembly>true</SignAssembly>
@@ -58,18 +58,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\..\packages\Rx-Core.2.2.4\lib\net45\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\..\packages\Rx-Interfaces.2.2.4\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\..\packages\Rx-Linq.2.2.4\lib\net45\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\..\packages\Rx-PlatformServices.2.2.4\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -91,6 +79,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\ErrorPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
@@ -100,6 +89,10 @@
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
       <Name>Narvalo.Mvp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

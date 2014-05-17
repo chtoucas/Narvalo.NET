@@ -3,15 +3,15 @@
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp;
-    using Playground.Data;
+    using Playground.Entities;
 
     public interface IEditWidgetView : IView<EditWidgetModel>
     {
         event EventHandler CountingWidgets;
         event EventHandler<WidgetIdEventArgs> DeletingWidget;
         event EventHandler<GettingWidgetsEventArgs> GettingWidgets;
-        event EventHandler<InsertingWidgettEventArgs> InsertingWidget;
-        event EventHandler<UpdatingWidgetEventArgs> UpdatingWidget;
+        event EventHandler<WidgetEventArgs> InsertingWidget;
+        event EventHandler<WidgetEventArgs> UpdatingWidget;
     }
 
     public sealed class EditWidgetModel
@@ -33,21 +33,9 @@
         public int StartRowIndex { get; private set; }
     }
 
-    public sealed class UpdatingWidgetEventArgs : EventArgs
+    public sealed class WidgetEventArgs : EventArgs
     {
-        public UpdatingWidgetEventArgs(Widget widget, Widget originalWidget)
-        {
-            Widget = widget;
-            OriginalWidget = originalWidget;
-        }
-
-        public Widget Widget { get; private set; }
-        public Widget OriginalWidget { get; private set; }
-    }
-
-    public sealed class InsertingWidgettEventArgs : EventArgs
-    {
-        public InsertingWidgettEventArgs(Widget widget)
+        public WidgetEventArgs(Widget widget)
         {
             Widget = widget;
         }

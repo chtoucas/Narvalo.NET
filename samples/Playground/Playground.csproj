@@ -30,24 +30,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Playground.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Playground.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="Data\PlaygroundContext.cs" />
+    <Compile Include="Entities\Widget.cs" />
     <Compile Include="Presenters\AsyncTplPresenter.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
     <Compile Include="Presenters\EditWidgetPresenter.cs" />
     <Compile Include="Presenters\HelloWorldPresenter.cs" />
-    <Compile Include="Presenters\LookupWidgetPresenter.cs" />
     <Compile Include="Presenters\StringMessage.cs" />
     <Compile Include="Presenters\Messaging1Presenter.cs" />
     <Compile Include="Presenters\Messaging2Presenter.cs" />
@@ -72,15 +78,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Data\Playground.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Playground.designer.cs</LastGenOutput>
+    <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Data\Playground.dbml.layout">
-      <DependentUpon>Playground.dbml</DependentUpon>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,7 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

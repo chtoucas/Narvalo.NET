@@ -6,6 +6,7 @@
     using Narvalo.Mvp.Web;
     using Playground.Views;
 
+    // See the comments in AsyncTplPresenter.
     public class AsyncApmPresenter : HttpPresenterOf<AsyncMessagesModel>
     {
         static readonly Func<string, string> Thunk_ = (string name) =>

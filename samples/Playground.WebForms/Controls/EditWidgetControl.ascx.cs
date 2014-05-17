@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp.Web;
-    using Playground.Data;
+    using Playground.Entities;
     using Playground.Views;
 
     public partial class EditWidgetControl : MvpUserControl<EditWidgetModel>, IEditWidgetView
@@ -16,8 +16,8 @@
         public event EventHandler CountingWidgets;
         public event EventHandler<WidgetIdEventArgs> DeletingWidget;
         public event EventHandler<GettingWidgetsEventArgs> GettingWidgets;
-        public event EventHandler<InsertingWidgettEventArgs> InsertingWidget;
-        public event EventHandler<UpdatingWidgetEventArgs> UpdatingWidget;
+        public event EventHandler<WidgetEventArgs> InsertingWidget;
+        public event EventHandler<WidgetEventArgs> UpdatingWidget;
 
         public IEnumerable<Widget> GetWidgets(int maximumRows, int startRowIndex)
         {
@@ -33,7 +33,7 @@
 
         public void UpdateWidget(Widget widget, Widget originalWidget)
         {
-            OnUpdatingWidget(widget, originalWidget);
+            OnUpdatingWidget(widget);
         }
 
         public void InsertWidget(Widget widget)
@@ -60,17 +60,17 @@
             }
         }
 
-        void OnUpdatingWidget(Widget widget, Widget originalWidget)
+        void OnUpdatingWidget(Widget widget)
         {
             if (UpdatingWidget != null) {
-                UpdatingWidget(this, new UpdatingWidgetEventArgs(widget, originalWidget));
+                UpdatingWidget(this, new WidgetEventArgs(widget));
             }
         }
 
         void OnInsertingWidget(Widget widget)
         {
             if (InsertingWidget != null) {
-                InsertingWidget(this, new InsertingWidgettEventArgs(widget));
+                InsertingWidget(this, new WidgetEventArgs(widget));
             }
         }
 

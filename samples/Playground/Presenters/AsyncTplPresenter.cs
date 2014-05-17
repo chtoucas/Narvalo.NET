@@ -15,9 +15,7 @@
     // References:
     // - http://www.hanselman.com/blog/TheMagicOfUsingAsynchronousMethodsInASPNET45PlusAnImportantGotcha.aspx
     // - http://msdn.microsoft.com/en-us/library/hh975440.aspx for UseTaskFriendlySynchronizationContext
-
-    // Using the TPL allows to reuse the presenter in a non web context (we do not inherit from HttpPresenter).
-
+    // NB: Using the TPL allows to reuse the presenter in a non web context (we do not inherit from HttpPresenter).
     public sealed class AsyncTplPresenter : PresenterOf<AsyncMessagesModel>
     {
         static readonly Func<string, string> Thunk_ = (string name) =>
@@ -40,10 +38,9 @@
             RunTask("A");
             RunTask("B");
 
-            // NB: To use the following we must enable UseTaskFriendlySynchronizationContext, but 
-            // this conflicts with the APM style of doing async stuff.
-            //AsyncManager.RegisterAsyncTask(TaskA);
-            //AsyncManager.RegisterAsyncTask(TaskB);
+            // NB: To use the AsyncManager.RegisterAsyncTask we must enable 
+            // UseTaskFriendlySynchronizationContext but this conflicts with 
+            // the APM style of doing async stuff.
         }
 
         async void RunTask(string state)
