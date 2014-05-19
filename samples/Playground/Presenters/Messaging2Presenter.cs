@@ -16,7 +16,7 @@
         {
             Messages.Subscribe<StringMessage>(_ =>
             {
-                View.Model.Message += String.Format("Presenter 2 received message: {0}", _.Content);
+                View.Model.Message += String.Format("Presenter 2 received: {0}", _.Content);
             });
 
             Messages.Subscribe<Guid>(_ =>

@@ -30,7 +30,7 @@ h3 {
   font-style: italic;
 }
 
-ul {
+ul, ol {
   padding-left: 0;
 }
 

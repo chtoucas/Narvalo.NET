@@ -11,5 +11,14 @@ namespace Playground {
     
     
     public partial class ParallelPage {
+        
+        /// <summary>
+        /// Contrôle ParallelControl.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Playground.Controls.ParallelControl ParallelControl;
     }
 }

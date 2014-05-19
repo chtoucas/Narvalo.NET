@@ -13,7 +13,7 @@
         {
             Thread.Sleep(100);
 
-            return String.Format("Task {0} ended", name);
+            return String.Format("Task {0} ended. ", name);
         };
 
         public ParallelPresenter(IView<ConcurrentModel> view)

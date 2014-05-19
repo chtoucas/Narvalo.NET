@@ -15,10 +15,10 @@
         void Load(object sender, EventArgs e)
         {
             var message = new StringMessage {
-                Content = "Awesome widget!"
+                Content = "Hello from Messaging1Presenter!"
             };
 
-            View.Model.Message = String.Format("Presenter 1 publishes message: {0}", message.Content);
+            View.Model.Message = String.Format("Presenter 1 publishes: {0}", message.Content);
 
             Messages.Publish(message);
             Messages.Publish(123456);

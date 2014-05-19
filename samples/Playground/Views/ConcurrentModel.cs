@@ -19,11 +19,7 @@
 
         static string Format_(string message)
         {
-            return String.Format(
-                "{2} [Thread={1}] {0}",
-                message,
-                Thread.CurrentThread.ManagedThreadId,
-                DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]"));
+            return String.Format("[Thread={0}] {1}", Thread.CurrentThread.ManagedThreadId, message);
         }
     }
 }
