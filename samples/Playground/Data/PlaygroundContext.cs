@@ -2,7 +2,7 @@
 {
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
-    using Playground.Entities;
+    using Playground.Model;
 
     public class PlaygroundContext : DbContext
     {

@@ -3,5 +3,5 @@
     using Narvalo.Mvp.Web;
     using Playground.Views;
 
-    public partial class AsyncApmControl : MvpUserControl<AsyncModel> { }
+    public partial class AsyncTapControl : MvpUserControl<AsyncModel> { }
 }

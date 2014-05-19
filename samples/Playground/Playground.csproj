@@ -48,11 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\PlaygroundContext.cs" />
-    <Compile Include="Entities\Widget.cs" />
-    <Compile Include="Presenters\AsyncTplPresenter.cs" />
+    <Compile Include="Model\Widget.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
-    <Compile Include="Presenters\EditWidgetPresenter.cs" />
+    <Compile Include="Presenters\WidgetsReadWritePresenter.cs" />
     <Compile Include="Presenters\HelloWorldPresenter.cs" />
     <Compile Include="Presenters\StringMessage.cs" />
     <Compile Include="Presenters\Messaging1Presenter.cs" />
@@ -64,10 +63,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Views\AsyncMessagesModel.cs" />
+    <Compile Include="Views\AsyncModel.cs" />
+    <Compile Include="Views\ConcurrentModel.cs" />
     <Compile Include="Views\IDynamicallyLoadedView.cs" />
-    <Compile Include="Views\IEditWidgetView.cs" />
-    <Compile Include="Views\ILookupWidgetView.cs" />
+    <Compile Include="Views\IWidgetsReadWriteView.cs" />
+    <Compile Include="Views\IWidgetsReadOnlyView.cs" />
     <Compile Include="Views\IRedirectView.cs" />
     <Compile Include="Views\StringModel.cs" />
   </ItemGroup>

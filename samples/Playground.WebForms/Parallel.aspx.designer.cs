@@ -10,15 +10,6 @@
 namespace Playground {
     
     
-    public partial class AsyncApmPage {
-        
-        /// <summary>
-        /// Contrôle AsyncApmControl.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::Playground.Controls.AsyncApmControl AsyncApmControl;
+    public partial class ParallelPage {
     }
 }

@@ -7,18 +7,18 @@
 // </généré automatiquement>
 //------------------------------------------------------------------------------
 
-namespace Playground {
+namespace Playground.Controls {
     
     
-    public partial class AsyncApmPage {
+    public partial class WidgetsReadOnlyControl {
         
         /// <summary>
-        /// Contrôle AsyncApmControl.
+        /// Contrôle WidgetId.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Playground.Controls.AsyncApmControl AsyncApmControl;
+        protected global::System.Web.UI.WebControls.TextBox WidgetId;
     }
 }

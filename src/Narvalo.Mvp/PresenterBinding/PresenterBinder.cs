@@ -98,10 +98,8 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
 
-            var ipresenter = presenter as Internal.IPresenter;
-            if (ipresenter != null) {
-                ipresenter.Messages = _messageCoordinator;
-            }
+            // TODO: Explain this.
+            ((Internal.IPresenter)presenter).Messages = _messageCoordinator;
 
             OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
 

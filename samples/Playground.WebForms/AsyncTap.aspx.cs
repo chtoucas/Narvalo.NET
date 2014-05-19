@@ -3,9 +3,9 @@
     using System;
     using System.Web.UI;
 
-    public partial class AsyncApmPage : Page
+    public partial class AsyncTapPage : Page
     {
-        public AsyncApmPage()
+        public AsyncTapPage()
             : base()
         {
             PreRenderComplete += Page_PreRenderComplete;
@@ -13,7 +13,7 @@
 
         void Page_PreRenderComplete(object sender, EventArgs e)
         {
-            AsyncApmControl.Model.RecordPagePreRenderComplete();
+            AsyncTapControl.Model.RecordPagePreRenderComplete();
         }
     }
 }

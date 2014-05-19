@@ -22,7 +22,7 @@
     {
         static readonly string[] PresenterNameTemplates_ = new[]
         {
-            "Playground.Presenters.{presenter}"
+            "Playground.Presenters.{presenter}",
         };
 
         protected override string[] PresenterNameTemplates

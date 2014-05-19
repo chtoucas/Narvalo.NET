@@ -2,15 +2,16 @@
 {
     using System;
     using System.Threading;
+    using System.Threading.Tasks;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
     using Playground.Views;
 
-    public sealed class AsyncApmPresenter : HttpPresenterOf<AsyncModel>
+    public sealed class AsyncTapPresenter : HttpPresenterOf<AsyncModel>
     {
         static readonly Action Thunk_ = () => Thread.Sleep(100);
 
-        public AsyncApmPresenter(IView<AsyncModel> view)
+        public AsyncTapPresenter(IView<AsyncModel> view)
             : base(view)
         {
             View.Load += Load;
@@ -20,10 +21,15 @@
         {
             View.Model.RecordViewLoad();
 
-            AsyncManager.RegisterAsyncTask(BeginInvoke, EndInvoke, null, null, false);
+            AsyncManager.RegisterAsyncTask(InvokeAsync);
         }
 
-        IAsyncResult BeginInvoke(object sender, EventArgs e, AsyncCallback cb, object state)
+        async Task InvokeAsync()
+        {
+            await Task.Factory.FromAsync(BeginInvoke, EndInvoke, null);
+        }
+
+        IAsyncResult BeginInvoke(AsyncCallback cb, object state)
         {
             View.Model.RecordAsyncStarted();
 

@@ -61,16 +61,18 @@
       <DependentUpon>Playground.mdf</DependentUpon>
     </Content>
     <Content Include="App_Themes\Default\screen.css" />
-    <Content Include="AsyncTpl.aspx" />
+    <Content Include="AsyncTap.aspx" />
+    <Content Include="Controls\AsyncTapControl.ascx" />
+    <Content Include="Parallel.aspx" />
     <Content Include="AsyncApm.aspx" />
     <Content Include="CompositeView.aspx" />
-    <Content Include="Controls\AsyncTplControl.ascx" />
+    <Content Include="Controls\ParallelControl.ascx" />
     <Content Include="Controls\AsyncApmControl.ascx" />
     <Content Include="Controls\CompositeControl.ascx" />
     <Content Include="Controls\DynamicallyLoadedControl.ascx" />
-    <Content Include="Controls\EditWidgetControl.ascx" />
+    <Content Include="Controls\WidgetsReadWriteControl.ascx" />
     <Content Include="Controls\HelloWorldControl.ascx" />
-    <Content Include="Controls\LookupWidgetControl.ascx" />
+    <Content Include="Controls\WidgetsReadOnlyControl.ascx" />
     <Content Include="Controls\Messaging1Control.ascx" />
     <Content Include="Controls\Messaging2Control.ascx" />
     <Content Include="Controls\RedirectControl.ascx" />
@@ -81,8 +83,8 @@
     <Content Include="Messaging.aspx" />
     <Content Include="Layouts\Site.Master" />
     <Content Include="App_Themes\Default\Controls.skin" />
-    <Content Include="WidgetEdit.aspx" />
-    <Content Include="WidgetLookup.aspx" />
+    <Content Include="Widgets.aspx" />
+    <Content Include="LookupWidget.aspx" />
     <Content Include="README.md" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -99,15 +101,31 @@
     <Content Include="Global.asax" />
     <Content Include="Redirect.aspx" />
     <Content Include="RedirectTo.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncTpl.aspx.cs">
-      <DependentUpon>AsyncTpl.aspx</DependentUpon>
+    <Compile Include="AsyncTap.aspx.cs">
+      <DependentUpon>AsyncTap.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AsyncTpl.aspx.designer.cs">
-      <DependentUpon>AsyncTpl.aspx</DependentUpon>
+    <Compile Include="AsyncTap.aspx.designer.cs">
+      <DependentUpon>AsyncTap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AsyncTapControl.ascx.cs">
+      <DependentUpon>AsyncTapControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AsyncTapControl.ascx.designer.cs">
+      <DependentUpon>AsyncTapControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Parallel.aspx.cs">
+      <DependentUpon>Parallel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parallel.aspx.designer.cs">
+      <DependentUpon>Parallel.aspx</DependentUpon>
     </Compile>
     <Compile Include="AsyncApm.aspx.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
@@ -118,7 +136,8 @@
     </Compile>
     <Compile Include="Common\PageDataSource.cs" />
     <Compile Include="Presenters\AsyncApmPresenter.cs" />
-    <Compile Include="Presenters\LookupWidgetPresenter.cs" />
+    <Compile Include="Presenters\AsyncTapPresenter.cs" />
+    <Compile Include="Presenters\ParallelPresenter.cs" />
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
@@ -127,12 +146,12 @@
     <Compile Include="CompositeView.aspx.designer.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AsyncTplControl.ascx.cs">
-      <DependentUpon>AsyncTplControl.ascx</DependentUpon>
+    <Compile Include="Controls\ParallelControl.ascx.cs">
+      <DependentUpon>ParallelControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\AsyncTplControl.ascx.designer.cs">
-      <DependentUpon>AsyncTplControl.ascx</DependentUpon>
+    <Compile Include="Controls\ParallelControl.ascx.designer.cs">
+      <DependentUpon>ParallelControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
@@ -155,12 +174,12 @@
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.designer.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditWidgetControl.ascx.cs">
-      <DependentUpon>EditWidgetControl.ascx</DependentUpon>
+    <Compile Include="Controls\WidgetsReadWriteControl.ascx.cs">
+      <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\EditWidgetControl.ascx.designer.cs">
-      <DependentUpon>EditWidgetControl.ascx</DependentUpon>
+    <Compile Include="Controls\WidgetsReadWriteControl.ascx.designer.cs">
+      <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
@@ -169,12 +188,12 @@
     <Compile Include="Controls\HelloWorldControl.ascx.designer.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LookupWidgetControl.ascx.cs">
-      <DependentUpon>LookupWidgetControl.ascx</DependentUpon>
+    <Compile Include="Controls\WidgetsReadOnlyControl.ascx.cs">
+      <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\LookupWidgetControl.ascx.designer.cs">
-      <DependentUpon>LookupWidgetControl.ascx</DependentUpon>
+    <Compile Include="Controls\WidgetsReadOnlyControl.ascx.designer.cs">
+      <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
@@ -242,6 +261,7 @@
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\WidgetsReadOnlyPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.aspx.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
@@ -271,19 +291,19 @@
     <Compile Include="ViewsAddedInPageInit.aspx.designer.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WidgetEdit.aspx.cs">
-      <DependentUpon>WidgetEdit.aspx</DependentUpon>
+    <Compile Include="Widgets.aspx.cs">
+      <DependentUpon>Widgets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WidgetEdit.aspx.designer.cs">
-      <DependentUpon>WidgetEdit.aspx</DependentUpon>
+    <Compile Include="Widgets.aspx.designer.cs">
+      <DependentUpon>Widgets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WidgetLookup.aspx.cs">
-      <DependentUpon>WidgetLookup.aspx</DependentUpon>
+    <Compile Include="LookupWidget.aspx.cs">
+      <DependentUpon>LookupWidget.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WidgetLookup.aspx.designer.cs">
-      <DependentUpon>WidgetLookup.aspx</DependentUpon>
+    <Compile Include="LookupWidget.aspx.designer.cs">
+      <DependentUpon>LookupWidget.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
