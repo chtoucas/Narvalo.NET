@@ -10,6 +10,17 @@ namespace Narvalo.Mvp.Web.Internal
 
     internal static class HttpPresenterBinderFactory
     {
+        //public static HttpPresenterBinder Create(
+        //    MvpHttpHandler httpHandler,
+        //    HttpContext context)
+        //{
+        //    return Create(
+        //        new[] { httpHandler },
+        //        context,
+        //        PlatformServices.Current,
+        //        MessageCoordinator.BlackHole);
+        //}
+
         public static HttpPresenterBinder Create(
             IEnumerable<Control> controls,
             HttpContext context)
