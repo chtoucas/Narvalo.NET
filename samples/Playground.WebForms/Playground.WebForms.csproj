@@ -63,6 +63,7 @@
     <Content Include="Assets\screen.css" />
     <Content Include="AsyncTap.aspx" />
     <Content Include="Controls\AsyncTapControl.ascx" />
+    <Content Include="Controls\SharedPresenterControl2.ascx" />
     <Content Include="Parallel.aspx" />
     <Content Include="AsyncApm.aspx" />
     <Content Include="CompositeView.aspx" />
@@ -76,7 +77,7 @@
     <Content Include="Controls\Messaging1Control.ascx" />
     <Content Include="Controls\Messaging2Control.ascx" />
     <Content Include="Controls\RedirectControl.ascx" />
-    <Content Include="Controls\SharedPresenterControl.ascx" />
+    <Content Include="Controls\SharedPresenterControl1.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="HelloWorld.aspx" />
     <Content Include="License-WebFormsMvp.txt" />
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="Controls\AsyncTapControl.ascx.designer.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SharedPresenterControl2.ascx.cs">
+      <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SharedPresenterControl2.ascx.designer.cs">
+      <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
     </Compile>
     <Compile Include="Parallel.aspx.cs">
       <DependentUpon>Parallel.aspx</DependentUpon>
@@ -215,12 +223,12 @@
     <Compile Include="Controls\RedirectControl.ascx.designer.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SharedPresenterControl.ascx.cs">
-      <DependentUpon>SharedPresenterControl.ascx</DependentUpon>
+    <Compile Include="Controls\SharedPresenterControl1.ascx.cs">
+      <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controls\SharedPresenterControl.ascx.designer.cs">
-      <DependentUpon>SharedPresenterControl.ascx</DependentUpon>
+    <Compile Include="Controls\SharedPresenterControl1.ascx.designer.cs">
+      <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

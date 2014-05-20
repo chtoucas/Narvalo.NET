@@ -9,14 +9,8 @@
         public CompositePresenter(IView<StringModel> view)
             : base(view)
         {
-            View.Load += Load;
-        }
-
-        void Load(object sender, EventArgs e)
-        {
-            View.Model.Message = String.Format(
-                "This message was set by the presenter. Here's a new guid to demonstrate that all views are sharing the one presenter instance: {0}",
-                Guid.NewGuid());
+            View.Load += (sender, e) =>
+                View.Model.Message = String.Format(@"Presenter instance: {0}", Guid.NewGuid());
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public sealed class StringModel
     {
-        public string Message { get; set; }
+        string _message = "If you see this message, something went wrong :-(";
+
+        public string Message { get { return _message; } set { _message = value; } }
     }
 }

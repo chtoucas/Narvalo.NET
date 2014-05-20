@@ -10,6 +10,6 @@
 namespace Playground.Controls {
     
     
-    public partial class SharedPresenterControl {
+    public partial class SharedPresenterControl1 {
     }
 }
