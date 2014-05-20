@@ -53,6 +53,7 @@
     <Compile Include="Model\Widget.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
+    <Compile Include="Presenters\WidgetsReadOnlyPresenter.cs" />
     <Compile Include="Presenters\WidgetsReadWritePresenter.cs" />
     <Compile Include="Presenters\HelloWorldPresenter.cs" />
     <Compile Include="Presenters\StringMessage.cs" />

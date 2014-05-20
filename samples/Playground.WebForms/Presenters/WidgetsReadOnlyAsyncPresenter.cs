@@ -10,27 +10,14 @@
     using Playground.Model;
     using Playground.Views;
 
-    public sealed class WidgetsReadOnlyPresenter
+    public sealed class WidgetsReadOnlyAsyncPresenter
         : HttpPresenter<IWidgetsReadOnlyView, WidgetsReadOnlyModel>
     {
-        public WidgetsReadOnlyPresenter(IWidgetsReadOnlyView view)
+        public WidgetsReadOnlyAsyncPresenter(IWidgetsReadOnlyView view)
             : base(view)
         {
-            View.Finding += Finding;
             View.FindingTap += FindingTap;
             View.FindingApm += FindingApm;
-        }
-
-        void Finding(object sender, WidgetIdEventArgs e)
-        {
-            using (var context = new PlaygroundContext()) {
-                var widget = context.Widgets.Find(e.Id);
-
-                if (widget != null) {
-                    View.Model.Widgets.Add(widget);
-                    View.Model.ShowResult = true;
-                }
-            }
         }
 
         void FindingTap(object sender, WidgetIdEventArgs e)

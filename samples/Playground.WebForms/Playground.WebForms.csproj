@@ -261,7 +261,7 @@
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\WidgetsReadOnlyPresenter.cs" />
+    <Compile Include="Presenters\WidgetsReadOnlyAsyncPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.aspx.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>

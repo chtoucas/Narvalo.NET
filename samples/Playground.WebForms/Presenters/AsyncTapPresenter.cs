@@ -26,19 +26,9 @@
 
         async Task InvokeAsync()
         {
-            await Task.Factory.FromAsync(BeginInvoke, EndInvoke, null);
-        }
-
-        IAsyncResult BeginInvoke(AsyncCallback cb, object state)
-        {
             View.Model.RecordAsyncStarted();
 
-            return Thunk_.BeginInvoke(cb, state);
-        }
-
-        void EndInvoke(IAsyncResult ar)
-        {
-            Thunk_.EndInvoke(ar);
+            await Task.Factory.FromAsync(Thunk_.BeginInvoke, Thunk_.EndInvoke, null);
 
             View.Model.RecordAsyncEnded();
         }

@@ -1,9 +1,13 @@
 ﻿namespace Playground.Controls
 {
     using System;
+    using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
+    using Playground.Presenters;
     using Playground.Views;
 
+    [PresenterBinding(typeof(WidgetsReadOnlyPresenter))]
+    [PresenterBinding(typeof(WidgetsReadOnlyAsyncPresenter))]
     public partial class WidgetsReadOnlyControl
         : MvpUserControl<WidgetsReadOnlyModel>, IWidgetsReadOnlyView
     {

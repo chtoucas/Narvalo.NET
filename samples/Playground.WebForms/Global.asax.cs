@@ -11,8 +11,8 @@
         public void Application_Start(object sender, EventArgs e)
         {
             new MvpBootstrapper()
-                .DiscoverPresenter.With(new CustomPresenterDiscoveryStrategy())
                 .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
+                .DiscoverPresenter.With(new CustomPresenterDiscoveryStrategy())
                 .Run();
         }
     }
