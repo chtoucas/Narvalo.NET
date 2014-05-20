@@ -1,4 +1,4 @@
-﻿namespace Playground.Model
+﻿namespace Playground.Entities
 {
     public class Widget
     {

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Narvalo.Mvp.Web;
-    using Playground.Model;
+    using Playground.Entities;
     using Playground.Views;
 
     public partial class WidgetsReadWriteControl

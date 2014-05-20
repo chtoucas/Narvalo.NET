@@ -1,6 +1,6 @@
 ﻿namespace Playground.Views
 {
-    public class StringModel
+    public sealed class StringModel
     {
         public string Message { get; set; }
     }

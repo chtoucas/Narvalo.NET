@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\PlaygroundContext.cs" />
-    <Compile Include="Model\Widget.cs" />
+    <Compile Include="Entities\Widget.cs" />
     <Compile Include="Presenters\CompositeDemoPresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
     <Compile Include="Presenters\WidgetsReadOnlyPresenter.cs" />
@@ -69,6 +69,11 @@
     <Compile Include="Views\AsyncModel.cs" />
     <Compile Include="Views\ConcurrentModel.cs" />
     <Compile Include="Views\IDynamicallyLoadedView.cs" />
+    <Compile Include="Views\GettingWidgetsEventArgs.cs" />
+    <Compile Include="Views\WidgetEventArgs.cs" />
+    <Compile Include="Views\WidgetsReadWriteModel.cs" />
+    <Compile Include="Views\WidgetIdEventArgs.cs" />
+    <Compile Include="Views\WidgetsReadOnlyModel.cs" />
     <Compile Include="Views\IWidgetsReadWriteView.cs" />
     <Compile Include="Views\IWidgetsReadOnlyView.cs" />
     <Compile Include="Views\IRedirectView.cs" />

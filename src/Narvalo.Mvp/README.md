@@ -15,7 +15,7 @@ Changes from the original "Web Forms Mvp"
 
 ### Remarks
 
-- Support for IOC (at least Autofac) is provided in src/Narvalo.Mvp.Extras. 
+- Sample support for IOC (at least Autofac) is provided in src/Narvalo.Mvp.Extras. 
   Since it is identical to what is done in WebFormsMvp, I do not intend to make
   it an official package. Just copy and adapt the code from WebFormsMvp.
   The same applies to StructureMap, Castle or Unity.
@@ -31,12 +31,8 @@ TODO (by order of priority)
   * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, not ready.
   * WPF, not yet started.
 
-- Using custom presenter types per platform prevents the reuse
-  of presenters across different platforms. 
-  For WebForms, we add an async manager (but we can avoid using with the TPL)	
-  and HttpContext (for the navigation part like redirect, a solution might be 
-  in the Navigator (see below), but for the rest???). 
-  Maybe it is a necessary evil...?
+- REVIEW: Using custom presenter types per platform prevents the reuse
+  of presenters across different platforms. Maybe it is a necessary evil...?
 
 - Add support for Appication Controller, Navigator, EventAggregator (not the same
   as cross-presenter communication).

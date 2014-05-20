@@ -7,7 +7,7 @@
     using System.Web.Configuration;
     using Narvalo.Mvp.Web;
     using Playground.Data;
-    using Playground.Model;
+    using Playground.Entities;
     using Playground.Views;
 
     public sealed class WidgetsReadOnlyAsyncPresenter
