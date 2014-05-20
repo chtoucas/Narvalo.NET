@@ -1,4 +1,4 @@
-﻿namespace Playground.Common
+﻿namespace WebFormsMvp
 {
     using System;
     using System.Reflection;

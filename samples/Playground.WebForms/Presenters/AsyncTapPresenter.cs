@@ -9,7 +9,7 @@
 
     public sealed class AsyncTapPresenter : HttpPresenterOf<AsyncModel>
     {
-        static readonly Action Thunk_ = () => Thread.Sleep(100);
+        static readonly Action Thunk_ = () => Thread.Sleep(10);
 
         public AsyncTapPresenter(IView<AsyncModel> view)
             : base(view)
@@ -28,7 +28,7 @@
         {
             View.Model.RecordAsyncStarted();
 
-            await Task.Factory.FromAsync(Thunk_.BeginInvoke, Thunk_.EndInvoke, null);
+            await Task.Run(Thunk_);
 
             View.Model.RecordAsyncEnded();
         }

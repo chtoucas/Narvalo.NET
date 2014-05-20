@@ -33,6 +33,15 @@ namespace Narvalo.Mvp.Web.Core
         }
 
         public void RegisterAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            object state)
+        {
+            _page.RegisterAsyncTask(
+                new PageAsyncTask(beginHandler, endHandler, null, state, executeInParallel: false));
+        }
+
+        public void RegisterAsyncTask(
             BeginEventHandler beginHandler, 
             EndEventHandler endHandler,
             EndEventHandler timeoutHandler,
@@ -41,7 +50,7 @@ namespace Narvalo.Mvp.Web.Core
             _page.RegisterAsyncTask(
                 new PageAsyncTask(beginHandler, endHandler, timeoutHandler, state));
         }
-     
+
         public void RegisterAsyncTask(
             BeginEventHandler beginHandler,
             EndEventHandler endHandler, 

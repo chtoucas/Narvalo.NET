@@ -1,8 +1,0 @@
-﻿<asp:RequiredFieldValidator runat="server" ForeColor="" CssClass="validation-error" />
-<asp:RangeValidator runat="server" ForeColor="" CssClass="validation-error" />
-<asp:CompareValidator runat="server" ForeColor="" CssClass="validation-error" />
-<asp:RegularExpressionValidator runat="server" ForeColor="" CssClass="validation-error" />
-<asp:CustomValidator runat="server" ForeColor="" CssClass="validation-error" />
-<asp:LinkButton runat="server" CssClass="button" />
-<asp:Button runat="server" CssClass="button" />
-<asp:TextBox runat="server" CssClass="text-box" />

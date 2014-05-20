@@ -60,7 +60,7 @@
     <Content Include="App_Data\Playground_log.ldf">
       <DependentUpon>Playground.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Themes\Default\screen.css" />
+    <Content Include="Assets\screen.css" />
     <Content Include="AsyncTap.aspx" />
     <Content Include="Controls\AsyncTapControl.ascx" />
     <Content Include="Parallel.aspx" />
@@ -82,7 +82,6 @@
     <Content Include="License-WebFormsMvp.txt" />
     <Content Include="Messaging.aspx" />
     <Content Include="Layouts\Site.Master" />
-    <Content Include="App_Themes\Default\Controls.skin" />
     <Content Include="Widgets.aspx" />
     <Content Include="LookupWidget.aspx" />
     <Content Include="README.md" />

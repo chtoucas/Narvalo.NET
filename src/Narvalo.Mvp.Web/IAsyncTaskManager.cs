@@ -15,12 +15,16 @@ namespace Narvalo.Mvp.Web
 
         void RegisterAsyncTask(Func<Task> handler);
 
-         void RegisterAsyncTask(
-            BeginEventHandler beginHandler,
-            EndEventHandler endHandler,
-            EndEventHandler timeoutHandler,
-            object state);
+        void RegisterAsyncTask(BeginEventHandler beginHandler, EndEventHandler endHandler, object state);
 
+        [Obsolete("As of .NET 4.5, you should not provide a timeoutHandler. Instead you should use one of the Task-based overloads.")]
+        void RegisterAsyncTask(
+           BeginEventHandler beginHandler,
+           EndEventHandler endHandler,
+           EndEventHandler timeoutHandler,
+           object state);
+
+        [Obsolete("As of .NET 4.5, you should not provide a timeoutHandler or set executeInParallel to true. Instead you should use one of the Task-based overloads.")]
         void RegisterAsyncTask(
             BeginEventHandler beginHandler,
             EndEventHandler endHandler,

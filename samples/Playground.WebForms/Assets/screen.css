@@ -7,7 +7,7 @@ html {
 
 body {
   background: #4f6db0;
-  font-size: 1.1em;
+  font-size: 1em;
   margin: 0;
 }
 
@@ -22,11 +22,11 @@ h1 {
   }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 h3 {
-  font-size: 1.1em;
+  font-size: 1em;
   font-style: italic;
 }
 
@@ -47,7 +47,7 @@ a {
     color: blue;
     text-decoration: none;
   }
-         
+
 #content {
   background: #fff;
   width: 600px;

@@ -13,14 +13,14 @@ namespace Narvalo.Mvp.Resolvers
     {
         readonly IBuildManager _buildManager;
         readonly IEnumerable<string> _defaultNamespaces;
-        readonly string[] _presenterNameTemplates;
-        readonly string[] _viewSuffixes;
+        readonly IEnumerable<string> _presenterNameTemplates;
+        readonly IEnumerable<string> _viewSuffixes;
 
         public PresenterTypeResolver(
             IBuildManager buildManager,
             IEnumerable<string> defaultNamespaces,
-            string[] viewSuffixes,
-            string[] presenterNameTemplates)
+            IEnumerable<string> viewSuffixes,
+            IEnumerable<string> presenterNameTemplates)
         {
             Require.NotNull(buildManager, "buildManager");
             Require.NotNull(defaultNamespaces, "defaultNamespaces");

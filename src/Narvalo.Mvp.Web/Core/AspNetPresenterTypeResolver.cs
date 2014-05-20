@@ -12,8 +12,8 @@ namespace Narvalo.Mvp.Web.Core
         public AspNetPresenterTypeResolver(
             IBuildManager buildManager,
             IEnumerable<string> defaultNamespaces,
-            string[] viewSuffixes,
-            string[] presenterNameTemplates)
+            IEnumerable<string> viewSuffixes,
+            IEnumerable<string> presenterNameTemplates)
             : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates) { }
 
         public override Type Resolve(Type input)

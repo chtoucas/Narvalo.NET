@@ -10,27 +10,16 @@
     {
         public void Application_Start(object sender, EventArgs e)
         {
+            var presenterDiscoveryStrategy
+                = new AspNetConventionBasedPresenterDiscoveryStrategy(
+                    AspNetConventionBasedPresenterDiscoveryStrategy.DefaultViewSuffixes,
+                    new[] { "Playground.Presenters.{presenter}" },
+                    enableCache: true);
+
             new MvpBootstrapper()
                 .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
-                .DiscoverPresenter.With(new CustomPresenterDiscoveryStrategy())
+                .DiscoverPresenter.With(presenterDiscoveryStrategy)
                 .Run();
-        }
-    }
-
-    public sealed class CustomPresenterDiscoveryStrategy
-        : AspNetConventionBasedPresenterDiscoveryStrategy
-    {
-        static readonly string[] PresenterNameTemplates_ = new[]
-        {
-            "Playground.Presenters.{presenter}",
-        };
-
-        protected override string[] PresenterNameTemplates
-        {
-            get
-            {
-                return PresenterNameTemplates_;
-            }
         }
     }
 }

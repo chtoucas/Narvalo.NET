@@ -31,6 +31,15 @@
 
         async Task RunTasks()
         {
+            // NB: This is just to demonstrate parallel execution of tasks.
+            // In real world, you are better off using Parallel.For:
+            //Parallel.For(0, 3, i =>
+            //{
+            //    View.Model.Append(String.Format("Task {0} started", i));
+            //    Thread.Sleep(100);
+            //    View.Model.Append(String.Format("Task {0} ended. ", i));
+            //});
+
             await Task.WhenAll(CreateTask("A"), CreateTask("B"), CreateTask("C"));
         }
 

@@ -6,7 +6,7 @@
     using Playground.Views;
 
     [PresenterBinding(
-        typeof(CompositeDemoPresenter),
+        typeof(CompositePresenter),
         ViewType = typeof(IView<StringModel>),
         BindingMode = PresenterBindingMode.SharedPresenter)]
     public partial class CompositeViewPage : MvpPage<StringModel> { }

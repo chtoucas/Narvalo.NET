@@ -8,7 +8,7 @@
 
     public sealed class AsyncApmPresenter : HttpPresenterOf<AsyncModel>
     {
-        static readonly Action Thunk_ = () => Thread.Sleep(100);
+        static readonly Action Thunk_ = () => Thread.Sleep(10);
 
         public AsyncApmPresenter(IView<AsyncModel> view)
             : base(view)
@@ -20,7 +20,7 @@
         {
             View.Model.RecordViewLoad();
 
-            AsyncManager.RegisterAsyncTask(BeginInvoke, EndInvoke, null, null, false);
+            AsyncManager.RegisterAsyncTask(BeginInvoke, EndInvoke, null);
         }
 
         IAsyncResult BeginInvoke(object sender, EventArgs e, AsyncCallback cb, object state)

@@ -30,7 +30,7 @@
         {
             BeginEventHandler beginAsync = (sa, ea, cb, state) => BeginFind(e.Id, sa, ea, cb, state);
 
-            AsyncManager.RegisterAsyncTask(beginAsync, EndFind, null, null, false);
+            AsyncManager.RegisterAsyncTask(beginAsync, EndFind, null);
             AsyncManager.ExecuteRegisteredAsyncTasks();
         }
 

@@ -8,7 +8,13 @@ namespace Narvalo.Mvp.Web.Core
 
     public class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly string[] ViewSuffixes_ = new[] 
+        static readonly string[] DefaultPresenterNameTemplates_ = new[]
+        {
+            "{namespace}.Presenters.{presenter}",
+            "{namespace}.{presenter}",
+        };
+
+        static readonly string[] DefaultViewSuffixes_ = new[] 
         {
             // Web Forms
             "UserControl",
@@ -24,35 +30,29 @@ namespace Narvalo.Mvp.Web.Core
             "View",
         };
 
-        static readonly string[] PresenterNameTemplates_ = new[]
-        {
-            "{namespace}.Presenters.{presenter}",
-            "{namespace}.{presenter}",
-        };
-
         readonly IPresenterDiscoveryStrategy _inner;
 
         public AspNetConventionBasedPresenterDiscoveryStrategy()
+            : this(DefaultViewSuffixes_, DefaultPresenterNameTemplates_, enableCache: true) { }
+
+        public AspNetConventionBasedPresenterDiscoveryStrategy(
+            IEnumerable<string> viewSuffixes,
+            IEnumerable<string> presenterNameTemplates,
+            bool enableCache)
         {
             var typeResolver = new AspNetPresenterTypeResolver(
                 new AspNetBuildManager(),
                 // REVIEW
                 Enumerable.Empty<string>(),
-                ViewSuffixes,
-                PresenterNameTemplates);
+                viewSuffixes,
+                presenterNameTemplates);
 
-            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
+            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver, enableCache);
         }
 
-        protected virtual string[] PresenterNameTemplates
-        {
-            get { return PresenterNameTemplates_; }
-        }
+        public static IEnumerable<string> DefaultPresenterNameTemplates { get { return DefaultPresenterNameTemplates_; } }
 
-        protected virtual string[] ViewSuffixes
-        {
-            get { return ViewSuffixes_; }
-        }
+        public static IEnumerable<string> DefaultViewSuffixes { get { return DefaultViewSuffixes_; } }
 
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,

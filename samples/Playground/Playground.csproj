@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Data\PlaygroundContext.cs" />
     <Compile Include="Entities\Widget.cs" />
-    <Compile Include="Presenters\CompositeDemoPresenter.cs" />
+    <Compile Include="Presenters\CompositePresenter.cs" />
     <Compile Include="Presenters\DynamicallyLoadedPresenter.cs" />
     <Compile Include="Presenters\WidgetsReadOnlyPresenter.cs" />
     <Compile Include="Presenters\WidgetsReadWritePresenter.cs" />
