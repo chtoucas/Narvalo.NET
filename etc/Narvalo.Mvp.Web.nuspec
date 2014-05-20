@@ -17,7 +17,7 @@ Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsm
     <tags>MVP, ASP.NET</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Narvalo.Mvp" version="0.24" />
+      <dependency id="Narvalo.Mvp" version="0.25" />
     </dependencies>
   </metadata>
 </package>

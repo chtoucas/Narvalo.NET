@@ -21,12 +21,11 @@ namespace Narvalo.Mvp.Web.Core
 
             _presenterBinder = HttpPresenterBinderFactory.Create(hosts, context);
 
-            var asyncManager = new PageAsyncTaskManager(page);
             _presenterBinder.PresenterCreated += (sender, e) =>
             {
                 var presenter = e.Presenter as Internal.IHttpPresenter;
                 if (presenter != null) {
-                    presenter.AsyncManager = asyncManager;
+                    presenter.AsyncManager = new PageAsyncTaskManager(page);
                 }
             };
 

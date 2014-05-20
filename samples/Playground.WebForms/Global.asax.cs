@@ -1,6 +1,7 @@
 ﻿namespace Playground
 {
     using System;
+    using System.Diagnostics;
     using System.Web;
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Web;
@@ -10,6 +11,8 @@
     {
         public void Application_Start(object sender, EventArgs e)
         {
+            Trace.Listeners.Add(new WebPageTraceListener());
+
             var presenterDiscoveryStrategy
                 = new AspNetConventionBasedPresenterDiscoveryStrategy(
                     AspNetConventionBasedPresenterDiscoveryStrategy.DefaultViewSuffixes,
