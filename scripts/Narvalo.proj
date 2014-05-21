@@ -18,6 +18,12 @@
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
       <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
     </SourcesToAnalyze>
+    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
+    </SourcesToAnalyze>
+    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
+      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
+    </SourcesToAnalyze>
     <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web\Narvalo.Web.csproj">
       <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
     </SourcesToAnalyze>
@@ -26,10 +32,12 @@
     </SourcesToAnalyze>
   </ItemGroup>
 
+  <!-- Restauration des packages NuGet. -->
   <Target Name="RestorePackages">
     <Exec Command="&quot;$(_NuGetExe)&quot; restore &quot;%(ProjectsToBuild.Identity)&quot; -Verbosity quiet" />
   </Target>
 
+  <!-- Nettoyage. -->
   <Target Name="Clean">
     <ItemGroup>
       <_FilesToRemove Include="$(_BuildDir)**\*"/>
@@ -41,11 +49,13 @@
     <RemoveDir Directories="$(_BuildDir);$(_PackageDir)" />
   </Target>
 
+  <!-- Vérification des règles de style. -->
   <Target Name="StyleCop" Condition="'$(AnalyzeSource)' == 'true'"
     DependsOnTargets="CreateReportsDir">
     <MSBuild Projects="@(SourcesToAnalyze)" Targets="StyleCop" StopOnFirstFailure="true" />
   </Target>
 
+  <!-- Compilation. -->
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" StopOnFirstFailure="true">
       <Output ItemName="_BuildOutputs" TaskParameter="TargetOutputs" />
@@ -57,9 +67,13 @@
 
   <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
+  <!-- Création d'un nouveau numéro de version. -->
   <Target Name="Milestone" DependsOnTargets="ValidateMilestone;UpdateVersionNumber" />
+  <Target Name="MilestoneForMvp" DependsOnTargets="ValidateMilestone;UpdateVersionNumberForMvp" />
 
+  <!-- Création des packages NuGet. -->
   <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
+  <Target Name="PackageForMvp" DependsOnTargets="$(PackageForMvpDependsOn)" />
 
   <ItemGroup>
     <_AfterBuildTargets Include="Verify" Condition="'$(Analyze)' == 'true'"  />
@@ -78,5 +92,14 @@
       CreatePackageDir;
       NuGetPackage
     </PackageDependsOn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageForMvpDependsOn>
+      UpdateVersionNumberForMvp;
+      Rebuild;
+      CreateStageDir;
+      CreatePackageDir;
+      NuGetPackageForMvp
+    </PackageForMvpDependsOn>
   </PropertyGroup>
 </Project>

@@ -40,9 +40,15 @@ Task Test {
 Task Milestone -depends ReadMilestoneConfig {
   MSBuild $options $project /t:Milestone $msproperties
 }
+Task MilestoneForMvp -depends ReadMilestoneConfig {
+  MSBuild $options $project /t:MilestoneForMvp $msproperties
+}
 
 Task Package {
   MSBuild $options $project /t:Package
+}
+Task PackageForMvp {
+  MSBuild $options $project /t:PackageForMvp
 }
 
 Task ReadMilestoneConfig {

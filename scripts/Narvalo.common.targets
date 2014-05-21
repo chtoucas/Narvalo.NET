@@ -58,6 +58,7 @@
     <MakeDir Directories="$(_PackageDir)" Condition="!Exists($(_PackageDir))" />
   </Target>
 
+  <!-- Création du répertoire intermédiaire contenant les packages NuGet. -->
   <Target Name="CreateStageDir">
     <MakeDir Directories="$(_StageDir)" Condition="!Exists($(_StageDir))" />
   </Target>
@@ -66,6 +67,11 @@
   <Target Name="GetVersionNumber">
     <GetVersion VersionInfoXml="$(_EtcDir)VersionInfo.xml">
       <Output TaskParameter="VersionNumber" PropertyName="_VersionNumber" />
+    </GetVersion>
+  </Target>
+  <Target Name="GetVersionNumberForMvp">
+    <GetVersion VersionInfoXml="$(_EtcDir)VersionInfo.Mvp.xml">
+      <Output TaskParameter="VersionNumber" PropertyName="_VersionNumberForMvp" />
     </GetVersion>
   </Target>
 
@@ -78,12 +84,22 @@
       Milestone="$(Milestone)">
     </UpdateVersion>
   </Target>
+  <Target Name="UpdateVersionNumberForMvp">
+    <UpdateVersion
+      VersionInfoXml="$(_EtcDir)VersionInfo.Mvp.xml"
+      AssemblyInfoTemplate="$(_EtcDir)AssemblyInfo.Template.cs"
+      AssemblyInfoFile="$(_EtcDir)AssemblyInfo.Version.Mvp.cs"
+      Milestone="$(Milestone)">
+    </UpdateVersion>
+  </Target>
 
+  <!-- Validation du numéro de version des assemblées .NET. -->
   <Target Name="ValidateMilestone">
     <Error Text="The parameter 'Milestone' must not be set to 'Build'."
            Condition="'$(Milestone)' == 'Build'" />
   </Target>
 
+  <!-- Création des packages NuGet -->
   <Target Name="NuGetPackage" DependsOnTargets="GetVersionNumber"
           Outputs="%(_Packages.Identity)">
     <PropertyGroup>
@@ -101,6 +117,25 @@
     <CreatePackageSpec
       TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
       VersionNumber="$(_VersionNumber)"
+      SpecFile="$(_PackageSpec)" />
+
+    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
+  </Target>
+
+  <Target Name="NuGetPackageForMvp" DependsOnTargets="GetVersionNumberForMvp"
+          Outputs="%(_PackagesForMvp.Identity)">
+    <PropertyGroup>
+      <_PackageStageDir>$(_StageDir)%(_PackagesForMvp.Identity)\</_PackageStageDir>
+      <_PackageSpec>$(_PackageStageDir)%(_PackagesForMvp.Identity).nuspec</_PackageSpec>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_PackageStageDir)lib\net45"
+             Condition="'%(_PackagesForMvp.Libs)' != ''" />
+    <Copy SourceFiles="%(_PackagesForMvp.Libs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
+
+    <CreatePackageSpec
+      TemplateFile="$(_EtcDir)%(_PackagesForMvp.Identity).nuspec"
+      VersionNumber="$(_VersionNumberForMvp)"
       SpecFile="$(_PackageSpec)" />
 
     <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />

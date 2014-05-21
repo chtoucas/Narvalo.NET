@@ -44,18 +44,6 @@
         $(_OutDir)Narvalo.Common.pdb
       </Libs>
     </_Packages>
-    <_Packages Include="Narvalo.Mvp">
-      <Libs>
-        $(_OutDir)Narvalo.Mvp.dll;
-        $(_OutDir)Narvalo.Mvp.pdb
-      </Libs>
-    </_Packages>
-    <_Packages Include="Narvalo.Mvp.Web">
-      <Libs>
-        $(_OutDir)Narvalo.Mvp.Web.dll;
-        $(_OutDir)Narvalo.Mvp.Web.pdb
-      </Libs>
-    </_Packages>
     <_Packages Include="Narvalo.Web">
       <Libs>
         $(_OutDir)Narvalo.Web.dll;
@@ -68,6 +56,21 @@
         $(_OutDir)Narvalo.Web.Extras.pdb
       </Libs>
     </_Packages>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_PackagesForMvp Include="Narvalo.Mvp">
+      <Libs>
+        $(_OutDir)Narvalo.Mvp.dll;
+        $(_OutDir)Narvalo.Mvp.pdb
+      </Libs>
+    </_PackagesForMvp>
+    <_PackagesForMvp Include="Narvalo.Mvp.Web">
+      <Libs>
+        $(_OutDir)Narvalo.Mvp.Web.dll;
+        $(_OutDir)Narvalo.Mvp.Web.pdb
+      </Libs>
+    </_PackagesForMvp>
   </ItemGroup>
 
 </Project>
