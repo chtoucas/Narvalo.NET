@@ -17,6 +17,7 @@ namespace Narvalo.Mvp.Platforms
             DebugCheck.NotNull(valueFactory);
 
             _valueFactory = valueFactory;
+            
             // WARNING: Do not change the following line for:
             // _lazyValue = new Lazy<TValue>(_valueFactory);
             // as it will fail to capture the variable "_valueFactory".

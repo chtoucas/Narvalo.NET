@@ -41,16 +41,14 @@ namespace Narvalo.Mvp.Resolvers
             return viewType.GetEvents()
                 .Union(
                     viewType.GetInterfaces()
-                        .SelectMany<Type, EventInfo>(FindEvents_)
-                );
+                        .SelectMany<Type, EventInfo>(FindEvents_));
         }
 
         static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
         {
             return viewType.GetProperties()
                 .Union(
-                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_)
-                )
+                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_))
                 .Select(p => new
                 {
                     PropertyInfo = p,
@@ -60,8 +58,7 @@ namespace Narvalo.Mvp.Resolvers
                     p.PropertyInfoFromCompositeViewBase == null
                     || (
                         p.PropertyInfoFromCompositeViewBase.GetGetMethod() == null
-                        && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null)
-                )
+                        && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null))
                 .Select(p => p.PropertyInfo);
         }
 

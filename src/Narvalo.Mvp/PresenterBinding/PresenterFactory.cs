@@ -46,8 +46,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 @"Constructing presenter ""{0}"" for view ""{1}"", view ""{2}"".",
                 presenterType.FullName,
                 viewType.FullName,
-                view.GetType().FullName
-            );
+                view.GetType().FullName);
 
             try {
                 return (IPresenter)ctor.Invoke(null, new[] { view });
@@ -59,12 +58,12 @@ namespace Narvalo.Mvp.PresenterBinding
                     originalException = ex.InnerException;
                 }
 
-                throw new PresenterBindingException(String.Format(
+                throw new PresenterBindingException(
+                    String.Format(
                         CultureInfo.InvariantCulture,
                         "An exception was thrown whilst trying to create an instance of {0}. Check the InnerException for more information.",
                         presenterType.FullName),
-                    originalException
-                );
+                    originalException);
             }
         }
 

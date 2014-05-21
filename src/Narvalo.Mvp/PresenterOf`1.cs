@@ -4,7 +4,7 @@ namespace Narvalo.Mvp
 {
     public abstract class PresenterOf<TViewModel>
         : IPresenter<IView<TViewModel>>, Internal.IPresenter
-        where TViewModel: class, new()
+        where TViewModel : class, new()
     {
         readonly IView<TViewModel> _view;
 

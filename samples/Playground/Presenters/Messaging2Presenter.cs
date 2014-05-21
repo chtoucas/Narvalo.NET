@@ -14,6 +14,8 @@
 
         void Load(object sender, EventArgs e)
         {
+            View.Model.Message = String.Empty;
+
             Messages.Subscribe<StringMessage>(_ =>
             {
                 View.Model.Message += String.Format("Presenter 2 received: {0}", _.Content);

@@ -77,11 +77,12 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
             Require.NotNull(eventInfo, "eventInfo");
 
             if (eventInfo.EventHandlerType == null) {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.InvariantCulture,
-                    "The supplied event {0} from {1} does not have the event handler type specified.",
-                    eventInfo.Name,
-                    eventInfo.ReflectedType.Name),
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "The supplied event {0} from {1} does not have the event handler type specified.",
+                        eventInfo.Name,
+                        eventInfo.ReflectedType.Name),
                     "eventInfo");
             }
 
@@ -128,12 +129,14 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 
             var il = addBuilder.GetILGenerator();
 
-            EmitILForEachView_(il, () =>
-            {
-                // Call the original add method
-                var originalAddMethod = eventInfo.GetAddMethod();
-                il.EmitCall(OpCodes.Callvirt, originalAddMethod, null);
-            });
+            EmitILForEachView_(
+                il, 
+                () =>
+                {
+                    // Call the original add method
+                    var originalAddMethod = eventInfo.GetAddMethod();
+                    il.EmitCall(OpCodes.Callvirt, originalAddMethod, null);
+                });
 
             // Return control
             il.Emit(OpCodes.Ret);
@@ -151,7 +154,8 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 
             var il = removeBuilder.GetILGenerator();
 
-            EmitILForEachView_(il,
+            EmitILForEachView_(
+                il,
                 () =>
                 {
                     // Call the original remove method
@@ -331,12 +335,14 @@ set
 
             var il = setBuilder.GetILGenerator();
 
-            EmitILForEachView_(il, () =>
-            {
-                // Call the original setter
-                var originalSetter = propertyInfo.GetSetMethod();
-                il.EmitCall(OpCodes.Callvirt, originalSetter, null);
-            });
+            EmitILForEachView_(
+                il, 
+                () =>
+                {
+                    // Call the original setter
+                    var originalSetter = propertyInfo.GetSetMethod();
+                    il.EmitCall(OpCodes.Callvirt, originalSetter, null);
+                });
 
             // Return control
             il.Emit(OpCodes.Ret);
@@ -366,7 +372,8 @@ set
             // Call IEnumerable<>.GetEnumerator
             var getViewsEnumerator = typeof(IEnumerable<>)
                 .MakeGenericType(_viewType)
-                .GetMethod("GetEnumerator",
+                .GetMethod(
+                    "GetEnumerator",
                     BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
             il.EmitCall(OpCodes.Callvirt, getViewsEnumerator, null);
 

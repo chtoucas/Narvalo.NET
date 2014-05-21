@@ -41,8 +41,7 @@ namespace Narvalo.Mvp
                     CultureInfo.InvariantCulture,
                     "Expected a view of type {0} but {1} was supplied.",
                     typeof(TView).FullName,
-                    view.GetType().FullName
-                ));
+                    view.GetType().FullName));
             }
 
             _views.Add((TView)view);

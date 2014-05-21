@@ -40,9 +40,9 @@ namespace Narvalo.Mvp.Web.Core
             IEnumerable<string> presenterNameTemplates,
             bool enableCache)
         {
+            // REVIEW: Empty namespaces.
             var typeResolver = new AspNetPresenterTypeResolver(
                 new AspNetBuildManager(),
-                // REVIEW
                 Enumerable.Empty<string>(),
                 viewSuffixes,
                 presenterNameTemplates);

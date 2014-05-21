@@ -21,12 +21,12 @@ namespace Narvalo.Mvp.Resolvers
                 .ToArray();
 
             if (attributes.Any(a =>
-                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null
-                )) {
-                throw new PresenterBindingException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    @"When shared presenter binding is requested, the ""ViewType"" must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
-                    input.FullName));
+                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null)) {
+                throw new PresenterBindingException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        @"When shared presenter binding is requested, the ""ViewType"" must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
+                        input.FullName));
             }
 
             return attributes

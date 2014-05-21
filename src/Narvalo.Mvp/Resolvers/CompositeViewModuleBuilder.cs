@@ -40,19 +40,16 @@ namespace Narvalo.Mvp.Resolvers
         ModuleBuilder CreateModuleBuilder_()
         {
             var assemblyName = new AssemblyName(_assemblyName);
+            
             // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
-            //var attributeBuilders = new CustomAttributeBuilder[] {
+            // var attributeBuilders = new CustomAttributeBuilder[] {
             //    new CustomAttributeBuilder(
             //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
             //        new Object[0])
-            //};
-
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly
-            (
+            // };
+            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 assemblyName,
-                AssemblyBuilderAccess.Run
-                //, attributeBuilders
-            );
+                AssemblyBuilderAccess.Run);
 
             return assembly.DefineDynamicModule(assemblyName.Name);
         }

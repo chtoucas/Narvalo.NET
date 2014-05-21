@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Web.Core
 
     public sealed class PageHost
     {
-        readonly static string PageHostKey_ = typeof(PageHost).FullName;
+        static readonly string PageHostKey_ = typeof(PageHost).FullName;
 
         readonly HttpPresenterBinder _presenterBinder;
 

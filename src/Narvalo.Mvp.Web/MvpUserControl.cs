@@ -21,15 +21,15 @@ namespace Narvalo.Mvp.Web
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
+
         protected bool AutoDataBind
         {
             get { return _autoDataBind; }
             set { _autoDataBind = value; }
-        }
-
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return _throwIfNoPresenterBound; }
         }
 
         protected override void OnInit(EventArgs e)
@@ -55,7 +55,8 @@ namespace Narvalo.Mvp.Web
             return (T)Page.GetDataItem();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "FIXME")]
         protected string DataValue<T>(string format)
         {
             return String.Format(CultureInfo.CurrentCulture, format, (T)Page.GetDataItem());

@@ -18,20 +18,22 @@ namespace Narvalo.Mvp.Resolvers
             var viewType = input.Item2;
 
             if (presenterType.IsNotPublic) {
-                throw new ArgumentException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0} does not meet accessibility requirements. For the WebFormsMvp framework to be able to call it, it must be public. Make the type public, or set PresenterBinder.Factory to an implementation that can access this type.",
-                    presenterType.FullName),
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0} does not meet accessibility requirements. For the WebFormsMvp framework to be able to call it, it must be public. Make the type public, or set PresenterBinder.Factory to an implementation that can access this type.",
+                        presenterType.FullName),
                     "input");
             }
 
             var ctor = presenterType.GetConstructor(new[] { viewType });
             if (ctor == null) {
-                throw new ArgumentException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or set PresenterBinder.Factory to an implementation that can supply constructor dependencies.",
-                    presenterType.FullName,
-                    viewType.FullName),
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or set PresenterBinder.Factory to an implementation that can supply constructor dependencies.",
+                        presenterType.FullName,
+                        viewType.FullName),
                     "input");
             }
 
@@ -47,11 +49,11 @@ namespace Narvalo.Mvp.Resolvers
                 presenterType.Module,
                 false /* skipVisibility */);
 
-            var ilGenerator = dynamicMethod.GetILGenerator();
-            ilGenerator.Emit(OpCodes.Nop);
-            ilGenerator.Emit(OpCodes.Ldarg_0);
-            ilGenerator.Emit(OpCodes.Newobj, ctor);
-            ilGenerator.Emit(OpCodes.Ret);
+            var ilg = dynamicMethod.GetILGenerator();
+            ilg.Emit(OpCodes.Nop);
+            ilg.Emit(OpCodes.Ldarg_0);
+            ilg.Emit(OpCodes.Newobj, ctor);
+            ilg.Emit(OpCodes.Ret);
 
             return dynamicMethod;
         }

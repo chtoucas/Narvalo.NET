@@ -20,8 +20,10 @@ namespace Narvalo.Mvp.Web.Core
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
+        
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
+        
         readonly Object _lock = new Object();
 
         bool _closed = false;

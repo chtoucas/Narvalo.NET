@@ -19,15 +19,15 @@ namespace Narvalo.Mvp.Web
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
+        public bool ThrowIfNoPresenterBound
+        {
+            get { return _throwIfNoPresenterBound; }
+        }
+
         protected bool AutoDataBind
         {
             get { return _autoDataBind; }
             set { _autoDataBind = value; }
-        }
-
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return _throwIfNoPresenterBound; }
         }
 
         protected override void OnInit(EventArgs e)

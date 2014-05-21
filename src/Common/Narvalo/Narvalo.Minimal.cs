@@ -7,6 +7,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -85,14 +86,12 @@ namespace Narvalo
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not in range {0} / {1}.",
-                        minValue,
-                        maxValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not in range {0} / {1}.",
+                    minValue,
+                    maxValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -103,14 +102,12 @@ namespace Narvalo
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not in range {0} / {1}.",
-                        minValue,
-                        maxValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not in range {0} / {1}.",
+                    minValue,
+                    maxValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -121,13 +118,11 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not greater than or equal to {0}.",
-                        minValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not greater than or equal to {0}.",
+                    minValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -138,13 +133,11 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not greater than or equal to {0}.",
-                        minValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not greater than or equal to {0}.",
+                    minValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -160,13 +153,11 @@ namespace Narvalo
             }
 
             if (value.CompareTo(minValue) < 0) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not greater than or equal to {0}.",
-                        minValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not greater than or equal to {0}.",
+                    minValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -177,13 +168,11 @@ namespace Narvalo
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not less than or equal to {0}.",
-                        maxValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not less than or equal to {0}.",
+                    maxValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -194,13 +183,11 @@ namespace Narvalo
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not less than or equal to {0}.",
-                        maxValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not less than or equal to {0}.",
+                    maxValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -216,13 +203,11 @@ namespace Narvalo
             }
 
             if (value.CompareTo(maxValue) > 0) {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The value is not less than or equal to {0}.",
-                        maxValue));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The value is not less than or equal to {0}.",
+                    maxValue);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
@@ -232,12 +217,11 @@ namespace Narvalo
         {
             public static ArgumentNullException ArgumentNull(string parameterName)
             {
-                return new ArgumentNullException(
-                    parameterName,
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The parameter {0} is null.",
-                        parameterName));
+                var message = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The parameter {0} is null.",
+                    parameterName);
+                return new ArgumentNullException(parameterName, message);
             }
         }
 
@@ -245,6 +229,9 @@ namespace Narvalo
         sealed class ValidatedNotNullAttribute : Attribute { }
     }
 
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification = "Single file containing only internal classes and included in all MVP projects.")]
     internal static class DebugCheck
     {
         [DebuggerStepThrough]
@@ -279,6 +266,9 @@ namespace Narvalo
         }
     }
 
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification = "Single file containing only internal classes and included in all MVP projects.")]
     internal static class __Tracer
     {
         [DebuggerStepThrough]

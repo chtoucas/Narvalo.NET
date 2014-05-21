@@ -42,9 +42,9 @@ namespace Narvalo.Mvp.Resolvers
             var shortNames = GetShortNamesFromInterfaces_(input)
                 .Append(GetShortNameFromType_(input));
 
+            // We also look into the view namespace 
+            // and into the assembly where the view is defined.
             var nameSpaces = _defaultNamespaces
-                // We also look into the view namespace 
-                // and into the assembly where the view is defined.
                 .Append(input.Namespace)
                 .Append(new AssemblyName(input.Assembly.FullName).Name);
 
@@ -86,7 +86,7 @@ namespace Narvalo.Mvp.Resolvers
                         where viewName.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
                         select viewName.Substring(0, viewName.Length - suffix.Length)).FirstOrDefault();
 
-            return (String.IsNullOrEmpty(name) ? viewName : name);
+            return String.IsNullOrEmpty(name) ? viewName : name;
         }
     }
 }

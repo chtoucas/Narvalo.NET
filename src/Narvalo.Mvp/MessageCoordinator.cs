@@ -48,13 +48,15 @@ namespace Narvalo.Mvp
 
         protected virtual void PublishCore<T>(T message)
         {
-            __Tracer.Warning(typeof(MessageCoordinator),
+            __Tracer.Warning(
+                typeof(MessageCoordinator),
                 "All messages published to this bus are dropped.");
         }
 
         protected virtual void SubscribeCore<T>(Action<T> onNext)
         {
-            __Tracer.Warning(typeof(MessageCoordinator),
+            __Tracer.Warning(
+                typeof(MessageCoordinator),
                 "Even if subscription is allowed, no messages will ever be received.");
         }
 
@@ -81,12 +83,13 @@ namespace Narvalo.Mvp
                 Justification = "Implementation of lazy initialized singleton.")]
             class Singleton
             {
-                // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.
+                internal static readonly BlackHole_ Instance = new BlackHole_();
+                
                 [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
                    Justification = "Implementation of lazy initialized singleton.")]
+                [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
+                    Justification = "Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.")]
                 static Singleton() { }
-
-                internal static readonly BlackHole_ Instance = new BlackHole_();
             }
         }
     }

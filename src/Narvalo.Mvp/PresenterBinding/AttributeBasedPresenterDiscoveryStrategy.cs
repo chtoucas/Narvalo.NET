@@ -59,8 +59,7 @@ namespace Narvalo.Mvp.PresenterBinding
                            attr.PresenterType,
                            attr.ViewType,
                            attr.BindingMode,
-                           GetViewsToBind_(attr, view, pendingViews)
-                       )).ToList();
+                           GetViewsToBind_(attr, view, pendingViews))).ToList();
 
                 bindings.AddRange(bindingsThisRound);
 
@@ -87,8 +86,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 attribute.PresenterType.FullName,
                 attribute.ViewType.FullName,
                 attribute.Origin.FullName,
-                attribute.BindingMode.ToString()
-            );
+                attribute.BindingMode.ToString());
 
             switch (attribute.BindingMode) {
                 case PresenterBindingMode.Default:

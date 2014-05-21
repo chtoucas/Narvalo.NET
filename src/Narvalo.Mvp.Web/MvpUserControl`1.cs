@@ -23,7 +23,11 @@ namespace Narvalo.Mvp.Web
 
                 return _model;
             }
-            set { _model = value; }
+            
+            set 
+            {
+                _model = value;
+            }
         }
     }
 }
