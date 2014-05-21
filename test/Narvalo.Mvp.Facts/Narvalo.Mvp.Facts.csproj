@@ -41,11 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -54,8 +50,8 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
-      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
     </Compile>
     <Compile Include="PresenterBindingAttributeFacts.cs" />
     <Compile Include="PresenterFacts.cs" />
@@ -73,17 +69,9 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.CommandLine\Narvalo.Mvp.CommandLine.csproj">
-      <Project>{400611c4-c02e-4ec0-88ce-28c6da9309d5}</Project>
-      <Name>Narvalo.Mvp.CommandLine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
       <Project>{fdadb21a-c99f-4d78-bdcc-a09a6ef97215}</Project>
       <Name>Narvalo.Mvp.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj">
-      <Project>{4c908c48-2bd9-4e23-bcbe-ed3604e0d387}</Project>
-      <Name>Narvalo.Mvp.Windows.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>

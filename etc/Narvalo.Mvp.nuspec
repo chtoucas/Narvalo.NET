@@ -6,10 +6,11 @@
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
-    <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
+    <projectUrl>https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
 This package contains a simple MVP framework inspired by webformsmvp.
+Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsmvp codebase.
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>

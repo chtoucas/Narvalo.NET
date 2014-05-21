@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Internal
     // presenter inherit one of the three presenter base classes.
     internal interface IPresenter
     {
-         [SuppressMessage("Microsoft.Design",
+        [SuppressMessage("Microsoft.Design",
             "CA1044:PropertiesShouldNotBeWriteOnly",
             Justification = "The read part is provided by the public interface.")]
         IMessageCoordinator Messages { set; }

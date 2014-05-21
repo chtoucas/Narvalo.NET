@@ -6,4 +6,4 @@ See _LICENSE-WebFormsMvp.txt_ for license information.
 
 ### Dropped functionalities
 
-Since I don't see value in MvpHttpHandler and MvpWebService, I removed both.
+Since I don't see any value in MvpHttpHandler and MvpWebService, I removed both.

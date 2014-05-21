@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.Web.Internal
            Justification = "The read part is provided by the public interface.")]
         HttpContextBase HttpContext { set; }
 
-         [SuppressMessage("Microsoft.Design",
+        [SuppressMessage("Microsoft.Design",
             "CA1044:PropertiesShouldNotBeWriteOnly",
             Justification = "The read part is provided by the public interface.")]
         IAsyncTaskManager AsyncManager { set; }

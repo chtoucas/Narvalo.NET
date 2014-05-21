@@ -26,7 +26,6 @@ TODO (by order of priority)
 - Tests. We can start by porting the tests from WebFormsMvp.
 
 - Add support for
-  * ASP.NET WebForms, cf. src/Narvalo.Mvp.Web, almost done.
   * CommandLine, cf. src/Narvalo.Mvp.CommandLine, basic but functional.
   * Windows Forms, cf. src/Narvalo.Mvp.Windows.Forms, not ready.
   * WPF, not yet started.
@@ -36,8 +35,6 @@ TODO (by order of priority)
 
 - Add support for Appication Controller, Navigator, EventAggregator (not the same
   as cross-presenter communication).
-
-- Samples, finish samples/Playground.WebForms.
 
 - Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
   / ReactiveUI / MVVM Light?

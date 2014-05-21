@@ -6,7 +6,7 @@
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
-    <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
+    <projectUrl>https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
 This package enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
@@ -14,10 +14,10 @@ Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsm
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2014</copyright>
-    <tags>MVP, ASP.NET</tags>
+    <tags>MVP, ASP.NET, WebForms</tags>
     <language>en-US</language>
     <dependencies>
-      <dependency id="Narvalo.Mvp" version="0.25" />
+      <dependency id="Narvalo.Mvp" version="1.0" />
     </dependencies>
   </metadata>
 </package>
