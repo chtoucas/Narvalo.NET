@@ -28,6 +28,7 @@
   </AssemblyReferenceDirectories>
   <Target Name="$(ProjectDir)/../src/Narvalo.Common/bin/Release/Narvalo.Common.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/../src/Narvalo.Mvp.Extras/bin/Release/Narvalo.Mvp.Extras.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../src/Narvalo.Mvp.Web/bin/Release/Narvalo.Mvp.Web.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/../src/Narvalo.Mvp/bin/Release/Narvalo.Mvp.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/../src/Narvalo.Web.Extras/bin/Release/Narvalo.Web.Extras.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/../src/Narvalo.Web/bin/Release/Narvalo.Web.dll" Analyze="True" AnalyzeAllChildren="True" />

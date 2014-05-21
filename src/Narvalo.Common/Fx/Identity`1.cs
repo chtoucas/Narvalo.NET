@@ -134,7 +134,8 @@ namespace Narvalo.Fx
             return new Identity<TResult>(fun.Invoke(this));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+        [SuppressMessage("StyleCop.CSharp.NamingRules", 
+            "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static T ε(Identity<T> monad)
         {
@@ -143,7 +144,8 @@ namespace Narvalo.Fx
             return monad._value;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+        [SuppressMessage("StyleCop.CSharp.NamingRules", 
+            "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {

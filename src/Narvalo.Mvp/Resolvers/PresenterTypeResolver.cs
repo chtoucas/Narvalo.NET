@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
     using Narvalo.Mvp;
@@ -65,6 +66,9 @@ namespace Narvalo.Mvp.Resolvers
             return presenterTypes.FirstOrDefault();
         }
 
+        [SuppressMessage("Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Private method only.")]
         static IEnumerable<string> GetShortNamesFromInterfaces_(Type viewType)
         {
             // Trim the "I" and "View" from the start & end respectively of the interface names.
@@ -78,6 +82,9 @@ namespace Narvalo.Mvp.Resolvers
                 select length > 0 ? name.Substring(0, length) : name;
         }
 
+        [SuppressMessage("Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Private method only.")]
         string GetShortNameFromType_(Type viewType)
         {
             var viewName = viewType.Name;
