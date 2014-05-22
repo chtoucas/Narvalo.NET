@@ -3,8 +3,6 @@
 namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Xunit;
 
     public class CompositePresenterDiscoveryStrategyFacts

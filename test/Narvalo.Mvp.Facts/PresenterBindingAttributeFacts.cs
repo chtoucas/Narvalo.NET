@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp
 {
     using System;
+    using Moq;
     using Xunit;
 
     public static class PresenterBindingAttributeFacts
@@ -23,7 +24,7 @@ namespace Narvalo.Mvp
             public static void IsDefault_ForDefaultConstructor()
             {
                 // Arrange
-                var presenterType = typeof(Stubs.PresenterForIView);
+                var presenterType = new Mock<IPresenter<IView>>().GetType();
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
                 // Assert
@@ -37,7 +38,7 @@ namespace Narvalo.Mvp
             public static void IsSetCorrectly()
             {
                 // Arrange
-                var presenterType = typeof(Stubs.PresenterForIView);
+                var presenterType = new Mock<IPresenter<IView>>().GetType();
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
                 // Assert
@@ -51,7 +52,7 @@ namespace Narvalo.Mvp
             public static void IsNull_ForDefaultConstructor()
             {
                 // Arrange
-                var presenterType = typeof(Stubs.PresenterForIView);
+                var presenterType = new Mock<IPresenter<IView>>().GetType();
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
                 // Assert
