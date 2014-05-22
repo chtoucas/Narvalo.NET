@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -53,9 +54,28 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
       <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
     </Compile>
+    <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />
+    <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />
     <Compile Include="PresenterFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stubs\ISimpleView.cs" />
+    <Compile Include="Stubs\MyCompositeView.cs" />
+    <Compile Include="Stubs\ViewModel.cs" />
+    <Compile Include="Stubs\HttpPresenterForView.cs" />
+    <Compile Include="Stubs\HttpPresenterForIView.cs" />
+    <Compile Include="Stubs\HttpPresenterForIViewWithModel.cs" />
+    <Compile Include="Stubs\PresenterForIViewWithModel.cs" />
+    <Compile Include="Stubs\PresenterForIView.cs" />
+    <Compile Include="Stubs\PresenterForView.cs" />
+    <Compile Include="Stubs\HttpPresenterForViewWithModel.cs" />
+    <Compile Include="Stubs\PresenterForViewWithModel.cs" />
+    <Compile Include="Stubs\ISimpleViewWithModel.cs" />
+    <Compile Include="Stubs\ViewWithModel.cs" />
+    <Compile Include="Stubs\SimpleViewWithModel.cs" />
+    <Compile Include="Web\HttpPresenterFacts.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
@@ -77,6 +97,9 @@
       <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
       <Name>Narvalo.Mvp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resolvers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

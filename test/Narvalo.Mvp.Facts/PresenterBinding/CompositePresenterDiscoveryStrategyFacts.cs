@@ -1,53 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using Rhino.Mocks;
-using WebFormsMvp.Binder;
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace WebFormsMvp.UnitTests.Binder
+namespace Narvalo.Mvp.PresenterBinding
 {
-    [TestFixture]
-    public class CompositePresenterDiscoveryStrategyTests
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Xunit;
+
+    public class CompositePresenterDiscoveryStrategyFacts
     {
-        [Test]
-        public void CompositePresenterDiscoveryStrategyTests_Ctor_ShouldGuardNullStrategyList()
+        public static class TheConstructor
         {
-            try
+            [Fact]
+            public static void ThrowsArgumentNullException_ForNullStrategies()
             {
-                // Act
-                new CompositePresenterDiscoveryStrategy(null);
-
-                // Assert
-                Assert.Fail("Exception not thrown");
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>(() => new CompositePresenterDiscoveryStrategy(null));
             }
-            catch (ArgumentNullException ex)
+
+            [Fact]
+            public static void ThrowsArgumentException_ForEmptyStrategies()
             {
-                // Assert
-                Assert.AreEqual("strategies", ex.ParamName);
+                // Act & Assert
+                Assert.Throws<ArgumentException>(
+                    () => new CompositePresenterDiscoveryStrategy(new IPresenterDiscoveryStrategy[0]));
             }
         }
 
-        [Test]
-        public void CompositePresenterDiscoveryStrategyTests_Ctor_ShouldGuardEmptyStrategyList()
-        {
-            try
-            {
-                // Act
-                new CompositePresenterDiscoveryStrategy(new IPresenterDiscoveryStrategy[0]);
-
-                // Assert
-                Assert.Fail("Exception not thrown");
-            }
-            catch (ArgumentException ex)
-            {
-                // Assert
-                Assert.AreEqual("strategies", ex.ParamName);
-                StringAssert.StartsWith("You must supply at least one strategy.", ex.Message);
-            }
-        }
-
-        //[Test]
+        //[Fact]
         //public void CompositePresenterDiscoveryStrategyTests_GetBindings_ShouldYieldFromChildStrategy()
         //{
         //    // Arrange
@@ -72,7 +52,7 @@ namespace WebFormsMvp.UnitTests.Binder
         //    CollectionAssert.AreEquivalent(discoveryResult.Bindings.ToArray(), bindings.First().Bindings.ToArray());
         //}
 
-        //[Test]
+        //[Fact]
         //public void CompositePresenterDiscoveryStrategyTests_GetBindings_ShouldNotPassMatchedViewsToSubsequentStrategies()
         //{
         //    // Arrange
@@ -110,7 +90,7 @@ namespace WebFormsMvp.UnitTests.Binder
         //    CollectionAssert.AreEqual(new[] { view3 }, strategy2ViewInstances.ToArray());
         //}
 
-        //[Test]
+        //[Fact]
         //public void CompositePresenterDiscoveryStrategyTests_GetBindings_ShouldFallThroughChildStrategiesInOrder()
         //{
         //    // Arrange

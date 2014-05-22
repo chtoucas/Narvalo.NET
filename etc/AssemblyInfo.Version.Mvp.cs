@@ -1,6 +1,6 @@
 /*
  * THIS FILE IS GENERATED, ANY LOCAL CHANGES WILL BE LOST.
- * Timestamp: 2014-05-21 08:39 +02:00
+ * Timestamp: 2014-05-21 09:54 +02:00
  */
 
 using System;
@@ -8,10 +8,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 // Version utilisée par le runtime.
-[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyVersion("0.99.0.0")]
 
 // Version visible dans l'explorateur.
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("0.99.0.0")]
 
 // Version utilisée par NuGet.
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("0.99.0")]
