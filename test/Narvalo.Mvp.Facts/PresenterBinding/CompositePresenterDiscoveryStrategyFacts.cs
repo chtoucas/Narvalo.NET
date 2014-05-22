@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System;
     using Xunit;
 
-    public class CompositePresenterDiscoveryStrategyFacts
+    public static class CompositePresenterDiscoveryStrategyFacts
     {
         public static class TheConstructor
         {
@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.PresenterBinding
             public static void ThrowsArgumentNullException_ForNullStrategies()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new CompositePresenterDiscoveryStrategy(null));
+                Assert.Throws<ArgumentNullException>(() => new CompositePresenterDiscoveryStrategy(strategies: null));
             }
 
             [Fact]

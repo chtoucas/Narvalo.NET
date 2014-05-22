@@ -14,28 +14,28 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentNullException_ForNullView_WhenIView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForIView(null));
+                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForIView(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForIViewWithModel(null));
+                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForIViewWithModel(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForView(null));
+                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForView(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForViewWithModel(null));
+                Assert.Throws<ArgumentNullException>(() => new Stubs.PresenterForViewWithModel(view: null));
             }
 
             [Fact]
@@ -43,8 +43,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Stubs.ViewWithModel();
+
                 // Act
                 new Stubs.PresenterForIViewWithModel(view);
+
                 // Assert
                 Assert.NotNull(view.Model);
             }
@@ -54,8 +56,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Stubs.SimpleViewWithModel();
+
                 // Act
                 var presenter = new Stubs.PresenterForViewWithModel(view);
+
                 // Assert
                 Assert.NotNull(view.Model);
             }
@@ -68,8 +72,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Mock<IView>().Object;
+
                 // Act
                 var presenter = new Stubs.PresenterForIView(view);
+
                 // Assert
                 Assert.Same(view, presenter.View);
             }
@@ -79,8 +85,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Mock<IView<Stubs.ViewModel>>().Object;
+
                 // Act
                 var presenter = new Stubs.PresenterForIViewWithModel(view);
+
                 // Assert
                 Assert.Same(view, presenter.View);
             }
@@ -90,8 +98,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Mock<Stubs.ISimpleView>().Object;
+
                 // Act
                 var presenter = new Stubs.PresenterForView(view);
+
                 // Assert
                 Assert.Same(view, presenter.View);
             }
@@ -101,8 +111,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var view = new Mock<Stubs.ISimpleViewWithModel>().Object;
+
                 // Act
                 var presenter = new Stubs.PresenterForViewWithModel(view);
+
                 // Assert
                 Assert.Same(view, presenter.View);
             }

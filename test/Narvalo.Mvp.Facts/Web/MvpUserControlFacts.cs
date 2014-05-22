@@ -2,6 +2,7 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using System;
     using Moq;
     using Xunit;
 
@@ -23,7 +24,7 @@ namespace Narvalo.Mvp.Web
             public static void IsTrue_ForDefautConstructor_WhenGeneric()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl<object>>().Object;
+                var control = new Mock<MvpUserControl<Object>>().Object;
 
                 // Assert
                 Assert.True(control.ThrowIfNoPresenterBound);
@@ -43,7 +44,7 @@ namespace Narvalo.Mvp.Web
             public static void IsFalse_ForCustomConstructor_WhenGeneric()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl<object>>(false).Object;
+                var control = new Mock<MvpUserControl<Object>>(false).Object;
 
                 // Assert
                 Assert.False(control.ThrowIfNoPresenterBound);

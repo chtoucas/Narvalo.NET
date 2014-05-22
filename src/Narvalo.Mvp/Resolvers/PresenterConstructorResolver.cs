@@ -49,11 +49,11 @@ namespace Narvalo.Mvp.Resolvers
                 presenterType.Module,
                 false /* skipVisibility */);
 
-            var ilg = dynamicMethod.GetILGenerator();
-            ilg.Emit(OpCodes.Nop);
-            ilg.Emit(OpCodes.Ldarg_0);
-            ilg.Emit(OpCodes.Newobj, ctor);
-            ilg.Emit(OpCodes.Ret);
+            var il = dynamicMethod.GetILGenerator();
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Newobj, ctor);
+            il.Emit(OpCodes.Ret);
 
             return dynamicMethod;
         }

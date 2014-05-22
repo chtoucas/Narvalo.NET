@@ -15,17 +15,17 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentNullException_ForNullView()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<object>>>().Object;
+                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
 
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => compositeView.Add(null));
+                Assert.Throws<ArgumentNullException>(() => compositeView.Add(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentException_ForViewOfWrongType()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<object>>>().Object;
+                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
 
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => compositeView.Add(new Mock<IView>().Object));
@@ -35,9 +35,9 @@ namespace Narvalo.Mvp
             public static void AddsViewsToList()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<object>>>().Object;
-                var view1 = new Mock<IView<object>>().Object;
-                var view2 = new Mock<IView<object>>().Object;
+                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
+                var view1 = new Mock<IView<Object>>().Object;
+                var view2 = new Mock<IView<Object>>().Object;
 
                 // Act
                 compositeView.Add(view1);

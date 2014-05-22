@@ -14,7 +14,7 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentNullException_ForNullPresenterType()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new PresenterBindingAttribute(null));
+                Assert.Throws<ArgumentNullException>(() => new PresenterBindingAttribute(presenterType: null));
             }
         }
 
@@ -25,8 +25,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var presenterType = new Mock<IPresenter<IView>>().GetType();
+
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
+
                 // Assert
                 Assert.Equal(PresenterBindingMode.Default, attribute.BindingMode);
             }
@@ -39,8 +41,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var presenterType = new Mock<IPresenter<IView>>().GetType();
+
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
+
                 // Assert
                 Assert.Equal(presenterType, attribute.PresenterType);
             }
@@ -53,8 +57,10 @@ namespace Narvalo.Mvp
             {
                 // Arrange
                 var presenterType = new Mock<IPresenter<IView>>().GetType();
+
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
+
                 // Assert
                 Assert.Null(attribute.ViewType);
             }
