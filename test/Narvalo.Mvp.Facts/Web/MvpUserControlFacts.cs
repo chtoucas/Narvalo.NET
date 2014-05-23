@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static class MvpUserControlFacts
@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Web
             public static void IsTrue_ForDefautConstructor()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl>().Object;
+                var control = Substitute.For<MvpUserControl>();
 
                 // Assert
                 Assert.True(control.ThrowIfNoPresenterBound);
@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.Web
             public static void IsTrue_ForDefautConstructor_WhenGeneric()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl<Object>>().Object;
+                var control = Substitute.For<MvpUserControl<Object>>();
 
                 // Assert
                 Assert.True(control.ThrowIfNoPresenterBound);
@@ -34,7 +34,7 @@ namespace Narvalo.Mvp.Web
             public static void IsFalse_ForCustomConstructor()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl>(false).Object;
+                var control = Substitute.For<MvpUserControl>(false);
 
                 // Assert
                 Assert.False(control.ThrowIfNoPresenterBound);
@@ -44,7 +44,7 @@ namespace Narvalo.Mvp.Web
             public static void IsFalse_ForCustomConstructor_WhenGeneric()
             {
                 // Arrange & Act
-                var control = new Mock<MvpUserControl<Object>>(false).Object;
+                var control = Substitute.For<MvpUserControl<Object>>(false);
 
                 // Assert
                 Assert.False(control.ThrowIfNoPresenterBound);

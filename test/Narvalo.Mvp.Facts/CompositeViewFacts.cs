@@ -3,8 +3,7 @@
 namespace Narvalo.Mvp
 {
     using System;
-    using System.Linq;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static class CompositeViewFacts
@@ -15,7 +14,7 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentNullException_ForNullView()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
+                var compositeView = new MyCompositeView<IView<Object>>();
 
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => compositeView.Add(view: null));
@@ -25,27 +24,35 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentException_ForViewOfWrongType()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
+                var compositeView = new MyCompositeView<IView<Object>>();
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => compositeView.Add(new Mock<IView>().Object));
+                Assert.Throws<ArgumentException>(() => compositeView.Add(Substitute.For<IView>()));
             }
 
             [Fact]
             public static void AddsViewsToList()
             {
                 // Arrange
-                var compositeView = new Mock<CompositeView<IView<Object>>>().Object;
-                var view1 = new Mock<IView<Object>>().Object;
-                var view2 = new Mock<IView<Object>>().Object;
+                var compositeView = new MyCompositeView<IView<Object>>();
+                var view1 = Substitute.For<IView<Object>>();
+                var view2 = Substitute.For<IView<Object>>();
 
                 // Act
                 compositeView.Add(view1);
                 compositeView.Add(view2);
 
                 // Assert
-                var expected = new[] { view1, view2 };
-                Assert.True(expected.SequenceEqual(compositeView.Views));
+                Assert.Equal(new[] { view1, view2 }, compositeView.Views);
+            }
+        }
+
+        class MyCompositeView<TView> : CompositeView<TView> where TView : IView
+        {
+            public override event EventHandler Load
+            {
+                add { throw new NotImplementedException(); }
+                remove { throw new NotImplementedException(); }
             }
         }
     }

@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static class MvpPageFacts
@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Web
             public static void IsTrue_ForDefautConstructor()
             {
                 // Arrange
-                var page = new Mock<MvpPage>().Object;
+                var page = Substitute.For<MvpPage>();
 
                 // Assert
                 Assert.True(page.ThrowIfNoPresenterBound);
@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.Web
             public static void IsTrue_ForDefautConstructor_WhenGeneric()
             {
                 // Arrange
-                var page = new Mock<MvpPage<Object>>().Object;
+                var page = Substitute.For<MvpPage<Object>>();
 
                 // Assert
                 Assert.True(page.ThrowIfNoPresenterBound);
@@ -34,7 +34,7 @@ namespace Narvalo.Mvp.Web
             public static void IsFalse_ForCustomConstructor()
             {
                 // Arrange
-                var page = new Mock<MvpPage>(false).Object;
+                var page = Substitute.For<MvpPage>(false);
 
                 // Assert
                 Assert.False(page.ThrowIfNoPresenterBound);
@@ -44,7 +44,7 @@ namespace Narvalo.Mvp.Web
             public static void IsFalse_ForCustomConstructor_WhenGeneric()
             {
                 // Arrange
-                var page = new Mock<MvpPage<Object>>(false).Object;
+                var page = Substitute.For<MvpPage<Object>>(false);
 
                 // Assert
                 Assert.False(page.ThrowIfNoPresenterBound);

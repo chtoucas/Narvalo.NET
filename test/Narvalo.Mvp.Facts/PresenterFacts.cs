@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp
 {
     using System;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static partial class PresenterFacts
@@ -11,54 +11,47 @@ namespace Narvalo.Mvp
         public static class Ctor
         {
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenIView()
+            public static void ThrowsArgumentNullException_ForNullView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenter(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenter(view: null));
             }
 
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
+            public static void ThrowsArgumentNullException_ForNullView_ForPresenterOf()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterOf(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenterOf(view: null));
             }
 
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenView()
+            public static void ThrowsArgumentNullException_ForNullView_ForPresenter()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterView(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenterWithModel(view: null));
             }
 
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterViewWithModel(view: null));
-            }
-
-            [Fact]
-            public static void InitializesViewModel_WhenIViewWithModel()
+            public static void InitializesViewModel_ForPresenterOf()
             {
                 // Arrange
-                var view = new StubIViewWithModel();
+                var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                new StubPresenterOf(view);
+                new MyPresenterOf(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
             }
 
             [Fact]
-            public static void InitializesViewModel_WhenViewWithModel()
+            public static void InitializesViewModel_ForPresenter()
             {
                 // Arrange
-                var view = new StubViewWithModel();
+                var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new StubPresenterViewWithModel(view);
+                new MyPresenterWithModel(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
@@ -68,133 +61,70 @@ namespace Narvalo.Mvp
         public static class ViewProperty
         {
             [Fact]
-            public static void IsSetCorrectly_WhenIView()
+            public static void IsSetCorrectly()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IMyView>();
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyPresenter(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
             }
 
             [Fact]
-            public static void IsSetCorrectly_WhenIViewWithModel()
+            public static void IsSetCorrectly_ForPresenterOf()
             {
                 // Arrange
-                var view = new Mock<IView<StubViewModel>>().Object;
+                var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                var presenter = new StubPresenterOf(view);
+                var presenter = new MyPresenterOf(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
             }
 
             [Fact]
-            public static void IsSetCorrectly_WhenView()
+            public static void IsSetCorrectly_ForPresenter()
             {
                 // Arrange
-                var view = new Mock<IStubView>().Object;
+                var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new StubPresenterView(view);
-
-                // Assert
-                Assert.Same(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WhenViewWithModel()
-            {
-                // Arrange
-                var view = new Mock<IStubViewWithModel>().Object;
-
-                // Act
-                var presenter = new StubPresenterViewWithModel(view);
+                var presenter = new MyPresenterWithModel(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
             }
         }
 
-        #region Stubs
-
-        public interface IStubView : IView
+        public interface IMyView : IView
         {
             event EventHandler TestHandler;
         }
 
-        public interface IStubViewWithModel : IView<StubViewModel>
+        public interface IMyViewWithModel : IView<MyViewModel>
         {
             event EventHandler TestHandler;
         }
 
-        public class StubViewModel { }
+        public class MyViewModel { }
 
-        class StubIViewWithModel : IView<StubViewModel>
+        class MyPresenter : Presenter<IMyView>
         {
-            event EventHandler IView.Load
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            public StubViewModel Model { get; set; }
-
-            public bool ThrowIfNoPresenterBound
-            {
-                get { throw new NotImplementedException(); }
-            }
+            public MyPresenter(IMyView view) : base(view) { }
         }
 
-        class StubViewWithModel : IStubViewWithModel
+        class MyPresenterOf : PresenterOf<MyViewModel>
         {
-            event EventHandler IView.Load
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            event EventHandler IStubViewWithModel.TestHandler
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            public StubViewModel Model { get; set; }
-
-            public bool ThrowIfNoPresenterBound
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            public MyPresenterOf(IView<MyViewModel> view) : base(view) { }
         }
 
-        class StubPresenter : Presenter<IView>
+        class MyPresenterWithModel : Presenter<IMyViewWithModel, MyViewModel>
         {
-            public StubPresenter(IView view) : base(view) { }
+            public MyPresenterWithModel(IMyViewWithModel view) : base(view) { }
         }
-
-        class StubPresenterOf : PresenterOf<StubViewModel>
-        {
-            public StubPresenterOf(IView<StubViewModel> view) : base(view) { }
-        }
-
-        class StubPresenterView : Presenter<IStubView>
-        {
-            public StubPresenterView(IStubView view) : base(view) { }
-        }
-
-        class StubPresenterViewWithModel : Presenter<IStubViewWithModel, StubViewModel>
-        {
-            public StubPresenterViewWithModel(IStubViewWithModel view) : base(view) { }
-        }
-
-        #endregion
     }
 }

@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Reflection.Emit;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static class CachedPresenterConstructorResolverFacts
@@ -27,11 +27,10 @@ namespace Narvalo.Mvp.Resolvers
                 // Arrange
                 var input = Tuple.Create(typeof(String), typeof(Char[]));
 
-                var innerMock = new Mock<IPresenterConstructorResolver>();
-                innerMock.Setup(_ => _.Resolve(input))
-                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                var inner = Substitute.For<IPresenterConstructorResolver>();
+                inner.Resolve(input).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
 
-                var resolver = new CachedPresenterConstructorResolver(innerMock.Object);
+                var resolver = new CachedPresenterConstructorResolver(inner);
 
                 // Act
                 var ctor1 = resolver.Resolve(input);
@@ -48,13 +47,11 @@ namespace Narvalo.Mvp.Resolvers
                 var input1 = Tuple.Create(typeof(String), typeof(Char*));
                 var input2 = Tuple.Create(typeof(String), typeof(Char[]));
 
-                var innerMock = new Mock<IPresenterConstructorResolver>();
-                innerMock.Setup(_ => _.Resolve(input1))
-                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
-                innerMock.Setup(_ => _.Resolve(input2))
-                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                var inner = Substitute.For<IPresenterConstructorResolver>();
+                inner.Resolve(input1).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                inner.Resolve(input2).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
 
-                var resolver = new CachedPresenterConstructorResolver(innerMock.Object);
+                var resolver = new CachedPresenterConstructorResolver(inner);
 
                 // Act
                 var ctor1 = resolver.Resolve(input1);

@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static class PresenterFactoryFacts
@@ -16,7 +16,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 // Arrange
                 var factory = new PresenterFactory();
                 var viewType = typeof(IView);
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
 
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => factory.Create(null, viewType, view));
@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 // Arrange
                 var factory = new PresenterFactory();
                 var presenterType = typeof(Presenter<IView>);
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
 
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => factory.Create(presenterType, null, view));
@@ -53,7 +53,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 var factory = new PresenterFactory();
                 var presenterType = typeof(StubPresenter);
                 var viewType = typeof(IView);
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
 
                 // Act
                 var presenter = factory.Create(
@@ -72,7 +72,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 var factory = new PresenterFactory();
                 var presenterType = typeof(StubErrorPresenter);
                 var viewType = typeof(IView);
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
 
                 // Act & Assert
                 Assert.Throws<PresenterBindingException>(() => factory.Create(presenterType, viewType, view));
@@ -85,7 +85,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 var factory = new PresenterFactory();
                 var presenterType = typeof(StubErrorPresenter);
                 var viewType = typeof(IView);
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
 
                 try {
                     // Act
@@ -105,7 +105,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IView>();
                 var presenter = new StubDisposablePresenter(view);
 
                 // Act

@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Web;
     using System.Web.Caching;
-    using Moq;
+    using NSubstitute;
     using Xunit;
 
     public static partial class HttpPresenterFacts
@@ -16,38 +16,31 @@ namespace Narvalo.Mvp.Web
             public static void ThrowsArgumentNullException_ForNullView_WhenIView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenter(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenter(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterOf(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenView()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterView(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterOf(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new StubPresenterViewWithModel(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterWithModel(view: null));
             }
 
             [Fact]
             public static void InitializesViewModel_WhenIViewWithModel()
             {
                 // Arrange
-                var view = new StubIViewWithModel();
+                var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                new StubPresenterOf(view);
+                new MyHttpPresenterOf(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
@@ -57,10 +50,10 @@ namespace Narvalo.Mvp.Web
             public static void InitializesViewModel_WhenViewWithModel()
             {
                 // Arrange
-                var view = new StubViewWithModel();
+                var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new StubPresenterViewWithModel(view);
+                var presenter = new MyHttpPresenterWithModel(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
@@ -70,13 +63,13 @@ namespace Narvalo.Mvp.Web
         public static class ViewProperty
         {
             [Fact]
-            public static void IsSetCorrectly_WhenIView()
+            public static void IsSetCorrectly()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
+                var view = Substitute.For<IMyView>();
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -86,23 +79,10 @@ namespace Narvalo.Mvp.Web
             public static void IsSetCorrectly_WhenIViewWithModel()
             {
                 // Arrange
-                var view = new Mock<IView<StubViewModel>>().Object;
+                var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                var presenter = new StubPresenterOf(view);
-
-                // Assert
-                Assert.Same(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WhenView()
-            {
-                // Arrange
-                var view = new Mock<IStubView>().Object;
-
-                // Act
-                var presenter = new StubPresenterView(view);
+                var presenter = new MyHttpPresenterOf(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -112,10 +92,10 @@ namespace Narvalo.Mvp.Web
             public static void IsSetCorrectly_WhenViewWithModel()
             {
                 // Arrange
-                var view = new Mock<IStubViewWithModel>().Object;
+                var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new StubPresenterViewWithModel(view);
+                var presenter = new MyHttpPresenterWithModel(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -128,11 +108,11 @@ namespace Narvalo.Mvp.Web
             public static void ReturnsAmbientHttpContext()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
-                var httpContext = new Mock<HttpContextBase>().Object;
+                var view = Substitute.For<IMyView>();
+                var httpContext = Substitute.For<HttpContextBase>();
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -146,14 +126,13 @@ namespace Narvalo.Mvp.Web
             public static void ReturnsCacheFromHttpContext()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
-                var mockHttpContext = new Mock<HttpContextBase>();
+                var view = Substitute.For<IMyView>();
                 var cache = new Cache();
-                mockHttpContext.Setup(h => h.Cache).Returns(cache);
-                var httpContext = mockHttpContext.Object;
+                var httpContext = Substitute.For<HttpContextBase>();
+                httpContext.Cache.Returns(cache);
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -167,14 +146,13 @@ namespace Narvalo.Mvp.Web
             public static void ReturnsRequestFromHttpContext()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
-                var mockHttpContext = new Mock<HttpContextBase>();
-                var request = new Mock<HttpRequestBase>().Object;
-                mockHttpContext.Setup(h => h.Request).Returns(request);
-                var httpContext = mockHttpContext.Object;
+                var view = Substitute.For<IMyView>();
+                var request = Substitute.For<HttpRequestBase>();
+                var httpContext = Substitute.For<HttpContextBase>();
+                httpContext.Request.Returns(request);
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -188,14 +166,13 @@ namespace Narvalo.Mvp.Web
             public static void ReturnsResponseFromHttpContext()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
-                var mockHttpContext = new Mock<HttpContextBase>();
-                var response = new Mock<HttpResponseBase>().Object;
-                mockHttpContext.Setup(h => h.Response).Returns(response);
-                var httpContext = mockHttpContext.Object;
+                var view = Substitute.For<IMyView>();
+                var response = Substitute.For<HttpResponseBase>();
+                var httpContext = Substitute.For<HttpContextBase>();
+                httpContext.Response.Returns(response);
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -209,14 +186,13 @@ namespace Narvalo.Mvp.Web
             public static void ReturnsServerFromHttpContext()
             {
                 // Arrange
-                var view = new Mock<IView>().Object;
-                var mockHttpContext = new Mock<HttpContextBase>();
-                var server = new Mock<HttpServerUtilityBase>().Object;
-                mockHttpContext.Setup(h => h.Server).Returns(server);
-                var httpContext = mockHttpContext.Object;
+                var view = Substitute.For<IMyView>();
+                var server = Substitute.For<HttpServerUtilityBase>();
+                var httpContext = Substitute.For<HttpContextBase>();
+                httpContext.Server.Returns(server);
 
                 // Act
-                var presenter = new StubPresenter(view);
+                var presenter = new MyHttpPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -224,81 +200,31 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        #region Stubs
-
-        public interface IStubView : IView
+        public interface IMyView : IView
         {
             event EventHandler TestHandler;
         }
 
-        public interface IStubViewWithModel : IView<StubViewModel>
+        public interface IMyViewWithModel : IView<MyViewModel>
         {
             event EventHandler TestHandler;
         }
 
-        public class StubViewModel { }
+        public class MyViewModel { }
 
-        class StubIViewWithModel : IView<StubViewModel>
+        class MyHttpPresenter : HttpPresenter<IMyView>
         {
-            event EventHandler IView.Load
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            public StubViewModel Model { get; set; }
-
-            public bool ThrowIfNoPresenterBound
-            {
-                get { throw new NotImplementedException(); }
-            }
+            public MyHttpPresenter(IMyView view) : base(view) { }
         }
 
-        class StubViewWithModel : IStubViewWithModel
+        class MyHttpPresenterOf : HttpPresenterOf<MyViewModel>
         {
-            event EventHandler IView.Load
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            event EventHandler IStubViewWithModel.TestHandler
-            {
-                add { throw new NotImplementedException(); }
-                remove { throw new NotImplementedException(); }
-            }
-
-            public StubViewModel Model { get; set; }
-
-            public bool ThrowIfNoPresenterBound
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            public MyHttpPresenterOf(IView<MyViewModel> view) : base(view) { }
         }
 
-        class StubPresenter : HttpPresenter<IView>
+        class MyHttpPresenterWithModel : HttpPresenter<IMyViewWithModel, MyViewModel>
         {
-            public StubPresenter(IView view) : base(view) { }
+            public MyHttpPresenterWithModel(IMyViewWithModel view) : base(view) { }
         }
-
-        class StubPresenterOf : HttpPresenterOf<StubViewModel>
-        {
-            public StubPresenterOf(IView<StubViewModel> view) : base(view) { }
-        }
-
-        class StubPresenterView : HttpPresenter<IStubView>
-        {
-            public StubPresenterView(IStubView view) : base(view) { }
-        }
-
-        class StubPresenterViewWithModel : HttpPresenter<IStubViewWithModel, StubViewModel>
-        {
-            public StubPresenterViewWithModel(IStubViewWithModel view) : base(view) { }
-        }
-
-        #endregion
     }
 }
