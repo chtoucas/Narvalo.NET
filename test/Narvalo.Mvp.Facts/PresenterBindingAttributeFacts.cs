@@ -8,7 +8,7 @@ namespace Narvalo.Mvp
 
     public static class PresenterBindingAttributeFacts
     {
-        public static class TheConstructor
+        public static class Ctor
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullPresenterType()
@@ -18,13 +18,13 @@ namespace Narvalo.Mvp
             }
         }
 
-        public static class TheBindingModeProperty
+        public static class BindingModeProperty
         {
             [Fact]
             public static void IsDefault_ForDefaultConstructor()
             {
                 // Arrange
-                var presenterType = new Mock<IPresenter<IView>>().GetType();
+                var presenterType = new Mock<IPresenter<IView>>().Object.GetType();
 
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
@@ -34,13 +34,13 @@ namespace Narvalo.Mvp
             }
         }
 
-        public static class ThePresenterTypeProperty
+        public static class PresenterTypeProperty
         {
             [Fact]
             public static void IsSetCorrectly()
             {
                 // Arrange
-                var presenterType = new Mock<IPresenter<IView>>().GetType();
+                var presenterType = new Mock<IPresenter<IView>>().Object.GetType();
 
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);
@@ -50,13 +50,13 @@ namespace Narvalo.Mvp
             }
         }
 
-        public static class TheViewTypeProperty
+        public static class ViewTypeProperty
         {
             [Fact]
             public static void IsNull_ForDefaultConstructor()
             {
                 // Arrange
-                var presenterType = new Mock<IPresenter<IView>>().GetType();
+                var presenterType = new Mock<IPresenter<IView>>().Object.GetType();
 
                 // Act
                 var attribute = new PresenterBindingAttribute(presenterType);

@@ -9,7 +9,7 @@ namespace Narvalo.Mvp
 
     public static class CompositeViewFacts
     {
-        public static class TheAddMethod
+        public static class AddMethod
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView()

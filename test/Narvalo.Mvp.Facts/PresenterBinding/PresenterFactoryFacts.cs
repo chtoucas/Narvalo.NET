@@ -8,46 +8,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public static class PresenterFactoryFacts
     {
-        class DisposablePresenter : Presenter<IView>, IDisposable
-        {
-            public DisposablePresenter(IView view) : base(view) { }
-
-            public bool DisposeCalled { get; private set; }
-
-            public void Dispose()
-            {
-                DisposeCalled = true;
-            }
-        }
-
-        public class ErrorPresenter : Presenter<IView>
-        {
-            public ErrorPresenter(IView view)
-                : base(view)
-            {
-                throw new ApplicationException("test exception");
-            }
-        }
-
-        public static class TheReleaseMethod
-        {
-            [Fact]
-            public static void DefaultPresenterFactory_DisposesPresenter()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var view = new Mock<IView>().Object;
-                var presenter = new DisposablePresenter(view);
-
-                // Act
-                factory.Release(presenter);
-
-                // Assert
-                Assert.True(presenter.DisposeCalled);
-            }
-        }
-
-        public static class TheCreateMethod
+        public static class CreateMethod
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullPresenterType()
@@ -90,7 +51,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(Stubs.PresenterForIView);
+                var presenterType = typeof(StubPresenter);
                 var viewType = typeof(IView);
                 var view = new Mock<IView>().Object;
 
@@ -101,15 +62,15 @@ namespace Narvalo.Mvp.PresenterBinding
                     view);
 
                 // Assert
-                Assert.True(presenter is Stubs.PresenterForIView);
+                Assert.True(presenter is StubPresenter);
             }
 
             [Fact]
-            public static void ThrowsPresenterBindingException()
+            public static void ThrowsPresenterBindingException_WhenBindingFails()
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(ErrorPresenter);
+                var presenterType = typeof(StubErrorPresenter);
                 var viewType = typeof(IView);
                 var view = new Mock<IView>().Object;
 
@@ -118,11 +79,11 @@ namespace Narvalo.Mvp.PresenterBinding
             }
 
             [Fact]
-            public static void WrapsOriginalException()
+            public static void WrapsOriginalException_WhenBindingFails()
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(ErrorPresenter);
+                var presenterType = typeof(StubErrorPresenter);
                 var viewType = typeof(IView);
                 var view = new Mock<IView>().Object;
 
@@ -136,5 +97,60 @@ namespace Narvalo.Mvp.PresenterBinding
                 }
             }
         }
+
+        public static class ReleaseMethod
+        {
+            [Fact]
+            public static void DisposesPresenter()
+            {
+                // Arrange
+                var factory = new PresenterFactory();
+                var view = new Mock<IView>().Object;
+                var presenter = new StubDisposablePresenter(view);
+
+                // Act
+                factory.Release(presenter);
+
+                // Assert
+                Assert.True(presenter.DisposeCalled);
+            }
+        }
+
+        #region Stubs
+
+        // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
+
+        public class StubPresenter : Presenter<IView>
+        {
+            public StubPresenter(IView view) : base(view) { }
+        }
+
+        public class StubDisposablePresenter : Presenter<IView>, IDisposable
+        {
+            public StubDisposablePresenter(IView view) : base(view) { }
+
+            public bool DisposeCalled { get; private set; }
+
+            public void Dispose()
+            {
+                DisposeCalled = true;
+            }
+        }
+
+        public class StubErrorPresenter : Presenter<IView>
+        {
+            public StubErrorPresenter(IView view)
+                : base(view)
+            {
+                throw new ApplicationException("test exception");
+            }
+        }
+
+        class StubPrivatePresenter : Presenter<IView>
+        {
+            public StubPrivatePresenter(IView view) : base(view) { }
+        }
+
+        #endregion
     }
 }

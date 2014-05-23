@@ -63,19 +63,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolvers\CachedPresenterConstructorResolverFacts.cs" />
     <Compile Include="Resolvers\PresenterConstructorResolverFacts.cs" />
-    <Compile Include="Stubs\ISimpleView.cs" />
-    <Compile Include="Stubs\ViewModel.cs" />
-    <Compile Include="Stubs\HttpPresenterForView.cs" />
-    <Compile Include="Stubs\HttpPresenterForIView.cs" />
-    <Compile Include="Stubs\HttpPresenterForIViewWithModel.cs" />
-    <Compile Include="Stubs\PresenterForIViewWithModel.cs" />
-    <Compile Include="Stubs\PresenterForIView.cs" />
-    <Compile Include="Stubs\PresenterForView.cs" />
-    <Compile Include="Stubs\HttpPresenterForViewWithModel.cs" />
-    <Compile Include="Stubs\PresenterForViewWithModel.cs" />
-    <Compile Include="Stubs\ISimpleViewWithModel.cs" />
-    <Compile Include="Stubs\ViewWithModel.cs" />
-    <Compile Include="Stubs\SimpleViewWithModel.cs" />
     <Compile Include="Web\Core\AspNetMessageCoordinatorFacts.cs" />
     <Compile Include="Web\HttpPresenterFacts.cs">
       <SubType>Code</SubType>

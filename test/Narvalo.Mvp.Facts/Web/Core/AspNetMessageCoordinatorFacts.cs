@@ -9,17 +9,7 @@ namespace Narvalo.Mvp.Web.Core
 
     public class AspNetMessageCoordinatorFacts
     {
-        #region Stubs
-
-        interface IMyMessage { }
-
-        class MyMessage : IMyMessage { }
-
-        class MyInheritedMessage : MyMessage { }
-
-        #endregion
-
-        public static class ThePublishMethod
+        public static class PublishMethod
         {
             [Fact]
             public static void ThrowsInvalidOperationException_WhenCalledAfterClose()
@@ -143,7 +133,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        public static class TheCloseMethod
+        public static class CloseMethod
         {
             [Fact]
             public static void MayBeCalledMultipleTimes()
@@ -157,7 +147,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        public static class TheSubscribeMethod
+        public static class SubscribeMethod
         {
             [Fact]
             public static void ThrowsInvalidOperationException_WhenCalledAfterClose()
@@ -247,5 +237,16 @@ namespace Narvalo.Mvp.Web.Core
             // Assert
             Assert.True(received);
         }
+
+        #region Stubs
+
+        interface IMyMessage { }
+
+        class MyMessage : IMyMessage { }
+
+        class MyInheritedMessage : MyMessage { }
+
+        #endregion
+
     }
 }

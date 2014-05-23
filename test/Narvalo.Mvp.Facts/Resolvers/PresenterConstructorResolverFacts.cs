@@ -7,25 +7,6 @@ namespace Narvalo.Mvp.Resolvers
 
     public static class PresenterConstructorResolverFacts
     {
-        #region Stubs
-
-        public class PresenterStub<T>
-        {
-            public PresenterStub(T view)
-            {
-                View = view;
-            }
-
-            public T View { get; private set; }
-        }
-
-        public class BadPresenterStub<T>
-        {
-            public BadPresenterStub(T view, int param) { }
-        }
-
-        #endregion
-
         public static class TheResolverMethod
         {
             [Fact]
@@ -43,7 +24,7 @@ namespace Narvalo.Mvp.Resolvers
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(PresenterStub<String>);
+                var presenterType = typeof(StubPresenter<String>);
                 var viewType = typeof(Int32);
                 var input = Tuple.Create(presenterType, viewType);
 
@@ -52,11 +33,24 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void ThrowsArgumentException_WhenMissingConstructor()
+            public static void ThrowsArgumentException_WhenMissingConstructor1()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(BadPresenterStub<String>);
+                var presenterType = typeof(StubBadPresenter<String>);
+                var viewType = typeof(String);
+                var input = Tuple.Create(presenterType, viewType);
+
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => resolver.Resolve(input));
+            }
+
+            [Fact]
+            public static void ThrowsArgumentException_WhenMissingConstructor2()
+            {
+                // Arrange
+                var resolver = new PresenterConstructorResolver();
+                var presenterType = typeof(StubBadPresenter);
                 var viewType = typeof(String);
                 var input = Tuple.Create(presenterType, viewType);
 
@@ -69,7 +63,7 @@ namespace Narvalo.Mvp.Resolvers
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(PresenterStub<String>);
+                var presenterType = typeof(StubPresenter<String>);
                 var viewType = typeof(String);
                 var input = Tuple.Create(presenterType, viewType);
 
@@ -78,8 +72,8 @@ namespace Narvalo.Mvp.Resolvers
                 var instance = ctor.Invoke(null, new[] { "test" });
 
                 // Assert
-                Assert.True(instance is PresenterStub<String>);
-                Assert.Equal("test", ((PresenterStub<String>)instance).View);
+                Assert.True(instance is StubPresenter<String>);
+                Assert.Equal("test", ((StubPresenter<String>)instance).View);
             }
 
             [Fact]
@@ -98,5 +92,30 @@ namespace Narvalo.Mvp.Resolvers
                 Assert.NotEqual(ctor1, ctor2);
             }
         }
+
+        #region Stubs
+
+        public class StubPresenter<T>
+        {
+            public StubPresenter(T view)
+            {
+                View = view;
+            }
+
+            public T View { get; private set; }
+        }
+
+        public class StubBadPresenter
+        {
+            public StubBadPresenter(int param) { }
+        }
+
+        public class StubBadPresenter<T>
+        {
+            public StubBadPresenter(T view, int param) { }
+        }
+
+        #endregion
+
     }
 }

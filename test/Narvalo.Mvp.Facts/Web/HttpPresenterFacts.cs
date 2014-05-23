@@ -10,44 +10,44 @@ namespace Narvalo.Mvp.Web
 
     public static partial class HttpPresenterFacts
     {
-        public static class TheConstructor
+        public static class Ctor
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenIView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.HttpPresenterForIView(view: null));
+                Assert.Throws<ArgumentNullException>(() => new StubPresenter(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.HttpPresenterForIViewWithModel(view: null));
+                Assert.Throws<ArgumentNullException>(() => new StubPresenterOf(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenView()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.HttpPresenterForView(view: null));
+                Assert.Throws<ArgumentNullException>(() => new StubPresenterView(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new Stubs.HttpPresenterForViewWithModel(view: null));
+                Assert.Throws<ArgumentNullException>(() => new StubPresenterViewWithModel(view: null));
             }
 
             [Fact]
             public static void InitializesViewModel_WhenIViewWithModel()
             {
                 // Arrange
-                var view = new Stubs.ViewWithModel();
+                var view = new StubIViewWithModel();
 
                 // Act
-                new Stubs.HttpPresenterForIViewWithModel(view);
+                new StubPresenterOf(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
@@ -57,17 +57,17 @@ namespace Narvalo.Mvp.Web
             public static void InitializesViewModel_WhenViewWithModel()
             {
                 // Arrange
-                var view = new Stubs.SimpleViewWithModel();
+                var view = new StubViewWithModel();
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForViewWithModel(view);
+                var presenter = new StubPresenterViewWithModel(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
             }
         }
 
-        public static class TheViewProperty
+        public static class ViewProperty
         {
             [Fact]
             public static void IsSetCorrectly_WhenIView()
@@ -76,7 +76,7 @@ namespace Narvalo.Mvp.Web
                 var view = new Mock<IView>().Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -86,10 +86,10 @@ namespace Narvalo.Mvp.Web
             public static void IsSetCorrectly_WhenIViewWithModel()
             {
                 // Arrange
-                var view = new Mock<IView<Stubs.ViewModel>>().Object;
+                var view = new Mock<IView<StubViewModel>>().Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIViewWithModel(view);
+                var presenter = new StubPresenterOf(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -99,10 +99,10 @@ namespace Narvalo.Mvp.Web
             public static void IsSetCorrectly_WhenView()
             {
                 // Arrange
-                var view = new Mock<Stubs.ISimpleView>().Object;
+                var view = new Mock<IStubView>().Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForView(view);
+                var presenter = new StubPresenterView(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
@@ -112,17 +112,17 @@ namespace Narvalo.Mvp.Web
             public static void IsSetCorrectly_WhenViewWithModel()
             {
                 // Arrange
-                var view = new Mock<Stubs.ISimpleViewWithModel>().Object;
+                var view = new Mock<IStubViewWithModel>().Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForViewWithModel(view);
+                var presenter = new StubPresenterViewWithModel(view);
 
                 // Assert
                 Assert.Same(view, presenter.View);
             }
         }
 
-        public static class TheHttpContextProperty
+        public static class HttpContextProperty
         {
             [Fact]
             public static void ReturnsAmbientHttpContext()
@@ -132,7 +132,7 @@ namespace Narvalo.Mvp.Web
                 var httpContext = new Mock<HttpContextBase>().Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -140,7 +140,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public static class TheCacheProperty
+        public static class CacheProperty
         {
             [Fact]
             public static void ReturnsCacheFromHttpContext()
@@ -153,7 +153,7 @@ namespace Narvalo.Mvp.Web
                 var httpContext = mockHttpContext.Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -161,7 +161,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public static class TheRequestProperty
+        public static class RequestProperty
         {
             [Fact]
             public static void ReturnsRequestFromHttpContext()
@@ -174,7 +174,7 @@ namespace Narvalo.Mvp.Web
                 var httpContext = mockHttpContext.Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -182,7 +182,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public static class TheResponseProperty
+        public static class ResponseProperty
         {
             [Fact]
             public static void ReturnsResponseFromHttpContext()
@@ -195,7 +195,7 @@ namespace Narvalo.Mvp.Web
                 var httpContext = mockHttpContext.Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
@@ -203,7 +203,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public static class TheServerProperty
+        public static class ServerProperty
         {
             [Fact]
             public static void ReturnsServerFromHttpContext()
@@ -216,12 +216,89 @@ namespace Narvalo.Mvp.Web
                 var httpContext = mockHttpContext.Object;
 
                 // Act
-                var presenter = new Stubs.HttpPresenterForIView(view);
+                var presenter = new StubPresenter(view);
                 (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
                 // Assert
                 Assert.Same(server, presenter.Server);
             }
         }
+
+        #region Stubs
+
+        public interface IStubView : IView
+        {
+            event EventHandler TestHandler;
+        }
+
+        public interface IStubViewWithModel : IView<StubViewModel>
+        {
+            event EventHandler TestHandler;
+        }
+
+        public class StubViewModel { }
+
+        class StubIViewWithModel : IView<StubViewModel>
+        {
+            event EventHandler IView.Load
+            {
+                add { throw new NotImplementedException(); }
+                remove { throw new NotImplementedException(); }
+            }
+
+            public StubViewModel Model { get; set; }
+
+            public bool ThrowIfNoPresenterBound
+            {
+                get { throw new NotImplementedException(); }
+            }
+        }
+
+        class StubViewWithModel : IStubViewWithModel
+        {
+            event EventHandler IView.Load
+            {
+                add { throw new NotImplementedException(); }
+                remove { throw new NotImplementedException(); }
+            }
+
+            event EventHandler IStubViewWithModel.TestHandler
+            {
+                add { throw new NotImplementedException(); }
+                remove { throw new NotImplementedException(); }
+            }
+
+            public StubViewModel Model { get; set; }
+
+            public bool ThrowIfNoPresenterBound
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
+
+        class StubPresenter : HttpPresenter<IView>
+        {
+            public StubPresenter(IView view) : base(view) { }
+        }
+
+        class StubPresenterOf : HttpPresenterOf<StubViewModel>
+        {
+            public StubPresenterOf(IView<StubViewModel> view) : base(view) { }
+        }
+
+        class StubPresenterView : HttpPresenter<IStubView>
+        {
+            public StubPresenterView(IStubView view) : base(view) { }
+        }
+
+        class StubPresenterViewWithModel : HttpPresenter<IStubViewWithModel, StubViewModel>
+        {
+            public StubPresenterViewWithModel(IStubViewWithModel view) : base(view) { }
+        }
+
+        #endregion
     }
 }

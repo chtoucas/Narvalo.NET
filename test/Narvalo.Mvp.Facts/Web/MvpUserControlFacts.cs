@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Web
 
     public static class MvpUserControlFacts
     {
-        public static class TheThrowIfNoPresenterBoundProperty
+        public static class ThrowIfNoPresenterBoundProperty
         {
             [Fact]
             public static void IsTrue_ForDefautConstructor()

@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public static class CompositePresenterDiscoveryStrategyFacts
     {
-        public static class TheConstructor
+        public static class Ctor
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullStrategies()
