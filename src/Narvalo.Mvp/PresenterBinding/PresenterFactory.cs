@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.PresenterBinding
             Require.NotNull(viewType, "viewType");
             Require.NotNull(view, "view");
 
-            var ctor = _constructorResolver.Resolve(Tuple.Create(presenterType, viewType));
+            var ctor = _constructorResolver.Resolve(presenterType, viewType);
 
             __Tracer.Info(
                 this,

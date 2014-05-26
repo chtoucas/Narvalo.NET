@@ -1,4 +1,6 @@
-﻿namespace Playground.Presenters
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Playground.Presenters
 {
     using System;
     using Narvalo.Mvp;

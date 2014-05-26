@@ -111,7 +111,6 @@
     <Compile Include="Resolvers\CachedCompositeViewTypeResolver.cs" />
     <Compile Include="Resolvers\CachedPresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\CompositeViewTypeResolver.cs" />
-    <Compile Include="Resolvers\IComponentResolver`2.cs" />
     <Compile Include="Resolvers\PresenterBindingAttributesResolver.cs" />
     <Compile Include="Resolvers\PresenterConstructorResolver.cs" />
     <Compile Include="Resolvers\CachedPresenterBindingAttributesResolver.cs" />

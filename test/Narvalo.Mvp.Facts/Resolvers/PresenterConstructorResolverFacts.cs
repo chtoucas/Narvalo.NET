@@ -3,20 +3,33 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+    using NSubstitute;
     using Xunit;
 
     public static class PresenterConstructorResolverFacts
     {
-        public static class TheResolverMethod
+        public static class ResolveMethod
         {
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullInput()
+            public static void ThrowsArgumentNullException_ForNullPresenterType()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
+                var viewType = typeof(IView);
 
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(input: null));
+                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(null, viewType));
+            }
+
+            [Fact]
+            public static void ThrowsArgumentNullException_ForNullViewType()
+            {
+                // Arrange
+                var resolver = new PresenterConstructorResolver();
+                var presenterType = typeof(IPresenter<IView>);
+
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(presenterType, null));
             }
 
             [Fact]
@@ -24,98 +37,127 @@ namespace Narvalo.Mvp.Resolvers
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(StubPresenter<String>);
-                var viewType = typeof(Int32);
-                var input = Tuple.Create(presenterType, viewType);
+                var presenterType = typeof(MyPresenter<IMyView1>);
+                var viewType = typeof(IMyView2);
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(input));
+                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
             }
 
             [Fact]
-            public static void ThrowsArgumentException_WhenMissingConstructor1()
+            public static void ThrowsArgumentException_WhenMissingRequiredConstructor()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(StubBadPresenter<String>);
-                var viewType = typeof(String);
-                var input = Tuple.Create(presenterType, viewType);
+                var presenterType = typeof(MyBadPresenter<IMyView1>);
+                var viewType = typeof(IMyView1);
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(input));
+                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
             }
 
             [Fact]
-            public static void ThrowsArgumentException_WhenMissingConstructor2()
+            public static void ThrowsArgumentException_WhenPresenterTypeIsPrivate()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(StubBadPresenter);
-                var viewType = typeof(String);
-                var input = Tuple.Create(presenterType, viewType);
+                var presenterType = typeof(MyPrivatePresenter);
+                var viewType = typeof(IMyView1);
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(input));
+                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
             }
 
             [Fact]
-            public static void ReturnsConstructorMethodWithOneParameter()
+            public static void ReturnsExpectedConstructor()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(StubPresenter<String>);
-                var viewType = typeof(String);
-                var input = Tuple.Create(presenterType, viewType);
+                var presenterType = typeof(MyPresenter<IMyView1>);
+                var viewType = typeof(IMyView1);
+                var view = Substitute.For<IMyView1>();
 
                 // Act
-                var ctor = resolver.Resolve(input);
-                var instance = ctor.Invoke(null, new[] { "test" });
+                var ctor = resolver.Resolve(presenterType, viewType);
+                var instance = ctor.Invoke(null, new[] { view });
 
                 // Assert
-                Assert.True(instance is StubPresenter<String>);
-                Assert.Equal("test", ((StubPresenter<String>)instance).View);
+                Assert.True(instance is MyPresenter<IMyView1>);
+                Assert.Equal(view, ((MyPresenter<IMyView1>)instance).View);
             }
 
             [Fact]
-            public static void ReturnsDifferentConstructorMethods()
+            public static void ReturnsDifferentConstructors_ForDifferentViewTypes()
             {
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
-                var input1 = Tuple.Create(typeof(String), typeof(Char*));
-                var input2 = Tuple.Create(typeof(String), typeof(Char[]));
 
                 // Act
-                var ctor1 = resolver.Resolve(input1);
-                var ctor2 = resolver.Resolve(input2);
+                var ctor1 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView3));
+                var ctor2 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView4));
 
                 // Assert
                 Assert.NotEqual(ctor1, ctor2);
             }
         }
 
-        #region Stubs
+        public interface IMyView1 : IView<String> { }
 
-        public class StubPresenter<T>
+        public interface IMyView2 : IView<Int16> { }
+
+        public interface IMyView3 : IView<Int32> { }
+
+        public interface IMyView4 : IView<Int64> { }
+
+        class MyPrivatePresenter : IPresenter<IMyView1>
         {
-            public StubPresenter(T view)
+            public IMyView1 View
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            public IMessageCoordinator Messages
+            {
+                get { throw new NotImplementedException(); }
+            }
+        }
+
+        public class MyPresenter<T> : IPresenter<T> where T : IView
+        {
+            public MyPresenter(T view)
             {
                 View = view;
             }
 
+            public MyPresenter(IMyView3 view) { }
+
+            public MyPresenter(IMyView4 view) { }
+
             public T View { get; private set; }
+
+            public IMessageCoordinator Messages
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
 
-        public class StubBadPresenter
+        public class MyBadPresenter<T> : IPresenter<T> where T : IView
         {
-            public StubBadPresenter(int param) { }
+            public MyBadPresenter() { }
+
+            public MyBadPresenter(int param) { }
+
+            public MyBadPresenter(T view, int param) { }
+
+            public T View
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            public IMessageCoordinator Messages
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
-
-        public class StubBadPresenter<T>
-        {
-            public StubBadPresenter(T view, int param) { }
-        }
-
-        #endregion
-
     }
 }

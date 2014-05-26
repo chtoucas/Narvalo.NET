@@ -9,13 +9,13 @@ namespace Narvalo.Mvp.Resolvers
 
     public class /*Default*/PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
     {
-        public virtual IEnumerable<PresenterBindingAttribute> Resolve(Type input)
+        public IEnumerable<PresenterBindingAttribute> Resolve(Type viewType)
         {
-            Require.NotNull(input, "input");
+            Require.NotNull(viewType, "viewType");
 
-            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
 
-            var attributes = input
+            var attributes = viewType
                 .GetCustomAttributes(typeof(PresenterBindingAttribute), inherit: true)
                 .OfType<PresenterBindingAttribute>()
                 .ToArray();
@@ -26,7 +26,7 @@ namespace Narvalo.Mvp.Resolvers
                     String.Format(
                         CultureInfo.InvariantCulture,
                         @"When shared presenter binding is requested, the ""ViewType"" must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
-                        input.FullName));
+                        viewType.FullName));
             }
 
             return attributes
@@ -34,8 +34,8 @@ namespace Narvalo.Mvp.Resolvers
                     new PresenterBindingAttribute(pba.PresenterType)
                     {
                         BindingMode = pba.BindingMode,
-                        Origin = input,
-                        ViewType = pba.ViewType ?? input,
+                        Origin = viewType,
+                        ViewType = pba.ViewType ?? viewType,
                     })
                 .ToArray();
         }

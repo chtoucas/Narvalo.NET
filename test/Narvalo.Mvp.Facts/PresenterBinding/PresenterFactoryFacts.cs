@@ -51,7 +51,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(StubPresenter);
+                var presenterType = typeof(MyPresenter);
                 var viewType = typeof(IView);
                 var view = Substitute.For<IView>();
 
@@ -62,7 +62,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     view);
 
                 // Assert
-                Assert.True(presenter is StubPresenter);
+                Assert.True(presenter is MyPresenter);
             }
 
             [Fact]
@@ -70,7 +70,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(StubErrorPresenter);
+                var presenterType = typeof(MyErrorPresenter);
                 var viewType = typeof(IView);
                 var view = Substitute.For<IView>();
 
@@ -83,7 +83,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(StubErrorPresenter);
+                var presenterType = typeof(MyErrorPresenter);
                 var viewType = typeof(IView);
                 var view = Substitute.For<IView>();
 
@@ -106,7 +106,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 // Arrange
                 var factory = new PresenterFactory();
                 var view = Substitute.For<IView>();
-                var presenter = new StubDisposablePresenter(view);
+                var presenter = new MyDisposablePresenter(view);
 
                 // Act
                 factory.Release(presenter);
@@ -120,14 +120,14 @@ namespace Narvalo.Mvp.PresenterBinding
 
         // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
 
-        public class StubPresenter : Presenter<IView>
+        public class MyPresenter : Presenter<IView>
         {
-            public StubPresenter(IView view) : base(view) { }
+            public MyPresenter(IView view) : base(view) { }
         }
 
-        public class StubDisposablePresenter : Presenter<IView>, IDisposable
+        public class MyDisposablePresenter : Presenter<IView>, IDisposable
         {
-            public StubDisposablePresenter(IView view) : base(view) { }
+            public MyDisposablePresenter(IView view) : base(view) { }
 
             public bool DisposeCalled { get; private set; }
 
@@ -137,18 +137,18 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public class StubErrorPresenter : Presenter<IView>
+        public class MyErrorPresenter : Presenter<IView>
         {
-            public StubErrorPresenter(IView view)
+            public MyErrorPresenter(IView view)
                 : base(view)
             {
                 throw new ApplicationException("test exception");
             }
         }
 
-        class StubPrivatePresenter : Presenter<IView>
+        class MyPrivatePresenter : Presenter<IView>
         {
-            public StubPrivatePresenter(IView view) : base(view) { }
+            public MyPrivatePresenter(IView view) : base(view) { }
         }
 
         #endregion

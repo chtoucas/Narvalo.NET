@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Resolvers
 
     public static class CachedPresenterConstructorResolverFacts
     {
-        public static class TheConstructorMethod
+        public static class Ctor
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullInnerResolver()
@@ -19,43 +19,41 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        public static class TheResolverMethod
+        public static class ResolveMethod
         {
             [Fact]
-            public static void AlwaysReturnSameConstructorMethod()
+            public static void ReturnsSameConstructor_ForSameInputs()
             {
                 // Arrange
-                var input = Tuple.Create(typeof(String), typeof(Char[]));
-
                 var inner = Substitute.For<IPresenterConstructorResolver>();
-                inner.Resolve(input).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                inner.Resolve(typeof(String), typeof(Char[]))
+                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
 
                 var resolver = new CachedPresenterConstructorResolver(inner);
 
                 // Act
-                var ctor1 = resolver.Resolve(input);
-                var ctor2 = resolver.Resolve(input);
+                var ctor1 = resolver.Resolve(typeof(String), typeof(Char[]));
+                var ctor2 = resolver.Resolve(typeof(String), typeof(Char[]));
 
                 // Assert
                 Assert.Equal(ctor1, ctor2);
             }
 
             [Fact]
-            public static void ReturnsDifferentConstructorMethods_ForDifferentTypes()
+            public static void ReturnsDifferentConstructors_ForDifferentInputs()
             {
                 // Arrange
-                var input1 = Tuple.Create(typeof(String), typeof(Char*));
-                var input2 = Tuple.Create(typeof(String), typeof(Char[]));
-
                 var inner = Substitute.For<IPresenterConstructorResolver>();
-                inner.Resolve(input1).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
-                inner.Resolve(input2).Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                inner.Resolve(typeof(String), typeof(Char*))
+                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+                inner.Resolve(typeof(String), typeof(Char[]))
+                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
 
                 var resolver = new CachedPresenterConstructorResolver(inner);
 
                 // Act
-                var ctor1 = resolver.Resolve(input1);
-                var ctor2 = resolver.Resolve(input2);
+                var ctor1 = resolver.Resolve(typeof(String), typeof(Char*));
+                var ctor2 = resolver.Resolve(typeof(String), typeof(Char[]));
 
                 // Assert
                 Assert.NotEqual(ctor1, ctor2);

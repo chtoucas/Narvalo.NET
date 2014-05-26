@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp
 {
     using System;
+    using System.Diagnostics;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class PresenterBindingAttribute : Attribute
@@ -16,6 +17,8 @@ namespace Narvalo.Mvp
         public PresenterBindingAttribute(Type presenterType)
         {
             Require.NotNull(presenterType, "presenterType");
+
+            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType));
 
             _presenterType = presenterType;
         }

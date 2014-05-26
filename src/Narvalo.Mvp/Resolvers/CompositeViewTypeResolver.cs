@@ -13,22 +13,22 @@ namespace Narvalo.Mvp.Resolvers
         readonly CompositeViewModuleBuilder _moduleBuilder
               = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
-        public virtual Type Resolve(Type input)
+        public Type Resolve(Type viewType)
         {
-            Require.NotNull(input, "input");
+            Require.NotNull(viewType, "viewType");
 
-            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
 
-            ValidateViewType_(input);
+            ValidateViewType_(viewType);
 
-            var typeBuilder = new CompositeViewTypeBuilder(input, _moduleBuilder.DefineType(input));
+            var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
 
-            var properties = FindProperties_(input);
+            var properties = FindProperties_(viewType);
             foreach (var propertyInfo in properties) {
                 typeBuilder.AddProperty(propertyInfo);
             }
 
-            var events = FindEvents_(input);
+            var events = FindEvents_(viewType);
             foreach (var eventInfo in events) {
                 typeBuilder.AddEvent(eventInfo);
             }

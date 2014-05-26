@@ -20,9 +20,9 @@ namespace Narvalo.Mvp.Resolvers
             _inner = inner;
         }
 
-        public IEnumerable<PresenterBindingAttribute> Resolve(Type input)
+        public IEnumerable<PresenterBindingAttribute> Resolve(Type viewType)
         {
-            return _cache.GetOrAdd(input, _inner.Resolve);
+            return _cache.GetOrAdd(viewType, _inner.Resolve);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Resolvers
     public interface IBuildManager
     {
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "GetType",
-            Justification = "Wrapping existing framework function name.")]
+            Justification = "Wraps an existing framework function name.")]
         Type GetType(string typeName, bool throwOnError, bool ignoreCase);
     }
 }

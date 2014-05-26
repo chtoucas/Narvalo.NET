@@ -17,9 +17,9 @@ namespace Narvalo.Mvp.Resolvers
             _inner = inner;
         }
 
-        public Type Resolve(Type input)
+        public Type Resolve(Type viewType)
         {
-            return _cache.GetOrAdd(input, _inner.Resolve);
+            return _cache.GetOrAdd(viewType, _inner.Resolve);
         }
     }
 }

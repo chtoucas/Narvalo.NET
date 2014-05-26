@@ -16,6 +16,7 @@ namespace Narvalo.Mvp.Web.Core
             IEnumerable<string> presenterNameTemplates)
             : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates) { }
 
+        // REVIEW: Prefers composition over extension?
         public override Type Resolve(Type input)
         {
             if (input.IsAspNetDynamicType()) {

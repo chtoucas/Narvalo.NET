@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Resolvers
         readonly ResolverCache<Tuple<Type, Type>, string, DynamicMethod> _cache
            = new ResolverCache<Tuple<Type, Type>, string, DynamicMethod>(
                 _ => String.Join(
-                    "__:__", 
+                    "__:__",
                     new[] 
                     {
                         _.Item1.AssemblyQualifiedName,
@@ -30,9 +30,9 @@ namespace Narvalo.Mvp.Resolvers
             _inner = inner;
         }
 
-        public DynamicMethod Resolve(Tuple<Type, Type> input)
+        public DynamicMethod Resolve(Type presenterType, Type viewType)
         {
-            return _cache.GetOrAdd(input, _inner.Resolve);
+            return _cache.GetOrAdd(Tuple.Create(presenterType, viewType), _ => _inner.Resolve(_.Item1, _.Item2));
         }
     }
 }

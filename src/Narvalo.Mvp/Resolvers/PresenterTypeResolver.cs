@@ -34,20 +34,21 @@ namespace Narvalo.Mvp.Resolvers
             _presenterNameTemplates = presenterNameTemplates;
         }
 
-        public virtual Type Resolve(Type input)
+        // REVIEW: Prefers composition over extension?
+        public virtual Type Resolve(Type viewType)
         {
-            Require.NotNull(input, "input");
+            Require.NotNull(viewType, "viewType");
 
-            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.FullName);
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
 
-            var shortNames = GetShortNamesFromInterfaces_(input)
-                .Append(GetShortNameFromType_(input));
+            var shortNames = GetShortNamesFromInterfaces_(viewType)
+                .Append(GetShortNameFromType_(viewType));
 
             // We also look into the view namespace 
             // and into the assembly where the view is defined.
             var nameSpaces = _defaultNamespaces
-                .Append(input.Namespace)
-                .Append(new AssemblyName(input.Assembly.FullName).Name);
+                .Append(viewType.Namespace)
+                .Append(new AssemblyName(viewType.Assembly.FullName).Name);
 
             var presenterTypes
                 = from shortName in shortNames.Distinct()

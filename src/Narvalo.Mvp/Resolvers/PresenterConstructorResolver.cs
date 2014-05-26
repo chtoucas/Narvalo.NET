@@ -3,25 +3,27 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection.Emit;
 
-    public class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
+    public sealed class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
     {
-        public virtual DynamicMethod Resolve(Tuple<Type, Type> input)
+        public DynamicMethod Resolve(Type presenterType, Type viewType)
         {
-            Require.NotNull(input, "input");
+            Require.NotNull(presenterType, "presenterType");
+            Require.NotNull(viewType, "viewType");
 
-            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", input.Item1.FullName);
+            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType));
+            Debug.Assert(typeof(IView).IsAssignableFrom(viewType));
 
-            var presenterType = input.Item1;
-            var viewType = input.Item2;
+            __Tracer.Info(this, @"Attempting to resolve ""{0}"".", presenterType.FullName);
 
             if (presenterType.IsNotPublic) {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,
-                        "{0} does not meet accessibility requirements. For the WebFormsMvp framework to be able to call it, it must be public. Make the type public, or set PresenterBinder.Factory to an implementation that can access this type.",
+                        "{0} does not meet accessibility requirements. For the framework to be able to call it, it must be public. Make the type public, or use a IPresenterFactory that can access this type.",
                         presenterType.FullName),
                     "input");
             }
@@ -31,7 +33,7 @@ namespace Narvalo.Mvp.Resolvers
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,
-                        "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or set PresenterBinder.Factory to an implementation that can supply constructor dependencies.",
+                        "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or use a IPresenterFactory that can supply constructor dependencies.",
                         presenterType.FullName,
                         viewType.FullName),
                     "input");
@@ -47,7 +49,7 @@ namespace Narvalo.Mvp.Resolvers
                 presenterType,
                 new[] { viewType },
                 presenterType.Module,
-                false /* skipVisibility */);
+                skipVisibility: false);
 
             var il = dynamicMethod.GetILGenerator();
             il.Emit(OpCodes.Nop);
