@@ -37,6 +37,7 @@ namespace Narvalo.Mvp.Resolvers
 
                 // Assert
                 inner.Received(1).Resolve(typeof(String), typeof(Char[]));
+                Assert.True(true);
             }
 
             [Fact]

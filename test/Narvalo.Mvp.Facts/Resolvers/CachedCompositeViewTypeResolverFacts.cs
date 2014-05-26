@@ -35,6 +35,7 @@ namespace Narvalo.Mvp.Resolvers
 
                 // Assert
                 inner.Received(1).Resolve(typeof(String));
+                Assert.True(true);
             }
 
             [Fact]
@@ -60,7 +61,7 @@ namespace Narvalo.Mvp.Resolvers
                 // Arrange
                 var inner = Substitute.For<ICompositeViewTypeResolver>();
                 inner.Resolve(typeof(String)).Returns(typeof(Int32));
-                inner.Resolve(typeof(Int32)).Returns(typeof(Int32));
+                inner.Resolve(typeof(Int32)).Returns(typeof(String));
 
                 var resolver = new CachedCompositeViewTypeResolver(inner);
 

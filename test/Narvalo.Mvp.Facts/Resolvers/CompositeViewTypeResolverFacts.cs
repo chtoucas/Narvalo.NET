@@ -46,7 +46,7 @@ namespace Narvalo.Mvp.Resolvers
             public static void ThrowsArgumentException_ForPrivateInterface()
             {
                 // Arrange
-                var viewType = typeof(IPrivateView);
+                var viewType = typeof(IMyPrivateView);
 
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
@@ -114,6 +114,6 @@ namespace Narvalo.Mvp.Resolvers
             void MyMethod();
         }
 
-        interface IPrivateView : IView { }
+        interface IMyPrivateView : IView { }
     }
 }
