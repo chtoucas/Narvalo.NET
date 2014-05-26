@@ -101,6 +101,8 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
+        // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
+
         public interface IMyView1 : IView<String> { }
 
         public interface IMyView2 : IView<Int16> { }

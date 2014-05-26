@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Resolvers
 
             __Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
 
-            ValidateViewType_(viewType);
+            ValidateViewType(viewType);
 
             var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
 
@@ -36,33 +36,7 @@ namespace Narvalo.Mvp.Resolvers
             return typeBuilder.Build();
         }
 
-        static IEnumerable<EventInfo> FindEvents_(Type viewType)
-        {
-            return viewType.GetEvents()
-                .Union(
-                    viewType.GetInterfaces()
-                        .SelectMany<Type, EventInfo>(FindEvents_));
-        }
-
-        static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
-        {
-            return viewType.GetProperties()
-                .Union(
-                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_))
-                .Select(p => new
-                {
-                    PropertyInfo = p,
-                    PropertyInfoFromCompositeViewBase = typeof(CompositeView<>).GetProperty(p.Name)
-                })
-                .Where(p =>
-                    p.PropertyInfoFromCompositeViewBase == null
-                    || (
-                        p.PropertyInfoFromCompositeViewBase.GetGetMethod() == null
-                        && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null))
-                .Select(p => p.PropertyInfo);
-        }
-
-        static void ValidateViewType_(Type viewType)
+        internal static void ValidateViewType(Type viewType)
         {
             if (!viewType.IsInterface) {
                 throw new ArgumentException(String.Format(
@@ -92,6 +66,32 @@ namespace Narvalo.Mvp.Resolvers
                     "To be used with shared presenters, the view type must not define public methods. The supplied type ({0}) is not.",
                     viewType.FullName));
             }
+        }
+
+        static IEnumerable<EventInfo> FindEvents_(Type viewType)
+        {
+            return viewType.GetEvents()
+                .Union(
+                    viewType.GetInterfaces()
+                        .SelectMany<Type, EventInfo>(FindEvents_));
+        }
+
+        static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
+        {
+            return viewType.GetProperties()
+                .Union(
+                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_))
+                .Select(p => new
+                {
+                    PropertyInfo = p,
+                    PropertyInfoFromCompositeViewBase = typeof(CompositeView<>).GetProperty(p.Name)
+                })
+                .Where(p =>
+                    p.PropertyInfoFromCompositeViewBase == null
+                    || (
+                        p.PropertyInfoFromCompositeViewBase.GetGetMethod() == null
+                        && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null))
+                .Select(p => p.PropertyInfo);
         }
     }
 }

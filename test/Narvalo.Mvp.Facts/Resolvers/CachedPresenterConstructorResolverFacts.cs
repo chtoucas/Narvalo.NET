@@ -22,7 +22,25 @@ namespace Narvalo.Mvp.Resolvers
         public static class ResolveMethod
         {
             [Fact]
-            public static void ReturnsSameConstructor_ForSameInputs()
+            public static void CachesInnerResolverCalls()
+            {
+                // Arrange
+                var inner = Substitute.For<IPresenterConstructorResolver>();
+                inner.Resolve(typeof(String), typeof(Char[]))
+                    .Returns(new DynamicMethod(String.Empty, typeof(String), new Type[0]));
+
+                var resolver = new CachedPresenterConstructorResolver(inner);
+
+                // Act
+                resolver.Resolve(typeof(String), typeof(Char[]));
+                resolver.Resolve(typeof(String), typeof(Char[]));
+
+                // Assert
+                inner.Received(1).Resolve(typeof(String), typeof(Char[]));
+            }
+
+            [Fact]
+            public static void ReturnsSameResult_ForSameInput()
             {
                 // Arrange
                 var inner = Substitute.For<IPresenterConstructorResolver>();
@@ -40,7 +58,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void ReturnsDifferentConstructors_ForDifferentInputs()
+            public static void ReturnsDifferentResults_ForDifferentInputs()
             {
                 // Arrange
                 var inner = Substitute.For<IPresenterConstructorResolver>();

@@ -66,7 +66,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
 
             [Fact]
-            public static void ThrowsPresenterBindingException_WhenBindingFails()
+            public static void ThrowsPresenterBindingException_WhenConstructorThrows()
             {
                 // Arrange
                 var factory = new PresenterFactory();
@@ -79,7 +79,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
 
             [Fact]
-            public static void WrapsOriginalException_WhenBindingFails()
+            public static void WrapsOriginalException_WhenConstructorThrows()
             {
                 // Arrange
                 var factory = new PresenterFactory();
@@ -116,8 +116,6 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        #region Stubs
-
         // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
 
         public class MyPresenter : Presenter<IView>
@@ -145,12 +143,5 @@ namespace Narvalo.Mvp.PresenterBinding
                 throw new ApplicationException("test exception");
             }
         }
-
-        class MyPrivatePresenter : Presenter<IView>
-        {
-            public MyPrivatePresenter(IView view) : base(view) { }
-        }
-
-        #endregion
     }
 }
