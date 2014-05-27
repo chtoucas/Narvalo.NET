@@ -11,47 +11,47 @@ namespace Narvalo.Mvp
         public static class Ctor
         {
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView()
+            public static void ThrowsArgumentNullException_ForNullView_WithPresenterT1()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenter(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyView>(view: null));
             }
 
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_ForPresenterOf()
+            public static void ThrowsArgumentNullException_ForNullView_WithPresenterOf()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenterOf(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenterOf<MyViewModel>(view: null));
             }
 
             [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_ForPresenter()
+            public static void ThrowsArgumentNullException_ForNullView_WithPresenterT2()
             {
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenterWithModel(view: null));
+                Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyViewWithModel, MyViewModel>(view: null));
             }
 
             [Fact]
-            public static void InitializesViewModel_ForPresenterOf()
+            public static void InitializesViewModel_WithPresenterOf()
             {
                 // Arrange
                 var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                new MyPresenterOf(view);
+                new MyPresenterOf<MyViewModel>(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
             }
 
             [Fact]
-            public static void InitializesViewModel_ForPresenter()
+            public static void InitializesViewModel_WithPresenterT2()
             {
                 // Arrange
                 var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                new MyPresenterWithModel(view);
+                new MyPresenter<IMyViewWithModel, MyViewModel>(view);
 
                 // Assert
                 Assert.NotNull(view.Model);
@@ -61,44 +61,46 @@ namespace Narvalo.Mvp
         public static class ViewProperty
         {
             [Fact]
-            public static void IsSetCorrectly()
+            public static void IsSetCorrectly_WithPresenterT1()
             {
                 // Arrange
                 var view = Substitute.For<IMyView>();
 
                 // Act
-                var presenter = new MyPresenter(view);
+                var presenter = new MyPresenter<IMyView>(view);
 
                 // Assert
-                Assert.Same(view, presenter.View);
+                Assert.Equal(view, presenter.View);
             }
 
             [Fact]
-            public static void IsSetCorrectly_ForPresenterOf()
+            public static void IsSetCorrectly_WithPresenterOf()
             {
                 // Arrange
                 var view = Substitute.For<IView<MyViewModel>>();
 
                 // Act
-                var presenter = new MyPresenterOf(view);
+                var presenter = new MyPresenterOf<MyViewModel>(view);
 
                 // Assert
-                Assert.Same(view, presenter.View);
+                Assert.Equal(view, presenter.View);
             }
 
             [Fact]
-            public static void IsSetCorrectly_ForPresenter()
+            public static void IsSetCorrectly_WithPresenterT2()
             {
                 // Arrange
                 var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new MyPresenterWithModel(view);
+                var presenter = new MyPresenter<IMyViewWithModel, MyViewModel>(view);
 
                 // Assert
-                Assert.Same(view, presenter.View);
+                Assert.Equal(view, presenter.View);
             }
         }
+
+        #region Supporting classes
 
         public interface IMyView : IView
         {
@@ -112,19 +114,23 @@ namespace Narvalo.Mvp
 
         public class MyViewModel { }
 
-        class MyPresenter : Presenter<IMyView>
+        class MyPresenter<T> : Presenter<T> where T : class, IView
         {
-            public MyPresenter(IMyView view) : base(view) { }
+            public MyPresenter(T view) : base(view) { }
         }
 
-        class MyPresenterOf : PresenterOf<MyViewModel>
+        class MyPresenterOf<T> : PresenterOf<T> where T : class, new()
         {
-            public MyPresenterOf(IView<MyViewModel> view) : base(view) { }
+            public MyPresenterOf(IView<T> view) : base(view) { }
         }
 
-        class MyPresenterWithModel : Presenter<IMyViewWithModel, MyViewModel>
+        class MyPresenter<T1, T2> : Presenter<T1, T2>
+            where T1 : class, IView<T2>
+            where T2 : class, new()
         {
-            public MyPresenterWithModel(IMyViewWithModel view) : base(view) { }
+            public MyPresenter(T1 view) : base(view) { }
         }
+
+        #endregion
     }
 }

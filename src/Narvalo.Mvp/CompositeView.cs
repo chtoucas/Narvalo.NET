@@ -37,11 +37,13 @@ namespace Narvalo.Mvp
             Require.NotNull(view, "view");
 
             if (!(view is TView)) {
-                throw new ArgumentException(String.Format(
-                    CultureInfo.InvariantCulture,
-                    "Expected a view of type {0} but {1} was supplied.",
-                    typeof(TView).FullName,
-                    view.GetType().FullName));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "Expected a view of type {0} but {1} was supplied.",
+                        typeof(TView).FullName,
+                        view.GetType().FullName),
+                    "view");
             }
 
             _views.Add((TView)view);

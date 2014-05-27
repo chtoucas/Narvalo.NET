@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using NSubstitute;
     using Xunit;
 
-    public static class PresenterFactoryFacts
+    public static partial class PresenterFactoryFacts
     {
         public static class CreateMethod
         {
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(Presenter<IView>);
+                var presenterType = typeof(IPresenter<IView>);
                 var view = Substitute.For<IView>();
 
                 // Act & Assert
@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 // Arrange
                 var factory = new PresenterFactory();
-                var presenterType = typeof(Presenter<IView>);
+                var presenterType = typeof(IPresenter<IView>);
                 var viewType = typeof(IView);
 
                 // Act & Assert
@@ -112,9 +112,11 @@ namespace Narvalo.Mvp.PresenterBinding
                 factory.Release(presenter);
 
                 // Assert
-                Assert.True(presenter.DisposeCalled);
+                Assert.True(presenter.DisposeWasCalled);
             }
         }
+
+        #region Supporting classes
 
         // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
 
@@ -127,11 +129,11 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             public MyDisposablePresenter(IView view) : base(view) { }
 
-            public bool DisposeCalled { get; private set; }
+            public bool DisposeWasCalled { get; private set; }
 
             public void Dispose()
             {
-                DisposeCalled = true;
+                DisposeWasCalled = true;
             }
         }
 
@@ -143,5 +145,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 throw new ApplicationException("test exception");
             }
         }
+
+        #endregion
     }
 }

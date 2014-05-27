@@ -14,38 +14,41 @@ namespace Narvalo.Mvp
             public static void ThrowsArgumentNullException_ForNullView()
             {
                 // Arrange
-                var compositeView = new MyCompositeView<IView<Object>>();
+                var view = new MyCompositeView<IView<Object>>();
 
                 // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => compositeView.Add(view: null));
+                Assert.Throws<ArgumentNullException>(() => view.Add(view: null));
             }
 
             [Fact]
             public static void ThrowsArgumentException_ForViewOfWrongType()
             {
                 // Arrange
-                var compositeView = new MyCompositeView<IView<Object>>();
+                var view = new MyCompositeView<IView<String>>();
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>(() => compositeView.Add(Substitute.For<IView>()));
+                Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView>()));
+                Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
             }
 
             [Fact]
             public static void AddsViewsToList()
             {
                 // Arrange
-                var compositeView = new MyCompositeView<IView<Object>>();
+                var view = new MyCompositeView<IView<Object>>();
                 var view1 = Substitute.For<IView<Object>>();
                 var view2 = Substitute.For<IView<Object>>();
 
                 // Act
-                compositeView.Add(view1);
-                compositeView.Add(view2);
+                view.Add(view1);
+                view.Add(view2);
 
                 // Assert
-                Assert.Equal(new[] { view1, view2 }, compositeView.Views);
+                Assert.Equal(new[] { view1, view2 }, view.Views);
             }
         }
+
+        #region Supporting classes
 
         class MyCompositeView<TView> : CompositeView<TView> where TView : IView
         {
@@ -55,5 +58,7 @@ namespace Narvalo.Mvp
                 remove { throw new NotImplementedException(); }
             }
         }
+
+        #endregion
     }
 }

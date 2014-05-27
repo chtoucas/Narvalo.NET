@@ -101,6 +101,8 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
+        #region Supporting classes
+
         // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
 
         public interface IMyView1 : IView<String> { }
@@ -161,5 +163,7 @@ namespace Narvalo.Mvp.Resolvers
                 get { throw new NotImplementedException(); }
             }
         }
+
+        #endregion
     }
 }

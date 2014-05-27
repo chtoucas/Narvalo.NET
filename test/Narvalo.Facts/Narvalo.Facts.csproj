@@ -143,6 +143,7 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="app.config" />
     <None Include="CodeTemplates\MonadFacts.tt" />
     <None Include="packages.config" />
   </ItemGroup>
