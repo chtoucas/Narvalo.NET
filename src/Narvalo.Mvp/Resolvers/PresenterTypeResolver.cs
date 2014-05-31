@@ -41,8 +41,8 @@ namespace Narvalo.Mvp.Resolvers
 
             __Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
 
-            var shortNames = GetShortNamesFromInterfaces_(viewType)
-                .Append(GetShortNameFromType_(viewType));
+            var candidatePrefixes = GetCandidatePrefixesFromInterfaces(viewType)
+                .Append(GetCandidatePrefixFromViewName(viewType.Name));
 
             // We also look into the view namespace 
             // and into the assembly where the view is defined.
@@ -51,12 +51,12 @@ namespace Narvalo.Mvp.Resolvers
                 .Append(new AssemblyName(viewType.Assembly.FullName).Name);
 
             var presenterTypes
-                = from shortName in shortNames.Distinct()
+                = from candidatePrefix in candidatePrefixes.Distinct()
                   from template in
                       (from nameSpace in nameSpaces.Distinct()
                        from template in _presenterNameTemplates
                        select template.Replace("{namespace}", nameSpace))
-                  let typeName = template.Replace("{presenter}", shortName + "Presenter")
+                  let typeName = template.Replace("{presenter}", candidatePrefix + "Presenter")
                   let presenterType = _buildManager.GetType(
                       typeName,
                       throwOnError: false,
@@ -69,27 +69,31 @@ namespace Narvalo.Mvp.Resolvers
 
         [SuppressMessage("Microsoft.Design",
             "CA1011:ConsiderPassingBaseTypesAsParameters",
-            Justification = "Private method only.")]
-        static IEnumerable<string> GetShortNamesFromInterfaces_(Type viewType)
+            Justification = "False positive, MemberInfo does not work.")]
+        internal static IEnumerable<string> GetCandidatePrefixesFromInterfaces(Type viewType)
         {
-            // Trim the "I" and "View" from the start & end respectively of the interface names.
+            DebugCheck.NotNull(viewType);
+
+            // Only keep interfaces inheriting IView, except IView and IView<T>, whose
+            // name ends with "View".
+            // If the interface is generic, remove everything after ` in the interface name.
+            // Trim "I" from the start of the interface name.
+            // Trim "View" from the end of the interface name.
+            // NB: We can not use _ != typeof(IView<>) to filter IView<T>
             return
                 from _ in viewType.GetInterfaces()
-                where typeof(IView).IsAssignableFrom(_)
-                    && _ != typeof(IView)
-                    && _ != typeof(IView<>)
-                let name = _.Name.TrimStart('I')
-                let length = name.LastIndexOf("View", StringComparison.OrdinalIgnoreCase)
-                select length > 0 ? name.Substring(0, length) : name;
+                where _.Name != "IView"
+                    && _.Name != "IView`1"
+                    && typeof(IView).IsAssignableFrom(_)
+                let name = _.IsGenericType
+                    ? _.Name.Substring(0, _.Name.LastIndexOf("`", StringComparison.OrdinalIgnoreCase))
+                    : _.Name
+                where name.EndsWith("View", StringComparison.OrdinalIgnoreCase)
+                select name.Substring(0, name.Length - 4).TrimStart('I');
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1011:ConsiderPassingBaseTypesAsParameters",
-            Justification = "Private method only.")]
-        string GetShortNameFromType_(Type viewType)
+        internal string GetCandidatePrefixFromViewName(string viewName)
         {
-            var viewName = viewType.Name;
-
             var name = (from suffix in _viewSuffixes
                         where viewName.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
                         select viewName.Substring(0, viewName.Length - suffix.Length)).FirstOrDefault();

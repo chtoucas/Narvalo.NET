@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Facts", "test\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.CommandLine", "samples\Playground.CommandLine\Playground.CommandLine.csproj", "{A7170884-2992-40DB-A4C0-7F43CAFC4912}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Tests", "test\Narvalo.Mvp.Tests\Narvalo.Mvp.Tests.csproj", "{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -343,6 +345,18 @@ Global
 		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x64.ActiveCfg = Release|x86
 		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x86.ActiveCfg = Release|x86
 		{A7170884-2992-40DB-A4C0-7F43CAFC4912}.Release|x86.Build.0 = Release|x86
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -370,9 +384,10 @@ Global
 		{400611C4-C02E-4EC0-88CE-28C6DA9309D5} = {E6F29C34-AA7D-4F6A-8661-6AA6C2197325}
 		{07F2B519-C74A-46F1-848F-002DE2DBF479} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 		{A7170884-2992-40DB-A4C0-7F43CAFC4912} = {DA1DD580-447C-4382-92E0-0193A71AC0FF}
+		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

@@ -100,7 +100,7 @@ namespace Narvalo.Mvp
             }
         }
 
-        #region Supporting classes
+        #region Helper classes
 
         public interface IMyView : IView
         {
@@ -114,17 +114,17 @@ namespace Narvalo.Mvp
 
         public class MyViewModel { }
 
-        class MyPresenter<T> : Presenter<T> where T : class, IView
+        public class MyPresenter<T> : Presenter<T> where T : class, IView
         {
             public MyPresenter(T view) : base(view) { }
         }
 
-        class MyPresenterOf<T> : PresenterOf<T> where T : class, new()
+        public class MyPresenterOf<T> : PresenterOf<T> where T : class, new()
         {
             public MyPresenterOf(IView<T> view) : base(view) { }
         }
 
-        class MyPresenter<T1, T2> : Presenter<T1, T2>
+        public class MyPresenter<T1, T2> : Presenter<T1, T2>
             where T1 : class, IView<T2>
             where T2 : class, new()
         {

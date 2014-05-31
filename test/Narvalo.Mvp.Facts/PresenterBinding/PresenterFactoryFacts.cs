@@ -116,9 +116,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        #region Supporting classes
-
-        // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
+        #region Helper classes
 
         public class MyPresenter : Presenter<IView>
         {

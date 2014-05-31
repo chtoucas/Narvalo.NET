@@ -200,6 +200,8 @@ namespace Narvalo.Mvp.Web
             }
         }
 
+        #region Helper classes
+
         public interface IMyView : IView
         {
             event EventHandler TestHandler;
@@ -212,19 +214,21 @@ namespace Narvalo.Mvp.Web
 
         public class MyViewModel { }
 
-        class MyHttpPresenter : HttpPresenter<IMyView>
+        public class MyHttpPresenter : HttpPresenter<IMyView>
         {
             public MyHttpPresenter(IMyView view) : base(view) { }
         }
 
-        class MyHttpPresenterOf : HttpPresenterOf<MyViewModel>
+        public class MyHttpPresenterOf : HttpPresenterOf<MyViewModel>
         {
             public MyHttpPresenterOf(IView<MyViewModel> view) : base(view) { }
         }
 
-        class MyHttpPresenterWithModel : HttpPresenter<IMyViewWithModel, MyViewModel>
+        public class MyHttpPresenterWithModel : HttpPresenter<IMyViewWithModel, MyViewModel>
         {
             public MyHttpPresenterWithModel(IMyViewWithModel view) : base(view) { }
         }
+
+        #endregion
     }
 }

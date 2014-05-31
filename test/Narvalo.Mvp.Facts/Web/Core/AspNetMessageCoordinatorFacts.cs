@@ -238,13 +238,13 @@ namespace Narvalo.Mvp.Web.Core
             Assert.True(received);
         }
 
-        #region Stubs
+        #region Helper classes
 
-        interface IMyMessage { }
+        public interface IMyMessage { }
 
-        class MyMessage : IMyMessage { }
+        public class MyMessage : IMyMessage { }
 
-        class MyInheritedMessage : MyMessage { }
+        public class MyInheritedMessage : MyMessage { }
 
         #endregion
 

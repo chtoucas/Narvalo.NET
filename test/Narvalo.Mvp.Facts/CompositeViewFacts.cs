@@ -48,9 +48,9 @@ namespace Narvalo.Mvp
             }
         }
 
-        #region Supporting classes
+        #region Helper classes
 
-        class MyCompositeView<TView> : CompositeView<TView> where TView : IView
+        public class MyCompositeView<TView> : CompositeView<TView> where TView : IView
         {
             public override event EventHandler Load
             {

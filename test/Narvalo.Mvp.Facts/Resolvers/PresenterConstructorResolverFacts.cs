@@ -62,7 +62,7 @@ namespace Narvalo.Mvp.Resolvers
                 // Arrange
                 var resolver = new PresenterConstructorResolver();
                 var presenterType = typeof(MyPrivatePresenter);
-                var viewType = typeof(IMyView1);
+                var viewType = typeof(IView);
 
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
@@ -101,9 +101,7 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        #region Supporting classes
-
-        // NB: Keep these classes public, otherwise "PresenterFactory" can not introspect them.
+        #region Helper classes
 
         public interface IMyView1 : IView<String> { }
 
@@ -113,9 +111,9 @@ namespace Narvalo.Mvp.Resolvers
 
         public interface IMyView4 : IView<Int64> { }
 
-        class MyPrivatePresenter : IPresenter<IMyView1>
+        class MyPrivatePresenter : IPresenter<IView>
         {
-            public IMyView1 View
+            public IView View
             {
                 get { throw new NotImplementedException(); }
             }

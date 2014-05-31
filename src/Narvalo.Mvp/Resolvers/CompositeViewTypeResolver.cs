@@ -38,6 +38,8 @@ namespace Narvalo.Mvp.Resolvers
 
         internal static void ValidateViewType(Type viewType)
         {
+            DebugCheck.NotNull(viewType);
+
             if (!viewType.IsInterface) {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,

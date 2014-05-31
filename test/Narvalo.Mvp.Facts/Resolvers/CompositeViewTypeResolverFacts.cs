@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Resolvers
         public static class ValidateViewTypeMethod
         {
             [Fact]
-            public static void ThrowsArgumentException_ForNonInterfaceType()
+            public static void ThrowsArgumentException_ForViewTypeOfClassType()
             {
                 // Arrange
                 var viewType = typeof(Object);
@@ -33,7 +33,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForInterfaceNotInheritingIView()
+            public static void ThrowsArgumentException_ForViewTypeNotInheritingIView()
             {
                 // Arrange
                 var viewType = typeof(IDisposable);
@@ -43,7 +43,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForPrivateInterface()
+            public static void ThrowsArgumentException_ForViewTypeOfPrivateType()
             {
                 // Arrange
                 var viewType = typeof(IMyPrivateView);
@@ -53,7 +53,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void ThrowsArgumentException_ForInterfaceWithPublicMethod()
+            public static void ThrowsArgumentException_ForViewTypeContainingPublicMethods()
             {
                 // Arrange
                 var viewType = typeof(IMyViewWithMethod);
@@ -76,10 +76,23 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             [Fact]
-            public static void Passes_ForViewTypeOfIViewTypeDefiningPropertyAndEventHandler()
+            public static void Passes_ForViewTypeInheritingIView()
             {
                 // Arrange
-                var viewType = typeof(IMyView);
+                var viewType = typeof(IMyView1);
+
+                // Act
+                CompositeViewTypeResolver.ValidateViewType(viewType);
+
+                // Assert
+                Assert.True(true);
+            }
+
+            [Fact]
+            public static void Passes_ForViewTypeInheritingGenericIView()
+            {
+                // Arrange
+                var viewType = typeof(IMyView2);
 
                 // Act
                 CompositeViewTypeResolver.ValidateViewType(viewType);
@@ -100,7 +113,26 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.True(true);
             }
+
+            [Fact]
+            public static void Passes_ForViewTypeContainingPropertiesAndEventHandlers()
+            {
+                // Arrange
+                var viewType = typeof(IMyView);
+
+                // Act
+                CompositeViewTypeResolver.ValidateViewType(viewType);
+
+                // Assert
+                Assert.True(true);
+            }
         }
+
+        #region Helper classes
+
+        public interface IMyView1 : IView { }
+
+        public interface IMyView2 : IView<Object> { }
 
         public interface IMyView : IView
         {
@@ -115,5 +147,7 @@ namespace Narvalo.Mvp.Resolvers
         }
 
         interface IMyPrivateView : IView { }
+
+        #endregion
     }
 }
