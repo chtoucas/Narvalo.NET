@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Web", "src\Narv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "samples\Playground\Playground.csproj", "{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.AspNetMvc", "samples\Playground.AspNetMvc\Playground.AspNetMvc.csproj", "{468972FF-C7C3-4DBA-A210-96BC6A677362}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,24 +77,12 @@ Global
 		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|x64.ActiveCfg = Release|Any CPU
 		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|x86.ActiveCfg = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|Any CPU.Build.0 = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|x64.ActiveCfg = Release|Any CPU
-		{468972FF-C7C3-4DBA-A210-96BC6A677362}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

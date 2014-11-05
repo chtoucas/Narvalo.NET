@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2183403F-6794-4547-BEDA-A9A555CBB726}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
@@ -366,7 +368,7 @@ Global
 		{56E3969F-5066-4702-A670-4C35FBD97201} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
 		{A73E8D05-8E5F-4DE6-B047-C943A39212A2} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
 		{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
-		{71B69787-365A-4C07-8449-497CA60135DC} = {4201BE1B-0CB6-4C4C-84C2-48DF211B6BCB}
+		{71B69787-365A-4C07-8449-497CA60135DC} = {F6D644EC-5C23-4D95-894C-3B698AC43DB4}
 		{E7294A87-060C-4377-A0A7-48E92D591987} = {E6F29C34-AA7D-4F6A-8661-6AA6C2197325}
 		{A1E58486-BCB8-43C9-BB77-2CE98CB3F57F} = {E6F29C34-AA7D-4F6A-8661-6AA6C2197325}
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7} = {74903B74-654E-4579-BA5A-FF39D85482E1}
@@ -387,7 +389,7 @@ Global
 		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal
