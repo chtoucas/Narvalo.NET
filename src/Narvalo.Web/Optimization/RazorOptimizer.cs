@@ -90,6 +90,7 @@ namespace Narvalo.Web.Optimization
             // WARNING: On est succeptible de modifier la collection currentBlock.Children,
             // on ne peut donc pas mettre en cache la valeur de currentBlock.Children.Count.
             var j = currentIndex + 1;
+
             while (j < block.Children.Count) {
                 var nextSpan = block.Children[j] as Span;
 

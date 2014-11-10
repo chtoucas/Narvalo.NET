@@ -8,6 +8,7 @@ namespace Narvalo.Web.Configuration
     public sealed class OptimizationSection : ConfigurationSection
     {
         public const string DefaultName = "optimization";
+
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
         static ConfigurationProperty EnableWhiteSpaceBusting_
