@@ -37,6 +37,11 @@ namespace Narvalo.Web.UI.Assets
             }
         }
 
+        public override Uri GetFont(string relativePath)
+        {
+            return MakeUri_("~/fonts/", relativePath);
+        }
+
         public override Uri GetImage(string relativePath)
         {
             return MakeUri_("~/Images/", relativePath);

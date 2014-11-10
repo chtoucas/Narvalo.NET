@@ -9,6 +9,8 @@ namespace Narvalo.Web.UI.Assets
     {
         protected AssetProviderBase() { }
 
+        public abstract Uri GetFont(string relativePath);
+
         public abstract Uri GetImage(string relativePath);
 
         public abstract Uri GetScript(string relativePath);
