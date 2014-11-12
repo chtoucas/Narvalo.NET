@@ -37,6 +37,12 @@ namespace Narvalo.Web.UI.Assets
             config.Remove("baseUri");
         }
 
+        public override Uri GetFont(string relativePath)
+        {
+            // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
+            return MakeUri_("font/", relativePath);
+        }
+
         public override Uri GetImage(string relativePath)
         {
             // WARNING: Ne pas utiliser "/img/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.

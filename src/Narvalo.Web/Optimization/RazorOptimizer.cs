@@ -47,7 +47,7 @@ namespace Narvalo.Web.Optimization
                 builder.ClearSymbols();
 
                 // FIXME: On perd toute information contextuelle.
-                builder.Accept(new OptimizedSymbol { Content = BustWhiteSpaces_(content) });
+                builder.Accept(new Symbol_ { Content = BustWhiteSpaces_(content) });
                 span.ReplaceWith(builder);
             }
         }
@@ -70,11 +70,35 @@ namespace Narvalo.Web.Optimization
 
                 // FIXME: On perd toute information contextuelle. Peut-être pour remédier à ce problème
                 // on pourrait ré-utiliser un HtmlSymbol.
-                builder.Accept(new OptimizedSymbol { Content = OptimizeContent_(sym, prevType) });
+                builder.Accept(new Symbol_ { Content = OptimizeContent_(sym, prevType) });
                 prevType = sym.Type;
             }
 
             span.ReplaceWith(builder);
+        }
+
+        class Symbol_ : ISymbol
+        {
+            string _content;
+            SourceLocation _start = SourceLocation.Zero;
+
+            public string Content
+            {
+                get { return _content; }
+                set { _content = value; }
+            }
+
+            public SourceLocation Start { get { return _start; } }
+
+            public void ChangeStart(SourceLocation newStart)
+            {
+                _start = newStart;
+            }
+
+            public void OffsetStart(SourceLocation documentStart)
+            {
+                _start = documentStart;
+            }
         }
 
         static bool IsMarkup_(Span span)
@@ -82,7 +106,8 @@ namespace Narvalo.Web.Optimization
             return span != null && span.Kind == SpanKind.Markup;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", 
+            Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
         static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
             var sb = new StringBuilder(content);
@@ -135,30 +160,6 @@ namespace Narvalo.Web.Optimization
             }
 
             return content;
-        }
-
-        class OptimizedSymbol : ISymbol
-        {
-            string _content;
-            SourceLocation _start = SourceLocation.Zero;
-
-            public string Content
-            {
-                get { return _content; }
-                set { _content = value; }
-            }
-
-            public SourceLocation Start { get { return _start; } }
-
-            public void ChangeStart(SourceLocation newStart)
-            {
-                _start = newStart;
-            }
-            
-            public void OffsetStart(SourceLocation documentStart)
-            {
-                _start = documentStart;
-            }
         }
     }
 }

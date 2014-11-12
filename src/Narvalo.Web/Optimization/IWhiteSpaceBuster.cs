@@ -8,7 +8,7 @@ namespace Narvalo.Web.Optimization
     public interface IWhiteSpaceBuster
     {
         /// <summary>
-        /// Supprime les espaces blancs non significatifs d'une chaîne de caractères
+        /// Supprime un certain nombre d'espaces blancs non significatifs d'une chaîne de caractères
         /// contenant du code HTML.
         /// </summary>
         /// <remarks>

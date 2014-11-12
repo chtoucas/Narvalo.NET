@@ -32,7 +32,7 @@ namespace Narvalo.Web.Optimization
             return new WhiteSpaceBusterMvcWebPageRazorHost(
                 virtualPath,
                 physicalPath,
-                new RazorOptimizer(WhiteSpaceBusterProvider.Current.WhiteSpaceBuster));
+                new RazorOptimizer(WhiteSpaceBusterProvider.Current.RazorBuster));
         }
     }
 }

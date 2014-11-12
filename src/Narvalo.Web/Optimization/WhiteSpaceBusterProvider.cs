@@ -9,31 +9,55 @@ namespace Narvalo.Web.Optimization
         static readonly object Lock_ = new Object();
         static WhiteSpaceBusterProvider Instance_ = new WhiteSpaceBusterProvider();
 
-        IWhiteSpaceBuster _whiteSpaceBuster;
+        IWhiteSpaceBuster _pageBuster;
+        IWhiteSpaceBuster _razorBuster;
 
         public WhiteSpaceBusterProvider() { }
 
         public static WhiteSpaceBusterProvider Current { get { return Instance_; } }
 
-        public IWhiteSpaceBuster WhiteSpaceBuster
+        public IWhiteSpaceBuster PageBuster
         {
             get
             {
-                if (_whiteSpaceBuster == null) {
+                if (_pageBuster == null) {
                     lock (Lock_) {
-                        if (_whiteSpaceBuster == null) {
-                            _whiteSpaceBuster = new GentleWhiteSpaceBuster();
+                        if (_pageBuster == null) {
+                            _pageBuster = new DefaultWhiteSpaceBuster();
                         }
                     }
                 }
 
-                return _whiteSpaceBuster;
+                return _pageBuster;
             }
 
             set
             {
                 lock (Lock_) {
-                    _whiteSpaceBuster = Require.Property(value);
+                    _pageBuster = Require.Property(value);
+                }
+            }
+        }
+
+        public IWhiteSpaceBuster RazorBuster
+        {
+            get
+            {
+                if (_razorBuster == null) {
+                    lock (Lock_) {
+                        if (_razorBuster == null) {
+                            _razorBuster = new DefaultWhiteSpaceBuster();
+                        }
+                    }
+                }
+
+                return _razorBuster;
+            }
+
+            set
+            {
+                lock (Lock_) {
+                    _razorBuster = Require.Property(value);
                 }
             }
         }

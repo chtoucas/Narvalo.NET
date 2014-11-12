@@ -59,7 +59,7 @@ namespace Narvalo.Web.Optimization
             _enabled = EnableWhiteSpaceBusting_ && enabled;
 
             if (_enabled) {
-                _buster = WhiteSpaceBusterProvider.Current.WhiteSpaceBuster;
+                _buster = WhiteSpaceBusterProvider.Current.PageBuster;
             }
 
             base.PreprocessDirective(directiveName, attributes);

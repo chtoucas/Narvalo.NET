@@ -127,7 +127,9 @@
     <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
-    <Compile Include="Optimization\GentleWhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\NamespaceDoc.cs" />
+    <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\DefaultWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\RazorOptimizer.cs" />
     <Compile Include="Optimization\WhiteSpaceBusterProvider.cs" />

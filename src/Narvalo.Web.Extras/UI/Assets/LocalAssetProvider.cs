@@ -27,6 +27,11 @@ namespace Narvalo.Web.UI.Assets
             base.Initialize(name, config);
         }
 
+        public override Uri GetFont(string relativePath)
+        {
+            return MakeUri_("~/assets/font/", relativePath);
+        }
+
         public override Uri GetImage(string relativePath)
         {
             return MakeUri_("~/assets/img/", relativePath);
