@@ -5,7 +5,8 @@ namespace Narvalo
     using System;
 
     [Flags]
-    [Serializable]
+    // FIXME_PCL: Serializable
+    //[Serializable]
     public enum BooleanStyles
     {
         Literal = 1 << 0,

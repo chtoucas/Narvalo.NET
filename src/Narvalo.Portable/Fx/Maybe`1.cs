@@ -484,6 +484,7 @@ namespace Narvalo.Fx
             Func<T, TSecond, TResult> resultSelector)
         {
             Require.NotNull(second, "second");
+            Require.NotNull(resultSelector, "resultSelector");
 
             return IsSome && second.IsSome
                 ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))

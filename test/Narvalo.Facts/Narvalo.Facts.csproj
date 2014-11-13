@@ -156,9 +156,9 @@
       <Project>{7e383354-3181-4fa2-a67b-97b320295f0b}</Project>
       <Name>Narvalo.Dirty</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Incubator\Narvalo.Incubator.csproj">
-      <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
-      <Name>Narvalo.Incubator</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Portable\Narvalo.Portable.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Portable</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -120,70 +120,13 @@
   <data name="AbsoluteUriValidator_UriIsNotAbsoluteFormat" xml:space="preserve">
     <value>The supplied value {0} is not a well-formed absolute URI.</value>
   </data>
-  <data name="Require_ArgumentEmptyFormat" xml:space="preserve">
-    <value>The parameter {0} is empty.</value>
-  </data>
-  <data name="Require_NotGreaterThanOrEqualToFormat" xml:space="preserve">
-    <value>The value is not greater than or equal to {0}.</value>
-  </data>
-  <data name="Require_NotLessThanOrEqualToFormat" xml:space="preserve">
-    <value>The value is not less than or equal to {0}.</value>
-  </data>
-  <data name="Maybe_NoneHasNoValue" xml:space="preserve">
-    <value>You can not get the underlying value of an empty maybe.</value>
-  </data>
-  <data name="Require_NotInRangeFormat" xml:space="preserve">
-    <value>The value is not in range {0} / {1}.</value>
-  </data>
   <data name="ExceptionFactory_ArgumentNullFormat" xml:space="preserve">
     <value>The parameter {0} is null.</value>
-  </data>
-  <data name="Require_ObjectNull" xml:space="preserve">
-    <value>The object 'this' is null.</value>
-  </data>
-  <data name="Require_PropertyNull" xml:space="preserve">
-    <value>The property value is null.</value>
-  </data>
-  <data name="Require_PropertyEmpty" xml:space="preserve">
-    <value>The property value is empty.</value>
-  </data>
-  <data name="Int64Encoder_IllegalCharacterFormat" xml:space="preserve">
-    <value>Illegal character {0} found at position {1}.</value>
   </data>
   <data name="ConfigurationManager_MissingSectionFormat" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme {0} does not support protocol less uri.</value>
-  </data>
-  <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
-    <value>The lower end must be lesser than upper end.</value>
-  </data>
-  <data name="DebugCheck_TypeIsNotEnum" xml:space="preserve">
-    <value>The type must be of enum type.</value>
-  </data>
-  <data name="DebugCheck_TypeIsNotValueType" xml:space="preserve">
-    <value>The type must be a value type.</value>
-  </data>
-  <data name="DebugCheck_IsNull" xml:space="preserve">
-    <value>The value is null.</value>
-  </data>
-  <data name="DebugCheck_IsEmpty" xml:space="preserve">
-    <value>The value is empty.</value>
-  </data>
-  <data name="Output_SuccessfulHasNoException" xml:space="preserve">
-    <value>A successful outcome has no exception.</value>
-  </data>
-  <data name="Output_UnsuccessfulHasNoValue" xml:space="preserve">
-    <value>A bad outcome has no value.</value>
-  </data>
-  <data name="VoidOrError_NotFatal" xml:space="preserve">
-    <value>A non fatal outcome has no exception info.</value>
-  </data>
-  <data name="VoidOrError_NotWarning" xml:space="preserve">
-    <value>A non warning outcome has no error message.</value>
-  </data>
-  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
-    <value>Can not cast a none maybe to its underlying value type.</value>
   </data>
 </root>
