@@ -48,6 +48,7 @@ namespace Narvalo.Fx
         public static T UnpackOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
         {
             Require.Object(@this);
+            Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
             return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
         }
@@ -59,6 +60,8 @@ namespace Narvalo.Fx
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
+            Require.Object(@this);
+
             return @this.ValueOrDefault().OnNull(() => { throw exceptionFactory.Invoke(); }).Value;
         }
 

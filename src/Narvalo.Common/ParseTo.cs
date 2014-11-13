@@ -19,8 +19,7 @@ namespace Narvalo
 
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            // FIXME_PCL: DebugCheck.IsEnum
-            //DebugCheck.IsEnum(typeof(TEnum));
+            DebugAssert.IsEnum(typeof(TEnum));
 
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
 

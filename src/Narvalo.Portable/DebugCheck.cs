@@ -2,7 +2,6 @@
 
 namespace Narvalo
 {
-    using System;
     using System.Diagnostics;
 
     public static class DebugCheck
@@ -21,23 +20,5 @@ namespace Narvalo
             NotNull(value);
             Debug.Assert(value.Length != 0, SR.DebugCheck_IsEmpty);
         }
-
-        // FIXME_PCL: Type.IsEnum
-        //[DebuggerStepThrough]
-        //[Conditional("DEBUG")]
-        //public static void IsEnum(Type type)
-        //{
-        //    NotNull(type);
-        //    Debug.Assert(type.IsEnum, type.FullName, SR.DebugCheck_TypeIsNotEnum);
-        //}
-
-        // FIXME_PCL: Type.IsValueType
-        //[DebuggerStepThrough]
-        //[Conditional("DEBUG")]
-        //public static void IsValueType(Type type)
-        //{
-        //    NotNull(type);
-        //    Debug.Assert(type.IsValueType, type.FullName, SR.DebugCheck_TypeIsNotValueType);
-        //}
     }
 }

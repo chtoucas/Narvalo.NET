@@ -129,4 +129,10 @@
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme {0} does not support protocol less uri.</value>
   </data>
+  <data name="DebugAssert_IsNotEnum" xml:space="preserve">
+    <value>The type must be of enum type.</value>
+  </data>
+  <data name="DebugAssert_IsNotValueType" xml:space="preserve">
+    <value>The type must be a value type.</value>
+  </data>
 </root>

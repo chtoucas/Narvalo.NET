@@ -79,6 +79,24 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type must be of enum type..
+        /// </summary>
+        internal static string DebugAssert_IsNotEnum {
+            get {
+                return ResourceManager.GetString("DebugAssert_IsNotEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type must be a value type..
+        /// </summary>
+        internal static string DebugAssert_IsNotValueType {
+            get {
+                return ResourceManager.GetString("DebugAssert_IsNotValueType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parameter {0} is null..
         /// </summary>
         internal static string ExceptionFactory_ArgumentNullFormat {

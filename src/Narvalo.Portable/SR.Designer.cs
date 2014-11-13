@@ -80,24 +80,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The type must be of enum type..
-        /// </summary>
-        internal static string DebugCheck_TypeIsNotEnum {
-            get {
-                return ResourceManager.GetString("DebugCheck_TypeIsNotEnum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type must be a value type..
-        /// </summary>
-        internal static string DebugCheck_TypeIsNotValueType {
-            get {
-                return ResourceManager.GetString("DebugCheck_TypeIsNotValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The parameter {0} is null..
         /// </summary>
         internal static string ExceptionFactory_ArgumentNullFormat {

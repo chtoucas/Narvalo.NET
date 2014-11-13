@@ -158,6 +158,8 @@ namespace Narvalo.Fx
         /// <summary />
         public static explicit operator T(Maybe<T> value)
         {
+            Require.NotNull(value, "value");
+
             if (value.IsNone) {
                 throw new InvalidCastException(SR.Maybe_CannotCastNoneToValue);
             }
@@ -297,6 +299,8 @@ namespace Narvalo.Fx
         /// <summary />
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
+            Require.NotNull(comparer, "comparer");
+
             if (ReferenceEquals(other, null)) {
                 return !_isSome;
             }

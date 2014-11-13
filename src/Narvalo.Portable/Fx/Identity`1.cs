@@ -35,6 +35,8 @@ namespace Narvalo.Fx
         /// <summary />
         public bool Equals(Identity<T> other, IEqualityComparer<T> comparer)
         {
+            Require.NotNull(comparer, "comparer");
+
             if (ReferenceEquals(other, null)) {
                 return _value == null;
             }

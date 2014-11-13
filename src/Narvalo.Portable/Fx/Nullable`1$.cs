@@ -59,6 +59,8 @@ namespace Narvalo.Fx
             where TSecond : struct
             where TResult : struct
         {
+            Require.NotNull(resultSelector, "resultSelector");
+
             return @this.HasValue && second.HasValue
                 ? (TResult?)resultSelector.Invoke(@this.Value, second.Value)
                 : null;
