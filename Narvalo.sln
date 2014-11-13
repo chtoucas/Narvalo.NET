@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C12F79C9-1453-412C-A50C-BD887C2C15AE}"
 EndProject
@@ -70,6 +70,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.CommandLine", "samples\Playground.CommandLine\Playground.CommandLine.csproj", "{A7170884-2992-40DB-A4C0-7F43CAFC4912}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Tests", "test\Narvalo.Mvp.Tests\Narvalo.Mvp.Tests.csproj", "{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.WebForms", "samples\Playground.WebForms\Playground.WebForms.csproj", "{779357E7-F156-425C-8EB8-FB45ACDFF9DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "samples\Playground\Playground.csproj", "{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -359,6 +363,30 @@ Global
 		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|x64.ActiveCfg = Release|Any CPU
 		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -387,9 +415,11 @@ Global
 		{07F2B519-C74A-46F1-848F-002DE2DBF479} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
 		{A7170884-2992-40DB-A4C0-7F43CAFC4912} = {DA1DD580-447C-4382-92E0-0193A71AC0FF}
 		{F892620F-E2B2-492D-BB25-BEBEA46D2E8C} = {1745EB1B-1227-4C17-A03E-B4DDEE760172}
+		{779357E7-F156-425C-8EB8-FB45ACDFF9DE} = {DA1DD580-447C-4382-92E0-0193A71AC0FF}
+		{2A0F777D-62B8-4509-836F-F6E2CB67E0D8} = {DA1DD580-447C-4382-92E0-0193A71AC0FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

@@ -45,7 +45,7 @@ namespace Narvalo.Web.Optimization
 
             // On remplace les chaînes de caractères constituées uniquement
             // d'espace ou tabulation par un seul espace.
-            if (IsTabsOrSpaces(value)) {
+            if (IsTabsOrSpaces_(value)) {
                 return "\x20";
             }
 
@@ -67,10 +67,10 @@ namespace Narvalo.Web.Optimization
             return result;
         }
 
-        static bool IsTabsOrSpaces(string value)
+        static bool IsTabsOrSpaces_(string value)
         {
             for (int i = 0; i < value.Length; i++) {
-                if (!IsTabsOrSpaces(value[i])) {
+                if (!IsTabOrSpace_(value[i])) {
                     return false;
                 }
             }
@@ -78,7 +78,7 @@ namespace Narvalo.Web.Optimization
             return true;
         }
 
-        static bool IsTabsOrSpaces(char ch)
+        static bool IsTabOrSpace_(char ch)
         {
             return ch == '\x0009' || ch == '\x0020';
         }
