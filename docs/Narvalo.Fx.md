@@ -77,18 +77,22 @@ MonadOr   | Monad + Monoid + Unit = left zero for Plus
 
 Already found in the Framework:
  
-- `Nullable<T>`                MonadMore, MonadOr (?)
-- `Func<T>`
-- `Lazy<T>`                    Monad, Comonad (?)
-- `Task<T>`                    Monad, Comonad (?)
-- `IEnumerable<T>`             MonadZero, MonadPlus (?)
+Class            | Type
+---------------- | ------------------------
+`Nullable<T>`    | MonadMore, MonadOr (?)
+`Func<T>`        | 
+`Lazy<T>`        | Monad, Comonad (?)
+`Task<T>`        | Monad, Comonad (?)
+`IEnumerable<T>` | MonadZero, MonadPlus (?)
 
 Things I am working on:
- 
-- `Identity<T>`                Monad, Comonad (?)
-- `Maybe<T>`                   MonadMore, MonadOr
-- `Output<T>`                  Monad (?)
-- `Either<TLeft, TRight>`      Monad (?)
+   
+Class                   | Type
+----------------------- | ------------------
+`Identity<T>`           | Monad, Comonad (?)
+`Maybe<T>`              | MonadMore, MonadOr
+`Output<T>`             | Monad (?)
+`Either<TLeft, TRight>` | Monad (?)
 
 ### Illustration
 
@@ -206,6 +210,7 @@ Lines starting with a ? flag method that I considered optional, either because t
 or they do not really make sense in .NET.
 
 #### Monad
+
   | C#                | Haskell                                         | Notes
 - | ----------------- | ----------------------------------------------- | --------------------
 * | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
@@ -215,12 +220,14 @@ or they do not really make sense in .NET.
   | -                 | `fail :: String -> m a`                         | See discussion above
 
 #### MonadPlus  
+
   | C#                | Haskell                                         
 - | ----------------- | -----------------------------------------------
   | `Monad<T>.Zero`   | `mzero :: m a`
   | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
 
 #### Basic Monad functions
+
      @Enumerable<T>.Map              mapM :: Monad m => (a -> m b) -> [a] -> m [b] 
      -                               mapM_ :: Monad m => (a -> m b) -> [a] -> m ()       NB: Same as mapM but returns Monad.Unit
      -                               forM :: Monad m => [a] -> (a -> m b) -> m [b]       NB: For us, same as mapM
@@ -234,6 +241,7 @@ or they do not really make sense in .NET.
      ??? Not supported               void :: Functor f => f a -> f ()
 
 #### Generalisations of list functions
+
      Monad.Flatten                   join :: Monad m => m (m a) -> m a
      @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
      @Monad<T>.Filter                mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
@@ -247,11 +255,13 @@ or they do not really make sense in .NET.
      -                               replicateM_ :: Monad m => Int -> m a -> m ()                    NB: Same as replicateM but returns Monad.Unit            
 
 #### Conditional execution of monadic expressions
+
 ?    @Monad<T>.Guard                 guard :: MonadPlus m => Bool -> m ()
 ?    @Monad<T>.When                  when :: Monad m => Bool -> m () -> m ()
 ?    @Monad<T>.Unless                unless :: Monad m => Bool -> m () -> m ()
 
 #### Monadic lifting operators
+
      Monad<T>.Map / Monad.Lift       liftM :: Monad m => (a1 -> r) -> m a1 -> m r
      @Monad<T>.Zip / Monad.Lift      liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
 ?    @Monad<T>.Zip / Monad.Lift      liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
