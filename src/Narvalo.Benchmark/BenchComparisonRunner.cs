@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using Narvalo.Benchmark.Internal;
-    //using Narvalo.Linq;
 
     public class BenchComparisonRunner
     {

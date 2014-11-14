@@ -2,7 +2,6 @@ namespace Narvalo.Benchmark
 {
     using System;
     using System.Globalization;
-    using Narvalo;
     using NodaTime;
 
     public struct BenchMetric : IEquatable<BenchMetric>
