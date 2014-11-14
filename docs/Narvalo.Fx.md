@@ -53,13 +53,15 @@ We follow (mostly) the proposed new terminology from the MonadPlus Reform.
 _MonadZero_, a MonadZero is a Monad with a left zero for `Bind`.
 
 _MonadMore_, a MonadMore is a Monad which is also a Monoid and for which `Zero` 
-  is a zero for `Bind`. This is what Haskell calls a MonadPlus.
+ is a zero for `Bind`. This is what Haskell calls a MonadPlus.
 
-_MonadPlus_, a MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
-  REVIEW: Haskell uses the term left distributive. Am I missing something?
+_MonadPlus_, a MonadPlus is a Monad which is also a Monoid and for which Bind
+ is right distributive over Plus.
+ REVIEW: Haskell uses the term left distributive. Am I missing something?
 
-_MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
-  Here, we prefer to use OrElse instead of Plus for the Monoid composition operation.
+_MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is
+ a left zero for Plus. Here, we prefer to use OrElse instead of Plus for the
+ Monoid composition operation.
 
 ### Summary
 
@@ -206,12 +208,12 @@ _Comonad_          |                   |
 ### From Haskell to C#
 
 We prefix with a @ the .NET methods provided as extension methods.
-Lines starting with a ? flag method that I considered optional, either because they're too complicated
-or they do not really make sense in .NET.
+Lines starting with a ? flag method that I considered optional, 
+either because they're too complicated or they do not really make sense in .NET.
 
 #### Monad
 
-  | C#                | Haskell                                         | Notes
+? | C#                | Haskell                                         | Notes
 - | ----------------- | ----------------------------------------------- | --------------------
 * | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
   | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
@@ -221,7 +223,7 @@ or they do not really make sense in .NET.
 
 #### MonadPlus  
 
-  | C#                | Haskell                                         
+? | C#                | Haskell                                         
 - | ----------------- | -----------------------------------------------
   | `Monad<T>.Zero`   | `mzero :: m a`
   | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
