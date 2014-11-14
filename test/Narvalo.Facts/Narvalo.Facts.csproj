@@ -145,10 +145,10 @@
     <Compile Include="Mvp\Resolvers\CompositeViewTypeResolverFacts.cs" />
     <Compile Include="Mvp\Resolvers\PresenterConstructorResolverFacts.cs" />
     <Compile Include="Mvp\Resolvers\PresenterTypeResolverFacts.cs" />
-    <Compile Include="Mvp\Web\Core\AspNetMessageCoordinatorFacts.cs" />
-    <Compile Include="Mvp\Web\HttpPresenterFacts.cs" />
-    <Compile Include="Mvp\Web\MvpPageFacts.cs" />
-    <Compile Include="Mvp\Web\MvpUserControlFacts.cs" />
+    <Compile Include="Web\Mvp\Core\AspNetMessageCoordinatorFacts.cs" />
+    <Compile Include="Web\Mvp\HttpPresenterFacts.cs" />
+    <Compile Include="Web\Mvp\MvpPageFacts.cs" />
+    <Compile Include="Web\Mvp\MvpUserControlFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
@@ -168,17 +168,13 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
-      <Project>{fdadb21a-c99f-4d78-bdcc-a09a6ef97215}</Project>
-      <Name>Narvalo.Mvp.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
-      <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
-      <Name>Narvalo.Mvp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Portable\Narvalo.Portable.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

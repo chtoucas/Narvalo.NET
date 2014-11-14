@@ -8,13 +8,8 @@ Right now, a place for me to learn and test various ideas.
 The most stable parts are:
 
 - `Narvalo.Portable`, PCL package of common utilities    
-- [Narvalo.Common](http://www.nuget.org/packages/Narvalo.Common/), 
-  complements `Narvalo.Portable`
-- [Narvalo.Web](http://www.nuget.org/packages/Narvalo.Web/),
-  Web centric utilities
-- [Narvalo.Mvp](http://www.nuget.org/packages/Narvalo.Mvp/),
-  a simple MVP framework largely inspired by 
+- `Narvalo.Common`, complements `Narvalo.Portable`.
+  Contains a simple MVP framework largely inspired by 
   [WebFormsMvp](https://github.com/webformsmvp/webformsmvp)
-- [Narvalo.Mvp.Web](http://www.nuget.org/packages/Narvalo.Mvp.Web/),
-  enhances `Narvalo.Mvp` to provide support for ASP.NET WebForms
+- `Narvalo.Web`, Web centric utilities
 - `Narvalo.Extras`, Autofac, Castle and Serilog goodies

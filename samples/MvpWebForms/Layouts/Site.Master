@@ -1,0 +1,18 @@
+﻿<%@ Master Language="C#" CodeBehind="Site.master.cs" Inherits="MvpWebForms.Layouts.SiteMasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <title>Narvalo.Web.Mvp Demo Site.</title>
+ <link href="~/assets/screen.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+ <div id="content">
+  <h1>
+   <asp:HyperLink NavigateUrl="~/" runat=server>ASP.NET Web Forms MVP</asp:HyperLink>
+  </h1>
+  <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+ </div>
+</body>
+</html>

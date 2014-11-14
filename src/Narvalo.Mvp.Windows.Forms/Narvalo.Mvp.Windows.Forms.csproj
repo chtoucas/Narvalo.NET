@@ -66,9 +66,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
       <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Narvalo.Minimal.cs">
-      <Link>Internal\Narvalo.Minimal.cs</Link>
-    </Compile>
     <Compile Include="PlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="Internal\PresenterBinderFactory.cs" />
@@ -88,12 +85,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
-      <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
-      <Name>Narvalo.Mvp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
@@ -104,7 +95,16 @@
     </None>
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Portable</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -55,7 +55,8 @@
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc">
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
@@ -223,8 +224,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ImageUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomNumber.cs" />
-    <Compile Include="RandomString.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Security\IBidirectionalCryptoEngine.cs" />
     <Compile Include="SR.Designer.cs">
@@ -232,7 +231,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="StringManip.cs" />
     <Compile Include="Web\Hosting.cs" />
     <Compile Include="Web\HttpCompressionModule.cs" />
     <Compile Include="Web\HttpRequestBase%24.cs" />
