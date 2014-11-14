@@ -29,22 +29,22 @@ namespace Narvalo.Web.UI.Assets
 
         public override Uri GetFont(string relativePath)
         {
-            return MakeUri_("~/assets/font/", relativePath);
+            return MakeUri_("~/asset/font/", relativePath);
         }
 
         public override Uri GetImage(string relativePath)
         {
-            return MakeUri_("~/assets/img/", relativePath);
+            return MakeUri_("~/asset/img/", relativePath);
         }
 
         public override Uri GetScript(string relativePath)
         {
-            return MakeUri_("~/assets/js/", relativePath);
+            return MakeUri_("~/asset/js/", relativePath);
         }
 
         public override Uri GetStyle(string relativePath)
         {
-            return MakeUri_("~/assets/css/", relativePath);
+            return MakeUri_("~/asset/css/", relativePath);
         }
 
         static Uri MakeUri_(string basePath, string relativePath)

@@ -112,10 +112,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj">
-      <Project>{a1e58486-bcb8-43c9-bb77-2ce98cb3f57f}</Project>
-      <Name>Narvalo.Mvp.Extras</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj">
       <Project>{4c908c48-2bd9-4e23-bcbe-ed3604e0d387}</Project>
       <Name>Narvalo.Mvp.Windows.Forms</Name>

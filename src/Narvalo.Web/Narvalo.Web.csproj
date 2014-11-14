@@ -98,6 +98,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="ErrorPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="HttpQueryBinderBase`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
@@ -161,6 +164,8 @@
     <Compile Include="UI\Assets\AssetProviderBase.cs" />
     <Compile Include="UI\Assets\AssetProviderCollection.cs" />
     <Compile Include="UI\Assets\DefaultAssetProvider.cs" />
+    <Compile Include="UI\Assets\LocalAssetProvider.cs" />
+    <Compile Include="UI\Assets\RemoteAssetProvider.cs" />
     <Compile Include="UI\ControlBuilder%24.cs" />
     <Compile Include="UI\LiteralPageParserFilterBase.cs" />
     <Compile Include="UI\PageParserFilterConstants.cs" />
