@@ -1,5 +1,5 @@
-Création d'une clé forte
-========================
+Strong Name Key
+===============
 
 See [Strong Name Tool](http://msdn.microsoft.com/en-us/library/k5b5tt23.aspx)
 
