@@ -213,11 +213,11 @@ either because they're too complicated or they do not really make sense in .NET.
 
 #### Monad
 
-Optional | C#                | Haskell                                         | Notes
+Optional | C#                | Haskell                                         | Remarks
 -------- | ----------------- | ----------------------------------------------- | --------------------
-Yes      | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
+*        | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
          | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
-Yes      | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
+*        | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
          | `Monad.Return`    | `return :: a -> m a`                            | 
          |                   | `fail :: String -> m a`                         | See discussion above
 
@@ -230,17 +230,19 @@ Optional | C#                | Haskell
 
 #### Basic Monad functions
 
-     @Enumerable<T>.Map              mapM :: Monad m => (a -> m b) -> [a] -> m [b] 
-     -                               mapM_ :: Monad m => (a -> m b) -> [a] -> m ()       NB: Same as mapM but returns Monad.Unit
-     -                               forM :: Monad m => [a] -> (a -> m b) -> m [b]       NB: For us, same as mapM
-     -                               forM_ :: Monad m => [a] -> (a -> m b) -> m ()       NB: Same as forM but returns Monad.Unit
-     @Enumerable<Monad<T>>.Collect   sequence :: Monad m => [m a] -> m [a]
-     -                               sequence_ :: Monad m => [m a] -> m ()               NB: Same as sequence but returns Monad.Unit
-     @Func.Invoke                    (=<<) :: Monad m => (a -> m b) -> m a -> m b
-     @Func.Compose                   (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
-     @Func.ComposeBack               (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
-     ??? Not supported               forever :: Monad m => m a -> m b
-     ??? Not supported               void :: Functor f => f a -> f ()
+Optional | C#                              | Haskell                                         | Remarks
+-------- | ------------------------------- | ---------------------------------------------------------- | --------------------
+         | `@Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`            |
+         |                                 | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`            | Same as mapM but returns Monad.Unit
+         |                                 | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`            | For us, same as mapM
+         |                                 | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`            | Same as forM but returns Monad.Unit
+         | `@Enumerable<Monad<T>>.Collect` | `sequence :: Monad m => [m a] -> m [a]`                    |
+         |                                 | `sequence_ :: Monad m => [m a] -> m ()`                    | Same as sequence but returns Monad.Unit
+         | `@Func.Invoke`                  | `(=<<) :: Monad m => (a -> m b) -> m a -> m b`             |
+         | `@Func.Compose`                 | `(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c` |
+         | `@Func.ComposeBack`             | `(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c` |
+         | ??? Not supported               | `forever :: Monad m => m a -> m b`                         |  
+         | ??? Not supported               | `void :: Functor f => f a -> f ()`                         |
 
 #### Generalisations of list functions
 
