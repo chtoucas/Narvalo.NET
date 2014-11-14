@@ -1,5 +1,5 @@
 ﻿Narvalo.Fx
-===========
+==========
 
 On Monads
 ---------
@@ -235,14 +235,14 @@ C#                              | Haskell                                       
 `@Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`            |
                                 | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`            | Same as `mapM` but returns `Monad.Unit`
                                 | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`            | For us, same as `mapM`
-                                | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`            | Same as forM but returns `Monad.Unit`
+                                | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`            | Same as `forM` but returns `Monad.Unit`
 `@Enumerable<Monad<T>>.Collect` | `sequence :: Monad m => [m a] -> m [a]`                    |
-                                | `sequence_ :: Monad m => [m a] -> m ()`                    | Same as sequence but returns `Monad.Unit`
+                                | `sequence_ :: Monad m => [m a] -> m ()`                    | Same as `sequence` but returns `Monad.Unit`
 `@Func.Invoke`                  | `(=<<) :: Monad m => (a -> m b) -> m a -> m b`             |
 `@Func.Compose`                 | `(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c` |
 `@Func.ComposeBack`             | `(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c` |
-                                | `forever :: Monad m => m a -> m b`                         | ??? Not supported 
-                                | `void :: Functor f => f a -> f ()`                         | ??? Not supported
+                                | `forever :: Monad m => m a -> m b`                         | Not supported (?) 
+                                | `void :: Functor f => f a -> f ()`                         | Not supported (?)
 
 #### Generalisations of list functions
 
@@ -272,12 +272,12 @@ C#                           | Haskell                                     | Rem
 
 C#                             | Haskell                                                                                                 | Remarks
 ------------------------------ | ------------------------------------------------------------------------------------------------------- | --------------------
-`Monad<T>.Map` / `Monad.Lift`  |    `liftM :: Monad m => (a1 -> r) -> m a1 -> m r`                                                       |
-`@Monad<T>.Zip` / `Monad.Lift` |    `liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r`                                        |
-`@Monad<T>.Zip` / `Monad.Lift` |    `liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r`                          | Optional
-`@Monad<T>.Zip` / `Monad.Lift` |    `liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r`            | Optional
+`Monad<T>.Map` / `Monad.Lift`  | `liftM :: Monad m => (a1 -> r) -> m a1 -> m r`                                                          |
+`@Monad<T>.Zip` / `Monad.Lift` | `liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r`                                           |
+`@Monad<T>.Zip` / `Monad.Lift` | `liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r`                             | Optional
+`@Monad<T>.Zip` / `Monad.Lift` | `liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r`               | Optional
 `@Monad<T>.Zip` / `Monad.Lift` | `liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r` | Optional
-                               | `ap :: Monad m => m (a -> b) -> m a -> m b`                                                             | ??? Not supported
+                               | `ap :: Monad m => m (a -> b) -> m a -> m b`                                                             | Not supported (?)
 
 ### References
  

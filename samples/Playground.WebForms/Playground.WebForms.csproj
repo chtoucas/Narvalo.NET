@@ -82,12 +82,10 @@
     <Content Include="Controls\SharedPresenterControl1.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="HelloWorld.aspx" />
-    <Content Include="License-WebFormsMvp.txt" />
     <Content Include="Messaging.aspx" />
     <Content Include="Layouts\Site.Master" />
     <Content Include="Widgets.aspx" />
     <Content Include="LookupWidget.aspx" />
-    <Content Include="README.md" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

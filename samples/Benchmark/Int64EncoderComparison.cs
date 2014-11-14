@@ -1,4 +1,4 @@
-﻿namespace Playground.Benchmark
+﻿namespace Benchmark
 {
     using System;
 

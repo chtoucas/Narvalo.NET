@@ -1,12 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Playground.Commands
+namespace Playground
 {
     using System;
     using Narvalo.Mvp.CommandLine;
-    using Playground.Views;
 
-    public sealed class TestCommand : MvpCommand, ITestView
+    public sealed class SampleCommand : MvpCommand, ISampleView
     {
         protected override void ExecuteCore()
         {

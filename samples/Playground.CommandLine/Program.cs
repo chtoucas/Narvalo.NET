@@ -3,7 +3,6 @@
 namespace Playground
 {
     using System;
-    using Playground.Commands;
     using Playground.Properties;
     using Serilog;
     using Serilog.Events;
@@ -18,8 +17,8 @@ namespace Playground
             Log.Logger = CreateLogger_();
             Log.Information(Resources.Starting);
 
-            new TestCommand().Execute();
-            new TestCommand().Execute();
+            new SampleCommand().Execute();
+            new SampleCommand().Execute();
 
             Log.Information(Resources.Ending);
         }

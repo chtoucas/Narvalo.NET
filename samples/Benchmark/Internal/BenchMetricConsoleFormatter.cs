@@ -1,11 +1,11 @@
-﻿namespace Playground.Benchmark.Internal
+﻿namespace Benchmark.Internal
 {
     using System.Globalization;
     using System.Linq;
     using System.Text;
     using Narvalo.Benchmark;
 
-    public class BenchMetricConsoleFormatter : BenchMetricFormatter
+    class BenchMetricConsoleFormatter : BenchMetricFormatter
     {
         public BenchMetricConsoleFormatter() : base() { }
 

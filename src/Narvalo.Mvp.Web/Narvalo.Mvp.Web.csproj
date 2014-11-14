@@ -118,10 +118,6 @@
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LICENSE-WebFormsMvp.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />

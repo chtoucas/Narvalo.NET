@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 using Autofac;
+using Autofac.Core;
 
 namespace Narvalo.Autofac
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Internal;
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
@@ -53,6 +53,15 @@ namespace Narvalo.Autofac
             }
 
             lifetimeScope.Dispose();
+        }
+
+        class LooselyTypedParameter : ConstantParameter
+        {
+            public LooselyTypedParameter(Type type, object value)
+                : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
+            {
+                DebugCheck.NotNull(type);
+            }
         }
     }
 }

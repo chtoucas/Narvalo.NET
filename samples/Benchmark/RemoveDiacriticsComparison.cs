@@ -1,10 +1,11 @@
-﻿namespace Playground.Benchmark.StringManip
+﻿using Narvalo.Benchmark;
+
+namespace Benchmark
 {
     using System;
     using System.Globalization;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Narvalo.Benchmark;
 
     [BenchComparison(10000, DisplayName = "Suppression des diacritiques.")]
     public class RemoveDiacriticsComparison

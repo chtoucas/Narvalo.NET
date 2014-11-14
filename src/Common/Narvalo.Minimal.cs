@@ -1,8 +1,5 @@
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-// The "Require" class is largely taken from:
-// http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx
-
 namespace Narvalo
 {
     using System;
@@ -231,7 +228,7 @@ namespace Narvalo
 
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
         "SA1402:FileMayOnlyContainASingleClass",
-        Justification = "Single file containing only internal classes and included in all MVP projects.")]
+        Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
     internal static class DebugCheck
     {
         [DebuggerStepThrough]
@@ -248,27 +245,11 @@ namespace Narvalo
             NotNull(value);
             Debug.Assert(value.Length != 0, "The value is empty.");
         }
-
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void IsEnum(Type type)
-        {
-            NotNull(type);
-            Debug.Assert(type.IsEnum, type.FullName, "The type must be of enum type.");
-        }
-
-        [DebuggerStepThrough]
-        [Conditional("DEBUG")]
-        public static void IsValueType(Type type)
-        {
-            NotNull(type);
-            Debug.Assert(type.IsValueType, type.FullName, "The type must be a value type.");
-        }
     }
 
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
         "SA1402:FileMayOnlyContainASingleClass",
-        Justification = "Single file containing only internal classes and included in all MVP projects.")]
+        Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
     internal static class __Tracer
     {
         [DebuggerStepThrough]

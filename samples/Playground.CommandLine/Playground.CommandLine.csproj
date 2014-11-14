@@ -72,7 +72,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="Presenters\TestPresenter.cs" />
+    <Compile Include="SamplePresenter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,8 +80,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
-    <Compile Include="Views\ITestView.cs" />
+    <Compile Include="SampleCommand.cs" />
+    <Compile Include="ISampleView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
@@ -97,7 +97,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Playground.ini">
+    <None Include="Playground.CommandLine.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

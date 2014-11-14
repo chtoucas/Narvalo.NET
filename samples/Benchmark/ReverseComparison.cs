@@ -1,8 +1,9 @@
-﻿namespace Playground.Benchmark.StringManip
+﻿using Narvalo.Benchmark;
+
+namespace Benchmark
 {
     using System;
     using System.Text;
-    using Narvalo.Benchmark;
 
     [BenchComparison(10000)]
     public class ReverseComparison

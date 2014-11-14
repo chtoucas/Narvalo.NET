@@ -1,14 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Playground.Presenters
+namespace Playground
 {
     using System;
     using Narvalo.Mvp;
-    using Playground.Views;
 
-    public sealed class TestPresenter : Presenter<ITestView>
+    public sealed class SamplePresenter : Presenter<ISampleView>
     {
-        public TestPresenter(ITestView view)
+        public SamplePresenter(ISampleView view)
             : base(view)
         {
             View.Completed += Completed;

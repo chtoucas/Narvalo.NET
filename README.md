@@ -13,7 +13,7 @@ The most stable parts are:
 - [Narvalo.Web](http://www.nuget.org/packages/Narvalo.Web/),
   Web centric utilities
 - [Narvalo.Mvp](http://www.nuget.org/packages/Narvalo.Mvp/),
-  a simple MVP framework inspired by 
+  a simple MVP framework largely inspired by 
   [WebFormsMvp](https://github.com/webformsmvp/webformsmvp)
 - [Narvalo.Mvp.Web](http://www.nuget.org/packages/Narvalo.Mvp.Web/),
   enhances `Narvalo.Mvp` to provide support for ASP.NET WebForms

@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Playground.Benchmark</RootNamespace>
-    <AssemblyName>Playground.Benchmark</AssemblyName>
+    <RootNamespace>Benchmark</RootNamespace>
+    <AssemblyName>Benchmark</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -16,7 +16,7 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
     <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
-    <StartupObject>Playground.Benchmark.Program</StartupObject>
+    <StartupObject>Benchmark.Program</StartupObject>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -72,8 +72,8 @@
     <Compile Include="Internal\BenchMetricConsoleFormatter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringManip\RemoveDiacriticsComparison.cs" />
-    <Compile Include="StringManip\ReverseComparison.cs" />
+    <Compile Include="RemoveDiacriticsComparison.cs" />
+    <Compile Include="ReverseComparison.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Benchmark\Narvalo.Benchmark.csproj">
@@ -96,7 +96,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Playground.Benchmark.ini">
+    <None Include="Benchmark.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
