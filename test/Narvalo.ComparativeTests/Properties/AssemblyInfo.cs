@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Narvalo.ComparativeTests")]
+[assembly: AssemblyTitle("Playground.Benchmark")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyProduct("Narvalo")]

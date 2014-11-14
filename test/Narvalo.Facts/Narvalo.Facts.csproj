@@ -66,6 +66,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>-->
   <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\..\packages\FakeItEasy.1.25.0\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -73,6 +76,9 @@
     <Reference Include="Moq, Version=4.2.1409.1722, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\packages\NSubstitute.1.8.0.0\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -132,8 +138,21 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Fx\NullableFacts.cs" />
+    <Compile Include="Mvp\CompositeViewFacts.cs" />
+    <Compile Include="Mvp\PresenterBindingAttributeFacts.cs" />
+    <Compile Include="Mvp\PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />
+    <Compile Include="Mvp\PresenterBinding\PresenterFactoryFacts.cs" />
+    <Compile Include="Mvp\PresenterFacts.cs" />
+    <Compile Include="Mvp\Resolvers\CachedCompositeViewTypeResolverFacts.cs" />
+    <Compile Include="Mvp\Resolvers\CachedPresenterConstructorResolverFacts.cs" />
+    <Compile Include="Mvp\Resolvers\CompositeViewTypeResolverFacts.cs" />
+    <Compile Include="Mvp\Resolvers\PresenterConstructorResolverFacts.cs" />
+    <Compile Include="Mvp\Resolvers\PresenterTypeResolverFacts.cs" />
+    <Compile Include="Mvp\Web\Core\AspNetMessageCoordinatorFacts.cs" />
+    <Compile Include="Mvp\Web\HttpPresenterFacts.cs" />
+    <Compile Include="Mvp\Web\MvpPageFacts.cs" />
+    <Compile Include="Mvp\Web\MvpUserControlFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
-    <Compile Include="EnumerationFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,9 +171,13 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Dirty\Narvalo.Dirty.csproj">
-      <Project>{7e383354-3181-4fa2-a67b-97b320295f0b}</Project>
-      <Name>Narvalo.Dirty</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
+      <Project>{fdadb21a-c99f-4d78-bdcc-a09a6ef97215}</Project>
+      <Name>Narvalo.Mvp.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{e7294a87-060c-4377-a0a7-48e92d591987}</Project>
+      <Name>Narvalo.Mvp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Portable\Narvalo.Portable.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>

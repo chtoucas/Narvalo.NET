@@ -68,13 +68,6 @@
     <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="PlatformServices.cs" />
-    <Compile Include="Internal\PresenterBinderFactory.cs" />
-    <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="MvpCommand.cs" />
-    <Compile Include="MvpCommand`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

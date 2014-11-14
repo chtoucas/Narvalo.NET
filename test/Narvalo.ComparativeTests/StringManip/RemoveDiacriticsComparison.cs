@@ -1,4 +1,4 @@
-﻿namespace Narvalo.ComparativeTests.StringManip
+﻿namespace Playground.Benchmark.StringManip
 {
     using System;
     using System.Globalization;

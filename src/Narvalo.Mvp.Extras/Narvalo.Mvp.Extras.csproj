@@ -78,7 +78,7 @@
     <Compile Include="AutofacPresenterFactory.cs" />
     <Compile Include="ContainerBuilder%24.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LooselyTypedParameter.cs" />
+    <Compile Include="Internal\LooselyTypedParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

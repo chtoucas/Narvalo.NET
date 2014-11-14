@@ -1,4 +1,4 @@
-﻿namespace Narvalo.ComparativeTests
+﻿namespace Playground.Benchmark
 {
     using System;
 

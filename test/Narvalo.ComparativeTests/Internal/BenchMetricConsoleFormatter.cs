@@ -1,4 +1,4 @@
-﻿namespace Narvalo.ComparativeTests.Internal
+﻿namespace Playground.Benchmark.Internal
 {
     using System.Globalization;
     using System.Linq;

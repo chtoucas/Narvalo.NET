@@ -1,9 +1,9 @@
-﻿namespace Narvalo.ComparativeTests
+﻿namespace Playground.Benchmark
 {
     using System;
     using Narvalo.Benchmark;
-    using Narvalo.ComparativeTests.Internal;
-    using Narvalo.ComparativeTests.StringManip;
+    using Playground.Benchmark.Internal;
+    using Playground.Benchmark.StringManip;
 
     class Program
     {

@@ -5,6 +5,7 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using Autofac;
+    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.PresenterBinding;
 
     public sealed class AutofacPresenterFactory : IPresenterFactory
