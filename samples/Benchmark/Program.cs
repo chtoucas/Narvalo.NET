@@ -1,15 +1,14 @@
-﻿using Narvalo.Benchmark;
-
-namespace Benchmark
+﻿namespace Benchmark
 {
     using System;
     using Benchmark.Internal;
+    using Narvalo.Runtime.Benchmarking;
 
     class Program
     {
         static void Main()
         {
-            var metrics = BenchComparisonProcessor
+            var metrics = BenchmarkComparisonProcessor
                 .Create()
                 .Process(typeof(RemoveDiacriticsComparison));
 

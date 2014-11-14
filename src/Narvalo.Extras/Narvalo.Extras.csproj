@@ -52,6 +52,9 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -64,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -107,7 +111,8 @@
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Castle\SqlExceptionInterceptor.cs" />
+    <Compile Include="Castle\XmlExceptionInterceptor.cs" />
     <Compile Include="Autofac\AutofacPresenterFactory.cs" />
     <Compile Include="Autofac\ContainerBuilder%24.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

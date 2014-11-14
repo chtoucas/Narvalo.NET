@@ -1,13 +1,12 @@
-﻿using Narvalo.Benchmark;
-
-namespace Benchmark
+﻿namespace Benchmark
 {
     using System;
     using System.Globalization;
     using System.Text;
     using System.Text.RegularExpressions;
+    using Narvalo.Runtime.Benchmarking;
 
-    [BenchComparison(10000, DisplayName = "Suppression des diacritiques.")]
+    [BenchmarkComparison(10000, DisplayName = "Suppression des diacritiques.")]
     public class RemoveDiacriticsComparison
     {
         // \p{Mn} or \p{Non_Spacing_Mark}:
@@ -24,7 +23,7 @@ namespace Benchmark
         //           select StringGenerator.RandomUnicodeString(l);
         //}
 
-        [BenchComparative(DisplayName = "Expression rationnelle.")]
+        [BenchmarkComparative(DisplayName = "Expression rationnelle.")]
         public string Regex(string value)
         {
             var formD = value.Normalize(NormalizationForm.FormD);
@@ -37,7 +36,7 @@ namespace Benchmark
             }
         }
 
-        [BenchComparative(DisplayName = "Caractères traités pas à pas.")]
+        [BenchmarkComparative(DisplayName = "Caractères traités pas à pas.")]
         public string ForLoop(string value)
         {
             var formD = value.Normalize(NormalizationForm.FormD);

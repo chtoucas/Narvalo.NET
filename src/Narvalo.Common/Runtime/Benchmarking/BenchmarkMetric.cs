@@ -1,0 +1,115 @@
+namespace Narvalo.Runtime.Benchmarking
+{
+    using System;
+    using System.Globalization;
+    using NodaTime;
+
+    public struct BenchmarkMetric : IEquatable<BenchmarkMetric>
+    {
+        internal static readonly IBenchmarkMetricFormatter DefaultFormatter
+            = new BenchmarkMetricFormatter();
+
+        readonly Duration _duration;
+        readonly int _iterations;
+        readonly string _name;
+
+        public BenchmarkMetric(string name, Duration duration, int iterations)
+        {
+            Require.NotNullOrEmpty(name, "name");
+
+            _name = name;
+            _duration = duration;
+            _iterations = iterations;
+        }
+
+        internal static BenchmarkMetric Create(Benchmark benchmark, Duration duration)
+        {
+            Require.NotNull(benchmark, "benchmark");
+
+            return new BenchmarkMetric(
+                benchmark.Name,
+                duration,
+                benchmark.Iterations
+            );
+        }
+
+        public long CallsPerSecond
+        {
+            get { return NodaConstants.TicksPerSecond * Iterations / Duration.Ticks; }
+        }
+
+        public Duration Duration { get { return _duration; } }
+
+        public int Iterations { get { return _iterations; } }
+
+        public string Name { get { return _name; } }
+
+        public long TicksPerCall
+        {
+            get { return Duration.Ticks / Iterations; }
+        }
+
+        #region IEquatable<BenchMetric>
+
+        public bool Equals(BenchmarkMetric other)
+        {
+            return Iterations == other.Iterations
+                && Duration == other.Duration
+                && Name == other.Name;
+        }
+
+        #endregion
+
+        #region Surchages d'Object.
+
+        /// <summary />
+        public override bool Equals(object obj)
+        {
+            if (!(obj is BenchmarkMetric)) {
+                return false;
+            }
+
+            return Equals((BenchmarkMetric)obj);
+        }
+
+        /// <summary />
+        public override int GetHashCode()
+        {
+            // FIXME
+            return Iterations
+                ^ Duration.GetHashCode()
+                ^ Name.GetHashCode();
+        }
+
+        /// <summary />
+        public override string ToString()
+        {
+            return ToString(DefaultFormatter);
+        }
+
+        #endregion
+
+        #region Opérateurs.
+
+        /// <summary />
+        public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary />
+        public static bool operator !=(BenchmarkMetric left, BenchmarkMetric right)
+        {
+            return !left.Equals(right);
+        }
+
+        #endregion
+
+        public string ToString(IBenchmarkMetricFormatter fmt)
+        {
+            Require.NotNull(fmt, "fmt");
+
+            return fmt.Format(CultureInfo.CurrentCulture, this);
+        }
+    }
+}

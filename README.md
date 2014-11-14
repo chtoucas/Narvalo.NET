@@ -1,7 +1,7 @@
 Narvalo.NET
 ===========
 
-Right now, a place for me to test various ideas.
+Right now, a place for me to learn and test various ideas.
 
 **Status: Experimental**
 
@@ -17,4 +17,4 @@ The most stable parts are:
   [WebFormsMvp](https://github.com/webformsmvp/webformsmvp)
 - [Narvalo.Mvp.Web](http://www.nuget.org/packages/Narvalo.Mvp.Web/),
   enhances `Narvalo.Mvp` to provide support for ASP.NET WebForms
-- `Narvalo.Extras`, Autofac and Serilog goodies
+- `Narvalo.Extras`, Autofac, Castle and Serilog goodies

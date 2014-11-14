@@ -3,13 +3,13 @@
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using Narvalo.Benchmark;
+    using Narvalo.Runtime.Benchmarking;
 
-    class BenchMetricConsoleFormatter : BenchMetricFormatter
+    class BenchMetricConsoleFormatter : BenchmarkMetricFormatter
     {
         public BenchMetricConsoleFormatter() : base() { }
 
-        public override string Format(CultureInfo cultureInfo, BenchMetricCollection metrics)
+        public override string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics)
         {
             var sb = new StringBuilder();
             sb.Append(metrics.Name);

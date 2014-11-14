@@ -76,20 +76,6 @@
     <Compile Include="ReverseComparison.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Benchmark\Narvalo.Benchmark.csproj">
-      <Project>{f17367ad-0265-4f9b-ad6c-ac0ead63a25f}</Project>
-      <Name>Narvalo.Benchmark</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Portable\Narvalo.Portable.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Portable</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
@@ -105,6 +91,12 @@
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <Import Project="..\..\scripts\Narvalo.stylecop.targets" />

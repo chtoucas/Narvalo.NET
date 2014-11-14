@@ -1,11 +1,10 @@
-﻿using Narvalo.Benchmark;
-
-namespace Benchmark
+﻿namespace Benchmark
 {
     using System;
     using System.Text;
+    using Narvalo.Runtime.Benchmarking;
 
-    [BenchComparison(10000)]
+    [BenchmarkComparison(10000)]
     public class ReverseComparison
     {
         //IEnumerable<string> GenerateTestData()
@@ -42,7 +41,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string CharArrayCopy(string value)
         {
             char[] reversed = value.ToCharArray();
@@ -61,7 +60,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string CharArrayCopyFast(string value)
         {
             char[] reversed = value.ToCharArray();
@@ -83,7 +82,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string CharArrayCopyAndReverse(string value)
         {
             char[] arr = value.ToCharArray();
@@ -100,7 +99,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string CharArrayInline(string value)
         {
             char[] reversed = new char[value.Length];
@@ -111,7 +110,7 @@ namespace Benchmark
             return new String(reversed);
         }
 
-        [BenchComparative]
+        [BenchmarkComparative]
         public string CharArrayInlineWithSurrogates(string value)
         {
             char[] reversed = new char[value.Length];
@@ -132,7 +131,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string StringBuilderInline(string value)
         {
             var sb = new StringBuilder(value);
@@ -150,7 +149,7 @@ namespace Benchmark
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        [BenchComparative]
+        [BenchmarkComparative]
         public string StringBuilderCopy(string value)
         {
             var sb = new StringBuilder(value.Length);
@@ -192,7 +191,7 @@ namespace Benchmark
         //}
 
         // Cf. http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
-        [BenchComparative]
+        [BenchmarkComparative]
         public static string CharArrayXor(string value)
         {
             char[] arr = value.ToCharArray();
