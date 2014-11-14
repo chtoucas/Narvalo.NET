@@ -213,65 +213,71 @@ either because they're too complicated or they do not really make sense in .NET.
 
 #### Monad
 
-Optional | C#                | Haskell                                         | Remarks
--------- | ----------------- | ----------------------------------------------- | --------------------
-*        | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
-         | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
-*        | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
-         | `Monad.Return`    | `return :: a -> m a`                            | 
-         |                   | `fail :: String -> m a`                         | See discussion above
+C#                | Haskell                                         | Remarks
+----------------- | ----------------------------------------------- | --------------------
+`Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | *
+`Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
+`Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | *
+`Monad.Return`    | `return :: a -> m a`                            | 
+                  | `fail :: String -> m a`                         | See discussion above
 
 #### MonadPlus  
 
-Optional | C#                | Haskell                                         
--------- | ----------------- | ----------------------------
-         | `Monad<T>.Zero`   | `mzero :: m a`
-         | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
+C#                | Haskell                                         
+----------------- | ----------------------------
+`Monad<T>.Zero`   | `mzero :: m a`
+`Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
 
 #### Basic Monad functions
 
-Optional | C#                              | Haskell                                         | Remarks
--------- | ------------------------------- | ---------------------------------------------------------- | --------------------
-         | `@Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`            |
-         |                                 | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`            | Same as mapM but returns Monad.Unit
-         |                                 | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`            | For us, same as mapM
-         |                                 | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`            | Same as forM but returns Monad.Unit
-         | `@Enumerable<Monad<T>>.Collect` | `sequence :: Monad m => [m a] -> m [a]`                    |
-         |                                 | `sequence_ :: Monad m => [m a] -> m ()`                    | Same as sequence but returns Monad.Unit
-         | `@Func.Invoke`                  | `(=<<) :: Monad m => (a -> m b) -> m a -> m b`             |
-         | `@Func.Compose`                 | `(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c` |
-         | `@Func.ComposeBack`             | `(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c` |
-         | ??? Not supported               | `forever :: Monad m => m a -> m b`                         |  
-         | ??? Not supported               | `void :: Functor f => f a -> f ()`                         |
+C#                              | Haskell                                                    | Remarks
+------------------------------- | ---------------------------------------------------------- | --------------------
+`@Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`            |
+                                | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`            | Same as `mapM` but returns `Monad.Unit`
+                                | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`            | For us, same as `mapM`
+                                | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`            | Same as forM but returns `Monad.Unit`
+`@Enumerable<Monad<T>>.Collect` | `sequence :: Monad m => [m a] -> m [a]`                    |
+                                | `sequence_ :: Monad m => [m a] -> m ()`                    | Same as sequence but returns `Monad.Unit`
+`@Func.Invoke`                  | `(=<<) :: Monad m => (a -> m b) -> m a -> m b`             |
+`@Func.Compose`                 | `(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c` |
+`@Func.ComposeBack`             | `(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c` |
+                                | `forever :: Monad m => m a -> m b`                         | ??? Not supported 
+                                | `void :: Functor f => f a -> f ()`                         | ??? Not supported
 
 #### Generalisations of list functions
 
-     Monad.Flatten                   join :: Monad m => m (m a) -> m a
-     @Enumerable<Monad<T>>.Sum       msum :: MonadPlus m => [m a] -> m a
-     @Monad<T>.Filter                mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a
-     @Enumerable<T>.Filter           filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]
-?    @Enumerable<T>.MapAndUnzip      mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])
-     @Enumerable<T>.Zip              zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-     -                               zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()   NB: Same as zipWithM but returns Monad.Unit            
-     @Enumerable<T>.Fold             foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
-     -                               foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()        NB: Same as foldM but returns Monad.Unit
-     @Monad<T>.Repeat                replicateM :: Monad m => Int -> m a -> m [a]
-     -                               replicateM_ :: Monad m => Int -> m a -> m ()                    NB: Same as replicateM but returns Monad.Unit            
+C#                           | Haskell                                                             | Remarks
+---------------------------- | ------------------------------------------------------------------- | --------------------
+`Monad.Flatten`              | `join :: Monad m => m (m a) -> m a`                                 |
+`@Enumerable<Monad<T>>.Sum`  | `msum :: MonadPlus m => [m a] -> m a`                               |
+`@Monad<T>.Filter`           | `mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a`               |
+`@Enumerable<T>.Filter`      | `filterM :: Monad m => (a -> m Bool) -> [a] -> m [a]`               |
+`@Enumerable<T>.MapAndUnzip` | `mapAndUnzipM :: Monad m => (a -> m (b, c)) -> [a] -> m ([b], [c])` | Optional
+`@Enumerable<T>.Zip`         | `zipWithM :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m [c]`     |
+                             | `zipWithM_ :: Monad m => (a -> b -> m c) -> [a] -> [b] -> m ()`     | Same as `zipWithM` but returns `Monad.Unit`            
+`@Enumerable<T>.Fold`        | `foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a`            |
+                             | `foldM_ :: Monad m => (a -> b -> m a) -> a -> [b] -> m ()`          | Same as `foldM` but returns `Monad.Unit`
+`@Monad<T>.Repeat`           | `replicateM :: Monad m => Int -> m a -> m [a]`                      |
+                             | `replicateM_ :: Monad m => Int -> m a -> m ()`                      | Same as `replicateM` but returns `Monad.Unit`            
 
 #### Conditional execution of monadic expressions
 
-?    @Monad<T>.Guard                 guard :: MonadPlus m => Bool -> m ()
-?    @Monad<T>.When                  when :: Monad m => Bool -> m () -> m ()
-?    @Monad<T>.Unless                unless :: Monad m => Bool -> m () -> m ()
+C#                           | Haskell                                     | Remarks
+---------------------------- | ------------------------------------------- | --------------------
+`@Monad<T>.Guard`            | `guard :: MonadPlus m => Bool -> m ()`      | Optional
+`@Monad<T>.When`             | `when :: Monad m => Bool -> m () -> m ()`   | Optional
+`@Monad<T>.Unless`           | `unless :: Monad m => Bool -> m () -> m ()` | Optional
 
 #### Monadic lifting operators
 
-     Monad<T>.Map / Monad.Lift       liftM :: Monad m => (a1 -> r) -> m a1 -> m r
-     @Monad<T>.Zip / Monad.Lift      liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r
-?    @Monad<T>.Zip / Monad.Lift      liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r
-?    @Monad<T>.Zip / Monad.Lift      liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r
-?    @Monad<T>.Zip  / Monad.Lift     liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r
-     ??? Not supported               ap :: Monad m => m (a -> b) -> m a -> m b
+C#                             | Haskell                                                                                                 | Remarks
+------------------------------ | ------------------------------------------------------------------------------------------------------- | --------------------
+`Monad<T>.Map` / `Monad.Lift`  |    `liftM :: Monad m => (a1 -> r) -> m a1 -> m r`                                                       |
+`@Monad<T>.Zip` / `Monad.Lift` |    `liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r`                                        |
+`@Monad<T>.Zip` / `Monad.Lift` |    `liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r`                          | Optional
+`@Monad<T>.Zip` / `Monad.Lift` |    `liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r`            | Optional
+`@Monad<T>.Zip` / `Monad.Lift` | `liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r` | Optional
+                               | `ap :: Monad m => m (a -> b) -> m a -> m b`                                                             | ??? Not supported
 
 ### References
  
