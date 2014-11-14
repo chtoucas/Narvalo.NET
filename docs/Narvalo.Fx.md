@@ -213,20 +213,20 @@ either because they're too complicated or they do not really make sense in .NET.
 
 #### Monad
 
-? | C#                | Haskell                                         | Notes
-- | ----------------- | ----------------------------------------------- | --------------------
-* | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
-  | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
-* | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
-  | `Monad.Return`    | `return :: a -> m a`                            | 
-  | -                 | `fail :: String -> m a`                         | See discussion above
+Optional | C#                | Haskell                                         | Notes
+-------- | ----------------- | ----------------------------------------------- | --------------------
+Yes      | `Monad<T>.Select` | `fmap :: (a -> b) -> m a -> m b`                | 
+         | `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b` | 
+Yes      | `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`         | 
+         | `Monad.Return`    | `return :: a -> m a`                            | 
+         |                   | `fail :: String -> m a`                         | See discussion above
 
 #### MonadPlus  
 
-? | C#                | Haskell                                         
-- | ----------------- | -----------------------------------------------
-  | `Monad<T>.Zero`   | `mzero :: m a`
-  | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
+Optional | C#                | Haskell                                         
+-------- | ----------------- | ----------------------------
+         | `Monad<T>.Zero`   | `mzero :: m a`
+         | `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
 
 #### Basic Monad functions
 
