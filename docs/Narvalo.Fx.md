@@ -63,7 +63,7 @@ _MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is a l
 
 ### Summary
 
-------------------------------------------------------
+--------- | ------------------------------------------
 Monoid    | (Plus, Zero) + Monoid Laws
 Monad     | (Bind, Unit) + Monad Laws
 Comonad   | (Cobind, Counit) + Comonad Laws
