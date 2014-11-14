@@ -4,70 +4,73 @@
 On Monads
 ---------
  
-You shouldn't be afraid of the monad! You don't need to understand the theory behind to make good use of it, really.
-In fact, I guess that the monad theory, or more precisely category theory, has influenced the design of many
-parts of the .NET framework ; Linq and the Reactive Extensions being the most obvious proofs of that.
-The .NET type system is not rich enough to make very general monadic constructions but it gives developpers
-access to some powerful monadic concepts in a very friendly way.
+You shouldn't be afraid of the monad! You don't need to understand the theory 
+behind to make good use of it, really. In fact, I guess that the monad theory,
+or more precisely category theory, has influenced the design of many parts of 
+the .NET framework ; Linq and the Reactive Extensions being the most obvious
+proofs of that. The .NET type system is not rich enough to make very general
+monadic constructions but it gives developpers access to some powerful monadic 
+concepts in a very friendly way.
  
 ### Monoid
 
-A Monoid has an Empty element and an Append operation that satisfy the Monoid laws:
+A Monoid has an `Empty` element and an `Append` operation that satisfy 
+the Monoid laws:
  
-- Empty is the identity for Append
-- Append is associative
+- `Empty` is the identity for `Append`
+- `Append` is associative
  
-Haskell also includes a Concat operation which in fact derives from Empty and Append:
-     FoldR Append Empty.
+Haskell also includes a `Concat` operation which in fact derives from `Empty`
+and `Append`: `FoldR Append Empty`.
 
 ### Monad
 
-A Monad has a Unit element and a Bind operation must satisfy the three monad laws:
+A Monad has a Unit element and a Bind operation must satisfy the three 
+monad laws:
  
-- Unit is the identity for Bind
-- Bind is associative
+- `Unit` is the identity for `Bind`
+- `Bind` is associative
 
-If one wishes to stay close to the Category roots of Monads, a Monad is equivalently
-defines with a Unit element and two operations Map and Multiply.
+If one wishes to stay close to the Category roots of Monads, a Monad is 
+equivalently defines with a `Unit` element and two operations `Map` 
+and `Multiply`.
 
-NB: Haskell also provides a fail method that is not part of the standard definition.
-It is mostly used for pattern matching failure, something we do not have in .NET.
+NB: Haskell also provides a fail method that is not part of the standard 
+definition. It is mostly used for pattern matching failure, something we do not 
+have in .NET.
 
 ### Comonad
 
-There are two equivalent ways to define a comonad:
+There are two equivalent ways to define a Comonad:
  
-- Counit, Cobind
-- Counit, Map, Comultiply
+- `Counit`, `Cobind`
+- `Counit`, `Map`, `Comultiply`
 
 ### Richer Monads
 
 We follow (mostly) the proposed new terminology from the MonadPlus Reform.
 
-MonadZero
-: A MonadZero is a Monad with a left zero for Bind.
+_MonadZero_, a MonadZero is a Monad with a left zero for `Bind`.
 
-MonadMore
-: A MonadMore is a Monad which is also a Monoid and for which Zero is a zero for Bind.
-  This is what Haskell calls a MonadPlus.
+_MonadMore_, a MonadMore is a Monad which is also a Monoid and for which `Zero` 
+  is a zero for `Bind`. This is what Haskell calls a MonadPlus.
 
-MonadPlus
-: A MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
+_MonadPlus_, a MonadPlus is a Monad which is also a Monoid and for which Bind is right distributive over Plus.
   REVIEW: Haskell uses the term left distributive. Am I missing something?
 
-MonadOr
-: A MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
+_MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is a left zero for Plus.
   Here, we prefer to use OrElse instead of Plus for the Monoid composition operation.
 
 ### Summary
 
-- Monoid                     (Plus, Zero) + Monoid Laws
-- Monad                      (Bind, Unit) + Monad Laws
-- Comonad                    (Cobind, Counit) + Comonad Laws
-- MonadZero                  (Monad, Zero) + Zero = left zero for Bind
-- MonadMore                  Monad + Monoid + Zero = zero for Bind
-- MonadPlus                  Monad + Monoid + Right distributivity
-- MonadOr                    Monad + Monoid + Unit = left zero for Plus
+------------------------------------------------------
+Monoid    | (Plus, Zero) + Monoid Laws
+Monad     | (Bind, Unit) + Monad Laws
+Comonad   | (Cobind, Counit) + Comonad Laws
+MonadZero | (Monad, Zero) + Zero = left zero for Bind
+MonadMore | Monad + Monoid + Zero = zero for Bind
+MonadPlus | Monad + Monoid + Right distributivity
+MonadOr   | Monad + Monoid + Unit = left zero for Plus
 
 ### Sample monads
 
