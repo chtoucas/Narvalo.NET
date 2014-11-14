@@ -103,7 +103,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="..\common\narvalo\Narvalo.Minimal.cs">
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />

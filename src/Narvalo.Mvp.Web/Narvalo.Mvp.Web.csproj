@@ -66,7 +66,7 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
       <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Narvalo\Narvalo.Minimal.cs">
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="Core\AspNetBuildManager.cs" />
