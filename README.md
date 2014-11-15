@@ -10,8 +10,8 @@ The most stable parts are:
 1. Tools
     - `Narvalo.Build`, custom MSBuild tasks.
 2. Utilities
-    - `Narvalo.Portable`, PCL package.    
-    - `Narvalo.Common`, complements `Narvalo.Portable`.
+    - [Narvalo.Portable](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Portable), PCL package.    
+    - `Narvalo.Common`, complements Narvalo.Portable.
     - `Narvalo.Web`, Web centric utilities.
     - `Narvalo.Extras`, Autofac, Castle and Serilog goodies.
 3. MVP framework
