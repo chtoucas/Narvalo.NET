@@ -55,6 +55,12 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO">
+      <HintPath>..\..\packages\LumenWorks.Framework.IO.3.8.0\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -108,9 +114,14 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
+    <Compile Include="Autofac\PrincipalModelBinder.cs" />
     <Compile Include="Castle\SqlExceptionInterceptor.cs" />
     <Compile Include="Castle\XmlExceptionInterceptor.cs" />
     <Compile Include="Autofac\ContainerBuilder%24.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Log4Net\Log4NetHttpModule.cs" />
+    <Compile Include="LumenWorks\CsvSlurp.cs" />
+    <Compile Include="NHibernate\GuidComb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serilog\HttpLogEventEnricher.cs" />
   </ItemGroup>
@@ -127,9 +138,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Portable</Name>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,9 +8,10 @@
     </Unrecognized>
     <Recognized>
       <!-- Espaces de noms -->
-      <Word>Narvalo</Word>
       <Word>Autofac</Word>
       <Word>Mvp</Word>
+      <Word>Narvalo</Word>
+      <Word>Serilog</Word>
 
       <!-- Brands -->
       <Word>Flickr</Word>

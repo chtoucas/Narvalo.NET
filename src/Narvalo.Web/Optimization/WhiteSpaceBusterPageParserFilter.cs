@@ -3,7 +3,6 @@
 namespace Narvalo.Web.Optimization
 {
     using System.Collections;
-    using Narvalo.Fx;
     using Narvalo.Web.Configuration;
     using Narvalo.Web.UI;
 

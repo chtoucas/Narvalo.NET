@@ -5,8 +5,6 @@ namespace Narvalo.Web.Optimization
     using System;
     using System.Text.RegularExpressions;
     using Narvalo;
-    using Narvalo.Web.Optimization;
-    using System.Globalization;
 
     /// <summary>
     /// Représente un nettoyeur simple d'espaces blancs.

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47194837-888B-48DE-9514-CFA899564BBF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo.Reliability</RootNamespace>
+    <AssemblyName>Narvalo.Reliability</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisRuleSet>..\..\etc\Debug.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
+    <CodeAnalysisRuleSet>..\..\etc\Release.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\Narvalo.Reliability.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.Miscs.cs">
+      <Link>Properties\AssemblyInfo.Library.Miscs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
+    <Compile Include="AggregateGuardException.cs" />
+    <Compile Include="BarrierException.cs" />
+    <Compile Include="BlackholeGuard.cs" />
+    <Compile Include="CircuitBreaker.cs" />
+    <Compile Include="CircuitBreakerState.cs" />
+    <Compile Include="CircuitBreakerStateChangedEventArgs.cs" />
+    <Compile Include="CircuitOpenException.cs" />
+    <Compile Include="ConcurrencyThrottle.cs" />
+    <Compile Include="FlowRateBarrier.cs" />
+    <Compile Include="FlowRateExceededException.cs" />
+    <Compile Include="GuardChain.cs" />
+    <Compile Include="GuardChainBuilder.cs" />
+    <Compile Include="GuardException.cs" />
+    <Compile Include="GuardStatus.cs" />
+    <Compile Include="GuardType.cs" />
+    <Compile Include="IBarrier.cs" />
+    <Compile Include="IGuard.cs" />
+    <Compile Include="IMonitorableGuard.cs" />
+    <Compile Include="IReliabilityMonitor.cs" />
+    <Compile Include="IThrottle.cs" />
+    <Compile Include="NoopGuard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReliabilityWrapper.cs" />
+    <Compile Include="RequestCounter.cs" />
+    <Compile Include="RetryGuard.cs" />
+    <Compile Include="RetryPolicy.cs" />
+    <Compile Include="ThrottleException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

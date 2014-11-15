@@ -5,12 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A4664A7E-72FF-4E56-8696-9E7EAFE66421}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Playground</RootNamespace>
     <AssemblyName>Playground</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,33 +35,155 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Edu\Fx\Fibonacci.cs" />
+    <Compile Include="Edu\Fx\Iteration.cs" />
+    <Compile Include="Edu\Fx\Iteration`2.cs" />
+    <Compile Include="Edu\Fx\Sequence.cs" />
+    <Compile Include="Edu\Fx\YCombinator.cs" />
+    <Compile Include="Edu\Linq\Bananas.cs" />
+    <Compile Include="Edu\Linq\IGroupingQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\IOrderedQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\IQuerySyntax.cs" />
+    <Compile Include="Edu\Linq\IQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\Lenses.cs" />
+    <Compile Include="Edu\Monads\Mu.cs" />
+    <Compile Include="Edu\Monads\Action`%24.cs" />
+    <Compile Include="Edu\Monads\Cokunc`.cs" />
+    <Compile Include="Edu\Monads\Comonad`1.cs" />
+    <Compile Include="Edu\Monads\Kunc`%24.cs" />
+    <Compile Include="Edu\Monads\Kunc`.cs" />
+    <Compile Include="Edu\Monads\Monad.cs" />
+    <Compile Include="Edu\Monads\Monad`1.cs" />
+    <Compile Include="Edu\Monads\Monoid`1.cs" />
+    <Compile Include="Edu\Monads\NamespaceDoc.cs" />
+    <Compile Include="Edu\Monads\Samples\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\Comonad`1.cs" />
+    <Compile Include="Edu\Monads\Samples\Enumerable`1%24.cs" />
+    <Compile Include="Edu\Monads\Samples\Internal\Enumerable`1%24.cs" />
+    <Compile Include="Edu\Monads\Samples\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadOr`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadPlus`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadValue`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadZero`1.cs" />
+    <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
+    <Compile Include="Edu\Monads\Stubs.cs" />
+    <Compile Include="Edu\Monads\Stubs`1.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\DebuggerLogger.cs" />
+    <Compile Include="Logging\DebuggerWriter.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ILoggerFactory.cs" />
+    <Compile Include="Logging\Log4NetFactory.cs" />
+    <Compile Include="Logging\Log4NetLogger.cs" />
+    <Compile Include="Logging\LoggerBase.cs" />
+    <Compile Include="Logging\LoggerLevel.cs" />
+    <Compile Include="Logging\LoggerAutofacModule.cs" />
+    <Compile Include="Logging\SilentLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomNumber.cs" />
-    <Compile Include="RandomString.cs" />
-    <Compile Include="StringManip.cs" />
+    <Compile Include="Miscs\RandomNumber.cs" />
+    <Compile Include="Miscs\RandomString.cs" />
+    <Compile Include="SR.Designer.cs">
+      <DependentUpon>SR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Miscs\StringManip.cs" />
+    <Compile Include="WebApplication.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Playground.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Edu\Monads\Samples\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
     </None>
+    <None Include="Edu\Monads\Samples\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
+    <EmbeddedResource Include="SR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Portable</Name>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

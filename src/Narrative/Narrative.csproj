@@ -216,13 +216,9 @@
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Incubator\Narvalo.Incubator.csproj">
-      <Project>{2a773ea9-d0bc-4a25-b43f-e238f52aa4d3}</Project>
-      <Name>Narvalo.Incubator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Portable</Name>
+      <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

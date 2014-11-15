@@ -8,7 +8,8 @@ Right now, a place for me to learn and test various ideas.
 The most stable parts are:
 
 1. Tools
-    - `Narvalo.Build`, custom MSBuild tasks.
+    - [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
+      custom MSBuild tasks.
 2. Utilities
     - [Narvalo.Portable](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Portable),
       PCL package.    
@@ -17,7 +18,7 @@ The most stable parts are:
     - [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web), 
       Web centric utilities.
     - [Narvalo.Extras](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Extras), 
-      Autofac, Castle and Serilog goodies.
+      collection of Autofac, Castle, Log4Net, LumenWorks, and Serilog goodies.
 3. MVP framework
     - [Narvalo.Mvp](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp), 
       a simple MVP framework largely inspired by 

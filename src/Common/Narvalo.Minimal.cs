@@ -8,6 +8,9 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
     internal static class Require
     {
         [DebuggerStepThrough]

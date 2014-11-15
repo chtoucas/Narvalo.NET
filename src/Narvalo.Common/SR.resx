@@ -135,22 +135,4 @@
   <data name="DebugAssert_IsNotValueType" xml:space="preserve">
     <value>The type must be a value type.</value>
   </data>
-  <data name="InvalidMetricFormat" xml:space="preserve">
-    <value>Invalid result: duration was 0 ({0} iterations)</value>
-  </data>
-  <data name="MetricCollectionFormat" xml:space="preserve">
-    <value>{0}; fastest result:</value>
-  </data>
-  <data name="MetricFormat" xml:space="preserve">
-    <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
-  </data>
-  <data name="MissingBenchComparativeAttribute" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MissingBenchComparisonAttribute" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MissingBenchmarkAttribute" xml:space="preserve">
-    <value />
-  </data>
 </root>

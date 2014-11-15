@@ -6,7 +6,6 @@ namespace Narvalo.Web
     using System.Linq;
     using System.Net;
     using System.Web;
-    using Narvalo.Fx;
 
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()
