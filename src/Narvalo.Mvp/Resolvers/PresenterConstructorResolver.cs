@@ -25,7 +25,7 @@ namespace Narvalo.Mvp.Resolvers
                         CultureInfo.InvariantCulture,
                         "{0} does not meet accessibility requirements. For the framework to be able to call it, it must be public. Make the type public, or use a IPresenterFactory that can access this type.",
                         presenterType.FullName),
-                    "input");
+                    "presenterType");
             }
 
             var ctor = presenterType.GetConstructor(new[] { viewType });
@@ -36,7 +36,7 @@ namespace Narvalo.Mvp.Resolvers
                         "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or use a IPresenterFactory that can supply constructor dependencies.",
                         presenterType.FullName,
                         viewType.FullName),
-                    "input");
+                    "presenterType");
             }
 
             // Using DynamicMethod and ILGenerator allows us to hold on to a

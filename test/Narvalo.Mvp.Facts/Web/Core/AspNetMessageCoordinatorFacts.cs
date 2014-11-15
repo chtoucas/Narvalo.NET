@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.Web.Core
     using System.Linq;
     using Xunit;
 
-    public class AspNetMessageCoordinatorFacts
+    public static class AspNetMessageCoordinatorFacts
     {
         public static class PublishMethod
         {

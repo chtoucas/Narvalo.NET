@@ -54,7 +54,7 @@ namespace Narvalo.Mvp.Web
                 var view = Substitute.For<IMyViewWithModel>();
 
                 // Act
-                var presenter = new MyHttpPresenterWithModel(view);
+                new MyHttpPresenterWithModel(view);
 
                 // Assert
                 Assert.NotNull(view.Model);

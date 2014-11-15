@@ -36,7 +36,10 @@ namespace Narvalo.Mvp.Windows.Forms
 
         protected override void OnControlAdded(ControlEventArgs e)
         {
+            Require.NotNull(e, "e");
+
             var view = e.Control as IView;
+
             if (!DesignMode && view != null) {
                 _presenterBinder.RegisterView(view);
             }

@@ -118,12 +118,12 @@ namespace Narvalo.Mvp.PresenterBinding
 
         #region Helper classes
 
-        public class MyPresenter : Presenter<IView>
+        public sealed class MyPresenter : Presenter<IView>
         {
             public MyPresenter(IView view) : base(view) { }
         }
 
-        public class MyDisposablePresenter : Presenter<IView>, IDisposable
+        public sealed class MyDisposablePresenter : Presenter<IView>, IDisposable
         {
             public MyDisposablePresenter(IView view) : base(view) { }
 
@@ -135,7 +135,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public class MyErrorPresenter : Presenter<IView>
+        public sealed class MyErrorPresenter : Presenter<IView>
         {
             public MyErrorPresenter(IView view)
                 : base(view)

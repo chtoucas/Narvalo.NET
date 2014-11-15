@@ -3,10 +3,9 @@
 namespace Narvalo.Mvp
 {
     using System;
-    //using System.Runtime.Serialization;
+    using System.Runtime.Serialization;
 
-    // FIXME_PCL: Serializable
-    //[Serializable]
+    [Serializable]
     public class PresenterBindingException : MvpException
     {
         public PresenterBindingException() { }
@@ -16,7 +15,7 @@ namespace Narvalo.Mvp
         public PresenterBindingException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        //protected PresenterBindingException(SerializationInfo info, StreamingContext context)
-        //    : base(info, context) { }
+        protected PresenterBindingException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -96,6 +96,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
         protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
+            Require.NotNull(binding, "binding");
+
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
 
             // TODO: Explain this.

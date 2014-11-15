@@ -3,10 +3,9 @@
 namespace Narvalo.Mvp
 {
     using System;
-    //using System.Runtime.Serialization;
+    using System.Runtime.Serialization;
 
-    // FIXME_PCL: Serializable
-    //[Serializable]
+    [Serializable]
     public class MvpException : Exception
     {
         public MvpException() { }
@@ -16,7 +15,7 @@ namespace Narvalo.Mvp
         public MvpException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        //protected MvpException(SerializationInfo info, StreamingContext context)
-        //    : base(info, context) { }
+        protected MvpException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

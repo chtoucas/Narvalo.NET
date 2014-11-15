@@ -44,6 +44,8 @@ namespace Narvalo.Autofac
 
         public void Release(IPresenter presenter)
         {
+            Require.NotNull(presenter, "presenter");
+
             var presenterKey = presenter.GetHashCode();
 
             var lifetimeScope = _lifetimeScopes[presenterKey];

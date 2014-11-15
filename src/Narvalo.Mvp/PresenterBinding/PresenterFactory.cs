@@ -61,7 +61,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 throw new PresenterBindingException(
                     String.Format(
                         CultureInfo.InvariantCulture,
-                        "An exception was thrown whilst trying to create an instance of {0}. Check the InnerException for more information.",
+                        "An exception was thrown whilst trying to create an instance of {0}. Check the inner exception for more information.",
                         presenterType.FullName),
                     originalException);
             }

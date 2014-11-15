@@ -25,7 +25,7 @@ namespace Narvalo.Mvp.Resolvers
                 throw new PresenterBindingException(
                     String.Format(
                         CultureInfo.InvariantCulture,
-                        @"When shared presenter binding is requested, the ""ViewType"" must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
+                        @"When shared presenter binding is requested, the view type must be explicitly specified. One of the bindings on ""{0}"" violates this restriction.",
                         viewType.FullName));
             }
 

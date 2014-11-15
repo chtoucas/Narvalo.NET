@@ -17,13 +17,15 @@ namespace Narvalo.Mvp.Web.Core
             : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates) { }
 
         // REVIEW: Prefers composition over extension?
-        public override Type Resolve(Type input)
+        public override Type Resolve(Type viewType)
         {
-            if (input.IsAspNetDynamicType()) {
-                return base.Resolve(input.BaseType);
+            Require.NotNull(viewType, "viewType");
+
+            if (viewType.IsAspNetDynamicType()) {
+                return base.Resolve(viewType.BaseType);
             }
             else {
-                return base.Resolve(input);
+                return base.Resolve(viewType);
             }
         }
     }

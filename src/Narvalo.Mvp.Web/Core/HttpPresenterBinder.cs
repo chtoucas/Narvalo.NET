@@ -32,6 +32,8 @@ namespace Narvalo.Mvp.Web.Core
 
         protected override void OnPresenterCreated(PresenterCreatedEventArgs args)
         {
+            Require.NotNull(args, "args");
+
             var presenter = args.Presenter as Internal.IHttpPresenter;
             if (presenter != null) {
                 presenter.HttpContext = new HttpContextWrapper(_context);

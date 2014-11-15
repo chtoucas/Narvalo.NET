@@ -7,6 +7,7 @@ namespace Narvalo.Mvp.Web.Core
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Narvalo.Mvp;
 
@@ -119,6 +120,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PreRenderComplete")]
         void ThrowIfClosed_()
         {
             if (_closed) {

@@ -20,6 +20,8 @@ namespace Narvalo.Mvp.Platforms
 
         public TSource With(params T[] values)
         {
+            Require.NotNull(values, "values");
+
             foreach (var value in values) {
                 _append(value);
             }
