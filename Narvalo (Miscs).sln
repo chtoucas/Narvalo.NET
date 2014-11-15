@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Build", "src\Narval
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Reliability", "src\Narvalo.Reliability\Narvalo.Reliability.csproj", "{47194837-888B-48DE-9514-CFA899564BBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playground\Playground.csproj", "{A4664A7E-72FF-4E56-8696-9E7EAFE66421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{47194837-888B-48DE-9514-CFA899564BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo.Edu</RootNamespace>
+    <AssemblyName>Narvalo.Edu</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fx\Fibonacci.cs" />
+    <Compile Include="Fx\Iteration.cs" />
+    <Compile Include="Fx\Iteration`2.cs" />
+    <Compile Include="Fx\Sequence.cs" />
+    <Compile Include="Fx\YCombinator.cs" />
+    <Compile Include="Linq\Bananas.cs" />
+    <Compile Include="Linq\IGroupingQuerySyntax`1.cs" />
+    <Compile Include="Linq\IOrderedQuerySyntax`1.cs" />
+    <Compile Include="Linq\IQuerySyntax.cs" />
+    <Compile Include="Linq\IQuerySyntax`1.cs" />
+    <Compile Include="Linq\Lenses.cs" />
+    <Compile Include="Monads\Action`%24.cs" />
+    <Compile Include="Monads\Cokunc`.cs" />
+    <Compile Include="Monads\Comonad`1.cs" />
+    <Compile Include="Monads\Kunc`%24.cs" />
+    <Compile Include="Monads\Kunc`.cs" />
+    <Compile Include="Monads\Monad.cs" />
+    <Compile Include="Monads\Monad`1.cs" />
+    <Compile Include="Monads\Monoid`1.cs" />
+    <Compile Include="Monads\Mu.cs" />
+    <Compile Include="Monads\NamespaceDoc.cs" />
+    <Compile Include="Monads\Samples\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\Comonad`1.cs" />
+    <Compile Include="Monads\Samples\Enumerable`1%24.cs" />
+    <Compile Include="Monads\Samples\Internal\Enumerable`1%24.cs" />
+    <Compile Include="Monads\Samples\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\MonadOr`1.cs" />
+    <Compile Include="Monads\Samples\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\MonadPlus`1.cs" />
+    <Compile Include="Monads\Samples\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\MonadValue`1.cs" />
+    <Compile Include="Monads\Samples\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Monads\Samples\MonadZero`1.cs" />
+    <Compile Include="Monads\Samples\Monad`1.cs" />
+    <Compile Include="Monads\Stubs.cs" />
+    <Compile Include="Monads\Stubs`1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\WebApplication.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Monads\Samples\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\Samples\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\Samples\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\Samples\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\Samples\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </None>
+    <None Include="Monads\Samples\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

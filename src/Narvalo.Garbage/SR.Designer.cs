@@ -61,6 +61,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exception: {0} {1} {2}..
+        /// </summary>
+        internal static string DebuggerLogger_MessageFormat {
+            get {
+                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A left Either has no right value..
         /// </summary>
         internal static string Either_LeftHasNoRightValue {

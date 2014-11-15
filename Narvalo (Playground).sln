@@ -21,11 +21,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playgroun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Garbage", "src\Narvalo.Garbage\Narvalo.Garbage.csproj", "{809C0DA5-9A01-4ADA-83A5-1A0494723594}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{D671EB5C-C5EA-4E35-8982-1524E708CCA6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core Libraries (read-only)", "Core Libraries (read-only)", "{D671EB5C-C5EA-4E35-8982-1524E708CCA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narrative", "src\Narrative\Narrative.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarking", "src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj", "{13CF906D-62BF-4962-8038-F54893A5F976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Benchmark", "src\Playground.Benchmark\Playground.Benchmark.csproj", "{D06F888D-9654-4D25-97BF-C92D5CBE4091}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Edu", "src\Narvalo.Edu\Narvalo.Edu.csproj", "{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Benchmarks", "src\Playground.Benchmarks\Playground.Benchmarks.csproj", "{D06F888D-9654-4D25-97BF-C92D5CBE4091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Narrative", "src\Narvalo.Narrative\Narvalo.Narrative.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +57,22 @@ Global
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BAC96E1-7EC9-4B96-B4D7-C542D2C869F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D06F888D-9654-4D25-97BF-C92D5CBE4091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D06F888D-9654-4D25-97BF-C92D5CBE4091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06F888D-9654-4D25-97BF-C92D5CBE4091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06F888D-9654-4D25-97BF-C92D5CBE4091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +81,6 @@ Global
 		{7B564B3C-CCCC-43CA-94B6-D375AA40F085} = {D671EB5C-C5EA-4E35-8982-1524E708CCA6}
 		{56E3969F-5066-4702-A670-4C35FBD97201} = {D671EB5C-C5EA-4E35-8982-1524E708CCA6}
 		{00388395-FC0D-4356-A1C8-9A9555B09943} = {D671EB5C-C5EA-4E35-8982-1524E708CCA6}
+		{13CF906D-62BF-4962-8038-F54893A5F976} = {D671EB5C-C5EA-4E35-8982-1524E708CCA6}
 	EndGlobalSection
 EndGlobal

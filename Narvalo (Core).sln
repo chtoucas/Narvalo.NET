@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Extras", "src\Narva
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Incubator", "src\Narvalo.Incubator\Narvalo.Incubator.csproj", "{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarking", "src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj", "{13CF906D-62BF-4962-8038-F54893A5F976}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playground\Playground.csproj", "{A4664A7E-72FF-4E56-8696-9E7EAFE66421}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 		{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A773EA9-D0BC-4A25-B43F-E238F52AA4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
