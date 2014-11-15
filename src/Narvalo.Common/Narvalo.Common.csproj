@@ -84,9 +84,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Narvalo.Tracer.cs">
-      <Link>Internal\Narvalo.Tracer.cs</Link>
-    </Compile>
     <Compile Include="ConvertTo.cs" />
     <Compile Include="DebugAssert.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -98,10 +95,6 @@
     <Compile Include="Internal\Benchmarker.cs" />
     <Compile Include="Internal\BenchmarkFactory.cs" />
     <Compile Include="Internal\BenchmarkFinder.cs" />
-    <Compile Include="Internal\IPresenter.cs" />
-    <Compile Include="Internal\PresenterBinderFactory.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>
@@ -118,66 +111,6 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mvp\CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\CommandLine\ICommand.cs" />
-    <Compile Include="Mvp\CommandLine\MvpBootstrapper.cs" />
-    <Compile Include="Mvp\CommandLine\MvpCommand.cs" />
-    <Compile Include="Mvp\CommandLine\MvpCommand`1.cs" />
-    <Compile Include="Mvp\CommandLine\PlatformServices.cs" />
-    <Compile Include="Mvp\CompositeView.cs" />
-    <Compile Include="Mvp\ICompositeView.cs" />
-    <Compile Include="Mvp\IMessageCoordinator.cs" />
-    <Compile Include="Mvp\IPresenter.cs" />
-    <Compile Include="Mvp\IPresenter`1.cs" />
-    <Compile Include="Mvp\IView.cs" />
-    <Compile Include="Mvp\IView`1.cs" />
-    <Compile Include="Mvp\MessageCoordinator.cs" />
-    <Compile Include="Mvp\MvpException.cs" />
-    <Compile Include="Mvp\Platforms\Appender`1.cs" />
-    <Compile Include="Mvp\Platforms\DefaultPlatformServices.cs" />
-    <Compile Include="Mvp\Platforms\IPlatformServices.cs" />
-    <Compile Include="Mvp\Platforms\LazyValueHolder`1.cs" />
-    <Compile Include="Mvp\Platforms\MvpBootstrapper`1.cs" />
-    <Compile Include="Mvp\Platforms\PlatformServicesVirtualProxy.cs" />
-    <Compile Include="Mvp\Platforms\Setter`1.cs" />
-    <Compile Include="Mvp\PresenterBindingAttribute.cs" />
-    <Compile Include="Mvp\PresenterBindingException.cs" />
-    <Compile Include="Mvp\PresenterBindingMode.cs" />
-    <Compile Include="Mvp\PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\PresenterBinding\CompositeViewFactory.cs" />
-    <Compile Include="Mvp\PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\PresenterBinding\ICompositeViewFactory.cs" />
-    <Compile Include="Mvp\PresenterBinding\IMessageCoordinatorFactory.cs" />
-    <Compile Include="Mvp\PresenterBinding\IPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\PresenterBinding\IPresenterFactory.cs" />
-    <Compile Include="Mvp\PresenterBinding\MessageCoordinatorFactory.cs" />
-    <Compile Include="Mvp\PresenterBinding\PresenterBinder.cs" />
-    <Compile Include="Mvp\PresenterBinding\PresenterBindingParameter.cs" />
-    <Compile Include="Mvp\PresenterBinding\PresenterCreatedEventArgs.cs" />
-    <Compile Include="Mvp\PresenterBinding\PresenterDiscoveryResult.cs" />
-    <Compile Include="Mvp\PresenterBinding\PresenterFactory.cs" />
-    <Compile Include="Mvp\PresenterOf`1.cs" />
-    <Compile Include="Mvp\Presenter`1.cs" />
-    <Compile Include="Mvp\Presenter`2.cs" />
-    <Compile Include="Mvp\Resolvers\BuildManager.cs" />
-    <Compile Include="Mvp\Resolvers\CachedCompositeViewTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\CachedPresenterBindingAttributesResolver.cs" />
-    <Compile Include="Mvp\Resolvers\CachedPresenterConstructorResolver.cs" />
-    <Compile Include="Mvp\Resolvers\CachedPresenterTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\CompositeViewModuleBuilder.cs" />
-    <Compile Include="Mvp\Resolvers\CompositeViewTypeBuilder.cs" />
-    <Compile Include="Mvp\Resolvers\CompositeViewTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\IBuildManager.cs" />
-    <Compile Include="Mvp\Resolvers\ICompositeViewTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\IPresenterBindingAttributesResolver.cs" />
-    <Compile Include="Mvp\Resolvers\IPresenterConstructorResolver.cs" />
-    <Compile Include="Mvp\Resolvers\IPresenterTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\PresenterBindingAttributesResolver.cs" />
-    <Compile Include="Mvp\Resolvers\PresenterConstructorResolver.cs" />
-    <Compile Include="Mvp\Resolvers\PresenterTypeResolver.cs" />
-    <Compile Include="Mvp\Resolvers\ResolverCache`3.cs" />
-    <Compile Include="Mvp\Resolvers\TypeKeyedResolverCache`1.cs" />
     <Compile Include="ParseTo.SimpleTypes.cs">
       <DependentUpon>ParseTo.cs</DependentUpon>
     </Compile>

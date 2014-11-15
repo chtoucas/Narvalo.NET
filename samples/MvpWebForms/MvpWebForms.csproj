@@ -138,14 +138,12 @@
     <Compile Include="Common\Views\WidgetsReadWriteModel.cs" />
     <Compile Include="Controls\AsyncTapControl.ascx.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncTapControl.ascx.designer.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
@@ -171,84 +169,72 @@
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CompositeView.aspx.designer.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.designer.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.designer.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.designer.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.designer.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.designer.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.designer.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.designer.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.designer.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
@@ -286,7 +272,6 @@
     </Compile>
     <Compile Include="PageView.aspx.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
@@ -338,13 +323,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
+      <Project>{f4e7c519-8c51-4f2f-a50e-1a478399c93c}</Project>
+      <Name>Narvalo.Mvp.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
-      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
-      <Name>Narvalo.Web</Name>
+    <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
+      <Name>Narvalo.Mvp</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

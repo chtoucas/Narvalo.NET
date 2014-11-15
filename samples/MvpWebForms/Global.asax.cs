@@ -4,8 +4,8 @@
     using System.Diagnostics;
     using System.Web;
     using Narvalo.Mvp.PresenterBinding;
-    using Narvalo.Web.Mvp;
-    using Narvalo.Web.Mvp.Core;
+    using Narvalo.Mvp.Web;
+    using Narvalo.Mvp.Web.Core;
 
     public class Global : HttpApplication
     {

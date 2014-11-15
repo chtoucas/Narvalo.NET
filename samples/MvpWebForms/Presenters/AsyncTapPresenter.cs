@@ -4,7 +4,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Narvalo.Mvp;
-    using Narvalo.Web.Mvp;
+    using Narvalo.Mvp.Web;
     using MvpWebForms.Views;
 
     public sealed class AsyncTapPresenter : HttpPresenterOf<AsyncModel>

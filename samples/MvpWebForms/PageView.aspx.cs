@@ -1,7 +1,7 @@
 ﻿namespace MvpWebForms
 {
     using Narvalo.Mvp;
-    using Narvalo.Web.Mvp;
+    using Narvalo.Mvp.Web;
     using MvpWebForms.Presenters;
     using MvpWebForms.Views;
 

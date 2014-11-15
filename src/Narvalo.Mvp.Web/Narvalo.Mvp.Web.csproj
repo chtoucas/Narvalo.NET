@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F4E7C519-8C51-4F2F-A50E-1A478399C93C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
+    <AssemblyName>Narvalo.Mvp.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisRuleSet>..\..\etc\Debug.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Narvalo.Mvp.Web.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <CodeAnalysisRuleSet>..\..\etc\Release.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Library.Mvp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
+    </Compile>
+    <Compile Include="..\common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Narvalo.Tracer.cs">
+      <Link>Internal\Narvalo.Tracer.cs</Link>
+    </Compile>
+    <Compile Include="Core\AspNetBuildManager.cs" />
+    <Compile Include="Core\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\AspNetMessageCoordinator.cs" />
+    <Compile Include="Core\AspNetMessageCoordinatorFactory.cs" />
+    <Compile Include="Core\AspNetPresenterTypeResolver.cs" />
+    <Compile Include="Core\HttpPresenterBinder.cs" />
+    <Compile Include="Core\PageAsyncTaskManager.cs" />
+    <Compile Include="Core\PageHost.cs" />
+    <Compile Include="Core\PlatformServices.cs" />
+    <Compile Include="HttpPresenterOf`1.cs" />
+    <Compile Include="HttpPresenter`1.cs" />
+    <Compile Include="HttpPresenter`2.cs" />
+    <Compile Include="IAsyncTaskManager.cs" />
+    <Compile Include="IHttpPresenter.cs" />
+    <Compile Include="Internal\HttpPresenterBinderFactory.cs" />
+    <Compile Include="Internal\IHttpPresenter.cs" />
+    <Compile Include="Internal\Type%24.cs" />
+    <Compile Include="MvpBootstrapper.cs" />
+    <Compile Include="MvpPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MvpPage`1.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MvpUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MvpUserControl`1.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
+      <Name>Narvalo.Mvp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Configuration;
-    using Narvalo.Web.Mvp;
+    using Narvalo.Mvp.Web;
     using MvpWebForms.Data;
     using MvpWebForms.Entities;
     using MvpWebForms.Views;

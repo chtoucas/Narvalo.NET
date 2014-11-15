@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Web.Mvp;
+    using Narvalo.Mvp.Web;
     using MvpWebForms.Entities;
     using MvpWebForms.Views;
 

@@ -3,7 +3,7 @@
     using System;
     using System.Threading;
     using Narvalo.Mvp;
-    using Narvalo.Web.Mvp;
+    using Narvalo.Mvp.Web;
     using MvpWebForms.Views;
 
     public sealed class AsyncApmPresenter : HttpPresenterOf<AsyncModel>

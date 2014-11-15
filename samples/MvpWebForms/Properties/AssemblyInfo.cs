@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("MvpWebForms")]
-[assembly: AssemblyDescription("Sample demo website for Narvalo.Web.Mvp.")]
+[assembly: AssemblyDescription("Sample demo website for Narvalo.Mvp.Web.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MvpWebForms")]

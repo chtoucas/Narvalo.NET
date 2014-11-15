@@ -98,9 +98,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Narvalo.Tracer.cs">
-      <Link>Internal\Narvalo.Tracer.cs</Link>
-    </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -130,38 +127,8 @@
     </Compile>
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Internal\HttpPresenterBinderFactory.cs" />
-    <Compile Include="Internal\IHttpPresenter.cs" />
-    <Compile Include="Internal\Type%24.cs" />
     <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
-    <Compile Include="Mvp\Core\AspNetBuildManager.cs" />
-    <Compile Include="Mvp\Core\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="Mvp\Core\AspNetMessageCoordinator.cs" />
-    <Compile Include="Mvp\Core\AspNetMessageCoordinatorFactory.cs" />
-    <Compile Include="Mvp\Core\AspNetPresenterTypeResolver.cs" />
-    <Compile Include="Mvp\Core\HttpPresenterBinder.cs" />
-    <Compile Include="Mvp\Core\PageAsyncTaskManager.cs" />
-    <Compile Include="Mvp\Core\PageHost.cs" />
-    <Compile Include="Mvp\Core\PlatformServices.cs" />
-    <Compile Include="Mvp\HttpPresenterOf`1.cs" />
-    <Compile Include="Mvp\HttpPresenter`1.cs" />
-    <Compile Include="Mvp\HttpPresenter`2.cs" />
-    <Compile Include="Mvp\IAsyncTaskManager.cs" />
-    <Compile Include="Mvp\IHttpPresenter.cs" />
-    <Compile Include="Mvp\MvpBootstrapper.cs" />
-    <Compile Include="Mvp\MvpPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mvp\MvpPage`1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mvp\MvpUserControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mvp\MvpUserControl`1.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />

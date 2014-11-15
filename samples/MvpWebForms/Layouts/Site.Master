@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
  <meta charset="utf-8" />
- <title>Narvalo.Web.Mvp Demo Site.</title>
+ <title>Narvalo.Mvp.Web Demo Site.</title>
  <link href="~/assets/screen.css" type="text/css" rel="stylesheet" />
 </head>
 <body>

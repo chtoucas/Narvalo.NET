@@ -3,8 +3,6 @@
  * Timestamp: 2014-05-21 09:54 +02:00
  */
 
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 // Version utilisée par le runtime.

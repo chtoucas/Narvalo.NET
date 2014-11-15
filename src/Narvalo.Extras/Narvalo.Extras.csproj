@@ -110,7 +110,6 @@
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
     <Compile Include="Castle\SqlExceptionInterceptor.cs" />
     <Compile Include="Castle\XmlExceptionInterceptor.cs" />
-    <Compile Include="Autofac\AutofacPresenterFactory.cs" />
     <Compile Include="Autofac\ContainerBuilder%24.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serilog\HttpLogEventEnricher.cs" />
@@ -128,10 +127,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Portable</Name>

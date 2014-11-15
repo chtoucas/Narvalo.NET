@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2944D621-7F6E-4792-94AD-0021C6B73981}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo.Mvp</RootNamespace>
+    <AssemblyName>Narvalo.Mvp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisRuleSet>..\..\etc\Debug.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Narvalo.Mvp.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\etc\Release.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Library.Mvp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
+    </Compile>
+    <Compile Include="..\common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Narvalo.Tracer.cs">
+      <Link>Internal\Narvalo.Tracer.cs</Link>
+    </Compile>
+    <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="CommandLine\ICommand.cs" />
+    <Compile Include="CommandLine\MvpBootstrapper.cs" />
+    <Compile Include="CommandLine\MvpCommand.cs" />
+    <Compile Include="CommandLine\MvpCommand`1.cs" />
+    <Compile Include="CommandLine\PlatformServices.cs" />
+    <Compile Include="CompositeView.cs" />
+    <Compile Include="ICompositeView.cs" />
+    <Compile Include="IMessageCoordinator.cs" />
+    <Compile Include="Internal\Enumerable`1%24.cs" />
+    <Compile Include="Internal\IPresenter.cs" />
+    <Compile Include="Internal\PresenterBinderFactory.cs" />
+    <Compile Include="IPresenter.cs" />
+    <Compile Include="IPresenter`1.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="IView`1.cs" />
+    <Compile Include="MessageCoordinator.cs" />
+    <Compile Include="MvpException.cs" />
+    <Compile Include="Platforms\Appender`1.cs" />
+    <Compile Include="Platforms\DefaultPlatformServices.cs" />
+    <Compile Include="Platforms\IPlatformServices.cs" />
+    <Compile Include="Platforms\LazyValueHolder`1.cs" />
+    <Compile Include="Platforms\MvpBootstrapper`1.cs" />
+    <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
+    <Compile Include="Platforms\Setter`1.cs" />
+    <Compile Include="PresenterBindingAttribute.cs" />
+    <Compile Include="PresenterBindingException.cs" />
+    <Compile Include="PresenterBindingMode.cs" />
+    <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\CompositeViewFactory.cs" />
+    <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\ICompositeViewFactory.cs" />
+    <Compile Include="PresenterBinding\IMessageCoordinatorFactory.cs" />
+    <Compile Include="PresenterBinding\IPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\IPresenterFactory.cs" />
+    <Compile Include="PresenterBinding\MessageCoordinatorFactory.cs" />
+    <Compile Include="PresenterBinding\PresenterBinder.cs" />
+    <Compile Include="PresenterBinding\PresenterBindingParameter.cs" />
+    <Compile Include="PresenterBinding\PresenterCreatedEventArgs.cs" />
+    <Compile Include="PresenterBinding\PresenterDiscoveryResult.cs" />
+    <Compile Include="PresenterBinding\PresenterFactory.cs" />
+    <Compile Include="PresenterOf`1.cs" />
+    <Compile Include="Presenter`1.cs" />
+    <Compile Include="Presenter`2.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\BuildManager.cs" />
+    <Compile Include="Resolvers\CachedCompositeViewTypeResolver.cs" />
+    <Compile Include="Resolvers\CachedPresenterBindingAttributesResolver.cs" />
+    <Compile Include="Resolvers\CachedPresenterConstructorResolver.cs" />
+    <Compile Include="Resolvers\CachedPresenterTypeResolver.cs" />
+    <Compile Include="Resolvers\CompositeViewModuleBuilder.cs" />
+    <Compile Include="Resolvers\CompositeViewTypeBuilder.cs" />
+    <Compile Include="Resolvers\CompositeViewTypeResolver.cs" />
+    <Compile Include="Resolvers\IBuildManager.cs" />
+    <Compile Include="Resolvers\ICompositeViewTypeResolver.cs" />
+    <Compile Include="Resolvers\IPresenterBindingAttributesResolver.cs" />
+    <Compile Include="Resolvers\IPresenterConstructorResolver.cs" />
+    <Compile Include="Resolvers\IPresenterTypeResolver.cs" />
+    <Compile Include="Resolvers\PresenterBindingAttributesResolver.cs" />
+    <Compile Include="Resolvers\PresenterConstructorResolver.cs" />
+    <Compile Include="Resolvers\PresenterTypeResolver.cs" />
+    <Compile Include="Resolvers\ResolverCache`3.cs" />
+    <Compile Include="Resolvers\TypeKeyedResolverCache`1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

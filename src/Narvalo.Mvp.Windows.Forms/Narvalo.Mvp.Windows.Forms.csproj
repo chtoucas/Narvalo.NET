@@ -27,7 +27,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -40,7 +40,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -60,11 +60,14 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
-      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Library.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Library.Mvp.cs</Link>
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
       <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
+    </Compile>
+    <Compile Include="..\common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="PlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
@@ -96,13 +99,9 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Portable\Narvalo.Portable.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Portable</Name>
+    <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
+      <Name>Narvalo.Mvp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
