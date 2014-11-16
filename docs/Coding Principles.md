@@ -17,12 +17,12 @@ TODO
 Solutions
 ---------
 
-- Narvalo (Core).sln, contains the core libraries.
-- Narvalo (Miscs).sln, containes libraries that do not depend on the core
-  libraries.
+- Narvalo (Core).sln, core libraries.
+- Narvalo (Miscs).sln, misc libraries (do not depend on the core
+  libraries).
 - Narvalo (Mvp).sln, all MVP related libraries (do not depend on the core
   libraries).
-- Narvalo (Playground).sln, a place "fourre-tout".
+- Narvalo (Playground).sln, "fourre-tout".
 
 
 Creating a new project
@@ -65,17 +65,19 @@ Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
 For test projects, simply unselect all rules (for now).
 
 Edit the project file and add the following lines:
-    <PropertyGroup>
-      ...
-      <SourceAnalysisOverrideSettingsFile>..\..\etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-      <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
-      ...
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(ReportsDir)' != ''">
-      <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
-      <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    </PropertyGroup>
-    <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
+```xml
+<PropertyGroup>
+  ...
+  <SourceAnalysisOverrideSettingsFile>..\..\etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+  <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
+  ...
+</PropertyGroup>
+<PropertyGroup Condition="'$(ReportsDir)' != ''">
+  <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
+  <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
+</PropertyGroup>
+<Import Project="..\..\scripts\Narvalo.stylecop.targets" />
+```
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
 
@@ -83,17 +85,13 @@ Permanently disabled rules:
 - SA1101:PrefixLocalCallsWithThis
 - SA1121:UseBuiltInTypeAlias
 - SA1126:PrefixCallsCorrectly
-
 - SA1306:FieldNamesMustBeginWithLowerCaseLetter
 - SA1309:FieldNamesMustNotBeginWithUnderscore
 - SA1310:FieldNamesMustNotContainUnderscore
-
 - SA1400:AccessModifierMustBeDeclared
-
 - SA1500:CurlyBracketsForMultiLineStatementsMustNotShareLine
 - SA1501:StatementMustNotBeOnASingleLine
 - SA1502:ElementMustNotBeOnASingleLine
-
 - SA1634:FileHeaderMustShowCopyright
 
 Temporary disabled documentation rules:
