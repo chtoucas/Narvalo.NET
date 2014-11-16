@@ -1,11 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.DocuMaker.Weavers
 {
-    using System.Runtime.CompilerServices;
-
-    [CompilerGeneratedAttribute]
-    class NamespaceDoc
+    public interface IWeaver<in T>
     {
+        void Weave(T source);
     }
 }

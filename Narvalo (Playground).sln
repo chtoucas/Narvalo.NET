@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Edu", "src\Narvalo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Benchmarks", "src\Playground.Benchmarks\Playground.Benchmarks.csproj", "{D06F888D-9654-4D25-97BF-C92D5CBE4091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Narrative", "src\Narvalo.Narrative\Narvalo.Narrative.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.DocuMaker", "src\Narvalo.DocuMaker\Narvalo.DocuMaker.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
