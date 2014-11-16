@@ -9,15 +9,15 @@ namespace Narvalo.DocuMaker.Templating
     [Serializable]
     public class TemplateException : DocuMakerException
     {
-        public TemplateException() : base() { ; }
+        public TemplateException() : base() { }
 
-        public TemplateException(string message) : base(message) { ; }
+        public TemplateException(string message) : base(message) { }
 
         public TemplateException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected TemplateException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
 
         public int Column { get; set; }
 

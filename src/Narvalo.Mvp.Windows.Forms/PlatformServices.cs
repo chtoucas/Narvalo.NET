@@ -34,7 +34,7 @@ namespace Narvalo.Mvp.Windows.Forms
                     () => new CompositePresenterDiscoveryStrategy(
                         new IPresenterDiscoveryStrategy[] {
                             new AttributeBasedPresenterDiscoveryStrategy(),
-                            new DefaultConventionBasedPresenterDiscoveryStrategy()}));
+                            new DefaultConventionBasedPresenterDiscoveryStrategy() }));
             }
         }
     }

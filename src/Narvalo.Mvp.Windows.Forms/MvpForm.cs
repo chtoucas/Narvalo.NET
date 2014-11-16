@@ -23,7 +23,6 @@ namespace Narvalo.Mvp.Windows.Forms
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) {
                 // Remark: We can not use the "DesignMode" property in the constructor.
                 // See http://stackoverflow.com/questions/1774689/how-to-have-code-in-the-constructor-that-will-not-be-executed-at-design-time-by
-
                 _presenterBinder = PresenterBinderFactory.Create(this);
                 _presenterBinder.PerformBinding();
             }

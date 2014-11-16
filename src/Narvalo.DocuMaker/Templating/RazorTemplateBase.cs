@@ -11,7 +11,6 @@ namespace Narvalo.DocuMaker.Templating
     // A mix of codes borrowed from Nocco and RazorEngine.
     // Cf.
     // https://github.com/Antaris/RazorEngine/blob/master/src/Core/RazorEngine.Core/Templating/TemplateBase.cs
-
     public abstract class RazorTemplateBase
     {
         readonly StringBuilder _buffer;

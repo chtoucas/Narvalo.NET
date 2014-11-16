@@ -26,7 +26,7 @@ namespace Narvalo.DocuMaker.Weavers
 
             foreach (var item in sources) {
                 _processor.Weave(item);
-            };
+            }
         }
     }
 }

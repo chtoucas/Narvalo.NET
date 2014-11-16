@@ -24,6 +24,7 @@ namespace Narvalo.Mvp.CommandLine
         }
 
         public event EventHandler Completed;
+
         public event EventHandler Load;
 
         public bool ThrowIfNoPresenterBound

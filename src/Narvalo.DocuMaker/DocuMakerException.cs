@@ -8,14 +8,14 @@ namespace Narvalo.DocuMaker
     [Serializable]
     public class DocuMakerException : Exception
     {
-        public DocuMakerException() : base() { ; }
+        public DocuMakerException() : base() { }
 
-        public DocuMakerException(string message) : base(message) { ; }
+        public DocuMakerException(string message) : base(message) { }
 
         public DocuMakerException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected DocuMakerException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
     }
 }

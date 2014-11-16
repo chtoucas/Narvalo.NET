@@ -16,7 +16,6 @@ namespace Narvalo.DocuMaker.Parsing
     // For compiled assemblies
     // http://ccimetadata.codeplex.com/
     // http://www.mono-project.com/Cecil
-
     public class SimpleParser : IParser
     {
         static readonly Regex IgnoreRegex_ = new Regex(@"^\s*(?:/\*|\*/|////)", RegexOptions.Compiled);

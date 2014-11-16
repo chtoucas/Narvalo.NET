@@ -1,6 +1,17 @@
 Coding Principles
 =================
 
+TODO
+----
+
+- Fix MSBuild StyleCop.
+- Fix MSBuild scripts.
+- Review all SuppressMessage directives.
+- Enable StyleCop for test libraries.
+- Replace all empty method with "Blank line...".
+- Review StyleCop settings.
+- Remove NuGet.exe from repository.
+
 
 Creating a new project
 ----------------------
@@ -39,6 +50,8 @@ In all modes:
 ### Configure StyleCop.
 
 Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
+For test projects, simply unselect all rules (for now).
+
 Edit the project file and add the following lines:
     <PropertyGroup>
       ...

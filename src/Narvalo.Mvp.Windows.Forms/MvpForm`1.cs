@@ -26,7 +26,10 @@ namespace Narvalo.Mvp.Windows.Forms
                 return _model;
             }
 
-            set { _model = value; }
+            set
+            {
+                _model = value;
+            }
         }
     }
 }

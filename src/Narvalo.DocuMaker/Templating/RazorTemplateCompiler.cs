@@ -66,7 +66,7 @@ namespace Narvalo.DocuMaker.Templating
             };
 
             var templateAssembly = typeof(RazorTemplateBase).Assembly
-                .CodeBase.Replace("file:///", "");
+                .CodeBase.Replace("file:///", String.Empty);
 
             compilerParams.ReferencedAssemblies.Add(templateAssembly);
             compilerParams.ReferencedAssemblies.Add("System.Web.dll");

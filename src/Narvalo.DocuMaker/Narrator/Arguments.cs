@@ -21,7 +21,11 @@ namespace Narvalo.DocuMaker.Narrator
         [Option('n', "dry-run")]
         public bool DryRun
         {
-            get { return _dryRun; }
+            get
+            {
+                return _dryRun;
+            }
+
             set
             {
                 _dryRunSet = true;
@@ -32,7 +36,11 @@ namespace Narvalo.DocuMaker.Narrator
         [Option('X', "parallel")]
         public bool RunInParallel
         {
-            get { return _runInParallel; }
+            get
+            {
+                return _runInParallel;
+            }
+
             set
             {
                 _runInParallelSet = true;

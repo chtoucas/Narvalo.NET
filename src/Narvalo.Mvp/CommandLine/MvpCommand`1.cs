@@ -20,7 +20,10 @@ namespace Narvalo.Mvp.CommandLine
                 return _model;
             }
 
-            set { _model = value; }
+            set
+            {
+                _model = value;
+            }
         }
     }
 }
