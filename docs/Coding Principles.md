@@ -1,18 +1,6 @@
 Coding Principles
 =================
 
-TODO
-----
-
-- Fix MSBuild StyleCop.
-- Fix MSBuild scripts.
-- Migrate from psake to Fake.
-- Review all SuppressMessage directives.
-- Enable StyleCop for test libraries.
-- Replace all empty method with "Blank line...".
-- Review StyleCop settings.
-- Remove NuGet.exe from repository.
-
 
 Solutions
 ---------
@@ -24,11 +12,9 @@ Solutions
   libraries).
 - Narvalo (Playground).sln, "fourre-tout".
 
+### Creating a new project
 
-Creating a new project
-----------------------
-
-### Add relevant files as linked files to the "Properties" folder.
+#### Add relevant files as linked files to the "Properties" folder.
 
 - Shared infos: "etc\AssemblyInfo.Common.cs"
 - Library specific infos:
@@ -43,7 +29,7 @@ Creating a new project
   with build action "CodeAnalysisDictionary"
 - Strong Name Key: "etc\Narvalo.snk"
 
-### Edit the project Properties.
+#### Edit the project Properties.
 
 In Debug mode:
 - "Build", treat all warnings as errors
@@ -59,7 +45,7 @@ In Release mode:
 In all modes:
 - "Signing", sign the assembly
 
-### Configure StyleCop.
+#### Configure StyleCop.
 
 Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
 For test projects, simply unselect all rules (for now).
@@ -78,6 +64,16 @@ Edit the project file and add the following lines:
 </PropertyGroup>
 <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
 ```
+
+
+Publishing
+----------
+
+
+Appendices
+----------
+
+### StyleCop Rules
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
 
@@ -108,9 +104,7 @@ Temporary disabled documentation rules:
 - SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText
 - SA1650:ElementDocumentationMustBeSpelledCorrectly
 
-
-Strong Name Key
----------------
+### Strong Name Key
 
 Create the key pair: `sn -k Application.snk`.
 
