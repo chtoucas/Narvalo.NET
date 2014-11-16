@@ -32,7 +32,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\..\etc\Release.ruleset</CodeAnalysisRuleSet>
@@ -67,7 +67,9 @@
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Collections\Enumerable[Maybe]%24.cs" />
-    <Compile Include="Collections\Enumerable[Output]%24.cs" />
+    <Compile Include="Collections\Enumerable[Output]%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\Enumerator`1%24.cs" />
     <Compile Include="Collections\Identity.g.cs">
@@ -104,13 +106,18 @@
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Nullable`1%24.cs" />
-    <Compile Include="Fx\Output.cs" />
+    <Compile Include="Fx\Output.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
+      <SubType>Code</SubType>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Fx\Output`1.cs" />
+    <Compile Include="Fx\Output`1.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Fx\Unit.cs" />

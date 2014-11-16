@@ -85,7 +85,6 @@ namespace Narvalo.Web.Optimization
         /// Cette classe n'est pas compatible avec la présence d'élément "pre",
         /// de règle CSS telle que "white-space: pre;" ou de code JavaScript.
         /// </remarks>
-        /// </remarks>
         /// <param name="value">La chaîne de caractères à nettoyer.</param>
         /// <returns>La chaîne de caractères nettoyée.</returns>
         public string Bust(string value)

@@ -29,3 +29,5 @@ The most stable parts are:
 3. Tools
     - [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
       custom MSBuild tasks.
+
+All other included projects are either unfinished or severely broken.

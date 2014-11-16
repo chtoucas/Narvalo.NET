@@ -6,11 +6,23 @@ TODO
 
 - Fix MSBuild StyleCop.
 - Fix MSBuild scripts.
+- Migrate from psake to Fake.
 - Review all SuppressMessage directives.
 - Enable StyleCop for test libraries.
 - Replace all empty method with "Blank line...".
 - Review StyleCop settings.
 - Remove NuGet.exe from repository.
+
+
+Solutions
+---------
+
+- Narvalo (Core).sln, contains the core libraries.
+- Narvalo (Miscs).sln, containes libraries that do not depend on the core
+  libraries.
+- Narvalo (Mvp).sln, all MVP related libraries (do not depend on the core
+  libraries).
+- Narvalo (Playground).sln, a place "fourre-tout".
 
 
 Creating a new project
@@ -64,6 +76,39 @@ Edit the project file and add the following lines:
       <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
     </PropertyGroup>
     <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
+
+For a detailed description of the rules, check out http://www.stylecop.com/docs/.
+
+Permanently disabled rules:
+- SA1101:PrefixLocalCallsWithThis
+- SA1121:UseBuiltInTypeAlias
+- SA1126:PrefixCallsCorrectly
+
+- SA1306:FieldNamesMustBeginWithLowerCaseLetter
+- SA1309:FieldNamesMustNotBeginWithUnderscore
+- SA1310:FieldNamesMustNotContainUnderscore
+
+- SA1400:AccessModifierMustBeDeclared
+
+- SA1500:CurlyBracketsForMultiLineStatementsMustNotShareLine
+- SA1501:StatementMustNotBeOnASingleLine
+- SA1502:ElementMustNotBeOnASingleLine
+
+- SA1634:FileHeaderMustShowCopyright
+
+Temporary disabled documentation rules:
+- SA1600:ElementsMustBeDocumented
+- SA1601:PartialElementsMustBeDocumented
+- SA1602:EnumerationItemsMustBeDocumented
+- SA1604:ElementDocumentationMustHaveSummary
+- SA1606:ElementDocumentationMustHaveSummaryText
+- SA1611:ElementParametersMustBeDocumented
+- SA1615:ElementReturnValueMustBeDocumented
+- SA1618:GenericTypeParametersMustBeDocumented
+- SA1623:PropertySummaryDocumentationMustMatchAccessors
+- SA1633:FileMustHaveHeader
+- SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText
+- SA1650:ElementDocumentationMustBeSpelledCorrectly
 
 
 Strong Name Key

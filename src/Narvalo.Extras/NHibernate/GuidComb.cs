@@ -1,20 +1,19 @@
-﻿namespace Narvalo.NHibernate
+﻿// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
+// https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Id/GuidCombGenerator.cs
+namespace Narvalo.NHibernate
 {
     using System;
 
     /// <summary>
-    /// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
-    /// https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Id/GuidCombGenerator.cs
-    /// 
     /// An <see cref="IIdentifierGenerator" /> that generates <see cref="System.Guid"/> values 
     /// using a strategy suggested Jimmy Nilsson's 
     /// <a href="http://www.informit.com/articles/article.asp?p=25862">article</a>
-    /// on <a href="http://www.informit.com">informit.com</a>. 
+    /// on <a href="http://www.informit.com">informit.com</a>.
     /// </summary>
     /// <remarks>
     /// <p>
-    ///	This id generation strategy is specified in the mapping file as 
-    ///	<code>&lt;generator class="guid.comb" /&gt;</code>
+    /// This id generation strategy is specified in the mapping file as 
+    /// <code>&lt;generator class="guid.comb" /&gt;</code>
     /// </p>
     /// <p>
     /// The <c>comb</c> algorithm is designed to make the use of GUIDs as Primary Keys, Foreign Keys, 
