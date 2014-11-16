@@ -9,7 +9,8 @@ namespace Narvalo.Autofac
     [ModelBinderType(typeof(IPrincipal))]
     public class PrincipalModelBinder : IModelBinder
     {
-        public object BindModel(ControllerContext controllerContext,
+        public object BindModel(
+            ControllerContext controllerContext,
             ModelBindingContext bindingContext)
         {
             Require.NotNull(controllerContext, "controllerContext");

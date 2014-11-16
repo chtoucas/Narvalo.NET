@@ -12,15 +12,13 @@
         {
             return MayCreate(type, items)
                 .ValueOrThrow(
-                    () =>
-                    {
+                    () => {
                         var message = String.Format(
                             CultureInfo.CurrentCulture,
                             SR.MissingBenchComparisonAttribute,
                             type.Name);
                         return new BenchmarkException(message);
-                    }
-                );
+                    });
         }
 
         public static Maybe<BenchmarkComparison> MayCreate(

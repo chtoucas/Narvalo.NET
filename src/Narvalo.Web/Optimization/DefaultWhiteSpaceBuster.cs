@@ -55,10 +55,13 @@ namespace Narvalo.Web.Optimization
 
             // 1. On remplace toute combinaison d'espace et tabulation par un seul espace.
             string result = TabsOrMultipleSpacesRegex_.Replace(value, "\x20");
+
             // 2. On supprime tous les espaces et tabulations en début de ligne.
             result = LeadingSpacesRegex_.Replace(result, String.Empty);
+
             // 3. On supprime tous les espaces et tabulations en fin de ligne.
             result = TrailingSpacesRegex_.Replace(result, String.Empty);
+
             // 4. On remplace les retours à la ligne consécutifs par un seul retour à la ligne.
             result = MultipleNewLinesRegex_.Replace(result, "\r\n");
 

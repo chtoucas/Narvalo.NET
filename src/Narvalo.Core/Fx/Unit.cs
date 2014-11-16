@@ -5,8 +5,8 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    // FIXME_PCL: Serializable
-    //[Serializable]
+    //// FIXME_PCL: Serializable
+    //// [Serializable]
     public struct Unit : IEquatable<Unit>
     {
         public static readonly Unit Single = new Unit();

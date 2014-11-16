@@ -77,30 +77,6 @@ namespace Narvalo.Web.Optimization
             span.ReplaceWith(builder);
         }
 
-        class Symbol_ : ISymbol
-        {
-            string _content;
-            SourceLocation _start = SourceLocation.Zero;
-
-            public string Content
-            {
-                get { return _content; }
-                set { _content = value; }
-            }
-
-            public SourceLocation Start { get { return _start; } }
-
-            public void ChangeStart(SourceLocation newStart)
-            {
-                _start = newStart;
-            }
-
-            public void OffsetStart(SourceLocation documentStart)
-            {
-                _start = documentStart;
-            }
-        }
-
         static bool IsMarkup_(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
@@ -160,6 +136,30 @@ namespace Narvalo.Web.Optimization
             }
 
             return content;
+        }
+
+        class Symbol_ : ISymbol
+        {
+            string _content;
+            SourceLocation _start = SourceLocation.Zero;
+
+            public string Content
+            {
+                get { return _content; }
+                set { _content = value; }
+            }
+
+            public SourceLocation Start { get { return _start; } }
+
+            public void ChangeStart(SourceLocation newStart)
+            {
+                _start = newStart;
+            }
+
+            public void OffsetStart(SourceLocation documentStart)
+            {
+                _start = documentStart;
+            }
         }
     }
 }

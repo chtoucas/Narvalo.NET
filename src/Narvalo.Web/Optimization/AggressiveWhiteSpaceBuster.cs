@@ -107,8 +107,10 @@ namespace Narvalo.Web.Optimization
             // WARNING: Dans la suite, l'ordre est important.
             // 1. On remplace tous les espaces blancs (éventuellement consécutifs) par un seul espace.
             string result = WhiteSpacesRegex_.Replace(value, "\x20");
+
             // 2. On supprime les espaces après certains crochets fermants : "XXX>   " -> "XXX>".
             result = SpaceAfterRightAngleBracketRegex_.Replace(result, "$1>");
+
             // 3. On supprime les espaces avant certains crochets ouvrants : 
             // "   <XXX" -> "<XXX" ou "   </XXX" -> "</XXX".
             result = SpaceBeforeLeftAngleBracketRegex_.Replace(result, "<$1");

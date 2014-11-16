@@ -1,19 +1,35 @@
 ﻿namespace Narvalo.NHibernate
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator.
-    /// Cf. http://www.informit.com/articles/article.aspx?p=25862&seqNum=7
+    /// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
+    /// https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Id/GuidCombGenerator.cs
+    /// 
+    /// An <see cref="IIdentifierGenerator" /> that generates <see cref="System.Guid"/> values 
+    /// using a strategy suggested Jimmy Nilsson's 
+    /// <a href="http://www.informit.com/articles/article.asp?p=25862">article</a>
+    /// on <a href="http://www.informit.com">informit.com</a>. 
     /// </summary>
+    /// <remarks>
+    /// <p>
+    ///	This id generation strategy is specified in the mapping file as 
+    ///	<code>&lt;generator class="guid.comb" /&gt;</code>
+    /// </p>
+    /// <p>
+    /// The <c>comb</c> algorithm is designed to make the use of GUIDs as Primary Keys, Foreign Keys, 
+    /// and Indexes nearly as efficient as ints.
+    /// </p>
+    /// <p>
+    /// This code was contributed by Donald Mull.
+    /// </p>
+    /// </remarks>
     public static class GuidComb
     {
         /// <summary>
         /// Generate a new <see cref="Guid"/> using the comb algorithm.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "NewComb")]
-        public static Guid NewComb()
+        public static Guid GenerateComb()
         {
             byte[] guidArray = Guid.NewGuid().ToByteArray();
 

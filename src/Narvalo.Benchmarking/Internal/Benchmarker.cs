@@ -34,9 +34,11 @@
             action();
 
             _timer.Reset();
+
             for (int i = 0; i < iterations; i++) {
                 action();
             }
+
             return _timer.ElapsedTime;
         }
 

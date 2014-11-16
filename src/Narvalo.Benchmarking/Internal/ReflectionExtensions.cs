@@ -18,25 +18,25 @@
 #endif
         }
 
-        //public static Maybe<ConstructorInfo> MayGetDefaultConstructor(Type type)
-        //{
-        //    return Maybe.Create(type.GetConstructor(Type.EmptyTypes));
-        //}
+        ////public static Maybe<ConstructorInfo> MayGetDefaultConstructor(Type type)
+        ////{
+        ////    return Maybe.Create(type.GetConstructor(Type.EmptyTypes));
+        ////}
 
-        // FIXME
-        //public static void GetObject(Type type)
-        //{
-        //    // Construction du type.
-        //    MayGetDefaultConstructor(type)
-        //        .WhenAny(c => { c.Invoke(null /* parameters */); });
-        //}
+        //// FIXME
+        ////public static void GetObject(Type type)
+        ////{
+        ////    // Construction du type.
+        ////    MayGetDefaultConstructor(type)
+        ////        .WhenAny(c => { c.Invoke(null /* parameters */); });
+        ////}
 
-        //public static bool IsStatic(Type type)
-        //{
-        //    // NB: At IL level any static class is abstract and sealed.
-        //    return MayGetDefaultConstructor(type).IsNone
-        //        && type.IsAbstract 
-        //        && type.IsSealed;
-        //}
+        ////public static bool IsStatic(Type type)
+        ////{
+        ////    // NB: At IL level any static class is abstract and sealed.
+        ////    return MayGetDefaultConstructor(type).IsNone
+        ////        && type.IsAbstract 
+        ////        && type.IsSealed;
+        ////}
     }
 }

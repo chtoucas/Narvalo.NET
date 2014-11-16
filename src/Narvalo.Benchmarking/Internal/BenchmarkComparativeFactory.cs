@@ -7,18 +7,18 @@
 
     static class BenchmarkComparativeFactory
     {
-        //public static BenchComparative Create(MethodInfo method)
-        //{
-        //    return MayCreate(method)
-        //        .ValueOrThrow(GetExceptionThunk(method.Name));
-        //}
+        ////public static BenchComparative Create(MethodInfo method)
+        ////{
+        ////    return MayCreate(method)
+        ////        .ValueOrThrow(GetExceptionThunk(method.Name));
+        ////}
 
-        // FIXME: Theory.
-        //public static BenchComparative Create<T>(MethodInfo method, T value)
-        //{
-        //    return MayCreate(method, value)
-        //        .ValueOrThrow(GetExceptionThunk(method.Name));
-        //}
+        //// FIXME: Theory.
+        ////public static BenchComparative Create<T>(MethodInfo method, T value)
+        ////{
+        ////    return MayCreate(method, value)
+        ////        .ValueOrThrow(GetExceptionThunk(method.Name));
+        ////}
 
         public static Maybe<BenchmarkComparative> MayCreate(MethodInfo method)
         {
@@ -39,16 +39,16 @@
 
         #region Membres privés.
 
-        //static Func<BenchException> GetExceptionThunk(string name)
-        //{
-        //    return () => {
-        //        var message = String.Format(
-        //            CultureInfo.CurrentCulture,
-        //            SR.MissingBenchComparativeAttribute,
-        //            name);
-        //        return new BenchException(message);
-        //    };
-        //}
+        ////static Func<BenchException> GetExceptionThunk(string name)
+        ////{
+        ////    return () => {
+        ////        var message = String.Format(
+        ////            CultureInfo.CurrentCulture,
+        ////            SR.MissingBenchComparativeAttribute,
+        ////            name);
+        ////        return new BenchException(message);
+        ////    };
+        ////}
 
         static string GetName(MethodInfo method, BenchmarkComparativeAttribute attr)
         {

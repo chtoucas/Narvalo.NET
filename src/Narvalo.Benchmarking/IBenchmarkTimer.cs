@@ -4,8 +4,8 @@ namespace Narvalo.Benchmarking
 
     public interface IBenchmarkTimer
     {
-        void Reset();
-
         Duration ElapsedTime { get; }
+
+        void Reset();
     }
 }

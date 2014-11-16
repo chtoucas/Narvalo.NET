@@ -7,19 +7,19 @@
 
     static class BenchmarkFactory
     {
-        //public static Benchmark Create(MethodInfo method)
-        //{
-        //    return MayCreate(method)
-        //        .ValueOrThrow(
-        //            () => {
-        //                var message = String.Format(
-        //                    CultureInfo.CurrentCulture,
-        //                    SR.MissingBenchmarkAttribute,
-        //                    method.Name);
-        //                return new BenchException(message);
-        //            }
-        //        );
-        //}
+        ////public static Benchmark Create(MethodInfo method)
+        ////{
+        ////    return MayCreate(method)
+        ////        .ValueOrThrow(
+        ////            () => {
+        ////                var message = String.Format(
+        ////                    CultureInfo.CurrentCulture,
+        ////                    SR.MissingBenchmarkAttribute,
+        ////                    method.Name);
+        ////                return new BenchException(message);
+        ////            }
+        ////        );
+        ////}
 
         public static Maybe<Benchmark> MayCreate(MethodInfo method)
         {

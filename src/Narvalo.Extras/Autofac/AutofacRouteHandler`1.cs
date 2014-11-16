@@ -5,6 +5,7 @@ using Autofac.Integration.Mvc;
 
 namespace Narvalo.Autofac
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Routing;
 

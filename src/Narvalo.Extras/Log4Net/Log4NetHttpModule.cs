@@ -14,10 +14,7 @@
             context.EndRequest += OnEndRequest_;
         }
 
-        public void Dispose()
-        {
-            ;
-        }
+        public void Dispose() { }
 
         void OnBeginRequest_(object sender, EventArgs e)
         {

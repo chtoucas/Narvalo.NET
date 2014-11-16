@@ -23,17 +23,6 @@ namespace Narvalo.Benchmarking
             _iterations = iterations;
         }
 
-        internal static BenchmarkMetric Create(Benchmark benchmark, Duration duration)
-        {
-            Require.NotNull(benchmark, "benchmark");
-
-            return new BenchmarkMetric(
-                benchmark.Name,
-                duration,
-                benchmark.Iterations
-            );
-        }
-
         public long CallsPerSecond
         {
             get { return NodaConstants.TicksPerSecond * Iterations / Duration.Ticks; }
@@ -49,6 +38,22 @@ namespace Narvalo.Benchmarking
         {
             get { return Duration.Ticks / Iterations; }
         }
+
+        #region Opérateurs.
+
+        /// <summary />
+        public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary />
+        public static bool operator !=(BenchmarkMetric left, BenchmarkMetric right)
+        {
+            return !left.Equals(right);
+        }
+
+        #endregion
 
         #region IEquatable<BenchMetric>
 
@@ -90,27 +95,21 @@ namespace Narvalo.Benchmarking
 
         #endregion
 
-        #region Opérateurs.
-
-        /// <summary />
-        public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)
-        {
-            return left.Equals(right);
-        }
-
-        /// <summary />
-        public static bool operator !=(BenchmarkMetric left, BenchmarkMetric right)
-        {
-            return !left.Equals(right);
-        }
-
-        #endregion
-
         public string ToString(IBenchmarkMetricFormatter formatter)
         {
             Require.NotNull(formatter, "fmt");
 
             return formatter.Format(CultureInfo.CurrentCulture, this);
+        }
+
+        internal static BenchmarkMetric Create(Benchmark benchmark, Duration duration)
+        {
+            Require.NotNull(benchmark, "benchmark");
+
+            return new BenchmarkMetric(
+                benchmark.Name,
+                duration,
+                benchmark.Iterations);
         }
     }
 }

@@ -24,6 +24,7 @@
             if (metric.Duration == Duration.Zero) {
                 return FormatInvalidMetric(cultureInfo, metric);
             }
+
             return FormatCore(cultureInfo, metric);
         }
 
