@@ -8,13 +8,13 @@ The .NET Standard Query Operators
 ### Restriction Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Where (*)             | Monad<T>.Where       | @Enumerable<T>.Filter
 
 ### Projection Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Select (*)            | Monad<T>.Select      | @Enumerable<T>.Map
 SelectMany            | Monad<T>.Bind        |
 (*)                   | @Monad<T>.SelectMany |
@@ -22,7 +22,7 @@ SelectMany            | Monad<T>.Bind        |
 ### Partitioning Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Take                  | -                    |
 Skip                  | -                    |
 TakeWhile             | -                    |
@@ -31,21 +31,21 @@ SkipWhile             | -                    |
 ### Join Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Join (*)              | @Monad<T>.Join       |
 GroupJoin (*)         | @Monad<T>.GroupJoin  |
 
 ### Concatenation Operator
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Concat                | @Monad<T>.Plus       |
 
 
 ### Ordering Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 OrderBy (*)           | ???                  |
 OrderByDescending (*) | ???                  |
 ThenBy                | ???                  |
@@ -55,13 +55,13 @@ Reverse               | -                    |
 ### Grouping Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 GroupBy (*)           | ???                  |
 
 ### Set Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Distinct              | -                    |
 Union                 | -                    |
 Intersect             | -                    |
@@ -70,7 +70,7 @@ Except                | -                    |
 ### Conversion Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 AsEnumerable          | -                    |
 ToArray               | -                    |
 ToList                | -                    |
@@ -82,13 +82,13 @@ Cast                  | ???                  |
 ### Equality Operator
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 SequenceEqual         | ??? Equals           |
 
 ### Element Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 First                 | -                    | @Enumerable<T>.FirstOrZero
 FirstOrDefault        | -                    | @Enumerable<T>.FirstOrZero
 Last                  | -                    | @Enumerable<T>.LastOrZero
@@ -102,7 +102,7 @@ DefaultIfEmpty        | ??? Monad w/Zero     |
 ### Generation Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Range                 | -                    |
 Repeat                | @Monad<T>.Repeat     |
 Empty                 | Monad<T>.Zero        |
@@ -110,7 +110,7 @@ Empty                 | Monad<T>.Zero        |
 ### Quantifiers
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Any                   | ???                  |
 All                   | ???                  |
 Contains              | ???                  |
@@ -118,7 +118,7 @@ Contains              | ???                  |
 ### Aggregate Operators
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Count                 | -                    |
 LongCount             | -                    |
 Sum                   | -                    | @Enumerable<Monad<T>>.Sum
@@ -131,13 +131,13 @@ Aggregate             | -                    | @Enumerable<T>.Fold
 ### New Operators in .NET 4
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Zip                   |                      | @Enumerable<T>.Zip
 
 ### Extensions to Linq
 
 Linq                  | Monad<T>             | Monadic generalisation of list operations
-----------------------+----------------------+-------------------------------------------
+--------------------- | -------------------- | ------------------------------------------
 Append                |                      | -
 Prepend               |                      | -
 AggregateBack         |                      | @Enumerable<T>.FoldBack
