@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project=".\xunit.runner.tasks" />
+  <ItemGroup>
+    <_XunitRunner Include="$(MSBuildThisFileDirectory)..\packages\xunit.1.9.2\lib\xunit.runner.msbuild.dll" />
+  </ItemGroup>
 
   <PropertyGroup>
     <_XunitXmlReport>$(_ReportsDir)xunit.xml</_XunitXmlReport>
     <_buildTimeFile>$(_BuildDir).buildTime</_buildTimeFile>
   </PropertyGroup>
+
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(_XunitRunner)" />
 
   <!-- ### Vérifications du résultat ### -->
 
@@ -14,7 +18,7 @@
   <Target Name="VerifyBuildOutputs" DependsOnTargets="GetPEVerify"
           Inputs="@(_BuildOutputs)"
           Outputs="$(_buildTimeFile)">
-    <Message Text="Verifying build outputs with PEVerify." Importance="Low" />
+    <Message Text="Verifying build outputs with PEVerify." Importance="High" />
 
     <!-- FIXME: On utilise ContinueOnError=false car pour une raison qui m'échappe pour le moment
         peverify échoue pour Narvalo.Web.Extras. -->

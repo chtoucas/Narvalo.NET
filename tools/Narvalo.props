@@ -1,69 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-  Ce fichier définit toutes les propriétés globales accessibles en lecture seule.
--->
-
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_RootDir>$(MSBuildThisFileDirectory)..\</_RootDir>
 
     <_EtcDir>$(_RootDir)etc\</_EtcDir>
     <_SourceDir>$(_RootDir)src\</_SourceDir>
-    <_TestDir>$(_RootDir)test\</_TestDir>
-    <_NuGetPackageDir>$(_RootDir)packages\</_NuGetPackageDir>
     <_PackageDir>$(_RootDir)_build\</_PackageDir>
   </PropertyGroup>
 
-  <!-- Répertoires temporaires créés au cours de la compilation. -->
+  <!-- Répertoires temporaires créés au cours de la compilation -->
   <PropertyGroup>
     <_BuildDir>$(_RootDir)_work\</_BuildDir>
     <_BaseOutDir>$(_BuildDir)bin\</_BaseOutDir>
     <_BaseIntermediateOutDir>$(_BuildDir)obj\</_BaseIntermediateOutDir>
     <_ReportsDir>$(_BuildDir)reports\</_ReportsDir>
-    <_StageDir>$(_BuildDir)stage\</_StageDir>
   </PropertyGroup>
-
-  <!-- Outils locaux -->
-  <PropertyGroup>
-    <_NuGetExe>$(_RootDir)nuget.exe</_NuGetExe>
-  </PropertyGroup>
-
-  <!-- Packages NuGet -->
-  <ItemGroup>
-    <_Packages Include="Narvalo.Build">
-      <Tools>
-        $(_OutDir)Narvalo.Build.dll;
-        $(_OutDir)Narvalo.Build.pdb;
-        $(_OutDir)Narvalo.Build.tasks
-      </Tools>
-    </_Packages>
-    <_Packages Include="Narvalo.Common">
-      <Libs>
-        $(_OutDir)Narvalo.Common.dll;
-        $(_OutDir)Narvalo.Common.pdb
-      </Libs>
-    </_Packages>
-    <_Packages Include="Narvalo.Web">
-      <Libs>
-        $(_OutDir)Narvalo.Web.dll;
-        $(_OutDir)Narvalo.Web.pdb
-      </Libs>
-    </_Packages>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_PackagesForMvp Include="Narvalo.Mvp">
-      <Libs>
-        $(_OutDir)Narvalo.Mvp.dll;
-        $(_OutDir)Narvalo.Mvp.pdb
-      </Libs>
-    </_PackagesForMvp>
-    <_PackagesForMvp Include="Narvalo.Mvp.Web">
-      <Libs>
-        $(_OutDir)Narvalo.Mvp.Web.dll;
-        $(_OutDir)Narvalo.Mvp.Web.pdb
-      </Libs>
-    </_PackagesForMvp>
-  </ItemGroup>
 
 </Project>

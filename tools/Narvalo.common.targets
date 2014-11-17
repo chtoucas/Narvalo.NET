@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-  Ce fichier contient toutes les directives communes.
--->
-
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project=".\Narvalo.props" />
   <Import Project=".\Narvalo.helpers.targets" />
-  <Import Project=".\Narvalo.common.tasks" />
 
   <PropertyGroup>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
@@ -32,9 +27,10 @@
     <BuildProperties>
       Configuration=$(Configuration);
       OutDir=$(_OutDir);
-      <!-- NB: D'après Microsoft.Common.targets, on doit utiliser "OutDir" plutôt qu'"OutputPath".
-           Pour les projets Web, choisir la même valeur pour "OutDir" et "OutputPath" permet
-           aussi d'éviter la création de "_PublishedWebsites". -->
+      <!--
+        D'après Microsoft.Common.targets, on doit utiliser "OutDir" plutôt qu'"OutputPath".
+        Pour les projets Web, choisir la même valeur pour "OutDir" et "OutputPath" permet
+        aussi d'éviter la création de "_PublishedWebsites". -->
       OutputPath=$(_OutDir);
       BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
       Platform=$(Platform);
@@ -48,61 +44,9 @@
     </SourceAnalyzeProperties>
   </PropertyGroup>
 
-  <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
+  <!-- Création du répertoire contenant les rapports produits au cours de la compilation -->
   <Target Name="CreateReportsDir">
     <MakeDir Directories="$(_ReportsDir)" Condition="!Exists($(_ReportsDir))" />
-  </Target>
-
-  <!-- Création du répertoire contenant les packages NuGet. -->
-  <Target Name="CreatePackageDir">
-    <MakeDir Directories="$(_PackageDir)" Condition="!Exists($(_PackageDir))" />
-  </Target>
-
-  <!-- Création du répertoire intermédiaire contenant les packages NuGet. -->
-  <Target Name="CreateStageDir">
-    <MakeDir Directories="$(_StageDir)" Condition="!Exists($(_StageDir))" />
-  </Target>
-
-  <!-- Création des packages NuGet -->
-  <!-- FIXME: GetVersionNumber -->
-  <Target Name="NuGetPackage" Outputs="%(_Packages.Identity)">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)%(_Packages.Identity)\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)%(_Packages.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)lib\net45"
-             Condition="'%(_Packages.Libs)' != ''" />
-    <Copy SourceFiles="%(_Packages.Libs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
-    <MakeDir Directories="$(_PackageStageDir)tools"
-             Condition="'%(_Packages.Tools)' != ''" />
-    <Copy SourceFiles="%(_Packages.Tools)" DestinationFolder="$(_PackageStageDir)tools" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
-  </Target>
-
-  <!-- FIXME: GetVersionNumber -->
-  <Target Name="NuGetPackageForMvp" Outputs="%(_PackagesForMvp.Identity)">
-    <PropertyGroup>
-      <_PackageStageDir>$(_StageDir)%(_PackagesForMvp.Identity)\</_PackageStageDir>
-      <_PackageSpec>$(_PackageStageDir)%(_PackagesForMvp.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)lib\net45"
-             Condition="'%(_PackagesForMvp.Libs)' != ''" />
-    <Copy SourceFiles="%(_PackagesForMvp.Libs)" DestinationFolder="$(_PackageStageDir)lib\net45" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)%(_PackagesForMvp.Identity).nuspec"
-      VersionNumber="$(_VersionNumberForMvp)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
   </Target>
 
 </Project>
