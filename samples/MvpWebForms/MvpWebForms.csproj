@@ -138,12 +138,14 @@
     <Compile Include="Common\Views\WidgetsReadWriteModel.cs" />
     <Compile Include="Controls\AsyncTapControl.ascx.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncTapControl.ascx.designer.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
@@ -169,72 +171,84 @@
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CompositeView.aspx.designer.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.designer.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.designer.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.designer.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.designer.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.designer.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.designer.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.designer.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.designer.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
@@ -272,6 +286,7 @@
     </Compile>
     <Compile Include="PageView.aspx.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
@@ -357,13 +372,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Activez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est le suivant : {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -13,5 +13,4 @@ using System.Runtime.InteropServices;
 #endif
 
 [assembly: CLSCompliant(true)]
-
 [assembly: ComVisible(false)]

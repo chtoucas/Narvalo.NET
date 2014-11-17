@@ -57,11 +57,11 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Library.cs">
-      <Link>Properties\AssemblyInfo.Library.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
+      <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
-      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Core.Version.cs">
+      <Link>Properties\AssemblyInfo.Core.Version.cs</Link>
     </Compile>
     <Compile Include="Apply.cs" />
     <Compile Include="BooleanStyles.cs" />

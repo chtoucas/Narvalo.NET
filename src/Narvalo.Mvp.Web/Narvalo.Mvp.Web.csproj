@@ -53,11 +53,11 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Library.Mvp.cs">
-      <Link>Properties\AssemblyInfo.Library.Mvp.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
+      <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Version.Mvp.cs">
-      <Link>Properties\AssemblyInfo.Version.Mvp.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Mvp.Version.cs">
+      <Link>Properties\AssemblyInfo.Mvp.Version.cs</Link>
     </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>

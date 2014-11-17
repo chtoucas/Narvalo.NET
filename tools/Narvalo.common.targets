@@ -63,45 +63,9 @@
     <MakeDir Directories="$(_StageDir)" Condition="!Exists($(_StageDir))" />
   </Target>
 
-  <!-- Récupération du numéro de version des assemblées .NET. -->
-  <Target Name="GetVersionNumber">
-    <GetVersion VersionInfoXml="$(_EtcDir)VersionInfo.xml">
-      <Output TaskParameter="VersionNumber" PropertyName="_VersionNumber" />
-    </GetVersion>
-  </Target>
-  <Target Name="GetVersionNumberForMvp">
-    <GetVersion VersionInfoXml="$(_EtcDir)VersionInfo.Mvp.xml">
-      <Output TaskParameter="VersionNumber" PropertyName="_VersionNumberForMvp" />
-    </GetVersion>
-  </Target>
-
-  <!-- Mise à jour du numéro de version des assemblées .NET. -->
-  <Target Name="UpdateVersionNumber">
-    <UpdateVersion
-      VersionInfoXml="$(_EtcDir)VersionInfo.xml"
-      AssemblyInfoTemplate="$(_EtcDir)AssemblyInfo.Template.cs"
-      AssemblyInfoFile="$(_EtcDir)AssemblyInfo.Version.cs"
-      Milestone="$(Milestone)">
-    </UpdateVersion>
-  </Target>
-  <Target Name="UpdateVersionNumberForMvp">
-    <UpdateVersion
-      VersionInfoXml="$(_EtcDir)VersionInfo.Mvp.xml"
-      AssemblyInfoTemplate="$(_EtcDir)AssemblyInfo.Template.cs"
-      AssemblyInfoFile="$(_EtcDir)AssemblyInfo.Version.Mvp.cs"
-      Milestone="$(Milestone)">
-    </UpdateVersion>
-  </Target>
-
-  <!-- Validation du numéro de version des assemblées .NET. -->
-  <Target Name="ValidateMilestone">
-    <Error Text="The parameter 'Milestone' must not be set to 'Build'."
-           Condition="'$(Milestone)' == 'Build'" />
-  </Target>
-
   <!-- Création des packages NuGet -->
-  <Target Name="NuGetPackage" DependsOnTargets="GetVersionNumber"
-          Outputs="%(_Packages.Identity)">
+  <!-- FIXME: GetVersionNumber -->
+  <Target Name="NuGetPackage" Outputs="%(_Packages.Identity)">
     <PropertyGroup>
       <_PackageStageDir>$(_StageDir)%(_Packages.Identity)\</_PackageStageDir>
       <_PackageSpec>$(_PackageStageDir)%(_Packages.Identity).nuspec</_PackageSpec>
@@ -122,8 +86,8 @@
     <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />
   </Target>
 
-  <Target Name="NuGetPackageForMvp" DependsOnTargets="GetVersionNumberForMvp"
-          Outputs="%(_PackagesForMvp.Identity)">
+  <!-- FIXME: GetVersionNumber -->
+  <Target Name="NuGetPackageForMvp" Outputs="%(_PackagesForMvp.Identity)">
     <PropertyGroup>
       <_PackageStageDir>$(_StageDir)%(_PackagesForMvp.Identity)\</_PackageStageDir>
       <_PackageSpec>$(_PackageStageDir)%(_PackagesForMvp.Identity).nuspec</_PackageSpec>

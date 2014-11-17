@@ -1,6 +1,7 @@
 TODO
 ====
 
+- Cleanup VS Projects.
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
 - Fix MSBuild StyleCop.
 - Fix MSBuild scripts.
@@ -10,6 +11,11 @@ TODO
 - Replace all empty method with "// Intentionally left blank.".
 - Review StyleCop settings.
 - Remove NuGet.exe from repository.
+- Re-enable Gendarme.
+- Nuget no-version for Nuget Commnand-Line / PSake / Fake / StyleCop / Gendarme
+  / xUnit runners?
+- Remove Markdown Deep
+
 
 Narvalo.Mvp
 -----------

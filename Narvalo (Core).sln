@@ -3,19 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2183403F-6794-4547-BEDA-A9A555CBB726}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Common", "src\Narvalo.Common\Narvalo.Common.csproj", "{7B564B3C-CCCC-43CA-94B6-D375AA40F085}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Web", "src\Narvalo.Web\Narvalo.Web.csproj", "{56E3969F-5066-4702-A670-4C35FBD97201}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "test\Narvalo.Facts\Narvalo.Facts.csproj", "{967FD938-F4FF-452B-9F9B-426D1F250BEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Core", "src\Narvalo.Core\Narvalo.Core.csproj", "{00388395-FC0D-4356-A1C8-9A9555B09943}"
 EndProject
@@ -26,6 +16,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarking", "src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj", "{13CF906D-62BF-4962-8038-F54893A5F976}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playground\Playground.csproj", "{A4664A7E-72FF-4E56-8696-9E7EAFE66421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0F5DD07C-8F90-4998-97B5-92991FFF2833}"
+	ProjectSection(SolutionItems) = preProject
+		docs\TODO.md = docs\TODO.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narvalo.Facts\Narvalo.Facts.csproj", "{967FD938-F4FF-452B-9F9B-426D1F250BEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1B5-0EE5-4BC9-AFCB-7A7128811DAB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +45,6 @@ Global
 		{56E3969F-5066-4702-A670-4C35FBD97201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56E3969F-5066-4702-A670-4C35FBD97201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56E3969F-5066-4702-A670-4C35FBD97201}.Release|Any CPU.Build.0 = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{00388395-FC0D-4356-A1C8-9A9555B09943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{00388395-FC0D-4356-A1C8-9A9555B09943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00388395-FC0D-4356-A1C8-9A9555B09943}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,8 +65,15 @@ Global
 		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4664A7E-72FF-4E56-8696-9E7EAFE66421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967FD938-F4FF-452B-9F9B-426D1F250BEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 	EndGlobalSection
 EndGlobal

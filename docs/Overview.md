@@ -1,6 +1,21 @@
 Overview
 ==========
 
+Project Layout
+--------------
+
+- `docs`
+- `etc`
+- `packages`
+- `samples`
+- `src`
+- `tests`
+- `tools`
+
+
+Solutions
+---------
+
 There are four solutions.
 
 ### Narvalo (Core).sln

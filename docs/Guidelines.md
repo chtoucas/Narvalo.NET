@@ -21,11 +21,12 @@ How to initiale a new project
     * for a MVP library: `etc\AssemblyInfo.Library.Mvp.cs`
     * for a test project: `etc\AssemblyInfo.Facts.cs`
 - Version informations:
+    * for a core library: `etc\AssemblyInfo.Version.cs`
     * for a MVP library: `etc\AssemblyInfo.Version.Mvp.cs`
-    * for other libraries: `etc\AssemblyInfo.Version.cs`
 - Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml`
   with build action _CodeAnalysisDictionary_
 - Strong Name Key: `etc\Narvalo.snk`
+- Cleanup AssemblyInfo.cs
 
 ### Edit the project Properties
 

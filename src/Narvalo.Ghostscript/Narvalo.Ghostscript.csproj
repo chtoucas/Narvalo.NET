@@ -54,11 +54,8 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Library.Miscs.cs">
-      <Link>Properties\AssemblyInfo.Library.Miscs.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Version.cs">
-      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    <Compile Include="..\..\etc\AssemblyInfo.Miscs.cs">
+      <Link>Properties\AssemblyInfo.Miscs.cs</Link>
     </Compile>
     <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
@@ -120,7 +117,7 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\scripts\Narvalo.stylecop.targets" />
+  <Import Project="..\..\tools\Narvalo.stylecop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

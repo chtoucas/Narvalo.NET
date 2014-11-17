@@ -8,4 +8,4 @@ get-module psake | remove-module
 .\.nuget\NuGet.exe install .nuget\packages.config -OutputDirectory packages -Verbosity quiet
 import-module (Get-ChildItem "$scriptDir\packages\psake.*\tools\psake.psm1" | Select-Object -First 1)
 
-exec { invoke-psake "$scriptDir\scripts\defaults.ps1" $task }
+exec { invoke-psake "$scriptDir\tools\defaults.ps1" $task }

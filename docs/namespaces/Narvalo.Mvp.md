@@ -16,12 +16,6 @@ See _LICENSE-WebFormsMvp.txt_ for license information.
 - Use `ConcurrentDictionary` instead of `Dictionary `for type caching.
 - Added basic (but usable) support for CommandLine application.
 
-### Inversion of Control
-
-Sample support for IOC (at least Autofac) is provided in src/Narvalo.Extras.
-Since it is identical to what is done in WebFormsMvp, I do not intend to make
-it an official package. Just copy and adapt the code from WebFormsMvp.
-The same applies to StructureMap, Castle or Unity.
 
 Narvalo.Mvp.Web
 ---------------
@@ -35,8 +29,19 @@ webformsmvp codebase.
 Since I don't see any value in `MvpHttpHandler` and `MvpWebService`,
 I dropped both.
 
+
 Narvalo.Mvp.Windows.Forms
 -------------------------
 
 Enhances Narvalo.Mvp to provide support for Windows Forms (not ready).
 
+
+Narvalo.Mvp.Extras
+------------------
+
+### Inversion of Control
+
+Narvalo.Mvp.Extras provides sample support for IOC (at least Autofac).
+Since it is identical to what is done in WebFormsMvp, I do not intend to make
+it an official package. Just copy and adapt the code from WebFormsMvp.
+The same applies to StructureMap, Castle or Unity.

@@ -22,9 +22,9 @@ The most stable parts are:
       a simple MVP framework largely inspired by
       [WebFormsMvp](https://github.com/webformsmvp/webformsmvp).
     - [Narvalo.Mvp.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web),
-      enhances `Narvalo.Mvp` to provide support for ASP.NET WebForms.
+      enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
     - [Narvalo.Mvp.Extras](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Extras),
-      Autofac goodies for `Narvalo.Mvp`.
+      Autofac goodies for Narvalo.Mvp.
 
 3. Tools
     - [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),

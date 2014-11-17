@@ -37,28 +37,10 @@ Task Test {
   MSBuild $options $project /t:Build '/p:AnalyzeSource=false;Analyze=false;RunTests=true'
 }
 
-Task Milestone -depends ReadMilestoneConfig {
-  MSBuild $options $project /t:Milestone $msproperties
-}
-Task MilestoneForMvp -depends ReadMilestoneConfig {
-  MSBuild $options $project /t:MilestoneForMvp $msproperties
-}
-
 Task Package {
   MSBuild $options $project /t:Package
 }
+
 Task PackageForMvp {
   MSBuild $options $project /t:PackageForMvp
-}
-
-Task ReadMilestoneConfig {
-  $configPath = $(Get-Location).Path + '\..\etc\Milestone.config'
-
-  [xml] $configXml = Get-Content -Path $configPath
-
-  [System.Xml.XmlElement] $config = $configXml.configuration
-
-  [string] $milestone = $config.Milestone
-
-  $script:msproperties = "/p:Milestone=$milestone";
 }

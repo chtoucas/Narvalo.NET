@@ -5,13 +5,8 @@
   <Import Project=".\Narvalo.common.targets" />
   <Import Project=".\Narvalo.tests.targets" />
 
-  <PropertyGroup>
-    <!-- Valeurs possibles : Major, Minor, Patch, Build. -->
-    <Milestone Condition="'$(Milestone)' == ''">Build</Milestone>
-  </PropertyGroup>
-
   <ItemGroup>
-    <ProjectsToBuild Include="$(_RootDir)Narvalo.sln">
+    <ProjectsToBuild Include="$(_RootDir)Narvalo (Core).sln">
       <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
     </ProjectsToBuild>
 
@@ -67,10 +62,6 @@
 
   <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
-  <!-- Création d'un nouveau numéro de version. -->
-  <Target Name="Milestone" DependsOnTargets="ValidateMilestone;UpdateVersionNumber" />
-  <Target Name="MilestoneForMvp" DependsOnTargets="ValidateMilestone;UpdateVersionNumberForMvp" />
-
   <!-- Création des packages NuGet. -->
   <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
   <Target Name="PackageForMvp" DependsOnTargets="$(PackageForMvpDependsOn)" />
@@ -86,7 +77,6 @@
 
   <PropertyGroup>
     <PackageDependsOn>
-      UpdateVersionNumber;
       Rebuild;
       CreateStageDir;
       CreatePackageDir;
@@ -95,7 +85,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageForMvpDependsOn>
-      UpdateVersionNumberForMvp;
       Rebuild;
       CreateStageDir;
       CreatePackageDir;
