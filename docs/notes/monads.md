@@ -302,7 +302,6 @@ References
 + [Lippert](http://ericlippert.com/category/monads/)
 + [Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
 + [Stephen Toub on the Task Comonad](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
-
 + [Haskell](http://www.haskell.org/onlinereport/monad.html)
 + [MonadPlus](http://www.haskell.org/haskellwiki/MonadPlus)
 + [MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal)

@@ -1,8 +1,6 @@
 _build/
 _work/
-tools/
-Narvalo.userprefs
-Narvalo.sln.metaproj*
+*.sln.metaproj*
 StyleCopViolations.xml
 
 # La suite est tirée de :

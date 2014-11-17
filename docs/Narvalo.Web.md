@@ -1,5 +1,8 @@
-﻿HTML Optimizations
-==================
+﻿Narvalo.Web Namespace
+=====================
+
+HTML Optimizations
+------------------
 
 Work related to HTML optimizations would have not been
 possible without other open source contributors. I owe a lot to this

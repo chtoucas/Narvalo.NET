@@ -8,10 +8,10 @@ Right now, a place for me to learn and test various ideas.
 The most stable parts are:
 
 1. Narvalo Core Libraries
-    - [Narvalo.Portable](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Portable),
+    - [Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
       PCL package.
     - [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
-      complements Narvalo.Portable.
+      complements Narvalo.Core.
     - [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
       Web centric utilities.
     - [Narvalo.Extras](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Extras),

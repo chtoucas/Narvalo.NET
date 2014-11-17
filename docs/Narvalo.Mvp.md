@@ -1,5 +1,5 @@
-﻿Model View Presenter
-====================
+﻿Narvalo.Mvp Namespace
+=====================
 
 Narvalo.Mvp
 -----------
@@ -39,17 +39,4 @@ Narvalo.Mvp.Windows.Forms
 -------------------------
 
 Enhances Narvalo.Mvp to provide support for Windows Forms (not ready).
-
-TODO (by order of priority)
----------------------------
-
-- Tests. We can start by porting the tests from WebFormsMvp.
-- Add support for WPF, not yet started.
-- REVIEW: Using custom presenter types per platform prevents the reuse
-  of presenters across different platforms. Maybe is it a necessary evil...?
-- Add support for Application Controller, Navigator, EventAggregator
- (not the same as cross-presenter communication).
-- Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
-  / ReactiveUI / MVVM Light?
-- Documentation and userguide.
 

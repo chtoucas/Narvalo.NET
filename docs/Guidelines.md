@@ -1,51 +1,50 @@
-Coding Principles
-=================
+Guidelines
+==========
 
 
-Solutions
----------
+Prerequisites
+-------------
 
-- Narvalo (Core).sln, core libraries.
-- Narvalo (Miscs).sln, misc libraries (do not depend on the core
-  libraries).
-- Narvalo (Mvp).sln, all MVP related libraries (do not depend on the core
-  libraries).
-- Narvalo (Playground).sln, "fourre-tout".
+- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- [StyleCop](https://stylecop.codeplex.com/)
 
-### Creating a new project
 
-#### Add relevant files as linked files to the "Properties" folder.
+How to initiale a new project
+-----------------------------
 
-- Shared infos: "etc\AssemblyInfo.Common.cs"
-- Library specific infos:
-    * for a core library: "etc\AssemblyInfo.Library.cs"
-    * for a "miscs" library: "etc\AssemblyInfo.Library.Miscs.cs"
-    * for a MVP library: "etc\AssemblyInfo.Library.Mvp.cs"
-    * for a test project: "etc\AssemblyInfo.Facts.cs"
-- Version infos:
-    * for a MVP library: "etc\AssemblyInfo.Version.Mvp.cs"
-    * for other libraries: "etc\AssemblyInfo.Version.cs"
-- Code Analysis dictionary: "etc\CodeAnalysisDictionary.xml"
-  with build action "CodeAnalysisDictionary"
-- Strong Name Key: "etc\Narvalo.snk"
+### Add relevant files as linked files to the "Properties" folder
 
-#### Edit the project Properties.
+- Shared informations: `etc\AssemblyInfo.Common.cs`
+- Library specific informations:
+    * for a core library: `etc\AssemblyInfo.Library.cs`
+    * for a misc library: `etc\AssemblyInfo.Library.Miscs.cs`
+    * for a MVP library: `etc\AssemblyInfo.Library.Mvp.cs`
+    * for a test project: `etc\AssemblyInfo.Facts.cs`
+- Version informations:
+    * for a MVP library: `etc\AssemblyInfo.Version.Mvp.cs`
+    * for other libraries: `etc\AssemblyInfo.Version.cs`
+- Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml`
+  with build action _CodeAnalysisDictionary_
+- Strong Name Key: `etc\Narvalo.snk`
+
+### Edit the project Properties
 
 In Debug mode:
-- "Build", treat all warnings as errors
-- "Build", check for arithmetic overflow/underflow
-- "Code Analysis", use "Narvalo Debug Rules"
+- "Build" panel, treat all warnings as errors.
+- "Build" panel, check for arithmetic overflow/underflow.
+- "Code Analysis" panel, use "Narvalo Debug Rules".
 
 In Release mode:
-- "Build", suppress compiler warnings 1591
-- "Build", treat all warnings as errors
-- "Build", output XML documentation file
-- "Code Analysis", use "Narvalo Release Rules"
+- "Build" panel, suppress compiler warnings 1591.
+- "Build" panel, treat all warnings as errors.
+- "Build" panel, output XML documentation file.
+- "Code Analysis" panel, use "Narvalo Release Rules" and enable Code Analysis
+  on Build.
 
-In all modes:
-- "Signing", sign the assembly
+For all modes:
+- "Signing" panel, sign the assembly using the "etc\Narvalo.snk" key.
 
-#### Configure StyleCop.
+### Configure StyleCop
 
 Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
 For test projects, simply unselect all rules (for now).
@@ -66,12 +65,11 @@ Edit the project file and add the following lines:
 ```
 
 
-Publishing
-----------
+Coding Style
+------------
 
-
-Appendices
-----------
+- Max line-width 100 characters.
+- Passes all StyleCop rules.
 
 ### StyleCop Rules
 
@@ -104,9 +102,17 @@ Temporary disabled documentation rules:
 - SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText
 - SA1650:ElementDocumentationMustBeSpelledCorrectly
 
+
+Publishing
+----------
+
+
+Appendices
+----------
+
 ### Strong Name Key
 
-Create the key pair: `sn -k Application.snk`.
+Create a key pair: `sn -k Application.snk`.
 
 Extract the public key: `sn -p Application.snk Application.pk`.
 

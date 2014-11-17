@@ -1,4 +1,4 @@
-﻿Going Functional
+﻿Functional Notes
 ================
 
 
