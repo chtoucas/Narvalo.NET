@@ -5,8 +5,11 @@ Guidelines
 Prerequisites
 -------------
 
-- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
-- [StyleCop](https://stylecop.codeplex.com/)
+[Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+
+Optional components:
+- [StyleCop](http://stylecop.codeplex.com) for source analysis integration
+- [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
 
 
 How to initiale a new project

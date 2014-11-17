@@ -1,7 +1,7 @@
 TODO
 ====
 
-- Cleanup VS Projects.
+- Cleanup VS Projects (remove stylecop).
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
 - Fix MSBuild StyleCop.
 - Fix MSBuild scripts.
