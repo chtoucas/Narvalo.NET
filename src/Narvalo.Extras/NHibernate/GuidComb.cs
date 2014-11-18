@@ -5,8 +5,7 @@ namespace Narvalo.NHibernate
     using System;
 
     /// <summary>
-    /// Generates <see cref="System.Guid"/> values 
-    /// using a strategy suggested Jimmy Nilsson's 
+    /// Generates <see cref="System.Guid"/> values using a strategy suggested Jimmy Nilsson's 
     /// <a href="http://www.informit.com/articles/article.asp?p=25862">article</a>
     /// on <a href="http://www.informit.com">informit.com</a>.
     /// </summary>

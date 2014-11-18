@@ -11,6 +11,7 @@ Prerequisites
 
 Optional components:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration
+  inside Visual Studio.
 - [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
 
 

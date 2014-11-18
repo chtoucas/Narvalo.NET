@@ -1,12 +1,10 @@
 TODO
 ====
 
-- Fix MSBuild scripts.
 - Cleanup VS Projects (remove stylecop).
 - Create Narvalo (All).sln (refactoring, NugGet updates) and Narvalo (NuGet).sln
 - NuGet pub script (in Fake or PowerShell)
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
-- Fix MSBuild StyleCop.
 - Migrate from psake to Fake.
 - Review all SuppressMessage directives.
 - Enable StyleCop for test libraries.

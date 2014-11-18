@@ -1,6 +1,4 @@
 _build/
-_work/
-*.sln.metaproj*
 StyleCopViolations.xml
 
 # La suite est tirée de :

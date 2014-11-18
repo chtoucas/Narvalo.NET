@@ -20,12 +20,12 @@
 @goto BuildCustom
 
 :BuildCustom
-%MSBuild% tools\Narvalo.proj /nologo /v:m /fl /flp:logfile=.\msbuild.log;verbosity=detailed;encoding=utf-8 /m /nr:false /t:%*
+%MSBuild% Narvalo.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false /t:%*
 @if %ERRORLEVEL% neq 0 @goto Failure
 @goto Success
 
 :BuildDefaults
-%MSBuild% tools\Narvalo.proj /nologo /v:m /fl /flp:logfile=.\msbuild.log;verbosity=detailed;encoding=utf-8 /m /nr:false
+%MSBuild% Narvalo.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false
 @if %ERRORLEVEL% neq 0 @goto Failure
 @goto Success
 

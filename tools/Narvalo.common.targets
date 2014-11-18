@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Each Visual Studio project imports this file. -->
   <PropertyGroup>
-    <RootDir>$(MSBuildThisFileDirectory)..\</RootDir>
+    <!-- $(SolutionDir) is only set inside Visual Studio. -->
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</SolutionDir>
 
-    <!--<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(RootDir)</SolutionDir>-->
-
-    <!-- Only enable Source Analysis in Release mode -->
+    <!-- Only enable Source Analysis in Release mode. -->
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisEnabled>
 
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
-    <SourceAnalysisOverrideSettingsFile>$(RootDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-
-    <!--
-    <CodeAnalysisRules>-Microsoft.Design#CA1006</CodeAnalysisRules>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    -->
+    <!-- In Release mode, we do not want a Build to fail because of StyleCop errors. -->
+    <SourceAnalysisTreatErrorsAsWarnings Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisTreatErrorsAsWarnings Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisOverrideSettingsFile>$(SolutionDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(NarvaloCustomBuild)' == 'true'">
-    <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
-
-    <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
+  <PropertyGroup Condition="'$(BuildFromNarvaloScript)' == 'true'">
+    <!-- Only when run from Narvalo.proj, $(AnalysisOutDir) is set. -->
+    <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
   </PropertyGroup>
 
   <!-- ### StyleCop ### -->
 
-  <ItemGroup>
-    <!-- FIXME: The StyleCop NuGet package does not include
-      StyleCop.CSharp.Rules.dll and the StyleCop.MSBuild package does too much
-      ugly stuff on the project file to fit my taste. -->
-    <_StyleCopAssemblyFile Include="C:\Program Files (x86)\StyleCop 4.7\StyleCop.dll" />
-    <!--<_StyleCopAssemblyFile Include="$(RootDir)packages\StyleCop.*\lib\*\StyleCop.dll" />-->
-  </ItemGroup>
+  <!--
+    The NuGet package for StyleCop does not include StyleCop.CSharp.Rules.dll.
+    There is a StyleCop.MSBuild package which has everything we need but we
+    do not add it directly to projects since it does ugly transforms
+    on the project file. A simple workaround is to add the StyleCop.MSBuild
+    package to the solution and import it included targets below.
 
-  <UsingTask TaskName="StyleCopTask" AssemblyFile="@(_StyleCopAssemblyFile)" />
-
-  <Import Project=".\StyleCop.targets" />
+    Now all projects depend on a specific version and when StyleCop.MSBuild
+    gets updated all projects will fail to load. This is not perfect but
+    at least we are immediately notified of the problem.
+  -->
+  <Import Project="$(SolutionDir)packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" />
 
   <Target Name="BeforeStyleCop"
           BeforeTargets="StyleCop"
@@ -52,11 +45,7 @@
   <Target Name="AfterStyleCop"
           AfterTargets="StyleCop"
           Condition="'$(StyleCopEnabled)' == 'true'">
-    <Message Text="StyleCop Analysis Complete -- $(StyleCopViolationCount) violation(s)"
+    <Message Text="StyleCop Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
              Importance="High" />
-
-    <Message Text="StyleCop Analysis Report for $(ProjectName): $(SourceAnalysisOutputFile)"
-             Importance="High"
-             Condition="'$(StyleCopViolationCount)' != '0'" />
   </Target>
 </Project>
