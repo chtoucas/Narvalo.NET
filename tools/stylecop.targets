@@ -1,22 +1,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Copie locale de "C:\Program Files (x86)\MSBuild\StyleCop\v4.7\StyleCop.Targets"
-    Modifications effectuées :
-    - On commente la ligne UsingTask ;
-    - On commente les surcharges BuildDependsOn & RebuildDependsOn.
+    Modifications effectuées : on commente la ligne UsingTask ;
    -->
-
-  <Import Project=".\stylecop.tasks" />
 
   <!-- Specify where tasks are implemented. -->
   <!--<UsingTask AssemblyFile="StyleCop.dll" TaskName="StyleCopTask"/>-->
 
-  <!--
   <PropertyGroup>
     <BuildDependsOn>$(BuildDependsOn);StyleCop</BuildDependsOn>
     <RebuildDependsOn>StyleCopForceFullAnalysis;$(RebuildDependsOn)</RebuildDependsOn>
   </PropertyGroup>
-  -->
 
   <!-- Define StyleCopForceFullAnalysis property. -->
   <PropertyGroup Condition="('$(SourceAnalysisForceFullAnalysis)' != '') and ('$(StyleCopForceFullAnalysis)' == '')">

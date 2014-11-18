@@ -1,52 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project=".\Narvalo.props" />
-  <Import Project=".\Narvalo.helpers.targets" />
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- NB: The StyleCop package does not include StyleCop.CSharp.Rules.dll
+      and the MSBuild package does some ugly stuff on your project file. -->
+    <_StyleCopAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\StyleCop.*\lib\*\StyleCop.dll" />
+  </ItemGroup>
+
+  <UsingTask TaskName="StyleCopTask" AssemblyFile="@(_StyleCopAssemblyFile)" />
+
+  <Import Project=".\StyleCop.targets" />
 
   <PropertyGroup>
-    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <Platform Condition="'$(Platform)' == ''">Any CPU</Platform>
-    <!-- TODO: À vérifier -->
-    <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
-    <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</SolutionDir>
 
-    <RunTests Condition="'$(RunTests)' != 'false'">true</RunTests>
-    <Analyze Condition="'$(Analyze)' != 'false'">true</Analyze>
-    <AnalyzeSource Condition="'$(AnalyzeSource)' != 'false'">true</AnalyzeSource>
+    <StyleCopEnabled Condition="'$(Configuration)' == 'Debug'">false</StyleCopEnabled>
+    <StyleCopEnabled Condition="'$(Configuration)' == 'Release'">true</StyleCopEnabled>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <_OutDir>$(_BaseOutDir)$(Configuration)\</_OutDir>
+  <PropertyGroup Condition="'$(ReportsDir)' != ''">
+    <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
   </PropertyGroup>
 
-  <!--
-    On essaie au mieux d'isoler l'environnement de compilation, ie de définir
-    des répertoires complètement séparés de ceux utilisés par VS.
-  -->
-  <PropertyGroup>
-    <BuildProperties>
-      Configuration=$(Configuration);
-      OutDir=$(_OutDir);
-      <!--
-        D'après Microsoft.Common.targets, on doit utiliser "OutDir" plutôt qu'"OutputPath".
-        Pour les projets Web, choisir la même valeur pour "OutDir" et "OutputPath" permet
-        aussi d'éviter la création de "_PublishedWebsites". -->
-      OutputPath=$(_OutDir);
-      BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
-      Platform=$(Platform);
-      BuildInParallel=$(BuildInParallel);
-      VisualStudioVersion=12.0;
-      ReportsDir=$(_ReportsDir)
-    </BuildProperties>
-    <SourceAnalyzeProperties>
-      $(BuildProperties);
-      StyleCopEnabled=true
-    </SourceAnalyzeProperties>
-  </PropertyGroup>
-
-  <!-- Création du répertoire contenant les rapports produits au cours de la compilation -->
-  <Target Name="CreateReportsDir">
-    <MakeDir Directories="$(_ReportsDir)" Condition="!Exists($(_ReportsDir))" />
+  <Target Name="BeforeStyleCop"
+          BeforeTargets="StyleCop"
+          Condition="'$(StyleCopEnabled)' == 'true'">
+    <Message Text="Running StyleCop Analysis on $(ProjectName)..." Importance="High" />
   </Target>
 
+  <Target Name="AfterStyleCop"
+          AfterTargets="StyleCop"
+          Condition="'$(StyleCopEnabled)' == 'true'">
+    <Message Text="Completed StyleCop Analysis on $(ProjectName)" Importance="High" />
+  </Target>
 </Project>

@@ -1,94 +1,178 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <Project ToolsVersion="12.0" DefaultTargets="Build"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project=".\Narvalo.common.targets" />
-  <Import Project=".\Narvalo.tests.targets" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="$(_RootDir)Narvalo (Core).sln">
-      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
-    </ProjectsToBuild>
-
-    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
-      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
-    </SourcesToAnalyze>
-    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Mvp\Narvalo.Mvp.csproj">
-      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
-    </SourcesToAnalyze>
-    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj">
-      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
-    </SourcesToAnalyze>
-    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web\Narvalo.Web.csproj">
-      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
-    </SourcesToAnalyze>
-    <SourcesToAnalyze Include="$(_SourceDir)Narvalo.Web.Extras\Narvalo.Web.Extras.csproj">
-      <AdditionalProperties>$(SourceAnalyzeProperties)</AdditionalProperties>
-    </SourcesToAnalyze>
+    <!-- TODO: Should not depend on xunit version -->
+    <_XunitAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
   </ItemGroup>
 
-  <!-- Restauration des packages NuGet. -->
-  <Target Name="RestorePackages">
-    <Exec Command="&quot;$(_NuGetExe)&quot; restore &quot;%(ProjectsToBuild.Identity)&quot; -Verbosity quiet" />
-  </Target>
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(_XunitAssemblyFile)" />
 
-  <!-- Nettoyage. -->
+  <!-- ### Build Configuration ### -->
+
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+
+    <!-- TODO: Check this-->
+    <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
+    <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_RootDir>$(MSBuildThisFileDirectory)..\</_RootDir>
+
+    <_SourceDir>$(_RootDir)src\</_SourceDir>
+    <_EtcDir>$(_RootDir)etc\</_EtcDir>
+
+    <!-- Répertoires temporaires créés au cours de la compilation -->
+    <_BuildDir>$(_RootDir)_work\</_BuildDir>
+    <_BaseOutDir>$(_BuildDir)bin\</_BaseOutDir>
+    <_BaseIntermediateOutDir>$(_BuildDir)obj\</_BaseIntermediateOutDir>
+    <_ReportsDir>$(_BuildDir)reports\</_ReportsDir>
+
+    <_OutDir>$(_BaseOutDir)$(Configuration)\</_OutDir>
+
+    <_BuildTimeFile>$(_BuildDir).buildTime</_BuildTimeFile>
+    <_XunitXmlReport>$(_ReportsDir)xunit.xml</_XunitXmlReport>
+
+    <_SourceAnalysisOverrideSettingsFile>$(_EtcDir)Settings.SourceAnalysis</_SourceAnalysisOverrideSettingsFile>
+    <_SourceAnalysisTreatErrorsAsWarnings>false</_SourceAnalysisTreatErrorsAsWarnings>
+
+    <!--
+    <CodeAnalysisRules>-Microsoft.Design#CA1006</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    -->
+  </PropertyGroup>
+
+  <!--
+    On essaie au mieux d'isoler l'environnement de compilation, ie de définir
+    des répertoires complètement séparés de ceux utilisés par VS.
+  -->
+  <PropertyGroup>
+    <BuildProperties>
+      Configuration=$(Configuration);
+      OutDir=$(_OutDir);
+      <!--
+        D'après Microsoft.Common.targets, on doit utiliser "OutDir" plutôt
+        qu'"OutputPath". Pour les projets Web, choisir la même valeur pour
+        "OutDir" et "OutputPath" permet aussi d'éviter la création
+        de "_PublishedWebsites".
+      -->
+      OutputPath=$(_OutDir);
+      BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
+      Platform=$(Platform);
+      BuildInParallel=$(BuildInParallel);
+      VisualStudioVersion=12.0;
+      <!-- REVIEW: Should be unecessary -->
+      StyleCopEnabled=true;
+      SourceAnalysisOverrideSettingsFile=$(_SourceAnalysisOverrideSettingsFile);
+      SourceAnalysisTreatErrorsAsWarnings=$(_SourceAnalysisTreatErrorsAsWarnings);
+      ReportsDir=$(_ReportsDir)
+    </BuildProperties>
+  </PropertyGroup>
+
+  <!-- Liste des projets -->
+  <ItemGroup>
+    <ProjectsToBuild Include="$(_SourceDir)\Narvalo.Core\Narvalo.Core.csproj">
+      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
+    </ProjectsToBuild>
+  </ItemGroup>
+
+  <!-- ### Public Targets ### -->
+
+  <!-- Nettoyage -->
   <Target Name="Clean">
-    <ItemGroup>
-      <_FilesToRemove Include="$(_BuildDir)**\*"/>
-      <_FilesToRemove Include="$(_PackageDir)**\*"/>
-    </ItemGroup>
-
-    <Delete Files="@(_FilesToRemove)" />
-
-    <RemoveDir Directories="$(_BuildDir);$(_PackageDir)" />
+    <MSBuild Projects="@(ProjectsToBuild)" Targets="Clean" />
+    <RemoveDir Directories="$(_BuildDir)" />
   </Target>
 
-  <!-- Vérification des règles de style. -->
-  <Target Name="StyleCop" Condition="'$(AnalyzeSource)' == 'true'"
-    DependsOnTargets="CreateReportsDir">
-    <MSBuild Projects="@(SourcesToAnalyze)" Targets="StyleCop" StopOnFirstFailure="true" />
-  </Target>
-
-  <!-- Compilation. -->
+  <!-- Compilation -->
   <Target Name="Build">
-    <MSBuild Projects="@(ProjectsToBuild)" Targets="Build" StopOnFirstFailure="true">
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Targets="Build"
+             StopOnFirstFailure="true">
       <Output ItemName="_BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
-  <Target Name="BeforeBuild" BeforeTargets="Build"
-          DependsOnTargets="EmitProjectSolution;RestorePackages;StyleCop" />
-  <Target Name="AfterBuild" AfterTargets="Build" DependsOnTargets="$(AfterBuildDependsOnTarget)" />
 
-  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+  <Target Name="BeforeBuild"
+          BeforeTargets="Build"
+          DependsOnTargets="_CreateReportsDir" />
 
-  <!-- Création des packages NuGet. -->
-  <Target Name="Package" DependsOnTargets="$(PackageDependsOn)" />
-  <Target Name="PackageForMvp" DependsOnTargets="$(PackageForMvpDependsOn)" />
+  <Target Name="AfterBuild"
+          AfterTargets="Build"
+          DependsOnTargets="$(AfterBuildDependsOnTarget)" />
 
   <ItemGroup>
-    <_AfterBuildTargets Include="Verify" Condition="'$(Analyze)' == 'true'"  />
-    <_AfterBuildTargets Include="RunUnitTests" Condition="'$(RunTests)' == 'true'" />
+    <_AfterBuildTargets Include="_PEVerify" />
+    <_AfterBuildTargets Include="_RunXunitTests" />
   </ItemGroup>
 
   <PropertyGroup>
     <AfterBuildDependsOnTarget>@(_AfterBuildTargets)</AfterBuildDependsOnTarget>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageDependsOn>
-      Rebuild;
-      CreateStageDir;
-      CreatePackageDir;
-      NuGetPackage
-    </PackageDependsOn>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PackageForMvpDependsOn>
-      Rebuild;
-      CreateStageDir;
-      CreatePackageDir;
-      NuGetPackageForMvp
-    </PackageForMvpDependsOn>
-  </PropertyGroup>
+  <!-- Recompilation -->
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+
+  <!-- ### Private Targets ### -->
+
+  <!--
+    Création du répertoire contenant les rapports produits
+    au cours de la compilation.
+  -->
+  <Target Name="_CreateReportsDir">
+    <MakeDir Directories="$(_ReportsDir)" Condition="!Exists($(_ReportsDir))" />
+  </Target>
+
+  <Target Name="_PEVerify"
+          DependsOnTargets="_GetPEVerify"
+          Inputs="@(_BuildOutputs)"
+          Outputs="$(_BuildTimeFile)">
+    <Message Text="Verifying build outputs with PEVerify." Importance="Low" />
+
+    <Exec Command="$(_PEVerifyExe) &quot;%(_BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+          ContinueOnError="false" />
+
+    <!-- NB: Garder cette commande en fin de directive au cas où une vérification échoue -->
+    <Touch Files="$(_BuildTimeFile)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="_GetPEVerify">
+    <GetFrameworkSdkPath>
+      <!-- Chemin vers la dernière version du SDK installée -->
+      <Output TaskParameter="Path" PropertyName="_SdkPath" />
+      <!--<Output TaskParameter="FrameworkSdkVersion40Path" PropertyName="_SdkPath" />-->
+    </GetFrameworkSdkPath>
+
+    <PropertyGroup>
+      <_NetFxTools>$(_SdkPath)Bin\NETFX 4.5.1 Tools\</_NetFxTools>
+      <_PEVerifyExe>&quot;$(_NetFxTools)peverify.exe&quot;</_PEVerifyExe>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Tests unitaires via Xunit. -->
+  <Target Name="_RunXunitTests"
+          DependsOnTargets="_CreateReportsDir"
+          Inputs="@(_BuildOutputs)"
+          Outputs="$(_XunitXmlReport)">
+    <Message Text="Running Xunit tests." Importance="Low" />
+
+    <ItemGroup>
+      <_TestAssemblies Include="%(_BuildOutputs.Identity)"
+                       Condition="'@(_BuildOutputs->EndsWith('Facts.dll'))' == 'true'" />
+    </ItemGroup>
+
+    <xunit Assemblies="@(_TestAssemblies)"
+           Xml="$(_XunitXmlReport)"
+           Condition="'@(_TestAssemblies)' != ''" />
+  </Target>
+
 </Project>

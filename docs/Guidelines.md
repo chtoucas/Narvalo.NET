@@ -5,7 +5,9 @@ Guidelines
 Prerequisites
 -------------
 
-[Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- Microsoft .NET 4.5.1 Developer Pack (?)
+- F# Compiler (?)
 
 Optional components:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration
@@ -53,19 +55,9 @@ For all modes:
 Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
 For test projects, simply unselect all rules (for now).
 
-Edit the project file and add the following lines:
+Edit the project file and add the following line:
 ```xml
-<PropertyGroup>
-  ...
-  <SourceAnalysisOverrideSettingsFile>..\..\etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-  <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
-  ...
-</PropertyGroup>
-<PropertyGroup Condition="'$(ReportsDir)' != ''">
-  <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
-  <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
-</PropertyGroup>
-<Import Project="..\..\scripts\Narvalo.stylecop.targets" />
+<Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
 
 
@@ -105,6 +97,18 @@ Temporary disabled documentation rules:
 - SA1633:FileMustHaveHeader
 - SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText
 - SA1650:ElementDocumentationMustBeSpelledCorrectly
+
+
+NuGet Updates
+-------------
+
+For package updates, use the Narvalo (All).sln solution.
+
+**WARNING** If the NuGet core framework is updated, do not forget to update
+`tools\NuGet\nuget.exe`:
+```
+tools\NuGet\nuget.exe update self
+```
 
 
 Publishing

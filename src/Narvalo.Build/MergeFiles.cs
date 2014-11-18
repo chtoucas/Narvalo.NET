@@ -18,7 +18,7 @@
     /// </example>
     /// <remarks>
     /// Il est possible de réaliser la même opération avec les outils de base de MSBuild.
-    /// <see cref="http://blogs.msdn.com/b/msbuild/archive/2005/09/29/475046.aspx"/>
+    /// Cf. http://blogs.msdn.com/b/msbuild/archive/2005/09/29/475046.aspx
     /// Dan provided an elegant answer. The first step is to create an ItemGroup
     /// with the files you want to concatenate:
     /// <code>

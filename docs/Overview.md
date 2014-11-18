@@ -16,7 +16,7 @@ Project Layout
 Solutions
 ---------
 
-There are four solutions.
+There are six solutions.
 
 ### Narvalo (Core).sln
 
@@ -52,3 +52,12 @@ of the core libraries.
 ### Narvalo (Playground).sln
 
 A "fourre-tout" of unfinished or broken codes.
+
+### Narvalo (All).sln
+
+This solution contains all projects. It is to be used for deep refactoring
+and installing NuGet packages updates.
+
+### Narvalo (NuGet).sln
+
+
