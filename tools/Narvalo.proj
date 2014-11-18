@@ -3,7 +3,7 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <ItemGroup>
-    <!-- TODO: Should not depend on xunit version -->
+    <!-- FIXME: Should not depend on xunit version -->
     <_XunitAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" />
   </ItemGroup>
 
@@ -13,9 +13,10 @@
 
   <PropertyGroup>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <!-- FIXME: For projects we must use "AnyCPU", and for solutions "Any CPU" -->
+    <Platform Condition="'$(Platform)' == ''">Any CPU</Platform>
 
-    <!-- TODO: Check this-->
+    <!-- REVIEW -->
     <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
     <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
   </PropertyGroup>
@@ -30,25 +31,11 @@
     <_BuildDir>$(_RootDir)_work\</_BuildDir>
     <_BaseOutDir>$(_BuildDir)bin\</_BaseOutDir>
     <_BaseIntermediateOutDir>$(_BuildDir)obj\</_BaseIntermediateOutDir>
-    <_ReportsDir>$(_BuildDir)reports\</_ReportsDir>
-
     <_OutDir>$(_BaseOutDir)$(Configuration)\</_OutDir>
 
+    <_ReportsDir>$(_BuildDir)reports\</_ReportsDir>
     <_BuildTimeFile>$(_BuildDir).buildTime</_BuildTimeFile>
     <_XunitXmlReport>$(_ReportsDir)xunit.xml</_XunitXmlReport>
-
-    <_SourceAnalysisOverrideSettingsFile>$(_EtcDir)Settings.SourceAnalysis</_SourceAnalysisOverrideSettingsFile>
-    <_SourceAnalysisTreatErrorsAsWarnings>false</_SourceAnalysisTreatErrorsAsWarnings>
-
-    <!--
-    <CodeAnalysisRules>-Microsoft.Design#CA1006</CodeAnalysisRules>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    -->
   </PropertyGroup>
 
   <!--
@@ -56,6 +43,7 @@
     des répertoires complètement séparés de ceux utilisés par VS.
   -->
   <PropertyGroup>
+    <!-- FIXME: Narvalo.Core does not go into "_work\bin\Release" -->
     <BuildProperties>
       Configuration=$(Configuration);
       OutDir=$(_OutDir);
@@ -69,31 +57,42 @@
       BaseIntermediateOutputPath=$(_BaseIntermediateOutDir);
       Platform=$(Platform);
       BuildInParallel=$(BuildInParallel);
+      <!-- FIXME: Should not depend on VS version -->
       VisualStudioVersion=12.0;
-      <!-- REVIEW: Should be unecessary -->
-      StyleCopEnabled=true;
-      SourceAnalysisOverrideSettingsFile=$(_SourceAnalysisOverrideSettingsFile);
-      SourceAnalysisTreatErrorsAsWarnings=$(_SourceAnalysisTreatErrorsAsWarnings);
+      NarvaloCustomBuild=true;
       ReportsDir=$(_ReportsDir)
     </BuildProperties>
   </PropertyGroup>
 
   <!-- Liste des projets -->
   <ItemGroup>
-    <ProjectsToBuild Include="$(_SourceDir)\Narvalo.Core\Narvalo.Core.csproj">
+    <!-- TODO: Add more projects/solutions -->
+    <ProjectsToBuild Include="$(_RootDir)Narvalo (Core).sln">
       <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
     </ProjectsToBuild>
+    <!--
+    <ProjectsToBuild Include="$(_SourceDir)Narvalo.Core\Narvalo.Core.csproj">
+      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
+    </ProjectsToBuild>
+    <ProjectsToBuild Include="$(_SourceDir)Narvalo.Common\Narvalo.Common.csproj">
+      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
+    </ProjectsToBuild>
+    <ProjectsToBuild Include="$(_SourceDir)Narvalo.Extras\Narvalo.Extras.csproj">
+      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
+    </ProjectsToBuild>
+    <ProjectsToBuild Include="$(_SourceDir)Narvalo.Web\Narvalo.Web.csproj">
+      <AdditionalProperties>$(BuildProperties)</AdditionalProperties>
+    </ProjectsToBuild>
+    -->
   </ItemGroup>
 
   <!-- ### Public Targets ### -->
 
-  <!-- Nettoyage -->
   <Target Name="Clean">
     <MSBuild Projects="@(ProjectsToBuild)" Targets="Clean" />
     <RemoveDir Directories="$(_BuildDir)" />
   </Target>
 
-  <!-- Compilation -->
   <Target Name="Build">
     <MSBuild Projects="@(ProjectsToBuild)"
              Targets="Build"
@@ -102,12 +101,25 @@
     </MSBuild>
   </Target>
 
+  <!--
+    WARNING: Do not use DependsOnTargets="Clean;Build;" as we need to call
+    each project target "Rebuild". For instance, the StyleCop target
+    overrides "Rebuild" for forcing full analysis but not "Build".
+  -->
+  <Target Name="Rebuild">
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Targets="Rebuild"
+             StopOnFirstFailure="true">
+      <Output ItemName="_BuildOutputs" TaskParameter="TargetOutputs" />
+    </MSBuild>
+  </Target>
+
   <Target Name="BeforeBuild"
-          BeforeTargets="Build"
+          BeforeTargets="Build;Rebuild"
           DependsOnTargets="_CreateReportsDir" />
 
   <Target Name="AfterBuild"
-          AfterTargets="Build"
+          AfterTargets="Build;Rebuild"
           DependsOnTargets="$(AfterBuildDependsOnTarget)" />
 
   <ItemGroup>
@@ -118,9 +130,6 @@
   <PropertyGroup>
     <AfterBuildDependsOnTarget>@(_AfterBuildTargets)</AfterBuildDependsOnTarget>
   </PropertyGroup>
-
-  <!-- Recompilation -->
-  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
   <!-- ### Private Targets ### -->
 
@@ -147,18 +156,19 @@
 
   <Target Name="_GetPEVerify">
     <GetFrameworkSdkPath>
-      <!-- Chemin vers la dernière version du SDK installée -->
+      <!-- Path to default version of the .NET SDK -->
       <Output TaskParameter="Path" PropertyName="_SdkPath" />
       <!--<Output TaskParameter="FrameworkSdkVersion40Path" PropertyName="_SdkPath" />-->
     </GetFrameworkSdkPath>
 
     <PropertyGroup>
+      <!-- REVIEW: Should not depend on tools version -->
       <_NetFxTools>$(_SdkPath)Bin\NETFX 4.5.1 Tools\</_NetFxTools>
       <_PEVerifyExe>&quot;$(_NetFxTools)peverify.exe&quot;</_PEVerifyExe>
     </PropertyGroup>
   </Target>
 
-  <!-- Tests unitaires via Xunit. -->
+  <!-- Xunit Tests -->
   <Target Name="_RunXunitTests"
           DependsOnTargets="_CreateReportsDir"
           Inputs="@(_BuildOutputs)"

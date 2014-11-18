@@ -1,36 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootDir>$(MSBuildThisFileDirectory)..\</RootDir>
+
+    <!--<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(RootDir)</SolutionDir>-->
+
+    <!-- Only enable Source Analysis in Release mode -->
+    <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisEnabled>
+
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisOverrideSettingsFile>$(RootDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+
+    <!--
+    <CodeAnalysisRules>-Microsoft.Design#CA1006</CodeAnalysisRules>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(NarvaloCustomBuild)' == 'true'">
+    <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
+
+    <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
+  </PropertyGroup>
+
+  <!-- ### StyleCop ### -->
+
   <ItemGroup>
-    <!-- NB: The StyleCop package does not include StyleCop.CSharp.Rules.dll
-      and the MSBuild package does some ugly stuff on your project file. -->
-    <_StyleCopAssemblyFile Include="$(MSBuildThisFileDirectory)..\packages\StyleCop.*\lib\*\StyleCop.dll" />
+    <!-- FIXME: The StyleCop NuGet package does not include
+      StyleCop.CSharp.Rules.dll and the StyleCop.MSBuild package does too much
+      ugly stuff on the project file to fit my taste. -->
+    <_StyleCopAssemblyFile Include="C:\Program Files (x86)\StyleCop 4.7\StyleCop.dll" />
+    <!--<_StyleCopAssemblyFile Include="$(RootDir)packages\StyleCop.*\lib\*\StyleCop.dll" />-->
   </ItemGroup>
 
   <UsingTask TaskName="StyleCopTask" AssemblyFile="@(_StyleCopAssemblyFile)" />
 
   <Import Project=".\StyleCop.targets" />
 
-  <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</SolutionDir>
-
-    <StyleCopEnabled Condition="'$(Configuration)' == 'Debug'">false</StyleCopEnabled>
-    <StyleCopEnabled Condition="'$(Configuration)' == 'Release'">true</StyleCopEnabled>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(ReportsDir)' != ''">
-    <SourceAnalysisOutputFile>$(ReportsDir)$(AssemblyName).StyleCopViolations.xml</SourceAnalysisOutputFile>
-    <CodeAnalysisLogFile>$(ReportsDir)$(AssemblyName).CodeAnalysisLog.xml</CodeAnalysisLogFile>
-  </PropertyGroup>
-
   <Target Name="BeforeStyleCop"
           BeforeTargets="StyleCop"
           Condition="'$(StyleCopEnabled)' == 'true'">
-    <Message Text="Running StyleCop Analysis on $(ProjectName)..." Importance="High" />
+    <Message Text="Running StyleCop Analysis on $(ProjectName)..." Importance="Low" />
   </Target>
 
   <Target Name="AfterStyleCop"
           AfterTargets="StyleCop"
           Condition="'$(StyleCopEnabled)' == 'true'">
-    <Message Text="Completed StyleCop Analysis on $(ProjectName)" Importance="High" />
+    <Message Text="StyleCop Analysis Complete -- $(StyleCopViolationCount) violation(s)"
+             Importance="High" />
+
+    <Message Text="StyleCop Analysis Report for $(ProjectName): $(SourceAnalysisOutputFile)"
+             Importance="High"
+             Condition="'$(StyleCopViolationCount)' != '0'" />
   </Target>
 </Project>
