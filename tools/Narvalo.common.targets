@@ -8,15 +8,13 @@
     <!-- Only enable Source Analysis in Release mode. -->
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisEnabled>
-
-    <!-- In Release mode, we do not want a Build to fail because of StyleCop errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisTreatErrorsAsWarnings>
-    <SourceAnalysisTreatErrorsAsWarnings Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisTreatErrorsAsWarnings>
+    <!-- We do not want a Build to fail because of StyleCop errors. -->
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(SolutionDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildFromNarvaloScript)' == 'true'">
-    <!-- Only when run from Narvalo.proj, $(AnalysisOutDir) is set. -->
+    <!-- Only when called from Narvalo.proj, $(AnalysisOutDir) is set. -->
     <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
     <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
   </PropertyGroup>

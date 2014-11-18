@@ -18,7 +18,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SourceDir>$(SolutionDir)src\</SourceDir>
     <BuildDir>$(SolutionDir)_build\</BuildDir>
     <AnalysisOutDir>$(BuildDir)reports\</AnalysisOutDir>
     <!-- RunCodeAnalysis -->
@@ -45,15 +44,15 @@
 
   <ItemGroup>
     <!-- TODO: Add more and more projects. -->
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Core\Narvalo.Core.csproj" />
-    <!--
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Common\Narvalo.Common.csproj" />
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Extras\Narvalo.Extras.csproj" />
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Web\Narvalo.Web.csproj" />
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Mvp\Narvalo.Mvp.csproj" />
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-    <ProjectsToBuild Include="$(SourceDir)Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
-    -->
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
   </ItemGroup>
 
   <!-- ### Core Targets ### -->
@@ -95,11 +94,13 @@
 
   <Target Name="BeforeBuild"
           BeforeTargets="Build"
-          DependsOnTargets="CreateAnalysisOutDir" />
+          DependsOnTargets="RestorePackages;CreateAnalysisOutDir" />
 
   <Target Name="AfterBuild"
           AfterTargets="Build"
           DependsOnTargets="PEVerify;RunXunitTests" />
+
+  <!-- ### Utilities ### -->
 
   <!--
     Création du répertoire contenant les rapports produits
@@ -107,6 +108,14 @@
   -->
   <Target Name="CreateAnalysisOutDir">
     <MakeDir Directories="$(AnalysisOutDir)" Condition="!Exists($(AnalysisOutDir))" />
+  </Target>
+
+  <!-- ### NuGet ### -->
+
+  <Target Name="RestorePackages">
+    <Message Text="Restoring NuGet packages..." Importance="High" />
+
+    <Exec Command='"$(SolutionDir)tools\NuGet\nuget.exe" restore "$(SolutionDir)Narvalo (Core).sln" -NonInteractive -Verbosity quiet ' />
   </Target>
 
   <!-- ### PEVerify ### -->
@@ -141,6 +150,10 @@
 
   <!-- ### xUnit ### -->
 
+  <PropertyGroup>
+    <XunitXmlReport>$(AnalysisOutDir)xunit.xml</XunitXmlReport>
+  </PropertyGroup>
+
   <ItemGroup>
     <XunitAssemblyFile Include="$(SolutionDir)packages\**\xunit.runner.msbuild.dll" />
   </ItemGroup>
@@ -159,7 +172,7 @@
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)"
-           Xml="$(AnalysisOutDir)xunit.xml"
+           Xml="$(XunitXmlReport)"
            Condition="'@(_TestAssemblies)' != ''" />
   </Target>
 

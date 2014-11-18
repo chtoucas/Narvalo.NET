@@ -2,11 +2,6 @@
 @pushd %~dp0
 @setlocal
 
-:RestorePackages
-@rem We must restore the NuGet packages first
-@rem because our MSBuild depends on them.
-".\tools\NuGet\nuget.exe" restore "Narvalo (Core).sln" "/Verbosity" "quiet"
-
 :Build
 @rem Find the most recent 32bit MSBuild.exe on the system. Require v12.0
 @rem (installed with VS2013) or later since .NET 4.0 is not supported.
