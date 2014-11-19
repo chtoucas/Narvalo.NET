@@ -42,7 +42,8 @@
             return _timer.ElapsedTime;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect")]
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
+            Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         static void Cleanup()
         {
             GC.Collect();

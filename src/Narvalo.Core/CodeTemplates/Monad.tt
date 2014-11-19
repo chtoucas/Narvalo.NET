@@ -325,6 +325,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `mzero` in Haskell parlance.
          */
+
         /// <summary>
         /// Returns the zero of type <c><#= Name #>&lt;Unit&gt;.<#= ZeroName #></c>.
         /// </summary>
@@ -334,6 +335,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `return` in Haskell parlance.
          */
+
         /// <summary>
         /// Returns a new instance of <see cref="<#= Name #>{T}" />.
         /// </summary>
@@ -348,6 +350,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `join` in Haskell parlance.
          */
+
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
@@ -364,6 +367,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `liftM` in Haskell parlance.
          */
+
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values.
         /// </summary>
@@ -374,7 +378,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return m =>
             {
-<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m"); PopIndent(); }  #>
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m"); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
             };
         }
@@ -382,6 +386,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `liftM2` in Haskell parlance.
          */
+
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
         /// monadic arguments from left to right.
@@ -394,7 +399,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return (m1, m2) => 
             {
-<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
             };
         }
@@ -402,6 +407,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `liftM3` in Haskell parlance.
          */
+
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
         /// monadic arguments from left to right.
@@ -415,7 +421,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return (m1, m2, m3) =>
             {
-<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -423,6 +429,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `liftM4` in Haskell parlance.
          */
+
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
@@ -438,7 +445,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return (m1, m2, m3, m4) =>
             {
-<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -446,6 +453,7 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `liftM5` in Haskell parlance.
          */
+
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
@@ -462,7 +470,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
             return (m1, m2, m3, m4, m5) =>
             {
-<#+ if (!RequireStruct) { PushIndent("\t"); NotNull_("m1"); PopIndent(); }  #>
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -590,7 +598,8 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `guard` in Haskell parlance.
          */
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "Extension method intended to be used as a fluent interface.")]
         public static <#= Name #><Unit> Guard<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate)
@@ -603,7 +612,8 @@ namespace <#= LinqNamespace #>.Internal {
         /*!
          * Named `when` in Haskell parlance.
          */
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "Extension method intended to be used as a fluent interface.")]
         public static <#= Name #><Unit> When<TSource>(
             this <#= Name #><TSource> @this, 
             bool predicate, 
@@ -909,8 +919,7 @@ namespace <#= LinqNamespace #>.Internal {
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue)
-                       .Then(inner));
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
         static Func<TSource, <#= Name #><TKey>> GetKeyLookup_<TSource, TInner, TKey>(
@@ -975,7 +984,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(); #>
 
-            return  @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
+            return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
 <#+ } #>
 
@@ -1096,8 +1105,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ } #>
         
         #endregion
-
 <#+ if (HasZero && HasPlus) { #>
+
         #region Generalisations of list functions (Prelude)
 
         /*!
@@ -1196,7 +1205,7 @@ namespace <#= LinqNamespace #>.Internal {
         /// <remarks>
         /// Named <c>filterM</c> in Haskell parlance.
         /// </remarks>
-        // REVIEW: Haskell use a differente signature.
+        /// REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
@@ -1506,7 +1515,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
 
-            using (var iter = @this.GetEnumerator()) {if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) {
+                if (!iter.MoveNext()) {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
@@ -1533,6 +1543,8 @@ namespace <#= LinqNamespace #>.Internal {
             return;
         }
 #>
+// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
 //------------------------------------------------------------------------------
 // <auto-generated>
 // This code was generated by a tool. Changes to this file may cause incorrect
@@ -1541,6 +1553,23 @@ namespace <#= LinqNamespace #>.Internal {
 // Runtime Version: <#= System.Environment.Version #>
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
+    Justification = "This is disabled for files generated by a Text Template.")]
+
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
+    Justification = "This is disabled for files generated by a Text Template.")]
+
+[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
+    Justification = "This is disabled for files generated by a Text Template.")]
+    
+[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
+    Justification = "Names of namespaces are dynamically generated.")]
+
+[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
+    Justification = "This is disabled for files generated by a Text Template.")]
 <#+
         _headerWritten = true;
     }

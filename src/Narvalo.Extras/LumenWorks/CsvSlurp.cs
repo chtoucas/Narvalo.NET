@@ -3,6 +3,7 @@
 namespace Narvalo.LumenWorks
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
     using global::LumenWorks.Framework.IO.Csv;
@@ -69,6 +70,8 @@ namespace Narvalo.LumenWorks
         /// </summary>
         public IEnumerable<Dictionary<string, string>> Records { get { return _records; } }
 
+        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times",
+            Justification = "The StreamReader class should be resilient to multiple calls to Dispose.")]
         public void Parse()
         {
             using (var streamReader = new StreamReader(_fileName, Encoding)) {

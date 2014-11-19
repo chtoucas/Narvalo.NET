@@ -7,16 +7,16 @@ namespace MvpCommandLine
 
     public sealed class SampleCommand : MvpCommand, ISampleView
     {
-        protected override void ExecuteCore()
-        {
-            DisplayText();
-        }
-
-        public void DisplayText()
+        public static void DisplayText()
         {
             Console.WriteLine();
             Console.WriteLine("I am a test command.");
             Console.WriteLine();
+        }
+
+        protected override void ExecuteCore()
+        {
+            DisplayText();
         }
     }
 }

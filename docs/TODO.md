@@ -4,6 +4,7 @@ TODO
 - Create Narvalo (NuGet).sln
 - NuGet pub script (in Fake or PowerShell)
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
+- Use Error for ruleset?
 - Migrate from psake to Fake.
 - Review all SuppressMessage directives and GlobalSuppression files.
 - Narvalo.Facts fails from Narvalo.proj when run twice.
