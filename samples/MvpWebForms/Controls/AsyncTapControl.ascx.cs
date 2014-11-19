@@ -1,7 +1,7 @@
 ﻿namespace MvpWebForms.Controls
 {
-    using Narvalo.Mvp.Web;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
     public partial class AsyncTapControl : MvpUserControl<AsyncModel> { }
 }

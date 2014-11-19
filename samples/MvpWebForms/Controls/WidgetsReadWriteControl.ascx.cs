@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using Narvalo.Mvp.Web;
     using MvpWebForms.Entities;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
     public partial class WidgetsReadWriteControl
         : MvpUserControl<WidgetsReadWriteModel>, IWidgetsReadWriteView
@@ -15,9 +15,13 @@
         }
 
         public event EventHandler CountingWidgets;
+
         public event EventHandler<WidgetIdEventArgs> DeletingWidget;
+
         public event EventHandler<GettingWidgetsEventArgs> GettingWidgets;
+
         public event EventHandler<WidgetEventArgs> InsertingWidget;
+
         public event EventHandler<WidgetEventArgs> UpdatingWidget;
 
         public IEnumerable<Widget> GetWidgets(int maximumRows, int startRowIndex)

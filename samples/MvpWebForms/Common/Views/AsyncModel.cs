@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading;
 
     public sealed class AsyncModel
@@ -30,18 +31,19 @@
             Append_("Page PreRenderComplete");
         }
 
-        void Append_(string message)
-        {
-            _messages.Add(Format_(message));
-        }
-
         static string Format_(string message)
         {
             return String.Format(
+                CultureInfo.InvariantCulture,
                 "{2} [Thread={1}] {0}",
                 message,
                 Thread.CurrentThread.ManagedThreadId,
-                DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]"));
+                DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]", CultureInfo.InvariantCulture));
+        }
+
+        void Append_(string message)
+        {
+            _messages.Add(Format_(message));
         }
     }
 }

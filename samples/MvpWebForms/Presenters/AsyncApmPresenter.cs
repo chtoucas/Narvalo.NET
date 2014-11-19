@@ -1,11 +1,13 @@
 ﻿namespace MvpWebForms.Presenters
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
+    using MvpWebForms.Views;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
-    using MvpWebForms.Views;
 
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apm")]
     public sealed class AsyncApmPresenter : HttpPresenterOf<AsyncModel>
     {
         static readonly Action Thunk_ = () => Thread.Sleep(10);

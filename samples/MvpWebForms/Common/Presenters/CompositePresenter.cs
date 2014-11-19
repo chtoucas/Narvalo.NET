@@ -1,8 +1,9 @@
 ﻿namespace MvpWebForms.Presenters
 {
     using System;
-    using Narvalo.Mvp;
+    using System.Globalization;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
 
     public sealed class CompositePresenter : PresenterOf<StringModel>
     {
@@ -10,7 +11,10 @@
             : base(view)
         {
             View.Load += (sender, e) =>
-                View.Model.Message = String.Format(@"Presenter instance: {0}", Guid.NewGuid());
+                View.Model.Message = String.Format(
+                    CultureInfo.InvariantCulture, 
+                    @"Presenter instance: {0}",
+                    Guid.NewGuid());
         }
     }
 }

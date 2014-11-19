@@ -6,11 +6,9 @@
     /// <example>
     /// <UsingTask TaskName="Narvalo.Build.CssYuiCompressor" 
     ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
-    ///
     /// <ItemGroup>
     ///   <CssFiles Include="$(SourceWebPhysicalPath)\Styles\*.css" />
     /// </ItemGroup>
-    ///
     /// <Target Name="AfterBuild">
     ///   <CssYuiCompressor Files="@(CssFiles)" />
     /// </Target>

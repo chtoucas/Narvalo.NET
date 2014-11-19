@@ -7,11 +7,9 @@
     /// <example>
     /// <UsingTask TaskName="Narvalo.Build.MergeFiles"
     ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
-    ///
     /// <ItemGroup>
     ///   <StyleFiles Include="$(SourceWebPhysicalPath)\Styles\*.css" />
     /// </ItemGroup>
-    ///
     /// <Target Name="AfterBuild">
     ///   <MergeFiles Files="@(StyleFiles)" OutFile="$(SourceWebPhysicalPath)\Styles\site.css" />
     /// </Target>

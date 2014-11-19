@@ -6,11 +6,9 @@
     /// <example>
     /// <UsingTask TaskName="Narvalo.Build.JsYuiCompressor" 
     ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
-    ///
     /// <ItemGroup>
     ///   <JavaScriptFiles Include="$(SourceWebPhysicalPath)\Scripts\*.js" />
     /// </ItemGroup>
-    ///
     /// <Target Name="AfterBuild">
     ///   <JsYuiCompressor Files="@(JavaScriptFiles)" />
     /// </Target>

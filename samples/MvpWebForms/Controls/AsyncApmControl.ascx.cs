@@ -1,7 +1,9 @@
 ﻿namespace MvpWebForms.Controls
 {
-    using Narvalo.Mvp.Web;
+    using System.Diagnostics.CodeAnalysis;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apm")]
     public partial class AsyncApmControl : MvpUserControl<AsyncModel> { }
 }

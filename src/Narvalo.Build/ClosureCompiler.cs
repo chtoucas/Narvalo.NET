@@ -18,7 +18,7 @@
         [Output]
         public ITaskItem[] CompressedFiles { get; private set; }
 
-        //public ITaskItem[] Externs { get; set; }
+        ////public ITaskItem[] Externs { get; set; }
 
         public string CompilationLevel { get; set; }
 
@@ -63,7 +63,8 @@
 
                 string outFile = GetCompressedFilePath_(inFile);
 
-                Log.LogMessage(MessageImportance.Normal,
+                Log.LogMessage(
+                    MessageImportance.Normal,
                     "Closure Compiler processing " + new FileInfo(inFile).Name);
 
                 if (File.Exists(outFile)) {

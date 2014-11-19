@@ -1,10 +1,12 @@
 ﻿namespace MvpWebForms.Controls
 {
     using System;
-    using Narvalo.Mvp;
-    using Narvalo.Mvp.Web;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using MvpWebForms.Presenters;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
+    using Narvalo.Mvp.Web;
 
     [PresenterBinding(typeof(WidgetsReadOnlyPresenter))]
     [PresenterBinding(typeof(WidgetsReadOnlyAsyncPresenter))]
@@ -12,7 +14,9 @@
         : MvpUserControl<WidgetsReadOnlyModel>, IWidgetsReadOnlyView
     {
         public event EventHandler<WidgetIdEventArgs> Finding;
+
         public event EventHandler<WidgetIdEventArgs> FindingApm;
+
         public event EventHandler<WidgetIdEventArgs> FindingTap;
 
         protected void Find_Click(object sender, EventArgs e)
@@ -24,6 +28,7 @@
             }
         }
 
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apm")]
         protected void FindApm_Click(object sender, EventArgs e)
         {
             var id = ParseId();
@@ -46,7 +51,7 @@
         {
             return String.IsNullOrEmpty(WidgetId.Text)
                 ? (int?)null
-                : Convert.ToInt32(WidgetId.Text);
+                : Convert.ToInt32(WidgetId.Text, CultureInfo.InvariantCulture);
         }
 
         void OnFinding(int id)

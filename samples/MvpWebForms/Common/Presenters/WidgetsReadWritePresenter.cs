@@ -3,9 +3,9 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using Narvalo.Mvp;
     using MvpWebForms.Data;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
 
     // NB: Just to make thinks simpler I removed all the async stuff found in the original code.
     // You can still see async at work width EntityFramework in LookupWidgetPresenter.
@@ -24,6 +24,12 @@
             View.UpdatingWidget += UpdatingWidget;
             View.InsertingWidget += InsertingWidget;
             View.DeletingWidget += DeletingWidget;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true /* disposing */);
+            GC.SuppressFinalize(this);
         }
 
         void CountingWidgets(object sender, EventArgs e)
@@ -60,12 +66,6 @@
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true /* disposing */);
-            GC.SuppressFinalize(this);
-        }
-
         void Dispose(bool disposing)
         {
             if (!_disposed) {
@@ -79,6 +79,5 @@
                 _disposed = true;
             }
         }
-
     }
 }

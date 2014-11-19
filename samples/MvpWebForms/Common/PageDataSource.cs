@@ -19,12 +19,15 @@
         public PageDataSource(string typeName, string selectMethod)
             : base(typeName, selectMethod)
         {
-            //this.EnablePaging = true;
-            //this.SortParameterName = "sortExpression";
+            ////this.EnablePaging = true;
+            ////this.SortParameterName = "sortExpression";
 
             ObjectCreating += OnObjectCreating;
             ObjectDisposing += OnObjectDisposing;
         }
+
+        /// <summary />
+        protected object ParentHost { get; private set; }
 
         /// <summary>
         /// Raises the <see cref="E:System.Web.UI.Control.Init"/> event.
@@ -40,7 +43,9 @@
         /// <summary />
         protected virtual void OnObjectCreating(object sender, ObjectDataSourceEventArgs e)
         {
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) {
+                throw new ArgumentNullException("e");
+            }
 
             e.ObjectInstance = ParentHost;
         }
@@ -48,13 +53,12 @@
         /// <summary />
         protected virtual void OnObjectDisposing(object sender, ObjectDataSourceDisposingEventArgs e)
         {
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) {
+                throw new ArgumentNullException("e");
+            }
 
             e.Cancel = true;
         }
-
-        /// <summary />
-        protected object ParentHost { get; private set; }
 
         /// <summary>
         /// Walks the control tree to find the hosting parent page or user control

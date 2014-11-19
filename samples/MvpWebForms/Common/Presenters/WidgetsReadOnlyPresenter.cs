@@ -1,8 +1,8 @@
 ﻿namespace MvpWebForms.Presenters
 {
-    using Narvalo.Mvp;
     using MvpWebForms.Data;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
 
     public sealed class WidgetsReadOnlyPresenter
         : Presenter<IWidgetsReadOnlyView, WidgetsReadOnlyModel>

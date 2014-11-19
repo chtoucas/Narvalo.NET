@@ -6,6 +6,7 @@
     using System.IO;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo;
 
     // Maybe we should use a separate AppDomain: AppDomainIsolatedTask
     public abstract class YuiCompressorBase : JavaTaskBase
@@ -44,8 +45,6 @@
 
         protected abstract string FileExtension { get; }
 
-        protected abstract string GenerateCommandLineArguments(string inFile, string outFile);
-
         public override bool Execute()
         {
             var compressedFiles = new List<ITaskItem>(Files.Length);
@@ -62,7 +61,8 @@
 
                 string outFile = GenerateCompressedFilePath(inFile);
 
-                Log.LogMessage(MessageImportance.Normal,
+                Log.LogMessage(
+                    MessageImportance.Normal,
                     "YUI Compressor processing " + new FileInfo(inFile).Name);
 
                 if (File.Exists(outFile)) {
@@ -96,8 +96,12 @@
             return !Log.HasLoggedErrors;
         }
 
+        protected abstract string GenerateCommandLineArguments(string inFile, string outFile);
+
         protected string GenerateCompressedFilePath(string fileName)
         {
+            Require.NotNullOrEmpty(fileName, "fileName");
+
             string name = fileName.Replace("." + FileExtension, ".min." + FileExtension);
             return String.IsNullOrEmpty(OutDir) ? name : Path.Combine(OutDir, new FileInfo(name).Name);
         }

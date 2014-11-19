@@ -1,7 +1,7 @@
 ﻿namespace MvpWebForms.Presenters
 {
-    using Narvalo.Mvp.Web;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
     public sealed class RedirectPresenter : HttpPresenter<IRedirectView>
     {

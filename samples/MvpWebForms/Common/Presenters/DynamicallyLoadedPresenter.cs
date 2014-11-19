@@ -1,7 +1,7 @@
 ﻿namespace MvpWebForms.Presenters
 {
-    using Narvalo.Mvp;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
 
     public sealed class DynamicallyLoadedPresenter : Presenter<IDynamicallyLoadedView>
     {

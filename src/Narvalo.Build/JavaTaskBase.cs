@@ -2,8 +2,8 @@
 {
     using System;
     using System.Diagnostics;
-    //using System.Runtime.CompilerServices;
-    //using System.Runtime.InteropServices;
+    ////using System.Runtime.CompilerServices;
+    ////using System.Runtime.InteropServices;
     using System.IO;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
@@ -31,16 +31,16 @@
             string javaPath = null;
 
             // On commence par chercher dans la base de registre Windows 32bit.
-            javaPath = FindJavaPathInRegistry(JreKey_, ToolName);
+            javaPath = FindJavaPathInRegistry_(JreKey_, ToolName);
 
             // On cherche ensuite dans l'environnement local.
             if (javaPath == null) {
-                javaPath = FindJavaPathInPathLocations(ToolName);
+                javaPath = FindJavaPathInPathLocations_(ToolName);
             }
 
             // En désespoir de cause, voyons voir dans les endroits communs.
             if (javaPath == null) {
-                javaPath = FindJavaPathInCommonLocations(ToolName);
+                javaPath = FindJavaPathInCommonLocations_(ToolName);
             }
 
             if (javaPath == null) {
@@ -53,7 +53,31 @@
             return javaPath;
         }
 
-        public static string FindJavaPathInRegistry(string keyName, string toolName)
+        protected void LogJavaFailure(Process process)
+        {
+            string[] errors = process.StandardError.ReadToEnd()
+                .Replace("\r", String.Empty)
+                .Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string error in errors) {
+                Log.LogMessage(
+                    MessageImportance.High,
+                    error.Trim().Replace("[WARNING] ", String.Empty));
+            }
+
+            Log.LogError("java.exe exited with error code {0}.", process.ExitCode);
+        }
+
+        protected override string GenerateFullPathToTool()
+        {
+            if (String.IsNullOrEmpty(ToolPath)) {
+                ToolPath = FindJavaPath();
+            }
+
+            return Path.Combine(ToolPath, ToolName);
+        }
+
+        static string FindJavaPathInRegistry_(string keyName, string toolName)
         {
             // FIXME: ne marche pas de manière consistante en cas de virtualisation de la base de registre.
             string javaHome = null;
@@ -79,14 +103,14 @@
             }
         }
 
-        public static string FindJavaPathInPathLocations(string toolName)
+        static string FindJavaPathInPathLocations_(string toolName)
         {
             string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? String.Empty;
             string[] paths = pathEnv.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
             return FindJavaPathInDirectories(paths, toolName);
         }
 
-        public static string FindJavaPathInCommonLocations(string toolName)
+        static string FindJavaPathInCommonLocations_(string toolName)
         {
             // FIXME: programFilesPath dépend du type de compilation (AnyCPU, x64, x32),
             // de la plate-forme, du processus courant :
@@ -99,6 +123,7 @@
                 // JRE/JDK v6
                 Path.Combine(programFilesPath, @"\Java\jre6\bin"),
                 @"C:\Program Files\Java\jre6\bin",
+
                 // JRE/JDK v7
                 Path.Combine(programFilesPath, @"\Java\jre7\bin"),
                 @"C:\Program Files\Java\jre7\bin",
@@ -107,7 +132,7 @@
             return FindJavaPathInDirectories(commonLocations, toolName);
         }
 
-        public static string FindJavaPathInDirectories(string[] paths, string toolName)
+        static string FindJavaPathInDirectories(string[] paths, string toolName)
         {
             string javaPath = null;
 
@@ -122,77 +147,54 @@
             return javaPath;
         }
 
-        protected void LogJavaFailure(Process process)
-        {
-            string[] errors = process.StandardError.ReadToEnd()
-                .Replace("\r", String.Empty)
-                .Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+        //// FIXME: does not work on x64 systems
 
-            foreach (string error in errors) {
-                Log.LogMessage(MessageImportance.High,
-                    error.Trim().Replace("[WARNING] ", String.Empty));
-            }
+        //// String x86folder = Environment.GetEnvironmentVariable("ProgramFiles(x86)");
 
-            Log.LogError("java.exe exited with error code {0}.", process.ExitCode);
-        }
+        ////static string ProgramFilesx86() {
+        ////    if (8 == IntPtr.Size
+        ////        || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))) {
+        ////        return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+        ////    }
 
-        protected override string GenerateFullPathToTool()
-        {
-            if (String.IsNullOrEmpty(ToolPath)) {
-                ToolPath = FindJavaPath();
-            }
+        ////    return Environment.GetEnvironmentVariable("ProgramFiles");
+        ////}
 
-            return Path.Combine(ToolPath, ToolName);
-        }
+        //// IntPtr.Size won't return the correct value if running in 32-bit .NET Framework 2.0
+        //// on 64-bit Windows (it would return 32-bit).
+        //// As Microsoft's Raymond Chen describes, you have to first check if running in a
+        //// 64-bit process (I think in .NET you can do so by checking IntPtr.Size), and if
+        //// you are running in a 32-bit process, you still have to call the Win API function
+        //// IsWow64Process. If this returns true, you are running in a 32-bit process on 64-bit Windows.
+        //// See : How to detect programmatically whether you are running on 64-bit Windows
+        //// http://blogs.msdn.com/b/oldnewthing/archive/2005/02/01/364563.aspx
 
-        // FIXME: does not work on x64 systems
+        ////private static readonly string Jre64Key = @"SOFTWARE\Wow6432Node\JavaSoft\Java Runtime Environment";
+        ////private static bool Is64BitProcess = (IntPtr.Size == 8);
+        ////private static bool Is64BitOperatingSystem = Is64BitProcess || InternalCheckIsWow64();
 
-        // String x86folder = Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+        ////[DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
+        ////[return: MarshalAs(UnmanagedType.Bool)]
+        ////public static extern bool IsWow64Process(
+        ////    [In] IntPtr hProcess,
+        ////    [Out] out bool wow64Process
+        ////);
 
-        //static string ProgramFilesx86() {
-        //    if (8 == IntPtr.Size
-        //        || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))) {
-        //        return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-        //    }
-
-        //    return Environment.GetEnvironmentVariable("ProgramFiles");
-        //}
-
-        // IntPtr.Size won't return the correct value if running in 32-bit .NET Framework 2.0
-        // on 64-bit Windows (it would return 32-bit).
-        // As Microsoft's Raymond Chen describes, you have to first check if running in a
-        // 64-bit process (I think in .NET you can do so by checking IntPtr.Size), and if
-        // you are running in a 32-bit process, you still have to call the Win API function
-        // IsWow64Process. If this returns true, you are running in a 32-bit process on 64-bit Windows.
-        // See : How to detect programmatically whether you are running on 64-bit Windows
-        // http://blogs.msdn.com/b/oldnewthing/archive/2005/02/01/364563.aspx
-
-        //private static readonly string Jre64Key = @"SOFTWARE\Wow6432Node\JavaSoft\Java Runtime Environment";
-        //private static bool Is64BitProcess = (IntPtr.Size == 8);
-        //private static bool Is64BitOperatingSystem = Is64BitProcess || InternalCheckIsWow64();
-
-        //[DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //public static extern bool IsWow64Process(
-        //    [In] IntPtr hProcess,
-        //    [Out] out bool wow64Process
-        //);
-
-        //[MethodImpl(MethodImplOptions.NoInlining)]
-        //private static bool InternalCheckIsWow64() {
-        //    if ((Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1)
-        //        || Environment.OSVersion.Version.Major >= 6) {
-        //        using (Process p = Process.GetCurrentProcess()) {
-        //            bool retVal;
-        //            if (!IsWow64Process(p.Handle, out retVal)) {
-        //                return false;
-        //            }
-        //            return retVal;
-        //        }
-        //    }
-        //    else {
-        //        return false;
-        //    }
-        //}
+        ////[MethodImpl(MethodImplOptions.NoInlining)]
+        ////private static bool InternalCheckIsWow64() {
+        ////    if ((Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1)
+        ////        || Environment.OSVersion.Version.Major >= 6) {
+        ////        using (Process p = Process.GetCurrentProcess()) {
+        ////            bool retVal;
+        ////            if (!IsWow64Process(p.Handle, out retVal)) {
+        ////                return false;
+        ////            }
+        ////            return retVal;
+        ////        }
+        ////    }
+        ////    else {
+        ////        return false;
+        ////    }
+        ////}
     }
 }

@@ -1,8 +1,9 @@
 ﻿namespace MvpWebForms.Presenters
 {
     using System;
-    using Narvalo.Mvp;
+    using System.Globalization;
     using MvpWebForms.Views;
+    using Narvalo.Mvp;
 
     public sealed class Messaging2Presenter : PresenterOf<StringModel>
     {
@@ -18,7 +19,7 @@
 
             Messages.Subscribe<StringMessage>(_ =>
             {
-                View.Model.Message += String.Format("Presenter 2 received: {0}", _.Content);
+                View.Model.Message += String.Format(CultureInfo.InvariantCulture, "Presenter 2 received: {0}", _.Content);
             });
 
             Messages.Subscribe<Guid>(_ =>

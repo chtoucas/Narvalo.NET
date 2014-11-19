@@ -64,6 +64,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Miscs.cs">
       <Link>Properties\AssemblyInfo.Miscs.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
     <Compile Include="ClosureCompiler.cs" />
     <Compile Include="JavaTaskBase.cs" />
     <Compile Include="MergeFiles.cs" />

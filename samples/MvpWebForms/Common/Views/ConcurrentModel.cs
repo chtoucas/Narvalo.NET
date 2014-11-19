@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Threading;
 
     public sealed class ConcurrentModel
@@ -19,7 +20,11 @@
 
         static string Format_(string message)
         {
-            return String.Format("[Thread={0}] {1}", Thread.CurrentThread.ManagedThreadId, message);
+            return String.Format(
+                CultureInfo.InvariantCulture, 
+                "[Thread={0}] {1}", 
+                Thread.CurrentThread.ManagedThreadId, 
+                message);
         }
     }
 }

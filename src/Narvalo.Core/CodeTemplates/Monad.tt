@@ -1542,6 +1542,9 @@ namespace <#= LinqNamespace #>.Internal {
         if (_headerWritten) {
             return;
         }
+
+        // See http://msdn.microsoft.com/en-us/library/ms244717.aspx for an explanation
+        // of the SuppressMessage attribute used at module scope.
 #>
 // Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 

@@ -2,13 +2,14 @@
 {
     using System;
     using System.Data.SqlClient;
+    using System.Globalization;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Configuration;
-    using Narvalo.Mvp.Web;
     using MvpWebForms.Data;
     using MvpWebForms.Entities;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
     public sealed class WidgetsReadOnlyAsyncPresenter
         : HttpPresenter<IWidgetsReadOnlyView, WidgetsReadOnlyModel>
@@ -53,7 +54,7 @@
             var conn = new SqlConnection(connectionString);
             conn.Open();
 
-            var sql = String.Format("select Id, Name, Description from dbo.Widget where Id={0}", id);
+            var sql = String.Format(CultureInfo.InvariantCulture, "select Id, Name, Description from dbo.Widget where Id={0}", id);
 
             var cmd = new SqlCommand(sql, conn);
 

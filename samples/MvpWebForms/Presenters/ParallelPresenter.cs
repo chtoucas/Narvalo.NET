@@ -1,11 +1,12 @@
 ﻿namespace MvpWebForms.Presenters
 {
     using System;
+    using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
+    using MvpWebForms.Views;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
-    using MvpWebForms.Views;
 
     public sealed class ParallelPresenter : HttpPresenterOf<ConcurrentModel>
     {
@@ -13,7 +14,7 @@
         {
             Thread.Sleep(100);
 
-            return String.Format("Task {0} ended. ", name);
+            return String.Format(CultureInfo.InvariantCulture, "Task {0} ended. ", name);
         };
 
         public ParallelPresenter(IView<ConcurrentModel> view)
@@ -33,12 +34,12 @@
         {
             // NB: This is just to demonstrate parallel execution of tasks.
             // In real world, you are better off using Parallel.For:
-            //Parallel.For(0, 3, i =>
-            //{
-            //    View.Model.Append(String.Format("Task {0} started", i));
-            //    Thread.Sleep(100);
-            //    View.Model.Append(String.Format("Task {0} ended. ", i));
-            //});
+            ////Parallel.For(0, 3, i =>
+            ////{
+            ////    View.Model.Append(String.Format("Task {0} started", i));
+            ////    Thread.Sleep(100);
+            ////    View.Model.Append(String.Format("Task {0} ended. ", i));
+            ////});
 
             await Task.WhenAll(CreateTask("A"), CreateTask("B"), CreateTask("C"));
         }
@@ -50,7 +51,7 @@
 
         IAsyncResult BeginInvoke(AsyncCallback cb, object state)
         {
-            View.Model.Append(String.Format("Task {0} started", state));
+            View.Model.Append(String.Format(CultureInfo.InvariantCulture, "Task {0} started", state));
 
             return Thunk_.BeginInvoke((string)state, cb, state);
         }

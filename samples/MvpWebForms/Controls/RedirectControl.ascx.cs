@@ -1,8 +1,8 @@
 ﻿namespace MvpWebForms.Controls
 {
     using System;
-    using Narvalo.Mvp.Web;
     using MvpWebForms.Views;
+    using Narvalo.Mvp.Web;
 
     public partial class RedirectControl : MvpUserControl, IRedirectView
     {

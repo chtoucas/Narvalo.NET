@@ -155,7 +155,10 @@
       </Rules>
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
+          <Value>db</Value>
+          <Value>in</Value>
           <Value>is</Value>
+          <Value>no</Value>
           <Value>on</Value>
         </CollectionProperty>
       </AnalyzerSettings>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Web.UI;
 
     public partial class ParallelPage : Page
@@ -24,7 +25,10 @@
         void Page_PreRenderComplete(object sender, EventArgs e)
         {
             _stopWatch.Stop();
-            ParallelControl.Model.Append(String.Format("Page PreRenderComplete. Elapsed time: {0}s", _stopWatch.Elapsed.Milliseconds / 1000.0));
+            ParallelControl.Model.Append(String.Format(
+                CultureInfo.InvariantCulture,
+                "Page PreRenderComplete. Elapsed time: {0}s",
+                _stopWatch.Elapsed.Milliseconds / 1000.0));
         }
     }
 }
