@@ -18,14 +18,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <!-- Directory where all compilation results should go. -->
     <BuildDir>$(SolutionDir)_build\</BuildDir>
+    <!-- Directory where all reports should go. -->
     <AnalysisOutDir>$(BuildDir)reports\</AnalysisOutDir>
-    <!-- RunCodeAnalysis -->
   </PropertyGroup>
 
   <!-- Attempt to completely isolate our build environment from VS. -->
   <PropertyGroup>
-    <!-- FIXME: Narvalo.Core does not go into "_build\bin\Release" -->
+    <!-- 
+      FIXME: Narvalo.Core output does not go into "_build\bin\Release"
+      but in "_build\bin\Release\Narvalo.Core".
+    -->
     <BuildProperties>
       Platform=$(Platform);
       Configuration=$(Configuration);
@@ -37,7 +41,7 @@
       OutputPath=$(BuildDir)bin\$(Configuration)\;
       BaseIntermediateOutputPath=$(BuildDir)obj\;
       BuildInParallel=$(BuildInParallel);
-      BuildFromNarvaloScript=true;
+      BuildCalledFromNarvaloProj=true;
       AnalysisOutDir=$(AnalysisOutDir)
     </BuildProperties>
   </PropertyGroup>
@@ -48,6 +52,7 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
@@ -72,7 +77,7 @@
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
              StopOnFirstFailure="true">
-      <Output ItemName="_BuildOutputs" TaskParameter="TargetOutputs" />
+      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
 
@@ -121,12 +126,12 @@
   <!-- ### PEVerify ### -->
 
   <PropertyGroup>
-    <PEVerifyTimeFile>$(BuildDir).peverify</PEVerifyTimeFile>
+    <PEVerifyOutFile>$(BuildDir).peverify</PEVerifyOutFile>
   </PropertyGroup>
 
   <Target Name="PEVerify"
-          Inputs="@(_BuildOutputs)"
-          Outputs="$(PEVerifyTimeFile)">
+          Inputs="@(BuildOutputs)"
+          Outputs="$(PEVerifyOutFile)">
     <Message Text="Verifying assemblies with PEVerify." Importance="Low" />
 
     <GetFrameworkSdkPath>
@@ -141,11 +146,11 @@
       <_PEVerifyExe>&quot;$(_SdkVersion40Path)Bin\NETFX 4.5.1 Tools\peverify.exe&quot;</_PEVerifyExe>
     </PropertyGroup>
 
-    <Exec Command="$(_PEVerifyExe) &quot;%(_BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+    <Exec Command="$(_PEVerifyExe) &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
-    <Touch Files="$(PEVerifyTimeFile)" AlwaysCreate="true" />
+    <Touch Files="$(PEVerifyOutFile)" AlwaysCreate="true" />
   </Target>
 
   <!-- ### xUnit ### -->
@@ -162,13 +167,13 @@
 
   <Target Name="RunXunitTests"
           DependsOnTargets="CreateAnalysisOutDir"
-          Inputs="@(_BuildOutputs)"
+          Inputs="@(BuildOutputs)"
           Outputs="$(XunitXmlReport)">
     <Message Text="Running Xunit tests." Importance="Low" />
 
     <ItemGroup>
-      <_TestAssemblies Include="%(_BuildOutputs.Identity)"
-                       Condition="'@(_BuildOutputs->EndsWith('Facts.dll'))' == 'true'" />
+      <_TestAssemblies Include="%(BuildOutputs.Identity)"
+                       Condition="'@(BuildOutputs->EndsWith('Facts.dll'))' == 'true'" />
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)"

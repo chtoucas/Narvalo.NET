@@ -56,10 +56,14 @@ For all modes:
 Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
 For test projects, simply unselect all rules (for now).
 
+###
+
 Edit the project file and add the following line:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
+
+Add the project to Narvalo.proj.
 
 
 Coding Style
