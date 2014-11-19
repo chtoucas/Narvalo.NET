@@ -14,6 +14,8 @@ namespace Narvalo.Web
         // Cf. http://www.make-awesome.com/2012/07/perfectionist-routing-in-asp-net-mvc/
         public static void MapChildOnlyActionRoutesFrom(this RouteCollection routes, Assembly assembly)
         {
+            Require.NotNull(assembly, "assembly");
+
             var controllerTypes = assembly.GetTypes()
                 .Where(t => !t.IsAbstract && typeof(IController).IsAssignableFrom(t));
 

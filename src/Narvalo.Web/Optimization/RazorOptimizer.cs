@@ -22,6 +22,8 @@ namespace Narvalo.Web.Optimization
 
         public void OptimizeBlock(BlockBuilder block)
         {
+            Require.NotNull(block, "block");
+
             for (int i = 0; i < block.Children.Count; i++) {
                 var span = block.Children[i] as Span;
 
@@ -54,6 +56,8 @@ namespace Narvalo.Web.Optimization
 
         public void OptimizeSpan(Span span)
         {
+            Require.NotNull(span, "span");
+
             var builder = new SpanBuilder(span);
             builder.ClearSymbols();
 

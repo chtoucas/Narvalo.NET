@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xunit>
-  <assemblies>
-    <assembly filename="..\test\Narvalo.Facts\bin\Debug\Narvalo.Facts.dll" shadow-copy="true" />
-    <assembly filename="..\test\Narvalo.Mvp.Facts\bin\Debug\Narvalo.Mvp.Facts.dll" shadow-copy="true" />
-  </assemblies>
-</xunit>

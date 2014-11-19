@@ -63,6 +63,8 @@ namespace Narvalo.Web.Semantic
 
         public void AddAlternativeLocales(IEnumerable<OpenGraphLocale> locales)
         {
+            Require.NotNull(locales, "locales");
+
             foreach (var locale in locales) {
                 _alternativeLocales.Add(locale);
             }

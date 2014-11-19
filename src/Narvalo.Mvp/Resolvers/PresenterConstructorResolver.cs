@@ -14,8 +14,8 @@ namespace Narvalo.Mvp.Resolvers
             Require.NotNull(presenterType, "presenterType");
             Require.NotNull(viewType, "viewType");
 
-            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType));
-            Debug.Assert(typeof(IView).IsAssignableFrom(viewType));
+            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType), "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
+            Debug.Assert(typeof(IView).IsAssignableFrom(viewType), "Asserts 'viewType' is of type 'IView'.");
 
             Tracer.Info(this, @"Attempting to resolve ""{0}"".", presenterType.FullName);
 

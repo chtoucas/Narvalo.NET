@@ -21,10 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docs\Changelog.md = docs\Changelog.md
 		README.md = README.md
+		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		docs\TODO.md = docs\TODO.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
 		tools\Narvalo.Common.targets = tools\Narvalo.Common.targets
@@ -37,6 +38,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "PreviewCommonMark", "{36958601-D874-4234-8802-6E496A8A6335}"
+	ProjectSection(SolutionItems) = preProject
+		tools\PreviewCommonMark\index.html = tools\PreviewCommonMark\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{990FBF0C-8EA8-4005-9524-511E12E7491F}"
+	ProjectSection(SolutionItems) = preProject
+		etc\AssemblyInfo.Common.cs = etc\AssemblyInfo.Common.cs
+		etc\AssemblyInfo.Core.cs = etc\AssemblyInfo.Core.cs
+		etc\AssemblyInfo.Core.Version.cs = etc\AssemblyInfo.Core.Version.cs
+		etc\AssemblyInfo.Miscs.cs = etc\AssemblyInfo.Miscs.cs
+		etc\AssemblyInfo.Mvp.cs = etc\AssemblyInfo.Mvp.cs
+		etc\AssemblyInfo.Mvp.Version.cs = etc\AssemblyInfo.Mvp.Version.cs
+		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
+		etc\Debug.ruleset = etc\Debug.ruleset
+		etc\Release.ruleset = etc\Release.ruleset
+		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
+		etc\Tests.ruleset = etc\Tests.ruleset
 	EndProjectSection
 EndProject
 Global
@@ -83,5 +104,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
+		{36958601-D874-4234-8802-6E496A8A6335} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
+		{990FBF0C-8EA8-4005-9524-511E12E7491F} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 	EndGlobalSection
 EndGlobal

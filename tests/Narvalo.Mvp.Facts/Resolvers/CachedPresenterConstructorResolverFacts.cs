@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection.Emit;
     using NSubstitute;
     using Xunit;

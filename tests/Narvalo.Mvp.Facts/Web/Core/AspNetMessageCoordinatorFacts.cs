@@ -247,6 +247,5 @@ namespace Narvalo.Mvp.Web.Core
         public class MyInheritedMessage : MyMessage { }
 
         #endregion
-
     }
 }

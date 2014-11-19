@@ -19,6 +19,8 @@ namespace Narvalo.Web
 
         public void ProcessRequest(HttpContext context)
         {
+            Require.NotNull(context, "context");
+
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
             if (ValidateHttpMethod(context.Request)) {
@@ -33,14 +35,14 @@ namespace Narvalo.Web
 
         protected virtual bool ValidateHttpMethod(HttpRequest request)
         {
-            DebugCheck.NotNull(request);
+            Require.NotNull(request, "request");
 
             return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod) select AcceptedVerbs.HasFlag(_)) ?? false;
         }
 
         protected virtual void OnInvalidHttpMethod(HttpContext context)
         {
-            DebugCheck.NotNull(context);
+            Require.NotNull(context, "context");
 
             var response = context.Response;
 

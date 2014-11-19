@@ -45,7 +45,8 @@ namespace Narvalo.Web
 
         protected virtual void OnBindingFailureCore(HttpContext context, HttpQueryBinderException exception)
         {
-            DebugCheck.NotNull(context);
+            Require.NotNull(context, "context");
+            Require.NotNull(exception, "exception");
 
             var response = context.Response;
 

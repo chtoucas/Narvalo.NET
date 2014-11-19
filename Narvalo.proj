@@ -52,7 +52,7 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />
+    <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
@@ -63,6 +63,8 @@
   <!-- ### Core Targets ### -->
 
   <Target Name="Clean">
+    <Message Text="Cleaning..." Importance="High" />
+    
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"

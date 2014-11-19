@@ -4,90 +4,13 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
+    [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
+        Justification = "Private structs are positioned after public classes and before private classes.")]
     public static class MaybeFacts
     {
-        #region Stubs
-
-        struct ValueStub : IEquatable<ValueStub>
-        {
-            int _value;
-
-            public ValueStub(int value) { _value = value; }
-
-            public static bool operator ==(ValueStub left, ValueStub right)
-            {
-                return left.Equals(right);
-            }
-
-            public static bool operator !=(ValueStub left, ValueStub right)
-            {
-                return !left.Equals(right);
-            }
-
-            public bool Equals(ValueStub other)
-            {
-                return _value == other._value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (obj == null) {
-                    return false;
-                }
-
-                if (!(obj is ValueStub)) {
-                    return false;
-                }
-
-                return Equals((ValueStub)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return _value.GetHashCode();
-            }
-        }
-
-        class AlmostValueStub : IEquatable<AlmostValueStub>
-        {
-            public string Value { get; set; }
-
-            public bool Equals(AlmostValueStub other)
-            {
-                if (ReferenceEquals(other, null)) {
-                    return false;
-                }
-
-                return Value == other.Value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (ReferenceEquals(obj, null)) {
-                    return false;
-                }
-
-                if (ReferenceEquals(obj, this)) {
-                    return true;
-                }
-
-                if (obj.GetType() != this.GetType()) {
-                    return false;
-                }
-
-                return Equals((AlmostValueStub)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return Value.GetHashCode();
-            }
-        }
-
-        #endregion
-
         #region Monoid Laws
 
         [Fact]
@@ -268,15 +191,15 @@ namespace Narvalo.Fx
             }
         }
 
-        //public static class TheNoneProperty
-        //{
-        //    [Fact]
-        //    public static void IsNone()
-        //    {
-        //        // Act & Assert
-        //        Assert.True(Maybe.None.IsNone);
-        //    }
-        //}
+        ////public static class TheNoneProperty
+        ////{
+        ////    [Fact]
+        ////    public static void IsNone()
+        ////    {
+        ////        // Act & Assert
+        ////        Assert.True(Maybe.None.IsNone);
+        ////    }
+        ////}
 
         public static class TheIsSomeProperty
         {
@@ -765,8 +688,8 @@ namespace Narvalo.Fx
 
                 // Act & Assert
                 // NB: Apply only if Select is provided by an extension method.
-                //Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-                //Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
+                ////Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+                ////Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
                 Assert.Throws<NullReferenceException>(() => source.Select(selector));
                 Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
             }
@@ -984,5 +907,85 @@ namespace Narvalo.Fx
                 Assert.Equal(3, q.Value);
             }
         }
+
+        #region Stubs
+
+        struct ValueStub : IEquatable<ValueStub>
+        {
+            int _value;
+
+            public ValueStub(int value) { _value = value; }
+
+            public static bool operator ==(ValueStub left, ValueStub right)
+            {
+                return left.Equals(right);
+            }
+
+            public static bool operator !=(ValueStub left, ValueStub right)
+            {
+                return !left.Equals(right);
+            }
+
+            public bool Equals(ValueStub other)
+            {
+                return _value == other._value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null) {
+                    return false;
+                }
+
+                if (!(obj is ValueStub)) {
+                    return false;
+                }
+
+                return Equals((ValueStub)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return _value.GetHashCode();
+            }
+        }
+
+        class AlmostValueStub : IEquatable<AlmostValueStub>
+        {
+            public string Value { get; set; }
+
+            public bool Equals(AlmostValueStub other)
+            {
+                if (ReferenceEquals(other, null)) {
+                    return false;
+                }
+
+                return Value == other.Value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(obj, null)) {
+                    return false;
+                }
+
+                if (ReferenceEquals(obj, this)) {
+                    return true;
+                }
+
+                if (obj.GetType() != this.GetType()) {
+                    return false;
+                }
+
+                return Equals((AlmostValueStub)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return Value.GetHashCode();
+            }
+        }
+
+        #endregion
     }
 }

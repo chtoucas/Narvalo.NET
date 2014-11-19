@@ -1,8 +1,8 @@
-﻿using StyleCop;
-using StyleCop.CSharp;
-
-namespace Narvalo.StyleCop.CSharp
+﻿namespace Narvalo.StyleCop.CSharp
 {
+    using global::StyleCop;
+    using global::StyleCop.CSharp;
+
     /// <summary>
     /// This StyleCop Rule makes sure that instance variables are prefixed with an underscore.
     /// </summary>
@@ -16,7 +16,7 @@ namespace Narvalo.StyleCop.CSharp
 
         public override void AnalyzeDocument(CodeDocument document)
         {
-            var csdocument  = (CsDocument)document;
+            var csdocument = (CsDocument)document;
 
             if (csdocument.RootElement != null && !csdocument.RootElement.Generated) {
                 csdocument.WalkDocument(new CodeWalkerElementVisitor<object>(VisitElement_), null, null);
@@ -29,10 +29,9 @@ namespace Narvalo.StyleCop.CSharp
             if (!element.Generated
                 && element.ElementType == ElementType.Field
                 && element.ActualAccess == AccessModifierType.Private
-                //&& element.ActualAccess != AccessModifierType.Public
-                //&& element.ActualAccess != AccessModifierType.Internal
+                ////&& element.ActualAccess != AccessModifierType.Public
+                ////&& element.ActualAccess != AccessModifierType.Internal
                 && element.Declaration.Name.ToCharArray()[0] != '_') {
-
                 AddViolation(element, "PrivateFieldNamesMustBeginWithUnderscore");
             }
 

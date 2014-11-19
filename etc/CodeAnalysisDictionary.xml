@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--
-  Cf. http://stylecop.soyuz5.com/
+  Cf. http://www.stylecop.com/docs/
 -->
 <Dictionary>
   <Words>
@@ -15,6 +15,7 @@
 
       <!-- Brands -->
       <Word>Flickr</Word>
+      <Word>Yui</Word>
 
       <!-- Serilog -->
       <Word>Enricher</Word>

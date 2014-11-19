@@ -22,10 +22,10 @@ namespace Narvalo.Mvp.Web.Core
     {
         readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
-        
+
         readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
-        
+
         readonly Object _lock = new Object();
 
         bool _closed = false;
@@ -120,12 +120,13 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PreRenderComplete")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PreRenderComplete",
+            Justification = "ASP.NET method name.")]
         void ThrowIfClosed_()
         {
             if (_closed) {
                 throw new InvalidOperationException(
-                    "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during PreRenderComplete.");
+                    "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during 'PreRenderComplete'.");
             }
         }
     }

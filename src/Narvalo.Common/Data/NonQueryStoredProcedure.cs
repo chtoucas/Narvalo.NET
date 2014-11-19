@@ -4,6 +4,7 @@ namespace Narvalo.Data
 {
     using System.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics.CodeAnalysis;
     using Narvalo;
 
     public abstract class NonQueryStoredProcedure<TParameters>
@@ -21,7 +22,7 @@ namespace Narvalo.Data
         }
 
         protected string ConnectionString { get { return _connectionString; } }
-        
+
         protected string Name { get { return _name; } }
 
         public int Execute(TParameters parameters)
@@ -47,6 +48,10 @@ namespace Narvalo.Data
             return new SqlConnection(ConnectionString);
         }
 
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
+            Justification = "REVIEW: False positive.")]
+        [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
+            Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         protected virtual SqlCommand CreateCommand(SqlConnection connection)
         {
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };

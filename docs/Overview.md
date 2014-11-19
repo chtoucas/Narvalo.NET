@@ -4,13 +4,17 @@ Overview
 Project Layout
 --------------
 
+- `.nuget`
 - `docs`
 - `etc`
-- `packages`
+- `packages`, local repository of NuGet packages.
 - `samples`
 - `src`
 - `tests`
 - `tools`
+
+Temporary directories:
+- `_build`
 
 
 Solutions
@@ -20,8 +24,8 @@ There are six solutions.
 
 ### Narvalo.sln
 
-This solution contains all projects. It is to be used for deep refactoring
-and installing NuGet packages updates.
+This solution contains all projects. This is not used for daily work but rather
+for deep refactoring and installing NuGet packages updates.
 
 ### Narvalo (Core).sln
 

@@ -111,19 +111,6 @@ namespace Narvalo.Mvp.Resolvers
 
         public interface IMyView4 : IView<Int64> { }
 
-        class MyPrivatePresenter : IPresenter<IView>
-        {
-            public IView View
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            public IMessageCoordinator Messages
-            {
-                get { throw new NotImplementedException(); }
-            }
-        }
-
         public class MyPresenter<T> : IPresenter<T> where T : IView
         {
             public MyPresenter(T view)
@@ -152,6 +139,19 @@ namespace Narvalo.Mvp.Resolvers
             public MyBadPresenter(T view, int param) { }
 
             public T View
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            public IMessageCoordinator Messages
+            {
+                get { throw new NotImplementedException(); }
+            }
+        }
+
+        class MyPrivatePresenter : IPresenter<IView>
+        {
+            public IView View
             {
                 get { throw new NotImplementedException(); }
             }

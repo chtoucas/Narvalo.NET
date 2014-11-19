@@ -1,16 +1,19 @@
 TODO
 ====
 
-- Create Narvalo (All).sln (refactoring, NugGet updates) and Narvalo (NuGet).sln
+- Create Narvalo (NuGet).sln
 - NuGet pub script (in Fake or PowerShell)
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
 - Migrate from psake to Fake.
-- Review all SuppressMessage directives.
-- Enable StyleCop for test libraries.
+- Review all SuppressMessage directives and GlobalSuppression files.
+- Narvalo.Facts fails from Narvalo.proj when run twice.
 - Replace all empty method with "// Intentionally left blank.".
 - Review StyleCop settings.
 - Re-enable Gendarme.
-- Remove Markdown Deep
+- Remove Markdown Deep.
+- Add a XML schema for Narvalo config.
+- Review the use of Debug, DebugCheck and Require.
+- Use resources for messages?
 
 
 Narvalo.Mvp

@@ -83,6 +83,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
+      <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -121,7 +121,9 @@
     <Compile Include="Fx\NullableFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
-    <Compile Include="Int64EncoderFacts.cs" />
+    <Compile Include="Int64EncoderFacts.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
   </ItemGroup>

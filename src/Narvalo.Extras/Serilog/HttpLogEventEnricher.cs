@@ -1,12 +1,11 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-using Serilog.Core;
-using Serilog.Events;
-
 namespace Narvalo.Serilog
 {
     using System;
     using System.Web;
+    using global::Serilog.Core;
+    using global::Serilog.Events;
     using Narvalo;
 
     [CLSCompliant(false)]

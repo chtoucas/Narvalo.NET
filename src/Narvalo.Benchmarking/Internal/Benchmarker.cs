@@ -42,9 +42,7 @@
             return _timer.ElapsedTime;
         }
 
-        [SuppressMessage("Microsoft.Reliability",
-            "CA2001:AvoidCallingProblematicMethods",
-            MessageId = "System.GC.Collect")]
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect")]
         static void Cleanup()
         {
             GC.Collect();

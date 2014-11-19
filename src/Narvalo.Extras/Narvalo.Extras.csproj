@@ -113,7 +113,9 @@
     <Compile Include="..\..\etc\AssemblyInfo.Core.Version.cs">
       <Link>Properties\AssemblyInfo.Core.Version.cs</Link>
     </Compile>
-    <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
+    <Compile Include="Autofac\AutofacRouteHandler`1.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Autofac\PrincipalModelBinder.cs" />
     <Compile Include="Castle\SqlExceptionInterceptor.cs" />
     <Compile Include="Castle\XmlExceptionInterceptor.cs" />

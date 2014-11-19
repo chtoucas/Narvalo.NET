@@ -15,6 +15,8 @@ namespace Narvalo.Web.UI.Assets
 
         public RemoteAssetProvider() { }
 
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "baseUri",
+            Justification = "The 'baseUri' literal is the key of the config.")]
         public override void Initialize(string name, NameValueCollection config)
         {
             Require.NotNull(config, "config");
@@ -30,7 +32,7 @@ namespace Narvalo.Web.UI.Assets
 
             base.Initialize(name, config);
 
-            // Initialisation du champs baseUri.
+            // Initialisation du champs "baseUri".
             _baseUri = config.MayGetSingle("baseUri")
                 .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
                 .ValueOrThrow(() => new ProviderException("Missing or invalid config 'baseUri'."));

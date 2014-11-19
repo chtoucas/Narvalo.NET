@@ -22,13 +22,12 @@ How to initiale a new project
 
 - Shared informations: `etc\AssemblyInfo.Common.cs`
 - Library specific informations:
-    * for a core library: `etc\AssemblyInfo.Library.cs`
-    * for a misc library: `etc\AssemblyInfo.Library.Miscs.cs`
-    * for a MVP library: `etc\AssemblyInfo.Library.Mvp.cs`
-    * for a test project: `etc\AssemblyInfo.Facts.cs`
+    * for a core library: `etc\AssemblyInfo.Core.cs`
+    * for a misc library: `etc\AssemblyInfo.Miscs.cs`
+    * for a MVP library: `etc\AssemblyInfo.Mvp.cs`
 - Version informations:
-    * for a core library: `etc\AssemblyInfo.Version.cs`
-    * for a MVP library: `etc\AssemblyInfo.Version.Mvp.cs`
+    * for a core library: `etc\AssemblyInfo.Core.Version.cs`
+    * for a MVP library: `etc\AssemblyInfo.Mvp.Version.cs`
 - Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml`
   with build action _CodeAnalysisDictionary_
 - Strong Name Key: `etc\Narvalo.snk`
