@@ -599,7 +599,7 @@ namespace <#= LinqNamespace #>.Internal {
          * Named `guard` in Haskell parlance.
          */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Extension method intended to be used as a fluent interface.")]
+            Justification = "Extension method intended to be used in a fluent way.")]
         public static <#= Name #><Unit> Guard<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate)
@@ -613,7 +613,7 @@ namespace <#= LinqNamespace #>.Internal {
          * Named `when` in Haskell parlance.
          */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Extension method intended to be used as a fluent interface.")]
+            Justification = "Extension method intended to be used in a fluent way.")]
         public static <#= Name #><Unit> When<TSource>(
             this <#= Name #><TSource> @this, 
             bool predicate, 
@@ -1202,10 +1202,10 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Generalisations of list functions (Prelude)
 
+<#+ // REVIEW: Haskell use a differente signature. #>
         /// <remarks>
         /// Named <c>filterM</c> in Haskell parlance.
         /// </remarks>
-        /// REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
@@ -1305,7 +1305,7 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Catamorphisms
 
-        // REVIEW: Signature.
+<#+ // REVIEW: Haskell use a differente signature. #>
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1319,7 +1319,7 @@ namespace <#= LinqNamespace #>.Internal {
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
         
-        // REVIEW: Signature.
+<#+ // REVIEW: Haskell use a differente signature. #>
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,

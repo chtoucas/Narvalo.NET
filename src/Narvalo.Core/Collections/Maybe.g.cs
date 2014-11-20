@@ -94,7 +94,6 @@ namespace Narvalo.Collections {
         /// <remarks>
         /// Named <c>filterM</c> in Haskell parlance.
         /// </remarks>
-        /// REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
@@ -179,7 +178,6 @@ namespace Narvalo.Collections {
 
         #region Catamorphisms
 
-        // REVIEW: Signature.
         public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -191,7 +189,6 @@ namespace Narvalo.Collections {
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
         
-        // REVIEW: Signature.
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
@@ -218,8 +215,6 @@ namespace Narvalo.Collections.Internal {
      */
     static partial class EnumerableMaybeExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields",
-            Justification = "This method has certainly been overridden for performance reasons.")]
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {

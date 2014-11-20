@@ -79,7 +79,6 @@ namespace Narvalo.Collections {
         /// <remarks>
         /// Named <c>filterM</c> in Haskell parlance.
         /// </remarks>
-        /// REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<bool>> predicateM)
@@ -164,7 +163,6 @@ namespace Narvalo.Collections {
 
         #region Catamorphisms
 
-        // REVIEW: Signature.
         public static Identity<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -176,7 +174,6 @@ namespace Narvalo.Collections {
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
         
-        // REVIEW: Signature.
         public static Identity<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM,
@@ -203,8 +200,6 @@ namespace Narvalo.Collections.Internal {
      */
     static partial class EnumerableIdentityExtensions
     {
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields",
-            Justification = "This method has certainly been overridden for performance reasons.")]
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {

@@ -230,7 +230,7 @@ namespace Narvalo.Fx {
          * Named `when` in Haskell parlance.
          */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Extension method intended to be used as a fluent interface.")]
+            Justification = "Extension method intended to be used in a fluent way.")]
         public static Output<Unit> When<TSource>(
             this Output<TSource> @this, 
             bool predicate, 

@@ -419,16 +419,14 @@ namespace Narvalo.Fx
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules",
-            "SA1300:ElementMustBeginWithUpperCaseLetter",
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Maybe<T> η(T value)
         {
             return value != null ? new Maybe<T>(value) : Maybe<T>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules",
-            "SA1300:ElementMustBeginWithUpperCaseLetter",
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics.")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {

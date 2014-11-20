@@ -81,7 +81,7 @@ namespace Narvalo.Benchmarking
         /// <summary />
         public override int GetHashCode()
         {
-            // FIXME
+            // FIXME: GetHashCode
             return Iterations
                 ^ Duration.GetHashCode()
                 ^ Name.GetHashCode();

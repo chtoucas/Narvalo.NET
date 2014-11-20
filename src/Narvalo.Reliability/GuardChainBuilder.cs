@@ -70,7 +70,7 @@
         void ThrowIfClosed()
         {
             if (_closed) {
-                throw new InvalidOperationException("XXX");
+                throw new InvalidOperationException("TODO");
             }
         }
     }

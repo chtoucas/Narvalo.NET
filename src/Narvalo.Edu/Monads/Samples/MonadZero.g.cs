@@ -251,7 +251,7 @@ namespace Narvalo.Edu.Monads.Samples {
          * Named `guard` in Haskell parlance.
          */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Extension method intended to be used as a fluent interface.")]
+            Justification = "Extension method intended to be used in a fluent way.")]
         public static MonadZero<Unit> Guard<TSource>(
             this MonadZero<TSource> @this,
             bool predicate)
@@ -263,7 +263,7 @@ namespace Narvalo.Edu.Monads.Samples {
          * Named `when` in Haskell parlance.
          */
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "Extension method intended to be used as a fluent interface.")]
+            Justification = "Extension method intended to be used in a fluent way.")]
         public static MonadZero<Unit> When<TSource>(
             this MonadZero<TSource> @this, 
             bool predicate, 
@@ -676,7 +676,6 @@ namespace Narvalo.Edu.Monads.Samples {
         /// <remarks>
         /// Named <c>filterM</c> in Haskell parlance.
         /// </remarks>
-        /// REVIEW: Haskell use a differente signature.
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<bool>> predicateM)
@@ -761,7 +760,6 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Catamorphisms
 
-        // REVIEW: Signature.
         public static MonadZero<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -773,7 +771,6 @@ namespace Narvalo.Edu.Monads.Samples {
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
         
-        // REVIEW: Signature.
         public static MonadZero<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM,

@@ -64,15 +64,14 @@
             return _runner.Run(comparison);
         }
 
-        // FIXME: Theory.
-        // FIXME: retourner plutôt un BenchMetricCollection ?
+        // REVIEW: Theory.
+        // REVIEW: retourner plutôt un BenchMetricCollection ?
         public IEnumerable<BenchmarkMetricCollection> Process<T>(
             Type type,
             IEnumerable<T> testData)
         {
             foreach (var value in testData) {
-                // FIXME: on peut sûrement éviter de relancer BenchComparisonFactory
-                // FIXME: à chaque itération.
+                // REVIEW: on peut sûrement éviter de relancer BenchComparisonFactory à chaque itération.
                 var items = _finder.FindComparatives(type, value);
                 var comparison = BenchmarkComparisonFactory.Create(type, items);
 

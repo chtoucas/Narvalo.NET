@@ -74,7 +74,7 @@ namespace Narvalo
 
             string result = String.Empty;
 
-            // TODO: Optimiser.
+            // TODO: Optimize.
             while (value > 0) {
                 long r = value % FlickrBase58AlphabetLength_;
 

@@ -164,7 +164,7 @@ tools\NuGet\nuget.exe update self
 Periodic checklist
 ------------------
 
-Fix
+Task List
 - FIXME
 - TODO
 - XXX

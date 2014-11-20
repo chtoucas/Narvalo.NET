@@ -34,13 +34,13 @@
                     break;
                 }
                 catch (GuardException) {
-                    throw NewAggregateGuardException("XXX", exceptions);
+                    throw NewAggregateGuardException("TODO", exceptions);
                 }
                 catch (Exception ex) {
                     exceptions.Add(ex);
 
                     if (!_policy.MayRetryAfter(ex)) {
-                        throw NewAggregateGuardException("XXX", exceptions);
+                        throw NewAggregateGuardException("TODO", exceptions);
                     }
 
                     // On n'attend pas si on a déjà atteint la limite d'essais acceptés.
@@ -58,10 +58,10 @@
            string message, IList<Exception> exceptions)
         {
             if (exceptions.Count > 0) {
-                return new AggregateGuardException("XXX", new AggregateException(exceptions));
+                return new AggregateGuardException("TODO", new AggregateException(exceptions));
             }
             else {
-                return new AggregateGuardException("XXX");
+                return new AggregateGuardException("TODO");
             }
         }
 

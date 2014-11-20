@@ -5,6 +5,8 @@ En vrac :
 - OK Core & Playground
 - Narvalo.DocuMaker & Benchmarks should use the Narvalo rulesets.
 - Remove the ruleset for Samples.
+- Fix regions, ////, /*!, Comments in english
+- GetHashCode
 - Review csproj and make Narvalo.Facts a true test proj. Check ExcludeFrom
 - Create Narvalo (NuGet).sln
 - Rework versioning & complete AssemblyDescription.
