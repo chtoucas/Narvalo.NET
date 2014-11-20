@@ -21,6 +21,11 @@
   <!-- ### Code Contracts ### -->
 
   <PropertyGroup Condition="'$(BuildCalledFromNarvaloProj)' == 'true' And $(RunCodeContracts) == 'true'">
+    <!-- Disable Source Analysis -->
+    <SourceAnalysisEnabled>false</SourceAnalysisEnabled>
+    <!-- Disable Code Analysis -->
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
 
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
