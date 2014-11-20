@@ -47,6 +47,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />-->
@@ -80,6 +84,16 @@
   </ItemGroup>
 
   <!-- ### Core Targets ### -->
+
+  <Target Name="Analyze">
+    <MSBuild Projects="@(ProjectsToAnalyze)"
+             Properties="$(BuildProperties);RunCodeContracts=true"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="Build"
+             StopOnFirstFailure="true">
+      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
+    </MSBuild>
+  </Target>
 
   <Target Name="Clean">
     <Message Text="Cleaning..." Importance="High" />

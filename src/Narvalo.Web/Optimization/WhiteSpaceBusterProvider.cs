@@ -33,8 +33,10 @@ namespace Narvalo.Web.Optimization
 
             set
             {
+                Require.Property(value);
+
                 lock (Lock_) {
-                    _pageBuster = Require.Property(value);
+                    _pageBuster = value;
                 }
             }
         }
@@ -56,8 +58,10 @@ namespace Narvalo.Web.Optimization
 
             set
             {
+                Require.Property(value);
+
                 lock (Lock_) {
-                    _razorBuster = Require.Property(value);
+                    _razorBuster = value;
                 }
             }
         }

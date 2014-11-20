@@ -11,7 +11,12 @@ namespace Narvalo.Web.Semantic
         public string ItemType
         {
             get { return _itemType; }
-            set { _itemType = Require.PropertyNotEmpty(value); }
+            set
+            {
+                Require.PropertyNotEmpty(value);
+
+                _itemType = value;
+            }
         }
     }
 }

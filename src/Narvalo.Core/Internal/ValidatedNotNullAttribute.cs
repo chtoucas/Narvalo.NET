@@ -4,6 +4,7 @@ namespace Narvalo.Internal
 {
     using System;
 
+    // REVIEW: CodeContracts internal -> public.
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-    sealed class ValidatedNotNullAttribute : Attribute { }
+    public sealed class ValidatedNotNullAttribute : Attribute { }
 }

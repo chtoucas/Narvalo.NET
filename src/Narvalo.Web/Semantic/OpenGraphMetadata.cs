@@ -27,7 +27,12 @@ namespace Narvalo.Web.Semantic
         public OpenGraphImage Image
         {
             get { return _image; }
-            set { _image = Require.Property(value); }
+            set
+            {
+                Require.Property(value);
+
+                _image = value;
+            }
         }
 
         public string Title { get { return _ontology.Title; } }
@@ -35,7 +40,12 @@ namespace Narvalo.Web.Semantic
         public string Type
         {
             get { return _type; }
-            set { _type = Require.PropertyNotEmpty(value); }
+            set
+            {
+                Require.Property(value);
+
+                _type = value;
+            }
         }
 
         public Uri Url { get { return _ontology.Relationships.CanonicalUrl; } }
