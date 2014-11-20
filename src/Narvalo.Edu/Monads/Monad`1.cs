@@ -9,14 +9,12 @@ namespace Narvalo.Edu.Monads
     {
 #if !MONAD_DISABLE_ZERO
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
 #if !MONAD_DISABLE_PLUS
         // [Haskell] mplus
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<T> Plus(Monad<T> other)
         {
             throw new NotImplementedException();
@@ -25,8 +23,6 @@ namespace Narvalo.Edu.Monads
 #endif
 
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "kun")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -37,8 +33,6 @@ namespace Narvalo.Edu.Monads
         }
 
         // [Haskell] fmap
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "fun")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<TResult> Map<TResult>(Func<T, TResult> selector)
         {
 #if MONAD_VIA_MAP_MULTIPLY
@@ -55,14 +49,16 @@ namespace Narvalo.Edu.Monads
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY

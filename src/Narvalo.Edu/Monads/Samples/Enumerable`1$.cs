@@ -2,10 +2,6 @@
 
 namespace Narvalo.Edu.Monads.Samples
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling",
-        Justification = "This code is only for demonstration purpose.")]
     public static partial class EnumerableExtensions
     {
     }

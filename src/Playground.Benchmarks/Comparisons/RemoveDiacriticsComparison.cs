@@ -13,15 +13,15 @@
         //   a character intended to be combined with another 
         //   character without taking up extra space 
         //   (e.g. accents, umlauts, etc.). 
-        readonly static Regex _NonSpacingMarkRegex = new Regex(@"\p{Mn}", RegexOptions.Compiled);
+        static readonly Regex _NonSpacingMarkRegex = new Regex(@"\p{Mn}", RegexOptions.Compiled);
 
-        //IEnumerable<string> GenerateTestData()
-        //{
-        //    int[] lengths = new int[] { 100, 1000, };
+        ////IEnumerable<string> GenerateTestData()
+        ////{
+        ////    int[] lengths = new int[] { 100, 1000, };
 
-        //    return from l in lengths
-        //           select StringGenerator.RandomUnicodeString(l);
-        //}
+        ////    return from l in lengths
+        ////           select StringGenerator.RandomUnicodeString(l);
+        ////}
 
         [BenchmarkComparative(DisplayName = "Expression rationnelle.")]
         public string Regex(string value)
@@ -45,13 +45,13 @@
 
             for (int i = 0; i < formD.Length; i++) {
                 var c = formD[i];
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark) {
                     sb.Append(c);
+                }
             }
 
             return sb.ToString().Normalize(NormalizationForm.FormC);
         }
-
     }
-
 }

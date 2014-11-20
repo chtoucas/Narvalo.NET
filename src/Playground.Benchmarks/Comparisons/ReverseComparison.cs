@@ -7,27 +7,41 @@
     [BenchmarkComparison(10000)]
     public class ReverseComparison
     {
-        //IEnumerable<string> GenerateTestData()
-        //{
-        //    int[] lengths = new int[] {
-        //        5, 50, 100, 150, 200, 250, 300, 350, 400,
-        //        500, 1000, 2000, 
-        //        //3000, 10000,
-        //    };
+        ////IEnumerable<string> GenerateTestData()
+        ////{
+        ////    int[] lengths = new int[] {
+        ////        5, 50, 100, 150, 200, 250, 300, 350, 400,
+        ////        500, 1000, 2000, 
+        ////        //3000, 10000,
+        ////    };
 
-        //    return from l in lengths
-        //           select StringGenerator.RandomUnicodeString(l);
-        //}
+        ////    return from l in lengths
+        ////           select StringGenerator.RandomUnicodeString(l);
+        ////}
 
-        /// <summary>
-        /// See also http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
-        /// See http://weblogs.asp.net/justin_rogers/archive/2004/06/10/153175.aspx
-        /// 1. string.ToCharArray - Note, this function is equivalent to net char[] + an internal memory copy.  Most users have this as the basis of their algorithm and I'll show you why this in turn hurts perf.  In effect you are copying the data twice when you don't need to. 
-        /// 2. new char[] -This is probably the best buffer you could use.  It has no data in it yet, but strings are immutable and you'll have the original string around the entire time as you do the reversal. 
-        /// 3. StringBuilder - StringBuilder's actually use a String behind the scenes and have the ability to convert your *work* into an instantly accessible string.  The char[] overloads for string actually have to copy your buffer into place.  This could be a solution for solving a buffer and reintegration?
-        /// The surprising part is how poorly StringBuilder actually performs.  Let's stop and think about what we are doing in the other algorithms.  We are making a copy, doing work on the buffer, then effectively making another copy to turn it back into a string.  The turning it back into a string part is actually a big operation and there isn't anything we can do to limit it's overhead.  Now with a StringBuilder we are making a copy that already is a now mutable string.  We can then update our buffer, and finally get a string back without incurring the extra copy.  To bad all of the bogus thread checking in there kills our performance.
-        /// Alrighty, I said three parts.  Turning the buffer back into a string is as easy as constructing a new string, or calling ToString in the case of a StringBuilder.  All there is to it, algorithms are complete.  Here they are, refactored into testable C# with the appropriate attributions to each submitter.
-        /// </summary>
+         //// See also http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
+         //// See http://weblogs.asp.net/justin_rogers/archive/2004/06/10/153175.aspx
+         //// 1. string.ToCharArray - Note, this function is equivalent to net char[] + an internal memory copy.  Most users have this as the basis of their algorithm and I'll show you why this in turn hurts perf.  In effect you are copying the data twice when you don't need to. 
+         //// 2. new char[] -This is probably the best buffer you could use.  It has no data in it yet, but strings are immutable and you'll have the original string around the entire time as you do the reversal. 
+         //// 3. StringBuilder - StringBuilder's actually use a String behind the scenes and have the ability to convert your *work* into an instantly accessible string.  The char[] overloads for string actually have to copy your buffer into place.  This could be a solution for solving a buffer and reintegration?
+         //// The surprising part is how poorly StringBuilder actually performs.  Let's stop and think about what we are doing in the other algorithms.  We are making a copy, doing work on the buffer, then effectively making another copy to turn it back into a string.  The turning it back into a string part is actually a big operation and there isn't anything we can do to limit it's overhead.  Now with a StringBuilder we are making a copy that already is a now mutable string.  We can then update our buffer, and finally get a string back without incurring the extra copy.  To bad all of the bogus thread checking in there kills our performance.
+         //// Alrighty, I said three parts.  Turning the buffer back into a string is as easy as constructing a new string, or calling ToString in the case of a StringBuilder.  All there is to it, algorithms are complete.  Here they are, refactored into testable C# with the appropriate attributions to each submitter.
+
+        // Cf. http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
+        [BenchmarkComparative]
+        public static string CharArrayXor(string value)
+        {
+            char[] arr = value.ToCharArray();
+            int len = value.Length - 1;
+
+            for (int i = 0; i < len; i++, len--) {
+                arr[i] ^= arr[len];
+                arr[len] ^= arr[i];
+                arr[i] ^= arr[len];
+            }
+
+            return new String(arr);
+        }
 
         /// <summary>
         /// This is an inline swap using the ToCharArray method. It involves making a swap 
@@ -45,10 +59,12 @@
         public string CharArrayCopy(string value)
         {
             char[] reversed = value.ToCharArray();
+
             for (int i = 0, j = reversed.Length - 1; i < j; i++, j--) {
                 reversed[j] = value[i];
                 reversed[i] = value[j];
             }
+
             return new String(reversed);
         }
 
@@ -64,11 +80,13 @@
         public string CharArrayCopyFast(string value)
         {
             char[] reversed = value.ToCharArray();
+
             for (int i = 0, j = reversed.Length - 1; i < j; i++, j--) {
                 char temp = reversed[i];
                 reversed[i] = reversed[j];
                 reversed[j] = temp;
             }
+
             return new String(reversed);
         }
 
@@ -93,7 +111,7 @@
         /// <summary>
         /// This method uses a character array only. This method gets by doing the original
         /// copy and instead saves all copying for the reversal layer. In this scenario,
-        /// you have to iterate until i &lt= j, because you need to restore that middle character.
+        /// you have to iterate until i &lt; j, because you need to restore that middle character.
         /// This generally results in one extra unneeded replacement per run of the algorithm,
         /// but that isn't bad. 
         /// </summary>
@@ -103,10 +121,12 @@
         public string CharArrayInline(string value)
         {
             char[] reversed = new char[value.Length];
+
             for (int i = 0, j = reversed.Length - 1; i <= j; i++, j--) {
                 reversed[i] = value[j];
                 reversed[j] = value[i];
             }
+
             return new String(reversed);
         }
 
@@ -114,6 +134,7 @@
         public string CharArrayInlineWithSurrogates(string value)
         {
             char[] reversed = new char[value.Length];
+
             for (int i = 0, j = value.Length - 1; i < value.Length; i++, j--) {
                 if (value[j] >= 0xD800 && value[j] <= 0xDFFF) {
                     reversed[i + 1] = value[j--];
@@ -123,6 +144,7 @@
                     reversed[i] = value[j];
                 }
             }
+
             return new String(reversed);
         }
 
@@ -135,10 +157,12 @@
         public string StringBuilderInline(string value)
         {
             var sb = new StringBuilder(value);
+
             for (int i = 0, j = value.Length - 1; i <= j; i++, j--) {
                 sb[i] = value[j];
                 sb[j] = value[i];
             }
+
             return sb.ToString();
         }
 
@@ -163,47 +187,33 @@
                 for (offset = 0; offset < buffer.Length; offset++) {
                     buffer[offset] = value[i--];
                 }
+
                 sb.Append(buffer, 0, buffer.Length);
             }
 
             for (offset = 0; i >= 0; i--, offset++) {
                 buffer[offset] = value[i];
             }
+
             sb.Append(buffer, 0, offset);
 
             return sb.ToString();
         }
 
-        //[BenchComparative]
-        //public unsafe string Unsafe(string value) {
-        //    string output = string.Copy(value);
-        //    fixed (char* pStr = output) {
-        //        char* pStart = pStr;
-        //        char* pEnd = pStr + (output.Length - 1);
-        //        char  temp;
-        //        for (; pStart < pEnd; pStart++, pEnd--) {
-        //            temp = *pStart;
-        //            *pStart = *pEnd;
-        //            *pEnd = temp;
-        //        }
-        //    }
-        //    return output;
-        //}
-
-        // Cf. http://stackoverflow.com/questions/228038/best-way-to-reverse-a-string
-        [BenchmarkComparative]
-        public static string CharArrayXor(string value)
-        {
-            char[] arr = value.ToCharArray();
-            int len = value.Length - 1;
-
-            for (int i = 0; i < len; i++, len--) {
-                arr[i] ^= arr[len];
-                arr[len] ^= arr[i];
-                arr[i] ^= arr[len];
-            }
-
-            return new String(arr);
-        }
+        ////[BenchComparative]
+        ////public unsafe string Unsafe(string value) {
+        ////    string output = string.Copy(value);
+        ////    fixed (char* pStr = output) {
+        ////        char* pStart = pStr;
+        ////        char* pEnd = pStr + (output.Length - 1);
+        ////        char  temp;
+        ////        for (; pStart < pEnd; pStart++, pEnd--) {
+        ////            temp = *pStart;
+        ////            *pStart = *pEnd;
+        ////            *pEnd = temp;
+        ////        }
+        ////    }
+        ////    return output;
+        ////}
     }
 }

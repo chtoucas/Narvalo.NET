@@ -23,6 +23,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +37,7 @@
     <NoWarn>1591</NoWarn>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -56,9 +58,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
       <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.Version.cs">
-      <Link>Properties\AssemblyInfo.Mvp.Version.cs</Link>
-    </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
@@ -74,6 +73,7 @@
     <Compile Include="Core\PageAsyncTaskManager.cs" />
     <Compile Include="Core\PageHost.cs" />
     <Compile Include="Core\PlatformServices.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenter`1.cs" />
     <Compile Include="HttpPresenter`2.cs" />

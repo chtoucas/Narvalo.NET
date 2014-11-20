@@ -23,6 +23,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +37,7 @@
     <DocumentationFile>bin\Release\Narvalo.Mvp.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -55,9 +57,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
       <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.Version.cs">
-      <Link>Properties\AssemblyInfo.Mvp.Version.cs</Link>
-    </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
@@ -71,6 +70,7 @@
     <Compile Include="CommandLine\MvpCommand`1.cs" />
     <Compile Include="CommandLine\PlatformServices.cs" />
     <Compile Include="CompositeView.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICompositeView.cs" />
     <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />

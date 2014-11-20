@@ -3,11 +3,9 @@
 namespace Narvalo.Edu.Fx
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> r);
 
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Combinator")]
     public static class YCombinator
     {
         public static Func<TSource, TResult> Y0<TSource, TResult>(Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
@@ -23,7 +21,6 @@ namespace Narvalo.Edu.Fx
             g = _ => generator.Invoke(g).Invoke(_);
 
             return g;
-
         }
 
         public static Func<TSource, TResult> Y2<TSource, TResult>(

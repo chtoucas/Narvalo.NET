@@ -23,6 +23,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +37,7 @@
     <DocumentationFile>bin\Release\Narvalo.Benchmarking.xml</DocumentationFile>
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -58,9 +60,6 @@
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
       <Link>Properties\AssemblyInfo.Core.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Core.Version.cs">
-      <Link>Properties\AssemblyInfo.Core.Version.cs</Link>
     </Compile>
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkAttribute.cs" />

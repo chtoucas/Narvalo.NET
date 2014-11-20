@@ -83,7 +83,7 @@
             }
 
             [Fact]
-            public static void ReturnsTrue_ForLiteralTrueAndWhitespacesAndLiteralStyle()
+            public static void ReturnsTrue_ForLiteralTrueAndWhiteSpacesAndLiteralStyle()
             {
                 // Act
                 bool? result = ParseTo.Boolean(" true ", BooleanStyles.Literal);

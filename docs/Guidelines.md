@@ -18,16 +18,16 @@ Optional components:
 How to initiale a new project
 -----------------------------
 
+Principle:
+- Debug Build is optimized for development.
+- Release Build is optimized for safety.
+
 ### Add relevant files as linked files to the "Properties" folder
 
-- Shared informations: `etc\AssemblyInfo.Common.cs`
+- Shared assembly informations: `etc\AssemblyInfo.Common.cs`
 - Library specific informations:
-    * for a core library: `etc\AssemblyInfo.Core.cs`
-    * for a misc library: `etc\AssemblyInfo.Miscs.cs`
-    * for a MVP library: `etc\AssemblyInfo.Mvp.cs`
-- Version informations:
-    * for a core library: `etc\AssemblyInfo.Core.Version.cs`
-    * for a MVP library: `etc\AssemblyInfo.Mvp.Version.cs`
+  * for a core library: `etc\AssemblyInfo.Core.cs`
+  * for a MVP library: `etc\AssemblyInfo.Mvp.cs`
 - Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml`
   with build action _CodeAnalysisDictionary_
 - Strong Name Key: `etc\Narvalo.snk`
@@ -38,31 +38,68 @@ How to initiale a new project
 In Debug mode:
 - "Build" panel, treat all warnings as errors.
 - "Build" panel, check for arithmetic overflow/underflow.
-- "Code Analysis" panel, use "Narvalo Debug Rules".
+- "Code Analysis" panel, use "Narvalo Rules".
 
 In Release mode:
 - "Build" panel, suppress compiler warnings 1591.
 - "Build" panel, treat all warnings as errors.
 - "Build" panel, output XML documentation file.
-- "Code Analysis" panel, use "Narvalo Release Rules" and enable Code Analysis
+- "Code Analysis" panel, use "Narvalo Rules" and enable Code Analysis
   on Build.
 
 For all modes:
 - "Signing" panel, sign the assembly using the "etc\Narvalo.snk" key.
+- "Build" panel, uncheck "Prefer 32-bit" if checked.
+- "Code Analysis" panel, uncheck "Suppress results from generated code (managed only)".
 
-### Configure StyleCop
+### Edit the project file
 
-Edit the local StyleCop settings to link to "etc\Settings.SourceAnalysis".
-For test projects, simply unselect all rules (for now).
-
-###
-
-Edit the project file and add the following line:
+Add the following line at the bottom:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
 
 Add the project to Narvalo.proj.
+
+### Configure StyleCop for Visual Studio
+
+Edit the local StyleCop settings and link it to "etc\Settings.SourceAnalysis".
+
+These settings only affect StyleCop when run explicitly from within Visual Studio.
+During Build, StyleCop is called from `Narvalo.Common.targets`.
+
+### Special Cases
+
+Desktop applications should include a .ini containing:
+```
+[.NET Framework Debugging Control]
+GenerateTrackingInfo=0
+AllowOptimize=1
+```
+Ensure that it is copied to the output directory.
+
+### Assembly versions
+
+- AssemblyVersion, version used by the runtime.
+- AssemblyFileVersion, version seen in the file explorer.
+- AssemblyInformationalVersion, version used by NuGet.
+
+### Global suppressions
+
+- [FIXME]
+- [GeneratedCode] to mark a suppression related to generated code.
+
+### Remarks
+
+Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
+the content of "etc\Settings.SourceAnalysis".
+
+The following projects use the default ruleset for Code Analysis.
+- Narvalo.DocuMaker
+- Narvalo.Edu
+- Narvalo.Junk
+- Playground
+- Playground.Benchmarks
 
 
 Coding Style
@@ -70,8 +107,16 @@ Coding Style
 
 - Max line-width 100 characters.
 - Passes all StyleCop rules.
+- Remove and sort usings.
+- Use a minimal set of references.
 
-### StyleCop Rules
+
+FxCop Rules
+-----------
+
+
+StyleCop Rules
+--------------
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
 
@@ -95,7 +140,9 @@ Temporary disabled documentation rules:
 - SA1604:ElementDocumentationMustHaveSummary
 - SA1606:ElementDocumentationMustHaveSummaryText
 - SA1611:ElementParametersMustBeDocumented
+- SA1614:ElementParameterDocumentationMustHaveText
 - SA1615:ElementReturnValueMustBeDocumented
+- SA1616:ElementReturnValueDocumentationMustHaveText
 - SA1618:GenericTypeParametersMustBeDocumented
 - SA1623:PropertySummaryDocumentationMustMatchAccessors
 - SA1633:FileMustHaveHeader
@@ -114,6 +161,16 @@ For package updates, use the Narvalo (All).sln solution.
 tools\NuGet\nuget.exe update self
 ```
 
+Periodic checklist
+------------------
+
+Fix
+- FIXME
+- TODO
+- XXX
+- REVIEW
+
+Global suppression files.
 
 Publishing
 ----------

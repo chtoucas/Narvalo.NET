@@ -27,6 +27,7 @@
     <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,6 +41,7 @@
     <DocumentationFile>bin\Release\Narvalo.Core.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -53,9 +55,6 @@
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
       <Link>Properties\AssemblyInfo.Core.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Core.Version.cs">
-      <Link>Properties\AssemblyInfo.Core.Version.cs</Link>
     </Compile>
     <Compile Include="Apply.cs" />
     <Compile Include="BooleanStyles.cs" />

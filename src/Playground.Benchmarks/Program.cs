@@ -1,9 +1,9 @@
 ﻿namespace Playground.Benchmarks
 {
     using System;
+    using Narvalo.Benchmarking;
     using Playground.Benchmarks.Comparisons;
     using Playground.Benchmarks.Internal;
-    using Narvalo.Benchmarking;
 
     class Program
     {

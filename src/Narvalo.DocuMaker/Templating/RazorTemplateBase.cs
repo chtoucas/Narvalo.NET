@@ -71,7 +71,7 @@ namespace Narvalo.DocuMaker.Templating
                         }
 
                         if (boolVal != null) {
-                            Debug.Assert(boolVal.Value);
+                            ////Debug.Assert(boolVal.Value);
                             valStr = name;
                         }
 

@@ -10,7 +10,9 @@
 
         public static IEnumerable<double> UniformDistribution()
         {
-            while (true) yield return Random_.NextDouble();
+            while (true) {
+                yield return Random_.NextDouble();
+            }
         }
 
         public static double CauchyQuantile_(double p)

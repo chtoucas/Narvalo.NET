@@ -20,8 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0F5DD07C-8F90-4998-97B5-92991FFF2833}"
 	ProjectSection(SolutionItems) = preProject
 		docs\Changelog.md = docs\Changelog.md
+		docs\Guidelines.md = docs\Guidelines.md
+		docs\Overview.md = docs\Overview.md
 		README.md = README.md
-		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		docs\TODO.md = docs\TODO.md
 	EndProjectSection
 EndProject
@@ -49,13 +50,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{99
 	ProjectSection(SolutionItems) = preProject
 		etc\AssemblyInfo.Common.cs = etc\AssemblyInfo.Common.cs
 		etc\AssemblyInfo.Core.cs = etc\AssemblyInfo.Core.cs
-		etc\AssemblyInfo.Core.Version.cs = etc\AssemblyInfo.Core.Version.cs
-		etc\AssemblyInfo.Miscs.cs = etc\AssemblyInfo.Miscs.cs
 		etc\AssemblyInfo.Mvp.cs = etc\AssemblyInfo.Mvp.cs
-		etc\AssemblyInfo.Mvp.Version.cs = etc\AssemblyInfo.Mvp.Version.cs
 		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
-		etc\Debug.ruleset = etc\Debug.ruleset
-		etc\Release.ruleset = etc\Release.ruleset
+		etc\Narvalo.ruleset = etc\Narvalo.ruleset
+		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		etc\Tests.ruleset = etc\Tests.ruleset
 	EndProjectSection

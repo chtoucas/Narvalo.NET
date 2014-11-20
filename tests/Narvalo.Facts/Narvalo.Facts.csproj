@@ -25,6 +25,7 @@
     <CodeAnalysisRuleSet>..\..\etc\Tests.ruleset</CodeAnalysisRuleSet>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,12 +34,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\etc\Tests.ruleset</CodeAnalysisRuleSet>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -114,16 +116,12 @@
     <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
       <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Core.Version.cs">
-      <Link>Properties\AssemblyInfo.Core.Version.cs</Link>
-    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Fx\NullableFacts.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
-    <Compile Include="Int64EncoderFacts.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
+    <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
   </ItemGroup>

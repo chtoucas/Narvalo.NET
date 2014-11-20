@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using Xunit.Extensions;
 
@@ -19,11 +20,13 @@
         /// <summary>
         /// Test data borrowed from the Encode-Base58 Perl module.
         /// </summary>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements",
+            Justification = "Very long list of sample data.")]
         public static IEnumerable<object[]> FlickrBase58SampleData
         {
             get
             {
-                #region Data
+                #region Very long list of sample data.
 
                 yield return new object[] { String.Empty, 0 };
                 yield return new object[] { "npL6MjP8Qfc", Int64.MaxValue };
@@ -533,7 +536,7 @@
         }
 
         [Fact]
-        public static void RoundTripBase58()
+        public static void RoundtripBase58()
         {
             // Arrange
             long value = 3471391110;
@@ -543,7 +546,7 @@
         }
 
         [Fact]
-        public static void RoundTripFlickrBase58String()
+        public static void RoundtripFlickrBase58String()
         {
             // Arrange
             long value = 3471391110;

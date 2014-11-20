@@ -28,6 +28,7 @@
     <CodeAnalysisRuleSet>..\..\etc\Tests.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,10 +37,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\etc\Tests.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -75,9 +77,6 @@
     </Compile>
     <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
       <Link>Properties\AssemblyInfo.Mvp.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.Version.cs">
-      <Link>Properties\AssemblyInfo.Mvp.Version.cs</Link>
     </Compile>
     <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />

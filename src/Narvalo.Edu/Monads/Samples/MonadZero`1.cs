@@ -8,27 +8,27 @@ namespace Narvalo.Edu.Monads.Samples
     public sealed class MonadZero<T>
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
         public static MonadZero<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "funM")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public MonadZero<TResult> Bind<TResult>(Func<T, MonadZero<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadZero<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadZero<T> μ(MonadZero<MonadZero<T>> square)
         {
             return square.Bind(_ => _);

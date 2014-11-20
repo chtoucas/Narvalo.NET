@@ -8,35 +8,33 @@ namespace Narvalo.Edu.Monads.Samples
     public sealed class MonadPlus<T>
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
         public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public MonadPlus<T> Plus(MonadPlus<T> other)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "funM")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadPlus<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
         {
             return square.Bind(_ => _);

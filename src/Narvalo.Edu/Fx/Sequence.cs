@@ -32,37 +32,37 @@ namespace Narvalo.Edu.Fx
             return Create(_ => Iteration.Create(resultSelector.Invoke(_), iter.Invoke(_)), seed);
         }
 
-        //public static IEnumerable<TResult> Create<TSource, TResult>(
-        //    Func<TSource, Maybe<Iteration<TResult, TSource>>> generator,
-        //    TSource seed)
-        //{
-        //    TSource next = seed;
+        ////public static IEnumerable<TResult> Create<TSource, TResult>(
+        ////    Func<TSource, Maybe<Iteration<TResult, TSource>>> generator,
+        ////    TSource seed)
+        ////{
+        ////    TSource next = seed;
 
-        //    while (true) {
-        //        var iter = generator.Invoke(next);
+        ////    while (true) {
+        ////        var iter = generator.Invoke(next);
 
-        //        if (iter.IsNone) {
-        //            yield break;
-        //        }
+        ////        if (iter.IsNone) {
+        ////            yield break;
+        ////        }
 
-        //        yield return iter.Value.Result;
+        ////        yield return iter.Value.Result;
 
-        //        next = iter.Value.Next;
-        //    }
-        //}
+        ////        next = iter.Value.Next;
+        ////    }
+        ////}
 
-        // Correspondence with Narvalo.Fx.Sequence.Create
-        //public static IEnumerable<TResult> Create<TSource, TResult>(
-        //    Func<TSource, TSource> iter,
-        //    TSource seed,
-        //    Func<TSource, TResult> resultSelector,
-        //    Func<TSource, bool> predicate)
-        //{
-        //    return Create(
-        //        _ => predicate.Invoke(_)
-        //            ? Iteration.MayCreate(resultSelector.Invoke(_), iter.Invoke(_))
-        //            : Maybe<Iteration<TResult, TSource>>.None,
-        //        seed);
-        //}
+        //// Correspondence with Narvalo.Fx.Sequence.Create
+        ////public static IEnumerable<TResult> Create<TSource, TResult>(
+        ////    Func<TSource, TSource> iter,
+        ////    TSource seed,
+        ////    Func<TSource, TResult> resultSelector,
+        ////    Func<TSource, bool> predicate)
+        ////{
+        ////    return Create(
+        ////        _ => predicate.Invoke(_)
+        ////            ? Iteration.MayCreate(resultSelector.Invoke(_), iter.Invoke(_))
+        ////            : Maybe<Iteration<TResult, TSource>>.None,
+        ////        seed);
+        ////}
     }
 }

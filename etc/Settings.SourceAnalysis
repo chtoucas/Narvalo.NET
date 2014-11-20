@@ -2,6 +2,9 @@
   <GlobalSettings>
     <StringProperty Name="MergeSettingsFiles">NoMerge</StringProperty>
     <BooleanProperty Name="WriteCache">False</BooleanProperty>
+    <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
+    <IntegerProperty Name="MaxViolationCount">100</IntegerProperty>
+    <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
   </GlobalSettings>
   <Parsers>
     <Parser ParserId="StyleCop.CSharp.CsParser">
@@ -78,6 +81,16 @@
           </RuleSettings>
         </Rule>
         <Rule Name="GenericTypeParametersMustBeDocumented">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="ElementParameterDocumentationMustHaveText">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="ElementReturnValueDocumentationMustHaveText">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>

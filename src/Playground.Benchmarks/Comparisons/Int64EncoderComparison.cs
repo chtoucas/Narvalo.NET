@@ -27,51 +27,50 @@
             't', 'u', 'v', 'w', 'x', 'y', 'z', 
         };
 
+        ////public static void ConvertInt64_Decode() {
+        ////    int howMany = 20000;
+        ////    var alts = ConvertInt64Tests.Decode();
+        ////    var test = new SpeedTest<string>(alts);
+        ////    var results =  test.Time(howMany, "6hJsyS");
 
-        //public static void ConvertInt64_Decode() {
-        //    int howMany = 20000;
-        //    var alts = ConvertInt64Tests.Decode();
-        //    var test = new SpeedTest<string>(alts);
-        //    var results =  test.Time(howMany, "6hJsyS");
+        ////    DisplayResult("ConvertInt64.Decode()", howMany, results);
+        ////}
 
-        //    DisplayResult("ConvertInt64.Decode()", howMany, results);
-        //}
+        ////public static void ConvertInt64_Encode() {
+        ////    int howMany = 20000;
+        ////    var alts = ConvertInt64Tests.Encode();
+        ////    var test = new SpeedTest<long>(alts);
+        ////    var results = test.Time(howMany, 3471131850);
 
-        //public static void ConvertInt64_Encode() {
-        //    int howMany = 20000;
-        //    var alts = ConvertInt64Tests.Encode();
-        //    var test = new SpeedTest<long>(alts);
-        //    var results = test.Time(howMany, 3471131850);
+        ////    DisplayResult("ConvertInt64.Encode()", howMany, results);
+        ////}
 
-        //    DisplayResult("ConvertInt64.Encode()", howMany, results);
-        //}
+        ////public static IDictionary<string, long> Decode(int iterations, string value)
+        ////{
+        ////    var list = new BenchmarkCollection<string>();
 
-        //public static IDictionary<string, long> Decode(int iterations, string value)
-        //{
-        //    var list = new BenchmarkCollection<string>();
+        ////    // The ordered array should be the fastest.
+        ////    list.Add("Ordered array", (p) => Decode_OrderedArray(p));
+        ////    list.Add("String", (p) => Decode_String(p));
+        ////    list.Add("Unordered array", (p) => Decode_UnorderedArray(p));
 
-        //    // The ordered array should be the fastest.
-        //    list.Add("Ordered array", (p) => Decode_OrderedArray(p));
-        //    list.Add("String", (p) => Decode_String(p));
-        //    list.Add("Unordered array", (p) => Decode_UnorderedArray(p));
+        ////    var test = BenchComparer.Create(new WallTimer(), list);
 
-        //    var test = BenchComparer.Create(new WallTimer(), list);
+        ////    return test.Compare(iterations, value /* "6hJsyS" */);
+        ////}
 
-        //    return test.Compare(iterations, value /* "6hJsyS" */);
-        //}
+        ////public static IDictionary<string, long> Encode(int iterations, long value)
+        ////{
+        ////    var list = new BenchmarkCollection<long>();
 
-        //public static IDictionary<string, long> Encode(int iterations, long value)
-        //{
-        //    var list = new BenchmarkCollection<long>();
+        ////    // Both should give similar results.
+        ////    list.Add("Array", (p) => Encode_Array(p));
+        ////    list.Add("String", (p) => Encode_String(p));
 
-        //    // Both should give similar results.
-        //    list.Add("Array", (p) => Encode_Array(p));
-        //    list.Add("String", (p) => Encode_String(p));
+        ////    var test = BenchComparer.Create(new WallTimer(), list);
 
-        //    var test = BenchComparer.Create(new WallTimer(), list);
-
-        //    return test.Compare(iterations, value /* 3471131850 */);
-        //}
+        ////    return test.Compare(iterations, value /* 3471131850 */);
+        ////}
 
         #region Private methods
 
@@ -82,9 +81,11 @@
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.BinarySearch(AlphabetOrderedArray, value[i]);
+
                 if (index < 0) {
                     throw new ArgumentException("Invalid string", "value");
                 }
+
                 result += multi * index;
                 multi *= AlphabetLength;
             }
@@ -100,9 +101,11 @@
             while (value.Length > 0) {
                 string digit = value.Substring(value.Length - 1);
                 int index = Alphabet.LastIndexOf(digit, StringComparison.Ordinal);
+
                 if (index < 0) {
                     throw new ArgumentException("Invalid string", "value");
                 }
+
                 result += multi * index;
                 multi *= AlphabetLength;
                 value = value.Substring(0, value.Length - 1);
@@ -118,9 +121,11 @@
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.IndexOf(AlphabetUnorderedArray, value[i]);
+
                 if (index < 0) {
                     throw new ArgumentException("Invalid string", "value");
                 }
+
                 result += multi * index;
                 multi *= AlphabetLength;
             }

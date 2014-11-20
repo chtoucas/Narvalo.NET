@@ -3,7 +3,6 @@
 namespace Narvalo.DocuMaker
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Narvalo.DocuMaker.Narrator;
     using Narvalo.DocuMaker.Properties;
     using Serilog;
@@ -15,8 +14,7 @@ namespace Narvalo.DocuMaker
         const int ErrorExitCode_ = 1;
         const int FatalExitCode_ = 2;
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "args")]
-        public static int Main(string[] args)
+        public static int Main()
         {
             // Resolve settings.
             var settings = SettingsResolver.Resolve();

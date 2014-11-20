@@ -6,11 +6,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("fb4adca1-86e0-4948-a9f9-735973d17b43")]
 
-// Version utilisée par le runtime.
-[assembly: AssemblyVersion("0.1.0.0")]
-
-// Version visible dans l'explorateur.
-[assembly: AssemblyFileVersion("0.1.0.0")]
-
-// Version utilisée par NuGet.
-[assembly: AssemblyInformationalVersion("0.1.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0")]

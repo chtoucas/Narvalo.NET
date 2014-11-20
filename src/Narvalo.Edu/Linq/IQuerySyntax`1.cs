@@ -3,13 +3,11 @@
 namespace Narvalo.Edu.Linq
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public interface IQuerySyntax<T> : IQuerySyntax
     {
         IQuerySyntax<T> Where(Func<T, bool> predicate);
 
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select")]
         IQuerySyntax<TResult> Select<TResult>(Func<T, TResult> selector);
 
         IQuerySyntax<TResult> SelectMany<TMiddle, TResult>(

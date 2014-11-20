@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>..\..\etc\Samples.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,13 @@
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>..\..\etc\Samples.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,9 +60,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
       <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.Version.cs">
-      <Link>Properties\AssemblyInfo.Mvp.Version.cs</Link>
-    </Compile>
     <Compile Include="ISampleView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +67,9 @@
     <Compile Include="SamplePresenter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\etc\Narvalo.snk">
+      <Link>Properties\Narvalo.snk</Link>
+    </None>
     <None Include="App.config" />
     <None Include="MvpCommandLine.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

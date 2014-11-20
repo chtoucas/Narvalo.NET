@@ -8,22 +8,22 @@ namespace Narvalo.Edu.Monads.Samples
     public sealed class Monad<T>
     {
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "funM")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> funM)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
             return square.Bind(_ => _);

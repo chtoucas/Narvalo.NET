@@ -6,10 +6,7 @@
     using System.Text;
     using Microsoft.JScript;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <see cref="http://madskristensen.net/post/Verify-JavaScript-syntax-using-C.aspx"/>
+    // Cf. http://madskristensen.net/post/Verify-JavaScript-syntax-using-C.aspx"
     public class JScriptCompiler : IDisposable
     {
         JScriptCodeProvider _provider = new JScriptCodeProvider();

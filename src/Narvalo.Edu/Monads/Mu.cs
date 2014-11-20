@@ -6,17 +6,12 @@ namespace Narvalo.Edu.Monads
 
     class Mu
     {
-        public Monad<Mu> Out { get; private set; }
-
         public Mu(Monad<Mu> f)
         {
             this.Out = f;
         }
 
-        public TResult Cata<TResult>(Func<Monad<TResult>, TResult> phi)
-        {
-            return phi(Out.Map(_ => _.Cata(phi)));
-        }
+        public Monad<Mu> Out { get; private set; }
 
         public static Mu Ana<TResult>(Func<TResult, Monad<TResult>> psi, TResult seed)
         {
@@ -29,6 +24,11 @@ namespace Narvalo.Edu.Monads
             T1 seed)
         {
             return Mu.Ana(psi, seed).Cata(phi);
+        }
+
+        public TResult Cata<TResult>(Func<Monad<TResult>, TResult> phi)
+        {
+            return phi(Out.Map(_ => _.Cata(phi)));
         }
     }
 }

@@ -1,7 +1,14 @@
 TODO
 ====
 
+En vrac :
+- OK Core & Playground
+- Narvalo.DocuMaker & Benchmarks should use the Narvalo rulesets.
+- Remove the ruleset for Samples.
+- Review csproj and make Narvalo.Facts a true test proj. Check ExcludeFrom
 - Create Narvalo (NuGet).sln
+- Rework versioning & complete AssemblyDescription.
+- Global suppression files.
 - NuGet pub script (in Fake or PowerShell)
 - Fix all TODO, FIXME, FIXME_PCL, XXX.
 - Use Error for ruleset?
@@ -11,10 +18,14 @@ TODO
 - Replace all empty method with "// Intentionally left blank.".
 - Review StyleCop settings.
 - Re-enable Gendarme.
+- Re-enable a few code contracts.
 - Remove Markdown Deep.
 - Add a XML schema for Narvalo config.
 - Review the use of Debug, DebugCheck and Require.
 - Use resources for messages?
+- AssemblyInfo:
+  [assembly: SatelliteContractVersion("X.X.X.X")] ?
+  [assembly: AssemblyMetadata("Serviceable", "True")] ?
 
 
 Narvalo.Mvp

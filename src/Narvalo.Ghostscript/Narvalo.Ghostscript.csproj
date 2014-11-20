@@ -54,9 +54,6 @@
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Miscs.cs">
-      <Link>Properties\AssemblyInfo.Miscs.cs</Link>
-    </Compile>
     <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>

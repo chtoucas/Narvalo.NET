@@ -8,8 +8,7 @@
     <!-- Only enable Source Analysis in Release mode. -->
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Debug'">false</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisEnabled>
-    <!-- We do not want a Build to fail because of StyleCop errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(SolutionDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 

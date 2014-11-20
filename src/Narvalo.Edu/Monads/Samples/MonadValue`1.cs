@@ -9,73 +9,72 @@ namespace Narvalo.Edu.Monads.Samples
         where T : struct
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
         public static MonadValue<T> None { get { throw new NotImplementedException(); } }
 
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
+        public static bool operator ==(MonadValue<T> left, MonadValue<T> right)
+        {
+            throw new NotImplementedException();
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
+        public static bool operator !=(MonadValue<T> left, MonadValue<T> right)
+        {
+            throw new NotImplementedException();
+        }
+
         // [Haskell] mplus
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "other")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public MonadValue<T> OrElse(MonadValue<T> other)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] >>=
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "funM")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public MonadValue<TResult> Bind<TResult>(Func<T, MonadValue<TResult>> funM)
-        where TResult : struct
+            where TResult : struct
+        {
+            throw new NotImplementedException();
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
+        public bool Equals(MonadValue<T> other)
+        {
+            throw new NotImplementedException();
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
+            Justification = "This code is not meant to be used. Only for educational purpose.")]
+        public override int GetHashCode()
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadValue<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "square")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics.")]
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)
         {
             return square.Bind(_ => _);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public bool Equals(MonadValue<T> other)
-        {
-            throw new NotImplementedException();
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public override bool Equals(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static bool operator ==(MonadValue<T> left, MonadValue<T> right)
-        {
-            throw new NotImplementedException();
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left")]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right")]
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
-        public static bool operator !=(MonadValue<T> left, MonadValue<T> right)
-        {
-            throw new NotImplementedException();
         }
     }
 }

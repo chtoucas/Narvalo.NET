@@ -14,6 +14,7 @@ namespace Narvalo.Edu.Fx
         }
 
         public TResult Result { get { return _pair.Item1; } }
+
         public TSource Next { get { return _pair.Item2; } }
     }
 }
