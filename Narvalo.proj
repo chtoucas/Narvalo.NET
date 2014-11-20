@@ -48,12 +48,14 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj" />
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.DocuMaker\Narvalo.DocuMaker.csproj" />-->
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.DocuMaker\Narvalo.DocuMaker.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Edu\Narvalo.Edu.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Incubator\Narvalo.Incubator.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Junk\Narvalo.Junk.csproj" />
@@ -61,15 +63,19 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj" />
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />-->
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Playground\Playground.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Playground.Benchmarks\Playground.Benchmarks.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)samples\MvpCommandLine\MvpCommandLine.csproj" />
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)samples\MvpWebForms\MvpWebForms.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)samples\MvpWindowsForms\MvpWindowsForms.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+    <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
   </ItemGroup>
 

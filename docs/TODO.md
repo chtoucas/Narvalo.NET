@@ -1,6 +1,8 @@
 TODO
 ====
 
+WARNING: Realease Build currently will fail.
+
 En vrac :
 - OK Core & Playground
 - Narvalo.DocuMaker & Benchmarks should use the Narvalo rulesets.
