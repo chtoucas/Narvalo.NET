@@ -167,7 +167,6 @@ Periodic checklist
 Task List
 - FIXME
 - TODO
-- XXX
 - REVIEW
 
 Global suppression files.
