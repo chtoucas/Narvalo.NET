@@ -615,6 +615,21 @@ namespace Narvalo.Fx
                 Assert.True(m.IsSome);
                 Assert.Equal(2, m.Value);
             }
+
+            [Fact]
+            public static void ReturnsNone_WhenSelectorReturnsNull()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, Maybe<int>> selector = _ => null;
+
+                // Act
+                var m = source.Bind(selector);
+
+                // Assert
+                Assert.True(m != null);
+                Assert.True(m.IsNone);
+            }
         }
 
         public static class TheWhereOperator

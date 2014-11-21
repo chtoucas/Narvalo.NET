@@ -205,8 +205,8 @@ namespace Narvalo.Collections.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;		// For Require
-    using Narvalo.Fx;	// For Unit
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
 
     /*!
      * Internal extensions for IEnumerable<Output<T>>.

@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
@@ -68,10 +69,12 @@ namespace Narvalo
             return _isError ? _exceptionInfo.ToString() : "{Void}";
         }
 
+#if CONTRACTS_FULL
         [ContractInvariantMethod]
         void ObjectInvariants()
         {
             Contract.Invariant(!_isError || _exceptionInfo != null);
         }
+#endif
     }
 }

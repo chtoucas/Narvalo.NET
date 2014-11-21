@@ -288,8 +288,8 @@ namespace <#= LinqNamespace #>.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;		// For Require
-    using Narvalo.Fx;	// For Unit
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>

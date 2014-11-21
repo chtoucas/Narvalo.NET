@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
@@ -113,11 +114,13 @@ namespace Narvalo.Fx
             return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
         }
 
+#if CONTRACTS_FULL
         [ContractInvariantMethod]
         void ObjectInvariants()
         {
             Contract.Invariant(_isSuccess || _exceptionInfo != null);
         }
+#endif
     }
 
     // Monad definition.
@@ -131,7 +134,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
@@ -140,14 +143,14 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Output<T> η(T value)
         {
             return new Output<T>(value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");

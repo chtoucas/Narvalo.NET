@@ -57,6 +57,7 @@ namespace Narvalo
         public static string ToBase25String(long value)
         {
             Contract.Requires(value >= (long)0);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return Encode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
@@ -64,6 +65,7 @@ namespace Narvalo
         public static string ToBase34String(long value)
         {
             Contract.Requires(value >= (long)0);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return Encode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
@@ -71,6 +73,7 @@ namespace Narvalo
         public static string ToBase58String(long value)
         {
             Contract.Requires(value >= (long)0);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return Encode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
@@ -78,6 +81,7 @@ namespace Narvalo
         public static string ToFlickrBase58String(long value)
         {
             Require.GreaterThanOrEqualTo(value, (long)0, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             string result = String.Empty;
 
@@ -188,6 +192,7 @@ namespace Narvalo
             Require.GreaterThanOrEqualTo(value, (long)0, "value");
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             string result = String.Empty;
 

@@ -65,7 +65,7 @@ namespace Narvalo.Fx
      * ### Maybe<T> vs Nullable<T> ###
      * 
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
-     * use of the `Maybe<T>` when a nullable would make a better fit, we shall create a FxCop rule.
+     * use of the `Maybe<T>` when a nullable would make a better fit, I should create a FxCop rule.
      * 
      * Implementation
      * --------------
@@ -421,19 +421,20 @@ namespace Narvalo.Fx
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
+            return IsSome ? (selector.Invoke(Value) ?? Maybe<TResult>.None) : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Maybe<T> η(T value)
         {
             return value != null ? new Maybe<T>(value) : Maybe<T>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
             Require.NotNull(square, "square");
@@ -489,6 +490,9 @@ namespace Narvalo.Fx
 
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
+            Require.NotNull(other, "other");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
+
             return IsSome ? other : Maybe<TResult>.None;
         }
 

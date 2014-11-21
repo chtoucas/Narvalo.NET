@@ -41,7 +41,6 @@
       OutputPath=$(BuildDir)bin\$(Configuration)\;
       BaseIntermediateOutputPath=$(BuildDir)obj\;
       BuildInParallel=$(BuildInParallel);
-      BuildCalledFromNarvaloProj=true;
       AnalysisOutDir=$(AnalysisOutDir)
     </BuildProperties>
   </PropertyGroup>
@@ -91,7 +90,6 @@
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
              StopOnFirstFailure="true">
-      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
 
@@ -131,6 +129,10 @@
       </BuildProperties>
     </PropertyGroup>
   </Target>
+
+  <Target Name="BeforeAnalyze"
+          BeforeTargets="Analyze"
+          DependsOnTargets="RestorePackages;CreateAnalysisOutDir" />
 
   <Target Name="BeforeBuild"
           BeforeTargets="Build"

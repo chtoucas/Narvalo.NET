@@ -839,8 +839,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;		// For Require
-    using Narvalo.Fx;	// For Unit
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads.Samples;
 
     /*!

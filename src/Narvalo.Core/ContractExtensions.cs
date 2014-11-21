@@ -6,7 +6,7 @@ namespace Narvalo
 
     public static class ContractExtensions
     {
-        public static T AssumeNotNull<T>(this T obj, string why = null) where T : class
+        public static T AssumeNotNull<T>(this T obj) where T : class
         {
             Contract.Ensures(Contract.Result<T>() == obj);
             Contract.Ensures(Contract.Result<T>() != null);

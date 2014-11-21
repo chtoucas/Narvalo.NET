@@ -12,7 +12,7 @@
     <SourceAnalysisOverrideSettingsFile>$(SolutionDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(BuildCalledFromNarvaloProj)' == 'true' And $(AnalysisOutDir) != ''">
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true' And $(AnalysisOutDir) != ''">
     <!-- When called from Narvalo.proj, reports are saved in a custom location. -->
     <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
     <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
@@ -20,46 +20,57 @@
 
   <!-- ### Code Contracts ### -->
 
-  <PropertyGroup Condition="'$(BuildCalledFromNarvaloProj)' == 'true' And $(RunCodeContracts) == 'true'">
-    <!-- Disable Source Analysis -->
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true' And $(RunCodeContracts) == 'true'">
+    <!-- Disable Source Analysis. -->
     <SourceAnalysisEnabled>false</SourceAnalysisEnabled>
-    <!-- Disable Code Analysis -->
+    <!-- Disable Code Analysis. -->
     <RunCodeAnalysis>false</RunCodeAnalysis>
 
-    <!--
-      Optimal settings.
-     NB: Section number refers to the official Code Contracts documentation.
-    -->
+    <!-- Section number refers to the official Code Contracts documentation. -->
 
-    <!-- 1. Assembly Mode -->
-    <!-- Custom Parameter Validation (6.1.1) -->
+    <!-- 1. Assembly Mode. -->
+    <!-- Custom Parameter Validation (6.1.1). -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
 
-    <!-- 2. Runtime Checking -->
-    <!-- Perform Runtime Contract Checking (6.2.1) -->
+    <!-- 2. Runtime Checking. -->
+    <!-- Perform Runtime Contract Checking (6.2.1). -->
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <!-- Only Public Surface Contracts (6.2.2) -->
+    <!-- Only Public Surface Contracts (6.2.2). -->
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
-    <!-- Assert On Contract Failure (6.2.3) -->
+    <!-- Assert On Contract Failure (6.2.3). -->
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
-    <!-- Call-site Requires Checking (6.2.4) -->
+    <!-- Call-site Requires Checking (6.2.4). -->
     <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
-    <!-- Skip Quantifiers (6.2.5) -->
+    <!-- Skip Quantifiers (6.2.5). -->
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
 
-    <!-- 3. Perform Static Contract Checking -->
-    <!-- Background checking is not available in terminal. -->
+    <!-- 3. Static  Checking. -->
+    <!-- Perform Static Contract Checking (6.6). -->
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <!-- Background checking is not available in terminal.-->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-    <!-- Only useful when running inside VS -->
+    <!-- Only useful when running inside VS. -->
     <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <!-- Fail build on warnings. -->
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <!-- Infers -->
+    <!-- Check non-null. -->
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <!-- Check arithmetic. -->
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <!-- Check array bounds. -->
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <!-- Check enum writes. -->
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <!-- Check missing public requires. -->
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <!-- Check missing public ensures. -->
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <!-- Infers. -->
     <CodeContractsInferRequires>True</CodeContractsInferRequires>
     <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
     <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
     <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
-
     <!-- "3" represents the highest possible warning level. -->
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
@@ -67,14 +78,12 @@
     <!-- 4. Contract Reference Assembly (6.2.5) -->
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
-    <!--<CodeContractsLibPaths />-->
-    <!--<CodeContractsExtraRewriteOptions />-->
-    <!--<CodeContractsExtraAnalysisOptions />-->
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+  </PropertyGroup>
 
-    <!--
-      Temporary overrides
-    -->
-
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true' And $(RunCodeContracts) == 'true'">
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
@@ -95,7 +104,7 @@
     <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
     <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
     <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
     <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
     <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
     <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
@@ -118,7 +127,7 @@
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsBeingOptimisticOnExternal>False</CodeContractsBeingOptimisticOnExternal>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
 

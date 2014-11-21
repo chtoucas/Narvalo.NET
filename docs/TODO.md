@@ -17,8 +17,8 @@ En vrac
 
 WARNING: Realease Build currently fail.
 
-- OK Core & Playground
-- Add Contract.Invariant messsages
+- Add Contract.Invariant,... messsages
+- Remove CONTRACTS_FULL
 - Narvalo.DocuMaker & Benchmarks should use the Narvalo rulesets.
 - Remove the ruleset for Samples.
 - Fix regions, ////, /*!, Comments in english

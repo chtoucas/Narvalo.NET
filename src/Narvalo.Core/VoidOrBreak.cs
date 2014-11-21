@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     public sealed class VoidOrBreak
@@ -53,10 +54,12 @@ namespace Narvalo
             return IsBreak ? _reason : "{Void}";
         }
 
+#if CONTRACTS_FULL
         [ContractInvariantMethod]
         void ObjectInvariants()
         {
             Contract.Invariant(!_isBreak || _reason != null);
         }
+#endif
     }
 }

@@ -471,6 +471,7 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<Monad<TSource>> @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -626,8 +627,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;		// For Require
-    using Narvalo.Fx;	// For Unit
+    using Narvalo;      // For Require
+    using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads.Samples;
 
     /*!
@@ -639,6 +640,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<Monad<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
             var seed = Monad.Return(Enumerable.Empty<TSource>());
             Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> fun
@@ -649,7 +651,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun);
+            return @this.Aggregate(seed, fun).AssumeNotNull();
         }
     }
 

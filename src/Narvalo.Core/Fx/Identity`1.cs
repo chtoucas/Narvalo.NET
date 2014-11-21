@@ -113,14 +113,14 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<T> η(T value)
         {
             return new Identity<T>(value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<T> μ(Identity<Identity<T>> square)
         {
             Require.NotNull(square, "square");
@@ -140,7 +140,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static T ε(Identity<T> monad)
         {
             Require.NotNull(monad, "monad");
@@ -149,7 +149,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
             return new Identity<Identity<T>>(monad);
