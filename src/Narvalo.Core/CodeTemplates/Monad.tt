@@ -230,6 +230,7 @@ namespace <#= Namespace #> {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -251,6 +252,8 @@ namespace <#= Namespace #> {
 #>
 
 namespace <#= Namespace #> {
+    using System.Diagnostics.Contracts;
+
 <#+ EmitCoreComonad(); #>
 }
 <#+
@@ -266,6 +269,7 @@ namespace <#= Namespace #> {
 namespace <#= LinqNamespace #> {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -282,6 +286,7 @@ namespace <#= LinqNamespace #> {
 namespace <#= LinqNamespace #>.Internal {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -357,6 +362,8 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
 <#+ StructConstraint_("T"); #>
         {
+            Contract.Requires(square != null);
+
             return <#= Name #><T>.μ(square);
         }
 
@@ -496,6 +503,8 @@ namespace <#= LinqNamespace #>.Internal {
         public static T Extract<T>(<#= Name #><T> monad)
 <#+ StructConstraint_("T"); #>
         {
+            Contract.Requires(monad != null);
+
             return <#= Name #><T>.ε(monad);
         }
 
@@ -639,6 +648,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -801,6 +811,10 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.Join(
                 inner,
@@ -822,6 +836,10 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.GroupJoin(
                 inner, 
@@ -849,6 +867,11 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return JoinCore_(
                 @this,
                 inner,
@@ -870,6 +893,11 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return GroupJoinCore_(
                 @this,
                 inner,
@@ -893,6 +921,9 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ NotNull_("seq"); #>
 <#+ NotNull_("resultSelector"); #>
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -915,6 +946,9 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ NotNull_("seq"); #>
 <#+ NotNull_("resultSelector"); #>
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -971,6 +1005,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
         }
@@ -983,6 +1018,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
@@ -1039,6 +1075,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ NotNull_("value"); #>
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -1212,6 +1249,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(predicateM != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -1245,6 +1283,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(resultSelectorM != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -1261,6 +1300,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -1277,6 +1317,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
  <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -1287,6 +1328,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -1297,6 +1339,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -1315,6 +1358,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1327,6 +1372,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(); #>
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1445,6 +1492,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ DebugNotNull_("@this"); #>
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -1478,6 +1526,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ DebugNotNull_("@this"); #>
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Reduce(accumulatorM);
         }

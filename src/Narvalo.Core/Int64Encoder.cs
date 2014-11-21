@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public static class Int64Encoder
     {
@@ -55,16 +56,22 @@ namespace Narvalo
 
         public static string ToBase25String(long value)
         {
+            Contract.Requires(value >= (long)0);
+
             return Encode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
 
         public static string ToBase34String(long value)
         {
+            Contract.Requires(value >= (long)0);
+
             return Encode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
 
         public static string ToBase58String(long value)
         {
+            Contract.Requires(value >= (long)0);
+
             return Encode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
 
@@ -150,6 +157,8 @@ namespace Narvalo
 
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
+            Require.NotNull(value, "value");
+
             long result = 0;
             long multiplier = 1;
 

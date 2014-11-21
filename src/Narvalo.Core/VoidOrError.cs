@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
     public sealed class VoidOrError
@@ -23,7 +24,15 @@ namespace Narvalo
             _exceptionInfo = exceptionInfo;
         }
 
-        public static VoidOrError Success { get { return Success_; } }
+        public static VoidOrError Success
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<VoidOrError>() != null);
+
+                return Success_;
+            }
+        }
 
         public bool IsError { get { return _isError; } }
 
@@ -42,6 +51,7 @@ namespace Narvalo
         public static VoidOrError Failure(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
+            Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             return new VoidOrError(exceptionInfo);
         }
@@ -56,6 +66,12 @@ namespace Narvalo
         public override string ToString()
         {
             return _isError ? _exceptionInfo.ToString() : "{Void}";
+        }
+
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(!_isError || _exceptionInfo != null);
         }
     }
 }

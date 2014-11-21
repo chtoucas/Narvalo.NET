@@ -29,6 +29,7 @@ using global::System.Diagnostics.CodeAnalysis;
 namespace Narvalo.Collections {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -84,6 +85,7 @@ namespace Narvalo.Collections {
             Func<TSource, Identity<bool>> predicateM)
         {
             Require.Object(@this);
+            Contract.Requires(predicateM != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -110,6 +112,7 @@ namespace Narvalo.Collections {
             Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
         {
             Require.Object(@this);
+            Contract.Requires(resultSelectorM != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -123,6 +126,7 @@ namespace Narvalo.Collections {
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -137,6 +141,7 @@ namespace Narvalo.Collections {
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
              Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -146,6 +151,7 @@ namespace Narvalo.Collections {
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -155,6 +161,7 @@ namespace Narvalo.Collections {
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -170,6 +177,8 @@ namespace Narvalo.Collections {
             Func<Identity<TAccumulate>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -180,6 +189,8 @@ namespace Narvalo.Collections {
             Func<Identity<TSource>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -191,6 +202,7 @@ namespace Narvalo.Collections {
 namespace Narvalo.Collections.Internal {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -305,6 +317,7 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -336,6 +349,7 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Reduce(accumulatorM);
         }

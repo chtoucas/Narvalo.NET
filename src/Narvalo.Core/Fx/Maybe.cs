@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public static partial class Maybe
     {
@@ -37,11 +38,15 @@ namespace Narvalo.Fx
 
         public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
         {
+            Contract.Requires(@this != null);
+
             return UnpackOrElse(@this, default(T));
         }
 
         public static T UnpackOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
         {
+            Contract.Requires(@this != null);
+
             return UnpackOrElse(@this, () => defaultValue);
         }
 
@@ -55,6 +60,8 @@ namespace Narvalo.Fx
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
         {
+            Contract.Requires(@this != null);
+
             return UnpackOrThrow(@this, () => exception);
         }
 

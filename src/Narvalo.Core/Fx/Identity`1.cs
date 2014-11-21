@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     /*!
      * The Identity Monad
@@ -57,6 +58,8 @@ namespace Narvalo.Fx
         /// <summary />
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
+            Contract.Requires(comparer != null);
+
             return Equals(η(other), comparer);
         }
 

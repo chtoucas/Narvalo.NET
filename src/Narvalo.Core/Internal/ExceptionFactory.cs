@@ -3,12 +3,17 @@
 namespace Narvalo.Internal
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     static class ExceptionFactory
     {
         internal static ArgumentNullException ArgumentNull(string parameterName)
         {
-            return new ArgumentNullException(parameterName, Format.CurrentCulture(SR.ExceptionFactory_ArgumentNullFormat, parameterName));
+            Contract.Requires(parameterName != null);
+
+            return new ArgumentNullException(
+                parameterName,
+                Format.CurrentCulture(SR.ExceptionFactory_ArgumentNullFormat, parameterName));
         }
     }
 }

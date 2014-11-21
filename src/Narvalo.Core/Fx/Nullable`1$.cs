@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     /*!
      * What's not to be found here:
@@ -118,6 +119,8 @@ namespace Narvalo.Fx
             where TSource : struct
             where TResult : struct
         {
+            Contract.Requires(predicate != null);
+
             return Coalesce(@this, predicate, other, null);
         }
 
@@ -128,12 +131,16 @@ namespace Narvalo.Fx
             where TSource : struct
             where TResult : struct
         {
+            Contract.Requires(predicate != null);
+
             return Coalesce(@this, predicate, null, other);
         }
 
         public static Unit? Run<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
+            Contract.Requires(action != null);
+
             OnValue(@this, action);
 
             return (Unit?)Unit.Single;

@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public static class Format
@@ -10,6 +11,7 @@ namespace Narvalo
         public static string CurrentCulture(string format, object arg0, params object[] args)
         {
             Require.NotNull(arg0, "arg0");
+            Contract.Requires(format != null);
 
             return String.Format(CultureInfo.CurrentCulture, format, args == null ? arg0 : GetArguments_(arg0, args));
         }
@@ -17,6 +19,7 @@ namespace Narvalo
         public static string InvariantCulture(string format, object arg0, params object[] args)
         {
             Require.NotNull(arg0, "arg0");
+            Contract.Requires(format != null);
 
             return String.Format(CultureInfo.InvariantCulture, format, args == null ? arg0 : GetArguments_(arg0, args));
         }

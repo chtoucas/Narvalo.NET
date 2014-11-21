@@ -84,7 +84,7 @@
     <!-- 2. Runtime Checking -->
     <!-- Perform Runtime Contract Checking (6.2.1) -->
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeCheckingLevel>ReleaseRequires</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsRuntimeCheckingLevel>Preconditions</CodeContractsRuntimeCheckingLevel>
     <!-- Only Public Surface Contracts (6.2.2) -->
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <!-- Assert On Contract Failure (6.2.3) -->
@@ -93,6 +93,10 @@
     <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
     <!-- Skip Quantifiers (6.2.5) -->
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+
+    <!-- 3. Perform Static Contract Checking -->
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
 
     <!-- 4. Contract Reference Assembly (6.2.5) -->
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>

@@ -30,6 +30,7 @@ namespace Narvalo.Fx {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -70,6 +71,8 @@ namespace Narvalo.Fx {
         /// </summary>
         public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
         {
+            Contract.Requires(square != null);
+
             return Identity<T>.μ(square);
         }
 
@@ -254,6 +257,7 @@ namespace Narvalo.Fx {
             Action action)
         {
             Require.Object(@this);
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -410,6 +414,7 @@ namespace Narvalo.Fx {
             Identity<TSource> value)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -443,6 +448,8 @@ namespace Narvalo.Fx {
 }
 
 namespace Narvalo.Fx {
+    using System.Diagnostics.Contracts;
+
     /*!
      * Comonad methods.
      */
@@ -453,6 +460,8 @@ namespace Narvalo.Fx {
          */
         public static T Extract<T>(Identity<T> monad)
         {
+            Contract.Requires(monad != null);
+
             return Identity<T>.ε(monad);
         }
 

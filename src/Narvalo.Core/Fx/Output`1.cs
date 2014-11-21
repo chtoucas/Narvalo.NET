@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
     public sealed partial class Output<T>
@@ -14,6 +15,8 @@ namespace Narvalo.Fx
 
         Output(ExceptionDispatchInfo exceptionInfo)
         {
+            Contract.Requires(exceptionInfo != null);
+
             _isSuccess = false;
             _exceptionInfo = exceptionInfo;
         }
@@ -54,6 +57,8 @@ namespace Narvalo.Fx
 
         public Output<T> OnSuccess(Action<T> action)
         {
+            Contract.Requires(action != null);
+
             return Run(action);
         }
 
@@ -106,6 +111,12 @@ namespace Narvalo.Fx
         public override string ToString()
         {
             return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
+        }
+
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_isSuccess || _exceptionInfo != null);
         }
     }
 

@@ -6,6 +6,7 @@ namespace Narvalo.Fx
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     /*!
@@ -173,6 +174,8 @@ namespace Narvalo.Fx
 
         public Maybe<T> OnSome(Action<T> action)
         {
+            Contract.Requires(action != null);
+
             return Run(action);
         }
 
@@ -319,6 +322,8 @@ namespace Narvalo.Fx
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
+            Contract.Requires(comparer != null);
+
             return Equals(η(other), comparer);
         }
 
@@ -449,7 +454,15 @@ namespace Narvalo.Fx
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "A non-generic version would not improve usability.")]
-        public static Maybe<T> None { get { return None_; } }
+        public static Maybe<T> None
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
+                return None_;
+            }
+        }
 
         public Maybe<T> OrElse(Maybe<T> other)
         {
@@ -468,6 +481,7 @@ namespace Narvalo.Fx
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }

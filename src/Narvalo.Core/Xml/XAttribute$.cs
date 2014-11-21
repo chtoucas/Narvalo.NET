@@ -3,6 +3,7 @@
 namespace Narvalo.Xml
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Xml.Linq;
     using Narvalo.Fx;
 
@@ -29,6 +30,7 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, "exception");
+            Contract.Requires(@this != null);
 
             return NextAttributeOrThrow(@this, () => exception);
         }
@@ -56,6 +58,7 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, "exception");
+            Contract.Requires(@this != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);
         }

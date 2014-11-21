@@ -5,6 +5,7 @@ namespace Narvalo.Collections
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo.Fx;
 
@@ -159,6 +160,8 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Contract.Requires(@this != null);
+
             return FirstOrNone(@this, _ => true);
         }
 
@@ -175,6 +178,8 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Contract.Requires(@this != null);
+
             return LastOrNone(@this, _ => true);
         }
 
@@ -200,6 +205,8 @@ namespace Narvalo.Collections
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
+            Contract.Requires(@this != null);
+
             return SingleOrNone(@this, _ => true);
         }
 

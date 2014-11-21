@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
     public static class Apply
@@ -13,6 +14,7 @@ namespace Narvalo
         public static VoidOrError Catch<TException>(Action action) where TException : Exception
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             try {
                 action.Invoke();
@@ -33,6 +35,7 @@ namespace Narvalo
             where T2Exception : Exception
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -55,6 +58,7 @@ namespace Narvalo
             where T3Exception : Exception
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -79,6 +83,7 @@ namespace Narvalo
             where T4Exception : Exception
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 

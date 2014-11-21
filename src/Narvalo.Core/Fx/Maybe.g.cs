@@ -30,6 +30,7 @@ namespace Narvalo.Fx {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -79,6 +80,8 @@ namespace Narvalo.Fx {
         /// </summary>
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
         {
+            Contract.Requires(square != null);
+
             return Maybe<T>.μ(square);
         }
 
@@ -287,6 +290,7 @@ namespace Narvalo.Fx {
             Action action)
         {
             Require.Object(@this);
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -399,6 +403,10 @@ namespace Narvalo.Fx {
             Func<TSource, TInner, TResult> resultSelector)
         {
             Require.Object(@this);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.Join(
                 inner,
@@ -416,6 +424,10 @@ namespace Narvalo.Fx {
             Func<TSource, Maybe<TInner>, TResult> resultSelector)
         {
             Require.Object(@this);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.GroupJoin(
                 inner, 
@@ -437,6 +449,11 @@ namespace Narvalo.Fx {
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return JoinCore_(
                 @this,
                 inner,
@@ -454,6 +471,11 @@ namespace Narvalo.Fx {
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return GroupJoinCore_(
                 @this,
                 inner,
@@ -473,6 +495,9 @@ namespace Narvalo.Fx {
         {
             Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -491,6 +516,9 @@ namespace Narvalo.Fx {
         {
             Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -538,6 +566,7 @@ namespace Narvalo.Fx {
             Maybe<TResult> other)
         {
             Require.Object(@this);
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, Maybe<TResult>.None);
         }
@@ -548,6 +577,7 @@ namespace Narvalo.Fx {
             Maybe<TResult> other)
         {
             Require.Object(@this);
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
@@ -590,6 +620,7 @@ namespace Narvalo.Fx {
             Maybe<TSource> value)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }

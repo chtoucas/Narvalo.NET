@@ -30,6 +30,7 @@ namespace Narvalo.Fx {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -70,6 +71,8 @@ namespace Narvalo.Fx {
         /// </summary>
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
+            Contract.Requires(square != null);
+
             return Output<T>.μ(square);
         }
 
@@ -254,6 +257,7 @@ namespace Narvalo.Fx {
             Action action)
         {
             Require.Object(@this);
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -410,6 +414,7 @@ namespace Narvalo.Fx {
             Output<TSource> value)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
