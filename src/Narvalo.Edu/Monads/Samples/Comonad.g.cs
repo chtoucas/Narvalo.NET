@@ -27,6 +27,8 @@ using global::System.Diagnostics.CodeAnalysis;
     Justification = "Actual namespaces are not known in advance.")]
 
 namespace Narvalo.Edu.Monads.Samples {
+    using System.Diagnostics.Contracts;
+
     /*!
      * Comonad methods.
      */
@@ -37,6 +39,8 @@ namespace Narvalo.Edu.Monads.Samples {
          */
         public static T Extract<T>(Comonad<T> monad)
         {
+            Contract.Requires(monad != null);
+
             return Comonad<T>.ε(monad);
         }
 

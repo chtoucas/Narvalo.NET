@@ -30,6 +30,7 @@ namespace Narvalo.Edu.Monads.Samples {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -79,6 +80,8 @@ namespace Narvalo.Edu.Monads.Samples {
         /// </summary>
         public static MonadOr<T> Flatten<T>(MonadOr<MonadOr<T>> square)
         {
+            Contract.Requires(square != null);
+
             return MonadOr<T>.μ(square);
         }
 
@@ -287,6 +290,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Action action)
         {
             Require.Object(@this);
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -399,6 +403,10 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TInner, TResult> resultSelector)
         {
             Require.Object(@this);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.Join(
                 inner,
@@ -416,6 +424,10 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, MonadOr<TInner>, TResult> resultSelector)
         {
             Require.Object(@this);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return @this.GroupJoin(
                 inner, 
@@ -437,6 +449,11 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return JoinCore_(
                 @this,
                 inner,
@@ -454,6 +471,11 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, MonadOr<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
+            Contract.Requires(@this != null);
+            Contract.Requires(resultSelector != null);
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+
             return GroupJoinCore_(
                 @this,
                 inner,
@@ -473,6 +495,9 @@ namespace Narvalo.Edu.Monads.Samples {
         {
             Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -491,6 +516,9 @@ namespace Narvalo.Edu.Monads.Samples {
         {
             Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(inner != null);
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(comparer != null);
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -538,6 +566,7 @@ namespace Narvalo.Edu.Monads.Samples {
             MonadOr<TResult> other)
         {
             Require.Object(@this);
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, MonadOr<TResult>.None);
         }
@@ -548,6 +577,7 @@ namespace Narvalo.Edu.Monads.Samples {
             MonadOr<TResult> other)
         {
             Require.Object(@this);
+            Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
         }
@@ -590,6 +620,7 @@ namespace Narvalo.Edu.Monads.Samples {
             MonadOr<TSource> value)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -625,6 +656,7 @@ namespace Narvalo.Edu.Monads.Samples {
 namespace Narvalo.Edu.Monads.Samples {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -696,6 +728,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, MonadOr<bool>> predicateM)
         {
             Require.Object(@this);
+            Contract.Requires(predicateM != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -722,6 +755,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
         {
             Require.Object(@this);
+            Contract.Requires(resultSelectorM != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -735,6 +769,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -749,6 +784,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
              Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -758,6 +794,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -767,6 +804,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -782,6 +820,8 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<MonadOr<TAccumulate>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -792,6 +832,8 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<MonadOr<TSource>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -803,6 +845,7 @@ namespace Narvalo.Edu.Monads.Samples {
 namespace Narvalo.Edu.Monads.Samples.Internal {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -926,6 +969,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -957,6 +1001,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Reduce(accumulatorM);
         }

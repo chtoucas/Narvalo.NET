@@ -77,7 +77,7 @@ namespace Narvalo
 
         public static string ToFlickrBase58String(long value)
         {
-            Require.GreaterThanOrEqualTo(value, 0, "value");
+            Require.GreaterThanOrEqualTo(value, (long)0, "value");
 
             string result = String.Empty;
 
@@ -158,6 +158,8 @@ namespace Narvalo
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(alphabet != null);
+            Contract.Requires(alphabetLength > 0);
 
             long result = 0;
             long multiplier = 1;
@@ -183,7 +185,9 @@ namespace Narvalo
 
         internal static string Encode(long value, char[] alphabet, int alphabetLength)
         {
-            Require.GreaterThanOrEqualTo(value, 0, "value");
+            Require.GreaterThanOrEqualTo(value, (long)0, "value");
+            Contract.Requires(alphabet != null);
+            Contract.Requires(alphabetLength > 0);
 
             string result = String.Empty;
 

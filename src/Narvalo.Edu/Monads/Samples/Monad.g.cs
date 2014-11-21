@@ -30,6 +30,7 @@ namespace Narvalo.Edu.Monads.Samples {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -70,6 +71,8 @@ namespace Narvalo.Edu.Monads.Samples {
         /// </summary>
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
         {
+            Contract.Requires(square != null);
+
             return Monad<T>.μ(square);
         }
 
@@ -254,6 +257,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Action action)
         {
             Require.Object(@this);
+            Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
         }
@@ -410,6 +414,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Monad<TSource> value)
         {
             Require.NotNull(value, "value");
+            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -445,6 +450,7 @@ namespace Narvalo.Edu.Monads.Samples {
 namespace Narvalo.Edu.Monads.Samples {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -501,6 +507,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, Monad<bool>> predicateM)
         {
             Require.Object(@this);
+            Contract.Requires(predicateM != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -527,6 +534,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
             Require.Object(@this);
+            Contract.Requires(resultSelectorM != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -540,6 +548,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -554,6 +563,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
              Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -563,6 +573,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -572,6 +583,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -587,6 +599,8 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<Monad<TAccumulate>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -597,6 +611,8 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<Monad<TSource>, bool> predicate)
         {
             Require.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -608,6 +624,7 @@ namespace Narvalo.Edu.Monads.Samples {
 namespace Narvalo.Edu.Monads.Samples.Internal {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
@@ -723,6 +740,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Fold(seed, accumulatorM);
         }
@@ -754,6 +772,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
         {
             DebugCheck.NotNull(@this);
+            Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().Reduce(accumulatorM);
         }
