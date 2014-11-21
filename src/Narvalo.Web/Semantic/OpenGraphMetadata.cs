@@ -26,7 +26,11 @@ namespace Narvalo.Web.Semantic
 
         public OpenGraphImage Image
         {
-            get { return _image; }
+            get
+            {
+                return _image;
+            }
+
             set
             {
                 Require.Property(value);
@@ -39,7 +43,11 @@ namespace Narvalo.Web.Semantic
 
         public string Type
         {
-            get { return _type; }
+            get
+            {
+                return _type;
+            }
+
             set
             {
                 Require.Property(value);

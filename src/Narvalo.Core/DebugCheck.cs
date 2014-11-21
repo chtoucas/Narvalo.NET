@@ -4,16 +4,15 @@ namespace Narvalo
 {
     using System.Diagnostics;
 
+    [DebuggerStepThrough]
     public static class DebugCheck
     {
-        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value)
         {
             Debug.Assert(value != null, SR.DebugCheck_IsNull);
         }
 
-        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNullOrEmpty(string value)
         {

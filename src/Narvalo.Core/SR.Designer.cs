@@ -98,6 +98,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The length is not less than or equal to {0}..
+        /// </summary>
+        internal static string Int64Encoder_OutOfRangeLengthFormat {
+            get {
+                return ResourceManager.GetString("Int64Encoder_OutOfRangeLengthFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not cast a none maybe to its underlying value type..
         /// </summary>
         internal static string Maybe_CannotCastNoneToValue {

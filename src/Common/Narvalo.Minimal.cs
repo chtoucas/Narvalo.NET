@@ -8,12 +8,11 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
-        "SA1402:FileMayOnlyContainASingleClass",
+    [DebuggerStepThrough]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    internal static class Require
+    static class Require
     {
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
@@ -24,7 +23,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
@@ -35,7 +33,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
@@ -48,7 +45,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
@@ -59,7 +55,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
@@ -77,7 +72,26 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
+        [ContractArgumentValidator]
+        public static void Check(bool condition, string parameterName, string message)
+        {
+            if (!condition) {
+                throw new ArgumentException(message, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void CheckRange<T>(bool condition, T value, string parameterName, string message)
+        {
+            if (!condition) {
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
+            }
+
+            Contract.EndContractBlock();
+        }
+
         [ContractArgumentValidator]
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
@@ -93,7 +107,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
@@ -109,7 +122,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
@@ -124,7 +136,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
@@ -139,7 +150,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
@@ -159,7 +169,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
@@ -174,7 +183,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
@@ -189,7 +197,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
@@ -222,22 +229,23 @@ namespace Narvalo
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
+#if CONTRACTS_FULL
+    public
+#endif
         sealed class ValidatedNotNullAttribute : Attribute { }
     }
 
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules",
-        "SA1402:FileMayOnlyContainASingleClass",
+    [DebuggerStepThrough]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    internal static class DebugCheck
+    static class DebugCheck
     {
-        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value)
         {
             Debug.Assert(value != null, "The value is null.");
         }
 
-        [DebuggerStepThrough]
         [Conditional("DEBUG")]
         public static void NotNullOrEmpty(string value)
         {

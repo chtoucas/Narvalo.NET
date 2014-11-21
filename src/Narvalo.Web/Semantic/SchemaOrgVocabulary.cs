@@ -10,7 +10,11 @@ namespace Narvalo.Web.Semantic
 
         public string ItemType
         {
-            get { return _itemType; }
+            get
+            {
+                return _itemType;
+            }
+
             set
             {
                 Require.PropertyNotEmpty(value);

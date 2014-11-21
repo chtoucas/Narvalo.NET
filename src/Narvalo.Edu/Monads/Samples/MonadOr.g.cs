@@ -238,7 +238,7 @@ namespace Narvalo.Edu.Monads.Samples {
             int count)
         {
             Require.Object(@this);
-            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+            Require.GreaterThanOrEqualTo(count, 1, "count");
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -504,9 +504,9 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
-            DebugCheck.NotNull(comparer);
             Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "outerKeySelector");
+            DebugCheck.NotNull(comparer);
 
             return source =>
             {
@@ -855,8 +855,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<bool>> predicateM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(predicateM, "predicateM");
+            DebugCheck.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -892,8 +892,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelectorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(resultSelectorM, "resultSelectorM");
+            DebugCheck.NotNull(@this);
 
             Func<TFirst, TSecond, MonadOr<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -908,8 +908,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             MonadOr<TAccumulate> result = MonadOr.Return(seed);
 
@@ -934,8 +934,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -967,9 +967,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TAccumulate, TSource, MonadOr<TAccumulate>> accumulatorM,
             Func<MonadOr<TAccumulate>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             MonadOr<TAccumulate> result = MonadOr.Return(seed);
 
@@ -987,9 +987,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, MonadOr<TSource>> accumulatorM,
             Func<MonadOr<TSource>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

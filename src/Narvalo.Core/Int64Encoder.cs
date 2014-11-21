@@ -88,7 +88,10 @@ namespace Narvalo
         public static long FromBase25String(string value)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, Base25MaxLength_, "value");
+            Require.Check(
+                value.Length <= Base25MaxLength_,
+                "value",
+                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_));
 
             return Decode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
@@ -96,7 +99,10 @@ namespace Narvalo
         public static long FromBase34String(string value)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, Base34MaxLength_, "value");
+            Require.Check(
+                value.Length <= Base34MaxLength_,
+                "value",
+                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_));
 
             return Decode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
@@ -104,7 +110,10 @@ namespace Narvalo
         public static long FromBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, Base58MaxLength_, "value");
+            Require.Check(
+                value.Length <= Base58MaxLength_,
+                "value",
+                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_));
 
             return Decode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
@@ -112,7 +121,10 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, FlickrBase58MaxLength_, "value");
+            Require.Check(
+                value.Length <= FlickrBase58MaxLength_,
+                "value",
+                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_));
 
             long result = 0;
             long multiplier = 1;
@@ -166,7 +178,7 @@ namespace Narvalo
 
             string result = String.Empty;
 
-            // TODO: Optimiser.
+            // TODO: Optimize.
             while (value > 0) {
                 long r = value % alphabetLength;
 

@@ -14,16 +14,23 @@ namespace Narvalo
 
         public Range(T lowerEnd, T upperEnd)
         {
-            Require.LessThanOrEqualTo(lowerEnd, upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
+            // REVIEW: Strict range? Do we allow for equality?
+            Require.CheckRange(lowerEnd.CompareTo(upperEnd) <= 0, upperEnd, "upperEnd", SR.Range_LowerEndNotLesserThanUpperEnd);
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
         }
 
         public T LowerEnd { get { return _lowerEnd; } }
-        
+
         public T UpperEnd { get { return _upperEnd; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [Pure]
         public bool Includes(T value)
         {
@@ -31,6 +38,12 @@ namespace Narvalo
                 && value.CompareTo(UpperEnd) <= 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <param name="range"></param>
+        /// <returns></returns>
         public bool Includes(Range<T> range)
         {
             return range.LowerEnd.CompareTo(LowerEnd) >= 0
@@ -43,7 +56,7 @@ namespace Narvalo
             return String.Format(
                 CultureInfo.InvariantCulture,
                 "LowerEnd={0};UpperEnd={1}",
-                LowerEnd.ToString(), 
+                LowerEnd.ToString(),
                 UpperEnd.ToString());
         }
     }

@@ -10,9 +10,9 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using Narvalo.Internal;
 
+    [DebuggerStepThrough]
     public static class Require
     {
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
@@ -23,7 +23,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
@@ -34,7 +33,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
@@ -47,7 +45,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
@@ -58,7 +55,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
@@ -71,7 +67,34 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
+        [ContractArgumentValidator]
+        public static void Check(bool condition, string parameterName, string message)
+        {
+            if (!condition) {
+                throw new ArgumentException(message, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void CheckRange<T>(bool condition, T value, string parameterName, string message)
+        {
+            if (!condition) {
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <param name="value"></param>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <param name="parameterName"></param>
         [ContractArgumentValidator]
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
@@ -85,7 +108,14 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <param name="value"></param>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <param name="parameterName"></param>
         [ContractArgumentValidator]
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
@@ -99,7 +129,14 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="range"></param>
+        /// <param name="parameterName"></param>
         [ContractArgumentValidator]
         public static void InRange<T>(T value, Range<T> range, string parameterName)
             where T : struct, IComparable<T>, IEquatable<T>
@@ -114,7 +151,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
@@ -128,7 +164,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
@@ -142,7 +177,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
@@ -161,7 +195,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
@@ -175,7 +208,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
@@ -189,7 +221,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [DebuggerStepThrough]
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
