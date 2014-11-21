@@ -8,6 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using Narvalo.Internal;
 
     /*!
      * The Maybe Monad
@@ -256,7 +257,7 @@ namespace Narvalo.Fx
                 return new List<T> { _value }.GetEnumerator();
             }
             else {
-                return Enumerable.Empty<T>().GetEnumerator();
+                return Enumerable.Empty<T>().AssumeNotNull().GetEnumerator();
             }
         }
 

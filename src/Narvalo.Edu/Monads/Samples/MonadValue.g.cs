@@ -839,8 +839,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+    using Narvalo;		// For Require
+    using Narvalo.Fx;	// For Unit
     using Narvalo.Edu.Monads.Samples;
 
     /*!
@@ -911,7 +911,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         internal static MonadValue<TSource> ReduceCore<TSource>(
@@ -942,7 +942,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         internal static MonadValue<TAccumulate> FoldCore<TSource, TAccumulate>(

@@ -49,6 +49,7 @@ namespace Narvalo.Collections {
             this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -219,8 +220,8 @@ namespace Narvalo.Collections.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+    using Narvalo;		// For Require
+    using Narvalo.Fx;	// For Unit
 
     /*!
      * Internal extensions for IEnumerable<Maybe<T>>.
@@ -231,6 +232,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<Maybe<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
@@ -241,7 +243,7 @@ namespace Narvalo.Collections.Internal {
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun);
+            return @this.Aggregate(seed, fun).AssumeNotNull();
         }
 
         internal static Maybe<TSource> SumCore<TSource>(
@@ -262,7 +264,7 @@ namespace Narvalo.Collections.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return @this.Select(funM).Collect();
+            return @this.Select(funM).AssumeNotNull().Collect();
         }
 
         internal static IEnumerable<TSource> FilterCore<TSource>(
@@ -295,7 +297,7 @@ namespace Narvalo.Collections.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return from tuple in @this.Select(funM).Collect()
+            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
                    let item2 = tuple.Select(_ => _.Item2)
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -314,7 +316,7 @@ namespace Narvalo.Collections.Internal {
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
             // instead of using the Zip from Linq.
-            return @this.Zip(second, resultSelector: resultSelector).Collect();
+            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 
         internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
@@ -342,7 +344,7 @@ namespace Narvalo.Collections.Internal {
             DebugCheck.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         internal static Maybe<TSource> ReduceCore<TSource>(
@@ -374,7 +376,7 @@ namespace Narvalo.Collections.Internal {
             DebugCheck.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(

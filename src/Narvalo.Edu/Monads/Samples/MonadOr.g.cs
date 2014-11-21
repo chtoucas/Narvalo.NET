@@ -847,8 +847,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+    using Narvalo;		// For Require
+    using Narvalo.Fx;	// For Unit
     using Narvalo.Edu.Monads.Samples;
 
     /*!
@@ -891,7 +891,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return @this.Select(funM).Collect();
+            return @this.Select(funM).AssumeNotNull().Collect();
         }
 
         internal static IEnumerable<TSource> FilterCore<TSource>(
@@ -924,7 +924,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             DebugCheck.NotNull(@this);
 
-            return from tuple in @this.Select(funM).Collect()
+            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
                    let item2 = tuple.Select(_ => _.Item2)
                    select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
@@ -943,7 +943,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
 
             // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
             // instead of using the Zip from Linq.
-            return @this.Zip(second, resultSelector: resultSelector).Collect();
+            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 
         internal static MonadOr<TAccumulate> FoldCore<TSource, TAccumulate>(
@@ -971,7 +971,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             DebugCheck.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         internal static MonadOr<TSource> ReduceCore<TSource>(
@@ -1003,7 +1003,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             DebugCheck.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         internal static MonadOr<TAccumulate> FoldCore<TSource, TAccumulate>(

@@ -8,6 +8,7 @@ namespace Narvalo.Collections
     using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo.Fx;
+    using Narvalo.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
@@ -171,7 +172,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
                 return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
             }
         }
@@ -189,7 +190,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
                 if (!iter.MoveNext()) {
                     return Maybe<TSource>.None;
                 }
@@ -216,7 +217,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.GetEnumerator()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
                 var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
 
                 // Return Maybe.None if there is one more element.

@@ -27,6 +27,8 @@ namespace Narvalo
             var lowerEnd = new DateTime(year, month, day);
             var upperEnd = lowerEnd.AddHours(23).AddMinutes(59).AddSeconds(59);
 
+            Contract.Assume(lowerEnd.CompareTo(upperEnd) <= 0);
+
             return Create(lowerEnd, upperEnd);
         }
     }
