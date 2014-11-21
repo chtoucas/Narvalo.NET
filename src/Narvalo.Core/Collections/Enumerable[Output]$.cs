@@ -3,6 +3,7 @@
 namespace Narvalo.Collections
 {
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo.Fx;
 
@@ -17,6 +18,8 @@ namespace Narvalo.Collections
 
             foreach (var m in @this) {
                 if (m.IsFailure) {
+                    Contract.Assert(m.ExceptionInfo != null);
+
                     return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
                 }
 

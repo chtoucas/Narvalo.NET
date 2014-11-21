@@ -4,7 +4,7 @@ namespace Narvalo
 {
     using System.Diagnostics.Contracts;
 
-    public static class ContractExtensions
+    public static class CodeContract
     {
         public static T AssumeNotNull<T>(this T obj) where T : class
         {
@@ -14,5 +14,14 @@ namespace Narvalo
 
             return obj;
         }
+
+        /// <summary>
+        /// According to its documentation, CCCheck only assumes and asserts
+        /// the object invariance for the "this" object. This method allows
+        /// to state explicitly the object invariance.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        public static void AssumeInvariant<T>(T obj) where T : class { }
     }
 }

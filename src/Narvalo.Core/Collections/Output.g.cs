@@ -49,7 +49,7 @@ namespace Narvalo.Collections {
             this IEnumerable<Output<TSource>> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
+            //Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -217,7 +217,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<Output<TSource>> @this)
         {
             DebugCheck.NotNull(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
+            //Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             var seed = Output.Success(Enumerable.Empty<TSource>());
             Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
@@ -228,7 +228,7 @@ namespace Narvalo.Collections.Internal {
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun).AssumeNotNull();
+            return @this.Aggregate(seed, fun); //.AssumeNotNull();
         }
     }
 
@@ -255,13 +255,15 @@ namespace Narvalo.Collections.Internal {
             var list = new List<TSource>();
 
             foreach (var item in @this) {
-                predicateM.Invoke(item)
-                    .Run(_ =>
-                    {
+                var m = predicateM.Invoke(item);
+
+                if (m != null) {
+                    m.Run(_ => {
                         if (_ == true) {
                             list.Add(item);
                         }
                     });
+                }
             }
 
             return list;

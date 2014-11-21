@@ -18,6 +18,8 @@ namespace Narvalo
             return new Range<T>(lowerEnd, upperEnd);
         }
 
+        [SuppressMessage("Microsoft.Contracts", "Requires",
+            Justification = "[REVIEW] CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
         public static Range<DateTime> OneDay(int year, int month, int day)
         {
             Contract.Requires(year >= 1 && year <= 9999);
@@ -27,7 +29,7 @@ namespace Narvalo
             var lowerEnd = new DateTime(year, month, day);
             var upperEnd = lowerEnd.AddHours(23).AddMinutes(59).AddSeconds(59);
 
-            Contract.Assume(lowerEnd.CompareTo(upperEnd) <= 0);
+            Contract.Assume(lowerEnd.CompareTo(upperEnd) <= 0, "This is guaranteed by construction of upperEnd.");
 
             return Create(lowerEnd, upperEnd);
         }

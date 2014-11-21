@@ -17,7 +17,7 @@ namespace Narvalo.Collections
             var list = new List<TSource>();
 
             foreach (var m in @this) {
-                if (m.IsNone) {
+                if (m == null || m.IsNone) {
                     return Maybe<IEnumerable<TSource>>.None;
                 }
 

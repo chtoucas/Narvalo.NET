@@ -69,7 +69,11 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
 
-            return @this.ValueOrDefault().OnNull(() => { throw exceptionFactory.Invoke(); }).Value;
+            var m = @this.ValueOrDefault().OnNull(() => { throw exceptionFactory.Invoke(); });
+
+            Contract.Assume(m.HasValue, "If it was not the case, we would have throw an exception just above.");
+
+            return m.Value;
         }
 
         #endregion
