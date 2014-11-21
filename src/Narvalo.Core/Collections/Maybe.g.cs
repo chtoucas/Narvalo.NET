@@ -257,8 +257,8 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(predicateM, "predicateM");
+            DebugCheck.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -294,8 +294,8 @@ namespace Narvalo.Collections.Internal {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(resultSelectorM, "resultSelectorM");
+            DebugCheck.NotNull(@this);
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -310,8 +310,8 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -336,8 +336,8 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -369,9 +369,9 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
             Func<Maybe<TAccumulate>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -389,9 +389,9 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
             Func<Maybe<TSource>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

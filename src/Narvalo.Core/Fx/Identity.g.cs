@@ -216,7 +216,7 @@ namespace Narvalo.Fx {
             int count)
         {
             Require.Object(@this);
-            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+            Require.GreaterThanOrEqualTo(count, 1, "count");
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }

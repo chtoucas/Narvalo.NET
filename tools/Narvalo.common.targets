@@ -72,20 +72,34 @@
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
 
-    <!-- Sections refer to the official Code Contracts documentation. -->
+    <!-- Section number refers to the official Code Contracts documentation. -->
+    <!--
+      - CodeContractsRuntimeCheckingLevel
+    -->
 
-    <!-- Assembly Mode = Custom Parameter Validation (Section 6.1.1) -->
+    <!-- 1. Assembly Mode -->
+    <!-- Custom Parameter Validation (6.1.1) -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
 
-    <!-- Runtime Checking -->
+    <!-- 2. Runtime Checking -->
+    <!-- Perform Runtime Contract Checking (6.2.1) -->
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeCheckingLevel>ReleaseRequires</CodeContractsRuntimeCheckingLevel>
+    <!-- Only Public Surface Contracts (6.2.2) -->
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <!-- Assert On Contract Failure (6.2.3) -->
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <!-- Call-site Requires Checking (6.2.4) -->
+    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
+    <!-- Skip Quantifiers (6.2.5) -->
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
 
-    <!-- Contract Reference Assembly -->
+    <!-- 4. Contract Reference Assembly (6.2.5) -->
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
     <!--<CodeContractsLibPaths />-->
     <!--<CodeContractsExtraRewriteOptions />-->
     <!--<CodeContractsExtraAnalysisOptions />-->
-
   </PropertyGroup>
 
   <!-- ### StyleCop ### -->

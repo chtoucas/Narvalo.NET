@@ -234,8 +234,8 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Output<bool>> predicateM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(predicateM, "predicateM");
+            DebugCheck.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -271,8 +271,8 @@ namespace Narvalo.Collections.Internal {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(resultSelectorM, "resultSelectorM");
+            DebugCheck.NotNull(@this);
 
             Func<TFirst, TSecond, Output<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -287,8 +287,8 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             Output<TAccumulate> result = Output.Success(seed);
 
@@ -313,8 +313,8 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -346,9 +346,9 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
             Func<Output<TAccumulate>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             Output<TAccumulate> result = Output.Success(seed);
 
@@ -366,9 +366,9 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Output<TSource>> accumulatorM,
             Func<Output<TSource>, bool> predicate)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
+            DebugCheck.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

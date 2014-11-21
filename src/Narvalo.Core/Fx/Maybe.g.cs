@@ -238,7 +238,7 @@ namespace Narvalo.Fx {
             int count)
         {
             Require.Object(@this);
-            Require.GreaterThanOrEqualTo(count, 1, "FIXME: Message.");
+            Require.GreaterThanOrEqualTo(count, 1, "count");
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -504,9 +504,9 @@ namespace Narvalo.Fx {
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
-            DebugCheck.NotNull(comparer);
             Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "outerKeySelector");
+            DebugCheck.NotNull(comparer);
 
             return source =>
             {
