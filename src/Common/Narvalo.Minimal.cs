@@ -26,20 +26,18 @@ namespace Narvalo
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static T Property<T>([ValidatedNotNull]T value) where T : class
+        public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
                 throw new ArgumentNullException("value", "The property value is null.");
             }
 
             Contract.EndContractBlock();
-
-            return value;
         }
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static string PropertyNotEmpty([ValidatedNotNull]string value)
+        public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
             Property(value);
 
@@ -48,8 +46,6 @@ namespace Narvalo
             }
 
             Contract.EndContractBlock();
-
-            return value;
         }
 
         [DebuggerStepThrough]

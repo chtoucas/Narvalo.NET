@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Range<T> : IEquatable<Range<T>>
@@ -23,6 +24,7 @@ namespace Narvalo
         
         public T UpperEnd { get { return _upperEnd; } }
 
+        [Pure]
         public bool Includes(T value)
         {
             return value.CompareTo(LowerEnd) >= 0

@@ -227,8 +227,8 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            DebugCheck.NotNull(@this);
             Require.NotNull(predicateM, "predicateM");
+            DebugCheck.NotNull(@this);
 
             return from _ in @this
                    where predicateM.Invoke(_).ValueOrElse(false)
