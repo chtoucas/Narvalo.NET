@@ -114,7 +114,7 @@ namespace Narvalo.Fx
             return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_CODEANALYSIS
         [ContractInvariantMethod]
         void ObjectInvariants()
         {

@@ -54,7 +54,7 @@ namespace Narvalo
             return IsBreak ? _reason : "{Void}";
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_CODEANALYSIS
         [ContractInvariantMethod]
         void ObjectInvariants()
         {

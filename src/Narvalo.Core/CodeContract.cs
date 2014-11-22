@@ -2,26 +2,37 @@
 
 namespace Narvalo
 {
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     public static class CodeContract
     {
-        public static T AssumeNotNull<T>(this T obj) where T : class
+        /// <summary>
+        /// When dealing with external dependencies, CCCheck can not infer
+        /// that the result of a method is not null. When we know for sure that
+        /// the result is not null, this extension method is a useful alias 
+        /// to inform CCCheck not to worry of <c>null</c> values here.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static T AssumeNotNull<T>(this T @this) where T : class
         {
-            Contract.Ensures(Contract.Result<T>() == obj);
+            Contract.Ensures(Contract.Result<T>() == @this);
             Contract.Ensures(Contract.Result<T>() != null);
-            Contract.Assume(obj != null);
+            Contract.Assume(@this != null);
 
-            return obj;
+            return @this;
         }
 
         /// <summary>
         /// According to its documentation, CCCheck only assumes and asserts
-        /// the object invariance for the "this" object. This method allows
+        /// object invariants for the "this" object. This method allows
         /// to state explicitly the object invariance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
+        [Conditional("CONTRACTS_FULL")]
         public static void AssumeInvariant<T>(T obj) where T : class { }
     }
 }

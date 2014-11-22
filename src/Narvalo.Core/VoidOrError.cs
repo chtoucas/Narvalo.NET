@@ -69,7 +69,7 @@ namespace Narvalo
             return _isError ? _exceptionInfo.ToString() : "{Void}";
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_CODEANALYSIS
         [ContractInvariantMethod]
         void ObjectInvariants()
         {

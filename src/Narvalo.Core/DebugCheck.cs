@@ -4,12 +4,13 @@ namespace Narvalo
 {
 #if CONTRACTS_FULL
     using System;
-#endif
     using System.Diagnostics;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
     using Narvalo.Internal;
+#else
+    using System.Diagnostics;
+    using Narvalo.Internal;
+#endif
 
     // https://social.msdn.microsoft.com/Forums/en-US/434fdb77-262e-474b-84ee-1fb0d5a843b1/any-way-to-bypass-validation-on-overload-methods?forum=codecontracts
     [DebuggerStepThrough]
@@ -17,30 +18,26 @@ namespace Narvalo
     {
 #if CONTRACTS_FULL
         [ContractArgumentValidator]
-#else
-        [Conditional("DEBUG")]
-#endif
-        public static void NotNull<T>(T value)
+        public static void NotNull<T>([ValidatedNotNull]T value)
         {
-#if CONTRACTS_FULL
             if (value == null) {
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
             Contract.EndContractBlock();
-#else
-            Debug.Assert(value != null, SR.DebugCheck_IsNull);
-#endif
         }
+#else
+        [Conditional("DEBUG")]
+        public static void NotNull<T>([ValidatedNotNull]T value)
+        {
+            Debug.Assert(value != null, SR.DebugCheck_IsNull);
+        }
+#endif
 
 #if CONTRACTS_FULL
         [ContractArgumentValidator]
-#else
-        [Conditional("DEBUG")]
-#endif
-        public static void NotNullOrEmpty(string value)
+        public static void NotNullOrEmpty([ValidatedNotNull]string value)
         {
-#if CONTRACTS_FULL
             NotNull(value);
 
             if (value.Length == 0) {
@@ -48,10 +45,14 @@ namespace Narvalo
             }
 
             Contract.EndContractBlock();
+        }
 #else
+        [Conditional("DEBUG")]
+        public static void NotNullOrEmpty([ValidatedNotNull]string value)
+        {
             NotNull(value);
             Debug.Assert(value.Length != 0, SR.DebugCheck_IsEmpty);
-#endif
         }
+#endif
     }
 }

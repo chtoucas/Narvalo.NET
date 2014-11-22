@@ -617,6 +617,7 @@ namespace Narvalo.Fx
             }
 
             [Fact]
+            [Issue(1, IssueSeverity.High)]
             public static void ReturnsNone_WhenSelectorReturnsNull()
             {
                 // Arrange
@@ -778,7 +779,6 @@ namespace Narvalo.Fx
             {
                 // Arrange
                 var source = Maybe.Create(1);
-                var middle = Maybe.Create(2);
                 Func<int, Maybe<int>> valueSelector = null;
                 Func<int, int, int> resultSelector = (i, j) => i + j;
 

@@ -30,8 +30,8 @@ for deep refactoring and installing NuGet packages updates.
 ### Narvalo (Core).sln
 
 This solution contains **all** libraries built upon Narvalo.Core:
-- Narvalo.Core itself, a PCL for .NET 4.5, Windows 8, Windows Phone 8.1 and
-  Windows Phone Silverlight 8.
+- Narvalo.Core itself, a PCL (Profile259) for .NET 4.5, Windows 8, Windows 
+  Phone 8.1 and Windows Phone Silverlight 8.
 - Narvalo.Common complements Narvalo.Core with non portable classes.
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
 - Narvalo.Extras a repository of sample classes depending on external packages.

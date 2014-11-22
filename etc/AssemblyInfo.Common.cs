@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if CONTRACTS_FULL && CODE_ANALYSIS
+#define CONTRACTS_CODEANALYSIS
+#endif
+
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;

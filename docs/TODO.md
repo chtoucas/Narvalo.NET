@@ -1,61 +1,101 @@
 TODO
 ====
 
-Status
-------
+In General
+----------
 
-### Narvalo (Core).sln
+### High Priority
 
-### Narvalo (Mvp).sln
+- Use true argument check for extension methods.
+- Review csproj, in particular, remove any ExcludeFromSyleCop.
+- Rework MSBuild import in csproj: use pre and post imports.
+  We then get access to $(ProjectName). We can also apply a common policy
+  more easily.
 
-### Narvalo (Miscs).sln
+### Medium Priority
 
-### Narvalo (Playground).sln
-
-En vrac
--------
-
-WARNING: Realease Build currently fail.
-
-- Add Contract.Invariant,... messsages
-- Remove CONTRACTS_FULL
-- Narvalo.DocuMaker & Benchmarks should use the Narvalo rulesets.
-- Remove the ruleset for Samples.
-- Fix regions, ////, /*!, Comments in english
-- GetHashCode
-- Review csproj and make Narvalo.Facts a true test proj. Check ExcludeFrom
-- Create Narvalo (NuGet).sln
-- Rework versioning & complete AssemblyDescription.
-- Global suppression files.
-- NuGet pub script (in Fake or PowerShell)
-- Fix all TODO, FIXME, FIXME_PCL, XXX.
-- Use Error for ruleset?
-- Migrate from psake to Fake.
-- Review all SuppressMessage directives and GlobalSuppression files.
-- Narvalo.Facts fails from Narvalo.proj when run twice.
-- Replace all empty method with "// Intentionally left blank.".
-- Review StyleCop settings.
+- NuGet publication script (use Fake or PSake). Maybe create a new
+  solution: Narvalo (NuGet).sln.
+- Rework assembly versioning.
+- Write assembly descriptions.
+- Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
+- Review all GetHashCode() methods.
+- Check that we always use Error for CA/SA/CC.
 - Re-enable Gendarme.
-- Re-enable a few code contracts.
-- Remove Markdown Deep.
+
+### Low Priority
+
+- Fix regions, ////, /*!, Comments in english
+- Always use resources for messages.
+- Remove the ruleset for Samples.
+- Review all ToString() methods.
+- Review StyleCop settings.
+- Review all SuppressMessage directives and tag them correctly.
+- Review all GlobalSuppression files and tag them correctly.
+- Replace all empty method with "// Intentionally left blank.".
+- I see that Microsoft projects include the following lines in their
+  assembly infos, what's the purpose?
+  [assembly: SatelliteContractVersion("X.X.X.X")]
+  [assembly: AssemblyMetadata("Serviceable", "True")]
+
+
+Narvalo (Core)
+--------------
+
+### High Priority
+
+### Medium Priority
+
+- For all classes in Narvalo.Fx, review null returns and null inputs.
+- Review the use of CONTRACTS_CODEANALYSIS.
+- Rework the use of Debug, DebugCheck and Require.
+- Add a description to all `Contract.Assume`.
+- Add Contract.Ensures directives.
+
+### Low Priority
+
 - Add a XML schema for Narvalo config.
-- Review the use of Debug, DebugCheck and Require.
-- Use resources for messages?
-- AssemblyInfo:
-  [assembly: SatelliteContractVersion("X.X.X.X")] ?
-  [assembly: AssemblyMetadata("Serviceable", "True")] ?
+- Make Narvalo.Facts a true VS test proj.
 
+Narvalo (Mvp)
+-------------
 
-Narvalo.Mvp
------------
+### High Priority
 
-By order of priority:
+### Medium Priority
+
 - Tests. We can start by porting the tests from WebFormsMvp.
-- Add support for WPF, not yet started.
-- REVIEW: Using custom presenter types per platform prevents the reuse
+- Documentation and userguide.
+- Using custom presenter types per platform prevents the reuse
   of presenters across different platforms. Maybe is it a necessary evil...?
+
+### Low Priority
+
+- Add support for WPF, not yet started.
 - Add support for Application Controller, Navigator, EventAggregator
   (not the same as cross-presenter communication).
 - Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
   / ReactiveUI / MVVM Light?
-- Documentation and userguide.
+
+
+Narvalo (Miscs)
+---------------
+
+### High Priority
+
+### Medium Priority
+
+### Low Priority
+
+
+Narvalo (Playground)
+--------------------
+
+### High Priority
+
+### Medium Priority
+
+- Narvalo.DocuMaker & Playground.Benchmarks should use the Narvalo rulesets.
+- Use CommonMark instead of Markdown Deep.
+
+### Low Priority

@@ -119,6 +119,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Fx\NullableFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IssueAttribute.cs" />
+    <Compile Include="IssueSeverity.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
@@ -155,6 +157,9 @@
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Issues.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\tools\Narvalo.Common.targets" />

@@ -26,7 +26,7 @@ namespace Narvalo
         public T UpperEnd { get { return _upperEnd; } }
 
         /// <summary>
-        /// 
+        /// Returns <c>true</c> if the value is included in the range. 
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
@@ -39,7 +39,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// 
+        /// Returns <c>true</c> if the value is included in the range. 
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="range"></param>

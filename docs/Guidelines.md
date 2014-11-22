@@ -112,16 +112,18 @@ Coding Style
 - Use a minimal set of references.
 
 
-FxCop Rules
------------
+FxCop
+-----
 
 
-StyleCop Rules
---------------
+StyleCop
+--------
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
+              
+_Documentation rules are temporary disabled._
 
-Permanently disabled rules:
+Disabled rules:
 - SA1101:PrefixLocalCallsWithThis
 - SA1121:UseBuiltInTypeAlias
 - SA1126:PrefixCallsCorrectly
@@ -134,22 +136,25 @@ Permanently disabled rules:
 - SA1502:ElementMustNotBeOnASingleLine
 - SA1634:FileHeaderMustShowCopyright
 
-Temporary disabled documentation rules:
-- SA1600:ElementsMustBeDocumented
-- SA1601:PartialElementsMustBeDocumented
-- SA1602:EnumerationItemsMustBeDocumented
-- SA1604:ElementDocumentationMustHaveSummary
-- SA1606:ElementDocumentationMustHaveSummaryText
-- SA1611:ElementParametersMustBeDocumented
-- SA1614:ElementParameterDocumentationMustHaveText
-- SA1615:ElementReturnValueMustBeDocumented
-- SA1616:ElementReturnValueDocumentationMustHaveText
-- SA1618:GenericTypeParametersMustBeDocumented
-- SA1623:PropertySummaryDocumentationMustMatchAccessors
-- SA1633:FileMustHaveHeader
-- SA1642:ConstructorSummaryDocumentationMustBeginWithStandardText
-- SA1650:ElementDocumentationMustBeSpelledCorrectly
 
+Code Contracts
+--------------
+
+We define the conditional compilation symbol CONTRACTS_CODEANALYSIS 
+when CODE_ANALYSIS and CONTRACTS_FULL are both defined.
+
+### Object Invariants
+
+Wrap any object invariants method with a compiler conditional clause :
+```csharp
+#if CONTRACTS_CODEANALYSIS
+    [ContractInvariantMethod]
+    void ObjectInvariants()
+    {
+        // Contract invariants directives.
+    }
+#endif
+```
 
 NuGet Updates
 -------------

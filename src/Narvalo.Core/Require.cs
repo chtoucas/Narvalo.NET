@@ -88,7 +88,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// 
+        /// Check that an argument is in a given integer range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
@@ -109,7 +109,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// 
+        /// Check that an argument is in a given long integer range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
@@ -130,7 +130,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// 
+        /// Check that an argument is in a given range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <typeparam name="T"></typeparam>
