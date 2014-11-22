@@ -36,7 +36,7 @@ namespace Narvalo.Edu.Monads.Samples {
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods and extension methods for <see cref="Monad{T}" />.
+    /// Provides a set of static methods for <see cref="Monad{T}" />.
     /// </summary>
     public static partial class Monad
     {
@@ -48,13 +48,12 @@ namespace Narvalo.Edu.Monads.Samples {
         public static Monad<Unit> Unit { get { return Unit_; } }
 
 
-        /*!
-         * Named `return` in Haskell parlance.
-         */
-
         /// <summary>
         /// Returns a new instance of <see cref="Monad{T}" />.
         /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static Monad<T> Return<T>(T value)
         {
             return Monad<T>.η(value);
@@ -62,13 +61,12 @@ namespace Narvalo.Edu.Monads.Samples {
         
         #region Generalisations of list functions (Prelude)
 
-        /*!
-         * Named `join` in Haskell parlance.
-         */
-
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
         {
             Contract.Requires(square != null);
@@ -80,93 +78,83 @@ namespace Narvalo.Edu.Monads.Samples {
 
         #region Monadic lifting operators (Prelude)
 
-        /*!
-         * Named `liftM` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
-            return m =>
-            {
-                Require.NotNull(m, "m");
+            return m => {
+                Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
             };
         }
 
-        /*!
-         * Named `liftM2` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
-            return (m1, m2) => 
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
             };
         }
 
-        /*!
-         * Named `liftM3` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
-            return (m1, m2, m3) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
             };
         }
 
-        /*!
-         * Named `liftM4` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
-            return (m1, m2, m3, m4) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3, m4) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
-
-        /*!
-         * Named `liftM5` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
-            return (m1, m2, m3, m4, m5) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3, m4, m5) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -174,34 +162,37 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    /*!
-     * Extensions methods for Monad<T>.
-     */
+    /// <summary>
+    /// Provides a set of extension methods for <see cref="Monad{T}" />.
+    /// We use extension methods so that we can override them on a case by case basis.
+    /// </summary>
     public static partial class Monad
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `fmap` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static Monad<TResult> Select<TSource, TResult>(
             this Monad<TSource> @this,
             Func<TSource, TResult> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
         }
 
-        /*!
-         * Named `>>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>>></c> in Haskell parlance.
+        /// </remarks>
         public static Monad<TResult> Then<TSource, TResult>(
             this Monad<TSource> @this,
             Monad<TResult> other)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -211,15 +202,16 @@ namespace Narvalo.Edu.Monads.Samples {
         #region Generalisations of list functions (Prelude)
 
 
-        /*!
-         * Named `replicateM` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static Monad<IEnumerable<TSource>> Repeat<TSource>(
             this Monad<TSource> @this,
             int count)
         {
-            Require.Object(@this);
+            Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
+            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -229,9 +221,9 @@ namespace Narvalo.Edu.Monads.Samples {
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        /*!
-         * Named `when` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
         public static Monad<Unit> When<TSource>(
@@ -248,9 +240,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return Monad.Unit;
         }
 
-        /*!
-         * Named `unless` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static Monad<Unit> Unless<TSource>(
             this Monad<TSource> @this,
             bool predicate,
@@ -273,7 +265,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TFirst, TSecond, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
@@ -287,7 +279,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<T1, T2, T3, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Monad<TResult>> g
@@ -305,7 +297,7 @@ namespace Narvalo.Edu.Monads.Samples {
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Monad<TResult>> g
@@ -327,7 +319,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Monad<TResult>> g
@@ -345,9 +337,9 @@ namespace Narvalo.Edu.Monads.Samples {
         #region Query Expression Pattern
 
 
-        /*!
-         * Kind of generalisation of Zip (liftM2).
-         */
+        /// <remarks>
+        /// Kind of generalisation of Zip (liftM2).
+        /// </remarks>
         public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Monad<TSource> @this,
             Func<TSource, Monad<TMiddle>> valueSelectorM,
@@ -446,7 +438,6 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 }
-
 namespace Narvalo.Edu.Monads.Samples {
     using System;
     using System.Collections.Generic;
@@ -639,7 +630,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         internal static Monad<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             ////Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
             var seed = Monad.Return(Enumerable.Empty<TSource>());
@@ -662,7 +653,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -672,7 +663,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, Monad<bool>> predicateM)
         {
             Require.NotNull(predicateM, "predicateM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -697,7 +688,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -711,7 +702,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Func<TFirst, TSecond, Monad<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -727,7 +718,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Monad<TAccumulate> result = Monad.Return(seed);
 
@@ -743,7 +734,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
@@ -754,7 +745,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -775,7 +766,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
@@ -789,7 +780,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Monad<TAccumulate> result = Monad.Return(seed);
 
@@ -809,7 +800,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

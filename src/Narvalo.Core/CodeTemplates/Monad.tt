@@ -225,7 +225,6 @@
     {
         WriteHeader_();
 #>
-
 namespace <#= Namespace #> {
     using System;
     using System.Collections.Generic;
@@ -250,7 +249,6 @@ namespace <#= Namespace #> {
     {
         WriteHeader_();
 #>
-
 namespace <#= Namespace #> {
     using System.Diagnostics.Contracts;
 
@@ -265,7 +263,6 @@ namespace <#= Namespace #> {
     {
         WriteHeader_();
 #>
-
 namespace <#= LinqNamespace #> {
     using System;
     using System.Collections.Generic;
@@ -312,7 +309,7 @@ namespace <#= LinqNamespace #>.Internal {
     {
 #>
     /// <summary>
-    /// Provides a set of static methods and extension methods for <see cref="<#= Name #>{T}" />.
+    /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
     /// </summary>
     public static partial class <#= Name #>
     {
@@ -327,23 +324,21 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><Unit> Unit { get { return Unit_; } }
 
 <#+ if (HasZero) { #>
-        /*!
-         * Named `mzero` in Haskell parlance.
-         */
-
         /// <summary>
         /// Returns the zero of type <c><#= Name #>&lt;Unit&gt;.<#= ZeroName #></c>.
         /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><Unit> <#= ZeroName #> { get { return <#= ZeroName #>_; } }
 <#+ } #>
-
-        /*!
-         * Named `return` in Haskell parlance.
-         */
 
         /// <summary>
         /// Returns a new instance of <see cref="<#= Name #>{T}" />.
         /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
 <#+ StructConstraint_("T"); #>
         {
@@ -352,13 +347,12 @@ namespace <#= LinqNamespace #>.Internal {
         
         #region Generalisations of list functions (Prelude)
 
-        /*!
-         * Named `join` in Haskell parlance.
-         */
-
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
 <#+ StructConstraint_("T"); #>
         {
@@ -371,54 +365,49 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Monadic lifting operators (Prelude)
 
-        /*!
-         * Named `liftM` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
 <#+ StructConstraint_("T"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return m =>
-            {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m"); PopIndent(); }  #>
+            return m => {
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m", MapName, true); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
             };
         }
-
-        /*!
-         * Named `liftM2` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
 <#+ StructConstraint_("T1"); #>
 <#+ StructConstraint_("T2"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2) => 
-            {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
+            return (m1, m2) => {
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
             };
         }
-
-        /*!
-         * Named `liftM3` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
 <#+ StructConstraint_("T1"); #>
@@ -426,21 +415,19 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T3"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3) =>
-            {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
+            return (m1, m2, m3) => {
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
             };
         }
-
-        /*!
-         * Named `liftM4` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
@@ -450,21 +437,19 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T4"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3, m4) =>
-            {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
+            return (m1, m2, m3, m4) => {
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
-
-        /*!
-         * Named `liftM5` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
@@ -475,9 +460,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T5"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-            return (m1, m2, m3, m4, m5) =>
-            {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1"); PopIndent(); }  #>
+            return (m1, m2, m3, m4, m5) => {
+<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -492,14 +476,14 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitCoreComonad() 
     {
 #>
-    /*!
-     * Comonad methods.
-     */
+    /// <summary>
+    /// Comonad methods.
+    /// </summary>
     public static partial class <#= Name #>
     {
-        /*!
-         * Named `extract` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
         public static T Extract<T>(<#= Name #><T> monad)
 <#+ StructConstraint_("T"); #>
         {
@@ -508,9 +492,9 @@ namespace <#= LinqNamespace #>.Internal {
             return <#= Name #><T>.ε(monad);
         }
 
-        /*!
-         * Named `duplicate` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
 <#+ StructConstraint_("T"); #>
         {
@@ -525,38 +509,41 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitExtensions()
     {
 #>
-    /*!
-     * Extensions methods for <#= Name #><T>.
-     */
+    /// <summary>
+    /// Provides a set of extension methods for <see cref="<#= Name #>{T}" />.
+    /// We use extension methods so that we can override them on a case by case basis.
+    /// </summary>
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `fmap` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("selector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("selector", false); #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
-        /*!
-         * Named `>>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>>></c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TResult> other)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(true); #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -566,16 +553,17 @@ namespace <#= LinqNamespace #>.Internal {
         #region Generalisations of list functions (Prelude)
 
 <#+ if (HasZero) { #>
-        /*!
-         * Named `mfilter` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><TSource> <#= FilterName #><TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("predicate"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("predicate", false); #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
@@ -584,16 +572,17 @@ namespace <#= LinqNamespace #>.Internal {
 
 <#+ if (!RequireStruct) { #>
 
-        /*!
-         * Named `replicateM` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
             this <#= Name #><TSource> @this,
             int count)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(MapName, true); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
@@ -604,9 +593,9 @@ namespace <#= LinqNamespace #>.Internal {
         #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
-        /*!
-         * Named `guard` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
         public static <#= Name #><Unit> Guard<TSource>(
@@ -618,9 +607,9 @@ namespace <#= LinqNamespace #>.Internal {
         }
 <#+ } #>
 
-        /*!
-         * Named `when` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
         public static <#= Name #><Unit> When<TSource>(
@@ -638,16 +627,16 @@ namespace <#= LinqNamespace #>.Internal {
             return <#= Name #>.Unit;
         }
 
-        /*!
-         * Named `unless` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><Unit> Unless<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(true); #>
             Contract.Requires(action != null);
 
             return @this.When(!predicate, action);
@@ -666,9 +655,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSecond"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("second"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("second", MapName, true); #>
+<#+ NotNull_("resultSelector", false); #>
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -684,9 +673,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T3"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("second"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("second", "Zip", true); #>
+<#+ NotNull_("resultSelector", false); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -707,9 +696,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T4"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("second"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("second", "Zip", true); #>
+<#+ NotNull_("resultSelector", false); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
@@ -735,9 +724,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("T5"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("second"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("second", "Zip", true); #>
+<#+ NotNull_("resultSelector", false); #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
@@ -760,9 +749,9 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(FilterName, true); #>
 
-            return @this.Filter(predicate);
+            return @this.<#= FilterName #>(predicate);
         }
 <#+ } #>
 
@@ -772,15 +761,15 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(MapName, true); #>
 
             return @this.<#= MapName #>(selector);
         }
 <#+ } #>
 
-        /*!
-         * Kind of generalisation of Zip (liftM2).
-         */
+        /// <remarks>
+        /// Kind of generalisation of Zip (liftM2).
+        /// </remarks>
         public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
@@ -789,9 +778,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TMiddle"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("valueSelectorM"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("valueSelectorM", false); #>
+<#+ NotNull_("resultSelector", false); #>
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).<#= MapName #>(
@@ -810,8 +799,10 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_("Join", true); #>
+<#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
@@ -835,8 +826,10 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_("GroupJoin", true); #>
+<#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
@@ -867,10 +860,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ if (IsNullable) { #>
             Contract.Requires(@this != null);
-            Contract.Requires(resultSelector != null);
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return JoinCore_(
                 @this,
@@ -893,10 +889,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+<#+ if (IsNullable) { #>
             Contract.Requires(@this != null);
-            Contract.Requires(resultSelector != null);
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
 
             return GroupJoinCore_(
                 @this,
@@ -919,10 +918,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ NotNull_("seq"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ NotNull_("seq", true); #>
+<#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -944,10 +946,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TKey"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ NotNull_("seq"); #>
-<#+ NotNull_("resultSelector"); #>
+<#+ NotNull_("seq", true); #>
+<#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
+<#+ } #>
             Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
@@ -965,15 +970,16 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TInner"); #>
 <#+ StructConstraint_("TKey"); #>
         {
-<#+ NotNull_("inner"); #>
-<#+ NotNull_("outerKeySelector"); #>
-<#+ DebugNotNull_("comparer"); #>
+<#+ NotNull_("inner", MapName, true); #>
+<#+ NotNull_("outerKeySelector", false); #>
+<#+ NotNull_("comparer", false); #>
+            Contract.Requires(innerKeySelector != null);
 
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
             
-                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
+                return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
             };
         }
 <#+ } #>
@@ -990,8 +996,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("predicate"); #>
+<#+ ObjectNotNull_(true); #>
+<#+ NotNull_("predicate", false); #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -1004,7 +1010,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_("Coalesce", true); #>
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
@@ -1017,7 +1023,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_("Coalesce", true); #>
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
@@ -1029,7 +1035,7 @@ namespace <#= LinqNamespace #>.Internal {
             Action<TSource> action)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(true); #>
             Require.NotNull(action, "action");
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -1041,8 +1047,8 @@ namespace <#= LinqNamespace #>.Internal {
             Action action)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
-<#+ NotNull_("action"); #>
+<#+ ObjectNotNull_("Then", true); #>
+<#+ NotNull_("action", false); #>
 
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
@@ -1180,7 +1186,7 @@ namespace <#= LinqNamespace #>.Internal {
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
             ////Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
@@ -1202,7 +1208,7 @@ namespace <#= LinqNamespace #>.Internal {
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
         }
@@ -1400,7 +1406,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -1412,7 +1418,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ NotNull_("predicateM"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1441,7 +1447,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -1458,7 +1464,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ NotNull_("resultSelectorM"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -1477,7 +1483,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TAccumulate"); #>
         {
 <#+ NotNull_("accumulatorM"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1495,7 +1501,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
@@ -1507,7 +1513,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ NotNull_("accumulatorM"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -1529,7 +1535,7 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
@@ -1545,7 +1551,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1566,7 +1572,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ DebugNotNull_("@this"); #>
+<#+ CheckNotNull_("@this"); #>
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -1626,6 +1632,7 @@ using global::System.Diagnostics.CodeAnalysis;
 
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
     Justification = "They are ordered in a T4 way.")]
+
 <#+
         _headerWritten = true;
     }
@@ -1651,33 +1658,58 @@ using global::System.Diagnostics.CodeAnalysis;
         }
     }
 
-    void ObjectNotNull_() 
+    void ObjectNotNull_(bool isMonad = true) 
     {
-        if (IsNullable) {
+        if (!isMonad || IsNullable) {
 #>
             Require.Object(@this);
 <#+
         }
     }
-
-    void NotNull_(string name) 
+    
+    void ObjectNotNull_(string methodName, bool isMonad = true) 
     {
-        if (IsNullable) {
+        if (!isMonad || IsNullable) {
+#>
+            Require.Object(@this); <#+ WarmNull_(methodName); #>
+<#+
+        }
+    }
+
+    void NotNull_(string name, bool isMonad = true) 
+    {
+        if (!isMonad || IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>");
 <#+
         }
     }
     
-    void DebugNotNull_(string value) 
+    void NotNull_(string name, string methodName, bool isMonad = true) 
     {
-        if (IsNullable) {
+        if (!isMonad || IsNullable) {
 #>
-            DebugCheck.NotNull(<#= value #>);
+            Require.NotNull(<#= name #>, "<#= name #>"); <#+ WarmNull_(methodName); #>
 <#+
         }
     }
     
+    void CheckNotNull_(string value, bool isMonad = true) 
+    {
+        if (!isMonad || IsNullable) {
+#>
+            Check.NotNull(<#= value #>);
+<#+
+        }
+    }
+    
+    // Null-reference check with extension methods is not always necessary but we never know for sure here.
+    void WarmNull_(string methodName) 
+    {
+#>// Null-reference check: "<#= methodName #>" could have been overriden by a normal method.
+<#+
+    }
+
     void ThrowIfInitialized_() 
     {
         if (_initialized) {

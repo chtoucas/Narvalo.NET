@@ -216,7 +216,7 @@ namespace Narvalo.Collections.Internal {
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             ////Contract.Ensures(Contract.Result<Identity<IEnumerable<TSource>>>() != null);
 
             var seed = Identity.Return(Enumerable.Empty<TSource>());
@@ -239,7 +239,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -249,7 +249,7 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, Identity<bool>> predicateM)
         {
             Require.NotNull(predicateM, "predicateM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -274,7 +274,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -288,7 +288,7 @@ namespace Narvalo.Collections.Internal {
             Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Func<TFirst, TSecond, Identity<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -304,7 +304,7 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Identity<TAccumulate> result = Identity.Return(seed);
 
@@ -320,7 +320,7 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
@@ -331,7 +331,7 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -352,7 +352,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
@@ -366,7 +366,7 @@ namespace Narvalo.Collections.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Identity<TAccumulate> result = Identity.Return(seed);
 
@@ -386,7 +386,7 @@ namespace Narvalo.Collections.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

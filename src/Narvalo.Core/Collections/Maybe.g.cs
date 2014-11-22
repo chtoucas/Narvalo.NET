@@ -231,7 +231,7 @@ namespace Narvalo.Collections.Internal {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             ////Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
@@ -249,7 +249,7 @@ namespace Narvalo.Collections.Internal {
         internal static Maybe<TSource> SumCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
         }
@@ -262,7 +262,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -272,7 +272,7 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, Maybe<bool>> predicateM)
         {
             Require.NotNull(predicateM, "predicateM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -297,7 +297,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -311,7 +311,7 @@ namespace Narvalo.Collections.Internal {
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -327,7 +327,7 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -343,7 +343,7 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
@@ -354,7 +354,7 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
             Require.NotNull(accumulatorM, "accumulatorM");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -375,7 +375,7 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
@@ -389,7 +389,7 @@ namespace Narvalo.Collections.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -409,7 +409,7 @@ namespace Narvalo.Collections.Internal {
         {
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

@@ -36,7 +36,7 @@ namespace Narvalo.Fx {
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods and extension methods for <see cref="Output{T}" />.
+    /// Provides a set of static methods for <see cref="Output{T}" />.
     /// </summary>
     public static partial class Output
     {
@@ -48,13 +48,12 @@ namespace Narvalo.Fx {
         public static Output<Unit> Unit { get { return Unit_; } }
 
 
-        /*!
-         * Named `return` in Haskell parlance.
-         */
-
         /// <summary>
         /// Returns a new instance of <see cref="Output{T}" />.
         /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
         public static Output<T> Success<T>(T value)
         {
             return Output<T>.η(value);
@@ -62,13 +61,12 @@ namespace Narvalo.Fx {
         
         #region Generalisations of list functions (Prelude)
 
-        /*!
-         * Named `join` in Haskell parlance.
-         */
-
         /// <summary>
         /// Removes one level of structure, projecting its bound value into the outer level.
         /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             Contract.Requires(square != null);
@@ -80,93 +78,83 @@ namespace Narvalo.Fx {
 
         #region Monadic lifting operators (Prelude)
 
-        /*!
-         * Named `liftM` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Output{T}" /> values.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T>, Output<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
-            return m =>
-            {
-                Require.NotNull(m, "m");
+            return m => {
+                Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
             };
         }
 
-        /*!
-         * Named `liftM2` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
-            return (m1, m2) => 
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
             };
         }
 
-        /*!
-         * Named `liftM3` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
-            return (m1, m2, m3) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
             };
         }
 
-        /*!
-         * Named `liftM4` in Haskell parlance.
-         */
-
         /// <summary>
         /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
-            return (m1, m2, m3, m4) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3, m4) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
-
-        /*!
-         * Named `liftM5` in Haskell parlance.
-         */
 
         /// <summary>
         /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
-            return (m1, m2, m3, m4, m5) =>
-            {
-                Require.NotNull(m1, "m1");
+            return (m1, m2, m3, m4, m5) => {
+                Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -174,34 +162,37 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    /*!
-     * Extensions methods for Output<T>.
-     */
+    /// <summary>
+    /// Provides a set of extension methods for <see cref="Output{T}" />.
+    /// We use extension methods so that we can override them on a case by case basis.
+    /// </summary>
     public static partial class Output
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `fmap` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Select<TSource, TResult>(
             this Output<TSource> @this,
             Func<TSource, TResult> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return @this.Bind(_ => Output.Success(selector.Invoke(_)));
         }
 
-        /*!
-         * Named `>>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>>></c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Then<TSource, TResult>(
             this Output<TSource> @this,
             Output<TResult> other)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -211,15 +202,16 @@ namespace Narvalo.Fx {
         #region Generalisations of list functions (Prelude)
 
 
-        /*!
-         * Named `replicateM` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
         public static Output<IEnumerable<TSource>> Repeat<TSource>(
             this Output<TSource> @this,
             int count)
         {
-            Require.Object(@this);
+            Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
+            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -229,9 +221,9 @@ namespace Narvalo.Fx {
         #region Conditional execution of monadic expressions (Prelude)
 
 
-        /*!
-         * Named `when` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>when</c> in Haskell parlance.
+        /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
         public static Output<Unit> When<TSource>(
@@ -248,9 +240,9 @@ namespace Narvalo.Fx {
             return Output.Unit;
         }
 
-        /*!
-         * Named `unless` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>unless</c> in Haskell parlance.
+        /// </remarks>
         public static Output<Unit> Unless<TSource>(
             this Output<TSource> @this,
             bool predicate,
@@ -273,7 +265,7 @@ namespace Narvalo.Fx {
             Func<TFirst, TSecond, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
@@ -287,7 +279,7 @@ namespace Narvalo.Fx {
             Func<T1, T2, T3, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Output<TResult>> g
@@ -305,7 +297,7 @@ namespace Narvalo.Fx {
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Output<TResult>> g
@@ -327,7 +319,7 @@ namespace Narvalo.Fx {
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
+            Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, Output<TResult>> g
@@ -345,9 +337,9 @@ namespace Narvalo.Fx {
         #region Query Expression Pattern
 
 
-        /*!
-         * Kind of generalisation of Zip (liftM2).
-         */
+        /// <remarks>
+        /// Kind of generalisation of Zip (liftM2).
+        /// </remarks>
         public static Output<TResult> SelectMany<TSource, TMiddle, TResult>(
             this Output<TSource> @this,
             Func<TSource, Output<TMiddle>> valueSelectorM,

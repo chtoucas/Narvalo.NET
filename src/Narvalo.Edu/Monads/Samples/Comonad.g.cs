@@ -29,14 +29,14 @@ using global::System.Diagnostics.CodeAnalysis;
 namespace Narvalo.Edu.Monads.Samples {
     using System.Diagnostics.Contracts;
 
-    /*!
-     * Comonad methods.
-     */
+    /// <summary>
+    /// Comonad methods.
+    /// </summary>
     public static partial class Comonad
     {
-        /*!
-         * Named `extract` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
         public static T Extract<T>(Comonad<T> monad)
         {
             Contract.Requires(monad != null);
@@ -44,9 +44,9 @@ namespace Narvalo.Edu.Monads.Samples {
             return Comonad<T>.ε(monad);
         }
 
-        /*!
-         * Named `duplicate` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
         {
             return Comonad<T>.δ(monad);

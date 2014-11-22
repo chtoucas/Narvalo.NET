@@ -473,8 +473,8 @@ namespace Narvalo.Fx
     }
 
     /*!
-     * Monad optimized extensions
-     * --------------------------
+     * Optimized version for Monad extension methods
+     * ---------------------------------------------
      */
     public partial class Maybe<T>
     {
