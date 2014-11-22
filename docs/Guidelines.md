@@ -140,14 +140,11 @@ Disabled rules:
 Code Contracts
 --------------
 
-We define the conditional compilation symbol CONTRACTS_CODEANALYSIS 
-when CODE_ANALYSIS and CONTRACTS_FULL are both defined.
-
 ### Object Invariants
 
 Wrap any object invariants method with a compiler conditional clause :
 ```csharp
-#if CONTRACTS_CODEANALYSIS
+#if CONTRACTS_FULL
     [ContractInvariantMethod]
     void ObjectInvariants()
     {

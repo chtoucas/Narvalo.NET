@@ -235,8 +235,9 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
+            Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
-            DebugCheck.NotNull(@this);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return from _ in @this
                    where predicateM.Invoke(_).ValueOrElse(false)

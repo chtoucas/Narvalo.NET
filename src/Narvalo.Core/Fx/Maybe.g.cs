@@ -193,7 +193,7 @@ namespace Narvalo.Fx {
         }
 
         /// <remarks>
-        /// Named <c>>></c> in Haskell parlance.
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
         public static Maybe<TResult> Then<TSource, TResult>(
             this Maybe<TSource> @this,
@@ -233,7 +233,7 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -533,8 +533,7 @@ namespace Narvalo.Fx {
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
 
-            return source =>
-            {
+            return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
             
                 return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
@@ -602,46 +601,49 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    /*!
-     * Extensions methods for Func<TSource, Maybe<TResult>>.
-     */
+    /// <summary>
+    /// Extensions methods for <c>Func&lt;TSource, Maybe&lt;TResult&gt;&gt;</c>.
+    /// </summary>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `=<<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Maybe<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return value.Bind(@this);
         }
 
-        /*!
-         * Named `>=>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Maybe<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Maybe<TMiddle>> @this,
             Func<TMiddle, Maybe<TResult>> funM)
         {
             Require.Object(@this);
+            Contract.Requires(funM != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /*!
-         * Named `<=<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Maybe<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> funM)
         {
             Require.NotNull(funM, "funM");
+            Contract.Requires(@this != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

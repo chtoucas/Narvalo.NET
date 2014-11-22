@@ -356,7 +356,9 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
 <#+ StructConstraint_("T"); #>
         {
+<#+ if (IsNullable) { #>
             Contract.Requires(square != null);
+<#+ } #>
 
             return <#= Name #><T>.μ(square);
         }
@@ -528,13 +530,15 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("selector", false); #>
+<#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
         }
 
         /// <remarks>
-        /// Named <c>>></c> in Haskell parlance.
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
@@ -543,7 +547,9 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(true); #>
+<#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Bind(_ => other);
         }
@@ -563,7 +569,9 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("predicate", false); #>
+<#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
@@ -582,7 +590,9 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(MapName, true); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
@@ -975,8 +985,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ NotNull_("comparer", false); #>
             Contract.Requires(innerKeySelector != null);
 
-            return source =>
-            {
+            return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
             
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
@@ -1064,31 +1073,34 @@ namespace <#= LinqNamespace #>.Internal {
     public void EmitKleisliExtensions()
     {
 #>
-    /*!
-     * Extensions methods for Func<TSource, <#= Name #><TResult>>.
-     */
+    /// <summary>
+    /// Extensions methods for <c>Func&lt;TSource, <#= Name #>&lt;TResult&gt;&gt;</c>.
+    /// </summary>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `=<<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             <#= Name #><TSource> value)
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ NotNull_("value"); #>
+<#+ NotNull_("value", true); #>
             Contract.Requires(@this != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return value.Bind(@this);
         }
 
-        /*!
-         * Named `>=>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
@@ -1096,14 +1108,15 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TMiddle"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+<#+ ObjectNotNull_(false); #>
+            Contract.Requires(funM != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /*!
-         * Named `<=<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)
@@ -1111,7 +1124,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TMiddle"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ NotNull_("funM"); #>
+<#+ NotNull_("funM", false); #>
+            Contract.Requires(@this != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -1126,23 +1140,26 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitEnumerableMonadExtensions()
     {
 #>
-    /*!
-     * Extensions for IEnumerable<<#= Name #><T>>.
-     */
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>.
+    /// </summary>
     public static partial class Enumerable<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
 <#+ if (!RequireStruct) { #>
-        /*!
-         * Named `sequence` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
-            ////Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "CollectCore" is an extension method.
+            Contract.Requires(@this != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
 
             return @this.CollectCore();
         }
@@ -1153,14 +1170,18 @@ namespace <#= LinqNamespace #>.Internal {
 
         #region Generalisations of list functions (Prelude)
 
-        /*!
-         * Named `msum` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "SumCore" is an extension method.
+            Contract.Requires(@this != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.SumCore();
         }
@@ -1176,9 +1197,9 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitEnumerableMonadInternalExtensions()
     {
 #>
-    /*!
-     * Internal extensions for IEnumerable<<#= Name #><T>>.
-     */
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>.
+    /// </summary>
     static partial class Enumerable<#= Name #>Extensions
     {
 <#+ if (!RequireStruct) { #>
@@ -1186,19 +1207,21 @@ namespace <#= LinqNamespace #>.Internal {
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ CheckNotNull_("@this"); #>
-            ////Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method.
+            Contract.Requires(@this != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
                 = (m, n) =>
-                    m.Bind(list =>
-                    {
+                    m.Bind(list => {
                         return n.Bind(item => <#= Name #>.<#= ReturnName #>(
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun); ////.AssumeNotNull();
+            return @this.Aggregate(seed, fun)<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
         }
 <#+ } #>
 
@@ -1208,9 +1231,13 @@ namespace <#= LinqNamespace #>.Internal {
             this IEnumerable<<#= Name #><TSource>> @this)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method. 
+            Contract.Requires(@this != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
-            return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
+            return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n))<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
         }
 <#+ } #>
     }
@@ -1222,7 +1249,9 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitEnumerableExtensions()
     {
 #>
-    // Extensions for IEnumerable<T>.
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -1237,7 +1266,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "MapCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
 
             return @this.MapCore(funM);
         }
@@ -1256,8 +1290,10 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, <#= Name #><bool>> predicateM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "FilterCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(predicateM != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -1274,7 +1310,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+<#+ } #>
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -1290,8 +1331,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSecond"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "ZipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -1307,8 +1353,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -1324,8 +1374,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
- <#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "FoldBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -1335,8 +1389,12 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -1346,8 +1404,12 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "ReduceBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -1365,9 +1427,13 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1379,9 +1445,13 @@ namespace <#= LinqNamespace #>.Internal {
             Func<<#= Name #><TSource>, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ ObjectNotNull_(); #>
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1396,7 +1466,9 @@ namespace <#= LinqNamespace #>.Internal {
     protected void EmitEnumerableInternalExtensions()
     {
 #>
-    // Internal extensions for IEnumerable<T>.
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     static partial class EnumerableExtensions
     {
 <#+ if (!RequireStruct) { #>
@@ -1406,7 +1478,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TResult"); #>
         {
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -1417,8 +1494,9 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, <#= Name #><bool>> predicateM)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ ObjectNotNull_(false); #>
 <#+ NotNull_("predicateM"); #>
-<#+ CheckNotNull_("@this"); #>
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1447,7 +1525,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TFirst"); #>
 <#+ StructConstraint_("TSecond"); #>
         {
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+<#+ } #>
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -1464,7 +1547,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ NotNull_("resultSelectorM"); #>
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -1482,8 +1570,11 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
+<#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
-<#+ CheckNotNull_("@this"); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1501,8 +1592,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
@@ -1512,8 +1607,11 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ NotNull_("accumulatorM"); #>
-<#+ CheckNotNull_("@this"); #>
+<#+ ObjectNotNull_(false); #>
+<#+ NotNull_("accumulatorM", false); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -1535,8 +1633,12 @@ namespace <#= LinqNamespace #>.Internal {
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
 <#+ StructConstraint_("TSource"); #>
         {
-<#+ CheckNotNull_("@this"); #>
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
@@ -1549,9 +1651,12 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TSource"); #>
 <#+ StructConstraint_("TAccumulate"); #>
         {
+<#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ CheckNotNull_("@this"); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
@@ -1570,9 +1675,12 @@ namespace <#= LinqNamespace #>.Internal {
             Func<<#= Name #><TSource>, bool> predicate)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ CheckNotNull_("@this"); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -1690,15 +1798,6 @@ using global::System.Diagnostics.CodeAnalysis;
         if (!isMonad || IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>"); <#+ WarmNull_(methodName); #>
-<#+
-        }
-    }
-    
-    void CheckNotNull_(string value, bool isMonad = true) 
-    {
-        if (!isMonad || IsNullable) {
-#>
-            Check.NotNull(<#= value #>);
 <#+
         }
     }

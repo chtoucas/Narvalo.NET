@@ -185,7 +185,7 @@ namespace Narvalo.Fx {
         }
 
         /// <remarks>
-        /// Named <c>>></c> in Haskell parlance.
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
         public static Output<TResult> Then<TSource, TResult>(
             this Output<TSource> @this,
@@ -211,7 +211,7 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -391,46 +391,49 @@ namespace Narvalo.Fx {
         #endregion
     }
 
-    /*!
-     * Extensions methods for Func<TSource, Output<TResult>>.
-     */
+    /// <summary>
+    /// Extensions methods for <c>Func&lt;TSource, Output&lt;TResult&gt;&gt;</c>.
+    /// </summary>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `=<<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Output<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Output<TResult>> @this,
             Output<TSource> value)
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return value.Bind(@this);
         }
 
-        /*!
-         * Named `>=>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Output<TMiddle>> @this,
             Func<TMiddle, Output<TResult>> funM)
         {
             Require.Object(@this);
+            Contract.Requires(funM != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /*!
-         * Named `<=<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, Output<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Output<TResult>> @this,
             Func<TSource, Output<TMiddle>> funM)
         {
             Require.NotNull(funM, "funM");
+            Contract.Requires(@this != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

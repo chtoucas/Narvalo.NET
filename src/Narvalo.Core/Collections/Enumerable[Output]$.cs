@@ -12,14 +12,13 @@ namespace Narvalo.Collections
     {
         internal static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
 
             foreach (var m in @this) {
                 if (m.IsFailure) {
-                    Contract.Assert(m.ExceptionInfo != null);
-
                     return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
                 }
 

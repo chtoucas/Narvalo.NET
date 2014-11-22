@@ -35,21 +35,22 @@ namespace Narvalo.Collections {
     using Narvalo.Fx;   // For Unit
     using Narvalo.Collections.Internal;
 
-    /*!
-     * Extensions for IEnumerable<Maybe<T>>.
-     */
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;Maybe&lt;T&gt;&gt;</c>.
+    /// </summary>
     public static partial class EnumerableMaybeExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `sequence` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
         public static Maybe<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.Object(@this);
-            ////Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "CollectCore" is an extension method.
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -58,13 +59,15 @@ namespace Narvalo.Collections {
 
         #region Generalisations of list functions (Prelude)
 
-        /*!
-         * Named `msum` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
         public static Maybe<TSource> Sum<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "SumCore" is an extension method.
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.SumCore();
         }
@@ -72,7 +75,9 @@ namespace Narvalo.Collections {
         #endregion
     }
 
-    // Extensions for IEnumerable<T>.
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -84,7 +89,10 @@ namespace Narvalo.Collections {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "MapCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -100,8 +108,10 @@ namespace Narvalo.Collections {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FilterCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(predicateM != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -114,7 +124,10 @@ namespace Narvalo.Collections {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -127,8 +140,11 @@ namespace Narvalo.Collections {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ZipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -141,8 +157,10 @@ namespace Narvalo.Collections {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -156,8 +174,10 @@ namespace Narvalo.Collections {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-             Require.Object(@this);
+            // No need to check for null-reference, "FoldBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -166,8 +186,10 @@ namespace Narvalo.Collections {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -176,8 +198,10 @@ namespace Narvalo.Collections {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -192,9 +216,11 @@ namespace Narvalo.Collections {
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
             Func<Maybe<TAccumulate>, bool> predicate)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -204,9 +230,11 @@ namespace Narvalo.Collections {
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
             Func<Maybe<TSource>, bool> predicate)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -223,46 +251,53 @@ namespace Narvalo.Collections.Internal {
     using Narvalo;      // For Require
     using Narvalo.Fx;   // For Unit
 
-    /*!
-     * Internal extensions for IEnumerable<Maybe<T>>.
-     */
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;Maybe&lt;T&gt;&gt;</c>.
+    /// </summary>
     static partial class EnumerableMaybeExtensions
     {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Check.NotNull(@this);
-            ////Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method.
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) =>
-                    m.Bind(list =>
-                    {
+                    m.Bind(list => {
                         return n.Bind(item => Maybe.Create(
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun); ////.AssumeNotNull();
+            return @this.Aggregate(seed, fun).AssumeNotNull();
         }
 
         internal static Maybe<TSource> SumCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n)).AssumeNotNull();
         }
     }
 
-    // Internal extensions for IEnumerable<T>.
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     static partial class EnumerableExtensions
     {
         internal static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -271,8 +306,9 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)
         {
+            Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -297,7 +333,10 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -311,7 +350,10 @@ namespace Narvalo.Collections.Internal {
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -326,8 +368,9 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -343,8 +386,10 @@ namespace Narvalo.Collections.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
@@ -353,8 +398,9 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -375,8 +421,10 @@ namespace Narvalo.Collections.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
@@ -387,9 +435,10 @@ namespace Narvalo.Collections.Internal {
             Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
             Func<Maybe<TAccumulate>, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
@@ -407,9 +456,10 @@ namespace Narvalo.Collections.Internal {
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
             Func<Maybe<TSource>, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

@@ -12,7 +12,8 @@ namespace Narvalo.Collections
     {
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            DebugCheck.NotNull(@this);
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
 

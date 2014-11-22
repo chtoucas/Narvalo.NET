@@ -36,6 +36,8 @@ namespace Narvalo.Fx
         {
             get
             {
+                Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
+
                 if (_isSuccess) {
                     throw new InvalidOperationException(SR.Output_SuccessfulHasNoException);
                 }
@@ -114,7 +116,7 @@ namespace Narvalo.Fx
             return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
         }
 
-#if CONTRACTS_CODEANALYSIS
+#if CONTRACTS_FULL
         [ContractInvariantMethod]
         void ObjectInvariants()
         {

@@ -193,7 +193,7 @@ namespace Narvalo.Edu.Monads.Samples {
         }
 
         /// <remarks>
-        /// Named <c>>></c> in Haskell parlance.
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
         public static MonadZero<TResult> Then<TSource, TResult>(
             this MonadZero<TSource> @this,
@@ -233,7 +233,7 @@ namespace Narvalo.Edu.Monads.Samples {
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -533,8 +533,7 @@ namespace Narvalo.Edu.Monads.Samples {
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
 
-            return source =>
-            {
+            return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
             
                 return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
@@ -602,46 +601,49 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    /*!
-     * Extensions methods for Func<TSource, MonadZero<TResult>>.
-     */
+    /// <summary>
+    /// Extensions methods for <c>Func&lt;TSource, MonadZero&lt;TResult&gt;&gt;</c>.
+    /// </summary>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `=<<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static MonadZero<TResult> Invoke<TSource, TResult>(
             this Func<TSource, MonadZero<TResult>> @this,
             MonadZero<TSource> value)
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
 
             return value.Bind(@this);
         }
 
-        /*!
-         * Named `>=>` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadZero<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, MonadZero<TMiddle>> @this,
             Func<TMiddle, MonadZero<TResult>> funM)
         {
             Require.Object(@this);
+            Contract.Requires(funM != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
 
-        /*!
-         * Named `<=<` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
         public static Func<TSource, MonadZero<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, MonadZero<TResult>> @this,
             Func<TSource, MonadZero<TMiddle>> funM)
         {
             Require.NotNull(funM, "funM");
+            Contract.Requires(@this != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -659,21 +661,22 @@ namespace Narvalo.Edu.Monads.Samples {
     using Narvalo.Edu.Monads.Samples;
     using Narvalo.Edu.Monads.Samples.Internal;
 
-    /*!
-     * Extensions for IEnumerable<MonadZero<T>>.
-     */
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;MonadZero&lt;T&gt;&gt;</c>.
+    /// </summary>
     public static partial class EnumerableMonadZeroExtensions
     {
         #region Basic Monad functions (Prelude)
 
-        /*!
-         * Named `sequence` in Haskell parlance.
-         */
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
         public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
         {
-            Require.Object(@this);
-            ////Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "CollectCore" is an extension method.
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -681,7 +684,9 @@ namespace Narvalo.Edu.Monads.Samples {
         #endregion
     }
 
-    // Extensions for IEnumerable<T>.
+    /// <summary>
+    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -693,7 +698,10 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<TResult>> funM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "MapCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -709,8 +717,10 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<bool>> predicateM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FilterCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(predicateM != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -723,7 +733,10 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -736,8 +749,11 @@ namespace Narvalo.Edu.Monads.Samples {
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelectorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ZipCore" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -750,8 +766,10 @@ namespace Narvalo.Edu.Monads.Samples {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -765,8 +783,10 @@ namespace Narvalo.Edu.Monads.Samples {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
         {
-             Require.Object(@this);
+            // No need to check for null-reference, "FoldBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -775,8 +795,10 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -785,8 +807,10 @@ namespace Narvalo.Edu.Monads.Samples {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceBackCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -801,9 +825,11 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM,
             Func<MonadZero<TAccumulate>, bool> predicate)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "FoldCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -813,9 +839,11 @@ namespace Narvalo.Edu.Monads.Samples {
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM,
             Func<MonadZero<TSource>, bool> predicate)
         {
-            Require.Object(@this);
+            // No need to check for null-reference, "ReduceCore" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -833,38 +861,43 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
     using Narvalo.Fx;   // For Unit
     using Narvalo.Edu.Monads.Samples;
 
-    /*!
-     * Internal extensions for IEnumerable<MonadZero<T>>.
-     */
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;MonadZero&lt;T&gt;&gt;</c>.
+    /// </summary>
     static partial class EnumerableMonadZeroExtensions
     {
         internal static MonadZero<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
         {
-            Check.NotNull(@this);
-            ////Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
+            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method.
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             var seed = MonadZero.Return(Enumerable.Empty<TSource>());
             Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> fun
                 = (m, n) =>
-                    m.Bind(list =>
-                    {
+                    m.Bind(list => {
                         return n.Bind(item => MonadZero.Return(
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun); ////.AssumeNotNull();
+            return @this.Aggregate(seed, fun).AssumeNotNull();
         }
     }
 
-    // Internal extensions for IEnumerable<T>.
+    /// <summary>
+    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// </summary>
     static partial class EnumerableExtensions
     {
         internal static MonadZero<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<TResult>> funM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -873,8 +906,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<bool>> predicateM)
         {
+            Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -899,7 +933,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return from tuple in @this.Select(funM).AssumeNotNull().Collect()
                    let item1 = tuple.Select(_ => _.Item1)
@@ -913,7 +950,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Contract.Requires(@this != null);
+            Contract.Requires(second != null);
+            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -928,8 +968,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             MonadZero<TAccumulate> result = MonadZero.Return(seed);
 
@@ -945,8 +986,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
@@ -955,8 +998,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -977,8 +1021,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
         {
-            Check.NotNull(@this);
+            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
@@ -989,9 +1035,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM,
             Func<MonadZero<TAccumulate>, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
             MonadZero<TAccumulate> result = MonadZero.Return(seed);
 
@@ -1009,9 +1056,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal {
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM,
             Func<MonadZero<TSource>, bool> predicate)
         {
+            Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Check.NotNull(@this);
+            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {

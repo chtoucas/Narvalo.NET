@@ -44,10 +44,11 @@ Narvalo (Core)
 
 ### High Priority
 
+- Code Analysis is not working with Code Contracts.
+
 ### Medium Priority
 
 - For all classes in Narvalo.Fx, review null returns and null inputs.
-- Review the use of CONTRACTS_CODEANALYSIS.
 - Rework the use of Debug, DebugCheck and Require.
 - Add a description to all `Contract.Assume`.
 - Add Contract.Ensures directives.
