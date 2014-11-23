@@ -26,6 +26,7 @@ In General
 ### Low Priority
 
 - Fix regions, ////, /*!, Comments in english
+- Remove linked files (IEquatable...)
 - Always use resources for messages.
 - Remove the ruleset for Samples.
 - Review all ToString() methods.
@@ -52,6 +53,7 @@ Narvalo (Core)
 - Rework the use of Debug, DebugCheck and Require.
 - Add a description to all `Contract.Assume`.
 - Add Contract.Ensures directives.
+- Write a T4 Template for Monad tests.
 
 ### Low Priority
 
@@ -96,7 +98,7 @@ Narvalo (Playground)
 
 ### Medium Priority
 
-- Narvalo.DocuMaker & Playground.Benchmarks should use the Narvalo rulesets.
+- Narvalo.DocuMaker & Playground could use the Narvalo rulesets.
 - Use CommonMark instead of Markdown Deep.
 
 ### Low Priority

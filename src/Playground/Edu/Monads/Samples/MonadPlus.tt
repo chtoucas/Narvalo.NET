@@ -1,0 +1,5 @@
+﻿<#@ include file="..\..\..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
+<# InitializePlus(); #>
+<# EmitMonad(); #>
+
+<# EmitLinq(); #>

@@ -1,9 +1,0 @@
-﻿<#@ include file="..\..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
-<# 
-    InitializeOr();
-
-    RequireStruct = true;
-    IsNullable = false;
-#>
-<# EmitMonad(); #>
-<# EmitLinq(); #>

@@ -97,10 +97,8 @@ the content of "etc\Settings.SourceAnalysis".
 
 The following projects use the default ruleset for Code Analysis.
 - Narvalo.DocuMaker
-- Narvalo.Edu
 - Narvalo.Junk
 - Playground
-- Playground.Benchmarks
 
 
 Coding Style

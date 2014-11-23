@@ -56,7 +56,6 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.DocuMaker\Narvalo.DocuMaker.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Edu\Narvalo.Edu.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->
@@ -72,7 +71,6 @@
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Playground\Playground.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Playground.Benchmarks\Playground.Benchmarks.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)samples\MvpCommandLine\MvpCommandLine.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)samples\MvpWebForms\MvpWebForms.csproj" />-->
