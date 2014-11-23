@@ -1,4 +1,6 @@
-﻿namespace Playground.Benchmarks.Comparisons
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Playground.Benchmarks.Comparisons
 {
     using System;
     using System.Globalization;
@@ -7,7 +9,7 @@
     using Narvalo.Benchmarking;
 
     [BenchmarkComparison(10000, DisplayName = "Suppression des diacritiques.")]
-    public class RemoveDiacriticsComparison
+    public static class RemoveDiacriticsComparison
     {
         // \p{Mn} or \p{Non_Spacing_Mark}:
         //   a character intended to be combined with another 
@@ -24,7 +26,7 @@
         ////}
 
         [BenchmarkComparative(DisplayName = "Expression rationnelle.")]
-        public string Regex(string value)
+        public static string Regex(string value)
         {
             var formD = value.Normalize(NormalizationForm.FormD);
 
@@ -37,7 +39,7 @@
         }
 
         [BenchmarkComparative(DisplayName = "Caractères traités pas à pas.")]
-        public string ForLoop(string value)
+        public static string ForLoop(string value)
         {
             var formD = value.Normalize(NormalizationForm.FormD);
 

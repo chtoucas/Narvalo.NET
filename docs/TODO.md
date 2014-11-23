@@ -54,6 +54,7 @@ Narvalo (Core)
 - Add a description to all `Contract.Assume`.
 - Add Contract.Ensures directives.
 - Write a T4 Template for Monad tests.
+- Narvalo.Benchmarking is obviously broken.
 
 ### Low Priority
 

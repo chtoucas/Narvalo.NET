@@ -36,7 +36,6 @@ This solution contains **all** libraries built upon Narvalo.Core:
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
 - Narvalo.Extras a repository of sample classes depending on external packages.
 - Narvalo.Benchmarking
-- Narvalo.Incubator
 - Narvalo.Facts, the test project.
 
 ### Narvalo (Mvp).sln

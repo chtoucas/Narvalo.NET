@@ -1,4 +1,6 @@
-﻿namespace Playground.Benchmarks.Comparisons
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Playground.Benchmarks.Comparisons
 {
     using System;
     using System.Text;
@@ -56,7 +58,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string CharArrayCopy(string value)
+        public static string CharArrayCopy(string value)
         {
             char[] reversed = value.ToCharArray();
 
@@ -77,7 +79,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string CharArrayCopyFast(string value)
+        public static string CharArrayCopyFast(string value)
         {
             char[] reversed = value.ToCharArray();
 
@@ -101,7 +103,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string CharArrayCopyAndReverse(string value)
+        public static string CharArrayCopyAndReverse(string value)
         {
             char[] arr = value.ToCharArray();
             Array.Reverse(arr);
@@ -118,7 +120,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string CharArrayInline(string value)
+        public static string CharArrayInline(string value)
         {
             char[] reversed = new char[value.Length];
 
@@ -131,7 +133,7 @@
         }
 
         [BenchmarkComparative]
-        public string CharArrayInlineWithSurrogates(string value)
+        public static string CharArrayInlineWithSurrogates(string value)
         {
             char[] reversed = new char[value.Length];
 
@@ -154,7 +156,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string StringBuilderInline(string value)
+        public static string StringBuilderInline(string value)
         {
             var sb = new StringBuilder(value);
 
@@ -174,7 +176,7 @@
         /// <param name="value"></param>
         /// <returns></returns>
         [BenchmarkComparative]
-        public string StringBuilderCopy(string value)
+        public static string StringBuilderCopy(string value)
         {
             var sb = new StringBuilder(value.Length);
             char[] buffer = new char[Math.Min(value.Length, 1024)];

@@ -59,7 +59,6 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Incubator\Narvalo.Incubator.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Junk\Narvalo.Junk.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
