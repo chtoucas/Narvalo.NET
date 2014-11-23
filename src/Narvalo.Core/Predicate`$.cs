@@ -8,6 +8,8 @@ namespace Narvalo
     {
         public static Func<TSource, bool> Negate<TSource>(this Func<TSource, bool> @this)
         {
+            Require.Object(@this);
+
             return _ => !@this.Invoke(_);
         }
     }

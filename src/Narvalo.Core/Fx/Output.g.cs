@@ -179,7 +179,6 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return @this.Bind(_ => Output.Success(selector.Invoke(_)));
         }
@@ -192,7 +191,6 @@ namespace Narvalo.Fx {
             Output<TResult> other)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -211,7 +209,6 @@ namespace Narvalo.Fx {
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -407,7 +404,6 @@ namespace Narvalo.Fx {
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
-            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
             return value.Bind(@this);
         }

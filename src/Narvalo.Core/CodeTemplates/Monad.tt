@@ -3,6 +3,9 @@
 
     // NB: Documentation is almost blindly copied from Haskell.
 
+    // If the monad does have a zero, we do expect Bind to never return null but the zero.
+    // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
+
     /* ========================================================================================== *
      * Fields
      * ========================================================================================== */
@@ -530,7 +533,8 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("selector", false); #>
-<#+ if (IsNullable) { #>
+<#+ // "Bind" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -547,7 +551,8 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(true); #>
-<#+ if (IsNullable) { #>
+<#+ // "Bind" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -569,7 +574,8 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("predicate", false); #>
-<#+ if (IsNullable) { #>
+<#+ // "Bind" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -590,7 +596,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(MapName, true); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
@@ -1091,7 +1097,8 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ NotNull_("value", true); #>
             Contract.Requires(@this != null);
-<#+ if (IsNullable) { #>
+<#+ // "Bind" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1313,7 +1320,7 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
@@ -1356,7 +1363,8 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ // "FoldCore" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
@@ -1377,7 +1385,8 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "FoldBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ // "FoldBackCore" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
@@ -1392,7 +1401,8 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ // "ReduceCore" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
             
@@ -1407,7 +1417,7 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "ReduceBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1431,7 +1441,8 @@ namespace <#= LinqNamespace #>.Internal {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-<#+ if (IsNullable) { #>
+<#+ // "FoldCore" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
@@ -1449,7 +1460,7 @@ namespace <#= LinqNamespace #>.Internal {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1528,14 +1539,18 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
-            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
-                   let item1 = tuple.Select(_ => _.Item1)
-                   let item2 = tuple.Select(_ => _.Item2)
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+            var m = @this.Select(funM).AssumeNotNull().Collect();
+
+            return m.Select(tuples => {
+                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+            });
         }
 
         internal static <#= Name #><IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
@@ -1571,13 +1586,19 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
             foreach (TSource item in @this) {
+<#+ if (IsNullable && !HasZero) { #>
+                if (result == null) {
+                    return null;
+                }
+
+<#+ } #>
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -1594,7 +1615,8 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ // "Fold" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
@@ -1608,7 +1630,7 @@ namespace <#= LinqNamespace #>.Internal {
         {
 <#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM", false); #>
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1620,6 +1642,12 @@ namespace <#= LinqNamespace #>.Internal {
                 <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
 
                 while (iter.MoveNext()) {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (result == null) {
+                        return null;
+                    }
+
+<#+ } #>
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -1635,7 +1663,7 @@ namespace <#= LinqNamespace #>.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1653,7 +1681,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
@@ -1661,6 +1689,12 @@ namespace <#= LinqNamespace #>.Internal {
 
             using (var iter = @this.GetEnumerator()) {
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+<#+ if (IsNullable && !HasZero) { #>
+                if (result == null) {
+                    return null;
+                }
+
+<#+ } #>
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -1677,7 +1711,7 @@ namespace <#= LinqNamespace #>.Internal {
 <#+ ObjectNotNull_(false); #>
 <#+ NotNull_("accumulatorM"); #>
 <#+ NotNull_("predicate"); #>
-<#+ if (IsNullable) { #>
+<#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1689,6 +1723,12 @@ namespace <#= LinqNamespace #>.Internal {
                 <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
 
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (result == null) {
+                        return null;
+                    }
+
+<#+ } #>
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 

@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
@@ -16,7 +15,7 @@ namespace Narvalo.Fx
 
         Output(ExceptionDispatchInfo exceptionInfo)
         {
-            Contract.Requires(exceptionInfo != null);
+            Require.NotNull(exceptionInfo, "exceptionInfo");
 
             _isSuccess = false;
             _exceptionInfo = exceptionInfo;
@@ -132,6 +131,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, "selector");
 
+            // FIXME: Incorrect? We should catch exceptions?
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
         }
 
@@ -167,10 +167,11 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions
 
-        public Output<TResult> Map<TResult>(Func<T, TResult> selector)
+        public Output<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
 
+            // FIXME: Incorrect? We should catch exceptions?
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
         }
 
@@ -188,6 +189,7 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
 
             if (IsSuccess) {
+                // FIXME: Incorrect? We should catch exceptions?
                 action.Invoke(Value);
             }
 

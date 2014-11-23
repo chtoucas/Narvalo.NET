@@ -89,6 +89,8 @@ namespace Narvalo
             while (value > 0) {
                 long r = value % FlickrBase58AlphabetLength_;
 
+                Contract.Assume(r < FlickrBase58Alphabet_.Length);
+
                 result = FlickrBase58Alphabet_[r].ToString() + result;
                 value /= FlickrBase58AlphabetLength_;
             }
@@ -199,6 +201,8 @@ namespace Narvalo
             // TODO: Optimize.
             while (value > 0) {
                 long r = value % alphabetLength;
+
+                Contract.Assume(r < alphabet.Length);
 
                 result = alphabet[r].ToString() + result;
                 value /= alphabetLength;

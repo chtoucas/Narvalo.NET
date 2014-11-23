@@ -18,6 +18,7 @@ namespace Narvalo.Collections
             var list = new List<TSource>();
 
             foreach (var m in @this) {
+                // REVIEW: Is this the correct behaviour when m is null?
                 if (m == null || m.IsNone) {
                     return Maybe<IEnumerable<TSource>>.None;
                 }

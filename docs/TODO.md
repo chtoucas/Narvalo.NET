@@ -22,6 +22,7 @@ In General
 - Review all GetHashCode() methods.
 - Check that we always use Error for CA/SA/CC.
 - Re-enable Gendarme.
+- ReferenceEquals or null-check
 
 ### Low Priority
 
@@ -52,7 +53,7 @@ Narvalo (Core)
 - For all classes in Narvalo.Fx, review null returns and null inputs.
 - Rework the use of Debug, DebugCheck and Require.
 - Add a description to all `Contract.Assume`.
-- Add Contract.Ensures directives.
+- Add Contract.Ensures directives, first for Monad.tt
 - Write a T4 Template for Monad tests.
 - Narvalo.Benchmarking is obviously broken.
 

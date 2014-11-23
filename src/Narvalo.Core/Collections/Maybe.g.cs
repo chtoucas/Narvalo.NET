@@ -338,10 +338,14 @@ namespace Narvalo.Collections.Internal {
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
-            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
-                   let item1 = tuple.Select(_ => _.Item1)
-                   let item2 = tuple.Select(_ => _.Item2)
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+            var m = @this.Select(funM).AssumeNotNull().Collect();
+
+            return m.Select(tuples => {
+                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+            });
         }
 
         internal static Maybe<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(

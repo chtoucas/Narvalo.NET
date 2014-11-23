@@ -1,3 +1,4 @@
 ﻿<#@ include file="..\CodeTemplates\Monad.tt" #>
 <# EmitMonad(); #>
+
 <# EmitComonad(); #>

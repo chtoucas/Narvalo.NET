@@ -8,7 +8,6 @@ namespace Narvalo.Collections
     using System.Diagnostics.Contracts;
     using System.Linq;
     using Narvalo.Fx;
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerable{T}"/>.
@@ -17,7 +16,7 @@ namespace Narvalo.Collections
     {
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
+            Contract.Requires(@this != null);
 
             return !@this.Any();
         }
@@ -26,13 +25,15 @@ namespace Narvalo.Collections
 
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Require.Object(@this);
+            Contract.Requires(@this != null);
 
             return @this.Concat(Enumerable.Repeat(element, 1));
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
+            Contract.Requires(@this != null);
+
             return Enumerable.Repeat(element, 1).Concat(@this);
         }
 
@@ -62,7 +63,8 @@ namespace Narvalo.Collections
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator)
         {
-            Require.Object(@this);
+            Contract.Requires(@this != null);
+            Contract.Requires(accumulator != null);
 
             return @this.Reverse().Aggregate(seed, accumulator);
         }
@@ -71,7 +73,8 @@ namespace Narvalo.Collections
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, TSource> accumulator)
         {
-            Require.Object(@this);
+            Contract.Requires(@this != null);
+            Contract.Requires(accumulator != null);
 
             return @this.Reverse().Aggregate(accumulator);
         }
@@ -172,6 +175,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
             using (var iter = seq.AssumeNotNull().GetEnumerator()) {
                 return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
             }
@@ -239,9 +243,9 @@ namespace Narvalo.Collections
             Require.NotNull(predicateM, "predicateM");
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return from _ in @this
-                   where predicateM.Invoke(_).ValueOrElse(false)
-                   select _;
+            return @this
+                .Where(_ => predicateM.Invoke(_).ValueOrElse(false))
+                .AssumeNotNull();
         }
     }
 }

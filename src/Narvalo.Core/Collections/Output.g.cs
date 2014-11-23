@@ -110,7 +110,6 @@ namespace Narvalo.Collections {
             // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -143,7 +142,6 @@ namespace Narvalo.Collections {
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -160,7 +158,6 @@ namespace Narvalo.Collections {
             // No need to check for null-reference, "FoldBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -172,7 +169,6 @@ namespace Narvalo.Collections {
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -184,7 +180,6 @@ namespace Narvalo.Collections {
             // No need to check for null-reference, "ReduceBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -203,7 +198,6 @@ namespace Narvalo.Collections {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -217,7 +211,6 @@ namespace Narvalo.Collections {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -309,12 +302,15 @@ namespace Narvalo.Collections.Internal {
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
-            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
-                   let item1 = tuple.Select(_ => _.Item1)
-                   let item2 = tuple.Select(_ => _.Item2)
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+            var m = @this.Select(funM).AssumeNotNull().Collect();
+
+            return m.Select(tuples => {
+                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+            });
         }
 
         internal static Output<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
@@ -342,11 +338,14 @@ namespace Narvalo.Collections.Internal {
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             Output<TAccumulate> result = Output.Success(seed);
 
             foreach (TSource item in @this) {
+                if (result == null) {
+                    return null;
+                }
+
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -361,7 +360,6 @@ namespace Narvalo.Collections.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
@@ -372,7 +370,6 @@ namespace Narvalo.Collections.Internal {
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -382,6 +379,10 @@ namespace Narvalo.Collections.Internal {
                 Output<TSource> result = Output.Success(iter.Current);
 
                 while (iter.MoveNext()) {
+                    if (result == null) {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -396,7 +397,6 @@ namespace Narvalo.Collections.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
@@ -410,12 +410,15 @@ namespace Narvalo.Collections.Internal {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Output<TAccumulate>>() != null);
 
             Output<TAccumulate> result = Output.Success(seed);
 
             using (var iter = @this.GetEnumerator()) {
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+                if (result == null) {
+                    return null;
+                }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -431,7 +434,6 @@ namespace Narvalo.Collections.Internal {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -441,6 +443,10 @@ namespace Narvalo.Collections.Internal {
                 Output<TSource> result = Output.Success(iter.Current);
 
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+                    if (result == null) {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 

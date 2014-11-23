@@ -18,6 +18,11 @@ namespace Narvalo.Collections
             var list = new List<TSource>();
 
             foreach (var m in @this) {
+                // REVIEW: Is this the correct behaviour when m is null?
+                if (m == null) {
+                    continue;
+                }
+
                 if (m.IsFailure) {
                     return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
                 }
