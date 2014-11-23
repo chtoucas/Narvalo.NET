@@ -50,6 +50,7 @@ Narvalo (Core)
 
 ### Medium Priority
 
+- Review Monads, VoidOr... for nullity.
 - Add Contract.Ensures directives, first for Monad.tt
 - Check all use of AssumeNotNull.
 - Check that Check do really make sense or better user Require.

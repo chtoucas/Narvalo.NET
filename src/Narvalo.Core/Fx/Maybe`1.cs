@@ -111,6 +111,8 @@ namespace Narvalo.Fx
         /// <param name="value">The underlying value.</param>
         Maybe(T value)
         {
+            Contract.Requires(value != null);
+
             _value = value;
             _isSome = true;
         }
@@ -154,6 +156,8 @@ namespace Narvalo.Fx
         /// <summary />
         public static explicit operator Maybe<T>(T value)
         {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
             return η(value);
         }
 
@@ -176,6 +180,7 @@ namespace Narvalo.Fx
         public Maybe<T> OnSome(Action<T> action)
         {
             Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return Run(action);
         }
@@ -231,6 +236,14 @@ namespace Narvalo.Fx
         {
             return _isSome ? _value.ToString() : "{None}";
         }
+
+        ////#if CONTRACTS_FULL
+        ////        [ContractInvariantMethod]
+        ////        void ObjectInvariants()
+        ////        {
+        ////            Contract.Invariant(!_isSome || _value != null);
+        ////        }
+        ////#endif
     }
 
     /*!
@@ -430,6 +443,8 @@ namespace Narvalo.Fx
             Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Maybe<T> η(T value)
         {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
             return value != null ? new Maybe<T>(value) : Maybe<T>.None;
         }
 
@@ -506,6 +521,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return IsSome && second.IsSome
                 ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))
@@ -527,6 +543,7 @@ namespace Narvalo.Fx
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             if (IsNone || inner.IsNone) {
                 return Maybe<TResult>.None;
@@ -551,6 +568,7 @@ namespace Narvalo.Fx
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             if (IsNone) {
                 return Maybe<TResult>.None;
@@ -571,6 +589,7 @@ namespace Narvalo.Fx
         public Maybe<T> Run(Action<T> action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             if (IsSome) {
                 action.Invoke(Value);
@@ -582,6 +601,7 @@ namespace Narvalo.Fx
         public Maybe<T> OnNone(Action action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             if (IsNone) {
                 action.Invoke();

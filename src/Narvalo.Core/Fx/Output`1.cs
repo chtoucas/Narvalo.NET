@@ -35,6 +35,7 @@ namespace Narvalo.Fx
         {
             get
             {
+                // REVIEW: Do I really need this since it is part of the invariant.
                 Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
                 if (_isSuccess) {
