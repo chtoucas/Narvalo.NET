@@ -50,10 +50,11 @@ Narvalo (Core)
 
 ### Medium Priority
 
-- For all classes in Narvalo.Fx, review null returns and null inputs.
-- Rework the use of Debug, DebugCheck and Require.
-- Add a description to all `Contract.Assume`.
 - Add Contract.Ensures directives, first for Monad.tt
+- Check all use of AssumeNotNull.
+- Check that Check do really make sense or better user Require.
+- VoirOr... and Output seem broken.
+- Add a description to all `Contract.Assume`.
 - Write a T4 Template for Monad tests.
 - Narvalo.Benchmarking is obviously broken.
 

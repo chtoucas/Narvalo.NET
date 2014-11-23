@@ -11,7 +11,7 @@ namespace Narvalo.DocuMaker.Internal
     {
         public void Intercept(IInvocation invocation)
         {
-            DebugCheck.NotNull(invocation);
+            Require.NotNull(invocation, "invocation");
 
             var info = invocation.Arguments[0] as RelativeFile;
 

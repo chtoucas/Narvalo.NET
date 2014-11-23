@@ -67,7 +67,7 @@ namespace Narvalo
             where TEnum : struct
         {
             // FIXME: ne marche pas de manière cohérente pour les enum's de type Flags.
-            DebugCheck.IsEnum(typeof(TEnum));
+            Check.IsEnum(typeof(TEnum));
 
             //if (Attribute.IsDefined(type, typeof(FlagsAttribute))) {
             //  throw Failure.Argument();

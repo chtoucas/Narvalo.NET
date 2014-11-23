@@ -51,7 +51,7 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj" />
-    <!-- FIXME: CA/SA failures -->
+    <!-- FIXME: CA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
@@ -66,8 +66,7 @@
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />-->
-    <!-- FIXME: CA/SA failures -->
-    <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj" />-->
+    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Playground\Playground.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)samples\MvpCommandLine\MvpCommandLine.csproj" />

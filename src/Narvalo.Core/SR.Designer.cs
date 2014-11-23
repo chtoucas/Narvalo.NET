@@ -64,18 +64,18 @@ namespace Narvalo {
         /// <summary>
         ///   Looks up a localized string similar to The value is empty..
         /// </summary>
-        internal static string DebugCheck_IsEmpty {
+        internal static string Check_IsEmpty {
             get {
-                return ResourceManager.GetString("DebugCheck_IsEmpty", resourceCulture);
+                return ResourceManager.GetString("Check_IsEmpty", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value is null..
         /// </summary>
-        internal static string DebugCheck_IsNull {
+        internal static string Check_IsNull {
             get {
-                return ResourceManager.GetString("DebugCheck_IsNull", resourceCulture);
+                return ResourceManager.GetString("Check_IsNull", resourceCulture);
             }
         }
         

@@ -10,14 +10,14 @@ namespace Narvalo.Web.Internal
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             return @this.ToHtmlString(TagRenderMode.Normal);
         }
 
         public static IHtmlString ToHtmlString(this TagBuilder @this, TagRenderMode renderMode)
         {
-            DebugCheck.NotNull(@this);
+            Require.Object(@this);
 
             return new HtmlString(@this.ToString(renderMode));
         }

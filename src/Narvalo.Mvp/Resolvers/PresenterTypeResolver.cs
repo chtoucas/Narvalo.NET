@@ -72,7 +72,7 @@ namespace Narvalo.Mvp.Resolvers
             Justification = "False positive, MemberInfo does not work.")]
         internal static IEnumerable<string> GetCandidatePrefixesFromInterfaces(Type viewType)
         {
-            DebugCheck.NotNull(viewType);
+            Check.NotNull(viewType);
 
             // Only keep interfaces inheriting IView, except IView and IView<T>, whose
             // name ends with "View".

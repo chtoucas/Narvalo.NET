@@ -72,7 +72,7 @@ namespace Narvalo.Data
 
         SqlDataReader ExecuteCommand_(SqlCommand command)
         {
-            DebugCheck.NotNull(command);
+            Check.NotNull(command);
 
             return command.ExecuteReader(CommandBehavior);
         }

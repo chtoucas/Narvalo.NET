@@ -21,7 +21,7 @@ namespace Narvalo.DocuMaker.Internal
             this IRegistrationBuilder<TLimit, TActivatorData, TSingleRegistrationStyle> @this,
             Type interceptorType)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             if (!IsDebuggingEnabled) {
                 return @this;

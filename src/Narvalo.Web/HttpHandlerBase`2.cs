@@ -14,7 +14,7 @@ namespace Narvalo.Web
 
         protected sealed override void ProcessRequestCore(HttpContext context)
         {
-            DebugCheck.NotNull(context);
+            Check.NotNull(context);
 
             var binder = new TBinder();
 

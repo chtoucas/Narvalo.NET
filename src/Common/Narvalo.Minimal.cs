@@ -238,19 +238,36 @@ namespace Narvalo
     [DebuggerStepThrough]
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    static class DebugCheck
+    static class Check
     {
+#if CONTRACTS_FULL
+        [ContractAbbreviator]
+        public static void NotNull<T>(T value)
+        {
+            Contract.Requires(value != null);
+        }
+#else
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value)
         {
-            Debug.Assert(value != null, "The value is null.");
+            Debug.Assert(value != null, "The value is empty.");
         }
+#endif
 
+#if CONTRACTS_FULL
+        [ContractAbbreviator]
+        public static void NotNullOrEmpty(string value)
+        {
+            NotNull(value);
+            Contract.Requires(value.Length != 0);
+        }
+#else
         [Conditional("DEBUG")]
         public static void NotNullOrEmpty(string value)
         {
             NotNull(value);
-            Debug.Assert(value.Length != 0, "The value is empty.");
+            Debug.Assert(value.Length != 0, "The value is null.");
         }
+#endif
     }
 }

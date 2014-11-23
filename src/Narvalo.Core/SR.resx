@@ -147,10 +147,10 @@
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
   </data>
-  <data name="DebugCheck_IsNull" xml:space="preserve">
+  <data name="Check_IsNull" xml:space="preserve">
     <value>The value is null.</value>
   </data>
-  <data name="DebugCheck_IsEmpty" xml:space="preserve">
+  <data name="Check_IsEmpty" xml:space="preserve">
     <value>The value is empty.</value>
   </data>
   <data name="Output_SuccessfulHasNoException" xml:space="preserve">

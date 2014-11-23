@@ -43,7 +43,7 @@
 
         public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability)
         {
-            DebugCheck.NotNull(@this);
+            Check.NotNull(@this);
 
             @this.CacheFor(duration, cacheability, HttpVersions.All);
         }

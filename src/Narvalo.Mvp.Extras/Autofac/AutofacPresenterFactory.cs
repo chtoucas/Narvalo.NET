@@ -61,7 +61,7 @@ namespace Narvalo.Autofac
             public LooselyTypedParameter(Type type, object value)
                 : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
             {
-                DebugCheck.NotNull(type);
+                Check.NotNull(type);
             }
         }
     }
