@@ -10,7 +10,7 @@ namespace Narvalo
         /// </remarks>
         public static TEnum? Enum<TEnum>(object value) where TEnum : struct
         {
-            DebugAssert.IsEnum(typeof(TEnum));
+            MoreCheck.IsEnum(typeof(TEnum));
 
             if (System.Enum.IsDefined(typeof(TEnum), value)) {
                 return (TEnum)System.Enum.ToObject(typeof(TEnum), value);

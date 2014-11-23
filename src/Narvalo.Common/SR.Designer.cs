@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
-{
-
-
+namespace Narvalo {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -79,29 +79,29 @@ namespace Narvalo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter {0} is null..
+        /// </summary>
+        internal static string ExceptionFactory_ArgumentNullFormat {
+            get {
+                return ResourceManager.GetString("ExceptionFactory_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type must be of enum type..
         /// </summary>
-        internal static string DebugAssert_IsNotEnum {
+        internal static string MoreCheck_IsNotEnum {
             get {
-                return ResourceManager.GetString("DebugAssert_IsNotEnum", resourceCulture);
+                return ResourceManager.GetString("MoreCheck_IsNotEnum", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The type must be a value type..
         /// </summary>
-        internal static string DebugAssert_IsNotValueType {
+        internal static string MoreCheck_IsNotValueType {
             get {
-                return ResourceManager.GetString("DebugAssert_IsNotValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is null..
-        /// </summary>
-        internal static string ExceptionFactory_ArgumentNullFormat {
-            get {
-                return ResourceManager.GetString("ExceptionFactory_ArgumentNullFormat", resourceCulture);
+                return ResourceManager.GetString("MoreCheck_IsNotValueType", resourceCulture);
             }
         }
         

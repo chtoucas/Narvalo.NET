@@ -9,7 +9,7 @@ namespace Narvalo
 #endif
 
     [DebuggerStepThrough]
-    public static class DebugAssert
+    public static class MoreCheck
     {
 #if CONTRACTS_FULL
         [ContractAbbreviator]
@@ -30,14 +30,14 @@ namespace Narvalo
         public static void IsEnum(Type type)
         {
             Check.NotNull(type);
-            Debug.Assert(type.IsEnum, type.FullName, SR.DebugAssert_IsNotEnum);
+            Debug.Assert(type.IsEnum, type.FullName, SR.MoreCheck_IsNotEnum);
         }
 
         [Conditional("DEBUG")]
         public static void IsValueType(Type type)
         {
             Check.NotNull(type);
-            Debug.Assert(type.IsValueType, type.FullName, SR.DebugAssert_IsNotValueType);
+            Debug.Assert(type.IsValueType, type.FullName, SR.MoreCheck_IsNotValueType);
         }
 #endif
     }

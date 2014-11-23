@@ -17,7 +17,7 @@ namespace Narvalo
             Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            DebugAssert.IsEnum(typeof(TEnum));
+            MoreCheck.IsEnum(typeof(TEnum));
 
             result = default(TEnum);
 
@@ -37,7 +37,7 @@ namespace Narvalo
 
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            DebugAssert.IsEnum(typeof(TEnum));
+            MoreCheck.IsEnum(typeof(TEnum));
 
             return (TEnum)System.Enum.Parse(typeof(TEnum), value, ignoreCase);
         }
