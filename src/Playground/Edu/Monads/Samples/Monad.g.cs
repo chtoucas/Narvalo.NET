@@ -179,7 +179,6 @@ namespace Playground.Edu.Monads.Samples {
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
         }
@@ -192,7 +191,6 @@ namespace Playground.Edu.Monads.Samples {
             Monad<TResult> other)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -211,7 +209,6 @@ namespace Playground.Edu.Monads.Samples {
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -407,7 +404,6 @@ namespace Playground.Edu.Monads.Samples {
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
-            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             return value.Bind(@this);
         }
@@ -527,7 +523,6 @@ namespace Playground.Edu.Monads.Samples {
             // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -560,7 +555,6 @@ namespace Playground.Edu.Monads.Samples {
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -577,7 +571,6 @@ namespace Playground.Edu.Monads.Samples {
             // No need to check for null-reference, "FoldBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -589,7 +582,6 @@ namespace Playground.Edu.Monads.Samples {
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
             
             return @this.ReduceCore(accumulatorM);
         }
@@ -601,7 +593,6 @@ namespace Playground.Edu.Monads.Samples {
             // No need to check for null-reference, "ReduceBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -620,7 +611,6 @@ namespace Playground.Edu.Monads.Samples {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -634,7 +624,6 @@ namespace Playground.Edu.Monads.Samples {
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -727,12 +716,15 @@ namespace Playground.Edu.Monads.Samples.Internal {
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
-            return from tuple in @this.Select(funM).AssumeNotNull().Collect()
-                   let item1 = tuple.Select(_ => _.Item1)
-                   let item2 = tuple.Select(_ => _.Item2)
-                   select new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(item1, item2);
+            var m = @this.Select(funM).AssumeNotNull().Collect();
+
+            return m.Select(tuples => {
+                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+            });
         }
 
         internal static Monad<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
@@ -760,11 +752,14 @@ namespace Playground.Edu.Monads.Samples.Internal {
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             Monad<TAccumulate> result = Monad.Return(seed);
 
             foreach (TSource item in @this) {
+                if (result == null) {
+                    return null;
+                }
+
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -779,7 +774,6 @@ namespace Playground.Edu.Monads.Samples.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
@@ -790,7 +784,6 @@ namespace Playground.Edu.Monads.Samples.Internal {
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -800,6 +793,10 @@ namespace Playground.Edu.Monads.Samples.Internal {
                 Monad<TSource> result = Monad.Return(iter.Current);
 
                 while (iter.MoveNext()) {
+                    if (result == null) {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -814,7 +811,6 @@ namespace Playground.Edu.Monads.Samples.Internal {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
@@ -828,12 +824,15 @@ namespace Playground.Edu.Monads.Samples.Internal {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Monad<TAccumulate>>() != null);
 
             Monad<TAccumulate> result = Monad.Return(seed);
 
             using (var iter = @this.GetEnumerator()) {
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+                if (result == null) {
+                    return null;
+                }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -849,7 +848,6 @@ namespace Playground.Edu.Monads.Samples.Internal {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator()) {
                 if (!iter.MoveNext()) {
@@ -859,6 +857,10 @@ namespace Playground.Edu.Monads.Samples.Internal {
                 Monad<TSource> result = Monad.Return(iter.Current);
 
                 while (predicate.Invoke(result) && iter.MoveNext()) {
+                    if (result == null) {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
