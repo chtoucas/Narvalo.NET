@@ -81,8 +81,8 @@ Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
 the content of "etc\Settings.SourceAnalysis".
 
 The following projects use the default ruleset for Code Analysis.
-- Narvalo.DocuMaker
 - Narvalo.Junk
+- DocuMaker
 - Playground
 
 

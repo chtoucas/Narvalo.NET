@@ -1,6 +1,6 @@
 Overview
 ==========
-  
+
 Prerequisites
 -------------
 
@@ -44,13 +44,14 @@ for deep refactoring and installing NuGet packages updates.
 ### Narvalo (Core).sln
 
 This solution contains **all** libraries built upon Narvalo.Core:
-- Narvalo.Core itself, a PCL (Profile259) for .NET 4.5, Windows 8, Windows 
+- Narvalo.Core itself, a PCL (Profile259) for .NET 4.5, Windows 8, Windows
   Phone 8.1 and Windows Phone Silverlight 8.
 - Narvalo.Common complements Narvalo.Core with non portable classes.
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
 - Narvalo.Extras a repository of sample classes depending on external packages.
-- Narvalo.Benchmarking
+- Narvalo.Benchmarking.
 - Narvalo.Facts, the test project.
+- Narvalo.Junk, a "fourre-tout" of unfinished or broken codes.
 
 ### Narvalo (Mvp).sln
 
@@ -71,13 +72,9 @@ of the core libraries.
 - Narvalo.Reliability
 - Narvalo.StyleCop.CSharp
 
-### Narvalo (Playground).sln
-
-A "fourre-tout" of unfinished or broken codes.
-
 ### Narvalo (NuGet).sln
 
-   
+
 FxCop
 -----
 
@@ -86,7 +83,7 @@ StyleCop
 --------
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
-              
+
 _Documentation rules are temporary disabled._
 
 Disabled rules:

@@ -97,6 +97,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter &apos;values&apos; is null..
+        /// </summary>
+        internal static string NonQueryStoredProcedure_ValuesIsNull {
+            get {
+                return ResourceManager.GetString("NonQueryStoredProcedure_ValuesIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
         /// </summary>
         internal static string Uri_ProtocolLessUnsupportedSchemeFormat {

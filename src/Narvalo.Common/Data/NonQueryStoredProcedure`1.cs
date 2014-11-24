@@ -8,15 +8,13 @@ namespace Narvalo.Data
     using System.Diagnostics.Contracts;
     using Narvalo;
 
-    [ContractClass(typeof(StoredProcedureContract<>))]
-    public abstract class StoredProcedure<TResult>
+    [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
+    public abstract class NonQueryStoredProcedure<TParameters>
     {
         readonly string _connectionString;
         readonly string _name;
 
-        CommandBehavior _commandBehavior = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
-
-        protected StoredProcedure(string connectionString, string name)
+        protected NonQueryStoredProcedure(string connectionString, string name)
         {
             Require.NotNullOrEmpty(connectionString, "connectionString");
             Require.NotNullOrEmpty(name, "name");
@@ -25,38 +23,29 @@ namespace Narvalo.Data
             _name = name;
         }
 
-        protected CommandBehavior CommandBehavior
-        {
-            get { return _commandBehavior; }
-            set { _commandBehavior = value; }
-        }
-
         protected string ConnectionString { get { return _connectionString; } }
 
         protected string Name { get { return _name; } }
 
-        public TResult Execute()
+        public int Execute(TParameters values)
         {
-            TResult result;
+            Require.Condition(values != null, "values", SR.NonQueryStoredProcedure_ValuesIsNull);
+
+            int result;
 
             using (var connection = CreateConnection_()) {
                 using (var command = CreateCommand_(connection)) {
-                    PrepareParameters(command.Parameters.AssumeNotNull());
+                    AddParameters(command.Parameters.AssumeNotNull(), values);
 
                     connection.Open();
-
-                    using (var reader = ExecuteCommand_(command)) {
-                        result = Execute(reader);
-                    }
+                    result = command.ExecuteNonQuery();
                 }
             }
 
             return result;
         }
 
-        protected abstract TResult Execute(SqlDataReader reader);
-
-        protected abstract void PrepareParameters(SqlParameterCollection parameters);
+        protected abstract void AddParameters(SqlParameterCollection parameters, TParameters values);
 
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
@@ -89,14 +78,6 @@ namespace Narvalo.Data
             Contract.Ensures(Contract.Result<SqlConnection>() != null);
 
             return new SqlConnection(ConnectionString);
-        }
-
-        SqlDataReader ExecuteCommand_(SqlCommand command)
-        {
-            Enforce.NotNull(command, "command");
-            Contract.Ensures(Contract.Result<SqlDataReader>() != null);
-
-            return command.ExecuteReader(CommandBehavior);
         }
 
 #if CONTRACTS_FULL

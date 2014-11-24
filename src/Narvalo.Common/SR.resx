@@ -132,4 +132,7 @@
   <data name="Check_IsNotValueType" xml:space="preserve">
     <value>The type '{0}' must be a value type.</value>
   </data>
+  <data name="NonQueryStoredProcedure_ValuesIsNull" xml:space="preserve">
+    <value>The parameter 'values' is null.</value>
+  </data>
 </root>

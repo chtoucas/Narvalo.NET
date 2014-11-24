@@ -59,7 +59,7 @@ Narvalo (Core)
 - Add Contract.Ensures directives, first for Monads.
 - Add a description to all Contract.Assume...
 - Write a T4 Template for Monad tests.
-- Narvalo.Benchmarking is obviously broken.
+- DocuMaker and Narvalo.Benchmarking are obviously broken.
 
 ### Low Priority
 
@@ -67,6 +67,9 @@ Narvalo (Core)
 - Document compiler conditional symbols in used: NET_35.
 - Add a XML schema for Narvalo config.
 - Make Narvalo.Facts a true VS test proj.
+- DocuMaker & Playground could use the Narvalo rulesets.
+- Use CommonMark instead of Markdown Deep.
+
 
 Narvalo (Mvp)
 -------------
@@ -98,15 +101,3 @@ Narvalo (Miscs)
 
 ### Low Priority
 
-
-Narvalo (Playground)
---------------------
-
-### High Priority
-
-### Medium Priority
-
-- Narvalo.DocuMaker & Playground could use the Narvalo rulesets.
-- Use CommonMark instead of Markdown Deep.
-
-### Low Priority

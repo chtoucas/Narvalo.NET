@@ -171,6 +171,9 @@
     </Compile>
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
+    <Compile Include="Data\SqlParameterCollection%24.cs" />
+    <Compile Include="Data\StoredProcedureContract`1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>
@@ -193,7 +196,7 @@
     <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
-    <Compile Include="Data\NonQueryStoredProcedure.cs" />
+    <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
     <Compile Include="Data\SqlCommand%24.cs" />
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
