@@ -26,6 +26,7 @@
             Require.NotNull(metrics, "metrics");
 
             var fastest = metrics.OrderBy(r => r.Duration).First();
+
             return String.Format(
                 cultureInfo,
                 SR.MetricFormat,

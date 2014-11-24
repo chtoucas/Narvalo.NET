@@ -22,7 +22,6 @@ In General
 - Review all GetHashCode() methods.
 - Check that we always use Error for CA/SA/CC.
 - Re-enable Gendarme.
-- ReferenceEquals or null-check
 
 ### Low Priority
 
@@ -47,10 +46,8 @@ Narvalo (Core)
 ### High Priority
 
 - Remove Tracer?
-- Add a userMessage to Check methods. Make Check internal?
 - Check all use of AssumeNotNull.
 - Validate(?) the usefulness of ExceptionFactory.
-- Check that Check do really make sense or better user Require.
 - String.IsNullOrWhiteSpace?
 - Code Analysis is not working with Code Contracts.
 
@@ -67,7 +64,8 @@ Narvalo (Core)
 
 ### Low Priority
 
-- Document compiler conditional symbols in used: NET_35
+- Use Format instead of String.Format.
+- Document compiler conditional symbols in used: NET_35.
 - Add a XML schema for Narvalo config.
 - Make Narvalo.Facts a true VS test proj.
 

@@ -62,7 +62,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is null, a situation that should NEVER have happened..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null, a situation that should NEVER have happened..
         /// </summary>
         internal static string Enforce_IsNullFormat {
             get {
@@ -71,7 +71,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is null..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
         /// </summary>
         internal static string ExceptionFactory_ArgumentNullFormat {
             get {
@@ -80,7 +80,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Illegal character {0} found at position {1}..
+        ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
         internal static string Int64Encoder_IllegalCharacterFormat {
             get {
@@ -89,7 +89,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The length is not less than or equal to {0}..
+        ///   Looks up a localized string similar to The length is not less than or equal to &apos;{0}&apos;..
         /// </summary>
         internal static string Int64Encoder_OutOfRangeLengthFormat {
             get {
@@ -143,7 +143,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is empty..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is empty..
         /// </summary>
         internal static string Require_ArgumentEmptyFormat {
             get {
@@ -152,7 +152,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not greater than or equal to {0}..
+        ///   Looks up a localized string similar to The value is not greater than or equal to &apos;{0}&apos;..
         /// </summary>
         internal static string Require_NotGreaterThanOrEqualToFormat {
             get {
@@ -161,7 +161,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not in range {0} / {1}..
+        ///   Looks up a localized string similar to The value is not in range &apos;{0}&apos; - &apos;{1}&apos;..
         /// </summary>
         internal static string Require_NotInRangeFormat {
             get {
@@ -170,7 +170,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not less than or equal to {0}..
+        ///   Looks up a localized string similar to The value is not less than or equal to &apos;{0}&apos;..
         /// </summary>
         internal static string Require_NotLessThanOrEqualToFormat {
             get {

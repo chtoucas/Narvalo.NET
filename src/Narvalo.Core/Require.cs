@@ -101,9 +101,9 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void Condition(bool condition, string parameterName, string message)
+        public static void Condition(bool expression, string parameterName, string message)
         {
-            if (!condition) {
+            if (!expression) {
                 throw new ArgumentException(message, parameterName);
             }
 
@@ -111,9 +111,9 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void RangeCondition<T>(bool condition, T value, string parameterName, string message)
+        public static void RangeCondition<T>(bool expression, T value, string parameterName, string message)
         {
-            if (!condition) {
+            if (!expression) {
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 

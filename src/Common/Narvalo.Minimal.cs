@@ -14,6 +14,8 @@ namespace Narvalo
     static class Require
     {
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
             if (@this == null) {
@@ -24,6 +26,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
         {
             if (@this == null) {
@@ -34,6 +38,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null) {
@@ -44,6 +50,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
             if (value == null) {
@@ -54,6 +62,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
             Property(value);
@@ -66,6 +76,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null) {
@@ -76,6 +88,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
             if (value == null) {
@@ -86,6 +100,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -103,9 +119,11 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void Condition(bool condition, string parameterName, string message)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void Condition(bool expression, string parameterName, string message)
         {
-            if (!condition) {
+            if (!expression) {
                 throw new ArgumentException(message, parameterName);
             }
 
@@ -113,9 +131,11 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void RangeCondition<T>(bool condition, T value, string parameterName, string message)
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void RangeCondition<T>(bool expression, T value, string parameterName, string message)
         {
-            if (!condition) {
+            if (!expression) {
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -123,6 +143,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
@@ -138,6 +160,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
@@ -153,6 +177,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue) {
@@ -167,6 +193,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue) {
@@ -181,6 +209,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
@@ -200,6 +230,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue) {
@@ -214,6 +246,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue) {
@@ -228,6 +262,8 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
         {
@@ -274,46 +310,36 @@ namespace Narvalo
         [ContractAbbreviator]
         public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Contract.Requires(
-                value != null, 
-                String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The parameter {0} is null, a situation that should NEVER have happened.",
-                    parameterName));
+            Contract.Requires(value != null, GetMessage_(parameterName));
         }
 
         [ContractAbbreviator]
         public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            Contract.Requires(
-                value != null, 
-                String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The parameter {0} is null, a situation that should NEVER have happened.",
-                    parameterName));
+            Contract.Requires(value != null, GetMessage_(parameterName));
         }
 #else
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Debug.Assert(
-                value != null, 
-                String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The parameter {0} is null, a situation that should NEVER have happened.",
-                    parameterName));
+            Debug.Assert(value != null, GetMessage_(parameterName));
         }
 
         [Conditional("DEBUG")]
         public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            Debug.Assert(
-                value != null, 
-                String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The parameter {0} is null, a situation that should NEVER have happened.",
-                    parameterName));
+            Debug.Assert(value != null, GetMessage_(parameterName));
         }
 #endif
+        
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method only available in Debug Build.")]
+        static string GetMessage_(string parameterName)
+        {
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "The parameter {0} is null, a situation that should NEVER have happened.",
+                parameterName);
+        }
     }
 }

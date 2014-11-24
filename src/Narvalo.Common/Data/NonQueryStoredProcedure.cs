@@ -50,11 +50,11 @@ namespace Narvalo.Data
             return new SqlConnection(ConnectionString);
         }
 
+        // REVIEW: Why virtual? Looks like a bad idea.
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
             Justification = "REVIEW: False positive.")]
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
-        // REVIEW: Why virtual? Looks like a bad idea.
         protected virtual SqlCommand CreateCommand(SqlConnection connection)
         {
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };

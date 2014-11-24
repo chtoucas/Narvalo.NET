@@ -61,11 +61,29 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The supplied value {0} is not a well-formed absolute URI..
+        ///   Looks up a localized string similar to The supplied value &apos;{0}&apos; is not a well-formed absolute URI..
         /// </summary>
         internal static string AbsoluteUriValidator_UriIsNotAbsoluteFormat {
             get {
                 return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsoluteFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
+        /// </summary>
+        internal static string Check_IsNotEnum {
+            get {
+                return ResourceManager.GetString("Check_IsNotEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be a value type..
+        /// </summary>
+        internal static string Check_IsNotValueType {
+            get {
+                return ResourceManager.GetString("Check_IsNotValueType", resourceCulture);
             }
         }
         
@@ -79,34 +97,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter {0} is null..
-        /// </summary>
-        internal static string ExceptionFactory_ArgumentNullFormat {
-            get {
-                return ResourceManager.GetString("ExceptionFactory_ArgumentNullFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type must be of enum type..
-        /// </summary>
-        internal static string MoreCheck_IsNotEnum {
-            get {
-                return ResourceManager.GetString("MoreCheck_IsNotEnum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type must be a value type..
-        /// </summary>
-        internal static string MoreCheck_IsNotValueType {
-            get {
-                return ResourceManager.GetString("MoreCheck_IsNotValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The scheme {0} does not support protocol less uri..
+        ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
         /// </summary>
         internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
             get {

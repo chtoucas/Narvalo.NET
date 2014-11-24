@@ -68,7 +68,7 @@
       <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="ConvertTo.cs" />
-    <Compile Include="MoreCheck.cs" />
+    <Compile Include="Check.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>

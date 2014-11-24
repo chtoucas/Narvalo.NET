@@ -108,8 +108,7 @@ namespace Narvalo
             Trace_(level, source.GetType(), message);
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1011:ConsiderPassingBaseTypesAsParameters",
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters",
             Justification = "Private method only.")]
         static void Trace_(TraceLevel level, Type sourceType, string message)
         {
