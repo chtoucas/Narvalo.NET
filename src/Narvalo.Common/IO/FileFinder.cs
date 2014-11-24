@@ -4,6 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
 
@@ -84,5 +85,14 @@ namespace Narvalo.IO
                 localHandler(this, e);
             }
         }
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_directoryFilter != null);
+            Contract.Invariant(_fileFilter != null);
+        }
+#endif
     }
 }

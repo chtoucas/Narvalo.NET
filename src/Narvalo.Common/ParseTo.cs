@@ -14,6 +14,8 @@ namespace Narvalo
 
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
+            Check.IsEnum(typeof(TEnum));
+
             return Enum<TEnum>(value, ignoreCase: true);
         }
 

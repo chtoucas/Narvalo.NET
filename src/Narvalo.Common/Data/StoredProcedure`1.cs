@@ -5,6 +5,7 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using Narvalo;
 
     public abstract class StoredProcedure<TResult>
@@ -16,8 +17,8 @@ namespace Narvalo.Data
 
         protected StoredProcedure(string connectionString, string name)
         {
-            Require.NotNull(connectionString, "connectionString");
-            Require.NotNull(name, "name");
+            Require.NotNullOrEmpty(connectionString, "connectionString");
+            Require.NotNullOrEmpty(name, "name");
 
             _connectionString = connectionString;
             _name = name;
@@ -79,5 +80,16 @@ namespace Narvalo.Data
 
             return command.ExecuteReader(CommandBehavior);
         }
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_connectionString != null);
+            Contract.Invariant(_connectionString.Length != 0);
+            Contract.Invariant(_name != null);
+            Contract.Invariant(_name.Length != 0);
+        }
+#endif
     }
 }

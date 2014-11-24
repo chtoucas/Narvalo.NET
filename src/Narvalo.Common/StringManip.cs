@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public static class StringManip
@@ -45,6 +46,10 @@ namespace Narvalo
 
         public static string Substring(string value, int startIndex, int length)
         {
+            Contract.Requires(value != null);
+            Contract.Requires(startIndex >= 0);
+            Contract.Requires(length >= 1);
+
             return Substring(value, startIndex, length, "...");
         }
 
@@ -71,6 +76,9 @@ namespace Narvalo
 
         public static string Truncate(string value, int length)
         {
+            Contract.Requires(value != null);
+            Contract.Requires(length >= 1);
+
             return Truncate(value, length, postfix: "...");
         }
 

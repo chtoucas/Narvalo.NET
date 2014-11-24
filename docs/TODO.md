@@ -49,7 +49,6 @@ Narvalo (Core)
 - Check all use of AssumeNotNull.
 - Validate(?) the usefulness of ExceptionFactory.
 - String.IsNullOrWhiteSpace?
-- Code Analysis is not working with Code Contracts.
 
 ### Medium Priority
 

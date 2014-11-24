@@ -5,6 +5,7 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using Narvalo;
 
     public abstract class NonQueryStoredProcedure<TParameters>
@@ -59,5 +60,16 @@ namespace Narvalo.Data
         {
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };
         }
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_connectionString != null);
+            Contract.Invariant(_connectionString.Length != 0);
+            Contract.Invariant(_name != null);
+            Contract.Invariant(_name.Length != 0);
+        }
+#endif
     }
 }

@@ -4,6 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
 
@@ -61,5 +62,14 @@ namespace Narvalo.IO
         protected abstract void OnDirectoryEnd(DirectoryInfo directory);
 
         protected abstract void OnFile(FileInfo file);
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_directoryFilter != null);
+            Contract.Invariant(_fileFilter != null);
+        }
+#endif
     }
 }

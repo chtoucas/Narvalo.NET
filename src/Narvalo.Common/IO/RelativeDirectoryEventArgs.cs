@@ -3,6 +3,7 @@
 namespace Narvalo.IO
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public sealed class RelativeDirectoryEventArgs : EventArgs
     {
@@ -19,5 +20,13 @@ namespace Narvalo.IO
         {
             get { return _relativeDirectory; }
         }
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_relativeDirectory != null);
+        }
+#endif
     }
 }

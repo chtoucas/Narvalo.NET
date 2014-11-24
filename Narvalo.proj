@@ -82,7 +82,7 @@
 
   <Target Name="Analyze">
     <MSBuild Projects="@(ProjectsToAnalyze)"
-             Properties="$(BuildProperties);RunCodeContracts=true"
+             Properties="$(BuildProperties);Configuration=CodeContracts"
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
              StopOnFirstFailure="true">

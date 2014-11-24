@@ -2,6 +2,7 @@
 
 namespace Narvalo.IO
 {
+    using System.Diagnostics.Contracts;
     using System.IO;
 
     public sealed class RelativeFile
@@ -9,6 +10,7 @@ namespace Narvalo.IO
         readonly FileInfo _file;
         readonly string _relativeDirectoryName;
 
+        // REVIEW: Require.NotEmpty on relativeDirectoryName?
         public RelativeFile(FileInfo file, string relativeDirectoryName)
         {
             Require.NotNull(file, "file");
@@ -24,5 +26,14 @@ namespace Narvalo.IO
         {
             get { return Path.Combine(_relativeDirectoryName, _file.Name); }
         }
+
+#if CONTRACTS_FULL
+        [ContractInvariantMethod]
+        void ObjectInvariants()
+        {
+            Contract.Invariant(_file != null);
+            Contract.Invariant(_relativeDirectoryName != null);
+        }
+#endif
     }
 }
