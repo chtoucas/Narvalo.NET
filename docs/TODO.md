@@ -46,21 +46,28 @@ Narvalo (Core)
 
 ### High Priority
 
+- Remove Tracer?
+- Add a userMessage to Check methods. Make Check internal?
+- Check all use of AssumeNotNull.
+- Validate(?) the usefulness of ExceptionFactory.
+- Check that Check do really make sense or better user Require.
+- String.IsNullOrWhiteSpace?
 - Code Analysis is not working with Code Contracts.
 
 ### Medium Priority
 
-- Review Monads, VoidOr... for nullity.
-- Add Contract.Ensures directives, first for Monad.tt
-- Check all use of AssumeNotNull.
-- Check that Check do really make sense or better user Require.
-- VoirOr... and Output seem broken.
-- Add a description to all `Contract.Assume`.
+- Check module: SuppressMessage
+- Serializable and PCL.
+- Review Monads, VoidOr... for nullity. I am pretty sure
+  that VoirOr... and Output are broken.
+- Add Contract.Ensures directives, first for Monads.
+- Add a description to all Contract.Assume...
 - Write a T4 Template for Monad tests.
 - Narvalo.Benchmarking is obviously broken.
 
 ### Low Priority
 
+- Document compiler conditional symbols in used: NET_35
 - Add a XML schema for Narvalo config.
 - Make Narvalo.Facts a true VS test proj.
 

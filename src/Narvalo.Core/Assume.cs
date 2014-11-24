@@ -5,7 +5,8 @@ namespace Narvalo
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    public static class CodeContract
+    [DebuggerStepThrough]
+    public static class Assume
     {
         /// <summary>
         /// When dealing with external dependencies, CCCheck can not infer
@@ -16,6 +17,7 @@ namespace Narvalo
         /// <typeparam name="T"></typeparam>
         /// <param name="this"></param>
         /// <returns></returns>
+        [DebuggerHidden]
         public static T AssumeNotNull<T>(this T @this) where T : class
         {
             Contract.Ensures(Contract.Result<T>() == @this);
@@ -33,6 +35,6 @@ namespace Narvalo
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         [Conditional("CONTRACTS_FULL")]
-        public static void AssumeInvariant<T>(T obj) where T : class { }
+        public static void Invariant<T>(T obj) where T : class { }
     }
 }

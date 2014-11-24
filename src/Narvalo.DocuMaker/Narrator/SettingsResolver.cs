@@ -36,7 +36,8 @@ namespace Narvalo.DocuMaker.Narrator
 
         static void AmendWithAppSettings_(Settings settings, NameValueCollection nvc)
         {
-            Check.NotNull(nvc);
+            Enforce.NotNull(settings, "settings");
+            Enforce.NotNull(nvc, "nvc");
 
             nvc.MayGetSingle("narrative:RunInParallel")
                 .Select(ParseTo.Boolean)
@@ -54,7 +55,8 @@ namespace Narvalo.DocuMaker.Narrator
 
         static void AmendWithCmdLineArguments_(Settings settings, Arguments arguments)
         {
-            Check.NotNull(arguments);
+            Enforce.NotNull(settings, "settings");
+            Enforce.NotNull(arguments, "arguments");
 
             if (arguments.DryRunSet) {
                 settings.DryRun = arguments.DryRun;

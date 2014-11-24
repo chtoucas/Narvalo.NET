@@ -24,7 +24,27 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
+        {
+            if (@this == null) {
+                throw new ArgumentNullException("this", "The object 'this' is null.");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
+        {
+            if (value == null) {
+                throw new ArgumentNullException("value", "The property value is null.");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
             if (value == null) {
                 throw new ArgumentNullException("value", "The property value is null.");
@@ -56,6 +76,16 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
+        {
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull(parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -73,7 +103,7 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void Check(bool condition, string parameterName, string message)
+        public static void Condition(bool condition, string parameterName, string message)
         {
             if (!condition) {
                 throw new ArgumentException(message, parameterName);
@@ -83,7 +113,7 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void CheckRange<T>(bool condition, T value, string parameterName, string message)
+        public static void RangeCondition<T>(bool condition, T value, string parameterName, string message)
         {
             if (!condition) {
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
@@ -238,35 +268,51 @@ namespace Narvalo
     [DebuggerStepThrough]
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    static class Check
+    static class Enforce
     {
 #if CONTRACTS_FULL
         [ContractAbbreviator]
-        public static void NotNull<T>(T value)
+        public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Contract.Requires(value != null);
+            Contract.Requires(
+                value != null, 
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The parameter {0} is null, a situation that should NEVER have happened.",
+                    parameterName));
         }
-#else
-        [Conditional("DEBUG")]
-        public static void NotNull<T>(T value)
-        {
-            Debug.Assert(value != null, "The value is empty.");
-        }
-#endif
 
-#if CONTRACTS_FULL
         [ContractAbbreviator]
-        public static void NotNullOrEmpty(string value)
+        public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            NotNull(value);
-            Contract.Requires(value.Length != 0);
+            Contract.Requires(
+                value != null, 
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The parameter {0} is null, a situation that should NEVER have happened.",
+                    parameterName));
         }
 #else
         [Conditional("DEBUG")]
-        public static void NotNullOrEmpty(string value)
+        public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            NotNull(value);
-            Debug.Assert(value.Length != 0, "The value is null.");
+            Debug.Assert(
+                value != null, 
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The parameter {0} is null, a situation that should NEVER have happened.",
+                    parameterName));
+        }
+
+        [Conditional("DEBUG")]
+        public static void NotNull<T>(T? value, string parameterName) where T : struct
+        {
+            Debug.Assert(
+                value != null, 
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "The parameter {0} is null, a situation that should NEVER have happened.",
+                    parameterName));
         }
 #endif
     }

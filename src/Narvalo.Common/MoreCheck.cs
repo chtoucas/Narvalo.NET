@@ -15,28 +15,28 @@ namespace Narvalo
         [ContractAbbreviator]
         public static void IsEnum(Type type)
         {
-            Check.NotNull(type);
+            Enforce.NotNull(type, "type");
             Contract.Requires(type.IsEnum);
         }
 
         [ContractAbbreviator]
         public static void IsValueType(Type type)
         {
-            Check.NotNull(type);
+            Enforce.NotNull(type, "type");
             Contract.Requires(type.IsValueType);
         }
 #else
         [Conditional("DEBUG")]
         public static void IsEnum(Type type)
         {
-            Check.NotNull(type);
+            Enforce.NotNull(type, "type");
             Debug.Assert(type.IsEnum, type.FullName, SR.MoreCheck_IsNotEnum);
         }
 
         [Conditional("DEBUG")]
         public static void IsValueType(Type type)
         {
-            Check.NotNull(type);
+            Enforce.NotNull(type, "type");
             Debug.Assert(type.IsValueType, type.FullName, SR.MoreCheck_IsNotValueType);
         }
 #endif

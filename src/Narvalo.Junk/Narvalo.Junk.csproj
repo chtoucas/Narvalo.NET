@@ -100,8 +100,6 @@
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomNumber.cs" />
-    <Compile Include="RandomString.cs" />
     <Compile Include="SR.Designer.cs">
       <DependentUpon>SR.resx</DependentUpon>
       <AutoGen>True</AutoGen>

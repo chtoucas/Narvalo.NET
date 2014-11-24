@@ -41,6 +41,7 @@ namespace Narvalo.Data
                 using (var command = CreateCommand(connection)) {
                     PrepareCommand(command);
 
+                    // FIXME: If connection is null???
                     connection.Open();
 
                     using (var reader = ExecuteCommand_(command)) {
@@ -56,15 +57,17 @@ namespace Narvalo.Data
 
         protected virtual void PrepareCommand(SqlCommand command) { }
 
+        // REVIEW: Why virtual? Looks like a bad idea.
         protected virtual SqlConnection CreateConnection()
         {
             return new SqlConnection(ConnectionString);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "REVIEW: False positive.")]
+            Justification = "[REVIEW] False positive.")]
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
+        // REVIEW: Why virtual? Looks like a bad idea. If not necessary, update ExecuteCommand_ to use Check.NotNull.
         protected virtual SqlCommand CreateCommand(SqlConnection connection)
         {
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };
@@ -72,7 +75,7 @@ namespace Narvalo.Data
 
         SqlDataReader ExecuteCommand_(SqlCommand command)
         {
-            Check.NotNull(command);
+            Require.NotNull(command, "command");
 
             return command.ExecuteReader(CommandBehavior);
         }

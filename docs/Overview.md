@@ -1,5 +1,19 @@
 Overview
 ==========
+  
+Prerequisites
+-------------
+
+- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- Microsoft .NET 4.5.1 Developer Pack (?)
+- F# Compiler (?)
+
+Optional components:
+- [StyleCop](http://stylecop.codeplex.com) for source analysis integration
+  inside Visual Studio.
+- [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
+- Code Contracts extension for Visual Studio
+
 
 Project Layout
 --------------
@@ -63,4 +77,28 @@ A "fourre-tout" of unfinished or broken codes.
 
 ### Narvalo (NuGet).sln
 
+   
+FxCop
+-----
+
+
+StyleCop
+--------
+
+For a detailed description of the rules, check out http://www.stylecop.com/docs/.
+              
+_Documentation rules are temporary disabled._
+
+Disabled rules:
+- SA1101:PrefixLocalCallsWithThis
+- SA1121:UseBuiltInTypeAlias
+- SA1126:PrefixCallsCorrectly
+- SA1306:FieldNamesMustBeginWithLowerCaseLetter
+- SA1309:FieldNamesMustNotBeginWithUnderscore
+- SA1310:FieldNamesMustNotContainUnderscore
+- SA1400:AccessModifierMustBeDeclared
+- SA1500:CurlyBracketsForMultiLineStatementsMustNotShareLine
+- SA1501:StatementMustNotBeOnASingleLine
+- SA1502:ElementMustNotBeOnASingleLine
+- SA1634:FileHeaderMustShowCopyright
 

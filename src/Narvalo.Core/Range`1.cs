@@ -15,7 +15,11 @@ namespace Narvalo
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            Require.CheckRange(lowerEnd.CompareTo(upperEnd) <= 0, upperEnd, "upperEnd", SR.Range_LowerEndNotLesserThanUpperEnd);
+            Require.RangeCondition(
+                lowerEnd.CompareTo(upperEnd) <= 0, 
+                upperEnd,
+                "upperEnd",
+                SR.Range_LowerEndNotLesserThanUpperEnd);
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;

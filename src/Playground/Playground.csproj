@@ -128,6 +128,8 @@
     <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
     <Compile Include="Edu\Monads\Stubs.cs" />
     <Compile Include="Edu\Monads\Stubs`1.cs" />
+    <Compile Include="Edu\RandomNumber.cs" />
+    <Compile Include="Edu\RandomString.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

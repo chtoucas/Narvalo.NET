@@ -147,11 +147,8 @@
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
   </data>
-  <data name="Check_IsNull" xml:space="preserve">
-    <value>The value is null.</value>
-  </data>
-  <data name="Check_IsEmpty" xml:space="preserve">
-    <value>The value is empty.</value>
+  <data name="Enforce_IsNullFormat" xml:space="preserve">
+    <value>The parameter {0} is null, a situation that should NEVER have happened.</value>
   </data>
   <data name="Output_SuccessfulHasNoException" xml:space="preserve">
     <value>A successful outcome has no exception.</value>

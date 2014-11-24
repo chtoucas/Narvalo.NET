@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Internal
             ICommand command,
             IPlatformServices platformServices)
         {
-            Check.NotNull(platformServices);
+            Require.NotNull(platformServices, "platformServices");
 
             return new PresenterBinder(
                 new[] { command },

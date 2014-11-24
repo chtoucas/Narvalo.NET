@@ -26,7 +26,7 @@ namespace Narvalo
 
         static object[] GetArguments_(object arg0, params object[] args)
         {
-            Check.NotNull(args);
+            Enforce.NotNull(args, "args");
 
             var arguments = new object[1 + args.Length];
             arguments[0] = arg0;

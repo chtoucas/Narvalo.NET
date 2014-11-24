@@ -33,6 +33,7 @@ namespace Narvalo.Data
                 using (var command = CreateCommand(connection)) {
                     PrepareCommand(command, parameters);
 
+                    // FIXME: If connection is null???
                     connection.Open();
                     result = command.ExecuteNonQuery();
                 }
@@ -43,6 +44,7 @@ namespace Narvalo.Data
 
         protected virtual void PrepareCommand(SqlCommand command, TParameters parameters) { }
 
+        // REVIEW: Why virtual? Looks like a bad idea.
         protected virtual SqlConnection CreateConnection()
         {
             return new SqlConnection(ConnectionString);
@@ -52,6 +54,7 @@ namespace Narvalo.Data
             Justification = "REVIEW: False positive.")]
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
+        // REVIEW: Why virtual? Looks like a bad idea.
         protected virtual SqlCommand CreateCommand(SqlConnection connection)
         {
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };

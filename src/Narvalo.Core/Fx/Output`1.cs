@@ -157,7 +157,7 @@ namespace Narvalo.Fx
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");
-            CodeContract.AssumeInvariant(square);
+            Assume.Invariant(square);
 
             return square.IsSuccess ? square.Value : η(square.ExceptionInfo);
         }

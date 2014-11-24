@@ -29,12 +29,12 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
     <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
     <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
     <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
@@ -170,7 +170,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Check.cs" />
+    <Compile Include="Enforce.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="Func`%24.cs" />
     <Compile Include="Fx\Identity.g.cs">
@@ -205,7 +205,7 @@
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="CodeContract.cs" />
+    <Compile Include="Assume.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
     <Compile Include="Internal\Stubs.cs" />
     <Compile Include="Internal\Stubs`1.cs" />

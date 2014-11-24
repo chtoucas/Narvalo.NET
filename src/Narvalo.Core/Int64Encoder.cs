@@ -101,7 +101,7 @@ namespace Narvalo
         public static long FromBase25String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Check(
+            Require.Condition(
                 value.Length <= Base25MaxLength_,
                 "value",
                 Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_));
@@ -112,7 +112,7 @@ namespace Narvalo
         public static long FromBase34String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Check(
+            Require.Condition(
                 value.Length <= Base34MaxLength_,
                 "value",
                 Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_));
@@ -123,7 +123,7 @@ namespace Narvalo
         public static long FromBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Check(
+            Require.Condition(
                 value.Length <= Base58MaxLength_,
                 "value",
                 Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_));
@@ -134,7 +134,7 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Check(
+            Require.Condition(
                 value.Length <= FlickrBase58MaxLength_,
                 "value",
                 Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_));

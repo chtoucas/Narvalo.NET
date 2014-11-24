@@ -7,7 +7,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    internal static class Tracer
+    static class Tracer
     {
         [DebuggerStepThrough]
         [Conditional("TRACE")]

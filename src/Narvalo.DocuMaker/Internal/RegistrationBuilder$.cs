@@ -3,9 +3,9 @@
 namespace Narvalo.DocuMaker.Internal
 {
     using System;
+    using System.Diagnostics.Contracts;
     using Autofac.Builder;
     using Autofac.Extras.DynamicProxy2;
-    using Narvalo;
     using Serilog;
     using Serilog.Events;
 
@@ -21,7 +21,7 @@ namespace Narvalo.DocuMaker.Internal
             this IRegistrationBuilder<TLimit, TActivatorData, TSingleRegistrationStyle> @this,
             Type interceptorType)
         {
-            Check.NotNull(@this);
+            Contract.Requires(@this != null);
 
             if (!IsDebuggingEnabled) {
                 return @this;

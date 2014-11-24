@@ -38,7 +38,7 @@ namespace Narvalo.Mvp.Resolvers
 
         internal static void ValidateViewType(Type viewType)
         {
-            Check.NotNull(viewType);
+            Require.NotNull(viewType, "viewType");
 
             if (!viewType.IsInterface) {
                 throw new ArgumentException(String.Format(

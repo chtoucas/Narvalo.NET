@@ -62,20 +62,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is empty..
+        ///   Looks up a localized string similar to The parameter {0} is null, a situation that should NEVER have happened..
         /// </summary>
-        internal static string Check_IsEmpty {
+        internal static string Enforce_IsNullFormat {
             get {
-                return ResourceManager.GetString("Check_IsEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value is null..
-        /// </summary>
-        internal static string Check_IsNull {
-            get {
-                return ResourceManager.GetString("Check_IsNull", resourceCulture);
+                return ResourceManager.GetString("Enforce_IsNullFormat", resourceCulture);
             }
         }
         

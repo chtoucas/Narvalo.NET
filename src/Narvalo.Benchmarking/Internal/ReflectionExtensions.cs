@@ -10,11 +10,11 @@
                this MemberInfo element,
                bool inherit) where T : Attribute
         {
-#if NET_40
-            var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
-            return Maybe.Create(attr).Map(a => (T)a);
-#else
+#if NET_35
             return Maybe.Create(element.GetCustomAttribute<T>(inherit));
+#else
+            var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
+            return Maybe.Create(attr).Select(a => (T)a);
 #endif
         }
 

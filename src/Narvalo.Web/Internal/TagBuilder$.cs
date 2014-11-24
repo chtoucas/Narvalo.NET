@@ -2,6 +2,7 @@
 
 namespace Narvalo.Web.Internal
 {
+    using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
     using Narvalo;
@@ -10,7 +11,7 @@ namespace Narvalo.Web.Internal
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
-            Check.NotNull(@this);
+            Contract.Requires(@this != null);
 
             return @this.ToHtmlString(TagRenderMode.Normal);
         }

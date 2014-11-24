@@ -29,7 +29,7 @@ namespace Narvalo.Web
 
         protected virtual bool Validate(TQuery query)
         {
-            Check.NotNull(query);
+            //Require.NotNull(query, "query");
 
             return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
                     from attr in prop.Attributes.OfType<ValidationAttribute>()

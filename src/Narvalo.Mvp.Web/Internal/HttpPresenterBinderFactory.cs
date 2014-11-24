@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.Web.Internal
             IPlatformServices platformServices,
             IMessageCoordinator messageCoordinator)
         {
-            Check.NotNull(platformServices);
+            Require.NotNull(platformServices, "platformServices");
 
             return new HttpPresenterBinder(
                 hosts,

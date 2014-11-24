@@ -27,7 +27,8 @@ namespace Narvalo.Autofac
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
-            // REVIEW: I would prefer to register the view as a dependency and then resolve the presenter.
+            // REVIEW: I would prefer to register the view as a dependency 
+            // and then resolve the presenter.
             var innerScope = _container.BeginLifetimeScope();
 
             var presenter = (IPresenter)innerScope.Resolve(
@@ -61,7 +62,7 @@ namespace Narvalo.Autofac
             public LooselyTypedParameter(Type type, object value)
                 : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
             {
-                Check.NotNull(type);
+                Enforce.NotNull(type, "type");
             }
         }
     }
