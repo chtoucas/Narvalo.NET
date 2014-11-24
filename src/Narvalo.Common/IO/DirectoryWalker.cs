@@ -35,10 +35,15 @@ namespace Narvalo.IO
             while (stack.Count > 0) {
                 var directory = stack.Pop();
 
+                if (directory == null) {
+                    throw new InvalidOperationException("FIXME");
+                }
+
                 OnDirectoryStart(directory);
 
                 var files = directory
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
+                    .AssumeNotNull()
                     .Where(_fileFilter);
 
                 foreach (var file in files) {
@@ -49,6 +54,7 @@ namespace Narvalo.IO
 
                 var subdirs = directory
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
+                    .AssumeNotNull()
                     .Where(_directoryFilter);
 
                 foreach (var dir in subdirs) {

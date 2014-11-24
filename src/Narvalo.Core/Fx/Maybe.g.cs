@@ -64,6 +64,8 @@ namespace Narvalo.Fx {
         /// </remarks>
         public static Maybe<T> Create<T>(T value)
         {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
             return Maybe<T>.η(value);
         }
         

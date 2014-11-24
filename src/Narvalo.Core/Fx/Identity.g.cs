@@ -56,6 +56,7 @@ namespace Narvalo.Fx {
         /// </remarks>
         public static Identity<T> Return<T>(T value)
         {
+
             return Identity<T>.η(value);
         }
         

@@ -22,6 +22,7 @@ namespace Narvalo.Configuration
         public override void Validate(object value)
         {
             string uriString = (string)value;
+
             if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute)) {
                 throw new ConfigurationErrorsException(
                     Format.CurrentCulture(SR.AbsoluteUriValidator_UriIsNotAbsoluteFormat, uriString));

@@ -3,7 +3,7 @@
 
     // NB: Documentation is almost blindly copied from Haskell.
 
-    // If the monad does have a zero, we do expect Bind to never return null but the zero.
+    // If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
     // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
 
     /* ========================================================================================== *
@@ -345,6 +345,10 @@ namespace <#= LinqNamespace #>.Internal {
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
 <#+ StructConstraint_("T"); #>
         {
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+<#+ } #>
+
             return <#= Name #><T>.η(value);
         }
         

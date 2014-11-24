@@ -17,16 +17,12 @@ namespace Narvalo.Data
 
         public static Maybe<byte[]> ToMaybe(this SqlBytes @this)
         {
-            Require.Object(@this);
-
-            return @this.IsNull ? Maybe<byte[]>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<byte[]>.None : Maybe.Create(@this.Value);
         }
 
         public static Maybe<char[]> ToMaybe(this SqlChars @this)
         {
-            Require.Object(@this);
-
-            return @this.IsNull ? Maybe<char[]>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<char[]>.None : Maybe.Create(@this.Value);
         }
 
         public static Maybe<string> ToMaybe(this SqlString @this)
@@ -36,9 +32,7 @@ namespace Narvalo.Data
 
         public static Maybe<string> ToMaybe(this SqlXml @this)
         {
-            Require.Object(@this);
-
-            return @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
         }
     }
 }

@@ -58,25 +58,30 @@ namespace Narvalo.Data
 
         protected virtual void PrepareCommand(SqlCommand command) { }
 
-        // REVIEW: Why virtual? Looks like a bad idea.
+        // REVIEW: Why virtual? Looks like a bad idea. Contract for overrides.
         protected virtual SqlConnection CreateConnection()
         {
+            Contract.Ensures(Contract.Result<SqlConnection>() != null);
+
             return new SqlConnection(ConnectionString);
         }
 
-        // REVIEW: Why virtual? Looks like a bad idea. If not necessary, update ExecuteCommand_ to use Require.NotNull.
+        // REVIEW: Why virtual? Looks like a bad idea. Contract for overrides.
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
             Justification = "[REVIEW] False positive.")]
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         protected virtual SqlCommand CreateCommand(SqlConnection connection)
         {
+            Contract.Ensures(Contract.Result<SqlCommand>() != null);
+
             return new SqlCommand(Name, connection) { CommandType = CommandType.StoredProcedure };
         }
 
         SqlDataReader ExecuteCommand_(SqlCommand command)
         {
-            Require.NotNull(command, "command");
+            Enforce.NotNull(command, "command");
+            Contract.Ensures(Contract.Result<SqlDataReader>() != null);
 
             return command.ExecuteReader(CommandBehavior);
         }

@@ -41,6 +41,7 @@ namespace Narvalo.Configuration
             Require.NotNullOrEmpty(configFilePath, "configFilePath");
 
             string configFileName;
+
             if (Path.IsPathRooted(configFilePath)) {
                 configFileName = configFilePath;
             }
@@ -48,7 +49,9 @@ namespace Narvalo.Configuration
                 string configurationDirectory
                     = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
-                configFileName = Path.Combine(configurationDirectory, configFilePath);
+                configFileName = configurationDirectory == null
+                    ? configFilePath
+                    : Path.Combine(configurationDirectory, configFilePath);
             }
 
             var map = new ExeConfigurationFileMap();

@@ -56,6 +56,7 @@ namespace Narvalo.Fx {
         /// </remarks>
         public static Output<T> Success<T>(T value)
         {
+
             return Output<T>.η(value);
         }
         

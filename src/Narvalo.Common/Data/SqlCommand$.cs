@@ -15,7 +15,9 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.Add(parameterName, parameterType).Value = value;
+            @this.Parameters.AssumeNotNull()
+                .Add(parameterName, parameterType).AssumeNotNull()
+                .Value = value;
         }
     }
 }

@@ -176,7 +176,7 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            var value = @this.GetSqlXml(ordinal);
+            var value = @this.GetSqlXml(ordinal).AssumeNotNull();
             return value.IsNull ? defaultValue : value.Value;
         }
 

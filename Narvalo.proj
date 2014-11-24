@@ -46,7 +46,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
+    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
