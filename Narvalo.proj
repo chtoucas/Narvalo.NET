@@ -52,12 +52,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectsToBuild Include="$(SolutionDir)src\DocuMaker\DocuMaker.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj" />
     <!-- FIXME: CA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />-->
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.DocuMaker\Narvalo.DocuMaker.csproj" />
     <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
     <!-- FIXME: CA/SA failures -->
     <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->

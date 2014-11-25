@@ -70,24 +70,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
-        /// </summary>
-        internal static string Check_IsNotEnum {
-            get {
-                return ResourceManager.GetString("Check_IsNotEnum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be a value type..
-        /// </summary>
-        internal static string Check_IsNotValueType {
-            get {
-                return ResourceManager.GetString("Check_IsNotValueType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string ConfigurationManager_MissingSectionFormat {
@@ -102,6 +84,15 @@ namespace Narvalo {
         internal static string NonQueryStoredProcedure_ValuesIsNull {
             get {
                 return ResourceManager.GetString("NonQueryStoredProcedure_ValuesIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
+        /// </summary>
+        internal static string TypeIsNotEnumFormat {
+            get {
+                return ResourceManager.GetString("TypeIsNotEnumFormat", resourceCulture);
             }
         }
         

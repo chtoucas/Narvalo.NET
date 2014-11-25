@@ -121,30 +121,6 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Condition(bool expression, string parameterName, string message)
-        {
-            if (!expression) {
-                throw new ArgumentException(message, parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void RangeCondition<T>(bool expression, T value, string parameterName, string message)
-        {
-            if (!expression) {
-                throw new ArgumentOutOfRangeException(parameterName, value, message);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue) {
@@ -307,16 +283,24 @@ namespace Narvalo
     static class Enforce
     {
 #if CONTRACTS_FULL
-        [ContractAbbreviator]
+        [ContractArgumentValidator]
         public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Contract.Requires(value != null, GetMessage_(parameterName));
+            if (value == null) {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            Contract.EndContractBlock();
         }
 
-        [ContractAbbreviator]
+        [ContractArgumentValidator]
         public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            Contract.Requires(value != null, GetMessage_(parameterName));
+            if (value == null) {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            Contract.EndContractBlock();
         }
 #else
         [Conditional("DEBUG")]
@@ -331,7 +315,7 @@ namespace Narvalo
             Debug.Assert(value != null, GetMessage_(parameterName));
         }
 #endif
-        
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method only available in Debug Build.")]
         static string GetMessage_(string parameterName)

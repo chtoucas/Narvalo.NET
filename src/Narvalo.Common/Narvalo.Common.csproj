@@ -90,7 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\CodeContracts\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>full</DebugType>
@@ -170,7 +170,6 @@
       <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="ConvertTo.cs" />
-    <Compile Include="Check.cs" />
     <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\StoredProcedureContract`1.cs" />

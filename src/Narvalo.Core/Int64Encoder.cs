@@ -101,10 +101,14 @@ namespace Narvalo
         public static long FromBase25String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Condition(
-                value.Length <= Base25MaxLength_,
-                "value",
-                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_));
+
+            if (value.Length > Base25MaxLength_) {
+                throw new ArgumentException(
+                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_),
+                    "value");
+            }
+
+            Contract.EndContractBlock();
 
             return Decode(value, Base25Alphabet_, Base25AlphabetLength_);
         }
@@ -112,10 +116,14 @@ namespace Narvalo
         public static long FromBase34String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Condition(
-                value.Length <= Base34MaxLength_,
-                "value",
-                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_));
+
+            if (value.Length > Base34MaxLength_) {
+                throw new ArgumentException(
+                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_),
+                    "value");
+            }
+
+            Contract.EndContractBlock();
 
             return Decode(value, Base34Alphabet_, Base34AlphabetLength_);
         }
@@ -123,10 +131,14 @@ namespace Narvalo
         public static long FromBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Condition(
-                value.Length <= Base58MaxLength_,
-                "value",
-                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_));
+
+            if (value.Length > Base58MaxLength_) {
+                throw new ArgumentException(
+                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_),
+                    "value");
+            }
+
+            Contract.EndContractBlock();
 
             return Decode(value, Base58Alphabet_, Base58AlphabetLength_);
         }
@@ -134,10 +146,14 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.Condition(
-                value.Length <= FlickrBase58MaxLength_,
-                "value",
-                Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_));
+
+            if (value.Length > FlickrBase58MaxLength_) {
+                throw new ArgumentException(
+                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_),
+                    "value");
+            }
+
+            Contract.EndContractBlock();
 
             long result = 0;
             long multiplier = 1;
@@ -149,7 +165,7 @@ namespace Narvalo
                         Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
-                
+
                 checked {
                     result += multiplier * index;
                     if (i != 0) {
@@ -177,7 +193,7 @@ namespace Narvalo
                         Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
-                
+
                 checked {
                     result += multiplier * index;
                     if (i != 0) {

@@ -2,9 +2,7 @@
 
 namespace Narvalo
 {
-#if NET_35
     using System;
-#endif
     using System.Diagnostics.CodeAnalysis;
 
     public static class Enumeration
@@ -17,7 +15,10 @@ namespace Narvalo
             Justification = "The method already returns a boolean to indicate the outcome.")]
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
+            var type = typeof(TEnum);
+            if (!type.IsEnum) {
+                throw new InvalidOperationException();
+            }
 
             result = default(TEnum);
 
@@ -37,7 +38,10 @@ namespace Narvalo
 
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
+            var type = typeof(TEnum);
+            if (!type.IsEnum) {
+                throw new InvalidOperationException();
+            }
 
             return (TEnum)System.Enum.Parse(typeof(TEnum), value, ignoreCase);
         }

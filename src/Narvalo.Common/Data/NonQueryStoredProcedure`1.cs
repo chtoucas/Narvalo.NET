@@ -2,6 +2,7 @@
 
 namespace Narvalo.Data
 {
+    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
@@ -29,7 +30,11 @@ namespace Narvalo.Data
 
         public int Execute(TParameters values)
         {
-            Require.Condition(values != null, "values", SR.NonQueryStoredProcedure_ValuesIsNull);
+            if (values == null) {
+                throw new ArgumentException(SR.NonQueryStoredProcedure_ValuesIsNull, "values");
+            }
+
+            Contract.EndContractBlock();
 
             int result;
 

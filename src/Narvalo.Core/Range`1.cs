@@ -15,11 +15,11 @@ namespace Narvalo
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            Require.RangeCondition(
-                lowerEnd.CompareTo(upperEnd) <= 0, 
-                upperEnd,
-                "upperEnd",
-                SR.Range_LowerEndNotLesserThanUpperEnd);
+            if (lowerEnd.CompareTo(upperEnd) > 0) {
+                throw new ArgumentOutOfRangeException("upperEnd", upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
+            }
+
+            Contract.EndContractBlock();
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;

@@ -45,10 +45,13 @@ Narvalo (Core)
 
 ### High Priority
 
+- <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
 - Remove Tracer?
 - Check all use of AssumeNotNull.
-- Validate(?) the usefulness of ExceptionFactory.
+- Validate(?) the usefulness of ExceptionFactory. Move to ThrowHelper?
 - String.IsNullOrWhiteSpace?
+- Enforce, why can't I use ContractAbbreviator? The method get erased.
+- Require.Condition, Require.RangeCondition. CCCheck fails on these.
 
 ### Medium Priority
 

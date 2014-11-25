@@ -126,11 +126,8 @@
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme '{0}' does not support protocol less uri.</value>
   </data>
-  <data name="Check_IsNotEnum" xml:space="preserve">
+  <data name="TypeIsNotEnumFormat" xml:space="preserve">
     <value>The type '{0}' must be of enum type.</value>
-  </data>
-  <data name="Check_IsNotValueType" xml:space="preserve">
-    <value>The type '{0}' must be a value type.</value>
   </data>
   <data name="NonQueryStoredProcedure_ValuesIsNull" xml:space="preserve">
     <value>The parameter 'values' is null.</value>

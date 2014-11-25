@@ -100,26 +100,6 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [ContractArgumentValidator]
-        public static void Condition(bool expression, string parameterName, string message)
-        {
-            if (!expression) {
-                throw new ArgumentException(message, parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        public static void RangeCondition<T>(bool expression, T value, string parameterName, string message)
-        {
-            if (!expression) {
-                throw new ArgumentOutOfRangeException(parameterName, value, message);
-            }
-
-            Contract.EndContractBlock();
-        }
-
         /// <summary>
         /// Check that an argument is in a given range of integers.
         /// </summary>

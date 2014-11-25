@@ -14,14 +14,15 @@ namespace Narvalo
 
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
-
             return Enum<TEnum>(value, ignoreCase: true);
         }
 
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
+            var type = typeof(TEnum);
+            if (!type.IsEnum) {
+                throw new InvalidOperationException(Format.CurrentCulture(SR.TypeIsNotEnumFormat, type.FullName ?? "Unknown type name"));
+            }
 
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
 

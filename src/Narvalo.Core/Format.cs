@@ -8,6 +8,7 @@ namespace Narvalo
 
     public static class Format
     {
+        [Pure]
         public static string CurrentCulture(string format, params object[] args)
         {
             Contract.Requires(format != null);
@@ -17,6 +18,7 @@ namespace Narvalo
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
 
+        [Pure]
         public static string InvariantCulture(string format, params object[] args)
         {
             Contract.Requires(format != null);
@@ -28,8 +30,9 @@ namespace Narvalo
 
         ////public static string CurrentCulture(string format, object arg0, params object[] args)
         ////{
-        ////    Require.NotNull(arg0, "arg0");
+        ////    Enforce.NotNull(arg0, "arg0");
         ////    Enforce.NotNull(format, "format");
+        ////    Contract.Ensures(Contract.Result<string>() != null);
 
         ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
 
@@ -38,8 +41,9 @@ namespace Narvalo
 
         ////public static string InvariantCulture(string format, object arg0, params object[] args)
         ////{
-        ////    Require.NotNull(arg0, "arg0");
+        ////    Enforce.NotNull(arg0, "arg0");
         ////    Enforce.NotNull(format, "format");
+        ////    Contract.Ensures(Contract.Result<string>() != null);
 
         ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
 
@@ -49,6 +53,7 @@ namespace Narvalo
         ////static object[] GetArguments_(object arg0, params object[] args)
         ////{
         ////    Enforce.NotNull(args, "args");
+        ////    Contract.Ensures(Contract.Result<object[]>() != null);
 
         ////    var arguments = new object[1 + args.Length];
         ////    arguments[0] = arg0;

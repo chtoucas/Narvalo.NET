@@ -20,8 +20,7 @@ namespace Narvalo
             Require.NotNull(type, "type");
 
             if (!type.IsEnum) {
-                throw new InvalidOperationException(
-                    Format.CurrentCulture(SR.Check_IsNotEnum, type.FullName));
+                throw new InvalidOperationException(Format.CurrentCulture(SR.Check_IsNotEnum, type.FullName ?? "Unknown type name"));
             }
 
             Contract.EndContractBlock();
@@ -33,8 +32,7 @@ namespace Narvalo
             Require.NotNull(type, "type");
 
             if (!type.IsValueType) {
-                throw new InvalidOperationException(
-                    Format.CurrentCulture(SR.Check_IsNotValueType, type.FullName));
+                throw new InvalidOperationException(Format.CurrentCulture(SR.Check_IsNotValueType, type.FullName ?? "Unknown type name"));
             }
 
             Contract.EndContractBlock();

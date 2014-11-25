@@ -2,6 +2,8 @@
 
 namespace Narvalo
 {
+    using System;
+
     public static class ConvertTo
     {
         /// <remarks>
@@ -10,10 +12,13 @@ namespace Narvalo
         /// </remarks>
         public static TEnum? Enum<TEnum>(object value) where TEnum : struct
         {
-            Check.IsEnum(typeof(TEnum));
+            var type = typeof(TEnum);
+            if (!type.IsEnum) {
+                throw new InvalidOperationException(Format.CurrentCulture(SR.TypeIsNotEnumFormat, type.FullName ?? "Unknown type name"));
+            }
 
-            if (System.Enum.IsDefined(typeof(TEnum), value)) {
-                return (TEnum)System.Enum.ToObject(typeof(TEnum), value);
+            if (System.Enum.IsDefined(type, value)) {
+                return (TEnum)System.Enum.ToObject(type, value);
             }
             else {
                 return null;

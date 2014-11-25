@@ -5,6 +5,7 @@ namespace Narvalo
     using System.Diagnostics;
 #if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+    using Narvalo.Internal;
 #endif
 
     /// <summary>
@@ -17,16 +18,24 @@ namespace Narvalo
     public static class Enforce
     {
 #if CONTRACTS_FULL
-        [ContractAbbreviator]
+        [ContractArgumentValidator]
         public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Contract.Requires(value != null, Format.CurrentCulture(SR.Enforce_IsNullFormat, parameterName));
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull(parameterName);
+            }
+
+            Contract.EndContractBlock();
         }
 
-        [ContractAbbreviator]
+        [ContractArgumentValidator]
         public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            Contract.Requires(value != null, Format.CurrentCulture(SR.Enforce_IsNullFormat, parameterName));
+            if (value == null) {
+                throw ExceptionFactory.ArgumentNull(parameterName);
+            }
+
+            Contract.EndContractBlock();
         }
 #else
         [Conditional("DEBUG")]

@@ -90,7 +90,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\CodeContracts\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>full</DebugType>
