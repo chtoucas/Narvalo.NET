@@ -8,9 +8,18 @@ High Priority
 Medium Priority
 ---------------
 
-- Narvalo.Facts fails when called from Narvalo.proj and run twice in a row.
-
 
 Low Priority
 ------------
 
+
+Resolved Issues
+===============
+
+[1] Narvalo.Facts fails when called from Narvalo.proj and run twice in a row.
+    Narvalo.Core and Narvalo.Common use the default namespace (`Narvalo`) and
+    both define a resource named `SR.resx` (with default access modifier kept,
+    that is internal). I have not found the reason but, when running the tests
+    from the command line, the resource embedded in `Narvalo.Core` got replaced
+    by the one in `Narvalo.Common`. The solution was to use different names for
+    both resources.

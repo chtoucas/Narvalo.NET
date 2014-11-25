@@ -14,6 +14,7 @@ namespace Narvalo
     [DebuggerStepThrough]
     public static class Check
     {
+        [Obsolete]
         [ContractArgumentValidator]
         public static void IsEnum(Type type)
         {
@@ -26,6 +27,7 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
+        [Obsolete]
         [ContractArgumentValidator]
         public static void IsValueType(Type type)
         {

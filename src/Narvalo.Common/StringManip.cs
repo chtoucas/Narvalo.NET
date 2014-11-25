@@ -65,7 +65,7 @@ namespace Narvalo
             }
             else {
                 if (value.Length < startIndex || value.Length < startIndex + length) {
-                    // The start index ot the end index is too big.
+                    // The start index ot the end index is too large.
                     return Format.CurrentCulture("{0}{1}", value.Substring(value.Length - length, length - 1), postfix);
                 }
                 else {
