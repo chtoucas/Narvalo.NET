@@ -31,7 +31,7 @@ namespace Narvalo.Data
         public int Execute(TParameters values)
         {
             if (values == null) {
-                throw new ArgumentException(SR.NonQueryStoredProcedure_ValuesIsNull, "values");
+                throw new ArgumentException(SRCommon.NonQueryStoredProcedure_ValuesIsNull, "values");
             }
 
             Contract.EndContractBlock();

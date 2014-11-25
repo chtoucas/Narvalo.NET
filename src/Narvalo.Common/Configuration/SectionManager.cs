@@ -26,7 +26,7 @@ namespace Narvalo.Configuration
 
             if (section == null) {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(SR.ConfigurationManager_MissingSectionFormat, sectionName));
+                    Format.CurrentCulture(SRCommon.ConfigurationManager_MissingSectionFormat, sectionName));
             }
 
             return section;
@@ -62,7 +62,7 @@ namespace Narvalo.Configuration
 
             if (section == null) {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(SR.ConfigurationManager_MissingSectionFormat, sectionName));
+                    Format.CurrentCulture(SRCommon.ConfigurationManager_MissingSectionFormat, sectionName));
             }
 
             return section;

@@ -153,10 +153,6 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
-      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
-      <Name>Narvalo.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Issues.txt" />
