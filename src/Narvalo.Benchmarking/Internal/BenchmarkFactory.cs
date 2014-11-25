@@ -14,7 +14,7 @@
         ////            () => {
         ////                var message = String.Format(
         ////                    CultureInfo.CurrentCulture,
-        ////                    SR.MissingBenchmarkAttribute,
+        ////                    Strings_Benchmarking.MissingBenchmarkAttribute,
         ////                    method.Name);
         ////                return new BenchException(message);
         ////            }

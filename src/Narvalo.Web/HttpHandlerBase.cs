@@ -48,7 +48,7 @@ namespace Narvalo.Web
 
             // TODO: Indiquer les méthodes autorisées dans la réponse.
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-            response.Write(Format.CurrentCulture(SR.HttpHandlerBase_InvalidHttpMethodFormat, context.Request.HttpMethod));
+            response.Write(Format.CurrentCulture(Strings_Web.HttpHandlerBase_InvalidHttpMethodFormat, context.Request.HttpMethod));
         }
     }
 }

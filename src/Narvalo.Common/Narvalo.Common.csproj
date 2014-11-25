@@ -203,10 +203,10 @@
     <Compile Include="ParseTo.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
-    <Compile Include="SRCommon.Designer.cs">
+    <Compile Include="Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SRCommon.resx</DependentUpon>
+      <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManip.cs" />
@@ -218,9 +218,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SRCommon.resx">
+    <EmbeddedResource Include="Strings_Common.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SRCommon.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Common.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

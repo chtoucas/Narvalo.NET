@@ -22,14 +22,14 @@ namespace Narvalo {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SRCommon {
+    internal class Strings_Junk {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SRCommon() {
+        internal Strings_Junk() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.SRCommon", typeof(SRCommon).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Strings_Junk", typeof(Strings_Junk).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,56 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The supplied value &apos;{0}&apos; is not a well-formed absolute URI..
+        ///   Looks up a localized string similar to Exception: {0} {1} {2}..
         /// </summary>
-        internal static string AbsoluteUriValidator_UriIsNotAbsoluteFormat {
+        internal static string DebuggerLogger_MessageFormat {
             get {
-                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsoluteFormat", resourceCulture);
+                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
+        ///   Looks up a localized string similar to A left Either has no right value..
         /// </summary>
-        internal static string ConfigurationManager_MissingSectionFormat {
+        internal static string Either_LeftHasNoRightValue {
             get {
-                return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
+                return ResourceManager.GetString("Either_LeftHasNoRightValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;values&apos; is null..
+        ///   Looks up a localized string similar to A right Either has no left value..
         /// </summary>
-        internal static string NonQueryStoredProcedure_ValuesIsNull {
+        internal static string Either_RightHasNoLeftValue {
             get {
-                return ResourceManager.GetString("NonQueryStoredProcedure_ValuesIsNull", resourceCulture);
+                return ResourceManager.GetString("Either_RightHasNoLeftValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
+        ///   Looks up a localized string similar to HTTP InputStream too large..
         /// </summary>
-        internal static string TypeIsNotEnumFormat {
+        internal static string HttpRequestBase_InputStreamTooLarge {
             get {
-                return ResourceManager.GetString("TypeIsNotEnumFormat", resourceCulture);
+                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
+        ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
         /// </summary>
-        internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
+        internal static string XElement_MalformedAttributeValueFormat {
             get {
-                return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
+                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to parse element &apos;{0}&apos;, line {1}..
+        /// </summary>
+        internal static string XElement_MalformedElementValueFormat {
+            get {
+                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
             }
         }
     }

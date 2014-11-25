@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Benchmarking
-{
-
-
+namespace Narvalo.Web {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,14 +22,14 @@ namespace Narvalo.Benchmarking
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SR {
+    internal class Strings_Web {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SR() {
+        internal Strings_Web() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo.Benchmarking
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Benchmarking.SR", typeof(SR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Web.Strings_Web", typeof(Strings_Web).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,65 @@ namespace Narvalo.Benchmarking
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid result: duration was 0 ({0} iterations).
+        ///   Looks up a localized string similar to The default AssetProvider was not specified..
         /// </summary>
-        internal static string InvalidMetricFormat {
+        internal static string AssetManager_DefaultProviderNotConfigured {
             get {
-                return ResourceManager.GetString("InvalidMetricFormat", resourceCulture);
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotConfigured", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}; fastest result:.
+        ///   Looks up a localized string similar to The default AssetProvider was not found..
         /// </summary>
-        internal static string MetricCollectionFormat {
+        internal static string AssetManager_DefaultProviderNotFound {
             get {
-                return ResourceManager.GetString("MetricCollectionFormat", resourceCulture);
+                return ResourceManager.GetString("AssetManager_DefaultProviderNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
+        ///   Looks up a localized string similar to Invalid provider type..
         /// </summary>
-        internal static string MetricFormat {
+        internal static string AssetProviderCollection_InvalidProvider {
             get {
-                return ResourceManager.GetString("MetricFormat", resourceCulture);
+                return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Invalid HTTP method: {0}..
         /// </summary>
-        internal static string MissingBenchComparativeAttribute {
+        internal static string HttpHandlerBase_InvalidHttpMethodFormat {
             get {
-                return ResourceManager.GetString("MissingBenchComparativeAttribute", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_InvalidHttpMethodFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Invalid request..
         /// </summary>
-        internal static string MissingBenchComparisonAttribute {
+        internal static string HttpHandlerBase_InvalidRequest {
             get {
-                return ResourceManager.GetString("MissingBenchComparisonAttribute", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_InvalidRequest", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config!.
         /// </summary>
-        internal static string MissingBenchmarkAttribute {
+        internal static string WebConfigurationManager_SectionNotFoundFormat {
             get {
-                return ResourceManager.GetString("MissingBenchmarkAttribute", resourceCulture);
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!.
+        /// </summary>
+        internal static string WebConfigurationManager_SectionNotFoundInPathFormat {
+            get {
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPathFormat", resourceCulture);
             }
         }
     }

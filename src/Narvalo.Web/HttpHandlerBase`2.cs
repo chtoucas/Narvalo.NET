@@ -31,13 +31,13 @@ namespace Narvalo.Web
             var errorsCount = errors.Count();
 
             if (errorsCount > 1) {
-                exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
+                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
             }
             else if (errorsCount == 1) {
                 exception = errors.First();
             }
             else {
-                exception = new HttpQueryBinderException(SR.HttpHandlerBase_InvalidRequest);
+                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest);
             }
 
             OnBindingFailureCore(context, exception);

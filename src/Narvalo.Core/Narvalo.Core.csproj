@@ -236,10 +236,10 @@
       <DependentUpon>Range`1.cs</DependentUpon>
     </Compile>
     <Compile Include="Require.cs" />
-    <Compile Include="SR.Designer.cs">
+    <Compile Include="Strings_Core.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SR.resx</DependentUpon>
+      <DependentUpon>Strings_Core.resx</DependentUpon>
     </Compile>
     <Compile Include="VoidOrBreak.cs" />
     <Compile Include="VoidOrError.cs" />
@@ -280,9 +280,9 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SR.resx">
+    <EmbeddedResource Include="Strings_Core.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Core.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

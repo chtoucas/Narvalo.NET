@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Benchmarking {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Narvalo {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SR {
+    internal class Strings_Benchmarking {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SR() {
+        internal Strings_Benchmarking() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.SR", typeof(SR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Benchmarking.Strings_Benchmarking", typeof(Strings_Benchmarking).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,56 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exception: {0} {1} {2}..
+        ///   Looks up a localized string similar to Invalid result: duration was 0 ({0} iterations).
         /// </summary>
-        internal static string DebuggerLogger_MessageFormat {
+        internal static string InvalidMetricFormat {
             get {
-                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
+                return ResourceManager.GetString("InvalidMetricFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A left Either has no right value..
+        ///   Looks up a localized string similar to {0}; fastest result:.
         /// </summary>
-        internal static string Either_LeftHasNoRightValue {
+        internal static string MetricCollectionFormat {
             get {
-                return ResourceManager.GetString("Either_LeftHasNoRightValue", resourceCulture);
+                return ResourceManager.GetString("MetricCollectionFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A right Either has no left value..
+        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
         /// </summary>
-        internal static string Either_RightHasNoLeftValue {
+        internal static string MetricFormat {
             get {
-                return ResourceManager.GetString("Either_RightHasNoLeftValue", resourceCulture);
+                return ResourceManager.GetString("MetricFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HTTP InputStream too large..
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string HttpRequestBase_InputStreamTooLarge {
+        internal static string MissingBenchComparativeAttribute {
             get {
-                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
+                return ResourceManager.GetString("MissingBenchComparativeAttribute", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string XElement_MalformedAttributeValueFormat {
+        internal static string MissingBenchComparisonAttribute {
             get {
-                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
+                return ResourceManager.GetString("MissingBenchComparisonAttribute", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to parse element &apos;{0}&apos;, line {1}..
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string XElement_MalformedElementValueFormat {
+        internal static string MissingBenchmarkAttribute {
             get {
-                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
+                return ResourceManager.GetString("MissingBenchmarkAttribute", resourceCulture);
             }
         }
     }

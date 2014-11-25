@@ -16,7 +16,7 @@ namespace Narvalo
         {
             // REVIEW: Strict range? Do we allow for equality?
             if (lowerEnd.CompareTo(upperEnd) > 0) {
-                throw new ArgumentOutOfRangeException("upperEnd", upperEnd, SR.Range_LowerEndNotLesserThanUpperEnd);
+                throw new ArgumentOutOfRangeException("upperEnd", upperEnd, Strings_Core.Range_LowerEndNotLesserThanUpperEnd);
             }
 
             Contract.EndContractBlock();

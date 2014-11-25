@@ -39,7 +39,7 @@ namespace Narvalo.Fx
                 Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
                 if (_isSuccess) {
-                    throw new InvalidOperationException(SR.Output_SuccessfulHasNoException);
+                    throw new InvalidOperationException(Strings_Core.Output_SuccessfulHasNoException);
                 }
 
                 return _exceptionInfo;
@@ -51,7 +51,7 @@ namespace Narvalo.Fx
             get
             {
                 if (!_isSuccess) {
-                    throw new InvalidOperationException(SR.Output_UnsuccessfulHasNoValue);
+                    throw new InvalidOperationException(Strings_Core.Output_UnsuccessfulHasNoValue);
                 }
 
                 return _value;

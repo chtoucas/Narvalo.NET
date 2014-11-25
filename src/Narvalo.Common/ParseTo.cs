@@ -21,7 +21,8 @@ namespace Narvalo
         {
             var type = typeof(TEnum);
             if (!type.IsEnum) {
-                throw new InvalidOperationException(Format.CurrentCulture(SRCommon.TypeIsNotEnumFormat, type.FullName ?? "Unknown type name"));
+                throw new InvalidOperationException(
+                    Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName ?? "Unknown type name"));
             }
 
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);

@@ -41,13 +41,13 @@ namespace Narvalo
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value, string parameterName) where T : class
         {
-            Debug.Assert(value != null, Format.CurrentCulture(SR.Enforce_IsNullFormat, parameterName));
+            Debug.Assert(value != null, Format.CurrentCulture(Strings_Core.Enforce_IsNullFormat, parameterName));
         }
 
         [Conditional("DEBUG")]
         public static void NotNull<T>(T? value, string parameterName) where T : struct
         {
-            Debug.Assert(value != null, Format.CurrentCulture(SR.Enforce_IsNullFormat, parameterName));
+            Debug.Assert(value != null, Format.CurrentCulture(Strings_Core.Enforce_IsNullFormat, parameterName));
         }
 #endif
     }

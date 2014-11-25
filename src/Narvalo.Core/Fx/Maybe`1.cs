@@ -142,7 +142,7 @@ namespace Narvalo.Fx
             get
             {
                 if (!_isSome) {
-                    throw new InvalidOperationException(SR.Maybe_NoneHasNoValue);
+                    throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
                 }
 
                 return _value;
@@ -167,7 +167,7 @@ namespace Narvalo.Fx
             Require.NotNull(value, "value");
 
             if (value.IsNone) {
-                throw new InvalidCastException(SR.Maybe_CannotCastNoneToValue);
+                throw new InvalidCastException(Strings_Core.Maybe_CannotCastNoneToValue);
             }
 
             return value.Value;

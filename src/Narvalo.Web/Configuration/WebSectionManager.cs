@@ -15,7 +15,7 @@ namespace Narvalo.Web.Configuration
 
             if (section == null) {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(SR.WebConfigurationManager_SectionNotFoundFormat, sectionName));
+                    Format.CurrentCulture(Strings_Web.WebConfigurationManager_SectionNotFoundFormat, sectionName));
             }
 
             return section;
@@ -30,7 +30,7 @@ namespace Narvalo.Web.Configuration
 
             if (section == null) {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(SR.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath));
+                    Format.CurrentCulture(Strings_Web.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath));
             }
 
             return section;

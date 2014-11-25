@@ -44,7 +44,7 @@
         ////    return () => {
         ////        var message = String.Format(
         ////            CultureInfo.CurrentCulture,
-        ////            SR.MissingBenchComparativeAttribute,
+        ////            Strings_Benchmarking.MissingBenchComparativeAttribute,
         ////            name);
         ////        return new BenchException(message);
         ////    };

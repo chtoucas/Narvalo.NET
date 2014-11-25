@@ -24,7 +24,7 @@ namespace Narvalo
             }
             else {
                 throw new NotSupportedException(
-                    Format.CurrentCulture(SRCommon.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
+                    Format.CurrentCulture(Strings_Common.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
             }
         }
     }

@@ -102,7 +102,7 @@ namespace Narvalo.Web.UI.Assets
 
             if (section.DefaultProvider == null) {
                 throw new ConfigurationErrorsException(
-                    SR.AssetManager_DefaultProviderNotConfigured,
+                    Strings_Web.AssetManager_DefaultProviderNotConfigured,
                     section.ElementInformation.Properties["providers"].Source,
                     section.ElementInformation.Properties["providers"].LineNumber);
             }
@@ -110,7 +110,7 @@ namespace Narvalo.Web.UI.Assets
             Provider_ = Providers_[section.DefaultProvider];
 
             if (Provider_ == null) {
-                throw new ProviderException(SR.AssetManager_DefaultProviderNotFound);
+                throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotFound);
             }
 
             InitializedDefaultProvider_ = true;

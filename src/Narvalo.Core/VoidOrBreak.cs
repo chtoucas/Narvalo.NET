@@ -35,7 +35,7 @@ namespace Narvalo
             get
             {
                 if (!IsBreak) {
-                    throw new InvalidOperationException(SR.VoidOrError_NotWarning);
+                    throw new InvalidOperationException(Strings_Core.VoidOrError_NotWarning);
                 }
 
                 return _reason;

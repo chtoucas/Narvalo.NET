@@ -253,8 +253,8 @@
     <Compile Include="Semantic\Relationships.cs" />
     <Compile Include="Semantic\SchemaOrgType.cs" />
     <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
-    <Compile Include="SR.Designer.cs">
-      <DependentUpon>SR.resx</DependentUpon>
+    <Compile Include="Strings_Web.Designer.cs">
+      <DependentUpon>Strings_Web.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -277,9 +277,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SR.resx">
+    <EmbeddedResource Include="Strings_Web.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Web.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

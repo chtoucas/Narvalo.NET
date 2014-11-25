@@ -42,7 +42,7 @@ namespace Narvalo
             get
             {
                 if (!_isError) {
-                    throw new InvalidOperationException(SR.VoidOrError_NotFatal);
+                    throw new InvalidOperationException(Strings_Core.VoidOrError_NotFatal);
                 }
 
                 return _exceptionInfo;

@@ -89,8 +89,8 @@
     <Compile Include="Internal\BenchmarkFinder.cs" />
     <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SR.Designer.cs">
-      <DependentUpon>SR.resx</DependentUpon>
+    <Compile Include="Strings_Benchmarking.Designer.cs">
+      <DependentUpon>Strings_Benchmarking.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -102,9 +102,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SR.resx">
+    <EmbeddedResource Include="Strings_Benchmarking.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Benchmarking.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

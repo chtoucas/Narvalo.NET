@@ -13,7 +13,7 @@ namespace Narvalo.Internal
 
             return new ArgumentNullException(
                 parameterName,
-                Format.CurrentCulture(SR.ExceptionFactory_ArgumentNullFormat, parameterName));
+                Format.CurrentCulture(Strings_Core.ExceptionFactory_ArgumentNullFormat, parameterName));
         }
     }
 }

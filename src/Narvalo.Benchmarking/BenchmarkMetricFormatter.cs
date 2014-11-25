@@ -13,7 +13,7 @@
         {
             return String.Format(
                 cultureInfo,
-                SR.MetricFormat,
+                Strings_Benchmarking.MetricFormat,
                 metric.Name,
                 metric.CallsPerSecond,
                 metric.Iterations,
@@ -29,7 +29,7 @@
 
             return String.Format(
                 cultureInfo,
-                SR.MetricFormat,
+                Strings_Benchmarking.MetricFormat,
                 metrics.Name,
                 Format(cultureInfo, fastest));
         }
@@ -38,7 +38,7 @@
         {
             return String.Format(
                 cultureInfo,
-                SR.InvalidMetricFormat,
+                Strings_Benchmarking.InvalidMetricFormat,
                 metric.Iterations);
         }
     }

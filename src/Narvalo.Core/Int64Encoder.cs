@@ -104,7 +104,7 @@ namespace Narvalo
 
             if (value.Length > Base25MaxLength_) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_),
                     "value");
             }
 
@@ -119,7 +119,7 @@ namespace Narvalo
 
             if (value.Length > Base34MaxLength_) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_),
                     "value");
             }
 
@@ -134,7 +134,7 @@ namespace Narvalo
 
             if (value.Length > Base58MaxLength_) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_),
                     "value");
             }
 
@@ -149,7 +149,7 @@ namespace Narvalo
 
             if (value.Length > FlickrBase58MaxLength_) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(SR.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_),
                     "value");
             }
 
@@ -162,7 +162,7 @@ namespace Narvalo
                 int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
                 if (index == -1) {
                     throw new ArgumentException(
-                        Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        Format.CurrentCulture(Strings_Core.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
 
@@ -190,7 +190,7 @@ namespace Narvalo
                 int index = Array.BinarySearch(alphabet, value[i]);
                 if (index == -1) {
                     throw new ArgumentException(
-                        Format.CurrentCulture(SR.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        Format.CurrentCulture(Strings_Core.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
 
