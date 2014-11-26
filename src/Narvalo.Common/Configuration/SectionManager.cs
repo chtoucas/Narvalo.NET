@@ -7,7 +7,7 @@ namespace Narvalo.Configuration
     using System.IO;
 
     /// <summary>
-    /// Provides methods to stronly-typed access to configuration sections.
+    /// Provides methods for stronly-typed access to configuration sections.
     /// </summary>
     public static class SectionManager
     {

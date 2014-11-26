@@ -8,9 +8,7 @@ In General
 
 - Use true argument check for extension methods.
 - Review csproj, in particular, remove any ExcludeFromSyleCop.
-- Rework MSBuild import in csproj: use pre and post imports.
-  We then get access to $(ProjectName). We can also apply a common policy
-  more easily.
+- Rework MSBuild import in csproj: use pre and post imports?
 
 ### Medium Priority
 
@@ -44,14 +42,14 @@ Narvalo (Core)
 --------------
 
 ### High Priority
-
-- <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
-- Remove Tracer?
+                      
+- Enforce, why can't I use ContractAbbreviator? The method get erased.
+  The current workaround makes the API too different.   
+- Require.Condition, Require.RangeCondition. CCCheck fails on these.   
 - Check all use of AssumeNotNull.
+- Remove Tracer?
 - Validate(?) the usefulness of ExceptionFactory. Move to ThrowHelper?
 - String.IsNullOrWhiteSpace?
-- Enforce, why can't I use ContractAbbreviator? The method get erased.
-- Require.Condition, Require.RangeCondition. CCCheck fails on these.
 
 ### Medium Priority
 

@@ -1,6 +1,6 @@
 ﻿// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
 // https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Id/GuidCombGenerator.cs
-namespace Narvalo.NHibernate
+namespace Narvalo.Externs.NHibernate
 {
     using System;
 

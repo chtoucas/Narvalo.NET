@@ -189,9 +189,6 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParseTo.SimpleTypes.cs">
-      <DependentUpon>ParseTo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
@@ -238,8 +235,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\tools\Narvalo.Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,10 +1,7 @@
-﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
-
-namespace Playground.Edu
+﻿namespace Narvalo
 {
     using System;
     using System.Text;
-    using Narvalo;
 
     public static class RandomString
     {

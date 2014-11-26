@@ -25,9 +25,11 @@
 
             // FIXME: FormatException quand value.Length est impair ?
             byte[] result = new byte[value.Length / 2];
+
             for (int i = 0; i < result.Length; i++) {
                 result[i] = Convert.ToByte(value.Substring(2 * i, 2), 16);
             }
+
             return result;
         }
 

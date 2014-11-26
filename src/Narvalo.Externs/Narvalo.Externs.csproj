@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{809C0DA5-9A01-4ADA-83A5-1A0494723594}</ProjectGuid>
+    <ProjectGuid>{FED38EF0-10B8-499A-B55E-026CC17A5764}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Garbage</AssemblyName>
+    <RootNamespace>Narvalo.Externs</RootNamespace>
+    <AssemblyName>Narvalo.Externs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -22,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -33,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
-    <DocumentationFile>bin\Release\Narvalo.Garbage.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Narvalo.Externs.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>..\..\etc\Narvalo.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
@@ -44,7 +46,21 @@
     <AssemblyOriginatorKeyFile>..\..\etc\Narvalo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO">
+      <HintPath>..\..\packages\LumenWorks.Framework.IO.3.8.0\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -58,14 +74,8 @@
       <HintPath>..\..\packages\Serilog.1.4.34\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -90,47 +100,36 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
-    <Compile Include="AssemblyUtility.cs" />
-    <Compile Include="Enumeration.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings_Junk.Designer.cs">
-      <DependentUpon>Strings_Junk.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Strings_Junk.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings_Junk.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
+    <Compile Include="Autofac\ContainerBuilder%24.cs" />
+    <Compile Include="Autofac\PrincipalModelBinder.cs" />
+    <Compile Include="Castle\SqlExceptionInterceptor.cs" />
+    <Compile Include="Castle\XmlExceptionInterceptor.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Log4Net\Log4NetHttpModule.cs" />
+    <Compile Include="LumenWorks\CsvSlurp.cs" />
+    <Compile Include="NHibernate\GuidComb.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serilog\HttpLogEventEnricher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\etc\Narvalo.snk">
       <Link>Properties\Narvalo.snk</Link>
     </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
-      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
-      <Name>Narvalo.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\etc\CodeAnalysisDictionary.xml">
@@ -139,7 +138,7 @@
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.targets" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

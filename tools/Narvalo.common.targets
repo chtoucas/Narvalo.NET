@@ -1,15 +1,122 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Each Visual Studio project imports this file. -->
+  <!--
+    Each Visual Studio project should import this file.
+    WARNING: Changing some settings from VS will have no effect...
+  -->
   <PropertyGroup>
-    <!-- $(SolutionDir) is only set inside Visual Studio. -->
+    <!-- $(SolutionDir) is usually set inside Visual Studio. -->
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</SolutionDir>
 
-    <!-- Only enable Source Analysis in Release mode. -->
+    <!--<OutputPath>bin\$(Configuration)\</OutputPath>-->
+
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+
+    <WarningLevel>4</WarningLevel>
+    <!-- Disable compile warning for missing documentation. -->
+    <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'CodeContracts'">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <!-- REVIEW: Keep the DEBUG constant since Contract.Assert and Contract.Assume depend on it. -->
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+
+  <!-- ### Source Analysis ### -->
+
+  <PropertyGroup>
+    <!-- Only automatically run Source Analysis in Release mode. -->
     <SourceAnalysisEnabled Condition="'$(Configuration)' != 'Release'">false</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition="'$(Configuration)' == 'Release'">true</SourceAnalysisEnabled>
+
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(SolutionDir)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+  </PropertyGroup>
+
+
+  <!-- ### Code Analysis ### -->
+
+  <PropertyGroup>
+    <!-- Only automatically run Code Analysis in Release mode. -->
+    <RunCodeAnalysis Condition="'$(Configuration)' != 'Release'">false</RunCodeAnalysis>
+    <RunCodeAnalysis Condition="'$(Configuration)' == 'Release'">true</RunCodeAnalysis>
+
+    <!-- Process generated files (.g.cs). -->
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+
+    <!--<CodeAnalysisRuleSet Condition=" '$(Configuration)' == 'Debug' ">$(SolutionDir)etc\Narvalo.ruleset</CodeAnalysisRuleSet>-->
+    <!--<CodeAnalysisRuleSet Condition=" '$(Configuration)' == 'Release' ">$(SolutionDir)etc\Narvalo.ruleset</CodeAnalysisRuleSet>-->
+    <CodeAnalysisRuleSet Condition="'$(Configuration)' == 'CodeContracts'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+
+    <!--- Test projects use a custom ruleset. -->
+    <!--<CodeAnalysisRuleSet Condition="'$(AssemblyName)->EndsWith('Facts.dll')' == 'true'">$(SolutionDir)etc\Tests.ruleset</CodeAnalysisRuleSet>-->
+  </PropertyGroup>
+
+
+  <!-- ### Code Contracts ### -->
+
+  <PropertyGroup Condition="'$(Configuration)' == 'CodeContracts'">
+    <!-- Assembly Mode: Custom Parameter Validation. -->
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+
+    <!-- Runtime Checking. -->
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+
+    <!-- Static Checking. -->
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <!-- Only useful when using VS but the result is confusing. -->
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+
+    <!-- Contract Reference Assembly. -->
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+  </PropertyGroup>
+
+
+  <!-- ### Continuous Integration ### -->
+
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
+    <!-- Background checking is not available in terminal.-->
+    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true' And $(AnalysisOutDir) != ''">
@@ -18,72 +125,30 @@
     <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
   </PropertyGroup>
 
-  <!-- ### Code Contracts ### -->
 
-  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true' And $(Configuration) == 'CodeContracts'">
-    <!-- Disable Source Analysis. -->
-    <!--<SourceAnalysisEnabled>false</SourceAnalysisEnabled>-->
-    <!-- Disable Code Analysis. -->
-    <!--<RunCodeAnalysis>false</RunCodeAnalysis>-->
+  <!-- ### Temporary Overrides ### -->
 
-    <!-- Section number refers to the official Code Contracts documentation. -->
+  <PropertyGroup>
+    <!-- Code Analysis. -->
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'MvpWebForms'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Narvalo.Build'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Narvalo.Ghostscript'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Narvalo.Reliability'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Narvalo.Mvp.Facts'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
 
-    <!-- 1. Assembly Mode. -->
-    <!-- Custom Parameter Validation (6.1.1). -->
-    <!--<CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>-->
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'DocuMaker'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Navalo.Junk'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(AssemblyName)' == 'Playground'">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
 
-    <!-- 2. Runtime Checking. -->
-    <!-- Perform Runtime Contract Checking (6.2.1). -->
-    <!--<CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>-->
-    <!--<CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>-->
-    <!-- Only Public Surface Contracts (6.2.2). -->
-    <!--<CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>-->
-    <!-- Assert On Contract Failure (6.2.3). -->
-    <!--<CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>-->
-    <!-- Call-site Requires Checking (6.2.4). -->
-    <!--<CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>-->
-    <!-- Skip Quantifiers (6.2.5). -->
-    <!--<CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>-->
-
-    <!-- 3. Static  Checking. -->
-    <!-- Perform Static Contract Checking (6.6). -->
-    <!--<CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>-->
-    <!-- Background checking is not available in terminal.-->
-    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-    <!-- Only useful when running inside VS. -->
-    <!--<CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>-->
-    <!-- Fail build on warnings. -->
-    <!--<CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>-->
-    <!-- Check non-null. -->
-    <!--<CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>-->
-    <!-- Check arithmetic. -->
-    <!--<CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>-->
-    <!-- Check array bounds. -->
-    <!--<CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>-->
-    <!-- Check enum writes. -->
-    <!--<CodeContractsEnumObligations>True</CodeContractsEnumObligations>-->
-    <!-- Check missing public requires. -->
-    <!--<CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>-->
-    <!-- Check missing public ensures. -->
-    <!--<CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>-->
-    <!-- Infers. -->
-    <!--<CodeContractsInferRequires>True</CodeContractsInferRequires>-->
-    <!--<CodeContractsInferEnsures>True</CodeContractsInferEnsures>-->
-    <!--<CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>-->
-    <!--<CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>-->
-    <!-- "3" represents the highest possible warning level. -->
-    <!--<CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>-->
-    <!--<CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>-->
-
-    <!-- 4. Contract Reference Assembly (6.2.5) -->
-    <!--<CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>-->
-    <!--<CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>-->
-    <!--<CodeContractsLibPaths />-->
-    <!--<CodeContractsExtraRewriteOptions />-->
-    <!--<CodeContractsExtraAnalysisOptions />-->
+    <!-- Source Analysis. -->
+    <SourceAnalysisEnabled Condition="'$(AssemblyName)' == 'MvpWebForms'">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition="'$(AssemblyName)' == 'Narvalo.Ghostscript'">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition="'$(AssemblyName)' == 'Narvalo.Reliability'">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition="'$(AssemblyName)' == 'Narvalo.Mvp.Facts'">false</SourceAnalysisEnabled>
   </PropertyGroup>
 
-  <!-- ### StyleCop ### -->
+
+  <!-- ### Source Analysis (Core) ### -->
 
   <!--
     The NuGet package for StyleCop does not include StyleCop.CSharp.Rules.dll.

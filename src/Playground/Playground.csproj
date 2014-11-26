@@ -128,8 +128,6 @@
     <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
     <Compile Include="Edu\Monads\Stubs.cs" />
     <Compile Include="Edu\Monads\Stubs`1.cs" />
-    <Compile Include="Edu\RandomNumber.cs" />
-    <Compile Include="Edu\RandomString.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,8 +184,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\tools\Narvalo.Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

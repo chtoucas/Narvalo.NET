@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D0F78A
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Externs", "src\Narvalo.Externs\Narvalo.Externs.csproj", "{FED38EF0-10B8-499A-B55E-026CC17A5764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{47194837-888B-48DE-9514-CFA899564BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

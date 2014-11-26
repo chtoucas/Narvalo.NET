@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Narvalo.Org Tools & Libraries.")]
 [assembly: AssemblyTrademark("")]
 
-// [assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en-US")]
 
 #if DEBUG
