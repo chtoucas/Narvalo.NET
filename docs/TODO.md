@@ -1,6 +1,12 @@
 TODO
 ====
 
+In Progress
+-----------          
+    
+- Rework MSBuild to use a common set of settings for all projects.
+
+
 In General
 ----------
 
@@ -8,7 +14,6 @@ In General
 
 - Use true argument check for extension methods.
 - Review csproj, in particular, remove any ExcludeFromSyleCop.
-- Rework MSBuild import in csproj: use pre and post imports?
 
 ### Medium Priority
 
@@ -67,7 +72,6 @@ Narvalo (Core)
 - Use Format instead of String.Format.
 - Document compiler conditional symbols in used: NET_35.
 - Add a XML schema for Narvalo config.
-- Make Narvalo.Facts a true VS test proj.
 - DocuMaker & Playground could use the Narvalo rulesets.
 - Use CommonMark instead of Markdown Deep.
 
