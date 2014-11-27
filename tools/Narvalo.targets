@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    Each Visual Studio project should import this file.
+      <Import Project="..\..\tools\Narvalo.Common.targets" />
+  -->
+
+  <PropertyGroup>
+    <NarvaloToolsDirectory>$(MSBuildThisFileDirectory)</NarvaloToolsDirectory>
+  </PropertyGroup>
+
+  <Import Project="$(NarvaloToolsDirectory)StyleCop.targets" />
+
+  <!-- 
+    To modify the build process, use of the extension points defined 
+    inside Microsoft.Common.targets.
+    See http://msdn.microsoft.com/en-us/library/ms366724.aspx
+  -->
+  <!--<Target Name="BeforeBuild">
+  </Target>-->
+
+  <Target Name="AfterBuild">
+    <Warning Text="$(ProjectName) does not use the default Code Analysis ruleset"
+             Condition=" '$(NarvaloUseTempCodeAnalysisRuleSet)' == 'true' "
+             ContinueOnError="true" />
+    
+    <Warning Text="Source Analysis is disabled on $(ProjectName)"
+             Condition=" '$(NarvaloTempDisabledSourceAnalysis)' == 'true' "
+             ContinueOnError="true" />
+  </Target>
+
+  <!-- ### Source Analysis Targets ### -->
+  
+  <!-- 
+    Use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
+    property set after importing StyleCop.targets.
+  -->
+
+  <Target Name="BeforeStyleCop"
+          BeforeTargets="StyleCop"
+          Condition=" '$(StyleCopEnabled)' == 'true' ">
+    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="Low" />
+  </Target>
+
+  <Target Name="AfterStyleCop"
+          AfterTargets="StyleCop"
+          Condition=" '$(StyleCopEnabled)' == 'true' ">
+    <Message Text="Source Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
+             Importance="High" />
+  </Target>
+
+  <!-- ### Code Analysis Targets ### -->
+
+  <!-- 
+    I wanted to replace the FxCop default messages to include the project name
+    but the provided MSBuild targets make it difficult to hook inside the process.
+  -->
+  <!--<Target Name="BeforeFxCop"
+          BeforeTargets="RunCodeAnalysis"
+          Condition=" '$(RunCodeAnalysis)' == 'true' ">
+    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="Low" />
+  </Target>
+
+  <Target Name="AfterFxCop"
+          BeforeTargets="RunCodeAnalysis"
+          Condition=" '$(RunCodeAnalysis)' == 'true' ">
+    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="High" />
+  </Target>-->
+
+  <!-- ### Code Contracts Targets ### -->
+
+  <Target Name="BeforeCodeContractsDocumentation"
+        BeforeTargets="ContractXmlDocumentation"
+        Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
+    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="Low" />
+  </Target>
+
+  <Target Name="AfterCodeContractsDocumentation"
+          AfterTargets="ContractXmlDocumentation"
+          Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
+    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="High" />
+  </Target>
+
+  <!-- 
+    Use "CreateCodeContractReferenceAssembly" not "CodeContractReferenceAssembly",
+    since CodeContractReferenceAssembly depends on it. Otherwise, the message
+    will appear too late.
+  -->
+  <Target Name="BeforeCodeContractsReferenceAssembly"
+        BeforeTargets="CreateCodeContractReferenceAssembly"
+        Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
+    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="Low" />
+  </Target>
+
+  <Target Name="AfterCodeContractsReferenceAssembly"
+          AfterTargets="CodeContractReferenceAssembly"
+          Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
+    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="High" />
+  </Target>
+</Project>

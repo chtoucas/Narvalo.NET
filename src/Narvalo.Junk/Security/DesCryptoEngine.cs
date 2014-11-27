@@ -1,11 +1,11 @@
 ﻿namespace Narvalo.Security
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
 
-    //[ContractVerification(true)]
     public class DesCryptoEngine : IBidirectionalCryptoEngine
     {
         readonly static TripleDESCryptoServiceProvider Provider
@@ -21,8 +21,8 @@
             _iv = iv;
         }
 
-        //[SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
-        //    Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
+        [SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
+            Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
         public string Encrypt(string val)
         {
             if (val == String.Empty) {
@@ -57,8 +57,8 @@
             return Convert.ToBase64String(result);
         }
 
-        //[SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
-        //    Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
+        [SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
+            Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
         public string Decrypt(string val)
         {
             if (val == String.Empty) {

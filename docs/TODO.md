@@ -5,6 +5,8 @@ In Progress
 -----------          
     
 - Rework MSBuild to use a common set of settings for all projects.
+  Import common target at start of projects.
+- Get rid off Narvalo.Junk.
 
 
 In General

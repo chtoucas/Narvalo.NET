@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    This MSBuild file enforces the use of a common set of Build properties.
+    You can still override any of them but this should not be the default.
+    
+    For sample projects create the following property before importing this file:
+      <PropertyGroup>
+        <NarvaloIsSampleProject>true<NarvaloIsSampleProject>
+      </PropertyGroup>
+    
+    Each Visual Studio project should import this file: 
+      <Import Project="..\..\etc\Narvalo.props" />
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\etc\Narvalo.props" />
+  -->
+
+  <PropertyGroup>
+    <NarvaloConfigurationDirectory>$(MSBuildThisFileDirectory)</NarvaloConfigurationDirectory>
+  </PropertyGroup>
+
+  <!-- ### Narvalo Custom Project Properties ### -->
+
+  <PropertyGroup>
+    <NarvaloIsSampleProject Condition=" '$(IsSampleProject)' == '' ">false</NarvaloIsSampleProject>
+  </PropertyGroup>
+
+
+  <!-- ### Standard Project Properties ### -->
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <WarningLevel>4</WarningLevel>
+    <!-- Disable compiler warnings for missing documentation. -->
+    <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(NarvaloConfigurationDirectory)Narvalo.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+
+    <!-- REVIEW: Should I also set these properties? -->
+    <!-- $(SolutionDir) is usually set inside Visual Studio. -->
+    <!--<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*' ">$(MSBuildThisFileDirectory)..\</SolutionDir>-->
+    <!--<AppDesignerFolder>Properties</AppDesignerFolder>-->
+    <!--<DefaultLanguage>en-US</DefaultLanguage>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <!-- Keep the DEBUG constant since Contract.Assert and Contract.Assume depend on it. -->
+    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+
+  <!-- ### Included Files ### -->
+
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="$(NarvaloConfigurationDirectory)CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+    <!-- 
+      I would like to always include the common assembly infos,
+      unfortunately, if done here, the file won't appear in VS. 
+    -->
+    <!--<Compile Include="$(NarvaloConfigurationDirectory)AssemblyInfo.Common.cs">
+      <Link>Properties\AssemblyInfo.Common.cs</Link>
+    </Compile>-->
+  </ItemGroup>
+
+
+  <!-- ### Source Analysis ### -->
+
+  <!-- For a complete list of available options, see tools\StyleCop.targets. -->
+  <PropertyGroup>
+    <!-- 
+      Only in Release Build is Source Analysis automatically run.
+      You can still perform manual Source Analysis for any Build configuration inside VS.
+    -->
+    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</SourceAnalysisEnabled>
+
+    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisOverrideSettingsFile>$(NarvaloConfigurationDirectory)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+  </PropertyGroup>
+
+
+  <!-- ### Code Analysis ### -->
+
+  <!-- 
+    For a complete list of available options, see 
+      %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v12.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
+  -->
+  <PropertyGroup>
+    <!-- 
+      Only in Release Build is Code Analysis automatically run.
+      You can still perform manual Code Analysis for any Build configuration inside VS.
+    -->
+    <RunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</RunCodeAnalysis>
+    <RunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</RunCodeAnalysis>
+
+    <!-- Process generated files (.g.cs). -->
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+
+    <!--
+      The default behaviour is to use a very strict ruleset. For performance reasons
+      we use a less strict ruleset when using Code Contracts. Also Code Contracts
+      produce assemblies that are not compatible with Code Analysis.
+    -->
+    <CodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</CodeAnalysisRuleSet>
+
+    <!-- Sample projects use a custom ruleset. -->
+    <CodeAnalysisRuleSet Condition=" '$(NarvaloIsSampleProject)' == 'true' ">$(NarvaloConfigurationDirectory)Samples.ruleset</CodeAnalysisRuleSet>
+
+    <!-- 
+      Test projects use a custom ruleset. We use the project type Guid
+      to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
+      Another way to do this here could be to use:
+        Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
+    -->
+    <CodeAnalysisRuleSet Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">$(NarvaloConfigurationDirectory)Tests.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+
+  <!-- ### Code Contracts ### -->
+
+  <!-- 
+    For a complete list of available options, see 
+      %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
+      %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
+  -->
+  <PropertyGroup>
+    <!-- Use "Custom Parameter Validation". -->
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'CodeContracts' ">
+    <!-- Runtime Checking. -->
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+
+    <!-- Static Checking. -->
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <!-- Only meaningful inside VS but I find the result confusing. -->
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsFailBuildOnWarnings>True</CodeContractsFailBuildOnWarnings>
+
+    <!-- Contract Reference Assembly. -->
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+  </PropertyGroup>
+
+
+  <!-- ### Continuous Integration Overrides ### -->
+
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+    <!-- Background checking is not available in terminal. -->
+    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+  </PropertyGroup>
+
+  <!-- When called from Narvalo.proj, reports are saved in a custom location. -->
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(AnalysisOutDir) != '' ">
+    <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+
+    <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <!-- 
+      We don't want the "succeed" file to be written to the custom location.
+      Doesn't seem to be understood by MSBuild. As a workaround, 
+      we simply disable the creation of the success file.
+    -->
+    <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
+    <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
+  </PropertyGroup>
+
+
+  <!-- ### FIXME: Temporary Overrides ### -->
+
+  <!-- Code Analysis. -->
+  <PropertyGroup>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'DocuMaker' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Build' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Junk' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Playground' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+
+    <CodeAnalysisRuleSet Condition=" '$(NarvaloUseTempCodeAnalysisRuleSet)' == 'true' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <!-- Source Analysis. -->
+  <PropertyGroup>
+    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloTempDisabledSourceAnalysis>
+    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloTempDisabledSourceAnalysis>
+    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloTempDisabledSourceAnalysis>
+    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloTempDisabledSourceAnalysis>
+    
+    <SourceAnalysisEnabled Condition=" '$(NarvaloTempDisabledSourceAnalysis)' == 'true' ">false</SourceAnalysisEnabled>
+  </PropertyGroup>
+</Project>

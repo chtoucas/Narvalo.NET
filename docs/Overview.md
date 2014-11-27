@@ -48,7 +48,7 @@ This solution contains **all** libraries built upon Narvalo.Core:
   Phone 8.1 and Windows Phone Silverlight 8.
 - Narvalo.Common complements Narvalo.Core with non portable classes.
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
-- Narvalo.Extras a repository of sample classes.
+- Narvalo.Extras.
 - Narvalo.Benchmarking.
 - Narvalo.Facts, the test project.
 - Narvalo.Junk, a "fourre-tout" of unfinished or broken codes.
@@ -68,6 +68,7 @@ of the core libraries.
 This solution contains anything else. It **does not** depend on any
 of the core libraries.
 - Narvalo.Build
+- Narvalo.Externs
 - Narvalo.Ghostscript
 - Narvalo.Reliability
 - Narvalo.StyleCop.CSharp

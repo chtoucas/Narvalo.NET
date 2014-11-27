@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    The NuGet package for StyleCop does not include StyleCop.CSharp.Rules.dll.
+    There is a StyleCop.MSBuild package which has everything we need.
+    Still we do not use it since it does ugly transforms on the project file. 
+    A simple workaround is to add the StyleCop.MSBuild
+    package to the solution and to import its included targets file.
+
+    Now all projects depend on a specific version and, when StyleCop.MSBuild
+    gets updated, all projects will fail to load. This is far from perfect but
+    at least we are immediately notified of the problem.
+  -->
+  <Import Project="$(MSBuildThisFileDirectory)..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" />
+</Project>
