@@ -10,7 +10,7 @@ namespace MvpCommandLine
         public static void DisplayText()
         {
             Console.WriteLine();
-            Console.WriteLine("I am a test command.");
+            Console.WriteLine(Strings.SampleCommand_DisplayText);
             Console.WriteLine();
         }
 

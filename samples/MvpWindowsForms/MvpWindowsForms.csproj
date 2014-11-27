@@ -65,12 +65,21 @@
     <Compile Include="SampleUserControl.Designer.cs">
       <DependentUpon>SampleUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="TestMessage.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SampleUserControl.resx">
       <DependentUpon>SampleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="MvpWindowsForms.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

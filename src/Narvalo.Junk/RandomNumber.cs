@@ -15,7 +15,7 @@
             }
         }
 
-        public static double CauchyQuantile_(double p)
+        public static double CauchyQuantile(double p)
         {
             return Math.Tan(Math.PI * (p - 0.5));
         }

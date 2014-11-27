@@ -16,12 +16,12 @@ namespace MvpCommandLine
 
         public void Completed(object sender, EventArgs e)
         {
-            Console.WriteLine("Presenter say Completed.");
+            Console.WriteLine(Strings.SamplePresenter_OnCompleted);
         }
 
         public void Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Presenter say Load.");
+            Console.WriteLine(Strings.SamplePresenter_OnLoad);
         }
     }
 }

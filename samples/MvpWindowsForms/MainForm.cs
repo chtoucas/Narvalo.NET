@@ -8,6 +8,8 @@
         public MainForm()
         {
             InitializeComponent();
+
+            Text = Strings.MainForm_Text;
         }
 
         public event EventHandler TextBoxTextChanged;

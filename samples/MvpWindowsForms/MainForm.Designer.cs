@@ -54,7 +54,6 @@
             this.Controls.Add(this.sampleUserControl1);
             this.Controls.Add(this.TextBox);
             this.Name = "MainForm";
-            this.Text = "MvpForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
