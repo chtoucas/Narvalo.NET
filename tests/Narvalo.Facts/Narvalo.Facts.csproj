@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{967FD938-F4FF-452B-9F9B-426D1F250BEB}</ProjectGuid>
+    <ProjectGuid>{A6E851F2-C725-4461-9A8D-47DADB563923}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Facts</RootNamespace>

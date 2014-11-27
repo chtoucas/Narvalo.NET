@@ -126,8 +126,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(NarvaloConfigurationDirectory)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
 
@@ -174,6 +174,11 @@
   <PropertyGroup>
     <!-- Process generated files (.g.cs). -->
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <!-- All these settings do not seem to have any effect. -->
+    <!--<CodeAnalysisQuiet>true</CodeAnalysisQuiet>
+    <CodeAnalysisVerbose>false</CodeAnalysisVerbose>
+    <CodeAnalysisSummary>false</CodeAnalysisSummary>-->
   </PropertyGroup>
 
 
@@ -207,7 +212,7 @@
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <!-- Only meaningful inside VS but I find the result confusing. -->
     <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
-    <CodeContractsFailBuildOnWarnings>True</CodeContractsFailBuildOnWarnings>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
 
     <!-- Contract Reference Assembly. -->
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
@@ -223,6 +228,11 @@
   <!-- TODO: Use MSBuild injection? -->
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+    <!-- Treat all warnings as errors. -->
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
+
     <!-- Background checking is not available in terminal. -->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
 
@@ -231,10 +241,10 @@
   </PropertyGroup>
 
   <!-- When called from Narvalo.proj, reports are saved in a custom location. -->
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(AnalysisOutDir) != '' ">
-    <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloAnalysisDir) != '' ">
+    <SourceAnalysisOutputFile>$(NarvaloAnalysisDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
-    <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>$(NarvaloAnalysisDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
     <!--
       We don't want the "succeed" file to be written to the custom location.
       Doesn't seem to be understood by MSBuild. As a workaround,

@@ -5,12 +5,23 @@
       <Import Project="..\..\tools\Narvalo.Common.targets" />
   -->
 
+  <!-- TODO: Remove .xml.old -->
+
   <!-- TODO: T4 regeneration. -->
   <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
 
   <Import Project=".\StyleCop.targets" />
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
+    <HighMessageLevel>High</HighMessageLevel>
+    <LowMessageLevel>Normal</LowMessageLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+    <HighMessageLevel>Normal</HighMessageLevel>
+    <LowMessageLevel>Low</LowMessageLevel>
+  </PropertyGroup>
+
+    <PropertyGroup>
     <BeforeBuildDependsOnTargets>
       ValidateSourceAnalysisSettings;
       ValidateCodeAnalysisSettings
@@ -45,14 +56,14 @@
   <Target Name="BeforeSourceAnalysis"
           BeforeTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="Low" />
+    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="$(LowMessageLevel)" />
   </Target>
 
   <Target Name="AfterSourceAnalysis"
           AfterTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
     <Message Text="Source Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
-             Importance="High" />
+             Importance="$(HighMessageLevel)" />
   </Target>
 
   <!-- ### Code Analysis Targets ### -->
@@ -80,13 +91,13 @@
   <!--<Target Name="BeforeCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="Low" />
+    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="$(LowMessageLevel)" />
   </Target>
 
   <Target Name="AfterCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="High" />
+    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="$(HighMessageLevel)" />
   </Target>-->
 
   <!-- ### Code Contracts Targets ### -->
@@ -94,13 +105,13 @@
   <Target Name="BeforeCodeContractsDocumentation"
         BeforeTargets="ContractXmlDocumentation"
         Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="Low" />
+    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="$(LowMessageLevel)" />
   </Target>
 
   <Target Name="AfterCodeContractsDocumentation"
           AfterTargets="ContractXmlDocumentation"
           Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="High" />
+    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="$(HighMessageLevel)" />
   </Target>
 
   <!--
@@ -111,12 +122,12 @@
   <Target Name="BeforeCodeContractsReferenceAssembly"
         BeforeTargets="CreateCodeContractReferenceAssembly"
         Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="Low" />
+    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="$(LowMessageLevel)" />
   </Target>
 
   <Target Name="AfterCodeContractsReferenceAssembly"
           AfterTargets="CodeContractReferenceAssembly"
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="High" />
+    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="$(HighMessageLevel)" />
   </Target>
 </Project>

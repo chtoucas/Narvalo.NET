@@ -10,7 +10,7 @@
 
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
     <!-- WARNING: Projects use "AnyCPU", but solutions use "Any CPU". -->
-    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <Platform Condition="'$(Platform)' == ''">Any CPU</Platform>
 
     <!-- Enable Parallel Build? -->
     <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
@@ -19,9 +19,9 @@
 
   <PropertyGroup>
     <!-- Directory where all compilation results should go. -->
-    <BuildDir>$(SolutionDir)_build\</BuildDir>
+    <NarvaloBuildDir>$(SolutionDir)_build\</NarvaloBuildDir>
     <!-- Directory where all reports should go. -->
-    <AnalysisOutDir>$(BuildDir)reports\</AnalysisOutDir>
+    <NarvaloAnalysisDir>$(NarvaloBuildDir)reports\</NarvaloAnalysisDir>
   </PropertyGroup>
 
   <!-- Attempt to completely isolate our build environment from VS. -->
@@ -36,52 +36,43 @@
       <!--
         According to Microsoft.Common.targets, we must use "OutDir" instead of "OutputPath".
       -->
-      OutDir=$(BuildDir)bin\$(Configuration)\;
-      OutputPath=$(BuildDir)bin\$(Configuration)\;<!-- Is this useful???-->
-      BaseIntermediateOutputPath=$(BuildDir)obj\;
+      OutDir=$(NarvaloBuildDir)bin\$(Configuration)\;
+      OutputPath=$(NarvaloBuildDir)bin\$(Configuration)\;<!-- REVIEW: Is this useful???-->
+      BaseIntermediateOutputPath=$(NarvaloBuildDir)obj\;
       BuildInParallel=$(BuildInParallel);
-      AnalysisOutDir=$(AnalysisOutDir)
+      NarvaloAnalysisDir=$(NarvaloAnalysisDir)
     </BuildProperties>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
-    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
-  </ItemGroup>
-
   <!-- TODO: Use Narvalo.sln? -->
   <ItemGroup>
-    <ProjectsToBuild Include="$(SolutionDir)samples\MvpCommandLine\MvpCommandLine.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)samples\MvpWebForms\MvpWebForms.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)samples\MvpWindowsForms\MvpWindowsForms.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\DocuMaker\DocuMaker.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Build\Narvalo.Build.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Externs\Narvalo.Extras.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Extras\Narvalo.Extras.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Junk\Narvalo.Junk.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)src\Playground\Playground.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
-    <ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
+    <SolutionsToBuild Include="$(SolutionDir)Narvalo.sln" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
+    <!--<ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />-->
   </ItemGroup>
 
 
   <!-- ### Core Targets ### -->
 
+  <!-- TODO: Remove this and use the solution. -->
   <Target Name="Analyze">
+    <!-- WARNING: Projects use "AnyCPU", but solutions use "Any CPU". -->
+    <PropertyGroup>
+      <BuildPropertiesForProjects Condition=" '$(Platform)' == 'Any CPU' ">
+        $(BuildProperties);
+        Platform=AnyCPU
+      </BuildPropertiesForProjects>
+      <BuildPropertiesForProjects Condition=" '$(Platform)' != 'Any CPU' ">
+        $(BuildProperties);
+      </BuildPropertiesForProjects>
+    </PropertyGroup>
+
     <MSBuild Projects="@(ProjectsToAnalyze)"
-             Properties="$(BuildProperties);Configuration=CodeContracts"
+             Properties="$(BuildPropertiesForProjects);Configuration=CodeContracts"
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
              StopOnFirstFailure="true">
@@ -91,16 +82,16 @@
   <Target Name="Clean">
     <Message Text="Cleaning..." Importance="High" />
 
-    <MSBuild Projects="@(ProjectsToBuild)"
+    <MSBuild Projects="@(SolutionsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Clean" />
 
-    <RemoveDir Directories="$(BuildDir)" />
+    <RemoveDir Directories="$(NarvaloBuildDir)" />
   </Target>
 
   <Target Name="Build">
-    <MSBuild Projects="@(ProjectsToBuild)"
+    <MSBuild Projects="@(SolutionsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
@@ -127,11 +118,11 @@
 
   <Target Name="BeforeAnalyze"
           BeforeTargets="Analyze"
-          DependsOnTargets="RestorePackages;CreateAnalysisOutDir" />
+          DependsOnTargets="RestorePackages;CreateAnalysisDir" />
 
   <Target Name="BeforeBuild"
           BeforeTargets="Build"
-          DependsOnTargets="RestorePackages;CreateAnalysisOutDir" />
+          DependsOnTargets="RestorePackages;CreateAnalysisDir" />
 
   <Target Name="AfterBuild"
           AfterTargets="Build"
@@ -144,8 +135,8 @@
     Création du répertoire contenant les rapports produits
     au cours de la compilation.
   -->
-  <Target Name="CreateAnalysisOutDir">
-    <MakeDir Directories="$(AnalysisOutDir)" Condition="!Exists($(AnalysisOutDir))" />
+  <Target Name="CreateAnalysisDir">
+    <MakeDir Directories="$(NarvaloAnalysisDir)" Condition="!Exists($(NarvaloAnalysisDir))" />
   </Target>
 
   <!-- ### NuGet ### -->
@@ -159,7 +150,7 @@
   <!-- ### PEVerify ### -->
 
   <PropertyGroup>
-    <PEVerifyOutFile>$(BuildDir).peverify</PEVerifyOutFile>
+    <PEVerifyOutFile>$(NarvaloBuildDir).peverify</PEVerifyOutFile>
   </PropertyGroup>
 
   <Target Name="PEVerify"
@@ -190,7 +181,7 @@
   <!-- ### xUnit ### -->
 
   <PropertyGroup>
-    <XunitXmlReport>$(AnalysisOutDir)xunit.xml</XunitXmlReport>
+    <XunitXmlReport>$(NarvaloAnalysisDir)xunit.xml</XunitXmlReport>
   </PropertyGroup>
 
   <ItemGroup>
@@ -200,7 +191,7 @@
   <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
 
   <Target Name="RunXunitTests"
-          DependsOnTargets="CreateAnalysisOutDir"
+          DependsOnTargets="CreateAnalysisDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitXmlReport)">
     <Message Text="Running Xunit tests." Importance="Low" />
