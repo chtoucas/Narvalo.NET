@@ -8,6 +8,9 @@
     <RootNamespace>Playground</RootNamespace>
     <AssemblyName>Playground</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup>
+    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="..\..\etc\Narvalo.props" />
   <PropertyGroup>
     <StartupObject>Playground.Program</StartupObject>

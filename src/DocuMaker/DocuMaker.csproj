@@ -24,6 +24,9 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
+  <PropertyGroup>
+    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="..\..\etc\Narvalo.props" />
   <PropertyGroup>
     <StartupObject>

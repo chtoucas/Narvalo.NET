@@ -8,6 +8,9 @@
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Junk</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup>
+    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="..\..\etc\Narvalo.props" />
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
@@ -79,12 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\tools\Narvalo.targets" />

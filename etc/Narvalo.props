@@ -4,13 +4,19 @@
     This MSBuild file enforces the use of a common set of Build properties.
     You can still override any of them but this should not be the default.
     
-    For sample projects create the following property before importing this file:
-      <PropertyGroup>
-        <NarvaloIsSampleProject>true<NarvaloIsSampleProject>
-      </PropertyGroup>
+    Public properties created in this file:
+    - NarvaloIsSampleProject
+    - NarvaloDisableSourceAnalysisOnBuild
+    - NarvaloCustomCodeAnalysisRuleSet
+    Public "read-only" properties created in this file:
+    - NarvaloConfigurationDirectory
+    - NarvaloSourceAnalysisEnabled
+    - NarvaloRunCodeAnalysis
+    - NarvaloCodeAnalysisRuleSet
     
     Each Visual Studio project should import this file: 
       <Import Project="..\..\etc\Narvalo.props" />
+    or
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\etc\Narvalo.props" />
   -->
 
@@ -18,14 +24,15 @@
     <NarvaloConfigurationDirectory>$(MSBuildThisFileDirectory)</NarvaloConfigurationDirectory>
   </PropertyGroup>
 
-  <!-- ### Narvalo Custom Project Properties ### -->
+  <!-- ### Narvalo Public Project Properties ### -->
 
   <PropertyGroup>
     <NarvaloIsSampleProject Condition=" '$(IsSampleProject)' == '' ">false</NarvaloIsSampleProject>
+    <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == '' ">false</NarvaloDisableSourceAnalysisOnBuild>
   </PropertyGroup>
 
 
-  <!-- ### Standard Project Properties ### -->
+  <!-- ### Standard Build Properties ### -->
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -85,14 +92,14 @@
   </PropertyGroup>
 
 
-  <!-- ### Included Files ### -->
+  <!-- ### Automatically Linked Files ### -->
 
   <ItemGroup>
     <CodeAnalysisDictionary Include="$(NarvaloConfigurationDirectory)CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <!-- 
-      I would like to always include the common assembly infos,
+      I would like to also include the file containing the common assembly infos,
       unfortunately, if done here, the file won't appear in VS. 
     -->
     <!--<Compile Include="$(NarvaloConfigurationDirectory)AssemblyInfo.Common.cs">
@@ -102,66 +109,80 @@
 
 
   <!-- ### Source Analysis ### -->
-
   <!-- For a complete list of available options, see tools\StyleCop.targets. -->
+
   <PropertyGroup>
     <!-- 
       Only in Release Build is Source Analysis automatically run.
       You can still perform manual Source Analysis for any Build configuration inside VS.
     -->
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</SourceAnalysisEnabled>
-
+    <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</NarvaloSourceAnalysisEnabled>
+    <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</NarvaloSourceAnalysisEnabled>
+    
+    <!-- If requested, we disable Source Analysis. -->
+    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(NarvaloConfigurationDirectory)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
 
   <!-- ### Code Analysis ### -->
-
   <!-- 
     For a complete list of available options, see 
       %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v12.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
   -->
+  
   <PropertyGroup>
     <!-- 
       Only in Release Build is Code Analysis automatically run.
       You can still perform manual Code Analysis for any Build configuration inside VS.
     -->
-    <RunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</RunCodeAnalysis>
-    <RunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</RunCodeAnalysis>
+    <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</NarvaloRunCodeAnalysis>
+    <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</NarvaloRunCodeAnalysis>
+    
+    <RunCodeAnalysis>$(NarvaloRunCodeAnalysis)</RunCodeAnalysis>
+  </PropertyGroup>
 
-    <!-- Process generated files (.g.cs). -->
-    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-
+  <PropertyGroup>
     <!--
       The default behaviour is to use a very strict ruleset. For performance reasons
       we use a less strict ruleset when using Code Contracts. Also Code Contracts
       produce assemblies that are not compatible with Code Analysis.
     -->
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</CodeAnalysisRuleSet>
-
+    <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
+    <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
     <!-- Sample projects use a custom ruleset. -->
-    <CodeAnalysisRuleSet Condition=" '$(NarvaloIsSampleProject)' == 'true' ">$(NarvaloConfigurationDirectory)Samples.ruleset</CodeAnalysisRuleSet>
-
+    <NarvaloCodeAnalysisRuleSet Condition=" '$(NarvaloIsSampleProject)' == 'true' ">$(NarvaloConfigurationDirectory)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
     <!-- 
       Test projects use a custom ruleset. We use the project type Guid
       to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
       Another way to do this here could be to use:
         Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
     -->
-    <CodeAnalysisRuleSet Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">$(NarvaloConfigurationDirectory)Tests.ruleset</CodeAnalysisRuleSet>
+    <NarvaloCodeAnalysisRuleSet Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">$(NarvaloConfigurationDirectory)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+    
+    <!-- If requested, use a custom Code Analysis ruleset. -->
+    <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' ">$(NarvaloCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' ">$(NarvaloCustomCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Process generated files (.g.cs). -->
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
 
 
   <!-- ### Code Contracts ### -->
-
   <!-- 
     For a complete list of available options, see 
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
   -->
+  
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
@@ -197,6 +218,8 @@
 
 
   <!-- ### Continuous Integration Overrides ### -->
+  
+  <!-- TODO: Use MSBuild injection. -->
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <!-- Background checking is not available in terminal. -->
@@ -219,28 +242,16 @@
 
 
   <!-- ### FIXME: Temporary Overrides ### -->
-
-  <!-- Code Analysis. -->
-  <PropertyGroup>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'DocuMaker' ">true</NarvaloUseTempCodeAnalysisRuleSet>
+  <!--<PropertyGroup>
     <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloUseTempCodeAnalysisRuleSet>
     <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Build' ">true</NarvaloUseTempCodeAnalysisRuleSet>
     <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Junk' ">true</NarvaloUseTempCodeAnalysisRuleSet>
     <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloUseTempCodeAnalysisRuleSet>
     <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Playground' ">true</NarvaloUseTempCodeAnalysisRuleSet>
 
-    <CodeAnalysisRuleSet Condition=" '$(NarvaloUseTempCodeAnalysisRuleSet)' == 'true' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <!-- Source Analysis. -->
-  <PropertyGroup>
     <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloTempDisabledSourceAnalysis>
     <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloTempDisabledSourceAnalysis>
-    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloTempDisabledSourceAnalysis>
     <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloTempDisabledSourceAnalysis>
-    
-    <SourceAnalysisEnabled Condition=" '$(NarvaloTempDisabledSourceAnalysis)' == 'true' ">false</SourceAnalysisEnabled>
-  </PropertyGroup>
+    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloTempDisabledSourceAnalysis>
+  </PropertyGroup>-->
 </Project>
