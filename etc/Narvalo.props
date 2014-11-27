@@ -54,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
 
+    <!-- REVIEW: Delay sign? -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(NarvaloConfigurationDirectory)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
@@ -118,12 +119,12 @@
     -->
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</NarvaloSourceAnalysisEnabled>
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</NarvaloSourceAnalysisEnabled>
-    
+
     <!-- If requested, we disable Source Analysis. -->
     <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
     <SourceAnalysisOverrideSettingsFile>$(NarvaloConfigurationDirectory)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
@@ -135,7 +136,7 @@
     For a complete list of available options, see 
       %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v12.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
   -->
-  
+
   <PropertyGroup>
     <!-- 
       Only in Release Build is Code Analysis automatically run.
@@ -143,7 +144,7 @@
     -->
     <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</NarvaloRunCodeAnalysis>
     <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</NarvaloRunCodeAnalysis>
-    
+
     <RunCodeAnalysis>$(NarvaloRunCodeAnalysis)</RunCodeAnalysis>
   </PropertyGroup>
 
@@ -164,7 +165,7 @@
         Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
     -->
     <NarvaloCodeAnalysisRuleSet Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">$(NarvaloConfigurationDirectory)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
-    
+
     <!-- If requested, use a custom Code Analysis ruleset. -->
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' ">$(NarvaloCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' ">$(NarvaloCustomCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
@@ -182,7 +183,7 @@
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
   -->
-  
+
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
@@ -218,12 +219,15 @@
 
 
   <!-- ### Continuous Integration Overrides ### -->
-  
-  <!-- TODO: Use MSBuild injection. -->
+
+  <!-- TODO: Use MSBuild injection? -->
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <!-- Background checking is not available in terminal. -->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+
+    <!-- Force T4 regeneration. -->
+    <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
 
   <!-- When called from Narvalo.proj, reports are saved in a custom location. -->

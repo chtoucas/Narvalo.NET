@@ -9,6 +9,8 @@
     <NarvaloToolsDirectory>$(MSBuildThisFileDirectory)</NarvaloToolsDirectory>
   </PropertyGroup>
 
+  <!-- TODO: T4 regeneration. -->
+  <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
   <Import Project="$(NarvaloToolsDirectory)StyleCop.targets" />
 
   <PropertyGroup>

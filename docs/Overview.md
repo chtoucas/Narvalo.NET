@@ -13,6 +13,8 @@ Optional components:
   inside Visual Studio.
 - [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
 - Code Contracts extension for Visual Studio
+- [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758)
+  Useful for T4 integration in MSBuild.
 
 
 Project Layout
