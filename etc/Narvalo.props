@@ -3,7 +3,7 @@
   <!--
     This MSBuild file enforces the use of a common set of Build properties.
     You can still override any of them but this should not be the default.
-    
+
     Public properties created in this file:
     - NarvaloIsSampleProject
     - NarvaloDisableSourceAnalysisOnBuild
@@ -13,8 +13,8 @@
     - NarvaloSourceAnalysisEnabled
     - NarvaloRunCodeAnalysis
     - NarvaloCodeAnalysisRuleSet
-    
-    Each Visual Studio project should import this file: 
+
+    Each Visual Studio project should import this file:
       <Import Project="..\..\etc\Narvalo.props" />
     or
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\etc\Narvalo.props" />
@@ -99,9 +99,9 @@
     <CodeAnalysisDictionary Include="$(NarvaloConfigurationDirectory)CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <!-- 
+    <!--
       I would like to also include the file containing the common assembly infos,
-      unfortunately, if done here, the file won't appear in VS. 
+      unfortunately, if done here, the file won't appear in VS.
     -->
     <!--<Compile Include="$(NarvaloConfigurationDirectory)AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
@@ -113,7 +113,7 @@
   <!-- For a complete list of available options, see tools\StyleCop.targets. -->
 
   <PropertyGroup>
-    <!-- 
+    <!--
       Only in Release Build is Source Analysis automatically run.
       You can still perform manual Source Analysis for any Build configuration inside VS.
     -->
@@ -121,8 +121,8 @@
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</NarvaloSourceAnalysisEnabled>
 
     <!-- If requested, we disable Source Analysis. -->
-    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</SourceAnalysisEnabled>
-    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' ">false</SourceAnalysisEnabled>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -132,13 +132,13 @@
 
 
   <!-- ### Code Analysis ### -->
-  <!-- 
-    For a complete list of available options, see 
+  <!--
+    For a complete list of available options, see
       %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v12.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
   -->
 
   <PropertyGroup>
-    <!-- 
+    <!--
       Only in Release Build is Code Analysis automatically run.
       You can still perform manual Code Analysis for any Build configuration inside VS.
     -->
@@ -158,7 +158,7 @@
     <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
     <!-- Sample projects use a custom ruleset. -->
     <NarvaloCodeAnalysisRuleSet Condition=" '$(NarvaloIsSampleProject)' == 'true' ">$(NarvaloConfigurationDirectory)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
-    <!-- 
+    <!--
       Test projects use a custom ruleset. We use the project type Guid
       to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
       Another way to do this here could be to use:
@@ -178,8 +178,8 @@
 
 
   <!-- ### Code Contracts ### -->
-  <!-- 
-    For a complete list of available options, see 
+  <!--
+    For a complete list of available options, see
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
   -->
@@ -235,27 +235,12 @@
     <SourceAnalysisOutputFile>$(AnalysisOutDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
     <CodeAnalysisLogFile>$(AnalysisOutDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <!-- 
+    <!--
       We don't want the "succeed" file to be written to the custom location.
-      Doesn't seem to be understood by MSBuild. As a workaround, 
+      Doesn't seem to be understood by MSBuild. As a workaround,
       we simply disable the creation of the success file.
     -->
     <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
   </PropertyGroup>
-
-
-  <!-- ### FIXME: Temporary Overrides ### -->
-  <!--<PropertyGroup>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Build' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-    <NarvaloUseTempCodeAnalysisRuleSet Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloUseTempCodeAnalysisRuleSet>
-
-    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'MvpWebForms' ">true</NarvaloTempDisabledSourceAnalysis>
-    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Ghostscript' ">true</NarvaloTempDisabledSourceAnalysis>
-    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Mvp.Facts' ">true</NarvaloTempDisabledSourceAnalysis>
-    <NarvaloTempDisabledSourceAnalysis Condition=" '$(AssemblyName)' == 'Narvalo.Reliability' ">true</NarvaloTempDisabledSourceAnalysis>
-  </PropertyGroup>-->
 </Project>

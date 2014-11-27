@@ -5,13 +5,10 @@
       <Import Project="..\..\tools\Narvalo.Common.targets" />
   -->
 
-  <PropertyGroup>
-    <NarvaloToolsDirectory>$(MSBuildThisFileDirectory)</NarvaloToolsDirectory>
-  </PropertyGroup>
-
   <!-- TODO: T4 regeneration. -->
   <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
-  <Import Project="$(NarvaloToolsDirectory)StyleCop.targets" />
+
+  <Import Project=".\StyleCop.targets" />
 
   <PropertyGroup>
     <BeforeBuildDependsOnTargets>
@@ -21,8 +18,8 @@
   </PropertyGroup>
 
   <!-- ### Microsoft Build Hooks ### -->
-  <!-- 
-    To modify the build process, use one of the extension points defined 
+  <!--
+    To modify the build process, use one of the extension points defined
     inside Microsoft.Common.targets.
     See http://msdn.microsoft.com/en-us/library/ms366724.aspx
   -->
@@ -30,18 +27,18 @@
   <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOnTargets)" />
 
   <!-- ### Source Analysis Targets ### -->
-  <!-- 
+  <!--
     Below, use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
     property set after importing StyleCop.targets.
   -->
 
   <Target Name="ValidateSourceAnalysisSettings">
-    <Warning Text="As explicitly requested, Source Analysis has been disabled on $(ProjectName)"
+    <Warning Text="On user request, Source Analysis has been disabled on $(ProjectName)"
              Condition=" '$(NarvaloSourceAnalysisEnabled)' == 'true' And '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' "
              ContinueOnError="true" />
-    
+
     <Error Text="Unexpectedly, the value of 'StyleCopEnabled' has been overriden for $(ProjectName): '$(StyleCopEnabled)' instead '$(NarvaloSourceAnalysisEnabled)'"
-             Condition=" '$(StyleCopEnabled)' != '$(NarvaloSourceAnalysisEnabled)' "
+             Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' And '$(StyleCopEnabled)' != '$(NarvaloSourceAnalysisEnabled)' "
              ContinueOnError="false" />
   </Target>
 
@@ -61,10 +58,10 @@
   <!-- ### Code Analysis Targets ### -->
 
   <Target Name="ValidateCodeAnalysisSettings">
-    <Warning Text="As explicitly requested, $(ProjectName) does not use the default Code Analysis ruleset: '$(NarvaloCustomCodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
+    <Warning Text="On user request, $(ProjectName) does not use the default Code Analysis ruleset: '$(NarvaloCustomCodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
              Condition=" '$(NarvaloRunCodeAnalysis)' == 'true' And '$(NarvaloCustomCodeAnalysisRuleSet)' != '' "
              ContinueOnError="true" />
-    
+
     <Error Text="Unexpectedly, the value of 'RunCodeAnalysis' has been overriden for $(ProjectName): '$(RunCodeAnalysis)' instead of '$(NarvaloRunCodeAnalysis)'"
              Condition=" '$(RunCodeAnalysis)' != '$(NarvaloRunCodeAnalysis)' "
              ContinueOnError="false" />
@@ -76,7 +73,7 @@
              ContinueOnError="false" />
   </Target>
 
-  <!-- 
+  <!--
     I wanted to replace the FxCop default messages to include the project name
     but the provided MSBuild targets make it difficult to hook inside the process.
   -->
@@ -106,7 +103,7 @@
     <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="High" />
   </Target>
 
-  <!-- 
+  <!--
     Use "CreateCodeContractReferenceAssembly" not "CodeContractReferenceAssembly",
     since CodeContractReferenceAssembly depends on it. Otherwise, the message
     will appear too late.
