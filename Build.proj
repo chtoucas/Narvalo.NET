@@ -4,6 +4,17 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <!--
+    Sample uses:
+    - Build all projects:
+        MSBuild Build.proj
+    - Build all projects, be verbose:
+        MSBuild Build.proj /p:Verbose:true
+    - Build all projects and create NuGet packages:
+        MSBuild Build.proj /t:Package
+    - Build NuGet packages and only the necessary projects:
+        MSBuild Build.proj /t:Package /p:Production=true
+
+    TODO: Versioning.
     TODO: Create NuGet packages.
     TODO: Message Importance.
   -->
@@ -11,7 +22,7 @@
   <!-- ### Public Properties ### -->
 
   <PropertyGroup>
-    <ContinuousBuild Condition=" '$(ContinuousBuild)' == '' ">true</ContinuousBuild>
+    <Production Condition=" '$(Production)' == '' ">false</Production>
     <Verbose Condition=" '$(Verbose)' == '' ">false</Verbose>
 
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
@@ -25,21 +36,21 @@
   <!-- ### Project Setup ### -->
 
   <PropertyGroup>
-    <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <!-- Directory where all compilation results should go. -->
-    <BuildDir>$(SolutionDir)_build\</BuildDir>
+    <BuildRoot>$(RepositoryRoot)_build\</BuildRoot>
     <!-- Directory where all reports should go. -->
-    <AnalysisDir>$(BuildDir)reports\</AnalysisDir>
+    <AnalysisDir>$(BuildRoot)reports\</AnalysisDir>
     <!-- Directory where all packages should go. -->
-    <PackagesDir>$(BuildDir)packages\</PackagesDir>
+    <PackagesDir>$(BuildRoot)packages\</PackagesDir>
     <!-- Path to NuGet exec. -->
-    <NuGetCommand>&quot;$(SolutionDir)tools\NuGet\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand>&quot;$(RepositoryRoot)tools\NuGet\nuget.exe&quot;</NuGetCommand>
   </PropertyGroup>
 
   <Choose>
-    <When Condition=" '$(ContinuousBuild)' == 'true' ">
+    <When Condition=" '$(Production)' == 'false' ">
       <ItemGroup>
-        <ProjectsToBuild Include="$(SolutionDir)Narvalo.sln"></ProjectsToBuild>
+        <ProjectsToBuild Include="$(RepositoryRoot)Narvalo.sln"></ProjectsToBuild>
       </ItemGroup>
       <PropertyGroup>
         <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU... -->
@@ -48,22 +59,22 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />-->
-        <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />-->
-        <!--<ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
 
   <PropertyGroup>
-    <OutDir>$(BuildDir)bin\$(Configuration)\</OutDir>
+    <OutDir>$(BuildRoot)bin\$(Configuration)\</OutDir>
 
     <!--
       Attempt to completely separate our build environment and the one used by VS.
 
       REVIEW: Is OutputPath really useful here?
-      REVIEW: Should I add SolutionDir?
+      REVIEW: Should I add SolutionDir=$(RepositoryRoot)
 
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of $(OutDir). To correct this, we instruct MSBuild to
@@ -96,7 +107,7 @@
         Configuration=$(Configuration);
         Platform=$(Platform);
         BuildInParallel=$(BuildInParallel);
-        BaseIntermediateOutputPath=$(BuildDir)obj\;
+        BaseIntermediateOutputPath=$(BuildRoot)obj\;
         OutDir=$(OutDir);
         OutputPath=$(OutDir);
         GenerateProjectSpecificOutputFolder=false;
@@ -158,13 +169,13 @@
   <Target Name="Clean">
     <Message Text="Cleaning..." Importance="High" />
 
-    <RemoveDir Directories="$(BuildDir)" />
+    <RemoveDir Directories="$(BuildRoot)" />
   </Target>
 
   <Target Name="RestorePackages">
     <Message Text="Restoring NuGet packages..." Importance="High" />
 
-    <Exec Command="$(NuGetCommand) restore &quot;$(SolutionDir)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
+    <Exec Command="$(NuGetCommand) restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
   </Target>
 
   <Target Name="Build" DependsOnTargets="RestorePackages;_CreateAnalysisDir">
@@ -247,12 +258,12 @@
   <!-- ### PEVerify ### -->
 
   <PropertyGroup>
-    <PEVerifySentinel>$(BuildDir).peverify</PEVerifySentinel>
+    <PEVerifyDummySentinel>$(BuildRoot)peverify.txt</PEVerifyDummySentinel>
   </PropertyGroup>
 
   <Target Name="PEVerify"
           Inputs="@(BuildOutputs)"
-          Outputs="$(PEVerifySentinel)">
+          Outputs="$(PEVerifyDummySentinel)">
     <Message Text="Verifying assemblies with PEVerify..." Importance="Normal" />
 
     <GetFrameworkSdkPath>
@@ -271,14 +282,14 @@
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
-    <Touch Files="$(PEVerifySentinel)" AlwaysCreate="true" />
+    <Touch Files="$(PEVerifyDummySentinel)" AlwaysCreate="true" />
   </Target>
 
 
   <!-- ### Tests ### -->
 
   <ItemGroup>
-    <XunitAssemblyFile Include="$(SolutionDir)packages\**\xunit.runner.msbuild.dll" />
+    <XunitAssemblyFile Include="$(RepositoryRoot)packages\**\xunit.runner.msbuild.dll" />
   </ItemGroup>
 
   <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />

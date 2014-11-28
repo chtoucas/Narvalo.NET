@@ -2,8 +2,8 @@ TODO
 ====
 
 In Progress
------------          
-    
+-----------
+
 - Rework MSBuild to use a common set of settings for all projects.
   Import common target at start of projects.
 - Get rid off Narvalo.Junk.
@@ -19,13 +19,11 @@ In General
 
 ### Medium Priority
 
-- NuGet publication script (use Fake or PSake). Maybe create a new
-  solution: Narvalo (NuGet).sln.
+- NuGet publication script (use Fake or PSake).
 - Rework assembly versioning.
 - Write assembly descriptions.
 - Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
 - Review all GetHashCode() methods.
-- Check that we always use Error for CA/SA/CC.
 - Re-enable Gendarme.
 
 ### Low Priority
@@ -49,10 +47,10 @@ Narvalo (Core)
 --------------
 
 ### High Priority
-                      
+
 - Enforce, why can't I use ContractAbbreviator? The method get erased.
-  The current workaround makes the API too different.   
-- Require.Condition, Require.RangeCondition. CCCheck fails on these.   
+  The current workaround makes the API too different.
+- Require.Condition, Require.RangeCondition. CCCheck fails on these.
 - Check all use of AssumeNotNull.
 - Remove Tracer?
 - Validate(?) the usefulness of ExceptionFactory. Move to ThrowHelper?
