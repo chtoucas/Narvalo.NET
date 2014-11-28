@@ -35,5 +35,6 @@
 @goto end
 
 :End
+@echo.
 @popd
 @endlocal

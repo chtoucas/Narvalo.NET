@@ -3,95 +3,172 @@
          DefaultTargets="Build"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <!-- ### Build Configuration ### -->
+  <!--
+    TODO: Create NuGet packages.
+    TODO: Message Importance.
+  -->
+
+  <!-- ### Public Properties ### -->
 
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildThisFileDirectory)</SolutionDir>
+    <ContinuousBuild Condition=" '$(ContinuousBuild)' == '' ">true</ContinuousBuild>
+    <Verbose Condition=" '$(Verbose)' == '' ">false</Verbose>
 
-    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-    <!-- WARNING: Projects use "AnyCPU", but solutions use "Any CPU". -->
-    <Platform Condition="'$(Platform)' == ''">Any CPU</Platform>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
-    <!-- Enable Parallel Build? -->
-    <BuildInParallel Condition="'$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1">true</BuildInParallel>
-    <BuildInParallel Condition="'$(BuildInParallel)' == ''">false</BuildInParallel>
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
   </PropertyGroup>
 
+
+  <!-- ### Project Setup ### -->
+
   <PropertyGroup>
+    <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
     <!-- Directory where all compilation results should go. -->
-    <NarvaloBuildDir>$(SolutionDir)_build\</NarvaloBuildDir>
+    <BuildDir>$(SolutionDir)_build\</BuildDir>
     <!-- Directory where all reports should go. -->
-    <NarvaloAnalysisDir>$(NarvaloBuildDir)reports\</NarvaloAnalysisDir>
+    <AnalysisDir>$(BuildDir)reports\</AnalysisDir>
+    <!-- Directory where all packages should go. -->
+    <PackagesDir>$(BuildDir)packages\</PackagesDir>
+    <!-- Path to NuGet exec. -->
+    <NuGetCommand>&quot;$(SolutionDir)tools\NuGet\nuget.exe&quot;</NuGetCommand>
   </PropertyGroup>
 
-  <!-- Attempt to completely isolate our build environment from VS. -->
+  <Choose>
+    <When Condition=" '$(ContinuousBuild)' == 'true' ">
+      <ItemGroup>
+        <ProjectsToBuild Include="$(SolutionDir)Narvalo.sln"></ProjectsToBuild>
+      </ItemGroup>
+      <PropertyGroup>
+        <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU... -->
+        <Platform Condition=" '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <!--<ProjectsToBuild Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />-->
+        <!--<ProjectsToBuild Include="$(SolutionDir)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
   <PropertyGroup>
+    <OutDir>$(BuildDir)bin\$(Configuration)\</OutDir>
+
     <!--
-      FIXME: Narvalo.Core output does not go into "_build\bin\Release"
-      but in "_build\bin\Release\Narvalo.Core".
+      Attempt to completely separate our build environment and the one used by VS.
+
+      REVIEW: Is OutputPath really useful here?
+      REVIEW: Should I add SolutionDir?
+
+      WARNING: When building a PCL project, MSBuild places its output inside
+      a subdirectory of $(OutDir). To correct this, we instruct MSBuild to
+      use the standard behaviour: $(GenerateProjectSpecificOutputFolder) = false.
+
+      Here is the documentation directly taken from:
+        %ProgramFiles(x86)%\MSBuild\12.0\Bin\Microsoft.Common.CurrentVersion.targets
+
+      Several properties must be set in the main project file, before using this .TARGETS file.
+      However, if the properties are not set, we pick some defaults.
+
+      OutDir:
+      Indicates the final output location for the project or solution. When building a solution,
+      OutDir can be used to gather multiple project outputs in one location. In addition,
+      OutDir is included in AssemblySearchPaths used for resolving references.
+
+      OutputPath:
+      This property is usually specified in the project file and is used to initialize OutDir.
+      OutDir and OutputPath are distinguished for legacy reasons, and OutDir should be used if at all possible.
+
+      BaseIntermediateOutputPath:
+      This is the top level folder where all configuration specific intermediate output folders will be created.
+      Default value is obj\
+
+      IntermediateOutputPath:
+      This is the full intermediate Output Path, and is derived from BaseIntermediateOutputPath, if none specified
+      (eg. obj\debug). If this property is overridden, then setting BaseIntermediateOutputPath has no effect.
     -->
-    <BuildProperties>
-      Platform=$(Platform);
-      Configuration=$(Configuration);
-      <!--
-        According to Microsoft.Common.targets, we must use "OutDir" instead of "OutputPath".
-      -->
-      OutDir=$(NarvaloBuildDir)bin\$(Configuration)\;
-      OutputPath=$(NarvaloBuildDir)bin\$(Configuration)\;<!-- REVIEW: Is this useful???-->
-      BaseIntermediateOutputPath=$(NarvaloBuildDir)obj\;
-      BuildInParallel=$(BuildInParallel);
-      NarvaloAnalysisDir=$(NarvaloAnalysisDir)
-    </BuildProperties>
+      <BuildProperties>
+        Configuration=$(Configuration);
+        Platform=$(Platform);
+        BuildInParallel=$(BuildInParallel);
+        BaseIntermediateOutputPath=$(BuildDir)obj\;
+        OutDir=$(OutDir);
+        OutputPath=$(OutDir);
+        GenerateProjectSpecificOutputFolder=false;
+        NarvaloAnalysisDir=$(AnalysisDir);
+        NarvaloVerbose=$(Verbose)
+      </BuildProperties>
   </PropertyGroup>
 
-  <!-- TODO: Use Narvalo.sln? -->
   <ItemGroup>
-    <SolutionsToBuild Include="$(SolutionDir)Narvalo.sln" />
+    <!--<Packages Include="Narvalo.Build">
+      <Build>
+        $(OutDir)Narvalo.Build.tasks
+      </Build>
+      <Tools>
+        $(OutDir)Narvalo.Build.dll;
+        $(OutDir)Narvalo.Build.pdb
+      </Tools>
+    </Packages>-->
+    <Packages Include="Narvalo.Core">
+      <Lib>
+        $(OutDir)Narvalo.Core.dll;
+        $(OutDir)Narvalo.Core.pdb;
+        $(OutDir)Narvalo.Core.xml;
+        $(OutDir)CodeContracts\Narvalo.Core.Contracts.dll;
+        $(OutDir)CodeContracts\Narvalo.Core.Contracts.pdb
+      </Lib>
+    </Packages>
+    <!--<Packages Include="Narvalo.Common">
+      <Lib>
+        $(OutDir)Narvalo.Common.dll;
+        $(OutDir)Narvalo.Common.pdb;
+        $(OutDir)Narvalo.Common.Contracts.dll
+      </Lib>
+    </Packages>
+    <Packages Include="Narvalo.Mvp">
+      <Lib>
+        $(OutDir)Narvalo.Mvp.dll;
+        $(OutDir)Narvalo.Mvp.pdb
+      </Lib>
+    </Packages>
+    <Packages Include="Narvalo.Mvp.Web">
+      <Lib>
+        $(OutDir)Narvalo.Mvp.Web.dll;
+        $(OutDir)Narvalo.Mvp.Web.pdb
+      </Lib>
+    </Packages>
+    <Packages Include="Narvalo.Web">
+      <Lib>
+        $(OutDir)Narvalo.Web.dll;
+        $(OutDir)Narvalo.Web.pdb;
+        $(OutDir)Narvalo.Web.Contracts.dll
+      </Lib>
+    </Packages>-->
   </ItemGroup>
 
-  <ItemGroup>
-    <!--<ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Common\Narvalo.Common.csproj" />-->
-    <ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <!--<ProjectsToAnalyze Include="$(SolutionDir)src\Narvalo.Web\Narvalo.Web.csproj" />-->
-  </ItemGroup>
 
-
-  <!-- ### Core Targets ### -->
-
-  <!-- TODO: Remove this and use the solution. -->
-  <Target Name="Analyze">
-    <!-- WARNING: Projects use "AnyCPU", but solutions use "Any CPU". -->
-    <PropertyGroup>
-      <BuildPropertiesForProjects Condition=" '$(Platform)' == 'Any CPU' ">
-        $(BuildProperties);
-        Platform=AnyCPU
-      </BuildPropertiesForProjects>
-      <BuildPropertiesForProjects Condition=" '$(Platform)' != 'Any CPU' ">
-        $(BuildProperties);
-      </BuildPropertiesForProjects>
-    </PropertyGroup>
-
-    <MSBuild Projects="@(ProjectsToAnalyze)"
-             Properties="$(BuildPropertiesForProjects);Configuration=CodeContracts"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Build"
-             StopOnFirstFailure="true">
-    </MSBuild>
-  </Target>
+  <!-- ### Public Targets ### -->
 
   <Target Name="Clean">
     <Message Text="Cleaning..." Importance="High" />
 
-    <MSBuild Projects="@(SolutionsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Clean" />
-
-    <RemoveDir Directories="$(NarvaloBuildDir)" />
+    <RemoveDir Directories="$(BuildDir)" />
   </Target>
 
-  <Target Name="Build">
-    <MSBuild Projects="@(SolutionsToBuild)"
+  <Target Name="RestorePackages">
+    <Message Text="Restoring NuGet packages..." Importance="High" />
+
+    <Exec Command="$(NuGetCommand) restore &quot;$(SolutionDir)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="RestorePackages;_CreateAnalysisDir">
+    <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Build"
@@ -100,9 +177,31 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Rebuild" DependsOnTargets="BeforeRebuild;Clean;Build" />
+  <Target Name="Package" DependsOnTargets="Clean;Build;CorePackage" />
 
-  <Target Name="BeforeRebuild">
+  <Target Name="Rebuild" DependsOnTargets="_BeforeRebuild;Clean;Build" />
+
+
+  <!-- ### Hooks ### -->
+
+  <Target Name="_AfterBuild"
+          AfterTargets="Build"
+          DependsOnTargets="PEVerify;RunTests" />
+
+
+  <!-- ### Utilities ### -->
+
+  <Target Name="_CreateAnalysisDir">
+    <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
+    <MakeDir Directories="$(AnalysisDir)" Condition="!Exists($(AnalysisDir))" />
+  </Target>
+
+  <Target Name="_CreatePackagesDir">
+    <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
+    <MakeDir Directories="$(PackagesDir)" Condition="!Exists($(PackagesDir))" />
+  </Target>
+
+  <Target Name="_BeforeRebuild">
     <!--
       StyleCop treats differently the "Build" and "Rebuild" targets.
       We correct this by adding "SourceAnalysisForceFullAnalysis" to the
@@ -116,47 +215,45 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="BeforeAnalyze"
-          BeforeTargets="Analyze"
-          DependsOnTargets="RestorePackages;CreateAnalysisDir" />
 
-  <Target Name="BeforeBuild"
-          BeforeTargets="Build"
-          DependsOnTargets="RestorePackages;CreateAnalysisDir" />
+  <!-- ### Nuget ### -->
 
-  <Target Name="AfterBuild"
-          AfterTargets="Build"
-          DependsOnTargets="PEVerify;RunXunitTests" />
+  <Target Name="CorePackage"
+          DependsOnTargets="_CreatePackagesDir"
+          Outputs="%(Packages.Identity)">
+    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="High" />
 
+    <PropertyGroup>
+      <_PackageDir>$(PackagesDir)%(Packages.Identity)\</_PackageDir>
+      <_PackageSpec>$(_PackageDir)%(Packages.Identity).nuspec</_PackageSpec>
+    </PropertyGroup>
 
-  <!-- ### Utilities ### -->
+    <!--<MakeDir Directories="$(_PackageDir)build" Condition=" '%(_Packages.Build)' != '' " />
+    <Copy SourceFiles="%(_Packages.Build)" DestinationFolder="$(_PackageDir)build" />
+    <MakeDir Directories="$(_PackageDir)lib" Condition=" '%(_Packages.Lib)' != '' " />
+    <Copy SourceFiles="%(_Packages.Libs)" DestinationFolder="$(_PackageDir)lib" />
+    <MakeDir Directories="$(_PackageDir)tools" Condition=" '%(_Packages.Tools)' != '' " />
+    <Copy SourceFiles="%(_Packages.Tools)" DestinationFolder="$(_PackageDir)tools" />
 
-  <!--
-    Création du répertoire contenant les rapports produits
-    au cours de la compilation.
-  -->
-  <Target Name="CreateAnalysisDir">
-    <MakeDir Directories="$(NarvaloAnalysisDir)" Condition="!Exists($(NarvaloAnalysisDir))" />
+    <CreatePackageSpec
+      TemplateFile="$(_EtcDir)%(Packages.Identity).nuspec"
+      VersionNumber="$(_VersionNumber)"
+      SpecFile="$(_PackageSpec)" />
+
+    <Exec Command="$(NuGetCommand) pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />-->
   </Target>
 
-  <!-- ### NuGet ### -->
-
-  <Target Name="RestorePackages">
-    <Message Text="Restoring NuGet packages..." Importance="High" />
-
-    <Exec Command='"$(SolutionDir)tools\NuGet\nuget.exe" restore "$(SolutionDir)Narvalo (Core).sln" -NonInteractive -Verbosity quiet ' />
-  </Target>
 
   <!-- ### PEVerify ### -->
 
   <PropertyGroup>
-    <PEVerifyOutFile>$(NarvaloBuildDir).peverify</PEVerifyOutFile>
+    <PEVerifySentinel>$(BuildDir).peverify</PEVerifySentinel>
   </PropertyGroup>
 
   <Target Name="PEVerify"
           Inputs="@(BuildOutputs)"
-          Outputs="$(PEVerifyOutFile)">
-    <Message Text="Verifying assemblies with PEVerify." Importance="Low" />
+          Outputs="$(PEVerifySentinel)">
+    <Message Text="Verifying assemblies with PEVerify..." Importance="Normal" />
 
     <GetFrameworkSdkPath>
       <!-- Path to default version of the .NET SDK. -->
@@ -167,22 +264,18 @@
 
     <PropertyGroup>
       <!-- We use a specific version. -->
-      <_PEVerifyExe>&quot;$(_SdkVersion40Path)Bin\NETFX 4.5.1 Tools\peverify.exe&quot;</_PEVerifyExe>
+      <_PEVerifyCommand>&quot;$(_SdkVersion40Path)Bin\NETFX 4.5.1 Tools\peverify.exe&quot;</_PEVerifyCommand>
     </PropertyGroup>
 
-    <Exec Command="$(_PEVerifyExe) &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+    <Exec Command="$(_PEVerifyCommand) &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
-    <Touch Files="$(PEVerifyOutFile)" AlwaysCreate="true" />
+    <Touch Files="$(PEVerifySentinel)" AlwaysCreate="true" />
   </Target>
 
 
-  <!-- ### xUnit ### -->
-
-  <PropertyGroup>
-    <XunitXmlReport>$(NarvaloAnalysisDir)xunit.xml</XunitXmlReport>
-  </PropertyGroup>
+  <!-- ### Tests ### -->
 
   <ItemGroup>
     <XunitAssemblyFile Include="$(SolutionDir)packages\**\xunit.runner.msbuild.dll" />
@@ -190,20 +283,23 @@
 
   <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
 
-  <Target Name="RunXunitTests"
-          DependsOnTargets="CreateAnalysisDir"
+  <PropertyGroup>
+    <XunitXmlReport>$(AnalysisDir)xunit.xml</XunitXmlReport>
+  </PropertyGroup>
+
+  <Target Name="RunTests"
+          DependsOnTargets="_CreateAnalysisDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitXmlReport)">
-    <Message Text="Running Xunit tests." Importance="Low" />
+    <Message Text="Running Xunit tests..." Importance="Normal" />
 
     <ItemGroup>
       <_TestAssemblies Include="%(BuildOutputs.Identity)"
-                       Condition="'@(BuildOutputs->EndsWith('Facts.dll'))' == 'true'" />
+                       Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)"
            Xml="$(XunitXmlReport)"
-           Condition="'@(_TestAssemblies)' != ''" />
+           Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
-
 </Project>

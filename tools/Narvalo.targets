@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
+    This MSBuild file defines the use of a common set of Build properties.
+    
+    Read-Only Properties:
+    - NarvaloMessageImportance
+    
     Each Visual Studio project should import this file.
       <Import Project="..\..\tools\Narvalo.Common.targets" />
+      
+    TODO: 
+    - Remove .xml.old created by Code Contracts.
+    - Enable T4 re-generation on Build.
+    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.
   -->
 
-  <!-- TODO: Remove .xml.old -->
-
-  <!-- TODO: T4 regeneration. -->
   <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
-
   <Import Project=".\StyleCop.targets" />
 
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-    <HighMessageLevel>High</HighMessageLevel>
-    <LowMessageLevel>Normal</LowMessageLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-    <HighMessageLevel>Normal</HighMessageLevel>
-    <LowMessageLevel>Low</LowMessageLevel>
+  <PropertyGroup>
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">High</NarvaloMessageImportance>
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">Normal</NarvaloMessageImportance>
   </PropertyGroup>
 
-    <PropertyGroup>
+  <PropertyGroup>
     <BeforeBuildDependsOnTargets>
       ValidateSourceAnalysisSettings;
       ValidateCodeAnalysisSettings
     </BeforeBuildDependsOnTargets>
   </PropertyGroup>
 
-  <!-- ### Microsoft Build Hooks ### -->
+  
+  <!-- ### Microsoft Build Targets ### -->
   <!--
     To modify the build process, use one of the extension points defined
     inside Microsoft.Common.targets.
@@ -36,6 +39,7 @@
   -->
 
   <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOnTargets)" />
+
 
   <!-- ### Source Analysis Targets ### -->
   <!--
@@ -56,15 +60,16 @@
   <Target Name="BeforeSourceAnalysis"
           BeforeTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="$(LowMessageLevel)" />
+    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
   </Target>
 
   <Target Name="AfterSourceAnalysis"
           AfterTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
     <Message Text="Source Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
-             Importance="$(HighMessageLevel)" />
+             Importance="$(NarvaloMessageImportance)" />
   </Target>
+
 
   <!-- ### Code Analysis Targets ### -->
 
@@ -91,43 +96,44 @@
   <!--<Target Name="BeforeCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="$(LowMessageLevel)" />
+    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
   </Target>
 
   <Target Name="AfterCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="$(HighMessageLevel)" />
+    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
   </Target>-->
+
 
   <!-- ### Code Contracts Targets ### -->
 
   <Target Name="BeforeCodeContractsDocumentation"
         BeforeTargets="ContractXmlDocumentation"
         Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="$(LowMessageLevel)" />
+    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
   </Target>
 
   <Target Name="AfterCodeContractsDocumentation"
           AfterTargets="ContractXmlDocumentation"
           Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="$(HighMessageLevel)" />
+    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="$(NarvaloMessageImportance)" />
   </Target>
 
   <!--
     Use "CreateCodeContractReferenceAssembly" not "CodeContractReferenceAssembly",
-    since CodeContractReferenceAssembly depends on it. Otherwise, the message
+    since "CodeContractReferenceAssembly" depends on it. Otherwise, the message
     will appear too late.
   -->
   <Target Name="BeforeCodeContractsReferenceAssembly"
         BeforeTargets="CreateCodeContractReferenceAssembly"
         Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="$(LowMessageLevel)" />
+    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
   </Target>
 
   <Target Name="AfterCodeContractsReferenceAssembly"
           AfterTargets="CodeContractReferenceAssembly"
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="$(HighMessageLevel)" />
+    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="$(NarvaloMessageImportance)" />
   </Target>
 </Project>

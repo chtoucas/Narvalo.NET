@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This MSBuild file enforces the use of a common set of Build properties.
+    This MSBuild file enforces the use of a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
-    Public properties created in this file:
-    - NarvaloIsSampleProject
-    - NarvaloDisableSourceAnalysisOnBuild
+    Read-Write Properties:
     - NarvaloCustomCodeAnalysisRuleSet
-    Public "read-only" properties created in this file:
-    - NarvaloConfigurationDirectory
-    - NarvaloSourceAnalysisEnabled
-    - NarvaloRunCodeAnalysis
+    - NarvaloDisableSourceAnalysisOnBuild
+    - NarvaloIsSampleProject
+    - NarvaloVerbose
+    
+    Read-Only Properties:
     - NarvaloCodeAnalysisRuleSet
+    - NarvaloConfigurationDirectory
+    - NarvaloIsTestProject
+    - NarvaloRunCodeAnalysis
+    - NarvaloSourceAnalysisEnabled
 
     Each Visual Studio project should import this file:
       <Import Project="..\..\etc\Narvalo.props" />
@@ -20,19 +23,39 @@
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\etc\Narvalo.props" />
   -->
 
-  <PropertyGroup>
-    <NarvaloConfigurationDirectory>$(MSBuildThisFileDirectory)</NarvaloConfigurationDirectory>
-  </PropertyGroup>
-
-  <!-- ### Narvalo Public Project Properties ### -->
+  <!-- ### Narvalo Properties ### -->
 
   <PropertyGroup>
-    <NarvaloIsSampleProject Condition=" '$(IsSampleProject)' == '' ">false</NarvaloIsSampleProject>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == '' ">false</NarvaloDisableSourceAnalysisOnBuild>
+    <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' == '' ">false</NarvaloIsSampleProject>
+    <NarvaloVerbose Condition=" '$(NarvaloVerbose)' == '' ">true</NarvaloVerbose>
+
+    <!-- Default values. This is not really necessary but we never know. -->
+    <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
+    <NarvaloConfigurationDirectory>$(MSBuildThisFileDirectory)</NarvaloConfigurationDirectory>
+    <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
+    <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
   </PropertyGroup>
 
+  <!--
+    We use the project type Guid to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
+    Another way to do this here could be to use: Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
+  -->
+  <Choose>
+    <When Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">
+      <PropertyGroup>
+        <NarvaloIsTestProject>true</NarvaloIsTestProject>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NarvaloIsTestProject>false</NarvaloIsTestProject>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
-  <!-- ### Standard Build Properties ### -->
+
+  <!-- ### Standard MSBuild Properties ### -->
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -121,8 +144,8 @@
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</NarvaloSourceAnalysisEnabled>
 
     <!-- If requested, we disable Source Analysis. -->
-    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
     <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' ">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">$(NarvaloSourceAnalysisEnabled)</SourceAnalysisEnabled>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -148,25 +171,40 @@
     <RunCodeAnalysis>$(NarvaloRunCodeAnalysis)</RunCodeAnalysis>
   </PropertyGroup>
 
+  <Choose>
+    <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
+      <!-- Sample projects use a custom ruleset. -->
+      <PropertyGroup>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloConfigurationDirectory)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
+      <!-- Test projects use a custom ruleset. -->
+      <PropertyGroup>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloConfigurationDirectory)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <!--
+          The default behaviour is to use a very strict ruleset. For performance reasons
+          we use a minimal ruleset when using Code Contracts. Also Code Contracts
+          produce assemblies that are not compatible with Code Analysis.
+        -->
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
   <PropertyGroup>
     <!--
       The default behaviour is to use a very strict ruleset. For performance reasons
       we use a less strict ruleset when using Code Contracts. Also Code Contracts
       produce assemblies that are not compatible with Code Analysis.
-    -->
-    <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-    <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
-    <!-- Sample projects use a custom ruleset. -->
-    <NarvaloCodeAnalysisRuleSet Condition=" '$(NarvaloIsSampleProject)' == 'true' ">$(NarvaloConfigurationDirectory)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
-    <!--
-      Test projects use a custom ruleset. We use the project type Guid
-      to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
-      Another way to do this here could be to use:
-        Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
-    -->
-    <NarvaloCodeAnalysisRuleSet Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">$(NarvaloConfigurationDirectory)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
 
-    <!-- If requested, use a custom Code Analysis ruleset. -->
+      If requested, use a custom Code Analysis ruleset. 
+    -->
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' ">$(NarvaloCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' ">$(NarvaloCustomCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -187,21 +225,24 @@
     For a complete list of available options, see
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
+      
+    We do not really enforce any policy for Code Contracts as they are not 
+    currently used by all projects. On Release Build, you should manually add 
+    the following lines:
+      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+        <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+      </PropertyGroup>
+    On CodeContracts Build, configuration is exclusively done inside VS.
+    Even so, let's set some reasonable defaults.
   -->
 
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-  </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'CodeContracts' ">
     <!-- Runtime Checking. -->
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
@@ -209,48 +250,47 @@
     <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
 
     <!-- Static Checking. -->
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <!-- Only meaningful inside VS but I find the result confusing. -->
     <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
 
     <!-- Contract Reference Assembly. -->
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
-    <CodeContractsLibPaths />
-    <CodeContractsExtraRewriteOptions />
-    <CodeContractsExtraAnalysisOptions />
   </PropertyGroup>
 
 
   <!-- ### Continuous Integration Overrides ### -->
 
-  <!-- TODO: Use MSBuild injection? -->
-
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <!-- Treat all warnings as errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
-    <!-- Background checking is not available in terminal. -->
-    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-
-    <!-- Force T4 regeneration. -->
-    <TransformOnBuild>true</TransformOnBuild>
-  </PropertyGroup>
-
-  <!-- When called from Narvalo.proj, reports are saved in a custom location. -->
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloAnalysisDir) != '' ">
-    <SourceAnalysisOutputFile>$(NarvaloAnalysisDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
-
-    <CodeAnalysisLogFile>$(NarvaloAnalysisDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
     <!--
-      We don't want the "succeed" file to be written to the custom location.
-      Doesn't seem to be understood by MSBuild. As a workaround,
-      we simply disable the creation of the success file.
+      We don't want the Code Analysis "succeed" file to be written to 
+      the custom location but it does not seem to be understood by MSBuild. 
+      As a workaround, we simply disable the creation of the success file.
     -->
     <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
+
+    <!-- Code Contracts background checking is not available in terminal. -->
+    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+
+    <!-- Force T4 re-generation. -->
+    <TransformOnBuild>true</TransformOnBuild>
+  </PropertyGroup>
+
+  <!-- 
+    When called from Build.proj, analysis reports are saved in a custom location. 
+    The NarvaloAnalysisDir property is injected by Build.proj.
+  -->
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloAnalysisDir) != '' And Exists('$(NarvaloAnalysisDir)')  ">
+    <CodeAnalysisLogFile>$(NarvaloAnalysisDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(NarvaloAnalysisDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
   </PropertyGroup>
 </Project>

@@ -16,6 +16,10 @@ Low Priority
 Resolved Issues
 ===============
 
+[2] When building a PCL project from the command line, MSBuild generates output
+    inside a subdirectory of `$(OutDir)`. To correct this, we instruct MSBuild to
+    use the standard behaviour: `$(GenerateProjectSpecificOutputFolder) = false`. 
+
 [1] Narvalo.Facts fails when called from Narvalo.proj and run twice in a row.
     Narvalo.Core and Narvalo.Common use the default namespace (`Narvalo`) and
     both define a resource named `SR.resx` (with default access modifier kept,
