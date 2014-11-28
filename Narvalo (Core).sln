@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{4F15
 		Build.proj = Build.proj
 		etc\Narvalo.props = etc\Narvalo.props
 		tools\Narvalo.targets = tools\Narvalo.targets
+		etc\NuGet.props = etc\NuGet.props
 		tools\StyleCop.targets = tools\StyleCop.targets
 	EndProjectSection
 EndProject

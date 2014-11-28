@@ -287,10 +287,10 @@
 
   <!-- 
     When called from Build.proj, analysis reports are saved in a custom location. 
-    The NarvaloAnalysisDir property is injected by Build.proj.
+    The NarvaloLogDir property is injected by Build.proj.
   -->
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloAnalysisDir) != '' And Exists('$(NarvaloAnalysisDir)')  ">
-    <CodeAnalysisLogFile>$(NarvaloAnalysisDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(NarvaloAnalysisDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloLogDir) != '' And Exists('$(NarvaloLogDir)')  ">
+    <CodeAnalysisLogFile>$(NarvaloLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(NarvaloLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
   </PropertyGroup>
 </Project>

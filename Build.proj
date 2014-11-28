@@ -14,15 +14,31 @@
     - Build NuGet packages and only the necessary projects:
         MSBuild Build.proj /t:Package /p:Production=true
 
+    TODO: Move MSBuild.log to log directory.
+    TODO: PSake or Fake launcher.
+    TODO: Download NuGet.
     TODO: Versioning.
-    TODO: Create NuGet packages.
+    TODO: Create NuGet packages: Subset of packages?
     TODO: Message Importance.
+    TODO: Merging, just for fun.
+    TODO: Nuproj?
   -->
+
+  <PropertyGroup>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+  </PropertyGroup>
+
+  <Import Project="$(RepositoryRoot)tools\NuGet.props" />
+
+  <ItemGroup>
+    <XunitAssemblyFile Include="$(RepositoryRoot)packages\**\xunit.runner.msbuild.dll" />
+  </ItemGroup>
+  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
 
   <!-- ### Public Properties ### -->
 
   <PropertyGroup>
-    <Production Condition=" '$(Production)' == '' ">false</Production>
+    <Production Condition=" '$(Production)' == '' ">true</Production>
     <Verbose Condition=" '$(Verbose)' == '' ">false</Verbose>
 
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
@@ -36,13 +52,16 @@
   <!-- ### Project Setup ### -->
 
   <PropertyGroup>
-    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <!-- Directory where all compilation results should go. -->
     <BuildRoot>$(RepositoryRoot)_build\</BuildRoot>
-    <!-- Directory where all reports should go. -->
-    <AnalysisDir>$(BuildRoot)reports\</AnalysisDir>
+    <!-- Directory where all log should go. -->
+    <LogDir>$(BuildRoot)log\</LogDir>
     <!-- Directory where all packages should go. -->
     <PackagesDir>$(BuildRoot)packages\</PackagesDir>
+    <!-- A dummy output for the target "Verify". -->
+    <VerifyDummyOutput>$(BuildRoot)verify.txt</VerifyDummyOutput>
+    <!-- Log file for Xunit. -->
+    <XunitLogfile>$(LogDir)xunit.xml</XunitLogfile>
     <!-- Path to NuGet exec. -->
     <NuGetCommand>&quot;$(RepositoryRoot)tools\NuGet\nuget.exe&quot;</NuGetCommand>
   </PropertyGroup>
@@ -59,10 +78,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -103,65 +122,18 @@
       This is the full intermediate Output Path, and is derived from BaseIntermediateOutputPath, if none specified
       (eg. obj\debug). If this property is overridden, then setting BaseIntermediateOutputPath has no effect.
     -->
-      <BuildProperties>
-        Configuration=$(Configuration);
-        Platform=$(Platform);
-        BuildInParallel=$(BuildInParallel);
-        BaseIntermediateOutputPath=$(BuildRoot)obj\;
-        OutDir=$(OutDir);
-        OutputPath=$(OutDir);
-        GenerateProjectSpecificOutputFolder=false;
-        NarvaloAnalysisDir=$(AnalysisDir);
-        NarvaloVerbose=$(Verbose)
-      </BuildProperties>
+    <BuildProperties>
+      Configuration=$(Configuration);
+      Platform=$(Platform);
+      BuildInParallel=$(BuildInParallel);
+      BaseIntermediateOutputPath=$(BuildRoot)obj\;
+      OutDir=$(OutDir);
+      OutputPath=$(OutDir);
+      GenerateProjectSpecificOutputFolder=false;
+      NarvaloLogDir=$(LogDir);
+      NarvaloVerbose=$(Verbose)
+    </BuildProperties>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!--<Packages Include="Narvalo.Build">
-      <Build>
-        $(OutDir)Narvalo.Build.tasks
-      </Build>
-      <Tools>
-        $(OutDir)Narvalo.Build.dll;
-        $(OutDir)Narvalo.Build.pdb
-      </Tools>
-    </Packages>-->
-    <Packages Include="Narvalo.Core">
-      <Lib>
-        $(OutDir)Narvalo.Core.dll;
-        $(OutDir)Narvalo.Core.pdb;
-        $(OutDir)Narvalo.Core.xml;
-        $(OutDir)CodeContracts\Narvalo.Core.Contracts.dll;
-        $(OutDir)CodeContracts\Narvalo.Core.Contracts.pdb
-      </Lib>
-    </Packages>
-    <!--<Packages Include="Narvalo.Common">
-      <Lib>
-        $(OutDir)Narvalo.Common.dll;
-        $(OutDir)Narvalo.Common.pdb;
-        $(OutDir)Narvalo.Common.Contracts.dll
-      </Lib>
-    </Packages>
-    <Packages Include="Narvalo.Mvp">
-      <Lib>
-        $(OutDir)Narvalo.Mvp.dll;
-        $(OutDir)Narvalo.Mvp.pdb
-      </Lib>
-    </Packages>
-    <Packages Include="Narvalo.Mvp.Web">
-      <Lib>
-        $(OutDir)Narvalo.Mvp.Web.dll;
-        $(OutDir)Narvalo.Mvp.Web.pdb
-      </Lib>
-    </Packages>
-    <Packages Include="Narvalo.Web">
-      <Lib>
-        $(OutDir)Narvalo.Web.dll;
-        $(OutDir)Narvalo.Web.pdb;
-        $(OutDir)Narvalo.Web.Contracts.dll
-      </Lib>
-    </Packages>-->
-  </ItemGroup>
 
 
   <!-- ### Public Targets ### -->
@@ -178,7 +150,7 @@
     <Exec Command="$(NuGetCommand) restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="RestorePackages;_CreateAnalysisDir">
+  <Target Name="Build" DependsOnTargets="RestorePackages;_PrepareForLogging">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -188,82 +160,12 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Package" DependsOnTargets="Clean;Build;CorePackage" />
+  <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
 
-  <Target Name="Rebuild" DependsOnTargets="_BeforeRebuild;Clean;Build" />
-
-
-  <!-- ### Hooks ### -->
-
-  <Target Name="_AfterBuild"
-          AfterTargets="Build"
-          DependsOnTargets="PEVerify;RunTests" />
-
-
-  <!-- ### Utilities ### -->
-
-  <Target Name="_CreateAnalysisDir">
-    <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
-    <MakeDir Directories="$(AnalysisDir)" Condition="!Exists($(AnalysisDir))" />
-  </Target>
-
-  <Target Name="_CreatePackagesDir">
-    <!-- Création du répertoire contenant les rapports produits au cours de la compilation. -->
-    <MakeDir Directories="$(PackagesDir)" Condition="!Exists($(PackagesDir))" />
-  </Target>
-
-  <Target Name="_BeforeRebuild">
-    <!--
-      StyleCop treats differently the "Build" and "Rebuild" targets.
-      We correct this by adding "SourceAnalysisForceFullAnalysis" to the
-      Build properties.
-    -->
-    <PropertyGroup>
-      <BuildProperties>
-        $(BuildProperties);
-        SourceAnalysisForceFullAnalysis=true
-      </BuildProperties>
-    </PropertyGroup>
-  </Target>
-
-
-  <!-- ### Nuget ### -->
-
-  <Target Name="CorePackage"
-          DependsOnTargets="_CreatePackagesDir"
-          Outputs="%(Packages.Identity)">
-    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="High" />
-
-    <PropertyGroup>
-      <_PackageDir>$(PackagesDir)%(Packages.Identity)\</_PackageDir>
-      <_PackageSpec>$(_PackageDir)%(Packages.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <!--<MakeDir Directories="$(_PackageDir)build" Condition=" '%(_Packages.Build)' != '' " />
-    <Copy SourceFiles="%(_Packages.Build)" DestinationFolder="$(_PackageDir)build" />
-    <MakeDir Directories="$(_PackageDir)lib" Condition=" '%(_Packages.Lib)' != '' " />
-    <Copy SourceFiles="%(_Packages.Libs)" DestinationFolder="$(_PackageDir)lib" />
-    <MakeDir Directories="$(_PackageDir)tools" Condition=" '%(_Packages.Tools)' != '' " />
-    <Copy SourceFiles="%(_Packages.Tools)" DestinationFolder="$(_PackageDir)tools" />
-
-    <CreatePackageSpec
-      TemplateFile="$(_EtcDir)%(Packages.Identity).nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="$(NuGetCommand) pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />-->
-  </Target>
-
-
-  <!-- ### PEVerify ### -->
-
-  <PropertyGroup>
-    <PEVerifyDummySentinel>$(BuildRoot)peverify.txt</PEVerifyDummySentinel>
-  </PropertyGroup>
-
-  <Target Name="PEVerify"
+  <Target Name="Verify"
+          DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
-          Outputs="$(PEVerifyDummySentinel)">
+          Outputs="$(VerifyDummyOutput)">
     <Message Text="Verifying assemblies with PEVerify..." Importance="Normal" />
 
     <GetFrameworkSdkPath>
@@ -282,26 +184,13 @@
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
-    <Touch Files="$(PEVerifyDummySentinel)" AlwaysCreate="true" />
+    <Touch Files="$(VerifyDummyOutput)" AlwaysCreate="true" />
   </Target>
 
-
-  <!-- ### Tests ### -->
-
-  <ItemGroup>
-    <XunitAssemblyFile Include="$(RepositoryRoot)packages\**\xunit.runner.msbuild.dll" />
-  </ItemGroup>
-
-  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
-
-  <PropertyGroup>
-    <XunitXmlReport>$(AnalysisDir)xunit.xml</XunitXmlReport>
-  </PropertyGroup>
-
   <Target Name="RunTests"
-          DependsOnTargets="_CreateAnalysisDir"
+          DependsOnTargets="Build;_PrepareForLogging"
           Inputs="@(BuildOutputs)"
-          Outputs="$(XunitXmlReport)">
+          Outputs="$(XunitLogfile)">
     <Message Text="Running Xunit tests..." Importance="Normal" />
 
     <ItemGroup>
@@ -310,7 +199,92 @@
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)"
-           Xml="$(XunitXmlReport)"
+           Xml="$(XunitLogfile)"
            Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
+
+  <Target Name="Package"
+          DependsOnTargets="Build;_BeforePackage;"
+          Outputs="%(Packages.Identity)">
+    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="High" />
+
+    <PropertyGroup>
+      <_PackageDir>$(PackagesDir)%(Packages.Identity)\</_PackageDir>
+      <_PackageSpec>$(_PackageDir)%(Packages.Identity).nuspec</_PackageSpec>
+    </PropertyGroup>
+
+    <!-- Remove directory first. -->
+
+    <MakeDir Directories="$(_PackageDir)build" Condition=" '%(Packages.Build)' != '' " />
+    <!--<Copy SourceFiles="%(Packages.Build)" DestinationFolder="$(Packages)build" />-->
+    <MakeDir Directories="$(_PackageDir)lib" Condition=" '%(Packages.Lib)' != '' " />
+    <!--<Copy SourceFiles="%(Packages.Libs)" DestinationFolder="$(_PackageDir)lib" />-->
+    <MakeDir Directories="$(_PackageDir)tools" Condition=" '%(Packages.Tools)' != '' " />
+    <!--<Copy SourceFiles="%(Packages.Tools)" DestinationFolder="$(_PackageDir)tools" />-->
+
+    <_CreatePackageSpec
+      TemplateFile="$(RepositoryRoot)etc\%(Packages.Identity).nuspec"
+      VersionNumber="1.0.0"
+      SpecFile="$(_PackageSpec)" />
+
+    <!--<Exec Command="$(NuGetCommand) pack &quot;$(_PackageSpec)&quot; -OutputDirectory &quot;$(PackagesDir)&quot; -Verbosity detailed" />-->
+  </Target>
+
+
+  <!-- ### Private Targets ### -->
+
+  <Target Name="_PrepareForLogging">
+    <MakeDir Directories="$(LogDir)" Condition="!Exists($(LogDir))" />
+  </Target>
+
+  <Target Name="_BeforePackage">
+    <MakeDir Directories="$(PackagesDir)" Condition="!Exists($(PackagesDir))" />
+  </Target>
+
+  <Target Name="_PatchRebuild">
+    <!--
+      StyleCop treats differently the "Build" and "Rebuild" targets.
+      We correct this by adding "SourceAnalysisForceFullAnalysis" to the
+      Build properties.
+    -->
+    <PropertyGroup>
+      <BuildProperties>
+        $(BuildProperties);
+        SourceAnalysisForceFullAnalysis=true
+      </BuildProperties>
+    </PropertyGroup>
+  </Target>
+
+  <UsingTask TaskName="_CreatePackageSpec" TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <ParameterGroup>
+      <TemplateFile ParameterType="System.String" Required="true" />
+      <VersionNumber ParameterType="System.String" Required="true" />
+      <SpecFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (TemplateFile.Length == 0) {
+    Log.LogMessage(MessageImportance.High, "You must supply a template file.");
+    return false;
+}
+
+try {
+    string template = File.ReadAllText(TemplateFile).Replace("$version$", VersionNumber);
+    File.WriteAllText(SpecFile, template);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 </Project>
