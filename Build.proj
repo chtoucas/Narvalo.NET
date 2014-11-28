@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         DefaultTargets="Build"
+         DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <!--
@@ -14,28 +14,25 @@
     - Build NuGet packages and only the necessary projects:
         MSBuild Build.proj /t:Package /p:Production=true
 
+    TODO: PSake or Fake launcher. Download NuGet if necessary then execute.
     TODO: Move MSBuild.log to log directory.
-    TODO: PSake or Fake launcher.
-    TODO: Download NuGet.
     TODO: Versioning.
     TODO: Create NuGet packages: Subset of packages?
-    TODO: Message Importance.
+    TODO: Artifacts
     TODO: Merging, just for fun.
     TODO: Nuproj?
+    REVIEW: Is OutputPath really useful here?
   -->
-
+  
   <PropertyGroup>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <ToolsDir>$(RepositoryRoot)tools\</ToolsDir>
   </PropertyGroup>
 
-  <Import Project="$(RepositoryRoot)tools\NuGet.props" />
+  <Import Project="$(ToolsDir)Packages.props" />
+  <Import Project="$(ToolsDir)xUnit.tasks" />
 
-  <ItemGroup>
-    <XunitAssemblyFile Include="$(RepositoryRoot)packages\**\xunit.runner.msbuild.dll" />
-  </ItemGroup>
-  <UsingTask TaskName="Xunit.Runner.MSBuild.xunit" AssemblyFile="@(XunitAssemblyFile)" />
-
-  <!-- ### Public Properties ### -->
+  <!-- ### Properties ### -->
 
   <PropertyGroup>
     <Production Condition=" '$(Production)' == '' ">true</Production>
@@ -46,24 +43,17 @@
 
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
-  </PropertyGroup>
 
-
-  <!-- ### Project Setup ### -->
-
-  <PropertyGroup>
-    <!-- Directory where all compilation results should go. -->
-    <BuildRoot>$(RepositoryRoot)_build\</BuildRoot>
-    <!-- Directory where all log should go. -->
-    <LogDir>$(BuildRoot)log\</LogDir>
-    <!-- Directory where all packages should go. -->
-    <PackagesDir>$(BuildRoot)packages\</PackagesDir>
-    <!-- A dummy output for the target "Verify". -->
-    <VerifyDummyOutput>$(BuildRoot)verify.txt</VerifyDummyOutput>
-    <!-- Log file for Xunit. -->
+    <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
+    <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
+    <LogDir>$(WorkRoot)log\</LogDir>
+    <PackagesDir>$(WorkRoot)packages\</PackagesDir>
+    <VerifyBuildDummyOutput>$(WorkRoot)verify.txt</VerifyBuildDummyOutput>
     <XunitLogfile>$(LogDir)xunit.xml</XunitLogfile>
-    <!-- Path to NuGet exec. -->
-    <NuGetCommand>&quot;$(RepositoryRoot)tools\NuGet\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand>&quot;$(ToolsDir)NuGet\nuget.exe&quot;</NuGetCommand>
+  
+    <MessageImportance Condition=" '$(Verbose)' == 'true' ">High</MessageImportance>
+    <MessageImportance Condition=" '$(Verbose)' != 'true' ">Normal</MessageImportance>
   </PropertyGroup>
 
   <Choose>
@@ -87,13 +77,8 @@
   </Choose>
 
   <PropertyGroup>
-    <OutDir>$(BuildRoot)bin\$(Configuration)\</OutDir>
-
     <!--
-      Attempt to completely separate our build environment and the one used by VS.
-
-      REVIEW: Is OutputPath really useful here?
-      REVIEW: Should I add SolutionDir=$(RepositoryRoot)
+      Attempt to use a completely different working directory from the one used by VS.
 
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of $(OutDir). To correct this, we instruct MSBuild to
@@ -126,7 +111,7 @@
       Configuration=$(Configuration);
       Platform=$(Platform);
       BuildInParallel=$(BuildInParallel);
-      BaseIntermediateOutputPath=$(BuildRoot)obj\;
+      BaseIntermediateOutputPath=$(WorkRoot)obj\;
       OutDir=$(OutDir);
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
@@ -138,19 +123,21 @@
 
   <!-- ### Public Targets ### -->
 
-  <Target Name="Clean">
-    <Message Text="Cleaning..." Importance="High" />
+  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
-    <RemoveDir Directories="$(BuildRoot)" />
+  <Target Name="Clean">
+    <Message Text="Cleaning..." Importance="$(MessageImportance)" />
+
+    <RemoveDir Directories="$(WorkRoot)" />
   </Target>
 
   <Target Name="RestorePackages">
-    <Message Text="Restoring NuGet packages..." Importance="High" />
+    <Message Text="Restoring NuGet packages..." Importance="$(MessageImportance)" />
 
     <Exec Command="$(NuGetCommand) restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="RestorePackages;_PrepareForLogging">
+  <Target Name="Build" DependsOnTargets="RestorePackages;_CreateLogDir">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -162,11 +149,11 @@
 
   <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
 
-  <Target Name="Verify"
+  <Target Name="VerifyBuild"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
-          Outputs="$(VerifyDummyOutput)">
-    <Message Text="Verifying assemblies with PEVerify..." Importance="Normal" />
+          Outputs="$(VerifyBuildDummyOutput)">
+    <Message Text="Verifying assemblies with PEVerify..." Importance="$(MessageImportance)" />
 
     <GetFrameworkSdkPath>
       <!-- Path to default version of the .NET SDK. -->
@@ -184,14 +171,14 @@
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
-    <Touch Files="$(VerifyDummyOutput)" AlwaysCreate="true" />
+    <Touch Files="$(VerifyBuildDummyOutput)" AlwaysCreate="true" />
   </Target>
 
   <Target Name="RunTests"
-          DependsOnTargets="Build;_PrepareForLogging"
+          DependsOnTargets="Build;_CreateLogDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitLogfile)">
-    <Message Text="Running Xunit tests..." Importance="Normal" />
+    <Message Text="Running Xunit tests..." Importance="$(MessageImportance)" />
 
     <ItemGroup>
       <_TestAssemblies Include="%(BuildOutputs.Identity)"
@@ -204,9 +191,9 @@
   </Target>
 
   <Target Name="Package"
-          DependsOnTargets="Build;_BeforePackage;"
+          DependsOnTargets="Build;_CreatePackagesDir;"
           Outputs="%(Packages.Identity)">
-    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="High" />
+    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="$(MessageImportance)" />
 
     <PropertyGroup>
       <_PackageDir>$(PackagesDir)%(Packages.Identity)\</_PackageDir>
@@ -233,11 +220,11 @@
 
   <!-- ### Private Targets ### -->
 
-  <Target Name="_PrepareForLogging">
+  <Target Name="_CreateLogDir">
     <MakeDir Directories="$(LogDir)" Condition="!Exists($(LogDir))" />
   </Target>
 
-  <Target Name="_BeforePackage">
+  <Target Name="_CreatePackagesDir">
     <MakeDir Directories="$(PackagesDir)" Condition="!Exists($(PackagesDir))" />
   </Target>
 

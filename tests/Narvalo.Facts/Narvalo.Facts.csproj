@@ -13,7 +13,7 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="FakeItEasy">
       <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>

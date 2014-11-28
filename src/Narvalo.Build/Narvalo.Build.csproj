@@ -13,7 +13,7 @@
   <PropertyGroup>
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />

@@ -8,7 +8,7 @@
     <RootNamespace>Narvalo.Mvp.Extras</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Extras</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>

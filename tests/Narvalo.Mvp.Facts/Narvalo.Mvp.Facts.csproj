@@ -17,7 +17,7 @@
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
     <NarvaloDisableSourceAnalysisOnBuild>true</NarvaloDisableSourceAnalysisOnBuild>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="NSubstitute">
       <HintPath>..\..\packages\NSubstitute.1.8.0.0\lib\net45\NSubstitute.dll</HintPath>

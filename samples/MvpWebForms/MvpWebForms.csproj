@@ -23,7 +23,7 @@
     <NarvaloDisableSourceAnalysisOnBuild>true</NarvaloDisableSourceAnalysisOnBuild>
     <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

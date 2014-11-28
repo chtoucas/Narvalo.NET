@@ -9,7 +9,7 @@
     <AssemblyName>Narvalo.Mvp.Windows.Forms</AssemblyName>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

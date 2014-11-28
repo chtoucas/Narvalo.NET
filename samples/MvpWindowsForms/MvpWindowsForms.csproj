@@ -27,7 +27,7 @@
   <PropertyGroup>
     <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

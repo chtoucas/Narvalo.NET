@@ -8,7 +8,7 @@
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Junk</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />

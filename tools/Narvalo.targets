@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This MSBuild file defines the use of a common set of Build properties.
-    
     Read-Only Properties:
     - NarvaloMessageImportance
     
-    Each Visual Studio project should import this file.
-      <Import Project="..\..\tools\Narvalo.Common.targets" />
+    Each project should import this file.
+      <Import Project="..\..\tools\Narvalo.targets" />
+    or if you do not follow the default repository layout:
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.targets" />
       
     TODO: 
     - Remove .xml.old created by Code Contracts.
@@ -16,12 +16,20 @@
   -->
 
   <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
-  <Import Project=".\StyleCop.targets" />
+  <Import Project="$(NarvaloToolsDir)StyleCop.targets" />
 
   <PropertyGroup>
     <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">High</NarvaloMessageImportance>
     <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">Normal</NarvaloMessageImportance>
   </PropertyGroup>
+
+
+  <!-- ### Microsoft Build Targets ### -->
+  <!--
+    To modify the build process, use one of the extension points defined
+    inside Microsoft.Common.targets.
+    See http://msdn.microsoft.com/en-us/library/ms366724.aspx
+  -->
 
   <PropertyGroup>
     <BeforeBuildDependsOnTargets>
@@ -29,14 +37,6 @@
       ValidateCodeAnalysisSettings
     </BeforeBuildDependsOnTargets>
   </PropertyGroup>
-
-  
-  <!-- ### Microsoft Build Targets ### -->
-  <!--
-    To modify the build process, use one of the extension points defined
-    inside Microsoft.Common.targets.
-    See http://msdn.microsoft.com/en-us/library/ms366724.aspx
-  -->
 
   <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOnTargets)" />
 

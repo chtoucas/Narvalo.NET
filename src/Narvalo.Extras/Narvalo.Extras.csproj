@@ -8,7 +8,7 @@
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Extras</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\etc\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

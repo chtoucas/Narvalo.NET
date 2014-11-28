@@ -12,15 +12,17 @@
     
     Read-Only Properties:
     - NarvaloCodeAnalysisRuleSet
-    - NarvaloConfigurationDirectory
     - NarvaloIsTestProject
+    - NarvaloRepositoryRoot
     - NarvaloRunCodeAnalysis
+    - NarvaloSettingsDir
     - NarvaloSourceAnalysisEnabled
+    - NarvaloToolsDir
 
-    Each Visual Studio project should import this file:
-      <Import Project="..\..\etc\Narvalo.props" />
-    or
-      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\etc\Narvalo.props" />
+    Each project should import this file:
+      <Import Project="..\..\tools\Narvalo.props" />
+    or if you do not follow the default repository layout:
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.props" />
   -->
 
   <!-- ### Narvalo Properties ### -->
@@ -30,11 +32,13 @@
     <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' == '' ">false</NarvaloIsSampleProject>
     <NarvaloVerbose Condition=" '$(NarvaloVerbose)' == '' ">true</NarvaloVerbose>
 
+    <NarvaloRepositoryRoot>$(MSBuildThisFileDirectory)..\</NarvaloRepositoryRoot>
     <!-- Default values. This is not really necessary but we never know. -->
     <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-    <NarvaloConfigurationDirectory>$(MSBuildThisFileDirectory)</NarvaloConfigurationDirectory>
     <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
+    <NarvaloSettingsDir>$(NarvaloRepositoryRoot)etc\</NarvaloSettingsDir>
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
+    <NarvaloToolsDir>$(NarvaloRepositoryRoot)tools\</NarvaloToolsDir>
   </PropertyGroup>
 
   <!--
@@ -79,7 +83,7 @@
 
     <!-- REVIEW: Delay sign? -->
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(NarvaloConfigurationDirectory)Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(NarvaloSettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
 
     <!-- REVIEW: Should I also set these properties? -->
@@ -119,14 +123,14 @@
   <!-- ### Automatically Linked Files ### -->
 
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(NarvaloConfigurationDirectory)CodeAnalysisDictionary.xml">
+    <CodeAnalysisDictionary Include="$(NarvaloSettingsDir)CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <!--
       I would like to also include the file containing the common assembly infos,
       unfortunately, if done here, the file won't appear in VS.
     -->
-    <!--<Compile Include="$(NarvaloConfigurationDirectory)AssemblyInfo.Common.cs">
+    <!--<Compile Include="$(NarvaloSettingsDir)AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>-->
   </ItemGroup>
@@ -149,7 +153,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(NarvaloConfigurationDirectory)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(NarvaloSettingsDir)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
@@ -175,13 +179,13 @@
     <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
       <!-- Sample projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloConfigurationDirectory)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloSettingsDir)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
       <!-- Test projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloConfigurationDirectory)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloSettingsDir)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <Otherwise>
@@ -192,7 +196,7 @@
           produce assemblies that are not compatible with Code Analysis.
         -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloConfigurationDirectory)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloSettingsDir)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>
@@ -286,7 +290,7 @@
   </PropertyGroup>
 
   <!-- 
-    When called from Build.proj, analysis reports are saved in a custom location. 
+    When called from Build.proj, log files are saved in a custom location. 
     The NarvaloLogDir property is injected by Build.proj.
   -->
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloLogDir) != '' And Exists('$(NarvaloLogDir)')  ">
