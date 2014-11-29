@@ -56,6 +56,7 @@ namespace Playground.Edu.Monads.Samples {
         /// </remarks>
         public static Monad<T> Return<T>(T value)
         {
+
             return Monad<T>.η(value);
         }
         

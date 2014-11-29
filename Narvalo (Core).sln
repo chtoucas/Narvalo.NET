@@ -28,11 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
 	ProjectSection(SolutionItems) = preProject
+		tools\Build.After.props = tools\Build.After.props
+		tools\Build.Before.targets = tools\Build.Before.targets
 		build.cmd = build.cmd
+		tools\Build.Packages.props = tools\Build.Packages.props
 		Build.proj = Build.proj
 		tools\Narvalo.props = tools\Narvalo.props
 		tools\Narvalo.targets = tools\Narvalo.targets
-		tools\Packages.props = tools\Packages.props
 		tools\StyleCop.targets = tools\StyleCop.targets
 		tools\xUnit.tasks = tools\xUnit.tasks
 	EndProjectSection

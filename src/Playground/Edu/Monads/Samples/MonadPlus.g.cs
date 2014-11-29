@@ -64,6 +64,8 @@ namespace Playground.Edu.Monads.Samples {
         /// </remarks>
         public static MonadPlus<T> Return<T>(T value)
         {
+            Contract.Ensures(Contract.Result<MonadPlus<T>>() != null);
+
             return MonadPlus<T>.η(value);
         }
         

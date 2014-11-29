@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 
+    Continuous Integration Overrides.
+    
+    This file is only injected at the end of Narvalo.props by Build.proj.
+    Another way of doing this could have been to include this file
+    directly in Narvalo.props and use a conditional:
+      '$(BuildingInsideVisualStudio)' != 'true'
+  -->
+
+  <PropertyGroup>
+    <!-- Treat all warnings as errors. -->
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
+
+    <!--
+      We don't want the Code Analysis "succeed" file to be written to 
+      the custom location but it does not seem to be understood by MSBuild. 
+      As a workaround, we simply disable the creation of the success file.
+    -->
+    <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
+    <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
+
+    <!-- Code Contracts background checking is not available in terminal. -->
+    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+
+    <!-- Force T4 re-generation (currently disabled). -->
+    <TransformOnBuild>false</TransformOnBuild>
+  </PropertyGroup>
+
+  <!-- 
+    Log files are saved in a custom location. 
+    The NarvaloLogDir property is injected by Build.proj.
+  -->
+  <PropertyGroup Condition=" $(NarvaloLogDir) != '' And Exists('$(NarvaloLogDir)')  ">
+    <CodeAnalysisLogFile>$(NarvaloLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(NarvaloLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+  </PropertyGroup>
+</Project>

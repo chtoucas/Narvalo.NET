@@ -3,7 +3,7 @@
          DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Sample uses:
+    Sample usages:
     - Build all projects:
         MSBuild Build.proj
     - Build all projects, be verbose:
@@ -12,16 +12,30 @@
         MSBuild Build.proj /t:Package
     - Build NuGet packages and only the necessary projects:
         MSBuild Build.proj /t:Package /p:Production=true
+        
+    *** IMPORTANT ***
+    When upgrading VS, you should upgrade the VisualStudioVersion here,
+    in build.cmd and in Narvalo.props.
+    
+    FIXME:
+    - T4 re-generation has been disabled since it require VS hosting.
 
-    TODO: Inject Custom Props.
-    TODO: PSake or Fake launcher. Download NuGet if necessary.
-    TODO: Move MSBuild.log to log directory.
-    TODO: Versioning.
-    TODO: Create NuGet packages: Subset of packages?
-    TODO: Artifacts
-    TODO: Merging, just for fun.
-    TODO: Nuproj?
-    REVIEW: Is OutputPath really useful here?
+    TODO:
+    - NarvaloLogDir
+    - Apply NarvaloVerbose to CodeAnalysis & co?
+    - Remove .xml.old created by Code Contracts.
+    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.        
+    - There are still some files created in bin and obj.
+    - PSake or Fake launcher. Download NuGet if necessary.
+    - Move MSBuild.log to log directory?
+    - Versioning.
+    - Create NuGet packages: Subset of packages?
+    - Artifacts
+    - Merging, just for fun.
+    - Nuproj?
+    
+    REVIEW: 
+    - Delay signing?
   -->
 
   <PropertyGroup>
@@ -43,6 +57,8 @@
     <MessageImportance Condition=" '$(Verbose)' == 'true' ">High</MessageImportance>
     <MessageImportance Condition=" '$(Verbose)' != 'true' ">Normal</MessageImportance>
 
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <ToolsDir>$(RepositoryRoot)tools\</ToolsDir>
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
@@ -54,7 +70,7 @@
     <NuGetCommand>&quot;$(ToolsDir)NuGet\nuget.exe&quot;</NuGetCommand>
   </PropertyGroup>
 
-  <Import Project="$(ToolsDir)Packages.props" />
+  <Import Project="$(ToolsDir)Build.Packages.props" />
   <Import Project="$(ToolsDir)xUnit.tasks" />
 
   <Choose>
@@ -86,7 +102,7 @@
       use the standard behaviour: $(GenerateProjectSpecificOutputFolder) = false.
 
       Here is the documentation directly taken from:
-        %ProgramFiles(x86)%\MSBuild\12.0\Bin\Microsoft.Common.CurrentVersion.targets
+        %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
 
       Several properties must be set in the main project file, before using this .TARGETS file.
       However, if the properties are not set, we pick some defaults.
@@ -116,6 +132,9 @@
       OutDir=$(OutDir);
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
+      VisualStudioVersion=$(VisualStudioVersion);
+      CustomAfterNarvaloProps=$(ToolsDir)Build.After.props;
+      CustomBeforeNarvaloTargets=$(ToolsDir)Build.Before.targets;
       NarvaloLogDir=$(LogDir);
       NarvaloVerbose=$(Verbose)
     </BuildProperties>
@@ -127,13 +146,13 @@
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
   <PropertyGroup>
-    <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">HardClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftClean</CleanDependsOn>
   </PropertyGroup>
 
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
 
-  <Target Name="HardClean">
+  <Target Name="CoreClean">
     <Message Text="Cleaning..." Importance="$(MessageImportance)" />
 
     <RemoveDir Directories="$(WorkRoot)" />
@@ -165,13 +184,13 @@
   </Target>
 
   <PropertyGroup>
-    <RebuildDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">HardRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreRebuild</RebuildDependsOn>
     <RebuildDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftRebuild</RebuildDependsOn>
   </PropertyGroup>
 
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
 
-  <Target Name="HardRebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
+  <Target Name="CoreRebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
 
   <Target Name="SoftRebuild">
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -285,7 +304,7 @@
   </Target>
 
   <UsingTask TaskName="_CreatePackageSpec" TaskFactory="CodeTaskFactory"
-             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(VisualStudioVersion).dll">
     <ParameterGroup>
       <TemplateFile ParameterType="System.String" Required="true" />
       <VersionNumber ParameterType="System.String" Required="true" />

@@ -26,6 +26,10 @@
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.props" />
   -->
 
+  <!-- If any, import custom props. -->
+  <Import Project="$(CustomBeforeNarvaloProps)"
+          Condition=" '$(CustomBeforeNarvaloProps)' != '' And Exists('$(CustomBeforeNarvaloProps)')" />
+
   <!-- ### Narvalo Properties ### -->
 
   <PropertyGroup>
@@ -71,6 +75,8 @@
   <!-- ### Standard MSBuild Properties ### -->
 
   <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -90,7 +96,6 @@
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
 
-    <!-- REVIEW: Delay sign? -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(NarvaloSettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
@@ -170,7 +175,7 @@
   <!-- ### Code Analysis ### -->
   <!--
     For a complete list of available options, see
-      %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v12.0\CodeAnalysis\Microsoft.CodeAnalysis.Targets
+      %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeAnalysis\Microsoft.CodeAnalysis.Targets
   -->
 
   <PropertyGroup>
@@ -226,7 +231,7 @@
     <!-- Process generated files (.g.cs). -->
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
-    <!-- All these settings do not seem to have any effect. -->
+    <!-- All the following settings do not seem to have any effect. -->
     <!--<CodeAnalysisQuiet>true</CodeAnalysisQuiet>
     <CodeAnalysisVerbose>false</CodeAnalysisVerbose>
     <CodeAnalysisSummary>false</CodeAnalysisSummary>-->
@@ -236,8 +241,8 @@
   <!-- ### Code Contracts ### -->
   <!--
     For a complete list of available options, see
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContractAnalysis.targets
-      %ProgramFiles%\Microsoft\Contracts\MsBuild\v12.0\Microsoft.CodeContracts.targets
+      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
+      %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContracts.targets
       
     We do not really enforce any policy for Code Contracts as they are not 
     currently used by all projects. On Release Build, you should manually add 
@@ -274,36 +279,8 @@
     <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
-
-  <!-- ### Continuous Integration Overrides ### -->
-
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-    <!-- Treat all warnings as errors. -->
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
-
-    <!--
-      We don't want the Code Analysis "succeed" file to be written to 
-      the custom location but it does not seem to be understood by MSBuild. 
-      As a workaround, we simply disable the creation of the success file.
-    -->
-    <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
-    <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
-
-    <!-- Code Contracts background checking is not available in terminal. -->
-    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-
-    <!-- Force T4 re-generation. -->
-    <TransformOnBuild>true</TransformOnBuild>
-  </PropertyGroup>
-
-  <!-- 
-    When called from Build.proj, log files are saved in a custom location. 
-    The NarvaloLogDir property is injected by Build.proj.
-  -->
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And $(NarvaloLogDir) != '' And Exists('$(NarvaloLogDir)')  ">
-    <CodeAnalysisLogFile>$(NarvaloLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(NarvaloLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
-  </PropertyGroup>
+  
+  <!-- If any, import custom props. -->
+  <Import Project="$(CustomAfterNarvaloProps)"
+          Condition=" '$(CustomAfterNarvaloProps)' != '' And Exists('$(CustomAfterNarvaloProps)')" />
 </Project>

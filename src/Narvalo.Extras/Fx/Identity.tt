@@ -1,4 +1,4 @@
-﻿<#@ include file="..\CodeTemplates\Monad.tt" #>
+﻿<#@ include file="..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
 <# EmitMonad(); #>
 
 <# EmitComonad(); #>

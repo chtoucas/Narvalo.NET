@@ -5,14 +5,12 @@
       <Import Project="..\..\tools\Narvalo.targets" />
     or if you do not follow the default repository layout:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.targets" />
-      
-    TODO: 
-    - Remove .xml.old created by Code Contracts.
-    - Enable T4 re-generation on Build.
-    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.
   -->
 
-  <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
+  <!-- If any, import custom targets.-->
+  <Import Project="$(CustomBeforeNarvaloTargets)"
+          Condition=" '$(CustomBeforeNarvaloTargets)' != '' And Exists('$(CustomBeforeNarvaloTargets)')" />
+
   <Import Project="$(NarvaloToolsDir)StyleCop.targets" />
 
   <!-- ### Microsoft Build Targets ### -->
@@ -23,13 +21,14 @@
   -->
 
   <PropertyGroup>
-    <BeforeBuildDependsOnTargets>
+    <BeforeBuildDependsOn>
+      $(BeforeBuildDependsOn);
       ValidateSourceAnalysisSettings;
       ValidateCodeAnalysisSettings
-    </BeforeBuildDependsOnTargets>
+    </BeforeBuildDependsOn>
   </PropertyGroup>
 
-  <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOnTargets)" />
+  <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)" />
 
 
   <!-- ### Source Analysis Targets ### -->
@@ -127,4 +126,8 @@
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="$(NarvaloMessageImportance)" />
   </Target>
+
+  <!-- If any, import custom targets.-->
+  <Import Project="$(CustomAfterNarvaloTargets)"
+          Condition=" '$(CustomAfterNarvaloTargets)' != '' And Exists('$(CustomAfterNarvaloTargets)')" />
 </Project>

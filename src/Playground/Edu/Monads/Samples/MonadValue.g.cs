@@ -65,6 +65,7 @@ namespace Playground.Edu.Monads.Samples {
         public static MonadValue<T> Return<T>(T value)
             where T : struct
         {
+
             return MonadValue<T>.η(value);
         }
         
