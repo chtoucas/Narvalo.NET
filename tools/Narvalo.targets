@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Read-Only Properties:
-    - NarvaloMessageImportance
-    
-    Each project should import this file.
+    Each project should import this file after Narvalo.props:
       <Import Project="..\..\tools\Narvalo.targets" />
     or if you do not follow the default repository layout:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.targets" />
@@ -17,12 +14,6 @@
 
   <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v12.0\Microsoft.TextTemplating.targets" />-->
   <Import Project="$(NarvaloToolsDir)StyleCop.targets" />
-
-  <PropertyGroup>
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">High</NarvaloMessageImportance>
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">Normal</NarvaloMessageImportance>
-  </PropertyGroup>
-
 
   <!-- ### Microsoft Build Targets ### -->
   <!--

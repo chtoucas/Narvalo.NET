@@ -31,9 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{4F15
 		build.cmd = build.cmd
 		Build.proj = Build.proj
 		tools\Narvalo.props = tools\Narvalo.props
+		tools\Narvalo.targets = tools\Narvalo.targets
 		tools\Packages.props = tools\Packages.props
 		tools\StyleCop.targets = tools\StyleCop.targets
-		tools\Narvalo.targets = tools\Narvalo.targets
 		tools\xUnit.tasks = tools\xUnit.tasks
 	EndProjectSection
 EndProject

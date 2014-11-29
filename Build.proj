@@ -2,7 +2,6 @@
 <Project ToolsVersion="12.0"
          DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <!--
     Sample uses:
     - Build all projects:
@@ -14,7 +13,8 @@
     - Build NuGet packages and only the necessary projects:
         MSBuild Build.proj /t:Package /p:Production=true
 
-    TODO: PSake or Fake launcher. Download NuGet if necessary then execute.
+    TODO: Inject Custom Props.
+    TODO: PSake or Fake launcher. Download NuGet if necessary.
     TODO: Move MSBuild.log to log directory.
     TODO: Versioning.
     TODO: Create NuGet packages: Subset of packages?
@@ -23,27 +23,28 @@
     TODO: Nuproj?
     REVIEW: Is OutputPath really useful here?
   -->
-  
-  <PropertyGroup>
-    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <ToolsDir>$(RepositoryRoot)tools\</ToolsDir>
-  </PropertyGroup>
-
-  <Import Project="$(ToolsDir)Packages.props" />
-  <Import Project="$(ToolsDir)xUnit.tasks" />
-
-  <!-- ### Properties ### -->
 
   <PropertyGroup>
-    <Production Condition=" '$(Production)' == '' ">true</Production>
-    <Verbose Condition=" '$(Verbose)' == '' ">false</Verbose>
+    <!-- The default behaviour is to build all projects. -->
+    <Production Condition=" '$(Production)' != 'true' ">false</Production>
+    <!-- The default behaviour is to not use the Clean and Rebuild targets from projects. -->
+    <DoNotDelegate Condition=" '$(DoNotDelegate)' != 'false' ">true</DoNotDelegate>
+    <!-- The default behaviour is to be verbose. -->
+    <Verbose Condition=" '$(Verbose)' != 'false' ">true</Verbose>
 
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
+  </PropertyGroup>
 
+  <PropertyGroup>
+    <MessageImportance Condition=" '$(Verbose)' == 'true' ">High</MessageImportance>
+    <MessageImportance Condition=" '$(Verbose)' != 'true' ">Normal</MessageImportance>
+
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <ToolsDir>$(RepositoryRoot)tools\</ToolsDir>
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
     <LogDir>$(WorkRoot)log\</LogDir>
@@ -51,10 +52,10 @@
     <VerifyBuildDummyOutput>$(WorkRoot)verify.txt</VerifyBuildDummyOutput>
     <XunitLogfile>$(LogDir)xunit.xml</XunitLogfile>
     <NuGetCommand>&quot;$(ToolsDir)NuGet\nuget.exe&quot;</NuGetCommand>
-  
-    <MessageImportance Condition=" '$(Verbose)' == 'true' ">High</MessageImportance>
-    <MessageImportance Condition=" '$(Verbose)' != 'true' ">Normal</MessageImportance>
   </PropertyGroup>
+
+  <Import Project="$(ToolsDir)Packages.props" />
+  <Import Project="$(ToolsDir)xUnit.tasks" />
 
   <Choose>
     <When Condition=" '$(Production)' == 'false' ">
@@ -125,10 +126,26 @@
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
-  <Target Name="Clean">
+  <PropertyGroup>
+    <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">HardClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftClean</CleanDependsOn>
+  </PropertyGroup>
+
+  <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
+
+  <Target Name="HardClean">
     <Message Text="Cleaning..." Importance="$(MessageImportance)" />
 
     <RemoveDir Directories="$(WorkRoot)" />
+  </Target>
+
+  <Target Name="SoftClean">
+    <Message Text="Cleaning..." Importance="$(MessageImportance)" />
+
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="Clean" />
   </Target>
 
   <Target Name="RestorePackages">
@@ -147,7 +164,24 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
+  <PropertyGroup>
+    <RebuildDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">HardRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftRebuild</RebuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
+
+  <Target Name="HardRebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
+
+  <Target Name="SoftRebuild">
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="Rebuild"
+             StopOnFirstFailure="true">
+      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
+    </MSBuild>
+  </Target>
 
   <Target Name="VerifyBuild"
           DependsOnTargets="Build"
@@ -230,9 +264,17 @@
 
   <Target Name="_PatchRebuild">
     <!--
-      StyleCop treats differently the "Build" and "Rebuild" targets.
-      We correct this by adding "SourceAnalysisForceFullAnalysis" to the
-      Build properties.
+      StyleCop uses $(RebuildDependsOn) to modify the Build process. 
+      Here, we define Rebuild as Clean;Build, which means that StyleCop 
+      modifications of the Rebuild process won't apply since we never call
+      the Rebuild target of MSBuild. 
+      
+      One solution to this problem is to add the StyleCop modifications to 
+      the Build properties.
+      
+      Another (better?) solution is to define our Rebuild target
+      so that he call MSBuild with the Rebuild target. This is exactly
+      what we do if DoNotDelegate is set to false.
     -->
     <PropertyGroup>
       <BuildProperties>

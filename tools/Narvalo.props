@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This MSBuild file enforces the use of a common set of Build Properties.
+    This MSBuild file defines a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
     Read-Write Properties:
@@ -13,6 +13,7 @@
     Read-Only Properties:
     - NarvaloCodeAnalysisRuleSet
     - NarvaloIsTestProject
+    - NarvaloMessageImportance
     - NarvaloRepositoryRoot
     - NarvaloRunCodeAnalysis
     - NarvaloSettingsDir
@@ -28,17 +29,25 @@
   <!-- ### Narvalo Properties ### -->
 
   <PropertyGroup>
-    <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' == '' ">false</NarvaloDisableSourceAnalysisOnBuild>
-    <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' == '' ">false</NarvaloIsSampleProject>
-    <NarvaloVerbose Condition=" '$(NarvaloVerbose)' == '' ">true</NarvaloVerbose>
+    <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
+    <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' != 'true' ">false</NarvaloIsSampleProject>
+    <NarvaloVerbose Condition=" '$(NarvaloVerbose)' != 'false' ">true</NarvaloVerbose>
 
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">High</NarvaloMessageImportance>
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">Normal</NarvaloMessageImportance>
+
+    <!-- Repository Layout. -->
     <NarvaloRepositoryRoot>$(MSBuildThisFileDirectory)..\</NarvaloRepositoryRoot>
+    <NarvaloSettingsDir>$(NarvaloRepositoryRoot)etc\</NarvaloSettingsDir>
+    <NarvaloToolsDir>$(NarvaloRepositoryRoot)tools\</NarvaloToolsDir>
+
+    <!-- Code Analysis. -->
     <!-- Default values. This is not really necessary but we never know. -->
     <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
     <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
-    <NarvaloSettingsDir>$(NarvaloRepositoryRoot)etc\</NarvaloSettingsDir>
+
+    <!-- Source Analysis. -->
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
-    <NarvaloToolsDir>$(NarvaloRepositoryRoot)tools\</NarvaloToolsDir>
   </PropertyGroup>
 
   <!--
