@@ -4,25 +4,15 @@
     This MSBuild file defines a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
-    Read-Write Properties:
+    Options:
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
     - NarvaloIsSampleProject
     - NarvaloVerbose
-    
-    Read-Only Properties:
-    - NarvaloCodeAnalysisRuleSet
-    - NarvaloIsTestProject
-    - NarvaloMessageImportance
-    - NarvaloRepositoryRoot
-    - NarvaloRunCodeAnalysis
-    - NarvaloSettingsDir
-    - NarvaloSourceAnalysisEnabled
-    - NarvaloToolsDir
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.props" />
-    or if you do not follow the default repository layout:
+    If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.props" />
   -->
 
@@ -37,20 +27,16 @@
     <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' != 'true' ">false</NarvaloIsSampleProject>
     <NarvaloVerbose Condition=" '$(NarvaloVerbose)' != 'false' ">true</NarvaloVerbose>
 
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">High</NarvaloMessageImportance>
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">Normal</NarvaloMessageImportance>
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">high</NarvaloMessageImportance>
+    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">normal</NarvaloMessageImportance>
 
-    <!-- Repository Layout. -->
-    <NarvaloRepositoryRoot>$(MSBuildThisFileDirectory)..\</NarvaloRepositoryRoot>
-    <NarvaloSettingsDir>$(NarvaloRepositoryRoot)etc\</NarvaloSettingsDir>
-    <NarvaloToolsDir>$(NarvaloRepositoryRoot)tools\</NarvaloToolsDir>
+    <NarvaloRepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</NarvaloRepositoryRoot>
 
-    <!-- Code Analysis. -->
-    <!-- Default values. This is not really necessary but we never know. -->
+    <!-- Code Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
     <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
 
-    <!-- Source Analysis. -->
+    <!-- Source Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
   </PropertyGroup>
 
@@ -75,8 +61,6 @@
   <!-- ### Standard MSBuild Properties ### -->
 
   <PropertyGroup>
-    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
-
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -97,8 +81,10 @@
     <FileAlignment>512</FileAlignment>
 
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(NarvaloSettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(NarvaloRepositoryRoot)etc\Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
 
     <!-- REVIEW: Should I also set these properties? -->
     <!-- $(SolutionDir) is usually set inside Visual Studio. -->
@@ -137,14 +123,14 @@
   <!-- ### Automatically Linked Files ### -->
 
   <ItemGroup>
-    <CodeAnalysisDictionary Include="$(NarvaloSettingsDir)CodeAnalysisDictionary.xml">
+    <CodeAnalysisDictionary Include="$(NarvaloRepositoryRoot)etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <!--
       I would like to also include the file containing the common assembly infos,
       unfortunately, if done here, the file won't appear in VS.
     -->
-    <!--<Compile Include="$(NarvaloSettingsDir)AssemblyInfo.Common.cs">
+    <!--<Compile Include="$(NarvaloRepositoryRoot)etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>-->
   </ItemGroup>
@@ -167,7 +153,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(NarvaloSettingsDir)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(NarvaloRepositoryRoot)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
@@ -193,13 +179,13 @@
     <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
       <!-- Sample projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloSettingsDir)Samples.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
       <!-- Test projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloSettingsDir)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Tests.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <Otherwise>
@@ -210,7 +196,7 @@
           produce assemblies that are not compatible with Code Analysis.
         -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloSettingsDir)Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloRepositoryRoot)etc\Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>
@@ -275,11 +261,11 @@
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
 
     <!-- Contract Reference Assembly. -->
-    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
-  
+
   <!-- If any, import custom props. -->
   <Import Project="$(CustomAfterNarvaloProps)"
           Condition=" '$(CustomAfterNarvaloProps)' != '' And Exists('$(CustomAfterNarvaloProps)')" />

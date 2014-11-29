@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    Continuous Integration Overrides.
-    
-    This file is only injected at the end of Narvalo.props by Build.proj.
-    Another way of doing this could have been to include this file
-    directly in Narvalo.props and use a conditional:
-      '$(BuildingInsideVisualStudio)' != 'true'
+    This file is injected at the end of Narvalo.props by Build.proj.
   -->
 
   <PropertyGroup>

@@ -3,7 +3,7 @@
   <!--
     Each project should import this file after Narvalo.props:
       <Import Project="..\..\tools\Narvalo.targets" />
-    or if you do not follow the default repository layout:
+    If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.targets" />
   -->
 
@@ -11,7 +11,7 @@
   <Import Project="$(CustomBeforeNarvaloTargets)"
           Condition=" '$(CustomBeforeNarvaloTargets)' != '' And Exists('$(CustomBeforeNarvaloTargets)')" />
 
-  <Import Project="$(NarvaloToolsDir)StyleCop.targets" />
+  <Import Project="$(NarvaloRepositoryRoot)tools\StyleCop.targets" />
 
   <!-- ### Microsoft Build Targets ### -->
   <!--

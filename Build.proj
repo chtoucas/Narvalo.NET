@@ -3,31 +3,32 @@
          DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
+    Options:
+    - DoNotDelegate
+    - Production
+    - Verbose
+    
     Sample usages:
     - Build all projects:
         MSBuild Build.proj
-    - Build all projects, be verbose:
-        MSBuild Build.proj /p:Verbose:true
-    - Build all projects and create NuGet packages:
-        MSBuild Build.proj /t:Package
-    - Build NuGet packages and only the necessary projects:
-        MSBuild Build.proj /t:Package /p:Production=true
+    - Build all projects, be quiet:
+        MSBuild Build.proj /p:Verbose:false
+    - Build only the "stable" projects:
+        MSBuild Build.proj /p:Production=true
         
     *** IMPORTANT ***
-    When upgrading VS, you should upgrade the VisualStudioVersion here,
-    in build.cmd and in Narvalo.props.
+    When upgrading VS, you should upgrade the VisualStudioVersion here, in
+    Narvalo.props and build.cmd.
     
     FIXME:
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
-    - NarvaloLogDir
+    - Inputs & Outputs
     - Apply NarvaloVerbose to CodeAnalysis & co?
     - Remove .xml.old created by Code Contracts.
     - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.        
-    - There are still some files created in bin and obj.
-    - PSake or Fake launcher. Download NuGet if necessary.
-    - Move MSBuild.log to log directory?
+    - PS1, PSake or Fake launcher. Download NuGet if necessary.
     - Versioning.
     - Create NuGet packages: Subset of packages?
     - Artifacts
@@ -45,33 +46,34 @@
     <DoNotDelegate Condition=" '$(DoNotDelegate)' != 'false' ">true</DoNotDelegate>
     <!-- The default behaviour is to be verbose. -->
     <Verbose Condition=" '$(Verbose)' != 'false' ">true</Verbose>
+  </PropertyGroup>
 
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
+
+    <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
 
   <PropertyGroup>
-    <MessageImportance Condition=" '$(Verbose)' == 'true' ">High</MessageImportance>
-    <MessageImportance Condition=" '$(Verbose)' != 'true' ">Normal</MessageImportance>
-
-    <VisualStudioVersion>12.0</VisualStudioVersion>
-
+    <MessageImportance Condition=" '$(Verbose)' == 'true' ">high</MessageImportance>
+    <MessageImportance Condition=" '$(Verbose)' != 'true' ">normal</MessageImportance>
+    
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <ToolsDir>$(RepositoryRoot)tools\</ToolsDir>
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
+    
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
     <LogDir>$(WorkRoot)log\</LogDir>
-    <PackagesDir>$(WorkRoot)packages\</PackagesDir>
+
     <VerifyBuildDummyOutput>$(WorkRoot)verify.txt</VerifyBuildDummyOutput>
     <XunitLogfile>$(LogDir)xunit.xml</XunitLogfile>
-    <NuGetCommand>&quot;$(ToolsDir)NuGet\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand>&quot;$(RepositoryRoot)tools\NuGet\nuget.exe&quot;</NuGetCommand>
   </PropertyGroup>
 
-  <Import Project="$(ToolsDir)Build.Packages.props" />
-  <Import Project="$(ToolsDir)xUnit.tasks" />
+  <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
 
   <Choose>
     <When Condition=" '$(Production)' == 'false' ">
@@ -85,10 +87,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -133,10 +135,10 @@
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
       VisualStudioVersion=$(VisualStudioVersion);
-      CustomAfterNarvaloProps=$(ToolsDir)Build.After.props;
-      CustomBeforeNarvaloTargets=$(ToolsDir)Build.Before.targets;
-      NarvaloLogDir=$(LogDir);
-      NarvaloVerbose=$(Verbose)
+      CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.After.props;
+      CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.Before.targets;
+      NarvaloVerbose=$(Verbose);
+      NarvaloLogDir=$(LogDir)
     </BuildProperties>
   </PropertyGroup>
 
@@ -159,8 +161,6 @@
   </Target>
 
   <Target Name="SoftClean">
-    <Message Text="Cleaning..." Importance="$(MessageImportance)" />
-
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -243,42 +243,11 @@
            Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
 
-  <Target Name="Package"
-          DependsOnTargets="Build;_CreatePackagesDir;"
-          Outputs="%(Packages.Identity)">
-    <Message Text="Creating NuGet package for %(Packages.Identity)..." Importance="$(MessageImportance)" />
-
-    <PropertyGroup>
-      <_PackageDir>$(PackagesDir)%(Packages.Identity)\</_PackageDir>
-      <_PackageSpec>$(_PackageDir)%(Packages.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <!-- Remove directory first. -->
-
-    <MakeDir Directories="$(_PackageDir)build" Condition=" '%(Packages.Build)' != '' " />
-    <!--<Copy SourceFiles="%(Packages.Build)" DestinationFolder="$(Packages)build" />-->
-    <MakeDir Directories="$(_PackageDir)lib" Condition=" '%(Packages.Lib)' != '' " />
-    <!--<Copy SourceFiles="%(Packages.Libs)" DestinationFolder="$(_PackageDir)lib" />-->
-    <MakeDir Directories="$(_PackageDir)tools" Condition=" '%(Packages.Tools)' != '' " />
-    <!--<Copy SourceFiles="%(Packages.Tools)" DestinationFolder="$(_PackageDir)tools" />-->
-
-    <_CreatePackageSpec
-      TemplateFile="$(RepositoryRoot)etc\%(Packages.Identity).nuspec"
-      VersionNumber="1.0.0"
-      SpecFile="$(_PackageSpec)" />
-
-    <!--<Exec Command="$(NuGetCommand) pack &quot;$(_PackageSpec)&quot; -OutputDirectory &quot;$(PackagesDir)&quot; -Verbosity detailed" />-->
-  </Target>
-
 
   <!-- ### Private Targets ### -->
 
   <Target Name="_CreateLogDir">
     <MakeDir Directories="$(LogDir)" Condition="!Exists($(LogDir))" />
-  </Target>
-
-  <Target Name="_CreatePackagesDir">
-    <MakeDir Directories="$(PackagesDir)" Condition="!Exists($(PackagesDir))" />
   </Target>
 
   <Target Name="_PatchRebuild">
@@ -302,37 +271,4 @@
       </BuildProperties>
     </PropertyGroup>
   </Target>
-
-  <UsingTask TaskName="_CreatePackageSpec" TaskFactory="CodeTaskFactory"
-             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(VisualStudioVersion).dll">
-    <ParameterGroup>
-      <TemplateFile ParameterType="System.String" Required="true" />
-      <VersionNumber ParameterType="System.String" Required="true" />
-      <SpecFile ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-if (TemplateFile.Length == 0) {
-    Log.LogMessage(MessageImportance.High, "You must supply a template file.");
-    return false;
-}
-
-try {
-    string template = File.ReadAllText(TemplateFile).Replace("$version$", VersionNumber);
-    File.WriteAllText(SpecFile, template);
-}
-catch (IOException ex) {
-    Log.LogErrorFromException(ex);
-}
-
-return !Log.HasLoggedErrors;
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask>
 </Project>

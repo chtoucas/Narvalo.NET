@@ -15,12 +15,12 @@
 @GOTO BuildCustom
 
 :BuildCustom
-%MSBuild% Build.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false /t:%* /p:Production=true;Verbose=true
+%MSBuild% Build.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false /t:%* /p:Production=true;Configuration=Release
 @IF %ERRORLEVEL% neq 0 @GOTO Failure
 @GOTO Success
 
 :BuildDefaults
-%MSBuild% Build.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false /p:Production=true;Verbose=true
+%MSBuild% Build.proj /nologo /v:m /fl /flp:logfile=.\build.log;verbosity=detailed;encoding=utf-8 /m /nr:false /p:Production=true;Configuration=Release
 @IF %ERRORLEVEL% neq 0 @GOTO Failure
 @GOTO Success
 
