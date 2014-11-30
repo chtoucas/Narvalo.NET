@@ -1,12 +1,11 @@
+
 @echo off
+@setlocal
 
-@if "%1"=="Release" ( @goto Release )
-@goto Debug
+@set Configuration=Debug
+@if "%1"=="Release" ( @set Configuration=Release )
 
-:Debug
-@call "%~dp0\build.cmd" Debug BuildFast Stable
-@goto :eof
+@call "%~dp0\build.cmd" %Configuration% BuildFast Stable
 
-:Release
-@call "%~dp0\build.cmd" Release BuildFast Stable
-@goto :eof
+@endlocal
+@exit /B %ERRORLEVEL%

@@ -16,7 +16,7 @@
         MSBuild Build.proj /p:Production=true
 
     *** IMPORTANT ***
-    When upgrading VS, you should upgrade the VisualStudioVersion here, in
+    When upgrading VS, do not forget to upgrade the VisualStudioVersion here, in
     Narvalo.props and build.cmd.
 
     FIXME:
@@ -27,9 +27,9 @@
     - ChangeLog compatibility with FAKE ReleaseNotes.
     - Inputs & Outputs: check that Code/Source Analysis & Code Contracts only run if the assembly did really change.
     - SecAnnotate
-    - Code Coverage + Report generator.
+    - Code Coverage + Report Generator.
     - Download NuGet if necessary.
-    - PS1 or Fake launcher. 
+    - PS1 or Fake launcher.
     - Use fake for Versioning and creating NuGet packages.
     - Artifacts
     - Merging, just for fun.
@@ -211,7 +211,7 @@
     <Warning Text="Cannot verify assemblies: .NET Framework SDK v4.5.1 is not installed on your system."
              ContinueOnError="true"
              Condition=" '$(_PEVerifyFound)' != 'true' " />
-    
+
     <Delete Files="$(PEVerifyLogFile)" Condition=" Exists('$(PEVerifyLogFile)') " />
 
     <Exec Command="&quot;$(_PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
@@ -252,7 +252,7 @@
     </GetFrameworkSdkPath>
 
     <PropertyGroup>
-      <!-- WARNING: We really want the 4.5.1 version. -->
+      <!-- WARNING: We really want the 4.5.1 version of tools. -->
       <_PEVerifyCommand>$(_SdkPath)bin\NETFX 4.5.1 Tools\PEVerify.exe</_PEVerifyCommand>
       <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
     </PropertyGroup>
@@ -265,11 +265,10 @@
       modifications of the Rebuild process won't apply since we never call
       the Rebuild target of MSBuild.
 
-      One solution to this problem is to add the StyleCop modifications to
-      the Build properties.
+      The solution is to add the StyleCop modifications to the Build properties.
 
       Another (better?) solution is to define our Rebuild target
-      so that he call MSBuild with the Rebuild target. This is exactly
+      so that it calls MSBuild with the Rebuild target. This is exactly
       what we do if DoNotDelegate is set to false.
     -->
     <PropertyGroup>
@@ -281,12 +280,13 @@
   </Target>
 
   <Target Name="_DeleteOriginalDocumentationFiles">
-    <Message Text="Deleting original XML documentation files (before Code Contracts)..." Importance="high"/>
-    
+    <Message Text="Deleting original XML documentation files (before Code Contracts)..."
+             Importance="high"/>
+
     <ItemGroup>
       <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
     </ItemGroup>
-    
+
     <Delete Files="@(_OriginalDocumentationFiles)" />
   </Target>
 </Project>
