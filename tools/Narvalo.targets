@@ -50,14 +50,14 @@
   <Target Name="BeforeSourceAnalysis"
           BeforeTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="high" />
   </Target>
 
   <Target Name="AfterSourceAnalysis"
           AfterTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
     <Message Text="Source Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
-             Importance="$(NarvaloMessageImportance)" />
+             Importance="high" />
   </Target>
 
 
@@ -86,13 +86,13 @@
   <!--<Target Name="BeforeCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="high" />
   </Target>
 
   <Target Name="AfterCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="high" />
   </Target>-->
 
 
@@ -101,13 +101,13 @@
   <Target Name="BeforeCodeContractsDocumentation"
         BeforeTargets="ContractXmlDocumentation"
         Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="high" />
   </Target>
 
   <Target Name="AfterCodeContractsDocumentation"
           AfterTargets="ContractXmlDocumentation"
           Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Code Contracts Documentation Complete for $(ProjectName)" Importance="high" />
   </Target>
 
   <!--
@@ -118,13 +118,13 @@
   <Target Name="BeforeCodeContractsReferenceAssembly"
         BeforeTargets="CreateCodeContractReferenceAssembly"
         Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="high" />
   </Target>
 
   <Target Name="AfterCodeContractsReferenceAssembly"
           AfterTargets="CodeContractReferenceAssembly"
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="$(NarvaloMessageImportance)" />
+    <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="high" />
   </Target>
 
   <!-- If any, import custom targets.-->

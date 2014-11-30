@@ -6,46 +6,45 @@
     Options:
     - DoNotDelegate
     - Production
-    - Verbose
-    
-    Sample usages:
+
+    Usage:
     - Build all projects:
         MSBuild Build.proj
     - Build all projects, be quiet:
         MSBuild Build.proj /p:Verbose:false
     - Build only the "stable" projects:
         MSBuild Build.proj /p:Production=true
-        
+
     *** IMPORTANT ***
     When upgrading VS, you should upgrade the VisualStudioVersion here, in
     Narvalo.props and build.cmd.
-    
+
     FIXME:
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
+    - ChangeLog compatibility with FAKE ReleaseNotes.
+    - SecAnnotate
     - Inputs & Outputs
-    - Apply NarvaloVerbose to CodeAnalysis & co?
     - Remove .xml.old created by Code Contracts.
-    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.        
-    - PS1, PSake or Fake launcher. Download NuGet if necessary.
+    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.
+    - Code Coverage + Report generator.
+    - PS1 or Fake launcher. Download NuGet if necessary.
     - Versioning.
     - Create NuGet packages: Subset of packages?
     - Artifacts
     - Merging, just for fun.
     - Nuproj?
-    
-    REVIEW: 
+
+    REVIEW:
     - Delay signing?
   -->
 
   <PropertyGroup>
-    <!-- The default behaviour is to build all projects. -->
+    <!-- The default behaviour is to only build the most stable projects. -->
     <Production Condition=" '$(Production)' != 'true' ">false</Production>
     <!-- The default behaviour is to not use the Clean and Rebuild targets from projects. -->
     <DoNotDelegate Condition=" '$(DoNotDelegate)' != 'false' ">true</DoNotDelegate>
-    <!-- The default behaviour is to be verbose. -->
-    <Verbose Condition=" '$(Verbose)' != 'false' ">true</Verbose>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -59,12 +58,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <MessageImportance Condition=" '$(Verbose)' == 'true' ">high</MessageImportance>
-    <MessageImportance Condition=" '$(Verbose)' != 'true' ">normal</MessageImportance>
-    
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
-    
+
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
     <LogDir>$(WorkRoot)log\</LogDir>
 
@@ -87,10 +83,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -137,7 +133,6 @@
       VisualStudioVersion=$(VisualStudioVersion);
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.After.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.Before.targets;
-      NarvaloVerbose=$(Verbose);
       NarvaloLogDir=$(LogDir)
     </BuildProperties>
   </PropertyGroup>
@@ -155,7 +150,7 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
 
   <Target Name="CoreClean">
-    <Message Text="Cleaning..." Importance="$(MessageImportance)" />
+    <Message Text="Cleaning..." Importance="high" />
 
     <RemoveDir Directories="$(WorkRoot)" />
   </Target>
@@ -168,7 +163,7 @@
   </Target>
 
   <Target Name="RestorePackages">
-    <Message Text="Restoring NuGet packages..." Importance="$(MessageImportance)" />
+    <Message Text="Restoring NuGet packages..." Importance="high" />
 
     <Exec Command="$(NuGetCommand) restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
   </Target>
@@ -190,7 +185,7 @@
 
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
 
-  <Target Name="CoreRebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
+  <Target Name="CoreRebuild" DependsOnTargets="_FixRebuild;Clean;Build" />
 
   <Target Name="SoftRebuild">
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -206,7 +201,7 @@
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(VerifyBuildDummyOutput)">
-    <Message Text="Verifying assemblies with PEVerify..." Importance="$(MessageImportance)" />
+    <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
 
     <GetFrameworkSdkPath>
       <!-- Path to default version of the .NET SDK. -->
@@ -231,7 +226,7 @@
           DependsOnTargets="Build;_CreateLogDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XunitLogfile)">
-    <Message Text="Running Xunit tests..." Importance="$(MessageImportance)" />
+    <Message Text="Running Xunit tests..." Importance="high" />
 
     <ItemGroup>
       <_TestAssemblies Include="%(BuildOutputs.Identity)"
@@ -250,16 +245,16 @@
     <MakeDir Directories="$(LogDir)" Condition="!Exists($(LogDir))" />
   </Target>
 
-  <Target Name="_PatchRebuild">
+  <Target Name="_FixRebuild">
     <!--
-      StyleCop uses $(RebuildDependsOn) to modify the Build process. 
-      Here, we define Rebuild as Clean;Build, which means that StyleCop 
+      StyleCop uses $(RebuildDependsOn) to modify the Build process.
+      Here, we define Rebuild as Clean;Build, which means that StyleCop
       modifications of the Rebuild process won't apply since we never call
-      the Rebuild target of MSBuild. 
-      
-      One solution to this problem is to add the StyleCop modifications to 
+      the Rebuild target of MSBuild.
+
+      One solution to this problem is to add the StyleCop modifications to
       the Build properties.
-      
+
       Another (better?) solution is to define our Rebuild target
       so that he call MSBuild with the Rebuild target. This is exactly
       what we do if DoNotDelegate is set to false.

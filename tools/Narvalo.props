@@ -8,7 +8,6 @@
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
     - NarvaloIsSampleProject
-    - NarvaloVerbose
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.props" />
@@ -25,10 +24,6 @@
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
     <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' != 'true' ">false</NarvaloIsSampleProject>
-    <NarvaloVerbose Condition=" '$(NarvaloVerbose)' != 'false' ">true</NarvaloVerbose>
-
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' == 'true' ">high</NarvaloMessageImportance>
-    <NarvaloMessageImportance Condition=" '$(NarvaloVerbose)' != 'true' ">normal</NarvaloMessageImportance>
 
     <NarvaloRepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</NarvaloRepositoryRoot>
 
