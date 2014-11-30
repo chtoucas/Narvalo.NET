@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4F15D06E
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
 		Build.proj = Build.proj
+		buildfast.cmd = buildfast.cmd
 		tools\Narvalo.After.props = tools\Narvalo.After.props
 		tools\Narvalo.Before.targets = tools\Narvalo.Before.targets
 		tools\Narvalo.props = tools\Narvalo.props

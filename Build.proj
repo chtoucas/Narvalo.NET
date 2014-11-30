@@ -23,15 +23,14 @@
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
+    - NarvaloReportsDir
     - ChangeLog compatibility with FAKE ReleaseNotes.
+    - Inputs & Outputs: check that Code/Source Analysis & Code Contracts only run if the assembly did really change.
     - SecAnnotate
-    - Inputs & Outputs
-    - Remove .xml.old created by Code Contracts.
-    - Check that Code/Source Analysis & Code Contracts only run if the assembly did change.
     - Code Coverage + Report generator.
-    - PS1 or Fake launcher. Download NuGet if necessary.
-    - Versioning.
-    - Create NuGet packages: Subset of packages?
+    - Download NuGet if necessary.
+    - PS1 or Fake launcher. 
+    - Use fake for Versioning and creating NuGet packages.
     - Artifacts
     - Merging, just for fun.
     - Nuproj?
@@ -48,7 +47,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
@@ -62,11 +61,12 @@
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
-    <LogDir>$(WorkRoot)log\</LogDir>
+    <ReportsDir>$(WorkRoot)reports\</ReportsDir>
 
-    <VerifyBuildDummyOutput>$(WorkRoot)verify.txt</VerifyBuildDummyOutput>
-    <XunitLogfile>$(LogDir)xunit.xml</XunitLogfile>
-    <NuGetCommand>&quot;$(RepositoryRoot)tools\NuGet\nuget.exe&quot;</NuGetCommand>
+    <VerifyBuildDummyOutput>$(WorkRoot)obj\$(Configuration)\Narvalo.Verify.txt</VerifyBuildDummyOutput>
+    <PEVerifyLogFile>$(WorkRoot)peverify.log</PEVerifyLogFile>
+    <XUnitReportFile>$(ReportsDir)xunit.xml</XUnitReportFile>
+    <NuGetCommand>$(RepositoryRoot)tools\NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
   <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
@@ -133,7 +133,7 @@
       VisualStudioVersion=$(VisualStudioVersion);
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.After.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.Before.targets;
-      NarvaloLogDir=$(LogDir)
+      NarvaloReportsDir=$(ReportsDir)
     </BuildProperties>
   </PropertyGroup>
 
@@ -141,6 +141,8 @@
   <!-- ### Public Targets ### -->
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
+
+  <Target Name="BuildFast" DependsOnTargets="CoreBuild;RunTests" />
 
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
@@ -165,10 +167,10 @@
   <Target Name="RestorePackages">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
-    <Exec Command="$(NuGetCommand) restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="RestorePackages;_CreateLogDir">
+  <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -177,6 +179,8 @@
       <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
+
+  <Target Name="Build" DependsOnTargets="RestorePackages;CoreBuild;_DeleteOriginalDocumentationFiles" />
 
   <PropertyGroup>
     <RebuildDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreRebuild</RebuildDependsOn>
@@ -198,24 +202,20 @@
   </Target>
 
   <Target Name="VerifyBuild"
-          DependsOnTargets="Build"
+          DependsOnTargets="CoreBuild;_FindPEVerify"
           Inputs="@(BuildOutputs)"
           Outputs="$(VerifyBuildDummyOutput)">
-    <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
+    <Message Text="Verifying assemblies with PEVerify..."
+             Importance="high"
+             Condition=" '$(_PEVerifyFound)' == 'true' " />
+    <Warning Text="Cannot verify assemblies: .NET Framework SDK v4.5.1 is not installed on your system."
+             ContinueOnError="true"
+             Condition=" '$(_PEVerifyFound)' != 'true' " />
+    
+    <Delete Files="$(PEVerifyLogFile)" Condition=" Exists('$(PEVerifyLogFile)') " />
 
-    <GetFrameworkSdkPath>
-      <!-- Path to default version of the .NET SDK. -->
-      <!--<Output TaskParameter="Path" PropertyName="_SdkPath" />-->
-      <!-- Path to default version of the .NET 4.0 SDK. -->
-      <Output TaskParameter="FrameworkSdkVersion40Path" PropertyName="_SdkVersion40Path" />
-    </GetFrameworkSdkPath>
-
-    <PropertyGroup>
-      <!-- We use a specific version. -->
-      <_PEVerifyCommand>&quot;$(_SdkVersion40Path)Bin\NETFX 4.5.1 Tools\peverify.exe&quot;</_PEVerifyCommand>
-    </PropertyGroup>
-
-    <Exec Command="$(_PEVerifyCommand) &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique"
+    <Exec Command="&quot;$(_PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
+          Condition=" '$(_PEVerifyFound)' == 'true' "
           ContinueOnError="false" />
 
     <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
@@ -223,9 +223,9 @@
   </Target>
 
   <Target Name="RunTests"
-          DependsOnTargets="Build;_CreateLogDir"
+          DependsOnTargets="CoreBuild;_CreateReportsDir"
           Inputs="@(BuildOutputs)"
-          Outputs="$(XunitLogfile)">
+          Outputs="$(XUnitReportFile)">
     <Message Text="Running Xunit tests..." Importance="high" />
 
     <ItemGroup>
@@ -234,15 +234,28 @@
     </ItemGroup>
 
     <xunit Assemblies="@(_TestAssemblies)"
-           Xml="$(XunitLogfile)"
+           Xml="$(XUnitReportFile)"
            Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
 
 
   <!-- ### Private Targets ### -->
 
-  <Target Name="_CreateLogDir">
-    <MakeDir Directories="$(LogDir)" Condition="!Exists($(LogDir))" />
+  <Target Name="_CreateReportsDir">
+    <MakeDir Directories="$(ReportsDir)" Condition="!Exists($(ReportsDir))" />
+  </Target>
+
+  <Target Name="_FindPEVerify">
+    <GetFrameworkSdkPath>
+      <!-- Path to default version of the .NET SDK. -->
+      <Output TaskParameter="Path" PropertyName="_SdkPath" />
+    </GetFrameworkSdkPath>
+
+    <PropertyGroup>
+      <!-- WARNING: We really want the 4.5.1 version. -->
+      <_PEVerifyCommand>$(_SdkPath)bin\NETFX 4.5.1 Tools\PEVerify.exe</_PEVerifyCommand>
+      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
+    </PropertyGroup>
   </Target>
 
   <Target Name="_FixRebuild">
@@ -265,5 +278,15 @@
         SourceAnalysisForceFullAnalysis=true
       </BuildProperties>
     </PropertyGroup>
+  </Target>
+
+  <Target Name="_DeleteOriginalDocumentationFiles">
+    <Message Text="Deleting original XML documentation files (before Code Contracts)..." Importance="high"/>
+    
+    <ItemGroup>
+      <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
+    </ItemGroup>
+    
+    <Delete Files="@(_OriginalDocumentationFiles)" />
   </Target>
 </Project>

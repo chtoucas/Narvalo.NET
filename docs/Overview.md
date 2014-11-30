@@ -5,18 +5,23 @@ Prerequisites
 -------------
 
 - [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
-- Microsoft .NET 4.5.1 Developer Pack (?)
-- F# Compiler (?)
 
 Optional components:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration
   inside Visual Studio.
 - [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
-- Code Contracts extension for Visual Studio
-- [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758)
-  Prerequisite for the Modeling SDK.
-- [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754)
-  Useful for T4 integration in MSBuild.
+  for xUnit integration inside Visual Studio.
+- [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
+  for building Code Contracts.
+
+Components necessary to run the build scripts:
+- Code Contracts (see above).
+- [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758),
+  Prerequisite for the Modeling SDK (see below).
+- [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754),
+  provides T4 integration in MSBuild.    
+- Microsoft .NET 4.5.1 Developer Pack(?),  Microsoft Windows SDK for Windows 8.1(?) 
+  or .NET Framework SDK for PEVerify.exe.
 
 
 Project Layout

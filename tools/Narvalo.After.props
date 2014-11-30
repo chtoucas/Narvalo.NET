@@ -27,10 +27,10 @@
 
   <!-- 
     Log files are saved in a custom location. 
-    The NarvaloLogDir property is injected by Build.proj.
+    The NarvaloReportsDir property is injected by Build.proj.
   -->
-  <PropertyGroup Condition=" $(NarvaloLogDir) != '' And Exists('$(NarvaloLogDir)')  ">
-    <CodeAnalysisLogFile>$(NarvaloLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(NarvaloLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+  <PropertyGroup Condition=" $(NarvaloReportsDir) != '' And Exists('$(NarvaloReportsDir)')  ">
+    <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
   </PropertyGroup>
 </Project>
