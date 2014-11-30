@@ -28,7 +28,6 @@
     - Inputs & Outputs: check that Code/Source Analysis & Code Contracts only run if the assembly did really change.
     - SecAnnotate
     - Code Coverage + Report Generator.
-    - Download NuGet if necessary.
     - PS1 or Fake launcher.
     - Use fake for Versioning and creating NuGet packages.
     - Artifacts
@@ -83,10 +82,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -143,7 +142,7 @@
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
   <Target Name="BuildFast" DependsOnTargets="CoreBuild;RunTests" />
-
+  
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftClean</CleanDependsOn>
@@ -164,7 +163,19 @@
              Targets="Clean" />
   </Target>
 
-  <Target Name="RestorePackages">
+  <Target Name="DownloadNuGet" Condition=" !Exists('$(NuGetCommand)') ">
+    <Message Text="Downloading latest version of NuGet..." Importance="high" />
+    
+    <PropertyGroup>
+      <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
+
+    <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
+  </Target>
+
+  <Target Name="RestorePackages" DependsOnTargets="DownloadNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
@@ -208,7 +219,7 @@
     <Message Text="Verifying assemblies with PEVerify..."
              Importance="high"
              Condition=" '$(_PEVerifyFound)' == 'true' " />
-    <Warning Text="Cannot verify assemblies: .NET Framework SDK v4.5.1 is not installed on your system."
+    <Warning Text="Cannot verify assemblies: is .NET Framework SDK v4.5.1 installed on your system?"
              ContinueOnError="true"
              Condition=" '$(_PEVerifyFound)' != 'true' " />
 
@@ -242,7 +253,7 @@
   <!-- ### Private Targets ### -->
 
   <Target Name="_CreateReportsDir">
-    <MakeDir Directories="$(ReportsDir)" Condition="!Exists($(ReportsDir))" />
+    <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
   </Target>
 
   <Target Name="_FindPEVerify">
@@ -265,7 +276,8 @@
       modifications of the Rebuild process won't apply since we never call
       the Rebuild target of MSBuild.
 
-      The solution is to add the StyleCop modifications to the Build properties.
+      The solution is to copy the original StyleCop modifications
+      to the Build properties.
 
       Another (better?) solution is to define our Rebuild target
       so that it calls MSBuild with the Rebuild target. This is exactly
@@ -289,4 +301,39 @@
 
     <Delete Files="@(_OriginalDocumentationFiles)" />
   </Target>
+
+  <!-- ### Tasks ### -->
+
+  <PropertyGroup>
+    <CodeTaskFactoryAssemblyFile Condition=" '$(CodeTaskFactoryAssemblyFile)' == '' ">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
+  </PropertyGroup>
+
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <OutputFilePath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+try {
+    new WebClient().DownloadFile("https://nuget.org/nuget.exe", OutputFilePath);
+
+    return true;
+}
+catch (Exception ex) {
+    Log.LogErrorFromException(ex);
+    return false;
+}
+         ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+
 </Project>
