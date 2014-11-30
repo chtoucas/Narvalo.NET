@@ -1,7 +1,6 @@
-@ECHO off
 
-:InstallFake
+@echo off
+
 ".\tools\NuGet\NuGet.exe" "Install" "FAKE" "-OutputDirectory" "packages" "-ExcludeVersion"
 
-:Package
 "packages\FAKE\tools\Fake.exe" package.fsx

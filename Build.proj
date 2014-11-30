@@ -5,7 +5,7 @@
   <!--
     Options:
     - DoNotDelegate
-    - Production
+    - OnlyNuGetProjects
 
     Usage:
     - Build all projects:
@@ -13,34 +13,34 @@
     - Build all projects, be quiet:
         MSBuild Build.proj /p:Verbose:false
     - Build only the "stable" projects:
-        MSBuild Build.proj /p:Production=true
+        MSBuild Build.proj /p:OnlyNuGetProjects=true
 
     *** IMPORTANT ***
-    When upgrading VS, do not forget to upgrade the VisualStudioVersion here, in
-    Narvalo.props and build.cmd.
+    When upgrading VS, do not forget to upgrade the VisualStudioVersion here,
+    in  Narvalo.props and build.cmd.
 
     FIXME:
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
+    - PS1 launcher.
+    - Use FAKE for Versioning and creating NuGet packages. "Requires" updating
+      the ChangeLog for compatibility with the FAKE ReleaseNotes.
+    - Nuproj?
     - NarvaloReportsDir
-    - ChangeLog compatibility with FAKE ReleaseNotes.
-    - Inputs & Outputs: check that Code/Source Analysis & Code Contracts only run if the assembly did really change.
     - SecAnnotate
     - Code Coverage + Report Generator.
-    - PS1 or Fake launcher.
-    - Use fake for Versioning and creating NuGet packages.
     - Artifacts
     - Merging, just for fun.
-    - Nuproj?
 
     REVIEW:
+    - If PEVerify fails, does the error message appear on the command prompt.
     - Delay signing?
   -->
 
   <PropertyGroup>
-    <!-- The default behaviour is to only build the most stable projects. -->
-    <Production Condition=" '$(Production)' != 'true' ">false</Production>
+    <!-- The default behaviour is to build all projects. -->
+    <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
     <!-- The default behaviour is to not use the Clean and Rebuild targets from projects. -->
     <DoNotDelegate Condition=" '$(DoNotDelegate)' != 'false' ">true</DoNotDelegate>
   </PropertyGroup>
@@ -57,8 +57,9 @@
 
   <PropertyGroup>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
+    <SolutionFile>$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
+    <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
     <ReportsDir>$(WorkRoot)reports\</ReportsDir>
 
@@ -71,9 +72,9 @@
   <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
 
   <Choose>
-    <When Condition=" '$(Production)' == 'false' ">
+    <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)Narvalo.sln"></ProjectsToBuild>
+        <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
       </ItemGroup>
       <PropertyGroup>
         <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU... -->
@@ -82,9 +83,13 @@
     </When>
     <Otherwise>
       <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
@@ -141,8 +146,9 @@
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
+  <!-- WARNING: This target may fail if NuGet is not installed. -->
   <Target Name="BuildFast" DependsOnTargets="CoreBuild;RunTests" />
-  
+
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftClean</CleanDependsOn>
@@ -165,7 +171,7 @@
 
   <Target Name="DownloadNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
-    
+
     <PropertyGroup>
       <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
     </PropertyGroup>
@@ -178,7 +184,7 @@
   <Target Name="RestorePackages" DependsOnTargets="DownloadNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(RepositoryRoot)Narvalo (Core).sln&quot; -NonInteractive -Verbosity quiet" />
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet" />
   </Target>
 
   <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
@@ -217,15 +223,16 @@
           Inputs="@(BuildOutputs)"
           Outputs="$(VerifyBuildDummyOutput)">
     <Message Text="Verifying assemblies with PEVerify..."
-             Importance="high"
-             Condition=" '$(_PEVerifyFound)' == 'true' " />
-    <Warning Text="Cannot verify assemblies: is .NET Framework SDK v4.5.1 installed on your system?"
+             Importance="high" Condition=" '$(_PEVerifyFound)' == 'true' " />
+
+    <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
              ContinueOnError="true"
              Condition=" '$(_PEVerifyFound)' != 'true' " />
 
     <Delete Files="$(PEVerifyLogFile)" Condition=" Exists('$(PEVerifyLogFile)') " />
 
     <Exec Command="&quot;$(_PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
+          LogStandardErrorAsError="true"
           Condition=" '$(_PEVerifyFound)' == 'true' "
           ContinueOnError="false" />
 
@@ -256,17 +263,15 @@
     <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
   </Target>
 
-  <Target Name="_FindPEVerify">
-    <GetFrameworkSdkPath>
-      <!-- Path to default version of the .NET SDK. -->
-      <Output TaskParameter="Path" PropertyName="_SdkPath" />
-    </GetFrameworkSdkPath>
+  <Target Name="_DeleteOriginalDocumentationFiles">
+    <Message Text="Deleting original XML documentation files (before Code Contracts)..."
+             Importance="high"/>
 
-    <PropertyGroup>
-      <!-- WARNING: We really want the 4.5.1 version of tools. -->
-      <_PEVerifyCommand>$(_SdkPath)bin\NETFX 4.5.1 Tools\PEVerify.exe</_PEVerifyCommand>
-      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
-    </PropertyGroup>
+    <ItemGroup>
+      <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
+    </ItemGroup>
+
+    <Delete Files="@(_OriginalDocumentationFiles)" />
   </Target>
 
   <Target Name="_FixRebuild">
@@ -291,21 +296,24 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="_DeleteOriginalDocumentationFiles">
-    <Message Text="Deleting original XML documentation files (before Code Contracts)..."
-             Importance="high"/>
+  <Target Name="_FindPEVerify">
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="Path" PropertyName="_SdkPath" />
+    </GetFrameworkSdkPath>
 
-    <ItemGroup>
-      <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
-    </ItemGroup>
-
-    <Delete Files="@(_OriginalDocumentationFiles)" />
+    <PropertyGroup>
+      <_PEVerifyCommand>$(_SdkPath)bin\NETFX 4.5.1 Tools\PEVerify.exe</_PEVerifyCommand>
+      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
+      <_PEVerifyCommand Condition=" '$(_PEVerifyFound)' != 'true' ">$(_SdkPath)bin\NETFX 4.0 Tools\PEVerify.exe</_PEVerifyCommand>
+      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
+    </PropertyGroup>
   </Target>
+
 
   <!-- ### Tasks ### -->
 
   <PropertyGroup>
-    <CodeTaskFactoryAssemblyFile Condition=" '$(CodeTaskFactoryAssemblyFile)' == '' ">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
+    <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
   <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">

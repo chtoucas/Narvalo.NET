@@ -1,3 +1,19 @@
+:: Launcher for Build.proj.
+::
+:: Usage: build [Target?] [Configuration?] [OnlyNuGetProjects?]
+::
+:: Without options, it is equivalent to: build all projects in Release mode,
+:: verify the assemblies and finally run the tests.
+::
+:: Examples:
+:: - Same as default but only for the most stable projects:
+::  build Default Release OnlyNuGetProjects
+:: - Call "Build" target, Debug configuration:
+::	build Build Debug
+:: - Download NuGet:
+::  build DownloadNuGet
+:: - Restore NuGet packages:
+::  build DownloadNuGet
 
 @echo off
 
@@ -16,8 +32,8 @@
 )
 
 :: As a last resort, we use the MSBuild installed alongside the .NET Framework.
-:: This is not perfect. For instance it won't be aware of the last installed
-:: version of the .NET SDK.
+:: It should work but it is not ideal. For instance, it won't be aware of the
+:: last installed version of the .NET SDK.
 @set MSBuild="%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\MSBuild"
 @if exist %MSBuild% ( @goto Build )
 
@@ -44,16 +60,16 @@
 @if "%1"=="" ( @goto BuildDefaults )
 
 :: Process options.
-@set Configuration=%1
-@set Target=Default
-@set Production=false
+@set Target=%1
+@set Configuration=Release
+@set OnlyNuGetProjects=false
 
 @if "%2"=="" ( @goto BuildCustom )
-@set Target=%2
+@set Configuration=%2
 
 @if "%3"=="" ( @goto BuildCustom )
-@if "%3"=="Stable" (
-    @set Production=true
+@if "%3"=="OnlyNuGetProjects" (
+    @set OnlyNuGetProjects=true
     @goto BuildCustom
 )
 
@@ -70,9 +86,9 @@
 
 :BuildCustom
 
-@echo Running Build with Configuration=%Configuration% Target=%Target% Production=%Production%
+@echo Running custom Build with Target=%Target% Configuration=%Configuration% OnlyNuGetProjects=%OnlyNuGetProjects%
 
-%MSBuildWithOptions% /t:%Target% /p:Production=%Production%;Configuration=%Configuration%
+%MSBuildWithOptions% /t:%Target% /p:OnlyNuGetProjects=%OnlyNuGetProjects%;Configuration=%Configuration%
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess
