@@ -9,6 +9,7 @@
     <AssemblyName>Narvalo.Web</AssemblyName>
     <TargetFrameworkProfile />
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <DefineConstants>NARVALO_CORE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -100,9 +101,6 @@
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
-      <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>

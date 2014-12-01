@@ -7,9 +7,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvpCommandLine</RootNamespace>
     <AssemblyName>MvpCommandLine</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup>
-    <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
+    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -24,9 +22,6 @@
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
-      <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
     <Compile Include="ISampleView.cs" />
     <Compile Include="Program.cs" />

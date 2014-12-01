@@ -7,6 +7,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Benchmarking</RootNamespace>
     <AssemblyName>Narvalo.Benchmarking</AssemblyName>
+    <DefineConstants>NARVALO_CORE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -21,9 +22,6 @@
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Core.cs">
-      <Link>Properties\AssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkAttribute.cs" />

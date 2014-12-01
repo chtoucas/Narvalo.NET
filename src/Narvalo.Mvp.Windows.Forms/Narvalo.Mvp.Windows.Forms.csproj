@@ -8,6 +8,7 @@
     <RootNamespace>Narvalo.Mvp.Windows.Forms</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Windows.Forms</AssemblyName>
     <TargetFrameworkProfile />
+    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -19,9 +20,6 @@
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
-      <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>

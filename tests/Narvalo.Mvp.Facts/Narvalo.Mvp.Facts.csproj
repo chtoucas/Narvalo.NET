@@ -12,6 +12,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
@@ -43,9 +44,6 @@
   <ItemGroup>
     <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
-    <Compile Include="..\..\etc\AssemblyInfo.Mvp.cs">
-      <Link>Properties\AssemblyInfo.Mvp.cs</Link>
     </Compile>
     <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />

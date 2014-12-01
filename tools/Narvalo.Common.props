@@ -7,7 +7,6 @@
     Options:
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
-    - NarvaloIsSampleProject
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -23,12 +22,11 @@
 
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
-    <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' != 'true' ">false</NarvaloIsSampleProject>
 
     <NarvaloRepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</NarvaloRepositoryRoot>
   </PropertyGroup>
 
-  <!-- Instruct MSBuild to load our common targets just after Microsoft.Common.targets. -->
+  <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
     <CustomAfterMicrosoftCommonTargets>$(NarvaloRepositoryRoot)tools\Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
@@ -41,9 +39,23 @@
     <!-- Source Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
   </PropertyGroup>
+
+  <!-- We use the project layout to identify sample projects. -->
+  <Choose>
+    <When Condition=" '$(MSBuildProjectDirectory.Contains(samples))' == 'true' ">
+      <PropertyGroup>
+        <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
+    </PropertyGroup>
+    </Otherwise>
+  </Choose>
   
   <!--
-    We use the project type Guid to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
+    We use the project type Guid to identify the test projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
     Another way to do this here could be to use: Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
   -->
   <Choose>
@@ -99,7 +111,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
@@ -107,7 +119,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;CODE_ANALYSIS</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -117,7 +129,7 @@
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <!-- Keep the DEBUG constant since Contract.Assert and Contract.Assume depend on it. -->
-    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 

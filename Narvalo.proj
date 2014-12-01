@@ -20,9 +20,14 @@
     in  Narvalo.props and build.cmd.
 
     FIXME:
-    - T4 re-generation has been disabled since it require VS hosting.
+    - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
+    - Remove Narvalo.sln everywhere in favour of Narvalo.proj
+      Use wildcard *.csproj instead. Solution uses Configuration Manager
+      which can lead to unexpected behaviour.
+    - Move Narvalo.Common.props at the top of the project files.
+    - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot)
     - NarvaloReportsDir
     - Use FAKE for versioning(?) and creation of NuGet packages.
@@ -218,9 +223,14 @@
   </Target>
 
   <Target Name="VerifyBuild"
-          DependsOnTargets="CoreBuild;_FindPEVerify"
+          DependsOnTargets="CoreBuild"
           Inputs="@(BuildOutputs)"
           Outputs="$(VerifyBuildDummyOutput)">
+    <PropertyGroup>
+      <_PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</_PEVerifyCommand>
+      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
+    </PropertyGroup>
+
     <Message Text="Verifying assemblies with PEVerify..."
              Importance="high" Condition=" '$(_PEVerifyFound)' == 'true' " />
 
@@ -292,19 +302,6 @@
         $(BuildProperties);
         SourceAnalysisForceFullAnalysis=true
       </BuildProperties>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="_FindPEVerify">
-    <GetFrameworkSdkPath>
-      <Output TaskParameter="Path" PropertyName="_SdkPath" />
-    </GetFrameworkSdkPath>
-
-    <PropertyGroup>
-      <_PEVerifyCommand>$(_SdkPath)bin\NETFX 4.5.1 Tools\PEVerify.exe</_PEVerifyCommand>
-      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
-      <_PEVerifyCommand Condition=" '$(_PEVerifyFound)' != 'true' ">$(_SdkPath)bin\NETFX 4.0 Tools\PEVerify.exe</_PEVerifyCommand>
-      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
     </PropertyGroup>
   </Target>
 
