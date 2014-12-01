@@ -48,7 +48,7 @@ There are five solutions.
 ### Narvalo.sln
 
 This solution contains all projects. This is not used for daily work but rather
-for deep refactoring and installing NuGet packages updates.
+for deep refactoring and installing NuGet packages updates/restores.
 
 ### Narvalo (Core).sln
 

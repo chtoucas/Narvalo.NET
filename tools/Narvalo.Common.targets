@@ -11,7 +11,8 @@
 
   <Import Project="$(NarvaloRepositoryRoot)tools\StyleCop.targets" />
 
-  <!-- ### Microsoft Build Targets ### -->
+  
+  <!-- ### Microsoft Build Process ### -->
   <!--
     To modify the build process, use one of the extension points defined
     inside Microsoft.Common.targets.

@@ -27,9 +27,9 @@
 
   <!-- 
     Log files are saved in a custom location. 
-    The NarvaloReportsDir property is injected by Narvalo.proj.
+    The NarvaloReportsDir property is passed to Narvalo.Common.props by Narvalo.proj.
   -->
-  <PropertyGroup Condition=" $(NarvaloReportsDir) != '' And Exists('$(NarvaloReportsDir)')  ">
+  <PropertyGroup Condition=" '$(NarvaloReportsDir)' == '' And Exists('$(NarvaloReportsDir)')  ">
     <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
     <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
   </PropertyGroup>

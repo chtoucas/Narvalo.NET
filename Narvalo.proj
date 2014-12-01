@@ -21,9 +21,9 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
+    - Add another filter: Core, Mvp
     - Review all AssemblyInfo.cs (header, version).
-    - Remove SolutionFile
-    - $(RepositoryRoot)
+    - $(RepositoryRoot) aliases -> tools, etc
     - NarvaloReportsDir
     - Use FAKE for versioning(?) and creation of NuGet packages.
     - Nuproj?
@@ -40,7 +40,10 @@
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
     <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
-    <!-- The default behaviour is to not use the Clean and Rebuild targets from projects. -->
+    <!-- 
+      The default behaviour is to use our own defined Clean and Rebuild targets
+      and not to delegate them to the one found in the projects. 
+    -->
     <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
   </PropertyGroup>
 
@@ -74,7 +77,8 @@
     <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
       <!-- 
         Solutions use the Configuration Manager which can lead to unexpected
-        behaviour. For instance, a project might not be selected for Build.
+        behaviour. For instance, a project might not have been selected for 
+        building.
         WARNING: Solutions use "Any CPU" instead of "AnyCPU... 
       -->
       <!--
@@ -111,7 +115,7 @@
 
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of $(OutDir). To correct this, we instruct MSBuild to
-      use the standard behaviour: $(GenerateProjectSpecificOutputFolder) = false.
+      use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
 
       Here is the documentation directly taken from:
         %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
@@ -147,6 +151,7 @@
       VisualStudioVersion=$(VisualStudioVersion);
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
+      NarvaloRepositoryRoot=$(RepositoryRoot);
       NarvaloReportsDir=$(ReportsDir)
     </BuildProperties>
   </PropertyGroup>
@@ -155,12 +160,6 @@
   <!-- ### Public Targets ### -->
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
-
-  <!-- 
-    WARNING: This target may fail if NuGet is not installed and packages
-    were not restored.
-  -->
-  <Target Name="QuickAndDirtyBuildThenTest" DependsOnTargets="CoreBuild;RunTests" />
 
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(BeLean)' == 'true' ">LeanClean</CleanDependsOn>
@@ -201,6 +200,10 @@
           LogStandardErrorAsError="true" />
   </Target>
 
+  <!-- 
+    WARNING: This target might fail if the packages were not previously restored. 
+    We keep it that way to be able to perform fast builds during development.
+  -->
   <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"

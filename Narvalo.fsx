@@ -47,7 +47,7 @@ Target "Build" (fun _ ->
     //    let setParams defaults =
     //        { defaults with
     //            Verbosity = Some(Quiet)
-    //            Targets = ["QuickAndDirtyBuildThenTest"]
+    //            Targets = ["LeanDefault"]
     //            Properties =
     //                [
     //                    "OnlyNuGetProjects", "true"

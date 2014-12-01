@@ -13,20 +13,20 @@
     If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\tools\Narvalo.Common.props" />
     
-    WARNING: Place your import just after the first PropertyGroup. We expect
-    $(AssemblyName) to be defined.
+    WARNING: Make sure your import is just after the first PropertyGroup. 
+    We expect $(AssemblyName) to be defined.
   -->
 
   <!-- If any, import custom props. -->
   <Import Project="$(CustomBeforeNarvaloProps)"
           Condition=" '$(CustomBeforeNarvaloProps)' != '' And Exists('$(CustomBeforeNarvaloProps)')" />
 
+
   <!-- ### Narvalo Properties ### -->
 
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
-
-    <NarvaloRepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</NarvaloRepositoryRoot>
+    <NarvaloRepositoryRoot Condition=" '$(NarvaloRepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</NarvaloRepositoryRoot>
   </PropertyGroup>
 
   <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
@@ -82,6 +82,8 @@
   <!-- ### Standard MSBuild Properties ### -->
 
   <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+    
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -105,8 +107,6 @@
     <AssemblyOriginatorKeyFile>$(NarvaloRepositoryRoot)etc\Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
 
-    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
-
     <!-- REVIEW: Should I also set these properties? -->
     <!-- $(SolutionDir) is usually set inside Visual Studio. -->
     <!--<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*' ">$(MSBuildThisFileDirectory)..\</SolutionDir>-->
@@ -118,7 +118,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;$(DefineConstants)</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
@@ -126,7 +126,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS;$(DefineConstants)</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -136,7 +136,7 @@
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <!-- Keep the DEBUG constant since Contract.Assert and Contract.Assume depend on it. -->
-    <DefineConstants>$(DefineConstants);TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL;$(DefineConstants)</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 

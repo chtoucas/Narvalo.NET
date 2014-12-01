@@ -48,6 +48,8 @@ Narvalo (Core)
 
 ### High Priority
 
+- Maybe<T>, ensures that if the underlying is null things work correctly 
+  (I don't think so).
 - Enforce, why can't I use ContractAbbreviator? The method get erased.
   The current workaround makes the API too different.
 - Require.Condition, Require.RangeCondition. CCCheck fails on these.
