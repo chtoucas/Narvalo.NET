@@ -12,6 +12,9 @@
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.Common.props" />
+    
+    WARNING: Place your import just after the first PropertyGroup. We expect
+    $(AssemblyName) to be defined.
   -->
 
   <!-- If any, import custom props. -->
@@ -40,26 +43,18 @@
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
   </PropertyGroup>
 
-  <!-- We use the project layout to identify sample projects. -->
-  <Choose>
-    <When Condition=" '$(MSBuildProjectDirectory.Contains(samples))' == 'true' ">
-      <PropertyGroup>
-        <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
-    </PropertyGroup>
-    </Otherwise>
-  </Choose>
-  
   <!--
-    We use the project type Guid to identify the test projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
-    Another way to do this here could be to use: Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
+    We use the project layout to identify test and sample projects. This way we
+    can be almost sure that a project is not identified at the same time
+    as a test project and as a sample project.
+    
+    For test projects, we could have used the project type Guid:
+      '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true'
+    or the assembly name: 
+      '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
   <Choose>
-    <When Condition=" '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true' ">
+    <When Condition=" '$(MSBuildProjectDirectory.Contains(tests))' == 'true' ">
       <PropertyGroup>
         <NarvaloIsTestProject>true</NarvaloIsTestProject>
       </PropertyGroup>
@@ -70,7 +65,19 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-
+  <Choose>
+    <When Condition=" '$(MSBuildProjectDirectory.Contains(samples))' == 'true' ">
+      <PropertyGroup>
+        <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  
 
   <!-- ### Standard MSBuild Properties ### -->
 
@@ -190,16 +197,16 @@
   </PropertyGroup>
 
   <Choose>
-    <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
-      <!-- Sample projects use a custom ruleset. -->
-      <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
-      </PropertyGroup>
-    </When>
     <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
       <!-- Test projects use a custom ruleset. -->
       <PropertyGroup>
         <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
+      <!-- Sample projects use a custom ruleset. -->
+      <PropertyGroup>
+        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <Otherwise>

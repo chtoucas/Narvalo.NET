@@ -23,10 +23,11 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
+    - Be Lean.
+    - xUnit run even if there is no build output.
     - Remove Narvalo.sln everywhere in favour of Narvalo.proj
       Use wildcard *.csproj instead. Solution uses Configuration Manager
       which can lead to unexpected behaviour.
-    - Move Narvalo.Common.props at the top of the project files.
     - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot)
     - NarvaloReportsDir
