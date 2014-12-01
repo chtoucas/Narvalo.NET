@@ -16,7 +16,7 @@ Low Priority
 Resolved Issues
 ===============
 
-[2] When building a PCL project from the command line, MSBuild generates output
+[2] When building a PCL project **from the command line**, MSBuild generates output
     inside a subdirectory of `$(OutDir)`. To correct this, we instruct MSBuild to
     use the standard behaviour: `$(GenerateProjectSpecificOutputFolder) = false`. 
 

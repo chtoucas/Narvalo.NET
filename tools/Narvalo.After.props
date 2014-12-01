@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.props by Build.proj.
+    This file is injected at the end of Narvalo.props by Narvalo.proj.
   -->
 
   <PropertyGroup>
@@ -27,7 +27,7 @@
 
   <!-- 
     Log files are saved in a custom location. 
-    The NarvaloReportsDir property is injected by Build.proj.
+    The NarvaloReportsDir property is injected by Narvalo.proj.
   -->
   <PropertyGroup Condition=" $(NarvaloReportsDir) != '' And Exists('$(NarvaloReportsDir)')  ">
     <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>

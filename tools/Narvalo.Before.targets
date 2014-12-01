@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the beginning of Narvalo.targets by Build.proj.
+    This file is injected at the beginning of Narvalo.targets by Narvalo.proj.
   -->
   
   <Import Project="$(NarvaloRepositoryRoot)tools\TextTemplating.targets" />

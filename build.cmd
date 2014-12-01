@@ -1,4 +1,4 @@
-:: Launcher for Build.proj.
+:: Launcher for Narvalo.proj.
 ::
 :: Usage: build [Target?] [Configuration?] [OnlyNuGetProjects?]
 ::
@@ -46,7 +46,7 @@
 @setlocal
 @pushd %~dp0
 
-@set BuildFile=.\Build.proj
+@set BuildFile=.\Narvalo.proj
 @set LogFile=.\build.log
 
 :: MSBuild command line with options.

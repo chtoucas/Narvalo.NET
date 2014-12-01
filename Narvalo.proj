@@ -9,11 +9,11 @@
 
     Usage:
     - Build all projects:
-        MSBuild Build.proj
+        MSBuild Narvalo.proj
     - Build all projects, be quiet:
-        MSBuild Build.proj /p:Verbose:false
+        MSBuild Narvalo.proj /p:Verbose:false
     - Build only the "stable" projects:
-        MSBuild Build.proj /p:OnlyNuGetProjects=true
+        MSBuild Narvalo.proj /p:OnlyNuGetProjects=true
 
     *** IMPORTANT ***
     When upgrading VS, do not forget to upgrade the VisualStudioVersion here,
@@ -23,8 +23,7 @@
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
-    - PS1 launcher.
-    - Use FAKE for Versioning and creating NuGet packages. "Requires" updating
+    - Use FAKE for versioning and creation of NuGet packages. "Requires" updating
       the ChangeLog for compatibility with the FAKE ReleaseNotes.
     - Nuproj?
     - NarvaloReportsDir
@@ -84,13 +83,13 @@
     <Otherwise>
       <ItemGroup>
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -147,7 +146,7 @@
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
   <!-- WARNING: This target may fail if NuGet is not installed. -->
-  <Target Name="BuildFast" DependsOnTargets="CoreBuild;RunTests" />
+  <Target Name="QuickAndDirtyBuildThenTest" DependsOnTargets="CoreBuild;RunTests" />
 
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
