@@ -17,7 +17,7 @@
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
     <NarvaloDisableSourceAnalysisOnBuild>true</NarvaloDisableSourceAnalysisOnBuild>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="NSubstitute">
       <HintPath>..\..\packages\NSubstitute.1.8.0.0\lib\net45\NSubstitute.dll</HintPath>
@@ -100,5 +100,5 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\tools\Narvalo.targets" />
+  <Import Project="..\..\tools\Narvalo.Common.targets" />
 </Project>

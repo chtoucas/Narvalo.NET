@@ -9,7 +9,7 @@
     <AssemblyName>Narvalo.Mvp.Windows.Forms</AssemblyName>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,5 +51,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\tools\Narvalo.targets" />
+  <Import Project="..\..\tools\Narvalo.Common.targets" />
 </Project>

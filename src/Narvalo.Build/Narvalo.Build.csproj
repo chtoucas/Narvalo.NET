@@ -13,7 +13,7 @@
   <PropertyGroup>
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
@@ -43,9 +43,5 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\tools\Narvalo.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
+  <Import Project="..\..\tools\Narvalo.Common.targets" />
 </Project>

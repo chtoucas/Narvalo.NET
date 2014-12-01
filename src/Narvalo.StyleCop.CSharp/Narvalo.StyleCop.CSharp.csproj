@@ -9,7 +9,7 @@
     <AssemblyName>Narvalo.StyleCop.CSharp</AssemblyName>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="StyleCop, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -39,5 +39,5 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\tools\Narvalo.targets" />
+  <Import Project="..\..\tools\Narvalo.Common.targets" />
 </Project>
