@@ -4,31 +4,25 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
-    - DoNotDelegate
+    - BeLean
     - OnlyNuGetProjects
 
     Usage:
     - Build all projects:
         MSBuild Narvalo.proj
-    - Build all projects, be quiet:
-        MSBuild Narvalo.proj /p:Verbose:false
     - Build only the "stable" projects:
         MSBuild Narvalo.proj /p:OnlyNuGetProjects=true
 
     *** IMPORTANT ***
-    When upgrading VS, do not forget to upgrade the VisualStudioVersion here,
-    in  Narvalo.props and build.cmd.
+    When upgrading VS, do not forget to update the VisualStudioVersion here,
+    in Narvalo.props and build.cmd. We might also need to update $(SDK40ToolsPath).
 
     FIXME:
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
-    - Be Lean.
-    - xUnit run even if there is no build output.
-    - Remove Narvalo.sln everywhere in favour of Narvalo.proj
-      Use wildcard *.csproj instead. Solution uses Configuration Manager
-      which can lead to unexpected behaviour.
     - Review all AssemblyInfo.cs (header, version).
+    - Remove SolutionFile
     - $(RepositoryRoot)
     - NarvaloReportsDir
     - Use FAKE for versioning(?) and creation of NuGet packages.
@@ -47,7 +41,7 @@
     <!-- The default behaviour is to build all projects. -->
     <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
     <!-- The default behaviour is to not use the Clean and Rebuild targets from projects. -->
-    <DoNotDelegate Condition=" '$(DoNotDelegate)' != 'false' ">true</DoNotDelegate>
+    <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -78,24 +72,35 @@
 
   <Choose>
     <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
+      <!-- 
+        Solutions use the Configuration Manager which can lead to unexpected
+        behaviour. For instance, a project might not be selected for Build.
+        WARNING: Solutions use "Any CPU" instead of "AnyCPU... 
+      -->
+      <!--
       <ItemGroup>
         <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
       </ItemGroup>
       <PropertyGroup>
-        <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU... -->
-        <Platform Condition=" '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
+      <Platform Condition=" '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
       </PropertyGroup>
+      -->
+      <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)samples\**\*.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\**\*.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\**\*.csproj" />
+      </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -151,12 +156,15 @@
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
-  <!-- WARNING: This target may fail if NuGet is not installed. -->
+  <!-- 
+    WARNING: This target may fail if NuGet is not installed and packages
+    were not restored.
+  -->
   <Target Name="QuickAndDirtyBuildThenTest" DependsOnTargets="CoreBuild;RunTests" />
 
   <PropertyGroup>
-    <CleanDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreClean</CleanDependsOn>
-    <CleanDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(BeLean)' == 'true' ">LeanClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(BeLean)' != 'true' ">CoreClean</CleanDependsOn>
   </PropertyGroup>
 
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
@@ -167,7 +175,7 @@
     <RemoveDir Directories="$(WorkRoot)" />
   </Target>
 
-  <Target Name="SoftClean">
+  <Target Name="LeanClean">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -189,7 +197,8 @@
   <Target Name="RestorePackages" DependsOnTargets="DownloadNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet" />
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"
+          LogStandardErrorAsError="true" />
   </Target>
 
   <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
@@ -205,15 +214,15 @@
   <Target Name="Build" DependsOnTargets="RestorePackages;CoreBuild;_DeleteOriginalDocumentationFiles" />
 
   <PropertyGroup>
-    <RebuildDependsOn Condition=" '$(DoNotDelegate)' == 'true' ">CoreRebuild</RebuildDependsOn>
-    <RebuildDependsOn Condition=" '$(DoNotDelegate)' != 'true' ">SoftRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreRebuild</RebuildDependsOn>
   </PropertyGroup>
 
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
 
   <Target Name="CoreRebuild" DependsOnTargets="_FixRebuild;Clean;Build" />
 
-  <Target Name="SoftRebuild">
+  <Target Name="LeanRebuild">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -254,12 +263,14 @@
           DependsOnTargets="CoreBuild;_CreateReportsDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XUnitReportFile)">
-    <Message Text="Running Xunit tests..." Importance="high" />
-
     <ItemGroup>
       <_TestAssemblies Include="%(BuildOutputs.Identity)"
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
+
+    <Message Text="Running Xunit tests..."
+             Importance="high"
+             Condition=" '@(_TestAssemblies)' != '' " />
 
     <xunit Assemblies="@(_TestAssemblies)"
            Xml="$(XUnitReportFile)"
@@ -296,7 +307,7 @@
 
       Another (better?) solution is to define our Rebuild target
       so that it calls MSBuild with the Rebuild target. This is exactly
-      what we do if DoNotDelegate is set to false.
+      what we do if BeLean is set to true.
     -->
     <PropertyGroup>
       <BuildProperties>
@@ -339,6 +350,4 @@ catch (Exception ex) {
       </Code>
     </Task>
   </UsingTask>
-
-
 </Project>
