@@ -10,9 +10,9 @@
     - NarvaloIsSampleProject
 
     Each project should import this file:
-      <Import Project="..\..\tools\Narvalo.props" />
+      <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
-      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.props" />
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.Common.props" />
   -->
 
   <!-- If any, import custom props. -->
@@ -26,7 +26,14 @@
     <NarvaloIsSampleProject Condition=" '$(NarvaloIsSampleProject)' != 'true' ">false</NarvaloIsSampleProject>
 
     <NarvaloRepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</NarvaloRepositoryRoot>
+  </PropertyGroup>
 
+  <!-- Instruct MSBuild to load our common targets just after Microsoft.Common.targets. -->
+  <PropertyGroup>
+    <CustomAfterMicrosoftCommonTargets>$(NarvaloRepositoryRoot)tools\Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!-- Code Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
     <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
@@ -34,7 +41,7 @@
     <!-- Source Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
   </PropertyGroup>
-
+  
   <!--
     We use the project type Guid to identify these projects: "3AC096D0-A1C2-E12C-1390-A8335801FDAB".
     Another way to do this here could be to use: Condition=" '$(AssemblyName.EndsWith(Facts))' == 'true' "
@@ -202,7 +209,7 @@
       we use a less strict ruleset when using Code Contracts. Also Code Contracts
       produce assemblies that are not compatible with Code Analysis.
 
-      If requested, use a custom Code Analysis ruleset. 
+      If requested, use a custom Code Analysis ruleset.
     -->
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' ">$(NarvaloCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' ">$(NarvaloCustomCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
@@ -224,9 +231,9 @@
     For a complete list of available options, see
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContracts.targets
-      
-    We do not really enforce any policy for Code Contracts as they are not 
-    currently used by all projects. On Release Build, you should manually add 
+
+    We do not really enforce any policy for Code Contracts as they are not
+    currently used by all projects. On Release Build, you should manually add
     the following lines:
       <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>

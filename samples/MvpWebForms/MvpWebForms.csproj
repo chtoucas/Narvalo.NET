@@ -362,5 +362,4 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\..\tools\Narvalo.Common.targets" />
 </Project>

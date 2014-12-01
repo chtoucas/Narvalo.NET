@@ -23,10 +23,10 @@
     - T4 re-generation has been disabled since it require VS hosting.
 
     TODO:
-    - Use FAKE for versioning and creation of NuGet packages. "Requires" updating
-      the ChangeLog for compatibility with the FAKE ReleaseNotes.
-    - Nuproj?
+    - $(RepositoryRoot)
     - NarvaloReportsDir
+    - Use FAKE for versioning(?) and creation of NuGet packages.
+    - Nuproj?
     - SecAnnotate
     - Code Coverage + Report Generator.
     - Artifacts
@@ -82,10 +82,10 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
@@ -134,8 +134,8 @@
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
       VisualStudioVersion=$(VisualStudioVersion);
-      CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.After.props;
-      CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.Before.targets;
+      CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
+      CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
       NarvaloReportsDir=$(ReportsDir)
     </BuildProperties>
   </PropertyGroup>
