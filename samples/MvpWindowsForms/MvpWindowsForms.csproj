@@ -39,9 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="MainForm.cs">

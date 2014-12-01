@@ -67,9 +67,6 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Apply.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />

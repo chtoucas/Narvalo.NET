@@ -5,6 +5,7 @@ Prerequisites
 -------------
 
 - [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- [NuProj](https://github.com/terrajobst/nuproj)
 
 Optional components:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration

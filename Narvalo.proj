@@ -21,7 +21,10 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
-    - Add another filter: Core, Mvp
+    - Add Constant INTERNALS_VISIBLE_TO, INCREMENT_BUILD_NUMBER
+    - Prefix Nuget Restore with packages
+    - Add other filters? OnlyCore, OnlyMvp
+    - $(SolutionDir)
     - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot) aliases -> tools, etc
     - NarvaloReportsDir
@@ -74,6 +77,14 @@
   <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
 
   <Choose>
+    <!-- FIXME: FOR TESTING ONLY -->
+    <When Condition=" 'true' == 'true' ">
+      <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+      </ItemGroup>
+    </When>
     <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
       <!-- 
         Solutions use the Configuration Manager which can lead to unexpected
@@ -140,6 +151,9 @@
       This is the full intermediate Output Path, and is derived from BaseIntermediateOutputPath, if none specified
       (eg. obj\debug). If this property is overridden, then setting BaseIntermediateOutputPath has no effect.
     -->
+    <!-- FIXME -->
+    <NarvaloConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</NarvaloConstants>
+    
     <BuildProperties>
       Configuration=$(Configuration);
       Platform=$(Platform);
@@ -152,7 +166,8 @@
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
       NarvaloRepositoryRoot=$(RepositoryRoot);
-      NarvaloReportsDir=$(ReportsDir)
+      NarvaloReportsDir=$(ReportsDir);
+      NarvaloConstants=$(NarvaloConstants)
     </BuildProperties>
   </PropertyGroup>
 
@@ -271,15 +286,8 @@
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <Message Text="Running Xunit tests..."
-             Importance="high"
-             Condition=" '@(_TestAssemblies)' != '' " />
-
-    <xunit Assemblies="@(_TestAssemblies)"
-           Xml="$(XUnitReportFile)"
-           Condition=" '@(_TestAssemblies)' != '' " />
+    <xunit Assemblies="@(_TestAssemblies)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssemblies)' != '' " />
   </Target>
-
 
   <!-- ### Private Targets ### -->
 
@@ -288,9 +296,6 @@
   </Target>
 
   <Target Name="_DeleteOriginalDocumentationFiles">
-    <Message Text="Deleting original XML documentation files (before Code Contracts)..."
-             Importance="high"/>
-
     <ItemGroup>
       <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
     </ItemGroup>

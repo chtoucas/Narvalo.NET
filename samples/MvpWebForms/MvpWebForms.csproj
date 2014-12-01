@@ -90,11 +90,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="AsyncTap.aspx.cs">
       <DependentUpon>AsyncTap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AsyncTap.aspx.designer.cs">
       <DependentUpon>AsyncTap.aspx</DependentUpon>
@@ -124,24 +122,28 @@
     <Compile Include="Common\Views\WidgetsReadWriteModel.cs" />
     <Compile Include="Controls\AsyncTapControl.ascx.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncTapControl.ascx.designer.cs">
       <DependentUpon>AsyncTapControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl2.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl2.ascx</DependentUpon>
     </Compile>
     <Compile Include="Parallel.aspx.cs">
       <DependentUpon>Parallel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Parallel.aspx.designer.cs">
       <DependentUpon>Parallel.aspx</DependentUpon>
     </Compile>
     <Compile Include="AsyncApm.aspx.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AsyncApm.aspx.designer.cs">
       <DependentUpon>AsyncApm.aspx</DependentUpon>
@@ -153,78 +155,91 @@
     <Compile Include="Presenters\RedirectPresenter.cs" />
     <Compile Include="CompositeView.aspx.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CompositeView.aspx.designer.cs">
       <DependentUpon>CompositeView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ParallelControl.ascx.designer.cs">
       <DependentUpon>ParallelControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\AsyncApmControl.ascx.designer.cs">
       <DependentUpon>AsyncApmControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\CompositeControl.ascx.designer.cs">
       <DependentUpon>CompositeControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\DynamicallyLoadedControl.ascx.designer.cs">
       <DependentUpon>DynamicallyLoadedControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadWriteControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadWriteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\HelloWorldControl.ascx.designer.cs">
       <DependentUpon>HelloWorldControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\WidgetsReadOnlyControl.ascx.designer.cs">
       <DependentUpon>WidgetsReadOnlyControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging1Control.ascx.designer.cs">
       <DependentUpon>Messaging1Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\Messaging2Control.ascx.designer.cs">
       <DependentUpon>Messaging2Control.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\RedirectControl.ascx.designer.cs">
       <DependentUpon>RedirectControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\SharedPresenterControl1.ascx.designer.cs">
       <DependentUpon>SharedPresenterControl1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -234,24 +249,28 @@
     </Compile>
     <Compile Include="HelloWorld.aspx.cs">
       <DependentUpon>HelloWorld.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="HelloWorld.aspx.designer.cs">
       <DependentUpon>HelloWorld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Layouts\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Messaging.aspx.cs">
       <DependentUpon>Messaging.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Messaging.aspx.designer.cs">
       <DependentUpon>Messaging.aspx</DependentUpon>
     </Compile>
     <Compile Include="PageView.aspx.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PageView.aspx.designer.cs">
       <DependentUpon>PageView.aspx</DependentUpon>
@@ -260,36 +279,42 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.aspx.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
     </Compile>
     <Compile Include="RedirectTo.aspx.cs">
       <DependentUpon>RedirectTo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RedirectTo.aspx.designer.cs">
       <DependentUpon>RedirectTo.aspx</DependentUpon>
     </Compile>
     <Compile Include="SharedPresenter.aspx.cs">
       <DependentUpon>SharedPresenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SharedPresenter.aspx.designer.cs">
       <DependentUpon>SharedPresenter.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewsAddedInPageInit.aspx.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewsAddedInPageInit.aspx.designer.cs">
       <DependentUpon>ViewsAddedInPageInit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Widgets.aspx.cs">
       <DependentUpon>Widgets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Widgets.aspx.designer.cs">
       <DependentUpon>Widgets.aspx</DependentUpon>
     </Compile>
     <Compile Include="LookupWidget.aspx.cs">
       <DependentUpon>LookupWidget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LookupWidget.aspx.designer.cs">
       <DependentUpon>LookupWidget.aspx</DependentUpon>

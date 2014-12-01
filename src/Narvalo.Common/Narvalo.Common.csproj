@@ -73,9 +73,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />

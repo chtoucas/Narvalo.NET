@@ -99,9 +99,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

@@ -16,9 +16,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>

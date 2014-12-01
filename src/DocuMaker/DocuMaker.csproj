@@ -101,9 +101,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Narrator\Settings.cs" />
     <Compile Include="Narrator\SettingsResolver.cs" />
     <Compile Include="Internal\RelativeFileWeaverInterceptor.cs" />

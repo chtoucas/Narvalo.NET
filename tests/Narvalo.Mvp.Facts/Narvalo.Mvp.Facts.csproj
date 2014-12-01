@@ -42,9 +42,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />

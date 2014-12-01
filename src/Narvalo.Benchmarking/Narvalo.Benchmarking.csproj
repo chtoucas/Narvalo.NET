@@ -20,9 +20,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkAttribute.cs" />
     <Compile Include="BenchmarkComparative.cs" />

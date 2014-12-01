@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project InitialTargets="_CheckForInvalidContext" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the beginning of Narvalo.Common.targets by Narvalo.proj.
   -->
   
   <Import Project="$(NarvaloRepositoryRoot)tools\TextTemplating.targets" />
+
+
+  <Target Name="_CheckForInvalidContext">
+    <Warning Text="'Narvalo.CustomBefore.targets' should not be imported inside Visual Studio."
+             Condition=" '$(BuildingInsideVisualStudio)' == 'true' " />
+  </Target>
 </Project>

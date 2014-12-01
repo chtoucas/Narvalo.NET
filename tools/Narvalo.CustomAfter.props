@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project InitialTargets="_CheckForInvalidContext" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
   -->
@@ -29,8 +29,14 @@
     Log files are saved in a custom location. 
     The NarvaloReportsDir property is passed to Narvalo.Common.props by Narvalo.proj.
   -->
-  <PropertyGroup Condition=" '$(NarvaloReportsDir)' == '' And Exists('$(NarvaloReportsDir)')  ">
+  <PropertyGroup Condition=" '$(NarvaloReportsDir)' != '' ">
     <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
     <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
   </PropertyGroup>
+
+
+  <Target Name="_CheckForInvalidContext">
+    <Warning Text="'Narvalo.CustomAfter.props' should not be imported inside Visual Studio."
+             Condition=" '$(BuildingInsideVisualStudio)' == 'true' " />
+  </Target>
 </Project>

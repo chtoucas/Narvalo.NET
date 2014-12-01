@@ -5,6 +5,7 @@
     You can still override any of them but this should not be the default.
 
     Options:
+    - NarvaloConstants
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
 
@@ -50,11 +51,15 @@
     
     For test projects, we could have used the project type Guid:
       '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true'
-    or the assembly name: 
+    or, maybe, the assembly name: 
       '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
+  <PropertyGroup>
+    <_NarvaloParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_NarvaloParentProjectDirectory>
+  </PropertyGroup>
+  
   <Choose>
-    <When Condition=" '$(MSBuildProjectDirectory.Contains(tests))' == 'true' ">
+    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(tests))' == 'true' ">
       <PropertyGroup>
         <NarvaloIsTestProject>true</NarvaloIsTestProject>
       </PropertyGroup>
@@ -66,7 +71,7 @@
     </Otherwise>
   </Choose>
   <Choose>
-    <When Condition=" '$(MSBuildProjectDirectory.Contains(samples))' == 'true' ">
+    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(samples))' == 'true' ">
       <PropertyGroup>
         <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
       </PropertyGroup>
@@ -114,6 +119,10 @@
     <!--<DefaultLanguage>en-US</DefaultLanguage>-->
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(NarvaloConstants)' != '' ">$(NarvaloConstants);$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -144,18 +153,16 @@
   <!-- ### Automatically Linked Files ### -->
 
   <ItemGroup>
+    <!-- Unfortunately, if done here, the files won't appear in VS. 
+         A file update won't cause a fresh build as it should. -->
     <CodeAnalysisDictionary Include="$(NarvaloRepositoryRoot)etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <!--
-      I would like to also include the file containing the common assembly infos,
-      unfortunately, if done here, the file won't appear in VS.
-    -->
-    <!--<Compile Include="$(NarvaloRepositoryRoot)etc\AssemblyInfo.Common.cs">
+    <Compile Include="$(NarvaloRepositoryRoot)etc\AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>-->
+    </Compile>
   </ItemGroup>
-
+  
 
   <!-- ### Source Analysis ### -->
   <!-- For a complete list of available options, see tools\StyleCop.targets. -->
@@ -217,7 +224,7 @@
           produce assemblies that are not compatible with Code Analysis.
         -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloRepositoryRoot)etc\Narvalo.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloRepositoryRoot)etc\Strict.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>

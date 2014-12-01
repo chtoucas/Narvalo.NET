@@ -26,9 +26,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Benchmarks\BenchMetricConsoleFormatter.cs" />
     <Compile Include="Benchmarks\Comparisons\Int64EncoderComparison.cs" />
     <Compile Include="Benchmarks\Comparisons\RemoveDiacriticsComparison.cs" />

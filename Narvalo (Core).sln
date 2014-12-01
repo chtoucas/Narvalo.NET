@@ -29,14 +29,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
-		fake.cmd = fake.cmd
 		tools\Narvalo.Common.props = tools\Narvalo.Common.props
 		tools\Narvalo.Common.targets = tools\Narvalo.Common.targets
 		tools\Narvalo.CustomAfter.props = tools\Narvalo.CustomAfter.props
 		tools\Narvalo.CustomBefore.targets = tools\Narvalo.CustomBefore.targets
-		Narvalo.fsx = Narvalo.fsx
 		Narvalo.proj = Narvalo.proj
-		package.ps1 = package.ps1
 		quick.cmd = quick.cmd
 		tools\StyleCop.targets = tools\StyleCop.targets
 		tools\TextTemplating.targets = tools\TextTemplating.targets
@@ -57,12 +54,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{990FBF0C-8EA8-4005-9524-511E12E7491F}"
 	ProjectSection(SolutionItems) = preProject
 		etc\AssemblyInfo.Common.cs = etc\AssemblyInfo.Common.cs
-		etc\AssemblyInfo.Core.cs = etc\AssemblyInfo.Core.cs
-		etc\AssemblyInfo.Mvp.cs = etc\AssemblyInfo.Mvp.cs
 		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
-		etc\Narvalo.ruleset = etc\Narvalo.ruleset
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
+		etc\Strict.ruleset = etc\Strict.ruleset
 		etc\Tests.ruleset = etc\Tests.ruleset
 	EndProjectSection
 EndProject

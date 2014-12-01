@@ -18,9 +18,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="..\common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>

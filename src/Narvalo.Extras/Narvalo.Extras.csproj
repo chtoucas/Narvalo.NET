@@ -16,9 +16,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Collections\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>

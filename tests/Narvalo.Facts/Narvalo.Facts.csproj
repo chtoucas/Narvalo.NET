@@ -46,9 +46,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\NullableFacts.cs" />

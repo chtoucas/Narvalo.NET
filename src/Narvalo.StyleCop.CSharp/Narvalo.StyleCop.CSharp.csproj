@@ -24,9 +24,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\etc\AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
     <Compile Include="NarvaloRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
