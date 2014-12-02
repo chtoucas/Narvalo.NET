@@ -32,6 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4F15D06E
 		tools\Narvalo.Common.props = tools\Narvalo.Common.props
 		tools\Narvalo.Common.targets = tools\Narvalo.Common.targets
 		tools\Narvalo.CustomAfter.props = tools\Narvalo.CustomAfter.props
+		tools\Narvalo.CustomAfter.targets = tools\Narvalo.CustomAfter.targets
 		tools\Narvalo.CustomBefore.targets = tools\Narvalo.CustomBefore.targets
 		Narvalo.proj = Narvalo.proj
 		quick.cmd = quick.cmd

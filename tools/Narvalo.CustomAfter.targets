@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 
+    This file is injected at the end of Narvalo.Common.targets by Narvalo.proj.
+  -->
+
+  <PropertyGroup>
+    <AfterBuildDependsOn>
+      $(AfterBuildDependsOn);
+      DeleteOriginalDocumentationFiles
+    </AfterBuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="DeleteOriginalDocumentationFiles">
+    <ItemGroup>
+      <_OriginalDocumentationFile Include="$(OutDir)$(AssemblyName).xml.old" />
+    </ItemGroup>
+
+    <Delete Files="@(_OriginalDocumentationFile)" />
+  </Target>
+</Project>

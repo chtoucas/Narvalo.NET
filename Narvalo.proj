@@ -4,27 +4,37 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
-    - BeLean
-    - OnlyNuGetProjects
+    - BeLean, if true use the Clean and Rebuild targets from the child projects.
+      Default to false.
+    - OnlyNuGetProjects, if true only build the projects necessary for creating
+      the NuGet packages. Default to false.
+    Standard MSBuild options:
+    - Configuration, default to Release.
+    - Platform, default to AnyCPU.
+    - BuildInParallel, default to false.
 
     Usage:
-    - Build all projects:
-        MSBuild Narvalo.proj
-    - Build only the "stable" projects:
-        MSBuild Narvalo.proj /p:OnlyNuGetProjects=true
+    - Build projects with default options:
+        MSBuild.exe Narvalo.proj
+    - Build projects in parallel:
+        MSBuild.exe Narvalo.proj /m /nr:false 
+    - Fast Debug Rebuild:
+        MSBuild.exe Narvalo.proj /t:LeanRebuild /p:Configuration=Debug;OnlyNuGetProjects=true
 
-    *** IMPORTANT ***
-    When upgrading VS, do not forget to update the VisualStudioVersion here,
-    in Narvalo.props and build.cmd. We might also need to update $(SDK40ToolsPath).
+    *** WARNING ***
+    When upgrading VS, do not forget to update the VisualStudioVersion property
+    here, in Narvalo.props and in build.cmd. We might also need to update 
+    the property $(SDK40ToolsPath).
 
     FIXME:
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
-    - Add Constant INTERNALS_VISIBLE_TO, INCREMENT_BUILD_NUMBER
-    - Prefix Nuget Restore with packages
-    - Add other filters? OnlyCore, OnlyMvp
-    - $(SolutionDir)
+    - Add Constant NO_INTERNALS_VISIBLE_TO, CONTINUOUS_BUILD.
+    - Removed FIXME below.
+    - Prefix Nuget Restore with packages.
+    - Add other filters? OnlyCore, OnlyMvp.
+    - Add $(SolutionDir) to BuildProperties?
     - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot) aliases -> tools, etc
     - NarvaloReportsDir
@@ -40,26 +50,32 @@
     - Delay signing?
   -->
 
+  <!-- ### Properties ### -->
+
+  <!-- Process the custom publicly writable properties. -->
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
     <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
-    <!-- 
-      The default behaviour is to use our own defined Clean and Rebuild targets
-      and not to delegate them to the one found in the projects. 
-    -->
+    <!-- The default behaviour is to use our own defined Clean and Rebuild 
+         targets and not to delegate them to the one found in the projects. -->
     <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
   </PropertyGroup>
 
+  <!-- Process the standard publicly writable properties. -->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
+  </PropertyGroup>
 
+  <!-- Define standard MSBuild properties. -->
+  <PropertyGroup>
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
 
+  <!-- Define properties related to the repository layout. -->
   <PropertyGroup>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <SolutionFile>$(RepositoryRoot)Narvalo.sln</SolutionFile>
@@ -74,17 +90,11 @@
     <NuGetCommand>$(RepositoryRoot)tools\NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
+  <!-- Import the xUnit tasks. -->
   <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
 
+  <!-- Define the ProjectsToBuild property. -->
   <Choose>
-    <!-- FIXME: FOR TESTING ONLY -->
-    <When Condition=" 'true' == 'true' ">
-      <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
-      </ItemGroup>
-    </When>
     <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
       <!-- 
         Solutions use the Configuration Manager which can lead to unexpected
@@ -108,18 +118,19 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
       </ItemGroup>
     </Otherwise>
   </Choose>
 
+  <!-- Define the BuildProperties property. -->
   <PropertyGroup>
     <!--
       Attempt to use a completely different working directory from the one used by VS.
@@ -151,9 +162,6 @@
       This is the full intermediate Output Path, and is derived from BaseIntermediateOutputPath, if none specified
       (eg. obj\debug). If this property is overridden, then setting BaseIntermediateOutputPath has no effect.
     -->
-    <!-- FIXME -->
-    <NarvaloConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</NarvaloConstants>
-    
     <BuildProperties>
       Configuration=$(Configuration);
       Platform=$(Platform);
@@ -165,17 +173,23 @@
       VisualStudioVersion=$(VisualStudioVersion);
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
+      CustomAfterNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomAfter.targets;
       NarvaloRepositoryRoot=$(RepositoryRoot);
-      NarvaloReportsDir=$(ReportsDir);
-      NarvaloConstants=$(NarvaloConstants)
+      NarvaloReportsDir=$(ReportsDir)
     </BuildProperties>
   </PropertyGroup>
 
-
+  <!-- FIXME -->
+  <!--<PropertyGroup>
+    <NarvaloConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</NarvaloConstants>
+  </PropertyGroup>-->
+  
+  
   <!-- ### Public Targets ### -->
 
   <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
 
+  <!-- Define the CleanDependsOn property. -->
   <PropertyGroup>
     <CleanDependsOn Condition=" '$(BeLean)' == 'true' ">LeanClean</CleanDependsOn>
     <CleanDependsOn Condition=" '$(BeLean)' != 'true' ">CoreClean</CleanDependsOn>
@@ -215,11 +229,12 @@
           LogStandardErrorAsError="true" />
   </Target>
 
-  <!-- 
-    WARNING: This target might fail if the packages were not previously restored. 
-    We keep it that way to be able to perform fast builds during development.
-  -->
+  <Target Name="Build" DependsOnTargets="RestorePackages;CoreBuild" />
+
   <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
+    <!-- WARNING: This target might fail if the packages were not previously 
+         restored. We keep it that way to be able to perform fast builds 
+         when we know it's OK. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -229,8 +244,7 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Build" DependsOnTargets="RestorePackages;CoreBuild;_DeleteOriginalDocumentationFiles" />
-
+  <!-- Define the RebuildDependsOn property. -->
   <PropertyGroup>
     <RebuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanRebuild</RebuildDependsOn>
     <RebuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreRebuild</RebuildDependsOn>
@@ -282,25 +296,18 @@
           Inputs="@(BuildOutputs)"
           Outputs="$(XUnitReportFile)">
     <ItemGroup>
-      <_TestAssemblies Include="%(BuildOutputs.Identity)"
+      <_TestAssembly Include="%(BuildOutputs.Identity)"
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <xunit Assemblies="@(_TestAssemblies)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssemblies)' != '' " />
+    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
+  
   <!-- ### Private Targets ### -->
 
   <Target Name="_CreateReportsDir">
     <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
-  </Target>
-
-  <Target Name="_DeleteOriginalDocumentationFiles">
-    <ItemGroup>
-      <_OriginalDocumentationFiles Include="$(OutDir)\*.xml.old" />
-    </ItemGroup>
-
-    <Delete Files="@(_OriginalDocumentationFiles)" />
   </Target>
 
   <Target Name="_FixRebuild">
@@ -311,11 +318,10 @@
       the Rebuild target of MSBuild.
 
       The solution is to copy the original StyleCop modifications
-      to the Build properties.
+      to BuildProperties.
 
-      Another (better?) solution is to define our Rebuild target
-      so that it calls MSBuild with the Rebuild target. This is exactly
-      what we do if BeLean is set to true.
+      Another solution is to define our Rebuild target so that it calls MSBuild 
+      with the Rebuild target. This is exactly what we do if BeLean is set to true.
     -->
     <PropertyGroup>
       <BuildProperties>

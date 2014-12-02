@@ -14,8 +14,8 @@
     If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\tools\Narvalo.Common.props" />
     
-    WARNING: Make sure your import is just after the first PropertyGroup. 
-    We expect $(AssemblyName) to be defined.
+    WARNING: Make sure your import is just after the first PropertyGroup where
+    the property $(AssemblyName) is usually defined.
   -->
 
   <!-- If any, import custom props. -->
@@ -25,6 +25,7 @@
 
   <!-- ### Narvalo Properties ### -->
 
+  <!-- Process the custom publicly writable properties. -->
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
     <NarvaloRepositoryRoot Condition=" '$(NarvaloRepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</NarvaloRepositoryRoot>
@@ -35,6 +36,7 @@
     <CustomAfterMicrosoftCommonTargets>$(NarvaloRepositoryRoot)tools\Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
+  <!-- Define default properties. -->
   <PropertyGroup>
     <!-- Code Analysis. Default values. This is not really necessary but we never know. -->
     <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
@@ -58,6 +60,7 @@
     <_NarvaloParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_NarvaloParentProjectDirectory>
   </PropertyGroup>
   
+  <!-- Define the NarvaloIsTestProject property. -->
   <Choose>
     <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(tests))' == 'true' ">
       <PropertyGroup>
@@ -70,6 +73,8 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
+  
+  <!-- Define the NarvaloIsSampleProject property. -->
   <Choose>
     <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(samples))' == 'true' ">
       <PropertyGroup>
@@ -153,7 +158,7 @@
   <!-- ### Automatically Linked Files ### -->
 
   <ItemGroup>
-    <!-- Unfortunately, if done here, the files won't appear in VS. 
+    <!-- Unfortunately, when done here, the files won't appear in VS. 
          A file update won't cause a fresh build as it should. -->
     <CodeAnalysisDictionary Include="$(NarvaloRepositoryRoot)etc\CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
@@ -168,10 +173,9 @@
   <!-- For a complete list of available options, see tools\StyleCop.targets. -->
 
   <PropertyGroup>
-    <!--
-      Only in Release Build is Source Analysis automatically run.
-      You can still perform manual Source Analysis for any Build configuration inside VS.
-    -->
+    <!-- Only in Release Build is Source Analysis automatically run.
+         You can still perform manual Source Analysis for any Build 
+         configuration inside VS. -->
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</NarvaloSourceAnalysisEnabled>
     <NarvaloSourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</NarvaloSourceAnalysisEnabled>
 
@@ -193,10 +197,9 @@
   -->
 
   <PropertyGroup>
-    <!--
-      Only in Release Build is Code Analysis automatically run.
-      You can still perform manual Code Analysis for any Build configuration inside VS.
-    -->
+    <!-- Only in Release Build is Code Analysis automatically run.
+         You can still perform manual Code Analysis for any Build configuration 
+         inside VS. -->
     <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</NarvaloRunCodeAnalysis>
     <NarvaloRunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</NarvaloRunCodeAnalysis>
 
@@ -218,11 +221,10 @@
     </When>
     <Otherwise>
       <PropertyGroup>
-        <!--
-          The default behaviour is to use a very strict ruleset. For performance reasons
-          we use a minimal ruleset when using Code Contracts. Also Code Contracts
-          produce assemblies that are not compatible with Code Analysis.
-        -->
+        <!-- The default behaviour is to use a very strict ruleset. 
+             For performance reasons we use a minimal ruleset when using Code 
+             Contracts. Also Code Contracts produce assemblies that are not 
+             compatible with Code Analysis. -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloRepositoryRoot)etc\Strict.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
