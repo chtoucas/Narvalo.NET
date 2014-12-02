@@ -1,6 +1,12 @@
 Tips
 ====
 
+**Update all binding redirects**
+In the Package Manager Console:
+```
+Get-Project –All | Add-BindingRedirect
+```
+
 **A call to an extension method on a null instance does not automatically throw**
 Calling an extension method on a null reference does not automatically cause a 
 NullExceptionReference exception to be thrown. Thereby, we can bypass

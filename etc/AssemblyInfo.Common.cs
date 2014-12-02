@@ -25,34 +25,17 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-// Versioning description:
-// - AssemblyVersion, the one used by the CLR.
-//   MAJOR.MINOR.PATCH.0
-// - AssemblyFileVersion, used to uniquely identify a build.
-//   MAJOR.MINOR.BUILD.0
-// - AssemblyInformationalVersion, public face of the assembly. In most cases
-//   this is the version we shall use for NuGet package versioning.
-//   MAJOR.MINOR.PATCH(-PreRelaseLabel)
-//
-// MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta) are manually set. 
-//
-// BUILD is generated automatically:
-//   Visual Studio build:
-//     Inside VS, we don't mind if the versions do not change between builds.
-//   Continuous build or publicly released build:
-//     BUILD is incremented.
-//
-// NARVALO_CORE and NARVALO_MVP are defined in the csproj.
+// NARVALO_CORE and NARVALO_MVP might be defined in the *.csproj.
 #if NARVALO_CORE && NARVALO_MVP
 #error You cannot define both NARVALO_CORE and NARVALO_MVP.
 #elif NARVALO_CORE
 
 [assembly: AssemblyProduct("Narvalo.Org Core Libraries.")]
-[assembly: AssemblyVersion("0.26.0.0")]
-[assembly: AssemblyInformationalVersion("0.26.0-alpha")]
 
-#if !CONTINUOUS_BUILD
+#if !BUILD_GENERATED_VERSION
+[assembly: AssemblyVersion("0.26.0.0")]
 [assembly: AssemblyFileVersion("0.26.0.0")]
+[assembly: AssemblyInformationalVersion("0.26.0")]
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO
@@ -62,11 +45,11 @@ using System.Runtime.InteropServices;
 #elif NARVALO_MVP
 
 [assembly: AssemblyProduct("Narvalo.Org MVP Libraries.")]
-[assembly: AssemblyVersion("0.99.0.0")]
-[assembly: AssemblyInformationalVersion("0.99.0-beta")]
 
-#if !CONTINUOUS_BUILD
-[assembly: AssemblyFileVersion("0.99.0.0")]
+#if !BUILD_GENERATED_VERSION
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0-beta")]
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO

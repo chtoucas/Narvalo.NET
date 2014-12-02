@@ -11,13 +11,9 @@ Principle:
 ### Add relevant files as linked files to the "Properties" folder
 
 - Shared assembly informations: `etc\AssemblyInfo.Common.cs`
-- Library specific informations:
-  * for a core library: `etc\AssemblyInfo.Core.cs`
-  * for a MVP library: `etc\AssemblyInfo.Mvp.cs`
 - Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml`
   with build action _CodeAnalysisDictionary_
 - Strong Name Key: `etc\Narvalo.snk`
-- Cleanup AssemblyInfo.cs
 
 ### Edit the project Properties
 
@@ -45,7 +41,7 @@ Add the following line at the bottom:
 <Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
 
-Add the project to Narvalo.proj.
+Add the project to Narvalo.proj when it is stable.
 
 ### Configure StyleCop for Visual Studio
 
@@ -66,9 +62,42 @@ Ensure that it is copied to the output directory.
 
 ### Assembly versions
 
+The project follows semantic versioning rules.
 - AssemblyVersion, version used by the runtime.
-- AssemblyFileVersion, version seen in the file explorer.
-- AssemblyInformationalVersion, version used by NuGet.
+  MAJOR.MINOR.0.0
+- AssemblyFileVersion, version as seen in the file explorer.
+  I used it to uniquely identify a build.
+  MAJOR.MINOR.BUILD.0
+- AssemblyInformationalVersion, the product version. In most cases
+  this is the version I shall use for NuGet package versioning.
+  MAJOR.MINOR.PATCH(-PreRelaseLabel)
+
+MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta) are manually set. 
+
+BUILD is generated automatically:
+- Inside Visual Studio, I don't mind if the versions do not change between builds.
+- Continuous build or publicly released build should increment it.
+
+I do not change the AssemblyVersion when PATCH is incremented.
+
+All core Narvalo projects use the same version, let's see if things work with NuGet:
+- Patch update: X.Y.0.0 -> X.Y.1.0
+  * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works
+    for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
+  * If I publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common 
+    references Narvalo.Core X.Y.1.0, obviously unknown outside, it doesn't 
+    matter for the CLR: the assembly version __did not actually change__,
+    it's still X.Y.0.0.
+- Major or Minor upgrade: 1.1.0.0 -> 1.2.0.0 (or 1.1.0.0 -> 2.1.0.0)
+  * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works.
+    Let's cross fingers that I did not make a mistake by not releasing 
+    Narvalo.Common too.
+  * If I publish Narvalo.Common but not Narvalo.Core, we get a runtime error 
+    since Narvalo.Common references an assembly version unknown outside my 
+    development environment. The solution is obvious. Narvalo.Core has not 
+    changed so Narvalo.Common should replace the direct reference and use 
+    the NuGet package for Narvalo.Core. If necessary we can roll back 
+    at any time and next time we must publish both packages.
 
 ### Global suppressions
 
