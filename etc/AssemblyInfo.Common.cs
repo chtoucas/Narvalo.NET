@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 
 // Versioning objectives:
 // - AssemblyVersion, the one used by the CLR should be of the form
-//   MAJOR.MINOR.PATCH
+//   MAJOR.MINOR.PATCH.0
 // - AssemblyFileVersion, auto-generated, only used to make sure we have
 //   a unique version per build.
 //   MAJOR.MINOR.BUILD.0
@@ -35,7 +35,10 @@ using System.Runtime.InteropServices;
 //   it for NuGet package versioning.
 //   MAJOR.MINOR.PATCH(-XXX)
 //
-// We don't mind if the version does not change when building inside Visual Studio.
+// Visual Studio Build:
+//   Inside VS, we don't mind if the versions do not change between builds.
+// Continuous Build:
+// Production Build:
 //
 // NARVALO_CORE and NARVALO_MVP are defined in the csproj.
 #if NARVALO_CORE && NARVALO_MVP

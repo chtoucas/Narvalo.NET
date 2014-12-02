@@ -35,7 +35,6 @@
     - Add $(SolutionDir) to BuildProperties?
     - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot) aliases -> tools, etc
-    - NarvaloReportsDir
     - Nuproj?
     - SecAnnotate
     - Code Coverage + Report Generator.
@@ -54,7 +53,9 @@
     <!-- The default behaviour is to build all projects. -->
     <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
     <!-- The default behaviour is to use our own defined Clean and Rebuild 
-         targets and not to delegate them to the one found in the projects. -->
+         targets and not to delegate them to the one found in the projects.
+         Even if this value is false, you can still directly call the 
+         "lean" targets. -->
     <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
   </PropertyGroup>
 
@@ -89,6 +90,11 @@
 
   <!-- Import the xUnit tasks. -->
   <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
+
+  <!-- Define the AdditionalConstants property. -->
+  <PropertyGroup>
+    <AdditionalConstants></AdditionalConstants>
+  </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->
   <Choose>
@@ -172,20 +178,15 @@
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
       CustomAfterNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomAfter.targets;
-      NarvaloRepositoryRoot=$(RepositoryRoot);
-      NarvaloReportsDir=$(ReportsDir)
+      NarvaloReportsDir=$(ReportsDir);
+      NarvaloRepositoryRoot=$(RepositoryRoot)
     </BuildProperties>
   </PropertyGroup>
 
-  <!-- FIXME -->
-  <!--<PropertyGroup>
-    <AdditionalConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
-  </PropertyGroup>-->
-  
   
   <!-- ### Public Targets ### -->
 
-  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
+  <Target Name="Default" DependsOnTargets="FullBuild" />
 
   <!-- Define the CleanDependsOn property. -->
   <PropertyGroup>
@@ -227,9 +228,18 @@
           LogStandardErrorAsError="true" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="RestorePackages;CoreBuild" />
+  <!-- Define the BuildDependsOn property. -->
+  <PropertyGroup>
+    <BuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanBuild</BuildDependsOn>
+    <BuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreBuild</BuildDependsOn>
+    <BuildDependsOn>_CreateReportsDir;$(BuildDependsOn)</BuildDependsOn>
+  </PropertyGroup>
 
-  <Target Name="CoreBuild" DependsOnTargets="_CreateReportsDir">
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+
+  <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
+  
+  <Target Name="LeanBuild">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
          when we know it's OK. -->
@@ -263,7 +273,7 @@
   </Target>
 
   <Target Name="VerifyBuild"
-          DependsOnTargets="CoreBuild"
+          DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(VerifyBuildDummyOutput)">
     <PropertyGroup>
@@ -290,7 +300,7 @@
   </Target>
 
   <Target Name="RunTests"
-          DependsOnTargets="CoreBuild;_CreateReportsDir"
+          DependsOnTargets="Build;_CreateReportsDir"
           Inputs="@(BuildOutputs)"
           Outputs="$(XUnitReportFile)">
     <ItemGroup>
@@ -300,6 +310,28 @@
 
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
+
+  <Target Name="FullBuild" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
+
+  <!--<Target Name="_PrepareForPackage">
+    <PropertyGroup>
+      <AdditionalConstants>$(AdditionalConstants);NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_PrepareForBuild" BeforeTargets="LeanBuild;LeanRebuild">
+    <ItemGroup Condition=" '$(AdditionalConstants)' != '' ">
+      <ProjectsToBuild>
+        <AdditionalProperties>NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
+      </ProjectsToBuild>
+    </ItemGroup>
+  </Target>
+  
+  <Target Name="Package" DependsOnTargets="_PrepareForPackage;Build">
+  </Target>
+  
+  <Target Name="Publish" DependsOnTargets="Package">
+  </Target>-->
 
   
   <!-- ### Private Targets ### -->

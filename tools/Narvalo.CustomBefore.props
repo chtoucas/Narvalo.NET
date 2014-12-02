@@ -8,7 +8,7 @@
     - NarvaloAdditionalConstants
   -->
   
-  <!-- Additional constants used during continuous build. -->
+  <!-- Compilation symbols added by Narvalo.proj. -->
   <PropertyGroup>
     <DefineConstants Condition=" '$(NarvaloAdditionalConstants)' != '' ">$(NarvaloAdditionalConstants);$(DefineConstants)</DefineConstants>
   </PropertyGroup>

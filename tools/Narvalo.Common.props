@@ -166,6 +166,7 @@
   
 
   <!-- ### Source Analysis ### -->
+  
   <!-- For a complete list of available options, see tools\StyleCop.targets. -->
 
   <PropertyGroup>
@@ -187,6 +188,7 @@
 
 
   <!-- ### Code Analysis ### -->
+  
   <!--
     For a complete list of available options, see
       %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeAnalysis\Microsoft.CodeAnalysis.Targets
@@ -251,6 +253,7 @@
 
 
   <!-- ### Code Contracts ### -->
+  
   <!--
     For a complete list of available options, see
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
