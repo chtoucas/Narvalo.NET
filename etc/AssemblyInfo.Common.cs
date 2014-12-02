@@ -1,10 +1,13 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
+[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", Justification = "Informational version uses semantic versioning.")]
 
 [assembly: AssemblyCompany("Narvalo.Org - http://narvalo.org")]
 [assembly: AssemblyCopyright("Copyright © 2010-2014 Narvalo.Org")]
@@ -22,6 +25,19 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
+// Versioning objectives:
+// - AssemblyVersion, the one used by the CLR should be of the form
+//   MAJOR.MINOR.PATCH
+// - AssemblyFileVersion, auto-generated, only used to make sure we have
+//   a unique version per build.
+//   MAJOR.MINOR.BUILD.0
+// - AssemblyInformationalVersion, public face of the assembly. We will use
+//   it for NuGet package versioning.
+//   MAJOR.MINOR.PATCH(-XXX)
+//
+// We don't mind if the version does not change when building inside Visual Studio.
+//
+// NARVALO_CORE and NARVALO_MVP are defined in the csproj.
 #if NARVALO_CORE && NARVALO_MVP
 #error You cannot define both NARVALO_CORE and NARVALO_MVP.
 #elif NARVALO_CORE

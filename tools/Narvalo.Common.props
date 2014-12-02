@@ -4,10 +4,10 @@
     This MSBuild file defines a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
-    Options:
-    - NarvaloConstants
+    Global properties:
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
+    - NarvaloRepositoryRoot
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -25,7 +25,7 @@
 
   <!-- ### Narvalo Properties ### -->
 
-  <!-- Process the custom publicly writable properties. -->
+  <!-- Process global properties. -->
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
     <NarvaloRepositoryRoot Condition=" '$(NarvaloRepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</NarvaloRepositoryRoot>
@@ -89,7 +89,7 @@
   </Choose>
   
 
-  <!-- ### Standard MSBuild Properties ### -->
+  <!-- ### Microsoft Common Properties ### -->
 
   <PropertyGroup>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
@@ -124,10 +124,6 @@
     <!--<DefaultLanguage>en-US</DefaultLanguage>-->
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DefineConstants Condition=" '$(NarvaloConstants)' != '' ">$(NarvaloConstants);$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project InitialTargets="_CheckCustomAfterPropsRequiredProperties"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
   -->
@@ -10,12 +11,14 @@
     <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
-    <!--
-      We don't want the Code Analysis "succeed" file to be written to 
-      the custom location but it does not seem to be understood by MSBuild. 
-      As a workaround, we simply disable the creation of the success file.
-    -->
-    <!--<CodeAnalysisSucceededFile>$(OutputPath)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
+    <!-- Reports are saved in a custom location. -->
+    <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+
+    <!-- We don't want the Code Analysis "succeed" file to be written to 
+         the custom location but it does not seem to be understood by MSBuild. 
+         As a workaround, we simply disable the creation of the success file. -->
+    <!--<CodeAnalysisSucceededFile>$(OutDir)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
 
     <!-- Code Contracts background checking is not available in terminal. -->
@@ -24,13 +27,11 @@
     <!-- Force T4 re-generation (currently disabled). -->
     <TransformOnBuild>false</TransformOnBuild>
   </PropertyGroup>
+  
 
-  <!-- 
-    Log files are saved in a custom location. 
-    The NarvaloReportsDir property is passed to Narvalo.Common.props by Narvalo.proj.
-  -->
-  <PropertyGroup Condition=" '$(NarvaloReportsDir)' != '' ">
-    <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
-  </PropertyGroup>
+  <Target Name="_CheckCustomAfterPropsRequiredProperties">
+    <Error Text="You MUST define the NarvaloReportsDir property before importing Narvalo.CustomAfter.props."
+           ContinueOnError="false"
+           Condition=" '$(NarvaloReportsDir)' == ''" />
+  </Target>
 </Project>

@@ -3,12 +3,12 @@
          DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Options:
+    Global properties:
     - BeLean, if true use the Clean and Rebuild targets from the child projects.
       Default to false.
     - OnlyNuGetProjects, if true only build the projects necessary for creating
       the NuGet packages. Default to false.
-    Standard MSBuild options:
+    Microsoft global properties:
     - Configuration, default to Release.
     - Platform, default to AnyCPU.
     - BuildInParallel, default to false.
@@ -31,14 +31,11 @@
 
     TODO:
     - Add Constant NO_INTERNALS_VISIBLE_TO, CONTINUOUS_BUILD.
-    - Removed FIXME below.
-    - Prefix Nuget Restore with packages.
     - Add other filters? OnlyCore, OnlyMvp.
     - Add $(SolutionDir) to BuildProperties?
     - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot) aliases -> tools, etc
     - NarvaloReportsDir
-    - Use FAKE for versioning(?) and creation of NuGet packages.
     - Nuproj?
     - SecAnnotate
     - Code Coverage + Report Generator.
@@ -52,7 +49,7 @@
 
   <!-- ### Properties ### -->
 
-  <!-- Process the custom publicly writable properties. -->
+  <!-- Process global properties. -->
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
     <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
@@ -61,7 +58,7 @@
     <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
   </PropertyGroup>
 
-  <!-- Process the standard publicly writable properties. -->
+  <!-- Process Microsoft global properties. -->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -70,7 +67,7 @@
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
   </PropertyGroup>
 
-  <!-- Define standard MSBuild properties. -->
+  <!-- Define Microsoft properties. -->
   <PropertyGroup>
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -171,6 +168,7 @@
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
       VisualStudioVersion=$(VisualStudioVersion);
+      CustomBeforeNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomBefore.props;
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
       CustomAfterNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomAfter.targets;
@@ -181,7 +179,7 @@
 
   <!-- FIXME -->
   <!--<PropertyGroup>
-    <NarvaloConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</NarvaloConstants>
+    <AdditionalConstants>CONTINUOUS_BUILD;NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
   </PropertyGroup>-->
   
   
@@ -210,7 +208,7 @@
              Targets="Clean" />
   </Target>
 
-  <Target Name="DownloadNuGet" Condition=" !Exists('$(NuGetCommand)') ">
+  <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
 
     <PropertyGroup>
@@ -222,7 +220,7 @@
     <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
   </Target>
 
-  <Target Name="RestorePackages" DependsOnTargets="DownloadNuGet">
+  <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"

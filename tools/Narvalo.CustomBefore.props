@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project InitialTargets="_CheckCustomBeforePropsRequiredProperties"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 
+    This file is injected at the beginnig of Narvalo.Common.props by Narvalo.proj.
+    
+    Global properties:
+    - NarvaloAdditionalConstants
+  -->
+  
+  <!-- Additional constants used during continuous build. -->
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(NarvaloAdditionalConstants)' != '' ">$(NarvaloAdditionalConstants);$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  
+  <Target Name="_CheckCustomBeforePropsRequiredProperties">
+    <Warning Text="You SHOULD define the NarvaloRepositoryRoot property before importing Narvalo.CustomBefore.props. This is not mandatory but seems reasonnable since Narvalo.proj already has it."
+           ContinueOnError="true"
+           Condition=" '$(NarvaloRepositoryRoot)' == ''" />
+  </Target>
+</Project>
