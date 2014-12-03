@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Define the AssemblyInfo itemGroup. -->
+  <ItemGroup>
+    <AssemblyInfo Include="Core">
+      <CompilationSymbol>NARVALO_CORE</CompilationSymbol>
+      <Major>0</Major>
+      <Minor>26</Minor>
+      <Patch>0</Patch>
+      <PreRelaseLabel></PreRelaseLabel>
+    </AssemblyInfo>
+    
+    <AssemblyInfo Include="Mvp">
+      <CompilationSymbol>NARVALO_MVP</CompilationSymbol>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Patch>0</Patch>
+      <PreRelaseLabel>beta</PreRelaseLabel>
+    </AssemblyInfo>
+  </ItemGroup>
+
+  <!-- Define the NuGetPackage itemGroup. -->
+  <ItemGroup>
+    <NuGetPackage Include="Narvalo.Core">
+      <Lib>
+        Narvalo.Core.dll;
+        Narvalo.Core.pdb;
+        Narvalo.Core.xml;
+      </Lib>
+    </NuGetPackage>
+  </ItemGroup>
+</Project>

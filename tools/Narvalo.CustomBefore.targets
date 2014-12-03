@@ -4,6 +4,7 @@
     This file is injected at the beginning of Narvalo.Common.targets by Narvalo.proj.
   -->
   
-  <Import Project="$(NarvaloRepositoryRoot)tools\TextTemplating.targets" />
+  <!-- Import the T4 targets. -->
+  <Import Project="$(NarvaloRepositoryRoot)tools\Microsoft.TextTemplating.targets" />
 
 </Project>

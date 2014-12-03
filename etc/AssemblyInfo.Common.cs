@@ -33,9 +33,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Narvalo.Org Core Libraries.")]
 
 #if !BUILD_GENERATED_VERSION
-[assembly: AssemblyVersion("0.26.0.0")]
-[assembly: AssemblyFileVersion("0.26.0.0")]
-[assembly: AssemblyInformationalVersion("0.26.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0-visualstudio")]
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO
@@ -49,7 +49,7 @@ using System.Runtime.InteropServices;
 #if !BUILD_GENERATED_VERSION
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0-beta")]
+[assembly: AssemblyInformationalVersion("1.0.0-visualstudio")]
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO

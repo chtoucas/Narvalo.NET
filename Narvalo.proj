@@ -31,8 +31,9 @@
 
     TODO:
     - Add Constant NO_INTERNALS_VISIBLE_TO, BUILD_GENERATED_VERSION.
-    - GenerateBuildNumber
     - Versioning + Metadata
+    - Code Contracts seem disabled???
+    - Simplify dependencies definition
     
     - Make unnecessary to add StyleCop settings to the project.
     - Add other filters? OnlyCore, OnlyMvp for NuGet packages.
@@ -92,12 +93,19 @@
     <NuGetCommand>$(RepositoryRoot)tools\NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
+  <!-- Import the project settings. -->
+  <Import Project="$(RepositoryRoot)tools\Narvalo.settings.props" />
   <!-- Import the xUnit tasks. -->
-  <Import Project="$(RepositoryRoot)tools\xUnit.tasks" />
+  <Import Project="$(RepositoryRoot)tools\Xunit.Runner.MSBuild.tasks" />
+
+  <!-- Define the AssemblyInfoVersionFile. -->
+  <PropertyGroup>
+    <AssemblyInfoVersionFile>$(RepositoryRoot)etc\AssemblyInfo.Version.cs</AssemblyInfoVersionFile>
+  </PropertyGroup>
 
   <!-- Define the AdditionalConstants property. -->
   <PropertyGroup>
-    <AdditionalConstants></AdditionalConstants>
+    <AdditionalConstants>BUILD_GENERATED_VERSION</AdditionalConstants>
   </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->
@@ -182,6 +190,7 @@
       CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
       CustomAfterNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomAfter.targets;
+      NarvaloAssemblyInfoVersionFile=$(AssemblyInfoVersionFile);
       NarvaloReportsDir=$(ReportsDir);
       NarvaloRepositoryRoot=$(RepositoryRoot)
     </BuildProperties>
@@ -200,7 +209,7 @@
 
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
 
-  <Target Name="CoreClean">
+  <Target Name="CoreClean" Condition=" Exists($(WorkRoot)) ">
     <Message Text="Cleaning..." Importance="high" />
 
     <RemoveDir Directories="$(WorkRoot)" />
@@ -213,40 +222,20 @@
              Targets="Clean" />
   </Target>
 
-  <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
-    <Message Text="Downloading latest version of NuGet..." Importance="high" />
-
-    <PropertyGroup>
-      <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
-
-    <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
-  </Target>
-
-  <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
-    <Message Text="Restoring NuGet packages..." Importance="high" />
-
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"
-          LogStandardErrorAsError="true" />
-  </Target>
-
   <!-- Define the BuildDependsOn property. -->
   <PropertyGroup>
     <BuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanBuild</BuildDependsOn>
     <BuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreBuild</BuildDependsOn>
-    <BuildDependsOn>_CreateReportsDir;$(BuildDependsOn)</BuildDependsOn>
   </PropertyGroup>
 
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
 
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
 
-  <Target Name="LeanBuild">
+  <Target Name="LeanBuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfo;_CreateReportsDir">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
-         when we know it's OK. -->
+         when we know it's OK. Otherwise there is always CoreBuild... -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -264,9 +253,9 @@
 
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
 
-  <Target Name="CoreRebuild" DependsOnTargets="_FixRebuild;Clean;Build" />
+  <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;Clean;_AddCompilationSymbols;GenerateAssemblyInfo;Build" />
 
-  <Target Name="LeanRebuild">
+  <Target Name="LeanRebuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfo;_CreateReportsDir">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -315,63 +304,23 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="UpdateVersion">
-    <GenerateBuildNumber>
-      <Output TaskParameter="BuildNumber" PropertyName="_BuildNumber"/>
-    </GenerateBuildNumber>
+  <Target Name="GenerateAssemblyInfo" DependsOnTargets="_PrepareAssemblyInfo">
+    <Message Text="Generating the assembly version informations..." Importance="high" />
 
-    <!-- TODO: Import this. -->
-    <ItemGroup>
-      <AssemblyVersion Include="Core">
-        <Major>0</Major>
-        <Minor>26</Minor>
-        <Patch>0</Patch>
-        <PreRelaseLabel></PreRelaseLabel>
-      </AssemblyVersion>
-      <AssemblyVersion Include="Mvp">
-        <Major>1</Major>
-        <Minor>0</Minor>
-        <Patch>0</Patch>
-        <PreRelaseLabel>beta</PreRelaseLabel>
-      </AssemblyVersion>
-    </ItemGroup>
-    
     <PropertyGroup>
-      <_CoreMajor>0</_CoreMajor>
-      <_CoreMinor>26</_CoreMinor>
-      <_CorePatch>0</_CorePatch>
-      <_CorePreRelaseLabel>beta</_CorePreRelaseLabel>
-
-      <_CoreVersion>$(_CoreMajor).$(_CoreMinor).0.0</_CoreVersion>
-      <_CoreFileVersion>$(_CoreMajor).$(_CoreMinor).$(_BuildNumber).0</_CoreFileVersion>
-      <_CoreInformationalVersion>$(_CoreMajor).$(_CoreMinor).$(_CorePatch)</_CoreInformationalVersion>
-      <_CoreInformationalVersion Condition=" '$(_CorePreRelaseLabel)' != ''">$(_CoreInformationalVersion)-$(_CorePreRelaseLabel)</_CoreInformationalVersion>
-
-      <_MvpMajor>0</_MvpMajor>
-      <_MvpMinor>26</_MvpMinor>
-      <_MvpPatch>0</_MvpPatch>
-      <_MvpPreRelaseLabel>beta</_MvpPreRelaseLabel>
-
-      <_MvpVersion>$(_MvpMajor).$(_MvpMinor).0.0</_MvpVersion>
-      <_MvpFileVersion>$(_MvpMajor).$(_MvpMinor).$(_BuildNumber).0</_MvpFileVersion>
-      <_MvpInformationalVersion>$(_MvpMajor).$(_MvpMinor).$(_MvpPatch)</_MvpInformationalVersion>
-      <_MvpInformationalVersion Condition=" '$(_MvpPreRelaseLabel)' != ''">$(_MvpInformationalVersion)-$(_MvpPreRelaseLabel)</_MvpInformationalVersion>
       <_AssemblyInfoContent>
         <![CDATA[
-// <auto-generated />  
+//------------------------------------------------------------------------------
+// <auto-generated>
+// This code was generated by a tool. Changes to this file may cause incorrect
+// behavior and will be lost if the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
 
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
-#if NARVALO_CORE
-[assembly: AssemblyVersion("$(_CoreVersion)")]
-[assembly: AssemblyFileVersion("$(_CoreFileVersion)")]
-[assembly: AssemblyInformationalVersion("$(_CoreInformationalVersion)")]
-#elif NARVALO_MVP
-[assembly: AssemblyVersion("$(MvpVersion)")]
-[assembly: AssemblyFileVersion("$(MvpFileVersion)")]
-[assembly: AssemblyInformationalVersion("$(MvpInformationalVersion)")]
-#endif
+@(AssemblyInfo -> '%(CodeFragment)', '')
 #endif
 
          ]]>
@@ -380,7 +329,7 @@ using System.Reflection;
     </PropertyGroup>
 
     <WriteLinesToFile Lines="$(_AssemblyInfoLines)"
-                      File="$(RepositoryDir)etc\_AssemblyInfo.Version.cs"
+                      File="$(AssemblyInfoVersionFile)"
                       Overwrite="true" />
   </Target>
 
@@ -390,27 +339,54 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PrepareForBuild" BeforeTargets="LeanBuild;LeanRebuild">
-    <ItemGroup Condition=" '$(AdditionalConstants)' != '' ">
-      <ProjectsToBuild>
-        <AdditionalProperties>NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
-      </ProjectsToBuild>
-    </ItemGroup>
-  </Target>
-  
   <Target Name="Package" DependsOnTargets="_PrepareForPackage;Build">
   </Target>
   
   <Target Name="Publish" DependsOnTargets="Package">
   </Target>-->
 
+  <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
+    <Message Text="Downloading latest version of NuGet..." Importance="high" />
+
+    <PropertyGroup>
+      <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
+
+    <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
+  </Target>
+
+  <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
+    <Message Text="Restoring NuGet packages..." Importance="high" />
+
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"
+          LogStandardErrorAsError="true" />
+  </Target>
+
+
   <!-- ### Private Targets ### -->
+
+  <Target Name="_AddCompilationSymbols">
+    <ItemGroup Condition=" '$(AdditionalConstants)' != '' ">
+      <ProjectsToBuild>
+        <AdditionalProperties>NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
+      </ProjectsToBuild>
+    </ItemGroup>
+  </Target>
 
   <Target Name="_CreateReportsDir">
     <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
   </Target>
 
-  <Target Name="_FixRebuild">
+  <Target Name="_GenerateBuildNumberAndRevision">
+    <GenerateBuildNumberAndRevision>
+      <Output TaskParameter="BuildNumber" PropertyName="BuildNumber"/>
+      <Output TaskParameter="Revision" PropertyName="Revision"/>
+    </GenerateBuildNumberAndRevision>
+  </Target>
+
+  <Target Name="_PatchCoreRebuild">
     <!--
       StyleCop uses $(RebuildDependsOn) to modify the Build process.
       Here, we define Rebuild as Clean;Build, which means that StyleCop
@@ -431,22 +407,70 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
+  <Target Name="_PrepareAssemblyInfo"
+          DependsOnTargets="_GenerateBuildNumberAndRevision"
+          Outputs="%(AssemblyInfo.Identity)">
+    <PropertyGroup>
+      <_CurrentAssemblyInfo>%(AssemblyInfo.Identity)</_CurrentAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
+        <Version>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).0.0</Version>
+        <FileVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).$(BuildNumber).$(Revision)</FileVersion>
+        <InformationalVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).%(AssemblyInfo.Patch)</InformationalVersion>
+      </AssemblyInfo>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
+        <InformationalVersion Condition=" '%(AssemblyInfo.PreRelaseLabel)' != '' ">%(AssemblyInfo.InformationalVersion)-%(AssemblyInfo.PreRelaseLabel)</InformationalVersion>
+      </AssemblyInfo>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
+        <CodeFragment>
+          <![CDATA[
+#if %(AssemblyInfo.CompilationSymbol)
+[assembly: AssemblyVersion("%(AssemblyInfo.Version)")]
+[assembly: AssemblyFileVersion("%(AssemblyInfo.FileVersion)")]
+[assembly: AssemblyInformationalVersion("%(AssemblyInfo.InformationalVersion)")]
+#endif
+         ]]>
+        </CodeFragment>
+      </AssemblyInfo>
+    </ItemGroup>
+  </Target>
+
 
   <!-- ### Tasks ### -->
 
+  <!-- Define the CodeTaskFactoryAssemblyFile property. -->
   <PropertyGroup>
     <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
-  <UsingTask TaskName="GenerateBuildNumber" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+  <UsingTask TaskName="GenerateBuildNumberAndRevision" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <BuildNumber ParameterType="System.String" Output="true" />
+      <Revision ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
       <Reference Include="System.Core" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-BuildNumber = DateTime.Now.ToString("yyMMddHHmm");
+// Re-implements the algorithm used by .NET:
+// See: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx
+// The default build number increments daily. The default revision number is 
+// the number of seconds since midnight local time (without taking into account 
+// time zone adjustments for daylight saving time), divided by 2.
+// IMPORTANT: These numbers must be less or equal to 65534 (UInt16.MaxValue - 1).
+// WARNING: Due to the way the revision is built, two builds may end up with
+// the same version.
+var now = DateTime.Now;
+BuildNumber = (now - new DateTime(2000, 1, 1)).Days.ToString();
+Revision = ((int)((now - new DateTime(now.Year, now.Month, now.Day, 0, 0, 0)).TotalSeconds) / 2).ToString();
          ]]>
       </Code>
     </Task>

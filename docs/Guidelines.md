@@ -62,19 +62,19 @@ Ensure that it is copied to the output directory.
 
 ### Assembly versions
 
-The project follows semantic versioning rules.
 - AssemblyVersion, version used by the runtime.
   MAJOR.MINOR.0.0
-- AssemblyFileVersion, version as seen in the file explorer.
-  I used it to uniquely identify a build.
-  MAJOR.MINOR.BUILD.0
+- AssemblyFileVersion, version as seen in the file explorer,
+  also used to uniquely identify a build.
+  MAJOR.MINOR.BUILD.REVISION
 - AssemblyInformationalVersion, the product version. In most cases
   this is the version I shall use for NuGet package versioning.
+  This attribute follows semantic versioning rules.
   MAJOR.MINOR.PATCH(-PreRelaseLabel)
 
 MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta) are manually set. 
 
-BUILD is generated automatically:
+BUILD and REVISION are generated automatically:
 - Inside Visual Studio, I don't mind if the versions do not change between builds.
 - Continuous build or publicly released build should increment it.
 
