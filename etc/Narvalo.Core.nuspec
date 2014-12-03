@@ -9,9 +9,9 @@
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-This package contains the Narvalo.Org common utilities.
+This package contains the Narvalo.Org core utilities.
 
-*** Until we reached version 1.0, backward compatibility is not guaranteed ***
+*** Until version 1.0, backward compatibility is not guaranteed ***
     </description>
     <!--<releaseNotes></releaseNotes>-->
     <copyright>Copyright 2013</copyright>

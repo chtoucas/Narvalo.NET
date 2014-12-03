@@ -20,6 +20,12 @@
         MSBuild.exe Narvalo.proj /m /nr:false 
     - Fast Debug Rebuild:
         MSBuild.exe Narvalo.proj /t:LeanRebuild /p:Configuration=Debug;SkipPrivateProjects=true
+        
+    Combinations that do not really make sense:
+    - No need to set LeanRun to true
+        MSBuild.exe Narvalo.proj /t:LeanBuild /p:LeanRun=true
+    - Setting LeanRun will have no effect
+        MSBuild.exe Narvalo.proj /t:CoreBuild /p:LeanRun=true
 
     *** WARNING ***
     When upgrading VS, do not forget to update the VisualStudioVersion property
@@ -30,23 +36,23 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
+    - Rework the build script to allow arbitrary args.
     - Versioning (for non core and non vp projects) + Metadata
     - Code Contracts seem disabled???
-    - Exclude test libraries when publishing...
     
+    - Delay signing?
     - Make unnecessary to add StyleCop settings to the project.
     - Add other filters? OnlyCore, OnlyMvp for NuGet packages.
     - Add $(SolutionDir) to BuildProperties?
-    - $(RepositoryRoot) aliases -> tools, etc
-    - Nuproj?
-    - SecAnnotate
-    - Code Coverage + Report Generator.
+    - $(RepositoryRoot) aliases for tools, etc
+    - Nice to have: 
+      * SecAnnotate
+      * Code Coverage + Report Generator.
     - Artifacts
     - Merging, just for fun.
 
     REVIEW:
     - If PEVerify fails, does the error message appear on the command prompt.
-    - Delay signing?
   -->
 
   <!-- ### Properties ### -->
@@ -81,6 +87,8 @@
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
     <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
     <ReportsDir>$(WorkRoot)reports\</ReportsDir>
+    <StagingDir>$(WorkRoot)staging\</StagingDir>
+    <PackagesDir>$(WorkRoot)packages\</PackagesDir>
 
     <VerifyBuildDummyOutput>$(WorkRoot)obj\$(Configuration)\Narvalo.Verify.txt</VerifyBuildDummyOutput>
     <PEVerifyLogFile>$(WorkRoot)peverify.log</PEVerifyLogFile>
@@ -138,14 +146,14 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -200,8 +208,17 @@
 
 
   <!-- ### Public Targets ### -->
+  
+  <!-- To keep things working correctly, DO NOT break the following rules:
+       Lean(...) targets MUST NOT refer to Core(...), Clean, Build and Rebuild targets.
+       Core(...) targets MUST NOT refer to Lean(...), Clean, Build and Rebuild targets.
+       Other targets MUST NOT refer to Core(...) and Lean(...) targets,
+       of course they may use the normal Clean, Build and Rebuild targets.
+       There are only two exceptions to these rules:
+       - CoreBuild refers to LeanBuild targets.
+       - any target MAY refer to the LeanClean target (this one won't break anything). -->
 
-  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
+  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests;Package" />
 
   <Target Name="Clean">
     <PropertyGroup>
@@ -236,22 +253,10 @@
 
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;_PrepareBuilEnvironment;LeanBuild" />
 
-  <Target Name="LeanBuild" DependsOnTargets="_CreateReportsDir">
+  <Target Name="LeanBuild" DependsOnTargets="_CreateReportsDir;_PrepareProjectsToBuild">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
          when we know it's OK. Otherwise there is always CoreBuild... -->
-
-    <!-- If there are any defined compilation symbols, add them to the BuildProperties. -->
-    <PropertyGroup Condition=" '$(AdditionalConstants)' != '' ">
-      <AdditionalProperties>$(AdditionalProperties);NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectsToBuild>
-        <AdditionalProperties>$(AdditionalProperties)</AdditionalProperties>
-      </ProjectsToBuild>
-    </ItemGroup>
-
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -272,7 +277,8 @@
 
   <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;CoreClean;CoreBuild" />
 
-  <Target Name="LeanRebuild" DependsOnTargets="_CreateReportsDir">
+  <Target Name="LeanRebuild" DependsOnTargets="_CreateReportsDir;_PrepareProjectsToBuild">
+    <!-- WARNING: See WARNING in LeanBuild. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -324,13 +330,33 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="Package" DependsOnTargets="Build">
-
+  <Target Name="Package" DependsOnTargets="InstallNuGet;Build;CorePackage">
+    <!--
+      Disable if LeanRun is true?
+      If Debug, add a suffix.
+      If Lean remove previous package?
+      Add Symbols?
+    -->
+  </Target>
+  
+  <Target Name="CorePackage"
+          Outputs="%(Package.Identity)">
+    <Message Text="Name = %(Package.Identity)" Importance="high" />
+  
   </Target>
 
-  <!--<Target Name="Publish" DependsOnTargets="_PreparePublishEnvironment;Clean;Package">
-
-  </Target>-->
+  <Target Name="Publish" DependsOnTargets="_PreparePublishEnvironment;Clean;Package;LeanClean">
+    <!--
+      At the end, we call the LeanClean target otherwise a later Build might fail
+      since Tests no longer have access to internals.
+    -->
+    
+    <!--
+      Disable if LeanRun is true?
+      Create publication scripts 
+      Publish to myget?
+    -->
+  </Target>
 
 
   <!-- ### Helpers ### -->
@@ -475,10 +501,32 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
+  <Target Name="_PrepareProjectsToBuild">
+    <!-- If there are any defined compilation symbols, add them to the BuildProperties. -->
+    <PropertyGroup Condition=" '$(AdditionalConstants)' != '' ">
+      <AdditionalProperties>$(AdditionalProperties);NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectsToBuild>
+        <AdditionalProperties>$(AdditionalProperties)</AdditionalProperties>
+      </ProjectsToBuild>
+    </ItemGroup>
+  </Target>
+
   <Target Name="_PreparePublishEnvironment">
     <PropertyGroup>
-      <!-- Define the BUILD_GENERATED_VERSION compilation symbol. -->
+      <!-- Define the NO_INTERNALS_VISIBLE_TO compilation symbol. -->
       <AdditionalConstants>$(AdditionalConstants);NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
     </PropertyGroup>
+
+    <!-- Internals are no longer visible, we must remove test projects. -->
+    <ItemGroup>
+      <_TestProject Include="%(ProjectsToBuild.Identity)"
+                    Condition=" '@(ProjectsToBuild->EndsWith('Facts.csproj'))' == 'true' " />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectsToBuild Remove="@(_TestProject)" />
+    </ItemGroup>
   </Target>
 </Project>
