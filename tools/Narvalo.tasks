@@ -16,23 +16,33 @@
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 // The algorithm used by .NET to auto-increment the assembly version is as follows:
-// The default build number increments daily. The default revision number is 
-// the number of seconds since midnight local time (without taking into account 
-// time zone adjustments for daylight saving time), divided by 2.
-// An important constraint is that build and revision numbers must be less or 
-// equal to 65534 (UInt16.MaxValue - 1).
+//   The default build number increments daily. The default revision number is 
+//   the number of seconds since midnight local time (without taking into account 
+//   time zone adjustments for daylight saving time), divided by 2.
 // For further informations, see: 
 // http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx
-// Obviously, during the same day, two builds may end up with the same assembly
-// version.
-// Here I implement a slight variation of the same algorithm. 
-// Instead of dividing by 2, I use the number of seconds divided by 1.3184 ie:
-//   (number of seconds in a day) / (UInt16.MaxValue - 1).
-// This method also proves to be useful since we can auto-increment the 
-// AssemblyFileVersion attribute, something that is normally not possible.
-var now = DateTime.Now;
-BuildNumber = (now - new DateTime(2000, 1, 1)).Days.ToString();
-RevisionNumber = ((int)((now - new DateTime(now.Year, now.Month, now.Day, 0, 0, 0)).TotalSeconds / 1.3184)).ToString();
+//
+// Remarks:
+// - this feature is only available to AssemblyVersion not to AssemblyFileVersion.
+// - during the same day, two builds may end up with the same assembly version.
+// - build and revision numbers must be less or equal to 65534 (UInt16.MaxValue - 1).
+//
+// Here I implement a slight variation of the same algorithm:
+// - use UTC time.
+// - count the number of days since 2014-12-01.
+// - prefix the build number with "1" in the morning and "2" in the afternoon.
+// - count the number of seconds since midnight in the morning and since 
+//   midday in the afternoon.
+// This way, there is less chances to get the same numbers during a single day
+// on the same build machine. The scheme will break in approximately 27 years...
+// Indeed the new prefix takes one digit in the build number, so we are left with 
+// 4 digits (remember the 65534 limit).
+var now = DateTime.UtcNow;
+var isMorning = now.ToString("t") == "A";
+var buildNumberPrefix = isMorning ? "1" : "2";
+var startHour = isMorning ? 0 : 12;
+BuildNumber = buildNumberPrefix + (now - new DateTime(2014, 12, 1)).Days.ToString();
+RevisionNumber = ((int)(now - new DateTime(now.Year, now.Month, now.Day, startHour, 0, 0)).TotalSeconds).ToString();
          ]]>
       </Code>
     </Task>

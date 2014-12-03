@@ -48,6 +48,7 @@ using System.Runtime.InteropServices;
 
 #endif
 
+// In Visual Studio, all assemblies get a fake version.
 #if !BUILD_GENERATED_VERSION
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

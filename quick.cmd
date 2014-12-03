@@ -1,4 +1,4 @@
-:: Simple script to build the most stable projects and run the tests.
+:: Simple script to build the most stable projects.
 ::
 :: Usage: quick [Release?]
 ::
@@ -10,7 +10,7 @@
 @set Configuration=Debug
 @if "%1"=="Release" ( @set Configuration=Release )
 
-@call "%~dp0\build.cmd" RunTests %Configuration% SkipPrivateProjects
+@call "%~dp0\build.cmd" LeanBuild %Configuration% SkipPrivateProjects
 
 @endlocal
 @exit /B %ERRORLEVEL%
