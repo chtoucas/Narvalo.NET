@@ -24,23 +24,14 @@
     <!-- Code Contracts background checking is not available in terminal. -->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
 
-    <!-- Force T4 re-generation (currently disabled). -->
-    <TransformOnBuild>false</TransformOnBuild>
+    <!-- Force T4 re-generation (currently disabled in Narvalo.CustomBefore.targets). -->
+    <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="$(NarvaloAssemblyInfoVersionFile)">
-      <Link>Properties\AssemblyInfo.Version.cs</Link>
-    </Compile>
-  </ItemGroup>
 
 
   <Target Name="_CheckCustomAfterPropsRequiredProperties">
     <Error Text="You MUST define the NarvaloReportsDir property before importing Narvalo.CustomAfter.props."
            ContinueOnError="false"
            Condition=" '$(NarvaloReportsDir)' == ''" />
-    <Error Text="You MUST define the NarvaloAssemblyInfoVersionFile property before importing Narvalo.CustomAfter.props."
-           ContinueOnError="false"
-           Condition=" '$(NarvaloAssemblyInfoVersionFile)' == ''" />
   </Target>
 </Project>

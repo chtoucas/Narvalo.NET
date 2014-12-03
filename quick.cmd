@@ -10,7 +10,7 @@
 @set Configuration=Debug
 @if "%1"=="Release" ( @set Configuration=Release )
 
-@call "%~dp0\build.cmd" RunTests %Configuration% OnlyNuGetProjects
+@call "%~dp0\build.cmd" RunTests %Configuration% SkipPrivateProjects
 
 @endlocal
 @exit /B %ERRORLEVEL%

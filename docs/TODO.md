@@ -6,6 +6,7 @@ In Progress
 
 - Rework MSBuild to use a common set of settings for all projects.
   Import common target at start of projects.
+- Rework assembly versioning.
 - Get rid off Narvalo.Junk.
 
 
@@ -20,7 +21,6 @@ In General
 ### Medium Priority
 
 - NuGet publication script (use Fake or PSake).
-- Rework assembly versioning.
 - Write assembly descriptions.
 - Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
 - Review all GetHashCode() methods.

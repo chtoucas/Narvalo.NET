@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -6,7 +7,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 
 [assembly: Guid("7e8fd841-aa2d-4519-8cd5-03dbde7a530e")]
-
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0")]

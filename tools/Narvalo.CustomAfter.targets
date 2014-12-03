@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <Target Name="DeleteOriginalDocumentationFiles">
+    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." 
+             Importance="normal" />
+    
     <ItemGroup>
       <_OriginalDocumentationFile Include="$(OutDir)$(AssemblyName).xml.old" />
     </ItemGroup>

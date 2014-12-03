@@ -13,8 +13,17 @@
     <DefineConstants Condition=" '$(NarvaloAdditionalConstants)' != '' ">$(NarvaloAdditionalConstants);$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="$(NarvaloAssemblyInfoVersionFile)">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
+  </ItemGroup>
+  
   
   <Target Name="_CheckCustomBeforePropsRequiredProperties">
+    <Error Text="You MUST define the NarvaloAssemblyInfoVersionFile property before importing Narvalo.CustomAfter.props."
+           ContinueOnError="false"
+           Condition=" '$(NarvaloAssemblyInfoVersionFile)' == ''" />
     <Warning Text="You SHOULD define the NarvaloRepositoryRoot property before importing Narvalo.CustomBefore.props. This is not mandatory but seems reasonnable since Narvalo.proj already has it."
            ContinueOnError="true"
            Condition=" '$(NarvaloRepositoryRoot)' == ''" />

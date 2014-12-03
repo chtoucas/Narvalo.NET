@@ -1,13 +1,13 @@
 :: Launcher for Narvalo.proj.
 ::
-:: Usage: build [Target?] [Configuration?] [OnlyNuGetProjects?]
+:: Usage: build [Target?] [Configuration?] [SkipPrivateProjects?]
 ::
 :: Without options, it is equivalent to: build all projects in Release mode,
 :: verify the assemblies and finally run the tests.
 ::
 :: Examples:
 :: - Same as default but only for the most stable projects:
-::  build Default Release OnlyNuGetProjects
+::  build Default Release SkipPrivateProjects
 :: - Call "Build" target, Debug configuration:
 ::	build Build Debug
 :: - Download NuGet:
@@ -62,14 +62,14 @@
 :: Process options.
 @set Target=%1
 @set Configuration=Release
-@set OnlyNuGetProjects=false
+@set SkipPrivateProjects=false
 
 @if "%2"=="" ( @goto BuildCustom )
 @set Configuration=%2
 
 @if "%3"=="" ( @goto BuildCustom )
-@if "%3"=="OnlyNuGetProjects" (
-    @set OnlyNuGetProjects=true
+@if "%3"=="SkipPrivateProjects" (
+    @set SkipPrivateProjects=true
     @goto BuildCustom
 )
 
@@ -86,9 +86,9 @@
 
 :BuildCustom
 
-@echo Running custom Build with Target=%Target% Configuration=%Configuration% OnlyNuGetProjects=%OnlyNuGetProjects%
+@echo Running custom Build with Target=%Target% Configuration=%Configuration% SkipPrivateProjects=%SkipPrivateProjects%
 
-%MSBuildWithOptions% /t:%Target% /p:OnlyNuGetProjects=%OnlyNuGetProjects%;Configuration=%Configuration%
+%MSBuildWithOptions% /t:%Target% /p:SkipPrivateProjects=%SkipPrivateProjects%;Configuration=%Configuration%
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess

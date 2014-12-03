@@ -20,14 +20,14 @@
     </AssemblyInfo>
   </ItemGroup>
 
-  <!-- Define the NuGetPackage itemGroup. -->
+  <!-- Define the Package itemGroup. -->
   <ItemGroup>
-    <NuGetPackage Include="Narvalo.Core">
+    <Package Include="Narvalo.Core">
       <Lib>
         Narvalo.Core.dll;
         Narvalo.Core.pdb;
         Narvalo.Core.xml;
       </Lib>
-    </NuGetPackage>
+    </Package>
   </ItemGroup>
 </Project>

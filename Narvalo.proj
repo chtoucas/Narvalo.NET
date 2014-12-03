@@ -4,9 +4,9 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Global properties:
-    - BeLean, if true use the Clean and Rebuild targets from the child projects.
+    - LeanRun, if true use the Clean and Rebuild targets from the child projects.
       Default to false.
-    - OnlyNuGetProjects, if true only build the projects necessary for creating
+    - SkipPrivateProjects, if true only build the projects necessary for creating
       the NuGet packages. Default to false.
     Microsoft global properties:
     - Configuration, default to Release.
@@ -19,7 +19,7 @@
     - Build projects in parallel:
         MSBuild.exe Narvalo.proj /m /nr:false 
     - Fast Debug Rebuild:
-        MSBuild.exe Narvalo.proj /t:LeanRebuild /p:Configuration=Debug;OnlyNuGetProjects=true
+        MSBuild.exe Narvalo.proj /t:LeanRebuild /p:Configuration=Debug;SkipPrivateProjects=true
 
     *** WARNING ***
     When upgrading VS, do not forget to update the VisualStudioVersion property
@@ -38,7 +38,6 @@
     - Make unnecessary to add StyleCop settings to the project.
     - Add other filters? OnlyCore, OnlyMvp for NuGet packages.
     - Add $(SolutionDir) to BuildProperties?
-    - Review all AssemblyInfo.cs (header, version).
     - $(RepositoryRoot) aliases -> tools, etc
     - Nuproj?
     - SecAnnotate
@@ -56,12 +55,12 @@
   <!-- Process global properties. -->
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
-    <OnlyNuGetProjects Condition=" '$(OnlyNuGetProjects)' != 'true' ">false</OnlyNuGetProjects>
+    <SkipPrivateProjects Condition=" '$(SkipPrivateProjects)' != 'true' ">false</SkipPrivateProjects>
     <!-- The default behaviour is to use our own defined Clean and Rebuild 
          targets and not to delegate them to the one found in the projects.
          Even if this value is false, you can still directly call the 
          "lean" targets. -->
-    <BeLean Condition=" '$(BeLean)' != 'true' ">false</BeLean>
+    <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
   </PropertyGroup>
 
   <!-- Process Microsoft global properties. -->
@@ -95,6 +94,8 @@
 
   <!-- Import the project settings. -->
   <Import Project="$(RepositoryRoot)tools\Narvalo.settings.props" />
+  <!-- Import the project tasks. -->
+  <Import Project="$(RepositoryRoot)tools\Narvalo.tasks" />
   <!-- Import the xUnit tasks. -->
   <Import Project="$(RepositoryRoot)tools\Xunit.Runner.MSBuild.tasks" />
 
@@ -110,7 +111,7 @@
 
   <!-- Define the ProjectsToBuild property. -->
   <Choose>
-    <When Condition=" '$(OnlyNuGetProjects)' == 'false' ">
+    <When Condition=" '$(SkipPrivateProjects)' == 'false' ">
       <!-- 
         Solutions use the Configuration Manager which can lead to unexpected
         behaviour. For instance, a project might not have been selected for 
@@ -203,8 +204,8 @@
 
   <!-- Define the CleanDependsOn property. -->
   <PropertyGroup>
-    <CleanDependsOn Condition=" '$(BeLean)' == 'true' ">LeanClean</CleanDependsOn>
-    <CleanDependsOn Condition=" '$(BeLean)' != 'true' ">CoreClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(LeanRun)' == 'true' ">LeanClean</CleanDependsOn>
+    <CleanDependsOn Condition=" '$(LeanRun)' != 'true' ">CoreClean</CleanDependsOn>
   </PropertyGroup>
 
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
@@ -224,15 +225,15 @@
 
   <!-- Define the BuildDependsOn property. -->
   <PropertyGroup>
-    <BuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanBuild</BuildDependsOn>
-    <BuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreBuild</BuildDependsOn>
+    <BuildDependsOn Condition=" '$(LeanRun)' == 'true' ">LeanBuild</BuildDependsOn>
+    <BuildDependsOn Condition=" '$(LeanRun)' != 'true' ">CoreBuild</BuildDependsOn>
   </PropertyGroup>
 
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
 
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
 
-  <Target Name="LeanBuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfo;_CreateReportsDir">
+  <Target Name="LeanBuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfoVersion;_CreateReportsDir">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
          when we know it's OK. Otherwise there is always CoreBuild... -->
@@ -247,15 +248,15 @@
 
   <!-- Define the RebuildDependsOn property. -->
   <PropertyGroup>
-    <RebuildDependsOn Condition=" '$(BeLean)' == 'true' ">LeanRebuild</RebuildDependsOn>
-    <RebuildDependsOn Condition=" '$(BeLean)' != 'true' ">CoreRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(LeanRun)' == 'true' ">LeanRebuild</RebuildDependsOn>
+    <RebuildDependsOn Condition=" '$(LeanRun)' != 'true' ">CoreRebuild</RebuildDependsOn>
   </PropertyGroup>
 
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" />
 
-  <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;Clean;_AddCompilationSymbols;GenerateAssemblyInfo;Build" />
+  <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;Clean;_AddCompilationSymbols;GenerateAssemblyInfoVersion;Build" />
 
-  <Target Name="LeanRebuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfo;_CreateReportsDir">
+  <Target Name="LeanRebuild" DependsOnTargets="_AddCompilationSymbols;GenerateAssemblyInfoVersion;_CreateReportsDir">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -275,7 +276,8 @@
     </PropertyGroup>
 
     <Message Text="Verifying assemblies with PEVerify..."
-             Importance="high" Condition=" '$(_PEVerifyFound)' == 'true' " />
+             Importance="high"
+             Condition=" '$(_PEVerifyFound)' == 'true' " />
 
     <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
              ContinueOnError="true"
@@ -288,7 +290,7 @@
           Condition=" '$(_PEVerifyFound)' == 'true' "
           ContinueOnError="false" />
 
-    <!-- Garder cette commande en fin de directive au cas où une vérification échoue. -->
+    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
     <Touch Files="$(VerifyBuildDummyOutput)" AlwaysCreate="true" />
   </Target>
 
@@ -304,35 +306,6 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="GenerateAssemblyInfo" DependsOnTargets="_PrepareAssemblyInfo">
-    <Message Text="Generating the assembly version informations..." Importance="high" />
-
-    <PropertyGroup>
-      <_AssemblyInfoContent>
-        <![CDATA[
-//------------------------------------------------------------------------------
-// <auto-generated>
-// This code was generated by a tool. Changes to this file may cause incorrect
-// behavior and will be lost if the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-using System.Reflection;
-
-#if BUILD_GENERATED_VERSION
-@(AssemblyInfo -> '%(CodeFragment)', '')
-#endif
-
-         ]]>
-      </_AssemblyInfoContent>
-      <_AssemblyInfoLines>$([MSBuild]::Escape($(_AssemblyInfoContent)))</_AssemblyInfoLines>
-    </PropertyGroup>
-
-    <WriteLinesToFile Lines="$(_AssemblyInfoLines)"
-                      File="$(AssemblyInfoVersionFile)"
-                      Overwrite="true" />
-  </Target>
-
   <!--<Target Name="_PrepareForPackage">
     <PropertyGroup>
       <AdditionalConstants>$(AdditionalConstants);NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
@@ -344,6 +317,35 @@ using System.Reflection;
   
   <Target Name="Publish" DependsOnTargets="Package">
   </Target>-->
+
+  <Target Name="GenerateAssemblyInfoVersion" DependsOnTargets="_PrepareAssemblyInfoVersion">
+    <Message Text="Generating the assembly version informations..." Importance="high" />
+
+    <PropertyGroup>
+      <_AssemblyInfoVersionContent>
+        <![CDATA[
+//------------------------------------------------------------------------------
+// <auto-generated>
+// This code was generated by a tool. Changes to this file may cause incorrect
+// behavior and will be lost when the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using System.Reflection;
+
+#if BUILD_GENERATED_VERSION
+@(AssemblyInfo -> '%(CodeFragment)', '')
+#endif
+
+         ]]>
+      </_AssemblyInfoVersionContent>
+      <_AssemblyInfoVersionLines>$([MSBuild]::Escape($(_AssemblyInfoVersionContent)))</_AssemblyInfoVersionLines>
+    </PropertyGroup>
+
+    <WriteLinesToFile Lines="$(_AssemblyInfoVersionLines)"
+                      File="$(AssemblyInfoVersionFile)"
+                      Overwrite="true" />
+  </Target>
 
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
@@ -379,11 +381,11 @@ using System.Reflection;
     <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
   </Target>
 
-  <Target Name="_GenerateBuildNumberAndRevision">
-    <GenerateBuildNumberAndRevision>
+  <Target Name="_IncrementBuildAndRevisionNumbers">
+    <IncrementBuildAndRevisionNumbers>
       <Output TaskParameter="BuildNumber" PropertyName="BuildNumber"/>
-      <Output TaskParameter="Revision" PropertyName="Revision"/>
-    </GenerateBuildNumberAndRevision>
+      <Output TaskParameter="RevisionNumber" PropertyName="RevisionNumber"/>
+    </IncrementBuildAndRevisionNumbers>
   </Target>
 
   <Target Name="_PatchCoreRebuild">
@@ -397,7 +399,7 @@ using System.Reflection;
       to BuildProperties.
 
       Another solution is to define our Rebuild target so that it calls MSBuild 
-      with the Rebuild target. This is exactly what we do if BeLean is set to true.
+      with the Rebuild target. This is exactly what we do if LeanRun is set to true.
     -->
     <PropertyGroup>
       <BuildProperties>
@@ -407,17 +409,19 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PrepareAssemblyInfo"
-          DependsOnTargets="_GenerateBuildNumberAndRevision"
+  <Target Name="_PrepareAssemblyInfoVersion"
+          DependsOnTargets="_IncrementBuildAndRevisionNumbers"
           Outputs="%(AssemblyInfo.Identity)">
     <PropertyGroup>
       <_CurrentAssemblyInfo>%(AssemblyInfo.Identity)</_CurrentAssemblyInfo>
     </PropertyGroup>
 
+    <!-- WARNING: Keep the ItemGroup's separated, otherwise it won't work. -->
+
     <ItemGroup>
       <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
         <Version>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).0.0</Version>
-        <FileVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).$(BuildNumber).$(Revision)</FileVersion>
+        <FileVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).$(BuildNumber).$(RevisionNumber)</FileVersion>
         <InformationalVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).%(AssemblyInfo.Patch)</InformationalVersion>
       </AssemblyInfo>
     </ItemGroup>
@@ -442,64 +446,4 @@ using System.Reflection;
       </AssemblyInfo>
     </ItemGroup>
   </Target>
-
-
-  <!-- ### Tasks ### -->
-
-  <!-- Define the CodeTaskFactoryAssemblyFile property. -->
-  <PropertyGroup>
-    <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
-  </PropertyGroup>
-
-  <UsingTask TaskName="GenerateBuildNumberAndRevision" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
-    <ParameterGroup>
-      <BuildNumber ParameterType="System.String" Output="true" />
-      <Revision ParameterType="System.String" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-// Re-implements the algorithm used by .NET:
-// See: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx
-// The default build number increments daily. The default revision number is 
-// the number of seconds since midnight local time (without taking into account 
-// time zone adjustments for daylight saving time), divided by 2.
-// IMPORTANT: These numbers must be less or equal to 65534 (UInt16.MaxValue - 1).
-// WARNING: Due to the way the revision is built, two builds may end up with
-// the same version.
-var now = DateTime.Now;
-BuildNumber = (now - new DateTime(2000, 1, 1)).Days.ToString();
-Revision = ((int)((now - new DateTime(now.Year, now.Month, now.Day, 0, 0, 0)).TotalSeconds) / 2).ToString();
-         ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
-    <ParameterGroup>
-      <OutputFilePath ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="System.Net" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-try {
-    new WebClient().DownloadFile("https://nuget.org/nuget.exe", OutputFilePath);
-
-    return true;
-}
-catch (Exception ex) {
-    Log.LogErrorFromException(ex);
-    return false;
-}
-         ]]>
-      </Code>
-    </Task>
-  </UsingTask>
 </Project>
