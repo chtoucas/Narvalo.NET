@@ -72,6 +72,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuMaker", "src\DocuMaker\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narvalo.Facts\Narvalo.Facts.csproj", "{A6E851F2-C725-4461-9A8D-47DADB563923}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{A1081472-283E-4EBA-B740-DD6AF14B41FC}"
+	ProjectSection(SolutionItems) = preProject
+		etc\Narvalo.Core.nuspec = etc\Narvalo.Core.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -135,5 +140,6 @@ Global
 		{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 		{36958601-D874-4234-8802-6E496A8A6335} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 		{990FBF0C-8EA8-4005-9524-511E12E7491F} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
+		{A1081472-283E-4EBA-B740-DD6AF14B41FC} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 	EndGlobalSection
 EndGlobal

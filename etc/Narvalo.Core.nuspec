@@ -13,7 +13,7 @@ This package contains the Narvalo.Org core utilities.
 
 *** Until version 1.0, backward compatibility is not guaranteed ***
     </description>
-    <!--<releaseNotes></releaseNotes>-->
+    <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>Maybe, Option, Linq, Monad</tags>
     <language>en-US</language>

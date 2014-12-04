@@ -36,9 +36,12 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
+    - Split build file
     - Rework the build script to allow arbitrary args.
     - Versioning (for non core and non vp projects) + Metadata
     - Code Contracts seem disabled???
+    - Review NuGet parameters
+    - Update Copyright, add build time to Configuration.
     
     - Delay signing?
     - Make unnecessary to add StyleCop settings to the project.
@@ -330,29 +333,62 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="Package" DependsOnTargets="InstallNuGet;Build;CorePackage">
+  <Target Name="Package" Condition=" '$(LeanRun)' == 'true' ">
+    <Error Text="If LeanRun is set to true, the Package target is not available."
+           ContinueOnError="false" />
+  </Target>
+  
+  <Target Name="Package" 
+          DependsOnTargets="InstallNuGet;Build;CorePackage"
+          Condition=" '$(LeanRun)' != 'true' ">
     <!--
-      Disable if LeanRun is true?
-      If Debug, add a suffix.
-      If Lean remove previous package?
+      Narvalo.Core.{Major}.{Minor}.{Patch}
+      Narvalo.Core.{Major}.{Minor}.{Patch}-{Configuration}+{BuildNumber}-{***Revision}
+      Clean staging dir before
+      Release Notes (fail if none)
+      Dependencies & co
+      Remove previous package?
       Add Symbols?
     -->
   </Target>
   
   <Target Name="CorePackage"
+          DependsOnTargets="_CreateStagingDir"
           Outputs="%(Package.Identity)">
-    <Message Text="Name = %(Package.Identity)" Importance="high" />
-  
+    <Message Text="Creating %(Package.Identity) package..." Importance="high" />
+    
+    <PropertyGroup>
+      <_PackageStageDir>$(StagingDir)%(Package.Identity)\</_PackageStageDir>
+      <_PackageSpec>$(RepositoryRoot)etc\%(Package.Identity).nuspec</_PackageSpec>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(_PackageStageDir)lib\%(Package.Profile)" Condition="'%(Package.Lib)' != ''" />
+    <!--<Copy SourceFiles="%(Package.Lib)" DestinationFolder="$(_PackageStageDir)lib\%(Package.Profile)" />-->
+    <MakeDir Directories="$(_PackageStageDir)tools" Condition="'%(Package.Tools)' != ''" />
+    <!--<Copy SourceFiles="%(Package.Tools)" DestinationFolder="$(_PackageStageDir)tools" />-->
+
+    <!--<CreatePackageSpec
+      TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
+      VersionNumber="$(_VersionNumber)"
+      SpecFile="$(_PackageSpec)" />
+
+    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />-->
   </Target>
 
-  <Target Name="Publish" DependsOnTargets="_PreparePublishEnvironment;Clean;Package;LeanClean">
+  <Target Name="Publish" Condition=" '$(LeanRun)' == 'true' ">
+    <Error Text="If LeanRun is set to true, the Publish target is not available."
+           ContinueOnError="false" />
+  </Target>
+  
+  <Target Name="Publish" 
+          DependsOnTargets="_PreparePublishEnvironment;Clean;Package;LeanClean"
+          Condition=" '$(LeanRun)' != 'true' ">
     <!--
       At the end, we call the LeanClean target otherwise a later Build might fail
       since Tests no longer have access to internals.
     -->
     
     <!--
-      Disable if LeanRun is true?
       Create publication scripts 
       Publish to myget?
     -->
@@ -385,6 +421,10 @@
 
   <Target Name="_CreateReportsDir">
     <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
+  </Target>
+
+  <Target Name="_CreateStagingDir">
+    <MakeDir Directories="$(StagingDir)" Condition=" !Exists($(StagingDir)) " />
   </Target>
 
   <Target Name="_CreateAssemblyInfo" DependsOnTargets="_PrepareAssemblyInfo">

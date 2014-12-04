@@ -23,6 +23,7 @@
   <!-- Define the Package itemGroup. -->
   <ItemGroup>
     <Package Include="Narvalo.Core">
+      <Profile>portable-net45+netcore45+wpa81+wp8</Profile>
       <Lib>
         Narvalo.Core.dll;
         Narvalo.Core.pdb;

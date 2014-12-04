@@ -44,6 +44,8 @@ var buildNumberPrefix = isMorning ? "1" : "2";
 var startHour = isMorning ? 0 : 12;
 BuildNumber = (now - new DateTime(2014, 12, 1)).Days.ToString() + buildNumberPrefix;
 RevisionNumber = ((int)(now - new DateTime(now.Year, now.Month, now.Day, startHour, 0, 0)).TotalSeconds).ToString();
+
+return true;
          ]]>
       </Code>
     </Task>
@@ -73,6 +75,62 @@ catch (Exception ex) {
     return false;
 }
          ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="CreatePackageSpec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <TemplateFile ParameterType="System.String" Required="true" />
+      <VersionNumber ParameterType="System.String" Required="true" />
+      <ReleaseNotes ParameterType="System.String" Required="true" />
+      <SpecFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+// TODO: Check all inputs.
+if (TemplateFile.Length == 0) {
+    Log.LogMessage(MessageImportance.High, "You must supply a NuSpec file.");
+    
+    return false;
+}
+
+try {
+    string template = File.ReadAllText(TemplateFile)
+      .Replace("$releasenotes$", ReleaseNotes)
+      .Replace("$version$", VersionNumber);
+    File.WriteAllText(SpecFile, template);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="SetEnvironmentVariable" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <Variable ParameterType="System.String" Required="true" />
+      <Value ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+Environment.SetEnvironmentVariable(Variable, Value);
+
+return true;
+        ]]>
       </Code>
     </Task>
   </UsingTask>
