@@ -7,7 +7,6 @@
 
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
-    <RepositoryToolsDir>$(RepositoryRoot)tools\</RepositoryToolsDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -19,10 +18,5 @@
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
 
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
-  </PropertyGroup>
-
-  <!-- If true, Shared.props has already been imported. -->
-  <PropertyGroup>
-    <SharedPropsHasBeenImported>true</SharedPropsHasBeenImported>
   </PropertyGroup>
 </Project>

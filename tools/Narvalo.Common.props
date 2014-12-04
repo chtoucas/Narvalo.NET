@@ -17,8 +17,7 @@
     the property $(AssemblyName) is usually defined.
   -->
 
-  <Import Project="$(MSBuildThisFileDirectory)Shared.props"
-          Condition=" '$(SharedPropsHasBeenImported)' != 'true' " />
+  <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
 
   <!-- If any, import custom props. -->
   <Import Project="$(CustomBeforeNarvaloProps)"
@@ -34,7 +33,7 @@
 
   <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
-    <CustomAfterMicrosoftCommonTargets>$(RepositoryToolsDir)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
+    <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
   <!-- Define default properties. -->

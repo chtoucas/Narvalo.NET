@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project="$(MSBuildThisFileDirectory)Shared.props"
-          Condition=" '$(SharedPropsHasBeenImported)' != 'true' " />
-  
+  <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
   <Import Project="$(MSBuildThisFileDirectory)Make.Settings.props" />
-
-  <!-- If true, Make.Common.props has already been imported. -->
-  <PropertyGroup>
-    <MakeCommonPropsHasBeenImported>true</MakeCommonPropsHasBeenImported>
-  </PropertyGroup>
   
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
@@ -55,7 +48,7 @@
 
   <!-- Define the NuGetCommand property. -->
   <PropertyGroup>
-    <NuGetCommand>$(RepositoryToolsDir)NuGet\nuget.exe</NuGetCommand>
+    <NuGetCommand>$(MSBuildThisFileDirectory)NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
   <!-- Define the VerifyBuildDummyOutput property. -->
@@ -118,10 +111,15 @@
       OutputPath=$(OutputPath);
       GenerateProjectSpecificOutputFolder=false;
       VisualStudioVersion=$(VisualStudioVersion);
-      CustomBeforeNarvaloProps=$(RepositoryToolsDir)Make.CustomBefore.props;
-      CustomAfterNarvaloProps=$(RepositoryToolsDir)Make.CustomAfter.props;
-      CustomBeforeNarvaloTargets=$(RepositoryToolsDir)Make.CustomBefore.targets;
-      CustomAfterNarvaloTargets=$(RepositoryToolsDir)Make.CustomAfter.targets
+      CustomBeforeNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
+      CustomAfterNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
+      CustomBeforeNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
+      CustomAfterNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets
     </BuildProperties>
+  </PropertyGroup>
+  
+  <!-- If true, Make.Common.props has already been imported. -->
+  <PropertyGroup>
+    <MakeCommonPropsHasBeenImported>true</MakeCommonPropsHasBeenImported>
   </PropertyGroup>
 </Project>
