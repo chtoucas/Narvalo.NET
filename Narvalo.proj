@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0"
-         DefaultTargets="Default"
-         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Global properties:
     - LeanRun, if true builds behave a lot like inside Visual Studio.
@@ -36,8 +34,12 @@
     - T4 re-generation has been disabled since it requires VS hosting.
 
     TODO:
-    - Split build file
-    - Rework the build script to allow arbitrary args.
+    - SolutionName
+    - Split build file for diff ProjectsToBuild settings.
+      Check ProjectsToBuild?
+      Check any reference to Narvalo.proj
+      Pass RepositoryRoot.
+    - Rework the build script to allow arbitrary args. (makedir work/ at start)
     - Versioning (for non core and non vp projects) + Metadata
     - Code Contracts seem disabled???
     - Review NuGet parameters
@@ -56,72 +58,18 @@
 
     REVIEW:
     - If PEVerify fails, does the error message appear on the command prompt.
+    
+    See: http://msdn.microsoft.com/en-us/library/dd393574.aspx
   -->
 
-  <!-- ### Properties ### -->
+  <Import Project="$(MSBuildThisFileDirectory)tools\Make.Common.props" />
 
   <!-- Process global properties. -->
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
     <SkipPrivateProjects Condition=" '$(SkipPrivateProjects)' != 'true' ">false</SkipPrivateProjects>
-    <!-- The default behaviour is to use our own heavy way of doing things. -->
+    <!-- The default behaviour is to use our own heavy way of running things. -->
     <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
-  </PropertyGroup>
-
-  <!-- Process Microsoft global properties. -->
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-
-    <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
-    <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
-  </PropertyGroup>
-
-  <!-- Define Microsoft properties. -->
-  <PropertyGroup>
-    <VisualStudioVersion>12.0</VisualStudioVersion>
-  </PropertyGroup>
-
-  <!-- Define properties related to the repository layout. -->
-  <PropertyGroup>
-    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <SolutionFile>$(RepositoryRoot)Narvalo.sln</SolutionFile>
-
-    <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
-    <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
-    <ReportsDir>$(WorkRoot)reports\</ReportsDir>
-    <StagingDir>$(WorkRoot)staging\</StagingDir>
-    <PackagesDir>$(WorkRoot)packages\</PackagesDir>
-
-    <VerifyBuildDummyOutput>$(WorkRoot)obj\$(Configuration)\Narvalo.Verify.txt</VerifyBuildDummyOutput>
-    <PEVerifyLogFile>$(WorkRoot)peverify.log</PEVerifyLogFile>
-    <XUnitReportFile>$(ReportsDir)xunit.xml</XUnitReportFile>
-    <NuGetCommand>$(RepositoryRoot)tools\NuGet\nuget.exe</NuGetCommand>
-  </PropertyGroup>
-
-  <!-- Import the project settings. -->
-  <Import Project="$(RepositoryRoot)tools\Narvalo.settings.props" />
-  <!-- Import the project tasks. -->
-  <Import Project="$(RepositoryRoot)tools\Narvalo.tasks" />
-  <!-- Import the xUnit tasks. -->
-  <Import Project="$(RepositoryRoot)tools\Xunit.Runner.MSBuild.tasks" />
-
-  <!-- Define the AssemblyInfoFile. -->
-  <PropertyGroup>
-    <AssemblyInfoFile>$(RepositoryRoot)etc\AssemblyInfo.Version.cs</AssemblyInfoFile>
-  </PropertyGroup>
-
-  <!-- Define the AdditionalConstants property. -->
-  <PropertyGroup>
-    <AdditionalConstants></AdditionalConstants>
-  </PropertyGroup>
-
-  <!-- Define the AdditionalProperties property. -->
-  <PropertyGroup>
-    <AdditionalProperties>
-      NarvaloReportsDir=$(ReportsDir);
-      NarvaloRepositoryRoot=$(RepositoryRoot)
-    </AdditionalProperties>
   </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->
@@ -142,431 +90,24 @@
       </PropertyGroup>
       -->
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)samples\**\*.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\**\*.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\**\*.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)samples\**\*.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\**\*.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\**\*.csproj" />
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />-->
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
-        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Build\Narvalo.Build.csproj" />-->
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Common\Narvalo.Common.csproj" />-->
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
       </ItemGroup>
     </Otherwise>
   </Choose>
 
-  <!-- Define the BuildProperties property. -->
-  <PropertyGroup>
-    <!--
-      Attempt to use a completely different working directory from the one used by VS.
-
-      WARNING: When building a PCL project, MSBuild places its output inside
-      a subdirectory of $(OutDir). To correct this, we instruct MSBuild to
-      use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
-
-      Here is the documentation directly taken from:
-        %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
-
-      Several properties must be set in the main project file, before using this .TARGETS file.
-      However, if the properties are not set, we pick some defaults.
-
-      OutDir:
-      Indicates the final output location for the project or solution. When building a solution,
-      OutDir can be used to gather multiple project outputs in one location. In addition,
-      OutDir is included in AssemblySearchPaths used for resolving references.
-
-      OutputPath:
-      This property is usually specified in the project file and is used to initialize OutDir.
-      OutDir and OutputPath are distinguished for legacy reasons, and OutDir should be used if at all possible.
-
-      BaseIntermediateOutputPath:
-      This is the top level folder where all configuration specific intermediate output folders will be created.
-      Default value is obj\
-
-      IntermediateOutputPath:
-      This is the full intermediate Output Path, and is derived from BaseIntermediateOutputPath, if none specified
-      (eg. obj\debug). If this property is overridden, then setting BaseIntermediateOutputPath has no effect.
-    -->
-    <BuildProperties>
-      Configuration=$(Configuration);
-      Platform=$(Platform);
-      BuildInParallel=$(BuildInParallel);
-      BaseIntermediateOutputPath=$(WorkRoot)obj\;
-      OutDir=$(OutDir);
-      OutputPath=$(OutDir);
-      GenerateProjectSpecificOutputFolder=false;
-      VisualStudioVersion=$(VisualStudioVersion);
-      CustomBeforeNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomBefore.props;
-      CustomAfterNarvaloProps=$(RepositoryRoot)tools\Narvalo.CustomAfter.props;
-      CustomBeforeNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomBefore.targets;
-      CustomAfterNarvaloTargets=$(RepositoryRoot)tools\Narvalo.CustomAfter.targets
-    </BuildProperties>
-  </PropertyGroup>
-
-
-  <!-- ### Public Targets ### -->
-  
-  <!-- To keep things working correctly, DO NOT break the following rules:
-       Lean(...) targets MUST NOT refer to Core(...), Clean, Build and Rebuild targets.
-       Core(...) targets MUST NOT refer to Lean(...), Clean, Build and Rebuild targets.
-       Other targets MUST NOT refer to Core(...) and Lean(...) targets,
-       of course they may use the normal Clean, Build and Rebuild targets.
-       There are only two exceptions to these rules:
-       - CoreBuild refers to LeanBuild targets.
-       - any target MAY refer to the LeanClean target (this one won't break anything). -->
-
-  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests;Package" />
-
-  <Target Name="Clean">
-    <PropertyGroup>
-      <_TargetsCalledByClean Condition=" '$(LeanRun)' == 'true' ">LeanClean</_TargetsCalledByClean>
-      <_TargetsCalledByClean Condition=" '$(LeanRun)' != 'true' ">CoreClean</_TargetsCalledByClean>
-    </PropertyGroup>
-
-    <CallTarget Targets="$(_TargetsCalledByClean)" />
-  </Target>
-
-  <Target Name="CoreClean" Condition=" Exists($(WorkRoot)) ">
-    <Message Text="Cleaning..." Importance="high" />
-
-    <RemoveDir Directories="$(WorkRoot)" />
-  </Target>
-
-  <Target Name="LeanClean">
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Clean" />
-  </Target>
-
-  <Target Name="Build">
-    <PropertyGroup>
-      <_TargetsCalledByBuild Condition=" '$(LeanRun)' == 'true' ">LeanBuild</_TargetsCalledByBuild>
-      <_TargetsCalledByBuild Condition=" '$(LeanRun)' != 'true' ">CoreBuild</_TargetsCalledByBuild>
-    </PropertyGroup>
-
-    <CallTarget Targets="$(_TargetsCalledByBuild)" />
-  </Target>
-
-  <Target Name="CoreBuild" DependsOnTargets="RestorePackages;_PrepareBuilEnvironment;LeanBuild" />
-
-  <Target Name="LeanBuild" DependsOnTargets="_CreateReportsDir;_PrepareProjectsToBuild">
-    <!-- WARNING: This target might fail if the packages were not previously 
-         restored. We keep it that way to be able to perform fast builds 
-         when we know it's OK. Otherwise there is always CoreBuild... -->
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Build"
-             StopOnFirstFailure="true">
-      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
-    </MSBuild>
-  </Target>
-
-  <Target Name="Rebuild">
-    <PropertyGroup>
-      <_TargetsCalledByRebuild Condition=" '$(LeanRun)' == 'true' ">LeanRebuild</_TargetsCalledByRebuild>
-      <_TargetsCalledByRebuild Condition=" '$(LeanRun)' != 'true' ">CoreRebuild</_TargetsCalledByRebuild>
-    </PropertyGroup>
-
-    <CallTarget Targets="$(_TargetsCalledByRebuild)" />
-  </Target>
-
-  <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;CoreClean;CoreBuild" />
-
-  <Target Name="LeanRebuild" DependsOnTargets="_CreateReportsDir;_PrepareProjectsToBuild">
-    <!-- WARNING: See WARNING in LeanBuild. -->
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Rebuild"
-             StopOnFirstFailure="true">
-      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
-    </MSBuild>
-  </Target>
-
-  <Target Name="VerifyBuild"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(VerifyBuildDummyOutput)">
-    <PropertyGroup>
-      <_PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</_PEVerifyCommand>
-      <_PEVerifyFound Condition=" Exists('$(_PEVerifyCommand)') ">true</_PEVerifyFound>
-    </PropertyGroup>
-
-    <Message Text="Verifying assemblies with PEVerify..."
-             Importance="high"
-             Condition=" '$(_PEVerifyFound)' == 'true' " />
-
-    <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
-             ContinueOnError="true"
-             Condition=" '$(_PEVerifyFound)' != 'true' " />
-
-    <Delete Files="$(PEVerifyLogFile)" Condition=" Exists('$(PEVerifyLogFile)') " />
-
-    <Exec Command="&quot;$(_PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
-          LogStandardErrorAsError="true"
-          Condition=" '$(_PEVerifyFound)' == 'true' "
-          ContinueOnError="false" />
-
-    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
-    <Touch Files="$(VerifyBuildDummyOutput)" AlwaysCreate="true" />
-  </Target>
-
-  <Target Name="RunTests"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(XUnitReportFile)">
-    <ItemGroup>
-      <_TestAssembly Include="%(BuildOutputs.Identity)"
-                       Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
-    </ItemGroup>
-
-    <!-- Since RunTests depends on Build, we are sure that the directory 
-         where we store the reports exists. -->
-    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
-  </Target>
-
-  <Target Name="Package" Condition=" '$(LeanRun)' == 'true' ">
-    <Error Text="If LeanRun is set to true, the Package target is not available."
-           ContinueOnError="false" />
-  </Target>
-  
-  <Target Name="Package" 
-          DependsOnTargets="InstallNuGet;Build;CorePackage"
-          Condition=" '$(LeanRun)' != 'true' ">
-    <!--
-      Narvalo.Core.{Major}.{Minor}.{Patch}
-      Narvalo.Core.{Major}.{Minor}.{Patch}-{Configuration}+{BuildNumber}-{***Revision}
-      Clean staging dir before
-      Release Notes (fail if none)
-      Dependencies & co
-      Remove previous package?
-      Add Symbols?
-    -->
-  </Target>
-  
-  <Target Name="CorePackage"
-          DependsOnTargets="_CreateStagingDir"
-          Outputs="%(Package.Identity)">
-    <Message Text="Creating %(Package.Identity) package..." Importance="high" />
-    
-    <PropertyGroup>
-      <_PackageStageDir>$(StagingDir)%(Package.Identity)\</_PackageStageDir>
-      <_PackageSpec>$(RepositoryRoot)etc\%(Package.Identity).nuspec</_PackageSpec>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_PackageStageDir)lib\%(Package.Profile)" Condition="'%(Package.Lib)' != ''" />
-    <!--<Copy SourceFiles="%(Package.Lib)" DestinationFolder="$(_PackageStageDir)lib\%(Package.Profile)" />-->
-    <MakeDir Directories="$(_PackageStageDir)tools" Condition="'%(Package.Tools)' != ''" />
-    <!--<Copy SourceFiles="%(Package.Tools)" DestinationFolder="$(_PackageStageDir)tools" />-->
-
-    <!--<CreatePackageSpec
-      TemplateFile="$(_EtcDir)%(_Packages.Identity).nuspec"
-      VersionNumber="$(_VersionNumber)"
-      SpecFile="$(_PackageSpec)" />
-
-    <Exec Command="&quot;$(_NuGetExe)&quot; pack &quot;$(_PackageSpec)&quot; -OutputDirectory $(_PackageDir)" />-->
-  </Target>
-
-  <Target Name="Publish" Condition=" '$(LeanRun)' == 'true' ">
-    <Error Text="If LeanRun is set to true, the Publish target is not available."
-           ContinueOnError="false" />
-  </Target>
-  
-  <Target Name="Publish" 
-          DependsOnTargets="_PreparePublishEnvironment;Clean;Package;LeanClean"
-          Condition=" '$(LeanRun)' != 'true' ">
-    <!--
-      At the end, we call the LeanClean target otherwise a later Build might fail
-      since Tests no longer have access to internals.
-    -->
-    
-    <!--
-      Create publication scripts 
-      Publish to myget?
-    -->
-  </Target>
-
-
-  <!-- ### Helpers ### -->
-
-  <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
-    <Message Text="Downloading latest version of NuGet..." Importance="high" />
-
-    <PropertyGroup>
-      <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
-
-    <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
-  </Target>
-
-  <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
-    <Message Text="Restoring NuGet packages..." Importance="high" />
-
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"
-          LogStandardErrorAsError="true" />
-  </Target>
-
-
-  <!-- ### Private Targets ### -->
-
-  <Target Name="_CreateReportsDir">
-    <MakeDir Directories="$(ReportsDir)" Condition=" !Exists($(ReportsDir)) " />
-  </Target>
-
-  <Target Name="_CreateStagingDir">
-    <MakeDir Directories="$(StagingDir)" Condition=" !Exists($(StagingDir)) " />
-  </Target>
-
-  <Target Name="_CreateAssemblyInfo" DependsOnTargets="_PrepareAssemblyInfo">
-    <Message Text="Creating the build generated assembly info..." Importance="high" />
-
-    <PropertyGroup>
-      <_AssemblyInfoContent>
-        <![CDATA[
-//------------------------------------------------------------------------------
-// <auto-generated>
-// This code was generated by a tool. Changes to this file may cause incorrect
-// behavior and will be lost when the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-using System.Reflection;
-
-#if BUILD_GENERATED_VERSION
-@(AssemblyInfo -> '%(CodeFragment)', '')
-#endif
-
-         ]]>
-      </_AssemblyInfoContent>
-      <_AssemblyInfoLines>$([MSBuild]::Escape($(_AssemblyInfoContent)))</_AssemblyInfoLines>
-    </PropertyGroup>
-
-    <WriteLinesToFile Lines="$(_AssemblyInfoLines)"
-                      File="$(AssemblyInfoFile)"
-                      Overwrite="true" />
-  </Target>
-
-  <Target Name="_IncrementBuildAndRevisionNumbers">
-    <IncrementBuildAndRevisionNumbers>
-      <Output TaskParameter="BuildNumber" PropertyName="BuildNumber"/>
-      <Output TaskParameter="RevisionNumber" PropertyName="RevisionNumber"/>
-    </IncrementBuildAndRevisionNumbers>
-  </Target>
-
-  <Target Name="_PatchCoreRebuild">
-    <!--
-      StyleCop uses $(RebuildDependsOn) to modify the Build process.
-      Here, we define Rebuild as Clean;Build, which means that StyleCop
-      modifications of the Rebuild process won't apply since we never call
-      the Rebuild target of MSBuild.
-
-      The solution is to copy the original StyleCop modifications
-      to BuildProperties.
-
-      Another solution is to define our Rebuild target so that it calls MSBuild 
-      with the Rebuild target. This is exactly what we do if LeanRun is set to true.
-    -->
-    <PropertyGroup>
-      <BuildProperties>
-        $(BuildProperties);
-        SourceAnalysisForceFullAnalysis=true
-      </BuildProperties>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="_PrepareAssemblyInfo"
-          DependsOnTargets="_IncrementBuildAndRevisionNumbers"
-          Outputs="%(AssemblyInfo.Identity)">
-    <!-- Batch enrichment of @(AssemblyInfo) which is defined in Narvalo.settings.props.
-         WARNING: Keep the next ItemGroup's separated, otherwise that won't work.
-         While enriching the AssemblyInfo metadata, each step uses metadata
-         only defined after completion of the previous step. -->
-
-    <PropertyGroup>
-      <_CurrentAssemblyInfo>%(AssemblyInfo.Identity)</_CurrentAssemblyInfo>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
-        <Version>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).0.0</Version>
-        <FileVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).$(BuildNumber).$(RevisionNumber)</FileVersion>
-        <InformationalVersion>%(AssemblyInfo.Major).%(AssemblyInfo.Minor).%(AssemblyInfo.Patch)</InformationalVersion>
-      </AssemblyInfo>
-    </ItemGroup>
-
-    <ItemGroup>
-      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
-        <InformationalVersion Condition=" '%(AssemblyInfo.PreRelaseLabel)' != '' ">%(AssemblyInfo.InformationalVersion)-%(AssemblyInfo.PreRelaseLabel)</InformationalVersion>
-      </AssemblyInfo>
-    </ItemGroup>
-
-    <ItemGroup>
-      <AssemblyInfo Condition=" '%(AssemblyInfo.Identity)' == '$(_CurrentAssemblyInfo)' ">
-        <CodeFragment>
-          <![CDATA[
-#if %(AssemblyInfo.CompilationSymbol)
-[assembly: AssemblyVersion("%(AssemblyInfo.Version)")]
-[assembly: AssemblyFileVersion("%(AssemblyInfo.FileVersion)")]
-[assembly: AssemblyInformationalVersion("%(AssemblyInfo.InformationalVersion)")]
-#endif
-         ]]>
-        </CodeFragment>
-      </AssemblyInfo>
-    </ItemGroup>
-  </Target>
-
-  <Target Name="_PrepareBuilEnvironment" DependsOnTargets="_CreateAssemblyInfo">
-    <!-- This target must of course be called just before Build. One interesting
-         thing is that, if we used a scheme that simply incremented the build 
-         numbers, we would generate a lot of unecessary holes in the sequence.
-         Inded due to incremental batching LeanBuild might not do anything.
-         That's a good reason to use an algorithm that only depends on the 
-         date and the time. -->
-
-    <PropertyGroup>
-      <!-- Define the BUILD_GENERATED_VERSION compilation symbol. -->
-      <AdditionalConstants>$(AdditionalConstants);BUILD_GENERATED_VERSION</AdditionalConstants>
-      <!-- Declare the build generated assembly version info. -->
-      <AdditionalProperties>$(AdditionalProperties);NarvaloAssemblyInfoFile=$(AssemblyInfoFile)</AdditionalProperties>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="_PrepareProjectsToBuild">
-    <!-- If there are any defined compilation symbols, add them to the BuildProperties. -->
-    <PropertyGroup Condition=" '$(AdditionalConstants)' != '' ">
-      <AdditionalProperties>$(AdditionalProperties);NarvaloAdditionalConstants=$(AdditionalConstants)</AdditionalProperties>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectsToBuild>
-        <AdditionalProperties>$(AdditionalProperties)</AdditionalProperties>
-      </ProjectsToBuild>
-    </ItemGroup>
-  </Target>
-
-  <Target Name="_PreparePublishEnvironment">
-    <PropertyGroup>
-      <!-- Define the NO_INTERNALS_VISIBLE_TO compilation symbol. -->
-      <AdditionalConstants>$(AdditionalConstants);NO_INTERNALS_VISIBLE_TO</AdditionalConstants>
-    </PropertyGroup>
-
-    <!-- Internals are no longer visible, we must remove test projects. -->
-    <ItemGroup>
-      <_TestProject Include="%(ProjectsToBuild.Identity)"
-                    Condition=" '@(ProjectsToBuild->EndsWith('Facts.csproj'))' == 'true' " />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectsToBuild Remove="@(_TestProject)" />
-    </ItemGroup>
-  </Target>
+  <Import Project="$(MSBuildThisFileDirectory)tools\Make.Common.targets" />
 </Project>

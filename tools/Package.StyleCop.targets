@@ -7,5 +7,6 @@
     A simple workaround is to add the StyleCop.MSBuild
     package to the solution and to import its included targets file.
   -->
+  
   <Import Project="$(MSBuildThisFileDirectory)..\packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets" />
 </Project>

@@ -15,9 +15,12 @@
 :: - Restore NuGet packages:
 ::  build DownloadNuGet
 
-@echo off
+@echo On
 
 :Bootstrap
+
+:: Uncomment the next line to remove some limitations on property functions.
+@rem @set MSBUILDENABLEALLPROPERTYFUNCTIONS=1
 
 @set MSBuild="%ProgramFiles(x86)%\MSBuild\12.0\Bin\MSBuild.exe"
 @if exist %MSBuild% ( @goto Build )
@@ -77,16 +80,12 @@
 
 :BuildDefaults
 
-@echo Running default Build
-
 %MSBuildWithOptions%
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess
 
 :BuildCustom
-
-@echo Running custom Build with Target=%Target% Configuration=%Configuration% SkipPrivateProjects=%SkipPrivateProjects%
 
 %MSBuildWithOptions% /t:%Target% /p:SkipPrivateProjects=%SkipPrivateProjects%;Configuration=%Configuration%
 

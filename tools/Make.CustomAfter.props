@@ -12,8 +12,8 @@
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(NarvaloReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(NarvaloReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(WorkReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(WorkReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
     <!-- We don't want the Code Analysis "succeed" file to be written to 
          the custom location but it does not seem to be understood by MSBuild. 
@@ -30,8 +30,8 @@
 
 
   <Target Name="_CheckCustomAfterPropsRequiredProperties">
-    <Error Text="You MUST define the NarvaloReportsDir property before importing Narvalo.CustomAfter.props."
+    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props."
            ContinueOnError="false"
-           Condition=" '$(NarvaloReportsDir)' == ''" />
+           Condition=" '$(WorkReportsDir)' == ''" />
   </Target>
 </Project>

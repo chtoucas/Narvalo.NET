@@ -10,7 +10,7 @@
           Condition=" '$(CustomBeforeNarvaloTargets)' != '' And Exists('$(CustomBeforeNarvaloTargets)')" />
 
   <!-- Import StyleCop targets. -->
-  <Import Project="$(NarvaloRepositoryRoot)tools\StyleCop.MSBuild.targets" />
+  <Import Project="$(RepositoryToolsDir)Package.StyleCop.targets" />
 
   
   <!-- ### Microsoft Build Process ### -->

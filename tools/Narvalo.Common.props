@@ -7,7 +7,6 @@
     Global properties:
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
-    - NarvaloRepositoryRoot
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -17,6 +16,9 @@
     WARNING: Make sure your import is just after the first PropertyGroup where
     the property $(AssemblyName) is usually defined.
   -->
+
+  <Import Project="$(MSBuildThisFileDirectory)Shared.props"
+          Condition=" '$(SharedPropsHasBeenImported)' != 'true' " />
 
   <!-- If any, import custom props. -->
   <Import Project="$(CustomBeforeNarvaloProps)"
@@ -28,12 +30,11 @@
   <!-- Process global properties. -->
   <PropertyGroup>
     <NarvaloDisableSourceAnalysisOnBuild Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' ">false</NarvaloDisableSourceAnalysisOnBuild>
-    <NarvaloRepositoryRoot Condition=" '$(NarvaloRepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</NarvaloRepositoryRoot>
   </PropertyGroup>
 
   <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
-    <CustomAfterMicrosoftCommonTargets>$(NarvaloRepositoryRoot)tools\Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
+    <CustomAfterMicrosoftCommonTargets>$(RepositoryToolsDir)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
   <!-- Define default properties. -->
@@ -92,10 +93,6 @@
   <!-- ### Microsoft Common Properties ### -->
 
   <PropertyGroup>
-    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
-    
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -114,12 +111,10 @@
     <FileAlignment>512</FileAlignment>
 
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(NarvaloRepositoryRoot)etc\Narvalo.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
 
     <!-- REVIEW: Should I also set these properties? -->
-    <!-- $(SolutionDir) is usually set inside Visual Studio. -->
-    <!--<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*' ">$(MSBuildThisFileDirectory)..\</SolutionDir>-->
     <!--<AppDesignerFolder>Properties</AppDesignerFolder>-->
     <!--<DefaultLanguage>en-US</DefaultLanguage>-->
   </PropertyGroup>
@@ -156,10 +151,10 @@
   <ItemGroup>
     <!-- Unfortunately, when done here, the files won't appear in VS. 
          A file update won't cause a fresh build as it should. -->
-    <CodeAnalysisDictionary Include="$(NarvaloRepositoryRoot)etc\CodeAnalysisDictionary.xml">
+    <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
-    <Compile Include="$(NarvaloRepositoryRoot)etc\AssemblyInfo.Common.cs">
+    <Compile Include="$(RepositorySettingsDir)AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
   </ItemGroup>
@@ -182,7 +177,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(NarvaloRepositoryRoot)etc\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
@@ -208,13 +203,13 @@
     <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
       <!-- Test projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Tests.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(RepositorySettingsDir)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
       <!-- Sample projects use a custom ruleset. -->
       <PropertyGroup>
-        <NarvaloCodeAnalysisRuleSet>$(NarvaloRepositoryRoot)etc\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet>$(RepositorySettingsDir)\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <Otherwise>
@@ -224,7 +219,7 @@
              Contracts. Also Code Contracts produce assemblies that are not 
              compatible with Code Analysis. -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(NarvaloRepositoryRoot)etc\Strict.ruleset</NarvaloCodeAnalysisRuleSet>
+        <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Strict.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <!-- Define common Narvalo project properties. -->
+  <PropertyGroup>
+    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
+
+    <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
+    <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
+    <RepositoryToolsDir>$(RepositoryRoot)tools\</RepositoryToolsDir>
+  </PropertyGroup>
+
+  <!-- Define common MSBuild project properties. -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
+
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+  </PropertyGroup>
+
+  <!-- If true, Shared.props has already been imported. -->
+  <PropertyGroup>
+    <SharedPropsHasBeenImported>true</SharedPropsHasBeenImported>
+  </PropertyGroup>
+</Project>

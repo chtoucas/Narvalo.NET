@@ -39,7 +39,7 @@
 // Indeed the new prefix takes one digit in the build number, so we are left with 
 // 4 digits (remember the 65534 limit).
 var now = DateTime.UtcNow;
-var isMorning = now.ToString("t") == "A";
+var isMorning = now.Hour < 12;
 var buildNumberPrefix = isMorning ? "1" : "2";
 var startHour = isMorning ? 0 : 12;
 BuildNumber = (now - new DateTime(2014, 12, 1)).Days.ToString() + buildNumberPrefix;
