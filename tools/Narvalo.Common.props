@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     This MSBuild file defines a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
-    Global properties:
+    Options:
+    - CustomAfterNarvaloProps
+    - CustomAfterNarvaloTargets
+    - CustomBeforeNarvaloProps
+    - CustomBeforeNarvaloTargets
     - NarvaloCustomCodeAnalysisRuleSet
     - NarvaloDisableSourceAnalysisOnBuild
+    
+    Other options may be found in Shared.props.
 
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
@@ -153,6 +159,7 @@
     <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml">
       <Link>Properties\CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+    
     <Compile Include="$(RepositorySettingsDir)AssemblyInfo.Common.cs">
       <Link>Properties\AssemblyInfo.Common.cs</Link>
     </Compile>
@@ -292,4 +299,9 @@
   <!-- If any, import custom props. -->
   <Import Project="$(CustomAfterNarvaloProps)"
           Condition=" '$(CustomAfterNarvaloProps)' != '' And Exists('$(CustomAfterNarvaloProps)')" />
+
+  <!-- If true, Make.Common.props has already been imported. -->
+  <PropertyGroup>
+    <NarvaloCommonPropsHasBeenImported>true</NarvaloCommonPropsHasBeenImported>
+  </PropertyGroup>
 </Project>

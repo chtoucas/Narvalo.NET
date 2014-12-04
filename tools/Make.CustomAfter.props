@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project InitialTargets="_CheckCustomAfterPropsRequiredProperties"
+<Project ToolsVersion="12.0"
+         InitialTargets="_CheckCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
   -->
 
+  <!-- Overrides for properties defined in Narvalo.Common.props. -->
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
@@ -23,14 +25,10 @@
 
     <!-- Code Contracts background checking is not available in terminal. -->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-
-    <!-- Force T4 re-generation (currently disabled in Narvalo.CustomBefore.targets). -->
-    <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
 
-
-  <Target Name="_CheckCustomAfterPropsRequiredProperties">
-    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props."
+  <Target Name="_CheckCustomAfterProps">
+    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Narvalo.proj."
            ContinueOnError="false"
            Condition=" '$(WorkReportsDir)' == ''" />
   </Target>

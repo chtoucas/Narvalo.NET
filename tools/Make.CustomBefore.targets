@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the beginning of Narvalo.Common.targets by Narvalo.proj.
   -->
 
-  <!-- Import the T4 targets. 
-       WARNING: Currently disabled since our T4 templates require VS hosting. -->
-
-  <!--<PropertyGroup>
+  <!-- Import the T4 targets. -->
+  <PropertyGroup>
     <TextTemplatingTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TextTemplating\Microsoft.TextTemplating.targets</TextTemplatingTargetsPath>
   </PropertyGroup>
 
-  <Import Project="$(TextTemplatingTargetsPath)" Condition="Exists('$(TextTemplatingTargetsPath)')" />-->
+  <Import Project="$(TextTemplatingTargetsPath)" Condition="Exists('$(TextTemplatingTargetsPath)')" />
 </Project>

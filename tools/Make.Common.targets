@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project DefaultTargets="Default"
+<Project ToolsVersion="12.0"
+         DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsHasBeenImported)' != 'true' "/>
-  
+
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.tasks" />
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
 
@@ -130,11 +131,11 @@
          where we store the reports exists. -->
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
-  
 
-  
-  
-  
+
+
+
+
   <Target Name="Package" Condition=" '$(LeanRun)' == 'true' ">
     <Error Text="If LeanRun is set to true, the Package target is not available."
            ContinueOnError="false" />

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Global properties:
-    - LeanRun, if true builds behave a lot like inside Visual Studio.
-      Default to false.
-    - SkipPrivateProjects, if true only build the projects necessary for creating
-      the NuGet packages. Default to false.
-    Microsoft global properties:
-    - Configuration, default to Release.
-    - Platform, default to AnyCPU.
-    - BuildInParallel, default to false.
+    Options:
+    - SkipPrivateProjects
+    
+    Other options:
+    - BuildInParallel from Shared.props
+    - LeanRun from Make.Common.props
+    - Configuration from Shared.props
+    - Platform from Shared.props
+    - RepositoryRoot from Shared.props
+    - VisualStudioVersion from Shared.props
 
     Usage:
     - Build projects with default options:
@@ -38,12 +39,13 @@
     - Split build file for diff ProjectsToBuild settings.
       Check ProjectsToBuild?
       Check any reference to Narvalo.proj
-      Pass RepositoryRoot.
+      Check 64bit
     - Rework the build script to allow arbitrary args. (makedir work/ at start)
     - Versioning (for non core and non vp projects) + Metadata
     - Code Contracts seem disabled???
     - Review NuGet parameters
     - Update Copyright, add build time to Configuration.
+    - XUnit 64bit
     
     - Delay signing?
     - Make unnecessary to add StyleCop settings to the project.
@@ -68,8 +70,6 @@
   <PropertyGroup>
     <!-- The default behaviour is to build all projects. -->
     <SkipPrivateProjects Condition=" '$(SkipPrivateProjects)' != 'true' ">false</SkipPrivateProjects>
-    <!-- The default behaviour is to use our own heavy way of running things. -->
-    <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
   </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->

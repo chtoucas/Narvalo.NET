@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the beginnig of Narvalo.Common.props by Narvalo.proj.
-    
-    Global properties:
-    - NarvaloAdditionalConstants
   -->
 
-  <!-- Compilation symbols added by Narvalo.proj. -->
+  <!-- Optional compilation symbols added by Narvalo.proj. -->
   <PropertyGroup>
     <DefineConstants Condition=" '$(NarvaloAdditionalConstants)' != '' ">$(NarvaloAdditionalConstants);$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
+  <!-- Optional assembly info file added by Narvalo.proj. -->
   <ItemGroup Condition=" '$(NarvaloAssemblyInfoFile)' != '' ">
     <Compile Include="$(NarvaloAssemblyInfoFile)">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
   </ItemGroup>
+  
+  <!-- T4 settings. -->
+  <PropertyGroup>
+    <!-- Force T4 re-generation on build.
+         REVIEW: Currently disabled since our T4 templates require VS hosting. -->
+    <TransformOnBuild>false</TransformOnBuild>
+  </PropertyGroup>
 </Project>
