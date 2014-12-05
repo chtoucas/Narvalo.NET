@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         InitialTargets="_CheckCustomAfterProps"
+         InitialTargets="__InitializeMakeCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the end of Narvalo.Common.props by the entry project (e.g. Narvalo.proj).
@@ -14,8 +14,8 @@
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(WorkReportsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(WorkReportsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(WorkArtefactsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(WorkArtefactsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
     <!-- We don't want the Code Analysis "succeed" file to be written to 
          the custom location but it does not seem to be understood by MSBuild. 
@@ -27,9 +27,9 @@
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
   </PropertyGroup>
 
-  <Target Name="_CheckCustomAfterProps">
-    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the entry project (e.g. Narvalo.proj)."
+  <Target Name="__InitializeMakeCustomAfterProps">
+    <Error Text="You MUST define the 'WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the entry project (e.g. Narvalo.proj)."
            ContinueOnError="false"
-           Condition=" '$(WorkReportsDir)' == ''" />
+           Condition=" '$(WorkArtefactsDir)' == ''" />
   </Target>
 </Project>

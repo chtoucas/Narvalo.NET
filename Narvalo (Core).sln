@@ -31,7 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4F15
 		build.cmd = build.cmd
 		tools\MSBuild.cmd = tools\MSBuild.cmd
 		quick.cmd = quick.cmd
-		rawbuild.cmd = rawbuild.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1B5-0EE5-4BC9-AFCB-7A7128811DAB}"

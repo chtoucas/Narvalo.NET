@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
          DefaultTargets="Default"
+         InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Prerequisites:
@@ -68,7 +69,7 @@
 
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;_PrepareBuilEnvironment;LeanBuild" />
 
-  <Target Name="LeanBuild" DependsOnTargets="_MakeReportsDir;_PrepareProjectsToBuild">
+  <Target Name="LeanBuild" DependsOnTargets="_PrepareProjectsToBuild">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
          when we know it's OK. Otherwise there is always CoreBuild... -->
@@ -92,7 +93,7 @@
 
   <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;CoreClean;CoreBuild" />
 
-  <Target Name="LeanRebuild" DependsOnTargets="_MakeReportsDir;_PrepareProjectsToBuild">
+  <Target Name="LeanRebuild" DependsOnTargets="_PrepareProjectsToBuild">
     <!-- WARNING: See WARNING in LeanBuild. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -102,6 +103,11 @@
       <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
     </MSBuild>
   </Target>
+
+  <!--<Target Name="AfterBuild" AfterTargets="Build">
+    --><!-- XML and pdb not here, code contracts too. --><!--
+    <Copy SourceFiles="@(BuildOutputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
+  </Target>-->
 
   <Target Name="VerifyBuild"
           DependsOnTargets="Build"
@@ -134,7 +140,7 @@
   <Target Name="RunTests"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
-          Outputs="$(XUnitReportFile)">
+          Outputs="$(XUnitLogFile)">
     <ItemGroup>
       <_TestAssembly Include="%(BuildOutputs.Identity)"
                        Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
@@ -142,7 +148,7 @@
 
     <!-- Since RunTests depends on Build, we are sure that the directory 
          where we store the reports exists. -->
-    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
+    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
 
@@ -169,7 +175,6 @@
   </Target>
 
   <Target Name="CorePackage"
-          DependsOnTargets="_MakeStagingDir"
           Outputs="%(Package.Identity)">
     <Message Text="Creating %(Package.Identity) package..." Importance="high" />
 
@@ -272,11 +277,9 @@ using System.Reflection;
     </IncrementBuildAndRevisionNumbers>
   </Target>
 
-  <Target Name="_MakeReportsDir">
-    <MakeDir Directories="$(WorkReportsDir)" Condition=" !Exists($(WorkReportsDir)) " />
-  </Target>
-
-  <Target Name="_MakeStagingDir">
+  <Target Name="_MakeWorkDirectories">
+    <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
+    <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
     <MakeDir Directories="$(WorkStagingDir)" Condition=" !Exists($(WorkStagingDir)) " />
   </Target>
 
@@ -386,4 +389,6 @@ using System.Reflection;
       <ProjectsToBuild Remove="@(_TestProject)" />
     </ItemGroup>
   </Target>
+
+  <Target Name="__InitializeMakeCommonTargets" DependsOnTargets="_MakeWorkDirectories" />
 </Project>

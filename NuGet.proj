@@ -4,6 +4,7 @@
 
   <Import Project="$(MSBuildThisFileDirectory)etc\Narvalo.props" />
 
+  <!-- Define the ProjectsToBuild property. -->
   <ItemGroup>
     <!-- Librairies. -->
     <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Build\Narvalo.Build.csproj" />

@@ -33,7 +33,7 @@
 
 :Build
 
-@set LogFile="%~dp0\..\build.log"
+@set LogFile="%~dp0\..\msbuild.log"
 
 :: MSBuild command line with options.
 ::  /v:m             -> Default logger only displays minimal information.
@@ -61,6 +61,11 @@
 
 :End
 
-@move /y %LogFile% "%~dp0\..\work\" > nul 2>&1
+:: If the artefacts directory exists, move the log file there.
+@set ArtefactsDir="%~dp0\..\work\artefacts\"
+@if exist %ArtefactsDir% ( 
+	@move /y %LogFile% %ArtefactsDir% > nul 2>&1
+)
+
 @endlocal
 @exit /B %ERRORLEVEL%

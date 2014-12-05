@@ -23,7 +23,7 @@
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
-    <WorkReportsDir>$(WorkRoot)reports\</WorkReportsDir>
+    <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
     <WorkStagingDir>$(WorkRoot)staging\</WorkStagingDir>
   </PropertyGroup>
 
@@ -46,17 +46,17 @@
 
   <!-- Define the AssemblyInfoFile property. -->
   <PropertyGroup>
-    <AssemblyInfoFile>$(RepositorySettingsDir)AssemblyInfo.Version.cs</AssemblyInfoFile>
+    <AssemblyInfoFile>$(WorkRoot)AssemblyInfo.Version.cs</AssemblyInfoFile>
   </PropertyGroup>
 
   <!-- Define the PEVerifyLogFile property. -->
   <PropertyGroup>
-    <PEVerifyLogFile>$(WorkRoot)peverify.log</PEVerifyLogFile>
+    <PEVerifyLogFile>$(WorkArtefactsDir)peverify.log</PEVerifyLogFile>
   </PropertyGroup>
 
-  <!-- Define the XUnitReportFile property. -->
+  <!-- Define the XUnitLogFile property. -->
   <PropertyGroup>
-    <XUnitReportFile>$(WorkReportsDir)xunit.xml</XUnitReportFile>
+    <XUnitLogFile>$(WorkArtefactsDir)xunit.xml</XUnitLogFile>
   </PropertyGroup>
 
   <!-- Define the NuGetCommand property. -->
@@ -66,7 +66,7 @@
 
   <!-- Define the VerifyBuildDummyOutput property. -->
   <PropertyGroup>
-    <VerifyBuildDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.txt</VerifyBuildDummyOutput>
+    <VerifyBuildDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</VerifyBuildDummyOutput>
   </PropertyGroup>
 
   <!-- Define the AdditionalConstants property. -->
@@ -77,7 +77,7 @@
   <!-- Define the AdditionalProperties property. -->
   <PropertyGroup>
     <AdditionalProperties>
-      WorkReportsDir=$(WorkReportsDir)
+      WorkArtefactsDir=$(WorkArtefactsDir)
     </AdditionalProperties>
   </PropertyGroup>
 

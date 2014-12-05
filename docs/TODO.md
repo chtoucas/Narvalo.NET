@@ -12,6 +12,9 @@ In Progress
 Build Infrastructure
 --------------------
 
+- CoreClean & __InitializeMakeCommonTargets is unnecessary
+- copy dll, packages, logs, reports to artefact and clean artefacts before.
+- %comspec% /k (@pause) or ps1 launcher 
 - Split build file for diff ProjectsToBuild settings.
   Check ProjectsToBuild?
   Check any reference to Narvalo.proj
@@ -32,7 +35,7 @@ Build Infrastructure
 - Nice to have:
   * SecAnnotate
   * Code Coverage + Report Generator.
-- Artifacts
+- Artefacts
 - Merging, just for fun.
 
 
