@@ -1,4 +1,4 @@
-:: Launcher for Narvalo.proj.
+:: Simple runner for Narvalo.proj.
 ::
 :: Usage: build [Target?] [Configuration?] [SolutioName?]
 

@@ -15,6 +15,7 @@
     <!-- If true builds behave a lot like they were run inside Visual Studio. -->
     <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
     
+    <!-- If SolutionName is not empty, we are building a solution. -->
     <BuildingSolution Condition=" '$(SolutionName)' != '' ">true</BuildingSolution>
     <BuildingSolution Condition=" '$(SolutionName)' == '' ">false</BuildingSolution>
     

@@ -17,7 +17,7 @@
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
-      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\tools\Narvalo.Common.props" />
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\tools\Narvalo.Common.props" />
     
     WARNING: Make sure your import is just after the first PropertyGroup where
     the property $(AssemblyName) is usually defined.

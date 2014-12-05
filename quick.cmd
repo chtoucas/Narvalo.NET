@@ -1,4 +1,4 @@
-:: Lean runner for Narvalo.NuGet.proj.
+:: Lean runner for NuGet.proj.
 ::
 :: Usage: quick [Release?]
 ::
@@ -12,7 +12,7 @@
   @set Configuration=Release
 )
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Narvalo.NuGet.proj" /t:RunTests /p:LeanRun=true;Configuration=%Configuration%
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\NuGet.proj" /t:RunTests /p:LeanRun=true;Configuration=%Configuration%
 
 @endlocal
 @exit /B %ERRORLEVEL%

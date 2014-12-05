@@ -86,8 +86,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{3988
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild Projects", "MSBuild Projects", "{E83CC612-564C-45C1-8DC7-094A34E3C873}"
 	ProjectSection(SolutionItems) = preProject
-		Narvalo.NuGet.proj = Narvalo.NuGet.proj
 		Narvalo.proj = Narvalo.proj
+		NuGet.proj = NuGet.proj
 	EndProjectSection
 EndProject
 Global
