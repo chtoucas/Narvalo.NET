@@ -1,114 +1,36 @@
 :: Launcher for Narvalo.proj.
 ::
-:: Usage: build [Target?] [Configuration?] [SkipPrivateProjects?]
-::
-:: Without options, it is equivalent to: build all projects in Release mode,
-:: verify the assemblies and finally run the tests.
-::
-:: Examples:
-:: - Same as default but only for the most stable projects:
-::  build Default Release SkipPrivateProjects
-:: - Call "Build" target, Debug configuration:
-::	build Build Debug
-:: - Download NuGet:
-::  build DownloadNuGet
-:: - Restore NuGet packages:
-::  build DownloadNuGet
+:: Usage: build [Target?] [Configuration?] [SolutioName?]
 
-@echo On
-
-:Bootstrap
-
-:: Uncomment the next line to remove some limitations on property functions.
-@rem @set MSBUILDENABLEALLPROPERTYFUNCTIONS=1
-
-@set MSBuild="%ProgramFiles(x86)%\MSBuild\12.0\Bin\MSBuild.exe"
-@if exist %MSBuild% ( @goto Build )
-
-@set MSBuild="%ProgramFiles%\MSBuild\12.0\Bin\MSBuild.exe"
-@if exist %MSBuild% ( @goto Build )
-
-@if defined VS120COMNTOOLS (
-  @call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat"
-  @set MSBuild=MSBuild
-  @goto Build
-)
-
-:: As a last resort, we use the MSBuild installed alongside the .NET Framework.
-:: It should work but it is not ideal. For instance, it won't be aware of the
-:: last installed version of the .NET SDK.
-@set MSBuild="%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\MSBuild"
-@if exist %MSBuild% ( @goto Build )
-
-@echo *** Unable to find a suitable version of MSBuild ***
-@exit /B 1
-@goto :eof
-
-:Build
-
+@echo off
 @setlocal
 @pushd %~dp0
 
+@set MSBuild=.\tools\MSBuild.cmd
 @set BuildFile=.\Narvalo.proj
-@set LogFile=.\build.log
 
-:: MSBuild command line with options.
-::  /v:m             -> Default logger only displays minimal information.
-::  /fl /flp:logfile -> Detailed log saved to %LogFile%.
-::  /m               -> Use up to the number of processors in the computer.
-::  /nr:false        -> Disable the re-use of MSBuild nodes.
-@set MSBuildWithOptions=%MSBuild% %BuildFile% /nologo /v:m /fl /flp:logfile=%LogFile%;verbosity=detailed;encoding=utf-8 /m /nr:false
+@if "%1"=="" ( @goto BuildDefault )
+@if "%2"=="" ( @goto BuildTarget )
+@if "%3"=="" ( @goto BuildTargetAndConfiguration )
+@goto BuildSolution
 
-:: No options, run default Build.
-@if "%1"=="" ( @goto BuildDefaults )
-
-:: Process options.
-@set Target=%1
-@set Configuration=Release
-@set SkipPrivateProjects=false
-
-@if "%2"=="" ( @goto BuildCustom )
-@set Configuration=%2
-
-@if "%3"=="" ( @goto BuildCustom )
-@if "%3"=="SkipPrivateProjects" (
-    @set SkipPrivateProjects=true
-    @goto BuildCustom
-)
-
-@goto BuildCustom
-
-:BuildDefaults
-
-%MSBuildWithOptions%
-
-@if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
-@goto BuildSuccess
-
-:BuildCustom
-
-%MSBuildWithOptions% /t:%Target% /p:SkipPrivateProjects=%SkipPrivateProjects%;Configuration=%Configuration%
-
-@if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
-@goto BuildSuccess
-
-:BuildFailure
-
-@echo.
-@echo *** Build failed ***
-@echo.
+:BuildDefault
+@call %MSBuild% %BuildFile%
 @goto End
 
-:BuildSuccess
+:BuildTarget
+@call %MSBuild% %BuildFile% /t:%1
+@goto End
 
-@echo.
-@echo Congratulations, Build successful!
-@echo.
+:BuildTargetAndConfiguration
+@call %MSBuild% %BuildFile% /t:%1 /p:Configuration=%2
+@goto End
+
+:BuildSolution
+@call %MSBuild% %BuildFile% /t:%1 /p:Configuration=%2;SolutionName=%3
 @goto End
 
 :End
-
-@move /y %LogFile% work\ > nul 2>&1
 @popd
 @endlocal
 @exit /B %ERRORLEVEL%

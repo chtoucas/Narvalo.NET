@@ -5,12 +5,19 @@
     - BuildInParallel
     - Configuration
     - Platform
-    - RepositoryRoot
-    - VisualStudioVersion
   -->
   
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
+    <!-- RepositoryRoot should not be set manually. The only time it is already
+         set is when building from the command line via one of the master
+         projects. The conditional define allows to speed up things a little bit.
+         
+         For instance, Narvalo.proj imports Make.Common.props then Shared.props;
+         RepositoryRoot is not already defined, we initialize it. 
+         When Narvalo.proj builds a child project, it injects RepositoryRoot
+         (see BuildProperties in Make.Common.props) so that when the child 
+         project imports Shared.props, RepositoryRoot is already defined. -->
     <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
 
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
@@ -25,6 +32,8 @@
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
 
+    <!-- VisualStudioVersion should not be set manually. Only here to allow
+         Visual Studio to override it. -->
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
   </PropertyGroup>
 </Project>

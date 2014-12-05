@@ -3,7 +3,7 @@
          InitialTargets="_CheckCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
+    This file is injected at the end of Narvalo.Common.props by the entry project (e.g. Narvalo.proj).
   -->
 
   <!-- Overrides for properties defined in Narvalo.Common.props. -->
@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <Target Name="_CheckCustomAfterProps">
-    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Narvalo.proj."
+    <Error Text="You MUST define the 'WorkReportsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the entry project (e.g. Narvalo.proj)."
            ContinueOnError="false"
            Condition=" '$(WorkReportsDir)' == ''" />
   </Target>

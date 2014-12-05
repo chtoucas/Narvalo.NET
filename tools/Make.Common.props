@@ -3,18 +3,23 @@
   <!--
     Options:
     - LeanRun
+    - SolutionName
     
     Other options may be found in Shared.props.
   -->
   
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
-  <Import Project="$(MSBuildThisFileDirectory)Make.Settings.props" />
   
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
     <!-- If true builds behave a lot like they were run inside Visual Studio. -->
     <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
     
+    <BuildingSolution Condition=" '$(SolutionName)' != '' ">true</BuildingSolution>
+    <BuildingSolution Condition=" '$(SolutionName)' == '' ">false</BuildingSolution>
+    
+    <SolutionName Condition=" '$(BuildingSolution)' != 'true' ">Narvalo.sln</SolutionName>
+
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <WorkReportsDir>$(WorkRoot)reports\</WorkReportsDir>
@@ -28,11 +33,9 @@
 
     <BaseOutputPath>$(WorkRoot)bin\</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
-  </PropertyGroup>
 
-  <!-- Define the SolutionName property. -->
-  <PropertyGroup>
-    <SolutionName>Narvalo.sln</SolutionName>
+    <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU"... -->
+    <Platform Condition=" '$(BuildingSolution)' == 'true' And '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
   </PropertyGroup>
 
   <!-- Define the SolutionFile property. -->

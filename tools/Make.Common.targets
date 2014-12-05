@@ -2,6 +2,19 @@
 <Project ToolsVersion="12.0"
          DefaultTargets="Default"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    Prerequisites:
+    - @(ProjectsToBuild)
+    - @(AssemblyInfo)
+    - @(Package)
+    
+    @(ProjectsToBuild) is created in the entry project (e.g. Narvalo.proj) 
+    and the other itemGroup's in etc\Narvalo.props.
+    
+    Combinations that do not really make sense:
+    - No need to set LeanRun to true when targeting LeanBuild.
+    - Setting LeanRun will have no effect when targeting CoreBuild.
+  -->
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsHasBeenImported)' != 'true' "/>

@@ -4,14 +4,40 @@ TODO
 In Progress
 -----------
 
-- Rework MSBuild to use a common set of settings for all projects.
-  Import common target at start of projects.
+- Rework MSBuild.
 - Rework assembly versioning.
 - Get rid off Narvalo.Junk.
 
 
-In General
-----------
+Build Infrastructure
+--------------------
+
+- Split build file for diff ProjectsToBuild settings.
+  Check ProjectsToBuild?
+  Check any reference to Narvalo.proj
+  Check 64bit
+- Versioning (for non core and non vp projects) + Metadata
+- Code Contracts seem disabled???
+- Review NuGet parameters -repository
+- Update Copyright, add build time to Configuration.
+- XUnit 64bit
+
+- T4 re-generation has been disabled since it requires VS hosting.
+- If PEVerify fails, does the error message appear on the command prompt.
+- Delay signing?
+- Make unnecessary to add StyleCop settings to the project.
+- Add other filters? OnlyCore, OnlyMvp for NuGet packages.
+- Add $(SolutionDir) to BuildProperties?
+- $(RepositoryRoot) aliases for tools, etc
+- Nice to have:
+  * SecAnnotate
+  * Code Coverage + Report Generator.
+- Artifacts
+- Merging, just for fun.
+
+
+Coding Rules
+------------
 
 ### High Priority
 
@@ -48,7 +74,7 @@ Narvalo (Core)
 
 ### High Priority
 
-- Maybe<T>, ensures that if the underlying is null things work correctly 
+- Maybe<T>, ensures that if the underlying is null things work correctly
   (I don't think so).
 - Enforce, why can't I use ContractAbbreviator? The method get erased.
   The current workaround makes the API too different.

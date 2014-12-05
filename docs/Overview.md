@@ -115,3 +115,7 @@ Code Contracts
 --------------
 
 
+MSBuild
+-------
+
+Cf. http://msdn.microsoft.com/en-us/library/dd393574.aspx

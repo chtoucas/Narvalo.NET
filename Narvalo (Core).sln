@@ -26,24 +26,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docs\TODO.md = docs\TODO.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4F15D06E-58F3-45ED-8960-4AC11C0DAE2E}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
-		tools\Make.Common.props = tools\Make.Common.props
-		tools\Make.Common.targets = tools\Make.Common.targets
-		tools\Make.Common.tasks = tools\Make.Common.tasks
-		tools\Make.CustomAfter.props = tools\Make.CustomAfter.props
-		tools\Make.CustomAfter.targets = tools\Make.CustomAfter.targets
-		tools\Make.CustomBefore.props = tools\Make.CustomBefore.props
-		tools\Make.CustomBefore.targets = tools\Make.CustomBefore.targets
-		tools\Make.Settings.props = tools\Make.Settings.props
-		tools\Narvalo.Common.props = tools\Narvalo.Common.props
-		tools\Narvalo.Common.targets = tools\Narvalo.Common.targets
-		Narvalo.proj = Narvalo.proj
-		tools\Package.StyleCop.targets = tools\Package.StyleCop.targets
-		tools\Package.Xunit.tasks = tools\Package.Xunit.tasks
+		tools\MSBuild.cmd = tools\MSBuild.cmd
 		quick.cmd = quick.cmd
-		tools\Shared.props = tools\Shared.props
+		rawbuild.cmd = rawbuild.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1B5-0EE5-4BC9-AFCB-7A7128811DAB}"
@@ -62,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{99
 		etc\AssemblyInfo.Common.cs = etc\AssemblyInfo.Common.cs
 		etc\AssemblyInfo.Version.cs = etc\AssemblyInfo.Version.cs
 		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
+		etc\Narvalo.props = etc\Narvalo.props
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		etc\Strict.ruleset = etc\Strict.ruleset
@@ -77,6 +66,28 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{A1081472-283E-4EBA-B740-DD6AF14B41FC}"
 	ProjectSection(SolutionItems) = preProject
 		etc\Narvalo.Core.nuspec = etc\Narvalo.Core.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{398815A8-4AA6-41F3-B55C-72545C07E26C}"
+	ProjectSection(SolutionItems) = preProject
+		tools\Make.Common.props = tools\Make.Common.props
+		tools\Make.Common.targets = tools\Make.Common.targets
+		tools\Make.Common.tasks = tools\Make.Common.tasks
+		tools\Make.CustomAfter.props = tools\Make.CustomAfter.props
+		tools\Make.CustomAfter.targets = tools\Make.CustomAfter.targets
+		tools\Make.CustomBefore.props = tools\Make.CustomBefore.props
+		tools\Make.CustomBefore.targets = tools\Make.CustomBefore.targets
+		tools\Narvalo.Common.props = tools\Narvalo.Common.props
+		tools\Narvalo.Common.targets = tools\Narvalo.Common.targets
+		tools\Package.StyleCop.targets = tools\Package.StyleCop.targets
+		tools\Package.Xunit.tasks = tools\Package.Xunit.tasks
+		tools\Shared.props = tools\Shared.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild Projects", "MSBuild Projects", "{E83CC612-564C-45C1-8DC7-094A34E3C873}"
+	ProjectSection(SolutionItems) = preProject
+		Narvalo.NuGet.proj = Narvalo.NuGet.proj
+		Narvalo.proj = Narvalo.proj
 	EndProjectSection
 EndProject
 Global
@@ -143,5 +154,7 @@ Global
 		{36958601-D874-4234-8802-6E496A8A6335} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 		{990FBF0C-8EA8-4005-9524-511E12E7491F} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 		{A1081472-283E-4EBA-B740-DD6AF14B41FC} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
+		{398815A8-4AA6-41F3-B55C-72545C07E26C} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
+		{E83CC612-564C-45C1-8DC7-094A34E3C873} = {0F5DD07C-8F90-4998-97B5-92991FFF2833}
 	EndGlobalSection
 EndGlobal

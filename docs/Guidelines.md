@@ -164,6 +164,14 @@ Global suppression files.
 Publishing
 ----------
 
+Updates
+-------
+
+### MSBuild
+When upgrading VS, do not forget to update the default VisualStudioVersion 
+property in Shared.props and in build.cmd.
+We might also need to update the SDK40ToolsPath property.
+
 
 Appendices
 ----------

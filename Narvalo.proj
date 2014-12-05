@@ -1,110 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
-    Options:
-    - SkipPrivateProjects
-    
-    Other options:
-    - BuildInParallel from Shared.props
-    - LeanRun from Make.Common.props
-    - Configuration from Shared.props
-    - Platform from Shared.props
-    - RepositoryRoot from Shared.props
-    - VisualStudioVersion from Shared.props
+  <!-- See Shared.props and Make.Common.props for all available options. -->
+  
+  <Import Project="$(MSBuildThisFileDirectory)etc\Narvalo.props" />
 
-    Usage:
-    - Build projects with default options:
-        MSBuild.exe Narvalo.proj
-    - Build projects in parallel:
-        MSBuild.exe Narvalo.proj /m /nr:false 
-    - Fast Debug Rebuild:
-        MSBuild.exe Narvalo.proj /t:LeanRebuild /p:Configuration=Debug;SkipPrivateProjects=true
-        
-    Combinations that do not really make sense:
-    - No need to set LeanRun to true
-        MSBuild.exe Narvalo.proj /t:LeanBuild /p:LeanRun=true
-    - Setting LeanRun will have no effect
-        MSBuild.exe Narvalo.proj /t:CoreBuild /p:LeanRun=true
-
-    *** WARNING ***
-    When upgrading VS, do not forget to update the VisualStudioVersion property
-    here, in Narvalo.props and in build.cmd. We might also need to update 
-    the property $(SDK40ToolsPath).
-
-    FIXME:
-    - T4 re-generation has been disabled since it requires VS hosting.
-
-    TODO:
-    - SolutionName
-    - Split build file for diff ProjectsToBuild settings.
-      Check ProjectsToBuild?
-      Check any reference to Narvalo.proj
-      Check 64bit
-    - Rework the build script to allow arbitrary args. (makedir work/ at start)
-    - Versioning (for non core and non vp projects) + Metadata
-    - Code Contracts seem disabled???
-    - Review NuGet parameters
-    - Update Copyright, add build time to Configuration.
-    - XUnit 64bit
-    
-    - Delay signing?
-    - Make unnecessary to add StyleCop settings to the project.
-    - Add other filters? OnlyCore, OnlyMvp for NuGet packages.
-    - Add $(SolutionDir) to BuildProperties?
-    - $(RepositoryRoot) aliases for tools, etc
-    - Nice to have: 
-      * SecAnnotate
-      * Code Coverage + Report Generator.
-    - Artifacts
-    - Merging, just for fun.
-
-    REVIEW:
-    - If PEVerify fails, does the error message appear on the command prompt.
-    
-    See: http://msdn.microsoft.com/en-us/library/dd393574.aspx
-  -->
-
+  <!-- IMPORTANT: Keep this import here otherwise BuildingSolution is not set. -->
   <Import Project="$(MSBuildThisFileDirectory)tools\Make.Common.props" />
-
-  <!-- Process global properties. -->
-  <PropertyGroup>
-    <!-- The default behaviour is to build all projects. -->
-    <SkipPrivateProjects Condition=" '$(SkipPrivateProjects)' != 'true' ">false</SkipPrivateProjects>
-  </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->
   <Choose>
-    <When Condition=" '$(SkipPrivateProjects)' == 'false' ">
-      <!-- 
-        Solutions use the Configuration Manager which can lead to unexpected
-        behaviour. For instance, a project might not have been selected for 
-        building.
-        WARNING: Solutions use "Any CPU" instead of "AnyCPU... 
-      -->
-      <!--
+    <When Condition=" '$(BuildingSolution)' == 'true' ">
+      <!-- WARNING: Solutions use the Configuration Manager which can lead 
+           to unexpected behaviour. For instance, a project might not have been 
+           selected for building. -->
       <ItemGroup>
         <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
-      </ItemGroup>
-      <PropertyGroup>
-      <Platform Condition=" '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
-      </PropertyGroup>
-      -->
-      <ItemGroup>
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)samples\**\*.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\**\*.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\**\*.csproj" />
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Build\Narvalo.Build.csproj" />-->
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Common\Narvalo.Common.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Web\Narvalo.Web.csproj" />
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)samples\**\*.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\**\*.csproj" />
+        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\**\*.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>

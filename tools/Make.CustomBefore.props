@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the beginnig of Narvalo.Common.props by Narvalo.proj.
+    This file is injected at the beginnig of Narvalo.Common.props by the entry project (e.g. Narvalo.proj).
   -->
 
-  <!-- Optional compilation symbols added by Narvalo.proj. -->
+  <!-- Optional compilation symbols added by the entry project (e.g. Narvalo.proj). -->
   <PropertyGroup>
     <DefineConstants Condition=" '$(NarvaloAdditionalConstants)' != '' ">$(NarvaloAdditionalConstants);$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
-  <!-- Optional assembly info file added by Narvalo.proj. -->
+  <!-- Optional assembly info file added by the entry project (e.g. Narvalo.proj). -->
   <ItemGroup Condition=" '$(NarvaloAssemblyInfoFile)' != '' ">
     <Compile Include="$(NarvaloAssemblyInfoFile)">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
