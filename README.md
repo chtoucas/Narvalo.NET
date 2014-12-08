@@ -9,7 +9,7 @@ The most stable parts are:
 
 1. Narvalo Core Libraries
     - [Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
-      PCL package.
+      PCL of common utilities.
     - [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
       complements Narvalo.Core.
     - [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),

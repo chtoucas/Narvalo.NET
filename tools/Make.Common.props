@@ -25,6 +25,7 @@
 
     <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
     <WorkStagingDir>$(WorkRoot)staging\</WorkStagingDir>
+    <WorkTmpDir>$(WorkRoot)tmp\</WorkTmpDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -46,7 +47,7 @@
 
   <!-- Define the AssemblyInfoFile property. -->
   <PropertyGroup>
-    <AssemblyInfoFile>$(WorkRoot)AssemblyInfo.Version.cs</AssemblyInfoFile>
+    <AssemblyInfoFile>$(WorkTmpDir)AssemblyInfo.Version.cs</AssemblyInfoFile>
   </PropertyGroup>
 
   <!-- Define the PEVerifyLogFile property. -->

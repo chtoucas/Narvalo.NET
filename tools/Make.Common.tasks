@@ -7,8 +7,8 @@
 
   <UsingTask TaskName="IncrementBuildAndRevisionNumbers" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
-      <BuildNumber ParameterType="System.String" Output="true" />
-      <RevisionNumber ParameterType="System.String" Output="true" />
+      <BuildNumber ParameterType="System.UInt16" Output="true" />
+      <RevisionNumber ParameterType="System.UInt16" Output="true" />
     </ParameterGroup>
     <Task>
       <Reference Include="System.Core" />
@@ -28,22 +28,20 @@
 //
 // Here I implement a slight variation of the same algorithm:
 // - use UTC time.
-// - count the number of days since 2014-12-01.
-// - add a suffix to the build number: "1" in the morning and "2" in the
-//   afternoon. We use a suffix to keep the number growing.
-// - count the number of seconds since midnight in the morning and since
-//   midday in the afternoon.
-// This way, there is less chances to get the same numbers during a single day
-// on the same build machine. The scheme will break in approximately 27 years...
-// Indeed the new prefix takes one digit in the build number, so we are left with
-// 4 digits (remember the 65534 limit).
+// - the build number is the number of half-days since 2014-12-01 
+//   (minus one to start at zero).
+// - the revision number is the number of seconds since midnight in the morning 
+//   and since midday in the afternoon.
+// This way, there is less chance of getting the same numbers during 
+// a single day on the same build machine. The scheme will break in 
+// approximately 89 years...
 var now = DateTime.UtcNow;
 var isMorning = now.Hour < 12;
-var buildNumberSuffix = isMorning ? "1" : "2";
-var startHour = isMorning ? 0 : 12;
+var numberOfHalfDays = 2 * (now - new DateTime(2014, 11, 30)).Days - (isMorning ? 1 : 0);
+var numberOfSeconds = (now - new DateTime(now.Year, now.Month, now.Day, isMorning ? 0 : 12, 0, 0)).TotalSeconds;
 
-BuildNumber = (now - new DateTime(2014, 12, 1)).Days.ToString() + buildNumberSuffix;
-RevisionNumber = ((int)(now - new DateTime(now.Year, now.Month, now.Day, startHour, 0, 0)).TotalSeconds).ToString();
+BuildNumber = (ushort)(numberOfHalfDays - 1);
+RevisionNumber = (ushort)numberOfSeconds;
 
 return true;
          ]]>

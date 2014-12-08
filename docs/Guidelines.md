@@ -1,7 +1,186 @@
 Guidelines
 ==========
+                    
+Prerequisites
+-------------
 
-How to initiale a new project
+- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+
+Optional components:
+- [StyleCop](http://stylecop.codeplex.com) for source analysis integration
+  inside Visual Studio.
+- [xUnit.net runner for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099)
+  for xUnit integration inside Visual Studio.
+- [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
+  for using Code Contracts.
+
+Components necessary to run the build scripts:
+- Code Contracts (see above).
+- [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758),
+  Prerequisite for the Modeling SDK (see below).
+- [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754),
+  provides T4 integration in MSBuild.    
+- Microsoft .NET 4.5.1 Developer Pack(?),  Microsoft Windows SDK for Windows 8.1(?) 
+  or .NET Framework SDK for PEVerify.exe.
+
+
+Project Layout
+--------------
+
+- `.nuget`, NuGet configurations.
+- `docs`
+- `etc`, directory of settings.
+- `packages`, local repository of NuGet packages.
+- `samples`
+- `src`
+- `tests`
+- `tools`
+
+Temporary directories:
+- `work`
+
+
+Solutions
+---------
+
+There are four solutions.
+
+### Narvalo.sln
+
+This solution contains all projects. This is not used for daily work but rather
+for deep refactoring and installing NuGet packages updates/restores.
+
+### Narvalo (Core).sln
+
+This solution contains **all** libraries built upon Narvalo.Core:
+- Narvalo.Core itself, a PCL (Profile259).
+- Narvalo.Common complements Narvalo.Core with non portable classes.
+- Narvalo.Web complements Narvalo.Common with Web centric classes.
+- Narvalo.Extras.
+- Narvalo.Benchmarking.
+- Narvalo.Facts, the test project.
+- Narvalo.Junk, a "fourre-tout" of unfinished or broken codes.
+
+### Narvalo (Mvp).sln
+
+This solution contains all MVP related libraries. It **does not** depend on any
+of the core libraries.
+- Narvalo.Mvp
+- Narvalo.Mvp.Web
+- Narvalo.Mvp.Windows.Forms
+- Narvalo.Mvp.Extras
+- Narvalo.Mvp.Facts, the test project.
+
+### Narvalo (Miscs).sln
+
+This solution contains anything else. It **does not** depend on any
+of the core libraries.
+- Narvalo.Build
+- Narvalo.Externs
+- Narvalo.Ghostscript
+- Narvalo.Reliability
+- Narvalo.StyleCop.CSharp 
+
+             
+Periodic Checklist
+------------------
+       
+### Unfinished Work
+
+Task List
+- FIXME
+- TODO
+- REVIEW
+- XXX
+
+Global suppression files.
+
+### NuGet Updates
+
+For package updates, use the Narvalo.sln solution.
+
+**WARNING** If the NuGet core framework is updated, do not forget to update
+`tools\NuGet\nuget.exe`:
+```
+tools\NuGet\nuget.exe update self
+```
+
+### Visual Studio or Framework Updates
+
+When upgrading VS, do not forget to update the default VisualStudioVersion 
+property in Shared.props and in build.cmd.
+We might also need to update the SDK40ToolsPath property.
+
+
+Coding Style
+------------
+         
+### General
+
+- Directories mirror namespaces.
+- One class per file.
+- Internal classes MUST be in a subdirectory named "Internal".
+- Optional extensions may be in a subdirectory named "Extensions".
+- Max line-width 100 characters.
+- Remove and sort usings.
+- Projects should use a minimal set of references.
+   
+### StyleCop
+
+Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
+the content of "etc\Settings.SourceAnalysis".
+
+For a detailed description of the rules, check out http://www.stylecop.com/docs/.
+
+_Documentation rules are temporary disabled._
+
+Disabled rules:
+- SA1101:PrefixLocalCallsWithThis
+- SA1121:UseBuiltInTypeAlias
+- SA1126:PrefixCallsCorrectly
+- SA1306:FieldNamesMustBeginWithLowerCaseLetter
+- SA1309:FieldNamesMustNotBeginWithUnderscore
+- SA1310:FieldNamesMustNotContainUnderscore
+- SA1400:AccessModifierMustBeDeclared
+- SA1500:CurlyBracketsForMultiLineStatementsMustNotShareLine
+- SA1501:StatementMustNotBeOnASingleLine
+- SA1502:ElementMustNotBeOnASingleLine
+- SA1634:FileHeaderMustShowCopyright
+    
+
+Code Quality
+------------
+
+### FxCop
+                   
+The following projects use the default ruleset for Code Analysis.
+- Narvalo.Junk
+- DocuMaker
+- Playground
+    
+### Code Contracts
+
+#### Object Invariants
+
+Wrap any object invariants method with a compiler conditional clause :
+```csharp
+#if CONTRACTS_FULL
+    [ContractInvariantMethod]
+    void ObjectInvariants()
+    {
+        // Contract invariants directives.
+    }
+#endif
+```
+
+
+Build Infrastructure
+--------------------
+
+Cf. http://msdn.microsoft.com/en-us/library/dd393574.aspx
+
+
+How to initialize a new project
 -----------------------------
 
 Principle:
@@ -36,12 +215,16 @@ For all modes:
 
 ### Edit the project file
 
-Add the following line at the bottom:
+Add the following line at the top of the project file:    
+```xml
+<Import Project="..\..\tools\Narvalo.Common.props" />
+```
+and at the bottom
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
 
-Add the project to Narvalo.proj when it is stable.
+Add the project to NuGet.proj when it is ready for publication.
 
 ### Configure StyleCop for Visual Studio
 
@@ -60,7 +243,16 @@ AllowOptimize=1
 ```
 Ensure that it is copied to the output directory.
 
-### Assembly versions
+### Global suppressions
+
+- [FIXME]
+- [GeneratedCode] to mark a suppression related to generated code.
+
+
+Appendices
+----------
+         
+### Assembly Versioning
 
 - AssemblyVersion, version used by the runtime.
   MAJOR.MINOR.0.0
@@ -86,7 +278,7 @@ All core Narvalo projects use the same version, let's see if things work with Nu
     for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
   * If I publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common 
     references Narvalo.Core X.Y.1.0, obviously unknown outside, it doesn't 
-    matter for the CLR: the assembly version __did not actually change__,
+    matter for the CLR: the assembly version _did not actually change_,
     it's still X.Y.0.0.
 - Major or Minor upgrade: 1.1.0.0 -> 1.2.0.0 (or 1.1.0.0 -> 2.1.0.0)
   * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works.
@@ -99,93 +291,11 @@ All core Narvalo projects use the same version, let's see if things work with Nu
     the NuGet package for Narvalo.Core. If necessary we can roll back 
     at any time and next time we must publish both packages.
 
-### Global suppressions
-
-- [FIXME]
-- [GeneratedCode] to mark a suppression related to generated code.
-
-### Remarks
-
-Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
-the content of "etc\Settings.SourceAnalysis".
-
-The following projects use the default ruleset for Code Analysis.
-- Narvalo.Junk
-- DocuMaker
-- Playground
-
-
-Coding Style
-------------
-
-- Max line-width 100 characters.
-- Passes all StyleCop rules.
-- Remove and sort usings.
-- Use a minimal set of references.
-
-
-Code Contracts
---------------
-
-### Object Invariants
-
-Wrap any object invariants method with a compiler conditional clause :
-```csharp
-#if CONTRACTS_FULL
-    [ContractInvariantMethod]
-    void ObjectInvariants()
-    {
-        // Contract invariants directives.
-    }
-#endif
-```
-
-NuGet Updates
--------------
-
-For package updates, use the Narvalo (All).sln solution.
-
-**WARNING** If the NuGet core framework is updated, do not forget to update
-`tools\NuGet\nuget.exe`:
-```
-tools\NuGet\nuget.exe update self
-```
-
-Periodic checklist
-------------------
-
-Task List
-- FIXME
-- TODO
-- REVIEW
-
-Global suppression files.
-
-Publishing
-----------
-
-Updates
--------
-
-### MSBuild
-When upgrading VS, do not forget to update the default VisualStudioVersion 
-property in Shared.props and in build.cmd.
-We might also need to update the SDK40ToolsPath property.
-
-
-Appendices
-----------
-
 ### Strong Name Key
 
-Create a key pair: `sn -k Application.snk`.
+- Create a key pair: `sn -k Narvalo.snk`.
+- Extract the public key: `sn -p Narvalo.snk Narvalo.pk`.
+- Extract the public key token: `sn -tp Narvalo.pk > Narvalo.txt`.
 
-Extract the public key: `sn -p Application.snk Application.pk`.
-
-Extract the public key token: `sn -tp Application.pk > Application.txt`.
-
-
-References
-----------
-
-+ [Strong Name Tool](http://msdn.microsoft.com/en-us/library/k5b5tt23.aspx)
+References:
+- [Strong Name Tool](http://msdn.microsoft.com/en-us/library/k5b5tt23.aspx)

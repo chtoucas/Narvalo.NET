@@ -104,11 +104,6 @@
     </MSBuild>
   </Target>
 
-  <!--<Target Name="AfterBuild" AfterTargets="Build">
-    --><!-- XML and pdb not here, code contracts too. --><!--
-    <Copy SourceFiles="@(BuildOutputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
-  </Target>-->
-
   <Target Name="VerifyBuild"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
@@ -153,6 +148,11 @@
 
 
 
+
+  <!--<Target Name="AfterBuild" AfterTargets="Build">
+    --><!-- XML and pdb not here, code contracts too. --><!--
+    <Copy SourceFiles="@(BuildOutputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
+  </Target>-->
 
 
   <Target Name="Package" Condition=" '$(LeanRun)' == 'true' ">
@@ -281,6 +281,7 @@ using System.Reflection;
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
     <MakeDir Directories="$(WorkStagingDir)" Condition=" !Exists($(WorkStagingDir)) " />
+    <MakeDir Directories="$(WorkTmpDir)" Condition=" !Exists($(WorkTmpDir)) " />
   </Target>
 
   <Target Name="_PatchCoreRebuild">

@@ -1,6 +1,6 @@
 :: Simple runner for Narvalo.proj.
 ::
-:: Usage: build [Target?] [Configuration?] [SolutioName?]
+:: Usage: make [Target?] [Configuration?] [SolutioName?]
 
 @echo off
 @setlocal
