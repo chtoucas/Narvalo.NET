@@ -39,6 +39,10 @@
 
   <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
+    <!-- Setting this property is not such a good idea. Microsoft.Common.targets
+         will completely ignore the original targets file which, by the way, 
+         is used by Code Contracts. A simple workaround is to import, 
+         in Narvalo.Common.targets, the system-wide custom after targets. -->
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
@@ -71,6 +75,7 @@
     <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(tests))' == 'true' ">
       <PropertyGroup>
         <NarvaloIsTestProject>true</NarvaloIsTestProject>
+        <DefineConstants>TEST_ASSEMBLY;$(DefineConstants)</DefineConstants>
       </PropertyGroup>
     </When>
     <Otherwise>

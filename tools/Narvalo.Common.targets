@@ -5,6 +5,13 @@
     See Narvalo.Common.props for details.
   -->
 
+  <!-- Import the original CustomAfterMicrosoftCommonTargets. -->
+  <PropertyGroup>
+    <OriginalCustomAfterMicrosoftCommonTargets>$(MSBuildExtensionsPath)\v$(MSBuildToolsVersion)\Custom.After.Microsoft.Common.targets</OriginalCustomAfterMicrosoftCommonTargets>
+  </PropertyGroup>
+  
+  <Import Project="$(OriginalCustomAfterMicrosoftCommonTargets)" Condition=" Exists('$(OriginalCustomAfterMicrosoftCommonTargets)') "/>
+
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props"
           Condition=" '$(NarvaloCommonPropsHasBeenImported)' != 'true' "/>
 
