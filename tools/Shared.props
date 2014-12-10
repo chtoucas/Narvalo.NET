@@ -24,9 +24,9 @@
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
     <!-- The reuse of RepositoryRoot allows to speed up things a little bit
-         when building from one of the master projects.
+         when building from Make.proj.
          
-         For instance, Make.proj imports Make.Common.props then Shared.props;
+         Make.proj imports Make.Common.props then Shared.props;
          RepositoryRoot is not already set, we initialize it. 
          When Make.proj builds a child project, it injects RepositoryRoot
          (see BuildProperties in Make.Common.props). This time when the child 

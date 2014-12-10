@@ -3,7 +3,7 @@
          InitialTargets="__InitializeMakeCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.Common.props by the master project (e.g. Make.proj).
+    This file is injected at the end of Narvalo.Common.props by Make.proj.
   -->
 
   <!-- Import version props. -->
@@ -52,7 +52,7 @@
   </PropertyGroup>
 
   <Target Name="__InitializeMakeCustomAfterProps">
-    <Error Text="You MUST define the 'Make_WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the master project (e.g. Make.proj)."
+    <Error Text="You MUST define the 'Make_WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(Make_WorkArtefactsDir)' == ''" />
   </Target>
