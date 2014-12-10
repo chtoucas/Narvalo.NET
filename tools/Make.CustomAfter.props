@@ -3,8 +3,12 @@
          InitialTargets="__InitializeMakeCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.Common.props by the entry project (e.g. Narvalo.proj).
+    This file is injected at the end of Narvalo.Common.props by the master project (e.g. Make.proj).
   -->
+
+  <!-- Import version props. -->
+  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
+          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
 
   <!-- Overrides for properties defined in Narvalo.Common.props. -->
   <PropertyGroup>
@@ -14,8 +18,8 @@
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(WorkArtefactsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(WorkArtefactsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(Make_WorkArtefactsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(Make_WorkArtefactsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
     <!-- We don't want the Code Analysis "succeed" file to be written to 
          the custom location but it does not seem to be understood by MSBuild. 
@@ -27,9 +31,29 @@
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
   </PropertyGroup>
 
+  <!-- Dynamically generate the assembly version info. -->
+  <PropertyGroup Condition=" '$(Make_SkipAssemblyVersionInfoCreation)' != 'true' ">
+    <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Sign the assemblies. -->
+  <PropertyGroup Condition=" '$(Make_SignAssembly)' == 'true' ">
+    <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  
+  <!-- T4 settings. -->
+  <PropertyGroup>
+    <!-- Force T4 re-generation on build.
+         REVIEW: Currently disabled since our T4 templates require VS hosting. -->
+    <TransformOnBuild>false</TransformOnBuild>
+  </PropertyGroup>
+
   <Target Name="__InitializeMakeCustomAfterProps">
-    <Error Text="You MUST define the 'WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the entry project (e.g. Narvalo.proj)."
+    <Error Text="You MUST define the 'Make_WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by the master project (e.g. Make.proj)."
            ContinueOnError="false"
-           Condition=" '$(WorkArtefactsDir)' == ''" />
+           Condition=" '$(Make_WorkArtefactsDir)' == ''" />
   </Target>
 </Project>

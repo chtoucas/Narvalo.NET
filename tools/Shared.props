@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
+    This file defines common MSBuild properties shared among all projects.
+    
     Options:
     - BuildInParallel
     - Configuration
     - Platform
   -->
-  
-  <!-- Define common Narvalo project properties. -->
-  <PropertyGroup>
-    <!-- RepositoryRoot should not be set manually. The only time it is already
-         set is when building from the command line via one of the master
-         projects. The conditional define allows to speed up things a little bit.
-         
-         For instance, Narvalo.proj imports Make.Common.props then Shared.props;
-         RepositoryRoot is not already defined, we initialize it. 
-         When Narvalo.proj builds a child project, it injects RepositoryRoot
-         (see BuildProperties in Make.Common.props) so that when the child 
-         project imports Shared.props, RepositoryRoot is already defined. -->
-    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</RepositoryRoot>
-
-    <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
-    <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
-  </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
   <PropertyGroup>
@@ -32,8 +17,23 @@
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
 
-    <!-- VisualStudioVersion should not be set manually. Only here to allow
-         Visual Studio to override it. -->
+    <!-- Only Visual Studio is expected to override this. -->
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+  </PropertyGroup>
+
+  <!-- Define common Narvalo project properties. -->
+  <PropertyGroup>
+    <!-- The reuse of RepositoryRoot allows to speed up things a little bit
+         when building from one of the master projects.
+         
+         For instance, Make.proj imports Make.Common.props then Shared.props;
+         RepositoryRoot is not already set, we initialize it. 
+         When Make.proj builds a child project, it injects RepositoryRoot
+         (see BuildProperties in Make.Common.props). This time when the child 
+         project imports Shared.props, RepositoryRoot is already set. -->
+    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\</RepositoryRoot>
+
+    <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
+    <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
   </PropertyGroup>
 </Project>

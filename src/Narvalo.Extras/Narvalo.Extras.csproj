@@ -7,7 +7,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Extras</AssemblyName>
-    <DefineConstants>NARVALO_CORE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>

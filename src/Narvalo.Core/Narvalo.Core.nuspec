@@ -8,6 +8,9 @@
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+      
+    </summary>
     <description>
 This package contains the Narvalo.Org core utilities.
 
@@ -18,4 +21,11 @@ This package contains the Narvalo.Org core utilities.
     <tags>Maybe, Option, Linq, Monad</tags>
     <language>en-US</language>
   </metadata>
+  <files>
+    <file src="Narvalo.Core.dll" target="lib\portable-net45+netcore45+wpa81+wp8" />
+    <file src="Narvalo.Core.pdb" target="lib\portable-net45+netcore45+wpa81+wp8" />
+    <file src="Narvalo.Core.xml" target="lib\portable-net45+netcore45+wpa81+wp8" />
+    <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\portable-net45+netcore45+wpa81+wp8\CodeContracts" />
+    <file src="CodeContracts\Narvalo.Core.Contracts.pdb" target="lib\portable-net45+netcore45+wpa81+wp8\CodeContracts" />
+  </files>
 </package>

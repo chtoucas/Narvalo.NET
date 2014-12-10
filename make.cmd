@@ -1,36 +1,11 @@
-:: Simple runner for Narvalo.proj.
-::
-:: Usage: make [Target?] [Configuration?] [SolutioName?]
-
 @echo off
-@setlocal
-@pushd %~dp0
 
-@set MSBuild=.\tools\MSBuild.cmd
-@set BuildFile=.\Narvalo.proj
+if '%1'=='/?' goto help
+if '%1'=='-help' goto help
+if '%1'=='-h' goto help
 
-@if "%1"=="" ( @goto BuildDefault )
-@if "%2"=="" ( @goto BuildTarget )
-@if "%3"=="" ( @goto BuildTargetAndConfiguration )
-@goto BuildSolution
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\make.ps1' %*; if ($psake.build_success -eq $false) { exit 1 } else { exit 0 }"
+goto :eof
 
-:BuildDefault
-@call %MSBuild% %BuildFile%
-@goto End
-
-:BuildTarget
-@call %MSBuild% %BuildFile% /t:%1
-@goto End
-
-:BuildTargetAndConfiguration
-@call %MSBuild% %BuildFile% /t:%1 /p:Configuration=%2
-@goto End
-
-:BuildSolution
-@call %MSBuild% %BuildFile% /t:%1 /p:Configuration=%2;SolutionName=%3
-@goto End
-
-:End
-@popd
-@endlocal
-@exit /B %ERRORLEVEL%
+:help
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0\make.ps1' Help"

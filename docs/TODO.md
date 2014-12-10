@@ -12,15 +12,23 @@ In Progress
 Build Infrastructure
 --------------------
 
-- CoreClean & __InitializeMakeCommonTargets is unnecessary
+Global properties: Narvalo...
+Single.proj -> ProjectName
+SIGNED_ASSEMBLY and Sign If no snk?
+Message
+Logfile & LogLevel
+AdditionalProperties
+Clean -> Remove AssemblyInfo
+Check PEVerify arguments
+Narvalo.Samples.props?
+Narvalo.Tests.props?
+Make_...
+
 - copy dll, packages, logs, reports to artefact and clean artefacts before.
 - %comspec% /k (@pause) or ps1 launcher 
 - Split build file for diff ProjectsToBuild settings.
   Check ProjectsToBuild?
-  Check any reference to Narvalo.proj
   Check 64bit
-- Versioning (for non core and non vp projects) + Metadata
-- Code Contracts seem disabled???
 - Review NuGet parameters -repository
 - Update Copyright, add build time to Configuration.
 - XUnit 64bit

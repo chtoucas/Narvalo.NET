@@ -23,7 +23,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>

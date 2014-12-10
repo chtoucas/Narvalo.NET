@@ -17,7 +17,6 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
-    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>

@@ -9,7 +9,6 @@
     <AssemblyName>Narvalo.Common</AssemblyName>
     <TargetFrameworkProfile />
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-    <DefineConstants>NARVALO_CORE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -128,6 +127,9 @@
       <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Narvalo.Common.nuspec" />
+    <None Include="Narvalo.Common.props" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

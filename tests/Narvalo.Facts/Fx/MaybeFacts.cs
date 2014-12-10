@@ -180,6 +180,7 @@ namespace Narvalo.Fx
 
         #endregion
 
+#if NO_INTERNALS_VISIBLE_TO
         public static class TheUnitProperty
         {
             [Fact]
@@ -190,6 +191,7 @@ namespace Narvalo.Fx
                 Assert.Equal(Unit.Single, Maybe.Unit.Value);
             }
         }
+#endif
 
         ////public static class TheNoneProperty
         ////{
@@ -203,6 +205,7 @@ namespace Narvalo.Fx
 
         public static class TheIsSomeProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsFalse_WhenNone()
             {
@@ -216,7 +219,9 @@ namespace Narvalo.Fx
                 Assert.False(value.IsSome);
                 Assert.False(reference.IsSome);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsTrue_WhenSome()
             {
@@ -230,7 +235,9 @@ namespace Narvalo.Fx
                 Assert.True(value.IsSome);
                 Assert.True(reference.IsSome);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsImmutable_OnceTrue()
             {
@@ -244,7 +251,9 @@ namespace Narvalo.Fx
                 // Assert
                 Assert.True(option.IsSome);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsImmutable_OnceFalse()
             {
@@ -258,10 +267,12 @@ namespace Narvalo.Fx
                 // Assert
                 Assert.True(!option.IsSome);
             }
+#endif
         }
 
         public static class TheValueProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsInvalidOperationException_WhenNone()
             {
@@ -271,7 +282,9 @@ namespace Narvalo.Fx
                 // Act & Assert
                 Assert.Throws<InvalidOperationException>(() => option.Value);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsTheOriginalValue_WhenSome()
             {
@@ -292,6 +305,7 @@ namespace Narvalo.Fx
                 Assert.True(nullableValueOpt.Value == nullableValue.Value);
                 Assert.True(referenceOpt.Value == reference);
             }
+#endif
         }
 
         public static class TheEqualityOperator
@@ -560,6 +574,7 @@ namespace Narvalo.Fx
 
         public static class TheCreateMethod
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_ForNotNull()
             {
@@ -581,7 +596,9 @@ namespace Narvalo.Fx
                 Assert.True(nullableValueOpt.IsSome);
                 Assert.True(referenceOpt.IsSome);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForNull()
             {
@@ -597,10 +614,12 @@ namespace Narvalo.Fx
                 Assert.True(valueOpt.IsNone);
                 Assert.True(referenceOpt.IsNone);
             }
+#endif
         }
 
         public static class TheBindMethod
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
             {
@@ -615,7 +634,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsSome);
                 Assert.Equal(2, m.Value);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             [Issue(1, IssueSeverity.High)]
             public static void ReturnsNone_WhenSelectorReturnsNull()
@@ -631,6 +652,7 @@ namespace Narvalo.Fx
                 Assert.True(m != null);
                 Assert.True(m.IsNone);
             }
+#endif
         }
 
         public static class TheWhereOperator
@@ -658,6 +680,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
             }
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_ForSuccessfulPredicate()
             {
@@ -675,7 +698,9 @@ namespace Narvalo.Fx
                 Assert.Equal(1, m.Value);
                 Assert.Equal(1, q.Value);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForUnsucessfulPredicate()
             {
@@ -691,6 +716,7 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
         }
 
         public static class TheSelectOperator
@@ -721,6 +747,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.Select(selector));
             }
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone()
             {
@@ -736,7 +763,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
             {
@@ -754,6 +783,7 @@ namespace Narvalo.Fx
                 Assert.Equal(2, m.Value);
                 Assert.Equal(2, q.Value);
             }
+#endif
         }
 
         public static class TheSelectManyOperator
@@ -799,6 +829,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
             }
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone()
             {
@@ -818,7 +849,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForMiddleIsNone()
             {
@@ -838,7 +871,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
             {
@@ -858,7 +893,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector()
             {
@@ -880,10 +917,12 @@ namespace Narvalo.Fx
                 Assert.Equal(3, m.Value);
                 Assert.Equal(3, q.Value);
             }
+#endif
         }
 
         public static class TheJoinOperator
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenJoinFailed()
             {
@@ -901,7 +940,9 @@ namespace Narvalo.Fx
                 Assert.True(m.IsNone);
                 Assert.True(q.IsNone);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_WhenJoinSucceed()
             {
@@ -921,6 +962,7 @@ namespace Narvalo.Fx
                 Assert.Equal(3, m.Value);
                 Assert.Equal(3, q.Value);
             }
+#endif
         }
 
         #region Stubs

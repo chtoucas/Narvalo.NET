@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This file is automatically imported after Microsoft.Common.targets.
-    See Narvalo.Common.props for details.
+    This file is automatically imported just after Microsoft.Common.targets.
+    See CustomAfterMicrosoftCommonTargets in Narvalo.Common.props for details.
   -->
 
   <!-- Import the original CustomAfterMicrosoftCommonTargets. -->
   <PropertyGroup>
     <OriginalCustomAfterMicrosoftCommonTargets>$(MSBuildExtensionsPath)\v$(MSBuildToolsVersion)\Custom.After.Microsoft.Common.targets</OriginalCustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
-  
-  <Import Project="$(OriginalCustomAfterMicrosoftCommonTargets)" Condition=" Exists('$(OriginalCustomAfterMicrosoftCommonTargets)') "/>
 
+  <Import Project="$(OriginalCustomAfterMicrosoftCommonTargets)" 
+          Condition=" Exists('$(OriginalCustomAfterMicrosoftCommonTargets)') "/>
+
+  <!-- Import properties if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props"
-          Condition=" '$(NarvaloCommonPropsHasBeenImported)' != 'true' "/>
+          Condition=" '$(NarvaloCommonPropsImported)' != 'true' "/>
 
   <!-- If any, import custom targets.-->
   <Import Project="$(CustomBeforeNarvaloTargets)"
@@ -21,8 +23,8 @@
 
   <!-- Import StyleCop targets. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.StyleCop.targets" />
-
   
+
   <!-- ### Microsoft Build Process ### -->
   <!--
     To modify the build process, use one of the extension points defined
@@ -30,42 +32,24 @@
     See http://msdn.microsoft.com/en-us/library/ms366724.aspx
   -->
 
-  <!-- Define the BeforeBuildDependsOn property. -->
-  <PropertyGroup>
-    <BeforeBuildDependsOn>
-      $(BeforeBuildDependsOn);
-      ValidateSourceAnalysisSettings;
-      ValidateCodeAnalysisSettings
-    </BeforeBuildDependsOn>
-  </PropertyGroup>
-
+  <!-- Use the BeforeBuildDependsOn property to add your custom targets to BeforeBuild. -->
   <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)" />
 
-  <!-- Define the AfterBuildDependsOn property. -->
-  <PropertyGroup>
-    <AfterBuildDependsOn>
-      $(AfterBuildDependsOn)
-    </AfterBuildDependsOn>
-  </PropertyGroup>
-
+  <!-- Use the AfterBuildDependsOn property to add your custom targets to AfterBuild. -->
   <Target Name="AfterBuild" DependsOnTargets="$(AfterBuildDependsOn)" />
 
-  
-  <!-- ### Source Analysis Targets ### -->
+  <!-- Use the BeforeCleanDependsOn property to add your custom targets to BeforeClean. -->
+  <Target Name="BeforeClean" DependsOnTargets="$(BeforeCleanDependsOn)" />
+
+  <!-- Use the AfterCleanDependsOn property to add your custom targets to AfterClean. -->
+  <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)" />
+
+
+  <!-- ### Source Analysis Hooks ### -->
   <!--
     Below, use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
     property set after importing StyleCop.targets.
   -->
-
-  <Target Name="ValidateSourceAnalysisSettings">
-    <Warning Text="On user request, Source Analysis has been disabled on $(ProjectName)"
-             Condition=" '$(NarvaloSourceAnalysisEnabled)' == 'true' And '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' "
-             ContinueOnError="true" />
-
-    <Error Text="Unexpectedly, the value of 'StyleCopEnabled' has been overriden for $(ProjectName): '$(StyleCopEnabled)' instead '$(NarvaloSourceAnalysisEnabled)'"
-             Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' And '$(StyleCopEnabled)' != '$(NarvaloSourceAnalysisEnabled)' "
-             ContinueOnError="false" />
-  </Target>
 
   <Target Name="BeforeSourceAnalysis"
           BeforeTargets="StyleCop"
@@ -81,23 +65,7 @@
   </Target>
 
 
-  <!-- ### Code Analysis Targets ### -->
-
-  <Target Name="ValidateCodeAnalysisSettings">
-    <Warning Text="On user request, $(ProjectName) does not use the default Code Analysis ruleset: '$(NarvaloCustomCodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloRunCodeAnalysis)' == 'true' And '$(NarvaloCustomCodeAnalysisRuleSet)' != '' "
-             ContinueOnError="true" />
-
-    <Error Text="Unexpectedly, the value of 'RunCodeAnalysis' has been overriden for $(ProjectName): '$(RunCodeAnalysis)' instead of '$(NarvaloRunCodeAnalysis)'"
-             Condition=" '$(RunCodeAnalysis)' != '$(NarvaloRunCodeAnalysis)' "
-             ContinueOnError="false" />
-    <Error Text="Unexpectedly, the value of 'CodeAnalysisRuleSet' has been overriden for $(ProjectName): '$(CodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' And '$(CodeAnalysisRuleSet)' != '$(NarvaloCodeAnalysisRuleSet)' "
-             ContinueOnError="false" />
-    <Error Text="Unexpectedly, the value of 'CodeAnalysisRuleSet' has been overriden for $(ProjectName): '$(CodeAnalysisRuleSet)' instead of '$(NarvaloCustomCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' And '$(CodeAnalysisRuleSet)' != '$(NarvaloCustomCodeAnalysisRuleSet)' "
-             ContinueOnError="false" />
-  </Target>
+  <!-- ### Code Analysis Hooks ### -->
 
   <!--
     I wanted to replace the FxCop default messages to include the project name
@@ -116,7 +84,7 @@
   </Target>-->
 
 
-  <!-- ### Code Contracts Targets ### -->
+  <!-- ### Code Contracts Hooks ### -->
 
   <Target Name="BeforeCodeContractsDocumentation"
         BeforeTargets="ContractXmlDocumentation"
@@ -136,8 +104,8 @@
     will appear too late.
   -->
   <Target Name="BeforeCodeContractsReferenceAssembly"
-        BeforeTargets="CreateCodeContractReferenceAssembly"
-        Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
+          BeforeTargets="CreateCodeContractReferenceAssembly"
+          Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="high" />
   </Target>
 
@@ -146,8 +114,9 @@
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="high" />
   </Target>
+  
 
-  <!-- If any, import custom targets.-->
+  <!-- If any, import custom targets. -->
   <Import Project="$(CustomAfterNarvaloTargets)"
           Condition=" '$(CustomAfterNarvaloTargets)' != '' And Exists('$(CustomAfterNarvaloTargets)')" />
 </Project>

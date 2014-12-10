@@ -3,29 +3,28 @@
   <!--
     Options:
     - LeanRun
-    - SolutionName
+    - SignAssembly
+    - SolutionFile
     
     Other options may be found in Shared.props.
   -->
-  
+
+  <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
-  
+
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
-    <!-- If true builds behave a lot like they were run inside Visual Studio. -->
+    <!-- If true, builds behave a lot like if they were run inside Visual Studio. -->
     <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
-    
-    <!-- If SolutionName is not empty, we are building a solution. -->
-    <BuildingSolution Condition=" '$(SolutionName)' != '' ">true</BuildingSolution>
-    <BuildingSolution Condition=" '$(SolutionName)' == '' ">false</BuildingSolution>
-    
-    <SolutionName Condition=" '$(BuildingSolution)' != 'true' ">Narvalo.sln</SolutionName>
+
+    <!-- If true, sign the assemblies. -->
+    <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
+
+    <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
-    <WorkStagingDir>$(WorkRoot)staging\</WorkStagingDir>
-    <WorkTmpDir>$(WorkRoot)tmp\</WorkTmpDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -35,19 +34,11 @@
 
     <BaseOutputPath>$(WorkRoot)bin\</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
-
-    <!-- WARNING: Solutions use "Any CPU" instead of "AnyCPU"... -->
-    <Platform Condition=" '$(BuildingSolution)' == 'true' And '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
   </PropertyGroup>
 
-  <!-- Define the SolutionFile property. -->
+  <!-- Define the PEVerifyDummyOutput property. -->
   <PropertyGroup>
-    <SolutionFile>$(RepositoryRoot)$(SolutionName)</SolutionFile>
-  </PropertyGroup>
-
-  <!-- Define the AssemblyInfoFile property. -->
-  <PropertyGroup>
-    <AssemblyInfoFile>$(WorkTmpDir)AssemblyInfo.Version.cs</AssemblyInfoFile>
+    <PEVerifyDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</PEVerifyDummyOutput>
   </PropertyGroup>
 
   <!-- Define the PEVerifyLogFile property. -->
@@ -65,40 +56,21 @@
     <NuGetCommand>$(MSBuildThisFileDirectory)NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
-  <!-- Define the VerifyBuildDummyOutput property. -->
+  <!-- Define the PEVerifyCommand property. -->
   <PropertyGroup>
-    <VerifyBuildDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</VerifyBuildDummyOutput>
-  </PropertyGroup>
-
-  <!-- Define the AdditionalConstants property. -->
-  <PropertyGroup>
-    <AdditionalConstants></AdditionalConstants>
-  </PropertyGroup>
-
-  <!-- Define the AdditionalProperties property. -->
-  <PropertyGroup>
-    <AdditionalProperties>
-      WorkArtefactsDir=$(WorkArtefactsDir)
-    </AdditionalProperties>
+    <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
   </PropertyGroup>
 
   <!-- Define the BuildProperties property. -->
   <PropertyGroup>
     <!--
-      I set both OutDir and OutputPath, but I guess only one is really necessary,
-      and if I had to keep one it ought to be OutDir. More documentation here:
+      I set both OutDir and OutputPath, but I guess only one is really necessary.
+      If I had to keep one it ought to be OutDir. More documentation here:
         %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
       
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of OutDir. To correct this, we instruct MSBuild to
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
-      
-      We have 
-      - first the properties shared across projects (see Shared.props).
-      - then the properties necessary to use a completely different working 
-        directory from the one used by VS. 
-      - and finally the properties used to inject properties and targets 
-        at various stages of the Narvalo projects.
     -->
     <BuildProperties>
       BuildInParallel=$(BuildInParallel);
@@ -110,17 +82,25 @@
       BaseIntermediateOutputPath=$(BaseIntermediateOutputPath);
       OutDir=$(OutputPath);
       OutputPath=$(OutputPath);
-      GenerateProjectSpecificOutputFolder=false;
-      
+      GenerateProjectSpecificOutputFolder=false
+    </BuildProperties>
+  </PropertyGroup>
+
+  <!-- Define the AdditionalProperties property. -->
+  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
+    <AdditionalProperties>
       CustomBeforeNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
       CustomAfterNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
       CustomBeforeNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
-      CustomAfterNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets
-    </BuildProperties>
+      CustomAfterNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
+
+      Make_SignAssembly=$(SignAssembly);
+      Make_WorkArtefactsDir=$(WorkArtefactsDir)
+    </AdditionalProperties>
   </PropertyGroup>
-  
-  <!-- If true, Make.Common.props has already been imported. -->
+
+  <!-- Marks Make.Common.props as already imported. -->
   <PropertyGroup>
-    <MakeCommonPropsHasBeenImported>true</MakeCommonPropsHasBeenImported>
+    <MakeCommonPropsImported>true</MakeCommonPropsImported>
   </PropertyGroup>
 </Project>

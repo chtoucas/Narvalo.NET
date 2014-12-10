@@ -224,7 +224,7 @@ and at the bottom
 <Import Project="..\..\tools\Narvalo.Common.targets" />
 ```
 
-Add the project to NuGet.proj when it is ready for publication.
+Add the project to Narvalo (Public).proj when it is ready for publication.
 
 ### Configure StyleCop for Visual Studio
 
@@ -247,6 +247,23 @@ Ensure that it is copied to the output directory.
 
 - [FIXME]
 - [GeneratedCode] to mark a suppression related to generated code.
+
+
+Compilation Symbols
+-------------------
+
+- DEBUG
+- TRACE
+- CODE_ANALYSIS
+- CONTRACTS_FULL
+
+- NET_35
+- NET_40
+
+- AUTO_GENERATED_VERSION
+- BUILD_GENERATED_VERSION
+- NO_INTERNALS_VISIBLE_TO
+- SIGNED_ASSEMBLY
 
 
 Appendices

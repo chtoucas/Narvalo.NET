@@ -17,18 +17,19 @@
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
-      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\tools\Narvalo.Common.props" />
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\tools\Narvalo.Common.props" />
     
     WARNING: Make sure your import is just after the first PropertyGroup where
     the property $(AssemblyName) is usually defined.
   -->
 
+  <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
 
-  <!-- If any, import custom props. -->
+  <!-- If any, import custom global properties. -->
   <Import Project="$(CustomBeforeNarvaloProps)"
           Condition=" '$(CustomBeforeNarvaloProps)' != '' And Exists('$(CustomBeforeNarvaloProps)')" />
-
+  
 
   <!-- ### Narvalo Properties ### -->
 
@@ -39,66 +40,14 @@
 
   <!-- Instruct MSBuild to always import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
-    <!-- Setting this property is not such a good idea. Microsoft.Common.targets
-         will completely ignore the original targets file which, by the way, 
-         is used by Code Contracts. A simple workaround is to import, 
-         in Narvalo.Common.targets, the system-wide custom after targets. -->
+    <!-- WARNING: Overriding this property may lead to unexpected results. 
+         Microsoft.Common.targets will completely ignore the original targets 
+         file which, by the way, is used by Code Contracts. A simple workaround 
+         is to import in Narvalo.Common.targets the orignal system-wide custom 
+         after targets. -->
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
-  <!-- Define default properties. -->
-  <PropertyGroup>
-    <!-- Code Analysis. Default values. This is not really necessary but we never know. -->
-    <NarvaloCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
-    <NarvaloRunCodeAnalysis>false</NarvaloRunCodeAnalysis>
-
-    <!-- Source Analysis. Default values. This is not really necessary but we never know. -->
-    <NarvaloSourceAnalysisEnabled>false</NarvaloSourceAnalysisEnabled>
-  </PropertyGroup>
-
-  <!--
-    We use the project layout to identify test and sample projects. This way we
-    can be almost sure that a project is not identified at the same time
-    as a test project and as a sample project.
-    
-    For test projects, we could have used the project type Guid:
-      '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true'
-    or, maybe, the assembly name: 
-      '$(AssemblyName.EndsWith(Facts))' == 'true'
-  -->
-  <PropertyGroup>
-    <_NarvaloParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_NarvaloParentProjectDirectory>
-  </PropertyGroup>
-  
-  <!-- Define the NarvaloIsTestProject property. -->
-  <Choose>
-    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(tests))' == 'true' ">
-      <PropertyGroup>
-        <NarvaloIsTestProject>true</NarvaloIsTestProject>
-        <DefineConstants>TEST_ASSEMBLY;$(DefineConstants)</DefineConstants>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <NarvaloIsTestProject>false</NarvaloIsTestProject>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-  
-  <!-- Define the NarvaloIsSampleProject property. -->
-  <Choose>
-    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(samples))' == 'true' ">
-      <PropertyGroup>
-        <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-  
 
   <!-- ### Microsoft Common Properties ### -->
 
@@ -120,20 +69,20 @@
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
 
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
+    <SignAssembly>false</SignAssembly>
 
-    <!-- REVIEW: Should I also set these properties? -->
+    <!-- REVIEW: Is there any reason to also set any of these properties? -->
     <!--<AppDesignerFolder>Properties</AppDesignerFolder>-->
     <!--<DefaultLanguage>en-US</DefaultLanguage>-->
   </PropertyGroup>
+  
+  <!-- We only check for overflow/underflow in Debug configuration. -->
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>TRACE;DEBUG;$(DefineConstants)</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
@@ -141,7 +90,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE;CODE_ANALYSIS;$(DefineConstants)</DefineConstants>
+    <DefineConstants>$(DefineConstants);TRACE;CODE_ANALYSIS</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -150,26 +99,69 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <!-- Keep the DEBUG constant since Contract.Assert and Contract.Assume depend on it. -->
-    <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL;$(DefineConstants)</DefineConstants>
+    <!-- WARNING: Keep the DEBUG symbol since Contract.Assert and Contract.Assume
+         depend on it. Do not add the CODE_ANALYSIS symbol since Code Contracts
+         and Code Analysis do not work well together. -->
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
 
-  <!-- ### Automatically Linked Files ### -->
+  <!-- ### Automatically Added Files ### -->
 
   <ItemGroup>
-    <!-- Unfortunately, when done here, the files won't appear in VS. 
-         A file update won't cause a fresh build as it should. -->
-    <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml">
-      <Link>Properties\CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
+    <!-- Unfortunately, when done here, the files won't appear in VS (even 
+         if they are marked as linked files). 
+         Also a file update won't cause a fresh build as it should. -->
+    <Compile Include="$(RepositorySettingsDir)AssemblyInfo.Common.cs" />
+    <Compile Include="$(RepositorySettingsDir)GlobalSuppressions.Common.cs" />
     
-    <Compile Include="$(RepositorySettingsDir)AssemblyInfo.Common.cs">
-      <Link>Properties\AssemblyInfo.Common.cs</Link>
-    </Compile>
+    <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml" />
   </ItemGroup>
+
   
+  <!-- ### Special Cases ### -->
+
+  <!--
+    We use the project layout to identify test and sample projects. This way we
+    can be almost sure that a project is not identified at the same time
+    as a test project and as a sample project.
+    
+    For test projects, we could have used the project type Guid:
+      '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true'
+    or, maybe, the assembly name: 
+      '$(AssemblyName.EndsWith(Facts))' == 'true'
+  -->
+  <PropertyGroup>
+    <_NarvaloParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_NarvaloParentProjectDirectory>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(tests))' == 'true' ">
+      <PropertyGroup>
+        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
+        <NarvaloIsTestProject>true</NarvaloIsTestProject>
+        <DefineConstants>$(DefineConstants);AUTO_GENERATED_VERSION</DefineConstants>
+        <Make_SkipAssemblyVersionInfoCreation>true</Make_SkipAssemblyVersionInfoCreation>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(_NarvaloParentProjectDirectory.EndsWith(samples))' == 'true' ">
+      <PropertyGroup>
+        <NarvaloIsSampleProject>true</NarvaloIsSampleProject>
+        <NarvaloIsTestProject>false</NarvaloIsTestProject>
+        <DefineConstants>$(DefineConstants);AUTO_GENERATED_VERSION</DefineConstants>
+        <Make_SkipAssemblyVersionInfoCreation>true</Make_SkipAssemblyVersionInfoCreation>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <NarvaloIsSampleProject>false</NarvaloIsSampleProject>
+        <NarvaloIsTestProject>false</NarvaloIsTestProject>
+        <Make_SkipAssemblyVersionInfoCreation>false</Make_SkipAssemblyVersionInfoCreation>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
 
   <!-- ### Source Analysis ### -->
   
@@ -212,37 +204,30 @@
 
   <Choose>
     <When Condition=" '$(NarvaloIsTestProject)' == 'true' ">
-      <!-- Test projects use a custom ruleset. -->
       <PropertyGroup>
+        <!-- Test projects use a custom ruleset. -->
         <NarvaloCodeAnalysisRuleSet>$(RepositorySettingsDir)Tests.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <When Condition=" '$(NarvaloIsSampleProject)' == 'true' ">
-      <!-- Sample projects use a custom ruleset. -->
       <PropertyGroup>
+        <!-- Sample projects use a custom ruleset. -->
         <NarvaloCodeAnalysisRuleSet>$(RepositorySettingsDir)\Samples.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <!-- The default behaviour is to use a very strict ruleset. 
-             For performance reasons we use a minimal ruleset when using Code 
-             Contracts. Also Code Contracts produce assemblies that are not 
+        <!-- The default behaviour is to use a very strict ruleset.
+             For performance reasons we use a minimal ruleset when using Code
+             Contracts. Also Code Contracts produce assemblies that are not
              compatible with Code Analysis. -->
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' == 'CodeContracts' ">MinimumRecommendedRules.ruleset</NarvaloCodeAnalysisRuleSet>
         <NarvaloCodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Strict.ruleset</NarvaloCodeAnalysisRuleSet>
       </PropertyGroup>
     </Otherwise>
   </Choose>
-
+  
   <PropertyGroup>
-    <!--
-      The default behaviour is to use a very strict ruleset. For performance reasons
-      we use a less strict ruleset when using Code Contracts. Also Code Contracts
-      produce assemblies that are not compatible with Code Analysis.
-
-      If requested, use a custom Code Analysis ruleset.
-    -->
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' ">$(NarvaloCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' ">$(NarvaloCustomCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -299,14 +284,14 @@
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
   </PropertyGroup>
+  
 
-
-  <!-- If any, import custom props. -->
+  <!-- If any, import custom properties. -->
   <Import Project="$(CustomAfterNarvaloProps)"
           Condition=" '$(CustomAfterNarvaloProps)' != '' And Exists('$(CustomAfterNarvaloProps)')" />
 
-  <!-- If true, Make.Common.props has already been imported. -->
+  <!-- Marks Make.Common.props as already imported. -->
   <PropertyGroup>
-    <NarvaloCommonPropsHasBeenImported>true</NarvaloCommonPropsHasBeenImported>
+    <NarvaloCommonPropsImported>true</NarvaloCommonPropsImported>
   </PropertyGroup>
 </Project>

@@ -12,7 +12,6 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <DefineConstants>NARVALO_CORE</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -46,7 +45,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\NullableFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -59,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\MonadFacts.tt" />
+    <None Include="Narvalo.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

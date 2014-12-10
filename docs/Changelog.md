@@ -7,4 +7,4 @@ ChangeLog
 - Improved: Created a brand new MSBuild infrastructure.
 - Improved: Reorganization of the solutions.
 - Improved: Narvalo.Facts becomes a true VS test project.
-- Fixed: #1 Narvalo.Facts failed whend run twice in a row when using Narvalo.proj.  
+- Fixed: #1 Narvalo.Facts failed whend run twice in a row when using Make.proj.  

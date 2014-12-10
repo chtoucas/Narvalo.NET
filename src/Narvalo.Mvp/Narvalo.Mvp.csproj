@@ -7,7 +7,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp</RootNamespace>
     <AssemblyName>Narvalo.Mvp</AssemblyName>
-    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -87,6 +86,9 @@
     <Compile Include="Resolvers\PresenterTypeResolver.cs" />
     <Compile Include="Resolvers\ResolverCache`3.cs" />
     <Compile Include="Resolvers\TypeKeyedResolverCache`1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Narvalo.Mvp.props" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -83,6 +83,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public static class GetCandidatePrefixesFromInterfacesMethod
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresIViewInterface()
             {
@@ -95,7 +96,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericIViewInterface()
             {
@@ -108,7 +111,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNotInheritingIView()
             {
@@ -121,7 +126,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNameNotEndingWithView()
             {
@@ -134,7 +141,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericInterfaceNameNotEndingWithView()
             {
@@ -147,7 +156,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNameNotContainingView()
             {
@@ -160,7 +171,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericInterfaceNameNotContainingView()
             {
@@ -173,7 +186,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.False(shortNames.Any());
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void TrimsPrefixIAndSuffixView_FromInterfaceName()
             {
@@ -186,7 +201,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.Equal(new[] { "My" }, shortNames);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void TrimsPrefixIAndSuffixView_ForGenericInterfaceName()
             {
@@ -199,7 +216,9 @@ namespace Narvalo.Mvp.Resolvers
                 // Assert
                 Assert.Equal(new[] { "My" }, shortNames);
             }
+#endif
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsAllCandidates_ForComplexInterfaceName()
             {
@@ -215,6 +234,7 @@ namespace Narvalo.Mvp.Resolvers
                 Assert.Contains("MyAlt", shortNames);
                 Assert.Contains("MyComplex", shortNames);
             }
+#endif
         }
 
         #region Helper classes

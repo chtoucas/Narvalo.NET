@@ -5,50 +5,6 @@
     <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
-  <UsingTask TaskName="IncrementBuildAndRevisionNumbers" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
-    <ParameterGroup>
-      <BuildNumber ParameterType="System.UInt16" Output="true" />
-      <RevisionNumber ParameterType="System.UInt16" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.Core" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-// The algorithm used by .NET to auto-increment the assembly version is as follows:
-//   The default build number increments daily. The default revision number is
-//   the number of seconds since midnight local time (without taking into account
-//   time zone adjustments for daylight saving time), divided by 2.
-// For further informations, see:
-// http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx
-//
-// Remarks:
-// - this feature is only available to AssemblyVersion not to AssemblyFileVersion.
-// - during the same day, two builds may end up with the same assembly version.
-// - build and revision numbers must be less or equal to 65534 (UInt16.MaxValue - 1).
-//
-// Here I implement a slight variation of the same algorithm:
-// - use UTC time.
-// - the build number is the number of half-days since 2014-12-01 
-//   (minus one to start at zero).
-// - the revision number is the number of seconds since midnight in the morning 
-//   and since midday in the afternoon.
-// This way, there is less chance of getting the same numbers during 
-// a single day on the same build machine. The scheme will break in 
-// approximately 89 years...
-var now = DateTime.UtcNow;
-var isMorning = now.Hour < 12;
-var numberOfHalfDays = 2 * (now - new DateTime(2014, 11, 30)).Days - (isMorning ? 1 : 0);
-var numberOfSeconds = (now - new DateTime(now.Year, now.Month, now.Day, isMorning ? 0 : 12, 0, 0)).TotalSeconds;
-
-BuildNumber = (ushort)(numberOfHalfDays - 1);
-RevisionNumber = (ushort)numberOfSeconds;
-
-return true;
-         ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
   <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <OutputFilePath ParameterType="System.String" Required="true" />

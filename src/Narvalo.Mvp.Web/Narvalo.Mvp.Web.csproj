@@ -7,7 +7,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Web</AssemblyName>
-    <DefineConstants>NARVALO_MVP</DefineConstants>
   </PropertyGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
@@ -61,6 +60,9 @@
       <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
       <Name>Narvalo.Mvp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Narvalo.Mvp.Web.props" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -105,6 +105,7 @@ namespace Narvalo.Mvp.Web
 
         public static class HttpContextProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsAmbientHttpContext()
             {
@@ -119,10 +120,12 @@ namespace Narvalo.Mvp.Web
                 // Assert
                 Assert.Same(httpContext, presenter.HttpContext);
             }
+#endif
         }
 
         public static class CacheProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsCacheFromHttpContext()
             {
@@ -139,10 +142,12 @@ namespace Narvalo.Mvp.Web
                 // Assert
                 Assert.Same(cache, presenter.Cache);
             }
+#endif
         }
 
         public static class RequestProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsRequestFromHttpContext()
             {
@@ -159,10 +164,12 @@ namespace Narvalo.Mvp.Web
                 // Assert
                 Assert.Same(request, presenter.Request);
             }
+#endif
         }
 
         public static class ResponseProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsResponseFromHttpContext()
             {
@@ -179,10 +186,12 @@ namespace Narvalo.Mvp.Web
                 // Assert
                 Assert.Same(response, presenter.Response);
             }
+#endif
         }
 
         public static class ServerProperty
         {
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsServerFromHttpContext()
             {
@@ -199,6 +208,7 @@ namespace Narvalo.Mvp.Web
                 // Assert
                 Assert.Same(server, presenter.Server);
             }
+#endif
         }
 
         #region Helper classes

@@ -31,6 +31,7 @@ namespace Narvalo.Mvp
                 Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
             }
 
+#if NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void AddsViewsToList()
             {
@@ -46,6 +47,7 @@ namespace Narvalo.Mvp
                 // Assert
                 Assert.Equal(new[] { view1, view2 }, view.Views);
             }
+#endif
         }
 
         #region Helper classes

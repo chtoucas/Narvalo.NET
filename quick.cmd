@@ -1,18 +1,11 @@
-:: Lean runner for NuGet.proj.
+:: Lean runner for Make (Dev).proj.
 ::
 :: Usage: quick [Release?]
 ::
 :: WARNING: This script might fail if the packages were not previously restored.
 
 @echo off
-@setlocal
 
-@set Configuration=Debug
-@if "%1"=="Release" (
-  @set Configuration=Release
-)
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Make.proj" /t:Build /p:LeanRun=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\NuGet.proj" /t:RunTests /p:LeanRun=true;Configuration=%Configuration%
-
-@endlocal
 @exit /B %ERRORLEVEL%
