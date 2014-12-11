@@ -25,10 +25,6 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
-    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
-  </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
-  <PropertyGroup>
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
@@ -196,5 +192,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

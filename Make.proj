@@ -16,11 +16,13 @@
         <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
       </ItemGroup>
     </When>
+    
     <When Condition=" '$(ProjectFile)' != '' ">
       <ItemGroup>
         <ProjectsToBuild Include="$(ProjectFile)"></ProjectsToBuild>
       </ItemGroup>
     </When>
+    
     <When Condition=" '$(SkipPrivateProjects)' == 'true' ">
       <ItemGroup>
         <!-- Librairies. -->
@@ -36,6 +38,7 @@
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </When>
+    
     <Otherwise>
       <ItemGroup>
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)samples\**\*.csproj" />

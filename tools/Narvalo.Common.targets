@@ -7,19 +7,19 @@
 
   <!-- Import the original CustomAfterMicrosoftCommonTargets. -->
   <PropertyGroup>
-    <OriginalCustomAfterMicrosoftCommonTargets>$(MSBuildExtensionsPath)\v$(MSBuildToolsVersion)\Custom.After.Microsoft.Common.targets</OriginalCustomAfterMicrosoftCommonTargets>
+    <CustomAfterMicrosoftCommonTargets>$(MSBuildExtensionsPath)\v$(MSBuildToolsVersion)\Custom.After.Microsoft.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
-
-  <Import Project="$(OriginalCustomAfterMicrosoftCommonTargets)" 
-          Condition=" Exists('$(OriginalCustomAfterMicrosoftCommonTargets)') "/>
+  
+  <Import Project="$(CustomAfterMicrosoftCommonTargets)" 
+          Condition=" Exists('$(CustomAfterMicrosoftCommonTargets)') "/>
 
   <!-- Import properties if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props"
           Condition=" '$(NarvaloCommonPropsImported)' != 'true' "/>
 
   <!-- If any, import custom targets.-->
-  <Import Project="$(CustomBeforeNarvaloTargets)"
-          Condition=" '$(CustomBeforeNarvaloTargets)' != '' And Exists('$(CustomBeforeNarvaloTargets)')" />
+  <Import Project="$(CustomBeforeNarvaloCommonTargets)"
+          Condition=" '$(CustomBeforeNarvaloCommonTargets)' != '' And Exists('$(CustomBeforeNarvaloCommonTargets)')" />
 
   <!-- Import StyleCop targets. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.StyleCop.targets" />
@@ -54,7 +54,7 @@
   <Target Name="BeforeSourceAnalysis"
           BeforeTargets="StyleCop"
           Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="high" />
+    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="normal" />
   </Target>
 
   <Target Name="AfterSourceAnalysis"
@@ -66,7 +66,6 @@
 
 
   <!-- ### Code Analysis Hooks ### -->
-
   <!--
     I wanted to replace the FxCop default messages to include the project name
     but the provided MSBuild targets make it difficult to hook inside the process.
@@ -74,7 +73,7 @@
   <!--<Target Name="BeforeCodeAnalysis"
           BeforeTargets="RunCodeAnalysis"
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="high" />
+    <Message Text="Running Code Analysis on $(ProjectName)..." Importance="normal" />
   </Target>
 
   <Target Name="AfterCodeAnalysis"
@@ -89,7 +88,7 @@
   <Target Name="BeforeCodeContractsDocumentation"
         BeforeTargets="ContractXmlDocumentation"
         Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="high" />
+    <Message Text="Building Code Contracts Documentation for $(ProjectName)..." Importance="normal" />
   </Target>
 
   <Target Name="AfterCodeContractsDocumentation"
@@ -106,7 +105,7 @@
   <Target Name="BeforeCodeContractsReferenceAssembly"
           BeforeTargets="CreateCodeContractReferenceAssembly"
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
-    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="high" />
+    <Message Text="Building Code Contracts Reference Assembly for $(ProjectName)..." Importance="normal" />
   </Target>
 
   <Target Name="AfterCodeContractsReferenceAssembly"
@@ -117,6 +116,6 @@
   
 
   <!-- If any, import custom targets. -->
-  <Import Project="$(CustomAfterNarvaloTargets)"
-          Condition=" '$(CustomAfterNarvaloTargets)' != '' And Exists('$(CustomAfterNarvaloTargets)')" />
+  <Import Project="$(CustomAfterNarvaloCommonTargets)"
+          Condition=" '$(CustomAfterNarvaloCommonTargets)' != '' And Exists('$(CustomAfterNarvaloCommonTargets)')" />
 </Project>

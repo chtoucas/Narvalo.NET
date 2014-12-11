@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         DefaultTargets="Default"
+         DefaultTargets="Build"
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
@@ -24,9 +24,6 @@
   <!-- Import Xunit tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
 
-  <!-- Default target. -->
-  <Target Name="Default" DependsOnTargets="Clean;Build;VerifyBuild;RunTests" />
-
   <!-- To prevent circular references and to avoid incorrect behaviour, 
        please DO NOT break the following rules:
        - Lean(...) targets MUST NOT refer to Core(...), Clean, Build and Rebuild targets.
@@ -36,7 +33,7 @@
          
        There is only one exception to these rules: CoreBuild depends on the LeanBuild target. -->
 
-  <Target Name="Clean" DependsOnTargets="_PrepareProjectsToBuild">
+  <Target Name="Clean">
     <!-- Artefacts created during a build. -->
     <ItemGroup>
       <_FilesToDelete Include="$(WorkArtefactsDir)\*" />
@@ -61,7 +58,7 @@
 
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
 
-  <Target Name="LeanBuild" DependsOnTargets="_PrepareProjectsToBuild">
+  <Target Name="LeanBuild">
     <!-- WARNING: This target might fail if the packages were not previously 
          restored. We keep it that way to be able to perform fast builds 
          when we know in advance it's OK. Otherwise there is always CoreBuild... -->
@@ -85,7 +82,7 @@
 
   <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;Clean;CoreBuild" />
 
-  <Target Name="LeanRebuild" DependsOnTargets="_PrepareProjectsToBuild">
+  <Target Name="LeanRebuild">
     <!-- WARNING: See WARNING in LeanBuild. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -120,8 +117,11 @@
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
+    <!-- Before running XUnit, clean the room. -->
+    <Delete Files="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
+    
     <!-- Since RunTests depends on Build, we are sure that the directory 
-         where we store the reports exists. -->
+         where reports are stored exists. -->
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
@@ -171,26 +171,15 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PrepareProjectsToBuild" Condition=" '$(AdditionalProperties)' != '' ">
-    <ItemGroup>
-      <ProjectsToBuild>
-        <AdditionalProperties>$(AdditionalProperties)</AdditionalProperties>
-      </ProjectsToBuild>
-    </ItemGroup>
-  </Target>
-
   <!-- PEVerify Targets. -->
 
-  <PropertyGroup>
-    <PEVerifyDependsOn>_DeletePEVerifyLog;Build</PEVerifyDependsOn>
-  </PropertyGroup>
-
   <Target Name="_DeletePEVerifyLog">
-    <Delete Files="$(PEVerifyLogFile)" Condition=" Exists('$(PEVerifyLogFile)') " />
+    <!-- Before running PEVerify, clean the room. -->
+    <Delete Files="$(PEVerifyLogFile)" />
   </Target>
 
   <Target Name="_PEVerify"
-          DependsOnTargets="$(PEVerifyDependsOn)"
+          DependsOnTargets="_DeletePEVerifyLog;Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(PEVerifyDummyOutput)">
     <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
@@ -204,13 +193,13 @@
   </Target>
 
   <Target Name="_WarnOnMissingPEVerify"
-          DependsOnTargets="$(PEVerifyDependsOn)">
+          DependsOnTargets="_DeletePEVerifyLog">
     <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
              ContinueOnError="true" />
   </Target>
 
   <!-- Initial target. -->
-  <Target Name="__InitializeMakeCommonTargets">
+  <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(LeanRun)' != 'true' ">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
   </Target>

@@ -8,7 +8,6 @@
     <RootNamespace>Narvalo.Externs</RootNamespace>
     <AssemblyName>Narvalo.Externs</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
@@ -89,5 +88,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

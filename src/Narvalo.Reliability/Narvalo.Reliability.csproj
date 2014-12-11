@@ -8,11 +8,6 @@
     <RootNamespace>Narvalo.Reliability</RootNamespace>
     <AssemblyName>Narvalo.Reliability</AssemblyName>
   </PropertyGroup>
-  <PropertyGroup>
-    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
-    <NarvaloDisableSourceAnalysisOnBuild>true</NarvaloDisableSourceAnalysisOnBuild>
-  </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,5 +45,6 @@
     <Compile Include="RetryPolicy.cs" />
     <Compile Include="ThrottleException.cs" />
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

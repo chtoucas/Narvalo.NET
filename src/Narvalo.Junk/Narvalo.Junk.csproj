@@ -8,7 +8,6 @@
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Junk</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />
@@ -26,5 +25,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

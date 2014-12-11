@@ -1,6 +1,6 @@
 :: Alias for MSBuild.
 
-@echo on
+@echo off
 @setlocal
 
 :Bootstrap
@@ -26,6 +26,8 @@
 @set MSBuild="%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\MSBuild"
 @if exist %MSBuild% ( @goto Build )
 
+:MSBuildNotFound
+
 @echo *** Unable to find a suitable version of MSBuild ***
 @endlocal
 @exit /B 1
@@ -33,39 +35,7 @@
 
 :Build
 
-@set LogFile="%~dp0\..\msbuild.log"
-
-:: MSBuild command line with options.
-::  /v:m             -> Default logger only displays minimal information.
-::  /fl /flp:logfile -> Detailed log saved to %LogFile%.
-::  /m               -> Use up to the number of processors in the computer.
-::  /nr:false        -> Disable the re-use of MSBuild nodes.
-%MSBuild% %* /nologo /v:m /fl /flp:logfile=%LogFile%;verbosity=detailed;encoding=utf-8 /m /nr:false
-
-@if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
-@goto BuildSuccess
-
-:BuildFailure
-
-@echo.
-@echo *** Build failed ***
-@echo.
-@goto End
-
-:BuildSuccess
-
-@echo.
-@echo Congratulations, Build successful!
-@echo.
-@goto End
-
-:End
-
-:: If the artefacts directory exists, move the log file there.
-@set ArtefactsDir="%~dp0\..\work\artefacts\"
-@if exist %ArtefactsDir% ( 
-	@move /y %LogFile% %ArtefactsDir% > nul 2>&1
-)
+%MSBuild% %*
 
 @endlocal
 @exit /B %ERRORLEVEL%

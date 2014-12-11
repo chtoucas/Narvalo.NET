@@ -12,38 +12,19 @@ In Progress
 Build Infrastructure
 --------------------
 
-Global properties: Narvalo...
-Single.proj -> ProjectName
-SIGNED_ASSEMBLY and Sign If no snk?
-Message
-Logfile & LogLevel
-AdditionalProperties
-Clean -> Remove AssemblyInfo
-Check PEVerify arguments
-Narvalo.Samples.props?
-Narvalo.Tests.props?
-Make_...
-
-- copy dll, packages, logs, reports to artefact and clean artefacts before.
+- Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
-- Split build file for diff ProjectsToBuild settings.
-  Check ProjectsToBuild?
-  Check 64bit
-- Review NuGet parameters -repository
-- Update Copyright, add build time to Configuration.
+- Review PEVerify & NuGet parameters -repository
+- Update Copyright, add build time.
+- Check 64bit
 - XUnit 64bit
-
 - T4 re-generation has been disabled since it requires VS hosting.
 - If PEVerify fails, does the error message appear on the command prompt.
-- Delay signing?
 - Make unnecessary to add StyleCop settings to the project.
-- Add other filters? OnlyCore, OnlyMvp for NuGet packages.
 - Add $(SolutionDir) to BuildProperties?
-- $(RepositoryRoot) aliases for tools, etc
 - Nice to have:
   * SecAnnotate
   * Code Coverage + Report Generator.
-- Artefacts
 - Merging, just for fun.
 
 

@@ -8,7 +8,6 @@
     <RootNamespace>Narvalo.Benchmarking</RootNamespace>
     <AssemblyName>Narvalo.Benchmarking</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="NodaTime">
       <HintPath>..\..\packages\NodaTime.1.3.0\lib\net35-Client\NodaTime.dll</HintPath>
@@ -68,5 +67,6 @@
       <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

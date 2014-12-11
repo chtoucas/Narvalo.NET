@@ -8,7 +8,6 @@
     <RootNamespace>Narvalo.Mvp.Web</RootNamespace>
     <AssemblyName>Narvalo.Mvp.Web</AssemblyName>
   </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,5 +63,6 @@
   <ItemGroup>
     <None Include="Narvalo.Mvp.Web.props" />
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,11 +9,6 @@
     <AssemblyName>Narvalo.Ghostscript</AssemblyName>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup>
-    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
-    <NarvaloDisableSourceAnalysisOnBuild>true</NarvaloDisableSourceAnalysisOnBuild>
-  </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,5 +67,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

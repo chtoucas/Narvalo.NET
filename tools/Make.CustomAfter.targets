@@ -5,58 +5,91 @@
   -->
 
   <PropertyGroup>
+    <!-- WARNING: This property can not be defined in one of the .props files,
+         as it should, since IntermediateOutputPath is only initialized 
+         after importing Microsoft.Common.targets. -->
+    <TmpAssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</TmpAssemblyVersionFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <BeforeBuildDependsOn>
       $(BeforeBuildDependsOn);
-      ValidateSourceAnalysisSettings;
-      ValidateCodeAnalysisSettings;
-      CreateAssemblyVersionInfo
+      CreateAssemblyVersionFile
     </BeforeBuildDependsOn>
   </PropertyGroup>
 
   <PropertyGroup>
     <AfterBuildDependsOn>
       $(AfterBuildDependsOn);
-      DeleteOriginalDocumentationFiles;
-      CopyBuildOutputsToArtefactsDir
+      DeleteOldDocumentationFile;
+      _CopyArtefacts
     </AfterBuildDependsOn>
   </PropertyGroup>
 
   <PropertyGroup>
     <AfterCleanDependsOn>
       $(AfterCleanDependsOn);
-      CleanCustomBuildOutputs
+      DeleteTmpBuildFiles
     </AfterCleanDependsOn>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <!-- WARNING: This property can not be defined in one of the .props files
-         since IntermediateOutputPath is only initialized after importing
-         Microsoft.Common.targets. -->
-    <TmpAssemblyVersionInfoFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</TmpAssemblyVersionInfoFile>
-  </PropertyGroup>
-  
 
-  <!-- ### Microsoft Build Process ### -->
+  <Choose>
+    <When Condition=" '$(SkipBuildGeneratedVersion)' != 'true' ">
+      <PropertyGroup>
+        <CreateAssemblyVersionFileDependsOn>_CreateAssemblyVersionFile</CreateAssemblyVersionFileDependsOn>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <CreateAssemblyVersionFileDependsOn>DeleteAssemblyVersionFile</CreateAssemblyVersionFileDependsOn>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
-  <Target Name="CleanCustomBuildOutputs">
-    
+  <Target Name="CreateAssemblyVersionFile" DependsOnTargets="$(CreateAssemblyVersionFileDependsOn)" />
+
+  <Target Name="DeleteAssemblyVersionFile">
+    <Delete Files="$(TmpAssemblyVersionFile)" />
   </Target>
 
-  <Target Name="CopyBuildOutputsToArtefactsDir">
-   <!-- TODO: Add code contracts. -->
+  <Target Name="DeleteOldDocumentationFile">
+    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..."
+             Importance="normal" />
+
+    <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
+  </Target>
+
+  <Target Name="DeleteTmpBuildFiles" DependsOnTargets="DeleteAssemblyVersionFile" />
+
+  <!-- ### Private Targets ### -->
+
+  <Target Name="_CopyArtefacts">
     <ItemGroup>
       <_Outputs Include="$(OutDir)$(AssemblyName).dll" />
-      <_Outputs Include="$(OutDir)$(AssemblyName).pdb" />
-      <_Outputs Include="$(OutDir)$(AssemblyName).xml" />
+      <_Outputs Include="$(OutDir)$(AssemblyName).pdb"
+                Condition=" Exists('$(OutDir)$(AssemblyName).pdb') " />
+      <_Outputs Include="$(OutDir)$(AssemblyName).xml"
+                Condition=" Exists('$(OutDir)$(AssemblyName).xml') " />
+
+      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll"
+                         Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll') " />
+      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb"
+                         Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb') " />
     </ItemGroup>
-      
-    <!--<Copy SourceFiles="@(_Outputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />-->
+
+    <Copy SourceFiles="@(_Outputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
+
+    <MakeDir Directories="$(WorkArtefactsDir)CodeContracts"
+             Condition=" '@(_ContractsOutputs)' != '' And !Exists('$(WorkArtefactsDir)CodeContracts') " />
+
+    <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
   </Target>
 
-  <Target Name="CreateAssemblyVersionInfo" Condition=" '$(Make_SkipAssemblyVersionInfoCreation)' != 'true' ">
-    <Message Text="Creating the build generated version file for $(AssemblyName)..." Importance="high" />
+  <!-- Dynamically generate the assembly version info. -->
+  <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="DeleteAssemblyVersionFile">
+    <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="high" />
 
-    <Warning Text="Using default assembly version for $(AssemblyName)." 
+    <Warning Text="Using default assembly version for $(AssemblyName)."
              Condition=" 
               '$(AssemblyMajorVersion)' == ''
               Or '$(AssemblyMinorVersion)' == ''
@@ -69,12 +102,12 @@
       <AssemblyPatchVersion Condition=" '$(AssemblyPatchVersion)' == '' ">0</AssemblyPatchVersion>
       <AssemblyPreRelaseLabel></AssemblyPreRelaseLabel>
     </PropertyGroup>
-    
+
     <IncrementBuildAndRevisionNumbers>
       <Output TaskParameter="BuildNumber" PropertyName="_BuildNumber"/>
       <Output TaskParameter="RevisionNumber" PropertyName="_RevisionNumber"/>
     </IncrementBuildAndRevisionNumbers>
-    
+
     <PropertyGroup>
       <_AssemblyPreRelaseLabelSuffix Condition=" '$(AssemblyPreRelaseLabel)' != '' ">-$(AssemblyPreRelaseLabel)</_AssemblyPreRelaseLabelSuffix>
       <_AssemblyInfoContent>
@@ -99,58 +132,20 @@ using System.Reflection;
       <_AssemblyInfoLines>$([MSBuild]::Escape($(_AssemblyInfoContent)))</_AssemblyInfoLines>
     </PropertyGroup>
 
+    <MakeDir Directories="$(IntermediateOutputPath)" Condition=" !Exists($(IntermediateOutputPath)) " />
+
     <WriteLinesToFile Lines="$(_AssemblyInfoLines)"
-                      File="$(TmpAssemblyVersionInfoFile)"
+                      File="$(TmpAssemblyVersionFile)"
                       Overwrite="true" />
 
-    <ItemGroup>
-      <Compile Include="$(TmpAssemblyVersionInfoFile)" />
-    </ItemGroup>
-  </Target>
-
-
-  <!-- ### Source Analysis Targets ### -->
-
-  <Target Name="ValidateSourceAnalysisSettings">
-    <Warning Text="On user request, Source Analysis has been disabled on $(ProjectName)"
-             Condition=" '$(NarvaloSourceAnalysisEnabled)' == 'true' And '$(NarvaloDisableSourceAnalysisOnBuild)' == 'true' "
-             ContinueOnError="true" />
-
-    <Error Text="Unexpectedly, the value of 'StyleCopEnabled' has been overriden for $(ProjectName): '$(StyleCopEnabled)' instead '$(NarvaloSourceAnalysisEnabled)'"
-             Condition=" '$(NarvaloDisableSourceAnalysisOnBuild)' != 'true' And '$(StyleCopEnabled)' != '$(NarvaloSourceAnalysisEnabled)' "
-             ContinueOnError="false" />
-  </Target>
-
-
-  <!-- ### Code Analysis Targets ### -->
-
-  <Target Name="ValidateCodeAnalysisSettings">
-    <Warning Text="On user request, $(ProjectName) does not use the default Code Analysis ruleset: '$(NarvaloCustomCodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloRunCodeAnalysis)' == 'true' And '$(NarvaloCustomCodeAnalysisRuleSet)' != '' "
-             ContinueOnError="true" />
-
-    <Error Text="Unexpectedly, the value of 'RunCodeAnalysis' has been overriden for $(ProjectName): '$(RunCodeAnalysis)' instead of '$(NarvaloRunCodeAnalysis)'"
-             Condition=" '$(RunCodeAnalysis)' != '$(NarvaloRunCodeAnalysis)' "
-             ContinueOnError="false" />
-    <Error Text="Unexpectedly, the value of 'CodeAnalysisRuleSet' has been overriden for $(ProjectName): '$(CodeAnalysisRuleSet)' instead of '$(NarvaloCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' == '' And '$(CodeAnalysisRuleSet)' != '$(NarvaloCodeAnalysisRuleSet)' "
-             ContinueOnError="false" />
-    <Error Text="Unexpectedly, the value of 'CodeAnalysisRuleSet' has been overriden for $(ProjectName): '$(CodeAnalysisRuleSet)' instead of '$(NarvaloCustomCodeAnalysisRuleSet)'"
-             Condition=" '$(NarvaloCustomCodeAnalysisRuleSet)' != '' And '$(CodeAnalysisRuleSet)' != '$(NarvaloCustomCodeAnalysisRuleSet)' "
-             ContinueOnError="false" />
-  </Target>
-
-
-  <!-- ### Code Contracts Targets ### -->
-
-  <Target Name="DeleteOriginalDocumentationFiles">
-    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..."
-             Importance="normal" />
+    <!-- Dynamically add the file to the list of sources to compile
+         and add the BUILD_GENERATED_VERSION compilation symbol. -->
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
+    </PropertyGroup>
 
     <ItemGroup>
-      <_OriginalDocumentationFile Include="$(OutDir)$(AssemblyName).xml.old" />
+      <Compile Include="$(TmpAssemblyVersionFile)" />
     </ItemGroup>
-
-    <Delete Files="@(_OriginalDocumentationFile)" />
   </Target>
 </Project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0"
+         TreatAsLocalProperty="SkipBuildGeneratedVersion"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    Sample projects should import this file.
+    
+    To identify sample projects, we could have used the repository layout:
+      <PropertyGroup>
+        <_ParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_ParentProjectDirectory>
+      </PropertyGroup>
+    
+      '$(_ParentProjectDirectory.EndsWith(samples))' == 'true'
+  -->
+
+  <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
+
+  <!-- Overrides for sample projects. -->
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);AUTO_GENERATED_VERSION</DefineConstants>
+
+    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Samples.ruleset</CodeAnalysisRuleSet>
+    
+    <!-- Only used by Make.proj. -->
+    <SkipBuildGeneratedVersion>true</SkipBuildGeneratedVersion>
+  </PropertyGroup>
+</Project>

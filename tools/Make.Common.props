@@ -4,6 +4,7 @@
     Options:
     - LeanRun
     - SignAssembly
+    - SkipBuildGeneratedVersion
     - SolutionFile
     
     Other options may be found in Shared.props.
@@ -20,11 +21,14 @@
     <!-- If true, sign the assemblies. -->
     <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
 
+    <!-- If true, do not dynamically generate the assemblies' version. -->
+    <SkipBuildGeneratedVersion Condition=" '$(SkipBuildGeneratedVersion)' != 'true' ">false</SkipBuildGeneratedVersion>
+
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
-    <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
+    <WorkArtefactsDir>$(WorkRoot)artefacts\$(Configuration)\</WorkArtefactsDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -78,28 +82,39 @@
       Platform=$(Platform);
       RepositoryRoot=$(RepositoryRoot);
       VisualStudioVersion=$(VisualStudioVersion);
+    </BuildProperties>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
+    <!--
+      I set both OutDir and OutputPath, but I guess only one is really necessary.
+      If I had to keep one it ought to be OutDir. More documentation here:
+        %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
+      
+      WARNING: When building a PCL project, MSBuild places its output inside
+      a subdirectory of OutDir. To correct this, we instruct MSBuild to
+      use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
+    -->
+    <BuildProperties>
+      $(BuildProperties);
 
       BaseIntermediateOutputPath=$(BaseIntermediateOutputPath);
       OutDir=$(OutputPath);
       OutputPath=$(OutputPath);
-      GenerateProjectSpecificOutputFolder=false
+      GenerateProjectSpecificOutputFolder=false;
+
+      CustomBeforeNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
+      CustomAfterNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
+      CustomBeforeNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
+      CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
+
+      SignAssembly=$(SignAssembly);
+      SkipBuildGeneratedVersion=$(SkipBuildGeneratedVersion);
+      WorkArtefactsDir=$(WorkArtefactsDir)
     </BuildProperties>
   </PropertyGroup>
 
-  <!-- Define the AdditionalProperties property. -->
-  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
-    <AdditionalProperties>
-      CustomBeforeNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
-      CustomAfterNarvaloProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
-      CustomBeforeNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
-      CustomAfterNarvaloTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
-
-      Make_SignAssembly=$(SignAssembly);
-      Make_WorkArtefactsDir=$(WorkArtefactsDir)
-    </AdditionalProperties>
-  </PropertyGroup>
-
-  <!-- Marks Make.Common.props as already imported. -->
+  <!-- Mark Make.Common.props as already imported. -->
   <PropertyGroup>
     <MakeCommonPropsImported>true</MakeCommonPropsImported>
   </PropertyGroup>

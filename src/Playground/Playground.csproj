@@ -9,10 +9,6 @@
     <AssemblyName>Playground</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
-    <NarvaloCustomCodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</NarvaloCustomCodeAnalysisRuleSet>
-  </PropertyGroup>
-  <Import Project="..\..\tools\Narvalo.Common.props" />
-  <PropertyGroup>
     <StartupObject>Playground.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
@@ -138,5 +134,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

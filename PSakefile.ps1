@@ -1,44 +1,80 @@
+#
+# WARNING: This file must stay at the root of the repository.
+#
 
 Properties {
-  $options = '/nologo', '/v:minimal', '/fl',
-    '/flp:logfile=.\msbuild.log;verbosity=normal;encoding=utf-8',
-    '/m', '/nodeReuse:false'
+  $options = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
+  $logfile = "$PSScriptRoot\make.log"
+  $normalFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=normal;encoding=utf-8"
+  $detailedFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=detailed;encoding=utf-8"
 }
 
-Task default -depends Quick
+Task default -depends Minimal
 
-Task Help {
-  Write-Host 'Not yet implemented...'
+# Remove all bin and obj directories created by Visual Studio.
+Task HardCleanVisualStudio {
+  Remove-VisualStudioTmpFiles "$PSScriptRoot\samples\"
+  Remove-VisualStudioTmpFiles "$PSScriptRoot\src\"
+  Remove-VisualStudioTmpFiles "$PSScriptRoot\tests\"
 }
 
-Task CleanVisualStudio {
-  Write-Host 'Not yet implemented...'
+# Remove the work directory.
+Task HardCleanWorkDir {
+  $workDir = "$PSScriptRoot\work\"
+
+  if (Test-Path $workDir) {
+    Remove-Item $workDir -Force -Recurse
+  }
 }
 
-Task HardClean {
-  Write-Host 'Not yet implemented...'
+# Run tests for public projects in Debug configuration.
+Task Minimal {
+  MSBuild $options '.\Make.proj' '/t:RunTests' '/p:SkipPrivateProjects=true;SkipBuildGeneratedVersion=true'
 }
 
-Task Quick {
-  MSBuild $options '.\Make.proj' '/t:RunTests' '/p:Configuration=Debug;LeanRun=true;SkipPrivateProjects=true'
-}
-
-Task BuildCore {
-  MSBuild $options '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Debug;SolutionFile=.\Narvalo (Core).sln'
-}
-
-Task BuildMvp {
-  MSBuild $options '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Debug;SolutionFile=.\Narvalo (Mvp).sln'
-}
-
-Task BuildMiscs {
-  MSBuild $options '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Debug;SolutionFile=.\Narvalo (Miscs).sln'
-}
-
+# Continuous integration build in Release configuration.
 Task CI {
-  MSBuild $options '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
+  MSBuild $options $detailedFileLogger '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
+} -PostAction {
+  Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
 }
 
-Task Publish -depends HardClean {
-  MSBuild $options '.\Make.proj' '/t:Clean;Build;VerifyBuild;RunTests' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
+# Create packages for release: sign assembles and use Release configuration.
+Task Package -depends HardCleanWorkDir {
+  MSBuild $options $normalFileLogger '.\Make.proj' '/t:Clean;Build;VerifyBuild;RunTests' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
+} -PostAction {
+  Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
+}
+
+# Lean build for Narvalo (Core).sln in Release configuration.
+Task CoreSolution {
+  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Core).sln'
+}
+
+# Lean build for Narvalo.sln in Release configuration.
+Task MainSolution {
+  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo.sln'
+}
+
+# Lean build for Narvalo (Miscs).sln in Release configuration.
+Task MiscsSolution {
+  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln'
+}
+
+# Lean build for Narvalo (Mvp).sln in Release configuration.
+Task MvpSolution {
+  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln'
+}
+
+# .SYNOPSIS
+# Supprime les répertoires 'bin' and 'obj' créés par Visual Studio.
+#
+# .PARAMETER path
+# Répertoire dans lequel résident les projets Visual Studio.
+function Remove-VisualStudioTmpFiles {
+  [CmdletBinding()]
+  param([Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $path)
+
+  Get-ChildItem $path -Include bin,obj -Recurse |
+    Where-Object { Remove-Item $_.FullName -Force -Recurse }
 }
