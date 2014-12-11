@@ -21,8 +21,7 @@
   <PropertyGroup>
     <AfterBuildDependsOn>
       $(AfterBuildDependsOn);
-      DeleteOldDocumentationFile;
-      _CopyArtefacts
+      DeleteOldDocumentationFile
     </AfterBuildDependsOn>
   </PropertyGroup>
 
@@ -61,9 +60,10 @@
 
   <Target Name="DeleteTmpBuildFiles" DependsOnTargets="DeleteAssemblyVersionFile" />
 
+  
   <!-- ### Private Targets ### -->
 
-  <Target Name="_CopyArtefacts">
+  <!--<Target Name="_CopyArtefacts">
     <ItemGroup>
       <_Outputs Include="$(OutDir)$(AssemblyName).dll" />
       <_Outputs Include="$(OutDir)$(AssemblyName).pdb"
@@ -83,33 +83,13 @@
              Condition=" '@(_ContractsOutputs)' != '' And !Exists('$(WorkArtefactsDir)CodeContracts') " />
 
     <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
-  </Target>
+  </Target>-->
 
   <!-- Dynamically generate the assembly version info. -->
-  <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="DeleteAssemblyVersionFile">
+  <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="DeleteAssemblyVersionFile;_GenerateAssemblyVersions">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="high" />
 
-    <Warning Text="Using default assembly version for $(AssemblyName)."
-             Condition=" 
-              '$(AssemblyMajorVersion)' == ''
-              Or '$(AssemblyMinorVersion)' == ''
-              Or '$(AssemblyPatchVersion)' == ''
-              " />
-
     <PropertyGroup>
-      <AssemblyMajorVersion Condition=" '$(AssemblyMajorVersion)' == '' ">1</AssemblyMajorVersion>
-      <AssemblyMinorVersion Condition=" '$(AssemblyMinorVersion)' == '' ">0</AssemblyMinorVersion>
-      <AssemblyPatchVersion Condition=" '$(AssemblyPatchVersion)' == '' ">0</AssemblyPatchVersion>
-      <AssemblyPreRelaseLabel></AssemblyPreRelaseLabel>
-    </PropertyGroup>
-
-    <IncrementBuildAndRevisionNumbers>
-      <Output TaskParameter="BuildNumber" PropertyName="_BuildNumber"/>
-      <Output TaskParameter="RevisionNumber" PropertyName="_RevisionNumber"/>
-    </IncrementBuildAndRevisionNumbers>
-
-    <PropertyGroup>
-      <_AssemblyPreRelaseLabelSuffix Condition=" '$(AssemblyPreRelaseLabel)' != '' ">-$(AssemblyPreRelaseLabel)</_AssemblyPreRelaseLabelSuffix>
       <_AssemblyInfoContent>
         <![CDATA[
 //------------------------------------------------------------------------------
@@ -122,9 +102,9 @@
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
-[assembly: AssemblyVersion("$(AssemblyMajorVersion).$(AssemblyMinorVersion).0.0")]
-[assembly: AssemblyFileVersion("$(AssemblyMajorVersion).$(AssemblyMinorVersion).$(_BuildNumber).$(_RevisionNumber)")]
-[assembly: AssemblyInformationalVersion("$(AssemblyMajorVersion).$(AssemblyMinorVersion).$(AssemblyPatchVersion)$(_AssemblyPreRelaseLabelSuffix)")]
+[assembly: AssemblyVersion("$(AssemblyVersion)")]
+[assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
+[assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
 #endif
 
          ]]>
@@ -147,5 +127,32 @@ using System.Reflection;
     <ItemGroup>
       <Compile Include="$(TmpAssemblyVersionFile)" />
     </ItemGroup>
+  </Target>
+
+  <Target Name="_GenerateAssemblyVersions">
+    <Warning Text="Using default assembly version for $(AssemblyName)."
+             Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
+
+    <PropertyGroup>
+      <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
+      <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
+      <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
+      <PreReleaseLabel></PreReleaseLabel>
+    </PropertyGroup>
+
+    <IncrementBuildAndRevisionNumbers>
+      <Output TaskParameter="BuildNumber" PropertyName="_BuildNumber"/>
+      <Output TaskParameter="RevisionNumber" PropertyName="_RevisionNumber"/>
+    </IncrementBuildAndRevisionNumbers>
+
+    <PropertyGroup>
+      <_PreReleaseLabelSuffix Condition=" '$(PreReleaseLabel)' != '' ">-$(PreReleaseLabel)</_PreReleaseLabelSuffix>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <AssemblyVersion>$(MajorVersion).$(MinorVersion).0.0</AssemblyVersion>
+      <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(_BuildNumber).$(_RevisionNumber)</AssemblyFileVersion>
+      <AssemblyInformationalVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)$(_PreReleaseLabelSuffix)</AssemblyInformationalVersion>
+    </PropertyGroup>
   </Target>
 </Project>

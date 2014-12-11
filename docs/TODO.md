@@ -14,7 +14,6 @@ Build Infrastructure
 
 - Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
-- Review PEVerify & NuGet parameters -repository
 - Update Copyright, add build time.
 - Check 64bit
 - XUnit 64bit

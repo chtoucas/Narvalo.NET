@@ -3,6 +3,7 @@
 #
 
 Properties {
+  $project = '.\Make.proj'
   $options = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
   $logfile = "$PSScriptRoot\make.log"
   $normalFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=normal;encoding=utf-8"
@@ -29,41 +30,41 @@ Task HardCleanWorkDir {
 
 # Run tests for public projects in Debug configuration.
 Task Minimal {
-  MSBuild $options '.\Make.proj' '/t:RunTests' '/p:SkipPrivateProjects=true;SkipBuildGeneratedVersion=true'
+  MSBuild $options $project '/t:RunTests' '/p:SkipPrivateProjects=true;SkipBuildGeneratedVersion=true'
 }
 
 # Continuous integration build in Release configuration.
 Task CI {
-  MSBuild $options $detailedFileLogger '.\Make.proj' '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
+  MSBuild $options $detailedFileLogger $project '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
 } -PostAction {
   Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
 }
 
 # Create packages for release: sign assembles and use Release configuration.
 Task Package -depends HardCleanWorkDir {
-  MSBuild $options $normalFileLogger '.\Make.proj' '/t:Clean;Build;VerifyBuild;RunTests' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
+  MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Package' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
 } -PostAction {
   Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
 }
 
 # Lean build for Narvalo (Core).sln in Release configuration.
 Task CoreSolution {
-  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Core).sln'
+  MSBuild $options $project '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Core).sln'
 }
 
 # Lean build for Narvalo.sln in Release configuration.
 Task MainSolution {
-  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo.sln'
+  MSBuild $options $project '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo.sln'
 }
 
 # Lean build for Narvalo (Miscs).sln in Release configuration.
 Task MiscsSolution {
-  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln'
+  MSBuild $options $project '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln'
 }
 
 # Lean build for Narvalo (Mvp).sln in Release configuration.
 Task MvpSolution {
-  MSBuild $options '.\Make.proj' '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln'
+  MSBuild $options $project '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln'
 }
 
 # .SYNOPSIS

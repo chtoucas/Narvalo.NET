@@ -125,6 +125,10 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
+  <Target Name="Package" DependsOnTargets="Build">
+    <Warning Text="Not yet implemented." />
+  </Target>
+
 
   <!-- ### Helpers ### -->
 
@@ -143,7 +147,7 @@
   <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -NonInteractive -Verbosity quiet"
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory $(RepositoryRoot)packages -ConfigFile $(RepositoryRoot).nuget\NuGet.Config -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true" />
   </Target>
 
