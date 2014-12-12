@@ -125,8 +125,13 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="Package" DependsOnTargets="Build">
-    <Warning Text="Not yet implemented." />
+  <!-- Work in progress. -->
+  <Target Name="Publish">
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="CreateNuspec"
+             StopOnFirstFailure="true" />
   </Target>
 
 

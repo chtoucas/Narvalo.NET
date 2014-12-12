@@ -63,7 +63,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Mvp.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

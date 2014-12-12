@@ -3,9 +3,9 @@
 @echo off
 @setlocal
 
-@set Verbosity=minimal
-@set Parameters=ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
+@set Parameters=SignAssembly=true;Configuration=Debug;SkipPrivateProjects=true
 @set Targets=Build
+@set Verbosity=minimal
 
 :Build
 

@@ -87,6 +87,7 @@
     <Compile Include="Resolvers\TypeKeyedResolverCache`1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Mvp.nuspec" />
     <None Include="Narvalo.Mvp.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

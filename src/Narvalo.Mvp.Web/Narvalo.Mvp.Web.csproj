@@ -61,6 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Mvp.Web.nuspec" />
     <None Include="Narvalo.Mvp.Web.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

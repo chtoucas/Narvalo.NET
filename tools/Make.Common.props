@@ -6,8 +6,10 @@
     - SignAssembly
     - SkipBuildGeneratedVersion
     - SolutionFile
-    
+
     Other options may be found in Shared.props.
+
+    If LeanRun is true, SignAssembly and SkipBuildGeneratedVersion are ignored.
   -->
 
   <!-- Import shared properties. -->
@@ -36,8 +38,7 @@
     <BaseIntermediateOutputPath>$(WorkRoot)obj\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
 
-    <BaseOutputPath>$(WorkRoot)bin\</BaseOutputPath>
-    <OutputPath>$(BaseOutputPath)$(Configuration)\</OutputPath>
+    <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
   </PropertyGroup>
 
   <!-- Define the PEVerifyDummyOutput property. -->
@@ -67,15 +68,6 @@
 
   <!-- Define the BuildProperties property. -->
   <PropertyGroup>
-    <!--
-      I set both OutDir and OutputPath, but I guess only one is really necessary.
-      If I had to keep one it ought to be OutDir. More documentation here:
-        %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
-      
-      WARNING: When building a PCL project, MSBuild places its output inside
-      a subdirectory of OutDir. To correct this, we instruct MSBuild to
-      use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
-    -->
     <BuildProperties>
       BuildInParallel=$(BuildInParallel);
       Configuration=$(Configuration);
@@ -87,10 +79,10 @@
 
   <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
     <!--
-      I set both OutDir and OutputPath, but I guess only one is really necessary.
-      If I had to keep one it ought to be OutDir. More documentation here:
+      There is also a legacy OutputPath property but this is no longer in use.
+      More documentation here:
         %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
-      
+
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of OutDir. To correct this, we instruct MSBuild to
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
@@ -99,8 +91,7 @@
       $(BuildProperties);
 
       BaseIntermediateOutputPath=$(BaseIntermediateOutputPath);
-      OutDir=$(OutputPath);
-      OutputPath=$(OutputPath);
+      OutDir=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
 
       CustomBeforeNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;

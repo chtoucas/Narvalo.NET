@@ -41,8 +41,8 @@ Task CI {
 }
 
 # Create packages for release: sign assembles and use Release configuration.
-Task Package -depends HardCleanWorkDir {
-  MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Package' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
+Task Publish -depends HardCleanWorkDir {
+  MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Publish' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
 } -PostAction {
   Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
 }

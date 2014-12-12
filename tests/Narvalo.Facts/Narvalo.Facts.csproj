@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\MonadFacts.tt" />
-    <None Include="Narvalo.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

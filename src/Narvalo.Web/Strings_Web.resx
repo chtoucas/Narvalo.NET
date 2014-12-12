@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
-    <value>Invalid provider type.</value>
-  </data>
-  <data name="WebConfigurationManager_SectionNotFoundFormat" xml:space="preserve">
-    <value>The &lt;{0}&gt; section is not defined in your web.config!</value>
-  </data>
   <data name="AssetManager_DefaultProviderNotConfigured" xml:space="preserve">
     <value>The default AssetProvider was not specified.</value>
   </data>
   <data name="AssetManager_DefaultProviderNotFound" xml:space="preserve">
     <value>The default AssetProvider was not found.</value>
   </data>
-  <data name="WebConfigurationManager_SectionNotFoundInPathFormat" xml:space="preserve">
-    <value>The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!</value>
+  <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
+    <value>Invalid provider type.</value>
   </data>
   <data name="HttpHandlerBase_InvalidHttpMethodFormat" xml:space="preserve">
     <value>Invalid HTTP method: {0}.</value>
   </data>
   <data name="HttpHandlerBase_InvalidRequest" xml:space="preserve">
     <value>Invalid request.</value>
+  </data>
+  <data name="WebConfigurationManager_SectionNotFoundFormat" xml:space="preserve">
+    <value>The &lt;{0}&gt; section is not defined in your web.config!</value>
+  </data>
+  <data name="WebConfigurationManager_SectionNotFoundInPathFormat" xml:space="preserve">
+    <value>The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!</value>
   </data>
 </root>

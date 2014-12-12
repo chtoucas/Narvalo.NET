@@ -8,24 +8,18 @@
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>
-      
-    </summary>
-    <description>
-This package contains the Narvalo.Org core utilities.
-
-*** Until version 1.0, backward compatibility is not guaranteed ***
-    </description>
-    <releaseNotes>$releaseNotes$</releaseNotes>
+    <title>XXX</title>
+    <summary>XXX</summary>
+    <description>XXX</description>
+    <releaseNotes>XXX</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>Maybe, Option, Linq, Monad</tags>
     <language>en-US</language>
   </metadata>
   <files>
-    <file src="bin\$configuration$\$id$.dll" target="lib\portable-net45+netcore45+wpa81+wp8\" />
-    <file src="bin\$configuration$\$id$.pdb" target="lib\portable-net45+netcore45+wpa81+wp8\" />
-    <file src="bin\$configuration$\$id$.xml" target="lib\portable-net45+netcore45+wpa81+wp8\" />
-    <file src="bin\$configuration$\CodeContracts\$id$.Contracts.dll" target="lib\portable-net45+netcore45+wpa81+wp8\CodeContracts\" />
-    <file src="bin\$configuration$\CodeContracts\$id$.Contracts.pdb" target="lib\portable-net45+netcore45+wpa81+wp8\CodeContracts\" />
+    <file src="Narvalo.Core.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\" />
+    <file src="Narvalo.Core.pdb" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\" />
+    <file src="Narvalo.Core.xml" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\" />
+    <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\CodeContracts\" />
   </files>
 </package>

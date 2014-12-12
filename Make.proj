@@ -5,8 +5,8 @@
   <!-- Define the ProjectsToBuild property. -->
   <Choose>
     <When Condition=" '$(SolutionFile)' != '' ">
-      <!-- WARNING: Solutions use the Configuration Manager which can lead 
-           to unexpected behaviour. For instance, a project might not have been 
+      <!-- WARNING: Solutions use the Configuration Manager which can lead
+           to unexpected behaviour. For instance, a project might not have been
            selected for building. -->
       <PropertyGroup>
         <!-- Solutions use "Any CPU" instead of "AnyCPU". -->
@@ -16,13 +16,13 @@
         <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
       </ItemGroup>
     </When>
-    
+
     <When Condition=" '$(ProjectFile)' != '' ">
       <ItemGroup>
         <ProjectsToBuild Include="$(ProjectFile)"></ProjectsToBuild>
       </ItemGroup>
     </When>
-    
+
     <When Condition=" '$(SkipPrivateProjects)' == 'true' ">
       <ItemGroup>
         <!-- Librairies. -->
@@ -38,7 +38,7 @@
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
       </ItemGroup>
     </When>
-    
+
     <Otherwise>
       <ItemGroup>
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)samples\**\*.csproj" />

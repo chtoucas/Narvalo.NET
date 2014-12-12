@@ -129,7 +129,6 @@
     <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
-    <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\DefaultWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />
@@ -172,6 +171,7 @@
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Web.nuspec" />
     <None Include="Narvalo.Web.props" />
     <None Include="packages.config" />
   </ItemGroup>

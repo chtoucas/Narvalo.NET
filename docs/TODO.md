@@ -21,6 +21,7 @@ Build Infrastructure
 - If PEVerify fails, does the error message appear on the command prompt.
 - Make unnecessary to add StyleCop settings to the project.
 - Add $(SolutionDir) to BuildProperties?
+- https://github.com/CatenaLogic/GitLink
 - Nice to have:
   * SecAnnotate
   * Code Coverage + Report Generator.

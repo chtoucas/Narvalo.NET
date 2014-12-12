@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- 
+  <!--
     This file is injected at the end of Narvalo.Common.targets by Make.proj.
   -->
 
   <PropertyGroup>
     <!-- WARNING: This property can not be defined in one of the .props files,
-         as it should, since IntermediateOutputPath is only initialized 
+         as it should, since IntermediateOutputPath is only initialized
          after importing Microsoft.Common.targets. -->
     <TmpAssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</TmpAssemblyVersionFile>
   </PropertyGroup>
@@ -51,6 +51,21 @@
     <Delete Files="$(TmpAssemblyVersionFile)" />
   </Target>
 
+  <!-- TODO: Move this to Make.CustomAfter.props. -->
+  <PropertyGroup>
+    <Nuspec>$(MSBuildProjectDirectory)\$(AssemblyName).nuspec</Nuspec>
+  </PropertyGroup>
+  
+  <!-- TODO: Incremental build. -->
+  <Target Name="CreateNuspec" Condition=" Exists('$(Nuspec)') " DependsOnTargets="_GenerateAssemblyVersions">
+    <Message Text="Creating NuGet spec for $(AssemblyName)..." Importance="high" />
+
+    <!-- TODO: Remove previous one... -->
+    <CreateNuspec NuSpec="$(Nuspec)"
+                  OutFile="$(OutDir)$(AssemblyName).nuspec"
+                  Version="$(AssemblyInformationalVersion)" />
+  </Target>
+
   <Target Name="DeleteOldDocumentationFile">
     <Message Text="Deleting original documentation files (before the Code Contracts transformation)..."
              Importance="normal" />
@@ -60,7 +75,7 @@
 
   <Target Name="DeleteTmpBuildFiles" DependsOnTargets="DeleteAssemblyVersionFile" />
 
-  
+
   <!-- ### Private Targets ### -->
 
   <!--<Target Name="_CopyArtefacts">
@@ -137,7 +152,8 @@ using System.Reflection;
       <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
       <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
       <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
-      <PreReleaseLabel></PreReleaseLabel>
+      <!-- REVIEW: If the version is less than 1, there is really no reason to also use a pre-release label. -->
+      <PreReleaseLabel Condition=" $(MajorVersion) &lt; 1 "></PreReleaseLabel>
     </PropertyGroup>
 
     <IncrementBuildAndRevisionNumbers>

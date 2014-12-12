@@ -53,4 +53,43 @@ return true;
       </Code>
     </Task>
   </UsingTask>
+
+  <UsingTask TaskName="CreateNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <Nuspec ParameterType="System.String" Required="true" />
+      <Version ParameterType="System.String" Required="true" />
+      <OutFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+// REVIEW: I guess these checks are unnecessary.        
+if (String.IsNullOrEmpty(Nuspec)) {
+    Log.LogError("Nuspec can not be null or empty.");
+    return false;
+}
+if (String.IsNullOrEmpty(OutFile)) {
+    Log.LogError("OutFile can not be null or empty.");
+    return false;
+}
+
+try {
+    string template = File.ReadAllText(Nuspec)
+      .Replace("$version$", Version);
+
+    File.WriteAllText(OutFile, template);
+}
+catch (IOException ex) {
+    Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 </Project>
