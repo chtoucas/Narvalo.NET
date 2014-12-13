@@ -1,4 +1,4 @@
-:: Quick and dirty runner for Make.proj.
+:: Create NuGet packages.
 
 @echo off
 @setlocal
