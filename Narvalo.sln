@@ -65,8 +65,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		make.cmd = make.cmd
 		make.ps1 = make.ps1
 		Narvalo.proj = Narvalo.proj
-		Narvalo.ps1 = Narvalo.ps1
 		package.cmd = package.cmd
+		PSakefile.ps1 = PSakefile.ps1
 		publish.ps1 = publish.ps1
 		README.md = README.md
 	EndProjectSection
@@ -100,7 +100,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{23
 		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
 		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
 		etc\Narvalo.nuspec = etc\Narvalo.nuspec
-		etc\Publish.props = etc\Publish.props
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		etc\Strict.ruleset = etc\Strict.ruleset
@@ -125,7 +124,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Release Engineering", "0
 	ProjectSection(SolutionItems) = preProject
 		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
 		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
-		etc\Publish.props = etc\Publish.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp.Web", "Narvalo.Mvp.Web", "{AF7F2203-7256-4D9D-A329-07E4491265CD}"

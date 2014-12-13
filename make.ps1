@@ -7,4 +7,4 @@ Set-StrictMode -Version Latest
 Get-Module psake | Remove-Module
 Import-Module (Get-ChildItem "$PSScriptRoot\packages\psake.*\tools\psake.psm1" | Select-Object -First 1)
 
-Invoke-psake "$PSScriptRoot\Narvalo.ps1" $task
+Invoke-psake "$PSScriptRoot\PSakefile.ps1" $task

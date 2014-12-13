@@ -10,7 +10,7 @@
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Narvalo.proj" /t:Clean;Build;VerifyBuild;RunTests;Package /p:Configuration=Release;SkipPrivateProjects=true;SignAssembly=true /v:m /m /nr:false /fileLogger /fileloggerparameters:logfile=%LogFile%;verbosity=normal;encoding=utf-8
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Narvalo.proj" /t:Clean;Build;VerifyBuild;RunTests;Package /p:Configuration=Release;SkipPrivateProjects=true;SignAssembly=true /verbosity:minimal /maxcpucount /nodeReuse:false /fileLogger /fileloggerparameters:logfile=%LogFile%;verbosity=normal;encoding=utf-8
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess
