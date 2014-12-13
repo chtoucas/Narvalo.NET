@@ -3,10 +3,15 @@
          InitialTargets="__InitializeMakeCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.Common.props by Make.proj.
+    This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
   -->
 
-  <!-- Overrides for properties defined in Narvalo.Common.props. -->
+  <!-- Import NuGet publication profile properties. -->
+  <Import Project="$(RepositorySettingsDir)Publish.props" />
+
+
+  <!-- ### Overrides for properties defined in Narvalo.Common.props ### -->
+
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
@@ -27,10 +32,6 @@
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
-    <BuildGeneratedVersion>false</BuildGeneratedVersion>
-  </PropertyGroup>
-
   <!-- Sign the assemblies. -->
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
@@ -39,15 +40,26 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 
-  <!-- Custom Narvalo project properties. -->
+
+  <!-- ### Custom Narvalo project properties ### -->
+
+  <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+    <BuildGeneratedVersion>false</BuildGeneratedVersion>
+  </PropertyGroup>
+
   <PropertyGroup>
     <!-- WARNING: This property requires IntermediateOutputPath to be initialized
-         which is only true since we add this property via Make.proj, otherwise
+         which is only true since we add this property via Narvalo.proj, otherwise
          it is only available after importing Microsoft.Common.targets. -->
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
 
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+  </PropertyGroup>
 
+
+  <!-- ### NuGet packaging ### -->
+
+  <PropertyGroup>
     <NuGetProjectDirectory>$(NuGetProjectsRoot)$(AssemblyName)\</NuGetProjectDirectory>
     <NuGetProjectFile>$(NuGetProjectDirectory)$(AssemblyName).nuproj</NuGetProjectFile>
 
@@ -56,13 +68,14 @@
 
     <NuGetId>$(AssemblyName)</NuGetId>
     <NuGetSpecFile>$(OutDir)$(AssemblyName).nuspec</NuGetSpecFile>
-    <NuGetPkgFile>$(WorkArtefactsDir)$(NuGetId).nupkg</NuGetPkgFile>
   </PropertyGroup>
 
   <!-- Import NuGet project properties. -->
   <Import Project="$(NuGetProjectFile)" Condition=" '$(NuGetProjectExists)' == 'true' " />
 
-  <!-- T4 settings. -->
+
+  <!-- ### T4 settings ### -->
+
   <PropertyGroup>
     <!-- Force T4 re-generation on build.
          REVIEW: Currently disabled since our T4 templates require VS hosting. -->

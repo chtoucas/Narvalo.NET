@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0"
+         InitialTargets="__InitializeMakeCustomAfterTargets"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This file is injected at the end of Narvalo.Common.targets by Make.proj.
+    This file is injected at the end of Narvalo.Common.targets by Narvalo.proj.
   -->
 
   <PropertyGroup>
@@ -41,7 +43,9 @@
     <Delete Files="$(AssemblyVersionFile)" />
   </Target>
 
-  <Target Name="DeleteNupkgFile">
+  <Target Name="DeleteNupkgFile" 
+          Condition=" '$(NuGetProjectExists)' == 'true' "
+          DependsOnTargets="_GetNuGetPkgFile">
     <Message Text="Deleting nupkg file..." Importance="normal" />
 
     <Delete Files="$(NuGetPkgFile)" />
@@ -59,8 +63,6 @@
     <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
   </Target>
 
-  <Target Name="Publish" DependsOnTargets="Build;CreateNupkg" />
-
   <!-- 
     Only create a NuGet package if:
     - A NuGet project exists.
@@ -68,18 +70,26 @@
     - The assembly is signed, ie SignAssembly is true.
     - We have a meaningful version, ie BuildGeneratedVersion is true. 
   -->
-  <Target Name="CreateNupkg"
+  <Target Name="Package"
           Condition=" 
             '$(NuGetProjectExists)' == 'true' 
             And '$(Configuration)' == 'Release'
             And '$(SignAssembly)' == 'true'
             And '$(BuildGeneratedVersion)' == 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;_WriteNuspec">
-    <Message Text="Creating NuGet package for $(AssemblyName)..." Importance="high" />
+    <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
     <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
     <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuGetSpecFile)&quot; -o $(WorkArtefactsDir) -NonInteractive $(NuGetCommandAdditionalArgs) -Verbosity quiet"
           LogStandardErrorAsError="true" />
+  </Target>
+
+  <Target Name="Publish"
+          Condition=" '$(NuGetProjectExists)' == 'true' And '$(PublishPackage)' == 'true' "
+          DependsOnTargets="Package;_GetNuGetPkgFile">
+    <Message Text="Publishing package for $(AssemblyName)..." Importance="high" />
+
+    <Copy SourceFiles="$(NuGetPkgFile)" DestinationFolder="$(WorkStagingDir)" ContinueOnError="false" />
   </Target>
 
 
@@ -153,6 +163,12 @@ using System.Reflection;
     </ReadDependenciesFromPackagesConfig>
   </Target>
 
+  <Target Name="_GetNuGetPkgFile" DependsOnTargets="_GenerateAssemblyVersions">
+    <PropertyGroup>
+      <NuGetPkgFile>$(WorkArtefactsDir)$(NuGetId).$(AssemblyInformationalVersion).nupkg</NuGetPkgFile>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="_GetProjectDependencies" DependsOnTargets="_ReadProjectDependency">
     <Message Text="Reading project references for $(AssemblyName)..." Importance="normal" />
 
@@ -210,5 +226,16 @@ using System.Reflection;
                  Copyright="$(NuGetCopyright)"
                  Tags="$(NuGetTags)"
                  Dependencies="$(ProjectDependencies)$(NuGetDependencies)" />
+  </Target>
+
+  <Target Name="__InitializeMakeCustomAfterTargets">
+    <ItemGroup>
+      <_PublishPackage Include="@(PublishPackage)" Condition=" '%(Identity)' == '$(AssemblyName)' " />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <PublishPackage Condition=" '@(_PublishPackage->Count())' == '1' ">true</PublishPackage>
+      <PublishPackage Condition=" '$(PublishPackage)' != 'true' ">false</PublishPackage>
+    </PropertyGroup>
   </Target>
 </Project>

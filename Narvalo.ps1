@@ -3,7 +3,7 @@
 #
 
 Properties {
-  $project = '.\Make.proj'
+  $project = '.\Narvalo.proj'
   $options = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
   $logfile = "$PSScriptRoot\make.log"
   $normalFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=normal;encoding=utf-8"
@@ -14,15 +14,8 @@ Properties {
 
 Task default -depends Minimal
 
-# Remove all bin and obj directories created by Visual Studio.
-Task HardCleanVisualStudio {
-  Remove-VisualStudioTmpFiles "$PSScriptRoot\samples\"
-  Remove-VisualStudioTmpFiles "$PSScriptRoot\src\"
-  Remove-VisualStudioTmpFiles "$PSScriptRoot\tests\"
-}
-
 # Remove the work directory.
-Task HardCleanWorkDir {
+Task Clean {
   if (Test-Path $workDir) {
     Remove-Item $workDir -Force -Recurse
   }
@@ -35,15 +28,17 @@ Task Minimal {
 
 # Continuous integration build in Release configuration.
 Task CI {
-  MSBuild $options $detailedFileLogger $project '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
+  MSBuild $options $detailedFileLogger $project '/t:Build;VerifyBuild;RunTests;Package' '/p:Configuration=Release;SignAssembly=true'
 } -PostAction {
+  # We assume this is a terminal task. No more log to be written.
   Move-Item $logfile $workArtefactsDir
 }
 
 # Create packages for release: sign assembles and use Release configuration.
-Task Publish -depends HardCleanWorkDir {
-  MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Publish' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
+Task Package -depends Clean {
+  MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Package' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
 } -PostAction {
+  # We assume this is a terminal task. No more log to be written.
   Move-Item $logfile $workArtefactsDir
 }
 
@@ -65,17 +60,4 @@ Task MiscsSolution {
 # Lean build for Narvalo (Mvp).sln in Release configuration.
 Task MvpSolution {
   MSBuild $options $project '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln'
-}
-
-# .SYNOPSIS
-# Supprime les répertoires 'bin' and 'obj' créés par Visual Studio.
-#
-# .PARAMETER path
-# Répertoire dans lequel résident les projets Visual Studio.
-function Remove-VisualStudioTmpFiles {
-  [CmdletBinding()]
-  param([Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $path)
-
-  Get-ChildItem $path -Include bin,obj -Recurse |
-    Where-Object { Remove-Item $_.FullName -Force -Recurse }
 }

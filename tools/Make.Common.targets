@@ -7,7 +7,7 @@
     Prerequisites:
     - @(ProjectsToBuild)
     
-    Each master project (e.g. Make.proj) creates its own instance of @(ProjectsToBuild).
+    Each master project (e.g. Narvalo.proj) creates its own instance of @(ProjectsToBuild).
     
     Combinations that do not really make sense:
     - No need to set LeanRun to true when targeting LeanBuild.
@@ -35,9 +35,11 @@
 
   <Target Name="Clean">
     <!-- Artefacts created during a build. 
-         Do not remove the entire WorkArtefactsDir, other targets may depend on it. -->
+         Do not remove the entire WorkArtefactsDir or WorkStagingDir, 
+         other targets may depend on it. -->
     <ItemGroup>
       <_FilesToDelete Include="$(WorkArtefactsDir)\**\*" />
+      <_FilesToDelete Include="$(WorkStagingDir)\**\*" />
       <_FilesToDelete Include="$(PEVerifyDummyOutput)" />
     </ItemGroup>
 
@@ -111,9 +113,19 @@
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <Target Name="Publish"
+  <Target Name="Package"
           Condition=" '$(LeanRun)' != 'true' "
           DependsOnTargets="Build">
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="Package"
+             StopOnFirstFailure="true" />
+  </Target>
+
+  <Target Name="Publish"
+          Condition=" '$(LeanRun)' != 'true' "
+          DependsOnTargets="Package">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -207,5 +219,6 @@
   <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(LeanRun)' != 'true' ">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
+    <MakeDir Directories="$(WorkStagingDir)" Condition=" !Exists($(WorkStagingDir)) " />
   </Target>
 </Project>

@@ -38,6 +38,7 @@
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
+    <WorkStagingDir>$(WorkRoot)staging\</WorkStagingDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -114,7 +115,8 @@
       NuGetCommand=$(NuGetCommand);
       NuGetProjectsRoot=$(NuGetProjectsRoot);
       SignAssembly=$(SignAssembly);
-      WorkArtefactsDir=$(WorkArtefactsDir)
+      WorkArtefactsDir=$(WorkArtefactsDir);
+      WorkStagingDir=$(WorkStagingDir)
     </BuildProperties>
   </PropertyGroup>
 

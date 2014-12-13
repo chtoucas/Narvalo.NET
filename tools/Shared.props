@@ -24,14 +24,14 @@
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
     <!-- The reuse of RepositoryRoot allows to speed up things a little bit
-         when building from Make.proj.
+         when building from Narvalo.proj.
 
-         Make.proj imports Make.Common.props then Shared.props;
+         Narvalo.proj imports Make.Common.props then Shared.props;
          RepositoryRoot is not already set, we initialize it.
-         When Make.proj builds a child project, it injects RepositoryRoot
+         When Narvalo.proj builds a child project, it injects RepositoryRoot
          (see BuildProperties in Make.Common.props). This time when the child
          project imports Shared.props, RepositoryRoot is already set. -->
-    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\</RepositoryRoot>
+    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\</RepositoryRoot>
 
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>

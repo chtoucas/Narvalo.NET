@@ -12,18 +12,16 @@ In Progress
 Build Infrastructure
 --------------------
 
+- No Internals
 - PSake does not report failure correctly
-- Add Symbols?
 - Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
 - Update Copyright, add build time.
 - Check 64bit
 - XUnit 64bit
 - T4 re-generation has been disabled since it requires VS hosting.
-- If PEVerify fails, does the error message appear on the command prompt.
 - Make unnecessary to add StyleCop settings to the project.
 - Add $(SolutionDir) to BuildProperties?
-- https://github.com/CatenaLogic/GitLink
 - Nice to have:
   * SecAnnotate
   * Code Coverage + Report Generator.
