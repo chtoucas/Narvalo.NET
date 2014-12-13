@@ -126,11 +126,7 @@
   <Target Name="Publish"
           Condition=" '$(LeanRun)' != 'true' "
           DependsOnTargets="Package">
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Publish"
-             StopOnFirstFailure="true" />
+    <Warning Text="NuGet packages are ready for publication. There is one last step... now run the publish.ps1 script." />
   </Target>
 
 

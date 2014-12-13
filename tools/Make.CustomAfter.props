@@ -68,10 +68,24 @@
 
     <NuGetId>$(AssemblyName)</NuGetId>
     <NuGetSpecFile>$(OutDir)$(AssemblyName).nuspec</NuGetSpecFile>
+
+    <!-- 
+      Only create a NuGet package if:
+      - A NuGet project exists.
+      - We are running a Release Build, ie Release Configuration.
+      - The assembly is signed, ie SignAssembly is true.
+      - We have a meaningful version, ie BuildGeneratedVersion is true. 
+    -->
+    <SkipPackage Condition=" 
+      '$(NuGetProjectExists)' == 'true' 
+      And '$(Configuration)' == 'Release'
+      And '$(SignAssembly)' == 'true'
+      And '$(BuildGeneratedVersion)' == 'true' ">false</SkipPackage>
+    <SkipPackage Condition=" '$(SkipPackage)' != 'false' ">true</SkipPackage>
   </PropertyGroup>
 
   <!-- Import NuGet project properties. -->
-  <Import Project="$(NuGetProjectFile)" Condition=" '$(NuGetProjectExists)' == 'true' " />
+  <Import Project="$(NuGetProjectFile)" Condition=" '$(SkipPackage)' != 'true' " />
 
 
   <!-- ### T4 settings ### -->

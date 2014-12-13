@@ -61,19 +61,8 @@
     <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
   </Target>
 
-  <!-- 
-    Only create a NuGet package if:
-    - A NuGet project exists.
-    - We are running a Release Build, Configuration is Release.
-    - The assembly is signed, ie SignAssembly is true.
-    - We have a meaningful version, ie BuildGeneratedVersion is true. 
-  -->
   <Target Name="Package"
-          Condition=" 
-            '$(NuGetProjectExists)' == 'true' 
-            And '$(Configuration)' == 'Release'
-            And '$(SignAssembly)' == 'true'
-            And '$(BuildGeneratedVersion)' == 'true' "
+          Condition=" '$(SkipPackage)' != 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;_WriteNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
@@ -82,32 +71,8 @@
           LogStandardErrorAsError="true" />
   </Target>
 
-  <Target Name="Publish" DependsOnTargets="Package">
-    
-  </Target>
-
   
   <!-- ### Private Targets ### -->
-
-  <Target Name="_CopyArtefacts">
-    <ItemGroup>
-      <_Outputs Include="$(OutDir)$(AssemblyName).dll" />
-      <_Outputs Include="$(OutDir)$(AssemblyName).pdb"
-                Condition=" Exists('$(OutDir)$(AssemblyName).pdb') " />
-      <_Outputs Include="$(OutDir)$(AssemblyName).xml"
-                Condition=" Exists('$(OutDir)$(AssemblyName).xml') " />
-      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll"
-                Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll') " />
-      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb"
-                Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb') " />
-    </ItemGroup>
-    
-    <Copy SourceFiles="@(_Outputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
-    <MakeDir Directories="$(WorkArtefactsDir)CodeContracts"
-             Condition=" '@(_ContractsOutputs)' != '' And !Exists('$(WorkArtefactsDir)CodeContracts') " />
-    
-    <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
-  </Target>
 
   <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="_GenerateAssemblyVersions">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
