@@ -3,7 +3,7 @@
          InitialTargets="__InitializeMakeCustomAfterProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
-    This file is injected at the end of Narvalo.Common.props by Narvalo.proj.
+    This file is injected at the end of Narvalo.Common.props by Make.proj.
   -->
 
   <!-- Import NuGet publication profile properties. -->
@@ -49,7 +49,7 @@
 
   <PropertyGroup>
     <!-- WARNING: This property requires IntermediateOutputPath to be initialized
-         which is only true since we add this property via Narvalo.proj, otherwise
+         which is only true since we add this property via Make.proj, otherwise
          it is only available after importing Microsoft.Common.targets. -->
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
 

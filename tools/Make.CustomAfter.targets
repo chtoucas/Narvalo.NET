@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This file is injected at the end of Narvalo.Common.targets by Narvalo.proj.
+    This file is injected at the end of Narvalo.Common.targets by Make.proj.
   -->
 
   <PropertyGroup>
@@ -86,8 +86,28 @@
     
   </Target>
 
-
+  
   <!-- ### Private Targets ### -->
+
+  <Target Name="_CopyArtefacts">
+    <ItemGroup>
+      <_Outputs Include="$(OutDir)$(AssemblyName).dll" />
+      <_Outputs Include="$(OutDir)$(AssemblyName).pdb"
+                Condition=" Exists('$(OutDir)$(AssemblyName).pdb') " />
+      <_Outputs Include="$(OutDir)$(AssemblyName).xml"
+                Condition=" Exists('$(OutDir)$(AssemblyName).xml') " />
+      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll"
+                Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll') " />
+      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb"
+                Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb') " />
+    </ItemGroup>
+    
+    <Copy SourceFiles="@(_Outputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
+    <MakeDir Directories="$(WorkArtefactsDir)CodeContracts"
+             Condition=" '@(_ContractsOutputs)' != '' And !Exists('$(WorkArtefactsDir)CodeContracts') " />
+    
+    <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
+  </Target>
 
   <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="_GenerateAssemblyVersions">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />

@@ -13,7 +13,6 @@ Build Infrastructure
 --------------------
 
 - No Internals
-- PSake does not report failure correctly
 - Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
 - Update Copyright, add build time.

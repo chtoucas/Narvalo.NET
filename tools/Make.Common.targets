@@ -7,7 +7,7 @@
     Prerequisites:
     - @(ProjectsToBuild)
     
-    Each master project (e.g. Narvalo.proj) creates its own instance of @(ProjectsToBuild).
+    Each master project (e.g. Make.proj) creates its own instance of @(ProjectsToBuild).
     
     Combinations that do not really make sense:
     - No need to set LeanRun to true when targeting LeanBuild.

@@ -16,7 +16,7 @@
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
-      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.proj))\tools\Narvalo.Common.props" />
+      <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\tools\Narvalo.Common.props" />
     
     WARNING: Make sure the import is located just before Microsoft targets.
   -->
@@ -68,7 +68,7 @@
     <ErrorReport>prompt</ErrorReport>
     <FileAlignment>512</FileAlignment>
 
-    <!-- Only released assemblies are signed. See Narvalo.proj. -->
+    <!-- Only released assemblies are signed. See Make.proj. -->
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
