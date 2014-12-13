@@ -3,7 +3,7 @@
 @echo off
 @setlocal
 
-@set Parameters=SignAssembly=true;Configuration=Debug;SkipPrivateProjects=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
+@set Parameters=Configuration=Debug;BuildGeneratedVersion=true;SignAssembly=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
 @set Targets=Publish
 @set Verbosity=minimal
 

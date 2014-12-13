@@ -9,6 +9,7 @@
     - CustomAfterNarvaloCommonProps
     - CustomBeforeNarvaloCommonTargets
     - CustomAfterNarvaloCommonTargets
+    - ConfigurationVariant
     - DummyGeneratedVersion
     
     Other options may be found in Shared.props.
@@ -47,7 +48,7 @@
     <DummyGeneratedVersion Condition=" '$(DummyGeneratedVersion)' != 'true' ">false</DummyGeneratedVersion>
   </PropertyGroup>
 
-  
+
   <!-- ### Microsoft Common Properties ### -->
 
   <PropertyGroup>
@@ -60,7 +61,7 @@
     <!-- Disable compiler warnings for missing documentation. -->
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\$(Configuration)$(ConfigurationVariant)\</OutputPath>
     <RegisterForComInterop>false</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
 
@@ -111,7 +112,7 @@
   <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
     <DefineConstants>$(DefineConstants);DUMMY_GENERATED_VERSION</DefineConstants>
   </PropertyGroup>
-  
+
 
   <!-- ### Additional Files ### -->
 

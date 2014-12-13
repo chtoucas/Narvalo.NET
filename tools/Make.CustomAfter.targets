@@ -62,6 +62,13 @@
     <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
   </Target>
 
+  <!-- 
+    TODO:
+    - if no BuildGeneratedVersion, no nuspec
+    - create nupkg
+    - if no nuproj, copy artefacts
+    - define NO_INTERNALS
+  -->
   <Target Name="Publish" DependsOnTargets="Build;_WriteNuspec" />
 
 

@@ -28,19 +28,23 @@
 
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
+    <!-- This property is useful to distinguish between variants of the same base configuration. -->
+    <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
+
     <NuGetProjectRoot>$(RepositoryRoot)src\NuGet\</NuGetProjectRoot>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
-    <WorkArtefactsDir>$(WorkRoot)artefacts\$(Configuration)\</WorkArtefactsDir>
+    <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
   <PropertyGroup>
     <BaseIntermediateOutputPath>$(WorkRoot)obj\</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)$(ConfigurationVariant)\</IntermediateOutputPath>
 
-    <OutDir>$(WorkRoot)bin\$(Configuration)\</OutDir>
+    <OutDir>$(WorkRoot)bin\$(Configuration)$(ConfigurationVariant)\</OutDir>
   </PropertyGroup>
 
   <!-- Define the PEVerifyDummyOutput property. -->
@@ -93,6 +97,7 @@
       $(BuildProperties);
 
       BaseIntermediateOutputPath=$(BaseIntermediateOutputPath);
+      IntermediateOutputPath=$(IntermediateOutputPath);
       OutDir=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
 
@@ -102,6 +107,7 @@
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
 
       BuildGeneratedVersion=$(BuildGeneratedVersion);
+      ConfigurationVariant=$(ConfigurationVariant);
       NuGetProjectRoot=$(NuGetProjectRoot);
       SignAssembly=$(SignAssembly);
       WorkArtefactsDir=$(WorkArtefactsDir)
