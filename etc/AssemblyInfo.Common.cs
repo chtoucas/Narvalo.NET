@@ -25,9 +25,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-#if AUTO_GENERATED_VERSION
+#if DUMMY_GENERATED_VERSION
 [assembly: AssemblyVersion("1.0.*")]
-#elif !BUILD_GENERATED_VERSION
+#elif BUILD_GENERATED_VERSION
+// Versions are automatically generated and made available in a separate file.
+#else
 // In Visual Studio, assemblies get a fake version.
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

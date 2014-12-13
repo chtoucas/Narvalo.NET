@@ -4,6 +4,9 @@
     This file is injected at the end of Narvalo.Common.targets by Make.proj.
   -->
 
+  <!-- Import NuGet project properties. -->
+  <Import Project="$(NuGetProjectFile)" Condition=" '$(NuGetProjectExists)' == 'true' " />
+
   <PropertyGroup>
     <!-- WARNING: This property can not be defined in one of the .props files,
          as it should, since IntermediateOutputPath is only initialized
@@ -28,52 +31,38 @@
   <PropertyGroup>
     <AfterCleanDependsOn>
       $(AfterCleanDependsOn);
-      DeleteTmpBuildFiles
+      DeleteAssemblyVersionFile;
+      DeleteNuspecFile
     </AfterCleanDependsOn>
   </PropertyGroup>
 
-  <Choose>
-    <When Condition=" '$(SkipBuildGeneratedVersion)' != 'true' ">
-      <PropertyGroup>
-        <CreateAssemblyVersionFileDependsOn>_CreateAssemblyVersionFile</CreateAssemblyVersionFileDependsOn>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <CreateAssemblyVersionFileDependsOn>DeleteAssemblyVersionFile</CreateAssemblyVersionFileDependsOn>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
+  <!-- Define the CoreCreateAssemblyVersionFile property. -->
+  <PropertyGroup>
+    <CoreCreateAssemblyVersionFile Condition=" '$(BuildGeneratedVersion)' == 'true' ">_CreateAssemblyVersionFile</CoreCreateAssemblyVersionFile>
+  </PropertyGroup>
 
-  <Target Name="CreateAssemblyVersionFile" DependsOnTargets="$(CreateAssemblyVersionFileDependsOn)" />
+  <Target Name="CreateAssemblyVersionFile"
+          DependsOnTargets="DeleteAssemblyVersionFile;$(CoreCreateAssemblyVersionFile)" />
 
   <Target Name="DeleteAssemblyVersionFile">
+    <Message Text="Deleting temporary assembly version file..." Importance="normal" />
+
     <Delete Files="$(TmpAssemblyVersionFile)" />
   </Target>
 
-  <!-- TODO: Move this to Make.CustomAfter.props. -->
-  <PropertyGroup>
-    <Nuspec>$(MSBuildProjectDirectory)\$(AssemblyName).nuspec</Nuspec>
-  </PropertyGroup>
-  
-  <!-- TODO: Incremental build. -->
-  <Target Name="CreateNuspec" Condition=" Exists('$(Nuspec)') " DependsOnTargets="_GenerateAssemblyVersions">
-    <Message Text="Creating NuGet spec for $(AssemblyName)..." Importance="high" />
+  <Target Name="DeleteNuspecFile">
+    <Message Text="Deleting temporary nuspec file..." Importance="normal" />
 
-    <!-- TODO: Remove previous one... -->
-    <CreateNuspec NuSpec="$(Nuspec)"
-                  OutFile="$(OutDir)$(AssemblyName).nuspec"
-                  Version="$(AssemblyInformationalVersion)" />
+    <Delete Files="$(NuGetSpecFile)" />
   </Target>
 
   <Target Name="DeleteOldDocumentationFile">
-    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..."
-             Importance="normal" />
+    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." Importance="normal" />
 
     <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
   </Target>
 
-  <Target Name="DeleteTmpBuildFiles" DependsOnTargets="DeleteAssemblyVersionFile" />
+  <Target Name="Publish" DependsOnTargets="Build;_WriteNuspec" />
 
 
   <!-- ### Private Targets ### -->
@@ -100,8 +89,7 @@
     <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
   </Target>-->
 
-  <!-- Dynamically generate the assembly version info. -->
-  <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="DeleteAssemblyVersionFile;_GenerateAssemblyVersions">
+  <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="_GenerateAssemblyVersions">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="high" />
 
     <PropertyGroup>
@@ -144,18 +132,7 @@ using System.Reflection;
     </ItemGroup>
   </Target>
 
-  <Target Name="_GenerateAssemblyVersions">
-    <Warning Text="Using default assembly version for $(AssemblyName)."
-             Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
-
-    <PropertyGroup>
-      <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
-      <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
-      <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
-      <!-- REVIEW: If the version is less than 1, there is really no reason to also use a pre-release label. -->
-      <PreReleaseLabel Condition=" $(MajorVersion) &lt; 1 "></PreReleaseLabel>
-    </PropertyGroup>
-
+  <Target Name="_GenerateAssemblyVersions" DependsOnTargets="_PrepareForGenerateAssemblyVersions">
     <IncrementBuildAndRevisionNumbers>
       <Output TaskParameter="BuildNumber" PropertyName="_BuildNumber"/>
       <Output TaskParameter="RevisionNumber" PropertyName="_RevisionNumber"/>
@@ -170,5 +147,84 @@ using System.Reflection;
       <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(_BuildNumber).$(_RevisionNumber)</AssemblyFileVersion>
       <AssemblyInformationalVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)$(_PreReleaseLabelSuffix)</AssemblyInformationalVersion>
     </PropertyGroup>
+  </Target>
+
+  <Target Name="_GetNuGetDependencies" Condition=" Exists('$(PackagesConfig)') ">
+    <Message Text="Reading packages.config for NuGet dependencies of $(AssemblyName)..." Importance="normal" />
+
+    <ReadDependenciesFromPackagesConfig Config="$(PackagesConfig)">
+      <Output TaskParameter="Dependencies" PropertyName="NuGetDependencies"/>
+    </ReadDependenciesFromPackagesConfig>
+  </Target>
+
+  <Target Name="_GetProjectDependencies" DependsOnTargets="_ReadProjectDependency">
+    <Message Text="Reading project references for $(AssemblyName)..." Importance="normal" />
+
+    <PropertyGroup>
+      <ProjectDependencies>@(ProjectDependency -> '%(XmlFragment)', '')</ProjectDependencies>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_PrepareForGenerateAssemblyVersions"
+          Condition=" '$(BuildGeneratedVersion)' == 'true' ">
+    <Warning Text="Using default assembly version for $(AssemblyName)."
+             Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
+
+    <PropertyGroup>
+      <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
+      <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
+      <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
+      <!-- REVIEW: If the version is less than 1, there is really no reason to also use a pre-release label. -->
+      <PreReleaseLabel Condition=" $(MajorVersion) &lt; 1 "></PreReleaseLabel>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_PrepareForGenerateAssemblyVersions"
+          Condition=" '$(BuildGeneratedVersion)' != 'true' ">
+    <PropertyGroup>
+      <MajorVersion>1</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+      <PreReleaseLabel>DEV</PreReleaseLabel>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="_ReadProjectDependency"
+          Condition=" '@(ProjectReference)' != '' "
+          Outputs="%(ProjectReference.Identity)">
+    <FindProductVersion AssemblyPath="$(OutDir)%(ProjectReference.Name).dll">
+      <Output TaskParameter="ProductVersion" PropertyName="_ProjectReferenceVersion"/>
+    </FindProductVersion>
+
+    <ItemGroup>
+      <ProjectDependency Include="%(ProjectReference.Name)">
+        <XmlFragment>
+          <![CDATA[
+<dependency id="%(ProjectReference.Name)" version="$(_ProjectReferenceVersion)" />
+          ]]>
+        </XmlFragment>
+      </ProjectDependency>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="_WriteNuspec"
+          Condition=" '$(NuGetProjectExists)' == 'true' "
+          DependsOnTargets="_GenerateAssemblyVersions;_GetNuGetDependencies;_GetProjectDependencies">
+    <Message Text="Creating Nuspec for $(AssemblyName)..." Importance="high" />
+
+    <WriteNuspec TemplateFile="$(RepositorySettingsDir)Narvalo.nuspec"
+                 OutFile="$(OutDir)$(AssemblyName).nuspec"
+
+                 Id="$(AssemblyName)"
+                 Version="$(AssemblyInformationalVersion)"
+                 Description="$(NuGetDescription)"
+                 Files="$(NuGetFiles)"
+
+                 Title="$(NuGetTitle)"
+                 Summary="$(NuGetSummary)"
+                 ReleaseNotes="$(NuGetReleaseNotes)"
+                 Copyright="$(NuGetCopyright)"
+                 Tags="$(NuGetTags)"
+                 Dependencies="$(ProjectDependencies)$(NuGetDependencies)" />
   </Target>
 </Project>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- See Shared.props and Make.Common.props for all available options. -->
+  <!--
+    Options:
+    - SolutionFile (default: none)
+    - ProjectFile (default: none)
+    - SkipPrivateProjects (default: false)
+
+    See Shared.props and Make.Common.props for all available options.
+  -->
+
+  <!-- Define the SkipPrivateProjects property. -->
+  <PropertyGroup>
+    <SkipPrivateProjects Condition=" '$(SkipPrivateProjects)' != 'true' ">false</SkipPrivateProjects>
+  </PropertyGroup>
 
   <!-- Define the ProjectsToBuild property. -->
   <Choose>

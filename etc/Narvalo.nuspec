@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Narvalo.Build</id>
+    <id>$id$</id>
     <version>$version$</version>
     <authors>Narvalo.Org</authors>
     <owners>chtoucas</owners>
     <licenseUrl>http://www.freebsd.org/copyright/license.html</licenseUrl>
     <projectUrl>https://github.com/chtoucas/Narvalo.NET</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>XXX</summary>
-    <description>XXX</description>
-    <releaseNotes>XXX</releaseNotes>
-    <copyright>Copyright 2013</copyright>
-    <tags>MSBuild</tags>
+    $title$
+    <description>$description$</description>
+    $summary$
+    $releaseNotes$
+    $copyright$
+    $tags$
+    $dependencies$
   </metadata>
-  <files>
-    <file src="Narvalo.Build.tasks" target="build\" />
-    <file src="Narvalo.Build.dll" target="tools\" />
-  </files>
+  <files>$files$</files>
 </package>

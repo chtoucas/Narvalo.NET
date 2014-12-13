@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     This file defines common MSBuild properties shared among all projects.
-    
+
     Options:
     - BuildInParallel
     - Configuration
@@ -25,15 +25,20 @@
   <PropertyGroup>
     <!-- The reuse of RepositoryRoot allows to speed up things a little bit
          when building from Make.proj.
-         
+
          Make.proj imports Make.Common.props then Shared.props;
-         RepositoryRoot is not already set, we initialize it. 
+         RepositoryRoot is not already set, we initialize it.
          When Make.proj builds a child project, it injects RepositoryRoot
-         (see BuildProperties in Make.Common.props). This time when the child 
+         (see BuildProperties in Make.Common.props). This time when the child
          project imports Shared.props, RepositoryRoot is already set. -->
     <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\</RepositoryRoot>
 
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
+  </PropertyGroup>
+
+  <!-- Mark Shared.props as already imported. -->
+  <PropertyGroup>
+    <SharedPropsImported>true</SharedPropsImported>
   </PropertyGroup>
 </Project>

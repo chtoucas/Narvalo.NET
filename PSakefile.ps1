@@ -30,7 +30,7 @@ Task HardCleanWorkDir {
 
 # Run tests for public projects in Debug configuration.
 Task Minimal {
-  MSBuild $options $project '/t:RunTests' '/p:SkipPrivateProjects=true;SkipBuildGeneratedVersion=true'
+  MSBuild $options $project '/t:RunTests' '/p:SkipPrivateProjects=true;BuildGeneratedVersion=false'
 }
 
 # Continuous integration build in Release configuration.

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NuGetTitle>Narvalo.Mvp.Web</NuGetTitle>
+    <NuGetDescription>
+      This package enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
+      Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsmvp codebase.
+    </NuGetDescription>
+    <NuGetCopyright>Copyright {0}</NuGetCopyright>
+    <NuGetTags>MVP, ASP.NET, WebForms</NuGetTags>
+    
+    <NuGetFiles>
+      <![CDATA[
+<file src="Narvalo.Core.dll" target="lib\net45\" />
+      ]]>
+    </NuGetFiles>
+    <NuGetFiles Condition=" '$(Configuration)' == 'Debug' ">
+      <![CDATA[
+$(NuGetFiles)
+<file src="Narvalo.Core.pdb" target="lib\net45\" />
+      ]]>
+    </NuGetFiles>
+    <NuGetFiles Condition=" '$(Configuration)' == 'Release' ">
+      <![CDATA[
+$(NuGetFiles)
+<file src="Narvalo.Core.pdb" target="lib\net45\" />
+<file src="Narvalo.Core.xml" target="lib\net45\" />
+<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\net45\CodeContracts\" />
+      ]]>
+    </NuGetFiles>
+  </PropertyGroup>
+</Project>

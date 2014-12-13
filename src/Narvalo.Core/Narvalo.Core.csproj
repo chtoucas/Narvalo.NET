@@ -160,9 +160,6 @@
     <None Include="Narvalo.Core.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Narvalo.Core.nuspec">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

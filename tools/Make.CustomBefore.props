@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
          InitialTargets="__InitializeMakeCustomBeforeProps"
+         TreatAsLocalProperty="BuildGeneratedVersion"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the beginning of Narvalo.Common.props by Make.proj.
@@ -11,15 +12,19 @@
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
           Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
 
+
   <Target Name="__InitializeMakeCustomBeforeProps">
     <Error Text="You MUST define the 'SignAssembly' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(SignAssembly)' == ''" />
-    <Error Text="You MUST define the 'SkipBuildGeneratedVersion' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+    <Error Text="You MUST define the 'BuildGeneratedVersion' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
-           Condition=" '$(SkipBuildGeneratedVersion)' == ''" />
+           Condition=" '$(BuildGeneratedVersion)' == ''" />
     <Error Text="You MUST define the 'WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(WorkArtefactsDir)' == ''" />
+    <Error Text="You MUST define the 'NuGetProjectRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(NuGetProjectRoot)' == ''" />
   </Target>
 </Project>

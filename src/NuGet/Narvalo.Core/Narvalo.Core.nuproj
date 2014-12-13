@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
+
+  <PropertyGroup>
+    <NuGetTitle>Narvalo.Core</NuGetTitle>
+    <NuGetDescription>...</NuGetDescription>
+    <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
+    <NuGetTags>Maybe, Option, Linq, Monad</NuGetTags>
+
+    <NuGetFiles>
+      <![CDATA[
+<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
+      ]]>
+    </NuGetFiles>
+    <NuGetFiles Condition=" '$(Configuration)' == 'Debug' ">
+      <![CDATA[
+$(NuGetFiles)
+<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
+      ]]>
+    </NuGetFiles>
+    <NuGetFiles Condition=" '$(Configuration)' == 'Release' ">
+      <![CDATA[
+$(NuGetFiles)
+<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
+<file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
+<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+      ]]>
+    </NuGetFiles>
+  </PropertyGroup>
+</Project>

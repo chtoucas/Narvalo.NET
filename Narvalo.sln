@@ -94,9 +94,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{23
 	ProjectSection(SolutionItems) = preProject
 		etc\AssemblyInfo.Common.cs = etc\AssemblyInfo.Common.cs
 		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
+		etc\FrameworkProfiles.props = etc\FrameworkProfiles.props
 		etc\GlobalSuppressions.Common.cs = etc\GlobalSuppressions.Common.cs
 		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
 		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
+		etc\Narvalo.nuspec = etc\Narvalo.nuspec
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		etc\Strict.ruleset = etc\Strict.ruleset
@@ -115,6 +117,48 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "PreviewCommonMark", "{F3FA70E0-7AA1-45B0-9816-9E264C62E7ED}"
 	ProjectSection(SolutionItems) = preProject
 		tools\PreviewCommonMark\index.html = tools\PreviewCommonMark\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Release Engineering", "0. Release Engineering", "{1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}"
+	ProjectSection(SolutionItems) = preProject
+		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
+		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp.Web", "Narvalo.Mvp.Web", "{AF7F2203-7256-4D9D-A329-07E4491265CD}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Mvp.Web\Narvalo.Mvp.Web.nuproj = src\NuGet\Narvalo.Mvp.Web\Narvalo.Mvp.Web.nuproj
+		src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.props = src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Core", "Narvalo.Core", "{5CE0DDF9-2C54-4916-B56D-1FEAF1E42A21}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Core\Narvalo.Core.nuproj = src\NuGet\Narvalo.Core\Narvalo.Core.nuproj
+		src\Narvalo.Core\Narvalo.Core.props = src\Narvalo.Core\Narvalo.Core.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Build", "Narvalo.Build", "{E1AC2ECD-5B76-4A15-A8BF-D0C7161A53E0}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Build\Narvalo.Build.nuproj = src\NuGet\Narvalo.Build\Narvalo.Build.nuproj
+		src\Narvalo.Build\Narvalo.Build.props = src\Narvalo.Build\Narvalo.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Common", "Narvalo.Common", "{39F3BC97-CD80-46BC-881C-827EFAEEC7CC}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Common\Narvalo.Common.nuproj = src\NuGet\Narvalo.Common\Narvalo.Common.nuproj
+		src\Narvalo.Common\Narvalo.Common.props = src\Narvalo.Common\Narvalo.Common.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp", "Narvalo.Mvp", "{B513FFFA-DBDB-4B35-A41E-2AB3FF8E0170}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj = src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj
+		src\Narvalo.Mvp\Narvalo.Mvp.props = src\Narvalo.Mvp\Narvalo.Mvp.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Web", "Narvalo.Web", "{34E3CC32-B725-4146-8E61-2C5563BC6FE4}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Web\Narvalo.Web.nuproj = src\NuGet\Narvalo.Web\Narvalo.Web.nuproj
+		src\Narvalo.Web\Narvalo.Web.props = src\Narvalo.Web\Narvalo.Web.props
 	EndProjectSection
 EndProject
 Global
@@ -268,5 +312,11 @@ Global
 		{23A73D4E-B49C-4A20-A113-E769E1B6957C} = {EAD2CE98-FDD5-4117-87DB-C889A0BE8D4C}
 		{89FFFB0B-5FE0-4715-824A-36E38EE6A4BE} = {EAD2CE98-FDD5-4117-87DB-C889A0BE8D4C}
 		{F3FA70E0-7AA1-45B0-9816-9E264C62E7ED} = {B9B4134F-87B9-4C90-AACD-B15B7088274A}
+		{AF7F2203-7256-4D9D-A329-07E4491265CD} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{5CE0DDF9-2C54-4916-B56D-1FEAF1E42A21} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{E1AC2ECD-5B76-4A15-A8BF-D0C7161A53E0} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{39F3BC97-CD80-46BC-881C-827EFAEEC7CC} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{B513FFFA-DBDB-4B35-A41E-2AB3FF8E0170} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{34E3CC32-B725-4146-8E61-2C5563BC6FE4} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
 	EndGlobalSection
 EndGlobal

@@ -27,12 +27,29 @@
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+    <BuildGeneratedVersion>false</BuildGeneratedVersion>
+  </PropertyGroup>
+
   <!-- Sign the assemblies. -->
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <!-- Custom Narvalo project properties. -->
+  <PropertyGroup>
+    <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+    
+    <NuGetProjectDirectory>$(NuGetProjectRoot)$(AssemblyName)\</NuGetProjectDirectory>
+    <NuGetProjectFile>$(NuGetProjectDirectory)$(AssemblyName).nuproj</NuGetProjectFile>
+
+    <NuGetProjectExists Condition=" Exists('$(NuGetProjectFile)') ">true</NuGetProjectExists>
+    <NuGetProjectExists Condition=" '$(NuGetProjectExists)' != 'true' ">false</NuGetProjectExists>
+
+    <NuGetSpecFile>$(OutDir)$(AssemblyName).nuspec</NuGetSpecFile>
   </PropertyGroup>
 
   <!-- T4 settings. -->

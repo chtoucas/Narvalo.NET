@@ -2,14 +2,14 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
-    - LeanRun
-    - SignAssembly
-    - SkipBuildGeneratedVersion
-    - SolutionFile
+    - LeanRun (default: false)
+    - SignAssembly (default: false)
+    - BuildGeneratedVersion (default: true)
+    - SolutionFile (default: none)
 
     Other options may be found in Shared.props.
 
-    If LeanRun is true, SignAssembly and SkipBuildGeneratedVersion are ignored.
+    If LeanRun is true, SignAssembly and BuildGeneratedVersion are ignored.
   -->
 
   <!-- Import shared properties. -->
@@ -17,16 +17,18 @@
 
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
-    <!-- If true, builds behave a lot like if they were run inside Visual Studio. -->
+    <!-- If true, builds behave a lot like if they were run inside Visual Studio. Default to false. -->
     <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
 
-    <!-- If true, sign the assemblies. -->
+    <!-- If true, sign the assemblies. Default to false. -->
     <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
 
-    <!-- If true, do not dynamically generate the assemblies' version. -->
-    <SkipBuildGeneratedVersion Condition=" '$(SkipBuildGeneratedVersion)' != 'true' ">false</SkipBuildGeneratedVersion>
+    <!-- If true, dynamically generate the assemblies' version. Default to true. -->
+    <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>
 
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
+
+    <NuGetProjectRoot>$(RepositoryRoot)src\NuGet\</NuGetProjectRoot>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
@@ -99,8 +101,9 @@
       CustomBeforeNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
 
+      BuildGeneratedVersion=$(BuildGeneratedVersion);
+      NuGetProjectRoot=$(NuGetProjectRoot);
       SignAssembly=$(SignAssembly);
-      SkipBuildGeneratedVersion=$(SkipBuildGeneratedVersion);
       WorkArtefactsDir=$(WorkArtefactsDir)
     </BuildProperties>
   </PropertyGroup>

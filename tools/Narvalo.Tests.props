@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         TreatAsLocalProperty="SkipBuildGeneratedVersion"
+         TreatAsLocalProperty="BuildGeneratedVersion"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Test projects should import this file.
@@ -17,16 +17,15 @@
     - the assembly name: 
       '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
+
+  <PropertyGroup>
+    <DummyGeneratedVersion>true</DummyGeneratedVersion>
+  </PropertyGroup>
   
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
 
   <!-- Overrides for test projects. -->
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);AUTO_GENERATED_VERSION</DefineConstants>
-
     <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
-
-    <!-- Only used by Make.proj. -->
-    <SkipBuildGeneratedVersion>true</SkipBuildGeneratedVersion>
   </PropertyGroup>
 </Project>

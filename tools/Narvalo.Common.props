@@ -9,6 +9,7 @@
     - CustomAfterNarvaloCommonProps
     - CustomBeforeNarvaloCommonTargets
     - CustomAfterNarvaloCommonTargets
+    - DummyGeneratedVersion
     
     Other options may be found in Shared.props.
 
@@ -40,7 +41,13 @@
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
+  <!-- Define the DummyGeneratedVersion property. -->
+  <PropertyGroup>
+    <!-- If true, use a dummy version. Default to false. -->
+    <DummyGeneratedVersion Condition=" '$(DummyGeneratedVersion)' != 'true' ">false</DummyGeneratedVersion>
+  </PropertyGroup>
 
+  
   <!-- ### Microsoft Common Properties ### -->
 
   <PropertyGroup>
@@ -101,6 +108,10 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+    <DefineConstants>$(DefineConstants);DUMMY_GENERATED_VERSION</DefineConstants>
+  </PropertyGroup>
+  
 
   <!-- ### Additional Files ### -->
 

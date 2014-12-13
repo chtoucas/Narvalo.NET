@@ -48,17 +48,28 @@ var numberOfSeconds = (now - new DateTime(now.Year, now.Month, now.Day, isMornin
 BuildNumber = (ushort)(numberOfHalfDays - 1);
 RevisionNumber = (ushort)numberOfSeconds;
 
-return true;
+return !Log.HasLoggedErrors;
          ]]>
       </Code>
     </Task>
   </UsingTask>
-
-  <UsingTask TaskName="CreateNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+  
+  <UsingTask TaskName="WriteNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
-      <Nuspec ParameterType="System.String" Required="true" />
-      <Version ParameterType="System.String" Required="true" />
+      <TemplateFile ParameterType="System.String" Required="true" />
       <OutFile ParameterType="System.String" Required="true" />
+      
+      <Id ParameterType="System.String" Required="true" />
+      <Version ParameterType="System.String" Required="true" />
+      <Description ParameterType="System.String" Required="true" />
+      <Files ParameterType="System.String" Required="true" />
+
+      <Title ParameterType="System.String" />
+      <Summary ParameterType="System.String" />
+      <ReleaseNotes ParameterType="System.String" />
+      <Copyright ParameterType="System.String" />
+      <Tags ParameterType="System.String" />
+      <Dependencies ParameterType="System.String" />
     </ParameterGroup>
     <Task>
       <Using Namespace="System" />
@@ -67,24 +78,86 @@ return true;
       <Using Namespace="Microsoft.Build.Utilities" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-// REVIEW: I guess these checks are unnecessary.        
-if (String.IsNullOrEmpty(Nuspec)) {
-    Log.LogError("Nuspec can not be null or empty.");
-    return false;
-}
-if (String.IsNullOrEmpty(OutFile)) {
-    Log.LogError("OutFile can not be null or empty.");
-    return false;
-}
-
 try {
-    string template = File.ReadAllText(Nuspec)
-      .Replace("$version$", Version);
-
-    File.WriteAllText(OutFile, template);
+    string nuspec = File.ReadAllText(TemplateFile)
+      .Replace("$id$", Id)
+      .Replace("$version$", Version)
+      .Replace("$description$", Description)
+      .Replace("$files$", Files)
+      
+      .Replace("$title$", String.IsNullOrWhiteSpace(Title) ? String.Empty : "<title>" + Title + "</title>")
+      .Replace("$summary$", String.IsNullOrWhiteSpace(Summary) ? String.Empty : "<summary>" + Summary + "</summary>")
+      .Replace("$releaseNotes$", String.IsNullOrWhiteSpace(ReleaseNotes) ? String.Empty : "<releaseNotes>" + ReleaseNotes + "</releaseNotes>")
+      .Replace("$copyright$", String.IsNullOrWhiteSpace(Copyright) ? String.Empty : "<copyright>" + String.Format(Copyright, DateTime.Now.Year) + "</copyright>")
+      .Replace("$tags$", String.IsNullOrWhiteSpace(Tags) ? String.Empty : "<tags>" + Tags + "</tags>")
+      .Replace("$dependencies$", String.IsNullOrWhiteSpace(Dependencies) ? String.Empty : "<dependencies>" + Dependencies + "</dependencies>")
+      ;
+    
+    File.WriteAllText(OutFile, nuspec);
 }
 catch (IOException ex) {
     Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="FindProductVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <AssemblyPath ParameterType="System.String" Required="true" />
+      <ProductVersion ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq"/>
+      <Using Namespace="System" />
+      <Using Namespace="System.Diagnostics" />
+      <Using Namespace="System.IO" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+ProductVersion = FileVersionInfo.GetVersionInfo(AssemblyPath).ProductVersion ;
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+  
+  <!-- Quick and dirty task to transform a packages.config to a dependencies XML string usable in nuspec. -->
+  <UsingTask TaskName="ReadDependenciesFromPackagesConfig" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <Config ParameterType="System.String" Required="true" />
+      <Dependencies ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq"/>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Xml" />
+      <Using Namespace="System.Xml.Linq" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+using (var reader = XmlReader.Create(Config)) {
+  var rootElement = XElement.Load(reader, LoadOptions.None);
+
+  var packages = rootElement.Elements("package");
+  
+  foreach (var package in packages) {
+    Dependencies += String.Format(
+      "\n<dependency id=\"{0}\" version=\"{1}\" />",
+      package.Attribute("id").Value, 
+      package.Attribute("version").Value); 
+  }
+  
+  if (Dependencies.Length != 0) {
+    Dependencies += "\n    ";
+  }
 }
 
 return !Log.HasLoggedErrors;

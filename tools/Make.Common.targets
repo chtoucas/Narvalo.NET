@@ -93,20 +93,7 @@
     </MSBuild>
   </Target>
 
-  <Choose>
-    <When Condition=" Exists('$(PEVerifyCommand)') ">
-      <PropertyGroup>
-        <VerifyBuildDependsOn>_PEVerify</VerifyBuildDependsOn>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <VerifyBuildDependsOn>_WarnOnMissingPEVerify</VerifyBuildDependsOn>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-
-  <Target Name="VerifyBuild" DependsOnTargets="$(VerifyBuildDependsOn)" />
+  <Target Name="VerifyBuild" DependsOnTargets="PEVerify" />
 
   <Target Name="RunTests"
           DependsOnTargets="Build"
@@ -119,7 +106,7 @@
 
     <!-- Before running XUnit, clean the room. -->
     <Delete Files="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
-    
+
     <!-- Since RunTests depends on Build, we are sure that the directory 
          where reports are stored exists. -->
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
@@ -130,12 +117,12 @@
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
-             Targets="CreateNuspec"
+             Targets="Publish"
              StopOnFirstFailure="true" />
   </Target>
 
 
-  <!-- ### Helpers ### -->
+  <!-- ### NuGet ### -->
 
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
@@ -155,6 +142,21 @@
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory $(RepositoryRoot)packages -ConfigFile $(RepositoryRoot).nuget\NuGet.Config -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true" />
   </Target>
+
+  
+  <!-- ### PEVerify ### -->
+
+  <Target Name="DeletePEVerifyLog">
+    <Delete Files="$(PEVerifyLogFile)" />
+  </Target>
+
+  <!-- Define the CorePEVerify property. -->
+  <PropertyGroup>
+    <CorePEVerify>_PEVerify</CorePEVerify>
+    <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
+  </PropertyGroup>
+
+  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLog;$(CorePEVerify)" />
 
 
   <!-- ### Private Targets ### -->
@@ -179,16 +181,9 @@
       </BuildProperties>
     </PropertyGroup>
   </Target>
-
-  <!-- PEVerify Targets. -->
-
-  <Target Name="_DeletePEVerifyLog">
-    <!-- Before running PEVerify, clean the room. -->
-    <Delete Files="$(PEVerifyLogFile)" />
-  </Target>
-
+  
   <Target Name="_PEVerify"
-          DependsOnTargets="_DeletePEVerifyLog;Build"
+          DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(PEVerifyDummyOutput)">
     <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
@@ -201,8 +196,7 @@
     <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="_WarnOnMissingPEVerify"
-          DependsOnTargets="_DeletePEVerifyLog">
+  <Target Name="_WarnOnMissingPEVerify">
     <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
              ContinueOnError="true" />
   </Target>
