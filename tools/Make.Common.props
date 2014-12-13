@@ -32,7 +32,8 @@
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
 
-    <NuGetProjectRoot>$(RepositoryRoot)src\NuGet\</NuGetProjectRoot>
+    <!-- The root directory for NuGet projects. -->
+    <NuGetProjectsRoot>$(RepositoryRoot)src\NuGet\</NuGetProjectsRoot>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
@@ -92,6 +93,8 @@
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of OutDir. To correct this, we instruct MSBuild to
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
+      
+      WARNING: We force the value of various paths (OutputPath, IntermediateOutputPath).
     -->
     <BuildProperties>
       $(BuildProperties);
@@ -99,6 +102,7 @@
       BaseIntermediateOutputPath=$(BaseIntermediateOutputPath);
       IntermediateOutputPath=$(IntermediateOutputPath);
       OutDir=$(OutDir);
+      OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
 
       CustomBeforeNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
@@ -107,8 +111,8 @@
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
 
       BuildGeneratedVersion=$(BuildGeneratedVersion);
-      ConfigurationVariant=$(ConfigurationVariant);
-      NuGetProjectRoot=$(NuGetProjectRoot);
+      NuGetCommand=$(NuGetCommand);
+      NuGetProjectsRoot=$(NuGetProjectsRoot);
       SignAssembly=$(SignAssembly);
       WorkArtefactsDir=$(WorkArtefactsDir)
     </BuildProperties>

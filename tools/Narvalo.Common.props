@@ -9,7 +9,6 @@
     - CustomAfterNarvaloCommonProps
     - CustomBeforeNarvaloCommonTargets
     - CustomAfterNarvaloCommonTargets
-    - ConfigurationVariant
     - DummyGeneratedVersion
     
     Other options may be found in Shared.props.
@@ -61,7 +60,7 @@
     <!-- Disable compiler warnings for missing documentation. -->
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath>bin\$(Configuration)$(ConfigurationVariant)\</OutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
     <RegisterForComInterop>false</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
 

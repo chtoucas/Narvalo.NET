@@ -2,9 +2,11 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuGetTitle>Narvalo.Web</NuGetTitle>
-    <NuGetDescription>...</NuGetDescription>
+    <NuGetDescription>
+      This package contains the Narvalo.Org Web utilities.
+    </NuGetDescription>
     <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
-    <NuGetTags>ASP.NET, MVC, WebForms</NuGetTags>
+    <NuGetTags>ASP.NET, MVC, WebForms, Optimization</NuGetTags>
     
     <NuGetFiles>
       <![CDATA[

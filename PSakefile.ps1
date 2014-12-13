@@ -8,6 +8,8 @@ Properties {
   $logfile = "$PSScriptRoot\make.log"
   $normalFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=normal;encoding=utf-8"
   $detailedFileLogger = '/fileLogger', "/fileloggerparameters:logfile=$logfile;verbosity=detailed;encoding=utf-8"
+  $workDir = "$PSScriptRoot\work\"
+  $workArtefactsDir = "$workDir\artefacts\"
 }
 
 Task default -depends Minimal
@@ -21,8 +23,6 @@ Task HardCleanVisualStudio {
 
 # Remove the work directory.
 Task HardCleanWorkDir {
-  $workDir = "$PSScriptRoot\work\"
-
   if (Test-Path $workDir) {
     Remove-Item $workDir -Force -Recurse
   }
@@ -37,14 +37,14 @@ Task Minimal {
 Task CI {
   MSBuild $options $detailedFileLogger $project '/t:Build;VerifyBuild;RunTests' '/p:Configuration=Release'
 } -PostAction {
-  Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
+  Move-Item $logfile $workArtefactsDir
 }
 
 # Create packages for release: sign assembles and use Release configuration.
 Task Publish -depends HardCleanWorkDir {
   MSBuild $options $normalFileLogger $project '/t:Clean;Build;VerifyBuild;RunTests;Publish' '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true'
 } -PostAction {
-  Move-Item $logfile "$PSScriptRoot\work\artefacts\Release"
+  Move-Item $logfile $workArtefactsDir
 }
 
 # Lean build for Narvalo (Core).sln in Release configuration.

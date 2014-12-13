@@ -4,16 +4,6 @@
     This file is injected at the end of Narvalo.Common.targets by Make.proj.
   -->
 
-  <!-- Import NuGet project properties. -->
-  <Import Project="$(NuGetProjectFile)" Condition=" '$(NuGetProjectExists)' == 'true' " />
-
-  <PropertyGroup>
-    <!-- WARNING: This property can not be defined in one of the .props files,
-         as it should, since IntermediateOutputPath is only initialized
-         after importing Microsoft.Common.targets. -->
-    <TmpAssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</TmpAssemblyVersionFile>
-  </PropertyGroup>
-
   <PropertyGroup>
     <BeforeBuildDependsOn>
       $(BeforeBuildDependsOn);
@@ -32,7 +22,8 @@
     <AfterCleanDependsOn>
       $(AfterCleanDependsOn);
       DeleteAssemblyVersionFile;
-      DeleteNuspecFile
+      DeleteNuspecFile;
+      DeleteNupkgFile
     </AfterCleanDependsOn>
   </PropertyGroup>
 
@@ -47,7 +38,13 @@
   <Target Name="DeleteAssemblyVersionFile">
     <Message Text="Deleting temporary assembly version file..." Importance="normal" />
 
-    <Delete Files="$(TmpAssemblyVersionFile)" />
+    <Delete Files="$(AssemblyVersionFile)" />
+  </Target>
+
+  <Target Name="DeleteNupkgFile">
+    <Message Text="Deleting nupkg file..." Importance="normal" />
+
+    <Delete Files="$(NuGetPkgFile)" />
   </Target>
 
   <Target Name="DeleteNuspecFile">
@@ -62,42 +59,34 @@
     <Delete Files="$(OutDir)$(AssemblyName).xml.old" />
   </Target>
 
+  <Target Name="Publish" DependsOnTargets="Build;CreateNupkg" />
+
   <!-- 
-    TODO:
-    - if no BuildGeneratedVersion, no nuspec
-    - create nupkg
-    - if no nuproj, copy artefacts
-    - define NO_INTERNALS
+    Only create a NuGet package if:
+    - A NuGet project exists.
+    - We are running a Release Build, Configuration is Release.
+    - The assembly is signed, ie SignAssembly is true.
+    - We have a meaningful version, ie BuildGeneratedVersion is true. 
   -->
-  <Target Name="Publish" DependsOnTargets="Build;_WriteNuspec" />
+  <Target Name="CreateNupkg"
+          Condition=" 
+            '$(NuGetProjectExists)' == 'true' 
+            And '$(Configuration)' == 'Release'
+            And '$(SignAssembly)' == 'true'
+            And '$(BuildGeneratedVersion)' == 'true' "
+          DependsOnTargets="DeleteNupkgFile;Build;_WriteNuspec">
+    <Message Text="Creating NuGet package for $(AssemblyName)..." Importance="high" />
+
+    <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
+    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuGetSpecFile)&quot; -o $(WorkArtefactsDir) -NonInteractive $(NuGetCommandAdditionalArgs) -Verbosity quiet"
+          LogStandardErrorAsError="true" />
+  </Target>
 
 
   <!-- ### Private Targets ### -->
 
-  <!--<Target Name="_CopyArtefacts">
-    <ItemGroup>
-      <_Outputs Include="$(OutDir)$(AssemblyName).dll" />
-      <_Outputs Include="$(OutDir)$(AssemblyName).pdb"
-                Condition=" Exists('$(OutDir)$(AssemblyName).pdb') " />
-      <_Outputs Include="$(OutDir)$(AssemblyName).xml"
-                Condition=" Exists('$(OutDir)$(AssemblyName).xml') " />
-
-      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll"
-                         Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.dll') " />
-      <_ContractsOutputs Include="$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb"
-                         Condition=" Exists('$(OutDir)CodeContracts\$(AssemblyName).Contracts.pdb') " />
-    </ItemGroup>
-
-    <Copy SourceFiles="@(_Outputs)" DestinationFolder="$(WorkArtefactsDir)" SkipUnchangedFiles="true" />
-
-    <MakeDir Directories="$(WorkArtefactsDir)CodeContracts"
-             Condition=" '@(_ContractsOutputs)' != '' And !Exists('$(WorkArtefactsDir)CodeContracts') " />
-
-    <Copy SourceFiles="@(_ContractsOutputs)" DestinationFolder="$(WorkArtefactsDir)CodeContracts\" SkipUnchangedFiles="true" />
-  </Target>-->
-
   <Target Name="_CreateAssemblyVersionFile" DependsOnTargets="_GenerateAssemblyVersions">
-    <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="high" />
+    <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
 
     <PropertyGroup>
       <_AssemblyInfoContent>
@@ -125,7 +114,7 @@ using System.Reflection;
     <MakeDir Directories="$(IntermediateOutputPath)" Condition=" !Exists($(IntermediateOutputPath)) " />
 
     <WriteLinesToFile Lines="$(_AssemblyInfoLines)"
-                      File="$(TmpAssemblyVersionFile)"
+                      File="$(AssemblyVersionFile)"
                       Overwrite="true" />
 
     <!-- Dynamically add the file to the list of sources to compile
@@ -135,7 +124,7 @@ using System.Reflection;
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Include="$(TmpAssemblyVersionFile)" />
+      <Compile Include="$(AssemblyVersionFile)" />
     </ItemGroup>
   </Target>
 
@@ -172,8 +161,7 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PrepareForGenerateAssemblyVersions"
-          Condition=" '$(BuildGeneratedVersion)' == 'true' ">
+  <Target Name="_PrepareForGenerateAssemblyVersions">
     <Warning Text="Using default assembly version for $(AssemblyName)."
              Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
 
@@ -183,16 +171,6 @@ using System.Reflection;
       <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
       <!-- REVIEW: If the version is less than 1, there is really no reason to also use a pre-release label. -->
       <PreReleaseLabel Condition=" $(MajorVersion) &lt; 1 "></PreReleaseLabel>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="_PrepareForGenerateAssemblyVersions"
-          Condition=" '$(BuildGeneratedVersion)' != 'true' ">
-    <PropertyGroup>
-      <MajorVersion>1</MajorVersion>
-      <MinorVersion>0</MinorVersion>
-      <PatchVersion>0</PatchVersion>
-      <PreReleaseLabel>DEV</PreReleaseLabel>
     </PropertyGroup>
   </Target>
 
@@ -215,14 +193,13 @@ using System.Reflection;
   </Target>
 
   <Target Name="_WriteNuspec"
-          Condition=" '$(NuGetProjectExists)' == 'true' "
           DependsOnTargets="_GenerateAssemblyVersions;_GetNuGetDependencies;_GetProjectDependencies">
-    <Message Text="Creating Nuspec for $(AssemblyName)..." Importance="high" />
+    <Message Text="Creating Nuspec for $(AssemblyName)..." Importance="normal" />
 
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Narvalo.nuspec"
-                 OutFile="$(OutDir)$(AssemblyName).nuspec"
+                 OutFile="$(NuGetSpecFile)"
 
-                 Id="$(AssemblyName)"
+                 Id="$(NuGetId)"
                  Version="$(AssemblyInformationalVersion)"
                  Description="$(NuGetDescription)"
                  Files="$(NuGetFiles)"

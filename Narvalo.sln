@@ -161,6 +161,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Web", "Narvalo.Web"
 		src\Narvalo.Web\Narvalo.Web.props = src\Narvalo.Web\Narvalo.Web.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E2B52424-3713-4494-8001-C5B46A08C08F}"
+	ProjectSection(SolutionItems) = preProject
+		src\NuGet\Narvalo.Build\build\Narvalo.Build.tasks = src\NuGet\Narvalo.Build\build\Narvalo.Build.tasks
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -318,5 +323,6 @@ Global
 		{39F3BC97-CD80-46BC-881C-827EFAEEC7CC} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
 		{B513FFFA-DBDB-4B35-A41E-2AB3FF8E0170} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
 		{34E3CC32-B725-4146-8E61-2C5563BC6FE4} = {1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}
+		{E2B52424-3713-4494-8001-C5B46A08C08F} = {E1AC2ECD-5B76-4A15-A8BF-D0C7161A53E0}
 	EndGlobalSection
 EndGlobal

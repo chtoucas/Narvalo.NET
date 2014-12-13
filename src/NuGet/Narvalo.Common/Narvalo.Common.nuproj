@@ -2,10 +2,12 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuGetTitle>Narvalo.Common</NuGetTitle>
-    <NuGetDescription>...</NuGetDescription>
+    <NuGetDescription>
+      This package contains the Narvalo.Org common utilities.
+    </NuGetDescription>
     <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
-    <NuGetTags>Maybe, Option, Linq, Monad</NuGetTags>
-    
+    <NuGetTags>SQL</NuGetTags>
+
     <NuGetFiles>
       <![CDATA[
 <file src="Narvalo.Common.dll" target="lib\net45\" />

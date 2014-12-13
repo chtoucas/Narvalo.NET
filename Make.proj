@@ -38,7 +38,7 @@
     <When Condition=" '$(SkipPrivateProjects)' == 'true' ">
       <ItemGroup>
         <!-- Librairies. -->
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Build\Narvalo.Build.csproj" />
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Build\Narvalo.Build.csproj" />-->
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
@@ -46,8 +46,8 @@
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)src\Narvalo.Web\Narvalo.Web.csproj" />
 
         <!-- Test projects. -->
-        <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
         <ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+        <!--<ProjectsToBuild Include="$(MSBuildThisFileDirectory)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />-->
       </ItemGroup>
     </When>
 

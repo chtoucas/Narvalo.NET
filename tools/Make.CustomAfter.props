@@ -41,16 +41,26 @@
 
   <!-- Custom Narvalo project properties. -->
   <PropertyGroup>
+    <!-- WARNING: This property requires IntermediateOutputPath to be initialized
+         which is only true since we add this property via Make.proj, otherwise
+         it is only available after importing Microsoft.Common.targets. -->
+    <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
+
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
-    
-    <NuGetProjectDirectory>$(NuGetProjectRoot)$(AssemblyName)\</NuGetProjectDirectory>
+
+    <NuGetProjectDirectory>$(NuGetProjectsRoot)$(AssemblyName)\</NuGetProjectDirectory>
     <NuGetProjectFile>$(NuGetProjectDirectory)$(AssemblyName).nuproj</NuGetProjectFile>
 
     <NuGetProjectExists Condition=" Exists('$(NuGetProjectFile)') ">true</NuGetProjectExists>
     <NuGetProjectExists Condition=" '$(NuGetProjectExists)' != 'true' ">false</NuGetProjectExists>
 
+    <NuGetId>$(AssemblyName)</NuGetId>
     <NuGetSpecFile>$(OutDir)$(AssemblyName).nuspec</NuGetSpecFile>
+    <NuGetPkgFile>$(WorkArtefactsDir)$(NuGetId).nupkg</NuGetPkgFile>
   </PropertyGroup>
+
+  <!-- Import NuGet project properties. -->
+  <Import Project="$(NuGetProjectFile)" Condition=" '$(NuGetProjectExists)' == 'true' " />
 
   <!-- T4 settings. -->
   <PropertyGroup>
@@ -58,7 +68,7 @@
          REVIEW: Currently disabled since our T4 templates require VS hosting. -->
     <TransformOnBuild>false</TransformOnBuild>
   </PropertyGroup>
-  
+
   <Target Name="__InitializeMakeCustomAfterProps">
     <Error Text="Unable to sign the assembly. The strong name key does not exist: $(RepositorySettingsDir)Narvalo.snk"
            ContinueOnError="false"

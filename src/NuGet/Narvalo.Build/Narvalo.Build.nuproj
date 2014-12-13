@@ -2,13 +2,17 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuGetTitle>Narvalo.Build</NuGetTitle>
-    <NuGetDescription>...</NuGetDescription>
+    <NuGetDescription>
+      This package contains the Narvalo.Org MSBuild tasks.
+    </NuGetDescription>
     <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
     <NuGetTags>MSBuild</NuGetTags>
+
+    <NuGetCommandAdditionalArgs>-Tool</NuGetCommandAdditionalArgs>
     
     <NuGetFiles>
       <![CDATA[
-<file src="build\Narvalo.Build.tasks" />
+<file src="$(MSBuildThisFileDirectory)build\Narvalo.Build.tasks" target="build\" />
 <file src="Narvalo.Build.dll" target="tools\" />
       ]]>
     </NuGetFiles>

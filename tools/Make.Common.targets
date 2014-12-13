@@ -34,9 +34,11 @@
        There is only one exception to these rules: CoreBuild depends on the LeanBuild target. -->
 
   <Target Name="Clean">
-    <!-- Artefacts created during a build. -->
+    <!-- Artefacts created during a build. 
+         Do not remove the entire WorkArtefactsDir, other targets may depend on it. -->
     <ItemGroup>
-      <_FilesToDelete Include="$(WorkArtefactsDir)\*" />
+      <_FilesToDelete Include="$(WorkArtefactsDir)\**\*" />
+      <_FilesToDelete Include="$(PEVerifyDummyOutput)" />
     </ItemGroup>
 
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -104,16 +106,14 @@
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <!-- Before running XUnit, clean the room. -->
-    <Delete Files="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
-
     <!-- Since RunTests depends on Build, we are sure that the directory 
          where reports are stored exists. -->
     <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
-  <!-- Work in progress. -->
-  <Target Name="Publish">
+  <Target Name="Publish"
+          Condition=" '$(LeanRun)' != 'true' "
+          DependsOnTargets="Build">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -139,11 +139,11 @@
   <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
-    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory $(RepositoryRoot)packages -ConfigFile $(RepositoryRoot).nuget\NuGet.Config -NonInteractive -Verbosity quiet"
+    <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true" />
   </Target>
 
-  
+
   <!-- ### PEVerify ### -->
 
   <Target Name="DeletePEVerifyLog">
@@ -156,7 +156,9 @@
     <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
   </PropertyGroup>
 
-  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLog;$(CorePEVerify)" />
+  <!-- WARNING: Delete previous log before doing anything. If something goes 
+       wrong we might not override it. -->
+  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLog;Build;$(CorePEVerify)" />
 
 
   <!-- ### Private Targets ### -->
@@ -181,7 +183,7 @@
       </BuildProperties>
     </PropertyGroup>
   </Target>
-  
+
   <Target Name="_PEVerify"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"

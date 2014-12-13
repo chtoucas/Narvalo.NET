@@ -4,9 +4,8 @@
     <NuGetTitle>Narvalo.Mvp</NuGetTitle>
     <NuGetDescription>
       This package contains a simple MVP framework inspired by webformsmvp.
-      Similarity with webformsmvp is no accident, lot of ideas are rooted in webformsmvp codebase.
     </NuGetDescription>
-    <NuGetCopyright>Copyright {0}</NuGetCopyright>
+    <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
     <NuGetTags>MVP</NuGetTags>
 
     <NuGetFiles>
@@ -25,7 +24,6 @@ $(NuGetFiles)
 $(NuGetFiles)
 <file src="Narvalo.Mvp.pdb" target="lib\net45\" />
 <file src="Narvalo.Mvp.xml" target="lib\net45\" />
-<file src="CodeContracts\Narvalo.Mvp.Contracts.dll" target="lib\net45\CodeContracts\" />
       ]]>
     </NuGetFiles>
   </PropertyGroup>

@@ -4,7 +4,9 @@
 
   <PropertyGroup>
     <NuGetTitle>Narvalo.Core</NuGetTitle>
-    <NuGetDescription>...</NuGetDescription>
+    <NuGetDescription>
+      This package contains the Narvalo.Org portable utilities.
+    </NuGetDescription>
     <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
     <NuGetTags>Maybe, Option, Linq, Monad</NuGetTags>
 

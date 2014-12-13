@@ -14,17 +14,23 @@
 
 
   <Target Name="__InitializeMakeCustomBeforeProps">
-    <Error Text="You MUST define the 'SignAssembly' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
-           ContinueOnError="false"
-           Condition=" '$(SignAssembly)' == ''" />
     <Error Text="You MUST define the 'BuildGeneratedVersion' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(BuildGeneratedVersion)' == ''" />
+    <Error Text="You MUST define the 'IntermediateOutputPath' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(IntermediateOutputPath)' == ''" />
+    <Error Text="You MUST define the 'NuGetCommand' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(NuGetCommand)' == ''" />
+    <Error Text="You MUST define the 'NuGetProjectsRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(NuGetProjectsRoot)' == ''" />
+    <Error Text="You MUST define the 'SignAssembly' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(SignAssembly)' == ''" />
     <Error Text="You MUST define the 'WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(WorkArtefactsDir)' == ''" />
-    <Error Text="You MUST define the 'NuGetProjectRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
-           ContinueOnError="false"
-           Condition=" '$(NuGetProjectRoot)' == ''" />
   </Target>
 </Project>
