@@ -6,8 +6,9 @@
     This file is injected at the end of Narvalo.Common.props by Make.proj.
   -->
 
-  <!-- Import NuGet publication profile properties. -->
-  <Import Project="$(RepositorySettingsDir)Publish.props" />
+  <!-- Import project specific properties. -->
+  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
+          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
 
 
   <!-- ### Overrides for properties defined in Narvalo.Common.props ### -->
@@ -54,38 +55,31 @@
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
 
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+
+    <!-- Original documentation files (before the Code Contracts transformation). -->
+    <OldDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OldDocumentationFile>
   </PropertyGroup>
 
-
-  <!-- ### NuGet packaging ### -->
-
+  <!-- NuGet packaging. -->
   <PropertyGroup>
-    <NuGetProjectDirectory>$(NuGetProjectsRoot)$(AssemblyName)\</NuGetProjectDirectory>
-    <NuGetProjectFile>$(NuGetProjectDirectory)$(AssemblyName).nuproj</NuGetProjectFile>
+    <NuProjectFile>$(NuProjectsRoot)$(AssemblyName)\$(AssemblyName).nuproj</NuProjectFile>
 
-    <NuGetProjectExists Condition=" Exists('$(NuGetProjectFile)') ">true</NuGetProjectExists>
-    <NuGetProjectExists Condition=" '$(NuGetProjectExists)' != 'true' ">false</NuGetProjectExists>
+    <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
+    <NuProjectExists Condition=" '$(NuProjectExists)' != 'true' ">false</NuProjectExists>
 
-    <NuGetId>$(AssemblyName)</NuGetId>
-    <NuGetSpecFile>$(OutDir)$(AssemblyName).nuspec</NuGetSpecFile>
+    <NuspecFile>$(OutDir)$(AssemblyName).nuspec</NuspecFile>
 
     <!-- 
       Only create a NuGet package if:
-      - A NuGet project exists.
-      - We are running a Release Build, ie Release Configuration.
-      - The assembly is signed, ie SignAssembly is true.
       - We have a meaningful version, ie BuildGeneratedVersion is true. 
+      - A NuGet project exists.
     -->
-    <SkipPackage Condition=" 
-      '$(NuGetProjectExists)' == 'true' 
-      And '$(Configuration)' == 'Release'
-      And '$(SignAssembly)' == 'true'
-      And '$(BuildGeneratedVersion)' == 'true' ">false</SkipPackage>
-    <SkipPackage Condition=" '$(SkipPackage)' != 'false' ">true</SkipPackage>
+    <SkipNupkgCreation Condition=" '$(BuildGeneratedVersion)' == 'true' And '$(NuProjectExists)' == 'true' ">false</SkipNupkgCreation>
+    <SkipNupkgCreation Condition=" '$(SkipNupkgCreation)' != 'false' ">true</SkipNupkgCreation>
   </PropertyGroup>
 
-  <!-- Import NuGet project properties. -->
-  <Import Project="$(NuGetProjectFile)" Condition=" '$(SkipPackage)' != 'true' " />
+  <!-- Import NuGet project. -->
+  <Import Project="$(NuProjectFile)" Condition=" '$(NuProjectExists)' == 'true' " />
 
 
   <!-- ### T4 settings ### -->
@@ -96,6 +90,8 @@
     <TransformOnBuild>false</TransformOnBuild>
   </PropertyGroup>
 
+
+  <!-- Initial target. -->
   <Target Name="__InitializeMakeCustomAfterProps">
     <Error Text="Unable to sign the assembly. The strong name key does not exist: $(RepositorySettingsDir)Narvalo.snk"
            ContinueOnError="false"

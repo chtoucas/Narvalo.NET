@@ -35,11 +35,10 @@
 
   <Target Name="Clean">
     <!-- Artefacts created during a build. 
-         Do not remove the entire WorkArtefactsDir or WorkStagingDir, 
+         Do not remove the entire WorkArtefactsDir, 
          other targets may depend on it. -->
     <ItemGroup>
       <_FilesToDelete Include="$(WorkArtefactsDir)\**\*" />
-      <_FilesToDelete Include="$(WorkStagingDir)\**\*" />
       <_FilesToDelete Include="$(PEVerifyDummyOutput)" />
     </ItemGroup>
 
@@ -126,7 +125,7 @@
   <Target Name="Publish"
           Condition=" '$(LeanRun)' != 'true' "
           DependsOnTargets="Package">
-    <Warning Text="NuGet packages are ready for publication. There is one last step... now run the publish.ps1 script." />
+    <Warning Text="NuGet packages are ready for publication. There is one last manual step... now run the publish.ps1 script." />
   </Target>
 
 
@@ -148,13 +147,14 @@
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
-          LogStandardErrorAsError="true" />
+          LogStandardErrorAsError="true"
+          ContinueOnError="false" />
   </Target>
 
 
   <!-- ### PEVerify ### -->
 
-  <Target Name="DeletePEVerifyLog">
+  <Target Name="DeletePEVerifyLog" Condition=" Exists('$(PEVerifyLogFile)') ">
     <Delete Files="$(PEVerifyLogFile)" />
   </Target>
 
@@ -168,8 +168,26 @@
        wrong we might not override it. -->
   <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLog;Build;$(CorePEVerify)" />
 
+  <Target Name="_PEVerify"
+          DependsOnTargets="Build"
+          Inputs="@(BuildOutputs)"
+          Outputs="$(PEVerifyDummyOutput)">
+    <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
 
-  <!-- ### Private Targets ### -->
+    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
+          LogStandardErrorAsError="true"
+          ContinueOnError="false" />
+
+    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
+    <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="_WarnOnMissingPEVerify">
+    <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+  </Target>
+
+
+  <!-- ### Other Private Targets ### -->
 
   <Target Name="_PatchCoreRebuild">
     <!--
@@ -192,29 +210,10 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="_PEVerify"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(PEVerifyDummyOutput)">
-    <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
-
-    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
-          LogStandardErrorAsError="true"
-          ContinueOnError="false" />
-
-    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
-    <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
-  </Target>
-
-  <Target Name="_WarnOnMissingPEVerify">
-    <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK."
-             ContinueOnError="true" />
-  </Target>
-
+  
   <!-- Initial target. -->
   <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(LeanRun)' != 'true' ">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
-    <MakeDir Directories="$(WorkStagingDir)" Condition=" !Exists($(WorkStagingDir)) " />
   </Target>
 </Project>

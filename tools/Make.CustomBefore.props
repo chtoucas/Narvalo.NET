@@ -5,35 +5,33 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- 
     This file is injected at the beginning of Narvalo.Common.props by Make.proj.
-    It contains properties imports and custom global properties.
+    It contains custom global properties.
   -->
 
-  <!-- Import project specific properties. -->
-  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
-          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
-
-
+  
+  <!-- Initial target. -->
   <Target Name="__InitializeMakeCustomBeforeProps">
+    <!-- Sanity checks. -->
     <Error Text="You MUST define the 'BuildGeneratedVersion' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(BuildGeneratedVersion)' == ''" />
+    <Error Text="You MUST define the 'ContinuousBuild' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(ContinuousBuild)' == ''" />
     <Error Text="You MUST define the 'IntermediateOutputPath' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(IntermediateOutputPath)' == ''" />
     <Error Text="You MUST define the 'NuGetCommand' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(NuGetCommand)' == ''" />
-    <Error Text="You MUST define the 'NuGetProjectsRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+    <Error Text="You MUST define the 'NuProjectsRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
-           Condition=" '$(NuGetProjectsRoot)' == ''" />
+           Condition=" '$(NuProjectsRoot)' == ''" />
     <Error Text="You MUST define the 'SignAssembly' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(SignAssembly)' == ''" />
     <Error Text="You MUST define the 'WorkArtefactsDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(WorkArtefactsDir)' == ''" />
-    <Error Text="You MUST define the 'WorkStagingDir' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
-           ContinueOnError="false"
-           Condition=" '$(WorkStagingDir)' == ''" />
   </Target>
 </Project>

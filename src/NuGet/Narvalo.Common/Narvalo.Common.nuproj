@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuGetTitle>Narvalo.Common</NuGetTitle>
-    <NuGetDescription>
+    <NuId>Narvalo.Common</NuId>
+    <NuTitle>Narvalo.Common</NuTitle>
+    <NuDescription>
       This package contains the Narvalo.Org common utilities.
-    </NuGetDescription>
-    <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
-    <NuGetTags>SQL</NuGetTags>
+    </NuDescription>
+    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuTags>SQL</NuTags>
 
-    <NuGetFiles>
+    <NuFiles>
       <![CDATA[
 <file src="Narvalo.Common.dll" target="lib\net45\" />
       ]]>
-    </NuGetFiles>
-    <NuGetFiles Condition=" '$(Configuration)' == 'Debug' ">
+    </NuFiles>
+    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
       <![CDATA[
-$(NuGetFiles)
+$(NuFiles)
 <file src="Narvalo.Common.pdb" target="lib\net45\" />
       ]]>
-    </NuGetFiles>
-    <NuGetFiles Condition=" '$(Configuration)' == 'Release' ">
+    </NuFiles>
+    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
       <![CDATA[
-$(NuGetFiles)
+$(NuFiles)
 <file src="Narvalo.Common.pdb" target="lib\net45\" />
 <file src="Narvalo.Common.xml" target="lib\net45\" />
 <file src="CodeContracts\Narvalo.Common.Contracts.dll" target="lib\net45\CodeContracts\" />
       ]]>
-    </NuGetFiles>
+    </NuFiles>
   </PropertyGroup>
 </Project>

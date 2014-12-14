@@ -99,11 +99,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{23
 		etc\GlobalSuppressions.Common.cs = etc\GlobalSuppressions.Common.cs
 		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
 		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
-		etc\Narvalo.nuspec = etc\Narvalo.nuspec
 		etc\packages.config = etc\packages.config
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
 		etc\Strict.ruleset = etc\Strict.ruleset
+		etc\Template.nuspec = etc\Template.nuspec
 		etc\Tests.ruleset = etc\Tests.ruleset
 	EndProjectSection
 EndProject

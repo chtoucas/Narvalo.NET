@@ -6,7 +6,7 @@ Properties {
     $Project = "$PSScriptRoot\Make.proj"
 }
 
-Task default -depends Minimal
+Task default -depends FastTests
 
 # Delete work directory.
 Task Clean {
@@ -18,7 +18,7 @@ Task Clean {
 }
 
 # Run tests for public projects in Debug configuration.
-Task Minimal {
+Task FastTests {
     MSBuild $Project '/t:RunTests',
         '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true',
         '/verbosity:minimal', 
@@ -29,7 +29,7 @@ Task Minimal {
 # Continuous integration build: sign assemblies, use Release configuration, detailed log.
 Task CI {
     MSBuild $Project '/t:Build;VerifyBuild;RunTests;Package', 
-        '/p:Configuration=Release;SignAssembly=true', 
+        '/p:Configuration=Release;ContinuousBuild=true,SignAssembly=true', 
         '/verbosity:detailed',
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -45,7 +45,7 @@ Task Package -depends Clean {
 }
 
 # Lean build then run tests for Narvalo (Core).sln in Release configuration.
-Task BuildThenTestCoreSolution {
+Task CoreSolution {
     MSBuild $Project '/t:RunTests',
         '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Core).sln', 
         '/verbosity:minimal', 
@@ -54,7 +54,7 @@ Task BuildThenTestCoreSolution {
 }
 
 # Lean build then run tests for Narvalo.sln in Release configuration.
-Task BuildThenTestMainSolution {
+Task MainSolution {
     MSBuild $Project '/t:RunTests',
         '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo.sln', 
         '/verbosity:minimal', 
@@ -63,7 +63,7 @@ Task BuildThenTestMainSolution {
 }
 
 # Lean build then run tests for Narvalo (Miscs).sln in Release configuration.
-Task BuildThenTestMiscsSolution {
+Task MiscsSolution {
     MSBuild $Project '/t:RunTests',
         '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln', 
         '/verbosity:minimal', 
@@ -72,7 +72,7 @@ Task BuildThenTestMiscsSolution {
 }
 
 # Lean build then run tests for Narvalo (Mvp).sln in Release configuration.
-Task BuildThenTestMvpSolution {
+Task MvpSolution {
     MSBuild $Project '/t:RunTests',
         '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln', 
         '/verbosity:minimal', 

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <NuGetTitle>Narvalo.Build</NuGetTitle>
-    <NuGetDescription>
+    <NuId>Narvalo.Build</NuId>
+    <NuTitle>Narvalo.Build</NuTitle>
+    <NuDescription>
       This package contains the Narvalo.Org MSBuild tasks.
-    </NuGetDescription>
-    <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
-    <NuGetTags>MSBuild</NuGetTags>
+    </NuDescription>
+    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuTags>MSBuild</NuTags>
 
     <NuGetCommandAdditionalArgs>-Tool</NuGetCommandAdditionalArgs>
     
-    <NuGetFiles>
+    <NuFiles>
       <![CDATA[
 <file src="$(MSBuildThisFileDirectory)build\Narvalo.Build.tasks" target="build\" />
 <file src="Narvalo.Build.dll" target="tools\" />
       ]]>
-    </NuGetFiles>
+    </NuFiles>
   </PropertyGroup>
 </Project>

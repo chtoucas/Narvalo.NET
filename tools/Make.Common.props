@@ -2,9 +2,10 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
+    - BuildGeneratedVersion (default: true)
+    - ContinuousBuild (default: false)
     - LeanRun (default: false)
     - SignAssembly (default: false)
-    - BuildGeneratedVersion (default: true)
     - SolutionFile (default: none)
 
     Other options may be found in Shared.props.
@@ -26,6 +27,9 @@
     <!-- If true, dynamically generate the assemblies' version. Default to true. -->
     <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>
 
+    <!-- If true, this is a CI build. Default to false. -->
+    <ContinuousBuild Condition=" '$(ContinuousBuild)' != 'true' ">false</ContinuousBuild>
+
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
     <!-- This property is useful to distinguish between variants of the same base configuration. -->
@@ -33,12 +37,11 @@
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
 
     <!-- The root directory for NuGet projects. -->
-    <NuGetProjectsRoot>$(RepositoryRoot)src\NuGet\</NuGetProjectsRoot>
+    <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
 
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
-    <WorkStagingDir>$(WorkRoot)staging\</WorkStagingDir>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -112,11 +115,11 @@
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
 
       BuildGeneratedVersion=$(BuildGeneratedVersion);
+      ContinuousBuild=$(ContinuousBuild);
       NuGetCommand=$(NuGetCommand);
-      NuGetProjectsRoot=$(NuGetProjectsRoot);
+      NuProjectsRoot=$(NuProjectsRoot);
       SignAssembly=$(SignAssembly);
       WorkArtefactsDir=$(WorkArtefactsDir);
-      WorkStagingDir=$(WorkStagingDir)
     </BuildProperties>
   </PropertyGroup>
 

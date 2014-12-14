@@ -3,31 +3,32 @@
   <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
 
   <PropertyGroup>
-    <NuGetTitle>Narvalo.Core</NuGetTitle>
-    <NuGetDescription>
+    <NuId>Narvalo.Core</NuId>
+    <NuTitle>Narvalo.Core</NuTitle>
+    <NuDescription>
       This package contains the Narvalo.Org portable utilities.
-    </NuGetDescription>
-    <NuGetCopyright>Copyright 2013-{0}</NuGetCopyright>
-    <NuGetTags>Maybe, Option, Linq, Monad</NuGetTags>
+    </NuDescription>
+    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuTags>Maybe, Option, Linq, Monad</NuTags>
 
-    <NuGetFiles>
+    <NuFiles>
       <![CDATA[
 <file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
       ]]>
-    </NuGetFiles>
-    <NuGetFiles Condition=" '$(Configuration)' == 'Debug' ">
+    </NuFiles>
+    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
       <![CDATA[
-$(NuGetFiles)
+$(NuFiles)
 <file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
       ]]>
-    </NuGetFiles>
-    <NuGetFiles Condition=" '$(Configuration)' == 'Release' ">
+    </NuFiles>
+    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
       <![CDATA[
-$(NuGetFiles)
+$(NuFiles)
 <file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
 <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
       ]]>
-    </NuGetFiles>
+    </NuFiles>
   </PropertyGroup>
 </Project>
