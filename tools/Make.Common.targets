@@ -98,19 +98,7 @@
 
   <Target Name="VerifyBuild" DependsOnTargets="PEVerify" />
 
-  <Target Name="RunTests"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(XUnitLogFile)">
-    <ItemGroup>
-      <_TestAssembly Include="%(BuildOutputs.Identity)"
-                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
-    </ItemGroup>
-
-    <!-- Since RunTests depends on Build, we are sure that the directory 
-         where reports are stored exists. -->
-    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
-  </Target>
+  <Target Name="RunTests" DependsOnTargets="RunXunitTests" />
 
   <Target Name="Package"
           Condition=" '$(LeanRun)' != 'true' "
@@ -149,6 +137,23 @@
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
+  </Target>
+
+
+  <!-- ### XUnit ### -->
+
+  <Target Name="RunXunitTests"
+          DependsOnTargets="Build"
+          Inputs="@(BuildOutputs)"
+          Outputs="$(XUnitLogFile)">
+    <ItemGroup>
+      <_TestAssembly Include="%(BuildOutputs.Identity)"
+                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
+    </ItemGroup>
+
+    <!-- Since RunXunitTests depends on Build, we are sure that the directory 
+         where reports are stored exists. -->
+    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
 

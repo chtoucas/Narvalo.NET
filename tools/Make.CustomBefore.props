@@ -21,6 +21,9 @@
     <Error Text="You MUST define the 'IntermediateOutputPath' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(IntermediateOutputPath)' == ''" />
+    <Error Text="You MUST define the 'NoVisibleInternals' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(NoVisibleInternals)' == ''" />
     <Error Text="You MUST define the 'NuGetCommand' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(NuGetCommand)' == ''" />

@@ -156,11 +156,13 @@ using System.Reflection;
   
   <Target Name="CheckNupkgCreationContext" Condition=" '$(ContinuousBuild)' != 'true' ">
     <!-- When this is not a continuous integration build, we also require 
-         a Release Build and signed assemblies. -->
+         a Release Build, signed assemblies and no visible internals. -->
     <Error Text="Creation of a NuGet package for public consumption is only available for Release Build."
            Condition=" '$(Configuration)' != 'Release' " />
     <Error Text="Creation of a NuGet package for public consumption is only available for signed assemblies."
            Condition=" '$(SignAssembly)' != 'true' " />
+    <Error Text="Creation of a NuGet package for public consumption is only available when internals are unconditionally hidden."
+           Condition=" '$(NoVisibleInternals)' != 'true' " />
   </Target>
 
   <Target Name="CreateNupkg"
@@ -169,7 +171,7 @@ using System.Reflection;
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
     <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
-    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -o $(WorkArtefactsDir) -NonInteractive $(NuGetCommandAdditionalArgs) -Verbosity quiet"
+    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -OutputDirectory $(WorkArtefactsDir) -NonInteractive $(NuGetCommandAdditionalArgs) -Verbosity quiet"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
   </Target>
@@ -270,7 +272,9 @@ using System.Reflection;
   <Target Name="__InitializeMakeCustomAfterTargets"
           Condition=" '$(NuProjectExists)' == 'true' "
           DependsOnTargets="GetNuVersion">
-    <!-- Sanity checks. -->
+    <!-- Sanity checks. Even if we skip the package creation (SkipNupkgCreation
+         is true), some targets (e.g. CreateNuspec) which require NuGet properties 
+         to be set may be called directly. -->
     <Error Text="You MUST define the 'NuId' property in your NuGet project: $(NuProjectFile)."
            Condition=" '$(NuId)' == '' "
            ContinueOnError="false" />

@@ -41,6 +41,11 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 
+  <!-- Sign the assemblies. -->
+  <PropertyGroup Condition=" '$(NoVisibleInternals)' == 'true' ">
+    <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
+  </PropertyGroup>
+
 
   <!-- ### Custom Narvalo project properties ### -->
 
@@ -71,7 +76,9 @@
 
     <!-- 
       Only create a NuGet package if:
-      - We have a meaningful version, ie BuildGeneratedVersion is true. 
+      - We have a meaningful version, ie BuildGeneratedVersion is true:
+        * the assembly gets an actual version
+        * the package has a unique version that matchs the assembly version.
       - A NuGet project exists.
     -->
     <SkipNupkgCreation Condition=" '$(BuildGeneratedVersion)' == 'true' And '$(NuProjectExists)' == 'true' ">false</SkipNupkgCreation>

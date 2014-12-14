@@ -5,8 +5,14 @@
     - BuildGeneratedVersion (default: true)
     - ContinuousBuild (default: false)
     - LeanRun (default: false)
+    - NoVisibleInternals (default: false)
     - SignAssembly (default: false)
     - SolutionFile (default: none)
+    
+    When creating packages for public consumption you should use the defaults
+    except for:
+    - NoVisibleInternals = true
+    - SignAssembly = true
 
     Other options may be found in Shared.props.
 
@@ -30,11 +36,10 @@
     <!-- If true, this is a CI build. Default to false. -->
     <ContinuousBuild Condition=" '$(ContinuousBuild)' != 'true' ">false</ContinuousBuild>
 
-    <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
+    <!-- If true, no internals are visible. Default to false. -->
+    <NoVisibleInternals Condition=" '$(NoVisibleInternals)' != 'true' ">false</NoVisibleInternals>
 
-    <!-- This property is useful to distinguish between variants of the same base configuration. -->
-    <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
+    <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
 
     <!-- The root directory for NuGet projects. -->
     <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
@@ -42,6 +47,14 @@
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
 
     <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
+  </PropertyGroup>
+
+  <!-- Define the ConfigurationVariant property. -->
+  <PropertyGroup>
+    <!-- This property is useful to distinguish between variants of the same base configuration. -->
+    <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(NoVisibleInternals)' == 'true' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -116,6 +129,7 @@
 
       BuildGeneratedVersion=$(BuildGeneratedVersion);
       ContinuousBuild=$(ContinuousBuild);
+      NoVisibleInternals=$(NoVisibleInternals);
       NuGetCommand=$(NuGetCommand);
       NuProjectsRoot=$(NuProjectsRoot);
       SignAssembly=$(SignAssembly);

@@ -12,7 +12,8 @@ In Progress
 Build Infrastructure
 --------------------
 
-- No Internals
+- No Internals Problem with CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
+- Symbols???
 - Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
 - Update Copyright, add build time.

@@ -6,7 +6,16 @@ Properties {
     $Project = "$PSScriptRoot\Make.proj"
 }
 
-Task default -depends FastTests
+Task default -depends Default_Debug
+
+TaskTearDown {
+    if ($LastExitCode -ne 0) {
+        Write-Host ''
+        Write-Host 'Build failed.' -BackgroundColor Red -ForegroundColor Yellow
+        Write-Host ''
+        Exit 1
+    }
+}
 
 # Delete work directory.
 Task Clean {
@@ -18,7 +27,7 @@ Task Clean {
 }
 
 # Run tests for public projects in Debug configuration.
-Task FastTests {
+Task Default_Debug {
     MSBuild $Project '/t:RunTests',
         '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true',
         '/verbosity:minimal', 
@@ -26,65 +35,96 @@ Task FastTests {
         '/nodeReuse:false'
 }
 
-# Continuous integration build: sign assemblies, use Release configuration, detailed log.
+# Run tests for public projects in Release configuration without visible internals.
+Task Default_ReleaseNoInternals {
+    MSBuild $Project '/t:RunTests',
+        '/p:Configuration=Release;BuildGeneratedVersion=false;NoVisibleInternals=true;SkipPrivateProjects=true',
+        '/verbosity:minimal', 
+        '/maxcpucount', 
+        '/nodeReuse:false'
+}
+
+# Create packages for publication: skip private projects, assemblies are 
+# signed, use Release configuration and unconditionally hide internals.
+Task Package -depends Clean {
+    MSBuild $Project '/t:Clean;Build;VerifyBuild;RunTests;Package' 
+        '/p:Configuration=Release;NoVisibleInternals=true;SignAssembly=true;SkipPrivateProjects=true', 
+        '/verbosity:minimal', 
+        '/maxcpucount', 
+        '/nodeReuse:false'
+}
+
+#
+# Continuous Integration Targets.
+#
+# REVIEW: To speed up things a bit, we do not call the Clean target?
+
+# Same as Package.
 Task CI {
     MSBuild $Project '/t:Build;VerifyBuild;RunTests;Package', 
-        '/p:Configuration=Release;ContinuousBuild=true,SignAssembly=true', 
+        '/p:Configuration=Release;ContinuousBuild=true;NoVisibleInternals=true;SignAssembly=true;SkipPrivateProjects=true', 
         '/verbosity:detailed',
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
-# Create packages for publication: sign assemblies, skip private projects, use Release configuration.
-Task Package -depends Clean {
-    MSBuild $Project '/t:Clean;Build;VerifyBuild;RunTests;Package' 
-        '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true', 
-        '/verbosity:minimal', 
+Task CI_Release {
+    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+        '/p:Configuration=Release;BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/verbosity:minimal',
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
-# Lean build then run tests for Narvalo (Core).sln in Release configuration.
+Task CI_Debug {
+    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+        '/p:BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/verbosity:minimal',
+        '/maxcpucount', 
+        '/nodeReuse:false'
+}
+
+Task CI_CodeContracts {
+    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+        '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/verbosity:minimal',
+        '/maxcpucount', 
+        '/nodeReuse:false'
+}
+
+#
+# Solution Targets.
+#
+# Lean build then run tests for solutions in Debug configuration.
+
 Task CoreSolution {
     MSBuild $Project '/t:RunTests',
-        '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Core).sln', 
+        '/p:LeanRun=true;SolutionFile=.\Narvalo (Core).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
-# Lean build then run tests for Narvalo.sln in Release configuration.
 Task MainSolution {
     MSBuild $Project '/t:RunTests',
-        '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo.sln', 
+        '/p:LeanRun=true;SolutionFile=.\Narvalo.sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
-# Lean build then run tests for Narvalo (Miscs).sln in Release configuration.
 Task MiscsSolution {
     MSBuild $Project '/t:RunTests',
-        '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln', 
+        '/p:LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
-# Lean build then run tests for Narvalo (Mvp).sln in Release configuration.
 Task MvpSolution {
     MSBuild $Project '/t:RunTests',
-        '/p:Configuration=Release;LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln', 
+        '/p:LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
-}
-
-TaskTearDown {
-    if ($LastExitCode -ne 0) {
-        Write-Host ''
-        Write-Host 'Build failed.' -BackgroundColor Red -ForegroundColor Yellow
-        Write-Host ''
-        Exit 1
-    }
 }
