@@ -96,24 +96,21 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Verify" DependsOnTargets="PEVerify;SecAnnotate" />
+  <Target Name="Analyze" DependsOnTargets="SecAnnotate" />
+  
+  <Target Name="Verify" DependsOnTargets="PEVerify" />
 
   <Target Name="Test" DependsOnTargets="RunXunitTests" />
 
   <Target Name="Package"
           Condition=" '$(Lean)' != 'true' "
           DependsOnTargets="Build">
+    <!-- WARNING: Package is a non-standard MSBuild target. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Package"
              StopOnFirstFailure="true" />
-  </Target>
-
-  <Target Name="Publish"
-          Condition=" '$(Lean)' != 'true' "
-          DependsOnTargets="Package">
-    <Warning Text="NuGet packages are ready for publication. There is one last manual step... now run the publish.ps1 script." />
   </Target>
 
 
@@ -218,7 +215,7 @@
           Inputs="@(BuildOutputs)"
           Outputs="$(SecAnnotateOutput)">
     <!-- FIXME: SecAnnotateOutput is not currently written... -->
-    <Message Text="Verifying assemblies with SecAnnotate..." Importance="high" />
+    <Message Text="Analyzing assemblies with SecAnnotate..." Importance="high" />
 
     <!-- /maximumpasses:1  /quiet -->
     <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;%(BuildOutputs.FullPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"

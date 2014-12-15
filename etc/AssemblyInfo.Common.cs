@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-// All compilation symbols found below may be defined on the fly by the build script.
+//// All compilation symbols found below are eventually defined on the fly by the build script.
 
 [module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", 
     Justification = "Informational version uses semantic versioning.")]

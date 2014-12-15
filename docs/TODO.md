@@ -15,6 +15,8 @@ In Progress
 Build Infrastructure
 --------------------
 
+- zip artefacts, analyze results from reports
+- make sure we see if SecAnnotate fails
 - check [module: SuppressMessage(
 - No internals: rework tests and fix CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
 - Gendarme.
