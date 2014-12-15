@@ -12,9 +12,11 @@ In Progress
 Build Infrastructure
 --------------------
 
+- check [module::SuppressMessage]
+- NuGet publication script (use Fake or PSake).   
+- Add Git commit stamp to BuildMetadata?
 - Gendarme.
-- No internals and tests or CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
-- Review ContinuousBuild & DummyGeneratedVersion.
+- No internals: rework tests and fix CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
 - http://www.visualstudio.com/downloads/download-visual-studio-vs
 - SecAnnotate (CAS, APTCA)
   http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
@@ -44,11 +46,9 @@ Coding Rules
 
 ### Medium Priority
 
-- NuGet publication script (use Fake or PSake).
 - Write assembly descriptions.
 - Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
 - Review all GetHashCode() methods.
-- Re-enable Gendarme.
 
 ### Low Priority
 
@@ -65,6 +65,22 @@ Coding Rules
   assembly infos, what's the purpose?
   [assembly: SatelliteContractVersion("X.X.X.X")]
   [assembly: AssemblyMetadata("Serviceable", "True")]
+  [assembly: AllowPartiallyTrustedCallers]
+  [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
+  [assembly: CompilationRelaxations(8)]
+  [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
+  [assembly: BitmapSuffixInSatelliteAssembly]
+  [assembly: TypeLibVersion(2, 4)]
+  [assembly: Dependency("System,", LoadHint.Always)]
+  [assembly: DefaultDependency(LoadHint.Always)]
+  [assembly: AssemblyDefaultAlias("System.Web.dll")]
+  [assembly: SecurityCritical]
+  [assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
+  [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+  [assembly: StringFreezing]
+  [assembly: AssemblyTargetedPatchBand("1.0.23-161462647")]
+  [assembly: ComCompatibleVersion(1, 0, 3300, 0)]
+  [module: UnverifiableCode]
 
 
 Narvalo (Core)
@@ -84,7 +100,6 @@ Narvalo (Core)
 
 ### Medium Priority
 
-- Check module: SuppressMessage
 - Serializable and PCL.
 - Review Monads, VoidOr... for nullity. I am pretty sure
   that VoirOr... and Output are broken.

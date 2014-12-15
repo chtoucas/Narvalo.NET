@@ -6,7 +6,10 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", Justification = "Informational version uses semantic versioning.")]
+// All compilation symbols found below may be defined on the fly by the build script.
+
+[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", 
+    Justification = "Informational version uses semantic versioning.")]
 
 [assembly: AssemblyProduct("Narvalo.Org Libraries & Tools.")]
 [assembly: AssemblyCompany("Narvalo.Org - http://narvalo.org")]
@@ -19,18 +22,14 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-#if DEBUG
-[assembly: AssemblyConfiguration("Debug")]
-#else
-[assembly: AssemblyConfiguration("Release")]
-#endif
-
 #if DUMMY_GENERATED_VERSION
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyVersion("1.0.*")]
 #elif BUILD_GENERATED_VERSION
 // Versions are automatically generated and made available in a separate file.
 #else
 // In Visual Studio, assemblies get a fake version.
+[assembly: AssemblyConfiguration("Development Build.")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyInformationalVersion("1.0.0-DEV")]

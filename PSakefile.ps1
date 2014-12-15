@@ -45,11 +45,11 @@ Task Default_ReleaseNoInternals {
         '/nodeReuse:false'
 }
 
-# Create packages for publication: skip private projects, assemblies are 
-# signed, use Release configuration and unconditionally hide internals.
-Task Package -depends Clean {
+# Create packages for publication: skip private projects, sign assemblies, 
+# use Release configuration and unconditionally hide internals.
+Task Retail -depends Clean {
     MSBuild $Project '/t:Clean;Build;Verify;Test;Package' 
-        '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
+        '/p:RetailBuild=true;SkipPrivateProjects=true', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -63,7 +63,7 @@ Task Package -depends Clean {
 # Same as Package. Detailed log.
 Task CI {
     MSBuild $Project '/t:Build;Verify;Test;Package', 
-        '/p:Configuration=Release;ContinuousBuild=true;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
+        '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
         '/verbosity:detailed',
         '/maxcpucount', 
         '/nodeReuse:false'

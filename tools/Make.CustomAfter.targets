@@ -71,12 +71,16 @@
              Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
   </Target>
 
-  <Target Name="GetBuildMetadata">
+  <Target Name="GetBuildMetadata" Condition=" '$(RetailBuild)' != 'true' ">
+    <!-- For retail builds, we don't add any build metadata to keep the
+         version as simple as possible. We can still read the complete
+         build configuration with the AssemblyConfiguration attribute. -->
     <PropertyGroup>
       <BuildMetadata>$(Configuration.ToLowerInvariant())</BuildMetadata>
-
       <BuildMetadata Condition=" '$(SignAssembly)' == 'true' ">$(BuildMetadata).signed</BuildMetadata>
       <BuildMetadata Condition=" '$(SignAssembly)' != 'true' ">$(BuildMetadata).unsigned</BuildMetadata>
+      <BuildMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(BuildMetadata).intern</BuildMetadata>
+      <BuildMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(BuildMetadata).nointern</BuildMetadata>
     </PropertyGroup>
   </Target>
 
@@ -110,6 +114,12 @@
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
 
     <PropertyGroup>
+      <_ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</_ConfigurationVariant>
+      <_ConfigurationVariant Condition=" '$(SignAssembly)' != 'true' ">-Signed</_ConfigurationVariant>
+      <_ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_ConfigurationVariant)+BuildGeneratedVersion</_ConfigurationVariant>
+      <_ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationVariant)-BuildGeneratedVersion</_ConfigurationVariant>
+      <_ConfigurationVariant Condition=" '$(VisibleInternals)' == 'true' ">$(_ConfigurationVariant)+VisibleInternals</_ConfigurationVariant>
+      <_ConfigurationVariant Condition=" '$(VisibleInternals)' != 'true' ">$(_ConfigurationVariant)-VisibleInternals</_ConfigurationVariant>
       <_AssemblyVersionContent>
         <![CDATA[
 //------------------------------------------------------------------------------
@@ -122,6 +132,7 @@
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
+[assembly: AssemblyConfiguration("$(Configuration)$(_ConfigurationVariant) Build on $([System.DateTime]::UtcNow.ToString()).")]
 [assembly: AssemblyVersion("$(AssemblyVersion)")]
 [assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
 [assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
@@ -153,21 +164,10 @@ using System.Reflection;
 
 
   <!-- ### NuGet packaging ### -->
-  
-  <Target Name="CheckNupkgCreationContext" Condition=" '$(ContinuousBuild)' != 'true' ">
-    <!-- When this is not a continuous integration build, we also require 
-         a Release Build, signed assemblies and no visible internals. -->
-    <Error Text="Creation of a NuGet package for public consumption is only available for Release Build."
-           Condition=" '$(Configuration)' != 'Release' " />
-    <Error Text="Creation of a NuGet package for public consumption is only available for signed assemblies."
-           Condition=" '$(SignAssembly)' != 'true' " />
-    <Error Text="Creation of a NuGet package for public consumption is only available when internals are unconditionally hidden."
-           Condition=" '$(VisibleInternals)' == 'true' " />
-  </Target>
 
   <Target Name="CreateNupkg"
           Condition=" '$(SkipNupkgCreation)' != 'true' "
-          DependsOnTargets="DeleteNupkgFile;CheckNupkgCreationContext;Build;CreateNuspec">
+          DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
     <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
@@ -218,7 +218,7 @@ using System.Reflection;
   </Target>
 
   <Target Name="GetNuPreReleaseLabel"
-          Condition=" '$(ContinuousBuild)' != 'true' "
+          Condition=" '$(RetailBuild)' == 'true' "
           DependsOnTargets="CheckSemanticVersion">
     <PropertyGroup>
       <NuPreReleaseLabel Condition=" '$(PreReleaseLabel)' != '' ">$(PreReleaseLabel)</NuPreReleaseLabel>
@@ -226,10 +226,10 @@ using System.Reflection;
   </Target>
 
   <Target Name="GetNuPreReleaseLabel"
-          Condition=" '$(ContinuousBuild)' == 'true' "
+          Condition=" '$(RetailBuild)' != 'true' "
           DependsOnTargets="GetBuildKey">
     <PropertyGroup>
-      <NuPreReleaseLabel>CI$(BuildKey)</NuPreReleaseLabel>
+      <NuPreReleaseLabel>$(BuildKey)</NuPreReleaseLabel>
     </PropertyGroup>
   </Target>
 

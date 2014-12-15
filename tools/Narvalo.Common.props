@@ -133,7 +133,7 @@
   -->
 
   <PropertyGroup>
-    <!-- Only in Release Build is Source Analysis automatically run.
+    <!-- Only in Release configuration is Source Analysis automatically run.
          Inside VS, you can still perform manual Source Analysis for any Build 
          configuration. -->
     <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
@@ -152,7 +152,7 @@
   -->
 
   <PropertyGroup>
-    <!-- Only in Release Build is Code Analysis automatically run.
+    <!-- Only in Release configuration is Code Analysis automatically run.
          Inside VS, you can still perform manual Code Analysis for any Build 
          configuration. -->
     <RunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</RunCodeAnalysis>
@@ -178,8 +178,8 @@
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContracts.targets
 
     We do not really enforce any policy for Code Contracts as they are not
-    currently used by all projects. On Release Build, you should manually add
-    the following lines:
+    currently used by all projects. When enabling Code Contracts on a project,
+    you should manually add the following lines, on Release configuration:
       <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
         <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>

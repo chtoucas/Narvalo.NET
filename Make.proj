@@ -5,13 +5,28 @@
     
     Custom build options:
     - BuildGeneratedVersion (default: true)
-      Be sure to use BuildGeneratedVersion=false for incremental batching;
-      otherwise at each run, an assembly version is generated which forces
-      a fresh build. 
-    - ContinuousBuild (default: false)
+      Generate assembly version before building.
+      A new generated assembly version forces a fresh build. 
+      For incremental batching to work be sure to use: 
+        BuildGeneratedVersion=false.
+      
+    - RetailBuild (default: false)
+      If true, generated packages are meant to be published. 
+      Currently it means three thing: 
+      * If true, override other properties:
+          BuildGeneratedVersion=true
+          Configuration=Release
+          SignAssembly=true
+          VisibleInternals=false
+      * If false, NuGet package versions are uniquely created on the fly.
+        This ensures that each build creates a distinct package.
+      * Use different build metadata for the assembly informational version.
+        
     - SignAssembly (default: false)
+    
     - VisibleInternals (default: true)
       Unconditionally hide internals to other assemblies.
+      
     - LeanRun (default: false)
       Make the build behaves a lot like if it was running inside Visual Studio.
       If true, the other custom build options are ignored.
@@ -19,36 +34,34 @@
     Child projects selection:
     - SolutionFile (default: none)
       Select a custom solution for building. 
-      If set, this option takes precedence over SkipPrivateProjects and ProjectFile.
+      
     - ProjectFile (default: none)
       Select a single project for building.
-      Does not apply when SolutionFile is also set.
+      Ignored when SolutionFile is also set.
+      
     - SkipPrivateProjects (default: false)
       Select the most relevant projects for building.
-      Only meaningful when SolutionFile and ProjectFile are not set.
+      Ignored when SolutionFile or ProjectFile is also set.
 
     Common MSBuild options:
     - Configuration (default: Debug)
       Other options: Release and CodeContracts.
+      
     - Platform (default: AnyCPU)
-      Right now, I don't see any circumstances under which we would need 
-      to override the default value.
+      Right now, AnyCPU is the only supported platform.
+      
     - BuildInParallel (default: false unless the /maxcpucount MSBuild's switch is used)
     
     Miscs options:
     - RepositoryRoot
-      No need to set this manually. If not already set, it will pick up the correct value.
+      No need to set this manually. If empty, MSBuild will pick up the correct value.
+      
     - VisualStudioVersion (default: 12.0) 
       Right now, I don't see any circumstances under which we would need
       to override the default value.
       Does not have any effect on some projects (e.g. test projects override this
       property).
 
-    Common combinations:
-    - Production build: Release Build, sign assemblies, skip private projects, hide internals.
-      Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false
-    - Do not fire a fresh build if nothing has changed:
-      BuildGeneratedVersion=false
   -->
 
   <!-- Define the SkipPrivateProjects property. -->

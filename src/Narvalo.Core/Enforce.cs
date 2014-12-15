@@ -11,8 +11,8 @@ namespace Narvalo
     /// <summary>
     /// Provides helper methods to write assertions on arguments. 
     /// These methods should only describe conditions that you know will ALWAYS be true.
-    /// In Release Build, these methods are erased, unless you turn on Code Contracts,
-    /// in which case we will even try to prove the assertion.
+    /// In Release configuration, these methods are erased, unless you turn
+    /// on Code Contracts, in which case we will even try to prove the assertion.
     /// </summary>
     [DebuggerStepThrough]
     public static class Enforce

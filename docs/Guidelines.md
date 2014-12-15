@@ -184,8 +184,8 @@ How to initialize a new project
 -----------------------------
 
 Principle:
-- Debug Build is optimized for development.
-- Release Build is optimized for safety.
+- Debug configuration is optimized for development.
+- Release configuration is optimized for safety.
 
 ### Add relevant files as linked files to the "Properties" folder
 

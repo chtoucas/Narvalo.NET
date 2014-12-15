@@ -14,9 +14,6 @@
     <Error Text="You MUST define the 'BuildGeneratedVersion' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(BuildGeneratedVersion)' == ''" />
-    <Error Text="You MUST define the 'ContinuousBuild' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
-           ContinueOnError="false"
-           Condition=" '$(ContinuousBuild)' == ''" />
     <Error Text="You MUST define the 'IntermediateOutputPath' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(IntermediateOutputPath)' == ''" />
@@ -26,6 +23,9 @@
     <Error Text="You MUST define the 'NuProjectsRoot' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(NuProjectsRoot)' == ''" />
+    <Error Text="You MUST define the 'RetailBuild' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
+           ContinueOnError="false"
+           Condition=" '$(RetailBuild)' == ''" />
     <Error Text="You MUST define the 'SignAssembly' property before importing Make.CustomAfter.props. This should have been done by Make.Common.props imported by Make.proj."
            ContinueOnError="false"
            Condition=" '$(SignAssembly)' == ''" />
