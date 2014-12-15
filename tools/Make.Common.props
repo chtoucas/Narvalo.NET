@@ -10,8 +10,6 @@
     - VisibleInternals (default: true)
 
     Other options may be found in Shared.props.
-
-    If LeanRun is true, SignAssembly and BuildGeneratedVersion are ignored.
   -->
 
   <!-- Import shared properties. -->
@@ -37,6 +35,7 @@
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
   </PropertyGroup>
 
+  <!-- Define layout-related properties. -->
   <PropertyGroup>
     <!-- The root directory for NuGet projects. -->
     <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
@@ -47,8 +46,9 @@
   </PropertyGroup>
 
   <!-- Define the ConfigurationVariant property. -->
-  <PropertyGroup>
-    <!-- This property is useful to distinguish between variants of the same base configuration. -->
+  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
+    <!-- This property is useful to distinguish between variants of the same base configuration. 
+         Does not apply to LeanRun builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)-Intern</ConfigurationVariant>
@@ -81,7 +81,7 @@
     <SecAnnotateLogFile>$(WorkArtefactsDir)secannotate.log</SecAnnotateLogFile>
   </PropertyGroup>
 
-  <!-- Define the XunitReportFile property. -->
+  <!-- Define the Xunit properties. -->
   <PropertyGroup>
     <XunitXmlFile>$(WorkArtefactsDir)xunit.xml</XunitXmlFile>
     <XunitHtmlFile>$(WorkArtefactsDir)xunit.html</XunitHtmlFile>

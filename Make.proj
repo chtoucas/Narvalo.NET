@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Options:
+    Options are defined here and either in Shared.props or in Make.Common.props.
+    
+    Custom build options:
+    - BuildGeneratedVersion (default: true)
+      Be sure to use BuildGeneratedVersion=false for incremental batching;
+      otherwise at each run, an assembly version is generated which forces
+      a fresh build. 
+    - ContinuousBuild (default: false)
+    - SignAssembly (default: false)
+    - VisibleInternals (default: true)
+      Unconditionally hide internals to other assemblies.
+    - LeanRun (default: false)
+      Make the build behaves a lot like if it was running inside Visual Studio.
+      If true, the other custom build options are ignored.
+ 
+    Child projects selection:
+    - SolutionFile (default: none)
+      Select a custom solution for building. 
+      If set, this option takes precedence over SkipPrivateProjects and ProjectFile.
     - ProjectFile (default: none)
+      Select a single project for building.
+      Does not apply when SolutionFile is also set.
     - SkipPrivateProjects (default: false)
+      Select the most relevant projects for building.
+      Only meaningful when SolutionFile and ProjectFile are not set.
 
-    See Shared.props and Make.Common.props for all available options.
+    Common MSBuild options:
+    - Configuration (default: Debug)
+      Other options: Release and CodeContracts.
+    - Platform (default: AnyCPU)
+      Right now, I don't see any circumstances under which we would need 
+      to override the default value.
+    - BuildInParallel (default: false unless the /maxcpucount MSBuild's switch is used)
+    
+    Miscs options:
+    - RepositoryRoot
+      No need to set this manually. If not already set, it will pick up the correct value.
+    - VisualStudioVersion (default: 12.0) 
+      Right now, I don't see any circumstances under which we would need
+      to override the default value.
+      Does not have any effect on some projects (e.g. test projects override this
+      property).
+
+    Common combinations:
+    - Production build: Release Build, sign assemblies, skip private projects, hide internals.
+      Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false
+    - Do not fire a fresh build if nothing has changed:
+      BuildGeneratedVersion=false
   -->
 
   <!-- Define the SkipPrivateProjects property. -->

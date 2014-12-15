@@ -51,6 +51,7 @@
   <!-- ### Custom Narvalo project properties ### -->
 
   <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+    <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion>false</BuildGeneratedVersion>
   </PropertyGroup>
 

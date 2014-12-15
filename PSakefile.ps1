@@ -1,27 +1,7 @@
 #
 # WARNING: This file must stay at the root of the repository.
 #
-# Options:
-# - BuildGeneratedVersion (default: true)
-#   Be sure to use BuildGeneratedVersion=false for incremental batching;
-#   otherwise at each run, an assembly version is generated which forces
-#   a fresh build. 
-# - ContinuousBuild (default: false)
-# - LeanRun (default: false)
-#   Make the build behaves a lot like if it was running inside Visual Studio.
-# - SignAssembly (default: false)
-#   If true, signs the assemblies.
-# - ProjectFile (default: none)
-# - SkipPrivateProjects (default: false)
-# - SolutionFile (default: none)
-# - VisibleInternals (default: true)
-#
-# - Configuration (default: Debug)
-#   Other options: Release and CodeContracts.
-# - Platform (default: AnyCPU)
-# - BuildInParallel (default: false unless /maxcpucount is in use)
-# - VisualStudioVersion (default: 12.0) Does not apply to certain projects (e.g. test projects).
-#
+# See Make.proj for a description of all available options.
 
 Properties {
     $Project = "$PSScriptRoot\Make.proj"
@@ -59,7 +39,7 @@ Task Default_Debug {
 # Run tests for public projects in Release configuration without visible internals.
 Task Default_ReleaseNoInternals {
     MSBuild $Project '/t:Test',
-        '/p:Configuration=Release;BuildGeneratedVersion=false;VisibleInternals=false;SkipPrivateProjects=true',
+        '/p:Configuration=Release;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false',
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -69,7 +49,7 @@ Task Default_ReleaseNoInternals {
 # signed, use Release configuration and unconditionally hide internals.
 Task Package -depends Clean {
     MSBuild $Project '/t:Clean;Build;Verify;Test;Package' 
-        '/p:Configuration=Release;VisibleInternals=false;SignAssembly=true;SkipPrivateProjects=true', 
+        '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -80,10 +60,10 @@ Task Package -depends Clean {
 #
 # REVIEW: To speed up things a bit, we do not call the Clean target?
 
-# Same as Package.
+# Same as Package. Detailed log.
 Task CI {
     MSBuild $Project '/t:Build;Verify;Test;Package', 
-        '/p:Configuration=Release;ContinuousBuild=true;VisibleInternals=false;SignAssembly=true;SkipPrivateProjects=true', 
+        '/p:Configuration=Release;ContinuousBuild=true;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
         '/verbosity:detailed',
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -91,7 +71,7 @@ Task CI {
 
 Task CI_Release {
     MSBuild $Project '/t:Build;Verify;Test', 
-        '/p:Configuration=Release;BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/p:Configuration=Release;BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -99,7 +79,7 @@ Task CI_Release {
 
 Task CI_Debug {
     MSBuild $Project '/t:Build;Verify;Test', 
-        '/p:BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/p:BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -107,7 +87,7 @@ Task CI_Debug {
 
 Task CI_CodeContracts {
     MSBuild $Project '/t:Build;Verify;Test', 
-        '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;ContinuousBuild=true', 
+        '/p:Configuration=CodeContracts;BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
         '/nodeReuse:false'
