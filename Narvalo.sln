@@ -61,13 +61,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Tests", "3. Tests", "{68
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EAD2CE98-FDD5-4117-87DB-C889A0BE8D4C}"
 	ProjectSection(SolutionItems) = preProject
-		louzy.cmd = louzy.cmd
 		make.cmd = make.cmd
 		Make.proj = Make.proj
 		make.ps1 = make.ps1
 		pack.cmd = pack.cmd
 		PSakefile.ps1 = PSakefile.ps1
 		publish.ps1 = publish.ps1
+		quick.cmd = quick.cmd
 		README.md = README.md
 	EndProjectSection
 EndProject

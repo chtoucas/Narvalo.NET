@@ -96,9 +96,9 @@
     </MSBuild>
   </Target>
 
-  <Target Name="VerifyBuild" DependsOnTargets="PEVerify" />
+  <Target Name="Verify" DependsOnTargets="PEVerify;SecAnnotate" />
 
-  <Target Name="RunTests" DependsOnTargets="RunXunitTests" />
+  <Target Name="Test" DependsOnTargets="RunXunitTests" />
 
   <Target Name="Package"
           Condition=" '$(LeanRun)' != 'true' "
@@ -140,12 +140,12 @@
   </Target>
 
 
-  <!-- ### XUnit ### -->
+  <!-- ### Xunit ### -->
 
   <Target Name="RunXunitTests"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
-          Outputs="$(XUnitLogFile)">
+          Outputs="$(XunitReportFile)">
     <ItemGroup>
       <_TestAssembly Include="%(BuildOutputs.Identity)"
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
@@ -153,13 +153,13 @@
 
     <!-- Since RunXunitTests depends on Build, we are sure that the directory 
          where reports are stored exists. -->
-    <xunit Assemblies="@(_TestAssembly)" Xml="$(XUnitLogFile)" Condition=" '@(_TestAssembly)' != '' " />
+    <xunit Assemblies="@(_TestAssembly)" Xml="$(XunitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
 
   <!-- ### PEVerify ### -->
 
-  <Target Name="DeletePEVerifyLog" Condition=" Exists('$(PEVerifyLogFile)') ">
+  <Target Name="DeletePEVerifyLogFile" Condition=" Exists('$(PEVerifyLogFile)') ">
     <Delete Files="$(PEVerifyLogFile)" />
   </Target>
 
@@ -169,9 +169,10 @@
     <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
   </PropertyGroup>
 
-  <!-- WARNING: Delete previous log before doing anything. If something goes 
-       wrong we might not override it. -->
-  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLog;Build;$(CorePEVerify)" />
+  <!-- WARNING: Delete previous log before doing anything. We append to it
+       and we don't want to let it grow endlessly. As a side-effect, we can not
+       use the log file for incremental batching. -->
+  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLogFile;$(CorePEVerify)" />
 
   <Target Name="_PEVerify"
           DependsOnTargets="Build"
@@ -188,10 +189,46 @@
   </Target>
 
   <Target Name="_WarnOnMissingPEVerify">
-    <Warning Text="Cannot verify assemblies. I was unable to find PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+    <Warning Text="Cannot verify assemblies. I was unable to locate PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
   </Target>
 
 
+  <!-- ### SecAnnotate ### -->
+
+  <Target Name="DeleteSecAnnotateLogFile" Condition=" Exists('$(SecAnnotateLogFile)') ">
+    <Delete Files="$(SecAnnotateLogFile)" />
+  </Target>
+
+  <!-- Define the CorePEVerify property. -->
+  <PropertyGroup>
+    <CoreSecAnnotate>_SecAnnotate</CoreSecAnnotate>
+    <CoreSecAnnotate Condition=" !Exists('$(SecAnnotateCommand)') ">_WarnOnMissingSecAnnotate</CoreSecAnnotate>
+  </PropertyGroup>
+
+  <!-- WARNING: Delete previous log before doing anything. We append to it
+       and we don't want to let it grow endlessly. As a side-effect, we can not
+       use the log file for incremental batching. -->
+  <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
+  
+  <Target Name="_SecAnnotate" 
+          DependsOnTargets="Build" 
+          Inputs="@(BuildOutputs)"
+          Outputs="$(SecAnnotateOutput)">
+    <!-- FIXME: SecAnnotateOutput is not currently written... -->
+    <Message Text="Verifying assemblies with SecAnnotate..." Importance="high" />
+
+    <!-- /maximumpasses:1  /quiet -->
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;%(BuildOutputs.FullPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+          WorkingDirectory="$(OutDir)"
+          LogStandardErrorAsError="true"
+          ContinueOnError="false" />
+  </Target>
+
+  <Target Name="_WarnOnMissingSecAnnotate">
+    <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+  </Target>
+
+  
   <!-- ### Other Private Targets ### -->
 
   <Target Name="_PatchCoreRebuild">

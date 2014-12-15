@@ -5,15 +5,24 @@ In Progress
 -----------
 
 - Rework MSBuild.
-- Rework assembly versioning.
 - Get rid off Narvalo.Junk.
 
 
 Build Infrastructure
 --------------------
 
+- Gendarme.
+- HTML output for Xunit.
+- No internals and tests.
 - No Internals Problem with CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
-- Symbols???
+- Doc all options.
+- Review ContinuousBuild & DummyGeneratedVersion.
+- http://www.visualstudio.com/downloads/download-visual-studio-vs
+- SecAnnotate (CAS, APTCA)
+  http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
+  http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx
+  http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx
+- Symbols??? GitLink???
 - Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
 - Update Copyright, add build time.
@@ -21,11 +30,10 @@ Build Infrastructure
 - XUnit 64bit
 - T4 re-generation has been disabled since it requires VS hosting.
 - Make unnecessary to add StyleCop settings to the project.
-- Add $(SolutionDir) to BuildProperties?
-- Nice to have:
-  * SecAnnotate
-  * Code Coverage + Report Generator.
+- Code Coverage + Report Generator.
+- Pex, SpecFlow
 - Merging, just for fun.
+- Custom FxCop & StyleCop.
 
 
 Coding Rules

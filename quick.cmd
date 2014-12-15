@@ -3,8 +3,8 @@
 @echo off
 @setlocal
 
-@set Parameters=Configuration=Release;NoVisibleInternals=true;SignAssembly=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
-@set Targets=Package
+@set Parameters=Configuration=Release;BuildGeneratedVersion=false;VisibleInternals=false;SkipPrivateProjects=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
+@set Targets=Build
 @set Verbosity=minimal
 
 :Build

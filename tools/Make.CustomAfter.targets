@@ -10,7 +10,7 @@
   <PropertyGroup>
     <BeforeBuildDependsOn>
       $(BeforeBuildDependsOn);
-      BuildGenerateVersion
+      CreateBuildGeneratedVersion
     </BeforeBuildDependsOn>
   </PropertyGroup>
 
@@ -91,7 +91,7 @@
 
   <!-- ### Build Generated Version ### -->
 
-  <Target Name="BuildGenerateVersion"
+  <Target Name="CreateBuildGeneratedVersion"
           Condition=" '$(BuildGeneratedVersion)' == 'true' "
           DependsOnTargets="CreateAssemblyVersionFile">
     <!-- Dynamically add the assembly version file to the list of sources 
@@ -162,7 +162,7 @@ using System.Reflection;
     <Error Text="Creation of a NuGet package for public consumption is only available for signed assemblies."
            Condition=" '$(SignAssembly)' != 'true' " />
     <Error Text="Creation of a NuGet package for public consumption is only available when internals are unconditionally hidden."
-           Condition=" '$(NoVisibleInternals)' != 'true' " />
+           Condition=" '$(VisibleInternals)' == 'true' " />
   </Target>
 
   <Target Name="CreateNupkg"

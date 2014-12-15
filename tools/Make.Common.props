@@ -5,14 +5,9 @@
     - BuildGeneratedVersion (default: true)
     - ContinuousBuild (default: false)
     - LeanRun (default: false)
-    - NoVisibleInternals (default: false)
     - SignAssembly (default: false)
     - SolutionFile (default: none)
-    
-    When creating packages for public consumption you should use the defaults
-    except for:
-    - NoVisibleInternals = true
-    - SignAssembly = true
+    - VisibleInternals (default: true)
 
     Other options may be found in Shared.props.
 
@@ -36,11 +31,13 @@
     <!-- If true, this is a CI build. Default to false. -->
     <ContinuousBuild Condition=" '$(ContinuousBuild)' != 'true' ">false</ContinuousBuild>
 
-    <!-- If true, no internals are visible. Default to false. -->
-    <NoVisibleInternals Condition=" '$(NoVisibleInternals)' != 'true' ">false</NoVisibleInternals>
+    <!-- If true, internals are visible. Default to true. -->
+    <VisibleInternals Condition=" '$(VisibleInternals)' != 'false' ">true</VisibleInternals>
 
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
+  </PropertyGroup>
 
+  <PropertyGroup>
     <!-- The root directory for NuGet projects. -->
     <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
 
@@ -54,7 +51,7 @@
     <!-- This property is useful to distinguish between variants of the same base configuration. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(NoVisibleInternals)' == 'true' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -65,29 +62,28 @@
     <OutDir>$(WorkRoot)bin\$(Configuration)$(ConfigurationVariant)\</OutDir>
   </PropertyGroup>
 
-  <!-- Define the PEVerifyDummyOutput property. -->
-  <PropertyGroup>
-    <PEVerifyDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</PEVerifyDummyOutput>
-  </PropertyGroup>
-
-  <!-- Define the PEVerifyLogFile property. -->
-  <PropertyGroup>
-    <PEVerifyLogFile>$(WorkArtefactsDir)peverify.log</PEVerifyLogFile>
-  </PropertyGroup>
-
-  <!-- Define the XUnitLogFile property. -->
-  <PropertyGroup>
-    <XUnitLogFile>$(WorkArtefactsDir)xunit.xml</XUnitLogFile>
-  </PropertyGroup>
-
   <!-- Define the NuGetCommand property. -->
   <PropertyGroup>
     <NuGetCommand>$(MSBuildThisFileDirectory)NuGet\nuget.exe</NuGetCommand>
   </PropertyGroup>
 
-  <!-- Define the PEVerifyCommand property. -->
+  <!-- Define the PEVerify properties. -->
   <PropertyGroup>
     <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
+    <PEVerifyDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</PEVerifyDummyOutput>
+    <PEVerifyLogFile>$(WorkArtefactsDir)peverify.log</PEVerifyLogFile>
+  </PropertyGroup>
+
+  <!-- Define the SecAnnotate properties. -->
+  <PropertyGroup>
+    <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
+    <SecAnnotateOutput>$(WorkArtefactsDir)secannotate.xml</SecAnnotateOutput>
+    <SecAnnotateLogFile>$(WorkArtefactsDir)secannotate.log</SecAnnotateLogFile>
+  </PropertyGroup>
+
+  <!-- Define the XunitReportFile property. -->
+  <PropertyGroup>
+    <XunitReportFile>$(WorkArtefactsDir)xunit.xml</XunitReportFile>
   </PropertyGroup>
 
   <!-- Define the BuildProperties property. -->
@@ -129,10 +125,10 @@
 
       BuildGeneratedVersion=$(BuildGeneratedVersion);
       ContinuousBuild=$(ContinuousBuild);
-      NoVisibleInternals=$(NoVisibleInternals);
       NuGetCommand=$(NuGetCommand);
       NuProjectsRoot=$(NuProjectsRoot);
       SignAssembly=$(SignAssembly);
+      VisibleInternals=$(VisibleInternals);
       WorkArtefactsDir=$(WorkArtefactsDir);
     </BuildProperties>
   </PropertyGroup>

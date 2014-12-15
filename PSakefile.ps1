@@ -28,7 +28,7 @@ Task Clean {
 
 # Run tests for public projects in Debug configuration.
 Task Default_Debug {
-    MSBuild $Project '/t:RunTests',
+    MSBuild $Project '/t:Test',
         '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true',
         '/verbosity:minimal', 
         '/maxcpucount', 
@@ -37,8 +37,8 @@ Task Default_Debug {
 
 # Run tests for public projects in Release configuration without visible internals.
 Task Default_ReleaseNoInternals {
-    MSBuild $Project '/t:RunTests',
-        '/p:Configuration=Release;BuildGeneratedVersion=false;NoVisibleInternals=true;SkipPrivateProjects=true',
+    MSBuild $Project '/t:Test',
+        '/p:Configuration=Release;BuildGeneratedVersion=false;VisibleInternals=false;SkipPrivateProjects=true',
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -47,8 +47,8 @@ Task Default_ReleaseNoInternals {
 # Create packages for publication: skip private projects, assemblies are 
 # signed, use Release configuration and unconditionally hide internals.
 Task Package -depends Clean {
-    MSBuild $Project '/t:Clean;Build;VerifyBuild;RunTests;Package' 
-        '/p:Configuration=Release;NoVisibleInternals=true;SignAssembly=true;SkipPrivateProjects=true', 
+    MSBuild $Project '/t:Clean;Build;Verify;Test;Package' 
+        '/p:Configuration=Release;VisibleInternals=false;SignAssembly=true;SkipPrivateProjects=true', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -61,15 +61,15 @@ Task Package -depends Clean {
 
 # Same as Package.
 Task CI {
-    MSBuild $Project '/t:Build;VerifyBuild;RunTests;Package', 
-        '/p:Configuration=Release;ContinuousBuild=true;NoVisibleInternals=true;SignAssembly=true;SkipPrivateProjects=true', 
+    MSBuild $Project '/t:Build;Verify;Test;Package', 
+        '/p:Configuration=Release;ContinuousBuild=true;VisibleInternals=false;SignAssembly=true;SkipPrivateProjects=true', 
         '/verbosity:detailed',
         '/maxcpucount', 
         '/nodeReuse:false'
 }
 
 Task CI_Release {
-    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+    MSBuild $Project '/t:Build;Verify;Test', 
         '/p:Configuration=Release;BuildGeneratedVersion=false;ContinuousBuild=true', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -77,7 +77,7 @@ Task CI_Release {
 }
 
 Task CI_Debug {
-    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+    MSBuild $Project '/t:Build;Verify;Test', 
         '/p:BuildGeneratedVersion=false;ContinuousBuild=true', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -85,7 +85,7 @@ Task CI_Debug {
 }
 
 Task CI_CodeContracts {
-    MSBuild $Project '/t:Build;VerifyBuild;RunTests', 
+    MSBuild $Project '/t:Build;Verify;Test', 
         '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;ContinuousBuild=true', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -98,7 +98,7 @@ Task CI_CodeContracts {
 # Lean build then run tests for solutions in Debug configuration.
 
 Task CoreSolution {
-    MSBuild $Project '/t:RunTests',
+    MSBuild $Project '/t:Test',
         '/p:LeanRun=true;SolutionFile=.\Narvalo (Core).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
@@ -106,7 +106,7 @@ Task CoreSolution {
 }
 
 Task MainSolution {
-    MSBuild $Project '/t:RunTests',
+    MSBuild $Project '/t:Test',
         '/p:LeanRun=true;SolutionFile=.\Narvalo.sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
@@ -114,7 +114,7 @@ Task MainSolution {
 }
 
 Task MiscsSolution {
-    MSBuild $Project '/t:RunTests',
+    MSBuild $Project '/t:Test',
         '/p:LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
@@ -122,7 +122,7 @@ Task MiscsSolution {
 }
 
 Task MvpSolution {
-    MSBuild $Project '/t:RunTests',
+    MSBuild $Project '/t:Test',
         '/p:LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
