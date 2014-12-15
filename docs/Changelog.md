@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-### Build Infrastructure, CodeContracts & PCL (Released 2014/12/13) [0.19.0]
+### Build Infrastructure, CodeContracts & PCL (Released 2014/12/13)
 - [New version 0.19.0 of the Core assemblies](ReleaseNotes.Core.md#0.19.0)
 - Improved: Brand new MSBuild infrastructure.
 - Improved: Assembly versioning scheme.
