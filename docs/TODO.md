@@ -15,6 +15,7 @@ In Progress
 Build Infrastructure
 --------------------
 
+- add commit hash to retail builds?
 - zip artefacts, analyze results from reports
 - make sure we see if SecAnnotate fails
 - check [module: SuppressMessage(

@@ -1,13 +1,8 @@
 ChangeLog
 =========
 
-### Narvalo.Core v0.19.1
-- Fixed: #3
-
-### Narvalo.Core v0.19.0
-- New: Enabled Code Contracts for a limited set of projects.
-- New: Removed all portable classes from Narvalo.Common
-  and put them in a new assembly Narvalo.Core.
+### Build Infrastructure, CodeContracts & PCL (Released 2014/12/13) [0.19.0]
+- [New version 0.19.0 of the Core assemblies](ReleaseNotes.Core.md#0.19.0)
 - Improved: Brand new MSBuild infrastructure.
 - Improved: Assembly versioning scheme.
 - Improved: Reorganization of the solutions.

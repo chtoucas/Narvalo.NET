@@ -10,6 +10,7 @@
     </NuDescription>
     <NuCopyright>Copyright 2013-{0}</NuCopyright>
     <NuTags>Maybe, Option, Linq, Monad</NuTags>
+    <NuReleaseNotes>https://github.com/chtoucas/Narvalo.NET/blob/master/docs/ReleaseNotes.Core.md</NuReleaseNotes>
 
     <NuFiles>
       <![CDATA[
