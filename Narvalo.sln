@@ -97,8 +97,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{23
 		etc\CodeAnalysisDictionary.xml = etc\CodeAnalysisDictionary.xml
 		etc\FrameworkProfiles.props = etc\FrameworkProfiles.props
 		etc\GlobalSuppressions.Common.cs = etc\GlobalSuppressions.Common.cs
-		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
-		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
 		etc\packages.config = etc\packages.config
 		etc\Samples.ruleset = etc\Samples.ruleset
 		etc\Settings.SourceAnalysis = etc\Settings.SourceAnalysis
@@ -122,7 +120,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "Previe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Release Engineering", "0. Release Engineering", "{1513A4D7-F9E5-46E3-83D8-CECD324CDD6E}"
 	ProjectSection(SolutionItems) = preProject
-		docs\Changelog.md = docs\Changelog.md
+		Changelog.md = Changelog.md
 		etc\Narvalo.Core.CurrentVersion.props = etc\Narvalo.Core.CurrentVersion.props
 		etc\Narvalo.Mvp.CurrentVersion.props = etc\Narvalo.Mvp.CurrentVersion.props
 		docs\ReleaseNotes.Core.md = docs\ReleaseNotes.Core.md
