@@ -7,27 +7,26 @@ In Progress
 - Rework MSBuild.
 - Get rid off Narvalo.Junk.
 - Fix all CA and SA.
+- Write assembly and package descriptions.
+- Missing AssemblyName.Version.props
+- Fixed Code Contracts and NuGet
 
 
 Build Infrastructure
 --------------------
 
 - check [module: SuppressMessage(
-- NuGet publication script (use Fake or PSake).   
-- Add Git commit stamp to BuildMetadata?
-- Gendarme.
 - No internals: rework tests and fix CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
+- Gendarme.
+- Check Platform, 64bit
+- Finish NuGet publication script.   
 - http://www.visualstudio.com/downloads/download-visual-studio-vs
 - SecAnnotate (CAS, APTCA)
   http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
   http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx
   http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx
 - Symbols??? GitLink???
-- Missing AssemblyName.props
 - %comspec% /k (@pause) or ps1 launcher 
-- Update Copyright, add build time.
-- Check 64bit
-- XUnit 64bit
 - T4 re-generation has been disabled since it requires VS hosting.
 - Make unnecessary to add StyleCop settings to the project.
 - Code Coverage + Report Generator.
@@ -46,7 +45,6 @@ Coding Rules
 
 ### Medium Priority
 
-- Write assembly descriptions.
 - Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
 - Review all GetHashCode() methods.
 
@@ -65,19 +63,23 @@ Coding Rules
   assembly infos, what's the purpose?
   [assembly: SatelliteContractVersion("X.X.X.X")]
   [assembly: AssemblyMetadata("Serviceable", "True")]
-  [assembly: AllowPartiallyTrustedCallers]
-  [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
-  [assembly: CompilationRelaxations(8)]
+
+  [assembly: StringFreezing]
+  NO: this disable string interning [assembly: CompilationRelaxations(8)] 
+
   [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
   [assembly: BitmapSuffixInSatelliteAssembly]
   [assembly: TypeLibVersion(2, 4)]
+
   [assembly: Dependency("System,", LoadHint.Always)]
   [assembly: DefaultDependency(LoadHint.Always)]
   [assembly: AssemblyDefaultAlias("System.Web.dll")]
+
   [assembly: SecurityCritical]
   [assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
   [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-  [assembly: StringFreezing]
+  [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
+
   [assembly: AssemblyTargetedPatchBand("1.0.23-161462647")]
   [assembly: ComCompatibleVersion(1, 0, 3300, 0)]
   [module: UnverifiableCode]

@@ -18,32 +18,51 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D0F78A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Externs", "src\Narvalo.Externs\Narvalo.Externs.csproj", "{FED38EF0-10B8-499A-B55E-026CC17A5764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuMaker", "src\DocuMaker\DocuMaker.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CodeContracts|Any CPU = CodeContracts|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47194837-888B-48DE-9514-CFA899564BBF}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{47194837-888B-48DE-9514-CFA899564BBF}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47194837-888B-48DE-9514-CFA899564BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{FED38EF0-10B8-499A-B55E-026CC17A5764}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

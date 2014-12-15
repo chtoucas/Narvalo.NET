@@ -23,8 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D552D1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Junk", "src\Narvalo.Junk\Narvalo.Junk.csproj", "{809C0DA5-9A01-4ADA-83A5-1A0494723594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuMaker", "src\DocuMaker\DocuMaker.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narvalo.Facts\Narvalo.Facts.csproj", "{A6E851F2-C725-4461-9A8D-47DADB563923}"
 EndProject
 Global
@@ -72,11 +70,6 @@ Global
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6E851F2-C725-4461-9A8D-47DADB563923}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
 		{A6E851F2-C725-4461-9A8D-47DADB563923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6E851F2-C725-4461-9A8D-47DADB563923}.Debug|Any CPU.Build.0 = Debug|Any CPU

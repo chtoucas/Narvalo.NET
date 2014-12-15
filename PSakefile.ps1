@@ -7,7 +7,7 @@ Properties {
     $Project = "$PSScriptRoot\Make.proj"
 }
 
-Task default -depends Default_Debug
+Task default -depends FastRun
 
 TaskTearDown {
     if ($LastExitCode -ne 0) {
@@ -28,7 +28,7 @@ Task Clean {
 }
 
 # Run tests for public projects in Debug configuration.
-Task Default_Debug {
+Task FastRun {
     MSBuild $Project '/t:Test',
         '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true',
         '/verbosity:minimal', 
@@ -36,10 +36,10 @@ Task Default_Debug {
         '/nodeReuse:false'
 }
 
-# Run tests for public projects in Release configuration without visible internals.
-Task Default_ReleaseNoInternals {
+# Run tests for public projects in Debug configuration without visible internals.
+Task FastRunBis {
     MSBuild $Project '/t:Test',
-        '/p:Configuration=Release;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false',
+        '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false',
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -49,7 +49,7 @@ Task Default_ReleaseNoInternals {
 # use Release configuration and unconditionally hide internals.
 Task Retail -depends Clean {
     MSBuild $Project '/t:Clean;Build;Verify;Test;Package' 
-        '/p:RetailBuild=true;SkipPrivateProjects=true', 
+        '/p:Retail=true;SkipPrivateProjects=true', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -60,7 +60,7 @@ Task Retail -depends Clean {
 #
 # REVIEW: To speed up things a bit, we do not call the Clean target?
 
-# Same as Package. Detailed log.
+# Same as Retail but not a Retail Build... and detailed log.
 Task CI {
     MSBuild $Project '/t:Build;Verify;Test;Package', 
         '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false', 
@@ -70,7 +70,7 @@ Task CI {
 }
 
 Task CI_Release {
-    MSBuild $Project '/t:Build;Verify;Test', 
+    MSBuild $Project '/t:Test', 
         '/p:Configuration=Release;BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -78,7 +78,7 @@ Task CI_Release {
 }
 
 Task CI_Debug {
-    MSBuild $Project '/t:Build;Verify;Test', 
+    MSBuild $Project '/t:Test', 
         '/p:BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -86,7 +86,7 @@ Task CI_Debug {
 }
 
 Task CI_CodeContracts {
-    MSBuild $Project '/t:Build;Verify;Test', 
+    MSBuild $Project '/t:Test', 
         '/p:Configuration=CodeContracts;BuildGeneratedVersion=false', 
         '/verbosity:minimal',
         '/maxcpucount', 
@@ -97,11 +97,10 @@ Task CI_CodeContracts {
 # Solution Targets.
 #
 # Lean build then run tests for solutions in Debug configuration.
-# Since LeanRun is true, no need to set BuildGeneratedVersion=false.
 
 Task CoreSolution {
     MSBuild $Project '/t:Test',
-        '/p:LeanRun=true;SolutionFile=.\Narvalo (Core).sln', 
+        '/p:Lean=true;SolutionFile=.\Narvalo (Core).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -109,7 +108,7 @@ Task CoreSolution {
 
 Task MainSolution {
     MSBuild $Project '/t:Test',
-        '/p:LeanRun=true;SolutionFile=.\Narvalo.sln', 
+        '/p:Lean=true;SolutionFile=.\Narvalo.sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -117,7 +116,7 @@ Task MainSolution {
 
 Task MiscsSolution {
     MSBuild $Project '/t:Test',
-        '/p:LeanRun=true;SolutionFile=.\Narvalo (Miscs).sln', 
+        '/p:Lean=true;SolutionFile=.\Narvalo (Miscs).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'
@@ -125,7 +124,7 @@ Task MiscsSolution {
 
 Task MvpSolution {
     MSBuild $Project '/t:Test',
-        '/p:LeanRun=true;SolutionFile=.\Narvalo (Mvp).sln', 
+        '/p:Lean=true;SolutionFile=.\Narvalo (Mvp).sln', 
         '/verbosity:minimal', 
         '/maxcpucount', 
         '/nodeReuse:false'

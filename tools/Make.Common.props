@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" 
-         TreatAsLocalProperty="BuildGeneratedVersion;Configuration;SignAssembly;VisibleInternals"
+<Project ToolsVersion="12.0"
+         TreatAsLocalProperty="BuildGeneratedVersion;Configuration;Lean;SignAssembly;VisibleInternals"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
     - BuildGeneratedVersion (default: true)
-    - LeanRun (default: false)
-    - RetailBuild (default: false)
+    - Lean (default: false)
+    - Retail (default: false)
     - SignAssembly (default: false)
     - SolutionFile (default: none)
     - VisibleInternals (default: true)
@@ -19,17 +19,11 @@
 
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
-    <!-- If true, builds behave a lot like if they were run inside Visual Studio. Default to false. -->
-    <LeanRun Condition=" '$(LeanRun)' != 'true' ">false</LeanRun>
-
     <!-- If true, sign the assemblies. Default to false. -->
     <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
 
     <!-- If true, dynamically generate the assemblies' version. Default to true. -->
     <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>
-
-    <!-- If true, packaging is for retail. Default to false. -->
-    <RetailBuild Condition=" '$(RetailBuild)' != 'true' ">false</RetailBuild>
 
     <!-- If true, internals are visible. Default to true. -->
     <VisibleInternals Condition=" '$(VisibleInternals)' != 'false' ">true</VisibleInternals>
@@ -37,13 +31,29 @@
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
   </PropertyGroup>
 
-  <!-- WARNING: For retail builds, we unconditionally override many properties. -->
-  <PropertyGroup Condition=" '$(RetailBuild)' == 'true' ">
-    <BuildGeneratedVersion>true</BuildGeneratedVersion>
-    <Configuration>Release</Configuration>
-    <SignAssembly>true</SignAssembly>
-    <VisibleInternals>false</VisibleInternals>
-  </PropertyGroup>
+  <Choose>
+    <!-- WARNING: For retail builds, we unconditionally override many properties. -->
+    <When Condition=" '$(Retail)' == 'true' ">
+      <PropertyGroup>
+        <Lean>false</Lean>
+
+        <Configuration>Release</Configuration>
+
+        <BuildGeneratedVersion>true</BuildGeneratedVersion>
+        <SignAssembly>true</SignAssembly>
+        <VisibleInternals>false</VisibleInternals>
+      </PropertyGroup>
+    </When>
+
+    <Otherwise>
+      <PropertyGroup>
+        <Retail>false</Retail>
+
+        <!-- If true, builds behave a lot like if they were run inside Visual Studio. Default to false. -->
+        <Lean Condition=" '$(Lean)' != 'true' ">false</Lean>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
   <!-- Define layout-related properties. -->
   <PropertyGroup>
@@ -56,12 +66,13 @@
   </PropertyGroup>
 
   <!-- Define the ConfigurationVariant property. -->
-  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
+  <PropertyGroup Condition=" '$(Lean)' != 'true' ">
     <!-- This property is useful to distinguish between variants of the same base configuration. 
-         Does not apply to LeanRun builds since the other options are always ignored. -->
-    <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)-Intern</ConfigurationVariant>
+         A variant is a build configuration not available to Visual Studio builds.
+         Does not apply to Lean builds since the other options are always ignored. -->
+    <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Sign</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+Vers</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+Inter</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -108,7 +119,7 @@
     </BuildProperties>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(LeanRun)' != 'true' ">
+  <PropertyGroup Condition=" '$(Lean)' != 'true' ">
     <!--
       There is also a legacy OutputPath property but this is no longer in use.
       More documentation here:
@@ -137,7 +148,7 @@
       BuildGeneratedVersion=$(BuildGeneratedVersion);
       NuGetCommand=$(NuGetCommand);
       NuProjectsRoot=$(NuProjectsRoot);
-      RetailBuild=$(RetailBuild);
+      Retail=$(Retail);
       SignAssembly=$(SignAssembly);
       VisibleInternals=$(VisibleInternals);
       WorkArtefactsDir=$(WorkArtefactsDir);

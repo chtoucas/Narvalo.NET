@@ -10,8 +10,8 @@
     Each master project (e.g. Make.proj) creates its own instance of @(ProjectsToBuild).
     
     Combinations that do not really make sense:
-    - No need to set LeanRun to true when targeting LeanBuild.
-    - Setting LeanRun will have no effect when targeting CoreBuild.
+    - No need to set Lean to true when targeting LeanBuild.
+    - Setting Lean will have no effect when targeting CoreBuild.
   -->
 
   <!-- Import properties if not already done. -->
@@ -52,8 +52,8 @@
 
   <Target Name="Build">
     <PropertyGroup>
-      <_TargetsCalledByBuild Condition=" '$(LeanRun)' == 'true' ">LeanBuild</_TargetsCalledByBuild>
-      <_TargetsCalledByBuild Condition=" '$(LeanRun)' != 'true' ">CoreBuild</_TargetsCalledByBuild>
+      <_TargetsCalledByBuild Condition=" '$(Lean)' == 'true' ">LeanBuild</_TargetsCalledByBuild>
+      <_TargetsCalledByBuild Condition=" '$(Lean)' != 'true' ">CoreBuild</_TargetsCalledByBuild>
     </PropertyGroup>
 
     <CallTarget Targets="$(_TargetsCalledByBuild)" />
@@ -76,8 +76,8 @@
 
   <Target Name="Rebuild">
     <PropertyGroup>
-      <_TargetsCalledByRebuild Condition=" '$(LeanRun)' == 'true' ">LeanRebuild</_TargetsCalledByRebuild>
-      <_TargetsCalledByRebuild Condition=" '$(LeanRun)' != 'true' ">CoreRebuild</_TargetsCalledByRebuild>
+      <_TargetsCalledByRebuild Condition=" '$(Lean)' == 'true' ">LeanRebuild</_TargetsCalledByRebuild>
+      <_TargetsCalledByRebuild Condition=" '$(Lean)' != 'true' ">CoreRebuild</_TargetsCalledByRebuild>
     </PropertyGroup>
 
     <CallTarget Targets="$(_TargetsCalledByRebuild)" />
@@ -101,7 +101,7 @@
   <Target Name="Test" DependsOnTargets="RunXunitTests" />
 
   <Target Name="Package"
-          Condition=" '$(LeanRun)' != 'true' "
+          Condition=" '$(Lean)' != 'true' "
           DependsOnTargets="Build">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -111,7 +111,7 @@
   </Target>
 
   <Target Name="Publish"
-          Condition=" '$(LeanRun)' != 'true' "
+          Condition=" '$(Lean)' != 'true' "
           DependsOnTargets="Package">
     <Warning Text="NuGet packages are ready for publication. There is one last manual step... now run the publish.ps1 script." />
   </Target>
@@ -245,7 +245,7 @@
       to BuildProperties.
 
       Another solution is to define our Rebuild target so that it calls MSBuild 
-      with the Rebuild target. This is exactly what we do if LeanRun is set to true.
+      with the Rebuild target. This is exactly what we do if Lean is set to true.
     -->
     <PropertyGroup>
       <BuildProperties>
@@ -257,7 +257,7 @@
 
 
   <!-- Initial target. -->
-  <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(LeanRun)' != 'true' ">
+  <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(Lean)' != 'true' ">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
     <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
   </Target>

@@ -10,9 +10,9 @@
       For incremental batching to work be sure to use: 
         BuildGeneratedVersion=false.
       
-    - RetailBuild (default: false)
-      If true, generated packages are meant to be published. 
-      Currently it means three thing: 
+    - Retail (default: false)
+      If true, generated results are meant to be published. 
+      Currently it means: 
       * If true, override other properties:
           BuildGeneratedVersion=true
           Configuration=Release
@@ -21,15 +21,18 @@
       * If false, NuGet package versions are uniquely created on the fly.
         This ensures that each build creates a distinct package.
       * Use different build metadata for the assembly informational version.
+      * Use different text for the AssemblyConfiguration attribute.
         
     - SignAssembly (default: false)
     
     - VisibleInternals (default: true)
       Unconditionally hide internals to other assemblies.
       
-    - LeanRun (default: false)
+    - Lean (default: false)
       Make the build behaves a lot like if it was running inside Visual Studio.
-      If true, the other custom build options are ignored.
+      If true, the other custom build options are ignored (except the standard
+      MSBuild ones).
+      __Ignored when Retail is true.__
  
     Child projects selection:
     - SolutionFile (default: none)
@@ -37,11 +40,11 @@
       
     - ProjectFile (default: none)
       Select a single project for building.
-      Ignored when SolutionFile is also set.
+      __Ignored when SolutionFile is also set.__
       
     - SkipPrivateProjects (default: false)
       Select the most relevant projects for building.
-      Ignored when SolutionFile or ProjectFile is also set.
+      __Ignored when SolutionFile or ProjectFile is also set.__
 
     Common MSBuild options:
     - Configuration (default: Debug)
