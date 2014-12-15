@@ -51,7 +51,7 @@
     <!-- This property is useful to distinguish between variants of the same base configuration. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)-Intern</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
@@ -83,7 +83,8 @@
 
   <!-- Define the XunitReportFile property. -->
   <PropertyGroup>
-    <XunitReportFile>$(WorkArtefactsDir)xunit.xml</XunitReportFile>
+    <XunitXmlFile>$(WorkArtefactsDir)xunit.xml</XunitXmlFile>
+    <XunitHtmlFile>$(WorkArtefactsDir)xunit.html</XunitHtmlFile>
   </PropertyGroup>
 
   <!-- Define the BuildProperties property. -->

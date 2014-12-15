@@ -1,6 +1,27 @@
 #
 # WARNING: This file must stay at the root of the repository.
 #
+# Options:
+# - BuildGeneratedVersion (default: true)
+#   Be sure to use BuildGeneratedVersion=false for incremental batching;
+#   otherwise at each run, an assembly version is generated which forces
+#   a fresh build. 
+# - ContinuousBuild (default: false)
+# - LeanRun (default: false)
+#   Make the build behaves a lot like if it was running inside Visual Studio.
+# - SignAssembly (default: false)
+#   If true, signs the assemblies.
+# - ProjectFile (default: none)
+# - SkipPrivateProjects (default: false)
+# - SolutionFile (default: none)
+# - VisibleInternals (default: true)
+#
+# - Configuration (default: Debug)
+#   Other options: Release and CodeContracts.
+# - Platform (default: AnyCPU)
+# - BuildInParallel (default: false unless /maxcpucount is in use)
+# - VisualStudioVersion (default: 12.0) Does not apply to certain projects (e.g. test projects).
+#
 
 Properties {
     $Project = "$PSScriptRoot\Make.proj"
@@ -96,6 +117,7 @@ Task CI_CodeContracts {
 # Solution Targets.
 #
 # Lean build then run tests for solutions in Debug configuration.
+# Since LeanRun is true, no need to set BuildGeneratedVersion=false.
 
 Task CoreSolution {
     MSBuild $Project '/t:Test',

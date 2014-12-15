@@ -6,16 +6,14 @@ In Progress
 
 - Rework MSBuild.
 - Get rid off Narvalo.Junk.
+- Fix all CA and SA.
 
 
 Build Infrastructure
 --------------------
 
 - Gendarme.
-- HTML output for Xunit.
-- No internals and tests.
-- No Internals Problem with CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
-- Doc all options.
+- No internals and tests or CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
 - Review ContinuousBuild & DummyGeneratedVersion.
 - http://www.visualstudio.com/downloads/download-visual-studio-vs
 - SecAnnotate (CAS, APTCA)

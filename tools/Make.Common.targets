@@ -145,7 +145,7 @@
   <Target Name="RunXunitTests"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
-          Outputs="$(XunitReportFile)">
+          Outputs="$(XunitXmlFile)">
     <ItemGroup>
       <_TestAssembly Include="%(BuildOutputs.Identity)"
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
@@ -153,7 +153,10 @@
 
     <!-- Since RunXunitTests depends on Build, we are sure that the directory 
          where reports are stored exists. -->
-    <xunit Assemblies="@(_TestAssembly)" Xml="$(XunitReportFile)" Condition=" '@(_TestAssembly)' != '' " />
+    <xunit Assemblies="@(_TestAssembly)"
+           Html="$(XunitHtmlFile)"
+           Xml="$(XunitXmlFile)"
+           Condition=" '@(_TestAssembly)' != '' " />
   </Target>
 
 
@@ -209,9 +212,9 @@
        and we don't want to let it grow endlessly. As a side-effect, we can not
        use the log file for incremental batching. -->
   <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
-  
-  <Target Name="_SecAnnotate" 
-          DependsOnTargets="Build" 
+
+  <Target Name="_SecAnnotate"
+          DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
           Outputs="$(SecAnnotateOutput)">
     <!-- FIXME: SecAnnotateOutput is not currently written... -->
@@ -228,7 +231,7 @@
     <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
   </Target>
 
-  
+
   <!-- ### Other Private Targets ### -->
 
   <Target Name="_PatchCoreRebuild">
@@ -252,7 +255,7 @@
     </PropertyGroup>
   </Target>
 
-  
+
   <!-- Initial target. -->
   <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(LeanRun)' != 'true' ">
     <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
