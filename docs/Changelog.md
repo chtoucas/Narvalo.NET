@@ -1,12 +1,15 @@
 ChangeLog
 =========
 
-### 0.19.0
-- New: Enabled Code Contracts for a limited set of projects. 
-- New: Removed all portable classes from Narvalo.Common 
+### Narvalo.Core v0.19.1
+- Fixed: #3
+
+### Narvalo.Core v0.19.0
+- New: Enabled Code Contracts for a limited set of projects.
+- New: Removed all portable classes from Narvalo.Common
   and put them in a new assembly Narvalo.Core.
 - Improved: Brand new MSBuild infrastructure.
 - Improved: Assembly versioning scheme.
 - Improved: Reorganization of the solutions.
 - Improved: Narvalo.Facts becomes a true VS test project.
-- Fixed: #1 Narvalo.Facts failed whend run twice in a row when using Make.proj.  
+- Fixed: #1 Narvalo.Facts failed whend run twice in a row when using Make.proj.

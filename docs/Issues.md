@@ -4,6 +4,8 @@ Issues
 High Priority
 -------------
 
+- When adding a NuGet package, the CodeContracts library is added to the
+  project references.
 
 Medium Priority
 ---------------
@@ -18,7 +20,7 @@ Resolved Issues
 
 [2] When building a PCL project _from the command line_, MSBuild generates output
     inside a subdirectory of `$(OutDir)`. To correct this, we instruct MSBuild to
-    use the standard behaviour: `$(GenerateProjectSpecificOutputFolder) = false`. 
+    use the standard behaviour: `$(GenerateProjectSpecificOutputFolder) = false`.
 
 [1] Narvalo.Facts fails when called from Make.proj and run twice in a row.
     Narvalo.Core and Narvalo.Common use the default namespace (`Narvalo`) and
