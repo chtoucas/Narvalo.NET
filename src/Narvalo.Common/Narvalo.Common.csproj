@@ -127,7 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Common.props" />
+    <None Include="Narvalo.Common.Version.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

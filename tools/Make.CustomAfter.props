@@ -7,9 +7,9 @@
     This file is injected at the end of Narvalo.Common.props by Make.proj.
   -->
 
-  <!-- Import project specific properties. -->
-  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
-          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
+  <!-- If any, import project version properties. -->
+  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).Version.props"
+          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).Version.props') "/>
 
 
   <!-- ### Overrides for properties defined in Narvalo.Common.props ### -->

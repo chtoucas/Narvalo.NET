@@ -171,7 +171,7 @@
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Web.props" />
+    <None Include="Narvalo.Web.Version.props" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

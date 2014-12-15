@@ -87,7 +87,7 @@
     <Compile Include="Resolvers\TypeKeyedResolverCache`1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Mvp.props" />
+    <None Include="Narvalo.Mvp.Version.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

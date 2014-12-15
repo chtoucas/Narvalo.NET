@@ -12,7 +12,7 @@ In Progress
 Build Infrastructure
 --------------------
 
-- check [module::SuppressMessage]
+- check [module: SuppressMessage(
 - NuGet publication script (use Fake or PSake).   
 - Add Git commit stamp to BuildMetadata?
 - Gendarme.

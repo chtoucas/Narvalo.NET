@@ -61,7 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Mvp.Web.props" />
+    <None Include="Narvalo.Mvp.Web.Version.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

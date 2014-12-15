@@ -26,7 +26,7 @@
 
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
-
+  
   <!-- If any, import custom global properties. -->
   <Import Project="$(CustomBeforeNarvaloCommonProps)"
           Condition=" '$(CustomBeforeNarvaloCommonProps)' != '' And Exists('$(CustomBeforeNarvaloCommonProps)')" />
@@ -213,9 +213,15 @@
   </PropertyGroup>
 
 
-  <!-- If any, import custom properties. -->
+  <!-- If any, import custom global properties. -->
   <Import Project="$(CustomAfterNarvaloCommonProps)"
           Condition=" '$(CustomAfterNarvaloCommonProps)' != '' And Exists('$(CustomAfterNarvaloCommonProps)') " />
+
+  <!-- If any, import custom project properties. 
+       This file is imported last. Should only exist when we have to test
+       something on a project and then removed. -->
+  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
+          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
 
   <!-- Mark Make.Common.props as already imported. -->
   <PropertyGroup>

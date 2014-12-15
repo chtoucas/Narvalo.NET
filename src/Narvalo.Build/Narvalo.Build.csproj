@@ -31,7 +31,7 @@
     <Compile Include="JsYuiCompressor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Build.props" />
+    <None Include="Narvalo.Build.Version.props" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
