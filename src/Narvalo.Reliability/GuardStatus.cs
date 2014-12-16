@@ -8,7 +8,7 @@
         Down,
 
         // Currently unavailable.
-        TemporarelyDown,
+        TemporarilyDown,
 
         // Something's wrong, but we can still serve requests. (Degraded)
         Degraded,

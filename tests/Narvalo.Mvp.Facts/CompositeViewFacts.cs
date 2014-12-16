@@ -31,7 +31,7 @@ namespace Narvalo.Mvp
                 Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
             }
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void AddsViewsToList()
             {

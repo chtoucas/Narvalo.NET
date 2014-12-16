@@ -91,7 +91,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     // Act
                     factory.Create(presenterType, viewType, view);
                 }
-                catch (Exception ex) {
+                catch (PresenterBindingException ex) {
                     // Assert
                     Assert.True(ex.InnerException is ApplicationException);
                 }
@@ -106,13 +106,14 @@ namespace Narvalo.Mvp.PresenterBinding
                 // Arrange
                 var factory = new PresenterFactory();
                 var view = Substitute.For<IView>();
-                var presenter = new MyDisposablePresenter(view);
 
-                // Act
-                factory.Release(presenter);
+                using (var presenter = new MyDisposablePresenter(view)) {
+                    // Act
+                    factory.Release(presenter);
 
-                // Assert
-                Assert.True(presenter.DisposeWasCalled);
+                    // Assert
+                    Assert.True(presenter.DisposeWasCalled);
+                }
             }
         }
 

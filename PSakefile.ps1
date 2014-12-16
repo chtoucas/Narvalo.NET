@@ -18,7 +18,7 @@ Task default -depends Tests
 
 Task CI {
     # Continuous Integration Build. Mimic the Retail target, with detailed log.
-    MSBuild $Project '/v:d', '/m', '/nr:false', '/t:FullBuild', 
+    MSBuild $Project '/v:d', '/m', '/nr:false', '/t:FullBuild',
         '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false'
 }
 Task Tests {
@@ -30,7 +30,7 @@ Task Verifications {
 Task SourceAnalysis {
     MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
 }
-# Code Analysis is slow. The default is to only analyze public projects. 
+# Code Analysis is slow. The default is to only analyze public projects.
 # WARNING: Do not change VisibleInternals to true.
 Task CodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false'
@@ -38,14 +38,14 @@ Task CodeAnalysis {
 Task FullCodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
-# Code Contracts Analysis is really slow. The default is to only analyze public projects. 
+# Code Contracts Analysis is really slow. The default is to only analyze public projects.
 Task CodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }
 Task FullCodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
-# Security Analysis is slow. The default is to only analyze public projects. 
+# Security Analysis is slow. The default is to only analyze public projects.
 Task SecurityAnalysis {
     MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }
@@ -63,7 +63,7 @@ Task Retail -depends FullClean {
 }
 # At first, I wanted to also offer the possibility of packaging a single project
 # but then we won't be able to run the test suite. A better solution is to use
-# the solution files, even if this is not perfect. For instance, the solution 
+# the solution files, even if this is not perfect. For instance, the solution
 # might have been incorrectly configured and only a subset of the projects
 # might be built.
 Task RetailCore -depends FullClean {
@@ -73,7 +73,7 @@ Task RetailMiscs -depends FullClean {
     MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Miscs).sln'
 }
 Task RetailMvp -depends FullClean {
-    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Mvp).sln' 
+    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Mvp).sln'
 }
 
 # ==============================================================================

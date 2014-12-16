@@ -180,7 +180,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
         public static class TheUnitProperty
         {
             [Fact]
@@ -205,7 +205,7 @@ namespace Narvalo.Fx
 
         public static class TheIsSomeProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsFalse_WhenNone()
             {
@@ -221,7 +221,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsTrue_WhenSome()
             {
@@ -237,7 +237,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsImmutable_OnceTrue()
             {
@@ -253,7 +253,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IsImmutable_OnceFalse()
             {
@@ -272,7 +272,7 @@ namespace Narvalo.Fx
 
         public static class TheValueProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsInvalidOperationException_WhenNone()
             {
@@ -284,7 +284,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsTheOriginalValue_WhenSome()
             {
@@ -574,7 +574,7 @@ namespace Narvalo.Fx
 
         public static class TheCreateMethod
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_ForNotNull()
             {
@@ -598,7 +598,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForNull()
             {
@@ -619,7 +619,7 @@ namespace Narvalo.Fx
 
         public static class TheBindMethod
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
             {
@@ -636,7 +636,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             [Issue(1, IssueSeverity.High)]
             public static void ReturnsNone_WhenSelectorReturnsNull()
@@ -680,7 +680,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
             }
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_ForSuccessfulPredicate()
             {
@@ -700,7 +700,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForUnsucessfulPredicate()
             {
@@ -747,7 +747,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.Select(selector));
             }
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone()
             {
@@ -765,7 +765,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
             {
@@ -829,7 +829,7 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
             }
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone()
             {
@@ -851,7 +851,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_ForMiddleIsNone()
             {
@@ -873,7 +873,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
             {
@@ -895,7 +895,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSomeAndApplySelector()
             {
@@ -922,7 +922,7 @@ namespace Narvalo.Fx
 
         public static class TheJoinOperator
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsNone_WhenJoinFailed()
             {
@@ -942,7 +942,7 @@ namespace Narvalo.Fx
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsSome_WhenJoinSucceed()
             {

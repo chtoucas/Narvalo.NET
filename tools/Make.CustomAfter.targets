@@ -73,7 +73,7 @@
       <_UnknownVersion Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' ">true</_UnknownVersion>
       <_UnknownVersion Condition=" '$(_UnknownVersion)' == 'true' ">false</_UnknownVersion>
     </PropertyGroup>
-    
+
     <Warning Text="Using a dummy semantic version for $(AssemblyName). Most certainly you forgot to create the $(AssemblyName).Version.props file."
              Condition=" '$(_UnknownVersion)' == 'true' " />
 
@@ -92,7 +92,7 @@
   <Target Name="GetBuildMetadata" Condition=" '$(Retail)' != 'true' " DependsOnTargets="GetConfigurationMetadata">
     <!-- For retail builds, we don't add any build metadata to keep the
          version as simple as possible. We can still read the complete
-         build configuration with the AssemblyConfiguration attribute. 
+         build configuration with the AssemblyConfiguration attribute.
          The build metadata enables us to quickly check the build configuration
          using the file explorer. -->
     <PropertyGroup>
@@ -113,7 +113,7 @@
   <Target Name="CreateBuildGeneratedVersion"
           Condition=" '$(BuildGeneratedVersion)' == 'true' "
           DependsOnTargets="CreateAssemblyVersionFile">
-    <!-- Dynamically add the assembly version file to the list of sources 
+    <!-- Dynamically add the assembly version file to the list of sources
          to compile and add the BUILD_GENERATED_VERSION compilation symbol. -->
     <PropertyGroup>
       <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
@@ -148,7 +148,7 @@
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
-[assembly: AssemblyConfiguration("$(_ConfigurationMetadata) Build on $([System.DateTime]::UtcNow.ToString()).")]
+[assembly: AssemblyConfiguration("$(_ConfigurationMetadata) built on $([System.DateTime]::UtcNow.ToString()).")]
 [assembly: AssemblyVersion("$(AssemblyVersion)")]
 [assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
 [assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
@@ -289,7 +289,7 @@ using System.Reflection;
           Condition=" '$(NuProjectExists)' == 'true' "
           DependsOnTargets="GetNuVersion">
     <!-- Sanity checks. Even if we skip the package creation (SkipNupkgCreation
-         is true), some targets (e.g. CreateNuspec) which require NuGet properties 
+         is true), some targets (e.g. CreateNuspec) which require NuGet properties
          to be set may be called directly. -->
     <Error Text="You MUST define the 'NuId' property in your NuGet project: $(NuProjectFile)."
            Condition=" '$(NuId)' == '' "

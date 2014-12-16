@@ -22,7 +22,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public static class ValidateViewTypeMethod
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsArgumentException_ForViewTypeOfClassType()
             {
@@ -34,7 +34,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsArgumentException_ForViewTypeNotInheritingIView()
             {
@@ -46,7 +46,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsArgumentException_ForViewTypeOfPrivateType()
             {
@@ -58,7 +58,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ThrowsArgumentException_ForViewTypeContainingPublicMethods()
             {
@@ -70,7 +70,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void Passes_ForViewTypeOfIViewType()
             {
@@ -85,7 +85,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void Passes_ForViewTypeInheritingIView()
             {
@@ -100,7 +100,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void Passes_ForViewTypeInheritingGenericIView()
             {
@@ -115,7 +115,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void Passes_ForViewTypeOfGenericIViewType()
             {
@@ -130,7 +130,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void Passes_ForViewTypeContainingPropertiesAndEventHandlers()
             {

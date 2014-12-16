@@ -83,7 +83,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public static class GetCandidatePrefixesFromInterfacesMethod
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresIViewInterface()
             {
@@ -98,7 +98,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericIViewInterface()
             {
@@ -113,7 +113,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNotInheritingIView()
             {
@@ -128,7 +128,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNameNotEndingWithView()
             {
@@ -143,7 +143,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericInterfaceNameNotEndingWithView()
             {
@@ -158,7 +158,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresInterfaceNameNotContainingView()
             {
@@ -173,7 +173,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void IgnoresGenericInterfaceNameNotContainingView()
             {
@@ -188,7 +188,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void TrimsPrefixIAndSuffixView_FromInterfaceName()
             {
@@ -203,7 +203,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void TrimsPrefixIAndSuffixView_ForGenericInterfaceName()
             {
@@ -218,7 +218,7 @@ namespace Narvalo.Mvp.Resolvers
             }
 #endif
 
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsAllCandidates_ForComplexInterfaceName()
             {

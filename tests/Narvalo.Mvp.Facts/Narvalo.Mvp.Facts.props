@@ -4,10 +4,9 @@
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Empty.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <Target Name="_InitializeNarvaloMvFactsProps">
-    <Warning Text="We temporarely override the Source &amp; Code Analysis settings for $(AssemblyName)." />
+    <Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)." />
   </Target>
 </Project>

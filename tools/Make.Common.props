@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         TreatAsLocalProperty="BuildGeneratedVersion;Configuration;Lean;SignAssembly;VisibleInternals"
+         TreatAsLocalProperty="Configuration;BuildGeneratedVersion;Lean;SignAssembly;VisibleInternals"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options:
@@ -74,7 +74,7 @@
          Does not apply to Lean builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+BuiltVersion</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+Internals</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->

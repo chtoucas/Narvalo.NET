@@ -80,10 +80,14 @@ namespace Narvalo.Mvp.Resolvers
                 // Act
                 var ctor = resolver.Resolve(presenterType, viewType);
                 var instance = ctor.Invoke(null, new[] { view });
+                var presenter = instance as MyPresenter<IMyView1>;
 
                 // Assert
-                Assert.True(instance is MyPresenter<IMyView1>);
-                Assert.Equal(view, ((MyPresenter<IMyView1>)instance).View);
+                Assert.True(presenter != null);
+
+                if (presenter != null) {
+                    Assert.Equal(view, presenter.View);
+                }
             }
 
             [Fact]

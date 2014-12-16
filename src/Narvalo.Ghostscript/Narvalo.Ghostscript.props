@@ -8,6 +8,6 @@
   </PropertyGroup>
 
   <Target Name="_InitializeNarvaloGhostscriptProps">
-    <Warning Text="We temporarely override the Source &amp; Code Analysis settings for $(AssemblyName)." />
+    <Warning Text="We temporarily override the Source &amp; Code Analysis settings for $(AssemblyName)." />
   </Target>
 </Project>

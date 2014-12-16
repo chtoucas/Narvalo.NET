@@ -3,10 +3,10 @@
          InitialTargets="_InitializeNarvaloBuildProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <!--<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>-->
   </PropertyGroup>
 
   <Target Name="_InitializeNarvaloBuildProps">
-    <Warning Text="We temporarely override the Code Analysis settings for $(AssemblyName)." />
+    <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)." />
   </Target>
 </Project>

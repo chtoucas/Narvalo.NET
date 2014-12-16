@@ -7,6 +7,6 @@
   </PropertyGroup>
 
   <Target Name="_InitializeMvpCommandLineProps">
-    <Warning Text="We temporarely override the Code Analysis settings for $(AssemblyName)." />
+    <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)." />
   </Target>
 </Project>

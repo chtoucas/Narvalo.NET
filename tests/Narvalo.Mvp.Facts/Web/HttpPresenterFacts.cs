@@ -105,7 +105,7 @@ namespace Narvalo.Mvp.Web
 
         public static class HttpContextProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsAmbientHttpContext()
             {
@@ -125,7 +125,7 @@ namespace Narvalo.Mvp.Web
 
         public static class CacheProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsCacheFromHttpContext()
             {
@@ -147,7 +147,7 @@ namespace Narvalo.Mvp.Web
 
         public static class RequestProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsRequestFromHttpContext()
             {
@@ -169,7 +169,7 @@ namespace Narvalo.Mvp.Web
 
         public static class ResponseProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsResponseFromHttpContext()
             {
@@ -191,7 +191,7 @@ namespace Narvalo.Mvp.Web
 
         public static class ServerProperty
         {
-#if NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO
             [Fact]
             public static void ReturnsServerFromHttpContext()
             {

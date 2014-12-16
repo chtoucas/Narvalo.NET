@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 //// All compilation symbols found below are eventually defined on the fly by the build script.
 
-[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", 
+[module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly",
     Justification = "Informational version uses semantic versioning.")]
 
 [assembly: AssemblyProduct("Narvalo.Org Libraries & Tools.")]
