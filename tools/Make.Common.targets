@@ -96,8 +96,6 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Analyze" DependsOnTargets="SecAnnotate" />
-  
   <Target Name="Verify" DependsOnTargets="PEVerify" />
 
   <Target Name="Test" DependsOnTargets="RunXunitTests" />
@@ -112,6 +110,10 @@
              Targets="Package"
              StopOnFirstFailure="true" />
   </Target>
+
+  <Target Name="FullBuild" DependsOnTargets="Build;Verify;Test;Package" />
+
+  <Target Name="FullRebuild" DependsOnTargets="Clean;FullBuild" />
 
 
   <!-- ### NuGet ### -->

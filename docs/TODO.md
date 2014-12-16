@@ -1,8 +1,8 @@
 TODO
 ====
 
-In Progress
------------
+Work In Progress
+----------------
 
 - Rework MSBuild.
 - Get rid off Narvalo.Junk.
@@ -15,21 +15,26 @@ In Progress
 Build Infrastructure
 --------------------
 
+- overridable CA & SA
+- review the changes with runcodeanalysis &  sourceanalysisenabled
+- build all configuration Debug|Release+AnyCPU
 - add commit hash to builds?
+- use nuget packages for WebSite, Benchmarking, DocuMaker
+- documentation target & website target
 - zip artefacts, analyze results from reports
-- make sure we see if SecAnnotate fails
+- make sure we see actually a SecAnnotate failure
 - check [module: SuppressMessage(
 - No internals: rework tests and fix CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
 - Gendarme.
 - Check Platform, 64bit
-- Finish NuGet publication script.   
+- Finish NuGet publication script.
 - http://www.visualstudio.com/downloads/download-visual-studio-vs
 - SecAnnotate (CAS, APTCA)
   http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
   http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx
   http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx
 - Symbols??? GitLink???
-- %comspec% /k (@pause) or ps1 launcher 
+- %comspec% /k (@pause) or ps1 launcher
 - T4 re-generation has been disabled since it requires VS hosting.
 - Make unnecessary to add StyleCop settings to the project.
 - Code Coverage + Report Generator.
@@ -68,7 +73,7 @@ Coding Rules
   [assembly: AssemblyMetadata("Serviceable", "True")]
 
   [assembly: StringFreezing]
-  NO: this disable string interning [assembly: CompilationRelaxations(8)] 
+  NO: this disable string interning [assembly: CompilationRelaxations(8)]
 
   [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
   [assembly: BitmapSuffixInSatelliteAssembly]

@@ -133,11 +133,7 @@
   -->
 
   <PropertyGroup>
-    <!-- Only in Release configuration is Source Analysis automatically run.
-         Inside VS, you can still perform manual Source Analysis for any Build 
-         configuration. -->
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' != 'Release' ">false</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
 
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 
@@ -152,13 +148,7 @@
   -->
 
   <PropertyGroup>
-    <!-- Only in Release configuration is Code Analysis automatically run.
-         Inside VS, you can still perform manual Code Analysis for any Build 
-         configuration. -->
-    <RunCodeAnalysis Condition=" '$(Configuration)' == 'Release' ">true</RunCodeAnalysis>
-    <RunCodeAnalysis Condition=" '$(Configuration)' != 'Release' ">false</RunCodeAnalysis>
-
-    <!-- The default behaviour is to use a very strict ruleset.
+    <!-- The default behaviour is to use a strict ruleset.
          For performance reasons we use a minimal ruleset when using Code
          Contracts. Also Code Contracts produce assemblies that are not
          compatible with Code Analysis. -->
@@ -211,15 +201,15 @@
     <!--<CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>-->
     <!--<CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>-->
   </PropertyGroup>
+  
 
+  <!-- ### After Imports ### -->
 
   <!-- If any, import custom global properties. -->
   <Import Project="$(CustomAfterNarvaloCommonProps)"
           Condition=" '$(CustomAfterNarvaloCommonProps)' != '' And Exists('$(CustomAfterNarvaloCommonProps)') " />
 
-  <!-- If any, import custom project properties. 
-       This file is imported last. Should only exist when we have to test
-       something on a project and then removed. -->
+  <!-- If any, import custom project properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
           Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
 

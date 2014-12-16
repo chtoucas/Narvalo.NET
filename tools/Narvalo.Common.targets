@@ -113,9 +113,16 @@
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="high" />
   </Target>
-  
 
-  <!-- If any, import custom targets. -->
+
+
+  <!-- ### After Imports ### -->
+
+  <!-- If any, import custom global targets. -->
   <Import Project="$(CustomAfterNarvaloCommonTargets)"
           Condition=" '$(CustomAfterNarvaloCommonTargets)' != '' And Exists('$(CustomAfterNarvaloCommonTargets)')" />
+  
+  <!-- If any, import custom project properties. -->
+  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).targets"
+          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).targets') "/>
 </Project>

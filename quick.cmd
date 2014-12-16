@@ -3,7 +3,7 @@
 @echo off
 @setlocal
 
-@set Parameters=Configuration=Debug;BuildGeneratedVersion=false;VisibleInternals=true;SkipPrivateProjects=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
+@set Parameters=Configuration=Debug;BuildGeneratedVersion=true;VisibleInternals=true;SkipPrivateProjects=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
 @set Targets=Clean;Build
 @set Verbosity=minimal
 

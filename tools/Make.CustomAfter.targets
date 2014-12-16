@@ -53,17 +53,35 @@
     </GetBuildKey>
   </Target>
 
+  <Target Name="GetConfigurationMetadata">
+    <PropertyGroup>
+      <ConfigurationMetadata>$(Configuration)</ConfigurationMetadata>
+      <ConfigurationMetadata>$(ConfigurationMetadata)+$(Platform)</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(SignAssembly)' == 'true' ">$(ConfigurationMetadata)+Signed</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(SignAssembly)' != 'true' ">$(ConfigurationMetadata)+Unsigned</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationMetadata)+BuiltVersion</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(ConfigurationMetadata)+DummyVersion</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(ConfigurationMetadata)+Internals</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+NoInternals</ConfigurationMetadata>
+    </PropertyGroup>
+  </Target>
 
   <!-- ### Semantic Versioning ### -->
 
   <Target Name="CheckSemanticVersion">
+    <PropertyGroup>
+      <_UnknownVersion Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' ">true</_UnknownVersion>
+      <_UnknownVersion Condition=" '$(_UnknownVersion)' == 'true' ">false</_UnknownVersion>
+    </PropertyGroup>
+    
     <Warning Text="Using a dummy semantic version for $(AssemblyName). Most certainly you forgot to create the $(AssemblyName).Version.props file."
-             Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
+             Condition=" '$(_UnknownVersion)' == 'true' " />
 
     <PropertyGroup>
       <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
       <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
       <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
+      <PreReleaseLabel Condition=" '$(_UnknownVersion)' == 'true' ">DUMMY</PreReleaseLabel>
     </PropertyGroup>
 
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
@@ -71,20 +89,14 @@
              Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
   </Target>
 
-  <Target Name="GetBuildMetadata" Condition=" '$(Retail)' != 'true' ">
+  <Target Name="GetBuildMetadata" Condition=" '$(Retail)' != 'true' " DependsOnTargets="GetConfigurationMetadata">
     <!-- For retail builds, we don't add any build metadata to keep the
          version as simple as possible. We can still read the complete
          build configuration with the AssemblyConfiguration attribute. 
          The build metadata enables us to quickly check the build configuration
          using the file explorer. -->
     <PropertyGroup>
-      <BuildMetadata>$(Configuration.ToLowerInvariant())</BuildMetadata>
-      <BuildMetadata Condition=" '$(SignAssembly)' == 'true' ">$(BuildMetadata).signed</BuildMetadata>
-      <BuildMetadata Condition=" '$(SignAssembly)' != 'true' ">$(BuildMetadata).unsigned</BuildMetadata>
-      <BuildMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(BuildMetadata).buildver</BuildMetadata>
-      <BuildMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(BuildMetadata).dummyver</BuildMetadata>
-      <BuildMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(BuildMetadata).intern</BuildMetadata>
-      <BuildMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(BuildMetadata).nointern</BuildMetadata>
+      <BuildMetadata>$(ConfigurationMetadata.Replace('+', '.').ToLowerInvariant())</BuildMetadata>
     </PropertyGroup>
   </Target>
 
@@ -95,7 +107,6 @@
       <SemanticVersion Condition=" '$(BuildMetadata)' != '' ">$(SemanticVersion)+$(BuildMetadata)</SemanticVersion>
     </PropertyGroup>
   </Target>
-
 
   <!-- ### Build Generated Version ### -->
 
@@ -114,20 +125,14 @@
   </Target>
 
   <Target Name="CreateAssemblyVersionFile"
-          DependsOnTargets="DeleteAssemblyVersionFile;GenerateAssemblyVersions">
+          DependsOnTargets="DeleteAssemblyVersionFile;GenerateAssemblyVersions;GetConfigurationMetadata">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
 
     <PropertyGroup Condition=" '$(Retail)' == 'true' ">
-      <_ConfigurationVariant>Retail</_ConfigurationVariant>
+      <_ConfigurationMetadata>Retail</_ConfigurationMetadata>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <_ConfigurationVariant>$(Configuration)</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(SignAssembly)' != 'true' ">+Unsigned</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_ConfigurationVariant)+BuildGeneratedVersion</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationVariant)+DummyVersion</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(VisibleInternals)' == 'true' ">$(_ConfigurationVariant)+VisibleInternals</_ConfigurationVariant>
-      <_ConfigurationVariant Condition=" '$(VisibleInternals)' != 'true' ">$(_ConfigurationVariant)+NoVisibleInternals</_ConfigurationVariant>
+      <_ConfigurationMetadata>$(ConfigurationMetadata)</_ConfigurationMetadata>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -143,7 +148,7 @@
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
-[assembly: AssemblyConfiguration("$(_ConfigurationVariant) Build on $([System.DateTime]::UtcNow.ToString()).")]
+[assembly: AssemblyConfiguration("$(_ConfigurationMetadata) Build on $([System.DateTime]::UtcNow.ToString()).")]
 [assembly: AssemblyVersion("$(AssemblyVersion)")]
 [assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
 [assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
@@ -240,7 +245,7 @@ using System.Reflection;
           Condition=" '$(Retail)' != 'true' "
           DependsOnTargets="GetBuildKey">
     <PropertyGroup>
-      <NuPreReleaseLabel>DEV$(BuildKey)</NuPreReleaseLabel>
+      <NuPreReleaseLabel>CURRENT(BuildKey)</NuPreReleaseLabel>
     </PropertyGroup>
   </Target>
 
