@@ -2,13 +2,12 @@
 
 namespace Narvalo.Fx
 {
-    using System.Runtime.CompilerServices;
+#if DOCUMENTATION
 
     /// <summary>
     /// The <b>Narvalo.Fx</b> namespace contains classes and interfaces inspired by functional programming.
     /// </summary>
-    [CompilerGeneratedAttribute]
-    class NamespaceDoc
-    {
-    }
+    class NamespaceDoc { }
+
+#endif
 }

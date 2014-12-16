@@ -2,10 +2,9 @@
 
 namespace Narvalo.Collections
 {
-    using System.Runtime.CompilerServices;
+#if DOCUMENTATION
 
-    [CompilerGeneratedAttribute]
-    class NamespaceDoc
-    {
-    }
+    class NamespaceDoc { }
+
+#endif
 }

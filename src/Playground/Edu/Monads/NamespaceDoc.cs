@@ -2,8 +2,8 @@
 
 namespace Playground.Edu.Monads
 {
-    using System.Runtime.CompilerServices;
-
+#if DOCUMENTATION
+    
     /*!
      * Monad Skeleton
      * ==============
@@ -30,9 +30,7 @@ namespace Playground.Edu.Monads
      * 
      *
      */
+    class NamespaceDoc { }
 
-    [CompilerGeneratedAttribute]
-    class NamespaceDoc
-    {
-    }
+#endif
 }

@@ -15,11 +15,9 @@ Work In Progress
 Build Infrastructure
 --------------------
 
-- StyleCop cache
+- StyleCop cache & ability to change settings used by the VS extension.
 - Split Make.proj: Make.proj & Narvalo.proj.
-- overridable CA & SA
 - different profiles for PSakefile.ps1
-- review the changes with runcodeanalysis &  sourceanalysisenabled
 - local NuGet repository. use nuget packages for WebSite, Benchmarking, DocuMaker
 - build all configuration Debug|Release+AnyCPU
 - add commit hash to builds?

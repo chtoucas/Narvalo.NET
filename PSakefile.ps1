@@ -16,8 +16,6 @@ Task default -depends Tests
 # Test and Analysis Targets
 # ==============================================================================
 
-# TODO: Release
-
 Task CI {
     # Continuous Integration Build. Mimic the Retail target, with detailed log.
     MSBuild $Project '/v:d', '/m', '/nr:false', '/t:FullBuild', 
@@ -32,22 +30,26 @@ Task Verifications {
 Task SourceAnalysis {
     MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
 }
-Task CodeAnalysis { # Slow! WARNING: Do not change VisibleInternals to true.
+# Code Analysis is slow. The default is to only analyze public projects. 
+# WARNING: Do not change VisibleInternals to true.
+Task CodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false'
 }
-Task FullCodeAnalysis { # Slow! WARNING: Do not change VisibleInternals to true.
+Task FullCodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
-Task CodeContractsAnalysis { # Really slow! When it is ready, move to Debug|Release configurations.
+# Code Contracts Analysis is really slow. The default is to only analyze public projects. 
+Task CodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }
-Task FullCodeContractsAnalysis { # Really slow! When it is ready, move to Debug|Release configurations.
+Task FullCodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
-Task SecurityAnalysis { # Slow!
+# Security Analysis is slow. The default is to only analyze public projects. 
+Task SecurityAnalysis {
     MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }
-Task FullSecurityAnalysis { # Slow!
+Task FullSecurityAnalysis {
     MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
 }
 

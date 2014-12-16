@@ -2,9 +2,9 @@
 <Project ToolsVersion="12.0"
          InitialTargets="_InitializeNarvaloCoreProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
   <Target Name="_InitializeNarvaloCoreProps">
     <Warning Text="We temporarely force internals to be invisible for $(AssemblyName)." />
