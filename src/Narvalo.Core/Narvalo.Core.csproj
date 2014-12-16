@@ -116,9 +116,6 @@
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Assume.cs" />
     <Compile Include="Internal\ExceptionFactory.cs" />
-    <Compile Include="Internal\Stubs.cs" />
-    <Compile Include="Internal\Stubs`1.cs" />
-    <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
     <Compile Include="Make`1.cs" />
     <Compile Include="NamespaceDoc.cs" />
