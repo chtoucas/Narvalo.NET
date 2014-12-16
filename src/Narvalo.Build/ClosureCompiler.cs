@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using Microsoft.Build.Framework;
@@ -22,7 +23,7 @@
 
         public string CompilationLevel { get; set; }
 
-        public string OutDir { get; set; }
+        public string OutputDirectory { get; set; }
 
         public int ProcessTimeout
         {
@@ -57,7 +58,7 @@
                 string inFile = file.ItemSpec;
 
                 if (!File.Exists(inFile)) {
-                    Log.LogError("The file " + inFile + " does not exist");
+                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, inFile));
                     break;
                 }
 
@@ -65,7 +66,7 @@
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    "Closure Compiler processing " + new FileInfo(inFile).Name);
+                    String.Format(CultureInfo.CurrentCulture, Strings_Build.ClosureCompiler_ProcessingFormat, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile)) {
                     File.Delete(outFile);
@@ -115,7 +116,7 @@
         string GetCompressedFilePath_(string fileName)
         {
             string name = fileName.Replace(".js", ".min.js");
-            return String.IsNullOrEmpty(OutDir) ? name : Path.Combine(OutDir, new FileInfo(name).Name);
+            return String.IsNullOrEmpty(OutputDirectory) ? name : Path.Combine(OutputDirectory, new FileInfo(name).Name);
         }
     }
 }

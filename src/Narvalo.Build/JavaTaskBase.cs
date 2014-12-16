@@ -4,6 +4,7 @@
     using System.Diagnostics;
     ////using System.Runtime.CompilerServices;
     ////using System.Runtime.InteropServices;
+    using System.Globalization;
     using System.IO;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
@@ -48,13 +49,17 @@
                     "Could not find java.exe. Looked in Registry, PATH locations and various common folders inside Program Files.");
             }
 
-            Log.LogMessage(MessageImportance.Low, "Using java.exe from: " + javaPath);
+            Log.LogMessage(
+                MessageImportance.Low, 
+                String.Format(CultureInfo.CurrentCulture, Strings_Build.JavaTask_JavaPathFormat, javaPath));
 
             return javaPath;
         }
 
         protected void LogJavaFailure(Process process)
         {
+            Require.NotNull(process, "process");
+
             string[] errors = process.StandardError.ReadToEnd()
                 .Replace("\r", String.Empty)
                 .Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -65,7 +70,7 @@
                     error.Trim().Replace("[WARNING] ", String.Empty));
             }
 
-            Log.LogError("java.exe exited with error code {0}.", process.ExitCode);
+            Log.LogError(Strings_Build.JavaTask_ErrorFormat, process.ExitCode);
         }
 
         protected override string GenerateFullPathToTool()

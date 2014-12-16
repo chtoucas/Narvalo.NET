@@ -1,5 +1,7 @@
 ﻿namespace Narvalo.Build
 {
+    using System;
+    using System.Globalization;
     using System.IO;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
@@ -51,7 +53,7 @@
         public override bool Execute()
         {
             if (Files.Length == 0) {
-                Log.LogMessage(MessageImportance.High, "The list of files to merge can not be empty.");
+                Log.LogMessage(MessageImportance.High, Strings_Build.MergeFiles_EmptyListOfFiles);
                 return true;
             }
 
@@ -59,7 +61,8 @@
                 using (var writer = new StreamWriter(OutFile)) {
                     foreach (ITaskItem file in Files) {
                         if (!File.Exists(file.ItemSpec)) {
-                            Log.LogError("The file " + file.ItemSpec + " does not exist.");
+                            Log.LogError(
+                                String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, file.ItemSpec));
                             break;
                         }
 

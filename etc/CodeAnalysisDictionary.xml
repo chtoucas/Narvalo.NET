@@ -7,7 +7,7 @@
     <Unrecognized>
     </Unrecognized>
     <Recognized>
-      <!-- Espaces de noms -->
+      <!-- Namespaces -->
       <Word>Autofac</Word>
       <Word>Mvp</Word>
       <Word>Narvalo</Word>
@@ -53,6 +53,9 @@
       <Word>Lorem</Word>
       <Word>Png</Word>
       <Word>Tv</Word>
+      
+      <!-- Jargon -->
+      <Word>Munge</Word>
     </Recognized>
 
     <Deprecated>
