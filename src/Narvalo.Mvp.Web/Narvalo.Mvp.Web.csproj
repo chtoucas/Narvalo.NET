@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Mvp.Web.Version.props" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

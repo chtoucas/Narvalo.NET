@@ -65,6 +65,10 @@
     <Content Include="Widgets.aspx" />
     <Content Include="LookupWidget.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Settings.StyleCop" />
+    <Content Include="MvpWebForms.props">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,6 +8,6 @@
         public AggregateGuardException(string message) : base(message) { }
 
         public AggregateGuardException(string message, AggregateException innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
     }
 }

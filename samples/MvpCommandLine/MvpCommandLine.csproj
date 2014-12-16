@@ -31,9 +31,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MvpCommandLine.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MvpCommandLine.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">

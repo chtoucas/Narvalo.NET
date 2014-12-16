@@ -5,21 +5,24 @@ Work In Progress
 ----------------
 
 - Rework MSBuild.
-- Get rid off Narvalo.Junk.
 - Fix all CA and SA.
 - Write assembly and package descriptions.
 - Missing AssemblyName.Version.props
 - Fixed Code Contracts and NuGet
+- Get rid off Narvalo.Junk.
 
 
 Build Infrastructure
 --------------------
 
+- StyleCop cache
+- Split Make.proj: Make.proj & Narvalo.proj.
 - overridable CA & SA
+- different profiles for PSakefile.ps1
 - review the changes with runcodeanalysis &  sourceanalysisenabled
+- local NuGet repository. use nuget packages for WebSite, Benchmarking, DocuMaker
 - build all configuration Debug|Release+AnyCPU
 - add commit hash to builds?
-- use nuget packages for WebSite, Benchmarking, DocuMaker
 - documentation target & website target
 - zip artefacts, analyze results from reports
 - make sure we see actually a SecAnnotate failure

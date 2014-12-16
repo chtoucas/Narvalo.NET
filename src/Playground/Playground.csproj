@@ -94,6 +94,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Playground.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Edu\Monads\Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
@@ -122,6 +125,7 @@
     <None Include="Playground.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj">

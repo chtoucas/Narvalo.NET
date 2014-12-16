@@ -27,15 +27,9 @@ Task Tests {
     MSBuild $Project $BuildArgs '/t:Test', '/p:BuildGeneratedVersion=false'
 }
 Task Verifications {
-    MSBuild $Project $BuildArgs '/t:Verify', '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true'
-}
-Task FullVerifications {
     MSBuild $Project $BuildArgs '/t:Verify', '/p:BuildGeneratedVersion=false'
 }
 Task SourceAnalysis {
-    MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false;SkipPrivateProjects=true'
-}
-Task FullSourceAnalysis {
     MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
 }
 Task CodeAnalysis { # Slow! WARNING: Do not change VisibleInternals to true.

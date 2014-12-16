@@ -57,6 +57,7 @@
   <ItemGroup>
     <None Include="CodeTemplates\MonadFacts.tt" />
     <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Issues.txt" />

@@ -135,7 +135,7 @@
   <PropertyGroup>
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
 
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>

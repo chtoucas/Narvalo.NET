@@ -128,7 +128,7 @@ Coding Style
 ### StyleCop
 
 Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
-the content of "etc\Settings.SourceAnalysis".
+the content of "etc\Strict.SourceAnalysis".
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
 
@@ -228,7 +228,7 @@ Add the project to Narvalo (Public).proj when it is ready for publication.
 
 ### Configure StyleCop for Visual Studio
 
-Edit the local StyleCop settings and link it to "etc\Settings.SourceAnalysis".
+Edit the local StyleCop settings and link it to "etc\Strict.SourceAnalysis".
 
 These settings only affect StyleCop when run explicitly from within Visual Studio.
 During Build, StyleCop is called from `Narvalo.Common.targets`.

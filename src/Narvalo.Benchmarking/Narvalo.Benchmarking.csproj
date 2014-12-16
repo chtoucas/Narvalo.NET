@@ -53,7 +53,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Benchmarking.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Strings_Benchmarking.resx">
