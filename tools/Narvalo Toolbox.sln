@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		..\docs\Guidelines.md = ..\docs\Guidelines.md
 		..\docs\Issues.md = ..\docs\Issues.md
 		..\README.md = ..\README.md
-		..\docs\ReleaseNotes.Core.md = ..\docs\ReleaseNotes.Core.md
-		..\docs\ReleaseNotes.Mvp.md = ..\docs\ReleaseNotes.Mvp.md
 		..\docs\Tips.md = ..\docs\Tips.md
 		..\docs\TODO.md = ..\docs\TODO.md
 	EndProjectSection

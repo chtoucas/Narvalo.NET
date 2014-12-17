@@ -8,7 +8,7 @@
     </NuDescription>
     <NuCopyright>Copyright 2013-{0}</NuCopyright>
     <NuTags>MVP</NuTags>
-    <NuReleaseNotes>See docs/ReleaseNotes.Mvp.md on project website.</NuReleaseNotes>
+    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuFiles>
       <![CDATA[

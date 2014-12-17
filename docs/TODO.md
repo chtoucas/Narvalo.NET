@@ -8,7 +8,6 @@ Work In Progress
 - Fix all CA and SA.
 - Write assembly and package descriptions.
 - Missing AssemblyName.Version.props
-- Fix Code Contracts and NuGet
 - Get rid off Narvalo.Junk.
 
 

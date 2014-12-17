@@ -8,9 +8,26 @@
     </NuDescription>
     <NuCopyright>Copyright 2013-{0}</NuCopyright>
     <NuTags>Utilities, SQL</NuTags>
-    <NuReleaseNotes>See docs/ReleaseNotes.Core.md on project website.</NuReleaseNotes>
+    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
-    <NuReferences Condition=" '$(Configuration)' == 'Release' ">
+    <NuFiles>
+      <![CDATA[
+<file src="Narvalo.Common.dll" target="lib\net45\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <NuFiles>
+      <![CDATA[
+$(NuFiles)
+<file src="Narvalo.Common.pdb" target="lib\net45\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NuReferences>
       <![CDATA[
       <references>
         <reference file="Narvalo.Common.dll" />
@@ -19,17 +36,6 @@
     </NuReferences>
 
     <NuFiles>
-      <![CDATA[
-<file src="Narvalo.Common.dll" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Common.pdb" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
       <![CDATA[
 $(NuFiles)
 <file src="Narvalo.Common.pdb" target="lib\net45\" />
