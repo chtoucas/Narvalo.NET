@@ -7,8 +7,8 @@
       This package contains the Narvalo.Org common utilities.
     </NuDescription>
     <NuCopyright>Copyright 2013-{0}</NuCopyright>
-    <NuTags>SQL</NuTags>
-    <NuReleaseNotes>https://github.com/chtoucas/Narvalo.NET/blob/master/docs/ReleaseNotes.Core.md</NuReleaseNotes>
+    <NuTags>Utilities, SQL</NuTags>
+    <NuReleaseNotes>See docs/ReleaseNotes.Core.md on project website.</NuReleaseNotes>
 
     <NuReferences Condition=" '$(Configuration)' == 'Release' ">
       <![CDATA[

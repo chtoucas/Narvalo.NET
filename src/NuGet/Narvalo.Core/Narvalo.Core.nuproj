@@ -10,9 +10,26 @@
     </NuDescription>
     <NuCopyright>Copyright 2013-{0}</NuCopyright>
     <NuTags>Maybe, Option, Linq, Monad</NuTags>
-    <NuReleaseNotes>https://github.com/chtoucas/Narvalo.NET/blob/master/docs/ReleaseNotes.Core.md</NuReleaseNotes>
+    <NuReleaseNotes>See docs/ReleaseNotes.Core.md on project website.</NuReleaseNotes>
 
-    <NuReferences Condition=" '$(Configuration)' == 'Release' ">
+    <NuFiles>
+      <![CDATA[
+<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <NuFiles>
+      <![CDATA[
+$(NuFiles)
+<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NuReferences>
       <![CDATA[
       <references>
         <reference file="Narvalo.Core.dll" />
@@ -21,17 +38,6 @@
     </NuReferences>
 
     <NuFiles>
-      <![CDATA[
-<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
       <![CDATA[
 $(NuFiles)
 <file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />

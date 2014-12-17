@@ -11,8 +11,8 @@
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
   <ItemGroup>
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+    <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
     <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />-->
   </ItemGroup>
 

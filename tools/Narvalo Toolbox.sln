@@ -101,6 +101,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp", "Narvalo.Mvp", "{17DD76B1-4A2F-4922-84B4-217386690277}"
 	ProjectSection(SolutionItems) = preProject
 		..\src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj = ..\src\NuGet\Narvalo.Mvp\Narvalo.Mvp.nuproj
+		..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props = ..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp.Web", "Narvalo.Mvp.Web", "{3AE373F6-9CFC-438B-B719-960ECD73C7B2}"
@@ -111,7 +112,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Mvp.Web", "Narvalo.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Web", "Narvalo.Web", "{B501E154-9C9A-4719-B60F-9EC7B878667F}"
 	ProjectSection(SolutionItems) = preProject
-		..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props = ..\src\Narvalo.Mvp\Narvalo.Mvp.Version.props
 		..\src\NuGet\Narvalo.Web\Narvalo.Web.nuproj = ..\src\NuGet\Narvalo.Web\Narvalo.Web.nuproj
 		..\src\Narvalo.Web\Narvalo.Web.Version.props = ..\src\Narvalo.Web\Narvalo.Web.Version.props
 	EndProjectSection
