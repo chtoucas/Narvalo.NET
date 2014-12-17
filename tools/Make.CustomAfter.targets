@@ -210,7 +210,8 @@ using System.Reflection;
                  ReleaseNotes="$(NuReleaseNotes)"
                  Copyright="$(NuCopyright)"
                  Tags="$(NuTags)"
-                 Dependencies="$(ProjectDependencies)$(NuGetDependencies)" />
+                 Dependencies="$(ProjectDependencies)$(NuGetDependencies)"
+                 References="$(NuReferences)" />
   </Target>
 
   <Target Name="DeleteNupkgFile" DependsOnTargets="GetNuPkgFile">
@@ -281,11 +282,21 @@ using System.Reflection;
       <_ProjectDependencyId  Condition=" '$(Retail)' != 'true' ">$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition=" '$(Retail)' == 'true' ">
       <ProjectDependency Include="$(_ProjectDependencyId)">
         <XmlFragment>
           <![CDATA[
 <dependency id="$(_ProjectDependencyId)" version="$(_ProjectDependencyVersion)" />
+          ]]>
+        </XmlFragment>
+      </ProjectDependency>
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(Retail)' != 'true' ">
+      <ProjectDependency Include="$(_ProjectDependencyId)">
+        <XmlFragment>
+          <![CDATA[
+<dependency id="$(_ProjectDependencyId)" version="(,$(_ProjectDependencyVersion)]" />
           ]]>
         </XmlFragment>
       </ProjectDependency>

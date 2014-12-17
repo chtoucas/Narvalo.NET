@@ -12,6 +12,14 @@
     <NuTags>Maybe, Option, Linq, Monad</NuTags>
     <NuReleaseNotes>https://github.com/chtoucas/Narvalo.NET/blob/master/docs/ReleaseNotes.Core.md</NuReleaseNotes>
 
+    <NuReferences Condition=" '$(Configuration)' == 'Release' ">
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Core.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />

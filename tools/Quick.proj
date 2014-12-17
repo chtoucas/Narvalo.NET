@@ -3,6 +3,7 @@
   <!-- WARNING: Only for testing. -->
 
   <PropertyGroup>
+    <Configuration>Release</Configuration>
     <SignAssembly>true</SignAssembly>
     <VisibleInternals>false</VisibleInternals>
   </PropertyGroup>

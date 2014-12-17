@@ -10,6 +10,14 @@
     <NuTags>SQL</NuTags>
     <NuReleaseNotes>https://github.com/chtoucas/Narvalo.NET/blob/master/docs/ReleaseNotes.Core.md</NuReleaseNotes>
 
+    <NuReferences Condition=" '$(Configuration)' == 'Release' ">
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Common.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Common.dll" target="lib\net45\" />

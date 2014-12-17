@@ -96,6 +96,7 @@ return !Log.HasLoggedErrors;
       <Copyright ParameterType="System.String" />
       <Tags ParameterType="System.String" />
       <Dependencies ParameterType="System.String" />
+      <References ParameterType="System.String" />
     </ParameterGroup>
     <Task>
       <Using Namespace="System" />
@@ -117,6 +118,7 @@ try {
       .Replace("$copyright$", String.IsNullOrWhiteSpace(Copyright) ? String.Empty : "<copyright>" + String.Format(Copyright, DateTime.Now.Year) + "</copyright>")
       .Replace("$tags$", String.IsNullOrWhiteSpace(Tags) ? String.Empty : "<tags>" + Tags + "</tags>")
       .Replace("$dependencies$", String.IsNullOrWhiteSpace(Dependencies) ? String.Empty : "<dependencies>" + Dependencies + "</dependencies>")
+      .Replace("$references$", String.IsNullOrWhiteSpace(References) ? String.Empty : References)
       ;
     
     File.WriteAllText(OutFile, nuspec);

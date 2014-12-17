@@ -15,6 +15,7 @@
     $copyright$
     $tags$
     $dependencies$
+    $references$
   </metadata>
   <files>$files$</files>
 </package>
