@@ -3,13 +3,13 @@
 @echo off
 @setlocal
 
-@set Parameters=Configuration=Debug;BuildGeneratedVersion=true;VisibleInternals=true;SkipPrivateProjects=true;ProjectFile=.\src\Narvalo.Core\Narvalo.Core.csproj
-@set Targets=Clean;Build
+@set Parameters=SignAssembly=true;VisibleInternals=false
+@set Targets=FullBuild
 @set Verbosity=minimal
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Make.proj" /t:%Targets% /p:%Parameters% /v:%Verbosity% /m /nr:false %LogParams%
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Quick.proj" /t:%Targets% /p:%Parameters% /v:%Verbosity% /m /nr:false %LogParams%
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess

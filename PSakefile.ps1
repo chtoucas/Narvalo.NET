@@ -21,6 +21,11 @@ Task CI {
     MSBuild $Project '/v:d', '/m', '/nr:false', '/t:FullBuild',
         '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false'
 }
+
+Task FakeRetail {
+    MSBuild $Project '/v:m', '/m', '/nr:false', '/t:FullBuild',
+        '/p:SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false'
+}
 Task Tests {
     MSBuild $Project $BuildArgs '/t:Test', '/p:BuildGeneratedVersion=false'
 }
@@ -30,7 +35,7 @@ Task Verifications {
 Task SourceAnalysis {
     MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
 }
-# Code Analysis is slow. The default is to only analyze public projects.
+# Code Analysis is slow. Analysis is only performed on public projects.
 # WARNING: Do not change VisibleInternals to true.
 Task CodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false'
@@ -38,14 +43,14 @@ Task CodeAnalysis {
 Task FullCodeAnalysis {
     MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
-# Code Contracts Analysis is really slow. The default is to only analyze public projects.
+# Code Contracts Analysis is really slow. Analysis is only performed on public projects.
 Task CodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }
 Task FullCodeContractsAnalysis {
     MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
-# Security Analysis is slow. The default is to only analyze public projects.
+# Security Analysis is slow. Analysis is only performed on public projects.
 Task SecurityAnalysis {
     MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true'
 }

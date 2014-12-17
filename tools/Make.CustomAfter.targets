@@ -71,17 +71,17 @@
   <Target Name="CheckSemanticVersion">
     <PropertyGroup>
       <_UnknownVersion Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' ">true</_UnknownVersion>
-      <_UnknownVersion Condition=" '$(_UnknownVersion)' == 'true' ">false</_UnknownVersion>
+      <_UnknownVersion Condition=" '$(_UnknownVersion)' != 'true' ">false</_UnknownVersion>
     </PropertyGroup>
 
     <Warning Text="Using a dummy semantic version for $(AssemblyName). Most certainly you forgot to create the $(AssemblyName).Version.props file."
              Condition=" '$(_UnknownVersion)' == 'true' " />
 
-    <PropertyGroup>
-      <MajorVersion Condition=" '$(MajorVersion)' == '' ">1</MajorVersion>
-      <MinorVersion Condition=" '$(MinorVersion)' == '' ">0</MinorVersion>
-      <PatchVersion Condition=" '$(PatchVersion)' == '' ">0</PatchVersion>
-      <PreReleaseLabel Condition=" '$(_UnknownVersion)' == 'true' ">DUMMY</PreReleaseLabel>
+    <PropertyGroup Condition=" '$(_UnknownVersion)' == 'true' ">
+      <MajorVersion>1</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+      <PreReleaseLabel>UNKNOWN</PreReleaseLabel>
     </PropertyGroup>
 
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
@@ -187,7 +187,7 @@ using System.Reflection;
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
     <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
-    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -OutputDirectory $(WorkArtefactsDir) -NonInteractive $(NuGetCommandAdditionalArgs) -Verbosity quiet"
+    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -OutputDirectory $(WorkArtefactsDir) $(NuGetCommandAdditionalArgs) -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
   </Target>
@@ -213,10 +213,10 @@ using System.Reflection;
                  Dependencies="$(ProjectDependencies)$(NuGetDependencies)" />
   </Target>
 
-  <Target Name="DeleteNupkgFile" Condition=" '$(NupkgFile)' != '' And Exists('$(NupkgFile)') ">
-    <Message Text="Deleting nupkg file..." Importance="normal" />
+  <Target Name="DeleteNupkgFile" DependsOnTargets="GetNuPkgFile">
+    <Message Text="Deleting nupkg file..." Importance="normal" Condition=" Exists('$(NupkgFile)') " />
 
-    <Delete Files="$(NupkgFile)" Condition=" '$(NupkgFile)' != '' " />
+    <Delete Files="$(NupkgFile)" />
   </Target>
 
   <Target Name="DeleteNuspecFile" Condition=" Exists('$(NuspecFile)') ">
@@ -233,24 +233,28 @@ using System.Reflection;
     </ReadDependenciesFromPackagesConfig>
   </Target>
 
-  <Target Name="GetNuPreReleaseLabel"
-          Condition=" '$(Retail)' == 'true' "
-          DependsOnTargets="CheckSemanticVersion">
+  <Target Name="GetNuPkgFile" DependsOnTargets="GetNuVersion">
     <PropertyGroup>
-      <NuPreReleaseLabel Condition=" '$(PreReleaseLabel)' != '' ">$(PreReleaseLabel)</NuPreReleaseLabel>
+      <NupkgFile>$(WorkArtefactsDir)$(NuId).$(NuVersion).nupkg</NupkgFile>
     </PropertyGroup>
   </Target>
 
-  <Target Name="GetNuPreReleaseLabel"
+  <Target Name="GetNuPreReleaseLabel" DependsOnTargets="CheckSemanticVersion">
+    <PropertyGroup>
+      <NuPreReleaseLabel>$(PreReleaseLabel)</NuPreReleaseLabel>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="AfterGetNuPreReleaseLabel"
           Condition=" '$(Retail)' != 'true' "
+          AfterTargets="GetNuPreReleaseLabel"
           DependsOnTargets="GetBuildKey">
     <PropertyGroup>
-      <NuPreReleaseLabel>CURRENT(BuildKey)</NuPreReleaseLabel>
+      <NuPreReleaseLabel>T$(BuildKey)</NuPreReleaseLabel>
     </PropertyGroup>
   </Target>
 
-  <Target Name="GetNuVersion"
-          DependsOnTargets="CheckSemanticVersion;GetNuPreReleaseLabel">
+  <Target Name="GetNuVersion" DependsOnTargets="CheckSemanticVersion;GetNuPreReleaseLabel">
     <PropertyGroup>
       <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</NuVersion>
       <NuVersion Condition=" '$(NuPreReleaseLabel)' != '' ">$(NuVersion)-$(NuPreReleaseLabel)</NuVersion>
@@ -269,14 +273,19 @@ using System.Reflection;
           Condition=" '@(ProjectReference)' != '' "
           Outputs="%(ProjectReference.Identity)">
     <FindProductVersion AssemblyPath="$(OutDir)%(ProjectReference.Name).dll">
-      <Output TaskParameter="ProductVersion" PropertyName="_ProjectReferenceVersion"/>
+      <Output TaskParameter="ProductVersion" PropertyName="_ProjectDependencyVersion"/>
     </FindProductVersion>
+
+    <!--<PropertyGroup>
+      <_ProjectDependencyId>%(ProjectReference.Name)</_ProjectDependencyId>
+      <_ProjectDependencyId  Condition=" '$(Retail)' != 'true' ">$(_ProjectDependencyId).CURRENT</_ProjectDependencyId>
+    </PropertyGroup>-->
 
     <ItemGroup>
       <ProjectDependency Include="%(ProjectReference.Name)">
         <XmlFragment>
           <![CDATA[
-<dependency id="%(ProjectReference.Name)" version="$(_ProjectReferenceVersion)" />
+<dependency id="%(ProjectReference.Name)" version="$(_ProjectDependencyVersion)" />
           ]]>
         </XmlFragment>
       </ProjectDependency>
@@ -286,8 +295,7 @@ using System.Reflection;
 
   <!-- Initial target. -->
   <Target Name="__InitializeMakeCustomAfterTargets"
-          Condition=" '$(NuProjectExists)' == 'true' "
-          DependsOnTargets="GetNuVersion">
+          Condition=" '$(NuProjectExists)' == 'true' ">
     <!-- Sanity checks. Even if we skip the package creation (SkipNupkgCreation
          is true), some targets (e.g. CreateNuspec) which require NuGet properties
          to be set may be called directly. -->
@@ -301,8 +309,9 @@ using System.Reflection;
            Condition=" '$(NuFiles)' == '' "
            ContinueOnError="false" />
 
-    <PropertyGroup>
-      <NupkgFile>$(WorkArtefactsDir)$(NuId).$(NuVersion).nupkg</NupkgFile>
+    <PropertyGroup Condition=" '$(Retail)' != 'true' ">
+      <!--<NuId>$(NuId).CURRENT</NuId>-->
+      <NuTitle>$(NuTitle)-CURRENT</NuTitle>
     </PropertyGroup>
   </Target>
 </Project>

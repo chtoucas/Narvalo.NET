@@ -2,17 +2,17 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options are defined here and either in Shared.props or in Make.Common.props.
-    
+
     Custom build options:
     - BuildGeneratedVersion (default: true)
       Generate assembly version before building.
-      A new generated assembly version forces a fresh build. 
-      For incremental batching to work be sure to use: 
+      A new generated assembly version forces a fresh build.
+      For incremental batching to work be sure to use:
         BuildGeneratedVersion=false.
-      
+
     - Retail (default: false)
-      If true, generated results are meant to be published. 
-      Currently it means: 
+      If true, generated results are meant to be published.
+      Currently it means:
       * If true, override other properties:
           BuildGeneratedVersion=true
           Configuration=Release
@@ -22,26 +22,26 @@
         This ensures that each build creates a distinct package.
       * Use different build metadata for the assembly informational version.
       * Use different text for the AssemblyConfiguration attribute.
-        
+
     - SignAssembly (default: false)
-    
+
     - VisibleInternals (default: true)
       Unconditionally hide internals to other assemblies.
-      
+
     - Lean (default: false)
       Make the build behaves a lot like if it was running inside Visual Studio.
       If true, the other custom build options are ignored (except the standard
       MSBuild ones).
       __Ignored when Retail is true.__
- 
+
     Child projects selection:
     - SolutionFile (default: none)
-      Select a custom solution for building. 
-      
+      Select a custom solution for building.
+
     - ProjectFile (default: none)
       Select a single project for building.
       __Ignored when SolutionFile is also set.__
-      
+
     - SkipPrivateProjects (default: false)
       Select the most relevant projects for building.
       __Ignored when SolutionFile or ProjectFile is also set.__
@@ -49,22 +49,21 @@
     Common MSBuild options:
     - Configuration (default: Debug)
       Other options: Release and CodeContracts.
-      
+
     - Platform (default: AnyCPU)
       Right now, AnyCPU is the only supported platform.
-      
+
     - BuildInParallel (default: false unless the /maxcpucount MSBuild's switch is used)
-    
+
     Miscs options:
     - RepositoryRoot
       No need to set this manually. If empty, MSBuild will pick up the correct value.
-      
-    - VisualStudioVersion (default: 12.0) 
+
+    - VisualStudioVersion (default: 12.0)
       Right now, I don't see any circumstances under which we would need
       to override the default value.
       Does not have any effect on some projects (e.g. test projects override this
       property).
-
   -->
 
   <!-- Define the SkipPrivateProjects property. -->

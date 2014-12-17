@@ -25,6 +25,7 @@ using System.Runtime.InteropServices;
 #if DUMMY_GENERATED_VERSION
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyInformationalVersion("1.0.0-DUMMY")]
 #elif BUILD_GENERATED_VERSION
 // Versions are automatically generated and made available in a separate file.
 #else

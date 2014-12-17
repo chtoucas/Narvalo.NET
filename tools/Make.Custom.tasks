@@ -53,7 +53,7 @@ return !Log.HasLoggedErrors;
       </Code>
     </Task>
   </UsingTask>
-  
+
   <!-- Create an ever growing integer key from the build and revision numbers. -->
   <UsingTask TaskName="GetBuildKey" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
@@ -79,12 +79,12 @@ return !Log.HasLoggedErrors;
       </Code>
     </Task>
   </UsingTask>
-  
+
   <UsingTask TaskName="WriteNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <TemplateFile ParameterType="System.String" Required="true" />
       <OutFile ParameterType="System.String" Required="true" />
-      
+
       <Id ParameterType="System.String" Required="true" />
       <Version ParameterType="System.String" Required="true" />
       <Description ParameterType="System.String" Required="true" />
@@ -144,14 +144,16 @@ return !Log.HasLoggedErrors;
       <Using Namespace="System.IO" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-ProductVersion = FileVersionInfo.GetVersionInfo(AssemblyPath).ProductVersion ;
+var version = FileVersionInfo.GetVersionInfo(AssemblyPath).ProductVersion ;
+int index = version.LastIndexOf("+");
+ProductVersion = index > 0 ? version.Remove(index) : version;
 
 return !Log.HasLoggedErrors;
         ]]>
       </Code>
     </Task>
   </UsingTask>
-  
+
   <!-- Quick and dirty task to transform a packages.config to a dependencies XML string usable in nuspec. -->
   <UsingTask TaskName="ReadDependenciesFromPackagesConfig" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
