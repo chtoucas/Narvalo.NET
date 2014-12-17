@@ -69,7 +69,7 @@
 
   <!-- Define the ConfigurationVariant property. -->
   <PropertyGroup Condition=" '$(Lean)' != 'true' ">
-    <!-- This property is useful to distinguish between variants of the same base configuration. 
+    <!-- This property is useful to distinguish between variants of the same base configuration.
          A variant is a build configuration not available to Visual Studio builds.
          Does not apply to Lean builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
@@ -87,7 +87,7 @@
 
   <!-- Define the NuGetCommand property. -->
   <PropertyGroup>
-    <NuGetCommand>$(MSBuildThisFileDirectory)NuGet\nuget.exe</NuGetCommand>
+    <NuGetCommand>$(MSBuildThisFileDirectory)nuget.exe</NuGetCommand>
   </PropertyGroup>
 
   <!-- Define the PEVerify properties. -->
@@ -130,7 +130,7 @@
       WARNING: When building a PCL project, MSBuild places its output inside
       a subdirectory of OutDir. To correct this, we instruct MSBuild to
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
-      
+
       WARNING: We force the value of various paths (OutputPath, IntermediateOutputPath).
     -->
     <BuildProperties>

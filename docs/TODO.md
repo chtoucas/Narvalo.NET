@@ -8,17 +8,16 @@ Work In Progress
 - Fix all CA and SA.
 - Write assembly and package descriptions.
 - Missing AssemblyName.Version.props
-- Fixed Code Contracts and NuGet
+- Fix Code Contracts and NuGet
 - Get rid off Narvalo.Junk.
 
 
 Build Infrastructure
 --------------------
 
-- check [module: SuppressMessage( -> T4 and Assembly
+- check [module: SuppressMessage( -> T4 and Assembly Info
 - StyleCop cache & ability to change settings used by the VS extension.
 - Split Make.proj: Make.proj & Narvalo.proj.
-- different profiles for PSakefile.ps1
 - local NuGet repository. use nuget packages for WebSite, Benchmarking, DocuMaker
 - build all configuration Debug|Release+AnyCPU
 - add commit hash to builds?

@@ -6,9 +6,9 @@
   <!--
     Prerequisites:
     - @(ProjectsToBuild)
-    
+
     Each master project (e.g. Make.proj) creates its own instance of @(ProjectsToBuild).
-    
+
     Combinations that do not really make sense:
     - No need to set Lean to true when targeting LeanBuild.
     - Setting Lean will have no effect when targeting CoreBuild.
@@ -24,18 +24,18 @@
   <!-- Import Xunit tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
 
-  <!-- To prevent circular references and to avoid incorrect behaviour, 
+  <!-- To prevent circular references and to avoid incorrect behaviour,
        please DO NOT break the following rules:
        - Lean(...) targets MUST NOT refer to Core(...), Clean, Build and Rebuild targets.
        - Core(...) targets MUST NOT refer to Lean(...), Clean, Build and Rebuild targets.
        - Other targets MUST NOT refer to Core(...) and Lean(...) targets,
          instead they should use the Clean, Build and Rebuild targets.
-         
+
        There is only one exception to these rules: CoreBuild depends on the LeanBuild target. -->
 
   <Target Name="Clean">
-    <!-- Artefacts created during a build. 
-         Do not remove the entire WorkArtefactsDir, 
+    <!-- Artefacts created during a build.
+         Do not remove the entire WorkArtefactsDir,
          other targets may depend on it. -->
     <ItemGroup>
       <_FilesToDelete Include="$(WorkArtefactsDir)\**\*" />
@@ -62,8 +62,8 @@
   <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
 
   <Target Name="LeanBuild">
-    <!-- WARNING: This target might fail if the packages were not previously 
-         restored. We keep it that way to be able to perform fast builds 
+    <!-- WARNING: This target might fail if the packages were not previously
+         restored. We keep it that way to be able to perform fast builds
          when we know in advance it's OK. Otherwise there is always CoreBuild... -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -121,11 +121,13 @@
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
 
+    <!--
     <PropertyGroup>
       <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
     </PropertyGroup>
 
     <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
+    -->
 
     <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
   </Target>
@@ -150,7 +152,7 @@
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <!-- Since RunXunitTests depends on Build, we are sure that the directory 
+    <!-- Since RunXunitTests depends on Build, we are sure that the directory
          where reports are stored exists. -->
     <xunit Assemblies="@(_TestAssembly)"
            Html="$(XunitHtmlFile)"
@@ -243,7 +245,7 @@
       The solution is to copy the original StyleCop modifications
       to BuildProperties.
 
-      Another solution is to define our Rebuild target so that it calls MSBuild 
+      Another solution is to define our Rebuild target so that it calls MSBuild
       with the Rebuild target. This is exactly what we do if Lean is set to true.
     -->
     <PropertyGroup>

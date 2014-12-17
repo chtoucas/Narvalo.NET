@@ -276,16 +276,16 @@ using System.Reflection;
       <Output TaskParameter="ProductVersion" PropertyName="_ProjectDependencyVersion"/>
     </FindProductVersion>
 
-    <!--<PropertyGroup>
+    <PropertyGroup>
       <_ProjectDependencyId>%(ProjectReference.Name)</_ProjectDependencyId>
-      <_ProjectDependencyId  Condition=" '$(Retail)' != 'true' ">$(_ProjectDependencyId).CURRENT</_ProjectDependencyId>
-    </PropertyGroup>-->
+      <_ProjectDependencyId  Condition=" '$(Retail)' != 'true' ">$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
+    </PropertyGroup>
 
     <ItemGroup>
-      <ProjectDependency Include="%(ProjectReference.Name)">
+      <ProjectDependency Include="$(_ProjectDependencyId)">
         <XmlFragment>
           <![CDATA[
-<dependency id="%(ProjectReference.Name)" version="$(_ProjectDependencyVersion)" />
+<dependency id="$(_ProjectDependencyId)" version="$(_ProjectDependencyVersion)" />
           ]]>
         </XmlFragment>
       </ProjectDependency>
@@ -310,8 +310,8 @@ using System.Reflection;
            ContinueOnError="false" />
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <!--<NuId>$(NuId).CURRENT</NuId>-->
-      <NuTitle>$(NuTitle)-CURRENT</NuTitle>
+      <NuId>$(NuId).EDGE</NuId>
+      <NuTitle>$(NuTitle)-EDGE</NuTitle>
     </PropertyGroup>
   </Target>
 </Project>

@@ -1,15 +1,10 @@
 :: Quick and dirty runner for Make.proj.
 
 @echo off
-@setlocal
-
-@set Parameters=SignAssembly=true;VisibleInternals=false
-@set Targets=FullBuild
-@set Verbosity=minimal
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Quick.proj" /t:%Targets% /p:%Parameters% /v:%Verbosity% /m /nr:false %LogParams%
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Quick.proj" /t:FullBuild /v:m /m /nr:false
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess
@@ -30,5 +25,4 @@
 
 :End
 
-@endlocal
 @exit /B %ERRORLEVEL%

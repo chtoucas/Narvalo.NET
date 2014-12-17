@@ -1,1 +1,2 @@
-NuGet/
+packages/
+nuget.exe
