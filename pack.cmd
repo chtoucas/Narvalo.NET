@@ -38,3 +38,4 @@
 
 @endlocal
 @exit /B %ERRORLEVEL%
+@pause

@@ -26,3 +26,4 @@
 :End
 
 @exit /B %ERRORLEVEL%
+@pause

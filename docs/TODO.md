@@ -1,58 +1,10 @@
 TODO
 ====
 
-Work In Progress
-----------------
+http://www.visualstudio.com/downloads/download-visual-studio-vs
 
-- Get rid off Narvalo.Junk.
-
-
-Build Infrastructure
---------------------
-
-- StyleCop cache & ability to change settings used by the VS extension.
-- Split Make.proj: Make.proj & Narvalo.proj.
-- add commit hash to builds?
-- analyze results from reports
-- make sure we actually see SecAnnotate failures
-- Check Platform, 64bit
-- http://www.visualstudio.com/downloads/download-visual-studio-vs
-- SecAnnotate (CAS, APTCA)
-  http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
-  http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx
-  http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx
-- %comspec% /k (@pause) or ps1 launcher
-- Pex, SpecFlow
-- Merging for DocuMaker, just for fun.
-- Custom FxCop & StyleCop.
-
-
-Coding Rules
-------------
-
-### High Priority
-
-- Use true argument check for extension methods.
-- Review csproj, in particular, remove any ExcludeFromSyleCop.
-
-### Medium Priority
-
-- Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
-- Review all GetHashCode() methods.
-
-### Low Priority
-
-- Fix regions, ////, /*!, Comments in english
-- Remove linked files (IEquatable...)
-- Always use resources for messages.
-- Remove the ruleset for Samples.
-- Review all ToString() methods.
-- Review StyleCop settings.
-- Review all SuppressMessage directives and tag them correctly.
-- Review all GlobalSuppression files and tag them correctly.
-- Replace all empty method with "// Intentionally left blank.".
-- I see that Microsoft projects include the following lines in their
-  assembly infos, what's the purpose?
+I see that Microsoft projects include the following lines in their
+assembly infos, what's the purpose?
   [assembly: SatelliteContractVersion("X.X.X.X")]
   [assembly: AssemblyMetadata("Serviceable", "True")]
 
@@ -76,59 +28,3 @@ Coding Rules
   [assembly: ComCompatibleVersion(1, 0, 3300, 0)]
   [module: UnverifiableCode]
 
-
-Narvalo (Core)
---------------
-
-### High Priority
-- `Maybe<t>`, ensures that if the underlying value is null-ed, things continue to
-  work as expected (I really don't think so).
-- `Enforce`, why can't I use ContractAbbreviator? The method get erased.
-  The current workaround makes the API too different.
-- `Require.Condition`, `Require.RangeCondition`. CCCheck fails on these.
-- Check all use of `AssumeNotNull`.
-- Remove `Tracer`?
-- Validate(?) the usefulness of `ExceptionFactory`. Move to a `ThrowHelper`?
-- String.IsNullOrWhiteSpace?
-
-### Medium Priority
-- Serializable and PCL.
-- Review Monads, VoidOr... for nullity. I am pretty sure
-  that VoirOr... and Output are broken.
-- Add Contract.Ensures directives, first for Monads.
-- Add a description to all Contract.Assume...
-- Write a T4 Template for Monad tests.
-- DocuMaker and Narvalo.Benchmarking are obviously broken.
-
-### Low Priority
-- Use Format instead of String.Format.
-- Document compiler conditional symbols in used: NET_35.
-- Add a XML schema for Narvalo config.
-- DocuMaker & Playground could use the Narvalo rulesets.
-- Use CommonMark instead of Markdown Deep.
-
-
-Narvalo (Mvp)
--------------
-
-### Medium Priority
-- Tests. We can start by porting the tests from WebFormsMvp.
-- Documentation and userguide.
-- Using custom presenter types per platform prevents the reuse
-of presenters across different platforms. Maybe is it a necessary evil...?
-
-### Low Priority
-- Add support for WPF, not yet started.
-- Add support for Application Controller, Navigator, EventAggregator
-(not the same as cross-presenter communication).
-- Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
-/ ReactiveUI / MVVM Light?
-- [Narvalo.Mvp.Windows.Forms] Cross-presenter communication is not functional.
-Thinks to work on before it might be useful:
-* Right now, only controls contained in a MvpForm share the same presenter binder.
-We need something similar to what is done with ASP.NET (PageHost) but the situation
-is a bit more complicated due to the different execution model. Controls
-are fully loaded before we reach the CreateControl or Load event in the form container
-where we normally perform the binding.
-
-* The message coordinator must support unsubscription (automatic or manual).
