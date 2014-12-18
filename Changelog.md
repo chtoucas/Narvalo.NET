@@ -11,9 +11,9 @@ ChangeLog
 - Improved: It is now possible to unconditionally hide internal classes and
   methods of an assembly. On the way, we fixed CA issues that appear when this
   is turned on.
-- Improved: Thanks to the previous capability, now we can instruct the projects 
+- Improved: Thanks to the previous enhancement, now we can instruct the projects 
   that do not yet pass CA or SA to use a relaxed set of rules. A warning is
-  raised when it is the case, so that we don't forget to later fix this.
+  raised when it is the case, so that we don't forget to fix this later on.
 - New: Allow for local customization of the build process. If we find a file
   named {AssemblyName}.props in the project root, it will be loaded at the very
   end of Narvalo.Common.props. The same holds true for {AssemblyName}.targets 

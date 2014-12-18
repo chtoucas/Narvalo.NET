@@ -33,8 +33,8 @@
       <DependentUpon>Strings_Build.resx</DependentUpon>
     </Compile>
     <Compile Include="YuiCompressorBase.cs" />
-    <Compile Include="CssYuiCompressor.cs" />
-    <Compile Include="JSYuiCompressor.cs" />
+    <Compile Include="StyleSheetYuiCompressor.cs" />
+    <Compile Include="JavaScriptYuiCompressor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Build.Version.props" />

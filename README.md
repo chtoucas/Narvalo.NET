@@ -1,7 +1,7 @@
 Narvalo.NET
 ===========
 
-Right now, a place for me to learn and test various ideas.
+Right now, a place for me to learn and to test various ideas.
 
 **Status: Experimental**
 
@@ -26,8 +26,8 @@ The most stable parts are:
     - [Narvalo.Mvp.Extras](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Extras),
       Autofac goodies for Narvalo.Mvp.
 
-3. Tools
+3. Developer Tools
     - [Narvalo.Build](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
       custom MSBuild tasks.
 
-All other projects are either unfinished or severely broken.
+All other projects are either unfinished or severely broken!

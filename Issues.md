@@ -7,12 +7,15 @@ in the ChangeLog file.
 Other closed issues are explicitely described and tested in one of the test 
 libraries. NB: To spot them, you should look for the `Issue` attribute.
 
+
 Work In Progress
 ----------------
 
 - Improvement (Medium): Move DummyGeneratedVersion to Make.CustomAfter.props.   
 - Improvement (Medium): Test and sample projects should not raise a warning 
   when no version is specified.
+- Improvement (Low): Write better documentation.
+
 
 Generic Issues
 --------------
@@ -20,7 +23,7 @@ Generic Issues
 ### High Priority   
 - Enhancement: Create a Retail.proj project and remove the SkipPrivateProjects option.
 - Enhancement: Better organization for black box tests.
-- Improvement: Review all GlobalSuppression's and tag them [REVIEW], [GeneratedCode]...
+- Improvement: Review all GlobalSuppression's and tag them with [REVIEW], [GeneratedCode]...
   in particular those added to fix warnings when internals are hidden
 
 ### Medium Priority

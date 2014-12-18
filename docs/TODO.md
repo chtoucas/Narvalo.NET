@@ -81,14 +81,14 @@ Narvalo (Core)
 --------------
 
 ### High Priority
-- Maybe<T>, ensures that if the underlying is null-ed things work correctly
-  (I don't think so).
-- Enforce, why can't I use ContractAbbreviator? The method get erased.
+- `Maybe<t>`, ensures that if the underlying value is null-ed, things continue to
+  work as expected (I really don't think so).
+- `Enforce`, why can't I use ContractAbbreviator? The method get erased.
   The current workaround makes the API too different.
-- Require.Condition, Require.RangeCondition. CCCheck fails on these.
-- Check all use of AssumeNotNull.
-- Remove Tracer?
-- Validate(?) the usefulness of ExceptionFactory. Move to ThrowHelper?
+- `Require.Condition`, `Require.RangeCondition`. CCCheck fails on these.
+- Check all use of `AssumeNotNull`.
+- Remove `Tracer`?
+- Validate(?) the usefulness of `ExceptionFactory`. Move to a `ThrowHelper`?
 - String.IsNullOrWhiteSpace?
 
 ### Medium Priority
@@ -115,20 +115,20 @@ Narvalo (Mvp)
 - Tests. We can start by porting the tests from WebFormsMvp.
 - Documentation and userguide.
 - Using custom presenter types per platform prevents the reuse
-  of presenters across different platforms. Maybe is it a necessary evil...?
+of presenters across different platforms. Maybe is it a necessary evil...?
 
 ### Low Priority
 - Add support for WPF, not yet started.
 - Add support for Application Controller, Navigator, EventAggregator
-  (not the same as cross-presenter communication).
+(not the same as cross-presenter communication).
 - Incorporate ideas from MVCSharp (Task) and maybe GWT / Caliburn.Micro
-  / ReactiveUI / MVVM Light?
+/ ReactiveUI / MVVM Light?
 - [Narvalo.Mvp.Windows.Forms] Cross-presenter communication is not functional.
-  Thinks to work on before it might be useful:
-  * Right now, only controls contained in a MvpForm share the same presenter binder.
-    We need something similar to what is done with ASP.NET (PageHost) but the situation
-    is a bit more complicated due to the different execution model. Controls
-    are fully loaded before we reach the CreateControl or Load event in the form container
-    where we normally perform the binding.
+Thinks to work on before it might be useful:
+* Right now, only controls contained in a MvpForm share the same presenter binder.
+We need something similar to what is done with ASP.NET (PageHost) but the situation
+is a bit more complicated due to the different execution model. Controls
+are fully loaded before we reach the CreateControl or Load event in the form container
+where we normally perform the binding.
 
-  * The message coordinator must support unsubscription (automatic or manual).
+* The message coordinator must support unsubscription (automatic or manual).

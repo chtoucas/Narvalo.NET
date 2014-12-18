@@ -13,7 +13,7 @@
     ///   <CssYuiCompressor Files="@(CssFiles)" />
     /// </Target>
     /// </example>
-    public sealed class CssYuiCompressor : YuiCompressorBase
+    public sealed class StyleSheetYuiCompressor : YuiCompressorBase
     {
         protected override string FileExtension
         {
