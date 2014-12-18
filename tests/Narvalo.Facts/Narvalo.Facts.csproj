@@ -60,9 +60,6 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Issues.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>

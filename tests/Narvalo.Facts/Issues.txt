@@ -1,5 +1,0 @@
-Issues
-======
-
-[1] `Maybe<T>.Bind(selector)` returns `null` when `selector` returns `null`. 
-	The correct behaviour is to return `Maybe<T>.None`.  

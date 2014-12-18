@@ -4,41 +4,26 @@ TODO
 Work In Progress
 ----------------
 
-- Rework MSBuild.
-- Fix all CA and SA.
-- Write assembly and package descriptions.
-- Missing AssemblyName.Version.props
 - Get rid off Narvalo.Junk.
 
 
 Build Infrastructure
 --------------------
 
-- check [module: SuppressMessage( -> T4 and Assembly Info
 - StyleCop cache & ability to change settings used by the VS extension.
 - Split Make.proj: Make.proj & Narvalo.proj.
-- local NuGet repository. use nuget packages for WebSite, Benchmarking, DocuMaker
-- build all configuration Debug|Release+AnyCPU
 - add commit hash to builds?
-- documentation target & website target
-- zip artefacts, analyze results from reports
-- make sure we see actually a SecAnnotate failure
-- No internals: rework tests and fix CodeAnalysis (e.g. see GlobalSuppression in Narvalo.Web)
-- Gendarme.
+- analyze results from reports
+- make sure we actually see SecAnnotate failures
 - Check Platform, 64bit
-- Finish NuGet publication script.
 - http://www.visualstudio.com/downloads/download-visual-studio-vs
 - SecAnnotate (CAS, APTCA)
   http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx
   http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx
   http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx
-- Symbols??? GitLink???
 - %comspec% /k (@pause) or ps1 launcher
-- T4 re-generation has been disabled since it requires VS hosting.
-- Make unnecessary to add StyleCop settings to the project.
-- Code Coverage + Report Generator.
 - Pex, SpecFlow
-- Merging, just for fun.
+- Merging for DocuMaker, just for fun.
 - Custom FxCop & StyleCop.
 
 
@@ -96,8 +81,7 @@ Narvalo (Core)
 --------------
 
 ### High Priority
-
-- Maybe<T>, ensures that if the underlying is null things work correctly
+- Maybe<T>, ensures that if the underlying is null-ed things work correctly
   (I don't think so).
 - Enforce, why can't I use ContractAbbreviator? The method get erased.
   The current workaround makes the API too different.
@@ -108,7 +92,6 @@ Narvalo (Core)
 - String.IsNullOrWhiteSpace?
 
 ### Medium Priority
-
 - Serializable and PCL.
 - Review Monads, VoidOr... for nullity. I am pretty sure
   that VoirOr... and Output are broken.
@@ -118,7 +101,6 @@ Narvalo (Core)
 - DocuMaker and Narvalo.Benchmarking are obviously broken.
 
 ### Low Priority
-
 - Use Format instead of String.Format.
 - Document compiler conditional symbols in used: NET_35.
 - Add a XML schema for Narvalo config.
@@ -129,17 +111,13 @@ Narvalo (Core)
 Narvalo (Mvp)
 -------------
 
-### High Priority
-
 ### Medium Priority
-
 - Tests. We can start by porting the tests from WebFormsMvp.
 - Documentation and userguide.
 - Using custom presenter types per platform prevents the reuse
   of presenters across different platforms. Maybe is it a necessary evil...?
 
 ### Low Priority
-
 - Add support for WPF, not yet started.
 - Add support for Application Controller, Navigator, EventAggregator
   (not the same as cross-presenter communication).
@@ -154,13 +132,3 @@ Narvalo (Mvp)
     where we normally perform the binding.
 
   * The message coordinator must support unsubscription (automatic or manual).
-
-Narvalo (Miscs)
----------------
-
-### High Priority
-
-### Medium Priority
-
-### Low Priority
-

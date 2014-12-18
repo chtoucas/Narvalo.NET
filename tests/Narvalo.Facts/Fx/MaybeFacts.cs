@@ -637,8 +637,13 @@ namespace Narvalo.Fx
 #endif
 
 #if !NO_INTERNALS_VISIBLE_TO
+            /// <summary>
+            /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
+            /// <c>selector</c> returns <c>null</c>. 
+            /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
+            /// </summary>
             [Fact]
-            [Issue(1, IssueSeverity.High)]
+            [Issue(IssueSeverity.High, "2014/12/01")]
             public static void ReturnsNone_WhenSelectorReturnsNull()
             {
                 // Arrange

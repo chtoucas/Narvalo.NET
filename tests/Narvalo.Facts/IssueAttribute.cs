@@ -7,23 +7,23 @@ namespace Narvalo
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class IssueAttribute : Attribute
     {
-        readonly int _id;
+        readonly string _closingDate;
         readonly IssueSeverity _severity;
 
-        public IssueAttribute(int id, IssueSeverity severity)
+        public IssueAttribute(IssueSeverity severity, string closingDate)
         {
-            _id = id;
             _severity = severity;
-        }
-
-        public int Id
-        {
-            get { return _id; }
+            _closingDate = closingDate;
         }
 
         public IssueSeverity Severity
         {
             get { return _severity; }
+        }
+
+        public string ClosingDate
+        {
+            get { return _closingDate; }
         }
     }
 }
