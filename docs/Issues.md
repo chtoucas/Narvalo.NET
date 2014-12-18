@@ -24,7 +24,7 @@ Generic Issues
   in particular those added to fix warnings when internals are hidden
 
 ### Medium Priority
-- Bug: Some assemblies raise a CA warning on resources not used.
+- Bug: Some assemblies raise a CA warning on resources supposably not used.
 - Bug: We used [module: SuppressMessage(...)] to suppress some CA or SA warnings
   but this does not work as expected when used in an assembly info file:
   it suppresses the warning for the whole assembly. We should further 
