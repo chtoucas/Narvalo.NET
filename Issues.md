@@ -57,7 +57,7 @@ Miscs:
 Not yet planified
 -----------------
 
-## More automation and further improvements to the overall code quality.
+### More automation and further improvements to the overall code quality.
 
 Build Automation:     
 - Enhancement: PSake CI target should build and test all possible configurations, 
@@ -159,12 +159,12 @@ At this point we should have a first useful release for the core assemblies.
 - Improvement: Make sure a build fails when SecAnnotate does too. 
 - Enhancement: Implements security attributes:
   Sample attributes:
-  ```     
-  [assembly: SecurityCritical]
-  [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-  [assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
-  [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
-  ```
+```     
+[assembly: SecurityCritical]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+[assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
+[assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
+```
   by the VS extension. See:
   * [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
   * [APTCA](http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx)
