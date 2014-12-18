@@ -19,9 +19,8 @@ Work in progress
 **Objectives: Small improvements to SA, CA and the MSBuild infrastructure**
 
 Code Analysis and Source Analysis:               
-- Improvement: Check all SuppressMessage (GlobalSuppression too) and tag them
-  with [REVIEW], [GeneratedCode]... in particular those added to fix warnings
-  when internals are hidden. Maybe create new SuppressMessage attributes.
+- Improvement: Check all SuppressMessage and tag them with [REVIEW], 
+  [GeneratedCode]... in particular those added to fix warnings when internals are hidden.
 - Improvement: Fix any remaining CA and SA warnings and errors. 
 - Bug: Some assemblies raise a CA warning on resources supposably not used.
 - Bug: We use [module: SuppressMessage(...)] to suppress some CA or SA warnings

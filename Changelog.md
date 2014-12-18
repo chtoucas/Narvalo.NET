@@ -1,8 +1,10 @@
 ChangeLog
 =========
-                  
+          
+- (2014/12/18) Enhancement: New compilation symbol `NO_GLOBAL_SUPPRESSIONS`
+  to enable or disable global suppressions.        
 - (2014/12/18) Improved: Moved IssueAttribute.cs and IssueSeverity.cs to a
-  shared directory and added them as linked files to test projects.  
+  shared directory then added them as linked files to test projects.  
 - (2014/12/18) Improved: Much needed rewriting of ChangeLog.md and Issues.md.
 - (2014/12/17) Released: **Narvalo.Core & Narvalo.Common v0.19.1**
   No code changes. Correct the problem with NuGet and Code Contracts assemblies.
