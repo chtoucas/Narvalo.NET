@@ -316,3 +316,28 @@ All core Narvalo projects use the same version, let's see if things work with Nu
 
 References:
 - [Strong Name Tool](http://msdn.microsoft.com/en-us/library/k5b5tt23.aspx)
+                              
+### Custom assembly and module attributes
+
+I see that Microsoft projects include the following lines in their
+assembly infos, what's their purposes?
+```
+  [module: UnverifiableCode]
+  [assembly: SatelliteContractVersion("X.X.X.X")]
+  [assembly: AssemblyMetadata("Serviceable", "True")]
+
+  [assembly: StringFreezing]
+  // Disable string interning. 
+  [assembly: CompilationRelaxations(8)]
+
+  [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
+  [assembly: BitmapSuffixInSatelliteAssembly]
+  [assembly: TypeLibVersion(2, 4)]
+
+  [assembly: Dependency("System,", LoadHint.Always)]
+  [assembly: DefaultDependency(LoadHint.Always)]
+  [assembly: AssemblyDefaultAlias("System.Web.dll")]
+
+  [assembly: AssemblyTargetedPatchBand("1.0.23-161462647")]
+  [assembly: ComCompatibleVersion(1, 0, 3300, 0)]
+```

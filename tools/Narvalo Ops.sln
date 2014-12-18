@@ -14,10 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		..\Changelog.md = ..\Changelog.md
 		..\docs\Guidelines.md = ..\docs\Guidelines.md
-		..\docs\Issues.md = ..\docs\Issues.md
+		..\Issues.md = ..\Issues.md
 		..\README.md = ..\README.md
 		..\docs\Tips.md = ..\docs\Tips.md
-		..\docs\TODO.md = ..\docs\TODO.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
@@ -119,7 +118,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "Previe
 		PreviewCommonMark\index.html = PreviewCommonMark\index.html
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdGet", "EdGet\EdGet.csproj", "{DDBD1800-0314-4A86-BF22-A7C84F473895}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edge", "Edge\Edge.csproj", "{DDBD1800-0314-4A86-BF22-A7C84F473895}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
