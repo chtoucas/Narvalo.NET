@@ -9,7 +9,7 @@ ChangeLog
 - (2014/12/18) Improvement: Moved IssueAttribute.cs and IssueSeverity.cs to a
   shared directory then added them as linked files to test projects.
 - (2014/12/18) Improvement: Much needed rewriting of ChangeLog.md and Issues.md.
-- (2014/12/17) **Released Narvalo.Core & Narvalo.Common v0.19.1:**
+- **(2014/12/17) Released Narvalo.Core & Narvalo.Common v0.19.1:**
   No code changes. Correct the problem with NuGet and Code Contracts assemblies.
 - (2014/12/17) Fixed: When adding a NuGet package, the Code Contracts library
   was incorrectly added to the project references. We just need to use the
@@ -28,9 +28,9 @@ ChangeLog
   named {AssemblyName}.props in the project root, it will be loaded at the very
   end of Narvalo.Common.props. The same holds true for {AssemblyName}.targets
   and Narvalo.Common.targets.
-- (2014/12/13) **Released Narvalo.Core, Narvalo.Common & Narvalo.Web v0.19.0:**
+- **(2014/12/13) Released Narvalo.Core, Narvalo.Common & Narvalo.Web v0.19.0:**
   New Code Contracts assemblies. Plenty of small bug fixes.
-- (2014/12/13) **Released Narvalo.Mvp & Narvalo.Mvp.Web v1.0.0-alpha:**
+- **(2014/12/13) Released Narvalo.Mvp & Narvalo.Mvp.Web v1.0.0-alpha:**
   No API changes. Alpha release of the first stable version.
 - Fixed: Lot of small bugfixes needed after enabling Code Contracts analysis.
 - Enhancement: PSake script to provide aliases to the most common build configurations.
