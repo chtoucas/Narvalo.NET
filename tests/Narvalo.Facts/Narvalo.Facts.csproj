@@ -44,12 +44,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\Common\IssueAttribute.cs">
+      <Link>IssueAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\IssueSeverity.cs">
+      <Link>IssueSeverity.cs</Link>
+    </Compile>
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\NullableFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
-    <Compile Include="IssueAttribute.cs" />
-    <Compile Include="IssueSeverity.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />

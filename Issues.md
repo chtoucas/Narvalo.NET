@@ -44,9 +44,6 @@ MSBuild files:
                        
 Miscs:
 - Improvement: Better organization for black box tests. 
-- Improvement: Move IssueAttribute.cs and IssueSeverity.cs to the
-  Common directory and link them automatically to test projects.  
-  Also move AssemblyInfo.Common.cs to the Common directory? 
 - Improvement: Complete Guidelines. 
   * Fully document any requirement. 
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)    
@@ -66,17 +63,15 @@ Build Automation:
   we should not try to publish a version already available on NuGet, check 
   the dependencies tree.  
 - Enhancement: Add Git commit hash to assembly configuration or info?
+- Enhancement: Use Git tags.
 - Enhancement: Create symbol packages (or use GitLink?).
-- Review: %comspec% /k (@pause).
+- Enhancement: %comspec% /k (@pause).
+- Improvement: Complete Narvalo.Build with Gendarme and Versioning tasks.   
 
 Code Quality:  
-- Enhancement: Static analysis with Gendarme.    
+- Enhancement: Static analysis with Gendarme. 
 - Improvement: Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
-
-Miscs:
 - Improvement: Remove linked files (IEquatable & co).   
-- Improvement: Move Narvalo.Benchmarking to the solution Miscs. 
-- Enhancement: Use Git tags.
 
 ### Code Review.
 
@@ -90,6 +85,7 @@ Bug corrections:
 - Bug: `Require.Condition`, `Require.RangeCondition`. CCCheck fails on them. 
 
 Code improvements:
+- Improvement: Use true argument check for extension methods.      
 - Improvement: Add a description to all `Contract.Assume`.
 - Improvement: Add `Contract.Ensures` directives, first for Monads. 
 - Improvement: Check any use of `AssumeNotNull`.    
@@ -104,10 +100,9 @@ Code improvements:
 - Improvement: Review all ToString() methods.                   
               
 Style improvements:                
-- Improvement: Use true argument check for extension methods.      
 - Improvement: Always use resources for messages.     
 - Improvement: Fix regions, ////, /*!.
-- Improvement: Replace all french comments in english.
+- Improvement: Rewrite all french comments in english.
 - Improvement: Replace all empty method with "// Intentionally left blank.".
 
 ### Better tested and documented Narvalo.Core assembly.
@@ -157,8 +152,7 @@ At this point we should have a first useful release for the core assemblies.
 - Improvement: Finish SecAnnotate. Requires to fully understand 
   the security model of .NET (CAS, APTCA).
 - Improvement: Make sure a build fails when SecAnnotate does too. 
-- Enhancement: Implements security attributes:
-  Sample attributes:
+- Enhancement: Implements security attributes, for instance:
 ```     
 [assembly: SecurityCritical]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -173,6 +167,7 @@ At this point we should have a first useful release for the core assemblies.
 ### Optimize core assemblies.
                   
 - Bug: Narvalo.Benchmarking is broken. 
+- Improvement: Move Narvalo.Benchmarking to the solution Miscs. 
 
 ### Narvalo.Mvp (en vrac)
                             
@@ -199,7 +194,7 @@ At this point we should have a first useful release for the core assemblies.
 Not yet classified
 ------------------
         
-- Enhancement: More supported platforms, 64bit?    
+- Enhancement: More supported platforms (64bit) and target frameworks.    
 - Enhancement: Create Narvalo.FxCop.
 - Improvement: Complete Narvalo.StyleCop.CSharp.                  
 - Enhancement: Zip artefacts when done building.
