@@ -42,7 +42,6 @@ MSBuild files:
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:
-- Improvement: Better organization for black box tests. 
 - Improvement: Complete Guidelines. 
   * Fully document any requirement. 
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)    
@@ -62,7 +61,7 @@ Build Automation:
   we should not try to publish a version already available on NuGet, check 
   the dependencies tree.  
 - Enhancement: Add Git commit hash to assembly configuration or info?
-- Enhancement: Use Git tags.
+- Enhancement: Start to use Git tags.
 - Enhancement: Create symbol packages (or use GitLink?).
 - Enhancement: %comspec% /k (@pause).
 - Improvement: Complete Narvalo.Build with Gendarme and Versioning tasks.   
@@ -72,7 +71,7 @@ Code Quality:
 - Improvement: Fix all FIXME, FIXME_PCL, TODO, REVIEW, XXX.
 - Improvement: Remove linked files (IEquatable & co).   
 
-### Code Review.
+### Code Cleanup.
 
 Bug corrections:
 - Bug: `Maybe<t>`, ensures that if the underlying value is null-ed, things 
@@ -132,6 +131,7 @@ At this point we should have a first stable release for the core Narvalo assembl
 - Bug: DocuMaker is broken.
 - Enhancement: Build C# documentation.
 - Enhancement: Use CommonMark instead of Markdown Deep.
+- Enhancement: Use PostSharp.
 - Enhancement: Use Roslyn.
 - Enhancement: ILMerge DocuMaker.           
 - Enhancement: Create a website for the project.

@@ -6,9 +6,9 @@ namespace Narvalo.Mvp
     using NSubstitute;
     using Xunit;
 
-    public static class CompositeViewFacts
+    public static partial class CompositeViewFacts
     {
-        public static class AddMethod
+        public static partial class AddMethod
         {
             [Fact]
             public static void ThrowsArgumentNullException_ForNullView()
@@ -30,24 +30,6 @@ namespace Narvalo.Mvp
                 Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView>()));
                 Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
             }
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void AddsViewsToList()
-            {
-                // Arrange
-                var view = new MyCompositeView<IView<Object>>();
-                var view1 = Substitute.For<IView<Object>>();
-                var view2 = Substitute.For<IView<Object>>();
-
-                // Act
-                view.Add(view1);
-                view.Add(view2);
-
-                // Assert
-                Assert.Equal(new[] { view1, view2 }, view.Views);
-            }
-#endif
         }
 
         #region Helper classes
@@ -63,4 +45,30 @@ namespace Narvalo.Mvp
 
         #endregion
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class CompositeViewFacts
+    {
+        public static partial class AddMethod
+        {
+            [Fact]
+            public static void AddsViewsToList()
+            {
+                // Arrange
+                var view = new MyCompositeView<IView<Object>>();
+                var view1 = Substitute.For<IView<Object>>();
+                var view2 = Substitute.For<IView<Object>>();
+
+                // Act
+                view.Add(view1);
+                view.Add(view2);
+
+                // Assert
+                Assert.Equal(new[] { view1, view2 }, view.Views);
+            }
+        }
+    }
+
+#endif
 }

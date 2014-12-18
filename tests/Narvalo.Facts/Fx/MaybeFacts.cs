@@ -9,7 +9,7 @@ namespace Narvalo.Fx
 
     [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
         Justification = "Private structs are positioned after public classes and before private classes.")]
-    public static class MaybeFacts
+    public static partial class MaybeFacts
     {
         #region Monoid Laws
 
@@ -180,19 +180,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-#if !NO_INTERNALS_VISIBLE_TO
-        public static class TheUnitProperty
-        {
-            [Fact]
-            public static void IsSome()
-            {
-                // Act & Assert
-                Assert.True(Maybe.Unit.IsSome);
-                Assert.Equal(Unit.Single, Maybe.Unit.Value);
-            }
-        }
-#endif
-
         ////public static class TheNoneProperty
         ////{
         ////    [Fact]
@@ -202,111 +189,6 @@ namespace Narvalo.Fx
         ////        Assert.True(Maybe.None.IsNone);
         ////    }
         ////}
-
-        public static class TheIsSomeProperty
-        {
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void IsFalse_WhenNone()
-            {
-                // Arrange
-                var simple = Maybe<int>.None;
-                var value = Maybe<ValueStub>.None;
-                var reference = Maybe<List<int>>.None;
-
-                // Act & Assert
-                Assert.False(simple.IsSome);
-                Assert.False(value.IsSome);
-                Assert.False(reference.IsSome);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void IsTrue_WhenSome()
-            {
-                // Arrange
-                var simple = Maybe.Create(3141);
-                var value = Maybe.Create(new ValueStub(3141));
-                var reference = Maybe.Create(new List<int>());
-
-                // Act & Assert
-                Assert.True(simple.IsSome);
-                Assert.True(value.IsSome);
-                Assert.True(reference.IsSome);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void IsImmutable_OnceTrue()
-            {
-                // Arrange
-                var list = new List<int>();
-                var option = Maybe.Create(list);
-
-                // Act
-                list = null;
-
-                // Assert
-                Assert.True(option.IsSome);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void IsImmutable_OnceFalse()
-            {
-                // Arrange
-                List<int> list = null;
-                var option = Maybe.Create(list);
-
-                // Act
-                list = new List<int>();
-
-                // Assert
-                Assert.True(!option.IsSome);
-            }
-#endif
-        }
-
-        public static class TheValueProperty
-        {
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ThrowsInvalidOperationException_WhenNone()
-            {
-                // Arrange
-                var option = Maybe<int>.None;
-
-                // Act & Assert
-                Assert.Throws<InvalidOperationException>(() => option.Value);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsTheOriginalValue_WhenSome()
-            {
-                // Arrange
-                var simple = 3141;
-                var value = new ValueStub(3141);
-                ValueStub? nullableValue = new ValueStub(3141);
-                var reference = new List<int>();
-
-                var simpleOpt = Maybe.Create(simple);
-                var valueOpt = Maybe.Create(value);
-                var nullableValueOpt = Maybe.Create(nullableValue);
-                var referenceOpt = Maybe.Create(reference);
-
-                // Act & Assert
-                Assert.True(simpleOpt.Value == simple);
-                Assert.True(valueOpt.Value == value);
-                Assert.True(nullableValueOpt.Value == nullableValue.Value);
-                Assert.True(referenceOpt.Value == reference);
-            }
-#endif
-        }
 
         public static class TheEqualityOperator
         {
@@ -572,95 +454,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static class TheCreateMethod
-        {
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSome_ForNotNull()
-            {
-                // Arrange
-                var simple = 3141;
-                var value = new ValueStub(3141);
-                ValueStub? nullableValue = new ValueStub(3141);
-                var reference = new List<int>();
-
-                // Act
-                var simpleOpt = Maybe.Create(simple);
-                var valueOpt = Maybe.Create(value);
-                var nullableValueOpt = Maybe.Create(nullableValue);
-                var referenceOpt = Maybe.Create(reference);
-
-                // Assert
-                Assert.True(simpleOpt.IsSome);
-                Assert.True(valueOpt.IsSome);
-                Assert.True(nullableValueOpt.IsSome);
-                Assert.True(referenceOpt.IsSome);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_ForNull()
-            {
-                // Arrange
-                ValueStub? value = null;
-                List<int> reference = null;
-
-                // Act
-                var valueOpt = Maybe.Create(value);
-                var referenceOpt = Maybe.Create(reference);
-
-                // Assert
-                Assert.True(valueOpt.IsNone);
-                Assert.True(referenceOpt.IsNone);
-            }
-#endif
-        }
-
-        public static class TheBindMethod
-        {
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
-
-                // Act
-                var m = source.Bind(selector);
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.Equal(2, m.Value);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            /// <summary>
-            /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
-            /// <c>selector</c> returns <c>null</c>. 
-            /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
-            /// </summary>
-            [Fact]
-            [Issue(IssueSeverity.High, "2014/12/01")]
-            public static void ReturnsNone_WhenSelectorReturnsNull()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, Maybe<int>> selector = _ => null;
-
-                // Act
-                var m = source.Bind(selector);
-
-                // Assert
-                Assert.True(m != null);
-                Assert.True(m.IsNone);
-            }
-#endif
-        }
-
-        public static class TheWhereOperator
+        public static partial class TheWhereOperator
         {
             [Fact]
             public static void ThrowsArgumentNullException_WhenSourceIsNull()
@@ -685,46 +479,9 @@ namespace Narvalo.Fx
                 Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
             }
 
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSome_ForSuccessfulPredicate()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, bool> predicate = _ => _ == 1;
-
-                // Act
-                var m = source.Where(predicate);
-                var q = from _ in source where predicate(_) select _;
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(1, m.Value);
-                Assert.Equal(1, q.Value);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_ForUnsucessfulPredicate()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, bool> predicate = _ => _ == 2;
-
-                // Act
-                var m = source.Where(predicate);
-                var q = from _ in source where predicate(_) select _;
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
         }
 
-        public static class TheSelectOperator
+        public static partial class TheSelectOperator
         {
             [Fact]
             public static void ThrowsArgumentNullException_WhenSourceIsNull()
@@ -751,47 +508,9 @@ namespace Narvalo.Fx
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => source.Select(selector));
             }
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                Func<int, int> selector = _ => _;
-
-                // Act
-                var m = source.Select(selector);
-                var q = from _ in source select selector(_);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, int> selector = _ => 2 * _;
-
-                // Act
-                var m = source.Select(selector);
-                var q = from _ in source select selector(_);
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(2, m.Value);
-                Assert.Equal(2, q.Value);
-            }
-#endif
         }
 
-        public static class TheSelectManyOperator
+        public static partial class TheSelectManyOperator
         {
             [Fact]
             public static void ThrowsArgumentNullException_WhenSourceIsNull()
@@ -833,141 +552,6 @@ namespace Narvalo.Fx
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
             }
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_ForMiddleIsNone()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe<int>.None;
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                var middle = Maybe<int>.None;
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSomeAndApplySelector()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(3, m.Value);
-                Assert.Equal(3, q.Value);
-            }
-#endif
-        }
-
-        public static class TheJoinOperator
-        {
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsNone_WhenJoinFailed()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var inner = Maybe.Create(2);
-
-                // Act
-                var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
-                var q = from i in source
-                        join j in inner on i equals j
-                        select i + j;
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-#endif
-
-#if !NO_INTERNALS_VISIBLE_TO
-            [Fact]
-            public static void ReturnsSome_WhenJoinSucceed()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var inner = Maybe.Create(2);
-
-                // Act
-                var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
-                var q = from i in source
-                        join j in inner on 2 * i equals j
-                        select i + j;
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(3, m.Value);
-                Assert.Equal(3, q.Value);
-            }
-#endif
         }
 
         #region Stubs
@@ -1050,4 +634,395 @@ namespace Narvalo.Fx
 
         #endregion
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class MaybeFacts
+    {
+        public static class TheUnitProperty
+        {
+            [Fact]
+            public static void IsSome()
+            {
+                // Act & Assert
+                Assert.True(Maybe.Unit.IsSome);
+                Assert.Equal(Unit.Single, Maybe.Unit.Value);
+            }
+        }
+
+        public static class TheIsSomeProperty
+        {
+            [Fact]
+            public static void IsFalse_WhenNone()
+            {
+                // Arrange
+                var simple = Maybe<int>.None;
+                var value = Maybe<ValueStub>.None;
+                var reference = Maybe<List<int>>.None;
+
+                // Act & Assert
+                Assert.False(simple.IsSome);
+                Assert.False(value.IsSome);
+                Assert.False(reference.IsSome);
+            }
+
+            [Fact]
+            public static void IsTrue_WhenSome()
+            {
+                // Arrange
+                var simple = Maybe.Create(3141);
+                var value = Maybe.Create(new ValueStub(3141));
+                var reference = Maybe.Create(new List<int>());
+
+                // Act & Assert
+                Assert.True(simple.IsSome);
+                Assert.True(value.IsSome);
+                Assert.True(reference.IsSome);
+            }
+
+            [Fact]
+            public static void IsImmutable_OnceTrue()
+            {
+                // Arrange
+                var list = new List<int>();
+                var option = Maybe.Create(list);
+
+                // Act
+                list = null;
+
+                // Assert
+                Assert.True(option.IsSome);
+            }
+
+            [Fact]
+            public static void IsImmutable_OnceFalse()
+            {
+                // Arrange
+                List<int> list = null;
+                var option = Maybe.Create(list);
+
+                // Act
+                list = new List<int>();
+
+                // Assert
+                Assert.True(!option.IsSome);
+            }
+        }
+
+        public static class TheValueProperty
+        {
+            [Fact]
+            public static void ThrowsInvalidOperationException_WhenNone()
+            {
+                // Arrange
+                var option = Maybe<int>.None;
+
+                // Act & Assert
+                Assert.Throws<InvalidOperationException>(() => option.Value);
+            }
+
+            [Fact]
+            public static void ReturnsTheOriginalValue_WhenSome()
+            {
+                // Arrange
+                var simple = 3141;
+                var value = new ValueStub(3141);
+                ValueStub? nullableValue = new ValueStub(3141);
+                var reference = new List<int>();
+
+                var simpleOpt = Maybe.Create(simple);
+                var valueOpt = Maybe.Create(value);
+                var nullableValueOpt = Maybe.Create(nullableValue);
+                var referenceOpt = Maybe.Create(reference);
+
+                // Act & Assert
+                Assert.True(simpleOpt.Value == simple);
+                Assert.True(valueOpt.Value == value);
+                Assert.True(nullableValueOpt.Value == nullableValue.Value);
+                Assert.True(referenceOpt.Value == reference);
+            }
+        }
+
+        public static class TheCreateMethod
+        {
+            [Fact]
+            public static void ReturnsSome_ForNotNull()
+            {
+                // Arrange
+                var simple = 3141;
+                var value = new ValueStub(3141);
+                ValueStub? nullableValue = new ValueStub(3141);
+                var reference = new List<int>();
+
+                // Act
+                var simpleOpt = Maybe.Create(simple);
+                var valueOpt = Maybe.Create(value);
+                var nullableValueOpt = Maybe.Create(nullableValue);
+                var referenceOpt = Maybe.Create(reference);
+
+                // Assert
+                Assert.True(simpleOpt.IsSome);
+                Assert.True(valueOpt.IsSome);
+                Assert.True(nullableValueOpt.IsSome);
+                Assert.True(referenceOpt.IsSome);
+            }
+
+            [Fact]
+            public static void ReturnsNone_ForNull()
+            {
+                // Arrange
+                ValueStub? value = null;
+                List<int> reference = null;
+
+                // Act
+                var valueOpt = Maybe.Create(value);
+                var referenceOpt = Maybe.Create(reference);
+
+                // Assert
+                Assert.True(valueOpt.IsNone);
+                Assert.True(referenceOpt.IsNone);
+            }
+        }
+
+        public static class TheBindMethod
+        {
+            [Fact]
+            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
+
+                // Act
+                var m = source.Bind(selector);
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.Equal(2, m.Value);
+            }
+
+            /// <summary>
+            /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
+            /// <c>selector</c> returns <c>null</c>. 
+            /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
+            /// </summary>
+            [Fact]
+            [Issue(IssueSeverity.High, "2014/12/01")]
+            public static void ReturnsNone_WhenSelectorReturnsNull()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, Maybe<int>> selector = _ => null;
+
+                // Act
+                var m = source.Bind(selector);
+
+                // Assert
+                Assert.True(m != null);
+                Assert.True(m.IsNone);
+            }
+        }
+
+        public static partial class TheWhereOperator
+        {
+            [Fact]
+            public static void ReturnsSome_ForSuccessfulPredicate()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, bool> predicate = _ => _ == 1;
+
+                // Act
+                var m = source.Where(predicate);
+                var q = from _ in source where predicate(_) select _;
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.True(q.IsSome);
+                Assert.Equal(1, m.Value);
+                Assert.Equal(1, q.Value);
+            }
+
+            [Fact]
+            public static void ReturnsNone_ForUnsucessfulPredicate()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, bool> predicate = _ => _ == 2;
+
+                // Act
+                var m = source.Where(predicate);
+                var q = from _ in source where predicate(_) select _;
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+        }
+
+        public static partial class TheSelectOperator
+        {
+            [Fact]
+            public static void ReturnsNone_WhenSourceIsNone()
+            {
+                // Arrange
+                var source = Maybe<int>.None;
+                Func<int, int> selector = _ => _;
+
+                // Act
+                var m = source.Select(selector);
+                var q = from _ in source select selector(_);
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+
+            [Fact]
+            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                Func<int, int> selector = _ => 2 * _;
+
+                // Act
+                var m = source.Select(selector);
+                var q = from _ in source select selector(_);
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.True(q.IsSome);
+                Assert.Equal(2, m.Value);
+                Assert.Equal(2, q.Value);
+            }
+        }
+
+        public static partial class TheSelectManyOperator
+        {
+            [Fact]
+            public static void ReturnsNone_WhenSourceIsNone()
+            {
+                // Arrange
+                var source = Maybe<int>.None;
+                var middle = Maybe.Create(2);
+                Func<int, Maybe<int>> valueSelector = _ => middle;
+                Func<int, int, int> resultSelector = (i, j) => i + j;
+
+                // Act
+                var m = source.SelectMany(valueSelector, resultSelector);
+                var q = from i in source
+                        from j in middle
+                        select resultSelector(i, j);
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+
+            [Fact]
+            public static void ReturnsNone_ForMiddleIsNone()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var middle = Maybe<int>.None;
+                Func<int, Maybe<int>> valueSelector = _ => middle;
+                Func<int, int, int> resultSelector = (i, j) => i + j;
+
+                // Act
+                var m = source.SelectMany(valueSelector, resultSelector);
+                var q = from i in source
+                        from j in middle
+                        select resultSelector(i, j);
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+
+            [Fact]
+            public static void ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
+            {
+                // Arrange
+                var source = Maybe<int>.None;
+                var middle = Maybe<int>.None;
+                Func<int, Maybe<int>> valueSelector = _ => middle;
+                Func<int, int, int> resultSelector = (i, j) => i + j;
+
+                // Act
+                var m = source.SelectMany(valueSelector, resultSelector);
+                var q = from i in source
+                        from j in middle
+                        select resultSelector(i, j);
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+
+            [Fact]
+            public static void ReturnsSomeAndApplySelector()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var middle = Maybe.Create(2);
+                Func<int, Maybe<int>> valueSelector = _ => middle;
+                Func<int, int, int> resultSelector = (i, j) => i + j;
+
+                // Act
+                var m = source.SelectMany(valueSelector, resultSelector);
+                var q = from i in source
+                        from j in middle
+                        select resultSelector(i, j);
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.True(q.IsSome);
+                Assert.Equal(3, m.Value);
+                Assert.Equal(3, q.Value);
+            }
+        }
+
+        public static class TheJoinOperator
+        {
+            [Fact]
+            public static void ReturnsNone_WhenJoinFailed()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var inner = Maybe.Create(2);
+
+                // Act
+                var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
+                var q = from i in source
+                        join j in inner on i equals j
+                        select i + j;
+
+                // Assert
+                Assert.True(m.IsNone);
+                Assert.True(q.IsNone);
+            }
+
+            [Fact]
+            public static void ReturnsSome_WhenJoinSucceed()
+            {
+                // Arrange
+                var source = Maybe.Create(1);
+                var inner = Maybe.Create(2);
+
+                // Act
+                var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
+                var q = from i in source
+                        join j in inner on 2 * i equals j
+                        select i + j;
+
+                // Assert
+                Assert.True(m.IsSome);
+                Assert.True(q.IsSome);
+                Assert.Equal(3, m.Value);
+                Assert.Equal(3, q.Value);
+            }
+        }
+    }
+
+#endif
 }
