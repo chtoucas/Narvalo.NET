@@ -31,7 +31,7 @@
          When Make.proj builds a child project, it injects RepositoryRoot
          (see BuildProperties in Make.Common.props). This time when the child
          project imports Shared.props, RepositoryRoot is already set. -->
-    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\</RepositoryRoot>
+    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
 
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>

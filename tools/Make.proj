@@ -3,37 +3,38 @@
   <!--
     Options are defined here and either in Shared.props or in Make.Common.props.
 
-    - SolutionFile (default: none)
+    - CustomSolution (default: none)
       Select a custom solution for building. 
       The path must be relative to the repository root.
       Also used by Make.Common.props for restoring NuGet packages.
 
-    - ProjectFile (default: none)
+    - CustomProject (default: none)
       Select a single project for building.
       The path must be relative to the repository root.
-      __Ignored when SolutionFile is also set.__
+      __Ignored when CustomSolution is also set.__
   -->
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
   <!-- Define the ProjectsToBuild property. -->
   <Choose>
-    <When Condition=" '$(SolutionFile)' != '' ">
+    <When Condition=" '$(CustomSolution)' != '' ">
       <!-- WARNING: Solutions use the Configuration Manager which can lead
            to unexpected behaviour. For instance, a project might not have been
            selected for building. -->
       <PropertyGroup>
         <!-- Solutions use "Any CPU" instead of "AnyCPU". -->
         <Platform Condition=" '$(Platform)' == '' Or '$(Platform)' == 'AnyCPU' ">Any CPU</Platform>
+        <SolutionFile>$(RepositoryRoot)$(CustomSolution)</SolutionFile>
       </PropertyGroup>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)$(SolutionFile)"></ProjectsToBuild>
+        <ProjectsToBuild Include="$(RepositoryRoot)$(CustomSolution)"></ProjectsToBuild>
       </ItemGroup>
     </When>
 
-    <When Condition=" '$(ProjectFile)' != '' ">
+    <When Condition=" '$(CustomProject)' != '' ">
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)$(ProjectFile)"></ProjectsToBuild>
+        <ProjectsToBuild Include="$(RepositoryRoot)$(CustomProject)"></ProjectsToBuild>
       </ItemGroup>
     </When>
 

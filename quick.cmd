@@ -1,4 +1,4 @@
-:: Quick and dirty runner for Make.proj.
+:: Quick and dirty runner.
 
 @echo off
 

@@ -73,13 +73,13 @@ Task Retail -depends FullClean {
 # might have been incorrectly configured and only a subset of the projects
 # might be built.
 Task RetailCore -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Core).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=.\Narvalo (Core).sln'
 }
 Task RetailMiscs -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Miscs).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=.\Narvalo (Miscs).sln'
 }
 Task RetailMvp -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Mvp).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=.\Narvalo (Mvp).sln'
 }
 
 # ==============================================================================
@@ -87,16 +87,16 @@ Task RetailMvp -depends FullClean {
 # ==============================================================================
 
 Task MainSolution {
-    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo.sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;CustomSolution=.\Narvalo.sln'
 }
 Task CoreSolution {
-    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Core).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;CustomSolution=.\Narvalo (Core).sln'
 }
 Task MiscsSolution {
-    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Miscs).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;CustomSolution=.\Narvalo (Miscs).sln'
 }
 Task MvpSolution {
-    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Mvp).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;CustomSolution=.\Narvalo (Mvp).sln'
 }
 
 # ==============================================================================
