@@ -19,9 +19,9 @@ Work in progress
 **Objectives: Small improvements to SA, CA and the MSBuild infrastructure**
 
 Code Analysis and Source Analysis:               
-- Improvement: Check all SuppressMessage and tag them with [REVIEW], 
-  [GeneratedCode]... in particular those added to fix warnings when internals 
-  are hidden.
+- Improvement: Wrap all SuppressMessage that are not really justified either
+  by a !NO_GLOBAL_SUPPRESSIONS or by a !NO_HACK. Tag with [GeneratedCode] those
+  related to generated code...
 - Improvement: Remove the local CA & SA overrides. Fix any remaining CA and 
   SA warnings and errors. 
 - Bug: Some assemblies raise a CA warning on string resources supposably not used.
@@ -33,8 +33,9 @@ Code Analysis and Source Analysis:
   Review StyleCop settings, StyleCop cache & ability to change settings used. 
   Review all project files for ExcludeFromSyleCop directives.   
 
-MSBuild files:              
-- Improvement: Cleanup of Make.CustomAfter.targets required.
+MSBuild files:             
+- Improvement: Clean up Make.CustomAfter.targets required. Check Retail & Lean
+  properties, removed DeleteNupkgFile.
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:

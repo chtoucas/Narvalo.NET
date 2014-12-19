@@ -68,30 +68,13 @@
 
   <!-- ### Semantic Versioning ### -->
 
-  <PropertyGroup>
-    <CoreCheckSemanticVersion>_CheckSemanticVersion</CoreCheckSemanticVersion>
-    <CoreCheckSemanticVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">_InitializeDummySemanticVersion</CoreCheckSemanticVersion>
-  </PropertyGroup>
-
-  <Target Name="CheckSemanticVersion" DependsOnTargets="$(CoreCheckSemanticVersion)" />
-
-  <Target Name="_CheckSemanticVersion">
+  <Target Name="CheckSemanticVersion" DependsOnTargets="InitializeDummyVersion">
     <Error Text="Invalid semantic version for $(AssemblyName). Most certainly you forgot to properly create the $(AssemblyName).Version.props file."
            Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
 
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
     <Warning Text="Are you sure you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
              Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
-  </Target>
-
-  <Target Name="_InitializeDummySemanticVersion">
-    <PropertyGroup>
-      <!-- Here we replicate the assembly versions as found in AssemblyInfo.Common.cs -->
-      <MajorVersion>1</MajorVersion>
-      <MinorVersion>0</MinorVersion>
-      <PatchVersion>0</PatchVersion>
-      <PreReleaseLabel>DUMMY</PreReleaseLabel>
-    </PropertyGroup>
   </Target>
 
   <Target Name="GetBuildMetadata" Condition=" '$(Retail)' != 'true' " DependsOnTargets="GetConfigurationMetadata">
@@ -105,6 +88,17 @@
     </PropertyGroup>
   </Target>
 
+  <Target Name="InitializeDummyVersion"
+          Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+    <PropertyGroup>
+      <!-- Here we replicate the assembly versions as found in AssemblyInfo.Common.cs -->
+      <MajorVersion>1</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+      <PreReleaseLabel>DUMMY</PreReleaseLabel>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="GetSemanticVersion" DependsOnTargets="CheckSemanticVersion;GetBuildMetadata">
     <PropertyGroup>
       <SemanticVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</SemanticVersion>
@@ -113,6 +107,7 @@
     </PropertyGroup>
   </Target>
 
+  
   <!-- ### Build Generated Version ### -->
 
   <Target Name="CreateBuildGeneratedVersion"
