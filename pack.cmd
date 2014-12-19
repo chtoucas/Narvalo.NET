@@ -10,7 +10,7 @@
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\Make.proj" /t:FullRebuild /p:Retail=true;SkipPrivateProjects=true /v:m /m /nr:false /fileLogger /fileloggerparameters:logfile=%LogFile%;verbosity=normal;encoding=utf-8
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Make.Public.proj" /t:FullRebuild /p:Retail=true /v:m /m /nr:false /fl /flp:logfile=%LogFile%;verbosity=normal;encoding=utf-8
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess

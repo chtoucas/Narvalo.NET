@@ -16,9 +16,4 @@
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
-
-  <!-- Overrides for sample projects. -->
-  <PropertyGroup>
-    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Samples.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
 </Project>

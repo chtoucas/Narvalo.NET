@@ -5,7 +5,8 @@
 # NB: To speed up things a bit, we do not call the Clean target most of time.
 
 Properties {
-    $Project = "$PSScriptRoot\Make.proj"
+    $DefaultProject = "$PSScriptRoot\tools\Make.proj"
+    $LeanProject = "$PSScriptRoot\tools\Make.Public.proj"
 
     $BuildArgs = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
 }
@@ -18,44 +19,44 @@ Task default -depends Tests
 
 Task CI {
     # Continuous Integration Build. Mimic the Retail target, with detailed log.
-    MSBuild $Project '/v:d', '/m', '/nr:false', '/t:FullBuild',
-        '/p:Configuration=Release;SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false'
+    MSBuild $LeanProject '/v:d', '/m', '/nr:false', '/t:FullBuild',
+        '/p:Configuration=Release;SignAssembly=true;VisibleInternals=false'
 }
 
 Task FakeRetail {
-    MSBuild $Project '/v:m', '/m', '/nr:false', '/t:FullBuild',
-        '/p:SignAssembly=true;SkipPrivateProjects=true;VisibleInternals=false'
+    MSBuild $LeanProject '/v:m', '/m', '/nr:false', '/t:FullBuild',
+        '/p:SignAssembly=true;VisibleInternals=false'
 }
 Task Tests {
-    MSBuild $Project $BuildArgs '/t:Test', '/p:BuildGeneratedVersion=false'
+    MSBuild $DefaultProject $BuildArgs '/t:Test', '/p:BuildGeneratedVersion=false'
 }
 Task Verifications {
-    MSBuild $Project $BuildArgs '/t:Verify', '/p:BuildGeneratedVersion=false'
+    MSBuild $DefaultProject $BuildArgs '/t:Verify', '/p:BuildGeneratedVersion=false'
 }
 Task SourceAnalysis {
-    MSBuild $Project $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
+    MSBuild $DefaultProject $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
 }
 # Code Analysis is slow. Analysis is only performed on public projects.
 # WARNING: Do not change VisibleInternals to true.
 Task CodeAnalysis {
-    MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;SkipPrivateProjects=true;VisibleInternals=false'
+    MSBuild $LeanProject $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
 Task FullCodeAnalysis {
-    MSBuild $Project $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
+    MSBuild $DefaultProject $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
 # Code Contracts Analysis is really slow. Analysis is only performed on public projects.
 Task CodeContractsAnalysis {
-    MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false;SkipPrivateProjects=true'
+    MSBuild $LeanProject $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
 Task FullCodeContractsAnalysis {
-    MSBuild $Project $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
+    MSBuild $DefaultProject $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
 # Security Analysis is slow. Analysis is only performed on public projects.
 Task SecurityAnalysis {
-    MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false;SkipPrivateProjects=true'
+    MSBuild $LeanProject $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
 }
 Task FullSecurityAnalysis {
-    MSBuild $Project $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
+    MSBuild $DefaultProject $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
 }
 
 
@@ -64,7 +65,7 @@ Task FullSecurityAnalysis {
 # ==============================================================================
 
 Task Retail -depends FullClean {
-    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SkipPrivateProjects=true'
+    MSBuild $LeanProject $BuildArgs '/t:FullRebuild', '/p:Retail=true'
 }
 # At first, I wanted to also offer the possibility of packaging a single project
 # but then we won't be able to run the test suite. A better solution is to use
@@ -72,13 +73,13 @@ Task Retail -depends FullClean {
 # might have been incorrectly configured and only a subset of the projects
 # might be built.
 Task RetailCore -depends FullClean {
-    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Core).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Core).sln'
 }
 Task RetailMiscs -depends FullClean {
-    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Miscs).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Miscs).sln'
 }
 Task RetailMvp -depends FullClean {
-    MSBuild $Project $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Mvp).sln'
+    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;SolutionFile=.\Narvalo (Mvp).sln'
 }
 
 # ==============================================================================
@@ -86,16 +87,16 @@ Task RetailMvp -depends FullClean {
 # ==============================================================================
 
 Task MainSolution {
-    MSBuild $Project $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo.sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo.sln'
 }
 Task CoreSolution {
-    MSBuild $Project $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Core).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Core).sln'
 }
 Task MiscsSolution {
-    MSBuild $Project $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Miscs).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Miscs).sln'
 }
 Task MvpSolution {
-    MSBuild $Project $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Mvp).sln'
+    MSBuild $DefaultProject $BuildArgs '/p:Lean=true;SolutionFile=.\Narvalo (Mvp).sln'
 }
 
 # ==============================================================================

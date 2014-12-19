@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+- (2014/12/19) _Enhancement:_ Created a Make.Public.proj that replaces the 
+  SkipPrivateProjects option from Make.proj. Moved Make.proj to the tools
+  directory.
+- (2014/12/19) _Improvement:_ Retired the custom CA ruleset for Samples.
+- (2014/12/19) _Improvement:_ Moved the DummyGeneratedVersion property 
+  to Make.CustomAfter.props. Now, inside Visual Studio, versioning for test 
+  and sample assemblies works exactly the same way as for the other assemblies.
 - (2014/12/18) _Improvement:_ Using partial classes we artificially separate
   whitebox tests from blackbox tests.
 - (2014/12/18) _Enhancement:_ New compilation symbol `NO_GLOBAL_SUPPRESSIONS`
@@ -11,7 +18,7 @@ ChangeLog
 - (2014/12/18) _Improvement:_ Much needed rewriting of ChangeLog.md and Issues.md.
 - **(2014/12/17) Released Narvalo.Core & Narvalo.Common v0.19.1:**
   No code changes. Correct the problem with NuGet and Code Contracts assemblies.
-- (2014/12/17) _Fixed:_ When adding a NuGet package, the Code Contracts library
+- (2014/12/17) _Bugfix:_ When adding a NuGet package, the Code Contracts library
   was incorrectly added to the project references. We just need to use the
   section references in the nuspec files to help NuGet identify _true_ references.
 - _Improvement:_ Packages not for retail get a completely different ID.
@@ -32,7 +39,7 @@ ChangeLog
   New Code Contracts assemblies. Plenty of small bug fixes.
 - **(2014/12/13) Released Narvalo.Mvp & Narvalo.Mvp.Web v1.0.0-alpha:**
   No API changes. Alpha release of the first stable version.
-- _Fixed:_ Lot of small bugfixes needed after enabling Code Contracts analysis.
+- _Bugfix:_ Lot of small bugfixes needed after enabling Code Contracts analysis.
 -  _Enhancement:_ PSake script to provide aliases to the most common build configurations.
 - _Improvement:_ Brand new MSBuild infrastructure. Extracted all targets and
   properties not required by Visual Studio. Continuous Integration builds are
@@ -43,11 +50,11 @@ ChangeLog
 - _Improvement:_ Implemented Semantic Versioning rules for assembly versions.
 - _Improvement:_ Reorganization of the solutions.
 - _Improvement:_ Narvalo.Facts becomes a true Visual Studio test project.
-- _Fixed:_ When building a PCL project _from the command line_, MSBuild generates
+- _Bugfix:_ When building a PCL project _from the command line_, MSBuild generates
   output inside a subdirectory of `$(OutDir)`. To correct this, we instruct
   MSBuild to not change the default behaviour:
   `$(GenerateProjectSpecificOutputFolder) = false`.
-- _Fixed:_ Narvalo.Facts fails when called from Make.proj and run twice in a row.
+- _Bugfix:_ Narvalo.Facts fails when called from Make.proj and run twice in a row.
   Narvalo.Core and Narvalo.Common use the default namespace (namely `Narvalo`)
   and both define a resource named `SR.resx` (with default access modifier kept,
   that is internal) which confused .NET when trying to resolve one of the string

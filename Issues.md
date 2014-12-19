@@ -20,9 +20,11 @@ Work in progress
 
 Code Analysis and Source Analysis:               
 - Improvement: Check all SuppressMessage and tag them with [REVIEW], 
-  [GeneratedCode]... in particular those added to fix warnings when internals are hidden.
-- Improvement: Fix any remaining CA and SA warnings and errors. 
-- Bug: Some assemblies raise a CA warning on resources supposably not used.
+  [GeneratedCode]... in particular those added to fix warnings when internals 
+  are hidden.
+- Improvement: Remove the local CA & SA overrides. Fix any remaining CA and 
+  SA warnings and errors. 
+- Bug: Some assemblies raise a CA warning on string resources supposably not used.
 - Bug: We use [module: SuppressMessage(...)] to suppress some CA or SA warnings
   but this does not work as expected when used in an assembly info file:
   it suppresses the warning for the whole assembly. We should further 
@@ -30,27 +32,25 @@ Code Analysis and Source Analysis:
 - Improvement: Make unnecessary to add StyleCop settings to each project.
   Review StyleCop settings, StyleCop cache & ability to change settings used. 
   Review all project files for ExcludeFromSyleCop directives.   
-- Improvement: Retire the CA ruleset for Samples.
 
-MSBuild files: 
-- Bug: Test and sample projects should not raise a warning when no version is specified.                           
-- Improvement: Move DummyGeneratedVersion to Make.CustomAfter.props.    
+MSBuild files:              
+- Bug: Test and sample projects should not raise a warning when no version is
+  specified. DummyGeneratedVersion is defined in Narvalo.Samples.targets but
+  it shouldn't. Cleanup of Make.CustomAfter.targets required.
 - Improvement: Move custom properties to {AssemblyName}.props.  
-- Improvement: Some projects don't have an {AssemblyName}.Version.props.      
-- Enhancement: Split Make.proj in sub-projects. Create a Retail.proj project
-  and remove the SkipPrivateProjects option.         
+- Improvement: Some projects don't have an {AssemblyName}.Version.props.
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:
 - Improvement: Complete Guidelines. 
   * Fully document any requirement. 
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)    
-  * Document compiler conditional symbols in used: NET_35.  
+  * Document compiler conditional symbols in use.  
 - Improvement: Write assembly and NuGet descriptions.  
 
 
-Not yet planified
------------------
+Not yet planned
+---------------
 
 ### More automation and further improvements to the overall code quality.
 
@@ -130,9 +130,8 @@ At this point we should have a first stable release for the core Narvalo assembl
                     
 - Bug: DocuMaker is broken.
 - Enhancement: Build C# documentation.
-- Enhancement: Use CommonMark instead of Markdown Deep.
-- Enhancement: Use PostSharp.
-- Enhancement: Use Roslyn.
+- Enhancement: Use CommonMark instead of Markdown Deep. 
+  NB: PostSharp, Roslyn, MEF, Serilog, Autofac.
 - Enhancement: ILMerge DocuMaker.           
 - Enhancement: Create a website for the project.
 - Improvement: Move namespace docs to NamespaceDocs files.

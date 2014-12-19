@@ -3,9 +3,10 @@
   <!-- WARNING: Only for testing. -->
 
   <PropertyGroup>
-    <Configuration>Release</Configuration>
+    <Configuration>Debug</Configuration>
     <SignAssembly>true</SignAssembly>
     <VisibleInternals>false</VisibleInternals>
+    <BuildGeneratedVersion>false</BuildGeneratedVersion>
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />

@@ -30,13 +30,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D31
 		Make.CustomBefore.props = Make.CustomBefore.props
 		Make.CustomBefore.targets = Make.CustomBefore.targets
 		..\Make.proj = ..\Make.proj
+		Make.Public.proj = Make.Public.proj
+		Make.Quick.proj = Make.Quick.proj
 		Narvalo.Common.props = Narvalo.Common.props
 		Narvalo.Common.targets = Narvalo.Common.targets
 		Narvalo.Samples.props = Narvalo.Samples.props
 		Narvalo.Tests.props = Narvalo.Tests.props
 		Package.StyleCop.targets = Package.StyleCop.targets
 		Package.Xunit.tasks = Package.Xunit.tasks
-		Quick.proj = Quick.proj
 		Shared.props = Shared.props
 	EndProjectSection
 EndProject
@@ -59,7 +60,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{EC
 		..\etc\FrameworkProfiles.props = ..\etc\FrameworkProfiles.props
 		..\etc\GlobalSuppressions.Common.cs = ..\etc\GlobalSuppressions.Common.cs
 		..\etc\packages.config = ..\etc\packages.config
-		..\etc\Samples.ruleset = ..\etc\Samples.ruleset
 		..\etc\Strict.ruleset = ..\etc\Strict.ruleset
 		..\etc\Strict.SourceAnalysis = ..\etc\Strict.SourceAnalysis
 		..\etc\Tests.ruleset = ..\etc\Tests.ruleset
