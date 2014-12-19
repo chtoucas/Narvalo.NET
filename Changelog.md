@@ -1,6 +1,20 @@
 ChangeLog
 =========
-
+             
+- (2014/12/19) _Improvement:_ In CreateAssemblyVersionFile, instead of 
+  hardcoding the path to the directory to be created, used the parent directory 
+  of AssemblyVersionFile.
+- (2014/12/19) _Bugfix:_ In Prose, replaced references to NuGet packages of
+  Narvalo.Core & Narvalo.Common by simple project references of the same 
+  assemblies. Before that, tests run from MSBuild command-line might fail
+  for obscure reasons. Worst, they might as well succeed even if nothing had 
+  changed. In fact, it truly depended on the order of builds decided by MSBuild
+  at that time; parallel build in action. The problem was that Prose carried 
+  its own versions of Narvalo.Core and Narvalo.Common, albeit the NuGet ones, 
+  and, when built, it overrided the freshly compiled versions of the same 
+  assemblies. Followed version and API missmatchs. The bottom line is to never 
+  again add references to one of our NuGet packages or be sure not to include 
+  the project in any MSBuild project. 
 - (2014/12/19) _Improvement:_ Cleaned up Make.CustomAfter.props and 
    Make.CustomAfter.targets
 - (2014/12/19) _Improvement:_ Renamed DocuMaker to Prose.

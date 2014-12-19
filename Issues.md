@@ -36,12 +36,7 @@ Code Analysis and Source Analysis:
 MSBuild files:             
 - Improvement: Check Retail & Lean properties.
 - Enhancement: Copy non retail packages to the local NuGet server. 
-- Bug: It seems that we didn't cover all possible configuration variants 
-  which can lead to tricky build failures. Run quick.cmd without visible 
-  internals then run make.ps1 Tests.
 - Bug: The Code Analysis "succeed" file does not seem to be created.
-- Improvement: In CreateAssemblyVersionFile, do not hardcode the directory to 
-  create but use instead the parent directory of AssemblyVersionFile.
                        
 Miscs:
 - Improvement: Complete Guidelines. 

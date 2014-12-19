@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D0F78A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Externs", "src\Narvalo.Externs\Narvalo.Externs.csproj", "{FED38EF0-10B8-499A-B55E-026CC17A5764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prose", "src\Prose\Prose.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -57,12 +55,6 @@ Global
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED38EF0-10B8-499A-B55E-026CC17A5764}.Release|Any CPU.Build.0 = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

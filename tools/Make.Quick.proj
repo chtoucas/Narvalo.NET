@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration>Debug</Configuration>
     <!--<SignAssembly>true</SignAssembly>-->
-    <VisibleInternals>true</VisibleInternals>
+    <VisibleInternals>false</VisibleInternals>
     <BuildGeneratedVersion>false</BuildGeneratedVersion>
   </PropertyGroup>
 
@@ -13,10 +13,10 @@
 
   <ItemGroup>
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+    <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />-->
     <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
     <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />-->
-    <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+    <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />-->
   </ItemGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
