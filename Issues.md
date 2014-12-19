@@ -34,9 +34,7 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:              
-- Bug: Test and sample projects should not raise a warning when no version is
-  specified. DummyGeneratedVersion is defined in Narvalo.Samples.targets but
-  it shouldn't. Cleanup of Make.CustomAfter.targets required.
+- Improvement: Cleanup of Make.CustomAfter.targets required.
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:

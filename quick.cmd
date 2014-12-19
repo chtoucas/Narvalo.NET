@@ -4,7 +4,7 @@
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Make.Quick.proj" /t:FullBuild /v:m /m /nr:false
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Make.Quick.proj" /t:Clean;Test /v:m /m /nr:false
 
 @if %ERRORLEVEL% neq 0 ( @goto BuildFailure )
 @goto BuildSuccess

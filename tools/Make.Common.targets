@@ -96,6 +96,27 @@
     </MSBuild>
   </Target>
 
+  <Target Name="_PatchCoreRebuild">
+    <!--
+      StyleCop uses $(RebuildDependsOn) to modify the Build process.
+      Here, we define Rebuild as Clean;Build, which means that StyleCop
+      modifications of the Rebuild process won't apply since we never call
+      the Rebuild target of MSBuild.
+
+      The solution is to copy the original StyleCop modifications
+      to BuildProperties.
+
+      Another solution is to define our Rebuild target so that it calls MSBuild
+      with the Rebuild target. This is exactly what we do if Lean is set to true.
+    -->
+    <PropertyGroup>
+      <BuildProperties>
+        $(BuildProperties);
+        SourceAnalysisForceFullAnalysis=true
+      </BuildProperties>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="Verify" DependsOnTargets="PEVerify" />
 
   <Target Name="Test" DependsOnTargets="RunXunitTests" />
@@ -230,30 +251,6 @@
 
   <Target Name="_WarnOnMissingSecAnnotate">
     <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
-  </Target>
-
-
-  <!-- ### Other Private Targets ### -->
-
-  <Target Name="_PatchCoreRebuild">
-    <!--
-      StyleCop uses $(RebuildDependsOn) to modify the Build process.
-      Here, we define Rebuild as Clean;Build, which means that StyleCop
-      modifications of the Rebuild process won't apply since we never call
-      the Rebuild target of MSBuild.
-
-      The solution is to copy the original StyleCop modifications
-      to BuildProperties.
-
-      Another solution is to define our Rebuild target so that it calls MSBuild
-      with the Rebuild target. This is exactly what we do if Lean is set to true.
-    -->
-    <PropertyGroup>
-      <BuildProperties>
-        $(BuildProperties);
-        SourceAnalysisForceFullAnalysis=true
-      </BuildProperties>
-    </PropertyGroup>
   </Target>
 
 

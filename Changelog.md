@@ -1,8 +1,13 @@
 ChangeLog
 =========
 
-- (2014/12/19) _Improvement:_ Moved properties relevant to the build of a Code 
-  Contracts reference assembly to {AssemblyName}.props.
+- (2014/12/19) _Bugfix:_ Building test and sample projects raised a warning for
+  an unknown semantic version. We just needed to check the context. Also
+  removed the creation of a fake version when the version was not complete.
+- (2014/12/19) _Improvement:_ Moved properties relevant to the Code 
+  Contracts reference assembly to {AssemblyName}.props. Along the way we 
+  disabled the creation of a CC reference library when working inside Visual
+  Studio. This should grealty reduce the build time in Release configuration.
 - (2014/12/19) _Improvement:_ Added missing {AssemblyName}.Version.props.
 - (2014/12/19) _Improvement:_ Use the BuildingInsideVisualStudio property 
   to only enable some properties when not running inside Visual Studio.
