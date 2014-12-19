@@ -16,10 +16,10 @@
       '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
 
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <DummyGeneratedVersion>true</DummyGeneratedVersion>
   </PropertyGroup>
-  
+
   <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
 
   <!-- Overrides for test projects. -->

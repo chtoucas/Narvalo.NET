@@ -119,7 +119,7 @@
          Does not apply to Lean builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+BuiltVersion</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+NoInternals</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+Closed</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->
