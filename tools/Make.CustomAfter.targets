@@ -59,10 +59,10 @@
       <ConfigurationMetadata>$(ConfigurationMetadata)+$(Platform)</ConfigurationMetadata>
       <ConfigurationMetadata Condition=" '$(SignAssembly)' == 'true' ">$(ConfigurationMetadata)+Signed</ConfigurationMetadata>
       <ConfigurationMetadata Condition=" '$(SignAssembly)' != 'true' ">$(ConfigurationMetadata)+Unsigned</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationMetadata)+BuiltVersion</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(ConfigurationMetadata)+DummyVersion</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(ConfigurationMetadata)+Internals</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+NoInternals</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationMetadata)+SemVer</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(ConfigurationMetadata)+Dummy</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(ConfigurationMetadata)+Leaky</ConfigurationMetadata>
+      <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+Closed</ConfigurationMetadata>
     </PropertyGroup>
   </Target>
 

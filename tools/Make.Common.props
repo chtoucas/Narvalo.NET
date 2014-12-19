@@ -37,7 +37,7 @@
       __Ignored when Retail is true.__
 
     - SolutionFile (default: none)
-      Main solution used to restore NuGet packages.
+      Solution used to restore NuGet packages.
 
     Common MSBuild options:
     - Configuration (default: Debug)
@@ -50,7 +50,7 @@
 
     Miscs options:
     - RepositoryRoot
-      No need to set this manually. If empty, MSBuild will pick up the correct value.
+      No need to set this manually. If empty, MSBuild will pick up the right value.
 
     - VisualStudioVersion (default: 12.0)
       Right now, I don't see any circumstances under which we would need
@@ -118,7 +118,7 @@
          A variant is a build configuration not available to Visual Studio builds.
          Does not apply to Lean builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
-    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+BuiltVersion</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+Closed</ConfigurationVariant>
   </PropertyGroup>
 
