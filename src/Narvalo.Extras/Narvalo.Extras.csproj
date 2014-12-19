@@ -39,6 +39,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
+    <None Include="Narvalo.Extras.Version.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

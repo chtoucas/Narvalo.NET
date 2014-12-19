@@ -94,6 +94,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Playground.Version.props" />
     <None Include="Playground.props">
       <SubType>Designer</SubType>
     </None>

@@ -68,6 +68,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Ghostscript.Version.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Narvalo.Ghostscript.props">
       <SubType>Designer</SubType>
     </None>

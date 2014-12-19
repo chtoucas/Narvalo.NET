@@ -46,6 +46,7 @@
     <Compile Include="ThrottleException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Reliability.Version.props" />
     <None Include="Narvalo.Reliability.props">
       <SubType>Designer</SubType>
     </None>

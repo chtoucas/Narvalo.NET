@@ -1,10 +1,13 @@
 ChangeLog
 =========
 
+- (2014/12/19) _Improvement:_ Added missing {AssemblyName}.Version.props.
+- (2014/12/19) _Improvement:_ Use the BuildingInsideVisualStudio property 
+  to only enable some properties when not running inside Visual Studio.
 - (2014/12/19) _Bugfix:_ Using the same property (SolutionFile) for NuGet
   packages restore and for the selection of a custom solution to build 
   made it easy to break the build system. In Make.proj, if we imported
-  Make.Common.props before defininf the ProjectsToBuild property, the path
+  Make.Common.props before defining the ProjectsToBuild property, the path
   of SolutionFile would be absolute but Make.proj expects it to be relative.
   We simply replaced the SolutionFile property used by Make.proj by CustomSolution.
 - (2014/12/19) _Improvement:_ Created a Make.Public.proj that replaces the 

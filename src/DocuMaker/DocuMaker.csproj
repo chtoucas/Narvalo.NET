@@ -159,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DocuMaker.Version.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DocuMaker.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

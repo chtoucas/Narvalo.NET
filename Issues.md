@@ -38,7 +38,6 @@ MSBuild files:
   specified. DummyGeneratedVersion is defined in Narvalo.Samples.targets but
   it shouldn't. Cleanup of Make.CustomAfter.targets required.
 - Improvement: Move custom properties to {AssemblyName}.props.  
-- Improvement: Some projects don't have an {AssemblyName}.Version.props.
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:
