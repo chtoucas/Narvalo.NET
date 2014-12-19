@@ -155,7 +155,7 @@ Code Quality
                    
 The following projects use the default ruleset for Code Analysis.
 - Narvalo.Junk
-- DocuMaker
+- Prose
 - Playground
     
 ### Code Contracts

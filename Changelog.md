@@ -1,6 +1,7 @@
 ChangeLog
 =========
 
+- (2014/12/19) _Improvement:_ Renamed DocuMaker to Prose.
 - (2014/12/19) _Improvement:_ Replaced all initial targets used to signal 
   temporary overriden settings by a target automatically run before a Build.
 - (2014/12/19) _Bugfix:_ Building test and sample projects raised a warning for

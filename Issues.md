@@ -80,12 +80,14 @@ Bug corrections:
 - Bug: `Require.Condition`, `Require.RangeCondition`. CCCheck fails on them. 
 
 Code improvements:
+- Improvement: Review the core Code Contracts classes.
+- Improvement: Review Narvalo.Minimal.cs.
+- Improvement: Remove `Tracer`?  
 - Improvement: Use true argument check for extension methods.      
 - Improvement: Add a description to all `Contract.Assume`.
 - Improvement: Add `Contract.Ensures` directives, first for Monads. 
 - Improvement: Check any use of `AssumeNotNull`.    
 - Improvement: Use `Format` instead of `String.Format`.
-- Improvement: Remove `Tracer`?  
 - Improvement: `Serializable` and PCL.
 - Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.    
 - Improvement: Validate the usefulness of `ExceptionFactory`. Replace it with 
@@ -128,11 +130,11 @@ At this point we should have a first stable release for the core Narvalo assembl
 
 ### Documentation & Literate Programming.
                     
-- Bug: DocuMaker is broken.
+- Bug: Prose is broken.
 - Enhancement: Build C# documentation.
 - Enhancement: Use CommonMark instead of Markdown Deep. 
   NB: PostSharp, Roslyn, MEF, Serilog, Autofac.
-- Enhancement: ILMerge DocuMaker.           
+- Enhancement: ILMerge Prose.           
 - Enhancement: Create a website for the project.
 - Improvement: Move namespace docs to NamespaceDocs files.
                       
