@@ -147,9 +147,11 @@ using System.Reflection;
          ]]>
       </_AssemblyVersionContent>
       <_AssemblyVersionLines>$([MSBuild]::Escape($(_AssemblyVersionContent)))</_AssemblyVersionLines>
+      <_ParentDirectoryOfAssemblyVersionFile>$([System.IO.Path]::GetDirectoryName($(AssemblyVersionFile)))</_ParentDirectoryOfAssemblyVersionFile>
     </PropertyGroup>
 
-    <MakeDir Directories="$(IntermediateOutputPath)" Condition=" !Exists($(IntermediateOutputPath)) " />
+    <MakeDir Directories="$(_ParentDirectoryOfAssemblyVersionFile)" 
+             Condition=" !Exists($(_ParentDirectoryOfAssemblyVersionFile)) " />
 
     <WriteLinesToFile Lines="$(_AssemblyVersionLines)" File="$(AssemblyVersionFile)" Overwrite="true" />
   </Target>
