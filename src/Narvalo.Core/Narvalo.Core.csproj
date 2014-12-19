@@ -13,10 +13,6 @@
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
@@ -153,6 +149,9 @@
     <None Include="Fx\Output.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
+    </None>
+    <None Include="Narvalo.Core.props">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Narvalo.Core.Version.props">
       <SubType>Designer</SubType>

@@ -37,7 +37,6 @@ MSBuild files:
 - Bug: Test and sample projects should not raise a warning when no version is
   specified. DummyGeneratedVersion is defined in Narvalo.Samples.targets but
   it shouldn't. Cleanup of Make.CustomAfter.targets required.
-- Improvement: Move custom properties to {AssemblyName}.props.  
 - Enhancement: Copy non retail packages to the local NuGet server. 
                        
 Miscs:
@@ -105,6 +104,7 @@ Style improvements:
 ### Better tested and documented Narvalo.Core assembly.
 
 - Improvement: Add more and more code contracts.
+- Improvement: Move Code Contracts settings from the project file to Narvalo.Core.props.  
 - Improvement: Large code coverage of Narvalo.Core.
 - Enhancement: Write a T4 template for Monad tests.   
 - Improvement: 100% SA documentation rules.
@@ -112,12 +112,14 @@ Style improvements:
 ### Better tested and documented Narvalo.Common assembly.
 
 - Improvement: Add more and more code contracts.
+- Improvement: Move Code Contracts settings from the project file to Narvalo.Common.props.  
 - Improvement: Large code coverage of Narvalo.Common.
 - Improvement: 100% SA documentation rules.
 
 ### Better tested and documented Narvalo.Web assembly.
 
 - Improvement: Add more and more code contracts.
+- Improvement: Move Code Contracts settings from the project file to Narvalo.Web.props.  
 - Improvement: Large code coverage of Narvalo.Web.
 - Improvement: 100% SA documentation rules.
 - Enhancement: Add an XML schema for the Narvalo config.    

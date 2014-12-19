@@ -172,23 +172,23 @@
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
 
     <!-- Runtime Checking. -->
-    <!--<CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>-->
+    <!--<CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
     <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
-    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>-->
 
     <!-- Static Checking. -->
-    <!--<CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>-->
-    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
-    <!-- Only meaningful inside VS but I find the result confusing. -->
+    <!--<CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>-->
+    <!-- Only meaningful inside VS, anyway I find the result confusing. -->
     <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
 
     <!-- Contract Reference Assembly. -->
-    <!--<CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>-->
-    <!--<CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>-->
+    <!--<CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>-->
   </PropertyGroup>
   
 

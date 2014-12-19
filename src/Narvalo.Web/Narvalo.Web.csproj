@@ -10,10 +10,6 @@
     <TargetFrameworkProfile />
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
@@ -171,6 +167,9 @@
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Narvalo.Web.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Narvalo.Web.Version.props" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />

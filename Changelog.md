@@ -1,6 +1,8 @@
 ChangeLog
 =========
 
+- (2014/12/19) _Improvement:_ Moved properties relevant to the build of a Code 
+  Contracts reference assembly to {AssemblyName}.props.
 - (2014/12/19) _Improvement:_ Added missing {AssemblyName}.Version.props.
 - (2014/12/19) _Improvement:_ Use the BuildingInsideVisualStudio property 
   to only enable some properties when not running inside Visual Studio.
