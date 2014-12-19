@@ -10,7 +10,7 @@
   <PropertyGroup>
     <BeforeBuildDependsOn>
       $(BeforeBuildDependsOn);
-      CreateBuildGeneratedVersion
+      CreateAssemblyVersionFile
     </BeforeBuildDependsOn>
   </PropertyGroup>
 
@@ -47,10 +47,10 @@
     </GenerateBuildAndRevisionNumbers>
   </Target>
 
-  <Target Name="GetBuildKey" DependsOnTargets="GenerateBuildAndRevisionNumbers">
-    <GetBuildKey BuildNumber="$(BuildNumber)" RevisionNumber="$(RevisionNumber)">
-      <Output TaskParameter="BuildKey" PropertyName="BuildKey"/>
-    </GetBuildKey>
+  <Target Name="GenerateBuildStamp" DependsOnTargets="GenerateBuildAndRevisionNumbers">
+    <GenerateBuildStamp BuildNumber="$(BuildNumber)" RevisionNumber="$(RevisionNumber)">
+      <Output TaskParameter="BuildStamp" PropertyName="BuildStamp"/>
+    </GenerateBuildStamp>
   </Target>
 
   <Target Name="GetConfigurationMetadata">
@@ -65,6 +65,7 @@
       <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+Closed</ConfigurationMetadata>
     </PropertyGroup>
   </Target>
+  
 
   <!-- ### Semantic Versioning ### -->
 
@@ -73,11 +74,11 @@
            Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
 
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
-    <Warning Text="Are you sure you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
+    <Warning Text="Are you sure that you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
              Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
   </Target>
 
-  <Target Name="GetBuildMetadata" Condition=" '$(Retail)' != 'true' " DependsOnTargets="GetConfigurationMetadata">
+  <Target Name="GetBuildMetadata" DependsOnTargets="GetConfigurationMetadata">
     <!-- For retail builds, we don't add any build metadata to keep the
          version as simple as possible. We can still read the complete
          build configuration with the AssemblyConfiguration attribute.
@@ -88,8 +89,7 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="InitializeDummyVersion"
-          Condition=" '$(DummyGeneratedVersion)' == 'true' ">
+  <Target Name="InitializeDummyVersion" Condition=" '$(DummyGeneratedVersion)' == 'true' ">
     <PropertyGroup>
       <!-- Here we replicate the assembly versions as found in AssemblyInfo.Common.cs -->
       <MajorVersion>1</MajorVersion>
@@ -107,32 +107,22 @@
     </PropertyGroup>
   </Target>
 
-  
+
   <!-- ### Build Generated Version ### -->
 
-  <Target Name="CreateBuildGeneratedVersion"
-          Condition=" '$(BuildGeneratedVersion)' == 'true' "
-          DependsOnTargets="CreateAssemblyVersionFile">
-    <!-- Dynamically add the assembly version file to the list of sources
-         to compile and add the BUILD_GENERATED_VERSION compilation symbol. -->
-    <PropertyGroup>
-      <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <Compile Include="$(AssemblyVersionFile)" />
-    </ItemGroup>
-  </Target>
-
   <Target Name="CreateAssemblyVersionFile"
+          Condition=" '$(BuildGeneratedVersion)' == 'true' "
           DependsOnTargets="DeleteAssemblyVersionFile;GenerateAssemblyVersions;GetConfigurationMetadata">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
 
     <PropertyGroup Condition=" '$(Retail)' == 'true' ">
-      <_ConfigurationMetadata>Retail</_ConfigurationMetadata>
+      <_AssemblyConfiguration>Retail</_AssemblyConfiguration>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <_ConfigurationMetadata>$(ConfigurationMetadata)</_ConfigurationMetadata>
+      <_AssemblyConfiguration>$(ConfigurationMetadata)</_AssemblyConfiguration>
+    </PropertyGroup>
+    <PropertyGroup>
+      <_AssemblyConfiguration>$(_AssemblyConfiguration) built on $([System.DateTime]::UtcNow.ToString()).</_AssemblyConfiguration>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -148,7 +138,7 @@
 using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
-[assembly: AssemblyConfiguration("$(_ConfigurationMetadata) built on $([System.DateTime]::UtcNow.ToString()).")]
+[assembly: AssemblyConfiguration("$(_AssemblyConfiguration)")]
 [assembly: AssemblyVersion("$(AssemblyVersion)")]
 [assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
 [assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
@@ -181,8 +171,15 @@ using System.Reflection;
 
   <!-- ### NuGet packaging ### -->
 
+  <!-- 
+      Only create a NuGet package if:
+      - A NuGet project exists.
+      - We have a meaningful version, ie BuildGeneratedVersion is true:
+        * the assembly gets an actual version
+        * the package has a unique version that matchs the assembly version.
+    -->
   <Target Name="CreateNupkg"
-          Condition=" '$(SkipNupkgCreation)' != 'true' "
+          Condition=" '$(NuProjectExists)' == 'true' And '$(BuildGeneratedVersion)' == 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
@@ -194,7 +191,7 @@ using System.Reflection;
 
   <Target Name="CreateNuspec"
           Condition=" '$(NuProjectExists)' == 'true' "
-          DependsOnTargets="DeleteNuspecFile;GetNuVersion;GetNuGetDependencies;GetProjectDependencies">
+          DependsOnTargets="DeleteNuspecFile;GetNuVersion;FindNuGetDependencies;FindProjectDependencies">
     <Message Text="Creating nuspec for $(AssemblyName)..." Importance="normal" />
 
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"
@@ -215,23 +212,31 @@ using System.Reflection;
   </Target>
 
   <Target Name="DeleteNupkgFile" DependsOnTargets="GetNuPkgFile">
-    <Message Text="Deleting nupkg file..." Importance="normal" Condition=" Exists('$(NupkgFile)') " />
+    <Message Text="Deleting nupkg file..." Importance="normal" />
 
-    <Delete Files="$(NupkgFile)" />
+    <Delete Files="$(NupkgFile)" Condition=" Exists('$(NupkgFile)') " />
   </Target>
 
   <Target Name="DeleteNuspecFile" Condition=" Exists('$(NuspecFile)') ">
-    <Message Text="Deleting temporary nuspec file..." Importance="normal" />
+    <Message Text="Deleting nuspec file..." Importance="normal" />
 
     <Delete Files="$(NuspecFile)" />
   </Target>
 
-  <Target Name="GetNuGetDependencies" Condition=" Exists('$(PackagesConfig)') ">
+  <Target Name="FindNuGetDependencies" Condition=" Exists('$(PackagesConfig)') ">
     <Message Text="Reading packages.config for NuGet dependencies of $(AssemblyName)..." Importance="normal" />
 
     <ReadDependenciesFromPackagesConfig Config="$(PackagesConfig)">
       <Output TaskParameter="Dependencies" PropertyName="NuGetDependencies"/>
     </ReadDependenciesFromPackagesConfig>
+  </Target>
+
+  <Target Name="FindProjectDependencies" DependsOnTargets="ReadProjectDependency">
+    <Message Text="Finding local project dependencies for $(AssemblyName)..." Importance="normal" />
+
+    <PropertyGroup>
+      <ProjectDependencies>@(ProjectDependency -> '%(XmlFragment)', '')</ProjectDependencies>
+    </PropertyGroup>
   </Target>
 
   <Target Name="GetNuPkgFile" DependsOnTargets="GetNuVersion">
@@ -249,9 +254,9 @@ using System.Reflection;
   <Target Name="AfterGetNuPreReleaseLabel"
           Condition=" '$(Retail)' != 'true' "
           AfterTargets="GetNuPreReleaseLabel"
-          DependsOnTargets="GetBuildKey">
+          DependsOnTargets="GenerateBuildStamp">
     <PropertyGroup>
-      <NuPreReleaseLabel>T$(BuildKey)</NuPreReleaseLabel>
+      <NuPreReleaseLabel>T$(BuildStamp)</NuPreReleaseLabel>
     </PropertyGroup>
   </Target>
 
@@ -259,14 +264,6 @@ using System.Reflection;
     <PropertyGroup>
       <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</NuVersion>
       <NuVersion Condition=" '$(NuPreReleaseLabel)' != '' ">$(NuVersion)-$(NuPreReleaseLabel)</NuVersion>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetProjectDependencies" DependsOnTargets="ReadProjectDependency">
-    <Message Text="Reading project references for $(AssemblyName)..." Importance="normal" />
-
-    <PropertyGroup>
-      <ProjectDependencies>@(ProjectDependency -> '%(XmlFragment)', '')</ProjectDependencies>
     </PropertyGroup>
   </Target>
 
@@ -279,24 +276,18 @@ using System.Reflection;
 
     <PropertyGroup>
       <_ProjectDependencyId>%(ProjectReference.Name)</_ProjectDependencyId>
-      <_ProjectDependencyId  Condition=" '$(Retail)' != 'true' ">$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
     </PropertyGroup>
 
-    <ItemGroup Condition=" '$(Retail)' == 'true' ">
+    <PropertyGroup Condition=" '$(Retail)' != 'true' ">
+      <_ProjectDependencyId>$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
+      <_ProjectDependencyVersion>(,$(_ProjectDependencyVersion)]</_ProjectDependencyVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
       <ProjectDependency Include="$(_ProjectDependencyId)">
         <XmlFragment>
           <![CDATA[
 <dependency id="$(_ProjectDependencyId)" version="$(_ProjectDependencyVersion)" />
-          ]]>
-        </XmlFragment>
-      </ProjectDependency>
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(Retail)' != 'true' ">
-      <ProjectDependency Include="$(_ProjectDependencyId)">
-        <XmlFragment>
-          <![CDATA[
-<dependency id="$(_ProjectDependencyId)" version="(,$(_ProjectDependencyVersion)]" />
           ]]>
         </XmlFragment>
       </ProjectDependency>

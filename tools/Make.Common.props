@@ -115,7 +115,7 @@
   <!-- Define the ConfigurationVariant property. -->
   <PropertyGroup Condition=" '$(Lean)' != 'true' ">
     <!-- This property is useful to distinguish between variants of the same base configuration.
-         A variant is a build configuration not available to Visual Studio builds.
+         A variant is a build configuration unavailable inside Visual Studio.
          Does not apply to Lean builds since the other options are always ignored. -->
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>

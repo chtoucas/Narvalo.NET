@@ -34,16 +34,21 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:             
-- Improvement: Clean up Make.CustomAfter.targets required. Check Retail & Lean
-  properties, removed DeleteNupkgFile.
+- Improvement: Check Retail & Lean properties.
 - Enhancement: Copy non retail packages to the local NuGet server. 
+- Bug: It seems that we didn't cover all possible configuration variants 
+  which can lead to tricky build failures. Run quick.cmd without visible 
+  internals then run make.ps1 Tests.
+- Bug: The Code Analysis "succeed" file does not seem to be created.
+- Improvement: In CreateAssemblyVersionFile, do not hardcode the directory to 
+  create but use instead the parent directory of AssemblyVersionFile.
                        
 Miscs:
 - Improvement: Complete Guidelines. 
-  * Fully document any requirement. 
+  * Fully document any requirement. See:
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)    
   * Document compiler conditional symbols in use.  
-- Improvement: Write assembly and NuGet descriptions.  
+- Improvement: Review and fill assembly and NuGet descriptions.  
 
 
 Not yet planned
@@ -56,7 +61,9 @@ Build Automation:
   currently Debug|Release, AnyCPU, with or without visible internals.
 - Enhancement: Script to push packages to NuGet with extensive checks. For instance,
   we should not try to publish a version already available on NuGet, check 
-  the dependencies tree.  
+  the dependencies tree.            
+- Enhancement: Enable T4-regeneration in VS since, for us, it does not work
+  when building from the command-line.
 - Enhancement: Add Git commit hash to assembly configuration or info?
 - Enhancement: Start to use Git tags.
 - Enhancement: Create symbol packages (or use GitLink?).

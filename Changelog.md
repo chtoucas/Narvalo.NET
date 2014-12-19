@@ -1,6 +1,8 @@
 ChangeLog
 =========
 
+- (2014/12/19) _Improvement:_ Cleaned up Make.CustomAfter.props and 
+   Make.CustomAfter.targets
 - (2014/12/19) _Improvement:_ Renamed DocuMaker to Prose.
 - (2014/12/19) _Improvement:_ Replaced all initial targets used to signal 
   temporary overriden settings by a target automatically run before a Build.

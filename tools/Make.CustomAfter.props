@@ -12,7 +12,7 @@
           Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).Version.props') "/>
 
 
-  <!-- ### Overrides for common MSBuild properties ### -->
+  <!-- ### CA, SA & Code Contracts properties ### -->
 
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
@@ -32,66 +32,73 @@
 
     <!-- Code Contracts background checking is not available in terminal. -->
     <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
+    <!-- Original documentation files (before the Code Contracts transformation). -->
+    <OldDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OldDocumentationFile>
   </PropertyGroup>
 
-  
-  <!-- ### Custom Narvalo project properties ### -->
 
-  <!-- Sign the assemblies. -->
+  <!-- ### Sign the assemblies ### -->
+  
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
+  
+  
+  <!-- ### Hide internals ### -->
 
-  <!-- Sign the assemblies. -->
   <PropertyGroup Condition=" '$(VisibleInternals)' == 'false' ">
     <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
   </PropertyGroup>
 
+  
+  <!-- ### Use a dummy version ### -->
+  
   <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion>false</BuildGeneratedVersion>
     <DefineConstants>$(DefineConstants);DUMMY_GENERATED_VERSION</DefineConstants>
   </PropertyGroup>
+  
+  
+  <!-- ### Dynamically generate the version ### -->
 
   <PropertyGroup>
     <!-- WARNING: This property requires IntermediateOutputPath to be initialized
          which is true only because we add this property via Make.proj, otherwise
          it is only available after importing Microsoft.Common.targets. -->
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
-
-    <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
-
-    <!-- Original documentation files (before the Code Contracts transformation). -->
-    <OldDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OldDocumentationFile>
   </PropertyGroup>
 
-  <!-- NuGet packaging. -->
+  <PropertyGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
+    <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
+    <!-- Dynamically add the assembly version file to the list of sources to compile. -->
+    <Compile Include="$(AssemblyVersionFile)" />
+  </ItemGroup>
+
+  
+  <!-- ### NuGet packaging ### -->
+
   <PropertyGroup>
+    <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
+    
     <NuProjectFile>$(NuProjectsRoot)$(AssemblyName)\$(AssemblyName).nuproj</NuProjectFile>
 
     <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
     <NuProjectExists Condition=" '$(NuProjectExists)' != 'true' ">false</NuProjectExists>
 
     <NuspecFile>$(OutDir)$(AssemblyName).nuspec</NuspecFile>
-
-    <!-- 
-      Only create a NuGet package if:
-      - We have a meaningful version, ie BuildGeneratedVersion is true:
-        * the assembly gets an actual version
-        * the package has a unique version that matchs the assembly version.
-      - A NuGet project exists.
-    -->
-    <SkipNupkgCreation Condition=" '$(BuildGeneratedVersion)' == 'true' And '$(NuProjectExists)' == 'true' ">false</SkipNupkgCreation>
-    <SkipNupkgCreation Condition=" '$(SkipNupkgCreation)' != 'false' ">true</SkipNupkgCreation>
   </PropertyGroup>
 
-  <!-- Import NuGet project. -->
+  <!-- Import NuGet project properties. -->
   <Import Project="$(NuProjectFile)" Condition=" '$(NuProjectExists)' == 'true' " />
 
-
+  
   <!-- ### T4 settings ### -->
 
   <PropertyGroup>

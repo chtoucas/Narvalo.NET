@@ -55,24 +55,24 @@ return !Log.HasLoggedErrors;
   </UsingTask>
 
   <!-- Create an ever growing integer key from the build and revision numbers. -->
-  <UsingTask TaskName="GetBuildKey" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+  <UsingTask TaskName="GenerateBuildStamp" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <BuildNumber ParameterType="System.UInt16" Required="true" />
       <RevisionNumber ParameterType="System.UInt16" Required="true" />
 
-      <BuildKey ParameterType="System.String" Output="true" />
+      <BuildStamp ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
       <Reference Include="System.Core" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-BuildKey = BuildNumber.ToString();        
+BuildStamp = BuildNumber.ToString();        
 
 var revisionString = RevisionNumber.ToString();
 
-for (int i = 0; i < 5 - revisionString.Length; i++) { BuildKey += "0"; }
+for (int i = 0; i < 5 - revisionString.Length; i++) { BuildStamp += "0"; }
 
-BuildKey += revisionString;
+BuildStamp += revisionString;
 
 return !Log.HasLoggedErrors;
          ]]>
