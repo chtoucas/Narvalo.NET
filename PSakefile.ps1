@@ -6,7 +6,7 @@
 
 Properties {
     $DefaultProject = "$PSScriptRoot\tools\Make.proj"
-    $LeanProject = "$PSScriptRoot\tools\Make.Public.proj"
+    $Foundations = "$PSScriptRoot\tools\Make.Foundations.proj"
 
     $BuildArgs = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
 }
@@ -19,12 +19,12 @@ Task default -depends Tests
 
 Task CI {
     # Continuous Integration Build. Mimic the Retail target, with detailed log.
-    MSBuild $LeanProject '/v:d', '/m', '/nr:false', '/t:FullBuild',
+    MSBuild $Foundations '/v:d', '/m', '/nr:false', '/t:FullBuild',
         '/p:Configuration=Release;SignAssembly=true;VisibleInternals=false'
 }
 
 Task FakeRetail {
-    MSBuild $LeanProject '/v:m', '/m', '/nr:false', '/t:FullBuild',
+    MSBuild $Foundations '/v:m', '/m', '/nr:false', '/t:FullBuild',
         '/p:SignAssembly=true;VisibleInternals=false'
 }
 Task Tests {
@@ -39,21 +39,21 @@ Task SourceAnalysis {
 # Code Analysis is slow. Analysis is only performed on public projects.
 # WARNING: Do not change VisibleInternals to true.
 Task CodeAnalysis {
-    MSBuild $LeanProject $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
+    MSBuild $Foundations $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
 Task FullCodeAnalysis {
     MSBuild $DefaultProject $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
 }
 # Code Contracts Analysis is really slow. Analysis is only performed on public projects.
 Task CodeContractsAnalysis {
-    MSBuild $LeanProject $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
+    MSBuild $Foundations $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
 Task FullCodeContractsAnalysis {
     MSBuild $DefaultProject $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
 }
 # Security Analysis is slow. Analysis is only performed on public projects.
 Task SecurityAnalysis {
-    MSBuild $LeanProject $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
+    MSBuild $Foundations $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
 }
 Task FullSecurityAnalysis {
     MSBuild $DefaultProject $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
@@ -65,7 +65,7 @@ Task FullSecurityAnalysis {
 # ==============================================================================
 
 Task Retail -depends FullClean {
-    MSBuild $LeanProject $BuildArgs '/t:FullRebuild', '/p:Retail=true'
+    MSBuild $Foundations $BuildArgs '/t:FullRebuild', '/p:Retail=true'
 }
 # At first, I wanted to also offer the possibility of packaging a single project
 # but then we won't be able to run the test suite. A better solution is to use

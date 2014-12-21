@@ -20,7 +20,7 @@ Work in progress
 
 Code Analysis and Source Analysis:               
 - Improvement: Wrap all SuppressMessage that are not really justified either
-  by a !NO_GLOBAL_SUPPRESSIONS or by a !NO_HACK. Tag with [GeneratedCode] those
+  by a `!NO_GLOBAL_SUPPRESSIONS` or by a `!NO_HACK`. Tag with [GeneratedCode] those
   related to generated code...
 - Improvement: Remove the local CA & SA overrides. Fix any remaining CA and 
   SA warnings and errors. 
@@ -34,16 +34,20 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:             
-- Improvement: Check Retail & Lean properties.
 - Enhancement: Copy non retail packages to the local NuGet server. 
 - Bug: The Code Analysis "succeed" file does not seem to be created.
+- Improvement: I don't like the way we handle Retail in Make.CustomAfter.targets.
+- PSakefile: Rename LeanProject
+- Make.Common.props: Remove Lean property. 
                        
 Miscs:
 - Improvement: Complete Guidelines. 
+  * Explain NuGet package versioning (retail or not). More details on the effect
+    of using Retail=true.
   * Fully document any requirement. See:
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)    
   * Document compiler conditional symbols in use.  
-- Improvement: Review and fill assembly and NuGet descriptions.  
+- Improvement: Review and fill assembly and NuGet spec.  
 
 
 Not yet planned

@@ -1,8 +1,8 @@
 ChangeLog
 =========
              
-- (2014/12/19) _Improvement:_ In CreateAssemblyVersionFile, instead of 
-  hardcoding the path to the directory to be created, used the parent directory 
+- (2014/12/19) _Improvement:_ In the CreateAssemblyVersionFile target, instead of 
+  hardcoding the path to the directory to be created, use the parent directory 
   of AssemblyVersionFile.
 - (2014/12/19) _Bugfix:_ In Prose, replaced references to NuGet packages of
   Narvalo.Core & Narvalo.Common by simple project references of the same 

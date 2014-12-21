@@ -176,7 +176,10 @@
       a subdirectory of OutDir. To correct this, we instruct MSBuild to
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
 
-      WARNING: We force the value of various paths (OutputPath, IntermediateOutputPath).
+      WARNING: We force the value of various paths. Although not required by the
+      standard MSBuild operations, we do use IntermediateOutputPath 
+      in Make.CustomAfter.props. Concerning OutputPath, I didn't check if this is
+      really necessary.
     -->
     <BuildProperties>
       $(BuildProperties);
