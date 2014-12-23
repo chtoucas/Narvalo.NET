@@ -1,6 +1,6 @@
 Guidelines
 ==========
-                    
+
 Prerequisites
 -------------
 
@@ -19,8 +19,8 @@ Components necessary to run the build scripts:
 - [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758),
   Prerequisite for the Modeling SDK (see below).
 - [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754),
-  provides T4 integration in MSBuild.    
-- Microsoft .NET 4.5.1 Developer Pack(?),  Microsoft Windows SDK for Windows 8.1(?) 
+  provides T4 integration in MSBuild.
+- Microsoft .NET 4.5.1 Developer Pack(?),  Microsoft Windows SDK for Windows 8.1(?)
   or .NET Framework SDK for PEVerify.exe.
 
 
@@ -79,12 +79,12 @@ of the core libraries.
 - Narvalo.Externs
 - Narvalo.Ghostscript
 - Narvalo.Reliability
-- Narvalo.StyleCop.CSharp 
+- Narvalo.StyleCop.CSharp
 
-             
+
 Periodic Checklist
 ------------------
-       
+
 ### Unfinished Work
 
 Task List
@@ -107,14 +107,14 @@ tools\NuGet\nuget.exe update self
 
 ### Visual Studio or Framework Updates
 
-When upgrading VS, do not forget to update the default VisualStudioVersion 
+When upgrading VS, do not forget to update the default VisualStudioVersion
 property in Shared.props and in build.cmd.
 We might also need to update the SDK40ToolsPath property.
 
 
 Coding Style
 ------------
-         
+
 ### General
 
 - Directories mirror namespaces.
@@ -124,7 +124,7 @@ Coding Style
 - Max line-width 100 characters.
 - Remove and sort usings.
 - Projects should use a minimal set of references.
-   
+
 ### StyleCop
 
 Narvalo.Core includes a Settings.StyleCop file with actual rules that mirror
@@ -146,18 +146,18 @@ Disabled rules:
 - SA1501:StatementMustNotBeOnASingleLine
 - SA1502:ElementMustNotBeOnASingleLine
 - SA1634:FileHeaderMustShowCopyright
-    
+
 
 Code Quality
 ------------
 
 ### FxCop
-                   
+
 The following projects use the default ruleset for Code Analysis.
 - Narvalo.Junk
 - Prose
 - Playground
-    
+
 ### Code Contracts
 
 #### Object Invariants
@@ -215,7 +215,7 @@ For all modes:
 
 ### Edit the project file
 
-Add the following line at the top of the project file:    
+Add the following line at the top of the project file:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
@@ -268,7 +268,7 @@ Compilation Symbols
 
 Appendices
 ----------
-         
+
 ### Assembly Versioning
 
 - AssemblyVersion, version used by the runtime.
@@ -281,7 +281,7 @@ Appendices
   This attribute follows semantic versioning rules.
   MAJOR.MINOR.PATCH(-PreRelaseLabel)
 
-MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta) are manually set. 
+MAJOR, MINOR, PATCH and PreRelaseLabel (alpha, beta) are manually set.
 
 BUILD and REVISION are generated automatically:
 - Inside Visual Studio, I don't mind if the versions do not change between builds.
@@ -293,19 +293,19 @@ All core Narvalo projects use the same version, let's see if things work with Nu
 - Patch update: X.Y.0.0 -> X.Y.1.0
   * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works
     for Narvalo.Core and Narvalo.Common can reference the newly published assembly.
-  * If I publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common 
-    references Narvalo.Core X.Y.1.0, obviously unknown outside, it doesn't 
+  * If I publish Narvalo.Common but not Narvalo.Core, even if Narvalo.Common
+    references Narvalo.Core X.Y.1.0, obviously unknown outside, it doesn't
     matter for the CLR: the assembly version _did not actually change_,
     it's still X.Y.0.0.
 - Major or Minor upgrade: 1.1.0.0 -> 1.2.0.0 (or 1.1.0.0 -> 2.1.0.0)
   * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works.
-    Let's cross fingers that I did not make a mistake by not releasing 
+    Let's cross fingers that I did not make a mistake by not releasing
     Narvalo.Common too.
-  * If I publish Narvalo.Common but not Narvalo.Core, we get a runtime error 
-    since Narvalo.Common references an assembly version unknown outside my 
-    development environment. The solution is obvious. Narvalo.Core has not 
-    changed so Narvalo.Common should replace the direct reference and use 
-    the NuGet package for Narvalo.Core. If necessary we can roll back 
+  * If I publish Narvalo.Common but not Narvalo.Core, we get a runtime error
+    since Narvalo.Common references an assembly version unknown outside my
+    development environment. The solution is obvious. Narvalo.Core has not
+    changed so Narvalo.Common should replace the direct reference and use
+    the NuGet package for Narvalo.Core. If necessary we can roll back
     at any time and next time we must publish both packages.
 
 ### Strong Name Key
@@ -316,7 +316,7 @@ All core Narvalo projects use the same version, let's see if things work with Nu
 
 References:
 - [Strong Name Tool](http://msdn.microsoft.com/en-us/library/k5b5tt23.aspx)
-                              
+
 ### Custom assembly and module attributes
 
 I see that Microsoft projects include the following lines in their
@@ -327,7 +327,7 @@ assembly infos, what's their purposes?
   [assembly: AssemblyMetadata("Serviceable", "True")]
 
   [assembly: StringFreezing]
-  // Disable string interning. 
+  // Disable string interning.
   [assembly: CompilationRelaxations(8)]
 
   [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]

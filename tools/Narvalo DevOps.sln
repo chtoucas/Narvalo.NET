@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D31
 		Make.CustomAfter.targets = Make.CustomAfter.targets
 		Make.CustomBefore.props = Make.CustomBefore.props
 		Make.CustomBefore.targets = Make.CustomBefore.targets
+		Make.Foundations.proj = Make.Foundations.proj
 		Make.proj = Make.proj
-		Make.Public.proj = Make.Public.proj
-		Make.Quick.proj = Make.Quick.proj
+		Make.QuickAndDirty.proj = Make.QuickAndDirty.proj
 		Narvalo.Common.props = Narvalo.Common.props
 		Narvalo.Common.targets = Narvalo.Common.targets
 		Narvalo.Samples.props = Narvalo.Samples.props
@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6D2B
 		..\pack.cmd = ..\pack.cmd
 		..\PSakefile.ps1 = ..\PSakefile.ps1
 		..\publish.ps1 = ..\publish.ps1
-		..\quick.cmd = ..\quick.cmd
+		..\quickanddirty.cmd = ..\quickanddirty.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{EC45235E-0AFF-48C1-AC38-41FF5469A638}"

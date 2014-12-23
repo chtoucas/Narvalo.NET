@@ -37,8 +37,8 @@ MSBuild files:
 - Enhancement: Copy non retail packages to the local NuGet server. 
 - Bug: The Code Analysis "succeed" file does not seem to be created.
 - Improvement: I don't like the way we handle Retail in Make.CustomAfter.targets.
-- PSakefile: Rename LeanProject
-- Make.Common.props: Remove Lean property. 
+- Improvement: Make.Common.props & Make.Common.targets: Clean up Lean property.
+- Bugfix: Make.Common.props & Narvalo.Common.props: CA & SA 
                        
 Miscs:
 - Improvement: Complete Guidelines. 
