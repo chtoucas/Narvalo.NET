@@ -3,8 +3,8 @@
 namespace Prose.Narrator
 {
     using Autofac;
-    using Prose.Parsing;
     using Narvalo;
+    using Prose.Parsing;
 
     public sealed class ParserModule : Module
     {

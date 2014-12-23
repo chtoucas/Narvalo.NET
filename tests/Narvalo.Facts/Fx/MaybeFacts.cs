@@ -478,7 +478,6 @@ namespace Narvalo.Fx
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
             }
-
         }
 
         public static partial class TheSelectOperator

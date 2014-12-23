@@ -4,9 +4,9 @@ namespace Prose.Weavers
 {
     using System.Collections.Generic;
     using System.IO;
+    using Narvalo;
     using Prose.Parsing;
     using Prose.Templating;
-    using Narvalo;
 
     public class WeaverEngine<TModel> : IWeaverEngine<TModel> where TModel : ITemplateModel
     {

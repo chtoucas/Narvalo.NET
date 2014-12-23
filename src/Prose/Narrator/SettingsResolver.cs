@@ -8,10 +8,10 @@ namespace Prose.Narrator
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using Prose.Properties;
     using Narvalo;
     using Narvalo.Collections;
     using Narvalo.Fx;
+    using Prose.Properties;
     using Serilog.Events;
 
     public static class SettingsResolver

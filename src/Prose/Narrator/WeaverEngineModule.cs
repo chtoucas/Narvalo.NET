@@ -3,10 +3,10 @@
 namespace Prose.Narrator
 {
     using Autofac;
+    using Narvalo;
     using Prose.Properties;
     using Prose.Templating;
     using Prose.Weavers;
-    using Narvalo;
 
     public sealed class WeaverEngineModule : Module
     {

@@ -8,9 +8,9 @@ namespace Prose.Narrator
     using System.Linq;
     using Autofac;
     using Autofac.Core;
-    using Prose.IO;
     using Narvalo;
     using Narvalo.IO;
+    using Prose.IO;
 
     public sealed class FileFinderModule : Module
     {

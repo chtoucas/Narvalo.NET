@@ -5,8 +5,8 @@ namespace Prose.Templating
     using System;
     using System.Linq;
     using System.Web;
-    using Prose.Parsing;
     using Narvalo;
+    using Prose.Parsing;
 
     public sealed class Template : ITemplate<TemplateModel>
     {

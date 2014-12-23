@@ -5,10 +5,10 @@ namespace Prose.Narrator
     using System.Diagnostics;
     using System.IO;
     using Autofac;
-    using Prose.Properties;
-    using Prose.Weavers;
     using Narvalo;
     using NodaTime;
+    using Prose.Properties;
+    using Prose.Weavers;
     using Serilog;
 
     public sealed class Application

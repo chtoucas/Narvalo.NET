@@ -3,10 +3,10 @@
 namespace Prose.Weavers
 {
     using System.IO;
-    using Prose.IO;
-    using Prose.Templating;
     using Narvalo;
     using Narvalo.IO;
+    using Prose.IO;
+    using Prose.Templating;
 
     public sealed class RelativeFileWeaver : IWeaver<RelativeFile>
     {

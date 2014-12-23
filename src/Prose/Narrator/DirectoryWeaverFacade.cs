@@ -6,8 +6,8 @@ namespace Prose.Narrator
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Prose.Weavers;
     using Narvalo;
+    using Prose.Weavers;
 
     public sealed class DirectoryWeaverFacade
     {

@@ -3,8 +3,8 @@
 namespace Prose.Narrator
 {
     using Autofac;
-    using Prose.IO;
     using Narvalo;
+    using Prose.IO;
 
     public sealed class WriterModule : Module
     {

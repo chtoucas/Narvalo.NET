@@ -3,9 +3,9 @@
 namespace Prose.Weavers
 {
     using System.IO;
+    using Narvalo;
     using Prose.IO;
     using Prose.Templating;
-    using Narvalo;
 
     public sealed class FileWeaver : IWeaver<FileInfo>
     {

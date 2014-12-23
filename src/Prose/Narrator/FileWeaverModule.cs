@@ -4,10 +4,10 @@ namespace Prose.Narrator
 {
     using System.IO;
     using Autofac;
-    using Prose.Internal;
-    using Prose.Weavers;
     using Narvalo;
     using Narvalo.IO;
+    using Prose.Internal;
+    using Prose.Weavers;
 
     public sealed class FileWeaverModule : Module
     {
