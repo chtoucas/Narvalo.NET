@@ -1,6 +1,11 @@
 ChangeLog
 =========
              
+- (2014/12/30) _Improvement:_ Fully documented the PSake script file. It is now 
+  possible to specify the MSBuild verbosity level from the command line.
+  In Make.Foundations.proj, added the ability to select a subset of the list
+  of projects to build. Using a MSBuild response file, allowed to try out the 
+  build system without actually committing your personal MSBuild parameters.
 - (2014/12/19) _Improvement:_ In the CreateAssemblyVersionFile target, instead of 
   hardcoding the path to the directory to be created, use the parent directory 
   of AssemblyVersionFile.

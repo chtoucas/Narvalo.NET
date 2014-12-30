@@ -1,97 +1,47 @@
-#
-# WARNING: This file must stay at the root of the repository.
-#
-# See Make.proj for a description of all available options.
-# NB: To speed up things a bit, we do not call the Clean target most of time.
-
 Properties {
-    $DefaultProject = "$PSScriptRoot\tools\Make.proj"
-    $Foundations = "$PSScriptRoot\tools\Make.Foundations.proj"
+    # WARNING: This file is supposed to be at the root of the repository.
+    $RepositoryRoot = $PSScriptRoot
 
-    $BuildArgs = '/verbosity:minimal', '/maxcpucount', '/nodeReuse:false'
-}
+    # Console parameters.
+    # NB: $verbosity should have been already set in make.ps1.
+    if ($verbosity -eq $null) { $verbosity = 'minimal' }
+    $BuildArgs = "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
-Task default -depends Tests
+    $Everything = "$RepositoryRoot\tools\Make.proj"
+    $Foundations = "$RepositoryRoot\tools\Make.Foundations.proj"
+    
+    # Packaging properties:
+    # - Release configuration
+    # - Generate assembly versions (necessary for NuGet packaging)
+    # - Sign assemblies
+    # - Unconditionally hide internals (implies no white-box testing)
+    $PackagingProps = `
+        '/p:Configuration=Release',
+        '/p:BuildGeneratedVersion=true',
+        '/p:SignAssembly=true',
+        '/p:VisibleInternals=false'
 
-# ==============================================================================
-# Test and Analysis.
-# ==============================================================================
+    # Default CI properties:
+    # - Release configuration
+    # - Do not generate assembly versions
+    # - Do not sign assemblies
+    # - Leak internals to enable all white-box tests.
+    $CIProps = `
+        '/p:Configuration=Release',
+        '/p:BuildGeneratedVersion=false',
+        '/p:SignAssembly=false',
+        '/p:VisibleInternals=true'
 
-Task CI {
-    # Continuous Integration Build. Mimic the Retail target, with detailed log.
-    MSBuild $Foundations '/v:d', '/m', '/nr:false', '/t:FullBuild',
-        '/p:Configuration=Release;SignAssembly=true;VisibleInternals=false'
-}
+    # For static analysis, we hide internals, otherwise we might not truly 
+    # analyze the public API.
+    $StaticAnalysisProps = $CIProps, '/p:VisibleInternals=false'
 
-Task FakeRetail {
-    MSBuild $Foundations '/v:m', '/m', '/nr:false', '/t:FullBuild',
-        '/p:SignAssembly=true;VisibleInternals=false'
-}
-Task Tests {
-    MSBuild $DefaultProject $BuildArgs '/t:Test', '/p:BuildGeneratedVersion=false'
-}
-Task Verifications {
-    MSBuild $DefaultProject $BuildArgs '/t:Verify', '/p:BuildGeneratedVersion=false'
-}
-Task SourceAnalysis {
-    MSBuild $DefaultProject $BuildArgs '/p:SourceAnalysisEnabled=true;BuildGeneratedVersion=false'
-}
-# Code Analysis is slow. Analysis is only performed on public projects.
-# WARNING: Do not change VisibleInternals to true.
-Task CodeAnalysis {
-    MSBuild $Foundations $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
-}
-Task FullCodeAnalysis {
-    MSBuild $DefaultProject $BuildArgs '/p:RunCodeAnalysis=true;BuildGeneratedVersion=false;VisibleInternals=false'
-}
-# Code Contracts Analysis is really slow. Analysis is only performed on public projects.
-Task CodeContractsAnalysis {
-    MSBuild $Foundations $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
-}
-Task FullCodeContractsAnalysis {
-    MSBuild $DefaultProject $BuildArgs '/p:Configuration=CodeContracts;BuildGeneratedVersion=false'
-}
-# Security Analysis is slow. Analysis is only performed on public projects.
-Task SecurityAnalysis {
-    MSBuild $Foundations $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
-}
-Task FullSecurityAnalysis {
-    MSBuild $DefaultProject $BuildArgs '/t:SecAnnotate', '/p:BuildGeneratedVersion=false'
-}
-
-# ==============================================================================
-# Retail
-# ==============================================================================
-
-Task Retail -depends FullClean {
-    MSBuild $Foundations $BuildArgs '/t:FullRebuild', '/p:Retail=true'
-}
-# At first, I wanted to also offer the possibility of packaging a single project
-# but then we won't be able to run the test suite. A better solution is to use
-# the solution files, even if this is not perfect. For instance, the solution
-# might have been incorrectly configured and only a subset of the projects
-# might be built.
-Task RetailCore -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=Narvalo (Core).sln'
-}
-Task RetailMiscs -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=Narvalo (Miscs).sln'
-}
-Task RetailMvp -depends FullClean {
-    MSBuild $DefaultProject $BuildArgs '/t:FullRebuild', '/p:Retail=true;CustomSolution=Narvalo (Mvp).sln'
-}
-
-# ==============================================================================
-# Miscs
-# ==============================================================================
-
-# Delete work directory.
-Task FullClean {
-    $workDir = "$PSScriptRoot\work\"
-
-    if (Test-Path $workDir) {
-        Remove-Item $workDir -Force -Recurse
-    }
+    # Retail targets:
+    # - Rebuild all
+    # - Verify Portable Executable (PE) format
+    # - Run Xunit tests
+    # - Package
+    $RetailTargets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
 TaskTearDown {
@@ -100,6 +50,89 @@ TaskTearDown {
         Write-Host 'Build failed.' -BackgroundColor Red -ForegroundColor Yellow
         Write-Host ''
         Exit 1
+    }
+}
+
+Task Default -depends FastBuild
+
+# ==============================================================================
+
+# Continuous Integration and development tasks:
+# - FastBuild, build then run Xunit tests in Debug configuration
+# - CI, default CI build
+# - CI-Retail, mimic the Retail task
+# - CodeAnalysis (slow)
+# - CodeContractsAnalysis (very slow)
+# - SecurityAnalysis (very slow)
+
+Task FastBuild {
+    MSBuild $Foundations $BuildArgs `
+        '/p:Configuration=Debug',
+        '/p:BuildGeneratedVersion=false',
+        '/p:SignAssembly=false',
+        '/p:VisibleInternals=true',
+        '/t:Build;Xunit'
+}
+
+Task CI {
+    # Perform the following operations:
+    # - Run Source Analysis
+    # - Build all projects
+    # - Verify Portable Executable (PE) format
+    # - Run Xunit tests, including white-box tests
+    MSBuild $Everything $BuildArgs $CIProps `
+        '/t:Build;PEVerify;Xunit',
+        '/p:SourceAnalysisEnabled=true'
+}
+
+Task CI-Retail {
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps
+}
+
+Task CodeAnalysis {
+    MSBuild $Everything $BuildArgs $StaticAnalysisProps '/t:Build', '/p:RunCodeAnalysis=true'
+}
+
+Task CodeContractsAnalysis {
+    MSBuild $Foundations $BuildArgs $StaticAnalysisProps '/t:Build', '/p:Configuration=CodeContracts'
+}
+
+Task SecurityAnalysis {
+    MSBuild $Foundations $BuildArgs $StaticAnalysisProps '/t:SecAnnotate'
+}
+
+# ==============================================================================
+
+# Retail tasks:
+# - Retail, package all
+# - Retail-Core, only package Core projects
+# - Retail-Mvp, only package Mvp projects
+# - Retail-Build, only package Narvalo.Build project
+
+Task Retail {
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true'
+}
+
+Task Retail-Core {
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Core_'
+}
+
+Task Retail-Mvp {
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Mvp_'
+}
+
+Task Retail-Build {
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Build_'
+}
+
+# ==============================================================================
+
+# Delete work directory.
+Task FullClean {
+    $workDir = "$RepositoryRoot\work\"
+
+    if (Test-Path $workDir) {
+        Remove-Item $workDir -Force -Recurse
     }
 }
 

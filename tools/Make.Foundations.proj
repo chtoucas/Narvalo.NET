@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    Only select the most relevant projects for building.
-    Options are defined in Shared.props or in Make.Common.props.
+    Available filters:
+    - Empty or '_None_', include all projects (default)
+    - '_Core_', include Core projects
+    - '_Mvp_', include Mvp projects
+    - '_Build_', include Narvalo.Build project
+    or any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
+    Any list separator should work but, if you use a semicolon, do not forget 
+    to quote the list of filters.
   -->
+
+  <PropertyGroup>
+    <Filter Condition=" '$(Filter)' == '' ">_None_</Filter>
+  </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
-  <!-- Define the ProjectsToBuild property. -->
-  <ItemGroup>
-    <!-- Librairies. -->
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+  <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Core_))' == 'true' ">
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
-    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
 
-    <!-- Test projects. -->
     <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Mvp_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+
     <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Mvp.Facts\Narvalo.Mvp.Facts.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Build_))' == 'true' ">
+    <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
+  </ItemGroup>
+  
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
 </Project>

@@ -5,7 +5,7 @@
 
 :Bootstrap
 
-:: Uncomment the next line to remove some limitations on property functions.
+:: Uncomment the next line to remove any limitation on property functions.
 @rem @set MSBUILDENABLEALLPROPERTYFUNCTIONS=1
 
 @set MSBuild="%ProgramFiles(x86)%\MSBuild\12.0\Bin\MSBuild.exe"
@@ -21,7 +21,7 @@
 )
 
 :: As a last resort, we use the MSBuild installed alongside the .NET Framework.
-:: It should work but it is not ideal. For instance, it won't be aware of the
+:: It should work but it is not ideal. For instance, it is not aware of the
 :: last installed version of the .NET SDK.
 @set MSBuild="%SystemRoot%\Microsoft.NET\Framework\v4.0.30319\MSBuild"
 @if exist %MSBuild% ( @goto Build )
