@@ -1,6 +1,11 @@
 ChangeLog
 =========
-             
+     
+- (2014/12/30) _Bugfix:_ Only enable white-box tests in `PresenterTypeResolverFacts`
+  when internals are visible.
+- (2014/12/30) _Improvement:_ Only display MSBuild warnings for local CA or SA
+  overrides when CA or SA is actually requested. 
+- (2014/12/30) _Improvement:_ Upgraded NSubsitute to v1.8.1.
 - (2014/12/30) _Improvement:_ Fully documented the PSake script file. It is now 
   possible to specify the MSBuild verbosity level from the command line.
   In Make.Foundations.proj, added the ability to select a subset of the list
