@@ -30,7 +30,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D31
 		Make.Foundations.proj = Make.Foundations.proj
 		Make.proj = Make.proj
 		Make.Shared.props = Make.Shared.props
-		Make.TryOut.proj = Make.TryOut.proj
 		Narvalo.Common.props = Narvalo.Common.props
 		Narvalo.Common.targets = Narvalo.Common.targets
 		Narvalo.Samples.props = Narvalo.Samples.props

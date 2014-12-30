@@ -95,7 +95,7 @@
       Configuration=$(Configuration);
       Platform=$(Platform);
       VisualStudioVersion=$(VisualStudioVersion);
-      
+
       RepositoryRoot=$(RepositoryRoot);
     </BuildProperties>
 
@@ -107,7 +107,7 @@
       SignAssembly=$(SignAssembly);
       VisibleInternals=$(VisibleInternals)
     </BuildProperties>
-    
+
     <!--
       Where shall we write the outputs.
       More documentation here:
@@ -148,7 +148,11 @@
 
   <!-- Initial target. -->
   <Target Name="__InitializeMakeCommonProps">
-    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of @(ProjectsToBuild)." 
+    <ItemGroup Condition=" '@(ProjectsToBuild)' == '' And '$(ProjectsToBuild)' != '' ">
+      <ProjectsToBuild Include="$(ProjectsToBuild)" />
+    </ItemGroup>
+
+    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of @(ProjectsToBuild)."
            Condition=" '@(ProjectsToBuild)' == '' " />
   </Target>
 </Project>

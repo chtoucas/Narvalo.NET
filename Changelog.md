@@ -1,6 +1,8 @@
 ChangeLog
 =========
      
+- (2014/12/30) _Improvement:_ Using a MSBuild response file, allowed to try out 
+  the build system without actually committing your personal settings.
 - (2014/12/30) _Improvement:_ Made sure a build fails if a custom import
   does not exist. Moved the content of Narvalo.CustomBefore.props & 
   Narvalo.CustomBefore.targets to CustomAfter props & targets and removed them.
@@ -21,8 +23,7 @@ ChangeLog
 - (2014/12/30) _Improvement:_ Fully documented the PSake script file. It is now 
   possible to specify the MSBuild verbosity level from the command-line.
   In Make.Foundations.proj, added the ability to select a subset of the list
-  of projects to build. Using a MSBuild response file, allowed to try out the 
-  build system without actually committing your personal settings.
+  of projects to build. 
 - (2014/12/19) _Improvement:_ In the CreateAssemblyVersionFile target, instead of 
   hardcoding the path to the directory to be created, use the parent directory 
   of AssemblyVersionFile.

@@ -1,13 +1,11 @@
-:: Quick and dirty runner.
+:: Quick runner to try out the build system.
 ::
 :: To run this script, you MUST create your personal MSBuild response file: tryout.rsp.
-:: A "good" practice is to include a file logger to %LogFile%.
 ::
 :: Sample response file:
-:: # MSBuild response file
 ::
-:: # Project to build
-:: .\tools\Make.TryOut.proj
+:: # MSBuild project
+:: %RepositoryRoot%\tools\Make.Common.targets
 ::
 :: # Targets
 :: /t:Build
@@ -17,6 +15,7 @@
 :: /p:BuildGeneratedVersion=false
 :: /p:SignAssembly=false
 :: /p:VisibleInternals=true
+:: /p:ProjectsToBuild=%RepositoryRoot%\src\Narvalo.Core\Narvalo.Core.csproj
 ::
 :: # Console parameters
 :: /verbosity:minimal
@@ -25,15 +24,17 @@
 ::
 :: # File logger
 :: /fileLogger
-:: /fileloggerparameters:logfile=%LogFile%;verbosity=normal;encoding=utf-8
+:: /fileloggerparameters:logfile=%WorkDir%\tryout.log;verbosity=normal;encoding=utf-8
 ::
 
 @echo off
 @setlocal
 
-@set RspFile="%~dp0\tryout.rsp"
-@set WorkDir="%~dp0\work"
-@set LogFile="%WorkDir%\tryout.log"
+@set RepositoryRoot=%~dp0
+@set WorkDir="%RepositoryRoot%\work"
+
+@set RspName=tryout.rsp
+@set RspFile="%RepositoryRoot%\%RspName%"
 
 :Setup
 
@@ -45,13 +46,13 @@
 )
 
 @if not exist %RspFile% (
-  @set ErrMsg=To run this script, you MUST create the MSBuild response file: tryout.rsp
+  @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspName%
   @goto Failure
 )
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Make.TryOut.proj" @%RspFile%
+@call "%RepositoryRoot%\tools\MSBuild.cmd" @%RspFile%
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed
@@ -81,5 +82,5 @@
 @rem )
 
 @endlocal
-@pause
+@rem @pause
 @exit /B %ERRORLEVEL%
