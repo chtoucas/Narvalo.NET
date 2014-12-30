@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
          DefaultTargets="Build"
-         InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
-    Prerequisites:
-    - @(ProjectsToBuild)
-
-    Each master project (e.g. Make.proj) creates its own instance of @(ProjectsToBuild).
-
-    Combinations that do not really make sense:
-    - No need to set Lean to true when targeting LeanBuild.
-    - Setting Lean will have no effect when targeting CoreBuild.
-  -->
-
+  
   <!-- Import properties if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
@@ -24,47 +13,22 @@
   <!-- Import Xunit tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
 
-  <!-- To prevent circular references and to avoid incorrect behaviour,
-       please DO NOT break the following rules:
-       - Lean(...) targets MUST NOT refer to Core(...), Clean, Build and Rebuild targets.
-       - Core(...) targets MUST NOT refer to Lean(...), Clean, Build and Rebuild targets.
-       - Other targets MUST NOT refer to Core(...) and Lean(...) targets,
-         instead they should use the Clean, Build and Rebuild targets.
-
-       There is only one exception to these rules: CoreBuild depends on the LeanBuild target. -->
-
   <Target Name="Clean">
-    <!-- Artefacts created during a build.
-         Do not remove the entire WorkArtefactsDir,
-         other targets may depend on it. -->
+    <!-- Artefacts created during a build. -->
     <ItemGroup>
-      <_FilesToDelete Include="$(WorkArtefactsDir)\**\*" />
-      <_FilesToDelete Include="$(PEVerifyDummyOutput)" />
+      <_FilesToDelete Include="$(XunitXmlFile)" />
+      <_FilesToDelete Include="$(XunitHtmlFile)" />
     </ItemGroup>
+
+    <Delete Files="@(_FilesToDelete)" />
 
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Clean" />
-
-    <Delete Files="@(_FilesToDelete)" />
   </Target>
 
-  <Target Name="Build">
-    <PropertyGroup>
-      <_TargetsCalledByBuild Condition=" '$(Lean)' == 'true' ">LeanBuild</_TargetsCalledByBuild>
-      <_TargetsCalledByBuild Condition=" '$(Lean)' != 'true' ">CoreBuild</_TargetsCalledByBuild>
-    </PropertyGroup>
-
-    <CallTarget Targets="$(_TargetsCalledByBuild)" />
-  </Target>
-
-  <Target Name="CoreBuild" DependsOnTargets="RestorePackages;LeanBuild" />
-
-  <Target Name="LeanBuild">
-    <!-- WARNING: This target might fail if the packages were not previously
-         restored. We keep it that way to be able to perform fast builds
-         when we know in advance it's OK. Otherwise there is always CoreBuild... -->
+  <Target Name="Build" DependsOnTargets="RestorePackages">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -74,34 +38,14 @@
     </MSBuild>
   </Target>
 
-  <Target Name="Rebuild">
-    <PropertyGroup>
-      <_TargetsCalledByRebuild Condition=" '$(Lean)' == 'true' ">LeanRebuild</_TargetsCalledByRebuild>
-      <_TargetsCalledByRebuild Condition=" '$(Lean)' != 'true' ">CoreRebuild</_TargetsCalledByRebuild>
-    </PropertyGroup>
+  <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
 
-    <CallTarget Targets="$(_TargetsCalledByRebuild)" />
-  </Target>
-
-  <Target Name="CoreRebuild" DependsOnTargets="_PatchCoreRebuild;Clean;CoreBuild" />
-
-  <Target Name="LeanRebuild">
-    <!-- WARNING: See WARNING in LeanBuild. -->
-    <MSBuild Projects="@(ProjectsToBuild)"
-             Properties="$(BuildProperties)"
-             BuildInParallel="$(BuildInParallel)"
-             Targets="Rebuild"
-             StopOnFirstFailure="true">
-      <Output ItemName="BuildOutputs" TaskParameter="TargetOutputs" />
-    </MSBuild>
-  </Target>
-
-  <Target Name="_PatchCoreRebuild">
+  <Target Name="_PatchRebuild">
     <!--
       StyleCop uses $(RebuildDependsOn) to modify the Build process.
       Here, we define Rebuild as Clean;Build, which means that StyleCop
       modifications of the Rebuild process won't apply since we never call
-      the Rebuild target of MSBuild.
+      the Rebuild target from a project.
 
       The solution is to copy the original StyleCop modifications
       to BuildProperties.
@@ -117,27 +61,50 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="Verify" DependsOnTargets="PEVerify" />
-
-  <Target Name="Test" DependsOnTargets="RunXunitTests" />
-
-  <Target Name="Package"
-          Condition=" '$(Lean)' != 'true' "
-          DependsOnTargets="Build">
-    <!-- WARNING: Package is a non-standard MSBuild target. -->
+  <Target Name="Package">
+    <!-- WARNING: Child Package target is a non-standard MSBuild target. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
              Targets="Package"
              StopOnFirstFailure="true" />
   </Target>
+  
+  <Target Name="PEVerify">
+    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. -->
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="PEVerify"
+             StopOnFirstFailure="true" />
+  </Target>
 
-  <Target Name="FullBuild" DependsOnTargets="Build;Verify;Test;Package" />
+  <Target Name="SecAnnotate">
+    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target. -->
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="$(BuildProperties)"
+             BuildInParallel="$(BuildInParallel)"
+             Targets="SecAnnotate"
+             StopOnFirstFailure="true" />
+  </Target>
 
-  <Target Name="FullRebuild" DependsOnTargets="Clean;FullBuild" />
+  <Target Name="Xunit"
+          DependsOnTargets="Build"
+          Inputs="@(BuildOutputs)"
+          Outputs="$(XunitXmlFile)">
+    <ItemGroup>
+      <_TestAssembly Include="%(BuildOutputs.Identity)"
+                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
+    </ItemGroup>
 
-
-  <!-- ### NuGet ### -->
+    <!-- Since Xunit depends on Build, we are sure that the directory
+         where reports are stored exists. -->
+    <xunit Assemblies="@(_TestAssembly)"
+           Html="$(XunitHtmlFile)"
+           Xml="$(XunitXmlFile)"
+           Condition=" '@(_TestAssembly)' != '' " />
+  </Target>
+  
 
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
@@ -159,104 +126,5 @@
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
-  </Target>
-
-
-  <!-- ### Xunit ### -->
-
-  <Target Name="RunXunitTests"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(XunitXmlFile)">
-    <ItemGroup>
-      <_TestAssembly Include="%(BuildOutputs.Identity)"
-                     Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
-    </ItemGroup>
-
-    <!-- Since RunXunitTests depends on Build, we are sure that the directory
-         where reports are stored exists. -->
-    <xunit Assemblies="@(_TestAssembly)"
-           Html="$(XunitHtmlFile)"
-           Xml="$(XunitXmlFile)"
-           Condition=" '@(_TestAssembly)' != '' " />
-  </Target>
-
-
-  <!-- ### PEVerify ### -->
-
-  <Target Name="DeletePEVerifyLogFile" Condition=" Exists('$(PEVerifyLogFile)') ">
-    <Delete Files="$(PEVerifyLogFile)" />
-  </Target>
-
-  <!-- Define the CorePEVerify property. -->
-  <PropertyGroup>
-    <CorePEVerify>_PEVerify</CorePEVerify>
-    <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
-  </PropertyGroup>
-
-  <!-- WARNING: Delete previous log before doing anything. We append to it
-       and we don't want to let it grow endlessly. As a side-effect, we can not
-       use the log file for incremental batching. -->
-  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLogFile;$(CorePEVerify)" />
-
-  <Target Name="_PEVerify"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(PEVerifyDummyOutput)">
-    <Message Text="Verifying assemblies with PEVerify..." Importance="high" />
-
-    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;%(BuildOutputs.FullPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
-          LogStandardErrorAsError="true"
-          ContinueOnError="false" />
-
-    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
-    <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
-  </Target>
-
-  <Target Name="_WarnOnMissingPEVerify">
-    <Warning Text="Cannot verify assemblies. I was unable to locate PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
-  </Target>
-
-
-  <!-- ### SecAnnotate ### -->
-
-  <Target Name="DeleteSecAnnotateLogFile" Condition=" Exists('$(SecAnnotateLogFile)') ">
-    <Delete Files="$(SecAnnotateLogFile)" />
-  </Target>
-
-  <!-- Define the CorePEVerify property. -->
-  <PropertyGroup>
-    <CoreSecAnnotate>_SecAnnotate</CoreSecAnnotate>
-    <CoreSecAnnotate Condition=" !Exists('$(SecAnnotateCommand)') ">_WarnOnMissingSecAnnotate</CoreSecAnnotate>
-  </PropertyGroup>
-
-  <!-- WARNING: Delete previous log before doing anything. We append to it
-       and we don't want to let it grow endlessly. As a side-effect, we can not
-       use the log file for incremental batching. -->
-  <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
-
-  <Target Name="_SecAnnotate"
-          DependsOnTargets="Build"
-          Inputs="@(BuildOutputs)"
-          Outputs="$(SecAnnotateOutput)">
-    <!-- FIXME: SecAnnotateOutput is not currently written... -->
-    <Message Text="Analyzing assemblies with SecAnnotate..." Importance="high" />
-
-    <!-- /maximumpasses:1  /quiet -->
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;%(BuildOutputs.FullPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
-          WorkingDirectory="$(OutDir)"
-          LogStandardErrorAsError="true"
-          ContinueOnError="false" />
-  </Target>
-
-  <Target Name="_WarnOnMissingSecAnnotate">
-    <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
-  </Target>
-
-
-  <!-- Initial target. -->
-  <Target Name="__InitializeMakeCommonTargets"  Condition=" '$(Lean)' != 'true' ">
-    <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
-    <MakeDir Directories="$(WorkArtefactsDir)" Condition=" !Exists($(WorkArtefactsDir)) " />
   </Target>
 </Project>

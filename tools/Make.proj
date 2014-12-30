@@ -28,7 +28,7 @@
         <SolutionFile>$(RepositoryRoot)$(CustomSolution)</SolutionFile>
       </PropertyGroup>
       <ItemGroup>
-        <ProjectsToBuild Include="$(RepositoryRoot)$(CustomSolution)"></ProjectsToBuild>
+        <ProjectsToBuild Include="$(SolutionFile)"></ProjectsToBuild>
       </ItemGroup>
     </When>
 

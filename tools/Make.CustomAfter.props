@@ -6,11 +6,26 @@
   <!-- 
     This file is injected at the end of Narvalo.Common.props by Make.proj.
   -->
+  
+  <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
 
-  <!-- If any, import project version properties. -->
+  <!-- If any, import project specific version properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).Version.props"
           Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).Version.props') "/>
+  
 
+  <!-- ### Options ### -->
+
+  <PropertyGroup>
+    <!-- If true, use a dummy version. Default to false. -->
+    <DummyGeneratedVersion Condition=" '$(DummyGeneratedVersion)' != 'true' ">false</DummyGeneratedVersion>
+    <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
+    <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
+
+    <!-- If true, packages are built for retail. Default to false. -->
+    <Retail Condition=" '$(Retail)' != 'true' ">false</Retail>
+  </PropertyGroup>
+  
 
   <!-- ### CA, SA & Code Contracts properties ### -->
 
@@ -21,8 +36,8 @@
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(WorkArtefactsDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
-    <SourceAnalysisOutputFile>$(WorkArtefactsDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+    <CodeAnalysisLogFile>$(WorkLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
+    <SourceAnalysisOutputFile>$(WorkLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
 
     <!-- We don't want the Code Analysis "succeed" file to be written to 
          the custom location but it does not seem to be understood by MSBuild. 
@@ -38,31 +53,29 @@
 
 
   <!-- ### Sign the assemblies ### -->
-  
+
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(RepositorySettingsDir)Narvalo.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
-  
-  
+
+
   <!-- ### Hide internals ### -->
 
   <PropertyGroup Condition=" '$(VisibleInternals)' == 'false' ">
     <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
   </PropertyGroup>
 
-  
+
   <!-- ### Use a dummy version ### -->
-  
+
   <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
-    <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
-    <BuildGeneratedVersion>false</BuildGeneratedVersion>
     <DefineConstants>$(DefineConstants);DUMMY_GENERATED_VERSION</DefineConstants>
   </PropertyGroup>
-  
-  
+
+
   <!-- ### Dynamically generate the version ### -->
 
   <PropertyGroup>
@@ -75,18 +88,40 @@
   <PropertyGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
     <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
   </PropertyGroup>
-  
+
   <ItemGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
     <!-- Dynamically add the assembly version file to the list of sources to compile. -->
     <Compile Include="$(AssemblyVersionFile)" />
   </ItemGroup>
+  
+  <!-- ### PEVerify ### -->
+
+  <!-- Define the PEVerify properties. -->
+  <PropertyGroup>
+    <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
+    <PEVerifyDummyOutput>$(IntermediateOutputPath)$(AssemblyName).PEVerify.out</PEVerifyDummyOutput>
+    <PEVerifyLogFile>$(WorkLogDir)$(AssemblyName).PEVerify.log</PEVerifyLogFile>
+  </PropertyGroup>
 
   
+  <!-- ### SecAnnotate ### -->
+
+  <!-- Define the SecAnnotate properties. -->
+  <PropertyGroup>
+    <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
+    <SecAnnotateOutput>$(WorkLogDir)$(AssemblyName).SecAnnotate.xml</SecAnnotateOutput>
+    <SecAnnotateLogFile>$(WorkLogDir)$(AssemblyName).SecAnnotate.log</SecAnnotateLogFile>
+  </PropertyGroup>
+
+
   <!-- ### NuGet packaging ### -->
 
   <PropertyGroup>
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
     
+    <!-- The root directory for NuGet projects. -->
+    <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
+
     <NuProjectFile>$(NuProjectsRoot)$(AssemblyName)\$(AssemblyName).nuproj</NuProjectFile>
 
     <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
@@ -98,12 +133,12 @@
   <!-- Import NuGet project properties. -->
   <Import Project="$(NuProjectFile)" Condition=" '$(NuProjectExists)' == 'true' " />
 
-  
+
   <!-- ### T4 settings ### -->
 
   <PropertyGroup>
     <!-- Force T4 re-generation on build.
-         REVIEW: Currently disabled since our T4 templates require VS hosting. -->
+         REVIEW: Currently disabled since current T4 templates require VS hosting. -->
     <TransformOnBuild>false</TransformOnBuild>
   </PropertyGroup>
 

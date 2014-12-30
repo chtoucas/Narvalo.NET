@@ -51,7 +51,7 @@
 
 :Build
 
-@call "%~dp0\tools\MSBuild.cmd" @%RspFile%
+@call "%~dp0\tools\MSBuild.cmd" "%~dp0\tools\Make.TryOut.proj" @%RspFile%
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed

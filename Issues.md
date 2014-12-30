@@ -34,11 +34,17 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:             
-- Enhancement: Copy non retail packages to the local NuGet server. 
 - Bug: The Code Analysis "succeed" file does not seem to be created.
+- Bug: The SecAnnotate output file does not seem to be created.  
+- Enhancement: Publish non retail packages to a remove MyGet server and
+  Publish retail packages to NuGet server.
 - Improvement: I don't like the way we handle Retail in Make.CustomAfter.targets.
-- Improvement: Make.Common.props & Make.Common.targets: Clean up Lean property.
-- Bugfix: Make.Common.props & Narvalo.Common.props: CA & SA 
+- Improvement: Better handling of unexisting PEVerify & SecAnnotate.
+- Bugfix: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
+- Improvement: Package for WebSites.
+- Improvement: Ability to install PSake on demand (important for CI).
+- Improvement: Check that TargetPath is the correct property to be used.
+  See http://sedodream.com/2007/11/21/MSBuildHowToGetAllGeneratedOutputs.aspx
                        
 Miscs:
 - Improvement: Complete Guidelines. 
@@ -86,6 +92,7 @@ Bug corrections:
 - Bug: `Require.Condition`, `Require.RangeCondition`. CCCheck fails on them. 
 
 Code improvements:
+- Improvement: Remove all hidden files.
 - Improvement: Review the core Code Contracts classes.
 - Improvement: Review Narvalo.Minimal.cs.
 - Improvement: Remove `Tracer`?  

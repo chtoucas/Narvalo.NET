@@ -1,16 +1,25 @@
 ChangeLog
 =========
      
+- (2014/12/30) _Improvement:_ Cleaner separation between optional properties and
+  other properties. Move the PEVerify & SecAnnotate targets from Make.Common 
+  to Narvalo.Custom. This makes possible to generate individual reports per
+  assemblies. Entirely removed from Make.Common.props & Make.Common.targets
+  the Lean property which did not bring anything (it was supposed to help
+  mimicking a Visual Studio build but MSBuild can just do it). Removed
+  Narvalo.CustomBefore.props & Narvalo.CustomBefore.targets.
+- (2014/12/30) _Improvement:_ Only define the `CODE_ANALYSIS` symbol if
+  Code Analysis is requested.
 - (2014/12/30) _Bugfix:_ Only enable white-box tests in `PresenterTypeResolverFacts`
   when internals are visible.
 - (2014/12/30) _Improvement:_ Only display MSBuild warnings for local CA or SA
   overrides when CA or SA is actually requested. 
 - (2014/12/30) _Improvement:_ Upgraded NSubsitute to v1.8.1.
 - (2014/12/30) _Improvement:_ Fully documented the PSake script file. It is now 
-  possible to specify the MSBuild verbosity level from the command line.
+  possible to specify the MSBuild verbosity level from the command-line.
   In Make.Foundations.proj, added the ability to select a subset of the list
   of projects to build. Using a MSBuild response file, allowed to try out the 
-  build system without actually committing your personal MSBuild parameters.
+  build system without actually committing your personal settings.
 - (2014/12/19) _Improvement:_ In the CreateAssemblyVersionFile target, instead of 
   hardcoding the path to the directory to be created, use the parent directory 
   of AssemblyVersionFile.

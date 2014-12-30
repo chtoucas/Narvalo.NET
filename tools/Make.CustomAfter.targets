@@ -6,7 +6,16 @@
     This file is injected at the end of Narvalo.Common.targets by Make.proj.
   -->
 
-  <!-- Define the BeforeBuildDependsOn property. -->
+  <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks" />
+
+  <!-- Import the T4 targets. -->
+  <PropertyGroup>
+    <TextTemplatingTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TextTemplating\Microsoft.TextTemplating.targets</TextTemplatingTargetsPath>
+  </PropertyGroup>
+
+  <Import Project="$(TextTemplatingTargetsPath)" Condition="Exists('$(TextTemplatingTargetsPath)')" />
+
+  <!-- Append to the BeforeBuildDependsOn property. -->
   <PropertyGroup>
     <BeforeBuildDependsOn>
       $(BeforeBuildDependsOn);
@@ -14,7 +23,7 @@
     </BeforeBuildDependsOn>
   </PropertyGroup>
 
-  <!-- Define the AfterBuildDependsOn property. -->
+  <!-- Append to the AfterBuildDependsOn property. -->
   <PropertyGroup>
     <AfterBuildDependsOn>
       $(AfterBuildDependsOn);
@@ -22,14 +31,18 @@
     </AfterBuildDependsOn>
   </PropertyGroup>
 
-  <!-- Define the AfterCleanDependsOn property. -->
+  <!-- Append to the CleanDependsOn property. -->
   <PropertyGroup>
-    <AfterCleanDependsOn>
-      $(AfterCleanDependsOn);
+    <CleanDependsOn>
+      $(CleanDependsOn);
       DeleteAssemblyVersionFile;
       DeleteNupkgFile;
-      DeleteNuspecFile
-    </AfterCleanDependsOn>
+      DeleteNuspecFile;
+      DeletePEVerifyDummyOutput;
+      DeletePEVerifyLogFile;
+      DeleteSecAnnotateLogFile;
+      DeleteSecAnnotateOutput
+    </CleanDependsOn>
   </PropertyGroup>
 
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
@@ -65,7 +78,7 @@
       <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+Closed</ConfigurationMetadata>
     </PropertyGroup>
   </Target>
-  
+
 
   <!-- ### Semantic Versioning ### -->
 
@@ -150,15 +163,13 @@ using System.Reflection;
       <_ParentDirectoryOfAssemblyVersionFile>$([System.IO.Path]::GetDirectoryName($(AssemblyVersionFile)))</_ParentDirectoryOfAssemblyVersionFile>
     </PropertyGroup>
 
-    <MakeDir Directories="$(_ParentDirectoryOfAssemblyVersionFile)" 
+    <MakeDir Directories="$(_ParentDirectoryOfAssemblyVersionFile)"
              Condition=" !Exists($(_ParentDirectoryOfAssemblyVersionFile)) " />
 
     <WriteLinesToFile Lines="$(_AssemblyVersionLines)" File="$(AssemblyVersionFile)" Overwrite="true" />
   </Target>
 
-  <Target Name="DeleteAssemblyVersionFile" Condition=" Exists('$(AssemblyVersionFile)') ">
-    <Message Text="Deleting temporary assembly version file..." Importance="normal" />
-
+  <Target Name="DeleteAssemblyVersionFile">
     <Delete Files="$(AssemblyVersionFile)" />
   </Target>
 
@@ -168,6 +179,86 @@ using System.Reflection;
       <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(RevisionNumber)</AssemblyFileVersion>
       <AssemblyInformationalVersion>$(SemanticVersion)</AssemblyInformationalVersion>
     </PropertyGroup>
+  </Target>
+
+
+  <!-- ### PEVerify ### -->
+
+  <Target Name="DeletePEVerifyLogFile">
+    <Delete Files="$(PEVerifyLogFile)" />
+  </Target>
+
+  <Target Name="DeletePEVerifyDummyOutput">
+    <Delete Files="$(PEVerifyDummyOutput)" />
+  </Target>
+
+  <!-- Define the CorePEVerify property. -->
+  <PropertyGroup>
+    <CorePEVerify>_PEVerify</CorePEVerify>
+    <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
+  </PropertyGroup>
+
+  <!-- WARNING: Delete previous log before doing anything. We append to it
+       and we don't want to let it grow endlessly. The obvious side-effect is
+       that we can not use the log file for incremental batching. -->
+  <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLogFile;$(CorePEVerify)" />
+
+  <Target Name="_PEVerify"
+          DependsOnTargets="Build"
+          Inputs="$(TargetPath)"
+          Outputs="$(PEVerifyDummyOutput)">
+    <Message Text="Verifying $(AssemblyName) with PEVerify..." Importance="high" />
+
+    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;$(TargetPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
+          LogStandardErrorAsError="true"
+          ContinueOnError="false" />
+
+    <!-- Keep this at the end of the target, in case one of the PEVerify executions failed. -->
+    <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="_WarnOnMissingPEVerify">
+    <Warning Text="Cannot verify assemblies. I was unable to locate PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+  </Target>
+
+
+  <!-- ### SecAnnotate ### -->
+
+  <Target Name="DeleteSecAnnotateLogFile">
+    <Delete Files="$(SecAnnotateLogFile)" />
+  </Target>
+
+  <Target Name="DeleteSecAnnotateOutput">
+    <Delete Files="$(SecAnnotateOutput)" />
+  </Target>
+
+  <!-- Define the CorePEVerify property. -->
+  <PropertyGroup>
+    <CoreSecAnnotate>_SecAnnotate</CoreSecAnnotate>
+    <CoreSecAnnotate Condition=" !Exists('$(SecAnnotateCommand)') ">_WarnOnMissingSecAnnotate</CoreSecAnnotate>
+  </PropertyGroup>
+
+  <!-- WARNING: Delete previous log before doing anything. We append to it
+       and we don't want to let it grow endlessly. As a side-effect, we can not
+       use the log file for incremental batching. -->
+  <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
+
+  <Target Name="_SecAnnotate"
+          DependsOnTargets="Build"
+          Inputs="$(TargetPath)"
+          Outputs="$(SecAnnotateOutput)">
+    <!-- FIXME: SecAnnotateOutput is not currently written... -->
+    <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
+
+    <!-- /maximumpasses:1  /quiet -->
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+          WorkingDirectory="$(OutDir)"
+          LogStandardErrorAsError="true"
+          ContinueOnError="false" />
+  </Target>
+
+  <Target Name="_WarnOnMissingSecAnnotate">
+    <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
   </Target>
 
 
@@ -185,8 +276,8 @@ using System.Reflection;
           DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
-    <!-- REVIEW: Why can't I quote WorkArtefactsDir? -->
-    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -OutputDirectory $(WorkArtefactsDir) $(NuGetCommandAdditionalArgs) -NonInteractive -Verbosity quiet"
+    <!-- REVIEW: Why can't I quote WorkPackagesDir? -->
+    <Exec Command="&quot;$(NuGetCommand)&quot; pack &quot;$(NuspecFile)&quot; -OutputDirectory $(WorkPackagesDir) $(NuGetCommandAdditionalArgs) -NonInteractive -Verbosity quiet"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
   </Target>
@@ -214,14 +305,10 @@ using System.Reflection;
   </Target>
 
   <Target Name="DeleteNupkgFile" DependsOnTargets="GetNuPkgFile">
-    <Message Text="Deleting nupkg file..." Importance="normal" />
-
-    <Delete Files="$(NupkgFile)" Condition=" Exists('$(NupkgFile)') " />
+    <Delete Files="$(NupkgFile)" />
   </Target>
 
-  <Target Name="DeleteNuspecFile" Condition=" Exists('$(NuspecFile)') ">
-    <Message Text="Deleting nuspec file..." Importance="normal" />
-
+  <Target Name="DeleteNuspecFile">
     <Delete Files="$(NuspecFile)" />
   </Target>
 
@@ -243,7 +330,7 @@ using System.Reflection;
 
   <Target Name="GetNuPkgFile" DependsOnTargets="GetNuVersion">
     <PropertyGroup>
-      <NupkgFile>$(WorkArtefactsDir)$(NuId).$(NuVersion).nupkg</NupkgFile>
+      <NupkgFile>$(WorkPackagesDir)$(NuId).$(NuVersion).nupkg</NupkgFile>
     </PropertyGroup>
   </Target>
 

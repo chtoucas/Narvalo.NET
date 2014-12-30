@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         TreatAsLocalProperty="Configuration;BuildGeneratedVersion;Lean;SignAssembly;VisibleInternals"
+         InitialTargets="__InitializeMakeCommonProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Options are defined here or in Shared.props.
@@ -30,12 +30,6 @@
     - VisibleInternals (default: true)
       Unconditionally hide internals to other assemblies.
 
-    - Lean (default: false)
-      Make the build behaves a lot like if it was running inside Visual Studio.
-      If true, the other custom build options are ignored (except the standard
-      MSBuild ones).
-      __Ignored when Retail is true.__
-
     - SolutionFile (default: none)
       Solution used to restore NuGet packages.
 
@@ -61,59 +55,16 @@
 
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
+  <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
 
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
-    <!-- If true, sign the assemblies. Default to false. -->
-    <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
-
-    <!-- If true, dynamically generate the assemblies' version. Default to true. -->
-    <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>
-
-    <!-- If true, internals are visible. Default to true. -->
-    <VisibleInternals Condition=" '$(VisibleInternals)' != 'false' ">true</VisibleInternals>
-
+    <!-- Solution used by NuGet to restore packages. -->
     <SolutionFile Condition=" '$(SolutionFile)' == '' ">$(RepositoryRoot)Narvalo.sln</SolutionFile>
   </PropertyGroup>
 
-  <Choose>
-    <!-- WARNING: For retail builds, we unconditionally override many properties. -->
-    <When Condition=" '$(Retail)' == 'true' ">
-      <PropertyGroup>
-        <Lean>false</Lean>
-
-        <Configuration>Release</Configuration>
-        <SourceAnalysisEnabled>true</SourceAnalysisEnabled>
-        <RunCodeAnalysis>true</RunCodeAnalysis>
-
-        <BuildGeneratedVersion>true</BuildGeneratedVersion>
-        <SignAssembly>true</SignAssembly>
-        <VisibleInternals>false</VisibleInternals>
-      </PropertyGroup>
-    </When>
-
-    <Otherwise>
-      <PropertyGroup>
-        <Retail>false</Retail>
-
-        <!-- If true, builds behave a lot like if they were run inside Visual Studio. Default to false. -->
-        <Lean Condition=" '$(Lean)' != 'true' ">false</Lean>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-
-  <!-- Define layout-related properties. -->
-  <PropertyGroup>
-    <!-- The root directory for NuGet projects. -->
-    <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
-
-    <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
-
-    <WorkArtefactsDir>$(WorkRoot)artefacts\</WorkArtefactsDir>
-  </PropertyGroup>
-
   <!-- Define the ConfigurationVariant property. -->
-  <PropertyGroup Condition=" '$(Lean)' != 'true' ">
+  <PropertyGroup>
     <!-- This property is useful to distinguish between variants of the same base configuration.
          A variant is a build configuration unavailable inside Visual Studio.
          Does not apply to Lean builds since the other options are always ignored. -->
@@ -130,43 +81,33 @@
     <OutDir>$(WorkRoot)bin\$(Configuration)$(ConfigurationVariant)\</OutDir>
   </PropertyGroup>
 
-  <!-- Define the NuGetCommand property. -->
-  <PropertyGroup>
-    <NuGetCommand>$(MSBuildThisFileDirectory)nuget.exe</NuGetCommand>
-  </PropertyGroup>
-
-  <!-- Define the PEVerify properties. -->
-  <PropertyGroup>
-    <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
-    <PEVerifyDummyOutput>$(IntermediateOutputPath)Narvalo.Verify.out</PEVerifyDummyOutput>
-    <PEVerifyLogFile>$(WorkArtefactsDir)peverify.log</PEVerifyLogFile>
-  </PropertyGroup>
-
-  <!-- Define the SecAnnotate properties. -->
-  <PropertyGroup>
-    <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
-    <SecAnnotateOutput>$(WorkArtefactsDir)secannotate.xml</SecAnnotateOutput>
-    <SecAnnotateLogFile>$(WorkArtefactsDir)secannotate.log</SecAnnotateLogFile>
-  </PropertyGroup>
-
   <!-- Define the Xunit properties. -->
   <PropertyGroup>
-    <XunitXmlFile>$(WorkArtefactsDir)xunit.xml</XunitXmlFile>
-    <XunitHtmlFile>$(WorkArtefactsDir)xunit.html</XunitHtmlFile>
+    <XunitXmlFile>$(WorkLogDir)xunit.xml</XunitXmlFile>
+    <XunitHtmlFile>$(WorkLogDir)xunit.html</XunitHtmlFile>
   </PropertyGroup>
 
   <!-- Define the BuildProperties property. -->
   <PropertyGroup>
+    <!-- Optional properties from Shared.props. -->
     <BuildProperties>
       BuildInParallel=$(BuildInParallel);
       Configuration=$(Configuration);
       Platform=$(Platform);
-      RepositoryRoot=$(RepositoryRoot);
       VisualStudioVersion=$(VisualStudioVersion);
+      
+      RepositoryRoot=$(RepositoryRoot);
     </BuildProperties>
-  </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Lean)' != 'true' ">
+    <!-- Optional properties from Make.Shared.props. -->
+    <BuildProperties>
+      $(BuildProperties);
+
+      BuildGeneratedVersion=$(BuildGeneratedVersion);
+      SignAssembly=$(SignAssembly);
+      VisibleInternals=$(VisibleInternals)
+    </BuildProperties>
+    
     <!--
       There is also a legacy OutputPath property but this is no longer in use.
       More documentation here:
@@ -189,19 +130,14 @@
       OutDir=$(OutDir);
       OutputPath=$(OutDir);
       GenerateProjectSpecificOutputFolder=false;
+    </BuildProperties>
 
-      CustomBeforeNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomBefore.props;
+    <BuildProperties>
+      $(BuildProperties);
+
       CustomAfterNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
       CustomBeforeNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
-
-      BuildGeneratedVersion=$(BuildGeneratedVersion);
-      NuGetCommand=$(NuGetCommand);
-      NuProjectsRoot=$(NuProjectsRoot);
-      Retail=$(Retail);
-      SignAssembly=$(SignAssembly);
-      VisibleInternals=$(VisibleInternals);
-      WorkArtefactsDir=$(WorkArtefactsDir);
     </BuildProperties>
   </PropertyGroup>
 
@@ -209,4 +145,10 @@
   <PropertyGroup>
     <MakeCommonPropsImported>true</MakeCommonPropsImported>
   </PropertyGroup>
+
+  <!-- Initial target. -->
+  <Target Name="__InitializeMakeSharedProps__InitializeMakeCommonProps">
+    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of @(ProjectsToBuild)." 
+           Condition=" '@(ProjectsToBuild)' == '' " />
+  </Target>
 </Project>
