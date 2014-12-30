@@ -136,7 +136,6 @@
       $(BuildProperties);
 
       CustomAfterNarvaloCommonProps=$(MSBuildThisFileDirectory)Make.CustomAfter.props;
-      CustomBeforeNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomBefore.targets;
       CustomAfterNarvaloCommonTargets=$(MSBuildThisFileDirectory)Make.CustomAfter.targets;
     </BuildProperties>
   </PropertyGroup>

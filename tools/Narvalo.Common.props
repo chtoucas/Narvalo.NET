@@ -28,7 +28,7 @@
   
   <!-- If any, import custom global properties. -->
   <Import Project="$(CustomBeforeNarvaloCommonProps)"
-          Condition=" '$(CustomBeforeNarvaloCommonProps)' != '' And Exists('$(CustomBeforeNarvaloCommonProps)')" />
+          Condition=" '$(CustomBeforeNarvaloCommonProps)' != '' " />
 
   <!-- Instruct MSBuild to import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
@@ -184,7 +184,7 @@
 
   <!-- If any, import custom global properties. -->
   <Import Project="$(CustomAfterNarvaloCommonProps)"
-          Condition=" '$(CustomAfterNarvaloCommonProps)' != '' And Exists('$(CustomAfterNarvaloCommonProps)') " />
+          Condition=" '$(CustomAfterNarvaloCommonProps)' != '' " />
 
   <!-- If any, import custom project properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"

@@ -19,7 +19,7 @@
 
   <!-- If any, import custom targets.-->
   <Import Project="$(CustomBeforeNarvaloCommonTargets)"
-          Condition=" '$(CustomBeforeNarvaloCommonTargets)' != '' And Exists('$(CustomBeforeNarvaloCommonTargets)')" />
+          Condition=" '$(CustomBeforeNarvaloCommonTargets)' != '' " />
 
   <!-- Import StyleCop targets. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.StyleCop.targets" />
@@ -120,7 +120,7 @@
 
   <!-- If any, import custom global targets. -->
   <Import Project="$(CustomAfterNarvaloCommonTargets)"
-          Condition=" '$(CustomAfterNarvaloCommonTargets)' != '' And Exists('$(CustomAfterNarvaloCommonTargets)')" />
+          Condition=" '$(CustomAfterNarvaloCommonTargets)' != '' " />
   
   <!-- If any, import custom project properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).targets"
