@@ -85,7 +85,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -137,6 +137,10 @@
   -->
 
   <PropertyGroup>
+    <RunCodeAnalysis Condition=" '$(RunCodeAnalysis)' != 'true' ">false</RunCodeAnalysis>
+
+    <DefineConstants Condition=" '$(RunCodeAnalysis)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
+    
     <!-- The default behaviour is to use a strict ruleset.
          For performance reasons we use a minimal ruleset when using Code
          Contracts. Also Code Contracts produce assemblies that are not
@@ -158,8 +162,8 @@
 
     We do not really enforce any policy for Code Contracts as they are not
     currently used by all projects. When enabling Code Contracts on a project,
-    you should manually add the following lines, on Release configuration:
-      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    you should add the following lines to {AssemblyName}.props:
+      <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And '$(Configuration)' != 'Debug' " >
         <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
         <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
       </PropertyGroup>
@@ -170,25 +174,9 @@
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-
-    <!-- Runtime Checking. -->
-    <!--<CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
-    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
-    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
-    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>-->
-
-    <!-- Static Checking. -->
-    <!--<CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
-    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>-->
     <!-- Only meaningful inside VS, anyway I find the result confusing. -->
     <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-
-    <!-- Contract Reference Assembly. -->
-    <!--<CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>-->
   </PropertyGroup>
   
 
