@@ -109,7 +109,7 @@
     </BuildProperties>
     
     <!--
-      There is also a legacy OutputPath property but this is no longer in use.
+      Where shall we write the outputs.
       More documentation here:
         %ProgramFiles(x86)%\MSBuild\$(VisualStudioVersion)\Bin\Microsoft.Common.CurrentVersion.targets
 
@@ -120,7 +120,8 @@
       WARNING: We force the value of various paths. Although not required by the
       standard MSBuild operations, we do use IntermediateOutputPath 
       in Make.CustomAfter.props. Concerning OutputPath, I didn't check if this is
-      really necessary.
+      really necessary to also include it as it is supposed to be a legacy
+      property, no longer in use.
     -->
     <BuildProperties>
       $(BuildProperties);

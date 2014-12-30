@@ -1,13 +1,16 @@
 ChangeLog
 =========
      
+- (2014/12/30) _Improvement:_ Made sure a build fails if a custom import
+  does not exist. Moved the content of Narvalo.CustomBefore.props & 
+  Narvalo.CustomBefore.targets to CustomAfter props & targets and removed them.
 - (2014/12/30) _Improvement:_ Cleaner separation between optional properties and
   other properties. Move the PEVerify & SecAnnotate targets from Make.Common 
   to Narvalo.Custom. This makes possible to generate individual reports per
-  assemblies. Entirely removed from Make.Common.props & Make.Common.targets
-  the Lean property which did not bring anything (it was supposed to help
-  mimicking a Visual Studio build but MSBuild can just do it). Removed
-  Narvalo.CustomBefore.props & Narvalo.CustomBefore.targets.
+  assemblies. 
+- (2014/12/30) _Improvement:_ Entirely removed from Make.Common.props & 
+  Make.Common.targets the `Lean` property which did not bring anything. It was 
+  supposed to help mimicking a Visual Studio build but MSBuild can just do it. 
 - (2014/12/30) _Improvement:_ Only define the `CODE_ANALYSIS` symbol if
   Code Analysis is requested.
 - (2014/12/30) _Bugfix:_ Only enable white-box tests in `PresenterTypeResolverFacts`
