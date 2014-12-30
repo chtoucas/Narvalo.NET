@@ -104,6 +104,7 @@ namespace Narvalo.Mvp.Resolvers
         #endregion
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
     public static partial class PresenterTypeResolverFacts
     {
 
@@ -243,4 +244,5 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
     }
+#endif
 }
