@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <Target Name="_WarnOnTemporaryOverridenSettings" BeforeTargets="Build">
-    <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)." />
+    <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
+             Condition=" '$(RunCodeAnalysis)' == 'true' "/>
   </Target>
 </Project>
