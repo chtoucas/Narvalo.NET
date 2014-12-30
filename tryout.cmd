@@ -1,6 +1,7 @@
 :: Quick runner to try out the build system.
 ::
 :: To run this script, you MUST create your personal MSBuild response file: tryout.rsp.
+:: If the file TryOut.proj exists, use it. If not, you MUST define it in your response file.
 ::
 :: Sample response file:
 ::
@@ -24,35 +25,33 @@
 ::
 :: # File logger
 :: /fileLogger
-:: /fileloggerparameters:logfile=%WorkDir%\tryout.log;verbosity=normal;encoding=utf-8
+:: /fileloggerparameters:logfile=tryout.log;verbosity=normal;encoding=utf-8
 ::
 
 @echo off
 @setlocal
 
+:Setup
+
 @set RepositoryRoot=%~dp0
-@set WorkDir="%RepositoryRoot%\work"
+
+@set ProjectFile="%RepositoryRoot%\TryOut.proj"
 
 @set RspName=tryout.rsp
 @set RspFile="%RepositoryRoot%\%RspName%"
-
-:Setup
-
-:: Remove work directory.
-@rem @rd %WorkDir% /S /Q
-
-@if not exist %WorkDir% (
-  @mkdir %WorkDir%
-)
 
 @if not exist %RspFile% (
   @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspName%
   @goto Failure
 )
 
+@if not exist %ProjectFile% (
+  @set ProjectFile=
+)
+
 :Build
 
-@call "%RepositoryRoot%\tools\MSBuild.cmd" @%RspFile%
+@call "%RepositoryRoot%\tools\MSBuild.cmd" %ProjectFile% @%RspFile%
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed
@@ -75,11 +74,6 @@
 @goto End
 
 :End
-
-:: If the work directory exists, move the log file there.
-@rem @if exist %WorkDir% (
-@rem   @move /y %LogFile% %WorkDir% > nul 2>&1
-@rem )
 
 @endlocal
 @rem @pause

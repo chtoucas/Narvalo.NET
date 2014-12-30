@@ -1,5 +1,6 @@
 work/
 StyleCopViolations.xml
+TryOut.proj
 
 # La suite est tirée de :
 #   https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
