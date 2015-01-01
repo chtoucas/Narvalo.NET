@@ -35,14 +35,10 @@ Code Analysis and Source Analysis:
 
 MSBuild files:             
 - Bug: The Code Analysis "succeed" file does not seem to be created.
-- Bug: The SecAnnotate output file does not seem to be created.  
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
-- Bugfix: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
-- Improvement: Package for WebSites.
+- Bug: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
 - Improvement: Ability to install PSake on demand (important for CI).
-- Improvement: Check that TargetPath is the correct property to be used.
-  See http://sedodream.com/2007/11/21/MSBuildHowToGetAllGeneratedOutputs.aspx
 - Improvement: Review _WarnOnTemporaryOverridenSettings. RunCodeAnalysis is not
   available in VS.
                        
@@ -75,6 +71,7 @@ Build Automation:
 - Enhancement: Create symbol packages (or use GitLink?).
 - Enhancement: %comspec% /k (@pause).
 - Improvement: Complete Narvalo.Build with Gendarme and Versioning tasks.   
+- Review: What's going on when Package target is also defined.
 
 Code Quality:  
 - Enhancement: Static analysis with Gendarme. 
@@ -163,6 +160,7 @@ At this point we should have a first useful release for the core assemblies.
 
 ### Secure core assemblies.     
 
+- Bug: The SecAnnotate output file does not seem to be created.  
 - Improvement: Finish SecAnnotate. Requires to fully understand 
   the security model of .NET (CAS, APTCA).
 - Improvement: Make sure a build fails when SecAnnotate does too. 

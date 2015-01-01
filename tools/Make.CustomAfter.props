@@ -126,6 +126,7 @@
   <!-- SecAnnotate. -->
   <PropertyGroup>
     <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
+    <SecAnnotateDummyOutput>$(IntermediateOutputPath)$(AssemblyName).SecAnnotate.out</SecAnnotateDummyOutput>
     <SecAnnotateOutput>$(WorkLogDir)$(AssemblyName).SecAnnotate.xml</SecAnnotateOutput>
     <SecAnnotateLogFile>$(WorkLogDir)$(AssemblyName).SecAnnotate.log</SecAnnotateLogFile>
   </PropertyGroup>

@@ -40,12 +40,15 @@
       DeleteNuspecFile;
       DeletePEVerifyDummyOutput;
       DeletePEVerifyLogFile;
+      DeleteSecAnnotateDummyOutput;
       DeleteSecAnnotateLogFile;
       DeleteSecAnnotateOutput
     </CleanDependsOn>
   </PropertyGroup>
 
   <!-- Package target. -->
+  <!-- WARNING: Some projects might also define a Package target which will 
+       override this one. -->
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
 
   <!-- DeleteOriginalDocumentationFile target. -->
@@ -180,6 +183,11 @@ using System.Reflection;
 
   <!-- ### SecAnnotate ### -->
 
+  <!-- DeleteSecAnnotateDummyOutput target. -->
+  <Target Name="DeleteSecAnnotateDummyOutput">
+    <Delete Files="$(SecAnnotateDummyOutput)" />
+  </Target>
+
   <!-- DeleteSecAnnotateLogFile target. -->
   <Target Name="DeleteSecAnnotateLogFile">
     <Delete Files="$(SecAnnotateLogFile)" />
@@ -206,8 +214,8 @@ using System.Reflection;
   <Target Name="_SecAnnotate"
           DependsOnTargets="Build"
           Inputs="$(TargetPath)"
-          Outputs="$(SecAnnotateOutput)">
-    <!-- FIXME: SecAnnotateOutput is not currently written... -->
+          Outputs="$(SecAnnotateDummyOutput)">
+    <!-- REVIEW: We use SecAnnotateDummyOutput since SecAnnotateOutput is not currently written... -->
     <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
 
     <!-- /maximumpasses:1  /quiet -->
@@ -215,6 +223,9 @@ using System.Reflection;
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
+
+    <!-- Keep this at the end of the target. -->
+    <Touch Files="$(SecAnnotateDummyOutput)" AlwaysCreate="true" />
   </Target>
 
   <!-- _WarnOnMissingSecAnnotate target. -->
