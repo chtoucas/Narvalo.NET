@@ -19,6 +19,7 @@
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
 
+    <!-- If true, build the code contracts reference assembly. Default to false. -->
     <BuildCodeContractsReferenceAssembly Condition=" '$(BuildCodeContractsReferenceAssembly)' != 'true' ">false</BuildCodeContractsReferenceAssembly>
 
     <!-- If true, packages/assemblies are built for retail. Default to false. -->
@@ -42,11 +43,8 @@
     <!-- Reports are saved in a custom location. -->
     <CodeAnalysisLogFile>$(WorkLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
 
-    <!-- We don't want the Code Analysis "succeed" file to be written to 
-         the custom location but it does not seem to be understood by MSBuild. 
-         As a workaround, we simply disable the creation of the success file. -->
-    <!--<CodeAnalysisSucceededFile>$(OutDir)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
-    <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
+    <CodeAnalysisSucceededFile>$(IntermediateOutputPath)$(AssemblyName).FxCop.out</CodeAnalysisSucceededFile>
+    <CodeAnalysisGenerateSuccessFile>true</CodeAnalysisGenerateSuccessFile>
   </PropertyGroup>
 
   <!-- Code Contracts -->

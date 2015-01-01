@@ -8,6 +8,6 @@
 
   <Target Name="_WarnOnTemporaryOverridenSettings">
     <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
-             Condition=" '$(RunCodeAnalysis)' == 'true' "/>
+             Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(RunCodeAnalysis)' == 'true' " />
   </Target>
 </Project>

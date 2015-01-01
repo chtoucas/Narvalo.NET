@@ -34,16 +34,17 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:             
-- Bug: The Code Analysis "succeed" file does not seem to be created.
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
 - Bug: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
 - Improvement: Ability to install PSake on demand (important for CI).
-- Improvement: Review _WarnOnTemporaryOverridenSettings. RunCodeAnalysis is not
-  available in VS.
+- Bug: Whatever we use for CodeAnalysisSucceededFile, it does not seem to be 
+  understood by MSBuild. Setting CodeAnalysisLogFile or CodeAnalysisSucceededFile
+  disables incremental building. Code Analysis Hooks. 
+  For _WarnOnTemporaryOverridenSettings, RunCodeAnalysis is not available in VS.
                        
 Miscs:
-- Bugfix: Narvalo.Int64Encoder.FromFlickrBase58String, Format.CurrentCulture
+- Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
 - Improvement: Complete Guidelines. 
   * Explain NuGet package versioning (retail or not). More details on the effect
     of using Retail=true.
@@ -116,7 +117,6 @@ Style improvements:
 ### Better tested and documented Narvalo.Core assembly.
 
 - Improvement: Add more and more code contracts.
-- Improvement: Move Code Contracts settings from the project file to Narvalo.Core.props.  
 - Improvement: Large code coverage of Narvalo.Core.
 - Enhancement: Write a T4 template for Monad tests.   
 - Improvement: 100% SA documentation rules.
@@ -124,14 +124,12 @@ Style improvements:
 ### Better tested and documented Narvalo.Common assembly.
 
 - Improvement: Add more and more code contracts.
-- Improvement: Move Code Contracts settings from the project file to Narvalo.Common.props.  
 - Improvement: Large code coverage of Narvalo.Common.
 - Improvement: 100% SA documentation rules.
 
 ### Better tested and documented Narvalo.Web assembly.
 
 - Improvement: Add more and more code contracts.
-- Improvement: Move Code Contracts settings from the project file to Narvalo.Web.props.  
 - Improvement: Large code coverage of Narvalo.Web.
 - Improvement: 100% SA documentation rules.
 - Enhancement: Add an XML schema for the Narvalo config.    
@@ -141,7 +139,7 @@ At this point we should have a first stable release for the core Narvalo assembl
 
 ### Documentation & Literate Programming.
                     
-- Bug: Prose is broken.
+- Bug: Prose is simply broken.
 - Enhancement: Build C# documentation.
 - Enhancement: Use CommonMark instead of Markdown Deep. 
   NB: PostSharp, Roslyn, MEF, Serilog, Autofac.
