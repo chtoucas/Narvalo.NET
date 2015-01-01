@@ -2,7 +2,7 @@
 
 Set-StrictMode -Version Latest
 
-$nuget = "$PSScriptRoot\tools\NuGet\NuGet.exe"
+$nuget = "$PSScriptRoot\tools\NuGet.exe"
 $stagingDir = "$PSScriptRoot\work\staging"
 
 if (!(Test-Path $nuget)) {

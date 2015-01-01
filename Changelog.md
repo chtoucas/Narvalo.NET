@@ -1,6 +1,8 @@
 ChangeLog
 =========
      
+- (2015/01/01) _Improvement:_ Automatically donwload and install nuget and PSake
+  when running make.ps1.
 - (2015/01/01) _Improvement:_ Made NuGet projects self-contained: the copyright 
   tag is automatically initialized.
 - (2015/01/01) _Improvement:_ Changed the way we override properties for sample

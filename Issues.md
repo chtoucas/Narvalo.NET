@@ -36,12 +36,11 @@ Code Analysis and Source Analysis:
 MSBuild files:             
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
-- Bug: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
-- Improvement: Ability to install PSake on demand (important for CI).
 - Bug: Whatever we use for CodeAnalysisSucceededFile, it does not seem to be 
   understood by MSBuild. Setting CodeAnalysisLogFile or CodeAnalysisSucceededFile
   disables incremental building. Code Analysis Hooks. 
-  For _WarnOnTemporaryOverridenSettings, RunCodeAnalysis is not available in VS.
+  For _WarnOnTemporaryOverridenSettings, RunCodeAnalysis is not available in VS.   
+- Bug: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
                        
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.

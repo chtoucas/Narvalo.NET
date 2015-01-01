@@ -100,9 +100,9 @@ Global suppression files.
 For package updates, use the Narvalo.sln solution.
 
 **WARNING** If the NuGet core framework is updated, do not forget to update
-`tools\NuGet\nuget.exe`:
+`tools\nuget.exe`:
 ```
-tools\NuGet\nuget.exe update self
+tools\nuget.exe update self
 ```
 
 ### Visual Studio or Framework Updates
