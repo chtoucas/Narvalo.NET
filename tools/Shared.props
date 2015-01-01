@@ -32,7 +32,6 @@
   <PropertyGroup>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
     <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
-    <RepositoryToolsDir>$(RepositoryRoot)tools\</RepositoryToolsDir>
   </PropertyGroup>
 
   <!-- Mark the file as already imported. -->

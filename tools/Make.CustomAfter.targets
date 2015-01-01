@@ -47,8 +47,7 @@
   </PropertyGroup>
 
   <!-- Package target. -->
-  <!-- WARNING: Some projects might also define a Package target which will 
-       override this one. -->
+  <!-- WARNING: Some projects might also define a Package target which will override this one. -->
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
 
   <!-- DeleteOriginalDocumentationFile target. -->
@@ -346,7 +345,7 @@ using System.Reflection;
   <Target Name="__PatchNuProject"
           Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' != 'true' "
           DependsOnTargets="GenerateBuildStamp">
-    <!-- For non-retail packages, we change on-the-fly various bits. -->
+    <!-- For non-retail packages, we change various bits on the fly. -->
     <PropertyGroup>
       <EDGE>EDGE</EDGE>
       

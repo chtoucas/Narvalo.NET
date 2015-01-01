@@ -127,7 +127,7 @@ Task Retail-Build {
 
 # ==============================================================================
 
-# Delete work directory.
+# Delete work directory. Sometimes, this target fails for obscure reasons.
 Task FullClean {
     $workDir = "$RepositoryRoot\work\"
 

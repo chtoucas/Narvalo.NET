@@ -6,7 +6,7 @@
 :: Sample response file:
 ::
 :: # MSBuild project
-:: %RepositoryRoot%\tools\Make.Common.targets
+:: .\tools\Make.proj
 ::
 :: # Targets
 :: /t:Build
@@ -16,7 +16,7 @@
 :: /p:BuildGeneratedVersion=false
 :: /p:SignAssembly=false
 :: /p:VisibleInternals=true
-:: /p:ProjectsToBuild=%RepositoryRoot%\src\Narvalo.Core\Narvalo.Core.csproj
+:: /p:CustomProject=src\Narvalo.Core\Narvalo.Core.csproj
 ::
 :: # Console parameters
 :: /verbosity:minimal
@@ -37,11 +37,10 @@
 
 @set ProjectFile="%RepositoryRoot%\TryOut.proj"
 
-@set RspName=tryout.rsp
-@set RspFile="%RepositoryRoot%\%RspName%"
+@set RspFile="%RepositoryRoot%\tryout.rsp
 
 @if not exist %RspFile% (
-  @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspName%
+  @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspFile%
   @goto Failure
 )
 

@@ -33,14 +33,13 @@ Code Analysis and Source Analysis:
   Review StyleCop settings, StyleCop cache & ability to change settings used. 
   Review all project files for ExcludeFromSyleCop directives.   
 
-MSBuild files:             
+MSBuild files:          
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
 - Bug: Whatever we use for CodeAnalysisSucceededFile, it does not seem to be 
   understood by MSBuild. Setting CodeAnalysisLogFile or CodeAnalysisSucceededFile
   disables incremental building. Code Analysis Hooks. 
   For _WarnOnTemporaryOverridenSettings, RunCodeAnalysis is not available in VS.   
-- Bug: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
                        
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
