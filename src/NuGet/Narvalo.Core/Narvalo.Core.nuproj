@@ -8,7 +8,7 @@
     <NuDescription>
       This package contains the Narvalo.Org portable utilities.
     </NuDescription>
-    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Maybe, Option, Linq, Monad</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 

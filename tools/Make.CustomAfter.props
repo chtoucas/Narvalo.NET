@@ -1,59 +1,73 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
-         InitialTargets="__InitializeMakeCustomAfterProps"
+         InitialTargets="__InitialMakeCustomAfterProps"
          TreatAsLocalProperty="BuildGeneratedVersion"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- 
-    This file is injected at the end of Narvalo.Common.props by Make.proj.
-  -->
-  
+  <!-- This file is injected at the end of Narvalo.Common.props by Make.proj. -->
+
+  <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
 
-  <!-- If any, import project specific version properties. -->
-  <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).Version.props"
-          Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).Version.props') "/>
-  
+  <!-- Import custom tasks, if not already done. -->
+  <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks"
+          Condition=" '$(MakeCustomTasksImported)' != 'true' "/>
 
-  <!-- ### Options ### -->
-
+  <!-- Options -->
   <PropertyGroup>
     <!-- If true, use a dummy version. Default to false. -->
     <DummyGeneratedVersion Condition=" '$(DummyGeneratedVersion)' != 'true' ">false</DummyGeneratedVersion>
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
 
-    <!-- If true, packages are built for retail. Default to false. -->
+    <BuildCodeContractsReferenceAssembly Condition=" '$(BuildCodeContractsReferenceAssembly)' != 'true' ">false</BuildCodeContractsReferenceAssembly>
+
+    <!-- If true, packages/assemblies are built for retail. Default to false. -->
     <Retail Condition=" '$(Retail)' != 'true' ">false</Retail>
   </PropertyGroup>
-  
 
-  <!-- ### CA, SA & Code Contracts properties ### -->
-
+  <!-- Source Analysis. -->
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
-    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
-    <CodeAnalysisLogFile>$(WorkLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
     <SourceAnalysisOutputFile>$(WorkLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
+  </PropertyGroup>
+
+  <!-- Code Analysis. -->
+  <PropertyGroup>
+    <!-- Treat all warnings as errors. -->
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+
+    <!-- Reports are saved in a custom location. -->
+    <CodeAnalysisLogFile>$(WorkLogDir)$(AssemblyName).FxCop.xml</CodeAnalysisLogFile>
 
     <!-- We don't want the Code Analysis "succeed" file to be written to 
          the custom location but it does not seem to be understood by MSBuild. 
          As a workaround, we simply disable the creation of the success file. -->
     <!--<CodeAnalysisSucceededFile>$(OutDir)$(AssemblyName).FxCop.Succeed</CodeAnalysisSucceededFile>-->
     <CodeAnalysisGenerateSuccessFile>false</CodeAnalysisGenerateSuccessFile>
-
-    <!-- Code Contracts background checking is not available in terminal. -->
-    <CodeContractsRunInBackground>False</CodeContractsRunInBackground>
-    <!-- Original documentation files (before the Code Contracts transformation). -->
-    <OldDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OldDocumentationFile>
   </PropertyGroup>
 
+  <!-- Code Contracts -->
+  <PropertyGroup>
+    <!-- Treat all warnings as errors. -->
+    <CodeContractsFailBuildOnWarnings>true</CodeContractsFailBuildOnWarnings>
 
-  <!-- ### Sign the assemblies ### -->
+    <!-- Code Contracts background checking is not available in terminal. -->
+    <CodeContractsRunInBackground>false</CodeContractsRunInBackground>
 
+    <!-- Original documentation file (before the Code Contracts transformation). -->
+    <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(BuildCodeContractsReferenceAssembly)' == 'true' And '$(Configuration)' == 'Release' " >
+    <!-- Build the contract reference assembly. -->
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+  </PropertyGroup>
+
+  <!-- Sign the assembly. -->
   <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
     <DefineConstants>$(DefineConstants);SIGNED_ASSEMBLY</DefineConstants>
     <SignAssembly>true</SignAssembly>
@@ -61,64 +75,65 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
 
-
-  <!-- ### Hide internals ### -->
-
+  <!-- Hide internals. -->
   <PropertyGroup Condition=" '$(VisibleInternals)' == 'false' ">
     <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
   </PropertyGroup>
 
+  <!-- Semantic versioning. -->
+  <PropertyGroup>
+    <VersionFile>$(MSBuildProjectDirectory)\$(AssemblyName).Version.props</VersionFile>
 
-  <!-- ### Use a dummy version ### -->
+    <VersionExists Condition=" Exists('$(VersionFile)') ">true</VersionExists>
+    <VersionExists Condition=" '$(VersionExists)' != 'true' ">false</VersionExists>
+  </PropertyGroup>
 
+  <!-- If any, import project version related properties. -->
+  <Import Project="$(VersionFile)" Condition=" '$(VersionExists)' == 'true' " />
+
+  <PropertyGroup Condition=" '$(VersionExists)' == 'true' ">
+    <SemanticVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</SemanticVersion>
+    <SemanticVersion Condition=" '$(PreReleaseLabel)' != '' ">$(SemanticVersion)-$(PreReleaseLabel)</SemanticVersion>
+  </PropertyGroup>
+
+  <!-- Use dummy assembly versions. -->
   <PropertyGroup Condition=" '$(DummyGeneratedVersion)' == 'true' ">
     <DefineConstants>$(DefineConstants);DUMMY_GENERATED_VERSION</DefineConstants>
   </PropertyGroup>
 
+  <!-- Dynamically generate the assembly versions. -->
+  <PropertyGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
+    <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
 
-  <!-- ### Dynamically generate the version ### -->
-
-  <PropertyGroup>
     <!-- WARNING: This property requires IntermediateOutputPath to be initialized
          which is true only because we add this property via Make.proj, otherwise
          it is only available after importing Microsoft.Common.targets. -->
     <AssemblyVersionFile>$(IntermediateOutputPath)$(AssemblyName).Version.cs</AssemblyVersionFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
-    <DefineConstants>$(DefineConstants);BUILD_GENERATED_VERSION</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup Condition=" '$(BuildGeneratedVersion)' == 'true' ">
     <!-- Dynamically add the assembly version file to the list of sources to compile. -->
     <Compile Include="$(AssemblyVersionFile)" />
   </ItemGroup>
-  
-  <!-- ### PEVerify ### -->
 
-  <!-- Define the PEVerify properties. -->
+  <!-- PEVerify. -->
   <PropertyGroup>
     <PEVerifyCommand>$(SDK40ToolsPath)PEVerify.exe</PEVerifyCommand>
     <PEVerifyDummyOutput>$(IntermediateOutputPath)$(AssemblyName).PEVerify.out</PEVerifyDummyOutput>
     <PEVerifyLogFile>$(WorkLogDir)$(AssemblyName).PEVerify.log</PEVerifyLogFile>
   </PropertyGroup>
 
-  
-  <!-- ### SecAnnotate ### -->
-
-  <!-- Define the SecAnnotate properties. -->
+  <!-- SecAnnotate. -->
   <PropertyGroup>
     <SecAnnotateCommand>$(SDK40ToolsPath)SecAnnotate.exe</SecAnnotateCommand>
     <SecAnnotateOutput>$(WorkLogDir)$(AssemblyName).SecAnnotate.xml</SecAnnotateOutput>
     <SecAnnotateLogFile>$(WorkLogDir)$(AssemblyName).SecAnnotate.log</SecAnnotateLogFile>
   </PropertyGroup>
 
-
-  <!-- ### NuGet packaging ### -->
-
+  <!-- NuGet packaging. -->
   <PropertyGroup>
     <PackagesConfig>$(MSBuildProjectDirectory)\packages.config</PackagesConfig>
-    
+
     <!-- The root directory for NuGet projects. -->
     <NuProjectsRoot>$(RepositoryRoot)src\NuGet\</NuProjectsRoot>
 
@@ -127,26 +142,58 @@
     <NuProjectExists Condition=" Exists('$(NuProjectFile)') ">true</NuProjectExists>
     <NuProjectExists Condition=" '$(NuProjectExists)' != 'true' ">false</NuProjectExists>
 
+    <NuVersion>$(SemanticVersion)</NuVersion>
     <NuspecFile>$(OutDir)$(AssemblyName).nuspec</NuspecFile>
   </PropertyGroup>
 
   <!-- Import NuGet project properties. -->
   <Import Project="$(NuProjectFile)" Condition=" '$(NuProjectExists)' == 'true' " />
 
-
-  <!-- ### T4 settings ### -->
-
+  <!-- T4 settings. -->
   <PropertyGroup>
     <!-- Force T4 re-generation on build.
          REVIEW: Currently disabled since current T4 templates require VS hosting. -->
     <TransformOnBuild>false</TransformOnBuild>
   </PropertyGroup>
 
+  <!-- __InitialMakeCustomAfterProps target. -->
+  <Target Name="__InitialMakeCustomAfterProps"
+          DependsOnTargets="
+            __SanityChecks;
+            __ValidateVersion;
+            __ValidateNuProject" />
 
-  <!-- Initial target. -->
-  <Target Name="__InitializeMakeCustomAfterProps">
-    <Error Text="Unable to sign the assembly. The strong name key does not exist: $(RepositorySettingsDir)Narvalo.snk"
-           ContinueOnError="false"
-           Condition=" '$(SignAssembly)' == 'true' And !Exists('$(RepositorySettingsDir)Narvalo.snk') " />
+  <!-- __SanityChecks target. -->
+  <Target Name="__SanityChecks">
+    <Warning Text="To sign the assembly, you must ask the project owner for the strong name key file."
+             Condition=" '$(SignAssembly)' == 'true' And !Exists('$(AssemblyOriginatorKeyFile)') " />
+
+    <Warning Text="You SHOULD NOT create a version file when the project uses dummy assembly versioning."
+             Condition=" '$(VersionExists)' == 'true' And '$(DummyGeneratedVersion)' == 'true' " />
+    
+    <Error Text="You MUST create a version file when the project is intended to be packaged: $(VersionFile)."
+           Condition=" '$(NuProjectExists)' == 'true' And '$(NuVersion)' == '' " />
+  </Target>
+
+  <!-- __ValidateVersion target. -->
+  <Target Name="__ValidateVersion" Condition=" '$(VersionExists)' == 'true' ">
+    <ValidateVersionNumber Value="$(MajorVersion)" Name="MajorVersion" />
+    <ValidateVersionNumber Value="$(MinorVersion)" Name="MinorVersion" />
+    <ValidateVersionNumber Value="$(PatchVersion)" Name="PatchVersion" />
+    <ValidatePreReleaseLabel Value="$(PreReleaseLabel)" Condition=" '$(PreReleaseLabel)' != '' " />
+    
+    <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
+    <Warning Text="Are you sure that you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
+             Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
+  </Target>
+
+  <!-- __ValidateNuProject target. -->
+  <Target Name="__ValidateNuProject" Condition=" '$(NuProjectExists)' == 'true' ">
+    <Error Text="You MUST define the 'NuId' property in the NuGet project: $(NuProjectFile)."
+           Condition=" '$(NuId)' == '' " />
+    <Error Text="You MUST define the 'NuDescription' property in the NuGet project: $(NuProjectFile)."
+           Condition=" '$(NuDescription)' == '' " />
+    <Error Text="You MUST define the 'NuFiles' property in the NuGet project: $(NuProjectFile)."
+           Condition=" '$(NuFiles)' == '' " />
   </Target>
 </Project>

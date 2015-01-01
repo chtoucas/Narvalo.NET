@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
-    This file defines common MSBuild properties shared among Make.Common.* and Narvalo.Common.*.
+    This file defines MSBuild properties shared among Make.* and Narvalo.* files.
   -->
 
-  <!-- Define common MSBuild project properties. -->
+  <!-- Define common MSBuild project options. -->
   <PropertyGroup>
+    <!-- Other options: Release and CodeContracts. -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    
+    <!-- Right now, AnyCPU is the only supported platform. -->
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 
+    <!-- False unless the /maxcpucount MSBuild's switch is used. -->
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
     <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
 
-    <!-- Only Visual Studio is expected to override this. -->
+    <!-- Right now, I don't see any circumstances under which we would need
+         to override the default value. Does not have any effect on some projects
+         (e.g. test projects override this property). -->
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+  </PropertyGroup>
+
+  <!-- Define common Narvalo project options. -->
+  <PropertyGroup>
+    <!-- No need to set this manually. If empty, MSBuild will pick up the right value. -->
+    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
   </PropertyGroup>
 
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
-    <!-- The reuse of RepositoryRoot allows to speed up things a little bit
-         when building from Make.proj.
-
-         Make.proj imports Make.Common.props then Shared.props;
-         RepositoryRoot is not already set, we initialize it.
-         When Make.proj builds a child project, it injects RepositoryRoot
-         (see BuildProperties in Make.Common.props). This time when the child
-         project imports Shared.props, RepositoryRoot is already set. -->
-    <RepositoryRoot Condition=" '$(RepositoryRoot)' == '' ">$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Narvalo.sln))\</RepositoryRoot>
-
-    <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
     <RepositoryPackagesDir>$(RepositoryRoot)packages\</RepositoryPackagesDir>
+    <RepositorySettingsDir>$(RepositoryRoot)etc\</RepositorySettingsDir>
+    <RepositoryToolsDir>$(RepositoryRoot)tools\</RepositoryToolsDir>
   </PropertyGroup>
 
-  <!-- Mark Shared.props as already imported. -->
+  <!-- Mark the file as already imported. -->
   <PropertyGroup>
     <SharedPropsImported>true</SharedPropsImported>
   </PropertyGroup>

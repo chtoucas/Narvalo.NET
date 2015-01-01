@@ -2,11 +2,11 @@
 <Project ToolsVersion="12.0"
          InitialTargets="__InitializeMakeCustomAfterTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
-    This file is injected at the end of Narvalo.Common.targets by Make.proj.
-  -->
+  <!-- This file is injected at the end of Narvalo.Common.targets by Make.proj. -->
 
-  <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks" />
+  <!-- Import custom tasks, if not already done. -->
+  <Import Project="$(MSBuildThisFileDirectory)Make.Custom.tasks"
+          Condition=" '$(MakeCustomTasksImported)' != 'true' "/>
 
   <!-- Import the T4 targets. -->
   <PropertyGroup>
@@ -27,7 +27,7 @@
   <PropertyGroup>
     <AfterBuildDependsOn>
       $(AfterBuildDependsOn);
-      DeleteOldDocumentationFile
+      DeleteOriginalDocumentationFile
     </AfterBuildDependsOn>
   </PropertyGroup>
 
@@ -45,14 +45,17 @@
     </CleanDependsOn>
   </PropertyGroup>
 
+  <!-- Package target. -->
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
 
-  <Target Name="DeleteOldDocumentationFile" Condition=" Exists('$(OldDocumentationFile)') ">
+  <!-- DeleteOriginalDocumentationFile target. -->
+  <Target Name="DeleteOriginalDocumentationFile" Condition=" '$(BuildCodeContractsReferenceAssembly)' == 'true' ">
     <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." Importance="normal" />
 
-    <Delete Files="$(OldDocumentationFile)" />
+    <Delete Files="$(OriginalDocumentationFile)" />
   </Target>
 
+  <!-- GenerateBuildAndRevisionNumbers target. -->
   <Target Name="GenerateBuildAndRevisionNumbers">
     <GenerateBuildAndRevisionNumbers>
       <Output TaskParameter="BuildNumber" PropertyName="BuildNumber"/>
@@ -60,85 +63,42 @@
     </GenerateBuildAndRevisionNumbers>
   </Target>
 
+  <!-- GenerateBuildStamp target. -->
   <Target Name="GenerateBuildStamp" DependsOnTargets="GenerateBuildAndRevisionNumbers">
     <GenerateBuildStamp BuildNumber="$(BuildNumber)" RevisionNumber="$(RevisionNumber)">
       <Output TaskParameter="BuildStamp" PropertyName="BuildStamp"/>
     </GenerateBuildStamp>
   </Target>
 
-  <Target Name="GetConfigurationMetadata">
-    <PropertyGroup>
-      <ConfigurationMetadata>$(Configuration)</ConfigurationMetadata>
-      <ConfigurationMetadata>$(ConfigurationMetadata)+$(Platform)</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(SignAssembly)' == 'true' ">$(ConfigurationMetadata)+Signed</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(SignAssembly)' != 'true' ">$(ConfigurationMetadata)+Unsigned</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationMetadata)+SemVer</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(ConfigurationMetadata)+Dummy</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(ConfigurationMetadata)+Leaky</ConfigurationMetadata>
-      <ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(ConfigurationMetadata)+Closed</ConfigurationMetadata>
-    </PropertyGroup>
-  </Target>
-
-
-  <!-- ### Semantic Versioning ### -->
-
-  <Target Name="CheckSemanticVersion" DependsOnTargets="InitializeDummyVersion">
-    <Error Text="Invalid semantic version for $(AssemblyName). Most certainly you forgot to properly create the $(AssemblyName).Version.props file."
-           Condition=" '$(MajorVersion)' == '' Or '$(MinorVersion)' == '' Or '$(PatchVersion)' == '' " />
-
-    <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
-    <Warning Text="Are you sure that you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
-             Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />
-  </Target>
-
-  <Target Name="GetBuildMetadata" DependsOnTargets="GetConfigurationMetadata">
-    <!-- For retail builds, we don't add any build metadata to keep the
-         version as simple as possible. We can still read the complete
-         build configuration with the AssemblyConfiguration attribute.
-         The build metadata enables us to quickly check the build configuration
-         using the file explorer. -->
-    <PropertyGroup>
-      <BuildMetadata>$(ConfigurationMetadata.Replace('+', '.').ToLowerInvariant())</BuildMetadata>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="InitializeDummyVersion" Condition=" '$(DummyGeneratedVersion)' == 'true' ">
-    <PropertyGroup>
-      <!-- Here we replicate the assembly versions as found in AssemblyInfo.Common.cs -->
-      <MajorVersion>1</MajorVersion>
-      <MinorVersion>0</MinorVersion>
-      <PatchVersion>0</PatchVersion>
-      <PreReleaseLabel>DUMMY</PreReleaseLabel>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetSemanticVersion" DependsOnTargets="CheckSemanticVersion;GetBuildMetadata">
-    <PropertyGroup>
-      <SemanticVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</SemanticVersion>
-      <SemanticVersion Condition=" '$(PreReleaseLabel)' != '' ">$(SemanticVersion)-$(PreReleaseLabel)</SemanticVersion>
-      <SemanticVersion Condition=" '$(BuildMetadata)' != '' ">$(SemanticVersion)+$(BuildMetadata)</SemanticVersion>
-    </PropertyGroup>
-  </Target>
-
-
   <!-- ### Build Generated Version ### -->
 
+  <!-- CreateAssemblyVersionFile target. -->
   <Target Name="CreateAssemblyVersionFile"
           Condition=" '$(BuildGeneratedVersion)' == 'true' "
-          DependsOnTargets="DeleteAssemblyVersionFile;GenerateAssemblyVersions;GetConfigurationMetadata">
+          DependsOnTargets="DeleteAssemblyVersionFile;GenerateBuildAndRevisionNumbers">
     <Message Text="Creating the assembly version file for $(AssemblyName)..." Importance="normal" />
 
-    <PropertyGroup Condition=" '$(Retail)' == 'true' ">
-      <_AssemblyConfiguration>Retail</_AssemblyConfiguration>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <_AssemblyConfiguration>$(ConfigurationMetadata)</_AssemblyConfiguration>
-    </PropertyGroup>
-    <PropertyGroup>
-      <_AssemblyConfiguration>$(_AssemblyConfiguration) built on $([System.DateTime]::UtcNow.ToString()).</_AssemblyConfiguration>
-    </PropertyGroup>
+    <Error Text="You MUST create a version file to generate the assembly versions: $(VersionFile)."
+           Condition=" '$(VersionExists)' != 'true' " />
 
     <PropertyGroup>
+      <_BuildMetadata>$(Configuration)</_BuildMetadata>
+      <_BuildMetadata>$(_BuildMetadata)+$(Platform)</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(SignAssembly)' == 'true' ">$(_BuildMetadata)+Signed</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(SignAssembly)' != 'true' ">$(_BuildMetadata)+Unsigned</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_BuildMetadata)+SemVer</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_BuildMetadata)+NotVer</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(_BuildMetadata)+Leaky</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(_BuildMetadata)+Closed</_BuildMetadata>
+
+      <_ConfigurationMetadata Condition=" '$(Retail)' == 'true' ">Retail</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(Retail)' != 'true' ">$(_BuildMetadata)</_ConfigurationMetadata>
+
+      <_AssemblyConfiguration>$(_ConfigurationMetadata) built on $([System.DateTime]::UtcNow.ToString()).</_AssemblyConfiguration>
+      <_AssemblyVersion>$(MajorVersion).$(MinorVersion).0.0</_AssemblyVersion>
+      <_AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(RevisionNumber)</_AssemblyFileVersion>
+      <_AssemblyInformationalVersion>$(SemanticVersion)+$(_BuildMetadata.Replace('+', '.').ToLowerInvariant())</_AssemblyInformationalVersion>
+
       <_AssemblyVersionContent>
         <![CDATA[
 //------------------------------------------------------------------------------
@@ -152,9 +112,9 @@ using System.Reflection;
 
 #if BUILD_GENERATED_VERSION
 [assembly: AssemblyConfiguration("$(_AssemblyConfiguration)")]
-[assembly: AssemblyVersion("$(AssemblyVersion)")]
-[assembly: AssemblyFileVersion("$(AssemblyFileVersion)")]
-[assembly: AssemblyInformationalVersion("$(AssemblyInformationalVersion)")]
+[assembly: AssemblyVersion("$(_AssemblyVersion)")]
+[assembly: AssemblyFileVersion("$(_AssemblyFileVersion)")]
+[assembly: AssemblyInformationalVersion("$(_AssemblyInformationalVersion)")]
 #endif
 
          ]]>
@@ -169,25 +129,19 @@ using System.Reflection;
     <WriteLinesToFile Lines="$(_AssemblyVersionLines)" File="$(AssemblyVersionFile)" Overwrite="true" />
   </Target>
 
-  <Target Name="DeleteAssemblyVersionFile">
+  <!-- DeleteAssemblyVersionFile target. -->
+  <Target Name="DeleteAssemblyVersionFile" Condition=" '$(BuildGeneratedVersion)' == 'true' ">
     <Delete Files="$(AssemblyVersionFile)" />
   </Target>
 
-  <Target Name="GenerateAssemblyVersions" DependsOnTargets="GetSemanticVersion;GenerateBuildAndRevisionNumbers">
-    <PropertyGroup>
-      <AssemblyVersion>$(MajorVersion).$(MinorVersion).0.0</AssemblyVersion>
-      <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(RevisionNumber)</AssemblyFileVersion>
-      <AssemblyInformationalVersion>$(SemanticVersion)</AssemblyInformationalVersion>
-    </PropertyGroup>
-  </Target>
-
-
   <!-- ### PEVerify ### -->
 
+  <!-- DeletePEVerifyLogFile target. -->
   <Target Name="DeletePEVerifyLogFile">
     <Delete Files="$(PEVerifyLogFile)" />
   </Target>
 
+  <!-- DeletePEVerifyDummyOutput target. -->
   <Target Name="DeletePEVerifyDummyOutput">
     <Delete Files="$(PEVerifyDummyOutput)" />
   </Target>
@@ -198,11 +152,13 @@ using System.Reflection;
     <CorePEVerify Condition=" !Exists('$(PEVerifyCommand)') ">_WarnOnMissingPEVerify</CorePEVerify>
   </PropertyGroup>
 
+  <!-- PEVerify target. -->
   <!-- WARNING: Delete previous log before doing anything. We append to it
        and we don't want to let it grow endlessly. The obvious side-effect is
        that we can not use the log file for incremental batching. -->
   <Target Name="PEVerify" DependsOnTargets="DeletePEVerifyLogFile;$(CorePEVerify)" />
 
+  <!-- _PEVerify target. -->
   <Target Name="_PEVerify"
           DependsOnTargets="Build"
           Inputs="$(TargetPath)"
@@ -217,32 +173,36 @@ using System.Reflection;
     <Touch Files="$(PEVerifyDummyOutput)" AlwaysCreate="true" />
   </Target>
 
+  <!-- _WarnOnMissingPEVerify target. -->
   <Target Name="_WarnOnMissingPEVerify">
-    <Warning Text="Cannot verify assemblies. I was unable to locate PEVerify.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+    <Warning Text="Cannot verify assemblies. I was unable to locate PEVerify.exe. It is part of the Visual Studio installation or the lighter .NET Framework SDK." />
   </Target>
-
 
   <!-- ### SecAnnotate ### -->
 
+  <!-- DeleteSecAnnotateLogFile target. -->
   <Target Name="DeleteSecAnnotateLogFile">
     <Delete Files="$(SecAnnotateLogFile)" />
   </Target>
 
+  <!-- DeleteSecAnnotateOutput target. -->
   <Target Name="DeleteSecAnnotateOutput">
     <Delete Files="$(SecAnnotateOutput)" />
   </Target>
 
-  <!-- Define the CorePEVerify property. -->
+  <!-- Define the CoreSecAnnotate property. -->
   <PropertyGroup>
     <CoreSecAnnotate>_SecAnnotate</CoreSecAnnotate>
     <CoreSecAnnotate Condition=" !Exists('$(SecAnnotateCommand)') ">_WarnOnMissingSecAnnotate</CoreSecAnnotate>
   </PropertyGroup>
 
+  <!-- SecAnnotate target. -->
   <!-- WARNING: Delete previous log before doing anything. We append to it
        and we don't want to let it grow endlessly. As a side-effect, we can not
        use the log file for incremental batching. -->
   <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
 
+  <!-- _SecAnnotate target. -->
   <Target Name="_SecAnnotate"
           DependsOnTargets="Build"
           Inputs="$(TargetPath)"
@@ -257,22 +217,16 @@ using System.Reflection;
           ContinueOnError="false" />
   </Target>
 
+  <!-- _WarnOnMissingSecAnnotate target. -->
   <Target Name="_WarnOnMissingSecAnnotate">
-    <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio 2013 installation or the lighter .NET Framework SDK." />
+    <Warning Text="Cannot analyze assemblies for transparency violations. I was unable to locate SecAnnotate.exe. It is part of the Visual Studio installation or the lighter .NET Framework SDK." />
   </Target>
-
 
   <!-- ### NuGet packaging ### -->
 
-  <!-- 
-      Only create a NuGet package if:
-      - A NuGet project exists.
-      - We have a meaningful version, ie BuildGeneratedVersion is true:
-        * the assembly gets an actual version
-        * the package has a unique version that matchs the assembly version.
-    -->
+  <!-- CreateNupkg target. -->
   <Target Name="CreateNupkg"
-          Condition=" '$(NuProjectExists)' == 'true' And '$(BuildGeneratedVersion)' == 'true' "
+          Condition=" '$(NuProjectExists)' == 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
@@ -282,10 +236,18 @@ using System.Reflection;
           ContinueOnError="false" />
   </Target>
 
+  <!-- CreateNuspec target. -->
   <Target Name="CreateNuspec"
           Condition=" '$(NuProjectExists)' == 'true' "
-          DependsOnTargets="DeleteNuspecFile;GetNuVersion;FindNuGetDependencies;FindProjectDependencies">
+          DependsOnTargets="DeleteNuspecFile;FindNuGetDependencies;FindProjectDependencies">
     <Message Text="Creating nuspec for $(AssemblyName)..." Importance="normal" />
+
+    <!-- To create a nupkg we need a meaningful version:
+         * BuildGeneratedVersion=true, ie the assembly gets an actual version,
+           which implies VersionExists = true.
+         * the package has a unique version that matchs the assembly version. -->
+    <Error Text="You MUST use 'BuildGeneratedVersion=true' to create a NuGet package."
+           Condition=" '$(BuildGeneratedVersion)' != 'true' " />
 
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"
                  OutFile="$(NuspecFile)"
@@ -304,14 +266,23 @@ using System.Reflection;
                  References="$(NuReferences)" />
   </Target>
 
-  <Target Name="DeleteNupkgFile" DependsOnTargets="GetNuPkgFile">
-    <Delete Files="$(NupkgFile)" />
+  <!-- DeleteNupkgFile target. -->
+  <Target Name="DeleteNupkgFile"
+          Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' == 'true' ">
+    <!-- No need to try to delete a non-retail packages. Its name changes over time. -->
+    <PropertyGroup>
+      <_NupkgFile>$(WorkPackagesDir)$(NuId).$(NuVersion).nupkg</_NupkgFile>
+    </PropertyGroup>
+
+    <Delete Files="$(_NupkgFile)" />
   </Target>
 
-  <Target Name="DeleteNuspecFile">
+  <!-- DeleteNuspecFile target. -->
+  <Target Name="DeleteNuspecFile" Condition=" '$(NuProjectExists)' == 'true' ">
     <Delete Files="$(NuspecFile)" />
   </Target>
 
+  <!-- FindNuGetDependencies target. -->
   <Target Name="FindNuGetDependencies" Condition=" Exists('$(PackagesConfig)') ">
     <Message Text="Reading packages.config for NuGet dependencies of $(AssemblyName)..." Importance="normal" />
 
@@ -320,6 +291,7 @@ using System.Reflection;
     </ReadDependenciesFromPackagesConfig>
   </Target>
 
+  <!-- FindProjectDependencies target. -->
   <Target Name="FindProjectDependencies" DependsOnTargets="ReadProjectDependency">
     <Message Text="Finding local project dependencies for $(AssemblyName)..." Importance="normal" />
 
@@ -328,34 +300,7 @@ using System.Reflection;
     </PropertyGroup>
   </Target>
 
-  <Target Name="GetNuPkgFile" DependsOnTargets="GetNuVersion">
-    <PropertyGroup>
-      <NupkgFile>$(WorkPackagesDir)$(NuId).$(NuVersion).nupkg</NupkgFile>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetNuPreReleaseLabel" DependsOnTargets="CheckSemanticVersion">
-    <PropertyGroup>
-      <NuPreReleaseLabel>$(PreReleaseLabel)</NuPreReleaseLabel>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="AfterGetNuPreReleaseLabel"
-          Condition=" '$(Retail)' != 'true' "
-          AfterTargets="GetNuPreReleaseLabel"
-          DependsOnTargets="GenerateBuildStamp">
-    <PropertyGroup>
-      <NuPreReleaseLabel>T$(BuildStamp)</NuPreReleaseLabel>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="GetNuVersion" DependsOnTargets="CheckSemanticVersion;GetNuPreReleaseLabel">
-    <PropertyGroup>
-      <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</NuVersion>
-      <NuVersion Condition=" '$(NuPreReleaseLabel)' != '' ">$(NuVersion)-$(NuPreReleaseLabel)</NuVersion>
-    </PropertyGroup>
-  </Target>
-
+  <!-- ReadProjectDependency target. -->
   <Target Name="ReadProjectDependency"
           Condition=" '@(ProjectReference)' != '' "
           Outputs="%(ProjectReference.Identity)">
@@ -368,7 +313,7 @@ using System.Reflection;
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <_ProjectDependencyId>$(_ProjectDependencyId).EDGE</_ProjectDependencyId>
+      <_ProjectDependencyId>$(_ProjectDependencyId).$(EDGE)</_ProjectDependencyId>
       <_ProjectDependencyVersion>(,$(_ProjectDependencyVersion)]</_ProjectDependencyVersion>
     </PropertyGroup>
 
@@ -383,26 +328,20 @@ using System.Reflection;
     </ItemGroup>
   </Target>
 
+  <!-- __InitializeMakeCustomAfterTargets target. -->
+  <Target Name="__InitializeMakeCustomAfterTargets" DependsOnTargets="__PatchNuProject" />
 
-  <!-- Initial target. -->
-  <Target Name="__InitializeMakeCustomAfterTargets"
-          Condition=" '$(NuProjectExists)' == 'true' ">
-    <!-- Sanity checks. Even if we skip the package creation (SkipNupkgCreation
-         is true), some targets (e.g. CreateNuspec) which require NuGet properties
-         to be set may be called directly. -->
-    <Error Text="You MUST define the 'NuId' property in your NuGet project: $(NuProjectFile)."
-           Condition=" '$(NuId)' == '' "
-           ContinueOnError="false" />
-    <Error Text="You MUST define the 'NuDescription' property in your NuGet project: $(NuProjectFile)."
-           Condition=" '$(NuDescription)' == '' "
-           ContinueOnError="false" />
-    <Error Text="You MUST define the 'NuFiles' property in your NuGet project: $(NuProjectFile)."
-           Condition=" '$(NuFiles)' == '' "
-           ContinueOnError="false" />
-
-    <PropertyGroup Condition=" '$(Retail)' != 'true' ">
-      <NuId>$(NuId).EDGE</NuId>
-      <NuTitle>$(NuTitle)-EDGE</NuTitle>
+  <!-- __PatchNuProject targets. -->
+  <Target Name="__PatchNuProject"
+          Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' != 'true' "
+          DependsOnTargets="GenerateBuildStamp">
+    <!-- For non-retail packages, we change on-the-fly various bits. -->
+    <PropertyGroup>
+      <EDGE>EDGE</EDGE>
+      
+      <NuId>$(NuId).$(EDGE)</NuId>
+      <NuTitle Condition=" '$(NuTitle)' != '' ">$(NuTitle) ($(EDGE))</NuTitle>
+      <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-T$(BuildStamp)</NuVersion>
     </PropertyGroup>
   </Target>
 </Project>

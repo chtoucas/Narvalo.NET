@@ -1,40 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" 
-         InitialTargets="__InitializeMakeSharedProps"
-         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
-    This file defines common MSBuild properties shared among Make.Common.* and Make.Custom.*.
-  -->
-  
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This file defines MSBuild properties shared among Make.* files. -->
+
+  <!-- Import shared properties, if not already done. -->
+  <Import Project="$(MSBuildThisFileDirectory)Shared.props"
+          Condition=" '$(SharedPropsImported)' != 'true' "/>
+
+  <!-- Define common Narvalo project options. -->
   <PropertyGroup>
-    <!-- If true, dynamically generate the assemblies' version. Default to true. -->
+    <!-- If true, dynamically generate the assemblies' version. Default to true. 
+         Beware, a newly generated assembly version forces a fresh build.
+         For incremental batching to work be sure to use: BuildGeneratedVersion=false. -->
     <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>
 
     <!-- If true, sign the assemblies. Default to false. -->
     <SignAssembly Condition=" '$(SignAssembly)' != 'true' ">false</SignAssembly>
 
-    <!-- If true, internals are visible. Default to true. -->
+    <!-- If true, unconditionally hide internals to other assemblies. Default to true. -->
     <VisibleInternals Condition=" '$(VisibleInternals)' != 'false' ">true</VisibleInternals>
   </PropertyGroup>
 
-  <!-- Define layout-related properties. -->
+  <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
+    <!-- Define layout-related properties. -->
     <WorkRoot>$(RepositoryRoot)work\</WorkRoot>
-
     <WorkLogDir>$(WorkRoot)log\</WorkLogDir>
     <WorkPackagesDir>$(WorkRoot)packages\</WorkPackagesDir>
-  </PropertyGroup>
 
-  <!-- Define the NuGetCommand property. -->
-  <PropertyGroup>
+    <!-- Define the NuGetCommand property. -->
     <NuGetCommand>$(MSBuildThisFileDirectory)nuget.exe</NuGetCommand>
   </PropertyGroup>
-
-
-  <!-- Initial target. -->
-  <Target Name="__InitializeMakeSharedProps">
-    <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
-    <MakeDir Directories="$(WorkLogDir)" Condition=" !Exists($(WorkLogDir)) " />
-    <MakeDir Directories="$(WorkPackagesDir)" Condition=" !Exists($(WorkPackagesDir)) " />
-  </Target>
 </Project>

@@ -38,15 +38,16 @@ MSBuild files:
 - Bug: The SecAnnotate output file does not seem to be created.  
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
-- Improvement: I don't like the way we handle Retail in Make.CustomAfter.targets.
-- Improvement: Better handling of unexisting PEVerify & SecAnnotate.
 - Bugfix: FullClean target from PSakefile.ps1 fails sometimes for obscure reasons.
 - Improvement: Package for WebSites.
 - Improvement: Ability to install PSake on demand (important for CI).
 - Improvement: Check that TargetPath is the correct property to be used.
   See http://sedodream.com/2007/11/21/MSBuildHowToGetAllGeneratedOutputs.aspx
+- Improvement: Review _WarnOnTemporaryOverridenSettings. RunCodeAnalysis is not
+  available in VS.
                        
 Miscs:
+- Bugfix: Narvalo.Int64Encoder.FromFlickrBase58String, Format.CurrentCulture
 - Improvement: Complete Guidelines. 
   * Explain NuGet package versioning (retail or not). More details on the effect
     of using Retail=true.

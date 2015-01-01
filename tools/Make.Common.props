@@ -2,60 +2,14 @@
 <Project ToolsVersion="12.0"
          InitialTargets="__InitializeMakeCommonProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--
-    Options are defined here or in Shared.props.
-
-    Custom build options:
-    - BuildGeneratedVersion (default: true)
-      Generate assembly version before building.
-      A new generated assembly version forces a fresh build.
-      For incremental batching to work be sure to use:
-        BuildGeneratedVersion=false.
-
-    - Retail (default: false)
-      If true, generated results are meant to be published.
-      Currently it means:
-      * If true, override other properties:
-          BuildGeneratedVersion=true
-          Configuration=Release
-          SignAssembly=true
-          VisibleInternals=false
-      * If false, NuGet package versions are uniquely created on the fly.
-        This ensures that each build creates a distinct package.
-      * Use different build metadata for the assembly informational version.
-      * Use different text for the AssemblyConfiguration attribute.
-
-    - SignAssembly (default: false)
-
-    - VisibleInternals (default: true)
-      Unconditionally hide internals to other assemblies.
-
-    - SolutionFile (default: none)
-      Solution used to restore NuGet packages.
-
-    Common MSBuild options:
-    - Configuration (default: Debug)
-      Other options: Release and CodeContracts.
-
-    - Platform (default: AnyCPU)
-      Right now, AnyCPU is the only supported platform.
-
-    - BuildInParallel (default: false unless the /maxcpucount MSBuild's switch is used)
-
-    Miscs options:
-    - RepositoryRoot
-      No need to set this manually. If empty, MSBuild will pick up the right value.
-
-    - VisualStudioVersion (default: 12.0)
-      Right now, I don't see any circumstances under which we would need
-      to override the default value.
-      Does not have any effect on some projects (e.g. test projects override this
-      property).
-  -->
-
+  
   <!-- Import shared properties. -->
-  <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
   <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
+
+  <!-- If the property ProjectsToBuild is set, but not the item, use the property to define the item. -->
+  <ItemGroup Condition=" '@(ProjectsToBuild)' == '' And '$(ProjectsToBuild)' != '' ">
+    <ProjectsToBuild Include="$(ProjectsToBuild)" />
+  </ItemGroup>
 
   <!-- Define common Narvalo project properties. -->
   <PropertyGroup>
@@ -141,17 +95,13 @@
     </BuildProperties>
   </PropertyGroup>
 
-  <!-- Mark Make.Common.props as already imported. -->
+  <!-- Mark the file as already imported. -->
   <PropertyGroup>
     <MakeCommonPropsImported>true</MakeCommonPropsImported>
   </PropertyGroup>
 
-  <!-- Initial target. -->
+  <!-- __InitializeMakeCommonProps target. -->
   <Target Name="__InitializeMakeCommonProps">
-    <ItemGroup Condition=" '@(ProjectsToBuild)' == '' And '$(ProjectsToBuild)' != '' ">
-      <ProjectsToBuild Include="$(ProjectsToBuild)" />
-    </ItemGroup>
-
     <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of @(ProjectsToBuild)."
            Condition=" '@(ProjectsToBuild)' == '' " />
   </Target>

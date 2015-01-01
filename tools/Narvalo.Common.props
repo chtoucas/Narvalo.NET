@@ -4,14 +4,6 @@
     This MSBuild file defines a common set of Build Properties.
     You can still override any of them but this should not be the default.
 
-    Options:
-    - CustomBeforeNarvaloCommonProps
-    - CustomAfterNarvaloCommonProps
-    - CustomBeforeNarvaloCommonTargets
-    - CustomAfterNarvaloCommonTargets
-    
-    Other options may be found in Shared.props.
-
     Each project should import this file:
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
@@ -19,9 +11,6 @@
     
     WARNING: Make sure the import is located just before Microsoft targets.
   -->
-
-
-  <!-- ### Imports ### -->
 
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
@@ -40,9 +29,7 @@
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
-
-  <!-- ### Microsoft Common Properties ### -->
-
+  <!-- Microsoft Common Properties -->
   <PropertyGroup>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
 
@@ -73,6 +60,7 @@
     in Debug configuration.
   -->
 
+  <!-- Debug configuration -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -81,6 +69,7 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
+  <!-- Release configuration -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
@@ -90,6 +79,7 @@
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
+  <!-- CodeContracts configuration -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
@@ -101,9 +91,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
-
-  <!-- ### Additional Files ### -->
-
+  <!-- Additional files -->
   <ItemGroup>
     <!-- Unfortunately, when done here, the files won't appear in VS (even 
          if they are declared as linked files). 
@@ -114,13 +102,11 @@
     <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml" />
   </ItemGroup>
 
-
-  <!-- ### Source Analysis ### -->
+  <!-- Source Analysis -->
   <!-- 
     For a complete list of available options, see
       packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets.
   -->
-
   <PropertyGroup>
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
 
@@ -129,13 +115,11 @@
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
-
-  <!-- ### Code Analysis ### -->
+  <!-- Code Analysis -->
   <!--
     For a complete list of available options, see
       %ProgramFiles%\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeAnalysis\Microsoft.CodeAnalysis.Targets
   -->
-
   <PropertyGroup>
     <RunCodeAnalysis Condition=" '$(RunCodeAnalysis)' != 'true' ">false</RunCodeAnalysis>
 
@@ -153,8 +137,7 @@
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 
-
-  <!-- ### Code Contracts ### -->
+  <!-- Code Contracts -->
   <!--
     For a complete list of available options, see
       %ProgramFiles%\Microsoft\Contracts\MsBuild\v$(VisualStudioVersion)\Microsoft.CodeContractAnalysis.targets
@@ -162,33 +145,28 @@
 
     We do not really enforce any policy for Code Contracts as they are not
     currently used by all projects. When enabling Code Contracts on a project,
-    you should add the following lines to {AssemblyName}.props:
-      <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' And '$(Configuration)' != 'Debug' " >
-        <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-        <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    you should also add the following lines to {AssemblyName}.props:
+      <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+        <BuildCodeContractsReferenceAssembly>true</BuildCodeContractsReferenceAssembly>
       </PropertyGroup>
     On CodeContracts Build, configuration is exclusively done inside VS.
     Even so, let's set some reasonable defaults.
   -->
-
   <PropertyGroup>
     <!-- Use "Custom Parameter Validation". -->
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
     <!-- Only meaningful inside VS, anyway I find the result confusing. -->
-    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
-    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsShowSquigglies>false</CodeContractsShowSquigglies>
+    <CodeContractsFailBuildOnWarnings>false</CodeContractsFailBuildOnWarnings>
   </PropertyGroup>
-  
-
-  <!-- ### After Imports ### -->
-
-  <!-- If any, import custom global properties. -->
-  <Import Project="$(CustomAfterNarvaloCommonProps)"
-          Condition=" '$(CustomAfterNarvaloCommonProps)' != '' " />
 
   <!-- If any, import custom project properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"
           Condition=" Exists('$(MSBuildProjectDirectory)\$(AssemblyName).props') "/>
+
+  <!-- If any, import custom global properties. -->
+  <Import Project="$(CustomAfterNarvaloCommonProps)"
+          Condition=" '$(CustomAfterNarvaloCommonProps)' != '' " />
 
   <!-- Mark Make.Common.props as already imported. -->
   <PropertyGroup>

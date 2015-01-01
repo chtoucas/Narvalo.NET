@@ -147,13 +147,13 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
+            Contract.EndContractBlock();
+
             if (value.Length > FlickrBase58MaxLength_) {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_),
                     "value");
             }
-
-            Contract.EndContractBlock();
 
             long result = 0;
             long multiplier = 1;

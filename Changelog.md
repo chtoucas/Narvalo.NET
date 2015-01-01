@@ -1,6 +1,13 @@
 ChangeLog
 =========
      
+- (2015/01/01) _Improvement:_ Made NuGet projects self-contained: the copyright 
+  tag is automatically initialized.
+- (2015/01/01) _Improvement:_ Changed the way we override properties for sample
+  and test projects. We no longer use extensions to Narvalo.Common.props
+  but rather use the new facility offered by $(AssemblyName).props.
+- (2015/01/01) _Improvement:_ Better validation of version properties and NuGet
+  project properties. Simplified Make.CustomAfter.*.
 - (2014/12/30) _Improvement:_ Using a MSBuild response file, allowed to try out 
   the build system without actually committing your personal settings.
 - (2014/12/30) _Improvement:_ Made sure a build fails if a custom import

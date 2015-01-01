@@ -36,7 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D31
 		Narvalo.Tests.props = Narvalo.Tests.props
 		Package.StyleCop.targets = Package.StyleCop.targets
 		Package.Xunit.tasks = Package.Xunit.tasks
+		Samples.props = Samples.props
 		Shared.props = Shared.props
+		Tests.props = Tests.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6D2B84B0-FD5E-4E14-A5B6-43BC56DF08E9}"

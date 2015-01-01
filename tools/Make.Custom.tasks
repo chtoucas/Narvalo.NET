@@ -5,13 +5,13 @@
     <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
+  <!-- GenerateBuildAndRevisionNumbers task. -->
   <UsingTask TaskName="GenerateBuildAndRevisionNumbers" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <BuildNumber ParameterType="System.UInt16" Output="true" />
       <RevisionNumber ParameterType="System.UInt16" Output="true" />
     </ParameterGroup>
     <Task>
-      <Reference Include="System.Core" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 // The algorithm used by .NET to auto-increment the assembly version is as follows:
@@ -54,8 +54,9 @@ return !Log.HasLoggedErrors;
     </Task>
   </UsingTask>
 
-  <!-- Create an ever growing integer key from the build and revision numbers. -->
+  <!-- GenerateBuildStamp task. -->
   <UsingTask TaskName="GenerateBuildStamp" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <!-- Create an ever growing integer key from the build and revision numbers. -->
     <ParameterGroup>
       <BuildNumber ParameterType="System.UInt16" Required="true" />
       <RevisionNumber ParameterType="System.UInt16" Required="true" />
@@ -63,7 +64,6 @@ return !Log.HasLoggedErrors;
       <BuildStamp ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
-      <Reference Include="System.Core" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 BuildStamp = BuildNumber.ToString();        
@@ -80,6 +80,7 @@ return !Log.HasLoggedErrors;
     </Task>
   </UsingTask>
 
+  <!-- WriteNuspec task. -->
   <UsingTask TaskName="WriteNuspec" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <TemplateFile ParameterType="System.String" Required="true" />
@@ -99,10 +100,6 @@ return !Log.HasLoggedErrors;
       <References ParameterType="System.String" />
     </ParameterGroup>
     <Task>
-      <Using Namespace="System" />
-      <Using Namespace="System.IO" />
-      <Using Namespace="Microsoft.Build.Framework" />
-      <Using Namespace="Microsoft.Build.Utilities" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 try {
@@ -115,7 +112,7 @@ try {
       .Replace("$title$", String.IsNullOrWhiteSpace(Title) ? String.Empty : "<title>" + Title + "</title>")
       .Replace("$summary$", String.IsNullOrWhiteSpace(Summary) ? String.Empty : "<summary>" + Summary + "</summary>")
       .Replace("$releaseNotes$", String.IsNullOrWhiteSpace(ReleaseNotes) ? String.Empty : "<releaseNotes>" + ReleaseNotes + "</releaseNotes>")
-      .Replace("$copyright$", String.IsNullOrWhiteSpace(Copyright) ? String.Empty : "<copyright>" + String.Format(Copyright, DateTime.Now.Year) + "</copyright>")
+      .Replace("$copyright$", String.IsNullOrWhiteSpace(Copyright) ? String.Empty : "<copyright>" + Copyright + "</copyright>")
       .Replace("$tags$", String.IsNullOrWhiteSpace(Tags) ? String.Empty : "<tags>" + Tags + "</tags>")
       .Replace("$dependencies$", String.IsNullOrWhiteSpace(Dependencies) ? String.Empty : "<dependencies>" + Dependencies + "</dependencies>")
       .Replace("$references$", String.IsNullOrWhiteSpace(References) ? String.Empty : References)
@@ -133,6 +130,7 @@ return !Log.HasLoggedErrors;
     </Task>
   </UsingTask>
 
+  <!-- FindProductVersion task. -->
   <UsingTask TaskName="FindProductVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <AssemblyPath ParameterType="System.String" Required="true" />
@@ -156,8 +154,9 @@ return !Log.HasLoggedErrors;
     </Task>
   </UsingTask>
 
-  <!-- Quick and dirty task to transform a packages.config to a dependencies XML string usable in nuspec. -->
+  <!-- ReadDependenciesFromPackagesConfig task. -->
   <UsingTask TaskName="ReadDependenciesFromPackagesConfig" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <!-- Quick and dirty task to transform a packages.config to a dependencies XML string usable in nuspec. -->
     <ParameterGroup>
       <Config ParameterType="System.String" Required="true" />
       <Dependencies ParameterType="System.String" Output="true" />
@@ -195,4 +194,61 @@ return !Log.HasLoggedErrors;
       </Code>
     </Task>
   </UsingTask>
+
+  <!-- ValidateVersionNumber task. -->
+  <UsingTask TaskName="ValidateVersionNumber" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <Value ParameterType="System.String" Required="true" />
+      <Name ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (Value.Length > 1 && Value.StartsWith("0")) {
+  // Semantic versioning requirement.
+  Log.LogError(Name + " (" + Value + ") MUST NOT contain leading zeroes.");
+}
+
+try {
+  // Assembly versioning requirement.
+  ushort version = Convert.ToUInt16(Value);
+}
+catch (FormatException ex) {
+  Log.LogWarning(Name + " (" + Value + ") MUST be a 16-bit unsigned integers.");
+  Log.LogErrorFromException(ex);
+}
+catch (OverflowException ex) {
+  Log.LogWarning(Name + " (" + Value + ") MUST be a 16-bit unsigned integers.");
+  Log.LogErrorFromException(ex);
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <!-- ValidatePreReleaseLabel task. -->
+  <UsingTask TaskName="ValidatePreReleaseLabel" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <Value ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+if (!Regex.IsMatch(Value, @"^[a-z][\-0-9a-z]*$", RegexOptions.IgnoreCase)) {
+  Log.LogError("PreReleaseLabel (" + Value + ") MUST comprise only ASCII alphanumerics and hyphen. It MUST also start with an ASCII letter.");
+}
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+  
+  <!-- Mark the file as already imported. -->
+  <PropertyGroup>
+    <MakeCustomTasksImported>true</MakeCustomTasksImported>
+  </PropertyGroup>
 </Project>

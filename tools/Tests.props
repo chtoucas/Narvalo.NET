@@ -16,15 +16,13 @@
       '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
 
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-    <!-- Properties only used by the command-line scripts. -->
-    <DummyGeneratedVersion>true</DummyGeneratedVersion>
-  </PropertyGroup>
-
-  <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
-
   <!-- Overrides for test projects. -->
   <PropertyGroup>
     <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+    <!-- Properties only used by the command-line scripts. -->
+    <DummyGeneratedVersion>true</DummyGeneratedVersion>
   </PropertyGroup>
 </Project>

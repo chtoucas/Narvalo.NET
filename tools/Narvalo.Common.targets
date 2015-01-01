@@ -23,7 +23,6 @@
 
   <!-- Import StyleCop targets. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.StyleCop.targets" />
-  
 
   <!-- ### Microsoft Build Process ### -->
   <!--
@@ -44,7 +43,6 @@
   <!-- Use the AfterCleanDependsOn property to add your custom targets to AfterClean. -->
   <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)" />
 
-
   <!-- ### Source Analysis Hooks ### -->
   <!--
     Below, use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
@@ -64,7 +62,6 @@
              Importance="high" />
   </Target>
 
-
   <!-- ### Code Analysis Hooks ### -->
   <!--
     I wanted to replace the FxCop default messages to include the project name
@@ -81,7 +78,6 @@
           Condition=" '$(RunCodeAnalysis)' == 'true' ">
     <Message Text="Code Analysis Complete for $(ProjectName)..." Importance="high" />
   </Target>-->
-
 
   <!-- ### Code Contracts Hooks ### -->
 
@@ -113,8 +109,6 @@
           Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <Message Text="Code Contracts Reference Assembly Complete for $(ProjectName)" Importance="high" />
   </Target>
-
-
 
   <!-- ### After Imports ### -->
 

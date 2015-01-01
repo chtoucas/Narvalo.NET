@@ -6,7 +6,7 @@
     <NuDescription>
       This package enhances Narvalo.Mvp to provide support for ASP.NET WebForms.
     </NuDescription>
-    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP, ASP.NET, WebForms</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 

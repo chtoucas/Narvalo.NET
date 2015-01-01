@@ -6,7 +6,7 @@
     <NuDescription>
       This package contains a simple MVP framework inspired by webformsmvp.
     </NuDescription>
-    <NuCopyright>Copyright 2013-{0}</NuCopyright>
+    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 

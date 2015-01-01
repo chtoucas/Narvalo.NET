@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\MonadFacts.tt" />
+    <Content Include="Narvalo.Facts.props">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
@@ -92,7 +95,7 @@
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="..\..\tools\Narvalo.Tests.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

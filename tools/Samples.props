@@ -15,6 +15,4 @@
     <!-- Properties only used by the command-line scripts. -->
     <DummyGeneratedVersion>true</DummyGeneratedVersion>
   </PropertyGroup>
-
-  <Import Project="$(MSBuildThisFileDirectory)Narvalo.Common.props" />
 </Project>

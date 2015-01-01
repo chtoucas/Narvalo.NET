@@ -60,7 +60,7 @@ Task Default -depends FastBuild
 # Continuous Integration and development tasks:
 # - FastBuild, build then run Xunit tests in Debug configuration
 # - CI, default CI build
-# - CI-Retail, mimic the Retail task
+# - Mock-Retail, mimic the Retail task
 # - CodeAnalysis (slow)
 # - CodeContractsAnalysis (very slow)
 # - SecurityAnalysis (very slow)
@@ -85,7 +85,7 @@ Task CI {
         '/p:SourceAnalysisEnabled=true'
 }
 
-Task CI-Retail {
+Task Mock-Retail {
     MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps
 }
 

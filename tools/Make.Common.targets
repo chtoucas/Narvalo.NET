@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0"
          DefaultTargets="Build"
+         InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   
-  <!-- Import properties if not already done. -->
+  <!-- Import common properties, if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
 
@@ -13,6 +14,7 @@
   <!-- Import Xunit tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
 
+  <!-- Clean target. -->
   <Target Name="Clean">
     <!-- Artefacts created during a build. -->
     <ItemGroup>
@@ -28,6 +30,7 @@
              Targets="Clean" />
   </Target>
 
+  <!-- Build target. -->
   <Target Name="Build" DependsOnTargets="RestorePackages">
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -38,8 +41,10 @@
     </MSBuild>
   </Target>
 
+  <!-- Rebuild target. -->
   <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
 
+  <!-- _PatchRebuild target. -->
   <Target Name="_PatchRebuild">
     <!--
       StyleCop uses $(RebuildDependsOn) to modify the Build process.
@@ -61,6 +66,7 @@
     </PropertyGroup>
   </Target>
 
+  <!-- Package target. -->
   <Target Name="Package">
     <!-- WARNING: Child Package target is a non-standard MSBuild target. -->
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -70,6 +76,7 @@
              StopOnFirstFailure="true" />
   </Target>
   
+  <!-- PEVerify target. -->
   <Target Name="PEVerify">
     <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. -->
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -79,6 +86,7 @@
              StopOnFirstFailure="true" />
   </Target>
 
+  <!-- SecAnnotate target. -->
   <Target Name="SecAnnotate">
     <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target. -->
     <MSBuild Projects="@(ProjectsToBuild)"
@@ -88,6 +96,7 @@
              StopOnFirstFailure="true" />
   </Target>
 
+  <!-- Xunit target. -->
   <Target Name="Xunit"
           DependsOnTargets="Build"
           Inputs="@(BuildOutputs)"
@@ -97,34 +106,31 @@
                      Condition=" '@(BuildOutputs->EndsWith('Facts.dll'))' == 'true' " />
     </ItemGroup>
 
-    <!-- Since Xunit depends on Build, we are sure that the directory
-         where reports are stored exists. -->
     <xunit Assemblies="@(_TestAssembly)"
            Html="$(XunitHtmlFile)"
            Xml="$(XunitXmlFile)"
            Condition=" '@(_TestAssembly)' != '' " />
   </Target>
-  
 
+  <!-- InstallNuGet target. -->
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
-
-    <!--
-    <PropertyGroup>
-      <_NuGetDir>$([System.IO.Path]::GetDirectoryName($(NuGetCommand)))</_NuGetDir>
-    </PropertyGroup>
-
-    <MakeDir Directories="$(_NuGetDir)" Condition=" !Exists($(_NuGetDir)) " />
-    -->
 
     <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
   </Target>
 
+  <!-- RestorePackages target. -->
   <Target Name="RestorePackages" DependsOnTargets="InstallNuGet">
     <Message Text="Restoring NuGet packages..." Importance="high" />
 
     <Exec Command="&quot;$(NuGetCommand)&quot; restore &quot;$(SolutionFile)&quot; -PackagesDirectory &quot;$(RepositoryRoot)packages&quot; -ConfigFile &quot;$(RepositoryRoot).nuget\NuGet.Config&quot; -NonInteractive -Verbosity quiet"
-          LogStandardErrorAsError="true"
-          ContinueOnError="false" />
+          LogStandardErrorAsError="true" />
+  </Target>
+
+  <!-- __InitializeMakeCommonProps target. -->
+  <Target Name="__InitializeMakeCommonTargets">
+    <MakeDir Directories="$(WorkRoot)" Condition=" !Exists($(WorkRoot)) " />
+    <MakeDir Directories="$(WorkLogDir)" Condition=" !Exists($(WorkLogDir)) " />
+    <MakeDir Directories="$(WorkPackagesDir)" Condition=" !Exists($(WorkPackagesDir)) " />
   </Target>
 </Project>
