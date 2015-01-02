@@ -19,8 +19,9 @@ param(
 Set-StrictMode -Version Latest
 
 # Download nuget if needed.
-$nuget = ".\tools\NuGet.exe";
+$nuget = "$PSScriptRoot\tools\NuGet.exe";
 if (!(Test-Path $nuget)) {
+    Write-Host -NoNewline 'Downloading NuGet.exe...'
     Invoke-WebRequest "https://nuget.org/nuget.exe" -OutFile $nuget
 }
 

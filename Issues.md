@@ -39,8 +39,7 @@ MSBuild files:
 - Bug: Code Analysis problems. Whatever we use for CodeAnalysisSucceededFile, 
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or 
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
-  in Narvalo.Common.targets are disabled. For _WarnOnTemporaryOverridenSettings,
-  RunCodeAnalysis is not available in VS.   
+  in Narvalo.Common.targets are disabled. 
                        
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.

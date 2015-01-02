@@ -2,12 +2,13 @@
 
 Set-StrictMode -Version Latest
 
-$nuget = "$PSScriptRoot\tools\NuGet.exe"
 $stagingDir = "$PSScriptRoot\work\staging"
 
+# Download nuget if needed.
+$nuget = "$PSScriptRoot\tools\NuGet.exe";
 if (!(Test-Path $nuget)) {
-  Write-Host 'This script requires a local copy of the NuGet executable: .\tools\NuGet\NuGet.exe!' -BackgroundColor Red -ForegroundColor Yellow
-  Exit 1
+    Write-Host -NoNewline 'Downloading NuGet.exe...'
+    Invoke-WebRequest "https://nuget.org/nuget.exe" -OutFile $nuget
 }
 
 Write-Host "Publishing packages..." -ForegroundColor 'Yellow'

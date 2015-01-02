@@ -36,9 +36,9 @@
 
 @set RepositoryRoot=%~dp0
 
-@set ProjectFile="%RepositoryRoot%\TryOut.proj"
+@set ProjectFile=%RepositoryRoot%\TryOut.proj
 
-@set RspFile="%RepositoryRoot%\tryout.rsp"
+@set RspFile=%RepositoryRoot%\tryout.rsp
 
 @if not exist %RspFile% (
   @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspFile%
@@ -51,7 +51,7 @@
 
 :Build
 
-@call "%RepositoryRoot%\tools\MSBuild.cmd" @%RspFile% %ProjectFile%
+@call "%RepositoryRoot%\tools\MSBuild.cmd" @"%RspFile%" "%ProjectFile%"
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed
