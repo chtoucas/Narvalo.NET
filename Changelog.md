@@ -1,6 +1,8 @@
 ChangeLog
 =========
      
+- (2015/01/02) _Improvement:_ Do not set VisualStudioVersion when building
+  inside Visual Studio... 
 - (2015/01/02) _Improvement:_ Do not change the content of the NuGet package 
   depending on the configuration: always add the CC reference assembly and
   the assembly documentation.  

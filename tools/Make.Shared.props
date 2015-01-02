@@ -6,6 +6,14 @@
   <Import Project="$(MSBuildThisFileDirectory)Shared.props"
           Condition=" '$(SharedPropsImported)' != 'true' "/>
 
+  <!-- Define common MSBuild project options. -->
+  <PropertyGroup>
+    <!-- Right now, I don't see any circumstances under which we would need
+         to override the default value. Does not have any effect on some projects
+         (e.g. test projects override this property). -->
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+  </PropertyGroup>
+
   <!-- Define common Narvalo project options. -->
   <PropertyGroup>
     <!-- If true, dynamically generate the assemblies' version. Default to true. 

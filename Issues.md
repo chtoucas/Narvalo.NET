@@ -35,8 +35,8 @@ Code Analysis and Source Analysis:
 
 MSBuild files:          
 - Enhancement: Publish non retail packages to a remove MyGet server and
-  Publish retail packages to NuGet server.
-- Bug: All related to Code Analysis. Whatever we use for CodeAnalysisSucceededFile, 
+  publish retail packages to NuGet server.
+- Bug: Code Analysis problems. Whatever we use for CodeAnalysisSucceededFile, 
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or 
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
   in Narvalo.Common.targets are disabled. For _WarnOnTemporaryOverridenSettings,
