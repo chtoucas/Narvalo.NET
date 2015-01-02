@@ -19,11 +19,20 @@
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
 
-    <!-- If true, build the code contracts reference assembly. Default to false. -->
-    <BuildCodeContractsReferenceAssembly Condition=" '$(BuildCodeContractsReferenceAssembly)' != 'true' ">false</BuildCodeContractsReferenceAssembly>
+    <!-- If true, skip the generation of the assembly documentation. Default to false. -->
+    <SkipDocumentation Condition=" '$(SkipDocumentation)' != 'true' ">false</SkipDocumentation>
+
+    <!-- If true, skip code contracts reference assembly. Default to false. -->
+    <SkipCodeContractsReferenceAssembly Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">false</SkipCodeContractsReferenceAssembly>
 
     <!-- If true, packages/assemblies are built for retail. Default to false. -->
     <Retail Condition=" '$(Retail)' != 'true' ">false</Retail>
+  </PropertyGroup>
+
+  <!-- Assembly documentation. -->
+  <PropertyGroup Condition=" '$(SkipDocumentation)' != 'true' ">
+    <!-- Always build the assembly documentation. -->
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <!-- Source Analysis. -->
@@ -59,10 +68,16 @@
     <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(BuildCodeContractsReferenceAssembly)' == 'true' And '$(Configuration)' == 'Release' " >
-    <!-- Build the contract reference assembly. -->
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+  <!-- Code Contracts reference assembly. -->
+  <PropertyGroup Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' " >
+    <!-- If requested, completely disable the generation of the CC reference assembly. -->
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsEmitXMLDocs>false</CodeContractsEmitXMLDocs>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' " >
+    <!-- Whenever we build the CC reference assembly we also patch the documentation. -->
+    <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
   <!-- Sign the assembly. -->

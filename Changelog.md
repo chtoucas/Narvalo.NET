@@ -1,6 +1,11 @@
 ChangeLog
 =========
      
+- (2015/01/02) _Improvement:_ Do not change the content of the NuGet package 
+  depending on the configuration: always add the CC reference assembly and
+  the assembly documentation.  
+- (2015/01/02) _Improvement:_ Unless explicitely requested, always build the Code 
+  Contracts reference assembly and the assembly documentation. 
 - (2015/01/01) _Improvement:_ If necessary, automatically donwload and install
   nuget.exe and PSake when running make.ps1.
 - (2015/01/01) _Improvement:_ Made NuGet projects self-contained: the copyright 

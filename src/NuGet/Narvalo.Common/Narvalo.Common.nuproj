@@ -10,23 +10,6 @@
     <NuTags>Utilities, SQL</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
-    <NuFiles>
-      <![CDATA[
-<file src="Narvalo.Common.dll" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <NuFiles>
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Common.pdb" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <NuReferences>
       <![CDATA[
       <references>
@@ -37,7 +20,7 @@ $(NuFiles)
 
     <NuFiles>
       <![CDATA[
-$(NuFiles)
+<file src="Narvalo.Common.dll" target="lib\net45\" />
 <file src="Narvalo.Common.pdb" target="lib\net45\" />
 <file src="Narvalo.Common.xml" target="lib\net45\" />
 <file src="CodeContracts\Narvalo.Common.Contracts.dll" target="lib\net45\CodeContracts\" />

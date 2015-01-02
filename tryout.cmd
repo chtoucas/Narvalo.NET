@@ -13,6 +13,7 @@
 ::
 :: # Properties
 :: /p:Configuration=Debug
+:: /p:SkipCodeContractsReferenceAssembly=true
 :: /p:BuildGeneratedVersion=false
 :: /p:SignAssembly=false
 :: /p:VisibleInternals=true
@@ -28,7 +29,7 @@
 :: /fileloggerparameters:logfile=tryout.log;verbosity=normal;encoding=utf-8
 ::
 
-@echo off
+@echo on
 @setlocal
 
 :Setup
@@ -37,7 +38,7 @@
 
 @set ProjectFile="%RepositoryRoot%\TryOut.proj"
 
-@set RspFile="%RepositoryRoot%\tryout.rsp
+@set RspFile="%RepositoryRoot%\tryout.rsp"
 
 @if not exist %RspFile% (
   @set ErrMsg=To run this script, you MUST create the MSBuild response file: %RspFile%
@@ -50,7 +51,7 @@
 
 :Build
 
-@call "%RepositoryRoot%\tools\MSBuild.cmd" %ProjectFile% @%RspFile%
+@call "%RepositoryRoot%\tools\MSBuild.cmd" @%RspFile% %ProjectFile%
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed

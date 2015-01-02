@@ -12,23 +12,6 @@
     <NuTags>Maybe, Option, Linq, Monad</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
-    <NuFiles>
-      <![CDATA[
-<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
-      ]]>
-    </NuFiles>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <NuFiles>
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
-      ]]>
-    </NuFiles>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <NuReferences>
       <![CDATA[
       <references>
@@ -36,10 +19,10 @@ $(NuFiles)
       </references>
       ]]>
     </NuReferences>
-
+    
     <NuFiles>
       <![CDATA[
-$(NuFiles)
+<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
 <file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
 <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />

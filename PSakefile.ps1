@@ -15,10 +15,12 @@ Properties {
     # - Generate assembly versions (necessary for NuGet packaging)
     # - Sign assemblies
     # - Unconditionally hide internals (implies no white-box testing)
+    # - Do not skip the generation of the Code Contracts reference assembly
     $PackagingProps = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
         '/p:SignAssembly=true',
+        '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=false'
 
     # Default CI properties:
@@ -66,12 +68,11 @@ Task Default -depends FastBuild
 # - SecurityAnalysis (very slow)
 
 Task FastBuild {
-    MSBuild $Foundations $BuildArgs `
+    MSBuild $Foundations $BuildArgs $CIProps `
+        '/t:Xunit', 
         '/p:Configuration=Debug',
-        '/p:BuildGeneratedVersion=false',
-        '/p:SignAssembly=false',
-        '/p:VisibleInternals=true',
-        '/t:Build;Xunit'
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true'
 }
 
 Task CI {
@@ -90,15 +91,24 @@ Task Mock-Retail {
 }
 
 Task CodeAnalysis {
-    MSBuild $Everything $BuildArgs $StaticAnalysisProps '/t:Build', '/p:RunCodeAnalysis=true'
+    MSBuild $Everything $BuildArgs $StaticAnalysisProps `
+        '/t:Build', 
+        '/p:RunCodeAnalysis=true',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true'
 }
 
 Task CodeContractsAnalysis {
-    MSBuild $Foundations $BuildArgs $StaticAnalysisProps '/t:Build', '/p:Configuration=CodeContracts'
+    MSBuild $Foundations $BuildArgs $StaticAnalysisProps `
+        '/t:Build',
+        '/p:Configuration=CodeContracts'
 }
 
 Task SecurityAnalysis {
-    MSBuild $Foundations $BuildArgs $StaticAnalysisProps '/t:SecAnnotate'
+    MSBuild $Foundations $BuildArgs $StaticAnalysisProps `
+        '/t:SecAnnotate',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true'
 }
 
 # ==============================================================================
@@ -127,7 +137,7 @@ Task Retail-Build {
 
 # ==============================================================================
 
-# Delete work directory. Sometimes, this target fails for obscure reasons.
+# Delete work directory.
 Task FullClean {
     $workDir = "$RepositoryRoot\work\"
 

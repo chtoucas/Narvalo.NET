@@ -13,17 +13,6 @@
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Mvp.dll" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Mvp.pdb" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
-      <![CDATA[
-$(NuFiles)
 <file src="Narvalo.Mvp.pdb" target="lib\net45\" />
 <file src="Narvalo.Mvp.xml" target="lib\net45\" />
       ]]>

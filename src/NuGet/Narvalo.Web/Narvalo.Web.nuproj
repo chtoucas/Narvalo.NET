@@ -13,17 +13,6 @@
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Web.dll" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Debug' ">
-      <![CDATA[
-$(NuFiles)
-<file src="Narvalo.Web.pdb" target="lib\net45\" />
-      ]]>
-    </NuFiles>
-    <NuFiles Condition=" '$(Configuration)' == 'Release' ">
-      <![CDATA[
-$(NuFiles)
 <file src="Narvalo.Web.pdb" target="lib\net45\" />
 <file src="Narvalo.Web.xml" target="lib\net45\" />
 <file src="CodeContracts\Narvalo.Web.Contracts.dll" target="lib\net45\CodeContracts\" />

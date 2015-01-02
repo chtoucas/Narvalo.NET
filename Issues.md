@@ -36,10 +36,11 @@ Code Analysis and Source Analysis:
 MSBuild files:          
 - Enhancement: Publish non retail packages to a remove MyGet server and
   Publish retail packages to NuGet server.
-- Bug: Whatever we use for CodeAnalysisSucceededFile, it does not seem to be 
-  understood by MSBuild. Setting CodeAnalysisLogFile or CodeAnalysisSucceededFile
-  disables incremental building. Code Analysis Hooks. 
-  For _WarnOnTemporaryOverridenSettings, RunCodeAnalysis is not available in VS.   
+- Bug: All related to Code Analysis. Whatever we use for CodeAnalysisSucceededFile, 
+  it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or 
+  CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
+  in Narvalo.Common.targets are disabled. For _WarnOnTemporaryOverridenSettings,
+  RunCodeAnalysis is not available in VS.   
                        
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
@@ -63,7 +64,7 @@ Build Automation:
 - Enhancement: Script to push packages to NuGet with extensive checks. For instance,
   we should not try to publish a version already available on NuGet, check 
   the dependencies tree.            
-- Enhancement: Enable T4-regeneration in VS since, for us, it does not work
+- Enhancement: Enable T4-regeneration in VS since, for us, it won't work
   when building from the command-line.
 - Enhancement: Add Git commit hash to assembly configuration or info?
 - Enhancement: Start to use Git tags.

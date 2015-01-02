@@ -51,7 +51,7 @@
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
 
   <!-- DeleteOriginalDocumentationFile target. -->
-  <Target Name="DeleteOriginalDocumentationFile" Condition=" '$(BuildCodeContractsReferenceAssembly)' == 'true' ">
+  <Target Name="DeleteOriginalDocumentationFile" Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
     <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." Importance="normal" />
 
     <Delete Files="$(OriginalDocumentationFile)" />

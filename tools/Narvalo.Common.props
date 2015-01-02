@@ -148,7 +148,7 @@
     currently used by all projects. When enabling Code Contracts on a project,
     you should also add the following lines to {AssemblyName}.props:
       <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
-        <BuildCodeContractsReferenceAssembly>true</BuildCodeContractsReferenceAssembly>
+        <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
       </PropertyGroup>
     On CodeContracts Build, configuration is exclusively done inside VS.
     Even so, let's set some reasonable defaults.
