@@ -49,15 +49,15 @@ param(
 
 Set-StrictMode -Version Latest
 
-# Force reload of the Narvalo & PSake modules.
+# Force reload of the Project & PSake modules.
 if ($Reload) {
-    Get-Module Narvalo | Remove-Module
+    Get-Module Project | Remove-Module
     Get-Module psake | Remove-Module
 }
 
 # Import Narvalo module.
-if (!(Get-Module Narvalo)) {
-    Join-Path $PSScriptRoot 'tools\Narvalo.psm1' | Import-Module 
+if (!(Get-Module Project)) {
+    Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module 
 }
 
 # Restore packages.
@@ -68,4 +68,8 @@ if (!(Get-Module psake)) {
     Get-PSakeModulePath | Import-Module
 }
 
-Invoke-PSake (Get-RepositoryPath 'PSakefile.ps1') $task -Parameters @{ 'verbosity' = $verbosity; }
+# We are forced to set the framework to use the build tools v12.0 (required by the MyGet target).
+Invoke-PSake (Get-RepositoryPath 'PSakefile.ps1') `
+    -Framework '4.5.1x64' `
+    -TaskList $task `
+    -Parameters @{ 'verbosity' = $verbosity; }

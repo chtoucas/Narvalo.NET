@@ -23,20 +23,21 @@ param(
 
 Set-StrictMode -Version Latest
 
-# Force reload of the Narvalo module.
+# Force reload of the Project module.
 if ($Reload) {
-    Get-Module Narvalo | Remove-Module
+    Get-Module Project | Remove-Module
 }
 
 # Import Narvalo module.
-if (!(Get-Module Narvalo)) {
-    Join-Path $PSScriptRoot 'tools\Narvalo.psm1' | Import-Module 
+if (!(Get-Module Project)) {
+    Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module 
 }
 
-Write-Host "Publishing packages..." -ForegroundColor 'Yellow'
+Write-Host "Publishing packages..." -ForegroundColor 'Green'
 
-$NuGet = Install-NuGet
-
+$nuget = Install-NuGet
 $packagesDir = Get-RepositoryPath 'work', 'packages'
 
-#& "$NuGet" push "$packagesDir\*.nupkg"
+Write-Host 'Not yet implemented!' -BackgroundColor Red -ForegroundColor Yellow
+
+#& $nuget push "$packagesDir\*.nupkg"

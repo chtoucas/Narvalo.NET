@@ -93,7 +93,7 @@
       <_ConfigurationMetadata Condition=" '$(SignAssembly)' == 'true' ">$(_ConfigurationMetadata)+Signed</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(SignAssembly)' != 'true' ">$(_ConfigurationMetadata)+Unsigned</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_ConfigurationMetadata)+SemVer</_ConfigurationMetadata>
-      <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationMetadata)+NotVer</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationMetadata)+FakeVer</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(_ConfigurationMetadata)+Leaky</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(_ConfigurationMetadata)+Closed</_ConfigurationMetadata>
     </PropertyGroup>
@@ -103,7 +103,8 @@
       <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(_BuildMetadata).$(GitCommitHash)</_BuildMetadata>
     </PropertyGroup>
 
-    <!-- For retail builds, we only keep the minimal amount of informations. -->
+    <!-- For retail builds, we only keep the minimal amount of informations.
+         More details are still available in the assembly configuration attribute. -->
     <PropertyGroup Condition=" '$(Retail)' == 'true' ">
       <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(GitCommitHash.Substring(0, 7))</_BuildMetadata>
     </PropertyGroup>

@@ -1,6 +1,7 @@
 ChangeLog
 =========
      
+- (2015/01/02) _Improvement_:_ Replace the build script for MyGet by a PSake task.
 - (2015/01/02) _Enhancement:_ Added git commit hash to assembly informations.
 - (2015/01/02) _Enhancement:_ Created a PowerShell utilities module.
 - (2015/01/02) _Enhancement:_ Created a publication package for our NuGet server. 
