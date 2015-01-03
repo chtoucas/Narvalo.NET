@@ -19,11 +19,6 @@
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
 
-    <GitCommitHash Condition=" '$(GitCommitHash)' == '' ">0000000000000000000000000000000000000000</GitCommitHash>
-
-    <FakeGitCommitHash Condition=" '$(GitCommitHash)' == '0000000000000000000000000000000000000000' ">true</FakeGitCommitHash>
-    <FakeGitCommitHash Condition=" '$(FakeGitCommitHash)' != 'true' ">false</FakeGitCommitHash>
-
     <!-- If true, skip the generation of the assembly documentation. Default to false. -->
     <SkipDocumentation Condition=" '$(SkipDocumentation)' != 'true' ">false</SkipDocumentation>
 

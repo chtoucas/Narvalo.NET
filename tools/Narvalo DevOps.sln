@@ -46,7 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6D2B
 		MSBuild.cmd = MSBuild.cmd
 		Project.psm1 = Project.psm1
 		..\PSakefile.ps1 = ..\PSakefile.ps1
-		..\publish.ps1 = ..\publish.ps1
 		..\tryout.cmd = ..\tryout.cmd
 		..\tryout.rsp = ..\tryout.rsp
 	EndProjectSection

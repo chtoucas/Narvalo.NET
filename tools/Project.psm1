@@ -13,6 +13,26 @@ Set-StrictMode -Version Latest
 # ------------------------------------------------------------------------------
 
 # .SYNOPSIS
+# Exit with the error code 1.
+#
+# .PARAMETER Message
+# The message to be written.
+#
+# .OUTPUTS
+# None.
+function Exit-Error {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $message
+    )
+    
+    Write-Host ''
+    Write-Host $message -BackgroundColor Red -ForegroundColor Yellow
+    Write-Host ''
+    Exit 1
+}
+
+# .SYNOPSIS
 # Get the path to the PSake module.
 #
 # .PARAMETER NoVersion
@@ -58,16 +78,14 @@ function Get-RepositoryPath {
 # System.String. Get-GitCommitHash returns a string that contains the git commit hash.
 # 
 # .NOTES
-# If the git command fails, returns a fake hash.
+# If the git command fails, returns an empty string.
 function Get-GitCommitHash {
     [CmdletBinding()]
     param([switch] $abbrev)
 
     if ($abbrev.IsPresent) {
-        $hash = '0000000'
         $fmt = '%h'
     } else {
-        $hash = '0000000000000000000000000000000000000000'
         $fmt = '%H'
     }
 
@@ -75,6 +93,7 @@ function Get-GitCommitHash {
         $hash = git.exe log -1 --format="$fmt"
     } catch {
         Write-Warning 'Unabled to get the last git commit hash: ' + $_
+        $hash = ''
     }
 
     $hash
@@ -210,7 +229,9 @@ function Join-Multiple {
 # Exports
 # ------------------------------------------------------------------------------
 
-Export-ModuleMember -Function Get-GitCommitHash, 
+Export-ModuleMember -Function `
+    Exit-Error,
+    Get-GitCommitHash, 
     Get-PSakeModulePath,
     Get-RepositoryPath, 
     Install-7Zip,

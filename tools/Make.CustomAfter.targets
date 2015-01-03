@@ -85,7 +85,7 @@
     <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks. 
          NB: MSBuild makes it too hard to get the console output from an executable. -->
     <Warning Text="Won't be able to add the git commit hash to the assembly version information."
-             Condition=" '$(FakeGitCommitHash)' == 'true' " />
+             Condition=" '$(GitCommitHash)' == '' " />
 
     <PropertyGroup>
       <_ConfigurationMetadata>$(Configuration)</_ConfigurationMetadata>
@@ -100,13 +100,13 @@
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
       <_BuildMetadata>$(_ConfigurationMetadata.Replace('+', '.').ToLowerInvariant())</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(_BuildMetadata).$(GitCommitHash)</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(GitCommitHash)' != '' ">$(_BuildMetadata).$(GitCommitHash)</_BuildMetadata>
     </PropertyGroup>
 
     <!-- For retail builds, we only keep the minimal amount of informations.
          More details are still available in the assembly configuration attribute. -->
     <PropertyGroup Condition=" '$(Retail)' == 'true' ">
-      <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(GitCommitHash.Substring(0, 7))</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(GitCommitHash)' != '' ">$(GitCommitHash.Substring(0, 7))</_BuildMetadata>
     </PropertyGroup>
 
     <PropertyGroup>
