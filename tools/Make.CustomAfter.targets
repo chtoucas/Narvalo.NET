@@ -82,25 +82,39 @@
 
     <Error Text="You MUST create a version file to generate the assembly versions: $(VersionFile)."
            Condition=" '$(VersionExists)' != 'true' " />
+    <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks. 
+         NB: MSBuild makes it too hard to get the console output from an executable. -->
+    <Warning Text="Won't be able to add the git commit hash to the assembly version information."
+             Condition=" '$(FakeGitCommitHash)' == 'true' " />
 
     <PropertyGroup>
-      <_BuildMetadata>$(Configuration)</_BuildMetadata>
-      <_BuildMetadata>$(_BuildMetadata)+$(Platform)</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(SignAssembly)' == 'true' ">$(_BuildMetadata)+Signed</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(SignAssembly)' != 'true' ">$(_BuildMetadata)+Unsigned</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_BuildMetadata)+SemVer</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_BuildMetadata)+NotVer</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(_BuildMetadata)+Leaky</_BuildMetadata>
-      <_BuildMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(_BuildMetadata)+Closed</_BuildMetadata>
+      <_ConfigurationMetadata>$(Configuration)</_ConfigurationMetadata>
+      <_ConfigurationMetadata>$(_ConfigurationMetadata)+$(Platform)</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(SignAssembly)' == 'true' ">$(_ConfigurationMetadata)+Signed</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(SignAssembly)' != 'true' ">$(_ConfigurationMetadata)+Unsigned</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(_ConfigurationMetadata)+SemVer</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationMetadata)+NotVer</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(_ConfigurationMetadata)+Leaky</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(_ConfigurationMetadata)+Closed</_ConfigurationMetadata>
+    </PropertyGroup>
 
-      <_ConfigurationMetadata Condition=" '$(Retail)' == 'true' ">Retail</_ConfigurationMetadata>
-      <_ConfigurationMetadata Condition=" '$(Retail)' != 'true' ">$(_BuildMetadata)</_ConfigurationMetadata>
+    <PropertyGroup Condition=" '$(Retail)' != 'true' ">
+      <_BuildMetadata>$(_ConfigurationMetadata.Replace('+', '.').ToLowerInvariant())</_BuildMetadata>
+      <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(_BuildMetadata).$(GitCommitHash)</_BuildMetadata>
+    </PropertyGroup>
 
+    <!-- For retail builds, we only keep the minimal amount of informations. -->
+    <PropertyGroup Condition=" '$(Retail)' == 'true' ">
+      <_BuildMetadata Condition=" '$(FakeGitCommitHash)' != 'true' ">$(GitCommitHash.Substring(0, 7))</_BuildMetadata>
+    </PropertyGroup>
+
+    <PropertyGroup>
       <_AssemblyConfiguration>$(_ConfigurationMetadata) built on $([System.DateTime]::UtcNow.ToString()).</_AssemblyConfiguration>
+
       <_AssemblyVersion>$(MajorVersion).$(MinorVersion).0.0</_AssemblyVersion>
       <_AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(BuildNumber).$(RevisionNumber)</_AssemblyFileVersion>
-      <_AssemblyInformationalVersion>$(SemanticVersion)+$(_BuildMetadata.Replace('+', '.').ToLowerInvariant())</_AssemblyInformationalVersion>
-
+      <_AssemblyInformationalVersion>$(SemanticVersion)</_AssemblyInformationalVersion>
+      <_AssemblyInformationalVersion Condition=" '$(_BuildMetadata)' != '' ">$(SemanticVersion)+$(_BuildMetadata)</_AssemblyInformationalVersion>
       <_AssemblyVersionContent>
         <![CDATA[
 //------------------------------------------------------------------------------
@@ -259,6 +273,12 @@ using System.Reflection;
     <Error Text="You MUST use 'BuildGeneratedVersion=true' to create a NuGet package."
            Condition=" '$(BuildGeneratedVersion)' != 'true' " />
 
+    <!-- The package creation will fail anyway, but better diagnose an invalid configuration before. -->
+    <Error Text="You MUST NOT use 'SkipDocumentation=true' to create a NuGet package."
+           Condition=" '$(SkipDocumentation)' == 'true' " />
+    <Error Text="You MUST NOT use 'SkipCodeContractsReferenceAssembly=true' to create a NuGet package."
+           Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' " />
+
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"
                  OutFile="$(NuspecFile)"
 
@@ -348,7 +368,7 @@ using System.Reflection;
     <!-- For non-retail packages, we change various bits on the fly. -->
     <PropertyGroup>
       <EDGE>EDGE</EDGE>
-      
+
       <NuId>$(NuId).$(EDGE)</NuId>
       <NuTitle Condition=" '$(NuTitle)' != '' ">$(NuTitle) ($(EDGE))</NuTitle>
       <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-T$(BuildStamp)</NuVersion>

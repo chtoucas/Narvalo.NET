@@ -1,37 +1,71 @@
 #Requires -Version 3.0
 
-# Samples:
-# - Default task with detailed informations: 
-#   make.ps1 -verbosity detailed
-# - Quiet run of the Code Analysis task:
-#   make.ps1 CodeAnalysis quiet
-# - Create retail packages, default verbosity level:
-#   make.ps1 Retail
+# .SYNOPSIS
+# Run the PSake build script.
+#
+# .PARAMETER Task
+# The task to be executed.
+#
+# .PARAMETER Verbosity
+# Specifies the amount of information displayed by MSBuild.
+# You can specify the following verbosity levels: 
+#   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
+#
+# .PARAMETER Reload
+# If present, force re-import of custom modules into the current session.
+#
+# .INPUTS
+# The task to be executed.
+#
+# .OUTPUTS
+# None.
+#
+# .EXAMPLE
+# make.ps1 -Verbosity detailed
+# Default task with detailed informations: 
+#
+# .EXAMPLE
+# make.ps1 CodeAnalysis quiet
+# Quiet run of the Code Analysis task:
+#
+# .EXAMPLE
+# make.ps1 Retail
+# Create retail packages with the default verbosity level:
+#
+# .NOTES
+# Contrary to PSake, you can not specify a task list.
+#
+# .LINK
+# https://github.com/psake/psake
 
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $false, Position = 0)]
+    [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
     [string] $task = 'default',
     [Parameter(Mandatory = $false, Position = 1)]
-    [string] $verbosity = 'minimal'
+    [string] $verbosity = 'minimal',
+    [switch] $reload
 )
 
 Set-StrictMode -Version Latest
 
-# Download nuget if needed.
-$nuget = "$PSScriptRoot\tools\NuGet.exe";
-if (!(Test-Path $nuget)) {
-    Write-Host -NoNewline 'Downloading NuGet.exe...'
-    Invoke-WebRequest "https://nuget.org/nuget.exe" -OutFile $nuget
+# Force reload of the Narvalo & PSake modules.
+if ($Reload) {
+    Get-Module Narvalo | Remove-Module
+    Get-Module psake | Remove-Module
 }
 
-# Install PSake if needed. NB: Using "install" is so slow, we use "restore" instead.
-# I would prefer the install mode, since we could exclude the version.
-#& $nuget install psake -OutputDirectory .\packages -ConfigFile .\.nuget\NuGet.Config -ExcludeVersion -Verbosity quiet
-& $nuget restore .nuget\packages.config -PackagesDirectory .\packages -ConfigFile .\.nuget\NuGet.Config -Verbosity quiet
+# Import Narvalo module.
+if (!(Get-Module Narvalo)) {
+    Join-Path $PSScriptRoot 'tools\Narvalo.psm1' | Import-Module 
+}
+
+# Restore packages.
+Install-NuGet | Restore-SolutionPackages
 
 # Import PSake.
-Get-Module psake | Remove-Module
-Import-Module (Get-ChildItem "$PSScriptRoot\packages\psake.*\tools\psake.psm1" | Select-Object -First 1)
+if (!(Get-Module psake)) {
+    Get-PSakeModulePath | Import-Module
+}
 
-Invoke-psake "$PSScriptRoot\PSakefile.ps1" $task -parameters @{ 'verbosity' = $verbosity; }
+Invoke-PSake (Get-RepositoryPath 'PSakefile.ps1') $task -Parameters @{ 'verbosity' = $verbosity; }

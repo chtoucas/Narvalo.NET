@@ -1,6 +1,8 @@
 ChangeLog
 =========
      
+- (2015/01/02) _Enhancement:_ Added git commit hash to assembly informations.
+- (2015/01/02) _Enhancement:_ Created a PowerShell utilities module.
 - (2015/01/02) _Enhancement:_ Created a publication package for our NuGet server. 
 - (2015/01/02) _Improvement:_ Do not set VisualStudioVersion when building
   inside Visual Studio... 

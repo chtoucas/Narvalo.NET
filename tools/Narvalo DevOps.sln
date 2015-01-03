@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{6D2B
 		..\make.ps1 = ..\make.ps1
 		MSBuild.cmd = MSBuild.cmd
 		myget.cmd = myget.cmd
+		Narvalo.psm1 = Narvalo.psm1
 		..\PSakefile.ps1 = ..\PSakefile.ps1
 		..\publish.ps1 = ..\publish.ps1
 		..\tryout.cmd = ..\tryout.cmd

@@ -19,6 +19,11 @@
     <!-- The DummyGeneratedVersion takes precedence over BuildGeneratedVersion. -->
     <BuildGeneratedVersion Condition=" '$(DummyGeneratedVersion)' == 'true' ">false</BuildGeneratedVersion>
 
+    <GitCommitHash Condition=" '$(GitCommitHash)' == '' ">0000000000000000000000000000000000000000</GitCommitHash>
+
+    <FakeGitCommitHash Condition=" '$(GitCommitHash)' == '0000000000000000000000000000000000000000' ">true</FakeGitCommitHash>
+    <FakeGitCommitHash Condition=" '$(FakeGitCommitHash)' != 'true' ">false</FakeGitCommitHash>
+
     <!-- If true, skip the generation of the assembly documentation. Default to false. -->
     <SkipDocumentation Condition=" '$(SkipDocumentation)' != 'true' ">false</SkipDocumentation>
 
@@ -74,7 +79,7 @@
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>false</CodeContractsEmitXMLDocs>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' " >
     <!-- Whenever we build the CC reference assembly we also patch the documentation. -->
     <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
@@ -184,7 +189,7 @@
 
     <Warning Text="You SHOULD NOT create a version file when the project uses dummy assembly versioning."
              Condition=" '$(VersionExists)' == 'true' And '$(DummyGeneratedVersion)' == 'true' " />
-    
+
     <Error Text="You MUST create a version file when the project is intended to be packaged: $(VersionFile)."
            Condition=" '$(NuProjectExists)' == 'true' And '$(NuVersion)' == '' " />
   </Target>
@@ -195,7 +200,7 @@
     <ValidateVersionNumber Value="$(MinorVersion)" Name="MinorVersion" />
     <ValidateVersionNumber Value="$(PatchVersion)" Name="PatchVersion" />
     <ValidatePreReleaseLabel Value="$(PreReleaseLabel)" Condition=" '$(PreReleaseLabel)' != '' " />
-    
+
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
     <Warning Text="Are you sure that you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
              Condition=" $(MajorVersion) &lt; 1 And '$(PreReleaseLabel)' != '' " />

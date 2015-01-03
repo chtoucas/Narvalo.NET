@@ -1,15 +1,15 @@
-Properties {
-    # WARNING: This file is supposed to be at the root of the repository.
-    $RepositoryRoot = $PSScriptRoot
 
+Properties {
+    Assert ($verbosity -ne $null) "`$verbosity should not be null. E.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
+    
     # Console parameters.
-    # NB: $verbosity should have been already set in make.ps1.
-    if ($verbosity -eq $null) { $verbosity = 'minimal' }
     $BuildArgs = "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
-    $Everything = "$RepositoryRoot\tools\Make.proj"
-    $Foundations = "$RepositoryRoot\tools\Make.Foundations.proj"
+    $Everything = Get-RepositoryPath 'tools', 'Make.proj'
+    $Foundations = Get-RepositoryPath 'tools', 'Make.Foundations.proj'
     
+    $GitCommitHash = Get-GitCommitHash
+
     # Packaging properties:
     # - Release configuration
     # - Generate assembly versions (necessary for NuGet packaging)
@@ -19,6 +19,7 @@ Properties {
     $PackagingProps = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
+        "/p:GitCommitHash=$GitCommitHash",
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=false'
@@ -120,26 +121,33 @@ Task SecurityAnalysis {
 # - Retail-Build, only package Narvalo.Build project
 
 Task Retail {
-    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true'
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps `
+        '/p:Retail=true'
 }
 
 Task Retail-Core {
-    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Core_'
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps `
+        '/p:Retail=true',
+        '/p:Filter=_Core_'
 }
 
 Task Retail-Mvp {
-    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Mvp_'
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps `
+        '/p:Retail=true',
+        '/p:Filter=_Mvp_'
 }
 
 Task Retail-Build {
-    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps '/p:Retail=true;Filter=_Build_'
+    MSBuild $Foundations $BuildArgs $RetailTargets $PackagingProps `
+        '/p:Retail=true',
+        '/p:Filter=_Build_'
 }
 
 # ==============================================================================
 
 # Delete work directory.
 Task FullClean {
-    $workDir = "$RepositoryRoot\work\"
+    $workDir = Get-RepositoryPath 'work'
 
     if (Test-Path $workDir) {
         Remove-Item $workDir -Force -Recurse
