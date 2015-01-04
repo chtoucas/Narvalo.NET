@@ -27,6 +27,7 @@ Set-StrictMode -Version Latest
 #
 # .LINK
 # http://git-scm.com/docs/git-clean
+# http://stackoverflow.com/questions/61212/remove-local-untracked-files-from-my-current-git-branch
 function Clear-Repository {
     [CmdletBinding()]
     param(
@@ -50,20 +51,14 @@ function Clear-Repository {
     Write-Verbose 'Cleaning repository...'
 
     $opts = 'clean'
-    if ($directories) {
-        $opts = $opts, '-d'
-    }
-    if ($force) {
-        $opts = $opts, '-f'
-    }
-    if ($dryRun) {
-        $opts = $opts, '-n'
-    }
+    if ($directories) { $opts = $opts, '-d' }
+    if ($force) { $opts = $opts, '-f' }
+    if ($dryRun) { $opts = $opts, '-n' }
 
     try {
         Push-Location $script:RepositoryRoot
 
-        git.exe $opts
+        git.exe clean -d -n
     } catch {
         Exit-Error "Unabled to clean repository: $_"
     } finally {
