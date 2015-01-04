@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Web.Html
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Web.Html
 {
     using System;
     using Microsoft.Web.UnitTestUtil;
