@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 // Ce code est inspiré de la classe Omari.Web.UI.ControlBuilderExtensions.
 // Par rapport au code d'origine, on a effectué les changements suivants :
