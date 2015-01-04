@@ -2,7 +2,7 @@ work/
 StyleCopViolations.xml
 TryOut.proj
 
-# La suite est tirée de :
+# Follow the sample ignore file from GitHub
 #   https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 ## Ignore Visual Studio temporary files, build results, and
