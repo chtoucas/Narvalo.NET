@@ -13,6 +13,59 @@ Set-StrictMode -Version Latest
 # ------------------------------------------------------------------------------
 
 # .SYNOPSIS
+# Remove untracked files from the working tree.
+#
+# .PARAMETER Directories
+# If present, remove untracked directories in addition to untracked files.
+#
+# .PARAMETER Force
+# If present, if the Git configuration variable clean.requireForce is not set 
+# to false, git clean will refuse to run unless given -f, -n or -i.
+#
+# .PARAMETER DryRun
+# Don't actually remove anything, just show what would be done.
+#
+# .LINK
+# http://git-scm.com/docs/git-clean
+function Clear-Repository {
+    [CmdletBinding()]
+    param(
+        [Alias('d')] [switch] $directories,
+        [Alias('f')] [switch] $force,
+        [Alias('n')] [switch] $dryRun
+    )
+
+    $yn = Read-Host 'Beware this will permanently delete all untracked files. Are you sure [y/N]?'
+    if ($yn -ne 'y') {
+        Write-Host 'Cancelling on user request.'
+        Exit 0
+    }
+
+    Write-Verbose 'Cleaning repository...'
+
+    $cmd = "git.exe clean"
+    if ($directories) {
+        $cmd = "$cmd -d"
+    }
+    if ($force) {
+        $cmd = "$cmd -f"
+    }
+    if ($dryRun) {
+        $cmd = "$cmd -n"
+    }
+
+    try {
+        Push-Location $script:RepositoryRoot
+
+        Write-Host $cmd
+    } catch {
+        Exit-Error "Unabled to clean repository: $_"
+    } finally {
+        Pop-Location
+    }
+}
+
+# .SYNOPSIS
 # Exit with the error code 1.
 #
 # .PARAMETER Message
@@ -92,7 +145,7 @@ function Get-GitCommitHash {
     try {
         $hash = git.exe log -1 --format="$fmt"
     } catch {
-        Write-Warning 'Unabled to get the last git commit hash: ' + $_
+        Write-Warning "Unabled to get the last git commit hash: $_"
         $hash = ''
     }
 
@@ -107,7 +160,9 @@ function Get-GitCommitHash {
 function Install-7Zip {
     [CmdletBinding()]
     param()
-
+    
+    Write-Verbose 'Installing 7-Zip...'
+    
     $sevenZip = Get-RepositoryPath 'tools', '7za.exe'
 
     [System.Uri] 'http://narvalo.org/7z936.exe' | Download-Source -Path $sevenZip
@@ -123,7 +178,9 @@ function Install-7Zip {
 function Install-NuGet {
     [CmdletBinding()]
     param()
-
+    
+    Write-Verbose 'Installing NuGet...'
+    
     $nuget = Get-RepositoryPath 'tools', 'NuGet.exe'
 
     [System.Uri] 'https://nuget.org/nuget.exe' | Download-Source -Path $nuget
@@ -148,10 +205,14 @@ function Install-NuGet {
 function Install-PSake {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $nuget
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] [string] $nuget
     )
 
     Write-Verbose 'Installing PSake...'
+    
+    if ($nuget -eq $null) {
+        $nuget = Install-NuGet
+    }
 
     & $nuget install psake `
        -ExcludeVersion 
@@ -176,10 +237,14 @@ function Install-PSake {
 function Restore-SolutionPackages {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $nuget
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] [string] $nuget
     )
 
     Write-Verbose 'Restoring solution packages...'
+    
+    if ($nuget -eq $null) {
+        $nuget = Install-NuGet
+    }
 
     & $nuget restore (Get-RepositoryPath '.nuget', 'packages.config') `
         -PackagesDirectory (Get-RepositoryPath 'packages') `
@@ -198,9 +263,9 @@ function Download-Source {
         [Parameter(Mandatory = $true, Position = 1)] [string] $path
     )
 
-    Write-Verbose "Downloading $source..."
-
     if (!(Test-Path $path -PathType Leaf)) {
+        Write-Verbose "Downloading $source..."
+
         Invoke-WebRequest $source -OutFile $path
     }
 }
@@ -230,6 +295,7 @@ function Join-Multiple {
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
+    Clear-Repository,
     Exit-Error,
     Get-GitCommitHash, 
     Get-PSakeModulePath,

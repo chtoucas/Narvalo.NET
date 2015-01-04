@@ -3,25 +3,25 @@
 # .SYNOPSIS
 # Run the PSake build script.
 #
-# .PARAMETER Task
-# The task to be executed.
+# .PARAMETER TaskList
+# The list of tasks to be executed.
 #
 # .PARAMETER Verbosity
 # Specifies the amount of information displayed by MSBuild.
-# You can specify the following verbosity levels: 
+# You can use the following verbosity levels: 
 #   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
 #
+# .PARAMETER Force
+# If present, force re-import of custom modules into the current session.
+#
 # .PARAMETER Help
-# If present, display help and exit.
+# If present, display help then exit.
 #
 # .PARAMETER Quiet
 # If present, force MSBuild to run quietly.
 #
 # .PARAMETER Retail
 # If present, packages/assemblies are built for retail.
-#
-# .PARAMETER Force
-# If present, force re-import of custom modules into the current session.
 #
 # .INPUTS
 # The task to be executed.
@@ -59,8 +59,6 @@ param(
 
 Set-StrictMode -Version Latest
 
-$PSakefile = (Get-RepositoryPath 'PSakefile.ps1')
-
 # Force MSBuild to run quietly?
 if ($quiet) {
     $verbosity = 'quiet'
@@ -76,6 +74,9 @@ if ($force) {
 if (!(Get-Module Project)) {
     Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module 
 }
+
+# Path to the PSake script.
+$PSakefile = (Get-RepositoryPath 'PSakefile.ps1')
 
 # Restore packages.
 Install-NuGet | Restore-SolutionPackages
