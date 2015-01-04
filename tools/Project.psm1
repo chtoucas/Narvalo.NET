@@ -27,17 +27,20 @@ Set-StrictMode -Version Latest
 function Clear-Repository {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $git,
         [Alias('n')] [switch] $dryRun
     )
 
+    # Sadly, it will keep the response in the console history.
     $yn = Read-Host 'Beware this will permanently delete all untracked files. Are you sure [y/N]?'
     if ($yn -ne 'y') {
         # NB: This is case insensitive.
-        Write-Host 'Cancelling on user request.'
+        Write-Verbose 'Cancelling on user request.'
         Exit 0
     }
-
-    if (!(Assert-GitAvailable)) { return }
+    
+    $git = ?? $git { Get-Git }
+    if ($git -eq $null) { return }
 
     Write-Verbose 'Cleaning repository...'
 
@@ -46,10 +49,10 @@ function Clear-Repository {
 
         # We ignore folders named 'Internal' (some of them only contain linked files).
         if ($dryRun) {
-            git.exe clean -d -n -e 'Internal'
+            . $git clean -d -n -e 'Internal'
         } else {
             # Force cleanup, ie ignore clean.requireForce
-            git.exe clean -d -f -e 'Internal'
+            . $git clean -d -f -e 'Internal'
         }
     } catch {
         Exit-Error "Unabled to clean repository: $_"
@@ -79,7 +82,7 @@ function Exit-Error {
 }
 
 # .SYNOPSIS
-# Find csharp files without copyright header.
+# Find C# files without copyright header.
 #
 # .PARAMETER Directory
 # The directory to traverse.
@@ -93,12 +96,49 @@ function Find-FilesWithoutCopyright {
         [Alias('d')] [string] $directory
     )
 
-    # Find all csharp source files, ignoring designer generated files.
+    # Find all C# source files, ignoring designer generated files.
     Get-ChildItem $directory -Recurse -Filter *.cs -Exclude *.Designer.cs |
         # Ignore temporary build directories.
         ? { -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
         ? { Assert-MissingCopyright $_.FullName } | 
         select FullName
+}
+
+# .SYNOPSIS
+# Get the last git commit hash.
+#
+# .PARAMETER Abbrev
+# If present, finds the abbreviated commit hash.
+#
+# .OUTPUTS
+# System.String. Get-GitCommitHash returns a string that contains the git commit hash.
+# 
+# .NOTES
+# If the git command fails, returns an empty string.
+function Get-GitCommitHash {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $git,
+        [switch] $abbrev
+    )
+
+    $git = ?? $git { Get-Git }
+    if ($git -eq $null) { return }
+
+    if ($abbrev.IsPresent) {
+        $fmt = '%h'
+    } else {
+        $fmt = '%H'
+    }
+
+    try {
+        $hash = . $git log -1 --format="$fmt"
+    } catch {
+        Write-Warning "Unabled to get the last git commit hash: $_"
+        $hash = ''
+    }
+
+    $hash
 }
 
 # .SYNOPSIS
@@ -135,39 +175,6 @@ function Get-RepositoryPath {
     )
 
     Get-RepositoryRoot | Join-Path -ChildPath (Join-Multiple $parts)
-}
-
-# .SYNOPSIS
-# Get the last git commit hash.
-#
-# .PARAMETER Abbrev
-# If present, finds the abbreviated commit hash.
-#
-# .OUTPUTS
-# System.String. Get-GitCommitHash returns a string that contains the git commit hash.
-# 
-# .NOTES
-# If the git command fails, returns an empty string.
-function Get-GitCommitHash {
-    [CmdletBinding()]
-    param([switch] $abbrev)
-    
-    if (!(Assert-GitAvailable)) { return }
-
-    if ($abbrev.IsPresent) {
-        $fmt = '%h'
-    } else {
-        $fmt = '%H'
-    }
-
-    try {
-        $hash = git.exe log -1 --format="$fmt"
-    } catch {
-        Write-Warning "Unabled to get the last git commit hash: $_"
-        $hash = ''
-    }
-
-    $hash
 }
 
 # .SYNOPSIS
@@ -223,7 +230,7 @@ function Install-NuGet {
 function Install-PSake {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] [string] $nuget
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $nuget
     )
 
     Write-Verbose 'Installing PSake...'
@@ -242,7 +249,53 @@ function Install-PSake {
 }
 
 # .SYNOPSIS
-# Add a copyright header to all csharp files missing one.
+# Mimic the ?? operator from C# but not quite the same.
+function Invoke-NullCoalescing {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] [AllowNull()] $value,
+        [Parameter(Mandatory = $true, Position = 1)] $alternate
+    )
+
+    if ($value -ne $null) {
+        $result = $value
+    } else {
+        if ($alternate -is [ScriptBlock]) {
+            $result = & $alternate
+        } else {
+            $result = $alternate
+        }
+    }
+
+    $result
+}
+
+# .SYNOPSIS
+# Mimic the ?: operator from C#.
+function Invoke-Ternary {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [bool] $predicate,
+
+        [Parameter(Mandatory = $true, Position = 1)]
+        [AllowNull()]
+        $then,
+
+        [Parameter(Mandatory = $true, Position = 2)] 
+        [AllowNull()]
+        $otherwise
+    )
+
+    if ($predicate) {
+        return $then
+    } else {
+        return $otherwise
+    }
+}
+
+# .SYNOPSIS
+# Add a copyright header to all C# files missing one.
 #
 # .PARAMETER Directory
 # The directory to traverse.
@@ -296,7 +349,7 @@ function Repair-MissingCopyright {
 function Restore-SolutionPackages {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] [string] $nuget
+        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $nuget
     )
 
     Write-Verbose 'Restoring solution packages...'
@@ -314,15 +367,6 @@ function Restore-SolutionPackages {
 # ------------------------------------------------------------------------------
 # Private methods
 # ------------------------------------------------------------------------------
-
-function Assert-GitAvailable {
-    if (!(Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)) { 
-       Write-Warning 'This function requires the git command to be in your PATH.'
-       return $false
-    }
-
-    return $true
-}
 
 function Assert-MissingCopyright {
     [CmdletBinding()]
@@ -351,6 +395,16 @@ function Download-Source {
     }
 }
 
+function Get-Git {
+    $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
+
+    if ($git -eq $null) { 
+       Write-Warning 'This function requires the git command to be in your PATH.'
+    }
+
+    return $git.Path
+}
+
 function Get-RepositoryRoot {
     $script:RepositoryRoot
 }
@@ -372,19 +426,32 @@ function Join-Multiple {
 }
 
 # ------------------------------------------------------------------------------
+# Aliases
+# ------------------------------------------------------------------------------
+
+Set-Alias ?? Invoke-NullCoalescing
+Set-Alias ?: Invoke-Ternary
+
+# ------------------------------------------------------------------------------
 # Exports
 # ------------------------------------------------------------------------------
 
-Export-ModuleMember -Function `
-    Clear-Repository,
-    Exit-Error,
-    Find-FilesWithoutCopyright,
-    Get-GitCommitHash, 
-    Get-PSakeModulePath,
-    Get-RepositoryPath, 
-    Install-7Zip,
-    Install-NuGet, 
-    Install-PSake, 
-    Repair-FilesWithoutCopyright,
-    Repair-MissingCopyright,
-    Restore-SolutionPackages
+Export-ModuleMember `
+    -Function `
+        Clear-Repository,
+        Exit-Error,
+        Find-FilesWithoutCopyright,
+        Get-GitCommitHash, 
+        Get-PSakeModulePath,
+        Get-RepositoryPath, 
+        Install-7Zip,
+        Install-NuGet, 
+        Install-PSake, 
+        Invoke-NullCoalescing,
+        Invoke-Ternary,
+        Repair-FilesWithoutCopyright,
+        Repair-MissingCopyright,
+        Restore-SolutionPackages `
+    -Alias `
+        ??,
+        ?:

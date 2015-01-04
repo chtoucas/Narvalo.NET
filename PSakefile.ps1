@@ -101,6 +101,13 @@ Task FullBuild -Description 'Full build then run tests.' {
         '/p:SourceAnalysisEnabled=true'
 }
 
+Task FullClean -ContinueOnError -Description 'Delete work directory.' {
+    # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
+    if (Test-Path $WorkRoot) {
+        Remove-Item $WorkRoot -Force -Recurse -ErrorAction SilentlyContinue
+    }
+}
+
 Task CodeAnalysis -Description 'Run Code Analysis (slow).' {
     MSBuild $Everything $Opts $StaticAnalysisProps `
         '/t:Build', 
@@ -123,7 +130,7 @@ Task SecurityAnalysis -Description 'Run SecAnnotate on Foundations (slow).' {
 } -Alias SA
 
 # ------------------------------------------------------------------------------
-# Package tasks
+# Packaging tasks
 # ------------------------------------------------------------------------------
 
 Task Package -depends Validate-Packaging -Description 'Package all projects.' {
@@ -141,6 +148,12 @@ Task Package-Mvp -depends Validate-Packaging -Description 'Package only MVP proj
 Task Package-Build -depends Validate-Packaging -Description 'Package the Narvalo.Build project.' {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Build_'
 } -Alias PackBuild
+
+Task Validate-Packaging -Description 'Validate packaging tasks.' {
+    if ($retail -and ($GitCommitHash -eq '')) {
+        Exit-Error 'When building retail packages, the git commit hash MUST not be empty.'
+    }
+}
 
 # ------------------------------------------------------------------------------
 # Publish tasks
@@ -187,6 +200,44 @@ Task MyGet-Zip -Description 'Zip MyGet server.' {
 
 Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `
     -Description 'Publish MyGet server.'
+    
+# ------------------------------------------------------------------------------
+# Maintenance tasks
+# ------------------------------------------------------------------------------
+
+Task Check -depends Check-Copyright -Description 'Perform extensive checks on the repository (slow)' {
+    # TODO:
+    # Check hidden files
+    # Check DependentUpon, SubType files
+    # Check status & ignored & untracked: git status -u --ignored
+    # Check files ignored by StyleCop
+}
+
+Task Check-Copyright -Description 'Find files without copyright header.' {
+    # Check copyright headers.
+    $copyrightCount = ('samples', 'src', 'tests' | 
+        % { (Get-RepositoryPath $_) } |
+        % { Find-FilesWithoutCopyright -d $_ }).Count
+
+    if ($copyrightCount -gt 0) {
+        Write-Warning "There are $copyrightCount files without copyright header. You can use the 'FixCopyright' task to correct this."
+    } else {
+        Write-Host '  No problem found with copyright header.'
+    }
+}
+
+Task Fix-Copyright -Description 'Add missing copyright headers (unsafe).' {
+    'samples', 'src', 'tests' | 
+        % { (Get-RepositoryPath $_) } |
+        % { Repair-FilesWithoutCopyright -d $_ }
+}
+
+Task Reset-Repository {
+    # TODO:
+    # Strong: Git reset (WARNING: remove ALL ignored files)
+    # Light: Remove nuget.exe, 7zip.exe, FullClean, remove obj & bin, packages
+    Exit-Error 'Not yet implemented!'
+}
 
 # ------------------------------------------------------------------------------
 # Miscs
@@ -202,26 +253,7 @@ Task Environment -Description 'Display the build environment.' {
     Write-Host "  PSake             v$version"
 }
 
-Task FixCopyright -Description 'Add missing copyright headers.' {
-    'samples', 'src', 'tests' | 
-        % { (Get-RepositoryPath $_) } |
-        % { Repair-FilesWithoutCopyright -d $_ }
-}
-
-# Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-Task FullClean -ContinueOnError -Description 'Delete work directory.' {
-    if (Test-Path $WorkRoot) {
-        Remove-Item $WorkRoot -Force -Recurse -ErrorAction SilentlyContinue
-    }
-}
-
 Task MSBuildVersion -Description 'Display the MSBuild version.' {
     MSBuild '/version'
-}
-
-Task Validate-Packaging -Description 'Validate packaging tasks.' {
-    if ($retail -and ($GitCommitHash -eq '')) {
-        Exit-Error 'When building in retail mode, the git commit hash MUST not be empty.'
-    }
 }
 

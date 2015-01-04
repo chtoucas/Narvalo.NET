@@ -34,8 +34,6 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.   
 
 MSBuild files:          
-- Enhancement: Publish non retail packages to a remove MyGet server and
-  publish retail packages to NuGet server.
 - Bug: Code Analysis problems. Whatever we use for CodeAnalysisSucceededFile, 
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or 
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
@@ -60,9 +58,9 @@ Not yet planned
 Build Automation:     
 - Enhancement: PSake CI target should build and test all possible configurations, 
   currently Debug|Release, AnyCPU, with or without visible internals.
-- Enhancement: Script to push packages to NuGet with extensive checks. For instance,
-  we should not try to publish a version already available on NuGet, check 
-  the dependencies tree.            
+- Enhancement: Script to push packages to NuGet (or MyGet) with extensive checks. 
+  For instance, we should not try to publish a version already available on NuGet, 
+  check the dependencies tree.            
 - Enhancement: Enable T4-regeneration in VS since, for us, it won't work
   when building from the command-line.
 - Enhancement: Add Git commit hash to assembly configuration or info?
