@@ -1,3 +1,5 @@
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
 namespace Narvalo.Web
 {
     using System;
@@ -66,7 +68,7 @@ namespace Narvalo.Web
             IReadOnlyCollection<ValidationEventArgs> errors = null;
 
             using (var reader = new StreamReader(captureStream.StreamCopy)) {
-                // FIXME: Utiliser les bons param�tres.
+                // FIXME: Utiliser les bons paramètres.
                 var validator = new XmlValidator(new XmlReaderSettings());
                 if (!validator.Validate(reader)) {
                     errors = validator.ValidationErrors;

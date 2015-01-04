@@ -1,3 +1,5 @@
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
 namespace Narvalo.Benchmarking
 {
     using System;
@@ -39,7 +41,7 @@ namespace Narvalo.Benchmarking
             get { return Duration.Ticks / Iterations; }
         }
 
-        #region Op�rateurs.
+        #region Opérateurs.
 
         /// <summary />
         public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)

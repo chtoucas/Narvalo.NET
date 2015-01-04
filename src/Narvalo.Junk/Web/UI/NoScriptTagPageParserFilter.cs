@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Web.UI
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Web.UI
 {
     // Cette classe est adaptée de :
     //  http://haacked.com/archive/2009/05/05/page-view-lockdown.aspx

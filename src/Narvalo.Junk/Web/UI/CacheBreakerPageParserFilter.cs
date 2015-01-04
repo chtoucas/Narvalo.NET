@@ -1,4 +1,6 @@
-﻿namespace Narvalo.Web.UI
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Web.UI
 {
     // Ce classe est adaptée de :
     //  http://www.sergeyakopov.com/2011/05/hooking-into-page-parsing-with-pageparserfilter

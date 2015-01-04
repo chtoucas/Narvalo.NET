@@ -1,4 +1,6 @@
-﻿namespace Narvalo.GhostScript
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.GhostScript
 {
     using System;
     using Narvalo.GhostScript.Internal;

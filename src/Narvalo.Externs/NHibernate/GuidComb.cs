@@ -1,4 +1,6 @@
-﻿// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Courtesy of NHibernate: NHibernate.Id.GuidCombGenerator:
 // https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Id/GuidCombGenerator.cs
 namespace Narvalo.Externs.NHibernate
 {

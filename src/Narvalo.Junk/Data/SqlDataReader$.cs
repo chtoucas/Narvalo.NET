@@ -1,4 +1,6 @@
-﻿// Au mieux on implémente les méthodes suivantes :
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// Au mieux on implémente les méthodes suivantes :
 // - T GetValue(this SqlDataReader @this, string name)
 // - T GetValue(this SqlDataReader @this, int ordinal, T defaultValue)
 // - T GetValue(this SqlDataReader @this, string name, T defaultValue)
