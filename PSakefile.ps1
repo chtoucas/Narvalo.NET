@@ -202,7 +202,7 @@ Task Environment -Description 'Display the build environment.' {
     Write-Host "  PSake             v$version"
 }
 
-Task FixCopyright -Description 'Add copyright header.' {
+Task FixCopyright -Description 'Add missing copyright headers.' {
     'samples', 'src', 'tests' | 
         % { (Get-RepositoryPath $_) } |
         % { Repair-FilesWithoutCopyright -d $_ }

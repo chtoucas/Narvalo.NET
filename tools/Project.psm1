@@ -37,7 +37,7 @@ function Clear-Repository {
         Exit 0
     }
 
-    if (!(Assert-GitFound)) { return }
+    if (!(Assert-GitAvailable)) { return }
 
     Write-Verbose 'Cleaning repository...'
 
@@ -152,7 +152,7 @@ function Get-GitCommitHash {
     [CmdletBinding()]
     param([switch] $abbrev)
     
-    if (!(Assert-GitFound)) { return }
+    if (!(Assert-GitAvailable)) { return }
 
     if ($abbrev.IsPresent) {
         $fmt = '%h'
@@ -315,7 +315,7 @@ function Restore-SolutionPackages {
 # Private methods
 # ------------------------------------------------------------------------------
 
-function Assert-GitFound {
+function Assert-GitAvailable {
     if (!(Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)) { 
        Write-Warning 'This function requires the git command to be in your PATH.'
        return $false
