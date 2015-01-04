@@ -88,8 +88,9 @@ if (!(Get-Module psake)) {
 
 # Display help?
 if ($help) {
-    Get-Help $MyInvocation.MyCommand.Path
-    Write-Host 'LIST OF AVAILABLE TASKS' -NoNewline
+    #Get-Help $MyInvocation.MyCommand.Path
+    Write-Host ''
+    Write-Host 'LIST OF AVAILABLE TASKS' -ForeGround Green
     Invoke-PSake $PSakefile -NoLogo -Docs
     Exit 0
 }
@@ -102,10 +103,6 @@ if ($retail) {
 }
 
 Write-Host $logo -ForegroundColor Green
-
-Clear-Repository -f -n -d 
-
-Exit 0
 
 # Invoke PSake.
 Invoke-PSake $PSakefile `

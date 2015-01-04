@@ -192,12 +192,6 @@ Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `
 # Miscs
 # ------------------------------------------------------------------------------
 
-Task Validate-Packaging -Description 'Validate packaging tasks.' {
-    if ($retail -and ($GitCommitHash -eq '')) {
-        Exit-Error 'When building in retail mode, the git commit hash MUST not be empty.'
-    }
-}
-
 Task Environment -Description 'Display the build environment.' {
     $msbuild = MSBuild $Opts '/version'
     $framework = $psake.context.peek().config.framework
@@ -208,14 +202,26 @@ Task Environment -Description 'Display the build environment.' {
     Write-Host "  PSake             v$version"
 }
 
+Task FixCopyright -Description 'Add copyright header.' {
+    'samples', 'src', 'tests' | 
+        % { (Get-RepositoryPath $_) } |
+        % { Repair-FilesWithoutCopyright -d $_ }
+}
+
+# Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
+Task FullClean -ContinueOnError -Description 'Delete work directory.' {
+    if (Test-Path $WorkRoot) {
+        Remove-Item $WorkRoot -Force -Recurse -ErrorAction SilentlyContinue
+    }
+}
+
 Task MSBuildVersion -Description 'Display the MSBuild version.' {
     MSBuild '/version'
 }
 
-# Sometimes this task fails for some obscure reasons.
-Task FullClean -ContinueOnError -Description 'Delete work directory.' {
-    if (Test-Path $WorkRoot) {
-        Remove-Item $WorkRoot -Force -Recurse -ErrorAction SilentlyContinue
+Task Validate-Packaging -Description 'Validate packaging tasks.' {
+    if ($retail -and ($GitCommitHash -eq '')) {
+        Exit-Error 'When building in retail mode, the git commit hash MUST not be empty.'
     }
 }
 

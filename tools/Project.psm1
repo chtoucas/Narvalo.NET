@@ -7,6 +7,7 @@ Set-StrictMode -Version Latest
 # ------------------------------------------------------------------------------
 
 [string] $script:RepositoryRoot = (Get-Item $PSScriptRoot).Parent.FullName
+[string] $script:copyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public methods
@@ -15,50 +16,41 @@ Set-StrictMode -Version Latest
 # .SYNOPSIS
 # Remove untracked files from the working tree.
 #
-# .PARAMETER Directories
-# If present, remove untracked directories in addition to untracked files.
-#
-# .PARAMETER Force
-# If present, if the Git configuration variable clean.requireForce is not set 
-# to false, git clean will refuse to run unless given -f, -n or -i.
-#
 # .PARAMETER DryRun
 # Don't actually remove anything, just show what would be done.
 #
+# .NOTES
+# We do not remove ignored files (see -x and -X options from git).
+# 
 # .LINK
 # http://git-scm.com/docs/git-clean
-# http://stackoverflow.com/questions/61212/remove-local-untracked-files-from-my-current-git-branch
 function Clear-Repository {
     [CmdletBinding()]
     param(
-        [Alias('d')] [switch] $directories,
-        [Alias('f')] [switch] $force,
         [Alias('n')] [switch] $dryRun
     )
 
     $yn = Read-Host 'Beware this will permanently delete all untracked files. Are you sure [y/N]?'
     if ($yn -ne 'y') {
+        # NB: This is case insensitive.
         Write-Host 'Cancelling on user request.'
         Exit 0
     }
 
-    if (Get-Command "git.exe" -ErrorAction SilentlyContinue) { 
-       Write-Host "Git found"
-    } else {
-       Write-Error "Git not found"
-    }
+    if (!(Assert-GitFound)) { return }
 
     Write-Verbose 'Cleaning repository...'
-
-    $opts = 'clean'
-    if ($directories) { $opts = $opts, '-d' }
-    if ($force) { $opts = $opts, '-f' }
-    if ($dryRun) { $opts = $opts, '-n' }
 
     try {
         Push-Location $script:RepositoryRoot
 
-        git.exe clean -d -n
+        # We ignore folders named 'Internal' (some of them only contain linked files).
+        if ($dryRun) {
+            git.exe clean -d -n -e 'Internal'
+        } else {
+            # Force cleanup, ie ignore clean.requireForce
+            git.exe clean -d -f -e 'Internal'
+        }
     } catch {
         Exit-Error "Unabled to clean repository: $_"
     } finally {
@@ -87,6 +79,29 @@ function Exit-Error {
 }
 
 # .SYNOPSIS
+# Find csharp files without copyright header.
+#
+# .PARAMETER Directory
+# The directory to traverse.
+#
+# .OUTPUTS
+# None.
+function Find-FilesWithoutCopyright {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [Alias('d')] [string] $directory
+    )
+
+    # Find all csharp source files, ignoring designer generated files.
+    Get-ChildItem $directory -Recurse -Filter *.cs -Exclude *.Designer.cs |
+        # Ignore temporary build directories.
+        ? { -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
+        ? { Assert-MissingCopyright $_.FullName } | 
+        select FullName
+}
+
+# .SYNOPSIS
 # Get the path to the PSake module.
 #
 # .PARAMETER NoVersion
@@ -101,7 +116,7 @@ function Get-PSakeModulePath {
     if ($noVersion.IsPresent) {
         Get-RepositoryPath 'packages\psake\tools\psake.psm1'
     } else {
-        (Get-ChildItem (Get-RepositoryPath 'packages\psake.*\tools\psake.psm1') | Select-Object -First 1)
+        (Get-ChildItem (Get-RepositoryPath 'packages\psake.*\tools\psake.psm1') | select -First 1)
     }
 }
 
@@ -136,6 +151,8 @@ function Get-RepositoryPath {
 function Get-GitCommitHash {
     [CmdletBinding()]
     param([switch] $abbrev)
+    
+    if (!(Assert-GitFound)) { return }
 
     if ($abbrev.IsPresent) {
         $fmt = '%h'
@@ -225,6 +242,47 @@ function Install-PSake {
 }
 
 # .SYNOPSIS
+# Add a copyright header to all csharp files missing one.
+#
+# .PARAMETER Directory
+# The directory to traverse.
+#
+# .OUTPUTS
+# None.
+function Repair-FilesWithoutCopyright {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('d')] [string] $directory
+    )
+
+    Find-FilesWithoutCopyright $directory | % { Repair-MissingCopyright $_.FullName }
+}
+
+# .SYNOPSIS
+# Add a copyright header to a file.
+#
+# .PARAMETER Path
+# The file to repair.
+#
+# .OUTPUTS
+# None.
+function Repair-MissingCopyright {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('p')] [string] $path
+    )
+
+    Write-Host "Adding copyright header to $path..."
+
+    $lines = New-Object System.Collections.ArrayList(, (Get-Content -LiteralPath $path))
+    $lines.Insert(0, '')
+    $lines.Insert(0, $script:copyrightHeader)
+    $lines | Set-Content -LiteralPath $path -Encoding UTF8
+}
+
+# .SYNOPSIS
 # Restore packages.
 #
 # .PARAMETER NuGet
@@ -256,6 +314,28 @@ function Restore-SolutionPackages {
 # ------------------------------------------------------------------------------
 # Private methods
 # ------------------------------------------------------------------------------
+
+function Assert-GitFound {
+    if (!(Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)) { 
+       Write-Warning 'This function requires the git command to be in your PATH.'
+       return $false
+    }
+
+    return $true
+}
+
+function Assert-MissingCopyright {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] [string] $path
+    )
+
+    Write-Verbose "Processing $path..."
+
+    $line = Get-Content -LiteralPath $path -totalCount 1;
+
+    return !$line -or !$line.StartsWith("// Copyright")
+}
 
 function Download-Source {
     [CmdletBinding()]
@@ -298,10 +378,13 @@ function Join-Multiple {
 Export-ModuleMember -Function `
     Clear-Repository,
     Exit-Error,
+    Find-FilesWithoutCopyright,
     Get-GitCommitHash, 
     Get-PSakeModulePath,
     Get-RepositoryPath, 
     Install-7Zip,
     Install-NuGet, 
     Install-PSake, 
+    Repair-FilesWithoutCopyright,
+    Repair-MissingCopyright,
     Restore-SolutionPackages
