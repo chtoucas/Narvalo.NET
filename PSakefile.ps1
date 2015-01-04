@@ -14,8 +14,8 @@ Properties {
     $WorkRoot = Get-RepositoryPath 'work' 
     $PackagesDir = Get-RepositoryPath 'work', 'packages'
 
-    # Console parameters.
-    $BuildArgs = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
+    # Console options.
+    $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
     $Everything = Get-RepositoryPath 'tools', 'Make.proj'
     $Foundations = Get-RepositoryPath 'tools', 'Make.Foundations.proj'
@@ -79,7 +79,7 @@ Task Default -depends FastBuild
 # ------------------------------------------------------------------------------
 
 Task FastBuild -Description 'Fast build Foundations then run tests.' {
-    MSBuild $Foundations $BuildArgs $CIProps `
+    MSBuild $Foundations $Opts $CIProps `
         '/t:Xunit', 
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -87,7 +87,7 @@ Task FastBuild -Description 'Fast build Foundations then run tests.' {
 }
 
 Task Build -Description 'Build all projects.' {
-    MSBuild $Everything $BuildArgs $CIProps '/t:Build'
+    MSBuild $Everything $Opts $CIProps '/t:Build'
 }
 
 Task FullBuild -Description 'Full build then run tests.' {
@@ -96,13 +96,13 @@ Task FullBuild -Description 'Full build then run tests.' {
     # - Build all projects
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests, including white-box tests
-    MSBuild $Everything $BuildArgs $CIProps `
+    MSBuild $Everything $Opts $CIProps `
         '/t:Build;PEVerify;Xunit',
         '/p:SourceAnalysisEnabled=true'
 }
 
 Task CodeAnalysis -Description 'Run Code Analysis (slow).' {
-    MSBuild $Everything $BuildArgs $StaticAnalysisProps `
+    MSBuild $Everything $Opts $StaticAnalysisProps `
         '/t:Build', 
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -110,13 +110,13 @@ Task CodeAnalysis -Description 'Run Code Analysis (slow).' {
 } -Alias CA
 
 Task CodeContractsAnalysis -Description 'Run Code Contracts Analysis on Foundations (very slow).' {
-    MSBuild $Foundations $BuildArgs $StaticAnalysisProps `
+    MSBuild $Foundations $Opts $StaticAnalysisProps `
         '/t:Build',
         '/p:Configuration=CodeContracts'
 } -Alias CC
 
 Task SecurityAnalysis -Description 'Run SecAnnotate on Foundations (slow).' {
-    MSBuild $Foundations $BuildArgs $StaticAnalysisProps `
+    MSBuild $Foundations $Opts $StaticAnalysisProps `
         '/t:SecAnnotate',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
@@ -127,19 +127,19 @@ Task SecurityAnalysis -Description 'Run SecAnnotate on Foundations (slow).' {
 # ------------------------------------------------------------------------------
 
 Task Package -depends Validate-Packaging -Description 'Package all projects.' {
-    MSBuild $Foundations $BuildArgs $PackagingTargets $PackagingProps
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps
 } -Alias Pack
 
 Task Package-Core -depends Validate-Packaging -Description 'Package only core projects.' {
-    MSBuild $Foundations $BuildArgs $PackagingTargets $PackagingProps '/p:Filter=_Core_'
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Core_'
 } -Alias PackCore
 
 Task Package-Mvp -depends Validate-Packaging -Description 'Package only MVP projects.' {
-    MSBuild $Foundations $BuildArgs $PackagingTargets $PackagingProps '/p:Filter=_Mvp_'
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Mvp_'
 } -Alias PackMvp
 
 Task Package-Build -depends Validate-Packaging -Description 'Package the Narvalo.Build project.' {
-    MSBuild $Foundations $BuildArgs $PackagingTargets $PackagingProps '/p:Filter=_Build_'
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Build_'
 } -Alias PackBuild
 
 # ------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ Task MyGet-Clean -Description 'Clean MyGet server.' {
 Task MyGet-Build -Description 'Build MyGet server.' {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
-    MSBuild $BuildArgs `
+    MSBuild $Opts `
         (Get-RepositoryPath 'tools', 'MyGet', 'MyGet.csproj') `
         '/t:Clean;Build',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
@@ -199,7 +199,7 @@ Task Validate-Packaging -Description 'Validate packaging tasks.' {
 }
 
 Task Environment -Description 'Display the build environment.' {
-    $msbuild = MSBuild $BuildArgs '/version'
+    $msbuild = MSBuild $Opts '/version'
     $framework = $psake.context.peek().config.framework
     $version = $psake.version
 

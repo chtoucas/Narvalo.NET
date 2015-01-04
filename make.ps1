@@ -103,6 +103,10 @@ if ($retail) {
 
 Write-Host $logo -ForegroundColor Green
 
+Clear-Repository -f -n -d 
+
+Exit 0
+
 # Invoke PSake.
 Invoke-PSake $PSakefile `
     -NoLogo `

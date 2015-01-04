@@ -41,23 +41,29 @@ function Clear-Repository {
         Exit 0
     }
 
+    if (Get-Command "git.exe" -ErrorAction SilentlyContinue) { 
+       Write-Host "Git found"
+    } else {
+       Write-Error "Git not found"
+    }
+
     Write-Verbose 'Cleaning repository...'
 
-    $cmd = "git.exe clean"
+    $opts = 'clean'
     if ($directories) {
-        $cmd = "$cmd -d"
+        $opts = $opts, '-d'
     }
     if ($force) {
-        $cmd = "$cmd -f"
+        $opts = $opts, '-f'
     }
     if ($dryRun) {
-        $cmd = "$cmd -n"
+        $opts = $opts, '-n'
     }
 
     try {
         Push-Location $script:RepositoryRoot
 
-        Write-Host $cmd
+        git.exe $opts
     } catch {
         Exit-Error "Unabled to clean repository: $_"
     } finally {
