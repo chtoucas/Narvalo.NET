@@ -1,4 +1,6 @@
-﻿namespace MvpWebForms.Controls
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace MvpWebForms.Controls
 {
     using System;
     using MvpWebForms.Views;
