@@ -9,17 +9,48 @@ Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber
 # Private variables
 # ------------------------------------------------------------------------------
 
-[string] $script:copyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
+[string] $script:CopyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public methods
 # ------------------------------------------------------------------------------
 
 # .SYNOPSIS
-# Remove untracked files from the working tree.
+# Remove the 'bin' and 'obj' directories created by Visual Studio.
 #
-# .PARAMETER DryRun
-# Don't actually remove anything, just show what would be done.
+# .PARAMETER PathList
+# Specifies the list of paths to traverse.
+#
+# .OUTPUTS
+# None.
+function Remove-BinAndObj {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string[]] $pathList
+    )
+
+    BEGIN { }
+
+    PROCESS {
+        $pathList | %{
+            if (!(Test-Path $_)) { return }
+
+            Write-Verbose "Processing directory '$_'."
+
+            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse }
+        }
+    }
+}
+
+# .SYNOPSIS
+# Remove untracked files.
+#
+# .PARAMETER Git
+# Specifies the path to the Git executable.
+#
+# .INPUTS
+# The path to the Git executable.
 #
 # .OUTPUTS
 # None.
@@ -30,59 +61,35 @@ Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber
 # .LINK
 # http://git-scm.com/docs/git-clean
 function Remove-UntrackedItems {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $git,
-        [Parameter(Mandatory = $true)] [Alias('n')] [bool] $dryRun
-    )
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string] $git,
 
-    # Sadly, it will keep the response in the console history.
-    $yn = Read-Host 'Beware this will permanently delete all untracked files. Are you sure [y/N]?'
-    if ($yn -ne 'y') {
-        # NB: This comparison is case insensitive.
-        Write-Verbose 'Cancelling on user request.'
-        Exit 0
+        [Parameter(Mandatory = $true, Position = 1)] 
+        [string] $path
+    )
+    
+    if (!$git) {
+        Write-Error 'The ''git'' parameter can not be null or empty.'
     }
     
-    $git = ?? $git { Project\Get-Git }
-    if ($git -eq $null) { return }
-
-    Write-Host 'Cleaning repository...'
+    Write-Verbose 'Removing untracked files.'
 
     try {
-        Push-Location (Get-RepositoryRoot)
+        Push-Location $path
 
-        # We ignore folders named 'Internal' (some of them only contain linked files).
-        if ($dryRun) {
-            . $git clean -d -n -e 'Internal'
-        } else {
-            # Force cleanup, ie ignore clean.requireForce
+        # We exclude all folders named 'Internal' (some of them only contain linked files).
+        if ($PSCmdlet.ShouldProcess($path, 'Calling git to permanently delete all untracked files')) {
             . $git clean -d -f -e 'Internal'
+        } else {
+            . $git clean -d -n -e 'Internal'
         }
     } catch {
-        Exit-Error "Unabled to clean repository: $_"
+        Exit-Error "Unabled to remove untracked files: $_"
     } finally {
         Pop-Location
     }
-}
-
-# .SYNOPSIS
-# Remove the 'bin' and 'obj' directories created by Visual Studio.
-#
-# .PARAMETER Path
-# Specifies the path to a directory.
-#
-# .OUTPUTS
-# None.
-function Remove-VisualStudioTmpFiles {
-  [CmdletBinding()]
-  param([Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $path)
-  
-  if (!(Test-Path $path)) { return }
-  
-  Write-Verbose "Removing VS tmp files in $path..."
-
-  gci $path -Include bin,obj -Recurse | ? { rm $_.FullName -Force -Recurse -WhatIf }
 }
 
 # .SYNOPSIS
@@ -91,25 +98,31 @@ function Remove-VisualStudioTmpFiles {
 # .OUTPUTS
 # None.
 function Repair-Copyright {
-    [CmdletBinding()]
-    param([Parameter(Mandatory = $true)] [bool] $dryRun)
-
-    $items = 'samples', 'src', 'tests' | 
-        % { (Project\Get-RepositoryPath $_) } | 
-        % { Find-MissingCopyright -Path $_ }
-
-    if ($items -eq $null) {
-        Write-Host 'Copyright header: no problem found.' -ForeGround Green
-        return
+    [CmdletBinding(SupportsShouldProcess = $true)] 
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string[]] $pathList
+    )
+    
+    BEGIN {
+        $count = 0
     }
 
-    $count = ($items | measure).Count
+    PROCESS {
+        $items = $pathList | %{ Find-MissingCopyright -Path $_ }
 
-    Write-Host "Copyright header: found $count files without a (c)." -ForeGround Red
+        $count += ($items | measure).Count
 
-    if ($dryRun) { return }
+        $items | %{ Add-Copyright $_.FullName }
+    }
 
-    $items | % { Add-Copyright $_.FullName }
+    END {
+        if ($count -eq 0) {
+            echo 'No missing copyright header found :-)'
+        } else {
+            echo "Repaired $count file(s) without a copyright header!"
+        }
+    }
 }
 
 # ------------------------------------------------------------------------------
@@ -120,22 +133,22 @@ function Repair-Copyright {
 # Add a copyright header to a file.
 #
 # .PARAMETER Path
-# The file to repair.
+# Specifies the file to repair.
 #
 # .OUTPUTS
 # None.
 function Add-Copyright {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0)] 
         [Alias('p')] [string] $path
     )
 
-    Write-Host "Adding copyright header to $path..."
+    Write-Verbose "Adding copyright header to $path..."
 
-    $lines = New-Object System.Collections.ArrayList(, (Get-Content -LiteralPath $path))
+    $lines = New-Object System.Collections.ArrayList(, (cat -LiteralPath $path))
     $lines.Insert(0, '')
-    $lines.Insert(0, $script:copyrightHeader)
+    $lines.Insert(0, $script:CopyrightHeader)
     $lines | Set-Content -LiteralPath $path -Encoding UTF8
 }
 
@@ -156,23 +169,23 @@ function Find-MissingCopyright {
 
     Write-Verbose 'Find all C# source files, ignoring designer generated files and temporary build directories.'
 
-    gci $path -Recurse -Filter *.cs -Exclude *.Designer.cs |
-        ? { -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
-        ? { -not (Test-Copyright $_.FullName) } | 
+    ls $path -Recurse -Filter *.cs -Exclude *.Designer.cs |
+        ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
+        ?{ -not (Test-Copyright $_.FullName) } | 
         select FullName
 }
 
 function Test-Copyright {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0)] [string] $path
     )
 
     Write-Verbose "Processing $path."
 
-    $line = Get-Content -LiteralPath $path -TotalCount 1;
+    $line = cat -LiteralPath $path -TotalCount 1;
 
-    return $line -and $line.StartsWith("// Copyright")
+    return $line -and $line.StartsWith('// Copyright')
 }
 
 # ------------------------------------------------------------------------------
@@ -180,6 +193,7 @@ function Test-Copyright {
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
+    Remove-BinAndObj,
     Remove-UntrackedItems,
-    Remove-VisualStudioTmpFiles,
-    Repair-Copyright
+    Repair-Copyright,
+    Yala

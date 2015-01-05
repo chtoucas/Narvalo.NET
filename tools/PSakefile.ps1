@@ -20,7 +20,7 @@ Properties {
     $Everything = Project\Get-RepositoryPath 'tools', 'Make.proj'
     $Foundations = Project\Get-RepositoryPath 'tools', 'Make.Foundations.proj'
     
-    $GitCommitHash = Project\Get-GitCommitHash
+    $GitCommitHash = Project\Get-Git | Project\Get-GitCommitHash
 
     # Packaging properties:
     # - Release configuration

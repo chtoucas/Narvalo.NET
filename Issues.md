@@ -34,11 +34,13 @@ Code Analysis and Source Analysis:
   Review all project files for ExcludeFromSyleCop directives.
 
 MSBuild files:
-- Analyze logs.
 - Bug: Code Analysis problems. Whatever we use for CodeAnalysisSucceededFile,
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
   in Narvalo.Common.targets are disabled.
+
+PowerShell
+- Analyze logs.
 
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.

@@ -7,16 +7,38 @@
 # Check files ignored by StyleCop
 # Reset repository
 # - Strong: Git reset (WARNING: remove ALL ignored files)
-# - Light: Remove nuget.exe, 7zip.exe, FullClean, remove obj & bin, packages
+# - Soft: Remove nuget.exe, 7zip.exe
 
 # .SYNOPSIS
 # Perform maintenance tasks.
+#
+# .PARAMETER Force
+# If present, do the actual work, otherwise only display what would have been done.
+#
+# .PARAMETER NoLogo
+# If present, don't display the startup banner.
+#
+# .PARAMETER Pristine
+# If present, force re-import of local modules into the current session.
+#
+# .PARAMETER Purge
+# If present, process cleanup tasks.
+#
+# .PARAMETER Repair
+# If present, process repair tasks.
+#
+# .PARAMETER Yes
+# If present, do not ask for any confirmation.
+#
+# .OUTPUTS
+# None.
 [CmdletBinding()]
 param(
-    [switch] $fixCopyright,
-    [switch] $softClean,
+    [Alias('fix')] [switch] $repair,
+    [switch] $purge,
 
     [Alias('f')] [switch] $force,
+    [Alias('y')] [switch] $yes,
     [switch] $noLogo,
     [switch] $pristine
 )
@@ -25,42 +47,67 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-if ($pristine) {
-    Write-Debug 'Unload Helpers, Project & Autofix modules.'
-    Get-Module Helpers | Remove-Module
+$verbose = $PSBoundParameters.ContainsKey('Verbose')
+#$whatIf = $WhatIfPreference
+$dryRun = !$force.IsPresent
+
+if (!$noLogo.IsPresent) {
+    if ($dryRun) {
+        Write-Host "Autofix (DRY RUN). Copyright (c) Narvalo.Org.`n"
+    } else {
+        Write-Host "Autofix. Copyright (c) Narvalo.Org.`n"
+    }
+}
+
+# ------------------------------------------------------------------------------
+
+if ($pristine.IsPresent) {
+    Write-Debug 'Unload Project & Autofix modules.'
     Get-Module Project | Remove-Module
     Get-Module Autofix | Remove-Module
 }
 
-if (!(Get-Module Helpers)) {
-    Write-Debug 'Import the Helpers module.'
-    Join-Path $PSScriptRoot 'Helpers.psm1' | Import-Module
-}
-if (!(Get-Module Project)) {
+if ($pristine.IsPresent -or !(Get-Module Project)) {
     Write-Debug 'Import the Project module.'
     Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber
 }
-if (!(Get-Module Autofix)) {
+if ($pristine.IsPresent -or !(Get-Module Autofix)) {
     Write-Debug 'Import the Autofix module.'
     Join-Path $PSScriptRoot 'Autofix.psm1' | Import-Module -NoClobber
 }
 
 # ------------------------------------------------------------------------------
 
-$dryRun = !$force
+$srcDirs = 'samples', 'src', 'tests' | %{ Project\Get-RepositoryPath $_ }
 
-if (!$noLogo) {
-    Write-Host (?: $dryRun 'Autofix (DRY RUN).' 'Autofix.'), "Copyright (c) Narvalo.Org.`n"
+if ($repair.IsPresent) {
+    if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
+        $srcDirs | Autofix\Repair-Copyright -WhatIf:$dryRun -v:$verbose
+    }
 }
 
-if ($fixCopyright) {
-    #Repair-Copyright -DryRun $dryRun
-}
+if ($purge.IsPresent) {
+    if ($yes.IsPresent -or (Read-Host 'Remove ''bin'' and ''obj'' directories? [y/N]') -eq 'y') {
+        $srcDirs | Autofix\Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
+    }
 
-if ($softClean) {
-    'samples', 'src', 'tests' | 
-        % { (Project\Get-RepositoryPath $_) } | 
-        % { Autofix\Remove-VisualStudioTmpFiles -Path $_ -Verbose }
+    if ($yes.IsPresent -or (Read-Host 'Remove ''packages'' directory? [y/N]') -eq 'y') {
+        $packagesDir = Project\Get-RepositoryPath 'packages' 
+        if (Test-Path $packagesDir) {
+            Remove-Item $packagesDir -Force -Recurse -ErrorAction SilentlyContinue -WhatIf:$dryRun
+        }
+    }
+
+    if ($yes.IsPresent -or (Read-Host 'Remove ''work'' directory? [y/N]') -eq 'y') {
+        $workDir = Project\Get-RepositoryPath 'work' 
+        if (Test-Path $workDir) {
+            Remove-Item $workDir -Force -Recurse -ErrorAction SilentlyContinue -WhatIf:$dryRun
+        }
+    }
+
+    if ($yes.IsPresent -or (Read-Host 'Remove all untracked files? [y/N]') -eq 'y') {
+        Project\Get-Git | Autofix\Remove-UntrackedItems -Path (Project\Get-RepositoryRoot) -WhatIf:$dryRun -v:$verbose
+    }
 }
 
 # ------------------------------------------------------------------------------

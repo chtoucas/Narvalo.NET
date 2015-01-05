@@ -3,14 +3,6 @@
 # .SYNOPSIS
 # Run the PSake build script.
 #
-# .PARAMETER TaskList
-# The list of tasks to be executed.
-#
-# .PARAMETER Verbosity
-# Specifies the amount of information displayed by MSBuild.
-# You can use the following verbosity levels: 
-#   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
-#
 # .PARAMETER Docs
 # If present, display the list of available tasks then exit.
 #
@@ -18,13 +10,21 @@
 # If present, force re-import of local modules into the current session.
 #
 # .PARAMETER NoLogo
-# Don't display the startup banner.
+# If present, don't display the startup banner.
 #
 # .PARAMETER Retail
 # If present, packages/assemblies are built for retail.
 #
+# .PARAMETER TaskList
+# Specifies the list of tasks to be executed.
+#
+# .PARAMETER Verbosity
+# Specifies the amount of information displayed by MSBuild.
+# You can use the following verbosity levels: 
+#   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
+#
 # .INPUTS
-# The task to be executed.
+# The list of tasks to be executed.
 #
 # .OUTPUTS
 # None.
@@ -34,7 +34,7 @@
 # Default task with detailed informations.
 #
 # .EXAMPLE
-# make.ps1 CodeAnalysis quiet
+# make.ps1 CodeAnalysis -v quiet
 # Quiet run of the Code Analysis task.
 #
 # .EXAMPLE
@@ -53,7 +53,6 @@ param(
     [Alias('v')] [string] $verbosity = 'minimal',
 
     [Alias('r')] [switch] $retail,
-    [Alias('q')] [switch] $quiet,
     [switch] $docs,
     [switch] $noLogo,
     [switch] $pristine
@@ -63,17 +62,26 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-if ($pristine) {
+if (!$noLogo.IsPresent) {
+    if ($retail.IsPresent) {
+        Write-Host "Make (RETAIL). Copyright (c) Narvalo.Org.`n"
+    } else {
+        Write-Host "Make. Copyright (c) Narvalo.Org.`n"
+    }
+}
+
+# ------------------------------------------------------------------------------
+
+if ($pristine.IsPresent) {
     Write-Debug 'Unload Helpers & Project modules.'
-    Get-Module Helpers | Remove-Module
     Get-Module Project | Remove-Module
 }
 
-if (!(Get-Module Helpers)) {
-    Write-Debug 'Import the Helpers module.'
+if ($pristine.IsPresent -or !(Get-Module Helpers)) {
+    Write-Debug 'Import the Helpers module (required by our psake script).'
     Join-Path $PSScriptRoot 'tools\Helpers.psm1' | Import-Module
 }
-if (!(Get-Module Project)) {
+if ($pristine.IsPresent -or !(Get-Module Project)) {
     Write-Debug 'Import the Project module.'
     Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module -NoClobber
 }
@@ -87,26 +95,21 @@ if (!(Get-Module psake)) {
 
 # ------------------------------------------------------------------------------
 
-# Path to the PSake script.
-$PSakefile = (Project\Get-RepositoryPath 'tools\PSakefile.ps1')
+$psakefile = (Project\Get-RepositoryPath 'tools\PSakefile.ps1')
 
-if (!$noLogo) {
-    Write-Host (?: $retail 'Make (RETAIL).' 'Make.'), "Copyright (c) Narvalo.Org.`n"
-}
-
-if ($docs) {
+if ($docs.IsPresent) {
     #Get-Help $MyInvocation.MyCommand.Path
     Write-Host 'LIST OF AVAILABLE TASKS'
-    Invoke-PSake $PSakefile -NoLogo -Docs
+    Invoke-PSake $psakefile -NoLogo -Docs
     Exit 0
 }
 
 Write-Debug 'Ensure there is no concurrent MSBuild running.'
 Get-Process -Name "msbuild" -ErrorAction SilentlyContinue | %{ Stop-Process $_.ID -force }
 
-Invoke-PSake $PSakefile `
+Invoke-PSake $psakefile `
     -NoLogo `
     -TaskList $taskList `
-    -Parameters @{ 'verbosity' = $verbosity; 'retail' = $retail }
+    -Parameters @{ 'verbosity' = $verbosity; 'retail' = $retail.IsPresent; }
 
 # ------------------------------------------------------------------------------
