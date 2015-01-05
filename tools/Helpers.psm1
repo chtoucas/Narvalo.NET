@@ -17,7 +17,8 @@ Set-StrictMode -Version Latest
 function Exit-Error {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $message
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string] $Message
     )
     
     Write-Host "`n", $message, "`n" -BackgroundColor Red -ForegroundColor Yellow
@@ -29,8 +30,11 @@ function Exit-Error {
 function Invoke-NullCoalescing {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] [AllowNull()] $value,
-        [Parameter(Mandatory = $true, Position = 1)] $alternate
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [AllowNull()] $Value,
+
+        [Parameter(Mandatory = $true, Position = 1)] 
+        [PSObject] $Alternate
     )
 
     if ($value -ne $null) {
@@ -52,15 +56,15 @@ function Invoke-Ternary {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
-        [bool] $predicate,
+        [bool] $Predicate,
 
         [Parameter(Mandatory = $true, Position = 1)]
         [AllowNull()]
-        $then,
+        [PSObject] $Then,
 
         [Parameter(Mandatory = $true, Position = 2)] 
         [AllowNull()]
-        $otherwise
+        [PSObject] $Otherwise
     )
 
     if ($predicate) {

@@ -27,7 +27,7 @@ function Remove-BinAndObj {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string[]] $pathList
+        [Alias('p')] [string[]] $PathList
     )
 
     BEGIN { }
@@ -64,10 +64,10 @@ function Remove-UntrackedItems {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $git,
+        [string] $Git,
 
         [Parameter(Mandatory = $true, Position = 1)] 
-        [string] $path
+        [Alias('p')] [string] $Path
     )
     
     if (!$git) {
@@ -101,7 +101,7 @@ function Repair-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)] 
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string[]] $pathList
+        [Alias('p')] [string[]] $PathList
     )
     
     BEGIN {
@@ -141,7 +141,7 @@ function Add-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0)] 
-        [Alias('p')] [string] $path
+        [Alias('p')] [string] $Path
     )
 
     Write-Verbose "Adding copyright header to $path..."
@@ -164,7 +164,7 @@ function Find-MissingCopyright {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [Alias('p')] [string] $path
+        [Alias('p')] [string] $Path
     )
 
     Write-Verbose 'Find all C# source files, ignoring designer generated files and temporary build directories.'
@@ -178,7 +178,8 @@ function Find-MissingCopyright {
 function Test-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] [string] $path
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('p')] [string] $Path
     )
 
     Write-Verbose "Processing $path."

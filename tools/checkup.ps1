@@ -1,16 +1,11 @@
 #Requires -Version 3.0
 
-# TODO:
-# Check hidden files
-# Check DependentUpon, SubType files
-# Check status & ignored & untracked: git status -u --ignored
-# Check files ignored by StyleCop
-# Reset repository
-# - Strong: Git reset (WARNING: remove ALL ignored files)
-# - Soft: Remove nuget.exe, 7zip.exe
 
 # .SYNOPSIS
 # Perform maintenance tasks.
+#
+# .PARAMETER Analyze
+# If present, process analysis tasks.
 #
 # .PARAMETER Force
 # If present, do the actual work, otherwise only display what would have been done.
@@ -30,17 +25,44 @@
 # .PARAMETER Yes
 # If present, do not ask for any confirmation.
 #
+# .INPUTS
+# None.
+#
 # .OUTPUTS
 # None.
+#
+# .EXAMPLE
+# checkup.ps1 -Repair
+# Process repair tasks but don't actually change anything.
+#
+# .EXAMPLE
+# checkup.ps1 -Repair -Force
+# Process repair tasks and do the actual work.
+#
+# .EXAMPLE
+# checkup.ps1 -Purge -Yes
+# Process cleanup tasks, do not ask for any confirmation, 
+# but don't actually change anything.
+#
+# .NOTES
+# On the TODO list:
+# - Analyze: Find hidden VS files
+# - Analyze: Find files ignored by git: git status -u --ignored
+# - Purge: Git reset (WARNING: remove ALL ignored files)
+# - Purge: Remove nuget.exe, 7zip.exe
+# - Repair: Find DependentUpon & SubType files
+# - Repair: Find files ignored by StyleCop
+
 [CmdletBinding()]
 param(
-    [Alias('fix')] [switch] $repair,
-    [switch] $purge,
+    [Alias('fix')] [switch] $Repair,
+    [switch] $Purge,
+    [switch] $Analyze,
 
-    [Alias('f')] [switch] $force,
-    [Alias('y')] [switch] $yes,
-    [switch] $noLogo,
-    [switch] $pristine
+    [Alias('f')] [switch] $Force,
+    [Alias('y')] [switch] $Yes,
+    [switch] $NoLogo,
+    [switch] $Pristine
 )
 
 Set-StrictMode -Version Latest
@@ -53,42 +75,40 @@ $dryRun = !$force.IsPresent
 
 if (!$noLogo.IsPresent) {
     if ($dryRun) {
-        Write-Host "Autofix (DRY RUN). Copyright (c) Narvalo.Org.`n"
+        Write-Host "Checkup (DRY RUN). Copyright (c) Narvalo.Org.`n"
     } else {
-        Write-Host "Autofix. Copyright (c) Narvalo.Org.`n"
+        Write-Host "Checkup. Copyright (c) Narvalo.Org.`n"
     }
 }
 
 # ------------------------------------------------------------------------------
 
 if ($pristine.IsPresent) {
-    Write-Debug 'Unload Project & Autofix modules.'
+    Write-Debug 'Unload Project & Checkup modules.'
     Get-Module Project | Remove-Module
-    Get-Module Autofix | Remove-Module
+    Get-Module Checkup | Remove-Module
 }
 
 if ($pristine.IsPresent -or !(Get-Module Project)) {
     Write-Debug 'Import the Project module.'
     Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber
 }
-if ($pristine.IsPresent -or !(Get-Module Autofix)) {
-    Write-Debug 'Import the Autofix module.'
-    Join-Path $PSScriptRoot 'Autofix.psm1' | Import-Module -NoClobber
+if ($pristine.IsPresent -or !(Get-Module Checkup)) {
+    Write-Debug 'Import the Checkup module.'
+    Join-Path $PSScriptRoot 'Checkup.psm1' | Import-Module -NoClobber
 }
 
 # ------------------------------------------------------------------------------
 
 $srcDirs = 'samples', 'src', 'tests' | %{ Project\Get-RepositoryPath $_ }
 
-if ($repair.IsPresent) {
-    if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
-        $srcDirs | Autofix\Repair-Copyright -WhatIf:$dryRun -v:$verbose
-    }
+if ($analyze.IsPresent) {
+    echo 'Analyze: nothing yet :-('
 }
 
 if ($purge.IsPresent) {
     if ($yes.IsPresent -or (Read-Host 'Remove ''bin'' and ''obj'' directories? [y/N]') -eq 'y') {
-        $srcDirs | Autofix\Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
+        $srcDirs | Checkup\Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove ''packages'' directory? [y/N]') -eq 'y') {
@@ -106,7 +126,13 @@ if ($purge.IsPresent) {
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove all untracked files? [y/N]') -eq 'y') {
-        Project\Get-Git | Autofix\Remove-UntrackedItems -Path (Project\Get-RepositoryRoot) -WhatIf:$dryRun -v:$verbose
+        Project\Get-Git | Checkup\Remove-UntrackedItems -Path (Project\Get-RepositoryRoot) -WhatIf:$dryRun -v:$verbose
+    }
+}
+
+if ($repair.IsPresent) {
+    if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
+        $srcDirs | Checkup\Repair-Copyright -WhatIf:$dryRun -v:$verbose
     }
 }
 

@@ -38,7 +38,7 @@
 # Quiet run of the Code Analysis task.
 #
 # .EXAMPLE
-# make.ps1 -r Package 
+# make.ps1 -Retail Package 
 # Create retail packages with the default verbosity level.
 #
 # .LINK
@@ -47,15 +47,15 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
-    [Alias('t')] [string[]] $taskList = @(),
+    [Alias('t')] [string[]] $TaskList = @(),
 
     [Parameter(Mandatory = $false, Position = 1)]
-    [Alias('v')] [string] $verbosity = 'minimal',
+    [Alias('v')] [string] $Verbosity = 'minimal',
 
-    [Alias('r')] [switch] $retail,
-    [switch] $docs,
-    [switch] $noLogo,
-    [switch] $pristine
+    [Alias('r')] [switch] $Retail,
+    [switch] $Docs,
+    [switch] $NoLogo,
+    [switch] $Pristine
 )
 
 Set-StrictMode -Version Latest
@@ -95,7 +95,7 @@ if (!(Get-Module psake)) {
 
 # ------------------------------------------------------------------------------
 
-$psakefile = (Project\Get-RepositoryPath 'tools\PSakefile.ps1')
+$psakefile = (Project\Get-RepositoryPath 'tools', 'PSakefile.ps1')
 
 if ($docs.IsPresent) {
     #Get-Help $MyInvocation.MyCommand.Path

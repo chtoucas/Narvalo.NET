@@ -56,8 +56,9 @@ function Get-GitCommitHash {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $git,
-        [switch] $abbrev
+        [string] $Git,
+
+        [switch] $Abbrev
     )
     
     if (!$git) {
@@ -93,7 +94,7 @@ function Get-GitCommitHash {
 # System.String. Get-PSakeModulePath returns a string that contains the path to the PSake module.
 function Get-PSakeModulePath {
     [CmdletBinding()]
-    param([switch] $noVersion)
+    param([switch] $NoVersion)
     
     if ($noVersion.IsPresent) {
         Get-RepositoryPath 'packages\psake\tools\psake.psm1'
@@ -113,7 +114,8 @@ function Get-PSakeModulePath {
 function Get-RepositoryPath {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] [string[]] $pathList
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('p')] [string[]] $PathList
     )
     
     Join-Path -Path $script:RepositoryRoot -ChildPath (Join-PathList $pathList)
@@ -197,7 +199,7 @@ function Install-PSake {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [string] $nuget
+        [string] $NuGet
     )
     
     if (!$nuget) {
@@ -231,7 +233,7 @@ function Restore-SolutionPackages {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $nuget
+        [string] $NuGet
     )
     
     if (!$nuget) {
@@ -253,15 +255,16 @@ function Restore-SolutionPackages {
 
 function Join-PathList {
     param(
-        [Parameter(Mandatory = $true, Position = 0)] [string[]] $paths
+        [Parameter(Mandatory = $true, Position = 0)]
+        [Alias('p')] [string[]] $PathList
     )
 
-    $count = $paths.Count - 1
+    $count = $pathList.Count - 1
 
-    $result = $paths[0]
+    $result = $pathList[0]
 
     for ($i = 1; $i -le $count; $i++) { 
-        $result = Join-Path $result $paths[$i]
+        $result = Join-Path $result $pathList[$i]
     }
 
     $result

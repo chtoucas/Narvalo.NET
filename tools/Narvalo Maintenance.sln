@@ -41,8 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D31
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{6D2B84B0-FD5E-4E14-A5B6-43BC56DF08E9}"
 	ProjectSection(SolutionItems) = preProject
-		autofix.ps1 = autofix.ps1
-		Autofix.psm1 = Autofix.psm1
+		checkup.ps1 = checkup.ps1
+		Checkup.psm1 = Checkup.psm1
 		Helpers.psm1 = Helpers.psm1
 		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
