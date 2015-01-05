@@ -11,16 +11,16 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
-    $WorkRoot = Get-RepositoryPath 'work' 
-    $PackagesDir = Get-RepositoryPath 'work', 'packages'
+    $WorkRoot = Project\Get-RepositoryPath 'work' 
+    $PackagesDir = Project\Get-RepositoryPath 'work', 'packages'
 
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
-    $Everything = Get-RepositoryPath 'tools', 'Make.proj'
-    $Foundations = Get-RepositoryPath 'tools', 'Make.Foundations.proj'
+    $Everything = Project\Get-RepositoryPath 'tools', 'Make.proj'
+    $Foundations = Project\Get-RepositoryPath 'tools', 'Make.Foundations.proj'
     
-    $GitCommitHash = Get-GitCommitHash
+    $GitCommitHash = Project\Get-GitCommitHash
 
     # Packaging properties:
     # - Release configuration
@@ -64,7 +64,7 @@ Properties {
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
-FormatTaskName "Task {0}"
+FormatTaskName "Executing Task {0}..."
 
 TaskTearDown {
     if ($LastExitCode -ne 0) {
@@ -137,11 +137,11 @@ Task Package -depends Validate-Packaging -Description 'Package all projects.' {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps
 } -Alias Pack
 
-Task Package-Core -depends Validate-Packaging -Description 'Package only core projects.' {
+Task Package-Core -depends Validate-Packaging -Description 'Package core projects.' {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Core_'
 } -Alias PackCore
 
-Task Package-Mvp -depends Validate-Packaging -Description 'Package only MVP projects.' {
+Task Package-Mvp -depends Validate-Packaging -Description 'Package MVP projects.' {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Mvp_'
 } -Alias PackMvp
 
@@ -160,7 +160,7 @@ Task Validate-Packaging -Description 'Validate packaging tasks.' {
 # ------------------------------------------------------------------------------
 
 Task Publish -Description 'Publish all projects.' {
-    $nuget = Install-NuGet
+    $nuget = Project\Install-NuGet
 
     Exit-Error 'Not yet implemented!'
 
@@ -187,57 +187,19 @@ Task MyGet-Build -Description 'Build MyGet server.' {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
     MSBuild $Opts `
-        (Get-RepositoryPath 'tools', 'MyGet', 'MyGet.csproj') `
+        (Project\Get-RepositoryPath 'tools', 'MyGet', 'MyGet.csproj') `
         '/t:Clean;Build',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
 
 Task MyGet-Zip -Description 'Zip MyGet server.' {
-    . (Install-7Zip) -mx9 a $script:MyGetPkg $script:MyGetDir | Out-Null
+    . (Project\Install-7Zip) -mx9 a $script:MyGetPkg $script:MyGetDir | Out-Null
 
     Write-Host "A ready to publish zip file for MyGet may be found here: '$script:MyGetPkg'." -ForegroundColor Green
 }
 
 Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `
     -Description 'Publish MyGet server.'
-    
-# ------------------------------------------------------------------------------
-# Maintenance tasks
-# ------------------------------------------------------------------------------
-
-Task Check -depends Check-Copyright -Description 'Perform extensive checks on the repository (slow)' {
-    # TODO:
-    # Check hidden files
-    # Check DependentUpon, SubType files
-    # Check status & ignored & untracked: git status -u --ignored
-    # Check files ignored by StyleCop
-}
-
-Task Check-Copyright -Description 'Find files without copyright header.' {
-    # Check copyright headers.
-    $copyrightCount = ('samples', 'src', 'tests' | 
-        % { (Get-RepositoryPath $_) } |
-        % { Find-FilesWithoutCopyright -d $_ }).Count
-
-    if ($copyrightCount -gt 0) {
-        Write-Warning "There are $copyrightCount files without copyright header. You can use the 'FixCopyright' task to correct this."
-    } else {
-        Write-Host '  No problem found with copyright header.'
-    }
-}
-
-Task Fix-Copyright -Description 'Add missing copyright headers (unsafe).' {
-    'samples', 'src', 'tests' | 
-        % { (Get-RepositoryPath $_) } |
-        % { Repair-FilesWithoutCopyright -d $_ }
-}
-
-Task Reset-Repository {
-    # TODO:
-    # Strong: Git reset (WARNING: remove ALL ignored files)
-    # Light: Remove nuget.exe, 7zip.exe, FullClean, remove obj & bin, packages
-    Exit-Error 'Not yet implemented!'
-}
 
 # ------------------------------------------------------------------------------
 # Miscs

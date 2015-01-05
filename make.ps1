@@ -11,14 +11,14 @@
 # You can use the following verbosity levels: 
 #   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
 #
-# .PARAMETER Force
-# If present, force re-import of custom modules into the current session.
+# .PARAMETER Docs
+# If present, display the list of available tasks then exit.
 #
-# .PARAMETER Help
-# If present, display help then exit.
+# .PARAMETER Pristine
+# If present, force re-import of local modules into the current session.
 #
-# .PARAMETER Quiet
-# If present, force MSBuild to run quietly.
+# .PARAMETER NoLogo
+# Don't display the startup banner.
 #
 # .PARAMETER Retail
 # If present, packages/assemblies are built for retail.
@@ -44,6 +44,7 @@
 # .LINK
 # https://github.com/psake/psake
 
+[CmdletBinding()]
 param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
     [Alias('t')] [string[]] $taskList = @(),
@@ -52,60 +53,60 @@ param(
     [Alias('v')] [string] $verbosity = 'minimal',
 
     [Alias('r')] [switch] $retail,
-    [Alias('h')] [switch] $help,
     [Alias('q')] [switch] $quiet,
-    [Alias('f')] [switch] $force
+    [switch] $docs,
+    [switch] $noLogo,
+    [switch] $pristine
 )
 
 Set-StrictMode -Version Latest
 
-# Force MSBuild to run quietly?
-if ($quiet) {
-    $verbosity = 'quiet'
-}
+# ------------------------------------------------------------------------------
 
-# Force re-import of the Project & PSake modules?
-if ($force) {
+if ($pristine) {
+    Write-Debug 'Unload Helpers & Project modules.'
+    Get-Module Helpers | Remove-Module
     Get-Module Project | Remove-Module
-    Get-Module psake | Remove-Module
 }
 
-# Import Narvalo module?
-if (!(Get-Module Project)) {
-    Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module 
+if (!(Get-Module Helpers)) {
+    Write-Debug 'Import the Helpers module.'
+    Join-Path $PSScriptRoot 'tools\Helpers.psm1' | Import-Module
 }
+if (!(Get-Module Project)) {
+    Write-Debug 'Import the Project module.'
+    Join-Path $PSScriptRoot 'tools\Project.psm1' | Import-Module -NoClobber
+}
+if (!(Get-Module psake)) {
+    Write-Debug 'Ensure PSake is installed.'
+    Project\Install-NuGet | Project\Restore-SolutionPackages
+
+    Write-Debug 'Import the psake module.'
+    Project\Get-PSakeModulePath | Import-Module -NoClobber
+}
+
+# ------------------------------------------------------------------------------
 
 # Path to the PSake script.
-$PSakefile = (Get-RepositoryPath 'PSakefile.ps1')
+$PSakefile = (Project\Get-RepositoryPath 'tools\PSakefile.ps1')
 
-# Restore packages.
-Install-NuGet | Restore-SolutionPackages
-
-# Import PSake.
-if (!(Get-Module psake)) {
-    Get-PSakeModulePath | Import-Module
+if (!$noLogo) {
+    Write-Host (?: $retail 'Make (RETAIL).' 'Make.'), "Copyright (c) Narvalo.Org.`n"
 }
 
-# Display help?
-if ($help) {
+if ($docs) {
     #Get-Help $MyInvocation.MyCommand.Path
-    Write-Host ''
-    Write-Host 'LIST OF AVAILABLE TASKS' -ForeGround Green
+    Write-Host 'LIST OF AVAILABLE TASKS'
     Invoke-PSake $PSakefile -NoLogo -Docs
     Exit 0
 }
 
-# Display logo.
-if ($retail) {
-    $logo = 'Executing PSake (RETAIL mode)...'
-} else {
-    $logo = 'Executing PSake...'
-}
+Write-Debug 'Ensure there is no concurrent MSBuild running.'
+Get-Process -Name "msbuild" -ErrorAction SilentlyContinue | %{ Stop-Process $_.ID -force }
 
-Write-Host $logo -ForegroundColor Green
-
-# Invoke PSake.
 Invoke-PSake $PSakefile `
     -NoLogo `
     -TaskList $taskList `
     -Parameters @{ 'verbosity' = $verbosity; 'retail' = $retail }
+
+# ------------------------------------------------------------------------------

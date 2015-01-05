@@ -2,107 +2,17 @@
 
 Set-StrictMode -Version Latest
 
+Join-Path $PSScriptRoot 'Helpers.psm1' | Import-Module
+
 # ------------------------------------------------------------------------------
 # Private variables
 # ------------------------------------------------------------------------------
 
 [string] $script:RepositoryRoot = (Get-Item $PSScriptRoot).Parent.FullName
-[string] $script:copyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public methods
 # ------------------------------------------------------------------------------
-
-# .SYNOPSIS
-# Remove untracked files from the working tree.
-#
-# .PARAMETER DryRun
-# Don't actually remove anything, just show what would be done.
-#
-# .NOTES
-# We do not remove ignored files (see -x and -X options from git).
-# 
-# .LINK
-# http://git-scm.com/docs/git-clean
-function Clear-Repository {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $git,
-        [Alias('n')] [switch] $dryRun
-    )
-
-    # Sadly, it will keep the response in the console history.
-    $yn = Read-Host 'Beware this will permanently delete all untracked files. Are you sure [y/N]?'
-    if ($yn -ne 'y') {
-        # NB: This is case insensitive.
-        Write-Verbose 'Cancelling on user request.'
-        Exit 0
-    }
-    
-    $git = ?? $git { Get-Git }
-    if ($git -eq $null) { return }
-
-    Write-Verbose 'Cleaning repository...'
-
-    try {
-        Push-Location $script:RepositoryRoot
-
-        # We ignore folders named 'Internal' (some of them only contain linked files).
-        if ($dryRun) {
-            . $git clean -d -n -e 'Internal'
-        } else {
-            # Force cleanup, ie ignore clean.requireForce
-            . $git clean -d -f -e 'Internal'
-        }
-    } catch {
-        Exit-Error "Unabled to clean repository: $_"
-    } finally {
-        Pop-Location
-    }
-}
-
-# .SYNOPSIS
-# Exit with the error code 1.
-#
-# .PARAMETER Message
-# The message to be written.
-#
-# .OUTPUTS
-# None.
-function Exit-Error {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $message
-    )
-    
-    Write-Host ''
-    Write-Host $message -BackgroundColor Red -ForegroundColor Yellow
-    Write-Host ''
-    Exit 1
-}
-
-# .SYNOPSIS
-# Find C# files without copyright header.
-#
-# .PARAMETER Directory
-# The directory to traverse.
-#
-# .OUTPUTS
-# None.
-function Find-FilesWithoutCopyright {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [Alias('d')] [string] $directory
-    )
-
-    # Find all C# source files, ignoring designer generated files.
-    Get-ChildItem $directory -Recurse -Filter *.cs -Exclude *.Designer.cs |
-        # Ignore temporary build directories.
-        ? { -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
-        ? { Assert-MissingCopyright $_.FullName } | 
-        select FullName
-}
 
 # .SYNOPSIS
 # Get the last git commit hash.
@@ -121,7 +31,9 @@ function Get-GitCommitHash {
         [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $git,
         [switch] $abbrev
     )
-
+    
+    Write-Verbose 'Getting the last git commit hash.'
+    
     $git = ?? $git { Get-Git }
     if ($git -eq $null) { return }
 
@@ -132,6 +44,7 @@ function Get-GitCommitHash {
     }
 
     try {
+        Write-Debug 'Call git.exe log.'
         $hash = . $git log -1 --format="$fmt"
     } catch {
         Write-Warning "Unabled to get the last git commit hash: $_"
@@ -152,11 +65,11 @@ function Get-GitCommitHash {
 function Get-PSakeModulePath {
     [CmdletBinding()]
     param([switch] $noVersion)
-
+    
     if ($noVersion.IsPresent) {
         Get-RepositoryPath 'packages\psake\tools\psake.psm1'
     } else {
-        (Get-ChildItem (Get-RepositoryPath 'packages\psake.*\tools\psake.psm1') | select -First 1)
+        (gci (Get-RepositoryPath 'packages\psake.*\tools\psake.psm1') | select -First 1)
     }
 }
 
@@ -171,10 +84,20 @@ function Get-PSakeModulePath {
 function Get-RepositoryPath {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] [string[]] $parts
+        [Parameter(Mandatory = $true, Position = 0)] [string[]] $pathList
     )
+    
+    Join-Path -Path $script:RepositoryRoot -ChildPath (Join-PathList $pathList)
+}
 
-    Get-RepositoryRoot | Join-Path -ChildPath (Join-Multiple $parts)
+# .SYNOPSIS
+# Return the path to the repository.
+#
+# .OUTPUTS
+# System.String. Get-RepositoryRoot returns a string that contains the path
+# to the repository.
+function Get-RepositoryRoot {
+    $script:RepositoryRoot
 }
 
 # .SYNOPSIS
@@ -186,11 +109,11 @@ function Install-7Zip {
     [CmdletBinding()]
     param()
     
-    Write-Verbose 'Installing 7-Zip...'
+    Write-Verbose 'Installing 7-Zip.'
     
     $sevenZip = Get-RepositoryPath 'tools', '7za.exe'
 
-    [System.Uri] 'http://narvalo.org/7z936.exe' | Download-Source -Path $sevenZip
+    [System.Uri] 'http://narvalo.org/7z936.exe' | Install-WebResource -Path $sevenZip
 
     $sevenZip
 }
@@ -204,11 +127,11 @@ function Install-NuGet {
     [CmdletBinding()]
     param()
     
-    Write-Verbose 'Installing NuGet...'
+    Write-Verbose 'Installing NuGet.'
     
     $nuget = Get-RepositoryPath 'tools', 'NuGet.exe'
 
-    [System.Uri] 'https://nuget.org/nuget.exe' | Download-Source -Path $nuget
+    [System.Uri] 'https://nuget.org/nuget.exe' | Install-WebResource -Path $nuget
 
     $nuget
 }
@@ -233,12 +156,11 @@ function Install-PSake {
         [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $nuget
     )
 
-    Write-Verbose 'Installing PSake...'
+    Write-Verbose 'Installing PSake.'
     
-    if ($nuget -eq $null) {
-        $nuget = Install-NuGet
-    }
+    $nuget = ?? $nuget { Install-NuGet }
 
+    Write-Debug 'Call nuget.exe install psake.'
     & $nuget install psake `
        -ExcludeVersion 
        -OutputDirectory (Get-RepositoryPath 'packages') `
@@ -246,93 +168,6 @@ function Install-PSake {
        -Verbosity quiet
 
     Get-PSakeModulePath -NoVersion
-}
-
-# .SYNOPSIS
-# Mimic the ?? operator from C# but not quite the same.
-function Invoke-NullCoalescing {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] [AllowNull()] $value,
-        [Parameter(Mandatory = $true, Position = 1)] $alternate
-    )
-
-    if ($value -ne $null) {
-        $result = $value
-    } else {
-        if ($alternate -is [ScriptBlock]) {
-            $result = & $alternate
-        } else {
-            $result = $alternate
-        }
-    }
-
-    $result
-}
-
-# .SYNOPSIS
-# Mimic the ?: operator from C#.
-function Invoke-Ternary {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [bool] $predicate,
-
-        [Parameter(Mandatory = $true, Position = 1)]
-        [AllowNull()]
-        $then,
-
-        [Parameter(Mandatory = $true, Position = 2)] 
-        [AllowNull()]
-        $otherwise
-    )
-
-    if ($predicate) {
-        return $then
-    } else {
-        return $otherwise
-    }
-}
-
-# .SYNOPSIS
-# Add a copyright header to all C# files missing one.
-#
-# .PARAMETER Directory
-# The directory to traverse.
-#
-# .OUTPUTS
-# None.
-function Repair-FilesWithoutCopyright {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [Alias('d')] [string] $directory
-    )
-
-    Find-FilesWithoutCopyright $directory | % { Repair-MissingCopyright $_.FullName }
-}
-
-# .SYNOPSIS
-# Add a copyright header to a file.
-#
-# .PARAMETER Path
-# The file to repair.
-#
-# .OUTPUTS
-# None.
-function Repair-MissingCopyright {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] 
-        [Alias('p')] [string] $path
-    )
-
-    Write-Host "Adding copyright header to $path..."
-
-    $lines = New-Object System.Collections.ArrayList(, (Get-Content -LiteralPath $path))
-    $lines.Insert(0, '')
-    $lines.Insert(0, $script:copyrightHeader)
-    $lines | Set-Content -LiteralPath $path -Encoding UTF8
 }
 
 # .SYNOPSIS
@@ -352,12 +187,11 @@ function Restore-SolutionPackages {
         [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)] $nuget
     )
 
-    Write-Verbose 'Restoring solution packages...'
+    Write-Verbose 'Restoring solution packages.'
     
-    if ($nuget -eq $null) {
-        $nuget = Install-NuGet
-    }
+    $nuget = ?? $nuget { Install-NuGet }
 
+    Write-Debug 'Call nuget.exe restore.'
     & $nuget restore (Get-RepositoryPath '.nuget', 'packages.config') `
         -PackagesDirectory (Get-RepositoryPath 'packages') `
         -ConfigFile (Get-RepositoryPath '.nuget', 'NuGet.Config') `
@@ -368,20 +202,7 @@ function Restore-SolutionPackages {
 # Private methods
 # ------------------------------------------------------------------------------
 
-function Assert-MissingCopyright {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] [string] $path
-    )
-
-    Write-Verbose "Processing $path..."
-
-    $line = Get-Content -LiteralPath $path -totalCount 1;
-
-    return !$line -or !$line.StartsWith("// Copyright")
-}
-
-function Download-Source {
+function Install-WebResource {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [System.Uri] $source,
@@ -389,27 +210,26 @@ function Download-Source {
     )
 
     if (!(Test-Path $path -PathType Leaf)) {
-        Write-Verbose "Downloading $source..."
+        Write-Verbose "Downloading $source to $path."
 
+        Write-Debug "Download $source."
         Invoke-WebRequest $source -OutFile $path
     }
 }
 
 function Get-Git {
+    Write-Verbose 'Getting git command.'
+
     $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
 
     if ($git -eq $null) { 
-       Write-Warning 'This function requires the git command to be in your PATH.'
+        Write-Warning 'Git could not be found in your PATH. Please ensure git is installed.'
     }
 
     return $git.Path
 }
 
-function Get-RepositoryRoot {
-    $script:RepositoryRoot
-}
-
-function Join-Multiple {
+function Join-PathList {
     param(
         [Parameter(Mandatory = $true, Position = 0)] [string[]] $paths
     )
@@ -426,32 +246,15 @@ function Join-Multiple {
 }
 
 # ------------------------------------------------------------------------------
-# Aliases
-# ------------------------------------------------------------------------------
-
-Set-Alias ?? Invoke-NullCoalescing
-Set-Alias ?: Invoke-Ternary
-
-# ------------------------------------------------------------------------------
 # Exports
 # ------------------------------------------------------------------------------
 
-Export-ModuleMember `
-    -Function `
-        Clear-Repository,
-        Exit-Error,
-        Find-FilesWithoutCopyright,
-        Get-GitCommitHash, 
-        Get-PSakeModulePath,
-        Get-RepositoryPath, 
-        Install-7Zip,
-        Install-NuGet, 
-        Install-PSake, 
-        Invoke-NullCoalescing,
-        Invoke-Ternary,
-        Repair-FilesWithoutCopyright,
-        Repair-MissingCopyright,
-        Restore-SolutionPackages `
-    -Alias `
-        ??,
-        ?:
+Export-ModuleMember -Function `
+    Get-GitCommitHash, 
+    Get-PSakeModulePath,
+    Get-RepositoryPath, 
+    Get-RepositoryRoot,
+    Install-7Zip,
+    Install-NuGet, 
+    Install-PSake, 
+    Restore-SolutionPackages
