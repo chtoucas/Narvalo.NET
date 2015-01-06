@@ -1,38 +1,62 @@
-#Requires -Version 3.0
+#Requires -Version 4.0
+#Requires -Modules Helpers
 
 Set-StrictMode -Version Latest
-
-Join-Path $PSScriptRoot 'Helpers.psm1' | Import-Module
 
 # ------------------------------------------------------------------------------
 # Private variables
 # ------------------------------------------------------------------------------
 
-[string] $script:RepositoryRoot = (Get-Item $PSScriptRoot).Parent.FullName
+[string] $SCRIPT:7Zip  = [NullString]::Value
+[string] $SCRIPT:Git   = [NullString]::Value
+[string] $SCRIPT:NuGet = [NullString]::Value
+
+[string] $SCRIPT:RepositoryRoot = (Get-Item $PSScriptRoot).Parent.FullName
 
 # ------------------------------------------------------------------------------
 # Public methods
 # ------------------------------------------------------------------------------
 
 # .SYNOPSIS
-# Get the path to the git command.
+# Get the path to the 7-Zip command.
+#
+# .OUTPUTS
+# System.String. Get-7Zip returns a string that contains the path to the 7-Zip executable.
+function Get-7Zip {
+    [CmdletBinding()]
+    param()
+    
+    if ($SCRIPT:7Zip -eq $null) {
+        $SCRIPT:7Zip = Get-RepositoryPath 'tools', '7za.exe'
+    }
+
+    $SCRIPT:7Zip
+}
+
+# .SYNOPSIS
+# Get the path to the installed git command.
 #
 # .OUTPUTS
 # System.String. Get-Git returns a string that contains the path to the git 
-# command or $null if git is nowhere to be found.
+# command or an empty string if git is nowhere to be found.
 function Get-Git {
     [CmdletBinding()]
     param()
 
-    Write-Verbose 'Getting git command.'
+    if ($SCRIPT:Git -eq $null) {
+        Write-Verbose 'Finding the installed git command.'
 
-    $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
+        $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
 
-    if ($git -eq $null) { 
-        Write-Warning 'Git could not be found in your PATH. Please ensure git is installed.'
+        if ($git -eq $null) { 
+            Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
+            $SCRIPT:Git = ''
+        } else {
+            $SCRIPT:Git = $git.Path
+        }
     }
 
-    return $git.Path
+    $SCRIPT:Git
 }
 
 # .SYNOPSIS
@@ -51,7 +75,7 @@ function Get-Git {
 # System.String. Get-GitCommitHash returns a string that contains the git commit hash.
 # 
 # .NOTES
-# If the git command fails, returns an empty string.
+# If anything fails, returns an empty string.
 function Get-GitCommitHash {
     [CmdletBinding()]
     param(
@@ -60,28 +84,37 @@ function Get-GitCommitHash {
 
         [switch] $Abbrev
     )
-    
-    if (!$git) {
-        Write-Error 'The "git" parameter can not be null or empty.'
-    }
-    
+
     Write-Verbose 'Getting the last git commit hash.'
 
-    if ($abbrev.IsPresent) {
-        $fmt = '%h'
-    } else {
-        $fmt = '%H'
-    }
+    $fmt = ?: { $abbrev.IsPresent } { '%h' } { '%H' }
+
+    $hash = ''
 
     try {
         Write-Debug 'Call git.exe log.'
-        $hash = . $git log -1 --format="$fmt"
+        $hash = . $git log -1 --format="$fmt" 2>&1
     } catch {
-        Write-Warning "Unabled to get the last git commit hash: $_"
-        $hash = ''
+        Write-Warning "Git command failed: $_"
     }
 
     $hash
+}
+
+# .SYNOPSIS
+# Get the path to the NuGet command.
+#
+# .OUTPUTS
+# System.String. Get-NuGet returns a string that contains the path to the NuGet executable.
+function Get-NuGet {
+    [CmdletBinding()]
+    param()
+
+    if ($SCRIPT:NuGet -eq $null) {
+        $SCRIPT:NuGet = Get-RepositoryPath 'tools', 'nuget.exe'
+    }
+
+    $SCRIPT:NuGet
 }
 
 # .SYNOPSIS
@@ -118,7 +151,7 @@ function Get-RepositoryPath {
         [Alias('p')] [string[]] $PathList
     )
     
-    Join-Path -Path $script:RepositoryRoot -ChildPath (Join-PathList $pathList)
+    Join-Path -Path $SCRIPT:RepositoryRoot -ChildPath (Join-PathList $pathList)
 }
 
 # .SYNOPSIS
@@ -128,7 +161,7 @@ function Get-RepositoryPath {
 # System.String. Get-RepositoryRoot returns a string that contains the path
 # to the repository.
 function Get-RepositoryRoot {
-    $script:RepositoryRoot
+    $SCRIPT:RepositoryRoot
 }
 
 # .SYNOPSIS
@@ -140,17 +173,21 @@ function Install-7Zip {
     [CmdletBinding()]
     param()
     
-    $path = Get-RepositoryPath 'tools', '7za.exe'
+    $path = Get-7Zip
 
     if (Test-Path $path -PathType Leaf) {
         Write-Verbose '7-Zip is already installed.'
     } else {
         echo 'Installing 7-Zip.'
 
-        [System.Uri] $source = 'http://narvalo.org/7z936.exe'
+        try {
+            [System.Uri] $source = 'http://narvalo.org/7z936.exe'
 
-        Write-Debug "Download $source to $path."
-        Invoke-WebRequest $source -OutFile $path
+            Write-Debug "Download $source to $path."
+            Invoke-WebRequest $source -OutFile $path
+        } catch {
+            throw 'Unabled to download 7-Zip.'
+        }
     }
 
     $path
@@ -165,17 +202,21 @@ function Install-NuGet {
     [CmdletBinding()]
     param()
     
-    $path = Get-RepositoryPath 'tools', 'NuGet.exe'
-
+    $path = Get-NuGet
+    
     if (Test-Path $path -PathType Leaf) {
         Write-Verbose 'NuGet is already installed.'
     } else {
         echo 'Installing NuGet.'
 
-        [System.Uri] $source = 'https://nuget.org/nuget.exe'
+        try {
+            [System.Uri] $source = 'https://nuget.org/nuget.exe'
 
-        Write-Debug "Download $source to $path."
-        Invoke-WebRequest $source -OutFile $path
+            Write-Debug "Download $source to $path."
+            Invoke-WebRequest $source -OutFile $path
+        } catch {
+            throw 'Unabled to download NuGet.'
+        }
     }
 
     $path
@@ -202,18 +243,18 @@ function Install-PSake {
         [string] $NuGet
     )
     
-    if (!$nuget) {
-        Write-Error 'The "nuget" parameter can not be null or empty.'
-    }
-    
     echo 'Installing PSake.'
     
-    Write-Debug 'Call nuget.exe install psake.'
-    & $nuget install psake `
-       -ExcludeVersion 
-       -OutputDirectory (Get-RepositoryPath 'packages') `
-       -ConfigFile (Get-RepositoryPath '.nuget', 'NuGet.Config') `
-       -Verbosity quiet
+    try {
+        Write-Debug 'Call nuget.exe install psake.'
+        . $nuget install psake `
+           -ExcludeVersion `
+           -OutputDirectory (Get-RepositoryPath 'packages') `
+           -ConfigFile (Get-RepositoryPath '.nuget', 'NuGet.Config') `
+           -Verbosity quiet 2>&1
+    } catch {
+        throw "'nuget.exe install' failed: $_"
+    }
 
     Get-PSakeModulePath -NoVersion
 }
@@ -236,17 +277,17 @@ function Restore-SolutionPackages {
         [string] $NuGet
     )
     
-    if (!$nuget) {
-        Write-Error 'The "nuget" parameter can not be null or empty.'
-    }
-    
     echo 'Restoring solution packages.'
     
-    Write-Debug 'Call nuget.exe restore.'
-    & $nuget restore (Get-RepositoryPath '.nuget', 'packages.config') `
-        -PackagesDirectory (Get-RepositoryPath 'packages') `
-        -ConfigFile (Get-RepositoryPath '.nuget', 'NuGet.Config') `
-        -Verbosity quiet
+    try {
+        Write-Debug 'Call nuget.exe restore.'
+        . $nuget restore (Get-RepositoryPath '.nuget', 'packages.config') `
+            -PackagesDirectory (Get-RepositoryPath 'packages') `
+            -ConfigFile (Get-RepositoryPath '.nuget', 'NuGet.Config') `
+            -Verbosity quiet 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
 }
 
 # ------------------------------------------------------------------------------
@@ -275,8 +316,10 @@ function Join-PathList {
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
+    Get-7Zip,
     Get-Git, 
     Get-GitCommitHash, 
+    Get-NuGet, 
     Get-PSakeModulePath,
     Get-RepositoryPath, 
     Get-RepositoryRoot,

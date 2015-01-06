@@ -20,8 +20,6 @@ Properties {
     $Everything = Project\Get-RepositoryPath 'tools', 'Make.proj'
     $Foundations = Project\Get-RepositoryPath 'tools', 'Make.Foundations.proj'
     
-    $GitCommitHash = Project\Get-Git | Project\Get-GitCommitHash
-
     # Packaging properties:
     # - Release configuration
     # - Generate assembly versions (necessary for NuGet packaging)
@@ -31,7 +29,6 @@ Properties {
     $PackagingProps = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
-        "/p:GitCommitHash=$GitCommitHash",
         "/p:Retail=$retail",
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=false',
@@ -46,7 +43,6 @@ Properties {
     $CIProps = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=false',
-        "/p:GitCommitHash=$GitCommitHash",
         "/p:Retail=$retail",
         '/p:SignAssembly=false',
         '/p:SkipCodeContractsReferenceAssembly=false',
@@ -133,26 +129,38 @@ Task SecurityAnalysis -Description 'Run SecAnnotate on Foundations (slow).' {
 # Packaging tasks
 # ------------------------------------------------------------------------------
 
-Task Package -depends Validate-Packaging -Description 'Package all projects.' {
-    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps
+Task Package -depends GetGitCommitHash -Description 'Package all projects.' {
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
+        "/p:GitCommitHash=$SCRIPT:GitCommitHash"
 } -Alias Pack
 
-Task Package-Core -depends Validate-Packaging -Description 'Package core projects.' {
-    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Core_'
+Task Package-Core -depends GetGitCommitHash -Description 'Package core projects.' {
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
+        "/p:GitCommitHash=$SCRIPT:GitCommitHash",
+        '/p:Filter=_Core_' 
 } -Alias PackCore
 
-Task Package-Mvp -depends Validate-Packaging -Description 'Package MVP projects.' {
-    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Mvp_'
+Task Package-Mvp -depends GetGitCommitHash -Description 'Package MVP projects.' {
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
+        "/p:GitCommitHash=$SCRIPT:GitCommitHash",
+        '/p:Filter=_Mvp_' 
 } -Alias PackMvp
 
-Task Package-Build -depends Validate-Packaging -Description 'Package the Narvalo.Build project.' {
-    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps '/p:Filter=_Build_'
+Task Package-Build -depends GetGitCommitHash -Description 'Package the Narvalo.Build project.' {
+    MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
+        "/p:GitCommitHash=$SCRIPT:GitCommitHash",
+        '/p:Filter=_Build_' 
 } -Alias PackBuild
 
-Task Validate-Packaging -Description 'Validate packaging tasks.' {
-    if ($retail -and ($GitCommitHash -eq '')) {
+Task GetGitCommitHash -Description 'Validate packaging tasks.' {
+    $git = (Project\Get-Git)
+    $hash = ?: { $git -eq '' } { '' } { (Project\Get-GitCommitHash $git) } 
+
+    if ($retail -and $hash -eq '') {
         Exit-Error 'When building retail packages, the git commit hash MUST not be empty.'
     }
+
+    $SCRIPT:GitCommitHash = $hash
 }
 
 # ------------------------------------------------------------------------------
@@ -172,8 +180,8 @@ Task Publish -Description 'Publish all projects.' {
 # ------------------------------------------------------------------------------
 
 Task MyGet-Clean -Description 'Clean MyGet server.' {
-    $script:MyGetDir = Join-Path $WorkRoot 'myget'
-    $script:MyGetPkg = Join-Path $WorkRoot 'myget.7z'
+    $SCRIPT:MyGetDir = Join-Path $WorkRoot 'myget'
+    $SCRIPT:MyGetPkg = Join-Path $WorkRoot 'myget.7z'
 
     if (Test-Path $MyGetDir) {
         Remove-Item $MyGetDir -Force -Recurse
@@ -193,9 +201,13 @@ Task MyGet-Build -Description 'Build MyGet server.' {
 }
 
 Task MyGet-Zip -Description 'Zip MyGet server.' {
-    . (Project\Install-7Zip) -mx9 a $script:MyGetPkg $script:MyGetDir | Out-Null
+    . (Project\Install-7Zip) -mx9 a $SCRIPT:MyGetPkg $SCRIPT:MyGetDir | Out-Null
 
-    Write-Host "A ready to publish zip file for MyGet may be found here: '$script:MyGetPkg'." -ForegroundColor Green
+    if (!$?) {
+        Exit-Error 'Unabled to create the Zip package.'
+    }
+
+    Write-Host "A ready to publish zip file for MyGet may be found here: '$SCRIPT:MyGetPkg'." -ForegroundColor Green
 }
 
 Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `

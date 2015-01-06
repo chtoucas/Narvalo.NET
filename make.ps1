@@ -1,4 +1,4 @@
-#Requires -Version 3.0
+#Requires -Version 4.0
 
 # .SYNOPSIS
 # Run the PSake build script.
@@ -49,10 +49,10 @@ param(
     [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $true)]
     [Alias('t')] [string[]] $TaskList = @(),
 
+    [Alias('r')] [switch] $Retail,
+
     [Parameter(Mandatory = $false, Position = 1)]
     [Alias('v')] [string] $Verbosity = 'minimal',
-
-    [Alias('r')] [switch] $Retail,
     [switch] $Docs,
     [switch] $NoLogo,
     [switch] $Pristine
@@ -73,12 +73,12 @@ if (!$noLogo.IsPresent) {
 # ------------------------------------------------------------------------------
 
 if ($pristine.IsPresent) {
-    Write-Debug 'Unload Helpers & Project modules.'
+    Write-Debug 'Unload Helpers & Project module.'
     Get-Module Project | Remove-Module
 }
 
 if ($pristine.IsPresent -or !(Get-Module Helpers)) {
-    Write-Debug 'Import the Helpers module (required by our psake script).'
+    Write-Debug 'Import the Helpers module.'
     Join-Path $PSScriptRoot 'tools\Helpers.psm1' | Import-Module
 }
 if ($pristine.IsPresent -or !(Get-Module Project)) {

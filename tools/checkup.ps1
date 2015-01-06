@@ -1,4 +1,4 @@
-#Requires -Version 3.0
+#Requires -Version 4.0
 
 
 # .SYNOPSIS
@@ -55,9 +55,9 @@
 
 [CmdletBinding()]
 param(
-    [Alias('fix')] [switch] $Repair,
-    [switch] $Purge,
     [switch] $Analyze,
+    [switch] $Purge,
+    [Alias('fix')] [switch] $Repair,
 
     [Alias('f')] [switch] $Force,
     [Alias('y')] [switch] $Yes,
@@ -84,11 +84,16 @@ if (!$noLogo.IsPresent) {
 # ------------------------------------------------------------------------------
 
 if ($pristine.IsPresent) {
-    Write-Debug 'Unload Project & Checkup modules.'
+    Write-Debug 'Unload Helpers, Project & Checkup modules.'
+    Get-Module Helpers | Remove-Module
     Get-Module Project | Remove-Module
     Get-Module Checkup | Remove-Module
 }
 
+if ($pristine.IsPresent -or !(Get-Module Helpers)) {
+    Write-Debug 'Import the Helpers module.'
+    Join-Path $PSScriptRoot 'tools\Helpers.psm1' | Import-Module
+}
 if ($pristine.IsPresent -or !(Get-Module Project)) {
     Write-Debug 'Import the Project module.'
     Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber

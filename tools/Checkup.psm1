@@ -1,15 +1,14 @@
-#Requires -Version 3.0
+#Requires -Version 4.0
+#Requires -Modules Helpers
+#Requires -Modules Project
 
 Set-StrictMode -Version Latest
-
-Join-Path $PSScriptRoot 'Helpers.psm1' | Import-Module
-Join-Path $PSScriptRoot 'Project.psm1' | Import-Module -NoClobber
 
 # ------------------------------------------------------------------------------
 # Private variables
 # ------------------------------------------------------------------------------
 
-[string] $script:CopyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
+[string] $SCRIPT:CopyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public methods
@@ -71,7 +70,7 @@ function Remove-UntrackedItems {
     )
     
     if (!$git) {
-        Write-Error 'The ''git'' parameter can not be null or empty.'
+        throw 'The ''git'' parameter can not be null or empty.'
     }
     
     Write-Verbose 'Removing untracked files.'
@@ -148,7 +147,7 @@ function Add-Copyright {
 
     $lines = New-Object System.Collections.ArrayList(, (cat -LiteralPath $path))
     $lines.Insert(0, '')
-    $lines.Insert(0, $script:CopyrightHeader)
+    $lines.Insert(0, $SCRIPT:CopyrightHeader)
     $lines | Set-Content -LiteralPath $path -Encoding UTF8
 }
 

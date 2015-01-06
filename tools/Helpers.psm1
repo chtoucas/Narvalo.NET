@@ -1,4 +1,4 @@
-#Requires -Version 3.0
+#Requires -Version 4.0
 
 Set-StrictMode -Version Latest
 
@@ -27,50 +27,104 @@ function Exit-Error {
 
 # .SYNOPSIS
 # Mimic the ?? operator from C# but not quite the same.
+#
+# .NOTES
+# Aliases: ??
+#
+# .LINK
+# https://pscx.codeplex.com/
 function Invoke-NullCoalescing {
-    [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
-        [AllowNull()] $Value,
+        [Parameter(Mandatory, Position=0)]
+        [AllowNull()]
+        [scriptblock]
+        $PrimaryExpr,
 
-        [Parameter(Mandatory = $true, Position = 1)] 
-        [PSObject] $Alternate
+        [Parameter(Mandatory, Position=1)]
+        [scriptblock]
+        $AlternateExpr,
+
+        [Parameter(ValueFromPipeline, ParameterSetName='InputObject')]
+        [psobject]
+        $InputObject
     )
 
-    if ($value -ne $null) {
-        $result = $value
-    } else {
-        if ($alternate -is [ScriptBlock]) {
-            $result = & $alternate
-        } else {
-            $result = $alternate
+    Process {
+        if ($pscmdlet.ParameterSetName -eq 'InputObject') {
+            if ($PrimaryExpr -eq $null) {
+                Foreach-Object $AlternateExpr -InputObject $InputObject
+            }
+            else {
+                $result = Foreach-Object $PrimaryExpr -input $InputObject
+                if ($result -eq $null) {
+                    Foreach-Object $AlternateExpr -InputObject $InputObject
+                }
+                else {
+                    $result
+                }
+            }
+        }
+        else {
+            if ($PrimaryExpr -eq $null) {
+                &$AlternateExpr
+            }
+            else {
+                $result = &$PrimaryExpr
+                if ($result -eq $null) {
+                    &$AlternateExpr
+                }
+                else {
+                    $result
+                }
+            }
         }
     }
-
-    $result
 }
 
 # .SYNOPSIS
 # Mimic the ?: operator from C#.
+#
+# .NOTES
+# Aliases: ?:
+#
+# .LINK
+# https://pscx.codeplex.com/
 function Invoke-Ternary {
-    [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [bool] $Predicate,
+        [Parameter(Mandatory, Position=0)]
+        [scriptblock]
+        $Condition,
 
-        [Parameter(Mandatory = $true, Position = 1)]
-        [AllowNull()]
-        [PSObject] $Then,
+        [Parameter(Mandatory, Position=1)]
+        [scriptblock]
+        $TrueBlock,
 
-        [Parameter(Mandatory = $true, Position = 2)] 
-        [AllowNull()]
-        [PSObject] $Otherwise
-    )
+        [Parameter(Mandatory, Position=2)]
+        [scriptblock]
+        $FalseBlock,
 
-    if ($predicate) {
-        return $then
-    } else {
-        return $otherwise
+        [Parameter(ValueFromPipeline, ParameterSetName='InputObject')]
+        [psobject]
+        $InputObject
+    ) 
+        
+    Process { 
+        if ($pscmdlet.ParameterSetName -eq 'InputObject') {
+            Foreach-Object $Condition -input $InputObject | Foreach { 
+                if ($_) { 
+                    Foreach-Object $TrueBlock -InputObject $InputObject 
+                }
+                else {
+                    Foreach-Object $FalseBlock -InputObject $InputObject 
+                }
+            }
+        }
+        elseif (&$Condition) {
+            &$TrueBlock
+        } 
+        else {
+            &$FalseBlock
+        }
     }
 }
 
