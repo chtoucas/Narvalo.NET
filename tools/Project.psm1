@@ -7,10 +7,6 @@ Set-StrictMode -Version Latest
 # Private variables
 # ------------------------------------------------------------------------------
 
-[string] $SCRIPT:7Zip  = [NullString]::Value
-[string] $SCRIPT:Git   = [NullString]::Value
-[string] $SCRIPT:NuGet = [NullString]::Value
-
 [string] $SCRIPT:RepositoryRoot = (Get-Item $PSScriptRoot).Parent.FullName
 
 # ------------------------------------------------------------------------------
@@ -26,37 +22,29 @@ function Get-7Zip {
     [CmdletBinding()]
     param()
     
-    if ($SCRIPT:7Zip -eq $null) {
-        $SCRIPT:7Zip = Get-RepositoryPath 'tools', '7za.exe'
-    }
-
-    $SCRIPT:7Zip
+    Get-RepositoryPath 'tools', '7za.exe'
 }
 
 # .SYNOPSIS
 # Get the path to the installed git command.
 #
 # .OUTPUTS
-# System.String. Get-Git returns a string that contains the path to the git 
-# command or an empty string if git is nowhere to be found.
+# System.String. Get-Git returns a string that contains the path to the git command 
+# or $null if git is nowhere to be found.
 function Get-Git {
     [CmdletBinding()]
     param()
 
-    if ($SCRIPT:Git -eq $null) {
-        Write-Verbose 'Finding the installed git command.'
+    Write-Verbose 'Finding the installed git command.'
 
-        $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
+    $git = (Get-Command "git.exe" -CommandType Application -ErrorAction SilentlyContinue)
 
-        if ($git -eq $null) { 
-            Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
-            $SCRIPT:Git = ''
-        } else {
-            $SCRIPT:Git = $git.Path
-        }
+    if ($git -eq $null) { 
+        Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
+        return $null
+    } else {
+        return $git.Path
     }
-
-    $SCRIPT:Git
 }
 
 # .SYNOPSIS
@@ -110,11 +98,7 @@ function Get-NuGet {
     [CmdletBinding()]
     param()
 
-    if ($SCRIPT:NuGet -eq $null) {
-        $SCRIPT:NuGet = Get-RepositoryPath 'tools', 'nuget.exe'
-    }
-
-    $SCRIPT:NuGet
+    Get-RepositoryPath 'tools', 'nuget.exe'
 }
 
 # .SYNOPSIS
@@ -165,61 +149,45 @@ function Get-RepositoryRoot {
 }
 
 # .SYNOPSIS
-# Install 7-Zip.
+# Install 7-Zip if it is not already installed.
+#
+# .PARAMETER Force
+# If present, override the previous installed 7-Zip if any.
 #
 # .OUTPUTS
 # System.String. Install-7Zip returns a string that contains the path to the 7-Zip executable.
 function Install-7Zip {
     [CmdletBinding()]
-    param()
-    
-    $path = Get-7Zip
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('o')] [string] $OutFile,
 
-    if (Test-Path $path -PathType Leaf) {
-        Write-Verbose '7-Zip is already installed.'
-    } else {
-        echo 'Installing 7-Zip.'
+        [switch] $Force
+    )
 
-        try {
-            [System.Uri] $source = 'http://narvalo.org/7z936.exe'
-
-            Write-Debug "Download $source to $path."
-            Invoke-WebRequest $source -OutFile $path
-        } catch {
-            throw 'Unabled to download 7-Zip.'
-        }
-    }
-
-    $path
+    [System.Uri] $uri = 'http://narvalo.org/7z936.exe'
+    $uri | Install-WebResource -Name '7-Zip' -o $outFile -Force:$force
 }
 
 # .SYNOPSIS
-# Install NuGet.
+# Install NuGet if it is not already installed.
+#
+# .PARAMETER Force
+# If present, override the previous installed NuGet if any.
 #
 # .OUTPUTS
 # System.String. Install-NuGet returns a string that contains the path to the NuGet executable.
 function Install-NuGet {
     [CmdletBinding()]
-    param()
-    
-    $path = Get-NuGet
-    
-    if (Test-Path $path -PathType Leaf) {
-        Write-Verbose 'NuGet is already installed.'
-    } else {
-        echo 'Installing NuGet.'
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('o')] [string] $OutFile,
 
-        try {
-            [System.Uri] $source = 'https://nuget.org/nuget.exe'
+        [switch] $Force
+    )
 
-            Write-Debug "Download $source to $path."
-            Invoke-WebRequest $source -OutFile $path
-        } catch {
-            throw 'Unabled to download NuGet.'
-        }
-    }
-
-    $path
+    [System.Uri] $uri = 'https://nuget.org/nuget.exe'
+    $uri | Install-WebResource -Name 'NuGet' -o $outFile -Force:$force
 }
 
 # .SYNOPSIS

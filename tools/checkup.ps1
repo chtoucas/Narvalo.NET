@@ -49,7 +49,6 @@
 # - Analyze: Find hidden VS files
 # - Analyze: Find files ignored by git: git status -u --ignored
 # - Purge: Git reset (WARNING: remove ALL ignored files)
-# - Purge: Remove nuget.exe, 7zip.exe
 # - Repair: Find DependentUpon & SubType files
 # - Repair: Find files ignored by StyleCop
 
@@ -92,7 +91,7 @@ if ($pristine.IsPresent) {
 
 if ($pristine.IsPresent -or !(Get-Module Helpers)) {
     Write-Debug 'Import the Helpers module.'
-    Join-Path $PSScriptRoot 'tools\Helpers.psm1' | Import-Module
+    Join-Path $PSScriptRoot 'Helpers.psm1' | Import-Module
 }
 if ($pristine.IsPresent -or !(Get-Module Project)) {
     Write-Debug 'Import the Project module.'
@@ -131,7 +130,16 @@ if ($purge.IsPresent) {
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove all untracked files? [y/N]') -eq 'y') {
-        Project\Get-Git | Checkup\Remove-UntrackedItems -Path (Project\Get-RepositoryRoot) -WhatIf:$dryRun -v:$verbose
+        $git = (Project\Get-Git)
+
+        if ($git -ne $null) {
+            $git | Checkup\Remove-UntrackedItems -Path (Project\Get-RepositoryRoot) -WhatIf:$dryRun -v:$verbose
+        }
+    }
+
+    if ($yes.IsPresent -or (Read-Host 'Remove local tools ''NuGet'' & ''7-Zip''? [y/N]') -eq 'y') {
+        Remove-Item (Project\Get-7Zip) -ErrorAction SilentlyContinue -WhatIf:$dryRun
+        Remove-Item (Project\Get-NuGet) -ErrorAction SilentlyContinue -WhatIf:$dryRun
     }
 }
 

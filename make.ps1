@@ -87,7 +87,7 @@ if ($pristine.IsPresent -or !(Get-Module Project)) {
 }
 if (!(Get-Module psake)) {
     Write-Debug 'Ensure PSake is installed.'
-    Project\Install-NuGet | Project\Restore-SolutionPackages
+    Project\Get-NuGet | Project\Install-NuGet | Project\Restore-SolutionPackages
 
     Write-Debug 'Import the psake module.'
     Project\Get-PSakeModulePath | Import-Module -NoClobber

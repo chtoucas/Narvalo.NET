@@ -26,6 +26,45 @@ function Exit-Error {
 }
 
 # .SYNOPSIS
+# Install a web resource if it is not already installed.
+#
+# .PARAMETER Force
+# If present, override the previous installed resource if any.
+#
+# .OUTPUTS
+# System.String. Install-WebResource returns a string that contains the path to the installed resource.
+function Install-WebResource {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)] 
+        [System.Uri] $Uri,
+
+        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)] 
+        [Alias('o')] [string] $OutFile,
+
+        [Parameter(Mandatory = $true, Position = 2)] 
+        [string] $Name,
+
+        [switch] $Force
+    )
+    
+    if (!$force -and (Test-Path $outFile -PathType Leaf)) {
+        Write-Verbose "$name is already installed."
+    } else {
+        echo "Installing $name."
+
+        try {
+            Write-Debug "Download $uri to $outFile."
+            Invoke-WebRequest $uri -OutFile $outFile
+        } catch {
+            throw "Unabled to download $name."
+        }
+    }
+
+    $outFile
+}
+
+# .SYNOPSIS
 # Mimic the ?? operator from C# but not quite the same.
 #
 # .NOTES
@@ -142,6 +181,7 @@ Set-Alias ?: Invoke-Ternary
 Export-ModuleMember `
     -Function `
         Exit-Error,
+        Install-WebResource,
         Invoke-NullCoalescing,
         Invoke-Ternary `
     -Alias `

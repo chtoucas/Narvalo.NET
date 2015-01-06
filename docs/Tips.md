@@ -1,6 +1,11 @@
 Tips
 ====
 
+
+### Truly initialize a PS string to $null ###
+
+[string] $value  = [NullString]::Value
+
 ### Update all binding redirects
 In the Package Manager Console:
 ```
