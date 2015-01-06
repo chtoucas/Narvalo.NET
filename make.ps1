@@ -20,8 +20,8 @@
 #
 # .PARAMETER Verbosity
 # Specifies the amount of information displayed by MSBuild.
-# You can use the following verbosity levels: 
-#   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. 
+# You can use the following verbosity levels:
+#   q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic].
 #
 # .INPUTS
 # The list of tasks to be executed.
@@ -38,7 +38,7 @@
 # Quiet run of the Code Analysis task.
 #
 # .EXAMPLE
-# make.ps1 -Retail Package 
+# make.ps1 -Retail Package
 # Create retail packages with the default verbosity level.
 #
 # .LINK
@@ -74,6 +74,7 @@ if (!$noLogo.IsPresent) {
 
 if ($pristine.IsPresent) {
     Write-Debug 'Unload Helpers & Project module.'
+    Get-Module Helpers | Remove-Module
     Get-Module Project | Remove-Module
 }
 
