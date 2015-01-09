@@ -11,8 +11,8 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
-    $WorkRoot = Project\Get-RepositoryPath 'work' 
-    $PackagesDir = Project\Get-RepositoryPath 'work', 'packages'
+    $WorkRoot = Get-ProjectItem 'work' 
+    $PackagesDir = Get-ProjectItem 'work\packages'
     
     $MyGetDir = Join-Path $WorkRoot 'myget'
     $MyGetPkg = Join-Path $WorkRoot 'myget.7z'
@@ -22,8 +22,8 @@ Properties {
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
-    $Everything = Project\Get-RepositoryPath 'tools', 'Make.proj'
-    $Foundations = Project\Get-RepositoryPath 'tools', 'Make.Foundations.proj'
+    $Everything = Get-ProjectItem 'tools\Make.proj' -Resolve
+    $Foundations = Get-ProjectItem 'tools\Make.Foundations.proj' -Resolve
     
     # Packaging properties:
     # - Release configuration
@@ -173,7 +173,7 @@ Task _Validate-Packaging -PreCondition { $retail } `
 # ------------------------------------------------------------------------------
 
 Task Publish -Description 'Publish all projects.' {
-    $nuget = Project\Get-NuGet | Project\Install-NuGet
+    $nuget = Get-NuGet -Install
 
     Exit-Error 'Not yet implemented!'
 
@@ -197,13 +197,13 @@ Task MyGet-Build -Description 'Build MyGet server.' {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
     MSBuild $Opts `
-        (Project\Get-RepositoryPath 'tools', 'MyGet', 'MyGet.csproj') `
+        (Get-ProjectItem 'tools\MyGet\MyGet.csproj' -Resolve) `
         '/t:Clean;Build',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
 
 Task MyGet-Zip -Description 'Zip MyGet server.' {
-    . (Project\Get-7zip | Project\Install-7Zip) -mx9 a $MyGetPkg $MyGetDir | Out-Null
+    . (Get-7Zip -Install) -mx9 a $MyGetPkg $MyGetDir | Out-Null
 
     if (!$?) {
         Exit-Error 'Unabled to create the Zip package.'
@@ -220,17 +220,23 @@ Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `
 # ------------------------------------------------------------------------------
 
 Task Environment -Description 'Display the build environment.' {
-    $msbuild = MSBuild $Opts '/version'
-    $framework = $psake.context.peek().config.framework
-    $version = $psake.version
+    # Running "MSBuild /version" outputs: 
+    # >   Microsoft (R) Build Engine, version 12.0.31101.0
+    # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
+    # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
+    # >
+    # >   12.0.31101.0
+    $infos = (MSBuild '/version') -Split "`n", 4
 
-    Write-Host "  MSBuild           v$msbuild"
-    Write-Host "  MSBuild Framework v$framework"
-    Write-Host "  PSake             v$version"
-}
+    $msbuild = $infos[4]
+    $netFramework = ($infos[1] -Split ' ', 5)[4].TrimEnd(']')
+    $psakeFramework = $psake.context.peek().config.framework
+    $psakeVersion = $psake.version
 
-Task MSBuildVersion -Description 'Display the MSBuild version.' {
-    MSBuild '/version'
+    Write-Host "  MSBuild         v$msbuild"
+    Write-Host "  .NET Framework  v$netFramework"
+    Write-Host "  PSake           v$psakeVersion"
+    Write-Host "  PSake Framework v$psakeFramework"
 }
 
 # ------------------------------------------------------------------------------
@@ -238,9 +244,9 @@ Task MSBuildVersion -Description 'Display the MSBuild version.' {
 # ------------------------------------------------------------------------------
 
 Task _Set-GitCommitHash -Description 'Initialize GitCommitHash.' {
-    $git = (Project\Get-Git)
+    $git = Get-Git
 
     if ($git -ne $null) {
-        $GitCommitHash = $git | Project\Get-GitCommitHash
+        $GitCommitHash = $git | Get-GitCommitHash
     }
 }

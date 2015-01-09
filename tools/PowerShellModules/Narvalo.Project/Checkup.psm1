@@ -1,7 +1,3 @@
-#Requires -Version 4.0
-#Requires -Modules Helpers
-#Requires -Modules Project
-
 Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
@@ -11,7 +7,7 @@ Set-StrictMode -Version Latest
 [string] $SCRIPT:CopyrightHeader = '// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
-# Public methods
+# Public functions
 # ------------------------------------------------------------------------------
 
 # .SYNOPSIS
@@ -37,7 +33,7 @@ function Remove-BinAndObj {
 
             Write-Verbose "Processing directory '$_'."
 
-            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse }
+            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse -ErrorAction SilentlyContinue }
         }
     }
 }
@@ -68,10 +64,6 @@ function Remove-UntrackedItems {
         [Parameter(Mandatory = $true, Position = 1)] 
         [Alias('p')] [string] $Path
     )
-    
-    if (!$git) {
-        throw 'The ''git'' parameter can not be null or empty.'
-    }
     
     Write-Verbose 'Removing untracked files.'
 
@@ -117,9 +109,9 @@ function Repair-Copyright {
 
     END {
         if ($count -eq 0) {
-            echo 'No missing copyright header found :-)'
+            Write-Output 'No missing copyright header found :-)'
         } else {
-            echo "Repaired $count file(s) without a copyright header!"
+            Write-Output "Repaired $count file(s) without a copyright header!"
         }
     }
 }
@@ -195,5 +187,4 @@ function Test-Copyright {
 Export-ModuleMember -Function `
     Remove-BinAndObj,
     Remove-UntrackedItems,
-    Repair-Copyright,
-    Yala
+    Repair-Copyright

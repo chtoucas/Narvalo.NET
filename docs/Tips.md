@@ -1,7 +1,6 @@
 Tips
 ====
 
-
 ### Truly initialize a PS string to $null ###
 
 [string] $value  = [NullString]::Value

@@ -51,7 +51,9 @@
 
 :Build
 
-@call "%RepositoryRoot%\tools\MSBuild.cmd" @"%RspFile%" "%ProjectFile%"
+@call "%RepositoryRoot%\tools\MSBuild.cmd" ^
+    @"%RspFile%" ^
+    "%ProjectFile%"
 
 @if %ERRORLEVEL% neq 0 (
   @set ErrMsg=Build failed
