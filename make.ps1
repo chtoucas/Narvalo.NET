@@ -57,8 +57,6 @@ Set-StrictMode -Version Latest
 Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1') -Force
 $module = Import-RepositoryModule 'Narvalo.Project' $pristine.IsPresent -Args $PSScriptRoot
 
-# ------------------------------------------------------------------------------
-
 if (!$noLogo.IsPresent) {
     $version = $module.Version
 
@@ -69,8 +67,6 @@ if (!$noLogo.IsPresent) {
     }
 }
 
-# ------------------------------------------------------------------------------
-
 if (!(Get-Module psake)) {
     Write-Debug 'Ensure PSake is installed.'
     Get-NuGet -Install | Restore-SolutionPackages
@@ -78,8 +74,6 @@ if (!(Get-Module psake)) {
     Write-Debug 'Import the psake module.'
     Get-PSakeModulePath | Import-Module -NoClobber
 }
-
-# ------------------------------------------------------------------------------
 
 $psakefile = Get-ProjectItem 'tools\PSakefile.ps1' -Resolve
 

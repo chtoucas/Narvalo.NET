@@ -250,3 +250,5 @@ Task _Set-GitCommitHash -Description 'Initialize GitCommitHash.' {
         $GitCommitHash = $git | Get-GitCommitHash
     }
 }
+
+# ------------------------------------------------------------------------------

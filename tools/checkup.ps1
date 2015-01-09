@@ -101,7 +101,7 @@ if ($analyze.IsPresent) {
 
 if ($purge.IsPresent) {
     if ($yes.IsPresent -or (Read-Host 'Remove ''bin'' and ''obj'' directories? [y/N]') -eq 'y') {
-        $srcDirs | Checkup\Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
+        $srcDirs | Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove ''packages'' directory? [y/N]') -eq 'y') {
@@ -122,7 +122,7 @@ if ($purge.IsPresent) {
         $git = (Get-Git)
 
         if ($git -ne $null) {
-            $git | Checkup\Remove-UntrackedItems -Path (Get-ProjectItem '') -WhatIf:$dryRun -v:$verbose
+            $git | Remove-UntrackedItems -Path (Get-ProjectItem '') -WhatIf:$dryRun -v:$verbose
         }
     }
 
@@ -134,7 +134,7 @@ if ($purge.IsPresent) {
 
 if ($repair.IsPresent) {
     if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
-        $srcDirs | Checkup\Repair-Copyright -WhatIf:$dryRun -v:$verbose
+        $srcDirs | Repair-Copyright -WhatIf:$dryRun -v:$verbose
     }
 }
 

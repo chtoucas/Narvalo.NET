@@ -124,7 +124,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FCB6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Project", "Narvalo.Project", "{689BB57E-CEC1-496E-9294-ADE97481280A}"
 	ProjectSection(SolutionItems) = preProject
-		PowerShellModules\Narvalo.Project\Checkup.psm1 = PowerShellModules\Narvalo.Project\Checkup.psm1
 		PowerShellModules\Narvalo.Project\Narvalo.Project.psd1 = PowerShellModules\Narvalo.Project\Narvalo.Project.psd1
 		PowerShellModules\Narvalo.Project\Narvalo.Project.psm1 = PowerShellModules\Narvalo.Project\Narvalo.Project.psm1
 	EndProjectSection

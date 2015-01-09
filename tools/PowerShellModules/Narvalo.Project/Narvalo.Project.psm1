@@ -4,18 +4,22 @@ function Approve-ProjectRoot {
     param([Parameter(Mandatory = $true)] [string] $path) 
 
     if (![System.IO.Path]::IsPathRooted($path)) {
-        throw 'When importing the ''Narvalo.Project'' module, you MUST specify an absolute path for the Narvalo.NET project repository.'
+        throw 'When importing the ''Narvalo.Project'' module, ',
+            'you MUST specify an absolute path for the Narvalo.NET project repository.'
     }
 
     if (!(Test-Path $path)) {
-        throw 'When importing the ''Narvalo.Project'' module, you MUST specify an existing directory for the Narvalo.NET project repository.'
+        throw 'When importing the ''Narvalo.Project'' module,',
+            'you MUST specify an existing directory for the Narvalo.NET project repository.'
     }
 
     return $path
 }
 
 if ($args.Length -ne 1) {
-    throw 'When importing the ''Narvalo.Project'' module, you MUST specify the Narvalo.NET project repository, e.g. ''Import-Module Narvalo.Project -Args $projectRoot''.'
+    throw 'When importing the ''Narvalo.Project'' module,',
+        'you MUST specify the Narvalo.NET project repository,',
+        ' e.g. ''Import-Module Narvalo.Project -Args $projectRoot''.'
 }
 
 Set-Variable -Name ProjectRoot `
@@ -27,6 +31,13 @@ Set-Variable -Name ProjectRoot `
 #$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 #    Remove-Variable -Name ProjectRoot -Scope Script -Force
 #}
+
+# ------------------------------------------------------------------------------
+# Private variables
+# ------------------------------------------------------------------------------
+
+[string] $script:CopyrightHeader = '// Copyright (c) Narvalo.Org.',
+    'All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public functions
@@ -294,6 +305,114 @@ function Install-PSake {
 
 <#
 .SYNOPSIS
+    Remove the 'bin' and 'obj' directories created by Visual Studio.
+.PARAMETER PathList
+    Specifies the list of paths to traverse.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Remove-BinAndObj {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('p')] [string[]] $PathList
+    )
+
+    BEGIN { }
+
+    PROCESS {
+        $pathList | %{
+            if (!(Test-Path $_)) { return }
+
+            Write-Verbose "Processing directory '$_'."
+
+            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse -ErrorAction SilentlyContinue }
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+    Remove files untracked by git.
+.PARAMETER Git
+    Specifies the path to the git executable.
+.INPUTS
+    The path to the git executable.
+.OUTPUTS
+    None.
+.NOTES
+    We do not remove ignored files (see -x and -X options from git).
+.LINK
+    http://git-scm.com/docs/git-clean
+#>
+function Remove-UntrackedItems {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string] $Git,
+
+        [Parameter(Mandatory = $true, Position = 1)] 
+        [Alias('p')] [string] $Path
+    )
+    
+    Write-Verbose 'Removing untracked files.'
+
+    try {
+        Push-Location $path
+
+        # We exclude all folders named 'Internal' (some of them only contain linked files).
+        if ($PSCmdlet.ShouldProcess($path, 'Calling git to permanently delete all untracked files')) {
+            . $git clean -d -f -e 'Internal'
+        } else {
+            . $git clean -d -n -e 'Internal'
+        }
+    } catch {
+        Exit-Error "Unabled to remove untracked files: $_"
+    } finally {
+        Pop-Location
+    }
+}
+
+<#
+.SYNOPSIS
+    Add a copyright header to all C# files missing one.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Repair-Copyright {
+    [CmdletBinding(SupportsShouldProcess = $true)] 
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('p')] [string[]] $PathList
+    )
+    
+    BEGIN {
+        $count = 0
+    }
+
+    PROCESS {
+        $items = $pathList | %{ Find-MissingCopyright -Path $_ }
+
+        $count += ($items | measure).Count
+
+        $items | %{ Add-Copyright $_.FullName }
+    }
+
+    END {
+        if ($count -eq 0) {
+            Write-Output 'No missing copyright header found :-)'
+        } else {
+            Write-Output "Repaired $count file(s) without a copyright header!"
+        }
+    }
+}
+
+<#
+.SYNOPSIS
     Restore packages.
 .PARAMETER NuGet
     Specifies the path to the NuGet executable.
@@ -341,6 +460,56 @@ function Stop-AnyMSBuildProcess {
 
 <#
 .SYNOPSIS
+    Add a copyright header to a file.
+.PARAMETER Path
+    Specifies the file to repair.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Add-Copyright {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('p')] [string] $Path
+    )
+
+    Write-Verbose "Adding copyright header to $path..."
+
+    $lines = New-Object System.Collections.ArrayList(, (cat -LiteralPath $path))
+    $lines.Insert(0, '')
+    $lines.Insert(0, $SCRIPT:CopyrightHeader)
+    $lines | Set-Content -LiteralPath $path -Encoding UTF8
+}
+
+<#
+.SYNOPSIS
+    Find C# files without copyright header.
+.PARAMETER Path
+    Specifies the path to the directory to traverse.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Find-MissingCopyright {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
+        [Alias('p')] [string] $Path
+    )
+
+    Write-Verbose 'Find all C# source files, ignoring designer generated files and temporary build directories.'
+
+    ls $path -Recurse -Filter *.cs -Exclude *.Designer.cs |
+        ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
+        ?{ -not (Test-Copyright $_.FullName) } | 
+        select FullName
+}
+
+<#
+.SYNOPSIS
     Install a web resource if it is not already installed.
 .PARAMETER Force
     If present, override the previous installed resource if any.
@@ -378,21 +547,49 @@ function Install-WebResource {
     $outFile
 }
 
+<#
+.SYNOPSIS
+    Return $true if the file contains a copyright header, $false otherwise.
+.PARAMETER Path
+    Specifies the file to test.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Test-Copyright {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('p')] [string] $Path
+    )
+
+    Write-Verbose "Processing $path."
+
+    $line = cat -LiteralPath $path -TotalCount 1;
+
+    return $line -and $line.StartsWith('// Copyright')
+}
+
 # ------------------------------------------------------------------------------
 # Exports
 # ------------------------------------------------------------------------------
 
-Export-ModuleMember `
-    -Function `
-        Exit-Error,
-        Get-7Zip,
-        Get-Git, 
-        Get-GitCommitHash, 
-        Get-NuGet, 
-        Get-ProjectItem,
-        Get-PSakeModulePath,
-        Install-7Zip,
-        Install-NuGet, 
-        Install-PSake,
-        Restore-SolutionPackages,
-        Stop-AnyMSBuildProcess
+Export-ModuleMember -Function `
+    Exit-Error,
+    Get-7Zip,
+    Get-Git, 
+    Get-GitCommitHash, 
+    Get-NuGet, 
+    Get-ProjectItem,
+    Get-PSakeModulePath,
+    Install-7Zip,
+    Install-NuGet, 
+    Install-PSake,
+    Remove-BinAndObj,
+    Remove-UntrackedItems,
+    Repair-Copyright,
+    Restore-SolutionPackages,
+    Stop-AnyMSBuildProcess
+        
+# ------------------------------------------------------------------------------
