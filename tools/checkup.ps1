@@ -46,7 +46,6 @@ param(
     [Alias('fix')] [switch] $Repair,
 
     [Alias('f')] [switch] $Force,
-    [Alias('gr')] [switch] $GlobalRegistry,
     [Alias('y')] [switch] $Yes,
     [switch] $NoLogo,
     [switch] $Pristine
@@ -56,86 +55,127 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-$verbose = $PSBoundParameters.ContainsKey('Verbose')
-#$whatIf = $WhatIfPreference
-$dryRun = !$force.IsPresent
-
-# ------------------------------------------------------------------------------
-
-trap { 
-    $message = 'A fatal error ''{0}'' of type ''{1}'' occured: {2}' -f
-        $_.CategoryInfo.Category,
-        $_.Exception.GetType().FullName,
-        $_.Exception.Message
-
-    Write-Warning $message
-
-    break
-}
-
-# ------------------------------------------------------------------------------
-
-Import-Module (Join-Path $PSScriptRoot 'Narvalo.Repository.psm1') -Force -Verbose
-
-$module = Import-RepositoryModule 'Narvalo.Project' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
-
-# ------------------------------------------------------------------------------
+Import-Module (Join-Path $PSScriptRoot 'Narvalo.Local.psm1') -Force
+$module = Import-LocalModule 'Narvalo.Project' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
 
 if (!$noLogo.IsPresent) {
     $version = $module.Version
 
-    if ($dryRun) {
-        Write-Host "Checkup (DRY RUN) v$version. Copyright (c) Narvalo.Org.`n"
+    if ($force.IsPresent) {
+        Write-Host "Checkup, version $version. Copyright (c) Narvalo.Org.`n"
+        Write-Warning '''Force'' mode on, any modification will be permanent.'
+        if ((Read-Host 'Are you sure you wish to continue? [y/N]') -ne 'y') {
+            Write-Host "Cancelling on use request.`n" -ForeGround Green
+            Exit 0
+        }
     } else {
-        Write-Host "Checkup v$version. Copyright (c) Narvalo.Org.`n"
+        Write-Host "Checkup (DRY RUN), version $version. Copyright (c) Narvalo.Org.`n"
+        Write-Warning 'Safe mode on, no modifications to the repository will happen. Use the option ''-Force'' when you are ready.'
+        Write-Host ''
     }
 }
 
-# ------------------------------------------------------------------------------
+if ($yes.IsPresent) {
+    Write-Warning '''Yes'' mode on, ALL tasks will be processed WITHOUT any prior confirmation.'
+    if ((Read-Host 'Are you sure you wish to continue? [y/N]') -ne 'y') {
+        Write-Host "Cancelling on use request.`n" -ForeGround Green
+        Exit 0
+    }
+}
 
-$srcDirs = 'samples', 'src', 'tests' | %{ Get-ProjectItem $_ }
+function Write-Header($message) { Write-Host $message -ForeGround DarkCyan }
+function Write-TaskCompleted { Write-Host 'Task completed.' -ForeGround Green }
+
+$verbose = $PSBoundParameters.ContainsKey('Verbose')
+#$whatIf = $WhatIfPreference
+$dryRun = !$force.IsPresent
 
 if ($analyze.IsPresent) {
-    echo 'Analyze: nothing yet :-('
+    $analyzeMessage = @"
+Ready to proceed to the analysis tasks.
+
+"@
+
+    Write-Header $analyzeMessage
+
+    Write-Warning 'Nothing yet :-('
+    Write-Host ''
 }
 
 if ($purge.IsPresent) {
+    $purgeMessage = @"
+Ready to proceed to the cleanup tasks. You will be offered the following options:
+- Remove 'bin' and 'obj' directories created by Visual Studio.
+- Remove the NuGet packages directory.
+- Remove the 'work' directory created by the build script.
+- Remove files untracked by git.
+- Remove the locally installed tools: nuget.exe and 7za.exe.
+
+"@
+
+    Write-Header $purgeMessage
+
     if ($yes.IsPresent -or (Read-Host 'Remove ''bin'' and ''obj'' directories? [y/N]') -eq 'y') {
-        $srcDirs | Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
+        'samples', 'src', 'tests' | Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
+        Write-TaskCompleted
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove ''packages'' directory? [y/N]') -eq 'y') {
-        $packagesDir = Get-ProjectItem 'packages' 
+        $packagesDir = Get-LocalPath 'packages' 
         if (Test-Path $packagesDir) {
-            Remove-Item $packagesDir -Force -Recurse -ErrorAction SilentlyContinue -WhatIf:$dryRun
+            Remove-Item $packagesDir -Force -Recurse -WhatIf:$dryRun
         }
+        Write-TaskCompleted
     }
 
     if ($yes.IsPresent -or (Read-Host 'Remove ''work'' directory? [y/N]') -eq 'y') {
-        $workDir = Get-ProjectItem 'work' 
+        $workDir = Get-LocalPath 'work' 
         if (Test-Path $workDir) {
-            Remove-Item $workDir -Force -Recurse -ErrorAction SilentlyContinue -WhatIf:$dryRun
+            Remove-Item $workDir -Force -Recurse -WhatIf:$dryRun
         }
+        Write-TaskCompleted
     }
 
-    if ($yes.IsPresent -or (Read-Host 'Remove all untracked files? [y/N]') -eq 'y') {
+    if ($yes.IsPresent -or (Read-Host 'Remove the locally installed tools? [y/N]') -eq 'y') {
+        $7zip = Get-7Zip
+        if (Test-Path $7zip) {
+            Remove-Item $7zip -WhatIf:$dryRun
+        }
+        $nuget = Get-NuGet
+        if (Test-Path $nuget) {
+            Remove-Item $nuget -WhatIf:$dryRun
+        }
+        Write-TaskCompleted
+    }
+
+    if ($yes.IsPresent -or (Read-Host 'Remove untracked files (unsafe)? [y/N]') -eq 'y') {
         $git = (Get-Git)
 
         if ($git -ne $null) {
-            $git | Remove-UntrackedItems -Path (Get-ProjectItem '') -WhatIf:$dryRun -v:$verbose
+            $git | Remove-UntrackedItems -WhatIf:$dryRun -v:$verbose
         }
+        Write-TaskCompleted
     }
 
-    if ($yes.IsPresent -or (Read-Host 'Remove local tools ''NuGet'' & ''7-Zip''? [y/N]') -eq 'y') {
-        Remove-Item (Get-7Zip) -ErrorAction SilentlyContinue -WhatIf:$dryRun
-        Remove-Item (Get-NuGet) -ErrorAction SilentlyContinue -WhatIf:$dryRun
-    }
+    Write-Host ''
 }
 
 if ($repair.IsPresent) {
+    $repairMessage = @"
+Ready to proceed to the repair tasks. You will be offered the following options:
+- Scan the repository for any C# source files missing a copyright header then repair them. 
+  *** This operation will stress the file system ****
+
+"@
+
+    Write-Header $repairMessage
+
     if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
-        $srcDirs | Repair-Copyright -WhatIf:$dryRun -v:$verbose
+        'samples', 'src', 'tests' | Repair-Copyright -WhatIf:$dryRun -v:$verbose
+        Write-TaskCompleted
     }
+
+    Write-Host ''
 }
 
 # ------------------------------------------------------------------------------

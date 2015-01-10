@@ -1,7 +1,20 @@
 Set-StrictMode -Version Latest
 
+<#
+.SYNOPSIS
+    Validate a path for use as a project root.
+.DESCRIPTION
+    The Approve-ProjectRoot cmdlet validates that the path exists and is absolute.
+.PARAMETER Path
+    Specifies a path to be approved.
+.INPUTS
+    None.
+.OUTPUTS
+    System.String. Approve-ProjectRoot returns a string that contains the approved path.
+#>
 function Approve-ProjectRoot {
-    param([Parameter(Mandatory = $true)] [string] $path) 
+    [CmdletBinding()]
+    param([Parameter(Mandatory = $true)] [string] $Path) 
 
     if (![System.IO.Path]::IsPathRooted($path)) {
         throw 'When importing the ''Narvalo.Project'' module, ',
@@ -22,22 +35,22 @@ if ($args.Length -ne 1) {
         ' e.g. ''Import-Module Narvalo.Project -Args $projectRoot''.'
 }
 
-Set-Variable -Name ProjectRoot `
+New-Variable -Name ProjectRoot `
     -Value (Approve-ProjectRoot $args[0]) `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Path to the local repository for the Narvalo.NET project.'
+    
+New-Variable -Name CopyrightHeader `
+    -Value '// Copyright (c) Narvalo.Org.',
+        'All rights reserved. See LICENSE.txt in the project root for license information.' `
+    -Scope Script `
+    -Option ReadOnly `
+    -Description 'C# copyright header.'
 
 #$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 #    Remove-Variable -Name ProjectRoot -Scope Script -Force
 #}
-
-# ------------------------------------------------------------------------------
-# Private variables
-# ------------------------------------------------------------------------------
-
-[string] $script:CopyrightHeader = '// Copyright (c) Narvalo.Org.',
-    'All rights reserved. See LICENSE.txt in the project root for license information.'
 
 # ------------------------------------------------------------------------------
 # Public functions
@@ -45,15 +58,15 @@ Set-Variable -Name ProjectRoot `
 
 <# 
 .SYNOPSIS
-    Exit with the error code 1.
+    Exit current process with the error code 1.
 .PARAMETER Message
-    The message to be written.
+    Specifies the message to be written to a host.
 .INPUTS
     None.
 .OUTPUTS
     None.
 #>
-function Exit-Error {
+function Exit-ErrorGracefully {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
@@ -66,7 +79,12 @@ function Exit-Error {
 
 <# 
 .SYNOPSIS
-    Get the path to the 7-Zip command.
+    Get the path to the locally installed 7-Zip command.
+.DESCRIPTION
+    Get the path to the locally installed 7-Zip command. 
+    Optionally install the 7-Zip commmand in the local repository.
+.PARAMETER Install
+    If present and the command does not exist, install 7-Zip.
 .INPUTS
     None.
 .OUTPUTS
@@ -76,10 +94,10 @@ function Get-7Zip {
     [CmdletBinding()]
     param([switch] $Install)
 
-    $sevenZip = Get-ProjectItem 'tools\7za.exe'
+    $sevenZip = Get-LocalPath 'tools\7za.exe'
 
     if ($install.IsPresent -and !(Test-Path $sevenZip)) {
-        Install-7Zip $sevenZip | Out-Null
+        Install-7Zip $sevenZip
     }
 
     return $sevenZip
@@ -87,7 +105,7 @@ function Get-7Zip {
 
 <# 
 .SYNOPSIS
-    Get the path to the installed git command.
+    Get the path to the system git command.
 .INPUTS
     None.
 .OUTPUTS
@@ -112,7 +130,7 @@ function Get-Git {
 
 <#
 .SYNOPSIS
-    Get the last git commit hash.
+    Get the last git commit hash of the local repository.
 .PARAMETER Abbrev
     If present, finds the abbreviated commit hash.
 .PARAMETER Git
@@ -144,10 +162,14 @@ function Get-GitCommitHash {
     $hash = ''
 
     try {
+        Push-Location $script:ProjectRoot
+
         Write-Debug 'Call git.exe log.'
         $hash = . $git log -1 --format="$fmt" 2>&1
     } catch {
         Write-Warning "Git command failed: $_"
+    } finally {
+        Pop-Location
     }
 
     $hash
@@ -155,36 +177,17 @@ function Get-GitCommitHash {
 
 <#
 .SYNOPSIS
-    Get the path to the NuGet command.
+    Combine the repository path and a child path.
+.PARAMETER Path
+    Specifies the path to append to the value of the repository path.
+.PARAMETER Resolve
+    If present, attempt to resolve the resulting path.
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-NuGet returns a string that contains the path to the NuGet executable.
+    System.String. Get-LocalPath returns a string that contains the resulting path.
 #>
-function Get-NuGet {
-    [CmdletBinding()]
-    param([switch] $Install)
-
-    $nuget = Get-ProjectItem 'tools\nuget.exe'
-
-    if ($install.IsPresent -and !(Test-Path $nuget)) {
-        Install-NuGet $nuget | Out-Null
-    }
-
-    $nuget
-}
-
-<#
-.SYNOPSIS
-    Combine the repository path and several parts.
-.PARAMETER PathList
-    Specifies the elements to append to the repository path.
-.INPUTS
-    None.
-.OUTPUTS
-    System.String. Get-ProjectItem returns a string that contains the resulting path.
-#>
-function Get-ProjectItem {
+function Get-LocalPath {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)] 
@@ -195,17 +198,43 @@ function Get-ProjectItem {
     )
 
     if ($path -eq '') {
-       $ProjectRoot
+       $script:ProjectRoot
     } else {
-        Join-Path -Path $ProjectRoot -ChildPath $path -Resolve:$resolve.IsPresent
+        Join-Path -Path $script:ProjectRoot -ChildPath $path -Resolve:$resolve.IsPresent
     }
+}
+
+<#
+.SYNOPSIS
+    Get the path to the locally installed NuGet command.
+.DESCRIPTION
+    Get the path to the locally installed NuGet command. 
+    Optionally install the NuGet commmand in the local repository.
+.PARAMETER Install
+    If present and the command does not exist, install NuGet.
+.INPUTS
+    None.
+.OUTPUTS
+    System.String. Get-NuGet returns a string that contains the path to the NuGet executable.
+#>
+function Get-NuGet {
+    [CmdletBinding()]
+    param([switch] $Install)
+
+    $nuget = Get-LocalPath 'tools\nuget.exe'
+
+    if ($install.IsPresent -and !(Test-Path $nuget)) {
+        Install-NuGet $nuget
+    }
+
+    $nuget
 }
 
 <#
 .SYNOPSIS
     Get the path to the PSake module.
 .PARAMETER NoVersion
-    If present, do not include a version independent path.
+    If present, do not include a version agnostic path.
 .INPUTS
     None.
 .OUTPUTS
@@ -216,21 +245,21 @@ function Get-PSakeModulePath {
     param([switch] $NoVersion)
     
     if ($noVersion.IsPresent) {
-        Get-ProjectItem 'packages\psake\tools\psake.psm1'
+        Get-LocalPath 'packages\psake\tools\psake.psm1'
     } else {
-        (ls (Get-ProjectItem 'packages\psake.*\tools\psake.psm1') | select -First 1)
+        (ls (Get-LocalPath 'packages\psake.*\tools\psake.psm1') | select -First 1)
     }
 }
 
 <#
 .SYNOPSIS
-    Install 7-Zip if it is not already installed.
+    Install 7-Zip.
 .PARAMETER Force
-    If present, override the previous installed 7-Zip if any.
+    If present, override any previous installed 7-Zip.
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Install-7Zip returns a string that contains the path to the 7-Zip executable.
+    None.
 #>
 function Install-7Zip {
     [CmdletBinding()]
@@ -242,18 +271,18 @@ function Install-7Zip {
     )
 
     [System.Uri] $uri = 'http://narvalo.org/7z936.exe'
-    $uri | Install-WebResource -Name '7-Zip' -o $outFile -Force:$force
+    $uri | Install-WebResource -Name '7-Zip' -o $outFile -Force:$force.IsPresent | Out-Null
 }
 
 <#
 .SYNOPSIS
-    Install NuGet if it is not already installed.
+    Install NuGet.
 .PARAMETER Force
-    If present, override the previous installed NuGet if any.
+    If present, override any previous installed NuGet.
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Install-NuGet returns a string that contains the path to the NuGet executable.
+    None.
 #>
 function Install-NuGet {
     [CmdletBinding()]
@@ -265,16 +294,14 @@ function Install-NuGet {
     )
 
     [System.Uri] $uri = 'https://nuget.org/nuget.exe'
-    $uri | Install-WebResource -Name 'NuGet' -o $outFile -Force:$force
+    $uri | Install-WebResource -Name 'NuGet' -o $outFile -Force:$force.IsPresent | Out-Null
 }
 
 <#
 .SYNOPSIS
     Install PSake.
-.PARAMETER NuGet
-    Specifies the path to the NuGet executable.
 .INPUTS
-    The path to the NuGet executable.
+    None.
 .OUTPUTS
     System.String. Install-PSake returns a string that contains the path to the PSake module.
 .NOTES
@@ -282,19 +309,18 @@ function Install-NuGet {
 #>
 function Install-PSake {
     [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        [string] $NuGet
-    )
+    param()
     
     Write-Verbose 'Installing PSake.'
+
+    $nuget = Get-NuGet -Install
     
     try {
         Write-Debug 'Call nuget.exe install psake.'
         . $nuget install psake `
            -ExcludeVersion `
-           -OutputDirectory (Get-ProjectItem 'packages') `
-           -ConfigFile (Get-ProjectItem '.nuget\NuGet.Config') `
+           -OutputDirectory (Get-LocalPath 'packages') `
+           -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
            -Verbosity quiet 2>&1
     } catch {
         throw "'nuget.exe install' failed: $_"
@@ -307,7 +333,7 @@ function Install-PSake {
 .SYNOPSIS
     Remove the 'bin' and 'obj' directories created by Visual Studio.
 .PARAMETER PathList
-    Specifies the list of paths to traverse.
+    Specifies the list of paths, relative to the project root, to traverse.
 .INPUTS
     None.
 .OUTPUTS
@@ -323,12 +349,12 @@ function Remove-BinAndObj {
     BEGIN { }
 
     PROCESS {
-        $pathList | %{
+        $pathList | %{ Get-LocalPath $_ } | %{
             if (!(Test-Path $_)) { return }
 
             Write-Verbose "Processing directory '$_'."
 
-            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse -ErrorAction SilentlyContinue }
+            ls $_ -Include bin,obj -Recurse | ?{ rm $_.FullName -Force -Recurse }
         }
     }
 }
@@ -351,25 +377,20 @@ function Remove-UntrackedItems {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $Git,
-
-        [Parameter(Mandatory = $true, Position = 1)] 
-        [Alias('p')] [string] $Path
+        [string] $Git
     )
     
-    Write-Verbose 'Removing untracked files.'
-
     try {
-        Push-Location $path
+        Push-Location $script:ProjectRoot
 
         # We exclude all folders named 'Internal' (some of them only contain linked files).
-        if ($PSCmdlet.ShouldProcess($path, 'Calling git to permanently delete all untracked files')) {
+        if ($PSCmdlet.ShouldProcess($script:ProjectRoot, 'Calling git to permanently delete all untracked files')) {
             . $git clean -d -f -e 'Internal'
         } else {
             . $git clean -d -n -e 'Internal'
         }
     } catch {
-        Exit-Error "Unabled to remove untracked files: $_"
+        Write-Error "Unabled to remove untracked files: $_"
     } finally {
         Pop-Location
     }
@@ -381,7 +402,8 @@ function Remove-UntrackedItems {
 .INPUTS
     None.
 .OUTPUTS
-    None.
+    System.String. Repair-Copyright returns a string that contains a short
+    explanation of what has been done.
 #>
 function Repair-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)] 
@@ -395,7 +417,7 @@ function Repair-Copyright {
     }
 
     PROCESS {
-        $items = $pathList | %{ Find-MissingCopyright -Path $_ }
+        $items = $pathList | %{ Get-LocalPath $_ } | %{ Find-MissingCopyright -Path $_ }
 
         $count += ($items | measure).Count
 
@@ -413,28 +435,25 @@ function Repair-Copyright {
 
 <#
 .SYNOPSIS
-    Restore packages.
-.PARAMETER NuGet
-    Specifies the path to the NuGet executable.
+    Restore solution packages.
 .INPUTS
-    The path to the NuGet executable.
+    None.
 .OUTPUTS
     None.
 #>
 function Restore-SolutionPackages {
     [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $NuGet
-    )
+    param()
     
     Write-Verbose 'Restoring solution packages.'
+
+    $nuget = Get-NuGet -Install
     
     try {
         Write-Debug 'Call nuget.exe restore.'
-        . $nuget restore (Get-ProjectItem '.nuget\packages.config') `
-            -PackagesDirectory (Get-ProjectItem 'packages') `
-            -ConfigFile (Get-ProjectItem '.nuget\NuGet.Config') `
+        . $nuget restore (Get-LocalPath '.nuget\packages.config') `
+            -PackagesDirectory (Get-LocalPath 'packages') `
+            -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
             -Verbosity quiet 2>&1
     } catch {
         throw "'nuget.exe restore' failed: $_"
@@ -450,8 +469,8 @@ function Restore-SolutionPackages {
     None.
 #>
 function Stop-AnyMSBuildProcess {
-    Write-Debug 'Ensure there is no concurrent MSBuild running.'
-    Get-Process -Name 'msbuild' -ErrorAction SilentlyContinue | %{ Stop-Process $_.ID -Force }
+    Write-Debug 'Stop any concurrent MSBuild running.'
+    Get-Process -Name 'msbuild' | %{ Stop-Process $_.ID -Force }
 }
 
 # ------------------------------------------------------------------------------
@@ -479,7 +498,7 @@ function Add-Copyright {
 
     $lines = New-Object System.Collections.ArrayList(, (cat -LiteralPath $path))
     $lines.Insert(0, '')
-    $lines.Insert(0, $SCRIPT:CopyrightHeader)
+    $lines.Insert(0, $script:CopyrightHeader)
     $lines | Set-Content -LiteralPath $path -Encoding UTF8
 }
 
@@ -514,7 +533,7 @@ function Find-MissingCopyright {
 .PARAMETER Force
     If present, override the previous installed resource if any.
 .OUTPUTS
-    System.String. Install-WebResource returns a string that contains the path to the installed resource.
+    None.
 #>
 function Install-WebResource {
     [CmdletBinding()]
@@ -543,8 +562,6 @@ function Install-WebResource {
             throw "Unabled to download $name."
         }
     }
-
-    $outFile
 }
 
 <#
@@ -572,16 +589,14 @@ function Test-Copyright {
 }
 
 # ------------------------------------------------------------------------------
-# Exports
-# ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
-    Exit-Error,
+    Exit-ErrorGracefully,
     Get-7Zip,
     Get-Git, 
     Get-GitCommitHash, 
+    Get-LocalPath,
     Get-NuGet, 
-    Get-ProjectItem,
     Get-PSakeModulePath,
     Install-7Zip,
     Install-NuGet, 

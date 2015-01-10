@@ -12,6 +12,8 @@
     If present, don't display the startup banner.
 .PARAMETER Retail
     If present, packages/assemblies are built for retail.
+.PARAMETER Safe
+    If present, ensures there is no concurrent MSBuild running.
 .PARAMETER TaskList
     Specifies the list of tasks to be executed.
 .PARAMETER Verbosity
@@ -24,10 +26,10 @@
     None.
 .EXAMPLE
     make.ps1 -Verbosity detailed
-    Default task with detailed informations.
+    Run default task with detailed informations.
 .EXAMPLE
-    make.ps1 CodeAnalysis -v quiet
-    Quiet run of the Code Analysis task.
+    make.ps1 CA, SA -v quiet
+    Quiet run of the Code Analysis & SecurityAnalysis tasks.
 .EXAMPLE
     make.ps1 -Retail Package
     Create retail packages with the default verbosity level.
@@ -45,6 +47,7 @@ param(
     [Parameter(Mandatory = $false, Position = 1)]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
+    [switch] $Safe,
     [switch] $Docs,
     [switch] $NoLogo,
     [switch] $Pristine
@@ -55,27 +58,27 @@ Set-StrictMode -Version Latest
 # ------------------------------------------------------------------------------
 
 Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1') -Force
-$module = Import-RepositoryModule 'Narvalo.Project' $pristine.IsPresent -Args $PSScriptRoot
+$module = Import-LocalModule 'Narvalo.Project' $pristine.IsPresent -Args $PSScriptRoot
 
 if (!$noLogo.IsPresent) {
     $version = $module.Version
 
     if ($retail.IsPresent) {
-        Write-Host "Make (RETAIL) v$version. Copyright (c) Narvalo.Org.`n"
+        Write-Host "Make (RETAIL), version $version. Copyright (c) Narvalo.Org.`n"
     } else {
-        Write-Host "Make v$version. Copyright (c) Narvalo.Org.`n"
+        Write-Host "Make, version $version. Copyright (c) Narvalo.Org.`n"
     }
 }
 
 if (!(Get-Module psake)) {
-    Write-Debug 'Ensure PSake is installed.'
-    Get-NuGet -Install | Restore-SolutionPackages
+    Write-Debug 'Ensure PSake is installed by restoring solution packages.'
+    Restore-SolutionPackages
 
     Write-Debug 'Import the psake module.'
     Get-PSakeModulePath | Import-Module -NoClobber
 }
 
-$psakefile = Get-ProjectItem 'tools\PSakefile.ps1' -Resolve
+$psakefile = Get-LocalPath 'tools\PSakefile.ps1' -Resolve
 
 if ($docs.IsPresent) {
     #Get-Help $MyInvocation.MyCommand.Path
@@ -84,7 +87,9 @@ if ($docs.IsPresent) {
     Exit 0
 }
 
-Stop-AnyMSBuildProcess
+if ($safe.IsPresent) {
+    Stop-AnyMSBuildProcess
+}
 
 Invoke-PSake $psakefile `
     -NoLogo `

@@ -11,8 +11,8 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
-    $WorkRoot = Get-ProjectItem 'work' 
-    $PackagesDir = Get-ProjectItem 'work\packages'
+    $WorkRoot = Get-LocalPath 'work' 
+    $PackagesDir = Get-LocalPath 'work\packages'
     
     $MyGetDir = Join-Path $WorkRoot 'myget'
     $MyGetPkg = Join-Path $WorkRoot 'myget.7z'
@@ -22,8 +22,8 @@ Properties {
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
-    $Everything = Get-ProjectItem 'tools\Make.proj' -Resolve
-    $Foundations = Get-ProjectItem 'tools\Make.Foundations.proj' -Resolve
+    $Everything = Get-LocalPath 'tools\Make.proj' -Resolve
+    $Foundations = Get-LocalPath 'tools\Make.Foundations.proj' -Resolve
     
     # Packaging properties:
     # - Release configuration
@@ -65,21 +65,27 @@ Properties {
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
-FormatTaskName "Executing Task {0}..."
+FormatTaskName {
+    param([Parameter(Mandatory = $true)] [string] $TaskName)
+    
+    Write-Host "Executing Task '$taskName'." -ForegroundColor Green
+}
 
 TaskTearDown {
     if ($LastExitCode -ne 0) {
-        Exit-Error 'Build failed.'
+        Exit-ErrorGracefully 'Build failed.'
     }
 }
 
-Task Default -depends FastBuild
+Task Default -Depends FastBuild
 
 # ------------------------------------------------------------------------------
 # Continuous Integration and development tasks
 # ------------------------------------------------------------------------------
 
-Task FastBuild -Description 'Fast build Foundations then run tests.' {
+Task FastBuild `
+    -Description 'Fast build ''Foundations'' then run tests.' `
+{
     MSBuild $Foundations $Opts $CIProps `
         '/t:Xunit', 
         '/p:Configuration=Debug',
@@ -87,11 +93,15 @@ Task FastBuild -Description 'Fast build Foundations then run tests.' {
         '/p:SkipDocumentation=true'
 }
 
-Task Build -Description 'Build all projects.' {
+Task Build `
+    -Description 'Build all projects.' `
+{
     MSBuild $Everything $Opts $CIProps '/t:Build'
 }
 
-Task FullBuild -Description 'Full build then run tests.' {
+Task FullBuild `
+    -Description 'Build all projects, run source analysis, verify results & run tests.' `
+{
     # Perform the following operations:
     # - Run Source Analysis
     # - Build all projects
@@ -100,71 +110,97 @@ Task FullBuild -Description 'Full build then run tests.' {
     MSBuild $Everything $Opts $CIProps `
         '/t:Build;PEVerify;Xunit',
         '/p:SourceAnalysisEnabled=true'
-}
+}   
 
-Task FullClean -ContinueOnError -Description 'Delete work directory.' {
+Task FullClean `
+    -Description 'Delete work directory.' `
+    -ContinueOnError `
+{
     # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
     if (Test-Path $WorkRoot) {
-        Remove-Item $WorkRoot -Force -Recurse -ErrorAction SilentlyContinue
+        Remove-Item $WorkRoot -Force -Recurse
     }
 }
 
-Task CodeAnalysis -Description 'Run Code Analysis (slow).' {
+Task CodeAnalysis `
+    -Description 'Run Code Analysis (slow).' `
+    -Alias CA `
+{
     MSBuild $Everything $Opts $StaticAnalysisProps `
         '/t:Build', 
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
-} -Alias CA
+}
 
-Task CodeContractsAnalysis -Description 'Run Code Contracts Analysis on Foundations (very slow).' {
+Task CodeContractsAnalysis `
+    -Description 'Run Code Contracts Analysis on ''Foundations'' (extremely slow).' `
+    -Alias CC `
+{
     MSBuild $Foundations $Opts $StaticAnalysisProps `
         '/t:Build',
         '/p:Configuration=CodeContracts'
-} -Alias CC
+} 
 
-Task SecurityAnalysis -Description 'Run SecAnnotate on Foundations (slow).' {
+Task SecurityAnalysis `
+    -Description 'Run SecAnnotate on ''Foundations'' (slow).' `
+    -Alias SA `
+{
     MSBuild $Foundations $Opts $StaticAnalysisProps `
         '/t:SecAnnotate',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
-} -Alias SA
+}
 
 # ------------------------------------------------------------------------------
 # Packaging tasks
 # ------------------------------------------------------------------------------
 
-Task Package -depends _Set-GitCommitHash, _Validate-Packaging `
-    -Description 'Package all projects.' {
+Task Package `
+    -Description 'Package ''Foundations''.' `
+    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Alias Pack `
+{
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
         "/p:GitCommitHash=$GitCommitHash"
-} -Alias Pack
+}
 
-Task Package-Core -depends _Set-GitCommitHash, _Validate-Packaging `
-    -Description 'Package core projects.' {
+Task Package-Core `
+    -Description 'Package core projects.' `
+    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Alias PackCore `
+{
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
         "/p:GitCommitHash=$GitCommitHash",
         '/p:Filter=_Core_' 
-} -Alias PackCore
+}
 
-Task Package-Mvp -depends _Set-GitCommitHash, _Validate-Packaging `
-    -Description 'Package MVP projects.' {
+Task Package-Mvp `
+    -Description 'Package MVP projects.' `
+    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Alias PackMvp `
+{
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
         "/p:GitCommitHash=$GitCommitHash",
         '/p:Filter=_Mvp_' 
-} -Alias PackMvp
+}
 
-Task Package-Build -depends _Set-GitCommitHash, _Validate-Packaging `
-    -Description 'Package the Narvalo.Build project.' {
+Task Package-Build `
+    -Description 'Package the Narvalo.Build project.' `
+    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Alias PackBuild `
+{
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
         "/p:GitCommitHash=$GitCommitHash",
         '/p:Filter=_Build_' 
-} -Alias PackBuild
+} 
 
-Task _Validate-Packaging -PreCondition { $retail } `
-    -Description 'Validate packaging tasks.' {
+Task _Validate-Packaging `
+    -Description 'Validate retail packaging tasks.' `
+    -PreCondition { $retail } `
+{
     if ($GitCommitHash -eq '') {
-        Exit-Error 'When building retail packages, the git commit hash MUST not be empty.'
+        Exit-ErrorGracefully 'When building retail packages, the git commit hash MUST not be empty.'
     }
 }
 
@@ -172,19 +208,23 @@ Task _Validate-Packaging -PreCondition { $retail } `
 # Publish tasks
 # ------------------------------------------------------------------------------
 
-Task Publish -Description 'Publish all projects.' {
-    $nuget = Get-NuGet -Install
+Task Publish `
+    -Description 'Publish all projects.' `
+    -Alias Push `
+{
+    Exit-ErrorGracefully 'Not yet implemented!'
 
-    Exit-Error 'Not yet implemented!'
-
+    #$nuget = Get-NuGet -Install
     #& $nuget push "$PackagesDir\*.nupkg"
-} -Alias Push
+}
 
 # ------------------------------------------------------------------------------
 # MyGet tasks
 # ------------------------------------------------------------------------------
 
-Task MyGet-Clean -Description 'Clean MyGet server.' {
+Task MyGet-Clean `
+    -Description 'Clean MyGet server.' `
+{
     if (Test-Path $MyGetDir) {
         Remove-Item $MyGetDir -Force -Recurse
     }
@@ -193,33 +233,49 @@ Task MyGet-Clean -Description 'Clean MyGet server.' {
     }
 }
 
-Task MyGet-Build -Description 'Build MyGet server.' {
+Task MyGet-Build `
+    -Description 'Build MyGet server.' `
+{
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
     MSBuild $Opts `
-        (Get-ProjectItem 'tools\MyGet\MyGet.csproj' -Resolve) `
+        (Get-LocalPath 'tools\MyGet\MyGet.csproj' -Resolve) `
         '/t:Clean;Build',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
 
-Task MyGet-Zip -Description 'Zip MyGet server.' {
+Task MyGet-Zip `
+    -Description 'Zip MyGet server.' `
+{
+    if (!(Test-Path $MyGetDir)) {
+        Exit-ErrorGracefully 'Unabled to create the Zip package: did you forgot to call the MyGet-Build task?'
+    }
+
     . (Get-7Zip -Install) -mx9 a $MyGetPkg $MyGetDir | Out-Null
 
     if (!$?) {
-        Exit-Error 'Unabled to create the Zip package.'
+        Exit-ErrorGracefully 'Unabled to create the Zip package.'
     }
 
     Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGetPkg'." -ForegroundColor Green
 }
 
-Task MyGet -depends MyGet-Clean, MyGet-Build, MyGet-Zip `
-    -Description 'Publish MyGet server.'
+Task MyGet-Package `
+    -Description 'Package MyGet server.' `
+    -Depends MyGet-Build, MyGet-Zip
+
+Task MyGet `
+    -Description 'Clean then package the MyGet server.' `
+    -Depends MyGet-Clean, MyGet-Build, MyGet-Zip
 
 # ------------------------------------------------------------------------------
 # Miscs
 # ------------------------------------------------------------------------------
 
-Task Environment -Description 'Display the build environment.' {
+Task Environment `
+    -Description 'Display the build environment.' `
+    -Alias Env `
+{
     # Running "MSBuild /version" outputs: 
     # >   Microsoft (R) Build Engine, version 12.0.31101.0
     # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
@@ -243,7 +299,9 @@ Task Environment -Description 'Display the build environment.' {
 # Utilities
 # ------------------------------------------------------------------------------
 
-Task _Set-GitCommitHash -Description 'Initialize GitCommitHash.' {
+Task _Set-GitCommitHash `
+    -Description 'Initialize GitCommitHash.' `
+{
     $git = Get-Git
 
     if ($git -ne $null) {

@@ -1,15 +1,17 @@
 Set-StrictMode -Version Latest
 
-Set-Variable -Name LocalModulesPath `
+New-Variable -Name LocalModulesPath `
     -Value (Join-Path (Get-Item $PSScriptRoot).Parent.FullName 'tools\PowerShellModules') `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Path to the local modules.'
 
-# --------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 <#
 .SYNOPSIS
+    Import a local module.
+.DESCRIPTION
     Import a local module into the global scope.
 .PARAMETER Name
     Specifies the name of the module.
@@ -20,13 +22,13 @@ Set-Variable -Name LocalModulesPath `
 .INPUTS
     None.
 .OUTPUTS
-    System.Management.Automation.PSModuleInfo. Import-RepositoryModule returns 
+    System.Management.Automation.PSModuleInfo. Import-LocalModule returns 
     the System.Management.Automation.PSModuleInfo object that represents the imported module.
 .EXAMPLE
-    $module = Import-RepositoryModule 'Narvalo.Project' -Args $PSScriptRoot
+    $module = Import-LocalModule 'Narvalo.Project' -Args $PSScriptRoot
     Import the 'Narvalo.Project' module.
 #>
-function Import-RepositoryModule {
+function Import-LocalModule {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)] [string] $Name,
@@ -37,7 +39,7 @@ function Import-RepositoryModule {
     Write-Verbose "Importing local module '$name'."
 
     if ($pristine) {
-        Write-Verbose 'Pristine switch on.'
+        Write-Verbose "Pristine switch on, force unload of '$name'."
         Write-Debug "Unload the module '$name'."
         Get-Module $name | Remove-Module -Force
     }
@@ -54,6 +56,8 @@ function Import-RepositoryModule {
     $module
 }
 
-# --------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
-Export-ModuleMember -Function Import-RepositoryModule
+Export-ModuleMember -Function Import-LocalModule
+
+# ------------------------------------------------------------------------------
