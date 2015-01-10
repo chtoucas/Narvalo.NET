@@ -5,6 +5,8 @@
     Run the PSake build script.
 .PARAMETER Docs
     If present, display the list of available tasks then exit.
+.PARAMETER Help
+    If present, display the help then exit.
 .PARAMETER Pristine
     If present, force re-import of local modules into the current session.
     This is a developer option and should not be used under normal circumstances.
@@ -25,14 +27,14 @@
 .OUTPUTS
     None.
 .EXAMPLE
+    make.ps1 -Retail Package
+    Create retail packages.
+.EXAMPLE
     make.ps1 -Verbosity detailed
     Run default task with detailed informations.
 .EXAMPLE
     make.ps1 CA, SA -v quiet
     Quiet run of the Code Analysis & SecurityAnalysis tasks.
-.EXAMPLE
-    make.ps1 -Retail Package
-    Create retail packages with the default verbosity level.
 .LINK
     https://github.com/psake/psake
 #>
@@ -49,6 +51,7 @@ param(
 
     [switch] $Safe,
     [switch] $Docs,
+    [Alias('h')] [switch] $Help,
     [switch] $NoLogo,
     [switch] $Pristine
 )
@@ -57,8 +60,10 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1') -Force
-$module = Import-LocalModule 'Narvalo.Project' $pristine.IsPresent -Args $PSScriptRoot
+if (!(Get-Module Narvalo.Local)) {
+    Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1')
+}
+$module = Import-LocalModule 'Narvalo.ProjectManagement' $pristine.IsPresent -Args $PSScriptRoot
 
 if (!$noLogo.IsPresent) {
     $version = $module.Version
@@ -80,8 +85,12 @@ if (!(Get-Module psake)) {
 
 $psakefile = Get-LocalPath 'tools\PSakefile.ps1' -Resolve
 
+if ($help.IsPresent) {
+    Get-Help $MyInvocation.MyCommand.Path -Full
+    Exit 0
+}
+
 if ($docs.IsPresent) {
-    #Get-Help $MyInvocation.MyCommand.Path
     Write-Host 'LIST OF AVAILABLE TASKS'
     Invoke-PSake $psakefile -NoLogo -Docs
     Exit 0

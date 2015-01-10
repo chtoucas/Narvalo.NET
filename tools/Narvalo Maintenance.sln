@@ -122,10 +122,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edge", "Edge\Edge.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FCB688F3-8203-49B5-B2F0-40B6E28315A9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Project", "Narvalo.Project", "{689BB57E-CEC1-496E-9294-ADE97481280A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.ProjectManagement", "Narvalo.ProjectManagement", "{689BB57E-CEC1-496E-9294-ADE97481280A}"
 	ProjectSection(SolutionItems) = preProject
-		PowerShellModules\Narvalo.Project\Narvalo.Project.psd1 = PowerShellModules\Narvalo.Project\Narvalo.Project.psd1
-		PowerShellModules\Narvalo.Project\Narvalo.Project.psm1 = PowerShellModules\Narvalo.Project\Narvalo.Project.psm1
+		PowerShellModules\Narvalo.ProjectManagement\Narvalo.ProjectManagement.psd1 = PowerShellModules\Narvalo.ProjectManagement\Narvalo.ProjectManagement.psd1
+		PowerShellModules\Narvalo.ProjectManagement\Narvalo.ProjectManagement.psm1 = PowerShellModules\Narvalo.ProjectManagement\Narvalo.ProjectManagement.psm1
 	EndProjectSection
 EndProject
 Global
