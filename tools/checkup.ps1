@@ -58,7 +58,7 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-function Confirm-Parameter($message) {
+function Confirm-Parameter([string] $Message) {
     Write-Warning $message
 
     if ((Read-Host 'Are you sure you wish to continue? [y/N]') -ne 'y') {
@@ -67,18 +67,14 @@ function Confirm-Parameter($message) {
     }
 }
 
-function Write-Header($message) { 
+function Write-Header([string] $Message) { 
     Write-Host $message -ForeGround DarkCyan 
-}
-
-function Write-TaskCompleted { 
-    Write-Host 'Task completed.' -ForeGround Green 
 }
 
 # ------------------------------------------------------------------------------
 
 if (!(Get-Module Narvalo.Local)) {
-    Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1')
+    Import-Module (Join-Path $PSScriptRoot 'Narvalo.Local.psm1')
 }
 $module = Import-LocalModule 'Narvalo.ProjectManagement' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
 
@@ -97,7 +93,8 @@ if ($help.IsPresent) {
     Exit 0
 } else {
     if (!$analyze.IsPresent -and !$purge.IsPresent -and !$repair.IsPresent) {
-        Exit-ErrorGracefully 'You should at least set one of the following switches: ''-Analyze'' or ''-Purge'' or ''-Repair''.'
+        Exit-Gracefully -ExitCode 1 `
+            'You should at least set one of the following switches: ''-Analyze'' or ''-Purge'' or ''-Repair''.'
     }
 
     if ($force.IsPresent) {
@@ -111,102 +108,47 @@ if ($help.IsPresent) {
     }
 }
 
-$verbose = $PSBoundParameters.ContainsKey('Verbose')
-#$whatIf = $WhatIfPreference
-$dryRun = !$force.IsPresent
-
+# $WhatIfPreference
+# $ConfirmPreference
+# $confirm = $PSBoundParameters.ContainsKey('Confirm') `
+#     -and [bool] $PSBoundParameters.Item('Confirm') -eq $true
+ 
+$whatIf  = !$force.IsPresent       
+   
 if ($analyze.IsPresent) {
-    $analyzeMessage = @"
+    Write-Header @"
 Ready to proceed to the analysis tasks.
 
 "@
 
-    Write-Header $analyzeMessage
-
-    Write-Warning 'Nothing yet :-('
+    Invoke-AnalyzeTask $yes.IsPresent -WhatIf:$whatIf
     Write-Host ''
 }
 
 if ($purge.IsPresent) {
-    $purgeMessage = @"
+    Write-Header @"
 Ready to proceed to the cleanup tasks. You will be offered the following options:
 - Remove 'bin' and 'obj' directories created by Visual Studio.
-- Remove the NuGet packages directory.
+- Remove the 'packages' directory used by NuGet.
 - Remove the 'work' directory created by the build script.
 - Remove files untracked by git.
-- Remove the locally installed tools: nuget.exe and 7za.exe.
+- Remove the locally installed tools: 'tools\nuget.exe' and 'tools\7za.exe'.
 
 "@
 
-    Write-Header $purgeMessage
-
-    if ($yes.IsPresent -or (Read-Host 'Remove ''bin'' and ''obj'' directories? [y/N]') -eq 'y') {
-        'samples', 'src', 'tests' | Remove-BinAndObj -WhatIf:$dryRun -v:$verbose
-
-        Write-TaskCompleted
-    }
-
-    if ($yes.IsPresent -or (Read-Host 'Remove ''packages'' directory? [y/N]') -eq 'y') {
-        $packagesDir = Get-LocalPath 'packages' 
-        if (Test-Path $packagesDir) {
-            Remove-Item $packagesDir -Force -Recurse -WhatIf:$dryRun
-        }
-
-        Write-TaskCompleted
-    }
-
-    if ($yes.IsPresent -or (Read-Host 'Remove ''work'' directory? [y/N]') -eq 'y') {
-        $workDir = Get-LocalPath 'work' 
-        if (Test-Path $workDir) {
-            Remove-Item $workDir -Force -Recurse -WhatIf:$dryRun
-        }
-
-        Write-TaskCompleted
-    }
-
-    if ($yes.IsPresent -or (Read-Host 'Remove the locally installed tools? [y/N]') -eq 'y') {
-        $7zip = Get-7Zip
-        if (Test-Path $7zip) {
-            Remove-Item $7zip -WhatIf:$dryRun
-        }
-
-        $nuget = Get-NuGet
-        if (Test-Path $nuget) {
-            Remove-Item $nuget -WhatIf:$dryRun
-        }
-
-        Write-TaskCompleted
-    }
-
-    if ($yes.IsPresent -or (Read-Host 'Remove untracked files (unsafe)? [y/N]') -eq 'y') {
-        $git = (Get-Git)
-
-        if ($git -ne $null) {
-            $git | Remove-UntrackedItems -WhatIf:$dryRun -v:$verbose
-        }
-
-        Write-TaskCompleted
-    }
-
+    Invoke-PurgeTask $yes.IsPresent -WhatIf:$whatIf
     Write-Host ''
 }
 
 if ($repair.IsPresent) {
-    $repairMessage = @"
+    Write-Header @"
 Ready to proceed to the repair tasks. You will be offered the following options:
 - Scan the repository for any C# source files missing a copyright header then repair them. 
   *** This operation puts a lot of stress on the file system ****
 
 "@
 
-    Write-Header $repairMessage
-
-    if ($yes.IsPresent -or (Read-Host 'Repair copyright headers? [y/N]') -eq 'y') {
-        'samples', 'src', 'tests' | Repair-Copyright -WhatIf:$dryRun -v:$verbose
-
-        Write-TaskCompleted
-    }
-
+    Invoke-RepairTask $yes.IsPresent -WhatIf:$whatIf
     Write-Host ''
 }
 

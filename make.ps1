@@ -75,6 +75,9 @@ if (!$noLogo.IsPresent) {
     }
 }
 
+if (Get-Module psake) {
+    Remove-Module psake
+}
 if (!(Get-Module psake)) {
     Write-Debug 'Ensure PSake is installed by restoring solution packages.'
     Restore-SolutionPackages

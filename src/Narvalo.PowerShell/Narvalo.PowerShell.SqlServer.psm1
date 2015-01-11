@@ -1,5 +1,3 @@
-#Requires -Version 3.0
-
 Set-StrictMode -Version Latest
 
 Add-Type -AssemblyName 'Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91'

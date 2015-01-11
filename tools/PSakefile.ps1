@@ -68,12 +68,12 @@ Properties {
 FormatTaskName {
     param([Parameter(Mandatory = $true)] [string] $TaskName)
     
-    Write-Host "Executing Task '$taskName'." -ForegroundColor Green
+    Write-Host "Executing Task '$taskName'." -ForegroundColor DarkCyan
 }
 
 TaskTearDown {
     if ($LastExitCode -ne 0) {
-        Exit-ErrorGracefully 'Build failed.'
+        Exit-Gracefully -ExitCode $LastExitCode 'Build failed.'
     }
 }
 
@@ -117,9 +117,7 @@ Task FullClean `
     -ContinueOnError `
 {
     # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    if (Test-Path $WorkRoot) {
-        Remove-Item $WorkRoot -Force -Recurse
-    }
+    Remove-LocalItem -Path $WorkRoot -Recurse
 }
 
 Task CodeAnalysis `
@@ -200,7 +198,8 @@ Task _Validate-Packaging `
     -PreCondition { $retail } `
 {
     if ($GitCommitHash -eq '') {
-        Exit-ErrorGracefully 'When building retail packages, the git commit hash MUST not be empty.'
+        Exit-Gracefully -ExitCode 1 `
+            'When building retail packages, the git commit hash MUST not be empty.'
     }
 }
 
@@ -212,7 +211,7 @@ Task Publish `
     -Description 'Publish all projects.' `
     -Alias Push `
 {
-    Exit-ErrorGracefully 'Not yet implemented!'
+    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
 
     #$nuget = Get-NuGet -Install
     #& $nuget push "$PackagesDir\*.nupkg"
@@ -225,12 +224,8 @@ Task Publish `
 Task MyGet-Clean `
     -Description 'Clean MyGet server.' `
 {
-    if (Test-Path $MyGetDir) {
-        Remove-Item $MyGetDir -Force -Recurse
-    }
-    if (Test-Path $MyGetPkg) {
-        Remove-Item $MyGetPkg -Force
-    }
+    Remove-LocalItem -Path $MyGetPkg
+    Remove-LocalItem -Path $MyGetDir -Recurse
 }
 
 Task MyGet-Build `
@@ -248,13 +243,14 @@ Task MyGet-Zip `
     -Description 'Zip MyGet server.' `
 {
     if (!(Test-Path $MyGetDir)) {
-        Exit-ErrorGracefully 'Unabled to create the Zip package: did you forgot to call the MyGet-Build task?'
+        Exit-Gracefully -ExitCode 1 `
+            'Unabled to create the Zip package: did you forgot to call the MyGet-Build task?'
     }
 
     . (Get-7Zip -Install) -mx9 a $MyGetPkg $MyGetDir | Out-Null
 
     if (!$?) {
-        Exit-ErrorGracefully 'Unabled to create the Zip package.'
+        Exit-Gracefully -ExitCode 1 'Unabled to create the Zip package.'
     }
 
     Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGetPkg'." -ForegroundColor Green
@@ -266,7 +262,7 @@ Task MyGet-Package `
 
 Task MyGet `
     -Description 'Clean then package the MyGet server.' `
-    -Depends MyGet-Clean, MyGet-Build, MyGet-Zip
+    -Depends MyGet-Clean, MyGet-Package
 
 # ------------------------------------------------------------------------------
 # Miscs
@@ -302,11 +298,7 @@ Task Environment `
 Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
-    $git = Get-Git
-
-    if ($git -ne $null) {
-        $GitCommitHash = $git | Get-GitCommitHash
-    }
+    $GitCommitHash = Get-Git | Get-GitCommitHash 
 }
 
 # ------------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-#Requires -Version 3.0
-
 Set-StrictMode -Version Latest
 
 Add-Type -AssemblyName 'System.IO.Compression.FileSystem'

@@ -1,3 +1,14 @@
+<#
+.SYNOPSIS
+    PowerShell module to manage the Narvalo.NET project.
+.DESCRIPTION
+    Provides helpers to perform various development tasks:
+    - Install or uninstall external tools.
+    - Automatically fix the most common problems.
+    - Run the build script.
+    - Clean up the repository.
+#>
+
 Set-StrictMode -Version Latest
 
 <#
@@ -58,23 +69,38 @@ New-Variable -Name CopyrightHeader `
 
 <# 
 .SYNOPSIS
-    Exit current process with the error code 1.
+    Exit current process gracefully.
+.DESCRIPTION
+    Depending on the specified error code, display a colorful message for success 
+    or failure then exit the current process.
 .PARAMETER Message
     Specifies the message to be written to a host.
+.PARAMETER Code
+    Specifies the exit code.
 .INPUTS
     None.
 .OUTPUTS
     None.
 #>
-function Exit-ErrorGracefully {
+function Exit-Gracefully {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [string] $Message
+        [string] $Message,
+        
+        [Parameter(Mandatory = $false, Position = 1)] 
+        [int] $ExitCode = 0
     )
     
-    Write-Host $message -BackgroundColor Red -ForegroundColor Yellow
-    Exit 1
+    if ($exitCode -eq 0) {
+        $backgroundColor = 'DarkGreen'
+    } else {
+        $backgroundColor = 'Red'
+    }
+        
+    Write-Host $message -BackgroundColor $backgroundColor -ForegroundColor Yellow
+
+    Exit $exitCode
 }
 
 <# 
@@ -97,6 +123,8 @@ function Get-7Zip {
     $sevenZip = Get-LocalPath 'tools\7za.exe'
 
     if ($install.IsPresent -and !(Test-Path $sevenZip)) {
+        Write-Host 'Installing 7-Zip.'
+
         Install-7Zip $sevenZip
     }
 
@@ -146,13 +174,19 @@ function Get-GitCommitHash {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [AllowNull()]
         [string] $Git,
 
         [switch] $Abbrev
     )
-
+    
     Write-Verbose 'Getting the last git commit hash.'
 
+    if ($git -eq $null) {
+        Write-Verbose 'The git parameter being $null, we can''t retrieve the git commit hash.' 
+        return ''
+    }
+    
     if ($abbrev.IsPresent) {
         $fmt = '%h'
     } else {
@@ -224,6 +258,8 @@ function Get-NuGet {
     $nuget = Get-LocalPath 'tools\nuget.exe'
 
     if ($install.IsPresent -and !(Test-Path $nuget)) {
+        Write-Host 'Installing NuGet.'
+
         Install-NuGet $nuget
     }
 
@@ -271,7 +307,7 @@ function Install-7Zip {
     )
 
     [System.Uri] $uri = 'http://narvalo.org/7z936.exe'
-    $uri | Install-WebResource -Name '7-Zip' -o $outFile -Force:$force.IsPresent | Out-Null
+    $uri | Install-RemoteItem -Name '7-Zip' -o $outFile -Force:$force.IsPresent
 }
 
 <#
@@ -294,7 +330,7 @@ function Install-NuGet {
     )
 
     [System.Uri] $uri = 'https://nuget.org/nuget.exe'
-    $uri | Install-WebResource -Name 'NuGet' -o $outFile -Force:$force.IsPresent | Out-Null
+    $uri | Install-RemoteItem -Name 'NuGet' -o $outFile -Force:$force.IsPresent
 }
 
 <#
@@ -331,6 +367,72 @@ function Install-PSake {
 
 <#
 .SYNOPSIS
+    Process the analysis tasks.
+.PARAMETER NoConfirm
+    If $true, do not ask for any confirmation.
+#>
+function Invoke-AnalyzeTask {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+
+    Write-Warning 'Nothing yet :-('
+}
+
+<#
+.SYNOPSIS
+    Process the cleanup tasks.
+.PARAMETER Yes
+    If $true, do not ask for any confirmation.
+#>
+function Invoke-PurgeTask {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    
+    if ($noConfirm -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
+        'samples', 'src', 'tests' | Remove-BinAndObj #-WhatIf:$dryRun -v:$verbose
+        Write-TaskCompleted
+    }
+
+    if ($noConfirm -or (Confirm-Yes 'Remove ''packages'' directory?')) {
+        'packages' | Remove-LocalItem -Recurse #-WhatIf:$dryRun
+        Write-TaskCompleted
+    }
+
+    if ($noConfirm -or (Confirm-Yes 'Remove ''work'' directory?')) {
+        'work' | Remove-LocalItem -Recurse #-WhatIf:$dryRun
+        Write-TaskCompleted
+    }
+
+    if ($noConfirm -or (Confirm-Yes 'Remove the locally installed tools?')) {
+        Remove-LocalItem -Path (Get-7Zip) #-WhatIf:$dryRun
+        Remove-LocalItem -Path (Get-NuGet) #-WhatIf:$dryRun
+        Write-TaskCompleted
+    }
+
+    if ($noConfirm -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
+        Get-Git | Remove-UntrackedItems #-WhatIf:$dryRun -v:$verbose
+        Write-TaskCompleted
+    }
+}
+
+<#
+.SYNOPSIS
+    Process the repair tasks.
+.PARAMETER Yes
+    If $true, do not ask for any confirmation.
+#>
+function Invoke-RepairTask {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    
+    if ($noConfirm -or (Confirm-Yes 'Repair copyright headers?')) {
+        'samples', 'src', 'tests' | Repair-Copyright #-WhatIf:$dryRun -v:$verbose
+        Write-TaskCompleted
+    }
+}
+
+<#
+.SYNOPSIS
     Remove the 'bin' and 'obj' directories created by Visual Studio.
 .PARAMETER PathList
     Specifies the list of paths, relative to the project root, to traverse.
@@ -359,6 +461,27 @@ function Remove-BinAndObj {
     }
 }
 
+function Remove-LocalItem {
+    [CmdletBinding(DefaultParametersetName = 'Relative', SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Relative')]  
+        [string] $RelativePath,
+
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Absolute')]  
+        [string] $Path,
+
+        [switch] $Recurse
+    )
+
+    if ($PsCmdlet.ParameterSetName -eq 'Relative') {
+        $path = Get-LocalPath $relativePath
+    } 
+
+    if (Test-Path $path) {
+        rm $path -Force -Recurse:$recurse.IsPresent
+    }
+}
+
 <#
 .SYNOPSIS
     Remove files untracked by git.
@@ -377,8 +500,14 @@ function Remove-UntrackedItems {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [AllowNull()]
         [string] $Git
     )
+    
+    if ($git -eq $null) {
+        Write-Warning 'Git being $null, we can not proceed.' 
+        return
+    }
     
     try {
         Push-Location $script:ProjectRoot
@@ -469,8 +598,11 @@ function Restore-SolutionPackages {
     None.
 #>
 function Stop-AnyMSBuildProcess {
+    [CmdletBinding()]
+    param()
+
     Write-Debug 'Stop any concurrent MSBuild running.'
-    Get-Process -Name 'msbuild' | %{ Stop-Process $_.ID -Force }
+    Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
 }
 
 # ------------------------------------------------------------------------------
@@ -500,6 +632,21 @@ function Add-Copyright {
     $lines.Insert(0, '')
     $lines.Insert(0, $script:CopyrightHeader)
     $lines | Set-Content -LiteralPath $path -Encoding UTF8
+}
+
+<#
+.SYNOPSIS
+    Requests confirmation from the user. 
+.PARAMETER Query
+    Specifies the query to be displayed to the user.
+#>
+function Confirm-Yes {
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [string] $Query
+    )
+
+    (Read-Host $query, '[y/N]') -eq 'y'
 }
 
 <#
@@ -535,7 +682,7 @@ function Find-MissingCopyright {
 .OUTPUTS
     None.
 #>
-function Install-WebResource {
+function Install-RemoteItem {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)] 
@@ -553,13 +700,17 @@ function Install-WebResource {
     if (!$force -and (Test-Path $outFile -PathType Leaf)) {
         Write-Verbose "$name is already installed."
     } else {
-        Write-Verbose "Installing $name."
+        Write-Verbose "Downloading ${name}."
 
+        # We could use 
+        #   Invoke-WebRequest $uri -OutFile $outFile
+        # but it displays a very ugly progress bar.
         try {
             Write-Debug "Download $uri to $outFile."
-            Invoke-WebRequest $uri -OutFile $outFile
+            $webClient = New-Object System.Net.WebClient
+            $webClient.DownloadFile($uri, $outFile)
         } catch {
-            throw "Unabled to download $name."
+            throw "Unabled to download ${name}: $_"
         }
     }
 }
@@ -581,17 +732,21 @@ function Test-Copyright {
         [Alias('p')] [string] $Path
     )
 
-    Write-Verbose "Processing $path."
+    Write-Verbose "Processing ${path}."
 
     $line = cat -LiteralPath $path -TotalCount 1;
 
     return $line -and $line.StartsWith('// Copyright')
 }
 
+function Write-TaskCompleted { 
+    Write-Host 'Task completed.' -ForeGround Green 
+}
+
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
-    Exit-ErrorGracefully,
+    Exit-Gracefully,
     Get-7Zip,
     Get-Git, 
     Get-GitCommitHash, 
@@ -601,10 +756,16 @@ Export-ModuleMember -Function `
     Install-7Zip,
     Install-NuGet, 
     Install-PSake,
+    Invoke-AnalyzeTask,
+    Invoke-PurgeTask,
+    Invoke-RepairTask,
     Remove-BinAndObj,
+    Remove-LocalItem,
     Remove-UntrackedItems,
     Repair-Copyright,
     Restore-SolutionPackages,
-    Stop-AnyMSBuildProcess
+    Stop-AnyMSBuildProcess,
+    Uninstall-7Zip,
+    Uninstall-NuGet
         
 # ------------------------------------------------------------------------------
