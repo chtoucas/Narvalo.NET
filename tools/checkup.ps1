@@ -58,17 +58,11 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-function Confirm-Parameter([string] $Message) {
-    Write-Warning $message
-
+function Confirm-Continue {
     if ((Read-Host 'Are you sure you wish to continue? [y/N]') -ne 'y') {
         Write-Host "Cancelling on use request.`n" -ForeGround Green
         Exit 0
     }
-}
-
-function Write-Header([string] $Message) { 
-    Write-Host $message -ForeGround DarkCyan 
 }
 
 # ------------------------------------------------------------------------------
@@ -91,21 +85,23 @@ if (!$noLogo.IsPresent) {
 if ($help.IsPresent) {
     Get-Help $MyInvocation.MyCommand.Path -Full
     Exit 0
-} else {
-    if (!$analyze.IsPresent -and !$purge.IsPresent -and !$repair.IsPresent) {
-        Exit-Gracefully -ExitCode 1 `
-            'You should at least set one of the following switches: ''-Analyze'' or ''-Purge'' or ''-Repair''.'
-    }
+}
 
-    if ($force.IsPresent) {
-        Confirm-Parameter '''Force'' mode on, any modification will be permanent.' 
-        if ($yes.IsPresent) {
-            Confirm-Parameter '''Yes'' mode on, ALL tasks will be processed WITHOUT any prior confirmation.'
-        }
-    } else {
-        Write-Warning 'Safe mode on, no modifications to the repository will happen. Use the option ''-Force'' when you are ready.'
-        Write-Host ''
+if (!$analyze.IsPresent -and !$purge.IsPresent -and !$repair.IsPresent) {
+    Exit-Gracefully -ExitCode 1 `
+        'You should at least set one of the following switches: ''-Analyze'' or ''-Purge'' or ''-Repair''.'
+}
+
+if ($force.IsPresent) {
+    Write-Warning '''Force'' mode on, any modification will be permanent.' 
+    Confirm-Continue
+
+    if ($yes.IsPresent) {
+        Write-Warning '''Yes'' mode on, ALL tasks will be processed WITHOUT any prior confirmation.'
+        Confirm-Continue
     }
+} else {
+    Write-Warning 'Safe mode on, no modifications to the repository will happen. Use the option ''-Force'' when you are ready.'
 }
 
 # $WhatIfPreference
@@ -116,17 +112,18 @@ if ($help.IsPresent) {
 $whatIf  = !$force.IsPresent       
    
 if ($analyze.IsPresent) {
-    Write-Header @"
+    Write-Host -ForeGround DarkCyan @"
+
 Ready to proceed to the analysis tasks.
 
 "@
 
-    Invoke-AnalyzeTask $yes.IsPresent -WhatIf:$whatIf
-    Write-Host ''
+    Invoke-AnalyzeTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
 }
 
 if ($purge.IsPresent) {
-    Write-Header @"
+    Write-Host -ForeGround DarkCyan @"
+
 Ready to proceed to the cleanup tasks. You will be offered the following options:
 - Remove 'bin' and 'obj' directories created by Visual Studio.
 - Remove the 'packages' directory used by NuGet.
@@ -136,20 +133,19 @@ Ready to proceed to the cleanup tasks. You will be offered the following options
 
 "@
 
-    Invoke-PurgeTask $yes.IsPresent -WhatIf:$whatIf
-    Write-Host ''
+    Invoke-PurgeTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
 }
 
 if ($repair.IsPresent) {
-    Write-Header @"
+    Write-Host -ForeGround DarkCyan @"
+
 Ready to proceed to the repair tasks. You will be offered the following options:
 - Scan the repository for any C# source files missing a copyright header then repair them. 
   *** This operation puts a lot of stress on the file system ****
 
 "@
 
-    Invoke-RepairTask $yes.IsPresent -WhatIf:$whatIf
-    Write-Host ''
+    Invoke-RepairTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
 }
 
 # ------------------------------------------------------------------------------

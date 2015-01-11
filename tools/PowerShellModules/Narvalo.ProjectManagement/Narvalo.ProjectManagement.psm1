@@ -123,8 +123,6 @@ function Get-7Zip {
     $sevenZip = Get-LocalPath 'tools\7za.exe'
 
     if ($install.IsPresent -and !(Test-Path $sevenZip)) {
-        Write-Host 'Installing 7-Zip.'
-
         Install-7Zip $sevenZip
     }
 
@@ -258,8 +256,6 @@ function Get-NuGet {
     $nuget = Get-LocalPath 'tools\nuget.exe'
 
     if ($install.IsPresent -and !(Test-Path $nuget)) {
-        Write-Host 'Installing NuGet.'
-
         Install-NuGet $nuget
     }
 
@@ -389,29 +385,24 @@ function Invoke-PurgeTask {
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
     
     if ($noConfirm -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
-        'samples', 'src', 'tests' | Remove-BinAndObj #-WhatIf:$dryRun -v:$verbose
-        Write-TaskCompleted
+        Remove-BinAndObj 'samples', 'src', 'tests'
     }
 
     if ($noConfirm -or (Confirm-Yes 'Remove ''packages'' directory?')) {
-        'packages' | Remove-LocalItem -Recurse #-WhatIf:$dryRun
-        Write-TaskCompleted
+        Remove-LocalItem 'packages' -Recurse
     }
 
     if ($noConfirm -or (Confirm-Yes 'Remove ''work'' directory?')) {
-        'work' | Remove-LocalItem -Recurse #-WhatIf:$dryRun
-        Write-TaskCompleted
+        Remove-LocalItem 'work' -Recurse
     }
 
     if ($noConfirm -or (Confirm-Yes 'Remove the locally installed tools?')) {
-        Remove-LocalItem -Path (Get-7Zip) #-WhatIf:$dryRun
-        Remove-LocalItem -Path (Get-NuGet) #-WhatIf:$dryRun
-        Write-TaskCompleted
+        Remove-LocalItem -Path (Get-7Zip)
+        Remove-LocalItem -Path (Get-NuGet)
     }
 
     if ($noConfirm -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
-        Get-Git | Remove-UntrackedItems #-WhatIf:$dryRun -v:$verbose
-        Write-TaskCompleted
+        Get-Git | Remove-UntrackedItems
     }
 }
 
@@ -426,8 +417,7 @@ function Invoke-RepairTask {
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
     
     if ($noConfirm -or (Confirm-Yes 'Repair copyright headers?')) {
-        'samples', 'src', 'tests' | Repair-Copyright #-WhatIf:$dryRun -v:$verbose
-        Write-TaskCompleted
+        Repair-Copyright 'samples', 'src', 'tests'
     }
 }
 
@@ -700,7 +690,7 @@ function Install-RemoteItem {
     if (!$force -and (Test-Path $outFile -PathType Leaf)) {
         Write-Verbose "$name is already installed."
     } else {
-        Write-Verbose "Downloading ${name}."
+        Write-Verbose "Installing ${name}."
 
         # We could use 
         #   Invoke-WebRequest $uri -OutFile $outFile
@@ -739,10 +729,6 @@ function Test-Copyright {
     return $line -and $line.StartsWith('// Copyright')
 }
 
-function Write-TaskCompleted { 
-    Write-Host 'Task completed.' -ForeGround Green 
-}
-
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
@@ -764,8 +750,6 @@ Export-ModuleMember -Function `
     Remove-UntrackedItems,
     Repair-Copyright,
     Restore-SolutionPackages,
-    Stop-AnyMSBuildProcess,
-    Uninstall-7Zip,
-    Uninstall-NuGet
+    Stop-AnyMSBuildProcess
         
 # ------------------------------------------------------------------------------
