@@ -25,8 +25,8 @@ New-Variable -Name LocalModulesPath `
     System.Management.Automation.PSModuleInfo. Import-LocalModule returns 
     the System.Management.Automation.PSModuleInfo object that represents the imported module.
 .EXAMPLE
-    $module = Import-LocalModule 'Narvalo.ProjectManagement' -Args $PSScriptRoot
-    Import the 'Narvalo.ProjectManagement' module.
+    $module = Import-LocalModule 'Narvalo.ProjectAutomation' -Args $PSScriptRoot
+    Import the 'Narvalo.ProjectAutomation' module.
 #>
 function Import-LocalModule {
     [CmdletBinding()]

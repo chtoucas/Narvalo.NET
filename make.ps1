@@ -72,7 +72,7 @@ trap {
 if (!(Get-Module Narvalo.Local)) {
     Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1')
 }
-$module = Import-LocalModule 'Narvalo.ProjectManagement' $pristine.IsPresent -Args $PSScriptRoot
+$module = Import-LocalModule 'Narvalo.ProjectAutomation' $pristine.IsPresent -Args $PSScriptRoot
 
 if (!$noLogo.IsPresent) {
     $version = $module.Version

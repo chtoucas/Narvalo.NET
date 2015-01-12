@@ -28,12 +28,12 @@ function Approve-ProjectRoot {
     param([Parameter(Mandatory = $true)] [string] $Path) 
 
     if (![System.IO.Path]::IsPathRooted($path)) {
-        throw 'When importing the ''Narvalo.ProjectManagement'' module, ',
+        throw 'When importing the ''Narvalo.ProjectAutomation'' module, ',
             'you MUST specify an absolute path for the Narvalo.NET project repository.'
     }
 
     if (!(Test-Path $path)) {
-        throw 'When importing the ''Narvalo.ProjectManagement'' module,',
+        throw 'When importing the ''Narvalo.ProjectAutomation'' module,',
             'you MUST specify an existing directory for the Narvalo.NET project repository.'
     }
 
@@ -41,9 +41,9 @@ function Approve-ProjectRoot {
 }
 
 if ($args.Length -ne 1) {
-    throw 'When importing the ''Narvalo.ProjectManagement'' module,',
+    throw 'When importing the ''Narvalo.ProjectAutomation'' module,',
         'you MUST specify the Narvalo.NET project repository,',
-        'e.g. ''Import-Module Narvalo.ProjectManagement -Args $projectRoot''.'
+        'e.g. ''Import-Module Narvalo.ProjectAutomation -Args $projectRoot''.'
 }
 
 New-Variable -Name ProjectRoot `

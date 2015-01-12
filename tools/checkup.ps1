@@ -85,7 +85,7 @@ function Confirm-Continue {
 if (!(Get-Module Narvalo.Local)) {
     Import-Module (Join-Path $PSScriptRoot 'Narvalo.Local.psm1')
 }
-$module = Import-LocalModule 'Narvalo.ProjectManagement' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
+$module = Import-LocalModule 'Narvalo.ProjectAutomation' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
 
 if (!$noLogo.IsPresent) {
     $version = $module.Version
