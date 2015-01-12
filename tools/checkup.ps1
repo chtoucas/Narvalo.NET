@@ -58,10 +58,25 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
+trap {
+    Write-Host ('An unexpected error occured: {0}' -f $_.Exception.Message) `
+        -BackgroundColor Red -ForegroundColor Yellow
+
+    Exit 1
+}
+
+# ------------------------------------------------------------------------------
+
 function Confirm-Continue {
-    if ((Read-Host 'Are you sure you wish to continue? [y/N]') -ne 'y') {
-        Write-Host "Cancelling on use request.`n" -ForeGround Green
-        Exit 0
+    while ($true) {
+        $rsp = Read-Host 'Are you sure you wish to continue? [y/N]'
+        
+        if ($rsp -eq '' -or $rsp -eq 'n') {
+            Write-Host "Cancelling on use request.`n"
+            Exit 0
+        } elseif ($rsp -eq 'y') {
+            break
+        }
     }
 }
 
@@ -104,11 +119,6 @@ if ($force.IsPresent) {
     Write-Warning 'Safe mode on, no modifications to the repository will happen. Use the option ''-Force'' when you are ready.'
 }
 
-# $WhatIfPreference
-# $ConfirmPreference
-# $confirm = $PSBoundParameters.ContainsKey('Confirm') `
-#     -and [bool] $PSBoundParameters.Item('Confirm') -eq $true
- 
 $whatIf  = !$force.IsPresent       
    
 if ($analyze.IsPresent) {

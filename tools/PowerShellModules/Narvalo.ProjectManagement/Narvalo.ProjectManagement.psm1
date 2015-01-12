@@ -43,7 +43,7 @@ function Approve-ProjectRoot {
 if ($args.Length -ne 1) {
     throw 'When importing the ''Narvalo.ProjectManagement'' module,',
         'you MUST specify the Narvalo.NET project repository,',
-        ' e.g. ''Import-Module Narvalo.ProjectManagement -Args $projectRoot''.'
+        'e.g. ''Import-Module Narvalo.ProjectManagement -Args $projectRoot''.'
 }
 
 New-Variable -Name ProjectRoot `
@@ -73,10 +73,10 @@ New-Variable -Name CopyrightHeader `
 .DESCRIPTION
     Depending on the specified error code, display a colorful message for success 
     or failure then exit the current process.
+.PARAMETER ExitCode
+    Specifies the exit code.
 .PARAMETER Message
     Specifies the message to be written to a host.
-.PARAMETER Code
-    Specifies the exit code.
 .INPUTS
     None.
 .OUTPUTS
@@ -636,7 +636,15 @@ function Confirm-Yes {
         [string] $Query
     )
 
-    (Read-Host $query, '[y/N]') -eq 'y'
+    while ($true) {
+        $rsp = (Read-Host $query, '[y/N]')
+        
+        if ($rsp -eq '' -or $rsp -eq 'n') {
+            return $false
+        } elseif ($rsp -eq 'y') {
+            return $true
+        }
+    }
 }
 
 <#
