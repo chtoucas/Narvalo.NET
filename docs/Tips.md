@@ -19,7 +19,7 @@ $confirm = $PSBoundParameters.ContainsKey('Confirm') `
 ### Update all binding redirects
 Inside the Package Manager Console:
 ```
-Get-Project –All | Add-BindingRedirect
+Get-Project -All | Add-BindingRedirect
 ```
 
 ### A call to an extension method on a null instance does not automatically throw

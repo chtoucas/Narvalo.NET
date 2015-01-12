@@ -637,11 +637,11 @@ function Confirm-Yes {
     )
 
     while ($true) {
-        $rsp = (Read-Host $query, '[y/N]')
+        $answer = (Read-Host $query, '[y/N]')
         
-        if ($rsp -eq '' -or $rsp -eq 'n') {
+        if ($answer -eq '' -or $answer -eq 'n') {
             return $false
-        } elseif ($rsp -eq 'y') {
+        } elseif ($answer -eq 'y') {
             return $true
         }
     }

@@ -69,12 +69,12 @@ trap {
 
 function Confirm-Continue {
     while ($true) {
-        $rsp = Read-Host 'Are you sure you wish to continue? [y/N]'
+        $answer = Read-Host 'Are you sure you wish to continue? [y/N]'
         
-        if ($rsp -eq '' -or $rsp -eq 'n') {
-            Write-Host "Cancelling on use request.`n"
+        if ($answer -eq '' -or $answer -eq 'n') {
+            Write-Host "Stopping on user request.`n"
             Exit 0
-        } elseif ($rsp -eq 'y') {
+        } elseif ($answer -eq 'y') {
             break
         }
     }
