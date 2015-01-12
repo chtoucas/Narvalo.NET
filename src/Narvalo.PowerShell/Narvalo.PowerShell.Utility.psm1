@@ -2,54 +2,65 @@ Set-StrictMode -Version Latest
 
 Add-Type -AssemblyName 'System.IO.Compression.FileSystem'
 
-# .SYNOPSIS
-# Décompresse un fichier au format ZIP.
-#
-# .PARAMETER path
-# Chemin du fichier à décompresser.
+# ------------------------------------------------------------------------------
+
+<# 
+.SYNOPSIS
+    Uncompress a ZIP file.
+.PARAMETER Path
+    Specifies the path to the file to be uncompressed.
+.INPUTS
+    The path to the file to be uncompressed.
+.OUTPUTS
+    None.
+#>
 function Expand-ZipArchive {
-  [CmdletBinding()]
-  param(
-    [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $file,
-    [Parameter(Mandatory = $true, Position = 1)] [string] $extractPath
-  )
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] [string] $Path,
+        [Parameter(Mandatory = $true, Position = 1)] [string] $OutPath
+    )
 
-  Write-Output -NoNewline 'Unzipping...'
-  [System.IO.Compression.ZipFile]::ExtractToDirectory($file, $extractPath)
-  Write-Output 'done'
+    Write-Verbose 'Unzipping...'
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($path, $outPath)
+    Write-Verbose 'done'
 }
 
-# .SYNOPSIS
-# Fusionne des fichiers UTF-8.
-#
-# .DESCRIPTION
-# Cette fonction permet de fusionner des fichiers UTF-8(Y).
-#
-# Si un des fichiers à fusionner contient un BOM, ce dernier
-# n'apparaîtra pas au milieu du fichier fusionné.
-#
-# Si le fichier fusionné existe déjà il est écrasé.
-#
-# .PARAMETER inFiles
-# Liste des fichiers à fusionner.
-#
-# .PARAMETER outFile
-# Nom du fichier fusionné.
+<# 
+.SYNOPSIS
+    Merge UTF-8 files.
+.DESCRIPTION
+    This function allows to merge UTF-8(Y) files.
+    Prior to merging the files, erase the output file if it already exists.
+.PARAMETER PathList
+    Speficies a list of paths of files to be merged.
+.PARAMETER OutPath
+    Sepcifies the path of the merged file.
+.NOTES
+    This function guarantees that no BOM wil end up in the middle of the file.
+#>
 function Merge-Utf8Files {
-  [CmdletBinding()]
-  param(
-    [Parameter(Mandatory = $true, Position = 0)] [array] $inFiles,
-    [Parameter(Mandatory = $true, Position = 1)] [string] $outFile
-  )
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] [string[]] $PathList,
+        [Parameter(Mandatory = $true, Position = 1)] [string] $OutPath
+    )
 
-  if (Test-Path $outFile) { Remove-Item $outFile }
+    if (Test-Path $outPath) { Remove-Item $outPath }
 
-  $encoding = New-Object System.Text.UTF8Encoding($false)
+    $encoding = New-Object System.Text.UTF8Encoding($false)
 
-  foreach ($filePath in $inFiles) {
-    $content = [System.IO.File]::ReadAllLines($filePath)
-    [System.IO.File]::AppendAllLines($outFile, $content, $encoding)
-  }
+    foreach ($path in $pathList) {
+        Write-Verbose "Processing file '$path'."
+        $content = [System.IO.File]::ReadAllLines($path)
+        [System.IO.File]::AppendAllLines($outPath, $content, $encoding)
+    }
 }
 
-Export-ModuleMember -Function *
+# ------------------------------------------------------------------------------
+
+Export-ModuleMember -Function `
+    Expand-ZipArchive,
+    Merge-Utf8Files
+
+# ------------------------------------------------------------------------------

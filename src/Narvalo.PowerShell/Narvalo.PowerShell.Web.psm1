@@ -1,50 +1,65 @@
 Set-StrictMode -Version Latest
 
-# .SYNOPSIS
-# Return the path to MSDeploy.
+# ------------------------------------------------------------------------------
+
+<# 
+.SYNOPSIS
+    Return the path to MSDeploy.
+#>
 function Get-WebDeployInstallPath {
-  return (Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\IIS Extensions\MSDeploy' | select -Last 1).GetValue("InstallPath")
+    $regKey = 'HKLM:\SOFTWARE\Microsoft\IIS Extensions\MSDeploy'
+
+    if (!(Test-Path $regKey)) {
+        throw 'MSDeploy is not installed.'
+    }
+
+    # REVIEW: Use (ls $regKey | select -Last 1) if there are more than one version
+    # of MSDeploy installed.
+
+    return (Get-ItemProperty $regKey).InstallPath
 }
 
-# .SYNOPSIS
-# Import WebAdministration as module or snap-in.
-#
-# .LINK
-# http://stackoverflow.com/questions/10700660/add-pssnapin-webadministration-in-windows7
+<# 
+.SYNOPSIS
+    Import WebAdministration as module or snap-in.
+.LINK
+    http://stackoverflow.com/questions/1924217/powershell-load-webadministration-in-ps1-script-on-both-iis-7-and-iis-7-5/4325963#4325963
+#>
 function Import-WebAdministration {
-  $moduleName = 'WebAdministration'
-  $loaded = $false
+    [CmdletBinding()]
+    param()
 
-  if ($PSVersionTable.PSVersion.Major -ge 2) {
-    if ((Get-Module -ListAvailable | ForEach-Object {$_.Name}) -contains $moduleName) {
-      Import-Module $moduleName
+    $regKey = 'HKLM:\SOFTWARE\Microsoft\InetStp'
 
-      if ((Get-Module | ForEach-Object {$_.Name}) -contains $moduleName) {
-        $loaded = $true
-      }
-    } elseif ((Get-Module | ForEach-Object {$_.Name}) -contains $moduleName) {
-      $loaded = $true
+    if (!(Test-Path $regKey)) {
+        throw 'Can not import WebAdministration, IIS is not installed.'
     }
-  }
 
-  if (-not $loaded) {
-    try {
-      if ((Get-PSSnapin -Registered | ForEach-Object {$_.Name}) -contains $moduleName) {
-        if ((Get-PSSnapin -Name $moduleName -ErrorAction SilentlyContinue) -eq $null) {
-          Add-PSSnapin $moduleName
-        }
+    $iisVersion = Get-ItemProperty $regKey
 
-        if ((Get-PSSnapin | ForEach-Object {$_.Name}) -contains $moduleName) {
-          $loaded = $true
+    if ($iisVersion.MajorVersion -eq 7) {
+        if ($iisVersion.MinorVersion -ge 5) {
+            Write-Verbose 'IIS 7.5 is installed. Will import ''WebAdministration'' as a module.'
+
+            if (!(Get-Module WebAdministration)) {
+                Import-Module WebAdministration
+            }
+        } else {
+            Write-Verbose 'IIS 7.5 is not installed. Will import ''WebAdministration'' as a snap-in.'
+
+            if (!(Get-PSSnapIn | ?{ $_.Name -eq 'WebAdministration' })) {
+                Add-PSSnapIn WebAdministration
+            }
         }
-      } elseif ((Get-PSSnapin | ForEach-Object {$_.Name}) -contains $moduleName) {
-        $loaded = $true
-      }
-    } catch {
-      Write-Error "`t`t$($MyInvocation.InvocationName): $_"
-      Exit 1
+    } else {
+        throw 'Can not import WebAdministration: installed IIS is too old. At least IIS version 7.0 is required.'
     }
-  }
 }
 
-Export-ModuleMember -Function *
+# ------------------------------------------------------------------------------
+
+Export-ModuleMember -Function `
+    Get-WebDeployInstallPath,
+    Import-WebAdministration
+
+# ------------------------------------------------------------------------------
