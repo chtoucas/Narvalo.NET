@@ -1,12 +1,23 @@
 Tips
 ====
 
-### Truly initialize a PS string to $null ###
+### CmdletBinding and scripts ###
+WhatIf and Confirm parameters won't propagate from a script to a module, 
+but one can manually get their values.
+If `-WhatIf` is in use, the `$WhatIfPreference` variable is `$true`, `$false` otherwise. 
+The `$ConfirmPreference` variable contains the value of ConfirmImpact and
+one can check if `-Confirm` is in use by using the following code snippet: 
+```
+$confirm = $PSBoundParameters.ContainsKey('Confirm') `
+    -and [bool] $PSBoundParameters.Item('Confirm') -eq $true
+```
+
+### Truly initialize a PowerShell string to $null ###
 
 [string] $value  = [NullString]::Value
 
 ### Update all binding redirects
-In the Package Manager Console:
+Inside the Package Manager Console:
 ```
 Get-Project –All | Add-BindingRedirect
 ```
