@@ -2,9 +2,9 @@
 .SYNOPSIS
     PowerShell module to manage the Narvalo.NET project.
 .DESCRIPTION
-    Provides helpers to perform various development tasks:
+    Provides helpers to automate various development tasks:
     - Install or uninstall external tools.
-    - Automatically fix the most common problems.
+    - Fix the most common problems.
     - Run the build script.
     - Clean up the repository.
 #>
@@ -161,6 +161,8 @@ function Get-Git {
     If present, finds the abbreviated commit hash.
 .PARAMETER Git
     Specifies the path to the Git executable.
+.PARAMETER NoWarn
+    f present, do not display warnings.
 .INPUTS
     The path to the Git executable.
 .OUTPUTS
@@ -175,13 +177,17 @@ function Get-GitCommitHash {
         [AllowNull()]
         [string] $Git,
 
-        [switch] $Abbrev
+        [switch] $Abbrev,
+        [switch] $NoWarn
     )
     
     Write-Verbose 'Getting the last git commit hash.'
 
     if ($git -eq $null) {
-        Write-Verbose 'The git parameter being $null, we can''t retrieve the git commit hash.' 
+        if (!$noWarn.isPresent) {
+            Write-Warning 'The git parameter being $null, we can''t retrieve the git commit hash.' 
+        }
+
         return ''
     }
     
@@ -370,8 +376,15 @@ function Install-PSake {
 function Invoke-AnalyzeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    
+    # TODO:
+    # Find DependentUpon & SubType files
+    # Find hidden VS files
+    # Find files ignored by git: git status -u --ignored
 
-    Write-Warning 'Nothing yet :-('
+    if ($noConfirm -or (Confirm-Yes 'Analyze C# project files for problems?')) {
+        Measure-CSharpProjects 'src', 'samples', 'test'
+    }
 }
 
 <#
@@ -383,6 +396,8 @@ function Invoke-AnalyzeTask {
 function Invoke-PurgeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+
+    # Add a new task: remove ignored files?
     
     if ($noConfirm -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
         Remove-BinAndObj 'samples', 'src', 'tests'
@@ -402,7 +417,7 @@ function Invoke-PurgeTask {
     }
 
     if ($noConfirm -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
-        Get-Git | Remove-UntrackedItems
+        Get-Git | Remove-UntrackedItems -NoWarn
     }
 }
 
@@ -423,11 +438,62 @@ function Invoke-RepairTask {
 
 <#
 .SYNOPSIS
+    Analyze project files.
+.PARAMETER PathList
+    Specifies the list of paths, relative to the project root, to traverse.
+#>
+function Measure-CSharpProjects {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Alias('p')] [string[]] $PathList
+    )
+
+    PROCESS {
+        $pathList | 
+            %{ Get-LocalPath $_ } | 
+            %{ ls $_ -Recurse -Filter *.csproj } |
+            %{ Measure-ProjectFile $_ }
+    }
+}
+
+<#
+.SYNOPSIS
+    Analyze a project file for common problems.
+.PARAMETER File
+    Specifies the path to a project file.
+#>
+function Measure-ProjectFile {
+    [CmdletBinding()]
+    param([Parameter(Mandatory = $true)] [System.IO.FileInfo] $File)
+
+    Write-Verbose "Analyzing the project '$($file.Name)'."
+
+    $content = [xml](cat $file.FullName)
+    
+    # If .NET supported XPath 2.0, we could use a simpler XPath query 
+    # (namespace removed for the sake of simplification):
+    #   /Project/ItemGroup/Compile[lower-case(./ExcludeFromStyleCop)="true"]
+    $nodes = $content | 
+        Select-Xml `
+            –Namespace @{ m = 'http://schemas.microsoft.com/developer/msbuild/2003' } `
+            -XPath '/m:Project/m:ItemGroup/m:Compile[translate(./m:ExcludeFromStyleCop, "TRUE", "true") = "true"]'
+
+    if ($nodes -ne $null) {
+        Write-Output ('In the project ''{0}'', there are {1} file(s) excluded from StyleCop:' -f $file.Name, $nodes.Length)
+        $nodes | %{ Write-Output ('- {0}' -f $_.Node.Include) }
+    } else {
+        Write-Verbose "No problems found with $($file.Name)."
+    }
+}
+
+<#
+.SYNOPSIS
     Remove the 'bin' and 'obj' directories created by Visual Studio.
 .PARAMETER PathList
     Specifies the list of paths, relative to the project root, to traverse.
 .INPUTS
-    None.
+    The list of paths, relative to the project root, to traverse.
 .OUTPUTS
     None.
 #>
@@ -477,6 +543,8 @@ function Remove-LocalItem {
     Remove files untracked by git.
 .PARAMETER Git
     Specifies the path to the git executable.
+.PARAMETER NoWarn
+    f present, do not display warnings.
 .INPUTS
     The path to the git executable.
 .OUTPUTS
@@ -491,11 +559,16 @@ function Remove-UntrackedItems {
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
         [AllowNull()]
-        [string] $Git
+        [string] $Git,
+
+        [switch] $NoWarn
     )
     
     if ($git -eq $null) {
-        Write-Warning 'Git being $null, we can not proceed.' 
+        if (!$noWarn.isPresent) {
+            Write-Warning 'Git being $null, we can not proceed.' 
+        }
+
         return
     }
     
@@ -753,6 +826,7 @@ Export-ModuleMember -Function `
     Invoke-AnalyzeTask,
     Invoke-PurgeTask,
     Invoke-RepairTask,
+    Measure-ProjectFile,
     Remove-BinAndObj,
     Remove-LocalItem,
     Remove-UntrackedItems,

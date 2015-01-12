@@ -18,7 +18,7 @@
 .PARAMETER Repair
     If present, process repair tasks.
 .PARAMETER Yes
-    If present, do not ask for any confirmation.
+    If present, do not ask for any confirmation, except for safety warnings.
 .INPUTS
     None.
 .OUTPUTS
@@ -33,12 +33,9 @@
     checkup.ps1 -Purge -Yes
     Process cleanup tasks, do not ask for any confirmation, but don't actually change anything.
 .NOTES
-    On the TODO list:
-    - Analyze: Find hidden VS files
-    - Analyze: Find files ignored by git: git status -u --ignored
-    - Purge: Git reset (WARNING: remove ALL ignored files)
-    - Repair: Find DependentUpon & SubType files
-    - Repair: Find files ignored by StyleCop
+    It is fairly safe to run this script. By default it does NOT modify anything
+    and only tells you what might be done.
+    The only truly unsafe parameter is -Yes used in conjunction with -Force.
 #>
 
 [CmdletBinding()]
@@ -124,7 +121,8 @@ $whatIf  = !$force.IsPresent
 if ($analyze.IsPresent) {
     Write-Host -ForeGround DarkCyan @"
 
-Ready to proceed to the analysis tasks.
+Ready to proceed to the analysis tasks. You will be offered the following options:
+- Scan the C# project files for files ignored by StyleCop.
 
 "@
 

@@ -10,9 +10,6 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
-    $WorkRoot = Get-LocalPath 'work' 
-    $WorkPackagesDir = Get-LocalPath 'work\packages'
-    
     $GitCommitHash = ''
 
     # Console options.
@@ -113,7 +110,7 @@ Task FullClean `
     -ContinueOnError `
 {
     # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    Remove-LocalItem -Path $WorkRoot -Recurse
+    Remove-LocalItem 'work' -Recurse
 }
 
 Task CodeAnalysis `
@@ -209,8 +206,10 @@ Task Publish `
 {
     Exit-Gracefully -ExitCode 1 'Not yet implemented!'
 
+    #$packagesDir = Get-LocalPath 'work\packages'
+
     #$nuget = Get-NuGet -Install
-    #& $nuget push "$WorkPackagesDir\*.nupkg"
+    #& $nuget push "$packagesDir\*.nupkg"
 }
 
 # ------------------------------------------------------------------------------
@@ -220,8 +219,8 @@ Task Publish `
 Task MyGet-Init `
     -Description 'Initialize the variables related to the MyGet tasks.' `
 {
-    $script:MyGetDir = Join-Path $WorkRoot 'myget'
-    $script:MyGetPkg = Join-Path $WorkRoot 'myget.7z'
+    $script:MyGetDir = Get-LocalPath 'work\myget'
+    $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
 }
 
 Task MyGet-Clean `
@@ -321,7 +320,7 @@ Task Environment `
 Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
-    $GitCommitHash = Get-Git | Get-GitCommitHash 
+    $GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
 }
 
 # ------------------------------------------------------------------------------

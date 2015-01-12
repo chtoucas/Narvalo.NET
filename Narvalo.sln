@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Externs", "src\Narv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prose", "src\Prose\Prose.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.PowerShell", "src\Narvalo.PowerShell\Narvalo.PowerShell.csproj", "{4A73807D-3ECA-438A-9108-5A99E193BFBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -173,6 +175,12 @@ Global
 		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{475B9410-296D-47CB-BB58-BC57BFA8F8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
