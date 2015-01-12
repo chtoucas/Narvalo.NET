@@ -60,6 +60,15 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
+trap {
+    Write-Host ('An unexpected error occured: {0}' -f $_.Exception.Message) `
+        -BackgroundColor Red -ForegroundColor Yellow
+
+    Exit 1
+}
+
+# ------------------------------------------------------------------------------
+
 if (!(Get-Module Narvalo.Local)) {
     Import-Module (Join-Path $PSScriptRoot 'tools\Narvalo.Local.psm1')
 }
