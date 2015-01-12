@@ -1,4 +1,5 @@
-Exit 1
+
+@exit /B 1
 
 "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\makecert.exe" ^
 -n "CN=CARoot" ^

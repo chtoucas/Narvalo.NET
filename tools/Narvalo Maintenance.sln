@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		..\Changelog.md = ..\Changelog.md
 		..\docs\Guidelines.md = ..\docs\Guidelines.md
 		..\Issues.md = ..\Issues.md
+		..\LICENSE.txt = ..\LICENSE.txt
 		..\README.md = ..\README.md
 		..\docs\Tips.md = ..\docs\Tips.md
 	EndProjectSection
@@ -42,8 +43,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{6D2B84B0-FD5E-4E14-A5B6-43BC56DF08E9}"
 	ProjectSection(SolutionItems) = preProject
 		checkup.ps1 = checkup.ps1
+		deploy-myget.ps1 = deploy-myget.ps1
 		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
+		makecert.cmd = makecert.cmd
 		MSBuild.cmd = MSBuild.cmd
 		Narvalo.Local.psm1 = Narvalo.Local.psm1
 		PSakefile.ps1 = PSakefile.ps1
