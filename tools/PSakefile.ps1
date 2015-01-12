@@ -1,4 +1,3 @@
-
 # We force the framework to be sure we use the build tools v12.0.
 # Required by the Build-MyGet target.
 Framework '4.5.1x64'
@@ -12,11 +11,8 @@ Properties {
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
     $WorkRoot = Get-LocalPath 'work' 
-    $PackagesDir = Get-LocalPath 'work\packages'
+    $WorkPackagesDir = Get-LocalPath 'work\packages'
     
-    $MyGetDir = Join-Path $WorkRoot 'myget'
-    $MyGetPkg = Join-Path $WorkRoot 'myget.7z'
-
     $GitCommitHash = ''
 
     # Console options.
@@ -214,22 +210,46 @@ Task Publish `
     Exit-Gracefully -ExitCode 1 'Not yet implemented!'
 
     #$nuget = Get-NuGet -Install
-    #& $nuget push "$PackagesDir\*.nupkg"
+    #& $nuget push "$WorkPackagesDir\*.nupkg"
 }
 
 # ------------------------------------------------------------------------------
 # MyGet tasks
 # ------------------------------------------------------------------------------
 
+Task MyGet-Init `
+    -Description 'Initialize the variables related to the MyGet tasks.' `
+{
+    $script:MyGetDir = Join-Path $WorkRoot 'myget'
+    $script:MyGetPkg = Join-Path $WorkRoot 'myget.7z'
+}
+
 Task MyGet-Clean `
     -Description 'Clean MyGet server.' `
+    -Depends MyGet-Init `
 {
-    Remove-LocalItem -Path $MyGetPkg
-    Remove-LocalItem -Path $MyGetDir -Recurse
+    Remove-LocalItem -Path $script:MyGetPkg
+    Remove-LocalItem -Path $script:MyGetDir -Recurse
+}
+
+Task MyGet-Restore `
+    -Description 'Restore NuGet packages for the MyGet project.' `
+{
+    $nuget = Get-NuGet -Install
+    
+    try {
+        . $nuget restore (Get-LocalPath 'tools\MyGet\packages.config') `
+            -PackagesDirectory (Get-LocalPath 'tools\packages') `
+            -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+            -Verbosity quiet 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
 }
 
 Task MyGet-Build `
     -Description 'Build MyGet server.' `
+    -Depends MyGet-Restore `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
@@ -241,19 +261,22 @@ Task MyGet-Build `
 
 Task MyGet-Zip `
     -Description 'Zip MyGet server.' `
+    -Depends MyGet-Init `
 {
-    if (!(Test-Path $MyGetDir)) {
+    if (!(Test-Path $script:MyGetDir)) {
+        # We do not add a dependency on MyGet-Build so that we can run this task alone.
+        # MyGet-Package provides the stronger version. 
         Exit-Gracefully -ExitCode 1 `
             'Unabled to create the Zip package: did you forgot to call the MyGet-Build task?'
     }
 
-    . (Get-7Zip -Install) -mx9 a $MyGetPkg $MyGetDir | Out-Null
+    . (Get-7Zip -Install) -mx9 a $script:MyGetPkg $script:MyGetDir | Out-Null
 
     if (!$?) {
         Exit-Gracefully -ExitCode 1 'Unabled to create the Zip package.'
     }
 
-    Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGetPkg'." -ForegroundColor Green
+    Write-Host "A ready to publish zip file for MyGet may be found here: '$script:MyGetPkg'." -ForegroundColor Green
 }
 
 Task MyGet-Package `
