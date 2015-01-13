@@ -131,6 +131,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.ProjectAutomation",
 		PowerShellModules\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psm1 = PowerShellModules\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psm1
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGet.Automation", "NuGet.Automation\NuGet.Automation.fsproj", "{CD83FB3F-7171-4944-B067-8586D8718CCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD83FB3F-7171-4944-B067-8586D8718CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD83FB3F-7171-4944-B067-8586D8718CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD83FB3F-7171-4944-B067-8586D8718CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD83FB3F-7171-4944-B067-8586D8718CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,5 +168,6 @@ Global
 		{DDBD1800-0314-4A86-BF22-A7C84F473895} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
 		{FCB688F3-8203-49B5-B2F0-40B6E28315A9} = {6D2B84B0-FD5E-4E14-A5B6-43BC56DF08E9}
 		{689BB57E-CEC1-496E-9294-ADE97481280A} = {FCB688F3-8203-49B5-B2F0-40B6E28315A9}
+		{CD83FB3F-7171-4944-B067-8586D8718CCE} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
 	EndGlobalSection
 EndGlobal

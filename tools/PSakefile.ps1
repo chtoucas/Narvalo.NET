@@ -321,7 +321,7 @@ Task _Documentation `
     -Description 'Display a description of the public tasks.' `
 {
     # PSake allows to display a description of the tasks by using:
-    # > Invoke-PSake $buildFile -NoLogo -Docs
+    # > Invoke-PSake $buildFile -Docs
     # but I find the result more geared towards developers. 
     # Here is my own version of the underlying WriteDocumentation function.
     $currentContext = $psake.context.Peek()
