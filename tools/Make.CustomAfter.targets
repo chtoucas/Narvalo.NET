@@ -251,7 +251,7 @@ using System.Reflection;
 
   <!-- CreateNupkg target. -->
   <Target Name="CreateNupkg"
-          Condition=" '$(NuProjectExists)' == 'true' "
+          Condition=" '$(OutputType)' == 'Library' And '$(NuProjectExists)' == 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
