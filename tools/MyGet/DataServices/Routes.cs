@@ -5,17 +5,20 @@ using Ninject;
 using NuGet.Server;
 using NuGet.Server.DataServices;
 using NuGet.Server.Infrastructure;
-using RouteMagic;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyGet.NuGetRoutes), "Start")]
 
-namespace MyGet {
-    public static class NuGetRoutes {
-        public static void Start() {
+namespace MyGet
+{
+    public static class NuGetRoutes
+    {
+        public static void Start()
+        {
             MapRoutes(RouteTable.Routes);
         }
 
-        private static void MapRoutes(RouteCollection routes) {
+        private static void MapRoutes(RouteCollection routes)
+        {
             // The default route is http://{root}/nuget/Packages
             var factory = new DataServiceHostFactory();
             var serviceRoute = new ServiceRoute("nuget", factory, typeof(Packages));
@@ -24,7 +27,8 @@ namespace MyGet {
             routes.Add("nuget", serviceRoute);
         }
 
-        private static PackageService CreatePackageService() {
+        private static PackageService CreatePackageService()
+        {
             return NinjectBootstrapper.Kernel.Get<PackageService>();
         }
     }

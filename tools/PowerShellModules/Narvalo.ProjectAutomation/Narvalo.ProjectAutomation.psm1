@@ -377,12 +377,7 @@ function Invoke-AnalyzeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
     
-    # TODO:
-    # Find DependentUpon & SubType files
-    # Find hidden VS files
-    # Find files ignored by git: git status -u --ignored
-
-    if ($noConfirm -or (Confirm-Yes 'Analyze C# project files for problems?')) {
+    if ($noConfirm -or (Confirm-Yes 'Analyze C# project files for common problems?')) {
         Measure-CSharpProjects 'src', 'samples', 'test'
     }
 }
@@ -430,7 +425,7 @@ function Invoke-PurgeTask {
 function Invoke-RepairTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
-    
+
     if ($noConfirm -or (Confirm-Yes 'Repair copyright headers?')) {
         Repair-Copyright 'samples', 'src', 'tests'
     }
@@ -483,7 +478,7 @@ function Measure-ProjectFile {
         Write-Output ('In the project ''{0}'', there are {1} file(s) excluded from StyleCop:' -f $file.Name, $nodes.Length)
         $nodes | %{ Write-Output ('- {0}' -f $_.Node.Include) }
     } else {
-        Write-Verbose "No problems found with $($file.Name)."
+        Write-Verbose "In the project $($file.Name), no file is excluded from StyleCop."
     }
 }
 

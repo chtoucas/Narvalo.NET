@@ -114,7 +114,7 @@ Task FullClean `
 }
 
 Task CodeAnalysis `
-    -Description 'Run Code Analysis (slow).' `
+    -Description 'Run Code Analysis (SLOW).' `
     -Alias CA `
 {
     MSBuild $Everything $Opts $StaticAnalysisProps `
@@ -125,7 +125,7 @@ Task CodeAnalysis `
 }
 
 Task CodeContractsAnalysis `
-    -Description 'Run Code Contracts Analysis on ''Foundations'' (extremely slow).' `
+    -Description 'Run Code Contracts Analysis on ''Foundations'' (EXTREMELY SLOW).' `
     -Alias CC `
 {
     MSBuild $Foundations $Opts $StaticAnalysisProps `
@@ -134,7 +134,7 @@ Task CodeContractsAnalysis `
 } 
 
 Task SecurityAnalysis `
-    -Description 'Run SecAnnotate on ''Foundations'' (slow).' `
+    -Description 'Run SecAnnotate on ''Foundations'' (SLOW).' `
     -Alias SA `
 {
     MSBuild $Foundations $Opts $StaticAnalysisProps `
@@ -149,7 +149,7 @@ Task SecurityAnalysis `
 
 Task Package `
     -Description 'Package ''Foundations''.' `
-    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Depends _Package-DependsOn `
     -Alias Pack `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
@@ -158,7 +158,7 @@ Task Package `
 
 Task Package-Core `
     -Description 'Package core projects.' `
-    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Depends _Package-DependsOn `
     -Alias PackCore `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
@@ -168,7 +168,7 @@ Task Package-Core `
 
 Task Package-Mvp `
     -Description 'Package MVP projects.' `
-    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Depends _Package-DependsOn `
     -Alias PackMvp `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
@@ -178,7 +178,7 @@ Task Package-Mvp `
 
 Task Package-Build `
     -Description 'Package the Narvalo.Build project.' `
-    -Depends _Set-GitCommitHash, _Validate-Packaging `
+    -Depends _Package-DependsOn `
     -Alias PackBuild `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
@@ -186,7 +186,11 @@ Task Package-Build `
         '/p:Filter=_Build_' 
 } 
 
-Task _Validate-Packaging `
+Task _Package-DependsOn `
+    -Description 'Tasks on which Packaging targets depend.' `
+    -Depends _Set-GitCommitHash, _Validate-PackagingForRetail `
+
+Task _Validate-PackagingForRetail `
     -Description 'Validate retail packaging tasks.' `
     -PreCondition { $retail } `
 {
@@ -216,39 +220,17 @@ Task Publish `
 # MyGet tasks
 # ------------------------------------------------------------------------------
 
-Task MyGet-Init `
-    -Description 'Initialize the variables related to the MyGet tasks.' `
-{
-    $script:MyGetDir = Get-LocalPath 'work\myget'
-    $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
-}
-
 Task MyGet-Clean `
     -Description 'Clean MyGet server.' `
-    -Depends MyGet-Init `
+    -Depends _MyGet-Init `
 {
     Remove-LocalItem -Path $script:MyGetPkg
     Remove-LocalItem -Path $script:MyGetDir -Recurse
 }
 
-Task MyGet-Restore `
-    -Description 'Restore NuGet packages for the MyGet project.' `
-{
-    $nuget = Get-NuGet -Install
-    
-    try {
-        . $nuget restore (Get-LocalPath 'tools\MyGet\packages.config') `
-            -PackagesDirectory (Get-LocalPath 'tools\packages') `
-            -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-            -Verbosity quiet 2>&1
-    } catch {
-        throw "'nuget.exe restore' failed: $_"
-    }
-}
-
 Task MyGet-Build `
     -Description 'Build MyGet server.' `
-    -Depends MyGet-Restore `
+    -Depends _MyGet-Restore `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
@@ -260,7 +242,7 @@ Task MyGet-Build `
 
 Task MyGet-Zip `
     -Description 'Zip MyGet server.' `
-    -Depends MyGet-Init `
+    -Depends _MyGet-Init `
 {
     if (!(Test-Path $script:MyGetDir)) {
         # We do not add a dependency on MyGet-Build so that we can run this task alone.
@@ -285,6 +267,28 @@ Task MyGet-Package `
 Task MyGet `
     -Description 'Clean then package the MyGet server.' `
     -Depends MyGet-Clean, MyGet-Package
+    
+Task _MyGet-Init `
+    -Description 'Initialize the variables only used by the MyGet tasks.' `
+{
+    $script:MyGetDir = Get-LocalPath 'work\myget'
+    $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
+}
+
+Task _MyGet-Restore `
+    -Description 'Restore NuGet packages for the MyGet project.' `
+{
+    $nuget = Get-NuGet -Install
+    
+    try {
+        . $nuget restore (Get-LocalPath 'tools\MyGet\packages.config') `
+            -PackagesDirectory (Get-LocalPath 'tools\packages') `
+            -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+            -Verbosity quiet 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
+}
 
 # ------------------------------------------------------------------------------
 # Miscs
@@ -313,9 +317,44 @@ Task Environment `
     Write-Host "  PSake Framework v$psakeFramework"
 }
 
-# ------------------------------------------------------------------------------
-# Utilities
-# ------------------------------------------------------------------------------
+Task _Documentation `
+    -Description 'Display a description of the public tasks.' `
+{
+    # PSake allows to display a description of the tasks by using:
+    # > Invoke-PSake $buildFile -NoLogo -Docs
+    # but I find the result more geared towards developers. 
+    # Here is my own version of the underlying WriteDocumentation function.
+    $currentContext = $psake.context.Peek()
+
+    if ($currentContext.tasks.default) {
+        $defaultTaskDependencies = $currentContext.tasks.default.DependsOn
+    } else {
+        $defaultTaskDependencies = @()
+    }
+
+    $currentContext.tasks.Keys | %{
+        # Ignore default and private tasks.
+        if ($_ -eq 'default' -or $_.StartsWith('_')) {
+            return
+        }
+
+        $task = $currentContext.tasks.$_
+
+        if ($defaultTaskDependencies -Contains $task.Name) { 
+            $name = "$($task.Name) (DEFAULT)"
+        } else {
+            $name = $task.Name
+        }
+
+        New-Object PSObject -Property @{
+            Name = $name;
+            Alias = $task.Alias;
+            Description = $task.Description;
+        }
+    } | 
+        sort 'Name' | 
+        Format-Table -AutoSize -Wrap -Property Name, Alias, Description
+}
 
 Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `

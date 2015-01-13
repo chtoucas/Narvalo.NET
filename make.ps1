@@ -100,9 +100,7 @@ if ($help.IsPresent) {
 }
 
 if ($docs.IsPresent) {
-    Write-Host 'LIST OF AVAILABLE TASKS'
-    Invoke-PSake $psakefile -NoLogo -Docs
-    Exit 0
+    $taskList = '_Documentation'
 }
 
 if ($safe.IsPresent) {

@@ -64,14 +64,19 @@ Build Automation:
 - Enhancement: Script to push packages to NuGet (or MyGet) with extensive checks.
   For instance, we should not try to publish a version already available on NuGet,
   check the dependencies tree. Add package to Edge and build.
-- Enhancement: Enable T4-regeneration in VS since, for us, it won't work
+- Enhancement: Enable T4-regeneration outside VS since, for us, it won't work
   when building from the command-line.
-- Enhancement: Add Git commit hash to assembly configuration or info?
 - Enhancement: Start to use Git tags.
 - Enhancement: Create symbol packages (or use GitLink?).
 - Enhancement: %comspec% /k (@pause).
 - Improvement: Complete Narvalo.Build with Gendarme and Versioning tasks.
 - Review: What's going on when Package target is also defined.
+- Enhancement: Add more tasks to checkup.ps1
+  * Find uncommon project settings
+  * Find DependentUpon without SubType files
+  * Find hidden VS files
+  * Find files ignored by git: git status -u --ignored
+  * Repair StyleCop settings
 
 Code Quality:
 - Enhancement: Static analysis with Gendarme.

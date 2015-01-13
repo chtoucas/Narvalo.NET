@@ -5,7 +5,7 @@
 .SYNOPSIS
     Deploy the MyGet server.
 .NOTES
-    Explore DSC or PSWorkflow.
+    TODO: Explore DSC or PSWorkflow.
 .LINKS
     http://technet.microsoft.com/fr-fr/library/ee790599.aspx
     http://technet.microsoft.com/fr-fr/library/ee909471%28v=ws.10%29.aspx
