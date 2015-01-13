@@ -7,20 +7,20 @@ but one can manually get their values.
 If `-WhatIf` is in use, the `$WhatIfPreference` variable is `$true`, `$false` otherwise. 
 The `$ConfirmPreference` variable contains the value of ConfirmImpact and
 one can check if `-Confirm` is in use by using the following code snippet: 
-```PowerShell
+```posh
 $confirm = $PSBoundParameters.ContainsKey('Confirm') `
     -and [bool] $PSBoundParameters.Item('Confirm') -eq $true
 ```
 
 ### Truly initialize a PowerShell string to $null ###
 
-```PowerShell
+```posh
 [string] $value  = [NullString]::Value
 ```
 
 ### Update all binding redirects
 Inside the Package Manager Console:
-```PowerShell
+```posh
 Get-Project -All | Add-BindingRedirect
 ```
 
