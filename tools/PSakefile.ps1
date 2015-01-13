@@ -243,11 +243,9 @@ Task _Publish-DependsOn `
 Task _Build-NuGetAutomation `
     -Description 'Build the NuGet.Automation F# project.' `
 {
-    $fsproj = (Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj')
+    $proj = (Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj')
 
-    MSBuild $fsproj $Opts `
-        '/p:Configuration=Release',
-        '/t:Build'
+    MSBuild $proj $Opts '/p:Configuration=Release' '/t:Build'
 }
 
 # ------------------------------------------------------------------------------
