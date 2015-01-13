@@ -187,8 +187,8 @@ Task Package-Build `
 } 
 
 Task _Package-DependsOn `
-    -Description 'Tasks on which Packaging targets depend.' `
-    -Depends _Set-GitCommitHash, _Validate-PackagingForRetail `
+    -Description 'Task on which all Package-* targets depend.' `
+    -Depends _Set-GitCommitHash, _Validate-PackagingForRetail
 
 Task _Validate-PackagingForRetail `
     -Description 'Validate retail packaging tasks.' `
@@ -205,15 +205,49 @@ Task _Validate-PackagingForRetail `
 # ------------------------------------------------------------------------------
 
 Task Publish `
-    -Description 'Publish all projects.' `
+    -Description 'Publish ''Foundations''.' `
+    -Depends _Publish-DependsOn `
     -Alias Push `
 {
     Exit-Gracefully -ExitCode 1 'Not yet implemented!'
+}
 
-    #$packagesDir = Get-LocalPath 'work\packages'
+Task Publish-Core `
+    -Description 'Publish core projects.' `
+    -Depends _Publish-DependsOn `
+    -Alias PushCore `
+{
+    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
+}
 
-    #$nuget = Get-NuGet -Install
-    #& $nuget push "$packagesDir\*.nupkg"
+Task Publish-Mvp `
+    -Description 'Publish MVP projects.' `
+    -Depends _Publish-DependsOn `
+    -Alias PushMvp `
+{
+    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
+}
+
+Task Publish-Build `
+    -Description 'Publish the Narvalo.Build projects.' `
+    -Depends _Publish-DependsOn `
+    -Alias PushBuild `
+{
+    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
+}
+
+Task _Publish-DependsOn `
+    -Description 'Task on which all Publish-* targets depend.' `
+    -Depends _Build-NuGetAutomation
+
+Task _Build-NuGetAutomation `
+    -Description 'Build the NuGet.Automation F# project.' `
+{
+    $fsproj = (Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj')
+
+    MSBuild $fsproj $Opts `
+        '/p:Configuration=Release',
+        '/t:Build'
 }
 
 # ------------------------------------------------------------------------------
@@ -221,7 +255,7 @@ Task Publish `
 # ------------------------------------------------------------------------------
 
 Task MyGet-Clean `
-    -Description 'Clean MyGet server.' `
+    -Description 'Clean MyGet project.' `
     -Depends _MyGet-Init `
 {
     Remove-LocalItem -Path $script:MyGetPkg
@@ -229,7 +263,7 @@ Task MyGet-Clean `
 }
 
 Task MyGet-Build `
-    -Description 'Build MyGet server.' `
+    -Description 'Build MyGet project.' `
     -Depends _MyGet-Restore `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
@@ -241,7 +275,7 @@ Task MyGet-Build `
 }
 
 Task MyGet-Zip `
-    -Description 'Zip MyGet server.' `
+    -Description 'Zip build outputs from the MyGet project.' `
     -Depends _MyGet-Init `
 {
     if (!(Test-Path $script:MyGetDir)) {
@@ -261,15 +295,15 @@ Task MyGet-Zip `
 }
 
 Task MyGet-Package `
-    -Description 'Package MyGet server.' `
+    -Description 'Package MyGet project.' `
     -Depends MyGet-Build, MyGet-Zip
 
 Task MyGet `
-    -Description 'Clean then package the MyGet server.' `
+    -Description 'Clean up then package the MyGet project.' `
     -Depends MyGet-Clean, MyGet-Package
     
 Task _MyGet-Init `
-    -Description 'Initialize the variables only used by the MyGet tasks.' `
+    -Description 'Initialize the variables only used by the MyGet-* tasks.' `
 {
     $script:MyGetDir = Get-LocalPath 'work\myget'
     $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
@@ -347,13 +381,13 @@ Task _Documentation `
         }
 
         New-Object PSObject -Property @{
-            Name = $name;
+            Task = $name;
             Alias = $task.Alias;
             Description = $task.Description;
         }
     } | 
-        sort 'Name' | 
-        Format-Table -AutoSize -Wrap -Property Name, Alias, Description
+        sort 'Task' | 
+        Format-Table -AutoSize -Wrap -Property Task, Alias, Description
 }
 
 Task _Set-GitCommitHash `

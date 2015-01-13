@@ -253,6 +253,7 @@ using System.Reflection;
   <Target Name="CreateNupkg"
           Condition=" '$(OutputType)' == 'Library' And '$(NuProjectExists)' == 'true' "
           DependsOnTargets="DeleteNupkgFile;Build;CreateNuspec">
+    <!-- NB: Right now, we only enable this target for Library projects. -->
     <Message Text="Creating package for $(AssemblyName)..." Importance="high" />
 
     <!-- REVIEW: Why can't I quote WorkPackagesDir? -->
