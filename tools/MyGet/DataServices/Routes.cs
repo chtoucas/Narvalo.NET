@@ -5,6 +5,7 @@ using Ninject;
 using NuGet.Server;
 using NuGet.Server.DataServices;
 using NuGet.Server.Infrastructure;
+using RouteMagic;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyGet.NuGetRoutes), "Start")]
 
