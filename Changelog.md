@@ -1,6 +1,13 @@
 ChangeLog
 =========
      
+- (2015/01/14) _Bugfix:_ In non-retail mode, when resolving project references, 
+  we should not include the prerelease label otherwise later on nuget won't be
+  able to resolve the dependency.       
+- (2015/01/13) _Bugfix:_ NuGet.Server require runAllManagedModulesForAllRequests
+  to be true, otherwise API calls will fail. 
+- (2015/01/13) _Enhancement:_ Created a PowerShell script (checkup.ps1) which
+  centralizes all maintenance tasks.
 - (2015/01/02) _Improvement:_ Added missing copyright headers.
 - (2015/01/02) _Improvement:_ Moved private settings to a single folder.
 - (2015/01/02) _Improvement:_ Replace the build script for MyGet by a PSake task.

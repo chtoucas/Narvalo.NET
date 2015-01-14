@@ -336,7 +336,8 @@ using System.Reflection;
   <Target Name="ReadProjectDependency"
           Condition=" '@(ProjectReference)' != '' "
           Outputs="%(ProjectReference.Identity)">
-    <FindProductVersion AssemblyPath="$(OutDir)%(ProjectReference.Name).dll">
+    <FindProductVersion AssemblyPath="$(OutDir)%(ProjectReference.Name).dll"
+                        Retail="$(Retail)">
       <Output TaskParameter="ProductVersion" PropertyName="_ProjectDependencyVersion"/>
     </FindProductVersion>
 

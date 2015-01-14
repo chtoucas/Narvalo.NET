@@ -134,6 +134,7 @@ return !Log.HasLoggedErrors;
   <UsingTask TaskName="FindProductVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
       <AssemblyPath ParameterType="System.String" Required="true" />
+      <Retail ParameterType="System.Boolean" Required="true" />
       <ProductVersion ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
@@ -145,7 +146,9 @@ return !Log.HasLoggedErrors;
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 var version = FileVersionInfo.GetVersionInfo(AssemblyPath).ProductVersion ;
-int index = version.LastIndexOf("+");
+// In retail mode, we remove all metadata. In non-retail mode, we also remove
+// the prerelease label since it is dynamically replaced by a timestamp in Make.CustomAfter.targets.
+int index = version.LastIndexOf(Retail ? "+" : "-");
 ProductVersion = index > 0 ? version.Remove(index) : version;
 
 return !Log.HasLoggedErrors;
