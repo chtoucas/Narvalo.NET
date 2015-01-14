@@ -10,8 +10,6 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
-    $GitCommitHash = ''
-
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
@@ -153,7 +151,7 @@ Task Package `
     -Alias Pack `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
-        "/p:GitCommitHash=$GitCommitHash"
+        "/p:GitCommitHash=$script:GitCommitHash"
 }
 
 Task Package-Core `
@@ -162,7 +160,7 @@ Task Package-Core `
     -Alias PackCore `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
-        "/p:GitCommitHash=$GitCommitHash",
+        "/p:GitCommitHash=$script:GitCommitHash",
         '/p:Filter=_Core_' 
 }
 
@@ -172,7 +170,7 @@ Task Package-Mvp `
     -Alias PackMvp `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
-        "/p:GitCommitHash=$GitCommitHash",
+        "/p:GitCommitHash=$script:GitCommitHash",
         '/p:Filter=_Mvp_' 
 }
 
@@ -182,7 +180,7 @@ Task Package-Build `
     -Alias PackBuild `
 {
     MSBuild $Foundations $Opts $PackagingTargets $PackagingProps `
-        "/p:GitCommitHash=$GitCommitHash",
+        "/p:GitCommitHash=$script:GitCommitHash",
         '/p:Filter=_Build_' 
 } 
 
@@ -194,7 +192,7 @@ Task _Validate-PackagingForRetail `
     -Description 'Validate retail packaging tasks.' `
     -PreCondition { $retail } `
 {
-    if ($GitCommitHash -eq '') {
+    if ($script:GitCommitHash -eq '') {
         Exit-Gracefully -ExitCode 1 `
             'When building retail packages, the git commit hash MUST not be empty.'
     }
@@ -391,7 +389,7 @@ Task _Documentation `
 Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
-    $GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
+    $script:GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
 }
 
 # ------------------------------------------------------------------------------
