@@ -1,3 +1,8 @@
+# PSakefile script.
+# 
+# NB: No need to restore packages before building the projects $Everything
+# and $Foundations, since it is already done in MSBuild.
+
 # We force the framework to be sure we use the build tools v12.0.
 # Required by the Build-MyGet target.
 Framework '4.5.1x64'
@@ -13,8 +18,10 @@ Properties {
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
+    # MSBuild projects.
     $Everything = Get-LocalPath 'tools\Make.proj' -Resolve
     $Foundations = Get-LocalPath 'tools\Make.Foundations.proj' -Resolve
+    $NuGetAutomation = Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj' -Resolve
     
     # Packaging properties:
     # - Release configuration
@@ -54,6 +61,9 @@ Properties {
     # - Run Xunit tests
     # - Package
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
+
+    # Properties for NuGet.Automation.
+    $NuGetAutomationProps = '/p:Configuration=Release'
 }
 
 FormatTaskName {
@@ -236,22 +246,31 @@ Task Publish-Build `
 
 Task _Publish-DependsOn `
     -Description 'Task on which all Publish-* targets depend.' `
-    -Depends _Build-NuGetAutomation
+    -Depends NuGetAutomation-Build
 
-Task _Build-NuGetAutomation `
-    -Description 'Build the NuGet.Automation F# project.' `
+# ------------------------------------------------------------------------------
+# NuGet.Automation project
+# ------------------------------------------------------------------------------
+
+Task NuGetAutomation-Clean `
+    -Description 'Clean the NuGet.Automation project.' `
 {
-    $proj = (Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj')
+    MSBuild $NuGetAutomation $Opts $NuGetAutomationProps '/t:Clean'
+}
 
-    MSBuild $proj $Opts '/p:Configuration=Release' '/t:Build'
+Task NuGetAutomation-Build `
+    -Description 'Build the NuGet.Automation project.' `
+    -Depends _Restore-MaintenancePackages `
+{
+    MSBuild $NuGetAutomation $Opts $NuGetAutomationProps '/t:Build'
 }
 
 # ------------------------------------------------------------------------------
-# MyGet tasks
+# MyGet project
 # ------------------------------------------------------------------------------
 
 Task MyGet-Clean `
-    -Description 'Clean MyGet project.' `
+    -Description 'Clean the MyGet project.' `
     -Depends _MyGet-Init `
 {
     Remove-LocalItem -Path $script:MyGetPkg
@@ -259,8 +278,8 @@ Task MyGet-Clean `
 }
 
 Task MyGet-Build `
-    -Description 'Build MyGet project.' `
-    -Depends _MyGet-Restore `
+    -Description 'Build the MyGet project.' `
+    -Depends _Restore-MaintenancePackages `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
@@ -291,7 +310,7 @@ Task MyGet-Zip `
 }
 
 Task MyGet-Package `
-    -Description 'Package MyGet project.' `
+    -Description 'Package the MyGet project.' `
     -Depends MyGet-Build, MyGet-Zip
 
 Task MyGet `
@@ -303,21 +322,6 @@ Task _MyGet-Init `
 {
     $script:MyGetDir = Get-LocalPath 'work\myget'
     $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
-}
-
-Task _MyGet-Restore `
-    -Description 'Restore NuGet packages for the MyGet project.' `
-{
-    $nuget = Get-NuGet -Install
-    
-    try {
-        . $nuget restore (Get-LocalPath 'tools\MyGet\packages.config') `
-            -PackagesDirectory (Get-LocalPath 'tools\packages') `
-            -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-            -Verbosity quiet 2>&1
-    } catch {
-        throw "'nuget.exe restore' failed: $_"
-    }
 }
 
 # ------------------------------------------------------------------------------
@@ -384,6 +388,12 @@ Task _Documentation `
     } | 
         sort 'Task' | 
         Format-Table -AutoSize -Wrap -Property Task, Alias, Description
+}
+
+Task _Restore-MaintenancePackages `
+    -Description 'Restore NuGet packages fors the "maintenance" solution.' `
+{
+    Restore-MaintenancePackages
 }
 
 Task _Set-GitCommitHash `

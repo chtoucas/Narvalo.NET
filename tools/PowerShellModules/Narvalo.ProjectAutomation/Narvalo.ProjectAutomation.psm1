@@ -622,6 +622,46 @@ function Repair-Copyright {
 
 <#
 .SYNOPSIS
+    Restore packages for the Edge project.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-PackagesForEdge {
+    [CmdletBinding()]
+    param()
+    
+    Write-Verbose 'Restoring packages for the Edge project.'
+
+    Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
+        -PackagesDirectory (Get-LocalPath 'tools\packages') `
+        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+        -Verbosity quiet
+}
+
+<#
+.SYNOPSIS
+    Restore packages for the "maintenance" solution.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-MaintenancePackages {
+    [CmdletBinding()]
+    param()
+    
+    Write-Verbose 'Restoring packages for the "maintenance" solution.'
+
+    Restore-Packages -Source (Get-LocalPath 'tools\Narvalo Maintenance.sln') `
+        -PackagesDirectory (Get-LocalPath 'tools\packages') `
+        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+        -Verbosity quiet
+}
+
+<#
+.SYNOPSIS
     Restore solution packages.
 .INPUTS
     None.
@@ -634,17 +674,10 @@ function Restore-SolutionPackages {
     
     Write-Verbose 'Restoring solution packages.'
 
-    $nuget = Get-NuGet -Install
-    
-    try {
-        Write-Debug 'Call nuget.exe restore.'
-        . $nuget restore (Get-LocalPath '.nuget\packages.config') `
-            -PackagesDirectory (Get-LocalPath 'packages') `
-            -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-            -Verbosity quiet 2>&1
-    } catch {
-        throw "'nuget.exe restore' failed: $_"
-    }
+    Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
+        -PackagesDirectory (Get-LocalPath 'packages') `
+        -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
+        -Verbosity quiet
 }
 
 <#
@@ -783,6 +816,43 @@ function Install-RemoteItem {
 
 <#
 .SYNOPSIS
+    Restore packages.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-Packages {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('s')] [string] $Source,
+        
+        [Parameter(Mandatory = $true, Position = 1)] 
+        [string] $PackagesDirectory,
+        
+        [Parameter(Mandatory = $true, Position = 2)] 
+        [string] $ConfigFile,
+        
+        [Parameter(Mandatory = $true, Position = 3)] 
+        [string] $Verbosity
+    )
+    
+    $nuget = Get-NuGet -Install
+
+    try {
+        Write-Debug 'Call nuget.exe restore.'
+        . $nuget restore $source `
+            -PackagesDirectory $packagesDirectory `
+            -ConfigFile $configFile `
+            -Verbosity $Verbosity 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
+}
+
+<#
+.SYNOPSIS
     Return $true if the file contains a copyright header, $false otherwise.
 .PARAMETER Path
     Specifies the file to test.
@@ -826,6 +896,8 @@ Export-ModuleMember -Function `
     Remove-LocalItem,
     Remove-UntrackedItems,
     Repair-Copyright,
+    Restore-PackagesForEdge,
+    Restore-MaintenancePackages,
     Restore-SolutionPackages,
     Stop-AnyMSBuildProcess
         
