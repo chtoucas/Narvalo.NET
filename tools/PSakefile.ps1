@@ -15,12 +15,18 @@ Properties {
     Assert ($verbosity -ne $null) "`$verbosity should not be null, e.g. run with -Parameters @{ 'verbosity' = 'minimal'; }"
     Assert ($retail -ne $null) "`$retail should not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
+    # NuGet servers.
+    $MyGetSource    = "http://narvalo.org/myget/nuget/"
+    $MyGetApiSource = "http://narvalo.org/myget/"
+    $NuGetSource    = "https://www.nuget.org/api/v2/"
+
     # Console options.
     $Opts = '/nologo', "/verbosity:$verbosity", '/maxcpucount', '/nodeReuse:false'
 
     # MSBuild projects.
-    $Everything = Get-LocalPath 'tools\Make.proj' -Resolve
-    $Foundations = Get-LocalPath 'tools\Make.Foundations.proj' -Resolve
+    $Everything      = Get-LocalPath 'tools\Make.proj' -Resolve
+    $Foundations     = Get-LocalPath 'tools\Make.Foundations.proj' -Resolve
+    $Edge            = Get-LocalPath 'tools\Edge\Edge.csproj' -Resolve
     $NuGetAutomation = Get-LocalPath 'tools\NuGet.Automation\NuGet.Automation.fsproj' -Resolve
     
     # Packaging properties:
@@ -61,6 +67,9 @@ Properties {
     # - Run Xunit tests
     # - Package
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
+    
+    # Properties for Edge.
+    $EdgeProps = '/p:Configuration=Release'
 
     # Properties for NuGet.Automation.
     $NuGetAutomationProps = '/p:Configuration=Release'
@@ -185,7 +194,7 @@ Task Package-Mvp `
 }
 
 Task Package-Build `
-    -Description 'Package the Narvalo.Build project.' `
+    -Description 'Package the project Narvalo.Build.' `
     -Depends _Package-DependsOn `
     -Alias PackBuild `
 {
@@ -214,52 +223,110 @@ Task _Validate-PackagingForRetail `
 
 Task Publish `
     -Description 'Publish ''Foundations''.' `
-    -Depends _Publish-DependsOn `
-    -Alias Push `
-{
-    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
-}
+    -Depends _Publish-Clean, _Publish `
+    -Alias Push
 
 Task Publish-Core `
     -Description 'Publish core projects.' `
-    -Depends _Publish-DependsOn `
-    -Alias PushCore `
-{
-    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
-}
+    -Depends _Publish-Clean, _Publish `
+    -Alias PushCore
 
 Task Publish-Mvp `
     -Description 'Publish MVP projects.' `
-    -Depends _Publish-DependsOn `
-    -Alias PushMvp `
-{
-    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
-}
+    -Depends _Publish-Clean, _Publish `
+    -Alias PushMvp
 
 Task Publish-Build `
-    -Description 'Publish the Narvalo.Build projects.' `
-    -Depends _Publish-DependsOn `
-    -Alias PushBuild `
+    -Description 'Publish the project Narvalo.Build.' `
+    -Depends _Publish-Clean, _Publish `
+    -Alias PushBuild
+
+Task _Publish `
+    -Description 'Core Publish task.' `
+    -Depends _Publish-Retail, _Publish-Local
+
+Task _Publish-Clean `
+    -Description 'Remove the directory ''work\packages''.' `
+    -Depends _Publish-Init `
 {
-    Exit-Gracefully -ExitCode 1 'Not yet implemented!'
+    Remove-LocalItem -Path $script:PackagesDir
+}
+
+Task _Publish-Init `
+    -Description 'Initialize the variables only used by the Publish-* tasks.' `
+{
+    $script:PackagesDir = Get-LocalPath 'work\packages'
 }
 
 Task _Publish-DependsOn `
     -Description 'Task on which all Publish-* targets depend.' `
-    -Depends NuGetAutomation-Build
+    -Depends NuGetAutomation-Build, _Publish-Init
+
+Task _Publish-Retail `
+    -Description 'Publish retail packages.' `
+    -Depends _Publish-DependsOn `
+    -PreCondition { $retail } `
+{
+    # Use NuGet.Automation for:
+    # - Find packages to be published
+    # - Find current public packages
+    # - Remove packages already public
+    # - Check the dependency tree
+    # - Publish packages, in the order of the dependency tree
+}
+
+Task _Publish-Local `
+    -Description 'Publish non-retail packages.' `
+    -Depends _Publish-DependsOn `
+    -PreCondition { -not $retail } `
+{
+    # Use NuGet.Automation for:
+    # - Find packages to be published
+    # - Check the dependency tree
+    # - For each package, in the order of the dependency tree
+    #  * Find previous versions
+    #  * Delete all previous versions but last
+    #  * Publish package
+    # Update project Edge
+    # Build project Edge
+}
 
 # ------------------------------------------------------------------------------
-# NuGet.Automation project
+# Maintenance projects
 # ------------------------------------------------------------------------------
+
+Task Edge-Clean `
+    -Description 'Clean the project Edge.' `
+{
+    MSBuild $Edge $Opts $EdgeProps '/t:Clean'
+}
+
+Task Edge-Build `
+    -Description 'Build the project Edge.' `
+    -Depends _Restore-MaintenancePackages `
+{
+    MSBuild $Edge $Opts $EdgeProps '/t:Build'
+}
+
+Task Edge-Update `
+    -Description 'Update NuGet packages for the project Edge.' `
+{
+    $nuget = Get-NuGet -Install
+
+    . $nuget update (Get-LocalPath 'tools\Edge\packages.config') `
+        -Source $MyGetSource `
+        -Prerelease `
+        -RepositoryPath (Get-LocalPath 'tools\packages')
+}
 
 Task NuGetAutomation-Clean `
-    -Description 'Clean the NuGet.Automation project.' `
+    -Description 'Clean the project NuGet.Automation.' `
 {
     MSBuild $NuGetAutomation $Opts $NuGetAutomationProps '/t:Clean'
 }
 
 Task NuGetAutomation-Build `
-    -Description 'Build the NuGet.Automation project.' `
+    -Description 'Build the project NuGet.Automation.' `
     -Depends _Restore-MaintenancePackages `
 {
     MSBuild $NuGetAutomation $Opts $NuGetAutomationProps '/t:Build'
@@ -269,16 +336,8 @@ Task NuGetAutomation-Build `
 # MyGet project
 # ------------------------------------------------------------------------------
 
-Task MyGet-Clean `
-    -Description 'Clean the MyGet project.' `
-    -Depends _MyGet-Init `
-{
-    Remove-LocalItem -Path $script:MyGetPkg
-    Remove-LocalItem -Path $script:MyGetDir -Recurse
-}
-
 Task MyGet-Build `
-    -Description 'Build the MyGet project.' `
+    -Description 'Build the project MyGet.' `
     -Depends _Restore-MaintenancePackages `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
@@ -289,9 +348,43 @@ Task MyGet-Build `
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
 
-Task MyGet-Zip `
-    -Description 'Zip build outputs from the MyGet project.' `
+Task MyGet-Rebuild `
+    -Description 'Clean then build the project MyGet.' `
+    -Depends _MyGet-Clean, MyGet-Build
+
+Task MyGet-Package `
+    -Description 'Package the project MyGet.' `
+    -Depends MyGet-Build, _MyGet-Zip
+
+Task MyGet-Repackage `
+    -Description 'Clean up then package the project MyGet.' `
+    -Depends _MyGet-Clean, MyGet-Package `
+    -Alias MyGet
+    
+Task _MyGet-Init `
+    -Description 'Initialize the variables only used by the MyGet-* tasks.' `
+{
+    $script:MyGetDir = Get-LocalPath 'work\myget'
+    $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
+}
+
+Task _MyGet-Clean `
+    -Description 'Remove the directory ''work\myget''.' `
     -Depends _MyGet-Init `
+{
+    Remove-LocalItem -Path $script:MyGetDir -Recurse
+}
+
+Task _MyGet-DeleteZip `
+    -Description 'Delete the package for MyGet.' `
+    -Depends _MyGet-Init `
+{
+    Remove-LocalItem -Path $script:MyGetPkg
+}
+
+Task _MyGet-Zip `
+    -Description 'Zip build outputs from the project MyGet.' `
+    -Depends _MyGet-Init, MyGet-DeleteZip `
 {
     if (!(Test-Path $script:MyGetDir)) {
         # We do not add a dependency on MyGet-Build so that we can run this task alone.
@@ -307,21 +400,6 @@ Task MyGet-Zip `
     }
 
     Write-Host "A ready to publish zip file for MyGet may be found here: '$script:MyGetPkg'." -ForegroundColor Green
-}
-
-Task MyGet-Package `
-    -Description 'Package the MyGet project.' `
-    -Depends MyGet-Build, MyGet-Zip
-
-Task MyGet `
-    -Description 'Clean up then package the MyGet project.' `
-    -Depends MyGet-Clean, MyGet-Package
-    
-Task _MyGet-Init `
-    -Description 'Initialize the variables only used by the MyGet-* tasks.' `
-{
-    $script:MyGetDir = Get-LocalPath 'work\myget'
-    $script:MyGetPkg = Get-LocalPath 'work\myget.7z'
 }
 
 # ------------------------------------------------------------------------------

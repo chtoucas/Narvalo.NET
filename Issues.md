@@ -72,6 +72,7 @@ Build Automation:
 - Improvement: Complete Narvalo.Build with Gendarme and Versioning tasks.
 - Review: What's going on when Package target is also defined.
 - Enhancement: Add more tasks to checkup.ps1
+  * Find projects not using Narvalo.Common.props
   * Find uncommon project settings
   * Find DependentUpon without SubType files
   * Find hidden VS files
