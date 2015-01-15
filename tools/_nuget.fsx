@@ -1,12 +1,8 @@
-﻿// Learn more about F# at http://fsharp.net. See the 'F# Tutorial' project
-// for more guidance on F# programming.
-
-// C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\fsi.exe
-
-#load "Library1.fs"
+﻿
+#I @"NuGet.Automation\bin\Release"
 
 #r "NuGet.Core.dll"
-#r "System.Xml.Linq.dll"
+#r "NuGet.Automation.dll"
 
 open NuGet.Automation
 open NuGet
