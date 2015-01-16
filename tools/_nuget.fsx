@@ -1,10 +1,10 @@
 ﻿
-#I @"NuGet.Automation\bin\Release"
+#I @"NuGetHelper\bin\Release"
 
 #r "NuGet.Core.dll"
-#r "NuGet.Automation.dll"
+#r "NuGetHelper.dll"
 
-open NuGet.Automation
+open NuGetHelper
 open NuGet
 
 let packageID = "Narvalo.Core.EDGE"

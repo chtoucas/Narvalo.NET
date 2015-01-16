@@ -3,6 +3,8 @@
 <#
 .SYNOPSIS
     Run the PSake build script.
+.PARAMETER Developer
+    If present, enable the developer mode.
 .PARAMETER Docs
     If present, display the list of available tasks then exit.
 .PARAMETER Help
@@ -47,13 +49,15 @@ param(
     [Alias('r')] [switch] $Retail,
 
     [Parameter(Mandatory = $false, Position = 1)]
+    [ValidateSet('q', 'quiet', 'm', 'minimal', 'n', 'normal', 'd', 'detailed', 'diag', 'diagnostic')]
     [Alias('v')] [string] $Verbosity = 'minimal',
 
     [switch] $Safe,
     [switch] $Docs,
     [Alias('h')] [switch] $Help,
     [switch] $NoLogo,
-    [switch] $Pristine
+    [switch] $Pristine,
+    [Alias('d')] [switch] $Developer
 )
 
 Set-StrictMode -Version Latest
@@ -85,7 +89,7 @@ if (!$noLogo.IsPresent) {
 }
 
 if (!(Get-Module psake)) {
-    Write-Debug 'Ensure PSake is installed by restoring solution packages.'
+    Write-Debug 'Ensure PSake is installed by restoring the solution packages.'
     Restore-SolutionPackages
 
     Write-Debug 'Import the psake module.'
@@ -99,6 +103,15 @@ if ($help.IsPresent) {
     Exit 0
 }
 
+if (!$developer) {
+    foreach ($task in $taskList) {
+        if ($task.StartsWith('_')) {
+            Exit-Gracefully -ExitCode 1 `
+                'Private tasks are only available when the developer mode is on.'
+        }
+    }
+}
+
 if ($docs.IsPresent) {
     $taskList = '_Documentation'
 }
@@ -110,6 +123,10 @@ if ($safe.IsPresent) {
 Invoke-PSake $psakefile `
     -NoLogo `
     -TaskList $taskList `
-    -Parameters @{ 'verbosity' = $verbosity; 'retail' = $retail.IsPresent; }
+    -Parameters @{ 
+        'developer' = $developer; 
+        'verbosity' = $verbosity; 
+        'retail' = $retail.IsPresent; 
+    }
 
 # ------------------------------------------------------------------------------

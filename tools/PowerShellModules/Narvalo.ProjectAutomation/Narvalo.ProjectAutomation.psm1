@@ -58,6 +58,12 @@ New-Variable -Name CopyrightHeader `
     -Scope Script `
     -Option ReadOnly `
     -Description 'C# copyright header.'
+     
+New-Variable -Name DefaultNuGetVerbosity `
+    -Value 'normal' `
+    -Scope Script `
+    -Option ReadOnly `
+    -Description 'Default NuGet verbosity.'
 
 #$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 #    Remove-Variable -Name ProjectRoot -Scope Script -Force
@@ -347,7 +353,11 @@ function Install-NuGet {
 #>
 function Install-PSake {
     [CmdletBinding()]
-    param()
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [ValidateSet('quiet', 'normal', 'detailed')]
+        [string] $Verbosity = $script:DefaultNuGetVerbosity
+    )
     
     Write-Verbose 'Installing PSake.'
 
@@ -359,7 +369,7 @@ function Install-PSake {
            -ExcludeVersion `
            -OutputDirectory (Get-LocalPath 'packages') `
            -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-           -Verbosity quiet 2>&1
+           -Verbosity $verbosity 2>&1
     } catch {
         throw "'nuget.exe install' failed: $_"
     }
@@ -480,6 +490,25 @@ function Measure-ProjectFile {
     } else {
         Write-Verbose "In the project $($file.Name), no file is excluded from StyleCop."
     }
+}
+
+function Publish-Packages {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [string] $Directory,
+        
+        [switch] $Retail
+    )
+
+    $helper = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
+
+    if (!(Test-Path $helper)) {
+        Exit-Gracefully -ExitCode 1 `
+            'Before calling this function, make sure to build the NuGetHelper project in Release configuration.'
+    }
+
+    . $helper $Directory $Retail
 }
 
 <#
@@ -630,14 +659,17 @@ function Repair-Copyright {
 #>
 function Restore-PackagesForEdge {
     [CmdletBinding()]
-    param()
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Verbosity
+    )
     
     Write-Verbose 'Restoring packages for the Edge project.'
 
     Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
         -PackagesDirectory (Get-LocalPath 'tools\packages') `
         -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-        -Verbosity quiet
+        -Verbosity $verbosity
 }
 
 <#
@@ -650,14 +682,17 @@ function Restore-PackagesForEdge {
 #>
 function Restore-MaintenancePackages {
     [CmdletBinding()]
-    param()
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Verbosity
+    )
     
     Write-Verbose 'Restoring packages for the "maintenance" solution.'
 
     Restore-Packages -Source (Get-LocalPath 'tools\Narvalo Maintenance.sln') `
         -PackagesDirectory (Get-LocalPath 'tools\packages') `
         -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-        -Verbosity quiet
+        -Verbosity $verbosity
 }
 
 <#
@@ -670,14 +705,17 @@ function Restore-MaintenancePackages {
 #>
 function Restore-SolutionPackages {
     [CmdletBinding()]
-    param()
-    
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Verbosity
+    )
+
     Write-Verbose 'Restoring solution packages.'
 
     Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
         -PackagesDirectory (Get-LocalPath 'packages') `
         -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-        -Verbosity quiet
+        -Verbosity $verbosity
 }
 
 <#
@@ -834,10 +872,15 @@ function Restore-Packages {
         [Parameter(Mandatory = $true, Position = 2)] 
         [string] $ConfigFile,
         
-        [Parameter(Mandatory = $true, Position = 3)] 
+        [Parameter(Mandatory = $false, Position = 3)] 
+        [ValidateSet('', 'quiet', 'normal', 'detailed')]
         [string] $Verbosity
     )
-    
+
+    if ($verbosity -eq '') {
+        $verbosity = $script:DefaultNuGetVerbosity
+    }
+
     $nuget = Get-NuGet -Install
 
     try {
@@ -845,7 +888,7 @@ function Restore-Packages {
         . $nuget restore $source `
             -PackagesDirectory $packagesDirectory `
             -ConfigFile $configFile `
-            -Verbosity $Verbosity 2>&1
+            -Verbosity $verbosity 2>&1
     } catch {
         throw "'nuget.exe restore' failed: $_"
     }
@@ -892,6 +935,7 @@ Export-ModuleMember -Function `
     Invoke-PurgeTask,
     Invoke-RepairTask,
     Measure-ProjectFile,
+    Publish-Packages,
     Remove-BinAndObj,
     Remove-LocalItem,
     Remove-UntrackedItems,
