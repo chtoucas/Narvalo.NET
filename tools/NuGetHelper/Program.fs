@@ -1,4 +1,6 @@
-﻿// In Retail mode:
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+// In Retail mode:
 //   Use NuGetHelper to:
 //   - Find packages to be published
 //   - Find current public version of packages
@@ -14,7 +16,28 @@
 //   * Delete all previous versions but last
 //   * Publish package
 
+module Program
+
+open System.Xml.Linq
+
+open NuGet
+
 [<EntryPoint>]
-let main argv = 
-    printfn "%A" argv
-    0 // return an integer exit code
+let main args = 
+    let (retail, directory) = CLI.parseArguments (args)
+
+    printfn "Packages are to be found from: %s" directory
+    printfn "Retail = %b" retail
+
+    let packageID = "Narvalo.Core.EDGE"
+
+    let repository =
+        NuGet.PackageRepositoryFactory.Default.CreateRepository
+            "http://narvalo.org/myget/nuget" 
+
+    let packages = repository.FindPackagesById(packageID)
+
+    for package in packages do
+        printfn "%s" package.Id
+
+    0

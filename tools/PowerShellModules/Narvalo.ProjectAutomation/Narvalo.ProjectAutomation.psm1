@@ -508,7 +508,7 @@ function Publish-Packages {
             'Before calling this function, make sure to build the NuGetHelper project in Release configuration.'
     }
 
-    . $helper $Directory $Retail
+    . $helper --directory $Directory --retail $Retail
 }
 
 <#
