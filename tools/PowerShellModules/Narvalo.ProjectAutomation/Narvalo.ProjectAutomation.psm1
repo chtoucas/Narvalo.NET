@@ -71,35 +71,6 @@ New-Variable -Name DefaultNuGetVerbosity `
 # Public functions
 # ------------------------------------------------------------------------------
 
-<#
-.SYNOPSIS
-    Convert a MSBuild verbosity level to a NuGet verbosity level.
-.PARAMETER Verbosity
-    Specifies the MSBuild verbosity.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function ConvertTo-NuGetVerbosity {
-    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
-
-    switch ($verbosity) {
-        'q'          { return 'quiet' }
-        'quiet'      { return 'quiet' }
-        'm'          { return 'normal' }
-        'minimal'    { return 'normal' }
-        'n'          { return 'normal' }
-        'normal'     { return 'normal' }
-        'd'          { return 'detailed' }
-        'detailed'   { return 'detailed' }
-        'diag'       { return 'detailed' }
-        'diagnostic' { return 'detailed' }
-
-        default      { return 'normal' }
-    }
-}
-
 <# 
 .SYNOPSIS
     Exit current process gracefully.
@@ -551,43 +522,6 @@ function Measure-ProjectFile {
 
 <#
 .SYNOPSIS
-    Publish NuGet packages to a remote repository.
-.PARAMETER Directory
-    Specifies the path to the directory where packages were created.
-.PARAMETER Retail
-    If present, packages will be published to the official NuGet server, 
-    otherwise they are pushed to our private NuGet server.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Publish-Packages {
-    [CmdletBinding(SupportsShouldProcess = $true)]
-    param([switch] $Retail)
-
-    $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
-
-    if (!(Test-Path $cmd)) {
-        Exit-Gracefully -ExitCode 1 `
-            'Before calling this function, make sure to build the project NuGetHelper in Release configuration.'
-    }
-
-    $stagingDirectory = (Get-StagingDirectoryForPackages)
-
-    try {
-        if ($retail.IsPresent) {
-            . $cmd --directory $stagingDirectory --retail 2>&1
-        } else {
-            . $cmd --directory $stagingDirectory 2>&1
-        }
-    } catch {
-        throw "NuGetHelper.exe failed: $_"
-    }
-}
-
-<#
-.SYNOPSIS
     Delete the 'bin' and 'obj' directories created by Visual Studio.
 .PARAMETER PathList
     Specifies the list of paths, relative to the project root, where to look for
@@ -655,18 +589,6 @@ function Remove-LocalItem {
 
 <#
 .SYNOPSIS
-    Delete the staging directory for packages.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Remove-StagingDirectoryForPackages {
-    Remove-LocalItem -Path (Get-StagingDirectoryForPackages) -Recurse
-}
-
-<#
-.SYNOPSIS
     Delete files untracked by git.
 .PARAMETER Git
     Specifies the path to the git executable.
@@ -713,18 +635,6 @@ function Remove-UntrackedItems {
     } finally {
         Pop-Location
     }
-}
-
-<#
-.SYNOPSIS
-    Delete the entire build directory.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Remove-WorkDirectory {
-    Remove-LocalItem 'work' -Recurse
 }
 
 <#
@@ -833,57 +743,6 @@ function Stop-AnyMSBuildProcess {
     Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
 }
 
-<#
-.SYNOPSIS
-    Update the NuGet packages for the project Edge.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-.NOTES
-    This function also updates the project to the last versions of the packages 
-    from the official NuGet repository, which might not be what we do really want.
-    The problem is that we want to update the Narvalo packages to their latest
-    pre-release versions (only available on our own NuGet server) but they might
-    include a new or updated dependency which is not available on our NuGet server.
-    The current workaround is to update first from the official NuGet source.
-    Unfortunately it won't help if there is a newly created dependency or if we 
-    update a dependency to a new untested version.
-#>
-function Update-PackagesForEdge {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)] 
-        [ValidateSet('quiet', 'normal', 'detailed')]
-        [string] $Verbosity = $script:DefaultNuGetVerbosity
-    )
-    
-    $nuget = Get-NuGet -Install
-    $repositoryPath = Get-LocalPath 'tools\packages'
-    $packagesConfig = Get-LocalPath 'tools\Edge\packages.config'
-    
-    try {
-        Write-Verbose 'Updating official NuGet packages for the project Edge.'
-        Write-Debug 'Call nuget.exe update from the official NuGet source.'
-        . $nuget update $packagesConfig `
-            -Source "https://www.nuget.org/api/v2/" `
-            -RepositoryPath $repositoryPath `
-            -Verbosity $verbosity
-
-        Write-Verbose 'Updating private NuGet packages for the project Edge.'
-        Write-Debug 'Call nuget.exe update from the private MyGet source.'
-        . $nuget update $packagesConfig `
-            -Source "http://narvalo.org/myget/nuget/" `
-            -Prerelease `
-            -RepositoryPath $repositoryPath `
-            -Verbosity $verbosity
-    } catch {
-        throw "'nuget.exe update' failed: $_"
-    }
-}
-
 # ------------------------------------------------------------------------------
 # Private functions
 # ------------------------------------------------------------------------------
@@ -963,10 +822,6 @@ function Find-MissingCopyright {
         ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
         ?{ -not (Test-Copyright $_.FullName) } | 
         select FullName
-}
-
-function Get-StagingDirectoryForPackages {
-    Get-LocalPath 'work\packages'
 }
 
 <#
@@ -1062,31 +917,6 @@ function Restore-Packages {
 
 <#
 .SYNOPSIS
-    Restore packages for the project Edge.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-PackagesForEdge {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)] 
-        [string] $Verbosity
-    )
-    
-    Write-Verbose 'Restoring packages for the project Edge.'
-
-    Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
-        -PackagesDirectory (Get-LocalPath 'tools\packages') `
-        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-        -Verbosity $verbosity
-}
-
-<#
-.SYNOPSIS
     Return $true if the file contains a copyright header, $false otherwise.
 .PARAMETER Path
     Specifies the path to the file to test.
@@ -1112,7 +942,6 @@ function Test-Copyright {
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
-    ConvertTo-NuGetVerbosity,
     Exit-Gracefully,
     Get-7Zip,
     Get-Git, 
@@ -1127,16 +956,12 @@ Export-ModuleMember -Function `
     Invoke-PurgeTask,
     Invoke-RepairTask,
     Measure-ProjectFile,
-    Publish-Packages,
     Remove-BinAndObj,
     Remove-LocalItem,
-    Remove-StagingDirectoryForPackages,
     Remove-UntrackedItems,
-    Remove-WorkDirectory,
     Repair-Copyright,
     Restore-PackagesForMaintenanceSolution,
     Restore-SolutionPackages,
-    Stop-AnyMSBuildProcess,
-    Update-PackagesForEdge
+    Stop-AnyMSBuildProcess
         
 # ------------------------------------------------------------------------------

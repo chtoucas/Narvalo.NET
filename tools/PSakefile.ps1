@@ -66,6 +66,8 @@ Properties {
     # - Package
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
 
+    $StagingDirectoryForPackages = Get-LocalPath 'work\packages'
+
     # Properties for MyGet.
     $MyGetStagingDirectory = Get-LocalPath 'work\myget'
     $MyGetZipFile          = Get-LocalPath 'work\myget.7z'
@@ -78,9 +80,11 @@ FormatTaskName {
 }
 
 TaskTearDown {
+    # Catch errors from both PowerShell and Win32 exe.
     if (!$?) {
         Exit-Gracefully -ExitCode 1 'Build failed.'
     }
+
     #if ($LastExitCode -ne 0) {
     #    Exit-Gracefully -ExitCode $LastExitCode 'Build failed.'
     #}
@@ -131,7 +135,7 @@ Task FullClean `
     -ContinueOnError `
 {
     # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    Remove-WorkDirectory
+    Remove-LocalItem 'work' -Recurse
 }
 
 Task CodeAnalysis `
@@ -209,7 +213,13 @@ Task Package-Build `
 
 Task _Package-DependsOn `
     -Description 'Task on which all Package-* targets depend.' `
-    -Depends _Set-GitCommitHash, _Validate-PackagingForRetail
+    -Depends _Set-GitCommitHash, _Validate-PackagingForRetail, _Package-Clean
+
+Task _Package-Clean `
+    -Description 'Remove the staging directory for packages.' `
+{
+    Remove-LocalItem -Path $StagingDirectoryForPackages -Recurse
+}
 
 Task _Validate-PackagingForRetail `
     -Description 'Validate retail packaging tasks.' `
@@ -231,35 +241,44 @@ Task _Fake-Package {
 
 Task Publish-All `
     -Description 'Publish ''Foundations''.' `
-    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
+    -Depends _Fake-Package, _Publish-Packages `
     -Alias Push
 
 Task Publish-Core `
     -Description 'Publish core projects.' `
-    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
+    -Depends _Fake-Package, _Publish-Packages `
     -Alias PushCore
 
 Task Publish-Mvp `
     -Description 'Publish MVP projects.' `
-    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
+    -Depends _Fake-Package, _Publish-Packages `
     -Alias PushMvp
 
 Task Publish-Build `
     -Description 'Publish the project Narvalo.Build.' `
-    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
+    -Depends _Fake-Package, _Publish-Packages `
     -Alias PushBuild
 
-Task _Publish-Clean `
-    -Description 'Remove the staging directory for packages.' `
-{
-    Remove-StagingDirectoryForPackages
-}
-
 Task _Publish-Packages `
-    -Description 'Core publish task.' `
+    -Description 'Core publication task.' `
     -Depends _NuGetHelper-Build `
 {
-    Publish-Packages -Retail:$Retail
+    $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
+
+    if (!(Test-Path $cmd)) {
+        Exit-Gracefully -ExitCode 1 `
+            'Before calling this function, make sure to build the project NuGetHelper in Release configuration.'
+    }
+
+    try {
+        if ($Retail) {
+            . $cmd --directory $StagingDirectoryForPackages --retail 2>&1
+        } else {
+            . $cmd --directory $StagingDirectoryForPackages 2>&1
+        }
+    } catch {
+        Exit-Gracefully -ExitCode 1 "'NuGetHelper.exe' failed: $_"
+    }
 }
 
 Task _NuGetHelper-Build `
@@ -291,7 +310,33 @@ Task _Edge-Rebuild `
 Task _Edge-Update `
     -Description 'Update NuGet packages for the project Edge.' `
 {
-    Update-PackagesForEdge $NuGetVerbosity
+    # This function also updates the project to the last versions of the packages 
+    # from the official NuGet repository, which might not be what we do really want.
+    # The problem is that we want to update the Narvalo packages to their latest
+    # pre-release versions (only available on our own NuGet server) but they might
+    # include a new or updated dependency which is not available on our NuGet server.
+    # The current workaround is to update first from the official NuGet source.
+    # Unfortunately it won't help if there is a newly created dependency or if we 
+    # update a dependency to a new untested version.
+
+    $nuget = Get-NuGet -Install
+    $repositoryPath = Get-LocalPath 'tools\packages'
+    $packagesConfig = Get-LocalPath 'tools\Edge\packages.config'
+    
+    try {
+        . $nuget update $packagesConfig `
+            -Source "https://www.nuget.org/api/v2/" `
+            -RepositoryPath $repositoryPath `
+            -Verbosity $NuGetVerbosity
+
+        . $nuget update $packagesConfig `
+            -Source "http://narvalo.org/myget/nuget/" `
+            -Prerelease `
+            -RepositoryPath $repositoryPath `
+            -Verbosity $NuGetVerbosity
+    } catch {
+        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
+    }
 }
 
 # ------------------------------------------------------------------------------
@@ -428,6 +473,39 @@ Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
     $script:GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
+}
+
+# ------------------------------------------------------------------------------
+# Functions
+# ------------------------------------------------------------------------------
+
+<#
+.SYNOPSIS
+    Convert a MSBuild verbosity level to a NuGet verbosity level.
+.PARAMETER Verbosity
+    Specifies the MSBuild verbosity.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function ConvertTo-NuGetVerbosity {
+    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
+
+    switch ($verbosity) {
+        'q'          { return 'quiet' }
+        'quiet'      { return 'quiet' }
+        'm'          { return 'normal' }
+        'minimal'    { return 'normal' }
+        'n'          { return 'normal' }
+        'normal'     { return 'normal' }
+        'd'          { return 'detailed' }
+        'detailed'   { return 'detailed' }
+        'diag'       { return 'detailed' }
+        'diagnostic' { return 'detailed' }
+
+        default      { return 'normal' }
+    }
 }
 
 # ------------------------------------------------------------------------------
