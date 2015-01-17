@@ -1,8 +1,7 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+[<RequireQualifiedAccess>]
 module CLI
-
-open System
 
 open Nessos.UnionArgParser
 
@@ -14,13 +13,6 @@ type Arguments =
             match s with
             | Directory _ -> "Specify the directory where packages are stored."
             | Retail _    -> "If present, packages are for retail."
-
-type ProcessExiter() = 
-    interface IExiter with
-        member __.Exit(msg : string, ?errorCode : int) = 
-            Console.Error.WriteLine msg
-            do Console.Error.Flush()
-            Operators.exit (defaultArg errorCode 1)
 
 let parseArguments args = 
     let parser = UnionArgParser.Create<Arguments>()

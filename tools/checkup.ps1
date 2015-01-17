@@ -126,7 +126,7 @@ Ready to proceed to the analysis tasks. You will be offered the following option
 
 "@
 
-    Invoke-AnalyzeTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
+    Invoke-AnalyzeTask -NoConfirm:$yes.IsPresent -WhatIf:$whatIf
 }
 
 if ($purge.IsPresent) {
@@ -141,7 +141,7 @@ Ready to proceed to the cleanup tasks. You will be offered the following options
 
 "@
 
-    Invoke-PurgeTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
+    Invoke-PurgeTask -NoConfirm:$yes.IsPresent -WhatIf:$whatIf
 }
 
 if ($repair.IsPresent) {
@@ -153,7 +153,7 @@ Ready to proceed to the repair tasks. You will be offered the following options:
 
 "@
 
-    Invoke-RepairTask -NoConfirm $yes.IsPresent -WhatIf:$whatIf
+    Invoke-RepairTask -NoConfirm:$yes.IsPresent -WhatIf:$whatIf
 }
 
 # ------------------------------------------------------------------------------

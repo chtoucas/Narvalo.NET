@@ -36,13 +36,15 @@
 
 :Setup
 
-@set RepositoryRoot=%~dp0
-@set ProjectFile=%RepositoryRoot%\TryOut.proj
-@set RspFile=%RepositoryRoot%\tryout.rsp
+@set RepositoryRoot=%~dp0\..
+
+@set ProjectFile=%~dp0\TryOut.proj
 
 @if not exist %ProjectFile% (
     @set ProjectFile=
 )
+
+@set RspFile=%~dp0\tryout.rsp
 
 @if exist %RspFile% (
     @goto Execute
@@ -52,9 +54,11 @@
 
 :Execute
 
-@call "%RepositoryRoot%\tools\MSBuild.cmd" ^
-    @"%RspFile%" ^
-    "%ProjectFile%"
+@pushd
+
+@call "%~dp0\MSBuild.cmd" @"%RspFile%" "%ProjectFile%"
+
+@popd
 
 @echo.
 

@@ -10,9 +10,10 @@ Framework '4.5.1x64'
 # ------------------------------------------------------------------------------
 
 Properties {
-    # Process parameters.
+    # Process mandatory parameters.
     Assert ($Retail -ne $null) "`$Retail must not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
 
+    # Process optional parameters.
     if ($Verbosity -eq $null) { $Verbosity = 'minimal' }
     if ($Developer -eq $null) { $Developer = $false }
 
@@ -236,7 +237,7 @@ Task _Validate-PackagingForRetail `
 # ------------------------------------------------------------------------------
 
 Task _Fake-Package {
-    Write-Warning 'Fake Package task. To be replaced by the real Package task.'
+    Write-Warning 'Fake Package task. To be replaced by the real one.'
 }
 
 Task Publish `
@@ -265,8 +266,15 @@ Task _Publish-Clean `
     Remove-LocalItem -Path $PackagesDirectory -Recurse
 }
 
+Task _Publish-Core `
+    -Description 'Core publish task.' `
+    -Depends NuGetHelper-Build `
+{
+    Publish-Packages -Directory $PackagesDirectory -Retail:$Retail
+}
+
 Task _Publish-Packages `
-    -Description 'Proxy to the real publish task.' `
+    -Description 'Proxy to the real publication task.' `
 {
     if ($Retail) {
         Invoke-Task _Publish-PackagesForRetail
@@ -282,15 +290,8 @@ Task _Publish-PackagesForRetail `
     
 Task _Publish-PackagesNotForDistribution `
     -Description 'Publish packages not for distribution.' `
-    -Depends _Publish-Core, Edge-FullBuild `
+    -Depends _Publish-Core, _Edge-Update, Edge-Build `
     -PreCondition { -not $Retail }
-
-Task _Publish-Core `
-    -Description 'Core publish task.' `
-    -Depends NuGetHelper-Build `
-{
-    Publish-Packages -Directory $PackagesDirectory -Retail:$Retail
-}
 
 # ------------------------------------------------------------------------------
 # NuGetHelper project
@@ -308,9 +309,9 @@ Task NuGetHelper-Build `
 # Edge project
 # ------------------------------------------------------------------------------
 
-Task Edge-FullBuild `
+Task Edge-Build `
     -Description 'Update NuGet dependencies, clean then build the project Edge.' `
-    -Depends _Restore-MaintenancePackages, _Edge-Update `
+    -Depends _Restore-MaintenancePackages `
     -Alias Edge `
 {
     MSBuild $Edge $Opts $EdgeProps '/t:Clean;Build'
@@ -319,13 +320,7 @@ Task Edge-FullBuild `
 Task _Edge-Update `
     -Description 'Update NuGet packages for the project Edge.' `
 {
-    $nuget = Get-NuGet -Install
-
-    . $nuget update (Get-LocalPath 'tools\Edge\packages.config') `
-        -Source $MyGetSource `
-        -Prerelease `
-        -RepositoryPath (Get-LocalPath 'tools\packages') `
-        -Verbosity $NuGetVerbosity
+    Update-PackagesForEdge $MyGetSource $NuGetVerbosity
 }
 
 # ------------------------------------------------------------------------------
@@ -397,7 +392,7 @@ Task Environment `
     -Description 'Display the build environment.' `
     -Alias Env `
 {
-    # Running "MSBuild /version" outputs: 
+    # The output of running "MSBuild /version" looks like: 
     # >   Microsoft (R) Build Engine, version 12.0.31101.0
     # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
     # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
@@ -462,7 +457,7 @@ Task _Documentation `
 Task _Restore-MaintenancePackages `
     -Description 'Restore NuGet packages fors the "maintenance" solution.' `
 {
-    Restore-MaintenancePackages -Verbosity $NuGetVerbosity
+    Restore-MaintenancePackages $NuGetVerbosity
 }
 
 Task _Set-GitCommitHash `

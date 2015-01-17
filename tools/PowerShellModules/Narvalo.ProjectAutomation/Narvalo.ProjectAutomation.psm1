@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    PowerShell module to manage the Narvalo.NET project.
+    PowerShell module to manage the project Narvalo.NET.
 .DESCRIPTION
     Provides helpers to automate various development tasks:
     - Install or uninstall external tools.
     - Fix the most common problems.
-    - Run the build script.
     - Clean up the repository.
+    - Helpers for the build script.
 #>
 
 Set-StrictMode -Version Latest
@@ -50,7 +50,7 @@ New-Variable -Name ProjectRoot `
     -Value (Approve-ProjectRoot $args[0]) `
     -Scope Script `
     -Option ReadOnly `
-    -Description 'Path to the local repository for the Narvalo.NET project.'
+    -Description 'Path to the local repository for the project Narvalo.NET.'
     
 New-Variable -Name CopyrightHeader `
     -Value '// Copyright (c) Narvalo.Org.',
@@ -82,9 +82,9 @@ New-Variable -Name DefaultNuGetVerbosity `
 .PARAMETER ExitCode
     Specifies the exit code.
 .PARAMETER Message
-    Specifies the message to be written to a host.
+    Specifies the message to be written to the host.
 .INPUTS
-    None.
+    The message to be written to the host.
 .OUTPUTS
     None.
 #>
@@ -154,6 +154,7 @@ function Get-Git {
 
     if ($git -eq $null) { 
         Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
+
         return $null
     } else {
         return $git.Path
@@ -168,7 +169,7 @@ function Get-Git {
 .PARAMETER Git
     Specifies the path to the Git executable.
 .PARAMETER NoWarn
-    f present, do not display warnings.
+    If present, do not write any warning.
 .INPUTS
     The path to the Git executable.
 .OUTPUTS
@@ -282,7 +283,8 @@ function Get-NuGet {
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-PSakeModulePath returns a string that contains the path to the PSake module.
+    System.String. Get-PSakeModulePath returns a string that contains the path 
+    to the PSake module.
 #>
 function Get-PSakeModulePath {
     [CmdletBinding()]
@@ -299,9 +301,11 @@ function Get-PSakeModulePath {
 .SYNOPSIS
     Install 7-Zip.
 .PARAMETER Force
-    If present, override any previous installed 7-Zip.
+    If present, override any previously installed 7-Zip.
+.PARAMETER OutFile
+    Specifies the path where 7-Zip will be installed.
 .INPUTS
-    None.
+    The path where 7-Zip will be installed.
 .OUTPUTS
     None.
 #>
@@ -322,9 +326,11 @@ function Install-7Zip {
 .SYNOPSIS
     Install NuGet.
 .PARAMETER Force
-    If present, override any previous installed NuGet.
+    If present, override any previously installed NuGet.
+.PARAMETER OutFile
+    Specifies the path where NuGet will be installed.
 .INPUTS
-    None.
+    The path where NuGet will be installed.
 .OUTPUTS
     None.
 #>
@@ -344,6 +350,8 @@ function Install-NuGet {
 <#
 .SYNOPSIS
     Install PSake.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -381,13 +389,17 @@ function Install-PSake {
 .SYNOPSIS
     Process the analysis tasks.
 .PARAMETER NoConfirm
-    If $true, do not ask for any confirmation.
+    If present, do not ask for any confirmation.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
 #>
 function Invoke-AnalyzeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
-    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    param([switch] $NoConfirm)
     
-    if ($noConfirm -or (Confirm-Yes 'Analyze C# project files for common problems?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Analyze C# project files for common problems?')) {
         Measure-CSharpProjects 'src', 'samples', 'test'
     }
 }
@@ -395,33 +407,37 @@ function Invoke-AnalyzeTask {
 <#
 .SYNOPSIS
     Process the cleanup tasks.
-.PARAMETER Yes
-    If $true, do not ask for any confirmation.
+.PARAMETER NoConfirm
+    If present, do not ask for any confirmation.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
 #>
 function Invoke-PurgeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
-    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    param([switch] $NoConfirm)
 
     # Add a new task: remove ignored files?
     
-    if ($noConfirm -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
         Remove-BinAndObj 'samples', 'src', 'tests'
     }
 
-    if ($noConfirm -or (Confirm-Yes 'Remove ''packages'' directory?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove ''packages'' directory?')) {
         Remove-LocalItem 'packages' -Recurse
     }
 
-    if ($noConfirm -or (Confirm-Yes 'Remove ''work'' directory?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove ''work'' directory?')) {
         Remove-LocalItem 'work' -Recurse
     }
 
-    if ($noConfirm -or (Confirm-Yes 'Remove the locally installed tools?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove the locally installed tools?')) {
         Remove-LocalItem -Path (Get-7Zip)
         Remove-LocalItem -Path (Get-NuGet)
     }
 
-    if ($noConfirm -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
         Get-Git | Remove-UntrackedItems -NoWarn
     }
 }
@@ -429,14 +445,18 @@ function Invoke-PurgeTask {
 <#
 .SYNOPSIS
     Process the repair tasks.
-.PARAMETER Yes
-    If $true, do not ask for any confirmation.
+.PARAMETER NoConfirm
+    If present, do not ask for any confirmation.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
 #>
 function Invoke-RepairTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
-    param([Parameter(Mandatory = $true)] [bool] $NoConfirm)
+    param([switch] $NoConfirm)
 
-    if ($noConfirm -or (Confirm-Yes 'Repair copyright headers?')) {
+    if ($noConfirm.IsPresent -or (Confirm-Yes 'Repair copyright headers?')) {
         Repair-Copyright 'samples', 'src', 'tests'
     }
 }
@@ -445,7 +465,12 @@ function Invoke-RepairTask {
 .SYNOPSIS
     Analyze project files.
 .PARAMETER PathList
-    Specifies the list of paths, relative to the project root, to traverse.
+    Specifies the list of paths, relative to the project root, where to 
+    look for C# projects.
+.INPUTS
+    The list of paths, relative to the project root, where to look for C# projects.
+.OUTPUTS
+    None.
 #>
 function Measure-CSharpProjects {
     [CmdletBinding(SupportsShouldProcess = $true)]
@@ -467,6 +492,11 @@ function Measure-CSharpProjects {
     Analyze a project file for common problems.
 .PARAMETER File
     Specifies the path to a project file.
+.INPUTS
+    None.
+.OUTPUTS
+    System.String[]. Measure-ProjectFile may return an array of strings 
+    that contains details about any problems found.
 #>
 function Measure-ProjectFile {
     [CmdletBinding()]
@@ -492,6 +522,19 @@ function Measure-ProjectFile {
     }
 }
 
+<#
+.SYNOPSIS
+    Publish NuGet packages to a remote repository.
+.PARAMETER Directory
+    Specifies the path to the directory where packages were created.
+.PARAMETER Retail
+    If present, packages will be published to the official NuGet server, 
+    otherwise they are pushed to our private NuGet server.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
 function Publish-Packages {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
@@ -505,7 +548,7 @@ function Publish-Packages {
 
     if (!(Test-Path $helper)) {
         Exit-Gracefully -ExitCode 1 `
-            'Before calling this function, make sure to build the NuGetHelper project in Release configuration.'
+            'Before calling this function, make sure to build the project NuGetHelper in Release configuration.'
     }
 
     . $helper --directory $Directory --retail $Retail
@@ -513,11 +556,13 @@ function Publish-Packages {
 
 <#
 .SYNOPSIS
-    Remove the 'bin' and 'obj' directories created by Visual Studio.
+    Delete the 'bin' and 'obj' directories created by Visual Studio.
 .PARAMETER PathList
-    Specifies the list of paths, relative to the project root, to traverse.
+    Specifies the list of paths, relative to the project root, where to look for
+    'bin' and 'obj' directories.
 .INPUTS
-    The list of paths, relative to the project root, to traverse.
+    The list of paths, relative to the project root, where to look for 'bin' 
+    and 'obj' directories.
 .OUTPUTS
     None.
 #>
@@ -541,6 +586,20 @@ function Remove-BinAndObj {
     }
 }
 
+<#
+.SYNOPSIS
+    Delete the specified item if it exists, otherwise do nothing.
+.PARAMETER Path
+    Specifies the path to the item.
+.PARAMETER Recurse
+    If present, delete the items in the specified location and in all child items of the location.
+.PARAMETER RelativePath
+    Specifies the path to the item, relative to the project root diretory.
+.INPUTS
+    The path to the item to be deleted.
+.OUTPUTS
+    None.
+#>
 function Remove-LocalItem {
     [CmdletBinding(DefaultParametersetName = 'Relative', SupportsShouldProcess = $true)]
     param(
@@ -564,17 +623,17 @@ function Remove-LocalItem {
 
 <#
 .SYNOPSIS
-    Remove files untracked by git.
+    Delete files untracked by git.
 .PARAMETER Git
     Specifies the path to the git executable.
 .PARAMETER NoWarn
-    f present, do not display warnings.
+    If present, do not display warnings.
 .INPUTS
     The path to the git executable.
 .OUTPUTS
     None.
 .NOTES
-    We do not remove ignored files (see -x and -X options from git).
+    We do not delete git-ignored files (see -x and -X options from git).
 .LINK
     http://git-scm.com/docs/git-clean
 #>
@@ -615,8 +674,11 @@ function Remove-UntrackedItems {
 <#
 .SYNOPSIS
     Add a copyright header to all C# files missing one.
+.PARAMETER PathList
+    Specifies the list of paths, relative to the project root, where to 
+    look for C# files.
 .INPUTS
-    None.
+    The list of paths, relative to the project root, where to look for C# files.
 .OUTPUTS
     System.String. Repair-Copyright returns a string that contains a short
     explanation of what has been done.
@@ -651,7 +713,9 @@ function Repair-Copyright {
 
 <#
 .SYNOPSIS
-    Restore packages for the Edge project.
+    Restore packages for the project Edge.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -664,7 +728,7 @@ function Restore-PackagesForEdge {
         [string] $Verbosity
     )
     
-    Write-Verbose 'Restoring packages for the Edge project.'
+    Write-Verbose 'Restoring packages for the project Edge.'
 
     Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
         -PackagesDirectory (Get-LocalPath 'tools\packages') `
@@ -675,6 +739,8 @@ function Restore-PackagesForEdge {
 <#
 .SYNOPSIS
     Restore packages for the "maintenance" solution.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -698,6 +764,8 @@ function Restore-MaintenancePackages {
 <#
 .SYNOPSIS
     Restore solution packages.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -732,6 +800,38 @@ function Stop-AnyMSBuildProcess {
 
     Write-Debug 'Stop any concurrent MSBuild running.'
     Get-Process | ?{ $_.ProcessName -eq 'msbuild' } | %{ Stop-Process $_.ID -Force }
+}
+
+<#
+.SYNOPSIS
+    Update packages for the project Edge.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Update-PackagesForEdge {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Source,
+
+        [Parameter(Mandatory = $false, Position = 1)] 
+        [ValidateSet('quiet', 'normal', 'detailed')]
+        [string] $Verbosity = $script:DefaultNuGetVerbosity
+    )
+    
+    Write-Verbose 'Updating packages for the project Edge.'
+
+    $nuget = Get-NuGet -Install
+
+    . $nuget update (Get-LocalPath 'tools\Edge\packages.config') `
+        -Source $source `
+        -Prerelease `
+        -RepositoryPath (Get-LocalPath 'tools\packages') `
+        -Verbosity $verbosity
 }
 
 # ------------------------------------------------------------------------------
@@ -943,6 +1043,7 @@ Export-ModuleMember -Function `
     Restore-PackagesForEdge,
     Restore-MaintenancePackages,
     Restore-SolutionPackages,
-    Stop-AnyMSBuildProcess
+    Stop-AnyMSBuildProcess,
+    Update-PackagesForEdge
         
 # ------------------------------------------------------------------------------

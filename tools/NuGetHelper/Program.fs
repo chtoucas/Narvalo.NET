@@ -26,9 +26,6 @@ open NuGet
 let main args = 
     let (retail, directory) = CLI.parseArguments (args)
 
-    printfn "Packages are to be found from: %s" directory
-    printfn "Retail = %b" retail
-
     let packageID = "Narvalo.Core.EDGE"
 
     let repository =
