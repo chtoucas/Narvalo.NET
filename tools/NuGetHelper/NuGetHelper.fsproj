@@ -60,6 +60,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="Constants.fs" />
     <Compile Include="CLI.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />

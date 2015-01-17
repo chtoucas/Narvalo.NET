@@ -18,8 +18,6 @@ Set-StrictMode -Version Latest
     The Approve-ProjectRoot cmdlet validates that the path exists and is absolute.
 .PARAMETER Path
     Specifies a path to be approved.
-.INPUTS
-    None.
 .OUTPUTS
     System.String. Approve-ProjectRoot returns a string that contains the approved path.
 #>
@@ -64,7 +62,7 @@ New-Variable -Name DefaultNuGetVerbosity `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Default NuGet verbosity.'
-
+    
 #$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 #    Remove-Variable -Name ProjectRoot -Scope Script -Force
 #}
@@ -72,6 +70,35 @@ New-Variable -Name DefaultNuGetVerbosity `
 # ------------------------------------------------------------------------------
 # Public functions
 # ------------------------------------------------------------------------------
+
+<#
+.SYNOPSIS
+    Convert a MSBuild verbosity level to a NuGet verbosity level.
+.PARAMETER Verbosity
+    Specifies the MSBuild verbosity.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function ConvertTo-NuGetVerbosity {
+    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
+
+    switch ($verbosity) {
+        'q'          { return 'quiet' }
+        'quiet'      { return 'quiet' }
+        'm'          { return 'normal' }
+        'minimal'    { return 'normal' }
+        'n'          { return 'normal' }
+        'normal'     { return 'normal' }
+        'd'          { return 'detailed' }
+        'detailed'   { return 'detailed' }
+        'diag'       { return 'detailed' }
+        'diagnostic' { return 'detailed' }
+
+        default      { return 'normal' }
+    }
+}
 
 <# 
 .SYNOPSIS
@@ -351,7 +378,7 @@ function Install-NuGet {
 .SYNOPSIS
     Install PSake.
 .PARAMETER Verbosity
-    Specifies the verbosity level for the NuGet command-line.
+    Specifies the verbosity level for the underlying NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -537,21 +564,26 @@ function Measure-ProjectFile {
 #>
 function Publish-Packages {
     [CmdletBinding(SupportsShouldProcess = $true)]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] 
-        [string] $Directory,
-        
-        [switch] $Retail
-    )
+    param([switch] $Retail)
 
-    $helper = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
+    $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
 
-    if (!(Test-Path $helper)) {
+    if (!(Test-Path $cmd)) {
         Exit-Gracefully -ExitCode 1 `
             'Before calling this function, make sure to build the project NuGetHelper in Release configuration.'
     }
 
-    . $helper --directory $Directory --retail $Retail
+    $stagingDirectory = (Get-StagingDirectoryForPackages)
+
+    try {
+        if ($retail.IsPresent) {
+            . $cmd --directory $stagingDirectory --retail 2>&1
+        } else {
+            . $cmd --directory $stagingDirectory 2>&1
+        }
+    } catch {
+        throw "NuGetHelper.exe failed: $_"
+    }
 }
 
 <#
@@ -623,6 +655,18 @@ function Remove-LocalItem {
 
 <#
 .SYNOPSIS
+    Delete the staging directory for packages.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Remove-StagingDirectoryForPackages {
+    Remove-LocalItem -Path (Get-StagingDirectoryForPackages) -Recurse
+}
+
+<#
+.SYNOPSIS
     Delete files untracked by git.
 .PARAMETER Git
     Specifies the path to the git executable.
@@ -673,6 +717,18 @@ function Remove-UntrackedItems {
 
 <#
 .SYNOPSIS
+    Delete the entire build directory.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Remove-WorkDirectory {
+    Remove-LocalItem 'work' -Recurse
+}
+
+<#
+.SYNOPSIS
     Add a copyright header to all C# files missing one.
 .PARAMETER PathList
     Specifies the list of paths, relative to the project root, where to 
@@ -713,59 +769,9 @@ function Repair-Copyright {
 
 <#
 .SYNOPSIS
-    Restore packages for the project Edge.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-PackagesForEdge {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)] 
-        [string] $Verbosity
-    )
-    
-    Write-Verbose 'Restoring packages for the project Edge.'
-
-    Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
-        -PackagesDirectory (Get-LocalPath 'tools\packages') `
-        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-        -Verbosity $verbosity
-}
-
-<#
-.SYNOPSIS
-    Restore packages for the "maintenance" solution.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-MaintenancePackages {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)] 
-        [string] $Verbosity
-    )
-    
-    Write-Verbose 'Restoring packages for the "maintenance" solution.'
-
-    Restore-Packages -Source (Get-LocalPath 'tools\Narvalo Maintenance.sln') `
-        -PackagesDirectory (Get-LocalPath 'tools\packages') `
-        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
-        -Verbosity $verbosity
-}
-
-<#
-.SYNOPSIS
     Restore solution packages.
 .PARAMETER Verbosity
-    Specifies the verbosity level for the NuGet command-line.
+    Specifies the verbosity level for the underlying NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -788,6 +794,31 @@ function Restore-SolutionPackages {
 
 <#
 .SYNOPSIS
+    Restore packages for the solution Narvalo Maintenance.sln.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-PackagesForMaintenanceSolution {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Verbosity
+    )
+    
+    Write-Verbose 'Restoring packages for the solution ''Narvalo Maintenance.sln''.'
+
+    Restore-Packages -Source (Get-LocalPath 'tools\Narvalo Maintenance.sln') `
+        -PackagesDirectory (Get-LocalPath 'tools\packages') `
+        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+        -Verbosity $verbosity
+}
+
+<#
+.SYNOPSIS
     Stop any running MSBuild process.
 .INPUTS
     None.
@@ -804,34 +835,53 @@ function Stop-AnyMSBuildProcess {
 
 <#
 .SYNOPSIS
-    Update packages for the project Edge.
+    Update the NuGet packages for the project Edge.
 .PARAMETER Verbosity
-    Specifies the verbosity level for the NuGet command-line.
+    Specifies the verbosity level for the underlying NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
     None.
+.NOTES
+    This function also updates the project to the last versions of the packages 
+    from the official NuGet repository, which might not be what we do really want.
+    The problem is that we want to update the Narvalo packages to their latest
+    pre-release versions (only available on our own NuGet server) but they might
+    include a new or updated dependency which is not available on our NuGet server.
+    The current workaround is to update first from the official NuGet source.
+    Unfortunately it won't help if there is a newly created dependency or if we 
+    update a dependency to a new untested version.
 #>
 function Update-PackagesForEdge {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false, Position = 0)] 
-        [string] $Source,
-
-        [Parameter(Mandatory = $false, Position = 1)] 
         [ValidateSet('quiet', 'normal', 'detailed')]
         [string] $Verbosity = $script:DefaultNuGetVerbosity
     )
     
-    Write-Verbose 'Updating packages for the project Edge.'
-
     $nuget = Get-NuGet -Install
+    $repositoryPath = Get-LocalPath 'tools\packages'
+    $packagesConfig = Get-LocalPath 'tools\Edge\packages.config'
+    
+    try {
+        Write-Verbose 'Updating official NuGet packages for the project Edge.'
+        Write-Debug 'Call nuget.exe update from the official NuGet source.'
+        . $nuget update $packagesConfig `
+            -Source "https://www.nuget.org/api/v2/" `
+            -RepositoryPath $repositoryPath `
+            -Verbosity $verbosity
 
-    . $nuget update (Get-LocalPath 'tools\Edge\packages.config') `
-        -Source $source `
-        -Prerelease `
-        -RepositoryPath (Get-LocalPath 'tools\packages') `
-        -Verbosity $verbosity
+        Write-Verbose 'Updating private NuGet packages for the project Edge.'
+        Write-Debug 'Call nuget.exe update from the private MyGet source.'
+        . $nuget update $packagesConfig `
+            -Source "http://narvalo.org/myget/nuget/" `
+            -Prerelease `
+            -RepositoryPath $repositoryPath `
+            -Verbosity $verbosity
+    } catch {
+        throw "'nuget.exe update' failed: $_"
+    }
 }
 
 # ------------------------------------------------------------------------------
@@ -842,7 +892,7 @@ function Update-PackagesForEdge {
 .SYNOPSIS
     Add a copyright header to a file.
 .PARAMETER Path
-    Specifies the file to repair.
+    Specifies the path to the file to repair.
 .INPUTS
     None.
 .OUTPUTS
@@ -868,6 +918,10 @@ function Add-Copyright {
     Requests confirmation from the user. 
 .PARAMETER Query
     Specifies the query to be displayed to the user.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
 #>
 function Confirm-Yes {
     param(
@@ -890,9 +944,9 @@ function Confirm-Yes {
 .SYNOPSIS
     Find C# files without copyright header.
 .PARAMETER Path
-    Specifies the path to the directory to traverse.
+    Specifies the path to the directory where to look for C# files.
 .INPUTS
-    None.
+    The path to the directory where to look for C# files.
 .OUTPUTS
     None.
 #>
@@ -909,6 +963,10 @@ function Find-MissingCopyright {
         ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
         ?{ -not (Test-Copyright $_.FullName) } | 
         select FullName
+}
+
+function Get-StagingDirectoryForPackages {
+    Get-LocalPath 'work\packages'
 }
 
 <#
@@ -955,6 +1013,14 @@ function Install-RemoteItem {
 <#
 .SYNOPSIS
     Restore packages.
+.PARAMETER ConfigFile
+    Specifies the path to the NuGet config.
+.PARAMETER PackagesDirectory
+    Specifies the path to the packages directory.
+.PARAMETER Source
+    Specifies the list of packages sources to use.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
 .INPUTS
     None.
 .OUTPUTS
@@ -996,9 +1062,34 @@ function Restore-Packages {
 
 <#
 .SYNOPSIS
+    Restore packages for the project Edge.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-PackagesForEdge {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false, Position = 0)] 
+        [string] $Verbosity
+    )
+    
+    Write-Verbose 'Restoring packages for the project Edge.'
+
+    Restore-Packages -Source (Get-LocalPath 'tools\Edge\packages.config') `
+        -PackagesDirectory (Get-LocalPath 'tools\packages') `
+        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
+        -Verbosity $verbosity
+}
+
+<#
+.SYNOPSIS
     Return $true if the file contains a copyright header, $false otherwise.
 .PARAMETER Path
-    Specifies the file to test.
+    Specifies the path to the file to test.
 .INPUTS
     None.
 .OUTPUTS
@@ -1021,6 +1112,7 @@ function Test-Copyright {
 # ------------------------------------------------------------------------------
 
 Export-ModuleMember -Function `
+    ConvertTo-NuGetVerbosity,
     Exit-Gracefully,
     Get-7Zip,
     Get-Git, 
@@ -1038,10 +1130,11 @@ Export-ModuleMember -Function `
     Publish-Packages,
     Remove-BinAndObj,
     Remove-LocalItem,
+    Remove-StagingDirectoryForPackages,
     Remove-UntrackedItems,
+    Remove-WorkDirectory,
     Repair-Copyright,
-    Restore-PackagesForEdge,
-    Restore-MaintenancePackages,
+    Restore-PackagesForMaintenanceSolution,
     Restore-SolutionPackages,
     Stop-AnyMSBuildProcess,
     Update-PackagesForEdge

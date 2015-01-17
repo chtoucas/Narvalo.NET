@@ -90,7 +90,7 @@ if (!$noLogo.IsPresent) {
 
 if (!(Get-Module psake)) {
     Write-Debug 'Ensure PSake is installed by restoring the solution packages.'
-    Restore-SolutionPackages
+    Restore-SolutionPackages -Verbosity quiet
 
     Write-Debug 'Import the psake module.'
     Get-PSakeModulePath | Import-Module -NoClobber

@@ -1,7 +1,7 @@
 # PSakefile script.
 
 # We force the framework to be sure we use the v12.0 of the build tools.
-# For instance, this is a requirement for the _MyGet-Build target where
+# For instance, this is a requirement for the _MyGet-Publish target where
 # the DeployOnBuild instruction is not understood by previsou versions of MSBuild.
 Framework '4.5.1x64'
 
@@ -11,33 +11,21 @@ Framework '4.5.1x64'
 
 Properties {
     # Process mandatory parameters.
-    Assert ($Retail -ne $null) "`$Retail must not be null, e.g. run with -Parameters @{ 'retail' = $true; }"
+    Assert($Retail -ne $null) "`$Retail must not be null, e.g. run with -Parameters @{ 'retail' = `$true; }"
 
     # Process optional parameters.
     if ($Verbosity -eq $null) { $Verbosity = 'minimal' }
     if ($Developer -eq $null) { $Developer = $false }
 
     # Define the NuGet verbosity.
-    $NuGetVerbosity = Get-NuGetVerbosity $Verbosity
-
-    # NuGet servers.
-    $NuGetSource    = "https://www.nuget.org/api/v2/"
-    $MyGetSource    = "http://narvalo.org/myget/nuget/"
-    $MyGetApiSource = "http://narvalo.org/myget/"
-    
-    # Work directories.
-    $MyGetDirectory    = Get-LocalPath 'work\myget'
-    $MyGetZipFile      = Get-LocalPath 'work\myget.7z'
-    $PackagesDirectory = Get-LocalPath 'work\packages'
+    $NuGetVerbosity = ConvertTo-NuGetVerbosity $Verbosity
 
     # MSBuild options.
     $Opts = '/nologo', "/verbosity:$Verbosity", '/maxcpucount', '/nodeReuse:false'
 
-    # MSBuild projects.
+    # Core MSBuild projects.
     $Everything  = Get-LocalPath 'tools\Make.proj' -Resolve
     $Foundations = Get-LocalPath 'tools\Make.Foundations.proj' -Resolve
-    $Edge        = Get-LocalPath 'tools\Edge\Edge.csproj' -Resolve
-    $NuGetHelper = Get-LocalPath 'tools\NuGetHelper\NuGetHelper.fsproj' -Resolve
     
     # Packaging properties:
     # - Release configuration
@@ -77,12 +65,10 @@ Properties {
     # - Run Xunit tests
     # - Package
     $PackagingTargets = '/t:Rebuild;PEVerify;Xunit;Package'
-    
-    # Properties for the project Edge.
-    $EdgeProps = '/p:Configuration=Release'
 
-    # Properties for the project NuGetHelper.
-    $NuGetHelperProps = '/p:Configuration=Release'
+    # Properties for MyGet.
+    $MyGetStagingDirectory = Get-LocalPath 'work\myget'
+    $MyGetZipFile          = Get-LocalPath 'work\myget.7z'
 }
 
 FormatTaskName {
@@ -92,9 +78,12 @@ FormatTaskName {
 }
 
 TaskTearDown {
-    if ($LastExitCode -ne 0) {
-        Exit-Gracefully -ExitCode $LastExitCode 'Build failed.'
+    if (!$?) {
+        Exit-Gracefully -ExitCode 1 'Build failed.'
     }
+    #if ($LastExitCode -ne 0) {
+    #    Exit-Gracefully -ExitCode $LastExitCode 'Build failed.'
+    #}
 }
 
 Task Default -Depends FastBuild
@@ -137,12 +126,12 @@ Task FullBuild `
 }   
 
 Task FullClean `
-    -Description 'Delete work directory.' `
+    -Description 'Delete the entire build directory.' `
     -Alias Clean `
     -ContinueOnError `
 {
     # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    Remove-LocalItem 'work' -Recurse
+    Remove-WorkDirectory
 }
 
 Task CodeAnalysis `
@@ -179,7 +168,7 @@ Task SecurityAnalysis `
 # Packaging tasks
 # ------------------------------------------------------------------------------
 
-Task Package `
+Task Package-All `
     -Description 'Package ''Foundations''.' `
     -Depends _Package-DependsOn `
     -Alias Pack `
@@ -233,149 +222,124 @@ Task _Validate-PackagingForRetail `
 }
 
 # ------------------------------------------------------------------------------
-# Publish tasks
+# Publication tasks
 # ------------------------------------------------------------------------------
 
 Task _Fake-Package {
-    Write-Warning 'Fake Package task. To be replaced by the real one.'
+     Write-Warning 'Fake packaging task. To be replaced by the real packaging task.'
 }
 
-Task Publish `
+Task Publish-All `
     -Description 'Publish ''Foundations''.' `
     -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
     -Alias Push
 
 Task Publish-Core `
     -Description 'Publish core projects.' `
-    -Depends _Publish-Clean, Package-Core, _Publish-Packages `
+    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
     -Alias PushCore
 
 Task Publish-Mvp `
     -Description 'Publish MVP projects.' `
-    -Depends _Publish-Clean, Package-Mvp, _Publish-Packages `
+    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
     -Alias PushMvp
 
 Task Publish-Build `
     -Description 'Publish the project Narvalo.Build.' `
-    -Depends _Publish-Clean, Package-Build, _Publish-Packages `
+    -Depends _Publish-Clean, _Fake-Package, _Publish-Packages `
     -Alias PushBuild
 
 Task _Publish-Clean `
-    -Description 'Remove the directory ''work\packages''.' `
+    -Description 'Remove the staging directory for packages.' `
 {
-    Remove-LocalItem -Path $PackagesDirectory -Recurse
-}
-
-Task _Publish-Core `
-    -Description 'Core publish task.' `
-    -Depends NuGetHelper-Build `
-{
-    Publish-Packages -Directory $PackagesDirectory -Retail:$Retail
+    Remove-StagingDirectoryForPackages
 }
 
 Task _Publish-Packages `
-    -Description 'Proxy to the real publication task.' `
+    -Description 'Core publish task.' `
+    -Depends _NuGetHelper-Build `
 {
-    if ($Retail) {
-        Invoke-Task _Publish-PackagesForRetail
-    } else {
-        Invoke-Task _Publish-PackagesNotForDistribution
-    }
+    Publish-Packages -Retail:$Retail
 }
 
-Task _Publish-PackagesForRetail `
-    -Description 'Publish retail packages.' `
-    -Depends _Publish-Core `
-    -PreCondition { $Retail }
-    
-Task _Publish-PackagesNotForDistribution `
-    -Description 'Publish packages not for distribution.' `
-    -Depends _Publish-Core, _Edge-Update, Edge-Build `
-    -PreCondition { -not $Retail }
-
-# ------------------------------------------------------------------------------
-# NuGetHelper project
-# ------------------------------------------------------------------------------
-
-Task NuGetHelper-Build `
+Task _NuGetHelper-Build `
     -Description 'Build the project NuGetHelper.' `
-    -Depends _Restore-MaintenancePackages `
-    -Alias NuGetHelper `
+    -Depends _Restore-PackagesForMaintenanceSolution `
 {
-    MSBuild $NuGetHelper $Opts $NuGetHelperProps '/t:Build'
+    $proj = Get-LocalPath 'tools\NuGetHelper\NuGetHelper.fsproj' -Resolve
+
+    MSBuild $proj $Opts '/p:Configuration=Release', '/t:Build'
 }
 
 # ------------------------------------------------------------------------------
 # Edge project
 # ------------------------------------------------------------------------------
 
-Task Edge-Build `
-    -Description 'Update NuGet dependencies, clean then build the project Edge.' `
-    -Depends _Restore-MaintenancePackages `
-    -Alias Edge `
+Task Edge `
+    -Description 'Update then re-build the project Edge.' `
+    -Depends _Edge-Update, _Edge-Rebuild
+
+Task _Edge-Rebuild `
+    -Description 'Re-build the project Edge.' `
+    -Depends _Restore-PackagesForMaintenanceSolution `
 {
-    MSBuild $Edge $Opts $EdgeProps '/t:Clean;Build'
+    $proj = Get-LocalPath 'tools\Edge\Edge.csproj' -Resolve
+
+    MSBuild $proj $Opts '/p:Configuration=Release', '/t:Rebuild'
 }
 
 Task _Edge-Update `
     -Description 'Update NuGet packages for the project Edge.' `
 {
-    Update-PackagesForEdge $MyGetSource $NuGetVerbosity
+    Update-PackagesForEdge $NuGetVerbosity
 }
 
 # ------------------------------------------------------------------------------
 # MyGet project
 # ------------------------------------------------------------------------------
 
-Task MyGet-Repackage `
-    -Description 'Clean up then package the project MyGet.' `
-    -Depends _MyGet-Clean, _MyGet-Package `
+Task MyGet-Package `
+    -Description 'Package the project MyGet.' `
+    -Depends _MyGet-DeleteStagingDirectory, _MyGet-Publish, _MyGet-Zip `
     -Alias MyGet
     
-Task _MyGet-Build `
-    -Description 'Build the project MyGet.' `
-    -Depends _Restore-MaintenancePackages `
+Task _MyGet-Publish `
+    -Description 'Clean up, build then publish the project MyGet.' `
+    -Depends _Restore-PackagesForMaintenanceSolution `
 {
+    $proj = Get-LocalPath 'tools\MyGet\MyGet.csproj' -Resolve
+
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
-    MSBuild $Opts `
-        (Get-LocalPath 'tools\MyGet\MyGet.csproj' -Resolve) `
-        '/t:Clean;Build',
+    MSBuild $Opts $proj `
+        '/t:Rebuild',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
-
-Task _MyGet-Rebuild `
-    -Description 'Clean then build the project MyGet.' `
-    -Depends _MyGet-Clean, _MyGet-Build
-
-Task _MyGet-Package `
-    -Description 'Package the project MyGet.' `
-    -Depends _MyGet-Build, _MyGet-Zip
     
-Task _MyGet-Clean `
+Task _MyGet-DeleteStagingDirectory `
     -Description 'Remove the directory ''work\myget''.' `
 {
-    Remove-LocalItem -Path $MyGetDirectory -Recurse
+    Remove-LocalItem -Path $MyGetStagingDirectory -Recurse
 }
 
-Task _MyGet-DeleteZip `
+Task _MyGet-DeleteZipFile `
     -Description 'Delete the package for MyGet.' `
 {
     Remove-LocalItem -Path $MyGetZipFile
 }
 
 Task _MyGet-Zip `
-    -Description 'Zip build outputs from the project MyGet.' `
-    -Depends MyGet-DeleteZip `
+    -Description 'Zip the publication artefacts for the project MyGet.' `
+    -Depends _MyGet-DeleteZipFile `
     -PreAction {
-        if (!(Test-Path $MyGetDirectory)) {
-            # We do not add a dependency on _MyGet-Build so that we can run this task alone.
-            # _MyGet-Package provides the stronger version. 
+        if (!(Test-Path $MyGetStagingDirectory)) {
+            # We do not add a dependency on _MyGet-Publish so that we can run this task alone.
+            # MyGet-Package provides the stronger version. 
             Exit-Gracefully -ExitCode 1 `
-                'Unabled to create the Zip package: did you forgot to call the _MyGet-Build task?'
+                'Unabled to create the Zip package: did you forgot to call the _MyGet-Publish task?'
         }
     } -Action {
-        . (Get-7Zip -Install) -mx9 a $MyGetZipFile $MyGetDirectory | Out-Null
+        . (Get-7Zip -Install) -mx9 a $MyGetZipFile $MyGetStagingDirectory | Out-Null
 
         if (!$?) {
             Exit-Gracefully -ExitCode 1 'Unabled to create the Zip package.'
@@ -454,43 +418,16 @@ Task _Documentation `
         Format-Table -AutoSize -Wrap -Property Task, Alias, Synopsis
 }
 
-Task _Restore-MaintenancePackages `
-    -Description 'Restore NuGet packages fors the "maintenance" solution.' `
+Task _Restore-PackagesForMaintenanceSolution `
+    -Description 'Restore NuGet packages for the solution ''Narvalo Maintenance.sln''.' `
 {
-    Restore-MaintenancePackages $NuGetVerbosity
+    Restore-PackagesForMaintenanceSolution $NuGetVerbosity
 }
 
 Task _Set-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
     $script:GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
-}
-
-# ------------------------------------------------------------------------------
-# Functions
-# ------------------------------------------------------------------------------
-
-<#
-.SYNOPSIS
-    Get the module (or NuGet) verbosity from the MSBuild verbosity.
-#>
-function Get-NuGetVerbosity {
-    param([Parameter(Mandatory = $true, Position = 0)] [string] $Verbosity)
-
-    switch ($verbosity) {
-        'q'          { return 'quiet' }
-        'quiet'      { return 'quiet' }
-        'm'          { return 'normal' }
-        'minimal'    { return 'normal' }
-        'n'          { return 'normal' }
-        'normal'     { return 'normal' }
-        'd'          { return 'detailed' }
-        'detailed'   { return 'detailed' }
-        'diag'       { return 'detailed' }
-        'diagnostic' { return 'detailed' }
-
-        default      { return 'normal' }
-    }
 }
 
 # ------------------------------------------------------------------------------
