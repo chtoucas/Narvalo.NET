@@ -26,7 +26,8 @@
     <DocumentationFile>
     </DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
-    <StartArguments>--directory C:\opt\code-github\Narvalo.NET\work\packages</StartArguments>
+    <StartArguments>
+    </StartArguments>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -62,10 +63,13 @@
   <ItemGroup>
     <Compile Include="Constants.fs" />
     <Compile Include="CLI.fs" />
+    <Compile Include="Edge.fs" />
+    <Compile Include="Retail.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
     <None Include="NuGetHelper.ini" />
+    <None Include="Edge.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.XmlTransform">
