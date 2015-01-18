@@ -679,6 +679,56 @@ function Repair-Copyright {
 
 <#
 .SYNOPSIS
+    Restore packages.
+.PARAMETER ConfigFile
+    Specifies the path to the NuGet config.
+.PARAMETER PackagesDirectory
+    Specifies the path to the packages directory.
+.PARAMETER Source
+    Specifies the list of packages sources to use.
+.PARAMETER Verbosity
+    Specifies the verbosity level for the underlying NuGet command-line.
+.INPUTS
+    None.
+.OUTPUTS
+    None.
+#>
+function Restore-Packages {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)] 
+        [Alias('s')] [string] $Source,
+        
+        [Parameter(Mandatory = $true, Position = 1)] 
+        [string] $PackagesDirectory,
+        
+        [Parameter(Mandatory = $true, Position = 2)] 
+        [string] $ConfigFile,
+        
+        [Parameter(Mandatory = $false, Position = 3)] 
+        [ValidateSet('', 'quiet', 'normal', 'detailed')]
+        [string] $Verbosity
+    )
+
+    if ($verbosity -eq '') {
+        $verbosity = $script:DefaultNuGetVerbosity
+    }
+
+    $nuget = Get-NuGet -Install
+
+    try {
+        Write-Debug 'Call nuget.exe restore.'
+        . $nuget restore $source `
+            -PackagesDirectory $packagesDirectory `
+            -ConfigFile $configFile `
+            -Verbosity $verbosity 2>&1
+    } catch {
+        throw "'nuget.exe restore' failed: $_"
+    }
+}
+
+<#
+.SYNOPSIS
     Restore solution packages.
 .PARAMETER Verbosity
     Specifies the verbosity level for the underlying NuGet command-line.
@@ -699,31 +749,6 @@ function Restore-SolutionPackages {
     Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
         -PackagesDirectory (Get-LocalPath 'packages') `
         -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-        -Verbosity $verbosity
-}
-
-<#
-.SYNOPSIS
-    Restore packages for the solution Narvalo Maintenance.sln.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-PackagesForMaintenanceSolution {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $false, Position = 0)] 
-        [string] $Verbosity
-    )
-    
-    Write-Verbose 'Restoring packages for the solution ''Narvalo Maintenance.sln''.'
-
-    Restore-Packages -Source (Get-LocalPath 'tools\Narvalo Maintenance.sln') `
-        -PackagesDirectory (Get-LocalPath 'tools\packages') `
-        -ConfigFile (Get-LocalPath 'tools\.nuget\NuGet.Config') `
         -Verbosity $verbosity
 }
 
@@ -867,56 +892,6 @@ function Install-RemoteItem {
 
 <#
 .SYNOPSIS
-    Restore packages.
-.PARAMETER ConfigFile
-    Specifies the path to the NuGet config.
-.PARAMETER PackagesDirectory
-    Specifies the path to the packages directory.
-.PARAMETER Source
-    Specifies the list of packages sources to use.
-.PARAMETER Verbosity
-    Specifies the verbosity level for the underlying NuGet command-line.
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-#>
-function Restore-Packages {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] 
-        [Alias('s')] [string] $Source,
-        
-        [Parameter(Mandatory = $true, Position = 1)] 
-        [string] $PackagesDirectory,
-        
-        [Parameter(Mandatory = $true, Position = 2)] 
-        [string] $ConfigFile,
-        
-        [Parameter(Mandatory = $false, Position = 3)] 
-        [ValidateSet('', 'quiet', 'normal', 'detailed')]
-        [string] $Verbosity
-    )
-
-    if ($verbosity -eq '') {
-        $verbosity = $script:DefaultNuGetVerbosity
-    }
-
-    $nuget = Get-NuGet -Install
-
-    try {
-        Write-Debug 'Call nuget.exe restore.'
-        . $nuget restore $source `
-            -PackagesDirectory $packagesDirectory `
-            -ConfigFile $configFile `
-            -Verbosity $verbosity 2>&1
-    } catch {
-        throw "'nuget.exe restore' failed: $_"
-    }
-}
-
-<#
-.SYNOPSIS
     Return $true if the file contains a copyright header, $false otherwise.
 .PARAMETER Path
     Specifies the path to the file to test.
@@ -960,7 +935,7 @@ Export-ModuleMember -Function `
     Remove-LocalItem,
     Remove-UntrackedItems,
     Repair-Copyright,
-    Restore-PackagesForMaintenanceSolution,
+    Restore-Packages,
     Restore-SolutionPackages,
     Stop-AnyMSBuildProcess
         
