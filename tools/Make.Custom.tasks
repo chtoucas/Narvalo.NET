@@ -146,10 +146,19 @@ return !Log.HasLoggedErrors;
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 var version = FileVersionInfo.GetVersionInfo(AssemblyPath).ProductVersion ;
-// In retail mode, we remove all metadata. In non-retail mode, we also remove
-// the prerelease label since it is dynamically replaced by a timestamp in Make.CustomAfter.targets.
-int index = version.LastIndexOf(Retail ? "+" : "-");
-ProductVersion = index > 0 ? version.Remove(index) : version;
+
+// Remove any build metadata.
+int metadataIndex = version.LastIndexOf("+");
+if (metadataIndex > 0) { version = version.Remove(metadataIndex); }
+
+if (!Retail) {
+    // In non-retail mode, we also remove the prerelease label since it is 
+    // dynamically replaced by a timestamp in Make.CustomAfter.targets.
+    int prereleaseIndex = version.LastIndexOf("-");
+    if (prereleaseIndex > 0) { version = version.Remove(prereleaseIndex); }
+}
+
+ProductVersion = version;
 
 return !Log.HasLoggedErrors;
         ]]>
