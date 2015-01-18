@@ -930,6 +930,7 @@ Export-ModuleMember -Function `
     Invoke-AnalyzeTask,
     Invoke-PurgeTask,
     Invoke-RepairTask,
+    Measure-CSharpProjects,
     Measure-ProjectFile,
     Remove-BinAndObj,
     Remove-LocalItem,

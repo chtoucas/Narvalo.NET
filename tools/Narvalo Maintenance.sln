@@ -133,7 +133,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts - Batch", "Scripts 
 		tryout.cmd = tryout.cmd
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetHelper", "NuGetHelper\NuGetHelper.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

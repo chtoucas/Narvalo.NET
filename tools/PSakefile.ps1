@@ -164,7 +164,7 @@ Task Package-All `
 
 Task Package-Core `
     -Description 'Package core projects.' `
-    -Depends _Package-InitializeVariables, _Package-ValidateRetail `
+    -Depends _Package-InitializeVariables `
     -Alias PackCore `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
@@ -173,7 +173,7 @@ Task Package-Core `
 
 Task Package-Mvp `
     -Description 'Package MVP projects.' `
-    -Depends _Package-InitializeVariables, _Package-ValidateRetail `
+    -Depends _Package-InitializeVariables `
     -Alias PackMvp `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
@@ -182,7 +182,7 @@ Task Package-Mvp `
 
 Task Package-Build `
     -Description 'Package the project Narvalo.Build.' `
-    -Depends _Package-InitializeVariables, _Package-ValidateRetail `
+    -Depends _Package-InitializeVariables `
     -Alias PackBuild `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
@@ -191,7 +191,7 @@ Task Package-Build `
 
 Task _Package-InitializeVariables `
     -Description 'Initialize variables only used by the Package-* tasks.' `
-    -Depends _Initialize-GitCommitHash `
+    -Depends _Initialize-GitCommitHash, _Package-ValidateRetailCondition `
     -RequiredVariables Retail `
 {
     # Packaging properties:
@@ -217,7 +217,7 @@ Task _Package-InitializeVariables `
     $script:Package_Targets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
-Task _Package-ValidateRetail `
+Task _Package-ValidateRetailCondition `
     -Description 'Validate retail packaging tasks.' `
     -PreCondition { $Retail } `
 {
@@ -238,34 +238,34 @@ Task Publish-All `
 
 Task Publish-Core `
     -Description 'Publish core projects.' `
-    -Depends _Publish-InitializeVariables, _Publish-DependsOn, Package-Core `
+    -Depends _Publish-DependsOn, Package-Core `
     -RequiredVariables Retail `
     -Alias PushCore `
 {
-    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
+    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task Publish-Mvp `
     -Description 'Publish MVP projects.' `
-    -Depends _Publish-InitializeVariables, _Publish-DependsOn, Package-Mvp `
+    -Depends _Publish-DependsOn, Package-Mvp `
     -RequiredVariables Retail `
     -Alias PushMvp `
 {
-    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
+    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task Publish-Build `
     -Description 'Publish the project Narvalo.Build.' `
-    -Depends _Publish-InitializeVariables, _Publish-DependsOn, Package-Build `
+    -Depends _Publish-DependsOn, Package-Build `
     -RequiredVariables Retail `
     -Alias PushBuild `
 {
-    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
+    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task _Publish-DependsOn `
     -Description 'Dependencies shared among the Publish-* tasks.' `
-    -Depends _Publish-Clean, NuGetHelper-Build
+    -Depends _Publish-InitializeVariables, _Publish-Clean, NuGetAgent-Build
 
 Task _Publish-Clean `
     -Description 'Remove the staging directory for packages.' `
@@ -281,32 +281,32 @@ Task _Publish-InitializeVariables `
 }
 
 # ------------------------------------------------------------------------------
-# NuGetHelper project
+# NuGetAgent project
 # ------------------------------------------------------------------------------
 
-Task NuGetHelper-Build `
-    -Description 'Build the project NuGetHelper.' `
-    -Depends _NuGetHelper-InitializeVariables, _NuGetHelper-RestorePackages `
-    -Alias NuGetHelper `
+Task NuGetAgent-Build `
+    -Description 'Build the project NuGetAgent.' `
+    -Depends _NuGetAgent-InitializeVariables, _NuGetAgent-RestorePackages `
+    -Alias NuGetAgent `
 {
-    MSBuild $NuGetHelper_Project  $Opts '/p:Configuration=Release', '/t:Build'
+    MSBuild $NuGetAgent_Project  $Opts '/p:Configuration=Release', '/t:Build'
 }
 
-Task _NuGetHelper-RestorePackages `
-    -Description 'Restore packages for the project NuGetHelper.' `
-    -Depends _NuGetHelper-InitializeVariables, _Tools-InitializeVariables `
+Task _NuGetAgent-RestorePackages `
+    -Description 'Restore packages for the project NuGetAgent.' `
+    -Depends _NuGetAgent-InitializeVariables, _Tools-InitializeVariables `
 {
-    Restore-Packages -Source $NuGetHelper_PackagesConfig `
+    Restore-Packages -Source $NuGetAgent_PackagesConfig `
         -PackagesDirectory $Tools_PackagesDirectory `
         -ConfigFile $Tools_NuGetConfig `
         -Verbosity $NuGetVerbosity
 }
 
-Task _NuGetHelper-InitializeVariables `
-    -Description 'Initialize variables only used by the NuGetHelper-* tasks.' `
+Task _NuGetAgent-InitializeVariables `
+    -Description 'Initialize variables only used by the NuGetAgent-* tasks.' `
 {
-    $script:NuGetHelper_Project        = Get-LocalPath 'tools\NuGetHelper\NuGetHelper.fsproj'
-    $script:NuGetHelper_PackagesConfig = Get-LocalPath 'tools\NuGetHelper\packages.config'
+    $script:NuGetAgent_Project        = Get-LocalPath 'tools\NuGetAgent\NuGetAgent.fsproj'
+    $script:NuGetAgent_PackagesConfig = Get-LocalPath 'tools\NuGetAgent\packages.config'
 }
 
 # ------------------------------------------------------------------------------
@@ -428,13 +428,13 @@ Task _MyGet-Zip `
             # We do not add a dependency on _MyGet-Publish so that we can run this task alone.
             # MyGet-Package provides the stronger version. 
             Exit-Gracefully -ExitCode 1 `
-                'Unabled to create the Zip package: did you forgot to call the _MyGet-Publish task?'
+                'Can not create the Zip package: did you forgot to call the _MyGet-Publish task?'
         }
     } -Action {
         . (Get-7Zip -Install) -mx9 a $MyGet_ZipFile $MyGet_StagingDirectory | Out-Null
 
         if (!$?) {
-            Exit-Gracefully -ExitCode 1 'Unabled to create the Zip package.'
+            Exit-Gracefully -ExitCode 1 'Failed to create the Zip package.'
         }
     }
 
@@ -563,16 +563,18 @@ function ConvertTo-NuGetVerbosity {
     }
 }
 
-function Publish-Packages {
+function Invoke-NuGetAgent {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)] [string] $Path,
+
+        [Parameter(Mandatory = $false)] [string] $Configuration = 'Release',
 
         [switch] $Retail
     ) 
 
     try {
-        $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe' -Resolve
+        $cmd = Get-LocalPath "tools\NuGetAgent\bin\$Configuration\nuget-agent.exe" -Resolve
 
         if ($Retail) {
             . $cmd --path $path --retail 2>&1
@@ -580,7 +582,7 @@ function Publish-Packages {
             . $cmd --path $path 2>&1
         }
     } catch {
-        Exit-Gracefully -ExitCode 1 "'NuGetHelper.exe' failed: $_"
+        Exit-Gracefully -ExitCode 1 "'nuget-agent.exe' failed: $_"
     }
 }
 

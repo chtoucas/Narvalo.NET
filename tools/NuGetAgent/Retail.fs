@@ -17,5 +17,5 @@ open System.Xml.Linq
 open NuGet
 
 let publishPackagesFrom path =
-    Console.WriteLine (printfn "RETAIL: %s" path)
+    Console.WriteLine (printfn "Publishing RETAIL packages from %s." path)
 
