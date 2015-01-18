@@ -18,32 +18,35 @@ open System.Xml.Linq
 
 open NuGet
 
-/// API Key
-let private apiKey = "XXX"
-
 /// Timeout in milliseconds.
+[<Literal>] 
 let private timeout = 120000
 
-let publishPackage (path: string) =
+let publishPackage path apiKey =
     let file = new FileInfo(path)
     let package = new OptimizedZipPackage(file.FullName)
 
-    Console.WriteLine (printfn "Publishing package %s" package.Id)
+    Console.WriteLine (printfn "Publishing package %s at version %s" package.Id (package.Version.ToString()))
+
+    let repository = PackageRepositoryFactory.Default.CreateRepository Constants.MyGetSource
+    let oldPackages = repository.FindPackagesById package.Id
+
+    let server = new PackageServer(Constants.MyGetApiSource, Constants.UserAgent)
+
+    for oldPackage in oldPackages do 
+        printfn "Deleting package %s" (oldPackage.Version.ToString())
+        //server.DeletePackage(apiKey, oldPackage.Id, oldPackage.Version.ToString())
     
-    let packageServer = new PackageServer(Constants.MyGetApiSource, Constants.UserAgent)
-    
-    //packageServer.PushPackage(apiKey, package, file.Length, timeout, true)
+    //server.PushPackage(apiKey, package, file.Length, timeout, true)
 
     ()
 
-let publishPackagesFrom (path: string) =
-    Console.WriteLine (printfn "Publishing EDGE packages from %s." path)
+let publishPackagesFrom packagesDir =
+    Console.WriteLine (printfn "Publishing EDGE packages from %s." packagesDir)
 
-    let files = Directory.GetFiles(path, "*.nupkg", SearchOption.TopDirectoryOnly)
+    let apiKey = "XXX"
 
-    for file in files do publishPackage file
+    let files = Directory.GetFiles(packagesDir, "*.nupkg", SearchOption.TopDirectoryOnly)
 
-//    let packageId = "Narvalo.Core.EDGE"
-//    let repository = PackageRepositoryFactory.Default.CreateRepository Constants.MyGetSource
-//    let packages = repository.FindPackagesById packageId
+    for file in files do publishPackage file apiKey
 

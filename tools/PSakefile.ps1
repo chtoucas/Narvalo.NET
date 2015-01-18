@@ -566,9 +566,9 @@ function ConvertTo-NuGetVerbosity {
 function Invoke-NuGetAgent {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)] [string] $Path,
+        [Parameter(Mandatory = $true, Position = 0)] [string] $Path,
 
-        [Parameter(Mandatory = $false)] [string] $Configuration = 'Release',
+        [Parameter(Mandatory = $false, Position = 1)] [string] $Configuration = 'Release',
 
         [switch] $Retail
     ) 

@@ -61,6 +61,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Constants.fs" />
     <Compile Include="CLI.fs" />
     <Compile Include="Edge.fs" />
@@ -71,7 +72,7 @@
     <None Include="nuget-agent.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Edge.fsx" />
+    <None Include="Scripts\Edge.fsx" />
     <None Include="Scripts\load-references.fsx" />
     <None Include="Scripts\load-project.fsx" />
   </ItemGroup>
