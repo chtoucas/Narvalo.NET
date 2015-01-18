@@ -59,7 +59,7 @@ Task FastBuild `
     -Description 'Fast build ''Foundations'' then run tests.' `
     -Depends _CI-InitializeVariables `
 {
-    MSBuild $Foundations $Opts $script:CIProps `
+    MSBuild $Foundations $Opts $CI_Props `
         '/t:Xunit', 
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -70,7 +70,7 @@ Task Build `
     -Description 'Build all projects.' `
     -Depends _CI-InitializeVariables `
 {
-    MSBuild $Everything $Opts $script:CIProps '/t:Build'
+    MSBuild $Everything $Opts $CI_Props '/t:Build'
 }
 
 Task FullBuild `
@@ -83,7 +83,7 @@ Task FullBuild `
     # - Build all projects
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests, including white-box tests
-    MSBuild $Everything $Opts $script:CIProps `
+    MSBuild $Everything $Opts $CI_Props `
         '/t:Build;PEVerify;Xunit',
         '/p:SourceAnalysisEnabled=true'
 }   
@@ -102,7 +102,7 @@ Task CodeAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CA `
 {
-    MSBuild $Everything $Opts $script:CIAnalysisProps `
+    MSBuild $Everything $Opts $CI_AnalysisProps `
         '/t:Build', 
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -114,7 +114,7 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
-    MSBuild $Foundations $Opts $script:CIAnalysisProps `
+    MSBuild $Foundations $Opts $CI_AnalysisProps `
         '/t:Build',
         '/p:Configuration=CodeContracts'
 } 
@@ -124,7 +124,7 @@ Task SecurityAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
-    MSBuild $Foundations $Opts $script:CIAnalysisProps `
+    MSBuild $Foundations $Opts $CI_AnalysisProps `
         '/t:SecAnnotate',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
@@ -140,7 +140,7 @@ Task _CI-InitializeVariables `
     # - Do not sign assemblies
     # - Do not skip the generation of the Code Contracts reference assembly
     # - Leak internals to enable all white-box tests.
-    $script:CIProps = `
+    $script:CI_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=false',
         "/p:Retail=$Retail",
@@ -150,7 +150,7 @@ Task _CI-InitializeVariables `
 
     # For static analysis, we hide internals, otherwise we might not truly 
     # analyze the public API.
-    $script:CIAnalysisProps = $script:CIProps, '/p:VisibleInternals=false'
+    $script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
 }
 
 # ------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ Task _CI-InitializeVariables `
 
 Task Package-All `
     -Description 'Package ''Foundations''.' `
-    -Depends Package-Core, Package-Mvp, Package-Miscs `
+    -Depends Package-Core, Package-Mvp, Package-Build `
     -Alias Pack
 
 Task Package-Core `
@@ -167,7 +167,7 @@ Task Package-Core `
     -Depends _Package-InitializeVariables, _Package-ValidateRetail `
     -Alias PackCore `
 {
-    MSBuild $Foundations $Opts $script:PackageTargets $script:PackageProps `
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
         '/p:Filter=_Core_' 
 }
 
@@ -176,7 +176,7 @@ Task Package-Mvp `
     -Depends _Package-InitializeVariables, _Package-ValidateRetail `
     -Alias PackMvp `
 {
-    MSBuild $Foundations $Opts $script:PackageTargets $script:PackageProps `
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
         '/p:Filter=_Mvp_' 
 }
 
@@ -185,7 +185,7 @@ Task Package-Build `
     -Depends _Package-InitializeVariables, _Package-ValidateRetail `
     -Alias PackBuild `
 {
-    MSBuild $Foundations $Opts $script:PackageTargets $script:PackageProps `
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
         '/p:Filter=_Build_'
 }
 
@@ -200,10 +200,10 @@ Task _Package-InitializeVariables `
     # - Sign assemblies
     # - Do not skip the generation of the Code Contracts reference assembly
     # - Unconditionally hide internals (implies no white-box testing)
-    $script:PackageProps = `
+    $script:Package_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',
-        "/p:GitCommitHash=$script:GitCommitHash",
+        "/p:GitCommitHash=$GitCommitHash",
         "/p:Retail=$Retail",
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=false',
@@ -214,14 +214,14 @@ Task _Package-InitializeVariables `
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests
     # - Package
-    $script:PackageTargets = '/t:Rebuild;PEVerify;Xunit;Package'
+    $script:Package_Targets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
 Task _Package-ValidateRetail `
     -Description 'Validate retail packaging tasks.' `
     -PreCondition { $Retail } `
 {
-    if ($script:GitCommitHash -eq '') {
+    if ($GitCommitHash -eq '') {
         Exit-Gracefully -ExitCode 1 `
             'When building retail packages, the git commit hash MUST not be empty.'
     }
@@ -242,7 +242,7 @@ Task Publish-Core `
     -RequiredVariables Retail `
     -Alias PushCore `
 {
-    Publish-Packages $script:PublishPackagesDirectory -Retail:$Retail
+    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task Publish-Mvp `
@@ -251,7 +251,7 @@ Task Publish-Mvp `
     -RequiredVariables Retail `
     -Alias PushMvp `
 {
-    Publish-Packages $script:PublishPackagesDirectory -Retail:$Retail
+    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task Publish-Build `
@@ -260,7 +260,7 @@ Task Publish-Build `
     -RequiredVariables Retail `
     -Alias PushBuild `
 {
-    Publish-Packages $script:PublishPackagesDirectory -Retail:$Retail
+    Publish-Packages $Publish_StagingDirectory -Retail:$Retail
 }
 
 Task _Publish-DependsOn `
@@ -271,13 +271,13 @@ Task _Publish-Clean `
     -Description 'Remove the staging directory for packages.' `
     -Depends _Publish-InitializeVariables `
 {
-    Remove-LocalItem -Path $script:PublishPackagesDirectory -Recurse
+    Remove-LocalItem -Path $Publish_StagingDirectory -Recurse
 }
 
 Task _Publish-InitializeVariables `
     -Description 'Initialize variables only used by the Publish-* tasks.' `
 {
-    $script:PublishPackagesDirectory = Get-LocalPath 'work\packages'
+    $script:Publish_StagingDirectory = Get-LocalPath 'work\packages'
 }
 
 # ------------------------------------------------------------------------------
@@ -289,24 +289,24 @@ Task NuGetHelper-Build `
     -Depends _NuGetHelper-InitializeVariables, _NuGetHelper-RestorePackages `
     -Alias NuGetHelper `
 {
-    MSBuild $script:NuGetHelperProject  $Opts '/p:Configuration=Release', '/t:Build'
+    MSBuild $NuGetHelper_Project  $Opts '/p:Configuration=Release', '/t:Build'
 }
 
 Task _NuGetHelper-RestorePackages `
     -Description 'Restore packages for the project NuGetHelper.' `
     -Depends _NuGetHelper-InitializeVariables, _Tools-InitializeVariables `
 {
-    Restore-Packages -Source $script:NuGetHelperPackagesConfig `
-        -PackagesDirectory $script:ToolsPackagesDirectory `
-        -ConfigFile $script:ToolsNuGetConfig `
+    Restore-Packages -Source $NuGetHelper_PackagesConfig `
+        -PackagesDirectory $Tools_PackagesDirectory `
+        -ConfigFile $Tools_NuGetConfig `
         -Verbosity $NuGetVerbosity
 }
 
 Task _NuGetHelper-InitializeVariables `
     -Description 'Initialize variables only used by the NuGetHelper-* tasks.' `
 {
-    $script:NuGetHelperProject        = Get-LocalPath 'tools\NuGetHelper\NuGetHelper.fsproj'
-    $script:NuGetHelperPackagesConfig = Get-LocalPath 'tools\NuGetHelper\packages.config'
+    $script:NuGetHelper_Project        = Get-LocalPath 'tools\NuGetHelper\NuGetHelper.fsproj'
+    $script:NuGetHelper_PackagesConfig = Get-LocalPath 'tools\NuGetHelper\packages.config'
 }
 
 # ------------------------------------------------------------------------------
@@ -322,16 +322,16 @@ Task _Edge-Rebuild `
     -Description 'Re-build the project Edge.' `
     -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
 {
-    MSBuild $script:EdgeProject $Opts '/p:Configuration=Release', '/t:Rebuild'
+    MSBuild $Edge_Project $Opts '/p:Configuration=Release', '/t:Rebuild'
 }
 
 Task _Edge-RestorePackages `
     -Description 'Restore packages for the project Edge.' `
     -Depends _Edge-InitializeVariables, _Tools-InitializeVariables `
 {
-    Restore-Packages -Source $script:EdgePackagesConfig `
-        -PackagesDirectory $script:ToolsPackagesDirectory `
-        -ConfigFile $script:ToolsNuGetConfig `
+    Restore-Packages -Source $Edge_PackagesConfig `
+        -PackagesDirectory $Tools_PackagesDirectory `
+        -ConfigFile $Tools_NuGetConfig `
         -Verbosity $NuGetVerbosity
 }
 
@@ -351,15 +351,15 @@ Task _Edge-Update `
     $nuget = Get-NuGet -Install
 
     try {
-        . $nuget update $script:EdgePackagesConfig `
+        . $nuget update $Edge_PackagesConfig `
             -Source "https://www.nuget.org/api/v2/" `
-            -RepositoryPath $script:ToolsPackagesDirectory `
+            -RepositoryPath $Tools_PackagesDirectory `
             -Verbosity $NuGetVerbosity
 
-        . $nuget update $script:EdgePackagesConfig `
+        . $nuget update $Edge_PackagesConfig `
             -Source "http://narvalo.org/myget/nuget/" `
             -Prerelease `
-            -RepositoryPath $script:ToolsPackagesDirectory `
+            -RepositoryPath $Tools_PackagesDirectory `
             -Verbosity $NuGetVerbosity
     } catch {
         Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
@@ -369,8 +369,8 @@ Task _Edge-Update `
 Task _Edge-InitializeVariables `
     -Description 'Initialize variables only used by the Edge-* tasks.' `
 {
-    $script:EdgeProject        = Get-LocalPath 'tools\Edge\Edge.csproj'
-    $script:EdgePackagesConfig = Get-LocalPath 'tools\Edge\packages.config'
+    $script:Edge_Project        = Get-LocalPath 'tools\Edge\Edge.csproj'
+    $script:Edge_PackagesConfig = Get-LocalPath 'tools\Edge\packages.config'
 }
 
 # ------------------------------------------------------------------------------
@@ -382,7 +382,7 @@ Task MyGet-Package `
     -Depends _MyGet-InitializeVariables, _MyGet-DeleteStagingDirectory, _MyGet-Publish, _MyGet-Zip `
     -Alias MyGet `
 {
-    Write-Host "A ready to publish zip file for MyGet may be found here: '$script:MyGetZipFile'." -ForegroundColor Green
+    Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGet_ZipFile'." -ForegroundColor Green
 }
        
 Task _MyGet-Publish `
@@ -391,7 +391,7 @@ Task _MyGet-Publish `
 {
     # Force the value of "VisualStudioVersion", otherwise MSBuild won't publish the project on build.
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
-    MSBuild $script:MyGetProject $Opts `
+    MSBuild $MyGet_Project $Opts `
         '/t:Rebuild',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
@@ -400,9 +400,9 @@ Task _MyGet-RestorePackages `
     -Description 'Restore packages for the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _Tools-InitializeVariables `
 {
-    Restore-Packages -Source $script:MyGetPackagesConfig `
-        -PackagesDirectory $script:ToolsPackagesDirectory `
-        -ConfigFile $script:ToolsNuGetConfig `
+    Restore-Packages -Source $MyGet_PackagesConfig `
+        -PackagesDirectory $Tools_PackagesDirectory `
+        -ConfigFile $Tools_NuGetConfig `
         -Verbosity $NuGetVerbosity
 }
 
@@ -410,28 +410,28 @@ Task _MyGet-DeleteStagingDirectory `
     -Description 'Remove the directory ''work\myget''.' `
     -Depends _MyGet-InitializeVariables `
 {
-    Remove-LocalItem -Path $script:MyGetStagingDirectory -Recurse
+    Remove-LocalItem -Path $MyGet_StagingDirectory -Recurse
 }
 
 Task _MyGet-DeleteZipFile `
     -Description 'Delete the package for MyGet.' `
     -Depends _MyGet-InitializeVariables `
 {
-    Remove-LocalItem -Path $script:MyGetZipFile
+    Remove-LocalItem -Path $MyGet_ZipFile
 }
 
 Task _MyGet-Zip `
     -Description 'Zip the publication artefacts for the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _MyGet-DeleteZipFile `
     -PreAction {
-        if (!(Test-Path $script:MyGetStagingDirectory)) {
+        if (!(Test-Path $MyGet_StagingDirectory)) {
             # We do not add a dependency on _MyGet-Publish so that we can run this task alone.
             # MyGet-Package provides the stronger version. 
             Exit-Gracefully -ExitCode 1 `
                 'Unabled to create the Zip package: did you forgot to call the _MyGet-Publish task?'
         }
     } -Action {
-        . (Get-7Zip -Install) -mx9 a $script:MyGetZipFile $script:MyGetStagingDirectory | Out-Null
+        . (Get-7Zip -Install) -mx9 a $MyGet_ZipFile $MyGet_StagingDirectory | Out-Null
 
         if (!$?) {
             Exit-Gracefully -ExitCode 1 'Unabled to create the Zip package.'
@@ -441,10 +441,10 @@ Task _MyGet-Zip `
 Task _MyGet-InitializeVariables `
     -Description 'Initialize variables only used by the MyGet-* tasks.' `
 {
-    $script:MyGetProject          = Get-LocalPath 'tools\MyGet\MyGet.csproj'
-    $script:MyGetPackagesConfig   = Get-LocalPath 'tools\MyGet\packages.config'
-    $script:MyGetStagingDirectory = Get-LocalPath 'work\myget'
-    $script:MyGetZipFile          = Get-LocalPath 'work\myget.7z'
+    $script:MyGet_Project          = Get-LocalPath 'tools\MyGet\MyGet.csproj'
+    $script:MyGet_PackagesConfig   = Get-LocalPath 'tools\MyGet\packages.config'
+    $script:MyGet_StagingDirectory = Get-LocalPath 'work\myget'
+    $script:MyGet_ZipFile          = Get-LocalPath 'work\myget.7z'
 }
 
 # ------------------------------------------------------------------------------
@@ -526,8 +526,8 @@ Task _Initialize-GitCommitHash `
 Task _Tools-InitializeVariables `
     -Description 'Initialize variables for the tooling projects.' `
 {
-    $script:ToolsPackagesDirectory = Get-LocalPath 'tools\packages'
-    $script:ToolsNuGetConfig       = Get-LocalPath 'tools\.nuget\NuGet.Config'
+    $script:Tools_PackagesDirectory = Get-LocalPath 'tools\packages'
+    $script:Tools_NuGetConfig       = Get-LocalPath 'tools\.nuget\NuGet.Config'
 }
 
 # ------------------------------------------------------------------------------
@@ -566,23 +566,18 @@ function ConvertTo-NuGetVerbosity {
 function Publish-Packages {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)] [string] $StagingDirectory,
+        [Parameter(Mandatory = $true)] [string] $Path,
 
         [switch] $Retail
     ) 
 
-    $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe'
-
-    if (!(Test-Path $cmd)) {
-        Exit-Gracefully -ExitCode 1 `
-            'Before calling this function, make sure to build the project NuGetHelper in Release configuration.'
-    }
-
     try {
+        $cmd = Get-LocalPath 'tools\NuGetHelper\bin\Release\NuGetHelper.exe' -Resolve
+
         if ($Retail) {
-            . $cmd --directory $stagingDirectory --retail 2>&1
+            . $cmd --path $path --retail 2>&1
         } else {
-            . $cmd --directory $stagingDirectory 2>&1
+            . $cmd --path $path 2>&1
         }
     } catch {
         Exit-Gracefully -ExitCode 1 "'NuGetHelper.exe' failed: $_"
