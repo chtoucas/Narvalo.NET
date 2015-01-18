@@ -12,9 +12,9 @@
 
     <NuFiles>
       <![CDATA[
-<file src="Narvalo.Core.dll" target="lib\net45\" />
-<file src="Narvalo.Core.pdb" target="lib\net45\" />
-<file src="Narvalo.Core.xml" target="lib\net45\" />
+<file src="Narvalo.Mvp.Web.dll" target="lib\net45\" />
+<file src="Narvalo.Mvp.Web.pdb" target="lib\net45\" />
+<file src="Narvalo.Mvp.Web.xml" target="lib\net45\" />
       ]]>
     </NuFiles>
   </PropertyGroup>
