@@ -6,10 +6,16 @@ open System.Reflection
 open System.Runtime.InteropServices
 
 [<assembly: AssemblyTitle("NuGet Agent.")>]
-[<assembly: AssemblyDescription("NuGet.Core wrapper.")>]
+[<assembly: AssemblyDescription("Facade for the assembly NuGet.Core.")>]
 [<assembly: AssemblyProduct("Narvalo.Org Supporting Tools.")>]
 [<assembly: AssemblyCompany("Narvalo.Org - http://narvalo.org")>]
 [<assembly: AssemblyCopyright("Copyright © 2015")>]
+
+[<assembly: AssemblyConfiguration("")>]
+[<assembly: AssemblyTrademark("")>]
+[<assembly: AssemblyCulture("")>]
+
+[<assembly: ComVisible(false)>]
 
 [<assembly: Guid("bcc3800c-6a75-4a9f-96df-91083e834591")>]
 

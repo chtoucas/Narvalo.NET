@@ -191,7 +191,7 @@ Task Package-Build `
 
 Task _Package-InitializeVariables `
     -Description 'Initialize variables only used by the Package-* tasks.' `
-    -Depends _Initialize-GitCommitHash, _Package-ValidateRetailCondition `
+    -Depends _Initialize-GitCommitHash, _Package-CheckRequirementsForRetailPackages `
     -RequiredVariables Retail `
 {
     # Packaging properties:
@@ -217,8 +217,8 @@ Task _Package-InitializeVariables `
     $script:Package_Targets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
-Task _Package-ValidateRetailCondition `
-    -Description 'Validate retail packaging tasks.' `
+Task _Package-CheckRequirementsForRetailPackages `
+    -Description 'Check conditions are met for creating retail packages.' `
     -PreCondition { $Retail } `
 {
     if ($GitCommitHash -eq '') {

@@ -2,9 +2,9 @@
 
 #load @"load-project.fsx"
 
-printfn "Publishing packages to our own private NuGet server."
+printfn "Publishing packages to the official NuGet server."
     
-let facade = new MyGetFacade(ApiKeysContainer.Load) :> INuGetFacade
+let facade = new NuGetFacade(ApiKeysContainer.Load) :> INuGetFacade
 let packages = facade.GetPackagesToBePublished <| __SOURCE_DIRECTORY__ + @"\..\..\..\work\packages"
-
+    
 for package in packages do facade.PublishPackage package

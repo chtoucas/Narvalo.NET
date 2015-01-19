@@ -63,16 +63,15 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Constants.fs" />
-    <Compile Include="CLI.fs" />
-    <Compile Include="Edge.fs" />
-    <Compile Include="Retail.fs" />
+    <Compile Include="Core.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
     <None Include="nuget-agent.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\Edge.fsx" />
+    <None Include="Scripts\edge.fsx" />
+    <None Include="Scripts\retail.fsx" />
     <None Include="Scripts\load-references.fsx" />
     <None Include="Scripts\load-project.fsx" />
   </ItemGroup>
