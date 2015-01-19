@@ -2,5 +2,6 @@
 #load @"load-references.fsx"
 #load @"..\AssemblyInfo.fs"
       @"..\Constants.fs"
-      @"..\Core.fs"
+      @"..\Helpers.fs"
+      @"..\Publisher.fs"
       @"..\Program.fs"

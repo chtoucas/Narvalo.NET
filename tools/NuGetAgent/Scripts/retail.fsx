@@ -2,9 +2,11 @@
 
 #load @"load-project.fsx"
 
+open NuGetAgent
+
 printfn "Publishing packages to the official NuGet server."
     
-let facade = new NuGetFacade(ApiKeysContainer.Load) :> INuGetFacade
-let packages = facade.GetPackagesToBePublished <| __SOURCE_DIRECTORY__ + @"\..\..\..\work\packages"
+let publisher = Publisher.create true
+let packages = publisher.FindPackagesToPublish <| __SOURCE_DIRECTORY__ + @"\..\..\..\work\packages"
     
-for package in packages do facade.PublishPackage package
+for package in packages do publisher.PublishPackage package
