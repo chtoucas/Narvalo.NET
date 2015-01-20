@@ -23,15 +23,15 @@ module Program =
             let parser = UnionArgParser.Create<ParserTemplate>()
             let result = parser.ParseCommandLine(args, new ProcessExiter())
 
-            let retail = result.Contains <@ Retail @>
             let path   = result.GetResult <@ Path @>
+            let retail = result.Contains <@ Retail @>
 
-            (retail, path)
+            (path, retail)
 
     [<EntryPoint>]
     let main args = 
-        let retail, path = Args.parse args
+        let path, retail = Args.parse args
 
-        Publishers.Publisher.Create(retail).PublishPackages path
+        Publishers.Publisher.Create(retail).PublishPackagesFrom path
 
         0

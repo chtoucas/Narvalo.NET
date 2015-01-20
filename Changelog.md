@@ -1,6 +1,7 @@
 ChangeLog
 =========
-     
+                                   
+- (2015/01/14) _Enhancement:_ Created a script to push packages to NuGet (or MyGet).
 - (2015/01/14) _Bugfix:_ In non-retail mode, when resolving project references, 
   we should not include the prerelease label otherwise later on nuget won't be
   able to resolve the dependency.       

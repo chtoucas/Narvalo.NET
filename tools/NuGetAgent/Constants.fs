@@ -11,13 +11,21 @@ let ApiKeysSectionName = "apikeys"
 [<Literal>]
 let EdgePackageSuffix = ".EDGE"
 
-/// MyGet source for write NuGet commands like 'delete' or 'push'.
+/// MyGet's config key.
 [<Literal>] 
-let MyGetApiSource = "http://narvalo.org/myget/"
+let MyGetConfigKey = "http://narvalo.org/myget/"
 
-/// MyGet source for read-only NuGet commands like 'list' or 'update'.
+/// MyGet repository source.
 [<Literal>] 
-let MyGetSource = "http://narvalo.org/myget/nuget/"
+let MyGetRepositorySource = "http://narvalo.org/myget/nuget/"
+
+/// MyGet server source.
+[<Literal>] 
+let MyGetServerSource = "http://narvalo.org/myget/"
+
+/// Official NuGet's config key.
+[<Literal>] 
+let NuGetConfigKey = "https://www.nuget.org"
 
 /// Official NuGet source.
 [<Literal>] 

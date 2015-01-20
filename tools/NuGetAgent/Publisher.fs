@@ -46,9 +46,9 @@ module Publishers =
         let _apiKey = apiKeysContainer.MyGetApiKey
 
         /// MyGet server.
-        let _server = new PackageServer(Constants.MyGetApiSource, Constants.UserAgent)
+        let _server = new PackageServer(Constants.MyGetServerSource, Constants.UserAgent)
         /// MyGet repository.
-        let _repository = PackageRepositoryFactory.Default.CreateRepository(Constants.MyGetSource)
+        let _repository = PackageRepositoryFactory.Default.CreateRepository(Constants.MyGetRepositorySource)
         /// Disable buffering?
         let _disableBuffering = true
         /// Timeout in milliseconds (1 minute).
@@ -61,9 +61,9 @@ module Publishers =
                     |> List.ofSeq
                     |> List.partition(fun p -> p.Version < package.Version)
 
-                // Delete obsolete packages.
                 match purge with
                 | Some(true) | None ->
+                    // Delete obsolete packages.
                     obsoletePackages
                     |> List.iter(fun p -> this._DeletePackage(p.Id, p.Version.ToString()))
                 | Some(false) -> ()
@@ -73,13 +73,13 @@ module Publishers =
                 then printfn "Skipping... a more recent version already exists."
                 else this._PushPackage(package)
           
-        /// Delete a package.
+        /// Delete a package from the remote server.
         member private this._DeletePackage(id, version) = 
             printfn "Deleting version %s" version
 
             _server.DeletePackage(_apiKey, id, version)
           
-        /// Delete a package.
+        /// Push a package to the remote server.
         member private this._PushPackage(package:IPackage) = 
             printfn "Publishing package..."
 
@@ -101,17 +101,26 @@ module Publishers =
 
         interface IPublisher with
             member this.PublishPackage(package:IPackage) = 
-                // - Find current public version of packages
-                // - Filter already published packages
-                // - Publish packages
+                let remotePackage = _repository.FindPackage(package.Id, package.Version)
 
-                ()
+                if remotePackage <> null
+                then printfn "Skipping... the package already exists on the server."
+                else this._PushPackage(package)
+          
+        /// Push a package to the remote server.
+        member private this._PushPackage(package:IPackage) = 
+            printfn "Pushing package..."
+
+            _server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
 
     let publishPackages (publisher:IPublisher) packages =
-        packages 
-        |> Seq.iter(fun (p:IPackage) -> 
-            printfn "> Processing package %s v%O" p.Id p.Version
-            publisher.PublishPackage p)
+        if Seq.isEmpty packages 
+        then printfn "No packages found for publication."
+        else
+            packages 
+            |> Seq.iter(fun (p:IPackage) -> 
+                printfn "> Processing package %s v%O" p.Id p.Version
+                publisher.PublishPackage p)
     
     type Publisher = 
         | Retail of bool * IPublisher 
@@ -125,15 +134,17 @@ module Publishers =
                 // For retail packages, the default behaviour is to publish them
                 // to the official NuGet server.
                 match official with
-                | Some(true) | None -> Retail(true, new PublisherToNuGet(container))
+                | None
+                | Some(true)  -> Retail(true, new PublisherToNuGet(container))
                 | Some(false) -> Retail(false, new PublisherToMyGet(container))
             else
                 // For edge packages, we only allow publication to our own private NuGet server.
                 match official with
-                | Some(false) | None -> Edge(new PublisherToMyGet(container))
-                | Some(true) -> failwith "You CAN NOT publish edge packages to the official NuGet server."
+                | None
+                | Some(false) -> Edge(new PublisherToMyGet(container))
+                | Some(true)  -> failwith "You CAN NOT publish edge packages to the official NuGet server."
 
-        member this.PublishPackages path =
+        member this.PublishPackagesFrom path =
             match this with
 
             | Retail(official, inner) -> 

@@ -18,11 +18,11 @@ type private MachineWideSettings(settings:IEnumerable<Settings>) =
             with get() = _settings
 
 /// Read the API Key from the settings.
-let private readApiKey (settings:ISettings) (source:string) =
-    let apiKey = settings.GetDecryptedValue(Constants.ApiKeysSectionName, source)
+let private readApiKey (settings:ISettings) (key:string) =
+    let apiKey = settings.GetDecryptedValue(Constants.ApiKeysSectionName, key)
 
     if String.IsNullOrWhiteSpace(apiKey) 
-    then failwithf "No API key could be found for the source: '%s'." source
+    then failwithf "No API key could be found for the source: '%s'." key
     else apiKey
 
 /// Load the NuGet settings.
@@ -32,6 +32,7 @@ let loadNuGetSettings =
         new MachineWideSettings(
             NuGet.Settings.LoadMachineWideSettings(new PhysicalFileSystem(baseDirectory)))
 
+    // Personal NuGet.config can be found in %APPDATA%\Roaming\NuGet\NuGet.config
     NuGet.Settings.LoadDefaultSettings(
         new PhysicalFileSystem(Directory.GetCurrentDirectory()), 
         configFileName=null, 
@@ -39,9 +40,14 @@ let loadNuGetSettings =
 
 /// Container for the various NuGet API keys.
 type ApiKeysContainer(settings:ISettings) =
-    let _myGetApiKey = lazy( readApiKey settings Constants.MyGetApiSource )
-    let _nuGetApiKey = lazy( readApiKey settings Constants.NuGetSource )
+    let _myGetApiKey = lazy( readApiKey settings Constants.MyGetConfigKey )
+    let _nuGetApiKey = lazy( readApiKey settings Constants.NuGetConfigKey )
 
     member this.MyGetApiKey with get() = _myGetApiKey.Value
     member this.NuGetApiKey with get() = _nuGetApiKey.Value
         
+/// Combines two path strings using Path.Combine. Borrowed from FAKE.
+let inline combinePaths path1 (path2 : string) = Path.Combine(path1, path2.TrimStart [| '\\'; '/' |])
+
+/// Combines two path strings using Path.Combine. Borrowed from FAKE.
+let inline (+/) path1 path2 = combinePaths path1 path2

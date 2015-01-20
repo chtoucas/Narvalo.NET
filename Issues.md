@@ -38,6 +38,7 @@ MSBuild files:
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
   in Narvalo.Common.targets are disabled.
+- Prevent creation of retail packages if there are uncommited changes.
 
 PowerShell
 - Analyze logs.
@@ -61,9 +62,6 @@ Not yet planned
 Build Automation:
 - Enhancement: PSake CI target should build and test all possible configurations,
   currently Debug|Release, AnyCPU, with or without visible internals.
-- Enhancement: Script to push packages to NuGet (or MyGet) with extensive checks.
-  For instance, we should not try to publish a version already available on NuGet,
-  check the dependencies tree. Add package to Edge and build.
 - Enhancement: Enable T4-regeneration outside VS since, for us, it won't work
   when building from the command-line.
 - Enhancement: Start to use Git tags.
