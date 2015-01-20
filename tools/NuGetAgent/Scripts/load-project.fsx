@@ -3,5 +3,5 @@
 #load @"..\AssemblyInfo.fs"
       @"..\Constants.fs"
       @"..\Helpers.fs"
-      @"..\Publisher.fs"
+      @"..\Publishers.fs"
       @"..\Program.fs"

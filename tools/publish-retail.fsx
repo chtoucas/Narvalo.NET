@@ -4,5 +4,5 @@
 
 open NuGetAgent
 
-Publishers.Publisher.Create(retail=true).PublishPackagesFrom
+Publishers.Processor.Create(retail=true).PublishPackagesFrom
 <| __SOURCE_DIRECTORY__ +/ @"..\work\packages"

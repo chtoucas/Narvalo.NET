@@ -409,7 +409,7 @@ Task _Edge-RestorePackages `
 }
 
 Task _Edge-Update `
-    -Description 'Update NuGet packages for the solution Edge.' `
+    -Description 'Safely update NuGet packages for the solution Edge.' `
     -Depends _Edge-InitializeVariables `
 {
     $nuget = Get-NuGet -Install
@@ -459,7 +459,7 @@ Task _Retail-RestorePackages `
 }
 
 Task _Retail-Update `
-    -Description 'Update NuGet packages for the solution Retail.' `
+    -Description 'Safely update NuGet packages for the solution Retail.' `
     -Depends _Retail-InitializeVariables `
 {
     $nuget = Get-NuGet -Install

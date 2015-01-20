@@ -139,6 +139,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts - FSharp", "Scripts
 		publish-retail.fsx = publish-retail.fsx
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Prose", "Prose\Prose.fsproj", "{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{702370E8-516C-4AE4-8913-CDB198070812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

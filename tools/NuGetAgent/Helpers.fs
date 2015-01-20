@@ -9,8 +9,14 @@ open System.IO
 
 open NuGet
 
+/// Combines two path strings using Path.Combine. Borrowed from FAKE.
+let inline combinePaths path1 (path2 : string) = Path.Combine(path1, path2.TrimStart [| '\\'; '/' |])
+
+/// Combines two path strings using Path.Combine. Borrowed from FAKE.
+let inline (+/) path1 path2 = combinePaths path1 path2
+
 /// Machine-wide settings for NuGet.
-type private MachineWideSettings(settings:IEnumerable<Settings>) =
+type MachineWideSettings(settings:IEnumerable<Settings>) =
     let _settings = settings
 
     interface IMachineWideSettings with
@@ -18,7 +24,7 @@ type private MachineWideSettings(settings:IEnumerable<Settings>) =
             with get() = _settings
 
 /// Read the API Key from the settings.
-let private readApiKey (settings:ISettings) (key:string) =
+let readApiKey (settings:ISettings) (key:string) =
     let apiKey = settings.GetDecryptedValue(Constants.ApiKeysSectionName, key)
 
     if String.IsNullOrWhiteSpace(apiKey) 
@@ -45,9 +51,3 @@ type ApiKeysContainer(settings:ISettings) =
 
     member this.MyGetApiKey with get() = _myGetApiKey.Value
     member this.NuGetApiKey with get() = _nuGetApiKey.Value
-        
-/// Combines two path strings using Path.Combine. Borrowed from FAKE.
-let inline combinePaths path1 (path2 : string) = Path.Combine(path1, path2.TrimStart [| '\\'; '/' |])
-
-/// Combines two path strings using Path.Combine. Borrowed from FAKE.
-let inline (+/) path1 path2 = combinePaths path1 path2
