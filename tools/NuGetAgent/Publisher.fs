@@ -9,7 +9,7 @@ open System.Linq
 open NuGet
 
 [<RequireQualifiedAccess>]
-module Publisher =
+module Publishers =
     /// Read-Only package repository, copied from NuGet.Common
     type private ReadOnlyPackageRepository(packages:IEnumerable<IPackage>) = 
         inherit PackageRepositoryBase()
@@ -19,61 +19,43 @@ module Publisher =
         override this.Source = null
         override this.SupportsPrereleasePackages = true
         override this.GetPackages() = _packages.AsQueryable()
-    
-    /// Get the list of packages to be published, sorted by dependency order.
-    /// If retail is true, only include retail packages.
-    /// If retail is false, only include edge packages.
-    let private getPackagesToPublish path retail =
+         
+    /// Find the list of the latest packages located at path, sorted by dependency order.
+    let findLatestPackages path filter =
         let repository = new LocalPackageRepository(path, enableCaching=false)
 
         // Find packages, keeping only retail or edge packages.
-        let packages = 
-            repository.GetPackages() 
-            |> Seq.filter(fun p ->
-                let isEdge = p.Id.EndsWith(Constants.EdgePackageSuffix)
-                if retail then not(isEdge) else isEdge)
+        let packages = repository.GetPackages() |> Seq.filter(filter)
 
         // Collapse the list of packages, keeping only the latest version.
         let uniqPackages = packages.AsCollapsed()
 
         // Sort these packages by the dependency order.
-        let sorter = new PackageSorter(targetFramework=null);
+        let sorter = new PackageSorter(targetFramework=null)
     
         sorter.GetPackagesByDependencyOrder(new ReadOnlyPackageRepository(uniqPackages))
 
     /// Publisher interface.
     type IPublisher =
-        /// Get the list of packages to be published, sorted by dependency order.
-        abstract member FindPackagesToPublish: path:string -> IEnumerable<IPackage>
-
         /// Publish a package.
         abstract member PublishPackage: package:IPackage -> unit
 
-    /// Publisher for edge packages.
-    type PublisherForEdgePackages(apiKeysContainer:ApiKeysContainer, ?purge, ?verbose) =
+    /// Publisher to our own private NuGet server.
+    type PublisherToMyGet(apiKeysContainer:ApiKeysContainer, ?purge) =
         /// API Key for the MyGet server.
         let _apiKey = apiKeysContainer.MyGetApiKey
-        /// Be verbose?
-        let _verbose = defaultArg verbose true 
 
         /// MyGet server.
         let _server = new PackageServer(Constants.MyGetApiSource, Constants.UserAgent)
         /// MyGet repository.
-        let _repository = PackageRepositoryFactory.Default.CreateRepository Constants.MyGetSource
+        let _repository = PackageRepositoryFactory.Default.CreateRepository(Constants.MyGetSource)
         /// Disable buffering?
         let _disableBuffering = true
         /// Timeout in milliseconds (1 minute).
         let _timeout = 60000
     
         interface IPublisher with
-            member this.FindPackagesToPublish(path:string) = 
-                getPackagesToPublish path false
-
-            /// Publish a package.
             member this.PublishPackage(package:IPackage) = 
-                if _verbose 
-                then printfn "> Processing package %s v%s" <| package.Id <| package.Version.ToString()
-
                 let obsoletePackages, newerPackages = 
                     _repository.FindPackagesById package.Id 
                     |> List.ofSeq
@@ -93,55 +75,74 @@ module Publisher =
           
         /// Delete a package.
         member private this._DeletePackage(id, version) = 
-            if _verbose then printfn "Deleting version %s" version
+            printfn "Deleting version %s" version
 
-            _server.DeletePackage(_apiKey, id, version)
+            //_server.DeletePackage(_apiKey, id, version)
           
         /// Delete a package.
         member private this._PushPackage(package:IPackage) = 
-            if _verbose then 
-                printfn "Publishing package..."
+            printfn "Publishing package..."
 
-            _server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
+            //_server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
         
-    /// Publisher for retail packages.
-    type PublisherForRetailPackages(apiKeysContainer:ApiKeysContainer, ?verbose) =
+    /// Publisher to the official NuGet server.
+    type PublisherToNuGet(apiKeysContainer:ApiKeysContainer) =
         /// API Key for the MyGet server.
         let _apiKey = apiKeysContainer.NuGetApiKey
-        /// Be verbose?
-        let _verbose = defaultArg verbose true 
        
         /// MyGet server.
         let _server = new PackageServer(Constants.NuGetSource, Constants.UserAgent)
         /// MyGet repository.
-        let _repository = PackageRepositoryFactory.Default.CreateRepository Constants.NuGetSource
+        let _repository = PackageRepositoryFactory.Default.CreateRepository(Constants.NuGetSource)
         /// Disable buffering?
         let _disableBuffering = true
         /// Timeout in milliseconds (1 minute).
         let _timeout = 60000
 
         interface IPublisher with
-            member this.FindPackagesToPublish(path:string) = 
-                getPackagesToPublish path true
-
-            /// Publish a package.
             member this.PublishPackage(package:IPackage) = 
-                if _verbose 
-                then printfn "> Processing package %s v%s" <| package.Id <| package.Version.ToString()
-                
                 // - Find current public version of packages
-                // - Filter already public packages
-                // - Check the dependency tree
-                // - Publish packages in the reverse order of the dependency tree
+                // - Filter already published packages
+                // - Publish packages
 
                 ()
 
-
-    let create retail =
-        let settings = loadNuGetSettings
-        let container = new ApiKeysContainer(settings)
-
-        if retail 
-        then new PublisherForRetailPackages(container) :> IPublisher
-        else new PublisherForEdgePackages(container) :> IPublisher
+    let publishPackages (publisher:IPublisher) packages =
+        packages 
+        |> Seq.iter(fun (p:IPackage) -> 
+            printfn "> Processing package %s v%O" p.Id p.Version
+            publisher.PublishPackage p)
     
+    type Publisher = 
+        | Retail of bool * IPublisher 
+        | Edge   of IPublisher
+    with 
+        static member Create(retail, ?official) = 
+            let settings = loadNuGetSettings
+            let container = new ApiKeysContainer(settings)
+
+            if retail then
+                match official with
+                | Some(true) | None -> Retail(true, new PublisherToNuGet(container))
+                | Some(false) -> Retail(false, new PublisherToMyGet(container))
+            else
+                match official with
+                | Some(false) | None -> Edge(new PublisherToMyGet(container))
+                | Some(true) -> failwith "You CAN NOT publish edge packages to the official NuGet server."
+
+        member this.PublishPackages path =
+            match this with
+
+            | Retail(official, inner) -> 
+                printfn <| if official then "Publishing retail packages to the official NuGet server."
+                           else "Publishing retail packages to our own private NuGet server."
+
+                findLatestPackages path (fun p -> not(p.Id.EndsWith(Constants.EdgePackageSuffix)))
+                |> (publishPackages <| inner)
+
+            | Edge(inner) -> 
+                printfn "Publishing edge packages to our own private NuGet server."
+
+                findLatestPackages path (fun p -> p.Id.EndsWith(Constants.EdgePackageSuffix))
+                |> (publishPackages <| inner)
+      

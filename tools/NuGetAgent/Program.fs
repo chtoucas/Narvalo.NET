@@ -32,12 +32,6 @@ module Program =
     let main args = 
         let retail, path = Args.parse args
 
-        printfn (if retail 
-                then "Publishing packages to the official NuGet server."
-                else "Publishing packages to our own private NuGet server.")
-
-        let publisher = Publisher.create retail
-
-        publisher.FindPackagesToPublish path |> Seq.iter(fun p -> publisher.PublishPackage p)
+        Publishers.Publisher.Create(retail).PublishPackages path
 
         0

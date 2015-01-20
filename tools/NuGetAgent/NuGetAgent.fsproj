@@ -71,8 +71,8 @@
     <None Include="nuget-agent.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\edge.fsx" />
-    <None Include="Scripts\retail.fsx" />
+    <None Include="Scripts\publish-retail.fsx" />
+    <None Include="Scripts\publish-edge.fsx" />
     <None Include="Scripts\load-references.fsx" />
     <None Include="Scripts\load-project.fsx" />
   </ItemGroup>

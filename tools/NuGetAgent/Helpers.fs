@@ -18,7 +18,7 @@ type private MachineWideSettings(settings:IEnumerable<Settings>) =
             with get() = _settings
 
 /// Read the API Key from the settings.
-let private readApiKey(settings:ISettings, source:string) =
+let private readApiKey (settings:ISettings) (source:string) =
     let apiKey = settings.GetDecryptedValue(Constants.ApiKeysSectionName, source)
 
     if String.IsNullOrWhiteSpace(apiKey) 
@@ -39,8 +39,8 @@ let loadNuGetSettings =
 
 /// Container for the various NuGet API keys.
 type ApiKeysContainer(settings:ISettings) =
-    let _myGetApiKey = lazy( readApiKey(settings, Constants.MyGetApiSource) )
-    let _nuGetApiKey = lazy( readApiKey(settings, Constants.NuGetSource) )
+    let _myGetApiKey = lazy( readApiKey settings Constants.MyGetApiSource )
+    let _nuGetApiKey = lazy( readApiKey settings Constants.NuGetSource )
 
     member this.MyGetApiKey with get() = _myGetApiKey.Value
     member this.NuGetApiKey with get() = _nuGetApiKey.Value
