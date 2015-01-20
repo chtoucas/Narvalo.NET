@@ -77,13 +77,13 @@ module Publishers =
         member private this._DeletePackage(id, version) = 
             printfn "Deleting version %s" version
 
-            //_server.DeletePackage(_apiKey, id, version)
+            _server.DeletePackage(_apiKey, id, version)
           
         /// Delete a package.
         member private this._PushPackage(package:IPackage) = 
             printfn "Publishing package..."
 
-            //_server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
+            _server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
         
     /// Publisher to the official NuGet server.
     type PublisherToNuGet(apiKeysContainer:ApiKeysContainer) =
@@ -122,10 +122,13 @@ module Publishers =
             let container = new ApiKeysContainer(settings)
 
             if retail then
+                // For retail packages, the default behaviour is to publish them
+                // to the official NuGet server.
                 match official with
                 | Some(true) | None -> Retail(true, new PublisherToNuGet(container))
                 | Some(false) -> Retail(false, new PublisherToMyGet(container))
             else
+                // For edge packages, we only allow publication to our own private NuGet server.
                 match official with
                 | Some(false) | None -> Edge(new PublisherToMyGet(container))
                 | Some(true) -> failwith "You CAN NOT publish edge packages to the official NuGet server."
