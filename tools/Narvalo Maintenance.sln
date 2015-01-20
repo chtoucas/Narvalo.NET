@@ -115,8 +115,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "Previe
 		PreviewCommonMark\index.html = PreviewCommonMark\index.html
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Edge", "Edge\Edge.csproj", "{DDBD1800-0314-4A86-BF22-A7C84F473895}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FCB688F3-8203-49B5-B2F0-40B6E28315A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.ProjectAutomation", "Narvalo.ProjectAutomation", "{689BB57E-CEC1-496E-9294-ADE97481280A}"
@@ -151,10 +149,6 @@ Global
 		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48ACFCCA-45CF-40FD-95C4-00830CF9DD2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDBD1800-0314-4A86-BF22-A7C84F473895}.Release|Any CPU.Build.0 = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Release|Any CPU.ActiveCfg = Release|Any CPU

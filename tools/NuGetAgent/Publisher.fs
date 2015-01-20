@@ -62,7 +62,8 @@ module Publishers =
                     |> List.partition(fun p -> p.Version < package.Version)
 
                 match purge with
-                | Some(true) | None ->
+                | None 
+                | Some(true) ->
                     // Delete obsolete packages.
                     obsoletePackages
                     |> List.iter(fun p -> this._DeletePackage(p.Id, p.Version.ToString()))
@@ -113,7 +114,7 @@ module Publishers =
 
             _server.PushPackage(_apiKey, package, package.GetStream().Length, _timeout, _disableBuffering)
 
-    let publishPackages (publisher:IPublisher) packages =
+    let private publishPackages (publisher:IPublisher) packages =
         if Seq.isEmpty packages 
         then printfn "No packages found for publication."
         else

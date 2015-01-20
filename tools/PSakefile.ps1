@@ -310,70 +310,6 @@ Task _NuGetAgent-InitializeVariables `
 }
 
 # ------------------------------------------------------------------------------
-# Edge project
-# ------------------------------------------------------------------------------
-
-Task Edge-FullBuild `
-    -Description 'Update then re-build the project Edge.' `
-    -Depends _Edge-Update, _Edge-Rebuild `
-    -Alias Edge
-
-Task _Edge-Rebuild `
-    -Description 'Re-build the project Edge.' `
-    -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
-{
-    MSBuild $Edge_Project $Opts '/p:Configuration=Release', '/t:Rebuild'
-}
-
-Task _Edge-RestorePackages `
-    -Description 'Restore packages for the project Edge.' `
-    -Depends _Edge-InitializeVariables, _Tools-InitializeVariables `
-{
-    Restore-Packages -Source $Edge_PackagesConfig `
-        -PackagesDirectory $Tools_PackagesDirectory `
-        -ConfigFile $Tools_NuGetConfig `
-        -Verbosity $NuGetVerbosity
-}
-
-Task _Edge-Update `
-    -Description 'Update NuGet packages for the project Edge.' `
-    -Depends _Edge-InitializeVariables, _Tools-InitializeVariables `
-{
-    # This function also updates the project to the last versions of the packages 
-    # from the official NuGet repository, which might not be what we do really want.
-    # The problem is that we want to update the Narvalo packages to their latest
-    # pre-release versions (only available on our own NuGet server) but they might
-    # include a new or updated dependency which is not available on our NuGet server.
-    # The current workaround is to update first from the official NuGet source.
-    # Unfortunately it won't help if there is a newly created dependency or if we 
-    # update a dependency to a new untested version.
-
-    $nuget = Get-NuGet -Install
-
-    try {
-        . $nuget update $Edge_PackagesConfig `
-            -Source "https://www.nuget.org/api/v2/" `
-            -RepositoryPath $Tools_PackagesDirectory `
-            -Verbosity $NuGetVerbosity
-
-        . $nuget update $Edge_PackagesConfig `
-            -Source "http://narvalo.org/myget/nuget/" `
-            -Prerelease `
-            -RepositoryPath $Tools_PackagesDirectory `
-            -Verbosity $NuGetVerbosity
-    } catch {
-        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
-    }
-}
-
-Task _Edge-InitializeVariables `
-    -Description 'Initialize variables only used by the Edge-* tasks.' `
-{
-    $script:Edge_Project        = Get-LocalPath 'tools\Edge\Edge.csproj'
-    $script:Edge_PackagesConfig = Get-LocalPath 'tools\Edge\packages.config'
-}
-
-# ------------------------------------------------------------------------------
 # MyGet project
 # ------------------------------------------------------------------------------
 
@@ -445,6 +381,106 @@ Task _MyGet-InitializeVariables `
     $script:MyGet_PackagesConfig   = Get-LocalPath 'tools\MyGet\packages.config'
     $script:MyGet_StagingDirectory = Get-LocalPath 'work\myget'
     $script:MyGet_ZipFile          = Get-LocalPath 'work\myget.7z'
+}
+
+# ------------------------------------------------------------------------------
+# Edge solution
+# ------------------------------------------------------------------------------
+
+Task Edge-FullBuild `
+    -Description 'Update then re-build the solution Edge.' `
+    -Depends _Edge-Update, _Edge-Rebuild
+
+Task _Edge-Rebuild `
+    -Description 'Re-build the solution Edge.' `
+    -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
+{
+    MSBuild $Edge_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
+}
+
+Task _Edge-RestorePackages `
+    -Description 'Restore packages for the solution Edge.' `
+    -Depends _Edge-InitializeVariables `
+{
+    Restore-Packages -Source $Edge_Solution `
+        -PackagesDirectory $Edge_PackagesDirectory `
+        -ConfigFile $Edge_NuGetConfig `
+        -Verbosity $NuGetVerbosity
+}
+
+Task _Edge-Update `
+    -Description 'Update NuGet packages for the solution Edge.' `
+    -Depends _Edge-InitializeVariables `
+{
+    $nuget = Get-NuGet -Install
+
+    try {
+        . $nuget update $Edge_Solution `
+            -Safe `
+            -RepositoryPath $Edge_PackagesDirectory `
+            -ConfigFile $Edge_NuGetConfig `
+            -Verbosity $NuGetVerbosity
+    } catch {
+        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
+    }
+}
+
+Task _Edge-InitializeVariables `
+    -Description 'Initialize variables only used by the Edge-* tasks.' `
+{
+    $script:Edge_Solution          = Get-LocalPath 'tools\MyPackages\Edge\Edge.sln'
+    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\MyPackages\Edge\.nuget\NuGet.Config'
+    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\MyPackages\Edge\packages'
+}
+
+# ------------------------------------------------------------------------------
+# Retail solution
+# ------------------------------------------------------------------------------
+
+Task Retail-FullBuild `
+    -Description 'Update then re-build the solution Retail.' `
+    -Depends _Retail-Update, _Retail-Rebuild
+
+Task _Retail-Rebuild `
+    -Description 'Re-build the solution Retail.' `
+    -Depends _Retail-InitializeVariables, _Retail-RestorePackages `
+{
+    MSBuild $Retail_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
+}
+
+Task _Retail-RestorePackages `
+    -Description 'Restore packages for the solution Retail.' `
+    -Depends _Retail-InitializeVariables `
+{
+    Restore-Packages -Source $Retail_Solution `
+        -PackagesDirectory $Retail_PackagesDirectory `
+        -ConfigFile $Retail_NuGetConfig `
+        -Verbosity $NuGetVerbosity
+}
+
+Task _Retail-Update `
+    -Description 'Update NuGet packages for the solution Retail.' `
+    -Depends _Retail-InitializeVariables `
+{
+    $nuget = Get-NuGet -Install
+
+    try {
+        . $nuget update $Retail_Solution `
+            -Safe `
+            -RepositoryPath $Retail_PackagesDirectory `
+            -ConfigFile $Retail_NuGetConfig `
+            -Verbosity $NuGetVerbosity
+    } catch {
+        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
+    }
+}
+
+Task _Retail-InitializeVariables `
+    -Description 'Initialize variables only used by the Retail-* tasks.' `
+{
+    $script:Retail_Solution          = Get-LocalPath 'tools\MyPackages\Retail\Retail.sln'
+    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\MyPackages\Retail\.nuget\NuGet.Config'
+    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\MyPackages\Retail\packages'
 }
 
 # ------------------------------------------------------------------------------
