@@ -1,7 +1,13 @@
 ChangeLog
 =========
-                                   
-- (2015/01/14) _Enhancement:_ Created a script to push packages to NuGet (or MyGet).
+                             
+- (2015/01/21) _Improvement:_ Prevent creation of retail packages if there are
+  uncommitted changes.      
+- (2015/01/21) _Enhancement:_ Created a shared properties file for F# projects.
+- (2015/01/20) _Improvement:_ New project to check the installation of retail 
+  packages after they are published to the official NuGet server.
+- (2015/01/20) _Enhancement:_ New scripts to push packages to NuGet or MyGet.
+- (2015/01/20) _Enhancement:_ New scripts to push packages to NuGet or MyGet.
 - (2015/01/14) _Bugfix:_ In non-retail mode, when resolving project references, 
   we should not include the prerelease label otherwise later on nuget won't be
   able to resolve the dependency.       

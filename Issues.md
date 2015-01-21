@@ -38,10 +38,9 @@ MSBuild files:
   it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or
   CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
   in Narvalo.Common.targets are disabled.
-- Prevent creation of retail packages if there are uncommited changes.
 
 PowerShell
-- Analyze logs.
+- Enhancement: Analyze logs.
 
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
