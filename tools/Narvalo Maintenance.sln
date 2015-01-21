@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
 	ProjectSection(SolutionItems) = preProject
+		FSharp.Common.props = FSharp.Common.props
 		Make.Common.props = Make.Common.props
 		Make.Common.targets = Make.Common.targets
 		Make.Common.tasks = Make.Common.tasks

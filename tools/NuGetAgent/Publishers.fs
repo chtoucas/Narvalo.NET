@@ -103,7 +103,7 @@ module Publishers =
     
         sorter.GetPackagesByDependencyOrder(new ReadOnlyPackageRepository(uniqPackages))
 
-    /// Publish packages using a specific publisher.
+    /// Publish packages using the supplied publisher.
     let publishPackages (publisher:IPublisher) packages =
         if Seq.isEmpty packages 
         then printfn "No packages found for publication."

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Prose
+namespace System
 
 open System.Reflection
 open System.Runtime.InteropServices
