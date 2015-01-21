@@ -166,8 +166,6 @@ function Get-Git {
     If present, finds the abbreviated commit hash.
 .PARAMETER Git
     Specifies the path to the Git executable.
-.PARAMETER NoWarn
-    If present, do not write any warning.
 .INPUTS
     The path to the Git executable.
 .OUTPUTS
@@ -179,23 +177,13 @@ function Get-GitCommitHash {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [AllowNull()]
         [string] $Git,
 
-        [switch] $Abbrev,
-        [switch] $NoWarn
+        [switch] $Abbrev
     )
     
     Write-Verbose 'Getting the last git commit hash.'
 
-    if ($git -eq $null) {
-        if (!$noWarn.isPresent) {
-            Write-Warning 'The git parameter being $null, we can''t retrieve the git commit hash.' 
-        }
-
-        return ''
-    }
-    
     if ($abbrev.IsPresent) {
         $fmt = '%h'
     } else {
@@ -216,6 +204,53 @@ function Get-GitCommitHash {
     }
 
     $hash
+}
+
+<#
+.SYNOPSIS
+    Get the git status.
+.PARAMETER Git
+    Specifies the path to the Git executable.
+.PARAMETER Short
+    If present, use the short-format.
+.INPUTS
+    The path to the Git executable.
+.OUTPUTS
+    System.String. Get-GitStatus returns a string that contains the git status.
+.NOTES
+    If anything fails, returns $null.
+#>
+function Get-GitStatus {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [string] $Git,
+
+        [switch] $Short
+    )
+    
+    Write-Verbose 'Getting the git status.'
+
+    if ($short.IsPresent) {
+        $opts = '-s'
+    } else {
+        $opts = ''
+    }
+
+    $status = $null
+
+    try {
+        Push-Location $script:ProjectRoot
+
+        Write-Debug 'Call git.exe status.'
+        $status = . $git status $opts 2>&1
+    } catch {
+        Write-Warning "Git command failed: $_"
+    } finally {
+        Pop-Location
+    }
+
+    $status
 }
 
 <#
@@ -436,7 +471,7 @@ function Invoke-PurgeTask {
     }
 
     if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove untracked files (unsafe)?')) {
-        Get-Git | Remove-UntrackedItems -NoWarn
+        Get-Git | Remove-UntrackedItems
     }
 }
 
@@ -592,8 +627,6 @@ function Remove-LocalItem {
     Delete files untracked by git.
 .PARAMETER Git
     Specifies the path to the git executable.
-.PARAMETER NoWarn
-    If present, do not display warnings.
 .INPUTS
     The path to the git executable.
 .OUTPUTS
@@ -607,19 +640,8 @@ function Remove-UntrackedItems {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
-        [AllowNull()]
-        [string] $Git,
-
-        [switch] $NoWarn
+        [string] $Git
     )
-    
-    if ($git -eq $null) {
-        if (!$noWarn.isPresent) {
-            Write-Warning 'Git being $null, we can not proceed.' 
-        }
-
-        return
-    }
     
     try {
         Push-Location $script:ProjectRoot
@@ -921,6 +943,7 @@ Export-ModuleMember -Function `
     Get-7Zip,
     Get-Git, 
     Get-GitCommitHash, 
+    Get-GitStatus,
     Get-LocalPath,
     Get-NuGet, 
     Get-PSakeModulePath,

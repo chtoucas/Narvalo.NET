@@ -191,7 +191,7 @@ Task Package-Build `
 
 Task _Package-InitializeVariables `
     -Description 'Initialize variables only used by the Package-* tasks.' `
-    -Depends _Initialize-GitCommitHash, _Package-CheckRequirementsForRetailPackages `
+    -Depends _Initialize-GitCommitHash, _Package-CheckPrerequisitesForRetail `
     -RequiredVariables Retail `
 {
     # Packaging properties:
@@ -217,8 +217,9 @@ Task _Package-InitializeVariables `
     $script:Package_Targets = '/t:Rebuild;PEVerify;Xunit;Package'
 }
 
-Task _Package-CheckRequirementsForRetailPackages `
+Task _Package-CheckPrerequisitesForRetail `
     -Description 'Check conditions are met for creating retail packages.' `
+    -Depends _Initialize-GitCommitHash `
     -PreCondition { $Retail } `
 {
     if ($GitCommitHash -eq '') {
@@ -556,7 +557,23 @@ Task _Documentation `
 Task _Initialize-GitCommitHash `
     -Description 'Initialize GitCommitHash.' `
 {
-    $script:GitCommitHash = Get-Git | Get-GitCommitHash -NoWarn
+    $git = (Get-Git)
+
+    $hash = ''
+
+    if ($git -ne $null) {
+        $status = Get-GitStatus $git -Short
+
+        if ($status -eq $null) {
+            Write-Warning 'Skipping... unabled to verify the git status.'
+        } elseif ($status -ne '') {
+            Write-Warning 'Skipping... uncommitted changes are pending.'
+        } else {
+            $hash = Get-GitCommitHash $git
+        }
+    }
+
+    $script:GitCommitHash = $hash
 }
 
 Task _Tools-InitializeVariables `
