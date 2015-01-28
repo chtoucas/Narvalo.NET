@@ -13,7 +13,7 @@ open NuGet
 let inline combinePaths path1 (path2 : string) = Path.Combine(path1, path2.TrimStart [| '\\'; '/' |])
 
 /// Combines two path strings using Path.Combine. Borrowed from FAKE.
-let inline (+/) path1 path2 = combinePaths path1 path2
+let inline (++) path1 path2 = combinePaths path1 path2
 
 /// Machine-wide settings for NuGet.
 type MachineWideSettings(settings:IEnumerable<Settings>) =
@@ -46,8 +46,11 @@ let loadNuGetSettings =
 
 /// Container for the various NuGet API keys.
 type ApiKeysContainer(settings:ISettings) =
-    let _myGetApiKey = lazy( readApiKey settings Constants.MyGetConfigKey )
-    let _nuGetApiKey = lazy( readApiKey settings Constants.NuGetConfigKey )
+    let myGetApiKey = lazy( readApiKey settings Constants.MyGetConfigKey )
+    let nuGetApiKey = lazy( readApiKey settings Constants.NuGetConfigKey )
 
-    member this.MyGetApiKey with get() = _myGetApiKey.Value
-    member this.NuGetApiKey with get() = _nuGetApiKey.Value
+    /// Return the API key for the MyGet server.
+    member this.MyGetApiKey with get() = myGetApiKey.Value
+
+    /// Return the API key for the NuGet server.
+    member this.NuGetApiKey with get() = nuGetApiKey.Value

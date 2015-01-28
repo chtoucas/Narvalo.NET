@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Autofac
+namespace Narvalo.Mvp.Autofac
 {
     using System;
     using System.Collections.Generic;
     using global::Autofac;
     using global::Autofac.Core;
-    using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
     public sealed class AutofacPresenterFactory : IPresenterFactory

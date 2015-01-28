@@ -9,6 +9,7 @@ open NuGet
 
 [<RequireQualifiedAccess>]
 module Publishers =
+
     /// Read-Only package repository, copied from NuGet.Common
     type ReadOnlyPackageRepository(packages:IEnumerable<IPackage>) = 
         inherit PackageRepositoryBase()
@@ -24,11 +25,11 @@ module Publishers =
 
     /// Publisher to our own private NuGet server.
     type PublisherToMyGet(apiKeysContainer:ApiKeysContainer, ?purge) =
-        /// API Key for the MyGet server.
+        // API Key for the MyGet server.
         let apiKey = apiKeysContainer.MyGetApiKey
-        /// MyGet server.
+        // MyGet server.
         let server = new PackageServer(Constants.MyGetServerSource, Constants.UserAgent)
-        /// MyGet repository.
+        // MyGet repository.
         let repository = PackageRepositoryFactory.Default.CreateRepository(Constants.MyGetRepositorySource)
     
         interface IPublisher with
@@ -66,11 +67,11 @@ module Publishers =
         
     /// Publisher to the official NuGet server.
     type PublisherToNuGet(apiKeysContainer:ApiKeysContainer) =
-        /// API Key for the NuGet server.
+        // API Key for the NuGet server.
         let apiKey = apiKeysContainer.NuGetApiKey
-        /// NuGet server.
+        // NuGet server.
         let server = new PackageServer(Constants.NuGetSource, Constants.UserAgent)
-        /// NuGet repository.
+        // NuGet repository.
         let repository = PackageRepositoryFactory.Default.CreateRepository(Constants.NuGetSource)
 
         interface IPublisher with
@@ -100,7 +101,6 @@ module Publishers =
 
         // Sort the packages by the dependency order.
         let sorter = new PackageSorter(targetFramework=null)
-    
         sorter.GetPackagesByDependencyOrder(new ReadOnlyPackageRepository(uniqPackages))
 
     /// Publish packages using the supplied publisher.

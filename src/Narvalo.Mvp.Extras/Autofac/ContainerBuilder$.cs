@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Autofac
+namespace Narvalo.Mvp.Autofac
 {
     using System;
     using System.Reflection;
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Features.Scanning;
-    using Narvalo.Mvp;
 
     public static class ContainerBuilderExtensions
     {

@@ -6,8 +6,10 @@ open Nessos.UnionArgParser
 
 [<RequireQualifiedAccess>]
 module Program =
+
     [<RequireQualifiedAccess>]
     module Args =
+
         /// Parser template for the command-line arguments.
         type private ParserTemplate = 
             | [<Mandatory; AltCommandLine("-p")>] Path of string

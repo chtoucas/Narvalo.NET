@@ -51,6 +51,7 @@ Miscs:
     [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)
   * Document compiler conditional symbols in use.
 - Improvement: Review and fill assembly and NuGet spec.
+- Sign F# assemblies.
 
 
 Not yet planned
