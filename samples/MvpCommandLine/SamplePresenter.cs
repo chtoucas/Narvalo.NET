@@ -5,23 +5,29 @@ namespace MvpCommandLine
     using System;
     using Narvalo.Mvp;
 
-    public sealed class SamplePresenter : Presenter<ISampleView>
+    public sealed class SamplePresenter : Presenter<ISampleView>, IDisposable
     {
         public SamplePresenter(ISampleView view)
             : base(view)
         {
-            View.Completed += Completed;
-            View.Load += Load;
+            View.Load += Load_;
+            View.Completed += Completed_;
         }
 
-        public void Completed(object sender, EventArgs e)
+        public void Dispose()
         {
-            Console.WriteLine(Strings.SamplePresenter_OnCompleted);
+            View.Load -= Load_;
+            View.Completed -= Completed_;
         }
 
-        public void Load(object sender, EventArgs e)
+        void Load_(object sender, EventArgs e)
         {
-            Console.WriteLine(Strings.SamplePresenter_OnLoad);
+            View.ShowLoad();
+        }
+
+        void Completed_(object sender, EventArgs e)
+        {
+            View.ShowCompleted();
         }
     }
 }

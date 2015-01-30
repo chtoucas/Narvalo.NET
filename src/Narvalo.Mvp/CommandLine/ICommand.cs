@@ -4,6 +4,6 @@ namespace Narvalo.Mvp.CommandLine
 {
     public interface ICommand
     {
-        void Execute();
+        void Run();
     }
 }

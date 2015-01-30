@@ -120,10 +120,10 @@
   <data name="SampleCommand_DisplayText" xml:space="preserve">
     <value>I am a test command.</value>
   </data>
-  <data name="SamplePresenter_OnCompleted" xml:space="preserve">
-    <value>Presenter says Completed.</value>
+  <data name="SampleCommand_OnCompleted" xml:space="preserve">
+    <value>Command says Completed.</value>
   </data>
-  <data name="SamplePresenter_OnLoad" xml:space="preserve">
-    <value>Presenter says Load.</value>
+  <data name="SampleCommand_OnLoad" xml:space="preserve">
+    <value>Command says Load.</value>
   </data>
 </root>

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MvpCommandLine {
-    using System;
-    
-    
+namespace MvpCommandLine
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -70,20 +70,20 @@ namespace MvpCommandLine {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Presenter says Completed..
+        ///   Looks up a localized string similar to Command says Completed..
         /// </summary>
-        internal static string SamplePresenter_OnCompleted {
+        internal static string SampleCommand_OnCompleted {
             get {
-                return ResourceManager.GetString("SamplePresenter_OnCompleted", resourceCulture);
+                return ResourceManager.GetString("SampleCommand_OnCompleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Presenter says Load..
+        ///   Looks up a localized string similar to Command says Load..
         /// </summary>
-        internal static string SamplePresenter_OnLoad {
+        internal static string SampleCommand_OnLoad {
             get {
-                return ResourceManager.GetString("SamplePresenter_OnLoad", resourceCulture);
+                return ResourceManager.GetString("SampleCommand_OnLoad", resourceCulture);
             }
         }
     }

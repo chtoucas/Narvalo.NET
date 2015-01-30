@@ -32,10 +32,9 @@ namespace Narvalo.Mvp.CommandLine
             get { return _throwIfNoPresenterBound; }
         }
 
-        public void Execute()
+        public void Run()
         {
             OnLoad();
-            ExecuteCore();
             OnCompleted();
         }
 
@@ -44,8 +43,6 @@ namespace Narvalo.Mvp.CommandLine
             Dispose(true /* disposing */);
             GC.SuppressFinalize(this);
         }
-
-        protected virtual void ExecuteCore() { }
 
         protected virtual void Dispose(bool disposing)
         {
@@ -61,18 +58,18 @@ namespace Narvalo.Mvp.CommandLine
             }
         }
 
-        protected virtual void OnLoad()
+        protected virtual void OnCompleted()
         {
-            var localHandler = Load;
+            var localHandler = Completed;
 
             if (localHandler != null) {
                 localHandler(this, EventArgs.Empty);
             }
         }
 
-        protected virtual void OnCompleted()
+        protected virtual void OnLoad()
         {
-            var localHandler = Completed;
+            var localHandler = Load;
 
             if (localHandler != null) {
                 localHandler(this, EventArgs.Empty);

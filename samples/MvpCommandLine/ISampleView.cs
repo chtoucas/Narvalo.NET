@@ -8,5 +8,8 @@ namespace MvpCommandLine
     public interface ISampleView : IView
     {
         event EventHandler Completed;
+
+        void ShowLoad();
+        void ShowCompleted();
     }
 }

@@ -10,7 +10,6 @@ namespace MvpCommandLine
         static void Main()
         {
             using (var cmd = new SampleCommand()) { cmd.Execute(); }
-            using (var cmd = new SampleCommand()) { cmd.Execute(); }
         }
     }
 }

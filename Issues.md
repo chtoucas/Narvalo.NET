@@ -184,6 +184,7 @@ At this point we should have a first useful release for the core assemblies.
 
 ### Narvalo.Mvp (en vrac)
 
+- Review: ThrowIfNoPresenterBound, Load event, PresenterBinder.Release.
 - Enhancement: Tests. We can start by porting those from WebFormsMvp.
 - Enhancement: Documentation and userguide.
 - Improvement: Using custom presenter types per platform prevents
@@ -194,12 +195,12 @@ At this point we should have a first useful release for the core assemblies.
 - Enhancement: Incorporate ideas from MVCSharp (Task) and maybe
   GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
 - Improvement: For Narvalo.Mvp.Windows.Forms, cross-presenter
-  communication is not functional. Thinks to work on before it might proved
+  communication is not functional. Things to work on before it might prove
   to be useful:
   * Right now, only controls contained in a MvpForm share the same presenter binder.
     We need something similar to what is done with ASP.NET (PageHost) but the situation
     is a bit more complicated due to the different execution model. Controls
-    are fully loaded before we reach the CreateControl or Load event in the form
+    are fully loaded before we reach the CreateControl or Load events in the form
     container where we normally perform the binding.
   * The message coordinator must support unsubscription (automatic or manual).
 

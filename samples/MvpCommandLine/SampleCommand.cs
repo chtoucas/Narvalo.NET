@@ -7,16 +7,14 @@ namespace MvpCommandLine
 
     public sealed class SampleCommand : MvpCommand, ISampleView
     {
-        public static void DisplayText()
+        public void ShowLoad()
         {
-            Console.WriteLine();
-            Console.WriteLine(Strings.SampleCommand_DisplayText);
-            Console.WriteLine();
+            Console.WriteLine(Strings.SampleCommand_OnLoad);
         }
 
-        protected override void ExecuteCore()
+        public void ShowCompleted()
         {
-            DisplayText();
+            Console.WriteLine(Strings.SampleCommand_OnCompleted);
         }
     }
 }
