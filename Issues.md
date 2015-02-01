@@ -42,6 +42,9 @@ MSBuild files:
 PowerShell
 - Enhancement: Analyze logs.
 
+F#
+- Finding previous version of packages seems incorrect and deleting fails sometimes?
+
 Miscs:
 - Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
 - Improvement: Complete Guidelines.
