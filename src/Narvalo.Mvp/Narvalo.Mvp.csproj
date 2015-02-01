@@ -22,10 +22,12 @@
     </Compile>
     <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="CommandLine\ICommand.cs" />
+    <Compile Include="CommandLine\ITerminal.cs" />
     <Compile Include="CommandLine\MvpBootstrapper.cs" />
     <Compile Include="CommandLine\MvpCommand.cs" />
     <Compile Include="CommandLine\MvpCommand`1.cs" />
     <Compile Include="CommandLine\PlatformServices.cs" />
+    <Compile Include="CommandLine\Terminal.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICompositeView.cs" />
