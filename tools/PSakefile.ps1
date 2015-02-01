@@ -564,7 +564,9 @@ Task _Initialize-GitCommitHash `
     if ($git -ne $null) {
         $status = Get-GitStatus $git -Short
 
-        if ($status -ne '') {
+        if ($status -eq $null) {
+            Write-Warning 'Skipping... unabled to verify the git status.'
+        } elseif ($status -ne '') {
             Write-Warning 'Skipping... uncommitted changes are pending.'
         } else {
             $hash = Get-GitCommitHash $git
