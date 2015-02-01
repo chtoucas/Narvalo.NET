@@ -562,7 +562,7 @@ Task _Initialize-GitCommitHash `
     $hash = ''
 
     if ($git -ne $null) {
-        $status = Get-GitStatus $git -Short
+        $status = Get-GitStatus $git -Short -Verbose
 
         if ($status -eq $null) {
             Write-Warning 'Skipping... unabled to verify the git status.'
