@@ -244,6 +244,10 @@ function Get-GitStatus {
 
         Write-Debug 'Call git.exe status.'
         $status = . $git status $opts 2>&1
+
+        if ($status -eq $null) {
+            $status = ''
+        }
     } catch {
         Write-Warning "Git command failed: $_"
     } finally {
