@@ -9,7 +9,7 @@ namespace MvpCommandLine
         [STAThread]
         static void Main()
         {
-            using (var cmd = new SampleCommand()) { cmd.Execute(); }
+            //using (var cmd = new SampleCommand()) { cmd.Run(); }
         }
     }
 }

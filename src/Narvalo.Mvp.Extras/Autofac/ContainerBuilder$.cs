@@ -13,11 +13,11 @@ namespace Narvalo.Mvp.Autofac
         public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
             RegisterPresenters(
                 this ContainerBuilder @this,
-                params Assembly[] controllerAssemblies)
+                params Assembly[] presenterAssemblies)
         {
             Require.Object(@this);
 
-            return @this.RegisterAssemblyTypes(controllerAssemblies)
+            return @this.RegisterAssemblyTypes(presenterAssemblies)
                 .Where(_ => typeof(IPresenter).IsAssignableFrom(_) &&
                     _.Name.EndsWith("Presenter", StringComparison.Ordinal));
         }

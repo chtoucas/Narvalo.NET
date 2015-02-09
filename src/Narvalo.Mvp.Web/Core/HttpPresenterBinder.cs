@@ -30,7 +30,7 @@ namespace Narvalo.Mvp.Web.Core
             _context = context;
         }
 
-        protected override void OnPresenterCreated(PresenterCreatedEventArgs args)
+        protected override void OnPresenterCreated(PresenterEventArgs args)
         {
             Require.NotNull(args, "args");
 

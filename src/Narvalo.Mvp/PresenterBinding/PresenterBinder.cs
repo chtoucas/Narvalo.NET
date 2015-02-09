@@ -46,7 +46,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public event EventHandler<PresenterCreatedEventArgs> PresenterCreated;
+        public event EventHandler<PresenterEventArgs> PresenterCreated;
 
         public IMessageCoordinator MessageCoordinator { get { return _messageCoordinator; } }
 
@@ -103,14 +103,14 @@ namespace Narvalo.Mvp.PresenterBinding
             // TODO: Explain this.
             ((Internal.IPresenter)presenter).Messages = _messageCoordinator;
 
-            OnPresenterCreated(new PresenterCreatedEventArgs(presenter));
+            OnPresenterCreated(new PresenterEventArgs(presenter));
 
             return presenter;
         }
 
-        protected virtual void OnPresenterCreated(PresenterCreatedEventArgs args)
+        protected virtual void OnPresenterCreated(PresenterEventArgs args)
         {
-            EventHandler<PresenterCreatedEventArgs> localHandler = PresenterCreated;
+            EventHandler<PresenterEventArgs> localHandler = PresenterCreated;
 
             if (localHandler != null) {
                 localHandler(this, args);

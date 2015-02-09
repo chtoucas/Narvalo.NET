@@ -5,7 +5,6 @@ namespace Narvalo.Mvp.Autofac
     using System;
     using System.Collections.Generic;
     using global::Autofac;
-    using global::Autofac.Core;
     using Narvalo.Mvp.PresenterBinding;
 
     public sealed class AutofacPresenterFactory : IPresenterFactory
@@ -27,15 +26,19 @@ namespace Narvalo.Mvp.Autofac
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
             // REVIEW: I would prefer to register the view as a dependency 
-            // and then resolve the presenter.
-            var innerScope = _container.BeginLifetimeScope();
+            // and then resolve the presenter, but it won't work.
+            //var presenterScope = _container.BeginLifetimeScope(
+            //    _ => _.RegisterInstance(view).As(viewType));
+            //var presenter = (IPresenter)presenterScope.Resolve(presenterType);
 
-            var presenter = (IPresenter)innerScope.Resolve(
+            var presenterScope = _container.BeginLifetimeScope();
+
+            var presenter = (IPresenter)presenterScope.Resolve(
                 presenterType,
-                new LooselyTypedParameter(viewType, view));
+                new TypedParameter(viewType, view));
 
             lock (Lock_) {
-                _lifetimeScopes[presenter.GetHashCode()] = innerScope;
+                _lifetimeScopes[presenter.GetHashCode()] = presenterScope;
             }
 
             return presenter;
@@ -56,13 +59,13 @@ namespace Narvalo.Mvp.Autofac
             lifetimeScope.Dispose();
         }
 
-        class LooselyTypedParameter : ConstantParameter
-        {
-            public LooselyTypedParameter(Type type, object value)
-                : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
-            {
-                Enforce.NotNull(type, "type");
-            }
-        }
+        //class LooselyTypedParameter : ConstantParameter
+        //{
+        //    public LooselyTypedParameter(Type type, object value)
+        //        : base(value, pi => pi.ParameterType.IsAssignableFrom(type))
+        //    {
+        //        Enforce.NotNull(type, "type");
+        //    }
+        //}
     }
 }

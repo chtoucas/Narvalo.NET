@@ -4,11 +4,11 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
 
-    public sealed class PresenterCreatedEventArgs : EventArgs
+    public sealed class PresenterEventArgs : EventArgs
     {
         readonly IPresenter _presenter;
 
-        public PresenterCreatedEventArgs(IPresenter presenter)
+        public PresenterEventArgs(IPresenter presenter)
         {
             _presenter = presenter;
         }

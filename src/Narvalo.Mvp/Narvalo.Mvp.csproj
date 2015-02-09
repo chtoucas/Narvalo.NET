@@ -20,19 +20,12 @@
     <Compile Include="..\Common\Narvalo.Tracer.cs">
       <Link>Internal\Narvalo.Tracer.cs</Link>
     </Compile>
-    <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
-    <Compile Include="CommandLine\ICommand.cs" />
-    <Compile Include="CommandLine\MvpBootstrapper.cs" />
-    <Compile Include="CommandLine\MvpCommand.cs" />
-    <Compile Include="CommandLine\MvpCommand`1.cs" />
-    <Compile Include="CommandLine\PlatformServices.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICompositeView.cs" />
     <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="Internal\IPresenter.cs" />
-    <Compile Include="Internal\PresenterBinderFactory.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />
@@ -60,7 +53,7 @@
     <Compile Include="PresenterBinding\MessageCoordinatorFactory.cs" />
     <Compile Include="PresenterBinding\PresenterBinder.cs" />
     <Compile Include="PresenterBinding\PresenterBindingParameter.cs" />
-    <Compile Include="PresenterBinding\PresenterCreatedEventArgs.cs" />
+    <Compile Include="PresenterBinding\PresenterEventArgs.cs" />
     <Compile Include="PresenterBinding\PresenterDiscoveryResult.cs" />
     <Compile Include="PresenterBinding\PresenterFactory.cs" />
     <Compile Include="PresenterOf`1.cs" />
