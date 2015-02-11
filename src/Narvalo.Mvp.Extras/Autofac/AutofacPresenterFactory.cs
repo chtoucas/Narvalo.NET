@@ -31,6 +31,9 @@ namespace Narvalo.Mvp.Autofac
             //    _ => _.RegisterInstance(view).As(viewType));
             //var presenter = (IPresenter)presenterScope.Resolve(presenterType);
 
+            // NB: Another option is to not register the presenters using the 
+            // ContainerBuilder and rather do it dynamically:
+            //var presenterScope = _container.BeginLifetimeScope(_ => _.RegisterType(presenterType))
             var presenterScope = _container.BeginLifetimeScope();
 
             var presenter = (IPresenter)presenterScope.Resolve(

@@ -7,6 +7,8 @@ namespace Narvalo.Mvp.Windows.Forms
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Windows.Forms.Internal;
 
+    // Cf. https://msdn.microsoft.com/library/86faxx0d%28v=vs.110%29.aspx (Windows Forms)
+
     public partial class MvpForm : Form, IView
     {
         readonly bool _throwIfNoPresenterBound;

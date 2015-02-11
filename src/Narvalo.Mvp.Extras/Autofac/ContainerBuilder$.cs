@@ -18,8 +18,8 @@ namespace Narvalo.Mvp.Autofac
             Require.Object(@this);
 
             return @this.RegisterAssemblyTypes(presenterAssemblies)
-                .Where(_ => typeof(IPresenter).IsAssignableFrom(_) &&
-                    _.Name.EndsWith("Presenter", StringComparison.Ordinal));
+                .Where(_ => typeof(IPresenter).IsAssignableFrom(_) 
+                    && _.Name.EndsWith("Presenter", StringComparison.Ordinal));
         }
     }
 }
