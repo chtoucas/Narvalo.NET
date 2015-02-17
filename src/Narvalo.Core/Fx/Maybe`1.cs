@@ -317,7 +317,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (ReferenceEquals(other, null)) {
+            if (Object.ReferenceEquals(other, null)) {
                 return !_isSome;
             }
 

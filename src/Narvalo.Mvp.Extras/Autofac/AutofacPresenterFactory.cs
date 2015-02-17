@@ -26,7 +26,8 @@ namespace Narvalo.Mvp.Autofac
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
             // REVIEW: I would prefer to register the view as a dependency 
-            // and then resolve the presenter, but it won't work.
+            // and then resolve the presenter, but it doesn't work 
+            // in some situations.
             //var presenterScope = _container.BeginLifetimeScope(
             //    _ => _.RegisterInstance(view).As(viewType));
             //var presenter = (IPresenter)presenterScope.Resolve(presenterType);

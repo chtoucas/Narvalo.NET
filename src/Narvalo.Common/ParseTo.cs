@@ -139,6 +139,38 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
+        //// SByte
+
+        [CLSCompliant(false)]
+        public static sbyte? SByte(string value)
+        {
+            return SByte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
+        }
+
+        [CLSCompliant(false)]
+        public static sbyte? SByte(string value, NumberStyles style, IFormatProvider provider)
+        {
+            TryParser<sbyte> parser = (string _, out sbyte result) => sbyte.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
+        }
+
+        //// Byte
+
+        [CLSCompliant(false)]
+        public static byte? Byte(string value)
+        {
+            return Byte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
+        }
+
+        [CLSCompliant(false)]
+        public static byte? Byte(string value, NumberStyles style, IFormatProvider provider)
+        {
+            TryParser<byte> parser = (string _, out byte result) => byte.TryParse(_, style, provider, out result);
+
+            return parser.NullInvoke(value);
+        }
+
         //// UInt16
 
         [CLSCompliant(false)]
