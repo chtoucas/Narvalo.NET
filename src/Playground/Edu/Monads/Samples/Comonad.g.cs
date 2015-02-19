@@ -26,7 +26,8 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
     Justification = "The directives are correctly ordered in the T4 source file.")]
 
-namespace Playground.Edu.Monads.Samples {
+namespace Playground.Edu.Monads.Samples 
+{
     using System.Diagnostics.Contracts;
 
     /// <summary>

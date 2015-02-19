@@ -26,7 +26,8 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
     Justification = "The directives are correctly ordered in the T4 source file.")]
 
-namespace Narvalo.Collections {
+namespace Narvalo.Collections 
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
@@ -222,7 +223,8 @@ namespace Narvalo.Collections {
     }
 }
 
-namespace Narvalo.Collections.Internal {
+namespace Narvalo.Collections.Internal
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;

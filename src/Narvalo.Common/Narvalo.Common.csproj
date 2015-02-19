@@ -68,10 +68,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConvertTo.cs" />
+    <Compile Include="Currency.cs" />
+    <Compile Include="CurrencyException.cs" />
+    <Compile Include="CurrencyInfo.cs" />
+    <Compile Include="CurrencyNotFoundException.cs" />
+    <Compile Include="CurrencyProvider.cs" />
+    <Compile Include="CurrencyProviderBase.cs" />
+    <Compile Include="CurrencyTypes.cs" />
     <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\StoredProcedureContract`1.cs" />
+    <Compile Include="DefaultCurrencyProvider.cs" />
+    <Compile Include="DefaultCurrencyProvider.g.cs">
+      <DependentUpon>DefaultCurrencyProvider.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ICurrencyProvider.cs" />
+    <Compile Include="Internal\Iso3166.cs" />
+    <Compile Include="Internal\RuntimeCurrencyProvider.cs" />
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +111,7 @@
     <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
+    <Compile Include="Money.cs" />
     <Compile Include="ParseTo.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
@@ -123,11 +140,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DefaultCurrencyProvider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DefaultCurrencyProvider.g.cs</LastGenOutput>
+    </None>
     <None Include="Narvalo.Common.Version.props" />
     <None Include="Narvalo.Common.props">
       <SubType>Designer</SubType>
     </None>
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ISO4217\20150101\A1.xml" />
+    <Content Include="Resources\ISO4217\20150101\A3.xml" />
+    <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

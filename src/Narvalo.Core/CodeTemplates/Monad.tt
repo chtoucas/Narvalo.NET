@@ -228,7 +228,8 @@
     {
         WriteHeader_();
 #>
-namespace <#= Namespace #> {
+namespace <#= Namespace #> 
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -252,7 +253,8 @@ namespace <#= Namespace #> {
     {
         WriteHeader_();
 #>
-namespace <#= Namespace #> {
+namespace <#= Namespace #> 
+{
     using System.Diagnostics.Contracts;
 
 <#+ EmitCoreComonad(); #>
@@ -266,7 +268,8 @@ namespace <#= Namespace #> {
     {
         WriteHeader_();
 #>
-namespace <#= LinqNamespace #> {
+namespace <#= LinqNamespace #> 
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
@@ -283,7 +286,8 @@ namespace <#= LinqNamespace #> {
 <#+ EmitEnumerableExtensions(); #>
 }
 
-namespace <#= LinqNamespace #>.Internal {
+namespace <#= LinqNamespace #>.Internal
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
