@@ -129,6 +129,7 @@
     <Compile Include="VoidOrError.cs" />
     <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad.Maybe.tt" />
