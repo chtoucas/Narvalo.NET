@@ -67,7 +67,7 @@ namespace Narvalo.Globalization
         /// Gets the full name of the currency in English.
         /// </summary>
         /// <remarks>
-        /// This name is not guaranteed to match the value of <see cref="RegionInfo.CurrencyEnglishName"/>.
+        /// This name is not guaranteed to match the value of RegionInfo.CurrencyEnglishName.
         /// </remarks>
         /// <value>The full name of the currency in English.</value>
         public string EnglishName { get; internal set; }
@@ -154,7 +154,8 @@ namespace Narvalo.Globalization
         /// Gets or sets the currency symbol.
         /// </summary>
         /// <remarks>
-        /// If <see cref="FindRegion"/> return value is not <c>null</c> and the value of 
+        /// In Narvalo.Common you may find an extension method <c>FindRegion</c>.
+        /// If its return value is not <c>null</c> and the value of 
         /// its <see cref="RegionInfo.ISOCurrencySymbol"/> property
         /// matchs with the one of <see cref="Code"/>, you might prefer to use the
         /// <see cref="RegionInfo.CurrencySymbol"/> property.
