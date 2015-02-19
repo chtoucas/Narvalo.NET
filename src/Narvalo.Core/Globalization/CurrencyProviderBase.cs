@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
@@ -21,12 +21,11 @@ namespace Narvalo
             short? minorUnits,
             string englishName,
             string englishRegionName,
-            bool isFund = false)
+            bool isFund)
         {
             return new CurrencyInfo(code, numericCode) {
                 EnglishName = englishName,
                 EnglishRegionName = englishRegionName,
-                IsDiscontinued = false,
                 IsFund = isFund,
                 MinorUnits = minorUnits,
             };
@@ -35,17 +34,15 @@ namespace Narvalo
         protected static CurrencyInfo CreateLegacyCurrency(
             string code,
             short numericCode,
-            short? minorUnits,
             string englishName,
             string englishRegionName,
-            bool isFund = false)
+            bool isFund)
         {
             return new CurrencyInfo(code, numericCode) {
                 EnglishName = englishName,
                 EnglishRegionName = englishRegionName,
-                IsDiscontinued = true,
+                Superseded = true,
                 IsFund = isFund,
-                MinorUnits = minorUnits,
             };
         }
     }

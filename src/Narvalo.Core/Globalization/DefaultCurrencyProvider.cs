@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Linq;
 
     public sealed partial class DefaultCurrencyProvider : ICurrencyProvider

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
@@ -1415,577 +1415,577 @@ namespace Narvalo
                 yield return new CurrencyInfo("AFA", 4) {
                     EnglishName = @"Afghani",
                     EnglishRegionName = @"AFGHANISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FIM", 246) {
                     EnglishName = @"Markka",
                     EnglishRegionName = @"ÅLAND ISLANDS",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ADP", 20) {
                     EnglishName = @"Andorran Peseta",
                     EnglishRegionName = @"ANDORRA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ESP", 724) {
                     EnglishName = @"Spanish Peseta",
                     EnglishRegionName = @"ANDORRA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"ANDORRA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("AON", 24) {
                     EnglishName = @"New Kwanza",
                     EnglishRegionName = @"ANGOLA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("AOR", 982) {
                     EnglishName = @"Kwanza Reajustado",
                     EnglishRegionName = @"ANGOLA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ARA", 32) {
                     EnglishName = @"Austral",
                     EnglishRegionName = @"ARGENTINA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ARP", 32) {
                     EnglishName = @"Peso Argentino",
                     EnglishRegionName = @"ARGENTINA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"ARMENIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ATS", 40) {
                     EnglishName = @"Schilling",
                     EnglishRegionName = @"AUSTRIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("AYM", 945) {
                     EnglishName = @"Azerbaijan Manat",
                     EnglishRegionName = @"AZERBAIJAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("AZM", 31) {
                     EnglishName = @"Azerbaijanian Manat",
                     EnglishRegionName = @"AZERBAIJAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"AZERBAIJAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BYB", 112) {
                     EnglishName = @"Belarussian Ruble",
                     EnglishRegionName = @"BELARUS",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"BELARUS",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BEC", 993) {
                     EnglishName = @"Convertible Franc",
                     EnglishRegionName = @"BELGIUM",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BEF", 56) {
                     EnglishName = @"Belgian Franc",
                     EnglishRegionName = @"BELGIUM",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BEL", 992) {
                     EnglishName = @"Financial Franc",
                     EnglishRegionName = @"BELGIUM",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BAD", 70) {
                     EnglishName = @"Dinar",
                     EnglishRegionName = @"BOSNIA AND HERZEGOVINA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BRC", 76) {
                     EnglishName = @"Cruzado",
                     EnglishRegionName = @"BRAZIL",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BRE", 76) {
                     EnglishName = @"Cruzeiro",
                     EnglishRegionName = @"BRAZIL",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BRN", 76) {
                     EnglishName = @"New Cruzado",
                     EnglishRegionName = @"BRAZIL",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BRR", 987) {
                     EnglishName = @"Cruzeiro Real",
                     EnglishRegionName = @"BRAZIL",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("BGL", 100) {
                     EnglishName = @"Lev",
                     EnglishRegionName = @"BULGARIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("HRD", 191) {
                     EnglishName = @"Croatian Dinar",
                     EnglishRegionName = @"CROATIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("CYP", 196) {
                     EnglishName = @"Cyprus Pound",
                     EnglishRegionName = @"CYPRUS",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("CSK", 200) {
                     EnglishName = @"Koruna",
                     EnglishRegionName = @"CZECHOSLOVAKIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ECS", 218) {
                     EnglishName = @"Sucre",
                     EnglishRegionName = @"ECUADOR",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ECV", 983) {
                     EnglishName = @"Unidad de Valor Constante (UVC)",
                     EnglishRegionName = @"ECUADOR",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GQE", 226) {
                     EnglishName = @"Ekwele",
                     EnglishRegionName = @"EQUATORIAL GUINEA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("EEK", 233) {
                     EnglishName = @"Kroon",
                     EnglishRegionName = @"ESTONIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("XEU", 954) {
                     EnglishName = @"European Currency Unit (E.C.U)",
                     EnglishRegionName = @"EUROPEAN MONETARY CO-OPERATION FUND (EMCF)",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FIM", 246) {
                     EnglishName = @"Markka",
                     EnglishRegionName = @"FINLAND",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"FRANCE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"FRENCH  GUIANA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"FRENCH SOUTHERN TERRITORIES",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GEK", 268) {
                     EnglishName = @"Georgian Coupon",
                     EnglishRegionName = @"GEORGIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"GEORGIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("DDM", 278) {
                     EnglishName = @"Mark der DDR",
                     EnglishRegionName = @"GERMAN DEMOCRATIC REPUBLIC",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("DEM", 276) {
                     EnglishName = @"Deutsche Mark",
                     EnglishRegionName = @"GERMANY",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GHC", 288) {
                     EnglishName = @"Cedi",
                     EnglishRegionName = @"GHANA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GHP", 939) {
                     EnglishName = @"Ghana Cedi",
                     EnglishRegionName = @"GHANA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GRD", 300) {
                     EnglishName = @"Drachma",
                     EnglishRegionName = @"GREECE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"GUADELOUPE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("GWP", 624) {
                     EnglishName = @"Guinea-Bissau Peso",
                     EnglishRegionName = @"GUINEA-BISSAU",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ITL", 380) {
                     EnglishName = @"Italian Lira",
                     EnglishRegionName = @"HOLY SEE (VATICAN CITY STATE)",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("IEP", 372) {
                     EnglishName = @"Irish Pound",
                     EnglishRegionName = @"IRELAND",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ITL", 380) {
                     EnglishName = @"Italian Lira",
                     EnglishRegionName = @"ITALY",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"KAZAKHSTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"KYRGYZSTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LVL", 428) {
                     EnglishName = @"Latvian Lats",
                     EnglishRegionName = @"LATVIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LVR", 428) {
                     EnglishName = @"Latvian Ruble",
                     EnglishRegionName = @"LATVIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZAL", 991) {
                     EnglishName = @"Financial Rand",
                     EnglishRegionName = @"LESOTHO",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LTL", 440) {
                     EnglishName = @"Lithuanian Litas",
                     EnglishRegionName = @"LITHUANIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LTT", 440) {
                     EnglishName = @"Talonas",
                     EnglishRegionName = @"LITHUANIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LUC", 989) {
                     EnglishName = @"Luxembourg Convertible Franc",
                     EnglishRegionName = @"LUXEMBOURG",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LUF", 442) {
                     EnglishName = @"Luxembourg Franc",
                     EnglishRegionName = @"LUXEMBOURG",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("LUL", 988) {
                     EnglishName = @"Luxembourg Financial Franc",
                     EnglishRegionName = @"LUXEMBOURG",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("MGF", 450) {
                     EnglishName = @"Malagasy Franc",
                     EnglishRegionName = @"MADAGASCAR",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("MLF", 466) {
                     EnglishName = @"Mali Franc",
                     EnglishRegionName = @"MALI",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("MTL", 470) {
                     EnglishName = @"Maltese Lira",
                     EnglishRegionName = @"MALTA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"MARTINIQUE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"MAYOTTE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"MOLDOVA, REPUBLIC OF",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"MONACO",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("MZM", 508) {
                     EnglishName = @"Mozambique Metical",
                     EnglishRegionName = @"MOZAMBIQUE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("NLG", 528) {
                     EnglishName = @"Netherlands Guilder",
                     EnglishRegionName = @"NETHERLANDS",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ANG", 532) {
                     EnglishName = @"Netherlands Antillean Guilder",
                     EnglishRegionName = @"NETHERLANDS ANTILLES",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("PEI", 604) {
                     EnglishName = @"Inti",
                     EnglishRegionName = @"PERU",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("PES", 604) {
                     EnglishName = @"Sol",
                     EnglishRegionName = @"PERU",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("PLZ", 616) {
                     EnglishName = @"Zloty",
                     EnglishRegionName = @"POLAND",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("PTE", 620) {
                     EnglishName = @"Portuguese Escudo",
                     EnglishRegionName = @"PORTUGAL",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"RÉUNION",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ROL", 642) {
                     EnglishName = @"Old Leu",
                     EnglishRegionName = @"ROMANIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"RUSSIAN FEDERATION",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"SAINT MARTIN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"SAINT PIERRE AND MIQUELON",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"SAINT-BARTHÉLEMY",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ITL", 380) {
                     EnglishName = @"Italian Lira",
                     EnglishRegionName = @"SAN MARINO",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("CSD", 891) {
                     EnglishName = @"Serbian Dinar",
                     EnglishRegionName = @"SERBIA AND MONTENEGRO",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("EUR", 978) {
                     EnglishName = @"Euro",
                     EnglishRegionName = @"SERBIA AND MONTENEGRO",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("SKK", 703) {
                     EnglishName = @"Slovak Koruna",
                     EnglishRegionName = @"SLOVAKIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("SIT", 705) {
                     EnglishName = @"Tolar",
                     EnglishRegionName = @"SLOVENIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZAL", 991) {
                     EnglishName = @"Financial Rand",
                     EnglishRegionName = @"SOUTH AFRICA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("SDG", 938) {
                     EnglishName = @"Sudanese Pound",
                     EnglishRegionName = @"SOUTH SUDAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ESA", 996) {
                     EnglishName = @"Spanish Peseta",
                     EnglishRegionName = @"SPAIN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ESB", 995) {
                     EnglishName = @"""A"" Account (convertible Peseta Account)",
                     EnglishRegionName = @"SPAIN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ESP", 724) {
                     EnglishName = @"Spanish Peseta",
                     EnglishRegionName = @"SPAIN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("SDD", 736) {
                     EnglishName = @"Sudanese Dinar",
                     EnglishRegionName = @"SUDAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("SRG", 740) {
                     EnglishName = @"Surinam Guilder",
                     EnglishRegionName = @"SURINAME",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("CHC", 948) {
                     EnglishName = @"WIR Franc (for electronic)",
                     EnglishRegionName = @"SWITZERLAND",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"TAJIKISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("TJR", 762) {
                     EnglishName = @"Tajik Ruble",
                     EnglishRegionName = @"TAJIKISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("IDR", 360) {
                     EnglishName = @"Rupiah",
                     EnglishRegionName = @"TIMOR-LESTE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("TPE", 626) {
                     EnglishName = @"Timor Escudo",
                     EnglishRegionName = @"TIMOR-LESTE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("TRL", 792) {
                     EnglishName = @"Old Turkish Lira",
                     EnglishRegionName = @"TURKEY",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("TRY", 949) {
                     EnglishName = @"New Turkish Lira",
                     EnglishRegionName = @"TURKEY",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"TURKMENISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("TMM", 795) {
                     EnglishName = @"Turkmenistan Manat",
                     EnglishRegionName = @"TURKMENISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("UAK", 804) {
                     EnglishName = @"Karbovanet",
                     EnglishRegionName = @"UKRAINE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("USS", 998) {
                     EnglishName = @"US Dollar (Same day)",
                     EnglishRegionName = @"UNITED STATES",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"UZBEKISTAN",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("VEB", 862) {
                     EnglishName = @"Bolivar",
                     EnglishRegionName = @"VENEZUELA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("VEF", 937) {
                     EnglishName = @"Bolivar Fuerte",
                     EnglishRegionName = @"VENEZUELA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("YDD", 720) {
                     EnglishName = @"Yemeni Dinar",
                     EnglishRegionName = @"YEMEN, DEMOCRATIC",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("YUM", 891) {
                     EnglishName = @"New Dinar",
                     EnglishRegionName = @"YUGOSLAVIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("YUN", 890) {
                     EnglishName = @"Yugoslavian Dinar",
                     EnglishRegionName = @"YUGOSLAVIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZRN", 180) {
                     EnglishName = @"New Zaire",
                     EnglishRegionName = @"ZAIRE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZRZ", 180) {
                     EnglishName = @"Zaire",
                     EnglishRegionName = @"ZAIRE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZMK", 894) {
                     EnglishName = @"Zambian Kwacha",
                     EnglishRegionName = @"ZAMBIA",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZWD", 716) {
                     EnglishName = @"Zimbabwe Dollar (old)",
                     EnglishRegionName = @"ZIMBABWE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZWD", 716) {
                     EnglishName = @"Zimbabwe Dollar",
                     EnglishRegionName = @"ZIMBABWE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZWN", 942) {
                     EnglishName = @"Zimbabwe Dollar (new)",
                     EnglishRegionName = @"ZIMBABWE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
                 yield return new CurrencyInfo("ZWR", 935) {
                     EnglishName = @"Zimbabwe Dollar",
                     EnglishRegionName = @"ZIMBABWE",
-                    IsDiscontinued = true,
+                    Superseded = true,
                 };
 
             }

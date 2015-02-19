@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System;
-    using System.Runtime.Serialization;
 
-    [Serializable]
-    public class CurrencyNotFoundException : CurrencyException
+    // FIXME_PCL: [Serializable]
+    public class CurrencyNotFoundException : Exception
     {
         public CurrencyNotFoundException() { }
 
@@ -16,7 +15,7 @@ namespace Narvalo
         public CurrencyNotFoundException(string message, Exception innerException) :
             base(message, innerException) { }
 
-        protected CurrencyNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
+        //protected CurrencyNotFoundException(SerializationInfo info, StreamingContext context)
+        //    : base(info, context) { }
     }
 }

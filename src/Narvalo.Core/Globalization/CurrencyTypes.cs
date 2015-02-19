@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System;
 
     [Flags]
-    [Serializable]
+    // FIXME_PCL: [Serializable]
     public enum CurrencyTypes
     {
         CurrentCurrencies = 1 << 0,

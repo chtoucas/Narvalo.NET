@@ -5,9 +5,10 @@ namespace Narvalo
     using System;
     using System.Collections.Concurrent;
     using System.Globalization;
+    using Narvalo.Globalization;
 
     /// <summary>
-    /// Represents a currency such as Euro or US Dollar.
+    /// Represents a currency unit such as Euro or US Dollar.
     /// </summary>
     /// <remarks>
     /// <para>
@@ -19,7 +20,7 @@ namespace Narvalo
     /// This class follows value type semantics when it comes to equality.
     /// </para>
     /// <para>
-    /// This class does not contain extended information about the currency.
+    /// This class does not offer extended information about the currency.
     /// For such needs, you should refer to the <see cref="CurrencyInfo"/> class.
     /// </para>
     /// </remarks>

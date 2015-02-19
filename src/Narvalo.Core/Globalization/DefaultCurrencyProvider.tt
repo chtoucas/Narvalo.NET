@@ -39,7 +39,7 @@ var codeSet = new HashSet<string>();
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
@@ -58,7 +58,7 @@ namespace Narvalo
             get 
             {
 <#
-    var source = Host.ResolvePath(@".\Resources\ISO4217\20150101\A1.xml");
+    var source = Host.ResolvePath(@"..\Resources\ISO4217\20150101\A1.xml");
 
     using (var reader = XmlReader.Create(source, settings)) {
         var root = XElement.Load(reader, LoadOptions.None);
@@ -139,7 +139,7 @@ namespace Narvalo
             get 
             {
 <#
-    var legacySource = Host.ResolvePath(@".\Resources\ISO4217\20150101\A3.xml");
+    var legacySource = Host.ResolvePath(@"..\Resources\ISO4217\20150101\A3.xml");
 
     using (var reader = XmlReader.Create(legacySource, settings)) {
         var root = XElement.Load(reader, LoadOptions.None);
@@ -186,10 +186,10 @@ namespace Narvalo
                 yield return new CurrencyInfo("<#= code #>", <#= numericCode #>) {
                     EnglishName = @"<#= englishName #>",
                     EnglishRegionName = @"<#= englishRegionName #>",
-                    IsDiscontinued = true,
 <# if (isFund) { #>
                     IsFund = true,
 <# } #>
+                    Superseded = true,
                 };
 <#
         }

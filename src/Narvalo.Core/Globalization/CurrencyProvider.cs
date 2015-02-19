@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System;
 
@@ -19,7 +19,7 @@ namespace Narvalo
             InnerSetProvider(provider ?? new DefaultCurrencyProvider());
         }
 
-        internal static ICurrencyProvider Current
+        public static ICurrencyProvider Current
         {
             get { return Instance_.InnerCurrent; }
         }

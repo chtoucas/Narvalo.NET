@@ -4,14 +4,18 @@ namespace Narvalo.Internal
 {
 #if DEBUG
 
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Schema;
+    using Narvalo.Globalization;
 
-    internal sealed class RuntimeCurrencyProvider : ICurrencyProvider
+    // NB: SNV = "Association Suisse de Normalisation"
+    // Only used internally for testing the XML sources. No need to bother too much with this.
+    internal sealed class SnvCurrencyProvider : CurrencyProviderBase
     {
         const string NoMinorUnits_ = "N.A.";
 
@@ -20,7 +24,7 @@ namespace Narvalo.Internal
 
         HashSet<string> _codeSet;
 
-        public RuntimeCurrencyProvider(string source, string legacySource)
+        public SnvCurrencyProvider(string source, string legacySource)
         {
             Require.NotNull(source, "source");
             Require.NotNull(legacySource, "legacySource");
@@ -29,7 +33,7 @@ namespace Narvalo.Internal
             _legacySource = legacySource;
         }
 
-        public HashSet<string> CurrencyCodes
+        public override HashSet<string> CurrencyCodes
         {
             get
             {
@@ -44,7 +48,7 @@ namespace Narvalo.Internal
             }
         }
 
-        public IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
+        public override IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
         {
             var settings = new XmlReaderSettings {
                 CheckCharacters = false,
@@ -82,11 +86,6 @@ namespace Narvalo.Internal
             return current.Concat(legacy);
         }
 
-        public string GetFallbackSymbol(string code)
-        {
-            return "\x00a4";
-        }
-
         static IEnumerable<CurrencyInfo> Parse_(XElement root)
         {
             //var pubDate = root.Attribute("Pblshd").Value;
@@ -106,15 +105,15 @@ namespace Narvalo.Internal
                 Debug.Assert(code.Length == 3, "The alphabetic code MUST be composed of exactly 3 characters.");
 
                 // Currency Numeric Code
-                // NB: ParseTo should never fail.
-                var numericCode = ParseTo.Int16(item.Element("CcyNbr").Value).Value;
+                // NB: Int16.Parse should never fail.
+                var numericCode = Int16.Parse(item.Element("CcyNbr").Value);
 
                 Debug.Assert(numericCode > 0, "The numeric code MUST be strictly greater than 0.");
                 Debug.Assert(numericCode < 1000, "The numeric code MUST be strictly less than 1000.");
 
                 // Currency English Name
                 var englishNameElement = item.Element("CcyNm");
-                var englishName = englishNameElement.Value;
+                var englishName = englishNameElement.Value.Replace("\"", "\"\"");
 
                 // Fund Currency
                 bool isFund = false;
@@ -126,32 +125,20 @@ namespace Narvalo.Internal
                 }
 
                 // Country English Name
-                var englishRegionName = item.Element("CtryNm").Value;
+                var englishRegionName = item.Element("CtryNm").Value
+                    .Replace("’", "'")
+                    .Replace("\"", "\"\"")
+                    .Replace("\n", "");
 
                 // Minor Units
                 var minorUnitsValue = item.Element("CcyMnrUnts").Value;
                 short? minorUnits = null;
                 if (minorUnitsValue != NoMinorUnits_) {
-                    // NB: ParseTo should never fail.
-                    minorUnits = ParseTo.Int16(minorUnitsValue).Value;
+                    // NB: Int16.Parse should never fail.
+                    minorUnits = Int16.Parse(minorUnitsValue);
                 }
 
-                //bool isPseudoCurrency = false;
-
-                //if (code[0] == PseudoCurrencyMarker_) {
-                //    // If the code starts with the letter "X", the currency is not attached to a specific country.
-                //    if (numericCode < 900) {
-                //        throw new Exception("Found a pseudo currency with a real country.");
-                //    }
-                //}
-
-                yield return new CurrencyInfo(code, numericCode) {
-                    EnglishName = englishName,
-                    EnglishRegionName = englishRegionName,
-                    IsDiscontinued = false,
-                    IsFund = isFund,
-                    MinorUnits = minorUnits,
-                };
+                yield return CreateCurrency(code, numericCode, minorUnits, englishName, englishRegionName, isFund);
             }
         }
 
@@ -166,21 +153,21 @@ namespace Narvalo.Internal
                 Debug.Assert(code.Length == 3, "The alphabetic code MUST be composed of exactly 3 characters.");
 
                 // Currency Numeric Code
-                // NB: ParseTo should never fail.
+                // NB: Int16.Parse should never fail.
                 var numericCodeElement = item.Element("CcyNbr");
                 if (numericCodeElement == null) {
                     Debug.WriteLine("Found a legacy currency without a numeric code: " + item.Element("CtryNm").Value);
 
                     continue;
                 }
-                var numericCode = ParseTo.Int16(numericCodeElement.Value).Value;
+                var numericCode = Int16.Parse(numericCodeElement.Value);
 
                 Debug.Assert(numericCode > 0, "The numeric code MUST be strictly greater than 0.");
                 Debug.Assert(numericCode < 1000, "The numeric code MUST be strictly less than 1000.");
 
                 // Currency English Name
                 var englishNameElement = item.Element("CcyNm");
-                var englishName = englishNameElement.Value;
+                var englishName = englishNameElement.Value.Replace("\"", "\"\"");
 
                 // Fund Currency
                 bool isFund = false;
@@ -193,15 +180,12 @@ namespace Narvalo.Internal
                 }
 
                 // Country English Name
-                var englishRegionName = item.Element("CtryNm").Value;
+                var englishRegionName = item.Element("CtryNm").Value
+                    .Replace("’", "'")
+                    .Replace("\"", "\"\"")
+                    .Replace("\n", "");
 
-                yield return new CurrencyInfo(code, numericCode) {
-                    EnglishName = englishName,
-                    EnglishRegionName = englishRegionName,
-                    IsDiscontinued = true,
-                    IsFund = isFund,
-                    MinorUnits = null,
-                };
+                yield return CreateLegacyCurrency(code, numericCode, englishName, englishRegionName, isFund);
             }
         }
     }

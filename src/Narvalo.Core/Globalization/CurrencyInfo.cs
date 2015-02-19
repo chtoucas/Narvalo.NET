@@ -1,14 +1,12 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Globalization
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides information about a specific combination of currency and region/country.
@@ -16,17 +14,16 @@ namespace Narvalo
     /// <remarks>
     /// Different currencies may have the same <see cref="CurrencyInfo.Code"/>
     /// and <see cref="CurrencyInfo.NumericCode"/> but be associated to different 
-    /// regions/countries. There is NOT a 1-1 correspondance between currencies
+    /// regions/countries. There is no 1-1 correspondance between currencies
     /// and currency infos.
     /// </remarks>
-    [Serializable]
+    // FIXME_PCL: [Serializable]
     public sealed class CurrencyInfo
     {
         const char MetaCurrencyMark_ = 'X';
 
         readonly string _code;
         readonly short _numericCode;
-        readonly Lazy<RegionInfo> _regionInfo;
 
         string _symbol;
 
@@ -39,8 +36,9 @@ namespace Narvalo
         internal CurrencyInfo(string code, short numericCode)
         {
             Enforce.NotNull(code, "code");
+            // For PCL classes, we must convert the string to an array to be able to use Linq.
             Contract.Requires(
-                code.Length == 3 && code.All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
+                code.Length == 3 && code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
                 "The code MUST be composed of exactly 3 letters, all CAPS and ASCII.");
             Contract.Requires(
                 numericCode > 0 && numericCode < 1000,
@@ -48,8 +46,6 @@ namespace Narvalo
 
             _code = code;
             _numericCode = numericCode;
-
-            _regionInfo = new Lazy<RegionInfo>(FindRegionInfo_);
         }
 
         /// <summary>
@@ -71,9 +67,7 @@ namespace Narvalo
         /// Gets the full name of the currency in English.
         /// </summary>
         /// <remarks>
-        /// This name is not guaranteed to match the value of 
-        /// <see cref="System.Globalization.RegionInfo.CurrencyEnglishName"/>
-        /// from the <see cref="RegionInfo"/> property.
+        /// This name is not guaranteed to match the value of <see cref="RegionInfo.CurrencyEnglishName"/>.
         /// </remarks>
         /// <value>The full name of the currency in English.</value>
         public string EnglishName { get; internal set; }
@@ -83,9 +77,7 @@ namespace Narvalo
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This name has nothing to do with the value of 
-        /// <see cref="System.Globalization.RegionInfo.EnglishName"/>
-        /// from the <see cref="RegionInfo"/> property.
+        /// This name has nothing to do with the value of <see cref="RegionInfo.EnglishName"/>.
         /// </para>
         /// <para>
         /// Most meta-currencies do not belong to a region but they still
@@ -95,12 +87,6 @@ namespace Narvalo
         /// </remarks>
         /// <value>The full name of the country/region in English.</value>
         public string EnglishRegionName { get; internal set; }
-
-        /// <summary>
-        /// Gets a value indicating whether the currency is no longer in use.
-        /// </summary>
-        /// <value><c>true</c> if the currency is no longer in use; otherwise <c>false</c>.</value>
-        public bool IsDiscontinued { get; internal set; }
 
         /// <summary>
         /// Gets a value indicating whether the currency represents a fund.
@@ -159,41 +145,27 @@ namespace Narvalo
         public short NumericCode { get { return _numericCode; } }
 
         /// <summary>
-        /// Gets the region info of the currency.
+        /// Gets a value indicating whether the currency is no longer in use.
         /// </summary>
-        /// <remarks>
-        /// The <see cref="Code"/> property is not guaranteed to match the value of 
-        /// <see cref="System.Globalization.RegionInfo.ISOCurrencySymbol"/>
-        /// from the <see cref="RegionInfo"/> property. Indeed, the region info
-        /// only uses the most recent currency.
-        /// Moreover, a country might use more than one currency but .NET will only allow for
-        /// one currency. For instance, El Salvador use both USD and SVC but .NET
-        /// only knows about USD.
-        /// </remarks>
-        /// <value>The region info of the currency; <c>null</c> if none found.</value>
-        public RegionInfo RegionInfo { get { return _regionInfo.Value; } }
+        /// <value><c>true</c> if the currency is no longer in use; otherwise <c>false</c>.</value>
+        public bool Superseded { get; internal set; }
 
         /// <summary>
         /// Gets or sets the currency symbol.
         /// </summary>
+        /// <remarks>
+        /// If <see cref="FindRegion"/> return value is not <c>null</c> and the value of 
+        /// its <see cref="RegionInfo.ISOCurrencySymbol"/> property
+        /// matchs with the one of <see cref="Code"/>, you might prefer to use the
+        /// <see cref="RegionInfo.CurrencySymbol"/> property.
+        /// </remarks>
         /// <value>The currency symbol of the currency.</value>
         public string Symbol
         {
             get
             {
                 if (_symbol == null) {
-                    string symbol;
-
-                    if (RegionInfo != null && RegionInfo.ISOCurrencySymbol == Code) {
-                        // If the RegionInfo do refer to the currency we are currently 
-                        // dealing with, the CurrencySymbol should give us the correct answer.
-                        symbol = RegionInfo.CurrencySymbol;
-                    }
-                    else {
-                        symbol = CurrencyProvider.Current.GetFallbackSymbol(Code);
-                    }
-
-                    _symbol = symbol;
+                    _symbol = CurrencyProvider.Current.GetFallbackSymbol(Code);
                 }
 
                 return _symbol;
@@ -204,7 +176,7 @@ namespace Narvalo
         /// <summary />
         public override string ToString()
         {
-            return String.Format("{0} ({1})", EnglishName, EnglishRegionName);
+            return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
         }
 
         /// <summary>
@@ -232,30 +204,6 @@ namespace Narvalo
         public static IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
         {
             return CurrencyProvider.Current.GetCurrencies(types);
-        }
-
-        RegionInfo FindRegionInfo_()
-        {
-            // Data from the ISO 4217 offer several hints from which we can infer the country/region:
-            // - If the numeric code is strictly less than 900, it SHOULD match 
-            //   the numeric country code defined by ISO 3166.
-            // - The first two letters from the alphabetic code SHOULD match
-            //   the country alpha-2 code defined by ISO 3166.
-            // - The english name of the region.
-            // Using the numeric code is not good. For instance, we would miss most of the European 
-            // countries which use the EUR supranational currency whose code (978) does not relate 
-            // to the actual country. For exactly the same reason we can not use the alphabetic code.
-            var region = Iso3166.FindRegionByEnglishName(EnglishRegionName).SingleOrDefault();
-
-            if (NumericCode < 900) {
-                if (region == null) {
-                    // This should not come as a surprise, .NET does not cover the full range 
-                    // of countries defined by ISO 3166.
-                    Debug.WriteLine("No region found for: " + EnglishRegionName);
-                }
-            }
-
-            return region;
         }
     }
 }

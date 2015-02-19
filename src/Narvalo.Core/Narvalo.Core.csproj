@@ -108,6 +108,18 @@
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="Globalization\CurrencyInfo.cs" />
+    <Compile Include="Globalization\CurrencyNotFoundException.cs" />
+    <Compile Include="Globalization\CurrencyProvider.cs" />
+    <Compile Include="Globalization\CurrencyProviderBase.cs" />
+    <Compile Include="Globalization\CurrencyTypes.cs" />
+    <Compile Include="Globalization\DefaultCurrencyProvider.cs" />
+    <Compile Include="Globalization\DefaultCurrencyProvider.g.cs">
+      <DependentUpon>DefaultCurrencyProvider.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Globalization\ICurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Assume.cs" />
@@ -151,6 +163,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
     </None>
+    <None Include="Globalization\DefaultCurrencyProvider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DefaultCurrencyProvider.g.cs</LastGenOutput>
+    </None>
     <None Include="Narvalo.Core.props">
       <SubType>Designer</SubType>
     </None>
@@ -168,6 +184,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ISO4217\20150101\A1.xml" />
+    <Content Include="Resources\ISO4217\20150101\A3.xml" />
+    <Content Include="Resources\ISO4217\README.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
