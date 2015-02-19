@@ -14,8 +14,5 @@ namespace Narvalo.Globalization
 
         public CurrencyNotFoundException(string message, Exception innerException) :
             base(message, innerException) { }
-
-        //protected CurrencyNotFoundException(SerializationInfo info, StreamingContext context)
-        //    : base(info, context) { }
     }
 }

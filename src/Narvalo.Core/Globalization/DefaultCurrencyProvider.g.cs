@@ -1987,7 +1987,6 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"ZIMBABWE",
                     Superseded = true,
                 };
-
             }
         }
 

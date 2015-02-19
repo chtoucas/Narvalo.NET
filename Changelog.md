@@ -1,6 +1,8 @@
 ChangeLog
 =========
                              
+- (2015/02/19) _Enhancement:_ Added classes to represent a currency defined 
+  by ISO 4217. 
 - (2015/01/21) _Improvement:_ Prevent creation of retail packages if there are
   uncommitted changes.      
 - (2015/01/21) _Enhancement:_ Created a shared properties file for F# projects.

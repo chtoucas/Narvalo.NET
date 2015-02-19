@@ -12,7 +12,7 @@ namespace Narvalo
     /// </summary>
     /// <remarks>
     /// <para>
-    /// You can not directly construct a currency. You must use instead one of the
+    /// You can not directly construct a currency. You must instead use one of the
     /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 
     /// or <see cref="Currency.OfCurrentCulture"/>.
     /// </para>
@@ -88,6 +88,12 @@ namespace Narvalo
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
+        /// <summary />
+        public override string ToString()
+        {
+            return _code;
+        }
+
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
@@ -105,12 +111,6 @@ namespace Narvalo
             }
 
             return new Currency(code);
-        }
-
-        /// <summary />
-        public override string ToString()
-        {
-            return _code;
         }
     }
 

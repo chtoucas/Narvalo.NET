@@ -56,7 +56,7 @@ namespace Narvalo.Globalization
                 case "VEF": return "\x0042\x0073";          // Bs
                 case "NIO": return "\x0043\x0024";          // C$
                 case "HUF": return "\x0046\x0074";          // Ft
-                //case "PYG": return "\x0047\x0073";        // Gs       REVIEW
+                ////case "PYG": return "\x0047\x0073";        // Gs       REVIEW
                 case "JMD": return "\x004a\x0024";          // J$
                 case "BAM": return "\x004b\x004d";          // KM
                 case "CZK": return "\x004b\x010d";          // Kč
@@ -137,12 +137,12 @@ namespace Narvalo.Globalization
                 case "YER": return "\xfdfc";    // ﷼ - RIAL SIGN
 
                 // Symbols in the Unicode range: \x20a0-\x20cf
-                // \x20a0 EURO-CURRENCY SIGN - NB: Intended for ECU before the EURO came to life.
+                //// \x20a0 EURO-CURRENCY SIGN - NB: Intended for ECU before the EURO came to life.
                 case "CRC": return "\x20a1";    // ₡ - COLON SIGN
                 case "BRE": return "\x20a2";    // ₢ - CRUZEIRO SIGN        NB: LEGACY -> EUR
                 case "FRF": return "\x20a3";    // ₣ - FRENCH FRANC SIGN    NB: LEGACY -> EUR
                 case "TRL": return "\x20a4";    // ₤ - LIRA SIGN            NB: LEGACY -> EUR
-                // \x20a5 MILL SIGN
+                //// \x20a5 MILL SIGN
                 case "NGN": return "\x20a6";    // ₦ - NAIRA SIGN
                 case "ESP": return "\x20a7";    // ₧ - PESETA SIGN          NB: LEGACY -> EUR
                 case "LKR":
@@ -158,21 +158,21 @@ namespace Narvalo.Globalization
                 case "LAK": return "\x20ad";    // ₭ - KIP SIGN
                 case "MNT": return "\x20ae";    // ₮ - TUGRIK SIGN
                 case "GRD": return "\x20af";    // ₯ - DRACHMA SIGN         NB: LEGACY -> EUR
-                // \x20b0 GERMAN PENNY SIGN
+                //// \x20b0 GERMAN PENNY SIGN
                 case "CUP":
                 case "PHP": return "\x20b1";    // ₱ - PESO SIGN
                 case "PYG": return "\x20b2";    // ₲ - GUARANI SIGN         NB: Often represented by G or Gs - REVIEW Paraguay
                 case "ARA": return "\x20b3";    // ₳ - AUSTRAL SIGN         NB: LEGACY -> ARS
                 case "UAH": return "\x20b4";    // ₴ - HRYVNIA SIGN
-                //case "GHS": return "\x20b5";    // ₵ - CEDI SIGN          REVIEW Ghana, GH₵?
-                // \x20b6 LIVRE TOURNOIS SIGN - NB: Historical
-                // \x20b7 SPESMILO SIGN - NB: Historical
-                //case "KZT": return "\x20b8";    // ₸ - TENGE SIGN         REVIEW Kazakhstan
+                ////case "GHS": return "\x20b5";    // ₵ - CEDI SIGN          REVIEW Ghana, GH₵?
+                //// \x20b6 LIVRE TOURNOIS SIGN - NB: Historical
+                //// \x20b7 SPESMILO SIGN - NB: Historical
+                ////case "KZT": return "\x20b8";    // ₸ - TENGE SIGN         REVIEW Kazakhstan
                 case "INR": return "\x20b9";    // ₹ - INDIAN RUPEE SIGN
                 case "TRY": return "\x20ba";    // ₺ - TURKISH LIRA SIGN
-                // \x20bb NORDIC MARK SIGN                                  REVIEW Denmark, Norway
-                // \x20bc MANAT SIGN                                        REVIEW Azerbaijan
-                // \x20bd RUBLE SIGN                                        REVIEW Russia
+                //// \x20bb NORDIC MARK SIGN                                  REVIEW Denmark, Norway
+                //// \x20bc MANAT SIGN                                        REVIEW Azerbaijan
+                //// \x20bd RUBLE SIGN                                        REVIEW Russia
 
                 default:
                     Debug.WriteLine("No symbol found for the currency: " + code);

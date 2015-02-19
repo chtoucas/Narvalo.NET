@@ -7,7 +7,7 @@
       This package contains the Narvalo.Org common utilities.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>Utilities, SQL, Currency, Money</NuTags>
+    <NuTags>Utilities, SQL, Currency</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>

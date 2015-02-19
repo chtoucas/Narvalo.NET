@@ -5,7 +5,7 @@ namespace Narvalo.Globalization
     using System;
 
     [Flags]
-    // FIXME_PCL: [Serializable]
+    //// FIXME_PCL: [Serializable]
     public enum CurrencyTypes
     {
         CurrentCurrencies = 1 << 0,

@@ -17,7 +17,7 @@ namespace Narvalo.Globalization
     /// regions/countries. There is no 1-1 correspondance between currencies
     /// and currency infos.
     /// </remarks>
-    // FIXME_PCL: [Serializable]
+    //// FIXME_PCL: [Serializable]
     public sealed class CurrencyInfo
     {
         const char MetaCurrencyMark_ = 'X';
@@ -36,6 +36,7 @@ namespace Narvalo.Globalization
         internal CurrencyInfo(string code, short numericCode)
         {
             Enforce.NotNull(code, "code");
+
             // For PCL classes, we must convert the string to an array to be able to use Linq.
             Contract.Requires(
                 code.Length == 3 && code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
@@ -171,13 +172,11 @@ namespace Narvalo.Globalization
 
                 return _symbol;
             }
-            set { _symbol = value; }
-        }
 
-        /// <summary />
-        public override string ToString()
-        {
-            return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
+            set
+            {
+                _symbol = value;
+            }
         }
 
         /// <summary>
@@ -205,6 +204,12 @@ namespace Narvalo.Globalization
         public static IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
         {
             return CurrencyProvider.Current.GetCurrencies(types);
+        }
+
+        /// <summary />
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
         }
     }
 }
