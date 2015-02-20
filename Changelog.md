@@ -1,13 +1,15 @@
 ChangeLog
 =========
            
-- (2015/02/19) _Bugfix:_ Use 0 for the numeric code of a currency when none is
+- **(2014/02/20) Released Narvalo.Core & Narvalo.Common v0.21:** 
+  Bugfix for currency types.
+- (2015/02/20) _Bugfix:_ Use 0 for the numeric code of a currency when none is
   defined. Before that, we registered the alphabetic code but not the currency 
   info since we didn't have a numeric code.
-- (2015/02/19) _Bugfix:_ Removed from the currency classes anything related 
+- (2015/02/20) _Bugfix:_ Removed from the currency classes anything related 
   to culture, namely the currency symbol methods. We need a better way of handling 
   localization problems. Unicode CLDR seems the way to go.
-- **(2014/02/19) Released Narvalo.Core & Narvalo.Common v0.20:**                  
+- **(2014/02/19) Released Narvalo.Core & Narvalo.Common v0.20:** Currency types.                 
 - (2015/02/19) _Enhancement:_ Added classes to represent a currency defined 
   by ISO 4217. 
 - (2015/01/21) _Improvement:_ Prevent creation of retail packages if there are
