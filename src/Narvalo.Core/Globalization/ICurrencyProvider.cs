@@ -7,9 +7,9 @@ namespace Narvalo.Globalization
     public interface ICurrencyProvider
     {
         /// <summary>
-        /// Gets the list of currency codes.
+        /// Gets the set of available currency codes.
         /// </summary>
-        /// <value>The list of currency codes.</value>
+        /// <value>The set of available currency codes.</value>
         HashSet<string> CurrencyCodes { get; }
 
         /// <summary>
@@ -21,21 +21,5 @@ namespace Narvalo.Globalization
         /// <returns>An enumeration that contains the currencies filtered by the <paramref name="types"/> 
         /// parameter.</returns>
         IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
-
-        /// <summary>
-        /// Obtains the fallback currency symbol for a given currency code.
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Since the currency symbol actually depends on the culture and local habits, this method 
-        /// can only return a closest match. The result is then non-authoritative.
-        /// </para>
-        /// <para>
-        /// If none is found, returns the Unicode currency sign.
-        /// </para>
-        /// </remarks>
-        /// <param name="code">The alphabetic code of the currency.</param>
-        /// <returns>The fallback currency symbol for a given currency code.</returns>
-        string GetFallbackSymbol(string code);
     }
 }

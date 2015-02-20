@@ -10,11 +10,6 @@ namespace Narvalo.Globalization
 
         public abstract IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
 
-        public virtual string GetFallbackSymbol(string code)
-        {
-            return "\x00a4";
-        }
-
         protected static CurrencyInfo CreateCurrency(
             string code,
             short numericCode,

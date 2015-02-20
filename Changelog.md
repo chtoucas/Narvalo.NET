@@ -1,6 +1,10 @@
 ChangeLog
 =========
-                             
+           
+- (2015/02/19) _Bugfix:_ Removed from the currency classes anything related 
+  to culture, namely the currency symbol methods. We need a better way of handling 
+  localization problems. Unicode CLDR seems the way to go.
+- **(2014/02/19) Released Narvalo.Core & Narvalo.Common v0.20:**                  
 - (2015/02/19) _Enhancement:_ Added classes to represent a currency defined 
   by ISO 4217. 
 - (2015/01/21) _Improvement:_ Prevent creation of retail packages if there are

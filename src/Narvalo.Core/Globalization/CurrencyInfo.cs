@@ -12,20 +12,18 @@ namespace Narvalo.Globalization
     /// Provides information about a specific combination of currency and region/country.
     /// </summary>
     /// <remarks>
-    /// Different currencies may have the same <see cref="CurrencyInfo.Code"/>
+    /// <para>You can define your own set of currencies by creating a <see cref="ICurrencyProvider"/>.</para>
+    /// <para>Different currencies may have the same <see cref="CurrencyInfo.Code"/>
     /// and <see cref="CurrencyInfo.NumericCode"/> but be associated to different 
     /// regions/countries. There is no 1-1 correspondance between currencies
-    /// and currency infos.
+    /// and currency infos.</para>
     /// </remarks>
-    //// FIXME_PCL: [Serializable]
     public sealed class CurrencyInfo
     {
         const char MetaCurrencyMark_ = 'X';
 
         readonly string _code;
         readonly short _numericCode;
-
-        string _symbol;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyInfo" /> class 
@@ -37,7 +35,7 @@ namespace Narvalo.Globalization
         {
             Enforce.NotNull(code, "code");
 
-            // For PCL classes, we must convert the string to an array to be able to use Linq.
+            // For PCL classes, we must convert the string to an array before being able to use Linq operators on it.
             Contract.Requires(
                 code.Length == 3 && code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
                 "The code MUST be composed of exactly 3 letters, all CAPS and ASCII.");
@@ -68,7 +66,7 @@ namespace Narvalo.Globalization
         /// Gets the full name of the currency in English.
         /// </summary>
         /// <remarks>
-        /// This name is not guaranteed to match the value of RegionInfo.CurrencyEnglishName.
+        /// This name is not guaranteed to match the value of <see cref="RegionInfo.CurrencyEnglishName"/>.
         /// </remarks>
         /// <value>The full name of the currency in English.</value>
         public string EnglishName { get; internal set; }
@@ -78,7 +76,7 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This name has nothing to do with the value of <see cref="RegionInfo.EnglishName"/>.
+        /// This name is not guaranteed to match the value of <see cref="RegionInfo.EnglishName"/>.
         /// </para>
         /// <para>
         /// Most meta-currencies do not belong to a region but they still
@@ -150,34 +148,6 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <value><c>true</c> if the currency is no longer in use; otherwise <c>false</c>.</value>
         public bool Superseded { get; internal set; }
-
-        /// <summary>
-        /// Gets or sets the currency symbol.
-        /// </summary>
-        /// <remarks>
-        /// In Narvalo.Common you may find an extension method <c>FindRegion</c>.
-        /// If its return value is not <c>null</c> and the value of 
-        /// its <see cref="RegionInfo.ISOCurrencySymbol"/> property
-        /// matchs with the one of <see cref="Code"/>, you might prefer to use the
-        /// <see cref="RegionInfo.CurrencySymbol"/> property.
-        /// </remarks>
-        /// <value>The currency symbol of the currency.</value>
-        public string Symbol
-        {
-            get
-            {
-                if (_symbol == null) {
-                    _symbol = CurrencyProvider.Current.GetFallbackSymbol(Code);
-                }
-
-                return _symbol;
-            }
-
-            set
-            {
-                _symbol = value;
-            }
-        }
 
         /// <summary>
         /// Obtains the list of currently active currencies.

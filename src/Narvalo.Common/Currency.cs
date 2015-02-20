@@ -12,7 +12,8 @@ namespace Narvalo
     /// </summary>
     /// <remarks>
     /// <para>
-    /// You can not directly construct a currency. You must instead use one of the
+    /// There's never more than one <see cref="Currency"/> instance for any given currency.
+    /// Therefore, you can not directly construct a currency. You must instead use one of the
     /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 
     /// or <see cref="Currency.OfCurrentCulture"/>.
     /// </para>
@@ -21,7 +22,7 @@ namespace Narvalo
     /// </para>
     /// <para>
     /// This class does not offer extended information about the currency.
-    /// For such needs, you should refer to the <see cref="CurrencyInfo"/> class.
+    /// If you needed so, you may use to the <see cref="CurrencyInfo"/> class.
     /// </para>
     /// </remarks>
     [Serializable]
@@ -37,7 +38,7 @@ namespace Narvalo
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        internal Currency(string code)
+        Currency(string code)
         {
             // We do not fully validate the input here since this should be taken care of by the provider.
             Enforce.NotNull(code, "code");
@@ -70,6 +71,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="cultureInfo">A culture info.</param>
         /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is <c>null</c></exception>
+        /// <exception cref="CurrencyNotFoundException">No currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
         public static Currency OfCulture(CultureInfo cultureInfo)
         {
@@ -82,13 +84,17 @@ namespace Narvalo
         /// Obtains an instance of the <see cref="Currency" /> class for the culture
         /// used by the current thread.
         /// </summary>
+        /// <exception cref="CurrencyNotFoundException">No currency exists for the current culture.</exception>
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency OfCurrentCulture()
         {
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
-        /// <summary />
+        /// <summary>
+        /// Returns a string containing the code of the currency.
+        /// </summary>
+        /// <returns>A string containing the code of the currency.</returns>
         public override string ToString()
         {
             return _code;
@@ -117,6 +123,13 @@ namespace Narvalo
     // Provides user-friendly access to some of the most common currencies.
     public sealed partial class Currency
     {
+        // We aggressively cache the most used currencies.
+        static Currency Dollar_ = Of("USD");
+        static Currency Euro_ = Of("EUR");
+        static Currency Pound_ = Of("GBP");
+        static Currency SwissFranc_ = Of("CHF");
+        static Currency Yen_ = Of("JPY");
+
         /// <summary>
         /// Gets the "Special Drawing Right" currency.
         /// </summary>
@@ -140,31 +153,31 @@ namespace Narvalo
         /// Gets the (British) Pound Sterling currency.
         /// </summary>
         /// <value>The (British) Pound Sterling currency.</value>
-        public static Currency Pound { get { return Of("GBP"); } }
+        public static Currency Pound { get { return Pound_; } }
 
         /// <summary>
         /// Gets the Euro currency.
         /// </summary>
         /// <value>The Euro currency.</value>
-        public static Currency Euro { get { return Of("EUR"); } }
+        public static Currency Euro { get { return Euro_; } }
 
         /// <summary>
         /// Gets the United States Dollar currency.
         /// </summary>
         /// <value>The United States Dollar currency.</value>
-        public static Currency Dollar { get { return Of("USD"); } }
+        public static Currency Dollar { get { return Dollar_; } }
 
         /// <summary>
         /// Gets the Swiss Franc currency.
         /// </summary>
         /// <value>The Swiss Franc currency.</value>
-        public static Currency SwissFranc { get { return Of("CHF"); } }
+        public static Currency SwissFranc { get { return SwissFranc_; } }
 
         /// <summary>
         /// Gets the Japanese Yen currency.
         /// </summary>
         /// <value>The Japanese Yen currency.</value>
-        public static Currency Yen { get { return Of("JPY"); } }
+        public static Currency Yen { get { return Yen_; } }
 
         /// <summary>
         /// Gets the pseudo-currency for gold.

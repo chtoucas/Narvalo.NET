@@ -38,7 +38,8 @@ namespace Narvalo.Globalization
             //   the numeric country code defined by ISO 3166.
             // - The first two letters from the alphabetic code SHOULD match
             //   the country alpha-2 code defined by ISO 3166.
-            // - The english name of the region.
+            // - The english name of the region. Let's hope that .NET and ISO 4217
+            //   both use the same name.
             // Using the numeric code is not good. For instance, we would miss most of the European 
             // countries which use the EUR supranational currency whose code (978) does not relate 
             // to the actual country. For exactly the same reason we can not use the alphabetic code.
