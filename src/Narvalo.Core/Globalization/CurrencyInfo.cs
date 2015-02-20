@@ -40,7 +40,7 @@ namespace Narvalo.Globalization
                 code.Length == 3 && code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
                 "The code MUST be composed of exactly 3 letters, all CAPS and ASCII.");
             Contract.Requires(
-                numericCode > 0 && numericCode < 1000,
+                numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");
 
             _code = code;
@@ -66,7 +66,7 @@ namespace Narvalo.Globalization
         /// Gets the full name of the currency in English.
         /// </summary>
         /// <remarks>
-        /// This name is not guaranteed to match the value of <see cref="RegionInfo.CurrencyEnglishName"/>.
+        /// This name is not guaranteed to match the value of RegionInfo.CurrencyEnglishName.
         /// </remarks>
         /// <value>The full name of the currency in English.</value>
         public string EnglishName { get; internal set; }

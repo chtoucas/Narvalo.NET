@@ -1422,6 +1422,11 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"ÅLAND ISLANDS",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("ALK", 0) {
+                    EnglishName = @"Old Lek",
+                    EnglishRegionName = @"ALBANIA",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("ADP", 20) {
                     EnglishName = @"Andorran Peseta",
                     EnglishRegionName = @"ANDORRA",
@@ -1435,6 +1440,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"ANDORRA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("AOK", 0) {
+                    EnglishName = @"Kwanza",
+                    EnglishRegionName = @"ANGOLA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("AON", 24) {
@@ -1454,6 +1464,11 @@ namespace Narvalo.Globalization
                 };
                 yield return new CurrencyInfo("ARP", 32) {
                     EnglishName = @"Peso Argentino",
+                    EnglishRegionName = @"ARGENTINA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("ARY", 0) {
+                    EnglishName = @"Peso",
                     EnglishRegionName = @"ARGENTINA",
                     Superseded = true,
                 };
@@ -1507,9 +1522,19 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"BELGIUM",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("BOP", 0) {
+                    EnglishName = @"Peso boliviano",
+                    EnglishRegionName = @"BOLIVIA",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("BAD", 70) {
                     EnglishName = @"Dinar",
                     EnglishRegionName = @"BOSNIA AND HERZEGOVINA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("BRB", 0) {
+                    EnglishName = @"Cruzeiro",
+                    EnglishRegionName = @"BRAZIL",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("BRC", 76) {
@@ -1532,9 +1557,29 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"BRAZIL",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("BGJ", 0) {
+                    EnglishName = @"Lev A/52",
+                    EnglishRegionName = @"BULGARIA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("BGK", 0) {
+                    EnglishName = @"Lev A/62",
+                    EnglishRegionName = @"BULGARIA",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("BGL", 100) {
                     EnglishName = @"Lev",
                     EnglishRegionName = @"BULGARIA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("BUK", 0) {
+                    EnglishName = @"N.A.",
+                    EnglishRegionName = @"BURMA ",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("CNX", 0) {
+                    EnglishName = @"Peoples Bank Dollar",
+                    EnglishRegionName = @"CHINA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("HRD", 191) {
@@ -1545,6 +1590,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("CYP", 196) {
                     EnglishName = @"Cyprus Pound",
                     EnglishRegionName = @"CYPRUS",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("CSJ", 0) {
+                    EnglishName = @"Krona A/53",
+                    EnglishRegionName = @"CZECHOSLOVAKIA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("CSK", 200) {
@@ -1560,6 +1610,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("ECV", 983) {
                     EnglishName = @"Unidad de Valor Constante (UVC)",
                     EnglishRegionName = @"ECUADOR",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("EQE", 0) {
+                    EnglishName = @"Ekwele",
+                    EnglishRegionName = @"EQUATORIAL GUINEA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("GQE", 226) {
@@ -1637,6 +1692,21 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"GUADELOUPE",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("GNE", 0) {
+                    EnglishName = @"Syli",
+                    EnglishRegionName = @"GUINEA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("GNS", 0) {
+                    EnglishName = @"Syli",
+                    EnglishRegionName = @"GUINEA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("GWE", 0) {
+                    EnglishName = @"Guinea Escudo",
+                    EnglishRegionName = @"GUINEA-BISSAU",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("GWP", 624) {
                     EnglishName = @"Guinea-Bissau Peso",
                     EnglishRegionName = @"GUINEA-BISSAU",
@@ -1647,9 +1717,24 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"HOLY SEE (VATICAN CITY STATE)",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("ISJ", 0) {
+                    EnglishName = @"Old Krona",
+                    EnglishRegionName = @"ICELAND",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("IEP", 372) {
                     EnglishName = @"Irish Pound",
                     EnglishRegionName = @"IRELAND",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("ILP", 0) {
+                    EnglishName = @"Pound",
+                    EnglishRegionName = @"ISRAEL",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("ILR", 0) {
+                    EnglishName = @"Old Shekel",
+                    EnglishRegionName = @"ISRAEL",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("ITL", 380) {
@@ -1667,6 +1752,11 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"KYRGYZSTAN",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("LAJ", 0) {
+                    EnglishName = @"Kip Pot Pol",
+                    EnglishRegionName = @"LAO",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("LVL", 428) {
                     EnglishName = @"Latvian Lats",
                     EnglishRegionName = @"LATVIA",
@@ -1675,6 +1765,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("LVR", 428) {
                     EnglishName = @"Latvian Ruble",
                     EnglishRegionName = @"LATVIA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("LSM", 0) {
+                    EnglishName = @"Maloti",
+                    EnglishRegionName = @"LESOTHO",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("ZAL", 991) {
@@ -1712,6 +1807,16 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"MADAGASCAR",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("MVQ", 0) {
+                    EnglishName = @"Maldive Rupee",
+                    EnglishRegionName = @"MALDIVES",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("MAF", 0) {
+                    EnglishName = @"Mali Franc",
+                    EnglishRegionName = @"MALI",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("MLF", 466) {
                     EnglishName = @"Mali Franc",
                     EnglishRegionName = @"MALI",
@@ -1719,6 +1824,11 @@ namespace Narvalo.Globalization
                 };
                 yield return new CurrencyInfo("MTL", 470) {
                     EnglishName = @"Maltese Lira",
+                    EnglishRegionName = @"MALTA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("MTP", 0) {
+                    EnglishName = @"Maltese Pound",
                     EnglishRegionName = @"MALTA",
                     Superseded = true,
                 };
@@ -1732,6 +1842,11 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"MAYOTTE",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("MXP", 0) {
+                    EnglishName = @"Mexican Peso",
+                    EnglishRegionName = @"MEXICO",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("RUR", 810) {
                     EnglishName = @"Russian Ruble",
                     EnglishRegionName = @"MOLDOVA, REPUBLIC OF",
@@ -1740,6 +1855,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"MONACO",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("MZE", 0) {
+                    EnglishName = @"Mozambique Escudo",
+                    EnglishRegionName = @"MOZAMBIQUE",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("MZM", 508) {
@@ -1755,6 +1875,16 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("ANG", 532) {
                     EnglishName = @"Netherlands Antillean Guilder",
                     EnglishRegionName = @"NETHERLANDS ANTILLES",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("NIC", 0) {
+                    EnglishName = @"Cordoba",
+                    EnglishRegionName = @"NICARAGUA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("PEH", 0) {
+                    EnglishName = @"Sol",
+                    EnglishRegionName = @"PERU",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("PEI", 604) {
@@ -1780,6 +1910,11 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("FRF", 250) {
                     EnglishName = @"French Franc",
                     EnglishRegionName = @"RÉUNION",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("ROK", 0) {
+                    EnglishName = @"Leu A/52",
+                    EnglishRegionName = @"ROMANIA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("ROL", 642) {
@@ -1842,6 +1977,11 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"SOUTH SUDAN",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("RHD", 0) {
+                    EnglishName = @"Rhodesian Dollar",
+                    EnglishRegionName = @"SOUTHERN RHODESIA ",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("ESA", 996) {
                     EnglishName = @"Spanish Peseta",
                     EnglishRegionName = @"SPAIN",
@@ -1859,6 +1999,11 @@ namespace Narvalo.Globalization
                 };
                 yield return new CurrencyInfo("SDD", 736) {
                     EnglishName = @"Sudanese Dinar",
+                    EnglishRegionName = @"SUDAN",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("SDP", 0) {
+                    EnglishName = @"Sudanese Pound",
                     EnglishRegionName = @"SUDAN",
                     Superseded = true,
                 };
@@ -1912,14 +2057,39 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"TURKMENISTAN",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("UGS", 0) {
+                    EnglishName = @"Uganda Shilling",
+                    EnglishRegionName = @"UGANDA",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("UGW", 0) {
+                    EnglishName = @"Old Shilling",
+                    EnglishRegionName = @"UGANDA",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("UAK", 804) {
                     EnglishName = @"Karbovanet",
                     EnglishRegionName = @"UKRAINE",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("SUR", 0) {
+                    EnglishName = @"Rouble",
+                    EnglishRegionName = @"UNION OF SOVIET SOCIALIST REPUBLICS",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("USS", 998) {
                     EnglishName = @"US Dollar (Same day)",
                     EnglishRegionName = @"UNITED STATES",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("UYN", 0) {
+                    EnglishName = @"Old Uruguay Peso",
+                    EnglishRegionName = @"URUGUAY",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("UYP", 0) {
+                    EnglishName = @"Uruguayan Peso",
+                    EnglishRegionName = @"URUGUAY",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("RUR", 810) {
@@ -1937,9 +2107,19 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"VENEZUELA",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("VNC", 0) {
+                    EnglishName = @"Old Dong",
+                    EnglishRegionName = @"VIETNAM",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("YDD", 720) {
                     EnglishName = @"Yemeni Dinar",
                     EnglishRegionName = @"YEMEN, DEMOCRATIC",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("YUD", 0) {
+                    EnglishName = @"New Yugoslavian Dinar",
+                    EnglishRegionName = @"YUGOSLAVIA",
                     Superseded = true,
                 };
                 yield return new CurrencyInfo("YUM", 891) {
@@ -1967,6 +2147,11 @@ namespace Narvalo.Globalization
                     EnglishRegionName = @"ZAMBIA",
                     Superseded = true,
                 };
+                yield return new CurrencyInfo("ZWC", 0) {
+                    EnglishName = @"Rhodesian Dollar",
+                    EnglishRegionName = @"ZIMBABWE",
+                    Superseded = true,
+                };
                 yield return new CurrencyInfo("ZWD", 716) {
                     EnglishName = @"Zimbabwe Dollar (old)",
                     EnglishRegionName = @"ZIMBABWE",
@@ -1985,6 +2170,23 @@ namespace Narvalo.Globalization
                 yield return new CurrencyInfo("ZWR", 935) {
                     EnglishName = @"Zimbabwe Dollar",
                     EnglishRegionName = @"ZIMBABWE",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("XFO", 0) {
+                    EnglishName = @"Gold-Franc",
+                    EnglishRegionName = @"ZZ01_Gold-Franc",
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("XRE", 0) {
+                    EnglishName = @"RINET Funds Code",
+                    EnglishRegionName = @"ZZ02_RINET Funds Code",
+                    IsFund = true,
+                    Superseded = true,
+                };
+                yield return new CurrencyInfo("XFU", 0) {
+                    EnglishName = @"UIC-Franc",
+                    EnglishRegionName = @"ZZ05_UIC-Franc",
+                    IsFund = true,
                     Superseded = true,
                 };
             }

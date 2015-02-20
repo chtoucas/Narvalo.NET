@@ -155,12 +155,15 @@ namespace Narvalo.Internal
                 // Currency Numeric Code
                 // NB: Int16.Parse should never fail.
                 var numericCodeElement = item.Element("CcyNbr");
+                short numericCode;
                 if (numericCodeElement == null) {
                     Debug.WriteLine("Found a legacy currency without a numeric code: " + item.Element("CtryNm").Value);
 
-                    continue;
+                    numericCode = 0;
                 }
-                var numericCode = Int16.Parse(numericCodeElement.Value);
+                else {
+                    numericCode = Int16.Parse(numericCodeElement.Value);
+                }
 
                 Debug.Assert(numericCode > 0, "The numeric code MUST be strictly greater than 0.");
                 Debug.Assert(numericCode < 1000, "The numeric code MUST be strictly less than 1000.");

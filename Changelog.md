@@ -1,6 +1,9 @@
 ChangeLog
 =========
            
+- (2015/02/19) _Bugfix:_ Use 0 for the numeric code of a currency when none is
+  defined. Before that, we registered the alphabetic code but not the currency 
+  info since we didn't have a numeric code.
 - (2015/02/19) _Bugfix:_ Removed from the currency classes anything related 
   to culture, namely the currency symbol methods. We need a better way of handling 
   localization problems. Unicode CLDR seems the way to go.

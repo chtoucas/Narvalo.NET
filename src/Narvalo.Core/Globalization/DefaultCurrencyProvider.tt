@@ -155,14 +155,15 @@ namespace Narvalo.Globalization
             // Currency Numeric Code
             // NB: ParseTo should never fail.
             var numericCodeElement = item.Element("CcyNbr");
+            short numericCode;
             if (numericCodeElement == null) {
                 if (DEBUG) {
                     Warning("Found a legacy currency without a numeric code: " + item.Element("CtryNm").Value);
                 }
-
-                continue;
+                numericCode = (short)0;
+            } else {
+                numericCode = Int16.Parse(numericCodeElement.Value);
             }
-            var numericCode = Int16.Parse(numericCodeElement.Value);
 
             // Currency English Name
             var englishNameElement = item.Element("CcyNm");
