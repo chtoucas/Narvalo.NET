@@ -11,12 +11,12 @@ namespace Narvalo.Benchmarking.Internal
 
     class BenchmarkComparativeFinder
     {
-        const BindingFlags DefaultBindings
+        const BindingFlags DEFAULT_BINDINGS
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
         readonly BindingFlags _bindings;
 
-        public BenchmarkComparativeFinder() : this(DefaultBindings) { }
+        public BenchmarkComparativeFinder() : this(DEFAULT_BINDINGS) { }
 
         public BenchmarkComparativeFinder(BindingFlags bindings)
         {

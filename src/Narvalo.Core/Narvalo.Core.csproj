@@ -111,7 +111,6 @@
     <Compile Include="Globalization\CurrencyInfo.cs" />
     <Compile Include="Globalization\CurrencyNotFoundException.cs" />
     <Compile Include="Globalization\CurrencyProvider.cs" />
-    <Compile Include="Globalization\CurrencyProviderBase.cs" />
     <Compile Include="Globalization\CurrencyTypes.cs" />
     <Compile Include="Globalization\DefaultCurrencyProvider.cs" />
     <Compile Include="Globalization\DefaultCurrencyProvider.g.cs">

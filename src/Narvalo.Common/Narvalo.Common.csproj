@@ -73,8 +73,10 @@
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\StoredProcedureContract`1.cs" />
     <Compile Include="Globalization\CurrencyInfo%24.cs" />
+    <Compile Include="Globalization\SnvCurrencyLegacyXmlReader.cs" />
+    <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Internal\SnvCurrencyProvider.cs">
+    <Compile Include="Globalization\SnvCurrencyXmlReader.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Internal\TryParser`1.cs">

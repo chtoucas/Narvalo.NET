@@ -17,9 +17,13 @@
       <Word>Flickr</Word>
       <Word>Yui</Word>
 
+      <!-- Organizations -->
+      <!-- "Association Suisse de Normalisation"-->
+      <Word>Snv</Word>
+
       <!-- Serilog -->
       <Word>Enricher</Word>
-      
+
       <!--  -->
       <Word>Appender</Word>
 
@@ -31,7 +35,7 @@
       <Word>Noop</Word>
       <Word>Cr</Word>
       <Word>Lf</Word>
-      
+
       <!-- Functional -->
       <Word>η</Word>
       <Word>μ</Word>
@@ -53,7 +57,7 @@
       <Word>Lorem</Word>
       <Word>Png</Word>
       <Word>Tv</Word>
-      
+
       <!-- Jargon -->
       <Word>Munge</Word>
     </Recognized>
@@ -78,7 +82,7 @@
       <Acronym>μ</Acronym>
       <Acronym>δ</Acronym>
       <Acronym>ε</Acronym>
-        
+
       <Acronym>Cr</Acronym>
       <Acronym>Lf</Acronym>
       <Acronym>Tv</Acronym>

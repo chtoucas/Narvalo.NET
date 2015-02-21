@@ -13,7 +13,7 @@ namespace Prose.Templating
 
     public sealed class RazorTemplateCompiler
     {
-        const string Namespace_ = "RazorOutput";
+        const string NAMESPACE = "RazorOutput";
 
         string _input;
         string _className;
@@ -39,7 +39,7 @@ namespace Prose.Templating
 
         string TypeFullName_
         {
-            get { return Namespace_ + "." + ClassName_; }
+            get { return NAMESPACE + "." + ClassName_; }
         }
 
         public Type Compile()
@@ -96,7 +96,7 @@ namespace Prose.Templating
         CodeCompileUnit GenerateCode_()
         {
             var host = new RazorEngineHost(new CSharpRazorCodeLanguage());
-            host.DefaultNamespace = Namespace_;
+            host.DefaultNamespace = NAMESPACE;
             host.DefaultBaseClass = typeof(RazorTemplateBase).FullName;
             host.DefaultClassName = ClassName_;
             host.NamespaceImports.Add("System");

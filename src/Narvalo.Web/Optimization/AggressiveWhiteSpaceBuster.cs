@@ -11,7 +11,7 @@ namespace Narvalo.Web.Optimization
     /// </summary>
     public sealed class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
     {
-        const string HtmlElements_ = @"
+        const string HTML_ELEMENTS = @"
             (
                # Eléments de type block.
                # Cf. https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
@@ -64,12 +64,12 @@ namespace Narvalo.Web.Optimization
 
         static readonly Regex SpaceAfterRightAngleBracketRegex_
             = new Regex(
-                HtmlElements_ + @"\>\x20",
+                HTML_ELEMENTS + @"\>\x20",
                 RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
 
         static readonly Regex SpaceBeforeLeftAngleBracketRegex_
             = new Regex(
-                @"\x20\<(/?" + HtmlElements_ + ")",
+                @"\x20\<(/?" + HTML_ELEMENTS + ")",
                 RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
 
         // Pour rappel, "\s" est un alias pour "[\f\n\r\t\v]".

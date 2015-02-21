@@ -29,7 +29,7 @@ namespace Narvalo
     public sealed partial class Currency : IEquatable<Currency>
     {
         // We cache all requested currencies.
-        static readonly ConcurrentDictionary<string, Currency> Cache_
+        static readonly ConcurrentDictionary<string, Currency> s_Cache
             = new ConcurrentDictionary<string, Currency>();
 
         readonly string _code;
@@ -62,7 +62,7 @@ namespace Narvalo
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            return Cache_.GetOrAdd(code, GetCurrency);
+            return s_Cache.GetOrAdd(code, GetCurrency);
         }
 
         /// <summary>
@@ -124,11 +124,11 @@ namespace Narvalo
     public sealed partial class Currency
     {
         // We aggressively cache the most used currencies.
-        static Currency Dollar_ = Of("USD");
-        static Currency Euro_ = Of("EUR");
-        static Currency Pound_ = Of("GBP");
-        static Currency SwissFranc_ = Of("CHF");
-        static Currency Yen_ = Of("JPY");
+        static Currency s_Dollar = Of("USD");
+        static Currency s_Euro = Of("EUR");
+        static Currency s_Pound = Of("GBP");
+        static Currency s_SwissFranc = Of("CHF");
+        static Currency s_Yen = Of("JPY");
 
         /// <summary>
         /// Gets the "Special Drawing Right" currency.
@@ -153,31 +153,31 @@ namespace Narvalo
         /// Gets the (British) Pound Sterling currency.
         /// </summary>
         /// <value>The (British) Pound Sterling currency.</value>
-        public static Currency Pound { get { return Pound_; } }
+        public static Currency Pound { get { return s_Pound; } }
 
         /// <summary>
         /// Gets the Euro currency.
         /// </summary>
         /// <value>The Euro currency.</value>
-        public static Currency Euro { get { return Euro_; } }
+        public static Currency Euro { get { return s_Euro; } }
 
         /// <summary>
         /// Gets the United States Dollar currency.
         /// </summary>
         /// <value>The United States Dollar currency.</value>
-        public static Currency Dollar { get { return Dollar_; } }
+        public static Currency Dollar { get { return s_Dollar; } }
 
         /// <summary>
         /// Gets the Swiss Franc currency.
         /// </summary>
         /// <value>The Swiss Franc currency.</value>
-        public static Currency SwissFranc { get { return SwissFranc_; } }
+        public static Currency SwissFranc { get { return s_SwissFranc; } }
 
         /// <summary>
         /// Gets the Japanese Yen currency.
         /// </summary>
         /// <value>The Japanese Yen currency.</value>
-        public static Currency Yen { get { return Yen_; } }
+        public static Currency Yen { get { return s_Yen; } }
 
         /// <summary>
         /// Gets the pseudo-currency for gold.

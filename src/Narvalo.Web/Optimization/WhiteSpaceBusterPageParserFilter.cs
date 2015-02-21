@@ -17,7 +17,7 @@ namespace Narvalo.Web.Optimization
     /// </remarks>
     public sealed class WhiteSpaceBusterPageParserFilter : LiteralPageParserFilterBase
     {
-        const string DirectiveName_ = "WhiteSpaceBusting";
+        const string DIRECTIVE_NAME = "WhiteSpaceBusting";
 
         // Par défaut, le filtre n'est pas actif.
         bool _enabled = false;
@@ -46,11 +46,11 @@ namespace Narvalo.Web.Optimization
             // NB: Si rien n'est précisé, on considère que le filtre est actif localement.
             bool enabled = true;
 
-            if (attributes.Contains(DirectiveName_)) {
-                enabled = ParseTo.Boolean((string)attributes[DirectiveName_], BooleanStyles.Literal) ?? enabled;
+            if (attributes.Contains(DIRECTIVE_NAME)) {
+                enabled = ParseTo.Boolean((string)attributes[DIRECTIVE_NAME], BooleanStyles.Literal) ?? enabled;
 
                 // On supprime la directive afin de ne pas perturber le fonctionnement de ASP.NET.
-                attributes.Remove(DirectiveName_);
+                attributes.Remove(DIRECTIVE_NAME);
             }
 
             // Si le filtre est activé globalement (valeur par défaut), on vérifie la directive locale, sinon on 

@@ -7,25 +7,25 @@ namespace Narvalo
 
     public static class Int64Encoder
     {
-        const int Base25AlphabetLength_ = 25;
-        const int Base34AlphabetLength_ = 34;
-        const int Base58AlphabetLength_ = 58;
-        const int FlickrBase58AlphabetLength_ = 58;
+        const int BASE25_ALPHABET_LENGTH = 25;
+        const int BASE34_ALPHABET_LENGTH = 34;
+        const int BASE58_ALPHABET_LENGTH = 58;
+        const int FLICKR_BASE58_ALPHABET_LENGTH = 58;
 
-        const int Base25MaxLength_ = 14;
-        const int Base34MaxLength_ = 13;
-        const int Base58MaxLength_ = 11;
-        const int FlickrBase58MaxLength_ = 11;
+        const int BASE25_MAX_LENGTH = 14;
+        const int BASE34_MAX_LENGTH = 13;
+        const int BASE58_MAX_LENGTH = 11;
+        const int FLICKR_BASE58_MAX_LENGTH = 11;
 
         // On exclue la lettre "l".
-        static readonly char[] Base25Alphabet_ = new char[] {
+        static readonly char[] s_Base25Alphabet = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
             'v', 'w', 'x', 'y', 'z', 
         };
 
         // On exclue le chiffre zéro et la lettre "l".
-        static readonly char[] Base34Alphabet_ = new char[] {
+        static readonly char[] s_Base34Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
@@ -33,7 +33,7 @@ namespace Narvalo
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] Base58Alphabet_ = new char[] {
+        static readonly char[] s_Base58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 
             'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
@@ -44,7 +44,7 @@ namespace Narvalo
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] FlickrBase58Alphabet_ = new char[] {
+        static readonly char[] s_FlickrBase58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -59,7 +59,7 @@ namespace Narvalo
             Contract.Requires(value >= 0L);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return Encode(value, Base25Alphabet_, Base25AlphabetLength_);
+            return Encode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
         }
 
         public static string ToBase34String(long value)
@@ -67,7 +67,7 @@ namespace Narvalo
             Contract.Requires(value >= 0L);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return Encode(value, Base34Alphabet_, Base34AlphabetLength_);
+            return Encode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
         }
 
         public static string ToBase58String(long value)
@@ -75,7 +75,7 @@ namespace Narvalo
             Contract.Requires(value >= 0L);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return Encode(value, Base58Alphabet_, Base58AlphabetLength_);
+            return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
         public static string ToFlickrBase58String(long value)
@@ -87,12 +87,12 @@ namespace Narvalo
 
             // TODO: Optimize.
             while (value > 0) {
-                long r = value % FlickrBase58AlphabetLength_;
+                long r = value % FLICKR_BASE58_ALPHABET_LENGTH;
 
-                Contract.Assume(r < FlickrBase58Alphabet_.Length);
+                Contract.Assume(r < s_FlickrBase58Alphabet.Length);
 
-                result = FlickrBase58Alphabet_[r].ToString() + result;
-                value /= FlickrBase58AlphabetLength_;
+                result = s_FlickrBase58Alphabet[r].ToString() + result;
+                value /= FLICKR_BASE58_ALPHABET_LENGTH;
             }
 
             return result;
@@ -102,45 +102,45 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > Base25MaxLength_) {
+            if (value.Length > BASE25_MAX_LENGTH) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base25MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE25_MAX_LENGTH),
                     "value");
             }
 
             Contract.EndContractBlock();
 
-            return Decode(value, Base25Alphabet_, Base25AlphabetLength_);
+            return Decode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
         }
 
         public static long FromBase34String(string value)
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > Base34MaxLength_) {
+            if (value.Length > BASE34_MAX_LENGTH) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base34MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE34_MAX_LENGTH),
                     "value");
             }
 
             Contract.EndContractBlock();
 
-            return Decode(value, Base34Alphabet_, Base34AlphabetLength_);
+            return Decode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
         }
 
         public static long FromBase58String(string value)
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > Base58MaxLength_) {
+            if (value.Length > BASE58_MAX_LENGTH) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, Base58MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE58_MAX_LENGTH),
                     "value");
             }
 
             Contract.EndContractBlock();
 
-            return Decode(value, Base58Alphabet_, Base58AlphabetLength_);
+            return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
         public static long FromFlickrBase58String(string value)
@@ -149,9 +149,9 @@ namespace Narvalo
 
             Contract.EndContractBlock();
 
-            if (value.Length > FlickrBase58MaxLength_) {
+            if (value.Length > FLICKR_BASE58_MAX_LENGTH) {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FlickrBase58MaxLength_),
+                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FLICKR_BASE58_MAX_LENGTH),
                     "value");
             }
 
@@ -159,7 +159,7 @@ namespace Narvalo
             long multiplier = 1;
 
             for (int i = value.Length - 1; i >= 0; i--) {
-                int index = Array.IndexOf(FlickrBase58Alphabet_, value[i]);
+                int index = Array.IndexOf(s_FlickrBase58Alphabet, value[i]);
                 if (index == -1) {
                     throw new ArgumentException(
                         Format.CurrentCulture(Strings_Core.Int64Encoder_IllegalCharacterFormat, value[i], i),
@@ -169,7 +169,7 @@ namespace Narvalo
                 checked {
                     result += multiplier * index;
                     if (i != 0) {
-                        multiplier *= FlickrBase58AlphabetLength_;
+                        multiplier *= FLICKR_BASE58_ALPHABET_LENGTH;
                     }
                 }
             }

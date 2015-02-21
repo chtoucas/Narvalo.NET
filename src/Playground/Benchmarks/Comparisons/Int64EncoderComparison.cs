@@ -6,8 +6,8 @@ namespace Playground.Benchmarks.Comparisons
 
     public static class Int64EncoderComparison
     {
-        const string Alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-        const int AlphabetLength = 58;
+        const string ALPHABET = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+        const int ALPHABET_LENGTH = 58;
 
         static readonly char[] AlphabetUnorderedArray = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
@@ -89,7 +89,7 @@ namespace Playground.Benchmarks.Comparisons
                 }
 
                 result += multi * index;
-                multi *= AlphabetLength;
+                multi *= ALPHABET_LENGTH;
             }
 
             return result;
@@ -102,14 +102,14 @@ namespace Playground.Benchmarks.Comparisons
 
             while (value.Length > 0) {
                 string digit = value.Substring(value.Length - 1);
-                int index = Alphabet.LastIndexOf(digit, StringComparison.Ordinal);
+                int index = ALPHABET.LastIndexOf(digit, StringComparison.Ordinal);
 
                 if (index < 0) {
                     throw new ArgumentException("Invalid string", "value");
                 }
 
                 result += multi * index;
-                multi *= AlphabetLength;
+                multi *= ALPHABET_LENGTH;
                 value = value.Substring(0, value.Length - 1);
             }
 
@@ -129,7 +129,7 @@ namespace Playground.Benchmarks.Comparisons
                 }
 
                 result += multi * index;
-                multi *= AlphabetLength;
+                multi *= ALPHABET_LENGTH;
             }
 
             return result;
@@ -143,16 +143,16 @@ namespace Playground.Benchmarks.Comparisons
 
             string result = string.Empty;
 
-            while (value >= AlphabetLength) {
-                int r = (int)(value % AlphabetLength);
-                result = Alphabet[r] + result;
-                value /= AlphabetLength;
+            while (value >= ALPHABET_LENGTH) {
+                int r = (int)(value % ALPHABET_LENGTH);
+                result = ALPHABET[r] + result;
+                value /= ALPHABET_LENGTH;
             }
 
             int index = (int)value;
 
             if (index > 0) {
-                result = Alphabet[index] + result;
+                result = ALPHABET[index] + result;
             }
 
             return result;
@@ -163,9 +163,9 @@ namespace Playground.Benchmarks.Comparisons
             string result = string.Empty;
 
             while (value > 0) {
-                long r = value % AlphabetLength;
+                long r = value % ALPHABET_LENGTH;
                 result = AlphabetOrderedArray[r] + result;
-                value /= AlphabetLength;
+                value /= ALPHABET_LENGTH;
             }
 
             return result;

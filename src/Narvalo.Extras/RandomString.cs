@@ -8,7 +8,7 @@ namespace Narvalo
 
     public static class RandomString
     {
-        const string Alphabet_ = "abcdefghijklmnopqrstuvwyxz";
+        const string ALPHABET = "abcdefghijklmnopqrstuvwyxz";
 
         // Cf. http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters
         public static string GenerateString(int size, Random generator)
@@ -19,7 +19,7 @@ namespace Narvalo
             var chars = new char[size];
 
             for (int i = 0; i < size; i++) {
-                chars[i] = Alphabet_[generator.Next(Alphabet_.Length)];
+                chars[i] = ALPHABET[generator.Next(ALPHABET.Length)];
             }
 
             return new String(chars);

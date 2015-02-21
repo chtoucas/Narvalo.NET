@@ -23,7 +23,7 @@ namespace Narvalo.Web.UI
 
     public static class ControlBuilderExtensions
     {
-        const BindingFlags BindingAttribute_
+        const BindingFlags BINDING_ATTRIBUTE
             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder @this)
@@ -34,7 +34,7 @@ namespace Narvalo.Web.UI
             Type type = @this.GetType();
 
             while (type != null
-                   && (pi = type.GetProperty("DefaultPropertyBuilder", BindingAttribute_)) == null) {
+                   && (pi = type.GetProperty("DefaultPropertyBuilder", BINDING_ATTRIBUTE)) == null) {
                 type = type.BaseType;
             }
 

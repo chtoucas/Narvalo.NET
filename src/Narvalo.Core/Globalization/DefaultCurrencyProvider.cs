@@ -9,7 +9,7 @@ namespace Narvalo.Globalization
     {
         public HashSet<string> CurrencyCodes
         {
-            get { return _codeSet; }
+            get { return s_CurrencyCodeSet; }
         }
 
         public IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)

@@ -10,20 +10,20 @@ namespace Narvalo.Web.UI.Assets
 
     public static class AssetManager
     {
-        static readonly object Lock_ = new Object();
+        static readonly object s_Lock = new Object();
 
-        static AssetProviderBase Provider_;
-        static AssetProviderCollection Providers_;
+        static AssetProviderBase s_Provider;
+        static AssetProviderCollection s_Providers;
 
-        static bool InitializedDefaultProvider_ = false;
-        static bool InitializedProviders_ = false;
+        static bool s_InitializedDefaultProvider = false;
+        static bool s_InitializedProviders = false;
 
         public static AssetProviderBase Provider
         {
             get
             {
                 EnsureInitialized_();
-                return Provider_;
+                return s_Provider;
             }
         }
 
@@ -32,7 +32,7 @@ namespace Narvalo.Web.UI.Assets
             get
             {
                 EnsureInitialized_();
-                return Providers_;
+                return s_Providers;
             }
         }
 
@@ -62,12 +62,12 @@ namespace Narvalo.Web.UI.Assets
 
         static void EnsureInitialized_()
         {
-            if (InitializedProviders_ && InitializedDefaultProvider_) {
+            if (s_InitializedProviders && s_InitializedDefaultProvider) {
                 return;
             }
 
-            lock (Lock_) {
-                if (InitializedProviders_ && InitializedDefaultProvider_) {
+            lock (s_Lock) {
+                if (s_InitializedProviders && s_InitializedDefaultProvider) {
                     return;
                 }
 
@@ -80,7 +80,7 @@ namespace Narvalo.Web.UI.Assets
 
         static void InitProviders_(AssetSection section)
         {
-            if (InitializedProviders_) {
+            if (s_InitializedProviders) {
                 return;
             }
 
@@ -90,13 +90,13 @@ namespace Narvalo.Web.UI.Assets
                 tmpProviders.SetReadOnly();
             }
 
-            Providers_ = tmpProviders;
-            InitializedProviders_ = true;
+            s_Providers = tmpProviders;
+            s_InitializedProviders = true;
         }
 
         static void InitDefaultProvider_(AssetSection section)
         {
-            if (InitializedDefaultProvider_) {
+            if (s_InitializedDefaultProvider) {
                 return;
             }
 
@@ -107,13 +107,13 @@ namespace Narvalo.Web.UI.Assets
                     section.ElementInformation.Properties["providers"].LineNumber);
             }
 
-            Provider_ = Providers_[section.DefaultProvider];
+            s_Provider = s_Providers[section.DefaultProvider];
 
-            if (Provider_ == null) {
+            if (s_Provider == null) {
                 throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotFound);
             }
 
-            InitializedDefaultProvider_ = true;
+            s_InitializedDefaultProvider = true;
         }
     }
 }

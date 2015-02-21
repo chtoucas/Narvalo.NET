@@ -49,11 +49,11 @@ namespace Narvalo.Globalization
         /// Gets the list of currently active currencies.
         /// </summary>
         /// <remarks>
-        /// The list is built out of data obtained from the "Association Suisse de Normalisation"
+        /// The list is built out of data found on the "Association Suisse de Normalisation"
         /// <see cref="!:http://www.currency-iso.org/en/home.html">website</see>.
         /// </remarks>
         /// <value>The list of currently active currencies.</value>
-        internal IEnumerable<CurrencyInfo> CurrentCurrencies
+        internal static IEnumerable<CurrencyInfo> CurrentCurrencies
         {
             get 
             {
@@ -130,11 +130,11 @@ namespace Narvalo.Globalization
         /// Gets the list of discontinued currencies.
         /// </summary>
         /// <remarks>
-        /// The list is built out of data obtained from the "Association Suisse de Normalisation"
+        /// The list is built out of data found on the "Association Suisse de Normalisation"
         /// <see cref="!:http://www.currency-iso.org/en/home.html">website</see>.
         /// </remarks>
         /// <value>The list of discontinued currencies.</value>
-        internal IEnumerable<CurrencyInfo> LegacyCurrencies
+        internal static IEnumerable<CurrencyInfo> LegacyCurrencies
         {
             get 
             {
@@ -199,7 +199,7 @@ namespace Narvalo.Globalization
             }
         }
 
-        HashSet<string> _codeSet = new HashSet<string>() {
+        static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
 <#
     foreach (var code in codeSet.OrderBy(_ => _)) {
 #>

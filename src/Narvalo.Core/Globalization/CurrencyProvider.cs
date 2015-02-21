@@ -6,7 +6,7 @@ namespace Narvalo.Globalization
 
     public sealed class CurrencyProvider
     {
-        static CurrencyProvider Instance_ = new CurrencyProvider();
+        static CurrencyProvider s_Instance = new CurrencyProvider();
 
         Func<ICurrencyProvider> _factoryThunk = () => null;
 
@@ -21,7 +21,7 @@ namespace Narvalo.Globalization
 
         public static ICurrencyProvider Current
         {
-            get { return Instance_.InnerCurrent; }
+            get { return s_Instance.InnerCurrent; }
         }
 
         internal ICurrencyProvider InnerCurrent
@@ -31,7 +31,7 @@ namespace Narvalo.Globalization
 
         public static void SetProvider(ICurrencyProvider provider)
         {
-            Instance_.InnerSetProvider(provider);
+            s_Instance.InnerSetProvider(provider);
         }
 
         internal void InnerSetProvider(ICurrencyProvider provider)
