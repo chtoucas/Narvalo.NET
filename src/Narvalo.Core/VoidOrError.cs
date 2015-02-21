@@ -9,17 +9,17 @@ namespace Narvalo
 
     public sealed class VoidOrError
     {
-        static readonly VoidOrError Success_ = new VoidOrError();
+        private static readonly VoidOrError Success_ = new VoidOrError();
 
-        readonly bool _isError;
-        readonly ExceptionDispatchInfo _exceptionInfo;
+        private readonly bool _isError;
+        private readonly ExceptionDispatchInfo _exceptionInfo;
 
-        VoidOrError()
+        private VoidOrError()
         {
             _isError = false;
         }
 
-        VoidOrError(ExceptionDispatchInfo exceptionInfo)
+        private VoidOrError(ExceptionDispatchInfo exceptionInfo)
         {
             _isError = false;
             _exceptionInfo = exceptionInfo;
@@ -71,7 +71,7 @@ namespace Narvalo
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(!_isError || _exceptionInfo != null);
         }

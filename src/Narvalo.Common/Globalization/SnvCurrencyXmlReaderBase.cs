@@ -11,7 +11,7 @@ namespace Narvalo.Globalization
 
     public abstract class SnvCurrencyXmlReaderBase
     {
-        const string MINOR_UNITS_NOT_AVAILABLE = "N.A.";
+        private const string MINOR_UNITS_NOT_AVAILABLE = "N.A.";
 
         protected SnvCurrencyXmlReaderBase() { }
 

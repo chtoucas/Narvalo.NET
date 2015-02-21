@@ -10,7 +10,7 @@ namespace Narvalo.Globalization
 
     public static class CurrencyInfoExtensions
     {
-        static Lazy<List<RegionInfo>> Regions_ = new Lazy<List<RegionInfo>>(GetRegions_);
+        private static Lazy<List<RegionInfo>> s_Regions = new Lazy<List<RegionInfo>>(GetRegions_);
 
         /// <summary>
         /// Obtains the region info of the currency.
@@ -43,7 +43,7 @@ namespace Narvalo.Globalization
             // Using the numeric code is not good. For instance, we would miss most of the European 
             // countries which use the EUR supranational currency whose code (978) does not relate 
             // to the actual country. For exactly the same reason we can not use the alphabetic code.
-            var region = Regions_.Value
+            var region = s_Regions.Value
                 .Where(_ => _.EnglishName.ToUpperInvariant() == @this.EnglishRegionName.ToUpperInvariant())
                 .SingleOrDefault();
 
@@ -58,7 +58,7 @@ namespace Narvalo.Globalization
             return region;
         }
 
-        static List<RegionInfo> GetRegions_()
+        private static List<RegionInfo> GetRegions_()
         {
             return (from ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                     let ri = new RegionInfo(ci.LCID)

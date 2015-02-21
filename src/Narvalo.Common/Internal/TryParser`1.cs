@@ -9,7 +9,7 @@ namespace Narvalo.Internal
         Justification = "The method already returns a boolean to indicate the outcome.")]
     delegate bool TryParser<TResult>(string value, out TResult result);
 
-    static class TryParserExtensions
+    internal static class TryParserExtensions
     {
         internal static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {

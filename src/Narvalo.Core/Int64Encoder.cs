@@ -7,25 +7,25 @@ namespace Narvalo
 
     public static class Int64Encoder
     {
-        const int BASE25_ALPHABET_LENGTH = 25;
-        const int BASE34_ALPHABET_LENGTH = 34;
-        const int BASE58_ALPHABET_LENGTH = 58;
-        const int FLICKR_BASE58_ALPHABET_LENGTH = 58;
+        private const int BASE25_ALPHABET_LENGTH = 25;
+        private const int BASE34_ALPHABET_LENGTH = 34;
+        private const int BASE58_ALPHABET_LENGTH = 58;
+        private const int FLICKR_BASE58_ALPHABET_LENGTH = 58;
 
-        const int BASE25_MAX_LENGTH = 14;
-        const int BASE34_MAX_LENGTH = 13;
-        const int BASE58_MAX_LENGTH = 11;
-        const int FLICKR_BASE58_MAX_LENGTH = 11;
+        private const int BASE25_MAX_LENGTH = 14;
+        private const int BASE34_MAX_LENGTH = 13;
+        private const int BASE58_MAX_LENGTH = 11;
+        private const int FLICKR_BASE58_MAX_LENGTH = 11;
 
         // On exclue la lettre "l".
-        static readonly char[] s_Base25Alphabet = new char[] {
+        private static readonly char[] s_Base25Alphabet = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
             'v', 'w', 'x', 'y', 'z', 
         };
 
         // On exclue le chiffre zéro et la lettre "l".
-        static readonly char[] s_Base34Alphabet = new char[] {
+        private static readonly char[] s_Base34Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
@@ -33,7 +33,7 @@ namespace Narvalo
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] s_Base58Alphabet = new char[] {
+        private static readonly char[] s_Base58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 
             'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
@@ -44,7 +44,7 @@ namespace Narvalo
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
-        static readonly char[] s_FlickrBase58Alphabet = new char[] {
+        private static readonly char[] s_FlickrBase58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',

@@ -26,7 +26,7 @@ namespace Narvalo.Web.UI
 
         protected abstract string TransformLiteral(string literal);
 
-        void TransformRecursively_(ControlBuilder controlBuilder)
+        private void TransformRecursively_(ControlBuilder controlBuilder)
         {
             ArrayList subBuilders = controlBuilder.SubBuilders;
 

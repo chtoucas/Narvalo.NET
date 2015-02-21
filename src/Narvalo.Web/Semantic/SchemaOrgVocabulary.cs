@@ -6,7 +6,7 @@ namespace Narvalo.Web.Semantic
 
     public sealed class SchemaOrgVocabulary
     {
-        string _itemType = SchemaOrgType.WebPage;
+        private string _itemType = SchemaOrgType.WebPage;
 
         public string ItemType
         {

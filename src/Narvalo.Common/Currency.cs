@@ -11,34 +11,28 @@ namespace Narvalo
     /// Represents a currency unit such as Euro or US Dollar.
     /// </summary>
     /// <remarks>
-    /// <para>
-    /// There's never more than one <see cref="Currency"/> instance for any given currency.
+    /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
     /// Therefore, you can not directly construct a currency. You must instead use one of the
     /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 
-    /// or <see cref="Currency.OfCurrentCulture"/>.
-    /// </para>
-    /// <para>
-    /// This class follows value type semantics when it comes to equality.
-    /// </para>
-    /// <para>
-    /// This class does not offer extended information about the currency.
-    /// If you needed so, you may use to the <see cref="CurrencyInfo"/> class.
-    /// </para>
+    /// or <see cref="Currency.OfCurrentCulture"/>.</para>
+    /// <para>This class follows value type semantics when it comes to equality.</para>
+    /// <para>This class does not offer extended information about the currency.
+    /// If you needed so, you may use to the <see cref="CurrencyInfo"/> class.</para>
     /// </remarks>
     [Serializable]
     public sealed partial class Currency : IEquatable<Currency>
     {
         // We cache all requested currencies.
-        static readonly ConcurrentDictionary<string, Currency> s_Cache
-            = new ConcurrentDictionary<string, Currency>();
+        private static readonly ConcurrentDictionary<string, Currency> s_Cache
+             = new ConcurrentDictionary<string, Currency>();
 
-        readonly string _code;
+        private readonly string _code;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        Currency(string code)
+        private Currency(string code)
         {
             // We do not fully validate the input here since this should be taken care of by the provider.
             Enforce.NotNull(code, "code");
@@ -124,11 +118,11 @@ namespace Narvalo
     public sealed partial class Currency
     {
         // We aggressively cache the most used currencies.
-        static Currency s_Dollar = Of("USD");
-        static Currency s_Euro = Of("EUR");
-        static Currency s_Pound = Of("GBP");
-        static Currency s_SwissFranc = Of("CHF");
-        static Currency s_Yen = Of("JPY");
+        private static Currency s_Dollar = Of("USD");
+        private static Currency s_Euro = Of("EUR");
+        private static Currency s_Pound = Of("GBP");
+        private static Currency s_SwissFranc = Of("CHF");
+        private static Currency s_Yen = Of("JPY");
 
         /// <summary>
         /// Gets the "Special Drawing Right" currency.

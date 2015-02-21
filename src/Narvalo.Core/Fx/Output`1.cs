@@ -9,11 +9,11 @@ namespace Narvalo.Fx
 
     public sealed partial class Output<T>
     {
-        readonly bool _isSuccess;
-        readonly ExceptionDispatchInfo _exceptionInfo;
-        readonly T _value;
+        private readonly bool _isSuccess;
+        private readonly ExceptionDispatchInfo _exceptionInfo;
+        private readonly T _value;
 
-        Output(ExceptionDispatchInfo exceptionInfo)
+        private Output(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
 
@@ -21,7 +21,7 @@ namespace Narvalo.Fx
             _exceptionInfo = exceptionInfo;
         }
 
-        Output(T value)
+        private Output(T value)
         {
             _isSuccess = true;
             _value = value;
@@ -118,7 +118,7 @@ namespace Narvalo.Fx
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_isSuccess || _exceptionInfo != null);
         }

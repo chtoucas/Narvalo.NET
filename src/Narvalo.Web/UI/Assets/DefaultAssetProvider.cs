@@ -57,13 +57,13 @@ namespace Narvalo.Web.UI.Assets
             return MakeUri_("~/Content/", relativePath);
         }
 
-        static Uri MakeUri_(string basePath, string relativePath)
+        private static Uri MakeUri_(string basePath, string relativePath)
         {
             return new Uri(Combine_(basePath, relativePath), UriKind.Relative);
         }
 
         // REVIEW: Cf. http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
-        static string Combine_(string basePath, string relativePath)
+        private static string Combine_(string basePath, string relativePath)
         {
             return VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath));
         }

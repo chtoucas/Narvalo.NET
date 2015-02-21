@@ -8,7 +8,7 @@ namespace Narvalo
 
     public static class RandomString
     {
-        const string ALPHABET = "abcdefghijklmnopqrstuvwyxz";
+        private const string ALPHABET = "abcdefghijklmnopqrstuvwyxz";
 
         // Cf. http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters
         public static string GenerateString(int size, Random generator)

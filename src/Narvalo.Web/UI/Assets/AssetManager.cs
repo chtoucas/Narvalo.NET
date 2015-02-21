@@ -10,13 +10,13 @@ namespace Narvalo.Web.UI.Assets
 
     public static class AssetManager
     {
-        static readonly object s_Lock = new Object();
+        private static readonly object s_Lock = new Object();
 
-        static AssetProviderBase s_Provider;
-        static AssetProviderCollection s_Providers;
+        private static AssetProviderBase s_Provider;
+        private static AssetProviderCollection s_Providers;
 
-        static bool s_InitializedDefaultProvider = false;
-        static bool s_InitializedProviders = false;
+        private static bool s_InitializedDefaultProvider = false;
+        private static bool s_InitializedProviders = false;
 
         public static AssetProviderBase Provider
         {
@@ -60,7 +60,7 @@ namespace Narvalo.Web.UI.Assets
             return Provider.GetStyle(relativePath);
         }
 
-        static void EnsureInitialized_()
+        private static void EnsureInitialized_()
         {
             if (s_InitializedProviders && s_InitializedDefaultProvider) {
                 return;
@@ -78,7 +78,7 @@ namespace Narvalo.Web.UI.Assets
             }
         }
 
-        static void InitProviders_(AssetSection section)
+        private static void InitProviders_(AssetSection section)
         {
             if (s_InitializedProviders) {
                 return;
@@ -94,7 +94,7 @@ namespace Narvalo.Web.UI.Assets
             s_InitializedProviders = true;
         }
 
-        static void InitDefaultProvider_(AssetSection section)
+        private static void InitDefaultProvider_(AssetSection section)
         {
             if (s_InitializedDefaultProvider) {
                 return;

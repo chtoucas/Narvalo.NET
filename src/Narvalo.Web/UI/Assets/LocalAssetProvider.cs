@@ -47,12 +47,12 @@ namespace Narvalo.Web.UI.Assets
             return MakeUri_("~/asset/css/", relativePath);
         }
 
-        static Uri MakeUri_(string basePath, string relativePath)
+        private static Uri MakeUri_(string basePath, string relativePath)
         {
             return new Uri(Combine_(basePath, relativePath), UriKind.Relative);
         }
 
-        static string Combine_(string basePath, string relativePath)
+        private static string Combine_(string basePath, string relativePath)
         {
             return VirtualPathUtility.ToAbsolute(
                 relativePath.Length == 0 ? basePath : VirtualPathUtility.Combine(basePath, relativePath));

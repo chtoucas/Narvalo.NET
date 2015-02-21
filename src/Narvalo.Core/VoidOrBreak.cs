@@ -8,17 +8,17 @@ namespace Narvalo
 
     public sealed class VoidOrBreak
     {
-        static readonly VoidOrBreak Success_ = new VoidOrBreak();
+        private static readonly VoidOrBreak Success_ = new VoidOrBreak();
 
-        readonly bool _isBreak;
-        readonly string _reason;
+        private readonly bool _isBreak;
+        private readonly string _reason;
 
-        VoidOrBreak()
+        private VoidOrBreak()
         {
             _isBreak = false;
         }
 
-        VoidOrBreak(string reason)
+        private VoidOrBreak(string reason)
         {
             Contract.Requires(reason != null);
 
@@ -56,7 +56,7 @@ namespace Narvalo
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(!_isBreak || _reason != null);
         }

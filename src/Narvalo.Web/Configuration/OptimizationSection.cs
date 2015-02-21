@@ -11,24 +11,24 @@ namespace Narvalo.Web.Configuration
 
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
-        static ConfigurationProperty EnableWhiteSpaceBusting_
+        private static ConfigurationProperty s_EnableWhiteSpaceBusting
             = new ConfigurationProperty("enableWhiteSpaceBusting", typeof(Boolean), true, ConfigurationPropertyOptions.IsRequired);
 
-        bool _enableWhiteSpaceBusting;
+        private bool _enableWhiteSpaceBusting;
 
-        bool _enableWhiteSpaceBustingSet = false;
+        private bool _enableWhiteSpaceBustingSet = false;
 
-        ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public OptimizationSection()
         {
-            _properties.Add(EnableWhiteSpaceBusting_);
+            _properties.Add(s_EnableWhiteSpaceBusting);
         }
 
         public bool EnableWhiteSpaceBusting
         {
             get { 
-                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[EnableWhiteSpaceBusting_]; 
+                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[s_EnableWhiteSpaceBusting]; 
             }
             
             set { 

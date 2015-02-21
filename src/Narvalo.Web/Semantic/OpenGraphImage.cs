@@ -7,8 +7,8 @@ namespace Narvalo.Web.Semantic
 
     public class OpenGraphImage
     {
-        readonly string _mimeType;
-        readonly Uri _url;
+        private readonly string _mimeType;
+        private readonly Uri _url;
 
         public OpenGraphImage(Uri url, string mimeType)
         {

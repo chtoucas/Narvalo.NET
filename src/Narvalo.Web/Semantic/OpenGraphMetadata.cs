@@ -8,13 +8,13 @@ namespace Narvalo.Web.Semantic
 
     public sealed class OpenGraphMetadata : IOpenGraphMetadata
     {
-        readonly IList<OpenGraphLocale> _alternativeLocales = new List<OpenGraphLocale>();
-        readonly OpenGraphLocale _locale;
-        readonly Ontology _ontology;
+        private readonly IList<OpenGraphLocale> _alternativeLocales = new List<OpenGraphLocale>();
+        private readonly OpenGraphLocale _locale;
+        private readonly Ontology _ontology;
 
-        string _type = OpenGraphType.WebSite;
+        private string _type = OpenGraphType.WebSite;
 
-        OpenGraphImage _image;
+        private OpenGraphImage _image;
 
         public OpenGraphMetadata(Ontology ontology)
         {

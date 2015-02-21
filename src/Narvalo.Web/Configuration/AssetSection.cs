@@ -11,7 +11,7 @@ namespace Narvalo.Web.Configuration
         public const string DefaultName = "assets";
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
-        static ConfigurationProperty DefaultProvider_
+        private static ConfigurationProperty s_DefaultProvider
             = new ConfigurationProperty(
                 "defaultProvider", 
                 typeof(String), 
@@ -19,30 +19,30 @@ namespace Narvalo.Web.Configuration
                null, 
                new StringValidator(1), 
                ConfigurationPropertyOptions.None);
-        
-        static ConfigurationProperty Providers_
+
+        private static ConfigurationProperty s_Providers
             = new ConfigurationProperty(
                 "providers", 
                 typeof(ProviderSettingsCollection));
 
-        string _defaultProvider;
-        ProviderSettingsCollection _providers;
+        private string _defaultProvider;
+        private ProviderSettingsCollection _providers;
 
-        bool _defaultProviderSet = false;
-        bool _providersSet = false;
+        private bool _defaultProviderSet = false;
+        private bool _providersSet = false;
 
-        ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public AssetSection()
         {
-            _properties.Add(DefaultProvider_);
-            _properties.Add(Providers_);
+            _properties.Add(s_DefaultProvider);
+            _properties.Add(s_Providers);
         }
 
         public string DefaultProvider
         {
             get { 
-                return _defaultProviderSet ? _defaultProvider : (string)base[DefaultProvider_]; 
+                return _defaultProviderSet ? _defaultProvider : (string)base[s_DefaultProvider]; 
             }
             
             set { 
@@ -55,7 +55,7 @@ namespace Narvalo.Web.Configuration
         public ProviderSettingsCollection Providers
         {
             get { 
-                return _providersSet ? _providers : (ProviderSettingsCollection)base[Providers_];
+                return _providersSet ? _providers : (ProviderSettingsCollection)base[s_Providers];
             }
             
             set { 

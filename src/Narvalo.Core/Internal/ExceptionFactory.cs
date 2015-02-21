@@ -5,7 +5,7 @@ namespace Narvalo.Internal
     using System;
     using System.Diagnostics.Contracts;
 
-    static class ExceptionFactory
+    internal static class ExceptionFactory
     {
         internal static ArgumentNullException ArgumentNull(string parameterName)
         {

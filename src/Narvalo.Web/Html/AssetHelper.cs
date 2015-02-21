@@ -8,7 +8,7 @@ namespace Narvalo.Web.Html
 
     public sealed class AssetHelper
     {
-        HtmlHelper _htmlHelper;
+        private HtmlHelper _htmlHelper;
 
         public AssetHelper(HtmlHelper htmlHelper)
         {

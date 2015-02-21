@@ -16,7 +16,7 @@ namespace Narvalo.Web.Optimization
         /// </summary>
         public WhiteSpaceBusterMvcWebRazorHostFactory() { }
 
-        static bool EnableWhiteSpaceBusting_
+        private static bool EnableWhiteSpaceBusting_
         {
             get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
         }

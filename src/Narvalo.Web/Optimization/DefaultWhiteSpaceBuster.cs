@@ -11,16 +11,16 @@ namespace Narvalo.Web.Optimization
     /// </summary>
     public sealed class DefaultWhiteSpaceBuster : IWhiteSpaceBuster
     {
-        static readonly Regex LeadingSpacesRegex_
+        private static readonly Regex s_LeadingSpacesRegex
             = new Regex(@"^\x20+", RegexOptions.Compiled | RegexOptions.Multiline);
 
-        static readonly Regex MultipleNewLinesRegex_
+        private static readonly Regex s_MultipleNewLinesRegex
             = new Regex(@"(\r\n){2,}", RegexOptions.Compiled);
 
-        static readonly Regex TabsOrMultipleSpacesRegex_
+        private static readonly Regex s_TabsOrMultipleSpacesRegex
             = new Regex(@"(?:\t+|\x20{2,})", RegexOptions.Compiled);
 
-        static readonly Regex TrailingSpacesRegex_
+        private static readonly Regex s_TrailingSpacesRegex
             = new Regex(@"\x20+$", RegexOptions.Compiled | RegexOptions.Multiline);
 
         /// <summary>
@@ -54,21 +54,21 @@ namespace Narvalo.Web.Optimization
             }
 
             // 1. On remplace toute combinaison d'espace et tabulation par un seul espace.
-            string result = TabsOrMultipleSpacesRegex_.Replace(value, "\x20");
+            string result = s_TabsOrMultipleSpacesRegex.Replace(value, "\x20");
 
             // 2. On supprime tous les espaces et tabulations en début de ligne.
-            result = LeadingSpacesRegex_.Replace(result, String.Empty);
+            result = s_LeadingSpacesRegex.Replace(result, String.Empty);
 
             // 3. On supprime tous les espaces et tabulations en fin de ligne.
-            result = TrailingSpacesRegex_.Replace(result, String.Empty);
+            result = s_TrailingSpacesRegex.Replace(result, String.Empty);
 
             // 4. On remplace les retours à la ligne consécutifs par un seul retour à la ligne.
-            result = MultipleNewLinesRegex_.Replace(result, "\r\n");
+            result = s_MultipleNewLinesRegex.Replace(result, "\r\n");
 
             return result;
         }
 
-        static bool IsTabsOrSpaces_(string value)
+        private static bool IsTabsOrSpaces_(string value)
         {
             for (int i = 0; i < value.Length; i++) {
                 if (!IsTabOrSpace_(value[i])) {
@@ -79,7 +79,7 @@ namespace Narvalo.Web.Optimization
             return true;
         }
 
-        static bool IsTabOrSpace_(char ch)
+        private static bool IsTabOrSpace_(char ch)
         {
             return ch == '\x0009' || ch == '\x0020';
         }

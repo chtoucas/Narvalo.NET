@@ -7,7 +7,7 @@ namespace Narvalo.Web.Semantic
 
     public sealed class OpenGraphLocale
     {
-        CultureInfo _culture;
+        private CultureInfo _culture;
 
         public OpenGraphLocale(CultureInfo culture)
         {

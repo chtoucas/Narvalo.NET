@@ -13,7 +13,7 @@ namespace Narvalo.Web.Optimization
 
     public sealed class WhiteSpaceBusterMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
     {
-        readonly RazorOptimizer _optimizer;
+        private readonly RazorOptimizer _optimizer;
 
         public WhiteSpaceBusterMvcCSharpRazorCodeGenerator(
             string className,
@@ -46,7 +46,7 @@ namespace Narvalo.Web.Optimization
             base.VisitSpan(span);
         }
 
-        void SetBaseType_(string modelTypeName)
+        private void SetBaseType_(string modelTypeName)
         {
             var baseType = new CodeTypeReference(Context.Host.DefaultBaseClass + "<" + modelTypeName + ">");
             Context.GeneratedClass.BaseTypes.Clear();

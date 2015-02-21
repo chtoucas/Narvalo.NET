@@ -9,7 +9,7 @@ namespace Narvalo.Web
     [Serializable]
     public class HttpQueryBinderException : Exception
     {
-        string _memberName = String.Empty;
+        private string _memberName = String.Empty;
 
         public HttpQueryBinderException() { }
 

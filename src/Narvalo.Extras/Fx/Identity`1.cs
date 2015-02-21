@@ -16,9 +16,9 @@ namespace Narvalo.Fx
 
     public sealed partial class Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
     {
-        readonly T _value;
+        private readonly T _value;
 
-        Identity(T value)
+        private Identity(T value)
         {
             _value = value;
         }

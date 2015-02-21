@@ -6,11 +6,11 @@ namespace Narvalo.Globalization
 
     public sealed class CurrencyProvider
     {
-        static CurrencyProvider s_Instance = new CurrencyProvider();
+        private static CurrencyProvider s_Instance = new CurrencyProvider();
 
-        Func<ICurrencyProvider> _factoryThunk = () => null;
+        private Func<ICurrencyProvider> _factoryThunk = () => null;
 
-        ICurrencyProvider _current;
+        private ICurrencyProvider _current;
 
         internal CurrencyProvider() : this(null) { }
 

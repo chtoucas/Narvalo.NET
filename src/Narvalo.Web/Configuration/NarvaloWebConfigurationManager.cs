@@ -8,8 +8,8 @@ namespace Narvalo.Web.Configuration
 
     public static class NarvaloWebConfigurationManager
     {
-        static readonly Lazy<AssetSection> AssetSection_ = new Lazy<AssetSection>(InitializeAssetSection_);
-        static readonly Lazy<OptimizationSection> OptimizationSection_ = new Lazy<OptimizationSection>(InitializeOptimizationSection_);
+        private static readonly Lazy<AssetSection> AssetSection_ = new Lazy<AssetSection>(InitializeAssetSection_);
+        private static readonly Lazy<OptimizationSection> OptimizationSection_ = new Lazy<OptimizationSection>(InitializeOptimizationSection_);
 
         public static AssetSection AssetSection { get { return AssetSection_.Value; } }
 
@@ -33,12 +33,12 @@ namespace Narvalo.Web.Configuration
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
 
-        static AssetSection InitializeAssetSection_()
+        private static AssetSection InitializeAssetSection_()
         {
             return WebSectionManager.GetSection<AssetSection>(AssetSection.SectionName);
         }
 
-        static OptimizationSection InitializeOptimizationSection_()
+        private static OptimizationSection InitializeOptimizationSection_()
         {
             return WebSectionManager.GetSection<OptimizationSection>(OptimizationSection.SectionName);
         }

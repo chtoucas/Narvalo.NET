@@ -17,12 +17,12 @@ namespace Narvalo.Web.Optimization
     /// </remarks>
     public sealed class WhiteSpaceBusterPageParserFilter : LiteralPageParserFilterBase
     {
-        const string DIRECTIVE_NAME = "WhiteSpaceBusting";
+        private const string DIRECTIVE_NAME = "WhiteSpaceBusting";
 
         // Par défaut, le filtre n'est pas actif.
-        bool _enabled = false;
+        private bool _enabled = false;
 
-        IWhiteSpaceBuster _buster;
+        private IWhiteSpaceBuster _buster;
 
         /// <summary>
         /// Initialise un nouvel objet de type <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterPageParserFilter"/>.
@@ -34,7 +34,7 @@ namespace Narvalo.Web.Optimization
         /// </summary>
         protected override bool Enabled { get { return _enabled; } }
 
-        static bool EnableWhiteSpaceBusting_
+        private static bool EnableWhiteSpaceBusting_
         {
             get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
         }

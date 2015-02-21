@@ -12,7 +12,7 @@ namespace Narvalo.Web
 
     public abstract class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
     {
-        readonly IList<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
+        private readonly IList<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
 
         protected HttpQueryBinderBase() { }
 

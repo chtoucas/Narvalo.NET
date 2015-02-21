@@ -8,7 +8,7 @@ namespace Narvalo.Globalization
 
     public sealed class SnvCurrencyLegacyXmlReader : SnvCurrencyXmlReaderBase
     {
-        readonly string _source;
+        private readonly string _source;
 
         public SnvCurrencyLegacyXmlReader(string source)
         {

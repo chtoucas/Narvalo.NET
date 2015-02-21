@@ -11,10 +11,11 @@ namespace Narvalo.Data
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract class StoredProcedure<TResult>
     {
-        readonly string _connectionString;
-        readonly string _name;
+        private readonly string _connectionString;
+        private readonly string _name;
 
-        CommandBehavior _commandBehavior = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
+        private CommandBehavior _commandBehavior 
+            = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
 
         protected StoredProcedure(string connectionString, string name)
         {
@@ -60,7 +61,7 @@ namespace Narvalo.Data
 
         [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
-        SqlCommand CreateCommand_(SqlConnection connection)
+        private SqlCommand CreateCommand_(SqlConnection connection)
         {
             Enforce.NotNull(connection, "connection");
             Contract.Ensures(Contract.Result<SqlCommand>() != null);
@@ -84,14 +85,14 @@ namespace Narvalo.Data
             return cmd;
         }
 
-        SqlConnection CreateConnection_()
+        private SqlConnection CreateConnection_()
         {
             Contract.Ensures(Contract.Result<SqlConnection>() != null);
 
             return new SqlConnection(ConnectionString);
         }
 
-        SqlDataReader ExecuteCommand_(SqlCommand command)
+        private SqlDataReader ExecuteCommand_(SqlCommand command)
         {
             Enforce.NotNull(command, "command");
             Contract.Ensures(Contract.Result<SqlDataReader>() != null);
@@ -101,7 +102,7 @@ namespace Narvalo.Data
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_connectionString != null);
             Contract.Invariant(_connectionString.Length != 0);

@@ -18,7 +18,7 @@ namespace Narvalo.Web.Html
             return new HtmlString(ipsum);
         }
 
-        static IDictionary<string, object> ObjectToDictionary_(object value)
+        private static IDictionary<string, object> ObjectToDictionary_(object value)
         {
             return new RouteValueDictionary(value);
         }

@@ -11,7 +11,7 @@ namespace Narvalo.Web.Optimization
     /// </summary>
     public sealed class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
     {
-        const string HTML_ELEMENTS = @"
+        private const string HTML_ELEMENTS = @"
             (
                # Eléments de type block.
                # Cf. https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
@@ -62,18 +62,18 @@ namespace Narvalo.Web.Optimization
             )
             ";
 
-        static readonly Regex SpaceAfterRightAngleBracketRegex_
+        private static readonly Regex s_SpaceAfterRightAngleBracketRegex
             = new Regex(
                 HTML_ELEMENTS + @"\>\x20",
                 RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
 
-        static readonly Regex SpaceBeforeLeftAngleBracketRegex_
+        private static readonly Regex s_SpaceBeforeLeftAngleBracketRegex
             = new Regex(
                 @"\x20\<(/?" + HTML_ELEMENTS + ")",
                 RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase);
 
         // Pour rappel, "\s" est un alias pour "[\f\n\r\t\v]".
-        static readonly Regex WhiteSpacesRegex_
+        private static readonly Regex s_WhiteSpacesRegex
             = new Regex(@"\s+", RegexOptions.Compiled);
 
         /// <summary>
@@ -105,14 +105,14 @@ namespace Narvalo.Web.Optimization
             //  C:\Users\[User]\AppData\Local\Temp\Temporary ASP.NET Files\vs
             // WARNING: Dans la suite, l'ordre est important.
             // 1. On remplace tous les espaces blancs (éventuellement consécutifs) par un seul espace.
-            string result = WhiteSpacesRegex_.Replace(value, "\x20");
+            string result = s_WhiteSpacesRegex.Replace(value, "\x20");
 
             // 2. On supprime les espaces après certains crochets fermants : "XXX>   " -> "XXX>".
-            result = SpaceAfterRightAngleBracketRegex_.Replace(result, "$1>");
+            result = s_SpaceAfterRightAngleBracketRegex.Replace(result, "$1>");
 
             // 3. On supprime les espaces avant certains crochets ouvrants : 
             // "   <XXX" -> "<XXX" ou "   </XXX" -> "</XXX".
-            result = SpaceBeforeLeftAngleBracketRegex_.Replace(result, "<$1");
+            result = s_SpaceBeforeLeftAngleBracketRegex.Replace(result, "<$1");
 
             return result.Trim();
         }

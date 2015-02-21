@@ -20,10 +20,10 @@ namespace Narvalo.Globalization
     /// </remarks>
     public sealed class CurrencyInfo
     {
-        const char META_CURRENCY_MARK = 'X';
+        private const char META_CURRENCY_MARK = 'X';
 
-        readonly string _code;
-        readonly short _numericCode;
+        private readonly string _code;
+        private readonly short _numericCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyInfo" /> class 

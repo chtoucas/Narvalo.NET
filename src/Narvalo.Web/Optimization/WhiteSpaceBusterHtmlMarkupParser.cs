@@ -9,8 +9,8 @@ namespace Narvalo.Web.Optimization
 
     public sealed class WhiteSpaceBusterHtmlMarkupParser : ParserBase
     {
-        readonly RazorOptimizer _optimizer;
-        readonly ParserBase _inner;
+        private readonly RazorOptimizer _optimizer;
+        private readonly ParserBase _inner;
 
         public WhiteSpaceBusterHtmlMarkupParser(ParserBase inner, RazorOptimizer optimizer)
         {

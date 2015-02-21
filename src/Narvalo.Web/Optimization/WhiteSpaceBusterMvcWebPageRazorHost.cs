@@ -8,7 +8,7 @@ namespace Narvalo.Web.Optimization
 
     public sealed class WhiteSpaceBusterMvcWebPageRazorHost : MvcWebPageRazorHost
     {
-        readonly RazorOptimizer _optimizer;
+        private readonly RazorOptimizer _optimizer;
 
         public WhiteSpaceBusterMvcWebPageRazorHost(
             string virtualPath,

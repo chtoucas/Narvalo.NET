@@ -11,7 +11,7 @@ namespace Narvalo.Web.UI.Assets
 
     public sealed class RemoteAssetProvider : AssetProviderBase
     {
-        Uri _baseUri;
+        private Uri _baseUri;
 
         public RemoteAssetProvider() { }
 
@@ -64,7 +64,7 @@ namespace Narvalo.Web.UI.Assets
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "Utiliser une URI serait contre productif.")]
-        Uri MakeUri_(string basePath, string relativePath)
+        private Uri MakeUri_(string basePath, string relativePath)
         {
             return new Uri(_baseUri, basePath + relativePath);
         }

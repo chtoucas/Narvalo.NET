@@ -78,8 +78,8 @@ namespace Narvalo.Fx
         Justification = "Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
-        readonly bool _isSome;
-        readonly T _value;
+        private readonly bool _isSome;
+        private readonly T _value;
 
         /*!
          * ### Constructor ###
@@ -99,7 +99,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Initializes a new instance of <see cref="Maybe{T}" /> that does not hold any value.
         /// </summary>
-        Maybe()
+        private Maybe()
         {
             _isSome = false;
         }
@@ -108,7 +108,7 @@ namespace Narvalo.Fx
         /// Initializes a new instance of <see cref="Maybe{T}" /> using the specified value. 
         /// </summary>
         /// <param name="value">The underlying value.</param>
-        Maybe(T value)
+        private Maybe(T value)
         {
             Contract.Requires(value != null);
 
@@ -463,7 +463,7 @@ namespace Narvalo.Fx
      */
     public partial class Maybe<T>
     {
-        static readonly Maybe<T> None_ = new Maybe<T>();
+        private static readonly Maybe<T> s_None = new Maybe<T>();
 
         /// <summary>
         /// Returns an instance of <see cref="Maybe{T}" /> that does not hold any value.
@@ -476,7 +476,7 @@ namespace Narvalo.Fx
             {
                 Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
-                return None_;
+                return s_None;
             }
         }
 

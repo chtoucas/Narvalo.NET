@@ -2192,7 +2192,7 @@ namespace Narvalo.Globalization
             }
         }
 
-        static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
+        private static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
             "ADP",
             "AED",
             "AFA",

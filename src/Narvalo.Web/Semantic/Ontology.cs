@@ -10,13 +10,13 @@ namespace Narvalo.Web.Semantic
     {
         public const string OpenGraphNamespace = "og: http://ogp.me/ns#";
 
-        readonly CultureInfo _culture;
-        readonly Relationships _relationships = new Relationships();
-        readonly SchemaOrgVocabulary _schemaOrg = new SchemaOrgVocabulary();
-        readonly IOpenGraphMetadata _openGraph;
+        private readonly CultureInfo _culture;
+        private readonly Relationships _relationships = new Relationships();
+        private readonly SchemaOrgVocabulary _schemaOrg = new SchemaOrgVocabulary();
+        private readonly IOpenGraphMetadata _openGraph;
 
-        string _keywords = String.Empty;
-        string _robotsDirective = "index, follow";
+        private string _keywords = String.Empty;
+        private string _robotsDirective = "index, follow";
 
         public Ontology(CultureInfo culture)
         {

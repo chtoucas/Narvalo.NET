@@ -8,11 +8,11 @@ namespace Narvalo.Web.Configuration
     {
         public const string GroupName = "narvalo.web";
 
-        AssetSection _asset;
-        OptimizationSection _optimization;
+        private AssetSection _asset;
+        private OptimizationSection _optimization;
 
-        bool _assetSet = false;
-        bool _optimizationSet = false;
+        private bool _assetSet = false;
+        private bool _optimizationSet = false;
 
         public AssetSection AssetSection
         {

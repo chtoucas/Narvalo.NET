@@ -11,7 +11,7 @@ namespace Narvalo.Web.Optimization
 
     public sealed class RazorOptimizer
     {
-        readonly IWhiteSpaceBuster _buster;
+        private readonly IWhiteSpaceBuster _buster;
 
         public RazorOptimizer(IWhiteSpaceBuster buster)
         {
@@ -81,14 +81,14 @@ namespace Narvalo.Web.Optimization
             span.ReplaceWith(builder);
         }
 
-        static bool IsMarkup_(Span span)
+        private static bool IsMarkup_(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
         }
 
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", 
             Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
-        static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
+        private static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
             var sb = new StringBuilder(content);
 
@@ -121,12 +121,12 @@ namespace Narvalo.Web.Optimization
             return sb.ToString();
         }
 
-        string BustWhiteSpaces_(string content)
+        private string BustWhiteSpaces_(string content)
         {
             return _buster.Bust(content);
         }
 
-        string OptimizeContent_(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
+        private string OptimizeContent_(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
             string content;
 
@@ -142,10 +142,10 @@ namespace Narvalo.Web.Optimization
             return content;
         }
 
-        class Symbol_ : ISymbol
+        private class Symbol_ : ISymbol
         {
-            string _content;
-            SourceLocation _start = SourceLocation.Zero;
+            private string _content;
+            private SourceLocation _start = SourceLocation.Zero;
 
             public string Content
             {

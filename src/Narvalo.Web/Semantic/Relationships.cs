@@ -7,7 +7,7 @@ namespace Narvalo.Web.Semantic
     public sealed class Relationships
     {
         // FIXME: Prendre en compte les sites web dans un répertoire virtuel.
-        Uri _humansTxtUrl = new Uri("/human.txt", UriKind.Relative);
+        private Uri _humansTxtUrl = new Uri("/human.txt", UriKind.Relative);
 
         public Uri CanonicalUrl { get; set; }
         
