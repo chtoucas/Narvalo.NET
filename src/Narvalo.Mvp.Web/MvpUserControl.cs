@@ -6,14 +6,15 @@ namespace Narvalo.Mvp.Web
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.UI;
+
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web.Core;
 
     public abstract class MvpUserControl : UserControl, IView
     {
-        readonly bool _throwIfNoPresenterBound;
+        private readonly bool _throwIfNoPresenterBound;
 
-        bool _autoDataBind = true;
+        private bool _autoDataBind = true;
 
         protected MvpUserControl() : this(true) { }
 

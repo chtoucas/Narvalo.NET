@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.PresenterBinding
 {
     using System.Collections.Generic;
+
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Resolvers;

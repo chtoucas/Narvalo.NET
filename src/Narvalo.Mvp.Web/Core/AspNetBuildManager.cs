@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System;
+
     using Narvalo.Mvp.Resolvers;
 
     using Compilation = System.Web.Compilation;

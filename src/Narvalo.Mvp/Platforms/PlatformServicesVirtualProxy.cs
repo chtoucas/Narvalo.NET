@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Platforms
 {
     using System;
     using System.ComponentModel;
+
     using Narvalo.Mvp.PresenterBinding;
 
     [EditorBrowsable(EditorBrowsableState.Never)]

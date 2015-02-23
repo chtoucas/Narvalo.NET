@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
+
     using Narvalo.Mvp.PresenterBinding;
 
     public class DefaultPlatformServices : IPlatformServices

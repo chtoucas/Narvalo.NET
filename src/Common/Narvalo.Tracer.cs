@@ -11,84 +11,84 @@ namespace Narvalo
     {
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Info(object source, string format, params string[] messages)
+        public static void Info(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Info, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Info(Type sourceType, string format, params string[] messages)
+        public static void Info(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Info, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Info(object source, string message)
+        public static void Info(object source, string message)
         {
             Trace_(TraceLevel.Info, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Info(Type sourceType, string message)
+        public static void Info(Type sourceType, string message)
         {
             Trace_(TraceLevel.Info, sourceType, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Warning(object source, string format, params string[] messages)
+        public static void Warning(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Warning, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Warning(Type sourceType, string format, params string[] messages)
+        public static void Warning(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Warning, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Warning(object source, string message)
+        public static void Warning(object source, string message)
         {
             Trace_(TraceLevel.Warning, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Warning(Type sourceType, string message)
+        public static void Warning(Type sourceType, string message)
         {
             Trace_(TraceLevel.Warning, sourceType, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Error(object source, string format, params string[] messages)
+        public static void Error(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Error, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Error(Type sourceType, string format, params string[] messages)
+        public static void Error(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Error, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Error(object source, string message)
+        public static void Error(object source, string message)
         {
             Trace_(TraceLevel.Error, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        internal static void Error(Type sourceType, string message)
+        public static void Error(Type sourceType, string message)
         {
             Trace_(TraceLevel.Error, sourceType, message);
         }

@@ -6,6 +6,7 @@ namespace Narvalo.Mvp
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Globalization;
+
     using Narvalo;
 
     // NB: Must stay public for "CompositeViewTypeBuilder" to work.

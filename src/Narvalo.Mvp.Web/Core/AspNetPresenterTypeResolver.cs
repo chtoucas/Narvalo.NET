@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Web.Core
 {
     using System;
     using System.Collections.Generic;
+
     using Narvalo.Mvp.Resolvers;
     using Narvalo.Mvp.Web.Internal;
 

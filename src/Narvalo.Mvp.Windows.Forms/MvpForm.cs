@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Windows.Forms
 {
     using System.ComponentModel;
     using System.Windows.Forms;
+
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Windows.Forms.Internal;
 
@@ -11,10 +12,10 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpForm : Form, IView
     {
-        readonly bool _throwIfNoPresenterBound;
+        private readonly bool _throwIfNoPresenterBound;
 
-        bool _disposed = false;
-        PresenterBinder _presenterBinder;
+        private bool _disposed = false;
+        private PresenterBinder _presenterBinder;
 
         protected MvpForm() : this(true) { }
 

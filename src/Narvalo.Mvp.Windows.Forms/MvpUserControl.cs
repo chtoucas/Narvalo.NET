@@ -3,15 +3,16 @@
 namespace Narvalo.Mvp.Windows.Forms
 {
     using System.Windows.Forms;
+
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Windows.Forms.Internal;
 
     public partial class MvpUserControl : UserControl, IView
     {
-        readonly bool _throwIfNoPresenterBound;
+        private readonly bool _throwIfNoPresenterBound;
 
-        bool _disposed = false;
-        PresenterBinder _presenterBinder;
+        private bool _disposed = false;
+        private PresenterBinder _presenterBinder;
 
         protected MvpUserControl() : this(true) { }
 

@@ -4,14 +4,15 @@ namespace Narvalo.Mvp.Web
 {
     using System;
     using System.Web.UI;
+
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web.Core;
 
     public abstract class MvpPage : Page, IView
     {
-        readonly bool _throwIfNoPresenterBound;
+        private readonly bool _throwIfNoPresenterBound;
 
-        bool _autoDataBind = true;
+        private bool _autoDataBind = true;
 
         protected MvpPage() : this(true) { }
 

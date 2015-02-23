@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpForm<TViewModel> : MvpForm, IView<TViewModel>
     {
-        TViewModel _model;
+        private TViewModel _model;
 
         protected MvpForm() { }
 

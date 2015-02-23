@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Autofac
 {
     using System;
     using System.Collections.Generic;
+
     using global::Autofac;
     using Narvalo.Mvp.PresenterBinding;
 

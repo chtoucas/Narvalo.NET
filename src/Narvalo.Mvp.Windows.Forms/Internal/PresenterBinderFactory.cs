@@ -3,6 +3,7 @@
 namespace Narvalo.Mvp.Windows.Forms.Internal
 {
     using System.Windows.Forms;
+
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 

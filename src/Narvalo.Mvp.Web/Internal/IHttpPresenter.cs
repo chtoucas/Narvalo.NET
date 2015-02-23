@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Web.Internal
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web;
+
     using Narvalo.Mvp;
 
     internal interface IHttpPresenter : IPresenter

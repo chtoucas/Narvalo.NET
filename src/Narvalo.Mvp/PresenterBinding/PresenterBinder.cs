@@ -6,6 +6,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+
     using Narvalo;
 
     public class PresenterBinder

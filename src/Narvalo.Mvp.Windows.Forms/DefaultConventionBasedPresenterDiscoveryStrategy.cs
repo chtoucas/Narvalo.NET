@@ -5,13 +5,14 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Resolvers;
 
     public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly string[] ViewSuffixes_ = new[] 
+        private static readonly string[] s_ViewSuffixes = new[] 
         {
             "UserControl",
             "Control",
@@ -19,13 +20,13 @@ namespace Narvalo.Mvp.Windows.Forms
             "View",
         };
 
-        static readonly string[] PresenterNameTemplates_ = new[]
+        private static readonly string[] s_PresenterNameTemplates = new[]
         {
             "{namespace}.Presenters.{presenter}",
             "{namespace}.{presenter}",
         };
 
-        readonly IPresenterDiscoveryStrategy _inner;
+        private readonly IPresenterDiscoveryStrategy _inner;
 
         public DefaultConventionBasedPresenterDiscoveryStrategy()
             : this(new[] { Assembly.GetEntryAssembly() }) { }
@@ -35,8 +36,8 @@ namespace Narvalo.Mvp.Windows.Forms
             var typeResolver = new PresenterTypeResolver(
                    new BuildManager(assemblies),
                    assemblies.Select(_ => new AssemblyName(_.FullName).Name),
-                   ViewSuffixes_,
-                   PresenterNameTemplates_);
+                   s_ViewSuffixes,
+                   s_PresenterNameTemplates);
 
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }

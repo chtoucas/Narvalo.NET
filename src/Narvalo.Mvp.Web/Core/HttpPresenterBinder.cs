@@ -4,12 +4,13 @@ namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
     using System.Web;
+
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
     public sealed class HttpPresenterBinder : PresenterBinder
     {
-        readonly HttpContext _context;
+        private readonly HttpContext _context;
 
         public HttpPresenterBinder(
             IEnumerable<object> hosts,

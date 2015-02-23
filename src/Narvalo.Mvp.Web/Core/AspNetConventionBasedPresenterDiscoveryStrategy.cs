@@ -4,18 +4,19 @@ namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
     public class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        static readonly string[] DefaultPresenterNameTemplates_ = new[]
+        private static readonly string[] s_DefaultPresenterNameTemplates = new[]
         {
             "{namespace}.Presenters.{presenter}",
             "{namespace}.{presenter}",
         };
 
-        static readonly string[] DefaultViewSuffixes_ = new[] 
+        private static readonly string[] s_DefaultViewSuffixes = new[] 
         {
             // Web Forms
             "UserControl",
@@ -31,10 +32,10 @@ namespace Narvalo.Mvp.Web.Core
             "View",
         };
 
-        readonly IPresenterDiscoveryStrategy _inner;
+        private readonly IPresenterDiscoveryStrategy _inner;
 
         public AspNetConventionBasedPresenterDiscoveryStrategy()
-            : this(DefaultViewSuffixes_, DefaultPresenterNameTemplates_, enableCache: true) { }
+            : this(s_DefaultViewSuffixes, s_DefaultPresenterNameTemplates, enableCache: true) { }
 
         public AspNetConventionBasedPresenterDiscoveryStrategy(
             IEnumerable<string> viewSuffixes,
@@ -51,9 +52,9 @@ namespace Narvalo.Mvp.Web.Core
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver, enableCache);
         }
 
-        public static IEnumerable<string> DefaultPresenterNameTemplates { get { return DefaultPresenterNameTemplates_; } }
+        public static IEnumerable<string> DefaultPresenterNameTemplates { get { return s_DefaultPresenterNameTemplates; } }
 
-        public static IEnumerable<string> DefaultViewSuffixes { get { return DefaultViewSuffixes_; } }
+        public static IEnumerable<string> DefaultViewSuffixes { get { return s_DefaultViewSuffixes; } }
 
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,

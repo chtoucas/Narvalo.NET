@@ -9,6 +9,7 @@ namespace Narvalo.Mvp.Web.Core
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+
     using Narvalo.Mvp;
 
     // Only views bound by the same "HttpPresenteBinder" will share this message bus.
@@ -20,15 +21,15 @@ namespace Narvalo.Mvp.Web.Core
     // NB: After pre-render completes, the message bus is closed.
     public sealed class AspNetMessageCoordinator : IMessageCoordinator
     {
-        readonly ConcurrentDictionary<Type, IList> _messages
+        private readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
 
-        readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
+        private readonly ConcurrentDictionary<Type, IList<Action<object>>> _handlers
             = new ConcurrentDictionary<Type, IList<Action<object>>>();
 
-        readonly Object _lock = new Object();
+        private readonly Object _lock = new Object();
 
-        bool _closed = false;
+        private bool _closed = false;
 
         public void Close()
         {
@@ -61,7 +62,7 @@ namespace Narvalo.Mvp.Web.Core
             PushPreviousMessages_(onNext);
         }
 
-        void AddMessage_<T>(T message)
+        private void AddMessage_<T>(T message)
         {
             var messagesOfT = _messages.GetOrAdd(typeof(T), _ => new List<T>());
 
@@ -70,7 +71,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        void AddHandler_<T>(Action<T> onNext)
+        private void AddHandler_<T>(Action<T> onNext)
         {
             var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
 
@@ -79,7 +80,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        void PushMessage_<T>(T message)
+        private void PushMessage_<T>(T message)
         {
             var messageType = typeof(T);
 
@@ -93,7 +94,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        void PushPreviousMessages_<T>(Action<T> onNext)
+        private void PushPreviousMessages_<T>(Action<T> onNext)
         {
             var messageType = typeof(T);
 
@@ -108,7 +109,7 @@ namespace Narvalo.Mvp.Web.Core
         }
 
         [Conditional("TRACE")]
-        void __TraceNeverReceivedMessages()
+        private void __TraceNeverReceivedMessages()
         {
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 
@@ -122,7 +123,7 @@ namespace Narvalo.Mvp.Web.Core
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PreRenderComplete",
             Justification = "ASP.NET method name.")]
-        void ThrowIfClosed_()
+        private void ThrowIfClosed_()
         {
             if (_closed) {
                 throw new InvalidOperationException(

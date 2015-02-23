@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public partial class MvpUserControl<TViewModel> : MvpUserControl, IView<TViewModel>
     {
-        TViewModel _model;
+        private TViewModel _model;
 
         protected MvpUserControl() { }
 

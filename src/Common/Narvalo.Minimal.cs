@@ -16,7 +16,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void Object<T>([ValidatedNotNull]T @this) where T : class
+        public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
             if (@this == null)
             {
@@ -29,7 +29,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void Object<T>([ValidatedNotNull]T? @this) where T : struct
+        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
         {
             if (@this == null)
             {
@@ -42,7 +42,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void Property<T>([ValidatedNotNull]T value) where T : class
+        public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null)
             {
@@ -55,7 +55,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void Property<T>([ValidatedNotNull]T? value) where T : struct
+        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
             if (value == null)
             {
@@ -68,7 +68,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void PropertyNotEmpty([ValidatedNotNull]string value)
+        public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
             Property(value);
 
@@ -83,7 +83,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
+        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null)
             {
@@ -96,7 +96,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
+        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
             if (value == null)
             {
@@ -109,7 +109,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
 
@@ -129,7 +129,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void InRange(int value, int minValue, int maxValue, string parameterName)
+        public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue)
             {
@@ -147,7 +147,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void InRange(long value, long minValue, long maxValue, string parameterName)
+        public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
             if (value < minValue || value > maxValue)
             {
@@ -165,7 +165,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue)
             {
@@ -182,7 +182,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue)
             {
@@ -199,7 +199,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
+        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)
@@ -222,7 +222,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
+        public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue)
             {
@@ -239,7 +239,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
+        public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue)
             {
@@ -256,7 +256,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        internal static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
+        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)

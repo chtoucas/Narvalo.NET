@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Web
 {
     using System.Web;
     using System.Web.Caching;
+
     using Narvalo.Mvp;
 
     public abstract class HttpPresenter<TView> 

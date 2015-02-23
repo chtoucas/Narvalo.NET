@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System;
     using System.Globalization;
     using System.Reflection;
+
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
 

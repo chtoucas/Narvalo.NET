@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Platforms
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+
     using Narvalo.Mvp.PresenterBinding;
 
     public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>

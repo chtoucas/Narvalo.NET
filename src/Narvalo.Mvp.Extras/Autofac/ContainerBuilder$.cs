@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Autofac
 {
     using System;
     using System.Reflection;
+
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Features.Scanning;

@@ -10,7 +10,7 @@ namespace Narvalo.Mvp.Web.Core
 
     public class PageAsyncTaskManager : IAsyncTaskManager
     {
-        readonly Page _page;
+        private readonly Page _page;
 
         public PageAsyncTaskManager(Page page)
         {

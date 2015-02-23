@@ -3,11 +3,12 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
+
     using Narvalo.Mvp;
 
     public class MvpUserControl<TViewModel> : MvpUserControl, IView<TViewModel>
     {
-        TViewModel _model;
+        private TViewModel _model;
 
         protected MvpUserControl() : base(true) { }
 
