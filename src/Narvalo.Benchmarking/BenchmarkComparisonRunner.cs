@@ -3,14 +3,15 @@
 namespace Narvalo.Benchmarking
 {
     using System.Linq;
+
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
     public class BenchmarkComparisonRunner
     {
-        readonly BenchmarkComparator _comparator;
+        private readonly BenchmarkComparator _comparator;
 
-        BenchmarkComparisonRunner(BenchmarkComparator comparator)
+        private BenchmarkComparisonRunner(BenchmarkComparator comparator)
         {
             Require.NotNull(comparator, "comparator");
 

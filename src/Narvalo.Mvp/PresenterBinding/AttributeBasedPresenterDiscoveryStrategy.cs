@@ -11,7 +11,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly IPresenterBindingAttributesResolver _attributesResolver;
+        private readonly IPresenterBindingAttributesResolver _attributesResolver;
 
         public AttributeBasedPresenterDiscoveryStrategy()
             : this(new PresenterBindingAttributesResolver()) { }
@@ -47,7 +47,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var pendingViews = views;
 
-            while (pendingViews.Any()) {
+            while (pendingViews.Any())
+            {
                 var view = pendingViews.First();
                 var viewType = view.GetType();
 
@@ -75,7 +76,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
 
-        static IEnumerable<IView> GetViewsToBind_(
+        private static IEnumerable<IView> GetViewsToBind_(
             PresenterBindingAttribute attribute,
             IView view,
             IEnumerable<IView> pendingViews)
@@ -88,7 +89,8 @@ namespace Narvalo.Mvp.PresenterBinding
                 attribute.Origin.FullName,
                 attribute.BindingMode.ToString());
 
-            switch (attribute.BindingMode) {
+            switch (attribute.BindingMode)
+            {
                 case PresenterBindingMode.Default:
                     return new[] { view };
 

@@ -7,7 +7,7 @@ namespace Narvalo.Mvp
         where TView : class, IView<TViewModel>
         where TViewModel : class, new()
     {
-        readonly TView _view;
+        private readonly TView _view;
 
         protected Presenter(TView view)
         {

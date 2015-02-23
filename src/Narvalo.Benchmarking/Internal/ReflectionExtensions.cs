@@ -4,9 +4,10 @@ namespace Narvalo.Benchmarking.Internal
 {
     using System;
     using System.Reflection;
+
     using Narvalo.Fx;
 
-    static class ReflectionExtensions
+    internal static class ReflectionExtensions
     {
         public static Maybe<T> MayGetCustomAttribute<T>(
                this MemberInfo element,

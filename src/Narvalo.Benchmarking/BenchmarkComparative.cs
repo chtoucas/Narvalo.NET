@@ -3,12 +3,13 @@
 namespace Narvalo.Benchmarking
 {
     using System;
+
     using Narvalo;
 
     public class BenchmarkComparative
     {
-        readonly string _name;
-        readonly Action _action;
+        private readonly string _name;
+        private readonly Action _action;
 
         public BenchmarkComparative(string name, Action action)
         {

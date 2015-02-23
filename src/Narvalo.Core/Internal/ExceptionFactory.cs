@@ -7,7 +7,7 @@ namespace Narvalo.Internal
 
     internal static class ExceptionFactory
     {
-        internal static ArgumentNullException ArgumentNull(string parameterName)
+        public static ArgumentNullException ArgumentNull(string parameterName)
         {
             Contract.Requires(parameterName != null);
 

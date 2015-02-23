@@ -7,9 +7,9 @@ namespace Narvalo.Benchmarking
 
     public class BenchmarkRunner
     {
-        readonly Benchmarker _benchmarker;
+        private readonly Benchmarker _benchmarker;
 
-        BenchmarkRunner(Benchmarker benchmarker)
+        private BenchmarkRunner(Benchmarker benchmarker)
         {
             Require.NotNull(benchmarker, "benchmarker");
 

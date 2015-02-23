@@ -3,13 +3,14 @@
 namespace Narvalo.Benchmarking
 {
     using System.Collections.Generic;
+
     using Narvalo;
 
     public class BenchmarkComparison
     {
-        readonly IEnumerable<BenchmarkComparative> _items;
-        readonly int _iterations;
-        readonly string _name;
+        private readonly IEnumerable<BenchmarkComparative> _items;
+        private readonly int _iterations;
+        private readonly string _name;
 
         public BenchmarkComparison(
             string name,

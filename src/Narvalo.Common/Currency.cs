@@ -5,6 +5,7 @@ namespace Narvalo
     using System;
     using System.Collections.Concurrent;
     using System.Globalization;
+
     using Narvalo.Globalization;
 
     /// <summary>

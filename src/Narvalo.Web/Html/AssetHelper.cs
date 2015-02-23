@@ -4,6 +4,7 @@ namespace Narvalo.Web.Html
 {
     using System.Web;
     using System.Web.Mvc;
+
     using Narvalo.Web.UI.Assets;
 
     public sealed class AssetHelper

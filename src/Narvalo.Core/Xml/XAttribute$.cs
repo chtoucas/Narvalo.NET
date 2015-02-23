@@ -5,6 +5,7 @@ namespace Narvalo.Xml
     using System;
     using System.Diagnostics.Contracts;
     using System.Xml.Linq;
+
     using Narvalo.Fx;
 
     /// <summary>
@@ -41,7 +42,8 @@ namespace Narvalo.Xml
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
             var attr = @this.NextAttribute;
-            if (attr == null) {
+            if (attr == null)
+            {
                 throw exceptionFactory.Invoke();
             }
 
@@ -69,7 +71,8 @@ namespace Narvalo.Xml
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
             var attr = @this.PreviousAttribute;
-            if (attr == null) {
+            if (attr == null)
+            {
                 throw exceptionFactory.Invoke();
             }
 

@@ -5,6 +5,7 @@ namespace Narvalo
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+
     using Narvalo.Fx;
 
     public static partial class FuncExtensions

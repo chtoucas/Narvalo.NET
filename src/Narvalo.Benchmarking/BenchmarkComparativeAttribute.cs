@@ -7,7 +7,7 @@ namespace Narvalo.Benchmarking
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class BenchmarkComparativeAttribute : Attribute
     {
-        string _displayName = String.Empty;
+        private string _displayName = String.Empty;
 
         public string DisplayName
         {

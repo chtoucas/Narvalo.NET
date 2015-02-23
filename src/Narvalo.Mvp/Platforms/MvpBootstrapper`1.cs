@@ -9,14 +9,14 @@ namespace Narvalo.Mvp.Platforms
 
     public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>
     {
-        readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
+        private readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
 
-        readonly IPlatformServices _defaultServices;
+        private readonly IPlatformServices _defaultServices;
 
-        ICompositeViewFactory _compositeViewFactory;
-        IMessageCoordinatorFactory _messageCoordinatorFactory;
-        IPresenterFactory _presenterFactory;
+        private ICompositeViewFactory _compositeViewFactory;
+        private IMessageCoordinatorFactory _messageCoordinatorFactory;
+        private IPresenterFactory _presenterFactory;
 
         protected MvpBootstrapper(IPlatformServices defaultServices)
         {
@@ -81,13 +81,16 @@ namespace Narvalo.Mvp.Platforms
             var strategies = _presenterDiscoveryStrategies.Where(_ => _ != null).Distinct();
             var count = strategies.Count();
 
-            if (count == 0) {
+            if (count == 0)
+            {
                 result.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
             }
-            else if (count == 1) {
+            else if (count == 1)
+            {
                 result.PresenterDiscoveryStrategy = strategies.First();
             }
-            else if (count > 1) {
+            else if (count > 1)
+            {
                 result.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
             }
@@ -95,7 +98,7 @@ namespace Narvalo.Mvp.Platforms
             return result;
         }
 
-        class PlatformServices_ : IPlatformServices
+        private class PlatformServices_ : IPlatformServices
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }
 

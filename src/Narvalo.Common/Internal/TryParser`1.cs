@@ -3,6 +3,7 @@
 namespace Narvalo.Internal
 {
     using System.Diagnostics.CodeAnalysis;
+
     using Narvalo.Fx;
 
     [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
@@ -11,7 +12,7 @@ namespace Narvalo.Internal
 
     internal static class TryParserExtensions
     {
-        internal static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
+        public static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {
             Require.Object(@this);
 
@@ -21,7 +22,7 @@ namespace Narvalo.Internal
             return @this.Invoke(value, out result) ? result : (T?)null;
         }
 
-        internal static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
+        public static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
         {
             Require.Object(@this);
 

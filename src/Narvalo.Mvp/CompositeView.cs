@@ -12,7 +12,7 @@ namespace Narvalo.Mvp
     [EditorBrowsableAttribute(EditorBrowsableState.Never)]
     public abstract class CompositeView<TView> : ICompositeView where TView : IView
     {
-        readonly IList<TView> _views = new List<TView>();
+        private readonly IList<TView> _views = new List<TView>();
 
         public abstract event EventHandler Load;
 
@@ -36,7 +36,8 @@ namespace Narvalo.Mvp
         {
             Require.NotNull(view, "view");
 
-            if (!(view is TView)) {
+            if (!(view is TView))
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,

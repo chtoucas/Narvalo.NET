@@ -5,67 +5,87 @@ namespace Narvalo.Globalization
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
+    using System.Linq;
+    using System.Xml.Linq;
+
+    using Narvalo.Xml;
 
     public sealed class SnvCurrencyXmlReader : SnvCurrencyXmlReaderBase
     {
-        private readonly string _source;
+        private DateTime? _publicationDate;
 
-        public SnvCurrencyXmlReader(string source)
+        public SnvCurrencyXmlReader(string source) : base(source) { }
+
+        public DateTime PublicationDate
         {
-            Require.NotNullOrEmpty(source, "source");
+            get
+            {
+                if (!_publicationDate.HasValue)
+                {
+                    throw new CurrencyException("XXX");
+                }
 
-            _source = source;
+                return _publicationDate.Value;
+            }
         }
-
-        public DateTime? PublicationDate { get; private set; }
 
         public IEnumerable<CurrencyInfo> Read()
         {
-            var root = ReadContent(_source);
+            var root = ReadContent();
 
-            PublicationDate = ParseTo.DateTime(root.Attribute("Pblshd").Value).Value;
+            _publicationDate = root
+                .AttributeOrThrow("Pblshd", ExceptionThunk("XXX"))
+                .Select(ProcessPublicationDate);
 
-            var list = root.Element("CcyTbl").Elements("CcyNtry");
+            var currencyElements = root
+                .ElementOrThrow("CcyTbl", ExceptionThunk("XXX"))
+                .Elements("CcyNtry")
+                .ToList();
 
-            foreach (var item in list) {
-                // Currency Alphabetic Code
-                var codeElement = item.Element("Ccy");
-                if (codeElement == null) {
-                    Debug.WriteLine("Found a country without universal currency: " + item.Element("CtryNm").Value);
+            if (currencyElements.Count == 0)
+            {
+                throw new CurrencyException("XXX");
+            }
+
+            foreach (var currencyElement in currencyElements)
+            {
+                // English Name
+                // NB: Keep the "englishNameElement" around, we will need it later on.
+                XElement englishNameElement = currencyElement
+                    .ElementOrThrow("CcyNm", ExceptionThunk("XXX"));
+                string englishName = englishNameElement.Select(ProcessCurrencyName);
+
+                // Alphabetic Code
+                XElement codeElement = currencyElement.Element("Ccy");
+                if (codeElement == null)
+                {
+                    Debug.WriteLine("Found a country without universal currency: " + englishName);
 
                     continue;
                 }
 
-                var code = codeElement.Value;
-                __ValidateCode(code);
+                var code = codeElement.Select(ProcessAlphabeticCode);
 
-                // Currency Numeric Code
-                var numericCode = ReadValueAsShort(item.Element("CcyNbr"));
-                __ValidateNumericCode(numericCode);
+                // Numeric Code
+                short numericCode = currencyElement
+                    .ElementOrThrow("CcyNbr", ExceptionThunk("XXX"))
+                    .Select(ProcessNumericCode);
 
-                // Currency English Name
-                var englishNameElement = item.Element("CcyNm");
-                var englishName = ReadCurrencyName(englishNameElement);
-
-                // Fund
-                bool isFund = false;
-                var isFundAttr = englishNameElement.Attribute("IsFund");
-                if (isFundAttr != null) {
-                    __ValidateIsFund(isFundAttr.Value);
-
-                    isFund = isFundAttr.Value == "true";
-                }
+                // Fund?
+                bool isFund = englishNameElement
+                    .AttributeOrNone("IsFund")
+                    .Select(_ => _.Select(ProcessIsFund))
+                    .ValueOrElse(false);
 
                 // Country English Name
-                var englishRegionName = ReadRegionName(item.Element("CtryNm"));
+                string englishRegionName = currencyElement
+                    .ElementOrThrow("CtryNm", ExceptionThunk("XXX"))
+                    .Select(ProcessRegionName);
 
                 // Minor Units
-                var minorUnitsValue = item.Element("CcyMnrUnts").Value;
-                short? minorUnits = null;
-                if (HasMinorUnits(minorUnitsValue)) {
-                    minorUnits = Int16.Parse(minorUnitsValue, CultureInfo.InvariantCulture);
-                }
+                short? minorUnits = currencyElement
+                    .ElementOrThrow("CcyMnrUnts", ExceptionThunk("XXX"))
+                    .Select(ProcessMinorUnits);
 
                 yield return new CurrencyInfo(code, numericCode) {
                     EnglishName = englishName,

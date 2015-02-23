@@ -6,6 +6,7 @@ namespace Narvalo.Xml
     using System.Diagnostics.Contracts;
     using System.Xml;
     using System.Xml.Linq;
+
     using Narvalo.Fx;
 
     /// <summary>

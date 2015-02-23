@@ -3,6 +3,7 @@
 namespace Narvalo.Data
 {
     using System.Data.SqlTypes;
+
     using Narvalo.Fx;
 
     /// <summary>

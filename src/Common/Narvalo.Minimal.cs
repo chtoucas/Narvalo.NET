@@ -11,14 +11,15 @@ namespace Narvalo
     [DebuggerStepThrough]
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    static class Require
+    internal static class Require
     {
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Object<T>([ValidatedNotNull]T @this) where T : class
+        internal static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
-            if (@this == null) {
+            if (@this == null)
+            {
                 throw new ArgumentNullException("this", "The object 'this' is null.");
             }
 
@@ -28,9 +29,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
+        internal static void Object<T>([ValidatedNotNull]T? @this) where T : struct
         {
-            if (@this == null) {
+            if (@this == null)
+            {
                 throw new ArgumentNullException("this", "The object 'this' is null.");
             }
 
@@ -40,9 +42,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Property<T>([ValidatedNotNull]T value) where T : class
+        internal static void Property<T>([ValidatedNotNull]T value) where T : class
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value", "The property value is null.");
             }
 
@@ -52,9 +55,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
+        internal static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value", "The property value is null.");
             }
 
@@ -64,11 +68,12 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void PropertyNotEmpty([ValidatedNotNull]string value)
+        internal static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
             Property(value);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 throw new ArgumentException("The property value is empty.", "value");
             }
 
@@ -78,9 +83,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
+        internal static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
@@ -90,9 +96,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
+        internal static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
@@ -102,11 +109,12 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
+        internal static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,
@@ -121,9 +129,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void InRange(int value, int minValue, int maxValue, string parameterName)
+        internal static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
-            if (value < minValue || value > maxValue) {
+            if (value < minValue || value > maxValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not in range {0} / {1}.",
@@ -138,9 +147,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void InRange(long value, long minValue, long maxValue, string parameterName)
+        internal static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
-            if (value < minValue || value > maxValue) {
+            if (value < minValue || value > maxValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not in range {0} / {1}.",
@@ -155,9 +165,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
+        internal static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
-            if (value < minValue) {
+            if (value < minValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not greater than or equal to {0}.",
@@ -171,9 +182,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
+        internal static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
-            if (value < minValue) {
+            if (value < minValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not greater than or equal to {0}.",
@@ -187,14 +199,16 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
+        internal static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(minValue) < 0) {
+            if (value.CompareTo(minValue) < 0)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not greater than or equal to {0}.",
@@ -208,9 +222,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
+        internal static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
-            if (value > maxValue) {
+            if (value > maxValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not less than or equal to {0}.",
@@ -224,9 +239,10 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
+        internal static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
-            if (value > maxValue) {
+            if (value > maxValue)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not less than or equal to {0}.",
@@ -240,14 +256,16 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
+        internal static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(maxValue) > 0) {
+            if (value.CompareTo(maxValue) > 0)
+            {
                 var message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value is not less than or equal to {0}.",
@@ -258,7 +276,7 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        static class ExceptionFactory
+        private static class ExceptionFactory
         {
             public static ArgumentNullException ArgumentNull(string parameterName)
             {
@@ -280,7 +298,7 @@ namespace Narvalo
     [DebuggerStepThrough]
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
         Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    static class Enforce
+    internal static class Enforce
     {
 #if CONTRACTS_FULL
         [ContractArgumentValidator]
@@ -318,7 +336,7 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method only available in Debug Build.")]
-        static string GetMessage_(string parameterName)
+        private static string GetMessage_(string parameterName)
         {
             return String.Format(
                 CultureInfo.InvariantCulture,

@@ -5,15 +5,16 @@ namespace Narvalo.Benchmarking
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
     public class BenchmarkProcessor
     {
-        readonly BenchmarkFinder _finder;
-        readonly BenchmarkRunner _runner;
+        private readonly BenchmarkFinder _finder;
+        private readonly BenchmarkRunner _runner;
 
-        BenchmarkProcessor(BenchmarkFinder finder, BenchmarkRunner runner)
+        private BenchmarkProcessor(BenchmarkFinder finder, BenchmarkRunner runner)
         {
             Require.NotNull(finder, "finder");
             Require.NotNull(runner, "runner");

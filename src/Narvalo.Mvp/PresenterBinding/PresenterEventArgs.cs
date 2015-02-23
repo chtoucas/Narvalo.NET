@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class PresenterEventArgs : EventArgs
     {
-        readonly IPresenter _presenter;
+        private readonly IPresenter _presenter;
 
         public PresenterEventArgs(IPresenter presenter)
         {

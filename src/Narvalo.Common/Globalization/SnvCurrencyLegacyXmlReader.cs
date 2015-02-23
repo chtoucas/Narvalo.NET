@@ -5,63 +5,81 @@ namespace Narvalo.Globalization
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
+    using System.Xml.Linq;
+
+    using Narvalo.Xml;
 
     public sealed class SnvCurrencyLegacyXmlReader : SnvCurrencyXmlReaderBase
     {
-        private readonly string _source;
+        private DateTime? _publicationDate;
 
-        public SnvCurrencyLegacyXmlReader(string source)
+        public SnvCurrencyLegacyXmlReader(string source) : base(source) { }
+
+        public DateTime PublicationDate
         {
-            Require.NotNullOrEmpty(source, "source");
+            get
+            {
+                if (!_publicationDate.HasValue)
+                {
+                    throw new CurrencyException("XXX");
+                }
 
-            _source = source;
+                return _publicationDate.Value;
+            }
         }
-
-        public DateTime? PublicationDate { get; private set; }
 
         public IEnumerable<CurrencyInfo> Read()
         {
-            var root = ReadContent(_source);
+            XElement root = ReadContent();
 
-            PublicationDate = ParseTo.DateTime(root.Attribute("Pblshd").Value).Value;
+            _publicationDate = root
+                .AttributeOrThrow("Pblshd", ExceptionThunk("XXX"))
+                .Select(ProcessPublicationDate);
 
-            var list = root.Element("HstrcCcyTbl").Elements("HstrcCcyNtry");
+            List<XElement> currencyElements = root
+                .ElementOrThrow("HstrcCcyTbl", ExceptionThunk("XXX"))
+                .Elements("HstrcCcyNtry")
+                .ToList();
 
-            foreach (var item in list) {
-                // Currency Alphabetic Code
-                var code = item.Element("Ccy").Value;
-                __ValidateCode(code);
+            if (currencyElements.Count == 0)
+            {
+                throw new CurrencyException("XXX");
+            }
 
-                // Currency Numeric Code
-                var numericCodeElement = item.Element("CcyNbr");
-                short numericCode;
-                if (numericCodeElement == null) {
-                    Debug.WriteLine("Found a currency without a numeric code: " + item.Element("CtryNm").Value);
+            foreach (var currencyElement in currencyElements)
+            {
+                // English Name
+                // NB: Keep the "englishNameElement" around, we will need it later on.
+                XElement englishNameElement = currencyElement
+                    .ElementOrThrow("CcyNm", ExceptionThunk("XXX"));
+                string englishName = englishNameElement.Select(ProcessCurrencyName);
 
-                    numericCode = 0;
+                // Alphabetic Code
+                string code = currencyElement
+                    .ElementOrThrow("Ccy", ExceptionThunk("XXX"))
+                    .Select(ProcessAlphabeticCode);
+
+                // Numeric Code
+                short numericCode = currencyElement
+                    .ElementOrNone("CcyNbr")
+                    .Select(_ => _.Select(ProcessNumericCode))
+                    .ValueOrElse(0);
+                if (numericCode == 0)
+                {
+                    Debug.WriteLine("Found a currency without a numeric code: " + englishName);
                 }
-                else {
-                    numericCode = ReadValueAsShort(numericCodeElement);
-                    __ValidateNumericCode(numericCode);
-                }
 
-                // Currency English Name
-                var englishNameElement = item.Element("CcyNm");
-                var englishName = ReadCurrencyName(englishNameElement);
-
-                // Fund
-                bool isFund = false;
-                var isFundAttr = englishNameElement.Attribute("IsFund");
-                if (isFundAttr != null) {
-                    // NB: A blank value is interpreted to be the same as no attribute.
-                    // Only applies to the legacy XML source.
-                    __ValidateIsFund(isFundAttr.Value.Trim());
-
-                    isFund = isFundAttr.Value == "true";
-                }
+                // Fund?
+                bool isFund = englishNameElement
+                    .AttributeOrNone("IsFund")
+                    .Select(_ => _.Select(ProcessIsFund))
+                    .ValueOrElse(false);
 
                 // Country English Name
-                var englishRegionName = ReadRegionName(item.Element("CtryNm"));
+                string englishRegionName = currencyElement
+                    .ElementOrThrow("CtryNm", ExceptionThunk("XXX"))
+                    .Select(ProcessRegionName);
 
                 yield return new CurrencyInfo(code, numericCode) {
                     EnglishName = englishName,

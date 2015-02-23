@@ -4,10 +4,11 @@ namespace Narvalo.Benchmarking.Internal
 {
     using System;
     using System.Reflection;
+
     using Narvalo.Benchmarking;
     using Narvalo.Fx;
 
-    static class BenchmarkComparativeFactory
+    internal static class BenchmarkComparativeFactory
     {
         ////public static BenchComparative Create(MethodInfo method)
         ////{
@@ -39,9 +40,7 @@ namespace Narvalo.Benchmarking.Internal
                        () => ActionFactory.Create<T>(method).Invoke(value));
         }
 
-        #region Membres privés.
-
-        ////static Func<BenchException> GetExceptionThunk(string name)
+        ////private static Func<BenchException> GetExceptionThunk(string name)
         ////{
         ////    return () => {
         ////        var message = String.Format(
@@ -52,17 +51,15 @@ namespace Narvalo.Benchmarking.Internal
         ////    };
         ////}
 
-        static string GetName(MethodInfo method, BenchmarkComparativeAttribute attr)
+        private static string GetName(MethodInfo method, BenchmarkComparativeAttribute attr)
         {
             return String.IsNullOrWhiteSpace(attr.DisplayName) ? method.Name : attr.DisplayName;
         }
 
-        static Maybe<BenchmarkComparativeAttribute> MayGetAttribute(MethodInfo method)
+        private static Maybe<BenchmarkComparativeAttribute> MayGetAttribute(MethodInfo method)
         {
             return method
                 .MayGetCustomAttribute<BenchmarkComparativeAttribute>(false /* inherit */);
         }
-
-        #endregion
     }
 }

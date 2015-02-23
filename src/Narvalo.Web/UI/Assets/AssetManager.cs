@@ -6,6 +6,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Configuration;
     using System.Configuration.Provider;
     using System.Web.Configuration;
+
     using Narvalo.Web.Configuration;
 
     public static class AssetManager

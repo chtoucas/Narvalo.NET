@@ -5,6 +5,7 @@ namespace Narvalo
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
+
     using Narvalo.Fx;
 
     public static class Make<T>

@@ -6,16 +6,17 @@ namespace Narvalo.Benchmarking.Internal
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
     using Narvalo;
     using Narvalo.Benchmarking;
     using Narvalo.Collections;
 
-    class BenchmarkFinder
+    internal class BenchmarkFinder
     {
-        const BindingFlags DEFAULT_BINDINGS
+        private const BindingFlags DEFAULT_BINDINGS
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
-        readonly BindingFlags _bindings;
+        private readonly BindingFlags _bindings;
 
         public BenchmarkFinder() : this(DEFAULT_BINDINGS) { }
 

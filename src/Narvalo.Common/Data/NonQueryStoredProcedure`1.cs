@@ -7,6 +7,7 @@ namespace Narvalo.Data
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+
     using Narvalo;
 
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]

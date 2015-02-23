@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class CompositePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly IEnumerable<IPresenterDiscoveryStrategy> _strategies;
+        private readonly IEnumerable<IPresenterDiscoveryStrategy> _strategies;
 
         public CompositePresenterDiscoveryStrategy(IEnumerable<IPresenterDiscoveryStrategy> strategies)
         {
@@ -18,7 +18,8 @@ namespace Narvalo.Mvp.PresenterBinding
             // an expensive and uncached list.
             _strategies = strategies.ToArray();
 
-            if (!strategies.Any()) {
+            if (!strategies.Any())
+            {
                 throw new ArgumentException("You must supply at least one strategy.", "strategies");
             }
         }
@@ -32,8 +33,10 @@ namespace Narvalo.Mvp.PresenterBinding
 
             var pendingViews = views;
 
-            foreach (var strategy in _strategies) {
-                if (!pendingViews.Any()) {
+            foreach (var strategy in _strategies)
+            {
+                if (!pendingViews.Any())
+                {
                     break;
                 }
 

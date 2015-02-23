@@ -5,6 +5,7 @@ namespace Narvalo.Web
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
+
     using Narvalo.Fx;
 
     public abstract class HttpHandlerBase : IHttpHandler

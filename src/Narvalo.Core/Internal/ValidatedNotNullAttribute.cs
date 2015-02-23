@@ -17,6 +17,8 @@ namespace Narvalo.Internal
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 #if CONTRACTS_FULL
     public
+#else
+    internal
 #endif
     sealed class ValidatedNotNullAttribute : Attribute { }
 }

@@ -4,28 +4,24 @@ namespace Narvalo.Globalization
 {
     using System;
 
-    /// <summary>
-    /// The exception thrown when a method is invoked which attempts to construct
-    /// a currency that is not available.
-    /// </summary>
-    public class CurrencyNotFoundException : CurrencyException
+    public class CurrencyException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
+        /// Initializes a new instance of the <see cref="CurrencyException"/>
         /// class with its message string set to a system-supplied message.
         /// </summary>
-        public CurrencyNotFoundException() { }
+        public CurrencyException() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
+        /// Initializes a new instance of the <see cref="CurrencyException"/>
         /// class with the specified error message.
         /// </summary>
         /// <param name="message">The error message to display with this exception.</param>
-        public CurrencyNotFoundException(string message)
+        public CurrencyException(string message)
             : base(message) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
+        /// Initializes a new instance of the <see cref="CurrencyException"/>
         /// class with a specified error message and a reference to the inner exception
         /// that is the cause of this exception.
         /// </summary>
@@ -33,7 +29,7 @@ namespace Narvalo.Globalization
         /// <param name="innerException">The exception that is the cause of the current exception. 
         /// If the innerException parameter is not a null reference, the current exception is raised 
         /// in a catch block that handles the inner exception.</param>
-        public CurrencyNotFoundException(string message, Exception innerException) :
+        public CurrencyException(string message, Exception innerException) :
             base(message, innerException) { }
     }
 }

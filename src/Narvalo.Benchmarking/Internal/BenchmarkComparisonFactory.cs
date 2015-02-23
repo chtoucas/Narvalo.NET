@@ -5,10 +5,11 @@ namespace Narvalo.Benchmarking.Internal
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+
     using Narvalo.Benchmarking;
     using Narvalo.Fx;
 
-    static class BenchmarkComparisonFactory
+    internal static class BenchmarkComparisonFactory
     {
         public static BenchmarkComparison Create(Type type, IEnumerable<BenchmarkComparative> items)
         {
@@ -34,13 +35,9 @@ namespace Narvalo.Benchmarking.Internal
                        attr.Iterations);
         }
 
-        #region Membres privés.
-
-        static string GetName(Type type, BenchmarkComparisonAttribute attr)
+        private static string GetName(Type type, BenchmarkComparisonAttribute attr)
         {
             return String.IsNullOrWhiteSpace(attr.DisplayName) ? type.Name : attr.DisplayName;
         }
-
-        #endregion
     }
 }

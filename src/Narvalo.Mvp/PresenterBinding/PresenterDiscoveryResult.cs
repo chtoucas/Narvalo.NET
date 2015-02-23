@@ -6,8 +6,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class PresenterDiscoveryResult
     {
-        readonly IList<IView> _boundViews;
-        readonly IList<PresenterBindingParameter> _bindings;
+        private readonly IList<IView> _boundViews;
+        private readonly IList<PresenterBindingParameter> _bindings;
 
         public PresenterDiscoveryResult(
             IList<IView> boundViews,

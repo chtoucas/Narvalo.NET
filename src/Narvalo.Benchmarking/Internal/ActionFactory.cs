@@ -6,7 +6,7 @@ namespace Narvalo.Benchmarking.Internal
     using System.Reflection;
 
     // FIXME: Cela ne marchera que si la méthode est statique http://msdn.microsoft.com/en-us/library/53cz7sc6(v=vs.100).aspx
-    static class ActionFactory
+    internal static class ActionFactory
     {
         public static Action Create(MethodInfo method)
         {

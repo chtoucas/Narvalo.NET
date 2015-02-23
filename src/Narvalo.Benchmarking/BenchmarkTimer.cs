@@ -3,11 +3,12 @@
 namespace Narvalo.Benchmarking
 {
     using System.Diagnostics;
+
     using NodaTime;
 
     public class BenchmarkTimer : IBenchmarkTimer
     {
-        readonly Stopwatch _stopwatch = Stopwatch.StartNew();
+        private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
 
         public Duration ElapsedTime
         {

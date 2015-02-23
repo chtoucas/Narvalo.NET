@@ -7,22 +7,22 @@ namespace Narvalo.Mvp.Platforms
 
     public class DefaultPlatformServices : IPlatformServices
     {
-        Func<ICompositeViewFactory> _compositeViewFactoryThunk
+        private Func<ICompositeViewFactory> _compositeViewFactoryThunk
            = () => new CompositeViewFactory();
 
-        Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
+        private Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
            = () => new MessageCoordinatorFactory();
 
-        Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
+        private Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
            = () => new AttributeBasedPresenterDiscoveryStrategy();
 
-        Func<IPresenterFactory> _presenterFactoryThunk
+        private Func<IPresenterFactory> _presenterFactoryThunk
            = () => new PresenterFactory();
 
-        ICompositeViewFactory _compositeViewFactory;
-        IMessageCoordinatorFactory _messageCoordinatorFactory;
-        IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
-        IPresenterFactory _presenterFactory;
+        private ICompositeViewFactory _compositeViewFactory;
+        private IMessageCoordinatorFactory _messageCoordinatorFactory;
+        private IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
+        private IPresenterFactory _presenterFactory;
 
         public ICompositeViewFactory CompositeViewFactory
         {

@@ -3,12 +3,13 @@
 namespace Narvalo.Benchmarking.Internal
 {
     using System.Collections.Generic;
+
     using Narvalo;
     using Narvalo.Benchmarking;
 
-    class BenchmarkComparator
+    internal class BenchmarkComparator
     {
-        readonly Benchmarker _benchmarker;
+        private readonly Benchmarker _benchmarker;
 
         public BenchmarkComparator(Benchmarker benchmarker)
         {

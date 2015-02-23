@@ -5,6 +5,7 @@ namespace Narvalo.Web.UI.Assets
     using System;
     using System.Collections.Specialized;
     using System.Web;
+
     using Narvalo;
 
     public sealed class LocalAssetProvider : AssetProviderBase

@@ -9,12 +9,12 @@ namespace Narvalo.Mvp.Autofac
 
     public sealed class AutofacPresenterFactory : IPresenterFactory
     {
-        static readonly Object Lock_ = new Object();
+        private static readonly Object s_Lock = new Object();
 
-        readonly IDictionary<int, ILifetimeScope> _lifetimeScopes
+        private readonly IDictionary<int, ILifetimeScope> _lifetimeScopes
            = new Dictionary<int, ILifetimeScope>();
 
-        readonly IContainer _container;
+        private readonly IContainer _container;
 
         public AutofacPresenterFactory(IContainer container)
         {
@@ -41,7 +41,7 @@ namespace Narvalo.Mvp.Autofac
                 presenterType,
                 new TypedParameter(viewType, view));
 
-            lock (Lock_) {
+            lock (s_Lock) {
                 _lifetimeScopes[presenter.GetHashCode()] = presenterScope;
             }
 
@@ -56,7 +56,7 @@ namespace Narvalo.Mvp.Autofac
 
             var lifetimeScope = _lifetimeScopes[presenterKey];
 
-            lock (Lock_) {
+            lock (s_Lock) {
                 _lifetimeScopes.Remove(presenterKey);
             }
 

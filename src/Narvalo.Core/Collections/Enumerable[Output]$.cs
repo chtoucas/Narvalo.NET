@@ -5,6 +5,7 @@ namespace Narvalo.Collections
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
     using Narvalo.Fx;
 
     // Optimized extensions.

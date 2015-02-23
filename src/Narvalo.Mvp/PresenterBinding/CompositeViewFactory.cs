@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class /*Default*/CompositeViewFactory : ICompositeViewFactory
     {
-        readonly ICompositeViewTypeResolver _typeResolver;
+        private readonly ICompositeViewTypeResolver _typeResolver;
 
         public CompositeViewFactory()
             : this(new CompositeViewTypeResolver()) { }
@@ -36,7 +36,8 @@ namespace Narvalo.Mvp.PresenterBinding
             var compositeViewType = _typeResolver.Resolve(viewType);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
 
-            foreach (var item in views) {
+            foreach (var item in views)
+            {
                 view.Add(item);
             }
 

@@ -7,24 +7,24 @@ namespace Narvalo.Mvp.Web.Core
 
     public static class PlatformServices
     {
-        static readonly IPlatformServices Default_
-            = new DefaultPlatformServices_();
+        private static readonly IPlatformServices s_Default
+             = new DefaultPlatformServices_();
 
-        static readonly PlatformServicesVirtualProxy Instance_
-            = new PlatformServicesVirtualProxy(() => Default_);
+        private static readonly PlatformServicesVirtualProxy s_Instance
+            = new PlatformServicesVirtualProxy(() => s_Default);
 
         public static IPlatformServices Default
         {
-            get { return Default_; }
+            get { return s_Default; }
         }
 
         public static IPlatformServices Current
         {
-            get { return Instance_; }
-            set { Instance_.Reset(value); }
+            get { return s_Instance; }
+            set { s_Instance.Reset(value); }
         }
 
-        class DefaultPlatformServices_ : DefaultPlatformServices
+        private class DefaultPlatformServices_ : DefaultPlatformServices
         {
             public DefaultPlatformServices_()
             {

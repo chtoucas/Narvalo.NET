@@ -5,6 +5,7 @@ namespace Narvalo
     using System.Diagnostics;
 #if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+
     using Narvalo.Internal;
 #endif
 

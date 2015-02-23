@@ -7,10 +7,10 @@ namespace Narvalo.Mvp
 
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
-        readonly bool _closeable;
-        readonly Object _lock = new Object();
+        private readonly bool _closeable;
+        private readonly Object _lock = new Object();
 
-        bool _closed = false;
+        private bool _closed = false;
 
         public MessageCoordinator() : this(closeable: true) { }
 
@@ -25,7 +25,8 @@ namespace Narvalo.Mvp
         {
             if (!_closeable || _closed) { return; }
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 if (_closed) { return; }
 
                 _closed = true;
@@ -60,18 +61,19 @@ namespace Narvalo.Mvp
                 "Even if subscription is allowed, no messages will ever be received.");
         }
 
-        void ThrowIfClosed_()
+        private void ThrowIfClosed_()
         {
-            if (_closed) {
+            if (_closed)
+            {
                 throw new InvalidOperationException(
                     "Messages can't be published or subscribed to after the message bus has been closed.");
             }
         }
 
-        class BlackHole_ : MessageCoordinator
+        private class BlackHole_ : MessageCoordinator
         {
             // NB: Since we choose a singleton, we disable the ability to close this message bus.
-            BlackHole_() : base(closeable: false) { }
+            private BlackHole_() : base(closeable: false) { }
 
             public static BlackHole_ Instance { get { return Singleton.Instance; } }
 
@@ -81,10 +83,10 @@ namespace Narvalo.Mvp
 
             [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
                 Justification = "Implementation of lazy initialized singleton.")]
-            class Singleton
+            private class Singleton
             {
                 internal static readonly BlackHole_ Instance = new BlackHole_();
-                
+
                 [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
                    Justification = "Implementation of lazy initialized singleton.")]
                 [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",

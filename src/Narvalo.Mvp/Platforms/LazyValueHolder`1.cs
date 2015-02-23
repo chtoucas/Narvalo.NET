@@ -8,16 +8,16 @@ namespace Narvalo.Mvp.Platforms
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class LazyValueHolder<TValue>
     {
-        readonly Lazy<TValue> _lazyValue;
+        private readonly Lazy<TValue> _lazyValue;
 
-        Func<TValue> _valueFactory;
+        private Func<TValue> _valueFactory;
 
         public LazyValueHolder(Func<TValue> valueFactory)
         {
             Require.NotNull(valueFactory, "valueFactory");
 
             _valueFactory = valueFactory;
-            
+
             // WARNING: Do not change the following line for:
             // _lazyValue = new Lazy<TValue>(_valueFactory);
             // as it will fail to capture the variable "_valueFactory".
@@ -37,7 +37,8 @@ namespace Narvalo.Mvp.Platforms
         {
             Require.NotNull(valueFactory, "valueFactory");
 
-            if (!CanReset) {
+            if (!CanReset)
+            {
                 throw new InvalidOperationException(
                     "Once the value has been accessed, you can no longer change the underlying value factory.");
             }

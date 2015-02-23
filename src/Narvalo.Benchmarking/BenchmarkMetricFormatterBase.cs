@@ -3,6 +3,7 @@
 namespace Narvalo.Benchmarking
 {
     using System.Globalization;
+
     using NodaTime;
 
     public abstract class BenchmarkMetricFormatterBase : IBenchmarkMetricFormatter

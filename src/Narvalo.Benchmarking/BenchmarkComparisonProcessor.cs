@@ -5,15 +5,16 @@ namespace Narvalo.Benchmarking
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
     public class BenchmarkComparisonProcessor
     {
-        readonly BenchmarkComparativeFinder _finder;
-        readonly BenchmarkComparisonRunner _runner;
+        private readonly BenchmarkComparativeFinder _finder;
+        private readonly BenchmarkComparisonRunner _runner;
 
-        BenchmarkComparisonProcessor(
+        private BenchmarkComparisonProcessor(
             BenchmarkComparativeFinder finder,
             BenchmarkComparisonRunner runner)
         {

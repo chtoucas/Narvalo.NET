@@ -4,6 +4,7 @@ namespace Narvalo.Data
 {
     using System.Data.SqlClient;
     using System.Diagnostics.Contracts;
+
     using Narvalo.Fx;
 
     /*!

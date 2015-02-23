@@ -7,110 +7,110 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    static class Tracer
+    internal static class Tracer
     {
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Info(object source, string format, params string[] messages)
+        internal static void Info(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Info, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Info(Type sourceType, string format, params string[] messages)
+        internal static void Info(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Info, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Info(object source, string message)
+        internal static void Info(object source, string message)
         {
             Trace_(TraceLevel.Info, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Info(Type sourceType, string message)
+        internal static void Info(Type sourceType, string message)
         {
             Trace_(TraceLevel.Info, sourceType, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Warning(object source, string format, params string[] messages)
+        internal static void Warning(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Warning, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Warning(Type sourceType, string format, params string[] messages)
+        internal static void Warning(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Warning, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Warning(object source, string message)
+        internal static void Warning(object source, string message)
         {
             Trace_(TraceLevel.Warning, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Warning(Type sourceType, string message)
+        internal static void Warning(Type sourceType, string message)
         {
             Trace_(TraceLevel.Warning, sourceType, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Error(object source, string format, params string[] messages)
+        internal static void Error(object source, string format, params string[] messages)
         {
             Trace_(TraceLevel.Error, source, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Error(Type sourceType, string format, params string[] messages)
+        internal static void Error(Type sourceType, string format, params string[] messages)
         {
             Trace_(TraceLevel.Error, sourceType, format, messages);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Error(object source, string message)
+        internal static void Error(object source, string message)
         {
             Trace_(TraceLevel.Error, source, message);
         }
 
         [DebuggerStepThrough]
         [Conditional("TRACE")]
-        public static void Error(Type sourceType, string message)
+        internal static void Error(Type sourceType, string message)
         {
             Trace_(TraceLevel.Error, sourceType, message);
         }
 
-        static void Trace_(TraceLevel level, object source, string format, params string[] messages)
+        private static void Trace_(TraceLevel level, object source, string format, params string[] messages)
         {
             Trace_(level, source.GetType(), format, messages);
         }
 
-        static void Trace_(TraceLevel level, Type sourceType, string format, params string[] messages)
+        private static void Trace_(TraceLevel level, Type sourceType, string format, params string[] messages)
         {
             Trace_(level, sourceType, String.Format(CultureInfo.InvariantCulture, format, messages));
         }
 
-        static void Trace_(TraceLevel level, object source, string message)
+        private static void Trace_(TraceLevel level, object source, string message)
         {
             Trace_(level, source.GetType(), message);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters",
             Justification = "Private method only.")]
-        static void Trace_(TraceLevel level, Type sourceType, string message)
+        private static void Trace_(TraceLevel level, Type sourceType, string message)
         {
             var msg = String.Format(
                 CultureInfo.InvariantCulture,
@@ -118,7 +118,8 @@ namespace Narvalo
                 sourceType.Name,
                 message);
 
-            switch (level) {
+            switch (level)
+            {
                 case TraceLevel.Error:
                     Trace.TraceError(msg);
                     break;

@@ -5,11 +5,12 @@ namespace Narvalo.Benchmarking
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
+
     using Narvalo;
 
     public class BenchmarkMetricCollection : ReadOnlyCollection<BenchmarkMetric>
     {
-        readonly string _name;
+        private readonly string _name;
 
         public BenchmarkMetricCollection(
             string name,

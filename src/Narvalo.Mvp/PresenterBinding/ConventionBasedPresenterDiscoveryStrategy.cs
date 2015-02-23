@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        readonly IPresenterTypeResolver _typeResolver;
+        private readonly IPresenterTypeResolver _typeResolver;
 
         public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
             : this(typeResolver, true) { }
@@ -34,11 +34,13 @@ namespace Narvalo.Mvp.PresenterBinding
             var boundViews = new List<IView>();
             var bindings = new List<PresenterBindingParameter>();
 
-            foreach (var view in views) {
+            foreach (var view in views)
+            {
                 var viewType = view.GetType();
                 var presenterType = _typeResolver.Resolve(viewType);
 
-                if (presenterType != null) {
+                if (presenterType != null)
+                {
                     Tracer.Info(
                         this,
                         @"Found presenter ""{0}"" for view ""{1}"".",
@@ -54,7 +56,8 @@ namespace Narvalo.Mvp.PresenterBinding
                     bindings.Add(binding);
                     boundViews.Add(view);
                 }
-                else {
+                else
+                {
                     Tracer.Info(
                         this,
                         @"No presenter found for view ""{0}"".",

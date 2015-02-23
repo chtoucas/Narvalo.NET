@@ -4,6 +4,7 @@ namespace Narvalo.Web.Optimization
 {
     using System.Web.Mvc;
     using System.Web.WebPages.Razor;
+
     using Narvalo.Web.Configuration;
 
     /// <remarks>

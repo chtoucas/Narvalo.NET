@@ -8,11 +8,11 @@ namespace Narvalo.Mvp
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class PresenterBindingAttribute : Attribute
     {
-        readonly Type _presenterType;
+        private readonly Type _presenterType;
 
-        PresenterBindingMode _bindingMode = PresenterBindingMode.Default;
-        Type _origin;
-        Type _viewType;
+        private PresenterBindingMode _bindingMode = PresenterBindingMode.Default;
+        private Type _origin;
+        private Type _viewType;
 
         public PresenterBindingAttribute(Type presenterType)
         {

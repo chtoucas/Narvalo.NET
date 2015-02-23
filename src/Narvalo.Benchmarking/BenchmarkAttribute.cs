@@ -7,8 +7,8 @@ namespace Narvalo.Benchmarking
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class BenchmarkAttribute : Attribute
     {
-        string _displayName = String.Empty;
-        int _iterations;
+        private string _displayName = String.Empty;
+        private int _iterations;
 
         public BenchmarkAttribute(int iterations)
         {

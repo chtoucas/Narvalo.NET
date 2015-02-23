@@ -6,6 +6,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
+
     using Narvalo;
     using Narvalo.Collections;
 

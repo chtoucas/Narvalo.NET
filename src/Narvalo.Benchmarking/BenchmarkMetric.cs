@@ -4,6 +4,7 @@ namespace Narvalo.Benchmarking
 {
     using System;
     using System.Globalization;
+
     using Narvalo;
     using NodaTime;
 
@@ -12,9 +13,9 @@ namespace Narvalo.Benchmarking
         internal static readonly IBenchmarkMetricFormatter DefaultFormatter
             = new BenchmarkMetricFormatter();
 
-        readonly Duration _duration;
-        readonly int _iterations;
-        readonly string _name;
+        private readonly Duration _duration;
+        private readonly int _iterations;
+        private readonly string _name;
 
         public BenchmarkMetric(string name, Duration duration, int iterations)
         {

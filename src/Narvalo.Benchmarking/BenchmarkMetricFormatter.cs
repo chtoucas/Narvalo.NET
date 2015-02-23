@@ -5,6 +5,7 @@ namespace Narvalo.Benchmarking
     using System;
     using System.Globalization;
     using System.Linq;
+
     using Narvalo;
 
     public class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase

@@ -4,6 +4,7 @@ namespace Narvalo.Web.Semantic
 {
     using System;
     using System.Collections.Generic;
+
     using Narvalo;
 
     public sealed class OpenGraphMetadata : IOpenGraphMetadata

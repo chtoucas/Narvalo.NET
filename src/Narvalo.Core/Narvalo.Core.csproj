@@ -109,6 +109,7 @@
     <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Globalization\CurrencyInfo.cs" />
+    <Compile Include="Globalization\CurrencyException.cs" />
     <Compile Include="Globalization\CurrencyNotFoundException.cs" />
     <Compile Include="Globalization\CurrencyProvider.cs" />
     <Compile Include="Globalization\CurrencyTypes.cs" />

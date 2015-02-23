@@ -6,8 +6,8 @@ namespace Narvalo.Mvp.Platforms
 
     public sealed class Appender<TSource, T> where TSource : class
     {
-        readonly TSource _source;
-        readonly Action<T> _append;
+        private readonly TSource _source;
+        private readonly Action<T> _append;
 
         public Appender(TSource source, Action<T> append)
         {
@@ -22,7 +22,8 @@ namespace Narvalo.Mvp.Platforms
         {
             Require.NotNull(values, "values");
 
-            foreach (var value in values) {
+            foreach (var value in values)
+            {
                 _append(value);
             }
 

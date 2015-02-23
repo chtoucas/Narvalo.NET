@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.PresenterBinding
     /// </remarks>
     public sealed class /*Default*/PresenterFactory : IPresenterFactory
     {
-        readonly IPresenterConstructorResolver _constructorResolver;
+        private readonly IPresenterConstructorResolver _constructorResolver;
 
         public PresenterFactory()
             : this(new PresenterConstructorResolver()) { }
@@ -48,13 +48,16 @@ namespace Narvalo.Mvp.PresenterBinding
                 viewType.FullName,
                 view.GetType().FullName);
 
-            try {
+            try
+            {
                 return (IPresenter)ctor.Invoke(null, new[] { view });
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 var originalException = ex;
 
-                if (ex is TargetInvocationException && ex.InnerException != null) {
+                if (ex is TargetInvocationException && ex.InnerException != null)
+                {
                     originalException = ex.InnerException;
                 }
 
@@ -71,7 +74,8 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             var disposablePresenter = presenter as IDisposable;
 
-            if (disposablePresenter != null) {
+            if (disposablePresenter != null)
+            {
                 disposablePresenter.Dispose();
             }
         }

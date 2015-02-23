@@ -10,10 +10,10 @@ namespace Narvalo.Mvp.PresenterBinding
 
     public sealed class PresenterBindingParameter
     {
-        readonly Type _presenterType;
-        readonly Type _viewType;
-        readonly PresenterBindingMode _bindingMode;
-        readonly IEnumerable<IView> _views;
+        private readonly Type _presenterType;
+        private readonly Type _viewType;
+        private readonly PresenterBindingMode _bindingMode;
+        private readonly IEnumerable<IView> _views;
 
         public PresenterBindingParameter(
             Type presenterType,
@@ -37,12 +37,14 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public override bool Equals(object obj)
         {
-            if (obj == null) {
+            if (obj == null)
+            {
                 return false;
             }
 
             var other = obj as PresenterBindingParameter;
-            if (other == null) {
+            if (other == null)
+            {
                 return false;
             }
 
@@ -63,7 +65,7 @@ namespace Narvalo.Mvp.PresenterBinding
         /// <summary>
         /// An order independent version of Enumerable.SequenceEqual.
         /// </summary>
-        static bool SequenceEqual_<T>(IEnumerable<T> left, IEnumerable<T> right)
+        private static bool SequenceEqual_<T>(IEnumerable<T> left, IEnumerable<T> right)
         {
             Require.NotNull(left, "left");
             Require.NotNull(right, "right");
@@ -71,12 +73,15 @@ namespace Narvalo.Mvp.PresenterBinding
             var leftObjects = left.ToList();
             var rightObjects = right.ToList();
 
-            if (leftObjects.Count != rightObjects.Count) {
+            if (leftObjects.Count != rightObjects.Count)
+            {
                 return false;
             }
 
-            foreach (var item in rightObjects) {
-                if (!leftObjects.Contains(item)) {
+            foreach (var item in rightObjects)
+            {
+                if (!leftObjects.Contains(item))
+                {
                     return false;
                 }
 

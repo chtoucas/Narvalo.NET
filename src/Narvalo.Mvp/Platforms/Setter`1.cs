@@ -6,8 +6,8 @@ namespace Narvalo.Mvp.Platforms
 
     public sealed class Setter<TSource, T> where TSource : class
     {
-        readonly TSource _source;
-        readonly Action<T> _set;
+        private readonly TSource _source;
+        private readonly Action<T> _set;
 
         public Setter(TSource source, Action<T> set)
         {
