@@ -4,6 +4,7 @@ namespace MvpWindowsForms
 {
     using System;
     using System.Windows.Forms;
+
     using Narvalo.Mvp;
 
     public sealed class MainPresenter : Presenter<IMainView>

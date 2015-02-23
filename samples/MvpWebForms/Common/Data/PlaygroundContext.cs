@@ -4,6 +4,7 @@ namespace MvpWebForms.Data
 {
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
+
     using MvpWebForms.Entities;
 
     public class MvpWebFormsContext : DbContext

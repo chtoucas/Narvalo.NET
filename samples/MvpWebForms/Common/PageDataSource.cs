@@ -45,7 +45,8 @@ namespace WebFormsMvp
         /// <summary />
         protected virtual void OnObjectCreating(object sender, ObjectDataSourceEventArgs e)
         {
-            if (e == null) {
+            if (e == null)
+            {
                 throw new ArgumentNullException("e");
             }
 
@@ -55,7 +56,8 @@ namespace WebFormsMvp
         /// <summary />
         protected virtual void OnObjectDisposing(object sender, ObjectDataSourceDisposingEventArgs e)
         {
-            if (e == null) {
+            if (e == null)
+            {
                 throw new ArgumentNullException("e");
             }
 
@@ -68,7 +70,8 @@ namespace WebFormsMvp
         /// <param name="ctl">The control to start the tree walk at</param>
         private void FindParentHost(Control ctl)
         {
-            if (ctl.Parent == null) {
+            if (ctl.Parent == null)
+            {
                 // At the top of the control tree and user control was not found, use page base type instead
                 TypeName = Assembly.CreateQualifiedName(
                     Page.GetType().Assembly.FullName,
@@ -81,7 +84,8 @@ namespace WebFormsMvp
             // Find the user control base type
             var parentUserControl = ctl.Parent as UserControl;
             var parentMasterPage = ctl.Parent as MasterPage;
-            if (parentUserControl != null && parentMasterPage == null) {
+            if (parentUserControl != null && parentMasterPage == null)
+            {
                 var parentBaseType = ctl.Parent.GetType().BaseType;
                 TypeName = parentBaseType.FullName;
                 ParentHost = ctl.Parent;

@@ -6,13 +6,14 @@ namespace MvpWebForms.Presenters
     using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
+
     using MvpWebForms.Views;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
 
     public sealed class ParallelPresenter : HttpPresenterOf<ConcurrentModel>
     {
-        static readonly Func<string, string> Thunk_ = (string name) =>
+        private static readonly Func<string, string> s_Thunk = (string name) =>
         {
             Thread.Sleep(100);
 
@@ -25,14 +26,14 @@ namespace MvpWebForms.Presenters
             View.Load += Load;
         }
 
-        void Load(object sender, EventArgs e)
+        private void Load(object sender, EventArgs e)
         {
             View.Model.Append("View Load");
 
             AsyncManager.RegisterAsyncTask(RunTasks);
         }
 
-        async Task RunTasks()
+        private async Task RunTasks()
         {
             // NB: This is just to demonstrate parallel execution of tasks.
             // In real world, you are better off using Parallel.For:
@@ -46,21 +47,21 @@ namespace MvpWebForms.Presenters
             await Task.WhenAll(CreateTask("A"), CreateTask("B"), CreateTask("C"));
         }
 
-        Task CreateTask(string name)
+        private Task CreateTask(string name)
         {
             return Task.Factory.FromAsync(BeginInvoke, EndInvoke, name);
         }
 
-        IAsyncResult BeginInvoke(AsyncCallback cb, object state)
+        private IAsyncResult BeginInvoke(AsyncCallback cb, object state)
         {
             View.Model.Append(String.Format(CultureInfo.InvariantCulture, "Task {0} started", state));
 
-            return Thunk_.BeginInvoke((string)state, cb, state);
+            return s_Thunk.BeginInvoke((string)state, cb, state);
         }
 
-        void EndInvoke(IAsyncResult ar)
+        private void EndInvoke(IAsyncResult ar)
         {
-            var result = Thunk_.EndInvoke(ar);
+            var result = s_Thunk.EndInvoke(ar);
 
             View.Model.Append(result);
         }

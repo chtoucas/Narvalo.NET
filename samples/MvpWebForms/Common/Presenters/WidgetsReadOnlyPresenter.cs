@@ -15,12 +15,14 @@ namespace MvpWebForms.Presenters
             View.Finding += Finding;
         }
 
-        void Finding(object sender, WidgetIdEventArgs e)
+        private void Finding(object sender, WidgetIdEventArgs e)
         {
-            using (var context = new MvpWebFormsContext()) {
+            using (var context = new MvpWebFormsContext())
+            {
                 var widget = context.Widgets.Find(e.Id);
 
-                if (widget != null) {
+                if (widget != null)
+                {
                     View.Model.Widgets.Add(widget);
                     View.Model.ShowResult = true;
                 }

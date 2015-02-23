@@ -3,6 +3,7 @@
 namespace MvpWindowsForms
 {
     using System;
+
     using Narvalo.Mvp.Windows.Forms;
 
     public partial class MainForm : MvpForm, IMainView
@@ -20,7 +21,8 @@ namespace MvpWindowsForms
         {
             var localHandler = TextBoxTextChanged;
 
-            if (localHandler != null) {
+            if (localHandler != null)
+            {
                 localHandler(sender, e);
             }
         }

@@ -13,7 +13,7 @@ namespace MvpWebForms
             PreRenderComplete += Page_PreRenderComplete;
         }
 
-        void Page_PreRenderComplete(object sender, EventArgs e)
+        private void Page_PreRenderComplete(object sender, EventArgs e)
         {
             AsyncTapControl.Model.RecordPagePreRenderComplete();
         }

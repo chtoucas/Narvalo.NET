@@ -3,6 +3,7 @@
 namespace MvpWebForms.Controls
 {
     using System;
+
     using MvpWebForms.Views;
     using Narvalo.Mvp.Web;
 
@@ -15,9 +16,10 @@ namespace MvpWebForms.Controls
             OnActionAccepted();
         }
 
-        void OnActionAccepted()
+        private void OnActionAccepted()
         {
-            if (ActionAccepted != null) {
+            if (ActionAccepted != null)
+            {
                 ActionAccepted(this, EventArgs.Empty);
             }
         }

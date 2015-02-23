@@ -4,6 +4,7 @@ namespace MvpWebForms.Controls
 {
     using System;
     using System.Collections.Generic;
+
     using MvpWebForms.Entities;
     using MvpWebForms.Views;
     using Narvalo.Mvp.Web;
@@ -53,37 +54,42 @@ namespace MvpWebForms.Controls
             OnDeletingWidget(widget);
         }
 
-        void OnGettingWidgets(int maximumRows, int startRowIndex)
+        private void OnGettingWidgets(int maximumRows, int startRowIndex)
         {
-            if (GettingWidgets != null) {
+            if (GettingWidgets != null)
+            {
                 GettingWidgets(this, new GettingWidgetsEventArgs(maximumRows, startRowIndex));
             }
         }
 
-        void OnCountingWidgets()
+        private void OnCountingWidgets()
         {
-            if (CountingWidgets != null) {
+            if (CountingWidgets != null)
+            {
                 CountingWidgets(this, EventArgs.Empty);
             }
         }
 
-        void OnUpdatingWidget(Widget widget)
+        private void OnUpdatingWidget(Widget widget)
         {
-            if (UpdatingWidget != null) {
+            if (UpdatingWidget != null)
+            {
                 UpdatingWidget(this, new WidgetEventArgs(widget));
             }
         }
 
-        void OnInsertingWidget(Widget widget)
+        private void OnInsertingWidget(Widget widget)
         {
-            if (InsertingWidget != null) {
+            if (InsertingWidget != null)
+            {
                 InsertingWidget(this, new WidgetEventArgs(widget));
             }
         }
 
-        void OnDeletingWidget(Widget widget)
+        private void OnDeletingWidget(Widget widget)
         {
-            if (DeletingWidget != null) {
+            if (DeletingWidget != null)
+            {
                 DeletingWidget(this, new WidgetIdEventArgs(widget.Id));
             }
         }

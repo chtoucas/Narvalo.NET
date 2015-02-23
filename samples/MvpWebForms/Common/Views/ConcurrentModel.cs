@@ -15,17 +15,18 @@ namespace MvpWebForms.Views
 
         public void Append(string message)
         {
-            lock (_messages) {
+            lock (_messages)
+            {
                 _messages.Add(Format_(message));
             }
         }
 
-        static string Format_(string message)
+        private static string Format_(string message)
         {
             return String.Format(
-                CultureInfo.InvariantCulture, 
-                "[Thread={0}] {1}", 
-                Thread.CurrentThread.ManagedThreadId, 
+                CultureInfo.InvariantCulture,
+                "[Thread={0}] {1}",
+                Thread.CurrentThread.ManagedThreadId,
                 message);
         }
     }

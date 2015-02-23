@@ -5,6 +5,7 @@ namespace MvpWebForms.Presenters
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
+
     using MvpWebForms.Views;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web;
@@ -12,7 +13,7 @@ namespace MvpWebForms.Presenters
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apm")]
     public sealed class AsyncApmPresenter : HttpPresenterOf<AsyncModel>
     {
-        static readonly Action Thunk_ = () => Thread.Sleep(10);
+        private static readonly Action s_Thunk = () => Thread.Sleep(10);
 
         public AsyncApmPresenter(IView<AsyncModel> view)
             : base(view)
@@ -20,23 +21,23 @@ namespace MvpWebForms.Presenters
             View.Load += Load;
         }
 
-        void Load(object sender, EventArgs e)
+        private void Load(object sender, EventArgs e)
         {
             View.Model.RecordViewLoad();
 
             AsyncManager.RegisterAsyncTask(BeginInvoke, EndInvoke, null);
         }
 
-        IAsyncResult BeginInvoke(object sender, EventArgs e, AsyncCallback cb, object state)
+        private IAsyncResult BeginInvoke(object sender, EventArgs e, AsyncCallback cb, object state)
         {
             View.Model.RecordAsyncStarted();
 
-            return Thunk_.BeginInvoke(cb, state);
+            return s_Thunk.BeginInvoke(cb, state);
         }
 
-        void EndInvoke(IAsyncResult ar)
+        private void EndInvoke(IAsyncResult ar)
         {
-            Thunk_.EndInvoke(ar);
+            s_Thunk.EndInvoke(ar);
 
             View.Model.RecordAsyncEnded();
         }

@@ -4,6 +4,7 @@ namespace MvpWebForms.Presenters
 {
     using System;
     using System.Globalization;
+
     using MvpWebForms.Views;
     using Narvalo.Mvp;
 
@@ -15,7 +16,7 @@ namespace MvpWebForms.Presenters
             View.Load += Load;
         }
 
-        void Load(object sender, EventArgs e)
+        private void Load(object sender, EventArgs e)
         {
             View.Model.Message = String.Empty;
 

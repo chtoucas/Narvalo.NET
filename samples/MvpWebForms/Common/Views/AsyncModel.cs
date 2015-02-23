@@ -9,7 +9,7 @@ namespace MvpWebForms.Views
 
     public sealed class AsyncModel
     {
-        readonly List<string> _messages = new List<string>();
+        private readonly List<string> _messages = new List<string>();
 
         public IEnumerable<string> Messages { get { return _messages; } }
 
@@ -33,7 +33,7 @@ namespace MvpWebForms.Views
             Append_("Page PreRenderComplete");
         }
 
-        static string Format_(string message)
+        private static string Format_(string message)
         {
             return String.Format(
                 CultureInfo.InvariantCulture,
@@ -43,7 +43,7 @@ namespace MvpWebForms.Views
                 DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]", CultureInfo.InvariantCulture));
         }
 
-        void Append_(string message)
+        private void Append_(string message)
         {
             _messages.Add(Format_(message));
         }

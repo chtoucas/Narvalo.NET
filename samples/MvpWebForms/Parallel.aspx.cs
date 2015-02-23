@@ -9,7 +9,7 @@ namespace MvpWebForms
 
     public partial class ParallelPage : Page
     {
-        Stopwatch _stopWatch = new Stopwatch();
+        private Stopwatch _stopWatch = new Stopwatch();
 
         public ParallelPage()
             : base()
@@ -18,13 +18,13 @@ namespace MvpWebForms
             PreRenderComplete += Page_PreRenderComplete;
         }
 
-        void Page_Load(object sender, EventArgs e)
+        private void Page_Load(object sender, EventArgs e)
         {
             _stopWatch.Start();
             ParallelControl.Model.Append("Page Load");
         }
 
-        void Page_PreRenderComplete(object sender, EventArgs e)
+        private void Page_PreRenderComplete(object sender, EventArgs e)
         {
             _stopWatch.Stop();
             ParallelControl.Model.Append(String.Format(

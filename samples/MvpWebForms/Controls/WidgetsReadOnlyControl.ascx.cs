@@ -5,6 +5,7 @@ namespace MvpWebForms.Controls
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+
     using MvpWebForms.Presenters;
     using MvpWebForms.Views;
     using Narvalo.Mvp;
@@ -25,7 +26,8 @@ namespace MvpWebForms.Controls
         {
             var id = ParseId();
 
-            if (id.HasValue) {
+            if (id.HasValue)
+            {
                 OnFinding(id.Value);
             }
         }
@@ -35,7 +37,8 @@ namespace MvpWebForms.Controls
         {
             var id = ParseId();
 
-            if (id.HasValue) {
+            if (id.HasValue)
+            {
                 OnFindingApm(id.Value);
             }
         }
@@ -44,35 +47,39 @@ namespace MvpWebForms.Controls
         {
             var id = ParseId();
 
-            if (id.HasValue) {
+            if (id.HasValue)
+            {
                 OnFindingTap(id.Value);
             }
         }
 
-        int? ParseId()
+        private int? ParseId()
         {
             return String.IsNullOrEmpty(WidgetId.Text)
                 ? (int?)null
                 : Convert.ToInt32(WidgetId.Text, CultureInfo.InvariantCulture);
         }
 
-        void OnFinding(int id)
+        private void OnFinding(int id)
         {
-            if (Finding != null) {
+            if (Finding != null)
+            {
                 Finding(this, new WidgetIdEventArgs(id));
             }
         }
 
-        void OnFindingApm(int id)
+        private void OnFindingApm(int id)
         {
-            if (FindingApm != null) {
+            if (FindingApm != null)
+            {
                 FindingApm(this, new WidgetIdEventArgs(id));
             }
         }
 
-        void OnFindingTap(int id)
+        private void OnFindingTap(int id)
         {
-            if (FindingTap != null) {
+            if (FindingTap != null)
+            {
                 FindingTap(this, new WidgetIdEventArgs(id));
             }
         }

@@ -3,6 +3,7 @@
 namespace MvpWindowsForms
 {
     using System;
+
     using Narvalo.Mvp;
 
     public interface IMainView : IView

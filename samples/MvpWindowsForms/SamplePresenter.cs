@@ -5,6 +5,7 @@ namespace MvpWindowsForms
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows.Forms;
+
     using Narvalo.Mvp;
 
     public class SamplePresenter : Presenter<IView>

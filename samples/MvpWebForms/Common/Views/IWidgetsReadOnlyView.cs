@@ -4,6 +4,7 @@ namespace MvpWebForms.Views
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+
     using Narvalo.Mvp;
 
     public interface IWidgetsReadOnlyView : IView<WidgetsReadOnlyModel>

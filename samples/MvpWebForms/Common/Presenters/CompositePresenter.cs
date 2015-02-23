@@ -4,6 +4,7 @@ namespace MvpWebForms.Presenters
 {
     using System;
     using System.Globalization;
+
     using MvpWebForms.Views;
     using Narvalo.Mvp;
 
@@ -14,7 +15,7 @@ namespace MvpWebForms.Presenters
         {
             View.Load += (sender, e) =>
                 View.Model.Message = String.Format(
-                    CultureInfo.InvariantCulture, 
+                    CultureInfo.InvariantCulture,
                     @"Presenter instance: {0}",
                     Guid.NewGuid());
         }
