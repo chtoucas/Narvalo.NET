@@ -74,7 +74,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;DOCUMENTATION</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -85,7 +85,7 @@
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <!-- WARNING: Keep the DEBUG symbol since Contract.Assert and Contract.Assume
-         depend on it. Do not add the CODE_ANALYSIS symbol; Code Contracts
+         depend on it. Do not add the CODE_ANALYSIS symbol: Code Contracts
          and Code Analysis don't play well together. -->
     <DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>

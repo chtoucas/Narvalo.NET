@@ -120,10 +120,13 @@ Coding Style
 - Directories mirror namespaces.
 - One class per file.
 - Internal classes MUST be in a subdirectory named "Internal".
-- Optional extensions may be in a subdirectory named "Extensions".
+- Optional extensions MAY be in a subdirectory named "Extensions".
 - Max line-width 100 characters.
 - Remove and sort usings.
+- Separate System namespaces from other namespaces.
 - Projects should use a minimal set of references.
+
+- Never use Current, it is kind of reserved word.
 
 ### StyleCop
 
