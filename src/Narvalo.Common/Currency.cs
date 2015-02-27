@@ -12,6 +12,7 @@ namespace Narvalo
     /// Represents a currency unit such as Euro or US Dollar.
     /// </summary>
     /// <remarks>
+    /// <para>Recognized currencies are defined in ISO 4217.</para>
     /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
     /// Therefore, you can not directly construct a currency. You must instead use one of the
     /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 

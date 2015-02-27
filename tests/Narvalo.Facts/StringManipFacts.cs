@@ -4,37 +4,35 @@ namespace Narvalo
 {
     using System;
     using System.Collections.Generic;
+
     using Xunit;
     using Xunit.Extensions;
 
     public static class StringManipFacts
     {
-        public static class TheReverseMethod
+        public static IEnumerable<object[]> ReverseSampleData
         {
-            public static IEnumerable<object[]> SampleData
+            get
             {
-                get
-                {
-                    yield return new object[] { String.Empty, String.Empty };
-                    yield return new object[] { "ABCD", "DCBA" };
-                    yield return new object[] { "éçàè$£ö", "ö£$èàçé" };
-                }
+                yield return new object[] { String.Empty, String.Empty };
+                yield return new object[] { "ABCD", "DCBA" };
+                yield return new object[] { "éçàè$£ö", "ö£$èàçé" };
             }
+        }
 
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullString()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => { StringManip.Reverse(null); });
-            }
+        [Fact]
+        public static void Reverse_ThrowsArgumentNullException_ForNullString()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => { StringManip.Reverse(null); });
+        }
 
-            [Theory]
-            [PropertyData("SampleData")]
-            public static void Succeeds_ForSampleStrings(string expectedValue, string value)
-            {
-                // Act & Assert
-                Assert.Equal(expectedValue, StringManip.Reverse(value));
-            }
+        [Theory]
+        [PropertyData("ReverseSampleData")]
+        public static void Reverse_Succeeds_ForSampleStrings(string expectedValue, string value)
+        {
+            // Act & Assert
+            Assert.Equal(expectedValue, StringManip.Reverse(value));
         }
     }
 }

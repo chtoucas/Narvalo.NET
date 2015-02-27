@@ -4,17 +4,17 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+
     using Xunit;
 
-    [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
-        Justification = "Private structs are positioned after public classes and before private classes.")]
+    //[SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
+    //    Justification = "Private structs are positioned after public classes and before private classes.")]
     public static partial class MaybeFacts
     {
-        #region Monoid Laws
+        #region Monad Laws
 
         [Fact]
-        public static void SatisfiesFirstMonoidLaw()
+        public static void Maybe_SatisfiesFirstMonoidLaw()
         {
             // Arrange
             var option = Maybe.Create(1);
@@ -28,7 +28,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SatisfiesSecondMonoidLaw()
+        public static void Maybe_SatisfiesSecondMonoidLaw()
         {
             // Arrange
             var option = Maybe.Create(1);
@@ -42,7 +42,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SatisfiesThirdMonoidLaw()
+        public static void Maybe_SatisfiesThirdMonoidLaw()
         {
             // Arrange
             var optionA = Maybe.Create(1);
@@ -57,12 +57,8 @@ namespace Narvalo.Fx
             Assert.True(left.Equals(right));
         }
 
-        #endregion
-
-        #region Monad laws
-
         [Fact]
-        public static void SatisfiesFirstMonadLaw()
+        public static void Maybe_SatisfiesFirstMonadLaw()
         {
             // Arrange
             int value = 1;
@@ -77,7 +73,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SatisfiesSecondMonadLaw()
+        public static void Maybe_SatisfiesSecondMonadLaw()
         {
             // Arrange
             Func<int, Maybe<int>> create = _ => Maybe.Create(_);
@@ -92,7 +88,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SatisfiesThirdMonadLaw()
+        public static void Maybe_SatisfiesThirdMonadLaw()
         {
             // Arrange
             Maybe<short> m = Maybe.Create((short)1);
@@ -107,12 +103,8 @@ namespace Narvalo.Fx
             Assert.True(left.Equals(right));
         }
 
-        #endregion
-
-        #region MonadZero rule
-
         [Fact]
-        public static void SatisfiesMonadZeroRule()
+        public static void Maybe_SatisfiesMonadZeroRule()
         {
             // Arrange
             Func<int, Maybe<long>> kun = _ => Maybe.Create((long)2 * _);
@@ -125,12 +117,8 @@ namespace Narvalo.Fx
             Assert.True(left.Equals(right));
         }
 
-        #endregion
-
-        #region MonadMore rule
-
         [Fact]
-        public static void SatisfiesMonadMoreRule()
+        public static void Maybe_SatisfiesMonadMoreRule()
         {
             // Act
             var leftSome = Maybe.Create(1).Bind(_ => Maybe<int>.None);
@@ -142,12 +130,8 @@ namespace Narvalo.Fx
             Assert.True(leftNone.Equals(right));
         }
 
-        #endregion
-
-        #region MonadOr rule
-
         [Fact]
-        public static void SatisfiesMonadOrRule()
+        public static void Maybe_SatisfiesMonadOrRule()
         {
             // Arrange
             var option = Maybe.Create(2);
@@ -163,7 +147,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void DoesNotSatisfyRightZeroForPlus()
+        public static void Maybe_DoesNotSatisfyRightZeroForPlus()
         {
             // Arrange
             var option = Maybe.Create(2);
@@ -180,7 +164,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        ////public static class TheNoneProperty
+        ////public static class NoneProperty
         ////{
         ////    [Fact]
         ////    public static void IsNone()
@@ -190,368 +174,358 @@ namespace Narvalo.Fx
         ////    }
         ////}
 
-        public static class TheEqualityOperator
+        #region Equality/Inequality Operator & Equals Method
+
+        [Fact]
+        public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
         {
-            [Fact]
-            public static void ReturnsTrue_ForNullAsMaybeAndNull()
-            {
-                // Arrange
-                var simple = (Maybe<int>)null;
-                var value = (Maybe<ValueStub>)null;
-                var reference = (Maybe<List<int>>)null;
+            // Arrange
+            var simple = (Maybe<int>)null;
+            var value = (Maybe<ValueStub>)null;
+            var reference = (Maybe<List<int>>)null;
 
-                // Act & Assert
-                Assert.True(simple == null);
-                Assert.True(value == null);
-                Assert.True(reference == null);
-            }
-
-            [Fact]
-            public static void ReturnsFalse_ForMaybeNoneAndNull()
-            {
-                // Arrange
-                var simple = Maybe<int>.None;
-                var value = Maybe<ValueStub>.None;
-                var reference = Maybe<List<int>>.None;
-
-                // Act & Assert
-                Assert.False(simple == null);
-                Assert.False(value == null);
-                Assert.False(reference == null);
-            }
-
-            [Fact]
-            public static void FollowsReferentialEqualityRules()
-            {
-                // Arrange
-                var simpleA0 = Maybe.Create(3141);
-                var simpleA1 = Maybe.Create(3141);
-
-                var valueA0 = Maybe.Create(new ValueStub(3141));
-                var valueA1 = Maybe.Create(new ValueStub(3141));
-
-                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-
-                var referenceA0 = Maybe.Create(new List<int>());
-                var referenceA1 = Maybe.Create(new List<int>());
-
-                // Act & Assert
-                Assert.False(simpleA0 == simpleA1);
-                Assert.False(valueA0 == valueA1);
-                Assert.False(almostValueA0 == almostValueA1);
-                Assert.False(referenceA0 == referenceA1);
-            }
+            // Act & Assert
+            Assert.True(simple == null);
+            Assert.True(value == null);
+            Assert.True(reference == null);
         }
 
-        public static class TheInequalityOperator
+        [Fact]
+        public static void Equality_ReturnsFalse_ForMaybeNoneAndNull()
         {
-            [Fact]
-            public static void ReturnsFalse_ForNullAsMaybeAndNull()
-            {
-                // Arrange
-                var simple = (Maybe<int>)null;
-                var value = (Maybe<ValueStub>)null;
-                var reference = (Maybe<List<int>>)null;
+            // Arrange
+            var simple = Maybe<int>.None;
+            var value = Maybe<ValueStub>.None;
+            var reference = Maybe<List<int>>.None;
 
-                // Act & Assert
-                Assert.False(simple != null);
-                Assert.False(value != null);
-                Assert.False(reference != null);
-            }
-
-            [Fact]
-            public static void ReturnsTrue_ForMaybeNoneAndNull()
-            {
-                // Arrange
-                var simple = Maybe<int>.None;
-                var value = Maybe<ValueStub>.None;
-                var reference = Maybe<List<int>>.None;
-
-                // Act & Assert
-                Assert.True(simple != null);
-                Assert.True(value != null);
-                Assert.True(reference != null);
-            }
-
-            [Fact]
-            public static void FollowsReferentialEqualityRules()
-            {
-                // Arrange
-                var simpleA0 = Maybe.Create(3141);
-                var simpleA1 = Maybe.Create(3141);
-
-                var valueA0 = Maybe.Create(new ValueStub(3141));
-                var valueA1 = Maybe.Create(new ValueStub(3141));
-
-                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-
-                var referenceA0 = Maybe.Create(new List<int>());
-                var referenceA1 = Maybe.Create(new List<int>());
-
-                // Act & Assert
-                Assert.True(simpleA0 != simpleA1);
-                Assert.True(valueA0 != valueA1);
-                Assert.True(almostValueA0 != almostValueA1);
-                Assert.True(referenceA0 != referenceA1);
-            }
+            // Act & Assert
+            Assert.False(simple == null);
+            Assert.False(value == null);
+            Assert.False(reference == null);
         }
 
-        public static class TheEqualsMethod
+        [Fact]
+        public static void Equality_FollowsReferentialEqualityRules()
         {
-            [Fact]
-            public static void IsReflexive()
-            {
-                // Arrange
-                var simple = Maybe.Create(3141);
-                var value = Maybe.Create(new ValueStub(3141));
-                var reference = Maybe.Create(new List<int>());
+            // Arrange
+            var simpleA0 = Maybe.Create(3141);
+            var simpleA1 = Maybe.Create(3141);
 
-                // Act & Assert
-                Assert.True(simple.Equals(simple));
-                Assert.True(value.Equals(value));
-                Assert.True(reference.Equals(reference));
-            }
+            var valueA0 = Maybe.Create(new ValueStub(3141));
+            var valueA1 = Maybe.Create(new ValueStub(3141));
 
-            [Fact]
-            public static void IsAbelian()
-            {
-                // Arrange
-                var simpleA0 = Maybe.Create(3141);
-                var simpleA1 = Maybe.Create(3141);
-                var simple = Maybe.Create(1570);
+            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
-                var valueA0 = Maybe.Create(new ValueStub(3141));
-                var valueA1 = Maybe.Create(new ValueStub(3141));
-                var value = Maybe.Create(new ValueStub(1570));
+            var referenceA0 = Maybe.Create(new List<int>());
+            var referenceA1 = Maybe.Create(new List<int>());
 
-                var referenceA0 = Maybe.Create(new List<int>());
-                var referenceA1 = Maybe.Create(new List<int>());
-                var reference = Maybe.Create(new List<int>() { 0 });
-
-                // Act & Assert
-                Assert.Equal(simpleA0.Equals(simpleA1), simpleA1.Equals(simpleA0));
-                Assert.Equal(simpleA0.Equals(simple), simple.Equals(simpleA0));
-                Assert.Equal(valueA0.Equals(valueA1), valueA1.Equals(valueA0));
-                Assert.Equal(valueA0.Equals(value), value.Equals(valueA0));
-                Assert.Equal(referenceA0.Equals(referenceA1), referenceA1.Equals(referenceA0));
-                Assert.Equal(referenceA0.Equals(reference), reference.Equals(referenceA0));
-            }
-
-            [Fact]
-            public static void IsTransitive()
-            {
-                // Arrange
-                var simple1 = Maybe.Create(3141);
-                var simple2 = Maybe.Create(3141);
-                var simple3 = Maybe.Create(3141);
-
-                var value1 = Maybe.Create(new ValueStub(3141));
-                var value2 = Maybe.Create(new ValueStub(3141));
-                var value3 = Maybe.Create(new ValueStub(3141));
-
-                var reference1 = Maybe.Create(new List<int>());
-                var reference2 = Maybe.Create(new List<int>());
-                var reference3 = Maybe.Create(new List<int>());
-
-                // Act & Assert
-                Assert.Equal(simple1.Equals(simple2) && simple2.Equals(simple3), simple1.Equals(simple3));
-                Assert.Equal(value1.Equals(value2) && value2.Equals(value3), value1.Equals(value3));
-                Assert.Equal(reference1.Equals(reference2) && reference2.Equals(reference3), reference1.Equals(reference3));
-            }
-
-            [Fact]
-            public static void ReturnsTrue_WhenNone_ForNull()
-            {
-                // Arrange
-                var simple = Maybe<int>.None;
-                var value = Maybe<ValueStub>.None;
-                var reference = Maybe<List<int>>.None;
-
-                // Act & Assert
-                Assert.True(simple.Equals(null));
-                Assert.True(value.Equals(null));
-                Assert.True(reference.Equals((object)null));
-                Assert.True(reference.Equals((List<int>)null));
-                Assert.True(reference.Equals((Maybe<List<int>>)null));
-            }
-
-            [Fact]
-            public static void ReturnsTrue_ForOriginalValue()
-            {
-                // Arrange
-                var simple = 3141;
-                var simpleOpt = Maybe.Create(simple);
-
-                var value = new ValueStub(3141);
-                var valueOpt = Maybe.Create(value);
-
-                var reference = new List<int>();
-                var referenceOpt = Maybe.Create(reference);
-
-                // Act & Assert
-                Assert.True(simpleOpt.Equals(simple));
-                Assert.True(valueOpt.Equals(value));
-                Assert.True(referenceOpt.Equals(reference));
-            }
-
-            [Fact]
-            public static void ReturnsTrue_ForOriginalValueCastedToObject()
-            {
-                // Arrange
-                var simple = 3141;
-                var simpleOpt = Maybe.Create(simple);
-
-                var value = new ValueStub(3141);
-                var valueOpt = Maybe.Create(value);
-
-                var reference = new List<int>();
-                var referenceOpt = Maybe.Create(reference);
-
-                // Act & Assert
-                Assert.True(simpleOpt.Equals((object)simple));
-                Assert.True(valueOpt.Equals((object)value));
-                Assert.True(referenceOpt.Equals((object)reference));
-            }
-
-            [Fact]
-            public static void FollowsStructuralEqualityRules()
-            {
-                // Arrange
-                var simpleA0 = Maybe.Create(3141);
-                var simpleA1 = Maybe.Create(3141);
-
-                var valueA0 = Maybe.Create(new ValueStub(3141));
-                var valueA1 = Maybe.Create(new ValueStub(3141));
-
-                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-
-                // Act & Assert
-                Assert.True(simpleA0.Equals(simpleA1));
-                Assert.True(valueA0.Equals(valueA1));
-                Assert.True(almostValueA0.Equals(almostValueA1));
-            }
-
-            [Fact]
-            public static void FollowsStructuralEqualityRulesAfterCastToObject()
-            {
-                // Arrange
-                var simpleA0 = Maybe.Create(3141);
-                var simpleA1 = Maybe.Create(3141);
-
-                var valueA0 = Maybe.Create(new ValueStub(3141));
-                var valueA1 = Maybe.Create(new ValueStub(3141));
-
-                var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-                var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-
-                // Act & Assert
-                Assert.True(simpleA0.Equals((object)simpleA1));
-                Assert.True(valueA0.Equals((object)valueA1));
-                Assert.True(almostValueA0.Equals((object)almostValueA1));
-            }
+            // Act & Assert
+            Assert.False(simpleA0 == simpleA1);
+            Assert.False(valueA0 == valueA1);
+            Assert.False(almostValueA0 == almostValueA1);
+            Assert.False(referenceA0 == referenceA1);
         }
 
-        public static partial class TheWhereOperator
+        [Fact]
+        public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_WhenSourceIsNull()
-            {
-                // Arrange
-                var source = (Maybe<int>)null;
-                Func<int, bool> predicate = _ => _ == 1;
+            // Arrange
+            var simple = (Maybe<int>)null;
+            var value = (Maybe<ValueStub>)null;
+            var reference = (Maybe<List<int>>)null;
 
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
-                Assert.Throws<ArgumentNullException>(() => from _ in source where predicate(_) select _);
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullPredicate()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, bool> predicate = null;
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
-            }
+            // Act & Assert
+            Assert.False(simple != null);
+            Assert.False(value != null);
+            Assert.False(reference != null);
         }
 
-        public static partial class TheSelectOperator
+        [Fact]
+        public static void Inequality_ReturnsTrue_ForMaybeNoneAndNull()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_WhenSourceIsNull()
-            {
-                // Arrange
-                var source = (Maybe<int>)null;
-                Func<int, int> selector = _ => _;
+            // Arrange
+            var simple = Maybe<int>.None;
+            var value = Maybe<ValueStub>.None;
+            var reference = Maybe<List<int>>.None;
 
-                // Act & Assert
-                // NB: Apply only if Select is provided by an extension method.
-                ////Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-                ////Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
-                Assert.Throws<NullReferenceException>(() => source.Select(selector));
-                Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullSelector()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, int> selector = null;
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            }
+            // Act & Assert
+            Assert.True(simple != null);
+            Assert.True(value != null);
+            Assert.True(reference != null);
         }
 
-        public static partial class TheSelectManyOperator
+        [Fact]
+        public static void Inequality_FollowsReferentialEqualityRules()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_WhenSourceIsNull()
-            {
-                // Arrange
-                var source = (Maybe<int>)null;
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
+            // Arrange
+            var simpleA0 = Maybe.Create(3141);
+            var simpleA1 = Maybe.Create(3141);
 
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-                Assert.Throws<ArgumentNullException>(() => from i in source
-                                                           from j in middle
-                                                           select resultSelector(i, j));
-            }
+            var valueA0 = Maybe.Create(new ValueStub(3141));
+            var valueA1 = Maybe.Create(new ValueStub(3141));
 
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullValueSelector()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, Maybe<int>> valueSelector = null;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
+            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            }
+            var referenceA0 = Maybe.Create(new List<int>());
+            var referenceA1 = Maybe.Create(new List<int>());
 
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullResultSelector()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = null;
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            }
+            // Act & Assert
+            Assert.True(simpleA0 != simpleA1);
+            Assert.True(valueA0 != valueA1);
+            Assert.True(almostValueA0 != almostValueA1);
+            Assert.True(referenceA0 != referenceA1);
         }
+
+        [Fact]
+        public static void Equals_IsReflexive()
+        {
+            // Arrange
+            var simple = Maybe.Create(3141);
+            var value = Maybe.Create(new ValueStub(3141));
+            var reference = Maybe.Create(new List<int>());
+
+            // Act & Assert
+            Assert.True(simple.Equals(simple));
+            Assert.True(value.Equals(value));
+            Assert.True(reference.Equals(reference));
+        }
+
+        [Fact]
+        public static void Equals_IsAbelian()
+        {
+            // Arrange
+            var simpleA0 = Maybe.Create(3141);
+            var simpleA1 = Maybe.Create(3141);
+            var simple = Maybe.Create(1570);
+
+            var valueA0 = Maybe.Create(new ValueStub(3141));
+            var valueA1 = Maybe.Create(new ValueStub(3141));
+            var value = Maybe.Create(new ValueStub(1570));
+
+            var referenceA0 = Maybe.Create(new List<int>());
+            var referenceA1 = Maybe.Create(new List<int>());
+            var reference = Maybe.Create(new List<int>() { 0 });
+
+            // Act & Assert
+            Assert.Equal(simpleA0.Equals(simpleA1), simpleA1.Equals(simpleA0));
+            Assert.Equal(simpleA0.Equals(simple), simple.Equals(simpleA0));
+            Assert.Equal(valueA0.Equals(valueA1), valueA1.Equals(valueA0));
+            Assert.Equal(valueA0.Equals(value), value.Equals(valueA0));
+            Assert.Equal(referenceA0.Equals(referenceA1), referenceA1.Equals(referenceA0));
+            Assert.Equal(referenceA0.Equals(reference), reference.Equals(referenceA0));
+        }
+
+        [Fact]
+        public static void Equals_IsTransitive()
+        {
+            // Arrange
+            var simple1 = Maybe.Create(3141);
+            var simple2 = Maybe.Create(3141);
+            var simple3 = Maybe.Create(3141);
+
+            var value1 = Maybe.Create(new ValueStub(3141));
+            var value2 = Maybe.Create(new ValueStub(3141));
+            var value3 = Maybe.Create(new ValueStub(3141));
+
+            var reference1 = Maybe.Create(new List<int>());
+            var reference2 = Maybe.Create(new List<int>());
+            var reference3 = Maybe.Create(new List<int>());
+
+            // Act & Assert
+            Assert.Equal(simple1.Equals(simple2) && simple2.Equals(simple3), simple1.Equals(simple3));
+            Assert.Equal(value1.Equals(value2) && value2.Equals(value3), value1.Equals(value3));
+            Assert.Equal(reference1.Equals(reference2) && reference2.Equals(reference3), reference1.Equals(reference3));
+        }
+
+        [Fact]
+        public static void Equals_ReturnsTrue_WhenNone_ForNull()
+        {
+            // Arrange
+            var simple = Maybe<int>.None;
+            var value = Maybe<ValueStub>.None;
+            var reference = Maybe<List<int>>.None;
+
+            // Act & Assert
+            Assert.True(simple.Equals(null));
+            Assert.True(value.Equals(null));
+            Assert.True(reference.Equals((object)null));
+            Assert.True(reference.Equals((List<int>)null));
+            Assert.True(reference.Equals((Maybe<List<int>>)null));
+        }
+
+        [Fact]
+        public static void Equals_ReturnsTrue_ForOriginalValue()
+        {
+            // Arrange
+            var simple = 3141;
+            var simpleOpt = Maybe.Create(simple);
+
+            var value = new ValueStub(3141);
+            var valueOpt = Maybe.Create(value);
+
+            var reference = new List<int>();
+            var referenceOpt = Maybe.Create(reference);
+
+            // Act & Assert
+            Assert.True(simpleOpt.Equals(simple));
+            Assert.True(valueOpt.Equals(value));
+            Assert.True(referenceOpt.Equals(reference));
+        }
+
+        [Fact]
+        public static void Equals_ReturnsTrue_ForOriginalValueCastedToObject()
+        {
+            // Arrange
+            var simple = 3141;
+            var simpleOpt = Maybe.Create(simple);
+
+            var value = new ValueStub(3141);
+            var valueOpt = Maybe.Create(value);
+
+            var reference = new List<int>();
+            var referenceOpt = Maybe.Create(reference);
+
+            // Act & Assert
+            Assert.True(simpleOpt.Equals((object)simple));
+            Assert.True(valueOpt.Equals((object)value));
+            Assert.True(referenceOpt.Equals((object)reference));
+        }
+
+        [Fact]
+        public static void Equals_FollowsStructuralEqualityRules()
+        {
+            // Arrange
+            var simpleA0 = Maybe.Create(3141);
+            var simpleA1 = Maybe.Create(3141);
+
+            var valueA0 = Maybe.Create(new ValueStub(3141));
+            var valueA1 = Maybe.Create(new ValueStub(3141));
+
+            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+
+            // Act & Assert
+            Assert.True(simpleA0.Equals(simpleA1));
+            Assert.True(valueA0.Equals(valueA1));
+            Assert.True(almostValueA0.Equals(almostValueA1));
+        }
+
+        [Fact]
+        public static void Equals_FollowsStructuralEqualityRulesAfterCastToObject()
+        {
+            // Arrange
+            var simpleA0 = Maybe.Create(3141);
+            var simpleA1 = Maybe.Create(3141);
+
+            var valueA0 = Maybe.Create(new ValueStub(3141));
+            var valueA1 = Maybe.Create(new ValueStub(3141));
+
+            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+
+            // Act & Assert
+            Assert.True(simpleA0.Equals((object)simpleA1));
+            Assert.True(valueA0.Equals((object)valueA1));
+            Assert.True(almostValueA0.Equals((object)almostValueA1));
+        }
+
+        #endregion
+
+        #region Linq Operators
+
+        [Fact]
+        public static void Where_ThrowsArgumentNullException_WhenSourceIsNull()
+        {
+            // Arrange
+            var source = (Maybe<int>)null;
+            Func<int, bool> predicate = _ => _ == 1;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+            Assert.Throws<ArgumentNullException>(() => from _ in source where predicate(_) select _);
+        }
+
+        [Fact]
+        public static void Where_ThrowsArgumentNullException_ForNullPredicate()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, bool> predicate = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+        }
+
+        [Fact]
+        public static void Select_ThrowsArgumentNullException_WhenSourceIsNull()
+        {
+            // Arrange
+            var source = (Maybe<int>)null;
+            Func<int, int> selector = _ => _;
+
+            // Act & Assert
+            // NB: Apply only if Select is provided by an extension method.
+            ////Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+            ////Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
+            Assert.Throws<NullReferenceException>(() => source.Select(selector));
+            Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
+        }
+
+        [Fact]
+        public static void Select_ThrowsArgumentNullException_ForNullSelector()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, int> selector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+        }
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_WhenSourceIsNull()
+        {
+            // Arrange
+            var source = (Maybe<int>)null;
+            var middle = Maybe.Create(2);
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+            Assert.Throws<ArgumentNullException>(() => from i in source
+                                                       from j in middle
+                                                       select resultSelector(i, j));
+        }
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, Maybe<int>> valueSelector = null;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            var middle = Maybe.Create(2);
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        #endregion
 
         #region Stubs
 
@@ -578,11 +552,13 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                if (obj == null) {
+                if (obj == null)
+                {
                     return false;
                 }
 
-                if (!(obj is ValueStub)) {
+                if (!(obj is ValueStub))
+                {
                     return false;
                 }
 
@@ -601,7 +577,8 @@ namespace Narvalo.Fx
 
             public bool Equals(AlmostValueStub other)
             {
-                if (ReferenceEquals(other, null)) {
+                if (ReferenceEquals(other, null))
+                {
                     return false;
                 }
 
@@ -610,15 +587,18 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(obj, null)) {
+                if (ReferenceEquals(obj, null))
+                {
                     return false;
                 }
 
-                if (ReferenceEquals(obj, this)) {
+                if (ReferenceEquals(obj, this))
+                {
                     return true;
                 }
 
-                if (obj.GetType() != this.GetType()) {
+                if (obj.GetType() != this.GetType())
+                {
                     return false;
                 }
 
@@ -638,389 +618,379 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        public static class TheUnitProperty
+        #region Properties
+
+        [Fact]
+        public static void Unit_IsSome()
         {
-            [Fact]
-            public static void IsSome()
-            {
-                // Act & Assert
-                Assert.True(Maybe.Unit.IsSome);
-                Assert.Equal(Unit.Single, Maybe.Unit.Value);
-            }
+            // Act & Assert
+            Assert.True(Maybe.Unit.IsSome);
+            Assert.Equal(Unit.Single, Maybe.Unit.Value);
         }
 
-        public static class TheIsSomeProperty
+        [Fact]
+        public static void IsSome_IsFalse_WhenNone()
         {
-            [Fact]
-            public static void IsFalse_WhenNone()
-            {
-                // Arrange
-                var simple = Maybe<int>.None;
-                var value = Maybe<ValueStub>.None;
-                var reference = Maybe<List<int>>.None;
+            // Arrange
+            var simple = Maybe<int>.None;
+            var value = Maybe<ValueStub>.None;
+            var reference = Maybe<List<int>>.None;
 
-                // Act & Assert
-                Assert.False(simple.IsSome);
-                Assert.False(value.IsSome);
-                Assert.False(reference.IsSome);
-            }
-
-            [Fact]
-            public static void IsTrue_WhenSome()
-            {
-                // Arrange
-                var simple = Maybe.Create(3141);
-                var value = Maybe.Create(new ValueStub(3141));
-                var reference = Maybe.Create(new List<int>());
-
-                // Act & Assert
-                Assert.True(simple.IsSome);
-                Assert.True(value.IsSome);
-                Assert.True(reference.IsSome);
-            }
-
-            [Fact]
-            public static void IsImmutable_OnceTrue()
-            {
-                // Arrange
-                var list = new List<int>();
-                var option = Maybe.Create(list);
-
-                // Act
-                list = null;
-
-                // Assert
-                Assert.True(option.IsSome);
-            }
-
-            [Fact]
-            public static void IsImmutable_OnceFalse()
-            {
-                // Arrange
-                List<int> list = null;
-                var option = Maybe.Create(list);
-
-                // Act
-                list = new List<int>();
-
-                // Assert
-                Assert.True(!option.IsSome);
-            }
+            // Act & Assert
+            Assert.False(simple.IsSome);
+            Assert.False(value.IsSome);
+            Assert.False(reference.IsSome);
         }
 
-        public static class TheValueProperty
+        [Fact]
+        public static void IsSome_IsTrue_WhenSome()
         {
-            [Fact]
-            public static void ThrowsInvalidOperationException_WhenNone()
-            {
-                // Arrange
-                var option = Maybe<int>.None;
+            // Arrange
+            var simple = Maybe.Create(3141);
+            var value = Maybe.Create(new ValueStub(3141));
+            var reference = Maybe.Create(new List<int>());
 
-                // Act & Assert
-                Assert.Throws<InvalidOperationException>(() => option.Value);
-            }
-
-            [Fact]
-            public static void ReturnsTheOriginalValue_WhenSome()
-            {
-                // Arrange
-                var simple = 3141;
-                var value = new ValueStub(3141);
-                ValueStub? nullableValue = new ValueStub(3141);
-                var reference = new List<int>();
-
-                var simpleOpt = Maybe.Create(simple);
-                var valueOpt = Maybe.Create(value);
-                var nullableValueOpt = Maybe.Create(nullableValue);
-                var referenceOpt = Maybe.Create(reference);
-
-                // Act & Assert
-                Assert.True(simpleOpt.Value == simple);
-                Assert.True(valueOpt.Value == value);
-                Assert.True(nullableValueOpt.Value == nullableValue.Value);
-                Assert.True(referenceOpt.Value == reference);
-            }
+            // Act & Assert
+            Assert.True(simple.IsSome);
+            Assert.True(value.IsSome);
+            Assert.True(reference.IsSome);
         }
 
-        public static class TheCreateMethod
+        [Fact]
+        public static void IsSome_IsImmutable_OnceTrue()
         {
-            [Fact]
-            public static void ReturnsSome_ForNotNull()
-            {
-                // Arrange
-                var simple = 3141;
-                var value = new ValueStub(3141);
-                ValueStub? nullableValue = new ValueStub(3141);
-                var reference = new List<int>();
+            // Arrange
+            var list = new List<int>();
+            var option = Maybe.Create(list);
 
-                // Act
-                var simpleOpt = Maybe.Create(simple);
-                var valueOpt = Maybe.Create(value);
-                var nullableValueOpt = Maybe.Create(nullableValue);
-                var referenceOpt = Maybe.Create(reference);
+            // Act
+            list = null;
 
-                // Assert
-                Assert.True(simpleOpt.IsSome);
-                Assert.True(valueOpt.IsSome);
-                Assert.True(nullableValueOpt.IsSome);
-                Assert.True(referenceOpt.IsSome);
-            }
-
-            [Fact]
-            public static void ReturnsNone_ForNull()
-            {
-                // Arrange
-                ValueStub? value = null;
-                List<int> reference = null;
-
-                // Act
-                var valueOpt = Maybe.Create(value);
-                var referenceOpt = Maybe.Create(reference);
-
-                // Assert
-                Assert.True(valueOpt.IsNone);
-                Assert.True(referenceOpt.IsNone);
-            }
+            // Assert
+            Assert.True(option.IsSome);
         }
 
-        public static class TheBindMethod
+        [Fact]
+        public static void IsSome_IsImmutable_OnceFalse()
         {
-            [Fact]
-            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
+            // Arrange
+            List<int> list = null;
+            var option = Maybe.Create(list);
 
-                // Act
-                var m = source.Bind(selector);
+            // Act
+            list = new List<int>();
 
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.Equal(2, m.Value);
-            }
-
-            /// <summary>
-            /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
-            /// <c>selector</c> returns <c>null</c>. 
-            /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
-            /// </summary>
-            [Fact]
-            [Issue(IssueSeverity.High, "2014/12/01")]
-            public static void ReturnsNone_WhenSelectorReturnsNull()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, Maybe<int>> selector = _ => null;
-
-                // Act
-                var m = source.Bind(selector);
-
-                // Assert
-                Assert.True(m != null);
-                Assert.True(m.IsNone);
-            }
+            // Assert
+            Assert.True(!option.IsSome);
         }
 
-        public static partial class TheWhereOperator
+        [Fact]
+        public static void Value_ThrowsInvalidOperationException_WhenNone()
         {
-            [Fact]
-            public static void ReturnsSome_ForSuccessfulPredicate()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, bool> predicate = _ => _ == 1;
+            // Arrange
+            var option = Maybe<int>.None;
 
-                // Act
-                var m = source.Where(predicate);
-                var q = from _ in source where predicate(_) select _;
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(1, m.Value);
-                Assert.Equal(1, q.Value);
-            }
-
-            [Fact]
-            public static void ReturnsNone_ForUnsucessfulPredicate()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, bool> predicate = _ => _ == 2;
-
-                // Act
-                var m = source.Where(predicate);
-                var q = from _ in source where predicate(_) select _;
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => option.Value);
         }
 
-        public static partial class TheSelectOperator
+        [Fact]
+        public static void Value_ReturnsTheOriginalValue_WhenSome()
         {
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                Func<int, int> selector = _ => _;
+            // Arrange
+            var simple = 3141;
+            var value = new ValueStub(3141);
+            ValueStub? nullableValue = new ValueStub(3141);
+            var reference = new List<int>();
 
-                // Act
-                var m = source.Select(selector);
-                var q = from _ in source select selector(_);
+            var simpleOpt = Maybe.Create(simple);
+            var valueOpt = Maybe.Create(value);
+            var nullableValueOpt = Maybe.Create(nullableValue);
+            var referenceOpt = Maybe.Create(reference);
 
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsSomeAndApplySelector_WhenSourceIsSome()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                Func<int, int> selector = _ => 2 * _;
-
-                // Act
-                var m = source.Select(selector);
-                var q = from _ in source select selector(_);
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(2, m.Value);
-                Assert.Equal(2, q.Value);
-            }
+            // Act & Assert
+            Assert.True(simpleOpt.Value == simple);
+            Assert.True(valueOpt.Value == value);
+            Assert.True(nullableValueOpt.Value == nullableValue.Value);
+            Assert.True(referenceOpt.Value == reference);
         }
 
-        public static partial class TheSelectManyOperator
+        #endregion
+
+        #region Create Method
+
+        [Fact]
+        public static void Create_ReturnsSome_ForNotNull()
         {
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
+            // Arrange
+            var simple = 3141;
+            var value = new ValueStub(3141);
+            ValueStub? nullableValue = new ValueStub(3141);
+            var reference = new List<int>();
 
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
+            // Act
+            var simpleOpt = Maybe.Create(simple);
+            var valueOpt = Maybe.Create(value);
+            var nullableValueOpt = Maybe.Create(nullableValue);
+            var referenceOpt = Maybe.Create(reference);
 
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsNone_ForMiddleIsNone()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe<int>.None;
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
-            {
-                // Arrange
-                var source = Maybe<int>.None;
-                var middle = Maybe<int>.None;
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsSomeAndApplySelector()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var middle = Maybe.Create(2);
-                Func<int, Maybe<int>> valueSelector = _ => middle;
-                Func<int, int, int> resultSelector = (i, j) => i + j;
-
-                // Act
-                var m = source.SelectMany(valueSelector, resultSelector);
-                var q = from i in source
-                        from j in middle
-                        select resultSelector(i, j);
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(3, m.Value);
-                Assert.Equal(3, q.Value);
-            }
+            // Assert
+            Assert.True(simpleOpt.IsSome);
+            Assert.True(valueOpt.IsSome);
+            Assert.True(nullableValueOpt.IsSome);
+            Assert.True(referenceOpt.IsSome);
         }
 
-        public static class TheJoinOperator
+        [Fact]
+        public static void Create_ReturnsNone_ForNull()
         {
-            [Fact]
-            public static void ReturnsNone_WhenJoinFailed()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var inner = Maybe.Create(2);
+            // Arrange
+            ValueStub? value = null;
+            List<int> reference = null;
 
-                // Act
-                var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
-                var q = from i in source
-                        join j in inner on i equals j
-                        select i + j;
+            // Act
+            var valueOpt = Maybe.Create(value);
+            var referenceOpt = Maybe.Create(reference);
 
-                // Assert
-                Assert.True(m.IsNone);
-                Assert.True(q.IsNone);
-            }
-
-            [Fact]
-            public static void ReturnsSome_WhenJoinSucceed()
-            {
-                // Arrange
-                var source = Maybe.Create(1);
-                var inner = Maybe.Create(2);
-
-                // Act
-                var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
-                var q = from i in source
-                        join j in inner on 2 * i equals j
-                        select i + j;
-
-                // Assert
-                Assert.True(m.IsSome);
-                Assert.True(q.IsSome);
-                Assert.Equal(3, m.Value);
-                Assert.Equal(3, q.Value);
-            }
+            // Assert
+            Assert.True(valueOpt.IsNone);
+            Assert.True(referenceOpt.IsNone);
         }
+
+
+        #endregion
+
+        #region Bind Method
+
+        [Fact]
+        public static void Bind_ReturnsSomeAndApplySelector_WhenSourceIsSome()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
+
+            // Act
+            var m = source.Bind(selector);
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.Equal(2, m.Value);
+        }
+
+        /// <summary>
+        /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
+        /// <c>selector</c> returns <c>null</c>. 
+        /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
+        /// </summary>
+        [Fact]
+        [Issue(IssueSeverity.High, "2014/12/01")]
+        public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, Maybe<int>> selector = _ => null;
+
+            // Act
+            var m = source.Bind(selector);
+
+            // Assert
+            Assert.True(m != null);
+            Assert.True(m.IsNone);
+        }
+
+        #endregion
+
+        #region Linq Operators
+
+        [Fact]
+        public static void Where_ReturnsSome_ForSuccessfulPredicate()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, bool> predicate = _ => _ == 1;
+
+            // Act
+            var m = source.Where(predicate);
+            var q = from _ in source where predicate(_) select _;
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.True(q.IsSome);
+            Assert.Equal(1, m.Value);
+            Assert.Equal(1, q.Value);
+        }
+
+        [Fact]
+        public static void Where_ReturnsNone_ForUnsucessfulPredicate()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, bool> predicate = _ => _ == 2;
+
+            // Act
+            var m = source.Where(predicate);
+            var q = from _ in source where predicate(_) select _;
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void Select_ReturnsNone_WhenSourceIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            Func<int, int> selector = _ => _;
+
+            // Act
+            var m = source.Select(selector);
+            var q = from _ in source select selector(_);
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void Select_ReturnsSomeAndApplySelector_WhenSourceIsSome()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            Func<int, int> selector = _ => 2 * _;
+
+            // Act
+            var m = source.Select(selector);
+            var q = from _ in source select selector(_);
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.True(q.IsSome);
+            Assert.Equal(2, m.Value);
+            Assert.Equal(2, q.Value);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_WhenSourceIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            var middle = Maybe.Create(2);
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_ForMiddleIsNone()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            var middle = Maybe<int>.None;
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            var middle = Maybe<int>.None;
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsSomeAndApplySelector()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            var middle = Maybe.Create(2);
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.True(q.IsSome);
+            Assert.Equal(3, m.Value);
+            Assert.Equal(3, q.Value);
+        }
+
+        [Fact]
+        public static void Join_ReturnsNone_WhenJoinFailed()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            var inner = Maybe.Create(2);
+
+            // Act
+            var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
+            var q = from i in source
+                    join j in inner on i equals j
+                    select i + j;
+
+            // Assert
+            Assert.True(m.IsNone);
+            Assert.True(q.IsNone);
+        }
+
+        [Fact]
+        public static void Join_ReturnsSome_WhenJoinSucceed()
+        {
+            // Arrange
+            var source = Maybe.Create(1);
+            var inner = Maybe.Create(2);
+
+            // Act
+            var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);
+            var q = from i in source
+                    join j in inner on 2 * i equals j
+                    select i + j;
+
+            // Assert
+            Assert.True(m.IsSome);
+            Assert.True(q.IsSome);
+            Assert.Equal(3, m.Value);
+            Assert.Equal(3, q.Value);
+        }
+
+        #endregion
     }
 
 #endif
