@@ -7,7 +7,7 @@ namespace Narvalo.Benchmarking.Internal
     using Narvalo;
     using Narvalo.Benchmarking;
 
-    internal class BenchmarkComparator
+    internal sealed class BenchmarkComparator
     {
         private readonly Benchmarker _benchmarker;
 

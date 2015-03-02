@@ -9,7 +9,7 @@ namespace Narvalo.Benchmarking.Internal
     using Narvalo.Benchmarking;
     using NodaTime;
 
-    internal class Benchmarker
+    internal sealed class Benchmarker
     {
         private readonly IBenchmarkTimer _timer;
 
@@ -31,7 +31,7 @@ namespace Narvalo.Benchmarking.Internal
         {
             Require.NotNull(action, "action");
 
-            Cleanup();
+            Cleanup_();
 
             // Echauffement (à améliorer).
             action();
@@ -47,7 +47,7 @@ namespace Narvalo.Benchmarking.Internal
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
             Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
-        private static void Cleanup()
+        private static void Cleanup_()
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();

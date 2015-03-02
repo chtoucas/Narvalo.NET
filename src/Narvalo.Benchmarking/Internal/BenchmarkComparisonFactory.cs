@@ -13,7 +13,7 @@ namespace Narvalo.Benchmarking.Internal
     {
         public static BenchmarkComparison Create(Type type, IEnumerable<BenchmarkComparative> items)
         {
-            return MayCreate(type, items)
+            return MayCreate_(type, items)
                 .ValueOrThrow(
                     () => {
                         var message = String.Format(
@@ -24,18 +24,18 @@ namespace Narvalo.Benchmarking.Internal
                     });
         }
 
-        public static Maybe<BenchmarkComparison> MayCreate(
+        private static Maybe<BenchmarkComparison> MayCreate_(
             Type type,
             IEnumerable<BenchmarkComparative> items)
         {
             return from attr in type.MayGetCustomAttribute<BenchmarkComparisonAttribute>(inherit: false)
                    select new BenchmarkComparison(
-                       GetName(type, attr),
+                       GetName_(type, attr),
                        items,
                        attr.Iterations);
         }
 
-        private static string GetName(Type type, BenchmarkComparisonAttribute attr)
+        private static string GetName_(Type type, BenchmarkComparisonAttribute attr)
         {
             return String.IsNullOrWhiteSpace(attr.DisplayName) ? type.Name : attr.DisplayName;
         }

@@ -28,12 +28,12 @@ namespace Narvalo.Benchmarking.Internal
         {
             return from attr in method.MayGetCustomAttribute<BenchmarkAttribute>(false /* inherit */)
                    select new Benchmark(
-                       GetName(method, attr),
+                       GetName_(method, attr),
                        ActionFactory.Create(method),
                        attr.Iterations);
         }
 
-        private static string GetName(MethodInfo method, BenchmarkAttribute attr)
+        private static string GetName_(MethodInfo method, BenchmarkAttribute attr)
         {
             return String.IsNullOrWhiteSpace(attr.DisplayName) ? method.Name : attr.DisplayName;
         }

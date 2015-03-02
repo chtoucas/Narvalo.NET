@@ -8,7 +8,7 @@ namespace Narvalo.Benchmarking
 
     using Narvalo;
 
-    public sealed class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase
+    public class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase
     {
         public BenchmarkMetricFormatter() : base() { }
 

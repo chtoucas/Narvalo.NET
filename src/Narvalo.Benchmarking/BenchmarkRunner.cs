@@ -16,8 +16,6 @@ namespace Narvalo.Benchmarking
             _benchmarker = benchmarker;
         }
 
-        #region Raccourcis de construction.
-
         public static BenchmarkRunner Create()
         {
             return Create(new BenchmarkTimer());
@@ -27,8 +25,6 @@ namespace Narvalo.Benchmarking
         {
             return new BenchmarkRunner(new Benchmarker(timer));
         }
-
-        #endregion
 
         public BenchmarkMetric Run(Benchmark benchmark)
         {

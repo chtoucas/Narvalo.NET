@@ -25,18 +25,18 @@ namespace Narvalo.Benchmarking.Internal
 
         public static Maybe<BenchmarkComparative> MayCreate(MethodInfo method)
         {
-            return from attr in MayGetAttribute(method)
+            return from attr in MayGetAttribute_(method)
                    select new BenchmarkComparative(
-                       GetName(method, attr),
+                       GetName_(method, attr),
                        ActionFactory.Create(method));
         }
 
         // FIXME: Theory.
         public static Maybe<BenchmarkComparative> MayCreate<T>(MethodInfo method, T value)
         {
-            return from attr in MayGetAttribute(method)
+            return from attr in MayGetAttribute_(method)
                    select new BenchmarkComparative(
-                       GetName(method, attr),
+                       GetName_(method, attr),
                        () => ActionFactory.Create<T>(method).Invoke(value));
         }
 
@@ -51,15 +51,15 @@ namespace Narvalo.Benchmarking.Internal
         ////    };
         ////}
 
-        private static string GetName(MethodInfo method, BenchmarkComparativeAttribute attr)
+        private static string GetName_(MethodInfo method, BenchmarkComparativeAttribute attr)
         {
             return String.IsNullOrWhiteSpace(attr.DisplayName) ? method.Name : attr.DisplayName;
         }
 
-        private static Maybe<BenchmarkComparativeAttribute> MayGetAttribute(MethodInfo method)
+        private static Maybe<BenchmarkComparativeAttribute> MayGetAttribute_(MethodInfo method)
         {
             return method
-                .MayGetCustomAttribute<BenchmarkComparativeAttribute>(false /* inherit */);
+                .MayGetCustomAttribute<BenchmarkComparativeAttribute>(inherit: false);
         }
     }
 }

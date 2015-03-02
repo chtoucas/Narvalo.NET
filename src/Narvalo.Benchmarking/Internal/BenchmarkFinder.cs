@@ -11,7 +11,7 @@ namespace Narvalo.Benchmarking.Internal
     using Narvalo.Benchmarking;
     using Narvalo.Collections;
 
-    internal class BenchmarkFinder
+    internal sealed class BenchmarkFinder
     {
         private const BindingFlags DEFAULT_BINDINGS
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;

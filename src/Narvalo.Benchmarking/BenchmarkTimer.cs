@@ -6,7 +6,7 @@ namespace Narvalo.Benchmarking
 
     using NodaTime;
 
-    public class BenchmarkTimer : IBenchmarkTimer
+    public sealed class BenchmarkTimer : IBenchmarkTimer
     {
         private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
 

@@ -6,10 +6,10 @@ namespace Playground.Benchmarks.Comparisons
 
     public static class Int64EncoderComparison
     {
-        const string ALPHABET = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-        const int ALPHABET_LENGTH = 58;
+        private const string ALPHABET = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+        private const int ALPHABET_LENGTH = 58;
 
-        static readonly char[] AlphabetUnorderedArray = new char[] {
+        private static readonly char[] s_AlphabetUnorderedArray = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
@@ -19,7 +19,7 @@ namespace Playground.Benchmarks.Comparisons
             'U', 'V', 'W', 'X', 'Y', 'Z',
         };
 
-        static readonly char[] AlphabetOrderedArray = new char[] {
+        private static readonly char[] s_AlphabetOrderedArray = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9', 
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
             'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 
@@ -76,14 +76,14 @@ namespace Playground.Benchmarks.Comparisons
 
         #region Private methods
 
-        static long Decode_OrderedArray(string value)
+        private static long Decode_OrderedArray(string value)
         {
             long result = 0;
             long multi = 1;
 
             for (int i = value.Length - 1; i >= 0; i--)
             {
-                int index = Array.BinarySearch(AlphabetOrderedArray, value[i]);
+                int index = Array.BinarySearch(s_AlphabetOrderedArray, value[i]);
 
                 if (index < 0)
                 {
@@ -97,7 +97,7 @@ namespace Playground.Benchmarks.Comparisons
             return result;
         }
 
-        static long Decode_String(string value)
+        private static long Decode_String(string value)
         {
             long result = 0;
             long multi = 1;
@@ -120,14 +120,14 @@ namespace Playground.Benchmarks.Comparisons
             return result;
         }
 
-        static long Decode_UnorderedArray(string value)
+        private static long Decode_UnorderedArray(string value)
         {
             long result = 0;
             long multi = 1;
 
             for (int i = value.Length - 1; i >= 0; i--)
             {
-                int index = Array.IndexOf(AlphabetUnorderedArray, value[i]);
+                int index = Array.IndexOf(s_AlphabetUnorderedArray, value[i]);
 
                 if (index < 0)
                 {
@@ -141,7 +141,7 @@ namespace Playground.Benchmarks.Comparisons
             return result;
         }
 
-        static string Encode_String(long value)
+        private static string Encode_String(long value)
         {
             if (value == 0)
             {
@@ -167,14 +167,14 @@ namespace Playground.Benchmarks.Comparisons
             return result;
         }
 
-        static string Encode_Array(long value)
+        private static string Encode_Array(long value)
         {
             string result = string.Empty;
 
             while (value > 0)
             {
                 long r = value % ALPHABET_LENGTH;
-                result = AlphabetOrderedArray[r] + result;
+                result = s_AlphabetOrderedArray[r] + result;
                 value /= ALPHABET_LENGTH;
             }
 
