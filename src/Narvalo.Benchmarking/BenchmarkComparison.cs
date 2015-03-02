@@ -6,7 +6,7 @@ namespace Narvalo.Benchmarking
 
     using Narvalo;
 
-    public class BenchmarkComparison
+    public sealed class BenchmarkComparison
     {
         private readonly IEnumerable<BenchmarkComparative> _items;
         private readonly int _iterations;

@@ -9,7 +9,7 @@ namespace Narvalo
 
     public sealed class VoidOrError
     {
-        private static readonly VoidOrError Success_ = new VoidOrError();
+        private static readonly VoidOrError s_Success = new VoidOrError();
 
         private readonly bool _isError;
         private readonly ExceptionDispatchInfo _exceptionInfo;
@@ -31,7 +31,7 @@ namespace Narvalo
             {
                 Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
-                return Success_;
+                return s_Success;
             }
         }
 

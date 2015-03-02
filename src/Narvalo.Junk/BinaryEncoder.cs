@@ -41,7 +41,7 @@ namespace Narvalo
 
         public static string ToZBase32String(byte[] value)
         {
-            Require.NotNull<byte[]>(value, "value");
+            Require.NotNull(value, "value");
 
             int length = value.Length;
             var sb = new StringBuilder((length + 7) * 8 / 5);

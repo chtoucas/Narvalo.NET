@@ -9,7 +9,7 @@ namespace Narvalo.Benchmarking
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
-    public class BenchmarkProcessor
+    public sealed class BenchmarkProcessor
     {
         private readonly BenchmarkFinder _finder;
         private readonly BenchmarkRunner _runner;
@@ -22,8 +22,6 @@ namespace Narvalo.Benchmarking
             _finder = finder;
             _runner = runner;
         }
-
-        #region Raccourcis de construction.
 
         public static BenchmarkProcessor Create()
         {
@@ -54,8 +52,6 @@ namespace Narvalo.Benchmarking
                 new BenchmarkFinder(bindings),
                 BenchmarkRunner.Create(timer));
         }
-
-        #endregion
 
         public IEnumerable<BenchmarkMetric> Process(Assembly assembly)
         {

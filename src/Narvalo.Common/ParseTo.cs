@@ -11,8 +11,6 @@ namespace Narvalo
 
     public static partial class ParseTo
     {
-        //// Boolean
-
         public static bool? Boolean(string value)
         {
             return Boolean(value, BooleanStyles.Default);
@@ -48,8 +46,6 @@ namespace Narvalo
             return null;
         }
 
-        //// Decimal
-
         public static decimal? Decimal(string value)
         {
             return Decimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
@@ -61,8 +57,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// Double
 
         public static double? Double(string value)
         {
@@ -84,8 +78,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// Int16
-
         public static short? Int16(string value)
         {
             return Int16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
@@ -97,8 +89,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// Int32
 
         public static int? Int32(string value)
         {
@@ -112,8 +102,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// Int64
-
         public static long? Int64(string value)
         {
             return Int64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
@@ -126,8 +114,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// Single
-
         public static float? Single(string value)
         {
             return Single(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
@@ -139,8 +125,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// SByte
 
         [CLSCompliant(false)]
         public static sbyte? SByte(string value)
@@ -156,8 +140,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// Byte
-
         [CLSCompliant(false)]
         public static byte? Byte(string value)
         {
@@ -171,8 +153,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// UInt16
 
         [CLSCompliant(false)]
         public static ushort? UInt16(string value)
@@ -188,8 +168,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// UInt32
-
         [CLSCompliant(false)]
         public static uint? UInt32(string value)
         {
@@ -203,8 +181,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// UInt64
 
         [CLSCompliant(false)]
         public static ulong? UInt64(string value)
@@ -223,8 +199,6 @@ namespace Narvalo
 
     public static partial class ParseTo
     {
-        //// Enum
-
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
             return Enum<TEnum>(value, ignoreCase: true);
@@ -242,8 +216,6 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-
-        //// DateTime
 
         public static DateTime? DateTime(string value)
         {
@@ -267,8 +239,6 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        //// Uri
-
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
             // REVIEW: Uri.TryCreate accepts empty strings.
@@ -280,8 +250,6 @@ namespace Narvalo
 
             return parser.MayInvoke(value);
         }
-
-        //// IPAddress
 
         public static Maybe<IPAddress> IPAddress(string value)
         {

@@ -15,7 +15,7 @@ namespace Playground.Benchmarks.Comparisons
         //   a character intended to be combined with another 
         //   character without taking up extra space 
         //   (e.g. accents, umlauts, etc.). 
-        static readonly Regex _NonSpacingMarkRegex = new Regex(@"\p{Mn}", RegexOptions.Compiled);
+        private static readonly Regex s_NonSpacingMarkRegex = new Regex(@"\p{Mn}", RegexOptions.Compiled);
 
         ////IEnumerable<string> GenerateTestData()
         ////{
@@ -30,10 +30,12 @@ namespace Playground.Benchmarks.Comparisons
         {
             var formD = value.Normalize(NormalizationForm.FormD);
 
-            if (formD != null) {
-                return _NonSpacingMarkRegex.Replace(formD, String.Empty);
+            if (formD != null)
+            {
+                return s_NonSpacingMarkRegex.Replace(formD, String.Empty);
             }
-            else {
+            else
+            {
                 return String.Empty;
             }
         }
@@ -45,10 +47,12 @@ namespace Playground.Benchmarks.Comparisons
 
             var sb = new StringBuilder();
 
-            for (int i = 0; i < formD.Length; i++) {
+            for (int i = 0; i < formD.Length; i++)
+            {
                 var c = formD[i];
 
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark) {
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
                     sb.Append(c);
                 }
             }

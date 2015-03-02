@@ -7,7 +7,7 @@ namespace Narvalo.Benchmarking
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
-    public class BenchmarkComparisonRunner
+    public sealed class BenchmarkComparisonRunner
     {
         private readonly BenchmarkComparator _comparator;
 
@@ -18,8 +18,6 @@ namespace Narvalo.Benchmarking
             _comparator = comparator;
         }
 
-        #region Raccourcis de construction.
-
         public static BenchmarkComparisonRunner Create()
         {
             return Create(new BenchmarkTimer());
@@ -29,8 +27,6 @@ namespace Narvalo.Benchmarking
         {
             return new BenchmarkComparisonRunner(new BenchmarkComparator(new Benchmarker(timer)));
         }
-
-        #endregion
 
         public BenchmarkMetricCollection Run(BenchmarkComparison comparison)
         {

@@ -174,7 +174,7 @@ namespace Narvalo.Fx
         ////    }
         ////}
 
-        #region Equality/Inequality Operator & Equals Method
+        #region Equality/Inequality Operators & Equals Method
 
         [Fact]
         public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
@@ -779,7 +779,7 @@ namespace Narvalo.Fx
 
         /// <summary>
         /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
-        /// <c>selector</c> returns <c>null</c>. 
+        /// <c>selector</c> returned <c>null</c>. 
         /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
         /// </summary>
         [Fact]

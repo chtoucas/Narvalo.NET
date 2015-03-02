@@ -6,7 +6,7 @@ namespace Narvalo.Benchmarking
 
     using Narvalo;
 
-    public class BenchmarkComparative
+    public sealed class BenchmarkComparative
     {
         private readonly string _name;
         private readonly Action _action;

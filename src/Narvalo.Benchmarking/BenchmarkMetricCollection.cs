@@ -8,7 +8,7 @@ namespace Narvalo.Benchmarking
 
     using Narvalo;
 
-    public class BenchmarkMetricCollection : ReadOnlyCollection<BenchmarkMetric>
+    public sealed class BenchmarkMetricCollection : ReadOnlyCollection<BenchmarkMetric>
     {
         private readonly string _name;
 

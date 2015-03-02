@@ -8,7 +8,7 @@ namespace Narvalo
 
     public sealed class VoidOrBreak
     {
-        private static readonly VoidOrBreak Success_ = new VoidOrBreak();
+        private static readonly VoidOrBreak s_Success = new VoidOrBreak();
 
         private readonly bool _isBreak;
         private readonly string _reason;
@@ -26,7 +26,7 @@ namespace Narvalo
             _reason = reason;
         }
 
-        public static VoidOrBreak Success { get { return Success_; } }
+        public static VoidOrBreak Success { get { return s_Success; } }
 
         public bool IsBreak { get { return _isBreak; } }
 

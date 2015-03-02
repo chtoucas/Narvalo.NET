@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+
     using Xunit;
 
     public static class NullableFacts
