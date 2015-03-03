@@ -6,6 +6,7 @@ namespace Narvalo.Benchmarking.Internal
 
     using Narvalo;
     using Narvalo.Benchmarking;
+    using NodaTime;
 
     internal sealed class BenchmarkComparator
     {
@@ -32,7 +33,7 @@ namespace Narvalo.Benchmarking.Internal
             Require.NotNull(items, "items");
 
             foreach (var item in items) {
-                var duration = _benchmarker.Time(item.Action, iterations);
+                Duration duration = _benchmarker.Time(item.Action, iterations);
 
                 yield return new BenchmarkMetric(item.Name, duration, iterations);
             }

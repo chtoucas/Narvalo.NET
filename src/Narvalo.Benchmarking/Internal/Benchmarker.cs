@@ -33,7 +33,7 @@ namespace Narvalo.Benchmarking.Internal
 
             Cleanup_();
 
-            // Echauffement (à améliorer).
+            // Warmup (To be improved).
             action();
 
             _timer.Reset();

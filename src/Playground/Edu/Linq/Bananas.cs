@@ -4,6 +4,7 @@ namespace Playground.Edu.Linq
 {
     using System;
     using System.Collections.Generic;
+
     using Narvalo.Collections;
 
     // Linq from scratch.

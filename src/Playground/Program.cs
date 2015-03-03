@@ -3,21 +3,27 @@
 namespace Playground
 {
     using System;
+    using System.Collections.Generic;
+
     using Narvalo.Benchmarking;
     using Playground.Benchmarks;
     using Playground.Benchmarks.Comparisons;
 
-    class Program
+    public static class Program
     {
-        static void Main()
+        public static void Main()
         {
-            var metrics = BenchmarkComparisonProcessor
+            IEnumerable<BenchmarkMetricCollection> metrics
+                = BenchmarkComparisonProcessor
                 .Create()
-                .Process(typeof(RemoveDiacriticsComparison));
+                .Process(typeof(RemoveDiacriticsComparison), RemoveDiacriticsComparison.GenerateTestData());
 
             var fmt = new BenchMetricConsoleFormatter();
 
-            Console.WriteLine(metrics.ToString(fmt));
+            foreach (var item in metrics)
+            {
+                Console.WriteLine(item.ToString(fmt));
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Playground.Benchmarks
     using System.Globalization;
     using System.Linq;
     using System.Text;
+
     using Narvalo.Benchmarking;
 
     class BenchMetricConsoleFormatter : BenchmarkMetricFormatter

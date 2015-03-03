@@ -3,6 +3,7 @@
 namespace Playground.Edu.Linq
 {
     using System.Collections.Generic;
+
     using Narvalo.Fx;
 
     // Linq from scratch.

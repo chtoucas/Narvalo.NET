@@ -3,6 +3,7 @@
 namespace Playground.Edu.Fx
 {
     using System;
+
     using Narvalo.Fx;
 
     public static class Iteration

@@ -4,6 +4,7 @@ namespace Playground.Edu.Fx
 {
     using System;
     using System.Collections.Generic;
+
     using Narvalo.Fx;
 
     // WARNING: These sequences are infinite!

@@ -4,6 +4,7 @@ namespace Playground.Benchmarks.Comparisons
 {
     using System;
     using System.Text;
+
     using Narvalo.Benchmarking;
 
     [BenchmarkComparison(10000)]

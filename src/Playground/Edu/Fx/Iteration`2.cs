@@ -4,7 +4,7 @@ namespace Playground.Edu.Fx
 {
     using System;
 
-    public class Iteration<TResult, TSource>
+    public sealed class Iteration<TResult, TSource>
     {
         readonly Tuple<TResult, TSource> _pair;
 

@@ -137,6 +137,10 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Extras\Narvalo.Extras.csproj">
+      <Project>{b4254c3b-1fe0-4a39-9215-6f84d058fd40}</Project>
+      <Name>Narvalo.Extras</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />

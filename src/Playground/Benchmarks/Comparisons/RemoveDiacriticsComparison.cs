@@ -3,9 +3,13 @@
 namespace Playground.Benchmarks.Comparisons
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
+
+    using Narvalo;
     using Narvalo.Benchmarking;
 
     [BenchmarkComparison(10000, DisplayName = "Suppression des diacritiques.")]
@@ -17,18 +21,30 @@ namespace Playground.Benchmarks.Comparisons
         //   (e.g. accents, umlauts, etc.). 
         private static readonly Regex s_NonSpacingMarkRegex = new Regex(@"\p{Mn}", RegexOptions.Compiled);
 
-        ////IEnumerable<string> GenerateTestData()
-        ////{
-        ////    int[] lengths = new int[] { 100, 1000, };
+        public static IEnumerable<string> GenerateTestData()
+        {
+            int[] lengths = new int[] { 10, 100 };
 
-        ////    return from l in lengths
-        ////           select StringGenerator.RandomUnicodeString(l);
-        ////}
+            var rnd = new Random();
+
+            return from l in lengths select RandomString.GenerateUnicodeString(l, rnd);
+        }
 
         [BenchmarkComparative(DisplayName = "Expression rationnelle.")]
-        public static string Regex(string value)
+        public static void Regex(string value)
         {
-            var formD = value.Normalize(NormalizationForm.FormD);
+            Regex_(value);
+        }
+
+        [BenchmarkComparative(DisplayName = "Caractères traités pas à pas.")]
+        public static void ForLoop(string value)
+        {
+            ForLoop_(value);
+        }
+
+        static string Regex_(string value)
+        {
+            string formD = value.Normalize(NormalizationForm.FormD);
 
             if (formD != null)
             {
@@ -40,16 +56,15 @@ namespace Playground.Benchmarks.Comparisons
             }
         }
 
-        [BenchmarkComparative(DisplayName = "Caractères traités pas à pas.")]
-        public static string ForLoop(string value)
+        static string ForLoop_(string value)
         {
-            var formD = value.Normalize(NormalizationForm.FormD);
+            string formD = value.Normalize(NormalizationForm.FormD);
 
             var sb = new StringBuilder();
 
             for (int i = 0; i < formD.Length; i++)
             {
-                var c = formD[i];
+                char c = formD[i];
 
                 if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
                 {
