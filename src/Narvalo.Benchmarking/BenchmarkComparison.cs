@@ -2,12 +2,9 @@
 
 namespace Narvalo.Benchmarking
 {
-    using System;
     using System.Collections.Generic;
-    using System.Globalization;
 
     using Narvalo;
-    using Narvalo.Benchmarking.Internal;
 
     public sealed class BenchmarkComparison
     {
@@ -33,44 +30,6 @@ namespace Narvalo.Benchmarking
         public int Iterations { get { return _iterations; } }
 
         public string Name { get { return _name; } }
-
-        internal static BenchmarkComparison Create(Type type, IEnumerable<BenchmarkComparative> items)
-        {
-            var attr = Attribute.GetCustomAttribute(type, typeof(BenchmarkComparisonAttribute), inherit: false);
-
-            if (attr == null)
-            {
-                var message = String.Format(
-                    CultureInfo.CurrentCulture,
-                    Strings_Benchmarking.MissingBenchComparisonAttribute,
-                    type.Name);
-
-                throw new BenchmarkException(message);
-            }
-
-            var benchAttr = attr as BenchmarkComparisonAttribute;
-
-            return new BenchmarkComparison(
-                benchAttr.DisplayName ?? type.Name,
-                items,
-                benchAttr.Iterations);
-
-            //var q = from attr in type.MayGetBenchmarkComparisonAttribute()
-            //        select new BenchmarkComparison(
-            //            attr.DisplayName ?? type.Name,
-            //            items,
-            //            attr.Iterations);
-
-            //return q.ValueOrThrow(
-            //    () =>
-            //    {
-            //        var message = String.Format(
-            //            CultureInfo.CurrentCulture,
-            //            Strings_Benchmarking.MissingBenchComparisonAttribute,
-            //            type.Name);
-            //        return new BenchmarkException(message);
-            //    });
-        }
 
         public override string ToString()
         {

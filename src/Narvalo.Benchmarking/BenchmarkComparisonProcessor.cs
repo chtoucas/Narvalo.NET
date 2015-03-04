@@ -5,6 +5,7 @@ namespace Narvalo.Benchmarking
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
 
     using Narvalo;
@@ -72,6 +73,8 @@ namespace Narvalo.Benchmarking
         /// <returns>The <see cref="BenchmarkComparisonProcessor"/> for the specified timer.</returns>
         public static BenchmarkComparisonProcessor Create(IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkComparisonProcessor(
                 new BenchmarkComparativeFinder(), 
                 BenchmarkComparisonRunner.Create(timer));
@@ -90,6 +93,8 @@ namespace Narvalo.Benchmarking
             BindingFlags bindings,
             IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkComparisonProcessor(
                 new BenchmarkComparativeFinder(bindings),
                 BenchmarkComparisonRunner.Create(timer));
@@ -102,8 +107,10 @@ namespace Narvalo.Benchmarking
         /// <returns>The collection of benchmark results, one result for each method run.</returns>
         public BenchmarkMetricCollection Process(Type type)
         {
+            Contract.Requires(type != null);
+
             IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type);
-            var comparison = BenchmarkComparison.Create(type, items);
+            var comparison = CreateComparison_(type, items);
 
             return _runner.Run(comparison);
         }
@@ -119,10 +126,33 @@ namespace Narvalo.Benchmarking
             foreach (var value in testData) {
                 // REVIEW: on peut sûrement éviter de relancer BenchComparisonFactory à chaque itération.
                 IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type, value);
-                var comparison = BenchmarkComparison.Create(type, items);
+                var comparison = CreateComparison_(type, items);
 
                 yield return _runner.Run(comparison);
             }
+        }
+
+        private static BenchmarkComparison CreateComparison_(Type type, IEnumerable<BenchmarkComparative> items)
+        {
+            Contract.Requires(type != null);
+
+            BenchmarkComparisonAttribute attr 
+                = type.GetCustomAttribute<BenchmarkComparisonAttribute>(inherit: false);
+
+            if (attr == null)
+            {
+                var message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    Strings_Benchmarking.MissingBenchComparisonAttribute,
+                    type.Name);
+
+                throw new BenchmarkException(message);
+            }
+
+            return new BenchmarkComparison(
+                attr.DisplayName ?? type.Name,
+                items,
+                attr.Iterations);
         }
     }
 }

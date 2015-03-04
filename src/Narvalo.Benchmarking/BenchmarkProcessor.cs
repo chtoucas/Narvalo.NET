@@ -63,6 +63,8 @@ namespace Narvalo.Benchmarking
         /// <returns>The <see cref="BenchmarkProcessor"/> for the specified timer.</returns>
         public static BenchmarkProcessor Create(IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkProcessor(
                 new BenchmarkFinder(),
                 BenchmarkRunner.Create(timer));
@@ -77,10 +79,10 @@ namespace Narvalo.Benchmarking
         /// <param name="timer">The timer for measuring time intervals.</param>
         /// <returns>The <see cref="BenchmarkProcessor"/> for the specified bindings 
         /// and timer.</returns>
-        public static BenchmarkProcessor Create(
-            BindingFlags bindings,
-            IBenchmarkTimer timer)
+        public static BenchmarkProcessor Create(BindingFlags bindings, IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkProcessor(
                 new BenchmarkFinder(bindings),
                 BenchmarkRunner.Create(timer));

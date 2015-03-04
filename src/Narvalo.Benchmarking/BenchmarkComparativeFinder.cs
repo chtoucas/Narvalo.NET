@@ -31,17 +31,16 @@ namespace Narvalo.Benchmarking
 
             foreach (var method in methods)
             {
-                var attr = Attribute.GetCustomAttribute(method, typeof(BenchmarkComparativeAttribute), inherit: false);
+                BenchmarkComparativeAttribute attr 
+                    = method.GetCustomAttribute<BenchmarkComparativeAttribute>(inherit: false);
 
                 if (attr == null)
                 {
                     continue;
                 }
 
-                var benchAttr = attr as BenchmarkAttribute;
-
                 yield return new BenchmarkComparative(
-                    benchAttr.DisplayName ?? method.Name,
+                    attr.DisplayName ?? method.Name,
                     ActionFactory.Create(method));
             }
         }
@@ -55,50 +54,18 @@ namespace Narvalo.Benchmarking
 
             foreach (var method in methods)
             {
-                var attr = Attribute.GetCustomAttribute(method, typeof(BenchmarkComparativeAttribute), inherit: false);
+                BenchmarkComparativeAttribute attr 
+                    = method.GetCustomAttribute<BenchmarkComparativeAttribute>(inherit: false);
 
                 if (attr == null)
                 {
                     continue;
                 }
 
-                var benchAttr = attr as BenchmarkComparativeAttribute;
-
                 yield return new BenchmarkComparative(
-                    benchAttr.DisplayName ?? method.Name,
+                    attr.DisplayName ?? method.Name,
                     () => ActionFactory.Create<T>(method).Invoke(value));
             }
         }
-
-        //public IEnumerable<BenchmarkComparative> FindComparatives(Type type)
-        //{
-        //    Require.NotNull(type, "type");
-
-        //    return type.GetMethods(_bindings).MapAny(MaySelectBenchmarkComparative_);
-        //}
-
-        //public IEnumerable<BenchmarkComparative> FindComparatives<T>(Type type, T value)
-        //{
-        //    Require.NotNull(type, "type");
-
-        //    return type.GetMethods(_bindings).MapAny(_ => MaySelectBenchmarkComparative_(_, value));
-        //}
-
-        //private static Maybe<BenchmarkComparative> MaySelectBenchmarkComparative_(MethodInfo method)
-        //{
-        //    return from attr in method.MayGetBenchmarkComparisonAttribute()
-        //           select new BenchmarkComparative(
-        //               attr.DisplayName ?? method.Name,
-        //               ActionFactory.Create(method));
-        //}
-
-        //// FIXME: Theory.
-        //private static Maybe<BenchmarkComparative> MaySelectBenchmarkComparative_<T>(MethodInfo method, T value)
-        //{
-        //    return from attr in method.MayGetBenchmarkComparisonAttribute()
-        //           select new BenchmarkComparative(
-        //               attr.DisplayName ?? method.Name,
-        //               () => ActionFactory.Create<T>(method).Invoke(value));
-        //}
     }
 }

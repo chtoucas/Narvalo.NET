@@ -2,6 +2,8 @@
 
 namespace Narvalo.Benchmarking
 {
+    using System.Diagnostics.Contracts;
+
     using Narvalo;
     using Narvalo.Benchmarking.Internal;
 
@@ -23,11 +25,15 @@ namespace Narvalo.Benchmarking
 
         public static BenchmarkRunner Create(IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkRunner(new Benchmarker(timer));
         }
 
         public BenchmarkMetric Run(Benchmark benchmark)
         {
+            Contract.Requires(benchmark != null);
+
             var duration = _benchmarker.Time(benchmark);
 
             return BenchmarkMetric.Create(benchmark, duration);

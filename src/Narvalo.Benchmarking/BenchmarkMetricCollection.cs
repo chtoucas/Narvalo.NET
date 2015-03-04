@@ -4,6 +4,7 @@ namespace Narvalo.Benchmarking
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo;
@@ -18,6 +19,7 @@ namespace Narvalo.Benchmarking
             : base(metrics)
         {
             Require.NotNullOrEmpty(name, "name");
+            Contract.Requires(metrics != null);
 
             _name = name;
         }
@@ -26,12 +28,15 @@ namespace Narvalo.Benchmarking
 
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return ToString(BenchmarkMetric.DefaultFormatter);
         }
 
         public string ToString(IBenchmarkMetricFormatter formatter)
         {
             Require.NotNull(formatter, "formatter");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return formatter.Format(CultureInfo.CurrentCulture, this);
         }

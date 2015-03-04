@@ -3,6 +3,7 @@
 namespace Narvalo.Benchmarking
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo;
@@ -93,6 +94,8 @@ namespace Narvalo.Benchmarking
         /// <summary />
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return ToString(DefaultFormatter);
         }
 

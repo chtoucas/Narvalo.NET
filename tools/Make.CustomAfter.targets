@@ -83,7 +83,7 @@
     <Error Text="You MUST create a version file to generate the assembly versions: $(VersionFile)."
            Condition=" '$(VersionExists)' != 'true' " />
     <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks. 
-         NB: MSBuild makes it too hard to get the console output from an executable. -->
+         NB: MSBuild makes it way too hard to get the console output from an executable. -->
     <Warning Text="Won't be able to add the git commit hash to the assembly version information."
              Condition=" '$(GitCommitHash)' == '' " />
 

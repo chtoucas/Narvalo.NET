@@ -2,6 +2,7 @@
 
 namespace Narvalo.Benchmarking
 {
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo;
@@ -25,6 +26,8 @@ namespace Narvalo.Benchmarking
 
         public static BenchmarkComparisonRunner Create(IBenchmarkTimer timer)
         {
+            Contract.Requires(timer != null);
+
             return new BenchmarkComparisonRunner(new BenchmarkComparator(new Benchmarker(timer)));
         }
 

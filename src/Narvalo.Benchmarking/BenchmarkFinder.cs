@@ -41,36 +41,19 @@ namespace Narvalo.Benchmarking
 
             foreach (var method in methods)
             {
-                var attr = Attribute.GetCustomAttribute(method, typeof(BenchmarkAttribute), inherit: false);
+                BenchmarkAttribute attr
+                    = method.GetCustomAttribute<BenchmarkAttribute>(inherit: false);
 
                 if (attr == null)
                 {
                     continue;
                 }
 
-                var benchAttr = attr as BenchmarkAttribute;
-
                 yield return new Benchmark(
-                    benchAttr.DisplayName ?? method.Name,
+                    attr.DisplayName ?? method.Name,
                     ActionFactory.Create(method),
-                    benchAttr.Iterations);
+                    attr.Iterations);
             }
         }
-
-        //public IEnumerable<Benchmark> FindBenchmarks(Type type)
-        //{
-        //    Require.NotNull(type, "type");
-
-        //    return type.GetMethods(_bindings).MapAny(MaySelectBenchmark_);
-        //}
-
-        //private static Maybe<Benchmark> MaySelectBenchmark_(MethodInfo method)
-        //{
-        //    return from attr in method.MayGetBenchmarkAttribute()
-        //           select new Benchmark(
-        //               attr.DisplayName ?? method.Name,
-        //               ActionFactory.Create(method),
-        //               attr.Iterations);
-        //}
     }
 }
