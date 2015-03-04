@@ -63,7 +63,7 @@ namespace Narvalo.Collections
     }
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}">.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
     public static partial class EnumerableExtensions
     {
@@ -259,7 +259,7 @@ namespace Narvalo.Collections.Internal
     }
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}">.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
     internal static partial class EnumerableExtensions
     {
