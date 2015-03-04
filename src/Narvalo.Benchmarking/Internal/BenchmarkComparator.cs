@@ -10,13 +10,13 @@ namespace Narvalo.Benchmarking.Internal
 
     internal sealed class BenchmarkComparator
     {
-        private readonly Benchmarker _benchmarker;
+        private readonly BenchmarkRunner _runner;
 
-        public BenchmarkComparator(Benchmarker benchmarker)
+        public BenchmarkComparator(BenchmarkRunner runner)
         {
-            Require.NotNull(benchmarker, "benchmarker");
+            Require.NotNull(runner, "runner");
 
-            _benchmarker = benchmarker;
+            _runner = runner;
         }
 
         public IEnumerable<BenchmarkMetric> Compare(BenchmarkComparison comparison)
@@ -33,7 +33,7 @@ namespace Narvalo.Benchmarking.Internal
             Require.NotNull(items, "items");
 
             foreach (var item in items) {
-                Duration duration = _benchmarker.Time(item.Action, iterations);
+                Duration duration = _runner.Time(item.Action, iterations);
 
                 yield return new BenchmarkMetric(item.Name, duration, iterations);
             }

@@ -9,18 +9,18 @@ namespace Narvalo.Benchmarking
     using Narvalo.Benchmarking;
     using NodaTime;
 
-    public sealed class Benchmarker
+    public sealed class BenchmarkRunner
     {
         private readonly IBenchmarkTimer _timer;
 
-        public Benchmarker(IBenchmarkTimer timer)
+        public BenchmarkRunner(IBenchmarkTimer timer)
         {
             Require.NotNull(timer, "timer");
 
             _timer = timer;
         }
 
-        public Duration Time(Benchmark benchmark)
+        public Duration Run(Benchmark benchmark)
         {
             Require.NotNull(benchmark, "benchmark");
 

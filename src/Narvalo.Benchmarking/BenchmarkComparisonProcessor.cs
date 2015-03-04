@@ -6,9 +6,11 @@ namespace Narvalo.Benchmarking
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
 
     using Narvalo;
+    using Narvalo.Benchmarking.Internal;
 
     /// <summary>
     /// Represents a processor that compares the performance of different implementations
@@ -17,87 +19,48 @@ namespace Narvalo.Benchmarking
     /// </summary>
     public sealed class BenchmarkComparisonProcessor
     {
+        private const BindingFlags DEFAULT_BINDINGS
+           = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+
+        private readonly BenchmarkComparator _comparator;
         private readonly BenchmarkComparativeFinder _finder;
-        private readonly BenchmarkComparisonRunner _runner;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/>
-        /// for the specified implementations finder and benchmark runner.
-        /// </summary>
-        /// <param name="finder">The finder used to look for methods with a benchmark attribute.</param>
-        /// <param name="runner">The benchmark runnner.</param>
-        private BenchmarkComparisonProcessor(
-            BenchmarkComparativeFinder finder,
-            BenchmarkComparisonRunner runner)
-        {
-            Contract.Requires(finder != null);
-            Contract.Requires(runner != null);
-
-            _finder = finder;
-            _runner = runner;
-        }
-
-        /// <summary>
-        /// Obtains an instance of the <see cref="BenchmarkComparisonProcessor"/> class with the 
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the 
         /// default bindings, used to look for methods with a benchmark attribute, 
         /// and with the default timer.
         /// </summary>
-        /// <returns>The default <see cref="BenchmarkComparisonProcessor"/> class.</returns>
-        public static BenchmarkComparisonProcessor Create()
-        {
-            return new BenchmarkComparisonProcessor(
-                new BenchmarkComparativeFinder(),
-                new BenchmarkComparisonRunner());
-        }
+        public BenchmarkComparisonProcessor() : this(DEFAULT_BINDINGS, new BenchmarkTimer()) { }
 
         /// <summary>
-        /// Obtains an instance of the <see cref="BenchmarkComparisonProcessor"/> class 
-        /// with the specified bindings, used to look for methods with a benchmark attribute,
-        /// and with the default timer.
-        /// </summary>
-        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
-        /// <returns>The <see cref="BenchmarkComparisonProcessor"/> for the specified bindings.</returns>
-        public static BenchmarkComparisonProcessor Create(BindingFlags bindings)
-        {
-            return new BenchmarkComparisonProcessor(
-                new BenchmarkComparativeFinder(bindings),
-                new BenchmarkComparisonRunner());
-        }
-
-        /// <summary>
-        /// Obtains an instance of the <see cref="BenchmarkComparisonProcessor"/> class 
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the 
         /// with the default bindings, used to look for methods with a benchmark attribute, 
         /// and with the specified timer.
         /// </summary>
         /// <param name="timer">The timer for measuring time intervals.</param>
-        /// <returns>The <see cref="BenchmarkComparisonProcessor"/> for the specified timer.</returns>
-        public static BenchmarkComparisonProcessor Create(IBenchmarkTimer timer)
-        {
-            Contract.Requires(timer != null);
-
-            return new BenchmarkComparisonProcessor(
-                new BenchmarkComparativeFinder(),
-                new BenchmarkComparisonRunner(timer));
-        }
+        public BenchmarkComparisonProcessor(IBenchmarkTimer timer) : this(DEFAULT_BINDINGS, timer) { }
 
         /// <summary>
-        /// Obtains an instance of the <see cref="BenchmarkComparisonProcessor"/> class
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> 
+        /// with the specified bindings, used to look for methods with a benchmark attribute,
+        /// and with the default timer.
+        /// </summary>
+        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
+        public BenchmarkComparisonProcessor(BindingFlags bindings) : this(bindings, new BenchmarkTimer()) { }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> 
         /// with the specified binding, used  to look for methods with a benchmark attribute,
         /// and with the specified timer.
         /// </summary>
         /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
         /// <param name="timer">The timer for measuring time intervals.</param>
-        /// <returns>The <see cref="BenchmarkComparisonProcessor"/> for the specified bindings 
-        /// and timer.</returns>
-        public static BenchmarkComparisonProcessor Create(
-            BindingFlags bindings,
-            IBenchmarkTimer timer)
+        public BenchmarkComparisonProcessor(BindingFlags bindings, IBenchmarkTimer timer)
         {
             Contract.Requires(timer != null);
 
-            return new BenchmarkComparisonProcessor(
-                new BenchmarkComparativeFinder(bindings),
-                new BenchmarkComparisonRunner(timer));
+            _finder = new BenchmarkComparativeFinder(bindings);
+            _comparator = new BenchmarkComparator(new BenchmarkRunner(timer));
         }
 
         /// <summary>
@@ -111,8 +74,9 @@ namespace Narvalo.Benchmarking
 
             IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type);
             var comparison = CreateComparison_(type, items);
+            IEnumerable<BenchmarkMetric> metrics = _comparator.Compare(comparison);
 
-            return _runner.Run(comparison);
+            return new BenchmarkMetricCollection(comparison.Name, metrics.ToList());
         }
 
         // REVIEW: Theory.
@@ -127,8 +91,9 @@ namespace Narvalo.Benchmarking
                 // REVIEW: on peut sûrement éviter de relancer BenchComparisonFactory à chaque itération.
                 IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type, value);
                 var comparison = CreateComparison_(type, items);
+                IEnumerable<BenchmarkMetric> metrics = _comparator.Compare(comparison);
 
-                yield return _runner.Run(comparison);
+                yield return new BenchmarkMetricCollection(comparison.Name, metrics.ToList());
             }
         }
 

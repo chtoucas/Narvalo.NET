@@ -74,7 +74,6 @@
     <Compile Include="BenchmarkComparison.cs" />
     <Compile Include="BenchmarkComparisonAttribute.cs" />
     <Compile Include="BenchmarkComparisonProcessor.cs" />
-    <Compile Include="BenchmarkComparisonRunner.cs" />
     <Compile Include="BenchmarkException.cs" />
     <Compile Include="BenchmarkMetric.cs" />
     <Compile Include="BenchmarkMetricCollection.cs" />
@@ -87,7 +86,7 @@
     <Compile Include="Internal\ActionFactory.cs" />
     <Compile Include="BenchmarkComparativeFinder.cs" />
     <Compile Include="Internal\BenchmarkComparator.cs" />
-    <Compile Include="Benchmarker.cs" />
+    <Compile Include="BenchmarkRunner.cs" />
     <Compile Include="BenchmarkFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings_Benchmarking.Designer.cs">

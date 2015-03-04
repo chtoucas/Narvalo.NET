@@ -14,8 +14,7 @@ namespace Playground
         public static void Main()
         {
             IEnumerable<BenchmarkMetricCollection> metrics
-                = BenchmarkComparisonProcessor
-                .Create()
+                = new BenchmarkComparisonProcessor()
                 .Process(typeof(RemoveDiacriticsComparison), RemoveDiacriticsComparison.GenerateTestData());
 
             var fmt = new BenchMetricConsoleFormatter();
