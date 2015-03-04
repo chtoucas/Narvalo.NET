@@ -47,7 +47,7 @@ namespace Narvalo.Benchmarking
         {
             return new BenchmarkComparisonProcessor(
                 new BenchmarkComparativeFinder(),
-                BenchmarkComparisonRunner.Create());
+                new BenchmarkComparisonRunner());
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Narvalo.Benchmarking
         {
             return new BenchmarkComparisonProcessor(
                 new BenchmarkComparativeFinder(bindings),
-                BenchmarkComparisonRunner.Create());
+                new BenchmarkComparisonRunner());
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace Narvalo.Benchmarking
             Contract.Requires(timer != null);
 
             return new BenchmarkComparisonProcessor(
-                new BenchmarkComparativeFinder(), 
-                BenchmarkComparisonRunner.Create(timer));
+                new BenchmarkComparativeFinder(),
+                new BenchmarkComparisonRunner(timer));
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Narvalo.Benchmarking
 
             return new BenchmarkComparisonProcessor(
                 new BenchmarkComparativeFinder(bindings),
-                BenchmarkComparisonRunner.Create(timer));
+                new BenchmarkComparisonRunner(timer));
         }
 
         /// <summary>

@@ -9,22 +9,29 @@ namespace Narvalo.Benchmarking
 
     public sealed class BenchmarkProcessor
     {
+        private readonly Benchmarker _benchmarker;
         private readonly BenchmarkFinder _finder;
-        private readonly BenchmarkRunner _runner;
 
         /// <summary>
         /// Initializes a new instance of <see cref="BenchmarkProcessor"/>
-        /// for the specified benchmark finder and benchmark runner.
+        /// for the specified benchmark finder.
         /// </summary>
         /// <param name="finder">The finder used to look for methods with a benchmark attribute.</param>
-        /// <param name="runner">The benchmark runnner.</param>
-        private BenchmarkProcessor(BenchmarkFinder finder, BenchmarkRunner runner)
+        private BenchmarkProcessor(BenchmarkFinder finder) : this(finder, new BenchmarkTimer()) { }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="BenchmarkProcessor"/>
+        /// for the specified benchmark finder and timer.
+        /// </summary>
+        /// <param name="finder">The finder used to look for methods with a benchmark attribute.</param>
+        /// <param name="timer">The timer for measuring time intervals.</param>
+        private BenchmarkProcessor(BenchmarkFinder finder, IBenchmarkTimer timer)
         {
             Contract.Requires(finder != null);
-            Contract.Requires(runner != null);
+            Contract.Requires(timer != null);
 
             _finder = finder;
-            _runner = runner;
+            _benchmarker = new Benchmarker(timer);
         }
 
         /// <summary>
@@ -35,9 +42,7 @@ namespace Narvalo.Benchmarking
         /// <returns>The default <see cref="BenchmarkProcessor"/> class.</returns>
         public static BenchmarkProcessor Create()
         {
-            return new BenchmarkProcessor(
-                new BenchmarkFinder(),
-                BenchmarkRunner.Create());
+            return new BenchmarkProcessor(new BenchmarkFinder());
         }
 
         /// <summary>
@@ -49,9 +54,7 @@ namespace Narvalo.Benchmarking
         /// <returns>The <see cref="BenchmarkProcessor"/> for the specified bindings.</returns>
         public static BenchmarkProcessor Create(BindingFlags bindings)
         {
-            return new BenchmarkProcessor(
-                new BenchmarkFinder(bindings),
-                BenchmarkRunner.Create());
+            return new BenchmarkProcessor(new BenchmarkFinder(bindings));
         }
 
         /// <summary>
@@ -65,9 +68,7 @@ namespace Narvalo.Benchmarking
         {
             Contract.Requires(timer != null);
 
-            return new BenchmarkProcessor(
-                new BenchmarkFinder(),
-                BenchmarkRunner.Create(timer));
+            return new BenchmarkProcessor(new BenchmarkFinder(), timer);
         }
 
         /// <summary>
@@ -83,9 +84,7 @@ namespace Narvalo.Benchmarking
         {
             Contract.Requires(timer != null);
 
-            return new BenchmarkProcessor(
-                new BenchmarkFinder(bindings),
-                BenchmarkRunner.Create(timer));
+            return new BenchmarkProcessor(new BenchmarkFinder(bindings), timer);
         }
 
         public IEnumerable<BenchmarkMetric> Process(Assembly assembly)
@@ -93,7 +92,9 @@ namespace Narvalo.Benchmarking
             var benchmarks = _finder.FindBenchmarks(assembly);
 
             foreach (var benchmark in benchmarks) {
-                yield return _runner.Run(benchmark);
+                var duration = _benchmarker.Time(benchmark);
+
+                yield return BenchmarkMetric.Create(benchmark, duration);
             }
         }
 
@@ -102,7 +103,9 @@ namespace Narvalo.Benchmarking
             var benchmarks = _finder.FindBenchmarks(type);
 
             foreach (var benchmark in benchmarks) {
-                yield return _runner.Run(benchmark);
+                var duration = _benchmarker.Time(benchmark);
+
+                yield return BenchmarkMetric.Create(benchmark, duration);
             }
         }
     }

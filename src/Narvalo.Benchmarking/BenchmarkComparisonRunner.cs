@@ -2,7 +2,6 @@
 
 namespace Narvalo.Benchmarking
 {
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo;
@@ -11,24 +10,14 @@ namespace Narvalo.Benchmarking
     public sealed class BenchmarkComparisonRunner
     {
         private readonly BenchmarkComparator _comparator;
+        
+        public BenchmarkComparisonRunner() : this(new BenchmarkTimer()) { }
 
-        private BenchmarkComparisonRunner(BenchmarkComparator comparator)
+        public BenchmarkComparisonRunner(IBenchmarkTimer timer)
         {
-            Require.NotNull(comparator, "comparator");
+            Require.NotNull(timer, "timer");
 
-            _comparator = comparator;
-        }
-
-        public static BenchmarkComparisonRunner Create()
-        {
-            return Create(new BenchmarkTimer());
-        }
-
-        public static BenchmarkComparisonRunner Create(IBenchmarkTimer timer)
-        {
-            Contract.Requires(timer != null);
-
-            return new BenchmarkComparisonRunner(new BenchmarkComparator(new Benchmarker(timer)));
+            _comparator = new BenchmarkComparator(new Benchmarker(timer));
         }
 
         public BenchmarkMetricCollection Run(BenchmarkComparison comparison)
