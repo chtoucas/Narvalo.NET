@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Benchmarking
+namespace Playground.Benchmarks.Sdk
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -8,6 +8,7 @@ namespace Narvalo.Benchmarking
     using System.Globalization;
 
     using Narvalo;
+    using Narvalo.Benchmarking;
 
     public sealed class BenchmarkMetricCollection : ReadOnlyCollection<BenchmarkMetric>
     {
@@ -30,10 +31,10 @@ namespace Narvalo.Benchmarking
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return ToString(BenchmarkMetric.DefaultFormatter);
+            return ToString(new BenchmarkMetricCollectionFormatter());
         }
 
-        public string ToString(IBenchmarkMetricFormatter formatter)
+        public string ToString(IBenchmarkMetricCollectionFormatter formatter)
         {
             Require.NotNull(formatter, "formatter");
             Contract.Ensures(Contract.Result<string>() != null);

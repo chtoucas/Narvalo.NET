@@ -5,6 +5,7 @@ namespace Narvalo.Benchmarking
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Reflection;
 
     using NodaTime;
@@ -14,8 +15,8 @@ namespace Narvalo.Benchmarking
         private const BindingFlags DEFAULT_BINDINGS
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
+        private readonly BindingFlags _bindings;
         private readonly BenchmarkRunner _runner;
-        private readonly BenchmarkFinder _finder;
 
         /// <summary>
         /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the 
@@ -30,7 +31,11 @@ namespace Narvalo.Benchmarking
         /// and with the specified timer.
         /// </summary>
         /// <param name="timer">The timer for measuring time intervals.</param>
-        public BenchmarkProcessor(IBenchmarkTimer timer) : this(DEFAULT_BINDINGS, timer) { }
+        public BenchmarkProcessor(IBenchmarkTimer timer)
+            : this(DEFAULT_BINDINGS, timer)
+        {
+            Contract.Requires(timer != null);
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="BenchmarkProcessor"/> 
@@ -51,31 +56,63 @@ namespace Narvalo.Benchmarking
         {
             Contract.Requires(timer != null);
 
-            _finder = new BenchmarkFinder(bindings);
+            _bindings = bindings;
             _runner = new BenchmarkRunner(timer);
         }
 
         public IEnumerable<BenchmarkMetric> Process(Assembly assembly)
         {
-            var benchmarks = _finder.FindBenchmarks(assembly);
+            Require.NotNull(assembly, "assembly");
+            Contract.Ensures(Contract.Result<IEnumerable<BenchmarkMetric>>() != null);
+
+            IEnumerable<Benchmark> benchmarks
+                = from type in assembly.GetExportedTypes()
+                  from benchmark in FindBenchmarks_(type)
+                  select benchmark;
 
             foreach (var benchmark in benchmarks)
             {
                 Duration duration = _runner.Run(benchmark);
 
-                yield return BenchmarkMetric.Create(benchmark, duration);
+                yield return new BenchmarkMetric(benchmark.Name, duration, benchmark.Iterations);
             }
         }
 
         public IEnumerable<BenchmarkMetric> Process(Type type)
         {
-            var benchmarks = _finder.FindBenchmarks(type);
+            Contract.Ensures(Contract.Result<IEnumerable<BenchmarkMetric>>() != null);
+
+            IEnumerable<Benchmark> benchmarks = FindBenchmarks_(type);
 
             foreach (var benchmark in benchmarks)
             {
                 Duration duration = _runner.Run(benchmark);
 
-                yield return BenchmarkMetric.Create(benchmark, duration);
+                yield return new BenchmarkMetric(benchmark.Name, duration, benchmark.Iterations);
+            }
+        }
+
+        private IEnumerable<Benchmark> FindBenchmarks_(Type type)
+        {
+            MethodInfo[] methods = type.GetMethods(_bindings);
+
+            foreach (var method in methods)
+            {
+                var attr = method.GetCustomAttribute<BenchmarkAttribute>(inherit: false);
+
+                if (attr == null)
+                {
+                    continue;
+                }
+
+                // FIXME: Cela ne marchera que si la méthode est statique.
+                //var action = (Action)Delegate.CreateDelegate(typeof(Action), method);
+                var action = (Action)method.CreateDelegate(typeof(Action));
+
+                yield return new Benchmark(
+                    attr.DisplayName ?? method.Name,
+                    action,
+                    attr.Iterations);
             }
         }
     }

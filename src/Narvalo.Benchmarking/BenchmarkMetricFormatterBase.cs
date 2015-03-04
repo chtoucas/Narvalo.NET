@@ -10,16 +10,9 @@ namespace Narvalo.Benchmarking
     {
         protected BenchmarkMetricFormatterBase() { }
 
-        #region IBenchMetricFormatter
-
         public string Format(BenchmarkMetric metric)
         {
             return Format(CultureInfo.CurrentCulture, metric);
-        }
-
-        public string Format(BenchmarkMetricCollection metrics)
-        {
-            return Format(CultureInfo.CurrentCulture, metrics);
         }
 
         public string Format(CultureInfo cultureInfo, BenchmarkMetric metric)
@@ -30,10 +23,6 @@ namespace Narvalo.Benchmarking
 
             return FormatCore(cultureInfo, metric);
         }
-
-        public abstract string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics);
-
-        #endregion
 
         public abstract string FormatCore(CultureInfo cultureInfo, BenchmarkMetric metric);
 

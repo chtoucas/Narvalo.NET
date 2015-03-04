@@ -21,6 +21,7 @@ namespace Narvalo.Benchmarking
         public BenchmarkMetric(string name, Duration duration, int iterations)
         {
             Require.NotNullOrEmpty(name, "name");
+            Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
 
             _name = name;
             _duration = duration;
@@ -106,16 +107,6 @@ namespace Narvalo.Benchmarking
             Require.NotNull(formatter, "fmt");
 
             return formatter.Format(CultureInfo.CurrentCulture, this);
-        }
-
-        internal static BenchmarkMetric Create(Benchmark benchmark, Duration duration)
-        {
-            Require.NotNull(benchmark, "benchmark");
-
-            return new BenchmarkMetric(
-                benchmark.Name,
-                duration,
-                benchmark.Iterations);
         }
     }
 }

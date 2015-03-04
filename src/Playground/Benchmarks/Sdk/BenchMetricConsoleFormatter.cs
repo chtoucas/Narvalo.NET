@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Playground.Benchmarks
+namespace Playground.Benchmarks.Sdk
 {
     using System.Globalization;
     using System.Linq;
     using System.Text;
 
-    using Narvalo.Benchmarking;
-
-    class BenchMetricConsoleFormatter : BenchmarkMetricFormatter
+    public class BenchMetricConsoleFormatter : BenchmarkMetricCollectionFormatter
     {
         public BenchMetricConsoleFormatter() : base() { }
 
@@ -21,7 +19,8 @@ namespace Playground.Benchmarks
 
             int pos = 0;
 
-            foreach (var r in metrics.OrderBy(m => m.Duration)) {
+            foreach (var r in metrics.OrderBy(m => m.Duration))
+            {
                 sb.AppendLine();
                 sb.AppendFormat(
                     cultureInfo,

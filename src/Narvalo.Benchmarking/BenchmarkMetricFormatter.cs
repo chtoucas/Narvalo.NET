@@ -4,9 +4,7 @@ namespace Narvalo.Benchmarking
 {
     using System;
     using System.Globalization;
-    using System.Linq;
 
-    using Narvalo;
 
     public class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase
     {
@@ -22,19 +20,6 @@ namespace Narvalo.Benchmarking
                 metric.Iterations,
                 metric.Duration.Ticks,
                 metric.TicksPerCall);
-        }
-
-        public override string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics)
-        {
-            Require.NotNull(metrics, "metrics");
-
-            var fastest = metrics.OrderBy(r => r.Duration).First();
-
-            return String.Format(
-                cultureInfo,
-                Strings_Benchmarking.MetricFormat,
-                metrics.Name,
-                Format(cultureInfo, fastest));
         }
 
         public override string FormatInvalidMetric(CultureInfo cultureInfo, BenchmarkMetric metric)

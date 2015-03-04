@@ -8,10 +8,6 @@ namespace Narvalo.Benchmarking
     {
         string Format(BenchmarkMetric metric);
 
-        string Format(BenchmarkMetricCollection metrics);
-
         string Format(CultureInfo cultureInfo, BenchmarkMetric metric);
-
-        string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics);
     }
 }

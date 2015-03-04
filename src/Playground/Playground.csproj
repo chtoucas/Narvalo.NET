@@ -22,10 +22,20 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benchmarks\BenchMetricConsoleFormatter.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchMetricConsoleFormatter.cs" />
     <Compile Include="Benchmarks\Comparisons\Int64EncoderComparison.cs" />
     <Compile Include="Benchmarks\Comparisons\RemoveDiacriticsComparison.cs" />
     <Compile Include="Benchmarks\Comparisons\ReverseComparison.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkComparative.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkComparativeAttribute.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkComparison.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkComparisonAttribute.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkComparisonProcessor.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkException.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollection.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollectionFormatter.cs" />
+    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollectionFormatterBase.cs" />
+    <Compile Include="Benchmarks\Sdk\IBenchmarkMetricCollectionFormatter.cs" />
     <Compile Include="Edu\Fx\Fibonacci.cs" />
     <Compile Include="Edu\Fx\Iteration.cs" />
     <Compile Include="Edu\Fx\Iteration`2.cs" />

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Benchmarking {
-    using System;
-    
-    
+namespace Narvalo.Benchmarking
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -75,15 +75,6 @@ namespace Narvalo.Benchmarking {
         internal static string MetricFormat {
             get {
                 return ResourceManager.GetString("MetricFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string MissingBenchComparisonAttribute {
-            get {
-                return ResourceManager.GetString("MissingBenchComparisonAttribute", resourceCulture);
             }
         }
     }

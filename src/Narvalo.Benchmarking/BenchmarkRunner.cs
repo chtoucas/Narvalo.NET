@@ -6,7 +6,6 @@ namespace Narvalo.Benchmarking
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo;
-    using Narvalo.Benchmarking;
     using NodaTime;
 
     public sealed class BenchmarkRunner
@@ -27,11 +26,15 @@ namespace Narvalo.Benchmarking
             return Time(benchmark.Action, benchmark.Iterations);
         }
 
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
+            Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         public Duration Time(Action action, int iterations)
         {
             Require.NotNull(action, "action");
 
-            Cleanup_();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
 
             // Warmup (To be improved).
             action();
@@ -43,15 +46,6 @@ namespace Narvalo.Benchmarking
             }
 
             return _timer.ElapsedTime;
-        }
-
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
-            Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
-        private static void Cleanup_()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
         }
     }
 }

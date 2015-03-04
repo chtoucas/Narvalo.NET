@@ -11,6 +11,8 @@ namespace Narvalo.Benchmarking
 
         public BenchmarkAttribute(int iterations)
         {
+            Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
+
             _iterations = iterations;
         }
 

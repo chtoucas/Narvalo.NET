@@ -3,6 +3,7 @@
 namespace Narvalo.Benchmarking
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     using Narvalo;
 
@@ -22,15 +23,43 @@ namespace Narvalo.Benchmarking
             _iterations = iterations;
         }
 
-        public Action Action { get { return _action; } }
+        public Action Action
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Action>() != null);
+
+                return _action;
+            }
+        }
 
         public int Iterations { get { return _iterations; } }
 
-        public string Name { get { return _name; } }
+        public string Name
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null); 
+
+                return _name;
+            }
+        }
 
         public override string ToString()
         {
             return Name;
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_name != null);
+            Contract.Invariant(_name.Length != 0);
+            Contract.Invariant(_action != null);
+        }
+
+#endif
     }
 }

@@ -5,9 +5,8 @@ namespace Playground
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Benchmarking;
-    using Playground.Benchmarks;
     using Playground.Benchmarks.Comparisons;
+    using Playground.Benchmarks.Sdk;
 
     public static class Program
     {

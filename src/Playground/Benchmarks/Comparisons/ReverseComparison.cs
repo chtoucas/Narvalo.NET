@@ -5,7 +5,7 @@ namespace Playground.Benchmarks.Comparisons
     using System;
     using System.Text;
 
-    using Narvalo.Benchmarking;
+    using Playground.Benchmarks.Sdk;
 
     [BenchmarkComparison(10000)]
     public class ReverseComparison

@@ -10,7 +10,7 @@ namespace Playground.Benchmarks.Comparisons
     using System.Text.RegularExpressions;
 
     using Narvalo;
-    using Narvalo.Benchmarking;
+    using Playground.Benchmarks.Sdk;
 
     [BenchmarkComparison(10000, DisplayName = "Suppression des diacritiques.")]
     public static class RemoveDiacriticsComparison
