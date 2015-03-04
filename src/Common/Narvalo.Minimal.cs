@@ -9,8 +9,6 @@ namespace Narvalo
     using System.Globalization;
 
     [DebuggerStepThrough]
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-        Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
     internal static class Require
     {
         [ContractArgumentValidator]
@@ -293,55 +291,5 @@ namespace Narvalo
     public
 #endif
         sealed class ValidatedNotNullAttribute : Attribute { }
-    }
-
-    [DebuggerStepThrough]
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-        Justification = "Single file containing only internal classes and included in projects as a lightweight alternative to Narvalo.Portable.")]
-    internal static class Enforce
-    {
-#if CONTRACTS_FULL
-        [ContractArgumentValidator]
-        public static void NotNull<T>(T value, string parameterName) where T : class
-        {
-            if (value == null) {
-                throw new ArgumentNullException(parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        public static void NotNull<T>(T? value, string parameterName) where T : struct
-        {
-            if (value == null) {
-                throw new ArgumentNullException(parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-#else
-        [Conditional("DEBUG")]
-        public static void NotNull<T>(T value, string parameterName) where T : class
-        {
-            Debug.Assert(value != null, GetMessage_(parameterName));
-        }
-
-        [Conditional("DEBUG")]
-        public static void NotNull<T>(T? value, string parameterName) where T : struct
-        {
-            Debug.Assert(value != null, GetMessage_(parameterName));
-        }
-#endif
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method only available in Debug Build.")]
-        private static string GetMessage_(string parameterName)
-        {
-            return String.Format(
-                CultureInfo.InvariantCulture,
-                "The parameter {0} is null, a situation that should NEVER have happened.",
-                parameterName);
-        }
     }
 }
