@@ -9,6 +9,16 @@ namespace Narvalo.Benchmarking.Internal
 
     internal static class ReflectionExtensions
     {
+        public static Maybe<BenchmarkAttribute> MayGetBenchmarkAttribute(this MemberInfo @this)
+        {
+            return @this.MayGetCustomAttribute<BenchmarkAttribute>(false);
+        }
+
+        public static Maybe<BenchmarkComparisonAttribute> MayGetBenchmarkComparisonAttribute(this MemberInfo @this)
+        {
+            return @this.MayGetCustomAttribute<BenchmarkComparisonAttribute>(false);
+        }
+
         public static Maybe<T> MayGetCustomAttribute<T>(
                this MemberInfo element,
                bool inherit) where T : Attribute

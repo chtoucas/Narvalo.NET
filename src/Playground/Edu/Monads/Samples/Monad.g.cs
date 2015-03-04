@@ -44,12 +44,12 @@ namespace Playground.Edu.Monads.Samples
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Monad
     {
-        static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+        private static readonly Monad<Unit> s_Unit = Return(Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Returns the unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        public static Monad<Unit> Unit { get { return Unit_; } }
+        public static Monad<Unit> Unit { get { return s_Unit; } }
 
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Provides a set of extension methods for <see cref="Monad{T}" />.
+    /// Provides extension methods for <see cref="Monad{T}" />.
     /// We use extension methods so that we can override them on a case by case basis.
     /// </summary>
     public static partial class Monad
@@ -394,7 +394,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Extensions methods for <c>Func&lt;TSource, Monad&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <c>Func&lt;TSource, Monad&lt;TResult&gt;&gt;</c>.
     /// </summary>
     public static partial class FuncExtensions
     {
@@ -455,7 +455,7 @@ namespace Playground.Edu.Monads.Samples
     using Playground.Edu.Monads.Samples.Internal;
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -481,7 +481,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
     public static partial class EnumerableExtensions
     {
@@ -652,9 +652,9 @@ namespace Playground.Edu.Monads.Samples.Internal
     using Playground.Edu.Monads.Samples;
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>.
     /// </summary>
-    static partial class EnumerableMonadExtensions
+    internal static partial class EnumerableMonadExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -678,9 +678,9 @@ namespace Playground.Edu.Monads.Samples.Internal
     }
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
-    static partial class EnumerableExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]

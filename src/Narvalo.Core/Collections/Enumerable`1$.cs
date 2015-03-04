@@ -233,9 +233,10 @@ namespace Narvalo.Collections
         #endregion
     }
 
-    // Optimized extensions for Maybe<T>.
+    // Overriden extension methods.
     public static partial class EnumerableExtensions
     {
+        // Custom version of FilterCore with Maybe<T>.
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<bool>> predicateM)

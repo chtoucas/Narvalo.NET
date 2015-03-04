@@ -9,12 +9,9 @@ namespace Narvalo.Xml
     /// <summary>
     /// Provides extension methods for <see cref="System.Xml.XmlReader"/>.
     /// </summary>
-    /// <remarks>
-    /// The PCL version of System.Xml does not include the full version of XmlReader.
-    /// </remarks>
     public static class XmlReaderExtensions
     {
-        #region Methods that simply wrap XmlReader methods for use with an XName parameter.
+        #region Wrappers for XmlReader methods using a XName parameter.
 
         public static string GetAttribute(this XmlReader @this, XName name)
         {

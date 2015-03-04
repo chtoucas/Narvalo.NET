@@ -8,9 +8,9 @@ namespace Narvalo.Collections
 
     using Narvalo.Fx;
 
-    // Optimized extensions.
     public static partial class EnumerableMaybeExtensions
     {
+        // Custom version of CollectCore.
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);

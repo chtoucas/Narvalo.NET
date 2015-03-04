@@ -13,11 +13,9 @@ namespace Narvalo.Fx
         }
     }
 
-    // Extensions for Maybe<T>
+    // Extension methods for Maybe<T>.
     public static partial class Maybe
     {
-        #region ToNullable
-
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
         {
             Require.Object(@this);
@@ -31,10 +29,6 @@ namespace Narvalo.Fx
 
             return @this.IsSome ? (T?)@this.Value : null;
         }
-
-        #endregion
-
-        #region UnpackOr...
 
         public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
         {
@@ -75,7 +69,5 @@ namespace Narvalo.Fx
 
             return m.Value;
         }
-
-        #endregion
     }
 }

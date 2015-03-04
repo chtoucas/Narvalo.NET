@@ -44,13 +44,13 @@ namespace Playground.Edu.Monads.Samples
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class MonadPlus
     {
-        static readonly MonadPlus<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
-        static readonly MonadPlus<Unit> Zero_ = MonadPlus<Unit>.Zero;
+        private static readonly MonadPlus<Unit> s_Unit = Return(Narvalo.Fx.Unit.Single);
+        private static readonly MonadPlus<Unit> s_Zero = MonadPlus<Unit>.Zero;
 
         /// <summary>
         /// Returns the unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
         /// </summary>
-        public static MonadPlus<Unit> Unit { get { return Unit_; } }
+        public static MonadPlus<Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
         /// Returns the zero of type <c>MonadPlus&lt;Unit&gt;.Zero</c>.
@@ -58,7 +58,7 @@ namespace Playground.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<Unit> Zero { get { return Zero_; } }
+        public static MonadPlus<Unit> Zero { get { return s_Zero; } }
 
         /// <summary>
         /// Returns a new instance of <see cref="MonadPlus{T}" />.
@@ -177,7 +177,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Provides a set of extension methods for <see cref="MonadPlus{T}" />.
+    /// Provides extension methods for <see cref="MonadPlus{T}" />.
     /// We use extension methods so that we can override them on a case by case basis.
     /// </summary>
     public static partial class MonadPlus
@@ -485,7 +485,7 @@ namespace Playground.Edu.Monads.Samples
                 comparer ?? EqualityComparer<TKey>.Default);
         }
         
-        static MonadPlus<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadPlus<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             MonadPlus<TSource> seq,
             MonadPlus<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -507,7 +507,7 @@ namespace Playground.Edu.Monads.Samples
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        static MonadPlus<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadPlus<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
             MonadPlus<TSource> seq,
             MonadPlus<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -528,7 +528,7 @@ namespace Playground.Edu.Monads.Samples
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        static Func<TSource, MonadPlus<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+        private static Func<TSource, MonadPlus<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
             MonadPlus<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -608,7 +608,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Extensions methods for <c>Func&lt;TSource, MonadPlus&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <c>Func&lt;TSource, MonadPlus&lt;TResult&gt;&gt;</c>.
     /// </summary>
     public static partial class FuncExtensions
     {
@@ -670,7 +670,7 @@ namespace Playground.Edu.Monads.Samples
     using Playground.Edu.Monads.Samples.Internal;
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;MonadPlus&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;MonadPlus&lt;T&gt;&gt;</c>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -713,7 +713,7 @@ namespace Playground.Edu.Monads.Samples
     }
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
     public static partial class EnumerableExtensions
     {
@@ -891,9 +891,9 @@ namespace Playground.Edu.Monads.Samples.Internal
     using Playground.Edu.Monads.Samples;
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;MonadPlus&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;MonadPlus&lt;T&gt;&gt;</c>.
     /// </summary>
-    static partial class EnumerableMonadPlusExtensions
+    internal static partial class EnumerableMonadPlusExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -929,9 +929,9 @@ namespace Playground.Edu.Monads.Samples.Internal
     }
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
-    static partial class EnumerableExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]

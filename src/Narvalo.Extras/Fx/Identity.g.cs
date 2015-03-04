@@ -44,12 +44,12 @@ namespace Narvalo.Fx
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Identity
     {
-        static readonly Identity<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+        private static readonly Identity<Unit> s_Unit = Return(Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Returns the unique object of type <c>Identity&lt;Unit&gt;</c>.
         /// </summary>
-        public static Identity<Unit> Unit { get { return Unit_; } }
+        public static Identity<Unit> Unit { get { return s_Unit; } }
 
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Provides a set of extension methods for <see cref="Identity{T}" />.
+    /// Provides extension methods for <see cref="Identity{T}" />.
     /// We use extension methods so that we can override them on a case by case basis.
     /// </summary>
     public static partial class Identity
@@ -394,7 +394,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Extensions methods for <c>Func&lt;TSource, Identity&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <c>Func&lt;TSource, Identity&lt;TResult&gt;&gt;</c>.
     /// </summary>
     public static partial class FuncExtensions
     {

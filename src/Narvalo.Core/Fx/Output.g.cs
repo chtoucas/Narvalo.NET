@@ -44,12 +44,12 @@ namespace Narvalo.Fx
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Output
     {
-        static readonly Output<Unit> Unit_ = Success(Narvalo.Fx.Unit.Single);
+        private static readonly Output<Unit> s_Unit = Success(Narvalo.Fx.Unit.Single);
 
         /// <summary>
         /// Returns the unique object of type <c>Output&lt;Unit&gt;</c>.
         /// </summary>
-        public static Output<Unit> Unit { get { return Unit_; } }
+        public static Output<Unit> Unit { get { return s_Unit; } }
 
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Provides a set of extension methods for <see cref="Output{T}" />.
+    /// Provides extension methods for <see cref="Output{T}" />.
     /// We use extension methods so that we can override them on a case by case basis.
     /// </summary>
     public static partial class Output
@@ -394,7 +394,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Extensions methods for <c>Func&lt;TSource, Output&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <c>Func&lt;TSource, Output&lt;TResult&gt;&gt;</c>.
     /// </summary>
     public static partial class FuncExtensions
     {

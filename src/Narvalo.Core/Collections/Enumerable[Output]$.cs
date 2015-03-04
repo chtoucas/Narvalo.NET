@@ -8,9 +8,9 @@ namespace Narvalo.Collections
 
     using Narvalo.Fx;
 
-    // Optimized extensions.
     public static partial class EnumerableOutputExtensions
     {
+        // Custom version of CollectCore.
         internal static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
         {
             Require.Object(@this);

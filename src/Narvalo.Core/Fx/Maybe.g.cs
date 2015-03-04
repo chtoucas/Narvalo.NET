@@ -44,13 +44,13 @@ namespace Narvalo.Fx
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Maybe
     {
-        static readonly Maybe<Unit> Unit_ = Create(Narvalo.Fx.Unit.Single);
-        static readonly Maybe<Unit> None_ = Maybe<Unit>.None;
+        private static readonly Maybe<Unit> s_Unit = Create(Narvalo.Fx.Unit.Single);
+        private static readonly Maybe<Unit> s_None = Maybe<Unit>.None;
 
         /// <summary>
         /// Returns the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
-        public static Maybe<Unit> Unit { get { return Unit_; } }
+        public static Maybe<Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
         /// Returns the zero of type <c>Maybe&lt;Unit&gt;.None</c>.
@@ -58,7 +58,7 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<Unit> None { get { return None_; } }
+        public static Maybe<Unit> None { get { return s_None; } }
 
         /// <summary>
         /// Returns a new instance of <see cref="Maybe{T}" />.
@@ -177,7 +177,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Provides a set of extension methods for <see cref="Maybe{T}" />.
+    /// Provides extension methods for <see cref="Maybe{T}" />.
     /// We use extension methods so that we can override them on a case by case basis.
     /// </summary>
     public static partial class Maybe
@@ -485,7 +485,7 @@ namespace Narvalo.Fx
                 comparer ?? EqualityComparer<TKey>.Default);
         }
         
-        static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -507,7 +507,7 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        static Maybe<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -528,7 +528,7 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        static Func<TSource, Maybe<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+        private static Func<TSource, Maybe<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -608,7 +608,7 @@ namespace Narvalo.Fx
     }
 
     /// <summary>
-    /// Extensions methods for <c>Func&lt;TSource, Maybe&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <c>Func&lt;TSource, Maybe&lt;TResult&gt;&gt;</c>.
     /// </summary>
     public static partial class FuncExtensions
     {

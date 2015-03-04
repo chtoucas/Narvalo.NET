@@ -37,7 +37,7 @@ namespace Narvalo.Collections
     using Narvalo.Collections.Internal;
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -63,7 +63,7 @@ namespace Narvalo.Collections
     }
 
     /// <summary>
-    /// Extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
     public static partial class EnumerableExtensions
     {
@@ -233,9 +233,9 @@ namespace Narvalo.Collections.Internal
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>.
     /// </summary>
-    static partial class EnumerableIdentityExtensions
+    internal static partial class EnumerableIdentityExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -259,9 +259,9 @@ namespace Narvalo.Collections.Internal
     }
 
     /// <summary>
-    /// Internal extensions for <c>IEnumerable&lt;T&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}">.
     /// </summary>
-    static partial class EnumerableExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]

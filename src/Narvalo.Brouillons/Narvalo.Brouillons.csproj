@@ -6,7 +6,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Junk</AssemblyName>
+    <AssemblyName>Narvalo.Brouillons</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />

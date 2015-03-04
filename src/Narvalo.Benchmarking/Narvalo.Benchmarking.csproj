@@ -18,6 +18,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Narvalo.Minimal.cs">
+      <Link>Internal\Narvalo.Minimal.cs</Link>
+    </Compile>
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkAttribute.cs" />
     <Compile Include="BenchmarkComparative.cs" />
@@ -37,14 +40,10 @@
     <Compile Include="IBenchmarkMetricFormatter.cs" />
     <Compile Include="IBenchmarkTimer.cs" />
     <Compile Include="Internal\ActionFactory.cs" />
-    <Compile Include="Internal\BenchmarkComparativeFactory.cs" />
-    <Compile Include="Internal\BenchmarkComparativeFinder.cs" />
+    <Compile Include="BenchmarkComparativeFinder.cs" />
     <Compile Include="Internal\BenchmarkComparator.cs" />
-    <Compile Include="Internal\BenchmarkComparisonFactory.cs" />
     <Compile Include="Internal\Benchmarker.cs" />
-    <Compile Include="Internal\BenchmarkFactory.cs" />
-    <Compile Include="Internal\BenchmarkFinder.cs" />
-    <Compile Include="Internal\ReflectionExtensions.cs" />
+    <Compile Include="BenchmarkFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings_Benchmarking.Designer.cs">
       <DependentUpon>Strings_Benchmarking.resx</DependentUpon>
@@ -56,9 +55,6 @@
     <None Include="Narvalo.Benchmarking.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Narvalo.Benchmarking.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
@@ -67,12 +63,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Benchmarking.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
-      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,10 +4,10 @@ namespace Narvalo.Benchmarking
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
 
     using Narvalo;
-    using Narvalo.Benchmarking.Internal;
 
     /// <summary>
     /// Represents a processor that compares the performance of different implementations
@@ -29,8 +29,8 @@ namespace Narvalo.Benchmarking
             BenchmarkComparativeFinder finder,
             BenchmarkComparisonRunner runner)
         {
-            Require.NotNull(finder, "finder");
-            Require.NotNull(runner, "runner");
+            Contract.Requires(finder != null);
+            Contract.Requires(runner != null);
 
             _finder = finder;
             _runner = runner;
@@ -103,7 +103,7 @@ namespace Narvalo.Benchmarking
         public BenchmarkMetricCollection Process(Type type)
         {
             IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type);
-            BenchmarkComparison comparison = BenchmarkComparisonFactory.Create(type, items);
+            var comparison = BenchmarkComparison.Create(type, items);
 
             return _runner.Run(comparison);
         }
@@ -119,7 +119,7 @@ namespace Narvalo.Benchmarking
             foreach (var value in testData) {
                 // REVIEW: on peut sûrement éviter de relancer BenchComparisonFactory à chaque itération.
                 IEnumerable<BenchmarkComparative> items = _finder.FindComparatives(type, value);
-                BenchmarkComparison comparison = BenchmarkComparisonFactory.Create(type, items);
+                var comparison = BenchmarkComparison.Create(type, items);
 
                 yield return _runner.Run(comparison);
             }

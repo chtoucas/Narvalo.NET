@@ -4,25 +4,35 @@ namespace Narvalo.Benchmarking
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
-
-    using Narvalo;
-    using Narvalo.Benchmarking.Internal;
 
     public sealed class BenchmarkProcessor
     {
         private readonly BenchmarkFinder _finder;
         private readonly BenchmarkRunner _runner;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="BenchmarkProcessor"/>
+        /// for the specified benchmark finder and benchmark runner.
+        /// </summary>
+        /// <param name="finder">The finder used to look for methods with a benchmark attribute.</param>
+        /// <param name="runner">The benchmark runnner.</param>
         private BenchmarkProcessor(BenchmarkFinder finder, BenchmarkRunner runner)
         {
-            Require.NotNull(finder, "finder");
-            Require.NotNull(runner, "runner");
+            Contract.Requires(finder != null);
+            Contract.Requires(runner != null);
 
             _finder = finder;
             _runner = runner;
         }
 
+        /// <summary>
+        /// Obtains an instance of the <see cref="BenchmarkProcessor"/> class with the 
+        /// default bindings, used to look for methods with a benchmark attribute, 
+        /// and with the default timer.
+        /// </summary>
+        /// <returns>The default <see cref="BenchmarkProcessor"/> class.</returns>
         public static BenchmarkProcessor Create()
         {
             return new BenchmarkProcessor(
@@ -30,6 +40,13 @@ namespace Narvalo.Benchmarking
                 BenchmarkRunner.Create());
         }
 
+        /// <summary>
+        /// Obtains an instance of the <see cref="BenchmarkProcessor"/> class 
+        /// with the specified bindings, used to look for methods with a benchmark attribute,
+        /// and with the default timer.
+        /// </summary>
+        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
+        /// <returns>The <see cref="BenchmarkProcessor"/> for the specified bindings.</returns>
         public static BenchmarkProcessor Create(BindingFlags bindings)
         {
             return new BenchmarkProcessor(
@@ -37,6 +54,13 @@ namespace Narvalo.Benchmarking
                 BenchmarkRunner.Create());
         }
 
+        /// <summary>
+        /// Obtains an instance of the <see cref="BenchmarkProcessor"/> class 
+        /// with the default bindings, used to look for methods with a benchmark attribute, 
+        /// and with the specified timer.
+        /// </summary>
+        /// <param name="timer">The timer for measuring time intervals.</param>
+        /// <returns>The <see cref="BenchmarkProcessor"/> for the specified timer.</returns>
         public static BenchmarkProcessor Create(IBenchmarkTimer timer)
         {
             return new BenchmarkProcessor(
@@ -44,6 +68,15 @@ namespace Narvalo.Benchmarking
                 BenchmarkRunner.Create(timer));
         }
 
+        /// <summary>
+        /// Obtains an instance of the <see cref="BenchmarkProcessor"/> class
+        /// with the specified binding, used  to look for methods with a benchmark attribute,
+        /// and with the specified timer.
+        /// </summary>
+        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
+        /// <param name="timer">The timer for measuring time intervals.</param>
+        /// <returns>The <see cref="BenchmarkProcessor"/> for the specified bindings 
+        /// and timer.</returns>
         public static BenchmarkProcessor Create(
             BindingFlags bindings,
             IBenchmarkTimer timer)

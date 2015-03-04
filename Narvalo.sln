@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Build", "src\Narval
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Ghostscript", "src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj", "{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Junk", "src\Narvalo.Junk\Narvalo.Junk.csproj", "{809C0DA5-9A01-4ADA-83A5-1A0494723594}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp", "src\Narvalo.Mvp\Narvalo.Mvp.csproj", "{2944D621-7F6E-4792-94AD-0021C6B73981}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Mvp.Extras", "src\Narvalo.Mvp.Extras\Narvalo.Mvp.Extras.csproj", "{206AE61E-2644-4E32-AD37-948755B17DC7}"
@@ -54,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prose", "src\Prose\Prose.csproj", "{475B9410-296D-47CB-BB58-BC57BFA8F8AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.PowerShell", "src\Narvalo.PowerShell\Narvalo.PowerShell.csproj", "{4A73807D-3ECA-438A-9108-5A99E193BFBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Brouillons", "src\Narvalo.Brouillons\Narvalo.Brouillons.csproj", "{809C0DA5-9A01-4ADA-83A5-1A0494723594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,11 +110,6 @@ Global
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661}.Release|Any CPU.Build.0 = Release|Any CPU
-		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.CodeContracts|Any CPU.ActiveCfg = Debug|Any CPU
-		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2944D621-7F6E-4792-94AD-0021C6B73981}.CodeContracts|Any CPU.ActiveCfg = Debug|Any CPU
 		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2944D621-7F6E-4792-94AD-0021C6B73981}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -181,6 +176,12 @@ Global
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809C0DA5-9A01-4ADA-83A5-1A0494723594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

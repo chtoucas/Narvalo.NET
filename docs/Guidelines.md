@@ -59,7 +59,7 @@ This solution contains **all** libraries built upon Narvalo.Core:
 - Narvalo.Extras.
 - Narvalo.Benchmarking.
 - Narvalo.Facts, the test project.
-- Narvalo.Junk, a "fourre-tout" of unfinished or broken codes.
+- Narvalo.Brouillons, a "fourre-tout" of unfinished or broken codes.
 
 ### Narvalo (Mvp).sln
 
@@ -157,7 +157,7 @@ Code Quality
 ### FxCop
 
 The following projects use the default ruleset for Code Analysis.
-- Narvalo.Junk
+- Narvalo.Brouillons
 - Prose
 - Playground
 

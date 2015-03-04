@@ -110,7 +110,7 @@ Code improvements:
 - Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.
 - Improvement: Validate the usefulness of `ExceptionFactory`. Replace it with
   something like a `ThrowHelper`?
-- Improvement: Cleanup then get rid of Narvalo.Junk.
+- Improvement: Cleanup Narvalo.Brouillons.
 - Improvement: Review all GetHashCode() methods.
 - Improvement: Review all ToString() methods.
 
