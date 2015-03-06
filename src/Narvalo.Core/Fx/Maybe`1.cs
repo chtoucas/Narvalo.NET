@@ -8,6 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     /*!
      * The Maybe Monad
@@ -440,6 +441,7 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics. Only used internally.")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> η(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);

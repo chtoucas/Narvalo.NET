@@ -16,56 +16,41 @@ namespace Playground.Benchmarks.Sdk
     /// <summary>
     /// Represents a processor that compares the performance of different implementations
     /// of the same problem given by methods defined inside a single class, each method
-    /// being identified by its <see cref="BenchmarkComparative"/> attribute.
+    /// being identified by its <see cref="Benchmark"/> attribute.
     /// </summary>
     public sealed class BenchmarkComparisonProcessor
     {
-        private const BindingFlags DEFAULT_BINDINGS
+        /// <summary>
+        /// Default bindings, used to look for methods with a benchmark attribute.
+        /// </summary>
+        public const BindingFlags DefaultDiscoveryBindings
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
-        private readonly BindingFlags _bindings;
         private readonly BenchmarkRunner _runner;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the 
-        /// default bindings, used to look for methods with a benchmark attribute, 
-        /// and with the default timer.
-        /// </summary>
-        public BenchmarkComparisonProcessor() : this(DEFAULT_BINDINGS, new BenchmarkTimer()) { }
+        private BindingFlags _discoveryBindings = DefaultDiscoveryBindings;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the 
-        /// with the default bindings, used to look for methods with a benchmark attribute, 
-        /// and with the specified timer.
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the default timer.
+        /// </summary>
+        public BenchmarkComparisonProcessor() : this(new BenchmarkTimer()) { }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> with the specified timer.
         /// </summary>
         /// <param name="timer">The timer for measuring time intervals.</param>
         public BenchmarkComparisonProcessor(IBenchmarkTimer timer)
-            : this(DEFAULT_BINDINGS, timer)
         {
             Contract.Requires(timer != null);
+
+            _runner = new BenchmarkRunner(timer);
         }
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> 
-        /// with the specified bindings, used to look for methods with a benchmark attribute,
-        /// and with the default timer.
-        /// </summary>
-        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
-        public BenchmarkComparisonProcessor(BindingFlags bindings) : this(bindings, new BenchmarkTimer()) { }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkComparisonProcessor"/> 
-        /// with the specified binding, used  to look for methods with a benchmark attribute,
-        /// and with the specified timer.
-        /// </summary>
-        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
-        /// <param name="timer">The timer for measuring time intervals.</param>
-        public BenchmarkComparisonProcessor(BindingFlags bindings, IBenchmarkTimer timer)
+        // Gets or sets the bindings used to look for methods with a benchmark attribute.
+        public BindingFlags DiscoveryBindings
         {
-            Contract.Requires(timer != null);
-
-            _bindings = bindings;
-            _runner = new BenchmarkRunner(timer);
+            get { return _discoveryBindings; }
+            set { _discoveryBindings = value; }
         }
 
         /// <summary>
@@ -75,7 +60,7 @@ namespace Playground.Benchmarks.Sdk
         /// <returns>The collection of benchmark results, one result for each method run.</returns>
         public BenchmarkMetricCollection Process(Type type)
         {
-            IEnumerable<BenchmarkComparative> items = FindComparatives_(type);
+            IEnumerable<Benchmark> items = FindComparatives_(type);
             var comparison = CreateComparison_(type, items);
             IEnumerable<BenchmarkMetric> metrics = ProcessCore_(comparison);
 
@@ -93,7 +78,7 @@ namespace Playground.Benchmarks.Sdk
             foreach (var value in testData)
             {
                 // REVIEW: on peut sûrement éviter de relancer CreateComparison_ à chaque itération.
-                IEnumerable<BenchmarkComparative> items = FindComparatives_(type, value);
+                IEnumerable<Benchmark> items = FindComparatives_(type, value);
                 var comparison = CreateComparison_(type, items);
                 IEnumerable<BenchmarkMetric> metrics = ProcessCore_(comparison);
 
@@ -107,13 +92,11 @@ namespace Playground.Benchmarks.Sdk
 
             foreach (var item in comparison.Items)
             {
-                Duration duration = _runner.Time(item.Action, comparison.Iterations);
-
-                yield return new BenchmarkMetric(item.Name, duration, comparison.Iterations);
+                yield return _runner.Run(item, comparison.Iterations);
             }
         }
 
-        private static BenchmarkComparison CreateComparison_(Type type, IEnumerable<BenchmarkComparative> items)
+        private static BenchmarkComparison CreateComparison_(Type type, IEnumerable<Benchmark> items)
         {
             BenchmarkComparisonAttribute attr
                 = type.GetCustomAttribute<BenchmarkComparisonAttribute>(inherit: false);
@@ -134,9 +117,9 @@ namespace Playground.Benchmarks.Sdk
                 attr.Iterations);
         }
 
-        private IEnumerable<BenchmarkComparative> FindComparatives_(Type type)
+        private IEnumerable<Benchmark> FindComparatives_(Type type)
         {
-            MethodInfo[] methods = type.GetMethods(_bindings);
+            MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 
             foreach (var method in methods)
             {
@@ -150,16 +133,17 @@ namespace Playground.Benchmarks.Sdk
                 // FIXME: Cela ne marchera que si la méthode est statique.
                 var action = (Action)method.CreateDelegate(typeof(Action));
 
-                yield return new BenchmarkComparative(
+                yield return new Benchmark(
+                    type.FullName,
                     attr.DisplayName ?? method.Name,
                     action);
             }
         }
 
         // FIXME: Theory.
-        private IEnumerable<BenchmarkComparative> FindComparatives_<T>(Type type, T value)
+        private IEnumerable<Benchmark> FindComparatives_<T>(Type type, T value)
         {
-            MethodInfo[] methods = type.GetMethods(_bindings);
+            MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 
             foreach (var method in methods)
             {
@@ -170,7 +154,8 @@ namespace Playground.Benchmarks.Sdk
                     continue;
                 }
 
-                yield return new BenchmarkComparative(
+                yield return new Benchmark(
+                    type.FullName,
                     attr.DisplayName ?? method.Name,
                     // FIXME: Cela ne marchera que si la méthode est statique.
                     () => ((Action<T>)Delegate.CreateDelegate(typeof(Action<T>), method)).Invoke(value));

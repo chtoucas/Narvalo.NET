@@ -26,7 +26,6 @@
     <Compile Include="Benchmarks\Comparisons\Int64EncoderComparison.cs" />
     <Compile Include="Benchmarks\Comparisons\RemoveDiacriticsComparison.cs" />
     <Compile Include="Benchmarks\Comparisons\ReverseComparison.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkComparative.cs" />
     <Compile Include="Benchmarks\Sdk\BenchmarkComparativeAttribute.cs" />
     <Compile Include="Benchmarks\Sdk\BenchmarkComparison.cs" />
     <Compile Include="Benchmarks\Sdk\BenchmarkComparisonAttribute.cs" />

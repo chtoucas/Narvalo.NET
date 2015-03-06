@@ -9,18 +9,19 @@ namespace Narvalo.Benchmarking
 
     public sealed class Benchmark
     {
-        private readonly int _iterations;
+        private readonly string _categoryName;
         private readonly string _name;
         private readonly Action _action;
 
-        public Benchmark(string name, Action action, int iterations)
+        public Benchmark(string categoryName, string name, Action action)
         {
+            Require.NotNullOrEmpty(categoryName, "categoryName");
             Require.NotNullOrEmpty(name, "name");
             Require.NotNull(action, "action");
 
+            _categoryName = categoryName;
             _name = name;
             _action = action;
-            _iterations = iterations;
         }
 
         public Action Action
@@ -33,7 +34,15 @@ namespace Narvalo.Benchmarking
             }
         }
 
-        public int Iterations { get { return _iterations; } }
+        public string CategoryName
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+
+                return _categoryName;
+            }
+        }
 
         public string Name
         {
@@ -47,7 +56,9 @@ namespace Narvalo.Benchmarking
 
         public override string ToString()
         {
-            return Name;
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return CategoryName + "; " + Name;
         }
 
 #if CONTRACTS_FULL
@@ -55,8 +66,8 @@ namespace Narvalo.Benchmarking
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
+            Contract.Invariant(_categoryName != null);
             Contract.Invariant(_name != null);
-            Contract.Invariant(_name.Length != 0);
             Contract.Invariant(_action != null);
         }
 

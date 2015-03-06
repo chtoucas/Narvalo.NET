@@ -4,6 +4,7 @@ namespace Playground
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     using Playground.Benchmarks.Comparisons;
     using Playground.Benchmarks.Sdk;
@@ -12,9 +13,14 @@ namespace Playground
     {
         public static void Main()
         {
+            var processor = new BenchmarkComparisonProcessor {
+                DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,
+            };
+
             IEnumerable<BenchmarkMetricCollection> metrics
-                = new BenchmarkComparisonProcessor()
-                .Process(typeof(RemoveDiacriticsComparison), RemoveDiacriticsComparison.GenerateTestData());
+                = processor.Process(
+                    typeof(RemoveDiacriticsComparison),
+                    RemoveDiacriticsComparison.GenerateTestData());
 
             var fmt = new BenchMetricConsoleFormatter();
 

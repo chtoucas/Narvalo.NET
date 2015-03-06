@@ -70,13 +70,11 @@
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkAttribute.cs" />
     <Compile Include="BenchmarkMetric.cs" />
-    <Compile Include="BenchmarkMetricFormatter.cs" />
-    <Compile Include="BenchmarkMetricFormatterBase.cs" />
     <Compile Include="BenchmarkProcessor.cs" />
     <Compile Include="BenchmarkTimer.cs" />
-    <Compile Include="IBenchmarkMetricFormatter.cs" />
     <Compile Include="IBenchmarkTimer.cs" />
     <Compile Include="BenchmarkRunner.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings_Benchmarking.Designer.cs">
       <DependentUpon>Strings_Benchmarking.resx</DependentUpon>

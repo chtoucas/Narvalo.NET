@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Brouillons", "src\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarking", "src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj", "{13CF906D-62BF-4962-8038-F54893A5F976}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarks", "tests\Narvalo.Benchmarks\Narvalo.Benchmarks.csproj", "{4F37224C-58CC-4C55-80E6-14FD54A57EBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -77,6 +79,12 @@ Global
 		{13CF906D-62BF-4962-8038-F54893A5F976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13CF906D-62BF-4962-8038-F54893A5F976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F37224C-58CC-4C55-80E6-14FD54A57EBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

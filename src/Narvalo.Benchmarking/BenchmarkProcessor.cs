@@ -12,52 +12,47 @@ namespace Narvalo.Benchmarking
 
     public sealed class BenchmarkProcessor
     {
-        private const BindingFlags DEFAULT_BINDINGS
+        /// <summary>
+        /// Default bindings, used to look for methods with a benchmark attribute.
+        /// </summary>
+        public const BindingFlags DefaultDiscoveryBindings
            = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
-        private readonly BindingFlags _bindings;
         private readonly BenchmarkRunner _runner;
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the 
-        /// default bindings, used to look for methods with a benchmark attribute, 
-        /// and with the default timer.
-        /// </summary>
-        public BenchmarkProcessor() : this(DEFAULT_BINDINGS, new BenchmarkTimer()) { }
+        private BindingFlags _discoveryBindings = DefaultDiscoveryBindings;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the 
-        /// with the default bindings, used to look for methods with a benchmark attribute, 
-        /// and with the specified timer.
+        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the default timer.
+        /// </summary>
+        public BenchmarkProcessor() : this(new BenchmarkTimer()) { }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the specified timer.
         /// </summary>
         /// <param name="timer">The timer for measuring time intervals.</param>
         public BenchmarkProcessor(IBenchmarkTimer timer)
-            : this(DEFAULT_BINDINGS, timer)
         {
             Contract.Requires(timer != null);
+
+            _runner = new BenchmarkRunner(timer);
         }
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> 
-        /// with the specified bindings, used to look for methods with a benchmark attribute,
-        /// and with the default timer.
-        /// </summary>
-        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
-        public BenchmarkProcessor(BindingFlags bindings) : this(bindings, new BenchmarkTimer()) { }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> 
-        /// with the specified binding, used  to look for methods with a benchmark attribute,
-        /// and with the specified timer.
-        /// </summary>
-        /// <param name="bindings">The bindings used to look for methods with a benchmark attribute.</param>
-        /// <param name="timer">The timer for measuring time intervals.</param>
-        public BenchmarkProcessor(BindingFlags bindings, IBenchmarkTimer timer)
+        // Gets or sets the bindings used to look for methods with a benchmark attribute.
+        public BindingFlags DiscoveryBindings
         {
-            Contract.Requires(timer != null);
+            get { return _discoveryBindings; }
+            set { _discoveryBindings = value; }
+        }
 
-            _bindings = bindings;
-            _runner = new BenchmarkRunner(timer);
+        public Duration TestDuration
+        {
+            set { _runner.TestDuration = value; }
+        }
+
+        public Duration WarmUpDuration
+        {
+            set { _runner.WarmUpDuration = value; }
         }
 
         public IEnumerable<BenchmarkMetric> Process(Assembly assembly)
@@ -72,9 +67,7 @@ namespace Narvalo.Benchmarking
 
             foreach (var benchmark in benchmarks)
             {
-                Duration duration = _runner.Run(benchmark);
-
-                yield return new BenchmarkMetric(benchmark.Name, duration, benchmark.Iterations);
+                yield return _runner.Run(benchmark);
             }
         }
 
@@ -86,15 +79,13 @@ namespace Narvalo.Benchmarking
 
             foreach (var benchmark in benchmarks)
             {
-                Duration duration = _runner.Run(benchmark);
-
-                yield return new BenchmarkMetric(benchmark.Name, duration, benchmark.Iterations);
+                yield return _runner.Run(benchmark);
             }
         }
 
         private IEnumerable<Benchmark> FindBenchmarks_(Type type)
         {
-            MethodInfo[] methods = type.GetMethods(_bindings);
+            MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 
             foreach (var method in methods)
             {
@@ -105,14 +96,14 @@ namespace Narvalo.Benchmarking
                     continue;
                 }
 
-                // FIXME: Cela ne marchera que si la méthode est statique.
+                // FIXME: Cela ne marche que si la méthode est statique.
                 //var action = (Action)Delegate.CreateDelegate(typeof(Action), method);
                 var action = (Action)method.CreateDelegate(typeof(Action));
 
                 yield return new Benchmark(
-                    attr.DisplayName ?? method.Name,
-                    action,
-                    attr.Iterations);
+                   method.DeclaringType.FullName,
+                   attr.DisplayName ?? method.Name,
+                   action);
             }
         }
     }

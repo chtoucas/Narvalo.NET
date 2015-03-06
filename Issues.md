@@ -55,6 +55,8 @@ Miscs:
   * Document compiler conditional symbols in use.
 - Improvement: Review and fill assembly and NuGet spec.
 - Sign F# assemblies.
+- Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
+- Handcode HasFlag
 
 
 Not yet planned

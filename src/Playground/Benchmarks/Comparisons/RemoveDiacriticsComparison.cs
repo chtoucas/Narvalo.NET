@@ -12,7 +12,7 @@ namespace Playground.Benchmarks.Comparisons
     using Narvalo;
     using Playground.Benchmarks.Sdk;
 
-    [BenchmarkComparison(10000, DisplayName = "Suppression des diacritiques.")]
+    [BenchmarkComparison(100000, DisplayName = "Suppression des diacritiques.")]
     public static class RemoveDiacriticsComparison
     {
         // \p{Mn} or \p{Non_Spacing_Mark}:

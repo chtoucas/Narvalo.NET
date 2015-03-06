@@ -5,16 +5,17 @@ namespace Playground.Benchmarks.Sdk
     using System.Collections.Generic;
 
     using Narvalo;
+    using Narvalo.Benchmarking;
 
     public sealed class BenchmarkComparison
     {
-        private readonly IEnumerable<BenchmarkComparative> _items;
+        private readonly IEnumerable<Benchmark> _items;
         private readonly int _iterations;
         private readonly string _name;
 
         public BenchmarkComparison(
             string name,
-            IEnumerable<BenchmarkComparative> items,
+            IEnumerable<Benchmark> items,
             int iterations)
         {
             Require.NotNullOrEmpty(name, "name");
@@ -25,7 +26,7 @@ namespace Playground.Benchmarks.Sdk
             _iterations = iterations;
         }
 
-        public IEnumerable<BenchmarkComparative> Items { get { return _items; } }
+        public IEnumerable<Benchmark> Items { get { return _items; } }
 
         public int Iterations { get { return _iterations; } }
 

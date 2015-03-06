@@ -70,11 +70,13 @@ namespace Narvalo
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
             Contract.Invariant(!_isError || _exceptionInfo != null);
         }
+
 #endif
     }
 }
