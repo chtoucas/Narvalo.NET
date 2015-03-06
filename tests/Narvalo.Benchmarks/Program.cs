@@ -21,10 +21,9 @@ namespace Narvalo
             };
 
             var metricsByCategory = processor
-                //.Process(typeof(Program).Assembly)
-                .Process(typeof(Narvalo.Fx.MaybeBenchmarks))
-                //.Process(typeof(Quick_))
-                .ToList()
+                .Process(typeof(Program).Assembly)
+                //.Process(typeof(Narvalo.Int64EncoderBenchmarks))
+                //.Process(typeof(TempBenchmarks_))
                 .GroupBy(_ => _.CategoryName);
 
             foreach (var metrics in metricsByCategory)
@@ -38,9 +37,9 @@ namespace Narvalo
             }
         }
 
-        private static class Quick_
+        private static class TempBenchmarks_
         {
-            private static int? s_Sample = 1;
+            //private static int? s_Sample = 1;
 
             [Benchmark]
             public static void Create_ReferenceType()

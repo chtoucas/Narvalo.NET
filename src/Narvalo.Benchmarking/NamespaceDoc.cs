@@ -12,7 +12,7 @@ namespace Narvalo.Benchmarking
     /// <see cref="!:https://code.google.com/p/noda-time/">NodaTime</see>.
     /// Even so, any error is of course mine.
     /// </remarks>
-    class NamespaceDoc
+    internal static class NamespaceDoc
     {
         // Note to me; other references I should explore
         // - https://github.com/mattwarren/MiniBench-WIP

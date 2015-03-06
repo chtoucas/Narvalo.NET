@@ -8,6 +8,10 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    /// <summary>
+    /// Provides helper methods to perform argument validation.
+    /// If Code Contracts is enabled, these methods will be understood as Preconditions.
+    /// </summary>
     [DebuggerStepThrough]
     internal static class Require
     {
@@ -114,10 +118,22 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "The parameter {0} is empty.",
-                        parameterName),
+                    "The parameter '" + parameterName + "' is empty.",
+                    parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void Predicate(bool predicate, string parameterName)
+        {
+            if (!predicate)
+            {
+                throw new ArgumentException(
+                    "The parameter '" + parameterName + "' does not satisfy the precondition.",
                     parameterName);
             }
 
@@ -131,11 +147,12 @@ namespace Narvalo
         {
             if (value < minValue || value > maxValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not in range {0} / {1}.",
-                    minValue,
-                    maxValue);
+                var message =
+                    "The value is not in range ["
+                    + minValue.ToString(CultureInfo.CurrentCulture)
+                    + ", "
+                    + maxValue.ToString(CultureInfo.CurrentCulture)
+                    + "].";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -149,11 +166,12 @@ namespace Narvalo
         {
             if (value < minValue || value > maxValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not in range {0} / {1}.",
-                    minValue,
-                    maxValue);
+                var message =
+                    "The value is not in range ["
+                    + minValue.ToString(CultureInfo.CurrentCulture)
+                    + ", "
+                    + maxValue.ToString(CultureInfo.CurrentCulture)
+                    + "].";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -167,10 +185,9 @@ namespace Narvalo
         {
             if (value < minValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not greater than or equal to {0}.",
-                    minValue);
+                var message =
+                    "The value is not greater than or equal to "
+                    + minValue.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -184,10 +201,9 @@ namespace Narvalo
         {
             if (value < minValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not greater than or equal to {0}.",
-                    minValue);
+                var message =
+                    "The value is not greater than or equal to "
+                    + minValue.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -207,10 +223,7 @@ namespace Narvalo
 
             if (value.CompareTo(minValue) < 0)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not greater than or equal to {0}.",
-                    minValue);
+                var message = "The value is not greater than or equal to " + minValue.ToString() + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -224,10 +237,9 @@ namespace Narvalo
         {
             if (value > maxValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not less than or equal to {0}.",
-                    maxValue);
+                var message =
+                    "The value is not less than or equal to "
+                    + maxValue.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -241,10 +253,9 @@ namespace Narvalo
         {
             if (value > maxValue)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not less than or equal to {0}.",
-                    maxValue);
+                var message =
+                    "The value is not less than or equal to "
+                    + maxValue.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -264,32 +275,28 @@ namespace Narvalo
 
             if (value.CompareTo(maxValue) > 0)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The value is not less than or equal to {0}.",
-                    maxValue);
+                var message = "The value is not less than or equal to " + maxValue.ToString() + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
             Contract.EndContractBlock();
         }
 
+        [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
+#if CONTRACTS_FULL
+        public
+#else
+        internal
+#endif
+ sealed class ValidatedNotNullAttribute : Attribute { }
+
         private static class ExceptionFactory
         {
             public static ArgumentNullException ArgumentNull(string parameterName)
             {
-                var message = String.Format(
-                    CultureInfo.InvariantCulture,
-                    "The parameter {0} is null.",
-                    parameterName);
+                var message = "The parameter '" + parameterName + "' is null.";
                 return new ArgumentNullException(parameterName, message);
             }
         }
-
-        [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-#if CONTRACTS_FULL
-    public
-#endif
-        sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }

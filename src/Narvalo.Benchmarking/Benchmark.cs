@@ -39,6 +39,7 @@ namespace Narvalo.Benchmarking
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+                Contract.Ensures(Contract.Result<string>().Length != 0);
 
                 return _categoryName;
             }
@@ -48,7 +49,8 @@ namespace Narvalo.Benchmarking
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null); 
+                Contract.Ensures(Contract.Result<string>() != null);
+                Contract.Ensures(Contract.Result<string>().Length != 0);
 
                 return _name;
             }
@@ -67,7 +69,9 @@ namespace Narvalo.Benchmarking
         private void ObjectInvariants()
         {
             Contract.Invariant(_categoryName != null);
+            Contract.Invariant(_categoryName.Length != 0);
             Contract.Invariant(_name != null);
+            Contract.Invariant(_name.Length != 0);
             Contract.Invariant(_action != null);
         }
 

@@ -4,7 +4,7 @@ namespace Narvalo.Data
 {
 #if DOCUMENTATION
 
-    class NamespaceDoc { }
+    internal static class NamespaceDoc { }
 
 #endif
 }

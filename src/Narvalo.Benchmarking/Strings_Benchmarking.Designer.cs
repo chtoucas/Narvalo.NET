@@ -61,15 +61,6 @@ namespace Narvalo.Benchmarking
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid result: duration was 0 ({0} iterations).
-        /// </summary>
-        internal static string InvalidMetricFormat {
-            get {
-                return ResourceManager.GetString("InvalidMetricFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
         /// </summary>
         internal static string MetricFormat {

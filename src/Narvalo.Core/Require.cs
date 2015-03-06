@@ -18,7 +18,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
-            if (@this == null) {
+            if (@this == null)
+            {
                 throw new ArgumentNullException("this", Strings_Core.Require_ObjectNull);
             }
 
@@ -28,7 +29,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
         {
-            if (@this == null) {
+            if (@this == null)
+            {
                 throw new ArgumentNullException("this", Strings_Core.Require_ObjectNull);
             }
 
@@ -38,7 +40,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value", Strings_Core.Require_PropertyNull);
             }
 
@@ -48,7 +51,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value", Strings_Core.Require_PropertyNull);
             }
 
@@ -60,7 +64,8 @@ namespace Narvalo
         {
             Property(value);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 throw new ArgumentException(Strings_Core.Require_PropertyEmpty, "value");
             }
 
@@ -70,7 +75,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
@@ -80,7 +86,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
@@ -92,7 +99,8 @@ namespace Narvalo
         {
             NotNull(value, parameterName);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Require_ArgumentEmptyFormat, parameterName),
                     parameterName);
@@ -112,7 +120,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void InRange(int value, int minValue, int maxValue, string parameterName)
         {
-            if (value < minValue || value > maxValue) {
+            if (value < minValue || value > maxValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -133,7 +142,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void InRange(long value, long minValue, long maxValue, string parameterName)
         {
-            if (value < minValue || value > maxValue) {
+            if (value < minValue || value > maxValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -155,7 +165,8 @@ namespace Narvalo
         public static void InRange<T>(T value, Range<T> range, string parameterName)
             where T : struct, IComparable<T>, IEquatable<T>
         {
-            if (!range.Includes(value)) {
+            if (!range.Includes(value))
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -168,7 +179,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
-            if (value < minValue) {
+            if (value < minValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -181,7 +193,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
-            if (value < minValue) {
+            if (value < minValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -195,11 +208,13 @@ namespace Narvalo
         public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
             where T : IComparable<T>
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(minValue) < 0) {
+            if (value.CompareTo(minValue) < 0)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -212,7 +227,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
-            if (value > maxValue) {
+            if (value > maxValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -225,7 +241,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
-            if (value > maxValue) {
+            if (value > maxValue)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
@@ -239,11 +256,13 @@ namespace Narvalo
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : IComparable<T>
         {
-            if (value == null) {
+            if (value == null)
+            {
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(maxValue) > 0) {
+            if (value.CompareTo(maxValue) > 0)
+            {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,

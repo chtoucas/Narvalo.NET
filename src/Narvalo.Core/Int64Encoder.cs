@@ -155,8 +155,8 @@ namespace Narvalo
                     "value");
             }
 
-            long result = 0;
-            long multiplier = 1;
+            long result = 0L;
+            long multiplier = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.IndexOf(s_FlickrBase58Alphabet, value[i]);
@@ -183,8 +183,8 @@ namespace Narvalo
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
 
-            long result = 0;
-            long multiplier = 1;
+            long result = 0L;
+            long multiplier = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--) {
                 int index = Array.BinarySearch(alphabet, value[i]);

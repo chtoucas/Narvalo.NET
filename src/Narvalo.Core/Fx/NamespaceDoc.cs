@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     /// <summary>
     /// The <b>Narvalo.Fx</b> namespace contains classes and interfaces inspired by functional programming.
     /// </summary>
-    class NamespaceDoc { }
+    internal static class NamespaceDoc { }
 
 #endif
 }

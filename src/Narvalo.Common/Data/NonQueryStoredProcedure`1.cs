@@ -87,6 +87,7 @@ namespace Narvalo.Data
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
@@ -95,6 +96,7 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
+
 #endif
     }
 }

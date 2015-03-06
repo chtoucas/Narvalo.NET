@@ -30,7 +30,7 @@ namespace Playground.Edu.Monads
      * 
      *
      */
-    class NamespaceDoc { }
+    internal static class NamespaceDoc { }
 
 #endif
 }

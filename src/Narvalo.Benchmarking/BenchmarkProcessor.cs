@@ -47,12 +47,32 @@ namespace Narvalo.Benchmarking
 
         public Duration TestDuration
         {
-            set { _runner.TestDuration = value; }
+            get
+            {
+                Contract.Ensures(Contract.Result<Duration>().Ticks > 0L);
+                return _runner.TestDuration;
+            }
+
+            set
+            {
+                Require.Predicate(value.Ticks > 0L, "value");
+                _runner.TestDuration = value;
+            }
         }
 
         public Duration WarmUpDuration
         {
-            set { _runner.WarmUpDuration = value; }
+            get
+            {
+                Contract.Ensures(Contract.Result<Duration>().Ticks > 0L);
+                return _runner.WarmUpDuration;
+            }
+
+            set
+            {
+                Require.Predicate(value.Ticks > 0L, "value");
+                _runner.WarmUpDuration = value;
+            }
         }
 
         public IEnumerable<BenchmarkMetric> Process(Assembly assembly)
@@ -97,7 +117,7 @@ namespace Narvalo.Benchmarking
                 }
 
                 // FIXME: Cela ne marche que si la méthode est statique.
-                //var action = (Action)Delegate.CreateDelegate(typeof(Action), method);
+                // var action = (Action)Delegate.CreateDelegate(typeof(Action), method);
                 var action = (Action)method.CreateDelegate(typeof(Action));
 
                 yield return new Benchmark(
@@ -106,5 +126,15 @@ namespace Narvalo.Benchmarking
                    action);
             }
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_runner != null);
+        }
+
+#endif
     }
 }

@@ -3,6 +3,7 @@
 namespace Narvalo.Benchmarking
 {
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
 
     using NodaTime;
 
@@ -12,7 +13,14 @@ namespace Narvalo.Benchmarking
 
         public Duration ElapsedTime
         {
-            get { return Duration.FromTicks(_stopwatch.Elapsed.Ticks); }
+            get
+            {
+                var result = Duration.FromTicks(_stopwatch.Elapsed.Ticks);
+
+                Contract.Assume(result.Ticks > 0L);
+
+                return result;
+            }
         }
 
         public void Reset()
@@ -20,5 +28,15 @@ namespace Narvalo.Benchmarking
             _stopwatch.Reset();
             _stopwatch.Start();
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_stopwatch != null);
+        }
+
+#endif
     }
 }

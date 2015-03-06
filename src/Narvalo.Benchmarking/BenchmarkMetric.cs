@@ -19,14 +19,20 @@ namespace Narvalo.Benchmarking
         private readonly bool _fixedTime;
 
         public BenchmarkMetric(string categoryName, string name, Duration duration, int iterations)
-            : this(categoryName, name, duration, iterations, true) { }
+            : this(categoryName, name, duration, iterations, true)
+        {
+            Contract.Requires(categoryName != null && categoryName.Length > 0);
+            Contract.Requires(name != null && name.Length > 0);
+            Contract.Requires(iterations > 0);
+            Contract.Requires(duration.Ticks > 0L);
+        }
 
         public BenchmarkMetric(string categoryName, string name, Duration duration, int iterations, bool fixedTime)
         {
             Require.NotNullOrEmpty(categoryName, "categoryName");
             Require.NotNullOrEmpty(name, "name");
             Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
-            Require.GreaterThanOrEqualTo(duration, Duration.Epsilon, "duration");
+            Require.Predicate(duration.Ticks > 0L, "duration");
 
             _categoryName = categoryName;
             _name = name;
@@ -45,6 +51,7 @@ namespace Narvalo.Benchmarking
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+                Contract.Ensures(Contract.Result<string>().Length != 0);
 
                 return _categoryName;
             }
@@ -54,7 +61,7 @@ namespace Narvalo.Benchmarking
         {
             get
             {
-                Contract.Ensures(Contract.Result<Duration>() > Duration.Zero);
+                Contract.Ensures(Contract.Result<Duration>().Ticks > 0L);
 
                 return _duration;
             }
@@ -72,12 +79,12 @@ namespace Narvalo.Benchmarking
 
         public bool FixedTime { get { return _fixedTime; } }
 
-
         public string Name
         {
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+                Contract.Ensures(Contract.Result<string>().Length != 0);
 
                 return _name;
             }
@@ -87,6 +94,19 @@ namespace Narvalo.Benchmarking
         {
             get { return (double)Duration.Ticks / Iterations; }
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_categoryName != null && _categoryName.Length != 0);
+            Contract.Invariant(_name != null && _name.Length != 0);
+            Contract.Invariant(_iterations > 0);
+            Contract.Invariant(_duration.Ticks > 0L);
+        }
+
+#endif
     }
 
     // Implements the IFormattable interface.
@@ -96,6 +116,8 @@ namespace Narvalo.Benchmarking
         /// <summary />
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return CallsPerSecond.ToString("#,0", CultureInfo.CurrentCulture)
                 + " call/s; " + Name;
         }
@@ -103,6 +125,8 @@ namespace Narvalo.Benchmarking
         /// <summary />
         public string ToString(string format)
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return ToString(format, CultureInfo.CurrentCulture);
         }
 
@@ -116,7 +140,11 @@ namespace Narvalo.Benchmarking
                 var formatter = formatProvider.GetFormat(GetType()) as ICustomFormatter;
                 if (formatter != null)
                 {
-                    return formatter.Format(format, this, formatProvider);
+                    var result = formatter.Format(format, this, formatProvider);
+
+                    Contract.Assume(result != null, "ICustomFormatter.Format() should not have returned a null string.");
+
+                    return result;
                 }
             }
 
@@ -139,7 +167,7 @@ namespace Narvalo.Benchmarking
                         Duration.Ticks,
                         TicksPerCall);
                 case "G": // Same as ToString().
-                default:
+                default:  // NB: This includes the "null" case.
                     return ToString();
             }
         }
@@ -188,11 +216,11 @@ namespace Narvalo.Benchmarking
             {
                 int hash = 17;
 
-                hash = hash * 23 + _iterations;
-                hash = hash * 23 + _duration.GetHashCode();
-                hash = hash * 23 + _categoryName.GetHashCode();
-                hash = hash * 23 + _name.GetHashCode();
-                hash = hash * 23 + _fixedTime.GetHashCode();
+                hash = (23 * hash) + _iterations;
+                hash = (23 * hash) + _duration.GetHashCode();
+                hash = (23 * hash) + _categoryName.GetHashCode();
+                hash = (23 * hash) + _name.GetHashCode();
+                hash = (23 * hash) + _fixedTime.GetHashCode();
 
                 return hash;
             }
