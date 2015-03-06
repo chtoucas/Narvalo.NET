@@ -20,11 +20,22 @@ namespace Narvalo.IO
             _relativeName = relativeName;
         }
 
-        public DirectoryInfo Directory { get { return _directory; } }
+        public DirectoryInfo Directory
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<DirectoryInfo>() != null);
+                return _directory;
+            }
+        }
 
         public string RelativeName
         {
-            get { return _relativeName; }
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _relativeName;
+            }
         }
 
 #if CONTRACTS_FULL

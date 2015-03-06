@@ -4,6 +4,7 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.Contracts;
     using System.IO;
 
     /// <summary>
@@ -21,10 +22,12 @@ namespace Narvalo.Configuration
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
             Require.NotNullOrEmpty(sectionName, "sectionName");
+            Contract.Ensures(Contract.Result<T>() != null);
 
             T section = ConfigurationManager.GetSection(sectionName) as T;
 
-            if (section == null) {
+            if (section == null)
+            {
                 throw new ConfigurationErrorsException(
                     Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
             }
@@ -39,13 +42,16 @@ namespace Narvalo.Configuration
         {
             Require.NotNullOrEmpty(sectionName, "sectionName");
             Require.NotNullOrEmpty(configFilePath, "configFilePath");
+            Contract.Ensures(Contract.Result<T>() != null);
 
             string configFileName;
 
-            if (Path.IsPathRooted(configFilePath)) {
+            if (Path.IsPathRooted(configFilePath))
+            {
                 configFileName = configFilePath;
             }
-            else {
+            else
+            {
                 string configurationDirectory
                     = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
@@ -60,7 +66,8 @@ namespace Narvalo.Configuration
             var configuration = ConfigurationManager.OpenMappedExeConfiguration(map, userLevel);
             var section = configuration.GetSection(sectionName) as T;
 
-            if (section == null) {
+            if (section == null)
+            {
                 throw new ConfigurationErrorsException(
                     Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
             }

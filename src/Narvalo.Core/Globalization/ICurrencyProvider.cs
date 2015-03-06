@@ -3,7 +3,9 @@
 namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
+    [ContractClass(typeof(ICurrencyProviderContract))]
     public interface ICurrencyProvider
     {
         /// <summary>
@@ -21,5 +23,23 @@ namespace Narvalo.Globalization
         /// <returns>An enumeration that contains the currencies filtered by the <paramref name="types"/> 
         /// parameter.</returns>
         IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
+    }
+
+    [ContractClassFor(typeof(ICurrencyProvider))]
+    internal abstract class ICurrencyProviderContract : ICurrencyProvider
+    {
+        HashSet<string> ICurrencyProvider.CurrencyCodes
+        {
+            get {
+                Contract.Ensures(Contract.Result<HashSet<string>>() != null);
+
+                return default(HashSet<string>);
+            }
+        }
+
+        IEnumerable<CurrencyInfo> ICurrencyProvider.GetCurrencies(CurrencyTypes types)
+        {
+            return default(IEnumerable<CurrencyInfo>);
+        }
     }
 }

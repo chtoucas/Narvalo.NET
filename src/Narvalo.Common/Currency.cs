@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo.Globalization;
@@ -46,7 +47,14 @@ namespace Narvalo
         /// Gets the alphabetic code of the currency.
         /// </summary>
         /// <value>The alphabetic code of the currency.</value>
-        public string Code { get { return _code; } }
+        public string Code
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _code;
+            }
+        }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -58,7 +66,10 @@ namespace Narvalo
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            return s_Cache.GetOrAdd(code, GetCurrency);
+            Contract.Requires(code != null);
+            Contract.Ensures(Contract.Result<Currency>() != null);
+
+            return s_Cache.GetOrAdd(code, GetCurrency).AssumeNotNull();
         }
 
         /// <summary>
@@ -72,8 +83,9 @@ namespace Narvalo
         public static Currency OfCulture(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, "cultureInfo");
+            Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return Of(new RegionInfo(cultureInfo.LCID).ISOCurrencySymbol);
+            return Of(new RegionInfo(cultureInfo.LCID).ISOCurrencySymbol.AssumeNotNull());
         }
 
         /// <summary>
@@ -84,6 +96,8 @@ namespace Narvalo
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency OfCurrentCulture()
         {
+            Contract.Ensures(Contract.Result<Currency>() != null);
+
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
@@ -93,6 +107,7 @@ namespace Narvalo
         /// <returns>A string containing the code of the currency.</returns>
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
             return _code;
         }
 
@@ -108,7 +123,11 @@ namespace Narvalo
         /// <returns>The currency for the specified code.</returns>
         internal static Currency GetCurrency(string code)
         {
-            if (!CurrencyProvider.Current.CurrencyCodes.Contains(code)) {
+            Contract.Requires(code != null);
+            Contract.Ensures(Contract.Result<Currency>() != null);
+
+            if (!CurrencyProvider.Current.CurrencyCodes.Contains(code))
+            {
                 throw new CurrencyNotFoundException("Unknown currency: " + code + ".");
             }
 
@@ -131,77 +150,161 @@ namespace Narvalo
         /// </summary>
         /// <remarks>This is the currency used by the invariant culture.</remarks>
         /// <value>The "Special Drawing Right" currency.</value>
-        public static Currency Invariant { get { return Of("XDR"); } }
+        public static Currency Invariant
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XDR");
+            }
+        }
 
         /// <summary>
         /// Gets the pseudo-currency for transactions where no currency is involved.
         /// </summary>
         /// <value>The pseudo-currency for transactions where no currency is involved.</value>
-        public static Currency None { get { return Of("XXX"); } }
+        public static Currency None
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XXX");
+            }
+        }
 
         /// <summary>
         /// Gets the currency specifically reserved for testing purposes.
         /// </summary>
         /// <value>The currency specifically reserved for testing purposes.</value>
-        public static Currency Test { get { return Of("XTS"); } }
+        public static Currency Test
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XTS");
+            }
+        }
 
         /// <summary>
         /// Gets the (British) Pound Sterling currency.
         /// </summary>
         /// <value>The (British) Pound Sterling currency.</value>
-        public static Currency Pound { get { return s_Pound; } }
+        public static Currency Pound
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Pound;
+            }
+        }
 
         /// <summary>
         /// Gets the Euro currency.
         /// </summary>
         /// <value>The Euro currency.</value>
-        public static Currency Euro { get { return s_Euro; } }
+        public static Currency Euro
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Euro;
+            }
+        }
 
         /// <summary>
         /// Gets the United States Dollar currency.
         /// </summary>
         /// <value>The United States Dollar currency.</value>
-        public static Currency Dollar { get { return s_Dollar; } }
+        public static Currency Dollar
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Dollar;
+            }
+        }
 
         /// <summary>
         /// Gets the Swiss Franc currency.
         /// </summary>
         /// <value>The Swiss Franc currency.</value>
-        public static Currency SwissFranc { get { return s_SwissFranc; } }
+        public static Currency SwissFranc
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_SwissFranc;
+            }
+        }
 
         /// <summary>
         /// Gets the Japanese Yen currency.
         /// </summary>
         /// <value>The Japanese Yen currency.</value>
-        public static Currency Yen { get { return s_Yen; } }
+        public static Currency Yen
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Yen;
+            }
+        }
 
         /// <summary>
         /// Gets the pseudo-currency for gold.
         /// </summary>
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
         /// <value>The pseudo-currency for gold.</value>
-        public static Currency Gold { get { return Of("XAU"); } }
+        public static Currency Gold
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XAU");
+            }
+        }
 
         /// <summary>
         /// Gets the pseudo-currency for palladium.
         /// </summary>
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
         /// <value>The pseudo-currency for palladium.</value>
-        public static Currency Palladium { get { return Of("XPD"); } }
+        public static Currency Palladium
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XPD");
+            }
+        }
 
         /// <summary>
         /// Gets the pseudo-currency for platinum.
         /// </summary>
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
         /// <value>The pseudo-currency for platinum.</value>
-        public static Currency Platinum { get { return Of("XPT"); } }
+        public static Currency Platinum
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XPT");
+            }
+        }
 
         /// <summary>
         /// Gets the pseudo-currency for silver.
         /// </summary>
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
         /// <value>The pseudo-currency for silver.</value>
-        public static Currency Silver { get { return Of("XAG"); } }
+        public static Currency Silver
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return Of("XAG");
+            }
+        }
     }
 
     // Implements the IEquatable<Currency> interface.
@@ -210,7 +313,8 @@ namespace Narvalo
         /// <summary />
         public static bool operator ==(Currency left, Currency right)
         {
-            if (Object.ReferenceEquals(left, null)) {
+            if (Object.ReferenceEquals(left, null))
+            {
                 // If left is null, returns true if right is null too, false otherwise.
                 return Object.ReferenceEquals(right, null);
             }
@@ -227,7 +331,8 @@ namespace Narvalo
         /// <summary />
         public bool Equals(Currency other)
         {
-            if (Object.ReferenceEquals(other, null)) {
+            if (Object.ReferenceEquals(other, null))
+            {
                 // Remember, "this" is never null in C#.
                 return false;
             }
@@ -238,17 +343,20 @@ namespace Narvalo
         /// <summary />
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(obj, null)) {
+            if (Object.ReferenceEquals(obj, null))
+            {
                 // Remember, "this" is never null in C#.
                 return false;
             }
 
-            if (Object.ReferenceEquals(this, obj)) {
+            if (Object.ReferenceEquals(this, obj))
+            {
                 // "obj" and "this" are exactly the same object.
                 return true;
             }
 
-            if (this.GetType() != obj.GetType()) {
+            if (this.GetType() != obj.GetType())
+            {
                 // "obj" and "this" are not of the same type.
                 return false;
             }
@@ -261,5 +369,15 @@ namespace Narvalo
         {
             return _code.GetHashCode();
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_code != null);
+        }
+
+#endif
     }
 }

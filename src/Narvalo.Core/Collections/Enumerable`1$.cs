@@ -45,6 +45,7 @@ namespace Narvalo.Collections
         public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<ICollection<TSource>>() != null);
 
             var result = new Collection<TSource>();
 

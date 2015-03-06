@@ -3,12 +3,14 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public static class UriExtensions
     {
         public static string ToProtocolLessString(this Uri @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (!@this.IsAbsoluteUri) {
                 return @this.ToString();

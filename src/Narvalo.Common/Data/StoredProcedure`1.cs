@@ -15,7 +15,7 @@ namespace Narvalo.Data
         private readonly string _connectionString;
         private readonly string _name;
 
-        private CommandBehavior _commandBehavior 
+        private CommandBehavior _commandBehavior
             = CommandBehavior.CloseConnection | CommandBehavior.SingleResult;
 
         protected StoredProcedure(string connectionString, string name)
@@ -33,21 +33,38 @@ namespace Narvalo.Data
             set { _commandBehavior = value; }
         }
 
-        protected string ConnectionString { get { return _connectionString; } }
+        protected string ConnectionString
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _connectionString;
+            }
+        }
 
-        protected string Name { get { return _name; } }
+        protected string Name
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _name;
+            }
+        }
 
         public TResult Execute()
         {
             TResult result;
 
-            using (var connection = CreateConnection_()) {
-                using (var command = CreateCommand_(connection)) {
+            using (var connection = CreateConnection_())
+            {
+                using (var command = CreateCommand_(connection))
+                {
                     PrepareParameters(command.Parameters.AssumeNotNull());
 
                     connection.Open();
 
-                    using (var reader = ExecuteCommand_(command)) {
+                    using (var reader = ExecuteCommand_(command))
+                    {
                         result = Execute(reader);
                     }
                 }
@@ -70,15 +87,18 @@ namespace Narvalo.Data
             SqlCommand tmpCmd = null;
             SqlCommand cmd = null;
 
-            try {
+            try
+            {
                 tmpCmd = new SqlCommand(Name, connection);
                 tmpCmd.CommandType = CommandType.StoredProcedure;
 
                 cmd = tmpCmd;
                 tmpCmd = null;
             }
-            finally {
-                if (tmpCmd != null) {
+            finally
+            {
+                if (tmpCmd != null)
+                {
                     tmpCmd.Dispose();
                 }
             }

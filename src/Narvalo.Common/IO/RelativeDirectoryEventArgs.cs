@@ -18,7 +18,11 @@ namespace Narvalo.IO
 
         public RelativeDirectory RelativeDirectory
         {
-            get { return _relativeDirectory; }
+            get
+            {
+                Contract.Ensures(Contract.Result<RelativeDirectory>() != null);
+                return _relativeDirectory;
+            }
         }
 
 #if CONTRACTS_FULL

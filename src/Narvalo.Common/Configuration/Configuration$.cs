@@ -3,6 +3,7 @@
 namespace Narvalo.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Configuration.Configuration"/>.
@@ -13,10 +14,12 @@ namespace Narvalo.Configuration
         {
             Require.Object(@this);
             Require.NotNullOrEmpty(sectionName, "sectionName");
+            Contract.Ensures(Contract.Result<T>() != null);
 
             T section = @this.GetSection(sectionName) as T;
 
-            if (section == null) {
+            if (section == null)
+            {
                 throw new ConfigurationErrorsException(
                     Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
             }

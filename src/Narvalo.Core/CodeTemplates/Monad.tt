@@ -1126,6 +1126,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(false); #>
             Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -1142,6 +1143,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ NotNull_("funM", false); #>
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

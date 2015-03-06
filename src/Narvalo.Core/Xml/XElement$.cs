@@ -25,6 +25,7 @@ namespace Narvalo.Xml
         public static Maybe<XAttribute> AttributeOrNone(this XElement @this, XName name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Create(@this.Attribute(name));
         }
@@ -33,6 +34,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, "exception");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
             return AttributeOrThrow(@this, name, () => exception);
         }
@@ -41,9 +43,11 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
-            var attr = @this.Attribute(name);
-            if (attr == null) {
+            XAttribute attr = @this.Attribute(name);
+            if (attr == null)
+            {
                 throw exceptionFactory.Invoke();
             }
 
@@ -53,6 +57,7 @@ namespace Narvalo.Xml
         public static Maybe<XElement> ElementOrNone(this XElement @this, XName name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
             return Maybe.Create(@this.Element(name));
         }
@@ -61,6 +66,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, "exception");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<XElement>() != null);
 
             return ElementOrThrow(@this, name, () => exception);
         }
@@ -69,9 +75,11 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<XElement>() != null);
 
-            var child = @this.Element(name);
-            if (child == null) {
+            XElement child = @this.Element(name);
+            if (child == null)
+            {
                 throw exceptionFactory.Invoke();
             }
 
@@ -82,8 +90,9 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
 
-            var nextElement = @this.NextNode;
-            while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
+            XNode nextElement = @this.NextNode;
+            while (nextElement != null && nextElement.NodeType != XmlNodeType.Element)
+            {
                 nextElement = nextElement.NextNode;
             }
 
@@ -93,6 +102,7 @@ namespace Narvalo.Xml
         public static Maybe<XElement> NextElementOrNone(this XElement @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
             return Maybe.Create(NextElement(@this));
         }
@@ -101,6 +111,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, "exception");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<XElement>() != null);
 
             return NextElementOrThrow(@this, () => exception);
         }
@@ -109,17 +120,22 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<XElement>() != null);
 
-            var nextElement = @this.NextNode;
-            while (nextElement != null && nextElement.NodeType != XmlNodeType.Element) {
+            XNode nextElement = @this.NextNode;
+            while (nextElement != null && nextElement.NodeType != XmlNodeType.Element)
+            {
                 nextElement = nextElement.NextNode;
             }
 
-            if (nextElement == null) {
+            var result = nextElement as XElement;
+
+            if (result == null)
+            {
                 throw exceptionFactory.Invoke();
             }
 
-            return nextElement as XElement;
+            return result;
         }
     }
 }

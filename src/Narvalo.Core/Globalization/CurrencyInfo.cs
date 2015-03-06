@@ -36,9 +36,10 @@ namespace Narvalo.Globalization
             Enforce.NotNull(code, "code");
 
             // For PCL classes, we must convert the string to an array before being able to use Linq operators on it.
-            Contract.Requires(
-                code.Length == 3 && code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
-                "The code MUST be composed of exactly 3 letters, all CAPS and ASCII.");
+            Contract.Requires(code.Length == 3, "The code MUST be composed of exactly 3 letters.");
+            //Contract.Requires(
+            //    code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
+            //    "The code MUST be all CAPS and ASCII.");
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");
@@ -60,7 +61,14 @@ namespace Narvalo.Globalization
         /// For instance: USD = US (United States) + D (Dollar).
         /// </remarks>
         /// <value>The alphabetic code of the currency.</value>
-        public string Code { get { return _code; } }
+        public string Code
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _code;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the full name of the currency in English.
@@ -180,5 +188,17 @@ namespace Narvalo.Globalization
         {
             return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_code != null);
+            Contract.Invariant(_code.Length == 3);
+            Contract.Invariant(_numericCode >= 0 && _numericCode < 1000);
+        }
+
+#endif
     }
 }

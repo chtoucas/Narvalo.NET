@@ -24,6 +24,7 @@ namespace Narvalo.Xml
         public static Maybe<XAttribute> NextAttributeOrNone(this XAttribute @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Create(@this.NextAttribute);
         }
@@ -32,6 +33,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, "exception");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
             return NextAttributeOrThrow(@this, () => exception);
         }
@@ -40,19 +42,21 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
-            var attr = @this.NextAttribute;
+            XAttribute attr = @this.NextAttribute;
             if (attr == null)
             {
                 throw exceptionFactory.Invoke();
             }
 
-            return attr as XAttribute;
+            return attr;
         }
 
         public static Maybe<XAttribute> PreviousAttributeOrNone(this XAttribute @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Create(@this.PreviousAttribute);
         }
@@ -61,6 +65,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, "exception");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);
         }
@@ -69,8 +74,9 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<XAttribute>() != null);
 
-            var attr = @this.PreviousAttribute;
+            XAttribute attr = @this.PreviousAttribute;
             if (attr == null)
             {
                 throw exceptionFactory.Invoke();

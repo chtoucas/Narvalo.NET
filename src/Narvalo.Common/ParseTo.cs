@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Net;
 
@@ -209,7 +210,7 @@ namespace Narvalo
             var type = typeof(TEnum);
             if (!type.IsEnum) {
                 throw new InvalidOperationException(
-                    Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName ?? "Unknown type name"));
+                    Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName));
             }
 
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
@@ -241,6 +242,8 @@ namespace Narvalo
 
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
+            Contract.Ensures(Contract.Result<Maybe<Uri>>() != null);
+
             // REVIEW: Uri.TryCreate accepts empty strings.
             if (String.IsNullOrWhiteSpace(value)) {
                 return Maybe<Uri>.None;
@@ -253,6 +256,8 @@ namespace Narvalo
 
         public static Maybe<IPAddress> IPAddress(string value)
         {
+            Contract.Ensures(Contract.Result<Maybe<IPAddress>>() != null);
+
             TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
 
             return parser.MayInvoke(value);

@@ -23,9 +23,9 @@
     <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
     <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
     <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
-    <CodeContractsRedundantTests>False</CodeContractsRedundantTests>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
     <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
-    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
     <CodeContractsInferRequires>True</CodeContractsInferRequires>
     <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
     <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
@@ -72,13 +72,7 @@
     <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\StoredProcedureContract`1.cs" />
-    <Compile Include="Globalization\CurrencyInfo%24.cs" />
-    <Compile Include="Globalization\SnvCurrencyLegacyXmlReader.cs" />
-    <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Globalization\SnvCurrencyXmlReader.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>
     </Compile>

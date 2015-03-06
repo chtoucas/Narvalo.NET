@@ -14,6 +14,7 @@ namespace Narvalo.IO
         {
             Contract.Requires(rootPath != null);
             Contract.Requires(path != null);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return MakeRelativePathInternal(new Uri(AppendDirectorySeparator(rootPath)), path);
         }
@@ -23,6 +24,7 @@ namespace Narvalo.IO
         {
             Require.NotNull(rootUri, "rootUri");
             Contract.Requires(path != null);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             var relativeUri = rootUri.MakeRelativeUri(new Uri(path));
 

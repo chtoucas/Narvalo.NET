@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     public static class Sequence
     {
@@ -14,6 +15,8 @@ namespace Narvalo.Fx
             TSource seed,
             Func<TSource, TResult> resultSelector)
         {
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+
             return Create(iter, seed, resultSelector, _ => true);
         }
 
@@ -23,6 +26,8 @@ namespace Narvalo.Fx
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+
             TSource next = seed;
 
             while (predicate.Invoke(next)) {

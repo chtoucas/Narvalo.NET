@@ -38,7 +38,8 @@ namespace Narvalo.Fx
                 // REVIEW: Do I really need this since it is part of the invariant.
                 Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-                if (_isSuccess) {
+                if (_isSuccess)
+                {
                     throw new InvalidOperationException(Strings_Core.Output_SuccessfulHasNoException);
                 }
 
@@ -50,7 +51,8 @@ namespace Narvalo.Fx
         {
             get
             {
-                if (!_isSuccess) {
+                if (!_isSuccess)
+                {
                     throw new InvalidOperationException(Strings_Core.Output_UnsuccessfulHasNoValue);
                 }
 
@@ -61,6 +63,7 @@ namespace Narvalo.Fx
         public Output<T> OnSuccess(Action<T> action)
         {
             Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return Run(action);
         }
@@ -68,8 +71,10 @@ namespace Narvalo.Fx
         public Output<T> OnFailure(Action<ExceptionDispatchInfo> action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            if (IsFailure) {
+            if (IsFailure)
+            {
                 action.Invoke(ExceptionInfo);
             }
 
@@ -104,7 +109,8 @@ namespace Narvalo.Fx
 
         public T ValueOrThrow()
         {
-            if (!_isSuccess) {
+            if (!_isSuccess)
+            {
                 _exceptionInfo.Throw();
             }
 
@@ -171,8 +177,9 @@ namespace Narvalo.Fx
         public Output<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
-            // FIXME: Incorrect? We should catch exceptions?
+            // FIXME: Incorrect? Should we catch exceptions?
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
         }
 
@@ -188,8 +195,10 @@ namespace Narvalo.Fx
         public Output<T> Run(Action<T> action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            if (IsSuccess) {
+            if (IsSuccess)
+            {
                 // FIXME: Incorrect? We should catch exceptions?
                 action.Invoke(Value);
             }

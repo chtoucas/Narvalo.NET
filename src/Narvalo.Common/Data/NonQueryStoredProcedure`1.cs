@@ -25,13 +25,28 @@ namespace Narvalo.Data
             _name = name;
         }
 
-        protected string ConnectionString { get { return _connectionString; } }
+        protected string ConnectionString
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _connectionString;
+            }
+        }
 
-        protected string Name { get { return _name; } }
+        protected string Name
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+                return _name;
+            }
+        }
 
         public int Execute(TParameters values)
         {
-            if (values == null) {
+            if (values == null)
+            {
                 throw new ArgumentException(Strings_Common.NonQueryStoredProcedure_ValuesIsNull, "values");
             }
 
@@ -39,8 +54,10 @@ namespace Narvalo.Data
 
             int result;
 
-            using (var connection = CreateConnection_()) {
-                using (var command = CreateCommand_(connection)) {
+            using (var connection = CreateConnection_())
+            {
+                using (var command = CreateCommand_(connection))
+                {
                     AddParameters(command.Parameters.AssumeNotNull(), values);
 
                     connection.Open();
@@ -63,15 +80,18 @@ namespace Narvalo.Data
             SqlCommand tmpCmd = null;
             SqlCommand cmd = null;
 
-            try {
+            try
+            {
                 tmpCmd = new SqlCommand(Name, connection);
                 tmpCmd.CommandType = CommandType.StoredProcedure;
 
                 cmd = tmpCmd;
                 tmpCmd = null;
             }
-            finally {
-                if (tmpCmd != null) {
+            finally
+            {
+                if (tmpCmd != null)
+                {
                     tmpCmd.Dispose();
                 }
             }

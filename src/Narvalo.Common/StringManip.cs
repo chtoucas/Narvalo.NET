@@ -20,6 +20,7 @@ namespace Narvalo
         public static string Reverse(string value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -36,6 +37,7 @@ namespace Narvalo
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -49,6 +51,7 @@ namespace Narvalo
             Contract.Requires(value != null);
             Contract.Requires(startIndex >= 0);
             Contract.Requires(length >= 1);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return Substring(value, startIndex, length, "...");
         }
@@ -58,6 +61,7 @@ namespace Narvalo
             Require.NotNull(value, "value");
             Require.GreaterThanOrEqualTo(startIndex, 0, "startIndex");
             Require.GreaterThanOrEqualTo(length, 1, "length");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length <= length) {
                 // The input string is too short.
@@ -78,6 +82,7 @@ namespace Narvalo
         {
             Contract.Requires(value != null);
             Contract.Requires(length >= 1);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return Truncate(value, length, postfix: "...");
         }
@@ -86,6 +91,7 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
             Require.GreaterThanOrEqualTo(length, 1, "length");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length <= length) {
                 return value;
@@ -98,6 +104,7 @@ namespace Narvalo
         public static string ToTitleCase(string value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length == 0) {
                 return value;

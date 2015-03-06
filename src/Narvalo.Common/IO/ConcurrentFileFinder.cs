@@ -34,6 +34,7 @@ namespace Narvalo.IO
         {
             Require.NotNull(startDirectory, "startDirectory");
             Require.NotNullOrEmpty(searchPattern, "searchPattern");
+            Contract.Ensures(Contract.Result<IEnumerable<RelativeFile>>() != null);
 
             var rootPath = PathUtility.AppendDirectorySeparator(startDirectory.FullName);
             var rootUri = new Uri(rootPath);

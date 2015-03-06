@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     public struct Unit : IEquatable<Unit>
     {
@@ -48,6 +49,8 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return "()";
         }
     }

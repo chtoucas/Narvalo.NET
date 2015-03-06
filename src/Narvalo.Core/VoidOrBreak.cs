@@ -26,7 +26,14 @@ namespace Narvalo
             _reason = reason;
         }
 
-        public static VoidOrBreak Success { get { return s_Success; } }
+        public static VoidOrBreak Success
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
+                return s_Success;
+            }
+        }
 
         public bool IsBreak { get { return _isBreak; } }
 
@@ -34,7 +41,8 @@ namespace Narvalo
         {
             get
             {
-                if (!IsBreak) {
+                if (!IsBreak)
+                {
                     throw new InvalidOperationException(Strings_Core.VoidOrError_NotWarning);
                 }
 
@@ -45,6 +53,7 @@ namespace Narvalo
         public static VoidOrBreak Abort(string reason)
         {
             Require.NotNullOrEmpty(reason, "reason");
+            Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
 
             return new VoidOrBreak(reason);
         }

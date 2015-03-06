@@ -637,6 +637,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Maybe<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -650,6 +651,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(funM, "funM");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Maybe<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

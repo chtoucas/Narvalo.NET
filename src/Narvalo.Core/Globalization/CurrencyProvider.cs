@@ -3,12 +3,13 @@
 namespace Narvalo.Globalization
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public sealed class CurrencyProvider
     {
         private static CurrencyProvider s_Instance = new CurrencyProvider();
 
-        private Func<ICurrencyProvider> _factoryThunk = () => null;
+        private Func<ICurrencyProvider> _factoryThunk; // = () => null;
 
         private ICurrencyProvider _current;
 
@@ -21,16 +22,29 @@ namespace Narvalo.Globalization
 
         public static ICurrencyProvider Current
         {
-            get { return s_Instance.InnerCurrent; }
+            get
+            {
+                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+                return s_Instance.InnerCurrent;
+            }
         }
 
         internal ICurrencyProvider InnerCurrent
         {
-            get { return _current ?? (_current = _factoryThunk()); }
+            get
+            {
+                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+
+                // NB: From the way _factoryThunk is built, it should be clear
+                // that the result of its invocation is never null.
+                return _current ?? (_current = _factoryThunk().AssumeNotNull());
+            }
         }
 
         public static void SetProvider(ICurrencyProvider provider)
         {
+            Contract.Requires(provider != null);
+
             s_Instance.InnerSetProvider(provider);
         }
 
@@ -40,5 +54,15 @@ namespace Narvalo.Globalization
 
             _factoryThunk = () => provider;
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_factoryThunk != null);
+        }
+
+#endif
     }
 }

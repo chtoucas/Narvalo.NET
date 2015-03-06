@@ -85,8 +85,8 @@ namespace Narvalo
 
             string result = String.Empty;
 
-            // TODO: Optimize.
-            while (value > 0L) {
+            while (value > 0L)
+            {
                 long r = value % FLICKR_BASE58_ALPHABET_LENGTH;
 
                 Contract.Assume(r < s_FlickrBase58Alphabet.Length);
@@ -102,12 +102,14 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > BASE25_MAX_LENGTH) {
+            if (value.Length > BASE25_MAX_LENGTH)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE25_MAX_LENGTH),
                     "value");
             }
 
+            Contract.Ensures(Contract.Result<long>() >= 0L);
             Contract.EndContractBlock();
 
             return Decode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
@@ -117,12 +119,14 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > BASE34_MAX_LENGTH) {
+            if (value.Length > BASE34_MAX_LENGTH)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE34_MAX_LENGTH),
                     "value");
             }
 
+            Contract.Ensures(Contract.Result<long>() >= 0L);
             Contract.EndContractBlock();
 
             return Decode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
@@ -132,12 +136,14 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
-            if (value.Length > BASE58_MAX_LENGTH) {
+            if (value.Length > BASE58_MAX_LENGTH)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE58_MAX_LENGTH),
                     "value");
             }
 
+            Contract.Ensures(Contract.Result<long>() >= 0L);
             Contract.EndContractBlock();
 
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
@@ -146,10 +152,11 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
-
+            Contract.Ensures(Contract.Result<long>() >= 0L);
             Contract.EndContractBlock();
 
-            if (value.Length > FLICKR_BASE58_MAX_LENGTH) {
+            if (value.Length > FLICKR_BASE58_MAX_LENGTH)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FLICKR_BASE58_MAX_LENGTH),
                     "value");
@@ -158,17 +165,23 @@ namespace Narvalo
             long result = 0L;
             long multiplier = 1L;
 
-            for (int i = value.Length - 1; i >= 0; i--) {
+            for (int i = value.Length - 1; i >= 0; i--)
+            {
                 int index = Array.IndexOf(s_FlickrBase58Alphabet, value[i]);
-                if (index == -1) {
+                if (index < 0)
+                {
                     throw new ArgumentException(
                         Format.CurrentCulture(Strings_Core.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
 
-                checked {
+                Contract.Assert(index >= 0);
+
+                checked
+                {
                     result += multiplier * index;
-                    if (i != 0) {
+                    if (i != 0)
+                    {
                         multiplier *= FLICKR_BASE58_ALPHABET_LENGTH;
                     }
                 }
@@ -182,21 +195,28 @@ namespace Narvalo
             Require.NotNull(value, "value");
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
+            Contract.Ensures(Contract.Result<long>() >= 0L);
 
             long result = 0L;
             long multiplier = 1L;
 
-            for (int i = value.Length - 1; i >= 0; i--) {
+            for (int i = value.Length - 1; i >= 0; i--)
+            {
                 int index = Array.BinarySearch(alphabet, value[i]);
-                if (index == -1) {
+                if (index < 0)
+                {
                     throw new ArgumentException(
                         Format.CurrentCulture(Strings_Core.Int64Encoder_IllegalCharacterFormat, value[i], i),
                         "value");
                 }
 
-                checked {
+                Contract.Assert(index >= 0);
+
+                checked
+                {
                     result += multiplier * index;
-                    if (i != 0) {
+                    if (i != 0)
+                    {
                         multiplier *= alphabetLength;
                     }
                 }
@@ -214,8 +234,8 @@ namespace Narvalo
 
             string result = String.Empty;
 
-            // TODO: Optimize.
-            while (value > 0L) {
+            while (value > 0L)
+            {
                 long r = value % alphabetLength;
 
                 Contract.Assume(r < alphabet.Length);
