@@ -32,7 +32,7 @@ namespace Narvalo.Benchmarking
             Require.NotNullOrEmpty(categoryName, "categoryName");
             Require.NotNullOrEmpty(name, "name");
             Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
-            Require.Predicate(duration.Ticks > 0L, "duration");
+            Require.Condition(duration.Ticks > 0L, "duration");
 
             _categoryName = categoryName;
             _name = name;

@@ -109,6 +109,19 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
+        [ContractArgumentValidator]
+        public static void Condition(bool predicate, string parameterName)
+        {
+            if (!predicate)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(Strings_Core.Require_Precondition, parameterName),
+                    parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
         /// <summary>
         /// Check that an argument is in a given range of integers.
         /// </summary>

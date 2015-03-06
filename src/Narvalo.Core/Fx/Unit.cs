@@ -25,6 +25,10 @@ namespace Narvalo.Fx
             Justification = "This method always returns the same result.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
             Justification = "This method always returns the same result.")]
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
+            Justification = "[CodeContracts] Useless postcondition.")]
+#endif
         public static bool operator !=(Unit left, Unit right)
         {
             return false;
@@ -42,6 +46,10 @@ namespace Narvalo.Fx
         }
 
         /// <summary />
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
+            Justification = "[CodeContracts] Useless postcondition.")]
+#endif
         public override int GetHashCode()
         {
             return 0;

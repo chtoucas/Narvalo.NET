@@ -4,10 +4,15 @@ namespace Narvalo
 {
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+#if !CONTRACTS_FULL
+    using System.Runtime.CompilerServices;
+#endif
 
     [DebuggerStepThrough]
     public static class Assume
     {
+#if CONTRACTS_FULL
+
         /// <summary>
         /// When dealing with external dependencies, CCCheck can not infer
         /// that the result of a method is not null. When we know for sure that
@@ -27,6 +32,17 @@ namespace Narvalo
             return @this;
         }
 
+#else
+
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T AssumeNotNull<T>(this T @this) where T : class
+        {
+            return @this;
+        }
+
+#endif
+
         /// <summary>
         /// According to its documentation, CCCheck only assumes and asserts
         /// object invariants for the "this" object. This method allows
@@ -34,6 +50,7 @@ namespace Narvalo
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
+        [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
         public static void Invariant<T>(T obj) where T : class { }
     }

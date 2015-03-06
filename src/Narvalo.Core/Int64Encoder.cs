@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class Int64Encoder
@@ -78,6 +79,10 @@ namespace Narvalo
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-29-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public static string ToFlickrBase58String(long value)
         {
             Require.GreaterThanOrEqualTo(value, 0L, "value");

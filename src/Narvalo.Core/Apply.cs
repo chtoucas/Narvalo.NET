@@ -16,12 +16,14 @@ namespace Narvalo
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
-            try {
+            try
+            {
                 action.Invoke();
 
                 return VoidOrError.Success;
             }
-            catch (TException ex) {
+            catch (TException ex)
+            {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
                 return VoidOrError.Failure(edi);
@@ -30,6 +32,10 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public static VoidOrError Catch<T1Exception, T2Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -39,7 +45,8 @@ namespace Narvalo
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 action.Invoke();
 
                 return VoidOrError.Success;
@@ -52,6 +59,10 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -62,7 +73,8 @@ namespace Narvalo
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 action.Invoke();
 
                 return VoidOrError.Success;
@@ -76,6 +88,10 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -87,7 +103,8 @@ namespace Narvalo
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 action.Invoke();
 
                 return VoidOrError.Success;

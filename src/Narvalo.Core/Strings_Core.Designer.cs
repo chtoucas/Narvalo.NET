@@ -188,6 +188,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; does not satisfy the precondition..
+        /// </summary>
+        internal static string Require_Precondition {
+            get {
+                return ResourceManager.GetString("Require_Precondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The property value is empty..
         /// </summary>
         internal static string Require_PropertyEmpty {

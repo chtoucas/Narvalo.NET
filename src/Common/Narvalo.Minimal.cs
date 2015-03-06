@@ -128,7 +128,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Predicate(bool predicate, string parameterName)
+        public static void Condition(bool predicate, string parameterName)
         {
             if (!predicate)
             {

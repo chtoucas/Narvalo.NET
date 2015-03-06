@@ -8,10 +8,8 @@ namespace Narvalo
 
     public static class Range
     {
-#if !NO_HACK
-        [SuppressMessage("Microsoft.Contracts", "Requires",
-            Justification = "CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
-#endif
+        //[SuppressMessage("Microsoft.Contracts", "Requires",
+        //    Justification = "[CodeContracts] CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
         public static Range<T> Create<T>(T lowerEnd, T upperEnd)
             where T : struct, IEquatable<T>, IComparable<T>
         {
@@ -20,10 +18,8 @@ namespace Narvalo
             return new Range<T>(lowerEnd, upperEnd);
         }
 
-#if !NO_HACK
-        [SuppressMessage("Microsoft.Contracts", "Requires",
-            Justification = "CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
-#endif
+        //[SuppressMessage("Microsoft.Contracts", "Requires",
+        //    Justification = "[CodeContracts] CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
         public static Range<DateTime> OneDay(int year, int month, int day)
         {
             Contract.Requires(year >= 1 && year <= 9999);

@@ -37,9 +37,9 @@ namespace Narvalo.Globalization
 
             // For PCL classes, we must convert the string to an array before being able to use Linq operators on it.
             Contract.Requires(code.Length == 3, "The code MUST be composed of exactly 3 letters.");
-            //Contract.Requires(
-            //    code.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
-            //    "The code MUST be all CAPS and ASCII.");
+            Contract.Requires(
+                Contract.ForAll(code.ToCharArray(), c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
+                "The code MUST be all CAPS and ASCII.");
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");

@@ -122,17 +122,19 @@ namespace Narvalo.Fx
          */
 
         /// <summary>
-        /// Returns true if the object does not have an underlying value, false otherwise.
+        /// Gets a value indicating whether the object does not have an underlying value.
         /// </summary>
+        /// <value><c>true</c> if the object does not have an underlying value; otherwise <c>false</c>.</value>
         internal bool IsNone { get { return !_isSome; } }
 
         /// <summary>
-        /// Returns true if the object contains a value, false otherwise.
+        /// Gets a value indicating whether the object does contain an underlying value.
         /// </summary>
+        /// <value><c>true</c> if the object does contain an underlying value; otherwise <c>false</c>.</value>
         internal bool IsSome { get { return _isSome; } }
 
         /// <summary>
-        /// Returns the underlying value.
+        /// Gets the underlying value.
         /// </summary>
         /// <exception cref="InvalidOperationException">
         /// The object does not contain any value.
@@ -141,9 +143,20 @@ namespace Narvalo.Fx
         {
             get
             {
-                if (!_isSome) {
+                Contract.Ensures(Contract.Result<T>() != null);
+
+                if (!_isSome)
+                {
                     throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
                 }
+
+#if DEBUG
+                // FIXME
+                if (_value == null)
+                {
+                    throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
+                }
+#endif
 
                 return _value;
             }
@@ -165,8 +178,10 @@ namespace Narvalo.Fx
         public static explicit operator T(Maybe<T> value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<T>() != null);
 
-            if (value.IsNone) {
+            if (value.IsNone)
+            {
                 throw new InvalidCastException(Strings_Core.Maybe_CannotCastNoneToValue);
             }
 
@@ -177,6 +192,10 @@ namespace Narvalo.Fx
          * ### Public methods ###
          */
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<T> OnSome(Action<T> action)
         {
             Contract.Requires(action != null);
@@ -216,6 +235,7 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Exception exception)
         {
             Require.NotNull(exception, "exception");
+            Contract.Ensures(Contract.Result<T>() != null);
 
             return ValueOrThrow(() => exception);
         }
@@ -223,12 +243,21 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
+            Contract.Ensures(Contract.Result<T>() != null);
 
-            if (!_isSome) {
+            if (IsNone)
+            {
                 throw exceptionFactory.Invoke();
             }
 
-            return _value;
+            return Value;
+
+            //if (!_isSome)
+            //{
+            //    throw exceptionFactory.Invoke();
+            //}
+
+            //return _value;
         }
 
         /// <summary />
@@ -237,13 +266,15 @@ namespace Narvalo.Fx
             return _isSome ? _value.ToString() : "{None}";
         }
 
-        ////#if CONTRACTS_FULL
-        ////        [ContractInvariantMethod]
-        ////        void ObjectInvariants()
-        ////        {
-        ////            Contract.Invariant(!_isSome || _value != null);
-        ////        }
-        ////#endif
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(IsNone || Value != null);
+        }
+
+#endif
     }
 
     /*!
@@ -266,10 +297,12 @@ namespace Narvalo.Fx
         /// <summary />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            if (IsSome) {
+            if (IsSome)
+            {
                 return new List<T> { _value }.GetEnumerator();
             }
-            else {
+            else
+            {
                 return Enumerable.Empty<T>().AssumeNotNull().GetEnumerator();
             }
         }
@@ -318,11 +351,13 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (Object.ReferenceEquals(other, null)) {
+            if (Object.ReferenceEquals(other, null))
+            {
                 return !_isSome;
             }
 
-            if (!_isSome) {
+            if (!_isSome)
+            {
                 return !other._isSome;
             }
 
@@ -352,11 +387,13 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (other == null) {
+            if (other == null)
+            {
                 return !_isSome;
             }
 
-            if (other is T) {
+            if (other is T)
+            {
                 return Equals((T)other, comparer);
             }
 
@@ -431,6 +468,10 @@ namespace Narvalo.Fx
      */
     public partial class Maybe<T>
     {
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
@@ -454,6 +495,7 @@ namespace Narvalo.Fx
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
             Require.NotNull(square, "square");
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
@@ -482,8 +524,15 @@ namespace Narvalo.Fx
             }
         }
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<T> OrElse(Maybe<T> other)
         {
+            Require.NotNull(other, "other");
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
             return IsNone ? other : this;
         }
     }
@@ -496,6 +545,10 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
@@ -504,6 +557,10 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             Require.NotNull(other, "other");
@@ -516,6 +573,10 @@ namespace Narvalo.Fx
 
         #region Monadic lifting operators
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
@@ -533,6 +594,10 @@ namespace Narvalo.Fx
 
         #region Linq extensions
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,
@@ -546,7 +611,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            if (IsNone || inner.IsNone) {
+            if (IsNone || inner.IsNone)
+            {
                 return Maybe<TResult>.None;
             }
 
@@ -558,6 +624,10 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
+#if !NO_CCCHECK_MASK
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,
@@ -571,7 +641,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            if (IsNone) {
+            if (IsNone)
+            {
                 return Maybe<TResult>.None;
             }
 
@@ -592,7 +663,8 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
-            if (IsSome) {
+            if (IsSome)
+            {
                 action.Invoke(Value);
             }
 
@@ -604,7 +676,8 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
-            if (IsNone) {
+            if (IsNone)
+            {
                 action.Invoke();
             }
 

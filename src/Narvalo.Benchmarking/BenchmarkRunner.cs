@@ -35,7 +35,7 @@ namespace Narvalo.Benchmarking
 
             set
             {
-                Require.Predicate(value.Ticks > 0L, "value");
+                Require.Condition(value.Ticks > 0L, "value");
                 _testDuration = value;
             }
         }
@@ -50,7 +50,7 @@ namespace Narvalo.Benchmarking
 
             set
             {
-                Require.Predicate(value.Ticks > 0L, "value");
+                Require.Condition(value.Ticks > 0L, "value");
                 _warmUpDuration = value;
             }
         }

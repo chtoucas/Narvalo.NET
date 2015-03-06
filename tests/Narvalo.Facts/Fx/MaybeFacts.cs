@@ -529,9 +529,9 @@ namespace Narvalo.Fx
 
         #region Stubs
 
-        struct ValueStub : IEquatable<ValueStub>
+        private struct ValueStub : IEquatable<ValueStub>
         {
-            int _value;
+            private int _value;
 
             public ValueStub(int value) { _value = value; }
 
@@ -571,7 +571,7 @@ namespace Narvalo.Fx
             }
         }
 
-        class AlmostValueStub : IEquatable<AlmostValueStub>
+        private sealed class AlmostValueStub : IEquatable<AlmostValueStub>
         {
             public string Value { get; set; }
 
@@ -609,6 +609,18 @@ namespace Narvalo.Fx
             {
                 return Value.GetHashCode();
             }
+        }
+
+        private sealed class Stub
+        {
+            private readonly int _value;
+
+            public Stub(int value)
+            {
+                _value = value;
+            }
+
+            public int Value { get { return _value; } }
         }
 
         #endregion
@@ -713,6 +725,22 @@ namespace Narvalo.Fx
             Assert.True(valueOpt.Value == value);
             Assert.True(nullableValueOpt.Value == nullableValue.Value);
             Assert.True(referenceOpt.Value == reference);
+        }
+
+        [Fact]
+        public static void Value_IsImmutable_OnceSome()
+        {
+            // Arrange
+            var reference = new Stub(1);
+            var option = Maybe.Create(reference);
+
+            // Act
+            reference = null;
+
+            // Assert
+            Assert.True(option.IsSome);
+            Assert.NotEqual(null, option.Value);
+            Assert.Equal(1, option.Value.Value);
         }
 
         #endregion
