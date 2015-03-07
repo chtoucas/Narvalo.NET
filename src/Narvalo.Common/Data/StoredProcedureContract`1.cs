@@ -6,7 +6,7 @@ namespace Narvalo.Data
     using System.Diagnostics.Contracts;
 
     [ContractClassFor(typeof(StoredProcedure<>))]
-    abstract class StoredProcedureContract<TResult> : StoredProcedure<TResult>
+    internal abstract class StoredProcedureContract<TResult> : StoredProcedure<TResult>
     {
         protected StoredProcedureContract(string connectionString, string name)
             : base(connectionString, name) { }

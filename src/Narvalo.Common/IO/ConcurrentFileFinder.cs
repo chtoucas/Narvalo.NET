@@ -12,8 +12,8 @@ namespace Narvalo.IO
 
     public class ConcurrentFileFinder
     {
-        readonly Func<DirectoryInfo, bool> _directoryFilter;
-        readonly Func<FileInfo, bool> _fileFilter;
+        private readonly Func<DirectoryInfo, bool> _directoryFilter;
+        private readonly Func<FileInfo, bool> _fileFilter;
 
         public ConcurrentFileFinder(
             Func<DirectoryInfo, bool> directoryFilter,
@@ -42,17 +42,19 @@ namespace Narvalo.IO
             var stack = new ConcurrentStack<DirectoryInfo>();
             stack.Push(new DirectoryInfo(rootPath));
 
-            while (!stack.IsEmpty) {
+            while (!stack.IsEmpty)
+            {
                 DirectoryInfo directory;
 
-                if (!stack.TryPop(out directory)) {
+                if (!stack.TryPop(out directory))
+                {
                     // REVIEW: What are the conditions that might cause TryPop to fail?
                     // Corollary: is it safe to use stack.TryPop directly to update a "shared" 
                     // directory variable?
                     yield break;
                 }
 
-                var relativeDirectoryName 
+                var relativeDirectoryName
                     = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
@@ -62,7 +64,8 @@ namespace Narvalo.IO
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
                     .Where(_fileFilter);
 
-                foreach (var file in files) {
+                foreach (var file in files)
+                {
                     yield return new RelativeFile(file, relativeDirectoryName);
                 }
 
@@ -72,7 +75,8 @@ namespace Narvalo.IO
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                     .Where(_directoryFilter);
 
-                foreach (var dir in subdirs) {
+                foreach (var dir in subdirs)
+                {
                     stack.Push(dir);
                 }
             }
@@ -85,7 +89,8 @@ namespace Narvalo.IO
             EventHandler<RelativeDirectoryEventArgs> localHandler
                 = Interlocked.CompareExchange(ref DirectoryStart, null, null);
 
-            if (localHandler != null) {
+            if (localHandler != null)
+            {
                 localHandler(this, e);
             }
         }
@@ -95,14 +100,15 @@ namespace Narvalo.IO
             EventHandler<RelativeDirectoryEventArgs> localHandler
                 = Interlocked.CompareExchange(ref DirectoryEnd, null, null);
 
-            if (localHandler != null) {
+            if (localHandler != null)
+            {
                 localHandler(this, e);
             }
         }
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);

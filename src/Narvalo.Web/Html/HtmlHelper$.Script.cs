@@ -32,14 +32,15 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
-        static IHtmlString ScriptHelper_(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
+        private static IHtmlString ScriptHelper_(this HtmlHelper @this, Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
         {
             Require.NotNull(scriptUri, "scriptUri");
 
             var tag = new TagBuilder("script");
             tag.MergeAttribute("src", scriptUri.ToProtocolLessString());
 
-            if (!String.IsNullOrEmpty(scriptType)) {
+            if (!String.IsNullOrEmpty(scriptType))
+            {
                 tag.MergeAttribute("type", scriptType);
             }
 

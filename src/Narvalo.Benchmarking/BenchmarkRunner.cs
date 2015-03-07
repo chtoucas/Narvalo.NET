@@ -35,7 +35,7 @@ namespace Narvalo.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, "value");
+                Require.Condition(value.Ticks > 0L, "The total number of ticks in 'value' must be strictly positive.");
                 _testDuration = value;
             }
         }
@@ -50,7 +50,7 @@ namespace Narvalo.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, "value");
+                Require.Condition(value.Ticks > 0L, "The total number of ticks in 'value' must be strictly positive.");
                 _warmUpDuration = value;
             }
         }

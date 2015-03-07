@@ -10,8 +10,8 @@ namespace Narvalo.IO
 
     public abstract class DirectoryWalker
     {
-        readonly Func<DirectoryInfo, bool> _directoryFilter;
-        readonly Func<FileInfo, bool> _fileFilter;
+        private readonly Func<DirectoryInfo, bool> _directoryFilter;
+        private readonly Func<FileInfo, bool> _fileFilter;
 
         protected DirectoryWalker(
             Func<DirectoryInfo, bool> directoryFilter,
@@ -32,10 +32,12 @@ namespace Narvalo.IO
             var stack = new Stack<DirectoryInfo>();
             stack.Push(startDirectory);
 
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var directory = stack.Pop();
 
-                if (directory == null) {
+                if (directory == null)
+                {
                     throw new InvalidOperationException("FIXME");
                 }
 
@@ -46,7 +48,8 @@ namespace Narvalo.IO
                     .AssumeNotNull()
                     .Where(_fileFilter);
 
-                foreach (var file in files) {
+                foreach (var file in files)
+                {
                     OnFile(file);
                 }
 
@@ -57,7 +60,8 @@ namespace Narvalo.IO
                     .AssumeNotNull()
                     .Where(_directoryFilter);
 
-                foreach (var dir in subdirs) {
+                foreach (var dir in subdirs)
+                {
                     stack.Push(dir);
                 }
             }
@@ -71,7 +75,7 @@ namespace Narvalo.IO
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);

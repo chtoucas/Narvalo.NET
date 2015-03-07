@@ -10,8 +10,8 @@ namespace Narvalo.IO
 
     public class FileFinder
     {
-        readonly Func<DirectoryInfo, bool> _directoryFilter;
-        readonly Func<FileInfo, bool> _fileFilter;
+        private readonly Func<DirectoryInfo, bool> _directoryFilter;
+        private readonly Func<FileInfo, bool> _fileFilter;
 
         public FileFinder(
             Func<DirectoryInfo, bool> directoryFilter,
@@ -40,10 +40,11 @@ namespace Narvalo.IO
             var stack = new Stack<DirectoryInfo>();
             stack.Push(new DirectoryInfo(rootPath));
 
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var directory = stack.Pop();
 
-                var relativeDirectoryName 
+                var relativeDirectoryName
                     = PathUtility.MakeRelativePathInternal(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
@@ -53,7 +54,8 @@ namespace Narvalo.IO
                     .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
                     .Where(_fileFilter);
 
-                foreach (var file in files) {
+                foreach (var file in files)
+                {
                     yield return new RelativeFile(file, relativeDirectoryName);
                 }
 
@@ -63,7 +65,8 @@ namespace Narvalo.IO
                     .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
                     .Where(_directoryFilter);
 
-                foreach (var dir in subdirs) {
+                foreach (var dir in subdirs)
+                {
                     stack.Push(dir);
                 }
             }
@@ -73,7 +76,8 @@ namespace Narvalo.IO
         {
             EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryStart;
 
-            if (localHandler != null) {
+            if (localHandler != null)
+            {
                 localHandler(this, e);
             }
         }
@@ -82,14 +86,15 @@ namespace Narvalo.IO
         {
             EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryEnd;
 
-            if (localHandler != null) {
+            if (localHandler != null)
+            {
                 localHandler(this, e);
             }
         }
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);

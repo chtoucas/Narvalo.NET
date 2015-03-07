@@ -42,20 +42,22 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
-        static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
+        private static IHtmlString ImageHelper_(this HtmlHelper @this, Uri imageUri, string alt, IDictionary<string, object> attributes)
         {
             Require.NotNull(imageUri, "imageUri");
 
             var tag = new TagBuilder("img");
             tag.MergeAttribute("src", imageUri.ToProtocolLessString());
 
-            if (!String.IsNullOrEmpty(alt)) {
+            if (!String.IsNullOrEmpty(alt))
+            {
                 tag.MergeAttribute("alt", alt);
             }
 
             tag.MergeAttributes(attributes, true);
 
-            if (tag.Attributes.ContainsKey("alt") && !tag.Attributes.ContainsKey("title")) {
+            if (tag.Attributes.ContainsKey("alt") && !tag.Attributes.ContainsKey("title"))
+            {
                 tag.MergeAttribute("title", (tag.Attributes["alt"] ?? String.Empty).ToString());
             }
 

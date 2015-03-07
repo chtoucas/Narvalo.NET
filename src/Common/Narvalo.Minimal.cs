@@ -128,13 +128,11 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Condition(bool predicate, string parameterName)
+        public static void Condition(bool predicate, string message)
         {
             if (!predicate)
             {
-                throw new ArgumentException(
-                    "The parameter '" + parameterName + "' does not satisfy the precondition.",
-                    parameterName);
+                throw new ArgumentException(message);
             }
 
             Contract.EndContractBlock();

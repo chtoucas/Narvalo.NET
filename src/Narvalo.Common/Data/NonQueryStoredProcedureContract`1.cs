@@ -6,7 +6,7 @@ namespace Narvalo.Data
     using System.Diagnostics.Contracts;
 
     [ContractClassFor(typeof(NonQueryStoredProcedure<>))]
-    abstract class NonQueryStoredProcedureContract<TResult> : NonQueryStoredProcedure<TResult>
+    internal abstract class NonQueryStoredProcedureContract<TResult> : NonQueryStoredProcedure<TResult>
     {
         protected NonQueryStoredProcedureContract(string connectionString, string name)
             : base(connectionString, name) { }

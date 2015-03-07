@@ -7,7 +7,7 @@ namespace Narvalo.IO
 
     public sealed class RelativeDirectoryEventArgs : EventArgs
     {
-        readonly RelativeDirectory _relativeDirectory;
+        private readonly RelativeDirectory _relativeDirectory;
 
         public RelativeDirectoryEventArgs(RelativeDirectory relativeDirectory)
         {
@@ -27,7 +27,7 @@ namespace Narvalo.IO
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_relativeDirectory != null);
         }

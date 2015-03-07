@@ -7,8 +7,8 @@ namespace Narvalo.IO
 
     public sealed class RelativeDirectory
     {
-        readonly DirectoryInfo _directory;
-        readonly string _relativeName;
+        private readonly DirectoryInfo _directory;
+        private readonly string _relativeName;
 
         // REVIEW: Require.NotEmpty on relativeName?
         public RelativeDirectory(DirectoryInfo directory, string relativeName)
@@ -40,7 +40,7 @@ namespace Narvalo.IO
 
 #if CONTRACTS_FULL
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        private void ObjectInvariants()
         {
             Contract.Invariant(_directory != null);
             Contract.Invariant(_relativeName != null);

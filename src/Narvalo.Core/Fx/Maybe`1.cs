@@ -15,7 +15,7 @@ namespace Narvalo.Fx
     /// </summary>
     /// <typeparam name="T">The type of the enclosed value.</typeparam>
     /**
-     * <content language="commonmark">
+     * <content markup="commonmark">
      * <![CDATA[
      * The Maybe Monad
      * ===============
@@ -284,7 +284,7 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, "exceptionFactory");
             Contract.Ensures(Contract.Result<T>() != null);
 
-            // Do prefer IsNone and Value to !_isSome and _value
+            // Do prefer IsNone and Value to !_isSome and _value,
             // it should help CCCheck to discover the object invariants.
             if (IsNone)
             {
@@ -372,6 +372,7 @@ namespace Narvalo.Fx
             return Equals(η(other), comparer);
         }
 
+        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             return Equals(obj, EqualityComparer<T>.Default);

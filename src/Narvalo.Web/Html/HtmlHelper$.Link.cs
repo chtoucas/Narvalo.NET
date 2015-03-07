@@ -32,18 +32,20 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
-        static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
+        private static IHtmlString LinkHelper_(this HtmlHelper @this, Uri linkUri, string linkType, string relation, IDictionary<string, object> attributes)
         {
             Require.NotNull(linkUri, "linkUri");
 
             var tag = new TagBuilder("link");
             tag.MergeAttribute("href", linkUri.ToProtocolLessString());
 
-            if (!String.IsNullOrEmpty(linkType)) {
+            if (!String.IsNullOrEmpty(linkType))
+            {
                 tag.MergeAttribute("type", linkType);
             }
 
-            if (!String.IsNullOrEmpty(relation)) {
+            if (!String.IsNullOrEmpty(relation))
+            {
                 tag.MergeAttribute("rel", relation);
             }
 

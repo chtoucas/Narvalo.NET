@@ -171,7 +171,4 @@
   <data name="Int64Encoder_OutOfRangeLengthFormat" xml:space="preserve">
     <value>The length is not less than or equal to '{0}'.</value>
   </data>
-  <data name="Require_Precondition" xml:space="preserve">
-    <value>The parameter '{0}' does not satisfy the precondition.</value>
-  </data>
 </root>

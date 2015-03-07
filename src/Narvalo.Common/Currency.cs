@@ -310,7 +310,6 @@ namespace Narvalo
     // Implements the IEquatable<Currency> interface.
     public sealed partial class Currency
     {
-        /// <summary />
         public static bool operator ==(Currency left, Currency right)
         {
             if (Object.ReferenceEquals(left, null))
@@ -322,13 +321,12 @@ namespace Narvalo
             return left.Equals(right);
         }
 
-        /// <summary />
         public static bool operator !=(Currency left, Currency right)
         {
             return !(left == right);
         }
 
-        /// <summary />
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -340,7 +338,7 @@ namespace Narvalo
             return this._code == other._code;
         }
 
-        /// <summary />
+        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             if (Object.ReferenceEquals(obj, null))
@@ -364,7 +362,7 @@ namespace Narvalo
             return Equals(obj as Currency);
         }
 
-        /// <summary />
+        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return _code.GetHashCode();

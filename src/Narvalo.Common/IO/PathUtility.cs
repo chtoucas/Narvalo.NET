@@ -8,7 +8,7 @@ namespace Narvalo.IO
 
     public static class PathUtility
     {
-        static readonly string DirectorySeparator_ = Path.DirectorySeparatorChar.ToString();
+        private static readonly string s_DirectorySeparator = Path.DirectorySeparatorChar.ToString();
 
         public static string MakeRelativePath(string rootPath, string path)
         {
@@ -37,10 +37,10 @@ namespace Narvalo.IO
             // REVIEW: Require.NotNullOrEmpty(path, "path");
             Require.NotNull(path, "path");
 
-            bool endsWithSeparator 
-                = path.EndsWith(DirectorySeparator_, StringComparison.OrdinalIgnoreCase);
+            bool endsWithSeparator
+                = path.EndsWith(s_DirectorySeparator, StringComparison.OrdinalIgnoreCase);
 
-            return endsWithSeparator ? path : path + DirectorySeparator_;
+            return endsWithSeparator ? path : path + s_DirectorySeparator;
         }
     }
 }

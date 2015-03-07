@@ -110,13 +110,11 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void Condition(bool predicate, string parameterName)
+        public static void Condition(bool predicate, string message)
         {
             if (!predicate)
             {
-                throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_Precondition, parameterName),
-                    parameterName);
+                throw new ArgumentException(message);
             }
 
             Contract.EndContractBlock();

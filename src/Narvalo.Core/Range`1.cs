@@ -3,19 +3,25 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public partial struct Range<T> : IEquatable<Range<T>>
         where T : struct, IEquatable<T>, IComparable<T>
     {
-        readonly T _lowerEnd;
-        readonly T _upperEnd;
+        private readonly T _lowerEnd;
+        private readonly T _upperEnd;
 
+#if !NO_CCCHECK_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "RequiresAtCall-!(lowerEnd.CompareTo(upperEnd) > 0)",
+            Justification = "[CodeContracts] CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
+#endif
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            if (lowerEnd.CompareTo(upperEnd) > 0) {
+            if (lowerEnd.CompareTo(upperEnd) > 0)
+            {
                 throw new ArgumentOutOfRangeException("upperEnd", upperEnd, Strings_Core.Range_LowerEndNotLesserThanUpperEnd);
             }
 
@@ -89,7 +95,8 @@ namespace Narvalo
         /// <summary />
         public override bool Equals(object obj)
         {
-            if (!(obj is Range<T>)) {
+            if (!(obj is Range<T>))
+            {
                 return false;
             }
 
