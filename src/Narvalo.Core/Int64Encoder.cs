@@ -79,7 +79,7 @@ namespace Narvalo
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-29-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif

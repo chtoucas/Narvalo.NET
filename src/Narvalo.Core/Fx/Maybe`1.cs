@@ -10,7 +10,13 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    /*!
+    /// <summary>
+    /// Represents a value that is either a single value of type T, or no value at all.
+    /// </summary>
+    /// <typeparam name="T">The type of the enclosed value.</typeparam>
+    /**
+     * <content language="commonmark">
+     * <![CDATA[
      * The Maybe Monad
      * ===============
      * 
@@ -24,13 +30,17 @@ namespace Narvalo.Fx
      * What I like the most about this class is that it helps to clearly express our intent with a 
      * very clean syntax. For instance, consider the following methods
      * 
-     *     string GetPhoneNumber() { ... }
-     *     Maybe<string> MayGetPhoneNumber() { ... }
+     * ```csharp
+     * string GetPhoneNumber() { }
+     * Maybe<string> MayGetPhoneNumber() { }
+     * ```
      * 
      * I believe that the second version makes it clearer that we might actually not know the phone 
      * number. It then makes easy to write what we do in either cases:
      * 
-     *     MayGetPhoneNumber().OnNone( ... ).OnSome( ... )
+     * ```csharp
+     * MayGetPhoneNumber().OnNone(action).OnSome(action)
+     * ```
      * 
      * The most obvious weakness of the Maybe monad is that it is all black or all white. In some
      * circumstances, I might like to be able to give an explanation for the absence of a value. 
@@ -67,35 +77,79 @@ namespace Narvalo.Fx
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
      * use of the `Maybe<T>` when a nullable would make a better fit, I should create a FxCop rule.
      * 
-     * Implementation
-     * --------------
+     * Constructor
+     * -----------
+     * 
+     * All constructors are made private. Having complete control over the creation of an 
+     * instance helps us to ensure that `value` is never `null` when passed to the constructor.
+     * This is exactly what we do in the static method `Maybe<T>.η(value)`.
+     * 
+     * To make things simpler, we provide two public factory methods:
+     * 
+     * ```csharp
+     * Maybe.Create<T>(value)
+     * Maybe.Create<T?>(value)
+     * ```
+     * 
+     * and one static property `Maybe<T>.None` to reference a Maybe that has no value.
+     * 
+     * `IEnumerable<T>` interface
+     * --------------------------
+     * 
+     * To support Linq we only need to create the appropriate methods and the C# compiler will work
+     * its magic. Actually, this is something that we have almost already done. Indeed, this is just
+     * a matter of using the right terminology :
+     * 
+     * + `Select` is the Linq name for the `Map` method from monads
+     * + `SelectMany` is the Linq name for the `Bind` method from monads
+     * + ...
+     * 
+     * Nevertheless, since this might look a bit too unusual we also explicitely implement the
+     * `IEnumerable<T>` interface.
+     * 
+     * `IEquatable<T>` and `IEquatable<Maybe<T>>` interfaces
+     * -------------------------------------------------
+     * 
+     * ### Referential equality and structural equality ###
+     * 
+     * We redefine the `Equals()` method to allow for structural equality for reference types that
+     * follow value type semantics. Nevertheless, we do not change the meaning of the equality
+     * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by
+     * the .NET framework for all reference types. I might change my mind on this and try to make
+     * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
+     * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
+     * `IStructuralEquatable` interface.
+     * 
+     * ### Sample rules ###
+     * 
+     * ```csharp
+     * Maybe<T>.None != null
+     * Maybe<T>.None.Equals(null)
+     *   
+     * Maybe.Create(1) != Maybe.Create(1)
+     * Maybe.Create(1).Equals(Maybe.Create(1))
+     * Maybe.Create(1) != 1
+     * Maybe.Create(1).Equals(1)
+     * ```
+     * 
+     * References
+     * ----------
+     * 
+     * + [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
+     * + [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
+     * 
+     * Alternative implementations in C#:
+     * 
+     * + [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
+     * ]]>
+     * </content>
      */
-
-    /// <summary>
-    /// Represents a value that is either a single value of type T, or no value at all.
-    /// </summary>
-    /// <typeparam name="T">The type of the underlying value.</typeparam>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         private readonly bool _isSome;
         private readonly T _value;
-
-        /*!
-         * ### Constructor ###
-         * 
-         * All constructors are made private. Having complete control over the creation of an 
-         * instance helps us to ensure that `value` is never `null` when passed to the constructor.
-         * This is exactly what we do in the static method `Maybe<T>.η(value)`.
-         * 
-         * To make things simpler, we provide two public factory methods:
-         * 
-         * + `Maybe.Create<T>(value)`
-         * + `Maybe.Create<T?>(value)`
-         * 
-         * and one static property `Maybe<T>.None` to reference a Maybe that has no value.
-         */
 
         /// <summary>
         /// Initializes a new instance of <see cref="Maybe{T}" /> that does not hold any value.
@@ -108,7 +162,8 @@ namespace Narvalo.Fx
         /// <summary>
         /// Initializes a new instance of <see cref="Maybe{T}" /> using the specified value. 
         /// </summary>
-        /// <param name="value">The underlying value.</param>
+        /// <param name="value">The value to wrap.</param>
+        /// <seealso cref="Maybe{T}.Maybe()"/>
         private Maybe(T value)
         {
             Contract.Requires(value != null);
@@ -117,28 +172,22 @@ namespace Narvalo.Fx
             _isSome = true;
         }
 
-        /*!
-         * ### Properties ###
-         */
-
         /// <summary>
-        /// Gets a value indicating whether the object does not have an underlying value.
+        /// Gets a value indicating whether the object does not enclose a value.
         /// </summary>
-        /// <value><c>true</c> if the object does not have an underlying value; otherwise <c>false</c>.</value>
+        /// <value><c>true</c> if the object does not have enclose a value; otherwise <c>false</c>.</value>
         internal bool IsNone { get { return !_isSome; } }
 
         /// <summary>
-        /// Gets a value indicating whether the object does contain an underlying value.
+        /// Gets a value indicating whether the object does hold a value.
         /// </summary>
-        /// <value><c>true</c> if the object does contain an underlying value; otherwise <c>false</c>.</value>
+        /// <value><c>true</c> if the object does hold a value; otherwise <c>false</c>.</value>
         internal bool IsSome { get { return _isSome; } }
 
         /// <summary>
         /// Gets the underlying value.
         /// </summary>
-        /// <exception cref="InvalidOperationException">
-        /// The object does not contain any value.
-        /// </exception>
+        /// <exception cref="InvalidOperationException">The object does not contain any value.</exception>
         internal T Value
         {
             get
@@ -162,11 +211,6 @@ namespace Narvalo.Fx
             }
         }
 
-        /*!
-         * ### Cast operators ###
-         */
-
-        /// <summary />
         public static explicit operator Maybe<T>(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -174,7 +218,6 @@ namespace Narvalo.Fx
             return η(value);
         }
 
-        /// <summary />
         public static explicit operator T(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -188,11 +231,7 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-        /*!
-         * ### Public methods ###
-         */
-
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -205,21 +244,21 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Returns the underlying value if any, the default value of the type T otherwise.
+        /// Returns the enclosed value if any, the default value of the type T otherwise.
         /// </summary>
-        /// <returns>The underlying value or the default value of the type T.</returns>
+        /// <returns>The enclosed value or the default value of the type T.</returns>
         public T ValueOrDefault()
         {
             return _isSome ? _value : default(T);
         }
 
         /// <summary>
-        /// Returns the underlying value if any, defaultValue otherwise.
+        /// Returns the enclosed value if any, <paramref name="defaultValue"/> otherwise.
         /// </summary>
         /// <param name="defaultValue">
         /// A default value to be used if if there is no underlying value.
         /// </param>
-        /// <returns>The underlying value or defaultValue.</returns>
+        /// <returns>The underlying value or <paramref name="defaultValue"/>.</returns>
         public T ValueOrElse(T defaultValue)
         {
             return _isSome ? _value : defaultValue;
@@ -245,22 +284,17 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, "exceptionFactory");
             Contract.Ensures(Contract.Result<T>() != null);
 
+            // Do prefer IsNone and Value to !_isSome and _value
+            // it should help CCCheck to discover the object invariants.
             if (IsNone)
             {
                 throw exceptionFactory.Invoke();
             }
 
             return Value;
-
-            //if (!_isSome)
-            //{
-            //    throw exceptionFactory.Invoke();
-            //}
-
-            //return _value;
         }
 
-        /// <summary />
+        /// <inheritdoc cref="Object.ToString" />
         public override String ToString()
         {
             return _isSome ? _value.ToString() : "{None}";
@@ -277,24 +311,10 @@ namespace Narvalo.Fx
 #endif
     }
 
-    /*!
-     * IEnumerable interface
-     * ---------------------
-     * 
-     * To support Linq we only need to create the appropriate methods and the C# compiler will work
-     * its magic. Actually, this is something that we have almost already done. Indeed, this is just
-     * a matter of using the right terminology :
-     * 
-     * + `Select` is the Linq name for the `Map` method from monads
-     * + `SelectMany` is the Linq name for the `Bind` method from monads
-     * + ...
-     * 
-     * Nevertheless, since this might look a bit too unusual we also explicitely implement the
-     * `IEnumerable<T>` interface.
-     */
+    // Implements the IEnumerable<T> interface.
     public partial class Maybe<T>
     {
-        /// <summary />
+        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             if (IsSome)
@@ -307,46 +327,21 @@ namespace Narvalo.Fx
             }
         }
 
-        /// <summary />
+        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<T>)this).GetEnumerator();
         }
     }
 
-    /*!
-     * IEquatable interface
-     * --------------------
-     * 
-     * ### Referential equality and structural equality ###
-     * 
-     * We redefine the `Equals()` method to allow for structural equality for reference types that
-     * follow value type semantics. Nevertheless, we do not change the meaning of the equality
-     * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by
-     * the .NET framework for all reference types. I might change my mind on this and try to make
-     * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
-     * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
-     * `IStructuralEquatable` interface.
-     * 
-     * ### Sample rules ###
-     * 
-     *     Maybe<T>.None != null
-     *     Maybe<T>.None.Equals(null)
-     *   
-     *     Maybe.Create(1) != Maybe.Create(1)
-     *     Maybe.Create(1).Equals(Maybe.Create(1))
-     *     Maybe.Create(1) != 1
-     *     Maybe.Create(1).Equals(1)
-     */
+    // Implements the IEquatable<T> and IEquatable<Maybe<T>> interfaces
     public partial class Maybe<T>
     {
-        /// <summary />
         public bool Equals(Maybe<T> other)
         {
             return Equals(other, EqualityComparer<T>.Default);
         }
 
-        /// <summary />
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, "comparer");
@@ -364,6 +359,7 @@ namespace Narvalo.Fx
             return comparer.Equals(_value, other._value);
         }
 
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(T other)
         {
             return Equals(other, EqualityComparer<T>.Default);
@@ -376,13 +372,11 @@ namespace Narvalo.Fx
             return Equals(η(other), comparer);
         }
 
-        /// <summary />
         public override bool Equals(object obj)
         {
             return Equals(obj, EqualityComparer<T>.Default);
         }
 
-        /// <summary />
         public bool Equals(object other, IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, "comparer");
@@ -403,13 +397,12 @@ namespace Narvalo.Fx
             return Equals(other as Maybe<T>, comparer);
         }
 
-        /// <summary />
+        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return GetHashCode(EqualityComparer<T>.Default);
         }
 
-        /// <summary />
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
             Require.NotNull(comparer, "comparer");
@@ -417,7 +410,6 @@ namespace Narvalo.Fx
             return _isSome ? comparer.GetHashCode(_value) : 0;
         }
 
-        /////// <summary />
         ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
         ////{
         ////    if (ReferenceEquals(left, null)) {
@@ -427,7 +419,6 @@ namespace Narvalo.Fx
         ////    return left.Equals(right);
         ////}
 
-        /////// <summary />
         ////public static bool operator ==(Maybe<T> left, T right)
         ////{
         ////    if (ReferenceEquals(left, null)) {
@@ -437,38 +428,31 @@ namespace Narvalo.Fx
         ////    return left.Equals(right);
         ////}
 
-        /////// <summary />
         ////public static bool operator ==(T left, Maybe<T> right)
         ////{
         ////    return right == left;
         ////}
 
-        /////// <summary />
         ////public static bool operator !=(Maybe<T> left, Maybe<T> right)
         ////{
         ////    return !(left == right);
         ////}
 
-        /////// <summary />
         ////public static bool operator !=(Maybe<T> left, T right)
         ////{
         ////    return !(left == right);
         ////}
 
-        /////// <summary />
         ////public static bool operator !=(T left, Maybe<T> right)
         ////{
         ////    return !(right == left);
         ////}
     }
 
-    /*!
-     * Monad definition
-     * ----------------
-     */
+    // Monad definition
     public partial class Maybe<T>
     {
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -501,10 +485,7 @@ namespace Narvalo.Fx
         }
     }
 
-    /*!
-     * MonadOr definition
-     * ------------------
-     */
+    // MonadOr definition
     public partial class Maybe<T>
     {
         private static readonly Maybe<T> s_None = new Maybe<T>();
@@ -524,7 +505,7 @@ namespace Narvalo.Fx
             }
         }
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -537,15 +518,12 @@ namespace Narvalo.Fx
         }
     }
 
-    /*!
-     * Optimized version for Monad extension methods
-     * ---------------------------------------------
-     */
+    // Optimized version for Monad extension methods
     public partial class Maybe<T>
     {
         #region Basic Monad functions
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -557,7 +535,7 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -573,7 +551,7 @@ namespace Narvalo.Fx
 
         #region Monadic lifting operators
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -592,9 +570,9 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Linq extensions
+        #region LINQ extensions
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -624,7 +602,7 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -686,17 +664,4 @@ namespace Narvalo.Fx
 
         #endregion
     }
-
-    /*!
-     * References
-     * ----------
-     * 
-     * + [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
-     * + [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
-     * 
-     * Alternative implementations in C#:
-     * 
-     * + [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
-     * 
-     */
 }

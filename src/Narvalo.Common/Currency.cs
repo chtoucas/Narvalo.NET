@@ -138,7 +138,7 @@ namespace Narvalo
     // Provides user-friendly access to some of the most common currencies.
     public sealed partial class Currency
     {
-        // We aggressively cache the most used currencies.
+        // We aggressively cache the most common currencies.
         private static Currency s_Dollar = Of("USD");
         private static Currency s_Euro = Of("EUR");
         private static Currency s_Pound = Of("GBP");

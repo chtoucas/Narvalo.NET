@@ -148,8 +148,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        //// ValueOrThrow
-
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
             where TSource : struct
         {
@@ -170,14 +168,10 @@ namespace Narvalo.Fx
             return @this.Value;
         }
 
-        //// ToMaybe
-
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
         {
             return Maybe.Create(@this);
         }
-
-        //// OnValue & OnNull
 
         public static TSource? OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct

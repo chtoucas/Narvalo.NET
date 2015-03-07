@@ -25,7 +25,7 @@ namespace Narvalo.Fx
             Justification = "This method always returns the same result.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
             Justification = "This method always returns the same result.")]
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
             Justification = "[CodeContracts] Useless postcondition.")]
 #endif
@@ -46,7 +46,7 @@ namespace Narvalo.Fx
         }
 
         /// <summary />
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
             Justification = "[CodeContracts] Useless postcondition.")]
 #endif

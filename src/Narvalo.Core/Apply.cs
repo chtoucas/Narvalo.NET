@@ -32,7 +32,7 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -59,7 +59,7 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
@@ -88,7 +88,7 @@ namespace Narvalo
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
-#if !NO_CCCHECK_MASK
+#if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
 #endif
