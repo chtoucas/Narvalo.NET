@@ -4,21 +4,22 @@ namespace Narvalo.Benchmarking
 {
 #if DOCUMENTATION
 
+    using System.Runtime.CompilerServices;
+
     /// <summary>
     /// The Narvalo.Benchmarking namespace contains helpers to perfom benchmarking tests.
     /// </summary>
     /// <remarks>
-    /// It is a very straightforward adaptation of the classes found in
-    /// <see cref="!:https://code.google.com/p/noda-time/">NodaTime</see>.
+    /// It is a very straightforward adaptation of the classes found in NodaTime.
     /// Even so, any error is of course mine.
     /// </remarks>
-    internal static class NamespaceDoc
-    {
-        // Note to me; other references I should explore
-        // - https://github.com/mattwarren/MiniBench-WIP
-        // - http://mattwarren.org/2014/09/19/the-art-of-benchmarking/
-        // - http://www.hanselman.com/blog/ProperBenchmarkingToDiagnoseAndSolveANETSerializationBottleneck.aspx
-    }
+    /// Note to me; other references I should explore
+    /// <seealso href="https://code.google.com/p/noda-time/"/>
+    /// <seealso href="https://github.com/mattwarren/MiniBench-WIP"/>
+    /// <seealso href="http://mattwarren.org/2014/09/19/the-art-of-benchmarking/"/>
+    /// <seealso href="http://www.hanselman.com/blog/ProperBenchmarkingToDiagnoseAndSolveANETSerializationBottleneck.aspx"/>
+    [CompilerGenerated]
+    internal static class NamespaceDoc { }
 
 #endif
 }

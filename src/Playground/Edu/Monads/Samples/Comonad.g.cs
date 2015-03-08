@@ -30,9 +30,9 @@ namespace Playground.Edu.Monads.Samples
 {
     using System.Diagnostics.Contracts;
 
-    /// <summary>
+    /// <content>
     /// Comonad methods.
-    /// </summary>
+    /// </content>
     public static partial class Comonad
     {
         /// <remarks>

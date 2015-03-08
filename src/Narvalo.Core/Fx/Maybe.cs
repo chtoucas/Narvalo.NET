@@ -9,6 +9,8 @@ namespace Narvalo.Fx
     {
         public static Maybe<T> Create<T>(T? value) where T : struct
         {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
     }

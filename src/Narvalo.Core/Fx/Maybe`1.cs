@@ -11,9 +11,9 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Represents a value that is either a single value of type T, or no value at all.
+    /// Represents an object that is either a single value of type T, or no value at all.
     /// </summary>
-    /// <typeparam name="T">The type of the enclosed value.</typeparam>
+    /// <typeparam name="T">The underlying type of the value.</typeparam>
     /**
      * <content markup="commonmark">
      * <![CDATA[
@@ -42,15 +42,14 @@ namespace Narvalo.Fx
      * MayGetPhoneNumber().OnNone(action).OnSome(action)
      * ```
      * 
-     * The most obvious weakness of the Maybe monad is that it is all black or all white. In some
-     * circumstances, I might like to be able to give an explanation for the absence of a value. 
-     * In fact, that's one of the purpose of the Either monad.
-     * 
      * The main defects of this implementation are :
      * 
-     * + It is a reference type
-     * + An instance is mutable for reference types
-     * + (more to be added later, I am sure there are other problems)
+     * - The most obvious weakness of the Maybe monad is that it is all black or all white. In some
+     *   circumstances, I might like to be able to give an explanation for the absence of a value. 
+     *   In fact, that's one of the purpose of the Either monad.
+     * - It is a reference type
+     * - An instance is mutable for reference types
+     * - (more to be added later, I am sure there are other problems)
      * 
      * This class is sometimes referred to as the Option type.
      * 
@@ -96,13 +95,12 @@ namespace Narvalo.Fx
      * `IEnumerable<T>` interface
      * --------------------------
      * 
-     * To support Linq we only need to create the appropriate methods and the C# compiler will work
+     * To support LINQ we only need to create the appropriate methods and the C# compiler will work
      * its magic. Actually, this is something that we have almost already done. Indeed, this is just
-     * a matter of using the right terminology :
+     * a matter of using the right terminology:
      * 
-     * + `Select` is the Linq name for the `Map` method from monads
-     * + `SelectMany` is the Linq name for the `Bind` method from monads
-     * + ...
+     * - `Select` is the LINQ name for the `Map` method from monads
+     * - `SelectMany` is the LINQ name for the `Bind` method from monads
      * 
      * Nevertheless, since this might look a bit too unusual we also explicitely implement the
      * `IEnumerable<T>` interface.
@@ -135,12 +133,11 @@ namespace Narvalo.Fx
      * References
      * ----------
      * 
-     * + [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
-     * + [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
+     * - [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
+     * - [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
      * 
      * Alternative implementations in C#:
-     * 
-     * + [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
+     * - [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
      * ]]>
      * </content>
      */
@@ -152,18 +149,20 @@ namespace Narvalo.Fx
         private readonly T _value;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Maybe{T}" /> that does not hold any value.
+        /// Initializes a new instance of the <see cref="Maybe{T}" /> class that does not hold any value.
         /// </summary>
+        /// <seealso cref="Maybe{T}.None"/>
         private Maybe()
         {
             _isSome = false;
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Maybe{T}" /> using the specified value. 
+        /// Initializes a new instance of the <see cref="Maybe{T}" /> class for the specified value. 
         /// </summary>
-        /// <param name="value">The value to wrap.</param>
-        /// <seealso cref="Maybe{T}.Maybe()"/>
+        /// <param name="value">A value to wrap.</param>
+        /// <seealso cref="Maybe.Create{T}(T)"/>
+        /// <seealso cref="Maybe.Create{T}(T?)"/>
         private Maybe(T value)
         {
             Contract.Requires(value != null);
@@ -173,9 +172,9 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Gets a value indicating whether the object does not enclose a value.
+        /// Gets a value indicating whether the object does not enclose any value.
         /// </summary>
-        /// <value><c>true</c> if the object does not have enclose a value; otherwise <c>false</c>.</value>
+        /// <value><c>true</c> if the object does not have enclose any value; otherwise <c>false</c>.</value>
         internal bool IsNone { get { return !_isSome; } }
 
         /// <summary>
@@ -185,9 +184,9 @@ namespace Narvalo.Fx
         internal bool IsSome { get { return _isSome; } }
 
         /// <summary>
-        /// Gets the underlying value.
+        /// Gets the enclosed value.
         /// </summary>
-        /// <exception cref="InvalidOperationException">The object does not contain any value.</exception>
+        /// <exception cref="InvalidOperationException">The object does not enclose any value.</exception>
         internal T Value
         {
             get
@@ -244,21 +243,19 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Returns the enclosed value if any, the default value of the type T otherwise.
+        /// Obtains the enclosed value if any; otherwise the default value of the type T.
         /// </summary>
-        /// <returns>The enclosed value or the default value of the type T.</returns>
+        /// <returns>The enclosed value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
             return _isSome ? _value : default(T);
         }
 
         /// <summary>
-        /// Returns the enclosed value if any, <paramref name="defaultValue"/> otherwise.
+        /// Obtains the enclosed value if any; otherwise <paramref name="defaultValue"/>.
         /// </summary>
-        /// <param name="defaultValue">
-        /// A default value to be used if if there is no underlying value.
-        /// </param>
-        /// <returns>The underlying value or <paramref name="defaultValue"/>.</returns>
+        /// <param name="defaultValue">A default value to be used if if there is no underlying value.</param>
+        /// <returns>The enclosed value if any; otherwise <paramref name="defaultValue"/>.</returns>
         public T ValueOrElse(T defaultValue)
         {
             return _isSome ? _value : defaultValue;
@@ -294,7 +291,7 @@ namespace Narvalo.Fx
             return Value;
         }
 
-        /// <inheritdoc cref="Object.ToString" />
+        /// <copydoc cref="Object.ToString" />
         public override String ToString()
         {
             return _isSome ? _value.ToString() : "{None}";
@@ -305,6 +302,7 @@ namespace Narvalo.Fx
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
+            Contract.Invariant(IsNone == !IsSome);
             Contract.Invariant(IsNone || Value != null);
         }
 
@@ -314,9 +312,11 @@ namespace Narvalo.Fx
     // Implements the IEnumerable<T> interface.
     public partial class Maybe<T>
     {
-        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
+        /// <copydoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
+            Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
+
             if (IsSome)
             {
                 return new List<T> { _value }.GetEnumerator();
@@ -327,9 +327,11 @@ namespace Narvalo.Fx
             }
         }
 
-        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
+        /// <copydoc cref="IEnumerable.GetEnumerator" />
         IEnumerator IEnumerable.GetEnumerator()
         {
+            Contract.Ensures(Contract.Result<IEnumerator>() != null);
+
             return ((IEnumerable<T>)this).GetEnumerator();
         }
     }
@@ -337,6 +339,7 @@ namespace Narvalo.Fx
     // Implements the IEquatable<T> and IEquatable<Maybe<T>> interfaces
     public partial class Maybe<T>
     {
+        /// <copydoc cref="IEquatable{T}.Equals" />
         public bool Equals(Maybe<T> other)
         {
             return Equals(other, EqualityComparer<T>.Default);
@@ -359,7 +362,7 @@ namespace Narvalo.Fx
             return comparer.Equals(_value, other._value);
         }
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
+        /// <copydoc cref="IEquatable{T}.Equals" />
         public bool Equals(T other)
         {
             return Equals(other, EqualityComparer<T>.Default);
@@ -372,7 +375,7 @@ namespace Narvalo.Fx
             return Equals(η(other), comparer);
         }
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
+        /// <copydoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             return Equals(obj, EqualityComparer<T>.Default);
@@ -398,7 +401,7 @@ namespace Narvalo.Fx
             return Equals(other as Maybe<T>, comparer);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
+        /// <copydoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return GetHashCode(EqualityComparer<T>.Default);
@@ -477,6 +480,7 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics. Only used internally.")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
             Require.NotNull(square, "square");
@@ -486,13 +490,13 @@ namespace Narvalo.Fx
         }
     }
 
-    // MonadOr definition
+    // MonadOr definition.
     public partial class Maybe<T>
     {
         private static readonly Maybe<T> s_None = new Maybe<T>();
 
         /// <summary>
-        /// Returns an instance of <see cref="Maybe{T}" /> that does not hold any value.
+        /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "A non-generic version would not improve usability.")]
@@ -519,7 +523,7 @@ namespace Narvalo.Fx
         }
     }
 
-    // Optimized version for Monad extension methods
+    // Custom versions of Monad extension methods (see Maybe.g.cs).
     public partial class Maybe<T>
     {
         #region Basic Monad functions

@@ -27,7 +27,7 @@ namespace Narvalo.Fx
             Justification = "This method always returns the same result.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
-            Justification = "[CodeContracts] Useless postcondition.")]
+            Justification = "[CodeContracts] We do not want to enforce the contract here.")]
 #endif
         public static bool operator !=(Unit left, Unit right)
         {
@@ -48,7 +48,7 @@ namespace Narvalo.Fx
         /// <summary />
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
-            Justification = "[CodeContracts] Useless postcondition.")]
+            Justification = "[CodeContracts] We do not want to enforce the contract here.")]
 #endif
         public override int GetHashCode()
         {

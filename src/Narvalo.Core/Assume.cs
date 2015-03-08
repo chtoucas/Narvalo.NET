@@ -17,7 +17,7 @@ namespace Narvalo
         /// When dealing with external dependencies, CCCheck can not infer
         /// that the result of a method is not null. When we know for sure that
         /// the result is not null, this extension method is a useful alias
-        /// to inform CCCheck not to worry of <c>null</c> values here.
+        /// to inform CCCheck not to worry of <see langword="null"/> values here.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="this"></param>

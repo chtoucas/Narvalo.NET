@@ -341,8 +341,8 @@ namespace Narvalo.Collections.Internal
             Func<TFirst, TSecond, Output<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
+            // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 

@@ -35,7 +35,6 @@ namespace Narvalo.Fx
         {
             get
             {
-                // REVIEW: Do I really need this since it is part of the invariant.
                 Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
                 if (_isSuccess)
@@ -60,6 +59,10 @@ namespace Narvalo.Fx
             }
         }
 
+#if !NO_CCCHECK_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Output<T> OnSuccess(Action<T> action)
         {
             Contract.Requires(action != null);
@@ -82,19 +85,19 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Returns the underlying value if any, the default value of the type T otherwise.
+        /// Obtains the underlying value if any; otherwise the default value of the type T.
         /// </summary>
-        /// <returns>The underlying value or the default value of the type T.</returns>
+        /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
             return _isSuccess ? _value : default(T);
         }
 
         /// <summary>
-        /// Returns the underlying value if any, defaultValue otherwise.
+        /// Returns the underlying value if any; otherwise <paramref name="defaultValue"/>.
         /// </summary>
         /// <param name="defaultValue">A default value to be used if if there is no underlying value.</param>
-        /// <returns>The underlying value or defaultValue.</returns>
+        /// <returns>The underlying value if any; otherwise <paramref name="defaultValue"/>.</returns>
         public T ValueOrElse(T defaultValue)
         {
             return _isSuccess ? _value : defaultValue;
@@ -123,11 +126,14 @@ namespace Narvalo.Fx
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_isSuccess || _exceptionInfo != null);
+            Contract.Invariant(IsSuccess == !IsFailure);
+            Contract.Invariant(IsSuccess || ExceptionInfo != null);
         }
+
 #endif
     }
 
@@ -138,7 +144,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(selector, "selector");
 
-            // FIXME: Incorrect? We should catch exceptions?
+            // FIXME: Incorrect? We should catch exceptions.
             return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
         }
 
@@ -147,6 +153,7 @@ namespace Narvalo.Fx
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return new Output<T>(exceptionInfo);
         }
@@ -155,6 +162,8 @@ namespace Narvalo.Fx
             Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Output<T> η(T value)
         {
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
+
             return new Output<T>(value);
         }
 
@@ -174,6 +183,10 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions
 
+#if !NO_CCCHECK_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+#endif
         public Output<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");

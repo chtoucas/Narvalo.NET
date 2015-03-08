@@ -7,7 +7,7 @@ namespace Playground.Edu.Linq
 
     using Narvalo.Collections;
 
-    // Linq from scratch.
+    // LINQ from scratch.
     public static class Bananas
     {
         #region Quantifiers

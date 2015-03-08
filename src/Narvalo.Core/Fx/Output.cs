@@ -10,6 +10,7 @@ namespace Narvalo.Fx
         public static Output<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Contract.Requires(exceptionInfo != null);
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return Output<T>.η(exceptionInfo);
         }

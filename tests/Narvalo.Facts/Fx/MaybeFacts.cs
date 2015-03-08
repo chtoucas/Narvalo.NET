@@ -805,11 +805,12 @@ namespace Narvalo.Fx
             Assert.Equal(2, m.Value);
         }
 
-        /// <summary>
-        /// <c>Maybe&lt;T&gt;.Bind(selector)</c> returned <c>null</c> when 
-        /// <c>selector</c> returned <c>null</c>. 
-        /// The correct behaviour is to return <c>Maybe&lt;T&gt;.None</c>.
-        /// </summary>
+        /// <content markup="commonmark">
+        /// <![CDATA[
+        /// `Maybe<T>.Bind(selector)` returned `null` when `selector` returned `null`. 
+        /// The correct behaviour is to return `Maybe<T>.None`.
+        /// ]]>
+        /// </content>
         [Fact]
         [Issue(IssueSeverity.High, "2014/12/01")]
         public static void Bind_ReturnsNone_WhenSelectorReturnsNull()

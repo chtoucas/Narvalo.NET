@@ -5,16 +5,17 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
-    /*!
-     * What's not to be found here:
-     * - Return is simply casting: (T?)value
-     * - Nullable does not support the Join operation; there is no Nullable<Nullable<T>>
-     * - Zero is null
-     */
-
     /// <summary>
-    /// Provides extension methods for <see cref="System.Nullable{T}"/>.
+    /// Provides extension methods for <see cref="Nullable{T}"/>.
     /// </summary>
+    /// <remarks>
+    /// What's not to be found here:
+    /// <list type="bullet">
+    /// <item><c>Return</c> is simply casting: <c>(T?)value</c>.</item>
+    /// <item><c>Nullable</c> does not support the <c>Join</c> operation; there is no <c>Nullable&lt;Nullable&lt;T&gt;&gt;</c>.</item>
+    /// <item><c>Zero</c> is <see langword="null"/>.</item>
+    /// </list>
+    /// </remarks>
     public static partial class NullableExtensions
     {
         #region Monad
@@ -161,7 +162,8 @@ namespace Narvalo.Fx
         {
             Require.NotNull(exceptionFactory, "exceptionFactory");
 
-            if (!@this.HasValue) {
+            if (!@this.HasValue)
+            {
                 throw exceptionFactory.Invoke();
             }
 
@@ -170,6 +172,8 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
         {
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
             return Maybe.Create(@this);
         }
 
@@ -178,7 +182,8 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, "action");
 
-            if (@this.HasValue) {
+            if (@this.HasValue)
+            {
                 action.Invoke(@this.Value);
             }
 
@@ -190,7 +195,8 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, "action");
 
-            if (!@this.HasValue) {
+            if (!@this.HasValue)
+            {
                 action.Invoke();
             }
 

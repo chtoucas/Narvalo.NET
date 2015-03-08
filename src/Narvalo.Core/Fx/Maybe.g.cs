@@ -37,8 +37,11 @@ namespace Narvalo.Fx
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods for <see cref="Maybe{T}" />.
+    /// Provides a set of static and extension methods for <see cref="Maybe{T}" />.
     /// </summary>
+    /// <remarks>
+    /// Sometimes we prefer extension to static methods to be able to locally override them.
+    /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
     [global::System.Runtime.CompilerServices.CompilerGenerated]
@@ -48,24 +51,29 @@ namespace Narvalo.Fx
         private static readonly Maybe<Unit> s_None = Maybe<Unit>.None;
 
         /// <summary>
-        /// Returns the unique object of type <c>Maybe&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
+        /// <value>The unique object of type <c>Maybe&lt;Unit&gt;</c>.</value>
         public static Maybe<Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
-        /// Returns the zero of type <c>Maybe&lt;Unit&gt;.None</c>.
+        /// Gets the zero for <see cref="Maybe{T}"/>.
         /// </summary>
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
+        /// <value>The zero for <see cref="Maybe{T}"/>.</value>
         public static Maybe<Unit> None { get { return s_None; } }
 
         /// <summary>
-        /// Returns a new instance of <see cref="Maybe{T}" />.
+        /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
+        /// <typeparam name="T">The underlying type of the <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="Maybe{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
         public static Maybe<T> Create<T>(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -84,6 +92,7 @@ namespace Narvalo.Fx
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
         {
             Contract.Requires(square != null);
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return Maybe<T>.μ(square);
         }
@@ -101,6 +110,8 @@ namespace Narvalo.Fx
         public static Func<Maybe<T>, Maybe<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Maybe<T>, Maybe<TResult>>>() != null);
+
             return m => {
                 Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
@@ -117,6 +128,8 @@ namespace Narvalo.Fx
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>>() != null);
+
             return (m1, m2) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
@@ -133,6 +146,8 @@ namespace Narvalo.Fx
         public static Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>>() != null);
+
             return (m1, m2, m3) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
@@ -150,6 +165,8 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>>() != null);
+            
             return (m1, m2, m3, m4) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
@@ -167,6 +184,8 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>>() != null);
+       
             return (m1, m2, m3, m4, m5) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -176,10 +195,6 @@ namespace Narvalo.Fx
         #endregion
     }
 
-    /// <summary>
-    /// Provides extension methods for <see cref="Maybe{T}" />.
-    /// We use extension methods so that we can override them on a case by case basis.
-    /// </summary>
     public static partial class Maybe
     {
         #region Basic Monad functions (Prelude)
@@ -257,6 +272,8 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             bool predicate)
         {
+            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
+
             return predicate ? Maybe.Unit : Maybe.None;
         }
 
@@ -271,6 +288,7 @@ namespace Narvalo.Fx
             Action action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
 
             if (predicate) {
                 action.Invoke();
@@ -289,6 +307,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
 
             return @this.When(!predicate, action);
         }
@@ -306,6 +325,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(second, "second"); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -320,6 +340,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -338,6 +359,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
@@ -360,6 +382,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(second, "second"); // Null-reference check: "Zip" could have been overriden by a normal method.
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
@@ -387,6 +410,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -405,6 +429,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Join(
                 inner,
@@ -426,6 +451,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.GroupJoin(
                 inner, 
@@ -437,7 +463,7 @@ namespace Narvalo.Fx
 
         #endregion
         
-        #region Linq extensions
+        #region LINQ extensions
 
         public static Maybe<TResult> Join<TSource, TInner, TKey, TResult>(
             this Maybe<TSource> @this,
@@ -452,6 +478,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return JoinCore_(
                 @this,
@@ -475,6 +502,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return GroupJoinCore_(
                 @this,
@@ -499,6 +527,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -521,6 +550,7 @@ namespace Narvalo.Fx
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -538,6 +568,7 @@ namespace Narvalo.Fx
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Maybe<TKey>>>() != null);
 
             return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -558,6 +589,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -569,6 +601,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this); // Null-reference check: "Coalesce" could have been overriden by a normal method.
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Coalesce(predicate, other, Maybe<TResult>.None);
         }
@@ -580,6 +613,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this); // Null-reference check: "Coalesce" could have been overriden by a normal method.
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
@@ -590,6 +624,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -600,6 +635,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this); // Null-reference check: "Then" could have been overriden by a normal method.
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Then(Maybe.Unit).Run(_ => action.Invoke()).Then(@this);
         }

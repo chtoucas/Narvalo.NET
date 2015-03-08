@@ -5,7 +5,7 @@ namespace Playground.Edu.Fx
     using System;
     using System.Collections.Generic;
 
-    // Linq from scratch.
+    // LINQ from scratch.
     public static class Sequence
     {
         public static IEnumerable<TResult> Create<TSource, TResult>(

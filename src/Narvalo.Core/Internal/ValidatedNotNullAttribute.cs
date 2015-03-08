@@ -6,9 +6,9 @@ namespace Narvalo.Internal
 
     /// <summary>
     /// Decorating a parameter with this attribute informs Code Analysis
-    /// that the method is validating the parameter for <see langword="null" />.
+    /// that the method is validating the parameter for <see langword="null"/>.
     /// This will silence the CA1062 warning.
-    /// <see href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx">here</see>
+    /// <seealso href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx" />
     /// </summary>
     /// <remarks>
     /// When performing Static Contracts checking, this attribute must be public.

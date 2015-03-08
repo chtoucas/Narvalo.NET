@@ -37,8 +37,11 @@ namespace Playground.Edu.Monads.Samples
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods for <see cref="MonadPlus{T}" />.
+    /// Provides a set of static and extension methods for <see cref="MonadPlus{T}" />.
     /// </summary>
+    /// <remarks>
+    /// Sometimes we prefer extension to static methods to be able to locally override them.
+    /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
     [global::System.Runtime.CompilerServices.CompilerGenerated]
@@ -48,27 +51,31 @@ namespace Playground.Edu.Monads.Samples
         private static readonly MonadPlus<Unit> s_Zero = MonadPlus<Unit>.Zero;
 
         /// <summary>
-        /// Returns the unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
         /// </summary>
+        /// <value>The unique object of type <c>MonadPlus&lt;Unit&gt;</c>.</value>
         public static MonadPlus<Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
-        /// Returns the zero of type <c>MonadPlus&lt;Unit&gt;.Zero</c>.
+        /// Gets the zero for <see cref="MonadPlus{T}"/>.
         /// </summary>
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
+        /// <value>The zero for <see cref="MonadPlus{T}"/>.</value>
         public static MonadPlus<Unit> Zero { get { return s_Zero; } }
 
         /// <summary>
-        /// Returns a new instance of <see cref="MonadPlus{T}" />.
+        /// Obtains an instance of the <see cref="MonadPlus{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
+        /// <typeparam name="T">The underlying type of the <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="MonadPlus{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="MonadPlus{T}"/> class for the specified value.</returns>
         public static MonadPlus<T> Return<T>(T value)
         {
-            Contract.Ensures(Contract.Result<MonadPlus<T>>() != null);
 
             return MonadPlus<T>.η(value);
         }
@@ -101,6 +108,8 @@ namespace Playground.Edu.Monads.Samples
         public static Func<MonadPlus<T>, MonadPlus<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<MonadPlus<T>, MonadPlus<TResult>>>() != null);
+
             return m => {
                 Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
@@ -117,6 +126,8 @@ namespace Playground.Edu.Monads.Samples
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>>() != null);
+
             return (m1, m2) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
@@ -133,6 +144,8 @@ namespace Playground.Edu.Monads.Samples
         public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>>() != null);
+
             return (m1, m2, m3) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
@@ -150,6 +163,8 @@ namespace Playground.Edu.Monads.Samples
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>>() != null);
+            
             return (m1, m2, m3, m4) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
@@ -167,6 +182,8 @@ namespace Playground.Edu.Monads.Samples
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>>() != null);
+       
             return (m1, m2, m3, m4, m5) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -176,10 +193,6 @@ namespace Playground.Edu.Monads.Samples
         #endregion
     }
 
-    /// <summary>
-    /// Provides extension methods for <see cref="MonadPlus{T}" />.
-    /// We use extension methods so that we can override them on a case by case basis.
-    /// </summary>
     public static partial class MonadPlus
     {
         #region Basic Monad functions (Prelude)
@@ -193,7 +206,6 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<MonadPlus<TResult>>() != null);
 
             return @this.Bind(_ => MonadPlus.Return(selector.Invoke(_)));
         }
@@ -206,7 +218,6 @@ namespace Playground.Edu.Monads.Samples
             MonadPlus<TResult> other)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<MonadPlus<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -224,7 +235,6 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : MonadPlus<TSource>.Zero);
@@ -239,7 +249,6 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.Object(@this); // Null-reference check: "Select" could have been overriden by a normal method.
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -257,6 +266,8 @@ namespace Playground.Edu.Monads.Samples
             this MonadPlus<TSource> @this,
             bool predicate)
         {
+            Contract.Ensures(Contract.Result<MonadPlus<Unit>>() != null);
+
             return predicate ? MonadPlus.Unit : MonadPlus.Zero;
         }
 
@@ -271,6 +282,7 @@ namespace Playground.Edu.Monads.Samples
             Action action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<MonadPlus<Unit>>() != null);
 
             if (predicate) {
                 action.Invoke();
@@ -289,6 +301,7 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.Object(@this);
             Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<MonadPlus<Unit>>() != null);
 
             return @this.When(!predicate, action);
         }
@@ -437,7 +450,7 @@ namespace Playground.Edu.Monads.Samples
 
         #endregion
         
-        #region Linq extensions
+        #region LINQ extensions
 
         public static MonadPlus<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadPlus<TSource> @this,
@@ -538,6 +551,7 @@ namespace Playground.Edu.Monads.Samples
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
+            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TKey>>>() != null);
 
             return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -623,7 +637,6 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.NotNull(value, "value");
             Contract.Requires(@this != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TResult>>() != null);
 
             return value.Bind(@this);
         }
@@ -637,6 +650,7 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -650,6 +664,7 @@ namespace Playground.Edu.Monads.Samples
         {
             Require.NotNull(funM, "funM");
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -985,7 +1000,6 @@ namespace Playground.Edu.Monads.Samples.Internal
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             var m = @this.Select(funM).AssumeNotNull().Collect();
 
@@ -1012,8 +1026,8 @@ namespace Playground.Edu.Monads.Samples.Internal
             Func<TFirst, TSecond, MonadPlus<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
+            // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 

@@ -1,6 +1,10 @@
 ﻿<#@ include file="Monad.tt" #>
 <# 
-	InitializeOr();
+    InitializeOr();
 
-	ReturnName = "Create";
+    BindReturnsSome = true;
+    UnitReturnsSome = true;
+    MultiplicationReturnsSome = true;
+
+    ReturnName = "Create";
 #>

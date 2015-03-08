@@ -25,6 +25,7 @@ namespace Narvalo.Globalization
             get
             {
                 Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+
                 return s_Instance.InnerCurrent;
             }
         }

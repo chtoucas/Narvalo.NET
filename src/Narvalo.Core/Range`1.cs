@@ -15,7 +15,7 @@ namespace Narvalo
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "RequiresAtCall-!(lowerEnd.CompareTo(upperEnd) > 0)",
-            Justification = "[CodeContracts] CCCheck does not seem to be able to prove a Require in conjunction with IComparable<T>.")]
+            Justification = "[CodeContracts] CCCheck does not seem to be able to prove a precondition in conjunction with IComparable<T>.")]
 #endif
         public Range(T lowerEnd, T upperEnd)
         {

@@ -37,8 +37,11 @@ namespace Narvalo.Fx
     using Narvalo.Fx;   // For Unit
 
     /// <summary>
-    /// Provides a set of static methods for <see cref="Output{T}" />.
+    /// Provides a set of static and extension methods for <see cref="Output{T}" />.
     /// </summary>
+    /// <remarks>
+    /// Sometimes we prefer extension to static methods to be able to locally override them.
+    /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
     [global::System.Runtime.CompilerServices.CompilerGenerated]
@@ -47,19 +50,24 @@ namespace Narvalo.Fx
         private static readonly Output<Unit> s_Unit = Success(Narvalo.Fx.Unit.Single);
 
         /// <summary>
-        /// Returns the unique object of type <c>Output&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Output&lt;Unit&gt;</c>.
         /// </summary>
+        /// <value>The unique object of type <c>Output&lt;Unit&gt;</c>.</value>
         public static Output<Unit> Unit { get { return s_Unit; } }
 
 
         /// <summary>
-        /// Returns a new instance of <see cref="Output{T}" />.
+        /// Obtains an instance of the <see cref="Output{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
+        /// <typeparam name="T">The underlying type of the <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="Output{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Output{T}"/> class for the specified value.</returns>
         public static Output<T> Success<T>(T value)
         {
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return Output<T>.η(value);
         }
@@ -75,6 +83,7 @@ namespace Narvalo.Fx
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             Contract.Requires(square != null);
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return Output<T>.μ(square);
         }
@@ -92,6 +101,8 @@ namespace Narvalo.Fx
         public static Func<Output<T>, Output<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Output<T>, Output<TResult>>>() != null);
+
             return m => {
                 Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
@@ -108,6 +119,8 @@ namespace Narvalo.Fx
         public static Func<Output<T1>, Output<T2>, Output<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<TResult>>>() != null);
+
             return (m1, m2) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
@@ -124,6 +137,8 @@ namespace Narvalo.Fx
         public static Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>>() != null);
+
             return (m1, m2, m3) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
@@ -141,6 +156,8 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>>() != null);
+            
             return (m1, m2, m3, m4) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
@@ -158,6 +175,8 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
+            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>>() != null);
+       
             return (m1, m2, m3, m4, m5) => {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -167,10 +186,6 @@ namespace Narvalo.Fx
         #endregion
     }
 
-    /// <summary>
-    /// Provides extension methods for <see cref="Output{T}" />.
-    /// We use extension methods so that we can override them on a case by case basis.
-    /// </summary>
     public static partial class Output
     {
         #region Basic Monad functions (Prelude)
@@ -234,6 +249,7 @@ namespace Narvalo.Fx
             Action action)
         {
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Output<Unit>>() != null);
 
             if (predicate) {
                 action.Invoke();
@@ -252,6 +268,7 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<Output<Unit>>() != null);
 
             return @this.When(!predicate, action);
         }
@@ -359,7 +376,7 @@ namespace Narvalo.Fx
 
         #endregion
         
-        #region Linq extensions
+        #region LINQ extensions
 
 
         #endregion

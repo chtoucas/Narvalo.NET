@@ -3,8 +3,12 @@
 namespace Playground.Edu.Monads
 {
 #if DOCUMENTATION
+
+    using System.Runtime.CompilerServices;
     
-    /*!
+    /**
+     * <content markup="commonmark">
+     * <![CDATA[
      * Monad Skeleton
      * ==============
      *
@@ -27,9 +31,10 @@ namespace Playground.Edu.Monads
      * 
      * - COMONAD_VIA_MAP_COMULTIPLY
      *   The default behaviour is to define Comonads via cobind.
-     * 
-     *
+     * ]]>
+     * </content>
      */
+    [CompilerGenerated]
     internal static class NamespaceDoc { }
 
 #endif

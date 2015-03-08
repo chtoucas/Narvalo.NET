@@ -3,12 +3,16 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
 
     public static class Format
     {
         [Pure]
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string CurrentCulture(string format, params object[] args)
         {
             Contract.Requires(format != null);
@@ -19,6 +23,8 @@ namespace Narvalo
         }
 
         [Pure]
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string InvariantCulture(string format, params object[] args)
         {
             Contract.Requires(format != null);

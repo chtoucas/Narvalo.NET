@@ -35,10 +35,10 @@ namespace Narvalo.Globalization
         {
             Enforce.NotNull(code, "code");
 
-            // For PCL classes, we must convert the string to an array before being able to use Linq operators on it.
+            // For PCL classes, we must convert the string to an array before being able to use LINQ operators on it.
             Contract.Requires(code.Length == 3, "The code MUST be composed of exactly 3 letters.");
             Contract.Requires(
-                Contract.ForAll(code.ToCharArray(), c => { var pos = (int)c; return pos >= 65 && pos <= 90; }),
+                Contract.ForAll(code.ToCharArray(), c => c >= 65 && c <= 90),
                 "The code MUST be all CAPS and ASCII.");
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
@@ -127,8 +127,8 @@ namespace Narvalo.Globalization
         /// <summary>
         /// Gets or sets the number of minor units.
         /// </summary>
-        /// <value>The number of minor units; <c>null</c> if none defined.
-        /// The default is <c>null</c>.</value>
+        /// <value>The number of minor units; <see langword="null"/> if none defined.
+        /// The default is <see langword="null"/>.</value>
         public short? MinorUnits { get; set; }
 
         /// <summary>

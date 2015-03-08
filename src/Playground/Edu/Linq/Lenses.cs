@@ -6,7 +6,7 @@ namespace Playground.Edu.Linq
 
     using Narvalo.Fx;
 
-    // Linq from scratch.
+    // LINQ from scratch.
     public static class Lenses
     {
         #region Generation Operators

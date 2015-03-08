@@ -60,7 +60,7 @@ namespace Narvalo
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="code"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="code"/> is <see langword="null"/>.</exception>
         /// <exception cref="CurrencyNotFoundException">No currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
@@ -77,7 +77,7 @@ namespace Narvalo
         /// with the specified culture.
         /// </summary>
         /// <param name="cultureInfo">A culture info.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
         /// <exception cref="CurrencyNotFoundException">No currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
         public static Currency OfCulture(CultureInfo cultureInfo)
@@ -326,7 +326,7 @@ namespace Narvalo
             return !(left == right);
         }
 
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
+        /// <copydoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -338,7 +338,7 @@ namespace Narvalo
             return this._code == other._code;
         }
 
-        /// <inheritdoc cref="Object.Equals(Object)" />
+        /// <copydoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             if (Object.ReferenceEquals(obj, null))
@@ -362,7 +362,7 @@ namespace Narvalo
             return Equals(obj as Currency);
         }
 
-        /// <inheritdoc cref="Object.GetHashCode" />
+        /// <copydoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return _code.GetHashCode();

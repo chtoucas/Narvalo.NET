@@ -3,6 +3,7 @@
 
     // NB: Documentation is almost blindly copied from Haskell.
 
+    // The following is going to change:
     // If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
     // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
 
@@ -17,14 +18,16 @@
     string _namespace;
     string _linqNamespace;
     
-    bool _hasPlus = false;
-    bool _hasZero = false;
     bool _isNullable = true;
-    string _plusName;
+
+    bool _unitReturnsSome = false;
+    bool _multiplicationReturnsSome = false;
+
     bool _preferLinqDialect = true;
-    bool _requireStruct = false;
+
+    string _plusName = "Plus";
     string _returnName = "Return";
-    string _zeroName;
+    string _zeroName = "Zero";
 
     /* ========================================================================================== *
      * Properties
@@ -44,7 +47,7 @@
         set
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The namespace can not be null or empty.");
             }
 
             _namespace = value;
@@ -65,7 +68,7 @@
         set
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The LINQ namespace can not be null or empty.");
             }
 
             _linqNamespace = value;
@@ -86,21 +89,69 @@
         set
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The name can not be null or empty.");
             }
 
             _name = value;
         }
     }
     
+    // Gets a value indicating whether Monad<T>.Bind() ensures a non-null return value. Default to false.
+    protected bool BindReturnsSome { get; set; }
+
+    // Gets a value indicating whether Monad<T>.Map() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Map() use Monad<T>.Bind().
+    protected bool MapReturnsSome { get { return BindReturnsSome; } }
+
+    // Gets a value indicating whether Monad<T>.Filter() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Filter() use Monad<T>.Bind().
+    protected bool FilterReturnsSome { get { return BindReturnsSome; } }
+    
+    // Gets a value indicating whether Monad<T>.Coalesce() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Coalesce() use Monad<T>.Bind().
+    protected bool CoalesceReturnsSome { get { return BindReturnsSome; } }
+    
+    // Gets a value indicating whether Monad<T>.Then() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Then() use Monad<T>.Coalesce().
+    protected bool ThenReturnsSome { get { return CoalesceReturnsSome; } }
+    
+    // Gets a value indicating whether Monad<T>.Join() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Join() use Monad<T>.Map().
+    protected bool JoinReturnsSome { get { return MapReturnsSome; } }
+
+    // Gets a value indicating whether Monad<T>.GroupJoin() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.GroupJoin() use Monad<T>.Map().
+    protected bool GroupJoinReturnsSome { get { return MapReturnsSome; } }
+    
+    // Gets a value indicating whether Monad<T>.η() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Return() being just the public alias of Monad<T>.η(), this also applies
+    // to the Monad<T>.Return() method.
+    protected bool UnitReturnsSome { 
+        get { return _unitReturnsSome; } 
+        set { _unitReturnsSome = value; } 
+    }
+
+    // Gets a value indicating whether Monad<T>.μ() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Flatten() being just the public alias of Monad<T>.μ(), this also applies
+    // to the Monad<T>.Flatten() method.
+    protected bool MultiplicationReturnsSome { 
+        get { return _multiplicationReturnsSome; } 
+        set { _multiplicationReturnsSome = value; } 
+    }
+    
+    // Default to true.
     protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
-    protected bool RequireStruct { get { return _requireStruct; } set { _requireStruct = value; } }
+    // Default to false.
+    protected bool RequireStruct { get; set; }
     
-    protected bool HasPlus { get { return _hasPlus; } private set { _hasPlus = value; } }
+    // Default to false.
+    protected bool HasPlus { get; set; }
 
-    protected bool HasZero { get { return _hasZero; } private set { _hasZero = value; } }
+    // Default to false.
+    protected bool HasZero { get; set; }
 
+    // Default to "Zero".
     protected string ZeroName { 
         get 
         { 
@@ -114,13 +165,14 @@
         set
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The Zero name can not be null or empty.");
             }
             
             _zeroName = value;
         } 
     }
     
+    // Default to "Plus".
     protected string PlusName
     {
         get
@@ -135,13 +187,14 @@
         set
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The Plus name can not be null or empty.");
             }
             
             _plusName = value;
         } 
     }
 
+    // Default to true.
     protected bool PreferLinqDialect { 
         get { return _preferLinqDialect; }
         set { _preferLinqDialect = value; }
@@ -164,6 +217,7 @@
         get { return PreferLinqDialect ? "Select" : "Map"; }
     }
     
+    // Default to Return.
     protected string ReturnName
     {
         get { return _returnName; }
@@ -171,7 +225,7 @@
         set 
         {
             if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException();
+                throw new ArgumentException("The Return name can not be null or empty.");
             }
             
             _returnName = value; 
@@ -187,7 +241,7 @@
         ThrowIfInitialized_();
         
         HasZero = true;
-        ZeroName = "Zero";
+        //ZeroName = "Zero";
 
         _initialized = true;
     }
@@ -197,10 +251,10 @@
         ThrowIfInitialized_();
         
         HasZero = true;
-        ZeroName = "Zero";
+        //ZeroName = "Zero";
 
         HasPlus = true;
-        PlusName = "Plus";
+        //PlusName = "Plus";
 
         _initialized = true;
     }
@@ -316,8 +370,11 @@ namespace <#= LinqNamespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
+    /// Provides a set of static and extension methods for <see cref="<#= Name #>{T}" />.
     /// </summary>
+    /// <remarks>
+    /// Sometimes we prefer extension to static methods to be able to locally override them.
+    /// </remarks>
 <#+ WriteCompilerAttributes_(); #>
     public static partial class <#= Name #>
     {
@@ -327,30 +384,35 @@ namespace <#= LinqNamespace #>.Internal
 <#+ } #>
 
         /// <summary>
-        /// Returns the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
+        /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
         public static <#= Name #><Unit> Unit { get { return s_Unit; } }
 
 <#+ if (HasZero) { #>
         /// <summary>
-        /// Returns the zero of type <c><#= Name #>&lt;Unit&gt;.<#= ZeroName #></c>.
+        /// Gets the zero for <see cref="<#= Name #>{T}"/>.
         /// </summary>
         /// <remarks>
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
+        /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
         public static <#= Name #><Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
 <#+ } #>
 
         /// <summary>
-        /// Returns a new instance of <see cref="<#= Name #>{T}" />.
+        /// Obtains an instance of the <see cref="<#= Name #>{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
+        /// <typeparam name="T">The underlying type of the <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
 <#+ StructConstraint_("T"); #>
         {
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && UnitReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
 <#+ } #>
 
@@ -371,6 +433,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ if (IsNullable) { #>
             Contract.Requires(square != null);
 <#+ } #>
+<#+ if (IsNullable && MultiplicationReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+<#+ } #>
 
             return <#= Name #><T>.μ(square);
         }
@@ -390,6 +455,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("T"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
+
             return m => {
 <#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m", MapName, true); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
@@ -409,6 +476,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("T2"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
+
             return (m1, m2) => {
 <#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
@@ -429,6 +498,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("T3"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
+
             return (m1, m2, m3) => {
 <#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
@@ -451,6 +522,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("T4"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
+            
             return (m1, m2, m3, m4) => {
 <#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
@@ -474,6 +547,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("T5"); #>
 <#+ StructConstraint_("TResult"); #>
         {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
+       
             return (m1, m2, m3, m4, m5) => {
 <#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -490,9 +565,9 @@ namespace <#= LinqNamespace #>.Internal
     protected void EmitCoreComonad() 
     {
 #>
-    /// <summary>
+    /// <content>
     /// Comonad methods.
-    /// </summary>
+    /// </content>
     public static partial class <#= Name #>
     {
         /// <remarks>
@@ -523,10 +598,6 @@ namespace <#= LinqNamespace #>.Internal
     protected void EmitExtensions()
     {
 #>
-    /// <summary>
-    /// Provides extension methods for <see cref="<#= Name #>{T}" />.
-    /// We use extension methods so that we can override them on a case by case basis.
-    /// </summary>
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
@@ -542,8 +613,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("selector", false); #>
-<#+ // "Bind" can not guarantee non null return value. #>
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && BindReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -560,8 +630,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(true); #>
-<#+ // "Bind" can not guarantee non null return value. #>
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && BindReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -583,8 +652,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("predicate", false); #>
-<#+ // "Bind" can not guarantee non null return value. #>
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && BindReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -605,7 +673,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(MapName, true); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && MapReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
@@ -628,6 +696,10 @@ namespace <#= LinqNamespace #>.Internal
             bool predicate)
 <#+ StructConstraint_("TSource"); #>
         {
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+<#+ } #>
+
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }
 <#+ } #>
@@ -644,6 +716,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("TSource"); #>
         {
             Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+<#+ } #>
 
             if (predicate) {
                 action.Invoke();
@@ -663,6 +738,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
             Contract.Requires(action != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+<#+ } #>
 
             return @this.When(!predicate, action);
         }
@@ -683,6 +761,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("second", MapName, true); #>
 <#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -701,6 +782,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("second", "Zip", true); #>
 <#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -724,6 +808,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("second", "Zip", true); #>
 <#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
@@ -752,6 +839,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("second", "Zip", true); #>
 <#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
@@ -775,10 +865,13 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ ObjectNotNull_(FilterName, true); #>
+<#+ if (IsNullable && FilterReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.<#= FilterName #>(predicate);
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this, 
@@ -787,10 +880,13 @@ namespace <#= LinqNamespace #>.Internal
 <#+ StructConstraint_("TResult"); #>
         {
 <#+ ObjectNotNull_(MapName, true); #>
+<#+ if (IsNullable && MapReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.<#= MapName #>(selector);
         }
-<#+ } #>
+<#+ } // End of !PreferLinqDialect. #>
 
         /// <remarks>
         /// Kind of generalisation of Zip (liftM2).
@@ -806,6 +902,9 @@ namespace <#= LinqNamespace #>.Internal
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("valueSelectorM", false); #>
 <#+ NotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).<#= MapName #>(
@@ -831,6 +930,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && JoinReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Join(
                 inner,
@@ -858,6 +960,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && GroupJoinReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.GroupJoin(
                 inner, 
@@ -870,7 +975,7 @@ namespace <#= LinqNamespace #>.Internal
 
         #endregion
         
-        #region Linq extensions
+        #region LINQ extensions
 
 <#+ if (HasZero) { #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
@@ -892,6 +997,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && JoinReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return JoinCore_(
                 @this,
@@ -921,6 +1029,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && GroupJoinReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return GroupJoinCore_(
                 @this,
@@ -951,6 +1062,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+<#+ if (IsNullable && MapReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
             
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -979,6 +1093,9 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+<#+ if (IsNullable && MapReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -999,6 +1116,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ NotNull_("outerKeySelector", false); #>
 <#+ NotNull_("comparer", false); #>
             Contract.Requires(innerKeySelector != null);
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
 
             return source => {
                 TKey outerKey = outerKeySelector.Invoke(source);
@@ -1022,6 +1140,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
 <#+ NotNull_("predicate", false); #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -1036,6 +1157,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_("Coalesce", true); #>
             Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
         }
@@ -1049,6 +1173,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_("Coalesce", true); #>
             Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
@@ -1061,6 +1188,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
             Require.NotNull(action, "action");
+<#+ if (IsNullable && BindReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -1073,6 +1203,9 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_("Then", true); #>
 <#+ NotNull_("action", false); #>
+<#+ if (IsNullable && ThenReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
@@ -1106,8 +1239,7 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ NotNull_("value", true); #>
             Contract.Requires(@this != null);
-<#+ // "Bind" can not guarantee non null return value. #>
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && BindReturnsSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1457,7 +1589,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-<#+ // "FoldCore" can not guarantee non null return value. #>
+<#+ // "FoldCore" does not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1561,7 +1693,8 @@ namespace <#= LinqNamespace #>.Internal
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-<#+ if (IsNullable && HasZero) { #>
+<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ // Select() guarantees a non-null return value. #>
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
@@ -1595,8 +1728,8 @@ namespace <#= LinqNamespace #>.Internal
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
-            // WARNING: Do not remove resultSelector, otherwise .NET will make a recursive call
-            // instead of using the Zip from Linq.
+            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
+            // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 <#+ } #>

@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
     using Narvalo.Fx;
@@ -17,6 +18,7 @@ namespace Narvalo
         public static Output<T> Catch<TException>(Func<T> valueFactory) where TException : Exception
         {
             Require.NotNull(valueFactory, "valueFactory");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             try {
                 T value = valueFactory.Invoke();
@@ -39,6 +41,7 @@ namespace Narvalo
             where T2Exception : Exception
         {
             Require.NotNull(valueFactory, "valueFactory");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -63,6 +66,7 @@ namespace Narvalo
             where T3Exception : Exception
         {
             Require.NotNull(valueFactory, "valueFactory");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -89,6 +93,7 @@ namespace Narvalo
             where T4Exception : Exception
         {
             Require.NotNull(valueFactory, "valueFactory");
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             ExceptionDispatchInfo edi;
 
