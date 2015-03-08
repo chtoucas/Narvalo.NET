@@ -3,6 +3,9 @@
 
     // NB: Documentation is almost blindly copied from Haskell.
 
+    // TODO:
+    // Protect the various property's setters.
+
     // The following is going to change:
     // If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
     // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
@@ -11,28 +14,26 @@
      * Fields
      * ========================================================================================== */
 
-    bool _initialized = false;
-    bool _headerWritten = false;
+    private bool _initialized = false;
+    private bool _headerWritten = false;
     
-    string _name;
-    string _namespace;
-    string _linqNamespace;
+    private string _name;
+    private string _namespace;
+    private string _linqNamespace;
     
-    bool _isNullable = true;
+    private bool _isNullable = true;
+    private bool _preferLinqDialect = true;
 
-    bool _unitReturnsSome = false;
-    bool _multiplicationReturnsSome = false;
-
-    bool _preferLinqDialect = true;
-
-    string _plusName = "Plus";
-    string _returnName = "Return";
-    string _zeroName = "Zero";
+    private string _plusName = "Plus";
+    private string _returnName = "Return";
+    private string _zeroName = "Zero";
 
     /* ========================================================================================== *
      * Properties
      * ========================================================================================== */
 
+    // Gets or sets the name of the namespace.
+    // If no namespace was given, it will be infered from the template location.
     protected string Namespace
     {
         get
@@ -46,14 +47,20 @@
 
         set
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The namespace can not be null or empty.");
+            if (_namespace != null) {
+                throw new InvalidOperationException("You can set the name of the namespace only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The namespace can not be null or blank.");
             }
 
             _namespace = value;
         }
     }
     
+    // Gets or sets the name of the LINQ namespace.
+    // If no namespace was given, it will be infered from the template location.
     protected string LinqNamespace
     {
         get
@@ -67,14 +74,20 @@
 
         set
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The LINQ namespace can not be null or empty.");
+            if (_linqNamespace != null) {
+                throw new InvalidOperationException("You can set the name of the LINQ namespace only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The LINQ namespace can not be null or blank.");
             }
 
             _linqNamespace = value;
         }
     }
-
+    
+    // Gets or sets the name of the monad.
+    // If no namespace was given, it will be infered from the template name.
     protected string Name
     {
         get
@@ -88,16 +101,30 @@
 
         set
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The name can not be null or empty.");
+            if (_name != null) {
+                throw new InvalidOperationException("You can set the name of the monad only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name can not be null or blank.");
             }
 
             _name = value;
         }
     }
     
-    // Gets a value indicating whether Monad<T>.Bind() ensures a non-null return value. Default to false.
+    // Gets or sets a value indicating whether Monad<T>.Bind() ensures a non-null return value. Default to false.
     protected bool BindReturnsSome { get; set; }
+    
+    // Gets or sets a value indicating whether Monad<T>.η() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Return() being just the public alias of Monad<T>.η(), this also applies
+    // to the Monad<T>.Return() method.
+    protected bool UnitReturnsSome { get; set; }
+
+    // Gets or sets a value indicating whether Monad<T>.μ() ensures a non-null return value. Default to false.
+    // NB: Monad<T>.Flatten() being just the public alias of Monad<T>.μ(), this also applies
+    // to the Monad<T>.Flatten() method.
+    protected bool MultiplicationReturnsSome { get; set; }
 
     // Gets a value indicating whether Monad<T>.Map() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Map() use Monad<T>.Bind().
@@ -123,40 +150,24 @@
     // NB: Monad<T>.GroupJoin() use Monad<T>.Map().
     protected bool GroupJoinReturnsSome { get { return MapReturnsSome; } }
     
-    // Gets a value indicating whether Monad<T>.η() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Return() being just the public alias of Monad<T>.η(), this also applies
-    // to the Monad<T>.Return() method.
-    protected bool UnitReturnsSome { 
-        get { return _unitReturnsSome; } 
-        set { _unitReturnsSome = value; } 
-    }
-
-    // Gets a value indicating whether Monad<T>.μ() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Flatten() being just the public alias of Monad<T>.μ(), this also applies
-    // to the Monad<T>.Flatten() method.
-    protected bool MultiplicationReturnsSome { 
-        get { return _multiplicationReturnsSome; } 
-        set { _multiplicationReturnsSome = value; } 
-    }
-    
-    // Default to true.
+    // Gets a value indicating whether the underlying type T is nullable. Default to true.
     protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
     // Default to false.
     protected bool RequireStruct { get; set; }
     
-    // Default to false.
+    // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
     protected bool HasPlus { get; set; }
 
-    // Default to false.
+    // Gets or sets a value indicating whether the monad is a MonadZero. Default to false.
     protected bool HasZero { get; set; }
 
-    // Default to "Zero".
+    // Gets or sets the name of the Zero property. Default to "Zero".
     protected string ZeroName { 
         get 
         { 
             if (!HasZero) {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The monad is not a MonadZero.");
             }
             
             return _zeroName; 
@@ -164,21 +175,21 @@
 
         set
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The Zero name can not be null or empty.");
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Zero property can not be null or blank.");
             }
             
             _zeroName = value;
         } 
     }
     
-    // Default to "Plus".
+    // Gets or sets the name of the Plus method. Default to "Plus".
     protected string PlusName
     {
         get
         { 
             if (!HasPlus) {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The monad is not a MonadPlus.");
             }
 
             return _plusName; 
@@ -186,46 +197,48 @@
 
         set
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The Plus name can not be null or empty.");
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Plus method can not be null or blank.");
             }
             
             _plusName = value;
         } 
     }
 
-    // Default to true.
+    // Gets or sets a value indicating whether we prefer to use the LINQ dialect. Default to true.
     protected bool PreferLinqDialect { 
         get { return _preferLinqDialect; }
         set { _preferLinqDialect = value; }
     }
 
+    // Gets the name of the Filter method.
     protected string FilterName
     {
         get 
         { 
             if (!HasZero) {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("The monad does not have a Zero.");
             }
 
             return PreferLinqDialect ? "Where" : "Filter";
         }
     }
     
+    // Gets the name of the Map method.
     protected string MapName
     {
         get { return PreferLinqDialect ? "Select" : "Map"; }
     }
     
-    // Default to Return.
+    // Gets or sets the name of the Return method. Default to "Return".
     protected string ReturnName
     {
         get { return _returnName; }
 
         set 
         {
-            if (String.IsNullOrEmpty(value)) {
-                throw new ArgumentException("The Return name can not be null or empty.");
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Return method can not be null or blank.");
             }
             
             _returnName = value; 
@@ -233,9 +246,10 @@
     }
     
     /* ========================================================================================== *
-     * "Constructors"
+     * "Constructors". NB: All constructors are mutually exclusive.
      * ========================================================================================== */
 
+    // Initializes a MonadZero.
     public void InitializeZero()
     {
         ThrowIfInitialized_();
@@ -246,6 +260,7 @@
         _initialized = true;
     }
     
+    // Initializes a MonadPlus.
     public void InitializePlus()
     {
         ThrowIfInitialized_();
@@ -259,6 +274,7 @@
         _initialized = true;
     }
     
+    // Initializes a MonadOr.
     public void InitializeOr()
     {
         ThrowIfInitialized_();
@@ -278,6 +294,7 @@
 
     // EmitMonad -----------------------------------------------------------------------------------
 
+    // Generates a Monad.
     public void EmitMonad()
     {
         WriteHeader_();
@@ -299,10 +316,11 @@ namespace <#= Namespace #>
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
-    }
+    } // End of EmitMonad().
 
     // EmitComonad ---------------------------------------------------------------------------------
     
+    // Generates a Comonad.
     public void EmitComonad()
     {
         WriteHeader_();
@@ -314,10 +332,11 @@ namespace <#= Namespace #>
 <#+ EmitCoreComonad(); #>
 }
 <#+
-    }
+    } // End of EmitComonad().
 
     // EmitLinq ------------------------------------------------------------------------------------
     
+    // Generates the LINQ extensions.
     public void EmitLinq()
     {
         WriteHeader_();
@@ -358,7 +377,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+
-    }
+    } // End of EmitLinq().
     
     /* ========================================================================================== *
      * Protected Methods
@@ -366,6 +385,7 @@ namespace <#= LinqNamespace #>.Internal
 
     // EmitCoreClass -------------------------------------------------------------------------------
 
+    // Generates the core Monad methods.
     protected void EmitCoreClass() 
     {
 #>
@@ -558,16 +578,14 @@ namespace <#= LinqNamespace #>.Internal
         #endregion
     }
 <#+
-    }
+    } // End of EmitCoreClass().
     
     // EmitCoreComonad -----------------------------------------------------------------------------
 
     protected void EmitCoreComonad() 
     {
 #>
-    /// <content>
-    /// Comonad methods.
-    /// </content>
+    // Implements core Comonad methods.
     public static partial class <#= Name #>
     {
         /// <remarks>
@@ -591,13 +609,14 @@ namespace <#= LinqNamespace #>.Internal
         }
     }
 <#+
-    }
+    } // End of EmitCoreComonad().
 
     // EmitExtensions ------------------------------------------------------------------------------
 
     protected void EmitExtensions()
     {
 #>
+    // Implements core Monad extension methods.
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
@@ -659,7 +678,7 @@ namespace <#= LinqNamespace #>.Internal
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
 <#+ if (!RequireStruct) { #>
 
@@ -679,7 +698,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
-<#+ } #>
+<#+ } // End of !RequireStruct. #>
         
         #endregion
 
@@ -702,7 +721,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         /// <remarks>
         /// Named <c>when</c> in Haskell parlance.
@@ -971,7 +990,7 @@ namespace <#= LinqNamespace #>.Internal
                 resultSelector, 
                 EqualityComparer<TKey>.Default);
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         #endregion
         
@@ -1124,7 +1143,7 @@ namespace <#= LinqNamespace #>.Internal
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
             };
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         #endregion
 
@@ -1179,7 +1198,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         public static <#= Name #><TSource> Run<TSource>(
             this <#= Name #><TSource> @this,
@@ -1209,12 +1228,12 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
-<#+ } #>
+<#+ } // End of HasZero. #>
 
         #endregion
     }
 <#+
-    }
+    } // End of EmitExtensions().
     
     // EmitKleisliExtensions -----------------------------------------------------------------------
 
@@ -1283,7 +1302,7 @@ namespace <#= LinqNamespace #>.Internal
         #endregion
     }
 <#+
-    }
+    } // End of EmitKleisliExtensions().
 
     // EmitEnumerableMonadExtensions ---------------------------------------------------------------
 
@@ -1314,7 +1333,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.CollectCore();
         }
-<#+ } #>
+<#+ } // End of !RequireStruct. #>
         
         #endregion
 <#+ if (HasZero && HasPlus) { #>
@@ -1338,10 +1357,10 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-<#+ } #>
+<#+ } // End of HasZero && HasPlus. #>
     }
 <#+
-    }
+    } // End of EmitEnumerableMonadExtensions().
 
     // EmitEnumerableMonadInternalExtensions -------------------------------------------------------
 
@@ -1376,7 +1395,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Aggregate(seed, fun)<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
         }
-<#+ } #>
+<#+ } // End of !RequireStruct. #>
 
 <#+ if (HasZero && HasPlus) { #>
 
@@ -1394,10 +1413,10 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n))<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
         }
-<#+ } #>
+<#+ } // End of HasZero && HasPlus. #>
     }
 <#+
-    }
+    } // End of EmitEnumerableMonadInternalExtensions().
 
     // EmitEnumerableExtensions --------------------------------------------------------------------
 
@@ -1618,7 +1637,7 @@ namespace <#= LinqNamespace #>.Internal
         #endregion
     }
 <#+
-    }
+    } // End of EmitEnumerableExtensions().
     
     // EmitEnumerableInternalExtensions ------------------------------------------------------------
 
@@ -1906,7 +1925,7 @@ namespace <#= LinqNamespace #>.Internal
         }
     }
 <#+
-    }
+    } // End of EmitEnumerableInternalExtensions().
 
     /* ========================================================================================== *
      * Private Methods
@@ -1951,7 +1970,7 @@ using global::System.Diagnostics.CodeAnalysis;
 
 <#+
         _headerWritten = true;
-    }
+    } // End of WriteHeader_().
     
     protected void WriteCompilerAttributes_()
     {
@@ -1960,80 +1979,80 @@ using global::System.Diagnostics.CodeAnalysis;
     [global::System.Diagnostics.DebuggerNonUserCode]
     [global::System.Runtime.CompilerServices.CompilerGenerated]
 <#+
-    }
+    } // End of WriteCompilerAttributes_().
     
-    string InferName_() 
+    private string InferName_() 
     {
         return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
     }
     
-    string InferNamespace_() 
+    private string InferNamespace_() 
     {
         return System.Runtime.Remoting.Messaging.CallContext
             .LogicalGetData("NamespaceHint")
             .ToString();
     }
     
-    void StructConstraint_(string name)
+    private void StructConstraint_(string name)
     {
         if (RequireStruct) {
 #>
             where <#= name #> : struct
 <#+
         }
-    }
+    } // End of StructConstraint_().
 
-    void ObjectNotNull_(bool isMonad = true) 
+    private void ObjectNotNull_(bool isMonad = true) 
     {
         if (!isMonad || IsNullable) {
 #>
             Require.Object(@this);
 <#+
         }
-    }
+    } // End of ObjectNotNull_().
     
-    void ObjectNotNull_(string methodName, bool isMonad = true) 
+    private void ObjectNotNull_(string methodName, bool isMonad = true) 
     {
         if (!isMonad || IsNullable) {
 #>
             Require.Object(@this); <#+ WarmNull_(methodName); #>
 <#+
         }
-    }
+    } // End of ObjectNotNull_().
 
-    void NotNull_(string name, bool isMonad = true) 
+    private void NotNull_(string name, bool isMonad = true) 
     {
         if (!isMonad || IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>");
 <#+
         }
-    }
+    } // End of NotNull_().
     
-    void NotNull_(string name, string methodName, bool isMonad = true) 
+    private void NotNull_(string name, string methodName, bool isMonad = true) 
     {
         if (!isMonad || IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>"); <#+ WarmNull_(methodName); #>
 <#+
         }
-    }
+    } // End of NotNull_().
     
     // Null-reference check with extension methods is not always necessary but we never know for sure here.
-    void WarmNull_(string methodName) 
+    private void WarmNull_(string methodName) 
     {
 #>// Null-reference check: "<#= methodName #>" could have been overriden by a normal method.
 <#+
-    }
+    } // End of WarmNull_().
 
-    void ThrowIfInitialized_() 
+    private void ThrowIfInitialized_() 
     {
         if (_initialized) {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("You can only initialize the template once.");
         }
     }
 
-    void NewLine_()
+    private void NewLine_()
     {
         WriteLine(String.Empty);
     }

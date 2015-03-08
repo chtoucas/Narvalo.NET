@@ -184,6 +184,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
+    // Implements core Monad extension methods.
     public static partial class Identity
     {
         #region Basic Monad functions (Prelude)
@@ -464,9 +465,7 @@ namespace Narvalo.Fx
 {
     using System.Diagnostics.Contracts;
 
-    /// <content>
-    /// Comonad methods.
-    /// </content>
+    // Implements core Comonad methods.
     public static partial class Identity
     {
         /// <remarks>

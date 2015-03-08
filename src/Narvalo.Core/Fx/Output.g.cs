@@ -186,6 +186,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
+    // Implements core Monad extension methods.
     public static partial class Output
     {
         #region Basic Monad functions (Prelude)

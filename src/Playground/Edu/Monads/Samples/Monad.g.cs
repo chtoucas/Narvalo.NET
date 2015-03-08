@@ -184,6 +184,7 @@ namespace Playground.Edu.Monads.Samples
         #endregion
     }
 
+    // Implements core Monad extension methods.
     public static partial class Monad
     {
         #region Basic Monad functions (Prelude)

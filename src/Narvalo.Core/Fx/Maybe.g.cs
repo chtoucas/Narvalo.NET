@@ -195,6 +195,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
+    // Implements core Monad extension methods.
     public static partial class Maybe
     {
         #region Basic Monad functions (Prelude)
