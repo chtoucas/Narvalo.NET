@@ -4,7 +4,8 @@ namespace Narvalo
 {
     using System;
 
-    using Narvalo.Benchmarking;
+    using Narvalo.Diagnostics.Benchmarking;
+    using Narvalo.Internal;
 
     public static class Int64EncoderBenchmarks
     {

@@ -183,7 +183,6 @@ namespace Narvalo.Globalization
             return CurrencyProvider.Current.GetCurrencies(types);
         }
 
-        /// <summary />
         public override string ToString()
         {
             return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);

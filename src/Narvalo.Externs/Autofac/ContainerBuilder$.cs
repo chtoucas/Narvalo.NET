@@ -5,9 +5,11 @@ namespace Narvalo.Externs.Autofac
     using System;
     using System.Reflection;
     using System.Web;
+
     using global::Autofac;
     using global::Autofac.Builder;
     using global::Autofac.Features.Scanning;
+    using Narvalo.Mvp;
 
     public static class ContainerBuilderExtensions
     {
@@ -21,6 +23,18 @@ namespace Narvalo.Externs.Autofac
             return @this.RegisterAssemblyTypes(handlerAssemblies)
                 .Where(_ => typeof(IHttpHandler).IsAssignableFrom(_)
                     && _.Name.EndsWith("Handler", StringComparison.Ordinal));
+        }
+
+        public static IRegistrationBuilder<object, ScanningActivatorData, DynamicRegistrationStyle>
+            RegisterPresenters(
+                this ContainerBuilder @this,
+                params Assembly[] presenterAssemblies)
+        {
+            Require.Object(@this);
+
+            return @this.RegisterAssemblyTypes(presenterAssemblies)
+                .Where(_ => typeof(IPresenter).IsAssignableFrom(_)
+                    && _.Name.EndsWith("Presenter", StringComparison.Ordinal));
         }
     }
 }

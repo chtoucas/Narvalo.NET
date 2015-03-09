@@ -4,10 +4,10 @@ namespace Narvalo.Internal
 {
     using System;
 
-    static class Stubs
+    public static class Stubs
     {
-        static readonly Action Noop_ = () => { };
+        private static readonly Action s_Noop = () => { };
 
-        internal static Action Noop { get { return Noop_; } }
+        public static Action Noop { get { return s_Noop; } }
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Narvalo.GhostScript.Internal
 {
-    static class NativeMethodsUtil
+    internal static class NativeMethodsUtil
     {
-        const int SuccessCode_ = 0;
+        private const int SuccessCode_ = 0;
         // const int QuitCode = -101;
         // const int InterruptCode = ;
         // const int NeedInputCode = -106;
         // const int InfoCode = ;
-        const int FatalCode_ = -100;
+        private const int FatalCode_ = -100;
 
         public static bool IsSuccess(int code)
         {

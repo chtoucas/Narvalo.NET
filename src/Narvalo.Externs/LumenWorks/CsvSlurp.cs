@@ -6,6 +6,7 @@ namespace Narvalo.Externs.LumenWorks
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text;
+
     using global::LumenWorks.Framework.IO.Csv;
     using Narvalo;
 
@@ -14,17 +15,17 @@ namespace Narvalo.Externs.LumenWorks
     /// </summary>
     public class CsvSlurp
     {
-        const char DefaultDelimiter_ = ';';
+        private const char DEFAULT_DELIMITER = ';';
 
-        static readonly Encoding DefaultEncoding_ = Encoding.GetEncoding(1252);
+        private static readonly Encoding s_DefaultEncoding = Encoding.GetEncoding(1252);
 
-        readonly string _fileName;
+        private readonly string _fileName;
 
-        Encoding _encoding = DefaultEncoding_;
-        char _delimiter = DefaultDelimiter_;
-        bool _hasHeaders = true;
-        IList<string> _headers = new string[] { };
-        IList<Dictionary<string, string>> _records = new List<Dictionary<string, string>>();
+        private Encoding _encoding = s_DefaultEncoding;
+        private char _delimiter = DEFAULT_DELIMITER;
+        private bool _hasHeaders = true;
+        private IList<string> _headers = new string[] { };
+        private IList<Dictionary<string, string>> _records = new List<Dictionary<string, string>>();
 
         public CsvSlurp(string fileName)
         {
@@ -83,17 +84,21 @@ namespace Narvalo.Externs.LumenWorks
             Justification = "The StreamReader class should be resilient to multiple calls to Dispose.")]
         public void Parse()
         {
-            using (var streamReader = new StreamReader(_fileName, Encoding)) {
-                using (var reader = new CsvReader(streamReader, HasHeaders, Delimiter)) {
+            using (var streamReader = new StreamReader(_fileName, Encoding))
+            {
+                using (var reader = new CsvReader(streamReader, HasHeaders, Delimiter))
+                {
                     reader.DefaultParseErrorAction = ParseErrorAction.ThrowException;
 
                     int fieldCount = reader.FieldCount;
                     _headers = reader.GetFieldHeaders();
 
-                    while (reader.ReadNextRecord()) {
+                    while (reader.ReadNextRecord())
+                    {
                         var record = new Dictionary<string, string>();
 
-                        for (int i = 0; i < fieldCount; i++) {
+                        for (int i = 0; i < fieldCount; i++)
+                        {
                             record.Add(_headers[i], reader[i]);
                         }
 

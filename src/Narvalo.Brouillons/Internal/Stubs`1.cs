@@ -4,10 +4,10 @@ namespace Narvalo.Internal
 {
     using System;
 
-    static class Stubs<T>
+    public static class Stubs<T>
     {
-        static readonly Action<T> Ignore_ = _ => { };
+        private static readonly Action<T> s_Ignore = _ => { };
 
-        internal static Action<T> Ignore { get { return Ignore_; } }
+        public static Action<T> Ignore { get { return s_Ignore; } }
     }
 }

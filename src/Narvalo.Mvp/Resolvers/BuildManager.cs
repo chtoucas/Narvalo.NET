@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.Resolvers
 
     public sealed class /*Default*/BuildManager : IBuildManager
     {
-        readonly Assembly[] _assemblies;
+        private readonly Assembly[] _assemblies;
 
         public BuildManager(Assembly assembly) : this(new[] { assembly }) { }
 

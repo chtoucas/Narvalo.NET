@@ -4,11 +4,12 @@ namespace Narvalo.Externs.Castle
 {
     using System;
     using System.Data.SqlClient;
+
     using global::Castle.DynamicProxy;
 
     public sealed class SqlExceptionInterceptor : IInterceptor
     {
-        readonly Action<SqlException> _onException;
+        private readonly Action<SqlException> _onException;
 
         public SqlExceptionInterceptor(Action<SqlException> onException)
         {
@@ -23,10 +24,12 @@ namespace Narvalo.Externs.Castle
         {
             Require.NotNull(invocation, "invocation");
 
-            try {
+            try
+            {
                 invocation.Proceed();
             }
-            catch (SqlException ex) {
+            catch (SqlException ex)
+            {
                 _onException(ex);
                 throw;
             }

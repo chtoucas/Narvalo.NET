@@ -4,6 +4,7 @@ namespace Narvalo.Externs.Autofac
 {
     using System.Web;
     using System.Web.Routing;
+
     using global::Autofac;
     using global::Autofac.Integration.Mvc;
 

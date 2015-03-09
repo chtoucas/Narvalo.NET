@@ -8,10 +8,10 @@ namespace Narvalo.Mvp.Resolvers
     public sealed class CachedPresenterBindingAttributesResolver
         : IPresenterBindingAttributesResolver
     {
-        readonly TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>> _cache
+        private readonly TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>> _cache
            = new TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>>();
 
-        readonly IPresenterBindingAttributesResolver _inner;
+        private readonly IPresenterBindingAttributesResolver _inner;
 
         public CachedPresenterBindingAttributesResolver(IPresenterBindingAttributesResolver inner)
         {

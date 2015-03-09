@@ -11,8 +11,6 @@ namespace Narvalo.Configuration
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class AbsoluteUriValidatorAttribute : ConfigurationValidatorAttribute
     {
-        /// <summary />
-        /// <see cref="System.Configuration.ConfigurationValidatorAttribute"/>
         public override ConfigurationValidatorBase ValidatorInstance
         {
             get { return new AbsoluteUriValidator(); }

@@ -47,7 +47,8 @@ namespace Narvalo.GhostScript.Options
 
         public override void AddDisplayTo(ICollection<string> args)
         {
-            if (Display != null) {
+            if (Display != null)
+            {
                 Display.AddTo(args);
             }
         }
@@ -58,7 +59,8 @@ namespace Narvalo.GhostScript.Options
 
         private static string GetDeviceName(ImageFormat format)
         {
-            switch (format) {
+            switch (format)
+            {
                 case ImageFormat.Bitmap8:
                     return "bmp256";
                 case ImageFormat.Bitmap24:

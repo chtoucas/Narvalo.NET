@@ -87,7 +87,7 @@
     }
     
     // Gets or sets the name of the monad.
-    // If no namespace was given, it will be infered from the template name.
+    // If no name was given, it will be infered from the template name.
     protected string Name
     {
         get
@@ -126,34 +126,39 @@
     // to the Monad<T>.Flatten() method.
     protected bool MultiplicationReturnsSome { get; set; }
 
+    // Gets or sets a value indicating whether Monad<T>.When() ensures a non-null return value. Always true.
+    // NB: Whatever happen, Monad<T>.When() always return a non-null value.
+    protected bool WhenReturnsSome { get { return true; } }
+
     // Gets a value indicating whether Monad<T>.Map() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Map() use Monad<T>.Bind().
+    // NB: Monad<T>.Map() uses Monad<T>.Bind().
     protected bool MapReturnsSome { get { return BindReturnsSome; } }
 
     // Gets a value indicating whether Monad<T>.Filter() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Filter() use Monad<T>.Bind().
+    // NB: Monad<T>.Filter() uses Monad<T>.Bind().
     protected bool FilterReturnsSome { get { return BindReturnsSome; } }
     
     // Gets a value indicating whether Monad<T>.Coalesce() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Coalesce() use Monad<T>.Bind().
+    // NB: Monad<T>.Coalesce() uses Monad<T>.Bind().
     protected bool CoalesceReturnsSome { get { return BindReturnsSome; } }
     
     // Gets a value indicating whether Monad<T>.Then() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Then() use Monad<T>.Coalesce().
+    // NB: Monad<T>.Then() uses Monad<T>.Coalesce().
     protected bool ThenReturnsSome { get { return CoalesceReturnsSome; } }
     
     // Gets a value indicating whether Monad<T>.Join() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.Join() use Monad<T>.Map().
+    // NB: Monad<T>.Join() uses Monad<T>.Map().
     protected bool JoinReturnsSome { get { return MapReturnsSome; } }
 
     // Gets a value indicating whether Monad<T>.GroupJoin() ensures a non-null return value. Default to false.
-    // NB: Monad<T>.GroupJoin() use Monad<T>.Map().
+    // NB: Monad<T>.GroupJoin() uses Monad<T>.Map().
     protected bool GroupJoinReturnsSome { get { return MapReturnsSome; } }
     
-    // Gets a value indicating whether the underlying type T is nullable. Default to true.
+    // Gets or sets a value indicating whether the underlying type T is nullable. Default to true.
     protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
-    // Default to false.
+    // Gets or sets a value indicating whether the underlying type T is a struct. Default to false.
+    // REVIEW: Isn't it simply !IsNullable?
     protected bool RequireStruct { get; set; }
     
     // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
@@ -206,6 +211,7 @@
     }
 
     // Gets or sets a value indicating whether we prefer to use the LINQ dialect. Default to true.
+    // Among other things, this property changes the names of the Map and Filter methods.
     protected bool PreferLinqDialect { 
         get { return _preferLinqDialect; }
         set { _preferLinqDialect = value; }
@@ -306,8 +312,8 @@ namespace <#= Namespace #>
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+
+    using global::Narvalo;
 
 <#+ EmitCoreClass(); #>
 <#+ NewLine_(); #>
@@ -346,12 +352,8 @@ namespace <#= LinqNamespace #>
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-<#+ if (Namespace != "Narvalo.Fx") { #>
+
     using <#= Namespace #>;
-<#+ } #>
     using <#= LinqNamespace #>.Internal;
 
 <#+ EmitEnumerableMonadExtensions(); #>
@@ -365,13 +367,10 @@ namespace <#= LinqNamespace #>.Internal
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
-<#+ if (Namespace != "Narvalo.Fx") { #>
-    using <#= Namespace #>;
-<#+ } #>
 
-<#+ NewLine_(); #>
+    using global::Narvalo;
+    using <#= Namespace #>;
+
 <#+ EmitEnumerableMonadInternalExtensions(); #>
 <#+ NewLine_(); #>
 <#+ EmitEnumerableInternalExtensions(); #>
@@ -398,16 +397,16 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteCompilerAttributes_(); #>
     public static partial class <#= Name #>
     {
-        private static readonly <#= Name #><Unit> s_Unit = <#= ReturnName #>(Narvalo.Fx.Unit.Single);
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
 <#+ if (HasZero) { #>
-        private static readonly <#= Name #><Unit> s_<#= ZeroName #> = <#= Name #><Unit>.<#= ZeroName #>;
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_<#= ZeroName #> = <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
 <#+ } #>
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
-        public static <#= Name #><Unit> Unit { get { return s_Unit; } }
+        public static <#= Name #><global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
 
 <#+ if (HasZero) { #>
         /// <summary>
@@ -417,7 +416,7 @@ namespace <#= LinqNamespace #>.Internal
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        public static <#= Name #><Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
+        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
 <#+ } #>
 
         /// <summary>
@@ -616,7 +615,7 @@ namespace <#= LinqNamespace #>.Internal
     protected void EmitExtensions()
     {
 #>
-    // Implements core Monad extension methods.
+    // Provides core Monad extension methods.
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)
@@ -710,13 +709,13 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
-        public static <#= Name #><Unit> Guard<TSource>(
+        public static <#= Name #><global::Narvalo.Fx.Unit> Guard<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate)
 <#+ StructConstraint_("TSource"); #>
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
@@ -728,7 +727,7 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
-        public static <#= Name #><Unit> When<TSource>(
+        public static <#= Name #><global::Narvalo.Fx.Unit> When<TSource>(
             this <#= Name #><TSource> @this, 
             bool predicate, 
             Action action)
@@ -736,7 +735,7 @@ namespace <#= LinqNamespace #>.Internal
         {
             Require.NotNull(action, "action");
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             if (predicate) {
@@ -749,7 +748,7 @@ namespace <#= LinqNamespace #>.Internal
         /// <remarks>
         /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><Unit> Unless<TSource>(
+        public static <#= Name #><global::Narvalo.Fx.Unit> Unless<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
@@ -757,8 +756,8 @@ namespace <#= LinqNamespace #>.Internal
         {
 <#+ ObjectNotNull_(true); #>
             Contract.Requires(action != null);
-<#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><Unit>>() != null);
+<#+ if (IsNullable && WhenReturnsSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             return @this.When(!predicate, action);

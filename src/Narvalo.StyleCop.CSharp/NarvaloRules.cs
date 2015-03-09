@@ -6,7 +6,7 @@ namespace Narvalo.StyleCop.CSharp
     using global::StyleCop.CSharp;
 
     /// <summary>
-    /// This StyleCop Rule makes sure that instance variables are prefixed with an underscore.
+    /// This StyleCop Rule makes sure that private instance fields are prefixed with an underscore.
     /// </summary>
     [SourceAnalyzer(typeof(CsParser))]
     public class NarvaloRules : SourceAnalyzer

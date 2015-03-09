@@ -12,39 +12,28 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomString.cs" />
-    <Compile Include="StringManip.cs" />
+    <Compile Include="Strings_Extras.Designer.cs">
+      <DependentUpon>Strings_Extras.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Collections\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
-    <None Include="Fx\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
     <None Include="Narvalo.Extras.Version.props">
       <SubType>Designer</SubType>
     </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
@@ -53,6 +42,13 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings_Extras.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings_Extras.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

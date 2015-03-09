@@ -193,18 +193,17 @@ namespace Narvalo.Fx
             {
                 Contract.Ensures(Contract.Result<T>() != null);
 
+#if DEBUG
                 if (!_isSome)
                 {
                     throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
                 }
+#endif
 
-#if DEBUG
-                // FIXME
                 if (_value == null)
                 {
                     throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
                 }
-#endif
 
                 return _value;
             }
@@ -232,7 +231,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<T> OnSome(Action<T> action)
         {
@@ -458,7 +457,7 @@ namespace Narvalo.Fx
     {
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
@@ -512,7 +511,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<T> OrElse(Maybe<T> other)
         {
@@ -530,7 +529,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
@@ -542,7 +541,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
@@ -558,7 +557,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
@@ -579,7 +578,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -609,7 +608,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,

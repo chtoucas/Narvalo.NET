@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
+    <Reference Include="NodaTime">
+      <HintPath>..\..\packages\NodaTime.1.3.1\lib\net35-Client\NodaTime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -23,14 +26,230 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apply.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="Collections\Enumerable[Output]%24.cs" />
+    <Compile Include="Collections\Enumerable`1%24.cs" />
+    <Compile Include="Collections\Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Collections\Output.g.cs">
+      <DependentUpon>Output.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparativeAttribute.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparison.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparisonAttribute.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparisonProcessor.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkException.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollection.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatter.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatterBase.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchMetricConsoleFormatter.cs" />
+    <Compile Include="Diagnostics\Benchmarking\IBenchmarkMetricCollectionFormatter.cs" />
+    <Compile Include="Edu\Comparisons\Int64EncoderComparison.cs" />
+    <Compile Include="Edu\Comparisons\RemoveDiacriticsComparison.cs" />
+    <Compile Include="Edu\Comparisons\ReverseComparison.cs" />
+    <Compile Include="Edu\Fx\Fibonacci.cs" />
+    <Compile Include="Edu\Fx\Iteration.cs" />
+    <Compile Include="Edu\Fx\Iteration`2.cs" />
+    <Compile Include="Edu\Fx\Sequence.cs" />
+    <Compile Include="Edu\Fx\YCombinator.cs" />
+    <Compile Include="Edu\Linq\Bananas.cs" />
+    <Compile Include="Edu\Linq\IGroupingQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\IOrderedQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\IQuerySyntax.cs" />
+    <Compile Include="Edu\Linq\IQuerySyntax`1.cs" />
+    <Compile Include="Edu\Linq\Lenses.cs" />
+    <Compile Include="Edu\Monads\Action`%24.cs" />
+    <Compile Include="Edu\Monads\Cokunc`.cs" />
+    <Compile Include="Edu\Monads\Comonad`1.cs" />
+    <Compile Include="Edu\Monads\Kunc`%24.cs" />
+    <Compile Include="Edu\Monads\Kunc`.cs" />
+    <Compile Include="Edu\Monads\Monad.cs" />
+    <Compile Include="Edu\Monads\Monad`1.cs" />
+    <Compile Include="Edu\Monads\Monoid`1.cs" />
+    <Compile Include="Edu\Monads\Mu.cs" />
+    <Compile Include="Edu\Monads\NamespaceDoc.cs" />
+    <Compile Include="Edu\Monads\Rules.cs" />
+    <Compile Include="Edu\Monads\Samples\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\Comonad`1.cs" />
+    <Compile Include="Edu\Monads\Samples\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadOr`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadPlus`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadValue`1.cs" />
+    <Compile Include="Edu\Monads\Samples\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Edu\Monads\Samples\MonadZero`1.cs" />
+    <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
+    <Compile Include="Edu\Monads\Stubs.cs" />
+    <Compile Include="Edu\Monads\Stubs`1.cs" />
+    <Compile Include="Edu\Web\WebApplication.cs" />
+    <Compile Include="Func`%24.cs" />
+    <Compile Include="Fx\Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Fx\Output.cs" />
+    <Compile Include="Fx\Output.g.cs">
+      <DependentUpon>Output.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Output`1.cs" />
+    <Compile Include="Fx\Recursion.cs" />
+    <Compile Include="Fx\Sequence.cs" />
+    <Compile Include="Globalization\CurrencyInfo%24.cs" />
+    <Compile Include="Globalization\SnvCurrencyLegacyXmlReader.cs" />
+    <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
+    <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Internal\Stubs.cs" />
+    <Compile Include="Internal\Stubs`1.cs" />
+    <Compile Include="Make`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomString.cs" />
+    <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
+    <Compile Include="Runtime\Reliability\BarrierException.cs" />
+    <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
+    <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
+    <Compile Include="Runtime\Reliability\ConcurrencyThrottle.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateBarrier.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateExceededException.cs" />
+    <Compile Include="Runtime\Reliability\GuardChain.cs" />
+    <Compile Include="Runtime\Reliability\GuardChainBuilder.cs" />
+    <Compile Include="Runtime\Reliability\GuardException.cs" />
+    <Compile Include="Runtime\Reliability\GuardStatus.cs" />
+    <Compile Include="Runtime\Reliability\GuardType.cs" />
+    <Compile Include="Runtime\Reliability\IBarrier.cs" />
+    <Compile Include="Runtime\Reliability\IGuard.cs" />
+    <Compile Include="Runtime\Reliability\IMonitorableGuard.cs" />
+    <Compile Include="Runtime\Reliability\IReliabilityMonitor.cs" />
+    <Compile Include="Runtime\Reliability\IThrottle.cs" />
+    <Compile Include="Runtime\Reliability\NoopGuard.cs" />
+    <Compile Include="Runtime\Reliability\ReliabilityWrapper.cs" />
+    <Compile Include="Runtime\Reliability\RequestCounter.cs" />
+    <Compile Include="Runtime\Reliability\RetryGuard.cs" />
+    <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
+    <Compile Include="Runtime\Reliability\ThrottleException.cs" />
+    <Compile Include="StringManip.cs" />
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="VoidOrBreak.cs" />
+    <Compile Include="VoidOrError.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Junk.Version.props">
+    <None Include="CodeTemplates\Monad.Output.tt" />
+    <None Include="Collections\Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
+    <None Include="Collections\Output.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Output.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </None>
+    <None Include="Edu\Monads\Samples\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Output.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Output.g.cs</LastGenOutput>
+    </None>
+    <None Include="Narvalo.Brouillons.Version.props">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Narvalo.Brouillons.props">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
+      <Name>Narvalo.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Diagnostics.Benchmarking\Narvalo.Diagnostics.Benchmarking.csproj">
+      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
+      <Name>Narvalo.Diagnostics.Benchmarking</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

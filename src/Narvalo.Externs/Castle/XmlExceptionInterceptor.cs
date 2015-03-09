@@ -4,11 +4,12 @@ namespace Narvalo.Externs.Castle
 {
     using System;
     using System.Xml;
+
     using global::Castle.DynamicProxy;
 
     public sealed class XmlExceptionInterceptor : IInterceptor
     {
-        readonly Action<XmlException> _onException;
+        private readonly Action<XmlException> _onException;
 
         public XmlExceptionInterceptor(Action<XmlException> onException)
         {
@@ -21,10 +22,12 @@ namespace Narvalo.Externs.Castle
         {
             Require.NotNull(invocation, "invocation");
 
-            try {
+            try
+            {
                 invocation.Proceed();
             }
-            catch (XmlException ex) {
+            catch (XmlException ex)
+            {
                 _onException(ex);
                 throw;
             }

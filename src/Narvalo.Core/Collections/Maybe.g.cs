@@ -31,9 +31,8 @@ namespace Narvalo.Collections
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+
+    using Narvalo.Fx;
     using Narvalo.Collections.Internal;
 
     /// <summary>
@@ -253,8 +252,9 @@ namespace Narvalo.Collections.Internal
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+
+    using global::Narvalo;
+    using Narvalo.Fx;
 
     /// <summary>
     /// Provides extension methods for <c>IEnumerable&lt;Maybe&lt;T&gt;&gt;</c>.

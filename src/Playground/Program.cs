@@ -7,7 +7,7 @@ namespace Playground
     using System.Reflection;
 
     using Playground.Benchmarks.Comparisons;
-    using Playground.Benchmarks.Sdk;
+    using Narvalo.Diagnostics.Benchmarking;
 
     public static class Program
     {

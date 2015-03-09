@@ -12,17 +12,17 @@ namespace Narvalo.GhostScript.Options
     /// </remarks>
     public class Display
     {
-        PaperSize _defaultPaperSize = PaperSize.None;
-        bool? _fixedMedia;
-        bool? _fixedResolution;
-        Size? _mediaSize;
-        bool? _orient1;
-        Size? _pageSize;
-        PageSizeMode _pageSizeMode = PageSizeMode.None;
-        PaperSize _paperSize = PaperSize.None;
-        bool _pdfFitPage = false;
-        bool? _printed;
-        Size? _resolution;
+        private PaperSize _defaultPaperSize = PaperSize.None;
+        private bool? _fixedMedia;
+        private bool? _fixedResolution;
+        private Size? _mediaSize;
+        private bool? _orient1;
+        private Size? _pageSize;
+        private PageSizeMode _pageSizeMode = PageSizeMode.None;
+        private PaperSize _paperSize = PaperSize.None;
+        private bool _pdfFitPage = false;
+        private bool? _printed;
+        private Size? _resolution;
 
         public Display() : base() { }
 
@@ -86,54 +86,67 @@ namespace Narvalo.GhostScript.Options
         {
             Require.NotNull(args, "args");
 
-            if (Orient1.HasValue) {
-                if (Orient1.Value) {
+            if (Orient1.HasValue)
+            {
+                if (Orient1.Value)
+                {
                     args.Add("-dORIENT1=true");
                 }
-                else {
+                else
+                {
                     args.Add("-dORIENT1=false");
                 }
             }
 
-            if (Printed.HasValue) {
-                if (Printed.Value) {
+            if (Printed.HasValue)
+            {
+                if (Printed.Value)
+                {
                     args.Add("-dPrinted");
                 }
-                else {
+                else
+                {
                     args.Add("-dPrinted=false");
                 }
             }
 
             // Screen
-            if (MediaSize.HasValue) {
+            if (MediaSize.HasValue)
+            {
                 // NB: GhostScript automatically sets FixedMedia
                 //args.Add("-dDEVICEWIDTH=" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture));
                 //args.Add("-dDEVICEHEIGHT=" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
                 args.Add("-g" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture)
                     + "x" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
             }
-            else if (FixedMedia.HasValue && FixedMedia.Value) {
+            else if (FixedMedia.HasValue && FixedMedia.Value)
+            {
                 args.Add("-dFIXEDMEDIA");
             }
 
             // Printer
-            if (Resolution.HasValue) {
+            if (Resolution.HasValue)
+            {
                 // NB: GhostScript automatically sets FixedResolution
-                if (Resolution.Value.IsSquare) {
+                if (Resolution.Value.IsSquare)
+                {
                     args.Add("-r" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
                 }
-                else {
+                else
+                {
                     //args.Add("-dDEVICEXRESOLUTION=" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture));
                     //args.Add("-dDEVICEYRESOLUTION=" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
                     args.Add("-r" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture)
                         + "x" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
                 }
             }
-            else if (FixedResolution.HasValue && FixedResolution.Value) {
+            else if (FixedResolution.HasValue && FixedResolution.Value)
+            {
                 args.Add("-dFIXEDRESOLUTION");
             }
 
-            switch (PageSizeMode) {
+            switch (PageSizeMode)
+            {
                 case PageSizeMode.CropBox:
                     args.Add("-dUseCropBox");
                     break;
@@ -141,10 +154,12 @@ namespace Narvalo.GhostScript.Options
                     args.Add("-dUseTrimBox");
                     break;
                 case PageSizeMode.None:
-                    if (PaperSize != PaperSize.None) {
+                    if (PaperSize != PaperSize.None)
+                    {
                         args.Add("-sPAPERSIZE=" + GetPaperSizeName(PaperSize));
                     }
-                    else if (PageSize.HasValue) {
+                    else if (PageSize.HasValue)
+                    {
                         args.Add("-dDEVICEWIDTHPOINTS=" + PageSize.Value.Width.ToString(CultureInfo.InvariantCulture));
                         args.Add("-dDEVICEHEIGHTPOINTS=" + PageSize.Value.Height.ToString(CultureInfo.InvariantCulture));
                     }
@@ -158,7 +173,8 @@ namespace Narvalo.GhostScript.Options
 
         public static string GetPaperSizeName(PaperSize paperSize)
         {
-            switch (paperSize) {
+            switch (paperSize)
+            {
                 // US
                 case PaperSize.ArchE:
                     return "archE";

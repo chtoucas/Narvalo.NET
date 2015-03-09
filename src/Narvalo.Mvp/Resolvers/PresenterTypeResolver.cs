@@ -13,10 +13,10 @@ namespace Narvalo.Mvp.Resolvers
 
     public class /*Default*/PresenterTypeResolver : IPresenterTypeResolver
     {
-        readonly IBuildManager _buildManager;
-        readonly IEnumerable<string> _defaultNamespaces;
-        readonly IEnumerable<string> _presenterNameTemplates;
-        readonly IEnumerable<string> _viewSuffixes;
+        private readonly IBuildManager _buildManager;
+        private readonly IEnumerable<string> _defaultNamespaces;
+        private readonly IEnumerable<string> _presenterNameTemplates;
+        private readonly IEnumerable<string> _viewSuffixes;
 
         public PresenterTypeResolver(
             IBuildManager buildManager,

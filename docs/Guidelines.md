@@ -49,37 +49,41 @@ There are four solutions.
 
 This solution contains all projects. This is not used for daily work but rather
 for deep refactoring and installing NuGet packages updates/restores.
+It also contains projects not included in the other solutions:
+- Narvalo.Externs        
+
+### Narvalo Maintenance.sln
+
+- Prose (F#), future version of Prose (C#)
 
 ### Narvalo (Core).sln
 
-This solution contains **all** libraries built upon Narvalo.Core:
+This solution contains the core library projects:
 - Narvalo.Core itself, a PCL (Profile259).
 - Narvalo.Common complements Narvalo.Core with non portable classes.
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
-- Narvalo.Extras.
-- Narvalo.Benchmarking.
-- Narvalo.Facts, the test project.
+- Narvalo.Benchmarking, benchmarking helpers.
+- Narvalo.Ghostscript
 - Narvalo.Brouillons, a "fourre-tout" of unfinished or broken codes.
+
+few developer tools:
+- Narvalo.Build, collection of MSBuild tasks.
+- Narvalo.PowerShell
+- Narvalo.StyleCop.CSharp
+
+and the test projects:
+- Narvalo.Benchmarks, the benchmarking project.
+- Narvalo.Facts, the test project.
+- Playground
 
 ### Narvalo (Mvp).sln
 
-This solution contains all MVP related libraries. It **does not** depend on any
-of the core libraries.
+This solution contains all MVP related projects:
 - Narvalo.Mvp
 - Narvalo.Mvp.Web
 - Narvalo.Mvp.Windows.Forms
-- Narvalo.Mvp.Extras
 - Narvalo.Mvp.Facts, the test project.
-
-### Narvalo (Miscs).sln
-
-This solution contains anything else. It **does not** depend on any
-of the core libraries.
-- Narvalo.Build
-- Narvalo.Externs
-- Narvalo.Ghostscript
-- Narvalo.Reliability
-- Narvalo.StyleCop.CSharp
+- Sample MVP projects.
 
 
 Periodic Checklist

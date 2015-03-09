@@ -6,8 +6,9 @@ namespace Narvalo
     using System.Linq;
     using System.Reflection;
 
-    using Narvalo.Benchmarking;
+    using Narvalo.Diagnostics.Benchmarking;
     using Narvalo.Fx;
+    using Narvalo.Internal;
     using NodaTime;
 
     public static class Program
@@ -22,8 +23,8 @@ namespace Narvalo
 
             var metricsByCategory = processor
                 .Process(typeof(Program).Assembly)
-                //.Process(typeof(Narvalo.Int64EncoderBenchmarks))
-                //.Process(typeof(TempBenchmarks_))
+                ////.Process(typeof(Narvalo.Int64EncoderBenchmarks))
+                ////.Process(typeof(TempBenchmarks_))
                 .GroupBy(_ => _.CategoryName);
 
             foreach (var metrics in metricsByCategory)
@@ -37,27 +38,27 @@ namespace Narvalo
             }
         }
 
-        private static class TempBenchmarks_
-        {
-            //private static int? s_Sample = 1;
+        ////private static class TempBenchmarks_
+        ////{
+        ////    private static int? s_Sample = 1;
 
-            [Benchmark]
-            public static void Create_ReferenceType()
-            {
-                Maybe.Create("Some").Consume();
-            }
+        ////    [Benchmark]
+        ////    public static void Create_ReferenceType()
+        ////    {
+        ////        Maybe.Create("Some").Consume();
+        ////    }
 
-            //[Benchmark]
-            //public static void Create_NullableValueType()
-            //{
-            //    Maybe.Create(s_Sample).Consume();
-            //}
+        ////    [Benchmark]
+        ////    public static void Create_NullableValueType()
+        ////    {
+        ////        Maybe.Create(s_Sample).Consume();
+        ////    }
 
-            [Benchmark]
-            public static void Create_ValueType()
-            {
-                Maybe.Create(1).Consume();
-            }
-        }
+        ////    [Benchmark]
+        ////    public static void Create_ValueType()
+        ////    {
+        ////        Maybe.Create(1).Consume();
+        ////    }
+        ////}
     }
 }

@@ -10,7 +10,6 @@ namespace Narvalo.Fx
     {
         public static readonly Unit Single = new Unit();
 
-        /// <summary />
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
             Justification = "This method always returns the same result.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
@@ -20,7 +19,6 @@ namespace Narvalo.Fx
             return true;
         }
 
-        /// <summary />
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
             Justification = "This method always returns the same result.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
@@ -39,13 +37,11 @@ namespace Narvalo.Fx
             return true;
         }
 
-        /// <summary />
         public override bool Equals(object obj)
         {
             return obj is Unit;
         }
 
-        /// <summary />
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
             Justification = "[CodeContracts] We do not want to enforce the contract here.")]

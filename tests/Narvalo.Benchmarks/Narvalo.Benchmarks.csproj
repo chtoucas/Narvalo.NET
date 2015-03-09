@@ -14,7 +14,7 @@
   <ItemGroup>
     <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NodaTime.1.3.0\lib\net35-Client\NodaTime.dll</HintPath>
+      <HintPath>..\..\packages\NodaTime.1.3.1\lib\net35-Client\NodaTime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -27,7 +27,7 @@
   <ItemGroup>
     <Compile Include="Fx\MaybeBenchmarks.cs" />
     <Compile Include="Int64EncoderBenchmarks.cs" />
-    <Compile Include="BenchmarkingExtensions.cs" />
+    <Compile Include="Internal\BenchmarkingExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -40,18 +40,16 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj">
-      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
-      <Name>Narvalo.Benchmarking</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Diagnostics.Benchmarking\Narvalo.Diagnostics.Benchmarking.csproj">
+      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
+      <Name>Narvalo.Diagnostics.Benchmarking</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Benchmarking\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

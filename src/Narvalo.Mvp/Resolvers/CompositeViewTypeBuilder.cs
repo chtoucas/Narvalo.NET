@@ -49,14 +49,14 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
          * 
          */
 
-        static readonly MethodAttributes MethodAttributes_
-            = MethodAttributes.Public
-            | MethodAttributes.SpecialName
-            | MethodAttributes.HideBySig
-            | MethodAttributes.Virtual;
+        private static readonly MethodAttributes s_MethodAttributes
+               = MethodAttributes.Public
+               | MethodAttributes.SpecialName
+               | MethodAttributes.HideBySig
+               | MethodAttributes.Virtual;
 
-        readonly TypeBuilder _typeBuilder;
-        readonly Type _viewType;
+        private readonly TypeBuilder _typeBuilder;
+        private readonly Type _viewType;
 
         public CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
         {
@@ -76,7 +76,8 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
         {
             Require.NotNull(eventInfo, "eventInfo");
 
-            if (eventInfo.EventHandlerType == null) {
+            if (eventInfo.EventHandlerType == null)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,
@@ -108,29 +109,31 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
 
-            if (propertyInfo.CanRead) {
+            if (propertyInfo.CanRead)
+            {
                 var getter = DefineGetter_(propertyInfo);
                 property.SetGetMethod(getter);
             }
 
-            if (propertyInfo.CanWrite) {
+            if (propertyInfo.CanWrite)
+            {
                 var setter = DefineSetter_(propertyInfo);
                 property.SetSetMethod(setter);
             }
         }
 
-        MethodBuilder DefineAddMethod_(EventInfo eventInfo)
+        private MethodBuilder DefineAddMethod_(EventInfo eventInfo)
         {
             var addBuilder = _typeBuilder.DefineMethod(
                 "add" + "_" + eventInfo.Name,
-                MethodAttributes_,
+                s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
 
             var il = addBuilder.GetILGenerator();
 
             EmitILForEachView_(
-                il, 
+                il,
                 () =>
                 {
                     // Call the original add method
@@ -144,11 +147,11 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
             return addBuilder;
         }
 
-        MethodBuilder DefineRemoveMethod_(EventInfo eventInfo)
+        private MethodBuilder DefineRemoveMethod_(EventInfo eventInfo)
         {
             var removeBuilder = _typeBuilder.DefineMethod(
                 "remove" + "_" + eventInfo.Name,
-                MethodAttributes_,
+                s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
 
@@ -169,7 +172,7 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
             return removeBuilder;
         }
 
-        MethodBuilder DefineGetter_(PropertyInfo propertyInfo)
+        private MethodBuilder DefineGetter_(PropertyInfo propertyInfo)
         {
             /*
              * Produces something functionally equivalent to this:
@@ -207,7 +210,7 @@ get
 
             var getBuilder = _typeBuilder.DefineMethod(
                 "get" + "_" + propertyInfo.Name,
-                MethodAttributes_,
+                s_MethodAttributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
 
@@ -257,7 +260,7 @@ get
             return getBuilder;
         }
 
-        MethodBuilder DefineSetter_(PropertyInfo propertyInfo)
+        private MethodBuilder DefineSetter_(PropertyInfo propertyInfo)
         {
             /*
              * Produces something functionally equivalent to this:
@@ -329,14 +332,14 @@ set
 
             var setBuilder = _typeBuilder.DefineMethod(
                 "set" + "_" + propertyInfo.Name,
-                MethodAttributes_,
+                s_MethodAttributes,
                 typeof(void),
                 new[] { propertyInfo.PropertyType });
 
             var il = setBuilder.GetILGenerator();
 
             EmitILForEachView_(
-                il, 
+                il,
                 () =>
                 {
                     // Call the original setter
@@ -350,7 +353,7 @@ set
             return setBuilder;
         }
 
-        void EmitILForEachView_(ILGenerator il, Action forEachAction)
+        private void EmitILForEachView_(ILGenerator il, Action forEachAction)
         {
             // Declare the locals we need
             var viewLocal = il.DeclareLocal(_viewType);

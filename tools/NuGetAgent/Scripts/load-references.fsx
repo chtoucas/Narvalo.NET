@@ -5,4 +5,4 @@
 #r @"System.Core.dll"
 #r @"System.Numerics.dll"
 #r @"System.Xml.Linq.dll"
-#r @"..\..\packages\UnionArgParser.0.8.3\lib\net40\UnionArgParser.dll"
+#r @"..\..\packages\UnionArgParser.0.8.6\lib\net40\UnionArgParser.dll"

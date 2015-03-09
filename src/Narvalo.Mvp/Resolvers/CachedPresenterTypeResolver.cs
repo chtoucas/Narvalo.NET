@@ -6,9 +6,9 @@ namespace Narvalo.Mvp.Resolvers
 
     public sealed class CachedPresenterTypeResolver : IPresenterTypeResolver
     {
-        readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
+        private readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
-        readonly IPresenterTypeResolver _inner;
+        private readonly IPresenterTypeResolver _inner;
 
         public CachedPresenterTypeResolver(IPresenterTypeResolver inner)
         {

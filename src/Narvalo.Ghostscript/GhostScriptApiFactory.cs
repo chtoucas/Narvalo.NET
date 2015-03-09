@@ -3,6 +3,7 @@
 namespace Narvalo.GhostScript
 {
     using System;
+
     using Narvalo.GhostScript.Internal;
 
     public static class GhostScriptApiFactory
@@ -10,13 +11,16 @@ namespace Narvalo.GhostScript
         public static IGhostScriptApi CreateApi()
         {
             // FIXME: utiliser Environment.Is64BitProcess
-            if (IntPtr.Size == 8) {
+            if (IntPtr.Size == 8)
+            {
                 return new Win64GhostScriptApi();
             }
-            else if (IntPtr.Size == 4) {
+            else if (IntPtr.Size == 4)
+            {
                 return new Win32GhostScriptApi();
             }
-            else {
+            else
+            {
                 throw new PlatformNotSupportedException();
             }
         }

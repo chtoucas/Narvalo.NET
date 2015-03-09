@@ -7,7 +7,7 @@ namespace Narvalo.Collections
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Collections.Generic.IEnumerator{T}"/>.
+    /// Provides extension methods for <see cref="IEnumerator{T}"/>.
     /// </summary>
     public static partial class EnumeratorExtensions
     {

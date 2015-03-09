@@ -6,9 +6,9 @@ namespace Narvalo.Mvp.Resolvers
 
     public sealed class CachedCompositeViewTypeResolver : ICompositeViewTypeResolver
     {
-        readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
+        private readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
-        readonly ICompositeViewTypeResolver _inner;
+        private readonly ICompositeViewTypeResolver _inner;
 
         public CachedCompositeViewTypeResolver(ICompositeViewTypeResolver inner)
         {

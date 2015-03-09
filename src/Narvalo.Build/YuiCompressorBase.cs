@@ -14,9 +14,9 @@ namespace Narvalo.Build
     // Maybe we should use a separate AppDomain: AppDomainIsolatedTask
     public abstract class YuiCompressorBase : JavaTaskBase
     {
-        int _lineBreak = 0;
-        int _processTimeout = 5000;
-        bool _verbose = false;
+        private int _lineBreak = 0;
+        private int _processTimeout = 5000;
+        private bool _verbose = false;
 
         protected YuiCompressorBase() : base() { }
 

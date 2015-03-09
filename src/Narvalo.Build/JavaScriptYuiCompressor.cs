@@ -19,9 +19,9 @@ namespace Narvalo.Build
         Justification = "Js is not an acronym.")]
     public sealed class JavaScriptYuiCompressor : YuiCompressorBase
     {
-         bool _disableOptimizations = false;
-         bool _noMunge = false;
-         bool _preserveSemi = false;
+        private bool _disableOptimizations = false;
+        private bool _noMunge = false;
+        private bool _preserveSemi = false;
 
         public bool DisableOptimizations
         {

@@ -10,8 +10,8 @@ namespace Narvalo.Mvp.Resolvers
 
     public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
-        readonly CompositeViewModuleBuilder _moduleBuilder
-              = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
+        private readonly CompositeViewModuleBuilder _moduleBuilder
+            = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
 
         public Type Resolve(Type viewType)
         {
@@ -24,12 +24,14 @@ namespace Narvalo.Mvp.Resolvers
             var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
 
             var properties = FindProperties_(viewType);
-            foreach (var propertyInfo in properties) {
+            foreach (var propertyInfo in properties)
+            {
                 typeBuilder.AddProperty(propertyInfo);
             }
 
             var events = FindEvents_(viewType);
-            foreach (var eventInfo in events) {
+            foreach (var eventInfo in events)
+            {
                 typeBuilder.AddEvent(eventInfo);
             }
 
@@ -40,14 +42,16 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            if (!viewType.IsInterface) {
+            if (!viewType.IsInterface)
+            {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,
                     "To be used with shared presenters, the view type must be an interface, but {0} was supplied instead.",
                     viewType.FullName));
             }
 
-            if (!typeof(IView).IsAssignableFrom(viewType)) {
+            if (!typeof(IView).IsAssignableFrom(viewType))
+            {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,
                     "To be used with shared presenters, the view type must inherit from {0}. The supplied type ({1}) does not.",
@@ -55,14 +59,16 @@ namespace Narvalo.Mvp.Resolvers
                     viewType.FullName));
             }
 
-            if (!viewType.IsPublic && !viewType.IsNestedPublic) {
+            if (!viewType.IsPublic && !viewType.IsNestedPublic)
+            {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,
                     "To be used with shared presenters, the view type must be public. The supplied type ({0}) is not.",
                     viewType.FullName));
             }
 
-            if (viewType.GetMethods().Where(_ => !_.IsSpecialName).Any()) {
+            if (viewType.GetMethods().Where(_ => !_.IsSpecialName).Any())
+            {
                 throw new ArgumentException(String.Format(
                     CultureInfo.InvariantCulture,
                     "To be used with shared presenters, the view type must not define public methods. The supplied type ({0}) is not.",
@@ -70,7 +76,7 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        static IEnumerable<EventInfo> FindEvents_(Type viewType)
+        private static IEnumerable<EventInfo> FindEvents_(Type viewType)
         {
             return viewType.GetEvents()
                 .Union(
@@ -78,13 +84,12 @@ namespace Narvalo.Mvp.Resolvers
                         .SelectMany<Type, EventInfo>(FindEvents_));
         }
 
-        static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
+        private static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
         {
             return viewType.GetProperties()
                 .Union(
                     viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_))
-                .Select(p => new
-                {
+                .Select(p => new {
                     PropertyInfo = p,
                     PropertyInfoFromCompositeViewBase = typeof(CompositeView<>).GetProperty(p.Name)
                 })

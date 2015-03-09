@@ -5,9 +5,10 @@ namespace Narvalo.GhostScript.Internal
     using System;
     using System.Runtime.InteropServices;
     using System.Text;
+
     using Narvalo.GhostScript.Options;
 
-    abstract class GhostScriptApiBase : IGhostScriptApi
+    internal abstract class GhostScriptApiBase : IGhostScriptApi
     {
         protected GhostScriptApiBase() { }
 
@@ -31,13 +32,15 @@ namespace Narvalo.GhostScript.Internal
             GCHandle[] argHandles = null;
             IntPtr[] argPtrs = null;
 
-            try {
+            try
+            {
                 var length = tmpArgs.Length;
 
                 argHandles = new GCHandle[length];
                 argPtrs = new IntPtr[length];
 
-                for (var i = 0; i < length; i++) {
+                for (var i = 0; i < length; i++)
+                {
                     argHandles[i] = GCHandle.Alloc(Encoding.ASCII.GetBytes(tmpArgs[i]), GCHandleType.Pinned);
                     argPtrs[i] = argHandles[i].AddrOfPinnedObject();
                 }
@@ -45,19 +48,26 @@ namespace Narvalo.GhostScript.Internal
                 // See http://stackoverflow.com/questions/10232320/using-try-catch-in-net-structure-constructor
                 GCHandle argPtrsHandle = GCHandle.Alloc(argPtrs, GCHandleType.Pinned);
 
-                try {
+                try
+                {
                     ExecuteNative(length, argPtrsHandle.AddrOfPinnedObject());
                 }
-                finally {
-                    if (argPtrsHandle.IsAllocated) {
+                finally
+                {
+                    if (argPtrsHandle.IsAllocated)
+                    {
                         argPtrsHandle.Free();
                     }
                 }
             }
-            finally {
-                if (argHandles != null) {
-                    foreach (var handle in argHandles) {
-                        if (handle.IsAllocated) {
+            finally
+            {
+                if (argHandles != null)
+                {
+                    foreach (var handle in argHandles)
+                    {
+                        if (handle.IsAllocated)
+                        {
                             handle.Free();
                         }
                     }
@@ -68,16 +78,16 @@ namespace Narvalo.GhostScript.Internal
 
         #endregion
 
-        #region Membres privés.
-
-        static string[] PrepareParams(string[] args)
+        private static string[] PrepareParams(string[] args)
         {
             string[] preparedArgs;
 
-            if (String.IsNullOrEmpty(args[0])) {
+            if (String.IsNullOrEmpty(args[0]))
+            {
                 preparedArgs = args;
             }
-            else {
+            else
+            {
                 // Ghostscript ignores the first argument in the array therefore, if the array
                 // doesn't have a blank item as the first item, create one saves callers having
                 // to think about dummy values etc...
@@ -89,7 +99,5 @@ namespace Narvalo.GhostScript.Internal
 
             return preparedArgs;
         }
-
-        #endregion
     }
 }

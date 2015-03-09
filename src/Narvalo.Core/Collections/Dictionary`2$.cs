@@ -8,7 +8,7 @@ namespace Narvalo.Collections
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Collections.Generic.IDictionary{T,U}"/>.
+    /// Provides extension methods for <see cref="IDictionary{T,U}"/>.
     /// </summary>
     public static partial class DictionaryExtensions
     {

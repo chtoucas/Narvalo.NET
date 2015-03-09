@@ -33,8 +33,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using Narvalo;      // For Require
-    using Narvalo.Fx;   // For Unit
+
+    using global::Narvalo;
 
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}" />.
@@ -47,14 +47,14 @@ namespace Narvalo.Fx
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Maybe
     {
-        private static readonly Maybe<Unit> s_Unit = Create(Narvalo.Fx.Unit.Single);
-        private static readonly Maybe<Unit> s_None = Maybe<Unit>.None;
+        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Create(global::Narvalo.Fx.Unit.Single);
+        private static readonly Maybe<global::Narvalo.Fx.Unit> s_None = Maybe<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>Maybe&lt;Unit&gt;</c>.</value>
-        public static Maybe<Unit> Unit { get { return s_Unit; } }
+        public static Maybe<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}"/>.
@@ -63,7 +63,7 @@ namespace Narvalo.Fx
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="Maybe{T}"/>.</value>
-        public static Maybe<Unit> None { get { return s_None; } }
+        public static Maybe<global::Narvalo.Fx.Unit> None { get { return s_None; } }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
@@ -195,7 +195,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
-    // Implements core Monad extension methods.
+    // Provides core Monad extension methods.
     public static partial class Maybe
     {
         #region Basic Monad functions (Prelude)
@@ -269,11 +269,11 @@ namespace Narvalo.Fx
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
-        public static Maybe<Unit> Guard<TSource>(
+        public static Maybe<global::Narvalo.Fx.Unit> Guard<TSource>(
             this Maybe<TSource> @this,
             bool predicate)
         {
-            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
+            Contract.Ensures(Contract.Result<Maybe<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? Maybe.Unit : Maybe.None;
         }
@@ -283,13 +283,13 @@ namespace Narvalo.Fx
         /// </remarks>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
             Justification = "Extension method intended to be used in a fluent way.")]
-        public static Maybe<Unit> When<TSource>(
+        public static Maybe<global::Narvalo.Fx.Unit> When<TSource>(
             this Maybe<TSource> @this, 
             bool predicate, 
             Action action)
         {
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
+            Contract.Ensures(Contract.Result<Maybe<global::Narvalo.Fx.Unit>>() != null);
 
             if (predicate) {
                 action.Invoke();
@@ -301,14 +301,14 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<Unit> Unless<TSource>(
+        public static Maybe<global::Narvalo.Fx.Unit> Unless<TSource>(
             this Maybe<TSource> @this,
             bool predicate,
             Action action)
         {
             Require.Object(@this);
             Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<Maybe<Unit>>() != null);
+            Contract.Ensures(Contract.Result<Maybe<global::Narvalo.Fx.Unit>>() != null);
 
             return @this.When(!predicate, action);
         }

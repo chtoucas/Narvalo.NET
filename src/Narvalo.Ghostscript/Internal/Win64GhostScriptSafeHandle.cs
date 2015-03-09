@@ -9,7 +9,7 @@ namespace Narvalo.GhostScript.Internal
     using System.Security.Permissions;
 
     [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-    sealed class Win64GhostScriptSafeHandle : SafeHandle
+    internal sealed class Win64GhostScriptSafeHandle : SafeHandle
     {
         public Win64GhostScriptSafeHandle()
             : base(IntPtr.Zero, true /* onwshandle */)

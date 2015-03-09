@@ -14,7 +14,7 @@ namespace Narvalo.Build
 
     public abstract class JavaTaskBase : ToolTask
     {
-        const string JreKey_ = @"SOFTWARE\JavaSoft\Java Runtime Environment";
+        private const string JRE_KEY = @"SOFTWARE\JavaSoft\Java Runtime Environment";
 
         protected JavaTaskBase() : base() { }
 
@@ -34,25 +34,28 @@ namespace Narvalo.Build
             string javaPath = null;
 
             // On commence par chercher dans la base de registre Windows 32bit.
-            javaPath = FindJavaPathInRegistry_(JreKey_, ToolName);
+            javaPath = FindJavaPathInRegistry_(JRE_KEY, ToolName);
 
             // On cherche ensuite dans l'environnement local.
-            if (javaPath == null) {
+            if (javaPath == null)
+            {
                 javaPath = FindJavaPathInPathLocations_(ToolName);
             }
 
             // En désespoir de cause, voyons voir dans les endroits communs.
-            if (javaPath == null) {
+            if (javaPath == null)
+            {
                 javaPath = FindJavaPathInCommonLocations_(ToolName);
             }
 
-            if (javaPath == null) {
+            if (javaPath == null)
+            {
                 throw new PlatformNotSupportedException(
                     "Could not find java.exe. Looked in Registry, PATH locations and various common folders inside Program Files.");
             }
 
             Log.LogMessage(
-                MessageImportance.Low, 
+                MessageImportance.Low,
                 String.Format(CultureInfo.CurrentCulture, Strings_Build.JavaTask_JavaPathFormat, javaPath));
 
             return javaPath;
@@ -66,7 +69,8 @@ namespace Narvalo.Build
                 .Replace("\r", String.Empty)
                 .Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string error in errors) {
+            foreach (string error in errors)
+            {
                 Log.LogMessage(
                     MessageImportance.High,
                     error.Trim().Replace("[WARNING] ", String.Empty));
@@ -77,47 +81,54 @@ namespace Narvalo.Build
 
         protected override string GenerateFullPathToTool()
         {
-            if (String.IsNullOrEmpty(ToolPath)) {
+            if (String.IsNullOrEmpty(ToolPath))
+            {
                 ToolPath = FindJavaPath();
             }
 
             return Path.Combine(ToolPath, ToolName);
         }
 
-        static string FindJavaPathInRegistry_(string keyName, string toolName)
+        private static string FindJavaPathInRegistry_(string keyName, string toolName)
         {
             // FIXME: ne marche pas de manière consistante en cas de virtualisation de la base de registre.
             string javaHome = null;
 
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyName)) {
-                if (key != null) {
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyName))
+            {
+                if (key != null)
+                {
                     object currentVersion
                         = key.GetValue("CurrentVersion", null, RegistryValueOptions.None);
-                    using (RegistryKey subKey = key.OpenSubKey(currentVersion.ToString())) {
-                        if (subKey != null) {
+                    using (RegistryKey subKey = key.OpenSubKey(currentVersion.ToString()))
+                    {
+                        if (subKey != null)
+                        {
                             javaHome = subKey.GetValue("JavaHome", null, RegistryValueOptions.None) as string;
                         }
                     }
                 }
             }
 
-            if (!String.IsNullOrEmpty(javaHome)) {
+            if (!String.IsNullOrEmpty(javaHome))
+            {
                 string toolPath = Path.Combine(javaHome, "bin");
                 return File.Exists(Path.Combine(toolPath, toolName)) ? toolPath : null;
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        static string FindJavaPathInPathLocations_(string toolName)
+        private static string FindJavaPathInPathLocations_(string toolName)
         {
             string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? String.Empty;
             string[] paths = pathEnv.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
             return FindJavaPathInDirectories(paths, toolName);
         }
 
-        static string FindJavaPathInCommonLocations_(string toolName)
+        private static string FindJavaPathInCommonLocations_(string toolName)
         {
             // FIXME: programFilesPath dépend du type de compilation (AnyCPU, x64, x32),
             // de la plate-forme, du processus courant :
@@ -139,13 +150,15 @@ namespace Narvalo.Build
             return FindJavaPathInDirectories(commonLocations, toolName);
         }
 
-        static string FindJavaPathInDirectories(string[] paths, string toolName)
+        private static string FindJavaPathInDirectories(string[] paths, string toolName)
         {
             string javaPath = null;
 
-            foreach (string path in paths) {
+            foreach (string path in paths)
+            {
                 string fullPath = Path.Combine(path, toolName);
-                if (File.Exists(fullPath)) {
+                if (File.Exists(fullPath))
+                {
                     javaPath = path;
                     break;
                 }

@@ -23,24 +23,29 @@ namespace Narvalo
 
             var val = value.Trim();
 
-            if (val.Length == 0) {
+            if (val.Length == 0)
+            {
                 return style.HasFlag(BooleanStyles.EmptyIsFalse) ? (bool?)false : null;
             }
 
-            if (style.HasFlag(BooleanStyles.Literal)) {
+            if (style.HasFlag(BooleanStyles.Literal))
+            {
                 bool result;
 
                 // NB: Cette méthode n'est pas sensible à la casse de "value".
-                if (System.Boolean.TryParse(val, out result)) {
+                if (System.Boolean.TryParse(val, out result))
+                {
                     return result;
                 }
             }
 
-            if (style.HasFlag(BooleanStyles.ZeroOrOne) && (val == "0" || val == "1")) {
+            if (style.HasFlag(BooleanStyles.ZeroOrOne) && (val == "0" || val == "1"))
+            {
                 return val == "1";
             }
 
-            if (style.HasFlag(BooleanStyles.HtmlInput) && value == "on") {
+            if (style.HasFlag(BooleanStyles.HtmlInput) && value == "on")
+            {
                 return true;
             }
 
@@ -208,7 +213,8 @@ namespace Narvalo
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             var type = typeof(TEnum);
-            if (!type.IsEnum) {
+            if (!type.IsEnum)
+            {
                 throw new InvalidOperationException(
                     Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName));
             }
@@ -245,7 +251,8 @@ namespace Narvalo
             Contract.Ensures(Contract.Result<Maybe<Uri>>() != null);
 
             // REVIEW: Uri.TryCreate accepts empty strings.
-            if (String.IsNullOrWhiteSpace(value)) {
+            if (String.IsNullOrWhiteSpace(value))
+            {
                 return Maybe<Uri>.None;
             }
 

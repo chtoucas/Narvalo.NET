@@ -13,7 +13,7 @@ namespace Narvalo.Build
 
     public sealed class ClosureCompiler : JavaTaskBase
     {
-        int _processTimeout = 5000;
+        private int _processTimeout = 5000;
 
         [Required]
         public ITaskItem[] Files { get; set; }
@@ -33,11 +33,12 @@ namespace Narvalo.Build
             set { _processTimeout = value; }
         }
 
-        string CompilationLevelString_
+        private string CompilationLevelString_
         {
             get
             {
-                switch (CompilationLevel) {
+                switch (CompilationLevel)
+                {
                     case "WhitespaceOnly":
                         return "WHITESPACE_ONLY";
                     case "Simple":
@@ -56,10 +57,12 @@ namespace Narvalo.Build
 
             string fullPathToTool = GenerateFullPathToTool();
 
-            foreach (ITaskItem file in Files) {
+            foreach (ITaskItem file in Files)
+            {
                 string inFile = file.ItemSpec;
 
-                if (!File.Exists(inFile)) {
+                if (!File.Exists(inFile))
+                {
                     Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, inFile));
                     break;
                 }
@@ -70,13 +73,14 @@ namespace Narvalo.Build
                     MessageImportance.Normal,
                     String.Format(CultureInfo.CurrentCulture, Strings_Build.ClosureCompiler_ProcessingFormat, new FileInfo(inFile).Name));
 
-                if (File.Exists(outFile)) {
+                if (File.Exists(outFile))
+                {
                     File.Delete(outFile);
                 }
 
-                using (var process = new Process()) {
-                    process.StartInfo = new ProcessStartInfo
-                    {
+                using (var process = new Process())
+                {
+                    process.StartInfo = new ProcessStartInfo {
                         FileName = fullPathToTool,
                         Arguments = GetCommandLineArguments_(inFile, outFile),
                         UseShellExecute = false,
@@ -88,7 +92,8 @@ namespace Narvalo.Build
                     process.WaitForExit(ProcessTimeout);
 
                     // FIXME: Terminer le processus sinon on n'a pas accès au code ExitCode.
-                    if (process.ExitCode != 0) {
+                    if (process.ExitCode != 0)
+                    {
                         LogJavaFailure(process);
                         return false;
                     }
@@ -102,12 +107,13 @@ namespace Narvalo.Build
             return !Log.HasLoggedErrors;
         }
 
-        string GetCommandLineArguments_(string inFile, string outFile)
+        private string GetCommandLineArguments_(string inFile, string outFile)
         {
             var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" ", JarPath);
 
-            if (!String.IsNullOrEmpty(CompilationLevelString_)) {
+            if (!String.IsNullOrEmpty(CompilationLevelString_))
+            {
                 sb.AppendFormat(" --compilation_level {0}", CompilationLevelString_);
             }
 
@@ -115,7 +121,7 @@ namespace Narvalo.Build
             return sb.ToString();
         }
 
-        string GetCompressedFilePath_(string fileName)
+        private string GetCompressedFilePath_(string fileName)
         {
             string name = fileName.Replace(".js", ".min.js");
             return String.IsNullOrEmpty(OutputDirectory) ? name : Path.Combine(OutputDirectory, new FileInfo(name).Name);

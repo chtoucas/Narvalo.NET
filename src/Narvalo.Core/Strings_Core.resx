@@ -150,18 +150,6 @@
   <data name="Enforce_IsNullFormat" xml:space="preserve">
     <value>The parameter '{0}' is null, a situation that should NEVER have happened.</value>
   </data>
-  <data name="Output_SuccessfulHasNoException" xml:space="preserve">
-    <value>A successful outcome has no exception.</value>
-  </data>
-  <data name="Output_UnsuccessfulHasNoValue" xml:space="preserve">
-    <value>A bad outcome has no value.</value>
-  </data>
-  <data name="VoidOrError_NotFatal" xml:space="preserve">
-    <value>A non fatal outcome has no exception info.</value>
-  </data>
-  <data name="VoidOrError_NotWarning" xml:space="preserve">
-    <value>A non warning outcome has no error message.</value>
-  </data>
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Can not cast a none maybe to its underlying value type.</value>
   </data>

@@ -12,8 +12,9 @@
     <StartupObject>Playground.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NodaTime">
-      <HintPath>..\..\packages\NodaTime.1.3.0\lib\net35-Client\NodaTime.dll</HintPath>
+    <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NodaTime.1.3.1\lib\net35-Client\NodaTime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -22,80 +23,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benchmarks\Sdk\BenchMetricConsoleFormatter.cs" />
-    <Compile Include="Benchmarks\Comparisons\Int64EncoderComparison.cs" />
-    <Compile Include="Benchmarks\Comparisons\RemoveDiacriticsComparison.cs" />
-    <Compile Include="Benchmarks\Comparisons\ReverseComparison.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkComparativeAttribute.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkComparison.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkComparisonAttribute.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkComparisonProcessor.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkException.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollection.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollectionFormatter.cs" />
-    <Compile Include="Benchmarks\Sdk\BenchmarkMetricCollectionFormatterBase.cs" />
-    <Compile Include="Benchmarks\Sdk\IBenchmarkMetricCollectionFormatter.cs" />
-    <Compile Include="Edu\Fx\Fibonacci.cs" />
-    <Compile Include="Edu\Fx\Iteration.cs" />
-    <Compile Include="Edu\Fx\Iteration`2.cs" />
-    <Compile Include="Edu\Fx\Sequence.cs" />
-    <Compile Include="Edu\Fx\YCombinator.cs" />
-    <Compile Include="Edu\Linq\Bananas.cs" />
-    <Compile Include="Edu\Linq\IGroupingQuerySyntax`1.cs" />
-    <Compile Include="Edu\Linq\IOrderedQuerySyntax`1.cs" />
-    <Compile Include="Edu\Linq\IQuerySyntax.cs" />
-    <Compile Include="Edu\Linq\IQuerySyntax`1.cs" />
-    <Compile Include="Edu\Linq\Lenses.cs" />
-    <Compile Include="Edu\Monads\Action`%24.cs" />
-    <Compile Include="Edu\Monads\Cokunc`.cs" />
-    <Compile Include="Edu\Monads\Comonad`1.cs" />
-    <Compile Include="Edu\Monads\Kunc`%24.cs" />
-    <Compile Include="Edu\Monads\Kunc`.cs" />
-    <Compile Include="Edu\Monads\Monad.cs" />
-    <Compile Include="Edu\Monads\Monad`1.cs" />
-    <Compile Include="Edu\Monads\Monoid`1.cs" />
-    <Compile Include="Edu\Monads\Mu.cs" />
-    <Compile Include="Edu\Monads\NamespaceDoc.cs" />
-    <Compile Include="Edu\Monads\Rules.cs" />
-    <Compile Include="Edu\Monads\Samples\Comonad.g.cs">
-      <DependentUpon>Comonad.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\Comonad`1.cs" />
-    <Compile Include="Edu\Monads\Samples\Monad.g.cs">
-      <DependentUpon>Monad.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadOr.g.cs">
-      <DependentUpon>MonadOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadOr`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadPlus.g.cs">
-      <DependentUpon>MonadPlus.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadPlus`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadValue.g.cs">
-      <DependentUpon>MonadValue.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadValue`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadZero.g.cs">
-      <DependentUpon>MonadZero.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadZero`1.cs" />
-    <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
-    <Compile Include="Edu\Monads\Stubs.cs" />
-    <Compile Include="Edu\Monads\Stubs`1.cs" />
-    <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,54 +30,30 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Playground.Version.props">
       <SubType>Designer</SubType>
     </None>
     <None Include="Playground.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Edu\Monads\Samples\Comonad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Comonad.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\Monad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Monad.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadPlus.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadValue.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadZero.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config" />
     <None Include="Playground.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Benchmarking\Narvalo.Benchmarking.csproj">
-      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
-      <Name>Narvalo.Benchmarking</Name>
+    <ProjectReference Include="..\Narvalo.Brouillons\Narvalo.Brouillons.csproj">
+      <Project>{809c0da5-9a01-4ada-83a5-1a0494723594}</Project>
+      <Name>Narvalo.Brouillons</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Extras\Narvalo.Extras.csproj">
-      <Project>{b4254c3b-1fe0-4a39-9215-6f84d058fd40}</Project>
-      <Name>Narvalo.Extras</Name>
+    <ProjectReference Include="..\Narvalo.Diagnostics.Benchmarking\Narvalo.Diagnostics.Benchmarking.csproj">
+      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
+      <Name>Narvalo.Diagnostics.Benchmarking</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

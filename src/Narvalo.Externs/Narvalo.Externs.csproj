@@ -30,11 +30,11 @@
     </Reference>
     <Reference Include="Serilog, Version=1.4.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.4.196\lib\net45\Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.4.204\lib\net45\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.4.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Serilog.1.4.196\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.1.4.204\lib\net45\Serilog.FullNetFx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -72,6 +72,7 @@
     <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
+    <Compile Include="Autofac\AutofacPresenterFactory.cs" />
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
     <Compile Include="Autofac\ContainerBuilder%24.cs" />
     <Compile Include="Autofac\PrincipalModelBinder.cs" />
@@ -91,6 +92,12 @@
     </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
+      <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
+      <Name>Narvalo.Mvp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

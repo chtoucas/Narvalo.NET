@@ -10,10 +10,10 @@ namespace Narvalo.Mvp.Resolvers
            Justification = "Using three generic parameters does not seem that much!")]
     public class ResolverCache<TKey, TCacheKey, TValue>
     {
-        readonly ConcurrentDictionary<TCacheKey, TValue> _dictionary
+        private readonly ConcurrentDictionary<TCacheKey, TValue> _dictionary
            = new ConcurrentDictionary<TCacheKey, TValue>();
 
-        readonly Func<TKey, TCacheKey> _cacheKeyProvider;
+        private readonly Func<TKey, TCacheKey> _cacheKeyProvider;
 
         public ResolverCache(Func<TKey, TCacheKey> cacheKeyProvider)
         {

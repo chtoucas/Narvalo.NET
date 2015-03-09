@@ -81,7 +81,7 @@ namespace Narvalo
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-29-0",
-            Justification = "[CodeContracts] Unrecognized fix by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
         public static string ToFlickrBase58String(long value)
         {

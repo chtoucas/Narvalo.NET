@@ -13,15 +13,18 @@ namespace Narvalo
         public static TEnum? Enum<TEnum>(object value) where TEnum : struct
         {
             var type = typeof(TEnum);
-            if (!type.IsEnum) {
+            if (!type.IsEnum)
+            {
                 throw new InvalidOperationException(
                     Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName));
             }
 
-            if (System.Enum.IsDefined(type, value)) {
+            if (System.Enum.IsDefined(type, value))
+            {
                 return (TEnum)System.Enum.ToObject(type, value);
             }
-            else {
+            else
+            {
                 return null;
             }
         }

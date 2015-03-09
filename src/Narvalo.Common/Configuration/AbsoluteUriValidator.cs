@@ -10,14 +10,12 @@ namespace Narvalo.Configuration
     /// </summary>
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
-        /// <summary />
         /// <see cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);
         }
 
-        /// <summary />
         /// <see cref="System.Configuration.ConfigurationValidatorBase.Validate"/>
         public override void Validate(object value)
         {

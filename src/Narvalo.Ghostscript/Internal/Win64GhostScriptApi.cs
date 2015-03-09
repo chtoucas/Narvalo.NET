@@ -6,7 +6,7 @@ namespace Narvalo.GhostScript.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    class Win64GhostScriptApi : GhostScriptApiBase
+    internal class Win64GhostScriptApi : GhostScriptApiBase
     {
         public Win64GhostScriptApi() : base() { }
 
@@ -16,11 +16,14 @@ namespace Narvalo.GhostScript.Internal
         {
             int code;
 
-            using (var handle = CreateGSHandle_()) {
-                try {
+            using (var handle = CreateGSHandle_())
+            {
+                try
+                {
                     code = Win64NativeMethods.gsapi_init_with_args(handle, argc, argv);
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     // WARNING: the handle is executing in CER but the last method may throw a CSE, 
                     // in which case the finally block won't be executed.
                     handle.Dispose();
@@ -29,20 +32,22 @@ namespace Narvalo.GhostScript.Internal
                 }
             }
 
-            if (NativeMethodsUtil.IsError(code)) {
+            if (NativeMethodsUtil.IsError(code))
+            {
                 throw new GhostScriptException("An error occured while executing gsapi_init_with_args().");
             }
         }
 
         #region Méthodes privées
 
-        static Win64GhostScriptSafeHandle CreateGSHandle_()
+        private static Win64GhostScriptSafeHandle CreateGSHandle_()
         {
             Win64GhostScriptSafeHandle handle = null;
 
             int code = Win64NativeMethods.gsapi_new_instance(out handle, IntPtr.Zero);
 
-            if (handle.IsInvalid || NativeMethodsUtil.IsError(code)) {
+            if (handle.IsInvalid || NativeMethodsUtil.IsError(code))
+            {
                 throw new GhostScriptException(
                     "It seems another instance of GhostScript is running.");
             }

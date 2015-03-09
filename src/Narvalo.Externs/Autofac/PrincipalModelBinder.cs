@@ -4,6 +4,7 @@ namespace Narvalo.Externs.Autofac
 {
     using System.Security.Principal;
     using System.Web.Mvc;
+
     using global::Autofac.Integration.Mvc;
     using Narvalo;
 

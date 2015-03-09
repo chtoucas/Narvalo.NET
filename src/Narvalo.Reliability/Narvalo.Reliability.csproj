@@ -17,33 +17,7 @@
     <Compile Include="..\Common\Narvalo.Minimal.cs">
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
-    <Compile Include="AggregateGuardException.cs" />
-    <Compile Include="BarrierException.cs" />
-    <Compile Include="BlackholeGuard.cs" />
-    <Compile Include="CircuitBreaker.cs" />
-    <Compile Include="CircuitBreakerState.cs" />
-    <Compile Include="CircuitBreakerStateChangedEventArgs.cs" />
-    <Compile Include="CircuitOpenException.cs" />
-    <Compile Include="ConcurrencyThrottle.cs" />
-    <Compile Include="FlowRateBarrier.cs" />
-    <Compile Include="FlowRateExceededException.cs" />
-    <Compile Include="GuardChain.cs" />
-    <Compile Include="GuardChainBuilder.cs" />
-    <Compile Include="GuardException.cs" />
-    <Compile Include="GuardStatus.cs" />
-    <Compile Include="GuardType.cs" />
-    <Compile Include="IBarrier.cs" />
-    <Compile Include="IGuard.cs" />
-    <Compile Include="IMonitorableGuard.cs" />
-    <Compile Include="IReliabilityMonitor.cs" />
-    <Compile Include="IThrottle.cs" />
-    <Compile Include="NoopGuard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReliabilityWrapper.cs" />
-    <Compile Include="RequestCounter.cs" />
-    <Compile Include="RetryGuard.cs" />
-    <Compile Include="RetryPolicy.cs" />
-    <Compile Include="ThrottleException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Reliability.Version.props" />

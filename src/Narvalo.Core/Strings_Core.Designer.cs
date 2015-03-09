@@ -116,24 +116,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception..
-        /// </summary>
-        internal static string Output_SuccessfulHasNoException {
-            get {
-                return ResourceManager.GetString("Output_SuccessfulHasNoException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A bad outcome has no value..
-        /// </summary>
-        internal static string Output_UnsuccessfulHasNoValue {
-            get {
-                return ResourceManager.GetString("Output_UnsuccessfulHasNoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The lower end must be lesser than upper end..
         /// </summary>
         internal static string Range_LowerEndNotLesserThanUpperEnd {
@@ -202,24 +184,6 @@ namespace Narvalo {
         internal static string Require_PropertyNull {
             get {
                 return ResourceManager.GetString("Require_PropertyNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A non fatal outcome has no exception info..
-        /// </summary>
-        internal static string VoidOrError_NotFatal {
-            get {
-                return ResourceManager.GetString("VoidOrError_NotFatal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A non warning outcome has no error message..
-        /// </summary>
-        internal static string VoidOrError_NotWarning {
-            get {
-                return ResourceManager.GetString("VoidOrError_NotWarning", resourceCulture);
             }
         }
     }

@@ -9,9 +9,9 @@ namespace Narvalo.Internal
         Justification = "The method already returns a boolean to indicate the outcome.")]
     delegate bool TryConverter<in TSource, TResult>(TSource value, out TResult result);
 
-    static class TryConverterExtensions
+    internal static class TryConverterExtensions
     {
-        internal static TResult? NullInvoke<TSource, TResult>(this TryConverter<TSource, TResult> @this, TSource value)
+        public static TResult? NullInvoke<TSource, TResult>(this TryConverter<TSource, TResult> @this, TSource value)
             where TResult : struct
         {
             Require.Object(@this);
@@ -22,7 +22,7 @@ namespace Narvalo.Internal
             return @this.Invoke(value, out result) ? result : (TResult?)null;
         }
 
-        internal static Maybe<TResult> MayInvoke<TSource, TResult>(this TryConverter<TSource, TResult> @this, TSource value)
+        public static Maybe<TResult> MayInvoke<TSource, TResult>(this TryConverter<TSource, TResult> @this, TSource value)
             where TResult : class
         {
             Require.Object(@this);

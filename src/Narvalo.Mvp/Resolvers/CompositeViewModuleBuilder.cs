@@ -8,10 +8,10 @@ namespace Narvalo.Mvp.Resolvers
 
     public sealed class CompositeViewModuleBuilder
     {
-        const string AssemblyName_ = "Narvalo.Mvp.CompositeViews";
+        private const string ASSEMBLY_NAME = "Narvalo.Mvp.CompositeViews";
 
-        readonly string _assemblyName;
-        readonly Lazy<ModuleBuilder> _moduleBuilder;
+        private readonly string _assemblyName;
+        private readonly Lazy<ModuleBuilder> _moduleBuilder;
 
         public CompositeViewModuleBuilder(string assemblyName)
         {
@@ -37,10 +37,10 @@ namespace Narvalo.Mvp.Resolvers
                 interfaces);
         }
 
-        ModuleBuilder CreateModuleBuilder_()
+        private ModuleBuilder CreateModuleBuilder_()
         {
             var assemblyName = new AssemblyName(_assemblyName);
-            
+
             // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
             // var attributeBuilders = new CustomAttributeBuilder[] {
             //    new CustomAttributeBuilder(

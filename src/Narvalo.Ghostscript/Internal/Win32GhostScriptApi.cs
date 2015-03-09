@@ -6,7 +6,7 @@ namespace Narvalo.GhostScript.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    class Win32GhostScriptApi : GhostScriptApiBase
+    internal class Win32GhostScriptApi : GhostScriptApiBase
     {
         public Win32GhostScriptApi() : base() { }
 
@@ -34,9 +34,7 @@ namespace Narvalo.GhostScript.Internal
             }
         }
 
-        #region Méthodes privées
-
-        static Win32GhostScriptSafeHandle CreateGSHandle_()
+        private static Win32GhostScriptSafeHandle CreateGSHandle_()
         {
             Win32GhostScriptSafeHandle handle = null;
 
@@ -49,7 +47,5 @@ namespace Narvalo.GhostScript.Internal
 
             return handle;
         }
-
-        #endregion
     }
 }

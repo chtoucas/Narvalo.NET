@@ -13,7 +13,7 @@ namespace Narvalo.GhostScript.Options
         private readonly string _inputFile;
 
         private Interactions _interactions = Interactions.Default;
-        private Miscs _miscs =  Miscs.Default;
+        private Miscs _miscs = Miscs.Default;
         private string _outputFile;
         private Pdf _pdf;
 
@@ -62,16 +62,19 @@ namespace Narvalo.GhostScript.Options
 
             // Input/Output
             args.Add(InputFile);
-            if (CanOutput) {
+            if (CanOutput)
+            {
                 args.Add("-sOutputFile=" + OutputFile);
             }
 
             Device.AddTo(args);
-            if (Device.CanDisplay) {
+            if (Device.CanDisplay)
+            {
                 Device.AddDisplayTo(args);
             }
 
-            if (Pdf != null) {
+            if (Pdf != null)
+            {
                 Pdf.AddTo(args);
             }
 

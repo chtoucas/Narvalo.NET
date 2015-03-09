@@ -6,9 +6,9 @@ namespace Narvalo.GhostScript.Internal
     using System.Runtime.InteropServices;
     using System.Security;
 
-    static class Win64NativeMethods
+    internal static class Win64NativeMethods
     {
-        const string GhostScriptDllName_ = "gsdll64.dll";
+        private const string GhostScriptDllName_ = "gsdll64.dll";
 
         // int gsapi_new_instance (void **pinstance, void *caller_handle);
         [DllImport(GhostScriptDllName_, EntryPoint = "gsapi_new_instance", SetLastError = true)]
