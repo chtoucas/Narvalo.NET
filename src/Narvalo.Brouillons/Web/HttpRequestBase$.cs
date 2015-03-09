@@ -27,7 +27,7 @@ namespace Narvalo.Web
 
             // FIXME: Int32.MaxValue ?
             if (bodyStream.Length > Int64.MaxValue) {
-                throw new ArgumentException(SR.HttpRequestBase_InputStreamTooLarge, "request");
+                throw new ArgumentException(Strings.HttpRequestBase_InputStreamTooLarge, "request");
             }
 
             int length = Convert.ToInt32(bodyStream.Length);

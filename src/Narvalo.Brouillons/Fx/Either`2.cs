@@ -4,7 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Narvalo;
 
     // NB: Par convention, quand Either est utilisé pour représenter une valeur soit correcte soit 
     // incorrecte, Left contient la valeur en cas d'erreur, et Right contient la valeur en cas de succès.
@@ -35,7 +34,7 @@ namespace Narvalo.Fx
             get
             {
                 if (!_isLeft) {
-                    throw new InvalidOperationException(SR.Either_RightHasNoLeftValue);
+                    throw new InvalidOperationException(Strings.Either_RightHasNoLeftValue);
                 }
 
                 return _left;
@@ -47,7 +46,7 @@ namespace Narvalo.Fx
             get
             {
                 if (_isLeft) {
-                    throw new InvalidOperationException(SR.Either_LeftHasNoRightValue);
+                    throw new InvalidOperationException(Strings.Either_LeftHasNoRightValue);
                 }
 
                 return _right;
@@ -153,5 +152,35 @@ namespace Narvalo.Fx
         //    public abstract void Switch(
         //        Action<TLeft> caseLeft,
         //        Action<TRight> caseRight);
+    }
+
+    // Monad
+    public abstract partial class Either<TLeft, TRight>
+    {
+        public Either<TResult, TResult> Map<TResult>(
+            Func<TLeft, TResult> leftSelector,
+            Func<TRight, TResult> rightSelector)
+        {
+            Require.NotNull(leftSelector, "leftSelector");
+            Require.NotNull(rightSelector, "rightSelector");
+
+            return IsLeft
+               ? Either<TResult, TResult>.Left(leftSelector(LeftValue))
+               : Either<TResult, TResult>.Right(rightSelector(RightValue));
+        }
+    }
+
+    // Grammar
+    public abstract partial class Either<TLeft, TRight>
+    {
+        //public TResult Match<TResult>(
+        //    Func<TLeft, TResult> leftSelector,
+        //    Func<TRight, TResult> rightSelector)
+        //{
+        //    Require.NotNull(leftSelector, "leftSelector");
+        //    Require.NotNull(rightSelector, "rightSelector");
+
+        //    return IsLeft ? leftSelector(LeftValue) : rightSelector(RightValue);
+        //}
     }
 }

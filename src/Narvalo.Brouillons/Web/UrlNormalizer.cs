@@ -5,7 +5,6 @@ namespace Narvalo.Web
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Narvalo;
 
     public static class UrlNormalizer
     {

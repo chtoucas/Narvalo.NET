@@ -4,7 +4,6 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
-    using Narvalo;
 
     public class NamedConfigurationElementCollection<TKey, TElement>
         : BasicConfigurationElementCollection<TElement>

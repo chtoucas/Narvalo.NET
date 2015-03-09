@@ -3,15 +3,17 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{809C0DA5-9A01-4ADA-83A5-1A0494723594}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Brouillons</AssemblyName>
+    <StartupObject>Narvalo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.JScript" />
-    <Reference Include="NodaTime">
-      <HintPath>..\..\packages\NodaTime.1.3.1\lib\net35-Client\NodaTime.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -22,24 +24,60 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Apply.cs" />
+    <Compile Include="Fx\Apply.cs" />
+    <Compile Include="Array%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyUtility.cs" />
+    <Compile Include="BinaryEncoder.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Collections\Enumerable[Output]%24.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
-    <Compile Include="Collections\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Collections\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
+    <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
+    <Compile Include="Configuration\KeyedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValueConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\KeyValuePairConfigurationElement`2.cs" />
+    <Compile Include="Configuration\NamedConfigurationElementCollection`2.cs" />
+    <Compile Include="Configuration\NameObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\NameValueConfigurationElement.cs" />
+    <Compile Include="Configuration\ObjectConfigurationElement`1.cs" />
+    <Compile Include="Configuration\ValueConfigurationElement.cs" />
+    <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkComparativeAttribute.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkComparison.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkComparisonAttribute.cs" />
@@ -48,8 +86,11 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollection.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatter.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatterBase.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFormatter.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFormatterBase.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchMetricConsoleFormatter.cs" />
     <Compile Include="Diagnostics\Benchmarking\IBenchmarkMetricCollectionFormatter.cs" />
+    <Compile Include="Diagnostics\Benchmarking\IBenchmarkMetricFormatter.cs" />
     <Compile Include="Edu\Comparisons\Int64EncoderComparison.cs" />
     <Compile Include="Edu\Comparisons\RemoveDiacriticsComparison.cs" />
     <Compile Include="Edu\Comparisons\ReverseComparison.cs" />
@@ -114,13 +155,18 @@
     <Compile Include="Edu\Monads\Stubs.cs" />
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
-    <Compile Include="Func`%24.cs" />
-    <Compile Include="Fx\Identity.g.cs">
+    <Compile Include="Enumeration.cs" />
+    <Compile Include="EnumStyles.cs" />
+    <Compile Include="Expando.cs" />
+    <Compile Include="Fx\Either`2.cs" />
+    <Compile Include="Fx\Fun.cs" />
+    <Compile Include="Fx\Func`%24.cs" />
+    <Compile Include="Edu\Monads\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Edu\Monads\Identity`1.cs" />
     <Compile Include="Fx\Output.cs" />
     <Compile Include="Fx\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
@@ -131,15 +177,34 @@
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Globalization\CurrencyInfo%24.cs" />
+    <Compile Include="Globalization\Locale.cs" />
+    <Compile Include="Globalization\Region.cs" />
+    <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Globalization\SnvCurrencyLegacyXmlReader.cs" />
     <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
     <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Internal\Stubs.cs" />
-    <Compile Include="Internal\Stubs`1.cs" />
-    <Compile Include="Make`1.cs" />
+    <Compile Include="ImageUtility.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
+    <Compile Include="Runtime\Reliability\Guard%24.cs" />
+    <Compile Include="Security\DesCryptoEngine.cs" />
+    <Compile Include="Security\IBidirectionalCryptoEngine.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Internal\TryConverter`1.cs" />
+    <Compile Include="Diagnostics\Logging\ConsoleLogger.cs" />
+    <Compile Include="Diagnostics\Logging\DebuggerLogger.cs" />
+    <Compile Include="Diagnostics\Logging\DebuggerWriter.cs" />
+    <Compile Include="Diagnostics\Logging\ILogger.cs" />
+    <Compile Include="Diagnostics\Logging\ILoggerFactory.cs" />
+    <Compile Include="Diagnostics\Logging\LoggerBase.cs" />
+    <Compile Include="Diagnostics\Logging\LoggerLevel.cs" />
+    <Compile Include="Diagnostics\Logging\SilentLogger.cs" />
+    <Compile Include="Fx\Make`1.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumber.cs" />
     <Compile Include="RandomString.cs" />
+    <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
     <Compile Include="Runtime\Reliability\BarrierException.cs" />
     <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
@@ -172,15 +237,130 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="VoidOrBreak.cs" />
-    <Compile Include="VoidOrError.cs" />
+    <Compile Include="Fx\VoidOrBreak.cs" />
+    <Compile Include="Fx\VoidOrError.cs" />
+    <Compile Include="Web\Configuration\NarvaloWebSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFilterElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFilterElementCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\ParserFiltersSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Configuration\XmlValidationSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Hosting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\HttpCompressionModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\HttpRequestBase%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\HttpResponse%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\HttpVerbs%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\IXmlValidationRenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\JScriptCompiler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\NameValueCollection%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Profile\AuthenticatedOnlyProfileProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Profile\NarvaloProfile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Profile\NarvaloProfileProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Profile\NarvaloProfileRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\RawHttpEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\RobotsDirectiveBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\RouteCollection%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\FormsAuthenticationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\IFormsAuthenticationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\IMembershipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\MembershipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\NarvaloMembershipProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Security\NarvaloMembershipUser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Social\FacebookContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\Social\FacebookCookie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\StaticFileHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\AggregatePageParserFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\AggregatePageParserFilterBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\ControlBuilder%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UI\NoScriptTagPageParserFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\UrlNormalizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\WebPageBase%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\XmlValidationModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Xml\CachingXmlResolver.cs" />
+    <Compile Include="Xml\Hxl.cs" />
+    <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
+    <Compile Include="Xml\Maybe[XElement]%24.cs" />
+    <Compile Include="Xml\XmlName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad.Output.tt" />
-    <None Include="Collections\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
     <None Include="Collections\Output.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
@@ -209,7 +389,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\Identity.tt">
+    <None Include="Edu\Monads\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
@@ -224,6 +404,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Narvalo.Brouillons.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
@@ -241,15 +424,24 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Narvalo.Diagnostics.Benchmarking\Narvalo.Diagnostics.Benchmarking.csproj">
-      <Project>{13cf906d-62bf-4962-8038-f54893a5f976}</Project>
-      <Name>Narvalo.Diagnostics.Benchmarking</Name>
+    <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
+      <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
+      <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Globalization\Cldr\" />
+    <Folder Include="Messaging\Jabber\" />
+    <Folder Include="Xml\RelaxNG\" />
+    <Folder Include="Xml\Sax\" />
+    <Folder Include="Xml\Svg\" />
+    <Folder Include="Xml\Syndication\" />
+    <Folder Include="Xml\Twig\" />
+    <Folder Include="Xml\Xmpp\" />
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

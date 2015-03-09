@@ -6,66 +6,67 @@ namespace Narvalo.Runtime.Reliability
     using System.Threading;
 
     // FIXME: à refaire en checkpoint sans exception...
-    public class FlowRateRegulator : IThrottle, IDisposable
+    public class FlowRateRegulator 
+        ////: IThrottle, IDisposable
     {
-        private readonly TimeSpan _timeout;
+        ////private readonly TimeSpan _timeout;
 
-        private bool _disposed = false;
-        private bool _blocking = false;
-        private Timer _resetTimer;
+        ////private bool _disposed = false;
+        ////private bool _blocking = false;
+        ////private Timer _resetTimer;
 
-        public FlowRateRegulator(TimeSpan timeout)
-        {
-            _timeout = timeout;
+        ////public FlowRateRegulator(TimeSpan timeout)
+        ////{
+        ////    _timeout = timeout;
 
-            _resetTimer = new Timer((state) => { _blocking = false; }, null /* state */, new TimeSpan(0), timeout);
-        }
+        ////    _resetTimer = new Timer((state) => { _blocking = false; }, null /* state */, new TimeSpan(0), timeout);
+        ////}
 
-        public bool Blocking { get { return _blocking; } }
+        ////public bool Blocking { get { return _blocking; } }
 
-        #region IStatefulGuard
+        ////#region IStatefulGuard
 
-        public bool CanExecute { get { return !_blocking; } }
+        ////public bool CanExecute { get { return !_blocking; } }
 
-        public int Multiplicity { get { return 1; } }
+        ////public int Multiplicity { get { return 1; } }
 
-        public void Execute(Action action)
-        {
-            Require.NotNull(action, "action");
+        ////public void Execute(Action action)
+        ////{
+        ////    Require.NotNull(action, "action");
 
-            if (CanExecute) {
-                _blocking = true;
-                action.Invoke();
-            }
-            else {
-                throw new FlowRateExceededException();
-            }
-        }
+        ////    if (CanExecute) {
+        ////        _blocking = true;
+        ////        action.Invoke();
+        ////    }
+        ////    else {
+        ////        throw new FlowRateExceededException();
+        ////    }
+        ////}
 
-        #endregion
+        ////#endregion
 
-        #region IDisposable
+        ////#region IDisposable
 
-        public void Dispose()
-        {
-            Dispose(true /* disposing */);
-            GC.SuppressFinalize(this);
-        }
+        ////public void Dispose()
+        ////{
+        ////    Dispose(true /* disposing */);
+        ////    GC.SuppressFinalize(this);
+        ////}
 
-        #endregion
+        ////#endregion
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed) {
-                if (disposing) {
-                    if (_resetTimer != null) {
-                        _resetTimer.Dispose();
-                        _resetTimer = null;
-                    }
-                }
+        ////protected virtual void Dispose(bool disposing)
+        ////{
+        ////    if (!_disposed) {
+        ////        if (disposing) {
+        ////            if (_resetTimer != null) {
+        ////                _resetTimer.Dispose();
+        ////                _resetTimer = null;
+        ////            }
+        ////        }
 
-                _disposed = true;
-            }
-        }
+        ////        _disposed = true;
+        ////    }
+        ////}
     }
 }

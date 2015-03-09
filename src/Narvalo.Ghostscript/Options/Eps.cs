@@ -11,4 +11,3 @@ namespace Narvalo.GhostScript.Options
         NoEps,
     }
 }
-

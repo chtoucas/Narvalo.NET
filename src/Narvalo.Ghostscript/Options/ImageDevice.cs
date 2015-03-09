@@ -7,25 +7,15 @@ namespace Narvalo.GhostScript.Options
 
     public class ImageDevice : OutputDevice
     {
-        #region Fields
-
         private readonly ImageFormat _format;
 
         private Display _display;
-
-        #endregion
-
-        #region Ctor
 
         public ImageDevice(ImageFormat format)
             : base()
         {
             _format = format;
         }
-
-        #endregion
-
-        #region Properties
 
         public override bool CanDisplay { get { return true; } }
 
@@ -41,10 +31,6 @@ namespace Narvalo.GhostScript.Options
 
         public ImageFormat ImageFormat { get { return _format; } }
 
-        #endregion
-
-        #region Public methods
-
         public override void AddDisplayTo(ICollection<string> args)
         {
             if (Display != null)
@@ -52,10 +38,6 @@ namespace Narvalo.GhostScript.Options
                 Display.AddTo(args);
             }
         }
-
-        #endregion
-
-        #region Private methods
 
         private static string GetDeviceName(ImageFormat format)
         {
@@ -85,8 +67,5 @@ namespace Narvalo.GhostScript.Options
                     throw new NotSupportedException("Unsupported format.");
             }
         }
-
-        #endregion
     }
 }
-

@@ -2,16 +2,19 @@
 
 namespace Narvalo.Diagnostics.Benchmarking
 {
-    using NodaTime;
+    using System;
+
     using Xunit;
 
     public static class BenchmarkMetricFacts
     {
+        private static readonly TimeSpan s_Epsilon = TimeSpan.FromTicks(1L);
+
         [Fact]
         public static void ToString_ForNullFormat()
         {
             // Arrange
-            var metric = new BenchmarkMetric("Category", "Name", Duration.Epsilon, 1);
+            var metric = new BenchmarkMetric("Category", "Name", s_Epsilon, 1);
 
             // Act & Assert
             Assert.Equal(metric.ToString(), metric.ToString(null, null));
@@ -21,7 +24,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         public static void ToString_ForDefaultFormat()
         {
             // Arrange
-            var metric = new BenchmarkMetric("Category", "Name", Duration.Epsilon, 1);
+            var metric = new BenchmarkMetric("Category", "Name", s_Epsilon, 1);
 
             // Act & Assert
             Assert.Equal(metric.ToString(), metric.ToString("G", null));

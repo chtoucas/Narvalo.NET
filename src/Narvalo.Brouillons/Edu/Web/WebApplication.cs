@@ -76,18 +76,12 @@ namespace Narvalo.Edu.Web
         /// l'attribut PreApplicationStartMethod. Voir aussi WebActivator.
         /// </para>
         /// </summary>
-        protected void Application_Start()
-        {
-            // Intentionally left blank.
-        }
+        protected void Application_Start() { }
 
         /// <summary>
         /// Appelé une fois dans la durée de vie de l'application avant que celle-ci ne soit déchargée. 
         /// </summary>
-        protected void Application_End(object sender, EventArgs e)
-        {
-            // Intentionally left blank.
-        }
+        protected void Application_End(object sender, EventArgs e) { }
 
         #endregion
 

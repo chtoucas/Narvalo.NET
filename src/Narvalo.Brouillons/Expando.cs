@@ -58,7 +58,7 @@ namespace Alien
         /// String Dictionary that contains the extra dynamic values
         /// stored on this object/instance
         /// </summary>        
-        /// <remarks>Using Dictionary<string, TValue> to support XML Serialization of the dictionary</remarks>
+        // <remarks>Using Dictionary<string, TValue> to support XML Serialization of the dictionary</remarks>
         Dictionary<string, object> _properties = new Dictionary<string, object>();
 
         /// <summary>
@@ -312,7 +312,7 @@ namespace Alien
         /// <summary>
         /// Returns and the properties of 
         /// </summary>
-        /// <param name="includeProperties"></param>
+        /// <param name="includeInstanceProperties"></param>
         /// <returns></returns>
         public IEnumerable<KeyValuePair<string, object>> GetProperties(bool includeInstanceProperties = false)
         {
@@ -330,8 +330,6 @@ namespace Alien
         /// Checks whether a property exists in the Property collection
         /// or as a property on the instance
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
         public bool Contains(KeyValuePair<string, object> item, bool includeInstanceProperties = false)
         {
             bool res = _properties.ContainsKey(item.Key);

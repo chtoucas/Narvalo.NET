@@ -44,8 +44,6 @@ namespace Narvalo.Data
     /// </summary>
     public static partial class SqlDataReaderExtensions
     {
-        //// Byte[]
-
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
@@ -62,8 +60,6 @@ namespace Narvalo.Data
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
         }
-
-        //// Binary
 
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
         {
@@ -82,8 +78,6 @@ namespace Narvalo.Data
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
 
-        //// Char[]
-
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
@@ -100,8 +94,6 @@ namespace Narvalo.Data
 
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
-
-        //// String
 
         public static string GetString(this SqlDataReader @this, string name)
         {
@@ -143,8 +135,6 @@ namespace Narvalo.Data
             return @this.MayGetString(@this.GetOrdinal(name));
         }
 
-        //// Money
-
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
             Require.Object(@this);
@@ -177,8 +167,6 @@ namespace Narvalo.Data
 
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
-
-        //// Xml
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {

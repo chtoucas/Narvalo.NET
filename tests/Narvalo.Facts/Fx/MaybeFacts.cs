@@ -785,7 +785,6 @@ namespace Narvalo.Fx
             Assert.True(referenceOpt.IsNone);
         }
 
-
         #endregion
 
         #region Bind Method

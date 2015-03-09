@@ -6,8 +6,8 @@ namespace Narvalo.Edu.Monads
 
     public static class Stubs<T>
     {
-        static readonly Kunc<T, Unit> Ignore_ = _ => Monad.Unit;
+        private static readonly Kunc<T, Unit> s_Ignore = _ => Monad.Unit;
 
-        public static Kunc<T, Unit> Ignore { get { return Ignore_; } }
+        public static Kunc<T, Unit> Ignore { get { return s_Ignore; } }
     }
 }

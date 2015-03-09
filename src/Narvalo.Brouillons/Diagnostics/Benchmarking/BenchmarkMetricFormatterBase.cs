@@ -2,9 +2,8 @@
 
 namespace Narvalo.Diagnostics.Benchmarking
 {
+    using System;
     using System.Globalization;
-
-    using NodaTime;
 
     public abstract class BenchmarkMetricFormatterBase : IBenchmarkMetricFormatter
     {
@@ -17,7 +16,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         public string Format(CultureInfo cultureInfo, BenchmarkMetric metric)
         {
-            if (metric.Duration == Duration.Zero) {
+            if (metric.Duration == TimeSpan.Zero) {
                 return FormatInvalidMetric(cultureInfo, metric);
             }
 

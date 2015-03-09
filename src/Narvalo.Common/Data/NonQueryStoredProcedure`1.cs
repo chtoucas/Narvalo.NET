@@ -8,8 +8,6 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo;
-
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
     public abstract class NonQueryStoredProcedure<TParameters>
     {

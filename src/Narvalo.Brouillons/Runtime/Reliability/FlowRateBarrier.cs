@@ -7,12 +7,12 @@ namespace Narvalo.Runtime.Reliability
 
     public class FlowRateBarrier : IBarrier, IDisposable
     {
-        readonly TimeSpan _resetInterval;
-        readonly int _maxRequestsPerInterval;
+        private readonly TimeSpan _resetInterval;
+        private readonly int _maxRequestsPerInterval;
 
-        bool _disposed = false;
-        int _requestCount = 0;
-        Timer _resetTimer;
+        private bool _disposed = false;
+        private int _requestCount = 0;
+        private Timer _resetTimer;
 
         public FlowRateBarrier(int maxRequestsPerInterval, TimeSpan resetInterval)
         {
@@ -21,12 +21,16 @@ namespace Narvalo.Runtime.Reliability
             _maxRequestsPerInterval = maxRequestsPerInterval;
             _resetInterval = resetInterval;
 
-            //_resetTimer = new Timer((state) => { _requestCount = 0; }, null /* state */, new TimeSpan(0), resetInterval);
-            _resetTimer = new Timer((state) =>
-            {
-                _requestCount = 0;
-                _resetTimer.Change(_resetInterval, new TimeSpan(-1));
-            }, null /* state */, _resetInterval, new TimeSpan(-1));
+            ////_resetTimer = new Timer((state) => { _requestCount = 0; }, null /* state */, new TimeSpan(0), resetInterval);
+            _resetTimer = new Timer(
+                (state) =>
+                {
+                    _requestCount = 0;
+                    _resetTimer.Change(_resetInterval, new TimeSpan(-1));
+                },
+                null /* state */,
+                _resetInterval,
+                new TimeSpan(-1));
         }
 
         public int MaxRequestsPerInterval { get { return _maxRequestsPerInterval; } }
@@ -46,7 +50,8 @@ namespace Narvalo.Runtime.Reliability
 
             ThrowIfDisposed();
 
-            if (!CanExecute) {
+            if (!CanExecute)
+            {
                 throw new FlowRateExceededException();
             }
 
@@ -68,9 +73,12 @@ namespace Narvalo.Runtime.Reliability
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed) {
-                if (disposing) {
-                    if (_resetTimer != null) {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    if (_resetTimer != null)
+                    {
                         _resetTimer.Dispose();
                         _resetTimer = null;
                     }
@@ -80,9 +88,10 @@ namespace Narvalo.Runtime.Reliability
             }
         }
 
-        void ThrowIfDisposed()
+        private void ThrowIfDisposed()
         {
-            if (_disposed) {
+            if (_disposed)
+            {
                 throw new ObjectDisposedException(typeof(FlowRateBarrier).FullName);
             }
         }

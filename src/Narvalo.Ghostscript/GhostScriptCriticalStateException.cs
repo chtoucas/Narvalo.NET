@@ -10,12 +10,12 @@ namespace Narvalo.GhostScript
     {
         public GhostScriptCriticalStateException() : base() { }
 
-        public GhostScriptCriticalStateException(string message) : base(message) { ; }
+        public GhostScriptCriticalStateException(string message) : base(message) { }
 
         public GhostScriptCriticalStateException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected GhostScriptCriticalStateException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
     }
 }

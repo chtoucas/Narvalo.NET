@@ -9,9 +9,6 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Linq;
     using System.Reflection;
 
-    using Narvalo;
-    using NodaTime;
-
     /// <summary>
     /// Represents a processor that compares the performance of different implementations
     /// of the same problem given by methods defined inside a single class, each method
@@ -85,16 +82,6 @@ namespace Narvalo.Diagnostics.Benchmarking
             }
         }
 
-        private IEnumerable<BenchmarkMetric> ProcessCore_(BenchmarkComparison comparison)
-        {
-            Require.NotNull(comparison, "comparison");
-
-            foreach (var item in comparison.Items)
-            {
-                yield return _runner.Run(item, comparison.Iterations);
-            }
-        }
-
         private static BenchmarkComparison CreateComparison_(Type type, IEnumerable<Benchmark> items)
         {
             BenchmarkComparisonAttribute attr
@@ -114,6 +101,16 @@ namespace Narvalo.Diagnostics.Benchmarking
                 attr.DisplayName ?? type.Name,
                 items,
                 attr.Iterations);
+        }
+
+        private IEnumerable<BenchmarkMetric> ProcessCore_(BenchmarkComparison comparison)
+        {
+            Require.NotNull(comparison, "comparison");
+
+            foreach (var item in comparison.Items)
+            {
+                yield return _runner.Run(item, comparison.Iterations);
+            }
         }
 
         private IEnumerable<Benchmark> FindComparatives_(Type type)
@@ -153,10 +150,10 @@ namespace Narvalo.Diagnostics.Benchmarking
                     continue;
                 }
 
+                // FIXME: Cela ne marchera que si la méthode est statique.
                 yield return new Benchmark(
                     type.FullName,
                     attr.DisplayName ?? method.Name,
-                    // FIXME: Cela ne marchera que si la méthode est statique.
                     () => ((Action<T>)Delegate.CreateDelegate(typeof(Action<T>), method)).Invoke(value));
             }
         }

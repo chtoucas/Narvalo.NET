@@ -9,7 +9,6 @@ namespace Narvalo.Build
     using System.IO;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
-    using Narvalo;
 
     // Maybe we should use a separate AppDomain: AppDomainIsolatedTask
     public abstract class YuiCompressorBase : JavaTaskBase

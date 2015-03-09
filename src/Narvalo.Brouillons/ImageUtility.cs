@@ -9,24 +9,27 @@ namespace Narvalo
 
     public static class ImageUtility
     {
-        static ImageCodecInfo AvailableJpegEncoder_;
+        private static ImageCodecInfo s_AvailableJpegEncoder;
 
         public static ImageCodecInfo JpegEncoder
         {
             get
             {
-                if (AvailableJpegEncoder_ == null) {
+                if (s_AvailableJpegEncoder == null)
+                {
                     ImageCodecInfo[] ici = ImageCodecInfo.GetImageDecoders();
 
-                    foreach (ImageCodecInfo info in ici) {
-                        if (info.FormatID == ImageFormat.Jpeg.Guid) {
-                            AvailableJpegEncoder_ = info;
+                    foreach (ImageCodecInfo info in ici)
+                    {
+                        if (info.FormatID == ImageFormat.Jpeg.Guid)
+                        {
+                            s_AvailableJpegEncoder = info;
                             break;
                         }
                     }
                 }
 
-                return AvailableJpegEncoder_;
+                return s_AvailableJpegEncoder;
             }
         }
 
@@ -37,10 +40,13 @@ namespace Narvalo
             Require.GreaterThanOrEqualTo(level, 0, "level");
             Require.LessThanOrEqualTo(level, 100, "level");
 
-            using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None)) {
+            using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
                 // Load via stream rather than Image.FromFile to release the file handle immediately.
-                using (var stream = new FileStream(inFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
-                    using (var inImage = Image.FromStream(stream)) {
+                using (var stream = new FileStream(inFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var inImage = Image.FromStream(stream))
+                    {
                         ResizeImage(inImage, outStream, maxWidth, maxHeight, level);
                     }
                 }
@@ -54,7 +60,8 @@ namespace Narvalo
             Require.GreaterThanOrEqualTo(level, 0, "level");
             Require.LessThanOrEqualTo(level, 100, "level");
 
-            using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None)) {
+            using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
                 ResizeImage(inImage, outStream, maxWidth, maxHeight, level);
             }
         }
@@ -68,12 +75,15 @@ namespace Narvalo
 
             var dim = GetFitToHeightDimensions(inImage.Width, inImage.Height, maxWidth, maxHeight);
 
-            using (var bitmap = Resize(inImage, dim.Width, dim.Height)) {
+            using (var bitmap = Resize(inImage, dim.Width, dim.Height))
+            {
                 //if (inImage.RawFormat.Guid == ImageFormat.Jpeg.Guid) {
-                if (JpegEncoder == null) {
+                if (JpegEncoder == null)
+                {
                     bitmap.Save(outStream, inImage.RawFormat);
                 }
-                else {
+                else
+                {
                     SaveAsJpeg(bitmap, outStream, level);
                 }
                 //}
@@ -118,11 +128,13 @@ namespace Narvalo
             double boxRatio = maxWidth / maxHeight;
             double scaleFactor;
 
-            if (boxRatio > aspectRatio) {
+            if (boxRatio > aspectRatio)
+            {
                 // Use height, since that is the most restrictive dimension of box.
                 scaleFactor = maxHeight / height;
             }
-            else {
+            else
+            {
                 scaleFactor = maxWidth / width;
             }
 
@@ -134,10 +146,12 @@ namespace Narvalo
             Bitmap bitmap;
             Bitmap tmpBitmap = null;
 
-            try {
+            try
+            {
                 tmpBitmap = new Bitmap(width, height);
 
-                using (var graphics = Graphics.FromImage(tmpBitmap)) {
+                using (var graphics = Graphics.FromImage(tmpBitmap))
+                {
                     graphics.SmoothingMode = SmoothingMode.HighQuality;
                     graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -148,8 +162,10 @@ namespace Narvalo
                 bitmap = tmpBitmap;
                 tmpBitmap = null;
             }
-            finally {
-                if (tmpBitmap != null) {
+            finally
+            {
+                if (tmpBitmap != null)
+                {
                     tmpBitmap.Dispose();
                 }
             }
@@ -159,9 +175,10 @@ namespace Narvalo
 
         private static void SaveAsJpeg(Bitmap bitmap, Stream outStream, long level)
         {
-            using (var ep = new EncoderParameters(1)) {
+            using (var ep = new EncoderParameters(1))
+            {
                 ep.Param[0] = new EncoderParameter(Encoder.Quality, level);
-                bitmap.Save(outStream, AvailableJpegEncoder_, ep);
+                bitmap.Save(outStream, s_AvailableJpegEncoder, ep);
             }
         }
     }

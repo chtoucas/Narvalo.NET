@@ -5,6 +5,7 @@ namespace Narvalo.Web.Configuration
     using System;
     using System.Configuration;
     using System.Web.UI;
+
     using Narvalo.Configuration;
 
     public class ParserFilterElement : ConfigurationElement, IKeyedConfigurationElement<Type>
@@ -35,7 +36,7 @@ namespace Narvalo.Web.Configuration
         public Type ElementType
         {
             get { return _elementTypeSet ? _elementType : (Type)base[ElementType_]; }
-            set { _elementType = Require.Property(value); _elementTypeSet = true; }
+            set { Require.Property(value); _elementType = value; _elementTypeSet = true; }
         }
 
         protected override ConfigurationPropertyCollection Properties

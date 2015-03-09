@@ -8,12 +8,13 @@ namespace Narvalo
     public static class RandomNumber
     {
         // Cf. http://blogs.msdn.com/b/ericlippert/archive/2012/02/21/generating-random-non-uniform-data-in-c.aspx
-        static Random Random_ = new Random();
+        private static Random s_Random = new Random();
 
         public static IEnumerable<double> UniformDistribution()
         {
-            while (true) {
-                yield return Random_.NextDouble();
+            while (true)
+            {
+                yield return s_Random.NextDouble();
             }
         }
 
@@ -34,10 +35,12 @@ namespace Narvalo
             int[] results = new int[buckets];
             double multiplier = buckets / (max - min);
 
-            foreach (double datum in data) {
+            foreach (double datum in data)
+            {
                 double index = (datum - min) * multiplier;
 
-                if (0.0 <= index && index < buckets) {
+                if (0.0 <= index && index < buckets)
+                {
                     results[(int)index] += 1;
                 }
             }

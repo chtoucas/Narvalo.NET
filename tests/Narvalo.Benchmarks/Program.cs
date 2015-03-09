@@ -7,9 +7,6 @@ namespace Narvalo
     using System.Reflection;
 
     using Narvalo.Diagnostics.Benchmarking;
-    using Narvalo.Fx;
-    using Narvalo.Internal;
-    using NodaTime;
 
     public static class Program
     {
@@ -17,8 +14,8 @@ namespace Narvalo
         {
             var processor = new BenchmarkProcessor {
                 DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,
-                TestDuration = Duration.FromMilliseconds(1000),
-                WarmUpDuration = Duration.FromMilliseconds(100),
+                TestDuration = TimeSpan.FromMilliseconds(1000),
+                WarmUpDuration = TimeSpan.FromMilliseconds(100),
             };
 
             var metricsByCategory = processor

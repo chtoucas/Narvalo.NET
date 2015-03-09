@@ -20,13 +20,14 @@ namespace Narvalo.Web
             return list;
         }
 
-        static void AddVerb_(
-          HttpVerbs verbs,
-          HttpVerbs match,
-          List<string> list,
-          string entryText)
+        private static void AddVerb_(
+              HttpVerbs verbs,
+              HttpVerbs match,
+              List<string> list,
+              string entryText)
         {
-            if (verbs.HasFlag(match)) {
+            if (verbs.HasFlag(match))
+            {
                 list.Add(entryText);
             }
         }

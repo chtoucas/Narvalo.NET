@@ -38,8 +38,6 @@ namespace Narvalo.GhostScript.Internal
             }
         }
 
-        #region Méthodes privées
-
         private static Win64GhostScriptSafeHandle CreateGSHandle_()
         {
             Win64GhostScriptSafeHandle handle = null;
@@ -54,7 +52,5 @@ namespace Narvalo.GhostScript.Internal
 
             return handle;
         }
-
-        #endregion
     }
 }

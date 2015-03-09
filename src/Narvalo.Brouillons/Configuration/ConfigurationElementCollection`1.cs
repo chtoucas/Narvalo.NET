@@ -4,7 +4,6 @@ namespace Narvalo.Configuration
 {
     using System.Collections.Generic;
     using System.Configuration;
-    using Narvalo;
 
     public abstract class ConfigurationElementCollection<TElement>
         : BasicConfigurationElementCollection<TElement>, IList<TElement>

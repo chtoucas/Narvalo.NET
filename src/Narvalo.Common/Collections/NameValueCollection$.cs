@@ -8,11 +8,10 @@ namespace Narvalo.Collections
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo;
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Collections.Specialized.NameValueCollection"/>.
+    /// Provides extension methods for <see cref="NameValueCollection"/>.
     /// </summary>
     public static partial class NameValueCollectionExtensions
     {

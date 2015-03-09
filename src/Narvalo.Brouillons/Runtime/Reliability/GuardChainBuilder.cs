@@ -8,8 +8,8 @@ namespace Narvalo.Runtime.Reliability
 
     public class GuardChainBuilder
     {
-        bool _closed = false;
-        IList<IGuard> _guards = new List<IGuard>();
+        private bool _closed = false;
+        private IList<IGuard> _guards = new List<IGuard>();
 
         public GuardChainBuilder(IGuard guard)
         {
@@ -29,9 +29,9 @@ namespace Narvalo.Runtime.Reliability
 
             Require.NotNull(guard, "guard");
 
-            //if (!guard.IsChainable()) {
-            //    throw new Failure.Argument("guard");
-            //}
+            ////if (!guard.IsChainable()) {
+            ////    throw new Failure.Argument("guard");
+            ////}
 
             _guards.Add(guard);
         }
@@ -42,14 +42,15 @@ namespace Narvalo.Runtime.Reliability
 
             Require.NotNull(guards, "guards");
 
-            foreach (var proxy in guards) {
+            foreach (var proxy in guards)
+            {
                 Add(proxy);
             }
         }
 
         public GuardChain Build()
         {
-            //IList<IGuard> guards = new List<IGuard>(_guards); 
+            ////IList<IGuard> guards = new List<IGuard>(_guards); 
             return new GuardChain(_guards);
         }
 
@@ -69,9 +70,10 @@ namespace Narvalo.Runtime.Reliability
             _closed = true;
         }
 
-        void ThrowIfClosed()
+        private void ThrowIfClosed()
         {
-            if (_closed) {
+            if (_closed)
+            {
                 throw new InvalidOperationException("TODO");
             }
         }

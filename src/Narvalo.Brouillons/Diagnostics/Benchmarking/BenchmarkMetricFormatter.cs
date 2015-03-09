@@ -14,7 +14,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             return String.Format(
                 cultureInfo,
-                Strings_Benchmarking.MetricFormat,
+               "XXX",
                 metric.Name,
                 metric.CallsPerSecond,
                 metric.Iterations,
@@ -26,7 +26,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             return String.Format(
                 cultureInfo,
-                Strings_Benchmarking.InvalidMetricFormat,
+               "XXX",
                 metric.Iterations);
         }
     }

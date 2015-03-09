@@ -41,7 +41,7 @@ namespace Narvalo.Fx
 #if DEBUG
                 if (_isSuccess)
                 {
-                    throw new InvalidOperationException(Strings_Core.Output_SuccessfulHasNoException);
+                    throw new InvalidOperationException(Strings.Output_SuccessfulHasNoException);
                 }
 #endif
 
@@ -61,7 +61,7 @@ namespace Narvalo.Fx
 #if DEBUG
                 if (!_isSuccess)
                 {
-                    throw new InvalidOperationException(Strings_Core.Output_UnsuccessfulHasNoValue);
+                    throw new InvalidOperationException(Strings.Output_UnsuccessfulHasNoValue);
                 }
 #endif
 

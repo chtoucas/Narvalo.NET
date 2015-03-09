@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Fx
 {
     using System;
 
-    delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> r);
+    internal delegate Func<TSource, TResult> Recursive<TSource, TResult>(Recursive<TSource, TResult> r);
 
     public static class YCombinator
     {

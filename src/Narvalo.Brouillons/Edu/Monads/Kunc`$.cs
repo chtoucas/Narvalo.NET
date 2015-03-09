@@ -2,7 +2,6 @@
 
 namespace Narvalo.Edu.Monads
 {
-    using Narvalo;
     using Narvalo.Fx;
 
     public static partial class KuncExtensions

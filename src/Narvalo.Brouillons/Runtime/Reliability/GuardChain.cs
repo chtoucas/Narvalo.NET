@@ -9,21 +9,20 @@ namespace Narvalo.Runtime.Reliability
 
     public class GuardChain : IGuard
     {
-        //readonly Lazy<int> _multiplicityThunk;
-        readonly IEnumerable<IGuard> _guards;
-        readonly Lazy<IReadOnlyCollection<IGuard>> _guardsThunk;
+        ////readonly Lazy<int> _multiplicityThunk;
+        private readonly IEnumerable<IGuard> _guards;
+        private readonly Lazy<IReadOnlyCollection<IGuard>> _guardsThunk;
 
         public GuardChain(IEnumerable<IGuard> guards)
         {
             Require.NotNull(guards, "guards");
 
             _guards = guards;
-            _guardsThunk = new Lazy<IReadOnlyCollection<IGuard>>(() =>
-                new ReadOnlyCollection<IGuard>(_guards.ToList())
-            );
+            _guardsThunk = new Lazy<IReadOnlyCollection<IGuard>>(
+                () => new ReadOnlyCollection<IGuard>(_guards.ToList()));
 
-            //_multiplicityThunk
-            //    = new Lazy<int>(() => _guards.Aggregate(1 /* seed */, (a, g) => { return a * g.Multiplicity; }));
+            ////_multiplicityThunk
+            ////    = new Lazy<int>(() => _guards.Aggregate(1 /* seed */, (a, g) => { return a * g.Multiplicity; }));
         }
 
         public IReadOnlyCollection<IGuard> Guards
@@ -33,14 +32,15 @@ namespace Narvalo.Runtime.Reliability
 
         #region IGuard
 
-        //public int Multiplicity { get { return _multiplicityThunk.Value; } }
+        ////public int Multiplicity { get { return _multiplicityThunk.Value; } }
 
         public void Execute(Action action)
         {
             Require.NotNull(action, "action");
 
             Action guardedAction = action;
-            foreach (var guard in _guards) {
+            foreach (var guard in _guards)
+            {
                 guardedAction = () => guard.Execute(guardedAction);
             }
 

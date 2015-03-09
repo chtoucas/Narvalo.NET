@@ -6,8 +6,8 @@ namespace Narvalo.Edu.Monads
 
     public static class Stubs
     {
-        static readonly Kunc<Unit, Unit> Noop_ = _ => Monad.Unit;
+        private static readonly Kunc<Unit, Unit> s_Noop = _ => Monad.Unit;
 
-        public static Kunc<Unit, Unit> Noop { get { return Noop_; } }
+        public static Kunc<Unit, Unit> Noop { get { return s_Noop; } }
     }
 }

@@ -20,8 +20,6 @@ namespace Narvalo.Runtime.Reliability
         Open,
 
         // Synonymes
-
         HalfClosed = HalfOpen,
     }
 }
-

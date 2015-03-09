@@ -7,12 +7,16 @@ namespace Narvalo.Web
 
     public static class WebPageBaseExtensions
     {
-        public static HelperResult RenderSection(this WebPageBase webPage,
-            string name, Func<dynamic, HelperResult> defaultContents)
+        public static HelperResult RenderSection(
+            this WebPageBase @this,
+            string name, 
+            Func<dynamic, HelperResult> defaultContents)
         {
-            if (webPage.IsSectionDefined(name)) {
-                return webPage.RenderSection(name);
+            if (@this.IsSectionDefined(name))
+            {
+                return @this.RenderSection(name);
             }
+
             return defaultContents(null);
         }
     }

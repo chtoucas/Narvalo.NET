@@ -10,7 +10,6 @@ namespace Narvalo.Runtime.Reliability
 
         public void Execute(Action action)
         {
-            ;
         }
 
         #endregion

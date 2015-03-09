@@ -12,8 +12,6 @@ namespace Narvalo.GhostScript.Internal
     {
         protected GhostScriptApiBase() { }
 
-        protected abstract void ExecuteNative(int argc, IntPtr argv);
-
         #region IGhostScriptApi
 
         public void Execute<T>(GhostScriptArgs<T> args) where T : Device
@@ -71,12 +69,15 @@ namespace Narvalo.GhostScript.Internal
                             handle.Free();
                         }
                     }
+
                     argHandles = null;
                 }
             }
         }
 
         #endregion
+
+        protected abstract void ExecuteNative(int argc, IntPtr argv);
 
         private static string[] PrepareParams(string[] args)
         {
@@ -91,7 +92,6 @@ namespace Narvalo.GhostScript.Internal
                 // Ghostscript ignores the first argument in the array therefore, if the array
                 // doesn't have a blank item as the first item, create one saves callers having
                 // to think about dummy values etc...
-
                 preparedArgs = new String[args.Length + 1];
                 preparedArgs[0] = String.Empty;
                 args.CopyTo(preparedArgs, 1);

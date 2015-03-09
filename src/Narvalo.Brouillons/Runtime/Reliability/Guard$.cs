@@ -4,11 +4,11 @@ namespace Narvalo.Runtime.Reliability
 {
     internal static class GuardExtensions
     {
-        public static bool IsChainable(this IGuard guard)
-        {
-            Require.NotNull(guard, "guard");
+        ////public static bool IsChainable(this IGuard guard)
+        ////{
+        ////    Require.NotNull(guard, "guard");
 
-            return guard.Multiplicity == 1;
-        }
+        ////    return guard.Multiplicity == 1;
+        ////}
     }
 }

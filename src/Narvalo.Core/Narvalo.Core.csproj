@@ -72,6 +72,13 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Collections\NamespaceDoc.cs" />
+    <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetric.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkRunner.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
+    <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
+    <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
     <Compile Include="Enforce.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="Fx\Maybe.cs" />

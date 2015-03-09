@@ -4,8 +4,6 @@ namespace Narvalo.Diagnostics.Benchmarking
 {
     using System.Collections.Generic;
 
-    using Narvalo;
-
     public sealed class BenchmarkComparison
     {
         private readonly IEnumerable<Benchmark> _items;

@@ -72,6 +72,7 @@
     <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\StoredProcedureContract`1.cs" />
+    <Compile Include="Diagnostics\Benchmarking\BenchmarkProcessor.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\TryParser`1.cs">
       <SubType>Code</SubType>

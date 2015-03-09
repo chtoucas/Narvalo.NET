@@ -9,7 +9,6 @@ namespace Narvalo.Web.Profile
     using System.Configuration.Provider;
     using System.Globalization;
     using System.Web.Profile;
-    using Narvalo;
 
     public class NarvaloProfileProvider : AuthenticatedOnlyProfileProvider
     {

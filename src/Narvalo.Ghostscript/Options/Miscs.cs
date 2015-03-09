@@ -16,6 +16,7 @@ namespace Narvalo.GhostScript.Options
         NoCache,
         NoGC,
         NoOuterSave,
+
         // FIXME
         NoSafer,
         DelayedSave = NoSafer,
@@ -26,4 +27,3 @@ namespace Narvalo.GhostScript.Options
         Default = Safer,
     }
 }
-

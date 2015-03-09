@@ -9,63 +9,64 @@ namespace Narvalo.Web
 
     public static class Hosting
     {
-        //static readonly AspNetHostingPermissionLevel[] TrustLevels_ = {
-        //    AspNetHostingPermissionLevel.Unrestricted,
-        //    AspNetHostingPermissionLevel.High,
-        //    AspNetHostingPermissionLevel.Medium,
-        //    AspNetHostingPermissionLevel.Low,
-        //    AspNetHostingPermissionLevel.Minimal
-        //};
+        ////static readonly AspNetHostingPermissionLevel[] TrustLevels_ = {
+        ////    AspNetHostingPermissionLevel.Unrestricted,
+        ////    AspNetHostingPermissionLevel.High,
+        ////    AspNetHostingPermissionLevel.Medium,
+        ////    AspNetHostingPermissionLevel.Low,
+        ////    AspNetHostingPermissionLevel.Minimal
+        ////};
 
-        static Lazy<bool> DeploymentIsRetail_ = new Lazy<bool>(DeploymentIsRetailThunk_);
+        private static Lazy<bool> s_DeploymentIsRetail = new Lazy<bool>(DeploymentIsRetailThunk_);
 
-        public static bool DeploymentIsRetail { get { return DeploymentIsRetail_.Value; } }
+        public static bool DeploymentIsRetail { get { return s_DeploymentIsRetail.Value; } }
 
-        /// <summary>
-        /// Récupération du niveau de confiance AspNet.
-        /// </summary>
-        /// <returns></returns>
-        //public static AspNetHostingPermissionLevel FindCurrentTrustLevel()
-        //{
-        //    foreach (var trustLevel in TrustLevels_) {
-        //        try {
-        //            new AspNetHostingPermission(trustLevel).Demand();
-        //        }
-        //        catch (SecurityException) {
-        //            continue;
-        //        }
+        ///// <summary>
+        ///// Récupération du niveau de confiance AspNet.
+        ///// </summary>
+        ///// <returns></returns>
+        ////public static AspNetHostingPermissionLevel FindCurrentTrustLevel()
+        ////{
+        ////    foreach (var trustLevel in TrustLevels_) {
+        ////        try {
+        ////            new AspNetHostingPermission(trustLevel).Demand();
+        ////        }
+        ////        catch (SecurityException) {
+        ////            continue;
+        ////        }
 
-        //        return trustLevel;
-        //    }
+        ////        return trustLevel;
+        ////    }
 
-        //    return AspNetHostingPermissionLevel.None;
-        //}
+        ////    return AspNetHostingPermissionLevel.None;
+        ////}
 
         public static bool IsDebuggingEnabled(HttpContextBase httpContext)
         {
             return !DeploymentIsRetail && httpContext.IsDebuggingEnabled;
         }
 
-        //public static bool IsDebuggingEnabled(HttpContextBase httpContext, string virtualPath)
-        //{
-        //    if (IsDebuggingEnabled(httpContext)) {
-        //        return true;
-        //    }
+        ////public static bool IsDebuggingEnabled(HttpContextBase httpContext, string virtualPath)
+        ////{
+        ////    if (IsDebuggingEnabled(httpContext)) {
+        ////        return true;
+        ////    }
 
-        //    var compilationSection
-        //        = (CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", virtualPath);
+        ////    var compilationSection
+        ////        = (CompilationSection)WebConfigurationManager.GetSection("system.web/compilation", virtualPath);
 
-        //    return compilationSection.Debug;
-        //}
+        ////    return compilationSection.Debug;
+        ////}
 
-        //public static bool IsDebuggingEnabled()
-        //{
-        //    return IsDebuggingEnabled(new HttpContextWrapper(HttpContext.Current));
-        //}
+        ////public static bool IsDebuggingEnabled()
+        ////{
+        ////    return IsDebuggingEnabled(new HttpContextWrapper(HttpContext.Current));
+        ////}
 
         public static bool IsDebuggingEnabled(string virtualPath)
         {
-            if (DeploymentIsRetail) {
+            if (DeploymentIsRetail)
+            {
                 return false;
             }
 
@@ -75,12 +76,13 @@ namespace Narvalo.Web
             return compilationSection.Debug;
         }
 
-        static bool DeploymentIsRetailThunk_()
+        private static bool DeploymentIsRetailThunk_()
         {
             var machineConfig = ConfigurationManager.OpenMachineConfiguration();
             var group = machineConfig.GetSectionGroup("system.web");
 
-            if (group != null) {
+            if (group != null)
+            {
                 var deploymentSection = (DeploymentSection)group.Sections["deployment"];
 
                 return deploymentSection.Retail;

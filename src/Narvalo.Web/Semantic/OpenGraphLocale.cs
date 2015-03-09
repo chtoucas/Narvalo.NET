@@ -4,8 +4,6 @@ namespace Narvalo.Web.Semantic
 {
     using System.Globalization;
 
-    using Narvalo;
-
     public sealed class OpenGraphLocale
     {
         private CultureInfo _culture;

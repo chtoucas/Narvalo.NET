@@ -4,7 +4,7 @@ namespace Narvalo.Edu.Monads
 {
     using System;
 
-    class Mu
+    internal class Mu
     {
         public Mu(Monad<Mu> f)
         {

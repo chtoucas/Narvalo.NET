@@ -82,95 +82,6 @@ namespace Narvalo.GhostScript.Options
 
         public Size? Resolution { get { return _resolution; } set { _resolution = value; } }
 
-        public void AddTo(ICollection<string> args)
-        {
-            Require.NotNull(args, "args");
-
-            if (Orient1.HasValue)
-            {
-                if (Orient1.Value)
-                {
-                    args.Add("-dORIENT1=true");
-                }
-                else
-                {
-                    args.Add("-dORIENT1=false");
-                }
-            }
-
-            if (Printed.HasValue)
-            {
-                if (Printed.Value)
-                {
-                    args.Add("-dPrinted");
-                }
-                else
-                {
-                    args.Add("-dPrinted=false");
-                }
-            }
-
-            // Screen
-            if (MediaSize.HasValue)
-            {
-                // NB: GhostScript automatically sets FixedMedia
-                //args.Add("-dDEVICEWIDTH=" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture));
-                //args.Add("-dDEVICEHEIGHT=" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
-                args.Add("-g" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture)
-                    + "x" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
-            }
-            else if (FixedMedia.HasValue && FixedMedia.Value)
-            {
-                args.Add("-dFIXEDMEDIA");
-            }
-
-            // Printer
-            if (Resolution.HasValue)
-            {
-                // NB: GhostScript automatically sets FixedResolution
-                if (Resolution.Value.IsSquare)
-                {
-                    args.Add("-r" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
-                }
-                else
-                {
-                    //args.Add("-dDEVICEXRESOLUTION=" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture));
-                    //args.Add("-dDEVICEYRESOLUTION=" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
-                    args.Add("-r" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture)
-                        + "x" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
-                }
-            }
-            else if (FixedResolution.HasValue && FixedResolution.Value)
-            {
-                args.Add("-dFIXEDRESOLUTION");
-            }
-
-            switch (PageSizeMode)
-            {
-                case PageSizeMode.CropBox:
-                    args.Add("-dUseCropBox");
-                    break;
-                case PageSizeMode.TrimBox:
-                    args.Add("-dUseTrimBox");
-                    break;
-                case PageSizeMode.None:
-                    if (PaperSize != PaperSize.None)
-                    {
-                        args.Add("-sPAPERSIZE=" + GetPaperSizeName(PaperSize));
-                    }
-                    else if (PageSize.HasValue)
-                    {
-                        args.Add("-dDEVICEWIDTHPOINTS=" + PageSize.Value.Width.ToString(CultureInfo.InvariantCulture));
-                        args.Add("-dDEVICEHEIGHTPOINTS=" + PageSize.Value.Height.ToString(CultureInfo.InvariantCulture));
-                    }
-                    break;
-                default:
-                    throw new NotSupportedException("Unsupported page size.");
-            }
-        }
-
-        #region Utilitaires
-
         public static string GetPaperSizeName(PaperSize paperSize)
         {
             switch (paperSize)
@@ -263,6 +174,92 @@ namespace Narvalo.GhostScript.Options
             }
         }
 
-        #endregion
+        public void AddTo(ICollection<string> args)
+        {
+            Require.NotNull(args, "args");
+
+            if (Orient1.HasValue)
+            {
+                if (Orient1.Value)
+                {
+                    args.Add("-dORIENT1=true");
+                }
+                else
+                {
+                    args.Add("-dORIENT1=false");
+                }
+            }
+
+            if (Printed.HasValue)
+            {
+                if (Printed.Value)
+                {
+                    args.Add("-dPrinted");
+                }
+                else
+                {
+                    args.Add("-dPrinted=false");
+                }
+            }
+
+            // Screen
+            if (MediaSize.HasValue)
+            {
+                // NB: GhostScript automatically sets FixedMedia
+                // args.Add("-dDEVICEWIDTH=" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture));
+                // args.Add("-dDEVICEHEIGHT=" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
+                args.Add("-g" + MediaSize.Value.Width.ToString(CultureInfo.InvariantCulture)
+                    + "x" + MediaSize.Value.Height.ToString(CultureInfo.InvariantCulture));
+            }
+            else if (FixedMedia.HasValue && FixedMedia.Value)
+            {
+                args.Add("-dFIXEDMEDIA");
+            }
+
+            // Printer
+            if (Resolution.HasValue)
+            {
+                // NB: GhostScript automatically sets FixedResolution
+                if (Resolution.Value.IsSquare)
+                {
+                    args.Add("-r" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
+                }
+                else
+                {
+                    // args.Add("-dDEVICEXRESOLUTION=" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture));
+                    // args.Add("-dDEVICEYRESOLUTION=" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
+                    args.Add("-r" + Resolution.Value.Width.ToString(CultureInfo.InvariantCulture)
+                        + "x" + Resolution.Value.Height.ToString(CultureInfo.InvariantCulture));
+                }
+            }
+            else if (FixedResolution.HasValue && FixedResolution.Value)
+            {
+                args.Add("-dFIXEDRESOLUTION");
+            }
+
+            switch (PageSizeMode)
+            {
+                case PageSizeMode.CropBox:
+                    args.Add("-dUseCropBox");
+                    break;
+                case PageSizeMode.TrimBox:
+                    args.Add("-dUseTrimBox");
+                    break;
+                case PageSizeMode.None:
+                    if (PaperSize != PaperSize.None)
+                    {
+                        args.Add("-sPAPERSIZE=" + GetPaperSizeName(PaperSize));
+                    }
+                    else if (PageSize.HasValue)
+                    {
+                        args.Add("-dDEVICEWIDTHPOINTS=" + PageSize.Value.Width.ToString(CultureInfo.InvariantCulture));
+                        args.Add("-dDEVICEHEIGHTPOINTS=" + PageSize.Value.Height.ToString(CultureInfo.InvariantCulture));
+                    }
+
+                    break;
+                default:
+                    throw new NotSupportedException("Unsupported page size.");
+            }
+        }
     }
 }

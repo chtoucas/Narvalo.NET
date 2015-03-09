@@ -16,17 +16,20 @@ namespace Narvalo
         public static bool TryConvert<TEnum>(object value, out TEnum result) where TEnum : struct
         {
             var type = typeof(TEnum);
-            if (!type.IsEnum) {
+            if (!type.IsEnum)
+            {
                 throw new InvalidOperationException();
             }
 
             result = default(TEnum);
 
-            if (System.Enum.IsDefined(typeof(TEnum), value)) {
+            if (System.Enum.IsDefined(typeof(TEnum), value))
+            {
                 result = (TEnum)System.Enum.ToObject(typeof(TEnum), value);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -39,7 +42,8 @@ namespace Narvalo
         public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             var type = typeof(TEnum);
-            if (!type.IsEnum) {
+            if (!type.IsEnum)
+            {
                 throw new InvalidOperationException();
             }
 

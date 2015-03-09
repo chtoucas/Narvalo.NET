@@ -7,8 +7,6 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo;
-
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract class StoredProcedure<TResult>
     {

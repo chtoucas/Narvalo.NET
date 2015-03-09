@@ -6,9 +6,6 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Globalization;
     using System.Linq;
 
-    using Narvalo;
-    using NodaTime;
-
     public class BenchmarkMetricCollectionFormatter : BenchmarkMetricCollectionFormatterBase
     {
         public BenchmarkMetricCollectionFormatter() : base() { }
@@ -33,7 +30,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         public string Format(CultureInfo cultureInfo, BenchmarkMetric metric)
         {
-            if (metric.Duration == Duration.Zero)
+            if (metric.Duration == TimeSpan.Zero)
             {
                 return FormatInvalidMetric(cultureInfo, metric);
             }
@@ -41,7 +38,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             return FormatCore(cultureInfo, metric);
         }
 
-        public  string FormatCore(CultureInfo cultureInfo, BenchmarkMetric metric)
+        public string FormatCore(CultureInfo cultureInfo, BenchmarkMetric metric)
         {
             return String.Format(
                 cultureInfo,
@@ -53,7 +50,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                 metric.TicksPerCall);
         }
 
-        public  string FormatInvalidMetric(CultureInfo cultureInfo, BenchmarkMetric metric)
+        public string FormatInvalidMetric(CultureInfo cultureInfo, BenchmarkMetric metric)
         {
             return String.Format(
                 cultureInfo,

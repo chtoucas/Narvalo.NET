@@ -6,7 +6,7 @@ namespace Narvalo.Web.Security
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Web.Security;
-    using Narvalo;
+    
     using Narvalo.Web.Profile;
 
     public class NarvaloMembershipProvider : SqlMembershipProvider

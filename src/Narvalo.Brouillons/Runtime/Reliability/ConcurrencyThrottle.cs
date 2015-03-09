@@ -7,11 +7,11 @@ namespace Narvalo.Runtime.Reliability
 
     public class ConcurrencyThrottle : IGuard, IDisposable
     {
-         readonly int _maxConcurrentRequests;
-         readonly TimeSpan _timeout;
+        private readonly int _maxConcurrentRequests;
+        private readonly TimeSpan _timeout;
 
-         bool _disposed = false;
-         SemaphoreSlim _sem;
+        private bool _disposed = false;
+        private SemaphoreSlim _sem;
 
         // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
         public ConcurrencyThrottle(int maxConcurrentRequests, TimeSpan timeout)
@@ -32,24 +32,28 @@ namespace Narvalo.Runtime.Reliability
 
         #region IGuard
 
-        //public bool CanExecute
-        //{
-        //    get { return _sem.CurrentCount < _maxConcurrentRequests; }
-        //}
+        ////public bool CanExecute
+        ////{
+        ////    get { return _sem.CurrentCount < _maxConcurrentRequests; }
+        ////}
 
         public void Execute(Action action)
         {
             ThrowIfDisposed_();
 
-            if (_sem.Wait(_timeout)) {
-                try {
+            if (_sem.Wait(_timeout))
+            {
+                try
+                {
                     action();
                 }
-                finally {
+                finally
+                {
                     _sem.Release();
                 }
             }
-            else {
+            else
+            {
                 throw new ThrottleException();
             }
         }
@@ -68,9 +72,12 @@ namespace Narvalo.Runtime.Reliability
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed) {
-                if (disposing) {
-                    if (_sem != null) {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    if (_sem != null)
+                    {
                         _sem.Dispose();
                         _sem = null;
                     }
@@ -80,9 +87,10 @@ namespace Narvalo.Runtime.Reliability
             }
         }
 
-        void ThrowIfDisposed_()
+        private void ThrowIfDisposed_()
         {
-            if (_disposed) {
+            if (_disposed)
+            {
                 throw new ObjectDisposedException(typeof(ConcurrencyThrottle).FullName);
             }
         }

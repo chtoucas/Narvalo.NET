@@ -17,4 +17,3 @@ namespace Narvalo.GhostScript.Options
         TiffMono,
     }
 }
-

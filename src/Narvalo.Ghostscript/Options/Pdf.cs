@@ -8,8 +8,6 @@ namespace Narvalo.GhostScript.Options
 
     public class Pdf
     {
-        #region Fields
-
         private int? _firstPage;
         private int? _lastPage;
         private bool _noUserInit = false;
@@ -18,15 +16,7 @@ namespace Narvalo.GhostScript.Options
         private bool _showAcroForm = false;
         private bool _showAnnotations = true;
 
-        #endregion
-
-        #region Ctor
-
         public Pdf() : base() { }
-
-        #endregion
-
-        #region Properties
 
         public int? FirstPage { get { return _firstPage; } set { _firstPage = value; } }
 
@@ -42,37 +32,44 @@ namespace Narvalo.GhostScript.Options
 
         public bool ShowAnnotations { get { return _showAnnotations; } set { _showAnnotations = value; } }
 
-        #endregion
-
-        #region Public methods
-
         public void AddTo(ICollection<string> args)
         {
             Require.NotNull(args, "args");
 
-            if (!String.IsNullOrEmpty(Password)) {
+            if (!String.IsNullOrEmpty(Password))
+            {
                 args.Add("-sPDFPassword=" + Password);
             }
-            if (FirstPage.HasValue) {
+
+            if (FirstPage.HasValue)
+            {
                 args.Add("-dFirstPage=" + FirstPage.Value.ToString(CultureInfo.InvariantCulture));
             }
-            if (LastPage.HasValue) {
+
+            if (LastPage.HasValue)
+            {
                 args.Add("-dLastPage=" + LastPage.Value.ToString(CultureInfo.InvariantCulture));
             }
-            if (!ShowAnnotations) {
+
+            if (!ShowAnnotations)
+            {
                 args.Add("-dShowAnnots=false");
             }
-            if (ShowAcroForm) {
+
+            if (ShowAcroForm)
+            {
                 args.Add("-dShowAcroForm");
             }
-            if (NoUserInit) {
+
+            if (NoUserInit)
+            {
                 args.Add("-dNoUserUnit");
             }
-            if (RenderTTNotDef) {
+
+            if (RenderTTNotDef)
+            {
                 args.Add("-dRENDERTTNOTDEF");
             }
         }
-
-        #endregion
     }
 }

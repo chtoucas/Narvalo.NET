@@ -8,8 +8,8 @@ namespace Narvalo
     // TODO: Créer la version Hexavigesimal.
     public static class BinaryEncoder
     {
-        //static string Base32Alphabet =  "abcdefghijklmnopqrstuvwxyz234567";
-        static string ZBase32Alphabet = "ybndrfg8ejkmcpqxot1uwisza345h769";
+        ////private static string Base32Alphabet =  "abcdefghijklmnopqrstuvwxyz234567";
+        private static string s_ZBase32Alphabet = "ybndrfg8ejkmcpqxot1uwisza345h769";
 
         #region Hexadecimal
 
@@ -28,7 +28,8 @@ namespace Narvalo
             // FIXME: FormatException quand value.Length est impair ?
             byte[] result = new byte[value.Length / 2];
 
-            for (int i = 0; i < result.Length; i++) {
+            for (int i = 0; i < result.Length; i++)
+            {
                 result[i] = Convert.ToByte(value.Substring(2 * i, 2), 16);
             }
 
@@ -52,15 +53,19 @@ namespace Narvalo
             int currByte;
             int nextByte;
 
-            while (i < length) {
+            while (i < length)
+            {
                 currByte = (value[i] >= 0) ? value[i] : (value[i] + 256); // unsign
 
                 // Is the current digit going to span a byte boundary?
-                if (index > 3) {
-                    if ((i + 1) < length) {
+                if (index > 3)
+                {
+                    if ((i + 1) < length)
+                    {
                         nextByte = (value[i + 1] >= 0) ? value[i + 1] : (value[i + 1] + 256);
                     }
-                    else {
+                    else
+                    {
                         nextByte = 0;
                     }
 
@@ -70,14 +75,17 @@ namespace Narvalo
                     digit |= nextByte >> (8 - index);
                     i++;
                 }
-                else {
+                else
+                {
                     digit = (currByte >> (8 - (index + 5))) & 0x1F;
                     index = (index + 5) % 8;
-                    if (index == 0) {
+                    if (index == 0)
+                    {
                         i++;
                     }
                 }
-                sb.Append(ZBase32Alphabet[digit]);
+
+                sb.Append(s_ZBase32Alphabet[digit]);
             }
 
             return sb.ToString();
@@ -87,7 +95,8 @@ namespace Narvalo
         {
             Require.NotNull(value, "value");
 
-            unchecked {
+            unchecked
+            {
                 int length = value.Length;
                 int resultLength = length * 5 / 8;
                 byte[] result = new byte[resultLength];
@@ -96,29 +105,37 @@ namespace Narvalo
                 int digit = 0;
                 int offset = 0;
 
-                for (int i = 0; i < length; i++) {
-                    digit = ZBase32Alphabet.IndexOf(value[i]);
+                for (int i = 0; i < length; i++)
+                {
+                    digit = s_ZBase32Alphabet.IndexOf(value[i]);
 
-                    if (index <= 3) {
+                    if (index <= 3)
+                    {
                         index = (index + 5) % 8;
-                        if (index == 0) {
+                        if (index == 0)
+                        {
                             result[offset] |= (byte)digit;
                             offset++;
-                            if (offset >= resultLength) {
+                            if (offset >= resultLength)
+                            {
                                 break;
                             }
                         }
-                        else {
+                        else
+                        {
                             result[offset] |= (byte)(digit << (8 - index));
                         }
                     }
-                    else {
+                    else
+                    {
                         index = (index + 5) % 8;
                         result[offset] |= (byte)(digit >> index);
                         offset++;
-                        if (offset >= resultLength) {
+                        if (offset >= resultLength)
+                        {
                             break;
                         }
+
                         result[offset] |= (byte)(digit << (8 - index));
                     }
                 }

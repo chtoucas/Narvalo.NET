@@ -7,8 +7,6 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    using Narvalo;
-
     public sealed class BenchmarkMetricCollection : ReadOnlyCollection<BenchmarkMetric>
     {
         private readonly string _name;

@@ -20,12 +20,13 @@ namespace Narvalo.StyleCop.CSharp
         {
             var csdocument = (CsDocument)document;
 
-            if (csdocument.RootElement != null && !csdocument.RootElement.Generated) {
+            if (csdocument.RootElement != null && !csdocument.RootElement.Generated)
+            {
                 csdocument.WalkDocument(new CodeWalkerElementVisitor<object>(VisitElement_), null, null);
             }
         }
 
-        bool VisitElement_(CsElement element, CsElement parentElement, object context)
+        private bool VisitElement_(CsElement element, CsElement parentElement, object context)
         {
             // Flag a violation if the instance variables are not prefixed with an underscore.
             if (!element.Generated
@@ -33,7 +34,8 @@ namespace Narvalo.StyleCop.CSharp
                 && element.ActualAccess == AccessModifierType.Private
                 ////&& element.ActualAccess != AccessModifierType.Public
                 ////&& element.ActualAccess != AccessModifierType.Internal
-                && element.Declaration.Name.ToCharArray()[0] != '_') {
+                && element.Declaration.Name.ToCharArray()[0] != '_')
+            {
                 AddViolation(element, "PrivateFieldNamesMustBeginWithUnderscore");
             }
 

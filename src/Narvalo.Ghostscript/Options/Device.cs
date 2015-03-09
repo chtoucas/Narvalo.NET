@@ -19,4 +19,3 @@ namespace Narvalo.GhostScript.Options
         public abstract void AddTo(ICollection<string> args);
     }
 }
-

@@ -7,8 +7,8 @@ namespace Narvalo
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class IssueAttribute : Attribute
     {
-        readonly string _closingDate;
-        readonly IssueSeverity _severity;
+        private readonly string _closingDate;
+        private readonly IssueSeverity _severity;
 
         public IssueAttribute(IssueSeverity severity, string closingDate)
         {

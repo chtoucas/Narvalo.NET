@@ -2,8 +2,6 @@
 
 namespace Narvalo.Web.Semantic
 {
-    using Narvalo;
-
     public sealed class SchemaOrgVocabulary
     {
         private string _itemType = SchemaOrgType.WebPage;

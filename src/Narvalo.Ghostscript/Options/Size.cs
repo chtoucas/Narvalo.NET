@@ -22,19 +22,10 @@ namespace Narvalo.GhostScript.Options
         }
 
         public int Width { get { return _width; } }
+
         public int Height { get { return _height; } }
 
         public bool IsSquare { get { return _width == _height; } }
-
-        #region IEquatable<Size>
-
-        public bool Equals(Size other)
-        {
-            return _width == other._width
-                && _height == other._height;
-        }
-
-        #endregion
 
         public static bool operator ==(Size left, Size right)
         {
@@ -46,9 +37,16 @@ namespace Narvalo.GhostScript.Options
             return !left.Equals(right);
         }
 
+        public bool Equals(Size other)
+        {
+            return _width == other._width
+                && _height == other._height;
+        }
+
         public override bool Equals(object obj)
         {
-            if (!(obj is Size)) {
+            if (!(obj is Size))
+            {
                 return false;
             }
 

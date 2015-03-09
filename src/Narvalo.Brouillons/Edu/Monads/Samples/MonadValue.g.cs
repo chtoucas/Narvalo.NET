@@ -26,7 +26,7 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
     Justification = "The directives are correctly ordered in the T4 source file.")]
 
-namespace Playground.Edu.Monads.Samples 
+namespace Narvalo.Edu.Monads.Samples 
 {
     using System;
     using System.Collections.Generic;
@@ -714,14 +714,14 @@ namespace Playground.Edu.Monads.Samples
     }
 }
 
-namespace Playground.Edu.Monads.Samples 
+namespace Narvalo.Edu.Monads.Samples 
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Playground.Edu.Monads.Samples;
-    using Playground.Edu.Monads.Samples.Internal;
+    using Narvalo.Edu.Monads.Samples;
+    using Narvalo.Edu.Monads.Samples.Internal;
 
     /// <summary>
     /// Provides extension methods for <c>IEnumerable&lt;MonadValue&lt;T&gt;&gt;</c>.
@@ -880,7 +880,7 @@ namespace Playground.Edu.Monads.Samples
     }
 }
 
-namespace Playground.Edu.Monads.Samples.Internal
+namespace Narvalo.Edu.Monads.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -888,7 +888,7 @@ namespace Playground.Edu.Monads.Samples.Internal
     using System.Linq;
 
     using global::Narvalo;
-    using Playground.Edu.Monads.Samples;
+    using Narvalo.Edu.Monads.Samples;
 
     /// <summary>
     /// Provides extension methods for <c>IEnumerable&lt;MonadValue&lt;T&gt;&gt;</c>.

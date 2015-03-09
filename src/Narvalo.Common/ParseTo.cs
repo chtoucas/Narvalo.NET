@@ -10,6 +10,7 @@ namespace Narvalo
     using Narvalo.Fx;
     using Narvalo.Internal;
 
+    // Simple types.
     public static partial class ParseTo
     {
         public static bool? Boolean(string value)

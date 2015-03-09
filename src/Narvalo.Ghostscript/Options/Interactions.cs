@@ -27,10 +27,9 @@ namespace Narvalo.GhostScript.Options
 
         ShortErrors,
 
-        //StandardOutput,
+        // StandardOutput,
         TtyPause,
 
         Default = Batch | NoPause,
     }
 }
-

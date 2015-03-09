@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Playground.Benchmarks.Comparisons
+namespace Narvalo.Edu.Comparisons
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,6 @@ namespace Playground.Benchmarks.Comparisons
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using Narvalo;
     using Narvalo.Diagnostics.Benchmarking;
 
     [BenchmarkComparison(100000, DisplayName = "Suppression des diacritiques.")]
@@ -42,7 +41,7 @@ namespace Playground.Benchmarks.Comparisons
             ForLoop_(value);
         }
 
-        static string Regex_(string value)
+        private static string Regex_(string value)
         {
             string formD = value.Normalize(NormalizationForm.FormD);
 
@@ -56,7 +55,7 @@ namespace Playground.Benchmarks.Comparisons
             }
         }
 
-        static string ForLoop_(string value)
+        private static string ForLoop_(string value)
         {
             string formD = value.Normalize(NormalizationForm.FormD);
 

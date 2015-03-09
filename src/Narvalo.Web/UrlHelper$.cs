@@ -7,8 +7,6 @@ namespace Narvalo.Web
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Narvalo;
-
     public static class UrlHelperExtensions
     {
         public static string Current(this UrlHelper @this)

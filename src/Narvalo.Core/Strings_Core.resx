@@ -159,4 +159,7 @@
   <data name="Int64Encoder_OutOfRangeLengthFormat" xml:space="preserve">
     <value>The length is not less than or equal to '{0}'.</value>
   </data>
+  <data name="MetricFormat" xml:space="preserve">
+    <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
+  </data>
 </root>

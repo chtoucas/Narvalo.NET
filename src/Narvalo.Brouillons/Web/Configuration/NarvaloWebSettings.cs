@@ -6,7 +6,7 @@ namespace Narvalo.Web.Configuration
     using System.Collections.Specialized;
     using System.Configuration;
     using System.Linq;
-    using Narvalo;
+    
     using Narvalo.Collections;
     using Narvalo.Fx;
 

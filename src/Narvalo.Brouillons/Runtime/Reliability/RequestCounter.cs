@@ -6,9 +6,9 @@ namespace Narvalo.Runtime.Reliability
 
     public class RequestCounter : IGuard, IReliabilityMonitor
     {
-        long _failureCount = 0;
-        long _requestCount = 0;
-        long _successCount = 0;
+        private long _failureCount = 0;
+        private long _requestCount = 0;
+        private long _successCount = 0;
 
         #region IGuard
 
@@ -18,13 +18,16 @@ namespace Narvalo.Runtime.Reliability
 
             RecordRequest();
 
-            try {
+            try
+            {
                 action.Invoke();
             }
-            catch (GuardException) {
+            catch (GuardException)
+            {
                 throw;
             }
-            catch {
+            catch
+            {
                 RecordFailure();
                 throw;
             }

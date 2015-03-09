@@ -5,8 +5,6 @@ namespace Narvalo.Web.Semantic
     using System;
     using System.Globalization;
 
-    using Narvalo;
-
     public sealed class Ontology
     {
         public const string OpenGraphNamespace = "og: http://ogp.me/ns#";

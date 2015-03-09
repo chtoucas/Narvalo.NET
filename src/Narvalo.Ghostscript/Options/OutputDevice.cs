@@ -6,7 +6,7 @@ namespace Narvalo.GhostScript.Options
 
     public abstract class OutputDevice : Device
     {
-        bool? _ignoreMultipleCopies;
+        private bool? _ignoreMultipleCopies;
 
         protected OutputDevice() : base() { }
 
@@ -22,11 +22,13 @@ namespace Narvalo.GhostScript.Options
         {
             Require.NotNull(args, "args");
 
-            if (IgnoreMultipleCopies.HasValue && IgnoreMultipleCopies.Value) {
+            if (IgnoreMultipleCopies.HasValue && IgnoreMultipleCopies.Value)
+            {
                 args.Add("-d.IgnoreNumCopies=true");
                 args.Add("-sDEVICE=" + DeviceName);
             }
-            else {
+            else
+            {
                 args.Add("-sDEVICE=" + DeviceName);
             }
         }

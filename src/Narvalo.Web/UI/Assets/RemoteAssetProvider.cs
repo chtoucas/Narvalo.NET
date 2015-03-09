@@ -7,7 +7,6 @@ namespace Narvalo.Web.UI.Assets
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo;
     using Narvalo.Collections;
 
     public sealed class RemoteAssetProvider : AssetProviderBase

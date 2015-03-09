@@ -5,6 +5,7 @@ namespace Narvalo.GhostScript.Internal
     internal static class NativeMethodsUtil
     {
         private const int SuccessCode_ = 0;
+
         // const int QuitCode = -101;
         // const int InterruptCode = ;
         // const int NeedInputCode = -106;

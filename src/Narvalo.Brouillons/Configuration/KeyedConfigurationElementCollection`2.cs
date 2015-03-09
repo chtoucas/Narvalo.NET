@@ -3,7 +3,6 @@
 namespace Narvalo.Configuration
 {
     using System.Configuration;
-    using Narvalo;
 
     public class KeyedConfigurationElementCollection<TKey, TItem>
         : ConfigurationElementCollection<TItem>

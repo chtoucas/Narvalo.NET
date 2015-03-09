@@ -8,14 +8,16 @@ namespace Narvalo.GhostScript.Options
 
     public static class OptionsExtensions
     {
-        private static readonly IEnumerable<Interactions> InteractionsList 
+        private static readonly IEnumerable<Interactions> InteractionsList
             = Enum.GetValues(typeof(Interactions)).Cast<Interactions>();
-        private static readonly IEnumerable<Miscs> MiscsList 
+
+        private static readonly IEnumerable<Miscs> MiscsList
             = Enum.GetValues(typeof(Miscs)).Cast<Miscs>();
 
         public static void AddTo(this Eps eps, ICollection<string> args)
         {
-            if (args == null) {
+            if (args == null)
+            {
                 throw new ArgumentNullException("interactions");
             }
 
@@ -24,12 +26,15 @@ namespace Narvalo.GhostScript.Options
 
         public static void AddTo(this Interactions interactions, ICollection<string> args)
         {
-            if (args == null) {
+            if (args == null)
+            {
                 throw new ArgumentNullException("interactions");
             }
 
-            foreach (var value in InteractionsList) {
-                if ((interactions & value) == value) {
+            foreach (var value in InteractionsList)
+            {
+                if ((interactions & value) == value)
+                {
                     args.Add(GetParameter(value));
                 }
             }
@@ -37,22 +42,24 @@ namespace Narvalo.GhostScript.Options
 
         public static void AddTo(this Miscs miscs, ICollection<string> args)
         {
-            if (args == null) {
+            if (args == null)
+            {
                 throw new ArgumentNullException("miscs");
             }
 
-            foreach (var value in MiscsList) {
-                if ((miscs & value) == value) {
+            foreach (var value in MiscsList)
+            {
+                if ((miscs & value) == value)
+                {
                     args.Add(GetParameter(value));
                 }
             }
         }
 
-        #region Private methods
-
         private static string GetParameter(Eps eps)
         {
-            switch (eps) {
+            switch (eps)
+            {
                 case Eps.EpsCrop:
                     return "-dEPSCrop";
                 case Eps.EppsFitPage:
@@ -67,7 +74,8 @@ namespace Narvalo.GhostScript.Options
 
         private static string GetParameter(Interactions interactions)
         {
-            switch (interactions) {
+            switch (interactions)
+            {
                 case Interactions.Batch:
                     return "-dBATCH";
                 case Interactions.NoPagePrompt:
@@ -82,7 +90,8 @@ namespace Narvalo.GhostScript.Options
                     return "-q";
                 case Interactions.ShortErrors:
                     return "-dSHORTERRORS";
-                //case Interaction.StandardOutput:
+
+                // case Interaction.StandardOutput:
                 //    return "-sstdout";
                 case Interactions.TtyPause:
                     return "-dTTYPAUSE";
@@ -94,7 +103,8 @@ namespace Narvalo.GhostScript.Options
 
         private static string GetParameter(Miscs miscs)
         {
-            switch (miscs) {
+            switch (miscs)
+            {
                 case Miscs.DelayBind:
                     return "-dDELAYBIND";
                 case Miscs.PdfMarks:
@@ -122,7 +132,5 @@ namespace Narvalo.GhostScript.Options
                     throw new NotSupportedException("Unsupported miscs.");
             }
         }
-
-        #endregion
     }
 }

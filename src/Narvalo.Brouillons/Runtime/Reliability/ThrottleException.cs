@@ -8,14 +8,14 @@ namespace Narvalo.Runtime.Reliability
     [Serializable]
     public class ThrottleException : GuardException
     {
-        public ThrottleException() : base() { ; }
+        public ThrottleException() : base() { }
 
-        public ThrottleException(string message) : base(message) { ; }
+        public ThrottleException(string message) : base(message) { }
 
         public ThrottleException(string message, Exception innerException)
-            : base(message, innerException) { ; }
+            : base(message, innerException) { }
 
         protected ThrottleException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { ; }
+            : base(info, context) { }
     }
 }

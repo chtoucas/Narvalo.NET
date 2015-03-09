@@ -116,6 +116,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
+        /// </summary>
+        internal static string MetricFormat {
+            get {
+                return ResourceManager.GetString("MetricFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The lower end must be lesser than upper end..
         /// </summary>
         internal static string Range_LowerEndNotLesserThanUpperEnd {

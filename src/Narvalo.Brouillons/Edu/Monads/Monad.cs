@@ -6,9 +6,9 @@ namespace Narvalo.Edu.Monads
 
     public static partial class Monad
     {
-        static readonly Monad<Unit> Unit_ = Return(Narvalo.Fx.Unit.Single);
+        private static readonly Monad<Unit> s_Unit = Return(Narvalo.Fx.Unit.Single);
 
-        public static Monad<Unit> Unit { get { return Unit_; } }
+        public static Monad<Unit> Unit { get { return s_Unit; } }
 
         // [Haskell] return
         public static Monad<T> Return<T>(T value)

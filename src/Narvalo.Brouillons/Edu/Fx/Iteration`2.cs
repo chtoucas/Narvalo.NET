@@ -6,7 +6,7 @@ namespace Narvalo.Edu.Fx
 
     public sealed class Iteration<TResult, TSource>
     {
-        readonly Tuple<TResult, TSource> _pair;
+        private readonly Tuple<TResult, TSource> _pair;
 
         public Iteration(Tuple<TResult, TSource> pair)
         {

@@ -8,6 +8,7 @@ namespace Narvalo.Web
     using System.Web;
     using System.Xml;
     using System.Xml.Schema;
+
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Narvalo.Xml;
 
@@ -42,7 +43,8 @@ namespace Narvalo.Web
             var app = sender as HttpApplication;
 
             bool validate = app.Request.Headers[HeaderName_] != null;
-            if (validate) {
+            if (validate)
+            {
                 app.Response.Filter = new CaptureStream(app.Response.Filter);
             }
         }
@@ -52,14 +54,16 @@ namespace Narvalo.Web
             var app = sender as HttpApplication;
 
             var rendererType = app.Request.Headers[HeaderName_];
-            if (rendererType == null) {
+            if (rendererType == null)
+            {
                 return;
             }
             var renderer = CreateRenderer_(rendererType);
 
             // REVIEW: Peut-on utiliser context.Response.OutputStream ?
             var captureStream = app.Response.Filter as CaptureStream;
-            if (captureStream == null) {
+            if (captureStream == null)
+            {
                 return;
             }
 
@@ -67,15 +71,17 @@ namespace Narvalo.Web
 
             IReadOnlyCollection<ValidationEventArgs> errors = null;
 
-            using (var reader = new StreamReader(captureStream.StreamCopy)) {
+            using (var reader = new StreamReader(captureStream.StreamCopy))
+            {
                 // FIXME: Utiliser les bons paramètres.
-                var validator = new XmlValidator(new XmlReaderSettings());
-                if (!validator.Validate(reader)) {
-                    errors = validator.ValidationErrors;
-                }
+                ////var validator = new XmlValidator(new XmlReaderSettings());
+                ////if (!validator.Validate(reader)) {
+                ////    errors = validator.ValidationErrors;
+                ////}
             }
 
-            if (errors != null) {
+            if (errors != null)
+            {
                 renderer.Render(app.Context, errors);
             }
         }
@@ -88,7 +94,8 @@ namespace Narvalo.Web
             Type rendererType = Type.GetType(typeName, true /* throwOnError */);
             var renderer = Activator.CreateInstance(rendererType) as IXmlValidationRenderer;
 
-            if (renderer == null) {
+            if (renderer == null)
+            {
                 throw new ArgumentException(
                     Format.CurrentCulture(
                         "The specified custom renderer type '{0}' must implement the '{1}' interface",

@@ -8,14 +8,15 @@ namespace Narvalo.Runtime.Reliability
 
     public class RetryPolicy
     {
-        readonly int _maxRetries;
-        readonly TimeSpan _retryInterval;
-        readonly IList<Type> _retryableExceptionTypes;
-        readonly Lazy<IReadOnlyCollection<Type>> _retryableExceptionTypesThunk;
+        private readonly int _maxRetries;
+        private readonly TimeSpan _retryInterval;
+        private readonly IList<Type> _retryableExceptionTypes;
+        private readonly Lazy<IReadOnlyCollection<Type>> _retryableExceptionTypesThunk;
 
         public RetryPolicy(int maxRetries, TimeSpan retryInterval, IList<Type> retryableExceptionTypes)
         {
             Require.GreaterThanOrEqualTo(maxRetries, 1, "maxRetries");
+
             // FIXME: la comparaison doit être stricte.
             Require.GreaterThanOrEqualTo(retryInterval, TimeSpan.Zero, "retryInterval");
             Require.NotNull(retryableExceptionTypes, "retryableExceptionTypes");
@@ -32,7 +33,9 @@ namespace Narvalo.Runtime.Reliability
         {
             get { return _retryableExceptionTypesThunk.Value; }
         }
+
         public int MaxRetries { get { return _maxRetries; } }
+
         public TimeSpan RetryInterval { get { return _retryInterval; } }
 
         public bool MayRetryAfter(Exception exception)
