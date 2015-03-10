@@ -36,8 +36,8 @@ namespace Narvalo
 
         ////public static string CurrentCulture(string format, object arg0, params object[] args)
         ////{
-        ////    Enforce.NotNull(arg0, "arg0");
-        ////    Enforce.NotNull(format, "format");
+        ////    Check.NotNull(arg0, "arg0");
+        ////    Check.NotNull(format, "format");
         ////    Contract.Ensures(Contract.Result<string>() != null);
 
         ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
@@ -47,8 +47,8 @@ namespace Narvalo
 
         ////public static string InvariantCulture(string format, object arg0, params object[] args)
         ////{
-        ////    Enforce.NotNull(arg0, "arg0");
-        ////    Enforce.NotNull(format, "format");
+        ////    Check.NotNull(arg0, "arg0");
+        ////    Check.NotNull(format, "format");
         ////    Contract.Ensures(Contract.Result<string>() != null);
 
         ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
@@ -58,7 +58,7 @@ namespace Narvalo
 
         ////static object[] GetArguments_(object arg0, params object[] args)
         ////{
-        ////    Enforce.NotNull(args, "args");
+        ////    Check.NotNull(args, "args");
         ////    Contract.Ensures(Contract.Result<object[]>() != null);
 
         ////    var arguments = new object[1 + args.Length];

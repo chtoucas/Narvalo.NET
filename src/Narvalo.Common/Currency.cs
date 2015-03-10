@@ -8,6 +8,7 @@ namespace Narvalo
     using System.Globalization;
 
     using Narvalo.Globalization;
+    using Narvalo.Internal;
 
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.
@@ -38,7 +39,7 @@ namespace Narvalo
         private Currency(string code)
         {
             // We do not fully validate the input here since this should be taken care of by the provider.
-            Enforce.NotNull(code, "code");
+            Contract.Requires(code != null);
 
             _code = code;
         }

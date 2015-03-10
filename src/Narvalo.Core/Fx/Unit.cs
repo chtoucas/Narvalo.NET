@@ -11,24 +11,24 @@ namespace Narvalo.Fx
         public static readonly Unit Single = new Unit();
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "This method always returns the same result.")]
+            Justification = "This method always returns the same result whatever the paramaters are.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "This method always returns the same result.")]
+            Justification = "This method always returns the same result whatever the paramaters are.")]
         public static bool operator ==(Unit left, Unit right)
         {
+            Contract.Ensures(Contract.Result<bool>() == true);
+
             return true;
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "This method always returns the same result.")]
+            Justification = "This method always returns the same result whatever the paramaters are.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "This method always returns the same result.")]
-#if !NO_CCCHECK_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
-            Justification = "[CodeContracts] We do not want to enforce the contract here.")]
-#endif
+            Justification = "This method always returns the same result whatever the paramaters are.")]
         public static bool operator !=(Unit left, Unit right)
         {
+            Contract.Ensures(Contract.Result<bool>() == false);
+
             return false;
         }
 
@@ -42,12 +42,10 @@ namespace Narvalo.Fx
             return obj is Unit;
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-1-0",
-            Justification = "[CodeContracts] We do not want to enforce the contract here.")]
-#endif
         public override int GetHashCode()
         {
+            Contract.Ensures(Contract.Result<int>() == 0);
+
             return 0;
         }
 

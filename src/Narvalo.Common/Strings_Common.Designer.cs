@@ -70,6 +70,15 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The total number of ticks in &apos;value&apos; must be strictly positive..
+        /// </summary>
+        internal static string BenchmarkProcessor_DurationPropertyIsNegative {
+            get {
+                return ResourceManager.GetString("BenchmarkProcessor_DurationPropertyIsNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string ConfigurationManager_MissingSectionFormat {

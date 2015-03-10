@@ -93,12 +93,14 @@ namespace Narvalo.IO
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);
         }
+
 #endif
     }
 }

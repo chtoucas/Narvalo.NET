@@ -62,11 +62,20 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null, a situation that should NEVER have happened..
+        ///   Looks up a localized string similar to The total number of ticks in &apos;duration&apos; must be strictly positive..
         /// </summary>
-        internal static string Enforce_IsNullFormat {
+        internal static string BenchmarkMetric_DurationIsNegative {
             get {
-                return ResourceManager.GetString("Enforce_IsNullFormat", resourceCulture);
+                return ResourceManager.GetString("BenchmarkMetric_DurationIsNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The total number of ticks in &apos;value&apos; must be strictly positive..
+        /// </summary>
+        internal static string BenchmarkRunner_DurationPropertyIsNegative {
+            get {
+                return ResourceManager.GetString("BenchmarkRunner_DurationPropertyIsNegative", resourceCulture);
             }
         }
         

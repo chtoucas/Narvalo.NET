@@ -10,6 +10,8 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Internal;
+
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
     /// </summary>

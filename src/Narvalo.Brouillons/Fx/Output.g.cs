@@ -184,7 +184,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
+    } // End of the class Output.
 
     // Provides core Monad extension methods.
     public static partial class Output
@@ -409,7 +409,7 @@ namespace Narvalo.Fx
 
 
         #endregion
-    }
+    } // End of the class Output.
 
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, Output&lt;TResult&gt;&gt;</c>.
@@ -460,5 +460,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
+    } // End of the class FuncExtensions.
 }

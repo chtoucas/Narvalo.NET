@@ -8,6 +8,8 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
+    using Narvalo.Internal;
+
     public sealed partial class Output<T>
     {
         private readonly bool _isSuccess;

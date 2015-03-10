@@ -7,6 +7,8 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
+
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract class StoredProcedure<TResult>
     {
@@ -79,7 +81,7 @@ namespace Narvalo.Data
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand_(SqlConnection connection)
         {
-            Enforce.NotNull(connection, "connection");
+            Contract.Requires(connection != null);
             Contract.Ensures(Contract.Result<SqlCommand>() != null);
 
             SqlCommand tmpCmd = null;
@@ -113,13 +115,14 @@ namespace Narvalo.Data
 
         private SqlDataReader ExecuteCommand_(SqlCommand command)
         {
-            Enforce.NotNull(command, "command");
+            Contract.Requires(command != null);
             Contract.Ensures(Contract.Result<SqlDataReader>() != null);
 
             return command.ExecuteReader(CommandBehavior);
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
@@ -128,6 +131,7 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
+
 #endif
     }
 }

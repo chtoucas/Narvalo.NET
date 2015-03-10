@@ -53,7 +53,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, "The total number of ticks in 'value' must be strictly positive.");
+                Require.Condition(value.Ticks > 0L, Strings_Common.BenchmarkProcessor_DurationPropertyIsNegative);
                 _runner.TestDuration = value;
             }
         }
@@ -68,7 +68,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, "The total number of ticks in 'value' must be strictly positive.");
+                Require.Condition(value.Ticks > 0L, Strings_Common.BenchmarkProcessor_DurationPropertyIsNegative);
                 _runner.WarmUpDuration = value;
             }
         }

@@ -52,13 +52,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Assume.cs">
+      <Link>Internal\Assume.cs</Link>
+    </Compile>
+    <Compile Include="Check.cs" />
     <Compile Include="Fx\Apply.cs" />
     <Compile Include="Array%24.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="BinaryEncoder.cs" />
-    <Compile Include="Check.cs" />
     <Compile Include="Collections\Enumerable[Output]%24.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
     <Compile Include="Collections\Output.g.cs">
@@ -184,6 +187,7 @@
     <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
     <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="ImageUtility.cs" />
+    <Compile Include="ParseTo.cs" />
     <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
     <Compile Include="Runtime\Reliability\Guard%24.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />

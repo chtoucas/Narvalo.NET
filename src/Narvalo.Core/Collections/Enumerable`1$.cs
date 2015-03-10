@@ -9,6 +9,7 @@ namespace Narvalo.Collections
     using System.Linq;
 
     using Narvalo.Fx;
+    using Narvalo.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -49,7 +50,8 @@ namespace Narvalo.Collections
 
             var result = new Collection<TSource>();
 
-            foreach (TSource item in @this) {
+            foreach (TSource item in @this)
+            {
                 result.Add(item);
             }
 
@@ -97,8 +99,10 @@ namespace Narvalo.Collections
 
             TAccumulate result = seed;
 
-            using (var iter = @this.GetEnumerator()) {
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
                     result = accumulator.Invoke(result, iter.Current);
                 }
             }
@@ -115,14 +119,17 @@ namespace Narvalo.Collections
             Require.NotNull(accumulator, "accumulator");
             Require.NotNull(predicate, "predicate");
 
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
                 TSource result = iter.Current;
 
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
                     result = accumulator.Invoke(result, iter.Current);
                 }
 
@@ -165,7 +172,8 @@ namespace Narvalo.Collections
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
 
-            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
                 return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
             }
         }
@@ -183,13 +191,16 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
                     return Maybe<TSource>.None;
                 }
 
                 var value = iter.Current;
-                while (iter.MoveNext()) {
+                while (iter.MoveNext())
+                {
                     value = iter.Current;
                 }
 
@@ -210,7 +221,8 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
 
             var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
-            using (var iter = seq.AssumeNotNull().GetEnumerator()) {
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
                 var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
 
                 // Return Maybe.None if there is one more element.

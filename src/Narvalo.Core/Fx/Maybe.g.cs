@@ -193,7 +193,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
+    } // End of the class Maybe.
 
     // Provides core Monad extension methods.
     public static partial class Maybe
@@ -642,7 +642,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
+    } // End of the class Maybe.
 
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, Maybe&lt;TResult&gt;&gt;</c>.
@@ -694,5 +694,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
+    } // End of the class FuncExtensions.
 }

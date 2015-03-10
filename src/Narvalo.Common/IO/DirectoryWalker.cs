@@ -8,6 +8,8 @@ namespace Narvalo.IO
     using System.IO;
     using System.Linq;
 
+    using Narvalo.Internal;
+
     public abstract class DirectoryWalker
     {
         private readonly Func<DirectoryInfo, bool> _directoryFilter;
@@ -74,12 +76,14 @@ namespace Narvalo.IO
         protected abstract void OnFile(FileInfo file);
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);
         }
+
 #endif
     }
 }

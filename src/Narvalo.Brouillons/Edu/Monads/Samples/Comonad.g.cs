@@ -50,5 +50,5 @@ namespace Narvalo.Edu.Monads.Samples
         {
             return Comonad<T>.δ(monad);
         }
-    }
+    } // End of the class Comonad.
 }

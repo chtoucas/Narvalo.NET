@@ -3,6 +3,7 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -31,7 +32,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             Require.NotNullOrEmpty(categoryName, "categoryName");
             Require.NotNullOrEmpty(name, "name");
             Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
-            Require.Condition(duration.Ticks > 0L, "The total number of ticks in 'duration' must be strictly positive.");
+            Require.Condition(duration.Ticks > 0L, Strings_Core.BenchmarkMetric_DurationIsNegative);
 
             _categoryName = categoryName;
             _name = name;
@@ -120,6 +121,10 @@ namespace Narvalo.Diagnostics.Benchmarking
                 + " call/s; " + Name;
         }
 
+#if !NO_CCCHECK_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-18-0",
+            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+#endif
         public string ToString(string format)
         {
             Contract.Ensures(Contract.Result<string>() != null);

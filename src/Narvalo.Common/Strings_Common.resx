@@ -132,4 +132,7 @@
   <data name="NonQueryStoredProcedure_ValuesIsNull" xml:space="preserve">
     <value>The parameter 'values' is null.</value>
   </data>
+  <data name="BenchmarkProcessor_DurationPropertyIsNegative" xml:space="preserve">
+    <value>The total number of ticks in 'value' must be strictly positive.</value>
+  </data>
 </root>

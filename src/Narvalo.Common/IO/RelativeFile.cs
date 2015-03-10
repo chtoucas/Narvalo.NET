@@ -39,12 +39,14 @@ namespace Narvalo.IO
         }
 
 #if CONTRACTS_FULL
+
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
             Contract.Invariant(_file != null);
             Contract.Invariant(_relativeDirectoryName != null);
         }
+
 #endif
     }
 }

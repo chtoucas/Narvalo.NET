@@ -147,9 +147,6 @@
   <data name="Range_LowerEndNotLesserThanUpperEnd" xml:space="preserve">
     <value>The lower end must be lesser than upper end.</value>
   </data>
-  <data name="Enforce_IsNullFormat" xml:space="preserve">
-    <value>The parameter '{0}' is null, a situation that should NEVER have happened.</value>
-  </data>
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Can not cast a none maybe to its underlying value type.</value>
   </data>
@@ -161,5 +158,11 @@
   </data>
   <data name="MetricFormat" xml:space="preserve">
     <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
+  </data>
+  <data name="BenchmarkMetric_DurationIsNegative" xml:space="preserve">
+    <value>The total number of ticks in 'duration' must be strictly positive.</value>
+  </data>
+  <data name="BenchmarkRunner_DurationPropertyIsNegative" xml:space="preserve">
+    <value>The total number of ticks in 'value' must be strictly positive.</value>
   </data>
 </root>

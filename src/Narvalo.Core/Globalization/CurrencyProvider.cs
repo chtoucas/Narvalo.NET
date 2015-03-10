@@ -5,6 +5,8 @@ namespace Narvalo.Globalization
     using System;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
+
     public sealed class CurrencyProvider
     {
         private static CurrencyProvider s_Instance = new CurrencyProvider();

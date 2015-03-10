@@ -5,12 +5,13 @@ namespace Narvalo
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     using Narvalo.Internal;
 
     /// <summary>
     /// Provides helper methods to perform argument validation.
-    /// If Code Contracts is enabled, these methods will be understood as Preconditions.
+    /// If Code Contracts is enabled, these methods will be understood as preconditions.
     /// </summary>
     [DebuggerStepThrough]
     public static class Require

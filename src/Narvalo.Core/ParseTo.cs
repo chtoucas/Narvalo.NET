@@ -5,7 +5,6 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Net;
 
     using Narvalo.Fx;
     using Narvalo.Internal;
@@ -213,13 +212,6 @@ namespace Narvalo
 
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            var type = typeof(TEnum);
-            if (!type.IsEnum)
-            {
-                throw new InvalidOperationException(
-                    Format.CurrentCulture(Strings_Common.TypeIsNotEnumFormat, type.FullName));
-            }
-
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
 
             return parser.NullInvoke(value);
@@ -258,15 +250,6 @@ namespace Narvalo
             }
 
             TryParser<Uri> parser = (string _, out Uri result) => System.Uri.TryCreate(_, uriKind, out result);
-
-            return parser.MayInvoke(value);
-        }
-
-        public static Maybe<IPAddress> IPAddress(string value)
-        {
-            Contract.Ensures(Contract.Result<Maybe<IPAddress>>() != null);
-
-            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
 
             return parser.MayInvoke(value);
         }

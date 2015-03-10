@@ -54,6 +54,7 @@ namespace Narvalo
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="range"></param>
         /// <returns></returns>
+        [Pure]
         public bool Includes(Range<T> range)
         {
             return range.LowerEnd.CompareTo(LowerEnd) >= 0

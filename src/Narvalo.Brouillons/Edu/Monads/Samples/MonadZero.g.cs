@@ -191,7 +191,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    }
+    } // End of the class MonadZero.
 
     // Provides core Monad extension methods.
     public static partial class MonadZero
@@ -620,7 +620,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    }
+    } // End of the class MonadZero.
 
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, MonadZero&lt;TResult&gt;&gt;</c>.
@@ -671,7 +671,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    }
+    } // End of the class FuncExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples 
@@ -707,7 +707,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
         
         #endregion
-    }
+    } // End of the class EnumerableMonadZeroExtensions.
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -874,21 +874,26 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    }
+    } // End of the class EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
+#if !CONTRACTS_FULL
+    using System.Runtime.CompilerServices;
+#endif
 
     using global::Narvalo;
     using Narvalo.Edu.Monads.Samples;
 
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;MonadZero&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;MonadZero&lt;T&gt;&gt;</c>
+    /// and <see cref="IEnumerable{T}"/>.
     /// </summary>
     internal static partial class EnumerableMonadZeroExtensions
     {
@@ -909,14 +914,30 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun).AssumeNotNull();
+            return @this.Aggregate(seed, fun).AssumeNotNull_();
         }
-    }
 
-    /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    internal static partial class EnumerableExtensions
+        /// <summary>
+        /// Instructs code analysis tools to assume that the specified value is not null,
+        /// even if it cannot be statically proven to always be not null.
+        /// When Code Contracts is disabled, this method is meant to be erased by the JIT compiler.
+        /// </summary>
+        [DebuggerHidden]
+#if !CONTRACTS_FULL
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        private static T AssumeNotNull_<T>(this T @this) where T : class
+        {
+#if CONTRACTS_FULL
+            Contract.Ensures(Contract.Result<T>() == @this);
+            Contract.Ensures(Contract.Result<T>() != null);
+            Contract.Assume(@this != null);
+#endif
+            return @this;
+        }
+    } // End of the class EnumerableMonadZeroExtensions.
+
+    internal static partial class EnumerableMonadZeroExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -929,7 +950,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
 
-            return @this.Select(funM).AssumeNotNull().Collect();
+            return @this.Select(funM).AssumeNotNull_().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -971,7 +992,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
 
-            var m = @this.Select(funM).AssumeNotNull().Collect();
+            var m = @this.Select(funM).AssumeNotNull_().Collect();
 
             return m.Select(tuples => {
                 IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -998,7 +1019,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
+            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull_().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1033,7 +1054,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
 
-            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull_().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1072,7 +1093,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
 
-            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull_().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1125,5 +1146,5 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                 return result;
             }
         }
-    }
+    } // End of the class EnumerableMonadZeroExtensions.
 }

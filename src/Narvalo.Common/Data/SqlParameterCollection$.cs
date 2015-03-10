@@ -5,6 +5,8 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
 
+    using Narvalo.Internal;
+
     /// <summary>
     /// Provides extension methods for <see cref="System.Data.SqlClient.SqlParameterCollection"/>.
     /// </summary>

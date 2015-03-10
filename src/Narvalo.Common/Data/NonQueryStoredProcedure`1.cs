@@ -8,6 +8,8 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
+
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
     public abstract class NonQueryStoredProcedure<TParameters>
     {
@@ -72,7 +74,7 @@ namespace Narvalo.Data
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand_(SqlConnection connection)
         {
-            Enforce.NotNull(connection, "connection");
+            Contract.Requires(connection != null);
             Contract.Ensures(Contract.Result<SqlCommand>() != null);
 
             SqlCommand tmpCmd = null;

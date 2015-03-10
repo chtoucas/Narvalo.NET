@@ -365,8 +365,12 @@ namespace <#= LinqNamespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
+#if !CONTRACTS_FULL
+    using System.Runtime.CompilerServices;
+#endif
 
     using global::Narvalo;
     using <#= Namespace #>;
@@ -575,7 +579,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-    }
+    } // End of the class <#= Name #>.
 <#+
     } // End of EmitCoreClass().
     
@@ -606,7 +610,7 @@ namespace <#= LinqNamespace #>.Internal
         {
             return <#= Name #><T>.δ(monad);
         }
-    }
+    } // End of the class <#= Name #>.
 <#+
     } // End of EmitCoreComonad().
 
@@ -1230,7 +1234,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ } // End of HasZero. #>
 
         #endregion
-    }
+    } // End of the class <#= Name #>.
 <#+
     } // End of EmitExtensions().
     
@@ -1299,7 +1303,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-    }
+    } // End of the class FuncExtensions.
 <#+
     } // End of EmitKleisliExtensions().
 
@@ -1357,7 +1361,7 @@ namespace <#= LinqNamespace #>.Internal
 
         #endregion
 <#+ } // End of HasZero && HasPlus. #>
-    }
+    } // End of the class Enumerable<#= Name #>Extensions.
 <#+
     } // End of EmitEnumerableMonadExtensions().
 
@@ -1367,7 +1371,8 @@ namespace <#= LinqNamespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>
+    /// and <see cref="IEnumerable{T}"/>.
     /// </summary>
     internal static partial class Enumerable<#= Name #>Extensions
     {
@@ -1392,7 +1397,7 @@ namespace <#= LinqNamespace #>.Internal
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
-            return @this.Aggregate(seed, fun)<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
+            return @this.Aggregate(seed, fun)<#+ if (IsNullable) { #>.AssumeNotNull_()<#+ } #>;
         }
 <#+ } // End of !RequireStruct. #>
 
@@ -1410,10 +1415,30 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n))<#+ if (IsNullable) { #>.AssumeNotNull()<#+ } #>;
+            return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n))<#+ if (IsNullable) { #>.AssumeNotNull_()<#+ } #>;
         }
 <#+ } // End of HasZero && HasPlus. #>
-    }
+
+        /// <summary>
+        /// Instructs code analysis tools to assume that the specified value is not null,
+        /// even if it cannot be statically proven to always be not null.
+        /// When Code Contracts is disabled, this method is meant to be erased by the JIT compiler.
+        /// </summary>
+        [DebuggerHidden]
+#if !CONTRACTS_FULL
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#endif
+        private static T AssumeNotNull_<T>(this T @this) where T : class
+        {
+#if CONTRACTS_FULL
+            Contract.Ensures(Contract.Result<T>() == @this);
+            Contract.Ensures(Contract.Result<T>() != null);
+            Contract.Assume(@this != null);
+#endif
+
+            return @this;
+        }
+    } // End of the class Enumerable<#= Name #>Extensions.
 <#+
     } // End of EmitEnumerableMonadInternalExtensions().
 
@@ -1634,7 +1659,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-    }
+    } // End of the class EnumerableExtensions.
 <#+
     } // End of EmitEnumerableExtensions().
     
@@ -1642,11 +1667,12 @@ namespace <#= LinqNamespace #>.Internal
 
     protected void EmitEnumerableInternalExtensions()
     {
+        // Normally we would name the class with EnumerableExtensions, but we prefer
+        // Enumerable{Name}Extensions to avoid any method collision.
+        // Indeed if we generate two monads in the same namespace, we would end up 
+        // with two methods named AssumeNotNull_() in the same class EnumerableExtensions.
 #>
-    /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    internal static partial class EnumerableExtensions
+    internal static partial class Enumerable<#= Name #>Extensions
     {
 <#+ if (!RequireStruct) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1664,7 +1690,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
-            return @this.Select(funM).AssumeNotNull().Collect();
+            return @this.Select(funM).AssumeNotNull_().Collect();
         }
 <#+ } #>
 
@@ -1716,7 +1742,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
-            var m = @this.Select(funM).AssumeNotNull().Collect();
+            var m = @this.Select(funM).AssumeNotNull_().Collect();
 
             return m.Select(tuples => {
                 IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
@@ -1748,7 +1774,7 @@ namespace <#= LinqNamespace #>.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
+            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull_().Collect();
         }
 <#+ } #>
 
@@ -1799,7 +1825,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
-            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull_().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1850,7 +1876,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull_().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1922,7 +1948,7 @@ namespace <#= LinqNamespace #>.Internal
                 return result;
             }
         }
-    }
+    } // End of the class Enumerable<#= Name #>Extensions.
 <#+
     } // End of EmitEnumerableInternalExtensions().
 
