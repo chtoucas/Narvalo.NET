@@ -3,9 +3,7 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
-    using System.Runtime.Serialization;
 
-    [Serializable]
     public class BarrierException : GuardException
     {
         public BarrierException() : base() { }
@@ -14,8 +12,5 @@ namespace Narvalo.Runtime.Reliability
 
         public BarrierException(string message, Exception innerException)
             : base(message, innerException) { }
-
-        protected BarrierException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
     }
 }

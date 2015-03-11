@@ -10,7 +10,9 @@ namespace Narvalo.Data
 
     using Narvalo.Internal;
 
+#if CONTRACTS_FULL
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
+#endif
     public abstract class NonQueryStoredProcedure<TParameters>
     {
         private readonly string _connectionString;
@@ -119,4 +121,21 @@ namespace Narvalo.Data
 
 #endif
     }
+
+#if CONTRACTS_FULL
+
+    [ContractClassFor(typeof(NonQueryStoredProcedure<>))]
+    internal abstract class NonQueryStoredProcedureContract<TResult> : NonQueryStoredProcedure<TResult>
+    {
+        protected NonQueryStoredProcedureContract(string connectionString, string name)
+            : base(connectionString, name) { }
+
+        protected override void AddParameters(SqlParameterCollection parameters, TResult values)
+        {
+            Contract.Requires(parameters != null);
+            Contract.Requires(values != null);
+        }
+    }
+
+#endif
 }

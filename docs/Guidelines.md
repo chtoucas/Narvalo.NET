@@ -62,7 +62,6 @@ This solution contains the core library projects:
 - Narvalo.Core itself, a PCL (Profile259).
 - Narvalo.Common complements Narvalo.Core with non portable classes.
 - Narvalo.Web complements Narvalo.Common with Web centric classes.
-- Narvalo.Benchmarking, benchmarking helpers.
 - Narvalo.Ghostscript
 - Narvalo.Brouillons, a "fourre-tout" of unfinished or broken codes.
 

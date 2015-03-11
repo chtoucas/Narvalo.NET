@@ -706,6 +706,8 @@ namespace Narvalo.Edu.Monads.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "This method has been localy overriden.")]
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
@@ -740,6 +742,7 @@ namespace Narvalo.Edu.Monads.Internal
             Contract.Ensures(Contract.Result<T>() != null);
             Contract.Assume(@this != null);
 #endif
+
             return @this;
         }
     } // End of the class EnumerableIdentityExtensions.
@@ -747,6 +750,8 @@ namespace Narvalo.Edu.Monads.Internal
     internal static partial class EnumerableIdentityExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Identity<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -761,6 +766,8 @@ namespace Narvalo.Edu.Monads.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -790,6 +797,8 @@ namespace Narvalo.Edu.Monads.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "This method has been localy overriden.")]
         internal static Identity<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -811,6 +820,8 @@ namespace Narvalo.Edu.Monads.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "This method has been localy overriden.")]
         internal static Identity<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -830,6 +841,8 @@ namespace Narvalo.Edu.Monads.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Identity<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -854,6 +867,8 @@ namespace Narvalo.Edu.Monads.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "This method has been localy overriden.")]
         internal static Identity<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -867,6 +882,8 @@ namespace Narvalo.Edu.Monads.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Identity<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -896,6 +913,8 @@ namespace Narvalo.Edu.Monads.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "This method has been localy overriden.")]
         internal static Identity<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
@@ -908,6 +927,8 @@ namespace Narvalo.Edu.Monads.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Identity<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -935,6 +956,8 @@ namespace Narvalo.Edu.Monads.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "This method has been localy overriden.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Identity<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,

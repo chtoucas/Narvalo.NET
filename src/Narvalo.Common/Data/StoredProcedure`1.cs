@@ -9,7 +9,9 @@ namespace Narvalo.Data
 
     using Narvalo.Internal;
 
+#if CONTRACTS_FULL
     [ContractClass(typeof(StoredProcedureContract<>))]
+#endif
     public abstract class StoredProcedure<TResult>
     {
         private readonly string _connectionString;
@@ -134,4 +136,27 @@ namespace Narvalo.Data
 
 #endif
     }
+
+#if CONTRACTS_FULL
+
+    [ContractClassFor(typeof(StoredProcedure<>))]
+    internal abstract class StoredProcedureContract<TResult> : StoredProcedure<TResult>
+    {
+        protected StoredProcedureContract(string connectionString, string name)
+            : base(connectionString, name) { }
+
+        protected override TResult Execute(SqlDataReader reader)
+        {
+            Contract.Requires(reader != null);
+
+            return default(TResult);
+        }
+
+        protected override void PrepareParameters(SqlParameterCollection parameters)
+        {
+            Contract.Requires(parameters != null);
+        }
+    }
+
+#endif
 }

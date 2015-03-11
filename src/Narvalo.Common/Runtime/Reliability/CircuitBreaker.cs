@@ -3,6 +3,7 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Threading;
 
     // IMPORTANT: Implémenter Thread-Safety
@@ -23,13 +24,10 @@ namespace Narvalo.Runtime.Reliability
 
             _threshold = threshold;
             _resetInterval = resetInterval;
-
-            InitializeTimer();
+            _resetTimer = InitializeTimer();
         }
 
         public event EventHandler<CircuitBreakerStateChangedEventArgs> StateChangedEventHandler;
-
-        #region Propriétés
 
         public bool AutoReset
         {
@@ -47,9 +45,11 @@ namespace Narvalo.Runtime.Reliability
             }
         }
 
+        public bool CanExecute { get { return !IsOpen; } }
+
         public double CurrentServiceLevel
         {
-            get { return 100 * (Threshold - FailureCount) / Threshold; }
+            get { return 100D * (Threshold - FailureCount) / Threshold; }
         }
 
         public CircuitBreakerState CurrentState { get { return _currentState; } }
@@ -66,18 +66,11 @@ namespace Narvalo.Runtime.Reliability
 
         public int Threshold { get { return _threshold; } }
 
-        #endregion
-
-        public void Reset()
+        public void Dispose()
         {
-            StopTimer();
-            SetState_(CircuitBreakerState.Closed);
-            _failureCount = 0;
+            Dispose(true /* disposing */);
+            GC.SuppressFinalize(this);
         }
-
-        #region IBarrier
-
-        public bool CanExecute { get { return !IsOpen; } }
 
         public void Execute(Action action)
         {
@@ -107,17 +100,29 @@ namespace Narvalo.Runtime.Reliability
             RecordSuccess_();
         }
 
-        #endregion
-
-        #region IDisposable
-
-        public void Dispose()
+        public void Reset()
         {
-            Dispose(true /* disposing */);
-            GC.SuppressFinalize(this);
+            ThrowIfDisposed_();
+
+            StopTimer();
+            SetState_(CircuitBreakerState.Closed);
+            _failureCount = 0;
         }
 
-        #endregion
+        internal void Close()
+        {
+            Close(false /* executing */);
+        }
+
+        internal void HalfOpen()
+        {
+            HalfOpen(false /* executing */);
+        }
+
+        internal void Trip()
+        {
+            Trip(false /* executing */);
+        }
 
         protected virtual void Dispose(bool disposing)
         {
@@ -201,11 +206,13 @@ namespace Narvalo.Runtime.Reliability
         #region Timer.
 
         // http://msdn.microsoft.com/en-us/magazine/cc164015.aspx
-        protected void InitializeTimer()
+        protected Timer InitializeTimer()
         {
+            Contract.Ensures(Contract.Result<Timer>() != null);
+
             // On crée un timer mais on ne le démarre pas encore.
             // FIXME: ré-entrance
-            _resetTimer = new Timer(
+            var resetTimer = new Timer(
                 (state) =>
                 {
                     if (IsOpen)
@@ -213,8 +220,8 @@ namespace Narvalo.Runtime.Reliability
                         HalfOpen(true /* executing */);
                     }
                 },
-                null, 
-                Timeout.Infinite, 
+                null,
+                Timeout.Infinite,
                 Timeout.Infinite);
 
             ////using Timer = System.Timers.Timer;
@@ -222,6 +229,8 @@ namespace Narvalo.Runtime.Reliability
             ////_timer.Elapsed += (object sender, ElapsedEventArgs e) => {
             ////    if (IsOpen) HalfOpen(true /* executing */);
             ////};
+
+            return resetTimer;
         }
 
         protected void StartTimer()
@@ -235,27 +244,6 @@ namespace Narvalo.Runtime.Reliability
         }
 
         #endregion
-
-        #region Membres internes.
-
-        internal void Close()
-        {
-            Close(false /* executing */);
-        }
-
-        internal void HalfOpen()
-        {
-            HalfOpen(false /* executing */);
-        }
-
-        internal void Trip()
-        {
-            Trip(false /* executing */);
-        }
-
-        #endregion
-
-        #region Membres privés.
 
         private void RecordFailure_()
         {
@@ -301,7 +289,5 @@ namespace Narvalo.Runtime.Reliability
                 throw new ObjectDisposedException(typeof(CircuitBreaker).FullName);
             }
         }
-
-        #endregion
     }
 }

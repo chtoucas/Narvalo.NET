@@ -198,6 +198,9 @@ namespace Narvalo.Collections
                     return Maybe<TSource>.None;
                 }
 
+                // REVIEW: This should work.
+                // while (iter.MoveNext()) { }
+                // return iter.Current;
                 var value = iter.Current;
                 while (iter.MoveNext())
                 {

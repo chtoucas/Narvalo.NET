@@ -3,7 +3,9 @@
 namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
 
 #if CONTRACTS_FULL
     [ContractClass(typeof(ICurrencyProviderContract))]

@@ -118,6 +118,13 @@
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="Require.cs" />
+    <Compile Include="Runtime\Reliability\BarrierException.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
+    <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
+    <Compile Include="Runtime\Reliability\GuardException.cs" />
+    <Compile Include="Runtime\Reliability\IBarrier.cs" />
+    <Compile Include="Runtime\Reliability\IGuard.cs" />
     <Compile Include="Strings_Core.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

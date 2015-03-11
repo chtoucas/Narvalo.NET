@@ -10,15 +10,12 @@ namespace Narvalo.Diagnostics.Benchmarking
 
     public sealed class BenchmarkProcessor
     {
-        /// <summary>
-        /// Default bindings, used to look for methods with a benchmark attribute.
-        /// </summary>
-        public const BindingFlags DefaultDiscoveryBindings
-           = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
-
         private readonly BenchmarkRunner _runner;
 
-        private BindingFlags _discoveryBindings = DefaultDiscoveryBindings;
+        /// <summary>
+        /// Bindings used to look for methods with a benchmark attribute.
+        /// </summary>
+        private BindingFlags _discoveryBindings = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
         /// <summary>
         /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the default timer.

@@ -3,7 +3,9 @@
 namespace Narvalo.Web
 {
     using System.Collections.Generic;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
     using System.Web;
 
     using Narvalo.Fx;

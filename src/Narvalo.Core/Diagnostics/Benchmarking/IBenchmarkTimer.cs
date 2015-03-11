@@ -3,7 +3,9 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
 
 #if CONTRACTS_FULL
     [ContractClass(typeof(IBenchmarkTimerContract))]

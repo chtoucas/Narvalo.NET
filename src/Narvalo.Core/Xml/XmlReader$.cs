@@ -94,7 +94,6 @@ namespace Narvalo.Xml
             Require.Object(@this);
             Require.NotNull(name, "name");
 
-            // [Mono] Marked as TODO.
             return @this.ReadElementContentAsObject(name.LocalName, name.NamespaceName);
         }
 

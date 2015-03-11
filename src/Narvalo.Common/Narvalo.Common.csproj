@@ -71,9 +71,7 @@
       <Link>Internal\Assume.cs</Link>
     </Compile>
     <Compile Include="Currency.cs" />
-    <Compile Include="Data\NonQueryStoredProcedureContract`1.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
-    <Compile Include="Data\StoredProcedureContract`1.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkProcessor.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
@@ -98,6 +96,7 @@
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
+    <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>

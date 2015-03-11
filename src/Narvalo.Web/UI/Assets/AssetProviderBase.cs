@@ -4,7 +4,9 @@ namespace Narvalo.Web.UI.Assets
 {
     using System;
     using System.Configuration.Provider;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
 
 #if CONTRACTS_FULL
     [ContractClass(typeof(AssetProviderBaseContract))]

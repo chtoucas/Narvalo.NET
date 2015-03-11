@@ -7,6 +7,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    // FIXME: This struct is a bit too large.
     public partial struct BenchmarkMetric
         : IEquatable<BenchmarkMetric>, IFormattable
     {

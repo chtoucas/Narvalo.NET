@@ -3,9 +3,7 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
-    using System.Runtime.Serialization;
 
-    [Serializable]
     public class GuardException : Exception
     {
         public GuardException() : base() { }
@@ -14,8 +12,5 @@ namespace Narvalo.Runtime.Reliability
 
         public GuardException(string message, Exception innerException)
             : base(message, innerException) { }
-
-        protected GuardException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
     }
 }

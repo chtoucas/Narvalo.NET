@@ -3,6 +3,7 @@
 namespace Narvalo.Internal
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Decorating a parameter with this attribute informs Code Analysis
@@ -10,13 +11,12 @@ namespace Narvalo.Internal
     /// This will silence the CA1062 warning.
     /// <seealso href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx" />
     /// </summary>
-    /// <remarks>
-    /// When performing Static Contracts checking, this attribute must be public.
-    /// This will silence the CC1038 error.
-    /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
+    [SuppressMessage("Gendarme.Rules.Performance", "AvoidUninstantiatedInternalClassesRule",
+        Justification = "This method is only used by the Code Analysis tools.")]
 #if CONTRACTS_FULL
-    // Preconditions must be public.
+    // When performing Static Contracts checking, this attribute MUST remain public.
+    // This will silence the CC1038 error.
     public
 #else
     internal
