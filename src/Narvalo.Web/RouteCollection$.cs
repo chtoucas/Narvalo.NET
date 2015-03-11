@@ -9,6 +9,9 @@ namespace Narvalo.Web
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="RouteCollection"/>.
+    /// </summary>
     public static class RouteCollectionExtensions
     {
         // Cf. http://www.make-awesome.com/2012/07/perfectionist-routing-in-asp-net-mvc/
@@ -19,12 +22,16 @@ namespace Narvalo.Web
             var controllerTypes = assembly.GetTypes()
                 .Where(t => !t.IsAbstract && typeof(IController).IsAssignableFrom(t));
 
-            foreach (Type t in controllerTypes) {
+            foreach (Type t in controllerTypes)
+            {
                 bool childOnlyController = t.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
-                foreach (MethodInfo m in t.GetMethods()) {
-                    if (m.IsPublic && typeof(ActionResult).IsAssignableFrom(m.ReturnType)) {
-                        if (!childOnlyController) {
+                foreach (MethodInfo m in t.GetMethods())
+                {
+                    if (m.IsPublic && typeof(ActionResult).IsAssignableFrom(m.ReturnType))
+                    {
+                        if (!childOnlyController)
+                        {
                             bool childOnlyAction = m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
                             if (!childOnlyAction) { continue; }

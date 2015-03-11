@@ -5,13 +5,17 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System;
     using System.Diagnostics.Contracts;
 
+#if CONTRACTS_FULL
     [ContractClass(typeof(IBenchmarkTimerContract))]
+#endif
     public interface IBenchmarkTimer
     {
         TimeSpan ElapsedTime { get; }
 
         void Reset();
     }
+
+#if CONTRACTS_FULL
 
     [ContractClassFor(typeof(IBenchmarkTimer))]
     internal abstract class IBenchmarkTimerContract : IBenchmarkTimer
@@ -28,4 +32,6 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         void IBenchmarkTimer.Reset() { }
     }
+
+#endif
 }

@@ -2,6 +2,7 @@
 
 namespace Narvalo.Web
 {
+    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
@@ -12,11 +13,27 @@ namespace Narvalo.Web
     {
         protected HttpHandlerBase() { }
 
-        public virtual bool IsReusable { get { return false; } }
+        public virtual bool IsReusable
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<bool>() == false);
+
+                return false;
+            }
+        }
 
         protected abstract HttpVerbs AcceptedVerbs { get; }
 
-        protected virtual bool TrySkipIisCustomErrors { get { return true; } }
+        protected virtual bool TrySkipIisCustomErrors
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<bool>() == true);
+
+                return true;
+            }
+        }
 
         public void ProcessRequest(HttpContext context)
         {
@@ -24,10 +41,12 @@ namespace Narvalo.Web
 
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
-            if (ValidateHttpMethod(context.Request)) {
+            if (ValidateHttpMethod(context.Request))
+            {
                 ProcessRequestCore(context);
             }
-            else {
+            else
+            {
                 OnInvalidHttpMethod(context);
             }
         }

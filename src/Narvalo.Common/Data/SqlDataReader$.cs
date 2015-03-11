@@ -85,6 +85,7 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
+            // [Mono] Missing method.
             return @this.GetSqlChars(ordinal).ToMaybe();
         }
 

@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public class OpenGraphImage
     {
@@ -18,12 +19,39 @@ namespace Narvalo.Web.Semantic
             _mimeType = mimeType;
         }
 
-        public Uri Url { get { return _url; } }
+        public Uri Url
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Uri>() != null);
 
-        public string MimeType { get { return _mimeType; } }
+                return _url;
+            }
+        }
+
+        public string MimeType
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+
+                return _mimeType;
+            }
+        }
 
         public int Height { get; set; }
 
         public int Width { get; set; }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_mimeType != null);
+            Contract.Invariant(_url != null);
+        }
+
+#endif
     }
 }

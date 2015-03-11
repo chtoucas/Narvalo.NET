@@ -6,7 +6,7 @@ namespace Narvalo.Web
     using System.Web;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Web.HttpResponse"/>.
+    /// Provides extension methods for <see cref="HttpResponse"/>.
     /// </summary>
     public static partial class HttpResponseExtensions
     {

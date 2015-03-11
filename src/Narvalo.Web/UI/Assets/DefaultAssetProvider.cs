@@ -15,11 +15,13 @@ namespace Narvalo.Web.UI.Assets
         {
             Require.NotNull(config, "config");
 
-            if (String.IsNullOrEmpty(name)) {
+            if (String.IsNullOrEmpty(name))
+            {
                 name = "DefaultAssetProvider";
             }
 
-            if (String.IsNullOrEmpty(config["description"])) {
+            if (String.IsNullOrEmpty(config["description"]))
+            {
                 config.Remove("description");
                 config.Add("description", "ASP.NET default asset provider.");
             }
@@ -29,9 +31,11 @@ namespace Narvalo.Web.UI.Assets
             // FIXME: On vérifie qu'il n'y a pas de champs inconnu restant.
             config.Remove("description");
 
-            if (config.Count > 0) {
+            if (config.Count > 0)
+            {
                 string attr = config.GetKey(0);
-                if (!String.IsNullOrEmpty(attr)) {
+                if (!String.IsNullOrEmpty(attr))
+                {
                     throw new ProviderException("Unrecognized attribute: " + attr);
                 }
             }

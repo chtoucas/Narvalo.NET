@@ -4,6 +4,7 @@ namespace Narvalo.Web.Optimization
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
@@ -24,10 +25,12 @@ namespace Narvalo.Web.Optimization
         {
             Require.NotNull(block, "block");
 
-            for (int i = 0; i < block.Children.Count; i++) {
+            for (int i = 0; i < block.Children.Count; i++)
+            {
                 var span = block.Children[i] as Span;
 
-                if (!IsMarkup_(span)) {
+                if (!IsMarkup_(span))
+                {
                     // On ne touche pas les éléments qui ne sont pas de type Markup.
                     continue;
                 }
@@ -38,7 +41,8 @@ namespace Narvalo.Web.Optimization
                     ? span.Content
                     : RemoveMarkupAndMergeContentAfter_(block, span.Content, ref i);
 
-                if (String.IsNullOrWhiteSpace(content)) {
+                if (String.IsNullOrWhiteSpace(content))
+                {
                     // Le contenu n'est constitué que d'espaces blancs.
                     block.Children.RemoveAt(i);
                     continue;
@@ -63,10 +67,12 @@ namespace Narvalo.Web.Optimization
 
             var prevType = HtmlSymbolType.Unknown;
 
-            foreach (ISymbol item in span.Symbols) {
+            foreach (ISymbol item in span.Symbols)
+            {
                 var sym = item as HtmlSymbol;
 
-                if (sym == null) {
+                if (sym == null)
+                {
                     // On ne touche pas les éléments qui ne sont pas de type HtmlSymbol.
                     builder.Accept(item);
                     continue;
@@ -81,32 +87,47 @@ namespace Narvalo.Web.Optimization
             span.ReplaceWith(builder);
         }
 
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_buster != null);
+        }
+
+#endif
+
         private static bool IsMarkup_(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", 
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference",
             Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
         private static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
+            Contract.Requires(block != null);
+
             var sb = new StringBuilder(content);
 
             // WARNING: On est succeptible de modifier la collection currentBlock.Children,
             // on ne peut donc pas mettre en cache la valeur de currentBlock.Children.Count.
             var j = currentIndex + 1;
 
-            while (j < block.Children.Count) {
+            while (j < block.Children.Count)
+            {
                 var nextSpan = block.Children[j] as Span;
 
                 // On s'arrête dès qu'on rencontre un Span qui n'est pas de type Markup.
-                if (!IsMarkup_(nextSpan)) {
+                if (!IsMarkup_(nextSpan))
+                {
                     break;
                 }
 
                 // On ajoute le contenu de l'élément si il n'est pas vide.
                 var nextContent = nextSpan.Content;
-                if (!String.IsNullOrWhiteSpace(nextContent)) {
+                if (!String.IsNullOrWhiteSpace(nextContent))
+                {
                     sb.Append(nextContent);
                 }
 
@@ -128,14 +149,18 @@ namespace Narvalo.Web.Optimization
 
         private string OptimizeContent_(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
+            Contract.Requires(sym != null);
+
             string content;
 
-            if (sym.Type == HtmlSymbolType.WhiteSpace && previousType == HtmlSymbolType.NewLine) {
+            if (sym.Type == HtmlSymbolType.WhiteSpace && previousType == HtmlSymbolType.NewLine)
+            {
                 // Si le symbole n'est constitué que d'espace blancs et le symbole
                 // précédent est un retour à la ligne, on peut vider son contenu.
                 content = String.Empty;
             }
-            else {
+            else
+            {
                 content = BustWhiteSpaces_(sym.Content);
             }
 

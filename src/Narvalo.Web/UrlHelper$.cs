@@ -7,6 +7,9 @@ namespace Narvalo.Web
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="UrlHelper"/>.
+    /// </summary>
     public static class UrlHelperExtensions
     {
         public static string Current(this UrlHelper @this)
@@ -41,7 +44,8 @@ namespace Narvalo.Web
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
 
-            if (!uri.IsAbsoluteUri) {
+            if (!uri.IsAbsoluteUri)
+            {
                 Uri requestUrl = @this.RequestContext.HttpContext.Request.Url;
                 var builder = new UriBuilder(requestUrl.Scheme, requestUrl.Host, requestUrl.Port);
 

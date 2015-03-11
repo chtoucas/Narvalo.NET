@@ -6,6 +6,9 @@ namespace Narvalo.Web.Internal
     using System.Web;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="TagBuilder"/>.
+    /// </summary>
     internal static class TagBuilderExtensions
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)

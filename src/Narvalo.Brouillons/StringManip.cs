@@ -15,7 +15,8 @@ namespace Narvalo
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<string>() != null);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 return String.Empty;
             }
 
@@ -23,11 +24,12 @@ namespace Narvalo
 
             var sb = new StringBuilder();
 
-            for (int i = 0; i < formD.Length; i++) {
-                Char c = formD[i];
+            for (int i = 0; i < formD.Length; i++)
+            {
 
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark) {
-                    sb.Append(c);
+                if (CharUnicodeInfo.GetUnicodeCategory(formD[i]) != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(formD[i]);
                 }
             }
 

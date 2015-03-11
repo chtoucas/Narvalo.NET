@@ -21,6 +21,9 @@ namespace Narvalo.Web.UI
     using System.Reflection;
     using System.Web.UI;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="ControlBuilder"/>.
+    /// </summary>
     public static class ControlBuilderExtensions
     {
         private const BindingFlags BINDING_ATTRIBUTE
@@ -34,7 +37,8 @@ namespace Narvalo.Web.UI
             Type type = @this.GetType();
 
             while (type != null
-                   && (pi = type.GetProperty("DefaultPropertyBuilder", BINDING_ATTRIBUTE)) == null) {
+                   && (pi = type.GetProperty("DefaultPropertyBuilder", BINDING_ATTRIBUTE)) == null)
+            {
                 type = type.BaseType;
             }
 

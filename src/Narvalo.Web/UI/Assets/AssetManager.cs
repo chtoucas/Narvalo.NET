@@ -5,10 +5,12 @@ namespace Narvalo.Web.UI.Assets
     using System;
     using System.Configuration;
     using System.Configuration.Provider;
+    using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
     using Narvalo.Web.Configuration;
 
+    // FIXME: Concurrency guard is broken.
     public static class AssetManager
     {
         private static readonly object s_Lock = new Object();
@@ -23,6 +25,8 @@ namespace Narvalo.Web.UI.Assets
         {
             get
             {
+                Contract.Ensures(Contract.Result<AssetProviderBase>() != null);
+
                 EnsureInitialized_();
                 return s_Provider;
             }
@@ -32,43 +36,78 @@ namespace Narvalo.Web.UI.Assets
         {
             get
             {
+                Contract.Ensures(Contract.Result<AssetProviderCollection>() != null);
+
                 EnsureInitialized_();
                 return s_Providers;
             }
         }
 
-        public static Uri ImageBase { get { return Provider.GetImage(String.Empty); } }
+        public static Uri ImageBase
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Uri>() != null);
 
-        public static Uri ScriptBase { get { return Provider.GetScript(String.Empty); } }
+                return Provider.GetImage(String.Empty);
+            }
+        }
 
-        public static Uri StyleBase { get { return Provider.GetStyle(String.Empty); } }
+        public static Uri ScriptBase
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Uri>() != null);
+
+                return Provider.GetScript(String.Empty);
+            }
+        }
+
+        public static Uri StyleBase
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Uri>() != null);
+
+                return Provider.GetStyle(String.Empty);
+            }
+        }
 
         public static Uri GetImage(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
             return Provider.GetImage(relativePath);
         }
 
         public static Uri GetScript(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
             return Provider.GetScript(relativePath);
         }
 
         public static Uri GetStyle(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
             return Provider.GetStyle(relativePath);
         }
 
         private static void EnsureInitialized_()
         {
-            if (s_InitializedProviders && s_InitializedDefaultProvider) {
+            if (s_InitializedProviders && s_InitializedDefaultProvider)
+            {
                 return;
             }
 
-            lock (s_Lock) {
-                if (s_InitializedProviders && s_InitializedDefaultProvider) {
+            lock (s_Lock)
+            {
+                if (s_InitializedProviders && s_InitializedDefaultProvider)
+                {
                     return;
                 }
 
@@ -81,12 +120,14 @@ namespace Narvalo.Web.UI.Assets
 
         private static void InitProviders_(AssetSection section)
         {
-            if (s_InitializedProviders) {
+            if (s_InitializedProviders)
+            {
                 return;
             }
 
             var tmpProviders = new AssetProviderCollection();
-            if (section.Providers != null) {
+            if (section.Providers != null)
+            {
                 ProvidersHelper.InstantiateProviders(section.Providers, tmpProviders, typeof(AssetProviderBase));
                 tmpProviders.SetReadOnly();
             }
@@ -97,11 +138,13 @@ namespace Narvalo.Web.UI.Assets
 
         private static void InitDefaultProvider_(AssetSection section)
         {
-            if (s_InitializedDefaultProvider) {
+            if (s_InitializedDefaultProvider)
+            {
                 return;
             }
 
-            if (section.DefaultProvider == null) {
+            if (section.DefaultProvider == null)
+            {
                 throw new ConfigurationErrorsException(
                     Strings_Web.AssetManager_DefaultProviderNotConfigured,
                     section.ElementInformation.Properties["providers"].Source,
@@ -110,7 +153,8 @@ namespace Narvalo.Web.UI.Assets
 
             s_Provider = s_Providers[section.DefaultProvider];
 
-            if (s_Provider == null) {
+            if (s_Provider == null)
+            {
                 throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotFound);
             }
 

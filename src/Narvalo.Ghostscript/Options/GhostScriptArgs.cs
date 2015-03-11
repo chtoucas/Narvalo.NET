@@ -7,8 +7,6 @@ namespace Narvalo.GhostScript.Options
 
     public class GhostScriptArgs<T> where T : Device
     {
-        #region Fields
-
         private readonly T _device;
         private readonly string _inputFile;
 
@@ -16,10 +14,6 @@ namespace Narvalo.GhostScript.Options
         private Miscs _miscs = Miscs.Default;
         private string _outputFile;
         private Pdf _pdf;
-
-        #endregion
-
-        #region Ctor
 
         public GhostScriptArgs(string inputFile, T device)
         {
@@ -30,9 +24,6 @@ namespace Narvalo.GhostScript.Options
             _device = device;
         }
 
-        #endregion
-
-        #region Properties
 
         public bool CanOutput { get { return !String.IsNullOrEmpty(OutputFile); } }
 
@@ -48,10 +39,6 @@ namespace Narvalo.GhostScript.Options
         public string OutputFile { get { return _outputFile; } set { _outputFile = value; } }
 
         public Pdf Pdf { get { return _pdf; } set { _pdf = value; } }
-
-        #endregion
-
-        #region Public methods
 
         public string[] ToParamArray()
         {
@@ -85,10 +72,6 @@ namespace Narvalo.GhostScript.Options
         {
             return String.Join(" ", ToParamArray());
         }
-
-        #endregion
-
-        #region Helpers
 
         ////private static string GetIccParameter(Icc arg) {
         ////    switch (arg) {
@@ -213,7 +196,5 @@ namespace Narvalo.GhostScript.Options
         ////            throw new ArgumentException("Invalid argument.", "arg");
         ////    }
         ////}
-
-        #endregion
     }
 }

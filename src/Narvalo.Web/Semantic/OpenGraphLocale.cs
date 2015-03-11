@@ -2,11 +2,12 @@
 
 namespace Narvalo.Web.Semantic
 {
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public sealed class OpenGraphLocale
     {
-        private CultureInfo _culture;
+        private readonly CultureInfo _culture;
 
         public OpenGraphLocale(CultureInfo culture)
         {
@@ -15,7 +16,15 @@ namespace Narvalo.Web.Semantic
             _culture = culture;
         }
 
-        public CultureInfo Culture { get { return _culture; } }
+        public CultureInfo Culture
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<CultureInfo>() != null);
+
+                return _culture;
+            }
+        }
 
         public override string ToString()
         {

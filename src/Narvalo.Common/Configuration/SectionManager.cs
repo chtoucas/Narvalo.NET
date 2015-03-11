@@ -63,6 +63,7 @@ namespace Narvalo.Configuration
             var map = new ExeConfigurationFileMap();
             map.ExeConfigFilename = configFileName;
 
+            // [Mono] Marked as TODO.
             var configuration = ConfigurationManager.OpenMappedExeConfiguration(map, userLevel);
             var section = configuration.GetSection(sectionName) as T;
 

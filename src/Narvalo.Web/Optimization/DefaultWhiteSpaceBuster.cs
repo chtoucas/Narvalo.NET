@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -36,19 +37,22 @@ namespace Narvalo.Web.Optimization
         {
             Require.NotNull(value, "value");
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 return String.Empty;
             }
 
             // On remplace les chaînes de caractères constituées uniquement
             // d'espace ou tabulation par un seul espace.
-            if (IsTabsOrSpaces_(value)) {
+            if (IsTabsOrSpaces_(value))
+            {
                 return "\x20";
             }
 
             // On remplace les chaînes de caractères constituées d'espace, tabulation 
             // et contenant un retour à la ligne par un retour à ligne.
-            if (String.IsNullOrWhiteSpace(value)) {
+            if (String.IsNullOrWhiteSpace(value))
+            {
                 return "\r\n";
             }
 
@@ -69,8 +73,12 @@ namespace Narvalo.Web.Optimization
 
         private static bool IsTabsOrSpaces_(string value)
         {
-            for (int i = 0; i < value.Length; i++) {
-                if (!IsTabOrSpace_(value[i])) {
+            Contract.Requires(value != null);
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!IsTabOrSpace_(value[i]))
+                {
                     return false;
                 }
             }

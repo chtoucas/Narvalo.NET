@@ -12,19 +12,23 @@ namespace Narvalo
             Require.Object(@this);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            if (!@this.IsAbsoluteUri) {
+            if (!@this.IsAbsoluteUri)
+            {
                 return @this.ToString();
             }
 
             var scheme = @this.Scheme;
 
-            if (scheme == Uri.UriSchemeHttp) {
+            if (scheme == Uri.UriSchemeHttp)
+            {
                 return @this.ToString().Replace("http:", String.Empty);
             }
-            else if (scheme == Uri.UriSchemeHttps) {
+            else if (scheme == Uri.UriSchemeHttps)
+            {
                 return @this.ToString().Replace("https:", String.Empty);
             }
-            else {
+            else
+            {
                 throw new NotSupportedException(
                     Format.CurrentCulture(Strings_Common.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
             }

@@ -47,7 +47,8 @@ namespace Narvalo.Web.Optimization
             // NB: Si rien n'est précisé, on considère que le filtre est actif localement.
             bool enabled = true;
 
-            if (attributes.Contains(DIRECTIVE_NAME)) {
+            if (attributes.Contains(DIRECTIVE_NAME))
+            {
                 enabled = ParseTo.Boolean((string)attributes[DIRECTIVE_NAME], BooleanStyles.Literal) ?? enabled;
 
                 // On supprime la directive afin de ne pas perturber le fonctionnement de ASP.NET.
@@ -58,7 +59,8 @@ namespace Narvalo.Web.Optimization
             // considère que le filtre ne doit pas être utilisé quelque soit la directive locale.
             _enabled = EnableWhiteSpaceBusting_ && enabled;
 
-            if (_enabled) {
+            if (_enabled)
+            {
                 _buster = WhiteSpaceBusterProvider.Current.PageBuster;
             }
 

@@ -3,9 +3,14 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public sealed class OpenGraphPng : OpenGraphImage
     {
-        public OpenGraphPng(Uri url) : base(url, "image/png") { }
+        public OpenGraphPng(Uri url)
+            : base(url, "image/png")
+        {
+            Contract.Requires(url != null);
+        }
     }
 }

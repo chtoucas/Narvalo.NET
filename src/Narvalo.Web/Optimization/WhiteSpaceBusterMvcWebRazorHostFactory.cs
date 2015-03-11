@@ -26,7 +26,8 @@ namespace Narvalo.Web.Optimization
         {
             WebPageRazorHost host = base.CreateHost(virtualPath, physicalPath);
 
-            if (host.IsSpecialPage || !EnableWhiteSpaceBusting_) {
+            if (host.IsSpecialPage || !EnableWhiteSpaceBusting_)
+            {
                 return host;
             }
 

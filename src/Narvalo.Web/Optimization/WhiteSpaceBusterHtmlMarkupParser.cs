@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Web.Razor.Parser;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
@@ -14,6 +15,9 @@ namespace Narvalo.Web.Optimization
 
         public WhiteSpaceBusterHtmlMarkupParser(ParserBase inner, RazorOptimizer optimizer)
         {
+            Require.NotNull(inner, "inner");
+            Require.NotNull(optimizer, "optimizer");
+
             _inner = inner;
             _optimizer = optimizer;
         }
@@ -46,5 +50,16 @@ namespace Narvalo.Web.Optimization
         {
             _inner.ParseSection(nestingSequences, caseSensitive);
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_inner != null);
+            Contract.Invariant(_optimizer != null);
+        }
+
+#endif
     }
 }

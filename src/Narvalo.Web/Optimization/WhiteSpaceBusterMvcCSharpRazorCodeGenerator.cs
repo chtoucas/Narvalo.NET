@@ -30,7 +30,8 @@ namespace Narvalo.Web.Optimization
             // À la différence de MvcCSharpRazorCodeGenerator, on n'a pas besoin de vérifier
             // host.IsSpecialPage car on exclut ce type de hôte en amont au niveau de 
             // WhiteSpaceBusterMvcWebRazorHostFactory.
-            if (mvcHost != null) {
+            if (mvcHost != null)
+            {
                 SetBaseType_("dynamic");
             }
         }
@@ -39,7 +40,8 @@ namespace Narvalo.Web.Optimization
         {
             Require.NotNull(span, "span");
 
-            if (span.Kind == SpanKind.Markup) {
+            if (span.Kind == SpanKind.Markup)
+            {
                 _optimizer.OptimizeSpan(span);
             }
 

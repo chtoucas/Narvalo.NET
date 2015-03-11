@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public sealed class WhiteSpaceBusterProvider
     {
@@ -14,15 +15,28 @@ namespace Narvalo.Web.Optimization
 
         public WhiteSpaceBusterProvider() { }
 
-        public static WhiteSpaceBusterProvider Current { get { return s_Instance; } }
+        public static WhiteSpaceBusterProvider Current
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<WhiteSpaceBusterProvider>() != null);
+
+                return s_Instance;
+            }
+        }
 
         public IWhiteSpaceBuster PageBuster
         {
             get
             {
-                if (_pageBuster == null) {
-                    lock (s_Lock) {
-                        if (_pageBuster == null) {
+                Contract.Ensures(Contract.Result<IWhiteSpaceBuster>() != null);
+
+                if (_pageBuster == null)
+                {
+                    lock (s_Lock)
+                    {
+                        if (_pageBuster == null)
+                        {
                             _pageBuster = new DefaultWhiteSpaceBuster();
                         }
                     }
@@ -35,7 +49,8 @@ namespace Narvalo.Web.Optimization
             {
                 Require.Property(value);
 
-                lock (s_Lock) {
+                lock (s_Lock)
+                {
                     _pageBuster = value;
                 }
             }
@@ -45,9 +60,14 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                if (_razorBuster == null) {
-                    lock (s_Lock) {
-                        if (_razorBuster == null) {
+                Contract.Ensures(Contract.Result<IWhiteSpaceBuster>() != null);
+
+                if (_razorBuster == null)
+                {
+                    lock (s_Lock)
+                    {
+                        if (_razorBuster == null)
+                        {
                             _razorBuster = new DefaultWhiteSpaceBuster();
                         }
                     }
@@ -60,7 +80,8 @@ namespace Narvalo.Web.Optimization
             {
                 Require.Property(value);
 
-                lock (s_Lock) {
+                lock (s_Lock)
+                {
                     _razorBuster = value;
                 }
             }

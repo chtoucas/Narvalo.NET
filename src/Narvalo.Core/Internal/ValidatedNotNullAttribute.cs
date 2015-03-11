@@ -16,7 +16,7 @@ namespace Narvalo.Internal
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 #if CONTRACTS_FULL
-    // Preconditions must stay public.
+    // Preconditions must be public.
     public
 #else
     internal

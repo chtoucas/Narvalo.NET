@@ -21,11 +21,13 @@ namespace Narvalo.Web.UI.Assets
         {
             Require.NotNull(config, "config");
 
-            if (String.IsNullOrEmpty(name)) {
+            if (String.IsNullOrEmpty(name))
+            {
                 name = "RemoteAssetProvider";
             }
 
-            if (String.IsNullOrEmpty(config["description"])) {
+            if (String.IsNullOrEmpty(config["description"]))
+            {
                 config.Remove("description");
                 config.Add("description", "Narvalo remote asset provider.");
             }

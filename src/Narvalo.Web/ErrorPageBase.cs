@@ -12,7 +12,7 @@ namespace Narvalo.Web
     public abstract class ErrorPageBase : Page
     {
         /// <summary>
-        /// Initialise un nouvel objet de type <see cref="Narvalo.Web.ErrorPageBase"/>.
+        /// Initializes a new instance of the <see cref="ErrorPageBase"/> class.
         /// </summary>
         protected ErrorPageBase()
         {
@@ -20,8 +20,9 @@ namespace Narvalo.Web
         }
 
         /// <summary>
-        /// Retourne le statut de la réponse HTTP.
+        /// Gets the status of the HTTP response.
         /// </summary>
+        /// <value>The status of the HTTP response.</value>
         protected abstract HttpStatusCode StatusCode { get; }
 
         /// <summary>

@@ -23,15 +23,15 @@
     <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
     <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
     <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
-    <CodeContractsRedundantTests>False</CodeContractsRedundantTests>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
     <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
-    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
     <CodeContractsInferRequires>True</CodeContractsInferRequires>
     <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
     <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
     <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
-    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
     <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
     <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
     <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
@@ -44,7 +44,8 @@
     <CodeContractsCustomRewriterClass />
     <CodeContractsLibPaths />
     <CodeContractsExtraRewriteOptions />
-    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsExtraAnalysisOptions>
+    </CodeContractsExtraAnalysisOptions>
     <CodeContractsSQLServerOption />
     <CodeContractsBaseLineFile />
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
@@ -93,6 +94,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Assume.cs">
+      <Link>Internal\Assume.cs</Link>
+    </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -106,15 +110,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\AssetHelper.cs" />
     <Compile Include="Html\HtmlHelper%24.cs" />
-    <Compile Include="Html\HtmlHelper%24.Image.cs">
-      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Html\HtmlHelper%24.Link.cs">
-      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Html\HtmlHelper%24.Script.cs">
-      <DependentUpon>HtmlHelper%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="HttpHandlerBase.cs" />
     <Compile Include="HttpHandlerBase`2.cs" />
     <Compile Include="HttpResponse%24.Caching.cs">

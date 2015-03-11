@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public sealed class Ontology
@@ -25,26 +26,54 @@ namespace Narvalo.Web.Semantic
             _openGraph = new OpenGraphMetadata(this);
         }
 
-        public CultureInfo Culture { get { return _culture; } }
+        public CultureInfo Culture
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<CultureInfo>() != null);
+
+                return _culture;
+            }
+        }
 
         public string LanguageName
         {
-            get { return Culture.TwoLetterISOLanguageName; }
+            get
+            {
+                Contract.Ensures(Contract.Result<string>() != null);
+
+                return Culture.TwoLetterISOLanguageName;
+            }
         }
 
         public IOpenGraphMetadata OpenGraph
         {
-            get { return _openGraph; }
+            get
+            {
+                Contract.Ensures(Contract.Result<IOpenGraphMetadata>() != null);
+
+                return _openGraph;
+            }
         }
 
         public Relationships Relationships
         {
-            get { return _relationships; }
+            get
+            {
+                Contract.Ensures(Contract.Result<Relationships>() != null);
+
+                return _relationships;
+            }
         }
 
         public SchemaOrgVocabulary SchemaOrg
         {
-            get { return _schemaOrg; }
+            get
+            {
+                Contract.Ensures(Contract.Result<SchemaOrgVocabulary>() != null);
+
+                return _schemaOrg;
+            }
         }
 
         public string RobotsDirective { get { return _robotsDirective; } set { _robotsDirective = value; } }
@@ -54,5 +83,18 @@ namespace Narvalo.Web.Semantic
         public string Keywords { get { return _keywords; } set { _keywords = value; } }
 
         public string Title { get; set; }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_culture != null);
+            Contract.Invariant(_openGraph != null);
+            Contract.Invariant(_relationships != null);
+            Contract.Invariant(_schemaOrg != null);
+        }
+
+#endif
     }
 }

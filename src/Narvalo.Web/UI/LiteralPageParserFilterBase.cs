@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 // Ce code est inspiré de la classe Omari.Web.UI.WhiteSpaceCleaner.
-    
+
 namespace Narvalo.Web.UI
 {
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Web.UI;
 
     public abstract class LiteralPageParserFilterBase : UnrestrictedPageParserFilter
@@ -17,7 +18,8 @@ namespace Narvalo.Web.UI
         {
             Require.NotNull(rootBuilder, "rootBuilder");
 
-            if (Enabled) {
+            if (Enabled)
+            {
                 TransformRecursively_(rootBuilder);
             }
 
@@ -28,14 +30,19 @@ namespace Narvalo.Web.UI
 
         private void TransformRecursively_(ControlBuilder controlBuilder)
         {
+            Contract.Requires(controlBuilder != null);
+
             ArrayList subBuilders = controlBuilder.SubBuilders;
 
-            for (int i = 0; i < subBuilders.Count; i++) {
+            for (int i = 0; i < subBuilders.Count; i++)
+            {
                 var subBuilder = subBuilders[i];
 
                 var literal = subBuilder as string;
-                if (literal != null) {
-                    if (literal.Length != 0) {
+                if (literal != null)
+                {
+                    if (literal.Length != 0)
+                    {
                         subBuilders[i] = TransformLiteral(literal);
                     }
 
@@ -43,21 +50,25 @@ namespace Narvalo.Web.UI
                 }
 
                 var controlSubBuilder = subBuilder as ControlBuilder;
-                if (controlSubBuilder != null) {
+                if (controlSubBuilder != null)
+                {
                     TransformRecursively_(controlSubBuilder);
                 }
             }
 
-            foreach (TemplatePropertyEntry entry in controlBuilder.TemplatePropertyEntries) {
+            foreach (TemplatePropertyEntry entry in controlBuilder.TemplatePropertyEntries)
+            {
                 TransformRecursively_(entry.Builder);
             }
 
-            foreach (ComplexPropertyEntry entry in controlBuilder.ComplexPropertyEntries) {
+            foreach (ComplexPropertyEntry entry in controlBuilder.ComplexPropertyEntries)
+            {
                 TransformRecursively_(entry.Builder);
             }
 
             ControlBuilder defaultPropertyBuilder = controlBuilder.GetDefaultPropertyBuilder();
-            if (defaultPropertyBuilder != null) {
+            if (defaultPropertyBuilder != null)
+            {
                 TransformRecursively_(defaultPropertyBuilder);
             }
         }

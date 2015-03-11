@@ -9,29 +9,29 @@ namespace Narvalo.Web.Configuration
     public sealed class AssetSection : ConfigurationSection
     {
         public const string DefaultName = "assets";
+
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
         private static ConfigurationProperty s_DefaultProvider
             = new ConfigurationProperty(
-                "defaultProvider", 
-                typeof(String), 
+                "defaultProvider",
+                typeof(String),
                 "DefaultAssetProvider",
-               null, 
-               new StringValidator(1), 
+               null,
+               new StringValidator(1),
                ConfigurationPropertyOptions.None);
 
         private static ConfigurationProperty s_Providers
             = new ConfigurationProperty(
-                "providers", 
+                "providers",
                 typeof(ProviderSettingsCollection));
 
+        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+
         private string _defaultProvider;
-        private ProviderSettingsCollection _providers;
-
         private bool _defaultProviderSet = false;
+        private ProviderSettingsCollection _providers;
         private bool _providersSet = false;
-
-        private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public AssetSection()
         {
@@ -41,26 +41,31 @@ namespace Narvalo.Web.Configuration
 
         public string DefaultProvider
         {
-            get { 
-                return _defaultProviderSet ? _defaultProvider : (string)base[s_DefaultProvider]; 
+            get
+            {
+                return _defaultProviderSet ? _defaultProvider : (string)base[s_DefaultProvider];
             }
-            
-            set { 
-                _defaultProvider = value; 
-                _defaultProviderSet = true; 
+
+            set
+            {
+                _defaultProvider = value;
+                _defaultProviderSet = true;
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "ProviderSettingsCollection précède les classes génériques.")]
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "ProviderSettingsCollection précède les classes génériques.")]
         public ProviderSettingsCollection Providers
         {
-            get { 
+            get
+            {
                 return _providersSet ? _providers : (ProviderSettingsCollection)base[s_Providers];
             }
-            
-            set { 
-                _providers = value; 
-                _providersSet = true; 
+
+            set
+            {
+                _providers = value;
+                _providersSet = true;
             }
         }
 

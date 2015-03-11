@@ -196,6 +196,7 @@ namespace Narvalo.Fx
                 Contract.Ensures(Contract.Result<T>() != null);
 
 #if DEBUG
+                // FIXME
                 if (!_isSome)
                 {
                     throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);

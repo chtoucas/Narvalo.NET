@@ -5,6 +5,7 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Web;
 
@@ -17,11 +18,20 @@ namespace Narvalo.Web
 
         protected HttpQueryBinderBase() { }
 
-        public IEnumerable<HttpQueryBinderException> BindingErrors { get { return _errors; } }
+        public IEnumerable<HttpQueryBinderException> BindingErrors
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<IEnumerable<HttpQueryBinderException>>() != null);
+
+                return _errors;
+            }
+        }
 
         public Maybe<TQuery> Bind(HttpRequest request)
         {
             Require.NotNull(request, "request");
+            Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
 
             return from _ in BindCore(request) where Validate(_) select _;
         }
@@ -40,5 +50,15 @@ namespace Narvalo.Web
         {
             _errors.Add(exception);
         }
+
+#if CONTRACTS_FULL
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_errors != null);
+        }
+
+#endif
     }
 }

@@ -19,7 +19,8 @@ namespace Narvalo.Web.UI.Assets
         {
             Require.NotNull(provider, "provider");
 
-            if (!(provider is AssetProviderBase)) {
+            if (!(provider is AssetProviderBase))
+            {
                 throw new ArgumentException(Strings_Web.AssetProviderCollection_InvalidProvider, "provider");
             }
 

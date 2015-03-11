@@ -11,7 +11,8 @@ namespace Narvalo.GhostScript.Options
 
         public override void AddTo(ICollection<string> args)
         {
-            if (args == null) {
+            if (args == null)
+            {
                 throw new ArgumentNullException("args");
             }
 

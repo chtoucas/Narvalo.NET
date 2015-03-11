@@ -3,6 +3,7 @@
 namespace Narvalo.Web
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Net;
     using System.Web;
@@ -25,18 +26,23 @@ namespace Narvalo.Web
 
         protected void OnBindingFailure(HttpContext context, TBinder binder)
         {
+            Contract.Requires(context != null);
+
             var errors = binder.BindingErrors;
             HttpQueryBinderException exception;
 
             var errorsCount = errors.Count();
 
-            if (errorsCount > 1) {
+            if (errorsCount > 1)
+            {
                 exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
             }
-            else if (errorsCount == 1) {
+            else if (errorsCount == 1)
+            {
                 exception = errors.First();
             }
-            else {
+            else
+            {
                 exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest);
             }
 

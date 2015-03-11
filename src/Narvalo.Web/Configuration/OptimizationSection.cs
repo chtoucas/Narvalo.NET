@@ -12,13 +12,16 @@ namespace Narvalo.Web.Configuration
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
         private static ConfigurationProperty s_EnableWhiteSpaceBusting
-            = new ConfigurationProperty("enableWhiteSpaceBusting", typeof(Boolean), true, ConfigurationPropertyOptions.IsRequired);
+            = new ConfigurationProperty(
+                "enableWhiteSpaceBusting",
+                typeof(Boolean),
+                true,
+                ConfigurationPropertyOptions.IsRequired);
+
+        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         private bool _enableWhiteSpaceBusting;
-
         private bool _enableWhiteSpaceBustingSet = false;
-
-        private ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
 
         public OptimizationSection()
         {
@@ -27,12 +30,14 @@ namespace Narvalo.Web.Configuration
 
         public bool EnableWhiteSpaceBusting
         {
-            get { 
-                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[s_EnableWhiteSpaceBusting]; 
+            get
+            {
+                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[s_EnableWhiteSpaceBusting];
             }
-            
-            set { 
-                _enableWhiteSpaceBusting = value; 
+
+            set
+            {
+                _enableWhiteSpaceBusting = value;
                 _enableWhiteSpaceBustingSet = true;
             }
         }

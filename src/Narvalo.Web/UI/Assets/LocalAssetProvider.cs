@@ -4,6 +4,7 @@ namespace Narvalo.Web.UI.Assets
 {
     using System;
     using System.Collections.Specialized;
+    using System.Diagnostics.Contracts;
     using System.Web;
 
     public sealed class LocalAssetProvider : AssetProviderBase
@@ -14,11 +15,13 @@ namespace Narvalo.Web.UI.Assets
         {
             Require.NotNull(config, "config");
 
-            if (String.IsNullOrEmpty(name)) {
+            if (String.IsNullOrEmpty(name))
+            {
                 name = "LocalAssetProvider";
             }
 
-            if (String.IsNullOrEmpty(config["description"])) {
+            if (String.IsNullOrEmpty(config["description"]))
+            {
                 config.Remove("description");
                 config.Add("description", "Narvalo local asset provider.");
             }
@@ -48,11 +51,15 @@ namespace Narvalo.Web.UI.Assets
 
         private static Uri MakeUri_(string basePath, string relativePath)
         {
+            Contract.Requires(relativePath != null);
+
             return new Uri(Combine_(basePath, relativePath), UriKind.Relative);
         }
 
         private static string Combine_(string basePath, string relativePath)
         {
+            Contract.Requires(relativePath != null);
+
             return VirtualPathUtility.ToAbsolute(
                 relativePath.Length == 0 ? basePath : VirtualPathUtility.Combine(basePath, relativePath));
         }

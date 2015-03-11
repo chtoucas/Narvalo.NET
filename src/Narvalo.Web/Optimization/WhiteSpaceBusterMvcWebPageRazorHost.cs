@@ -21,7 +21,8 @@ namespace Narvalo.Web.Optimization
 
         public override RazorCodeGenerator DecorateCodeGenerator(RazorCodeGenerator incomingCodeGenerator)
         {
-            if (incomingCodeGenerator is CSharpRazorCodeGenerator) {
+            if (incomingCodeGenerator is CSharpRazorCodeGenerator)
+            {
                 return new WhiteSpaceBusterMvcCSharpRazorCodeGenerator(
                     incomingCodeGenerator.ClassName,
                     incomingCodeGenerator.RootNamespaceName,
@@ -29,7 +30,8 @@ namespace Narvalo.Web.Optimization
                     incomingCodeGenerator.Host,
                     _optimizer);
             }
-            else {
+            else
+            {
                 // NB: On ne prend pas en charge les projets VB.NET.
                 return base.DecorateCodeGenerator(incomingCodeGenerator);
             }
@@ -40,7 +42,8 @@ namespace Narvalo.Web.Optimization
             var parser = base.DecorateMarkupParser(incomingMarkupParser);
 
             // REVIEW: Peut-on plutôt utiliser parser.IsMarkupParser ?
-            if (!(parser is HtmlMarkupParser)) {
+            if (!(parser is HtmlMarkupParser))
+            {
                 return parser;
             }
 

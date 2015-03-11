@@ -51,7 +51,7 @@
     </CodeContractsExtraRewriteOptions>
     <CodeContractsExtraAnalysisOptions>-outputwarnmasks</CodeContractsExtraAnalysisOptions>
     <CodeContractsSQLServerOption />
-    <CodeContractsBaseLineFile>..\..\baseline.xml</CodeContractsBaseLineFile>
+    <CodeContractsBaseLineFile />
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
@@ -75,6 +75,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Collections\NamespaceDoc.cs" />
+    <Compile Include="ConvertTo.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetric.cs" />
