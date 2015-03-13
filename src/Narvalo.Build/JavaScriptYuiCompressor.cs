@@ -6,14 +6,18 @@ namespace Narvalo.Build
     using System.Text;
 
     /// <example>
+    /// <code>
+    /// <![CDATA[
     /// <UsingTask TaskName="Narvalo.Build.JsYuiCompressor" 
-    ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
+    ///     AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
     /// <ItemGroup>
-    ///   <JavaScriptFiles Include="$(SourceWebPhysicalPath)\Scripts\*.js" />
+    ///     <JavaScriptFiles Include="$(SourceWebPhysicalPath)\Scripts\*.js" />
     /// </ItemGroup>
     /// <Target Name="AfterBuild">
-    ///   <JsYuiCompressor Files="@(JavaScriptFiles)" />
+    ///     <JsYuiCompressor Files="@(JavaScriptFiles)" />
     /// </Target>
+    /// ]]>
+    /// </code>
     /// </example>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "Js is not an acronym.")]

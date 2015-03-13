@@ -3,13 +3,9 @@
 namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
 
-#if CONTRACTS_FULL
     [ContractClass(typeof(ICurrencyProviderContract))]
-#endif
     public interface ICurrencyProvider
     {
         /// <summary>
@@ -29,8 +25,6 @@ namespace Narvalo.Globalization
         IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
     }
 
-#if CONTRACTS_FULL
-
     [ContractClassFor(typeof(ICurrencyProvider))]
     internal abstract class ICurrencyProviderContract : ICurrencyProvider
     {
@@ -49,6 +43,4 @@ namespace Narvalo.Globalization
             return default(IEnumerable<CurrencyInfo>);
         }
     }
-
-#endif
 }

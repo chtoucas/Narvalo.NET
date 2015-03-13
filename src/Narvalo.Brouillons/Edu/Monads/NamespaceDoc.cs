@@ -2,10 +2,8 @@
 
 namespace Narvalo.Edu.Monads
 {
-#if DOCUMENTATION
-
     using System.Runtime.CompilerServices;
-    
+
     /**
      * <content markup="commonmark">
      * <![CDATA[
@@ -36,6 +34,4 @@ namespace Narvalo.Edu.Monads
      */
     [CompilerGenerated]
     internal static class NamespaceDoc { }
-
-#endif
 }

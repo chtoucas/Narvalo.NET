@@ -5,6 +5,7 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Net;
 
     using Narvalo.Fx;
     using Narvalo.Internal;
@@ -250,6 +251,15 @@ namespace Narvalo
             }
 
             TryParser<Uri> parser = (string _, out Uri result) => System.Uri.TryCreate(_, uriKind, out result);
+
+            return parser.MayInvoke(value);
+        }
+
+        public static Maybe<IPAddress> IPAddress(string value)
+        {
+            Contract.Ensures(Contract.Result<Maybe<IPAddress>>() != null);
+
+            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
 
             return parser.MayInvoke(value);
         }

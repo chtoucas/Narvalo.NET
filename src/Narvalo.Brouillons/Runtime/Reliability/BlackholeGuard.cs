@@ -4,7 +4,7 @@ namespace Narvalo.Runtime.Reliability
 {
     using System;
 
-    public class BlackholeGuard : IGuard
+    public class BlackholeGuard : ISentinel
     {
         public void Execute(Action action)
         {

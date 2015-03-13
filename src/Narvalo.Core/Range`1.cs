@@ -13,7 +13,7 @@ namespace Narvalo
         private readonly T _lowerEnd;
         private readonly T _upperEnd;
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "RequiresAtCall-!(lowerEnd.CompareTo(upperEnd) > 0)",
             Justification = "[CodeContracts] CCCheck does not seem to be able to understand a precondition in conjunction with IComparable<T>.")]
 #endif
@@ -71,6 +71,9 @@ namespace Narvalo
         }
     }
 
+    /// <content>
+    /// Implements the <c>IEquatable&lt;Range&lt;T&gt;&gt;</c> interface.
+    /// </content>
     public partial struct Range<T>
     {
         public static bool operator ==(Range<T> left, Range<T> right)

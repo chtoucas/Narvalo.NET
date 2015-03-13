@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -151,6 +152,7 @@ namespace Narvalo.Fx
         private readonly T _value;
 
         /// <summary>
+        /// Prevents a default instance of the <see cref="Maybe{T}" /> class from being created.
         /// Initializes a new instance of the <see cref="Maybe{T}" /> class that does not hold any value.
         /// </summary>
         /// <seealso cref="Maybe{T}.None"/>
@@ -232,7 +234,7 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -299,19 +301,20 @@ namespace Narvalo.Fx
             return _isSome ? _value.ToString() : "{None}";
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(IsNone == !IsSome);
             Contract.Invariant(IsNone || Value != null);
         }
-
-#endif
     }
 
-    // Implements the IEnumerable<T> interface.
+    /// <content>
+    /// Implements the <see cref="IEnumerable{T}"/> interface.
+    /// </content>
     public partial class Maybe<T>
     {
         /// <copydoc cref="IEnumerable{T}.GetEnumerator" />
@@ -338,7 +341,9 @@ namespace Narvalo.Fx
         }
     }
 
-    // Implements the IEquatable<T> and IEquatable<Maybe<T>> interfaces
+    /// <content>
+    /// Implements the <see cref="IEquatable{T}"/> and <c>IEquatable&lt;Maybe&lt;T&gt;&gt;</c> interfaces.
+    /// </content>
     public partial class Maybe<T>
     {
         /// <copydoc cref="IEquatable{T}.Equals" />
@@ -455,10 +460,12 @@ namespace Narvalo.Fx
         ////}
     }
 
-    // Monad definition
+    /// <content>
+    /// Provides the core Monad methods.
+    /// </content>
     public partial class Maybe<T>
     {
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -492,7 +499,9 @@ namespace Narvalo.Fx
         }
     }
 
-    // MonadOr definition.
+    /// <content>
+    /// Provides the core MonadOr methods.
+    /// </content>
     public partial class Maybe<T>
     {
         private static readonly Maybe<T> s_None = new Maybe<T>();
@@ -512,7 +521,7 @@ namespace Narvalo.Fx
             }
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -525,12 +534,14 @@ namespace Narvalo.Fx
         }
     }
 
-    // Custom versions of Monad extension methods (see Maybe.g.cs).
+    /// <content>
+    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
+    /// </content>
     public partial class Maybe<T>
     {
         #region Basic Monad functions
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -542,7 +553,7 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -558,7 +569,7 @@ namespace Narvalo.Fx
 
         #region Monadic lifting operators
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -579,7 +590,7 @@ namespace Narvalo.Fx
 
         #region LINQ extensions
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -609,7 +620,7 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif

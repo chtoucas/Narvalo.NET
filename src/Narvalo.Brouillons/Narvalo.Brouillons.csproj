@@ -187,7 +187,6 @@
     <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
     <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="ImageUtility.cs" />
-    <Compile Include="ParseTo.cs" />
     <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
     <Compile Include="Runtime\Reliability\Guard%24.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
@@ -221,7 +220,6 @@
     <Compile Include="Runtime\Reliability\IMonitorableGuard.cs" />
     <Compile Include="Runtime\Reliability\IReliabilityMonitor.cs" />
     <Compile Include="Runtime\Reliability\IThrottle.cs" />
-    <Compile Include="Runtime\Reliability\NoopGuard.cs" />
     <Compile Include="Runtime\Reliability\ReliabilityWrapper.cs" />
     <Compile Include="Runtime\Reliability\RequestCounter.cs" />
     <Compile Include="Runtime\Reliability\RetryGuard.cs" />

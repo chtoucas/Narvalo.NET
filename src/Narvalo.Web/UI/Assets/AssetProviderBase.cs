@@ -4,13 +4,9 @@ namespace Narvalo.Web.UI.Assets
 {
     using System;
     using System.Configuration.Provider;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
 
-#if CONTRACTS_FULL
     [ContractClass(typeof(AssetProviderBaseContract))]
-#endif
     public abstract class AssetProviderBase : ProviderBase
     {
         protected AssetProviderBase() { }
@@ -23,8 +19,6 @@ namespace Narvalo.Web.UI.Assets
 
         public abstract Uri GetStyle(string relativePath);
     }
-
-#if CONTRACTS_FULL
 
     [ContractClassFor(typeof(AssetProviderBase))]
     internal abstract class AssetProviderBaseContract : AssetProviderBase
@@ -57,6 +51,4 @@ namespace Narvalo.Web.UI.Assets
             return default(Uri);
         }
     }
-
-#endif
 }

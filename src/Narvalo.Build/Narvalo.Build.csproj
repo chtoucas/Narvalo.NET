@@ -21,7 +21,6 @@
       <Link>Internal\Narvalo.Minimal.cs</Link>
     </Compile>
     <Compile Include="ClosureCompiler.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="JavaTaskBase.cs" />
     <Compile Include="MergeFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

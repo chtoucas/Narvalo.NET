@@ -2,6 +2,8 @@
 
 namespace Narvalo.Web.Html
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
@@ -79,14 +81,13 @@ namespace Narvalo.Web.Html
             return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_htmlHelper != null);
         }
-
-#endif
     }
 }

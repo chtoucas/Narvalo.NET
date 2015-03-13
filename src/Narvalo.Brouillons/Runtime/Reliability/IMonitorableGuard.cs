@@ -2,7 +2,7 @@
 
 namespace Narvalo.Runtime.Reliability
 {
-    public interface IMonitorableGuard : IGuard
+    public interface IMonitorableGuard : ISentinel
     {
         GuardStatus Status { get; }
     }

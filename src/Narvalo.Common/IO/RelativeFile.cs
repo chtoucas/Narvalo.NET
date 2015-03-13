@@ -2,6 +2,8 @@
 
 namespace Narvalo.IO
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
 
@@ -38,15 +40,14 @@ namespace Narvalo.IO
             }
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_file != null);
             Contract.Invariant(_relativeDirectoryName != null);
         }
-
-#endif
     }
 }

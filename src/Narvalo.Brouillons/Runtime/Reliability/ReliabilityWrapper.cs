@@ -6,9 +6,9 @@ namespace Narvalo.Runtime.Reliability
 
     public class ReliabilityWrapper
     {
-        private readonly IGuard _guard;
+        private readonly ISentinel _guard;
 
-        public ReliabilityWrapper(IGuard guard)
+        public ReliabilityWrapper(ISentinel guard)
         {
             Require.NotNull(guard, "guard");
 

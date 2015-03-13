@@ -5,7 +5,7 @@ namespace Narvalo.Runtime.Reliability
     using System;
     using System.Threading;
 
-    public class ConcurrencyThrottle : IGuard, IDisposable
+    public class ConcurrencyThrottle : ISentinel, IDisposable
     {
         private readonly int _maxConcurrentRequests;
         private readonly TimeSpan _timeout;

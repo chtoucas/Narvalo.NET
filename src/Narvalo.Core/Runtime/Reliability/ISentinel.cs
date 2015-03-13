@@ -3,29 +3,21 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
 
-#if CONTRACTS_FULL
-    [ContractClass(typeof(IGuardContract))]
-#endif
-    public interface IGuard
+    [ContractClass(typeof(ISentinelContract))]
+    public interface ISentinel
     {
         // TODO: Ajouter les variantes async : Task, Begin/End, async ?
         void Execute(Action action);
     }
 
-#if CONTRACTS_FULL
-
-    [ContractClassFor(typeof(IGuard))]
-    internal abstract class IGuardContract : IGuard
+    [ContractClassFor(typeof(ISentinel))]
+    internal abstract class ISentinelContract : ISentinel
     {
-        void IGuard.Execute(Action action)
+        void ISentinel.Execute(Action action)
         {
             Contract.Requires(action != null);
         }
     }
-
-#endif
 }

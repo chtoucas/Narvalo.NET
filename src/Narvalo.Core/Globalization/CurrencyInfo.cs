@@ -4,11 +4,11 @@ namespace Narvalo.Globalization
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Linq;
 
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides information about a localized currency.
@@ -152,7 +152,7 @@ namespace Narvalo.Globalization
         public short NumericCode { get { return _numericCode; } }
 
         /// <summary>
-        /// Gets a value indicating whether the currency is no longer in use.
+        /// Gets or sets a value indicating whether the currency is no longer in use.
         /// </summary>
         /// <value><c>true</c> if the currency is no longer in use; otherwise <c>false</c>.
         /// The default is <c>false</c>.</value>
@@ -190,16 +190,15 @@ namespace Narvalo.Globalization
             return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_code != null);
             Contract.Invariant(_code.Length == 3);
             Contract.Invariant(_numericCode >= 0 && _numericCode < 1000);
         }
-
-#endif
     }
 }

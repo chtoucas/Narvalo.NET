@@ -3,7 +3,12 @@
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
   </PropertyGroup>
-  <!--<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">
-    <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
-  </PropertyGroup>-->
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
+    <!--
+    Define:
+    - CODE_ANALYSIS for Gendarme
+    - CONTRACTS_FULL to ease refactoring 
+    -->
+    <DefineConstants>$(DefineConstants);CONTRACTS_FULL</DefineConstants>
+  </PropertyGroup>
 </Project>

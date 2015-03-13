@@ -3,24 +3,18 @@
 namespace Narvalo.Web
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
     using System.Web;
 
     using Narvalo.Fx;
 
-#if CONTRACTS_FULL
     [ContractClass(typeof(IHttpQueryBinderContract<>))]
-#endif
     public interface IHttpQueryBinder<TQuery>
     {
         IEnumerable<HttpQueryBinderException> BindingErrors { get; }
 
         Maybe<TQuery> Bind(HttpRequest request);
     }
-
-#if CONTRACTS_FULL
 
     [ContractClassFor(typeof(IHttpQueryBinder<>))]
     internal abstract class IHttpQueryBinderContract<TQuery> : IHttpQueryBinder<TQuery>
@@ -42,6 +36,4 @@ namespace Narvalo.Web
             return default(Maybe<TQuery>);
         }
     }
-
-#endif
 }

@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Text;
@@ -87,16 +88,6 @@ namespace Narvalo.Web.Optimization
             span.ReplaceWith(builder);
         }
 
-#if CONTRACTS_FULL
-
-        [ContractInvariantMethod]
-        private void ObjectInvariants()
-        {
-            Contract.Invariant(_buster != null);
-        }
-
-#endif
-
         private static bool IsMarkup_(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
@@ -140,6 +131,15 @@ namespace Narvalo.Web.Optimization
             }
 
             return sb.ToString();
+        }
+
+        [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_buster != null);
         }
 
         private string BustWhiteSpaces_(string content)

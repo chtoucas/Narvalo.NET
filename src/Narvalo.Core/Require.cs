@@ -5,7 +5,6 @@ namespace Narvalo
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using System.Reflection;
 
     using Narvalo.Internal;
 
@@ -27,6 +26,7 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
+        [Obsolete]
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
         {
@@ -49,6 +49,7 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
+        [Obsolete]
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
@@ -78,18 +79,19 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw ExceptionFactory.ArgumentNull(parameterName);
+                throw NewArgumentNullException_(parameterName);
             }
 
             Contract.EndContractBlock();
         }
 
+        [Obsolete]
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
             if (value == null)
             {
-                throw ExceptionFactory.ArgumentNull(parameterName);
+                throw NewArgumentNullException_(parameterName);
             }
 
             Contract.EndContractBlock();
@@ -122,22 +124,22 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Check that an argument is in a given range of integers.
+        /// Checks that an argument is in a given range of integers.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
-        /// <param name="minValue"></param>
-        /// <param name="maxValue"></param>
-        /// <param name="parameterName"></param>
+        /// <param name="minInclusive"></param>
+        /// <param name="maxInclusive"></param>
+        /// <param name="parameterName">The name of the parameter that caused the exception.</param>
         [ContractArgumentValidator]
-        public static void InRange(int value, int minValue, int maxValue, string parameterName)
+        public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
-            if (value < minValue || value > maxValue)
+            if (value < minInclusive || value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, minValue, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -148,18 +150,41 @@ namespace Narvalo
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
-        /// <param name="minValue"></param>
-        /// <param name="maxValue"></param>
-        /// <param name="parameterName"></param>
+        /// <param name="minInclusive"></param>
+        /// <param name="maxInclusive"></param>
+        /// <param name="parameterName">The name of the parameter that caused the exception.</param>
         [ContractArgumentValidator]
-        public static void InRange(long value, long minValue, long maxValue, string parameterName)
+        public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
-            if (value < minValue || value > maxValue)
+            if (value < minInclusive || value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, minValue, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, minInclusive, maxInclusive));
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Check that an argument is in a given range.
+        /// </summary>
+        /// <remarks>Range borders are included in the comparison.</remarks>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="minInclusive"></param>
+        /// <param name="maxInclusive"></param>
+        /// <param name="parameterName">The name of the parameter that caused the exception.</param>
+        [ContractArgumentValidator]
+        public static void InRange<T>(T value, T minInclusive, T maxInclusive, string parameterName) where T : IComparable<T>
+        {
+            if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    parameterName,
+                    value,
+                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -172,7 +197,7 @@ namespace Narvalo
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <param name="range"></param>
-        /// <param name="parameterName"></param>
+        /// <param name="parameterName">The name of the parameter that caused the exception.</param>
         [ContractArgumentValidator]
         public static void InRange<T>(T value, Range<T> range, string parameterName)
             where T : struct, IComparable<T>, IEquatable<T>
@@ -189,99 +214,108 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
-        public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(int value, int minInclusive, string parameterName)
         {
-            if (value < minValue)
+            if (value < minInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minInclusive));
             }
 
             Contract.EndContractBlock();
         }
 
         [ContractArgumentValidator]
-        public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(long value, long minInclusive, string parameterName)
         {
-            if (value < minValue)
+            if (value < minInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minInclusive));
             }
 
             Contract.EndContractBlock();
         }
 
         [ContractArgumentValidator]
-        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
+        public static void GreaterThanOrEqualTo<T>(T value, T minInclusive, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)
             {
-                throw ExceptionFactory.ArgumentNull("value");
+                throw NewArgumentNullException_("value");
             }
 
-            if (value.CompareTo(minValue) < 0)
+            if (value.CompareTo(minInclusive) < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, minInclusive));
             }
 
             Contract.EndContractBlock();
         }
 
         [ContractArgumentValidator]
-        public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
+        public static void LessThanOrEqualTo(int value, int maxInclusive, string parameterName)
         {
-            if (value > maxValue)
+            if (value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxInclusive));
             }
 
             Contract.EndContractBlock();
         }
 
         [ContractArgumentValidator]
-        public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
+        public static void LessThanOrEqualTo(long value, long maxInclusive, string parameterName)
         {
-            if (value > maxValue)
+            if (value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxInclusive));
             }
 
             Contract.EndContractBlock();
         }
 
         [ContractArgumentValidator]
-        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
+        public static void LessThanOrEqualTo<T>(T value, T maxInclusive, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)
             {
-                throw ExceptionFactory.ArgumentNull("value");
+                throw NewArgumentNullException_("value");
             }
 
-            if (value.CompareTo(maxValue) > 0)
+            if (value.CompareTo(maxInclusive) > 0)
             {
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, maxInclusive));
             }
 
             Contract.EndContractBlock();
+        }
+
+        private static ArgumentNullException NewArgumentNullException_(string parameterName)
+        {
+            Contract.Requires(parameterName != null);
+
+            return new ArgumentNullException(
+                parameterName,
+                Format.CurrentCulture(Strings_Core.ExceptionFactory_ArgumentNullFormat, parameterName));
         }
     }
 }

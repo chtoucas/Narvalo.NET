@@ -8,6 +8,14 @@ namespace Narvalo.Collections
 
     using Narvalo.Fx;
 
+    /// <summary>
+    /// Provides extension methods for <c>IEnumerable&lt;Maybe&lt;T&gt;&gt;</c>.
+    /// </summary>
+    public static partial class EnumerableMaybeExtensions { }
+
+    /// <content>
+    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
+    /// </content>
     public static partial class EnumerableMaybeExtensions
     {
         // Custom version of CollectCore.

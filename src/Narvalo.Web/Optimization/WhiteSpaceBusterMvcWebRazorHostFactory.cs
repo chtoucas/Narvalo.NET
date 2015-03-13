@@ -13,7 +13,7 @@ namespace Narvalo.Web.Optimization
     public sealed class WhiteSpaceBusterMvcWebRazorHostFactory : MvcWebRazorHostFactory
     {
         /// <summary>
-        /// Initialise un nouvel objet de type <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterMvcWebRazorHostFactory"/>.
+        /// Initializes a new instance of the <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterMvcWebRazorHostFactory"/> class.
         /// </summary>
         public WhiteSpaceBusterMvcWebRazorHostFactory() { }
 

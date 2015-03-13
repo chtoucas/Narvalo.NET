@@ -6,7 +6,7 @@ namespace Narvalo.Runtime.Reliability
     using System.Collections.Generic;
     using System.Threading;
 
-    public class RetryGuard : IGuard
+    public class RetryGuard : ISentinel
     {
         private readonly RetryPolicy _policy;
 

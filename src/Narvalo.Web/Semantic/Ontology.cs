@@ -3,6 +3,8 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -84,9 +86,10 @@ namespace Narvalo.Web.Semantic
 
         public string Title { get; set; }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_culture != null);
@@ -94,7 +97,5 @@ namespace Narvalo.Web.Semantic
             Contract.Invariant(_relationships != null);
             Contract.Invariant(_schemaOrg != null);
         }
-
-#endif
     }
 }

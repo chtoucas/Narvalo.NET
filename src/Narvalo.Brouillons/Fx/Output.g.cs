@@ -40,7 +40,7 @@ namespace Narvalo.Fx
     /// Provides a set of static and extension methods for <see cref="Output{T}" />.
     /// </summary>
     /// <remarks>
-    /// Sometimes we prefer extension to static methods to be able to locally override them.
+    /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -186,7 +186,9 @@ namespace Narvalo.Fx
         #endregion
     } // End of the class Output.
 
-    // Provides core Monad extension methods.
+    /// <content>
+    /// Provides core Monad extension methods.
+    /// </content>
     public static partial class Output
     {
         #region Basic Monad functions (Prelude)

@@ -4,7 +4,7 @@ namespace Narvalo.Runtime.Reliability
 {
     using System;
 
-    public class RequestCounter : IGuard, IReliabilityMonitor
+    public class RequestCounter : ISentinel, IReliabilityMonitor
     {
         private long _failureCount = 0;
         private long _requestCount = 0;

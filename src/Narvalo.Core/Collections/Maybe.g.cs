@@ -253,9 +253,6 @@ namespace Narvalo.Collections.Internal
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
-#if !CONTRACTS_FULL
-    using System.Runtime.CompilerServices;
-#endif
 
     using global::Narvalo;
     using Narvalo.Fx;
@@ -267,8 +264,6 @@ namespace Narvalo.Collections.Internal
     internal static partial class EnumerableMaybeExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
@@ -290,8 +285,6 @@ namespace Narvalo.Collections.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "This method has been localy overriden.")]
         internal static Maybe<TSource> SumCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
         {
@@ -309,25 +302,24 @@ namespace Narvalo.Collections.Internal
         /// </summary>
         [DebuggerHidden]
 #if !CONTRACTS_FULL
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
         private static T AssumeNotNull_<T>(this T @this) where T : class
         {
-#if CONTRACTS_FULL
             Contract.Ensures(Contract.Result<T>() == @this);
             Contract.Ensures(Contract.Result<T>() != null);
             Contract.Assume(@this != null);
-#endif
 
             return @this;
         }
     } // End of the class EnumerableMaybeExtensions.
 
+    /// <content>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// </content>
     internal static partial class EnumerableMaybeExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -342,8 +334,6 @@ namespace Narvalo.Collections.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -373,8 +363,6 @@ namespace Narvalo.Collections.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "This method has been localy overriden.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -397,8 +385,6 @@ namespace Narvalo.Collections.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "This method has been localy overriden.")]
         internal static Maybe<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -418,8 +404,6 @@ namespace Narvalo.Collections.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -441,8 +425,6 @@ namespace Narvalo.Collections.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "This method has been localy overriden.")]
         internal static Maybe<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -457,8 +439,6 @@ namespace Narvalo.Collections.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -485,8 +465,6 @@ namespace Narvalo.Collections.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "This method has been localy overriden.")]
         internal static Maybe<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM)
@@ -500,8 +478,6 @@ namespace Narvalo.Collections.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
@@ -526,8 +502,6 @@ namespace Narvalo.Collections.Internal
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "This method has been localy overriden.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "This method has been localy overriden.")]
         internal static Maybe<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,

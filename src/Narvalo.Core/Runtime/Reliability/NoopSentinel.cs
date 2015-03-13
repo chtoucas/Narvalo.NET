@@ -4,7 +4,7 @@ namespace Narvalo.Runtime.Reliability
 {
     using System;
 
-    public class NoopGuard : IGuard
+    public class NoopSentinel : ISentinel
     {
         public void Execute(Action action)
         {

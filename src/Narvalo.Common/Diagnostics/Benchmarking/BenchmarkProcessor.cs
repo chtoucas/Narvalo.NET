@@ -4,6 +4,8 @@ namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
@@ -18,12 +20,12 @@ namespace Narvalo.Diagnostics.Benchmarking
         private BindingFlags _discoveryBindings = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the default timer.
+        /// Initializes a new instance of the <see cref="BenchmarkProcessor"/> class with the default timer.
         /// </summary>
         public BenchmarkProcessor() : this(new BenchmarkTimer()) { }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="BenchmarkProcessor"/> with the specified timer.
+        /// Initializes a new instance of the <see cref="BenchmarkProcessor"/> class with the specified timer.
         /// </summary>
         /// <param name="timer">The timer for measuring time intervals.</param>
         public BenchmarkProcessor(IBenchmarkTimer timer)
@@ -122,14 +124,13 @@ namespace Narvalo.Diagnostics.Benchmarking
             }
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_runner != null);
         }
-
-#endif
     }
 }

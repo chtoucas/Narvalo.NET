@@ -5,6 +5,9 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
+    /// <summary>
+    /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.
+    /// </summary>
     public static partial class Maybe
     {
         public static Maybe<T> Create<T>(T? value) where T : struct
@@ -15,7 +18,9 @@ namespace Narvalo.Fx
         }
     }
 
-    // Extension methods for Maybe<T>.
+    /// <content>
+    /// Provides extension methods for <see cref="Maybe{T}"/> where <c>T</c> is a struct.
+    /// </content>
     public static partial class Maybe
     {
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct

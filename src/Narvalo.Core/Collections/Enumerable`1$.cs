@@ -140,7 +140,10 @@ namespace Narvalo.Collections
         #endregion
     }
 
-    // Extensions using monadic classes.
+    /// <content>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that
+    /// depend on monadic classes from Narvalo.Fx.
+    /// </content>
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
@@ -236,7 +239,9 @@ namespace Narvalo.Collections
         #endregion
     }
 
-    // Overriden extension methods.
+    /// <content>
+    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
+    /// </content>
     public static partial class EnumerableExtensions
     {
         // Custom version of FilterCore with Maybe<T>.

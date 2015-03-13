@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
@@ -69,14 +70,13 @@ namespace Narvalo.Fx
             return _isError ? _exceptionInfo.ToString() : "{Void}";
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(!_isError || _exceptionInfo != null);
         }
-
-#endif
     }
 }

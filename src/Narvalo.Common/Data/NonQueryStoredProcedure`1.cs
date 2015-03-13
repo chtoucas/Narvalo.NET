@@ -5,14 +5,13 @@ namespace Narvalo.Data
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
 
-#if CONTRACTS_FULL
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
-#endif
     public abstract class NonQueryStoredProcedure<TParameters>
     {
         private readonly string _connectionString;
@@ -108,9 +107,10 @@ namespace Narvalo.Data
             return new SqlConnection(ConnectionString);
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_connectionString != null);
@@ -118,11 +118,7 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
-
-#endif
     }
-
-#if CONTRACTS_FULL
 
     [ContractClassFor(typeof(NonQueryStoredProcedure<>))]
     internal abstract class NonQueryStoredProcedureContract<TResult> : NonQueryStoredProcedure<TResult>
@@ -136,6 +132,4 @@ namespace Narvalo.Data
             Contract.Requires(values != null);
         }
     }
-
-#endif
 }

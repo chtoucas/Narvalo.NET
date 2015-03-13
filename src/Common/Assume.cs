@@ -3,11 +3,8 @@
 namespace Narvalo.Internal
 {
     using System.Diagnostics;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#else
     using System.Runtime.CompilerServices;
-#endif
 
     /// <summary>
     /// Provides helper methods to instruct the code analysis tools
@@ -35,11 +32,9 @@ namespace Narvalo.Internal
 #endif
         public static T AssumeNotNull<T>(this T @this) where T : class
         {
-#if CONTRACTS_FULL
             Contract.Ensures(Contract.Result<T>() == @this);
             Contract.Ensures(Contract.Result<T>() != null);
             Contract.Assume(@this != null);
-#endif
 
             return @this;
         }

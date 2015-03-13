@@ -2,8 +2,6 @@
 
 namespace Narvalo.Diagnostics.Benchmarking
 {
-#if DOCUMENTATION
-
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -20,6 +18,4 @@ namespace Narvalo.Diagnostics.Benchmarking
     /// <seealso href="http://www.hanselman.com/blog/ProperBenchmarkingToDiagnoseAndSolveANETSerializationBottleneck.aspx"/>
     [CompilerGenerated]
     internal static class NamespaceDoc { }
-
-#endif
 }

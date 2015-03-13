@@ -3,6 +3,7 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -96,9 +97,10 @@ namespace Narvalo.Diagnostics.Benchmarking
             get { return (double)Duration.Ticks / Iterations; }
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_categoryName != null && _categoryName.Length != 0);
@@ -106,14 +108,14 @@ namespace Narvalo.Diagnostics.Benchmarking
             Contract.Invariant(_iterations > 0);
             Contract.Invariant(_duration.Ticks > 0L);
         }
-
-#endif
     }
 
-    // Implements the IFormattable interface.
-    // https://msdn.microsoft.com/en-us/library/26etazsy.aspx
+    /// <content>
+    /// Implements the <see cref="IFormattable"/> interface.
+    /// </content>
     public partial struct BenchmarkMetric
     {
+        // https://msdn.microsoft.com/en-us/library/26etazsy.aspx
         public override string ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
@@ -122,7 +124,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                 + " call/s; " + Name;
         }
 
-#if !NO_CCCHECK_SUPPRESSIONS
+#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-18-0",
             Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
 #endif
@@ -175,7 +177,9 @@ namespace Narvalo.Diagnostics.Benchmarking
         }
     }
 
-    // Implements the IEquatable<BenchmarkMetric> interface.
+    /// <content>
+    /// Implements the <see cref="IEquatable{BenchmarkMetric}"/> interface.
+    /// </content>
     public partial struct BenchmarkMetric
     {
         public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)

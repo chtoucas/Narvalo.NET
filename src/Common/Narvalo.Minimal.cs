@@ -31,33 +31,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
-        {
-            if (@this == null)
-            {
-                throw new ArgumentNullException("this", "The object 'this' is null.");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value", "The property value is null.");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
         {
             if (value == null)
             {
@@ -86,19 +60,6 @@ namespace Narvalo
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
-        {
-            if (value == null)
-            {
-                throw ExceptionFactory.ArgumentNull(parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
         {
             if (value == null)
             {
@@ -141,15 +102,15 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void InRange(int value, int minValue, int maxValue, string parameterName)
+        public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
-            if (value < minValue || value > maxValue)
+            if (value < minInclusive || value > maxInclusive)
             {
                 var message =
                     "The value is not in range ["
-                    + minValue.ToString(CultureInfo.CurrentCulture)
+                    + minInclusive.ToString(CultureInfo.CurrentCulture)
                     + ", "
-                    + maxValue.ToString(CultureInfo.CurrentCulture)
+                    + maxInclusive.ToString(CultureInfo.CurrentCulture)
                     + "].";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
@@ -160,15 +121,15 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void InRange(long value, long minValue, long maxValue, string parameterName)
+        public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
-            if (value < minValue || value > maxValue)
+            if (value < minInclusive || value > maxInclusive)
             {
                 var message =
                     "The value is not in range ["
-                    + minValue.ToString(CultureInfo.CurrentCulture)
+                    + minInclusive.ToString(CultureInfo.CurrentCulture)
                     + ", "
-                    + maxValue.ToString(CultureInfo.CurrentCulture)
+                    + maxInclusive.ToString(CultureInfo.CurrentCulture)
                     + "].";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
@@ -179,13 +140,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(int value, int minInclusive, string parameterName)
         {
-            if (value < minValue)
+            if (value < minInclusive)
             {
                 var message =
                     "The value is not greater than or equal to "
-                    + minValue.ToString(CultureInfo.CurrentCulture) + ".";
+                    + minInclusive.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -195,13 +156,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
+        public static void GreaterThanOrEqualTo(long value, long minInclusive, string parameterName)
         {
-            if (value < minValue)
+            if (value < minInclusive)
             {
                 var message =
                     "The value is not greater than or equal to "
-                    + minValue.ToString(CultureInfo.CurrentCulture) + ".";
+                    + minInclusive.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -211,7 +172,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
+        public static void GreaterThanOrEqualTo<T>(T value, T minInclusive, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)
@@ -219,9 +180,9 @@ namespace Narvalo
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(minValue) < 0)
+            if (value.CompareTo(minInclusive) < 0)
             {
-                var message = "The value is not greater than or equal to " + minValue.ToString() + ".";
+                var message = "The value is not greater than or equal to " + minInclusive.ToString() + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -231,13 +192,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
+        public static void LessThanOrEqualTo(int value, int maxInclusive, string parameterName)
         {
-            if (value > maxValue)
+            if (value > maxInclusive)
             {
                 var message =
                     "The value is not less than or equal to "
-                    + maxValue.ToString(CultureInfo.CurrentCulture) + ".";
+                    + maxInclusive.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -247,13 +208,13 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
+        public static void LessThanOrEqualTo(long value, long maxInclusive, string parameterName)
         {
-            if (value > maxValue)
+            if (value > maxInclusive)
             {
                 var message =
                     "The value is not less than or equal to "
-                    + maxValue.ToString(CultureInfo.CurrentCulture) + ".";
+                    + maxInclusive.ToString(CultureInfo.CurrentCulture) + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
 
@@ -263,7 +224,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
+        public static void LessThanOrEqualTo<T>(T value, T maxInclusive, string parameterName)
             where T : IComparable<T>
         {
             if (value == null)
@@ -271,22 +232,59 @@ namespace Narvalo
                 throw ExceptionFactory.ArgumentNull("value");
             }
 
-            if (value.CompareTo(maxValue) > 0)
+            if (value.CompareTo(maxInclusive) > 0)
             {
-                var message = "The value is not less than or equal to " + maxValue.ToString() + ".";
+                var message = "The value is not less than or equal to " + maxInclusive.ToString() + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [Obsolete]
+        [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
+        {
+            if (@this == null)
+            {
+                throw new ArgumentNullException("this", "The object 'this' is null.");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [Obsolete]
+        [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value", "The property value is null.");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [Obsolete]
+        [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Helper method shared among projects.")]
+        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
+        {
+            if (value == null)
+            {
+                throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
             Contract.EndContractBlock();
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-#if CONTRACTS_FULL
-        public
-#else
-        internal
-#endif
- sealed class ValidatedNotNullAttribute : Attribute { }
+        public sealed class ValidatedNotNullAttribute : Attribute { }
 
         private static class ExceptionFactory
         {

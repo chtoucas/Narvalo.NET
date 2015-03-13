@@ -13,10 +13,10 @@ namespace Narvalo.Internal
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
     [SuppressMessage("Gendarme.Rules.Performance", "AvoidUninstantiatedInternalClassesRule",
-        Justification = "This method is only used by the Code Analysis tools.")]
+        Justification = "This method is used by the Code Analysis tools.")]
 #if CONTRACTS_FULL
-    // When performing Static Contracts checking, this attribute MUST remain public.
-    // This will silence the CC1038 error.
+    // This attribute is only used by the Require class. When performing Static Contracts checking, 
+    // this attribute MUST remain public. This should silence the CC1038 error.
     public
 #else
     internal

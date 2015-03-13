@@ -2,12 +2,8 @@
 
 namespace Narvalo.Configuration
 {
-#if DOCUMENTATION
-
     using System.Runtime.CompilerServices;
 
     [CompilerGenerated]
     internal static class NamespaceDoc { }
-
-#endif
 }

@@ -2,7 +2,7 @@
 
 namespace Narvalo.Runtime.Reliability
 {
-    public interface IBarrier : IGuard
+    public interface IBarrier : ISentinel
     {
         bool CanExecute { get; }
     }

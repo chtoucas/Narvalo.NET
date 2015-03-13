@@ -2,8 +2,6 @@
 
 namespace Narvalo.Fx
 {
-#if DOCUMENTATION
-
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -11,6 +9,4 @@ namespace Narvalo.Fx
     /// </summary>
     [CompilerGenerated]
     internal static class NamespaceDoc { }
-
-#endif
 }

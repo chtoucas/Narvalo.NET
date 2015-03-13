@@ -4,14 +4,13 @@ namespace Narvalo.Data
 {
     using System.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
 
-#if CONTRACTS_FULL
     [ContractClass(typeof(StoredProcedureContract<>))]
-#endif
     public abstract class StoredProcedure<TResult>
     {
         private readonly string _connectionString;
@@ -123,9 +122,10 @@ namespace Narvalo.Data
             return command.ExecuteReader(CommandBehavior);
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_connectionString != null);
@@ -133,11 +133,7 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
-
-#endif
     }
-
-#if CONTRACTS_FULL
 
     [ContractClassFor(typeof(StoredProcedure<>))]
     internal abstract class StoredProcedureContract<TResult> : StoredProcedure<TResult>
@@ -157,6 +153,4 @@ namespace Narvalo.Data
             Contract.Requires(parameters != null);
         }
     }
-
-#endif
 }

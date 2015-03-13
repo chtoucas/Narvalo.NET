@@ -3,6 +3,7 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
@@ -126,16 +127,15 @@ namespace Narvalo.Diagnostics.Benchmarking
             return iterations;
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_timer != null);
             Contract.Invariant(_testDuration.Ticks > 0L);
             Contract.Invariant(_warmUpDuration.Ticks > 0L);
         }
-
-#endif
     }
 }

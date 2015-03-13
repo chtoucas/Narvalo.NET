@@ -7,25 +7,25 @@ namespace Narvalo.Runtime.Reliability
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public class GuardChain : IGuard
+    public class GuardChain : ISentinel
     {
         ////readonly Lazy<int> _multiplicityThunk;
-        private readonly IEnumerable<IGuard> _guards;
-        private readonly Lazy<IReadOnlyCollection<IGuard>> _guardsThunk;
+        private readonly IEnumerable<ISentinel> _guards;
+        private readonly Lazy<IReadOnlyCollection<ISentinel>> _guardsThunk;
 
-        public GuardChain(IEnumerable<IGuard> guards)
+        public GuardChain(IEnumerable<ISentinel> guards)
         {
             Require.NotNull(guards, "guards");
 
             _guards = guards;
-            _guardsThunk = new Lazy<IReadOnlyCollection<IGuard>>(
-                () => new ReadOnlyCollection<IGuard>(_guards.ToList()));
+            _guardsThunk = new Lazy<IReadOnlyCollection<ISentinel>>(
+                () => new ReadOnlyCollection<ISentinel>(_guards.ToList()));
 
             ////_multiplicityThunk
             ////    = new Lazy<int>(() => _guards.Aggregate(1 /* seed */, (a, g) => { return a * g.Multiplicity; }));
         }
 
-        public IReadOnlyCollection<IGuard> Guards
+        public IReadOnlyCollection<ISentinel> Guards
         {
             get { return _guardsThunk.Value; }
         }

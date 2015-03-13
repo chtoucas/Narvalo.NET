@@ -3,6 +3,8 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web.Razor.Parser;
     using System.Web.Razor.Parser.SyntaxTree;
@@ -51,15 +53,14 @@ namespace Narvalo.Web.Optimization
             _inner.ParseSection(nestingSequences, caseSensitive);
         }
 
-#if CONTRACTS_FULL
-
         [ContractInvariantMethod]
+        [Conditional("CONTRACTS_FULL")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_inner != null);
             Contract.Invariant(_optimizer != null);
         }
-
-#endif
     }
 }

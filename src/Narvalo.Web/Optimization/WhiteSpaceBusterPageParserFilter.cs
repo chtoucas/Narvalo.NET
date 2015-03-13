@@ -26,7 +26,7 @@ namespace Narvalo.Web.Optimization
         private IWhiteSpaceBuster _buster;
 
         /// <summary>
-        /// Initialise un nouvel objet de type <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterPageParserFilter"/>.
+        /// Initializes a new instance of the <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterPageParserFilter"/> class.
         /// </summary>
         public WhiteSpaceBusterPageParserFilter() { }
 

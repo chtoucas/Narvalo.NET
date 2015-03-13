@@ -9,21 +9,21 @@ namespace Narvalo.Runtime.Reliability
     public class GuardChainBuilder
     {
         private bool _closed = false;
-        private IList<IGuard> _guards = new List<IGuard>();
+        private IList<ISentinel> _guards = new List<ISentinel>();
 
-        public GuardChainBuilder(IGuard guard)
+        public GuardChainBuilder(ISentinel guard)
         {
             Require.NotNull(guard, "guard");
 
             Add(guard);
         }
 
-        public IReadOnlyCollection<IGuard> Guards
+        public IReadOnlyCollection<ISentinel> Guards
         {
-            get { return new ReadOnlyCollection<IGuard>(_guards); }
+            get { return new ReadOnlyCollection<ISentinel>(_guards); }
         }
 
-        public void Add(IGuard guard)
+        public void Add(ISentinel guard)
         {
             ThrowIfClosed();
 
@@ -36,7 +36,7 @@ namespace Narvalo.Runtime.Reliability
             _guards.Add(guard);
         }
 
-        public void Add(IEnumerable<IGuard> guards)
+        public void Add(IEnumerable<ISentinel> guards)
         {
             ThrowIfClosed();
 
@@ -54,13 +54,13 @@ namespace Narvalo.Runtime.Reliability
             return new GuardChain(_guards);
         }
 
-        public GuardChain Build(IGuard guard)
+        public GuardChain Build(ISentinel guard)
         {
             Close(guard);
             return Build();
         }
 
-        public void Close(IGuard guard)
+        public void Close(ISentinel guard)
         {
             ThrowIfClosed();
 

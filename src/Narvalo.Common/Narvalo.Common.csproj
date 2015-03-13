@@ -74,6 +74,7 @@
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkProcessor.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
+    <Compile Include="ParseTo.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Strings_Common.Designer.cs">
