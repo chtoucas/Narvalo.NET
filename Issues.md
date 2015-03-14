@@ -16,19 +16,38 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-**Objectives: Small improvements to SA, CA and the MSBuild infrastructure**
-
-Code Analysis and Source Analysis:
-- Improvement: Wrap all SuppressMessage that are not really justified either
+**WIP**    
+- Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
+- CC, review and understand all the NO_CCCHECK_SUPPRESSIONS
+  Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
+- Remove the use of HasFlag
+- Check libraries with SecAnnotate (AllowPartiallyTrustedCallers). 
+  Do not run SecAnnotate on test libraries? See permcalc.
+- Reduce the number of #ifdef -> Should we always define CONTRACTS_FULL
+  Output<T> and Maybe<T> remove DEBUG
+  to ease refactoring? See Narvalo.Core.props.
+- Fix the ContractInvariantMethod warning with CA. See BenchmarkTimer.
+- Review the AggressiveInlining
+- Reduce the number of SuppressMesage.
+  Wrap all SuppressMessage that are not really justified either
   by a `!NO_GLOBAL_SUPPRESSIONS` or by a `!NO_HACK`. Tag with [GeneratedCode] those
   related to generated code...
-- Improvement: Remove the local CA & SA overrides. Fix any remaining CA and
-  SA warnings and errors.
-- Bug: Some assemblies raise a CA warning on string resources supposably not used.
-- Bug: We use [module: SuppressMessage(...)] to suppress some CA or SA warnings
+  We use [module: SuppressMessage(...)] to suppress some CA or SA warnings
   but this does not work as expected when used in an assembly info file:
   it suppresses the warning for the whole assembly. We should further
   review all cases where we do such a thing (T4 files).
+- Create custom FxCop rules: 
+  * private readonly static must start with s_
+  * private const must be uppercase
+  * private fields must start with underscore
+  * do not create a Maybe<T> where T is struct
+
+**Objectives: Small improvements to SA, CA and the MSBuild infrastructure**
+
+Code Analysis and Source Analysis:
+- Improvement: Remove the local CA & SA overrides. Fix any remaining CA and
+  SA warnings and errors.
+- Bug: Some assemblies raise a CA warning on string resources supposably not used.
 - Improvement: Make unnecessary to add StyleCop settings to each project.
   Review StyleCop settings, StyleCop cache & ability to change settings used.
   Review all project files for ExcludeFromSyleCop directives.
@@ -46,7 +65,6 @@ F#
 - Finding previous version of packages seems incorrect and deleting fails sometimes?
 
 Miscs:
-- Bugfix: CC & Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
 - Improvement: Complete Guidelines.
   * Explain NuGet package versioning (retail or not). More details on the effect
     of using Retail=true.
@@ -55,8 +73,6 @@ Miscs:
   * Document compiler conditional symbols in use.
 - Improvement: Review and fill assembly and NuGet spec.
 - Sign F# assemblies.
-- Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
-- Handcode HasFlag
 
 
 Not yet planned
@@ -166,9 +182,7 @@ At this point we should have a first useful release for the core assemblies.
 
 ### Secure core assemblies.
 
-- Bug: The SecAnnotate output file does not seem to be created.
-- Improvement: Finish SecAnnotate. Requires to fully understand
-  the security model of .NET (CAS, APTCA).
+- Improvement: Finish SecAnnotate.
 - Improvement: Make sure a build fails when SecAnnotate does too.
 - Enhancement: Implements security attributes, for instance:
 ```
@@ -184,8 +198,6 @@ At this point we should have a first useful release for the core assemblies.
 
 ### Optimize core assemblies.
 
-- Bug: Narvalo.Benchmarking is broken.
-- Improvement: Move Narvalo.Benchmarking to the solution Miscs.
 
 ### Narvalo.Mvp (en vrac)
 

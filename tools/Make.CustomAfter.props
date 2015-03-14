@@ -64,7 +64,9 @@
     <!-- Code Contracts background checking is not available in terminal. -->
     <CodeContractsRunInBackground>false</CodeContractsRunInBackground>
 
-    <!-- Original documentation file (before the Code Contracts transformation). -->
+    <!-- Original documentation file (before the Code Contracts transformation). 
+         NB: This is not something that you can change. Only defined to make
+         things clearer. -->
     <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>
   </PropertyGroup>
 

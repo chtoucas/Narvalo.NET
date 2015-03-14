@@ -2,9 +2,9 @@
 <# 
     InitializeOr();
 
-    BindReturnsSome = true;
-    UnitReturnsSome = true;
-    MultiplicationReturnsSome = true;
+    BindEnsuresSome = true;
+    UnitEnsuresSome = true;
+    MultiplicationEnsuresSome = true;
 
     ReturnName = "Create";
 #>

@@ -77,7 +77,9 @@ namespace Narvalo.Fx
      * ### Maybe<T> vs Nullable<T> ###
      * 
      * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
-     * use of the `Maybe<T>` when a nullable would make a better fit, I should create a FxCop rule.
+     * use of the `Maybe<T>` when a nullable would make a better fit.
+     * We can not enforce this rule with a generic constraint. For instance, this would prevent us
+     * from being able to use `Maybe<Unit>`.
      * 
      * Constructor
      * -----------

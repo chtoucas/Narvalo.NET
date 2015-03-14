@@ -78,7 +78,8 @@
   
   <!-- PEVerify target. -->
   <Target Name="PEVerify">
-    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. -->
+    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. 
+         The projects must have imported Narvalo.Common.targets. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"
@@ -88,7 +89,8 @@
 
   <!-- SecAnnotate target. -->
   <Target Name="SecAnnotate">
-    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target. -->
+    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target. 
+         The projects must have imported Narvalo.Common.targets. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
              BuildInParallel="$(BuildInParallel)"

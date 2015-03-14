@@ -1,18 +1,20 @@
 ﻿<#@ template debug="true" hostspecific="true" #>
 <#@ output extension=".g.cs" #><#+
 
-    // NB: Documentation is almost blindly copied from Haskell.
-
     // TODO:
     // Protect the various property's setters.
 
     // The following is going to change:
+    // Some documentation is almost blindly copied from Haskell.
     // If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
     // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
-
+    
     /* ========================================================================================== *
      * Fields
      * ========================================================================================== */
+     
+    // We use four spaces (no tabs) for indentation.
+    private const string INDENT = "    ";
 
     private bool _initialized = false;
     private bool _headerWritten = false;
@@ -23,6 +25,8 @@
     
     private bool _isNullable = true;
     private bool _preferLinqDialect = true;
+    private bool _hasUnderlyingTypeConstraint = false;
+    private string _underlyingTypeConstraint = String.Empty;
 
     private string _plusName = "Plus";
     private string _returnName = "Return";
@@ -112,55 +116,74 @@
             _name = value;
         }
     }
+
+    #region Postconditions.
     
     // Gets or sets a value indicating whether Monad<T>.Bind() ensures a non-null return value. Default to false.
-    protected bool BindReturnsSome { get; set; }
+    protected bool BindEnsuresSome { get; set; }
     
     // Gets or sets a value indicating whether Monad<T>.η() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Return() being just the public alias of Monad<T>.η(), this also applies
     // to the Monad<T>.Return() method.
-    protected bool UnitReturnsSome { get; set; }
+    protected bool UnitEnsuresSome { get; set; }
 
     // Gets or sets a value indicating whether Monad<T>.μ() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Flatten() being just the public alias of Monad<T>.μ(), this also applies
     // to the Monad<T>.Flatten() method.
-    protected bool MultiplicationReturnsSome { get; set; }
+    protected bool MultiplicationEnsuresSome { get; set; }
 
     // Gets or sets a value indicating whether Monad<T>.When() ensures a non-null return value. Always true.
     // NB: Whatever happen, Monad<T>.When() always return a non-null value.
-    protected bool WhenReturnsSome { get { return true; } }
+    protected bool WhenEnsuresSome { get { return true; } }
 
     // Gets a value indicating whether Monad<T>.Map() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Map() uses Monad<T>.Bind().
-    protected bool MapReturnsSome { get { return BindReturnsSome; } }
+    protected bool MapEnsuresSome { get { return BindEnsuresSome; } }
 
     // Gets a value indicating whether Monad<T>.Filter() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Filter() uses Monad<T>.Bind().
-    protected bool FilterReturnsSome { get { return BindReturnsSome; } }
+    protected bool FilterEnsuresSome { get { return BindEnsuresSome; } }
     
     // Gets a value indicating whether Monad<T>.Coalesce() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Coalesce() uses Monad<T>.Bind().
-    protected bool CoalesceReturnsSome { get { return BindReturnsSome; } }
+    protected bool CoalesceEnsuresSome { get { return BindEnsuresSome; } }
     
     // Gets a value indicating whether Monad<T>.Then() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Then() uses Monad<T>.Coalesce().
-    protected bool ThenReturnsSome { get { return CoalesceReturnsSome; } }
+    protected bool ThenEnsuresSome { get { return CoalesceEnsuresSome; } }
     
     // Gets a value indicating whether Monad<T>.Join() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Join() uses Monad<T>.Map().
-    protected bool JoinReturnsSome { get { return MapReturnsSome; } }
+    protected bool JoinEnsuresSome { get { return MapEnsuresSome; } }
 
     // Gets a value indicating whether Monad<T>.GroupJoin() ensures a non-null return value. Default to false.
     // NB: Monad<T>.GroupJoin() uses Monad<T>.Map().
-    protected bool GroupJoinReturnsSome { get { return MapReturnsSome; } }
+    protected bool GroupJoinEnsuresSome { get { return MapEnsuresSome; } }
     
-    // Gets or sets a value indicating whether the underlying type T is nullable. Default to true.
+    #endregion
+
+    #region Type constraints.
+
+    // Gets or sets a value indicating whether the monad is nullable. Default to true.
     protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
-    // Gets or sets a value indicating whether the underlying type T is a struct. Default to false.
-    // REVIEW: Isn't it simply !IsNullable?
-    protected bool RequireStruct { get; set; }
+    // Gets or sets a generic constraint on the underlying type T. Default to String.Empty.
+    protected string UnderlyingTypeConstraint
+    { 
+        get { return _underlyingTypeConstraint ; } 
+
+        set 
+        { 
+            _underlyingTypeConstraint  = value; 
+            _hasUnderlyingTypeConstraint = !String.IsNullOrWhiteSpace(value);
+        } 
+    }
+
+    // Gets a value indicating whether the underlying type T satisfies a generic type constraint. Default to false.
+    protected bool HasUnderlyingTypeConstraint { get { return _hasUnderlyingTypeConstraint; } }
     
+    #endregion
+
     // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
     protected bool HasPlus { get; set; }
 
@@ -168,7 +191,8 @@
     protected bool HasZero { get; set; }
 
     // Gets or sets the name of the Zero property. Default to "Zero".
-    protected string ZeroName { 
+    protected string ZeroName 
+    { 
         get 
         { 
             if (!HasZero) {
@@ -261,7 +285,7 @@
         ThrowIfInitialized_();
         
         HasZero = true;
-        //ZeroName = "Zero";
+        //ZeroName = "Zero"; (default value).
 
         _initialized = true;
     }
@@ -272,10 +296,10 @@
         ThrowIfInitialized_();
         
         HasZero = true;
-        //ZeroName = "Zero";
+        //ZeroName = "Zero"; (default value).
 
         HasPlus = true;
-        //PlusName = "Plus";
+        //PlusName = "Plus"; (default value).
 
         _initialized = true;
     }
@@ -316,9 +340,9 @@ namespace <#= Namespace #>
     using global::Narvalo;
 
 <#+ EmitCoreClass(); #>
-<#+ NewLine_(); #>
+<#+ WriteNewLine_(); #>
 <#+ EmitExtensions(); #>
-<#+ NewLine_(); #>
+<#+ WriteNewLine_(); #>
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
@@ -357,7 +381,7 @@ namespace <#= LinqNamespace #>
     using <#= LinqNamespace #>.Internal;
 
 <#+ EmitEnumerableMonadExtensions(); #>
-<#+ NewLine_(); #>
+<#+ WriteNewLine_(); #>
 <#+ EmitEnumerableExtensions(); #>
 }
 
@@ -373,7 +397,7 @@ namespace <#= LinqNamespace #>.Internal
     using <#= Namespace #>;
 
 <#+ EmitEnumerableMonadInternalExtensions(); #>
-<#+ NewLine_(); #>
+<#+ WriteNewLine_(); #>
 <#+ EmitEnumerableInternalExtensions(); #>
 }
 <#+
@@ -430,9 +454,9 @@ namespace <#= LinqNamespace #>.Internal
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
-<#+ StructConstraint_("T"); #>
+<#+ WriteTypeConstraints_("T"); #>
         {
-<#+ if (IsNullable && UnitReturnsSome) { #>
+<#+ if (IsNullable && UnitEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
 <#+ } #>
 
@@ -448,12 +472,12 @@ namespace <#= LinqNamespace #>.Internal
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
-<#+ StructConstraint_("T"); #>
+<#+ WriteTypeConstraints_("T"); #>
         {
 <#+ if (IsNullable) { #>
             Contract.Requires(square != null);
 <#+ } #>
-<#+ if (IsNullable && MultiplicationReturnsSome) { #>
+<#+ if (IsNullable && MultiplicationEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
 <#+ } #>
 
@@ -472,13 +496,13 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
-<#+ StructConstraint_("T"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
 
-            return m => {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m", MapName, true); PopIndent(); }  #>
+            return m => 
+            {
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m", MapName, true); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
             };
         }
@@ -492,14 +516,13 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
 
-            return (m1, m2) => {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
+            return (m1, m2) => 
+            {
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
             };
         }
@@ -513,15 +536,13 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
 
-            return (m1, m2, m3) => {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
+            return (m1, m2, m3) => 
+            {
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -536,16 +557,13 @@ namespace <#= LinqNamespace #>.Internal
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("T4"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
+            return (m1, m2, m3, m4) => 
+            {
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -560,17 +578,13 @@ namespace <#= LinqNamespace #>.Internal
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("T4"); #>
-<#+ StructConstraint_("T5"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => {
-<#+ if (!RequireStruct) { PushIndent("    "); NotNull_("m1", "Zip", true); PopIndent(); }  #>
+            return (m1, m2, m3, m4, m5) => 
+            {
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -592,7 +606,7 @@ namespace <#= LinqNamespace #>.Internal
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(<#= Name #><T> monad)
-<#+ StructConstraint_("T"); #>
+<#+ WriteTypeConstraints_("T"); #>
         {
             Contract.Requires(monad != null);
 
@@ -603,7 +617,7 @@ namespace <#= LinqNamespace #>.Internal
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
-<#+ StructConstraint_("T"); #>
+<#+ WriteTypeConstraints_("T"); #>
         {
             return <#= Name #><T>.δ(monad);
         }
@@ -629,12 +643,11 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("selector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("selector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -647,11 +660,10 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TResult> other)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -669,11 +681,11 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> <#= FilterName #><TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("predicate", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("predicate", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -682,25 +694,25 @@ namespace <#= LinqNamespace #>.Internal
         }
 <#+ } // End of HasZero. #>
 
-<#+ if (!RequireStruct) { #>
-
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
             this <#= Name #><TSource> @this,
             int count)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(MapName, true); #>
+<#+ WriteObjectNotNull_(MapName); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
-<#+ if (IsNullable && MapReturnsSome) { #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
-<#+ } // End of !RequireStruct. #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
         
         #endregion
 
@@ -715,7 +727,7 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard<TSource>(
             this <#= Name #><TSource> @this,
             bool predicate)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
@@ -734,14 +746,15 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TSource> @this, 
             bool predicate, 
             Action action)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             Require.NotNull(action, "action");
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
-            if (predicate) {
+            if (predicate) 
+            {
                 action.Invoke();
             }
 
@@ -755,11 +768,11 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(true); #>
+<#+ WriteObjectNotNull_(); #>
             Contract.Requires(action != null);
-<#+ if (IsNullable && WhenReturnsSome) { #>
+<#+ if (IsNullable && WhenEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
@@ -775,14 +788,12 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TFirst> @this,
             <#= Name #><TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
-<#+ StructConstraint_("TFirst"); #>
-<#+ StructConstraint_("TSecond"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("second", MapName, true); #>
-<#+ NotNull_("resultSelector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second", MapName, true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -795,15 +806,12 @@ namespace <#= LinqNamespace #>.Internal
             <#= Name #><T2> second,
             <#= Name #><T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("second", "Zip", true); #>
-<#+ NotNull_("resultSelector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second", "Zip", true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -820,16 +828,12 @@ namespace <#= LinqNamespace #>.Internal
              <#= Name #><T3> third,
              <#= Name #><T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("T4"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("second", "Zip", true); #>
-<#+ NotNull_("resultSelector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second", "Zip", true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -850,17 +854,12 @@ namespace <#= LinqNamespace #>.Internal
             <#= Name #><T4> fourth,
             <#= Name #><T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-<#+ StructConstraint_("T1"); #>
-<#+ StructConstraint_("T2"); #>
-<#+ StructConstraint_("T3"); #>
-<#+ StructConstraint_("T4"); #>
-<#+ StructConstraint_("T5"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("second", "Zip", true); #>
-<#+ NotNull_("resultSelector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second", "Zip", true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -883,10 +882,10 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> Where<TSource>(
             this <#= Name #><TSource> @this, 
             Func<TSource, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(FilterName, true); #>
-<#+ if (IsNullable && FilterReturnsSome) { #>
+<#+ WriteObjectNotNull_(FilterName); #>
+<#+ if (IsNullable && FilterEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -897,11 +896,10 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this, 
             Func<TSource, TResult> selector)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_(MapName, true); #>
-<#+ if (IsNullable && MapReturnsSome) { #>
+<#+ WriteObjectNotNull_(MapName); #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -916,14 +914,12 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TSource> @this,
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TMiddle"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("valueSelectorM", false); #>
-<#+ NotNull_("resultSelector", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("valueSelectorM", false); #>
+<#+ WriteNotNull_("resultSelector", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -939,19 +935,16 @@ namespace <#= LinqNamespace #>.Internal
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ ObjectNotNull_("Join", true); #>
+<#+ WriteObjectNotNull_("Join"); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && JoinReturnsSome) { #>
+<#+ if (IsNullable && JoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -969,19 +962,16 @@ namespace <#= LinqNamespace #>.Internal
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ ObjectNotNull_("GroupJoin", true); #>
+<#+ WriteObjectNotNull_("GroupJoin"); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && GroupJoinReturnsSome) { #>
+<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1006,10 +996,7 @@ namespace <#= LinqNamespace #>.Internal
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Contract.Requires(@this != null);
@@ -1018,7 +1005,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && JoinReturnsSome) { #>
+<#+ if (IsNullable && JoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1038,10 +1025,7 @@ namespace <#= LinqNamespace #>.Internal
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Contract.Requires(@this != null);
@@ -1050,7 +1034,7 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && GroupJoinReturnsSome) { #>
+<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1070,20 +1054,17 @@ namespace <#= LinqNamespace #>.Internal
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ NotNull_("seq", true); #>
-<#+ NotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("seq", true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-<#+ if (IsNullable && MapReturnsSome) { #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
             
@@ -1101,20 +1082,17 @@ namespace <#= LinqNamespace #>.Internal
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ NotNull_("seq", true); #>
-<#+ NotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("seq", true); #>
+<#+ WriteNotNull_("resultSelector", false); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-<#+ if (IsNullable && MapReturnsSome) { #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1129,17 +1107,16 @@ namespace <#= LinqNamespace #>.Internal
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TInner"); #>
-<#+ StructConstraint_("TKey"); #>
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey"); #>
         {
-<#+ NotNull_("inner", MapName, true); #>
-<#+ NotNull_("outerKeySelector", false); #>
-<#+ NotNull_("comparer", false); #>
+<#+ WriteNotNull_("inner", MapName, true); #>
+<#+ WriteNotNull_("outerKeySelector", false); #>
+<#+ WriteNotNull_("comparer", false); #>
             Contract.Requires(innerKeySelector != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
 
-            return source => {
+            return source =>
+            {
                 TKey outerKey = outerKeySelector.Invoke(source);
             
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
@@ -1156,12 +1133,11 @@ namespace <#= LinqNamespace #>.Internal
             Func<TSource, bool> predicate,
             <#= Name #><TResult> then,
             <#= Name #><TResult> otherwise)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_(true); #>
-<#+ NotNull_("predicate", false); #>
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("predicate", false); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1173,12 +1149,11 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_("Coalesce", true); #>
+<#+ WriteObjectNotNull_("Coalesce"); #>
             Contract.Requires(predicate != null);
-<#+ if (IsNullable && CoalesceReturnsSome) { #>
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1189,12 +1164,11 @@ namespace <#= LinqNamespace #>.Internal
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ ObjectNotNull_("Coalesce", true); #>
+<#+ WriteObjectNotNull_("Coalesce"); #>
             Contract.Requires(predicate != null);
-<#+ if (IsNullable && CoalesceReturnsSome) { #>
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1205,11 +1179,11 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> Run<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(true); #>
+<#+ WriteObjectNotNull_(); #>
             Require.NotNull(action, "action");
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1220,11 +1194,11 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_("Then", true); #>
-<#+ NotNull_("action", false); #>
-<#+ if (IsNullable && ThenReturnsSome) { #>
+<#+ WriteObjectNotNull_("Then"); #>
+<#+ WriteNotNull_("action", false); #>
+<#+ if (IsNullable && ThenEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -1255,12 +1229,11 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             <#= Name #><TSource> value)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ NotNull_("value", true); #>
+<#+ WriteNotNull_("value", true); #>
             Contract.Requires(@this != null);
-<#+ if (IsNullable && BindReturnsSome) { #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -1273,11 +1246,9 @@ namespace <#= LinqNamespace #>.Internal
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TMiddle"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
         {
-<#+ ObjectNotNull_(false); #>
+<#+ WriteObjectNotNull_(true); #>
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
@@ -1290,11 +1261,9 @@ namespace <#= LinqNamespace #>.Internal
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TMiddle"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
         {
-<#+ NotNull_("funM", false); #>
+<#+ WriteNotNull_("funM", false); #>
             Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
@@ -1319,13 +1288,14 @@ namespace <#= LinqNamespace #>.Internal
     {
         #region Basic Monad functions (Prelude)
 
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "CollectCore" is an extension method.
             Contract.Requires(@this != null);
@@ -1335,7 +1305,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.CollectCore();
         }
-<#+ } // End of !RequireStruct. #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
         
         #endregion
 <#+ if (HasZero && HasPlus) { #>
@@ -1347,7 +1317,7 @@ namespace <#= LinqNamespace #>.Internal
         /// </remarks>
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "SumCore" is an extension method.
             Contract.Requires(@this != null);
@@ -1375,12 +1345,13 @@ namespace <#= LinqNamespace #>.Internal
     /// </summary>
     internal static partial class Enumerable<#= Name #>Extensions
     {
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "Enumerable.Aggregate" is an extension method.
             Contract.Requires(@this != null);
@@ -1390,15 +1361,16 @@ namespace <#= LinqNamespace #>.Internal
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list => {
+                = (m, n) => m.Bind(
+                    list => 
+                    {
                         return n.Bind(item => <#= Name #>.<#= ReturnName #>(
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
 
             return @this.Aggregate(seed, fun)<#+ if (IsNullable) { #>.AssumeNotNull_()<#+ } #>;
         }
-<#+ } // End of !RequireStruct. #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
 
 <#+ if (HasZero && HasPlus) { #>
 
@@ -1406,7 +1378,7 @@ namespace <#= LinqNamespace #>.Internal
             Justification = "This method has been localy overriden.")]
         internal static <#= Name #><TSource> SumCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "Enumerable.Aggregate" is an extension method. 
             Contract.Requires(@this != null);
@@ -1451,15 +1423,15 @@ namespace <#= LinqNamespace #>.Internal
     {
         #region Basic Monad functions (Prelude)
 
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
             // No need to check for null-reference, "MapCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1470,7 +1442,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.MapCore(funM);
         }
-<#+ } #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
         
         #endregion
 
@@ -1483,7 +1455,7 @@ namespace <#= LinqNamespace #>.Internal
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "FilterCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1493,7 +1465,8 @@ namespace <#= LinqNamespace #>.Internal
             return @this.FilterCore(predicateM);
         }
 
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
@@ -1501,9 +1474,7 @@ namespace <#= LinqNamespace #>.Internal
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TFirst"); #>
-<#+ StructConstraint_("TSecond"); #>
+<#+ WriteTypeConstraints_("TSource", "TFirst", "TSecond"); #>
         {
             // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1522,9 +1493,7 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
-<#+ StructConstraint_("TFirst"); #>
-<#+ StructConstraint_("TSecond"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
         {
             // No need to check for null-reference, "ZipCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1536,7 +1505,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.ZipCore(second, resultSelectorM);
         }
-<#+ } #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
 
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
@@ -1545,8 +1514,7 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1567,8 +1535,7 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
             // No need to check for null-reference, "FoldBackCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1584,7 +1551,7 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1600,7 +1567,7 @@ namespace <#= LinqNamespace #>.Internal
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "ReduceBackCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1622,8 +1589,7 @@ namespace <#= LinqNamespace #>.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
             Func<<#= Name #><TAccumulate>, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1642,7 +1608,7 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
             Func<<#= Name #><TSource>, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
@@ -1674,14 +1640,14 @@ namespace <#= LinqNamespace #>.Internal
     /// </content>
     internal static partial class Enumerable<#= Name #>Extensions
     {
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
         internal static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
@@ -1692,64 +1658,69 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Select(funM).AssumeNotNull_().Collect();
         }
-<#+ } #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(false); #>
-<#+ NotNull_("predicateM"); #>
+<#+ WriteObjectNotNull_(true); #>
+<#+ WriteNotNull_("predicateM"); #>
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
-            foreach (var item in @this) {
+            foreach (var item in @this)
+            {
                 var m = predicateM.Invoke(item);
 
-                if (m != null) {
-                    m.Run(_ => {
-                        if (_ == true) {
-                            list.Add(item);
-                        }
-                    });
+                if (m != null)
+                {
+                    m.Run(
+                        _ => 
+                        {
+                            if (_ == true) 
+                            {
+                                list.Add(item);
+                            }
+                        });
                 }
             }
 
             return list;
         }
 
-<#+ if (!RequireStruct) { #>
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
         internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TFirst"); #>
-<#+ StructConstraint_("TSecond"); #>
+<#+ WriteTypeConstraints_("TSource", "TFirst", "TSecond"); #>
         {
             // No need to check for null-reference, "Enumerable.Select" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(funM != null);
-<#+ if (IsNullable && BindReturnsSome) { #>
-<#+ // Select() guarantees a non-null return value. #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
             var m = @this.Select(funM).AssumeNotNull_().Collect();
 
-            return m.Select(tuples => {
-                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+            return m.<#= MapName #>(
+                tuples => 
+                {
+                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
 
-                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
-            });
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                });
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1758,11 +1729,9 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
-<#+ StructConstraint_("TFirst"); #>
-<#+ StructConstraint_("TSecond"); #>
-<#+ StructConstraint_("TResult"); #>
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
         {
-<#+ NotNull_("resultSelectorM"); #>
+<#+ WriteNotNull_("resultSelectorM"); #>
             Contract.Requires(@this != null); // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
             Contract.Requires(second != null);
 <#+ if (IsNullable) { #>
@@ -1776,7 +1745,7 @@ namespace <#= LinqNamespace #>.Internal
             // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull_().Collect();
         }
-<#+ } #>
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -1784,20 +1753,21 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
-<#+ ObjectNotNull_(false); #>
-<#+ NotNull_("accumulatorM"); #>
+<#+ WriteObjectNotNull_(true); #>
+<#+ WriteNotNull_("accumulatorM"); #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
-            foreach (TSource item in @this) {
+            foreach (TSource item in @this) 
+            {
 <#+ if (IsNullable && !HasZero) { #>
-                if (result == null) {
+                if (result == null) 
+                {
                     return null;
                 }
 
@@ -1814,8 +1784,7 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
@@ -1833,24 +1802,28 @@ namespace <#= LinqNamespace #>.Internal
         internal static <#= Name #><TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(false); #>
-<#+ NotNull_("accumulatorM", false); #>
+<#+ WriteObjectNotNull_(true); #>
+<#+ WriteNotNull_("accumulatorM", false); #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                if (!iter.MoveNext())
+                {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
                 <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
 
-                while (iter.MoveNext()) {
+                while (iter.MoveNext()) 
+                {
 <#+ if (IsNullable && !HasZero) { #>
-                    if (result == null) {
+                    if (result == null) 
+                    {
                         return null;
                     }
 
@@ -1867,7 +1840,7 @@ namespace <#= LinqNamespace #>.Internal
         internal static <#= Name #><TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
             // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
             Contract.Requires(@this != null);
@@ -1886,24 +1859,26 @@ namespace <#= LinqNamespace #>.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
             Func<<#= Name #><TAccumulate>, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
-<#+ StructConstraint_("TAccumulate"); #>
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
-<#+ ObjectNotNull_(false); #>
-<#+ NotNull_("accumulatorM"); #>
-<#+ NotNull_("predicate"); #>
+<#+ WriteObjectNotNull_(true); #>
+<#+ WriteNotNull_("accumulatorM"); #>
+<#+ WriteNotNull_("predicate"); #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
 
-            using (var iter = @this.GetEnumerator()) {
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
 <#+ if (IsNullable && !HasZero) { #>
-                if (result == null) {
-                    return null;
-                }
+                    if (result == null) 
+                    {
+                        return null;
+                    }
 
 <#+ } #>
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
@@ -1919,17 +1894,19 @@ namespace <#= LinqNamespace #>.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
             Func<<#= Name #><TSource>, bool> predicate)
-<#+ StructConstraint_("TSource"); #>
+<#+ WriteTypeConstraints_("TSource"); #>
         {
-<#+ ObjectNotNull_(false); #>
-<#+ NotNull_("accumulatorM"); #>
-<#+ NotNull_("predicate"); #>
+<#+ WriteObjectNotNull_(true); #>
+<#+ WriteNotNull_("accumulatorM"); #>
+<#+ WriteNotNull_("predicate"); #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                if (!iter.MoveNext()) 
+                {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
@@ -1937,7 +1914,8 @@ namespace <#= LinqNamespace #>.Internal
 
                 while (predicate.Invoke(result) && iter.MoveNext()) {
 <#+ if (IsNullable && !HasZero) { #>
-                    if (result == null) {
+                    if (result == null) 
+                    {
                         return null;
                     }
 
@@ -2018,57 +1996,59 @@ using global::System.Diagnostics.CodeAnalysis;
             .ToString();
     }
     
-    private void StructConstraint_(string name)
+    private void WriteTypeConstraints_(params string[] names)
     {
-        if (RequireStruct) {
+        if (HasUnderlyingTypeConstraint) {
+            foreach (var name in names) {
 #>
-            where <#= name #> : struct
+            where <#= name #> : <#= UnderlyingTypeConstraint #>
 <#+
+            }
         }
-    } // End of StructConstraint_().
+    } // End of WriteTypeConstraints_().
 
-    private void ObjectNotNull_(bool isMonad = true) 
+    private void WriteObjectNotNull_(bool force = false) 
     {
-        if (!isMonad || IsNullable) {
+        if (force || IsNullable) {
 #>
             Require.Object(@this);
 <#+
         }
-    } // End of ObjectNotNull_().
+    } // End of WriteObjectNotNull_().
     
-    private void ObjectNotNull_(string methodName, bool isMonad = true) 
+    private void WriteObjectNotNull_(string methodName) 
     {
-        if (!isMonad || IsNullable) {
+        if (IsNullable) {
 #>
-            Require.Object(@this); <#+ WarmNull_(methodName); #>
+            Require.Object(@this); <#+ WriteNullWarning_(methodName); #>
 <#+
         }
-    } // End of ObjectNotNull_().
+    } // End of WriteObjectNotNull_().
 
-    private void NotNull_(string name, bool isMonad = true) 
+    private void WriteNotNull_(string name, bool isSelf = true) 
     {
-        if (!isMonad || IsNullable) {
+        if (!isSelf || IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>");
 <#+
         }
-    } // End of NotNull_().
+    } // End of WriteNotNull_().
     
-    private void NotNull_(string name, string methodName, bool isMonad = true) 
+    private void WriteNotNull_(string name, string methodName, bool isSelf = true) 
     {
-        if (!isMonad || IsNullable) {
+        if (!isSelf || IsNullable) {
 #>
-            Require.NotNull(<#= name #>, "<#= name #>"); <#+ WarmNull_(methodName); #>
+            Require.NotNull(<#= name #>, "<#= name #>"); <#+ WriteNullWarning_(methodName); #>
 <#+
         }
-    } // End of NotNull_().
+    } // End of WriteNotNull_().
     
     // Null-reference check with extension methods is not always necessary but we never know for sure here.
-    private void WarmNull_(string methodName) 
+    private void WriteNullWarning_(string methodName) 
     {
 #>// Null-reference check: "<#= methodName #>" could have been overriden by a normal method.
 <#+
-    } // End of WarmNull_().
+    } // End of WriteNullWarning_().
 
     private void ThrowIfInitialized_() 
     {
@@ -2077,7 +2057,7 @@ using global::System.Diagnostics.CodeAnalysis;
         }
     }
 
-    private void NewLine_()
+    private void WriteNewLine_()
     {
         WriteLine(String.Empty);
     }

@@ -204,6 +204,7 @@ namespace Narvalo
         }
     }
 
+    // Other value types.
     public static partial class ParseTo
     {
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
@@ -239,7 +240,11 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
+    }
 
+    // Reference types.
+    public static partial class ParseTo
+    {
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
             Contract.Ensures(Contract.Result<Maybe<Uri>>() != null);

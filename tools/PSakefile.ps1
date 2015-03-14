@@ -102,8 +102,11 @@ Task CodeAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CA `
 {
-    MSBuild $Everything $Opts $CI_AnalysisProps `
+    MSBuild $Everything $Opts $CI_Props `
         '/t:Build', 
+        # For static analysis, we hide internals, otherwise we might not truly 
+        # analyze the public API.
+        '/p:VisibleInternals=false',
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
@@ -114,8 +117,11 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
-    MSBuild $Foundations $Opts $CI_AnalysisProps `
+    MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
+        # For static analysis, we hide internals, otherwise we might not truly 
+        # analyze the public API.
+        '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts'
 } 
 
@@ -124,10 +130,14 @@ Task SecurityAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
-    MSBuild $Foundations $Opts $CI_AnalysisProps `
-        '/t:SecAnnotate',
+    MSBuild $Foundations $Opts $CI_Props `
+        '/t:Clean;SecAnnotate',
+        # For static analysis, we hide internals, otherwise we might not truly 
+        # analyze the public API.
+        '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true'
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_' 
 }
 
 Task _CI-InitializeVariables `
@@ -148,9 +158,13 @@ Task _CI-InitializeVariables `
         '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=true'
 
+    # FIXME: Don't understand why doing what follows does not work.
+    # Either MSBuild or PowerShell mixes up the MSBuild parameters.
+    # The result is that Configuration property takes all following properties
+    # as its value. For instance, Configuration is read as "Release /p:BuildGeneratedVersion=false...".
     # For static analysis, we hide internals, otherwise we might not truly 
     # analyze the public API.
-    $script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
+    #$script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
 }
 
 # ------------------------------------------------------------------------------

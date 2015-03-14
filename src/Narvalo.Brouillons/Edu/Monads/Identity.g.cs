@@ -101,7 +101,8 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T>, Identity<TResult>>>() != null);
 
-            return m => {
+            return m => 
+            {
                 Require.NotNull(m, "m"); // Null-reference check: "Select" could have been overriden by a normal method.
                 return m.Select(fun);
             };
@@ -119,7 +120,8 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
 
-            return (m1, m2) => {
+            return (m1, m2) => 
+            {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, fun);
             };
@@ -137,7 +139,8 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
 
-            return (m1, m2, m3) => {
+            return (m1, m2, m3) => 
+            {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, fun);
             };
@@ -156,7 +159,8 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => {
+            return (m1, m2, m3, m4) => 
+            {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, fun);
             };
@@ -175,7 +179,8 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => {
+            return (m1, m2, m3, m4, m5) => 
+            {
                 Require.NotNull(m1, "m1"); // Null-reference check: "Zip" could have been overriden by a normal method.
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
@@ -219,7 +224,6 @@ namespace Narvalo.Edu.Monads
         #endregion
 
         #region Generalisations of list functions (Prelude)
-
 
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.

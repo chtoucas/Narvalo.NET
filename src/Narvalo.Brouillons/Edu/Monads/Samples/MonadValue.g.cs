@@ -113,7 +113,8 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T>, MonadValue<TResult>>>() != null);
 
-            return m => {
+            return m => 
+            {
                 return m.Select(fun);
             };
         }
@@ -133,7 +134,8 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>>() != null);
 
-            return (m1, m2) => {
+            return (m1, m2) => 
+            {
                 return m1.Zip(m2, fun);
             };
         }
@@ -154,7 +156,8 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>>() != null);
 
-            return (m1, m2, m3) => {
+            return (m1, m2, m3) => 
+            {
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -177,7 +180,8 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => {
+            return (m1, m2, m3, m4) => 
+            {
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -201,7 +205,8 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => {
+            return (m1, m2, m3, m4, m5) => 
+            {
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }

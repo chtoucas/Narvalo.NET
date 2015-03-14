@@ -2,7 +2,7 @@
 <# 
     InitializeOr();
 
-    RequireStruct = true;
+    UnderlyingTypeConstraint = "struct";
     IsNullable = false;
 #>
 <# EmitMonad(); #>

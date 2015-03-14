@@ -1,7 +1,7 @@
 ﻿<#@ include file="..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
 <# 
-    UnitReturnsSome = true;
-    MultiplicationReturnsSome = true;
+    UnitEnsuresSome = true;
+    MultiplicationEnsuresSome = true;
 
     ReturnName = "Success";
 #>

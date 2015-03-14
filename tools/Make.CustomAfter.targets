@@ -229,11 +229,21 @@ using System.Reflection;
           DependsOnTargets="Build"
           Inputs="$(TargetPath)"
           Outputs="$(SecAnnotateDummyOutput)">
-    <!-- REVIEW: We use SecAnnotateDummyOutput since SecAnnotateOutput is not currently written... -->
+    <!-- REVIEW: We use SecAnnotateDummyOutput since SecAnnotateOutput is not always written (for instance
+         when there is no error). -->
     <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
+    <!--<Message Text="&quot;$(SecAnnotateCommand)&quot; /maximumpasses:1 /includesignatures /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;" 
+             Importance="high"/>-->
 
-    <!-- /maximumpasses:1  /quiet -->
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+    <!-- WARNING: The /verify switch disable output and other things. From the documentationt:
+         Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes 
+         to find all required annotations if the assembly does not verify. -->
+    <!-- NB: Available options:
+         /maximumpasses:1 to limit the number of passes. 
+         /includesignatures for detail signatures. 
+         /showstatistics 
+         /verbose -->
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />

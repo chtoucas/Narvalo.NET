@@ -274,8 +274,9 @@ namespace Narvalo.Collections.Internal
 
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
-                = (m, n) =>
-                    m.Bind(list => {
+                = (m, n) => m.Bind(
+                    list => 
+                    {
                         return n.Bind(item => Maybe.Create(
                             list.Concat(Enumerable.Repeat(item, 1))));
                     });
@@ -346,15 +347,20 @@ namespace Narvalo.Collections.Internal
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
 
-            foreach (var item in @this) {
+            foreach (var item in @this)
+            {
                 var m = predicateM.Invoke(item);
 
-                if (m != null) {
-                    m.Run(_ => {
-                        if (_ == true) {
-                            list.Add(item);
-                        }
-                    });
+                if (m != null)
+                {
+                    m.Run(
+                        _ => 
+                        {
+                            if (_ == true) 
+                            {
+                                list.Add(item);
+                            }
+                        });
                 }
             }
 
@@ -375,12 +381,14 @@ namespace Narvalo.Collections.Internal
 
             var m = @this.Select(funM).AssumeNotNull_().Collect();
 
-            return m.Select(tuples => {
-                IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
-                IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+            return m.Select(
+                tuples => 
+                {
+                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
 
-                return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
-            });
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                });
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -416,7 +424,8 @@ namespace Narvalo.Collections.Internal
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
-            foreach (TSource item in @this) {
+            foreach (TSource item in @this) 
+            {
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -448,14 +457,17 @@ namespace Narvalo.Collections.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                if (!iter.MoveNext())
+                {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
                 Maybe<TSource> result = Maybe.Create(iter.Current);
 
-                while (iter.MoveNext()) {
+                while (iter.MoveNext()) 
+                {
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -492,8 +504,10 @@ namespace Narvalo.Collections.Internal
 
             Maybe<TAccumulate> result = Maybe.Create(seed);
 
-            using (var iter = @this.GetEnumerator()) {
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -513,8 +527,10 @@ namespace Narvalo.Collections.Internal
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            using (var iter = @this.GetEnumerator()) {
-                if (!iter.MoveNext()) {
+            using (var iter = @this.GetEnumerator()) 
+            {
+                if (!iter.MoveNext()) 
+                {
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
