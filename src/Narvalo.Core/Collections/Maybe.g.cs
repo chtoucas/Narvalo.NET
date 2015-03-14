@@ -169,7 +169,7 @@ namespace Narvalo.Collections
         }
 
         #endregion
-        
+
         #region Aggregate Operators
 
         public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
@@ -193,7 +193,7 @@ namespace Narvalo.Collections
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
-            
+
             return @this.ReduceCore(accumulatorM);
         }
 

@@ -1528,7 +1528,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-        
+
         #region Aggregate Operators
 
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
@@ -1560,7 +1560,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
-            
+
             return @this.ReduceCore(accumulatorM);
         }
 
