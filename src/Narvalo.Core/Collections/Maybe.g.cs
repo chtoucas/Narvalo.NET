@@ -227,7 +227,7 @@ namespace Narvalo.Collections
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
-        
+
         public static Maybe<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Maybe<TSource>> accumulatorM,
@@ -275,7 +275,7 @@ namespace Narvalo.Collections.Internal
             var seed = Maybe.Create(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(
-                    list => 
+                    list =>
                     {
                         return n.Bind(item => Maybe.Create(
                             list.Concat(Enumerable.Repeat(item, 1))));
@@ -536,7 +536,8 @@ namespace Narvalo.Collections.Internal
 
                 Maybe<TSource> result = Maybe.Create(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 

@@ -1362,7 +1362,7 @@ namespace <#= LinqNamespace #>.Internal
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
             Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(
-                    list => 
+                    list =>
                     {
                         return n.Bind(item => <#= Name #>.<#= ReturnName #>(
                             list.Concat(Enumerable.Repeat(item, 1))));
@@ -1602,7 +1602,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
-        
+
 <#+ // REVIEW: Haskell use a differente signature. #>
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
@@ -1912,7 +1912,8 @@ namespace <#= LinqNamespace #>.Internal
 
                 <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext()) {
+                while (predicate.Invoke(result) && iter.MoveNext())
+                {
 <#+ if (IsNullable && !HasZero) { #>
                     if (result == null)
                     {
