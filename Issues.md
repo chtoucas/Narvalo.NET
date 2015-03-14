@@ -17,6 +17,7 @@ Work in progress
 ----------------
 
 **WIP**    
+- Monad.tt, review (and this is needed) the postconditions.
 - Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
 - CC, review and understand all the NO_CCCHECK_SUPPRESSIONS
   Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
@@ -185,8 +186,11 @@ At this point we should have a first useful release for the core assemblies.
 - Improvement: Finish SecAnnotate.
 - Improvement: Make sure a build fails when SecAnnotate does too.
 - Enhancement: Implements security attributes, for instance:
-```
-[assembly: SecurityCritical]
+```    
+[assembly: SecurityRules(SecurityRuleSet.Level2)]
+[assembly: AllowPartiallyTrustedCallers]
+[assembly: SecurityTransparent]
+//[assembly: SecurityCritical]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 [assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]

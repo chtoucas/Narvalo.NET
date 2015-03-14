@@ -399,7 +399,9 @@ namespace Narvalo.Collections.Internal
             Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
-            Contract.Requires(@this != null); // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+
+            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(second != null);
             Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 

@@ -190,6 +190,18 @@
     // Gets or sets a value indicating whether the monad is a MonadZero. Default to false.
     protected bool HasZero { get; set; }
 
+    // Gets a value indicating whether the monad has a Filter method. Default to true.
+    protected bool HasFilter { get { return HasZero; } }
+    
+    // Gets a value indicating whether the monad has Join and GroupJoin methods. Default to true.
+    protected bool HasJoin { get { return HasZero; } }
+
+    // Gets a value indicating whether the monad has a Then method. Default to true.
+    protected bool HasThen { get { return HasZero; } }
+
+    // Gets a value indicating whether the monad has a Sum method. Default to true.
+    protected bool HasSum { get { return HasZero && HasPlus; } }
+
     // Gets or sets the name of the Zero property. Default to "Zero".
     protected string ZeroName 
     { 
@@ -502,7 +514,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return m => 
             {
-<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m", MapName, true); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m", MapName); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
             };
         }
@@ -522,7 +534,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return (m1, m2) => 
             {
-<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip"); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
             };
         }
@@ -542,7 +554,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return (m1, m2, m3) => 
             {
-<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -563,7 +575,7 @@ namespace <#= LinqNamespace #>.Internal
             
             return (m1, m2, m3, m4) => 
             {
-<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -584,7 +596,7 @@ namespace <#= LinqNamespace #>.Internal
        
             return (m1, m2, m3, m4, m5) => 
             {
-<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip", true); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1", "Zip"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -646,7 +658,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("selector", false); #>
+            Require.NotNull(selector, "selector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -684,7 +696,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("predicate", false); #>
+            Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -696,6 +708,7 @@ namespace <#= LinqNamespace #>.Internal
 
 <#+ if (!HasUnderlyingTypeConstraint) { #>
 <#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
@@ -791,8 +804,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second", MapName, true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("second", MapName); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -809,8 +822,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second", "Zip", true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("second", "Zip"); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -831,8 +844,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second", "Zip", true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("second", "Zip"); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -857,8 +870,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second", "Zip", true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("second", "Zip"); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -878,7 +891,7 @@ namespace <#= LinqNamespace #>.Internal
         #region Query Expression Pattern
 
 <#+ if (!PreferLinqDialect) { #>
-<#+ if (HasZero) { #>
+<#+ if (HasFilter) { #>
         public static <#= Name #><TSource> Where<TSource>(
             this <#= Name #><TSource> @this, 
             Func<TSource, bool> predicate)
@@ -891,7 +904,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.<#= FilterName #>(predicate);
         }
-<#+ } // End of HasZero. #>
+<#+ } // End of HasFilter. #>
 
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this, 
@@ -917,8 +930,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("valueSelectorM", false); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+            Require.NotNull(valueSelectorM, "valueSelectorM");
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -928,7 +941,7 @@ namespace <#= LinqNamespace #>.Internal
                     middle => resultSelector.Invoke(_, middle)));
         }
 
-<#+ if (HasZero) { #>
+<#+ if (HasJoin) { #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -982,13 +995,13 @@ namespace <#= LinqNamespace #>.Internal
                 resultSelector, 
                 EqualityComparer<TKey>.Default);
         }
-<#+ } // End of HasZero. #>
+<#+ } // End of HasJoin. #>
 
         #endregion
         
         #region LINQ extensions
 
-<#+ if (HasZero) { #>
+<#+ if (HasJoin) { #>
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -1056,8 +1069,8 @@ namespace <#= LinqNamespace #>.Internal
             IEqualityComparer<TKey> comparer)
 <#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull_("seq", true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("seq"); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -1084,8 +1097,8 @@ namespace <#= LinqNamespace #>.Internal
             IEqualityComparer<TKey> comparer)
 <#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull_("seq", true); #>
-<#+ WriteNotNull_("resultSelector", false); #>
+<#+ WriteNotNull_("seq"); #>
+            Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -1109,9 +1122,9 @@ namespace <#= LinqNamespace #>.Internal
             IEqualityComparer<TKey> comparer)
 <#+ WriteTypeConstraints_("TSource", "TInner", "TKey"); #>
         {
-<#+ WriteNotNull_("inner", MapName, true); #>
-<#+ WriteNotNull_("outerKeySelector", false); #>
-<#+ WriteNotNull_("comparer", false); #>
+<#+ WriteNotNull_("inner", MapName); #>
+            Require.NotNull(outerKeySelector, "outerKeySelector");
+            Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
 
@@ -1122,7 +1135,7 @@ namespace <#= LinqNamespace #>.Internal
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
             };
         }
-<#+ } // End of HasZero. #>
+<#+ } // End of HasJoin. #>
 
         #endregion
 
@@ -1136,7 +1149,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
 <#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("predicate", false); #>
+            Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -1190,21 +1203,21 @@ namespace <#= LinqNamespace #>.Internal
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-<#+ if (HasZero) { #>
+<#+ if (HasThen) { #>
         public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_("Then"); #>
-<#+ WriteNotNull_("action", false); #>
+            Require.NotNull(action, "action");
 <#+ if (IsNullable && ThenEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
         }
-<#+ } // End of HasZero. #>
+<#+ } // End of HasThen. #>
 
         #endregion
     } // End of the class <#= Name #>.
@@ -1231,7 +1244,7 @@ namespace <#= LinqNamespace #>.Internal
             <#= Name #><TSource> value)
 <#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
-<#+ WriteNotNull_("value", true); #>
+<#+ WriteNotNull_("value"); #>
             Contract.Requires(@this != null);
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -1263,7 +1276,7 @@ namespace <#= LinqNamespace #>.Internal
             Func<TSource, <#= Name #><TMiddle>> funM)
 <#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
         {
-<#+ WriteNotNull_("funM", false); #>
+            Require.NotNull(funM, "funM");
             Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
@@ -1308,7 +1321,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ } // End of !HasUnderlyingTypeConstraint. #>
 
         #endregion
-<#+ if (HasZero && HasPlus) { #>
+<#+ if (HasSum) { #>
 
         #region Generalisations of list functions (Prelude)
 
@@ -1329,7 +1342,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-<#+ } // End of HasZero && HasPlus. #>
+<#+ } // End of HasSum. #>
     } // End of the class Enumerable<#= Name #>Extensions.
 <#+
     } // End of EmitEnumerableMonadExtensions().
@@ -1372,7 +1385,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 <#+ } // End of !HasUnderlyingTypeConstraint. #>
 
-<#+ if (HasZero && HasPlus) { #>
+<#+ if (HasSum) { #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
@@ -1388,7 +1401,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n))<#+ if (IsNullable) { #>.AssumeNotNull_()<#+ } #>;
         }
-<#+ } // End of HasZero && HasPlus. #>
+<#+ } // End of HasSum. #>
 
         /// <summary>
         /// Instructs code analysis tools to assume that the specified value is not null,
@@ -1519,7 +1532,6 @@ namespace <#= LinqNamespace #>.Internal
             // No need to check for null-reference, "FoldCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ // "FoldCore" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1540,7 +1552,6 @@ namespace <#= LinqNamespace #>.Internal
             // No need to check for null-reference, "FoldBackCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ // "FoldBackCore" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1556,7 +1567,6 @@ namespace <#= LinqNamespace #>.Internal
             // No need to check for null-reference, "ReduceCore" is an extension method. 
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
-<#+ // "ReduceCore" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -1595,7 +1605,6 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Requires(@this != null);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-<#+ // "FoldCore" does not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1641,7 +1650,7 @@ namespace <#= LinqNamespace #>.Internal
     internal static partial class Enumerable<#= Name #>Extensions
     {
 <#+ if (!HasUnderlyingTypeConstraint) { #>
-<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+<#+ // Not available when we enforce a generic type constraint on the underlying type of the monadic return value. #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "This method has been localy overriden.")]
         internal static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
@@ -1668,7 +1677,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_(true); #>
-<#+ WriteNotNull_("predicateM"); #>
+            Require.NotNull(predicateM, "predicateM");
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
@@ -1731,8 +1740,10 @@ namespace <#= LinqNamespace #>.Internal
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
 <#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
         {
-<#+ WriteNotNull_("resultSelectorM"); #>
-            Contract.Requires(@this != null); // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Require.NotNull(resultSelectorM, "resultSelectorM");
+
+            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
+            Contract.Requires(@this != null);
             Contract.Requires(second != null);
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
@@ -1756,7 +1767,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
 <#+ WriteObjectNotNull_(true); #>
-<#+ WriteNotNull_("accumulatorM"); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1805,7 +1816,7 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_(true); #>
-<#+ WriteNotNull_("accumulatorM", false); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -1862,8 +1873,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
         {
 <#+ WriteObjectNotNull_(true); #>
-<#+ WriteNotNull_("accumulatorM"); #>
-<#+ WriteNotNull_("predicate"); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -1897,8 +1908,8 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_(true); #>
-<#+ WriteNotNull_("accumulatorM"); #>
-<#+ WriteNotNull_("predicate"); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -2026,18 +2037,18 @@ using global::System.Diagnostics.CodeAnalysis;
         }
     } // End of WriteObjectNotNull_().
 
-    private void WriteNotNull_(string name, bool isSelf = true) 
+    private void WriteNotNull_(string name) 
     {
-        if (!isSelf || IsNullable) {
+        if (IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>");
 <#+
         }
     } // End of WriteNotNull_().
     
-    private void WriteNotNull_(string name, string methodName, bool isSelf = true) 
+    private void WriteNotNull_(string name, string methodName) 
     {
-        if (!isSelf || IsNullable) {
+        if (IsNullable) {
 #>
             Require.NotNull(<#= name #>, "<#= name #>"); <#+ WriteNullWarning_(methodName); #>
 <#+
@@ -2047,7 +2058,7 @@ using global::System.Diagnostics.CodeAnalysis;
     // Null-reference check with extension methods is not always necessary but we never know for sure here.
     private void WriteNullWarning_(string methodName) 
     {
-#>// Null-reference check: "<#= methodName #>" could have been overriden by a normal method.
+#>// Null-reference check: normally we don't need to check for null-reference since "<#= methodName #>" is an extension method but it could have been overriden by a normal method.
 <#+
     } // End of WriteNullWarning_().
 
