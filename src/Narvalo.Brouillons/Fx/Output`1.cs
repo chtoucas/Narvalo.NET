@@ -74,7 +74,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Output<T> OnSuccess(Action<T> action)
         {
@@ -213,7 +213,7 @@ namespace Narvalo.Fx
 
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Output<TResult> Select<TResult>(Func<T, TResult> selector)
         {

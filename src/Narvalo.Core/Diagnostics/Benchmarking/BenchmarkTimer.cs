@@ -32,7 +32,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
+        //[Conditional("CONTRACTS_FULL")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_stopwatch != null);

@@ -7,6 +7,8 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
+
     public sealed class BenchmarkRunner
     {
         private readonly IBenchmarkTimer _timer;
@@ -33,7 +35,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, Strings_Core.BenchmarkRunner_DurationPropertyIsNegative);
+                Require.GreaterThan(value.Ticks, 0L, "TestDuration.Ticks");
                 _testDuration = value;
             }
         }
@@ -48,7 +50,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, Strings_Core.BenchmarkRunner_DurationPropertyIsNegative);
+                Require.GreaterThan(value.Ticks, 0L, "WarmUpDuration.Ticks");
                 _warmUpDuration = value;
             }
         }
@@ -82,7 +84,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         private TimeSpan Time_(Action action, int iterations)
         {
-            Contract.Requires(action != null);
+            Check.NotNull(action);
             Contract.Ensures(Contract.Result<TimeSpan>().Ticks > 0L);
 
             // Make sure we start with a clean room.

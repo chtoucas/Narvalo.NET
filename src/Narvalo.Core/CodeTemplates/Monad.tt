@@ -462,7 +462,7 @@ namespace <#= LinqNamespace #>.Internal
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
-        /// <typeparam name="T">The underlying type of the <paramref name="value"/>.</typeparam>
+        /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)

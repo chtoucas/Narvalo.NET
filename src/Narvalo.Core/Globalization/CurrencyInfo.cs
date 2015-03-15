@@ -9,7 +9,6 @@ namespace Narvalo.Globalization
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-
     /// <summary>
     /// Provides information about a localized currency.
     /// </summary>

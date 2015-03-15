@@ -33,8 +33,8 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             Require.NotNullOrEmpty(categoryName, "categoryName");
             Require.NotNullOrEmpty(name, "name");
-            Require.GreaterThanOrEqualTo(iterations, 1, "iterations");
-            Require.Condition(duration.Ticks > 0L, Strings_Core.BenchmarkMetric_DurationIsNegative);
+            Require.GreaterThan(iterations, 0, "iterations");
+            Require.GreaterThan(duration.Ticks, 0L, "duration.Ticks");
 
             _categoryName = categoryName;
             _name = name;
@@ -126,7 +126,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-18-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public string ToString(string format)
         {

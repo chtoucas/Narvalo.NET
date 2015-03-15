@@ -37,8 +37,8 @@ namespace Narvalo
         {
             Require.NotNullOrEmpty(inFile, "inFile");
             Require.NotNullOrEmpty(outFile, "outFile");
-            Require.GreaterThanOrEqualTo(level, 0, "level");
-            Require.LessThanOrEqualTo(level, 100, "level");
+            Require.GreaterThanOrEqualTo(level, 0L, "level");
+            Require.LessThanOrEqualTo(level, 100L, "level");
 
             using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None))
             {
@@ -57,8 +57,8 @@ namespace Narvalo
         {
             Require.NotNull(inImage, "inImage");
             Require.NotNullOrEmpty(outFile, "outFile");
-            Require.GreaterThanOrEqualTo(level, 0, "level");
-            Require.LessThanOrEqualTo(level, 100, "level");
+            Require.GreaterThanOrEqualTo(level, 0L, "level");
+            Require.LessThanOrEqualTo(level, 100L, "level");
 
             using (var outStream = new FileStream(outFile, FileMode.Create, FileAccess.Write, FileShare.None))
             {
@@ -70,8 +70,8 @@ namespace Narvalo
         {
             Require.NotNull(inImage, "inImage");
             Require.NotNull(outStream, "outStream");
-            Require.GreaterThanOrEqualTo(level, 0, "level");
-            Require.LessThanOrEqualTo(level, 100, "level");
+            Require.GreaterThanOrEqualTo(level, 0L, "level");
+            Require.LessThanOrEqualTo(level, 100L, "level");
 
             var dim = GetFitToHeightDimensions(inImage.Width, inImage.Height, maxWidth, maxHeight);
 

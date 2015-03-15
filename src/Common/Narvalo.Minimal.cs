@@ -89,19 +89,6 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Helper method shared among projects.")]
-        public static void Condition(bool predicate, string message)
-        {
-            if (!predicate)
-            {
-                throw new ArgumentException(message);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
         public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
             if (value < minInclusive || value > maxInclusive)
@@ -236,48 +223,6 @@ namespace Narvalo
             {
                 var message = "The value is not less than or equal to " + maxInclusive.ToString() + ".";
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [Obsolete]
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void Object<T>([ValidatedNotNull]T? @this) where T : struct
-        {
-            if (@this == null)
-            {
-                throw new ArgumentNullException("this", "The object 'this' is null.");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [Obsolete]
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void Property<T>([ValidatedNotNull]T? value) where T : struct
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value", "The property value is null.");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [Obsolete]
-        [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
-        public static void NotNull<T>([ValidatedNotNull]T? value, string parameterName) where T : struct
-        {
-            if (value == null)
-            {
-                throw ExceptionFactory.ArgumentNull(parameterName);
             }
 
             Contract.EndContractBlock();

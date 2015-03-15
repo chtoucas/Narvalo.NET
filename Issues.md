@@ -17,7 +17,7 @@ Work in progress
 ----------------
 
 **WIP**    
-- Monad.tt, review (and this is needed) the postconditions.
+- Monad.tt, review (and this is needed) the postconditions and null-reference checks.
 - Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
 - CC, review and understand all the NO_CCCHECK_SUPPRESSIONS
   Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.

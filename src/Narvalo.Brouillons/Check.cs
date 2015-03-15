@@ -15,8 +15,10 @@ namespace Narvalo
     /// In Release configuration, these methods are simply erased. 
     /// </summary>
     [DebuggerStepThrough]
-    public static class Check
+    public static class CheckXXX
     {
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
         public static void IsEnum(Type type)
         {
             Contract.Requires(type != null);
@@ -24,6 +26,8 @@ namespace Narvalo
             Contract.Requires(!GetTypeInfo(type).IsEnum);
         }
 
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
         public static void IsValueType(Type type)
         {
             Contract.Requires(type != null);
@@ -55,12 +59,6 @@ namespace Narvalo
 
         //    //// NB: type.IsValueType is not available in the context of PCL.
         //    Debug.Assert(GetTypeInfo_(type).IsValueType, Format.CurrentCulture("The type '{0}' MUST be of value type.", type.FullName));
-        //}
-
-        //[Conditional("DEBUG")]
-        //public static void NotNull<T>(T value, string parameterName) where T : class
-        //{
-        //    Debug.Assert(value != null, Format.CurrentCulture("The parameter '{0}' MUST NOT be null.", parameterName));
         //}
 
         //[Conditional("DEBUG")]

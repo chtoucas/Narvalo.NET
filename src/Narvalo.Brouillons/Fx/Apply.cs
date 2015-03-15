@@ -34,7 +34,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception>(Action action)
             where T1Exception : Exception
@@ -61,7 +61,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(Action action)
             where T1Exception : Exception
@@ -90,7 +90,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
             where T1Exception : Exception

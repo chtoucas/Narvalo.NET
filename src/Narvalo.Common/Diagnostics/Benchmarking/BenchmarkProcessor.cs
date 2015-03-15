@@ -52,7 +52,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, Strings_Common.BenchmarkProcessor_DurationPropertyIsNegative);
+                Require.GreaterThan(value.Ticks, 0L, "TestDuration.Ticks");
                 _runner.TestDuration = value;
             }
         }
@@ -67,7 +67,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             set
             {
-                Require.Condition(value.Ticks > 0L, Strings_Common.BenchmarkProcessor_DurationPropertyIsNegative);
+                Require.GreaterThan(value.Ticks, 0L, "WarmUpDuration.Ticks");
                 _runner.WarmUpDuration = value;
             }
         }

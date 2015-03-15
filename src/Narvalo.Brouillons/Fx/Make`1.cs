@@ -36,7 +36,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static Output<T> Catch<T1Exception, T2Exception>(Func<T> valueFactory)
             where T1Exception : Exception
@@ -64,7 +64,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception>(Func<T> valueFactory)
             where T1Exception : Exception
@@ -94,7 +94,7 @@ namespace Narvalo.Fx
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static Output<T> Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Func<T> valueFactory)
             where T1Exception : Exception

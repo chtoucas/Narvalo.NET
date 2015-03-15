@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Narvalo {
+    using System;
     using System.Reflection;
     
     
@@ -79,11 +80,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; MUST NOT be null..
         /// </summary>
-        internal static string ExceptionFactory_ArgumentNullFormat {
+        internal static string Check_ArgumentNullFormat {
             get {
-                return ResourceManager.GetString("ExceptionFactory_ArgumentNullFormat", resourceCulture);
+                return ResourceManager.GetString("Check_ArgumentNullFormat", resourceCulture);
             }
         }
         
@@ -133,15 +134,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The lower end must be lesser than upper end..
-        /// </summary>
-        internal static string Range_LowerEndNotLesserThanUpperEnd {
-            get {
-                return ResourceManager.GetString("Range_LowerEndNotLesserThanUpperEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is empty..
         /// </summary>
         internal static string Require_ArgumentEmptyFormat {
@@ -151,7 +143,25 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not greater than or equal to &apos;{0}&apos;..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
+        /// </summary>
+        internal static string Require_ArgumentNullFormat {
+            get {
+                return ResourceManager.GetString("Require_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
+        /// </summary>
+        internal static string Require_NotGreaterThanFormat {
+            get {
+                return ResourceManager.GetString("Require_NotGreaterThanFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
         /// </summary>
         internal static string Require_NotGreaterThanOrEqualToFormat {
             get {
@@ -160,7 +170,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not in range &apos;{0}&apos; - &apos;{1}&apos;..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
         /// </summary>
         internal static string Require_NotInRangeFormat {
             get {
@@ -169,7 +179,16 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value is not less than or equal to &apos;{0}&apos;..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
+        /// </summary>
+        internal static string Require_NotLessThanFormat {
+            get {
+                return ResourceManager.GetString("Require_NotLessThanFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
         /// </summary>
         internal static string Require_NotLessThanOrEqualToFormat {
             get {

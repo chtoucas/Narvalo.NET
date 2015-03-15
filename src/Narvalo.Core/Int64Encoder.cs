@@ -81,7 +81,7 @@ namespace Narvalo
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-29-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static string ToFlickrBase58String(long value)
         {
@@ -94,7 +94,7 @@ namespace Narvalo
             {
                 long r = value % FLICKR_BASE58_ALPHABET_LENGTH;
 
-                Contract.Assume(r < s_FlickrBase58Alphabet.Length);
+                Contract.Assume(r < (long)s_FlickrBase58Alphabet.Length);
 
                 result = s_FlickrBase58Alphabet[r].ToString() + result;
                 value /= FLICKR_BASE58_ALPHABET_LENGTH;
@@ -105,51 +105,27 @@ namespace Narvalo
 
         public static long FromBase25String(string value)
         {
-            Require.NotNull(value, "value");
-
-            if (value.Length > BASE25_MAX_LENGTH)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE25_MAX_LENGTH),
-                    "value");
-            }
-
+            Contract.Requires(value != null);
+            Contract.Requires(value.Length <= BASE25_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
-            Contract.EndContractBlock();
 
             return Decode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
         }
 
         public static long FromBase34String(string value)
         {
-            Require.NotNull(value, "value");
-
-            if (value.Length > BASE34_MAX_LENGTH)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE34_MAX_LENGTH),
-                    "value");
-            }
-
+            Contract.Requires(value != null);
+            Contract.Requires(value.Length <= BASE34_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
-            Contract.EndContractBlock();
 
             return Decode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
         }
 
         public static long FromBase58String(string value)
         {
-            Require.NotNull(value, "value");
-
-            if (value.Length > BASE58_MAX_LENGTH)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, BASE58_MAX_LENGTH),
-                    "value");
-            }
-
+            Contract.Requires(value != null);
+            Contract.Requires(value.Length <= BASE58_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
-            Contract.EndContractBlock();
 
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
@@ -157,15 +133,8 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, FLICKR_BASE58_MAX_LENGTH, "value.Length");
             Contract.Ensures(Contract.Result<long>() >= 0L);
-            Contract.EndContractBlock();
-
-            if (value.Length > FLICKR_BASE58_MAX_LENGTH)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Int64Encoder_OutOfRangeLengthFormat, FLICKR_BASE58_MAX_LENGTH),
-                    "value");
-            }
 
             long result = 0L;
             long multiplier = 1L;
@@ -198,6 +167,7 @@ namespace Narvalo
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             Require.NotNull(value, "value");
+            Require.LessThanOrEqualTo(value.Length, alphabetLength, "value.Length");
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
             Contract.Ensures(Contract.Result<long>() >= 0L);
@@ -243,7 +213,7 @@ namespace Narvalo
             {
                 long r = value % alphabetLength;
 
-                Contract.Assume(r < alphabet.Length);
+                Contract.Assume(r < (long)alphabet.Length);
 
                 result = alphabet[r].ToString() + result;
                 value /= alphabetLength;

@@ -238,7 +238,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<T> OnSome(Action<T> action)
         {
@@ -469,7 +469,7 @@ namespace Narvalo.Fx
     {
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
@@ -525,7 +525,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<T> OrElse(Maybe<T> other)
         {
@@ -545,7 +545,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
@@ -557,7 +557,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
@@ -573,7 +573,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
@@ -594,7 +594,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
@@ -624,7 +624,7 @@ namespace Narvalo.Fx
 
 #if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized precondition by CCCheck.")]
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,

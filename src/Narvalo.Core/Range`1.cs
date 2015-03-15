@@ -3,7 +3,6 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -13,19 +12,10 @@ namespace Narvalo
         private readonly T _lowerEnd;
         private readonly T _upperEnd;
 
-#if !NO_CONTRACTS_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "RequiresAtCall-!(lowerEnd.CompareTo(upperEnd) > 0)",
-            Justification = "[CodeContracts] CCCheck does not seem to be able to understand a precondition in conjunction with IComparable<T>.")]
-#endif
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            if (lowerEnd.CompareTo(upperEnd) > 0)
-            {
-                throw new ArgumentOutOfRangeException("upperEnd", upperEnd, Strings_Core.Range_LowerEndNotLesserThanUpperEnd);
-            }
-
-            Contract.EndContractBlock();
+            Require.LessThanOrEqualTo(lowerEnd, upperEnd, "lowerEnd");
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
