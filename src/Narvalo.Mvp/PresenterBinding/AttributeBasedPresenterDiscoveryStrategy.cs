@@ -8,6 +8,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Linq;
 
     using Narvalo;
+    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
@@ -84,11 +85,13 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             Tracer.Info(
                 typeof(AttributeBasedPresenterDiscoveryStrategy),
-                @"Found presenter ""{0}"" for view ""{1}"", origin=""{2}"", binding mode=""{3}"".",
-                attribute.PresenterType.FullName,
-                attribute.ViewType.FullName,
-                attribute.Origin.FullName,
-                attribute.BindingMode.ToString());
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    @"Found presenter ""{0}"" for view ""{1}"", origin=""{2}"", binding mode=""{3}"".",
+                    attribute.PresenterType.FullName,
+                    attribute.ViewType.FullName,
+                    attribute.Origin.FullName,
+                    attribute.BindingMode.ToString()));
 
             switch (attribute.BindingMode)
             {

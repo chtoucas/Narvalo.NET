@@ -7,6 +7,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Reflection;
 
     using Narvalo;
+    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     /// <remarks>
@@ -34,7 +35,7 @@ namespace Narvalo.Mvp.PresenterBinding
                  : constructorResolver;
         }
 
-        public IPresenter Create(Type presenterType, Type viewType, IView view)
+        public Narvalo.Mvp.IPresenter Create(Type presenterType, Type viewType, IView view)
         {
             Require.NotNull(presenterType, "presenterType");
             Require.NotNull(viewType, "viewType");
@@ -44,14 +45,16 @@ namespace Narvalo.Mvp.PresenterBinding
 
             Tracer.Info(
                 this,
-                @"Constructing presenter ""{0}"" for view ""{1}"", view ""{2}"".",
-                presenterType.FullName,
-                viewType.FullName,
-                view.GetType().FullName);
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    @"Constructing presenter ""{0}"" for view ""{1}"", view ""{2}"".",
+                    presenterType.FullName,
+                    viewType.FullName,
+                    view.GetType().FullName));
 
             try
             {
-                return (IPresenter)ctor.Invoke(null, new[] { view });
+                return (Narvalo.Mvp.IPresenter)ctor.Invoke(null, new[] { view });
             }
             catch (Exception ex)
             {
@@ -71,7 +74,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public void Release(IPresenter presenter)
+        public void Release(Narvalo.Mvp.IPresenter presenter)
         {
             var disposablePresenter = presenter as IDisposable;
 

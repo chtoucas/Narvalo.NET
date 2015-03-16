@@ -5,6 +5,8 @@ namespace Narvalo.Mvp
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Mvp.Internal;
+
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         private readonly bool _closeable;
@@ -49,16 +51,12 @@ namespace Narvalo.Mvp
 
         protected virtual void PublishCore<T>(T message)
         {
-            Tracer.Warning(
-                typeof(MessageCoordinator),
-                "All messages published to this bus are dropped.");
+            Tracer.Warning(this, "All messages published to this bus are dropped.");
         }
 
         protected virtual void SubscribeCore<T>(Action<T> onNext)
         {
-            Tracer.Warning(
-                typeof(MessageCoordinator),
-                "Even if subscription is allowed, no messages will ever be received.");
+            Tracer.Warning(this, "Even if subscription is allowed, no messages will ever be received.");
         }
 
         private void ThrowIfClosed_()

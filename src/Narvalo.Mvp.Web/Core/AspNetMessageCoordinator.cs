@@ -115,9 +115,8 @@ namespace Narvalo.Mvp.Web.Core
 
             foreach (var type in neverReceivedMessages) {
                 Tracer.Warning(
-                    typeof(AspNetMessageCoordinator),
-                    @"You published a message of type ""{0}"" but you did not registered any handler for it.",
-                    type.FullName);
+                    this,
+                    "You published a message of type '" + type.FullName + "' but you did not registered any handler for it.");
             }
         }
 

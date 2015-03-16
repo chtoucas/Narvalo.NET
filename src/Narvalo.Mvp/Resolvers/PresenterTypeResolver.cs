@@ -40,7 +40,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            Tracer.Info(this, @"Attempting to resolve ""{0}"".", viewType.FullName);
+            Tracer.Info(this, "Attempting to resolve '" + viewType.FullName +"'.");
 
             var candidatePrefixes = GetCandidatePrefixesFromInterfaces(viewType)
                 .Append(GetCandidatePrefixFromViewName(viewType.Name));

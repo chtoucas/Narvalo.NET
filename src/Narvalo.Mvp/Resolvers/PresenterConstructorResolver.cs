@@ -7,6 +7,8 @@ namespace Narvalo.Mvp.Resolvers
     using System.Globalization;
     using System.Reflection.Emit;
 
+    using Narvalo.Mvp.Internal;
+
     public sealed class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
     {
         public DynamicMethod Resolve(Type presenterType, Type viewType)
@@ -17,7 +19,7 @@ namespace Narvalo.Mvp.Resolvers
             Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType), "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
             Debug.Assert(typeof(IView).IsAssignableFrom(viewType), "Asserts 'viewType' is of type 'IView'.");
 
-            Tracer.Info(this, @"Attempting to resolve ""{0}"".", presenterType.FullName);
+            Tracer.Info(this, "Attempting to resolve '" + presenterType.FullName + "'.");
 
             if (presenterType.IsNotPublic) {
                 throw new ArgumentException(
