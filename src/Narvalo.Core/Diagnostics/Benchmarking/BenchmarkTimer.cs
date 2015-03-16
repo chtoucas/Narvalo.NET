@@ -25,14 +25,13 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         public void Reset()
         {
-            _stopwatch.Reset(); 
+            _stopwatch.Reset();
             _stopwatch.Start();
         }
 
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        //[Conditional("CONTRACTS_FULL")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_stopwatch != null);

@@ -111,6 +111,7 @@ namespace Narvalo
         public override string ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
+
             return _code;
         }
 
@@ -126,7 +127,7 @@ namespace Narvalo
         /// <returns>The currency for the specified code.</returns>
         internal static Currency GetCurrency(string code)
         {
-            Contract.Requires(code != null);
+            Promise.NotNull(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             if (!CurrencyProvider.Current.CurrencyCodes.Contains(code))
@@ -370,14 +371,15 @@ namespace Narvalo
         {
             return _code.GetHashCode();
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_code != null);
         }
+
+#endif
     }
 }

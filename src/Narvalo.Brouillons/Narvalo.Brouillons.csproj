@@ -55,7 +55,7 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
-    <Compile Include="Check.cs" />
+    <Compile Include="Internal\Check.cs" />
     <Compile Include="Fx\Apply.cs" />
     <Compile Include="Array%24.cs">
       <SubType>Code</SubType>

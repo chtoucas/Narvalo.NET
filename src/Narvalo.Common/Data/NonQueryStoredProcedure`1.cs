@@ -100,11 +100,10 @@ namespace Narvalo.Data
 
             return new SqlConnection(ConnectionString);
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_connectionString != null);
@@ -112,6 +111,8 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
+
+#endif
     }
 
     [ContractClassFor(typeof(NonQueryStoredProcedure<>))]

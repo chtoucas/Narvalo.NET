@@ -7,7 +7,7 @@ namespace Narvalo.Internal
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Provides helper methods to instruct the code analysis tools
+    /// Provides helper methods to help the code analysis tools recognize
     /// that certain conditions are met.
     /// </summary>
     [DebuggerStepThrough]
@@ -28,6 +28,7 @@ namespace Narvalo.Internal
         /// <returns>The untouched input.</returns>
         [DebuggerHidden]
 #if !CONTRACTS_FULL
+        // NB: We can not use a conditional attribute here since the method has a return type.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static T AssumeNotNull<T>(this T @this) where T : class

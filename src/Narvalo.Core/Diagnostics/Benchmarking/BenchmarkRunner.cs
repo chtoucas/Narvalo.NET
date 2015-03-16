@@ -3,7 +3,6 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
@@ -84,7 +83,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         private TimeSpan Time_(Action action, int iterations)
         {
-            Check.NotNull(action);
+            Promise.NotNull(action);
             Contract.Ensures(Contract.Result<TimeSpan>().Ticks > 0L);
 
             // Make sure we start with a clean room.
@@ -104,7 +103,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         private int WarmUp_(Action action)
         {
-            Contract.Requires(action != null);
+            Promise.NotNull(action);
             Contract.Ensures(Contract.Result<int>() > 0);
 
             double testTicks = (double)TestDuration.Ticks;
@@ -128,16 +127,17 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             return iterations;
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_timer != null);
             Contract.Invariant(_testDuration.Ticks > 0L);
             Contract.Invariant(_warmUpDuration.Ticks > 0L);
         }
+
+#endif
     }
 }

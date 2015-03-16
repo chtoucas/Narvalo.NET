@@ -70,6 +70,9 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Promise.cs">
+      <Link>Internal\Promise.cs</Link>
+    </Compile>
     <Compile Include="Currency.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkProcessor.cs" />

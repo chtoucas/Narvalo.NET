@@ -105,8 +105,7 @@ namespace Narvalo
 
         public static long FromBase25String(string value)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(value.Length <= BASE25_MAX_LENGTH);
+            Contract.Requires(value != null && value.Length <= BASE25_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
             return Decode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
@@ -114,8 +113,7 @@ namespace Narvalo
 
         public static long FromBase34String(string value)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(value.Length <= BASE34_MAX_LENGTH);
+            Contract.Requires(value != null && value.Length <= BASE34_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
             return Decode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
@@ -123,8 +121,7 @@ namespace Narvalo
 
         public static long FromBase58String(string value)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(value.Length <= BASE58_MAX_LENGTH);
+            Contract.Requires(value != null && value.Length <= BASE58_MAX_LENGTH);
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);

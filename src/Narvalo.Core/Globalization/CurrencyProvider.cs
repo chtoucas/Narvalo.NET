@@ -59,14 +59,15 @@ namespace Narvalo.Globalization
 
             _factoryThunk = () => provider;
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_factoryThunk != null);
         }
+
+#endif
     }
 }

@@ -123,14 +123,15 @@ namespace Narvalo.Diagnostics.Benchmarking
                    action);
             }
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_runner != null);
         }
+
+#endif
     }
 }

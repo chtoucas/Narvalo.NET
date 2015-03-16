@@ -44,15 +44,16 @@ namespace Narvalo.Web.Semantic
         public int Height { get; set; }
 
         public int Width { get; set; }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_mimeType != null);
             Contract.Invariant(_url != null);
         }
+
+#endif
     }
 }

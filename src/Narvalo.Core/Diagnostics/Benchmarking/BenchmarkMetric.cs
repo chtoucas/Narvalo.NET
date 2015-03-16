@@ -96,11 +96,10 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             get { return (double)Duration.Ticks / Iterations; }
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_categoryName != null && _categoryName.Length != 0);
@@ -108,6 +107,8 @@ namespace Narvalo.Diagnostics.Benchmarking
             Contract.Invariant(_iterations > 0);
             Contract.Invariant(_duration.Ticks > 0L);
         }
+
+#endif
     }
 
     /// <content>

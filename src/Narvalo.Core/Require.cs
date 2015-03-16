@@ -14,8 +14,8 @@ namespace Narvalo
     /// </summary>
     /// <remarks>
     /// CCCheck does not seem to be able to comprehend a precondition used in conjunction
-    /// with <see cref="IComparable{T}"/>. Therefore we disable any Code Contracts specification 
-    /// for these methods.
+    /// with <see cref="IComparable{T}"/>. Therefore, any Code Contracts specification 
+    /// for this kind of method is disabled.
     /// </remarks>
     [DebuggerStepThrough]
     public static class Require
@@ -102,17 +102,35 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty string.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
-            NotNull(value, parameterName);
-
-            if (value.Length == 0)
+            if (String.IsNullOrEmpty(value))
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentEmptyFormat, parameterName),
+                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrEmptyFormat, parameterName),
+                    parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/> or empty,
+        /// and does not consist only of white-space characters.
+        /// </summary>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
+        /// or empty, or does not consist only of white-space characters.</exception>
+        [ContractArgumentValidator]
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrWhiteSpaceFormat, parameterName),
                     parameterName);
             }
 

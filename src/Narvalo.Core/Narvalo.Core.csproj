@@ -64,8 +64,10 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Promise.cs">
+      <Link>Internal\Promise.cs</Link>
+    </Compile>
     <Compile Include="BooleanStyles.cs" />
-    <Compile Include="Internal\Check.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Collections\Enumerable[Maybe]%24.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />

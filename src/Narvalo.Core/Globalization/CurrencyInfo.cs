@@ -188,16 +188,17 @@ namespace Narvalo.Globalization
         {
             return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_code != null);
             Contract.Invariant(_code.Length == 3);
             Contract.Invariant(_numericCode >= 0 && _numericCode < 1000);
         }
+
+#endif
     }
 }

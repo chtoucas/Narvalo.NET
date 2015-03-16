@@ -63,14 +63,15 @@ namespace Narvalo.Fx
         {
             return IsBreak ? _reason : "{Void}";
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(!_isBreak || _reason != null);
         }
+
+#endif
     }
 }

@@ -39,15 +39,16 @@ namespace Narvalo.IO
                 return Path.Combine(_relativeDirectoryName, _file.Name);
             }
         }
+        
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-            Justification = "[CodeContracts] Object Invariants.")]
         private void ObjectInvariants()
         {
             Contract.Invariant(_file != null);
             Contract.Invariant(_relativeDirectoryName != null);
         }
+
+#endif
     }
 }

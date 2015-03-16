@@ -134,20 +134,29 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is empty..
-        /// </summary>
-        internal static string Require_ArgumentEmptyFormat {
-            get {
-                return ResourceManager.GetString("Require_ArgumentEmptyFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
         /// </summary>
         internal static string Require_ArgumentNullFormat {
             get {
                 return ResourceManager.GetString("Require_ArgumentNullFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or empty..
+        /// </summary>
+        internal static string Require_ArgumentNullOrEmptyFormat {
+            get {
+                return ResourceManager.GetString("Require_ArgumentNullOrEmptyFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or white-space..
+        /// </summary>
+        internal static string Require_ArgumentNullOrWhiteSpaceFormat {
+            get {
+                return ResourceManager.GetString("Require_ArgumentNullOrWhiteSpaceFormat", resourceCulture);
             }
         }
         
