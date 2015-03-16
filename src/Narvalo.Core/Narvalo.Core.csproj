@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Collections\NamespaceDoc.cs" />
-    <Compile Include="ConvertTo.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetric.cs" />

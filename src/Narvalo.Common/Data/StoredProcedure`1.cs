@@ -82,7 +82,7 @@ namespace Narvalo.Data
             Justification = "The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand_(SqlConnection connection)
         {
-            Contract.Requires(connection != null);
+            Promise.NotNull(connection);
             Contract.Ensures(Contract.Result<SqlCommand>() != null);
 
             SqlCommand tmpCmd = null;
@@ -116,7 +116,7 @@ namespace Narvalo.Data
 
         private SqlDataReader ExecuteCommand_(SqlCommand command)
         {
-            Contract.Requires(command != null);
+            Promise.NotNull(command);
             Contract.Ensures(Contract.Result<SqlDataReader>() != null);
 
             return command.ExecuteReader(CommandBehavior);

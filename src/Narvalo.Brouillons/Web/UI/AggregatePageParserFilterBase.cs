@@ -37,8 +37,10 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                foreach (var filter in _filters) {
-                    if (!filter.AllowCode) {
+                foreach (var filter in _filters)
+                {
+                    if (!filter.AllowCode)
+                    {
                         return false;
                     }
                 }
@@ -53,7 +55,8 @@ namespace Narvalo.Web.UI
             {
                 int num = Sentinel_;
 
-                foreach (var filter in _filters) {
+                foreach (var filter in _filters)
+                {
                     num = Min_(num, filter.NumberOfControlsAllowed);
                 }
 
@@ -67,7 +70,8 @@ namespace Narvalo.Web.UI
             {
                 int num = Sentinel_;
 
-                foreach (var filter in _filters) {
+                foreach (var filter in _filters)
+                {
                     num = Min_(num, filter.NumberOfDirectDependenciesAllowed);
                 }
 
@@ -81,7 +85,8 @@ namespace Narvalo.Web.UI
             {
                 int num = Sentinel_;
 
-                foreach (var filter in _filters) {
+                foreach (var filter in _filters)
+                {
                     num = Min_(num, filter.TotalNumberOfDependenciesAllowed);
                 }
 
@@ -91,8 +96,10 @@ namespace Narvalo.Web.UI
 
         public override bool AllowBaseType(Type baseType)
         {
-            foreach (var filter in _filters) {
-                if (!filter.AllowBaseType(baseType)) {
+            foreach (var filter in _filters)
+            {
+                if (!filter.AllowBaseType(baseType))
+                {
                     return false;
                 }
             }
@@ -102,8 +109,10 @@ namespace Narvalo.Web.UI
 
         public override bool AllowControl(Type controlType, ControlBuilder builder)
         {
-            foreach (var filter in _filters) {
-                if (!filter.AllowControl(controlType, builder)) {
+            foreach (var filter in _filters)
+            {
+                if (!filter.AllowControl(controlType, builder))
+                {
                     return false;
                 }
             }
@@ -113,8 +122,10 @@ namespace Narvalo.Web.UI
 
         public override bool AllowServerSideInclude(string includeVirtualPath)
         {
-            foreach (var filter in _filters) {
-                if (!filter.AllowServerSideInclude(includeVirtualPath)) {
+            foreach (var filter in _filters)
+            {
+                if (!filter.AllowServerSideInclude(includeVirtualPath))
+                {
                     return false;
                 }
             }
@@ -124,8 +135,10 @@ namespace Narvalo.Web.UI
 
         public override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType)
         {
-            foreach (var filter in _filters) {
-                if (!filter.AllowVirtualReference(referenceVirtualPath, referenceType)) {
+            foreach (var filter in _filters)
+            {
+                if (!filter.AllowVirtualReference(referenceVirtualPath, referenceType))
+                {
                     return false;
                 }
             }
@@ -137,7 +150,8 @@ namespace Narvalo.Web.UI
         {
             var filter = _filters.FirstOrDefault();
 
-            if (filter != null) {
+            if (filter != null)
+            {
                 return filter.GetCompilationMode(current);
             }
 
@@ -146,10 +160,12 @@ namespace Narvalo.Web.UI
 
         public override Type GetNoCompileUserControlType()
         {
-            foreach (var filter in _filters) {
+            foreach (var filter in _filters)
+            {
                 Type type = filter.GetNoCompileUserControlType();
 
-                if (type != null) {
+                if (type != null)
+                {
                     return type;
                 }
             }
@@ -159,22 +175,26 @@ namespace Narvalo.Web.UI
 
         public override void ParseComplete(ControlBuilder rootBuilder)
         {
-            foreach (var filter in _filters) {
+            foreach (var filter in _filters)
+            {
                 filter.ParseComplete(rootBuilder);
             }
         }
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)
         {
-            foreach (var filter in _filters) {
+            foreach (var filter in _filters)
+            {
                 filter.PreprocessDirective(directiveName, attributes);
             }
         }
 
         public override bool ProcessCodeConstruct(CodeConstructType codeType, string code)
         {
-            foreach (var filter in _filters) {
-                if (filter.ProcessCodeConstruct(codeType, code)) {
+            foreach (var filter in _filters)
+            {
+                if (filter.ProcessCodeConstruct(codeType, code))
+                {
                     return true;
                 }
             }
@@ -184,8 +204,10 @@ namespace Narvalo.Web.UI
 
         public override bool ProcessDataBindingAttribute(string controlId, string name, string value)
         {
-            foreach (var filter in _filters) {
-                if (filter.ProcessDataBindingAttribute(controlId, name, value)) {
+            foreach (var filter in _filters)
+            {
+                if (filter.ProcessDataBindingAttribute(controlId, name, value))
+                {
                     return true;
                 }
             }
@@ -195,8 +217,10 @@ namespace Narvalo.Web.UI
 
         public override bool ProcessEventHookup(string controlId, string eventName, string handlerName)
         {
-            foreach (var filter in _filters) {
-                if (filter.ProcessEventHookup(controlId, eventName, handlerName)) {
+            foreach (var filter in _filters)
+            {
+                if (filter.ProcessEventHookup(controlId, eventName, handlerName))
+                {
                     return true;
                 }
             }

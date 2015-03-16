@@ -10,6 +10,8 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Linq;
     using System.Reflection;
 
+    using Narvalo.Internal;
+
     public sealed class BenchmarkProcessor
     {
         private readonly BenchmarkRunner _runner;
@@ -102,6 +104,8 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         private IEnumerable<Benchmark> FindBenchmarks_(Type type)
         {
+            Promise.NotNull(type);
+
             MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 
             foreach (var method in methods)

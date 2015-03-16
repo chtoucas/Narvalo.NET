@@ -291,8 +291,9 @@ namespace Narvalo.Globalization
 
         public static short GetISOCode(string twoLetterISOCode)
         {
-            if (!TwoLetterCodeToNumericCode_.ContainsKey(twoLetterISOCode)) {
-                throw new Exception(String.Format("There is no numeric value for regionInfo {0}", twoLetterISOCode));
+            if (!TwoLetterCodeToNumericCode_.ContainsKey(twoLetterISOCode))
+            {
+                throw new Exception(Format.InvariantCulture("There is no numeric value for regionInfo {0}", twoLetterISOCode));
             }
 
             return TwoLetterCodeToNumericCode_[twoLetterISOCode];
@@ -302,7 +303,8 @@ namespace Narvalo.Globalization
         {
             // Numeric codes that have been withdrawn from ISO 3166.
             // See the "Withdrawn codes" section at http://en.wikipedia.org/wiki/ISO_3166-1_numeric.
-            switch (numericCode) {
+            switch (numericCode)
+            {
                 case 230: // Ethiopia (before Eritrea split away in 1993).
                 case 532: // Netherlands Antilles (before Aruba split away in 1986).
                 case 590: // Panama (before adding Panama Canal Zone in 1979).
@@ -313,13 +315,16 @@ namespace Narvalo.Globalization
             var lookup = NumericCodeToTwoLetterCode_.Value;
             var seq = lookup[numericCode].ToList();
 
-            if (seq.Count == 0) {
+            if (seq.Count == 0)
+            {
                 throw new Exception("ISO Code not found: " + numericCode);
             }
-            else if (seq.Count > 1) {
+            else if (seq.Count > 1)
+            {
                 throw new Exception("More than one ISO Code found: " + numericCode);
             }
-            else {
+            else
+            {
                 return seq[0];
             }
         }

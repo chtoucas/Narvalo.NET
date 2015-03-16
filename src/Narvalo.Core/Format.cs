@@ -8,6 +8,7 @@ namespace Narvalo
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
+    [DebuggerStepThrough]
     public static class Format
     {
         [Pure]

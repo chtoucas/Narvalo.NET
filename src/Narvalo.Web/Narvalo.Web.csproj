@@ -97,6 +97,9 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Promise.cs">
+      <Link>Internal\Promise.cs</Link>
+    </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

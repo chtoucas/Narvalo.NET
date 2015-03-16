@@ -6,6 +6,8 @@ namespace Narvalo.Web.Optimization
     using System.Diagnostics.Contracts;
     using System.Text.RegularExpressions;
 
+    using Narvalo.Internal;
+
     /// <summary>
     /// Représente un nettoyeur simple d'espaces blancs.
     /// </summary>
@@ -73,7 +75,7 @@ namespace Narvalo.Web.Optimization
 
         private static bool IsTabsOrSpaces_(string value)
         {
-            Contract.Requires(value != null);
+            Promise.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {

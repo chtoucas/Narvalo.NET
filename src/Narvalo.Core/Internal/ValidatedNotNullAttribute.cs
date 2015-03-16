@@ -3,9 +3,6 @@
 namespace Narvalo.Internal
 {
     using System;
-#if !CONTRACTS_FULL
-    using System.Diagnostics.CodeAnalysis;
-#endif
 
     /// <summary>
     /// Decorating a parameter with this attribute informs the Code Analysis tool
@@ -13,20 +10,17 @@ namespace Narvalo.Internal
     /// </summary>
     /// <remarks>
     /// Using the parameter suppresses the CA1062 warning.
-    /// <seealso href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx" />
+    /// <see href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx" />
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 #if CONTRACTS_FULL
     // If Code Contracts is enabled, this attribute is used by the Require class for writing preconditions. 
     // Therefore, to be able to perform Static Contracts checkings, this attribute MUST remain public. 
     // Not doing so would lead to a CC1038 error. 
-    public
+    public sealed class ValidatedNotNullAttribute : Attribute { }
 #else
     // This class is of no use outside this assembly. In fact, we do expect to have the CONTRACTS_FULL symbol 
     // defined ONLY when we explicitly run the Code Contracts analysis tools.
-    [SuppressMessage("Gendarme.Rules.Performance", "AvoidUninstantiatedInternalClassesRule",
-        Justification = "This method is used by the Code Analysis tools.")]
-    internal
+    internal sealed class ValidatedNotNullAttribute : Attribute { }
 #endif
- sealed class ValidatedNotNullAttribute : Attribute { }
 }

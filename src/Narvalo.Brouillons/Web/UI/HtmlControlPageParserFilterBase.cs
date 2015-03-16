@@ -20,7 +20,8 @@ namespace Narvalo.Web.UI
         {
             Require.NotNull(rootBuilder, "rootBuilder");
 
-            if (Enabled) {
+            if (Enabled)
+            {
                 TransformRecursively_(rootBuilder);
             }
 
@@ -31,39 +32,49 @@ namespace Narvalo.Web.UI
         {
             ArrayList subBuilders = cb.SubBuilders;
 
-            for (int i = 0; i < subBuilders.Count; i++) {
+            for (int i = 0; i < subBuilders.Count; i++)
+            {
                 var literal = subBuilders[i] as string;
-                if (String.IsNullOrEmpty(literal)) {
+                if (String.IsNullOrEmpty(literal))
+                {
                     continue;
                 }
 
                 subBuilders[i] = TransformLiteral(literal);
             }
 
-            if (cb.ControlType == typeof(TControl)) {
-                foreach (SimplePropertyEntry entry in cb.GetSimplePropertyEntries()) {
+            if (cb.ControlType == typeof(TControl))
+            {
+                foreach (SimplePropertyEntry entry in cb.GetSimplePropertyEntries())
+                {
                     entry.Value = TransformLiteral(entry.PersistedValue);
                 }
             }
-            else {
-                foreach (object subBuilder in subBuilders) {
+            else
+            {
+                foreach (object subBuilder in subBuilders)
+                {
                     var controlBuilder = subBuilder as ControlBuilder;
-                    if (controlBuilder != null) {
+                    if (controlBuilder != null)
+                    {
                         TransformRecursively_(controlBuilder);
                     }
                 }
 
-                foreach (TemplatePropertyEntry entry in cb.TemplatePropertyEntries) {
+                foreach (TemplatePropertyEntry entry in cb.TemplatePropertyEntries)
+                {
                     TransformRecursively_(entry.Builder);
                 }
 
-                foreach (ComplexPropertyEntry entry in cb.ComplexPropertyEntries) {
+                foreach (ComplexPropertyEntry entry in cb.ComplexPropertyEntries)
+                {
                     TransformRecursively_(entry.Builder);
                 }
             }
 
             ControlBuilder defaultPropertyBuilder = cb.GetDefaultPropertyBuilder();
-            if (defaultPropertyBuilder != null) {
+            if (defaultPropertyBuilder != null)
+            {
                 TransformRecursively_(defaultPropertyBuilder);
             }
         }

@@ -12,10 +12,10 @@ namespace Narvalo.Diagnostics.Benchmarking
     /// Even so, any error is of course mine.
     /// </remarks>
     /// Note to me; other references I should explore
-    /// <seealso href="https://code.google.com/p/noda-time/"/>
-    /// <seealso href="https://github.com/mattwarren/MiniBench-WIP"/>
-    /// <seealso href="http://mattwarren.org/2014/09/19/the-art-of-benchmarking/"/>
-    /// <seealso href="http://www.hanselman.com/blog/ProperBenchmarkingToDiagnoseAndSolveANETSerializationBottleneck.aspx"/>
+    /// <see href="https://code.google.com/p/noda-time/">NodaTime</see>
+    /// <see href="https://github.com/mattwarren/MiniBench-WIP">MiniBench</see>
+    /// <see href="http://mattwarren.org/2014/09/19/the-art-of-benchmarking/"/>
+    /// <see href="http://www.hanselman.com/blog/ProperBenchmarkingToDiagnoseAndSolveANETSerializationBottleneck.aspx"/>
     [CompilerGenerated]
     internal static class NamespaceDoc { }
 }

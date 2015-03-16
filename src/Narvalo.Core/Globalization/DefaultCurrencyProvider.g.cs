@@ -25,7 +25,7 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <remarks>
         /// The list is built out of data found on the "Association Suisse de Normalisation"
-        /// <seealso href="http://www.currency-iso.org/en/home.html">website</seealso>.
+        /// <see href="http://www.currency-iso.org/en/home.html">website</see>.
         /// </remarks>
         /// <value>The list of currently active currencies.</value>
         internal static IEnumerable<CurrencyInfo> CurrentCurrencies
@@ -1410,7 +1410,7 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <remarks>
         /// The list is built out of data found on the "Association Suisse de Normalisation"
-        /// <seealso href="http://www.currency-iso.org/en/home.html">website</seealso>.
+        /// <see href="http://www.currency-iso.org/en/home.html">website</see>.
         /// </remarks>
         /// <value>The list of discontinued currencies.</value>
         internal static IEnumerable<CurrencyInfo> LegacyCurrencies

@@ -2,10 +2,7 @@
 
 namespace Narvalo.Globalization
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -186,7 +183,7 @@ namespace Narvalo.Globalization
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0} ({1})", EnglishName, EnglishRegionName);
+            return Format.InvariantCulture("{0} ({1})", EnglishName, EnglishRegionName);
         }
         
 #if CONTRACTS_FULL

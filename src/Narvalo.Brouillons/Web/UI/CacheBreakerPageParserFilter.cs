@@ -28,10 +28,12 @@ namespace Narvalo.Web.UI
 
         protected override string TransformLiteral(string literal)
         {
-            if (literal.Contains(".css")) {
+            if (literal.Contains(".css"))
+            {
                 literal = literal.Replace(".css", ".css?v=1234567890");
             }
-            if (literal.Contains(".js")) {
+            if (literal.Contains(".js"))
+            {
                 literal = literal.Replace(".js", ".js?v=1234567890");
             }
             return literal;

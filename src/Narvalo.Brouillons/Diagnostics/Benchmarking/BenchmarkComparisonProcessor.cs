@@ -89,10 +89,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             if (attr == null)
             {
-                var message = String.Format(
-                    CultureInfo.CurrentCulture,
-                    "XXX",
-                    type.Name);
+                var message = Format.CurrentCulture("XXX", type.Name);
 
                 throw new BenchmarkException(message);
             }

@@ -13,8 +13,7 @@ namespace Narvalo.Internal
     /// <remarks>
     /// <para>These helpers MUST NOT be used in place of proper validation routines of public 
     /// arguments but they should rather be reserved for internal sanity checking.</para>
-    /// <para>If Code Contracts is enabled the methods are recognized as preconditions.
-    /// If Code Contracts is disabled,
+    /// <para>If Code Contracts is enabled the methods are recognized as preconditions; otherwise
     /// - In Debug builds, the methods turn into debugging assertions.
     /// - Otherwise, the methods are simply discarded by the compiler.</para>
     /// </remarks>
@@ -24,8 +23,7 @@ namespace Narvalo.Internal
         /// <summary>
         /// Checks for a condition.
         /// </summary>
-        /// <param name="condition">The conditional expression to evaluate.
-        /// It must be pure and use only public methods.</param>
+        /// <param name="condition">The conditional expression to evaluate.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [DebuggerHidden]

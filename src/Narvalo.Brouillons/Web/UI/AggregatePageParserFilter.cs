@@ -33,7 +33,8 @@ namespace Narvalo.Web.UI
                 = WebConfigurationManager.GetSection(ParserFiltersSection.DefaultName, VirtualPath)
                     as ParserFiltersSection;
 
-            if (section == null) {
+            if (section == null)
+            {
                 throw new NotSupportedException("You forgot to create a ParserFiltersSection configuration.");
             }
 
@@ -43,7 +44,8 @@ namespace Narvalo.Web.UI
 
             var filters = new List<PageParserFilter>();
 
-            foreach (ParserFilterElement element in section.ParserFilters) {
+            foreach (ParserFilterElement element in section.ParserFilters)
+            {
                 var filter = (PageParserFilter)Activator.CreateInstance(element.ElementType, true /* nonPublic */);
                 initialize.Invoke(filter, new[] { virtualPath, parser });
 

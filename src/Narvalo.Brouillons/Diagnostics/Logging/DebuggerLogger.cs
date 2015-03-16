@@ -29,9 +29,9 @@ namespace Narvalo.Diagnostics.Logging
 
             Debugger.Log(debuggerLevel, Name, message);
 
-            if (exception != null) {
-                string debuggerMessage = String.Format(
-                    CultureInfo.CurrentCulture,
+            if (exception != null)
+            {
+                string debuggerMessage = Format.CurrentCulture(
                     Strings.DebuggerLogger_MessageFormat,
                     exception.GetType().FullName,
                     exception.Message,
@@ -43,7 +43,8 @@ namespace Narvalo.Diagnostics.Logging
 
         static int ToDebuggerLevel_(LoggerLevel level)
         {
-            switch (level) {
+            switch (level)
+            {
                 case LoggerLevel.Debug:
                 case LoggerLevel.Informational:
                 case LoggerLevel.Notice:

@@ -10,7 +10,6 @@ namespace Narvalo.GhostScript.Internal
     {
         public Win64GhostScriptApi() : base() { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois")]
         [HandleProcessCorruptedStateExceptions]
         protected override void ExecuteNative(int argc, IntPtr argv)
         {

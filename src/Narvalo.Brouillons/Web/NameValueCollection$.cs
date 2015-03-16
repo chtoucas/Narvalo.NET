@@ -13,7 +13,8 @@ namespace Narvalo.Web
         {
             Require.Object(nvc);
 
-            if (nvc.Count == 0) {
+            if (nvc.Count == 0)
+            {
                 return String.Empty;
             }
 
@@ -21,8 +22,7 @@ namespace Narvalo.Web
             return String.Join("&",
                 Array.ConvertAll(
                     nvc.AllKeys,
-                    key => String.Format(
-                        CultureInfo.InvariantCulture,
+                    key => Format.InvariantCulture(
                         "{0}={1}",
                         HttpUtility.UrlEncode(key),
                         HttpUtility.UrlEncode(nvc[key])

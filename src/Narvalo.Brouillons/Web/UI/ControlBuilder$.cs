@@ -37,9 +37,11 @@ namespace Narvalo.Web.UI
 
             ControlBuilder result = null;
 
-            while (true) {
+            while (true)
+            {
                 var parentBuilder = @this.GetParentBuilder();
-                if (parentBuilder == null) {
+                if (parentBuilder == null)
+                {
                     break;
                 }
                 result = parentBuilder;

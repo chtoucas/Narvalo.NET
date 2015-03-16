@@ -14,7 +14,8 @@ namespace Narvalo.Web.UI
 
         public override bool ProcessCodeConstruct(CodeConstructType codeType, string code)
         {
-            if (codeType == CodeConstructType.ScriptTag) {
+            if (codeType == CodeConstructType.ScriptTag)
+            {
                 throw new InvalidOperationException("Say NO to server script blocks!");
             }
             return base.ProcessCodeConstruct(codeType, code);

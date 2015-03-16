@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics.Contracts;
-    using System.Globalization;
 
     public partial struct Range<T> : IEquatable<Range<T>>
         where T : struct, IEquatable<T>, IComparable<T>
@@ -53,8 +52,7 @@ namespace Narvalo
 
         public override string ToString()
         {
-            return String.Format(
-                CultureInfo.InvariantCulture,
+            return Format.InvariantCulture(
                 "LowerEnd={0};UpperEnd={1}",
                 LowerEnd.ToString(),
                 UpperEnd.ToString());

@@ -2,9 +2,10 @@
 
 namespace Narvalo.Web.Internal
 {
-    using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
+
+    using Narvalo.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="TagBuilder"/>.
@@ -13,14 +14,14 @@ namespace Narvalo.Web.Internal
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
-            Contract.Requires(@this != null);
+            Promise.NotNull(@this);
 
             return @this.ToHtmlString(TagRenderMode.Normal);
         }
 
         public static IHtmlString ToHtmlString(this TagBuilder @this, TagRenderMode renderMode)
         {
-            Require.Object(@this);
+            Promise.NotNull(@this);
 
             return new HtmlString(@this.ToString(renderMode));
         }

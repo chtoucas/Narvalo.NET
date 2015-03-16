@@ -9,8 +9,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Globalization;
 
     // FIXME: This struct is a bit too large.
-    public partial struct BenchmarkMetric
-        : IEquatable<BenchmarkMetric>, IFormattable
+    public partial struct BenchmarkMetric : IEquatable<BenchmarkMetric>, IFormattable
     {
         private const long TICKS_PER_SECOND = 10000000L;
 
