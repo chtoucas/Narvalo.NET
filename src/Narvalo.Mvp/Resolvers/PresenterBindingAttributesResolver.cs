@@ -4,10 +4,9 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
     {
@@ -15,7 +14,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            Tracer.Info(this, "Attempting to resolve '" + viewType.FullName + "'.");
+            Trace.TraceInformation("[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.", viewType.FullName);
 
             var attributes = viewType
                 .GetCustomAttributes(typeof(PresenterBindingAttribute), inherit: true)

@@ -2,13 +2,11 @@
 
 namespace Narvalo.Mvp.PresenterBinding
 {
-    using System;
     using System.Collections.Generic;
-    using System.Globalization;
+    using System.Diagnostics;
 
     using Narvalo;
     using Narvalo.Mvp;
-    using Narvalo.Mvp.Internal;
     using Narvalo.Mvp.Resolvers;
 
     public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
@@ -45,13 +43,10 @@ namespace Narvalo.Mvp.PresenterBinding
 
                 if (presenterType != null)
                 {
-                    Tracer.Info(
-                        this,
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "Found presenter '{0}' for view '{1}'.",
-                            presenterType.FullName,
-                            viewType.FullName));
+                    Trace.TraceInformation(
+                        "[ConventionBasedPresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}'.",
+                        presenterType.FullName,
+                        viewType.FullName);
 
                     var binding = new PresenterBindingParameter(
                         presenterType,
@@ -64,7 +59,9 @@ namespace Narvalo.Mvp.PresenterBinding
                 }
                 else
                 {
-                    Tracer.Info(this, "No presenter found for view '" + viewType.FullName + "'.");
+                    Trace.TraceInformation(
+                        "[ConventionBasedPresenterDiscoveryStrategy] No presenter found for view '{0}'",
+                        viewType.FullName);
                 }
             }
 

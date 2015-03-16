@@ -4,11 +4,10 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
@@ -19,7 +18,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            Tracer.Info(this, @"Attempting to resolve '" + viewType.FullName + "'.");
+            Trace.TraceInformation("[CompositeViewTypeResolver] Attempting to resolve '{0}'", viewType.FullName);
 
             ValidateViewType(viewType);
 

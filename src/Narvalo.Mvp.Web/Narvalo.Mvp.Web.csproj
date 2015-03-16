@@ -15,9 +15,6 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Narvalo.Tracer.cs">
-      <Link>Internal\Narvalo.Tracer.cs</Link>
-    </Compile>
     <Compile Include="..\Common\Require.cs">
       <Link>Internal\Require.cs</Link>
     </Compile>

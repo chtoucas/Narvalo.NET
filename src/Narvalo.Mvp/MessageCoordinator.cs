@@ -3,9 +3,8 @@
 namespace Narvalo.Mvp
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-
-    using Narvalo.Mvp.Internal;
 
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
@@ -51,12 +50,12 @@ namespace Narvalo.Mvp
 
         protected virtual void PublishCore<T>(T message)
         {
-            Tracer.Warning(this, "All messages published to this bus are dropped.");
+            Trace.TraceWarning("[MessageCoordinator] All messages published to this bus are dropped.");
         }
 
         protected virtual void SubscribeCore<T>(Action<T> onNext)
         {
-            Tracer.Warning(this, "Even if subscription is allowed, no messages will ever be received.");
+            Trace.TraceWarning("[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
         }
 
         private void ThrowIfClosed_()

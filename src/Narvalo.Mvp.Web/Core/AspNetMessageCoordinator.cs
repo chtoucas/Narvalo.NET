@@ -35,7 +35,8 @@ namespace Narvalo.Mvp.Web.Core
         {
             if (_closed) { return; }
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 if (_closed) { return; }
 
                 _closed = true;
@@ -66,7 +67,8 @@ namespace Narvalo.Mvp.Web.Core
         {
             var messagesOfT = _messages.GetOrAdd(typeof(T), _ => new List<T>());
 
-            lock (messagesOfT) {
+            lock (messagesOfT)
+            {
                 messagesOfT.Add(message);
             }
         }
@@ -75,7 +77,8 @@ namespace Narvalo.Mvp.Web.Core
         {
             var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
 
-            lock (handlersOfT) {
+            lock (handlersOfT)
+            {
                 handlersOfT.Add(_ => onNext((T)_));
             }
         }
@@ -89,7 +92,8 @@ namespace Narvalo.Mvp.Web.Core
                               from handler in _handlers[t]
                               select handler;
 
-            foreach (var handler in handlersOfT) {
+            foreach (var handler in handlersOfT)
+            {
                 handler(message);
             }
         }
@@ -103,7 +107,8 @@ namespace Narvalo.Mvp.Web.Core
                               from m in _messages[t].Cast<T>()
                               select m;
 
-            foreach (var message in messagesOfT) {
+            foreach (var message in messagesOfT)
+            {
                 onNext(message);
             }
         }
@@ -113,10 +118,11 @@ namespace Narvalo.Mvp.Web.Core
         {
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 
-            foreach (var type in neverReceivedMessages) {
-                Tracer.Warning(
-                    this,
-                    "You published a message of type '" + type.FullName + "' but you did not registered any handler for it.");
+            foreach (var type in neverReceivedMessages)
+            {
+                Trace.TraceWarning(
+                    "[AspNetMessageCoordinator] You published a message of type '{1}' but you did not registered any handler for it.",
+                    type.FullName);
             }
         }
 
@@ -124,7 +130,8 @@ namespace Narvalo.Mvp.Web.Core
             Justification = "ASP.NET method name.")]
         private void ThrowIfClosed_()
         {
-            if (_closed) {
+            if (_closed)
+            {
                 throw new InvalidOperationException(
                     "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during 'PreRenderComplete'.");
             }

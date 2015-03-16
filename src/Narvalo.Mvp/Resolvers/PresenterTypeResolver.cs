@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
@@ -40,7 +41,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            Tracer.Info(this, "Attempting to resolve '" + viewType.FullName +"'.");
+            Trace.TraceInformation("[PresenterTypeResolver] Attempting to resolve '{0}'", viewType.FullName);
 
             var candidatePrefixes = GetCandidatePrefixesFromInterfaces(viewType)
                 .Append(GetCandidatePrefixFromViewName(viewType.Name));
