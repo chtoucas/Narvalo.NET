@@ -28,6 +28,7 @@ namespace Narvalo.Internal
         /// It must be pure and use only public methods.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        [DebuggerHidden]
         [ContractAbbreviator]
         public static void Condition(bool condition)
         {
@@ -43,6 +44,7 @@ namespace Narvalo.Internal
         /// <param name="value">The argument to check.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        [DebuggerHidden]
         [ContractAbbreviator]
         public static void NotNull<T>(T value) where T : class
         {
@@ -57,6 +59,7 @@ namespace Narvalo.Internal
         /// <param name="value">The argument to check.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        [DebuggerHidden]
         [ContractAbbreviator]
         public static void NotNullOrEmpty(string value)
         {
@@ -72,6 +75,7 @@ namespace Narvalo.Internal
         /// <param name="value">The argument to check.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        [DebuggerHidden]
         [ContractAbbreviator]
         public static void NotNullOrWhiteSpace(string value)
         {

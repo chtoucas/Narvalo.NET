@@ -152,7 +152,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or white-space..
+        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or empty, or contains only white-space characters..
         /// </summary>
         internal static string Require_ArgumentNullOrWhiteSpaceFormat {
             get {

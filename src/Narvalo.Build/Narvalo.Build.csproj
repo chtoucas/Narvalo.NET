@@ -63,8 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Narvalo.Minimal.cs">
-      <Link>Internal\Narvalo.Minimal.cs</Link>
+    <Compile Include="..\Common\Require.cs">
+      <Link>Internal\Require.cs</Link>
     </Compile>
     <Compile Include="ClosureCompiler.cs" />
     <Compile Include="JavaTaskBase.cs" />
