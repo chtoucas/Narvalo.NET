@@ -14,11 +14,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\common\Narvalo.Minimal.cs">
-      <Link>Internal\Narvalo.Minimal.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Narvalo.Tracer.cs">
-      <Link>Internal\Narvalo.Tracer.cs</Link>
+    <Compile Include="..\Common\Require.cs">
+      <Link>Internal\Require.cs</Link>
     </Compile>
     <Compile Include="CompositeView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -26,6 +23,7 @@
     <Compile Include="IMessageCoordinator.cs" />
     <Compile Include="Internal\Enumerable`1%24.cs" />
     <Compile Include="Internal\IPresenter.cs" />
+    <Compile Include="Internal\Tracer.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IPresenter`1.cs" />
     <Compile Include="IView.cs" />

@@ -16,8 +16,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\common\Narvalo.Minimal.cs">
-      <Link>Internal\Narvalo.Minimal.cs</Link>
+    <Compile Include="..\Common\Require.cs">
+      <Link>Internal\Require.cs</Link>
     </Compile>
     <Compile Include="PlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
