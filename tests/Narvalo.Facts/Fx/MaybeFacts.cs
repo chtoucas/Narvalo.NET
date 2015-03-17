@@ -728,19 +728,24 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Value_IsImmutable_OnceSome()
+        public static void IsImmutable()
         {
             // Arrange
-            var reference = new Stub(1);
-            var option = Maybe.Create(reference);
+            var stub = new Stub(1);
+            var option = Maybe.Create(stub);
 
             // Act
-            reference = null;
+            stub = null;
 
             // Assert
             Assert.True(option.IsSome);
             Assert.NotEqual(null, option.Value);
             Assert.Equal(1, option.Value.Value);
+        }
+
+        static void Nullify_(ref Stub stub)
+        {
+            stub = null;
         }
 
         #endregion

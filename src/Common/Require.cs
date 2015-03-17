@@ -9,7 +9,7 @@ namespace Narvalo
 
     /// <summary>
     /// Provides helper methods to perform argument validation.
-    /// If Code Contracts is enabled, these methods are recognized as preconditions.
+    /// If Code Contracts are enabled, these methods are recognized as preconditions.
     /// </summary>
     [DebuggerStepThrough]
     internal static class Require

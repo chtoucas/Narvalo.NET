@@ -6,6 +6,8 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
+
     public static class Int64Encoder
     {
         private const int BASE25_ALPHABET_LENGTH = 25;

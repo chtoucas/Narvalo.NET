@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -51,7 +50,6 @@ namespace Narvalo.Fx
      *   circumstances, I might like to be able to give an explanation for the absence of a value. 
      *   In fact, that's one of the purpose of the Either monad.
      * - It is a reference type
-     * - An instance is mutable for reference types
      * - (more to be added later, I am sure there are other problems)
      * 
      * This class is sometimes referred to as the Option type.
@@ -67,12 +65,18 @@ namespace Narvalo.Fx
      * 
      * Argument _towards_ a structure
      * : C# then guarantees that an instance is never null, which seems like a good thing here.
-     *   Isn't it one of the reasons why we decided in the first place to create such a class?
+     *   Isn't it one of the reasons why in the first place we decided to create such a class?
      * 
      * Argument _against_ a structure
-     * : An instance is mutable if `T` is a reference type. This should always raise a big warning.
+     * : An instance is _mutable_ if `T` is a reference type. This should always raise a big warning.
+     *   The underlying value field is "shallowly" immutable in the sense defined
+     *   [here](http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx).
      *   
      * In the end, creating a mutable structure seems way too hazardous.
+     * 
+     * ### Immutability ###
+     * 
+     * The class is immutable. (TODO: expand on this).
      *   
      * ### Maybe<T> vs Nullable<T> ###
      * 
@@ -151,6 +155,9 @@ namespace Narvalo.Fx
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         private readonly bool _isSome;
+
+        // You should not use this field directly. Use instead the property; the Code Contracts 
+        // static checker will attempt to prove that no illegal access happen (i.e. when IsNone is true).
         private readonly T _value;
 
         /// <summary>
@@ -192,25 +199,36 @@ namespace Narvalo.Fx
         /// <summary>
         /// Gets the enclosed value.
         /// </summary>
+        /// <remarks>
+        /// Any access to this property must be protected by firstly checking that <see cref="IsSome"/> 
+        /// is <see langword="true"/>.
+        /// </remarks>
         /// <exception cref="InvalidOperationException">The object does not enclose any value.</exception>
         internal T Value
         {
             get
             {
+                // Ensures that any call to this property is guarded upstream.
+                Promise.Condition(IsSome);
                 Contract.Ensures(Contract.Result<T>() != null);
 
-#if DEBUG
-                // FIXME
-                if (!_isSome)
-                {
-                    throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
-                }
-#endif
+#if CONTRACTS_FULL
 
                 if (_value == null)
                 {
-                    throw new InvalidOperationException(Strings_Core.Maybe_NoneHasNoValue);
+                    // REVIEW: I'm pretty sure this can never happen. Even if the caller "nullify" 
+                    // the referenced value, we still hold a reference to it so that it can not be null after all.
+                    // Whatever, keep this around to make the Code Contracts static checker happy.
+                    // If I am right about this, without Code Contracts, we are better off disabling this.
+                    // The property will be inlined for sure. Furthermore, not throwing the exception means
+                    // that we can use this property safely, for instance inside the GetHashCode() method
+                    // (remember that in our particular setup the Code Contracts symbol does not exist in any build 
+                    // except when we do run the Code Contracts tools, which implies that this particular piece of code
+                    // will never execute at runtime).
+                    throw new InvalidOperationException();
                 }
+
+#endif
 
                 return _value;
             }
@@ -254,7 +272,7 @@ namespace Narvalo.Fx
         /// <returns>The enclosed value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return _isSome ? _value : default(T);
+            return IsSome ? Value : default(T);
         }
 
         /// <summary>
@@ -264,14 +282,14 @@ namespace Narvalo.Fx
         /// <returns>The enclosed value if any; otherwise <paramref name="defaultValue"/>.</returns>
         public T ValueOrElse(T defaultValue)
         {
-            return _isSome ? _value : defaultValue;
+            return IsSome ? Value : defaultValue;
         }
 
         public T ValueOrElse(Func<T> defaultValueFactory)
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return _isSome ? _value : defaultValueFactory.Invoke();
+            return IsSome ? Value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
@@ -287,8 +305,6 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, "exceptionFactory");
             Contract.Ensures(Contract.Result<T>() != null);
 
-            // Do prefer IsNone and Value to !_isSome and _value,
-            // it should help CCCheck to discover the object invariants.
             if (IsNone)
             {
                 throw exceptionFactory.Invoke();
@@ -300,9 +316,9 @@ namespace Narvalo.Fx
         /// <copydoc cref="Object.ToString" />
         public override String ToString()
         {
-            return _isSome ? _value.ToString() : "{None}";
+            return IsSome ? Value.ToString() : "{None}";
         }
-        
+
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
@@ -327,7 +343,7 @@ namespace Narvalo.Fx
 
             if (IsSome)
             {
-                return new List<T> { _value }.GetEnumerator();
+                return new List<T> { Value }.GetEnumerator();
             }
             else
             {
@@ -361,15 +377,20 @@ namespace Narvalo.Fx
 
             if (Object.ReferenceEquals(other, null))
             {
-                return !_isSome;
+                return IsNone;
             }
 
-            if (!_isSome)
+            if (IsNone)
             {
-                return !other._isSome;
+                return other.IsNone;
             }
 
-            return comparer.Equals(_value, other._value);
+            if (other.IsNone)
+            {
+                return IsNone;
+            }
+
+            return comparer.Equals(Value, other.Value);
         }
 
         /// <copydoc cref="IEquatable{T}.Equals" />
@@ -397,7 +418,7 @@ namespace Narvalo.Fx
 
             if (other == null)
             {
-                return !_isSome;
+                return IsNone;
             }
 
             if (other is T)
@@ -421,7 +442,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            return _isSome ? comparer.GetHashCode(_value) : 0;
+            return IsSome ? comparer.GetHashCode(Value) : 0;
         }
 
         ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
@@ -640,7 +661,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            if (IsNone)
+            // REVIEW: Should we keep inner.IsNone?
+            if (IsNone || inner.IsNone)
             {
                 return Maybe<TResult>.None;
             }

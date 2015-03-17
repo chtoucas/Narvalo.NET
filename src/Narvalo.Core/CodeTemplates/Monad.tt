@@ -1408,7 +1408,7 @@ namespace <#= LinqNamespace #>.Internal
         /// <summary>
         /// Instructs code analysis tools to assume that the specified value is not null,
         /// even if it cannot be statically proven to always be not null.
-        /// When Code Contracts is disabled, this method is meant to be erased by the JIT compiler.
+        /// When Code Contracts are disabled, this method is meant to be erased by the JIT compiler.
         /// </summary>
         [DebuggerHidden]
 #if !CONTRACTS_FULL

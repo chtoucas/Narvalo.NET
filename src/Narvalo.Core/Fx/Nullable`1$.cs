@@ -9,11 +9,12 @@ namespace Narvalo.Fx
     /// Provides extension methods for <see cref="Nullable{T}"/>.
     /// </summary>
     /// <remarks>
-    /// What's not to be found here:
     /// <list type="bullet">
-    /// <item><c>Return</c> is simply casting: <c>(T?)value</c>.</item>
-    /// <item><c>Nullable</c> does not support the <c>Join</c> operation; there is no <c>Nullable&lt;Nullable&lt;T&gt;&gt;</c>.</item>
-    /// <item><c>Zero</c> is <see langword="null"/>.</item>
+    /// <listheader>What's not to be found here:</listheader>
+    /// <item><description><c>Return</c> is simply casting: <c>(T?)value</c>.</description></item>
+    /// <item><description><c>Nullable</c> does not support the <c>Join</c> operation; there is no
+    /// <c>Nullable&lt;Nullable&lt;T&gt;&gt;</c>.</description></item>
+    /// <item><description><c>Zero</c> is <see langword="null"/>.</description></item>
     /// </list>
     /// </remarks>
     public static partial class NullableExtensions

@@ -116,15 +116,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can not get the underlying value of an empty maybe..
-        /// </summary>
-        internal static string Maybe_NoneHasNoValue {
-            get {
-                return ResourceManager.GetString("Maybe_NoneHasNoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
         /// </summary>
         internal static string MetricFormat {

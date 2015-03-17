@@ -10,7 +10,7 @@ namespace Narvalo
 
     /// <summary>
     /// Provides helper methods to perform argument validation.
-    /// If Code Contracts is enabled, these methods are recognized as preconditions.
+    /// If Code Contracts are enabled, these methods are recognized as preconditions.
     /// </summary>
     /// <remarks>
     /// CCCheck does not seem to be able to comprehend a precondition used in conjunction

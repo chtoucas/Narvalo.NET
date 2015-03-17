@@ -126,9 +126,6 @@
   <data name="Require_NotLessThanOrEqualToFormat" xml:space="preserve">
     <value>The value of '{0}' is not less than or equal to '{1}'.</value>
   </data>
-  <data name="Maybe_NoneHasNoValue" xml:space="preserve">
-    <value>You can not get the underlying value of an empty maybe.</value>
-  </data>
   <data name="Require_NotInRangeFormat" xml:space="preserve">
     <value>The value of '{0}' is not in range [{1} - {2}].</value>
   </data>

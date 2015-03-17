@@ -7,22 +7,28 @@ namespace Narvalo.Internal
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Provides helper methods to check for conditions on arguments that you know to ALWAYS hold, 
-    /// through both debugging assertions and Code Contracts preconditions.
+    /// Provides helper methods to check for preconditions that you know to ALWAYS hold.
+    /// This is achieved through both debugging assertions and Code Contracts preconditions.
     /// </summary>
     /// <remarks>
     /// <para>These helpers MUST NOT be used in place of proper validation routines of public 
     /// arguments but they should rather be reserved for internal sanity checking.</para>
-    /// <para>If Code Contracts is enabled the methods are recognized as preconditions; otherwise
+    /// <para>If Code Contracts are enabled the methods are recognized as preconditions; otherwise
     /// - In Debug builds, the methods turn into debugging assertions.
     /// - Otherwise, the methods are simply discarded by the compiler.</para>
     /// </remarks>
+    /// <seealso cref="Assume"/>.
     [DebuggerStepThrough]
     internal static class Promise
     {
         /// <summary>
         /// Checks for a condition.
         /// </summary>
+        /// <remarks>
+        /// <para>All methods called within the condition must be pure.</para>
+        /// <para>All members mentioned in the condition must be at least as visible as the method 
+        /// in which they appear.</para>
+        /// </remarks>
         /// <param name="condition">The conditional expression to evaluate.</param>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]

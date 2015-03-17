@@ -9,6 +9,6 @@
     - CODE_ANALYSIS for Gendarme
     - CONTRACTS_FULL to ease refactoring 
     -->
-    <!--<DefineConstants>$(DefineConstants);CONTRACTS_FULL</DefineConstants>-->
+    <!--<DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>-->
   </PropertyGroup>
 </Project>

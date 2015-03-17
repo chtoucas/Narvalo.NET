@@ -14,7 +14,7 @@ namespace Narvalo.Internal
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 #if CONTRACTS_FULL
-    // If Code Contracts is enabled, this attribute is used by the Require class for writing preconditions. 
+    // If Code Contracts are enabled, this attribute is used by the Require class for writing preconditions. 
     // Therefore, to be able to perform Static Contracts checkings, this attribute MUST remain public. 
     // Not doing so would lead to a CC1038 error. 
     public sealed class ValidatedNotNullAttribute : Attribute { }
