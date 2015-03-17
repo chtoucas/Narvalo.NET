@@ -44,19 +44,15 @@ namespace Narvalo.Fx
      * MayGetPhoneNumber().OnNone(action).OnSome(action)
      * ```
      * 
-     * The main defects of this implementation are :
-     * 
-     * - The most obvious weakness of the Maybe monad is that it is all black or all white. In some
-     *   circumstances, I might like to be able to give an explanation for the absence of a value. 
-     *   In fact, that's one of the purpose of the Either monad.
-     * - It is a reference type
-     * - (more to be added later, I am sure there are other problems)
+     * The most obvious weakness of the Maybe monad is that it is all black or all white. In some
+     * circumstances, I might like to be able to give an explanation for the absence of a value. 
+     * In fact, that's one of the purpose of the Either monad.
      * 
      * This class is sometimes referred to as the Option type.
      * 
      * ### Naming convention ###
      * 
-     * We prefix with _May_ all methods that return a Maybe instance.
+     * We suggest to prefix with _May_ the methods that return a Maybe instance.
      * 
      * Design of `Maybe<T>`
      * --------------------
@@ -161,7 +157,7 @@ namespace Narvalo.Fx
         private readonly T _value;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="Maybe{T}" /> class from being created.
+        /// Prevents a default instance of the <see cref="Maybe{T}" /> class from being created outside.
         /// Initializes a new instance of the <see cref="Maybe{T}" /> class that does not hold any value.
         /// </summary>
         /// <seealso cref="Maybe{T}.None"/>
