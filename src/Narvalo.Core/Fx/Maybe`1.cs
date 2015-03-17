@@ -156,8 +156,8 @@ namespace Narvalo.Fx
     {
         private readonly bool _isSome;
 
-        // You should not use this field directly. Use instead the property; the Code Contracts 
-        // static checker will attempt to prove that no illegal access happen (i.e. when IsNone is true).
+        // You should NEVER use this field directly. Use instead the property; the Code Contracts 
+        // static checker should then prove that no illegal access to this field happen (i.e. when IsNone is true).
         private readonly T _value;
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Narvalo.Fx
 
                 if (_value == null)
                 {
-                    // REVIEW: I'm pretty sure this can never happen. Even if the caller "nullify" 
+                    // I'm pretty sure this can never happen. Even if the caller "nullify" 
                     // the referenced value, we still hold a reference to it so that it can not be null after all.
                     // Whatever, keep this around to make the Code Contracts static checker happy.
                     // If I am right about this, without Code Contracts, we are better off disabling this.
@@ -380,14 +380,10 @@ namespace Narvalo.Fx
                 return IsNone;
             }
 
-            if (IsNone)
+            if (IsNone || other.IsNone)
             {
-                return other.IsNone;
-            }
-
-            if (other.IsNone)
-            {
-                return IsNone;
+                // If one the two objects is none, they must be both none to be equal.
+                return IsNone && other.IsNone;
             }
 
             return comparer.Equals(Value, other.Value);
