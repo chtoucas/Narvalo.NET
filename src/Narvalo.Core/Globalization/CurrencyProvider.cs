@@ -9,6 +9,7 @@ namespace Narvalo.Globalization
 
     using Narvalo.Internal;
 
+    // TODO: Implements ICurrencyProvider.
     public sealed class CurrencyProvider
     {
         private static CurrencyProvider s_Instance = new CurrencyProvider();

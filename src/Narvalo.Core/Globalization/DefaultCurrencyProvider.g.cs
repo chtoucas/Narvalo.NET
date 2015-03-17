@@ -18,6 +18,7 @@ namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
+    // FIXME: Very bad design.
     public sealed partial class DefaultCurrencyProvider
     {
         /// <summary>

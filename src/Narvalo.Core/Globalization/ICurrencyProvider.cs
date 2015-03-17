@@ -5,6 +5,7 @@ namespace Narvalo.Globalization
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
+    // FIXME: Very bad design.
     [ContractClass(typeof(ICurrencyProviderContract))]
     public interface ICurrencyProvider
     {

@@ -5,6 +5,7 @@ namespace Narvalo.Globalization
     using System.Collections.Generic;
     using System.Linq;
 
+    // FIXME: Very bad design.
     public sealed partial class DefaultCurrencyProvider : ICurrencyProvider
     {
         public HashSet<string> CurrencyCodes
