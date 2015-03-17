@@ -216,15 +216,15 @@ namespace Narvalo.Fx
 
                 if (_value == null)
                 {
-                    // I'm pretty sure this can never happen. Even if the caller "nullify" 
-                    // the referenced value, we still hold a reference to it so that it can not be null after all.
+                    // I'm pretty sure this can never happen. Even if the caller "nullify" the referenced 
+                    // value, we still hold a reference to it so that it can not be null after all.
                     // Whatever, keep this around to make the Code Contracts static checker happy.
                     // If I am right about this, without Code Contracts, we are better off disabling this.
                     // The property will be inlined for sure. Furthermore, not throwing the exception means
                     // that we can use this property safely, for instance inside the GetHashCode() method
-                    // (remember that in our particular setup the Code Contracts symbol does not exist in any build 
-                    // except when we do run the Code Contracts tools, which implies that this particular piece of code
-                    // will never execute at runtime).
+                    // (remember that in our particular setup the Code Contracts symbol does not exist in any 
+                    // build except when we do run the Code Contracts tools, which implies that this particular
+                    // piece of code will never execute at runtime).
                     throw new InvalidOperationException();
                 }
 
@@ -382,7 +382,7 @@ namespace Narvalo.Fx
 
             if (IsNone || other.IsNone)
             {
-                // If one the two objects is none, they must be both none to be equal.
+                // If one is none, they must be both none to be equal.
                 return IsNone && other.IsNone;
             }
 
@@ -441,6 +441,8 @@ namespace Narvalo.Fx
             return IsSome ? comparer.GetHashCode(Value) : 0;
         }
 
+        #region Equality operators (see "Referential equality and structural equality" above)
+
         ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
         ////{
         ////    if (ReferenceEquals(left, null)) {
@@ -478,6 +480,8 @@ namespace Narvalo.Fx
         ////{
         ////    return !(right == left);
         ////}
+
+        #endregion
     }
 
     /// <content>
@@ -657,7 +661,7 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            // REVIEW: Should we keep inner.IsNone?
+            // REVIEW: I can't remember why I didn't include inner.IsNone before?
             if (IsNone || inner.IsNone)
             {
                 return Maybe<TResult>.None;
