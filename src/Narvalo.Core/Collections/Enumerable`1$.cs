@@ -29,14 +29,14 @@ namespace Narvalo.Collections
         {
             Contract.Requires(@this != null);
 
-            return @this.Concat(Enumerable.Repeat(element, 1));
+            return @this.Concat(Sequence.Single(element));
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Contract.Requires(@this != null);
 
-            return Enumerable.Repeat(element, 1).Concat(@this);
+            return Sequence.Single(element).Concat(@this);
         }
 
         #endregion
@@ -165,7 +165,7 @@ namespace Narvalo.Collections
         {
             Contract.Requires(@this != null);
 
-            return FirstOrNone(@this, _ => true);
+            return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -185,7 +185,7 @@ namespace Narvalo.Collections
         {
             Contract.Requires(@this != null);
 
-            return LastOrNone(@this, _ => true);
+            return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
@@ -218,7 +218,7 @@ namespace Narvalo.Collections
         {
             Contract.Requires(@this != null);
 
-            return SingleOrNone(@this, _ => true);
+            return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)

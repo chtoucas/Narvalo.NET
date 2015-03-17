@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using Xunit.Sdk;
 
     using Xunit;
 
@@ -696,15 +697,19 @@ namespace Narvalo.Fx
             Assert.True(!option.IsSome);
         }
 
+#if DEBUG
+
         [Fact]
-        public static void Value_ThrowsInvalidOperationException_WhenNone()
+        public static void Value_ThrowsTraceAssertException_WhenNone()
         {
             // Arrange
             var option = Maybe<int>.None;
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => option.Value);
+            Assert.Throws<TraceAssertException>(() => option.Value);
         }
+
+#endif
 
         [Fact]
         public static void Value_ReturnsTheOriginalValue_WhenSome()

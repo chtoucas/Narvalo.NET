@@ -6,6 +6,7 @@ namespace Narvalo.Edu.Linq
     using System.Collections.Generic;
 
     using Narvalo.Collections;
+    using Narvalo.Fx;
 
     // LINQ from scratch.
     public static class Bananas
@@ -61,7 +62,7 @@ namespace Narvalo.Edu.Linq
             TResult seed,
             Func<TResult, T, TResult> accumulator)
         {
-            return @this.Fold(seed, accumulator, _ => true);
+            return @this.Fold(seed, accumulator, Stubs<TResult>.AlwaysTrue);
         }
 
         #endregion

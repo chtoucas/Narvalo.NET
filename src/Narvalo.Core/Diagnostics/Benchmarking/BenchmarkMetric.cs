@@ -13,11 +13,11 @@ namespace Narvalo.Diagnostics.Benchmarking
     {
         private const long TICKS_PER_SECOND = 10000000L;
 
-        private readonly string _categoryName;
-        private readonly TimeSpan _duration;
-        private readonly int _iterations;
-        private readonly string _name;
         private readonly bool _fixedTime;
+        private readonly int _iterations;
+        private readonly TimeSpan _duration;
+        private readonly string _categoryName;
+        private readonly string _name;
 
         public BenchmarkMetric(string categoryName, string name, TimeSpan duration, int iterations)
             : this(categoryName, name, duration, iterations, true)

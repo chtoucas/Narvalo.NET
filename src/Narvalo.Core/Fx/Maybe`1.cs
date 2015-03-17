@@ -10,6 +10,7 @@ namespace Narvalo.Fx
     using System.Linq;
     using System.Runtime.CompilerServices;
 
+    using Narvalo.Collections;
     using Narvalo.Internal;
 
     /// <summary>
@@ -64,22 +65,21 @@ namespace Narvalo.Fx
      *   Isn't it one of the reasons why in the first place we decided to create such a class?
      * 
      * Argument _against_ a structure
-     * : An instance is _mutable_ if `T` is a reference type. This should always raise a big warning.
-     *   The underlying value field is "shallowly" immutable in the sense defined
-     *   [here](http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx).
+     * : An instance is _mutable_ if `T` is mutable. This should always raise a big warning.
+     *   (TODO: Other things to discuss: impact on performances (boxing, size of the struct...)
      *   
-     * In the end, creating a mutable structure seems way too hazardous.
+     * In the end, I prefer to be conservative; creating a structure seems way too hazardous.
      * 
      * ### Immutability ###
      * 
-     * The class is immutable. (TODO: expand on this).
+     * The class is mutable but it is not something observable from the outside.
      *   
-     * ### Maybe<T> vs Nullable<T> ###
+     * ### `Maybe<T>` vs `Nullable<T>` ###
      * 
-     * Most of the time, for value types, `T?` offers a much better alternative. To discourage the 
-     * use of the `Maybe<T>` when a nullable would make a better fit.
+     * For value types, most of the time `T?` offers a much better alternative. We can not discourage 
+     * you enough to use a `Maybe<T>` when a nullable would make a better fit, 
      * We can not enforce this rule with a generic constraint. For instance, this would prevent us
-     * from being able to use `Maybe<Unit>`.
+     * from being able to use `Maybe<Unit>` which must be allowed to unleash the real power of the Maybe monad.
      * 
      * Constructor
      * -----------
@@ -119,7 +119,7 @@ namespace Narvalo.Fx
      * follow value type semantics. Nevertheless, we do not change the meaning of the equality
      * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by
      * the .NET framework for all reference types. I might change my mind on this and try to make
-     * `Maybe<T>` behave like `Nullable<T>`. As a matter of convenience, we also implement the
+     * `Maybe<T>` behave more like `Nullable<T>`. As a matter of convenience, we also implement the
      * `IEquatable<T>` interface. Another (abandonned) possibility has been to implement the
      * `IStructuralEquatable` interface.
      * 
@@ -140,6 +140,7 @@ namespace Narvalo.Fx
      * 
      * - [Wikipedia](http://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Maybe_monad)
      * - [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
+     * - [Kinds of Immutability](http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx)
      * 
      * Alternative implementations in C#:
      * - [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
@@ -337,14 +338,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
 
-            if (IsSome)
-            {
-                return new List<T> { Value }.GetEnumerator();
-            }
-            else
-            {
-                return Enumerable.Empty<T>().AssumeNotNull().GetEnumerator();
-            }
+            return AsEnumerable().GetEnumerator();
         }
 
         /// <copydoc cref="IEnumerable.GetEnumerator" />
@@ -352,7 +346,19 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerator>() != null);
 
-            return ((IEnumerable<T>)this).GetEnumerator();
+            ////return ((IEnumerable<T>)this).GetEnumerator();
+            return AsEnumerable().GetEnumerator();
+        }
+
+#if !NO_CONTRACTS_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+#endif
+        public IEnumerable<T> AsEnumerable()
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+
+            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
         }
     }
 

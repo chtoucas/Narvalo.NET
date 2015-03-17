@@ -178,8 +178,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Fx\Output`1.cs" />
-    <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\Sequence.cs" />
     <Compile Include="Globalization\CurrencyInfo%24.cs" />
     <Compile Include="Globalization\Locale.cs" />
     <Compile Include="Globalization\Region.cs" />
@@ -192,8 +190,6 @@
     <Compile Include="Runtime\Reliability\Guard%24.cs" />
     <Compile Include="Security\DesCryptoEngine.cs" />
     <Compile Include="Security\IBidirectionalCryptoEngine.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
     <Compile Include="Diagnostics\Logging\ConsoleLogger.cs" />
     <Compile Include="Diagnostics\Logging\DebuggerLogger.cs" />

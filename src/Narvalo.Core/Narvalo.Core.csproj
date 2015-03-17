@@ -58,7 +58,7 @@
     <CodeContractsBeingOptimisticOnExternal>False</CodeContractsBeingOptimisticOnExternal>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Common\Assume.cs">
@@ -95,6 +95,10 @@
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Nullable`1%24.cs" />
+    <Compile Include="Fx\Recursion.cs" />
+    <Compile Include="Collections\Sequence.cs" />
+    <Compile Include="Fx\Stubs.cs" />
+    <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Globalization\CurrencyInfo.cs" />
     <Compile Include="Globalization\CurrencyException.cs" />

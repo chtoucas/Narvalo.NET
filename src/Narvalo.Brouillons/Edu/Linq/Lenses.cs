@@ -4,6 +4,7 @@ namespace Narvalo.Edu.Linq
 {
     using System.Collections.Generic;
 
+    using Narvalo.Collections;
     using Narvalo.Fx;
 
     // LINQ from scratch.
@@ -28,7 +29,7 @@ namespace Narvalo.Edu.Linq
 
         public static IEnumerable<T> Empty<T>()
         {
-            return Sequence.Create(i => i, 0, i => default(T), i => false);
+            return Sequence.Create(i => i, 0, i => default(T), Stubs<int>.AlwaysFalse);
         }
 
         #endregion
