@@ -28,15 +28,17 @@ namespace Narvalo.Collections
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return @this.Concat(Sequence.Single(element));
+            return @this.Concat(Sequence.Single(element)).AssumeNotNull();
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return Sequence.Single(element).Concat(@this);
+            return Sequence.Single(element).Concat(@this).AssumeNotNull();
         }
 
         #endregion
@@ -152,11 +154,18 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            return from _ in @this
-                   let m = funM.Invoke(_)
-                   where m.IsSome
-                   select m.Value;
+            // We could use a LINQ query expression but it then won't be possible 
+            // to add the Code Contracts workarounds.
+            //  return from _ in @this
+            //      let m = funM.Invoke(_)
+            //      where m.IsSome
+            //      select m.Value;
+            return @this
+                .Select(_ => funM.Invoke(_)).AssumeNotNull()
+                .Where(_ => _.IsSome)
+                .Select(_ => _.Value).AssumeNotNull();
         }
 
         #region Element Operators
@@ -164,6 +173,7 @@ namespace Narvalo.Collections
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -172,18 +182,21 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            IEnumerable<Maybe<TSource>> seq
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {
-                return iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+                return iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
             }
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -192,8 +205,11 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            IEnumerable<Maybe<TSource>> seq 
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {
                 if (!iter.MoveNext())
@@ -201,13 +217,10 @@ namespace Narvalo.Collections
                     return Maybe<TSource>.None;
                 }
 
-                // REVIEW: This should work.
-                // while (iter.MoveNext()) { }
-                // return iter.Current;
-                var value = iter.Current;
+                var value = iter.Current.AssumeNotNull();
                 while (iter.MoveNext())
                 {
-                    value = iter.Current;
+                    value = iter.Current.AssumeNotNull();
                 }
 
                 return value;
@@ -217,6 +230,7 @@ namespace Narvalo.Collections
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -225,11 +239,14 @@ namespace Narvalo.Collections
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            var seq = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+            IEnumerable<Maybe<TSource>> seq 
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {
-                var result = iter.MoveNext() ? iter.Current : Maybe<TSource>.None;
+                var result = iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
 
                 // Return Maybe.None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
