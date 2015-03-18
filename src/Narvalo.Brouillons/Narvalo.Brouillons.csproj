@@ -56,6 +56,7 @@
       <Link>Internal\Assume.cs</Link>
     </Compile>
     <Compile Include="ConvertTo.cs" />
+    <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Internal\Check.cs" />
     <Compile Include="Fx\Apply.cs" />
     <Compile Include="Array%24.cs">

@@ -70,7 +70,7 @@ namespace Narvalo.Fx
      *   
      * In the end, I prefer to be conservative; creating a structure seems way too hazardous.
      * 
-     * ### Immutability ###
+     * ### Apparent Immutability ###
      * 
      * The class is mutable but it is not something observable from the outside.
      *   
@@ -216,12 +216,12 @@ namespace Narvalo.Fx
                     // I'm pretty sure this can never happen. Even if the caller "nullify" the referenced 
                     // value, we still hold a reference to it so that it can not be null after all.
                     // Whatever, keep this around to make the Code Contracts static checker happy.
-                    // If I am right about this, without Code Contracts, we are better off disabling this.
-                    // The property will be inlined for sure. Furthermore, not throwing the exception means
-                    // that we can use this property safely, for instance inside the GetHashCode() method
-                    // (remember that in our particular setup the Code Contracts symbol does not exist in any 
+                    // If I am right about this, without Code Contracts, we are better off disabling this;
+                    // the property will be inlined for sure. Furthermore, not throwing the exception means
+                    // that we can use this property safely, for instance inside the GetHashCode() method.
+                    // Remember that in our particular setup the Code Contracts symbol does not exist in any 
                     // build except when we do run the Code Contracts tools, which implies that this particular
-                    // piece of code will never execute at runtime).
+                    // piece of code will never execute at runtime.
                     throw new InvalidOperationException();
                 }
 

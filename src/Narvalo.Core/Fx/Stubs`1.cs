@@ -3,7 +3,12 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics.Contracts;
 
+    /// <summary>
+    /// Provides helper methods pertaining to <see cref="Func{T}"/> and <see cref="Action{T}"/> instances.
+    /// </summary>
+    /// <typeparam name="T">The type of the parameter of the delegates that this class encapsulates.</typeparam>
     public static class Stubs<T>
     {
         private static readonly Func<T, bool> s_AlwaysFalse = _ => false;
@@ -14,12 +19,60 @@ namespace Narvalo.Fx
 
         private static readonly Action<T> s_Ignore = _ => { };
 
-        public static Func<T, bool> AlwaysFalse { get { return s_AlwaysFalse; } }
+        /// <summary>
+        /// Gets a predicate that always evaluates to false.
+        /// </summary>
+        /// <value>The predicate that always evaluates to false.</value>
+        public static Func<T, bool> AlwaysFalse
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<T, bool>>() != null);
 
-        public static Func<T, bool> AlwaysTrue { get { return s_AlwaysTrue; } }
+                return s_AlwaysFalse;
+            }
+        }
 
-        public static Func<T, T> Identity { get { return s_Identity; } }
+        /// <summary>
+        /// Gets a predicate that always evaluates to true.
+        /// </summary>
+        /// <value>The predicate that always evaluates to true.</value>
+        public static Func<T, bool> AlwaysTrue
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<T, bool>>() != null);
 
-        public static Action<T> Ignore { get { return s_Ignore; } }
+                return s_AlwaysTrue;
+            }
+        }
+
+        /// <summary>
+        /// Gets the identity function.
+        /// </summary>
+        /// <value>The identity function.</value>
+        public static Func<T, T> Identity
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<T, T>>() != null);
+
+                return s_Identity;
+            }
+        }
+
+        /// <summary>
+        /// Gets the action that will do nothing to its input.
+        /// </summary>
+        /// <value>The empty action.</value>
+        public static Action<T> Ignore
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Action<T>>() != null);
+
+                return s_Ignore;
+            }
+        }
     }
 }

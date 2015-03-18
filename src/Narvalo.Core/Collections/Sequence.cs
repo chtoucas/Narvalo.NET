@@ -16,12 +16,12 @@ namespace Narvalo.Collections
         /// Generates a sequence that contains exactly one value.
         /// </summary>
         /// <remarks>The result is immutable.</remarks>
-        /// <typeparam name="TResult">The type of the value to be used in the result sequence.</typeparam>
+        /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
         /// <param name="value">The single value of the sequence.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
-        public static IEnumerable<TResult> Single<TResult>(TResult value)
+        public static IEnumerable<TSource> Single<TSource>(TSource value)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // Enumerable.Repeat(value, 1) would work too, but is less readable.
             yield return value;
@@ -66,16 +66,16 @@ namespace Narvalo.Collections
         /// <para>Workaround for the fact that <see cref="Enumerable.Empty{T}"/> does not have any contract attached.</para>
         /// <para>The result is immutable.</para>
         /// </remarks>
-        /// <typeparam name="TResult">The type to assign to the type parameter of the returned 
+        /// <typeparam name="TSource">The type to assign to the type parameter of the returned 
         /// generic <see cref="IEnumerable{T}"/>.</typeparam>
         /// <returns>An empty <see cref="IEnumerable{T}"/> whose type argument is TResult.</returns>
-        internal static IEnumerable<TResult> Empty<TResult>()
+        internal static IEnumerable<TSource> Empty<TSource>()
         {
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // We could use "yield break", but Enumerable.Empty<T> is more readable 
             // with the additional benefit of returning a singleton.
-            return Enumerable.Empty<TResult>().AssumeNotNull();
+            return Enumerable.Empty<TSource>().AssumeNotNull();
         }
     }
 }

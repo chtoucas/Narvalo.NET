@@ -18,6 +18,9 @@ Work in progress
 
 **WIP**    
 - Monad.tt, review (and this is needed) the postconditions and null-reference checks.
+- Review all IEnumerable extensions for null-checking and deferred execution.
+- Check all uses of AssumeNotNull
+- Remove IEnumerable for Maybe?
 - Narvalo.Web.UI.Assets.AssetManager -> Add volatile to the Initialized... fields.
 - CC, review and understand all the NO_CCCHECK_SUPPRESSIONS
   Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.

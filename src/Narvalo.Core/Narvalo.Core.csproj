@@ -95,7 +95,6 @@
     <Compile Include="Fx\Maybe`1.cs" />
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Nullable`1%24.cs" />
-    <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Collections\Sequence.cs" />
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
