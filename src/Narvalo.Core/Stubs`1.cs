@@ -3,8 +3,8 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Func{T}"/> and <see cref="Action{T}"/> instances.

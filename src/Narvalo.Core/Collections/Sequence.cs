@@ -7,7 +7,6 @@ namespace Narvalo.Collections
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo.Fx;
     using Narvalo.Internal;
 
     public static class Sequence
