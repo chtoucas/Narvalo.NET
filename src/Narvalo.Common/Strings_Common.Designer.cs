@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
-{
-
-
+namespace Narvalo {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -70,11 +70,11 @@ namespace Narvalo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The total number of ticks in &apos;value&apos; must be strictly positive..
+        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
         /// </summary>
-        internal static string BenchmarkProcessor_DurationPropertyIsNegative {
+        internal static string BenchmarkMetric_MetricFormat {
             get {
-                return ResourceManager.GetString("BenchmarkProcessor_DurationPropertyIsNegative", resourceCulture);
+                return ResourceManager.GetString("BenchmarkMetric_MetricFormat", resourceCulture);
             }
         }
         
@@ -84,24 +84,6 @@ namespace Narvalo
         internal static string ConfigurationManager_MissingSectionFormat {
             get {
                 return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;values&apos; is null..
-        /// </summary>
-        internal static string NonQueryStoredProcedure_ValuesIsNull {
-            get {
-                return ResourceManager.GetString("NonQueryStoredProcedure_ValuesIsNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
-        /// </summary>
-        internal static string TypeIsNotEnumFormat {
-            get {
-                return ResourceManager.GetString("TypeIsNotEnumFormat", resourceCulture);
             }
         }
         

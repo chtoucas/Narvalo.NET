@@ -1,9 +1,10 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo
 {
     using System;
     using System.Diagnostics.Contracts;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Func{T}"/> and <see cref="Action{T}"/> instances.
@@ -23,6 +24,8 @@ namespace Narvalo.Fx
         /// Gets a predicate that always evaluates to false.
         /// </summary>
         /// <value>The predicate that always evaluates to false.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "This is done on purpose to emphasize the underlying type of the input.")]
         public static Func<T, bool> AlwaysFalse
         {
             get
@@ -37,6 +40,8 @@ namespace Narvalo.Fx
         /// Gets a predicate that always evaluates to true.
         /// </summary>
         /// <value>The predicate that always evaluates to true.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "This is done on purpose to emphasize the underlying type of the input.")]
         public static Func<T, bool> AlwaysTrue
         {
             get
@@ -51,6 +56,8 @@ namespace Narvalo.Fx
         /// Gets the identity function.
         /// </summary>
         /// <value>The identity function.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "This is done on purpose to emphasize the underlying type of the input.")]
         public static Func<T, T> Identity
         {
             get
@@ -65,6 +72,8 @@ namespace Narvalo.Fx
         /// Gets the action that will do nothing to its input.
         /// </summary>
         /// <value>The empty action.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "This is done on purpose to emphasize the underlying type of the input.")]
         public static Action<T> Ignore
         {
             get

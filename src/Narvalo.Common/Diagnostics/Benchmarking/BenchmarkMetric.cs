@@ -164,7 +164,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                 case "d":
                     return String.Format(
                         formatProvider,
-                        Strings_Core.MetricFormat,
+                        Strings_Common.BenchmarkMetric_MetricFormat,
                         Name,
                         CallsPerSecond,
                         Iterations,

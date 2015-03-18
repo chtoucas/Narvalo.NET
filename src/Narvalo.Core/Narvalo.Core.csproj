@@ -67,7 +67,6 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
-    <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Collections\Enumerable[Maybe]%24.cs" />
     <Compile Include="Collections\Enumerable`1%24.cs" />
@@ -78,13 +77,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Collections\NamespaceDoc.cs" />
-    <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetric.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkRunner.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
-    <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
-    <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="Fx\Maybe.cs" />
     <Compile Include="Fx\Maybe.g.cs">
@@ -96,21 +88,9 @@
     <Compile Include="Fx\NamespaceDoc.cs" />
     <Compile Include="Fx\Nullable`1%24.cs" />
     <Compile Include="Collections\Sequence.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
+    <Compile Include="Stubs.cs" />
+    <Compile Include="Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
-    <Compile Include="Globalization\CurrencyInfo.cs" />
-    <Compile Include="Globalization\CurrencyException.cs" />
-    <Compile Include="Globalization\CurrencyNotFoundException.cs" />
-    <Compile Include="Globalization\CurrencyProvider.cs" />
-    <Compile Include="Globalization\CurrencyTypes.cs" />
-    <Compile Include="Globalization\DefaultCurrencyProvider.cs" />
-    <Compile Include="Globalization\DefaultCurrencyProvider.g.cs">
-      <DependentUpon>DefaultCurrencyProvider.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Globalization\ICurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\ValidatedNotNullAttribute.cs" />
@@ -120,22 +100,11 @@
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="Require.cs" />
-    <Compile Include="Runtime\Reliability\BarrierException.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
-    <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
-    <Compile Include="Runtime\Reliability\GuardException.cs" />
-    <Compile Include="Runtime\Reliability\IBarrier.cs" />
-    <Compile Include="Runtime\Reliability\ISentinel.cs" />
-    <Compile Include="Runtime\Reliability\NoopSentinel.cs" />
     <Compile Include="Strings_Core.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Core.resx</DependentUpon>
     </Compile>
-    <Compile Include="Xml\XAttribute%24.cs" />
-    <Compile Include="Xml\XElement%24.cs" />
-    <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad.Maybe.tt" />
@@ -147,10 +116,6 @@
     <None Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
-    </None>
-    <None Include="Globalization\DefaultCurrencyProvider.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DefaultCurrencyProvider.g.cs</LastGenOutput>
     </None>
     <None Include="Narvalo.Core.props">
       <SubType>Designer</SubType>
@@ -168,13 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\ISO4217\20150101\A1.xml" />
-    <Content Include="Resources\ISO4217\20150101\A3.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />

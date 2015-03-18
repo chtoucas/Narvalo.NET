@@ -126,13 +126,7 @@
   <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
     <value>The scheme '{0}' does not support protocol less uri.</value>
   </data>
-  <data name="TypeIsNotEnumFormat" xml:space="preserve">
-    <value>The type '{0}' must be of enum type.</value>
-  </data>
-  <data name="NonQueryStoredProcedure_ValuesIsNull" xml:space="preserve">
-    <value>The parameter 'values' is null.</value>
-  </data>
-  <data name="BenchmarkProcessor_DurationPropertyIsNegative" xml:space="preserve">
-    <value>The total number of ticks in 'value' must be strictly positive.</value>
+  <data name="BenchmarkMetric_MetricFormat" xml:space="preserve">
+    <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
   </data>
 </root>

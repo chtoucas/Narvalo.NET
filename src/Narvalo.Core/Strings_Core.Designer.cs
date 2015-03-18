@@ -62,33 +62,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The total number of ticks in &apos;duration&apos; must be strictly positive..
-        /// </summary>
-        internal static string BenchmarkMetric_DurationIsNegative {
-            get {
-                return ResourceManager.GetString("BenchmarkMetric_DurationIsNegative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The total number of ticks in &apos;value&apos; must be strictly positive..
-        /// </summary>
-        internal static string BenchmarkRunner_DurationPropertyIsNegative {
-            get {
-                return ResourceManager.GetString("BenchmarkRunner_DurationPropertyIsNegative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; MUST NOT be null..
-        /// </summary>
-        internal static string Check_ArgumentNullFormat {
-            get {
-                return ResourceManager.GetString("Check_ArgumentNullFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
         internal static string Int64Encoder_IllegalCharacterFormat {
@@ -112,15 +85,6 @@ namespace Narvalo {
         internal static string Maybe_CannotCastNoneToValue {
             get {
                 return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
-        /// </summary>
-        internal static string MetricFormat {
-            get {
-                return ResourceManager.GetString("MetricFormat", resourceCulture);
             }
         }
         
