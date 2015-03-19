@@ -3,11 +3,12 @@
 namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
 
     // FIXME: Very bad design.
-    [ContractClass(typeof(ICurrencyProviderContract))]
-    public interface ICurrencyProvider
+    public partial interface ICurrencyProvider
     {
         /// <summary>
         /// Gets the set of available currency codes.
@@ -25,6 +26,11 @@ namespace Narvalo.Globalization
         /// parameter.</returns>
         IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
     }
+
+#if CONTRACTS_FULL
+    
+    [ContractClass(typeof(ICurrencyProviderContract))]
+    public partial interface ICurrencyProvider { }
 
     [ContractClassFor(typeof(ICurrencyProvider))]
     internal abstract class ICurrencyProviderContract : ICurrencyProvider
@@ -44,4 +50,6 @@ namespace Narvalo.Globalization
             return default(IEnumerable<CurrencyInfo>);
         }
     }
+
+#endif
 }

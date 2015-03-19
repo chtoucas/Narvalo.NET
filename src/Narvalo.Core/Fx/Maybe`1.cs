@@ -44,10 +44,6 @@ namespace Narvalo.Fx
      * MayGetPhoneNumber().OnNone(action).OnSome(action)
      * ```
      * 
-     * The most obvious weakness of the Maybe monad is that it is all black or all white. In some
-     * circumstances, I might like to be able to give an explanation for the absence of a value. 
-     * In fact, that's one of the purpose of the Either monad.
-     * 
      * This class is sometimes referred to as the Option type.
      * 
      * ### Naming convention ###
@@ -312,7 +308,7 @@ namespace Narvalo.Fx
         /// <copydoc cref="Object.ToString" />
         public override String ToString()
         {
-            return IsSome ? Value.ToString() : "{None}";
+            return IsSome ? Value.ToString() : "Maybe(None)";
         }
 
 #if CONTRACTS_FULL
@@ -332,6 +328,17 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
+#if !NO_CONTRACTS_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+#endif
+        public IEnumerable<T> AsEnumerable()
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+
+            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
+        }
+
         /// <copydoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
@@ -345,19 +352,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerator>() != null);
 
-            ////return ((IEnumerable<T>)this).GetEnumerator();
             return AsEnumerable().GetEnumerator();
-        }
-
-#if !NO_CONTRACTS_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
-        public IEnumerable<T> AsEnumerable()
-        {
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
-
-            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
         }
     }
 

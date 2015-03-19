@@ -5,6 +5,10 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
+    /// <summary>
+    /// Represents a range of values.
+    /// </summary>
+    /// <typeparam name="T">The underlying type of the values.</typeparam>
     public partial struct Range<T> : IEquatable<Range<T>>
         where T : struct, IEquatable<T>, IComparable<T>
     {

@@ -1,19 +1,16 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Monads
+namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    /*!
-     * The Identity Monad
-     * ==================
-     * 
-     * The trivial monad. Useless in the context of C#.
-     */
-
+    /// <summary>
+    /// Represents the trivial monad. Useless in the context of C#.
+    /// </summary>
+    /// <typeparam name="T">The underlying type of the value.</typeparam>
     public sealed partial class Identity<T> : IEquatable<Identity<T>>, IEquatable<T>
     {
         private readonly T _value;
@@ -22,9 +19,13 @@ namespace Narvalo.Edu.Monads
         {
             _value = value;
         }
+
+        public T Value { get { return _value; } }
     }
 
-    // IEquatable interfaces.
+    /// <content>
+    /// Implements the <see cref="IEquatable{T}"/> interface.
+    /// </content>
     public partial class Identity<T>
     {
         public bool Equals(Identity<T> other)
@@ -36,15 +37,17 @@ namespace Narvalo.Edu.Monads
         {
             Require.NotNull(comparer, "comparer");
 
-            if (ReferenceEquals(other, null)) {
-                return _value == null;
+            if (ReferenceEquals(other, null))
+            {
+                return Value == null;
             }
 
-            if (_value == null) {
-                return other._value == null;
+            if (Value == null)
+            {
+                return other.Value == null;
             }
 
-            return comparer.Equals(_value, other._value);
+            return comparer.Equals(Value, other.Value);
         }
 
         public bool Equals(T other)
@@ -68,11 +71,13 @@ namespace Narvalo.Edu.Monads
         {
             Require.NotNull(comparer, "comparer");
 
-            if (other == null) {
-                return _value == null;
+            if (other == null)
+            {
+                return Value == null;
             }
 
-            if (other is T) {
+            if (other is T)
+            {
                 return Equals((T)other, comparer);
             }
 
@@ -90,24 +95,28 @@ namespace Narvalo.Edu.Monads
         {
             Require.NotNull(comparer, "comparer");
 
-            return _value != null ? comparer.GetHashCode(_value) : 0;
+            return Value != null ? comparer.GetHashCode(Value) : 0;
         }
     }
 
-    // Monad definition.
+    /// <content>
+    /// Provides the core Monad methods.
+    /// </content>
     public partial class Identity<T>
     {
         public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
 
-            return selector.Invoke(_value);
+            return selector.Invoke(Value);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<T> η(T value)
         {
+            Contract.Ensures(Contract.Result<Identity<T>>() != null);
+
             return new Identity<T>(value);
         }
 
@@ -117,16 +126,19 @@ namespace Narvalo.Edu.Monads
         {
             Require.NotNull(square, "square");
 
-            return square._value;
+            return square.Value;
         }
     }
 
-    // Comonad definition.
+    /// <content>
+    /// Provides the core Comonad methods.
+    /// </content>
     public partial class Identity<T>
     {
         public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> fun)
         {
             Require.NotNull(fun, "fun");
+            Contract.Ensures(Contract.Result<Identity<TResult>>() != null);
 
             return new Identity<TResult>(fun.Invoke(this));
         }
@@ -137,13 +149,15 @@ namespace Narvalo.Edu.Monads
         {
             Require.NotNull(monad, "monad");
 
-            return monad._value;
+            return monad.Value;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
+            Contract.Ensures(Contract.Result<Identity<Identity<T>>>() != null);
+
             return new Identity<Identity<T>>(monad);
         }
     }

@@ -55,7 +55,16 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Promise.cs">
+      <Link>Internal\Promise.cs</Link>
+    </Compile>
     <Compile Include="ConvertTo.cs" />
+    <Compile Include="Fx\Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Identity`1.cs" />
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Internal\Check.cs" />
     <Compile Include="Fx\Apply.cs" />
@@ -163,16 +172,9 @@
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\Either`2.cs" />
     <Compile Include="Fx\Fun.cs" />
     <Compile Include="Fx\Func`%24.cs" />
-    <Compile Include="Edu\Monads\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Identity`1.cs" />
-    <Compile Include="Fx\Output.cs" />
+    <Compile Include="Fx\Error.cs" />
     <Compile Include="Fx\Output.g.cs">
       <DependentUpon>Output.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -381,7 +383,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </None>
-    <None Include="Edu\Monads\Identity.tt">
+    <None Include="Fx\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>

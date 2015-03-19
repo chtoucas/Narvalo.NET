@@ -9,8 +9,7 @@ namespace Narvalo.Data
 
     using Narvalo.Internal;
 
-    [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
-    public abstract class NonQueryStoredProcedure<TParameters>
+    public abstract partial class NonQueryStoredProcedure<TParameters>
     {
         private readonly string _connectionString;
         private readonly string _name;
@@ -99,9 +98,13 @@ namespace Narvalo.Data
 
             return new SqlConnection(ConnectionString);
         }
-        
-#if CONTRACTS_FULL
+    }
 
+#if CONTRACTS_FULL
+    
+    [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
+    public abstract partial class NonQueryStoredProcedure<TParameters>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
@@ -110,8 +113,6 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
-
-#endif
     }
 
     [ContractClassFor(typeof(NonQueryStoredProcedure<>))]
@@ -126,4 +127,6 @@ namespace Narvalo.Data
             Contract.Requires(values != null);
         }
     }
+
+#endif
 }

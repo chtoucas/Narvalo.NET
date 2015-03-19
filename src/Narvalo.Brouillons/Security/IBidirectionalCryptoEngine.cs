@@ -3,15 +3,21 @@
 namespace Narvalo.Security
 {
     using System;
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
+#endif
 
-    [ContractClass(typeof(ContractForIBidirectionalCryptoEngine))]
-    public interface IBidirectionalCryptoEngine
+    public partial interface IBidirectionalCryptoEngine
     {
         string Encrypt(string val);
 
         string Decrypt(string val);
     }
+
+#if CONTRACTS_FULL
+
+    [ContractClass(typeof(ContractForIBidirectionalCryptoEngine))]
+    public partial interface IBidirectionalCryptoEngine { }
 
     [ContractClassFor(typeof(IBidirectionalCryptoEngine))]
     internal abstract class ContractForIBidirectionalCryptoEngine : IBidirectionalCryptoEngine
@@ -28,4 +34,6 @@ namespace Narvalo.Security
             return default(String);
         }
     }
+
+#endif
 }

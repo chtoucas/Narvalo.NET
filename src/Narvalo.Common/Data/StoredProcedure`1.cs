@@ -9,8 +9,7 @@ namespace Narvalo.Data
 
     using Narvalo.Internal;
 
-    [ContractClass(typeof(StoredProcedureContract<>))]
-    public abstract class StoredProcedure<TResult>
+    public abstract partial class StoredProcedure<TResult>
     {
         private readonly string _connectionString;
         private readonly string _name;
@@ -120,9 +119,13 @@ namespace Narvalo.Data
 
             return command.ExecuteReader(CommandBehavior);
         }
-        
-#if CONTRACTS_FULL
+    }
 
+#if CONTRACTS_FULL
+    
+    [ContractClass(typeof(StoredProcedureContract<>))]
+    public abstract partial class StoredProcedure<TResult>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
@@ -131,8 +134,6 @@ namespace Narvalo.Data
             Contract.Invariant(_name != null);
             Contract.Invariant(_name.Length != 0);
         }
-
-#endif
     }
 
     [ContractClassFor(typeof(StoredProcedure<>))]
@@ -153,4 +154,6 @@ namespace Narvalo.Data
             Contract.Requires(parameters != null);
         }
     }
+
+#endif
 }

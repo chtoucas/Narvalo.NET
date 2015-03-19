@@ -8,6 +8,7 @@ namespace Narvalo
 
     using Narvalo.Diagnostics.Benchmarking;
     using Narvalo.Edu.Comparisons;
+    using Narvalo.Fx;
 
     internal static class Program
     {

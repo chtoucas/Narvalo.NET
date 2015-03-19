@@ -12,6 +12,8 @@ namespace Narvalo
     /// <typeparam name="T">The type of the parameter of the delegates that this class encapsulates.</typeparam>
     public static class Stubs<T>
     {
+        private static readonly Func<T> s_AlwaysDefault = () => default(T);
+
         private static readonly Func<T, bool> s_AlwaysFalse = _ => false;
 
         private static readonly Func<T, bool> s_AlwaysTrue = _ => true;
@@ -21,7 +23,23 @@ namespace Narvalo
         private static readonly Action<T> s_Ignore = _ => { };
 
         /// <summary>
-        /// Gets a predicate that always evaluates to false.
+        /// Gets the function that always returns the default value.
+        /// </summary>
+        /// <value>The function that always returns the default value.</value>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "This is done on purpose to emphasize the underlying type of the input.")]
+        public static Func<T> AlwaysDefault
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<T>>() != null);
+
+                return s_AlwaysDefault;
+            }
+        }
+
+        /// <summary>
+        /// Gets the predicate that always evaluates to false.
         /// </summary>
         /// <value>The predicate that always evaluates to false.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -37,7 +55,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Gets a predicate that always evaluates to true.
+        /// Gets the predicate that always evaluates to true.
         /// </summary>
         /// <value>The predicate that always evaluates to true.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",

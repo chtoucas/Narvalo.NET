@@ -105,8 +105,6 @@
     <Compile Include="IO\RelativeDirectory.cs" />
     <Compile Include="IO\RelativeFile.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
-    <Compile Include="Configuration\NamespaceDoc.cs" />
-    <Compile Include="Data\NamespaceDoc.cs" />
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>

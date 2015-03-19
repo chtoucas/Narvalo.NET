@@ -1,0 +1,9 @@
+﻿<#@ include file="..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
+<# 
+    UnitEnsuresSome = true;
+#>
+<# EmitMonad(); #>
+
+<# EmitComonad(); #>
+
+<# EmitLinq(); #>
