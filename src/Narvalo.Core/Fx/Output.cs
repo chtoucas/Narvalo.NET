@@ -5,6 +5,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    /// <summary>
+    /// Provides a set of static and extension methods for <see cref="Output{T}"/>.
+    /// </summary>
     public static partial class Output
     {
         public static Output<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
@@ -12,7 +15,7 @@ namespace Narvalo.Fx
             Contract.Requires(exceptionInfo != null);
             Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            return Output<T>.η(exceptionInfo);
+            return Output<T>.Failure.η(exceptionInfo);
         }
     }
 }

@@ -403,14 +403,14 @@ namespace Narvalo.Fx
         }
 
 
-        public static Output<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this Output<TSource> @this,
             Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 

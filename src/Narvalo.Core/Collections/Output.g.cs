@@ -313,7 +313,7 @@ namespace Narvalo.Collections.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

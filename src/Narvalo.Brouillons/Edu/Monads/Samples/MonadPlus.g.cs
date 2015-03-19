@@ -606,24 +606,38 @@ namespace Narvalo.Edu.Monads.Samples
             return @this.Coalesce(predicate, MonadPlus<TResult>.Zero, other);
         }
 
-        public static MonadPlus<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this MonadPlus<TSource> @this,
             Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-        public static MonadPlus<TSource> OnZero<TSource>(
+
+        public static void OnZero<TSource>(
             this MonadPlus<TSource> @this,
             Action action)
         {
             Require.Object(@this); // Null-reference check: normally we don't need to check for null-reference since "Then" is an extension method but it could have been overriden by a normal method.
             Require.NotNull(action, "action");
 
-            return @this.Then(MonadPlus.Unit).Run(_ => action.Invoke()).Then(@this);
+            @this.Then(MonadPlus.Unit).Apply(_ => action.Invoke());
+        }
+
+        public static void Apply<TSource>(
+            this MonadPlus<TSource> @this,
+            Action<TSource> action,
+            Action caseZero)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(MonadPlus.Unit)
+                .Bind(_ => { caseZero.Invoke(); return Unit; });
         }
 
         #endregion
@@ -1008,7 +1022,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

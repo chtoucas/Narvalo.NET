@@ -1191,7 +1191,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 <#+ } // End of HasZero. #>
 
-        public static <#= Name #><TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
 <#+ WriteTypeConstraints_("TSource"); #>
@@ -1202,22 +1202,37 @@ namespace <#= LinqNamespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 <#+ if (HasThen) { #>
-        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
+
+        public static void On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
 <#+ WriteObjectNotNull_("Then"); #>
             Require.NotNull(action, "action");
-<#+ if (IsNullable && ThenEnsuresSome) { #>
+
+            @this.Then(<#= Name #>.Unit).Apply(_ => action.Invoke());
+        }
+
+        public static void Apply<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action,
+            Action case<#= ZeroName #>)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(action, "action");
+<#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            return @this.Then(<#= Name #>.Unit).Run(_ => action.Invoke()).Then(@this);
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(<#= Name #>.Unit)
+                .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
         }
 <#+ } // End of HasThen. #>
 
@@ -1691,7 +1706,7 @@ namespace <#= LinqNamespace #>.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

@@ -626,7 +626,7 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
-        public static Maybe<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action)
         {
@@ -634,18 +634,32 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-        public static Maybe<TSource> OnNone<TSource>(
+
+        public static void OnNone<TSource>(
             this Maybe<TSource> @this,
             Action action)
         {
             Require.Object(@this); // Null-reference check: normally we don't need to check for null-reference since "Then" is an extension method but it could have been overriden by a normal method.
             Require.NotNull(action, "action");
+
+            @this.Then(Maybe.Unit).Apply(_ => action.Invoke());
+        }
+
+        public static void Apply<TSource>(
+            this Maybe<TSource> @this,
+            Action<TSource> action,
+            Action caseNone)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Then(Maybe.Unit).Run(_ => action.Invoke()).Then(@this);
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(Maybe.Unit)
+                .Bind(_ => { caseNone.Invoke(); return Unit; });
         }
 
         #endregion

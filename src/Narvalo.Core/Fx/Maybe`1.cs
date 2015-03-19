@@ -246,16 +246,26 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-#if !NO_CONTRACTS_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-30-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
-        public Maybe<T> OnSome(Action<T> action)
+        public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
+        {
+            Require.NotNull(caseSome, "caseSome");
+            Require.NotNull(caseNone, "caseNone");
+
+            if (IsSome)
+            {
+                return caseSome.Invoke(Value);
+            }
+            else
+            {
+                return caseNone.Invoke();
+            }
+        }
+
+        public void OnSome(Action<T> action)
         {
             Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
-            return Run(action);
+            Apply(action);
         }
 
         /// <summary>
@@ -268,20 +278,20 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Obtains the enclosed value if any; otherwise <paramref name="defaultValue"/>.
+        /// Obtains the enclosed value if any; otherwise <paramref name="other"/>.
         /// </summary>
-        /// <param name="defaultValue">A default value to be used if if there is no underlying value.</param>
-        /// <returns>The enclosed value if any; otherwise <paramref name="defaultValue"/>.</returns>
-        public T ValueOrElse(T defaultValue)
+        /// <param name="other">A default value to be used if if there is no underlying value.</param>
+        /// <returns>The enclosed value if any; otherwise <paramref name="other"/>.</returns>
+        public T ValueOrElse(T other)
         {
-            return IsSome ? Value : defaultValue;
+            return IsSome ? Value : other;
         }
 
-        public T ValueOrElse(Func<T> defaultValueFactory)
+        public T ValueOrElse(Func<T> valueFactory)
         {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+            Require.NotNull(valueFactory, "valueFactory");
 
-            return IsSome ? Value : defaultValueFactory.Invoke();
+            return IsSome ? Value : valueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
@@ -675,30 +685,39 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions
 
-        public Maybe<T> Run(Action<T> action)
+        public void Apply(Action<T> action, Action caseNone)
         {
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+            Require.NotNull(caseNone, "caseNone");
 
             if (IsSome)
             {
                 action.Invoke(Value);
             }
-
-            return this;
+            else
+            {
+                caseNone.Invoke();
+            }
         }
 
-        public Maybe<T> OnNone(Action action)
+        public void Apply(Action<T> action)
         {
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
+            if (IsSome)
+            {
+                action.Invoke(Value);
+            }
+        }
+
+        public void OnNone(Action action)
+        {
+            Require.NotNull(action, "action");
 
             if (IsNone)
             {
                 action.Invoke();
             }
-
-            return this;
         }
 
         #endregion

@@ -8,17 +8,20 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
 #endif
 
+    /// <summary>
+    /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class 
+    /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
+    /// </summary>
+    /// <remarks>The enclosed value might be <see langword="null"/>.</remarks>
+    /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
+    /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Either<TLeft, TRight>
     {
-#if CONTRACTS_FULL
         protected Either() { }
-#else
-        private Either() { }
-#endif
 
-        public abstract TResult Switch<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
+        public abstract void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight);
 
-        public abstract void Switch(Action<TLeft> caseLeft, Action<TRight> caseRight);
+        public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         internal sealed class Left : Either<TLeft, TRight>, IEquatable<Left>
         {
@@ -29,14 +32,14 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override TResult Switch<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
                 return caseLeft.Invoke(_value);
             }
 
-            public override void Switch(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
@@ -83,14 +86,14 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override TResult Switch<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseRight, "caseRight");
 
                 return caseRight.Invoke(_value);
             }
 
-            public override void Switch(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseRight, "caseRight");
 
@@ -137,13 +140,13 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Either<,>))]
     internal abstract class EitherContract<TLeft, TRight> : Either<TLeft, TRight>
     {
-        public override void Switch(Action<TLeft> caseLeft, Action<TRight> caseRight)
+        public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);
         }
 
-        public override TResult Switch<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+        public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);

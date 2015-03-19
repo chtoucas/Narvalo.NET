@@ -9,10 +9,11 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Represents the (possibly empty) sum of two types. 
-    /// An instance of the <see cref="Switch{TLeft, TRight}"/> class contains 
-    /// either a TLeft value or a TRight value or nothing.
+    /// Represents the (possibly empty) sum of two types. An instance of the 
+    /// <see cref="Switch{TLeft, TRight}"/> class contains either a <c>TLeft</c>
+    /// value or a <c>TRight</c> value or nothing.
     /// </summary>
+    /// <remarks>Any enclosed value is not <see langword="null"/>.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Switch<TLeft, TRight>
@@ -32,6 +33,8 @@ namespace Narvalo.Fx
             }
         }
 
+        public abstract void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
+
         // Bind to the left value.
         public abstract Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM);
 
@@ -44,8 +47,6 @@ namespace Narvalo.Fx
         // Map the right value.
         public abstract Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector);
 
-        public abstract void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
-
         public abstract TResult Match<TResult>(
             Func<TLeft, TResult> caseLeft,
             Func<TRight, TResult> caseRight,
@@ -53,33 +54,51 @@ namespace Narvalo.Fx
 
         public abstract Switch<TRight, TLeft> Swap();
 
+        public abstract TLeft LeftOrThrow(Exception exception);
+
+        public abstract TLeft LeftOrThrow(Func<Exception> exceptionFactory);
+
+        public abstract TRight RightOrThrow(Exception exception);
+
+        public abstract TRight RightOrThrow(Func<Exception> exceptionFactory);
+
         public TLeft LeftOrDefault()
         {
-            return LeftOrElse(Stubs<TRight, TLeft>.AlwaysDefault);
+            return Match(Stubs<TLeft>.Identity, Stubs<TRight, TLeft>.AlwaysDefault, Stubs<TLeft>.AlwaysDefault);
         }
 
-        public TLeft LeftOrElse(Func<TRight, TLeft> other)
+        public TLeft LeftOrElse(TLeft other)
         {
-            Contract.Requires(other != null);
+            return Match(Stubs<TLeft>.Identity, _ => other, Stubs<TLeft>.AlwaysDefault);
+        }
 
-            return Match(Stubs<TLeft>.Identity, other, Stubs<TLeft>.AlwaysDefault);
+        public TLeft LeftOrElse(Func<TRight, TLeft> valueFactory)
+        {
+            Contract.Requires(valueFactory != null);
+
+            return Match(Stubs<TLeft>.Identity, valueFactory, Stubs<TLeft>.AlwaysDefault);
         }
 
         public TRight RightOrDefault()
         {
-            return RightOrElse(Stubs<TLeft, TRight>.AlwaysDefault);
+            return Match(Stubs<TLeft, TRight>.AlwaysDefault, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
         }
 
-        public TRight RightOrElse(Func<TLeft, TRight> other)
+        public TRight RightOrElse(TRight other)
         {
-            Contract.Requires(other != null);
+            return Match(_ => other, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
+        }
 
-            return Match(other, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
+        public TRight RightOrElse(Func<TLeft, TRight> valueFactory)
+        {
+            Contract.Requires(valueFactory != null);
+
+            return Match(valueFactory, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
         }
     }
 
     /// <content>
-    /// Implements the empty switch.
+    /// Implements the empty <see cref="Switch{TLeft, TRight}"/>.
     /// </content>
     public abstract partial class Switch<TLeft, TRight>
     {
@@ -106,7 +125,7 @@ namespace Narvalo.Fx
                 return Switch<TLeft, TResult>.Empty;
             }
 
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(otherwise, "otherwise");
 
@@ -126,6 +145,34 @@ namespace Narvalo.Fx
             public override Switch<TRight, TLeft> Swap()
             {
                 return Switch<TRight, TLeft>.Empty;
+            }
+
+            public override TLeft LeftOrThrow(Exception exception)
+            {
+                Require.NotNull(exception, "exception");
+
+                throw exception;
+            }
+
+            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            {
+                Require.NotNull(exceptionFactory, "exceptionFactory");
+
+                throw exceptionFactory.Invoke();
+            }
+
+            public override TRight RightOrThrow(Exception exception)
+            {
+                Require.NotNull(exception, "exception");
+
+                throw exception;
+            }
+
+            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
+            {
+                Require.NotNull(exceptionFactory, "exceptionFactory");
+
+                throw exceptionFactory.Invoke();
             }
 
             public override string ToString()
@@ -151,12 +198,12 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Implements the left side of the switch type.
+    /// Implements the left side of the <see cref="Switch{TLeft, TRight}"/> type.
     /// </content>
     public abstract partial class Switch<TLeft, TRight>
     {
         /// <summary>
-        /// Represents the left side of the switch type.
+        /// Represents the left side of the <see cref="Switch{TLeft, TRight}"/> type.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         internal sealed partial class Left : Switch<TLeft, TRight>, IEquatable<Left>
@@ -198,15 +245,15 @@ namespace Narvalo.Fx
                 return new Switch<TLeft, TResult>.Left(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Match" />
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
                 caseLeft.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Match" />
+            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
@@ -223,11 +270,51 @@ namespace Narvalo.Fx
                 return Switch<TRight, TLeft>.Right.η(_value);
             }
 
+            public override TLeft LeftOrThrow(Exception exception)
+            {
+                return _value;
+            }
+
+            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            {
+                return _value;
+            }
+
+            public override TRight RightOrThrow(Exception exception)
+            {
+                Require.NotNull(exception, "exception");
+
+                throw exception;
+            }
+
+            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
+            {
+                Require.NotNull(exceptionFactory, "exceptionFactory");
+
+                throw exceptionFactory.Invoke();
+            }
+
             public override string ToString()
             {
                 return Format.CurrentCulture("Left({0})", _value);
             }
 
+            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+                Justification = "Standard naming convention from mathematics. Only used internally.")]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            internal static Switch<TLeft, TRight> η(TLeft value)
+            {
+                Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
+
+                return value != null ? new Left(value) : Switch<TLeft, TRight>.Empty;
+            }
+        }
+
+        /// <content>
+        /// Implements the <see cref="IEquatable{Left}"/> interface.
+        /// </content>
+        internal partial class Left
+        {
             public bool Equals(Left other)
             {
                 if (other == this)
@@ -252,26 +339,16 @@ namespace Narvalo.Fx
             {
                 return EqualityComparer<TLeft>.Default.GetHashCode(_value);
             }
-
-            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-                Justification = "Standard naming convention from mathematics. Only used internally.")]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static Switch<TLeft, TRight> η(TLeft value)
-            {
-                Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
-
-                return value != null ? new Left(value) : Switch<TLeft, TRight>.Empty;
-            }
         }
     }
 
     /// <content>
-    /// Implements the right side of the switch type.
+    /// Implements the right side of the <see cref="Switch{TLeft, TRight}"/> type.
     /// </content>
     public abstract partial class Switch<TLeft, TRight>
     {
         /// <summary>
-        /// Represents the right side of the switch type.
+        /// Represents the right side of the <see cref="Switch{TLeft, TRight}"/> type.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         internal sealed partial class Right : Switch<TLeft, TRight>, IEquatable<Right>
@@ -319,15 +396,15 @@ namespace Narvalo.Fx
                 return Switch<TRight, TLeft>.Left.η(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Match" />
-            public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseRight, "caseRight");
 
                 caseRight.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Match" />
+            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
             public override TResult Match<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
@@ -338,11 +415,51 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
+            public override TLeft LeftOrThrow(Exception exception)
+            {
+                Require.NotNull(exception, "exception");
+
+                throw exception;
+            }
+
+            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            {
+                Require.NotNull(exceptionFactory, "exceptionFactory");
+
+                throw exceptionFactory.Invoke();
+            }
+
+            public override TRight RightOrThrow(Exception exception)
+            {
+                return _value;
+            }
+
+            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
+            {
+                return _value;
+            }
+
             public override string ToString()
             {
                 return Format.CurrentCulture("Right({0})", _value);
             }
 
+            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+                Justification = "Standard naming convention from mathematics. Only used internally.")]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            internal static Switch<TLeft, TRight> η(TRight value)
+            {
+                Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
+
+                return value != null ? new Right(value) : Switch<TLeft, TRight>.Empty;
+            }
+        }
+
+        /// <content>
+        /// Implements the <see cref="IEquatable{Right}"/> interface.
+        /// </content>
+        internal partial class Right
+        {
             public bool Equals(Right other)
             {
                 if (other == this)
@@ -367,25 +484,15 @@ namespace Narvalo.Fx
             {
                 return EqualityComparer<TRight>.Default.GetHashCode(_value);
             }
-
-            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-                Justification = "Standard naming convention from mathematics. Only used internally.")]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static Switch<TLeft, TRight> η(TRight value)
-            {
-                Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
-
-                return value != null ? new Right(value) : Switch<TLeft, TRight>.Empty;
-            }
         }
     }
 
 #if CONTRACTS_FULL
 
-    [ContractClass(typeof(WitchContract<,>))]
+    [ContractClass(typeof(SwitchContract<,>))]
     public abstract partial class Switch<TLeft, TRight>
     {
-        internal sealed partial class Left
+        internal partial class Left
         {
             [ContractInvariantMethod]
             private void ObjectInvariants()
@@ -394,7 +501,7 @@ namespace Narvalo.Fx
             }
         }
 
-        internal sealed partial class Right
+        internal partial class Right
         {
             [ContractInvariantMethod]
             private void ObjectInvariants()
@@ -405,8 +512,15 @@ namespace Narvalo.Fx
     }
 
     [ContractClassFor(typeof(Switch<,>))]
-    internal abstract class WitchContract<TLeft, TRight> : Switch<TLeft, TRight>
+    internal abstract class SwitchContract<TLeft, TRight> : Switch<TLeft, TRight>
     {
+        public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+        {
+            Contract.Requires(caseLeft != null);
+            Contract.Requires(caseRight != null);
+            Contract.Requires(otherwise != null);
+        }
+
         public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
         {
             Contract.Requires(leftSelectorM != null);
@@ -435,13 +549,6 @@ namespace Narvalo.Fx
             return default(Switch<TLeft, TResult>);
         }
 
-        public override void Match(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
-        {
-            Contract.Requires(caseLeft != null);
-            Contract.Requires(caseRight != null);
-            Contract.Requires(otherwise != null);
-        }
-
         public override TResult Match<TResult>(
             Func<TLeft, TResult> caseLeft,
             Func<TRight, TResult> caseRight,
@@ -459,6 +566,34 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Switch<TRight, TLeft>>() != null);
 
             return default(Switch<TRight, TLeft>);
+        }
+
+        public override TLeft LeftOrThrow(Exception exception)
+        {
+            Contract.Requires(exception != null);
+
+            return default(TLeft);
+        }
+
+        public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+        {
+            Contract.Requires(exceptionFactory != null);
+
+            return default(TLeft);
+        }
+
+        public override TRight RightOrThrow(Exception exception)
+        {
+            Contract.Requires(exception != null);
+
+            return default(TRight);
+        }
+
+        public override TRight RightOrThrow(Func<Exception> exceptionFactory)
+        {
+            Contract.Requires(exceptionFactory != null);
+
+            return default(TRight);
         }
     }
 

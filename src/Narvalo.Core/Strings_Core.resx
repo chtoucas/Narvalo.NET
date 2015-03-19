@@ -159,4 +159,10 @@
   <data name="Require_ArgumentNullOrWhiteSpaceFormat" xml:space="preserve">
     <value>The parameter '{0}' is null or empty, or contains only white-space characters.</value>
   </data>
+  <data name="Output_SuccessHasNoException" xml:space="preserve">
+    <value>A successful outcome has no exception.</value>
+  </data>
+  <data name="Output_FailureHasNoValue" xml:space="preserve">
+    <value>A bad outcome has no value.</value>
+  </data>
 </root>

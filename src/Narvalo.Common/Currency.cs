@@ -138,7 +138,7 @@ namespace Narvalo
     }
 
     // Provides user-friendly access to some of the most common currencies.
-    public sealed partial class Currency
+    public partial class Currency
     {
         // We aggressively cache the most common currencies.
         private static Currency s_Dollar = Of("USD");
@@ -310,7 +310,7 @@ namespace Narvalo
     }
 
     // Implements the IEquatable<Currency> interface.
-    public sealed partial class Currency
+    public partial class Currency
     {
         public static bool operator ==(Currency left, Currency right)
         {
@@ -369,7 +369,7 @@ namespace Narvalo
         {
             return _code.GetHashCode();
         }
-        
+
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]

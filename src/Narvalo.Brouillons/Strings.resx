@@ -129,12 +129,6 @@
   <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
     <value>HTTP InputStream too large.</value>
   </data>
-  <data name="Output_SuccessfulHasNoException" xml:space="preserve">
-    <value>A successful outcome has no exception.</value>
-  </data>
-  <data name="Output_UnsuccessfulHasNoValue" xml:space="preserve">
-    <value>A bad outcome has no value.</value>
-  </data>
   <data name="TypeIsNotEnumFormat" xml:space="preserve">
     <value>The type '{0}' must be of enum type.</value>
   </data>

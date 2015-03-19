@@ -401,14 +401,14 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
 
-        public static Monad<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this Monad<TSource> @this,
             Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
@@ -758,7 +758,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

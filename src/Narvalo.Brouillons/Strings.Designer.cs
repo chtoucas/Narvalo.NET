@@ -97,24 +97,6 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception..
-        /// </summary>
-        internal static string Output_SuccessfulHasNoException {
-            get {
-                return ResourceManager.GetString("Output_SuccessfulHasNoException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A bad outcome has no value..
-        /// </summary>
-        internal static string Output_UnsuccessfulHasNoValue {
-            get {
-                return ResourceManager.GetString("Output_UnsuccessfulHasNoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
         /// </summary>
         internal static string TypeIsNotEnumFormat {

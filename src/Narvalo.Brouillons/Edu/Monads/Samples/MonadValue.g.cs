@@ -639,24 +639,38 @@ namespace Narvalo.Edu.Monads.Samples
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
 
-        public static MonadValue<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct
         {
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-        public static MonadValue<TSource> OnNone<TSource>(
+
+        public static void OnNone<TSource>(
             this MonadValue<TSource> @this,
             Action action)
             where TSource : struct
         {
             Require.NotNull(action, "action");
 
-            return @this.Then(MonadValue.Unit).Run(_ => action.Invoke()).Then(@this);
+            @this.Then(MonadValue.Unit).Apply(_ => action.Invoke());
+        }
+
+        public static void Apply<TSource>(
+            this MonadValue<TSource> @this,
+            Action<TSource> action,
+            Action caseNone)
+            where TSource : struct
+        {
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(MonadValue.Unit)
+                .Bind(_ => { caseNone.Invoke(); return Unit; });
         }
 
         #endregion
@@ -962,7 +976,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

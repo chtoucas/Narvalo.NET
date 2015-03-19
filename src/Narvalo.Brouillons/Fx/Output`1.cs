@@ -3,7 +3,6 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
@@ -39,19 +38,17 @@ namespace Narvalo.Fx
         {
             get
             {
+                Promise.Condition(IsFailure);
                 Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-#if DEBUG
-                if (_isSuccess)
-                {
-                    throw new InvalidOperationException(Strings.Output_SuccessfulHasNoException);
-                }
-#endif
+#if CONTRACTS_FULL
 
                 if (_exceptionInfo == null)
                 {
-                    throw new InvalidOperationException(Strings.Output_SuccessfulHasNoException);
+                    throw new InvalidOperationException(Strings_Core.Output_SuccessHasNoException);
                 }
+
+#endif
 
                 return _exceptionInfo;
             }
@@ -61,12 +58,7 @@ namespace Narvalo.Fx
         {
             get
             {
-#if DEBUG
-                if (!_isSuccess)
-                {
-                    throw new InvalidOperationException(Strings.Output_UnsuccessfulHasNoValue);
-                }
-#endif
+                Promise.Condition(IsSuccess);
 
                 return _value;
             }
@@ -91,7 +83,7 @@ namespace Narvalo.Fx
 
             if (IsFailure)
             {
-                // FIXME: Incorrect? We should catch exceptions?
+                // FIXME: Incorrect? Should we catch exceptions?
                 action.Invoke(ExceptionInfo);
             }
 
@@ -104,7 +96,7 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return _isSuccess ? _value : default(T);
+            return IsSuccess ? Value : default(T);
         }
 
         /// <summary>
@@ -114,21 +106,21 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise <paramref name="defaultValue"/>.</returns>
         public T ValueOrElse(T defaultValue)
         {
-            return _isSuccess ? _value : defaultValue;
+            return IsSuccess ? Value : defaultValue;
         }
 
         public T ValueOrElse(Func<T> defaultValueFactory)
         {
             Require.NotNull(defaultValueFactory, "defaultValueFactory");
 
-            return _isSuccess ? _value : defaultValueFactory.Invoke();
+            return IsSuccess ? Value : defaultValueFactory.Invoke();
         }
 
         public T ValueOrThrow()
         {
-            if (!_isSuccess)
+            if (IsFailure)
             {
-                _exceptionInfo.Throw();
+                ExceptionInfo.Throw();
             }
 
             return Value;
@@ -136,9 +128,9 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
-            return _isSuccess ? Value.ToString() : _exceptionInfo.ToString();
+            return IsSuccess ? Value.ToString() : ExceptionInfo.ToString();
         }
-        
+
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
@@ -151,28 +143,30 @@ namespace Narvalo.Fx
 #endif
     }
 
-    // Monad definition.
     public partial class Output<T>
     {
         public Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
 
-            if (IsFailure)
-            {
-                return Output<TResult>.η(ExceptionInfo);
-            }
+            // FIXME: Incorrect? We should catch exceptions?
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : selector.Invoke(Value);
 
-            try
-            {
-                return selector.Invoke(Value);
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
+            //if (IsFailure)
+            //{
+            //    return Output<TResult>.η(ExceptionInfo);
+            //}
 
-                return Output<TResult>.η(edi);
-            }
+            //try
+            //{
+            //    return selector.Invoke(Value);
+            //}
+            //catch (Exception ex)
+            //{
+            //    var edi = ExceptionDispatchInfo.Capture(ex);
+
+            //    return Output<TResult>.η(edi);
+            //}
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
@@ -180,7 +174,7 @@ namespace Narvalo.Fx
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
-            Require.NotNull(exceptionInfo, "exceptionInfo");
+            Contract.Requires(exceptionInfo != null);
             Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return new Output<T>(exceptionInfo);
@@ -207,7 +201,6 @@ namespace Narvalo.Fx
         }
     }
 
-    // Monad optimized extensions.
     public partial class Output<T>
     {
         #region Basic Monad functions
@@ -221,21 +214,24 @@ namespace Narvalo.Fx
             Require.NotNull(selector, "selector");
             Contract.Ensures(Contract.Result<Output<TResult>>() != null);
 
-            if (IsFailure)
-            {
-                return Output<TResult>.η(ExceptionInfo);
-            }
+            // FIXME: Incorrect? We should catch exceptions?
+            return IsFailure ? Output<TResult>.η(ExceptionInfo) : Output<TResult>.η(selector.Invoke(Value));
 
-            try
-            {
-                return Output<TResult>.η(selector.Invoke(Value));
-            }
-            catch (Exception ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
+            //if (IsFailure)
+            //{
+            //    return Output<TResult>.η(ExceptionInfo);
+            //}
 
-                return Output<TResult>.η(edi);
-            }
+            //try
+            //{
+            //    return Output<TResult>.η(selector.Invoke(Value));
+            //}
+            //catch (Exception ex)
+            //{
+            //    var edi = ExceptionDispatchInfo.Capture(ex);
+
+            //    return Output<TResult>.η(edi);
+            //}
         }
 
         public Output<TResult> Then<TResult>(Output<TResult> other)

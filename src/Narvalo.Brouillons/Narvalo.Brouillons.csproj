@@ -73,13 +73,6 @@
     </Compile>
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="BinaryEncoder.cs" />
-    <Compile Include="Collections\Enumerable[Output]%24.cs" />
-    <Compile Include="Collections\Enumerable`1%24.cs" />
-    <Compile Include="Collections\Output.g.cs">
-      <DependentUpon>Output.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\ConfigurationElementCollection`1.cs" />
     <Compile Include="Configuration\IKeyedConfigurationElement`1.cs" />
@@ -174,13 +167,6 @@
     <Compile Include="Expando.cs" />
     <Compile Include="Fx\Fun.cs" />
     <Compile Include="Fx\Func`%24.cs" />
-    <Compile Include="Fx\Error.cs" />
-    <Compile Include="Fx\Output.g.cs">
-      <DependentUpon>Output.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Output`1.cs" />
     <Compile Include="Globalization\CurrencyInfo%24.cs" />
     <Compile Include="Globalization\Locale.cs" />
     <Compile Include="Globalization\Region.cs" />
@@ -354,11 +340,6 @@
     <Compile Include="Xml\XmlName.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Monad.Output.tt" />
-    <None Include="Collections\Output.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Output.g.cs</LastGenOutput>
-    </None>
     <None Include="Edu\Monads\Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>
@@ -386,10 +367,6 @@
     <None Include="Fx\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
-    <None Include="Fx\Output.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Output.g.cs</LastGenOutput>
     </None>
     <None Include="Narvalo.Brouillons.Version.props">
       <SubType>Designer</SubType>

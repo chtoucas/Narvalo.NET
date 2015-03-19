@@ -89,6 +89,24 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A bad outcome has no value..
+        /// </summary>
+        internal static string Output_FailureHasNoValue {
+            get {
+                return ResourceManager.GetString("Output_FailureHasNoValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome has no exception..
+        /// </summary>
+        internal static string Output_SuccessHasNoException {
+            get {
+                return ResourceManager.GetString("Output_SuccessHasNoException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
         /// </summary>
         internal static string Require_ArgumentNullFormat {

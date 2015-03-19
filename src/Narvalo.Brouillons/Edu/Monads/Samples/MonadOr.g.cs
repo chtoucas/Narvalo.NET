@@ -606,24 +606,38 @@ namespace Narvalo.Edu.Monads.Samples
             return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
         }
 
-        public static MonadOr<TSource> Run<TSource>(
+        public static void Apply<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action)
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            return @this.Bind(_ => { action.Invoke(_); return @this; });
+            @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-        public static MonadOr<TSource> OnNone<TSource>(
+
+        public static void OnNone<TSource>(
             this MonadOr<TSource> @this,
             Action action)
         {
             Require.Object(@this); // Null-reference check: normally we don't need to check for null-reference since "Then" is an extension method but it could have been overriden by a normal method.
             Require.NotNull(action, "action");
 
-            return @this.Then(MonadOr.Unit).Run(_ => action.Invoke()).Then(@this);
+            @this.Then(MonadOr.Unit).Apply(_ => action.Invoke());
+        }
+
+        public static void Apply<TSource>(
+            this MonadOr<TSource> @this,
+            Action<TSource> action,
+            Action caseNone)
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(MonadOr.Unit)
+                .Bind(_ => { caseNone.Invoke(); return Unit; });
         }
 
         #endregion
@@ -1008,7 +1022,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Run(
+                    m.Apply(
                         _ =>
                         {
                             if (_ == true)

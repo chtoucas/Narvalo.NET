@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     public static class Either<T>
     {
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "Type inference won't help here.")]
+            Justification = "A non-generic version would not improve usability.")]
         public static Either<TLeft, T> Left<TLeft>(TLeft value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, T>>() != null);
@@ -17,7 +17,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "Type inference won't help here.")]
+            Justification = "A non-generic version would not improve usability.")]
         public static Either<T, TRight> Right<TRight>(TRight value)
         {
             Contract.Ensures(Contract.Result<Either<T, TRight>>() != null);
