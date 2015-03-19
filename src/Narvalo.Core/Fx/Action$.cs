@@ -7,18 +7,18 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    public static class Apply
+    public static class ActionExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
-        public static VoidOrError Catch<TException>(Action action) where TException : Exception
+        public static VoidOrError Catch<TException>(this Action @this) where TException : Exception
         {
-            Require.NotNull(action, "action");
+            Require.Object(@this);
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
-
+            
             try
             {
-                action.Invoke();
+                @this.Invoke();
 
                 return VoidOrError.Success;
             }
@@ -36,18 +36,18 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static VoidOrError Catch<T1Exception, T2Exception>(Action action)
+        public static VoidOrError Catch<T1Exception, T2Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception
         {
-            Require.NotNull(action, "action");
+            Require.Object(@this);
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                action.Invoke();
+                @this.Invoke();
 
                 return VoidOrError.Success;
             }
@@ -63,19 +63,19 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(Action action)
+        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
         {
-            Require.NotNull(action, "action");
+            Require.Object(@this);
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                action.Invoke();
+                @this.Invoke();
 
                 return VoidOrError.Success;
             }
@@ -92,20 +92,20 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(Action action)
+        public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
             where T4Exception : Exception
         {
-            Require.NotNull(action, "action");
+            Require.Object(@this);
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                action.Invoke();
+                @this.Invoke();
 
                 return VoidOrError.Success;
             }

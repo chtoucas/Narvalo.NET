@@ -54,47 +54,9 @@ namespace Narvalo.Fx
 
         public abstract Switch<TRight, TLeft> Swap();
 
-        public abstract TLeft LeftOrThrow(Exception exception);
+        public abstract Maybe<TLeft> LeftOrNone();
 
-        public abstract TLeft LeftOrThrow(Func<Exception> exceptionFactory);
-
-        public abstract TRight RightOrThrow(Exception exception);
-
-        public abstract TRight RightOrThrow(Func<Exception> exceptionFactory);
-
-        public TLeft LeftOrDefault()
-        {
-            return Match(Stubs<TLeft>.Identity, Stubs<TRight, TLeft>.AlwaysDefault, Stubs<TLeft>.AlwaysDefault);
-        }
-
-        public TLeft LeftOrElse(TLeft other)
-        {
-            return Match(Stubs<TLeft>.Identity, _ => other, Stubs<TLeft>.AlwaysDefault);
-        }
-
-        public TLeft LeftOrElse(Func<TRight, TLeft> valueFactory)
-        {
-            Contract.Requires(valueFactory != null);
-
-            return Match(Stubs<TLeft>.Identity, valueFactory, Stubs<TLeft>.AlwaysDefault);
-        }
-
-        public TRight RightOrDefault()
-        {
-            return Match(Stubs<TLeft, TRight>.AlwaysDefault, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
-        }
-
-        public TRight RightOrElse(TRight other)
-        {
-            return Match(_ => other, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
-        }
-
-        public TRight RightOrElse(Func<TLeft, TRight> valueFactory)
-        {
-            Contract.Requires(valueFactory != null);
-
-            return Match(valueFactory, Stubs<TRight>.Identity, Stubs<TRight>.AlwaysDefault);
-        }
+        public abstract Maybe<TRight> RightOrNone();
     }
 
     /// <content>
@@ -147,32 +109,14 @@ namespace Narvalo.Fx
                 return Switch<TRight, TLeft>.Empty;
             }
 
-            public override TLeft LeftOrThrow(Exception exception)
+            public override Maybe<TLeft> LeftOrNone()
             {
-                Require.NotNull(exception, "exception");
-
-                throw exception;
+                return Maybe<TLeft>.None;
             }
 
-            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            public override Maybe<TRight> RightOrNone()
             {
-                Require.NotNull(exceptionFactory, "exceptionFactory");
-
-                throw exceptionFactory.Invoke();
-            }
-
-            public override TRight RightOrThrow(Exception exception)
-            {
-                Require.NotNull(exception, "exception");
-
-                throw exception;
-            }
-
-            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
-            {
-                Require.NotNull(exceptionFactory, "exceptionFactory");
-
-                throw exceptionFactory.Invoke();
+                return Maybe<TRight>.None;
             }
 
             public override string ToString()
@@ -270,28 +214,14 @@ namespace Narvalo.Fx
                 return Switch<TRight, TLeft>.Right.η(_value);
             }
 
-            public override TLeft LeftOrThrow(Exception exception)
+            public override Maybe<TLeft> LeftOrNone()
             {
-                return _value;
+                return Maybe.Create(_value);
             }
 
-            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            public override Maybe<TRight> RightOrNone()
             {
-                return _value;
-            }
-
-            public override TRight RightOrThrow(Exception exception)
-            {
-                Require.NotNull(exception, "exception");
-
-                throw exception;
-            }
-
-            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
-            {
-                Require.NotNull(exceptionFactory, "exceptionFactory");
-
-                throw exceptionFactory.Invoke();
+                return Maybe<TRight>.None;
             }
 
             public override string ToString()
@@ -415,28 +345,14 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
-            public override TLeft LeftOrThrow(Exception exception)
+            public override Maybe<TLeft> LeftOrNone()
             {
-                Require.NotNull(exception, "exception");
-
-                throw exception;
+                return Maybe<TLeft>.None;
             }
 
-            public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+            public override Maybe<TRight> RightOrNone()
             {
-                Require.NotNull(exceptionFactory, "exceptionFactory");
-
-                throw exceptionFactory.Invoke();
-            }
-
-            public override TRight RightOrThrow(Exception exception)
-            {
-                return _value;
-            }
-
-            public override TRight RightOrThrow(Func<Exception> exceptionFactory)
-            {
-                return _value;
+                return Maybe.Create(_value);
             }
 
             public override string ToString()
@@ -568,32 +484,18 @@ namespace Narvalo.Fx
             return default(Switch<TRight, TLeft>);
         }
 
-        public override TLeft LeftOrThrow(Exception exception)
+        public override Maybe<TLeft> LeftOrNone() 
         {
-            Contract.Requires(exception != null);
+            Contract.Ensures(Contract.Result<Maybe<TLeft>>() != null);
 
-            return default(TLeft);
+            return default(Maybe<TLeft>);
         }
 
-        public override TLeft LeftOrThrow(Func<Exception> exceptionFactory)
+        public override Maybe<TRight> RightOrNone()
         {
-            Contract.Requires(exceptionFactory != null);
+            Contract.Ensures(Contract.Result<Maybe<TRight>>() != null);
 
-            return default(TLeft);
-        }
-
-        public override TRight RightOrThrow(Exception exception)
-        {
-            Contract.Requires(exception != null);
-
-            return default(TRight);
-        }
-
-        public override TRight RightOrThrow(Func<Exception> exceptionFactory)
-        {
-            Contract.Requires(exceptionFactory != null);
-
-            return default(TRight);
+            return default(Maybe<TRight>);
         }
     }
 

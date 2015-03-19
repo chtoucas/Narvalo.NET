@@ -204,5 +204,23 @@ namespace Narvalo {
                 return ResourceManager.GetString("Require_PropertyNull", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome has no error message..
+        /// </summary>
+        internal static string VoidOrBreak_IsNotBreak {
+            get {
+                return ResourceManager.GetString("VoidOrBreak_IsNotBreak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome has no exception info..
+        /// </summary>
+        internal static string VoidOrError_IsNotError {
+            get {
+                return ResourceManager.GetString("VoidOrError_IsNotError", resourceCulture);
+            }
+        }
     }
 }

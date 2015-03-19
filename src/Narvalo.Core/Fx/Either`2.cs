@@ -4,9 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class 
@@ -23,6 +21,10 @@ namespace Narvalo.Fx
 
         public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
+        public abstract Maybe<TLeft> LeftOrNone();
+
+        public abstract Maybe<TRight> RightOrNone();
+
         internal sealed class Left : Either<TLeft, TRight>, IEquatable<Left>
         {
             private readonly TLeft _value;
@@ -32,6 +34,13 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            {
+                Require.NotNull(caseLeft, "caseLeft");
+
+                caseLeft.Invoke(_value);
+            }
+
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseLeft, "caseLeft");
@@ -39,11 +48,14 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(_value);
             }
 
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override Maybe<TLeft> LeftOrNone()
             {
-                Require.NotNull(caseLeft, "caseLeft");
+                return Maybe.Create(_value);
+            }
 
-                caseLeft.Invoke(_value);
+            public override Maybe<TRight> RightOrNone()
+            {
+                return Maybe<TRight>.None;
             }
 
             public bool Equals(Left other)
@@ -86,6 +98,13 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
+            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            {
+                Require.NotNull(caseRight, "caseRight");
+
+                caseRight.Invoke(_value);
+            }
+
             public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseRight, "caseRight");
@@ -93,11 +112,14 @@ namespace Narvalo.Fx
                 return caseRight.Invoke(_value);
             }
 
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override Maybe<TLeft> LeftOrNone()
             {
-                Require.NotNull(caseRight, "caseRight");
+                return Maybe<TLeft>.None;
+            }
 
-                caseRight.Invoke(_value);
+            public override Maybe<TRight> RightOrNone()
+            {
+                return Maybe.Create(_value);
             }
 
             public bool Equals(Right other)
@@ -152,6 +174,20 @@ namespace Narvalo.Fx
             Contract.Requires(caseRight != null);
 
             return default(TResult);
+        }
+
+        public override Maybe<TLeft> LeftOrNone() 
+        {
+            Contract.Ensures(Contract.Result<Maybe<TLeft>>() != null);
+
+            return default(Maybe<TLeft>);
+        }
+
+        public override Maybe<TRight> RightOrNone()
+        {
+            Contract.Ensures(Contract.Result<Maybe<TRight>>() != null);
+
+            return default(Maybe<TRight>);
         }
     }
 

@@ -67,7 +67,6 @@
     <Compile Include="Fx\Identity`1.cs" />
     <Compile Include="Fx\Recursion.cs" />
     <Compile Include="Internal\Check.cs" />
-    <Compile Include="Fx\Apply.cs" />
     <Compile Include="Array%24.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -188,7 +187,6 @@
     <Compile Include="Diagnostics\Logging\LoggerBase.cs" />
     <Compile Include="Diagnostics\Logging\LoggerLevel.cs" />
     <Compile Include="Diagnostics\Logging\SilentLogger.cs" />
-    <Compile Include="Fx\Make`1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomNumber.cs" />
@@ -217,8 +215,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Fx\VoidOrBreak.cs" />
-    <Compile Include="Fx\VoidOrError.cs" />
     <Compile Include="Web\Configuration\NarvaloWebSettings.cs">
       <SubType>Code</SubType>
     </Compile>

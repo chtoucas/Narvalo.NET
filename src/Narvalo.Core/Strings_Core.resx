@@ -165,4 +165,10 @@
   <data name="Output_FailureHasNoValue" xml:space="preserve">
     <value>A bad outcome has no value.</value>
   </data>
+  <data name="VoidOrBreak_IsNotBreak" xml:space="preserve">
+    <value>A successful outcome has no error message.</value>
+  </data>
+  <data name="VoidOrError_IsNotError" xml:space="preserve">
+    <value>A successful outcome has no exception info.</value>
+  </data>
 </root>

@@ -138,14 +138,42 @@ namespace Narvalo.Fx
             return Coalesce(@this, predicate, null, other);
         }
 
-        public static Unit? Run<TSource>(this TSource? @this, Action<TSource> action)
+        public static void Apply<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            Contract.Requires(action != null);
+            Require.NotNull(action, "action");
 
-            OnValue(@this, action);
+            if (@this.HasValue)
+            {
+                action.Invoke(@this.Value);
+            }
+        }
 
-            return (Unit?)Unit.Single;
+        public static void OnNull<TSource>(this TSource? @this, Action action)
+            where TSource : struct
+        {
+            Require.NotNull(action, "action");
+
+            if (!@this.HasValue)
+            {
+                action.Invoke();
+            }
+        }
+
+        public static void Apply<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
+            where TSource : struct
+        {
+            Require.NotNull(action, "action");
+            Require.NotNull(caseNull, "caseNull");
+
+            if (@this.HasValue)
+            {
+                action.Invoke(@this.Value);
+            }
+            else
+            {
+                caseNull.Invoke();
+            }
         }
 
         #endregion
@@ -178,30 +206,12 @@ namespace Narvalo.Fx
             return Maybe.Create(@this);
         }
 
-        public static TSource? OnValue<TSource>(this TSource? @this, Action<TSource> action)
+        public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
+            Contract.Requires(action != null);
 
-            if (@this.HasValue)
-            {
-                action.Invoke(@this.Value);
-            }
-
-            return @this;
-        }
-
-        public static TSource? OnNull<TSource>(this TSource? @this, Action action)
-            where TSource : struct
-        {
-            Require.NotNull(action, "action");
-
-            if (!@this.HasValue)
-            {
-                action.Invoke();
-            }
-
-            return @this;
+            @this.Apply(action);
         }
     }
 }

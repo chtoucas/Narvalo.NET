@@ -11,10 +11,10 @@ namespace Narvalo.Fx
 
     using Narvalo.Internal;
 
-    // WARNING: We do not catch exception.
+    // WARNING: We do not catch any exception.
     public abstract partial class Output<T>
     {
-        private Output() { }
+        protected Output() { }
 
         public abstract void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
 
@@ -22,7 +22,23 @@ namespace Narvalo.Fx
 
         public abstract TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure);
 
+        public abstract void OnSuccess(Action<T> action);
+
+        public abstract void OnFailure(Action<ExceptionDispatchInfo> action);
+
+        public abstract Maybe<T> ValueOrNone();
+
         public abstract T ValueOrThrow();
+
+        #region Overrides for a bunch of auto-generated (extension) methods (see Output.g.cs).
+
+        public abstract void Apply(Action<T> action);
+
+        public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
+
+        public abstract Output<TResult> Then<TResult>(Output<TResult> other);
+
+        #endregion
 
         /// <summary>
         /// Obtains the underlying value if any; otherwise the default value of the type T.
@@ -97,11 +113,11 @@ namespace Narvalo.Fx
 
             internal T Value { get { return _value; } }
 
-            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+            public override void Apply(Action<T> action)
             {
-                Require.NotNull(selector, "selector");
+                Require.NotNull(action, "action");
 
-                return selector.Invoke(Value);
+                action.Invoke(Value);
             }
 
             public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
@@ -111,11 +127,42 @@ namespace Narvalo.Fx
                 caseSuccess.Invoke(Value);
             }
 
+            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+            {
+                Require.NotNull(selector, "selector");
+
+                return selector.Invoke(Value);
+            }
+
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
             {
                 Require.NotNull(caseSuccess, "caseSuccess");
 
                 return caseSuccess.Invoke(Value);
+            }
+
+            public override void OnFailure(Action<ExceptionDispatchInfo> action) { }
+
+            public override void OnSuccess(Action<T> action)
+            {
+                Apply(action);
+            }
+
+            public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+            {
+                Require.NotNull(selector, "selector");
+
+                return Output<TResult>.η(selector.Invoke(Value));
+            }
+
+            public override Output<TResult> Then<TResult>(Output<TResult> other)
+            {
+                return other;
+            }
+
+            public override Maybe<T> ValueOrNone()
+            {
+                return Maybe.Create(Value);
             }
 
             public override T ValueOrThrow()
@@ -190,10 +237,7 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
-            {
-                return Output<TResult>.Failure.η(_exceptionInfo);
-            }
+            public override void Apply(Action<T> action) { }
 
             public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
             {
@@ -202,11 +246,40 @@ namespace Narvalo.Fx
                 caseFailure.Invoke(ExceptionInfo);
             }
 
+            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+            {
+                return Output<TResult>.Failure.η(ExceptionInfo);
+            }
+
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
             {
                 Require.NotNull(caseFailure, "caseFailure");
 
                 return caseFailure.Invoke();
+            }
+
+            public override void OnFailure(Action<ExceptionDispatchInfo> action)
+            {
+                Require.NotNull(action, "action");
+
+                action.Invoke(ExceptionInfo);
+            }
+
+            public override void OnSuccess(Action<T> action) { }
+
+            public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+            {
+                return Output<TResult>.Failure.η(ExceptionInfo);
+            }
+
+            public override Output<TResult> Then<TResult>(Output<TResult> other)
+            {
+                return Output<TResult>.Failure.η(ExceptionInfo);
+            }
+
+            public override Maybe<T> ValueOrNone()
+            {
+                return Maybe<T>.None;
             }
 
             public override T ValueOrThrow()
@@ -264,9 +337,9 @@ namespace Narvalo.Fx
         }
     }
 
-
 #if CONTRACTS_FULL
 
+    [ContractClass(typeof(OutputContract<>))]
     public abstract partial class Output<T>
     {
         internal partial class Failure
@@ -278,6 +351,54 @@ namespace Narvalo.Fx
             }
         }
     }
+    
+    [ContractClassFor(typeof(Output<>))]
+    internal abstract class OutputContract<T> : Output<T>
+    {
+        public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+        {
+            Contract.Requires(caseSuccess != null);
+            Contract.Requires(caseFailure != null);
+        }
 
+        public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+        {
+            Contract.Requires(selector != null);
+
+            return default(Output<TResult>);
+        }
+
+        public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
+        {
+            Contract.Requires(caseSuccess != null);
+            Contract.Requires(caseFailure != null);
+
+            return default(TResult);
+        }
+
+        public override void OnFailure(Action<ExceptionDispatchInfo> action)
+        {
+            Contract.Requires(action != null);
+        }
+
+        public override void OnSuccess(Action<T> action)
+        {
+            Contract.Requires(action != null);
+        }
+
+        public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+        {
+            Contract.Requires(selector != null);
+
+            return default(Output<TResult>);
+        }
+
+        public override Maybe<T> ValueOrNone()
+        {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
+            return default(Maybe<T>);
+        }
+    }
 #endif
 }
