@@ -58,12 +58,13 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
-    <Compile Include="Fx\Identity.g.cs">
+    <Compile Include="Enumerable`1%24.cs" />
+    <Compile Include="Edu\Monads\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\Identity`1.cs" />
+    <Compile Include="Edu\Monads\Identity`1.cs" />
     <Compile Include="Internal\Check.cs" />
     <Compile Include="AssemblyUtility.cs" />
     <Compile Include="Configuration\BasicConfigurationElementCollection`1.cs" />
@@ -325,7 +326,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\Identity.tt">
+    <None Include="Edu\Monads\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>

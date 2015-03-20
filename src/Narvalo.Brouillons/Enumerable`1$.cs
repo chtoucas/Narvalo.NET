@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo
 {
     using System;
     using System.Collections.Generic;
@@ -21,10 +21,12 @@ namespace Narvalo.Collections
             Require.Object(@this);
             Require.NotNull(funM, "funM");
 
-            return from _ in @this
-                   let m = funM.Invoke(_)
-                   where m.IsSuccess
-                   select m.Value;
+            throw new NotImplementedException();
+
+            //return from _ in @this
+            //       let m = funM.Invoke(_)
+            //       where m.IsSuccess
+            //       select m.Value;
         }
     }
 
@@ -36,25 +38,27 @@ namespace Narvalo.Collections
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
-            var list = new List<TSource>();
+            throw new NotImplementedException();
 
-            foreach (var m in @this)
-            {
-                // REVIEW: Is this the correct behaviour when m is null?
-                if (m == null)
-                {
-                    continue;
-                }
+            //var list = new List<TSource>();
 
-                if (m.IsFailure)
-                {
-                    return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
-                }
+            //foreach (var m in @this)
+            //{
+            //    // REVIEW: Is this the correct behaviour when m is null?
+            //    if (m == null)
+            //    {
+            //        continue;
+            //    }
 
-                list.Add(m.Value);
-            }
+            //    if (m.IsFailure)
+            //    {
+            //        return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
+            //    }
 
-            return Output.Success(list.AsEnumerable());
+            //    list.Add(m.Value);
+            //}
+
+            //return Output.Success(list.AsEnumerable());
         }
     }
 }
