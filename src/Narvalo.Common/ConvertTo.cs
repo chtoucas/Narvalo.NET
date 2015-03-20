@@ -2,8 +2,6 @@
 
 namespace Narvalo
 {
-    using Narvalo.Internal;
-
     public static class ConvertTo
     {
         /// <remarks>

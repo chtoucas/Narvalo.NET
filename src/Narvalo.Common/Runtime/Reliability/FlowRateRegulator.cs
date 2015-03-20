@@ -2,9 +2,6 @@
 
 namespace Narvalo.Runtime.Reliability
 {
-    using System;
-    using System.Threading;
-
     // FIXME: à refaire en checkpoint sans exception...
     public class FlowRateRegulator 
         ////: IThrottle, IDisposable
