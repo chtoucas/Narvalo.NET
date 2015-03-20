@@ -5,7 +5,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <Target Name="_WarnOnTemporaryOverridenSettings" BeforeTargets="Build">
+  <Target Name="_WarnOnTemporaryOverriddenSettings" BeforeTargets="Build">
     <!--<Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)."
              Condition=" '$(SourceAnalysisEnabled)' == 'true' "/>-->
     <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."

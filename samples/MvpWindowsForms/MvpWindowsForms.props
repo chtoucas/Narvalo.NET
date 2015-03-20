@@ -6,7 +6,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <Target Name="_WarnOnTemporaryOverridenSettings">
+  <Target Name="_WarnOnTemporaryOverriddenSettings">
     <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
              Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(RunCodeAnalysis)' == 'true' " />
   </Target>

@@ -13,7 +13,7 @@ namespace Narvalo.Fx.Extensions
     public static class ActionExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
         public static VoidOrError Catch<TException>(this Action @this) where TException : Exception
         {
             Require.Object(@this);
@@ -34,7 +34,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
@@ -61,7 +61,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
@@ -90,7 +90,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]

@@ -17,7 +17,11 @@ namespace Narvalo.Fx
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Either<TLeft, TRight>
     {
+#if CONTRACTS_FULL
         protected Either() { }
+#else
+        private Either() { }
+#endif
 
         public abstract void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight);
 
@@ -28,7 +32,7 @@ namespace Narvalo.Fx
         public abstract Maybe<TRight> RightOrNone();
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
@@ -38,7 +42,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TRight value)
         {
@@ -179,7 +183,7 @@ namespace Narvalo.Fx
 #if CONTRACTS_FULL
 
     [ContractClass(typeof(EitherContract<,>))]
-    public abstract partial class Either<TLeft, TRight> { }
+    public partial class Either<TLeft, TRight> { }
 
     [ContractClassFor(typeof(Either<,>))]
     internal abstract class EitherContract<TLeft, TRight> : Either<TLeft, TRight>

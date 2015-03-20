@@ -12,10 +12,8 @@ namespace Narvalo.Fx.Extensions
     /// </summary>
     public static partial class FuncOutputExtensions
     {
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
         public static Output<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
         {
             Require.Object(@this);
@@ -33,10 +31,8 @@ namespace Narvalo.Fx.Extensions
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
@@ -61,10 +57,8 @@ namespace Narvalo.Fx.Extensions
             return Output.Failure<TSource>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
@@ -91,10 +85,8 @@ namespace Narvalo.Fx.Extensions
             return Output.Failure<TSource>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "There is no way we can achieve the same thing with type inference.")]
+            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]

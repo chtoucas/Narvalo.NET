@@ -19,11 +19,15 @@ namespace Narvalo.Fx
     public abstract partial class Switch<TLeft, TRight>
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
-
+        
+#if CONTRACTS_FULL
         protected Switch() { }
+#else
+        private Switch() { }
+#endif
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version of this static property is simply not possible.")]
+            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
         public static Switch<TLeft, TRight> Empty
         {
             get
@@ -60,7 +64,7 @@ namespace Narvalo.Fx
         public abstract Maybe<TRight> RightOrNone();
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
@@ -70,7 +74,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
@@ -83,7 +87,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the empty <see cref="Switch{TLeft, TRight}"/>.
     /// </content>
-    public abstract partial class Switch<TLeft, TRight>
+    public partial class Switch<TLeft, TRight>
     {
         private sealed class Empty_ : Switch<TLeft, TRight>, IEquatable<Empty_>
         {
@@ -164,7 +168,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the left side of the <see cref="Switch{TLeft, TRight}"/> type.
     /// </content>
-    public abstract partial class Switch<TLeft, TRight>
+    public partial class Switch<TLeft, TRight>
     {
         /// <summary>
         /// Represents the left side of the <see cref="Switch{TLeft, TRight}"/> type.
@@ -284,7 +288,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the right side of the <see cref="Switch{TLeft, TRight}"/> type.
     /// </content>
-    public abstract partial class Switch<TLeft, TRight>
+    public partial class Switch<TLeft, TRight>
     {
         /// <summary>
         /// Represents the right side of the <see cref="Switch{TLeft, TRight}"/> type.
@@ -404,7 +408,7 @@ namespace Narvalo.Fx
 #if CONTRACTS_FULL
 
     [ContractClass(typeof(SwitchContract<,>))]
-    public abstract partial class Switch<TLeft, TRight>
+    public partial class Switch<TLeft, TRight>
     {
         private partial class Left_
         {

@@ -6,7 +6,7 @@
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Empty.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
-  <Target Name="_WarnOnTemporaryOverridenSettings" BeforeTargets="Build">
+  <Target Name="_WarnOnTemporaryOverriddenSettings" BeforeTargets="Build">
     <Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)."
              Condition=" '$(SourceAnalysisEnabled)' == 'true' "/>
   </Target>

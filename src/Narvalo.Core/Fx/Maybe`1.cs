@@ -142,7 +142,7 @@ namespace Narvalo.Fx
      * </content>
      */
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Maybe<T> only pretends to be a collection.")]
+        Justification = "[Ignore] Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         private readonly bool _isSome;
@@ -507,7 +507,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> η(T value)
         {
@@ -517,7 +517,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
@@ -539,7 +539,7 @@ namespace Narvalo.Fx
         /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version of this static property is simply not possible.")]
+            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
         public static Maybe<T> None
         {
             get
