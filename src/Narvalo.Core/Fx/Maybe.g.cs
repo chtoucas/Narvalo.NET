@@ -679,7 +679,7 @@ namespace Narvalo.Fx.Extensions
     using global::Narvalo;
 
     /// <summary>
-    /// Provides extension methods for <c>Func&lt;TSource, Maybe&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
     public static partial class FuncMaybeExtensions
     {
@@ -728,5 +728,5 @@ namespace Narvalo.Fx.Extensions
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of the class FuncMaybeExtensions.
 }

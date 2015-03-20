@@ -2,11 +2,31 @@
 
 namespace Narvalo.Collections
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo.Fx;
+
+    /// <summary>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// </summary>
+    public static partial class EnumerableExtensions
+    {
+        public static IEnumerable<TResult> MapAny<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Output<TResult>> funM)
+        {
+            Require.Object(@this);
+            Require.NotNull(funM, "funM");
+
+            return from _ in @this
+                   let m = funM.Invoke(_)
+                   where m.IsSuccess
+                   select m.Value;
+        }
+    }
 
     public static partial class EnumerableOutputExtensions
     {
@@ -18,13 +38,16 @@ namespace Narvalo.Collections
 
             var list = new List<TSource>();
 
-            foreach (var m in @this) {
+            foreach (var m in @this)
+            {
                 // REVIEW: Is this the correct behaviour when m is null?
-                if (m == null) {
+                if (m == null)
+                {
                     continue;
                 }
 
-                if (m.IsFailure) {
+                if (m.IsFailure)
+                {
                     return Output.Failure<IEnumerable<TSource>>(m.ExceptionInfo);
                 }
 

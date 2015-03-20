@@ -1,16 +1,14 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Fx.Extensions
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx;
-
     /// <summary>
-    /// Provides extension methods for <see cref="IDictionary{T,U}"/>.
+    /// Provides extension methods for <see cref="IDictionary{T,U}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
-    public static partial class DictionaryExtensions
+    public static partial class DictionaryMaybeExtensions
     {
         /// <summary>
         /// Version sans passage par référence de la méthode <see cref="System.Collections.Generic.IDictionary{T,U}.TryGetValue"/>.

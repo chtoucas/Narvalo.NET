@@ -4,7 +4,6 @@ namespace Narvalo.Edu.Linq
 {
     using System.Collections.Generic;
 
-    using Narvalo.Collections;
     using Narvalo.Fx;
 
     // LINQ from scratch.

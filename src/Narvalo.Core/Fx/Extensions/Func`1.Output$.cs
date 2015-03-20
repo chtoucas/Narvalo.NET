@@ -8,9 +8,9 @@ namespace Narvalo.Fx.Extensions
     using System.Runtime.ExceptionServices;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Func{T}"/>.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </summary>
-    public static partial class FuncExtensions
+    public static partial class FuncOutputExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "A non-generic version would not improve usability.")]

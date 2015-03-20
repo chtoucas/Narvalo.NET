@@ -429,7 +429,7 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
     using global::Narvalo;
 
     /// <summary>
-    /// Provides extension methods for <c>Func&lt;TSource, Monad&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Monad{T}"/> class.
     /// </summary>
     public static partial class FuncMonadExtensions
     {
@@ -477,7 +477,7 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of the class FuncMonadExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples
@@ -490,7 +490,7 @@ namespace Narvalo.Edu.Monads.Samples
     using Narvalo.Edu.Monads.Samples.Internal;
 
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Monad{T}"/> class..
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -515,10 +515,10 @@ namespace Narvalo.Edu.Monads.Samples
         #endregion
     } // End of the class EnumerableMonadExtensions.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    public static partial class EnumerableExtensions
+    /// </content>
+    public static partial class EnumerableMonadExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -673,7 +673,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of the class EnumerableMonadExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples.Internal
@@ -688,8 +688,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     using Narvalo.Edu.Monads.Samples;
 
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;Monad&lt;T&gt;&gt;</c>
-    /// and <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Monad{T}"/> class.
     /// </summary>
     internal static partial class EnumerableMonadExtensions
     {
@@ -739,7 +738,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     } // End of the class EnumerableMonadExtensions.
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableMonadExtensions
     {

@@ -430,7 +430,7 @@ namespace Narvalo.Fx.Extensions
     using global::Narvalo;
 
     /// <summary>
-    /// Provides extension methods for <c>Func&lt;TSource, Identity&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </summary>
     public static partial class FuncIdentityExtensions
     {
@@ -478,7 +478,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of the class FuncIdentityExtensions.
 }
 
 namespace Narvalo.Fx
@@ -518,7 +518,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class..
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -543,10 +543,10 @@ namespace Narvalo.Fx
         #endregion
     } // End of the class EnumerableIdentityExtensions.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    public static partial class EnumerableExtensions
+    /// </content>
+    public static partial class EnumerableIdentityExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -701,7 +701,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of the class EnumerableIdentityExtensions.
 }
 
 namespace Narvalo.Fx.Internal
@@ -716,8 +716,7 @@ namespace Narvalo.Fx.Internal
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;Identity&lt;T&gt;&gt;</c>
-    /// and <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </summary>
     internal static partial class EnumerableIdentityExtensions
     {
@@ -767,7 +766,7 @@ namespace Narvalo.Fx.Internal
     } // End of the class EnumerableIdentityExtensions.
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableIdentityExtensions
     {

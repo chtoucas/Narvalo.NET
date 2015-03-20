@@ -9,7 +9,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
-    using Narvalo.Collections;
     using Narvalo.Internal;
 
     /// <summary>

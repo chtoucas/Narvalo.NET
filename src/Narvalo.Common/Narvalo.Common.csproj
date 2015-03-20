@@ -108,7 +108,7 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Fx\Extensions\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
@@ -173,6 +173,7 @@
     </Content>
     <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Fx.Extensions
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -12,141 +11,14 @@ namespace Narvalo.Collections
     using Narvalo.Internal;
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
-    public static partial class EnumerableExtensions
-    {
-        public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
-        {
-            Contract.Requires(@this != null);
-
-            return !@this.Any();
-        }
-
-        #region Concatenation Operators
-
-        public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
-        {
-            Contract.Requires(@this != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
-
-            return @this.Concat(Sequence.Single(element)).AssumeNotNull();
-        }
-
-        public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
-        {
-            Contract.Requires(@this != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
-
-            return Sequence.Single(element).Concat(@this).AssumeNotNull();
-        }
-
-        #endregion
-
-        #region Conversion Operators
-
-        public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
-        {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<ICollection<TSource>>() != null);
-
-            var result = new Collection<TSource>();
-
-            foreach (TSource item in @this)
-            {
-                result.Add(item);
-            }
-
-            return result;
-        }
-
-        #endregion
-
-        #region Aggregate Operators
-
-        public static TAccumulate AggregateBack<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, TAccumulate> accumulator)
-        {
-            Contract.Requires(@this != null);
-            Contract.Requires(accumulator != null);
-
-            return @this.Reverse().Aggregate(seed, accumulator);
-        }
-
-        public static TSource AggregateBack<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, TSource> accumulator)
-        {
-            Contract.Requires(@this != null);
-            Contract.Requires(accumulator != null);
-
-            return @this.Reverse().Aggregate(accumulator);
-        }
-
-        #endregion
-
-        #region Catamorphisms
-
-        public static TAccumulate Fold<TSource, TAccumulate>(
-            this IEnumerable<TSource> @this,
-            TAccumulate seed,
-            Func<TAccumulate, TSource, TAccumulate> accumulator,
-            Func<TAccumulate, bool> predicate)
-        {
-            Require.Object(@this);
-            Require.NotNull(accumulator, "accumulator");
-            Require.NotNull(predicate, "predicate");
-
-            TAccumulate result = seed;
-
-            using (var iter = @this.GetEnumerator())
-            {
-                while (predicate.Invoke(result) && iter.MoveNext())
-                {
-                    result = accumulator.Invoke(result, iter.Current);
-                }
-            }
-
-            return result;
-        }
-
-        public static TSource Reduce<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, TSource, TSource> accumulator,
-            Func<TSource, bool> predicate)
-        {
-            Require.Object(@this);
-            Require.NotNull(accumulator, "accumulator");
-            Require.NotNull(predicate, "predicate");
-
-            using (var iter = @this.GetEnumerator())
-            {
-                if (!iter.MoveNext())
-                {
-                    throw new InvalidOperationException("Source sequence was empty.");
-                }
-
-                TSource result = iter.Current;
-
-                while (predicate.Invoke(result) && iter.MoveNext())
-                {
-                    result = accumulator.Invoke(result, iter.Current);
-                }
-
-                return result;
-            }
-        }
-
-        #endregion
-    }
+    public static partial class EnumerableMaybeExtensions { }
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that
-    /// depend on monadic classes from Narvalo.Fx.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that are specific to the <see cref="Maybe{T}"/> class.
     /// </content>
-    public static partial class EnumerableExtensions
+    public static partial class EnumerableMaybeExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
@@ -207,7 +79,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            IEnumerable<Maybe<TSource>> seq 
+            IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
@@ -241,7 +113,7 @@ namespace Narvalo.Collections
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            IEnumerable<Maybe<TSource>> seq 
+            IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
@@ -259,8 +131,30 @@ namespace Narvalo.Collections
     /// <content>
     /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
     /// </content>
-    public static partial class EnumerableExtensions
+    public static partial class EnumerableMaybeExtensions
     {
+        // Custom version of CollectCore.
+        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
+
+            var list = new List<TSource>();
+
+            foreach (var m in @this)
+            {
+                // REVIEW: Is this the correct behaviour when m is null?
+                if (m == null || m.IsNone)
+                {
+                    return Maybe<IEnumerable<TSource>>.None;
+                }
+
+                list.Add(m.Value);
+            }
+
+            return Maybe.Create(list.AsEnumerable());
+        }
+
         // Custom version of FilterCore with Maybe<T>.
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,

@@ -1,0 +1,6 @@
+﻿<#@ include file="..\..\CodeTemplates\Monad.Maybe.tt" #>
+<# 
+    Namespace = "Narvalo.Fx";
+
+    EmitLinq(); 
+#>

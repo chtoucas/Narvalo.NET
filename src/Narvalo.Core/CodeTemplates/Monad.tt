@@ -1256,7 +1256,7 @@ namespace <#= LinqNamespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides extension methods for <c>Func&lt;TSource, <#= Name #>&lt;TResult&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
     public static partial class Func<#= Name #>Extensions
     {
@@ -1310,7 +1310,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of the class Func<#= Name #>Extensions.
 <#+
     } // End of EmitKleisliExtensions().
 
@@ -1320,7 +1320,7 @@ namespace <#= LinqNamespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class..
     /// </summary>
 <#+ WriteCompilerAttributes_(); #>
     public static partial class Enumerable<#= Name #>Extensions
@@ -1379,8 +1379,7 @@ namespace <#= LinqNamespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides extension methods for <c>IEnumerable&lt;<#= Name #>&lt;T&gt;&gt;</c>
-    /// and <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
     internal static partial class Enumerable<#= Name #>Extensions
     {
@@ -1460,10 +1459,10 @@ namespace <#= LinqNamespace #>.Internal
     protected void EmitEnumerableExtensions()
     {
 #>
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </summary>
-    public static partial class EnumerableExtensions
+    /// </content>
+    public static partial class Enumerable<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -1662,7 +1661,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of the class Enumerable<#= Name #>Extensions.
 <#+
     } // End of EmitEnumerableExtensions().
     
@@ -1676,7 +1675,7 @@ namespace <#= LinqNamespace #>.Internal
         // with two methods named AssumeNotNull_() in the same class EnumerableExtensions.
 #>
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class Enumerable<#= Name #>Extensions
     {

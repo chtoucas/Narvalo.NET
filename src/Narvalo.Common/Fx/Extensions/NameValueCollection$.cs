@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Fx.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Narvalo.Collections
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="NameValueCollection"/>.
+    /// Provides extension methods for <see cref="NameValueCollection"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
     public static partial class NameValueCollectionExtensions
     {

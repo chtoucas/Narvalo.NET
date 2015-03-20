@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Collections
+namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo.Fx;
     using Narvalo.Internal;
 
     public static class Sequence

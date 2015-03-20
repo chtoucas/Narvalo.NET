@@ -5,13 +5,10 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Web;
 
-    using Narvalo.Collections;
     using Narvalo.Fx;
 
     public abstract class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
