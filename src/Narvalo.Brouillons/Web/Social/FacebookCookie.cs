@@ -9,8 +9,9 @@ namespace Narvalo.Web.Social
     using System.Security.Cryptography;
     using System.Text;
     using System.Web;
-    
+
     using Narvalo.Fx;
+    using Narvalo.Fx.Extensions;
 
     public struct FacebookCookie
     {

@@ -10,7 +10,7 @@ namespace Narvalo.Web.Html
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Narvalo.Web.Internal;
+    using Narvalo.Web.Html.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="HtmlHelper"/>.

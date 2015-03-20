@@ -16,7 +16,7 @@ namespace Narvalo.Fx
     /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
-    /// <remarks>WARNING: We do not catch any exception throw by any supplied delegate...</remarks>
+    /// <remarks>WARNING: We do not catch exceptions throw by any supplied delegate...</remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public abstract partial class Output<T>
     {

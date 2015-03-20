@@ -5,6 +5,8 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Fx.Extensions;
+
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.
     /// </summary>

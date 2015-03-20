@@ -354,7 +354,16 @@ namespace <#= Namespace #>
 <#+ EmitCoreClass(); #>
 <#+ WriteNewLine_(); #>
 <#+ EmitExtensions(); #>
-<#+ WriteNewLine_(); #>
+}
+
+// Extensions for core CLR types are put into a separate namespace.
+namespace <#= Namespace #>.Extensions
+{
+    using System;
+    using System.Diagnostics.Contracts;
+
+    using global::Narvalo;
+
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
@@ -1249,7 +1258,7 @@ namespace <#= LinqNamespace #>.Internal
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, <#= Name #>&lt;TResult&gt;&gt;</c>.
     /// </summary>
-    public static partial class FuncExtensions
+    public static partial class Func<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
 

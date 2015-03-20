@@ -420,11 +420,20 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of the class Output.
+}
+
+// Extensions for core CLR types are put into a separate namespace.
+namespace Narvalo.Fx.Extensions
+{
+    using System;
+    using System.Diagnostics.Contracts;
+
+    using global::Narvalo;
 
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, Output&lt;TResult&gt;&gt;</c>.
     /// </summary>
-    public static partial class FuncExtensions
+    public static partial class FuncOutputExtensions
     {
         #region Basic Monad functions (Prelude)
 

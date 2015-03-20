@@ -164,8 +164,8 @@
     <Compile Include="Enumeration.cs" />
     <Compile Include="EnumStyles.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Fx\Fun.cs" />
-    <Compile Include="Fx\Func`%24.cs" />
+    <Compile Include="Fx\Extensions\Fun.cs" />
+    <Compile Include="Fx\Extensions\Func`%24.cs" />
     <Compile Include="Globalization\CurrencyInfo%24.cs" />
     <Compile Include="Globalization\Locale.cs" />
     <Compile Include="Globalization\Region.cs" />

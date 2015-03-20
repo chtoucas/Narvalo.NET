@@ -418,11 +418,20 @@ namespace Narvalo.Edu.Monads.Samples
 
         #endregion
     } // End of the class Monad.
+}
+
+// Extensions for core CLR types are put into a separate namespace.
+namespace Narvalo.Edu.Monads.Samples.Extensions
+{
+    using System;
+    using System.Diagnostics.Contracts;
+
+    using global::Narvalo;
 
     /// <summary>
     /// Provides extension methods for <c>Func&lt;TSource, Monad&lt;TResult&gt;&gt;</c>.
     /// </summary>
-    public static partial class FuncExtensions
+    public static partial class FuncMonadExtensions
     {
         #region Basic Monad functions (Prelude)
 

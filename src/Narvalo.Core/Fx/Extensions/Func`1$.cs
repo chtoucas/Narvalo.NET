@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Fx.Extensions
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -16,20 +16,20 @@ namespace Narvalo.Fx
             Justification = "A non-generic version would not improve usability.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
-        public static Output<T> Catch<T, TException>(this Func<T> @this) where TException : Exception
+        public static Output<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             try {
-                T value = @this.Invoke();
+                TSource value = @this.Invoke();
 
                 return Output.Success(value);
             }
             catch (TException ex) {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Output.Failure<T>(edi);
+                return Output.Failure<TSource>(edi);
             }
         }
 
@@ -41,24 +41,24 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static Output<T> Catch<T, T1Exception, T2Exception>(this Func<T> @this)
+        public static Output<TSource> Catch<TSource, T1Exception, T2Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try {
-                T value = @this.Invoke();
+                TSource value = @this.Invoke();
 
                 return Output.Success(value);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Output.Failure<T>(edi);
+            return Output.Failure<TSource>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -69,18 +69,18 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static Output<T> Catch<T, T1Exception, T2Exception, T3Exception>(this Func<T> @this)
+        public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try {
-                T value = @this.Invoke();
+                TSource value = @this.Invoke();
 
                 return Output.Success(value);
             }
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Output.Failure<T>(edi);
+            return Output.Failure<TSource>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -99,19 +99,19 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
-        public static Output<T> Catch<T, T1Exception, T2Exception, T3Exception, T4Exception>(this Func<T> @this)
+        public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception, T4Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
             where T4Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try {
-                T value = @this.Invoke();
+                TSource value = @this.Invoke();
 
                 return Output.Success(value);
             }
@@ -120,7 +120,7 @@ namespace Narvalo.Fx
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Output.Failure<T>(edi);
+            return Output.Failure<TSource>(edi);
         }
     }
 }
