@@ -3,6 +3,7 @@
 namespace Narvalo.Xml
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Xml;
     using System.Xml.Linq;
 
@@ -45,6 +46,7 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(name, "name");
+            Contract.Requires(returnType != null);
 
             return @this.ReadElementContentAs(returnType, namespaceResolver, name.LocalName, name.NamespaceName);
         }

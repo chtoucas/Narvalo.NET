@@ -3,7 +3,9 @@
 namespace Narvalo.Xml
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Xml.Linq;
+
     using Narvalo.Fx;
 
     /// <summary>
@@ -15,6 +17,7 @@ namespace Narvalo.Xml
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return from _ in @this select selector.Invoke(_.Value);
         }
@@ -22,6 +25,7 @@ namespace Narvalo.Xml
         public static Maybe<string> ValueOrNone(this Maybe<XElement> @this)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return from _ in @this select _.Value;
         }

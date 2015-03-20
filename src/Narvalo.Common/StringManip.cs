@@ -8,6 +8,8 @@ namespace Narvalo
     using System.Globalization;
     using System.Text;
 
+    using Narvalo.Internal;
+
     public static class StringManip
     {
         // Cf. http://stackoverflow.com/questions/249087/how-do-i-remove-diacritics-accents-from-a-string-in-net
@@ -21,7 +23,7 @@ namespace Narvalo
                 return String.Empty;
             }
 
-            var formD = value.Normalize(NormalizationForm.FormD);
+            var formD = value.Normalize(NormalizationForm.FormD).AssumeNotNull();
 
             var sb = new StringBuilder();
 
@@ -34,7 +36,7 @@ namespace Narvalo
                 }
             }
 
-            return sb.ToString().Normalize(NormalizationForm.FormC);
+            return sb.ToString().Normalize(NormalizationForm.FormC).AssumeNotNull();
         }
 
         /// <summary>

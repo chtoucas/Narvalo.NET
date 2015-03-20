@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Text;
 
     // TODO: Créer la version Hexavigesimal.
@@ -17,6 +18,7 @@ namespace Narvalo
         public static string ToHexString(byte[] value)
         {
             Require.NotNull<byte[]>(value, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return BitConverter.ToString(value).Replace("-", String.Empty);
         }
@@ -24,6 +26,7 @@ namespace Narvalo
         public static byte[] FromHexString(string value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<byte[]>() != null);
 
             // FIXME: FormatException quand value.Length est impair ?
             byte[] result = new byte[value.Length / 2];
@@ -43,6 +46,7 @@ namespace Narvalo
         public static string ToZBase32String(byte[] value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             int length = value.Length;
             var sb = new StringBuilder((length + 7) * 8 / 5);
@@ -94,6 +98,7 @@ namespace Narvalo
         public static byte[] FromZBase32String(string value)
         {
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<byte[]>() != null);
 
             unchecked
             {

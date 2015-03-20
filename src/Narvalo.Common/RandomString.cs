@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Text;
 
@@ -13,6 +14,7 @@ namespace Narvalo
         // Cf. http://stackoverflow.com/questions/976646/is-this-a-good-way-to-generate-a-string-of-random-characters
         public static string GenerateString(int size, Random generator)
         {
+            Require.GreaterThanOrEqualTo(size, 0, "size");
             Require.NotNull(generator, "generator");
             Contract.Ensures(Contract.Result<string>() != null);
 
@@ -26,6 +28,10 @@ namespace Narvalo
         }
 
         // Cf. http://www.bonf.net/2009/01/14/generating-random-unicode-strings-in-c/
+#if !NO_CCCHECK_SUPPRESSIONS
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-57-0",
+            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+#endif
         public static string GenerateUnicodeString(int size, Random generator)
         {
             Require.GreaterThanOrEqualTo(size, 0, "size");
@@ -40,8 +46,8 @@ namespace Narvalo
 
                 for (int i = 0; i < length; i += 2) {
                     int chr = generator.Next(0xD7FF);
-                    byteArray[i + 1] = (byte)((chr & 0xFF00) >> 8);
                     byteArray[i] = (byte)(chr & 0xFF);
+                    byteArray[i + 1] = (byte)((chr & 0xFF00) >> 8);
                 }
 
                 return Encoding.Unicode.GetString(byteArray);

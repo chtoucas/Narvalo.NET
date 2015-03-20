@@ -5,6 +5,7 @@ namespace Narvalo.Runtime.Reliability
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.Contracts;
 
     public class RetryPolicy
     {
@@ -16,8 +17,8 @@ namespace Narvalo.Runtime.Reliability
         public RetryPolicy(int maxRetries, TimeSpan retryInterval, IList<Type> retryableExceptionTypes)
         {
             Require.GreaterThan(maxRetries, 0, "maxRetries");
-            Require.GreaterThan(retryInterval, TimeSpan.Zero, "retryInterval");
             Require.NotNull(retryableExceptionTypes, "retryableExceptionTypes");
+            Enforce.GreaterThan(retryInterval, TimeSpan.Zero, "retryInterval");
 
             _maxRetries = maxRetries;
             _retryInterval = retryInterval;

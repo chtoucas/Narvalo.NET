@@ -121,6 +121,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
+    <Compile Include="Enforce.cs" />
     <Compile Include="Require.cs" />
     <Compile Include="Strings_Core.Designer.cs">
       <AutoGen>True</AutoGen>
