@@ -7,6 +7,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    /// <summary>
+    /// Provides extension methods for <see cref="Action"/>.
+    /// </summary>
     public static class ActionExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
@@ -33,7 +36,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception>(this Action @this)
@@ -60,7 +63,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(this Action @this)
@@ -89,7 +92,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "There is no way we can achieve the same thing with type inference.")]
 #if !NO_CCCHECK_SUPPRESSIONS
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
 #endif
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(this Action @this)

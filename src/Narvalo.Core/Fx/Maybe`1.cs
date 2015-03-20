@@ -540,7 +540,7 @@ namespace Narvalo.Fx
         /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "A non-generic version would not improve usability.")]
+            Justification = "A non-generic version of this static property is simply not possible.")]
         public static Maybe<T> None
         {
             get

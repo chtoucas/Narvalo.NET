@@ -13,7 +13,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Either<TLeft, T>>() != null);
 
-            return new Either<TLeft, T>.Left(value);
+            return Either<TLeft, T>.η(value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -22,7 +22,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Either<T, TRight>>() != null);
 
-            return new Either<T, TRight>.Right(value);
+            return Either<T, TRight>.η(value);
         }
     }
 }

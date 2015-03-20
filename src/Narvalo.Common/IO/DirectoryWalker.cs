@@ -4,6 +4,9 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+#if CONTRACTS_FULL
+    using System.Diagnostics.Contracts;
+#endif
     using System.IO;
     using System.Linq;
 

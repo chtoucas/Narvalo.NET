@@ -4,7 +4,9 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class 
@@ -25,11 +27,31 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
-        internal sealed class Left : Either<TLeft, TRight>, IEquatable<Left>
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Either<TLeft, TRight> η(TLeft value)
+        {
+            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+
+            return new Left_(value);
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Either<TLeft, TRight> η(TRight value)
+        {
+            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+
+            return new Right_(value);
+        }
+
+        private sealed class Left_ : Either<TLeft, TRight>, IEquatable<Left_>
         {
             private readonly TLeft _value;
 
-            public Left(TLeft value)
+            public Left_(TLeft value)
             {
                 _value = value;
             }
@@ -58,7 +80,7 @@ namespace Narvalo.Fx
                 return Maybe<TRight>.None;
             }
 
-            public bool Equals(Left other)
+            public bool Equals(Left_ other)
             {
                 if (other == this)
                 {
@@ -75,7 +97,7 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as Left);
+                return Equals(obj as Left_);
             }
 
             public override int GetHashCode()
@@ -89,11 +111,11 @@ namespace Narvalo.Fx
             }
         }
 
-        internal sealed class Right : Either<TLeft, TRight>, IEquatable<Right>
+        private sealed class Right_ : Either<TLeft, TRight>, IEquatable<Right_>
         {
             private readonly TRight _value;
 
-            public Right(TRight value)
+            public Right_(TRight value)
             {
                 _value = value;
             }
@@ -122,7 +144,7 @@ namespace Narvalo.Fx
                 return Maybe.Create(_value);
             }
 
-            public bool Equals(Right other)
+            public bool Equals(Right_ other)
             {
                 if (other == this)
                 {
@@ -139,7 +161,7 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as Right);
+                return Equals(obj as Right_);
             }
 
             public override int GetHashCode()

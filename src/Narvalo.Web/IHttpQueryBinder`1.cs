@@ -10,7 +10,7 @@ namespace Narvalo.Web
 
     using Narvalo.Fx;
 
-    public interface IHttpQueryBinder<TQuery>
+    public partial interface IHttpQueryBinder<TQuery>
     {
         IEnumerable<HttpQueryBinderException> BindingErrors { get; }
 

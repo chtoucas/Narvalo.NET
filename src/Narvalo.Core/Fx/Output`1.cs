@@ -11,7 +11,13 @@ namespace Narvalo.Fx
 
     using Narvalo.Internal;
 
-    // WARNING: We do not catch any exception.
+    /// <summary>
+    /// Represents the output of a computation which may throw exceptions.
+    /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>
+    /// value or the exception state at the point it was thrown.
+    /// </summary>
+    /// <remarks>WARNING: We do not catch any exception throw by any supplied delegate...</remarks>
+    /// <typeparam name="T">The underlying type of the value.</typeparam>
     public abstract partial class Output<T>
     {
         protected Output() { }
@@ -34,8 +40,12 @@ namespace Narvalo.Fx
 
         public abstract void Apply(Action<T> action);
 
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
+            Justification = "No trouble here, this Select is the LINQ standard query operator.")]
         public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
 
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Then",
+            Justification = "'Then' is a VB keyword (if...then...else), but this is harmless here.")]
         public abstract Output<TResult> Then<TResult>(Output<TResult> other);
 
         #endregion
@@ -71,7 +81,17 @@ namespace Narvalo.Fx
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(T value)
         {
-            return Output<T>.Success.η(value);
+            return new Success_(value);
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Standard naming convention from mathematics. Only used internally.")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
+        {
+            Require.NotNull(exceptionInfo, "exceptionInfo");
+
+            return new Failure_(exceptionInfo);
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
@@ -81,7 +101,7 @@ namespace Narvalo.Fx
             Require.NotNull(square, "square");
             Assume.Invariant(square);
 
-            var output = square as Output<Output<T>>.Success;
+            var output = square as Output<Output<T>>.Success_;
 
             if (output != null)
             {
@@ -89,7 +109,7 @@ namespace Narvalo.Fx
             }
             else
             {
-                return Failure.η((square as Output<Output<T>>.Failure).ExceptionInfo);
+                return Failure_.η((square as Output<Output<T>>.Failure_).ExceptionInfo);
             }
         }
     }
@@ -102,11 +122,11 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents the success part of the <see cref="Output{T}"/> type.
         /// </summary>
-        internal sealed partial class Success : Output<T>, IEquatable<Success>
+        private sealed partial class Success_ : Output<T>, IEquatable<Success_>
         {
             private readonly T _value;
 
-            private Success(T value)
+            public Success_(T value)
             {
                 _value = value;
             }
@@ -179,9 +199,9 @@ namespace Narvalo.Fx
         /// <content>
         /// Implements the <see cref="IEquatable{Success}"/> interface.
         /// </content>
-        internal partial class Success
+        private partial class Success_
         {
-            public bool Equals(Success other)
+            public bool Equals(Success_ other)
             {
                 if (other == this)
                 {
@@ -198,7 +218,7 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as Success);
+                return Equals(obj as Success_);
             }
 
             public override int GetHashCode()
@@ -216,11 +236,11 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents the failure part of the <see cref="Output{T}"/> type.
         /// </summary>
-        internal sealed partial class Failure : Output<T>, IEquatable<Failure>
+        private sealed partial class Failure_ : Output<T>, IEquatable<Failure_>
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
-            private Failure(ExceptionDispatchInfo exceptionInfo)
+            public Failure_(ExceptionDispatchInfo exceptionInfo)
             {
                 Contract.Requires(exceptionInfo != null);
 
@@ -248,7 +268,7 @@ namespace Narvalo.Fx
 
             public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
             {
-                return Output<TResult>.Failure.η(ExceptionInfo);
+                return Output<TResult>.Failure_.η(ExceptionInfo);
             }
 
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
@@ -269,12 +289,12 @@ namespace Narvalo.Fx
 
             public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
             {
-                return Output<TResult>.Failure.η(ExceptionInfo);
+                return Output<TResult>.Failure_.η(ExceptionInfo);
             }
 
             public override Output<TResult> Then<TResult>(Output<TResult> other)
             {
-                return Output<TResult>.Failure.η(ExceptionInfo);
+                return Output<TResult>.Failure_.η(ExceptionInfo);
             }
 
             public override Maybe<T> ValueOrNone()
@@ -293,24 +313,14 @@ namespace Narvalo.Fx
             {
                 return Format.CurrentCulture("Failure({0})", _exceptionInfo);
             }
-
-            [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-                Justification = "Standard naming convention from mathematics. Only used internally.")]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
-            {
-                Require.NotNull(exceptionInfo, "exceptionInfo");
-
-                return new Failure(exceptionInfo);
-            }
         }
 
         /// <content>
         /// Implements the <see cref="IEquatable{Failure}"/> interface.
         /// </content>
-        internal partial class Failure
+        private partial class Failure_
         {
-            public bool Equals(Failure other)
+            public bool Equals(Failure_ other)
             {
                 if (other == this)
                 {
@@ -327,7 +337,7 @@ namespace Narvalo.Fx
 
             public override bool Equals(object obj)
             {
-                return Equals(obj as Failure);
+                return Equals(obj as Failure_);
             }
 
             public override int GetHashCode()
@@ -342,7 +352,7 @@ namespace Narvalo.Fx
     [ContractClass(typeof(OutputContract<>))]
     public abstract partial class Output<T>
     {
-        internal partial class Failure
+        private partial class Failure_
         {
             [ContractInvariantMethod]
             private void ObjectInvariants()
@@ -400,5 +410,6 @@ namespace Narvalo.Fx
             return default(Maybe<T>);
         }
     }
+
 #endif
 }

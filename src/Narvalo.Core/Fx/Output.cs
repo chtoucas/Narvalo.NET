@@ -15,7 +15,7 @@ namespace Narvalo.Fx
             Contract.Requires(exceptionInfo != null);
             Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            return Output<T>.Failure.η(exceptionInfo);
+            return Output<T>.η(exceptionInfo);
         }
     }
 }
