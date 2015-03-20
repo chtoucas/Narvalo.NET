@@ -25,9 +25,9 @@ namespace Narvalo.Runtime.Reliability
 
         public void Add(ISentinel guard)
         {
-            ThrowIfClosed();
-
             Require.NotNull(guard, "guard");
+
+            ThrowIfClosed();
 
             ////if (!guard.IsChainable()) {
             ////    throw new Failure.Argument("guard");
@@ -38,9 +38,9 @@ namespace Narvalo.Runtime.Reliability
 
         public void Add(IEnumerable<ISentinel> guards)
         {
-            ThrowIfClosed();
-
             Require.NotNull(guards, "guards");
+
+            ThrowIfClosed();
 
             foreach (var proxy in guards)
             {
@@ -62,9 +62,9 @@ namespace Narvalo.Runtime.Reliability
 
         public void Close(ISentinel guard)
         {
-            ThrowIfClosed();
-
             Require.NotNull(guard, "guard");
+
+            ThrowIfClosed();
 
             _guards.Add(guard);
             _closed = true;
