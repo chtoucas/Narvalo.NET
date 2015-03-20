@@ -204,6 +204,8 @@ namespace Narvalo
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, parameterName, minInclusive, maxInclusive));
             }
+
+            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -270,6 +272,8 @@ namespace Narvalo
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotGreaterThanFormat, parameterName, minValue));
             }
+
+            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -336,6 +340,8 @@ namespace Narvalo
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, parameterName, minValue));
             }
+
+            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -402,6 +408,8 @@ namespace Narvalo
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotLessThanFormat, parameterName, maxValue));
             }
+
+            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -468,6 +476,8 @@ namespace Narvalo
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, parameterName, maxValue));
             }
+
+            Contract.EndContractBlock();
         }
     }
 }
