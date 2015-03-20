@@ -2,6 +2,7 @@
 
 namespace Narvalo.Data
 {
+    using System;
     using System.Data.SqlTypes;
     using System.Diagnostics.Contracts;
 
@@ -12,6 +13,67 @@ namespace Narvalo.Data
     /// </summary>
     public static class SqlTypesExtensions
     {
+        #region Value Types
+
+        public static bool? ToNullable(this SqlBoolean @this)
+        {
+            return @this.IsNull ? (bool?)null : @this.Value;
+        }
+
+        public static byte? ToNullable(this SqlByte @this)
+        {
+            return @this.IsNull ? (byte?)null : @this.Value;
+        }
+
+        public static DateTime? ToNullable(this SqlDateTime @this)
+        {
+            return @this.IsNull ? (DateTime?)null : @this.Value;
+        }
+
+        public static decimal? ToNullable(this SqlDecimal @this)
+        {
+            return @this.IsNull ? (decimal?)null : @this.Value;
+        }
+
+        public static double? ToNullable(this SqlDouble @this)
+        {
+            return @this.IsNull ? (double?)null : @this.Value;
+        }
+
+        public static Guid? ToNullable(this SqlGuid @this)
+        {
+            return @this.IsNull ? (Guid?)null : @this.Value;
+        }
+
+        public static short? ToNullable(this SqlInt16 @this)
+        {
+            return @this.IsNull ? (short?)null : @this.Value;
+        }
+
+        public static int? ToNullable(this SqlInt32 @this)
+        {
+            return @this.IsNull ? (int?)null : @this.Value;
+        }
+
+        public static long? ToNullable(this SqlInt64 @this)
+        {
+            return @this.IsNull ? (long?)null : @this.Value;
+        }
+
+        public static decimal? ToNullable(this SqlMoney @this)
+        {
+            return @this.IsNull ? (decimal?)null : @this.Value;
+        }
+
+        public static float? ToNullable(this SqlSingle @this)
+        {
+            return @this.IsNull ? (float?)null : @this.Value;
+        }
+
+        #endregion
+
+        #region Reference Types
+
         public static Maybe<byte[]> ToMaybe(this SqlBinary @this)
         {
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
@@ -46,5 +108,7 @@ namespace Narvalo.Data
 
             return @this == null || @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
         }
+
+        #endregion
     }
 }

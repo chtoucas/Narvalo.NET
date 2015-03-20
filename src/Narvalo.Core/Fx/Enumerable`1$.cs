@@ -22,6 +22,93 @@ namespace Narvalo.Fx
             return !@this.Any();
         }
 
+        #region Element Operators
+
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
+        }
+
+        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            IEnumerable<Maybe<TSource>> seq
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
+                return iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
+            }
+        }
+
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
+        }
+
+        public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            IEnumerable<Maybe<TSource>> seq
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    return Maybe<TSource>.None;
+                }
+
+                var value = iter.Current.AssumeNotNull();
+                while (iter.MoveNext())
+                {
+                    value = iter.Current.AssumeNotNull();
+                }
+
+                return value;
+            }
+        }
+
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
+        {
+            Contract.Requires(@this != null);
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
+        }
+
+        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
+
+            IEnumerable<Maybe<TSource>> seq
+                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+
+            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            {
+                var result = iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
+
+                // Return Maybe.None if there is one more element.
+                return iter.MoveNext() ? Maybe<TSource>.None : result;
+            }
+        }
+
+        #endregion
+
         #region Concatenation Operators
 
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)

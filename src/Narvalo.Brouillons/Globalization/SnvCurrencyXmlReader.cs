@@ -35,7 +35,7 @@ namespace Narvalo.Globalization
 
             _publicationDate = root
                 .AttributeOrThrow("Pblshd", ExceptionThunk("XXX"))
-                .Select(ProcessPublicationDate);
+                .Value(ProcessPublicationDate);
 
             var currencyElements = root
                 .ElementOrThrow("CcyTbl", ExceptionThunk("XXX"))
@@ -53,7 +53,7 @@ namespace Narvalo.Globalization
                 // NB: Keep the "englishNameElement" around, we will need it later on.
                 XElement englishNameElement = currencyElement
                     .ElementOrThrow("CcyNm", ExceptionThunk("XXX"));
-                string englishName = englishNameElement.Select(ProcessCurrencyName);
+                string englishName = englishNameElement.Value(ProcessCurrencyName);
 
                 // Alphabetic Code
                 XElement codeElement = currencyElement.Element("Ccy");
@@ -64,28 +64,28 @@ namespace Narvalo.Globalization
                     continue;
                 }
 
-                var code = codeElement.Select(ProcessAlphabeticCode);
+                var code = codeElement.Value(ProcessAlphabeticCode);
 
                 // Numeric Code
                 short numericCode = currencyElement
                     .ElementOrThrow("CcyNbr", ExceptionThunk("XXX"))
-                    .Select(ProcessNumericCode);
+                    .Value(ProcessNumericCode);
 
                 // Fund?
                 bool isFund = englishNameElement
                     .AttributeOrNone("IsFund")
-                    .Select(_ => _.Select(ProcessIsFund))
+                    .MapValue(ProcessIsFund)
                     .ValueOrElse(false);
 
                 // Country English Name
                 string englishRegionName = currencyElement
                     .ElementOrThrow("CtryNm", ExceptionThunk("XXX"))
-                    .Select(ProcessRegionName);
+                    .Value(ProcessRegionName);
 
                 // Minor Units
                 short? minorUnits = currencyElement
                     .ElementOrThrow("CcyMnrUnts", ExceptionThunk("XXX"))
-                    .Select(ProcessMinorUnits);
+                    .Value(ProcessMinorUnits);
 
                 yield return new CurrencyInfo(code, numericCode) {
                     EnglishName = englishName,

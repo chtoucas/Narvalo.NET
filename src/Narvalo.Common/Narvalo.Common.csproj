@@ -73,7 +73,9 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
+    <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
+    <Compile Include="ConvertTo.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -108,7 +110,7 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Extensions\NameValueCollection%24.cs" />
+    <Compile Include="Fx\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
@@ -119,15 +121,35 @@
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="ParseTo.cs" />
+    <Compile Include="RandomString.cs" />
+    <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
     <Compile Include="Runtime\Reliability\BarrierException.cs" />
+    <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
     <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
+    <Compile Include="Runtime\Reliability\ConcurrencyThrottle.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateBarrier.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateExceededException.cs" />
+    <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
+    <Compile Include="Runtime\Reliability\Guard%24.cs" />
+    <Compile Include="Runtime\Reliability\GuardChain.cs" />
+    <Compile Include="Runtime\Reliability\GuardChainBuilder.cs" />
     <Compile Include="Runtime\Reliability\GuardException.cs" />
+    <Compile Include="Runtime\Reliability\GuardStatus.cs" />
+    <Compile Include="Runtime\Reliability\GuardType.cs" />
     <Compile Include="Runtime\Reliability\IBarrier.cs" />
+    <Compile Include="Runtime\Reliability\IMonitorableGuard.cs" />
+    <Compile Include="Runtime\Reliability\IReliabilityMonitor.cs" />
     <Compile Include="Runtime\Reliability\ISentinel.cs" />
+    <Compile Include="Runtime\Reliability\IThrottle.cs" />
     <Compile Include="Runtime\Reliability\NoopSentinel.cs" />
+    <Compile Include="Runtime\Reliability\ReliabilityWrapper.cs" />
+    <Compile Include="Runtime\Reliability\RequestCounter.cs" />
+    <Compile Include="Runtime\Reliability\RetryGuard.cs" />
+    <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
+    <Compile Include="Runtime\Reliability\ThrottleException.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -136,8 +158,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Uri%24.cs" />
-    <Compile Include="Xml\XAttribute%24.cs" />
-    <Compile Include="Xml\XElement%24.cs" />
+    <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
+    <Compile Include="Xml\Maybe[XElement]%24.cs" />
+    <Compile Include="Xml\XAttribute%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Xml\XElement%24.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>

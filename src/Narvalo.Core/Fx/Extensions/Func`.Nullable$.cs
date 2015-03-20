@@ -3,32 +3,25 @@
 namespace Narvalo.Fx.Extensions
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    public static partial class FuncXExtensions
+    /// <summary>
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Nullable{T}"/> class.
+    /// </summary>
+    public static partial class FuncNullableExtensions
     {
-        public static Func<TResult> Bind<TSource, TResult>(this Func<TSource> @this, Func<TSource, Func<TResult>> selector)
+        #region Basic Monad functions (Prelude)
+
+        public static TResult? Invoke<TSource, TResult>(
+            this Func<TSource, TResult?> @this,
+            TSource? value)
+            where TSource : struct
+            where TResult : struct
         {
-            Require.NotNull(selector, "selector");
+            Contract.Requires(@this != null);
 
-            return selector.Invoke(@this.Invoke());
+            return value.Bind(@this);
         }
-
-        public static Func<TResult> Select<TSource, TResult>(this Func<TSource> @this, Func<TSource, TResult> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return () => selector.Invoke(@this.Invoke());
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this")]
-        public static Func<TResult> Then<TSource, TResult>(this Func<TSource> @this, Func<TResult> other)
-        {
-            return other;
-        }
-
-        #region Basic Monad functions for Nullable
 
         public static Func<TSource, TResult?> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, TMiddle?> @this,
@@ -38,6 +31,7 @@ namespace Narvalo.Fx.Extensions
             where TResult : struct
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -51,6 +45,7 @@ namespace Narvalo.Fx.Extensions
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");
+            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

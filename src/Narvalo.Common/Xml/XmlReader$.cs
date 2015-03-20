@@ -7,7 +7,7 @@ namespace Narvalo.Xml
     using System.Xml.Linq;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Xml.XmlReader"/>.
+    /// Provides extension methods for <see cref="XmlReader"/>.
     /// </summary>
     public static class XmlReaderExtensions
     {

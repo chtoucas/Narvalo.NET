@@ -10,11 +10,11 @@ namespace Narvalo.Xml
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Xml.Linq.XElement"/>.
+    /// Provides extension methods for <see cref="XElement"/>.
     /// </summary>
     public static class XElementExtensions
     {
-        public static T Select<T>(this XElement @this, Func<string, T> selector)
+        public static T Value<T>(this XElement @this, Func<string, T> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");

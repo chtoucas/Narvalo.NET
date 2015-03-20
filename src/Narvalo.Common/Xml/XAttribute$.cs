@@ -9,11 +9,11 @@ namespace Narvalo.Xml
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Xml.Linq.XAttribute"/>.
+    /// Provides extension methods for <see cref="XAttribute"/>.
     /// </summary>
     public static class XAttributeExtensions
     {
-        public static T Select<T>(this XAttribute @this, Func<string, T> selector)
+        public static T Value<T>(this XAttribute @this, Func<string, T> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");

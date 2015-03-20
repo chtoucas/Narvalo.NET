@@ -7,26 +7,22 @@ namespace Narvalo.Xml
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <c>Maybe&lt;XAttribute&gt;</c>.
+    /// Provides extension methods for <see cref="Maybe{XAttribute}"/>.
     /// </summary>
     public static class MaybeXAttributeExtensions
     {
-        public static Maybe<T> BindValue<T>(this Maybe<XAttribute> @this, Func<string, Maybe<T>> kun)
+        public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)
         {
-            Require.NotNull(kun, "kun");
-
-            return @this.Bind(_ => kun.Invoke(_.Value));
-        }
-
-        public static Maybe<T> SelectValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)
-        {
+            Require.Object(@this);
             Require.NotNull(selector, "selector");
 
-            return @this.Select(_ => selector.Invoke(_.Value));
+            return from _ in @this select selector.Invoke(_.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)
         {
+            Require.Object(@this);
+
             return from _ in @this select _.Value;
         }
     }
