@@ -16,7 +16,7 @@ namespace Narvalo.Internal
     {
         /// <summary>
         /// Instructs code analysis tools to assume that the specified object is not null,
-        /// even if it cannot be statically proven to always be not null.
+        /// even if it cannot be statically proven not to be <see langword="null"/>.
         /// </summary>
         /// <remarks>
         /// When dealing with external dependencies, CCCheck can not infer
@@ -28,10 +28,9 @@ namespace Narvalo.Internal
         /// <param name="this">The input object.</param>
         /// <returns>The untouched input.</returns>
         [DebuggerHidden]
-#if !CONTRACTS_FULL
         // NB: We can not use a conditional attribute here since the method has a return type.
+        // Inlining the method should remove any performance concern.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static T AssumeNotNull<T>(this T @this) where T : class
         {
             Contract.Ensures(Contract.Result<T>() == @this);

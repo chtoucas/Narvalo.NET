@@ -94,8 +94,8 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             get { return (double)Duration.Ticks / Iterations; }
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

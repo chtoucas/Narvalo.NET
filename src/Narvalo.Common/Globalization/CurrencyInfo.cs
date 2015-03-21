@@ -185,8 +185,8 @@ namespace Narvalo.Globalization
         {
             return Format.InvariantCulture("{0} ({1})", EnglishName, EnglishRegionName);
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

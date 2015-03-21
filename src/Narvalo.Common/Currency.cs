@@ -370,7 +370,7 @@ namespace Narvalo
             return _code.GetHashCode();
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

@@ -69,7 +69,7 @@ namespace Narvalo.Fx
                 return _exceptionInfo.ToString();
             }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
             [ContractInvariantMethod]
             private void ObjectInvariants()

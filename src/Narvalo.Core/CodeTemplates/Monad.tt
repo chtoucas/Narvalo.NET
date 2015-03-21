@@ -1462,13 +1462,11 @@ namespace <#= LinqNamespace #>.Internal
 
         /// <summary>
         /// Instructs code analysis tools to assume that the specified value is not null,
-        /// even if it cannot be statically proven to always be not null.
-        /// When Code Contracts are disabled, this method is meant to be erased by the JIT compiler.
+        /// even if it cannot be statically proven not to be <see langword="null"/>.
+        /// Inlining the method should remove any performance concern.
         /// </summary>
         [DebuggerHidden]
-#if !CONTRACTS_FULL
         [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
         private static T AssumeNotNull_<T>(this T @this) where T : class
         {
             Contract.Ensures(Contract.Result<T>() == @this);

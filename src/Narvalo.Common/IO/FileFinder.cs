@@ -4,6 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
@@ -91,8 +92,8 @@ namespace Narvalo.IO
                 localHandler(this, e);
             }
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

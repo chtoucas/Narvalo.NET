@@ -127,8 +127,8 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             return iterations;
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

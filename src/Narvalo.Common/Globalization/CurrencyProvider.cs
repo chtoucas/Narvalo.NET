@@ -3,6 +3,7 @@
 namespace Narvalo.Globalization
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
@@ -58,8 +59,8 @@ namespace Narvalo.Globalization
 
             _factoryThunk = () => provider;
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

@@ -4,6 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 #if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
@@ -76,8 +77,8 @@ namespace Narvalo.IO
         protected abstract void OnDirectoryEnd(DirectoryInfo directory);
 
         protected abstract void OnFile(FileInfo file);
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

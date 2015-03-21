@@ -2,6 +2,7 @@
 
 namespace Narvalo.IO
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
 
@@ -37,8 +38,8 @@ namespace Narvalo.IO
                 return Path.Combine(_relativeDirectoryName, _file.Name);
             }
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

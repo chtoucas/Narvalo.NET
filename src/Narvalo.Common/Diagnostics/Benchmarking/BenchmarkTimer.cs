@@ -4,6 +4,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public sealed class BenchmarkTimer : IBenchmarkTimer
@@ -28,7 +29,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             _stopwatch.Start();
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()
