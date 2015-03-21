@@ -14,7 +14,7 @@
 
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Shared.props" />
-  
+
   <!-- If any, import custom global properties. -->
   <Import Project="$(CustomBeforeNarvaloCommonProps)"
           Condition=" '$(CustomBeforeNarvaloCommonProps)' != '' " />
@@ -91,6 +91,14 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
+      <!-- Inside VS, we always define the Code Contracts symbol; otherwise many lines
+           would be unreachable by the refactoring tool, leading to broken sources. 
+           We also define the Code Analysis symbol to be able to suppress warnings from Mono.Gendarme. -->
+    <DefineConstants 
+      Condition=" '$(Configuration)' != 'CodeContracts' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">$(DefineConstants);CONTRACTS_FULL;CODE_ANALYSIS</DefineConstants>
+  </PropertyGroup>
+
   <!-- Additional files -->
   <ItemGroup>
     <!-- Unfortunately, when done here, the files won't appear in VS (even 
@@ -124,7 +132,7 @@
     <RunCodeAnalysis Condition=" '$(RunCodeAnalysis)' != 'true' ">false</RunCodeAnalysis>
 
     <DefineConstants Condition=" '$(RunCodeAnalysis)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
-    
+
     <!-- The default behaviour is to use a strict ruleset.
          For performance reasons we use a minimal ruleset when using Code
          Contracts. Also Code Contracts produce assemblies that are not
@@ -134,7 +142,7 @@
 
     <!-- Process generated files (.g.cs). -->
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-    
+
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 

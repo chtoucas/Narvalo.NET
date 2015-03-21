@@ -331,7 +331,7 @@ namespace Narvalo.Fx
     public partial class Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> AsEnumerable()
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -486,7 +486,7 @@ namespace Narvalo.Fx
     public partial class Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
@@ -540,7 +540,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<T> OrElse(Maybe<T> other)
         {
             Require.NotNull(other, "other");
@@ -558,7 +558,7 @@ namespace Narvalo.Fx
         #region Basic Monad functions
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
@@ -568,7 +568,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             Require.NotNull(other, "other");
@@ -582,7 +582,7 @@ namespace Narvalo.Fx
         #region Monadic lifting operators
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
@@ -601,7 +601,7 @@ namespace Narvalo.Fx
         #region LINQ extensions
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,
@@ -629,7 +629,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,

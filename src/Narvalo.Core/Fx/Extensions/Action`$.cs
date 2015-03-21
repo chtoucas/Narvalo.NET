@@ -36,7 +36,7 @@ namespace Narvalo.Fx.Extensions
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -61,7 +61,7 @@ namespace Narvalo.Fx.Extensions
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -88,7 +88,7 @@ namespace Narvalo.Fx.Extensions
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(this Action @this)
             where T1Exception : Exception
             where T2Exception : Exception

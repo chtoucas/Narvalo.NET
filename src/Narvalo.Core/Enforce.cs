@@ -11,8 +11,7 @@ namespace Narvalo
     /// <remarks>
     /// <para>These methods must appear after all Code Contracts.</para>
     /// <para>CCCheck does not seem to be able to comprehend a precondition used in conjunction
-    /// with <see cref="IComparable{T}"/>. Therefore, any Code Contracts specification 
-    /// for this kind of method is disabled.</para>
+    /// with <see cref="IComparable{T}"/>, therefore any Code Contracts specification has been disabled</para>
     /// </remarks>
     [DebuggerStepThrough]
     public static class Enforce

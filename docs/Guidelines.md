@@ -168,7 +168,6 @@ All suppressions must be tagged:
 - Ignore: Tag a false positive.
 - Intentionally
 - GeneratedCode
-- CodeContracts
 - Educational
 
 ### Code Contracts

@@ -124,7 +124,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         }
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-18-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public string ToString(string format)
         {
             Contract.Ensures(Contract.Result<string>() != null);

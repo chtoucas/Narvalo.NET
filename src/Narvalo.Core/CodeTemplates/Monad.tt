@@ -1,6 +1,13 @@
 ﻿<#@ template debug="true" hostspecific="true" #>
 <#@ output extension=".g.cs" #><#+
 
+    // WARNING: This is only a proof of concept.
+    // This file depends on Narvalo.Core NuGet package for two things:
+    // - the Require class to perform argument validation (which is available as a separate file).
+    // - the Unit class in the Narvalo.Fx namespace; but you can define your own: see UnitFullName.
+    // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
+    // Exposing nested generics is the price to pay for monads.
+
     // TODO:
     // Protect the various property's setters.
 
@@ -32,6 +39,8 @@
     private string _plusName = "Plus";
     private string _returnName = "Return";
     private string _zeroName = "Zero";
+
+    private string _unitFullName = "Narvalo.Fx.Unit";
 
     /* ========================================================================================== *
      * Properties
@@ -115,6 +124,24 @@
             }
 
             _name = value;
+        }
+    }
+
+    protected string UnitFullName 
+    {
+        get { return _unitFullName; }
+
+        set
+        {
+            if (_unitFullName != null) {
+                throw new InvalidOperationException("You can set the name of the Unit full name only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The Unit full name can not be null or blank.");
+            }
+
+            _unitFullName = value;
         }
     }
 
@@ -444,16 +471,16 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteCompilerAttributes_(); #>
     public static partial class <#= Name #>
     {
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
+        private static readonly <#= Name #><global::<#= UnitFullName #>> s_Unit = <#= ReturnName #>(global::<#= UnitFullName #>.Single);
 <#+ if (HasZero) { #>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_<#= ZeroName #> = <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
+        private static readonly <#= Name #><global::<#= UnitFullName #>> s_<#= ZeroName #> = <#= Name #><global::<#= UnitFullName #>>.<#= ZeroName #>;
 <#+ } #>
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static <#= Name #><global::<#= UnitFullName #>> Unit { get { return s_Unit; } }
 
 <#+ if (HasZero) { #>
         /// <summary>
@@ -463,7 +490,7 @@ namespace <#= LinqNamespace #>.Internal
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
+        public static <#= Name #><global::<#= UnitFullName #>> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
 <#+ } #>
 
         /// <summary>
@@ -745,20 +772,19 @@ namespace <#= LinqNamespace #>.Internal
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
+        public static <#= Name #><global::<#= UnitFullName #>> Guard(bool predicate)
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
 <#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }
 <#+ } // End of HasZero. #>
 
-<#+ // REVIEW: Haskell use a differente signature. Returns Narvalo.Fx.Unit. #>
-
         /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature. The method should return a <see cref="<#= UnitFullName #>"/>.</para>
         /// </remarks>
         public static <#= Name #><TSource> When<TSource>(
             this <#= Name #><TSource> @this, 
@@ -780,9 +806,9 @@ namespace <#= LinqNamespace #>.Internal
             return @this;
         }
 
-<#+ // REVIEW: Haskell use a differente signature. Returns Narvalo.Fx.Unit. #>
         /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature. The method should return a <see cref="<#= UnitFullName #>"/>.</para>
         /// </remarks>
         public static <#= Name #><TSource> Unless<TSource>(
             this <#= Name #><TSource> @this,
@@ -980,7 +1006,7 @@ namespace <#= LinqNamespace #>.Internal
                 resultSelector,
                 EqualityComparer<TKey>.Default);
         }
-
+        
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -1042,7 +1068,7 @@ namespace <#= LinqNamespace #>.Internal
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
         }
-
+        
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -1492,9 +1518,9 @@ namespace <#= LinqNamespace #>.Internal
 
         #region Generalisations of list functions (Prelude)
 
-<#+ // REVIEW: Haskell use a differente signature. #>
         /// <remarks>
-        /// Named <c>filterM</c> in Haskell parlance.
+        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature.</para>
         /// </remarks>
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
@@ -1573,7 +1599,7 @@ namespace <#= LinqNamespace #>.Internal
         #endregion
 
         #region Aggregate Operators
-
+        
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1589,7 +1615,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
-
+        
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
@@ -1604,7 +1630,7 @@ namespace <#= LinqNamespace #>.Internal
 
             return @this.ReduceCore(accumulatorM);
         }
-
+        
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
@@ -1624,7 +1650,9 @@ namespace <#= LinqNamespace #>.Internal
 
         #region Catamorphisms
 
-<#+ // REVIEW: Haskell use a differente signature. #>
+        /// <remarks>
+        /// <para>Haskell use a different signature.</para>
+        /// </remarks>
         public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1643,7 +1671,9 @@ namespace <#= LinqNamespace #>.Internal
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
 
-<#+ // REVIEW: Haskell use a differente signature. #>
+        /// <remarks>
+        /// <para>Haskell use a different signature.</para>
+        /// </remarks>
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
@@ -1982,9 +2012,6 @@ namespace <#= LinqNamespace #>.Internal
         if (_headerWritten) {
             return;
         }
-
-        // See http://msdn.microsoft.com/en-us/library/ms244717.aspx for an explanation
-        // of the SuppressMessage attribute used at module scope.
 #>
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
@@ -1999,13 +2026,15 @@ namespace <#= LinqNamespace #>.Internal
 
 using global::System.Diagnostics.CodeAnalysis;
 
-// We favour T4 readibility over StyleCop rules.
+// See http://msdn.microsoft.com/en-us/library/ms244717.aspx for an explanation 
+// of the effect of the SuppressMessage attribute at module scope.
+// This suppresses the corresponding warnings for the code inside the generated file.
+// We either favour T4 readibility over StyleCop rules or disable rules that do not make sense 
+// for files generated by a Text Template.
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
     Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
     Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-
-// These rules do not make sense for files generated by a Text Template.
 [module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
     Justification = "[GeneratedCode] A T4 template may contain multiple classes..")]
 [module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",

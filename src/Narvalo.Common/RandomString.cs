@@ -29,7 +29,7 @@ namespace Narvalo
 
         // Cf. http://www.bonf.net/2009/01/14/generating-random-unicode-strings-in-c/
         [SuppressMessage("Microsoft.Contracts", "Suggestion-57-0",
-            Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static string GenerateUnicodeString(int size, Random generator)
         {
             Require.GreaterThanOrEqualTo(size, 0, "size");

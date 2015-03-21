@@ -5,8 +5,8 @@ namespace Narvalo.Fx.Extensions
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// The Narvalo.Fx.Extensions namespace contains extension methods either on core CLR types
-    /// or reserved to advanced users.
+    /// The Narvalo.Fx.Extensions namespace contains extension methods on core CLR types
+    /// and extensions reserved to advanced scenarios.
     /// </summary>
     [CompilerGenerated]
     internal static class NamespaceDoc { }

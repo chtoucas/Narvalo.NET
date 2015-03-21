@@ -3,7 +3,4 @@
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
   </PropertyGroup>
-  <!--<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">
-    <DefineConstants>$(DefineConstants);CODE_ANALYSIS</DefineConstants>
-  </PropertyGroup>-->
 </Project>
