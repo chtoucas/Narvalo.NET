@@ -169,7 +169,7 @@ namespace Narvalo.Fx
         ////    public static void IsNone()
         ////    {
         ////        // Act & Assert
-        ////        Assert.True(Maybe.None.IsNone);
+        ////        Assert.False(Maybe.None.IsSome);
         ////    }
         ////}
 
@@ -789,8 +789,8 @@ namespace Narvalo.Fx
             var referenceOpt = Maybe.Create(reference);
 
             // Assert
-            Assert.True(valueOpt.IsNone);
-            Assert.True(referenceOpt.IsNone);
+            Assert.False(valueOpt.IsSome);
+            Assert.False(referenceOpt.IsSome);
         }
 
         #endregion
@@ -830,7 +830,7 @@ namespace Narvalo.Fx
 
             // Assert
             Assert.True(m != null);
-            Assert.True(m.IsNone);
+            Assert.False(m.IsSome);
         }
 
         #endregion
@@ -867,8 +867,8 @@ namespace Narvalo.Fx
             var q = from _ in source where predicate(_) select _;
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -883,8 +883,8 @@ namespace Narvalo.Fx
             var q = from _ in source select selector(_);
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -921,8 +921,8 @@ namespace Narvalo.Fx
                     select resultSelector(i, j);
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -941,8 +941,8 @@ namespace Narvalo.Fx
                     select resultSelector(i, j);
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -961,8 +961,8 @@ namespace Narvalo.Fx
                     select resultSelector(i, j);
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -1001,8 +1001,8 @@ namespace Narvalo.Fx
                     select i + j;
 
             // Assert
-            Assert.True(m.IsNone);
-            Assert.True(q.IsNone);
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]

@@ -148,7 +148,7 @@ namespace Narvalo.Fx
         private readonly bool _isSome;
 
         // You should NEVER use this field directly. Use instead the property; the Code Contracts 
-        // static checker should then prove that no illegal access to this field happen (i.e. when IsNone is true).
+        // static checker should then prove that no illegal access to this field happen (i.e. when IsSome is false).
         private readonly T _value;
 
         /// <summary>
@@ -174,12 +174,6 @@ namespace Narvalo.Fx
             _value = value;
             _isSome = true;
         }
-
-        /// <summary>
-        /// Gets a value indicating whether the object does not enclose any value.
-        /// </summary>
-        /// <value><c>true</c> if the object does not have enclose any value; otherwise <c>false</c>.</value>
-        internal bool IsNone { get { return !_isSome; } }
 
         /// <summary>
         /// Gets a value indicating whether the object does hold a value.
@@ -237,7 +231,7 @@ namespace Narvalo.Fx
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<T>() != null);
 
-            if (value.IsNone)
+            if (!value.IsSome)
             {
                 throw new InvalidCastException(Strings_Core.Maybe_CannotCastNoneToValue);
             }
@@ -306,7 +300,7 @@ namespace Narvalo.Fx
             Require.NotNull(exceptionFactory, "exceptionFactory");
             Contract.Ensures(Contract.Result<T>() != null);
 
-            if (IsNone)
+            if (!IsSome)
             {
                 throw exceptionFactory.Invoke();
             }
@@ -325,8 +319,7 @@ namespace Narvalo.Fx
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(IsNone == !IsSome);
-            Contract.Invariant(IsNone || Value != null);
+            Contract.Invariant(!IsSome || Value != null);
         }
 
 #endif
@@ -380,13 +373,13 @@ namespace Narvalo.Fx
 
             if (Object.ReferenceEquals(other, null))
             {
-                return IsNone;
+                return !IsSome;
             }
 
-            if (IsNone || other.IsNone)
+            if (!IsSome || !other.IsSome)
             {
                 // If one is none, they must be both none to be equal.
-                return IsNone && other.IsNone;
+                return !IsSome && !other.IsSome;
             }
 
             return comparer.Equals(Value, other.Value);
@@ -417,7 +410,7 @@ namespace Narvalo.Fx
 
             if (other == null)
             {
-                return IsNone;
+                return !IsSome;
             }
 
             if (other is T)
@@ -449,7 +442,7 @@ namespace Narvalo.Fx
         ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
         ////{
         ////    if (ReferenceEquals(left, null)) {
-        ////        return ReferenceEquals(right, null) ? true : right.IsNone;
+        ////        return ReferenceEquals(right, null) ? true : !right.IsSome;
         ////    }
 
         ////    return left.Equals(right);
@@ -553,7 +546,7 @@ namespace Narvalo.Fx
             Require.NotNull(other, "other");
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
-            return IsNone ? other : this;
+            return !IsSome ? other : this;
         }
     }
 
@@ -622,7 +615,7 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            if (IsNone || inner.IsNone)
+            if (!IsSome || !inner.IsSome)
             {
                 return Maybe<TResult>.None;
             }
@@ -650,8 +643,8 @@ namespace Narvalo.Fx
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            // REVIEW: I can't remember why I didn't include inner.IsNone before?
-            if (IsNone || inner.IsNone)
+            // REVIEW: I can't remember why I didn't include !inner.IsSome before?
+            if (!IsSome || !inner.IsSome)
             {
                 return Maybe<TResult>.None;
             }
@@ -697,7 +690,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(action, "action");
 
-            if (IsNone)
+            if (!IsSome)
             {
                 action.Invoke();
             }
