@@ -4,7 +4,6 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 #if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif

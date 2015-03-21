@@ -2,7 +2,6 @@
 
 namespace Narvalo.IO
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
 
