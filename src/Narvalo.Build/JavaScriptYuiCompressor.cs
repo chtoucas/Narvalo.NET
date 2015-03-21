@@ -19,8 +19,6 @@ namespace Narvalo.Build
     /// ]]>
     /// </code>
     /// </example>
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
-        Justification = "Js is not an acronym.")]
     public sealed class JavaScriptYuiCompressor : YuiCompressorBase
     {
         private bool _disableOptimizations = false;

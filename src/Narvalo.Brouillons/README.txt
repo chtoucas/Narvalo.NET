@@ -16,3 +16,7 @@ http://hxlstandard.org/
 Narvalo.Messaging
 
 Jabber
+
+Narvalo.Globalization
+
+Cldr

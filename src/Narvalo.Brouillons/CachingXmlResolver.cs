@@ -64,6 +64,7 @@ namespace Narvalo
             {
                 content = Slurp_(stream, BUFFER_LENGTH);
             }
+
             return content;
         }
 

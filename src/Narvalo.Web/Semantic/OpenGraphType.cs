@@ -11,8 +11,8 @@ namespace Narvalo.Web.Semantic
         public const string Profile = "profile";
         public const string WebSite = "website";
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", 
-            Justification = "La classe imbriquée ne contient que des constantes.")]
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible",
+            Justification = "[Intentionally] The nested class only contains constants.")]
         public static class Music
         {
             public const string Album = "music.album";
@@ -22,7 +22,7 @@ namespace Narvalo.Web.Semantic
         }
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible", 
-            Justification = "La classe imbriquée ne contient que des constantes.")]
+            Justification = "[Intentionally] The nested class only contains constants.")]
         public static class Video
         {
             public const string Episode = "video.episode";

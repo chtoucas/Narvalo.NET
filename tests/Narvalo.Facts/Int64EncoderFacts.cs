@@ -24,7 +24,7 @@ namespace Narvalo
         /// Test data borrowed from the Encode-Base58 Perl module.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements",
-            Justification = "Very long list of sample data.")]
+            Justification = "[GeneratedCode] Very long list of sample data.")]
         public static IEnumerable<object[]> FlickrBase58SampleData
         {
             get

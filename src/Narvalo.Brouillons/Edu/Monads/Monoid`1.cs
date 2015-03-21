@@ -9,7 +9,7 @@ namespace Narvalo.Edu.Monads
     {
         // [Haskell] mempty
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static Monoid<T> Empty { get { throw new NotImplementedException(); } }
 
         // [Haskell] mappend

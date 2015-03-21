@@ -30,8 +30,6 @@ namespace Narvalo.Runtime.Reliability
 
         public TimeSpan Timeout { get { return _timeout; } }
 
-        #region IGuard
-
         ////public bool CanExecute
         ////{
         ////    get { return _sem.CurrentCount < _maxConcurrentRequests; }
@@ -58,17 +56,11 @@ namespace Narvalo.Runtime.Reliability
             }
         }
 
-        #endregion
-
-        #region IDisposable
-
         public void Dispose()
         {
             Dispose(true /* disposing */);
             GC.SuppressFinalize(this);
         }
-
-        #endregion
 
         protected virtual void Dispose(bool disposing)
         {

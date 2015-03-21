@@ -11,17 +11,14 @@ namespace Narvalo.Configuration
         : ConfigurationElementCollection, IEnumerable<TElement>
         where TElement : ConfigurationElement
     {
-        #region IEnumerable<TElement>
-
         public new IEnumerator<TElement> GetEnumerator()
         {
-            foreach (TElement element in (IEnumerable)this) {
+            foreach (TElement element in (IEnumerable)this)
+            {
                 yield return element;
             }
         }
 
-        #endregion
-        
         protected override ConfigurationElement CreateNewElement()
         {
             // NB: On n'utilise pas la contrainte générique new() car cette

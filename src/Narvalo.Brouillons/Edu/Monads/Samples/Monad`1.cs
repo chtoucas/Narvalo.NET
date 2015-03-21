@@ -15,7 +15,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
@@ -23,7 +23,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
             return square.Bind(_ => _);

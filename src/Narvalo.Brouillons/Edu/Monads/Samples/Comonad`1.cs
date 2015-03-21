@@ -18,14 +18,14 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static T ε(Comonad<T> monad)
         {
             throw new NotImplementedException();
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
             return monad.Extend(_ => _);

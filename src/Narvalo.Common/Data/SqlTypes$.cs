@@ -9,12 +9,10 @@ namespace Narvalo.Data
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for native SQL server data types.
+    /// Provides extension methods to convert native SQL server data types to CLR types.
     /// </summary>
-    public static class SqlTypesExtensions
+    public static partial class SqlTypesExtensions
     {
-        #region Value Types
-
         public static bool? ToNullable(this SqlBoolean @this)
         {
             return @this.IsNull ? (bool?)null : @this.Value;
@@ -69,11 +67,13 @@ namespace Narvalo.Data
         {
             return @this.IsNull ? (float?)null : @this.Value;
         }
+    }
 
-        #endregion
-
-        #region Reference Types
-
+    /// <content>
+    /// Implements extension methods to convert native SQL server data types to CLR reference types.
+    /// </content>
+    public static partial class SqlTypesExtensions
+    {
         public static Maybe<byte[]> ToMaybe(this SqlBinary @this)
         {
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
@@ -108,7 +108,5 @@ namespace Narvalo.Data
 
             return @this == null || @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
         }
-
-        #endregion
     }
 }

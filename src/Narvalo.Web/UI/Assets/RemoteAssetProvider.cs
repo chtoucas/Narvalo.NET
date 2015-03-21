@@ -16,7 +16,7 @@ namespace Narvalo.Web.UI.Assets
         public RemoteAssetProvider() { }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "baseUri",
-            Justification = "The 'baseUri' literal is the key of the config.")]
+            Justification = "[Intentionally] The 'baseUri' literal is a string key in the configuration file.")]
         public override void Initialize(string name, NameValueCollection config)
         {
             Require.NotNull(config, "config");
@@ -65,7 +65,6 @@ namespace Narvalo.Web.UI.Assets
             return MakeUri_("css/", relativePath);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "Utiliser une URI serait contre productif.")]
         private Uri MakeUri_(string basePath, string relativePath)
         {
             return new Uri(_baseUri, basePath + relativePath);

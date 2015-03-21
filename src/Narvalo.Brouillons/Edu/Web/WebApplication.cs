@@ -54,10 +54,17 @@ namespace Narvalo.Edu.Web
     /// http://msdn.microsoft.com/en-us/library/ms178473%28v=vs.100%29.aspx
     /// </para>
     /// </summary>
-    [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-        Justification = "This code is not meant to be used. Only for educational purpose.")]
     public class WebApplication : HttpApplication
     {
+        /// <summary>
+        /// Exécute un code d'initialisation personnalisé une fois que tous les modules ont été créés.
+        /// Demandé une fois pour chaque instance de la classe HttpApplication.
+        /// </summary>
+        public override void Init()
+        {
+            base.Init();
+        }
+
         #region Méthodes spéciales appelées une seule fois dans toute la durée de vie du domaine d'application.
 
         /// <summary>
@@ -84,14 +91,5 @@ namespace Narvalo.Edu.Web
         protected void Application_End(object sender, EventArgs e) { }
 
         #endregion
-
-        /// <summary>
-        /// Exécute un code d'initialisation personnalisé une fois que tous les modules ont été créés.
-        /// Demandé une fois pour chaque instance de la classe HttpApplication.
-        /// </summary>
-        public override void Init()
-        {
-            base.Init();
-        }
     }
 }

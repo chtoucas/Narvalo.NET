@@ -94,7 +94,7 @@ namespace Narvalo.Web.Optimization
         }
 
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference",
-            Justification = "Utiliser un paramètre par référence simplifie le design de cette méthode.")]
+            Justification = "[Intentionally] The use of a parameter passed by reference simplifies the algorithm. Only used privately.")]
         private static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
         {
             Contract.Requires(block != null);

@@ -235,8 +235,6 @@ namespace Narvalo.Web.UI
             _filters = InitializeFilters();
         }
 
-        #region > Membres privés <
-
         static int Min_(int num1, int num2)
         {
             return Math.Min(num1, num2 < 0 ? Sentinel_ : num2);
@@ -246,7 +244,5 @@ namespace Narvalo.Web.UI
         {
             return value == Sentinel_ ? PageParserFilterConstants.UnlimitedNumber : value;
         }
-
-        #endregion
     }
 }

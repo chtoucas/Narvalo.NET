@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Security
+namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -24,14 +24,14 @@ namespace Narvalo.Security
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
-            Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
-        public string Encrypt(string val)
+            Justification = "[Intentionally] Handling of multiple calls to Dispose is certainly implemented by a framework class.")]
+        public string Encrypt(string value)
         {
-            if (val == String.Empty) {
+            if (value == String.Empty) {
                 return String.Empty;
             }
 
-            byte[] input = Encoding.GetBytes(val);
+            byte[] input = Encoding.GetBytes(value);
             byte[] result;
             MemoryStream mStream = null;
 
@@ -60,14 +60,14 @@ namespace Narvalo.Security
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Ne pas supprimer d'objets plusieurs fois",
-            Justification = "Multiple calls to Dispose is certainly implemented by a framework class.")]
-        public string Decrypt(string val)
+            Justification = "[Intentionally] Handling of multiple calls to Dispose is certainly implemented by a framework class.")]
+        public string Decrypt(string value)
         {
-            if (val == String.Empty) {
+            if (value == String.Empty) {
                 return String.Empty;
             }
 
-            byte[] input = Convert.FromBase64String(val);
+            byte[] input = Convert.FromBase64String(value);
             byte[] result;
             MemoryStream mStream = null;
 

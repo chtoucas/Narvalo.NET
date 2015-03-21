@@ -42,9 +42,6 @@
     <Compile Include="..\Common\IssueAttribute.cs">
       <Link>IssueAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\Common\IssueSeverity.cs">
-      <Link>IssueSeverity.cs</Link>
-    </Compile>
     <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />

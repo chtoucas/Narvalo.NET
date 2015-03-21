@@ -4,6 +4,7 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     public class ImageDevice : OutputDevice
     {
@@ -64,7 +65,7 @@ namespace Narvalo.GhostScript.Options
 
                 case ImageFormat.None:
                 default:
-                    throw new NotSupportedException("Unsupported format.");
+                    throw new InvalidEnumArgumentException("Unsupported format.");
             }
         }
     }

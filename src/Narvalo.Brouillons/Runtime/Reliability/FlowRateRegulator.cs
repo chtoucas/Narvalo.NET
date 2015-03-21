@@ -21,8 +21,6 @@ namespace Narvalo.Runtime.Reliability
 
         ////public bool Blocking { get { return _blocking; } }
 
-        ////#region IStatefulGuard
-
         ////public bool CanExecute { get { return !_blocking; } }
 
         ////public int Multiplicity { get { return 1; } }
@@ -40,17 +38,11 @@ namespace Narvalo.Runtime.Reliability
         ////    }
         ////}
 
-        ////#endregion
-
-        ////#region IDisposable
-
         ////public void Dispose()
         ////{
         ////    Dispose(true /* disposing */);
         ////    GC.SuppressFinalize(this);
         ////}
-
-        ////#endregion
 
         ////protected virtual void Dispose(bool disposing)
         ////{

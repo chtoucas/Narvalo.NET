@@ -4,6 +4,7 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
+    //using System.ComponentModel;
 
     public class GhostScriptArgs<T> where T : Device
     {
@@ -23,7 +24,6 @@ namespace Narvalo.GhostScript.Options
             _inputFile = inputFile;
             _device = device;
         }
-
 
         public bool CanOutput { get { return !String.IsNullOrEmpty(OutputFile); } }
 
@@ -116,7 +116,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Icc.IccProfilesDirectory:
         ////            return "-sICCProfilesDir";
         ////        default:
-        ////            throw new ArgumentException("Invalid argument.", "arg");
+        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -145,7 +145,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Fonts.OldCffParser:
         ////            return "-dOLDCFF";
         ////        default:
-        ////            throw new ArgumentException("Invalid argument.", "arg");
+        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -182,7 +182,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Rendering.DoPS:
         ////            return "-dDOPS";
         ////        default:
-        ////            throw new ArgumentException("Invalid argument.", "arg");
+        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -193,7 +193,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Resource.FontResourceDirectory:
         ////            return "-sFontResourceDir";
         ////        default:
-        ////            throw new ArgumentException("Invalid argument.", "arg");
+        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
         ////    }
         ////}
     }

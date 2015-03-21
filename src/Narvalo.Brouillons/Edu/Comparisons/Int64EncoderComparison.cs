@@ -74,8 +74,6 @@ namespace Narvalo.Edu.Comparisons
         ////    return test.Compare(iterations, value /* 3471131850 */);
         ////}
 
-        #region Private methods
-
         private static long Decode_OrderedArray(string value)
         {
             long result = 0;
@@ -180,7 +178,5 @@ namespace Narvalo.Edu.Comparisons
 
             return result;
         }
-
-        #endregion
     }
 }

@@ -12,8 +12,6 @@ namespace Narvalo.GhostScript.Internal
     {
         protected GhostScriptApiBase() { }
 
-        #region IGhostScriptApi
-
         public void Execute<T>(GhostScriptArgs<T> args) where T : Device
         {
             Require.NotNull(args, "args");
@@ -74,8 +72,6 @@ namespace Narvalo.GhostScript.Internal
                 }
             }
         }
-
-        #endregion
 
         protected abstract void ExecuteNative(int argc, IntPtr argv);
 

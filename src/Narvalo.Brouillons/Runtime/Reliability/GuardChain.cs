@@ -30,8 +30,6 @@ namespace Narvalo.Runtime.Reliability
             get { return _guardsThunk.Value; }
         }
 
-        #region IGuard
-
         ////public int Multiplicity { get { return _multiplicityThunk.Value; } }
 
         public void Execute(Action action)
@@ -46,7 +44,5 @@ namespace Narvalo.Runtime.Reliability
 
             guardedAction();
         }
-
-        #endregion
     }
 }

@@ -50,7 +50,7 @@ There are four solutions.
 This solution contains all projects. This is not used for daily work but rather
 for deep refactoring and installing NuGet packages updates/restores.
 It also contains projects not included in the other solutions:
-- Narvalo.Externs        
+- Narvalo.Externs
 
 ### Narvalo Maintenance.sln
 
@@ -164,7 +164,20 @@ The following projects use the default ruleset for Code Analysis.
 - Prose
 - Playground
 
+All suppressions must be tagged:
+- Ignore: Tag a false positive.
+- Intentionally
+- GeneratedCode
+- CodeContracts
+- Educational
+
 ### Code Contracts
+
+```xml
+<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
+  <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+</PropertyGroup>
+```
 
 #### Object Invariants
 
@@ -179,6 +192,28 @@ Wrap any object invariants method with a compiler conditional clause :
 #endif
 ```
 
+To override global settings
+---------------------------
+
+For instance, in project Narvalo.Core, create a property file Narvalo.Core.props
+with the following content:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Empty.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <Target Name="_WarnOnTemporaryOverriddenSettings" BeforeTargets="Build">
+    <Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)."
+             Condition=" '$(SourceAnalysisEnabled)' == 'true' "/>
+    <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
+             Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(RunCodeAnalysis)' == 'true' " />
+  </Target>
+</Project>
+```
 
 Build Infrastructure
 --------------------
@@ -374,13 +409,13 @@ makecert.exe ^
     -cy authority ^
     -sv CARoot.pvk ^
     CARoot.cer
- 
+
 :: Copy the public key and private key into a personal information exchange file CARoot.pfx (private)
 pvk2pfx.exe ^
     -pvk CARoot.pvk ^
     -spc CARoot.cer ^
     -pfx CARoot.pfx ^
-    -po Test123      
+    -po Test123
 
 makecert.exe ^
     -n "CN=PowerShell Local Certificate Root" ^
@@ -396,7 +431,7 @@ makecert.exe ^
     CARoot.cer
 ```
 Details:
-- `-n CN=PowerShell Local Certificate Root`, subject's certificate name 
+- `-n CN=PowerShell Local Certificate Root`, subject's certificate name
   and must be formatted as the standard: "CN=Your CA name here"
 - `-r`, indicates that this certificate is self signed
 - `-a sha512`, declare which signature algorithm we will be using
@@ -414,7 +449,7 @@ Create a personal certificate from the above authority:
 PS> makecert -pe -n "CN=PowerShell User" -ss MY -a sha1 -eku 1.3.6.1.5.5.7.3.3 -iv root.pvk -ic root.cer
 
 PS> Set-AuthenticodeSignature [script] @(Get-ChildItem cert:\CurrentUser\My -CodeSign)[0]
-                                                                                     
+
 References:
 - [Makecert](http://msdn.microsoft.com/en-us/library/bfsktky3%28v=vs.110%29.aspx)
 - [hanselman](http://www.hanselman.com/blog/SigningPowerShellScripts.aspx)

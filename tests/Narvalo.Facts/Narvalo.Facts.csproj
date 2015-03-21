@@ -53,9 +53,6 @@
     <Compile Include="..\Common\IssueAttribute.cs">
       <Link>IssueAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\Common\IssueSeverity.cs">
-      <Link>IssueSeverity.cs</Link>
-    </Compile>
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />

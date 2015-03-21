@@ -45,11 +45,11 @@ namespace Narvalo.Fx
         public abstract void Apply(Action<T> action);
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
-            Justification = "[Ignore] No trouble here, this 'Select' is the one from LINQ standard query operator.")]
+            Justification = "[Intentionally] No trouble here, this 'Select' is the one from LINQ standard query operator.")]
         public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Then",
-            Justification = "[Ignore] 'Then' is a VB keyword (if...then...else), but this is harmless here.")]
+            Justification = "[Intentionally] 'Then' is a VB keyword (if...then...else), but this is harmless here.")]
         public abstract Output<TResult> Then<TResult>(Output<TResult> other);
 
         #endregion
@@ -81,7 +81,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(T value)
         {
@@ -89,7 +89,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
@@ -99,7 +99,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");

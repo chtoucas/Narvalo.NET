@@ -10,7 +10,7 @@ namespace Narvalo.Edu.Monads
 #if !MONAD_DISABLE_ZERO
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
 #if !MONAD_DISABLE_PLUS
@@ -50,7 +50,7 @@ namespace Narvalo.Edu.Monads
 
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
@@ -58,7 +58,7 @@ namespace Narvalo.Edu.Monads
 
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
 #if MONAD_VIA_MAP_MULTIPLY

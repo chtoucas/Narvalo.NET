@@ -9,7 +9,7 @@ namespace Narvalo.Edu.Monads.Samples
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static MonadOr<T> None { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
@@ -26,7 +26,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadOr<T> η(T value)
         {
             throw new NotImplementedException();
@@ -34,7 +34,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
         {
             return square.Bind(_ => _);

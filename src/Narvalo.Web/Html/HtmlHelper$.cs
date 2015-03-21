@@ -18,7 +18,7 @@ namespace Narvalo.Web.Html
     public static partial class HtmlHelperExtensions
     {
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
+            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
         public static IHtmlString LoremIpsum(this HtmlHelper @this)
         {
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
@@ -90,7 +90,7 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
+            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
         private static IHtmlString ImageHelper_(
             this HtmlHelper @this,
             Uri imageUri,
@@ -165,7 +165,7 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
+            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
         private static IHtmlString LinkHelper_(
             this HtmlHelper @this,
             Uri linkUri,
@@ -235,7 +235,7 @@ namespace Narvalo.Web.Html
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "On utilise une méthode d'extension afin d'en améliorer son accessibilité.")]
+            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
         private static IHtmlString ScriptHelper_(
             this HtmlHelper @this,
             Uri scriptUri,

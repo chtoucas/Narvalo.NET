@@ -16,8 +16,9 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-**WIP**    
-- Monad.tt, review (and this is needed) the postconditions and null-reference checks.
+**WIP**
+- Setting SourceAnalysisOverrideSettingsFile has no effect
+- Monad.tt, review.
 - Review all IEnumerable extensions for null-checking and deferred execution.
 - Check all uses of AssumeNotNull
 - Remove IEnumerable for Maybe?
@@ -25,22 +26,14 @@ Work in progress
 - CC, review and understand all the NO_CCCHECK_SUPPRESSIONS
   Format.CurrentCulture. Narvalo.Int64Encoder.FromFlickrBase58String.
 - Remove the use of HasFlag
-- Check libraries with SecAnnotate (AllowPartiallyTrustedCallers). 
+- Check libraries with SecAnnotate (AllowPartiallyTrustedCallers).
   Do not run SecAnnotate on test libraries? See permcalc.
 - Reduce the number of #ifdef -> Should we always define CONTRACTS_FULL
   Output<T> and Maybe<T> remove DEBUG
   to ease refactoring? See Narvalo.Core.props.
 - Fix the ContractInvariantMethod warning with CA. See BenchmarkTimer.
 - Review the AggressiveInlining
-- Reduce the number of SuppressMesage.
-  Wrap all SuppressMessage that are not really justified either
-  by a `!NO_GLOBAL_SUPPRESSIONS` or by a `!NO_HACK`. Tag with [GeneratedCode] those
-  related to generated code...
-  We use [module: SuppressMessage(...)] to suppress some CA or SA warnings
-  but this does not work as expected when used in an assembly info file:
-  it suppresses the warning for the whole assembly. We should further
-  review all cases where we do such a thing (T4 files).
-- Create custom FxCop rules: 
+- Create custom FxCop rules:
   * private readonly static must start with s_
   * private const must be uppercase
   * private fields must start with underscore
@@ -189,7 +182,7 @@ At this point we should have a first useful release for the core assemblies.
 - Improvement: Finish SecAnnotate.
 - Improvement: Make sure a build fails when SecAnnotate does too.
 - Enhancement: Implements security attributes, for instance:
-```    
+```
 [assembly: SecurityRules(SecurityRuleSet.Level2)]
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: SecurityTransparent]

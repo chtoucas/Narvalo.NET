@@ -64,8 +64,6 @@ namespace Narvalo.Web.Social
                 .ValueOrDefault();
         }
 
-        #region Membres privés
-
         static bool CheckSignature_(NameValueCollection nvc, string appSecret)
         {
             string[] keys = nvc.AllKeys;
@@ -129,7 +127,5 @@ namespace Narvalo.Web.Social
                        nvc[SessionKeyKey_],
                        userId);
         }
-
-        #endregion
     }
 }

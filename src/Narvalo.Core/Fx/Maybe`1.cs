@@ -142,7 +142,7 @@ namespace Narvalo.Fx
      * </content>
      */
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "[Ignore] Maybe<T> only pretends to be a collection.")]
+        Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         private readonly bool _isSome;
@@ -337,10 +337,8 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public IEnumerable<T> AsEnumerable()
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -494,10 +492,8 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
@@ -507,7 +503,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> η(T value)
         {
@@ -517,7 +513,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
@@ -550,10 +546,8 @@ namespace Narvalo.Fx
             }
         }
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<T> OrElse(Maybe<T> other)
         {
             Require.NotNull(other, "other");
@@ -570,10 +564,8 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
@@ -582,10 +574,8 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             Require.NotNull(other, "other");
@@ -598,10 +588,8 @@ namespace Narvalo.Fx
 
         #region Monadic lifting operators
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
@@ -619,10 +607,8 @@ namespace Narvalo.Fx
 
         #region LINQ extensions
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,
@@ -649,10 +635,8 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,

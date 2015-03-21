@@ -4,6 +4,7 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
 
     public static class OptionsExtensions
@@ -68,7 +69,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dNOEPS";
                 case Eps.None:
                 default:
-                    throw new NotSupportedException("Unsupported eps.");
+                    throw new InvalidEnumArgumentException("Unsupported eps.");
             }
         }
 
@@ -97,7 +98,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dTTYPAUSE";
                 case Interactions.None:
                 default:
-                    throw new NotSupportedException("Unsupported interactions.");
+                    throw new InvalidEnumArgumentException("Unsupported interactions.");
             }
         }
 
@@ -129,7 +130,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dWRITESYSTEMDICT";
                 case Miscs.None:
                 default:
-                    throw new NotSupportedException("Unsupported miscs.");
+                    throw new InvalidEnumArgumentException("Unsupported miscs.");
             }
         }
     }

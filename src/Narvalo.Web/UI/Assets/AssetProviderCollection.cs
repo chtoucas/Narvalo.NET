@@ -7,7 +7,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface",
-        Justification = "ProviderCollection précède les classes génériques.")]
+        Justification = "[Intentionally] ProviderCollection existed before generics even did.")]
     public sealed class AssetProviderCollection : ProviderCollection
     {
         public new AssetProviderBase this[string name]

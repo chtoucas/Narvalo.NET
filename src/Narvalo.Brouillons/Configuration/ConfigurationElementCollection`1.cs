@@ -9,8 +9,6 @@ namespace Narvalo.Configuration
         : BasicConfigurationElementCollection<TElement>, IList<TElement>
         where TElement : ConfigurationElement
     {
-        #region ICollection<TElement>
-
         public new bool IsReadOnly
         {
             get { return base.IsReadOnly(); }
@@ -47,25 +45,24 @@ namespace Narvalo.Configuration
             Require.NotNull(item, "item");
 
             int index = BaseIndexOf(item);
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 BaseRemoveAt(index);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
-
-        #endregion
-
-        #region IList<TElement>
 
         public TElement this[int index]
         {
             get { return BaseGet(index) as TElement; }
             set
             {
-                if (BaseGet(index) != null) {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
                 BaseAdd(index, value);
@@ -90,7 +87,5 @@ namespace Narvalo.Configuration
         {
             BaseRemoveAt(index);
         }
-
-        #endregion
     }
 }

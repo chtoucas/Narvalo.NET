@@ -8,8 +8,6 @@ namespace Narvalo.Data
 
     public static partial class SqlDataReaderExtensions
     {
-        //// Boolean
-
         public static bool GetBoolean(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -49,8 +47,6 @@ namespace Narvalo.Data
 
             return @this.GetNullableBoolean(@this.GetOrdinal(name));
         }
-
-        //// Byte
 
         public static byte GetByte(this SqlDataReader @this, string name)
         {
@@ -92,8 +88,6 @@ namespace Narvalo.Data
             return @this.GetNullableByte(@this.GetOrdinal(name));
         }
 
-        //// DateTime
-
         public static DateTime GetDateTime(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -133,8 +127,6 @@ namespace Narvalo.Data
 
             return @this.GetNullableDateTime(@this.GetOrdinal(name));
         }
-
-        //// Decimal
 
         public static decimal GetDecimal(this SqlDataReader @this, string name)
         {
@@ -176,8 +168,6 @@ namespace Narvalo.Data
             return @this.GetNullableDecimal(@this.GetOrdinal(name));
         }
 
-        //// Double
-
         public static double GetDouble(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -217,8 +207,6 @@ namespace Narvalo.Data
 
             return @this.GetNullableDouble(@this.GetOrdinal(name));
         }
-
-        //// Guid
 
         public static Guid GetGuid(this SqlDataReader @this, string name)
         {
@@ -260,8 +248,6 @@ namespace Narvalo.Data
             return @this.GetNullableGuid(@this.GetOrdinal(name));
         }
 
-        //// Int16
-
         public static short GetInt16(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -302,8 +288,6 @@ namespace Narvalo.Data
             return @this.GetNullableInt16(@this.GetOrdinal(name));
         }
 
-        //// Int32
-
         public static int GetInt32(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
@@ -343,8 +327,6 @@ namespace Narvalo.Data
 
             return @this.GetNullableInt32(@this.GetOrdinal(name));
         }
-
-        //// Int64
 
         public static long GetInt64(this SqlDataReader @this, string name)
         {

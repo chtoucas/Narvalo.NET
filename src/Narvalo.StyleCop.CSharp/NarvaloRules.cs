@@ -5,8 +5,6 @@ namespace Narvalo.StyleCop.CSharp
     using global::StyleCop;
     using global::StyleCop.CSharp;
 
-    using Narvalo;
-
     /// <summary>
     /// This StyleCop Rule makes sure that private instance fields are prefixed with an underscore.
     /// </summary>

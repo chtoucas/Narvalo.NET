@@ -7,7 +7,7 @@ namespace Narvalo.Internal
     using Narvalo.Fx;
 
     [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
-        Justification = "The method already returns a boolean to indicate the outcome.")]
+        Justification = "[Intentionally] The method implements the Try... pattern. Only used internally.")]
     internal delegate bool TryParser<TResult>(string value, out TResult result);
 
     internal static class TryParserExtensions

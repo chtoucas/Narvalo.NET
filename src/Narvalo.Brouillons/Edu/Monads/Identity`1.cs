@@ -112,7 +112,7 @@ namespace Narvalo.Edu.Monads
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<T> η(T value)
         {
             Contract.Ensures(Contract.Result<Identity<T>>() != null);
@@ -121,7 +121,7 @@ namespace Narvalo.Edu.Monads
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<T> μ(Identity<Identity<T>> square)
         {
             Require.NotNull(square, "square");
@@ -144,7 +144,7 @@ namespace Narvalo.Edu.Monads
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static T ε(Identity<T> monad)
         {
             Require.NotNull(monad, "monad");
@@ -153,7 +153,7 @@ namespace Narvalo.Edu.Monads
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Identity<Identity<T>> δ(Identity<T> monad)
         {
             Contract.Ensures(Contract.Result<Identity<Identity<T>>>() != null);

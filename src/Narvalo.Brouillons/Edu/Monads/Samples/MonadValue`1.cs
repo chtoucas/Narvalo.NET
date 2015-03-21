@@ -10,18 +10,18 @@ namespace Narvalo.Edu.Monads.Samples
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static MonadValue<T> None { get { throw new NotImplementedException(); } }
 
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static bool operator ==(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
         }
 
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public static bool operator !=(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
@@ -41,21 +41,21 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public bool Equals(MonadValue<T> other)
         {
             throw new NotImplementedException();
         }
 
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public override bool Equals(object obj)
         {
             throw new NotImplementedException();
         }
 
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "This code is not meant to be used. Only for educational purpose.")]
+            Justification = "[Educational] This code is not meant to be used.")]
         public override int GetHashCode()
         {
             throw new NotImplementedException();
@@ -63,7 +63,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadValue<T> η(T value)
         {
             throw new NotImplementedException();
@@ -71,7 +71,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "Standard naming convention from mathematics.")]
+            Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)
         {
             return square.Bind(_ => _);

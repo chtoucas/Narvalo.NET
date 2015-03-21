@@ -12,7 +12,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     /// <summary>
     /// Represents a processor that compares the performance of different implementations
     /// of the same problem given by methods defined inside a single class, each method
-    /// being identified by its <see cref="Benchmark"/> attribute.
+    /// being identified by its <see cref="BenchmarkComparativeAttribute"/> attribute.
     /// </summary>
     public sealed class BenchmarkComparisonProcessor
     {

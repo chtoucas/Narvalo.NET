@@ -10,8 +10,6 @@ namespace Narvalo.Runtime.Reliability
         private long _requestCount = 0;
         private long _successCount = 0;
 
-        #region IGuard
-
         public void Execute(Action action)
         {
             Require.NotNull(action, "action");
@@ -34,10 +32,6 @@ namespace Narvalo.Runtime.Reliability
 
             RecordSuccess();
         }
-
-        #endregion
-
-        #region IReliabilityMonitor
 
         public long FailureCount
         {
@@ -68,7 +62,5 @@ namespace Narvalo.Runtime.Reliability
         {
             _successCount++;
         }
-
-        #endregion
     }
 }

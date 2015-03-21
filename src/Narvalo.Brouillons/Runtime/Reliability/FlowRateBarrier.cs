@@ -37,8 +37,6 @@ namespace Narvalo.Runtime.Reliability
 
         public TimeSpan ResetInterval { get { return _resetInterval; } }
 
-        #region IBarrier
-
         public bool CanExecute
         {
             get { return _requestCount <= _maxRequestsPerInterval; }
@@ -59,17 +57,11 @@ namespace Narvalo.Runtime.Reliability
             action();
         }
 
-        #endregion
-
-        #region IDisposable
-
         public void Dispose()
         {
             Dispose(true /* disposing */);
             GC.SuppressFinalize(this);
         }
-
-        #endregion
 
         protected virtual void Dispose(bool disposing)
         {

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Security
+namespace Narvalo
 {
     using System;
 #if CONTRACTS_FULL
@@ -9,9 +9,9 @@ namespace Narvalo.Security
 
     public partial interface IBidirectionalCryptoEngine
     {
-        string Encrypt(string val);
+        string Encrypt(string value);
 
-        string Decrypt(string val);
+        string Decrypt(string value);
     }
 
 #if CONTRACTS_FULL
@@ -22,15 +22,17 @@ namespace Narvalo.Security
     [ContractClassFor(typeof(IBidirectionalCryptoEngine))]
     internal abstract class ContractForIBidirectionalCryptoEngine : IBidirectionalCryptoEngine
     {
-        string IBidirectionalCryptoEngine.Encrypt(string val)
+        string IBidirectionalCryptoEngine.Encrypt(string value)
         {
-            Contract.Requires<ArgumentNullException>(val != null);
+            Contract.Requires(value != null);
+
             return default(String);
         }
 
-        string IBidirectionalCryptoEngine.Decrypt(string val)
+        string IBidirectionalCryptoEngine.Decrypt(string value)
         {
-            Contract.Requires<ArgumentNullException>(val != null);
+            Contract.Requires(value != null);
+
             return default(String);
         }
     }

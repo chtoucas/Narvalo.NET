@@ -28,7 +28,7 @@ namespace Narvalo.Globalization
     {
         static Dictionary<string, short> TwoLetterCodeToNumericCode_
             = new Dictionary<string, short>() {
-        #region Data
+        #region ISO Data.
                 {"AF", 4},
                 {"AX", 248},
                 {"AL", 8},

@@ -24,7 +24,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
             if (@this == null)
@@ -44,7 +44,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
             if (value == null)
@@ -64,7 +64,7 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty string.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
             Property(value);
@@ -86,7 +86,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null)
@@ -105,7 +105,7 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "Helper method shared among projects.")]
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             if (String.IsNullOrEmpty(value))
@@ -127,6 +127,8 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[Intentionally] Helper method shared among projects.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             if (String.IsNullOrWhiteSpace(value))

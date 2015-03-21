@@ -34,7 +34,7 @@ namespace Narvalo.Edu.Monads
         /// Third Monoid Law: Plus is associative.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1119:StatementMustNotUseUnnecessaryParenthesis",
-            Justification = "Unnecessary parenthesis are kept to emphasis the order of operations.")]
+            Justification = "[Educational] Unnecessary parenthesis are kept to emphasis the order of operations.")]
         public static bool SatisfiesThirdMonoidLaw<X>(Monad<X> a, Monad<X> b, Monad<X> c)
         {
             // mplus a (mplus b c) = mplus (mplus a b) c 
@@ -104,7 +104,7 @@ namespace Narvalo.Edu.Monads
         /// Third Monad Law.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1119:StatementMustNotUseUnnecessaryParenthesis",
-            Justification = "Unnecessary parenthesis are kept to emphasis the order of operations.")]
+            Justification = "[Educational] Unnecessary parenthesis are kept to emphasis the order of operations.")]
         public static bool SatisfiesThirdMonadLawKleisliVersion<X, Y, Z, T>(
            Kunc<X, Y> f,
            Kunc<Y, Z> g,

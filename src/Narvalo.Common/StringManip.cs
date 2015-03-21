@@ -29,7 +29,6 @@ namespace Narvalo
 
             for (int i = 0; i < formD.Length; i++)
             {
-
                 if (CharUnicodeInfo.GetUnicodeCategory(formD[i]) != UnicodeCategory.NonSpacingMark)
                 {
                     sb.Append(formD[i]);
@@ -63,7 +62,7 @@ namespace Narvalo
         }
 
         [SuppressMessage("Gendarme.Rules.Portability", "NewLineLiteralRule",
-            Justification = "This method does not depend on platform specific rules.")]
+            Justification = "[Intentionally] This method does not depend on platform specific rules.")]
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, "value");

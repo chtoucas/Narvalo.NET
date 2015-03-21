@@ -34,39 +34,5 @@ namespace Narvalo
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
-
-        ////public static string CurrentCulture(string format, object arg0, params object[] args)
-        ////{
-        ////    Check.NotNull(arg0, "arg0");
-        ////    Check.NotNull(format, "format");
-        ////    Contract.Ensures(Contract.Result<string>() != null);
-
-        ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
-
-        ////    return String.Format(CultureInfo.CurrentCulture, format, arguments);
-        ////}
-
-        ////public static string InvariantCulture(string format, object arg0, params object[] args)
-        ////{
-        ////    Check.NotNull(arg0, "arg0");
-        ////    Check.NotNull(format, "format");
-        ////    Contract.Ensures(Contract.Result<string>() != null);
-
-        ////    var arguments = args == null ? arg0 : GetArguments_(arg0, args);
-
-        ////    return String.Format(CultureInfo.InvariantCulture, format, arguments);
-        ////}
-
-        ////static object[] GetArguments_(object arg0, params object[] args)
-        ////{
-        ////    Check.NotNull(args, "args");
-        ////    Contract.Ensures(Contract.Result<object[]>() != null);
-
-        ////    var arguments = new object[1 + args.Length];
-        ////    arguments[0] = arg0;
-        ////    args.CopyTo(arguments, 1);
-
-        ////    return arguments;
-        ////}
     }
 }

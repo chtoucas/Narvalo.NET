@@ -178,8 +178,6 @@ namespace Narvalo.Web.Profile
             Repository.UpdateActivity(userName, false /* activityOnly */);
         }
 
-        #region Méthods privées
-
         static ProfileInfoCollection GetProfileInfos_(IList<NarvaloProfile> profiles)
         {
             var pic = new ProfileInfoCollection();
@@ -238,7 +236,5 @@ namespace Narvalo.Web.Profile
 
             return profile;
         }
-
-        #endregion
     }
 }

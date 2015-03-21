@@ -64,7 +64,7 @@ namespace Narvalo.Fx
         public abstract Maybe<TRight> RightOrNone();
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
@@ -74,7 +74,7 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Ignore] Standard naming convention from mathematics. Only used internally.")]
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TRight value)
         {

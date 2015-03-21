@@ -79,10 +79,8 @@ namespace Narvalo
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
-#if !NO_CONTRACTS_SUPPRESSIONS
         [SuppressMessage("Microsoft.Contracts", "Suggestion-29-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public static string ToFlickrBase58String(long value)
         {
             Require.GreaterThanOrEqualTo(value, 0L, "value");

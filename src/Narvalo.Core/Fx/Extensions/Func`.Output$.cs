@@ -13,7 +13,7 @@ namespace Narvalo.Fx.Extensions
     public static partial class FuncOutputExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Output<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
         {
             Require.Object(@this);
@@ -32,11 +32,9 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
-#if !NO_CCCHECK_SUPPRESSIONS
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public static Output<TSource> Catch<TSource, T1Exception, T2Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -58,11 +56,9 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
-#if !NO_CCCHECK_SUPPRESSIONS
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
@@ -86,11 +82,9 @@ namespace Narvalo.Fx.Extensions
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Ignore] There is no way we can achieve the same thing with type parameter inference.")]
-#if !NO_CCCHECK_SUPPRESSIONS
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[CodeContracts] Unrecognized postcondition by CCCheck.")]
-#endif
         public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception, T4Exception>(this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception

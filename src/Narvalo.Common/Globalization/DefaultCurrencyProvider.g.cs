@@ -12,7 +12,7 @@
 using global::System.Diagnostics.CodeAnalysis;
 
 [module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
-    Justification = "The elements are ordered in order for T4 to work properly.")]
+    Justification = "[GeneratedCode] The elements are ordered in order for T4 to work properly.")]
 
 namespace Narvalo.Globalization
 {
@@ -26,7 +26,7 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <remarks>
         /// The list is built out of data found on the "Association Suisse de Normalisation"
-        /// <see href="http://www.currency-iso.org/en/home.html">website</see>.
+        /// <seealso href="http://www.currency-iso.org/en/home.html">website</seealso>.
         /// </remarks>
         /// <value>The list of currently active currencies.</value>
         internal static IEnumerable<CurrencyInfo> CurrentCurrencies
@@ -1411,7 +1411,7 @@ namespace Narvalo.Globalization
         /// </summary>
         /// <remarks>
         /// The list is built out of data found on the "Association Suisse de Normalisation"
-        /// <see href="http://www.currency-iso.org/en/home.html">website</see>.
+        /// <seealso href="http://www.currency-iso.org/en/home.html">website</seealso>.
         /// </remarks>
         /// <value>The list of discontinued currencies.</value>
         internal static IEnumerable<CurrencyInfo> LegacyCurrencies

@@ -21,8 +21,6 @@ namespace Narvalo.Runtime.Reliability
 
         public RetryPolicy Policy { get { return _policy; } }
 
-        #region IGuard
-
         public void Execute(Action action)
         {
             Require.NotNull(action, "action");
@@ -59,8 +57,6 @@ namespace Narvalo.Runtime.Reliability
                 }
             }
         }
-
-        #endregion
 
         private static AggregateGuardException NewAggregateGuardException(
            string message, IList<Exception> exceptions)

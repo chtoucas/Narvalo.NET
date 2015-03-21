@@ -54,7 +54,7 @@ namespace Narvalo.Web.Configuration
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "ProviderSettingsCollection précède les classes génériques.")]
+            Justification = "[Intentionally] This property must be writable to be initialized by the framework.")]
         public ProviderSettingsCollection Providers
         {
             get

@@ -80,7 +80,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
-            Justification = "The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
+            Justification = "[Intentionally] The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         private TimeSpan Time_(Action action, int iterations)
         {
             Promise.NotNull(action);

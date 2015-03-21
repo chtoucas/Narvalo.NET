@@ -10,7 +10,9 @@ namespace Narvalo
     using Narvalo.Fx;
     using Narvalo.Internal;
 
-    // Simple types.
+    /// <summary>
+    /// Provides parsing helpers.
+    /// </summary>
     public static partial class ParseTo
     {
         public static bool? Boolean(string value)
@@ -204,7 +206,9 @@ namespace Narvalo
         }
     }
 
-    // Other value types.
+    /// <content>
+    /// Implements parsers for value types that are not simple types.
+    /// </content>
     public static partial class ParseTo
     {
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
@@ -242,7 +246,9 @@ namespace Narvalo
         }
     }
 
-    // Reference types.
+    /// <content>
+    /// Implements parsers for reference types.
+    /// </content>
     public static partial class ParseTo
     {
         public static Maybe<Uri> Uri(string value, UriKind uriKind)

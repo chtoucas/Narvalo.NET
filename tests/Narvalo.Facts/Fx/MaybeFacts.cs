@@ -4,12 +4,10 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using Xunit.Sdk;
 
     using Xunit;
+    using Xunit.Sdk;
 
-    //[SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1201:ElementsMustAppearInTheCorrectOrder",
-    //    Justification = "Private structs are positioned after public classes and before private classes.")]
     public static partial class MaybeFacts
     {
         #region Monad Laws
@@ -820,8 +818,7 @@ namespace Narvalo.Fx
         /// The correct behaviour is to return Maybe<T>.None.
         /// ]]>
         /// </summary>
-        [Fact]
-        [Issue(IssueSeverity.High, "2014/12/01")]
+        [Fact, Issue]
         public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
         {
             // Arrange

@@ -71,9 +71,6 @@
     <None Include="Narvalo.Ghostscript.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Narvalo.Ghostscript.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

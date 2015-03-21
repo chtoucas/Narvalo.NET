@@ -9,7 +9,7 @@ namespace Narvalo
     // TODO: Créer la version Hexavigesimal.
     public static class BinaryEncoder
     {
-        ////private static string Base32Alphabet =  "abcdefghijklmnopqrstuvwxyz234567";
+        // Alternative alphabet: "abcdefghijklmnopqrstuvwxyz234567";
         private static string s_ZBase32Alphabet = "ybndrfg8ejkmcpqxot1uwisza345h769";
 
         #region Hexadecimal

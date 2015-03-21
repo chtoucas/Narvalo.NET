@@ -6,17 +6,13 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.IO;
     using System.Web;
-    using System.Xml;
     using System.Xml.Schema;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using Narvalo.Xml;
 
     public class XmlValidationModule : IHttpModule
     {
         static readonly string HeaderName_ = "X-Narvalo-Validate";
-
-        #region IHttpModule
 
         public void Init(HttpApplication context)
         {
@@ -31,25 +27,23 @@ namespace Narvalo.Web
             ;
         }
 
-        #endregion
-
         public static void Register()
         {
             DynamicModuleUtility.RegisterModule(typeof(XmlValidationModule));
         }
 
-        void OnBeginRequest_(object sender, EventArgs e)
+        private void OnBeginRequest_(object sender, EventArgs e)
         {
             var app = sender as HttpApplication;
 
             bool validate = app.Request.Headers[HeaderName_] != null;
             if (validate)
             {
-                app.Response.Filter = new CaptureStream(app.Response.Filter);
+                app.Response.Filter = new CaptureStream_(app.Response.Filter);
             }
         }
 
-        void OnEndRequest_(object sender, EventArgs e)
+        private void OnEndRequest_(object sender, EventArgs e)
         {
             var app = sender as HttpApplication;
 
@@ -61,7 +55,7 @@ namespace Narvalo.Web
             var renderer = CreateRenderer_(rendererType);
 
             // REVIEW: Peut-on utiliser context.Response.OutputStream ?
-            var captureStream = app.Response.Filter as CaptureStream;
+            var captureStream = app.Response.Filter as CaptureStream_;
             if (captureStream == null)
             {
                 return;
@@ -87,7 +81,7 @@ namespace Narvalo.Web
         }
 
         // FIXME
-        static IXmlValidationRenderer CreateRenderer_(string typeName)
+        private static IXmlValidationRenderer CreateRenderer_(string typeName)
         {
             Require.NotNullOrEmpty(typeName, "typeName");
 
@@ -107,12 +101,12 @@ namespace Narvalo.Web
             return renderer;
         }
 
-        class CaptureStream : Stream
+        private class CaptureStream_ : Stream
         {
-            Stream _inner;
-            Stream _streamCopy;
+            private Stream _inner;
+            private Stream _streamCopy;
 
-            public CaptureStream(Stream inner)
+            public CaptureStream_(Stream inner)
             {
                 _streamCopy = new MemoryStream();
                 _inner = inner;
