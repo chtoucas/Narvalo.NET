@@ -12,7 +12,7 @@ namespace Narvalo
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
-    public static partial class EnumerableExtensions
+    public static partial class EnumerableOutputExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
             this IEnumerable<TSource> @this,

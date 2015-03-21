@@ -13,7 +13,7 @@ namespace Narvalo.Fx
             return Either<TLeft, TRight>.η(value);
         }
 
-        public static Either<TLeft, TRight> Right<TLeft, TRight>(TLeft value)
+        public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
 

@@ -144,6 +144,13 @@
 
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
+  
+  <!-- Gendarme Analysis -->
+  <PropertyGroup>
+    <EnableGendarme Condition=" '$(EnableGendarme)' != 'true' ">false</EnableGendarme>
+
+    <DefineConstants Condition=" '$(EnableGendarme)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
+  </PropertyGroup>
 
   <!-- Code Contracts -->
   <!--

@@ -82,7 +82,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(T value)
         {
             return new Success_(value);
@@ -90,7 +89,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
@@ -113,7 +111,7 @@ namespace Narvalo.Fx
             }
             else
             {
-                return Failure_.η((square as Output<Output<T>>.Failure_).ExceptionInfo);
+                return η((square as Output<Output<T>>.Failure_).ExceptionInfo);
             }
         }
     }
@@ -272,7 +270,7 @@ namespace Narvalo.Fx
 
             public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
             {
-                return Output<TResult>.Failure_.η(ExceptionInfo);
+                return Output<TResult>.η(ExceptionInfo);
             }
 
             public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
@@ -293,12 +291,12 @@ namespace Narvalo.Fx
 
             public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
             {
-                return Output<TResult>.Failure_.η(ExceptionInfo);
+                return Output<TResult>.η(ExceptionInfo);
             }
 
             public override Output<TResult> Then<TResult>(Output<TResult> other)
             {
-                return Output<TResult>.Failure_.η(ExceptionInfo);
+                return Output<TResult>.η(ExceptionInfo);
             }
 
             public override Maybe<T> ValueOrNone()
@@ -351,7 +349,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>

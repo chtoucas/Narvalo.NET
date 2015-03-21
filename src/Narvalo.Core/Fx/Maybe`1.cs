@@ -197,7 +197,7 @@ namespace Narvalo.Fx
                 Promise.Condition(IsSome);
                 Contract.Ensures(Contract.Result<T>() != null);
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
                 if (_value == null)
                 {
@@ -314,7 +314,7 @@ namespace Narvalo.Fx
             return IsSome ? Value.ToString() : "Maybe(None)";
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
         [ContractInvariantMethod]
         private void ObjectInvariants()
@@ -497,7 +497,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> η(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -507,7 +506,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
             Require.NotNull(square, "square");

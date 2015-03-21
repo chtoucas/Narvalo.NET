@@ -33,7 +33,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
@@ -43,7 +42,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Either<TLeft, TRight> η(TRight value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
@@ -180,7 +178,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
     [ContractClass(typeof(EitherContract<,>))]
     public partial class Either<TLeft, TRight> { }

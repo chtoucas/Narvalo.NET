@@ -31,7 +31,7 @@ Properties {
 
 FormatTaskName {
     param([Parameter(Mandatory = $true)] [string] $TaskName)
-    
+
     Write-Host "Executing Task '$taskName'." -ForegroundColor DarkCyan
 }
 
@@ -60,7 +60,7 @@ Task FastBuild `
     -Depends _CI-InitializeVariables `
 {
     MSBuild $Foundations $Opts $CI_Props `
-        '/t:Xunit', 
+        '/t:Xunit',
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
@@ -86,7 +86,7 @@ Task FullBuild `
     MSBuild $Everything $Opts $CI_Props `
         '/t:Build;PEVerify;Xunit',
         '/p:SourceAnalysisEnabled=true'
-}   
+}
 
 Task FullClean `
     -Description 'Delete the entire build directory.' `
@@ -103,13 +103,29 @@ Task CodeAnalysis `
     -Alias CA `
 {
     MSBuild $Everything $Opts $CI_Props `
-        '/t:Build', 
-        # For static analysis, we hide internals, otherwise we might not truly 
+        '/t:Build',
+        # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
+}
+
+Task GendarmeAnalysis `
+    -Description 'Build ''Foundations'' for Mono.Gendarme.' `
+    -Depends _CI-InitializeVariables `
+    -Alias Keuf `
+{
+    MSBuild $Foundations $Opts $CI_Props `
+        '/t:Clean;Build',
+        # For static analysis, we hide internals, otherwise we might not truly
+        # analyze the public API.
+        '/p:EnableGendarme=true',
+        '/p:VisibleInternals=false',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_'
 }
 
 Task CodeContractsAnalysis `
@@ -119,11 +135,11 @@ Task CodeContractsAnalysis `
 {
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
-        # For static analysis, we hide internals, otherwise we might not truly 
+        # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts'
-} 
+}
 
 Task SecurityAnalysis `
     -Description 'Run SecAnnotate on ''Foundations'' (SLOW).' `
@@ -132,12 +148,12 @@ Task SecurityAnalysis `
 {
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Clean;SecAnnotate',
-        # For static analysis, we hide internals, otherwise we might not truly 
+        # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_' 
+        '/p:Filter=_Core_'
 }
 
 Task _CI-InitializeVariables `
@@ -162,7 +178,7 @@ Task _CI-InitializeVariables `
     # Either MSBuild or PowerShell mixes up the MSBuild parameters.
     # The result is that Configuration property takes all following properties
     # as its value. For instance, Configuration is read as "Release /p:BuildGeneratedVersion=false...".
-    # For static analysis, we hide internals, otherwise we might not truly 
+    # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
     #$script:CI_AnalysisProps = $CI_Props, '/p:VisibleInternals=false'
 }
@@ -182,7 +198,7 @@ Task Package-Core `
     -Alias PackCore `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Core_' 
+        '/p:Filter=_Core_'
 }
 
 Task Package-Mvp `
@@ -191,7 +207,7 @@ Task Package-Mvp `
     -Alias PackMvp `
 {
     MSBuild $Foundations $Opts $Package_Targets $Package_Props `
-        '/p:Filter=_Mvp_' 
+        '/p:Filter=_Mvp_'
 }
 
 Task Package-Build `
@@ -222,7 +238,7 @@ Task _Package-InitializeVariables `
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=false'
-        
+
     # Packaging targets:
     # - Rebuild all
     # - Verify Portable Executable (PE) format
@@ -335,7 +351,7 @@ Task MyGet-Package `
 {
     Write-Host "A ready to publish zip file for MyGet may be found here: '$MyGet_ZipFile'." -ForegroundColor Green
 }
-       
+
 Task _MyGet-Publish `
     -Description 'Clean up, build then publish the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _MyGet-RestorePackages `
@@ -346,7 +362,7 @@ Task _MyGet-Publish `
         '/t:Rebuild',
         '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
 }
-    
+
 Task _MyGet-RestorePackages `
     -Description 'Restore packages for the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _Tools-InitializeVariables `
@@ -377,7 +393,7 @@ Task _MyGet-Zip `
     -PreAction {
         if (!(Test-Path $MyGet_StagingDirectory)) {
             # We do not add a dependency on _MyGet-Publish so that we can run this task alone.
-            # MyGet-Package provides the stronger version. 
+            # MyGet-Package provides the stronger version.
             Exit-Gracefully -ExitCode 1 `
                 'Can not create the Zip package: did you forgot to call the _MyGet-Publish task?'
         }
@@ -506,7 +522,7 @@ Task Environment `
     -Description 'Display the build environment.' `
     -Alias Env `
 {
-    # The output of running "MSBuild /version" looks like: 
+    # The output of running "MSBuild /version" looks like:
     # >   Microsoft (R) Build Engine, version 12.0.31101.0
     # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
     # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
@@ -530,7 +546,7 @@ Task _Documentation `
 {
     # PSake allows to display a description of the tasks by using:
     # > Invoke-PSake $buildFile -Docs
-    # but I find the result more geared towards developers. 
+    # but I find the result more geared towards developers.
     # Here is my own version of the underlying WriteDocumentation function.
     $currentContext = $psake.context.Peek()
 
@@ -552,7 +568,7 @@ Task _Documentation `
 
         $task = $currentContext.tasks.$_
 
-        if ($defaultTaskDependencies -Contains $task.Name) { 
+        if ($defaultTaskDependencies -Contains $task.Name) {
             $name = "$($task.Name) (DEFAULT)"
         } else {
             $name = $task.Name
@@ -563,8 +579,8 @@ Task _Documentation `
             Alias = $task.Alias;
             Synopsis = $task.Description;
         }
-    } | 
-        sort 'Task' | 
+    } |
+        sort 'Task' |
         Format-Table -AutoSize -Wrap -Property Task, Alias, Synopsis
 }
 
@@ -638,7 +654,7 @@ function Invoke-NuGetAgent {
         [Parameter(Mandatory = $false, Position = 1)] [string] $Configuration = 'Release',
 
         [switch] $Retail
-    ) 
+    )
 
     try {
         $cmd = Get-LocalPath "tools\NuGetAgent\bin\$Configuration\nuget-agent.exe" -Resolve

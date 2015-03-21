@@ -57,7 +57,7 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
-    <Compile Include="Enumerable`1.Output%24.cs" />
+    <Compile Include="Enumerable`1%24.Output.cs" />
     <Compile Include="Edu\Monads\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>

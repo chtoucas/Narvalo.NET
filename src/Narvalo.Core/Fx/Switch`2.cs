@@ -65,7 +65,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
             Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
@@ -75,7 +74,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
             Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
@@ -203,7 +201,7 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(leftSelector, "leftSelector");
 
-                return Switch<TResult, TRight>.Left_.η(leftSelector.Invoke(_value));
+                return Switch<TResult, TRight>.η(leftSelector.Invoke(_value));
             }
 
             /// <copydoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
@@ -234,7 +232,7 @@ namespace Narvalo.Fx
             /// <copydoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap()
             {
-                return Switch<TRight, TLeft>.Right_.η(_value);
+                return Switch<TRight, TLeft>.η(_value);
             }
 
             public override Maybe<TLeft> LeftOrNone()
@@ -329,13 +327,13 @@ namespace Narvalo.Fx
             {
                 Require.NotNull(rightSelector, "rightSelector");
 
-                return Switch<TLeft, TResult>.Right_.η(rightSelector.Invoke(_value));
+                return Switch<TLeft, TResult>.η(rightSelector.Invoke(_value));
             }
 
             /// <copydoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap()
             {
-                return Switch<TRight, TLeft>.Left_.η(_value);
+                return Switch<TRight, TLeft>.η(_value);
             }
 
             /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
@@ -405,7 +403,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
 
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>
