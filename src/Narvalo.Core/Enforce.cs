@@ -10,7 +10,7 @@ namespace Narvalo
     /// Provides helper methods to perform argument validation.
     /// </summary>
     /// <remarks>
-    /// <para>These methods must appear after all Code Contracts.</para>
+    /// <para>WARNING: These methods MUST appear after all Code Contracts.</para>
     /// <para>CCCheck does not seem to be able to comprehend a precondition used in conjunction
     /// with <see cref="IComparable{T}"/>, therefore any Code Contracts specification has been disabled</para>
     /// </remarks>

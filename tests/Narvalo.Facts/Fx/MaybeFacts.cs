@@ -695,7 +695,7 @@ namespace Narvalo.Fx
             Assert.True(!option.IsSome);
         }
 
-#if DEBUG
+#if DEBUG // [Intentionally] No exception is thrown when DEBUG is not defined.
 
         [Fact]
         public static void Value_ThrowsTraceAssertException_WhenNone()

@@ -100,8 +100,8 @@ namespace Narvalo.Data
         }
     }
 
-#if CONTRACTS_FULL
-    
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
     public abstract partial class NonQueryStoredProcedure<TParameters>
     {

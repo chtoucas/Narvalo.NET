@@ -5,7 +5,9 @@ namespace Narvalo.Web.Optimization
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Intentionally] Using directive.
     using System.Diagnostics.Contracts;
+#endif
     using System.Web.Razor.Parser;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
@@ -53,7 +55,7 @@ namespace Narvalo.Web.Optimization
             _inner.ParseSection(nestingSequences, caseSensitive);
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

@@ -25,6 +25,7 @@ namespace Narvalo.IO
             get
             {
                 Contract.Ensures(Contract.Result<FileInfo>() != null);
+
                 return _file;
             }
         }
@@ -34,11 +35,12 @@ namespace Narvalo.IO
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return Path.Combine(_relativeDirectoryName, _file.Name);
             }
         }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

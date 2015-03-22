@@ -13,7 +13,7 @@ namespace Narvalo.Internal
     /// <see href="http://geekswithblogs.net/terje/archive/2010/10/14/making-static-code-analysis-and-code-contracts-work-together-or.aspx" />
     /// </remarks>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // [Intentionally] Public visibility is mandatory for preconditions in Require.
     // If Code Contracts are enabled, this attribute is used by the Require class for writing preconditions. 
     // Therefore, to be able to perform Static Contracts checkings, this attribute MUST remain public. 
     // Not doing so would lead to a CC1038 error. 

@@ -3,7 +3,7 @@
 namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Intentionally] Using directive.
     using System.Diagnostics.Contracts;
 #endif
 
@@ -27,8 +27,8 @@ namespace Narvalo.Globalization
         IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
     }
 
-#if CONTRACTS_FULL
-    
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+
     [ContractClass(typeof(ICurrencyProviderContract))]
     public partial interface ICurrencyProvider { }
 

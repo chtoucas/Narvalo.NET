@@ -92,7 +92,7 @@ namespace Narvalo.IO
             }
         }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

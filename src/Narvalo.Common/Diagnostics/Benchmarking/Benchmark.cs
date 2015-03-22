@@ -61,7 +61,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             return CategoryName + "; " + Name;
         }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

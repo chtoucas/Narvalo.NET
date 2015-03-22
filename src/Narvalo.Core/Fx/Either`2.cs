@@ -17,7 +17,7 @@ namespace Narvalo.Fx
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Either<TLeft, TRight>
     {
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
         protected Either() { }
 #else
         private Either() { }
@@ -182,7 +182,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
     [ContractClass(typeof(EitherContract<,>))]
     public partial class Either<TLeft, TRight> { }

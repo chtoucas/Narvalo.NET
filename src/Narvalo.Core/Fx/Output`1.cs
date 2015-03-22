@@ -20,7 +20,7 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public abstract partial class Output<T>
     {
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
         protected Output() { }
 #else
         private Output() { }
@@ -355,7 +355,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
@@ -369,7 +369,7 @@ namespace Narvalo.Fx
             }
         }
     }
-    
+
     [ContractClassFor(typeof(Output<>))]
     internal abstract class OutputContract<T> : Output<T>
     {

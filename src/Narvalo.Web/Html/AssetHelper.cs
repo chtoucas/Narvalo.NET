@@ -80,8 +80,8 @@ namespace Narvalo.Web.Html
             var assetUri = AssetManager.GetStyle(relativePath);
             return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

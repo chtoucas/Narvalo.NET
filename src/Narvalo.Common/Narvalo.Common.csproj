@@ -73,7 +73,6 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
-    <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />

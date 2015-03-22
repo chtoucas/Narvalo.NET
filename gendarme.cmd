@@ -24,7 +24,7 @@
 
 :Execute
 
-%Gendarme% ^
+@call %Gendarme% ^
   --v ^
   --console ^
   --limit %Limit% ^

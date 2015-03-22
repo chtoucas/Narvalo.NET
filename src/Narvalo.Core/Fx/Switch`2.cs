@@ -19,8 +19,8 @@ namespace Narvalo.Fx
     public abstract partial class Switch<TLeft, TRight>
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
         protected Switch() { }
 #else
         private Switch() { }
@@ -403,7 +403,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>

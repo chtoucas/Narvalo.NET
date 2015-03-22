@@ -132,8 +132,8 @@ namespace Narvalo.Web.Optimization
 
             return sb.ToString();
         }
-        
-#if CONTRACTS_FULL
+
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

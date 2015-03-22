@@ -37,6 +37,7 @@ namespace Narvalo.Data
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return _connectionString;
             }
         }
@@ -46,6 +47,7 @@ namespace Narvalo.Data
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return _name;
             }
         }
@@ -121,8 +123,8 @@ namespace Narvalo.Data
         }
     }
 
-#if CONTRACTS_FULL
-    
+#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract partial class StoredProcedure<TResult>
     {
