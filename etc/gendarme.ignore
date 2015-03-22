@@ -8,11 +8,16 @@
 # A: Used to filter out an assembly.
 #
 # The following rules are disabled in the configuration file:
+# - Gendarme.Rules.BadPractice.AvoidAssemblyVersionMismatchRule
+#   We use semantic versioning but still keep extended version information.
 # - Gendarme.Rules.Serialization.MarkEnumerationsAsSerializableRule
-#   This rule would make the code more confusing than anything else.
+#   Fixing this rule could make the code more confusing.
 #
-# We use the ignore file exclusively for defects not yet reviewed or fixed
-# and those that can not be masked with a SuppressMessage attribute.
+# We use the ignore file exclusively for defects that can not be masked
+# with a SuppressMessage attribute.
+# We also include warnings not yet reviewed or fixed. Beware the intention
+# is not to hide the warning but rather to keep a list of things to fix.
+# Moreover, we can easily see when new warnings are showing up.
 #
 # Sample ignore files from the Mono project:
 # https://github.com/mono/mono-tools/blob/master/gendarme/mono-options.ignore
@@ -45,6 +50,8 @@ N: Narvalo.Fx.Extensions.Internal
 # -----------------------
 
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
+# Justification = [Intentionally] Complements the namespace from Narvalo.Core which is a required dependency.
+N: Narvalo.Fx
 # Justification = [Intentionally] Hopefully more will come.
 N: Narvalo.Configuration
 
@@ -73,19 +80,6 @@ M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServices.ExceptionDispatchInfo)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch`2::η(TRight)
 
-R: Gendarme.Rules.Smells.AvoidCodeDuplicatedInSameClassRule
-#  --------------------------------------------------------
-M: System.Int64 Narvalo.Int64Encoder::FromFlickrBase58String(System.String)
-
-R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
-#  ----------------------------------------------------
-T: Narvalo.Fx.Either
-T: Narvalo.Fx.Switch
-T: Narvalo.Int64Encoder
-T: Narvalo.Fx.Extensions.FuncMaybeExtensions
-T: Narvalo.Fx.Extensions.FuncNullableExtensions
-T: Narvalo.Fx.Extensions.PredicateExtensions
-
 # ==============================================================================
 # Narvalo.Common (REVIEW or FIXME)
 # ==============================================================================
@@ -105,10 +99,6 @@ R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
 #  ---------------------------------------------------------
 T: Narvalo.Globalization.CurrencyProvider
 
-R: Gendarme.Rules.Naming.UseCorrectCasingRule
-#  ------------------------------------------
-M: System.Boolean Narvalo.Internal.TryParser`1::EndInvoke(TResult&,System.IAsyncResult)
-
 R: Gendarme.Rules.Performance.AvoidLargeStructureRule
 #  --------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkMetric
@@ -123,6 +113,5 @@ T: Narvalo.Currency
 
 R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
 #  -------------------------------------------
-T: Narvalo.ParseTo
 T: Narvalo.Globalization.CurrencyProvider
 

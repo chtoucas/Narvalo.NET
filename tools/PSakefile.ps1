@@ -117,8 +117,9 @@ Task GendarmeAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
+    # Currently only prepare the assemblies for Gendarme.
     MSBuild $Foundations $Opts $CI_Props `
-        '/t:Clean;Build',
+        '/t:Build',
         # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:EnableGendarme=true',

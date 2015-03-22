@@ -5,6 +5,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is done to hide static methods defined on a generic type. This should improve the usability of these methods.")]
     public static class Switch
     {
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",

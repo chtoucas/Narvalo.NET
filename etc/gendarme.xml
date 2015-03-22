@@ -2,7 +2,9 @@
   <!-- See gendarme.ignore for explanations. -->
 
   <ruleset name="narvalo-strict">
-    <rules include="*" from="Gendarme.Rules.BadPractice.dll"/>
+    <rules include="*"
+           exclude="AvoidAssemblyVersionMismatchRule"
+           from="Gendarme.Rules.BadPractice.dll"/>
     <rules include="*" from="Gendarme.Rules.Concurrency.dll" />
     <rules include="*" from="Gendarme.Rules.Correctness.dll"/>
     <rules include="*" from="Gendarme.Rules.Design.dll"/>

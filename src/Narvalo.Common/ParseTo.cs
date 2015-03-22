@@ -14,6 +14,8 @@ namespace Narvalo
     /// <summary>
     /// Provides parsing helpers.
     /// </summary>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is done to offer a simplified API by automatically selecting the most common options for the consumer.")]
     public static partial class ParseTo
     {
         public static bool? Boolean(string value)

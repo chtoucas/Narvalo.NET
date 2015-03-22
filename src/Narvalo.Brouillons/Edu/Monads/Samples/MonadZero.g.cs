@@ -666,6 +666,8 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadZero{T}"/> class.
     /// </summary>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncMonadZeroExtensions
     {
         #region Basic Monad functions (Prelude)

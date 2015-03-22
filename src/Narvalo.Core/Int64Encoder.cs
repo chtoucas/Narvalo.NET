@@ -6,6 +6,8 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is done to avoid repetitive code. Only visible from the inside.")]
     public static class Int64Encoder
     {
         private const int BASE25_ALPHABET_LENGTH = 25;
@@ -125,6 +127,8 @@ namespace Narvalo
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidCodeDuplicatedInSameClassRule",
+            Justification = "[Intentionally] The codes are only look-alike.")]
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");

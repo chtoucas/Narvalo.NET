@@ -1289,6 +1289,8 @@ namespace <#= LinqNamespace #>.Internal
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class Func<#= Name #>Extensions
     {
         #region Basic Monad functions (Prelude)
