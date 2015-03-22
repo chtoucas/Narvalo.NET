@@ -1,12 +1,12 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Stabilizing Narvalo.Core API
------------------------------------------
+XXXX-XX-XX - Stabilizing the Narvalo.Core API
+---------------------------------------------
 
 #### Breaking changes
-- To improve usability, merged `Narvalo.Collections` with `Narvalo.Fx`.
-- Moved to `Enforce` all methods from `Require` that do not play well
+- To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`.
+- Moved from `Require` to `Enforce` all methods that do not play well
   with Code Contracts.
 
 #### Enhancements
@@ -14,12 +14,12 @@ XXXX-XX-XX - Stabilizing Narvalo.Core API
   `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
 
 #### Improvements
-- Narvalo.Core now fully passes CA, Gendarme and Code Contracts analysis.
+- Narvalo.Core now fully passes FxCop, Gendarme and Code Contracts analysis.
 - Added more C# documentation.
 
 2015-02-20 - Bugfix for currency types
 --------------------------------------
-**[v0.21]** for Narvalo.Core & Narvalo.Common                         
+- [v0.21] Narvalo.Core & Narvalo.Common                         
 
 #### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we
@@ -33,7 +33,7 @@ XXXX-XX-XX - Stabilizing Narvalo.Core API
 
 2015-02-19 - New currency types
 -------------------------------
-**[v0.20]** for Narvalo.Core & Narvalo.Common
+- [v0.20] Narvalo.Core & Narvalo.Common
 
 #### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
@@ -138,7 +138,7 @@ XXXX-XX-XX - Stabilizing Narvalo.Core API
 
 2014-12-17 - No API changes. Correct a problem with NuGet and Code Contracts
 ----------------------------------------------------------------------------
-**[v0.19.1]** for Narvalo.Core, Narvalo.Common & Narvalo.Web
+- [v0.19.1] Narvalo.Core, Narvalo.Common & Narvalo.Web
 
 #### Bugfixes
 - When adding a NuGet package, the Code Contracts library was incorrectly added
@@ -163,8 +163,8 @@ XXXX-XX-XX - Stabilizing Narvalo.Core API
 
 2014-12-13 - New Code Contracts assemblies. Plenty of small bugfixes
 --------------------------------------------------------------------
-**[v0.19.0]** for Narvalo.Core, Narvalo.Common & Narvalo.Web
-**[v1.0.0-alpha]** for Narvalo.Mvp & Narvalo.Mvp.Web
+- [v0.19.0] Narvalo.Core, Narvalo.Common & Narvalo.Web
+- [v1.0.0-alpha] for Narvalo.Mvp & Narvalo.Mvp.Web
 
 #### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.
