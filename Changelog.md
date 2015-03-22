@@ -1,29 +1,29 @@
 ChangeLog
 =========
 
-### Breaking changes
+#### Breaking changes
 - To improve usability, merged `Narvalo.Collections` with `Narvalo.Fx`.
 - Moved to `Enforce` all methods from `Require` that do not play well
   with Code Contracts.
 
-### Enhancements
+#### Enhancements
 - New types inspired by functional programming:
   `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
 
-### Improvements
+#### Improvements
 - Narvalo.Core now fully passes CA, Gendarme and Code Contracts analysis.
 - Added more C# documentation.
 
 2015-02-20 - Bugfix for currency types
 --------------------------------------
-[v0.21] Narvalo.Core & Narvalo.Common
+**v0.21** Narvalo.Core & Narvalo.Common
 
-### Bugfixes
+#### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we
   registered the alphabetic code but not the currency info since we didn't have
   a numeric code.
 
-### Improvements
+#### Improvements
 - Removed from the currency classes anything related to culture, namely the
   currency symbol methods. We need a better way of handling localization problems.
   Unicode CLDR seems the way to go.
@@ -32,7 +32,7 @@ ChangeLog
 -------------------------------
 [v0.20] Narvalo.Core & Narvalo.Common
 
-### Bugfixes
+#### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
   the prerelease label; otherwise, later on, nuget won't be able to resolve the
   dependency.
@@ -61,7 +61,7 @@ ChangeLog
   of SolutionFile would be absolute but Make.proj expects it to be relative.
   We simply replaced the SolutionFile property used by Make.proj by CustomSolution.
 
-### Enhancements
+#### Enhancements
 - Added classes to represent a currency defined by ISO 4217.
 - Created a PowerShell scripts for all maintenance tasks.
 - Added git commit hash to assembly informations.
@@ -72,7 +72,7 @@ ChangeLog
 - If necessary, automatically donwload and install
   nuget.exe and PSake when running make.ps1 or publish.ps1.
 
-### Improvements
+#### Improvements
 - Prevent creation of retail packages if there are uncommitted changes.
 - Created a shared properties file for F# projects.
 - New project to check the installation of retail packages after they are
@@ -137,12 +137,12 @@ ChangeLog
 ----------------------------------------------------------------------------
 [v0.19.1] Narvalo.Core, Narvalo.Common & Narvalo.Web
 
-### Bugfixes
+#### Bugfixes
 - When adding a NuGet package, the Code Contracts library was incorrectly added
   to the project references. To help NuGet identify _true_ references, we just
   have to use the section "references" in the nuspec files.
 
-### Enhancements
+#### Enhancements
 - Created a solution solely for project management, MSBuild and documentation.
 - Created a local NuGet server to test the creation of NuGet packages.
 - Allowed for local customization of the build process. If we find a file
@@ -152,7 +152,7 @@ ChangeLog
   that do not yet pass CA or SA to use a relaxed set of rules. A warning is
   raised when it is the case, so that we don't forget to fix this later on.
 
-### Improvements
+#### Improvements
 - Packages not for retail get a completely different ID.
   For instance, Narvalo.Core becomes Narvalo.Core.EDGE.
 - It is now possible to unconditionally hide internal classes and methods of an
@@ -163,7 +163,7 @@ ChangeLog
 [v0.19.0] Narvalo.Core, Narvalo.Common & Narvalo.Web
 [v1.0.0-alpha] Narvalo.Mvp & Narvalo.Mvp.Web
 
-### Bugfixes
+#### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.
 - When building a PCL project _from the command line_, MSBuild generates
   output inside a subdirectory of `$(OutDir)`. To correct this, we instruct
@@ -178,13 +178,13 @@ ChangeLog
   by the one in Narvalo.Common. The solution was to use different names for
   both resources.
 
-### Enhancements
+#### Enhancements
 - PSake script for the most common build configurations.
 - Preliminary support for Code Contracts.
 - New portable class library Narvalo.Core which becomes the new base
   instead of Narvalo.Common.
 
-### Improvements
+#### Improvements
 - Brand new MSBuild infrastructure. Extracted all targets and
   properties not required by Visual Studio.
 - Implemented Semantic Versioning rules for assembly versions.
