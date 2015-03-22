@@ -33,6 +33,8 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
@@ -41,6 +43,8 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TRight value)
         {

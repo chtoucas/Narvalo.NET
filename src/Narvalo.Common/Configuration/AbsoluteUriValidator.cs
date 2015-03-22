@@ -4,6 +4,7 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Represents a class that provides validation of an absolute URI value.
@@ -11,6 +12,8 @@ namespace Narvalo.Configuration
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
         /// <copydoc cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
+        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
+            Justification = "[Intentionally] Method marked as MonoTODO.")]
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);

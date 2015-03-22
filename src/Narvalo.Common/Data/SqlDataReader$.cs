@@ -3,6 +3,7 @@
 namespace Narvalo.Data
 {
     using System.Data.SqlClient;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
@@ -79,6 +80,8 @@ namespace Narvalo.Data
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
 
+        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
+            Justification = "[Intentionally] Missing method from Mono with no adequate replacement.")]
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);

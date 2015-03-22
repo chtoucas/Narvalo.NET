@@ -535,6 +535,9 @@ namespace Narvalo.Edu.Monads.Samples
                 comparer ?? EqualityComparer<TKey>.Default);
         }
         
+        
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static MonadValue<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             MonadValue<TSource> seq,
             MonadValue<TInner> inner,
@@ -559,6 +562,8 @@ namespace Narvalo.Edu.Monads.Samples
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static MonadValue<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
             MonadValue<TSource> seq,
             MonadValue<TInner> inner,

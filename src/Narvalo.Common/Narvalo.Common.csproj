@@ -75,7 +75,6 @@
     </Compile>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
-    <Compile Include="ConvertTo.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />

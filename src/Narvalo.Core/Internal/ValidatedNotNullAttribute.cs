@@ -21,6 +21,8 @@ namespace Narvalo.Internal
 #else
     // This class is of no use outside this assembly. In fact, we do expect to have the CONTRACTS_FULL symbol 
     // defined ONLY when we explicitly run the Code Contracts analysis tools.
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Gendarme.Rules.Performance", "AvoidUninstantiatedInternalClassesRule",
+        Justification = "[Ignore] Looking at the decompiled source, I can confirm that this attribute is in use (Require.cs). Honestly only the Code Analysis tool will really use of it.")]
     internal sealed class ValidatedNotNullAttribute : Attribute { }
 #endif
 }

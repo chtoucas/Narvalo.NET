@@ -2,10 +2,13 @@
 
 namespace Narvalo.Fx
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class Switch
     {
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Switch<TLeft, TRight> Left<TLeft, TRight>(TLeft value)
         {
             Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
@@ -13,6 +16,8 @@ namespace Narvalo.Fx
             return Switch<TLeft, TRight>.η(value);
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Switch<TLeft, TRight> Right<TLeft, TRight>(TRight value)
         {
             Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);

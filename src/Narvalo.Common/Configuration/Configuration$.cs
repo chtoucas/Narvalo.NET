@@ -3,13 +3,18 @@
 namespace Narvalo.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Configuration.Configuration"/>.
     /// </summary>
+    [SuppressMessage("Gendarme.Rules.Naming", "AvoidRedundancyInTypeNameRule",
+        Justification = "[Intentionally] The type only contains extension methods.")]
     public static class ConfigurationExtensions
     {
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static T GetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
         {
             Require.Object(@this);

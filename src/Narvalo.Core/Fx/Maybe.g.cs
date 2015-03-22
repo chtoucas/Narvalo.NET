@@ -526,6 +526,9 @@ namespace Narvalo.Fx
                 comparer ?? EqualityComparer<TKey>.Default);
         }
         
+        
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
@@ -549,6 +552,8 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static Maybe<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,

@@ -165,10 +165,13 @@ The following projects use the default ruleset for Code Analysis.
 - Playground
 
 All suppressions must be tagged:
-- Ignore: Tag a false positive.
-- Intentionally
-- GeneratedCode
-- Educational
+- [Ignore] Used to tag a false positive.
+  Also used for unrecognized Code Contracts postconditions; if they are no longer
+  necessary CCCheck will tell us.
+- [Intentionally]
+- [GeneratedCode] Used to mark a suppression related to generated code.
+- [Educational]
+- [REVIEW] or [FIXME]
 
 ### Code Contracts
 
@@ -310,11 +313,6 @@ GenerateTrackingInfo=0
 AllowOptimize=1
 ```
 Ensure that it is copied to the output directory.
-
-### Global suppressions
-
-- [FIXME]
-- [GeneratedCode] to mark a suppression related to generated code.
 
 
 Compilation Symbols

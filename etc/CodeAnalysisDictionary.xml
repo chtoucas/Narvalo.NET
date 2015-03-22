@@ -7,10 +7,12 @@
     <Unrecognized>
     </Unrecognized>
     <Recognized>
-      <!-- Namespaces -->
-      <Word>Autofac</Word>
+      <!-- Narvalo namespaces -->
       <Word>Mvp</Word>
       <Word>Narvalo</Word>
+
+      <!-- External packages -->
+      <Word>Autofac</Word>
       <Word>Serilog</Word>
 
       <!-- Brands -->
@@ -68,7 +70,6 @@
     <Compound>
       <Term CompoundAlternate="LoremIpsum">loremipsum</Term>
       <Term CompoundAlternate="PlainText">plaintext</Term>
-      <Term CompoundAlternate="SuccessOr">successor</Term>
       <Term CompoundAlternate="WebPage">webpage</Term>
       <Term CompoundAlternate="WebSite">website</Term>
     </Compound>

@@ -2,10 +2,13 @@
 
 namespace Narvalo.Fx
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class Either
     {
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
@@ -13,6 +16,8 @@ namespace Narvalo.Fx
             return Either<TLeft, TRight>.η(value);
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight value)
         {
             Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);

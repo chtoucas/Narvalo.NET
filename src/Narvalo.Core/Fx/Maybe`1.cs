@@ -219,6 +219,8 @@ namespace Narvalo.Fx
             }
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Maybe<T>(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -226,6 +228,8 @@ namespace Narvalo.Fx
             return η(value);
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator T(Maybe<T> value)
         {
             Require.NotNull(value, "value");

@@ -1097,6 +1097,9 @@ namespace <#= LinqNamespace #>.Internal
                 comparer ?? EqualityComparer<TKey>.Default);
         }
         
+        
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static <#= Name #><TResult> JoinCore_<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
@@ -1125,6 +1128,8 @@ namespace <#= LinqNamespace #>.Internal
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
+            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static <#= Name #><TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,

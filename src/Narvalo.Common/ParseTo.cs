@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Net;
@@ -211,11 +212,15 @@ namespace Narvalo
     /// </content>
     public static partial class ParseTo
     {
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
             return Enum<TEnum>(value, ignoreCase: true);
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);

@@ -72,6 +72,7 @@ namespace Narvalo
                 return String.Empty;
             }
 
+            // TODO: There is clearly a more performant way of doing this.
             return value.Replace("\n", String.Empty).Replace("\r", String.Empty);
         }
 

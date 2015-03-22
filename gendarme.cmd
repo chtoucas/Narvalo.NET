@@ -26,6 +26,7 @@
 
 %Gendarme% ^
   --v ^
+  --console ^
   --limit %Limit% ^
   --config "%ConfigFile%" ^
   --set %RuleSet% ^
@@ -33,7 +34,8 @@
   --confidence all ^
   --ignore "%IgnoreFile%" ^
   --log "%LogFile%" ^
-  "%RepositoryRoot%\work\bin\Release+Closed\Narvalo.Core.dll"
+  "%RepositoryRoot%\work\bin\Release+Closed\Narvalo.Core.dll" ^
+  "%RepositoryRoot%\work\bin\Release+Closed\Narvalo.Common.dll"
 
 @if %ERRORLEVEL% neq 0 (
     @set Message=*** gendarme.exe failed ***

@@ -4,6 +4,7 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
 
@@ -19,6 +20,8 @@ namespace Narvalo.Configuration
         /// <param name="sectionName">Nom de la section.</param>
         /// <returns>La section de configuration.</returns>
         /// <exception cref="System.Configuration.ConfigurationErrorsException">La section n'a pas été trouvée ou n'est pas du type demandée.</exception>>
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
             Require.NotNullOrEmpty(sectionName, "sectionName");
@@ -35,6 +38,10 @@ namespace Narvalo.Configuration
             return section;
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
+            Justification = "[Intentionally] Missing method from Mono with no adequate replacement.")]
         public static T GetSection<T>(
             string sectionName,
             string configFilePath,
