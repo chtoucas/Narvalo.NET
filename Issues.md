@@ -91,16 +91,16 @@ Code Quality:
 ### Better tested and documented Narvalo.Core assembly.
 
 - Enhancement: Write a T4 template for Monad tests.
-- Improvement: Add more code contracts and arge code coverage.
+- Improvement: Add more code contracts and large code coverage.
 
 ### Better tested and documented Narvalo.Common assembly.
 
-- Improvement: Add more code contracts and arge code coverage.
+- Improvement: Add more code contracts and large code coverage.
 
 ### Better tested and documented Narvalo.Web assembly.
 
 - Enhancement: Add an XML schema for the Narvalo config.
-- Improvement: Add more code contracts and arge code coverage.
+- Improvement: Add more code contracts and large code coverage.
 
 ### Documentation & Literate Programming.
 
