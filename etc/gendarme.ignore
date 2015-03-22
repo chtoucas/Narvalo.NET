@@ -77,7 +77,6 @@ M: TSource Narvalo.Fx.EnumerableExtensions::Reduce(System.Collections.Generic.IE
 R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
 #  -------------------------------------------------------
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
-M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServices.ExceptionDispatchInfo)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch`2::η(TRight)
 
 # ==============================================================================

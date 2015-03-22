@@ -1,12 +1,16 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
+    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
+
 namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Represents the (possibly empty) sum of two types. An instance of the 
@@ -405,9 +409,11 @@ namespace Narvalo.Fx
 
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
+    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>
     {
+        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Left_
         {
             [ContractInvariantMethod]
@@ -417,6 +423,7 @@ namespace Narvalo.Fx
             }
         }
 
+        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Right_
         {
             [ContractInvariantMethod]

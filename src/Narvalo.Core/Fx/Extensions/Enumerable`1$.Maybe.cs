@@ -13,11 +13,6 @@ namespace Narvalo.Fx.Extensions
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
-    public static partial class EnumerableMaybeExtensions { }
-
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that are specific to the <see cref="Maybe{T}"/> class.
-    /// </content>
     public static partial class EnumerableMaybeExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(

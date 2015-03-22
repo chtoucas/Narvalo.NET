@@ -6,21 +6,20 @@ XXXX-XX-XX - Stabilizing the Narvalo.Core API
 
 #### Breaking changes
 - To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`.
-- Moved from `Require` to `Enforce` all methods that do not play well
-  with Code Contracts.
+- Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
 
 #### Enhancements
 - New types inspired by functional programming:
   `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
 
 #### Improvements
-- `Narvalo.Core` now fully passes FxCop, Gendarme and Code Contracts analysis.
+- The Narvalo.Core project now fully passes FxCop, Gendarme and Code Contracts analysis.
 - Added more C# documentation.
 
 2015-02-20 - Bugfix for currency types
 --------------------------------------
 
-_Released version 0.21 of Narvalo.Core & Narvalo.Common._                         
+_Released version 0.21 of Narvalo.Core & Narvalo.Common_                         
 
 #### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we
@@ -35,7 +34,7 @@ _Released version 0.21 of Narvalo.Core & Narvalo.Common._
 2015-02-19 - New currency types
 -------------------------------
 
-_Released version 0.20 of Narvalo.Core & Narvalo.Common._
+_Released version 0.20 of Narvalo.Core & Narvalo.Common_
 
 #### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
@@ -141,7 +140,7 @@ _Released version 0.20 of Narvalo.Core & Narvalo.Common._
 2014-12-17 - No API changes. Correct a problem with NuGet and Code Contracts
 ----------------------------------------------------------------------------
 
-_Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web._
+_Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 #### Bugfixes
 - When adding a NuGet package, the Code Contracts library was incorrectly added
@@ -167,9 +166,9 @@ _Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web._
 2014-12-13 - New Code Contracts assemblies. Plenty of small bugfixes
 --------------------------------------------------------------------
 
-_Released version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web._
+_Released version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
-_Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web._
+_Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web_
 
 #### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.

@@ -29,6 +29,7 @@ namespace Narvalo.Globalization
 
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
+    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(ICurrencyProviderContract))]
     public partial interface ICurrencyProvider { }
 

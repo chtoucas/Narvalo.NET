@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
+    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
+
 namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 
     using Narvalo.Internal;
@@ -20,11 +24,64 @@ namespace Narvalo.Fx
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public abstract partial class Output<T>
     {
+        private readonly bool _isSuccess;
+
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
-        protected Output() { }
+        protected Output(bool isSuccess) { _isSuccess = isSuccess; }
 #else
-        private Output() { }
+        protected Output(bool isSuccess) { _isSuccess = isSuccess;  }
 #endif
+
+        internal bool IsSuccess { get { return _isSuccess; } }
+
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
+        public static explicit operator Output<T>(T value)
+        {
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
+
+            return η(value);
+        }
+
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
+        public static explicit operator Output<T>(ExceptionDispatchInfo exceptionInfo)
+        {
+            Contract.Ensures(Contract.Result<Output<T>>() != null);
+
+            return η(exceptionInfo);
+        }
+
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
+        public static explicit operator T(Output<T> value)
+        {
+            Require.NotNull(value, "value");
+
+            // REVIEW: Should we simply let the cast to Success_ fail?
+            if (!value.IsSuccess)
+            {
+                throw new InvalidCastException(Strings_Core.Output_CannotCastFailureToValue);
+            }
+
+            return ((Success_)value).Value;
+        }
+
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Ignore] An explicit conversion operator must be static.")]
+        public static explicit operator ExceptionDispatchInfo(Output<T> value)
+        {
+            Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
+
+            // REVIEW: Should we simply let the cast to Failure_ fail?
+            if (value.IsSuccess)
+            {
+                throw new InvalidCastException(Strings_Core.Output_CannotCastSuccessToException);
+            }
+
+            return ((Failure_)value).ExceptionInfo;
+        }
 
         public abstract void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
 
@@ -93,6 +150,8 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+            Justification = "[Ignore] Weird. This method is called many times.")]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
@@ -135,6 +194,7 @@ namespace Narvalo.Fx
             private readonly T _value;
 
             public Success_(T value)
+                : base(true)
             {
                 _value = value;
             }
@@ -249,6 +309,7 @@ namespace Narvalo.Fx
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
             public Failure_(ExceptionDispatchInfo exceptionInfo)
+                : base(false)
             {
                 Contract.Requires(exceptionInfo != null);
 
@@ -357,9 +418,11 @@ namespace Narvalo.Fx
 
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
+    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
+        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Failure_
         {
             [ContractInvariantMethod]
@@ -373,6 +436,8 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Output<>))]
     internal abstract class OutputContract<T> : Output<T>
     {
+        protected OutputContract() : base(true) { }
+
         public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
         {
             Contract.Requires(caseSuccess != null);

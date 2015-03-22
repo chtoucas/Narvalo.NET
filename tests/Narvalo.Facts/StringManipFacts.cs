@@ -28,7 +28,8 @@ namespace Narvalo
         }
 
         [Theory]
-        [PropertyData("ReverseSampleData")]
+        [MemberData("ReverseSampleData")]
+        [CLSCompliant(false)]
         public static void Reverse_Succeeds_ForSampleStrings(string expectedValue, string value)
         {
             // Act & Assert

@@ -71,6 +71,7 @@
     <Compile Include="Fx\Enumerable`1%24.cs" />
     <Compile Include="Fx\Enumerator`1%24.cs" />
     <Compile Include="Fx\Extensions\Enumerable`1%24.Maybe.cs" />
+    <Compile Include="Fx\Extensions\Enumerable`1%24.Output.cs" />
     <Compile Include="Fx\Func.cs" />
     <Compile Include="Fx\Extensions\Func`%24.Nullable.cs" />
     <Compile Include="Fx\Extensions\Func`%24.cs" />

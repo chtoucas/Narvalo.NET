@@ -171,4 +171,10 @@
   <data name="VoidOrError_IsNotError" xml:space="preserve">
     <value>A successful outcome has no exception info.</value>
   </data>
+  <data name="Output_CannotCastFailureToValue" xml:space="preserve">
+    <value>Can not cast a output failure to a value.</value>
+  </data>
+  <data name="Output_CannotCastSuccessToException" xml:space="preserve">
+    <value>Can not cast a output success to an exception.</value>
+  </data>
 </root>

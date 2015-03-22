@@ -19,17 +19,17 @@ namespace Narvalo.Internal
         /// even if it cannot be statically proven not to be <see langword="null"/>.
         /// </summary>
         /// <remarks>
-        /// When dealing with external dependencies, CCCheck can not infer
+        /// <para>When dealing with external dependencies, CCCheck can not infer
         /// that the result of a method is not null. When we know for sure that
         /// the result is not null, this extension method is a useful alias
-        /// to inform CCCheck not to worry of <see langword="null"/> values here.
+        /// to inform CCCheck not to worry of <see langword="null"/> values here.</para>
+        /// <para>We can not use a conditional attribute here since the method has 
+        /// a return type. Inlining the method should remove any performance concern.</para>
         /// </remarks>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="this">The input object.</param>
         /// <returns>The untouched input.</returns>
         [DebuggerHidden]
-        // NB: We can not use a conditional attribute here since the method has a return type.
-        // Inlining the method should remove any performance concern.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T AssumeNotNull<T>(this T @this) where T : class
         {

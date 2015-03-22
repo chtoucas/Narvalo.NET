@@ -138,7 +138,9 @@ namespace Narvalo
         }
     }
 
-    // Provides user-friendly access to some of the most common currencies.
+    /// <content>
+    /// Provides user-friendly access to some of the most common currencies.
+    /// </content>
     public partial class Currency
     {
         // We aggressively cache the most common currencies.
@@ -310,7 +312,9 @@ namespace Narvalo
         }
     }
 
-    // Implements the IEquatable<Currency> interface.
+    /// <content>
+    /// Implements the <see cref="IEquatable{Currency}"/> interface.
+    /// </content>
     public partial class Currency
     {
         public static bool operator ==(Currency left, Currency right)

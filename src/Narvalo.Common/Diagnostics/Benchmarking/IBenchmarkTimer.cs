@@ -16,6 +16,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
+    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(IBenchmarkTimerContract))]
     public partial interface IBenchmarkTimer { }
 

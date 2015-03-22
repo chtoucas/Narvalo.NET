@@ -89,6 +89,24 @@ namespace Narvalo {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not cast a output failure to a value..
+        /// </summary>
+        internal static string Output_CannotCastFailureToValue {
+            get {
+                return ResourceManager.GetString("Output_CannotCastFailureToValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not cast a output success to an exception..
+        /// </summary>
+        internal static string Output_CannotCastSuccessToException {
+            get {
+                return ResourceManager.GetString("Output_CannotCastSuccessToException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A bad outcome has no value..
         /// </summary>
         internal static string Output_FailureHasNoValue {

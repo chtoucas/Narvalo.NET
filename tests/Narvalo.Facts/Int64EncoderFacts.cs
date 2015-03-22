@@ -568,7 +568,8 @@ namespace Narvalo
         }
 
         [Theory]
-        [PropertyData("Base58SampleData")]
+        [MemberData("Base58SampleData")]
+        [CLSCompliant(false)]
         public static void FromBase58String_Succeeds_ForSampleData(string value, long expectedValue)
         {
             // Act & Assert
@@ -587,7 +588,8 @@ namespace Narvalo
         }
 
         [Theory]
-        [PropertyData("FlickrBase58SampleData")]
+        [MemberData("FlickrBase58SampleData")]
+        [CLSCompliant(false)]
         public static void FromFlickrBase58String_Succeeds_ForSampleData(string value, long expectedValue)
         {
             // Act & Assert
@@ -606,7 +608,8 @@ namespace Narvalo
         }
 
         [Theory]
-        [PropertyData("Base58SampleData")]
+        [MemberData("Base58SampleData")]
+        [CLSCompliant(false)]
         public static void ToBase58String_Succeeds_ForSampleData(string expectedValue, long value)
         {
             // Act & Assert
@@ -625,7 +628,8 @@ namespace Narvalo
         }
 
         [Theory]
-        [PropertyData("FlickrBase58SampleData")]
+        [MemberData("FlickrBase58SampleData")]
+        [CLSCompliant(false)]
         public static void ToFlickrBase58String_Succeeds_ForSampleData(string expectedValue, long value)
         {
             // Act & Assert

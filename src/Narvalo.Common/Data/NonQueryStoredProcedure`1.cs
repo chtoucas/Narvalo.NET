@@ -1,5 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
+    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
+
 namespace Narvalo.Data
 {
     using System.Data;
@@ -104,6 +109,7 @@ namespace Narvalo.Data
 
 #if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
 
+    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(NonQueryStoredProcedureContract<>))]
     public abstract partial class NonQueryStoredProcedure<TParameters>
     {
