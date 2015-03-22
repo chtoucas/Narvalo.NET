@@ -74,7 +74,7 @@ namespace Narvalo.Runtime.Reliability
         {
             if (_closed)
             {
-                throw new InvalidOperationException("TODO");
+                throw new InvalidOperationException("XXX");
             }
         }
     }

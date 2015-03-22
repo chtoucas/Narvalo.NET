@@ -26,6 +26,7 @@ namespace Narvalo.Web
               List<string> list,
               string entryText)
         {
+            // FIXME: Replace the call to Enum.HasFlag
             if (verbs.HasFlag(match))
             {
                 list.Add(entryText);

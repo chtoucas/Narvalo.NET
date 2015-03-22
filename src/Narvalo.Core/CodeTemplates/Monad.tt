@@ -8,8 +8,7 @@
     // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
     // Exposing nested generics is the price to pay for monads.
 
-    // TODO:
-    // Protect the various property's setters.
+    // TODO: Protect the various property's setters.
 
     // The following is going to change:
     // Some documentation is almost blindly copied from Haskell.

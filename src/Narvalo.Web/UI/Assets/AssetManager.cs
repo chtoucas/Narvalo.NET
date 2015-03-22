@@ -10,7 +10,7 @@ namespace Narvalo.Web.UI.Assets
 
     using Narvalo.Web.Configuration;
 
-    // FIXME: Concurrency guard is broken.
+    // FIXME: The concurrency doulbe check is broken. Add volatile to the Initialized... fields?
     public static class AssetManager
     {
         private static readonly object s_Lock = new Object();

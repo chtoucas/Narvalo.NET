@@ -122,7 +122,7 @@
     <Compile Include="HttpVersions.cs" />
     <Compile Include="Html\Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
-    <Compile Include="Optimization\AggressiveWhiteSpaceBuster.cs" />
+    <Compile Include="Optimization\UnsafeWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\DefaultWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\IWhiteSpaceBuster.cs" />

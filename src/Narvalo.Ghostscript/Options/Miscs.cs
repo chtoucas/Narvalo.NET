@@ -17,7 +17,7 @@ namespace Narvalo.GhostScript.Options
         NoGC,
         NoOuterSave,
 
-        // FIXME
+        // FIXME: Why did I tagged this before?
         NoSafer,
         DelayedSave = NoSafer,
         Safer,

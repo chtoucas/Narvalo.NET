@@ -37,7 +37,7 @@ namespace Narvalo.Runtime.Reliability
                 }
                 catch (GuardException)
                 {
-                    throw NewAggregateGuardException("TODO", exceptions);
+                    throw NewAggregateGuardException("XXX", exceptions);
                 }
                 catch (Exception ex)
                 {
@@ -45,7 +45,7 @@ namespace Narvalo.Runtime.Reliability
 
                     if (!_policy.MayRetryAfter(ex))
                     {
-                        throw NewAggregateGuardException("TODO", exceptions);
+                        throw NewAggregateGuardException("XXX", exceptions);
                     }
 
                     // On n'attend pas si on a déjà atteint la limite d'essais acceptés.
@@ -63,11 +63,11 @@ namespace Narvalo.Runtime.Reliability
         {
             if (exceptions.Count > 0)
             {
-                return new AggregateGuardException("TODO", new AggregateException(exceptions));
+                return new AggregateGuardException("XXX", new AggregateException(exceptions));
             }
             else
             {
-                return new AggregateGuardException("TODO");
+                return new AggregateGuardException("XXX");
             }
         }
 
@@ -77,7 +77,7 @@ namespace Narvalo.Runtime.Reliability
             {
                 TimerCallback cb = (state) => { (state as ManualResetEvent).Set(); };
 
-                // FIXME var dueTime = (long)duration.TotalMilliseconds;
+                // FIXME: var dueTime = (long)duration.TotalMilliseconds;
                 var dueTime = (int)duration.TotalMilliseconds;
 
                 using (var tmr = new Timer(cb, resetEvent, dueTime, Timeout.Infinite))

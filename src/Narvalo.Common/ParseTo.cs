@@ -23,6 +23,7 @@ namespace Narvalo
             return Boolean(value, BooleanStyles.Default);
         }
 
+        // FIXME: Replace all calls to Enum.HasFlag
         public static bool? Boolean(string value, BooleanStyles style)
         {
             if (value == null) { return null; }

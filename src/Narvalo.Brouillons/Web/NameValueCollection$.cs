@@ -35,8 +35,7 @@ namespace Narvalo.Web
             //                query.AllKeys
             //                    .Where(key => !String.IsNullOrEmpty(query[key]))
             //                    .Select(
-            //                        key => String.Format(
-            //                            CultureInfo.InvariantCulture,
+            //                        key => Format.InvariantCulture(
             //                            "{0}={1}",
             //                            HttpUtility.UrlEncode(key),
             //                            HttpUtility.UrlEncode(query[key]))

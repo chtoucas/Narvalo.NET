@@ -28,7 +28,7 @@ namespace Narvalo.Web.UI.Assets
 
             base.Initialize(name, config);
 
-            // FIXME: On vérifie qu'il n'y a pas de champs inconnu restant.
+            // FIXME: Vérifier qu'il n'y a pas de champs inconnu restant.
             config.Remove("description");
 
             if (config.Count > 0)

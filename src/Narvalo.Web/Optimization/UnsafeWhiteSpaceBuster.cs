@@ -7,8 +7,9 @@ namespace Narvalo.Web.Optimization
 
     /// <summary>
     /// Représente un nettoyeur agressif d'espaces blancs.
+    /// Unsafe because aggressive.
     /// </summary>
-    public sealed class AggressiveWhiteSpaceBuster : IWhiteSpaceBuster
+    public sealed class UnsafeWhiteSpaceBuster : IWhiteSpaceBuster
     {
         private const string HTML_ELEMENTS = @"
             (

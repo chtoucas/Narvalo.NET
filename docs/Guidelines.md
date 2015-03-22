@@ -91,12 +91,10 @@ Periodic Checklist
 ### Unfinished Work
 
 Task List
-- FIXME
-- TODO
-- REVIEW
-- XXX
-
-Global suppression files.
+- FIXME:
+- TODO:
+- REVIEW:
+- XXX:
 
 ### NuGet Updates
 
@@ -138,31 +136,10 @@ the content of "etc\Strict.SourceAnalysis".
 
 For a detailed description of the rules, check out http://www.stylecop.com/docs/.
 
-_Documentation rules are temporary disabled._
-
-Disabled rules:
-- SA1101:PrefixLocalCallsWithThis
-- SA1121:UseBuiltInTypeAlias
-- SA1126:PrefixCallsCorrectly
-- SA1306:FieldNamesMustBeginWithLowerCaseLetter
-- SA1309:FieldNamesMustNotBeginWithUnderscore
-- SA1310:FieldNamesMustNotContainUnderscore
-- SA1400:AccessModifierMustBeDeclared
-- SA1500:CurlyBracketsForMultiLineStatementsMustNotShareLine
-- SA1501:StatementMustNotBeOnASingleLine
-- SA1502:ElementMustNotBeOnASingleLine
-- SA1634:FileHeaderMustShowCopyright
-
-
 Code Quality
 ------------
 
 ### FxCop
-
-The following projects use the default ruleset for Code Analysis.
-- Narvalo.Brouillons
-- Prose
-- Playground
 
 All suppressions must be tagged:
 - [Ignore] Used to tag a false positive.
@@ -172,6 +149,10 @@ All suppressions must be tagged:
 - [GeneratedCode] Used to mark a suppression related to generated code.
 - [Educational]
 - [REVIEW] or [FIXME]
+
+The following projects should the default ruleset from Code Analysis.
+- Narvalo.Brouillons
+- Playground
 
 ### Code Contracts
 
@@ -183,9 +164,9 @@ All suppressions must be tagged:
 
 #### Object Invariants
 
-Wrap any object invariants method with a compiler conditional clause :
+Wrap any object invariants methods and contract classes with a compiler conditional clause:
 ```csharp
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL && !CODE_ANALYSIS
     [ContractInvariantMethod]
     void ObjectInvariants()
     {

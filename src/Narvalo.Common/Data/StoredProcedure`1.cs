@@ -78,7 +78,7 @@ namespace Narvalo.Data
 
         protected abstract void PrepareParameters(SqlParameterCollection parameters);
 
-        [SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities",
+        [SuppressMessage("Microsoft.Security", "CA2100:ReviewSqlQueriesForSecurityVulnerabilities",
             Justification = "[Intentionally] The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand_(SqlConnection connection)
         {

@@ -56,7 +56,7 @@ namespace Narvalo.Fx.Extensions
 
             foreach (var m in @this)
             {
-                // REVIEW: Is this the correct behaviour when m is null?
+                // REVIEW: Is this the expected behaviour when m is null?
                 if (m == null || !m.IsSome)
                 {
                     return Maybe<IEnumerable<TSource>>.None;

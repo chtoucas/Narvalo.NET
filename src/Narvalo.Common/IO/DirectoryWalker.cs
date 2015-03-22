@@ -42,7 +42,8 @@ namespace Narvalo.IO
 
                 if (directory == null)
                 {
-                    throw new InvalidOperationException("FIXME");
+                    // XXX: Fix the message 
+                    throw new InvalidOperationException("XXX");
                 }
 
                 OnDirectoryStart(directory);

@@ -35,7 +35,7 @@ namespace Narvalo.Globalization
                 case "PAB": return "\x0042\x002f\x002e";    // B/.
                 case "CHF": return "\x0043\x0048\x0046";    // CHF
                 case "ALL": return "\x004c\x0065\x006b";    // Lek
-                case "TWD": return "\x004e\x0054\x0024";    // NT$      REVIEW
+                case "TWD": return "\x004e\x0054\x0024";    // NT$      REVIEW Taïwan
                 case "DOP": return "\x0052\x0044\x0024";    // RD$
                 case "PEN": return "\x0053\x002f\x002e";    // S/.
                 case "TTD": return "\x0054\x0054\x0024";    // TT$
@@ -50,7 +50,7 @@ namespace Narvalo.Globalization
                 case "VEF": return "\x0042\x0073";          // Bs
                 case "NIO": return "\x0043\x0024";          // C$
                 case "HUF": return "\x0046\x0074";          // Ft
-                ////case "PYG": return "\x0047\x0073";        // Gs       REVIEW
+                ////case "PYG": return "\x0047\x0073";        // Gs       REVIEW PYG
                 case "JMD": return "\x004a\x0024";          // J$
                 case "BAM": return "\x004b\x004d";          // KM
                 case "CZK": return "\x004b\x010d";          // Kč

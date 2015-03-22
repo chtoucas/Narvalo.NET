@@ -51,7 +51,7 @@ namespace Narvalo.Web.Security
 
             if (status == MembershipCreateStatus.Success) {
                 Repository.SaveOrUpdate(
-                    "FIXME",
+                    "XXX",
                     userName,
                     new NarvaloProfile {
                         Email = user.Email,
@@ -74,7 +74,7 @@ namespace Narvalo.Web.Security
 
             if (status == MembershipCreateStatus.Success) {
                 Repository.SaveOrUpdate(
-                    "FIXME",
+                    "XXX",
                     userName,
                     new NarvaloProfile {
                         Email = user.Email,

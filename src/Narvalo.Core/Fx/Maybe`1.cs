@@ -332,6 +332,9 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the <see cref="IEnumerable{T}"/> interface.
     /// </content>
+    /// <remarks>
+    /// REVIEW: Is it such a good idea to implement <see cref="IEnumerable{T}"/>?
+    /// </remarks>
     public partial class Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",

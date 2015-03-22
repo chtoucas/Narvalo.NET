@@ -63,7 +63,6 @@ namespace Narvalo.Diagnostics.Benchmarking
             return new BenchmarkMetricCollection(comparison.Name, metrics.ToList());
         }
 
-        // REVIEW: Theory.
         // REVIEW: retourner plutôt un BenchMetricCollection ?
         public IEnumerable<BenchmarkMetricCollection> Process<T>(
             Type type,
@@ -133,7 +132,6 @@ namespace Narvalo.Diagnostics.Benchmarking
             }
         }
 
-        // FIXME: Theory.
         private IEnumerable<Benchmark> FindComparatives_<T>(Type type, T value)
         {
             MethodInfo[] methods = type.GetMethods(DiscoveryBindings);

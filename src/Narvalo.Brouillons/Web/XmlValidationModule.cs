@@ -80,7 +80,6 @@ namespace Narvalo.Web
             }
         }
 
-        // FIXME
         private static IXmlValidationRenderer CreateRenderer_(string typeName)
         {
             Require.NotNullOrEmpty(typeName, "typeName");

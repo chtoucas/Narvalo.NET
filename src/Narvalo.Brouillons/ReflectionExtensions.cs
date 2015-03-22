@@ -26,7 +26,6 @@ namespace Narvalo
         ////    return Maybe.Create(type.GetConstructor(Type.EmptyTypes));
         ////}
 
-        //// FIXME
         ////public static void GetObject(Type type)
         ////{
         ////    // Construction du type.

@@ -15,6 +15,7 @@ namespace Narvalo.Globalization
 
         public IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
         {
+            // FIXME: Replace all calls to Enum.HasFlag
             if (types.HasFlag(CurrencyTypes.AllCurrencies)) {
                 return CurrentCurrencies.Concat(LegacyCurrencies);
             }

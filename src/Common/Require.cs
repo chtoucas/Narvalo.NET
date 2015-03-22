@@ -87,6 +87,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[Intentionally] Helper method shared among projects.")]
+        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
+            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null)
@@ -106,6 +108,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[Intentionally] Helper method shared among projects.")]
+        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
+            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             if (String.IsNullOrEmpty(value))
@@ -129,6 +133,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[Intentionally] Helper method shared among projects.")]
+        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
+            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             if (String.IsNullOrWhiteSpace(value))
