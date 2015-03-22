@@ -2,10 +2,10 @@
 # ====================
 #
 # R: Full name of a rule to be filtered.
-# T: Used to filter out a namespace qualified type name.
-# M: Used to filter out a method.
+# T: Used to filter out a fully qualified type name.
+# M: Used to filter out a type member.
 # N: Used to filter out a namespace.
-# A: Used to filter out an assembly (the extension can be omitted).
+# A: Used to filter out an assembly.
 #
 # NB: An ignore-file can be generated automatically (using gd2i) from an XML
 # defect list produced by Gendarme.
@@ -15,16 +15,15 @@
 # https://github.com/mono/mono-tools/blob/master/gendarme/self-test.ignore
 
 # Narvalo.Core
-# ============
+# ==============================================================================
 
 R: Gendarme.Rules.Design.Generic.AvoidMethodWithUnusedGenericTypeRule
 #  ------------------------------------------------------------------
-# JUSTIFICATION =
+# JUSTIFICATION = [Intentionally] There is no way we can achieve the same thing with type parameter inference.
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either::Left(TLeft)
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either::Right(TRight)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch::Left(TLeft)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch::Right(TRight)
-# JUSTIFICATION =
 M: System.Collections.Generic.IEnumerable`1<TSource> Narvalo.Fx.Sequence::Empty()
 
 R: Gendarme.Rules.Design.Generic.DoNotDeclareStaticMembersOnGenericTypesRule
@@ -44,7 +43,7 @@ N: Narvalo.Fx.Extensions.Internal
 
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
 #  -------------------------------------------------------------------
-# JUSTIFICATION = [Ignore] We do initialize correctly the exceptions, but Gendarme does not see that.
+# JUSTIFICATION = [Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.
 M: System.Void Narvalo.Enforce::GreaterThan(T,T,System.String)
 M: System.Void Narvalo.Enforce::GreaterThanOrEqualTo(T,T,System.String)
 M: System.Void Narvalo.Enforce::InRange(T,T,T,System.String)
@@ -64,16 +63,6 @@ M: System.Void Narvalo.Require::NotNull(T,System.String)
 M: System.Void Narvalo.Require::NotNullOrEmpty(System.String,System.String)
 M: System.Void Narvalo.Require::NotNullOrWhiteSpace(System.String,System.String)
 
-R: Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule
-#  -------------------------------------------------------------------
-# JUSTIFICATION =
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Map(System.Func`2<TRight,TResult>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Map(System.Func`2<TRight,TResult>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Map(System.Func`2<TRight,TResult>)
-
 R: Gendarme.Rules.Naming.UseCorrectCasingRule
 #  ------------------------------------------
 # JUSTIFICATION = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
@@ -87,20 +76,51 @@ M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(T)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServices.ExceptionDispatchInfo)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::μ(Narvalo.Fx.Output`1<Narvalo.Fx.Output`1<T>>)
 
-R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
-#  -----------------------------------------------------------------
-# JUSTIFICATION =
-T: Narvalo.Internal.ValidatedNotNullAttribute
+R: Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule
+#  -------------------------------------------------------------------
+# JUSTIFICATION = [REVIEW]
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Map(System.Func`2<TRight,TResult>)
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Map(System.Func`2<TRight,TResult>)
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
+M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Map(System.Func`2<TRight,TResult>)
+
+R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
+#  ---------------------------------------------------------------
+# JUSTIFICATION = [FIXME] Correct. See how it is done in System.Linq.Enumerable.
+M: Narvalo.Fx.Maybe`1<TSource> Narvalo.Fx.EnumerableExtensions::LastOrNone(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`2<TSource,System.Boolean>)
+M: TSource Narvalo.Fx.EnumerableExtensions::Reduce(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`3<TSource,TSource,TSource>,System.Func`2<TSource,System.Boolean>)
 
 R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
 #  -------------------------------------------------------
-# JUSTIFICATION =
+# JUSTIFICATION = [REVIEW]
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServices.ExceptionDispatchInfo)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch`2::η(TRight)
 
+R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
+#  -----------------------------------------------------------------
+# JUSTIFICATION = [REVIEW]
+T: Narvalo.Internal.ValidatedNotNullAttribute
+
+R: Gendarme.Rules.Smells.AvoidCodeDuplicatedInSameClassRule
+#  --------------------------------------------------------
+# JUSTIFICATION = [REVIEW]
+M: System.Int64 Narvalo.Int64Encoder::FromFlickrBase58String(System.String)
+
 R: Gendarme.Rules.Smells.AvoidLongParameterListsRule
 #  -------------------------------------------------
-# JUSTIFICATION = [Intentionally] Correct but these methods are helper methods only used privately.
+# JUSTIFICATION = [Intentionally] Correct but these are helper methods for private use only.
 M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::JoinCore_(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,TInner,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)
 M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::GroupJoinCore_(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,Narvalo.Fx.Maybe`1<TInner>,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)
+
+R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
+#  ----------------------------------------------------
+# JUSTIFICATION = [REVIEW]
+T: Narvalo.Fx.Either
+T: Narvalo.Fx.Switch
+T: Narvalo.Int64Encoder
+T: Narvalo.Fx.Extensions.FuncMaybeExtensions
+T: Narvalo.Fx.Extensions.FuncNullableExtensions
+T: Narvalo.Fx.Extensions.PredicateExtensions

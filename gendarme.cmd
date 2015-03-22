@@ -28,7 +28,7 @@
   --v ^
   --limit %Limit% ^
   --config "%ConfigFile%" ^
-  --set narvalo ^
+  --set %RuleSet% ^
   --severity all ^
   --confidence all ^
   --ignore "%IgnoreFile%" ^
