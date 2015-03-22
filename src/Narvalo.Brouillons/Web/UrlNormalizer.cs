@@ -13,7 +13,7 @@ namespace Narvalo.Web
         static readonly Regex MultipleDashRegex_ = new Regex(@"\-{2,}", RegexOptions.Compiled);
 
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "[Intentionally] It is safer to only use lowercase characters in URIs.")]
+            Justification = "[Intentionally] It is safer to use lowercase characters in URIs.")]
         public static string NormalizePart(string value)
         {
             Require.NotNullOrEmpty(value, "value");

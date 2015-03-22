@@ -3,13 +3,14 @@
 #
 # R: Full name of a rule to be filtered.
 # T: Used to filter out a namespace qualified type name.
-# N: Used to filter out a namespace.
 # M: Used to filter out a method.
-# A: Used  to filter out an assembly (the extension can be omitted).
+# N: Used to filter out a namespace.
+# A: Used to filter out an assembly (the extension can be omitted).
 #
-# An  ignore-file can be generated automatically (using gd2i) from a XML defect list produced by Gendarme.
+# NB: An ignore-file can be generated automatically (using gd2i) from an XML
+# defect list produced by Gendarme.
 #
-# Samples:
+# Sample ignore files from the Mono project:
 # https://github.com/mono/mono-tools/blob/master/gendarme/mono-options.ignore
 # https://github.com/mono/mono-tools/blob/master/gendarme/self-test.ignore
 
@@ -17,19 +18,33 @@
 # ============
 
 R: Gendarme.Rules.Design.Generic.AvoidMethodWithUnusedGenericTypeRule
+#  ------------------------------------------------------------------
+# JUSTIFICATION =
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either::Left(TLeft)
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either::Right(TRight)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch::Left(TLeft)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch::Right(TRight)
+# JUSTIFICATION =
 M: System.Collections.Generic.IEnumerable`1<TSource> Narvalo.Fx.Sequence::Empty()
 
 R: Gendarme.Rules.Design.Generic.DoNotDeclareStaticMembersOnGenericTypesRule
+#  -------------------------------------------------------------------------
+# JUSTIFICATION = [Ignore] An explicit conversion operator must be static.
 M: Narvalo.Fx.Maybe`1<T> Narvalo.Fx.Maybe`1::op_Explicit(T)
 M: T Narvalo.Fx.Maybe`1::op_Explicit(Narvalo.Fx.Maybe`1<T>)
 M: System.Boolean Narvalo.Range`1::op_Equality(Narvalo.Range`1<T>,Narvalo.Range`1<T>)
 M: System.Boolean Narvalo.Range`1::op_Inequality(Narvalo.Range`1<T>,Narvalo.Range`1<T>)
 
+R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
+#  --------------------------------------------------------------------
+# JUSTIFICATION = [Intentionally] Exposing nested generics is the price to pay for monads.
+N: Narvalo.Fx
+N: Narvalo.Fx.Extensions
+N: Narvalo.Fx.Extensions.Internal
+
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
+#  -------------------------------------------------------------------
+# JUSTIFICATION = [Ignore] We do initialize correctly the exceptions, but Gendarme does not see that.
 M: System.Void Narvalo.Enforce::GreaterThan(T,T,System.String)
 M: System.Void Narvalo.Enforce::GreaterThanOrEqualTo(T,T,System.String)
 M: System.Void Narvalo.Enforce::InRange(T,T,T,System.String)
@@ -50,6 +65,8 @@ M: System.Void Narvalo.Require::NotNullOrEmpty(System.String,System.String)
 M: System.Void Narvalo.Require::NotNullOrWhiteSpace(System.String,System.String)
 
 R: Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule
+#  -------------------------------------------------------------------
+# JUSTIFICATION =
 M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
 M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Map(System.Func`2<TRight,TResult>)
 M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
@@ -58,9 +75,12 @@ M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Bind(System.Fu
 M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Map(System.Func`2<TRight,TResult>)
 
 R: Gendarme.Rules.Naming.UseCorrectCasingRule
+#  ------------------------------------------
+# JUSTIFICATION = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
 N: Narvalo.Fx
 N: Narvalo.Fx.Extensions
 N: Narvalo.Fx.Extensions.Internal
+# JUSTIFICATION = [Intentionally] Standard naming convention from mathematics. Only used internally.
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TLeft)
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(T)
@@ -68,13 +88,19 @@ M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServic
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::μ(Narvalo.Fx.Output`1<Narvalo.Fx.Output`1<T>>)
 
 R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
+#  -----------------------------------------------------------------
+# JUSTIFICATION =
 T: Narvalo.Internal.ValidatedNotNullAttribute
 
 R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
+#  -------------------------------------------------------
+# JUSTIFICATION =
 M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
 M: Narvalo.Fx.Output`1<T> Narvalo.Fx.Output`1::η(System.Runtime.ExceptionServices.ExceptionDispatchInfo)
 M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch`2::η(TRight)
 
 R: Gendarme.Rules.Smells.AvoidLongParameterListsRule
+#  -------------------------------------------------
+# JUSTIFICATION = [Intentionally] Correct but these methods are helper methods only used privately.
 M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::JoinCore_(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,TInner,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)
 M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::GroupJoinCore_(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,Narvalo.Fx.Maybe`1<TInner>,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)

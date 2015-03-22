@@ -11,6 +11,8 @@
 @set ConfigFile=%RepositoryRoot%\etc\gendarme.xml
 @set IgnoreFile=%RepositoryRoot%\etc\gendarme.ignore
 @set LogFile=%RepositoryRoot%\gendarme.log
+@set Limit=100
+@set RuleSet=narvalo-strict
 
 @if not exist %Gendarme% (
     @set Message=*** Looks like gendarme.exe is not installed on your system ***
@@ -24,7 +26,7 @@
 
 %Gendarme% ^
   --v ^
-  --limit 20 ^
+  --limit %Limit% ^
   --config "%ConfigFile%" ^
   --set narvalo ^
   --severity all ^

@@ -27,7 +27,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The function that always returns the default value.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Func<T> AlwaysDefault
         {
             get
@@ -43,7 +43,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The predicate that always evaluates to false.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Func<T, bool> AlwaysFalse
         {
             get
@@ -59,7 +59,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The predicate that always evaluates to true.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Func<T, bool> AlwaysTrue
         {
             get
@@ -75,7 +75,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The identity function.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Func<T, T> Identity
         {
             get
@@ -91,7 +91,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <value>The empty action.</value>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] A generic version of a static property is simply not possible.")]
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Action<T> Ignore
         {
             get
