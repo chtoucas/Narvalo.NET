@@ -20,7 +20,7 @@ XXXX-XX-XX - Stabilizing the Narvalo.Core API
 2015-02-20 - Bugfix for currency types
 --------------------------------------
 
-Released version 0.21 of Narvalo.Core & Narvalo.Common.                         
+_Released version 0.21 of Narvalo.Core & Narvalo.Common._                         
 
 #### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we
@@ -35,7 +35,7 @@ Released version 0.21 of Narvalo.Core & Narvalo.Common.
 2015-02-19 - New currency types
 -------------------------------
 
-Released version 0.20 of Narvalo.Core & Narvalo.Common.
+_Released version 0.20 of Narvalo.Core & Narvalo.Common._
 
 #### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
@@ -141,7 +141,7 @@ Released version 0.20 of Narvalo.Core & Narvalo.Common.
 2014-12-17 - No API changes. Correct a problem with NuGet and Code Contracts
 ----------------------------------------------------------------------------
 
-Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
+_Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web._
 
 #### Bugfixes
 - When adding a NuGet package, the Code Contracts library was incorrectly added
@@ -167,9 +167,9 @@ Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 2014-12-13 - New Code Contracts assemblies. Plenty of small bugfixes
 --------------------------------------------------------------------
 
-Released version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
+_Released version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web._
 
-Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web.
+_Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web._
 
 #### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.
