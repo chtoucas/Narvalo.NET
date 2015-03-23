@@ -9,13 +9,13 @@ namespace Narvalo.Fx
     {
         private static readonly VoidOrBreak s_Success = new VoidOrBreak();
 
-        private readonly bool _isBreak;
+        private readonly bool _aborted;
 
         private VoidOrBreak() { }
 
-        private VoidOrBreak(bool isBreak)
+        private VoidOrBreak(bool arboted)
         {
-            _isBreak = isBreak;
+            _aborted = arboted;
         }
 
         public static VoidOrBreak Success
@@ -28,7 +28,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public bool IsBreak { get { return _isBreak; } }
+        public bool Arboted { get { return _aborted; } }
 
         public virtual string Reason
         {

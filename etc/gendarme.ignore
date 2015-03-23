@@ -59,25 +59,11 @@ N: Narvalo.Configuration
 # Narvalo.Core (REVIEW or FIXME)
 # ==============================================================================
 
-R: Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule
-#  -------------------------------------------------------------------
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Empty_::Map(System.Func`2<TRight,TResult>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Left_::Map(System.Func`2<TRight,TResult>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Bind(System.Func`2<TRight,Narvalo.Fx.Switch`2<TLeft,TResult>>)
-M: Narvalo.Fx.Switch`2<TLeft,TResult> Narvalo.Fx.Switch`2/Right_::Map(System.Func`2<TRight,TResult>)
-
 R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
 #  ---------------------------------------------------------------
 # [FIXME] Correct. See how it is done in System.Linq.Enumerable.
 M: Narvalo.Fx.Maybe`1<TSource> Narvalo.Fx.EnumerableExtensions::LastOrNone(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`2<TSource,System.Boolean>)
 M: TSource Narvalo.Fx.EnumerableExtensions::Reduce(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`3<TSource,TSource,TSource>,System.Func`2<TSource,System.Boolean>)
-
-R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
-#  -------------------------------------------------------
-M: Narvalo.Fx.Either`2<TLeft,TRight> Narvalo.Fx.Either`2::η(TRight)
-M: Narvalo.Fx.Switch`2<TLeft,TRight> Narvalo.Fx.Switch`2::η(TRight)
 
 # ==============================================================================
 # Narvalo.Common (REVIEW or FIXME)
