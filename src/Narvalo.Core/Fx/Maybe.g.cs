@@ -637,7 +637,7 @@ namespace Narvalo.Fx
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action)
         {
@@ -656,10 +656,10 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            @this.Then(Maybe.Unit).Apply(_ => action.Invoke());
+            @this.Then(Maybe.Unit).Invoke(_ => action.Invoke());
         }
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action,
             Action caseNone)

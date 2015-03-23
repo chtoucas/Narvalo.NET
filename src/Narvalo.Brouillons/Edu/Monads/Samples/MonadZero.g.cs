@@ -617,7 +617,7 @@ namespace Narvalo.Edu.Monads.Samples
             return @this.Coalesce(predicate, MonadZero<TResult>.Zero, other);
         }
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this MonadZero<TSource> @this,
             Action<TSource> action)
         {
@@ -635,10 +635,10 @@ namespace Narvalo.Edu.Monads.Samples
             Require.Object(@this);
             Require.NotNull(action, "action");
 
-            @this.Then(MonadZero.Unit).Apply(_ => action.Invoke());
+            @this.Then(MonadZero.Unit).Invoke(_ => action.Invoke());
         }
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this MonadZero<TSource> @this,
             Action<TSource> action,
             Action caseZero)
@@ -1024,7 +1024,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Apply(
+                    m.Invoke(
                         _ =>
                         {
                             if (_ == true)

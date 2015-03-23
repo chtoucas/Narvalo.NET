@@ -37,7 +37,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public abstract void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
+        public abstract void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise);
 
         // Bind to the left value.
         public abstract Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM);
@@ -51,7 +51,7 @@ namespace Narvalo.Fx
         // Map the right value.
         public abstract Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector);
 
-        public abstract TResult Match<TResult>(
+        public abstract TResult Map<TResult>(
             Func<TLeft, TResult> caseLeft,
             Func<TRight, TResult> caseRight,
             Func<TResult> otherwise);
@@ -102,14 +102,14 @@ namespace Narvalo.Fx
                 return Switch<TLeft, TResult>.Empty;
             }
 
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(otherwise, "otherwise");
 
                 otherwise.Invoke();
             }
 
-            public override TResult Match<TResult>(
+            public override TResult Map<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
@@ -197,16 +197,16 @@ namespace Narvalo.Fx
                 return new Switch<TLeft, TResult>.Left_(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
                 caseLeft.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
-            public override TResult Match<TResult>(
+            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            public override TResult Map<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
@@ -311,16 +311,16 @@ namespace Narvalo.Fx
                 return Switch<TRight, TLeft>.η(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseRight, "caseRight");
 
                 caseRight.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Apply" />
-            public override TResult Match<TResult>(
+            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            public override TResult Map<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
@@ -399,7 +399,7 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Switch<,>))]
     internal abstract class SwitchContract<TLeft, TRight> : Switch<TLeft, TRight>
     {
-        public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
+        public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);
@@ -434,7 +434,7 @@ namespace Narvalo.Fx
             return default(Switch<TLeft, TResult>);
         }
 
-        public override TResult Match<TResult>(
+        public override TResult Map<TResult>(
             Func<TLeft, TResult> caseLeft,
             Func<TRight, TResult> caseRight,
             Func<TResult> otherwise)

@@ -138,7 +138,7 @@ namespace Narvalo.Fx.Extensions
             return Coalesce(@this, predicate, null, other);
         }
 
-        public static void Apply<TSource>(this TSource? @this, Action<TSource> action)
+        public static void Invoke<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
             Require.NotNull(action, "action");
@@ -211,7 +211,7 @@ namespace Narvalo.Fx.Extensions
         {
             Contract.Requires(action != null);
 
-            @this.Apply(action);
+            @this.Invoke(action);
         }
     }
 }

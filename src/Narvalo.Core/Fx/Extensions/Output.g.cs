@@ -329,7 +329,7 @@ namespace Narvalo.Fx.Extensions.Internal
 
                 if (m != null)
                 {
-                    m.Apply(
+                    m.Invoke(
                         _ =>
                         {
                             if (_ == true)

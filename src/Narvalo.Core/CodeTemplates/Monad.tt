@@ -1230,7 +1230,7 @@ namespace <#= LinqNamespace #>.Internal
         }
 <#+ } // End of HasZero. #>
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
 <#+ WriteTypeConstraints_("TSource"); #>
@@ -1254,10 +1254,10 @@ namespace <#= LinqNamespace #>.Internal
 <#+ WriteObjectNotNull_(); #>
             Require.NotNull(action, "action");
 
-            @this.Then(<#= Name #>.Unit).Apply(_ => action.Invoke());
+            @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
         }
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action,
             Action case<#= ZeroName #>)
@@ -1753,7 +1753,7 @@ namespace <#= LinqNamespace #>.Internal
 
                 if (m != null)
                 {
-                    m.Apply(
+                    m.Invoke(
                         _ =>
                         {
                             if (_ == true)

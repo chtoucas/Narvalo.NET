@@ -413,7 +413,7 @@ namespace Narvalo.Fx
         }
 
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this Output<TSource> @this,
             Action<TSource> action)
         {

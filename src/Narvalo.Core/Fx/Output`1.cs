@@ -119,7 +119,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        public void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+        public void Invoke(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
         {
             Require.NotNull(caseSuccess, "caseSuccess");
             Require.NotNull(caseFailure, "caseFailure");
@@ -134,7 +134,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
+        public TResult Map<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
         {
             Require.NotNull(caseSuccess, "caseSuccess");
             Require.NotNull(caseFailure, "caseFailure");
@@ -150,7 +150,7 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                Apply(action);
+                Invoke(action);
             }
         }
 
@@ -220,7 +220,7 @@ namespace Narvalo.Fx
 
         #region Overrides a bunch of auto-generated (extension) methods (see Output.g.cs).
 
-        public void Apply(Action<T> action)
+        public void Invoke(Action<T> action)
         {
             Require.NotNull(action, "action");
 
@@ -446,18 +446,13 @@ namespace Narvalo.Fx
 
 #if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
+    // In real world, only Success_ and Failure_ can inherit from Output.
+    // Adding the following object invariants on Output<T>:
+    //  (IsSuccess && (this as Success_) != null) || (this as Failure_) != null
+    // should make unecessary any call to Contract.Assume but I have not been able to make this work.
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
-        //// In real world, only Success_ and Failure_ can inherit from Output.
-        //// This object invariant should make unecessary any call to Contract.Assume
-        //// but I have not been able to make this work.
-        ////[ContractInvariantMethod]
-        ////private void OutputInvariants()
-        ////{
-        ////    Contract.Invariant((IsSuccess && (this as Success_) != null) || (this as Failure_) != null);
-        ////}
-
         private partial class Success_
         {
             [ContractInvariantMethod]

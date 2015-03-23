@@ -412,7 +412,7 @@ namespace Narvalo.Edu.Monads
         }
 
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
         {
@@ -816,7 +816,7 @@ namespace Narvalo.Edu.Monads.Internal
 
                 if (m != null)
                 {
-                    m.Apply(
+                    m.Invoke(
                         _ =>
                         {
                             if (_ == true)

@@ -411,7 +411,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
 
-        public static void Apply<TSource>(
+        public static void Invoke<TSource>(
             this Monad<TSource> @this,
             Action<TSource> action)
         {
@@ -788,7 +788,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
                 if (m != null)
                 {
-                    m.Apply(
+                    m.Invoke(
                         _ =>
                         {
                             if (_ == true)

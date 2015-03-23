@@ -17,8 +17,7 @@ Work in progress
 ----------------
 
 - Refactorings:
- * Output<T>, Switch<T1, T2> and Either<T1, T2> no longer use abstract methods. Open IsLeft?
- * Type casting for Maybe, Output...
+ * Switch<T1, T2> reduce the number of abstract methods. Open IsLeft?
  * Currencies
  * Benchmarks
 - Review Monad.tt.

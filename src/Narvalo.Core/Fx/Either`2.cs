@@ -22,9 +22,9 @@ namespace Narvalo.Fx
         private Either() { }
 #endif
 
-        public abstract void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight);
+        public abstract void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight);
 
-        public abstract TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
+        public abstract TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight);
 
         public abstract Maybe<TLeft> LeftOrNone();
 
@@ -61,14 +61,14 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
                 caseLeft.Invoke(_value);
             }
 
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseLeft, "caseLeft");
 
@@ -125,14 +125,14 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+            public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
                 Require.NotNull(caseRight, "caseRight");
 
                 caseRight.Invoke(_value);
             }
 
-            public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+            public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
                 Require.NotNull(caseRight, "caseRight");
 
@@ -189,13 +189,13 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Either<,>))]
     internal abstract class EitherContract<TLeft, TRight> : Either<TLeft, TRight>
     {
-        public override void Apply(Action<TLeft> caseLeft, Action<TRight> caseRight)
+        public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);
         }
 
-        public override TResult Match<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
+        public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
         {
             Contract.Requires(caseLeft != null);
             Contract.Requires(caseRight != null);

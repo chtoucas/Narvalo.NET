@@ -244,7 +244,7 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-        public TResult Match<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
+        public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, "caseSome");
             Require.NotNull(caseNone, "caseNone");
@@ -263,7 +263,7 @@ namespace Narvalo.Fx
         {
             Contract.Requires(action != null);
 
-            Apply(action);
+            Invoke(action);
         }
 
         /// <summary>
@@ -667,7 +667,7 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions
 
-        public void Apply(Action<T> action, Action caseNone)
+        public void Invoke(Action<T> action, Action caseNone)
         {
             Require.NotNull(action, "action");
             Require.NotNull(caseNone, "caseNone");
@@ -682,7 +682,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public void Apply(Action<T> action)
+        public void Invoke(Action<T> action)
         {
             Require.NotNull(action, "action");
 

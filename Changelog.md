@@ -9,7 +9,9 @@ XXXX-XX-XX - Focus on usability and code quality
 - Moved the `Narvalo.Globalization` namespace to Narvalo.Common. 
 - Moved all XML helpers to Narvalo.Common.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
-- Renamed `Maybe.Create` to `Maybe.Of` and `Range.Create` to `Range.Of`.
+- Renamed `Maybe.Create()` to `Maybe.Of()` and `Range.Create()` to `Range.Of()`.
+- For all monads, renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and changed the signature 
+  of `When()` and `Then()`. 
 
 #### Enhancements
 - New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
