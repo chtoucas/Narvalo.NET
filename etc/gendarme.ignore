@@ -50,23 +50,18 @@ N: Narvalo.Fx.Extensions.Internal
 # -----------------------
 
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
-# Justification = [Intentionally] Complements the namespace from Narvalo.Core which is a required dependency.
+# Justification = [Intentionally] Complements the namespace from Narvalo.Core, a required dependency.
 N: Narvalo.Fx
-# Justification = [Intentionally] Hopefully more will come.
+# Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Configuration
 
 # ==============================================================================
-# Narvalo.Core (REVIEW or FIXME)
+# Narvalo.Core
 # ==============================================================================
 
-R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
-#  ---------------------------------------------------------------
-# [FIXME] Correct. See how it is done in System.Linq.Enumerable.
-M: Narvalo.Fx.Maybe`1<TSource> Narvalo.Fx.EnumerableExtensions::LastOrNone(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`2<TSource,System.Boolean>)
-M: TSource Narvalo.Fx.EnumerableExtensions::Reduce(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`3<TSource,TSource,TSource>,System.Func`2<TSource,System.Boolean>)
 
 # ==============================================================================
-# Narvalo.Common (REVIEW or FIXME)
+# Narvalo.Common
 # ==============================================================================
 
 R: Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule
@@ -95,4 +90,3 @@ T: Narvalo.Currency
 R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
 #  -------------------------------------------
 T: Narvalo.Globalization.CurrencyProvider
-

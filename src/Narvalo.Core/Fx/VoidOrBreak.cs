@@ -28,7 +28,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public bool Arboted { get { return _aborted; } }
+        public bool Aborted { get { return _aborted; } }
 
         public virtual string Reason
         {

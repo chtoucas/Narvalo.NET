@@ -16,8 +16,8 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Complete Range, Either and Switch.
 - Refactorings:
- * Switch<T1, T2> reduce the number of abstract methods. Open IsLeft?
  * Currencies
  * Benchmarks
 - Review Monad.tt.
@@ -77,7 +77,7 @@ Code Quality:
 - Improvement: Remove the local CA & SA overrides.
 - Improvement: Make unnecessary to add StyleCop settings to each project.
   Review StyleCop settings, StyleCop cache & ability to change settings used.
-- Create custom FxCop rules:
+- Create custom StyleCop/FxCop rules:
   * private readonly static must start with s_
   * private const must be uppercase
   * private fields must start with underscore

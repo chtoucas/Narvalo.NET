@@ -1,26 +1,31 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Focus on usability and code quality
-------------------------------------------------
+XXXX-XX-XX - Focus on API and code quality
+------------------------------------------
+
+_Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 #### Breaking changes
-- To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`.
-- Moved the `Narvalo.Globalization` namespace to Narvalo.Common. 
-- Moved all XML helpers to Narvalo.Common.
+- To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`,
+  moved the `Narvalo.Globalization` namespace and almost all helpers to Narvalo.Common.
+  Narvalo.Core is now focused on implementing functional patterns and the minimal set 
+  of helpers necessary to perform argument validation.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
 - Renamed `Maybe.Create()` to `Maybe.Of()` and `Range.Create()` to `Range.Of()`.
-- For all monads, renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and changed the signature 
-  of `When()` and `Then()`. 
+- Apply to all monads: renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and 
+  changed the signature of `When()` and `Then()`. 
+- Moved the `UriExtensions` class to Narvalo.Web as it is only useful there.
 
 #### Enhancements
 - New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
 - New types to help writing naïve benchmarks.
 
 #### Improvements
-- The Narvalo.Core project now fully passes FxCop, Gendarme and Code Contracts static analysis.
+- Narvalo.Core fully passes FxCop, Gendarme and Code Contracts static analysis.
 - Added more C# documentation.
 - Made the `Maybe<T>.IsSome` property public; there was no compelling reason to continue hiding it.
+- Follow more closely the coding style recommandations by the .NET team.
 
 2015-02-20 - Bugfix for currency types
 --------------------------------------

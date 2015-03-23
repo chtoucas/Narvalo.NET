@@ -88,11 +88,20 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
+        ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
-        internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
+        internal static string Int64Encoder_IllegalCharacterFormat {
             get {
-                return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
+                return ResourceManager.GetString("Int64Encoder_IllegalCharacterFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The length is not less than or equal to &apos;{0}&apos;..
+        /// </summary>
+        internal static string Int64Encoder_OutOfRangeLengthFormat {
+            get {
+                return ResourceManager.GetString("Int64Encoder_OutOfRangeLengthFormat", resourceCulture);
             }
         }
     }

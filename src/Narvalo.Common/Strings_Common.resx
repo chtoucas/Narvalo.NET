@@ -123,10 +123,13 @@
   <data name="ConfigurationManager_MissingSectionFormat" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
-  <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
-    <value>The scheme '{0}' does not support protocol less uri.</value>
-  </data>
   <data name="BenchmarkMetric_MetricFormat" xml:space="preserve">
     <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
+  </data>
+  <data name="Int64Encoder_IllegalCharacterFormat" xml:space="preserve">
+    <value>Illegal character '{0}' found at position '{1}'.</value>
+  </data>
+  <data name="Int64Encoder_OutOfRangeLengthFormat" xml:space="preserve">
+    <value>The length is not less than or equal to '{0}'.</value>
   </data>
 </root>

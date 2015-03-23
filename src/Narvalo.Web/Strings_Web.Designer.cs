@@ -106,6 +106,15 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
+        /// </summary>
+        internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
+            get {
+                return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config!.
         /// </summary>
         internal static string WebConfigurationManager_SectionNotFoundFormat {

@@ -132,6 +132,9 @@
   <data name="HttpHandlerBase_InvalidRequest" xml:space="preserve">
     <value>Invalid request.</value>
   </data>
+  <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
+    <value>The scheme '{0}' does not support protocol less uri.</value>
+  </data>
   <data name="WebConfigurationManager_SectionNotFoundFormat" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your web.config!</value>
   </data>

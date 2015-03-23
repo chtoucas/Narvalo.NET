@@ -162,6 +162,7 @@
     <Compile Include="UI\LiteralPageParserFilterBase.cs" />
     <Compile Include="UI\PageParserFilterConstants.cs" />
     <Compile Include="UI\UnrestrictedPageParserFilter.cs" />
+    <Compile Include="Uri%24.cs" />
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>

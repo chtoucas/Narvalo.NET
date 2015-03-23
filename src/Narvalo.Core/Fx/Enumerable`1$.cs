@@ -5,9 +5,11 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    using Narvalo.Fx.Extensions;
     using Narvalo.Internal;
 
     /// <summary>
@@ -61,24 +63,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
-
-            using (var iter = seq.AssumeNotNull().GetEnumerator())
-            {
-                if (!iter.MoveNext())
-                {
-                    return Maybe<TSource>.None;
-                }
-
-                var value = iter.Current.AssumeNotNull();
-                while (iter.MoveNext())
-                {
-                    value = iter.Current.AssumeNotNull();
-                }
-
-                return value;
-            }
+            return @this.Reverse().FirstOrNone();
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
@@ -198,6 +183,8 @@ namespace Narvalo.Fx
             return result;
         }
 
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidRepetitiveCallsToPropertiesRule",
+            Justification = "[Intentionally] Part of the 'raison d'être' of this method is to iterate over all the elements in the sequence.")]
         public static TSource Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, TSource> accumulator,

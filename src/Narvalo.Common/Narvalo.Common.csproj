@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Globalization\ICurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="ParseTo.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="Range`1.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -126,7 +129,6 @@
       <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Uri%24.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />
     <Compile Include="Xml\XAttribute%24.cs">

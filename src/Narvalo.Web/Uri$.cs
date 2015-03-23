@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Web
 {
     using System;
     using System.Diagnostics.Contracts;
@@ -30,7 +30,7 @@ namespace Narvalo
             else
             {
                 throw new NotSupportedException(
-                    Format.CurrentCulture(Strings_Common.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
+                    Format.CurrentCulture(Strings_Web.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
             }
         }
     }
