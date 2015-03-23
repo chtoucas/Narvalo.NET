@@ -6,7 +6,6 @@ namespace Narvalo
     using System.Collections.Generic;
 
     using Xunit;
-    using Xunit.Extensions;
 
     public static class StringManipFacts
     {

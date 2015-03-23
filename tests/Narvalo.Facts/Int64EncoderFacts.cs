@@ -7,7 +7,6 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
 
     using Xunit;
-    using Xunit.Extensions;
 
     public static class Int64EncoderFacts
     {
