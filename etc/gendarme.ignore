@@ -98,10 +98,6 @@ R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
 #  ---------------------------------------------------------
 T: Narvalo.Globalization.CurrencyProvider
 
-R: Gendarme.Rules.Performance.AvoidLargeStructureRule
-#  --------------------------------------------------
-T: Narvalo.Diagnostics.Benchmarking.BenchmarkMetric
-
 R: Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule
 #  -------------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkProcessor

@@ -7,7 +7,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    public partial struct BenchmarkMetric : IEquatable<BenchmarkMetric>, IFormattable
+    public sealed partial class BenchmarkMetric : IFormattable
     {
         private const long TICKS_PER_SECOND = 10000000L;
 
@@ -111,7 +111,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     /// <content>
     /// Implements the <see cref="IFormattable"/> interface.
     /// </content>
-    public partial struct BenchmarkMetric
+    public partial class BenchmarkMetric
     {
         // https://msdn.microsoft.com/en-us/library/26etazsy.aspx
         public override string ToString()
@@ -169,57 +169,6 @@ namespace Narvalo.Diagnostics.Benchmarking
                 case "G": // Same as ToString().
                 default:  // NB: This includes the "null" case.
                     return ToString();
-            }
-        }
-    }
-
-    /// <content>
-    /// Implements the <see cref="IEquatable{BenchmarkMetric}"/> interface.
-    /// </content>
-    public partial struct BenchmarkMetric
-    {
-        public static bool operator ==(BenchmarkMetric left, BenchmarkMetric right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(BenchmarkMetric left, BenchmarkMetric right)
-        {
-            return !left.Equals(right);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (!(obj is BenchmarkMetric))
-            {
-                return false;
-            }
-
-            return Equals((BenchmarkMetric)obj);
-        }
-
-        public bool Equals(BenchmarkMetric other)
-        {
-            return _iterations == other._iterations
-                && _duration == other._duration
-                && _fixedTime == other._fixedTime
-                && _categoryName == other._categoryName
-                && _name == other._name;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 17;
-
-                hash = (23 * hash) + _iterations;
-                hash = (23 * hash) + _duration.GetHashCode();
-                hash = (23 * hash) + _categoryName.GetHashCode();
-                hash = (23 * hash) + _name.GetHashCode();
-                hash = (23 * hash) + _fixedTime.GetHashCode();
-
-                return hash;
             }
         }
     }

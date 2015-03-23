@@ -179,7 +179,7 @@ namespace Narvalo.Fx
         /// Gets a value indicating whether the object does hold a value.
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
-        /// You are better off using the rich monadic vocabulary.</remarks>
+        /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><c>true</c> if the object does hold a value; otherwise <c>false</c>.</value>
         public bool IsSome { get { return _isSome; } }
 

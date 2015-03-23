@@ -34,7 +34,7 @@ namespace Narvalo.Fx
         /// Gets a value identicating whether the output is successful. 
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
-        /// You are better off using the rich monadic vocabulary.</remarks>
+        /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><c>true</c> if the output is successful; otherwise <c>false</c>.</value>
         public bool IsSuccess { get { return _isSuccess; } }
 
@@ -113,11 +113,11 @@ namespace Narvalo.Fx
         public abstract void Apply(Action<T> action);
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
-            Justification = "[Intentionally] No trouble here, this 'Select' is the one from LINQ standard query operator.")]
+            Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
 
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Then",
-            Justification = "[Intentionally] 'Then' is a VB keyword (if...then...else), but this is harmless here.")]
+            Justification = "[Intentionally] 'Then' is a VB keyword (If...Then...Else), but this is harmless here.")]
         public abstract Output<TResult> Then<TResult>(Output<TResult> other);
 
         #endregion
