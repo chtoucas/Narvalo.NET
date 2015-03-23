@@ -81,7 +81,7 @@ namespace Narvalo.Web.Html
             return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

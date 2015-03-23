@@ -198,7 +198,7 @@ namespace Narvalo.Fx
                 Promise.Condition(IsSome);
                 Contract.Ensures(Contract.Result<T>() != null);
 
-#if CONTRACTS_FULL // [Intentionally] Helps CCCheck with the object invariance.
+#if CONTRACTS_FULL // Helps CCCheck with the object invariance.
 
                 if (_value == null)
                 {
@@ -319,7 +319,7 @@ namespace Narvalo.Fx
             return IsSome ? Value.ToString() : "Maybe(None)";
         }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

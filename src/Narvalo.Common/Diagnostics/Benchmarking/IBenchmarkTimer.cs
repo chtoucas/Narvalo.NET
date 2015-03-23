@@ -3,7 +3,7 @@
 namespace Narvalo.Diagnostics.Benchmarking
 {
     using System;
-#if CONTRACTS_FULL // [Intentionally] Using directive.
+#if CONTRACTS_FULL // Using directive.
     using System.Diagnostics.Contracts;
 #endif
 
@@ -14,7 +14,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         void Reset();
     }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     [ContractClass(typeof(IBenchmarkTimerContract))]
     public partial interface IBenchmarkTimer { }

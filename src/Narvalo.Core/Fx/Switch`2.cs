@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Custom ctor visibility for the contract class.
         protected Switch() { }
 #else
         private Switch() { }
@@ -372,7 +372,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>

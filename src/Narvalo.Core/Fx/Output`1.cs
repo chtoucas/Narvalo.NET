@@ -22,7 +22,7 @@ namespace Narvalo.Fx
     {
         private readonly bool _isSuccess;
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Custom ctor visibility for the contract class.
         protected Output(bool isSuccess)
 #else
         private Output(bool isSuccess)
@@ -444,7 +444,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     // In real world, only Success_ and Failure_ can inherit from Output.
     // Adding the following object invariants on Output<T>:

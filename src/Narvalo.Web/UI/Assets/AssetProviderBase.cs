@@ -4,7 +4,7 @@ namespace Narvalo.Web.UI.Assets
 {
     using System;
     using System.Configuration.Provider;
-#if CONTRACTS_FULL // [Intentionally] Using directive.
+#if CONTRACTS_FULL // Using directive.
     using System.Diagnostics.Contracts;
 #endif
 
@@ -21,7 +21,7 @@ namespace Narvalo.Web.UI.Assets
         public abstract Uri GetStyle(string relativePath);
     }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     [ContractClass(typeof(AssetProviderBaseContract))]
     public abstract partial class AssetProviderBase : ProviderBase { }

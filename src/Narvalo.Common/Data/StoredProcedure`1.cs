@@ -123,7 +123,7 @@ namespace Narvalo.Data
         }
     }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract partial class StoredProcedure<TResult>

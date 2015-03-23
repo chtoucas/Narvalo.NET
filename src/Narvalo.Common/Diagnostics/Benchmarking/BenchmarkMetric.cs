@@ -96,7 +96,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             get { return (double)Duration.Ticks / Iterations; }
         }
 
-#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()
