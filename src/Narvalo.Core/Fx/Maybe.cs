@@ -76,7 +76,7 @@ namespace Narvalo.Fx
             
             m.OnNull(() => { throw exceptionFactory.Invoke(); });
 
-            Contract.Assume(m.HasValue, "If it was not the case, we would have throw an exception just above.");
+            Contract.Assume(m.HasValue, "'m' is null; we should have throw an exception.");
 
             return m.Value;
         }

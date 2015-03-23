@@ -142,7 +142,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                 {
                     var result = formatter.Format(format, this, formatProvider);
 
-                    Contract.Assume(result != null, "ICustomFormatter.Format() should not have returned a null string.");
+                    Contract.Assume(result != null, "ICustomFormatter.Format() returned a null string.");
 
                     return result;
                 }

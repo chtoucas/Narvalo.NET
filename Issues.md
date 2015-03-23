@@ -25,7 +25,6 @@ Work in progress
 - Improvement: True argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`.
-- Improvement: Add a description to all `Contract.Assume`.
 - Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.
 - Improvement: Review all GetHashCode() methods.
 - Improvement: Review all ToString() methods.

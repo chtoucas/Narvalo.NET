@@ -1009,7 +1009,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         {
             Contract.Ensures(Contract.Result<T>() == @this);
             Contract.Ensures(Contract.Result<T>() != null);
-            Contract.Assume(@this != null);
+            Contract.Assume(@this != null, "'this' is null.");
 
             return @this;
         }

@@ -18,8 +18,8 @@ namespace Narvalo.Diagnostics.Benchmarking
         public BenchmarkRunner(IBenchmarkTimer timer)
         {
             Require.NotNull(timer, "timer");
-            Contract.Assume(_testDuration.Ticks > 0L, "At construction time, '_testDuration' should have been strictly positive.");
-            Contract.Assume(_warmUpDuration.Ticks > 0L, "At construction time, '_warmUpDuration' should have been strictly positive.");
+            Contract.Assume(_testDuration.Ticks > 0L, "'_testDuration.Ticks' is negative.");
+            Contract.Assume(_warmUpDuration.Ticks > 0L, "'_warmUpDuration.Ticks' is negative.");
 
             _timer = timer;
         }
@@ -118,7 +118,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                     double scale = testTicks / duration.Ticks;
                     double scaledIterations = scale * iterations;
                     iterations = (int)Math.Min(scaledIterations, maxIterations);
-                    Contract.Assume(iterations > 0, "Both 'scaledIterations' and 'maxIterations' should have been strictly positive.");
+                    Contract.Assume(iterations > 0, "'scaledIterations' or 'maxIterations' is negative.");
                     break;
                 }
 

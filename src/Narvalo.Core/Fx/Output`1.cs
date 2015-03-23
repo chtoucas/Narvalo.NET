@@ -177,7 +177,6 @@ namespace Narvalo.Fx
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");
-            Assume.Invariant(square);
 
             var output = square as Output<Output<T>>.Success_;
 

@@ -16,7 +16,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             {
                 var result = TimeSpan.FromTicks(_stopwatch.Elapsed.Ticks);
 
-                Contract.Assume(result.Ticks > 0L);
+                Contract.Assume(result.Ticks > 0L, "'result.Ticks' is negative.");
 
                 return result;
             }
