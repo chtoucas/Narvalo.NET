@@ -67,7 +67,6 @@
     <Compile Include="..\Common\Promise.cs">
       <Link>Internal\Promise.cs</Link>
     </Compile>
-    <Compile Include="Fx\Dictionary`2%24.cs" />
     <Compile Include="Fx\Enumerable`1%24.cs" />
     <Compile Include="Fx\Enumerator`1%24.cs" />
     <Compile Include="Fx\Extensions\Enumerable`1%24.Maybe.cs" />

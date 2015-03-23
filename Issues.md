@@ -16,8 +16,8 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- Complete Range, Either and Switch.
 - Refactorings:
+ * Range
  * Currencies
  * Benchmarks
 - Review Monad.tt.

@@ -22,7 +22,7 @@ namespace Narvalo.Fx
     {
         private readonly bool _isSuccess;
 
-#if CONTRACTS_FULL // Custom ctor visibility for the contract class.
+#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
         protected Output(bool isSuccess)
 #else
         private Output(bool isSuccess)
@@ -64,7 +64,8 @@ namespace Narvalo.Fx
         {
             Require.NotNull(value, "value");
 
-            // This is not really necessary since a direct cast would have worked too:
+            // We check the value of the property IsSuccess even if this is not really necessary 
+            // since a direct cast would have worked too:
             //  return ((Success_)value).Value;
             // but doing so allows us to throw a more meaningful exception and to effectively
             // hide the implementation details; the default exception would say something
@@ -87,7 +88,8 @@ namespace Narvalo.Fx
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-            // This is not really necessary since a direct cast would have worked too:
+            // We check the value of the property IsSuccess even if this is not really necessary 
+            // since a direct cast would have worked too:
             //  return ((Failure_)value).Value;
             // but doing so allows us to throw a more meaningful exception and to effectively
             // hide the implementation details; the default exception would say something

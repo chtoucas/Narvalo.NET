@@ -50,9 +50,8 @@ N: Narvalo.Fx.Extensions.Internal
 # -----------------------
 
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
-# Justification = [Intentionally] Complements the namespace from Narvalo.Core, a required dependency.
-N: Narvalo.Fx
 # Justification = [Intentionally] Hopefully more will be added.
+N: Narvalo.Collections
 N: Narvalo.Configuration
 
 # ==============================================================================

@@ -74,6 +74,7 @@
       <Link>Internal\Promise.cs</Link>
     </Compile>
     <Compile Include="BooleanStyles.cs" />
+    <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -109,7 +110,7 @@
     <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
       <DependentUpon>SqlDataReader%24.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fx\NameValueCollection%24.cs" />
+    <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />

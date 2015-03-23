@@ -73,7 +73,8 @@ namespace Narvalo.Fx
      * For value types, most of the time `T?` offers a much better alternative. We can not discourage 
      * you enough to use a `Maybe<T>` when a nullable would make a better fit, 
      * We can not enforce this rule with a generic constraint. For instance, this would prevent us
-     * from being able to use `Maybe<Unit>` which must be allowed to unleash the real power of the Maybe monad.
+     * from being able to use `Maybe<Unit>` which must be allowed to unleash the real power of the 
+     * Maybe monad.
      * 
      * Constructor
      * -----------

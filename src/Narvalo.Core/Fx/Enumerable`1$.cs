@@ -63,7 +63,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Reverse().FirstOrNone();
+            return @this.Reverse().AssumeNotNull().FirstOrNone();
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)

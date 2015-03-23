@@ -1,16 +1,16 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Focus on API and code quality
-------------------------------------------
+XXXX-XX-XX - Focus on API and code quality of Narvalo.Core
+----------------------------------------------------------
 
 _Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 #### Breaking changes
-- To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`,
-  moved the `Narvalo.Globalization` namespace and almost all helpers to Narvalo.Common.
-  Narvalo.Core is now focused on implementing functional patterns and the minimal set 
-  of helpers necessary to perform argument validation.
+- To improve usability, merged most of the `Narvalo.Collections` namespace with 
+  `Narvalo.Fx` and moved almost all others classes to Narvalo.Common.
+  Narvalo.Core is now focused on implementing functional patterns and a minimal set 
+  of helpers, namely what is necessary to perform argument validation.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
 - Renamed `Maybe.Create()` to `Maybe.Of()` and `Range.Create()` to `Range.Of()`.
 - Apply to all monads: renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and 

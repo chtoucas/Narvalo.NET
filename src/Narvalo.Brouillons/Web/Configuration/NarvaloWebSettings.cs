@@ -7,8 +7,8 @@ namespace Narvalo.Web.Configuration
     using System.Configuration;
     using System.Linq;
 
+    using Narvalo.Collections;
     using Narvalo.Fx;
-    using Narvalo.Fx.Extensions;
 
     // FIXME: Ajouter une méthode statique de récupération Current.
     public class NarvaloWebSettings

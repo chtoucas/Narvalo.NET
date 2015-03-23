@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Fx
+namespace Narvalo.Collections
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    using Narvalo.Fx;
     using Narvalo.Fx.Extensions;
 
     /// <summary>
@@ -33,6 +35,8 @@ namespace Narvalo.Fx
             return Maybe.Of(@this.GetValues(name));
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotExposeNestedGenericSignaturesRule",
+            Justification = "[Intentionally] Exposing nested generics is the price to pay for monads.")]
         public static IEnumerable<T> ParseAny<T>(
             this NameValueCollection @this,
             string name,
@@ -43,6 +47,8 @@ namespace Narvalo.Fx
             return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotExposeNestedGenericSignaturesRule",
+            Justification = "[Intentionally] Exposing nested generics is the price to pay for monads.")]
         public static Maybe<IEnumerable<T>> MayParseAll<T>(
             this NameValueCollection @this,
             string name,
