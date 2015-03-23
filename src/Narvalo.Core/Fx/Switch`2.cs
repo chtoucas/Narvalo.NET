@@ -79,13 +79,7 @@ namespace Narvalo.Fx
 
             return value != null ? new Right_(value) : Switch<TLeft, TRight>.Empty;
         }
-    }
 
-    /// <content>
-    /// Implements the empty <see cref="Switch{TLeft, TRight}"/>.
-    /// </content>
-    public partial class Switch<TLeft, TRight>
-    {
         private sealed class Empty_ : Switch<TLeft, TRight>, IEquatable<Empty_>
         {
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
@@ -160,13 +154,7 @@ namespace Narvalo.Fx
                 return 0;
             }
         }
-    }
 
-    /// <content>
-    /// Implements the left side of the <see cref="Switch{TLeft, TRight}"/> type.
-    /// </content>
-    public partial class Switch<TLeft, TRight>
-    {
         /// <summary>
         /// Represents the left side of the <see cref="Switch{TLeft, TRight}"/> type.
         /// </summary>
@@ -244,17 +232,6 @@ namespace Narvalo.Fx
                 return Maybe<TRight>.None;
             }
 
-            public override string ToString()
-            {
-                return Format.CurrentCulture("Left({0})", _value);
-            }
-        }
-
-        /// <content>
-        /// Implements the <see cref="IEquatable{Left}"/> interface.
-        /// </content>
-        private partial class Left_
-        {
             public bool Equals(Left_ other)
             {
                 if (other == this)
@@ -279,14 +256,13 @@ namespace Narvalo.Fx
             {
                 return EqualityComparer<TLeft>.Default.GetHashCode(_value);
             }
-        }
-    }
 
-    /// <content>
-    /// Implements the right side of the <see cref="Switch{TLeft, TRight}"/> type.
-    /// </content>
-    public partial class Switch<TLeft, TRight>
-    {
+            public override string ToString()
+            {
+                return Format.CurrentCulture("Left({0})", _value);
+            }
+        }
+
         /// <summary>
         /// Represents the right side of the <see cref="Switch{TLeft, TRight}"/> type.
         /// </summary>
@@ -364,17 +340,6 @@ namespace Narvalo.Fx
                 return Maybe.Of(_value);
             }
 
-            public override string ToString()
-            {
-                return Format.CurrentCulture("Right({0})", _value);
-            }
-        }
-
-        /// <content>
-        /// Implements the <see cref="IEquatable{Right}"/> interface.
-        /// </content>
-        private partial class Right_
-        {
             public bool Equals(Right_ other)
             {
                 if (other == this)
@@ -398,6 +363,11 @@ namespace Narvalo.Fx
             public override int GetHashCode()
             {
                 return EqualityComparer<TRight>.Default.GetHashCode(_value);
+            }
+
+            public override string ToString()
+            {
+                return Format.CurrentCulture("Right({0})", _value);
             }
         }
     }

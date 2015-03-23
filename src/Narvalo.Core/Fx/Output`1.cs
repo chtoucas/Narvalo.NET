@@ -74,7 +74,10 @@ namespace Narvalo.Fx
                 throw new InvalidCastException(Strings_Core.Output_CannotCastFailureToValue);
             }
 
-            return (value as Success_).Value;
+            var success = value as Success_;
+            Contract.Assume(success != null, "'value' is not of Success_ type");
+
+            return success.Value;
         }
 
         [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
@@ -94,7 +97,10 @@ namespace Narvalo.Fx
                 throw new InvalidCastException(Strings_Core.Output_CannotCastSuccessToException);
             }
 
-            return (value as Failure_).ExceptionInfo;
+            var failure = value as Failure_;
+            Contract.Assume(failure != null, "'value' is not of Failure_ type");
+
+            return failure.ExceptionInfo;
         }
 
         #endregion
@@ -105,7 +111,8 @@ namespace Narvalo.Fx
         public abstract Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector);
 
         // Overrides the 'Select' auto-generated (extension) method (see Output.g.cs).
-        // Since Select is a building block, we override it in Failure_ and Success_ to avoid any casting.
+        // Since Select is a building block, we override it in Failure_ and Success_.
+        // Otherwise we would have to call ToValue() or ToExceptionInfo() which imply a casting.
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
             Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
@@ -125,6 +132,16 @@ namespace Narvalo.Fx
             {
                 caseFailure.Invoke(ToExceptionDispatchInfo());
             }
+        }
+
+        public TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
+        {
+            Require.NotNull(caseSuccess, "caseSuccess");
+            Require.NotNull(caseFailure, "caseFailure");
+
+            return IsSuccess
+                ? caseSuccess.Invoke(ToValue())
+                : caseFailure.Invoke();
         }
 
         public void OnSuccess(Action<T> action)
@@ -201,7 +218,7 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Provides overrides for a bunch of auto-generated (extension) methods (see Output.g.cs).
+        #region Overrides a bunch of auto-generated (extension) methods (see Output.g.cs).
 
         public void Apply(Action<T> action)
         {
@@ -211,16 +228,6 @@ namespace Narvalo.Fx
             {
                 action.Invoke(ToValue());
             }
-        }
-
-        public TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
-        {
-            Require.NotNull(caseSuccess, "caseSuccess");
-            Require.NotNull(caseFailure, "caseFailure");
-
-            return IsSuccess
-                ? caseSuccess.Invoke(ToValue())
-                : caseFailure.Invoke();
         }
 
         public Output<TResult> Then<TResult>(Output<TResult> other)
@@ -276,18 +283,38 @@ namespace Narvalo.Fx
 
         #endregion
 
+        /// <summary>
+        /// Obtains the enclosed value.
+        /// </summary>
+        /// <remarks>
+        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
+        /// is <see langword="true"/>.
+        /// </remarks>
         internal T ToValue()
         {
             Contract.Requires(IsSuccess);
 
-            return (this as Success_).Value;
+            var success = this as Success_;
+            Contract.Assume(success != null, "'this' is not of Success_ type");
+
+            return success.Value;
         }
 
+        /// <summary>
+        /// Obtains the enclosed exception state.
+        /// </summary>
+        /// <remarks>
+        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
+        /// is <see langword="false"/>.
+        /// </remarks>
         internal ExceptionDispatchInfo ToExceptionDispatchInfo()
         {
             Contract.Requires(!IsSuccess);
 
-            return (this as Failure_).ExceptionInfo;
+            var failure = this as Failure_;
+            Contract.Assume(failure != null, "'this' is not of Failure_ type");
+
+            return failure.ExceptionInfo;
         }
 
         /// <summary>
@@ -422,6 +449,15 @@ namespace Narvalo.Fx
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
+        //// In real world, only Success_ and Failure_ can inherit from Output.
+        //// This object invariant should make unecessary any call to Contract.Assume
+        //// but I have not been able to make this work.
+        ////[ContractInvariantMethod]
+        ////private void OutputInvariants()
+        ////{
+        ////    Contract.Invariant((IsSuccess && (this as Success_) != null) || (this as Failure_) != null);
+        ////}
+
         private partial class Success_
         {
             [ContractInvariantMethod]

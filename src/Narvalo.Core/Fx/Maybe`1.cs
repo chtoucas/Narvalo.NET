@@ -187,10 +187,9 @@ namespace Narvalo.Fx
         /// Gets the enclosed value.
         /// </summary>
         /// <remarks>
-        /// Any access to this property must be protected by firstly checking that <see cref="IsSome"/> 
+        /// Any access to this property must be protected by checking before that <see cref="IsSome"/> 
         /// is <see langword="true"/>.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">The object does not enclose any value.</exception>
         internal T Value
         {
             get
