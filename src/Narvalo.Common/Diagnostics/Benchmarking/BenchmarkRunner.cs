@@ -58,6 +58,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         public BenchmarkMetric Run(Benchmark benchmark)
         {
             Require.NotNull(benchmark, "benchmark");
+            Contract.Ensures(Contract.Result<BenchmarkMetric>() != null);
 
             int iterations = WarmUp_(benchmark.Action);
             TimeSpan duration = Time_(benchmark.Action, iterations);
@@ -70,6 +71,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             Require.NotNull(benchmark, "benchmark");
             Contract.Requires(iterations > 0);
+            Contract.Ensures(Contract.Result<BenchmarkMetric>() != null);
 
             // Warmup.
             benchmark.Action();

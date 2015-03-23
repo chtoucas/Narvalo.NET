@@ -162,7 +162,7 @@ namespace Narvalo.Fx
         [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "[Ignore] Weird. This method is called many times.")]
+            Justification = "[Ignore] Weird. This method does have plenty of callers inside the assembly.")]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");

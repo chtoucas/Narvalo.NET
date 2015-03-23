@@ -119,7 +119,6 @@
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
     <Compile Include="ParseTo.cs" />
-    <Compile Include="RandomString.cs" />
     <Compile Include="StringManip.cs" />
     <Compile Include="Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>

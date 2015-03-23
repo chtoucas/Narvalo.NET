@@ -164,6 +164,7 @@
     <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
     <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="ImageUtility.cs" />
+    <Compile Include="RandomString.cs" />
     <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
     <Compile Include="Runtime\Reliability\BarrierException.cs" />
     <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />

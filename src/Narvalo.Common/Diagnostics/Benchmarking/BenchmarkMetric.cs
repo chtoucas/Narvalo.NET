@@ -7,6 +7,8 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    [SuppressMessage("Gendarme.Rules.Maintainability", "AvoidLackOfCohesionOfMethodsRule",
+        Justification = "[Intentionally] If it were not a bit too large, we would have make it a struct.")]
     public sealed partial class BenchmarkMetric : IFormattable
     {
         private const long TICKS_PER_SECOND = 10000000L;
@@ -99,8 +101,10 @@ namespace Narvalo.Diagnostics.Benchmarking
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_categoryName != null && _categoryName.Length != 0);
-            Contract.Invariant(_name != null && _name.Length != 0);
+            Contract.Invariant(_categoryName != null);
+            Contract.Invariant(_categoryName.Length != 0);
+            Contract.Invariant(_name != null);
+            Contract.Invariant(_name.Length != 0);
             Contract.Invariant(_iterations > 0);
             Contract.Invariant(_duration.Ticks > 0L);
         }
@@ -122,8 +126,6 @@ namespace Narvalo.Diagnostics.Benchmarking
                 + " call/s; " + Name;
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-18-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public string ToString(string format)
         {
             Contract.Ensures(Contract.Result<string>() != null);
