@@ -1,16 +1,19 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Stabilizing the Narvalo.Core API
----------------------------------------------
+XXXX-XX-XX - Focus on usability and code quality
+------------------------------------------------
 
 #### Breaking changes
 - To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`.
+- Moved the `Narvalo.Globalization` namespace to Narvalo.Common. 
+- Moved all XML helpers to Narvalo.Common.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
 - Renamed `Maybe.Create` to `Maybe.Of` and `Range.Create` to `Range.Of`.
 
 #### Enhancements
 - New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
+- New types to help writing naïve benchmarks.
 
 #### Improvements
 - The Narvalo.Core project now fully passes FxCop, Gendarme and Code Contracts static analysis.

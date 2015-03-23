@@ -6,7 +6,6 @@ namespace Narvalo.Fx.Extensions
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using System.Runtime.ExceptionServices;
 
     using Narvalo.Fx;
     using Narvalo.Internal;
@@ -29,11 +28,10 @@ namespace Narvalo.Fx.Extensions
             //      let m = funM.Invoke(_)
             //      where m.IsSuccess
             //      select m.Value;
-            // REVIEW: We could simply call ValueOrThrow()
             return @this
                 .Select(_ => funM.Invoke(_)).AssumeNotNull()
                 .Where(_ => _.IsSuccess)
-                .Select(_ => (TResult)_).AssumeNotNull();
+                .Select(_ => _.ToValue()).AssumeNotNull();
         }
     }
 
@@ -60,11 +58,10 @@ namespace Narvalo.Fx.Extensions
 
                 if (!m.IsSuccess)
                 {
-                    return Output.Failure<IEnumerable<TSource>>((ExceptionDispatchInfo)m);
+                    return Output.Failure<IEnumerable<TSource>>(m.ToExceptionDispatchInfo());
                 }
 
-                // REVIEW: We could simply call ValueOrThrow()
-                list.Add((TSource)m);
+                list.Add(m.ToValue());
             }
 
             return Output.Success(list.AsEnumerable());

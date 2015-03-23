@@ -8,8 +8,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    using Narvalo.Internal;
-
     /// <summary>
     /// Represents the output of a computation which may throw exceptions.
     /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>
@@ -25,18 +23,21 @@ namespace Narvalo.Fx
         private readonly bool _isSuccess;
 
 #if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
-        protected Output(bool isSuccess) { _isSuccess = isSuccess; }
+        protected Output(bool isSuccess)
 #else
-        protected Output(bool isSuccess) { _isSuccess = isSuccess;  }
+        private Output(bool isSuccess)
 #endif
+        { _isSuccess = isSuccess; }
 
         /// <summary>
-        /// Gets a value identicating whether the output is successful. 
+        /// Gets a value indicating whether the output is successful. 
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><c>true</c> if the output is successful; otherwise <c>false</c>.</value>
         public bool IsSuccess { get { return _isSuccess; } }
+
+        #region Explicit casting operators
 
         [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
             Justification = "[Ignore] An explicit conversion operator must be static.")]
@@ -63,8 +64,9 @@ namespace Narvalo.Fx
         {
             Require.NotNull(value, "value");
 
-            // This is not really necessary since the cast to Success_ would fail anyway,
-            // but doing so allows us to throw a more meaningful exception and effectively
+            // This is not really necessary since a direct cast would have worked too:
+            //  return ((Success_)value).Value;
+            // but doing so allows us to throw a more meaningful exception and to effectively
             // hide the implementation details; the default exception would say something
             // like "Unable to cast a Failure_ type to a Success_ type".
             if (!value.IsSuccess)
@@ -72,7 +74,7 @@ namespace Narvalo.Fx
                 throw new InvalidCastException(Strings_Core.Output_CannotCastFailureToValue);
             }
 
-            return ((Success_)value).Value;
+            return (value as Success_).Value;
         }
 
         [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
@@ -82,8 +84,9 @@ namespace Narvalo.Fx
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-            // This is not really necessary since the cast to Failure_ would fail anyway,
-            // but doing so allows us to throw a more meaningful exception and effectively
+            // This is not really necessary since a direct cast would have worked too:
+            //  return ((Failure_)value).Value;
+            // but doing so allows us to throw a more meaningful exception and to effectively
             // hide the implementation details; the default exception would say something
             // like "Unable to cast a Success_ type to a Failure_ type".
             if (value.IsSuccess)
@@ -91,36 +94,58 @@ namespace Narvalo.Fx
                 throw new InvalidCastException(Strings_Core.Output_CannotCastSuccessToException);
             }
 
-            return ((Failure_)value).ExceptionInfo;
+            return (value as Failure_).ExceptionInfo;
         }
 
-        public abstract void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure);
+        #endregion
 
+        #region Abstract methods
+
+        // Core monad Bind method.
         public abstract Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector);
 
-        public abstract TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure);
-
-        public abstract void OnSuccess(Action<T> action);
-
-        public abstract void OnFailure(Action<ExceptionDispatchInfo> action);
-
-        public abstract Maybe<T> ValueOrNone();
-
-        public abstract T ValueOrThrow();
-
-        #region Overrides for a bunch of auto-generated (extension) methods (see Output.g.cs).
-
-        public abstract void Apply(Action<T> action);
-
+        // Overrides the 'Select' auto-generated (extension) method (see Output.g.cs).
+        // Since Select is a building block, we override it in Failure_ and Success_ to avoid any casting.
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
             Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
         public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
 
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Then",
-            Justification = "[Intentionally] 'Then' is a VB keyword (If...Then...Else), but this is harmless here.")]
-        public abstract Output<TResult> Then<TResult>(Output<TResult> other);
-
         #endregion
+
+        public void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
+        {
+            Require.NotNull(caseSuccess, "caseSuccess");
+            Require.NotNull(caseFailure, "caseFailure");
+
+            if (IsSuccess)
+            {
+                caseSuccess.Invoke(ToValue());
+            }
+            else
+            {
+                caseFailure.Invoke(ToExceptionDispatchInfo());
+            }
+        }
+
+        public void OnSuccess(Action<T> action)
+        {
+            Contract.Requires(action != null);
+
+            if (IsSuccess)
+            {
+                Apply(action);
+            }
+        }
+
+        public void OnFailure(Action<ExceptionDispatchInfo> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (!IsSuccess)
+            {
+                action.Invoke(ToExceptionDispatchInfo());
+            }
+        }
 
         /// <summary>
         /// Obtains the underlying value if any; otherwise the default value of the type T.
@@ -128,7 +153,7 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return Match(Stubs<T>.Identity, Stubs<T>.AlwaysDefault);
+            return IsSuccess ? ToValue() : default(T);
         }
 
         /// <summary>
@@ -138,15 +163,76 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
         public T ValueOrElse(T other)
         {
-            return Match(Stubs<T>.Identity, () => other);
+            return IsSuccess ? ToValue() : other;
         }
 
         public T ValueOrElse(Func<T> valueFactory)
         {
-            Contract.Requires(valueFactory != null);
+            Require.NotNull(valueFactory, "valueFactory");
 
-            return Match(Stubs<T>.Identity, valueFactory);
+            return IsSuccess ? ToValue() : valueFactory.Invoke();
         }
+
+        public Maybe<T> ValueOrNone()
+        {
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
+
+            if (IsSuccess)
+            {
+                return Maybe.Of(ToValue());
+            }
+            else
+            {
+                return Maybe<T>.None;
+            }
+        }
+
+        public T ValueOrThrow()
+        {
+            if (IsSuccess)
+            {
+                return ToValue();
+            }
+            else
+            {
+                ToExceptionDispatchInfo().Throw();
+
+                return default(T);
+            }
+        }
+
+        #region Provides overrides for a bunch of auto-generated (extension) methods (see Output.g.cs).
+
+        public void Apply(Action<T> action)
+        {
+            Require.NotNull(action, "action");
+
+            if (IsSuccess)
+            {
+                action.Invoke(ToValue());
+            }
+        }
+
+        public TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
+        {
+            Require.NotNull(caseSuccess, "caseSuccess");
+            Require.NotNull(caseFailure, "caseFailure");
+
+            return IsSuccess
+                ? caseSuccess.Invoke(ToValue())
+                : caseFailure.Invoke();
+        }
+
+        public Output<TResult> Then<TResult>(Output<TResult> other)
+        {
+            return IsSuccess
+                ? other
+                : Output<TResult>.η(ToExceptionDispatchInfo());
+        }
+
+        #endregion
+
+        #region Core Monad methods
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
@@ -178,24 +264,32 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, "square");
 
-            var output = square as Output<Output<T>>.Success_;
-
-            if (output != null)
+            if (square.IsSuccess)
             {
-                return output.Value;
+                return square.ToValue();
             }
             else
             {
-                return η((square as Output<Output<T>>.Failure_).ExceptionInfo);
+                return η(square.ToExceptionDispatchInfo());
             }
         }
-    }
 
-    /// <content>
-    /// Implements the "success" part of the <see cref="Output{T}"/> type.
-    /// </content>
-    public partial class Output<T>
-    {
+        #endregion
+
+        internal T ToValue()
+        {
+            Contract.Requires(IsSuccess);
+
+            return (this as Success_).Value;
+        }
+
+        internal ExceptionDispatchInfo ToExceptionDispatchInfo()
+        {
+            Contract.Requires(!IsSuccess);
+
+            return (this as Failure_).ExceptionInfo;
+        }
+
         /// <summary>
         /// Represents the "success" part of the <see cref="Output{T}"/> type.
         /// </summary>
@@ -211,39 +305,11 @@ namespace Narvalo.Fx
 
             internal T Value { get { return _value; } }
 
-            public override void Apply(Action<T> action)
-            {
-                Require.NotNull(action, "action");
-
-                action.Invoke(Value);
-            }
-
-            public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
-            {
-                Require.NotNull(caseSuccess, "caseSuccess");
-
-                caseSuccess.Invoke(Value);
-            }
-
             public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
             {
                 Require.NotNull(selector, "selector");
 
                 return selector.Invoke(Value);
-            }
-
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
-            {
-                Require.NotNull(caseSuccess, "caseSuccess");
-
-                return caseSuccess.Invoke(Value);
-            }
-
-            public override void OnFailure(Action<ExceptionDispatchInfo> action) { }
-
-            public override void OnSuccess(Action<T> action)
-            {
-                Apply(action);
             }
 
             public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -253,32 +319,6 @@ namespace Narvalo.Fx
                 return Output<TResult>.η(selector.Invoke(Value));
             }
 
-            public override Output<TResult> Then<TResult>(Output<TResult> other)
-            {
-                return other;
-            }
-
-            public override Maybe<T> ValueOrNone()
-            {
-                return Maybe.Of(Value);
-            }
-
-            public override T ValueOrThrow()
-            {
-                return Value;
-            }
-
-            public override string ToString()
-            {
-                return Format.CurrentCulture("Success({0})", Value);
-            }
-        }
-
-        /// <content>
-        /// Implements the <see cref="IEquatable{Success}"/> interface.
-        /// </content>
-        private partial class Success_
-        {
             public bool Equals(Success_ other)
             {
                 if (other == this)
@@ -303,14 +343,13 @@ namespace Narvalo.Fx
             {
                 return Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
             }
-        }
-    }
 
-    /// <content>
-    /// Implements the "failure" part of the <see cref="Output{T}"/> type.
-    /// </content>
-    public partial class Output<T>
-    {
+            public override string ToString()
+            {
+                return Format.CurrentCulture("Success({0})", Value);
+            }
+        }
+
         /// <summary>
         /// Represents the "failure" part of the <see cref="Output{T}"/> type.
         /// </summary>
@@ -336,69 +375,16 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override void Apply(Action<T> action) { }
-
-            public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
-            {
-                Require.NotNull(caseFailure, "caseFailure");
-
-                caseFailure.Invoke(ExceptionInfo);
-            }
-
             public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
             {
                 return Output<TResult>.η(ExceptionInfo);
             }
-
-            public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
-            {
-                Require.NotNull(caseFailure, "caseFailure");
-
-                return caseFailure.Invoke();
-            }
-
-            public override void OnFailure(Action<ExceptionDispatchInfo> action)
-            {
-                Require.NotNull(action, "action");
-
-                action.Invoke(ExceptionInfo);
-            }
-
-            public override void OnSuccess(Action<T> action) { }
 
             public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 return Output<TResult>.η(ExceptionInfo);
             }
 
-            public override Output<TResult> Then<TResult>(Output<TResult> other)
-            {
-                return Output<TResult>.η(ExceptionInfo);
-            }
-
-            public override Maybe<T> ValueOrNone()
-            {
-                return Maybe<T>.None;
-            }
-
-            public override T ValueOrThrow()
-            {
-                ExceptionInfo.Throw();
-
-                return default(T);
-            }
-
-            public override string ToString()
-            {
-                return Format.CurrentCulture("Failure({0})", _exceptionInfo);
-            }
-        }
-
-        /// <content>
-        /// Implements the <see cref="IEquatable{Failure}"/> interface.
-        /// </content>
-        private partial class Failure_
-        {
             public bool Equals(Failure_ other)
             {
                 if (other == this)
@@ -423,6 +409,11 @@ namespace Narvalo.Fx
             {
                 return EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(_exceptionInfo);
             }
+
+            public override string ToString()
+            {
+                return Format.CurrentCulture("Failure({0})", _exceptionInfo);
+            }
         }
     }
 
@@ -431,11 +422,21 @@ namespace Narvalo.Fx
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
+        private partial class Success_
+        {
+            [ContractInvariantMethod]
+            private void ObjectInvariants()
+            {
+                Contract.Invariant(IsSuccess);
+            }
+        }
+
         private partial class Failure_
         {
             [ContractInvariantMethod]
             private void ObjectInvariants()
             {
+                Contract.Invariant(!IsSuccess);
                 Contract.Invariant(_exceptionInfo != null);
             }
         }
@@ -446,12 +447,6 @@ namespace Narvalo.Fx
     {
         protected OutputContract() : base(true) { }
 
-        public override void Apply(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
-        {
-            Contract.Requires(caseSuccess != null);
-            Contract.Requires(caseFailure != null);
-        }
-
         public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
         {
             Contract.Requires(selector != null);
@@ -459,36 +454,11 @@ namespace Narvalo.Fx
             return default(Output<TResult>);
         }
 
-        public override TResult Match<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
-        {
-            Contract.Requires(caseSuccess != null);
-            Contract.Requires(caseFailure != null);
-
-            return default(TResult);
-        }
-
-        public override void OnFailure(Action<ExceptionDispatchInfo> action)
-        {
-            Contract.Requires(action != null);
-        }
-
-        public override void OnSuccess(Action<T> action)
-        {
-            Contract.Requires(action != null);
-        }
-
         public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Contract.Requires(selector != null);
 
             return default(Output<TResult>);
-        }
-
-        public override Maybe<T> ValueOrNone()
-        {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
-            return default(Maybe<T>);
         }
     }
 
