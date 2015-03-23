@@ -165,14 +165,6 @@ namespace Narvalo.Fx
         #region Properties
 
         [Fact]
-        public static void Unit_IsSome()
-        {
-            // Act & Assert
-            Assert.True(Maybe.Unit.IsSome);
-            Assert.Equal(Unit.Single, Maybe.Unit.Value);
-        }
-
-        [Fact]
         public static void IsSome_IsFalse_WhenNone()
         {
             // Arrange
@@ -880,6 +872,14 @@ namespace Narvalo.Fx
     public static partial class MaybeFacts
     {
         #region Properties
+
+        [Fact]
+        public static void Unit_IsSome()
+        {
+            // Act & Assert
+            Assert.True(Maybe.Unit.IsSome);
+            Assert.Equal(Unit.Single, Maybe.Unit.Value);
+        }
 
         [Fact]
         public static void Value_ReturnsTheOriginalValue_WhenSome()

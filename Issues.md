@@ -18,7 +18,7 @@ Work in progress
 
 - Refactorings:
  * Output<T>, Switch<T1, T2> and Either<T1, T2> no longer use abstract methods. Open IsLeft?
- * Type casting for Maybe, Output... Implements IEquatable correctly.
+ * Type casting for Maybe, Output...
  * Currencies
  * Benchmarks
 - Review Monad.tt.
