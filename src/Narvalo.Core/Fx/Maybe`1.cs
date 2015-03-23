@@ -85,8 +85,8 @@ namespace Narvalo.Fx
      * To make things simpler, we provide two public factory methods:
      * 
      * ```csharp
-     * Maybe.Create<T>(value)
-     * Maybe.Create<T?>(value)
+     * Maybe.Of<T>(value)
+     * Maybe.Of<T?>(value)
      * ```
      * 
      * and one static property `Maybe<T>.None` to reference a Maybe that has no value.
@@ -123,10 +123,10 @@ namespace Narvalo.Fx
      * Maybe<T>.None != null
      * Maybe<T>.None.Equals(null)
      *   
-     * Maybe.Create(1) != Maybe.Create(1)
-     * Maybe.Create(1).Equals(Maybe.Create(1))
-     * Maybe.Create(1) != 1
-     * Maybe.Create(1).Equals(1)
+     * Maybe.Of(1) != Maybe.Of(1)
+     * Maybe.Of(1).Equals(Maybe.Of(1))
+     * Maybe.Of(1) != 1
+     * Maybe.Of(1).Equals(1)
      * ```
      * 
      * References
@@ -165,8 +165,8 @@ namespace Narvalo.Fx
         /// Initializes a new instance of the <see cref="Maybe{T}" /> class for the specified value. 
         /// </summary>
         /// <param name="value">A value to wrap.</param>
-        /// <seealso cref="Maybe.Create{T}(T)"/>
-        /// <seealso cref="Maybe.Create{T}(T?)"/>
+        /// <seealso cref="Maybe.Of{T}(T)"/>
+        /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
             Contract.Requires(value != null);
@@ -178,8 +178,10 @@ namespace Narvalo.Fx
         /// <summary>
         /// Gets a value indicating whether the object does hold a value.
         /// </summary>
+        /// <remarks>Most of the time, you don't need to access this property.
+        /// You are better off using the rich monadic vocabulary.</remarks>
         /// <value><c>true</c> if the object does hold a value; otherwise <c>false</c>.</value>
-        internal bool IsSome { get { return _isSome; } }
+        public bool IsSome { get { return _isSome; } }
 
         /// <summary>
         /// Gets the enclosed value.
@@ -318,7 +320,7 @@ namespace Narvalo.Fx
             return IsSome ? Value.ToString() : "Maybe(None)";
         }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

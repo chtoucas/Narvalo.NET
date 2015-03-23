@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class Maybe
     {
-        public static Maybe<T> Create<T>(T? value) where T : struct
+        public static Maybe<T> Of<T>(T? value) where T : struct
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 

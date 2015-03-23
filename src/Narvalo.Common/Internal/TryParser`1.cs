@@ -31,7 +31,7 @@ namespace Narvalo.Internal
             if (value == null) { return Maybe<T>.None; }
 
             T result;
-            return @this.Invoke(value, out result) ? Maybe.Create(result) : Maybe<T>.None;
+            return @this.Invoke(value, out result) ? Maybe.Of(result) : Maybe<T>.None;
         }
     }
 }

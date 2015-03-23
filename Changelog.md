@@ -7,14 +7,15 @@ XXXX-XX-XX - Stabilizing the Narvalo.Core API
 #### Breaking changes
 - To improve usability, merged the `Narvalo.Collections` namespace with `Narvalo.Fx`.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
+- Renamed `Maybe.Create` to `Maybe.Of` and `Range.Create` to `Range.Of`.
 
 #### Enhancements
-- New types inspired by functional programming:
-  `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
+- New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
 
 #### Improvements
-- The Narvalo.Core project now fully passes FxCop, Gendarme and Code Contracts analysis.
+- The Narvalo.Core project now fully passes FxCop, Gendarme and Code Contracts static analysis.
 - Added more C# documentation.
+- Made the `Maybe<T>.IsSome` property public; there was no compelling reason to continue hiding it.
 
 2015-02-20 - Bugfix for currency types
 --------------------------------------
@@ -22,14 +23,12 @@ XXXX-XX-XX - Stabilizing the Narvalo.Core API
 _Released version 0.21 of Narvalo.Core & Narvalo.Common_                         
 
 #### Bugfixes
-- Use 0 for the numeric code for a currency when none is defined. Before that, we
-  registered the alphabetic code but not the currency info since we didn't have
-  a numeric code.
+- Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the 
+  alphabetic code but not the currency info since we didn't have a numeric code.
 
 #### Improvements
-- Removed from the currency classes anything related to culture, namely the
-  currency symbol methods. We need a better way of handling localization problems.
-  Unicode CLDR seems the way to go.
+- Removed from the currency classes anything related to culture, namely the currency symbol methods.
+  We need a better way of handling localization problems. Unicode CLDR seems the way to go.
 
 2015-02-19 - New currency types
 -------------------------------
@@ -172,9 +171,8 @@ _Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web_
 
 #### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.
-- When building a PCL project _from the command line_, MSBuild generates
-  output inside a subdirectory of `$(OutDir)`. To correct this, we instruct
-  MSBuild to not change the default behaviour:
+- When building a PCL project _from the command line_, MSBuild generates output inside a subdirectory
+  of `$(OutDir)`. To correct this, we instruct MSBuild to not change the default behaviour:
   `$(GenerateProjectSpecificOutputFolder) = false`.
 - Narvalo.Facts fails when called from Make.proj and run twice in a row.
   Narvalo.Core and Narvalo.Common use the default namespace (namely `Narvalo`)
@@ -188,11 +186,9 @@ _Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web_
 #### Enhancements
 - PSake script for the most common build configurations.
 - Preliminary support for Code Contracts.
-- New portable class library Narvalo.Core which becomes the new base
-  instead of Narvalo.Common.
+- New portable class library Narvalo.Core which becomes the new base instead of Narvalo.Common.
 
 #### Improvements
-- Brand new MSBuild infrastructure. Extracted all targets and
-  properties not required by Visual Studio.
+- Brand new MSBuild infrastructure. Extracted all targets and properties not required by VS.
 - Implemented Semantic Versioning rules for assembly versions.
 - Narvalo.Facts becomes a true Visual Studio test project.

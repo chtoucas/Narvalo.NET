@@ -1,10 +1,5 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-using System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
-
 namespace Narvalo.Fx
 {
     using System;
@@ -20,19 +15,28 @@ namespace Narvalo.Fx
     /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
-    /// <remarks>WARNING: We do not catch exceptions throw by any supplied delegate...</remarks>
+    /// <remarks>
+    /// <para>WARNING: We do not catch exceptions throw by any supplied delegate...</para>
+    /// <para>This class is not meant to replace the standard exception mechanism.</para>
+    /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public abstract partial class Output<T>
     {
         private readonly bool _isSuccess;
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
         protected Output(bool isSuccess) { _isSuccess = isSuccess; }
 #else
         protected Output(bool isSuccess) { _isSuccess = isSuccess;  }
 #endif
 
-        internal bool IsSuccess { get { return _isSuccess; } }
+        /// <summary>
+        /// Gets a value identicating whether the output is successful. 
+        /// </summary>
+        /// <remarks>Most of the time, you don't need to access this property.
+        /// You are better off using the rich monadic vocabulary.</remarks>
+        /// <value><c>true</c> if the output is successful; otherwise <c>false</c>.</value>
+        public bool IsSuccess { get { return _isSuccess; } }
 
         [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
             Justification = "[Ignore] An explicit conversion operator must be static.")]
@@ -47,6 +51,7 @@ namespace Narvalo.Fx
             Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Output<T>(ExceptionDispatchInfo exceptionInfo)
         {
+            Contract.Requires(exceptionInfo != null);
             Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return η(exceptionInfo);
@@ -58,7 +63,10 @@ namespace Narvalo.Fx
         {
             Require.NotNull(value, "value");
 
-            // REVIEW: Should we simply let the cast to Success_ fail?
+            // This is not really necessary since the cast to Success_ would fail anyway,
+            // but doing so allows us to throw a more meaningful exception and effectively
+            // hide the implementation details; the default exception would say something
+            // like "Unable to cast a Failure_ type to a Success_ type".
             if (!value.IsSuccess)
             {
                 throw new InvalidCastException(Strings_Core.Output_CannotCastFailureToValue);
@@ -74,7 +82,10 @@ namespace Narvalo.Fx
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-            // REVIEW: Should we simply let the cast to Failure_ fail?
+            // This is not really necessary since the cast to Failure_ would fail anyway,
+            // but doing so allows us to throw a more meaningful exception and effectively
+            // hide the implementation details; the default exception would say something
+            // like "Unable to cast a Success_ type to a Failure_ type".
             if (value.IsSuccess)
             {
                 throw new InvalidCastException(Strings_Core.Output_CannotCastSuccessToException);
@@ -182,12 +193,12 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Implements the success part of the <see cref="Output{T}"/> type.
+    /// Implements the "success" part of the <see cref="Output{T}"/> type.
     /// </content>
     public partial class Output<T>
     {
         /// <summary>
-        /// Represents the success part of the <see cref="Output{T}"/> type.
+        /// Represents the "success" part of the <see cref="Output{T}"/> type.
         /// </summary>
         private sealed partial class Success_ : Output<T>, IEquatable<Success_>
         {
@@ -250,7 +261,7 @@ namespace Narvalo.Fx
 
             public override Maybe<T> ValueOrNone()
             {
-                return Maybe.Create(Value);
+                return Maybe.Of(Value);
             }
 
             public override T ValueOrThrow()
@@ -297,12 +308,12 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Implements the failure part of the <see cref="Output{T}"/> type.
+    /// Implements the "failure" part of the <see cref="Output{T}"/> type.
     /// </content>
     public partial class Output<T>
     {
         /// <summary>
-        /// Represents the failure part of the <see cref="Output{T}"/> type.
+        /// Represents the "failure" part of the <see cref="Output{T}"/> type.
         /// </summary>
         private sealed partial class Failure_ : Output<T>, IEquatable<Failure_>
         {
@@ -416,13 +427,11 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
-    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
-        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Failure_
         {
             [ContractInvariantMethod]

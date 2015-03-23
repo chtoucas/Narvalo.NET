@@ -17,7 +17,7 @@ namespace Narvalo
             return Maybe.Create(element.GetCustomAttribute<T>(inherit));
 #else
             var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
-            return Maybe.Create(attr).Select(a => (T)a);
+            return Maybe.Of(attr).Select(a => (T)a);
 #endif
         }
 

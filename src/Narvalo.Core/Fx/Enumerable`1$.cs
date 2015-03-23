@@ -39,7 +39,7 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {
@@ -62,7 +62,7 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {
@@ -96,7 +96,7 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             IEnumerable<Maybe<TSource>> seq
-                = from t in @this where predicate.Invoke(t) select Maybe.Create(t);
+                = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
 
             using (var iter = seq.AssumeNotNull().GetEnumerator())
             {

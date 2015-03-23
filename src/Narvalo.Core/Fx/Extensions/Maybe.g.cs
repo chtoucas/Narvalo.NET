@@ -281,7 +281,7 @@ namespace Narvalo.Fx.Extensions.Internal
             Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
-            var seed = Maybe.Create(Enumerable.Empty<TSource>());
+            var seed = Maybe.Of(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
@@ -295,7 +295,7 @@ namespace Narvalo.Fx.Extensions.Internal
         {
             Contract.Requires(m != null);
 
-            return m.Bind(item => Maybe.Create(list.Concat(Enumerable.Repeat(item, 1))));
+            return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -436,7 +436,7 @@ namespace Narvalo.Fx.Extensions.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Create(seed);
+            Maybe<TAccumulate> result = Maybe.Of(seed);
 
             foreach (TSource item in @this)
             {
@@ -478,7 +478,7 @@ namespace Narvalo.Fx.Extensions.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Create(iter.Current);
+                Maybe<TSource> result = Maybe.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
@@ -516,7 +516,7 @@ namespace Narvalo.Fx.Extensions.Internal
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Create(seed);
+            Maybe<TAccumulate> result = Maybe.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -548,7 +548,7 @@ namespace Narvalo.Fx.Extensions.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Create(iter.Current);
+                Maybe<TSource> result = Maybe.Of(iter.Current);
 
                 while (predicate.Invoke(result) && iter.MoveNext())
                 {

@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Ghostscript", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.PowerShell", "src\Narvalo.PowerShell\Narvalo.PowerShell.csproj", "{4A73807D-3ECA-438A-9108-5A99E193BFBE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8122F9A-9B8D-4888-8A0C-0185F7FDEEF3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Documentation", "{A8122F9A-9B8D-4888-8A0C-0185F7FDEEF3}"
 	ProjectSection(SolutionItems) = preProject
 		Changelog.md = Changelog.md
 		etc\gendarme.ignore = etc\gendarme.ignore

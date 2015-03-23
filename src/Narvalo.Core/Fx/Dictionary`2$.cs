@@ -28,7 +28,7 @@ namespace Narvalo.Fx
             if (key == null) { return Maybe<TValue>.None; }
 
             TValue value;
-            return @this.TryGetValue(key, out value) ? Maybe.Create(value) : Maybe<TValue>.None;
+            return @this.TryGetValue(key, out value) ? Maybe.Of(value) : Maybe<TValue>.None;
         }
     }
 }

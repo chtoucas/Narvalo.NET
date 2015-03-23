@@ -3,7 +3,7 @@
 namespace Narvalo
 {
     using System;
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Intentionally] Using directive.
+#if CONTRACTS_FULL // [Intentionally] Using directive.
     using System.Diagnostics.Contracts;
 #endif
 
@@ -14,7 +14,7 @@ namespace Narvalo
         string Decrypt(string value);
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
     [ContractClass(typeof(ContractForIBidirectionalCryptoEngine))]
     public partial interface IBidirectionalCryptoEngine { }

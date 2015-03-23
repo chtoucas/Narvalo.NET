@@ -6,7 +6,7 @@ namespace Narvalo
 
     public static class Range
     {
-        public static Range<T> Create<T>(T lowerEnd, T upperEnd)
+        public static Range<T> Of<T>(T lowerEnd, T upperEnd)
             where T : struct, IEquatable<T>, IComparable<T>
         {
             return new Range<T>(lowerEnd, upperEnd);

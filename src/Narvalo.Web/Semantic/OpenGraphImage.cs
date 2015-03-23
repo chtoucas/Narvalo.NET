@@ -45,7 +45,7 @@ namespace Narvalo.Web.Semantic
 
         public int Width { get; set; }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

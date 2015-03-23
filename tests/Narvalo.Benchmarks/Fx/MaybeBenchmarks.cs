@@ -7,7 +7,7 @@ namespace Narvalo.Fx
 
     public static class MaybeBenchmarks
     {
-        private static readonly Maybe<string> s_SampleSome = Maybe.Create("Some");
+        private static readonly Maybe<string> s_SampleSome = Maybe.Of("Some");
         private static readonly Maybe<string> s_SampleNone = Maybe<string>.None;
 
         [Benchmark]
@@ -19,25 +19,25 @@ namespace Narvalo.Fx
         [Benchmark]
         public static void Create_ReferenceType()
         {
-            Maybe.Create("Some").Consume();
+            Maybe.Of("Some").Consume();
         }
 
         [Benchmark]
         public static void Create_ValueType()
         {
-            Maybe.Create(1).Consume();
+            Maybe.Of(1).Consume();
         }
 
         [Benchmark]
         public static void Create_NullReferenceType()
         {
-            Maybe.Create<string>(null).Consume();
+            Maybe.Of<string>(null).Consume();
         }
 
         [Benchmark]
         public static void Create_NullValueType()
         {
-            Maybe.Create<int>(null).Consume();
+            Maybe.Of<int>(null).Consume();
         }
 
         [Benchmark]

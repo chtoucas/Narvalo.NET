@@ -28,7 +28,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             _stopwatch.Start();
         }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()

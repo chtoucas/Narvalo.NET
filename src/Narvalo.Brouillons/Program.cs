@@ -8,11 +8,19 @@ namespace Narvalo
 
     using Narvalo.Diagnostics.Benchmarking;
     using Narvalo.Edu.Comparisons;
-    using Narvalo.Fx;
 
     internal static class Program
     {
         public static void Main()
+        {
+            Run();
+        }
+
+        public static void Run()
+        {
+        }
+
+        public static void Benchmark()
         {
             var processor = new BenchmarkComparisonProcessor {
                 DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,

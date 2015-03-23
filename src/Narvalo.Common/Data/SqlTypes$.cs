@@ -78,35 +78,35 @@ namespace Narvalo.Data
         {
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this.IsNull ? Maybe<byte[]>.None : Maybe.Create(@this.Value);
+            return @this.IsNull ? Maybe<byte[]>.None : Maybe.Of(@this.Value);
         }
 
         public static Maybe<byte[]> ToMaybe(this SqlBytes @this)
         {
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this == null || @this.IsNull ? Maybe<byte[]>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<byte[]>.None : Maybe.Of(@this.Value);
         }
 
         public static Maybe<char[]> ToMaybe(this SqlChars @this)
         {
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
-            return @this == null || @this.IsNull ? Maybe<char[]>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<char[]>.None : Maybe.Of(@this.Value);
         }
 
         public static Maybe<string> ToMaybe(this SqlString @this)
         {
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
+            return @this.IsNull ? Maybe<string>.None : Maybe.Of(@this.Value);
         }
 
         public static Maybe<string> ToMaybe(this SqlXml @this)
         {
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this == null || @this.IsNull ? Maybe<string>.None : Maybe.Create(@this.Value);
+            return @this == null || @this.IsNull ? Maybe<string>.None : Maybe.Of(@this.Value);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Narvalo.Fx
     [global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Maybe
     {
-        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Create(global::Narvalo.Fx.Unit.Single);
+        private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
         private static readonly Maybe<global::Narvalo.Fx.Unit> s_None = Maybe<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Narvalo.Fx
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
         /// <param name="value">A value to be wrapped into a <see cref="Maybe{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
-        public static Maybe<T> Create<T>(T value)
+        public static Maybe<T> Of<T>(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
@@ -220,7 +220,7 @@ namespace Narvalo.Fx
             Require.NotNull(selector, "selector");
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            return @this.Bind(_ => Maybe.Create(selector.Invoke(_)));
+            return @this.Bind(_ => Maybe.Of(selector.Invoke(_)));
         }
 
         /// <remarks>

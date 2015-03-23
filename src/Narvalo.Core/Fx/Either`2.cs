@@ -1,10 +1,5 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-using System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
-
 namespace Narvalo.Fx
 {
     using System;
@@ -21,7 +16,7 @@ namespace Narvalo.Fx
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
     public abstract partial class Either<TLeft, TRight>
     {
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
         protected Either() { }
 #else
         private Either() { }
@@ -82,7 +77,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TLeft> LeftOrNone()
             {
-                return Maybe.Create(_value);
+                return Maybe.Of(_value);
             }
 
             public override Maybe<TRight> RightOrNone()
@@ -151,7 +146,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone()
             {
-                return Maybe.Create(_value);
+                return Maybe.Of(_value);
             }
 
             public bool Equals(Right_ other)
@@ -186,9 +181,8 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
-    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(EitherContract<,>))]
     public partial class Either<TLeft, TRight> { }
 

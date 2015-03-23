@@ -91,12 +91,13 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-      <!-- Inside VS, we always define the Code Contracts symbol; otherwise many lines
-           would be unreachable, leading to broken sources after refactoring. -->
+  <!-- Inside VS, we would like to always define the Code Contracts symbol; otherwise many lines
+       are unreachable, leading to broken sources after refactoring. Unfortunately it does not
+       play nicely with the VS environment: compiling is fine but running anything is broken. -->
+  <!--<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
     <DefineConstants 
       Condition=" '$(Configuration)' != 'CodeContracts' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">$(DefineConstants);CONTRACTS_FULL</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <!-- Additional files -->
   <ItemGroup>
@@ -144,7 +145,7 @@
 
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
-  
+
   <!-- Gendarme Analysis -->
   <PropertyGroup>
     <EnableGendarme Condition=" '$(EnableGendarme)' != 'true' ">false</EnableGendarme>

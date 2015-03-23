@@ -27,7 +27,7 @@ namespace Narvalo.Xml
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
-            return Maybe.Create(@this.Attribute(name));
+            return Maybe.Of(@this.Attribute(name));
         }
 
         public static XAttribute AttributeOrThrow(this XElement @this, XName name, Exception exception)
@@ -59,7 +59,7 @@ namespace Narvalo.Xml
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
-            return Maybe.Create(@this.Element(name));
+            return Maybe.Of(@this.Element(name));
         }
 
         public static XElement ElementOrThrow(this XElement @this, XName name, Exception exception)
@@ -104,7 +104,7 @@ namespace Narvalo.Xml
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
-            return Maybe.Create(NextElement(@this));
+            return Maybe.Of(NextElement(@this));
         }
 
         public static XElement NextElementOrThrow(this XElement @this, Exception exception)

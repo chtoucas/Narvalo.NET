@@ -16,7 +16,7 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesFirstMonoidLaw()
         {
             // Arrange
-            var option = Maybe.Create(1);
+            var option = Maybe.Of(1);
 
             // Act
             var left = Maybe<int>.None.OrElse(option);
@@ -30,7 +30,7 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesSecondMonoidLaw()
         {
             // Arrange
-            var option = Maybe.Create(1);
+            var option = Maybe.Of(1);
 
             // Act
             var left = option.OrElse(Maybe<int>.None);
@@ -44,9 +44,9 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesThirdMonoidLaw()
         {
             // Arrange
-            var optionA = Maybe.Create(1);
-            var optionB = Maybe.Create(2);
-            var optionC = Maybe.Create(3);
+            var optionA = Maybe.Of(1);
+            var optionB = Maybe.Of(2);
+            var optionC = Maybe.Of(3);
 
             // Act
             var left = optionA.OrElse(optionB.OrElse(optionC));
@@ -61,10 +61,10 @@ namespace Narvalo.Fx
         {
             // Arrange
             int value = 1;
-            Func<int, Maybe<long>> kun = _ => Maybe.Create((long)2 * _);
+            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
 
             // Act
-            var left = Maybe.Create(value).Bind(kun);
+            var left = Maybe.Of(value).Bind(kun);
             var right = kun(value);
 
             // Assert
@@ -75,8 +75,8 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, Maybe<int>> create = _ => Maybe.Create(_);
-            var option = Maybe.Create(1);
+            Func<int, Maybe<int>> create = _ => Maybe.Of(_);
+            var option = Maybe.Of(1);
 
             // Act
             var left = option.Bind(create);
@@ -90,9 +90,9 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            Maybe<short> m = Maybe.Create((short)1);
-            Func<short, Maybe<int>> f = _ => Maybe.Create((int)3 * _);
-            Func<int, Maybe<long>> g = _ => Maybe.Create((long)2 * _);
+            Maybe<short> m = Maybe.Of((short)1);
+            Func<short, Maybe<int>> f = _ => Maybe.Of((int)3 * _);
+            Func<int, Maybe<long>> g = _ => Maybe.Of((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);
@@ -106,7 +106,7 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesMonadZeroRule()
         {
             // Arrange
-            Func<int, Maybe<long>> kun = _ => Maybe.Create((long)2 * _);
+            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
 
             // Act
             var left = Maybe<int>.None.Bind(kun);
@@ -120,7 +120,7 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesMonadMoreRule()
         {
             // Act
-            var leftSome = Maybe.Create(1).Bind(_ => Maybe<int>.None);
+            var leftSome = Maybe.Of(1).Bind(_ => Maybe<int>.None);
             var leftNone = Maybe<int>.None.Bind(_ => Maybe<int>.None);
             var right = Maybe<int>.None;
 
@@ -133,10 +133,10 @@ namespace Narvalo.Fx
         public static void Maybe_SatisfiesMonadOrRule()
         {
             // Arrange
-            var option = Maybe.Create(2);
+            var option = Maybe.Of(2);
 
             // Act
-            var leftSome = option.OrElse(Maybe.Create(1));
+            var leftSome = option.OrElse(Maybe.Of(1));
             var leftNone = option.OrElse(Maybe<int>.None);
             var right = option;
 
@@ -149,16 +149,84 @@ namespace Narvalo.Fx
         public static void Maybe_DoesNotSatisfyRightZeroForPlus()
         {
             // Arrange
-            var option = Maybe.Create(2);
+            var option = Maybe.Of(2);
 
             // Act
-            var leftSome = Maybe.Create(1).OrElse(option);
+            var leftSome = Maybe.Of(1).OrElse(option);
             var leftNone = Maybe<int>.None.OrElse(option);
             var right = option;
 
             // Assert
             Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
             Assert.True(leftNone.Equals(right));
+        }
+
+        #endregion
+
+        #region Properties
+
+        [Fact]
+        public static void Unit_IsSome()
+        {
+            // Act & Assert
+            Assert.True(Maybe.Unit.IsSome);
+            Assert.Equal(Unit.Single, Maybe.Unit.Value);
+        }
+
+        [Fact]
+        public static void IsSome_IsFalse_WhenNone()
+        {
+            // Arrange
+            var simple = Maybe<int>.None;
+            var value = Maybe<ValueStub>.None;
+            var reference = Maybe<List<int>>.None;
+
+            // Act & Assert
+            Assert.False(simple.IsSome);
+            Assert.False(value.IsSome);
+            Assert.False(reference.IsSome);
+        }
+
+        [Fact]
+        public static void IsSome_IsTrue_WhenSome()
+        {
+            // Arrange
+            var simple = Maybe.Of(3141);
+            var value = Maybe.Of(new ValueStub(3141));
+            var reference = Maybe.Of(new List<int>());
+
+            // Act & Assert
+            Assert.True(simple.IsSome);
+            Assert.True(value.IsSome);
+            Assert.True(reference.IsSome);
+        }
+
+        [Fact]
+        public static void IsSome_IsImmutable_OnceTrue()
+        {
+            // Arrange
+            var list = new List<int>();
+            var option = Maybe.Of(list);
+
+            // Act
+            list = null;
+
+            // Assert
+            Assert.True(option.IsSome);
+        }
+
+        [Fact]
+        public static void IsSome_IsImmutable_OnceFalse()
+        {
+            // Arrange
+            List<int> list = null;
+            var option = Maybe.Of(list);
+
+            // Act
+            list = new List<int>();
+
+            // Assert
+            Assert.True(!option.IsSome);
         }
 
         #endregion
@@ -207,17 +275,17 @@ namespace Narvalo.Fx
         public static void Equality_FollowsReferentialEqualityRules()
         {
             // Arrange
-            var simpleA0 = Maybe.Create(3141);
-            var simpleA1 = Maybe.Create(3141);
+            var simpleA0 = Maybe.Of(3141);
+            var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Create(new ValueStub(3141));
-            var valueA1 = Maybe.Create(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub(3141));
+            var valueA1 = Maybe.Of(new ValueStub(3141));
 
-            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
-            var referenceA0 = Maybe.Create(new List<int>());
-            var referenceA1 = Maybe.Create(new List<int>());
+            var referenceA0 = Maybe.Of(new List<int>());
+            var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.False(simpleA0 == simpleA1);
@@ -258,17 +326,17 @@ namespace Narvalo.Fx
         public static void Inequality_FollowsReferentialEqualityRules()
         {
             // Arrange
-            var simpleA0 = Maybe.Create(3141);
-            var simpleA1 = Maybe.Create(3141);
+            var simpleA0 = Maybe.Of(3141);
+            var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Create(new ValueStub(3141));
-            var valueA1 = Maybe.Create(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub(3141));
+            var valueA1 = Maybe.Of(new ValueStub(3141));
 
-            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
-            var referenceA0 = Maybe.Create(new List<int>());
-            var referenceA1 = Maybe.Create(new List<int>());
+            var referenceA0 = Maybe.Of(new List<int>());
+            var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.True(simpleA0 != simpleA1);
@@ -281,9 +349,9 @@ namespace Narvalo.Fx
         public static void Equals_IsReflexive()
         {
             // Arrange
-            var simple = Maybe.Create(3141);
-            var value = Maybe.Create(new ValueStub(3141));
-            var reference = Maybe.Create(new List<int>());
+            var simple = Maybe.Of(3141);
+            var value = Maybe.Of(new ValueStub(3141));
+            var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.True(simple.Equals(simple));
@@ -295,17 +363,17 @@ namespace Narvalo.Fx
         public static void Equals_IsAbelian()
         {
             // Arrange
-            var simpleA0 = Maybe.Create(3141);
-            var simpleA1 = Maybe.Create(3141);
-            var simple = Maybe.Create(1570);
+            var simpleA0 = Maybe.Of(3141);
+            var simpleA1 = Maybe.Of(3141);
+            var simple = Maybe.Of(1570);
 
-            var valueA0 = Maybe.Create(new ValueStub(3141));
-            var valueA1 = Maybe.Create(new ValueStub(3141));
-            var value = Maybe.Create(new ValueStub(1570));
+            var valueA0 = Maybe.Of(new ValueStub(3141));
+            var valueA1 = Maybe.Of(new ValueStub(3141));
+            var value = Maybe.Of(new ValueStub(1570));
 
-            var referenceA0 = Maybe.Create(new List<int>());
-            var referenceA1 = Maybe.Create(new List<int>());
-            var reference = Maybe.Create(new List<int>() { 0 });
+            var referenceA0 = Maybe.Of(new List<int>());
+            var referenceA1 = Maybe.Of(new List<int>());
+            var reference = Maybe.Of(new List<int>() { 0 });
 
             // Act & Assert
             Assert.Equal(simpleA0.Equals(simpleA1), simpleA1.Equals(simpleA0));
@@ -320,17 +388,17 @@ namespace Narvalo.Fx
         public static void Equals_IsTransitive()
         {
             // Arrange
-            var simple1 = Maybe.Create(3141);
-            var simple2 = Maybe.Create(3141);
-            var simple3 = Maybe.Create(3141);
+            var simple1 = Maybe.Of(3141);
+            var simple2 = Maybe.Of(3141);
+            var simple3 = Maybe.Of(3141);
 
-            var value1 = Maybe.Create(new ValueStub(3141));
-            var value2 = Maybe.Create(new ValueStub(3141));
-            var value3 = Maybe.Create(new ValueStub(3141));
+            var value1 = Maybe.Of(new ValueStub(3141));
+            var value2 = Maybe.Of(new ValueStub(3141));
+            var value3 = Maybe.Of(new ValueStub(3141));
 
-            var reference1 = Maybe.Create(new List<int>());
-            var reference2 = Maybe.Create(new List<int>());
-            var reference3 = Maybe.Create(new List<int>());
+            var reference1 = Maybe.Of(new List<int>());
+            var reference2 = Maybe.Of(new List<int>());
+            var reference3 = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.Equal(simple1.Equals(simple2) && simple2.Equals(simple3), simple1.Equals(simple3));
@@ -359,13 +427,13 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var simpleOpt = Maybe.Create(simple);
+            var simpleOpt = Maybe.Of(simple);
 
             var value = new ValueStub(3141);
-            var valueOpt = Maybe.Create(value);
+            var valueOpt = Maybe.Of(value);
 
             var reference = new List<int>();
-            var referenceOpt = Maybe.Create(reference);
+            var referenceOpt = Maybe.Of(reference);
 
             // Act & Assert
             Assert.True(simpleOpt.Equals(simple));
@@ -378,13 +446,13 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var simpleOpt = Maybe.Create(simple);
+            var simpleOpt = Maybe.Of(simple);
 
             var value = new ValueStub(3141);
-            var valueOpt = Maybe.Create(value);
+            var valueOpt = Maybe.Of(value);
 
             var reference = new List<int>();
-            var referenceOpt = Maybe.Create(reference);
+            var referenceOpt = Maybe.Of(reference);
 
             // Act & Assert
             Assert.True(simpleOpt.Equals((object)simple));
@@ -396,14 +464,14 @@ namespace Narvalo.Fx
         public static void Equals_FollowsStructuralEqualityRules()
         {
             // Arrange
-            var simpleA0 = Maybe.Create(3141);
-            var simpleA1 = Maybe.Create(3141);
+            var simpleA0 = Maybe.Of(3141);
+            var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Create(new ValueStub(3141));
-            var valueA1 = Maybe.Create(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub(3141));
+            var valueA1 = Maybe.Of(new ValueStub(3141));
 
-            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
             // Act & Assert
             Assert.True(simpleA0.Equals(simpleA1));
@@ -415,19 +483,86 @@ namespace Narvalo.Fx
         public static void Equals_FollowsStructuralEqualityRulesAfterCastToObject()
         {
             // Arrange
-            var simpleA0 = Maybe.Create(3141);
-            var simpleA1 = Maybe.Create(3141);
+            var simpleA0 = Maybe.Of(3141);
+            var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Create(new ValueStub(3141));
-            var valueA1 = Maybe.Create(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub(3141));
+            var valueA1 = Maybe.Of(new ValueStub(3141));
 
-            var almostValueA0 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Create(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
 
             // Act & Assert
             Assert.True(simpleA0.Equals((object)simpleA1));
             Assert.True(valueA0.Equals((object)valueA1));
             Assert.True(almostValueA0.Equals((object)almostValueA1));
+        }
+
+        #endregion
+
+        #region Of Method
+
+        [Fact]
+        public static void Of_ReturnsSome_ForNotNull()
+        {
+            // Arrange
+            var simple = 3141;
+            var value = new ValueStub(3141);
+            ValueStub? nullableValue = new ValueStub(3141);
+            var reference = new List<int>();
+
+            // Act
+            var simpleOpt = Maybe.Of(simple);
+            var valueOpt = Maybe.Of(value);
+            var nullableValueOpt = Maybe.Of(nullableValue);
+            var referenceOpt = Maybe.Of(reference);
+
+            // Assert
+            Assert.True(simpleOpt.IsSome);
+            Assert.True(valueOpt.IsSome);
+            Assert.True(nullableValueOpt.IsSome);
+            Assert.True(referenceOpt.IsSome);
+        }
+
+        [Fact]
+        public static void Of_ReturnsNone_ForNull()
+        {
+            // Arrange
+            ValueStub? value = null;
+            List<int> reference = null;
+
+            // Act
+            var valueOpt = Maybe.Of(value);
+            var referenceOpt = Maybe.Of(reference);
+
+            // Assert
+            Assert.False(valueOpt.IsSome);
+            Assert.False(referenceOpt.IsSome);
+        }
+
+        #endregion
+
+        #region Bind Method
+
+        /// <summary>
+        /// <![CDATA[
+        /// Maybe<T>.Bind(selector) returned null when selector returned null. 
+        /// The correct behaviour is to return Maybe<T>.None.
+        /// ]]>
+        /// </summary>
+        [Fact, Issue]
+        public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
+        {
+            // Arrange
+            var source = Maybe.Of(1);
+            Func<int, Maybe<int>> selector = _ => null;
+
+            // Act
+            var m = source.Bind(selector);
+
+            // Assert
+            Assert.True(m != null);
+            Assert.False(m.IsSome);
         }
 
         #endregion
@@ -450,11 +585,27 @@ namespace Narvalo.Fx
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
             // Arrange
-            var source = Maybe.Create(1);
+            var source = Maybe.Of(1);
             Func<int, bool> predicate = null;
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+        }
+
+        [Fact]
+        public static void Where_ReturnsNone_ForUnsuccessfulPredicate()
+        {
+            // Arrange
+            var source = Maybe.Of(1);
+            Func<int, bool> predicate = _ => _ == 2;
+
+            // Act
+            var m = source.Where(predicate);
+            var q = from _ in source where predicate(_) select _;
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         [Fact]
@@ -476,7 +627,7 @@ namespace Narvalo.Fx
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             // Arrange
-            var source = Maybe.Create(1);
+            var source = Maybe.Of(1);
             Func<int, int> selector = null;
 
             // Act & Assert
@@ -484,11 +635,27 @@ namespace Narvalo.Fx
         }
 
         [Fact]
+        public static void Select_ReturnsNone_WhenSourceIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            Func<int, int> selector = _ => _;
+
+            // Act
+            var m = source.Select(selector);
+            var q = from _ in source select selector(_);
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
+        }
+
+        [Fact]
         public static void SelectMany_ThrowsArgumentNullException_WhenSourceIsNull()
         {
             // Arrange
             var source = (Maybe<int>)null;
-            var middle = Maybe.Create(2);
+            var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
@@ -503,7 +670,7 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
             // Arrange
-            var source = Maybe.Create(1);
+            var source = Maybe.Of(1);
             Func<int, Maybe<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
@@ -515,13 +682,91 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
             // Arrange
-            var source = Maybe.Create(1);
-            var middle = Maybe.Create(2);
+            var source = Maybe.Of(1);
+            var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_WhenSourceIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            var middle = Maybe.Of(2);
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_ForMiddleIsNone()
+        {
+            // Arrange
+            var source = Maybe.Of(1);
+            var middle = Maybe<int>.None;
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
+        {
+            // Arrange
+            var source = Maybe<int>.None;
+            var middle = Maybe<int>.None;
+            Func<int, Maybe<int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
+        }
+
+        [Fact]
+        public static void Join_ReturnsNone_WhenJoinFailed()
+        {
+            // Arrange
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
+
+            // Act
+            var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
+            var q = from i in source
+                    join j in inner on i equals j
+                    select i + j;
+
+            // Assert
+            Assert.False(m.IsSome);
+            Assert.False(q.IsSome);
         }
 
         #endregion
@@ -631,70 +876,6 @@ namespace Narvalo.Fx
     {
         #region Properties
 
-        [Fact]
-        public static void Unit_IsSome()
-        {
-            // Act & Assert
-            Assert.True(Maybe.Unit.IsSome);
-            Assert.Equal(Unit.Single, Maybe.Unit.Value);
-        }
-
-        [Fact]
-        public static void IsSome_IsFalse_WhenNone()
-        {
-            // Arrange
-            var simple = Maybe<int>.None;
-            var value = Maybe<ValueStub>.None;
-            var reference = Maybe<List<int>>.None;
-
-            // Act & Assert
-            Assert.False(simple.IsSome);
-            Assert.False(value.IsSome);
-            Assert.False(reference.IsSome);
-        }
-
-        [Fact]
-        public static void IsSome_IsTrue_WhenSome()
-        {
-            // Arrange
-            var simple = Maybe.Create(3141);
-            var value = Maybe.Create(new ValueStub(3141));
-            var reference = Maybe.Create(new List<int>());
-
-            // Act & Assert
-            Assert.True(simple.IsSome);
-            Assert.True(value.IsSome);
-            Assert.True(reference.IsSome);
-        }
-
-        [Fact]
-        public static void IsSome_IsImmutable_OnceTrue()
-        {
-            // Arrange
-            var list = new List<int>();
-            var option = Maybe.Create(list);
-
-            // Act
-            list = null;
-
-            // Assert
-            Assert.True(option.IsSome);
-        }
-
-        [Fact]
-        public static void IsSome_IsImmutable_OnceFalse()
-        {
-            // Arrange
-            List<int> list = null;
-            var option = Maybe.Create(list);
-
-            // Act
-            list = new List<int>();
-
-            // Assert
-            Assert.True(!option.IsSome);
-        }
-
 #if DEBUG // [Intentionally] No exception is thrown when DEBUG is not defined.
 
         [Fact(Skip = "What is the replacement for TraceAssertException")]
@@ -718,10 +899,10 @@ namespace Narvalo.Fx
             ValueStub? nullableValue = new ValueStub(3141);
             var reference = new List<int>();
 
-            var simpleOpt = Maybe.Create(simple);
-            var valueOpt = Maybe.Create(value);
-            var nullableValueOpt = Maybe.Create(nullableValue);
-            var referenceOpt = Maybe.Create(reference);
+            var simpleOpt = Maybe.Of(simple);
+            var valueOpt = Maybe.Of(value);
+            var nullableValueOpt = Maybe.Of(nullableValue);
+            var referenceOpt = Maybe.Of(reference);
 
             // Act & Assert
             Assert.True(simpleOpt.Value == simple);
@@ -735,7 +916,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var stub = new Stub(1);
-            var option = Maybe.Create(stub);
+            var option = Maybe.Of(stub);
 
             // Act
             stub = null;
@@ -753,56 +934,14 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Create Method
-
-        [Fact]
-        public static void Create_ReturnsSome_ForNotNull()
-        {
-            // Arrange
-            var simple = 3141;
-            var value = new ValueStub(3141);
-            ValueStub? nullableValue = new ValueStub(3141);
-            var reference = new List<int>();
-
-            // Act
-            var simpleOpt = Maybe.Create(simple);
-            var valueOpt = Maybe.Create(value);
-            var nullableValueOpt = Maybe.Create(nullableValue);
-            var referenceOpt = Maybe.Create(reference);
-
-            // Assert
-            Assert.True(simpleOpt.IsSome);
-            Assert.True(valueOpt.IsSome);
-            Assert.True(nullableValueOpt.IsSome);
-            Assert.True(referenceOpt.IsSome);
-        }
-
-        [Fact]
-        public static void Create_ReturnsNone_ForNull()
-        {
-            // Arrange
-            ValueStub? value = null;
-            List<int> reference = null;
-
-            // Act
-            var valueOpt = Maybe.Create(value);
-            var referenceOpt = Maybe.Create(reference);
-
-            // Assert
-            Assert.False(valueOpt.IsSome);
-            Assert.False(referenceOpt.IsSome);
-        }
-
-        #endregion
-
         #region Bind Method
 
         [Fact]
         public static void Bind_ReturnsSomeAndApplySelector_WhenSourceIsSome()
         {
             // Arrange
-            var source = Maybe.Create(1);
-            Func<int, Maybe<int>> selector = _ => Maybe.Create(2 * _);
+            var source = Maybe.Of(1);
+            Func<int, Maybe<int>> selector = _ => Maybe.Of(2 * _);
 
             // Act
             var m = source.Bind(selector);
@@ -810,27 +949,6 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(m.IsSome);
             Assert.Equal(2, m.Value);
-        }
-
-        /// <summary>
-        /// <![CDATA[
-        /// Maybe<T>.Bind(selector) returned null when selector returned null. 
-        /// The correct behaviour is to return Maybe<T>.None.
-        /// ]]>
-        /// </summary>
-        [Fact, Issue]
-        public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
-        {
-            // Arrange
-            var source = Maybe.Create(1);
-            Func<int, Maybe<int>> selector = _ => null;
-
-            // Act
-            var m = source.Bind(selector);
-
-            // Assert
-            Assert.True(m != null);
-            Assert.False(m.IsSome);
         }
 
         #endregion
@@ -841,7 +959,7 @@ namespace Narvalo.Fx
         public static void Where_ReturnsSome_ForSuccessfulPredicate()
         {
             // Arrange
-            var source = Maybe.Create(1);
+            var source = Maybe.Of(1);
             Func<int, bool> predicate = _ => _ == 1;
 
             // Act
@@ -856,42 +974,10 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Where_ReturnsNone_ForUnsucessfulPredicate()
-        {
-            // Arrange
-            var source = Maybe.Create(1);
-            Func<int, bool> predicate = _ => _ == 2;
-
-            // Act
-            var m = source.Where(predicate);
-            var q = from _ in source where predicate(_) select _;
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
-        public static void Select_ReturnsNone_WhenSourceIsNone()
-        {
-            // Arrange
-            var source = Maybe<int>.None;
-            Func<int, int> selector = _ => _;
-
-            // Act
-            var m = source.Select(selector);
-            var q = from _ in source select selector(_);
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
         public static void Select_ReturnsSomeAndApplySelector_WhenSourceIsSome()
         {
             // Arrange
-            var source = Maybe.Create(1);
+            var source = Maybe.Of(1);
             Func<int, int> selector = _ => 2 * _;
 
             // Act
@@ -906,71 +992,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_WhenSourceIsNone()
-        {
-            // Arrange
-            var source = Maybe<int>.None;
-            var middle = Maybe.Create(2);
-            Func<int, Maybe<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            // Act
-            var m = source.SelectMany(valueSelector, resultSelector);
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
-        public static void SelectMany_ReturnsNone_ForMiddleIsNone()
-        {
-            // Arrange
-            var source = Maybe.Create(1);
-            var middle = Maybe<int>.None;
-            Func<int, Maybe<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            // Act
-            var m = source.SelectMany(valueSelector, resultSelector);
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
-        public static void SelectMany_ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
-        {
-            // Arrange
-            var source = Maybe<int>.None;
-            var middle = Maybe<int>.None;
-            Func<int, Maybe<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            // Act
-            var m = source.SelectMany(valueSelector, resultSelector);
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
         public static void SelectMany_ReturnsSomeAndApplySelector()
         {
             // Arrange
-            var source = Maybe.Create(1);
-            var middle = Maybe.Create(2);
+            var source = Maybe.Of(1);
+            var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
@@ -988,29 +1014,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Join_ReturnsNone_WhenJoinFailed()
-        {
-            // Arrange
-            var source = Maybe.Create(1);
-            var inner = Maybe.Create(2);
-
-            // Act
-            var m = source.Join(inner, _ => _, _ => _, (i, j) => i + j);
-            var q = from i in source
-                    join j in inner on i equals j
-                    select i + j;
-
-            // Assert
-            Assert.False(m.IsSome);
-            Assert.False(q.IsSome);
-        }
-
-        [Fact]
         public static void Join_ReturnsSome_WhenJoinSucceed()
         {
             // Arrange
-            var source = Maybe.Create(1);
-            var inner = Maybe.Create(2);
+            var source = Maybe.Of(1);
+            var inner = Maybe.Of(2);
 
             // Act
             var m = source.Join(inner, _ => 2 * _, _ => _, (i, j) => i + j);

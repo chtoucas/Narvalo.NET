@@ -1,10 +1,5 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-using System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[Intentionally] We keep a class and its code contract class in the same file.")]
-
 namespace Narvalo.Fx
 {
     using System;
@@ -24,7 +19,7 @@ namespace Narvalo.Fx
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
         protected Switch() { }
 #else
         private Switch() { }
@@ -241,7 +236,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TLeft> LeftOrNone()
             {
-                return Maybe.Create(_value);
+                return Maybe.Of(_value);
             }
 
             public override Maybe<TRight> RightOrNone()
@@ -366,7 +361,7 @@ namespace Narvalo.Fx
 
             public override Maybe<TRight> RightOrNone()
             {
-                return Maybe.Create(_value);
+                return Maybe.Of(_value);
             }
 
             public override string ToString()
@@ -407,13 +402,11 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
-    /// <content>Contains the Code Contracts definitions for the type.</content>
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>
     {
-        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Left_
         {
             [ContractInvariantMethod]
@@ -423,7 +416,6 @@ namespace Narvalo.Fx
             }
         }
 
-        /// <content>Contains the Code Contracts definitions for the type.</content>
         private partial class Right_
         {
             [ContractInvariantMethod]

@@ -42,19 +42,19 @@ namespace Narvalo
         ////    [Benchmark]
         ////    public static void Create_ReferenceType()
         ////    {
-        ////        Maybe.Create("Some").Consume();
+        ////        Maybe.Of("Some").Consume();
         ////    }
 
         ////    [Benchmark]
         ////    public static void Create_NullableValueType()
         ////    {
-        ////        Maybe.Create(s_Sample).Consume();
+        ////        Maybe.Of(s_Sample).Consume();
         ////    }
 
         ////    [Benchmark]
         ////    public static void Create_ValueType()
         ////    {
-        ////        Maybe.Create(1).Consume();
+        ////        Maybe.Of(1).Consume();
         ////    }
         ////}
     }

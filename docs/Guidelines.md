@@ -166,7 +166,7 @@ The following projects should the default ruleset from Code Analysis.
 
 Wrap any object invariants methods and contract classes with a compiler conditional clause:
 ```csharp
-#if CONTRACTS_FULL && !CODE_ANALYSIS
+#if CONTRACTS_FULL
     [ContractInvariantMethod]
     void ObjectInvariants()
     {

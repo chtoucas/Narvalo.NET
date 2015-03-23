@@ -29,7 +29,9 @@ namespace Narvalo.Mvp.Web.Core
                 var coordinator = new AspNetMessageCoordinator();
 
                 // Act & Assert
-                Assert.DoesNotThrow(() => coordinator.Publish("message"));
+                //Assert.DoesNotThrow(() => coordinator.Publish("message"));
+                coordinator.Publish("message");
+                Assert.True(true);
             }
 
             [Fact]
@@ -143,7 +145,9 @@ namespace Narvalo.Mvp.Web.Core
                 coordinator.Close();
 
                 // Act & Assert
-                Assert.DoesNotThrow(() => coordinator.Close());
+                //Assert.DoesNotThrow(() => coordinator.Close());
+                coordinator.Close();
+                Assert.True(true);
             }
         }
 

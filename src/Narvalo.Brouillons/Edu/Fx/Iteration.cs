@@ -15,7 +15,7 @@ namespace Narvalo.Edu.Fx
 
         public static Maybe<Iteration<TResult, TSource>> MayCreate<TResult, TSource>(TResult result, TSource source)
         {
-            return Maybe.Create(Iteration.Create(result, source));
+            return Maybe.Of(Iteration.Create(result, source));
         }
     }
 }

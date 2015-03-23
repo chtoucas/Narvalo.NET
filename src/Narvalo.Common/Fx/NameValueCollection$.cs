@@ -30,7 +30,7 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string[]>>() != null);
 
-            return Maybe.Create(@this.GetValues(name));
+            return Maybe.Of(@this.GetValues(name));
         }
 
         public static IEnumerable<T> ParseAny<T>(

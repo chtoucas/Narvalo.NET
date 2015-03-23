@@ -18,10 +18,9 @@ Work in progress
 
 - Refactorings:
  * Output<T>, Switch<T1, T2> and Either<T1, T2> no longer use abstract methods.
- * Type casting for Maybe, Output... IEquatable
+ * Type casting for Maybe, Output... Implements correctly IEquatable
  * Currencies
  * Benchmarks
-- Inside VS we always define the CONTRACTS_FULL but this conflicts with the test runner.
 - Review Monad.tt.
 - Improvement: True argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.

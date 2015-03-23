@@ -203,7 +203,7 @@ namespace Narvalo.Fx.Extensions
         {
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return Maybe.Create(@this);
+            return Maybe.Of(@this);
         }
 
         public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)

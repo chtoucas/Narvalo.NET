@@ -3,7 +3,7 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Intentionally] Using directive.
+#if CONTRACTS_FULL // [Intentionally] Using directive.
     using System.Diagnostics.Contracts;
 #endif
 
@@ -13,7 +13,7 @@ namespace Narvalo.Runtime.Reliability
         void Execute(Action action);
     }
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
     [ContractClass(typeof(ISentinelContract))]
     public partial interface ISentinel { }

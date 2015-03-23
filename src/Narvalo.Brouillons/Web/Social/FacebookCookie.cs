@@ -107,7 +107,7 @@ namespace Narvalo.Web.Social
 
             string cookieName = Format.InvariantCulture(CookieNameFormat_, appId);
 
-            return Maybe.Create(request.Cookies[cookieName]);
+            return Maybe.Of(request.Cookies[cookieName]);
         }
 
         static FacebookCookie? ParseHttpCookie_(HttpCookie httpCookie, string appSecret)

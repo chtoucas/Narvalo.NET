@@ -60,7 +60,7 @@ namespace Narvalo.Fx.Extensions
                 list.Add(m.Value);
             }
 
-            return Maybe.Create(list.AsEnumerable());
+            return Maybe.Of(list.AsEnumerable());
         }
 
         // Custom version of FilterCore with Maybe<T>.

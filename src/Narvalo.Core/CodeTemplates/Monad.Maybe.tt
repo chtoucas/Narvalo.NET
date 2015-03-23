@@ -6,5 +6,5 @@
     UnitEnsuresSome = true;
     MultiplicationEnsuresSome = true;
 
-    ReturnName = "Create";
+    ReturnName = "Of";
 #>

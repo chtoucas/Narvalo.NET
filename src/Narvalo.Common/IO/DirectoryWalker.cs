@@ -4,7 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Intentionally] Using directive.
+#if CONTRACTS_FULL // [Intentionally] Using directive.
     using System.Diagnostics.Contracts;
 #endif
     using System.IO;
@@ -78,7 +78,7 @@ namespace Narvalo.IO
 
         protected abstract void OnFile(FileInfo file);
 
-#if CONTRACTS_FULL && !CODE_ANALYSIS // [Ignore] Contract Class and Object Invariants.
+#if CONTRACTS_FULL // [Ignore] Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariants()
