@@ -6,7 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
 
     using Xunit;
-    using Xunit.Sdk;
 
     public static partial class MaybeFacts
     {
@@ -247,6 +246,7 @@ namespace Narvalo.Fx
         public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
         {
             // Arrange
+            // REVIEW: Cast
             var simple = (Maybe<int>)null;
             var value = (Maybe<ValueStub>)null;
             var reference = (Maybe<List<int>>)null;
@@ -298,6 +298,7 @@ namespace Narvalo.Fx
         public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
         {
             // Arrange
+            // REVIEW: Cast
             var simple = (Maybe<int>)null;
             var value = (Maybe<ValueStub>)null;
             var reference = (Maybe<List<int>>)null;
@@ -418,6 +419,7 @@ namespace Narvalo.Fx
             Assert.True(simple.Equals(null));
             Assert.True(value.Equals(null));
             Assert.True(reference.Equals((object)null));
+            // REVIEW: Cast
             Assert.True(reference.Equals((List<int>)null));
             Assert.True(reference.Equals((Maybe<List<int>>)null));
         }
@@ -573,6 +575,7 @@ namespace Narvalo.Fx
         public static void Where_ThrowsArgumentNullException_WhenSourceIsNull()
         {
             // Arrange
+            // REVIEW: Cast
             var source = (Maybe<int>)null;
             Func<int, bool> predicate = _ => _ == 1;
 
@@ -612,6 +615,7 @@ namespace Narvalo.Fx
         public static void Select_ThrowsArgumentNullException_WhenSourceIsNull()
         {
             // Arrange
+            // REVIEW: Cast
             var source = (Maybe<int>)null;
             Func<int, int> selector = _ => _;
 
@@ -654,6 +658,7 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_WhenSourceIsNull()
         {
             // Arrange
+            // REVIEW: Cast
             var source = (Maybe<int>)null;
             var middle = Maybe.Of(2);
             Func<int, Maybe<int>> valueSelector = _ => middle;
@@ -875,20 +880,6 @@ namespace Narvalo.Fx
     public static partial class MaybeFacts
     {
         #region Properties
-
-#if DEBUG // [Intentionally] No exception is thrown when DEBUG is not defined.
-
-        [Fact(Skip = "What is the replacement for TraceAssertException")]
-        public static void Value_ThrowsTraceAssertException_WhenNone()
-        {
-            // Arrange
-            var option = Maybe<int>.None;
-
-            // Act & Assert
-            //Assert.Throws<TraceAssertException>(() => option.Value);
-        }
-
-#endif
 
         [Fact]
         public static void Value_ReturnsTheOriginalValue_WhenSome()

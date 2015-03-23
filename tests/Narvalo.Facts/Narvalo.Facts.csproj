@@ -60,6 +60,7 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
+    <Compile Include="Fx\OutputFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
