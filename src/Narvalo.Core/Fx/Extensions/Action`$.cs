@@ -23,13 +23,13 @@ namespace Narvalo.Fx.Extensions
             {
                 @this.Invoke();
 
-                return VoidOrError.Success;
+                return VoidOrError.Void;
             }
             catch (TException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return VoidOrError.Failure(edi);
+                return VoidOrError.Error(edi);
             }
         }
 
@@ -50,12 +50,12 @@ namespace Narvalo.Fx.Extensions
             {
                 @this.Invoke();
 
-                return VoidOrError.Success;
+                return VoidOrError.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Failure(edi);
+            return VoidOrError.Error(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
@@ -76,13 +76,13 @@ namespace Narvalo.Fx.Extensions
             {
                 @this.Invoke();
 
-                return VoidOrError.Success;
+                return VoidOrError.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Failure(edi);
+            return VoidOrError.Error(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
@@ -104,14 +104,14 @@ namespace Narvalo.Fx.Extensions
             {
                 @this.Invoke();
 
-                return VoidOrError.Success;
+                return VoidOrError.Void;
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return VoidOrError.Failure(edi);
+            return VoidOrError.Error(edi);
         }
     }
 }

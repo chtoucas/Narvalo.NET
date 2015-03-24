@@ -7,7 +7,7 @@ namespace Narvalo.Fx
 
     public class VoidOrError
     {
-        private static readonly VoidOrError s_Success = new VoidOrError();
+        private static readonly VoidOrError s_Void = new VoidOrError();
 
         private readonly bool _isError;
 
@@ -18,19 +18,19 @@ namespace Narvalo.Fx
             _isError = isError;
         }
 
-        public static VoidOrError Success
+        public static VoidOrError Void
         {
             get
             {
                 Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
-                return s_Success;
+                return s_Void;
             }
         }
 
         public bool IsError { get { return _isError; } }
 
-        public static VoidOrError Failure(ExceptionDispatchInfo exceptionInfo)
+        public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
             Contract.Ensures(Contract.Result<VoidOrError>() != null);

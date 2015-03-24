@@ -7,28 +7,28 @@ namespace Narvalo.Fx
 
     public class VoidOrBreak
     {
-        private static readonly VoidOrBreak s_Success = new VoidOrBreak();
+        private static readonly VoidOrBreak s_Void = new VoidOrBreak();
 
-        private readonly bool _aborted;
+        private readonly bool _isBreak;
 
         private VoidOrBreak() { }
 
         private VoidOrBreak(bool arboted)
         {
-            _aborted = arboted;
+            _isBreak = arboted;
         }
 
-        public static VoidOrBreak Success
+        public static VoidOrBreak Void
         {
             get
             {
                 Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
 
-                return s_Success;
+                return s_Void;
             }
         }
 
-        public bool Aborted { get { return _aborted; } }
+        public bool IsBreak { get { return _isBreak; } }
 
         public virtual string Reason
         {
@@ -38,7 +38,7 @@ namespace Narvalo.Fx
             }
         }
 
-        public static VoidOrBreak Abort(string reason)
+        public static VoidOrBreak Break(string reason)
         {
             Require.NotNullOrEmpty(reason, "reason");
             Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
@@ -87,7 +87,7 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariants()
             {
-                Contract.Invariant(_reason != null);
+                Contract.Invariant(_isBreak != null);
             }
 
 #endif
