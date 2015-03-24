@@ -80,12 +80,12 @@ namespace Narvalo.Runtime.Reliability
 
             if (!CanExecute)
             {
-                throw new CircuitOpenException();
+                throw new InvalidOperationException("The circuit is open");
             }
 
             try
             {
-                action();
+                action.Invoke();
             }
             catch (GuardException)
             {

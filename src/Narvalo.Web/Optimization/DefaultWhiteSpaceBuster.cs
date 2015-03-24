@@ -3,10 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Text.RegularExpressions;
-
-    using Narvalo.Internal;
 
     /// <summary>
     /// Représente un nettoyeur simple d'espaces blancs.

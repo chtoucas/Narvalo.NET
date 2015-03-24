@@ -3,6 +3,9 @@ ChangeLog
                        
 XXXX-XX-XX
 ----------
+
+#### Bugfixes
+- The contract invariant for `VoidOrBreak` was 
          
 #### Breaking changes
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
@@ -10,6 +13,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
+- Provides a class to verify 
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
 

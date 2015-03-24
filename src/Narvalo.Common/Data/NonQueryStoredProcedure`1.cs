@@ -49,7 +49,7 @@ namespace Narvalo.Data
 
             int result;
 
-            using (var connection = CreateConnection_())
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 using (var command = CreateCommand_(connection))
                 {
@@ -92,13 +92,6 @@ namespace Narvalo.Data
             }
 
             return cmd;
-        }
-
-        private SqlConnection CreateConnection_()
-        {
-            Contract.Ensures(Contract.Result<SqlConnection>() != null);
-
-            return new SqlConnection(ConnectionString);
         }
     }
 

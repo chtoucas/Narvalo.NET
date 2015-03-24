@@ -19,10 +19,10 @@ namespace Narvalo.Internal
     /// </remarks>
     /// <seealso cref="Assume"/>.
     [DebuggerStepThrough]
-    internal static class Promise
+    internal static class AssertPromise
     {
         /// <summary>
-        /// Checks for a condition.
+        /// Checks various precondition.
         /// </summary>
         /// <remarks>
         /// <para>All methods called within the condition must be pure.</para>

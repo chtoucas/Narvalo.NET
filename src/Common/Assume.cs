@@ -10,7 +10,6 @@ namespace Narvalo.Internal
     /// Provides helper methods to help the code analysis tools recognize
     /// that certain conditions are met.
     /// </summary>
-    /// <seealso cref="Promise"/>.
     [DebuggerStepThrough]
     internal static class Assume
     {

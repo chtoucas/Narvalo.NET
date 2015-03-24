@@ -23,7 +23,7 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            AddParameterUnsafe(@this, parameterName, parameterType, value);
+            @this.AddParameterUnsafe(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -48,7 +48,7 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            AddParameterOrNullUnsafe(@this, parameterName, parameterType, value);
+            @this.AddParameterOrNullUnsafe(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -81,7 +81,7 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            AddParameterOrNullUnsafe(@this, parameterName, parameterType, value, value != null);
+            @this.AddParameterOrNullUnsafe(parameterName, parameterType, value, value != null);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -95,7 +95,7 @@ namespace Narvalo.Data
         {
             Contract.Requires(@this != null);
 
-            AddParameterOrNullUnsafe(@this, parameterName, parameterType, value, value != null);
+            @this.AddParameterOrNullUnsafe(parameterName, parameterType, value, value != null);
         }
 
         public static void AddParameterOrNull<T>(
@@ -107,7 +107,7 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            AddParameterOrNullUnsafe(@this, parameterName, parameterType, value, condition);
+            @this.AddParameterOrNullUnsafe(parameterName, parameterType, value, condition);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",

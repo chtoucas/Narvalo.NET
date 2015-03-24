@@ -5,8 +5,6 @@ namespace Narvalo.Web.Html.Internal
     using System.Web;
     using System.Web.Mvc;
 
-    using Narvalo.Internal;
-
     /// <summary>
     /// Provides extension methods for <see cref="TagBuilder"/>.
     /// </summary>

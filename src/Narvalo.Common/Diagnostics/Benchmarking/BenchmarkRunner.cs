@@ -6,8 +6,6 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
-
     public sealed class BenchmarkRunner
     {
         private readonly IBenchmarkTimer _timer;

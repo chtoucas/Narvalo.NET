@@ -50,7 +50,7 @@ namespace Narvalo.Runtime.Reliability
 
             if (!CanExecute)
             {
-                throw new FlowRateExceededException();
+                throw new InvalidOperationException("Flow rate exceeded.");
             }
 
             _requestCount++;

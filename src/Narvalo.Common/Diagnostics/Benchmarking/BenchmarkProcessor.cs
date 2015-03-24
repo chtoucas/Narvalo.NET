@@ -8,8 +8,6 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Linq;
     using System.Reflection;
 
-    using Narvalo.Internal;
-
     public sealed class BenchmarkProcessor
     {
         private readonly BenchmarkRunner _runner;

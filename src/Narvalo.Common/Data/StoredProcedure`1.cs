@@ -56,7 +56,7 @@ namespace Narvalo.Data
         {
             TResult result;
 
-            using (var connection = CreateConnection_())
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 using (var command = CreateCommand_(connection))
                 {
@@ -64,7 +64,7 @@ namespace Narvalo.Data
 
                     connection.Open();
 
-                    using (var reader = ExecuteCommand_(command))
+                    using (var reader = command.ExecuteReader(CommandBehavior))
                     {
                         result = Execute(reader);
                     }
@@ -105,21 +105,6 @@ namespace Narvalo.Data
             }
 
             return cmd;
-        }
-
-        private SqlConnection CreateConnection_()
-        {
-            Contract.Ensures(Contract.Result<SqlConnection>() != null);
-
-            return new SqlConnection(ConnectionString);
-        }
-
-        private SqlDataReader ExecuteCommand_(SqlCommand command)
-        {
-            Promise.NotNull(command);
-            Contract.Ensures(Contract.Result<SqlDataReader>() != null);
-
-            return command.ExecuteReader(CommandBehavior);
         }
     }
 

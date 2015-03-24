@@ -70,9 +70,6 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Promise.cs">
-      <Link>Internal\Promise.cs</Link>
-    </Compile>
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Currency.cs" />

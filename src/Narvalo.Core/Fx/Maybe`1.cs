@@ -7,9 +7,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Runtime.CompilerServices;
-
-    using Narvalo.Internal;
 
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
@@ -195,8 +192,8 @@ namespace Narvalo.Fx
         {
             get
             {
-                // Ensures that any call to this property is guarded upstream.
-                Promise.Condition(IsSome);
+                // Proves that any call to this property is guarded upstream.
+                Promise.Check(IsSome);
                 Contract.Ensures(Contract.Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.

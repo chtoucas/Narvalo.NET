@@ -54,9 +54,6 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Promise.cs">
-      <Link>Internal\Promise.cs</Link>
-    </Compile>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Edu\Monads\Identity.g.cs">
@@ -166,15 +163,12 @@
     <Compile Include="ImageUtility.cs" />
     <Compile Include="RandomString.cs" />
     <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
-    <Compile Include="Runtime\Reliability\BarrierException.cs" />
     <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
     <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
-    <Compile Include="Runtime\Reliability\CircuitOpenException.cs" />
     <Compile Include="Runtime\Reliability\ConcurrencyThrottle.cs" />
     <Compile Include="Runtime\Reliability\FlowRateBarrier.cs" />
-    <Compile Include="Runtime\Reliability\FlowRateExceededException.cs" />
     <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
     <Compile Include="Runtime\Reliability\Guard%24.cs" />
     <Compile Include="Runtime\Reliability\GuardChain.cs" />

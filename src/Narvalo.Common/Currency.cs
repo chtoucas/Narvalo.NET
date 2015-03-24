@@ -71,7 +71,7 @@ namespace Narvalo
             Contract.Requires(code != null);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return s_Cache.GetOrAdd(code, GetCurrency).AssumeNotNull();
+            return s_Cache.GetOrAdd(code, GetCurrency_).AssumeNotNull();
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Narvalo
         /// <exception cref="CurrencyNotFoundException">No currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
-        internal static Currency GetCurrency(string code)
+        private static Currency GetCurrency_(string code)
         {
             Promise.NotNull(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
