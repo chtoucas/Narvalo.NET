@@ -10,7 +10,7 @@ namespace Narvalo
 
     /// <summary>
     /// Provides helper methods to check for preconditions that you know to ALWAYS hold.
-    /// This is achieved through both debugging assertions and Code Contracts preconditions.
+    /// This is achieved through both debugging exceptions and Code Contracts preconditions.
     /// </summary>
     /// <remarks>
     /// <para>These helpers MUST NOT be used in place of proper validation routines of public 

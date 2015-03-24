@@ -13,7 +13,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- Provides a class to verify 
+- New `Promise` class to perform argument validation only in DEBUG builds. 
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
 
