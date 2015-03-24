@@ -87,7 +87,8 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariants()
             {
-                Contract.Invariant(_isBreak != null);
+                Contract.Invariant(_reason != null);
+                Contract.Invariant(_isBreak);
             }
 
 #endif
