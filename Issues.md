@@ -20,6 +20,7 @@ Work in progress
  * Range
  * Currencies
  * Benchmarks
+- Enforce & Range T struct ?
 - Review Monad.tt.
 - Improvement: True argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
@@ -27,6 +28,7 @@ Work in progress
 - Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.
 - Improvement: Review all GetHashCode() methods.
 - Improvement: Review all ToString() methods.
+- make.ps1 -r fails to push to the official NuGet server.
 
 
 Not yet planned

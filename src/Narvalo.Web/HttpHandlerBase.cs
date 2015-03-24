@@ -57,8 +57,7 @@ namespace Narvalo.Web
         {
             Require.NotNull(request, "request");
 
-            // FIXME: Replace the call to Enum.HasFlag
-            return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod) select AcceptedVerbs.HasFlag(_)) ?? false;
+            return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod) select AcceptedVerbs.Contains(_)) ?? false;
         }
 
         protected virtual void OnInvalidHttpMethod(HttpContext context)

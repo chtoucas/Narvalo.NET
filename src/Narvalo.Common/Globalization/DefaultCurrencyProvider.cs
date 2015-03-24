@@ -15,14 +15,16 @@ namespace Narvalo.Globalization
 
         public IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
         {
-            // FIXME: Replace all calls to Enum.HasFlag
-            if (types.HasFlag(CurrencyTypes.AllCurrencies)) {
+            if (types.Contains(CurrencyTypes.AllCurrencies))
+            {
                 return CurrentCurrencies.Concat(LegacyCurrencies);
             }
-            else if (types.HasFlag(CurrencyTypes.CurrentCurrencies)) {
+            else if (types.Contains(CurrencyTypes.CurrentCurrencies))
+            {
                 return CurrentCurrencies;
             }
-            else {
+            else
+            {
                 return LegacyCurrencies;
             }
         }

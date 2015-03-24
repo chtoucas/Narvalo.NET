@@ -58,15 +58,15 @@ namespace Narvalo.Web
             @this.Cache.SetCacheability(cacheability);
 
             // En-tête HTTP 1.0
-            // FIXME: Replace all calls to Enum.HasFlag
-            if (versions.HasFlag(HttpVersions.HttpV10))
+            if (versions.Contains(HttpVersions.HttpV10))
             {
                 // REVIEW: Now ou UtcNow ?
                 @this.Cache.SetExpires(DateTime.UtcNow.Add(duration));
             }
-            
+
             // En-tête HTTP 1.1
-            if (versions.HasFlag(HttpVersions.HttpV11)) {
+            if (versions.Contains(HttpVersions.HttpV11))
+            {
                 @this.Cache.SetMaxAge(duration);
                 @this.Cache.AppendCacheExtension("must-revalidate, proxy-revalidate");
             }

@@ -23,7 +23,6 @@ namespace Narvalo
             return Boolean(value, BooleanStyles.Default);
         }
 
-        // FIXME: Replace all calls to Enum.HasFlag
         public static bool? Boolean(string value, BooleanStyles style)
         {
             if (value == null) { return null; }
@@ -32,10 +31,10 @@ namespace Narvalo
 
             if (val.Length == 0)
             {
-                return style.HasFlag(BooleanStyles.EmptyIsFalse) ? (bool?)false : null;
+                return style.Contains(BooleanStyles.EmptyIsFalse) ? (bool?)false : null;
             }
 
-            if (style.HasFlag(BooleanStyles.Literal))
+            if (style.Contains(BooleanStyles.Literal))
             {
                 bool result;
 
@@ -46,12 +45,12 @@ namespace Narvalo
                 }
             }
 
-            if (style.HasFlag(BooleanStyles.ZeroOrOne) && (val == "0" || val == "1"))
+            if (style.Contains(BooleanStyles.ZeroOrOne) && (val == "0" || val == "1"))
             {
                 return val == "1";
             }
 
-            if (style.HasFlag(BooleanStyles.HtmlInput) && value == "on")
+            if (style.Contains(BooleanStyles.HtmlInput) && value == "on")
             {
                 return true;
             }

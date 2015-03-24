@@ -1,25 +1,37 @@
 ChangeLog
 =========
+                               
+2015-03-24 - Correct a problem with NuGet and Code Contracts
+------------------------------------------------------------
+              
+_Released version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
-XXXX-XX-XX - Focus on API and code quality of Narvalo.Core
+#### Bugfixes
+- For Narvalo.Web, the Code Contracts library was wrongly added to the project references.
+
+#### Improvements
+- More meaningful description of the NuGet packages.
+- Replaced all calls to Enum.HasFlag by a specialized extension method that should be more efficient.
+
+2015-03-23 - Focus on API and code quality of Narvalo.Core
 ----------------------------------------------------------
 
 _Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 #### Breaking changes
-- To improve usability, merged most of the `Narvalo.Collections` namespace with 
+- To improve usability, merged most of the `Narvalo.Collections` namespace with
   `Narvalo.Fx` and moved almost all others classes to Narvalo.Common.
-  Narvalo.Core is now focused on implementing functional patterns and a minimal set 
+  Narvalo.Core is now focused on implementing functional patterns and a minimal set
   of helpers, namely what is necessary to perform argument validation.
 - Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
 - Renamed `Maybe.Create()` to `Maybe.Of()` and `Range.Create()` to `Range.Of()`.
-- Apply to all monads: renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and 
-  changed the signature of `When()` and `Then()`. 
+- Apply to all monads: renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and
+  changed the signature of `When()` and `Then()`.
 - Moved the `UriExtensions` class to Narvalo.Web as it is only useful there.
 
 #### Enhancements
 - New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
-- New types to help writing naïve benchmarks.
+- New types to help writing naÃ¯ve benchmarks.
 
 #### Improvements
 - Narvalo.Core fully passes FxCop, Gendarme and Code Contracts static analysis.
@@ -30,10 +42,10 @@ _Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 2015-02-20 - Bugfix for currency types
 --------------------------------------
 
-_Released version 0.21 of Narvalo.Core & Narvalo.Common_                         
+_Released version 0.21 of Narvalo.Core & Narvalo.Common_
 
 #### Bugfixes
-- Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the 
+- Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the
   alphabetic code but not the currency info since we didn't have a numeric code.
 
 #### Improvements

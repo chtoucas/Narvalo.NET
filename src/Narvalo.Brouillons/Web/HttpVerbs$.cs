@@ -5,7 +5,7 @@ namespace Narvalo.Web
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public static class HttpVerbsExtensions
+    public static class HttpVerbsXXXExtensions
     {
         public static IList<string> ToLiteralList(this HttpVerbs verbs)
         {
@@ -26,8 +26,7 @@ namespace Narvalo.Web
               List<string> list,
               string entryText)
         {
-            // FIXME: Replace the call to Enum.HasFlag
-            if (verbs.HasFlag(match))
+            if (verbs.Contains(match))
             {
                 list.Add(entryText);
             }

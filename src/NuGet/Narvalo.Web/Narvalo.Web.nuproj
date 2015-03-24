@@ -4,12 +4,22 @@
     <NuId>Narvalo.Web</NuId>
     <NuTitle>Narvalo.Web</NuTitle>
     <NuDescription>
-      This package contains the Narvalo.Org Web utilities.
+      This package provides types that might prove useful for Web development:
+      generic HttpHandler type, asset provider, Razor and WebForms compile-time optimizers,
+      preliminary support for OpenGraph and Schema.Org.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>ASP.NET, MVC, WebForms, Optimization</NuTags>
+    <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
+    <NuReferences>
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Web.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+    
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Web.dll" target="lib\net45\" />

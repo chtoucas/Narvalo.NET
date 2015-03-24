@@ -13,4 +13,12 @@ namespace Narvalo.Globalization
 
         AllCurrencies = CurrentCurrencies | LegacyCurrencies
     }
+
+    public static class CurrencyTypesExtensions
+    {
+        public static bool Contains(this CurrencyTypes @this, CurrencyTypes value)
+        {
+            return (@this & value) != 0;
+        }
+    }
 }
