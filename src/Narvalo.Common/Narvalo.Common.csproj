@@ -107,9 +107,6 @@
     <Compile Include="IO\RelativeDirectory.cs" />
     <Compile Include="IO\RelativeFile.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
-    <Compile Include="Data\SqlDataReader%24.SimpleTypes.cs">
-      <DependentUpon>SqlDataReader%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />

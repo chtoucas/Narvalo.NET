@@ -1,6 +1,18 @@
 ChangeLog
 =========
-                               
+                       
+XXXX-XX-XX
+----------
+         
+#### Breaking changes
+- Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
+  and `VoidOrBreak.Success` to `VoidOrBreak.Void`.
+- Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
+
+#### Enhancements
+- Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
+  These unsafe methods delegate parameter validation to the caller.
+
 2015-03-24 - Correct a problem with NuGet and Code Contracts
 ------------------------------------------------------------
               

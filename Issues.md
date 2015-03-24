@@ -16,6 +16,8 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Unsafe alternates: complete SqlDataReader.
+- Confirm that Maybe methods never returns null.
 - Refactorings:
  * Range
  * Currencies
@@ -28,7 +30,7 @@ Work in progress
 - Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.
 - Improvement: Review all GetHashCode() methods.
 - Improvement: Review all ToString() methods.
-- make.ps1 -r fails to push to the official NuGet server.
+- make.ps1 -r fails to push to the official NuGet server but works otherwise.
 
 
 Not yet planned
