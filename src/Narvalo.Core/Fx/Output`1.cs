@@ -379,6 +379,8 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
+                Contract.Ensures(Contract.Result<string>() != null);
+
                 return Format.CurrentCulture("Success({0})", Value);
             }
         }
@@ -445,6 +447,8 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
+                Contract.Ensures(Contract.Result<string>() != null);
+
                 return Format.CurrentCulture("Failure({0})", _exceptionInfo);
             }
         }
@@ -496,13 +500,6 @@ namespace Narvalo.Fx
             Contract.Requires(selector != null);
 
             return default(Output<TResult>);
-        }
-
-        public override string ToString()
-        {
-            Contract.Ensures(Contract.Result<string>() != null);
-
-            return String.Empty;
         }
     }
 

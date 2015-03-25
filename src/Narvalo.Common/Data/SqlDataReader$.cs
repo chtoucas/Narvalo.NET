@@ -355,6 +355,8 @@ namespace Narvalo.Data
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
+            Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBytesUnsafe(ordinal);
         }
@@ -373,6 +375,7 @@ namespace Narvalo.Data
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBytesUnsafe(name);
         }
@@ -390,6 +393,8 @@ namespace Narvalo.Data
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
+            Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBinaryUnsafe(ordinal);
         }
@@ -408,6 +413,7 @@ namespace Narvalo.Data
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBinaryUnsafe(name);
         }
@@ -425,6 +431,8 @@ namespace Narvalo.Data
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
+            Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
             return @this.MayGetCharsUnsafe(ordinal);
         }
@@ -445,6 +453,7 @@ namespace Narvalo.Data
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
             return @this.MayGetCharsUnsafe(name);
         }
@@ -462,6 +471,7 @@ namespace Narvalo.Data
         public static string GetString(this SqlDataReader @this, int ordinal, string defaultValue)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
 
             return @this.GetStringUnsafe(ordinal, defaultValue);
         }
@@ -496,6 +506,8 @@ namespace Narvalo.Data
         public static Maybe<string> MayGetString(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
+            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetStringUnsafe(ordinal);
         }
@@ -514,6 +526,7 @@ namespace Narvalo.Data
         public static Maybe<string> MayGetString(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetStringUnsafe(name);
         }
@@ -531,6 +544,7 @@ namespace Narvalo.Data
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
 
             return @this.GetMoneyUnsafe(ordinal, defaultValue);
         }
@@ -565,6 +579,7 @@ namespace Narvalo.Data
         public static decimal? GetNullableMoney(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
 
             return @this.GetNullableMoneyUnsafe(ordinal);
         }
@@ -600,6 +615,7 @@ namespace Narvalo.Data
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
 
             return @this.GetXmlUnsafe(ordinal, defaultValue);
         }
@@ -634,6 +650,8 @@ namespace Narvalo.Data
         public static Maybe<string> MayGetXml(this SqlDataReader @this, int ordinal)
         {
             Require.Object(@this);
+            Contract.Requires(ordinal >= 0);
+            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetXmlUnsafe(ordinal);
         }
@@ -652,6 +670,7 @@ namespace Narvalo.Data
         public static Maybe<string> MayGetXml(this SqlDataReader @this, string name)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetXmlUnsafe(name);
         }

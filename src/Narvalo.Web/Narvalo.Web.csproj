@@ -94,9 +94,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Assume.cs">
-      <Link>Internal\Assume.cs</Link>
-    </Compile>
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

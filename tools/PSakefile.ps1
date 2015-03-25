@@ -98,22 +98,23 @@ Task FullClean `
 }
 
 Task CodeAnalysis `
-    -Description 'Run Code Analysis (SLOW).' `
+    -Description 'Run Code Analysis on core libraries (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias CA `
 {
-    MSBuild $Everything $Opts $CI_Props `
+    MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
         # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true'
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_'
 }
 
 Task GendarmeAnalysis `
-    -Description 'Build ''Foundations'' for Mono.Gendarme.' `
+    -Description 'Build core libraries for Mono.Gendarme.' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
@@ -130,7 +131,7 @@ Task GendarmeAnalysis `
 }
 
 Task CodeContractsAnalysis `
-    -Description 'Run Code Contracts Analysis on ''Foundations'' (EXTREMELY SLOW).' `
+    -Description 'Run Code Contracts Analysis on core libraries (EXTREMELY SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
@@ -139,11 +140,12 @@ Task CodeContractsAnalysis `
         # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
-        '/p:Configuration=CodeContracts'
+        '/p:Configuration=CodeContracts',
+        '/p:Filter=_Core_'
 }
 
 Task SecurityAnalysis `
-    -Description 'Run SecAnnotate on ''Foundations'' (SLOW).' `
+    -Description 'Run SecAnnotate on core libraries (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {

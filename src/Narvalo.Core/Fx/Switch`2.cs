@@ -148,6 +148,8 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
+                Contract.Ensures(Contract.Result<string>() != null);
+
                 return "Either(Empty)";
             }
 
@@ -278,6 +280,7 @@ namespace Narvalo.Fx
             public override string ToString()
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return Format.CurrentCulture("Left({0})", _value);
             }
         }
@@ -392,6 +395,8 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
+                Contract.Ensures(Contract.Result<string>() != null);
+
                 return Format.CurrentCulture("Right({0})", _value);
             }
         }
@@ -490,13 +495,6 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Maybe<TRight>>() != null);
 
             return default(Maybe<TRight>);
-        }
-
-        public override string ToString()
-        {
-            Contract.Ensures(Contract.Result<string>() != null);
-
-            return String.Empty;
         }
     }
 

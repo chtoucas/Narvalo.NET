@@ -25,6 +25,8 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static bool GetBooleanUnsafe(this IDataRecord @this, string name)
         {
+            Contract.Requires(@this != null);
+
             return @this.GetBoolean(@this.GetOrdinal(name));
         }
 

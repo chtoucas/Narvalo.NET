@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Internal
+namespace Narvalo
 {
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// Provides helper methods to help the code analysis tools recognize
-    /// that certain conditions are met.
+    /// Provides helper methods to help the Code Contracts tools recognize that 
+    /// certain conditions are met.
     /// </summary>
     [DebuggerStepThrough]
-    internal static class Assume
+    public static class Assume
     {
         /// <summary>
         /// Instructs code analysis tools to assume that the specified object is not null,
