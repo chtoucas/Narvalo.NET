@@ -1,11 +1,9 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Internal
 {
     using System;
     using System.Diagnostics;
-
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides helper methods to check for promises on parameters.
@@ -18,12 +16,12 @@ namespace Narvalo
     /// arguments but is only useful in very specialized use cases. Be wise.
     /// Personally, I can only see three situations where these helpers make sense:
     /// for protected overriden methods in a sealed class when the base method does
-    /// have a contract attached AND when you know for certain that all callers will 
+    /// have a contract attached AND when you know for certain that all callers will
     /// satisfy the condition.
     /// </para>
     /// </remarks>
     [DebuggerStepThrough]
-    public static class Check
+    internal static class Check
     {
         /// <summary>
         /// Checks that the specified argument is not <see langword="null"/>.
@@ -99,5 +97,8 @@ namespace Narvalo
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(value), rationale);
         }
+
+        [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
+        public sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }

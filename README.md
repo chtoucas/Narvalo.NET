@@ -9,11 +9,21 @@ The most stable parts are:
 
 1. Narvalo Core Libraries
     - [Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
-      portable class library of utilities.
+      This library features implementations of some of the usual suspects from
+      functional programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads,
+      simple pattern matching (`Either<T1, T2>`, `Switch<T1, T2>`), generators
+      and function extensions.
+      It also contains helpers to perform argument validation compatible with
+      Code Contracts preconditions.
     - [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
-      complements Narvalo.Core.
+      This library provides various utilities and extension methods: `Currency`
+      (ISO 4217) and Range types, directory walker, Int64 encoder,
+      benchmark helpers, extensions for Collections, Configuration, SQL client
+      and XDom.
     - [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
-      Web centric utilities.
+      This library provides types that might prove useful for Web development:
+      generic HttpHandler type, asset provider, Razor and WebForms compile-time
+      optimizers, preliminary support for OpenGraph and Schema.Org.
 
 2. MVP Framework
     - [Narvalo.Mvp](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp),
