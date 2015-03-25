@@ -4,18 +4,20 @@ ChangeLog
 XXXX-XX-XX
 ----------
 
-#### Bugfixes
-- The contract invariant for `VoidOrBreak` was 
-         
 #### Breaking changes
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
   and `VoidOrBreak.Success` to `VoidOrBreak.Void`.
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- New `Promise` class to perform argument validation only in DEBUG builds. 
+- New `Promise` class to perform argument validation that you know must ALWAYS succeed. 
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
+- New validation method: `Require.PropertyNotWhiteSpace()`.
+
+#### Improvements
+- `Require.PropertyNotEmpty()` no longer throws an `ArgumentNullException`.
+- Whenever it was possible, moved `SqlDataReader` extensions to `IDataRecord` extensions.
 
 2015-03-24 - Correct a problem with NuGet and Code Contracts
 ------------------------------------------------------------

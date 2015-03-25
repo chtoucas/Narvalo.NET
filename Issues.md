@@ -16,9 +16,10 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- Review Assume, Promise, Require, ValidatedNotNull and Enforce. 
+- Review the definition of DEBUG in CodeContracts builds.
+- Review ValidatedNotNull in the shared Require file.
 - Inlining.
-- Unsafe alternates: complete SqlDataReader.
+- Unsafe alternates: validate their usefulness and complete SqlDataReader.
 - Confirm that Maybe methods never returns null.
 - Refactorings:
  * Range
