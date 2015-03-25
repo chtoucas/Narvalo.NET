@@ -4,9 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-    using System.Runtime.CompilerServices;
 
     using Narvalo.Internal;
 
@@ -40,33 +38,18 @@ namespace Narvalo
         /// </remarks>
         /// <param name="testCondition">The conditional expression to evaluate.</param>
         /// <param name="rationale">The rationale for the promise.</param>
-        /// <param name="file">Optional full path of the source file that contains the caller.</param>
-        /// <param name="line">Optional line number in the source file at which the method is called.</param>
-        /// <param name="memberName">Optional method or property name of the caller to the method.</param>
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-            Justification = "[Intentionally] The parameters are filled automatically by the compler.")]
-        public static void Condition(
-            bool testCondition,
-            string rationale,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int line = 0,
-            [CallerMemberName] string memberName = null)
+        public static void Condition(bool testCondition, string rationale)
         {
             Contract.Requires(testCondition);
 
             if (!testCondition)
             {
                 throw new FailedPromiseException(
-                    Format.InvariantCulture(
-                        "{0}:{1} [{2}] - A promise did not hold: {3}",
-                        file,
-                        line,
-                        memberName,
-                        rationale));
+                    Format.CurrentCulture("A promise did not hold: {0}", rationale));
             }
         }
 
@@ -76,33 +59,18 @@ namespace Narvalo
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The rationale for the promise.</param>
-        /// <param name="file">Optional full path of the source file that contains the caller.</param>
-        /// <param name="line">Optional line number in the source file at which the method is called.</param>
-        /// <param name="memberName">Optional method or property name of the caller to the method.</param>
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-            Justification = "[Intentionally] The parameters are filled automatically by the compler.")]
-        public static void NotNull<T>(
-            T value,
-            string rationale,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int line = 0,
-            [CallerMemberName] string memberName = null)
+        public static void NotNull<T>(T value, string rationale)
         {
             Contract.Requires(value != null);
 
             if (value == null)
             {
                 throw new FailedPromiseException(
-                    Format.InvariantCulture(
-                        "{0}:{1} [{2}] - The parameter is null: {3}",
-                        file,
-                        line,
-                        memberName,
-                        rationale));
+                    Format.CurrentCulture("The parameter value is null: {0}", rationale));
             }
         }
 
@@ -111,33 +79,18 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The rationale for the promise.</param>
-        /// <param name="file">Optional full path of the source file that contains the caller.</param>
-        /// <param name="line">Optional line number in the source file at which the method is called.</param>
-        /// <param name="memberName">Optional method or property name of the caller to the method.</param>
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-            Justification = "[Intentionally] The parameters are filled automatically by the compler.")]
-        public static void NotNullOrEmpty(
-            string value,
-            string rationale,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int line = 0,
-            [CallerMemberName] string memberName = null)
+        public static void NotNullOrEmpty(string value, string rationale)
         {
             Contract.Requires(!String.IsNullOrEmpty(value));
 
             if (String.IsNullOrEmpty(value))
             {
                 throw new FailedPromiseException(
-                    Format.InvariantCulture(
-                        "{0}:{1} [{2}] - The parameter is null or empty: {3}",
-                        file,
-                        line,
-                        memberName,
-                        rationale));
+                    Format.CurrentCulture("The parameter value is null or empty: {0}", rationale));
             }
         }
 
@@ -147,32 +100,19 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The rationale for the promise.</param>
-        /// <param name="file">Optional full path of the source file that contains the caller.</param>
-        /// <param name="line">Optional line number in the source file at which the method is called.</param>
-        /// <param name="memberName">Optional method or property name of the caller to the method.</param>
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed",
-            Justification = "[Intentionally] The parameters are filled automatically by the compler.")]
-        public static void NotNullOrWhiteSpace(
-            string value,
-            string rationale,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int line = 0,
-            [CallerMemberName] string memberName = null)
+        public static void NotNullOrWhiteSpace(string value, string rationale)
         {
             Contract.Requires(!String.IsNullOrWhiteSpace(value));
 
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new FailedPromiseException(
-                    Format.InvariantCulture(
-                        "{0}:{1} [{2}] - The parameter is null or empty, or consists only of white-space characters: {3}",
-                        file,
-                        line,
-                        memberName,
+                    Format.CurrentCulture(
+                        "The parameter value is null or empty, or consists only of white-space characters: {0}",
                         rationale));
             }
         }

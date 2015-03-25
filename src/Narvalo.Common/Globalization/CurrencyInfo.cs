@@ -185,7 +185,7 @@ namespace Narvalo.Globalization
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return Format.InvariantCulture("{0} ({1})", EnglishName, EnglishRegionName);
+            return Format.CurrentCulture("{0} ({1})", EnglishName, EnglishRegionName);
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

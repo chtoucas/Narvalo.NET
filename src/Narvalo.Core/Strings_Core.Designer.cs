@@ -62,7 +62,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a none maybe to its underlying value type..
+        ///   Looks up a localized string similar to Can not cast a Maybe.None to a value..
         /// </summary>
         internal static string Maybe_CannotCastNoneToValue {
             get {
@@ -71,7 +71,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a output failure to a value..
+        ///   Looks up a localized string similar to Can not cast an failed output to a value..
         /// </summary>
         internal static string Output_CannotCastFailureToValue {
             get {
@@ -80,7 +80,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a output success to an exception..
+        ///   Looks up a localized string similar to Can not cast an successful output to an exception..
         /// </summary>
         internal static string Output_CannotCastSuccessToException {
             get {
@@ -89,7 +89,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A bad outcome has no value..
+        ///   Looks up a localized string similar to A failed output does not enclose any value..
         /// </summary>
         internal static string Output_FailureHasNoValue {
             get {
@@ -98,7 +98,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception..
+        ///   Looks up a localized string similar to A successful output does not enclose any exception..
         /// </summary>
         internal static string Output_SuccessHasNoException {
             get {
@@ -107,7 +107,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null..
         /// </summary>
         internal static string Require_ArgumentNullFormat {
             get {
@@ -116,7 +116,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or empty..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty..
         /// </summary>
         internal static string Require_ArgumentNullOrEmptyFormat {
             get {
@@ -125,7 +125,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The parameter &apos;{0}&apos; is null or empty, or contains only white-space characters..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty, or contains only white-space characters..
         /// </summary>
         internal static string Require_ArgumentNullOrWhiteSpaceFormat {
             get {
@@ -179,7 +179,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The object &apos;this&apos; is null..
+        ///   Looks up a localized string similar to The object parameter is null..
         /// </summary>
         internal static string Require_ObjectNull {
             get {
