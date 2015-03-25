@@ -64,7 +64,6 @@
     <Compile Include="..\Common\Assume.cs">
       <Link>Internal\Assume.cs</Link>
     </Compile>
-    <Compile Include="Check.cs" />
     <Compile Include="Internal\FailedPromiseException.cs" />
     <Compile Include="Fx\Enumerable`1%24.cs" />
     <Compile Include="Fx\Enumerator`1%24.cs" />

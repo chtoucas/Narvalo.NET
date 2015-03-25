@@ -28,7 +28,6 @@ namespace Narvalo
     /// </list>
     /// </para>
     /// </remarks>
-    /// <seealso cref="Check"/>
     [DebuggerStepThrough]
     public static class Promise
     {

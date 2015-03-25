@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Runtime.CompilerServices;
 
     using Narvalo.Internal;
 
@@ -23,7 +22,6 @@ namespace Narvalo
     /// satisfy the condition.
     /// </para>
     /// </remarks>
-    /// <seealso cref="Promise"/>
     [DebuggerStepThrough]
     public static class Check
     {
@@ -33,7 +31,7 @@ namespace Narvalo
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNull<T>([ValidatedNotNull]T value) where T : class
         {
             Debug.Assert(value != null, "The parameter value is null.");
@@ -46,7 +44,7 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNull<T>([ValidatedNotNull]T value, string rationale) where T : class
         {
             Debug.Assert(value != null, rationale);
@@ -57,7 +55,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value)
         {
             Debug.Assert(!String.IsNullOrEmpty(value), "The parameter value is null or empty.");
@@ -69,7 +67,7 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string rationale)
         {
             Debug.Assert(!String.IsNullOrEmpty(value), rationale);
@@ -81,7 +79,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value)
         {
             Debug.Assert(
@@ -96,7 +94,7 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Conditional("DEBUG")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string rationale)
         {
             Debug.Assert(!String.IsNullOrWhiteSpace(value), rationale);
