@@ -34,12 +34,12 @@ namespace Narvalo
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
-        /// <param name="message">The message to send to display if the test fails.</param>
+        /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNull<T>([ValidatedNotNull]T value, string message) where T : class
+        public static void NotNull<T>([ValidatedNotNull]T value, string rationale) where T : class
         {
-            Debug.Assert(value != null, message);
+            Debug.Assert(value != null, rationale);
         }
 
         /// <summary>
@@ -57,12 +57,12 @@ namespace Narvalo
         /// Checks that the specified argument is not <see langword="null"/> or empty.
         /// </summary>
         /// <param name="value">The argument to check.</param>
-        /// <param name="message">The message to send to display if the test fails.</param>
+        /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value, string message)
+        public static void NotNullOrEmpty([ValidatedNotNull]string value, string rationale)
         {
-            Debug.Assert(!String.IsNullOrEmpty(value), message);
+            Debug.Assert(!String.IsNullOrEmpty(value), rationale);
         }
 
         /// <summary>
@@ -84,12 +84,12 @@ namespace Narvalo
         /// and does not consist only of white-space characters.
         /// </summary>
         /// <param name="value">The argument to check.</param>
-        /// <param name="message">The message to send to display if the test fails.</param>
+        /// <param name="rationale">The message to send to display if the test fails.</param>
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string message)
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string rationale)
         {
-            Debug.Assert(!String.IsNullOrWhiteSpace(value), message);
+            Debug.Assert(!String.IsNullOrWhiteSpace(value), rationale);
         }
     }
 }

@@ -38,12 +38,12 @@ namespace Narvalo.Fx
             }
         }
 
-        public static VoidOrBreak Break(string reason)
+        public static VoidOrBreak Break(string message)
         {
-            Require.NotNullOrEmpty(reason, "reason");
+            Require.NotNullOrEmpty(message, "message");
             Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
 
-            return new VoidOrBreak.Break_(reason);
+            return new VoidOrBreak.Break_(message);
         }
 
         public override string ToString()
