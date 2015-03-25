@@ -14,6 +14,8 @@ namespace Narvalo.Data
      * Méthodes d'extension pour `SqlDataReader` 
      * =========================================
      * 
+     * TODO: Mettre à jour!
+     * 
      * Objets de type valeur
      * ---------------------
      * 
@@ -43,26 +45,10 @@ namespace Narvalo.Data
      */
 
     /// <summary>
-    /// Provides extension methods for <see cref="System.Data.SqlClient.SqlDataReader"/>.
+    /// Provides extension methods for <see cref="SqlDataReader"/>.
     /// </summary>
     public static partial class SqlDataReaderExtensions
     {
-        public static bool GetBoolean(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetBooleanUnsafe(name);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static bool GetBooleanUnsafe(this SqlDataReader @this, string name)
-        {
-            Contract.Requires(@this != null);
-
-            return @this.GetBoolean(@this.GetOrdinal(name));
-        }
-
         public static bool GetBoolean(this SqlDataReader @this, int ordinal, bool defaultValue)
         {
             Require.Object(@this);
@@ -94,13 +80,6 @@ namespace Narvalo.Data
             Require.Object(@this);
 
             return @this.GetNullableBoolean(@this.GetOrdinal(name));
-        }
-
-        public static byte GetByte(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetByte(@this.GetOrdinal(name));
         }
 
         public static byte GetByte(this SqlDataReader @this, int ordinal, byte defaultValue)
@@ -136,22 +115,6 @@ namespace Narvalo.Data
             return @this.GetNullableByte(@this.GetOrdinal(name));
         }
 
-        public static DateTime GetDateTime(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetDateTimeUnsafe(name);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static DateTime GetDateTimeUnsafe(this SqlDataReader @this, string name)
-        {
-            Contract.Requires(@this != null);
-
-            return @this.GetDateTime(@this.GetOrdinal(name));
-        }
-
         public static DateTime GetDateTime(this SqlDataReader @this, int ordinal, DateTime defaultValue)
         {
             Require.Object(@this);
@@ -183,13 +146,6 @@ namespace Narvalo.Data
             Require.Object(@this);
 
             return @this.GetNullableDateTime(@this.GetOrdinal(name));
-        }
-
-        public static decimal GetDecimal(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetDecimal(@this.GetOrdinal(name));
         }
 
         public static decimal GetDecimal(this SqlDataReader @this, int ordinal, decimal defaultValue)
@@ -225,13 +181,6 @@ namespace Narvalo.Data
             return @this.GetNullableDecimal(@this.GetOrdinal(name));
         }
 
-        public static double GetDouble(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetDouble(@this.GetOrdinal(name));
-        }
-
         public static double GetDouble(this SqlDataReader @this, int ordinal, double defaultValue)
         {
             Require.Object(@this);
@@ -263,13 +212,6 @@ namespace Narvalo.Data
             Require.Object(@this);
 
             return @this.GetNullableDouble(@this.GetOrdinal(name));
-        }
-
-        public static Guid GetGuid(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetGuid(@this.GetOrdinal(name));
         }
 
         public static Guid GetGuid(this SqlDataReader @this, int ordinal, Guid defaultValue)
@@ -305,13 +247,6 @@ namespace Narvalo.Data
             return @this.GetNullableGuid(@this.GetOrdinal(name));
         }
 
-        public static short GetInt16(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetInt16(@this.GetOrdinal(name));
-        }
-
         public static short GetInt16(this SqlDataReader @this, int ordinal, short defaultValue)
         {
             Require.Object(@this);
@@ -345,22 +280,6 @@ namespace Narvalo.Data
             return @this.GetNullableInt16(@this.GetOrdinal(name));
         }
 
-        public static int GetInt32(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetInt32Unsafe(name);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static int GetInt32Unsafe(this SqlDataReader @this, string name)
-        {
-            Contract.Requires(@this != null);
-
-            return @this.GetInt32(@this.GetOrdinal(name));
-        }
-
         public static int GetInt32(this SqlDataReader @this, int ordinal, int defaultValue)
         {
             Require.Object(@this);
@@ -392,13 +311,6 @@ namespace Narvalo.Data
             Require.Object(@this);
 
             return @this.GetNullableInt32(@this.GetOrdinal(name));
-        }
-
-        public static long GetInt64(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetInt64(@this.GetOrdinal(name));
         }
 
         public static long GetInt64(this SqlDataReader @this, int ordinal, long defaultValue)
@@ -545,22 +457,6 @@ namespace Narvalo.Data
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
             return @this.MayGetChars(@this.GetOrdinal(name));
-        }
-
-        public static string GetString(this SqlDataReader @this, string name)
-        {
-            Require.Object(@this);
-
-            return @this.GetStringUnsafe(name);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetStringUnsafe(this SqlDataReader @this, string name)
-        {
-            Contract.Requires(@this != null);
-
-            return @this.GetString(@this.GetOrdinal(name));
         }
 
         public static string GetString(this SqlDataReader @this, int ordinal, string defaultValue)
