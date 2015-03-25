@@ -7,8 +7,6 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
-
     public abstract partial class NonQueryStoredProcedure<TParameters>
     {
         private readonly string _connectionString;

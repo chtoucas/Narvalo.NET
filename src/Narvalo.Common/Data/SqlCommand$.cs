@@ -7,8 +7,6 @@ namespace Narvalo.Data
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
-
     /// <summary>
     /// Provides extension methods for <see cref="SqlCommand"/>.
     /// </summary>

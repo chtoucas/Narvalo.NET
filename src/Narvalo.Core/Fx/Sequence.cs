@@ -8,8 +8,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo.Internal;
-
     public static class Sequence
     {
         /// <summary>

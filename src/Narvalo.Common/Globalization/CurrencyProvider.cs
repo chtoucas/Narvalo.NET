@@ -5,8 +5,6 @@ namespace Narvalo.Globalization
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
-
     // TODO: Implements ICurrencyProvider.
     public sealed class CurrencyProvider
     {

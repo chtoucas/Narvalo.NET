@@ -9,9 +9,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo.Fx.Extensions;
-    using Narvalo.Internal;
-
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>

@@ -10,8 +10,6 @@ namespace Narvalo.IO
     using System.IO;
     using System.Linq;
 
-    using Narvalo.Internal;
-
     public abstract class DirectoryWalker
     {
         private readonly Func<DirectoryInfo, bool> _directoryFilter;

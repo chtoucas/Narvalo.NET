@@ -8,7 +8,6 @@ namespace Narvalo.Data
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
-    using Narvalo.Internal;
 
     /*!
      * Méthodes d'extension pour `SqlDataReader` 

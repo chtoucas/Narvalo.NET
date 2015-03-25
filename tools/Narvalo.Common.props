@@ -84,8 +84,7 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <!-- WARNING: Keep the DEBUG symbol since Contract.Assert and Contract.Assume
-         depend on it. Do not add the CODE_ANALYSIS symbol: Code Contracts
+    <!-- WARNING: Do not add the CODE_ANALYSIS symbol: Code Contracts
          and Code Analysis don't play well together. -->
     <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
     <!--<DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>-->
