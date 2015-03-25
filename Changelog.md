@@ -1,6 +1,6 @@
 ChangeLog
 =========
-                       
+
 XXXX-XX-XX
 ----------
 
@@ -10,7 +10,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- New `Promise` class to perform argument validation that you know must ALWAYS succeed. 
+- New `Promise` and `Check` classes to perform argument validation that you know must ALWAYS succeed.
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
 - New validation method: `Require.PropertyNotWhiteSpace()`.
@@ -21,7 +21,7 @@ XXXX-XX-XX
 
 2015-03-24 - Correct a problem with NuGet and Code Contracts
 ------------------------------------------------------------
-              
+
 _Released version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 #### Bugfixes

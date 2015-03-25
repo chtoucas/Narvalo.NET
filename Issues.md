@@ -25,7 +25,7 @@ Work in progress
  * Range
  * Currencies
  * Benchmarks
-- Enforce & Range T struct ?
+- Enforce & Range T struct constraint? Require for T? where T is a struct?
 - Review Monad.tt.
 - Improvement: True argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.

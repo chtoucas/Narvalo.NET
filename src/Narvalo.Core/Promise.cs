@@ -12,7 +12,7 @@ namespace Narvalo
 
     /// <summary>
     /// Provides helper methods to check for preconditions that you know to ALWAYS hold.
-    /// This is achieved through both unrecoverable exceptions in DEBUG builds 
+    /// This is achieved through unrecoverable exceptions in DEBUG builds 
     /// and Code Contracts preconditions when their enabled.
     /// </summary>
     /// <remarks>
