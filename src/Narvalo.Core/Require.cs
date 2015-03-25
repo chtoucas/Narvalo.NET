@@ -58,16 +58,32 @@ namespace Narvalo
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty string.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
-            Property(value);
-
-            if (value.Length == 0)
+            if (String.IsNullOrEmpty(value))
             {
-                throw new ArgumentException(Strings_Core.Require_PropertyEmpty, "value");
+                throw new ArgumentException(Strings_Core.Require_PropertyNullOrEmpty, "value");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified property value is not <see langword="null"/> or empty,
+        /// or does not consist only of white-space characters.
+        /// Meant to be used inside a property setter to validate the new value.
+        /// </summary>
+        /// <param name="value">The property value to check.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
+        /// or empty, or does not consist only of white-space characters.</exception>
+        [ContractArgumentValidator]
+        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(Strings_Core.Require_PropertyNullOrWhiteSpace, "value");
             }
 
             Contract.EndContractBlock();
