@@ -53,7 +53,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return "{Void}";
+            return "Void";
         }
 
         private sealed class Break_ : VoidOrBreak
@@ -82,7 +82,7 @@ namespace Narvalo.Fx
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return _reason;
+                return Format.CurrentCulture("Break({0})", _reason);
             }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

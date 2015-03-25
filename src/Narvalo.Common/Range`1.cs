@@ -57,8 +57,10 @@ namespace Narvalo
 
         public override string ToString()
         {
-            return Format.InvariantCulture(
-                "LowerEnd={0};UpperEnd={1}",
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return Format.CurrentCulture(
+                "LowerEnd({0}) - UpperEnd({1})",
                 LowerEnd.ToString(),
                 UpperEnd.ToString());
         }

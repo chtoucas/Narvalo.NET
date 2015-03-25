@@ -183,6 +183,8 @@ namespace Narvalo.Globalization
 
         public override string ToString()
         {
+            Contract.Ensures(Contract.Result<string>() != null);
+
             return Format.InvariantCulture("{0} ({1})", EnglishName, EnglishRegionName);
         }
 

@@ -313,7 +313,9 @@ namespace Narvalo.Fx
         /// <copydoc cref="Object.ToString" />
         public override String ToString()
         {
-            return IsSome ? Value.ToString() : "Maybe(None)";
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return IsSome ? Format.CurrentCulture("Maybe({0})", Value) : "Maybe(None)";
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

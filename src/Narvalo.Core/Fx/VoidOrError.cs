@@ -45,7 +45,9 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
-            return "{Void}";
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return "Void";
         }
 
         private sealed class Error_ : VoidOrError
@@ -69,7 +71,7 @@ namespace Narvalo.Fx
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return _exceptionInfo.ToString();
+                return Format.CurrentCulture("Error({0})", _exceptionInfo);
             }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

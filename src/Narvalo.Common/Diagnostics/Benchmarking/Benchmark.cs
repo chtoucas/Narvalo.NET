@@ -58,7 +58,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return CategoryName + "; " + Name;
+            return Format.CurrentCulture("[{0}] {1}", CategoryName, Name);
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

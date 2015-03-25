@@ -28,7 +28,7 @@ namespace Narvalo.Web.Semantic
 
         public override string ToString()
         {
-            return _culture.ToString().Replace('-', '_');
+            return Culture.ToString().Replace('-', '_');
         }
     }
 }

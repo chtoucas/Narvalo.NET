@@ -32,7 +32,6 @@ Work in progress
 - Improvement: Monad.tt, review true argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`.
-- Improvement: Review all ToString() methods.
 - make.ps1 -r fails to push to the official NuGet server but works otherwise.
 
 

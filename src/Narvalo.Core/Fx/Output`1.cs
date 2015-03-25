@@ -493,6 +493,13 @@ namespace Narvalo.Fx
 
             return default(Output<TResult>);
         }
+
+        public override string ToString()
+        {
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return String.Empty;
+        }
     }
 
 #endif

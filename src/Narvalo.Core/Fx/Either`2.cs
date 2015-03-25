@@ -221,6 +221,13 @@ namespace Narvalo.Fx
 
             return default(Maybe<TRight>);
         }
+
+        public override string ToString()
+        {
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return String.Empty;
+        }
     }
 
 #endif
