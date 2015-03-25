@@ -5,6 +5,7 @@ namespace Narvalo.Web
     using System.Collections.Generic;
 #if CONTRACTS_FULL // Using directive.
     using System.Diagnostics.Contracts;
+    using System.Linq;
 #endif
     using System.Web;
 
@@ -31,7 +32,7 @@ namespace Narvalo.Web
             {
                 Contract.Ensures(Contract.Result<IEnumerable<HttpQueryBinderException>>() != null);
 
-                return default(IEnumerable<HttpQueryBinderException>);
+                return Enumerable.Empty<HttpQueryBinderException>();
             }
         }
 
@@ -39,7 +40,7 @@ namespace Narvalo.Web
         {
             Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
 
-            return default(Maybe<TQuery>);
+            return Maybe<TQuery>.None;
         }
     }
 

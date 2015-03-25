@@ -13,6 +13,8 @@ namespace Narvalo
     /// Provides helper methods to perform argument validation.
     /// If Code Contracts are enabled, these methods are recognized as preconditions.
     /// </summary>
+    /// <remarks>The methods are recognized as parameter validators by the Code Analysis tool.</remarks>
+    /// <seealso cref="Enforce"/>
     [DebuggerStepThrough]
     public static class Require
     {

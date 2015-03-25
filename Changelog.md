@@ -10,7 +10,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- New `Promise` and `Check` classes to perform argument validation that you know must ALWAYS succeed.
+- New `Promise` and `Check` classes to check for conditions on parameters.
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
 - New validation method: `Require.PropertyNotWhiteSpace()`.

@@ -2,7 +2,6 @@
 
 namespace Narvalo.Web
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Net;
     using System.Web;
@@ -36,11 +35,9 @@ namespace Narvalo.Web
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
-            Justification = "[Intentionally] The framework guarantees the parameter validity at runtime.")]
         public void ProcessRequest(HttpContext context)
         {
-            Promise.NotNull(context, "The .NET framework guarantees that 'context' is not null.");
+            Require.NotNull(context, "context");
 
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 

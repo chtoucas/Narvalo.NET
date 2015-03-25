@@ -12,21 +12,26 @@ namespace Narvalo
 
     /// <summary>
     /// Provides helper methods to check for preconditions that you know to ALWAYS hold.
-    /// This is achieved through unrecoverable exceptions in DEBUG builds 
-    /// and Code Contracts preconditions when their enabled.
+    /// This is achieved through unrecoverable exceptions in Debug builds.
+    /// If Code Contracts are enabled the methods are recognized as preconditions.
+    /// Otherwise, the methods are simply discarded by the compiler.
     /// </summary>
     /// <remarks>
-    /// <para>These helpers MUST NOT be used in place of proper validation routines of public 
-    /// arguments but they should rather be reserved for internal sanity checking.</para>
-    /// <para>If Code Contracts are enabled the methods are recognized as preconditions; otherwise
-    /// - In Debug builds, the methods turn into debugging assertions.
-    /// - Otherwise, the methods are simply discarded by the compiler.</para>
+    /// This class MUST NOT be used in place of proper validation routines of public 
+    /// arguments but rather be reserved for internal sanity checking.
+    /// Be wise. Personally, I can only see two situations where these helpers make sense:
+    /// for private methods where you have full control of all possible callers and,
+    /// only exceptionally, for a few internal methods when you have achieved complete 
+    /// Code Contracts coverage.
+    /// On purpose, the methods are NOT recognized as parameter validators 
+    /// by the Code Analysis tool.
     /// </remarks>
+    /// <seealso cref="Check"/>
     [DebuggerStepThrough]
     public static class Promise
     {
         /// <summary>
-        /// Checks for a condition.
+        /// Asserts a condition.
         /// </summary>
         /// <remarks>
         /// <para>All methods called within the condition must be pure.</para>

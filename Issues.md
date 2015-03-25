@@ -16,6 +16,7 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Review all interface and abstract class contracts (default values and ensures).
 - Review the definition of DEBUG in CodeContracts builds.
 - Review ValidatedNotNull in the shared Require file.
 - Inlining.

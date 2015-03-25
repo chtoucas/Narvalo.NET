@@ -11,9 +11,12 @@ namespace Narvalo
     /// </summary>
     /// <remarks>
     /// <para>WARNING: These methods MUST appear after all Code Contracts.</para>
-    /// <para>CCCheck does not seem to be able to comprehend a precondition used in conjunction
-    /// with <see cref="IComparable{T}"/>, therefore any Code Contracts specification has been disabled</para>
+    /// <para>The methods are recognized as parameter validators by the Code Analysis tool.</para>
+    /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition 
+    /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have 
+    /// been alongside the others in <see cref="Require"/>.</para>
     /// </remarks>
+    /// <seealso cref="Require"/>
     [DebuggerStepThrough]
     public static class Enforce
     {
