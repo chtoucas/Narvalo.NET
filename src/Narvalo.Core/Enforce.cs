@@ -6,6 +6,8 @@ namespace Narvalo
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Internal;
+
     /// <summary>
     /// Provides helper methods to perform argument validation.
     /// </summary>
@@ -32,7 +34,7 @@ namespace Narvalo
         /// the allowable range of values.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
-        public static void InRange<T>(T value, T minInclusive, T maxInclusive, string parameterName)
+        public static void InRange<T>([ValidatedNotNull]T value, T minInclusive, T maxInclusive, string parameterName)
             where T : struct, IComparable<T>
         {
             if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
@@ -56,7 +58,7 @@ namespace Narvalo
         /// or equal to the minimum value.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
-        public static void GreaterThan<T>(T value, T minValue, string parameterName)
+        public static void GreaterThan<T>([ValidatedNotNull]T value, T minValue, string parameterName)
             where T : struct, IComparable<T>
         {
             if (value.CompareTo(minValue) <= 0)
@@ -80,7 +82,7 @@ namespace Narvalo
         /// the minimum value.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
-        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
+        public static void GreaterThanOrEqualTo<T>([ValidatedNotNull]T value, T minValue, string parameterName)
             where T : struct, IComparable<T>
         {
             if (value.CompareTo(minValue) < 0)
@@ -104,7 +106,7 @@ namespace Narvalo
         /// or equal the maximum value.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
-        public static void LessThan<T>(T value, T maxValue, string parameterName)
+        public static void LessThan<T>([ValidatedNotNull]T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
             if (value.CompareTo(maxValue) >= 0)
@@ -128,7 +130,7 @@ namespace Narvalo
         /// the maximum value.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
-        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
+        public static void LessThanOrEqualTo<T>([ValidatedNotNull]T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
             if (value.CompareTo(maxValue) > 0)
