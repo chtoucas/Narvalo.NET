@@ -6,9 +6,9 @@ namespace Narvalo.Internal
     using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic",
-        Justification = "[Intentionally] This exception is expressly hidden on purpose. "
-            + "We do not want to give the impression that it is catchable. "
-            + "Such an exception is thrown when a supposedly impossible situation happened.")]
+        Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
+    [SuppressMessage("Gendarme.Rules.Exceptions", "MissingExceptionConstructorsRule",
+        Justification = "[Intentionally] This exception can not be initialized outside this assembly.")]
     internal sealed class FailedPromiseException : Exception
     {
         public FailedPromiseException(string message) : base(message) { }

@@ -135,8 +135,8 @@
   <data name="Require_PropertyNull" xml:space="preserve">
     <value>The property value is null.</value>
   </data>
-  <data name="Require_PropertyEmpty" xml:space="preserve">
-    <value>The property value is empty.</value>
+  <data name="Require_PropertyNullOrEmpty" xml:space="preserve">
+    <value>The property value is null or empty.</value>
   </data>
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Can not cast a none maybe to its underlying value type.</value>
@@ -170,5 +170,8 @@
   </data>
   <data name="Output_CannotCastSuccessToException" xml:space="preserve">
     <value>Can not cast a output success to an exception.</value>
+  </data>
+  <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
+    <value>The property value is null or empty, or contains only white-space characters.</value>
   </data>
 </root>

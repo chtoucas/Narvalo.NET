@@ -12,15 +12,13 @@ namespace Narvalo.Web.Html.Internal
     {
         public static IHtmlString ToHtmlString(this TagBuilder @this)
         {
-            Promise.NotNull(@this);
-
+            // REVIEW: Parameter validation.
             return @this.ToHtmlString(TagRenderMode.Normal);
         }
 
         public static IHtmlString ToHtmlString(this TagBuilder @this, TagRenderMode renderMode)
         {
-            Promise.NotNull(@this);
-
+            // REVIEW: Parameter validation.
             return new HtmlString(@this.ToString(renderMode));
         }
     }

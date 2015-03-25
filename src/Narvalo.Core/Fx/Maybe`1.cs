@@ -192,8 +192,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                // Proves that any call to this property is guarded upstream.
-                Promise.Check(IsSome);
+                Promise.Condition(IsSome, "Proves that any call to this internal property is guarded upstream.");
                 Contract.Ensures(Contract.Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.

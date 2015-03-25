@@ -83,7 +83,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             Justification = "[Intentionally] The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
         private TimeSpan Time_(Action action, int iterations)
         {
-            Promise.NotNull(action);
+            Promise.NotNull(action, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<TimeSpan>().Ticks > 0L);
 
             // Make sure we start with a clean room.
@@ -103,7 +103,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         private int WarmUp_(Action action)
         {
-            Promise.NotNull(action);
+            Promise.NotNull(action, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<int>() > 0);
 
             double testTicks = (double)TestDuration.Ticks;

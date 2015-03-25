@@ -73,6 +73,7 @@
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="Currency.cs" />
+    <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />

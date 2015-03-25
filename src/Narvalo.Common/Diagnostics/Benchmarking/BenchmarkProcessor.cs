@@ -100,7 +100,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         private IEnumerable<Benchmark> FindBenchmarks_(Type type)
         {
-            Promise.NotNull(type);
+            Promise.NotNull(type, "Null guard for a private method call.");
 
             MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 

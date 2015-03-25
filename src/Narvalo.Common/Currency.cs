@@ -126,7 +126,7 @@ namespace Narvalo
         /// <returns>The currency for the specified code.</returns>
         private static Currency GetCurrency_(string code)
         {
-            Promise.NotNull(code);
+            Promise.NotNull(code, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             if (!CurrencyProvider.Current.CurrencyCodes.Contains(code))

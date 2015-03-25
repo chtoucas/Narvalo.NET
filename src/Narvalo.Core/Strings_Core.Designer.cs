@@ -188,20 +188,29 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property value is empty..
-        /// </summary>
-        internal static string Require_PropertyEmpty {
-            get {
-                return ResourceManager.GetString("Require_PropertyEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The property value is null..
         /// </summary>
         internal static string Require_PropertyNull {
             get {
                 return ResourceManager.GetString("Require_PropertyNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property value is null or empty..
+        /// </summary>
+        internal static string Require_PropertyNullOrEmpty {
+            get {
+                return ResourceManager.GetString("Require_PropertyNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property value is null or empty, or contains only white-space characters..
+        /// </summary>
+        internal static string Require_PropertyNullOrWhiteSpace {
+            get {
+                return ResourceManager.GetString("Require_PropertyNullOrWhiteSpace", resourceCulture);
             }
         }
         

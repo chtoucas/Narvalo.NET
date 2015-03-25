@@ -69,7 +69,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
         private SqlCommand CreateCommand_(SqlConnection connection)
         {
-            Promise.NotNull(connection);
+            Promise.NotNull(connection, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<SqlCommand>() != null);
 
             SqlCommand tmpCmd = null;

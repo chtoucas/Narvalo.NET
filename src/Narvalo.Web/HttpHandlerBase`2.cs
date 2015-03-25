@@ -15,8 +15,7 @@ namespace Narvalo.Web
 
         protected sealed override void ProcessRequestCore(HttpContext context)
         {
-            Require.NotNull(context, "context");
-
+            // REVIEW: Parameter validation.
             var binder = new TBinder();
 
             binder.Bind(context.Request)

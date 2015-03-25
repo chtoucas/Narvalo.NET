@@ -72,7 +72,7 @@ namespace Narvalo.Web.Optimization
 
         private static bool IsTabsOrSpaces_(string value)
         {
-            Promise.NotNull(value);
+            Promise.NotNull(value, "Null guard for a private method call.");
 
             for (int i = 0; i < value.Length; i++)
             {
