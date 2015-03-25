@@ -9,13 +9,19 @@ namespace Narvalo
     using Narvalo.Internal;
 
     /// <summary>
-    /// Provides helper methods to check for conditions on parameters that you know to ALWAYS hold.
-    /// This is achieved through debugging assertions.
+    /// Provides helper methods to check for promises on parameters.
     /// </summary>
     /// <remarks>
+    /// <para>The methods will be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods MUST appear after all Code Contracts.</para>
+    /// <para>If a promise does not hold, a message is sent to the debugging listeners.</para>
     /// <para>This class MUST NOT be used in place of proper validation routines of public
-    /// arguments but is only useful in very specialized use cases. (More explanations to come)</para>
-    /// <para>The methods are recognized as parameter validators by the Code Analysis tool.</para>
+    /// arguments but is only useful in very specialized use cases. Be wise.
+    /// Personally, I can only see three situations where these helpers make sense:
+    /// for protected overriden methods in a sealed class when the base method does
+    /// have a contract attached AND when you know for certain that all callers will 
+    /// satisfy the condition.
+    /// </para>
     /// </remarks>
     /// <seealso cref="Promise"/>
     [DebuggerStepThrough]

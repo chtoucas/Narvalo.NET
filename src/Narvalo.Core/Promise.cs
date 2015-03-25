@@ -9,27 +9,31 @@ namespace Narvalo
     using Narvalo.Internal;
 
     /// <summary>
-    /// Provides helper methods to check for preconditions that you know to ALWAYS hold.
-    /// This is achieved through unrecoverable exceptions in Debug builds.
-    /// If Code Contracts are enabled the methods are recognized as preconditions.
-    /// Otherwise, the methods are simply discarded by the compiler.
+    /// Provides helper methods to state promises and to validate them right away.
     /// </summary>
     /// <remarks>
-    /// This class MUST NOT be used in place of proper validation routines of public 
-    /// arguments but rather be reserved for internal sanity checking.
-    /// Be wise. Personally, I can only see two situations where these helpers make sense:
-    /// for private methods where you have full control of all possible callers and,
-    /// only exceptionally, for a few internal methods when you have achieved complete 
-    /// Code Contracts coverage.
-    /// On purpose, the methods are NOT recognized as parameter validators 
-    /// by the Code Analysis tool.
+    /// <para>The methods WON'T be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods will be recognized as Code Contracts preconditions.</para>
+    /// <para>If a promise does not hold, an unrecoverable exception is thrown.</para>
+    /// <para>This class MUST NOT be used in place of proper validation routines of public 
+    /// arguments but rather be reserved for internal sanity checking. Be wise.
+    /// Personally, I can only see three situations where these helpers make sense:
+    /// <list type="bullet">
+    /// <item>for private methods where you have full control of all possible callers.</item>
+    /// <item>for protected overriden methods in a sealed class when the base method does
+    /// not have any contract attached AND when you know for certain that all callers will 
+    /// satisfy the condition.</item>
+    /// <item>and exceptionally for a few internal methods when you have achieved complete
+    /// Code Contracts coverage.</item>
+    /// </list>
+    /// </para>
     /// </remarks>
     /// <seealso cref="Check"/>
     [DebuggerStepThrough]
     public static class Promise
     {
         /// <summary>
-        /// Asserts a condition.
+        /// Promises and checks that a condition holds.
         /// </summary>
         /// <remarks>
         /// <para>All methods called within the condition must be pure.</para>
@@ -54,7 +58,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Asserts that the specified argument is not <see langword="null"/>.
+        /// Promises and checks that the specified argument is not <see langword="null"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
@@ -75,7 +79,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Asserts that the specified argument is not <see langword="null"/> or empty.
+        /// Promises and checks that the specified argument is not <see langword="null"/> or empty.
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The rationale for the promise.</param>
@@ -95,7 +99,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Asserts that the specified argument is not <see langword="null"/> or empty,
+        /// Promises and checks that the specified argument is not <see langword="null"/> or empty,
         /// and does not consist only of white-space characters.
         /// </summary>
         /// <param name="value">The argument to check.</param>

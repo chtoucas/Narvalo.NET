@@ -10,10 +10,13 @@ namespace Narvalo
     using Narvalo.Internal;
 
     /// <summary>
-    /// Provides helper methods to perform argument validation.
-    /// If Code Contracts are enabled, these methods are recognized as preconditions.
+    /// Provides helper methods to perform argument validation compatible with Code Contracts.
     /// </summary>
-    /// <remarks>The methods are recognized as parameter validators by the Code Analysis tool.</remarks>
+    /// <remarks>
+    /// <para>The methods will be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods will be recognized as Code Contracts preconditions.</para>
+    /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
+    /// </remarks>
     /// <seealso cref="Enforce"/>
     [DebuggerStepThrough]
     public static class Require

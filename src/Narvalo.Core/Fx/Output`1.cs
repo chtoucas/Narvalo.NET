@@ -18,6 +18,10 @@ namespace Narvalo.Fx
     /// <para>This class is not meant to replace the standard exception mechanism.</para>
     /// </remarks>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
+    /// <seealso cref="Either{T1, T2}"/>
+    /// <seealso cref="Switch{T1, T2}"/>
+    /// <seealso cref="VoidOrBreak"/>
+    /// <seealso cref="VoidOrError"/>
     public abstract partial class Output<T>
     {
         private readonly bool _isSuccess;

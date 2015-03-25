@@ -12,8 +12,9 @@ namespace Narvalo
     /// Provides helper methods to perform argument validation.
     /// </summary>
     /// <remarks>
-    /// <para>WARNING: These methods MUST appear after all Code Contracts.</para>
-    /// <para>The methods are recognized as parameter validators by the Code Analysis tool.</para>
+    /// <para>The methods will be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods MUST appear after all Code Contracts.</para>
+    /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
     /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition 
     /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have 
     /// been alongside the others in <see cref="Require"/>.</para>

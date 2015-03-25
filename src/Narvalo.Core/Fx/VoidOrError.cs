@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    /// <seealso cref="Output{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>

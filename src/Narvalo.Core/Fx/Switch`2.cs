@@ -15,6 +15,7 @@ namespace Narvalo.Fx
     /// <remarks>Any enclosed value is not <see langword="null"/>.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
+    /// <seealso cref="Output{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>
     /// <seealso cref="VoidOrError"/>
