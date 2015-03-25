@@ -12,7 +12,11 @@ namespace Narvalo
     /// Provides helper methods to check for conditions on parameters that you know to ALWAYS hold.
     /// This is achieved through debugging assertions.
     /// </summary>
-    /// <remarks>The methods are recognized as parameter validators by the Code Analysis tool.</remarks>
+    /// <remarks>
+    /// <para>This class MUST NOT be used in place of proper validation routines of public
+    /// arguments but is only useful in very specialized use cases. (More explanations to come)</para>
+    /// <para>The methods are recognized as parameter validators by the Code Analysis tool.</para>
+    /// </remarks>
     /// <seealso cref="Promise"/>
     [DebuggerStepThrough]
     public static class Check
