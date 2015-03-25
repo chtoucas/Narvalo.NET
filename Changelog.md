@@ -10,7 +10,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- New `Promise` class to state and check promises.
+- New `Promise` class to state promises and check them.
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
 - New validation method: `Require.PropertyNotWhiteSpace()`.

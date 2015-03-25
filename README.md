@@ -9,19 +9,18 @@ The most stable parts are:
 
 1. Narvalo Core Libraries
     - [Narvalo.Core](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
-      This library features implementations of some of the usual suspects from
+      this library features implementations of some of the usual suspects from
       functional programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads,
       simple pattern matching (`Either<T1, T2>`, `Switch<T1, T2>`), generators
-      and function extensions.
-      It also contains helpers to perform argument validation compatible with
-      Code Contracts preconditions.
+      and function extensions. It also contains helpers to perform argument
+      validation compatible with Code Contracts preconditions.
     - [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
-      This library provides various utilities and extension methods: `Currency`
+      this library provides various utilities and extension methods: Currency
       (ISO 4217) and Range types, directory walker, Int64 encoder,
       benchmark helpers, extensions for Collections, Configuration, SQL client
       and XDom.
     - [Narvalo.Web](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
-      This library provides types that might prove useful for Web development:
+      this library provides types that might prove useful for Web development:
       generic HttpHandler type, asset provider, Razor and WebForms compile-time
       optimizers, preliminary support for OpenGraph and Schema.Org.
 

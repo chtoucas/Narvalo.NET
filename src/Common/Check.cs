@@ -99,6 +99,6 @@ namespace Narvalo.Internal
         }
 
         [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-        public sealed class ValidatedNotNullAttribute : Attribute { }
+        private sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }
