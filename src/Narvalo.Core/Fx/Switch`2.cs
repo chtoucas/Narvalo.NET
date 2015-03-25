@@ -15,6 +15,9 @@ namespace Narvalo.Fx
     /// <remarks>Any enclosed value is not <see langword="null"/>.</remarks>
     /// <typeparam name="TLeft">The underlying type of the left part.</typeparam>
     /// <typeparam name="TRight">The underlying type of the right part.</typeparam>
+    /// <seealso cref="Either{T1, T2}"/>
+    /// <seealso cref="VoidOrBreak"/>
+    /// <seealso cref="VoidOrError"/>
     public abstract partial class Switch<TLeft, TRight>
     {
         private static readonly Switch<TLeft, TRight> s_Empty = new Switch<TLeft, TRight>.Empty_();

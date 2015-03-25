@@ -5,6 +5,9 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
+    /// <seealso cref="Either{T1, T2}"/>
+    /// <seealso cref="Switch{T1, T2}"/>
+    /// <seealso cref="VoidOrError"/>
     public class VoidOrBreak
     {
         private static readonly VoidOrBreak s_Void = new VoidOrBreak();

@@ -19,7 +19,7 @@ Work in progress
 - Explain when to use Check or Promise.
 - Review all interfaces and abstract class contracts (default values and ensures).
 - Review the definition of DEBUG in CodeContracts builds.
-- Review ValidatedNotNull in the shared Require file.
+- Explain visibility of ValidatedNotNull in the shared Require file.
 - Inlining.
 - Unsafe alternates: validate their usefulness and complete SqlDataReader.
 - Confirm that Maybe methods never returns null.
@@ -29,11 +29,9 @@ Work in progress
  * Benchmarks
 - Enforce & Range T struct constraint? Require for T? where T is a struct?
 - Review Monad.tt.
-- Improvement: True argument check for extension methods.
+- Improvement: Monad.tt, review true argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`.
-- Improvement: `String.IsNullOrWhiteSpace` vs `String.IsNullOrEmpty`.
-- Improvement: Review all GetHashCode() methods.
 - Improvement: Review all ToString() methods.
 - make.ps1 -r fails to push to the official NuGet server but works otherwise.
 

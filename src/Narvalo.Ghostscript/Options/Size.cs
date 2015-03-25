@@ -6,8 +6,8 @@ namespace Narvalo.GhostScript.Options
 
     public struct Size : IEquatable<Size>
     {
-        private int _width;
-        private int _height;
+        private readonly int _width;
+        private readonly int _height;
 
         public Size(int dpi)
         {
@@ -55,7 +55,10 @@ namespace Narvalo.GhostScript.Options
 
         public override int GetHashCode()
         {
-            return _width ^ _height;
+            int hash = 17;
+            hash = 23 * hash + Width.GetHashCode();
+            hash = 23 * hash + Height.GetHashCode();
+            return hash;
         }
     }
 }
