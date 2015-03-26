@@ -2,8 +2,8 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MajorVersion>0</MajorVersion>
-    <MinorVersion>22</MinorVersion>
-    <PatchVersion>1</PatchVersion>
+    <MinorVersion>23</MinorVersion>
+    <PatchVersion>0</PatchVersion>
     <PreReleaseLabel></PreReleaseLabel>
   </PropertyGroup>
 </Project>

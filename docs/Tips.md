@@ -47,6 +47,7 @@ must be met but rather that one of the conditions must be met.
 `DebuggerStepThrough` means that the code will be marked as an _external code_ in the call stack.
 
 ### CmdletBinding and scripts ###
+
 WhatIf and Confirm parameters won't propagate from a script to a module, 
 but one can manually get their values.
 If `-WhatIf` is in use, the `$WhatIfPreference` variable is `$true`, `$false` otherwise. 
@@ -64,23 +65,26 @@ $confirm = $PSBoundParameters.ContainsKey('Confirm') `
 ```
 
 ### Update all binding redirects
+
 Inside the Package Manager Console:
 ```posh
 Get-Project -All | Add-BindingRedirect
 ```
 
 ### A call to an extension method on a null instance does not automatically throw
+
 Calling an extension method on a null reference does not automatically cause a 
-`NullExceptionReference` exception to be thrown. Thereby, we can bypass
+`NullExceptionReference` exception to be thrown. Thereby, one can bypass
 null-reference check **if** the extension method allows for them.
 
 A more common case is an extension method that solely calls another extension
-method on the same object, we may omit the null-reference check in the calling
+method on the same object, one may omit the null-reference check in the calling
 method.
 
 [StackOverflow](http://stackoverflow.com/questions/847209/in-c-what-happens-when-you-call-an-extension-method-on-a-null-object)
 
 ### A foreach loop throw when the collection is null
+
 This one is obvious since a foreach loop is just a hidden call to GetEnumerator().
 Anyway, null collections should raise an alarm.
   

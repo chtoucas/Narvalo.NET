@@ -32,7 +32,7 @@ namespace Narvalo.Web
             {
                 Contract.Ensures(Contract.Result<IEnumerable<HttpQueryBinderException>>() != null);
 
-                return Enumerable.Empty<HttpQueryBinderException>();
+                return default(IEnumerable<HttpQueryBinderException>);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Narvalo.Web
         {
             Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
 
-            return Maybe<TQuery>.None;
+            return default(Maybe<TQuery>);
         }
     }
 

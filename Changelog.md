@@ -1,8 +1,10 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
+
+_Aiming for API stability of Narvalo.Core_
 
 #### Breaking changes
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`

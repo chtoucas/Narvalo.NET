@@ -30,6 +30,7 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iter)
         {
             Require.NotNull(iter, "iter");
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             TSource current = start;
 

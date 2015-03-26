@@ -32,7 +32,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             }
         }
 
-        void IBenchmarkTimer.Reset() { }
+        public abstract void Reset();
     }
 
 #endif

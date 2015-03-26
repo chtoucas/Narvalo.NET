@@ -33,7 +33,6 @@ namespace Narvalo.Web.UI.Assets
         {
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // REVIEW: Seems odd to return null when we require the opposite.
             return default(Uri);
         }
 
@@ -41,7 +40,6 @@ namespace Narvalo.Web.UI.Assets
         {
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // REVIEW: Seems odd to return null when we require the opposite.
             return default(Uri);
         }
 
@@ -49,7 +47,6 @@ namespace Narvalo.Web.UI.Assets
         {
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // REVIEW: Seems odd to return null when we require the opposite.
             return default(Uri);
         }
 
@@ -57,7 +54,6 @@ namespace Narvalo.Web.UI.Assets
         {
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // REVIEW: Seems odd to return null when we require the opposite.
             return default(Uri);
         }
     }

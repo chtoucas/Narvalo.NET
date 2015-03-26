@@ -16,19 +16,15 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with infinite sequences.
+- IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
 - Verify that SkipDocumentation=true when building Code Contracts doc.
-- Review all interfaces and abstract class contracts (default values and ensures).
-- DebuggerStepThrough or DebuggerHidden, choose!
-- Inlining.
-- Unsafe alternates: validate their usefulness and complete SqlDataReader.
+- Unsafe alternates: complete SqlDataReader.
 - Confirm that Maybe methods never returns null.
 - Refactorings:
  * Range
  * Currencies
  * Benchmarks
-- Enforce & Range T struct constraint? Require for T? where T is a struct?
-- Review Monad.tt.
+- Range T why force struct constraint? Require for T? where T is a struct?
 - Improvement: Monad.tt, review true argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`.

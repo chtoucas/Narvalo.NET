@@ -41,16 +41,11 @@ namespace Narvalo.Globalization
             {
                 Contract.Ensures(Contract.Result<HashSet<string>>() != null);
 
-                // REVIEW: Seems odd to return null when we require the opposite.
                 return default(HashSet<string>);
             }
         }
 
-        IEnumerable<CurrencyInfo> ICurrencyProvider.GetCurrencies(CurrencyTypes types)
-        {
-            // REVIEW: not null
-            return default(IEnumerable<CurrencyInfo>);
-        }
+        public abstract IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
     }
 
 #endif

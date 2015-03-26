@@ -12,7 +12,7 @@ namespace Narvalo
     /// </summary>
     /// <remarks>
     /// <para>The methods WON'T be recognized as parameter validators by FxCop.</para>
-    /// <para>The methods will be recognized as Code Contracts preconditions.</para>
+    /// <para>The methods will be recognized as Contract Abbreviator methods.</para>
     /// <para>If a promise does not hold, an unrecoverable exception is thrown.</para>
     /// <para>This class MUST NOT be used in place of proper validation routines of public 
     /// arguments but rather be reserved for internal sanity checking. Be wise.
