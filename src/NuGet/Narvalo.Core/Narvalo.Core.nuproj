@@ -9,7 +9,7 @@
       <![CDATA[
       This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and function extensions.
 
-      It also contains helpers to perform argument validation compatible with Code Contracts preconditions.
+      It also contains a few Code Contracts helpers.
       ]]>
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
