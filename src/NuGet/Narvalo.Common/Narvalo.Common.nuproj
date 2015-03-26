@@ -4,7 +4,7 @@
     <NuId>Narvalo.Common</NuId>
     <NuTitle>Narvalo.Common</NuTitle>
     <NuDescription>
-      Provides various utilities and extension methods: Currency (ISO 4217) and Range types, directory walker, Int64 encoders, benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
+      This package provides various utilities and extension methods: Currency (ISO 4217) and Range types, directory walker, Int64 encoders, benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
 
       A code contracts reference assembly is also included if you need it.
     </NuDescription>

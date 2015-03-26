@@ -17,7 +17,7 @@
       ]]>
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>Maybe, Option, Error, Either, Require, Linq, Monad, Functional, Code Contracts, Contracts</NuTags>
+    <NuTags>Maybe, Option, Error, Either, Require, Linq, Monad, Functional, CodeContracts, Contracts</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>

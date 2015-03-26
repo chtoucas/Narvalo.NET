@@ -63,6 +63,7 @@
     <Compile Include="Fx\OutputFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
+    <Compile Include="RequireFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
