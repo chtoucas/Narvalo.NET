@@ -19,6 +19,8 @@ XXXX-XX-XX
 #### Improvements
 - `Require.PropertyNotEmpty()` no longer throws an `ArgumentNullException`.
 - Whenever it was possible, moved `SqlDataReader` extensions to `IDataRecord` extensions.
+- We no longer patch the documentation with Code Contracts annotations which created too
+  much noise. The patched documentation is still available alongside the contract assemblies.
 
 2015-03-24 - Correct a problem with NuGet and Code Contracts
 ------------------------------------------------------------

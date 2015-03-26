@@ -84,10 +84,12 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <!-- WARNING: Do not add the CODE_ANALYSIS symbol: Code Contracts
-         and Code Analysis don't play well together. -->
+    <!-- WARNING: Do not add the CODE_ANALYSIS symbol. Inside VS, it would cause 
+         FxCop to run automatically on build but Code Contracts and Code Analysis 
+         don't play well together. Anyway, the build is already slow enough in this
+         confguration. Otherwise, note that the Code Contracts rewriter will 
+         define the CODE_ANALYSIS symbol. -->
     <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
-    <!--<DefineConstants>TRACE;DEBUG;CONTRACTS_FULL</DefineConstants>-->
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 

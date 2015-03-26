@@ -12,8 +12,7 @@ The most stable parts are:
       this library features implementations of some of the usual suspects from
       functional programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads,
       simple pattern matching (`Either<T1, T2>`, `Switch<T1, T2>`), generators
-      and function extensions. It also contains helpers to perform argument
-      validation compatible with Code Contracts preconditions.
+      and function extensions. It also contains a few Code Contracts helpers.
     - [Narvalo.Common](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
       this library provides various utilities and extension methods: Currency
       (ISO 4217) and Range types, directory walker, Int64 encoder,
