@@ -54,7 +54,9 @@
   <Target Name="DeleteOriginalDocumentationFile" Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
     <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." Importance="normal" />
 
-    <Delete Files="$(OriginalDocumentationFile)" />
+    <Move SourceFiles="$(DocumentationFile)"  DestinationFiles="$(CodeContractsDocumentationFile)" />
+    <Move SourceFiles="$(OriginalDocumentationFile)"  DestinationFiles="$(DocumentationFile)" />
+    <!--<Delete Files="$(OriginalDocumentationFile)" />-->
   </Target>
 
   <!-- GenerateBuildAndRevisionNumbers target. -->

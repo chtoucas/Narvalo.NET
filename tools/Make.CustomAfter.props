@@ -68,6 +68,7 @@
          NB: This is not something that you can change. Only defined to make
          things clearer. -->
     <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>
+    <CodeContractsDocumentationFile>$(OutDir)\CodeContracts\$(AssemblyName).Contracts.xml</CodeContractsDocumentationFile>
   </PropertyGroup>
 
   <!-- Code Contracts reference assembly. -->
