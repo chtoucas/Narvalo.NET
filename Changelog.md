@@ -1,8 +1,8 @@
 ChangeLog
 =========
 
-XXXX-XX-XX
-----------
+XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+-----------------------------------------------------------------------
 
 #### Breaking changes
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
@@ -10,7 +10,7 @@ XXXX-XX-XX
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
 
 #### Enhancements
-- New `Promise` class to make promises and check them.   
+- New `Promise` class to make promises and check them.
 - New `Assume` class to help the Code Contracts tools recognize that certain conditions are met.
 - Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
   These unsafe methods delegate parameter validation to the caller.
@@ -20,13 +20,13 @@ XXXX-XX-XX
 - `Require.PropertyNotEmpty()` no longer throws an `ArgumentNullException`.
 - Whenever it was possible, moved `SqlDataReader` extensions to `IDataRecord` extensions.
 - We no longer patch the documentation with Code Contracts annotations; this created too
-  much noise and annoying duplicates of descriptions for exceptions. The patched documentation 
+  much noise and annoying duplicates of descriptions for exceptions. The patched documentation
   is still available in the NuGet package alongside the contract assemblies.
 
-2015-03-24 - Correct a problem with NuGet and Code Contracts
-------------------------------------------------------------
+2015-03-24 - Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+-------------------------------------------------------------------------
 
-_Released version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
+_Correct a problem with NuGet and Code Contracts_
 
 #### Bugfixes
 - For Narvalo.Web, the Code Contracts library was wrongly added to the project references.
@@ -35,10 +35,10 @@ _Released version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 - More meaningful description of the NuGet packages.
 - Replaced all calls to Enum.HasFlag by a specialized extension method that should be more efficient.
 
-2015-03-23 - Focus on API and code quality of Narvalo.Core
-----------------------------------------------------------
+2015-03-23 - Version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+-----------------------------------------------------------------------
 
-_Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
+_Focus on API and code quality of Narvalo.Core_
 
 #### Breaking changes
 - To improve usability, merged most of the `Narvalo.Collections` namespace with
@@ -61,10 +61,10 @@ _Released version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 - Made the `Maybe<T>.IsSome` property public; there was no compelling reason to continue hiding it.
 - Follow more closely the coding style recommandations by the .NET team.
 
-2015-02-20 - Bugfix for currency types
---------------------------------------
+2015-02-20 - Version 0.21 of Narvalo.Core & Narvalo.Common
+----------------------------------------------------------
 
-_Released version 0.21 of Narvalo.Core & Narvalo.Common_
+_Bugfix for currency types_
 
 #### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the
@@ -74,10 +74,10 @@ _Released version 0.21 of Narvalo.Core & Narvalo.Common_
 - Removed from the currency classes anything related to culture, namely the currency symbol methods.
   We need a better way of handling localization problems. Unicode CLDR seems the way to go.
 
-2015-02-19 - New currency types
--------------------------------
+2015-02-19 - Version 0.20 of Narvalo.Core & Narvalo.Common
+----------------------------------------------------------
 
-_Released version 0.20 of Narvalo.Core & Narvalo.Common_
+_New currency types_
 
 #### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
@@ -180,10 +180,10 @@ _Released version 0.20 of Narvalo.Core & Narvalo.Common_
   them as linked files to test projects.
 - Much needed rewriting of ChangeLog.md and Issues.md.
 
-2014-12-17 - No API changes. Correct a problem with NuGet and Code Contracts
+2014-12-17 - Version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 ----------------------------------------------------------------------------
 
-_Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
+_No API changes. Correct a problem with NuGet and Code Contracts_
 
 #### Bugfixes
 - When adding a NuGet package, the Code Contracts library was incorrectly added
@@ -206,12 +206,13 @@ _Released version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 - It is now possible to unconditionally hide internal classes and methods of an
   assembly. On the way, we fixed CA issues that appear when this is turned on.
 
-2014-12-13 - New Code Contracts assemblies. Plenty of small bugfixes
+2014-12-13 - Version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web
+-----------------------------------------------------------------
+
+2014-12-13 - Version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 --------------------------------------------------------------------
 
-_Released version 0.19.0 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
-
-_Released version 1.0.0-alpha of Narvalo.Mvp & Narvalo.Mvp.Web_
+_New Code Contracts assemblies. Plenty of small bugfixes_
 
 #### Bugfixes
 - Lot of small bugfixes needed after enabling Code Contracts analysis.
