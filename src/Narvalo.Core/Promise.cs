@@ -27,7 +27,6 @@ namespace Narvalo
     /// </list>
     /// </para>
     /// </remarks>
-    [DebuggerStepThrough]
     public static class Promise
     {
         /// <summary>

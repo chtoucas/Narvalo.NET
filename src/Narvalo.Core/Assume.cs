@@ -10,7 +10,6 @@ namespace Narvalo
     /// Provides helper methods to help the Code Contracts tools recognize that 
     /// certain conditions are met.
     /// </summary>
-    [DebuggerStepThrough]
     public static class Assume
     {
         /// <summary>
