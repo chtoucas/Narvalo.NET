@@ -8,6 +8,7 @@ XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
   and `VoidOrBreak.Success` to `VoidOrBreak.Void`.
 - Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
+- Renamed `Sequence.Create()` to `Sequence.Generate()`.
 
 #### Enhancements
 - New `Promise` class to make promises and check them.

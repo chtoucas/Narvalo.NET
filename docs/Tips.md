@@ -6,17 +6,18 @@ Often obvious but worth recalling.
 ### The counter intuitive meaning of "protected internal" ###
 
 This accessibility level is counter intuitive:
+
 _Access is limited to the current assembly or types derived from the containing class._
 
-It _does not_ mean protected _and_ internal but rather protected _or_ internal.
+It **does not** mean protected _and_ internal but rather protected _or_ internal.
 
-[MSDN](https://msdn.microsoft.com/library/ba0a1yw2.aspx)
-[Stackoverflow](http://stackoverflow.com/questions/585859/what-is-the-difference-between-protected-and-protected-internal)
+- [MSDN](https://msdn.microsoft.com/library/ba0a1yw2.aspx)
+- [StackOverflow](http://stackoverflow.com/questions/585859/what-is-the-difference-between-protected-and-protected-internal)
 
 ### Infinite sequence ###
 
-An `IEnumerable<T>` sequence might be infinite. This is important to remember 
-because some LINQ operators need to read _ALL_ data before doing their work.
+An `IEnumerable<T>` sequence might be infinite. This is important to remember because 
+some LINQ operators need to read _ALL_ data before doing their work.
 
 In those cases, don't use `Count()` if `Any()` would do or, if you can, use `Take(1)` for instance.
 
@@ -27,10 +28,10 @@ In those cases, don't use `Count()` if `Any()` would do or, if you can, use `Tak
 If a compilation symbol is not set, all methods with a `Conditional` attribute for
 this symbol will be erased by the compiler. 
 
-There is still a special case where a consumer of your library can still _see_ 
-the erased code. Indeed, with the `CONTRACTS_FULL` symbol, if you build a contract 
-reference assembly too, your consumers will be able to discover and use all the 
-contracts if they wish to.
+There is still a special case where the removed code is not entirely hidden.
+Indeed, with the `CONTRACTS_FULL` symbol, if you build a contract 
+reference assembly too, your consumers, if they wish to, will be able 
+to discover and use all the contracts.
 
 ### Multiple Conditional attributes ###
 
@@ -77,10 +78,10 @@ A more common case is an extension method that solely calls another extension
 method on the same object, we may omit the null-reference check in the calling
 method.
 
-[Stackoverflow](http://stackoverflow.com/questions/847209/in-c-what-happens-when-you-call-an-extension-method-on-a-null-object)
+[StackOverflow](http://stackoverflow.com/questions/847209/in-c-what-happens-when-you-call-an-extension-method-on-a-null-object)
 
 ### A foreach loop throw when the collection is null
 This one is obvious since a foreach loop is just a hidden call to GetEnumerator().
 Anyway, null collections should raise an alarm.
   
-[Stackoverflow](http://stackoverflow.com/questions/11734380/check-for-null-in-foreach-loop)
+[StackOverflow](http://stackoverflow.com/questions/11734380/check-for-null-in-foreach-loop)

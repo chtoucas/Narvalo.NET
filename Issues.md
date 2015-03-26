@@ -16,6 +16,7 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with infinite sequences.
 - Verify that SkipDocumentation=true when building Code Contracts doc.
 - Review all interfaces and abstract class contracts (default values and ensures).
 - DebuggerStepThrough or DebuggerHidden, choose!
