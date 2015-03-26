@@ -14,7 +14,7 @@ namespace Narvalo
     /// <para>If a promise does not hold, a message is sent to the debugging listeners.</para>
     /// <para>This class MUST NOT be used in place of proper validation routines of public
     /// arguments but is only useful in very specialized use cases. Be wise.
-    /// Personally, I can only see three situations where these helpers make sense:
+    /// Personally, I can only see one situation where these helpers make sense:
     /// for protected overriden methods in a sealed class when the base method does
     /// have a contract attached AND when you know for certain that all callers will
     /// satisfy the condition.

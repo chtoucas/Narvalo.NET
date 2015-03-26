@@ -4,9 +4,8 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides helper methods to state promises and to validate them right away.
@@ -118,6 +117,15 @@ namespace Narvalo
                         "The parameter value is null or empty, or consists only of white-space characters: {0}",
                         rationale));
             }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic",
+            Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
+        [SuppressMessage("Gendarme.Rules.Exceptions", "MissingExceptionConstructorsRule",
+            Justification = "[Intentionally] This exception can not be initialized outside this assembly.")]
+        private sealed class FailedPromiseException : Exception
+        {
+            public FailedPromiseException(string message) : base(message) { }
         }
     }
 }

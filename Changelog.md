@@ -22,6 +22,7 @@ XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - We no longer patch the documentation with Code Contracts annotations; this created too
   much noise and annoying duplicates of descriptions for exceptions. The patched documentation
   is still available in the NuGet package alongside the contract assemblies.
+- Added more Code Contracts.
 
 2015-03-24 - Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -------------------------------------------------------------------------

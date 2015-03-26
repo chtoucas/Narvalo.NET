@@ -1,6 +1,14 @@
 Tips
 ====
 
+### DebuggerStepThrough vs DebuggerHidden ###
+              
+`DebuggerStepThrough` can be set on a class, `DebuggerHidden` can not.
+
+`DebuggerHidden` means that the code won't appear in the call stack.
+
+`DebuggerStepThrough` means that the code will be marked as an _external code_ in the call stack.
+
 ### CmdletBinding and scripts ###
 WhatIf and Confirm parameters won't propagate from a script to a module, 
 but one can manually get their values.

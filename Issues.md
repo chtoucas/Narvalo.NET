@@ -18,8 +18,7 @@ Work in progress
 
 - Verify that SkipDocumentation=true when building Code Contracts doc.
 - Review all interfaces and abstract class contracts (default values and ensures).
-- Review the definition of DEBUG in CodeContracts builds.
-- Explain visibility of ValidatedNotNull in the shared Require file.
+- DebuggerStepThrough or DebuggerHidden, choose!
 - Inlining.
 - Unsafe alternates: validate their usefulness and complete SqlDataReader.
 - Confirm that Maybe methods never returns null.
