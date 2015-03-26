@@ -25,24 +25,45 @@ namespace Narvalo.Fx
             yield return value;
         }
 
+        public static IEnumerable<TSource> Generate<TSource>(
+            TSource start,
+            Func<TSource, TSource> iter)
+        {
+            Require.NotNull(iter, "iter");
+
+            TSource current = start;
+
+            while (true)
+            {
+                yield return current;
+
+                current = iter.Invoke(current);
+            }
+        }
+
         #region Anamorphims
 
-        public static IEnumerable<TResult> Create<TSource, TResult>(
+        public static IEnumerable<TResult> Generate<TSource, TResult>(
             Func<TSource, TSource> iter,
             TSource seed,
             Func<TSource, TResult> resultSelector)
         {
+            Contract.Requires(iter != null);
+            Contract.Requires(resultSelector != null);
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            return Create(iter, seed, resultSelector, Stubs<TSource>.AlwaysTrue);
+            return Generate(iter, seed, resultSelector, Stubs<TSource>.AlwaysTrue);
         }
 
-        public static IEnumerable<TResult> Create<TSource, TResult>(
+        public static IEnumerable<TResult> Generate<TSource, TResult>(
             Func<TSource, TSource> iter,
             TSource seed,
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
+            Require.NotNull(iter, "iter");
+            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, "predicate");
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
             TSource next = seed;
