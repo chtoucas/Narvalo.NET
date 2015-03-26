@@ -7,13 +7,17 @@
     <NuTitle>Narvalo.Core</NuTitle>
     <NuDescription>
       <![CDATA[
-      This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and function extensions.
+      This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions. It also provides a few Code Contracts helpers.
 
-      It also contains a few Code Contracts helpers.
+      This is a portable class library targeting Profile259. The behaviour is 100% identical across all supported platforms; this is achieved without making use of the bait and switch PCL trick.
+
+      This library fully passes FxCop, Gendarme and Code Contracts static analysis.
+
+      A code contracts reference assembly is also included if you need it.
       ]]>
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>Maybe, Option, Error, Either, Require, Linq, Monad, Functional</NuTags>
+    <NuTags>Maybe, Option, Error, Either, Require, Linq, Monad, Functional, Code Contracts, Contracts</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
