@@ -8,6 +8,8 @@ namespace Narvalo
 
     public static class RequireFacts
     {
+        private const string WHITESPACE_ONLY_STRING = "     ";
+
         #region Object()
 
         [Fact]
@@ -15,9 +17,6 @@ namespace Narvalo
         {
             // Act
             Require.Object("this");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -36,9 +35,6 @@ namespace Narvalo
         {
             // Act
             Require.Property("value");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -57,9 +53,6 @@ namespace Narvalo
         {
             // Act
             Require.PropertyNotEmpty("value");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -85,9 +78,6 @@ namespace Narvalo
         {
             // Act
             Require.PropertyNotWhiteSpace("value");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -108,7 +98,7 @@ namespace Narvalo
         public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotWhiteSpace("    "));
+            Assert.Throws<ArgumentException>(() => Require.PropertyNotWhiteSpace(WHITESPACE_ONLY_STRING));
         }
 
         #endregion
@@ -120,9 +110,6 @@ namespace Narvalo
         {
             // Act
             Require.NotNull("value", "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -141,9 +128,6 @@ namespace Narvalo
         {
             // Act
             Require.NotNullOrEmpty("value", "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -169,9 +153,6 @@ namespace Narvalo
         {
             // Act
             Require.NotNullOrWhiteSpace("value", "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -192,7 +173,7 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrWhiteSpace("    ", "parameter"));
+            Assert.Throws<ArgumentException>(() => Require.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "parameter"));
         }
 
         #endregion
@@ -204,9 +185,6 @@ namespace Narvalo
         {
             // Act
             Require.InRange(2, 1, 3, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -214,49 +192,34 @@ namespace Narvalo
         {
             // Act
             Require.InRange(2L, 1L, 3L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void InRange_DoesNotThrow_ForInt32LowerEnd()
+        public static void InRange_DoesNotThrow_ForInt32AtLowerEnd()
         {
             // Act
             Require.InRange(1, 1, 3, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void InRange_DoesNotThrow_ForInt64LowerEnd()
+        public static void InRange_DoesNotThrow_ForInt64AtLowerEnd()
         {
             // Act
             Require.InRange(1L, 1L, 3L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void InRange_DoesNotThrow_ForInt32UpperEnd()
+        public static void InRange_DoesNotThrow_ForInt32AtUpperEnd()
         {
             // Act
             Require.InRange(2, 1, 3, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void InRange_DoesNotThrow_ForInt64UpperEnd()
+        public static void InRange_DoesNotThrow_ForInt64AtUpperEnd()
         {
             // Act
             Require.InRange(2L, 1L, 3L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -296,9 +259,6 @@ namespace Narvalo
         {
             // Act
             Require.GreaterThan(2, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -306,20 +266,17 @@ namespace Narvalo
         {
             // Act
             Require.GreaterThan(2L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void GreaterThan_ThrowsArgumentOutOfRangeException_ForInt32MinValue()
+        public static void GreaterThan_ThrowsArgumentOutOfRangeException_ForInt32AtMinValue()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.GreaterThan(1, 1, "parameter"));
         }
 
         [Fact]
-        public static void GreaterThan_ThrowsArgumentOutOfRangeException_ForInt64MinValue()
+        public static void GreaterThan_ThrowsArgumentOutOfRangeException_ForInt64AtMinValue()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.GreaterThan(1L, 1L, "parameter"));
@@ -348,9 +305,6 @@ namespace Narvalo
         {
             // Act
             Require.GreaterThanOrEqualTo(2, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -358,29 +312,20 @@ namespace Narvalo
         {
             // Act
             Require.GreaterThanOrEqualTo(2L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void GreaterThanOrEqualTo_DoesNotThrow_ForInt32MinValue()
+        public static void GreaterThanOrEqualTo_DoesNotThrow_ForInt32AtMinValue()
         {
             // Act
             Require.GreaterThanOrEqualTo(1, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void GreaterThanOrEqualTo_DoesNotThrow_ForInt64MinValue()
+        public static void GreaterThanOrEqualTo_DoesNotThrow_ForInt64AtMinValue()
         {
             // Act
             Require.GreaterThanOrEqualTo(1L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -406,9 +351,6 @@ namespace Narvalo
         {
             // Act
             Require.LessThan(0, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -416,20 +358,17 @@ namespace Narvalo
         {
             // Act
             Require.LessThan(0L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void LessThan_ThrowsArgumentOutOfRangeException_ForInt32MinValue()
+        public static void LessThan_ThrowsArgumentOutOfRangeException_ForInt32AtMinValue()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.LessThan(1, 1, "parameter"));
         }
 
         [Fact]
-        public static void LessThan_ThrowsArgumentOutOfRangeException_ForInt64MinValue()
+        public static void LessThan_ThrowsArgumentOutOfRangeException_ForInt64AtMinValue()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.LessThan(1L, 1L, "parameter"));
@@ -458,9 +397,6 @@ namespace Narvalo
         {
             // Act
             Require.LessThanOrEqualTo(0, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
@@ -468,29 +404,20 @@ namespace Narvalo
         {
             // Act
             Require.LessThanOrEqualTo(0L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void LessThanOrEqualTo_DoesNotThrow_ForInt32MinValue()
+        public static void LessThanOrEqualTo_DoesNotThrow_ForInt32AtMinValue()
         {
             // Act
             Require.LessThanOrEqualTo(1, 1, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
-        public static void LessThanOrEqualTo_DoesNotThrow_ForInt64MinValue()
+        public static void LessThanOrEqualTo_DoesNotThrow_ForInt64AtMinValue()
         {
             // Act
             Require.LessThanOrEqualTo(1L, 1L, "parameter");
-
-            // Assert
-            Assert.True(true);
         }
 
         [Fact]
