@@ -13,22 +13,22 @@ namespace Narvalo.Edu.Linq
 
         public static IEnumerable<int> Range(int start, int count)
         {
-            return Sequence.Create(i => i + 1, 0, i => start + i, i => i < count);
+            return Sequence.Generate(i => i + 1, 0, i => start + i, i => i < count);
         }
 
         public static IEnumerable<T> Repeat<T>(T value)
         {
-            return Sequence.Create(i => i + 1, 0, i => value);
+            return Sequence.Generate(i => i + 1, 0, i => value);
         }
 
         public static IEnumerable<T> Repeat<T>(T value, int count)
         {
-            return Sequence.Create(i => i + 1, 0, i => value, i => i < count);
+            return Sequence.Generate(i => i + 1, 0, i => value, i => i < count);
         }
 
         public static IEnumerable<T> Empty<T>()
         {
-            return Sequence.Create(i => i, 0, i => default(T), Stubs<int>.AlwaysFalse);
+            return Sequence.Generate(i => i, 0, i => default(T), Stubs<int>.AlwaysFalse);
         }
 
         #endregion
