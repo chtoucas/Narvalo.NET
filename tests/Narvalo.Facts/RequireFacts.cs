@@ -59,7 +59,7 @@ namespace Narvalo
         public static void PropertyNotEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotEmpty((string)null));
+            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotEmpty((string)null));
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace Narvalo
         public static void PropertyNotWhiteSpace_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotWhiteSpace((string)null));
+            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotWhiteSpace((string)null));
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace Narvalo
         public static void NotNullOrEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrEmpty((string)null, "parameter"));
+            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrEmpty((string)null, "parameter"));
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrWhiteSpace((string)null, "parameter"));
+            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrWhiteSpace((string)null, "parameter"));
         }
 
         [Fact]

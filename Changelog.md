@@ -1,5 +1,10 @@
 ChangeLog
 =========
+                                                
+XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+-----------------------------------------------------------------------
+                             
+#### Improvements
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

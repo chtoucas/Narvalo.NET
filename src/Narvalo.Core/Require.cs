@@ -68,7 +68,9 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
-            if (String.IsNullOrEmpty(value))
+            Require.Property(value);
+
+            if (value.Length == 0)
             {
                 throw new ArgumentException(Strings_Core.Require_PropertyNullOrEmpty, "value");
             }
@@ -87,6 +89,8 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
+            Require.Property(value);
+
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Core.Require_PropertyNullOrWhiteSpace, "value");
@@ -128,7 +132,9 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
-            if (String.IsNullOrEmpty(value))
+            Require.NotNull(value, parameterName);
+
+            if (value.Length == 0)
             {
                 throw new ArgumentException(
                     Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrEmptyFormat, parameterName),
@@ -151,6 +157,8 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
+            Require.NotNull(value, parameterName);
+
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(
