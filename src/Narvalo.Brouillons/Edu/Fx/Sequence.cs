@@ -8,7 +8,21 @@ namespace Narvalo.Edu.Fx
     // LINQ from scratch.
     public static class Sequence
     {
-        public static IEnumerable<TResult> Create<TSource, TResult>(
+        public static IEnumerable<TSource> Generate<TSource>(
+            TSource start,
+            Func<TSource, TSource> iter)
+        {
+            TSource current = start;
+
+            while (true)
+            {
+                yield return current;
+
+                current = iter.Invoke(current);
+            }
+        }
+
+        public static IEnumerable<TResult> Generate<TSource, TResult>(
             Func<TSource, Iteration<TResult, TSource>> generator,
             TSource seed)
         {
@@ -24,12 +38,12 @@ namespace Narvalo.Edu.Fx
         }
 
         // Correspondence with Narvalo.Fx.Sequence.Create
-        public static IEnumerable<TResult> Create<TSource, TResult>(
+        public static IEnumerable<TResult> Generate<TSource, TResult>(
             Func<TSource, TSource> iter,
             TSource seed,
             Func<TSource, TResult> resultSelector)
         {
-            return Create(_ => Iteration.Create(resultSelector.Invoke(_), iter.Invoke(_)), seed);
+            return Generate(_ => Iteration.Create(resultSelector.Invoke(_), iter.Invoke(_)), seed);
         }
 
         ////public static IEnumerable<TResult> Create<TSource, TResult>(
