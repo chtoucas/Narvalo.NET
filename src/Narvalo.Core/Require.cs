@@ -15,7 +15,7 @@ namespace Narvalo
     /// <remarks>
     /// <para>The methods will be recognized as parameter validators by FxCop.</para>
     /// <para>The methods will be recognized as Code Contracts preconditions.</para>
-    /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
+    /// <para>If a condition does not hold, a <see cref="ArgumentException"/> is thrown.</para>
     /// </remarks>
     /// <seealso cref="Enforce"/>
     [DebuggerStepThrough]

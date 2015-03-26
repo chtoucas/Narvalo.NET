@@ -24,6 +24,7 @@
 <file src="Narvalo.Common.pdb" target="lib\net45\" />
 <file src="Narvalo.Common.xml" target="lib\net45\" />
 <file src="CodeContracts\Narvalo.Common.Contracts.dll" target="lib\net45\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Common.Contracts.xml" target="lib\net45\CodeContracts\" />
       ]]>
     </NuFiles>
   </PropertyGroup>

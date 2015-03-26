@@ -27,7 +27,7 @@
   <PropertyGroup>
     <AfterBuildDependsOn>
       $(AfterBuildDependsOn);
-      DeleteOriginalDocumentationFile
+      PatchDocumentationFiles
     </AfterBuildDependsOn>
   </PropertyGroup>
 
@@ -50,13 +50,12 @@
   <!-- WARNING: Some projects might also define a Package target which will override this one. -->
   <Target Name="Package" DependsOnTargets="CreateNupkg" />
 
-  <!-- DeleteOriginalDocumentationFile target. -->
-  <Target Name="DeleteOriginalDocumentationFile" Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
-    <Message Text="Deleting original documentation files (before the Code Contracts transformation)..." Importance="normal" />
+  <!-- PatchDocumentationFiles target. -->
+  <Target Name="PatchDocumentationFiles" Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
+    <Message Text="Patching documentation files (after the Code Contracts transformation)..." Importance="normal" />
 
     <Move SourceFiles="$(DocumentationFile)"  DestinationFiles="$(CodeContractsDocumentationFile)" />
     <Move SourceFiles="$(OriginalDocumentationFile)"  DestinationFiles="$(DocumentationFile)" />
-    <!--<Delete Files="$(OriginalDocumentationFile)" />-->
   </Target>
 
   <!-- GenerateBuildAndRevisionNumbers target. -->

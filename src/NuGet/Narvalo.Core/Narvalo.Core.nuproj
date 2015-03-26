@@ -30,6 +30,7 @@
 <file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
 <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
       ]]>
     </NuFiles>
   </PropertyGroup>
