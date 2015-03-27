@@ -73,7 +73,7 @@ namespace Narvalo.Web.Profile
         {
             Require.NotNull(profiles, "profiles");
 
-            var userNames = new List<String>();
+            var userNames = new List<string>();
 
             foreach (ProfileInfo profile in profiles) {
                 userNames.Add(profile.UserName);

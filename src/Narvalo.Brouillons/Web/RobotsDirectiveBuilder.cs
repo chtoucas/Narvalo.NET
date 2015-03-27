@@ -11,7 +11,7 @@ namespace Narvalo.Web
     // TODO: Manque les directives suivantes : all, none, unavailable_after.
     public class RobotsDirectiveBuilder
     {
-        private IList<String> _values = new List<String>();
+        private IList<string> _values = new List<string>();
 
         public RobotsDirectiveBuilder Follow()
         {

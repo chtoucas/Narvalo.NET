@@ -216,7 +216,7 @@ namespace Narvalo.Edu.Comparisons
 
         ////[BenchComparative]
         ////public unsafe string Unsafe(string value) {
-        ////    string output = string.Copy(value);
+        ////    string output = String.Copy(value);
         ////    fixed (char* pStr = output) {
         ////        char* pStart = pStr;
         ////        char* pEnd = pStr + (output.Length - 1);

@@ -146,7 +146,7 @@ namespace Narvalo.Edu.Comparisons
                 return String.Empty;
             }
 
-            string result = string.Empty;
+            string result = String.Empty;
 
             while (value >= ALPHABET_LENGTH)
             {
@@ -167,7 +167,7 @@ namespace Narvalo.Edu.Comparisons
 
         private static string Encode_Array(long value)
         {
-            string result = string.Empty;
+            string result = String.Empty;
 
             while (value > 0)
             {
