@@ -100,7 +100,7 @@ namespace Narvalo.Configuration
 
     //    protected override string ElementName
     //    {
-    //        get { return string.Empty; }
+    //        get { return String.Empty; }
     //    }
 
     //    protected override bool IsElementName(string elementName)

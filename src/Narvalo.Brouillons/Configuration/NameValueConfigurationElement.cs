@@ -6,19 +6,19 @@ namespace Narvalo.Configuration
     using System.Configuration;
 
     public class NameValueConfigurationElement
-        : ConfigurationElement, IKeyedConfigurationElement<String>
+        : ConfigurationElement, IKeyedConfigurationElement<string>
     {
         const string NameName_ = "name";
         const string ValueName_ = "value";
 
         static readonly ConfigurationProperty NameProperty_
-			= new ConfigurationProperty(
+            = new ConfigurationProperty(
                 NameName_,
                 typeof(String),
                 default(String),
                 ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
         static readonly ConfigurationProperty ValueProperty_
-			= new ConfigurationProperty(
+            = new ConfigurationProperty(
                 ValueName_,
                 typeof(String),
                 default(String),
