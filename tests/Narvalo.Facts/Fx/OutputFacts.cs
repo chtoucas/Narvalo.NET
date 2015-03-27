@@ -9,10 +9,10 @@ namespace Narvalo.Fx
 
     public static partial class OutputFacts
     {
-        #region Explicit Casting
+        #region Explicit Cast
 
         [Fact]
-        public static void CastingSuccessToFailure_Throws()
+        public static void ExplicitCast_Throws_WhenCastingSuccessToFailure()
         {
             // Arrange
             var output = Output.Success(1);

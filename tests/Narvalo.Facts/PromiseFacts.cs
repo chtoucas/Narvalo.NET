@@ -8,6 +8,7 @@ namespace Narvalo
 
     public static class PromiseFacts
     {
+        private const string NULL_STRING = null;
         private const string WHITESPACE_ONLY_STRING = "     ";
 
         #region Condition()
@@ -41,7 +42,7 @@ namespace Narvalo
         public static void NotNull_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNull((string)null, "rationale"));
+            Assert.ThrowsAny<Exception>(() => Promise.NotNull(NULL_STRING, "rationale"));
         }
 
         #endregion
@@ -59,7 +60,7 @@ namespace Narvalo
         public static void NotNullOrEmpty_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty((string)null, "rationale"));
+            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(NULL_STRING, "rationale"));
         }
 
         [Fact]
@@ -84,7 +85,7 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace((string)null, "rationale"));
+            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale"));
         }
 
         [Fact]

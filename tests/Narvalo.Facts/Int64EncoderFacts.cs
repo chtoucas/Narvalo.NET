@@ -557,7 +557,7 @@ namespace Narvalo
             Assert.Equal(value, Int64Encoder.FromFlickrBase58String(Int64Encoder.ToFlickrBase58String(value)));
         }
 
-        #region FromBase58String
+        #region FromBase58String()
 
         [Fact]
         public static void FromBase58String_ThrowsArgumentNullException_ForNull()
@@ -577,7 +577,7 @@ namespace Narvalo
 
         #endregion
 
-        #region FromFlickrBase58String
+        #region FromFlickrBase58String()
 
         [Fact]
         public static void FromFlickrBase58String_ThrowsArgumentNullException_ForNull()
@@ -597,7 +597,7 @@ namespace Narvalo
 
         #endregion
 
-        #region ToBase58String
+        #region ToBase58String()
 
         [Fact]
         public static void ToBase58String_ThrowsArgumentOutOfRangeException_ForNegativeValue()
@@ -617,7 +617,7 @@ namespace Narvalo
 
         #endregion
 
-        #region ToFlickrBase58String
+        #region ToFlickrBase58String()
 
         [Fact]
         public static void ToFlickrBase58String_ThrowsArgumentOutOfRangeException_ForNegativeValue()

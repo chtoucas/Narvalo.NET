@@ -8,6 +8,8 @@ namespace Narvalo
 
     public static class ParseToFacts
     {
+        #region Boolean()
+
         [Fact]
         public static void Boolean_ReturnsNull_ForNullString()
         {
@@ -155,5 +157,7 @@ namespace Narvalo
             // Assert
             Assert.False(result.HasValue);
         }
+
+        #endregion
     }
 }

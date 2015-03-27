@@ -162,7 +162,18 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Properties
+        #region None Property
+
+        [Fact]
+        public static void NoneProperty_IsNone()
+        {
+            // Act & Assert
+            Assert.False(Maybe.None.IsSome);
+        }
+
+        #endregion
+
+        #region IsSome Property
 
         [Fact]
         public static void IsSome_IsFalse_WhenNone()
@@ -222,20 +233,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        ////public static class NoneProperty
-        ////{
-        ////    [Fact]
-        ////    public static void IsNone()
-        ////    {
-        ////        // Act & Assert
-        ////        Assert.False(Maybe.None.IsSome);
-        ////    }
-        ////}
-
-        #region Equality/Inequality Operators & Equals Method
+        #region op_Equality()
 
         [Fact]
-        public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
+        public static void op_Equality_ReturnsTrue_ForNullAsMaybeAndNull()
         {
             // Arrange
             // REVIEW: Cast
@@ -250,7 +251,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Equality_ReturnsFalse_ForMaybeNoneAndNull()
+        public static void op_Equality_ReturnsFalse_ForMaybeNoneAndNull()
         {
             // Arrange
             var simple = Maybe<int>.None;
@@ -264,7 +265,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Equality_FollowsReferentialEqualityRules()
+        public static void op_Equality_FollowsReferentialEqualityRules()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
@@ -286,8 +287,12 @@ namespace Narvalo.Fx
             Assert.False(referenceA0 == referenceA1);
         }
 
+        #endregion
+
+        #region op_Inequality()
+
         [Fact]
-        public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
+        public static void op_Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
         {
             // Arrange
             // REVIEW: Cast
@@ -302,7 +307,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Inequality_ReturnsTrue_ForMaybeNoneAndNull()
+        public static void op_Inequality_ReturnsTrue_ForMaybeNoneAndNull()
         {
             // Arrange
             var simple = Maybe<int>.None;
@@ -316,7 +321,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Inequality_FollowsReferentialEqualityRules()
+        public static void op_Inequality_FollowsReferentialEqualityRules()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
@@ -337,6 +342,10 @@ namespace Narvalo.Fx
             Assert.True(almostValueA0 != almostValueA1);
             Assert.True(referenceA0 != referenceA1);
         }
+
+        #endregion
+
+        #region Equals()
 
         [Fact]
         public static void Equals_IsReflexive()
@@ -494,7 +503,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Of Method
+        #region Of()
 
         [Fact]
         public static void Of_ReturnsSome_ForNotNull()
@@ -536,7 +545,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Bind Method
+        #region Bind()
 
         /// <summary>
         /// <![CDATA[
@@ -871,18 +880,38 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        #region Properties
+        [Fact]
+        public static void Object_IsImmutable()
+        {
+            // Arrange
+            var stub = new Stub(1);
+            var option = Maybe.Of(stub);
+
+            // Act
+            stub = null;
+
+            // Assert
+            Assert.True(option.IsSome);
+            Assert.NotEqual(null, option.Value);
+            Assert.Equal(1, option.Value.Value);
+        }
+
+        #region Unit Property
 
         [Fact]
-        public static void Unit_IsSome()
+        public static void UnitProperty_IsSome()
         {
             // Act & Assert
             Assert.True(Maybe.Unit.IsSome);
             Assert.Equal(Unit.Single, Maybe.Unit.Value);
         }
 
+        #endregion
+
+        #region Value Property
+
         [Fact]
-        public static void Value_ReturnsTheOriginalValue_WhenSome()
+        public static void ValueProperty_ReturnsTheOriginalValue_WhenSome()
         {
             // Arrange
             var simple = 3141;
@@ -902,30 +931,9 @@ namespace Narvalo.Fx
             Assert.True(referenceOpt.Value == reference);
         }
 
-        [Fact]
-        public static void IsImmutable()
-        {
-            // Arrange
-            var stub = new Stub(1);
-            var option = Maybe.Of(stub);
-
-            // Act
-            stub = null;
-
-            // Assert
-            Assert.True(option.IsSome);
-            Assert.NotEqual(null, option.Value);
-            Assert.Equal(1, option.Value.Value);
-        }
-
-        static void Nullify_(ref Stub stub)
-        {
-            stub = null;
-        }
-
         #endregion
 
-        #region Bind Method
+        #region Bind()
 
         [Fact]
         public static void Bind_ReturnsSomeAndApplySelector_WhenSourceIsSome()

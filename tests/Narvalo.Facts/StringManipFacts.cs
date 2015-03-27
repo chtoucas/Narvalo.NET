@@ -9,7 +9,7 @@ namespace Narvalo
 
     public static class StringManipFacts
     {
-        public static IEnumerable<object[]> ReverseSampleData
+        public static IEnumerable<object[]> SampleDataForReverse
         {
             get
             {
@@ -19,6 +19,8 @@ namespace Narvalo
             }
         }
 
+        #region Reverse()
+
         [Fact]
         public static void Reverse_ThrowsArgumentNullException_ForNullString()
         {
@@ -27,12 +29,14 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("ReverseSampleData")]
+        [MemberData("SampleDataForReverse")]
         [CLSCompliant(false)]
         public static void Reverse_Succeeds_ForSampleStrings(string expectedValue, string value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, StringManip.Reverse(value));
         }
+
+        #endregion
     }
 }
