@@ -31,7 +31,7 @@ namespace Narvalo
         [Theory]
         [MemberData("SampleDataForReverse")]
         [CLSCompliant(false)]
-        public static void Reverse_Succeeds_ForSampleStrings(string expectedValue, string value)
+        public static void Reverse_ReturnsExpectedValue(string expectedValue, string value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, StringManip.Reverse(value));

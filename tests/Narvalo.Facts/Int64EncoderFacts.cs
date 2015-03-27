@@ -569,7 +569,7 @@ namespace Narvalo
         [Theory]
         [MemberData("Base58SampleData")]
         [CLSCompliant(false)]
-        public static void FromBase58String_Succeeds_ForSampleData(string value, long expectedValue)
+        public static void FromBase58String_ReturnsExpectedValue(string value, long expectedValue)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.FromBase58String(value));
@@ -589,7 +589,7 @@ namespace Narvalo
         [Theory]
         [MemberData("FlickrBase58SampleData")]
         [CLSCompliant(false)]
-        public static void FromFlickrBase58String_Succeeds_ForSampleData(string value, long expectedValue)
+        public static void FromFlickrBase58String_ReturnsExpectedValue(string value, long expectedValue)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
@@ -609,7 +609,7 @@ namespace Narvalo
         [Theory]
         [MemberData("Base58SampleData")]
         [CLSCompliant(false)]
-        public static void ToBase58String_Succeeds_ForSampleData(string expectedValue, long value)
+        public static void ToBase58String_ReturnsExpectedValue(string expectedValue, long value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
@@ -629,7 +629,7 @@ namespace Narvalo
         [Theory]
         [MemberData("FlickrBase58SampleData")]
         [CLSCompliant(false)]
-        public static void ToFlickrBase58String_Succeeds_ForSampleData(string expectedValue, long value)
+        public static void ToFlickrBase58String_ReturnsExpectedValue(string expectedValue, long value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
