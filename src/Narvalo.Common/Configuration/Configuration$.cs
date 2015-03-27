@@ -6,6 +6,8 @@ namespace Narvalo.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Resources;
+
     /// <summary>
     /// Provides extension methods for <see cref="System.Configuration.Configuration"/>.
     /// </summary>
@@ -26,7 +28,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
+                    Format.CurrentCulture(Strings_Common.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;

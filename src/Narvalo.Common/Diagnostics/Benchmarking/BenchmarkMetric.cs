@@ -7,6 +7,8 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    using Narvalo.Resources;
+
     [SuppressMessage("Gendarme.Rules.Maintainability", "AvoidLackOfCohesionOfMethodsRule",
         Justification = "[Intentionally] If it were not a bit too large, we would have make it a struct.")]
     public sealed partial class BenchmarkMetric : IFormattable
@@ -162,7 +164,7 @@ namespace Narvalo.Diagnostics.Benchmarking
                 case "d":
                     return String.Format(
                         formatProvider,
-                        Strings_Common.BenchmarkMetric_MetricFormat,
+                        Strings_Common.BenchmarkMetric_Metric_Format,
                         Name,
                         CallsPerSecond,
                         Iterations,

@@ -6,8 +6,10 @@ namespace Narvalo.Configuration
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Resources;
+
     /// <summary>
-    /// Represents a class that provides validation of an absolute URI value.
+    /// Represents a class that validates an absolute URI value.
     /// </summary>
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
@@ -26,7 +28,7 @@ namespace Narvalo.Configuration
 
             if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute)) {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Common.AbsoluteUriValidator_UriIsNotAbsoluteFormat, uriString));
+                    Format.CurrentCulture(Strings_Common.AbsoluteUriValidator_UriIsNotAbsolute_Format, uriString));
             }
         }
     }

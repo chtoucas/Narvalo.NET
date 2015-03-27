@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Strings_Common", typeof(Strings_Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Resources.Strings_Common", typeof(Strings_Common).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,38 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The supplied value &apos;{0}&apos; is not a well-formed absolute URI..
+        ///   Looks up a localized string similar to The specified value &apos;{0}&apos; is not a well-formed absolute URI..
         /// </summary>
-        internal static string AbsoluteUriValidator_UriIsNotAbsoluteFormat {
+        internal static string AbsoluteUriValidator_UriIsNotAbsolute_Format {
             get {
-                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsoluteFormat", resourceCulture);
+                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsolute_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
         /// </summary>
-        internal static string BenchmarkMetric_MetricFormat {
+        internal static string BenchmarkMetric_Metric_Format {
             get {
-                return ResourceManager.GetString("BenchmarkMetric_MetricFormat", resourceCulture);
+                return ResourceManager.GetString("BenchmarkMetric_Metric_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
-        internal static string ConfigurationManager_MissingSectionFormat {
+        internal static string Configuration_MissingSection_Format {
             get {
-                return ResourceManager.GetString("ConfigurationManager_MissingSectionFormat", resourceCulture);
+                return ResourceManager.GetString("Configuration_MissingSection_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
-        internal static string Int64Encoder_IllegalCharacterFormat {
+        internal static string Int64Encoder_IllegalCharacter_Format {
             get {
-                return ResourceManager.GetString("Int64Encoder_IllegalCharacterFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The length is not less than or equal to &apos;{0}&apos;..
-        /// </summary>
-        internal static string Int64Encoder_OutOfRangeLengthFormat {
-            get {
-                return ResourceManager.GetString("Int64Encoder_OutOfRangeLengthFormat", resourceCulture);
+                return ResourceManager.GetString("Int64Encoder_IllegalCharacter_Format", resourceCulture);
             }
         }
     }

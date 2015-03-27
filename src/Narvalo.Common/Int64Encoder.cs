@@ -6,6 +6,8 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Resources;
+
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is done to avoid repetitive code. Only visible from the inside.")]
     public static class Int64Encoder
@@ -144,7 +146,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new ArgumentException(
-                        Format.CurrentCulture(Strings_Common.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        Format.CurrentCulture(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i),
                         "value");
                 }
 
@@ -180,7 +182,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new ArgumentException(
-                        Format.CurrentCulture(Strings_Common.Int64Encoder_IllegalCharacterFormat, value[i], i),
+                        Format.CurrentCulture(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i),
                         "value");
                 }
 

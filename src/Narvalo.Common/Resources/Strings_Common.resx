@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbsoluteUriValidator_UriIsNotAbsoluteFormat" xml:space="preserve">
-    <value>The supplied value '{0}' is not a well-formed absolute URI.</value>
+  <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
+    <value>The specified value '{0}' is not a well-formed absolute URI.</value>
   </data>
-  <data name="ConfigurationManager_MissingSectionFormat" xml:space="preserve">
+  <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
-  <data name="BenchmarkMetric_MetricFormat" xml:space="preserve">
+  <data name="BenchmarkMetric_Metric_Format" xml:space="preserve">
     <value>{0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration)</value>
   </data>
-  <data name="Int64Encoder_IllegalCharacterFormat" xml:space="preserve">
+  <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
     <value>Illegal character '{0}' found at position '{1}'.</value>
-  </data>
-  <data name="Int64Encoder_OutOfRangeLengthFormat" xml:space="preserve">
-    <value>The length is not less than or equal to '{0}'.</value>
   </data>
 </root>

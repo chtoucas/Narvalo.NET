@@ -8,6 +8,8 @@ namespace Narvalo.Configuration
     using System.Diagnostics.Contracts;
     using System.IO;
 
+    using Narvalo.Resources;
+
     /// <summary>
     /// Provides methods for stronly-typed access to configuration sections.
     /// </summary>
@@ -32,7 +34,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
+                    Format.CurrentCulture(Strings_Common.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;
@@ -76,7 +78,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Common.ConfigurationManager_MissingSectionFormat, sectionName));
+                    Format.CurrentCulture(Strings_Common.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;
