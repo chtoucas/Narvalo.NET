@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Require_ArgumentNullOrEmptyFormat" xml:space="preserve">
+  <data name="Require_ArgumentNullOrEmpty_Format" xml:space="preserve">
     <value>The value of '{0}' is null or empty.</value>
   </data>
-  <data name="Require_NotGreaterThanOrEqualToFormat" xml:space="preserve">
+  <data name="Require_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
     <value>The value of '{0}' is not greater than or equal to '{1}'.</value>
   </data>
-  <data name="Require_NotLessThanOrEqualToFormat" xml:space="preserve">
+  <data name="Require_NotLessThanOrEqualTo_Format" xml:space="preserve">
     <value>The value of '{0}' is not less than or equal to '{1}'.</value>
   </data>
-  <data name="Require_NotInRangeFormat" xml:space="preserve">
+  <data name="Require_NotInRange_Format" xml:space="preserve">
     <value>The value of '{0}' is not in range [{1} - {2}].</value>
   </data>
   <data name="Require_ObjectNull" xml:space="preserve">
@@ -139,37 +139,28 @@
     <value>The property value is null or empty.</value>
   </data>
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
-    <value>Can not cast a Maybe.None to a value.</value>
+    <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
   </data>
-  <data name="Require_ArgumentNullFormat" xml:space="preserve">
+  <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>The value of '{0}' is null.</value>
   </data>
-  <data name="Require_NotGreaterThanFormat" xml:space="preserve">
+  <data name="Require_NotGreaterThan_Format" xml:space="preserve">
     <value>The value of '{0}' is not greater than '{1}'.</value>
   </data>
-  <data name="Require_NotLessThanFormat" xml:space="preserve">
+  <data name="Require_NotLessThan_Format" xml:space="preserve">
     <value>The value of '{0}' is not less than '{1}'.</value>
   </data>
-  <data name="Require_ArgumentNullOrWhiteSpaceFormat" xml:space="preserve">
+  <data name="Require_ArgumentNullOrWhiteSpace_Format" xml:space="preserve">
     <value>The value of '{0}' is null or empty, or contains only white-space characters.</value>
   </data>
-  <data name="Output_SuccessHasNoException" xml:space="preserve">
-    <value>A successful output does not enclose any exception.</value>
-  </data>
-  <data name="Output_FailureHasNoValue" xml:space="preserve">
-    <value>A failed output does not enclose any value.</value>
-  </data>
-  <data name="VoidOrBreak_IsNotBreak" xml:space="preserve">
-    <value>A successful outcome has no error message.</value>
-  </data>
-  <data name="VoidOrError_IsNotError" xml:space="preserve">
-    <value>A successful outcome has no exception info.</value>
+  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
+    <value>A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property.</value>
   </data>
   <data name="Output_CannotCastFailureToValue" xml:space="preserve">
-    <value>Can not cast an failed output to a value.</value>
+    <value>Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T.</value>
   </data>
   <data name="Output_CannotCastSuccessToException" xml:space="preserve">
-    <value>Can not cast an successful output to an exception.</value>
+    <value>Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state.</value>
   </data>
   <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
     <value>The property value is null or empty, or contains only white-space characters.</value>

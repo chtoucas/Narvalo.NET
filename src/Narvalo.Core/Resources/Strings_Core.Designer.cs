@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Resources {
+    using System;
     using System.Reflection;
     
     
@@ -39,7 +40,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Strings_Core", typeof(Strings_Core).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Resources.Strings_Core", typeof(Strings_Core).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +62,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast a Maybe.None to a value..
+        ///   Looks up a localized string similar to Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T..
         /// </summary>
         internal static string Maybe_CannotCastNoneToValue {
             get {
@@ -70,7 +71,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast an failed output to a value..
+        ///   Looks up a localized string similar to Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T..
         /// </summary>
         internal static string Output_CannotCastFailureToValue {
             get {
@@ -79,7 +80,7 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not cast an successful output to an exception..
+        ///   Looks up a localized string similar to Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state..
         /// </summary>
         internal static string Output_CannotCastSuccessToException {
             get {
@@ -88,92 +89,74 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A failed output does not enclose any value..
-        /// </summary>
-        internal static string Output_FailureHasNoValue {
-            get {
-                return ResourceManager.GetString("Output_FailureHasNoValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A successful output does not enclose any exception..
-        /// </summary>
-        internal static string Output_SuccessHasNoException {
-            get {
-                return ResourceManager.GetString("Output_SuccessHasNoException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null..
         /// </summary>
-        internal static string Require_ArgumentNullFormat {
+        internal static string Require_ArgumentNull_Format {
             get {
-                return ResourceManager.GetString("Require_ArgumentNullFormat", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentNull_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty..
         /// </summary>
-        internal static string Require_ArgumentNullOrEmptyFormat {
+        internal static string Require_ArgumentNullOrEmpty_Format {
             get {
-                return ResourceManager.GetString("Require_ArgumentNullOrEmptyFormat", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentNullOrEmpty_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty, or contains only white-space characters..
         /// </summary>
-        internal static string Require_ArgumentNullOrWhiteSpaceFormat {
+        internal static string Require_ArgumentNullOrWhiteSpace_Format {
             get {
-                return ResourceManager.GetString("Require_ArgumentNullOrWhiteSpaceFormat", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentNullOrWhiteSpace_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
         /// </summary>
-        internal static string Require_NotGreaterThanFormat {
+        internal static string Require_NotGreaterThan_Format {
             get {
-                return ResourceManager.GetString("Require_NotGreaterThanFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotGreaterThan_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
         /// </summary>
-        internal static string Require_NotGreaterThanOrEqualToFormat {
+        internal static string Require_NotGreaterThanOrEqualTo_Format {
             get {
-                return ResourceManager.GetString("Require_NotGreaterThanOrEqualToFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotGreaterThanOrEqualTo_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
         /// </summary>
-        internal static string Require_NotInRangeFormat {
+        internal static string Require_NotInRange_Format {
             get {
-                return ResourceManager.GetString("Require_NotInRangeFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotInRange_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
         /// </summary>
-        internal static string Require_NotLessThanFormat {
+        internal static string Require_NotLessThan_Format {
             get {
-                return ResourceManager.GetString("Require_NotLessThanFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotLessThan_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
         /// </summary>
-        internal static string Require_NotLessThanOrEqualToFormat {
+        internal static string Require_NotLessThanOrEqualTo_Format {
             get {
-                return ResourceManager.GetString("Require_NotLessThanOrEqualToFormat", resourceCulture);
+                return ResourceManager.GetString("Require_NotLessThanOrEqualTo_Format", resourceCulture);
             }
         }
         
@@ -214,20 +197,11 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no error message..
+        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
         /// </summary>
-        internal static string VoidOrBreak_IsNotBreak {
+        internal static string VoidOrBreak_BreakHasNoReason {
             get {
-                return ResourceManager.GetString("VoidOrBreak_IsNotBreak", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A successful outcome has no exception info..
-        /// </summary>
-        internal static string VoidOrError_IsNotError {
-            get {
-                return ResourceManager.GetString("VoidOrError_IsNotError", resourceCulture);
+                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
             }
         }
     }

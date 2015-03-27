@@ -8,6 +8,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    using Narvalo.Resources;
+
     /// <summary>
     /// Represents the output of a computation which may throw exceptions.
     /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>

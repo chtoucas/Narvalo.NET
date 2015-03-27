@@ -10,6 +10,8 @@ namespace Narvalo.Diagnostics.Benchmarking
     {
         private static readonly TimeSpan s_Epsilon = TimeSpan.FromTicks(1L);
 
+        #region ToString()
+
         [Fact]
         public static void ToString_ForNullFormat()
         {
@@ -29,5 +31,7 @@ namespace Narvalo.Diagnostics.Benchmarking
             // Act & Assert
             Assert.Equal(metric.ToString(), metric.ToString("G", null));
         }
+
+        #endregion
     }
 }

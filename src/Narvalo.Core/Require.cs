@@ -8,6 +8,7 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
+    using Narvalo.Resources;
 
     /// <summary>
     /// Provides helper methods to perform argument validation compatible with Code Contracts.
@@ -64,6 +65,7 @@ namespace Narvalo
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
@@ -84,6 +86,7 @@ namespace Narvalo
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
@@ -115,7 +118,7 @@ namespace Narvalo
             {
                 throw new ArgumentNullException(
                     parameterName,
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullFormat, parameterName));
+                    Format.CurrentCulture(Strings_Core.Require_ArgumentNull_Format, parameterName));
             }
 
             Contract.EndContractBlock();
@@ -126,6 +129,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
@@ -137,7 +141,7 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrEmptyFormat, parameterName),
+                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrEmpty_Format, parameterName),
                     parameterName);
             }
 
@@ -150,6 +154,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
@@ -162,7 +167,7 @@ namespace Narvalo
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrWhiteSpaceFormat, parameterName),
+                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
                     parameterName);
             }
 
@@ -188,7 +193,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, parameterName, minInclusive, maxInclusive));
+                    Format.CurrentCulture(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -213,7 +218,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, parameterName, minInclusive, maxInclusive));
+                    Format.CurrentCulture(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -237,7 +242,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -261,7 +266,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -285,7 +290,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -309,7 +314,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -333,7 +338,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -357,7 +362,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -381,7 +386,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -405,7 +410,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();

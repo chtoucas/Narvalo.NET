@@ -8,6 +8,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Resources;
+
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
     /// </summary>
