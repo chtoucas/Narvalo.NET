@@ -70,7 +70,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
-            Require.Property(value);
+            Property(value);
 
             if (value.Length == 0)
             {
@@ -92,7 +92,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
-            Require.Property(value);
+            Property(value);
 
             if (String.IsNullOrWhiteSpace(value))
             {
@@ -136,7 +136,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
-            Require.NotNull(value, parameterName);
+            NotNull(value, parameterName);
 
             if (value.Length == 0)
             {
@@ -162,7 +162,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
-            Require.NotNull(value, parameterName);
+            NotNull(value, parameterName);
 
             if (String.IsNullOrWhiteSpace(value))
             {
@@ -190,15 +190,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
-            if (minInclusive > maxInclusive)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(
-                        Strings_Core.Require_InvalidRange_Format,
-                        minInclusive,
-                        maxInclusive),
-                    "minInclusive");
-            }
+            ValidateRange_(minInclusive, maxInclusive);
 
             if (value < minInclusive || value > maxInclusive)
             {
@@ -227,15 +219,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
-            if (minInclusive > maxInclusive)
-            {
-                throw new ArgumentException(
-                    Format.CurrentCulture(
-                        Strings_Core.Require_InvalidRange_Format,
-                        minInclusive,   
-                        maxInclusive),
-                    "minInclusive");
-            }
+            ValidateRange_(minInclusive, maxInclusive);
 
             if (value < minInclusive || value > maxInclusive)
             {
@@ -435,6 +419,46 @@ namespace Narvalo
                     parameterName,
                     value,
                     Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        // This method was created to silent a CC1025 error:
+        //  "After contract block, found use of local variable defined in contract block"
+        // We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
+        // instead of an ArgumentOutOfRangeException.
+        [ContractArgumentValidator]
+        private static void ValidateRange_(int minInclusive, int maxInclusive)
+        {
+            if (minInclusive > maxInclusive)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        Strings_Core.Require_InvalidRange_Format,
+                        minInclusive,
+                        maxInclusive),
+                    "minInclusive");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        // This method was created to silent a CC1025 error:
+        //  "After contract block, found use of local variable defined in contract block"
+        // We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
+        // instead of an ArgumentOutOfRangeException.
+        [ContractArgumentValidator]
+        private static void ValidateRange_(long minInclusive, long maxInclusive)
+        {
+            if (minInclusive > maxInclusive)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        Strings_Core.Require_InvalidRange_Format,
+                        minInclusive,
+                        maxInclusive),
+                    "minInclusive");
             }
 
             Contract.EndContractBlock();

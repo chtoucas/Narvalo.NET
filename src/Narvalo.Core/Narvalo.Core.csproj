@@ -49,7 +49,7 @@
     </CodeContractsLibPaths>
     <CodeContractsExtraRewriteOptions>
     </CodeContractsExtraRewriteOptions>
-    <CodeContractsExtraAnalysisOptions>-outputwarnmasks</CodeContractsExtraAnalysisOptions>
+    <CodeContractsExtraAnalysisOptions>-outputwarnmasks -show unreached</CodeContractsExtraAnalysisOptions>
     <CodeContractsSQLServerOption />
     <CodeContractsBaseLineFile />
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
