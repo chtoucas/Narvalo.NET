@@ -1,10 +1,19 @@
 ChangeLog
 =========
                                                 
-XXXX-XX-XX - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
-                             
+         
+#### Breaking changes
+- Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
+  Protocol-relative URL appears to be the accepted name, not protocol-less URL.
+
 #### Improvements
+- Improved the error messages. Whenever it is possible, we explain how to fix the problem.
+- Added localized resources for the french language.
+- Added more tests.
+- Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
+  exception is certainly better.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
@@ -31,6 +40,8 @@ _Aiming for API stability of Narvalo.Core_
   much noise and annoying duplicates of descriptions for exceptions. The patched documentation
   is still available in the NuGet package alongside the contract assemblies.
 - Added more Code Contracts.
+- Changed a few parameter names to ensure a CA1303 error is triggered whenever 
+  a string should be localized.
 
 2015-03-24 - Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -------------------------------------------------------------------------

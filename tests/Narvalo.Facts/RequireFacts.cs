@@ -224,28 +224,28 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt32StrictlyBelowLowerEnd()
+        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt32BelowLowerEnd()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.InRange(0, 1, 3, "parameter"));
         }
 
         [Fact]
-        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt64StrictlyBelowLowerEnd()
+        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt64BelowLowerEnd()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.InRange(0L, 1L, 3L, "parameter"));
         }
 
         [Fact]
-        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt32StrictlyAboveUpperEnd()
+        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt32AboveUpperEnd()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.InRange(4, 1, 3, "parameter"));
         }
 
         [Fact]
-        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt64StrictlyAboveUpperEnd()
+        public static void InRange_ThrowsArgumentOutOfRangeException_ForInt64AboveUpperEnd()
         {
             // Act & Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Require.InRange(4L, 1L, 3L, "parameter"));

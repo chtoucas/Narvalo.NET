@@ -7,6 +7,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Internal;
+    using Narvalo.Resources;
 
     /// <summary>
     /// Provides helper methods to perform argument validation.
@@ -43,7 +44,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRangeFormat, parameterName, minInclusive, maxInclusive));
+                    Format.CurrentCulture(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
         }
 
@@ -67,7 +68,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
             }
         }
 
@@ -91,7 +92,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualToFormat, parameterName, minValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
         }
 
@@ -115,7 +116,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
             }
         }
 
@@ -127,6 +128,7 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="maxValue">The maximum value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum value.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
@@ -139,7 +141,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualToFormat, parameterName, maxValue));
+                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
         }
     }

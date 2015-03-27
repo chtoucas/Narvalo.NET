@@ -3,6 +3,15 @@ Tips
 
 Often obvious but worth recalling.
 
+### Do not pass literals as localized parameters ###
+
+Ensure that a CA1303 code analysis error is triggered whenever a string should be localized: 
+- The `LocalizableAttribute` attribute of the parameter or property is set to true.
+- The parameter or property name contains "Text", "Message", or "Caption".
+- The name of the string parameter that is passed to a Console.Write or Console.WriteLine method is either "value" or "format".
+  
+[MSDN](https://msdn.microsoft.com/en-us/library/ms182187.aspx)
+
 ### The counter intuitive meaning of "protected internal" ###
 
 This accessibility level is counter intuitive:

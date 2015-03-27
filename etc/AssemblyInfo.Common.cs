@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 #if !NO_INTERNALS_VISIBLE_TO
 namespace Narvalo.Properties
 {
-    static partial class AssemblyInfo
+    internal static partial class AssemblyInfo
     {
 #if SIGNED_ASSEMBLY
         public const string PublicKeySuffix =

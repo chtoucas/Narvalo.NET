@@ -58,6 +58,7 @@
       <Link>IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
+    <Compile Include="EnforceFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
     <Compile Include="Fx\OutputFacts.cs" />

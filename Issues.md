@@ -16,6 +16,10 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Add fr resources, NeutralResourcesLanguage("en-US")
+- EditorBrowsableState
+- String.Format and casting
+- Fix all InRange methods for minValue <= maxValue
 - IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
 - Verify that SkipDocumentation=true when building Code Contracts doc.
 - Unsafe alternates: complete SqlDataReader.
