@@ -9,11 +9,12 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
 
 #### Improvements
-- Improved the error messages. Whenever it is possible, we explain how to fix the problem.
+- Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
 - Added localized resources for the french language.
 - Added more tests.
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
   exception is certainly better.
+- For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

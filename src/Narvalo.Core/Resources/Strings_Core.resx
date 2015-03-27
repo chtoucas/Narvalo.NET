@@ -165,4 +165,7 @@
   <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
     <value>The property value is null or empty, or contains only white-space characters.</value>
   </data>
+  <data name="Require_InvalidRange_Format" xml:space="preserve">
+    <value>The value of the parameter 'minInclusive' ({0}) must be greater than or equal to value of the parameter 'maxInclusive' ({1}).</value>
+  </data>
 </root>

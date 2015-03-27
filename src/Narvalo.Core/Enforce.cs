@@ -32,6 +32,8 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum value (inclusive).</param>
         /// <param name="maxInclusive">The maximum value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
@@ -39,6 +41,16 @@ namespace Narvalo
         public static void InRange<T>([ValidatedNotNull]T value, T minInclusive, T maxInclusive, string parameterName)
             where T : struct, IComparable<T>
         {
+            if (minInclusive.CompareTo(maxInclusive) > 0)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        Strings_Core.Require_InvalidRange_Format,
+                        minInclusive,
+                        maxInclusive),
+                    "minInclusive");
+            }
+
             if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
             {
                 throw new ArgumentOutOfRangeException(

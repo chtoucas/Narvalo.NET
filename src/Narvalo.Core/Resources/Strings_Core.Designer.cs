@@ -116,6 +116,15 @@ namespace Narvalo.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
+        /// </summary>
+        internal static string Require_InvalidRange_Format {
+            get {
+                return ResourceManager.GetString("Require_InvalidRange_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
         /// </summary>
         internal static string Require_NotGreaterThan_Format {

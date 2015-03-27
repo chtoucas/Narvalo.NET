@@ -135,6 +135,9 @@
   <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>La valeur de '{0}' est null.</value>
   </data>
+  <data name="Require_InvalidRange_Format" xml:space="preserve">
+    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
+  </data>
   <data name="Require_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
     <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
   </data>

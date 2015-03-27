@@ -224,6 +224,20 @@ namespace Narvalo
         }
 
         [Fact]
+        public static void InRange_ThrowsArgumentException_ForInvalidInt32Range()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => Require.InRange(0, 3, 1, "parameter"));
+        }
+
+        [Fact]
+        public static void InRange_ThrowsArgumentException_ForInvalidInt64Range()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => Require.InRange(0L, 3L, 1L, "parameter"));
+        }
+
+        [Fact]
         public static void InRange_ThrowsArgumentOutOfRangeException_ForInt32BelowLowerEnd()
         {
             // Act & Assert

@@ -181,6 +181,8 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum integer value (inclusive).</param>
         /// <param name="maxInclusive">The maximum integer value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
         [ContractArgumentValidator]
@@ -188,6 +190,16 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
+            if (minInclusive > maxInclusive)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        Strings_Core.Require_InvalidRange_Format,
+                        minInclusive,
+                        maxInclusive),
+                    "minInclusive");
+            }
+
             if (value < minInclusive || value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(
@@ -206,6 +218,8 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum long value (inclusive).</param>
         /// <param name="maxInclusive">The maximum long value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
         [ContractArgumentValidator]
@@ -213,6 +227,16 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
+            if (minInclusive > maxInclusive)
+            {
+                throw new ArgumentException(
+                    Format.CurrentCulture(
+                        Strings_Core.Require_InvalidRange_Format,
+                        minInclusive,   
+                        maxInclusive),
+                    "minInclusive");
+            }
+
             if (value < minInclusive || value > maxInclusive)
             {
                 throw new ArgumentOutOfRangeException(

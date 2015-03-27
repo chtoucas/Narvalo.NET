@@ -38,6 +38,13 @@ namespace Narvalo
         }
 
         [Fact]
+        public static void InRange_ThrowsArgumentException_ForInvalidRange()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => Enforce.InRange(s_ValueBelow, s_MaxValue, s_MinValue, "parameter"));
+        }
+
+        [Fact]
         public static void InRange_ThrowsArgumentOutOfRangeException_ForValueBelowMinValue()
         {
             // Act & Assert
@@ -55,7 +62,7 @@ namespace Narvalo
 
         #endregion
 
-        #region GreaterThan
+        #region GreaterThan()
 
         [Fact]
         public static void GreaterThan_DoesNotThrow_ForValueAboveMinValue()
@@ -82,7 +89,7 @@ namespace Narvalo
 
         #endregion
 
-        #region GreaterThanOrEqualTo
+        #region GreaterThanOrEqualTo()
 
         [Fact]
         public static void GreaterThanOrEqualTo_DoesNotThrow_ForValueAtMinValue()
@@ -108,7 +115,7 @@ namespace Narvalo
 
         #endregion
 
-        #region LessThan
+        #region LessThan()
 
         [Fact]
         public static void LessThan_DoesNotThrow_ForValueBelowMaxValue()
@@ -135,7 +142,7 @@ namespace Narvalo
 
         #endregion
 
-        #region LessThanOrEqualTo
+        #region LessThanOrEqualTo()
 
         [Fact]
         public static void LessThanOrEqualTo_DoesNotThrow_ForValueBelowMaxValue()
