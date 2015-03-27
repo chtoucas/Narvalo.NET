@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Web {
+namespace Narvalo.Web.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Narvalo.Web {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Web.Strings_Web", typeof(Strings_Web).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Web.Resources.Strings_Web", typeof(Strings_Web).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default AssetProvider was not specified..
+        ///   Looks up a localized string similar to A default AssetProvider was not specified in your web.config. See Narvalo.Web.Configuration for more information on how to configure properly your application..
         /// </summary>
         internal static string AssetManager_DefaultProviderNotConfigured {
             get {
@@ -70,7 +70,7 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The default AssetProvider was not found..
+        ///   Looks up a localized string similar to The specified default AssetProvider was not found. Most certainly you misconfigured your application. See Narvalo.Web.Configuration for more information on how to configure properly your application..
         /// </summary>
         internal static string AssetManager_DefaultProviderNotFound {
             get {
@@ -79,7 +79,7 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid provider type..
+        ///   Looks up a localized string similar to Attempt to add a provider of invalid type. Most certainly you specified a provider which does not extend AssetProviderBase. See Narvalo.Web.Configuration for more information on how to configure properly your application..
         /// </summary>
         internal static string AssetProviderCollection_InvalidProvider {
             get {
@@ -88,47 +88,56 @@ namespace Narvalo.Web {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid HTTP method: {0}..
+        ///   Looks up a localized string similar to An error occurred while trying to bind the HTTP request to a query object. Please see the enclosed exceptions for more details on the error..
         /// </summary>
-        internal static string HttpHandlerBase_InvalidHttpMethodFormat {
+        internal static string HttpHandlerBase_BindingFailure {
             get {
-                return ResourceManager.GetString("HttpHandlerBase_InvalidHttpMethodFormat", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_BindingFailure", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid request..
+        ///   Looks up a localized string similar to This HTTP handler does not support this HTTP method: {0}. Only the following methods are accepted: {1}..
         /// </summary>
-        internal static string HttpHandlerBase_InvalidRequest {
+        internal static string HttpHandlerBase_InvalidHttpMethod_Format {
             get {
-                return ResourceManager.GetString("HttpHandlerBase_InvalidRequest", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_InvalidHttpMethod_Format", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The scheme &apos;{0}&apos; does not support protocol less uri..
+        ///   Looks up a localized string similar to An unknown error while trying to bind the HTTP request to a query object..
         /// </summary>
-        internal static string Uri_ProtocolLessUnsupportedSchemeFormat {
+        internal static string HttpHandlerBase_UnknownBindingFailure {
             get {
-                return ResourceManager.GetString("Uri_ProtocolLessUnsupportedSchemeFormat", resourceCulture);
+                return ResourceManager.GetString("HttpHandlerBase_UnknownBindingFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The URI scheme &apos;{0}&apos; does not support protocol-relative URLs..
+        /// </summary>
+        internal static string UriExtensions_ProtocolRelativeUnsupportedScheme_Format {
+            get {
+                return ResourceManager.GetString("UriExtensions_ProtocolRelativeUnsupportedScheme_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config!.
         /// </summary>
-        internal static string WebConfigurationManager_SectionNotFoundFormat {
+        internal static string WebConfigurationManager_SectionNotFound_Format {
             get {
-                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundFormat", resourceCulture);
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFound_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!.
         /// </summary>
-        internal static string WebConfigurationManager_SectionNotFoundInPathFormat {
+        internal static string WebConfigurationManager_SectionNotFoundInPath_Format {
             get {
-                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPathFormat", resourceCulture);
+                return ResourceManager.GetString("WebConfigurationManager_SectionNotFoundInPath_Format", resourceCulture);
             }
         }
     }

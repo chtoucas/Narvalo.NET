@@ -118,27 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AssetManager_DefaultProviderNotConfigured" xml:space="preserve">
-    <value>The default AssetProvider was not specified.</value>
+    <value>Un fournisseur de type AssetProvider à utiliser par défaut n'a pas été spécifié dans votre fichier de configuration web.config. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>
   </data>
   <data name="AssetManager_DefaultProviderNotFound" xml:space="preserve">
-    <value>The default AssetProvider was not found.</value>
+    <value>Le fournisseur de type AssetProvider à utiliser par défaut n'a pas été trouvé. Il est plus que probable que vous ayez mal configuré votre application. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>
   </data>
   <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
-    <value>Invalid provider type.</value>
+    <value>Tentative de rajouter un fournisseur de type invalide. Il est plus que probable que vous ayez spécifié un fournisseur qui n'étende pas AssetProviderBase. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>
   </data>
-  <data name="HttpHandlerBase_InvalidHttpMethodFormat" xml:space="preserve">
-    <value>Invalid HTTP method: {0}.</value>
+  <data name="HttpHandlerBase_BindingFailure" xml:space="preserve">
+    <value>Une erreur est intervenue lors de la tentative de liaison entre une requête HTTP et un objet de requête fortement typé. Veuillez consulter la liste des exceptions encapsulées si vous souhaitez de plus amples informations concernant cette erreur.</value>
   </data>
-  <data name="HttpHandlerBase_InvalidRequest" xml:space="preserve">
-    <value>Invalid request.</value>
+  <data name="HttpHandlerBase_InvalidHttpMethod_Format" xml:space="preserve">
+    <value>Ce gestionnaire de requêtes HTTP ne supporte pas cette méthode HTTP : {0}. Seules sont accptées les méthode suivantes : {1}.</value>
   </data>
-  <data name="Uri_ProtocolLessUnsupportedSchemeFormat" xml:space="preserve">
-    <value>The scheme '{0}' does not support protocol less uri.</value>
+  <data name="HttpHandlerBase_UnknownBindingFailure" xml:space="preserve">
+    <value>Une erreur inconnue est intervenue lors de la tentative de liaison entre une requête HTTP et un objet de requête fortement typé.</value>
   </data>
-  <data name="WebConfigurationManager_SectionNotFoundFormat" xml:space="preserve">
-    <value>The &lt;{0}&gt; section is not defined in your web.config!</value>
+  <data name="UriExtensions_ProtocolRelativeUnsupportedScheme_Format" xml:space="preserve">
+    <value>Le protocole '{0}' n'est pas éligible à la suppression du protocole de sa représentation en chaîne de caractères.</value>
   </data>
-  <data name="WebConfigurationManager_SectionNotFoundInPathFormat" xml:space="preserve">
-    <value>The &lt;{0}&gt; section is not defined in your web.config for the virtual path: {1}!</value>
+  <data name="WebConfigurationManager_SectionNotFoundInPath_Format" xml:space="preserve">
+    <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration web.config pour le chemin virtuel : '{1}' !</value>
+  </data>
+  <data name="WebConfigurationManager_SectionNotFound_Format" xml:space="preserve">
+    <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration web.config !</value>
   </data>
 </root>

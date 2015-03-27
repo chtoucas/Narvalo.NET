@@ -5,9 +5,13 @@ namespace Narvalo.Web
     using System;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Web.Resources;
+
     public static class UriExtensions
     {
-        public static string ToProtocolLessString(this Uri @this)
+        // Also known as protocol-less URL.
+        // <seealso href="http://tools.ietf.org/html/rfc3986#section-4.2"/>
+        public static string ToProtocolRelativeString(this Uri @this)
         {
             Require.Object(@this);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -30,7 +34,7 @@ namespace Narvalo.Web
             else
             {
                 throw new NotSupportedException(
-                    Format.CurrentCulture(Strings_Web.Uri_ProtocolLessUnsupportedSchemeFormat, scheme));
+                    Format.CurrentCulture(Strings_Web.UriExtensions_ProtocolRelativeUnsupportedScheme_Format, scheme));
             }
         }
     }

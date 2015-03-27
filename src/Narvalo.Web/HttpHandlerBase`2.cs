@@ -8,6 +8,8 @@ namespace Narvalo.Web
     using System.Net;
     using System.Web;
 
+    using Narvalo.Web.Resources;
+
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()
     {
@@ -35,7 +37,9 @@ namespace Narvalo.Web
 
             if (errorsCount > 1)
             {
-                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest, new AggregateException(errors));
+                exception = new HttpQueryBinderException(
+                    Strings_Web.HttpHandlerBase_BindingFailure, 
+                    new AggregateException(errors));
             }
             else if (errorsCount == 1)
             {
@@ -43,7 +47,7 @@ namespace Narvalo.Web
             }
             else
             {
-                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_InvalidRequest);
+                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_UnknownBindingFailure);
             }
 
             OnBindingFailureCore(context, exception);

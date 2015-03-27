@@ -6,6 +6,8 @@ namespace Narvalo.Web.Configuration
     using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
+    using Narvalo.Web.Resources;
+
     public static class WebSectionManager
     {
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
@@ -18,7 +20,7 @@ namespace Narvalo.Web.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Web.WebConfigurationManager_SectionNotFoundFormat, sectionName));
+                    Format.CurrentCulture(Strings_Web.WebConfigurationManager_SectionNotFound_Format, sectionName));
             }
 
             return section;
@@ -35,7 +37,10 @@ namespace Narvalo.Web.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.CurrentCulture(Strings_Web.WebConfigurationManager_SectionNotFoundInPathFormat, sectionName, virtualPath));
+                    Format.CurrentCulture(
+                        Strings_Web.WebConfigurationManager_SectionNotFoundInPath_Format,
+                        sectionName,
+                        virtualPath));
             }
 
             return section;

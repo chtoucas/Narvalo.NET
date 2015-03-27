@@ -8,6 +8,7 @@ namespace Narvalo.Web
     using System.Web.Mvc;
 
     using Narvalo.Fx.Extensions;
+    using Narvalo.Web.Resources;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {
@@ -57,7 +58,8 @@ namespace Narvalo.Web
         {
             Require.NotNull(request, "request");
 
-            return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod) select AcceptedVerbs.Contains(_)) ?? false;
+            return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod)
+                    select AcceptedVerbs.Contains(_)) ?? false;
         }
 
         protected virtual void OnInvalidHttpMethod(HttpContext context)
@@ -66,9 +68,13 @@ namespace Narvalo.Web
 
             var response = context.Response;
 
-            // TODO: Indiquer les méthodes autorisées dans la réponse.
+            // TODO: Check the error message.
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
-            response.Write(Format.CurrentCulture(Strings_Web.HttpHandlerBase_InvalidHttpMethodFormat, context.Request.HttpMethod));
+            response.Write(
+                Format.CurrentCulture(
+                    Strings_Web.HttpHandlerBase_InvalidHttpMethod_Format,
+                    context.Request.HttpMethod,
+                    AcceptedVerbs.ToString()));
         }
     }
 }

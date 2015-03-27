@@ -101,7 +101,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var tag = new TagBuilder("img");
-            tag.MergeAttribute("src", imageUri.ToProtocolLessString());
+            tag.MergeAttribute("src", imageUri.ToProtocolRelativeString());
 
             if (!String.IsNullOrEmpty(alt))
             {
@@ -177,7 +177,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var tag = new TagBuilder("link");
-            tag.MergeAttribute("href", linkUri.ToProtocolLessString());
+            tag.MergeAttribute("href", linkUri.ToProtocolRelativeString());
 
             if (!String.IsNullOrEmpty(linkType))
             {
@@ -246,7 +246,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var tag = new TagBuilder("script");
-            tag.MergeAttribute("src", scriptUri.ToProtocolLessString());
+            tag.MergeAttribute("src", scriptUri.ToProtocolRelativeString());
 
             if (!String.IsNullOrEmpty(scriptType))
             {
