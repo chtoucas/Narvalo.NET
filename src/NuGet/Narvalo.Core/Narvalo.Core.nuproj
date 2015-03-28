@@ -35,6 +35,7 @@
 <file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
 <file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
 <file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+<file src="fr\Narvalo.Core.resources.dll" target="lib\$(Profile259)\fr\" />
       ]]>
     </NuFiles>
   </PropertyGroup>

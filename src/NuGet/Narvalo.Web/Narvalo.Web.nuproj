@@ -27,6 +27,7 @@
 <file src="Narvalo.Web.xml" target="lib\net45\" />
 <file src="CodeContracts\Narvalo.Web.Contracts.dll" target="lib\net45\CodeContracts\" />
 <file src="CodeContracts\Narvalo.Web.Contracts.xml" target="lib\net45\CodeContracts\" />
+<file src="fr\Narvalo.Web.resources.dll" target="lib\net45\fr\" />
       ]]>
     </NuFiles>
   </PropertyGroup>
