@@ -8,7 +8,7 @@ namespace Narvalo.Fx.Extensions
 
     public static class NullableFacts
     {
-        #region Linq Operators
+        #region Where()
 
         [Fact]
         public static void Where_ReturnsValue_ForSuccessfulPredicate()
@@ -44,8 +44,12 @@ namespace Narvalo.Fx.Extensions
             Assert.False(q.HasValue);
         }
 
+        #endregion
+
+        #region Select()
+
         [Fact]
-        public static void Select_ReturnsNull_WhenSourceIsNull()
+        public static void Select_ReturnsNull_ForNullObject()
         {
             // Arrange
             int? source = null;
@@ -61,7 +65,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [Fact]
-        public static void Select_ReturnsValueAndApplySelector_WhenSourceHasValue()
+        public static void Select_ReturnsValueAfterApplyingSelector()
         {
             // Arrange
             int? source = 1;
@@ -78,8 +82,12 @@ namespace Narvalo.Fx.Extensions
             Assert.Equal(2, q.Value);
         }
 
+        #endregion
+
+        #region SelectMany()
+
         [Fact]
-        public static void SelectMany_ReturnsNull_WhenSourceIsNull()
+        public static void SelectMany_ReturnsNull_ForNullObject()
         {
             // Arrange
             int? source = null;
@@ -99,27 +107,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNull_ForMiddleIsNull()
-        {
-            // Arrange
-            int? source = 1;
-            int? middle = null;
-            Func<int, int?> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
-
-            // Act
-            var m = source.SelectMany(valueSelector, resultSelector);
-            var q = from i in source
-                    from j in middle
-                    select resultSelector(i, j);
-
-            // Assert
-            Assert.False(m.HasValue);
-            Assert.False(q.HasValue);
-        }
-
-        [Fact]
-        public static void SelectMany_ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
+        public static void SelectMany_ReturnsNull_ForNullObjectAndNullMiddle()
         {
             // Arrange
             int? source = null;
@@ -139,7 +127,27 @@ namespace Narvalo.Fx.Extensions
         }
 
         [Fact]
-        public static void SelectMany_ReturnsValueAndApplySelector()
+        public static void SelectMany_ReturnsNull_ForNullMiddle()
+        {
+            // Arrange
+            int? source = 1;
+            int? middle = null;
+            Func<int, int?> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act
+            var m = source.SelectMany(valueSelector, resultSelector);
+            var q = from i in source
+                    from j in middle
+                    select resultSelector(i, j);
+
+            // Assert
+            Assert.False(m.HasValue);
+            Assert.False(q.HasValue);
+        }
+
+        [Fact]
+        public static void SelectMany_ReturnsValueAfterApplyingSelector()
         {
             // Arrange
             int? source = 1;

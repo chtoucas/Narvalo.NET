@@ -25,7 +25,10 @@ namespace Narvalo.Web
 
             public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
             {
-                string valueDebug = String.Join(String.Empty, values.Select(p => Format.InvariantCulture("\r\n{0} = {1}", p.Key, p.Value)).ToArray());
+                string valueDebug = String.Join(
+                    String.Empty,
+                    values.Select(p => "\r\n" + p.Key + " = " + p.Value).ToArray());
+
                 throw new InvalidOperationException("Unable to find a valid route for the following route values:" + valueDebug);
             }
         }

@@ -13,7 +13,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         #region ToString()
 
         [Fact]
-        public static void ToString_ForNullFormat()
+        public static void ToString_IsSameAsNoFormat_ForNullFormat()
         {
             // Arrange
             var metric = new BenchmarkMetric("Category", "Name", s_Epsilon, 1);
@@ -23,7 +23,7 @@ namespace Narvalo.Diagnostics.Benchmarking
         }
 
         [Fact]
-        public static void ToString_ForDefaultFormat()
+        public static void ToString_IsSameAsNoFormat_ForDefaultFormat()
         {
             // Arrange
             var metric = new BenchmarkMetric("Category", "Name", s_Epsilon, 1);

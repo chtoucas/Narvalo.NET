@@ -304,6 +304,8 @@
     <Compile Include="CachingXmlResolver.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Edu\Linq\LINQ.md" />
+    <None Include="Edu\Monads\Monads.md" />
     <None Include="Edu\Monads\Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Comonad.g.cs</LastGenOutput>

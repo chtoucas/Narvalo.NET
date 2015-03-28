@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Narvalo.Common")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Narvalo Common Library containing helpers and extension methods for classes from the BCL.")]
 
 [assembly: Guid("8cd3c522-030f-49b4-bd87-285e2b35425b")]
 

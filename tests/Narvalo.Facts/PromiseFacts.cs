@@ -6,8 +6,8 @@ namespace Narvalo
 
     using Xunit;
 
-    // NB: This is one exceptional case where we run different tests 
-    // whether we are building in debug configuration or in release configuration.
+    // NB: This is one of those exceptional cases where we use different sets of tests 
+    // whether we build the tests in debug or in release configuration.
     public static class PromiseFacts
     {
         private const string NULL_STRING = null;

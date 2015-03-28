@@ -15,9 +15,6 @@ namespace Narvalo.Web.Social
 
     public struct FacebookCookie
     {
-        // Le format est : "fbs_{appId}".
-        const string CookieNameFormat_ = @"fbs_{0}";
-
         const string AccessTokenKey_ = "access_token";
         const string ExpiresOnKey_ = "expires";
         const string SecretKey_ = "secret";
@@ -105,7 +102,7 @@ namespace Narvalo.Web.Social
                 return Maybe<HttpCookie>.None;
             }
 
-            string cookieName = Format.InvariantCulture(CookieNameFormat_, appId);
+            string cookieName = "fbs_" + appId;
 
             return Maybe.Of(request.Cookies[cookieName]);
         }

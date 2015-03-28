@@ -9,7 +9,7 @@ namespace Narvalo
 
     public static class StringManipFacts
     {
-        public static IEnumerable<object[]> SampleDataForReverse
+        public static IEnumerable<object[]> ReverseData
         {
             get
             {
@@ -29,9 +29,9 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("SampleDataForReverse")]
+        [MemberData("ReverseData")]
         [CLSCompliant(false)]
-        public static void Reverse_ReturnsExpectedValue(string expectedValue, string value)
+        public static void Reverse_ReturnsExpectedString(string expectedValue, string value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, StringManip.Reverse(value));

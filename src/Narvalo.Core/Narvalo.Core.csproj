@@ -123,17 +123,11 @@
     <Compile Include="Fx\Stubs`2.cs" />
     <Compile Include="Fx\VoidOrBreak.cs" />
     <Compile Include="Fx\VoidOrError.cs" />
-    <Compile Include="Resources\Strings_Core.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings_Core.fr.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad.Maybe.tt" />
     <None Include="CodeTemplates\Monad.Output.tt" />
     <None Include="CodeTemplates\Monad.tt" />
-    <None Include="Fx\NamespaceDoc\LINQ.md" />
     <None Include="Fx\Extensions\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
@@ -146,7 +140,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\NamespaceDoc\Monads.md" />
     <None Include="Fx\Output.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
@@ -160,10 +153,7 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings_Core.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings_Core.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings_Core.fr.resx" />
     <EmbeddedResource Include="Resources\Strings_Core.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Core.Designer.cs</LastGenOutput>

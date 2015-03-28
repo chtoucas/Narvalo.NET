@@ -6,7 +6,7 @@
     <ProjectGuid>{A6E851F2-C725-4461-9A8D-47DADB563923}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narvalo.Facts</RootNamespace>
+    <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Facts</AssemblyName>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -63,6 +63,9 @@
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
     <Compile Include="Fx\OutputFacts.cs" />
+    <Compile Include="Fx\SequenceFacts.cs" />
+    <Compile Include="Fx\VoidOrErrorFacts.cs" />
+    <Compile Include="Fx\VoidOrBreakFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="PromiseFacts.cs" />

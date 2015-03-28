@@ -22,10 +22,7 @@ namespace Narvalo.Web
             return String.Join("&",
                 Array.ConvertAll(
                     nvc.AllKeys,
-                    key => Format.InvariantCulture(
-                        "{0}={1}",
-                        HttpUtility.UrlEncode(key),
-                        HttpUtility.UrlEncode(nvc[key])
+                    key => HttpUtility.UrlEncode(key) + "=" + HttpUtility.UrlEncode(nvc[key]
                     )
                 )
             );

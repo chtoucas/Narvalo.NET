@@ -11,7 +11,7 @@ namespace Narvalo
         #region AssumeNotNull()
 
         [Fact]
-        public static void AssumeNotNull_ReturnsBackTheObject()
+        public static void AssumeNotNull_ReturnsBackTheInput()
         {
             // Arrange
             var obj = new Object();

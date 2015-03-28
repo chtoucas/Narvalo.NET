@@ -293,7 +293,7 @@ namespace Narvalo.Globalization
         {
             if (!TwoLetterCodeToNumericCode_.ContainsKey(twoLetterISOCode))
             {
-                throw new Exception(Format.InvariantCulture("There is no numeric value for regionInfo {0}", twoLetterISOCode));
+                throw new Exception(Format.CurrentCulture("There is no numeric value for regionInfo {0}", twoLetterISOCode));
             }
 
             return TwoLetterCodeToNumericCode_[twoLetterISOCode];

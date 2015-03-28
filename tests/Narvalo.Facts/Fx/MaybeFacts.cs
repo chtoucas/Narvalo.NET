@@ -9,163 +9,10 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        #region Monad Laws
+        #region None
 
         [Fact]
-        public static void Maybe_SatisfiesFirstMonoidLaw()
-        {
-            // Arrange
-            var option = Maybe.Of(1);
-
-            // Act
-            var left = Maybe<int>.None.OrElse(option);
-            var right = option;
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesSecondMonoidLaw()
-        {
-            // Arrange
-            var option = Maybe.Of(1);
-
-            // Act
-            var left = option.OrElse(Maybe<int>.None);
-            var right = option;
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesThirdMonoidLaw()
-        {
-            // Arrange
-            var optionA = Maybe.Of(1);
-            var optionB = Maybe.Of(2);
-            var optionC = Maybe.Of(3);
-
-            // Act
-            var left = optionA.OrElse(optionB.OrElse(optionC));
-            var right = optionA.OrElse(optionB).OrElse(optionC);
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesFirstMonadLaw()
-        {
-            // Arrange
-            int value = 1;
-            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
-
-            // Act
-            var left = Maybe.Of(value).Bind(kun);
-            var right = kun(value);
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesSecondMonadLaw()
-        {
-            // Arrange
-            Func<int, Maybe<int>> create = _ => Maybe.Of(_);
-            var option = Maybe.Of(1);
-
-            // Act
-            var left = option.Bind(create);
-            var right = option;
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesThirdMonadLaw()
-        {
-            // Arrange
-            Maybe<short> m = Maybe.Of((short)1);
-            Func<short, Maybe<int>> f = _ => Maybe.Of((int)3 * _);
-            Func<int, Maybe<long>> g = _ => Maybe.Of((long)2 * _);
-
-            // Act
-            var left = m.Bind(f).Bind(g);
-            var right = m.Bind(_ => f(_).Bind(g));
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesMonadZeroRule()
-        {
-            // Arrange
-            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
-
-            // Act
-            var left = Maybe<int>.None.Bind(kun);
-            var right = Maybe<long>.None;
-
-            // Assert
-            Assert.True(left.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesMonadMoreRule()
-        {
-            // Act
-            var leftSome = Maybe.Of(1).Bind(_ => Maybe<int>.None);
-            var leftNone = Maybe<int>.None.Bind(_ => Maybe<int>.None);
-            var right = Maybe<int>.None;
-
-            // Assert
-            Assert.True(leftSome.Equals(right));
-            Assert.True(leftNone.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_SatisfiesMonadOrRule()
-        {
-            // Arrange
-            var option = Maybe.Of(2);
-
-            // Act
-            var leftSome = option.OrElse(Maybe.Of(1));
-            var leftNone = option.OrElse(Maybe<int>.None);
-            var right = option;
-
-            // Assert
-            Assert.True(leftSome.Equals(right));
-            Assert.True(leftNone.Equals(right));
-        }
-
-        [Fact]
-        public static void Maybe_DoesNotSatisfyRightZeroForPlus()
-        {
-            // Arrange
-            var option = Maybe.Of(2);
-
-            // Act
-            var leftSome = Maybe.Of(1).OrElse(option);
-            var leftNone = Maybe<int>.None.OrElse(option);
-            var right = option;
-
-            // Assert
-            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
-            Assert.True(leftNone.Equals(right));
-        }
-
-        #endregion
-
-        #region None Property
-
-        [Fact]
-        public static void NoneProperty_IsNone()
+        public static void None_IsNone()
         {
             // Act & Assert
             Assert.False(Maybe.None.IsSome);
@@ -173,7 +20,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region IsSome Property
+        #region IsSome
 
         [Fact]
         public static void IsSome_IsFalse_WhenNone()
@@ -573,7 +420,7 @@ namespace Narvalo.Fx
         #region Linq Operators
 
         [Fact]
-        public static void Where_ThrowsArgumentNullException_WhenSourceIsNull()
+        public static void Where_ThrowsArgumentNullException_ForNullObject()
         {
             // Arrange
             // REVIEW: Cast
@@ -613,7 +460,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Select_ThrowsArgumentNullException_WhenSourceIsNull()
+        public static void Select_ThrowsArgumentNullException_ForNullObject()
         {
             // Arrange
             // REVIEW: Cast
@@ -640,7 +487,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Select_ReturnsNone_WhenSourceIsNone()
+        public static void Select_ReturnsNone_ForNoneObject()
         {
             // Arrange
             var source = Maybe<int>.None;
@@ -656,7 +503,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_WhenSourceIsNull()
+        public static void SelectMany_ThrowsArgumentNullException_ForNullObject()
         {
             // Arrange
             // REVIEW: Cast
@@ -698,7 +545,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_WhenSourceIsNone()
+        public static void SelectMany_ReturnsNone_ForNoneObject()
         {
             // Arrange
             var source = Maybe<int>.None;
@@ -738,7 +585,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNone_WhenSourceIsNone_ForMiddleIsNone()
+        public static void SelectMany_ReturnsNone_ForNoneObjectAndNoneMiddle()
         {
             // Arrange
             var source = Maybe<int>.None;
@@ -773,6 +620,159 @@ namespace Narvalo.Fx
             // Assert
             Assert.False(m.IsSome);
             Assert.False(q.IsSome);
+        }
+
+        #endregion
+
+        #region Monad Laws
+
+        [Fact]
+        public static void Maybe_SatisfiesFirstMonoidLaw()
+        {
+            // Arrange
+            var option = Maybe.Of(1);
+
+            // Act
+            var left = Maybe<int>.None.OrElse(option);
+            var right = option;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesSecondMonoidLaw()
+        {
+            // Arrange
+            var option = Maybe.Of(1);
+
+            // Act
+            var left = option.OrElse(Maybe<int>.None);
+            var right = option;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesThirdMonoidLaw()
+        {
+            // Arrange
+            var optionA = Maybe.Of(1);
+            var optionB = Maybe.Of(2);
+            var optionC = Maybe.Of(3);
+
+            // Act
+            var left = optionA.OrElse(optionB.OrElse(optionC));
+            var right = optionA.OrElse(optionB).OrElse(optionC);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesFirstMonadLaw()
+        {
+            // Arrange
+            int value = 1;
+            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
+
+            // Act
+            var left = Maybe.Of(value).Bind(kun);
+            var right = kun(value);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesSecondMonadLaw()
+        {
+            // Arrange
+            Func<int, Maybe<int>> create = _ => Maybe.Of(_);
+            var option = Maybe.Of(1);
+
+            // Act
+            var left = option.Bind(create);
+            var right = option;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesThirdMonadLaw()
+        {
+            // Arrange
+            Maybe<short> m = Maybe.Of((short)1);
+            Func<short, Maybe<int>> f = _ => Maybe.Of((int)3 * _);
+            Func<int, Maybe<long>> g = _ => Maybe.Of((long)2 * _);
+
+            // Act
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(_ => f(_).Bind(g));
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesMonadZeroRule()
+        {
+            // Arrange
+            Func<int, Maybe<long>> kun = _ => Maybe.Of((long)2 * _);
+
+            // Act
+            var left = Maybe<int>.None.Bind(kun);
+            var right = Maybe<long>.None;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesMonadMoreRule()
+        {
+            // Act
+            var leftSome = Maybe.Of(1).Bind(_ => Maybe<int>.None);
+            var leftNone = Maybe<int>.None.Bind(_ => Maybe<int>.None);
+            var right = Maybe<int>.None;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_SatisfiesMonadOrRule()
+        {
+            // Arrange
+            var option = Maybe.Of(2);
+
+            // Act
+            var leftSome = option.OrElse(Maybe.Of(1));
+            var leftNone = option.OrElse(Maybe<int>.None);
+            var right = option;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        [Fact]
+        public static void Maybe_DoesNotSatisfyRightZeroForPlus()
+        {
+            // Arrange
+            var option = Maybe.Of(2);
+
+            // Act
+            var leftSome = Maybe.Of(1).OrElse(option);
+            var leftNone = Maybe<int>.None.OrElse(option);
+            var right = option;
+
+            // Assert
+            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
+            Assert.True(leftNone.Equals(right));
         }
 
         #endregion
@@ -876,12 +876,12 @@ namespace Narvalo.Fx
         #endregion
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class MaybeFacts
     {
         [Fact]
-        public static void Object_IsImmutable()
+        public static void Maybe_IsApparentlyImmutable()
         {
             // Arrange
             var stub = new Stub(1);
@@ -896,10 +896,10 @@ namespace Narvalo.Fx
             Assert.Equal(1, option.Value.Value);
         }
 
-        #region Unit Property
+        #region Unit
 
         [Fact]
-        public static void UnitProperty_IsSome()
+        public static void Unit_IsSome()
         {
             // Act & Assert
             Assert.True(Maybe.Unit.IsSome);
@@ -908,10 +908,10 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Value Property
+        #region Value
 
         [Fact]
-        public static void ValueProperty_ReturnsTheOriginalValue_WhenSome()
+        public static void Value_ReturnsTheOriginalValue_WhenSome()
         {
             // Arrange
             var simple = 3141;

@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Narvalo.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Narvalo Core Library containing implementations of functional patterns.")]
 
 #if !NO_INTERNALS_VISIBLE_TO
 [assembly: InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
