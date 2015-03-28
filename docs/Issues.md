@@ -19,7 +19,7 @@ Work in progress
 - Explains Check and the lie about ValidatedNotNull.
 - Serialization for Currency
 - EditorBrowsableState
-- String.Format and casting
+- Format and boxing
 - IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
 - Verify that SkipDocumentation=true when building Code Contracts doc.
 - Unsafe alternates: complete SqlDataReader.
@@ -121,20 +121,7 @@ Code Quality:
 - Check libraries with SecAnnotate (AllowPartiallyTrustedCallers).
   Do not run SecAnnotate on test libraries? See permcalc.
 - Improvement: Make sure a build fails when SecAnnotate does too.
-- Enhancement: Implements security attributes, for instance:
-```
-[assembly: SecurityRules(SecurityRuleSet.Level2)]
-[assembly: AllowPartiallyTrustedCallers]
-[assembly: SecurityTransparent]
-//[assembly: SecurityCritical]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-[assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
-[assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
-```
-  by the VS extension. See:
-  * [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
-  * [APTCA](http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx)
-  * [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
+- Enhancement: Implements security attributes.
 
 ### Narvalo.Mvp (en vrac)
 

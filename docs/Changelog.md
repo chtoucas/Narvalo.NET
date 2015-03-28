@@ -3,6 +3,9 @@ ChangeLog
                                                 
 XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
+
+#### Bugfixes
+- At start of `Require.InRange()`, we did not validate the range before using it.
          
 #### Breaking changes
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.

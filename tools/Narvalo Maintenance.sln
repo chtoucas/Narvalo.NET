@@ -12,10 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E60806
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{2F6EB97B-14A3-45FD-A665-A8C60D8744C2}"
 	ProjectSection(SolutionItems) = preProject
-		..\Changelog.md = ..\Changelog.md
+		..\docs\Changelog.md = ..\docs\Changelog.md
 		..\docs\Guidelines.md = ..\docs\Guidelines.md
-		..\Issues.md = ..\Issues.md
+		..\docs\Issues.md = ..\docs\Issues.md
 		..\LICENSE.txt = ..\LICENSE.txt
+		..\docs\Overview.md = ..\docs\Overview.md
 		..\README.md = ..\README.md
 		..\docs\Tips.md = ..\docs\Tips.md
 	EndProjectSection

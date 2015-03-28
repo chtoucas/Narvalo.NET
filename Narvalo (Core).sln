@@ -37,11 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.PowerShell", "src\N
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Documentation", "{A8122F9A-9B8D-4888-8A0C-0185F7FDEEF3}"
 	ProjectSection(SolutionItems) = preProject
-		Changelog.md = Changelog.md
+		docs\Changelog.md = docs\Changelog.md
 		etc\gendarme.ignore = etc\gendarme.ignore
 		docs\Guidelines.md = docs\Guidelines.md
-		Issues.md = Issues.md
-		docs\Tips.md = docs\Tips.md
+		docs\Issues.md = docs\Issues.md
 	EndProjectSection
 EndProject
 Global

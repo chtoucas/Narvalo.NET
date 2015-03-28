@@ -1,7 +1,14 @@
 Narvalo.NET
 ===========
 
-Right now, a place for me to learn and to test various ideas.
+#### Documentation
+- [Project Overview](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Overview.md)
+- [Project Changelog](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Changelog.md)
+- [Issues and Roadmap](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Issues.md)
+- [Developer Guidelines](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Guidelines.md)
+- [Developer Tips](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Tips.md)
+- [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
+- [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
 
 #### General Purpose Libraries
 - **Narvalo.Core**
@@ -58,27 +65,3 @@ Right now, a place for me to learn and to test various ideas.
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
   [package](https://www.nuget.org/packages/Narvalo.Build/)),
   custom MSBuild tasks.
-
-There are other projects
-([Narvalo.GhostScript](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.GhostScript),
-[Narvalo.PowerShell](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.PowerShell),
-[Narvalo.StyleCop.CSharp](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.StyleCop.CSharp),
-Prose...),
-but they are either unfinished, not even started, or severely broken!
-
-Technology footprint
---------------------
-
-- Most developments are done in C#.
-- Static and quality analysis are done with StyleCop, FxCop, Gendarme, Code Contracts
-  and a tailor-made script.
-- All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
-
-Extra care has been taken to completely isolate the CI environment and to keep the development
-inside Visual Studio as smooth and swift as they can be.
-
-### Requirements
-
-- Visual Studio Express 2013 Community Edition
-- Code Contracts Tools extension
-- PowerShell v3
