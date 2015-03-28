@@ -16,6 +16,10 @@ We also enforce the following rules:
 - Suffix all private methods and classes with `_`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
+- All files must contain a copyright header:
+```csharp
+// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+```
 
 Optional rules:
 - Consider using regions or partial classes to organize code.

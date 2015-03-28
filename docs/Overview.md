@@ -169,6 +169,27 @@ content of the new configuration to the shared one `etc\Strict.SourceAnalysis`.
 These settings only affect StyleCop when run explicitly from within Visual Studio.
 During build, StyleCop is called from `Narvalo.Common.targets`.
 
+### Assembly Information
+
+Clean up the assembly information file:
+```csharp
+// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+using System.Reflection;
+
+[assembly: AssemblyTitle("The assembly title.")]
+[assembly: AssemblyDescription("The assembly description.")]
+```
+
+Optionally, give access to internals to the test project:
+```csharp
+using System.Runtime.CompilerServices;
+
+#if !NO_INTERNALS_VISIBLE_TO
+[assembly: InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+#endif
+```
+
 ### Special Cases
 
 #### Desktop applications
