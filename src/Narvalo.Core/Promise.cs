@@ -49,8 +49,7 @@ namespace Narvalo
 
             if (!testCondition)
             {
-                throw new FailedPromiseException(
-                    Format.CurrentCulture("A promise did not hold: {0}", rationale));
+                throw new FailedPromiseException("A promise did not hold: " + rationale);
             }
         }
 
@@ -70,8 +69,7 @@ namespace Narvalo
 
             if (value == null)
             {
-                throw new FailedPromiseException(
-                    Format.CurrentCulture("The parameter value is null: {0}", rationale));
+                throw new FailedPromiseException("The parameter value is null: " + rationale);
             }
         }
 
@@ -90,8 +88,7 @@ namespace Narvalo
 
             if (String.IsNullOrEmpty(value))
             {
-                throw new FailedPromiseException(
-                    Format.CurrentCulture("The parameter value is null or empty: {0}", rationale));
+                throw new FailedPromiseException("The parameter value is null or empty: " + rationale);
             }
         }
 
@@ -112,9 +109,7 @@ namespace Narvalo
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new FailedPromiseException(
-                    Format.CurrentCulture(
-                        "The parameter value is null or empty, or consists only of white-space characters: {0}",
-                        rationale));
+                    "The parameter value is null or empty, or consists only of white-space characters: " + rationale);
             }
         }
 

@@ -118,7 +118,7 @@ namespace Narvalo
             {
                 throw new ArgumentNullException(
                     parameterName,
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNull_Format, parameterName));
+                    Format.Resource(Strings_Core.Require_ArgumentNull_Format, parameterName));
             }
 
             Contract.EndContractBlock();
@@ -141,7 +141,7 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrEmpty_Format, parameterName),
+                    Format.Resource(Strings_Core.Require_ArgumentNullOrEmpty_Format, parameterName),
                     parameterName);
             }
 
@@ -167,7 +167,7 @@ namespace Narvalo
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(Strings_Core.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
+                    Format.Resource(Strings_Core.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
                     parameterName);
             }
 
@@ -197,7 +197,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    Format.Resource(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -226,7 +226,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    Format.Resource(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -250,7 +250,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
+                    Format.Resource(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -274,7 +274,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
+                    Format.Resource(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -298,7 +298,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
+                    Format.Resource(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -322,7 +322,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
+                    Format.Resource(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -346,7 +346,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -370,7 +370,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -394,7 +394,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -418,7 +418,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.CurrentCulture(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -434,7 +434,7 @@ namespace Narvalo
             if (minInclusive > maxInclusive)
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(
+                    Format.Resource(
                         Strings_Core.Require_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),
@@ -454,7 +454,7 @@ namespace Narvalo
             if (minInclusive > maxInclusive)
             {
                 throw new ArgumentException(
-                    Format.CurrentCulture(
+                    Format.Resource(
                         Strings_Core.Require_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),

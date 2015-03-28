@@ -11,10 +11,13 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
 
-#### Improvements
-- Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
+### Enhancements    
 - Added localized resources for the french language.                            
+- Use `Format.Resource` instead of `Format.CurrentCulture` for resource formatting.
+
+#### Improvements                
 - Added more tests.
+- Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
   exception is certainly better.
 - For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.

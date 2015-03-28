@@ -34,7 +34,7 @@ namespace Narvalo.Web
             else
             {
                 throw new NotSupportedException(
-                    Format.CurrentCulture(Strings_Web.UriExtensions_ProtocolRelativeUnsupportedScheme_Format, scheme));
+                    Format.Resource(Strings_Web.UriExtensions_ProtocolRelativeUnsupportedScheme_Format, scheme));
             }
         }
     }

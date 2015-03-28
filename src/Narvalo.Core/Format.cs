@@ -34,5 +34,17 @@ namespace Narvalo
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
+
+        [Pure]
+        [DebuggerHidden]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Resource(string resource, params object[] args)
+        {
+            Contract.Requires(resource != null);
+            Contract.Requires(args != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            return String.Format(CultureInfo.CurrentCulture, resource, args);
+        }
     }
 }

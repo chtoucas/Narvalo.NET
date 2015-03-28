@@ -155,7 +155,18 @@ for MVP libraries:
 </Project>
 ```
 
-You can locally override the version properties.
+Locally, you may override the version properties:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>2</MinorVersion>
+    <PatchVersion>0</PatchVersion>
+    <PreReleaseLabel></PreReleaseLabel>
+  </PropertyGroup>
+</Project>
+```
 
 ### Configure StyleCop for Visual Studio
 
