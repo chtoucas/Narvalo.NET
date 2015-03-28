@@ -58,8 +58,8 @@ Design Recommendations
 Rules:
 - Internal classes must be in a subdirectory named "Internal".
 - Do not use reserved words:
-  * Current
-  * Select (LINQ operator)
+  * `Current`
+  * `Select` (LINQ operator)
 
 Optional rules:
 - Consider putting optional extensions in a subdirectory named "Extensions".
@@ -71,9 +71,8 @@ Code Analysis
 ### Suppressions
 
 All suppressions must be justified and tagged:
-- `[Ignore]` Only use this to tag a false positive.
-  Also used for unrecognized Code Contracts postconditions; if they are no longer
-  necessary CCCheck will tell us.
+- `[Ignore]` Only use this to tag a false positive and for unrecognized
+  Code Contracts postconditions; if they are no longer necessary CCCheck will tell us.
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
 - `[Intentionally]` Used in all other cases
 - `[Educational]` Only used inside the project Narvalo.Brouillons.

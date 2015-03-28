@@ -1,14 +1,14 @@
 Overview
 ========
-       
+
 Technology footprint
 --------------------
-  
+
 - Most developments are done in C#.
 - Static and quality analysis are done with StyleCop, FxCop, Gendarme, Code Contracts
   and a tailor-made script.
 - All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
-             
+
 Extra care has been taken to completely isolate the CI environment and to keep the development
 inside Visual Studio as smooth and swift as they can be.
 
@@ -37,7 +37,7 @@ Project Layout
 --------------
 
 - `.nuget`, NuGet configuration.
-- `docs`, documentation. 
+- `docs`, documentation.
 - `etc`, shared configurations.
 - `packages`, local repository of NuGet packages.
 - `samples`, sample projects.
@@ -100,16 +100,16 @@ The following procedure enables us to centralize all settings into a single plac
 Except for Code Contracts, there should be no need to edit the project properties anymore.
 For more the details about this shared configuration, see the section "Global settings" below.
 
-Create a project and add it to Narvalo (Core).sln or Narvalo (Mvp).sln, and also
-to the Narvalo.sln solution.
+Create a project and add it to `Narvalo (Core).sln` or `Narvalo (Mvp).sln`, and also
+to the `Narvalo.sln solution`.
 
 Edit the project file:
-- add the following line at the bottom of the project file, just BEFORE the Microsoft targets:
+- Add the following line at the bottom of the project file, just BEFORE the Microsoft targets:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
-- remove all sections about Debug, Release and CodeContracts.
-- remove all properties configured globally.
+- Remove all sections about Debug, Release and CodeContracts.
+- Remove all properties configured globally.
 
 A typical project file should then look like this:
 ```xml
@@ -137,7 +137,7 @@ A typical project file should then look like this:
 
 ### Add Versioning
 
-Create a version property file: {ProjectName}.Version.props.
+Create a version property file: `{ProjectName}.Version.props`.
 
 For core libraries:
 ```xml
@@ -147,25 +147,27 @@ For core libraries:
 </Project>
 ```
 
-for MVP libraries: 
+for MVP libraries:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(RepositorySettingsDir)Narvalo.Mvp.CurrentVersion.props" />
 </Project>
-```              
+```
+
+You can locally override the version properties.
 
 ### Configure StyleCop for Visual Studio
 
-Edit the local StyleCop settings and link it to "etc\Strict.SourceAnalysis"
+Edit the local StyleCop settings and link it to `etc\Strict.SourceAnalysis`
 or just copy the settings from another project (but not Narvalo.Core).
-                
+
 Narvalo.Core is the only project including a StyleCop configuration with actual rules.
-If you need to update the settings, do it there. When you are finished, copy the 
-content of the new configuration to the shared one "etc\Strict.SourceAnalysis".
+If you need to update the settings, do it there. When you are finished, copy the
+content of the new configuration to the shared one `etc\Strict.SourceAnalysis`.
 
 These settings only affect StyleCop when run explicitly from within Visual Studio.
-During Build, StyleCop is called from `Narvalo.Common.targets`.
+During build, StyleCop is called from `Narvalo.Common.targets`.
 
 ### Special Cases
 
@@ -201,10 +203,10 @@ Create a property file {ProjectName}.props with the following content (this is j
   </Target>
 </Project>
 ```
-        
+
 ### Code Contracts
 
-When a project is ready for Code Contracts, add the following lines to the 
+When a project is ready for Code Contracts, add the following lines to the
 local property file {ProjectName}.props:
 ```xml
 <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
@@ -213,7 +215,7 @@ local property file {ProjectName}.props:
 ```
 
 ### Global settings
-               
+
 Three build configurations are available:
 - Debug configuration is optimized for development.
 - Release configuration is optimized for safety.
@@ -243,7 +245,7 @@ For all modes:
 
 Build Infrastructure
 --------------------
-                  
+
 The main build script is `make.ps1` at the root of the repository.
 
 Add the project to Make.Foundations.proj when it is ready for publication.
@@ -262,9 +264,9 @@ tools\nuget.exe update self
 
 ### Visual Studio or Framework Updates
 
-After upgrading Visual Studio, do not forget to update the `VisualStudioVersion` property in both 
+After upgrading Visual Studio, do not forget to update the `VisualStudioVersion` property in both
 Shared.props and build.cmd. We might also need to update the `SDK40ToolsPath` property.
-          
+
 Appendices
 ----------
 
