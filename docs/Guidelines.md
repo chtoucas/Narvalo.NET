@@ -6,13 +6,13 @@ Coding Style
 
 ### General
 
-In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Coding-style) 
+In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Coding-style)
 from the .NET team with few differences:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
 - Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`).
 - Do not use PascalCasing to name private constants (i.e `MY_PRIVATE_CONSTANT` instead of `MyPrivateConstant`).
 
-We also enforce the following rules:    
+We also enforce the following rules:
 - Suffix all private methods and classes with `_`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
@@ -21,7 +21,7 @@ Optional rules:
 - Consider using regions or partial classes to organize code.
 - Consider separating System imports from other imports.
 - Source lines should not exceed 120 characters.
-     
+
 ### Tasks
 
 List of recognized tasks:
@@ -29,33 +29,34 @@ List of recognized tasks:
 - TODO
 - REVIEW
 
-For temporary string content, just use "XXX".
+For temporary string content, use `"XXX"`.
 
 ### Naming tests
 
-{TypeUnderTest}Facts
-  {MemberUnderTest}_{ExpectedOutcome} 
-  {TypeName}_{PropertyDescription}
-  {ActionDescription}_{ExpectedOutcome}
-Suffixes
-  _For{WhichArgument}
-  _{Context}
+- {TypeUnderTest}Facts
+- {MemberUnderTest}_{ExpectedOutcome}
+- {TypeName}_{PropertyDescription}
+- {ActionDescription}_{ExpectedOutcome}
+
+Suffixes:
+- _For{WhichArgument}
+- _{Context}
 
 Example:
 ```csharp
 public static class MyTypeFacts
 {
     public static void MyMethod_ReturnsTrue_ForEmptyInput() { }
- 
+
     public static void MyType_IsImmutable() { }
 }
 ```
 
 Design Recommendations
 ----------------------
-            
-Rules: 
-- Internal classes must be in a subdirectory named "Internal".   
+
+Rules:
+- Internal classes must be in a subdirectory named "Internal".
 - Do not use reserved words:
   * Current
   * Select (LINQ operator)
@@ -63,23 +64,24 @@ Rules:
 Optional rules:
 - Consider putting optional extensions in a subdirectory named "Extensions".
 - Projects should use a minimal set of references.
-          
+
 Code Analysis
 -------------
 
 ### Suppressions
-      
+
 All suppressions must be justified and tagged:
-- [Ignore] Only use this to tag a false positive.
+- `[Ignore]` Only use this to tag a false positive.
   Also used for unrecognized Code Contracts postconditions; if they are no longer
   necessary CCCheck will tell us.
-- [GeneratedCode] Used to mark a suppression related to generated code.
-- [Intentionally] Used in all other cases 
-- [Educational] Only used inside the project Narvalo.Brouillons.
+- `[GeneratedCode]` Used to mark a suppression related to generated code.
+- `[Intentionally]` Used in all other cases
+- `[Educational]` Only used inside the project Narvalo.Brouillons.
 
 ### StyleCop
 
-For a detailed description of each rule, check out http://www.stylecop.com/docs/.
+For a detailed description of each rule, check out the
+[documentation](http://www.stylecop.com/docs/).
 
 ### FxCop
 
@@ -88,25 +90,25 @@ For a detailed description of each rule, check out http://www.stylecop.com/docs/
 Compilation Symbols
 -------------------
 
-Always prefer conditional attributes to #ifdef. The only two exceptions are described below.
-If you use #ifdef directives you must justify it with a comment just after the #if.
+Always prefer conditional attributes to `#ifdef`. The only two exceptions are described below.
+If you use `#ifdef` directives you must justify it with a comment just after the `#if`.
 
 Standard compilation symbols:
-- DEBUG
-- TRACE
-- CODE_ANALYSIS
-- CONTRACTS_FULL
+- `DEBUG`
+- `TRACE`
+- `CODE_ANALYSIS`
+- `CONTRACTS_FULL`
 
 Compilation symbols for .NET versions:
-- NET_35
-- NET_40
+- `NET_35`
+- `NET_40`
 
 Symbols used to define the assembly properties:
-- BUILD_GENERATED_VERSION
-- DUMMY_GENERATED_VERSION
-- NO_INTERNALS_VISIBLE_TO
-- SIGNED_ASSEMBLY
-         
+- `BUILD_GENERATED_VERSION`
+- `DUMMY_GENERATED_VERSION`
+- `NO_INTERNALS_VISIBLE_TO`
+- `SIGNED_ASSEMBLY`
+
 ### Object Invariants
 
 Wrap any object invariants method and contract class with a compiler conditional clause:
@@ -114,7 +116,7 @@ Wrap any object invariants method and contract class with a compiler conditional
 #if CONTRACTS_FULL // Using directive.
     using System.Diagnostics.Contracts;
 #endif
-          
+
     public class MyType
     {
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
@@ -125,7 +127,7 @@ Wrap any object invariants method and contract class with a compiler conditional
             // Contract invariants directives.
         }
 
-#endif     
+#endif
     }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
@@ -156,17 +158,16 @@ Wrap white-box tests as follow:
     {
          // Black-box tests.
     }
-    
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.   
- 
+
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+
     public static partial class Facts
     {
          // White-box tests
     }
-    
+
 #endif
 ```
 
 Performance
 -----------
-              

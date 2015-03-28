@@ -18,6 +18,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
   exception is certainly better.
 - For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.
+- In `StringManip`, use direct concatenation instead of `String.Format()`.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
