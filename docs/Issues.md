@@ -18,6 +18,7 @@ Work in progress
 
 - Explains Check and the lie about ValidatedNotNull.
 - Serialization for Currency
+- CurrentUICulture vs CurrentCulture
 - EditorBrowsableState
 - Format and boxing
 - IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.

@@ -49,6 +49,7 @@
     <Compile Include="MvpUserControl`1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -29,6 +29,7 @@
     <Compile Include="IView`1.cs" />
     <Compile Include="MessageCoordinator.cs" />
     <Compile Include="MvpException.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Platforms\Appender`1.cs" />
     <Compile Include="Platforms\DefaultPlatformServices.cs" />
     <Compile Include="Platforms\IPlatformServices.cs" />

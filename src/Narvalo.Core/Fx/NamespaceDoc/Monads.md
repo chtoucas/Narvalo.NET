@@ -9,7 +9,6 @@ proofs of that. The .NET type system is not rich enough to make very general
 monadic constructions but it gives developpers access to some powerful monadic
 concepts in a very friendly way.
 
-
 Monoid
 ------
 
@@ -21,7 +20,6 @@ the Monoid laws:
 
 Haskell also includes a `Concat` operation which in fact derives from `Empty`
 and `Append`: `FoldR Append Empty`.
-
 
 Monad
 -----
@@ -40,7 +38,6 @@ NB: Haskell also provides a fail method that is not part of the standard
 definition. It is mostly used for pattern matching failure, something we do not
 have in .NET.
 
-
 Comonad
 -------
 
@@ -48,7 +45,6 @@ There are two equivalent ways to define a Comonad:
 
 - `Counit`, `Cobind`
 - `Counit`, `Map`, `Comultiply`
-
 
 Richer Monads
 -------------
@@ -68,7 +64,6 @@ _MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is
  a left zero for Plus. Here, we prefer to use OrElse instead of Plus for the
  Monoid composition operation.
 
-
 Summary
 -------
 
@@ -81,7 +76,6 @@ MonadZero | (Monad, Zero) + Zero = left zero for Bind
 MonadMore | Monad + Monoid + Zero = zero for Bind
 MonadPlus | Monad + Monoid + Right distributivity
 MonadOr   | Monad + Monoid + Unit = left zero for Plus
-
 
 Sample monads
 -------------
@@ -104,7 +98,6 @@ Class                   | Type
 `Maybe<T>`              | MonadMore, MonadOr
 `Output<T>`             | Monad (?)
 `Either<TLeft, TRight>` | Monad (?)
-
 
 Illustration
 ------------

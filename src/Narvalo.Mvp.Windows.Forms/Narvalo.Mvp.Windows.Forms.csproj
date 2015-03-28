@@ -19,6 +19,7 @@
     <Compile Include="..\Common\Require.cs">
       <Link>Internal\Require.cs</Link>
     </Compile>
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="PlatformServices.cs" />
     <Compile Include="MvpBootstrapper.cs" />
     <Compile Include="Internal\PresenterBinderFactory.cs" />

@@ -1,6 +1,5 @@
-﻿Functional Notes
-================
-
+﻿LINQ
+====
 
 The .NET Standard Query Operators
 ---------------------------------

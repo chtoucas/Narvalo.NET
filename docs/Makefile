@@ -3,7 +3,7 @@
 
 all: pdf
 
-pdf: Guidelines.tex
+pdf: Narvalo.tex
 	pdflatex $?
 
 clean:
