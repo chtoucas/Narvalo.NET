@@ -81,12 +81,28 @@ All suppressions must be justified and tagged:
 - `[Intentionally]` Used in all other cases
 - `[Educational]` Only used inside the project Narvalo.Brouillons.
 
+In addition, defects that need to be fixed are tagged with `[FIXME]`
+in the global suppression file.
+
+For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across 
+all projects. This file is used exclusively for defects that can not be masked
+with a `SuppressMessage` attribute and for defects that need a fix.
+
 ### StyleCop
 
 For a detailed description of each rule, check out the
 [documentation](http://www.stylecop.com/docs/).
 
 ### FxCop
+         
+Except for test projects we use a strict ruleset; 
+only one rule is disabled: _[CA1006] Do not nest generic types in member signatures_.
+Nevertheless, we will test the equivalent rule with Gendarme which has the ability
+to disable a rule at assembly level.
+
+Test projects use a relaxed ruleset.
+
+### Gendarme
 
 ### Code Contracts
 

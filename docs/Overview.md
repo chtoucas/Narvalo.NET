@@ -155,7 +155,7 @@ for MVP libraries:
 </Project>
 ```
 
-Locally, you may override the version properties:
+For other libraries or when you want to override the version properties:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -168,9 +168,11 @@ Locally, you may override the version properties:
 </Project>
 ```
 
+Test and sample projects do not need a version property file.
+
 ### Configure StyleCop for Visual Studio
 
-Edit the local StyleCop settings and link it to `etc\Strict.SourceAnalysis`
+Edit the local StyleCop settings `Settings.StyleCop` and link it to `etc\Strict.SourceAnalysis`
 or just copy the settings from another project (but not Narvalo.Core).
 
 Narvalo.Core is the only project including a StyleCop configuration with actual rules.
@@ -179,6 +181,10 @@ content of the new configuration to the shared one `etc\Strict.SourceAnalysis`.
 
 These settings only affect StyleCop when run explicitly from within Visual Studio.
 During build, StyleCop is called from `Narvalo.Common.targets`.
+
+**WARNING:**
+- Local settings file `Settings.StyleCop` must not be a linked file.
+- Test projects use different settings (see below).
 
 ### Assembly Information
 
@@ -201,24 +207,9 @@ using System.Runtime.CompilerServices;
 #endif
 ```
 
-### Special Cases
-
-#### Desktop applications
-Desktop applications should include a .ini containing:
-```
-[.NET Framework Debugging Control]
-GenerateTrackingInfo=0
-AllowOptimize=1
-```
-Ensure that it is copied to the output directory.
-
-#### Test projects
-
-#### Sample projects
-
 ### Overriding the global settings
 
-Create a property file {ProjectName}.props with the following content (this is just a sample):
+Create a property file `{ProjectName}.props` with the following content (this is just a sample):
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -235,11 +226,57 @@ Create a property file {ProjectName}.props with the following content (this is j
   </Target>
 </Project>
 ```
+Here we do two things:
+- We override the FxCop ruleset.
+- We override the StyleCop settings. **WARNING:** This only changes the settings used by the build script.
+  To make this change visible from Visual Studio, you must also update the `Settings.StyleCop`.
+
+### Special Cases
+
+#### Desktop applications
+Desktop applications should include a .ini containing:
+```
+[.NET Framework Debugging Control]
+GenerateTrackingInfo=0
+AllowOptimize=1
+```
+Ensure that it is copied to the output directory.
+
+#### Test projects
+To create a test project use the "Unit Test Project" template from Visual Studio.
+Add the following content to you local customization property file `{ProjectName}.props`:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)Tests.props" />
+</Project>
+```
+This has two consequences:
+- Test projects use a custom FxCop ruleset.
+- Test projects use a dummy assembly version.
+
+Edit the local StyleCop settings and link it to `etc\Tests.SourceAnalysis`
+or just copy the settings from another project (but not Narvalo.Facts).
+
+Narvalo.Facts is the only project including a StyleCop configuration with actual rules.
+If you need to update the settings, do it there. When you are finished, copy the
+content of the new configuration to the shared one `etc\Tests.SourceAnalysis`.
+
+#### Sample projects
+Add the following content to you local customization property file `{ProjectName}.props`:
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)Samples.props" />
+</Project>
+```
+This has ony one effect:
+- Sample projects use a dummy assembly version.
 
 ### Code Contracts
 
 When a project is ready for Code Contracts, add the following lines to the
-local property file {ProjectName}.props:
+local property file `{ProjectName}.props`:
 ```xml
 <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
   <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
@@ -289,7 +326,7 @@ Update external dependencies
 
 For package updates, use the Narvalo.sln solution.
 
-**WARNING** If the NuGet core framework is updated, do not forget to also update `tools\nuget.exe`:
+**WARNING:** If the NuGet core framework is updated, do not forget to also update `tools\nuget.exe`:
 ```
 tools\nuget.exe update self
 ```

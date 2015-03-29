@@ -16,7 +16,7 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- Explains Check and the lie about ValidatedNotNull.
+- Explains `Check` and the lie about ValidatedNotNull.
 - Serialization for Currency
 - CurrentUICulture vs CurrentCulture
 - EditorBrowsableState
@@ -46,7 +46,6 @@ Build Automation:
   currently Debug|Release, AnyCPU, with or without visible internals.
 - Enhancement: Enable T4-regeneration outside VS since, for us, it won't work
   when building from the command-line.
-- Setting SourceAnalysisOverrideSettingsFile has no effect
 - Enhancement: Start to use Git tags.
 - Enhancement: Create symbol packages (or use GitLink?).
 - Enhancement: %comspec% /k (@pause).
@@ -83,6 +82,7 @@ Build Automation:
 Code Quality:
 - Improvement: Remove the local CA & SA overrides.
 - Improvement: Make unnecessary to add StyleCop settings to each project.
+  Fix the double settings (StyleCop.SourceAnalysis and local props file)
   Review StyleCop settings, StyleCop cache & ability to change settings used.
 - Create custom StyleCop/FxCop rules:
   * private readonly static must start with s_
