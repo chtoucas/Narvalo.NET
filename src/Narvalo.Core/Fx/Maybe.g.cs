@@ -292,8 +292,8 @@ namespace Narvalo.Fx
             bool predicate, 
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             if (predicate) 
@@ -313,8 +313,8 @@ namespace Narvalo.Fx
             bool predicate,
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             if (!predicate) 
@@ -486,7 +486,7 @@ namespace Narvalo.Fx
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -510,7 +510,7 @@ namespace Narvalo.Fx
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -701,8 +701,8 @@ namespace Narvalo.Fx.Extensions
             this Func<TSource, Maybe<TResult>> @this,
             Maybe<TSource> value)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(value, "value");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return value.Bind(@this);
@@ -729,8 +729,8 @@ namespace Narvalo.Fx.Extensions
             this Func<TMiddle, Maybe<TResult>> @this,
             Func<TSource, Maybe<TMiddle>> funM)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, Maybe<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);

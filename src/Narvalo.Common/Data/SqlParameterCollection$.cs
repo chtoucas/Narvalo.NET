@@ -32,7 +32,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             @this.Add(parameterName, parameterType).AssumeNotNull().Value = value;
         }
@@ -58,7 +58,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             if (value.HasValue)
             {
@@ -91,7 +91,7 @@ namespace Narvalo.Data
             T value)
             where T : class
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             @this.AddParameterOrNullUnsafe(parameterName, parameterType, value, value != null);
         }
@@ -117,7 +117,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             if (condition)
             {

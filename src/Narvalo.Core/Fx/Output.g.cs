@@ -257,8 +257,8 @@ namespace Narvalo.Fx
             bool predicate, 
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             if (predicate) 
@@ -278,8 +278,8 @@ namespace Narvalo.Fx
             bool predicate,
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             if (!predicate) 
@@ -452,8 +452,8 @@ namespace Narvalo.Fx.Extensions
             this Func<TSource, Output<TResult>> @this,
             Output<TSource> value)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(value, "value");
-            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -479,8 +479,8 @@ namespace Narvalo.Fx.Extensions
             this Func<TMiddle, Output<TResult>> @this,
             Func<TSource, Output<TMiddle>> funM)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, Output<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);

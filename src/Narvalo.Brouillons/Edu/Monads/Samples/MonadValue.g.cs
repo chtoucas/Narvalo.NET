@@ -291,8 +291,8 @@ namespace Narvalo.Edu.Monads.Samples
             Action action)
             where TSource : struct
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
 
             if (predicate) 
             {
@@ -312,8 +312,8 @@ namespace Narvalo.Edu.Monads.Samples
             Action action)
             where TSource : struct
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
 
             if (!predicate) 
             {
@@ -714,7 +714,7 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return value.Bind(@this);
         }
@@ -746,8 +746,8 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
             where TMiddle : struct
             where TResult : struct
         {
+            Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, MonadValue<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -788,8 +788,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            // No need to check for null-reference, "SumCore" is an extension method.
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.SumCore();
         }
@@ -818,8 +817,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            // No need to check for null-reference, "FilterCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
@@ -837,8 +835,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TAccumulate : struct
         {
-            // No need to check for null-reference, "FoldCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.FoldCore(seed, accumulatorM);
@@ -855,8 +852,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TAccumulate : struct
         {
-            // No need to check for null-reference, "FoldBackCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
@@ -867,8 +863,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            // No need to check for null-reference, "ReduceCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.ReduceCore(accumulatorM);
@@ -879,8 +874,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            // No need to check for null-reference, "ReduceBackCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
             return @this.ReduceBackCore(accumulatorM);
@@ -901,8 +895,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TAccumulate : struct
         {
-            // No need to check for null-reference, "FoldCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
 
@@ -918,8 +911,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            // No need to check for null-reference, "ReduceCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
 
@@ -953,26 +945,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
-        }
-
-        /// <summary>
-        /// Instructs code analysis tools to assume that the specified value is not null,
-        /// even if it cannot be statically proven not to be <see langword="null"/>.
-        /// Inlining the method should remove any performance concern.
-        /// </summary>
-        [DebuggerHidden]
-        [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        private static T AssumeNotNull_<T>(this T @this) where T : class
-        {
-            Contract.Ensures(Contract.Result<T>() == @this);
-            Contract.Ensures(Contract.Result<T>() != null);
-            Contract.Assume(@this != null, "'this' is null.");
-
-            return @this;
         }
     } // End of the class EnumerableMonadValueExtensions.
 
@@ -1048,11 +1023,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             where TSource : struct
             where TAccumulate : struct
         {
-            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull_().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1090,11 +1064,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull_().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",

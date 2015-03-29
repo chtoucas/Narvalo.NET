@@ -21,7 +21,7 @@ namespace Narvalo.Fx.Extensions
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return value.Bind(@this);
         }

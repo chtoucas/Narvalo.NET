@@ -25,7 +25,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static bool GetBooleanUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetBoolean(@this.GetOrdinal(name));
         }
@@ -41,7 +41,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static byte GetByteUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetByte(@this.GetOrdinal(name));
         }
@@ -57,7 +57,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static DateTime GetDateTimeUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetDateTime(@this.GetOrdinal(name));
         }
@@ -73,7 +73,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetDecimalUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetDecimal(@this.GetOrdinal(name));
         }
@@ -89,7 +89,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static double GetDoubleUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetDouble(@this.GetOrdinal(name));
         }
@@ -105,7 +105,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Guid GetGuidUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetGuid(@this.GetOrdinal(name));
         }
@@ -121,7 +121,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static short GetInt16Unsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetInt16(@this.GetOrdinal(name));
         }
@@ -137,7 +137,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static int GetInt32Unsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetInt32(@this.GetOrdinal(name));
         }
@@ -153,7 +153,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static long GetInt64Unsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetInt64(@this.GetOrdinal(name));
         }
@@ -175,7 +175,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnsafe(this IDataRecord @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetString(@this.GetOrdinal(name));
         }

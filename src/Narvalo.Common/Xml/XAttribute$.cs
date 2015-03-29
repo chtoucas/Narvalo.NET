@@ -32,7 +32,7 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, "exception");
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<XAttribute>() != null);
 
             return NextAttributeOrThrow(@this, () => exception);
@@ -64,7 +64,7 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, "exception");
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<XAttribute>() != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);

@@ -364,7 +364,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
@@ -383,7 +383,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
@@ -402,7 +402,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
@@ -421,7 +421,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
             return @this.MayGetBinary(@this.GetOrdinal(name));
@@ -442,7 +442,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
@@ -461,7 +461,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
             return @this.MayGetChars(@this.GetOrdinal(name));
@@ -479,7 +479,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnsafe(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlString(ordinal);
@@ -497,7 +497,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnsafe(this SqlDataReader @this, string name, string defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetString(@this.GetOrdinal(name), defaultValue);
         }
@@ -515,7 +515,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
@@ -534,7 +534,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetString(@this.GetOrdinal(name));
@@ -552,7 +552,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnsafe(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -570,7 +570,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnsafe(this SqlDataReader @this, string name, decimal defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetMoney(@this.GetOrdinal(name), defaultValue);
         }
@@ -587,7 +587,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -606,7 +606,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
@@ -623,7 +623,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnsafe(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlXml(ordinal).AssumeNotNull();
@@ -641,7 +641,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnsafe(this SqlDataReader @this, string name, string defaultValue)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
 
             return @this.GetXml(@this.GetOrdinal(name), defaultValue);
         }
@@ -659,7 +659,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnsafe(this SqlDataReader @this, int ordinal)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
@@ -678,7 +678,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnsafe(this SqlDataReader @this, string name)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return @this.MayGetXml(@this.GetOrdinal(name));

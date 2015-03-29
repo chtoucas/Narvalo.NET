@@ -440,7 +440,7 @@ namespace Narvalo.Fx
         #region Of()
 
         [Fact]
-        public static void Of_ReturnsSome_ForNotNull()
+        public static void Of_ReturnsSome_ForNonNull()
         {
             // Arrange
             var simple = 3141;

@@ -63,6 +63,7 @@
     <Compile Include="..\Common\ReleaseOnlyFactAttribute.cs">
       <Link>Internal\ReleaseOnlyFactAttribute.cs</Link>
     </Compile>
+    <Compile Include="AcknowledgeFacts.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />

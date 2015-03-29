@@ -15,9 +15,8 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- AllowPartiallyTrustedCallers & SecAnnotate
+- SecurityTransparent attribute and non PCL libraries depending on a PCL library.
 - Explains `Check` and the lie about ValidatedNotNull.
-- Serialization for Currency
 - EditorBrowsableState
 - Format and boxing
 - IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
@@ -26,9 +25,9 @@ Work in progress
 - Confirm that Maybe methods never returns null.
 - Refactorings:
  * Range
- * Currencies
+ * Currencies (Serialization & providers)
  * Benchmarks
-- Range T why force struct constraint? Require for T? where T is a struct?
+- Range T why force struct constraint? Require for "T?" where T is a struct?
 - Improvement: Monad.tt, review true argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`.

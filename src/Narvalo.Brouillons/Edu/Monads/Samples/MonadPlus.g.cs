@@ -286,8 +286,8 @@ namespace Narvalo.Edu.Monads.Samples
             bool predicate, 
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             if (predicate) 
@@ -307,8 +307,8 @@ namespace Narvalo.Edu.Monads.Samples
             bool predicate,
             Action action)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             if (!predicate) 
@@ -473,7 +473,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -496,7 +496,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, MonadPlus<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -679,8 +679,8 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
             this Func<TSource, MonadPlus<TResult>> @this,
             MonadPlus<TSource> value)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(value, "value");
-            Contract.Requires(@this != null);
 
             return value.Bind(@this);
         }
@@ -706,8 +706,8 @@ namespace Narvalo.Edu.Monads.Samples.Extensions
             this Func<TMiddle, MonadPlus<TResult>> @this,
             Func<TSource, MonadPlus<TMiddle>> funM)
         {
+            Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Requires(@this != null);
             Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -742,8 +742,7 @@ namespace Narvalo.Edu.Monads.Samples
         public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            // No need to check for null-reference, "CollectCore" is an extension method.
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
@@ -759,8 +758,7 @@ namespace Narvalo.Edu.Monads.Samples
         public static MonadPlus<TSource> Sum<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            // No need to check for null-reference, "SumCore" is an extension method.
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.SumCore();
@@ -783,8 +781,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<TResult>> funM)
         {
-            // No need to check for null-reference, "MapCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
@@ -803,8 +800,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<bool>> predicateM)
         {
-            // No need to check for null-reference, "FilterCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
@@ -819,8 +815,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> funM)
         {
-            // No need to check for null-reference, "MapAndUnzipCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
@@ -835,8 +830,7 @@ namespace Narvalo.Edu.Monads.Samples
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadPlus<TResult>> resultSelectorM)
         {
-            // No need to check for null-reference, "ZipCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
@@ -852,8 +846,7 @@ namespace Narvalo.Edu.Monads.Samples
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
         {
-            // No need to check for null-reference, "FoldCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
@@ -869,8 +862,7 @@ namespace Narvalo.Edu.Monads.Samples
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
         {
-            // No need to check for null-reference, "FoldBackCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
@@ -881,8 +873,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
         {
-            // No need to check for null-reference, "ReduceCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
@@ -893,8 +884,7 @@ namespace Narvalo.Edu.Monads.Samples
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
         {
-            // No need to check for null-reference, "ReduceBackCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
@@ -914,8 +904,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM,
             Func<MonadPlus<TAccumulate>, bool> predicate)
         {
-            // No need to check for null-reference, "FoldCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
@@ -931,8 +920,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM,
             Func<MonadPlus<TSource>, bool> predicate)
         {
-            // No need to check for null-reference, "ReduceCore" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
@@ -965,15 +953,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         internal static MonadPlus<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method.
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TSource>>>() != null);
 
             var seed = MonadPlus.Return(Enumerable.Empty<TSource>());
             Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
-            return @this.Aggregate(seed, fun).AssumeNotNull_();
+            return @this.Aggregate(seed, fun).AssumeNotNull();
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
@@ -991,27 +978,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         internal static MonadPlus<TSource> SumCore<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            // No need to check for null-reference, "Enumerable.Aggregate" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
-            return @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n)).AssumeNotNull_();
-        }
-
-        /// <summary>
-        /// Instructs code analysis tools to assume that the specified value is not null,
-        /// even if it cannot be statically proven not to be <see langword="null"/>.
-        /// Inlining the method should remove any performance concern.
-        /// </summary>
-        [DebuggerHidden]
-        [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        private static T AssumeNotNull_<T>(this T @this) where T : class
-        {
-            Contract.Ensures(Contract.Result<T>() == @this);
-            Contract.Ensures(Contract.Result<T>() != null);
-            Contract.Assume(@this != null, "'this' is null.");
-
-            return @this;
+            return @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n)).AssumeNotNull();
         }
     } // End of the class EnumerableMonadPlusExtensions.
 
@@ -1026,12 +996,11 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<TResult>> funM)
         {
-            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
-            return @this.Select(funM).AssumeNotNull_().Collect();
+            return @this.Select(funM).AssumeNotNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1074,11 +1043,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> funM)
         {
-            // No need to check for null-reference, "Enumerable.Select" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(funM != null);
 
-            var m = @this.Select(funM).AssumeNotNull_().Collect();
+            var m = @this.Select(funM).AssumeNotNull().Collect();
 
             return m.Select(
                 tuples =>
@@ -1099,8 +1067,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
-            // No need to check for null-reference, "Enumerable.Zip" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
@@ -1109,7 +1076,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull_().Collect();
+            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1140,12 +1107,11 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
         {
-            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
-            return @this.Reverse().AssumeNotNull_().Fold(seed, accumulatorM);
+            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1182,12 +1148,11 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
         {
-            // No need to check for null-reference, "Enumerable.Reverse" is an extension method. 
-            Contract.Requires(@this != null);
+            Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
-            return @this.Reverse().AssumeNotNull_().Reduce(accumulatorM);
+            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",

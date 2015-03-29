@@ -1,21 +1,24 @@
 ChangeLog
 =========
-                                                
+
 XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
+_Better test coverage for Narvalo.Core_
+
 #### Bugfixes
 - At start of `Require.InRange()`, we did not validate the range before using it.
-         
+
 #### Breaking changes
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
 
-### Enhancements    
-- Added localized resources for the french language.     
-- Applied the `SecurityTransparent` attribute to Narvalo.Core.                       
+### Enhancements
+- Added localized resources for the french language.
+- Applied the `SecurityTransparent` attribute to Narvalo.Core.
+- New Code Contracts helper `Ensure` containing abbreviators.
 
-#### Improvements                
+#### Improvements
 - Use the new `Format.Resource()` instead of `Format.CurrentCulture()` for resource formatting.
 - Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
@@ -52,7 +55,7 @@ _Aiming for API stability of Narvalo.Core_
   much noise and annoying duplicates of descriptions for exceptions. The patched documentation
   is still available in the NuGet package alongside the contract assemblies.
 - Added more Code Contracts.
-- Changed a few parameter names to ensure a CA1303 error is triggered whenever 
+- Changed a few parameter names to ensure a CA1303 error is triggered whenever
   a string should be localized.
 
 2015-03-24 - Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
