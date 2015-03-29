@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Globalization;
 
     using Xunit;
 
@@ -30,7 +31,7 @@ namespace Narvalo
 
             public override string ToString()
             {
-                return _value.ToString();
+                return _value.ToString(CultureInfo.CurrentCulture);
             }
         }
     }

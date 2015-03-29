@@ -9,6 +9,91 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
+        private struct ValueStub_ : IEquatable<ValueStub_>
+        {
+            private int _value;
+
+            public ValueStub_(int value) { _value = value; }
+
+            public static bool operator ==(ValueStub_ left, ValueStub_ right)
+            {
+                return left.Equals(right);
+            }
+
+            public static bool operator !=(ValueStub_ left, ValueStub_ right)
+            {
+                return !left.Equals(right);
+            }
+
+            public bool Equals(ValueStub_ other)
+            {
+                return _value == other._value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null)
+                {
+                    return false;
+                }
+
+                if (!(obj is ValueStub_))
+                {
+                    return false;
+                }
+
+                return Equals((ValueStub_)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return _value.GetHashCode();
+            }
+        }
+
+        private sealed class AlmostValueStub_ : IEquatable<AlmostValueStub_>
+        {
+            public string Value { get; set; }
+
+            public bool Equals(AlmostValueStub_ other)
+            {
+                if (ReferenceEquals(other, null))
+                {
+                    return false;
+                }
+
+                return Value == other.Value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(obj, null))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(obj, this))
+                {
+                    return true;
+                }
+
+                if (obj.GetType() != this.GetType())
+                {
+                    return false;
+                }
+
+                return Equals((AlmostValueStub_)obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return Value.GetHashCode();
+            }
+        }
+    }
+
+    public static partial class MaybeFacts
+    {
         #region None
 
         [Fact]
@@ -27,7 +112,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<ValueStub>.None;
+            var value = Maybe<ValueStub_>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -41,7 +126,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new ValueStub(3141));
+            var value = Maybe.Of(new ValueStub_(3141));
             var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
@@ -83,12 +168,12 @@ namespace Narvalo.Fx
         #region op_Equality()
 
         [Fact]
-        public static void op_Equality_ReturnsTrue_ForNullAsMaybeAndNull()
+        public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
         {
             // Arrange
             // REVIEW: Cast
             var simple = (Maybe<int>)null;
-            var value = (Maybe<ValueStub>)null;
+            var value = (Maybe<ValueStub_>)null;
             var reference = (Maybe<List<int>>)null;
 
             // Act & Assert
@@ -98,11 +183,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void op_Equality_ReturnsFalse_ForMaybeNoneAndNull()
+        public static void Equality_ReturnsFalse_ForMaybeNoneAndNull()
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<ValueStub>.None;
+            var value = Maybe<ValueStub_>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -112,17 +197,17 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void op_Equality_FollowsReferentialEqualityRules()
+        public static void Equality_FollowsReferentialEqualityRules()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new ValueStub(3141));
-            var valueA1 = Maybe.Of(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub_(3141));
+            var valueA1 = Maybe.Of(new ValueStub_(3141));
 
-            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
 
             var referenceA0 = Maybe.Of(new List<int>());
             var referenceA1 = Maybe.Of(new List<int>());
@@ -139,12 +224,12 @@ namespace Narvalo.Fx
         #region op_Inequality()
 
         [Fact]
-        public static void op_Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
+        public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
         {
             // Arrange
             // REVIEW: Cast
             var simple = (Maybe<int>)null;
-            var value = (Maybe<ValueStub>)null;
+            var value = (Maybe<ValueStub_>)null;
             var reference = (Maybe<List<int>>)null;
 
             // Act & Assert
@@ -154,11 +239,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void op_Inequality_ReturnsTrue_ForMaybeNoneAndNull()
+        public static void Inequality_ReturnsTrue_ForMaybeNoneAndNull()
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<ValueStub>.None;
+            var value = Maybe<ValueStub_>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -168,17 +253,17 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void op_Inequality_FollowsReferentialEqualityRules()
+        public static void Inequality_FollowsReferentialEqualityRules()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new ValueStub(3141));
-            var valueA1 = Maybe.Of(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub_(3141));
+            var valueA1 = Maybe.Of(new ValueStub_(3141));
 
-            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
 
             var referenceA0 = Maybe.Of(new List<int>());
             var referenceA1 = Maybe.Of(new List<int>());
@@ -199,7 +284,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new ValueStub(3141));
+            var value = Maybe.Of(new ValueStub_(3141));
             var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
@@ -216,9 +301,9 @@ namespace Narvalo.Fx
             var simpleA1 = Maybe.Of(3141);
             var simple = Maybe.Of(1570);
 
-            var valueA0 = Maybe.Of(new ValueStub(3141));
-            var valueA1 = Maybe.Of(new ValueStub(3141));
-            var value = Maybe.Of(new ValueStub(1570));
+            var valueA0 = Maybe.Of(new ValueStub_(3141));
+            var valueA1 = Maybe.Of(new ValueStub_(3141));
+            var value = Maybe.Of(new ValueStub_(1570));
 
             var referenceA0 = Maybe.Of(new List<int>());
             var referenceA1 = Maybe.Of(new List<int>());
@@ -241,9 +326,9 @@ namespace Narvalo.Fx
             var simple2 = Maybe.Of(3141);
             var simple3 = Maybe.Of(3141);
 
-            var value1 = Maybe.Of(new ValueStub(3141));
-            var value2 = Maybe.Of(new ValueStub(3141));
-            var value3 = Maybe.Of(new ValueStub(3141));
+            var value1 = Maybe.Of(new ValueStub_(3141));
+            var value2 = Maybe.Of(new ValueStub_(3141));
+            var value3 = Maybe.Of(new ValueStub_(3141));
 
             var reference1 = Maybe.Of(new List<int>());
             var reference2 = Maybe.Of(new List<int>());
@@ -260,13 +345,14 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<ValueStub>.None;
+            var value = Maybe<ValueStub_>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
             Assert.True(simple.Equals(null));
             Assert.True(value.Equals(null));
             Assert.True(reference.Equals((object)null));
+
             // REVIEW: Cast
             Assert.True(reference.Equals((List<int>)null));
             Assert.True(reference.Equals((Maybe<List<int>>)null));
@@ -279,7 +365,7 @@ namespace Narvalo.Fx
             var simple = 3141;
             var simpleOpt = Maybe.Of(simple);
 
-            var value = new ValueStub(3141);
+            var value = new ValueStub_(3141);
             var valueOpt = Maybe.Of(value);
 
             var reference = new List<int>();
@@ -298,7 +384,7 @@ namespace Narvalo.Fx
             var simple = 3141;
             var simpleOpt = Maybe.Of(simple);
 
-            var value = new ValueStub(3141);
+            var value = new ValueStub_(3141);
             var valueOpt = Maybe.Of(value);
 
             var reference = new List<int>();
@@ -317,11 +403,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new ValueStub(3141));
-            var valueA1 = Maybe.Of(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub_(3141));
+            var valueA1 = Maybe.Of(new ValueStub_(3141));
 
-            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
 
             // Act & Assert
             Assert.True(simpleA0.Equals(simpleA1));
@@ -336,11 +422,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new ValueStub(3141));
-            var valueA1 = Maybe.Of(new ValueStub(3141));
+            var valueA0 = Maybe.Of(new ValueStub_(3141));
+            var valueA1 = Maybe.Of(new ValueStub_(3141));
 
-            var almostValueA0 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new AlmostValueStub { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
+            var almostValueA1 = Maybe.Of(new AlmostValueStub_ { Value = "Une chaîne de caractère" });
 
             // Act & Assert
             Assert.True(simpleA0.Equals((object)simpleA1));
@@ -357,8 +443,8 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var value = new ValueStub(3141);
-            ValueStub? nullableValue = new ValueStub(3141);
+            var value = new ValueStub_(3141);
+            ValueStub_? nullableValue = new ValueStub_(3141);
             var reference = new List<int>();
 
             // Act
@@ -378,7 +464,7 @@ namespace Narvalo.Fx
         public static void Of_ReturnsNone_ForNull()
         {
             // Arrange
-            ValueStub? value = null;
+            ValueStub_? value = null;
             List<int> reference = null;
 
             // Act
@@ -776,107 +862,24 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    }
 
-        #region Stubs
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
-        private struct ValueStub : IEquatable<ValueStub>
-        {
-            private int _value;
-
-            public ValueStub(int value) { _value = value; }
-
-            public static bool operator ==(ValueStub left, ValueStub right)
-            {
-                return left.Equals(right);
-            }
-
-            public static bool operator !=(ValueStub left, ValueStub right)
-            {
-                return !left.Equals(right);
-            }
-
-            public bool Equals(ValueStub other)
-            {
-                return _value == other._value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (obj == null)
-                {
-                    return false;
-                }
-
-                if (!(obj is ValueStub))
-                {
-                    return false;
-                }
-
-                return Equals((ValueStub)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return _value.GetHashCode();
-            }
-        }
-
-        private sealed class AlmostValueStub : IEquatable<AlmostValueStub>
-        {
-            public string Value { get; set; }
-
-            public bool Equals(AlmostValueStub other)
-            {
-                if (ReferenceEquals(other, null))
-                {
-                    return false;
-                }
-
-                return Value == other.Value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (ReferenceEquals(obj, null))
-                {
-                    return false;
-                }
-
-                if (ReferenceEquals(obj, this))
-                {
-                    return true;
-                }
-
-                if (obj.GetType() != this.GetType())
-                {
-                    return false;
-                }
-
-                return Equals((AlmostValueStub)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return Value.GetHashCode();
-            }
-        }
-
-        private sealed class Stub
+    public static partial class MaybeFacts
+    {
+        private sealed class Stub_
         {
             private readonly int _value;
 
-            public Stub(int value)
+            public Stub_(int value)
             {
                 _value = value;
             }
 
             public int Value { get { return _value; } }
         }
-
-        #endregion
     }
-
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class MaybeFacts
     {
@@ -884,7 +887,7 @@ namespace Narvalo.Fx
         public static void Maybe_IsApparentlyImmutable()
         {
             // Arrange
-            var stub = new Stub(1);
+            var stub = new Stub_(1);
             var option = Maybe.Of(stub);
 
             // Act
@@ -915,8 +918,8 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var value = new ValueStub(3141);
-            ValueStub? nullableValue = new ValueStub(3141);
+            var value = new ValueStub_(3141);
+            ValueStub_? nullableValue = new ValueStub_(3141);
             var reference = new List<int>();
 
             var simpleOpt = Maybe.Of(simple);

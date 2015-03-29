@@ -536,7 +536,6 @@ namespace Narvalo
                 #endregion
             }
         }
-
     }
 
     public static partial class Int64EncoderFacts
