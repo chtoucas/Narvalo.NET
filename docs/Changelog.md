@@ -14,6 +14,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 ### Enhancements    
 - Added localized resources for the french language.                            
 - Use `Format.Resource` instead of `Format.CurrentCulture` for resource formatting.
+- Added the `AllowPartiallyTrustedCallers` attribute to Narvalo.Core.
 
 #### Improvements                
 - Added more tests.
@@ -22,6 +23,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
   exception is certainly better.
 - For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.
 - In `StringManip`, use direct concatenation instead of `String.Format()`.
+- Use "en" instead of "en-US" as the default resource language.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

@@ -8,9 +8,21 @@ namespace Narvalo
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// Provides helper methods to format strings.
+    /// </summary>
     [DebuggerStepThrough]
     public static class Format
     {
+        /// <summary>
+        /// Replaces the format items in a specified string with the string representations
+        /// of corresponding objects in a specified array. Actual formatting is done with
+        /// the culture used by the current thread.
+        /// </summary>
+        /// <param name="format">A composite format string.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        /// <returns>A copy of format in which the format items have been replaced by the string
+        /// representation of the corresponding objects in args.</returns>
         [Pure]
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -23,18 +35,14 @@ namespace Narvalo
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
 
-        [Pure]
-        [DebuggerHidden]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string CurrentUICulture(string format, params object[] args)
-        {
-            Contract.Requires(format != null);
-            Contract.Requires(args != null);
-            Contract.Ensures(Contract.Result<string>() != null);
-
-            return String.Format(CultureInfo.CurrentUICulture, format, args);
-        }
-
+        /// <summary>
+        /// Replaces the format items in a specified string with the string representations
+        /// of corresponding objects in a specified array. Actual formatting is culture-independent.
+        /// </summary>
+        /// <param name="format">A composite format string.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        /// <returns>A copy of format in which the format items have been replaced by the string
+        /// representation of the corresponding objects in args.</returns>
         [Pure]
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -47,6 +55,17 @@ namespace Narvalo
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
 
+        /// <summary>
+        /// Replaces the format items in a specified string with the string representations
+        /// of corresponding objects in a specified array. Actual formatting is done with
+        /// the culture used by the current thread.
+        /// </summary>
+        /// <remarks>Same as <see cref="Format.CurrentCulture"/>, but makes it clear that the format is coming
+        /// from a localized resource.</remarks>
+        /// <param name="localizedResource">A composite format string obtained from a localized resource.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        /// <returns>A copy of format in which the format items have been replaced by the string
+        /// representation of the corresponding objects in args.</returns>
         [Pure]
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

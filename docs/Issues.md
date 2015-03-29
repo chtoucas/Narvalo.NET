@@ -16,9 +16,9 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- AllowPartiallyTrustedCallers & SecAnnotate
 - Explains `Check` and the lie about ValidatedNotNull.
 - Serialization for Currency
-- CurrentUICulture vs CurrentCulture
 - EditorBrowsableState
 - Format and boxing
 - IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
