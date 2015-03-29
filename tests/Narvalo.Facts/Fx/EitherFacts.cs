@@ -19,12 +19,12 @@ namespace Narvalo.Fx
             // Act
             var result = either.LeftOrNone();
 
-            // Act & Assert
+            // Assert
             Assert.False(result.IsSome);
         }
 
         [Fact]
-        public static void LeftOrNone_ReturnsValue_ForLeftEither()
+        public static void LeftOrNone_ReturnsSome_ForLeftEither()
         {
             // Arrange
             var leftValue = "leftValue";
@@ -34,7 +34,7 @@ namespace Narvalo.Fx
             // Act
             var result = either.LeftOrNone();
 
-            // Act & Assert
+            // Assert
             Assert.True(result.IsSome);
             Assert.Equal(expectedResult, result);
         }
@@ -52,12 +52,12 @@ namespace Narvalo.Fx
             // Act
             var result = either.RightOrNone();
 
-            // Act & Assert
+            // Assert
             Assert.False(result.IsSome);
         }
 
         [Fact]
-        public static void RightOrNone_ReturnsValue_ForRightEither()
+        public static void RightOrNone_ReturnsSome_ForRightEither()
         {
             // Arrange
             var rightValue = "rightValue";
@@ -67,7 +67,7 @@ namespace Narvalo.Fx
             // Act
             var result = either.RightOrNone();
 
-            // Act & Assert
+            // Assert
             Assert.True(result.IsSome);
             Assert.Equal(expectedResult, result);
         }

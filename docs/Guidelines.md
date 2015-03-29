@@ -105,8 +105,10 @@ All suppressions must be justified and tagged:
 - `[Intentionally]` Used in all other cases
 - `[Educational]` Only used inside the project Narvalo.Brouillons.
 
+Consider puttin the justification on its own line. This helps to quickly see them in search results.
+
 In addition, defects that need to be fixed are tagged with `[FIXME]`
-in the global suppression file.
+in the global suppression file. This helps tracking things.
 
 For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across 
 all projects. This file is used exclusively for defects that can not be masked
@@ -134,7 +136,8 @@ Compilation Symbols
 -------------------
 
 Always prefer conditional attributes to `#ifdef`. The only two exceptions are described below.
-If you use `#ifdef` directives you must justify it with a comment just after the `#if`.
+If you use `#ifdef` directives you must justify it with a comment placed on the same line 
+as the `#if`. This helps to quickly spot the justification in search results.
 
 Standard compilation symbols:
 - `DEBUG`
