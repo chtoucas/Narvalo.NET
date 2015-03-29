@@ -2,9 +2,12 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security;
 
 [assembly: AssemblyTitle("Narvalo.Core")]
 [assembly: AssemblyDescription("Narvalo Core Library containing implementations of functional patterns.")]
+
+[assembly: AllowPartiallyTrustedCallers]
 
 #if NO_INTERNALS_VISIBLE_TO
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "Narvalo.Resources.Strings_Core",

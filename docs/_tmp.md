@@ -107,6 +107,7 @@ assembly infos, what's their purposes?
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 ```
   by the VS extension. See:
+  * https://github.com/nodatime/nodatime/issues/268
   * [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
   * [APTCA](http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx)
   * [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
