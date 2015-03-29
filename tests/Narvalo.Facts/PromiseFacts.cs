@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
 
+    using Narvalo.Internal;
     using Xunit;
 
     // NB: This is one of those exceptional cases where we use different sets of tests 
@@ -22,18 +23,14 @@ namespace Narvalo
             Promise.Condition(true, "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void Condition_Throws_ForFalseCondition_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.Condition(false, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void Condition_DoesNotThrow_ForFalseCondition_InReleaseBuild()
         {
             // Act
@@ -51,18 +48,14 @@ namespace Narvalo
             Promise.NotNull(String.Empty, "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNull_Throws_ForNull_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNull(NULL_STRING, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNull_DoesNotThrow_ForNull_InReleaseBuild()
         {
             // Act
@@ -80,36 +73,28 @@ namespace Narvalo
             Promise.NotNullOrEmpty("value", "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNullOrEmpty_Throws_ForNull_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(NULL_STRING, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNullOrEmpty_DoesNotThrow_ForNull_InReleaseBuild()
         {
             // Act
             Promise.NotNullOrEmpty(NULL_STRING, "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNullOrEmpty_Throws_ForEmptyString_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(String.Empty, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNullOrEmpty_DoesNotThrow_ForEmptyString_InReleaseBuild()
         {
             // Act
@@ -127,54 +112,42 @@ namespace Narvalo
             Promise.NotNullOrWhiteSpace("value", "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Throws_ForNull_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_DoesNotThrow_ForNull_InReleaseBuild()
         {
             // Act
             Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Throws_ForEmptyString_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(String.Empty, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_DoesNotThrow_ForEmptyString_InReleaseBuild()
         {
             // Act
             Promise.NotNullOrWhiteSpace(String.Empty, "rationale");
         }
 
-#if DEBUG
-        [Fact]
-#endif
+        [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Throws_ForWhiteSpaceOnlyString_InDebugBuild()
         {
             // Act & Assert
             Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "rationale"));
         }
 
-#if !DEBUG
-        [Fact]
-#endif
+        [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_DoesNotThrow_ForWhiteSpaceOnlyString_InReleaseBuild()
         {
             // Act

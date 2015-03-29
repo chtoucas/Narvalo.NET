@@ -46,9 +46,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\Common\IssueAttribute.cs">
-      <Link>IssueAttribute.cs</Link>
-    </Compile>
     <Compile Include="CompositeViewFacts.cs" />
     <Compile Include="PresenterBindingAttributeFacts.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategyFacts.cs" />

@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Internal;
     using Xunit;
 
     public static partial class MaybeFacts
@@ -864,7 +865,15 @@ namespace Narvalo.Fx
         #endregion
     }
 
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if NO_INTERNALS_VISIBLE_TO // White-box tests.
+
+    public static partial class MaybeFacts
+    {
+        [Fact(Skip = "White-box tests disabled in this configuration.")]
+        public static void Maybe_BlackBox() { }
+    }
+
+#else
 
     public static partial class MaybeFacts
     {

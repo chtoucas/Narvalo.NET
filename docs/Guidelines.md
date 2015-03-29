@@ -56,6 +56,23 @@ public static class MyTypeFacts
 }
 ```
 
+If a test suite contains white-box tests, add a fake test as follows:
+```csharp
+#if NO_INTERNALS_VISIBLE_TO // White-box tests.
+
+    public static partial class MyTypeFacts
+    {
+        [Fact(Skip = "White-box tests disabled in this configuration.")]
+        public static void Maybe_BlackBox() { }
+    }
+
+#else
+
+    // Here goes the white-box tests.
+
+#endif
+``` 
+
 Design Recommendations
 ----------------------
 

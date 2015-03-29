@@ -54,8 +54,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\Common\DebugOnlyFactAttribute.cs">
+      <Link>Internal\DebugOnlyFactAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\Common\IssueAttribute.cs">
-      <Link>IssueAttribute.cs</Link>
+      <Link>Internal\IssueAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ReleaseOnlyFactAttribute.cs">
+      <Link>Internal\ReleaseOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="AssumeFacts.cs" />
