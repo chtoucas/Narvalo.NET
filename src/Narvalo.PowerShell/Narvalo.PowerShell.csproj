@@ -32,6 +32,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Narvalo.PowerShell.Web.psm1" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

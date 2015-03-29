@@ -7,9 +7,9 @@ namespace MvpCommandLine
     public static class Program
     {
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            //using (var cmd = new SampleCommand()) { cmd.Run(); }
+            ////using (var cmd = new SampleCommand()) { cmd.Run(); }
         }
     }
 }

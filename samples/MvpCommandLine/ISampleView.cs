@@ -11,6 +11,7 @@ namespace MvpCommandLine
         event EventHandler Completed;
 
         void ShowLoad();
+
         void ShowCompleted();
     }
 }

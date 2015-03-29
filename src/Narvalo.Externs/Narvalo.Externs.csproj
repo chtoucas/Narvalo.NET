@@ -87,9 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Narvalo.Externs.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

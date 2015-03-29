@@ -15,12 +15,12 @@ namespace MvpCommandLine
             View.Completed += View_Completed;
         }
 
-        void View_Load_(object sender, EventArgs e)
+        private void View_Load_(object sender, EventArgs e)
         {
             View.ShowLoad();
         }
 
-        void View_Completed(object sender, EventArgs e)
+        private void View_Completed(object sender, EventArgs e)
         {
             View.ShowCompleted();
         }

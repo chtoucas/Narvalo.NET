@@ -4,7 +4,7 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
-    //using System.ComponentModel;
+    ////using System.ComponentModel;
 
     public class GhostScriptArgs<T> where T : Device
     {

@@ -334,9 +334,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
-    <None Include="Narvalo.Brouillons.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Narvalo.Brouillons.props">
       <SubType>Designer</SubType>
     </None>
