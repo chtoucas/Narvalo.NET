@@ -53,6 +53,9 @@
       <Word>Monad</Word>
       <Word>Comonad</Word>
 
+      <!-- Functional -->
+      <Word>Abelian</Word>
+
       <!-- Common Terms -->
       <Word>Edu</Word>
       <Word>Ipsum</Word>
@@ -72,6 +75,7 @@
       <Term CompoundAlternate="PlainText">plaintext</Term>
       <Term CompoundAlternate="WebPage">webpage</Term>
       <Term CompoundAlternate="WebSite">website</Term>
+      <Term CompoundAlternate="ForInt">forint</Term>
     </Compound>
 
     <DiscreteExceptions>
