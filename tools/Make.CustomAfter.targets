@@ -233,10 +233,26 @@ using System.Reflection;
     <!-- REVIEW: We use SecAnnotateDummyOutput since SecAnnotateOutput is not always written (for instance
          when there is no error). -->
     <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
-    <!--<Message Text="&quot;$(SecAnnotateCommand)&quot; /maximumpasses:1 /includesignatures /showstatistics /verify /verbose /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;" 
-             Importance="high"/>-->
 
-    <!-- WARNING: The /verify switch disable output and other things. From the documentationt:
+    <PropertyGroup>
+      <!-- We must add manually the PCL reference assemblies otherwise for a PCL
+           project, SecAnnotate will see all types and members as SecurityCritical 
+           even if the assembly is declared SecurityTransparent.
+           Weird, adding the PCL references for a non PCL project makes the assembly 
+           SecurityCritical for SecAnnotate.
+           FIXME: This is really dirty, use an ItemGroup and a response file like Autofac does.
+           FIXME: Clean up the mess with PCL. We should add the PCL references only when we depend on a PCL class.
+                  These references depend also on the PCL profile.
+           FIXME: A non PCL project does not recognize the SecurityTransparent attribute applied to a PCL assembly.
+           WARNING: The directory path must not end with a slash.
+           http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
+           https://github.com/autofac/Autofac/blob/v3.5.2/default.proj 
+      -->
+      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) == 'Profile259' ">/referencedir:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5"</_SecAnnotateReferenceDirectory>
+      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) != 'Profile259' ">$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
+    </PropertyGroup>
+
+    <!-- WARNING: The /verify switch disable output and other things. From the documentation:
          Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes 
          to find all required annotations if the assembly does not verify. -->
     <!-- NB: Available options:
@@ -244,7 +260,7 @@ using System.Reflection;
          /includesignatures for detail signatures. 
          /showstatistics 
          /verbose -->
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />

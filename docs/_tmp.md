@@ -107,7 +107,9 @@ assembly infos, what's their purposes?
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 ```
   by the VS extension. See:
+  * http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level
+  * http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
   * https://github.com/nodatime/nodatime/issues/268
   * [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
-  * [APTCA](http://msdn.microsoft.com/fr-fr/magazine/ee336023.aspx)
+  * [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
   * [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)

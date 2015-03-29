@@ -7,7 +7,7 @@
     - '_Mvp_', include Mvp projects
     - '_Build_', include Narvalo.Build project
     or any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
-    Any list separator should work but, if you use a semicolon, do not forget 
+    Any list separator should work but, if you use a semicolon, do not forget
     to quote the list of filters.
   -->
 
@@ -35,6 +35,6 @@
   <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Build_))' == 'true' ">
     <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Build\Narvalo.Build.csproj" />
   </ItemGroup>
-  
+
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.targets" />
 </Project>

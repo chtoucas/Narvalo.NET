@@ -114,7 +114,7 @@ Task CodeAnalysis `
 }
 
 Task GendarmeAnalysis `
-    -Description 'Build core libraries for Mono.Gendarme.' `
+    -Description 'Build core libraries for Mono.Gendarme (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {

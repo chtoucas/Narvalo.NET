@@ -12,18 +12,20 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
 
 ### Enhancements    
-- Added localized resources for the french language.                            
-- Use `Format.Resource` instead of `Format.CurrentCulture` for resource formatting.
-- Added the `AllowPartiallyTrustedCallers` attribute to Narvalo.Core.
+- Added localized resources for the french language.     
+- Applied the `SecurityTransparent` attribute to Narvalo.Core.                       
 
 #### Improvements                
-- Added more tests.
+- Use `Format.Resource` instead of `Format.CurrentCulture` for resource formatting.
 - Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
   exception is certainly better.
 - For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.
 - In `StringManip`, use direct concatenation instead of `String.Format()`.
 - Use "en" instead of "en-US" as the default resource language.
+- Added more tests.
+- Clearly marks skipped tests. This includes debug or release only tests and white-box tests.
+- Use traits to mark slow tests.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

@@ -12,7 +12,6 @@ All issues are either Bug, Enhancement or Improvement.
 When an issue is closed, move it to the ChangeLog. Further more, if it is a bug,
 add the necessary tests to be sure it does not pass through again.
 
-
 Work in progress
 ----------------
 
