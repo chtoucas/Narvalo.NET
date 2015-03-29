@@ -66,6 +66,8 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
+    <Compile Include="Fx\SwitchFacts.cs" />
+    <Compile Include="Fx\EitherFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Extensions\NullableFacts.cs" />
     <Compile Include="Fx\OutputFacts.cs" />
