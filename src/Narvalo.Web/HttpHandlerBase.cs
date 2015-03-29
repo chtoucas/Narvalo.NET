@@ -8,7 +8,7 @@ namespace Narvalo.Web
     using System.Web.Mvc;
 
     using Narvalo.Fx.Extensions;
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     public abstract class HttpHandlerBase : IHttpHandler
     {

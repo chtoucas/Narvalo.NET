@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents the output of a computation which may throw exceptions.

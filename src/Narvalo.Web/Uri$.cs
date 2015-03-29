@@ -5,7 +5,7 @@ namespace Narvalo.Web
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     public static class UriExtensions
     {

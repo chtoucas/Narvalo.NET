@@ -116,7 +116,7 @@
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="StringManip.cs" />
-    <Compile Include="Resources\Strings_Common.Designer.cs">
+    <Compile Include="Properties\Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Common.resx</DependentUpon>
@@ -133,8 +133,8 @@
     <Compile Include="Xml\XmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings_Common.fr.resx" />
-    <EmbeddedResource Include="Resources\Strings_Common.resx">
+    <EmbeddedResource Include="Properties\Strings_Common.fr.resx" />
+    <EmbeddedResource Include="Properties\Strings_Common.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Common.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -8,7 +8,7 @@ namespace Narvalo.Configuration
     using System.Diagnostics.Contracts;
     using System.IO;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Provides methods for stronly-typed access to configuration sections.

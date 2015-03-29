@@ -8,7 +8,7 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Provides helper methods to perform argument validation compatible with Code Contracts.

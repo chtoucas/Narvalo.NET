@@ -6,7 +6,7 @@ namespace Narvalo.Web.Configuration
     using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     public static class WebSectionManager
     {

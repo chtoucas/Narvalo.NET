@@ -6,7 +6,7 @@ namespace Narvalo
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Provides helper methods to perform argument validation.

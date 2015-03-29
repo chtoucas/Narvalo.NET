@@ -16,7 +16,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - Applied the `SecurityTransparent` attribute to Narvalo.Core.                       
 
 #### Improvements                
-- Use `Format.Resource` instead of `Format.CurrentCulture` for resource formatting.
+- Use the new `Format.Resource()` instead of `Format.CurrentCulture()` for resource formatting.
 - Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
 - Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
   exception is certainly better.
@@ -24,7 +24,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 - In `StringManip`, use direct concatenation instead of `String.Format()`.
 - Use "en" instead of "en-US" as the default resource language.
 - Added more tests.
-- Clearly marks skipped tests. This includes debug or release only tests and white-box tests.
+- Clearly shows skipped tests. This includes debug or release only tests and white-box tests.
 - Use traits to mark slow tests.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web

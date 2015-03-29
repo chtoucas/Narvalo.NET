@@ -5,7 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <seealso cref="Output{T}"/>
     /// <seealso cref="Either{T1, T2}"/>

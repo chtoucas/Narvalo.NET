@@ -9,7 +9,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Web.Configuration;
 
     using Narvalo.Web.Configuration;
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     // FIXME: The concurrency doulbe check is broken. Add volatile to the Initialized... fields?
     public static class AssetManager

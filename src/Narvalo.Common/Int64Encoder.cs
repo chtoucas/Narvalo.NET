@@ -6,7 +6,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is done to avoid repetitive code. Only visible from the inside.")]

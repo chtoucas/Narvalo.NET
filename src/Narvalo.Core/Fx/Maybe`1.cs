@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
@@ -138,6 +138,8 @@ namespace Narvalo.Fx
      * 
      * Alternative implementations in C#:
      * - [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
+     * 
+     * REVIEW: Is it such a good idea to implement <see cref="IEnumerable{T}"/>?
      * ]]>
      * </content>
      */
@@ -334,9 +336,6 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the <see cref="IEnumerable{T}"/> interface.
     /// </content>
-    /// <remarks>
-    /// REVIEW: Is it such a good idea to implement <see cref="IEnumerable{T}"/>?
-    /// </remarks>
     public partial class Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",

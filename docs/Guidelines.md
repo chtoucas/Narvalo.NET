@@ -9,6 +9,7 @@ Coding Style
 In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Coding-style)
 from the .NET team with few differences:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
+  In case of namespace conflict, use the 'global::' prefix.
 - Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`).
 - Do not use PascalCasing to name private constants (i.e `MY_PRIVATE_CONSTANT` instead of `MyPrivateConstant`).
 
@@ -21,10 +22,14 @@ We also enforce the following rules:
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 ```
 
-Optional rules:
+#### Optional rules:
 - Consider using regions or partial classes to organize code.
 - Consider separating System imports from other imports.
 - Source lines should not exceed 120 characters.
+
+#### Localization & Resources
+- Consider putting localized resources in the `Properties` folder.
+- Consider putting other resources in a `Resources` folder.
 
 ### Tasks
 
@@ -45,6 +50,8 @@ For temporary string content, use `"XXX"`.
 Suffixes:
 - _For{WhichArgument}
 - _{Context}
+
+Consider using traits to mark slow tests.
 
 Example:
 ```csharp
@@ -107,7 +114,7 @@ with a `SuppressMessage` attribute and for defects that need a fix.
 
 ### StyleCop
 
-For a detailed description of each rule, check out the
+For a detailed description of each rule, check out the official
 [documentation](http://www.stylecop.com/docs/).
 
 ### FxCop
@@ -117,7 +124,7 @@ only one rule is disabled: _[CA1006] Do not nest generic types in member signatu
 Nevertheless, we will test the equivalent rule with Gendarme which has the ability
 to disable a rule at assembly level.
 
-Test projects use a relaxed ruleset.
+Test projects use a relaxed ruleset. Roughly, you don't have to create C# documentation.
 
 ### Gendarme
 

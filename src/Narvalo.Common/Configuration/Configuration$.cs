@@ -6,7 +6,7 @@ namespace Narvalo.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Provides extension methods for <see cref="System.Configuration.Configuration"/>.

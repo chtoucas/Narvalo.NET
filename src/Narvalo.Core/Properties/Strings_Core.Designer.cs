@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Resources {
+namespace Narvalo.Properties {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Narvalo.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Resources.Strings_Core", typeof(Strings_Core).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Core", typeof(Strings_Core).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -131,7 +131,7 @@
     <Compile Include="Optimization\WhiteSpaceBusterPageParserFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HttpQueryBinderException.cs" />
-    <Compile Include="Resources\Strings_Web.Designer.cs">
+    <Compile Include="Properties\Strings_Web.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Web.resx</DependentUpon>
@@ -170,8 +170,8 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings_Web.fr.resx" />
-    <EmbeddedResource Include="Resources\Strings_Web.resx">
+    <EmbeddedResource Include="Properties\Strings_Web.fr.resx" />
+    <EmbeddedResource Include="Properties\Strings_Web.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Web.Designer.cs</LastGenOutput>
     </EmbeddedResource>

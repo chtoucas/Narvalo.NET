@@ -6,7 +6,7 @@ namespace Narvalo.Configuration
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     /// <summary>
     /// Represents a class that validates an absolute URI value.

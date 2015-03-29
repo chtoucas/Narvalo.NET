@@ -7,7 +7,7 @@ namespace Narvalo.Diagnostics.Benchmarking
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    using Narvalo.Resources;
+    using Narvalo.Properties;
 
     [SuppressMessage("Gendarme.Rules.Maintainability", "AvoidLackOfCohesionOfMethodsRule",
         Justification = "[Intentionally] If it were not a bit too large, we would have make it a struct.")]

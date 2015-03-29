@@ -8,7 +8,7 @@ namespace Narvalo.Web
     using System.Net;
     using System.Web;
 
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()

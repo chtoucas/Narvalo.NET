@@ -6,7 +6,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Web.Resources;
+    using Narvalo.Web.Properties;
 
     [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface",
         Justification = "[Intentionally] ProviderCollection existed before generics even did.")]

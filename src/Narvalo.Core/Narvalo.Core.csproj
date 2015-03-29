@@ -114,8 +114,13 @@
     <Compile Include="Promise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enforce.cs" />
+    <Compile Include="Properties\Strings_Core.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings_Core.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="Require.cs" />
-    <Compile Include="Resources\Strings_Core.Designer.cs">
+    <Compile Include="Properties\Strings_Core.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Core.resx</DependentUpon>
@@ -153,8 +158,11 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings_Core.fr.resx" />
-    <EmbeddedResource Include="Resources\Strings_Core.resx">
+    <EmbeddedResource Include="Properties\Strings_Core.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings_Core.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Strings_Core.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Core.Designer.cs</LastGenOutput>
     </EmbeddedResource>

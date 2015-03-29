@@ -252,7 +252,8 @@ Add the following content to you local customization property file `{ProjectName
 </Project>
 ```
 This has two consequences:
-- Test projects use a custom FxCop ruleset.
+- Test projects use a custom FxCop ruleset (same as the strict one but without
+  documentation rules).
 - Test projects use a dummy assembly version.
 
 Edit the local StyleCop settings and link it to `etc\Tests.SourceAnalysis`
