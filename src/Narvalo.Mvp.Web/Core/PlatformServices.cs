@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.Web.Core
             set { s_Instance.Reset(value); }
         }
 
-        private class DefaultPlatformServices_ : DefaultPlatformServices
+        private sealed class DefaultPlatformServices_ : DefaultPlatformServices
         {
             public DefaultPlatformServices_()
             {

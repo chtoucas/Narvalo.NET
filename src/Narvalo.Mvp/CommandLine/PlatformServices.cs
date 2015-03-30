@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Mvp.Windows.Forms
+namespace Narvalo.Mvp.CommandLine
 {
     using Narvalo.Mvp.Platforms;
-    using Narvalo.Mvp.PresenterBinding;
 
     public static class PlatformServices
     {
@@ -28,13 +27,8 @@ namespace Narvalo.Mvp.Windows.Forms
         {
             public DefaultPlatformServices_()
             {
-                // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
-                // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
                 SetPresenterDiscoveryStrategy(
-                    () => new CompositePresenterDiscoveryStrategy(
-                        new IPresenterDiscoveryStrategy[] {
-                            new AttributeBasedPresenterDiscoveryStrategy(),
-                            new DefaultConventionBasedPresenterDiscoveryStrategy() }));
+                    () => new DefaultConventionBasedPresenterDiscoveryStrategy());
             }
         }
     }

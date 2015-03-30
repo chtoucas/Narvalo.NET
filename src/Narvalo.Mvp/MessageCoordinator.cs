@@ -67,7 +67,7 @@ namespace Narvalo.Mvp
             }
         }
 
-        private class BlackHole_ : MessageCoordinator
+        private sealed class BlackHole_ : MessageCoordinator
         {
             // NB: Since we choose a singleton, we disable the ability to close this message bus.
             private BlackHole_() : base(closeable: false) { }
@@ -80,7 +80,7 @@ namespace Narvalo.Mvp
 
             [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
                 Justification = "Implementation of lazy initialized singleton.")]
-            private class Singleton
+            private sealed class Singleton
             {
                 internal static readonly BlackHole_ Instance = new BlackHole_();
 

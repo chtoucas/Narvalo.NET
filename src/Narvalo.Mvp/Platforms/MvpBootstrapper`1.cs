@@ -99,7 +99,7 @@ namespace Narvalo.Mvp.Platforms
             return result;
         }
 
-        private class PlatformServices_ : IPlatformServices
+        private sealed class PlatformServices_ : IPlatformServices
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }
 

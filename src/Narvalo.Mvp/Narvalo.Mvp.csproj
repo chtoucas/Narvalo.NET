@@ -17,6 +17,13 @@
     <Compile Include="..\Common\Require.cs">
       <Link>Internal\Require.cs</Link>
     </Compile>
+    <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="CommandLine\ICommand.cs" />
+    <Compile Include="CommandLine\Internal\PresenterBinderFactory.cs" />
+    <Compile Include="CommandLine\MvpBootstrapper.cs" />
+    <Compile Include="CommandLine\MvpCommand.cs" />
+    <Compile Include="CommandLine\MvpCommand`1.cs" />
+    <Compile Include="CommandLine\PlatformServices.cs" />
     <Compile Include="CompositeView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICompositeView.cs" />
