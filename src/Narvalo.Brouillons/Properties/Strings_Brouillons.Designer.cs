@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Build {
+namespace Narvalo.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Narvalo.Build {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Build {
+    internal class Strings_Brouillons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Build() {
+        internal Strings_Brouillons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo.Build {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Build.Strings_Build", typeof(Strings_Build).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Brouillons", typeof(Strings_Brouillons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,11 @@ namespace Narvalo.Build {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Closure Compiler processing {0}..
+        ///   Looks up a localized string similar to HTTP InputStream too large..
         /// </summary>
-        internal static string ClosureCompiler_ProcessingFormat {
+        internal static string HttpRequestBase_InputStreamTooLarge {
             get {
-                return ResourceManager.GetString("ClosureCompiler_ProcessingFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The file {0} does not exist..
-        /// </summary>
-        internal static string FileNotFoundFomat {
-            get {
-                return ResourceManager.GetString("FileNotFoundFomat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to java.exe exited with error code {0}..
-        /// </summary>
-        internal static string JavaTask_ErrorFormat {
-            get {
-                return ResourceManager.GetString("JavaTask_ErrorFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using java.exe from: {0}..
-        /// </summary>
-        internal static string JavaTask_JavaPathFormat {
-            get {
-                return ResourceManager.GetString("JavaTask_JavaPathFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The list of files to merge can not be empty..
-        /// </summary>
-        internal static string MergeFiles_EmptyListOfFiles {
-            get {
-                return ResourceManager.GetString("MergeFiles_EmptyListOfFiles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to YUI Compressor processing {0}..
-        /// </summary>
-        internal static string YuiCompressor_ProcessingFormat {
-            get {
-                return ResourceManager.GetString("YuiCompressor_ProcessingFormat", resourceCulture);
+                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
             }
         }
     }

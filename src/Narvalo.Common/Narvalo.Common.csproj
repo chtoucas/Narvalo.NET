@@ -160,6 +160,7 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
     <Content Include="Resources\ISO4217\20150101\A1.xml" />
     <Content Include="Resources\ISO4217\20150101\A3.xml">
       <SubType>Designer</SubType>

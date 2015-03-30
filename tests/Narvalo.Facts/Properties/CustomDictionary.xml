@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <!-- ### Mathematics ### -->
+      <Word>Abelian</Word>
+      <Word>Monoid</Word>
+    </Recognized>
+
+    <Compound>
+      <!-- ForInt32, ForInt64... -->
+      <Term CompoundAlternate="ForInt">forint</Term>
+    </Compound>
+  </Words>
+</Dictionary>

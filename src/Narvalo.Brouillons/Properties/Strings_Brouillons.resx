@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DebuggerLogger_MessageFormat" xml:space="preserve">
-    <value>Exception: {0} {1} {2}.</value>
-  </data>
-  <data name="Either_LeftHasNoRightValue" xml:space="preserve">
-    <value>A left Either has no right value.</value>
-  </data>
-  <data name="Either_RightHasNoLeftValue" xml:space="preserve">
-    <value>A right Either has no left value.</value>
-  </data>
   <data name="HttpRequestBase_InputStreamTooLarge" xml:space="preserve">
     <value>HTTP InputStream too large.</value>
-  </data>
-  <data name="TypeIsNotEnumFormat" xml:space="preserve">
-    <value>The type '{0}' must be of enum type.</value>
-  </data>
-  <data name="XElement_MalformedAttributeValueFormat" xml:space="preserve">
-    <value>Unable to parse attribute '{0}', line {1}.</value>
-  </data>
-  <data name="XElement_MalformedElementValueFormat" xml:space="preserve">
-    <value>Unable to parse element '{0}', line {1}.</value>
   </data>
 </root>

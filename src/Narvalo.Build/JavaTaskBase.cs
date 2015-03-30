@@ -8,9 +8,11 @@ namespace Narvalo.Build
     ////using System.Runtime.InteropServices;
     using System.Globalization;
     using System.IO;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using Microsoft.Win32;
+    using Narvalo.Build.Properties;
 
     public abstract class JavaTaskBase : ToolTask
     {

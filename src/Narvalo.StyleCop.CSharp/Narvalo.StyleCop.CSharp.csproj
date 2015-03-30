@@ -126,6 +126,9 @@
     <Content Include="NarvaloRules.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />

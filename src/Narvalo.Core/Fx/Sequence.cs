@@ -27,9 +27,9 @@ namespace Narvalo.Fx
 
         public static IEnumerable<TSource> Generate<TSource>(
             TSource start,
-            Func<TSource, TSource> iter)
+            Func<TSource, TSource> iterator)
         {
-            Require.NotNull(iter, "iter");
+            Require.NotNull(iterator, "iterator");
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             TSource current = start;
@@ -38,31 +38,31 @@ namespace Narvalo.Fx
             {
                 yield return current;
 
-                current = iter.Invoke(current);
+                current = iterator.Invoke(current);
             }
         }
 
         #region Anamorphims
 
         public static IEnumerable<TResult> Generate<TSource, TResult>(
-            Func<TSource, TSource> iter,
+            Func<TSource, TSource> iterator,
             TSource seed,
             Func<TSource, TResult> resultSelector)
         {
-            Contract.Requires(iter != null);
+            Contract.Requires(iterator != null);
             Contract.Requires(resultSelector != null);
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            return Generate(iter, seed, resultSelector, Stubs<TSource>.AlwaysTrue);
+            return Generate(iterator, seed, resultSelector, Stubs<TSource>.AlwaysTrue);
         }
 
         public static IEnumerable<TResult> Generate<TSource, TResult>(
-            Func<TSource, TSource> iter,
+            Func<TSource, TSource> iterator,
             TSource seed,
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(iter, "iter");
+            Require.NotNull(iterator, "iterator");
             Require.NotNull(resultSelector, "resultSelector");
             Require.NotNull(resultSelector, "predicate");
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
@@ -73,7 +73,7 @@ namespace Narvalo.Fx
             {
                 yield return resultSelector.Invoke(next);
 
-                next = iter.Invoke(next);
+                next = iterator.Invoke(next);
             }
         }
 

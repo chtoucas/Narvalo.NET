@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo {
+namespace Narvalo.Build.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Narvalo {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    internal class Strings_Build {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        internal Strings_Build() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Build.Properties.Strings_Build", typeof(Strings_Build).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,56 @@ namespace Narvalo {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exception: {0} {1} {2}..
+        ///   Looks up a localized string similar to Closure Compiler processing {0}..
         /// </summary>
-        internal static string DebuggerLogger_MessageFormat {
+        internal static string ClosureCompiler_ProcessingFormat {
             get {
-                return ResourceManager.GetString("DebuggerLogger_MessageFormat", resourceCulture);
+                return ResourceManager.GetString("ClosureCompiler_ProcessingFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A left Either has no right value..
+        ///   Looks up a localized string similar to The file {0} does not exist..
         /// </summary>
-        internal static string Either_LeftHasNoRightValue {
+        internal static string FileNotFoundFomat {
             get {
-                return ResourceManager.GetString("Either_LeftHasNoRightValue", resourceCulture);
+                return ResourceManager.GetString("FileNotFoundFomat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A right Either has no left value..
+        ///   Looks up a localized string similar to java.exe exited with error code {0}..
         /// </summary>
-        internal static string Either_RightHasNoLeftValue {
+        internal static string JavaTask_ErrorFormat {
             get {
-                return ResourceManager.GetString("Either_RightHasNoLeftValue", resourceCulture);
+                return ResourceManager.GetString("JavaTask_ErrorFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HTTP InputStream too large..
+        ///   Looks up a localized string similar to Using java.exe from: {0}..
         /// </summary>
-        internal static string HttpRequestBase_InputStreamTooLarge {
+        internal static string JavaTask_JavaPathFormat {
             get {
-                return ResourceManager.GetString("HttpRequestBase_InputStreamTooLarge", resourceCulture);
+                return ResourceManager.GetString("JavaTask_JavaPathFormat", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The type &apos;{0}&apos; must be of enum type..
+        ///   Looks up a localized string similar to The list of files to merge can not be empty..
         /// </summary>
-        internal static string TypeIsNotEnumFormat {
+        internal static string MergeFiles_EmptyListOfFiles {
             get {
-                return ResourceManager.GetString("TypeIsNotEnumFormat", resourceCulture);
+                return ResourceManager.GetString("MergeFiles_EmptyListOfFiles", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to parse attribute &apos;{0}&apos;, line {1}..
+        ///   Looks up a localized string similar to YUI Compressor processing {0}..
         /// </summary>
-        internal static string XElement_MalformedAttributeValueFormat {
+        internal static string YuiCompressor_ProcessingFormat {
             get {
-                return ResourceManager.GetString("XElement_MalformedAttributeValueFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to parse element &apos;{0}&apos;, line {1}..
-        /// </summary>
-        internal static string XElement_MalformedElementValueFormat {
-            get {
-                return ResourceManager.GetString("XElement_MalformedElementValueFormat", resourceCulture);
+                return ResourceManager.GetString("YuiCompressor_ProcessingFormat", resourceCulture);
             }
         }
     }

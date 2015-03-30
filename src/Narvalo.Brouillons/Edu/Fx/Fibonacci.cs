@@ -33,7 +33,7 @@ namespace Narvalo.Edu.Fx
         private static IEnumerable<int> CreateViaAnamorphism()
         {
             return Narvalo.Fx.Sequence.Generate<Tuple<int, int>, int>(
-                iter: _ => Tuple.Create(_.Item2, _.Item1 + _.Item2),
+                iterator: _ => Tuple.Create(_.Item2, _.Item1 + _.Item2),
                 seed: Tuple.Create(1, 1),
                 resultSelector: _ => _.Item1);
         }

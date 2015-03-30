@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <!-- ### Brands and Organizations ### -->
+      <!-- Association Suisse de Normalisation-->
+      <Word>Snv</Word>
+      
+      <!-- ### Functional ### -->
+      <Word>Anamorphism</Word>
+      <Word>Cata</Word>
+      <Word>Kunc</Word>
+      <Word>Cokun</Word>
+      <Word>Cokunc</Word>
+      
+      <!-- ### Mathematics ### -->
+      <Word>Comonad</Word>
+      <Word>Monad</Word>
+      <Word>Monoid</Word>
+      
+      <!-- ### Abbreviations ### -->
+      <!-- Education -->
+      <Word>Edu</Word>
+    </Recognized>
+  </Words>
+</Dictionary>

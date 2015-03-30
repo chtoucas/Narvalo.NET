@@ -8,8 +8,10 @@ namespace Narvalo.Build
     using System.Globalization;
     using System.IO;
     using System.Text;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Properties;
 
     public sealed class ClosureCompiler : JavaTaskBase
     {

@@ -5,11 +5,12 @@ namespace Narvalo.Build
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Properties;
 
     // Maybe we should use a separate AppDomain: AppDomainIsolatedTask
     public abstract class YuiCompressorBase : JavaTaskBase

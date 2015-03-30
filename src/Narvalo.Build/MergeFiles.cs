@@ -5,8 +5,10 @@ namespace Narvalo.Build
     using System;
     using System.Globalization;
     using System.IO;
+
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Properties;
 
     /// <example>
     /// <UsingTask TaskName="Narvalo.Build.MergeFiles"

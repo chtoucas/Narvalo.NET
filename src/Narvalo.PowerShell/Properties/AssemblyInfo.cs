@@ -4,6 +4,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Narvalo.PowerShell")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Narvalo PowerShell Modules.")]
 
 [assembly: Guid("ca89ed43-2231-4eac-a63e-b85c45539537")]

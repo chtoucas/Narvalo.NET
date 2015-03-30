@@ -8,6 +8,8 @@ namespace Narvalo.Web
     using System.Text;
     using System.Web;
 
+    using Narvalo.Properties;
+
     public static class HttpRequestBaseExtensions
     {
         public static NameValueCollection DecodeKeyValuePost(this HttpRequestBase @this)
@@ -27,7 +29,7 @@ namespace Narvalo.Web
 
             // FIXME: Int32.MaxValue ?
             if (bodyStream.Length > Int64.MaxValue) {
-                throw new ArgumentException(Strings.HttpRequestBase_InputStreamTooLarge, "request");
+                throw new ArgumentException(Strings_Brouillons.HttpRequestBase_InputStreamTooLarge, "request");
             }
 
             int length = Convert.ToInt32(bodyStream.Length);

@@ -84,6 +84,9 @@
     <Compile Include="StringManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
     <None Include="CodeTemplates\MonadFacts.tt" />
     <Content Include="Narvalo.Facts.props">
       <SubType>Designer</SubType>

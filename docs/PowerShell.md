@@ -1,8 +1,10 @@
+PowerShell
+==========
 
-### PowerShell Signing
+PowerShell Signing
+------------------
 
 PS> Set-ExecutionPolicy RemoteSigned
-
 PS> Set-ExecutionPolicy AllSigned
 PS> Get-ChildItem cert:\CurrentUser\My -CodeSign
 PS> Get-ChildItem -Path cert:\CurrentUser\my -CodeSigningCert
@@ -70,46 +72,3 @@ References:
 - http://blogs.technet.com/b/heyscriptingguy/archive/2010/06/16/hey-scripting-guy-how-can-i-sign-windows-powershell-scripts-with-an-enterprise-windows-pki-part-1-of-2.aspx
 - http://blogs.technet.com/b/heyscriptingguy/archive/2010/06/17/hey-scripting-guy-how-can-i-sign-windows-powershell-scripts-with-an-enterprise-windows-pki-part-2-of-2.aspx
 
-### Custom assembly and module attributes
-
-I see that Microsoft projects include the following lines in their
-assembly infos, what's their purposes?
-```
-  [module: UnverifiableCode]
-  [assembly: SatelliteContractVersion("X.X.X.X")]
-  [assembly: AssemblyMetadata("Serviceable", "True")]
-
-  [assembly: StringFreezing]
-  // Disable string interning.
-  [assembly: CompilationRelaxations(8)]
-
-  [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
-  [assembly: BitmapSuffixInSatelliteAssembly]
-  [assembly: TypeLibVersion(2, 4)]
-
-  [assembly: Dependency("System,", LoadHint.Always)]
-  [assembly: DefaultDependency(LoadHint.Always)]
-  [assembly: AssemblyDefaultAlias("System.Web.dll")]
-
-  [assembly: AssemblyTargetedPatchBand("1.0.23-161462647")]
-  [assembly: ComCompatibleVersion(1, 0, 3300, 0)]
-```
-
-### Security attributes
-
-```
-[assembly: SecurityRules(SecurityRuleSet.Level2)]
-[assembly: AllowPartiallyTrustedCallers]
-[assembly: SecurityTransparent]
-//[assembly: SecurityCritical]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-[assembly: SecurityRules(SecurityRuleSet.Level1, SkipVerificationInFullTrust = true)]
-[assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
-```
-  by the VS extension. See:
-  * http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level
-  * http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
-  * https://github.com/nodatime/nodatime/issues/268
-  * [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
-  * [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
-  * [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)

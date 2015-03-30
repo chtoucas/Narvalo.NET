@@ -32,6 +32,9 @@
     <None Include="benchmark.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="benchmark.props">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
@@ -44,7 +47,11 @@
       <Name>Narvalo.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

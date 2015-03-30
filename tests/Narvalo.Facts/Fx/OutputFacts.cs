@@ -18,7 +18,7 @@ namespace Narvalo.Fx
             var output = Output.Success(1);
 
             // Act & Assert
-            Assert.Throws<InvalidCastException>(() => { var result = (ExceptionDispatchInfo)output; });
+            Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
         }
 
         #endregion

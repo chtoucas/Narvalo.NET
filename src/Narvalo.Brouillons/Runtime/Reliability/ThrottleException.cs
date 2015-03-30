@@ -4,6 +4,7 @@ namespace Narvalo.Runtime.Reliability
 {
     using System;
 
+    [Serializable]
     public class ThrottleException : GuardException
     {
         public ThrottleException() : base() { }

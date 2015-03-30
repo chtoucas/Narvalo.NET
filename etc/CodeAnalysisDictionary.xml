@@ -1,69 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--
-  Cf. http://www.stylecop.com/docs/
--->
 <Dictionary>
   <Words>
     <Unrecognized>
     </Unrecognized>
+
     <Recognized>
-      <!-- Narvalo namespaces -->
-      <Word>Mvp</Word>
       <Word>Narvalo</Word>
 
-      <!-- External packages -->
-      <Word>Autofac</Word>
-      <Word>Serilog</Word>
-
-      <!-- Brands -->
-      <Word>Flickr</Word>
-      <Word>Yui</Word>
-
-      <!-- Organizations -->
-      <!-- "Association Suisse de Normalisation"-->
-      <Word>Snv</Word>
-
-      <!-- Serilog -->
-      <Word>Enricher</Word>
-
-      <!--  -->
-      <Word>Appender</Word>
-
-      <!-- ASP.NET -->
-      <Word>Mvc</Word>
-
-      <!-- Abréviations -->
-      <Word>Manip</Word>
-      <Word>Noop</Word>
-      <Word>Cr</Word>
-      <Word>Lf</Word>
-
-      <!-- Functional -->
-      <Word>η</Word>
-      <Word>μ</Word>
+      <!-- ### Mathematical Symbols ### -->
+      <!-- Comultiplication (Comonad) -->
       <Word>δ</Word>
+      <!-- Counit (Comonad) -->
       <Word>ε</Word>
-      <Word>Anamorphism</Word>
-      <Word>Cata</Word>
-      <Word>Iter</Word>
-      <Word>Kunc</Word>
-      <Word>Cokun</Word>
-      <Word>Cokunc</Word>
-      <Word>Monoid</Word>
-      <Word>Monad</Word>
-      <Word>Comonad</Word>
+      <!-- Multiplication (Monad) -->
+      <Word>μ</Word>
+      <!-- Unit (Monad) -->
+      <Word>η</Word>
 
-      <!-- Functional -->
-      <Word>Abelian</Word>
-
-      <!-- Common Terms -->
-      <Word>Edu</Word>
+      <!-- ### Common Terms ### -->
+      <!-- Lipsum, Faux-Texte -->
       <Word>Ipsum</Word>
       <Word>Lorem</Word>
+
+      <!-- ### Acronyms ### -->
+      <!-- Carriage Return -->
+      <Word>Cr</Word>
+      <!-- Line Feed -->
+      <Word>Lf</Word>
+      <!-- Model View Controller -->
+      <Word>Mvc</Word>
+      <!-- Model View Presenter -->
+      <Word>Mvp</Word>
+      <!-- Portable Network Graphics -->
       <Word>Png</Word>
+      <!-- Television -->
       <Word>Tv</Word>
 
-      <!-- Jargon -->
+      <!-- ### Abbreviations ### -->
+      <!-- Manipulation -->
+      <Word>Manip</Word>
+      <!-- No Operation -->
+      <Word>Noop</Word>
+
+      <!-- ### Jargon and Barbarisms ### -->
+      <Word>Appender</Word>
+      <Word>Enricher</Word>
       <Word>Munge</Word>
     </Recognized>
 
@@ -75,19 +56,18 @@
       <Term CompoundAlternate="PlainText">plaintext</Term>
       <Term CompoundAlternate="WebPage">webpage</Term>
       <Term CompoundAlternate="WebSite">website</Term>
-      <Term CompoundAlternate="ForInt">forint</Term>
     </Compound>
 
     <DiscreteExceptions>
     </DiscreteExceptions>
   </Words>
+
   <Acronyms>
     <CasingExceptions>
-      <Acronym>η</Acronym>
-      <Acronym>μ</Acronym>
       <Acronym>δ</Acronym>
       <Acronym>ε</Acronym>
-
+      <Acronym>μ</Acronym>
+      <Acronym>η</Acronym>
       <Acronym>Cr</Acronym>
       <Acronym>Lf</Acronym>
       <Acronym>Tv</Acronym>
