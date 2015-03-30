@@ -49,7 +49,7 @@ Narvalo.NET
   [package](https://www.nuget.org/packages/Narvalo.Mvp/)),
   a simple MVP framework largely inspired by [WebFormsMvp](https://github.com/webformsmvp/webformsmvp).
   Contrary to WebFormsMvp, it is not restricted to the WebForms platform; nevertheless, featurewise,
-  it should be on par with WebFormsMvp.
+  it should be on par with WebFormsMvp. Includes support for command-line applications.
 - **Narvalo.Mvp.Web**
   (_beta_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web),

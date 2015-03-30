@@ -869,7 +869,7 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        [Fact(Skip = "White-box tests disabled in this configuration.")]
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
         public static void Maybe_BlackBox() { }
     }
 

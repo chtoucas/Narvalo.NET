@@ -10,7 +10,8 @@ In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Cod
 from the .NET team with few differences:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
   In case of namespace conflict, use the 'global::' prefix.
-- Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`).
+- Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`) 
+  and for object creation.
 - Do not use PascalCasing to name private constants (i.e `MY_PRIVATE_CONSTANT` instead of `MyPrivateConstant`).
 
 We also enforce the following rules:
@@ -174,19 +175,22 @@ Wrap any object invariants method and contract class with a compiler conditional
 ```
      
 Tests
------                   
+-----     
 
+We consider test projects as first-class citizens. This means that they should
+pass successfully all static analysis.             
+
+### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
 - Name {Type}Facts a test class for the type {Type}.
 - Name {Member}_{ExpectedOutcome} a unit test for a member {Member}.
-- Name {Type}_{TestDescription} a unit test for the type {Type} not specific 
+- Name {Type}_{ExpectedOutcome} a unit test for the type {Type} not specific 
   to a member of the type.
-- Consider adding a suffix _For{WhichArgument} to describe the arguments used.
-- Consider adding a suffix _{Context} to describe the context.
-- Consider using the same ordering for tests than the one used inside classes.
-- Consider wrapping each set of tests with `#region ... #endregion`. 
-- Consider using traits:
-  * "Slow" for slow tests.
+- After a bugfix, create a unit test, decorate it with the `Issue` attribute 
+  and add a detailed summary of the bug.
+- Add a justification for all skipped tests.
+- Do not run a different set of tests depending on the build configuration.
+  If you have to, do not disable the test but skip it.     
 
 Example:
 ```csharp
@@ -198,13 +202,23 @@ public static class MyTypeFacts
 }
 ```
 
-If a test suite contains white-box tests, add a fake test as follows:
+### Optional Rules
+- Consider adding a suffix _For{WhichArgument} to describe the arguments used.
+- Consider adding a suffix _{Context} to describe the context.
+- Consider using the same ordering for tests than the one used inside classes.
+- Consider wrapping each set of tests with `#region ... #endregion`. 
+- Consider using traits:
+  * "Slow" for slow tests.
+
+### White-Box Tests
+
+If a test suite contains white-box tests, add also a fake test as follows:
 ```csharp
 #if NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class MyTypeFacts
     {
-        [Fact(Skip = "White-box tests disabled in this configuration.")]
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
         public static void Maybe_BlackBox() { }
     }
 
@@ -236,6 +250,12 @@ Wrap white-box tests as follow:
 
 Performance
 -----------
+
+### Delegates
+
+### Virtual Methods
+
+### Boxing and Unboxing
 
 References:
 - [CoreFX](https://github.com/dotnet/corefx/wiki/Performance)

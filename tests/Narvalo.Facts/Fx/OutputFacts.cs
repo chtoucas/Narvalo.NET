@@ -12,13 +12,34 @@ namespace Narvalo.Fx
         #region Explicit Cast
 
         [Fact]
-        public static void ExplicitCast_Throws_WhenCastingSuccessToFailure()
+        public static void ExplicitCastToExceptionDispatchInfo_Throws_WhenCastingSuccessObject()
         {
             // Arrange
             var output = Output.Success(1);
 
             // Act & Assert
             Assert.Throws<InvalidCastException>(() => (ExceptionDispatchInfo)output);
+        }
+
+        [Fact]
+        public static void ExplicitCastToValue_Throws_WhenCastingFailureObject()
+        {
+            // Arrange
+            Output<string> output = null;
+
+            try
+            {
+                throw new FakeException();
+            }
+            catch (FakeException ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                output = Output.Failure<string>(edi);
+            }
+
+            // Act & Assert
+            Assert.Throws<InvalidCastException>(() => (string)output);
         }
 
         #endregion

@@ -13,6 +13,6 @@
     <Rule Id="CA1709" Action="Warning" />
     <Rule Id="CA1801" Action="None" />
     <Rule Id="CA1806" Action="None" />
-    <Rule Id="CA2201" Action="None" />
+    <Rule Id="CA2201" Action="Warning" />
   </Rules>
 </RuleSet>
