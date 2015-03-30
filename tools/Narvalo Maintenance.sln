@@ -18,7 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		..\docs\Issues.md = ..\docs\Issues.md
 		..\LICENSE.txt = ..\LICENSE.txt
 		..\docs\Overview.md = ..\docs\Overview.md
-		..\docs\PowerShell.md = ..\docs\PowerShell.md
 		..\README.md = ..\README.md
 		..\docs\Tips.md = ..\docs\Tips.md
 	EndProjectSection

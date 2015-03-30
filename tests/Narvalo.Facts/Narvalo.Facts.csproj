@@ -78,6 +78,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="FakeException.cs" />
+    <Compile Include="CheckFacts.cs" />
     <Compile Include="PromiseFacts.cs" />
     <Compile Include="RequireFacts.cs" />
     <Compile Include="ParseToFacts.cs" />

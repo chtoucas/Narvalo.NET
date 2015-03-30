@@ -16,9 +16,10 @@ namespace Narvalo.Internal
         /// Asserts that the specified type parameter is an enumeration.
         /// </summary>
         /// <typeparam name="T">The type to be checked.</typeparam>
+        [DebuggerHidden]
+        [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ContractAbbreviator]
         public static void IsEnum<T>()
         {
             Contract.Requires(typeof(T).IsEnum);
@@ -30,9 +31,10 @@ namespace Narvalo.Internal
         /// Asserts that the specified type parameter is a value type.
         /// </summary>
         /// <typeparam name="T">The type to be checked.</typeparam>
+        [DebuggerHidden]
+        [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        [ContractAbbreviator]
         public static void IsValueType<T>()
         {
             Contract.Requires(typeof(T).IsValueType);

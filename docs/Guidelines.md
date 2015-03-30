@@ -173,12 +173,32 @@ Wrap any object invariants method and contract class with a compiler conditional
 
 #endif
 ```
+
+Documentation
+-------------
+
+Non-standard tags:
+- `<copydoc cref=""/>`
+- `<seealso href=""/>` used to write hyperlinks.
+- `<content></content>` used for documenting partial classes.
+
+### Literate Programming
+
+```csharp
+/**
+ * <content markup="commonmark">
+ * <![CDATA[
+ *
+ * ]]>
+ * </content>
+ */
+```
      
 Tests
 -----     
 
-We consider test projects as first-class citizens. This means that they should
-pass successfully all static analysis.             
+Test projects are first-class citizens; translate: they must pass successfully 
+all static analysis.             
 
 ### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.

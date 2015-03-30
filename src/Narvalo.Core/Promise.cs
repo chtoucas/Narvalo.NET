@@ -20,7 +20,7 @@ namespace Narvalo
     /// <list type="bullet">
     /// <item>for private methods where you have full control of all possible callers.</item>
     /// <item>for protected overriden methods in a sealed class when the base method does
-    /// not have any contract attached AND when you know for certain that all callers will 
+    /// not declare any contract AND when you know for certain that all callers will 
     /// satisfy the condition.</item>
     /// <item>and exceptionally for a few internal methods when you have achieved complete
     /// Code Contracts coverage.</item>

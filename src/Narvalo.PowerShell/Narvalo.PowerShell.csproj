@@ -32,6 +32,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Narvalo.PowerShell.Web.psm1" />
+    <None Include="PowerShell.md" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

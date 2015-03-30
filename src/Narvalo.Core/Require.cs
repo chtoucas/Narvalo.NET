@@ -7,11 +7,11 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
     using Narvalo.Properties;
 
     /// <summary>
-    /// Provides helper methods to perform argument validation compatible with Code Contracts.
+    /// Provides helper methods to perform argument validation in the form
+    /// of if-then-throw code and Code Contracts preconditions.
     /// </summary>
     /// <remarks>
     /// <para>The methods will be recognized as parameter validators by FxCop.</para>

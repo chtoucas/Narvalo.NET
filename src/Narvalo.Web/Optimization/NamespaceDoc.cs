@@ -5,7 +5,7 @@ namespace Narvalo.Web.Optimization
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// The Narvalo.Web.Optimization namespace contains classes and interfaces 
+    /// The Narvalo.Web.Optimization namespace contains types that enable you
     /// to optimize web content for HTTP delivery.
     /// </summary>
     /**

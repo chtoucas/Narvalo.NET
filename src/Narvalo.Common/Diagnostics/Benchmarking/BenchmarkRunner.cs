@@ -95,7 +95,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
             for (int i = 0; i < iterations; i++)
             {
-                action();
+                action.Invoke();
             }
 
             return _timer.ElapsedTime;
