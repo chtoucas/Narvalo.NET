@@ -27,9 +27,9 @@ namespace Narvalo
     /// by Code Contracts.</para>
     /// <para>For parameter validation of private methods, use <see cref="Promise"/>.</para>
     /// <para>For parameter validation of protected overriden methods in sealed classes,
-    /// when you know for certain that *ALL* callers satisfy the condition,
-    /// use <see cref="Promise"/> when the base method does not declare any contract;
-    /// otherwise use <see cref="Check"/>.</para>
+    /// when you know for certain that *ALL* callers satisfy the condition
+    /// and when you own all base classes, use <see cref="Promise"/>.
+    /// When the base method declares a contract use <see cref="Check"/> instead.</para>
     /// <para>We also provide two static classes to help with Code Contracts:
     /// <list type="bullet">
     /// <item><see cref="Acknowledge"/> provides Code Contracts abbreviators and helpers.</item>

@@ -15,15 +15,17 @@ namespace Narvalo
     /// <para>The methods WON'T be recognized by FxCop as parameter validators
     /// against <see langword="null"/> value.</para>
     /// <para>The methods will be recognized as Contract Abbreviator methods.</para>
-    /// <para>If a promise does not hold, an unrecoverable exception is thrown.</para>
+    /// <para>If a promise does not hold, an unrecoverable exception is thrown
+    /// in debug builds.</para>
     /// <para>This class MUST NOT be used in place of proper validation routines of public
     /// arguments but rather be reserved for internal sanity checking. Be wise.
     /// Personally, I can only see three situations where these helpers make sense:
     /// <list type="bullet">
     /// <item>for private methods where you have full control of all possible callers.</item>
     /// <item>for protected overriden methods in a sealed class when the base method does
-    /// not declare any contract AND when you know for certain that all callers will
-    /// satisfy the condition.</item>
+    /// not declare any contract, when you know for certain that *ALL* callers will
+    /// satisfy the condition and most certainly when you own all base classes.
+    /// As you can see, that makes a lot of prerequisites...</item>
     /// <item>and exceptionally for a few internal methods when you have achieved complete
     /// Code Contracts coverage.</item>
     /// </list>
