@@ -4,13 +4,15 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
+
+    using Narvalo.Internal;
 
     /// <summary>
-    /// Provides helper methods to check for promises on parameters.
+    /// Provides helper methods to check for conditions on parameters.
     /// </summary>
     /// <remarks>
-    /// <para>The methods WON'T be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods WON'T be recognized by FxCop as parameter validators
+    /// against <see langword="null"/> value.</para>
     /// <para>The methods MUST appear after all Code Contracts.</para>
     /// <para>If a condition does not hold, a message is sent to the debugging listeners
     /// and an unrecoverable exception is thrown.</para>
@@ -22,6 +24,7 @@ namespace Narvalo
     /// AND when you know for certain that all callers will satisfy the condition.
     /// </para>
     /// </remarks>
+    [DebuggerStepThrough]
     public static class Check
     {
         /// <summary>
@@ -29,13 +32,12 @@ namespace Narvalo
         /// </summary>
         /// <param name="testCondition">The conditional expression to evaluate.</param>
         /// <param name="rationale">The rationale for the promise.</param>
-        [DebuggerHidden]
         [Conditional("DEBUG")]
         public static void Condition(bool testCondition, string rationale)
         {
             if (!testCondition)
             {
-                throw new FailedCheckException("A condition did not hold: " + rationale);
+                throw new FatalPreconditionException("A condition did not hold: " + rationale);
             }
         }
 
@@ -45,13 +47,12 @@ namespace Narvalo
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
-        [DebuggerHidden]
         [Conditional("DEBUG")]
         public static void NotNull<T>(T value, string rationale) where T : class
         {
             if (value == null)
             {
-                throw new FailedCheckException("The parameter value is null: " + rationale);
+                throw new FatalPreconditionException("The parameter value is null: " + rationale);
             }
         }
 
@@ -60,13 +61,12 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
-        [DebuggerHidden]
         [Conditional("DEBUG")]
         public static void NotNullOrEmpty(string value, string rationale)
         {
             if (String.IsNullOrEmpty(value))
             {
-                throw new FailedCheckException("The parameter value is null or empty: " + rationale);
+                throw new FatalPreconditionException("The parameter value is null or empty: " + rationale);
             }
         }
 
@@ -76,24 +76,14 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The message to send to display if the test fails.</param>
-        [DebuggerHidden]
         [Conditional("DEBUG")]
         public static void NotNullOrWhiteSpace(string value, string rationale)
         {
             if (String.IsNullOrWhiteSpace(value))
             {
-                throw new FailedCheckException(
+                throw new FatalPreconditionException(
                     "The parameter value is null or empty, or consists only of white-space characters: " + rationale);
             }
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic",
-            Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "MissingExceptionConstructorsRule",
-            Justification = "[Intentionally] This exception can not be initialized outside this assembly.")]
-        private sealed class FailedCheckException : Exception
-        {
-            public FailedCheckException(string message) : base(message) { }
         }
     }
 }

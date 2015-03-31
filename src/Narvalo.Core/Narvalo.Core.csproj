@@ -111,6 +111,7 @@
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
+    <Compile Include="Internal\FatalPreconditionException.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Extensions\PredicateExtensions.cs" />
     <Compile Include="NamespaceDoc.cs" />
@@ -176,6 +177,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

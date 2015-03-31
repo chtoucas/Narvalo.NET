@@ -32,7 +32,6 @@ namespace Narvalo
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
         [Pure]
-        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string CurrentCulture(string format, params object[] args)
         {
@@ -52,7 +51,6 @@ namespace Narvalo
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
         [Pure]
-        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string InvariantCulture(string format, params object[] args)
         {
@@ -75,7 +73,6 @@ namespace Narvalo
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
         [Pure]
-        [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Resource(string localizedResource, params object[] args)
         {

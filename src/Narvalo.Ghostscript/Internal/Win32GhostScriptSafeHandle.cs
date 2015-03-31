@@ -21,6 +21,7 @@ namespace Narvalo.GhostScript.Internal
             get { return handle == IntPtr.Zero; }
         }
 
+        // https://msdn.microsoft.com/en-us/magazine/cc163716.aspx
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SuppressUnmanagedCodeSecurity]
         protected override bool ReleaseHandle()

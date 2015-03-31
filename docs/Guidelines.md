@@ -179,7 +179,6 @@ Documentation
 
 Non-standard tags:
 - `<copydoc cref=""/>`
-- `<seealso href=""/>` used to write hyperlinks.
 - `<content></content>` used for documenting partial classes.
 
 ### Literate Programming

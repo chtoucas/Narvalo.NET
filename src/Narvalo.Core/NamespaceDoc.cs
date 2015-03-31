@@ -11,15 +11,17 @@ namespace Narvalo
     /// <remarks>
     /// <para>We provide four static classes to perform argument validation:
     /// <list type="bullet">
-    /// <item><see cref="Enforce"/> throws <see cref="System.ArgumentException"/>.</item>
+    /// <item><see cref="Enforce"/> throws an <see cref="System.ArgumentException"/>
+    /// on failure.</item>
     /// <item><see cref="Require"/> uses Code Contracts preconditions
-    /// and throws <see cref="System.ArgumentException"/>.</item>
+    /// and throws <see cref="System.ArgumentException"/> on failure.</item>
     /// <item><see cref="Promise"/> uses Code Contracts preconditions
-    /// and throws unrecoverable exceptions in debug builds.</item>
-    /// <item><see cref="Check"/> throws unrecoverable exceptions in debug builds.</item>
+    /// and throws an unrecoverable exception on failure in debug builds.</item>
+    /// <item><see cref="Check"/> throws an unrecoverable exception on failure
+    /// in debug builds.</item>
     /// </list>
-    /// Each one serves a different purpose but only the first two will survive
-    /// in retail builds.</para>
+    /// Only the first two will survive in retail builds.</para>
+    /// <para>Each one serves a different purpose.</para>
     /// <para>For parameter validation of public methods, use <see cref="Require"/>
     /// and <see cref="Enforce"/> which provides support for conditions not yet handled
     /// by Code Contracts.</para>
@@ -30,8 +32,8 @@ namespace Narvalo
     /// otherwise use <see cref="Check"/>.</para>
     /// <para>We also provide two static classes to help with Code Contracts:
     /// <list type="bullet">
-    /// <item><see cref="Acknowledge"/> provides Code Contracts abbreviators.</item>
-    /// <item><see cref="Assume"/> is for assumptions.</item>
+    /// <item><see cref="Acknowledge"/> provides Code Contracts abbreviators and helpers.</item>
+    /// <item><see cref="Assume"/> focuses on assumptions.</item>
     /// </list>
     /// </para>
     /// </remarks>

@@ -3,10 +3,18 @@ Tips
 
 Often obvious but worth recalling.
 
+### Use hyperlinks in documentation ###
+
+To use hyperlinks in C# documentation, prefix the reference with "!:":
+```xml
+<see cref="!:http://acme.org"/>
+<seealso cref="!:http://acme.org"/>
+```
+
 ### MSBuild file for a solution ###
 
 Each time we build a solution, MSBuild first generates an XML file
-from the solution file. Out of curiosity, you can see this file (.metaproj)
+from the solution file. Out of curiosity, you can save this file (.metaproj)
 by setting the environment variable `MSBUILDEMITSOLUTION` to `1`.
 
 ### Do not pass literals as localized parameters ###

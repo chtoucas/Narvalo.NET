@@ -10,7 +10,7 @@ namespace Narvalo.Web
     public static class UriExtensions
     {
         // Also known as protocol-less URL.
-        // <seealso href="http://tools.ietf.org/html/rfc3986#section-4.2"/>
+        // <seealso cref="!:http://tools.ietf.org/html/rfc3986#section-4.2"/>
         public static string ToProtocolRelativeString(this Uri @this)
         {
             Require.Object(@this);

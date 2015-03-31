@@ -6,6 +6,8 @@ namespace Narvalo.Globalization
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
+    using Narvalo.Internal;
+
     /// <summary>
     /// Provides information about a localized currency.
     /// </summary>
@@ -31,13 +33,8 @@ namespace Narvalo.Globalization
         /// <param name="numericCode">A numeric identifier defined in ISO 4217.</param>
         public CurrencyInfo(string code, short numericCode)
         {
-            Require.NotNullOrEmpty(code, "code");
-
-            // For PCL classes, we must convert the string to an array before being able to use LINQ operators on it.
-            Contract.Requires(code.Length == 3, "The code MUST be composed of exactly 3 letters.");
-            Contract.Requires(
-                Contract.ForAll(code.ToCharArray(), c => c >= 65 && c <= 90),
-                "The code MUST be all CAPS and ASCII.");
+            Require.NotNullOrWhiteSpace(code, "code");
+            ContractFor.CurrencyCode(code);
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");

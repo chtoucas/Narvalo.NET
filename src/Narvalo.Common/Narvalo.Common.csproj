@@ -94,6 +94,7 @@
     <Compile Include="Globalization\ICurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
+    <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />

@@ -2,9 +2,11 @@
 
 namespace Narvalo
 {
+    using System;
+
     using Xunit;
 
-    public static class AcknowledgeFacts
+    public static partial class AcknowledgeFacts
     {
         #region Object()
 
@@ -23,5 +25,77 @@ namespace Narvalo
         }
 
         #endregion
+
+        #region Unreachable()
+
+        [Fact]
+        public static void Unreachable_DoesNotThrow_ForComprehensiveSwitch()
+        {
+            // Act
+            ComprehensiveSwitch_(MyEnum_.One);
+        }
+
+        [Fact]
+        public static void Unreachable_ThrowsInvalidOperationException_ForIncompleteSwitch()
+        {
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => IncompleteSwitch_(MyEnum_.Two));
+        }
+
+        [Fact]
+        public static void Unreachable_ThrowsCustomException_ForIncompleteSwitch()
+        {
+            // Act & Assert
+            Assert.Throws<NotSupportedException>(() => IncompleteSwitchWithCustomException_(MyEnum_.Two));
+        }
+
+        #endregion
+    }
+
+    public static partial class AcknowledgeFacts
+    {
+        private enum MyEnum_
+        {
+            One,
+            Two,
+        }
+
+        private static string ComprehensiveSwitch_(MyEnum_ value)
+        {
+            switch (value)
+            {
+                case MyEnum_.One:
+                case MyEnum_.Two:
+                    return "OK";
+
+                default:
+                    throw Acknowledge.Unreachable("Found a missing case in the switch.");
+            }
+        }
+
+        private static string IncompleteSwitch_(MyEnum_ value)
+        {
+            switch (value)
+            {
+                case MyEnum_.One:
+                    return "OK";
+
+                default:
+                    throw Acknowledge.Unreachable("Found a missing case in the switch.");
+            }
+        }
+
+        private static string IncompleteSwitchWithCustomException_(MyEnum_ value)
+        {
+            switch (value)
+            {
+                case MyEnum_.One:
+                    return "OK";
+
+                default:
+                    throw Acknowledge.Unreachable(
+                        new NotSupportedException("Found a missing case in the switch."));
+            }
+        }
     }
 }

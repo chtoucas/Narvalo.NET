@@ -88,6 +88,7 @@ namespace Narvalo.Diagnostics.Benchmarking
 
         public IEnumerable<BenchmarkMetric> Process(Type type)
         {
+            Require.NotNull(type, "type");
             Contract.Ensures(Contract.Result<IEnumerable<BenchmarkMetric>>() != null);
 
             IEnumerable<Benchmark> benchmarks = FindBenchmarks_(type);

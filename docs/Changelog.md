@@ -16,7 +16,8 @@ _Better test coverage for Narvalo.Core_
 ### Enhancements
 - Added localized resources for the french language.
 - Applied the `SecurityTransparent` attribute to Narvalo.Core.
-- New Code Contracts helper `Ensure` containing abbreviators.
+- New helpers for parameter validation or Code Contracts:
+  `Acknowledge`, `Check` and `ValidatedNotNull`.
 
 #### Improvements
 - Use the new `Format.Resource()` instead of `Format.CurrentCulture()` for resource formatting.

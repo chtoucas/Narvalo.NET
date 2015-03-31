@@ -29,7 +29,7 @@ Work in progress
 - Range T why force struct constraint? Require for "T?" where T is a struct?
 - Improvement: Monad.tt, review true argument check for extension methods.
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
-- Improvement: Check any use of `AssumeNotNull`, Promise & Acknowledge
+- Improvement: Check any use of `AssumeNotNull`
 - make.ps1 -r fails to push to the official NuGet server but works otherwise.
 
 

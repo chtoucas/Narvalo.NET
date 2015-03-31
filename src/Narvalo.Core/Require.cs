@@ -14,7 +14,8 @@ namespace Narvalo
     /// of if-then-throw code and Code Contracts preconditions.
     /// </summary>
     /// <remarks>
-    /// <para>The methods will be recognized as parameter validators by FxCop.</para>
+    /// <para>The methods will be recognized by FxCop as parameter validators
+    /// against <see langword="null"/> value.</para>
     /// <para>The methods will be recognized as Contract Argument Validator methods.</para>
     /// <para>If a condition does not hold, a <see cref="ArgumentException"/> is thrown.</para>
     /// <para>Only useful if you are using the "Custom Parameter Validation" assembly mode.</para>
@@ -24,8 +25,8 @@ namespace Narvalo
     public static class Require
     {
         /// <summary>
-        /// Validates that the specified object is not <see langword="null"/>. 
-        /// Meant to be used inside an extension method to validate the first parameter which 
+        /// Validates that the specified object is not <see langword="null"/>.
+        /// Meant to be used inside an extension method to validate the first parameter which
         /// specifies which type the method operates on.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
@@ -43,7 +44,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified property value is not <see langword="null"/>. 
+        /// Validates that the specified property value is not <see langword="null"/>.
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -87,7 +88,7 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The property value to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/>
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
@@ -155,7 +156,7 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> 
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/>
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
         [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
@@ -181,7 +182,7 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum integer value (inclusive).</param>
         /// <param name="maxInclusive">The maximum integer value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
         /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
@@ -210,7 +211,7 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum long value (inclusive).</param>
         /// <param name="maxInclusive">The maximum long value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
         /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>

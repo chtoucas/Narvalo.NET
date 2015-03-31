@@ -9,6 +9,7 @@ namespace Narvalo
     using System.Globalization;
 
     using Narvalo.Globalization;
+    using Narvalo.Internal;
 
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.
@@ -38,8 +39,8 @@ namespace Narvalo
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
         private Currency(string code)
         {
-            // We do not fully validate the input here since this should be taken care of by the provider.
             Contract.Requires(code != null);
+            Contract.Requires(code.Length == 3);
 
             _code = code;
         }
@@ -53,6 +54,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return _code;
             }
         }
@@ -61,13 +63,14 @@ namespace Narvalo
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="code"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CurrencyNotFoundException">No currency exists for the
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is <see langword="null"/>.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            Contract.Requires(code != null);
+            Require.NotNullOrWhiteSpace(code, "code");
+            ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             return s_Cache.GetOrAdd(code, GetCurrency_).AssumeNotNull();
@@ -78,22 +81,26 @@ namespace Narvalo
         /// with the specified culture.
         /// </summary>
         /// <param name="cultureInfo">A culture info.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CurrencyNotFoundException">No currency exists for the specified culture.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
         public static Currency OfCulture(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, "cultureInfo");
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return Of(new RegionInfo(cultureInfo.LCID).ISOCurrencySymbol.AssumeNotNull());
+            var code = new RegionInfo(cultureInfo.LCID).ISOCurrencySymbol.AssumeNotNull();
+
+            Contract.Assume(code.Length == 3);
+
+            return Of(code);
         }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the culture
         /// used by the current thread.
         /// </summary>
-        /// <exception cref="CurrencyNotFoundException">No currency exists for the current culture.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the current culture.</exception>
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency OfCurrentCulture()
         {
@@ -120,12 +127,13 @@ namespace Narvalo
         /// Contrary to the <see cref="Currency.Of"/> method, this method always return a fresh object.
         /// </remarks>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="CurrencyNotFoundException">No currency exists for the
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
         private static Currency GetCurrency_(string code)
         {
-            Promise.NotNull(code, "Null guard for a private method call.");
+            Contract.Requires(code != null);
+            Contract.Requires(code.Length == 3);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             if (!CurrencyProvider.Current.CurrencyCodes.Contains(code))
@@ -159,6 +167,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XDR");
             }
         }
@@ -172,6 +181,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XXX");
             }
         }
@@ -185,6 +195,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XTS");
             }
         }
@@ -198,6 +209,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return s_Pound;
             }
         }
@@ -224,6 +236,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return s_Dollar;
             }
         }
@@ -250,6 +263,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return s_Yen;
             }
         }
@@ -278,6 +292,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XPD");
             }
         }
@@ -292,6 +307,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XPT");
             }
         }
@@ -306,6 +322,7 @@ namespace Narvalo
             get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
+
                 return Of("XAG");
             }
         }
@@ -382,6 +399,7 @@ namespace Narvalo
         private void ObjectInvariants()
         {
             Contract.Invariant(_code != null);
+            Contract.Invariant(_code.Length == 3);
         }
 
 #endif
