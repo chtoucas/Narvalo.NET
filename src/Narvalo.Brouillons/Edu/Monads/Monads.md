@@ -6,7 +6,7 @@ behind to make good use of it, really. In fact, I guess that the monad theory,
 or more precisely category theory, has influenced the design of many parts of
 the .NET framework ; Linq and the Reactive Extensions being the most obvious
 proofs of that. The .NET type system is not rich enough to make very general
-monadic constructions but it gives developpers access to some powerful monadic
+monadic constructions but it gives developers access to some powerful monadic
 concepts in a very friendly way.
 
 Monoid

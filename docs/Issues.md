@@ -15,6 +15,8 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Find a better name for "Unsafe".
+- If the test project fails, the build does not.
 - SecurityTransparent attribute and non PCL libraries depending on a PCL library.
 - EditorBrowsableState
 - Format and boxing
