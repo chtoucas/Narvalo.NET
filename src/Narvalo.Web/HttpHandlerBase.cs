@@ -16,24 +16,14 @@ namespace Narvalo.Web
 
         public virtual bool IsReusable
         {
-            get
-            {
-                Contract.Ensures(Contract.Result<bool>() == false);
-
-                return false;
-            }
+            get { return false; }
         }
 
         protected abstract HttpVerbs AcceptedVerbs { get; }
 
         protected virtual bool TrySkipIisCustomErrors
         {
-            get
-            {
-                Contract.Ensures(Contract.Result<bool>() == true);
-
-                return true;
-            }
+            get { return true; }
         }
 
         public void ProcessRequest(HttpContext context)
