@@ -2,19 +2,20 @@
 
 namespace Narvalo
 {
-    using System;
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-#endif
-
     public partial interface IBidirectionalCryptoEngine
     {
         string Encrypt(string value);
 
         string Decrypt(string value);
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo
+{
+    using System;
+    using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(ContractForIBidirectionalCryptoEngine))]
     public partial interface IBidirectionalCryptoEngine { }
@@ -36,6 +37,6 @@ namespace Narvalo
             return default(String);
         }
     }
+}
 
 #endif
-}

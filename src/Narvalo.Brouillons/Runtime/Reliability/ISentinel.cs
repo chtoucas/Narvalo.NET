@@ -3,17 +3,20 @@
 namespace Narvalo.Runtime.Reliability
 {
     using System;
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-#endif
 
     public partial interface ISentinel
     {
         // TODO: Ajouter les variantes async : Task, Begin/End, async ?
         void Execute(Action action);
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+    
+namespace Narvalo.Runtime.Reliability
+{
+    using System;
+    using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(ISentinelContract))]
     public partial interface ISentinel { }
@@ -26,6 +29,6 @@ namespace Narvalo.Runtime.Reliability
             Contract.Requires(action != null);
         }
     }
+}
 
 #endif
-}

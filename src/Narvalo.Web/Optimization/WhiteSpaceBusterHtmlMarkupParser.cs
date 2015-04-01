@@ -3,11 +3,6 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Web.Razor.Parser;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
@@ -57,11 +52,11 @@ namespace Narvalo.Web.Optimization
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_inner != null);
-            Contract.Invariant(_optimizer != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_inner != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_optimizer != null);
         }
 
 #endif

@@ -3,10 +3,6 @@
 namespace Narvalo.Web
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-#endif
     using System.Web;
 
     using Narvalo.Fx;
@@ -17,8 +13,17 @@ namespace Narvalo.Web
 
         Maybe<TQuery> Bind(HttpRequest request);
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+    
+namespace Narvalo.Web
+{
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Web;
+
+    using Narvalo.Fx;
 
     [ContractClass(typeof(IHttpQueryBinderContract<>))]
     public partial interface IHttpQueryBinder<TQuery> { }
@@ -43,6 +48,6 @@ namespace Narvalo.Web
             return default(Maybe<TQuery>);
         }
     }
+}
 
 #endif
-}

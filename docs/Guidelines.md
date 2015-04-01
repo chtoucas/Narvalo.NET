@@ -137,15 +137,11 @@ Symbols used to define the assembly properties:
 
 Wrap any object invariants method and contract class with a compiler conditional clause:
 ```csharp
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-#endif
-
     public class MyType
     {
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         void ObjectInvariants()
         {
             // Contract invariants directives.

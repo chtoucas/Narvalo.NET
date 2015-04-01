@@ -4,9 +4,6 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Using directive.
-    using System.Diagnostics.Contracts;
-#endif
     using System.IO;
     using System.Linq;
 
@@ -78,11 +75,11 @@ namespace Narvalo.IO
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_directoryFilter != null);
-            Contract.Invariant(_fileFilter != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_directoryFilter != null);
+            System.Diagnostics.Contracts.Contract.Invariant(_fileFilter != null);
         }
 
 #endif
