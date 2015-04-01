@@ -53,7 +53,7 @@ namespace Narvalo
 
             if (!testCondition)
             {
-                throw new FatalPreconditionException("A promise did not hold: " + rationale);
+                throw new IllegalConditionException("A promise did not hold: " + rationale);
             }
         }
 
@@ -72,7 +72,7 @@ namespace Narvalo
 
             if (value == null)
             {
-                throw new FatalPreconditionException("The parameter value is null: " + rationale);
+                throw new IllegalConditionException("The parameter value is null: " + rationale);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Narvalo
 
             if (String.IsNullOrEmpty(value))
             {
-                throw new FatalPreconditionException("The parameter value is null or empty: " + rationale);
+                throw new IllegalConditionException("The parameter value is null or empty: " + rationale);
             }
         }
 
@@ -109,7 +109,7 @@ namespace Narvalo
 
             if (String.IsNullOrWhiteSpace(value))
             {
-                throw new FatalPreconditionException(
+                throw new IllegalConditionException(
                     "The parameter value is null or empty, or consists only of white-space characters: " + rationale);
             }
         }

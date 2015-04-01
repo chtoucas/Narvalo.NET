@@ -9,8 +9,8 @@ namespace Narvalo.Internal
     Justification = "[Intentionally] This is an unrecoverable exception, thrown when a supposedly impossible situation happened.")]
     [SuppressMessage("Gendarme.Rules.Exceptions", "MissingExceptionConstructorsRule",
         Justification = "[Intentionally] This exception can not be initialized outside this assembly.")]
-    internal sealed class FatalPreconditionException : Exception
+    internal sealed class IllegalConditionException : Exception
     {
-        public FatalPreconditionException(string message) : base(message) { }
+        public IllegalConditionException(string message) : base(message) { }
     }
 }
