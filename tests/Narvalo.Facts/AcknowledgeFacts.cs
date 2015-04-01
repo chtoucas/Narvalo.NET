@@ -39,14 +39,14 @@ namespace Narvalo
         public static void Unreachable_ThrowsInvalidOperationException_ForIncompleteSwitch()
         {
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => IncompleteSwitch_(MyEnum_.Two));
+            Assert.Throws<NotSupportedException>(() => IncompleteSwitch_(MyEnum_.Two));
         }
 
         [Fact]
         public static void Unreachable_ThrowsCustomException_ForIncompleteSwitch()
         {
             // Act & Assert
-            Assert.Throws<NotSupportedException>(() => IncompleteSwitchWithCustomException_(MyEnum_.Two));
+            Assert.Throws<InvalidOperationException>(() => IncompleteSwitchWithCustomException_(MyEnum_.Two));
         }
 
         #endregion
@@ -94,7 +94,7 @@ namespace Narvalo
 
                 default:
                     throw Acknowledge.Unreachable(
-                        new NotSupportedException("Found a missing case in the switch."));
+                        new InvalidOperationException("Found a missing case in the switch."));
             }
         }
     }
