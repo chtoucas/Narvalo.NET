@@ -37,16 +37,15 @@ namespace Narvalo
         ///         throw Acknowledge.Unreachable("Found a missing case in the switch.");
         /// }
         /// </example>
-        /// <param name="message">The error message to display with the exception.</param>
-        /// <returns>A new instance of the <see cref="NotSupportedException"/>
-        /// class with the specified error message.</returns>
+        /// <param name="reason">The error message to use if the point of execution is reached.</param>
+        /// <returns>A new instance of the <see cref="NotSupportedException"/> class with the specified error message.</returns>
         [DebuggerHidden]
         [ContractVerification(false)]
-        public static NotSupportedException Unreachable(string message)
+        public static NotSupportedException Unreachable(string reason)
         {
             Contract.Requires(false);
 
-            return new NotSupportedException(message);
+            return new NotSupportedException(reason);
         }
 
         /// <summary>
