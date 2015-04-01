@@ -65,7 +65,7 @@ namespace Narvalo.GhostScript.Options
 
                 case ImageFormat.None:
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported format.");
+                    throw new NotSupportedException("Unsupported format.");
             }
         }
     }

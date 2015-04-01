@@ -69,7 +69,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dNOEPS";
                 case Eps.None:
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported eps.");
+                    throw new NotSupportedException("Unsupported eps.");
             }
         }
 
@@ -98,7 +98,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dTTYPAUSE";
                 case Interactions.None:
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported interactions.");
+                    throw new NotSupportedException("Unsupported interactions.");
             }
         }
 
@@ -130,7 +130,7 @@ namespace Narvalo.GhostScript.Options
                     return "-dWRITESYSTEMDICT";
                 case Miscs.None:
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported miscs.");
+                    throw new NotSupportedException("Unsupported miscs.");
             }
         }
     }

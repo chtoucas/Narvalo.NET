@@ -171,7 +171,7 @@ namespace Narvalo.GhostScript.Options
 
                 case PaperSize.None:
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported paper size.");
+                    throw new NotSupportedException("Unsupported paper size.");
             }
         }
 
@@ -259,7 +259,7 @@ namespace Narvalo.GhostScript.Options
 
                     break;
                 default:
-                    throw new InvalidEnumArgumentException("Unsupported page size.");
+                    throw new NotSupportedException("Unsupported page size.");
             }
         }
     }

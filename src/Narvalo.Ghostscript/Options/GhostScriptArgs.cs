@@ -116,7 +116,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Icc.IccProfilesDirectory:
         ////            return "-sICCProfilesDir";
         ////        default:
-        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
+        ////            throw new NotSupportedException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -145,7 +145,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Fonts.OldCffParser:
         ////            return "-dOLDCFF";
         ////        default:
-        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
+        ////            throw new NotSupportedException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -182,7 +182,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Rendering.DoPS:
         ////            return "-dDOPS";
         ////        default:
-        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
+        ////            throw new NotSupportedException("Invalid argument.", "arg");
         ////    }
         ////}
 
@@ -193,7 +193,7 @@ namespace Narvalo.GhostScript.Options
         ////        case Resource.FontResourceDirectory:
         ////            return "-sFontResourceDir";
         ////        default:
-        ////            throw new InvalidEnumArgumentException("Invalid argument.", "arg");
+        ////            throw new NotSupportedException("Invalid argument.", "arg");
         ////    }
         ////}
     }
