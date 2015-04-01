@@ -38,15 +38,15 @@ namespace Narvalo
         /// }
         /// </example>
         /// <param name="message">The error message to display with the exception.</param>
-        /// <returns>A new instance of the <see cref="InvalidOperationException"/>
+        /// <returns>A new instance of the <see cref="NotSupportedException"/>
         /// class with the specified error message.</returns>
         [DebuggerHidden]
         [ContractVerification(false)]
-        public static InvalidOperationException Unreachable(string message)
+        public static NotSupportedException Unreachable(string message)
         {
             Contract.Requires(false);
 
-            return new InvalidOperationException(message);
+            return new NotSupportedException(message);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Narvalo
         ///     case MyEnum.DefinedValue:
         ///         return "DefinedValue";
         ///     default:
-        ///         throw Acknowledge.Unreachable(new NotSupportedException("Found a missing case in the switch."));
+        ///         throw Acknowledge.Unreachable(new MyException("Found a missing case in the switch."));
         /// }
         /// </example>
         /// <typeparam name="TException">The type of <paramref name="exception"/>.</typeparam>
