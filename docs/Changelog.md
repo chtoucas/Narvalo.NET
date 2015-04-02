@@ -12,6 +12,9 @@ _Better test coverage for Narvalo.Core_
 #### Breaking changes
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
+- `HttpHandlerBase.AcceptedVerbs` is now public.
+  `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
+   no longer virtual.
 
 ### Enhancements
 - Added localized resources for the french language.

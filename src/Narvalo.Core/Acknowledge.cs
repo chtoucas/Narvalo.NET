@@ -7,7 +7,7 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Provides Code Contracts abbreviators.
+    /// Provides Code Contracts abbreviators and helpers.
     /// </summary>
     public static class Acknowledge
     {
@@ -63,7 +63,7 @@ namespace Narvalo
         /// </example>
         /// <typeparam name="TException">The type of <paramref name="exception"/>.</typeparam>
         /// <param name="exception">The exception the caller wish to throw back from here.</param>
-        /// <returns>The untouched parameter <paramref name="exception"/>.</returns>
+        /// <returns>The untouched input <paramref name="exception"/>.</returns>
         [DebuggerHidden]
         [ContractVerification(false)]
         public static TException Unreachable<TException>(TException exception)

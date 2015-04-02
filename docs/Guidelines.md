@@ -26,7 +26,7 @@ We also enforce the following rules:
 ### Optional Rules
 
 - Consider using regions or partial classes to organize code.
-- Consider separating System imports from other imports.
+- Consider separating System imports from the others.
 - Source lines should not exceed 120 characters.
 
 ### Tasks
@@ -101,6 +101,12 @@ directory `Properties` rather than modifying the global one.
 ### Gendarme
 
 ### Code Contracts
+
+The target is full CC coverage: we enable all options of the static contract checker 
+except "Check redundant assume".
+```
+-outputwarnmasks -show unreached
+```
 
 Compilation Symbols
 -------------------
