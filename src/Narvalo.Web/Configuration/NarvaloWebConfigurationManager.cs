@@ -21,7 +21,7 @@ namespace Narvalo.Web.Configuration
             {
                 Contract.Ensures(Contract.Result<AssetSection>() != null);
 
-                return s_AssetSection.Value;
+                return s_AssetSection.Value.AssumeNotNull();
             }
         }
 
@@ -31,7 +31,7 @@ namespace Narvalo.Web.Configuration
             {
                 Contract.Ensures(Contract.Result<OptimizationSection>() != null);
 
-                return s_OptimizationSection.Value;
+                return s_OptimizationSection.Value.AssumeNotNull();
             }
         }
 

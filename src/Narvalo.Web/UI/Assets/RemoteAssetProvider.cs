@@ -6,6 +6,7 @@ namespace Narvalo.Web.UI.Assets
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Collections;
 
@@ -39,6 +40,8 @@ namespace Narvalo.Web.UI.Assets
                 .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
                 .ValueOrThrow(() => new ProviderException("Missing or invalid config 'baseUri'."));
             config.Remove("baseUri");
+
+            Contract.Assume(_baseUri != null);
         }
 
         public override Uri GetFont(string relativePath)

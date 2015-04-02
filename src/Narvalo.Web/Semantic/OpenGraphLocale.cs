@@ -30,5 +30,15 @@ namespace Narvalo.Web.Semantic
         {
             return Culture.ToString().Replace('-', '_');
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_culture != null);
+        }
+
+#endif
     }
 }

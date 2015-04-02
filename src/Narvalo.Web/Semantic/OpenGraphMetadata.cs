@@ -4,6 +4,7 @@ namespace Narvalo.Web.Semantic
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     public sealed class OpenGraphMetadata : IOpenGraphMetadata
     {
@@ -86,5 +87,18 @@ namespace Narvalo.Web.Semantic
                 _alternativeLocales.Add(locale);
             }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_alternativeLocales != null);
+            Contract.Invariant(_locale != null);
+            Contract.Invariant(_ontology != null);
+            Contract.Invariant(_ontology.Culture != null);
+        }
+
+#endif
     }
 }

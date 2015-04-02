@@ -3,6 +3,7 @@
 namespace Narvalo.Web
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -16,7 +17,11 @@ namespace Narvalo.Web
         {
             Require.Object(@this);
 
-            return @this.RequestContext.HttpContext.Request.RawUrl;
+            return @this
+                .RequestContext.AssumeNotNull()
+                .HttpContext
+                .Request
+                .RawUrl;
         }
 
         public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, object routeValues)
@@ -24,7 +29,13 @@ namespace Narvalo.Web
             Require.Object(@this);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
-            var scheme = @this.RequestContext.HttpContext.Request.Url.Scheme;
+            var scheme = @this
+                .RequestContext.AssumeNotNull()
+                .HttpContext
+                .Request
+                .Url.AssumeNotNull()
+                .Scheme;
+
             return @this.Action(actionName, controllerName, routeValues, scheme);
         }
 
@@ -33,20 +44,32 @@ namespace Narvalo.Web
             Require.Object(@this);
 
             // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
-            var scheme = @this.RequestContext.HttpContext.Request.Url.Scheme;
+            var scheme = @this
+                .RequestContext.AssumeNotNull()
+                .HttpContext
+                .Request
+                .Url.AssumeNotNull()
+                .Scheme;
+
             return @this.Action(actionName, controllerName, routeValues, scheme);
         }
 
-        // Voir aussi http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
+        // Cf. http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
         public static string AbsoluteContent(this UrlHelper @this, string path)
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
 
             if (!uri.IsAbsoluteUri)
             {
-                Uri requestUrl = @this.RequestContext.HttpContext.Request.Url;
+                Uri requestUrl = @this
+                    .RequestContext.AssumeNotNull()
+                    .HttpContext
+                    .Request
+                    .Url.AssumeNotNull();
+
                 var builder = new UriBuilder(requestUrl.Scheme, requestUrl.Host, requestUrl.Port);
 
                 builder.Path = VirtualPathUtility.ToAbsolute(path);

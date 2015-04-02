@@ -7,7 +7,7 @@ namespace Narvalo.Web
     using System.Web.UI;
 
     /// <summary>
-    /// Fournit une classe abstraite représentant une page d'erreur.
+    /// Represents an ASP.NET error page.
     /// </summary>
     public abstract class ErrorPageBase : Page
     {
@@ -26,7 +26,7 @@ namespace Narvalo.Web
         protected abstract HttpStatusCode StatusCode { get; }
 
         /// <summary>
-        /// Méthode exécutée lorsque la page est chargée dans l'objet <see cref="System.Web.UI.Page"/>.
+        /// Méthode exécutée lorsque la page est chargée dans l'objet <see cref="Page"/>.
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {

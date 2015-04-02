@@ -110,6 +110,8 @@ namespace Narvalo.Web.Html
 
             tag.MergeAttributes(attributes, true);
 
+            Contract.Assume(tag.Attributes != null);
+
             if (tag.Attributes.ContainsKey("alt") && !tag.Attributes.ContainsKey("title"))
             {
                 tag.MergeAttribute("title", (tag.Attributes["alt"] ?? String.Empty).ToString());

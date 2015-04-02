@@ -35,6 +35,7 @@ namespace Narvalo.Web.UI.Assets
     {
         public override Uri GetFont(string relativePath)
         {
+            Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -42,6 +43,7 @@ namespace Narvalo.Web.UI.Assets
 
         public override Uri GetImage(string relativePath)
         {
+            Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -49,6 +51,7 @@ namespace Narvalo.Web.UI.Assets
 
         public override Uri GetScript(string relativePath)
         {
+            Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -56,6 +59,7 @@ namespace Narvalo.Web.UI.Assets
 
         public override Uri GetStyle(string relativePath)
         {
+            Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);

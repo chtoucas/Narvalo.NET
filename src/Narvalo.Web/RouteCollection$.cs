@@ -3,6 +3,7 @@
 namespace Narvalo.Web
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
@@ -38,6 +39,8 @@ namespace Narvalo.Web
 
                         string controllerName = t.Name;
                         string actionName = m.Name;
+
+                        Contract.Assume(controllerName.Length >= 10);
 
                         // Le nom du controleur Mvc finit toujours en "Controller".
                         controllerName = controllerName.Substring(0, controllerName.Length - 10);
