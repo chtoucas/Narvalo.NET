@@ -10,7 +10,7 @@ namespace Narvalo.Web
 
     using Narvalo.Web.Properties;
 
-    public abstract class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
+    public abstract partial class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()
     {
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);
@@ -23,10 +23,21 @@ namespace Narvalo.Web
             binder.Bind(context.Request)
                 .Invoke(
                     action: _ => ProcessRequestCore(context, _),
-                    caseNone: () => OnBindingFailure(context, binder));
+                    caseNone: () => ProcessBindingFailure_(context, binder));
         }
 
-        protected void OnBindingFailure(HttpContext context, TBinder binder)
+        protected virtual void OnBindingFailure(HttpContext context, HttpQueryBinderException exception)
+        {
+            Require.NotNull(context, "context");
+            Require.NotNull(exception, "exception");
+
+            var response = context.Response;
+
+            response.SetStatusCode(HttpStatusCode.BadRequest);
+            response.Write(exception.Message);
+        }
+
+        private void ProcessBindingFailure_(HttpContext context, TBinder binder)
         {
             Contract.Requires(context != null);
 
@@ -38,30 +49,37 @@ namespace Narvalo.Web
             if (errorsCount > 1)
             {
                 exception = new HttpQueryBinderException(
-                    Strings_Web.HttpHandlerBase_BindingFailure, 
+                    Strings_Web.HttpHandlerBase_BindingFailure,
                     new AggregateException(errors));
             }
             else if (errorsCount == 1)
             {
-                exception = errors.First();
+                exception = errors.First().AssumeNotNull();
             }
             else
             {
                 exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_UnknownBindingFailure);
             }
 
-            OnBindingFailureCore(context, exception);
-        }
-
-        protected virtual void OnBindingFailureCore(HttpContext context, HttpQueryBinderException exception)
-        {
-            Require.NotNull(context, "context");
-            Require.NotNull(exception, "exception");
-
-            var response = context.Response;
-
-            response.SetStatusCode(HttpStatusCode.BadRequest);
-            response.Write(exception.Message);
+            OnBindingFailure(context, exception);
         }
     }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+    [ContractClass(typeof(HttpHandlerBaseContract<,>))]
+    public abstract partial class HttpHandlerBase<TQuery, TBinder> { }
+
+    [ContractClassFor(typeof(HttpHandlerBase<,>))]
+    internal abstract class HttpHandlerBaseContract<TQuery, TBinder> : HttpHandlerBase<TQuery, TBinder>
+        where TBinder : IHttpQueryBinder<TQuery>, new()
+    {
+        protected override void ProcessRequestCore(HttpContext context, TQuery query)
+        {
+            Contract.Requires(context != null);
+            Contract.Requires(query != null);
+        }
+    }
+
+#endif
 }

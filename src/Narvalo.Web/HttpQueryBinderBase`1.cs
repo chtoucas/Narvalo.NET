@@ -11,9 +11,9 @@ namespace Narvalo.Web
 
     using Narvalo.Fx;
 
-    public abstract class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
+    public abstract partial class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
     {
-        private readonly IList<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
+        private readonly List<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
 
         protected HttpQueryBinderBase() { }
 
@@ -37,7 +37,7 @@ namespace Narvalo.Web
 
         protected abstract Maybe<TQuery> BindCore(HttpRequest request);
 
-        protected virtual bool Validate(TQuery query)
+        protected bool Validate(TQuery query)
         {
             return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
                     from attr in prop.Attributes.OfType<ValidationAttribute>()
@@ -60,4 +60,23 @@ namespace Narvalo.Web
 
 #endif
     }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+    [ContractClass(typeof(HttpQueryBinderBaseContract<>))]
+    public abstract partial class HttpQueryBinderBase<TQuery> { }
+
+    [ContractClassFor(typeof(HttpQueryBinderBase<>))]
+    internal abstract class HttpQueryBinderBaseContract<TQuery> : HttpQueryBinderBase<TQuery>
+    {
+        protected override Maybe<TQuery> BindCore(HttpRequest request)
+        {
+            Contract.Requires(request != null);
+            Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
+
+            return default(Maybe<TQuery>);
+        }
+    }
+
+#endif
 }
