@@ -47,11 +47,11 @@ N: Narvalo.Fx.Extensions
 N: Narvalo.Fx.Extensions.Internal
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
-# Justification = [Intentionally] Portable Class Libraries do not support the standard serialization mechanism.
+# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
 A: Narvalo.Core
 
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
-# Justification = [Intentionally] Portable Class Libraries do not support the standard serialization mechanism.
+# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
 A: Narvalo.Core
 
 # Narvalo.Common assembly

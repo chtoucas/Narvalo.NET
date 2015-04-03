@@ -67,8 +67,7 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            // This is guaranteed by base.Initialize().
-            Contract.Assume(config != null);
+            InitializeCustomInternal(config);
 
             var fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
             var imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);

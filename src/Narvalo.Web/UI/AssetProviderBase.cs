@@ -5,6 +5,7 @@ namespace Narvalo.Web.UI
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Web.Properties;
@@ -77,7 +78,7 @@ namespace Narvalo.Web.UI
         /// <param name="name">The friendly name of the provider.</param>
         /// <param name="config">A collection of the name/value pairs representing 
         /// the provider-specific attributes specified in the configuration for this provider.</param>
-        public override void Initialize(string name, NameValueCollection config)
+        public override sealed void Initialize(string name, NameValueCollection config)
         {
             if (String.IsNullOrWhiteSpace(name))
             {
@@ -96,11 +97,6 @@ namespace Narvalo.Web.UI
 
             base.Initialize(name, config);
 
-            // This is ensured by base.Initialize().
-            Contract.Assume(Name != null);
-
-            Contract.Assert(config != null);
-
             InitializeCustom(config);
 
             // Sanity checks.
@@ -113,11 +109,20 @@ namespace Narvalo.Web.UI
                         Format.Resource(Strings_Web.AssetProviderBase_UnknownConfigurationKey_Format, key));
                 }
             }
+
+            // REVIEW: Name is initialized by base.Initialize() but could be overriden in a derived class.
+            Contract.Assume(Name != null);
         }
 
         protected virtual void InitializeCustom(NameValueCollection config)
         {
             // Intentionally left blank.
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config")]
+        internal static void InitializeCustomInternal([ValidatedNotNull]NameValueCollection config)
+        {
+            Check.NotNull(config, "The base class 'AssetProviderBase' guarantees that 'config' is never null.");
         }
     }
 }

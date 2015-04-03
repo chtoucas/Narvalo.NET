@@ -4,9 +4,8 @@ namespace Narvalo.Web.Semantic
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
-    public sealed class OpenGraphMetadata : IOpenGraphMetadata
+    public sealed partial class OpenGraphMetadata : IOpenGraphMetadata
     {
         private readonly IList<OpenGraphLocale> _alternativeLocales = new List<OpenGraphLocale>();
         private readonly OpenGraphLocale _locale;
@@ -83,13 +82,22 @@ namespace Narvalo.Web.Semantic
         {
             Require.NotNull(locales, "locales");
 
-            foreach (var locale in locales) {
+            foreach (var locale in locales)
+            {
                 _alternativeLocales.Add(locale);
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Web.Semantic
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class OpenGraphMetadata : IOpenGraphMetadata
+    {
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
@@ -98,7 +106,7 @@ namespace Narvalo.Web.Semantic
             Contract.Invariant(_ontology != null);
             Contract.Invariant(_ontology.Culture != null);
         }
-
-#endif
     }
 }
+
+#endif

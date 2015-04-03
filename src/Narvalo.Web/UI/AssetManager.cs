@@ -130,8 +130,8 @@ namespace Narvalo.Web.UI
             {
                 throw new ConfigurationErrorsException(
                     Strings_Web.AssetManager_DefaultProviderNotConfigured,
-                    section.ElementInformation.Properties["providers"].Source,
-                    section.ElementInformation.Properties["providers"].LineNumber);
+                    section.ElementInformation.Source,
+                    0);
             }
 
             s_Provider = s_Providers[section.DefaultProvider];

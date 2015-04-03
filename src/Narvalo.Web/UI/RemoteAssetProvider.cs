@@ -48,8 +48,7 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            // This is guaranteed by base.Initialize().
-            Contract.Assume(config != null);
+            InitializeCustomInternal(config);
 
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
                 .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
