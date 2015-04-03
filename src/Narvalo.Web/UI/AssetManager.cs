@@ -11,7 +11,6 @@ namespace Narvalo.Web.UI
     using Narvalo.Web.Configuration;
     using Narvalo.Web.Properties;
 
-    // FIXME: The concurrency double check is broken. Add volatile to the Initialized... fields?
     public static class AssetManager
     {
         private static readonly object s_Lock = new Object();
@@ -19,8 +18,7 @@ namespace Narvalo.Web.UI
         private static AssetProviderBase s_Provider;
         private static AssetProviderCollection s_Providers;
 
-        private static bool s_InitializedDefaultProvider = false;
-        private static bool s_InitializedProviders = false;
+        private static volatile bool s_Initialized = false;
 
         public static AssetProviderBase Provider
         {
@@ -100,32 +98,24 @@ namespace Narvalo.Web.UI
 
         private static void EnsureInitialized_()
         {
-            if (s_InitializedProviders && s_InitializedDefaultProvider)
+            if (!s_Initialized)
             {
-                return;
-            }
-
-            lock (s_Lock)
-            {
-                if (s_InitializedProviders && s_InitializedDefaultProvider)
+                lock (s_Lock)
                 {
-                    return;
+                    if (!s_Initialized)
+                    {
+                        Initialize_();
+                        s_Initialized = true;
+                    }
                 }
-
-                var section = NarvaloWebConfigurationManager.AssetSection;
-
-                InitProviders_(section);
-                InitDefaultProvider_(section);
             }
         }
 
-        private static void InitProviders_(AssetSection section)
+        private static void Initialize_()
         {
-            if (s_InitializedProviders)
-            {
-                return;
-            }
+            var section = NarvaloWebConfigurationManager.AssetSection;
 
+            // Initialize providers.
             var tmpProviders = new AssetProviderCollection();
             if (section.Providers != null)
             {
@@ -134,16 +124,8 @@ namespace Narvalo.Web.UI
             }
 
             s_Providers = tmpProviders;
-            s_InitializedProviders = true;
-        }
 
-        private static void InitDefaultProvider_(AssetSection section)
-        {
-            if (s_InitializedDefaultProvider)
-            {
-                return;
-            }
-
+            // Initialize default provider.
             if (section.DefaultProvider == null)
             {
                 throw new ConfigurationErrorsException(
@@ -158,8 +140,6 @@ namespace Narvalo.Web.UI
             {
                 throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotFound);
             }
-
-            s_InitializedDefaultProvider = true;
         }
     }
 }
