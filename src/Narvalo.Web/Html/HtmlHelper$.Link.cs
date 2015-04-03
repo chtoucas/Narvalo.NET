@@ -14,6 +14,14 @@ namespace Narvalo.Web.Html
 
     public static class LinkExtensions
     {
+        public static IHtmlString Link(this HtmlHelper @this, Uri linkUri)
+        {
+            Contract.Requires(linkUri != null);
+            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+
+            return Link(@this, linkUri, null, null, (IDictionary<string, object>)null);
+        }
+
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType)
         {
             Contract.Requires(linkUri != null);

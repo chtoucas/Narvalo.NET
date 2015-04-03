@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-using System;
-using System.Collections;
-using System.IO;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Moq;
-
 namespace Microsoft.Web.UnitTestUtil
 {
+    using System;
+    using System.Collections;
+    using System.IO;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using Moq;
+
     public static class MvcHelper
     {
         public const string AppPathModifier = "/$(SESSION)";
@@ -116,6 +116,7 @@ namespace Microsoft.Web.UnitTestUtil
                 mockHttpContext.Setup(o => o.Request.ApplicationPath).Returns(appPath);
                 mockHttpContext.Setup(o => o.Request.RawUrl).Returns(appPath);
             }
+
             if (!String.IsNullOrEmpty(requestPath))
             {
                 mockHttpContext.Setup(o => o.Request.AppRelativeCurrentExecutionFilePath).Returns(requestPath);
@@ -131,6 +132,7 @@ namespace Microsoft.Web.UnitTestUtil
             {
                 uri = new Uri(protocol + "://localhost");
             }
+
             mockHttpContext.Setup(o => o.Request.Url).Returns(uri);
 
             mockHttpContext.Setup(o => o.Request.PathInfo).Returns(String.Empty);

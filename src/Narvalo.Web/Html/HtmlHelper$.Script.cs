@@ -69,7 +69,7 @@ namespace Narvalo.Web.Html
                 tag.MergeAttribute("type", scriptType);
             }
 
-            tag.MergeAttributes(attributes, true);
+            tag.MergeAttributes(attributes, replaceExisting: true);
 
             return tag.ToHtmlString();
         }

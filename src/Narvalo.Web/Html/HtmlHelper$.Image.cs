@@ -63,7 +63,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, alt, new RouteValueDictionary(attributes));
+            return ImageHelper_(@this, imageUri, alt, attributes);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",

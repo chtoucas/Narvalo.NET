@@ -117,6 +117,7 @@
     <Compile Include="StringManipFacts.cs" />
     <Compile Include="Web\Html\HtmlHelperFacts.cs" />
     <Compile Include="Web\UI\AssetProviderBaseFacts.cs" />
+    <Compile Include="Web\UriFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
