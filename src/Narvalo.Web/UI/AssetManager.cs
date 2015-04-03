@@ -13,12 +13,12 @@ namespace Narvalo.Web.UI
 
     public static class AssetManager
     {
+        // We use a volatile field to prevent any re-ordering inside EnsureIntialized_().
+        private static volatile bool s_Initialized = false;
         private static readonly object s_Lock = new Object();
 
         private static AssetProviderBase s_Provider;
         private static AssetProviderCollection s_Providers;
-
-        private static volatile bool s_Initialized = false;
 
         public static AssetProviderBase Provider
         {
