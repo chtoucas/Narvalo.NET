@@ -144,7 +144,6 @@ namespace Narvalo.Web.UI
         public override Uri GetFont(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -153,7 +152,6 @@ namespace Narvalo.Web.UI
         public override Uri GetImage(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -162,7 +160,6 @@ namespace Narvalo.Web.UI
         public override Uri GetScript(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);
@@ -171,7 +168,6 @@ namespace Narvalo.Web.UI
         public override Uri GetStyle(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             return default(Uri);

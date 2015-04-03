@@ -44,13 +44,13 @@ namespace Narvalo.Web.UI
             Contract.Requires(basePath != null);
             Contract.Requires(basePath.Length != 0);
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.
             // REVIEW: Cf. http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
-            var uriString = VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath));
+            var uriString = VirtualPathUtility.ToAbsolute(
+                relativePath.Length == 0 ? basePath : VirtualPathUtility.Combine(basePath, relativePath));
 
             return new Uri(uriString, UriKind.Relative);
         }

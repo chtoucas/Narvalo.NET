@@ -33,7 +33,6 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_fontsPath != null);
-            Contract.Assume(_fontsPath.Length != 0);
 
             return MakeUri_(_fontsPath, relativePath);
         }
@@ -42,7 +41,6 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_imagesPath != null);
-            Contract.Assume(_imagesPath.Length != 0);
 
             return MakeUri_(_imagesPath, relativePath);
         }
@@ -51,7 +49,6 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_scriptsPath != null);
-            Contract.Assume(_scriptsPath.Length != 0);
 
             return MakeUri_(_scriptsPath, relativePath);
         }
@@ -60,7 +57,6 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_stylesPath != null);
-            Contract.Assume(_stylesPath.Length != 0);
 
             return MakeUri_(_stylesPath, relativePath);
         }
@@ -95,12 +91,12 @@ namespace Narvalo.Web.UI
             Contract.Requires(basePath != null);
             Contract.Requires(basePath.Length != 0);
             Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.
-            var uriString = VirtualPathUtility.ToAbsolute(VirtualPathUtility.Combine(basePath, relativePath));
+            var uriString = VirtualPathUtility.ToAbsolute(
+                relativePath.Length == 0 ? basePath : VirtualPathUtility.Combine(basePath, relativePath));
 
             return new Uri(uriString, UriKind.Relative);
         }

@@ -59,7 +59,7 @@ namespace Narvalo.Web.UI
 
         private Uri MakeUri_(string basePath, string relativePath)
         {
-            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Require.NotNull(relativePath, "relativePath");
             Contract.Requires(basePath != null);
             Contract.Requires(basePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
