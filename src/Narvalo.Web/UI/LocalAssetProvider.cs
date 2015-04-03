@@ -70,20 +70,25 @@ namespace Narvalo.Web.UI
             // This is guaranteed by base.Initialize().
             Contract.Assume(config != null);
 
-            var fontsPath = config.MayGetSingle(FONTS_PATH_KEY).NoneIfWhiteSpace();
-            var imagesPath = config.MayGetSingle(IMAGES_PATH_KEY).NoneIfWhiteSpace();
-            var scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY).NoneIfWhiteSpace();
-            var stylesPath = config.MayGetSingle(STYLES_PATH_KEY).NoneIfWhiteSpace();
+            var fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
+            var imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
+            var scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);
+            var stylesPath = config.MayGetSingle(STYLES_PATH_KEY);
 
-            _fontsPath = fontsPath.ValueOrElse("~/assets/fonts/");
-            _imagesPath = imagesPath.ValueOrElse("~/assets/img/");
-            _scriptsPath = scriptsPath.ValueOrElse("~/assets/js/");
-            _stylesPath = stylesPath.ValueOrElse("~/assets/css/");
+            _fontsPath = fontsPath.Where(NotWhiteSpace_).ValueOrElse("~/assets/fonts/");
+            _imagesPath = imagesPath.Where(NotWhiteSpace_).ValueOrElse("~/assets/img/");
+            _scriptsPath = scriptsPath.Where(NotWhiteSpace_).ValueOrElse("~/assets/js/");
+            _stylesPath = stylesPath.Where(NotWhiteSpace_).ValueOrElse("~/assets/css/");
 
             if (fontsPath.IsSome) { config.Remove(FONTS_PATH_KEY); }
             if (imagesPath.IsSome) { config.Remove(IMAGES_PATH_KEY); }
             if (scriptsPath.IsSome) { config.Remove(SCRIPTS_PATH_KEY); }
             if (stylesPath.IsSome) { config.Remove(STYLES_PATH_KEY); }
+        }
+
+        private static bool NotWhiteSpace_(string value)
+        {
+            return !String.IsNullOrWhiteSpace(value);
         }
 
         private static Uri MakeUri_(string basePath, string relativePath)

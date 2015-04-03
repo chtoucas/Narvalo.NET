@@ -21,52 +21,6 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Provides extension methods for <see cref="Maybe{T}"/> where <c>T</c> is a string.
-    /// </content>
-    public static partial class Maybe
-    {
-        public static Maybe<string> NoneIfEmpty(this Maybe<string> @this)
-        {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
-
-            // This of course could be done with Select().
-            if (!@this.IsSome)
-            {
-                return @this;
-            }
-            else if (@this.Value.Length == 0)
-            {
-                return Maybe<string>.None;
-            }
-            else
-            {
-                return @this;
-            }
-        }
-
-        public static Maybe<string> NoneIfWhiteSpace(this Maybe<string> @this)
-        {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
-
-            // This of course could be done with Select().
-            if (!@this.IsSome)
-            {
-                return @this;
-            }
-            else if (String.IsNullOrWhiteSpace(@this.Value))
-            {
-                return Maybe<string>.None;
-            }
-            else
-            {
-                return @this;
-            }
-        }
-    }
-
-    /// <content>
     /// Provides extension methods for <see cref="Maybe{T}"/> where <c>T</c> is a struct.
     /// </content>
     public static partial class Maybe
