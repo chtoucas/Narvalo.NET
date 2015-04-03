@@ -1,14 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Web.Html
+namespace Narvalo.Web.UI
 {
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
-
-    using Narvalo.Web.UI.Assets;
 
     public sealed class AssetHelper
     {

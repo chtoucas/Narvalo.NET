@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Web.Html.Internal
+namespace Narvalo.Web.Internal
 {
     using System.Diagnostics.Contracts;
     using System.Web;

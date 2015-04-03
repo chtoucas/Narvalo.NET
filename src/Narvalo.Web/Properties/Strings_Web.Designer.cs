@@ -79,11 +79,38 @@ namespace Narvalo.Web.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provider for static Web assets..
+        /// </summary>
+        internal static string AssetProviderBase_Description {
+            get {
+                return ResourceManager.GetString("AssetProviderBase_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an unknown configuration key for RemoteAssetProvider: {0}..
+        /// </summary>
+        internal static string AssetProviderBase_UnknownConfigurationKey_Format {
+            get {
+                return ResourceManager.GetString("AssetProviderBase_UnknownConfigurationKey_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attempt to add a provider of invalid type. Most certainly you specified a provider which does not extend AssetProviderBase. See Narvalo.Web.Configuration for more information on how to configure properly your application..
         /// </summary>
         internal static string AssetProviderCollection_InvalidProvider {
             get {
                 return ResourceManager.GetString("AssetProviderCollection_InvalidProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default asset provider for ASP.NET MVC..
+        /// </summary>
+        internal static string DefaultAssetProvider_Description {
+            get {
+                return ResourceManager.GetString("DefaultAssetProvider_Description", resourceCulture);
             }
         }
         
@@ -111,6 +138,33 @@ namespace Narvalo.Web.Properties {
         internal static string HttpHandlerBase_UnknownBindingFailure {
             get {
                 return ResourceManager.GetString("HttpHandlerBase_UnknownBindingFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider for local static Web assets..
+        /// </summary>
+        internal static string LocalAssetProvider_Description {
+            get {
+                return ResourceManager.GetString("LocalAssetProvider_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider for remote static Web assets..
+        /// </summary>
+        internal static string RemoteAssetProvider_Description {
+            get {
+                return ResourceManager.GetString("RemoteAssetProvider_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing or invalid configuration setting for &apos;baseUri&apos;. Its value must be a valid URL string..
+        /// </summary>
+        internal static string RemoteAssetProvider_MissingOrInvalidBaseUri {
+            get {
+                return ResourceManager.GetString("RemoteAssetProvider_MissingOrInvalidBaseUri", resourceCulture);
             }
         }
         

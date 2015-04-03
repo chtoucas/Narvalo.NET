@@ -70,6 +70,8 @@ namespace Narvalo.Web
                     .Request
                     .Url.AssumeNotNull();
 
+                Contract.Assume(requestUrl.Port >= -1);
+
                 var builder = new UriBuilder(requestUrl.Scheme, requestUrl.Host, requestUrl.Port);
 
                 builder.Path = VirtualPathUtility.ToAbsolute(path);

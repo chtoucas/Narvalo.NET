@@ -123,8 +123,17 @@
   <data name="AssetManager_DefaultProviderNotFound" xml:space="preserve">
     <value>Le fournisseur de type AssetProvider à utiliser par défaut n'a pas été trouvé. Il est plus que probable que vous ayez mal configuré votre application. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>
   </data>
+  <data name="AssetProviderBase_Description" xml:space="preserve">
+    <value>Fournisseur de contenu Web statique.</value>
+  </data>
+  <data name="AssetProviderBase_UnknownConfigurationKey_Format" xml:space="preserve">
+    <value>Une clé de configuration inconnue pour RemoteAssetProvider a été trouvée : {0}.</value>
+  </data>
   <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
     <value>Tentative de rajouter un fournisseur de type invalide. Il est plus que probable que vous ayez spécifié un fournisseur qui n'étende pas AssetProviderBase. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>
+  </data>
+  <data name="DefaultAssetProvider_Description" xml:space="preserve">
+    <value>Fournisseur de contenu Web compatible avec la structure de projet créée par défaut pour une projet ASP.NET MVC.</value>
   </data>
   <data name="HttpHandlerBase_BindingFailure" xml:space="preserve">
     <value>Une erreur est intervenue lors de la tentative de liaison entre une requête HTTP et un objet de requête fortement typé. Veuillez consulter la liste des exceptions encapsulées si vous souhaitez de plus amples informations concernant cette erreur.</value>
@@ -134,6 +143,15 @@
   </data>
   <data name="HttpHandlerBase_UnknownBindingFailure" xml:space="preserve">
     <value>Une erreur inconnue est intervenue lors de la tentative de liaison entre une requête HTTP et un objet de requête fortement typé.</value>
+  </data>
+  <data name="LocalAssetProvider_Description" xml:space="preserve">
+    <value>Fournisseur de contenu Web statique local.</value>
+  </data>
+  <data name="RemoteAssetProvider_Description" xml:space="preserve">
+    <value>Fournisseur de contenu Web statique distant.</value>
+  </data>
+  <data name="RemoteAssetProvider_MissingOrInvalidBaseUri" xml:space="preserve">
+    <value>Pour utiliser ce fournisseur de contenu Web, vous devez préciser la valeur de 'baseUri' dans votre configuration en utilisant un URL valide.</value>
   </data>
   <data name="UriExtensions_ProtocolRelativeUnsupportedScheme_Format" xml:space="preserve">
     <value>Le protocole '{0}' n'est pas éligible à la suppression du protocole de sa représentation en chaîne de caractères.</value>

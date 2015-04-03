@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Web.UI.Assets
+namespace Narvalo.Web.UI
 {
     using System;
     using System.Configuration;
@@ -11,7 +11,7 @@ namespace Narvalo.Web.UI.Assets
     using Narvalo.Web.Configuration;
     using Narvalo.Web.Properties;
 
-    // FIXME: The concurrency doulbe check is broken. Add volatile to the Initialized... fields?
+    // FIXME: The concurrency double check is broken. Add volatile to the Initialized... fields?
     public static class AssetManager
     {
         private static readonly object s_Lock = new Object();

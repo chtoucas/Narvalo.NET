@@ -1,53 +1,31 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Web.UI.Assets
+namespace Narvalo.Web.UI
 {
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Collections;
+    using Narvalo.Web.Properties;
 
     public sealed class RemoteAssetProvider : AssetProviderBase
     {
+        private const string BASE_URI_KEY = "baseUri";
+
         private Uri _baseUri;
 
-        public RemoteAssetProvider() { }
-
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "baseUri",
-            Justification = "[Intentionally] The 'baseUri' literal is a string key in the configuration file.")]
-        public override void Initialize(string name, NameValueCollection config)
+        public RemoteAssetProvider()
         {
-            Require.NotNull(config, "config");
-
-            if (String.IsNullOrEmpty(name))
-            {
-                name = "RemoteAssetProvider";
-            }
-
-            if (String.IsNullOrEmpty(config["description"]))
-            {
-                config.Remove("description");
-                config.Add("description", "Narvalo remote asset provider.");
-            }
-
-            base.Initialize(name, config);
-
-            // Initialisation du champs "baseUri".
-            _baseUri = config.MayGetSingle("baseUri")
-                .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
-                .ValueOrThrow(() => new ProviderException("Missing or invalid config 'baseUri'."));
-            config.Remove("baseUri");
-
-            Contract.Assume(_baseUri != null);
+            DefaultName = "RemoteAssetProvider";
+            DefaultDescription = Strings_Web.RemoteAssetProvider_Description;
         }
 
         public override Uri GetFont(string relativePath)
         {
             // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-            return MakeUri_("font/", relativePath);
+            return MakeUri_("fonts/", relativePath);
         }
 
         public override Uri GetImage(string relativePath)
@@ -68,8 +46,30 @@ namespace Narvalo.Web.UI.Assets
             return MakeUri_("css/", relativePath);
         }
 
+        protected override void InitializeCustom(NameValueCollection config)
+        {
+            // This is guaranteed by base.Initialize().
+            Contract.Assume(config != null);
+
+            _baseUri = config.MayGetSingle(BASE_URI_KEY)
+                .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
+                .ValueOrThrow(() => new ProviderException(Strings_Web.RemoteAssetProvider_MissingOrInvalidBaseUri));
+
+            config.Remove(BASE_URI_KEY);
+        }
+
         private Uri MakeUri_(string basePath, string relativePath)
         {
+            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Requires(basePath != null);
+            Contract.Requires(basePath.Length != 0);
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
+            // Here we can be sure that _baseUri is not null; otherwise an exception 
+            // would have been thrown in Initialize().
+            Contract.Assume(_baseUri != null);
+
+            // FIXME: Use Path.Combine?
             return new Uri(_baseUri, basePath + relativePath);
         }
     }

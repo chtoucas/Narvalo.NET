@@ -123,8 +123,17 @@
   <data name="AssetManager_DefaultProviderNotFound" xml:space="preserve">
     <value>The specified default AssetProvider was not found. Most certainly you misconfigured your application. See Narvalo.Web.Configuration for more information on how to configure properly your application.</value>
   </data>
+  <data name="AssetProviderBase_Description" xml:space="preserve">
+    <value>Provider for static Web assets.</value>
+  </data>
+  <data name="AssetProviderBase_UnknownConfigurationKey_Format" xml:space="preserve">
+    <value>Found an unknown configuration key for RemoteAssetProvider: {0}.</value>
+  </data>
   <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
     <value>Attempt to add a provider of invalid type. Most certainly you specified a provider which does not extend AssetProviderBase. See Narvalo.Web.Configuration for more information on how to configure properly your application.</value>
+  </data>
+  <data name="DefaultAssetProvider_Description" xml:space="preserve">
+    <value>Default asset provider for ASP.NET MVC.</value>
   </data>
   <data name="HttpHandlerBase_BindingFailure" xml:space="preserve">
     <value>An error occurred while trying to bind the HTTP request to a query object. Please see the enclosed exceptions for more details on the error.</value>
@@ -134,6 +143,15 @@
   </data>
   <data name="HttpHandlerBase_UnknownBindingFailure" xml:space="preserve">
     <value>An unknown error while trying to bind the HTTP request to a query object.</value>
+  </data>
+  <data name="LocalAssetProvider_Description" xml:space="preserve">
+    <value>Provider for local static Web assets.</value>
+  </data>
+  <data name="RemoteAssetProvider_Description" xml:space="preserve">
+    <value>Provider for remote static Web assets.</value>
+  </data>
+  <data name="RemoteAssetProvider_MissingOrInvalidBaseUri" xml:space="preserve">
+    <value>Missing or invalid configuration setting for 'baseUri'. Its value must be a valid URL string.</value>
   </data>
   <data name="UriExtensions_ProtocolRelativeUnsupportedScheme_Format" xml:space="preserve">
     <value>The URI scheme '{0}' does not support protocol-relative URLs.</value>

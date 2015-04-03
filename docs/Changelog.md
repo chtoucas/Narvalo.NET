@@ -10,11 +10,13 @@ _Better test coverage for Narvalo.Core_
 - At start of `Require.InRange()`, we did not validate the range before using it.
 
 #### Breaking changes
+- Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.
 - `HttpHandlerBase.AcceptedVerbs` is now public.
   `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
    no longer virtual.
+- Refactored the asset providers in attempt to make them more configurable.
 
 ### Enhancements
 - Added localized resources for the french language.

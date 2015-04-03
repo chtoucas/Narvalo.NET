@@ -3,6 +3,7 @@
 namespace Narvalo.Web.Optimization
 {
     using System.Collections;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Web.Configuration;
     using Narvalo.Web.UI;
@@ -62,6 +63,8 @@ namespace Narvalo.Web.Optimization
             if (_enabled)
             {
                 _buster = WhiteSpaceBusterProvider.Current.PageBuster;
+
+                Contract.Assert(_buster != null);
             }
 
             base.PreprocessDirective(directiveName, attributes);
@@ -69,6 +72,10 @@ namespace Narvalo.Web.Optimization
 
         protected override string TransformLiteral(string literal)
         {
+            // TransformLiteral() is called from ParseComplete() which happens 
+            // after PreprocessDirective() where _buster is initialized.
+            Contract.Assume(_buster != null);
+
             return _buster.Bust(literal);
         }
     }

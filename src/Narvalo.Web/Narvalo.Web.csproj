@@ -48,13 +48,13 @@
     </CodeContractsExtraAnalysisOptions>
     <CodeContractsSQLServerOption />
     <CodeContractsBaseLineFile />
-    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
     <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsBeingOptimisticOnExternal>False</CodeContractsBeingOptimisticOnExternal>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -97,6 +97,9 @@
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Html\HtmlHelper%24.Script.cs" />
+    <Compile Include="Html\HtmlHelper%24.Link.cs" />
+    <Compile Include="Html\HtmlHelper%24.Image.cs" />
     <Compile Include="HttpQueryBinderBase`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
@@ -104,7 +107,6 @@
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Configuration\WebSectionManager.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\AssetHelper.cs" />
     <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="HttpHandlerBase.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Html\Internal\TagBuilder%24.cs" />
+    <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\UnsafeWhiteSpaceBuster.cs" />
@@ -148,12 +150,12 @@
     <Compile Include="Semantic\Relationships.cs" />
     <Compile Include="Semantic\SchemaOrgType.cs" />
     <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
-    <Compile Include="UI\Assets\AssetManager.cs" />
-    <Compile Include="UI\Assets\AssetProviderBase.cs" />
-    <Compile Include="UI\Assets\AssetProviderCollection.cs" />
-    <Compile Include="UI\Assets\DefaultAssetProvider.cs" />
-    <Compile Include="UI\Assets\LocalAssetProvider.cs" />
-    <Compile Include="UI\Assets\RemoteAssetProvider.cs" />
+    <Compile Include="UI\AssetManager.cs" />
+    <Compile Include="UI\AssetProviderBase.cs" />
+    <Compile Include="UI\AssetProviderCollection.cs" />
+    <Compile Include="UI\DefaultAssetProvider.cs" />
+    <Compile Include="UI\LocalAssetProvider.cs" />
+    <Compile Include="UI\RemoteAssetProvider.cs" />
     <Compile Include="UI\ControlBuilder%24.cs" />
     <Compile Include="UI\LiteralPageParserFilterBase.cs" />
     <Compile Include="UI\PageParserFilterConstants.cs" />

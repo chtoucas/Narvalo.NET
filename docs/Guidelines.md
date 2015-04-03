@@ -28,6 +28,7 @@ We also enforce the following rules:
 - Consider using regions or partial classes to organize code.
 - Consider separating System imports from the others.
 - Source lines should not exceed 120 characters.
+- Consider adding the "Base" suffix to all abstract classes.
 
 ### Tasks
 
