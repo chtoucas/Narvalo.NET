@@ -18,12 +18,14 @@
 namespace Narvalo.Web.UI
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Web.UI;
 
     /// <summary>
     /// Provides extension methods for <see cref="ControlBuilder"/>.
     /// </summary>
+    [ContractVerification(false)]
     public static class ControlBuilderExtensions
     {
         private const BindingFlags BINDING_ATTRIBUTE

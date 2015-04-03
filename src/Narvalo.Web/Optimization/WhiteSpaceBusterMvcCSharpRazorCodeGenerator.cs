@@ -6,11 +6,13 @@
 namespace Narvalo.Web.Optimization
 {
     using System.CodeDom;
+    using System.Diagnostics.Contracts;
     using System.Web.Mvc.Razor;
     using System.Web.Razor;
     using System.Web.Razor.Generator;
     using System.Web.Razor.Parser.SyntaxTree;
 
+    [ContractVerification(false)]
     public sealed class WhiteSpaceBusterMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
     {
         private readonly RazorOptimizer _optimizer;

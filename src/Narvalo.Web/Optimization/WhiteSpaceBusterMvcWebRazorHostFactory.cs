@@ -2,6 +2,7 @@
 
 namespace Narvalo.Web.Optimization
 {
+    using System.Diagnostics.Contracts;
     using System.Web.Mvc;
     using System.Web.WebPages.Razor;
 
@@ -10,6 +11,7 @@ namespace Narvalo.Web.Optimization
     /// <remarks>
     /// Malheureusement, en utilisant cette classe, on perd l'intellisense.
     /// </remarks>
+    [ContractVerification(false)]
     public sealed class WhiteSpaceBusterMvcWebRazorHostFactory : MvcWebRazorHostFactory
     {
         /// <summary>

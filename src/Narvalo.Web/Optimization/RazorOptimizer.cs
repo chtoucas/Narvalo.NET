@@ -11,6 +11,7 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Text;
     using System.Web.Razor.Tokenizer.Symbols;
 
+    [ContractVerification(false)]
     public sealed class RazorOptimizer
     {
         private readonly IWhiteSpaceBuster _buster;

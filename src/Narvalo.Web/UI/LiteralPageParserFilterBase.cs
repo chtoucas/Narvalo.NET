@@ -8,6 +8,7 @@ namespace Narvalo.Web.UI
     using System.Diagnostics.Contracts;
     using System.Web.UI;
 
+    [ContractVerification(false)]
     public abstract class LiteralPageParserFilterBase : UnrestrictedPageParserFilter
     {
         protected LiteralPageParserFilterBase() { }

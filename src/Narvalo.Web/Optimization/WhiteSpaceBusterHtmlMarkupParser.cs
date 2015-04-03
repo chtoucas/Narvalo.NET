@@ -3,10 +3,12 @@
 namespace Narvalo.Web.Optimization
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Web.Razor.Parser;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
 
+    [ContractVerification(false)]
     public sealed class WhiteSpaceBusterHtmlMarkupParser : ParserBase
     {
         private readonly RazorOptimizer _optimizer;

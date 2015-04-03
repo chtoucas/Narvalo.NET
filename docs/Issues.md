@@ -15,6 +15,7 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- [ContractVerification(false)]
 - Comment Contract.Assume and AssumeNotNull
 - Find a better name for "Unsafe".
 - If the test project fails, the build does not.
