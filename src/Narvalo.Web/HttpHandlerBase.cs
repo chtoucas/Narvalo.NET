@@ -24,7 +24,7 @@ namespace Narvalo.Web
         protected HttpHandlerBase() { }
 
         /// <summary>
-        /// Gets a value indicating whether another request can use the <see cref="IHttpHandler"/> instance.
+        /// Gets or sets a value indicating whether another request can use the <see cref="IHttpHandler"/> instance.
         /// The default is <c>false</c>.
         /// </summary>
         /// <value><c>true</c> if the <see cref="IHttpHandler"/> instance is reusable; otherwise, <c>false</c>.</value>
@@ -37,7 +37,7 @@ namespace Narvalo.Web
         public abstract HttpVerbs AcceptedVerbs { get; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether IIS 7.0 custom errors are disabled.
+        /// Gets or sets a value indicating whether IIS 7.0 custom errors are disabled.
         /// The default is <c>true</c>.
         /// </summary>
         /// <value><c>true</c> to disable IIS custom errors; otherwise, <c>false</c>.</value>

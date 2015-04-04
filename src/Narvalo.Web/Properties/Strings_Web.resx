@@ -151,7 +151,7 @@
     <value>Provider for remote static Web assets.</value>
   </data>
   <data name="RemoteAssetProvider_MissingOrInvalidBaseUri" xml:space="preserve">
-    <value>Missing or invalid configuration setting for 'baseUri'. Its value must be a valid URL string.</value>
+    <value>Missing or invalid configuration setting for 'baseUri'. Its value must be a valid absolute URL string.</value>
   </data>
   <data name="UriExtensions_ProtocolRelativeUnsupportedScheme_Format" xml:space="preserve">
     <value>The URI scheme '{0}' does not support protocol-relative URLs.</value>

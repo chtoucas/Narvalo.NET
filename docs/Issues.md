@@ -15,7 +15,11 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
-- [ContractVerification(false)]
+- VirtualPath
+    http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
+    http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
+    http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
+- Use static readonly fields instead of const for some fields in Narvalo.Web.Semantic?
 - Comment Contract.Assume and AssumeNotNull
 - Find a better name for "Unsafe".
 - If the test project fails, the build does not.

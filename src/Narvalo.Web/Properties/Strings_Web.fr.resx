@@ -151,7 +151,7 @@
     <value>Fournisseur de contenu Web statique distant.</value>
   </data>
   <data name="RemoteAssetProvider_MissingOrInvalidBaseUri" xml:space="preserve">
-    <value>Pour utiliser ce fournisseur de contenu Web, vous devez préciser la valeur de 'baseUri' dans votre configuration en utilisant un URL valide.</value>
+    <value>Pour utiliser ce fournisseur de contenu Web, vous devez préciser la valeur de 'baseUri' dans votre configuration en utilisant un URL absolu valide.</value>
   </data>
   <data name="UriExtensions_ProtocolRelativeUnsupportedScheme_Format" xml:space="preserve">
     <value>Le protocole '{0}' n'est pas éligible à la suppression du protocole de sa représentation en chaîne de caractères.</value>

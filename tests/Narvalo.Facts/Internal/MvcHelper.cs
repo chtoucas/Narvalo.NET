@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
+// Borrowed from aspnetwebstack\test\System.Web.Mvc.Test\Util
 namespace Microsoft.Web.UnitTestUtil
 {
     using System;

@@ -160,7 +160,7 @@ namespace Narvalo.Web.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing or invalid configuration setting for &apos;baseUri&apos;. Its value must be a valid URL string..
+        ///   Looks up a localized string similar to Missing or invalid configuration setting for &apos;baseUri&apos;. Its value must be a valid absolute URL string..
         /// </summary>
         internal static string RemoteAssetProvider_MissingOrInvalidBaseUri {
             get {
