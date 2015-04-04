@@ -29,6 +29,10 @@ We also enforce the following rules:
 - Consider separating System imports from the others.
 - Source lines should not exceed 120 characters.
 - Consider adding the "Base" suffix to all abstract classes.
+- Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
+- Consider adding an "Internal" prefix to the names of internal properties, static fields and 
+  constants in a non-internal class.
+- Avoid named parameters.
 
 ### Tasks
 
@@ -109,6 +113,9 @@ except "Check redundant assume".
 -outputwarnmasks -show unreached
 ```
 
+Remember that you can mark a type/member with the attribute `[ContractVerification(false)]`.
+If this is expected to be permanent, justify it.
+
 Compilation Symbols
 -------------------
 
@@ -183,6 +190,7 @@ Documentation
 Non-standard tags:
 - `<copydoc cref=""/>`
 - `<content></content>` used for documenting partial classes.
+- `<internalonly/>` for internal members or types.
 
 ### Literate Programming
 
@@ -208,6 +216,7 @@ all static analysis.
 - Name {Member}_{ExpectedOutcome} a unit test for a member {Member}.
 - Name {Type}_{ExpectedOutcome} a unit test for the type {Type} not specific 
   to a member of the type.
+- When testing for exceptions use: `_Throws{ExpectedException}` or `_DoesNotThrow`.
 - After a bugfix, create a unit test, decorate it with the `Issue` attribute 
   and add a detailed summary of the bug.
 - Add a justification for all skipped tests.
@@ -269,6 +278,12 @@ Wrap white-box tests as follow:
 
 #endif
 ```
+
+Multi-Threading
+---------------
+
+Always remember that you are not an expert in multi-threading:
+**Always prefer high-level constructs to low-level primitives**.
 
 Performance
 -----------

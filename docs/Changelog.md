@@ -4,10 +4,11 @@ ChangeLog
 XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
-_Better test coverage for Narvalo.Core_
+_Better test coverage for Narvalo.Core & Narvalo.Web_
 
 #### Bugfixes
 - At start of `Require.InRange()`, we did not validate the range before using it.
+- Fixed uncorrect initialization of `AssetManager`.
 
 #### Breaking changes
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
@@ -16,7 +17,7 @@ _Better test coverage for Narvalo.Core_
 - `HttpHandlerBase.AcceptedVerbs` is now public.
   `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
    no longer virtual.
-- Refactored the asset providers in attempt to make them more configurable.
+- Refactored the asset providers in an attempt to make them more configurable.
 
 ### Enhancements
 - Added localized resources for the french language.
@@ -191,7 +192,7 @@ _New currency types_
 - Only define the `CODE_ANALYSIS` symbol if Code Analysis is requested.
 - Only display MSBuild warnings for local CA or SA
   overrides when CA or SA is actually requested.
-- Upgraded NSubsitute to v1.8.1.
+- Upgraded NSubstitute to v1.8.1.
 - Fully documented the PSake script file. It is now
   possible to specify the MSBuild verbosity level from the command-line.
   In Make.Foundations.proj, added the ability to select a subset of the list
