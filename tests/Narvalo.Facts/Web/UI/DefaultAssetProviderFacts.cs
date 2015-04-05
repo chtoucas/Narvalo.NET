@@ -3,19 +3,14 @@
 namespace Narvalo.Web.UI
 {
     using System;
+    using System.Web.WebPages.TestUtils;
 
     using Narvalo.TestCommon;
     using Xunit;
 
     // TODO: Test absolute, relative and bad paths.
-    // FIXME: Reset environment after.
     public static class DefaultAssetProviderFacts
     {
-        static DefaultAssetProviderFacts()
-        {
-            VirtualPathUtility.InitializeFakeContext();
-        }
-
         #region GetFontUri()
 
         [Fact]
@@ -31,14 +26,22 @@ namespace Narvalo.Web.UI
         [Fact]
         public static void GetFontUri_ReturnsBasePath_ForEmptyPath()
         {
-            // Arrange
-            var provider = new DefaultAssetProvider();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                AspNetUtility.SetupAspNetDomain();
 
-            // Act
-            var uri = provider.GetFontUri(String.Empty);
+                using (var _ = AspNetUtility.CreateHttpContext())
+                {
+                    // Arrange
+                    var provider = new DefaultAssetProvider();
 
-            // Act & Assert
-            Assert.Equal("/fonts/", uri.ToString());
+                    // Act
+                    var uri = provider.GetFontUri(String.Empty);
+
+                    // Act & Assert
+                    Assert.Equal("/fonts/", uri.ToString());
+                }
+            });
         }
 
         #endregion
@@ -58,14 +61,22 @@ namespace Narvalo.Web.UI
         [Fact]
         public static void GetImageUri_ReturnsBasePath_ForEmptyPath()
         {
-            // Arrange
-            var provider = new DefaultAssetProvider();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                AspNetUtility.SetupAspNetDomain();
 
-            // Act
-            var uri = provider.GetImageUri(String.Empty);
+                using (var _ = AspNetUtility.CreateHttpContext())
+                {
+                    // Arrange
+                    var provider = new DefaultAssetProvider();
 
-            // Act & Assert
-            Assert.Equal("/Images/", uri.ToString());
+                    // Act
+                    var uri = provider.GetImageUri(String.Empty);
+
+                    // Act & Assert
+                    Assert.Equal("/Images/", uri.ToString());
+                }
+            });
         }
 
         #endregion
@@ -85,14 +96,22 @@ namespace Narvalo.Web.UI
         [Fact]
         public static void GetScriptUri_ReturnsBasePath_ForEmptyPath()
         {
-            // Arrange
-            var provider = new DefaultAssetProvider();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                AspNetUtility.SetupAspNetDomain();
 
-            // Act
-            var uri = provider.GetScriptUri(String.Empty);
+                using (var _ = AspNetUtility.CreateHttpContext())
+                {
+                    // Arrange
+                    var provider = new DefaultAssetProvider();
 
-            // Act & Assert
-            Assert.Equal("/Scripts/", uri.ToString());
+                    // Act
+                    var uri = provider.GetScriptUri(String.Empty);
+
+                    // Act & Assert
+                    Assert.Equal("/Scripts/", uri.ToString());
+                }
+            });
         }
 
         #endregion
@@ -112,14 +131,22 @@ namespace Narvalo.Web.UI
         [Fact]
         public static void GetStyleUri_ReturnsBasePath_ForEmptyPath()
         {
-            // Arrange
-            var provider = new DefaultAssetProvider();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                AspNetUtility.SetupAspNetDomain();
 
-            // Act
-            var uri = provider.GetStyleUri(String.Empty);
+                using (var _ = AspNetUtility.CreateHttpContext())
+                {
+                    // Arrange
+                    var provider = new DefaultAssetProvider();
 
-            // Act & Assert
-            Assert.Equal("/Content/", uri.ToString());
+                    // Act
+                    var uri = provider.GetStyleUri(String.Empty);
+
+                    // Act & Assert
+                    Assert.Equal("/Content/", uri.ToString());
+                }
+            });
         }
 
         #endregion

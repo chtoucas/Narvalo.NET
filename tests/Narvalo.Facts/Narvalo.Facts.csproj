@@ -85,13 +85,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="..\Common\DebugOnlyFactAttribute.cs">
-      <Link>Test\DebugOnlyFactAttribute.cs</Link>
+      <Link>TestCommon\DebugOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="..\Common\IssueAttribute.cs">
-      <Link>Test\IssueAttribute.cs</Link>
+      <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="..\Common\ReleaseOnlyFactAttribute.cs">
-      <Link>Test\ReleaseOnlyFactAttribute.cs</Link>
+      <Link>TestCommon\ReleaseOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
@@ -99,7 +99,9 @@
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="EnumerationFacts.cs" />
-    <Compile Include="TestCommon\VirtualPathUtility.cs" />
+    <Compile Include="TestCommon\AppDomainUtils.cs" />
+    <Compile Include="TestCommon\DisposableAction.cs" />
+    <Compile Include="TestCommon\AspNetUtility.cs" />
     <Compile Include="TestCommon\MvcHelper.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />

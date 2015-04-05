@@ -16,8 +16,6 @@ namespace Narvalo.Web.UI
         private static readonly object s_Lock = new Object();
 
         // We use a volatile field to prevent any re-ordering inside Initialize_().
-        // I presume that the runtime actually recognizes the pattern 
-        // and makes this unnecessary, but I am not sure about it.
         private static volatile bool s_Initialized;
 
         // Exception thrown during initialization.
@@ -204,7 +202,7 @@ namespace Narvalo.Web.UI
 
         private static void InitializeDefault_()
         {
-            // Use the default provider. WARNING: Don't forget to initialize it too.
+            // Use the default provider. WARNING: Don't forget to initialize it too!
             var tmpProvider = new DefaultAssetProvider();
             tmpProvider.Initialize(null, null);
 

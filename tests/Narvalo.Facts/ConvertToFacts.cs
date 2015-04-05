@@ -16,7 +16,7 @@ namespace Narvalo
         }
 
         [Flags]
-        private enum EnumFlagStub_
+        private enum BitwiseEnumStub_
         {
             None = 0,
             ActualValue1 = 1 << 0,
@@ -69,14 +69,14 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void Enum_ReturnsExpectedValue_ForActualValueAndFlagEnum()
+        public static void Enum_ReturnsExpectedValue_ForActualValueAndBitwiseEnum()
         {
             // Act
-            var result = ConvertTo.Enum<EnumFlagStub_>(1 << 0);
+            var result = ConvertTo.Enum<BitwiseEnumStub_>(1 << 0);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(EnumFlagStub_.ActualValue1, result.Value);
+            Assert.Equal(BitwiseEnumStub_.ActualValue1, result.Value);
         }
 
         #endregion

@@ -5,10 +5,11 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
 _Better test coverage for Narvalo.Core & Narvalo.Web_
+_Very much improved the asset providers_
 
 #### Bugfixes
 - At start of `Require.InRange()`, we did not validate the range before using it.
-- Fixed uncorrect initialization of `AssetManager`.
+- Fixed uncorrect and inefficient initialization of `AssetManager`.
 
 #### Breaking changes
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
@@ -17,7 +18,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - `HttpHandlerBase.AcceptedVerbs` is now public.
   `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
    no longer virtual.
-- Refactored the asset providers in an attempt to make them more configurable.
+- Refactored the asset providers in an attempt to make them more robust and configurable.
 
 ### Enhancements
 - Added localized resources for the french language.

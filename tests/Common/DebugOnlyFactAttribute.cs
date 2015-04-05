@@ -2,8 +2,11 @@
 
 namespace Narvalo.TestCommon
 {
+    using System;
+
     using Xunit;
 
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class DebugOnlyFactAttribute : FactAttribute
     {
         public DebugOnlyFactAttribute()
