@@ -4,7 +4,6 @@ namespace Narvalo.Web.Html
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
@@ -12,34 +11,33 @@ namespace Narvalo.Web.Html
 
     using Narvalo.Web.Internal;
 
-    public static class LinkExtensions
+    public static class LinkHelper
     {
-        public static IHtmlString Link(this HtmlHelper @this, Uri linkUri)
+        public static IHtmlString Render(Uri linkUri)
         {
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return LinkHelper_(@this, linkUri, null, null, (IDictionary<string, object>)null);
+            return Render(linkUri, null, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType)
+        public static IHtmlString Render(Uri linkUri, string linkType)
         {
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return LinkHelper_(@this, linkUri, linkType, null, (IDictionary<string, object>)null);
+            return Render(linkUri, linkType, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation)
+        public static IHtmlString Render(Uri linkUri, string linkType, string relation)
         {
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return LinkHelper_(@this, linkUri, linkType, relation, (IDictionary<string, object>)null);
+            return Render(linkUri, linkType, relation, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Link(
-            this HtmlHelper @this,
+        public static IHtmlString Render(
             Uri linkUri,
             string linkType,
             string relation,
@@ -48,26 +46,10 @@ namespace Narvalo.Web.Html
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return LinkHelper_(@this, linkUri, linkType, relation, new RouteValueDictionary(attributes));
+            return Render(linkUri, linkType, relation, new RouteValueDictionary(attributes));
         }
 
-        public static IHtmlString Link(
-            this HtmlHelper @this,
-            Uri linkUri,
-            string linkType,
-            string relation,
-            IDictionary<string, object> attributes)
-        {
-            Contract.Requires(linkUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return LinkHelper_(@this, linkUri, linkType, relation, attributes);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
-        private static IHtmlString LinkHelper_(
-            this HtmlHelper @this,
+        private static IHtmlString Render(
             Uri linkUri,
             string linkType,
             string relation,

@@ -2,15 +2,11 @@
 
 namespace Narvalo.Web.Html
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
 
-    /// <summary>
-    /// Provides extension methods for <see cref="HtmlHelper"/>.
-    /// </summary>
-    public static class HtmlHelperExtensions
+    public static class HtmlText
     {
         private static readonly HtmlString s_Lipsum
             = new HtmlString(
@@ -22,13 +18,14 @@ namespace Narvalo.Web.Html
                 + "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia "
                 + "deserunt mollit anim id est laborum.");
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
-        public static IHtmlString LoremIpsum(this HtmlHelper @this)
+        public static IHtmlString LoremIpsum
         {
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            get
+            {
+                Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return s_Lipsum;
+                return s_Lipsum;
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Narvalo.Web.Html
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
@@ -12,64 +11,49 @@ namespace Narvalo.Web.Html
 
     using Narvalo.Web.Internal;
 
-    public static class ImageExtensions
+    public static class ImageHelper
     {
-        public static IHtmlString Image(this HtmlHelper @this, Uri imageUri)
+        public static IHtmlString Render(Uri imageUri)
         {
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, null, (IDictionary<string, object>)null);
+            return Render(imageUri, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt)
+        public static IHtmlString Render(Uri imageUri, string alt)
         {
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, alt, (IDictionary<string, object>)null);
+            return Render(imageUri, alt, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, object attributes)
+        public static IHtmlString Render(Uri imageUri, object attributes)
         {
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, null, new RouteValueDictionary(attributes));
+            return Render(imageUri, null, new RouteValueDictionary(attributes));
         }
 
-        public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, IDictionary<string, object> attributes)
+        public static IHtmlString Render(Uri imageUri, IDictionary<string, object> attributes)
         {
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, null, attributes);
+            return Render(imageUri, null, attributes);
         }
 
-        public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, object attributes)
+        public static IHtmlString Render(Uri imageUri, string alt, object attributes)
         {
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ImageHelper_(@this, imageUri, alt, new RouteValueDictionary(attributes));
+            return Render(imageUri, alt, new RouteValueDictionary(attributes));
         }
 
-        public static IHtmlString Image(
-            this HtmlHelper @this,
-            Uri imageUri,
-            string alt,
-            IDictionary<string, object> attributes)
-        {
-            Contract.Requires(imageUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return ImageHelper_(@this, imageUri, alt, attributes);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
-        private static IHtmlString ImageHelper_(
-            this HtmlHelper @this,
+        public static IHtmlString Render(
             Uri imageUri,
             string alt,
             IDictionary<string, object> attributes)

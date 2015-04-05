@@ -4,7 +4,6 @@ namespace Narvalo.Web.Html
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Mvc;
@@ -12,48 +11,33 @@ namespace Narvalo.Web.Html
 
     using Narvalo.Web.Internal;
 
-    public static class ScriptExtensions
+    public static class ScriptHelper
     {
-        public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri)
+        public static IHtmlString Render(Uri scriptUri)
         {
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ScriptHelper_(@this, scriptUri, null, (IDictionary<string, object>)null);
+            return Render(scriptUri, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType)
+        public static IHtmlString Render(Uri scriptUri, string scriptType)
         {
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ScriptHelper_(@this, scriptUri, scriptType, (IDictionary<string, object>)null);
+            return Render(scriptUri, scriptType, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, object attributes)
+        public static IHtmlString Render(Uri scriptUri, string scriptType, object attributes)
         {
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return ScriptHelper_(@this, scriptUri, scriptType, new RouteValueDictionary(attributes));
+            return Render(scriptUri, scriptType, new RouteValueDictionary(attributes));
         }
 
-        public static IHtmlString Script(
-            this HtmlHelper @this,
-            Uri scriptUri,
-            string scriptType,
-            IDictionary<string, object> attributes)
-        {
-            Contract.Requires(scriptUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return ScriptHelper_(@this, scriptUri, scriptType, attributes);
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] We use an extension method to improve the accessibility of this method.")]
-        private static IHtmlString ScriptHelper_(
-            this HtmlHelper @this,
+        public static IHtmlString Render(
             Uri scriptUri,
             string scriptType,
             IDictionary<string, object> attributes)

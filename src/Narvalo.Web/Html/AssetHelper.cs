@@ -4,89 +4,69 @@ namespace Narvalo.Web.Html
 {
     using System.Diagnostics.Contracts;
     using System.Web;
-    using System.Web.Mvc;
 
     using Narvalo.Web.UI;
 
-    public sealed class AssetHelper
+    public static class AssetHelper
     {
-        private readonly HtmlHelper _htmlHelper;
-
-        public AssetHelper(HtmlHelper htmlHelper)
-        {
-            Require.NotNull(htmlHelper, "htmlHelper");
-
-            _htmlHelper = htmlHelper;
-        }
-
-        public IHtmlString Css(string relativePath)
+        public static IHtmlString Css(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return _htmlHelper.Link(assetUri, null /* linkType */, "stylesheet");
+            return LinkHelper.Render(assetUri, null /* linkType */, "stylesheet");
         }
 
-        public IHtmlString Css(string relativePath, string media)
+        public static IHtmlString Css(string relativePath, string media)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return _htmlHelper.Link(assetUri, null /* linkType */, "stylesheet", new { media = media });
+            return LinkHelper.Render(assetUri, null /* linkType */, "stylesheet", new { media = media });
         }
 
-        public IHtmlString Image(string relativePath, string alt)
+        public static IHtmlString Image(string relativePath, string alt)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetImageUri(relativePath);
-            return _htmlHelper.Image(assetUri, alt);
+            return ImageHelper.Render(assetUri, alt);
         }
 
-        public IHtmlString JavaScript(string relativePath)
+        public static IHtmlString JavaScript(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
-            return _htmlHelper.Script(assetUri);
+            return ScriptHelper.Render(assetUri);
         }
 
-        public IHtmlString Less(string relativePath)
+        public static IHtmlString Less(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less");
+            return LinkHelper.Render(assetUri, "text/css", "stylesheet/less");
         }
 
-        public IHtmlString Less(string relativePath, string media)
+        public static IHtmlString Less(string relativePath, string media)
         {
             Contract.Requires(relativePath != null);
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
+            return LinkHelper.Render(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariants()
-        {
-            Contract.Invariant(_htmlHelper != null);
-        }
-
-#endif
     }
 }
