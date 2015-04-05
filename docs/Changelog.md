@@ -19,6 +19,7 @@ _Very much improved the asset providers_
   `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
    no longer virtual.
 - Refactored the asset providers in an attempt to make them more robust and configurable.
+- Refactored the HTML helpers into purely static methods.
 
 ### Enhancements
 - Added localized resources for the french language.

@@ -145,7 +145,7 @@ namespace Narvalo.Web.UI
     [ContractClassFor(typeof(AssetProviderBase))]
     internal abstract class AssetProviderBaseContract : AssetProviderBase
     {
-        public override Uri GetFont(string relativePath)
+        public override Uri GetFontUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
@@ -153,7 +153,7 @@ namespace Narvalo.Web.UI
             return default(Uri);
         }
 
-        public override Uri GetImage(string relativePath)
+        public override Uri GetImageUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
@@ -161,7 +161,7 @@ namespace Narvalo.Web.UI
             return default(Uri);
         }
 
-        public override Uri GetScript(string relativePath)
+        public override Uri GetScriptUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
@@ -169,7 +169,7 @@ namespace Narvalo.Web.UI
             return default(Uri);
         }
 
-        public override Uri GetStyle(string relativePath)
+        public override Uri GetStyleUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
