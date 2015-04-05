@@ -2,6 +2,24 @@
 
 namespace Narvalo.Web.UI
 {
+#if NO_INTERNALS_VISIBLE_TO // White-box tests.
+
+    using Xunit;
+
+    public static partial class AssetManagerFacts
+    {
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
+        public static void Provider_BlackBox() { }
+    
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
+        public static void Providers_BlackBox() { }
+    
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
+        public static void InitializeInternal_BlackBox() { }
+    }
+
+#else
+
     using System.Configuration;
     using System.Configuration.Provider;
 
@@ -73,7 +91,7 @@ namespace Narvalo.Web.UI
         {
             // Arrange
             var section = new AssetSection();
-           section.DefaultProvider = null;
+            section.DefaultProvider = null;
 
             // Act & Assert
             Assert.Throws<ProviderException>(() => AssetManager.InitializeInternal(section));
@@ -102,4 +120,6 @@ namespace Narvalo.Web.UI
 
         #endregion
     }
+
+#endif
 }

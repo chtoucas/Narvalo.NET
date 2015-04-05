@@ -74,19 +74,6 @@ namespace Narvalo.Web.UI
         #region Description
 
         [Fact]
-        public static void Description_ReturnsInternalDefaultDescription()
-        {
-            // Arrange
-            var provider = new AssetProvider_();
-
-            // Act
-            provider.Initialize(null, null);
-
-            // Assert
-            Assert.Equal(Strings_Web.AssetProviderBase_Description, provider.Description);
-        }
-
-        [Fact]
         public static void Description_ReturnsCustomDefaultDescription()
         {
             // Arrange
@@ -163,19 +150,6 @@ namespace Narvalo.Web.UI
         #endregion
 
         #region Name
-
-        [Fact]
-        public static void Name_ReturnsInternalDefaultName()
-        {
-            // Arrange
-            var provider = new AssetProvider_();
-
-            // Act
-            provider.Initialize(null, null);
-
-            // Assert
-            Assert.Equal(AssetProviderBase.InternalDefaultName, provider.Name);
-        }
 
         [Fact]
         public static void Name_ReturnsCustomDefaultName()
@@ -262,4 +236,56 @@ namespace Narvalo.Web.UI
 
         #endregion
     }
+    
+#if NO_INTERNALS_VISIBLE_TO // White-box tests.
+
+    public static partial class AssetProviderBaseFacts
+    {
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
+        public static void Description_BlackBox() { }
+    
+        [Fact(Skip = "White-box tests disabled for this configuration.")]
+        public static void Name_BlackBox() { }
+    }
+
+#else
+
+    public static partial class AssetProviderBaseFacts
+    {
+        #region Description
+
+        [Fact]
+        public static void Description_ReturnsInternalDefaultDescription()
+        {
+            // Arrange
+            var provider = new AssetProvider_();
+
+            // Act
+            provider.Initialize(null, null);
+
+            // Assert
+            Assert.Equal(Strings_Web.AssetProviderBase_Description, provider.Description);
+        }
+
+        #endregion
+
+        #region Name
+
+        [Fact]
+        public static void Name_ReturnsInternalDefaultName()
+        {
+            // Arrange
+            var provider = new AssetProvider_();
+
+            // Act
+            provider.Initialize(null, null);
+
+            // Assert
+            Assert.Equal(AssetProviderBase.InternalDefaultName, provider.Name);
+        }
+
+        #endregion
+    }
+
+#endif
 }
