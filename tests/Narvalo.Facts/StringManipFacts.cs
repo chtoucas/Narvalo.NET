@@ -3,22 +3,11 @@
 namespace Narvalo
 {
     using System;
-    using System.Collections.Generic;
 
     using Xunit;
 
     public static class StringManipFacts
     {
-        public static IEnumerable<object[]> ReverseData
-        {
-            get
-            {
-                yield return new object[] { String.Empty, String.Empty };
-                yield return new object[] { "ABCD", "DCBA" };
-                yield return new object[] { "éçàè$£ö", "ö£$èàçé" };
-            }
-        }
-
         #region Reverse()
 
         [Fact]
@@ -29,9 +18,11 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("ReverseData")]
+        [InlineData("", "")]
+        [InlineData("ABCD", "DCBA")]
+        [InlineData("éçàè$£ö", "ö£$èàçé")]
         [CLSCompliant(false)]
-        public static void Reverse_ReturnsExpectedString(string expectedValue, string value)
+        public static void Reverse_ReturnsExpectedString(string value, string expectedValue)
         {
             // Act & Assert
             Assert.Equal(expectedValue, StringManip.Reverse(value));

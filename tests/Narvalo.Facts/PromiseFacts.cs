@@ -4,7 +4,7 @@ namespace Narvalo
 {
     using System;
 
-    using Narvalo.Internal;
+    using Narvalo.TestCommon;
     using Xunit;
 
     // NB: This is one of those exceptional cases where we use different sets of tests 

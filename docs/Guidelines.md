@@ -12,7 +12,7 @@ from the .NET team with few differences:
   In case of namespace conflict, use the 'global::' prefix.
 - Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`) 
   and for object creation.
-- Do not use PascalCasing to name private constants (i.e `MY_PRIVATE_CONSTANT` instead of `MyPrivateConstant`).
+- Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
 
 We also enforce the following rules:
 - Add a suffix to all private methods and classes with `_`.
@@ -28,11 +28,17 @@ We also enforce the following rules:
 - Consider using regions or partial classes to organize code.
 - Consider separating System imports from the others.
 - Source lines should not exceed 120 characters.
-- Consider adding the "Base" suffix to all abstract classes.
-- Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
-- Consider adding an "Internal" prefix to the names of internal properties, static fields and 
-  constants in a non-internal class.
 - Avoid named parameters.
+
+Naming:
+
+- Consider adding the "Base" suffix to all abstract classes.
+- Consider not adding an internal access modifier to members of an internal class.
+- Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
+- Consider adding an "Internal" prefix to the names of internal static fields and constants in a non-internal class.
+- For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
+  or use a verb. Examples: "Require", "ParseTo", StringManip"...
+  If not, use "Helper" for concrete classes and "Utility" for static classes.
 
 ### Tasks
 
@@ -52,6 +58,7 @@ Design Recommendations
 - Do not use reserved words:
   * `Current`
   * `Select` (LINQ operator)
+- All static members should be thread-safe.
 
 ### Optional Rules
 

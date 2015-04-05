@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Internal
+namespace Narvalo.TestCommon
 {
     using System;
     using System.Globalization;
@@ -8,7 +8,8 @@ namespace Narvalo.Internal
     using System.Web;
     using System.Web.Hosting;
 
-    internal static class VirtualPathHelper
+    // FIXME: Reset environment after.
+    public static class VirtualPathUtility
     {
         private static readonly object s_Lock = new Object();
         private static volatile bool s_Initialized = false;

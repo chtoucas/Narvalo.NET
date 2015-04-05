@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Internal
+namespace Narvalo.TestCommon
 {
     using Xunit;
 
-    internal sealed class ReleaseOnlyFactAttribute : FactAttribute
+    public sealed class ReleaseOnlyFactAttribute : FactAttribute
     {
         public ReleaseOnlyFactAttribute()
             : base()

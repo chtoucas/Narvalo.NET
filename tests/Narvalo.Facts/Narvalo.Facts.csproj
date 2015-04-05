@@ -85,19 +85,22 @@
   </Choose>
   <ItemGroup>
     <Compile Include="..\Common\DebugOnlyFactAttribute.cs">
-      <Link>Internal\DebugOnlyFactAttribute.cs</Link>
+      <Link>Test\DebugOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="..\Common\IssueAttribute.cs">
-      <Link>Internal\IssueAttribute.cs</Link>
+      <Link>Test\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="..\Common\ReleaseOnlyFactAttribute.cs">
-      <Link>Internal\ReleaseOnlyFactAttribute.cs</Link>
+      <Link>Test\ReleaseOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
-    <Compile Include="Internal\MvcHelper.cs" />
+    <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="EnumerationFacts.cs" />
+    <Compile Include="TestCommon\VirtualPathUtility.cs" />
+    <Compile Include="TestCommon\MvcHelper.cs" />
     <Compile Include="Fx\SwitchFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
@@ -108,7 +111,7 @@
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
-    <Compile Include="FakeException.cs" />
+    <Compile Include="TestCommon\FakeException.cs" />
     <Compile Include="CheckFacts.cs" />
     <Compile Include="PromiseFacts.cs" />
     <Compile Include="RequireFacts.cs" />
@@ -116,7 +119,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
     <Compile Include="Web\Html\HtmlHelperFacts.cs" />
+    <Compile Include="Web\UI\AssetManagerFacts.cs" />
     <Compile Include="Web\UI\AssetProviderBaseFacts.cs" />
+    <Compile Include="Web\UI\AssetProviderCollectionFacts.cs" />
+    <Compile Include="Web\UI\RemoteAssetProviderFacts.cs" />
+    <Compile Include="Web\UI\DefaultAssetProviderFacts.cs" />
     <Compile Include="Web\UriFacts.cs" />
   </ItemGroup>
   <ItemGroup>

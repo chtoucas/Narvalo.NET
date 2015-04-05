@@ -19,7 +19,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Link(@this, linkUri, null, null, (IDictionary<string, object>)null);
+            return LinkHelper_(@this, linkUri, null, null, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType)
@@ -27,7 +27,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Link(@this, linkUri, linkType, null, (IDictionary<string, object>)null);
+            return LinkHelper_(@this, linkUri, linkType, null, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Link(this HtmlHelper @this, Uri linkUri, string linkType, string relation)
@@ -35,7 +35,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Link(@this, linkUri, linkType, relation, (IDictionary<string, object>)null);
+            return LinkHelper_(@this, linkUri, linkType, relation, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Link(
@@ -48,7 +48,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(linkUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Link(@this, linkUri, linkType, relation, new RouteValueDictionary(attributes));
+            return LinkHelper_(@this, linkUri, linkType, relation, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Link(

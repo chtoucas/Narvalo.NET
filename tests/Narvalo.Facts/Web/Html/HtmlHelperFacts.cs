@@ -33,7 +33,7 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = null;
 
             // Act
-            htmlHelper.Image(new Uri("http://localhost/assets/image.jpg"));
+            htmlHelper.Image(new Uri("http://tempuri.org/assets/image.jpg"));
         }
 
         #endregion
@@ -57,7 +57,7 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = null;
 
             // Act
-            htmlHelper.Link(new Uri("http://localhost/assets/style.css"));
+            htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"));
         }
 
         [Fact]
@@ -67,10 +67,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"));
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"));
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -93,10 +93,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), null);
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), null);
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -106,10 +106,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), String.Empty);
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), String.Empty);
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -119,10 +119,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), "text/css");
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), "text/css");
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -132,10 +132,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), "text/css", null);
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), "text/css", null);
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -145,10 +145,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), "text/css", String.Empty);
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), "text/css", String.Empty);
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" type=""text/css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -158,10 +158,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Link(new Uri("http://localhost/assets/style.css"), "text/css", "stylesheet");
+            var result = htmlHelper.Link(new Uri("http://tempuri.org/assets/style.css"), "text/css", "stylesheet");
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" rel=""stylesheet"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" rel=""stylesheet"" type=""text/css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -172,13 +172,13 @@ namespace Narvalo.Web.Html
 
             // Act
             var result = htmlHelper.Link(
-                new Uri("http://localhost/assets/style.css"),
+                new Uri("http://tempuri.org/assets/style.css"),
                 "text/css",
                 "stylesheet",
                 new { attrName = "attrValue" });
 
             // Assert
-            Assert.Equal(@"<link attrName=""attrValue"" href=""//localhost/assets/style.css"" rel=""stylesheet"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link attrName=""attrValue"" href=""//tempuri.org/assets/style.css"" rel=""stylesheet"" type=""text/css"" />", result.ToHtmlString());
         }
 
         [Fact]
@@ -189,13 +189,13 @@ namespace Narvalo.Web.Html
 
             // Act
             var result = htmlHelper.Link(
-                new Uri("http://localhost/assets/style.css"),
+                new Uri("http://tempuri.org/assets/style.css"),
                 "text/css",
                 "stylesheet",
                 new { rel = "relation" });
 
             // Assert
-            Assert.Equal(@"<link href=""//localhost/assets/style.css"" rel=""relation"" type=""text/css"" />", result.ToHtmlString());
+            Assert.Equal(@"<link href=""//tempuri.org/assets/style.css"" rel=""relation"" type=""text/css"" />", result.ToHtmlString());
         }
 
         #endregion
@@ -219,7 +219,7 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = null;
 
             // Act
-            htmlHelper.Script(new Uri("http://localhost/assets/script.js"));
+            htmlHelper.Script(new Uri("http://tempuri.org/assets/script.js"));
         }
 
         [Fact]
@@ -229,10 +229,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Script(new Uri("http://localhost/assets/script.js"));
+            var result = htmlHelper.Script(new Uri("http://tempuri.org/assets/script.js"));
 
             // Assert
-            Assert.Equal(@"<script src=""//localhost/assets/script.js""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script src=""//tempuri.org/assets/script.js""></script>", result.ToHtmlString());
         }
 
         [Fact]
@@ -255,10 +255,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Script(new Uri("http://localhost/assets/script.js"), null);
+            var result = htmlHelper.Script(new Uri("http://tempuri.org/assets/script.js"), null);
 
             // Assert
-            Assert.Equal(@"<script src=""//localhost/assets/script.js""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script src=""//tempuri.org/assets/script.js""></script>", result.ToHtmlString());
         }
 
         [Fact]
@@ -268,10 +268,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Script(new Uri("http://localhost/assets/script.js"), String.Empty);
+            var result = htmlHelper.Script(new Uri("http://tempuri.org/assets/script.js"), String.Empty);
 
             // Assert
-            Assert.Equal(@"<script src=""//localhost/assets/script.js""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script src=""//tempuri.org/assets/script.js""></script>", result.ToHtmlString());
         }
 
         [Fact]
@@ -281,10 +281,10 @@ namespace Narvalo.Web.Html
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = htmlHelper.Script(new Uri("http://localhost/assets/script.js"), "text/javascript");
+            var result = htmlHelper.Script(new Uri("http://tempuri.org/assets/script.js"), "text/javascript");
 
             // Assert
-            Assert.Equal(@"<script src=""//localhost/assets/script.js"" type=""text/javascript""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script src=""//tempuri.org/assets/script.js"" type=""text/javascript""></script>", result.ToHtmlString());
         }
 
         [Fact]
@@ -295,12 +295,12 @@ namespace Narvalo.Web.Html
 
             // Act
             var result = htmlHelper.Script(
-                new Uri("http://localhost/assets/script.js"),
+                new Uri("http://tempuri.org/assets/script.js"),
                 "text/javascript",
                 new { attrName = "attrValue" });
 
             // Assert
-            Assert.Equal(@"<script attrName=""attrValue"" src=""//localhost/assets/script.js"" type=""text/javascript""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script attrName=""attrValue"" src=""//tempuri.org/assets/script.js"" type=""text/javascript""></script>", result.ToHtmlString());
         }
 
         [Fact]
@@ -311,12 +311,12 @@ namespace Narvalo.Web.Html
 
             // Act
             var result = htmlHelper.Script(
-                new Uri("http://localhost/assets/script.js"),
+                new Uri("http://tempuri.org/assets/script.js"),
                 "text/javascript",
                 new { type = "scriptType" });
 
             // Assert
-            Assert.Equal(@"<script src=""//localhost/assets/script.js"" type=""scriptType""></script>", result.ToHtmlString());
+            Assert.Equal(@"<script src=""//tempuri.org/assets/script.js"" type=""scriptType""></script>", result.ToHtmlString());
         }
 
         #endregion

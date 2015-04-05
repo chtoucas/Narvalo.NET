@@ -91,7 +91,7 @@ namespace Narvalo.Fx
         /// <returns>An empty <see cref="IEnumerable{T}"/> whose type argument is TResult.</returns>
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        internal static IEnumerable<TSource> Empty<TSource>()
+        internal static IEnumerable<TSource> EmptyInternal<TSource>()
         {
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 

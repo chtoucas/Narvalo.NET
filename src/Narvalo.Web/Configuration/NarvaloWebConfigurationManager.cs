@@ -7,21 +7,23 @@ namespace Narvalo.Web.Configuration
     using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
+    using Narvalo.Fx;
     using Narvalo.Internal;
 
     public static class NarvaloWebConfigurationManager
     {
-        private static readonly Lazy<AssetSection> s_AssetSection = new Lazy<AssetSection>(InitializeAssetSection_);
+        private static readonly Lazy<Maybe<AssetSection>> s_AssetSection
+            = new Lazy<Maybe<AssetSection>>(InitializeAssetSection_);
         private static readonly Lazy<OptimizationSection> s_OptimizationSection
             = new Lazy<OptimizationSection>(InitializeOptimizationSection_);
 
-        public static AssetSection AssetSection
+        public static Maybe<AssetSection> AssetSection
         {
             get
             {
                 Contract.Ensures(Contract.Result<AssetSection>() != null);
 
-                return s_AssetSection.Value.AssumeNotNull();
+                return s_AssetSection.Value;
             }
         }
 
@@ -54,11 +56,11 @@ namespace Narvalo.Web.Configuration
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
 
-        private static AssetSection InitializeAssetSection_()
+        private static Maybe<AssetSection> InitializeAssetSection_()
         {
             Contract.Ensures(Contract.Result<AssetSection>() != null);
 
-            return WebSectionManager.GetSection<AssetSection>(AssetSection.SectionName);
+            return WebSectionManager.MayGetSection<AssetSection>(Narvalo.Web.Configuration.AssetSection.SectionName);
         }
 
         private static OptimizationSection InitializeOptimizationSection_()

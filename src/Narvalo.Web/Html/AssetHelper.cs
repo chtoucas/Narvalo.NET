@@ -25,7 +25,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyle(relativePath);
+            var assetUri = AssetManager.GetStyleUri(relativePath);
             return _htmlHelper.Link(assetUri, null /* linkType */, "stylesheet");
         }
 
@@ -35,7 +35,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyle(relativePath);
+            var assetUri = AssetManager.GetStyleUri(relativePath);
             return _htmlHelper.Link(assetUri, null /* linkType */, "stylesheet", new { media = media });
         }
 
@@ -45,7 +45,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetImage(relativePath);
+            var assetUri = AssetManager.GetImageUri(relativePath);
             return _htmlHelper.Image(assetUri, alt);
         }
 
@@ -55,7 +55,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetScript(relativePath);
+            var assetUri = AssetManager.GetScriptUri(relativePath);
             return _htmlHelper.Script(assetUri);
         }
 
@@ -65,7 +65,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyle(relativePath);
+            var assetUri = AssetManager.GetStyleUri(relativePath);
             return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less");
         }
 
@@ -75,7 +75,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(relativePath.Length != 0);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyle(relativePath);
+            var assetUri = AssetManager.GetStyleUri(relativePath);
             return _htmlHelper.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
 

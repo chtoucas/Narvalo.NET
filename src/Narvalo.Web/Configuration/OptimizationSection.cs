@@ -11,9 +11,11 @@ namespace Narvalo.Web.Configuration
 
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
+        internal const string InternalEnableWhiteSpaceBustingPropertyName = "enableWhiteSpaceBusting";
+
         private static ConfigurationProperty s_EnableWhiteSpaceBusting
             = new ConfigurationProperty(
-                "enableWhiteSpaceBusting",
+                InternalEnableWhiteSpaceBustingPropertyName,
                 typeof(Boolean),
                 true,
                 ConfigurationPropertyOptions.IsRequired);

@@ -88,7 +88,7 @@ namespace Narvalo.Web.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found an unknown configuration key for RemoteAssetProvider: {0}..
+        ///   Looks up a localized string similar to Found an unknown configuration key: {0}..
         /// </summary>
         internal static string AssetProviderBase_UnknownConfigurationKey_Format {
             get {

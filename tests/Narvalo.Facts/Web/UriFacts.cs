@@ -24,7 +24,7 @@ namespace Narvalo.Web
         public static void ToProtocolRelativeString_ThrowsNotSupportedException_ForUnsupportedScheme()
         {
             // Arrange
-            Uri uri = new Uri("mailto:nobody@nowhere.org");
+            Uri uri = new Uri("mailto:nobody@tempuri.org");
 
             // Act & Assert
             Assert.Throws<NotSupportedException>(() => uri.ToProtocolRelativeString());
@@ -34,26 +34,26 @@ namespace Narvalo.Web
         public static void Link_ReturnsExpectedString_ForAbsoluteUriAndHttpScheme()
         {
             // Arrange
-            Uri uri = new Uri("http://localhost/my/relative/path");
+            Uri uri = new Uri("http://tempuri.org/my/relative/path");
 
             // Act
             var result = uri.ToProtocolRelativeString();
 
             // Assert
-            Assert.Equal("//localhost/my/relative/path", result);
+            Assert.Equal("//tempuri.org/my/relative/path", result);
         }
 
         [Fact]
         public static void Link_ReturnsExpectedString_ForAbsoluteUriAndHttpsScheme()
         {
             // Arrange
-            Uri uri = new Uri("https://localhost/my/relative/path");
+            Uri uri = new Uri("https://tempuri.org/my/relative/path");
 
             // Act
             var result = uri.ToProtocolRelativeString();
 
             // Assert
-            Assert.Equal("//localhost/my/relative/path", result);
+            Assert.Equal("//tempuri.org/my/relative/path", result);
         }
 
         [Fact]

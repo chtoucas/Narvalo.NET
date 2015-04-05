@@ -6,12 +6,19 @@ namespace Narvalo.Web.UI
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Diagnostics.Contracts;
+    using System.IO;
 
     using Narvalo.Collections;
     using Narvalo.Web.Properties;
 
     public sealed class RemoteAssetProvider : AssetProviderBase
     {
+        // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
+        internal static readonly string InternalFontsPath = "fonts/";
+        internal static readonly string InternalImagesPath = "img/";
+        internal static readonly string InternalScriptsPath = "js/";
+        internal static readonly string InternalStylesPath = "css/";
+
         private const string BASE_URI_KEY = "baseUri";
 
         private Uri _baseUri;
@@ -22,28 +29,24 @@ namespace Narvalo.Web.UI
             DefaultDescription = Strings_Web.RemoteAssetProvider_Description;
         }
 
-        public override Uri GetFont(string relativePath)
+        public override Uri GetFontUri(string relativePath)
         {
-            // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-            return MakeUri_("fonts/", relativePath);
+            return MakeUri_(InternalFontsPath, relativePath);
         }
 
-        public override Uri GetImage(string relativePath)
+        public override Uri GetImageUri(string relativePath)
         {
-            // WARNING: Ne pas utiliser "/img/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-            return MakeUri_("img/", relativePath);
+            return MakeUri_(InternalImagesPath, relativePath);
         }
 
-        public override Uri GetScript(string relativePath)
+        public override Uri GetScriptUri(string relativePath)
         {
-            // WARNING: Ne pas utiliser "/js/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-            return MakeUri_("js/", relativePath);
+            return MakeUri_(InternalScriptsPath, relativePath);
         }
 
-        public override Uri GetStyle(string relativePath)
+        public override Uri GetStyleUri(string relativePath)
         {
-            // WARNING: Ne pas utiliser "/css/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-            return MakeUri_("css/", relativePath);
+            return MakeUri_(InternalStylesPath, relativePath);
         }
 
         protected override void InitializeCustom(NameValueCollection config)
@@ -51,25 +54,61 @@ namespace Narvalo.Web.UI
             InitializeCustomInternal(config);
 
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
-                .Bind(_ => ParseTo.Uri(_, UriKind.RelativeOrAbsolute))
+                .Bind(_ => ParseTo.Uri(_, UriKind.Absolute))
                 .ValueOrThrow(() => new ProviderException(Strings_Web.RemoteAssetProvider_MissingOrInvalidBaseUri));
 
             config.Remove(BASE_URI_KEY);
         }
 
-        private Uri MakeUri_(string basePath, string relativePath)
+        private Uri MakeUri_(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, "relativePath");
-            Contract.Requires(basePath != null);
-            Contract.Requires(basePath.Length != 0);
+            Contract.Requires(baseIntermediatePath != null);
+            Contract.Requires(baseIntermediatePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // Here we can be sure that _baseUri is not null; otherwise an exception 
-            // would have been thrown in Initialize().
+            // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception 
+            // would have been thrown in InitializeCustom().
             Contract.Assume(_baseUri != null);
 
-            // FIXME: Use Path.Combine?
-            return new Uri(_baseUri, basePath + relativePath);
+            string relativeUri = Combine(baseIntermediatePath, relativePath);
+
+            return new Uri(_baseUri, relativeUri);
+        }
+
+        private static string Combine(string basePath, string relativePath)
+        {
+            Contract.Requires(basePath != null);
+            Contract.Requires(basePath.Length != 0);
+            Contract.Requires(relativePath != null);
+            Contract.Ensures(Contract.Result<string>() != null);
+
+            string result;
+
+            if (relativePath.Length == 0)
+            {
+                result = basePath;
+            }
+            else if (relativePath[0] == '/')
+            {
+                // FIXME: Message = "relativePath" is not a relative path.
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (HasTrailingSlash(basePath))
+            {
+                result = basePath + relativePath;
+            }
+            else
+            {
+                result = basePath + "/" + relativePath;
+            }
+
+            return result;
+        }
+
+        private static bool HasTrailingSlash(string path)
+        {
+            return path[path.Length - 1] == '/';
         }
     }
 }

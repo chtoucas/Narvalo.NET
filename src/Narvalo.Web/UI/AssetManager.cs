@@ -13,9 +13,15 @@ namespace Narvalo.Web.UI
 
     public static class AssetManager
     {
-        // We use a volatile field to prevent any re-ordering inside EnsureIntialized_().
-        private static volatile bool s_Initialized = false;
         private static readonly object s_Lock = new Object();
+
+        // We use a volatile field to prevent any re-ordering inside Initialize_().
+        // I presume that the runtime actually recognizes the pattern 
+        // and makes this unnecessary, but I am not sure about it.
+        private static volatile bool s_Initialized;
+
+        // Exception thrown during initialization.
+        private static Exception s_InitializationException;
 
         private static AssetProviderBase s_Provider;
         private static AssetProviderCollection s_Providers;
@@ -26,7 +32,7 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<AssetProviderBase>() != null);
 
-                EnsureInitialized_();
+                Initialize_();
                 return s_Provider;
             }
         }
@@ -37,85 +43,90 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<AssetProviderCollection>() != null);
 
-                EnsureInitialized_();
+                Initialize_();
                 return s_Providers;
             }
         }
 
-        public static Uri ImageBase
+        public static Uri FontsBaseUri
         {
             get
             {
                 Contract.Ensures(Contract.Result<Uri>() != null);
 
-                return Provider.GetImage(String.Empty);
+                return Provider.GetFontUri(String.Empty);
             }
         }
 
-        public static Uri ScriptBase
+        public static Uri ImagesBaseUri
         {
             get
             {
                 Contract.Ensures(Contract.Result<Uri>() != null);
 
-                return Provider.GetScript(String.Empty);
+                return Provider.GetImageUri(String.Empty);
             }
         }
 
-        public static Uri StyleBase
+        public static Uri ScriptsBaseUri
         {
             get
             {
                 Contract.Ensures(Contract.Result<Uri>() != null);
 
-                return Provider.GetStyle(String.Empty);
+                return Provider.GetScriptUri(String.Empty);
             }
         }
 
-        public static Uri GetImage(string relativePath)
+        public static Uri StylesBaseUri
         {
-            Require.NotNullOrEmpty(relativePath, "relativePath");
-            Contract.Ensures(Contract.Result<Uri>() != null);
-
-            return Provider.GetImage(relativePath);
-        }
-
-        public static Uri GetScript(string relativePath)
-        {
-            Require.NotNullOrEmpty(relativePath, "relativePath");
-            Contract.Ensures(Contract.Result<Uri>() != null);
-
-            return Provider.GetScript(relativePath);
-        }
-
-        public static Uri GetStyle(string relativePath)
-        {
-            Require.NotNullOrEmpty(relativePath, "relativePath");
-            Contract.Ensures(Contract.Result<Uri>() != null);
-
-            return Provider.GetStyle(relativePath);
-        }
-
-        private static void EnsureInitialized_()
-        {
-            if (!s_Initialized)
+            get
             {
-                lock (s_Lock)
-                {
-                    if (!s_Initialized)
-                    {
-                        Initialize_();
-                        s_Initialized = true;
-                    }
-                }
+                Contract.Ensures(Contract.Result<Uri>() != null);
+
+                return Provider.GetStyleUri(String.Empty);
             }
         }
 
-        private static void Initialize_()
+        public static Uri GetFontUri(string relativePath)
         {
-            var section = NarvaloWebConfigurationManager.AssetSection;
+            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // Initialize providers.
+            return Provider.GetFontUri(relativePath);
+        }
+
+        public static Uri GetImageUri(string relativePath)
+        {
+            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
+            return Provider.GetImageUri(relativePath);
+        }
+
+        public static Uri GetScriptUri(string relativePath)
+        {
+            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
+            return Provider.GetScriptUri(relativePath);
+        }
+
+        public static Uri GetStyleUri(string relativePath)
+        {
+            Require.NotNullOrEmpty(relativePath, "relativePath");
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
+            return Provider.GetStyleUri(relativePath);
+        }
+
+        // Internal-only method for testing.
+        // We use temporary objects to achieve exception-neutral code. 
+        internal static void InitializeInternal(AssetSection section)
+        {
+            Contract.Requires(section != null);
+
+            // Initialize the provider collection.
             var tmpProviders = new AssetProviderCollection();
             if (section.Providers != null)
             {
@@ -125,21 +136,87 @@ namespace Narvalo.Web.UI
 
             s_Providers = tmpProviders;
 
-            // Initialize default provider.
+            // Initialize the default provider.
             if (section.DefaultProvider == null)
             {
-                throw new ConfigurationErrorsException(
-                    Strings_Web.AssetManager_DefaultProviderNotConfigured,
-                    section.ElementInformation.Source,
-                    0);
+                throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotConfigured);
             }
 
-            s_Provider = s_Providers[section.DefaultProvider];
-
-            if (s_Provider == null)
+            var tmpProvider = s_Providers[section.DefaultProvider];
+            if (tmpProvider == null)
             {
-                throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotFound);
+                var propertyInfo
+                    = section.ElementInformation.Properties[AssetSection.InternalDefaultProviderPropertyName];
+
+                throw new ConfigurationErrorsException(
+                    Strings_Web.AssetManager_DefaultProviderNotFound,
+                    propertyInfo.Source,
+                    propertyInfo.LineNumber);
             }
+
+            s_Provider = tmpProvider;
+
+            Contract.Assert(s_Providers != null);
+            Contract.Assert(s_Provider != null);
+        }
+
+        // Internal-only method for testing.
+        internal static void ResetInternal()
+        {
+            s_Initialized = false;
+        }
+
+        private static void Initialize_()
+        {
+            if (!s_Initialized)
+            {
+                lock (s_Lock)
+                {
+                    if (!s_Initialized)
+                    {
+                        try
+                        {
+                            NarvaloWebConfigurationManager.AssetSection
+                                .Invoke(InitializeInternal, InitializeDefault_);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Keep the exception around.
+                            // **Any** subsequent call to Initialize_() will throw this exception.
+                            s_InitializationException = ex;
+
+                            throw;
+                        }
+                        finally
+                        {
+                            // Even in case of failure, mark the type as initialized.
+                            s_Initialized = true;
+                        }
+                    }
+                }
+            }
+
+            if (s_InitializationException != null)
+            {
+                throw s_InitializationException;
+            }
+        }
+
+        private static void InitializeDefault_()
+        {
+            // Use the default provider. WARNING: Don't forget to initialize it too.
+            var tmpProvider = new DefaultAssetProvider();
+            tmpProvider.Initialize(null, null);
+
+            var tmpProviders = new AssetProviderCollection();
+            tmpProviders.Add(tmpProvider);
+            tmpProviders.SetReadOnly();
+
+            s_Providers = tmpProviders;
+            s_Provider = tmpProvider;
+
+            Contract.Assert(s_Providers != null);
+            Contract.Assert(s_Provider != null);
         }
     }
 }

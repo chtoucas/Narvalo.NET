@@ -1,20 +1,5 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-// Ce code est inspiré de la classe Omari.Web.UI.ControlBuilderExtensions.
-// Par rapport au code d'origine, on a effectué les changements suivants :
-// - passage en méthodes d'extension ;
-// - certaines propriétés étant maintenant publiques, on a supprimé les méthodes
-//   permettant d'accéder aux propriétés suivantes : 
-//   - ComplexPropertyEntries ;
-//   - SubBuilders ;
-//   - TemplatePropertyEntries.
-// - on préfère conserver la signature d'origine, ie ICollection plutôt que ArrayList ;
-// - désactivation des méthodes dont l'utilité ne saute pas aux yeux (en ce qui nous concerne) :
-//   - GetParentBuilder() qui donne accès à la propriété interne ParentBuilder ;
-//   - GetSimplePropertyEntries() qui donne accès à la propriété interne SimplePropertyEntries ;
-//   - GetRootBuilder().
-// WARNING: Cette classe dépend de l'API non publique de ControlBuilder.
-
 namespace Narvalo.Web.UI
 {
     using System;
@@ -25,6 +10,26 @@ namespace Narvalo.Web.UI
     /// <summary>
     /// Provides extension methods for <see cref="ControlBuilder"/>.
     /// </summary>
+    /**
+     * <content markup="commonmark">
+     * <![CDATA[
+     * Ce code est inspiré de la classe `Omari.Web.UI.ControlBuilderExtensions`.
+     * Par rapport au code d'origine, on a effectué les changements suivants :
+     * - passage en méthodes d'extension ;
+     * - certaines propriétés étant maintenant publiques, on a supprimé les méthodes
+     * permettant d'accéder aux propriétés suivantes : 
+     * - `ComplexPropertyEntries` ;
+     * - `SubBuilders` ;
+     * - `TemplatePropertyEntries`.
+     * - on préfère conserver la signature d'origine, ie `ICollection` plutôt que `ArrayList` ;
+     * - désactivation des méthodes dont l'utilité ne saute pas aux yeux (en ce qui nous concerne) :
+     * - `GetParentBuilder()` qui donne accès à la propriété interne `ParentBuilder` ;
+     * - `GetSimplePropertyEntries()` qui donne accès à la propriété interne `SimplePropertyEntries` ;
+     * - `GetRootBuilder()`.
+     * WARNING: Cette classe dépend de l'API non publique de `ControlBuilder`.
+     * ]]>
+     * </content>
+     */
     [ContractVerification(false)]
     public static class ControlBuilderExtensions
     {

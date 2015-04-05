@@ -13,44 +13,47 @@ namespace Narvalo.Web.UI
     /// </summary>
     public sealed class DefaultAssetProvider : AssetProviderBase
     {
+        internal const string InternalCustomDefaultName = "DefaultAssetProvider";
+
+        // WARNING: If you change the name of this type, be sure to also update
+        // AssetSection.InternalDefaultProviderPropertyValue.
         public DefaultAssetProvider()
         {
-            DefaultName = "DefaultAssetProvider";
+            DefaultName = InternalCustomDefaultName;
             DefaultDescription = Strings_Web.DefaultAssetProvider_Description;
         }
 
-        public override Uri GetFont(string relativePath)
+        public override Uri GetFontUri(string relativePath)
         {
             return MakeUri_("~/fonts/", relativePath);
         }
 
-        public override Uri GetImage(string relativePath)
+        public override Uri GetImageUri(string relativePath)
         {
             return MakeUri_("~/Images/", relativePath);
         }
 
-        public override Uri GetScript(string relativePath)
+        public override Uri GetScriptUri(string relativePath)
         {
             return MakeUri_("~/Scripts/", relativePath);
         }
 
-        public override Uri GetStyle(string relativePath)
+        public override Uri GetStyleUri(string relativePath)
         {
             return MakeUri_("~/Content/", relativePath);
         }
 
-        private static Uri MakeUri_(string basePath, string relativePath)
+        private static Uri MakeUri_(string baseIntermediatePath, string relativePath)
         {
-            Contract.Requires(basePath != null);
-            Contract.Requires(basePath.Length != 0);
-            Contract.Requires(relativePath != null);
+            Require.NotNull(relativePath, "relativePath");
+            Contract.Requires(baseIntermediatePath != null);
+            Contract.Requires(baseIntermediatePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.
-            // REVIEW: Cf. http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
             var uriString = VirtualPathUtility.ToAbsolute(
-                relativePath.Length == 0 ? basePath : VirtualPathUtility.Combine(basePath, relativePath));
+                relativePath.Length == 0 ? baseIntermediatePath : VirtualPathUtility.Combine(baseIntermediatePath, relativePath));
 
             return new Uri(uriString, UriKind.Relative);
         }

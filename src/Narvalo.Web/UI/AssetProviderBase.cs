@@ -15,6 +15,8 @@ namespace Narvalo.Web.UI
     /// </summary>
     public abstract partial class AssetProviderBase : ProviderBase
     {
+        internal const string InternalDefaultName = "AssetProvider";
+
         private string _defaultDescription;
         private string _defaultName;
 
@@ -55,7 +57,7 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return String.IsNullOrWhiteSpace(_defaultName) ? "AssetProvider" : _defaultName;
+                return String.IsNullOrWhiteSpace(_defaultName) ? InternalDefaultName : _defaultName;
             }
 
             set
@@ -64,13 +66,13 @@ namespace Narvalo.Web.UI
             }
         }
 
-        public abstract Uri GetFont(string relativePath);
+        public abstract Uri GetFontUri(string relativePath);
 
-        public abstract Uri GetImage(string relativePath);
+        public abstract Uri GetImageUri(string relativePath);
 
-        public abstract Uri GetScript(string relativePath);
+        public abstract Uri GetScriptUri(string relativePath);
 
-        public abstract Uri GetStyle(string relativePath);
+        public abstract Uri GetStyleUri(string relativePath);
 
         /// <summary>
         /// Initializes the provider.
@@ -78,7 +80,7 @@ namespace Narvalo.Web.UI
         /// <param name="name">The friendly name of the provider.</param>
         /// <param name="config">A collection of the name/value pairs representing 
         /// the provider-specific attributes specified in the configuration for this provider.</param>
-        public override sealed void Initialize(string name, NameValueCollection config)
+        public sealed override void Initialize(string name, NameValueCollection config)
         {
             if (String.IsNullOrWhiteSpace(name))
             {
@@ -90,7 +92,7 @@ namespace Narvalo.Web.UI
                 config = new NameValueCollection(1);
                 config.Add("description", DefaultDescription);
             }
-            else if (String.IsNullOrEmpty(config["description"]))
+            else if (String.IsNullOrWhiteSpace(config["description"]))
             {
                 config.Set("description", DefaultDescription);
             }
@@ -110,19 +112,21 @@ namespace Narvalo.Web.UI
                 }
             }
 
-            // REVIEW: Name is initialized by base.Initialize() but could be overriden in a derived class.
-            Contract.Assume(Name != null);
+            // FIXME: Name is initialized by base.Initialize() but Name 
+            // could have been overriden in a derived class.
+            // Contract.Assume(Name != null);
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config",
+            Justification = "[Intentionally] Internal parameter validation in debug builds only.")]
+        internal static void InitializeCustomInternal([ValidatedNotNull]NameValueCollection config)
+        {
+            Check.NotNull(config, "The base class 'AssetProviderBase' guarantees that 'config' is never null.");
         }
 
         protected virtual void InitializeCustom(NameValueCollection config)
         {
             // Intentionally left blank.
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config")]
-        internal static void InitializeCustomInternal([ValidatedNotNull]NameValueCollection config)
-        {
-            Check.NotNull(config, "The base class 'AssetProviderBase' guarantees that 'config' is never null.");
         }
     }
 }

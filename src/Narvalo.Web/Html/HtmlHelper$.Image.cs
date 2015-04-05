@@ -19,7 +19,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(@this, imageUri, null, (IDictionary<string, object>)null);
+            return ImageHelper_(@this, imageUri, null, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt)
@@ -27,7 +27,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(@this, imageUri, alt, (IDictionary<string, object>)null);
+            return ImageHelper_(@this, imageUri, alt, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, object attributes)
@@ -35,7 +35,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(@this, imageUri, null, new RouteValueDictionary(attributes));
+            return ImageHelper_(@this, imageUri, null, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, IDictionary<string, object> attributes)
@@ -43,7 +43,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(@this, imageUri, null, attributes);
+            return ImageHelper_(@this, imageUri, null, attributes);
         }
 
         public static IHtmlString Image(this HtmlHelper @this, Uri imageUri, string alt, object attributes)
@@ -51,7 +51,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(imageUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(@this, imageUri, alt, new RouteValueDictionary(attributes));
+            return ImageHelper_(@this, imageUri, alt, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Image(

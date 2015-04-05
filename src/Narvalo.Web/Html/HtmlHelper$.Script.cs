@@ -19,7 +19,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Script(@this, scriptUri, null, (IDictionary<string, object>)null);
+            return ScriptHelper_(@this, scriptUri, null, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType)
@@ -27,7 +27,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Script(@this, scriptUri, scriptType, (IDictionary<string, object>)null);
+            return ScriptHelper_(@this, scriptUri, scriptType, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Script(this HtmlHelper @this, Uri scriptUri, string scriptType, object attributes)
@@ -35,7 +35,7 @@ namespace Narvalo.Web.Html
             Contract.Requires(scriptUri != null);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Script(@this, scriptUri, scriptType, new RouteValueDictionary(attributes));
+            return ScriptHelper_(@this, scriptUri, scriptType, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Script(

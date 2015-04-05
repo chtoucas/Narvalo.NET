@@ -127,7 +127,7 @@
     <value>Fournisseur de contenu Web statique.</value>
   </data>
   <data name="AssetProviderBase_UnknownConfigurationKey_Format" xml:space="preserve">
-    <value>Une clé de configuration inconnue pour RemoteAssetProvider a été trouvée : {0}.</value>
+    <value>Une clé de configuration inconnue a été trouvée : {0}.</value>
   </data>
   <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
     <value>Tentative de rajouter un fournisseur de type invalide. Il est plus que probable que vous ayez spécifié un fournisseur qui n'étende pas AssetProviderBase. Pour corriger ce problème, reportez-vous aux informations disponibles dans l'espace de noms Narvalo.Web.Configuration.</value>

@@ -15,6 +15,7 @@ add the necessary tests to be sure it does not pass through again.
 Work in progress
 ----------------
 
+- Make optional the AssetSection and Optimization sections.
 - VirtualPath
     http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
     http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
@@ -39,7 +40,9 @@ Work in progress
 - Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
 - Improvement: Check any use of `AssumeNotNull`
 - make.ps1 -r fails to push to the official NuGet server but works otherwise.
-
+- Maybe we can simplify semver for edge packages 
+  * http://semver.npmjs.com/
+  * http://www.infoq.com/news/2015/04/semver-calculator-npm
 
 Not yet planned
 ---------------

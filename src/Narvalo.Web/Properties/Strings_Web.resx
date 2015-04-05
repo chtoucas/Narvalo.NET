@@ -127,7 +127,7 @@
     <value>Provider for static Web assets.</value>
   </data>
   <data name="AssetProviderBase_UnknownConfigurationKey_Format" xml:space="preserve">
-    <value>Found an unknown configuration key for RemoteAssetProvider: {0}.</value>
+    <value>Found an unknown configuration key: {0}.</value>
   </data>
   <data name="AssetProviderCollection_InvalidProvider" xml:space="preserve">
     <value>Attempt to add a provider of invalid type. Most certainly you specified a provider which does not extend AssetProviderBase. See Narvalo.Web.Configuration for more information on how to configure properly your application.</value>

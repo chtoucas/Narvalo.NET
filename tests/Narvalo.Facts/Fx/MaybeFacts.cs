@@ -5,7 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Internal;
+    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class MaybeFacts

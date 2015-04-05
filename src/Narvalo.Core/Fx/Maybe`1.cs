@@ -344,7 +344,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
-            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
+            return IsSome ? Sequence.Single(Value) : Sequence.EmptyInternal<T>();
         }
 
         /// <copydoc cref="IEnumerable{T}.GetEnumerator" />

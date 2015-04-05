@@ -12,18 +12,22 @@ namespace Narvalo.Web.Configuration
 
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
+        internal const string InternalDefaultProviderPropertyName = "defaultProvider";
+        internal const string InternalDefaultProviderPropertyValue = "DefaultAssetProvider";
+        internal const string InternalProvidersPropertyName = "providers";
+
         private static ConfigurationProperty s_DefaultProvider
             = new ConfigurationProperty(
-                "defaultProvider",
+                InternalDefaultProviderPropertyName,
                 typeof(String),
-                "DefaultAssetProvider",
+                InternalDefaultProviderPropertyValue,
                null,
                new StringValidator(1),
                ConfigurationPropertyOptions.None);
 
         private static ConfigurationProperty s_Providers
             = new ConfigurationProperty(
-                "providers",
+                InternalProvidersPropertyName,
                 typeof(ProviderSettingsCollection));
 
         private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
