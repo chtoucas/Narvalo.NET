@@ -17,7 +17,7 @@ namespace Narvalo.TestCommon
     {
         public static IDisposable CreateHttpContext()
         {
-            return CreateHttpContext("default.aspx", "http://localhost/", null);
+            return CreateHttpContext("default.aspx", "http://tempuri.org/", String.Empty);
         }
 
         public static IDisposable CreateHttpContext(string page, string query)
@@ -48,19 +48,6 @@ namespace Narvalo.TestCommon
         public static void RestoreHttpContext()
         {
             HttpContext.Current = null;
-        }
-
-        public static void RunInIsolatedAspNetDomain(Action action)
-        {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
-            {
-                SetupAspNetDomain();
-
-                using (var _ = AspNetUtility.CreateHttpContext())
-                {
-                    action.Invoke();
-                }
-            });
         }
 
         public static void SetupAspNetDomain()
