@@ -8,14 +8,14 @@ namespace Narvalo
 
     public static partial class ParseToFacts
     {
-        private enum EnumStub_
+        private enum MyEnum_
         {
             None = 0,
             ActualValue = 1,
             AliasValue = ActualValue,
         }
 
-        private struct StructStub_ { }
+        private struct MyStruct_ { }
     }
 
     public static partial class ParseToFacts
@@ -185,14 +185,14 @@ namespace Narvalo
         public static void ParseTo_ThrowsArgumentException_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ParseTo.Enum<StructStub_>("Whatever"));
+            Assert.Throws<ArgumentException>(() => ParseTo.Enum<MyStruct_>("Whatever"));
         }
 
         [Fact]
         public static void ParseTo_ReturnsNull_ForActualValueAndBadCase()
         {
             // Act
-            var result = ParseTo.Enum<EnumStub_>("actualvalue", ignoreCase: false);
+            var result = ParseTo.Enum<MyEnum_>("actualvalue", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -202,7 +202,7 @@ namespace Narvalo
         public static void ParseTo_ReturnsNull_ForInvalidValue()
         {
             // Act
-            var result = ParseTo.Enum<EnumStub_>("InvalidValue");
+            var result = ParseTo.Enum<MyEnum_>("InvalidValue");
 
             // Assert
             Assert.False(result.HasValue);
@@ -212,7 +212,7 @@ namespace Narvalo
         public static void ParseTo_ReturnsNull_ForInvalidValueAndIgnoreCase()
         {
             // Act
-            var result = ParseTo.Enum<EnumStub_>("invalidvalue", ignoreCase: true);
+            var result = ParseTo.Enum<MyEnum_>("invalidvalue", ignoreCase: true);
 
             // Assert
             Assert.False(result.HasValue);
@@ -222,7 +222,7 @@ namespace Narvalo
         public static void ParseTo_ReturnsNull_ForInvalidValueAndBadCase()
         {
             // Act
-            var result = ParseTo.Enum<EnumStub_>("invalidvalue", ignoreCase: false);
+            var result = ParseTo.Enum<MyEnum_>("invalidvalue", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -232,22 +232,22 @@ namespace Narvalo
         public static void ParseTo_ReturnsExpectedValue_ForActualValue()
         {
             // Act
-            EnumStub_? result = ParseTo.Enum<EnumStub_>("ActualValue");
+            MyEnum_? result = ParseTo.Enum<MyEnum_>("ActualValue");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(EnumStub_.ActualValue, result.Value);
+            Assert.Equal(MyEnum_.ActualValue, result.Value);
         }
 
         [Fact]
         public static void ParseTo_ReturnsExpectedValue_ForActualValueAndIgnoreCase()
         {
             // Act
-            EnumStub_? result = ParseTo.Enum<EnumStub_>("actualvalue", ignoreCase: true);
+            MyEnum_? result = ParseTo.Enum<MyEnum_>("actualvalue", ignoreCase: true);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(EnumStub_.ActualValue, result.Value);
+            Assert.Equal(MyEnum_.ActualValue, result.Value);
         }
 
         #endregion

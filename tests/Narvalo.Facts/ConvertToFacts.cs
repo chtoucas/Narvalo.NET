@@ -8,7 +8,7 @@ namespace Narvalo
 
     public static partial class ConvertToFacts
     {
-        private enum EnumStub_
+        private enum MyEnum_
         {
             None = 0,
             ActualValue = 1,
@@ -16,7 +16,7 @@ namespace Narvalo
         }
 
         [Flags]
-        private enum BitwiseEnumStub_
+        private enum MyBitwiseEnum_
         {
             None = 0,
             ActualValue1 = 1 << 0,
@@ -26,7 +26,7 @@ namespace Narvalo
             CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
         }
 
-        private struct StructStub_ { }
+        private struct MyStruct_ { }
     }
 
     public static partial class ConvertToFacts
@@ -44,14 +44,14 @@ namespace Narvalo
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<StructStub_>(1));
+            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<MyStruct_>(1));
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
-            var result = ConvertTo.Enum<EnumStub_>(2);
+            var result = ConvertTo.Enum<MyEnum_>(2);
 
             // Assert
             Assert.False(result.HasValue);
@@ -61,22 +61,22 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForActualValue()
         {
             // Act
-            var result = ConvertTo.Enum<EnumStub_>(1);
+            var result = ConvertTo.Enum<MyEnum_>(1);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(EnumStub_.ActualValue, result.Value);
+            Assert.Equal(MyEnum_.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForActualValueAndBitwiseEnum()
         {
             // Act
-            var result = ConvertTo.Enum<BitwiseEnumStub_>(1 << 0);
+            var result = ConvertTo.Enum<MyBitwiseEnum_>(1 << 0);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(BitwiseEnumStub_.ActualValue1, result.Value);
+            Assert.Equal(MyBitwiseEnum_.ActualValue1, result.Value);
         }
 
         #endregion

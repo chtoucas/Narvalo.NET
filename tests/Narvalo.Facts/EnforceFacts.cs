@@ -9,22 +9,22 @@ namespace Narvalo
 
     public static partial class EnforceFacts
     {
-        private static readonly Stub_ s_ValueBelow = new Stub_(0);
-        private static readonly Stub_ s_MinValue = new Stub_(1);
-        private static readonly Stub_ s_ValueInRange = new Stub_(2);
-        private static readonly Stub_ s_MaxValue = new Stub_(3);
-        private static readonly Stub_ s_ValueAbove = new Stub_(4);
+        private static readonly MyValue_ s_ValueBelow = new MyValue_(0);
+        private static readonly MyValue_ s_MinValue = new MyValue_(1);
+        private static readonly MyValue_ s_ValueInRange = new MyValue_(2);
+        private static readonly MyValue_ s_MaxValue = new MyValue_(3);
+        private static readonly MyValue_ s_ValueAbove = new MyValue_(4);
 
-        private struct Stub_ : IComparable<Stub_>
+        private struct MyValue_ : IComparable<MyValue_>
         {
             private readonly int _value;
 
-            public Stub_(int value)
+            public MyValue_(int value)
             {
                 _value = value;
             }
 
-            public int CompareTo(Stub_ other)
+            public int CompareTo(MyValue_ other)
             {
                 return _value.CompareTo(other._value);
             }
