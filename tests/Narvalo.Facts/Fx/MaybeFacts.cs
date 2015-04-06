@@ -865,15 +865,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
-#if NO_INTERNALS_VISIBLE_TO // White-box tests.
-
-    public static partial class MaybeFacts
-    {
-        [Fact(Skip = "White-box tests disabled for this configuration.")]
-        public static void Maybe_BlackBox() { }
-    }
-
-#else
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class MaybeFacts
     {

@@ -4,8 +4,8 @@ ChangeLog
 XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
+_Focus on API and code quality of Narvalo.Web_
 _Better test coverage for Narvalo.Core & Narvalo.Web_
-_Very much improved the asset providers and HTML helpers_
 
 #### Bugfixes
 - At start of `Require.InRange()`, we did not validate the range before using it.
@@ -37,7 +37,7 @@ _Very much improved the asset providers and HTML helpers_
 - Use "en" instead of "en-US" as the default resource language.
 - Added more tests.
 - Clearly shows skipped tests. This includes debug or release only tests and white-box tests.
-- Use traits to mark slow tests.
+- Use traits to mark slow or unsafe tests.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

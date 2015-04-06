@@ -236,19 +236,8 @@ namespace Narvalo.Web.UI
 
         #endregion
     }
-    
-#if NO_INTERNALS_VISIBLE_TO // White-box tests.
 
-    public static partial class AssetProviderBaseFacts
-    {
-        [Fact(Skip = "White-box tests disabled for this configuration.")]
-        public static void Description_BlackBox() { }
-    
-        [Fact(Skip = "White-box tests disabled for this configuration.")]
-        public static void Name_BlackBox() { }
-    }
-
-#else
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class AssetProviderBaseFacts
     {

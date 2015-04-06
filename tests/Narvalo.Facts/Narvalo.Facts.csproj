@@ -84,14 +84,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\Common\DebugOnlyFactAttribute.cs">
-      <Link>TestCommon\DebugOnlyFactAttribute.cs</Link>
+    <Compile Include="..\Common\ConfigurationFacts.cs">
+      <Link>TestCommon\ConfigurationFacts.cs</Link>
     </Compile>
     <Compile Include="..\Common\IssueAttribute.cs">
       <Link>TestCommon\IssueAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\ReleaseOnlyFactAttribute.cs">
-      <Link>TestCommon\ReleaseOnlyFactAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
     <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
@@ -100,6 +97,8 @@
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="EnumerationFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
+    <Compile Include="TestCommon\AssertExt.cs" />
+    <Compile Include="TestCommon\DebugOnlyAssert.cs" />
     <Compile Include="TestCommon\DisposableAction.cs" />
     <Compile Include="TestCommon\AspNetUtility.cs" />
     <Compile Include="TestCommon\MvcUtility.cs" />

@@ -7,9 +7,7 @@ namespace Narvalo
     using Narvalo.TestCommon;
     using Xunit;
 
-    // NB: This is one of those exceptional cases where we use different sets of tests 
-    // whether we build the tests in debug or in release configuration.
-    public static class PromiseFacts
+    public static partial class PromiseFacts
     {
         private const string NULL_STRING = null;
         private const string WHITESPACE_ONLY_STRING = "     ";
@@ -23,18 +21,11 @@ namespace Narvalo
             Promise.Condition(true, "rationale");
         }
 
-        [DebugOnlyFact]
-        public static void Condition_Throws_ForFalseCondition_InDebugBuild()
+        [Fact]
+        public static void Condition_Throws_ForFalseCondition()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.Condition(false, "rationale"));
-        }
-
-        [ReleaseOnlyFact]
-        public static void Condition_DoesNotThrow_ForFalseCondition_InReleaseBuild()
-        {
-            // Act
-            Promise.Condition(false, "rationale");
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.Condition(false, "rationale"));
         }
 
         #endregion
@@ -48,18 +39,11 @@ namespace Narvalo
             Promise.NotNull(String.Empty, "rationale");
         }
 
-        [DebugOnlyFact]
-        public static void NotNull_Throws_ForNull_InDebugBuild()
+        [Fact]
+        public static void NotNull_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNull(NULL_STRING, "rationale"));
-        }
-
-        [ReleaseOnlyFact]
-        public static void NotNull_DoesNotThrow_ForNull_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNull(NULL_STRING, "rationale");
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNull(NULL_STRING, "rationale"));
         }
 
         #endregion
@@ -73,32 +57,18 @@ namespace Narvalo
             Promise.NotNullOrEmpty("value", "rationale");
         }
 
-        [DebugOnlyFact]
-        public static void NotNullOrEmpty_Throws_ForNull_InDebugBuild()
+        [Fact]
+        public static void NotNullOrEmpty_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(NULL_STRING, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(NULL_STRING, "rationale"));
         }
 
-        [ReleaseOnlyFact]
-        public static void NotNullOrEmpty_DoesNotThrow_ForNull_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNullOrEmpty(NULL_STRING, "rationale");
-        }
-
-        [DebugOnlyFact]
-        public static void NotNullOrEmpty_Throws_ForEmptyString_InDebugBuild()
+        [Fact]
+        public static void NotNullOrEmpty_Throws_ForEmptyString()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(String.Empty, "rationale"));
-        }
-
-        [ReleaseOnlyFact]
-        public static void NotNullOrEmpty_DoesNotThrow_ForEmptyString_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNullOrEmpty(String.Empty, "rationale");
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNullOrEmpty(String.Empty, "rationale"));
         }
 
         #endregion
@@ -112,48 +82,100 @@ namespace Narvalo
             Promise.NotNullOrWhiteSpace("value", "rationale");
         }
 
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Throws_ForNull_InDebugBuild()
+        [Fact]
+        public static void NotNullOrWhiteSpace_Throws_ForNull()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale"));
         }
 
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForNull_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale");
-        }
-
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Throws_ForEmptyString_InDebugBuild()
+        [Fact]
+        public static void NotNullOrWhiteSpace_Throws_ForEmptyString()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(String.Empty, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(String.Empty, "rationale"));
         }
 
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForEmptyString_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNullOrWhiteSpace(String.Empty, "rationale");
-        }
-
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Throws_ForWhiteSpaceOnlyString_InDebugBuild()
+        [Fact]
+        public static void NotNullOrWhiteSpace_Throws_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "rationale"));
-        }
-
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForWhiteSpaceOnlyString_InReleaseBuild()
-        {
-            // Act
-            Promise.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "rationale");
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "rationale"));
         }
 
         #endregion
     }
+
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+
+    public static partial class PromiseFacts
+    {
+        #region Condition()
+
+        [Fact]
+        public static void Condition_ThrowsIllegalConditionException_ForFalseCondition()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.Condition(false, "rationale"));
+        }
+
+        #endregion
+
+        #region NotNull()
+
+        [Fact]
+        public static void NotNull_ThrowsIllegalConditionException_ForNull()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNull(NULL_STRING, "rationale"));
+        }
+
+        #endregion
+
+        #region NotNullOrEmpty()
+
+        [Fact]
+        public static void NotNullOrEmpty_ThrowsIllegalConditionException_ForNull()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNullOrEmpty(NULL_STRING, "rationale"));
+        }
+
+        [Fact]
+        public static void NotNullOrEmpty_ThrowsIllegalConditionException_ForEmptyString()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNullOrEmpty(String.Empty, "rationale"));
+        }
+
+        #endregion
+
+        #region NotNullOrWhiteSpace()
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForNull()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNullOrWhiteSpace(NULL_STRING, "rationale"));
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForEmptyString()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNullOrWhiteSpace(String.Empty, "rationale"));
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForWhiteSpaceOnlyString()
+        {
+            // Act & Assert
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.NotNullOrWhiteSpace(WHITESPACE_ONLY_STRING, "rationale"));
+        }
+
+        #endregion
+    }
+
+#endif
 }
+
