@@ -6,16 +6,16 @@ namespace Narvalo.TestCommon
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class FakeException : Exception
+    public class SimpleException : Exception
     {
-        public FakeException() : base() { }
+        public SimpleException() : base() { }
 
-        public FakeException(string message) : base(message) { }
+        public SimpleException(string message) : base(message) { }
 
-        public FakeException(string message, Exception innerException)
+        public SimpleException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        protected FakeException(SerializationInfo info, StreamingContext context)
+        protected SimpleException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
     }
 }

@@ -7,7 +7,7 @@ namespace Narvalo.Web.Html
 
     using Narvalo.Web.UI;
 
-    public static class AssetHelper
+    public static class Asset
     {
         public static IHtmlString Css(string relativePath)
         {
@@ -16,7 +16,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return LinkHelper.Render(assetUri, null /* linkType */, "stylesheet");
+            return Markup.Link(assetUri, null /* linkType */, "stylesheet");
         }
 
         public static IHtmlString Css(string relativePath, string media)
@@ -26,7 +26,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return LinkHelper.Render(assetUri, null /* linkType */, "stylesheet", new { media = media });
+            return Markup.Link(assetUri, null /* linkType */, "stylesheet", new { media = media });
         }
 
         public static IHtmlString Image(string relativePath, string alt)
@@ -36,7 +36,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetImageUri(relativePath);
-            return ImageHelper.Render(assetUri, alt);
+            return Markup.Image(assetUri, alt);
         }
 
         public static IHtmlString JavaScript(string relativePath)
@@ -46,7 +46,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
-            return ScriptHelper.Render(assetUri);
+            return Markup.Script(assetUri);
         }
 
         public static IHtmlString Less(string relativePath)
@@ -56,7 +56,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return LinkHelper.Render(assetUri, "text/css", "stylesheet/less");
+            return Markup.Link(assetUri, "text/css", "stylesheet/less");
         }
 
         public static IHtmlString Less(string relativePath, string media)
@@ -66,7 +66,7 @@ namespace Narvalo.Web.Html
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return LinkHelper.Render(assetUri, "text/css", "stylesheet/less", new { media = media });
+            return Markup.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
         }
     }
 }

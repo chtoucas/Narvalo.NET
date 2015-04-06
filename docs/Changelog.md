@@ -5,7 +5,7 @@ XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
 _Better test coverage for Narvalo.Core & Narvalo.Web_
-_Very much improved the asset providers_
+_Very much improved the asset providers and HTML helpers_
 
 #### Bugfixes
 - At start of `Require.InRange()`, we did not validate the range before using it.
@@ -19,7 +19,7 @@ _Very much improved the asset providers_
   `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
    no longer virtual.
 - Refactored the asset providers in an attempt to make them more robust and configurable.
-- Refactored the HTML helpers into purely static methods.
+- Refactored the HTML helpers into "purely" static methods.
 
 ### Enhancements
 - Added localized resources for the french language.

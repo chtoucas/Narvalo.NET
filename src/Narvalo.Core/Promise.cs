@@ -22,7 +22,7 @@ namespace Narvalo
     /// Personally, I can only see three situations where these helpers make sense:
     /// <list type="bullet">
     /// <item>for private methods where you have full control of all possible callers.</item>
-    /// <item>for protected overriden methods in a sealed class when the base method does
+    /// <item>for protected overridden methods in a sealed class when the base method does
     /// not declare any contract, when you know for certain that *ALL* callers will
     /// satisfy the condition and most certainly when you own all base classes.
     /// As you can see, that makes a lot of prerequisites...</item>

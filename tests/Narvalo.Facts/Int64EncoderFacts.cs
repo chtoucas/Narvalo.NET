@@ -1,5 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
+[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
+
 namespace Narvalo
 {
     using System;
@@ -22,8 +27,7 @@ namespace Narvalo
         /// <summary>
         /// Test data borrowed from the Encode-Base58 Perl module.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements",
-            Justification = "[GeneratedCode] Very long list of sample data.")]
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements")]
         public static IEnumerable<object[]> FlickrBase58Data
         {
             get
@@ -595,7 +599,7 @@ namespace Narvalo
 
         [Theory]
         [MemberData("FlickrBase58Data")]
-        [Trait("Slow", "")]
+        [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void FromFlickrBase58String_ReturnsExpectedString(string value, long expectedValue)
         {
@@ -636,7 +640,7 @@ namespace Narvalo
 
         [Theory]
         [MemberData("FlickrBase58Data")]
-        [Trait("Slow", "")]
+        [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void ToFlickrBase58String_ReturnsExpectedString(string expectedValue, long value)
         {

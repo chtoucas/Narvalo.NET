@@ -3,7 +3,6 @@
 namespace Narvalo.Web.UI
 {
     using System;
-    using System.Web.WebPages.TestUtils;
 
     using Narvalo.TestCommon;
     using Xunit;
@@ -24,9 +23,10 @@ namespace Narvalo.Web.UI
         }
 
         [Fact]
+        [Trait("Unsafe", "AppDomain")]
         public static void GetFontUri_ReturnsBasePath_ForEmptyPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
+            AppDomainUtility.RunInSeparateAppDomain(() =>
             {
                 AspNetUtility.SetupAspNetDomain();
 
@@ -59,9 +59,10 @@ namespace Narvalo.Web.UI
         }
 
         [Fact]
+        [Trait("Unsafe", "AppDomain")]
         public static void GetImageUri_ReturnsBasePath_ForEmptyPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
+            AppDomainUtility.RunInSeparateAppDomain(() =>
             {
                 AspNetUtility.SetupAspNetDomain();
 
@@ -94,9 +95,10 @@ namespace Narvalo.Web.UI
         }
 
         [Fact]
+        [Trait("Unsafe", "AppDomain")]
         public static void GetScriptUri_ReturnsBasePath_ForEmptyPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
+            AppDomainUtility.RunInSeparateAppDomain(() =>
             {
                 AspNetUtility.SetupAspNetDomain();
 
@@ -129,9 +131,10 @@ namespace Narvalo.Web.UI
         }
 
         [Fact]
+        [Trait("Unsafe", "AppDomain")]
         public static void GetStyleUri_ReturnsBasePath_ForEmptyPath()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
+            AppDomainUtility.RunInSeparateAppDomain(() =>
             {
                 AspNetUtility.SetupAspNetDomain();
 

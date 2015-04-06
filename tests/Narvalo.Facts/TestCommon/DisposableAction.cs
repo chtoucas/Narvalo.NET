@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-// Borrowed from aspnetwebstack\src\System.Web.WebPages\Common
-namespace System.Web.WebPages
+// Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
+namespace Narvalo.TestCommon
 {
+    using System;
+
     public class DisposableAction : IDisposable
     {
         private Action _action;

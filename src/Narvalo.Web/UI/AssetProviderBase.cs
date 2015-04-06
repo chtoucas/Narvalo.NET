@@ -113,7 +113,7 @@ namespace Narvalo.Web.UI
             }
 
             // FIXME: Name is initialized by base.Initialize() but Name 
-            // could have been overriden in a derived class.
+            // could have been overridden in a derived class.
             // Contract.Assume(Name != null);
         }
 

@@ -60,22 +60,6 @@ namespace Narvalo.Web.UI
             config.Remove(BASE_URI_KEY);
         }
 
-        private Uri MakeUri_(string baseIntermediatePath, string relativePath)
-        {
-            Require.NotNull(relativePath, "relativePath");
-            Contract.Requires(baseIntermediatePath != null);
-            Contract.Requires(baseIntermediatePath.Length != 0);
-            Contract.Ensures(Contract.Result<Uri>() != null);
-
-            // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception 
-            // would have been thrown in InitializeCustom().
-            Contract.Assume(_baseUri != null);
-
-            string relativeUri = Combine(baseIntermediatePath, relativePath);
-
-            return new Uri(_baseUri, relativeUri);
-        }
-
         private static string Combine(string basePath, string relativePath)
         {
             Contract.Requires(basePath != null);
@@ -109,6 +93,22 @@ namespace Narvalo.Web.UI
         private static bool HasTrailingSlash(string path)
         {
             return path[path.Length - 1] == '/';
+        }
+
+        private Uri MakeUri_(string baseIntermediatePath, string relativePath)
+        {
+            Require.NotNull(relativePath, "relativePath");
+            Contract.Requires(baseIntermediatePath != null);
+            Contract.Requires(baseIntermediatePath.Length != 0);
+            Contract.Ensures(Contract.Result<Uri>() != null);
+
+            // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception 
+            // would have been thrown in InitializeCustom().
+            Contract.Assume(_baseUri != null);
+
+            string relativeUri = Combine(baseIntermediatePath, relativePath);
+
+            return new Uri(_baseUri, relativeUri);
         }
     }
 }

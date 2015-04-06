@@ -61,6 +61,19 @@ namespace Narvalo.Web.UI
             return MakeUri_(_stylesPath, relativePath);
         }
 
+        // FIXME: If any value is invalid, return null.
+        internal static string NormalizeAppRelativePath(string value)
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                return null;
+            }
+            else
+            {
+                return value;
+            }
+        }
+
         protected override void InitializeCustom(NameValueCollection config)
         {
             InitializeCustomInternal(config);
@@ -80,19 +93,6 @@ namespace Narvalo.Web.UI
             if (imagesPath.IsSome) { config.Remove(IMAGES_PATH_KEY); }
             if (scriptsPath.IsSome) { config.Remove(SCRIPTS_PATH_KEY); }
             if (stylesPath.IsSome) { config.Remove(STYLES_PATH_KEY); }
-        }
-
-        // FIXME: If any value is invalid, return null.
-        internal static string NormalizeAppRelativePath(string value)
-        {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                return null;
-            }
-            else
-            {
-                return value;
-            }
         }
 
         private static Uri MakeUri_(string baseIntermediatePath, string relativePath)

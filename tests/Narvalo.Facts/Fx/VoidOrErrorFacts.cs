@@ -28,9 +28,9 @@ namespace Narvalo.Fx
             // Act
             try
             {
-                throw new FakeException();
+                throw new SimpleException();
             }
-            catch (FakeException ex)
+            catch (SimpleException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 

@@ -22,6 +22,7 @@ namespace Narvalo.Web.UI
 
     using System.Configuration;
     using System.Configuration.Provider;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Web.Configuration;
     using Xunit;
@@ -32,6 +33,7 @@ namespace Narvalo.Web.UI
         #region Provider
 
         [Fact]
+        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "provider")]
         public static void Provider_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange
@@ -59,6 +61,7 @@ namespace Narvalo.Web.UI
         #region Providers
 
         [Fact]
+        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "providers")]
         public static void Providers_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange

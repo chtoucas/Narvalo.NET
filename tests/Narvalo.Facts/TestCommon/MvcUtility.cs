@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-// Borrowed from aspnetwebstack\test\System.Web.Mvc.Test\Util
-namespace Microsoft.Web.UnitTestUtil
+// Adapted from aspnetwebstack\test\System.Web.Mvc.Test\Util\MvcHelper.cs
+namespace Narvalo.TestCommon
 {
     using System;
     using System.Collections;
+    using System.Globalization;
     using System.IO;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Moq;
 
-    public static class MvcHelper
+    public static class MvcUtility
     {
         public const string AppPathModifier = "/$(SESSION)";
 
@@ -127,7 +128,7 @@ namespace Microsoft.Web.UnitTestUtil
 
             if (port >= 0)
             {
-                uri = new Uri(protocol + "://localhost" + ":" + Convert.ToString(port));
+                uri = new Uri(protocol + "://localhost" + ":" + Convert.ToString(port, CultureInfo.InvariantCulture));
             }
             else
             {
@@ -160,7 +161,12 @@ namespace Microsoft.Web.UnitTestUtil
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { DefaultValue = DefaultValue.Mock };
             mockViewContext.Setup(c => c.HttpContext).Returns(httpContext);
             mockViewContext.Setup(c => c.ViewData).Returns(viewData);
-            mockViewContext.Setup(c => c.Writer).Returns(new StringWriter());
+
+            using (var sw = new StringWriter(CultureInfo.CurrentCulture))
+            {
+                mockViewContext.Setup(c => c.Writer).Returns(sw);
+            }
+
             return mockViewContext.Object;
         }
 

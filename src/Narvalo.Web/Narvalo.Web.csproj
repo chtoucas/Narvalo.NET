@@ -97,9 +97,8 @@
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Html\ScriptHelper.cs" />
-    <Compile Include="Html\LinkHelper.cs" />
-    <Compile Include="Html\ImageHelper.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Html\Markup.cs" />
     <Compile Include="HttpQueryBinderBase`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
@@ -107,8 +106,7 @@
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Configuration\WebSectionManager.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="Html\AssetHelper.cs" />
-    <Compile Include="Html\HtmlText.cs" />
+    <Compile Include="Html\Asset.cs" />
     <Compile Include="HttpHandlerBase.cs" />
     <Compile Include="HttpHandlerBase`2.cs" />
     <Compile Include="HttpResponse%24.Caching.cs">

@@ -14,6 +14,7 @@ namespace Narvalo.Web.Configuration
     {
         private static readonly Lazy<Maybe<AssetSection>> s_AssetSection
             = new Lazy<Maybe<AssetSection>>(InitializeAssetSection_);
+
         private static readonly Lazy<OptimizationSection> s_OptimizationSection
             = new Lazy<OptimizationSection>(InitializeOptimizationSection_);
 

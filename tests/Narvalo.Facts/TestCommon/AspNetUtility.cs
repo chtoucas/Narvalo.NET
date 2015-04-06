@@ -9,8 +9,6 @@ namespace Narvalo.TestCommon
     using System.Text;
     using System.Web;
     using System.Web.Hosting;
-    using System.Web.WebPages;
-    using System.Web.WebPages.TestUtils;
 
     // FIXME: Reset environment after.
     public static class AspNetUtility
@@ -22,7 +20,7 @@ namespace Narvalo.TestCommon
 
         public static IDisposable CreateHttpContext(string page, string query)
         {
-            using (var sw = new StringWriter(new StringBuilder(), CultureInfo.InvariantCulture))
+            using (var sw = new StringWriter(new StringBuilder(), CultureInfo.CurrentCulture))
             {
                 var worker = new SimpleWorkerRequest(page, query, sw);
                 var httpContext = new HttpContext(worker);
@@ -35,7 +33,7 @@ namespace Narvalo.TestCommon
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#")]
         public static IDisposable CreateHttpContext(string fileName, string url, string query)
         {
-            using (var sw = new StringWriter(new StringBuilder(), CultureInfo.InvariantCulture))
+            using (var sw = new StringWriter(new StringBuilder(), CultureInfo.CurrentCulture))
             {
                 var request = new HttpRequest(fileName, url, query);
                 var httpContext = new HttpContext(request, new HttpResponse(sw));
