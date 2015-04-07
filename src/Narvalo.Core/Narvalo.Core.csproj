@@ -112,8 +112,6 @@
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
-    <Compile Include="Internal\Is.cs" />
-    <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Extensions\PredicateExtensions.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Promise.cs" />
@@ -133,6 +131,7 @@
     <Compile Include="Fx\Stubs`2.cs" />
     <Compile Include="Fx\VoidOrBreak.cs" />
     <Compile Include="Fx\VoidOrError.cs" />
+    <Compile Include="ValidatedNotNullAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Monad.Maybe.tt" />

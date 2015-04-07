@@ -4,29 +4,29 @@ namespace Narvalo.TestCommon
 {
     using System;
 
+#if DEBUG
     using Xunit;
+#endif
 
     internal static class AssertExt
     {
         public static class DebugOnly
         {
-            public static T Throws<T>(Action testCode) where T : Exception
+            public static void Throws<T>(Action testCode) where T : Exception
             {
 #if DEBUG
-                return Assert.Throws<T>(testCode);
+                Assert.Throws<T>(testCode);
 #else
-            testCode();
-            return default(T);
+                testCode();
 #endif
             }
 
-            public static T ThrowsAny<T>(Action testCode) where T : Exception
+            public static void ThrowsAny<T>(Action testCode) where T : Exception
             {
 #if DEBUG
-                return Assert.ThrowsAny<T>(testCode);
+                Assert.ThrowsAny<T>(testCode);
 #else
-            testCode();
-            return default(T);
+                testCode();
 #endif
             }
         }

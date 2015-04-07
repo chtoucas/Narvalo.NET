@@ -5,6 +5,8 @@ namespace Narvalo
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Internal;
+
     public static class ConvertTo
     {
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
@@ -13,9 +15,9 @@ namespace Narvalo
         {
             var type = typeof(TEnum);
 
-            if (TypeUtility.HasFlagsInternal(type))
+            if (TypeUtility.HasFlagsAttribute(type))
             {
-                // WARNING: Does not work consistently for Flags enums:
+                // Does not work consistently for Flags enums:
                 // http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
                 throw new ArgumentException();
             }

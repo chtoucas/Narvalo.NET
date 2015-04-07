@@ -3,18 +3,19 @@
 namespace Narvalo
 {
     using System;
-    using System.Reflection;
     using System.Diagnostics.Contracts;
 
-    public static class TypeUtility
+    using Narvalo.Internal;
+
+    public static class Is
     {
         /// <summary>
         /// Returns a value indicating whether the specified type parameter is an enumeration.
         /// </summary>
-        /// <typeparam name="T">The type to be checked.</typeparam>
+        /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is an enumeration; 
         /// otherwise <c>false</c>.</returns>
-        public static bool IsEnum<T>() where T : struct
+        public static bool Enum<T>() where T : struct
         {
             return typeof(T).IsEnum;
         }
@@ -22,47 +23,59 @@ namespace Narvalo
         /// <summary>
         /// Returns a value indicating whether the specified type parameter is a flags enumeration.
         /// </summary>
-        /// <typeparam name="T">The type to be checked.</typeparam>
+        /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is a flags enumeration; 
         /// otherwise <c>false</c>.</returns>
-        public static bool IsFlagsEnum<T>() where T : struct
+        public static bool FlagsEnum<T>() where T : struct
         {
             var type = typeof(T);
 
-            return type.IsEnum && HasFlagsInternal(type);
+            return type.IsEnum && TypeUtility.HasFlagsAttribute(type);
         }
 
         /// <summary>
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
         /// </summary>
-        /// <param name="type">The type to be checked.</param>
+        /// <param name="type">The type to test.</param>
         /// <returns><c>true</c> if the specified <paramref name="type"/> is a flags enumeration; 
         /// otherwise <c>false</c>.</returns>
         [Pure]
-        public static bool IsFlagsEnum(Type type)
+        public static bool FlagsEnum(Type type)
         {
-            return type != null && type.IsEnum && HasFlagsInternal(type);
+            return type != null && type.IsEnum && TypeUtility.HasFlagsAttribute(type);
         }
 
         /// <summary>
         /// Returns a value indicating whether the specified type parameter is a value type.
         /// </summary>
-        /// <typeparam name="T">The type to be checked.</typeparam>
+        /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is a value type; 
         /// otherwise <c>false</c>.</returns>
-        public static bool IsValueType<T>()
+        public static bool ValueType<T>()
         {
             return typeof(T).IsValueType;
         }
 
+        /// <summary>
+        /// Returns a value indicating whether the specified value consists only of white-space characters.
+        /// </summary>
+        /// <param name="value">The string to test.</param>
+        /// <returns><c>true</c> if the specified value consists only of white-space characters; 
+        /// otherwise <c>false</c>.</returns>
         [Pure]
-        internal static bool HasFlagsInternal(Type type)
+        public static bool WhiteSpace(string value)
         {
-            Contract.Requires(type != null);
+            Require.NotNull(value, "value");
 
-            var attribute = type.GetCustomAttribute<FlagsAttribute>(inherit: false);
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(value[i]))
+                {
+                    return false;
+                }
+            }
 
-            return attribute != null;
+            return true;
         }
     }
 }
