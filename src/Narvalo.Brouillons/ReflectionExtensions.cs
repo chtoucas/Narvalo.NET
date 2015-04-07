@@ -9,16 +9,17 @@ namespace Narvalo
 
     internal static class ReflectionExtensions
     {
-        public static Maybe<T> MayGetCustomAttribute<T>(
-               this MemberInfo element,
-               bool inherit) where T : Attribute
+        public static Maybe<TAttribute> MayGetCustomAttribute<TAttribute>(
+               this Type @this,
+               bool inherit) where TAttribute : Attribute
         {
-#if NET_35
-            return Maybe.Of(element.GetCustomAttribute<T>(inherit));
-#else
-            var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
-            return Maybe.Of(attr).Select(a => (T)a);
-#endif
+            return Maybe.Of(@this.GetCustomAttribute<TAttribute>(inherit));
+
+            //#if NET_35
+            //#else
+            //            var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
+            //            return Maybe.Of(attr).Select(a => (T)a);
+            //#endif
         }
 
         ///// <summary>

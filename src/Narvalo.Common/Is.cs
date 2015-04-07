@@ -30,7 +30,7 @@ namespace Narvalo
         {
             var type = typeof(T);
 
-            return type.IsEnum && TypeUtility.HasFlagsAttribute(type);
+            return type.IsEnum && type.HasFlagsAttribute();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Narvalo
         [Pure]
         public static bool FlagsEnum(Type type)
         {
-            return type != null && type.IsEnum && TypeUtility.HasFlagsAttribute(type);
+            return type != null && type.IsEnum && type.HasFlagsAttribute();
         }
 
         /// <summary>
@@ -65,7 +65,10 @@ namespace Narvalo
         [Pure]
         public static bool WhiteSpace(string value)
         {
-            Require.NotNull(value, "value");
+            if (value == null)
+            {
+                return false;
+            }
 
             for (int i = 0; i < value.Length; i++)
             {

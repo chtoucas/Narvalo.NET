@@ -9,9 +9,9 @@ namespace Narvalo.Web.Html
 
     public static class Asset
     {
-        internal const string InternalCssRelation = "stylesheet";
-        internal const string InternalLessLinkType = "text/css";
-        internal const string InternalLessRelation = "stylesheet/less";
+        private const string CSS_RELATION = "stylesheet";
+        private const string LESS_LINK_TYPE = "text/css";
+        private const string LESS_RELATION = "stylesheet/less";
 
         public static IHtmlString Css(string relativePath)
         {
@@ -21,7 +21,7 @@ namespace Narvalo.Web.Html
             var assetUri = AssetManager.GetStyleUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
 
-            return Markup.Link(assetPath, null /* linkType */, InternalCssRelation);
+            return Markup.Link(assetPath, null /* linkType */, CSS_RELATION);
         }
 
         public static IHtmlString Css(string relativePath, string media)
@@ -32,7 +32,7 @@ namespace Narvalo.Web.Html
             var assetUri = AssetManager.GetStyleUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
 
-            return Markup.Link(assetPath, null /* linkType */, InternalCssRelation, new { media = media });
+            return Markup.Link(assetPath, null /* linkType */, CSS_RELATION, new { media = media });
         }
 
         public static IHtmlString Image(string relativePath, string alt)
@@ -65,7 +65,7 @@ namespace Narvalo.Web.Html
             var assetUri = AssetManager.GetScriptUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
 
-            return Markup.Link(assetPath, InternalLessLinkType, InternalLessRelation);
+            return Markup.Link(assetPath, LESS_LINK_TYPE, LESS_RELATION);
         }
 
         public static IHtmlString Less(string relativePath, string media)
@@ -76,7 +76,7 @@ namespace Narvalo.Web.Html
             var assetUri = AssetManager.GetScriptUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
 
-            return Markup.Link(assetPath, InternalLessLinkType, InternalLessRelation, new { media = media });
+            return Markup.Link(assetPath, LESS_LINK_TYPE, LESS_RELATION, new { media = media });
         }
     }
 }

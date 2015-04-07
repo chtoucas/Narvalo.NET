@@ -15,6 +15,7 @@ namespace Narvalo.Web.Html
             {
                 yield return new object[] { "http://tempuri.org/assets/path" };
                 yield return new object[] { "https://tempuri.org/assets/path" };
+                yield return new object[] { "//tempuri.org/assets/path" };
                 yield return new object[] { "/assets/path" };
                 yield return new object[] { "assets/path" };
                 yield return new object[] { "./assets/path" };

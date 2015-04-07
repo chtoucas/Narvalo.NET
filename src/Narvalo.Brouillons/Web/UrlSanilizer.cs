@@ -6,7 +6,7 @@ namespace Narvalo.Web
     using System.Text;
     using System.Text.RegularExpressions;
 
-    public static class UrlNormalizer
+    public static class UrlSanilizer
     {
         const char NormalizationChar_ = '-';
 
@@ -14,7 +14,7 @@ namespace Narvalo.Web
 
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
             Justification = "[Intentionally] It is safer to use lowercase characters in URIs.")]
-        public static string NormalizePart(string value)
+        public static string Sanitize(string value)
         {
             Require.NotNullOrEmpty(value, "value");
 

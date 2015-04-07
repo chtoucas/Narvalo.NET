@@ -15,7 +15,7 @@ namespace Narvalo.Web.Html
             Acknowledge.Object(@this);
             Acknowledge.NotNullOrEmpty(relativePath);
 
-            Render_(@this, LinkMarkup_(relativePath, null /* linkType */, Asset.InternalCssRelation, null));
+            Render_(@this, LinkMarkup_(relativePath, null /* linkType */, Asset.CssRelation, null));
         }
 
         public static void RenderCss(this HtmlHelper @this, string relativePath, string media)
@@ -23,7 +23,7 @@ namespace Narvalo.Web.Html
             Acknowledge.Object(@this);
             Acknowledge.NotNullOrEmpty(relativePath);
 
-            Render_(@this, LinkMarkup_(relativePath, null /* linkType */, Asset.InternalCssRelation, new { media = media }));
+            Render_(@this, LinkMarkup_(relativePath, null /* linkType */, Asset.CssRelation, new { media = media }));
         }
 
         public static void RenderImage(this HtmlHelper @this, string relativePath, string alt)
@@ -52,7 +52,7 @@ namespace Narvalo.Web.Html
             Acknowledge.Object(@this);
             Acknowledge.NotNullOrEmpty(relativePath);
 
-            Render_(@this, LinkMarkup_(relativePath, Asset.InternalLessLinkType, Asset.InternalLessRelation, null));
+            Render_(@this, LinkMarkup_(relativePath, Asset.LessLinkType, Asset.LessRelation, null));
         }
 
         public static void RenderLess(this HtmlHelper @this, string relativePath, string media)
@@ -60,7 +60,7 @@ namespace Narvalo.Web.Html
             Acknowledge.Object(@this);
             Acknowledge.NotNullOrEmpty(relativePath);
 
-            Render_(@this, LinkMarkup_(relativePath, Asset.InternalLessLinkType, Asset.InternalLessRelation, new { media = media }));
+            Render_(@this, LinkMarkup_(relativePath, Asset.LessLinkType, Asset.LessRelation, new { media = media }));
         }
 
         private static void Render_(HtmlHelper @this, string content)

@@ -67,6 +67,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="ConvertTo.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
-    <Compile Include="Internal\TypeUtility.cs" />
+    <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />

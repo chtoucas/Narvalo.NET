@@ -6,14 +6,14 @@ namespace Narvalo.Internal
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
-    internal static class TypeUtility
+    internal static class ReflectionExtensions
     {
         [Pure]
-        public static bool HasFlagsAttribute(Type type)
+        public static bool HasFlagsAttribute(this Type @this)
         {
-            Contract.Requires(type != null);
+            Contract.Requires(@this != null);
 
-            var attribute = type.GetCustomAttribute<FlagsAttribute>(inherit: false);
+            var attribute = @this.GetCustomAttribute<FlagsAttribute>(inherit: false);
 
             return attribute != null;
         }

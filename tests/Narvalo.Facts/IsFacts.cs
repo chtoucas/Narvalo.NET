@@ -162,13 +162,6 @@ namespace Narvalo
         #region WhiteSpace()
 
         [Fact]
-        public static void WhiteSpace_ThrowsArgumentNullException_ForNullString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Is.WhiteSpace(null));
-        }
-
-        [Fact]
         public static void WhiteSpace_ReturnsTrue_ForEmptyString()
         {
             // Act & Assert
@@ -180,6 +173,13 @@ namespace Narvalo
         {
             // Act & Assert
             Assert.True(Is.WhiteSpace(WHITESPACE_ONLY_STRING));
+        }
+
+        [Fact]
+        public static void WhiteSpace_ReturnsFalse_ForNullString()
+        {
+            // Act & Assert
+            Assert.False(Is.WhiteSpace(null));
         }
 
         [Fact]

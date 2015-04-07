@@ -95,7 +95,6 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
-    <Compile Include="EnumerationFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
     <Compile Include="TestCommon\AssertExt.cs" />
     <Compile Include="TestCommon\DisposableAction.cs" />
