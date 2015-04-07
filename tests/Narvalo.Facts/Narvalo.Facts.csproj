@@ -84,8 +84,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\Common\ConfigurationFacts.cs">
-      <Link>TestCommon\ConfigurationFacts.cs</Link>
+    <Compile Include="..\Common\EnvironmentFacts.cs">
+      <Link>TestCommon\EnvironmentFacts.cs</Link>
     </Compile>
     <Compile Include="..\Common\IssueAttribute.cs">
       <Link>TestCommon\IssueAttribute.cs</Link>

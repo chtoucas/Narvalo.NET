@@ -4,7 +4,7 @@ namespace Narvalo.TestCommon
 {
     using Xunit;
 
-    public static class ConfigurationFacts
+    public static class EnvironmentFacts
     {
 #if NO_INTERNALS_VISIBLE_TO // White-box testing.
 
