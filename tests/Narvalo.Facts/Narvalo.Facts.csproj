@@ -124,7 +124,7 @@
     <Compile Include="Web\UI\AssetProviderCollectionFacts.cs" />
     <Compile Include="Web\UI\RemoteAssetProviderFacts.cs" />
     <Compile Include="Web\UI\DefaultAssetProviderFacts.cs" />
-    <Compile Include="Web\UriFacts.cs" />
+    <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">

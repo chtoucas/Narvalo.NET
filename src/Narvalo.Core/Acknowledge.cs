@@ -24,6 +24,15 @@ namespace Narvalo
             Contract.Requires(@this != null);
         }
 
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullOrEmpty(string value)
+        {
+            Contract.Requires(value != null);
+            Contract.Requires(value.Length != 0);
+        }
+
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>

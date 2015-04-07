@@ -6,18 +6,18 @@ namespace Narvalo.Web
 
     using Xunit;
 
-    public static class UriFacts
+    public static class UrlManipFacts
     {
         #region ToProtocolRelativeString()
 
         [Fact]
-        public static void ToProtocolRelativeString_ThrowsArgumentNullException_ForNullObject()
+        public static void ToProtocolRelativeString_ThrowsArgumentNullException_ForNullInput()
         {
             // Arrange
             Uri uri = null;
 
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => uri.ToProtocolRelativeString());
+            Assert.Throws<ArgumentNullException>(() => UrlManip.ToProtocolRelativeString(uri));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Narvalo.Web
             Uri uri = new Uri("mailto:nobody@tempuri.org");
 
             // Act & Assert
-            Assert.Throws<NotSupportedException>(() => uri.ToProtocolRelativeString());
+            Assert.Throws<NotSupportedException>(() => UrlManip.ToProtocolRelativeString(uri));
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Narvalo.Web
             Uri uri = new Uri("http://tempuri.org/my/relative/path");
 
             // Act
-            var result = uri.ToProtocolRelativeString();
+            var result = UrlManip.ToProtocolRelativeString(uri);
 
             // Assert
             Assert.Equal("//tempuri.org/my/relative/path", result);
@@ -50,7 +50,7 @@ namespace Narvalo.Web
             Uri uri = new Uri("https://tempuri.org/my/relative/path");
 
             // Act
-            var result = uri.ToProtocolRelativeString();
+            var result = UrlManip.ToProtocolRelativeString(uri);
 
             // Assert
             Assert.Equal("//tempuri.org/my/relative/path", result);
@@ -63,7 +63,7 @@ namespace Narvalo.Web
             Uri uri = new Uri("/my/relative/path", UriKind.Relative);
 
             // Act
-            var result = uri.ToProtocolRelativeString();
+            var result = UrlManip.ToProtocolRelativeString(uri);
 
             // Assert
             Assert.Equal("/my/relative/path", result);

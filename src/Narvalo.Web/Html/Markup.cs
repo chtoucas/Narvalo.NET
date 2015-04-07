@@ -9,131 +9,156 @@ namespace Narvalo.Web.Html
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Narvalo.Web.Internal;
-
+    // REVIEW: Null media.
     public static class Markup
     {
-        private static HtmlString s_Lipsum;
-
-        public static IHtmlString LoremIpsum
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-                if (s_Lipsum == null)
-                {
-                    s_Lipsum = new HtmlString(
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, "
-                        + "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                        + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris "
-                        + "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in "
-                        + "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
-                        + "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia "
-                        + "deserunt mollit anim id est laborum.");
-                }
-
-                return s_Lipsum;
-            }
-        }
-
         #region Image()
 
         public static IHtmlString Image(string path)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), null, (IDictionary<string, object>)null);
+            return Image(path, null, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Image(string path, string alt)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), alt, (IDictionary<string, object>)null);
+            return Image(path, alt, (IDictionary<string, object>)null);
         }
 
         public static IHtmlString Image(string path, object attributes)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), null, new RouteValueDictionary(attributes));
+            return Image(path, null, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Image(string path, IDictionary<string, object> attributes)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), null, attributes);
+            return Image(path, null, attributes);
         }
 
         public static IHtmlString Image(string path, string alt, object attributes)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), alt, new RouteValueDictionary(attributes));
+            return Image(path, alt, new RouteValueDictionary(attributes));
         }
 
         public static IHtmlString Image(string path, string alt, IDictionary<string, object> attributes)
         {
-            Contract.Requires(path != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(new Uri(path, UriKind.RelativeOrAbsolute), alt, attributes);
+            return new HtmlString(ImageInternal(path, alt, attributes));
         }
 
-        public static IHtmlString Image(Uri imageUri)
+        #endregion
+
+        #region Link()
+
+        public static IHtmlString Link(string path)
         {
-            Contract.Requires(imageUri != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(imageUri, null, (IDictionary<string, object>)null);
+            return Link(path, null, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt)
+        public static IHtmlString Link(string path, string linkType)
         {
-            Contract.Requires(imageUri != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(imageUri, alt, (IDictionary<string, object>)null);
+            return Link(path, linkType, null, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(Uri imageUri, object attributes)
+        public static IHtmlString Link(string path, string linkType, string relation)
         {
-            Contract.Requires(imageUri != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(imageUri, null, new RouteValueDictionary(attributes));
+            return Link(path, linkType, relation, (IDictionary<string, object>)null);
         }
 
-        public static IHtmlString Image(Uri imageUri, IDictionary<string, object> attributes)
+        public static IHtmlString Link(
+            string path,
+            string linkType,
+            string relation,
+            object attributes)
         {
-            Contract.Requires(imageUri != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(imageUri, null, attributes);
+            return Link(path, linkType, relation, new RouteValueDictionary(attributes));
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt, object attributes)
+        public static IHtmlString Link(
+            string path,
+            string linkType,
+            string relation,
+            IDictionary<string, object> attributes)
         {
-            Contract.Requires(imageUri != null);
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return Image(imageUri, alt, new RouteValueDictionary(attributes));
+            return new HtmlString(LinkInternal(path, linkType, relation, attributes));
         }
 
-        public static IHtmlString Image(Uri imageUri, string alt, IDictionary<string, object> attributes)
+        #endregion
+
+        #region Script()
+
+        public static IHtmlString Script(string path)
         {
-            Require.NotNull(imageUri, "imageUri");
+            Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
+
+            return Script(path, null, (IDictionary<string, object>)null);
+        }
+
+        public static IHtmlString Script(string path, string scriptType)
+        {
+            Acknowledge.NotNullOrEmpty(path);
+            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+
+            return Script(path, scriptType, (IDictionary<string, object>)null);
+        }
+
+        public static IHtmlString Script(string path, string scriptType, object attributes)
+        {
+            Acknowledge.NotNullOrEmpty(path);
+            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+
+            return Script(path, scriptType, new RouteValueDictionary(attributes));
+        }
+
+        public static IHtmlString Script(string path, string scriptType, IDictionary<string, object> attributes)
+        {
+            Acknowledge.NotNullOrEmpty(path);
+            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+
+            return new HtmlString(ScriptInternal(path, scriptType, attributes));
+        }
+
+        #endregion
+
+        internal static string ImageInternal(string path, string alt, IDictionary<string, object> attributes)
+        {
+            Require.NotNullOrEmpty(path, "path");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("img");
-            tag.MergeAttribute("src", imageUri.ToProtocolRelativeString());
+            tag.MergeAttribute("src", path);
 
             if (!String.IsNullOrEmpty(alt))
             {
@@ -149,108 +174,20 @@ namespace Narvalo.Web.Html
                 tag.MergeAttribute("title", (tag.Attributes["alt"] ?? String.Empty).ToString());
             }
 
-            return tag.ToHtmlString(TagRenderMode.SelfClosing);
+            return tag.ToString(TagRenderMode.SelfClosing);
         }
 
-        #endregion
-
-        #region Link()
-
-        public static IHtmlString Link(string path)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(new Uri(path, UriKind.RelativeOrAbsolute), null, null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(string path, string linkType)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(new Uri(path, UriKind.RelativeOrAbsolute), linkType, null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(string path, string linkType, string relation)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(new Uri(path, UriKind.RelativeOrAbsolute), linkType, relation, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(
-            string path,
-            string linkType,
-            string relation,
-            object attributes)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(new Uri(path, UriKind.RelativeOrAbsolute), linkType, relation, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Link(
+        internal static string LinkInternal(
             string path,
             string linkType,
             string relation,
             IDictionary<string, object> attributes)
         {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(new Uri(path, UriKind.RelativeOrAbsolute), linkType, relation, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Link(Uri linkUri)
-        {
-            Contract.Requires(linkUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(linkUri, null, null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(Uri linkUri, string linkType)
-        {
-            Contract.Requires(linkUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(linkUri, linkType, null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(Uri linkUri, string linkType, string relation)
-        {
-            Contract.Requires(linkUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(linkUri, linkType, relation, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Link(
-            Uri linkUri,
-            string linkType,
-            string relation,
-            object attributes)
-        {
-            Contract.Requires(linkUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Link(linkUri, linkType, relation, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Link(
-            Uri linkUri,
-            string linkType,
-            string relation,
-            IDictionary<string, object> attributes)
-        {
-            Require.NotNull(linkUri, "linkUri");
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Require.NotNullOrEmpty(path, "path");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("link");
-            tag.MergeAttribute("href", linkUri.ToProtocolRelativeString());
+            tag.MergeAttribute("href", path);
 
             if (!String.IsNullOrEmpty(linkType))
             {
@@ -264,76 +201,16 @@ namespace Narvalo.Web.Html
 
             tag.MergeAttributes(attributes, replaceExisting: true);
 
-            return tag.ToHtmlString(TagRenderMode.SelfClosing);
+            return tag.ToString(TagRenderMode.SelfClosing);
         }
 
-        #endregion
-
-        #region Script()
-
-        public static IHtmlString Script(string path)
+        internal static string ScriptInternal(string path, string scriptType, IDictionary<string, object> attributes)
         {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(new Uri(path, UriKind.RelativeOrAbsolute), null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Script(string path, string scriptType)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(new Uri(path, UriKind.RelativeOrAbsolute), scriptType, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Script(string path, string scriptType, object attributes)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(new Uri(path, UriKind.RelativeOrAbsolute), scriptType, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Script(string path, string scriptType, IDictionary<string, object> attributes)
-        {
-            Contract.Requires(path != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(new Uri(path, UriKind.RelativeOrAbsolute), scriptType, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Script(Uri scriptUri)
-        {
-            Contract.Requires(scriptUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(scriptUri, null, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Script(Uri scriptUri, string scriptType)
-        {
-            Contract.Requires(scriptUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(scriptUri, scriptType, (IDictionary<string, object>)null);
-        }
-
-        public static IHtmlString Script(Uri scriptUri, string scriptType, object attributes)
-        {
-            Contract.Requires(scriptUri != null);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
-
-            return Script(scriptUri, scriptType, new RouteValueDictionary(attributes));
-        }
-
-        public static IHtmlString Script(Uri scriptUri, string scriptType, IDictionary<string, object> attributes)
-        {
-            Require.NotNull(scriptUri, "scriptUri");
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Require.NotNullOrEmpty(path, "path");
+            Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("script");
-            tag.MergeAttribute("src", scriptUri.ToProtocolRelativeString());
+            tag.MergeAttribute("src", path);
 
             if (!String.IsNullOrEmpty(scriptType))
             {
@@ -342,9 +219,7 @@ namespace Narvalo.Web.Html
 
             tag.MergeAttributes(attributes, replaceExisting: true);
 
-            return tag.ToHtmlString();
+            return tag.ToString();
         }
-
-        #endregion
     }
 }

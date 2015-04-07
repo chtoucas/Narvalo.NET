@@ -97,7 +97,7 @@
     <Compile Include="ErrorPageBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Html\Asset.cs" />
     <Compile Include="Html\Markup.cs" />
     <Compile Include="HttpQueryBinderBase`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Configuration\WebSectionManager.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="Html\Asset.cs" />
+    <Compile Include="Html\HtmlHelper%24.cs" />
     <Compile Include="HttpHandlerBase.cs" />
     <Compile Include="HttpHandlerBase`2.cs" />
     <Compile Include="HttpResponse%24.Caching.cs">
@@ -115,7 +115,6 @@
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
-    <Compile Include="Internal\TagBuilder%24.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\UnsafeWhiteSpaceBuster.cs" />
@@ -158,7 +157,7 @@
     <Compile Include="UI\LiteralPageParserFilterBase.cs" />
     <Compile Include="UI\PageParserFilterConstants.cs" />
     <Compile Include="UI\UnrestrictedPageParserFilter.cs" />
-    <Compile Include="Uri%24.cs" />
+    <Compile Include="UrlManip.cs" />
     <Compile Include="UrlHelper%24.cs" />
   </ItemGroup>
   <ItemGroup>

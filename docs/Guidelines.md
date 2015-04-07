@@ -54,11 +54,12 @@ Design Recommendations
 
 ### Mandatory Rules
 
-- Internal classes must be in a subdirectory named "Internal".
+- Do not write extension methods on core types.
 - Do not use reserved words:
   * `Current`
   * `Select` (LINQ operator)
 - All static members should be thread-safe.
+- Internal classes must be in a subdirectory named "Internal".
 
 ### Optional Rules
 

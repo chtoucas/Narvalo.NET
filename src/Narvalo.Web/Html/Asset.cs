@@ -9,64 +9,74 @@ namespace Narvalo.Web.Html
 
     public static class Asset
     {
+        internal const string InternalCssRelation = "stylesheet";
+        internal const string InternalLessLinkType = "text/css";
+        internal const string InternalLessRelation = "stylesheet/less";
+
         public static IHtmlString Css(string relativePath)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return Markup.Link(assetUri, null /* linkType */, "stylesheet");
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Link(assetPath, null /* linkType */, InternalCssRelation);
         }
 
         public static IHtmlString Css(string relativePath, string media)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
-            return Markup.Link(assetUri, null /* linkType */, "stylesheet", new { media = media });
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Link(assetPath, null /* linkType */, InternalCssRelation, new { media = media });
         }
 
         public static IHtmlString Image(string relativePath, string alt)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetImageUri(relativePath);
-            return Markup.Image(assetUri, alt);
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Image(assetPath, alt);
         }
 
         public static IHtmlString JavaScript(string relativePath)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
-            return Markup.Script(assetUri);
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Script(assetPath);
         }
 
         public static IHtmlString Less(string relativePath)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyleUri(relativePath);
-            return Markup.Link(assetUri, "text/css", "stylesheet/less");
+            var assetUri = AssetManager.GetScriptUri(relativePath);
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Link(assetPath, InternalLessLinkType, InternalLessRelation);
         }
 
         public static IHtmlString Less(string relativePath, string media)
         {
-            Contract.Requires(relativePath != null);
-            Contract.Requires(relativePath.Length != 0);
+            Acknowledge.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            var assetUri = AssetManager.GetStyleUri(relativePath);
-            return Markup.Link(assetUri, "text/css", "stylesheet/less", new { media = media });
+            var assetUri = AssetManager.GetScriptUri(relativePath);
+            var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
+
+            return Markup.Link(assetPath, InternalLessLinkType, InternalLessRelation, new { media = media });
         }
     }
 }

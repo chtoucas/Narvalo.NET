@@ -7,29 +7,29 @@ namespace Narvalo.Web
 
     using Narvalo.Web.Properties;
 
-    public static class UriExtensions
+    public static class UrlManip
     {
         // Also known as protocol-less URL.
         // <seealso cref="!:http://tools.ietf.org/html/rfc3986#section-4.2"/>
-        public static string ToProtocolRelativeString(this Uri @this)
+        public static string ToProtocolRelativeString(Uri uri)
         {
-            Require.Object(@this);
+            Require.NotNull(uri, "uri");
             Contract.Ensures(Contract.Result<string>() != null);
 
-            if (!@this.IsAbsoluteUri)
+            if (!uri.IsAbsoluteUri)
             {
-                return @this.ToString();
+                return uri.ToString();
             }
 
-            var scheme = @this.Scheme;
+            var scheme = uri.Scheme;
 
             if (scheme == Uri.UriSchemeHttp)
             {
-                return @this.ToString().Replace("http:", String.Empty);
+                return uri.ToString().Replace("http:", String.Empty);
             }
             else if (scheme == Uri.UriSchemeHttps)
             {
-                return @this.ToString().Replace("https:", String.Empty);
+                return uri.ToString().Replace("https:", String.Empty);
             }
             else
             {
