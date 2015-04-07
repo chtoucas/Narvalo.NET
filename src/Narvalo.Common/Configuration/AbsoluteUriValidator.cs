@@ -13,7 +13,7 @@ namespace Narvalo.Configuration
     /// </summary>
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
-        /// <copydoc cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
+        /// <inheritdoc cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
         [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
             Justification = "[Intentionally] Method marked as MonoTODO.")]
         public override bool CanValidate(Type type)
@@ -21,7 +21,7 @@ namespace Narvalo.Configuration
             return type == typeof(Uri);
         }
 
-        /// <copydoc cref="System.Configuration.ConfigurationValidatorBase.Validate"/>
+        /// <inheritdoc cref="System.Configuration.ConfigurationValidatorBase.Validate"/>
         public override void Validate(object value)
         {
             string uriString = (string)value;

@@ -28,7 +28,7 @@ We also enforce the following rules:
 - Consider using regions or partial classes to organize code.
 - Consider separating System imports from the others.
 - Source lines should not exceed 120 characters.
-- Avoid named parameters.
+- Consider using named parameters for disambiguation of constant or null parameters.
 
 Naming:
 
@@ -194,8 +194,10 @@ Wrap any object invariants method and contract class with a compiler conditional
 Documentation
 -------------
 
+Instead of literal true, false, null, use `<see langword="true"/>`...
+
 Non-standard tags:
-- `<copydoc cref=""/>`
+- `<inheritdoc cref=""/>`
 - `<content></content>` used for documenting partial classes.
 - `<internalonly/>` for internal members or types.
 

@@ -112,6 +112,7 @@
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
+    <Compile Include="Internal\Is.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Fx\Extensions\PredicateExtensions.cs" />
     <Compile Include="NamespaceDoc.cs" />

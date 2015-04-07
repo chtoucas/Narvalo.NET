@@ -175,21 +175,21 @@ namespace Narvalo
         #region Enum()
 
         [Fact]
-        public static void ParseTo_ThrowsArgumentException_ForInt32()
+        public static void Enum_ThrowsArgumentException_ForInt32()
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(() => ParseTo.Enum<int>("Whatever"));
         }
 
         [Fact]
-        public static void ParseTo_ThrowsArgumentException_ForNonEnumerationStruct()
+        public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(() => ParseTo.Enum<MyStruct_>("Whatever"));
         }
 
         [Fact]
-        public static void ParseTo_ReturnsNull_ForActualValueAndBadCase()
+        public static void Enum_ReturnsNull_ForActualValueAndBadCase()
         {
             // Act
             var result = ParseTo.Enum<MyEnum_>("actualvalue", ignoreCase: false);
@@ -199,7 +199,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void ParseTo_ReturnsNull_ForInvalidValue()
+        public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
             var result = ParseTo.Enum<MyEnum_>("InvalidValue");
@@ -209,7 +209,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void ParseTo_ReturnsNull_ForInvalidValueAndIgnoreCase()
+        public static void Enum_ReturnsNull_ForInvalidValueAndIgnoreCase()
         {
             // Act
             var result = ParseTo.Enum<MyEnum_>("invalidvalue", ignoreCase: true);
@@ -219,7 +219,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void ParseTo_ReturnsNull_ForInvalidValueAndBadCase()
+        public static void Enum_ReturnsNull_ForInvalidValueAndBadCase()
         {
             // Act
             var result = ParseTo.Enum<MyEnum_>("invalidvalue", ignoreCase: false);
@@ -229,7 +229,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void ParseTo_ReturnsExpectedValue_ForActualValue()
+        public static void Enum_ReturnsExpectedValue_ForActualValue()
         {
             // Act
             MyEnum_? result = ParseTo.Enum<MyEnum_>("ActualValue");
@@ -240,7 +240,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void ParseTo_ReturnsExpectedValue_ForActualValueAndIgnoreCase()
+        public static void Enum_ReturnsExpectedValue_ForActualValueAndIgnoreCase()
         {
             // Act
             MyEnum_? result = ParseTo.Enum<MyEnum_>("actualvalue", ignoreCase: true);

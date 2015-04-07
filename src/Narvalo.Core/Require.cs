@@ -7,6 +7,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Internal;
     using Narvalo.Properties;
 
     /// <summary>
@@ -95,7 +96,7 @@ namespace Narvalo
         {
             Property(value);
 
-            if (String.IsNullOrWhiteSpace(value))
+            if (Is.WhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Core.Require_PropertyNullOrWhiteSpace, "value");
             }
@@ -165,7 +166,7 @@ namespace Narvalo
         {
             NotNull(value, parameterName);
 
-            if (String.IsNullOrWhiteSpace(value))
+            if (Is.WhiteSpace(value))
             {
                 throw new ArgumentException(
                     Format.Resource(Strings_Core.Require_ArgumentNullOrWhiteSpace_Format, parameterName),

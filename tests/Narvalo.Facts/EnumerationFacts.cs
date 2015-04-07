@@ -20,7 +20,7 @@ namespace Narvalo
         }
 
         [Flags]
-        private enum MyBitwiseEnum_
+        private enum MyFlagsEnum_
         {
             None = 0,
             ActualValue1 = 1 << 0,
@@ -136,65 +136,65 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForActualValueAndBitwiseEnum()
+        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForActualValueAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>("ActualValue1", out result);
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>("ActualValue1", out result);
             // Assert
             Assert.True(succeed);
-            Assert.Equal(MyBitwiseEnum_.ActualValue1, result);
+            Assert.Equal(MyFlagsEnum_.ActualValue1, result);
         }
 
         [Fact]
-        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForActualCompositeValueAndBitwiseEnum()
+        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForActualCompositeValueAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>("CompositeValue1", out result);
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>("CompositeValue1", out result);
             // Assert
             Assert.True(succeed);
-            Assert.Equal(MyBitwiseEnum_.CompositeValue1, result);
+            Assert.Equal(MyFlagsEnum_.CompositeValue1, result);
         }
 
         [Fact]
-        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndBitwiseEnum()
+        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>("ActualValue1, ActualValue2", out result);
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>("ActualValue1, ActualValue2", out result);
             // Assert
             Assert.True(succeed);
-            Assert.Equal(MyBitwiseEnum_.CompositeValue1, result);
+            Assert.Equal(MyFlagsEnum_.CompositeValue1, result);
         }
 
         [Fact]
-        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndWhitespacesAndBitwiseEnum()
+        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndWhitespacesAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>(
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>(
                 "  ActualValue1,  ActualValue2,ActualValue3  ", out result);
             // Assert
             Assert.True(succeed);
-            Assert.Equal(MyBitwiseEnum_.CompositeValue2, result);
+            Assert.Equal(MyFlagsEnum_.CompositeValue2, result);
         }
 
         [Fact]
-        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndWhitespacesAndIgnoreCaseAndBitwiseEnum()
+        public static void TryParse_ReturnsTrueAndPicksCorrectMember_ForUserDefinedCompositeValueAndWhitespacesAndIgnoreCaseAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>(
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>(
                 "  actualvalue1,  ActualValue2,actualVAlue3  ", true /* ignoreCase */, out result);
             // Assert
             Assert.True(succeed);
-            Assert.Equal(MyBitwiseEnum_.CompositeValue2, result);
+            Assert.Equal(MyFlagsEnum_.CompositeValue2, result);
         }
 
         [Fact]
@@ -246,15 +246,15 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void TryParse_ReturnsFalseAndPicksDefaultMember_ForInvalidUserDefinedCompositeValueAndWhitespacesAndBitwiseEnum()
+        public static void TryParse_ReturnsFalseAndPicksDefaultMember_ForInvalidUserDefinedCompositeValueAndWhitespacesAndFlagsEnum()
         {
             // Arrange
-            MyBitwiseEnum_ result;
+            MyFlagsEnum_ result;
             // Act
-            var succeed = Enumeration.TryParse<MyBitwiseEnum_>("  InvalidValue,  ActualValue2,ActualValue3  ", out result);
+            var succeed = Enumeration.TryParse<MyFlagsEnum_>("  InvalidValue,  ActualValue2,ActualValue3  ", out result);
             // Assert
             Assert.False(succeed);
-            Assert.Equal(default(MyBitwiseEnum_), result);
+            Assert.Equal(default(MyFlagsEnum_), result);
         }
 
 #endif

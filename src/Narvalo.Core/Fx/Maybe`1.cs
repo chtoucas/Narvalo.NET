@@ -314,7 +314,7 @@ namespace Narvalo.Fx
             return Value;
         }
 
-        /// <copydoc cref="Object.ToString" />
+        /// <inheritdoc cref="Object.ToString" />
         public override String ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
@@ -347,7 +347,7 @@ namespace Narvalo.Fx
             return IsSome ? Sequence.Single(Value) : Sequence.EmptyInternal<T>();
         }
 
-        /// <copydoc cref="IEnumerable{T}.GetEnumerator" />
+        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
@@ -355,7 +355,7 @@ namespace Narvalo.Fx
             return AsEnumerable().GetEnumerator();
         }
 
-        /// <copydoc cref="IEnumerable.GetEnumerator" />
+        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
         IEnumerator IEnumerable.GetEnumerator()
         {
             Contract.Ensures(Contract.Result<IEnumerator>() != null);
@@ -369,7 +369,7 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
-        /// <copydoc cref="IEquatable{T}.Equals" />
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Maybe<T> other)
         {
             return Equals(other, EqualityComparer<T>.Default);
@@ -393,7 +393,7 @@ namespace Narvalo.Fx
             return comparer.Equals(Value, other.Value);
         }
 
-        /// <copydoc cref="IEquatable{T}.Equals" />
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(T other)
         {
             return Equals(other, EqualityComparer<T>.Default);
@@ -406,7 +406,7 @@ namespace Narvalo.Fx
             return Equals(η(other), comparer);
         }
 
-        /// <copydoc cref="Object.Equals(Object)" />
+        /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
             return Equals(obj, EqualityComparer<T>.Default);
@@ -432,7 +432,7 @@ namespace Narvalo.Fx
             return Equals(other as Maybe<T>, comparer);
         }
 
-        /// <copydoc cref="Object.GetHashCode" />
+        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return GetHashCode(EqualityComparer<T>.Default);

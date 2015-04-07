@@ -16,7 +16,7 @@ namespace Narvalo
         }
 
         [Flags]
-        private enum MyBitwiseEnum_
+        private enum MyFlagsEnum_
         {
             None = 0,
             ActualValue1 = 1 << 0,
@@ -48,6 +48,13 @@ namespace Narvalo
         }
 
         [Fact]
+        public static void Enum_ThrowsArgumentException_ForFlagsEnum()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<MyFlagsEnum_>(1));
+        }
+
+        [Fact]
         public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
@@ -66,17 +73,6 @@ namespace Narvalo
             // Assert
             Assert.True(result.HasValue);
             Assert.Equal(MyEnum_.ActualValue, result.Value);
-        }
-
-        [Fact]
-        public static void Enum_ReturnsExpectedValue_ForActualValueAndBitwiseEnum()
-        {
-            // Act
-            var result = ConvertTo.Enum<MyBitwiseEnum_>(1 << 0);
-
-            // Assert
-            Assert.True(result.HasValue);
-            Assert.Equal(MyBitwiseEnum_.ActualValue1, result.Value);
         }
 
         #endregion

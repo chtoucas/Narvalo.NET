@@ -349,7 +349,7 @@ namespace Narvalo
             return !(left == right);
         }
 
-        /// <copydoc cref="IEquatable{T}.Equals" />
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -361,7 +361,7 @@ namespace Narvalo
             return this._code == other._code;
         }
 
-        /// <copydoc cref="Object.Equals(Object)" />
+        /// <inheritdoc cref="Object.Equals(Object)" />
         [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
             Justification = "[Intentionally] Method marked as MonoTODO.")]
         public override bool Equals(object obj)
@@ -387,7 +387,7 @@ namespace Narvalo
             return Equals(obj as Currency);
         }
 
-        /// <copydoc cref="Object.GetHashCode" />
+        /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
             return _code.GetHashCode();

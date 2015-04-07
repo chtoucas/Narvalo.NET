@@ -14,12 +14,28 @@ namespace Narvalo
                bool inherit) where T : Attribute
         {
 #if NET_35
-            return Maybe.Create(element.GetCustomAttribute<T>(inherit));
+            return Maybe.Of(element.GetCustomAttribute<T>(inherit));
 #else
             var attr = Attribute.GetCustomAttribute(element, typeof(T), inherit);
             return Maybe.Of(attr).Select(a => (T)a);
 #endif
         }
+
+        ///// <summary>
+        ///// Returns the <see cref="System.Reflection.TypeInfo"/> representation of the specified type.
+        ///// Workaround for the fact that IntrospectionExtensions.GetTypeInfo() does not have any contract attached.
+        ///// </summary>
+        ///// <remarks>This method MUST remain public in order to be used inside CC preconditions.</remarks>
+        ///// <param name="type">The type to convert.</param>
+        ///// <returns>The converted object.</returns>
+        //[Pure]
+        //public static TypeInfo GetTypeInfo(this Type @this)
+        //{
+        //    Contract.Ensures(Contract.Result<TypeInfo>() != null);
+
+        //    // NB: The properties Type.IsEnum and Type.IsValueType do not exist in the context of PCL.
+        //    return @this.GetTypeInfo().AssumeNotNull();
+        //}
 
         ////public static Maybe<ConstructorInfo> MayGetDefaultConstructor(Type type)
         ////{

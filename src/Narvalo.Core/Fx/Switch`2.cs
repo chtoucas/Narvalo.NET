@@ -183,7 +183,7 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
@@ -193,7 +193,7 @@ namespace Narvalo.Fx
                 return leftSelectorM.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
@@ -201,7 +201,7 @@ namespace Narvalo.Fx
                 return new Switch<TLeft, TResult>.Left_(_value);
             }
 
-            /// <copydoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
+            /// <inheritdoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
             {
                 Require.NotNull(leftSelector, "leftSelector");
@@ -209,7 +209,7 @@ namespace Narvalo.Fx
                 return Switch<TResult, TRight>.η(leftSelector.Invoke(_value));
             }
 
-            /// <copydoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
@@ -217,7 +217,7 @@ namespace Narvalo.Fx
                 return new Switch<TLeft, TResult>.Left_(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseLeft, "caseLeft");
@@ -225,7 +225,7 @@ namespace Narvalo.Fx
                 caseLeft.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override TResult Map<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
@@ -236,7 +236,7 @@ namespace Narvalo.Fx
                 return caseLeft.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TRight, TLeft}.Swap" />
+            /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap()
             {
                 return Switch<TRight, TLeft>.η(_value);
@@ -299,7 +299,7 @@ namespace Narvalo.Fx
                 _value = value;
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
@@ -307,7 +307,7 @@ namespace Narvalo.Fx
                 return new Switch<TResult, TRight>.Right_(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
@@ -317,13 +317,13 @@ namespace Narvalo.Fx
                 return rightSelectorM.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
+            /// <inheritdoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
             {
                 return new Switch<TResult, TRight>.Right_(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
             [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
                 Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
@@ -333,13 +333,13 @@ namespace Narvalo.Fx
                 return Switch<TLeft, TResult>.η(rightSelector.Invoke(_value));
             }
 
-            /// <copydoc cref="Switch{TRight, TLeft}.Swap" />
+            /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
             public override Switch<TRight, TLeft> Swap()
             {
                 return Switch<TRight, TLeft>.η(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
                 Require.NotNull(caseRight, "caseRight");
@@ -347,7 +347,7 @@ namespace Narvalo.Fx
                 caseRight.Invoke(_value);
             }
 
-            /// <copydoc cref="Switch{TLeft, TRight}.Invoke" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override TResult Map<TResult>(
                 Func<TLeft, TResult> caseLeft,
                 Func<TRight, TResult> caseRight,
