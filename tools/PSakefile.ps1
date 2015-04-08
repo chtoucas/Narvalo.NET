@@ -97,6 +97,23 @@ Task FullClean `
     Remove-LocalItem 'work' -Recurse
 }
 
+Task Coverage `
+    -Description 'Build core libraries for OpenCover.' `
+    -Depends _CI-InitializeVariables `
+    -Alias Cover `
+{
+    # Use debug build to also cover debug-only tests.
+    MSBuild $Foundations $Opts $CI_Props `
+        '/p:Configuration=Debug',
+        '/t:Build',
+        # For static analysis, we hide internals, otherwise we might not truly
+        # analyze the public API.
+        '/p:VisibleInternals=false',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_'
+}
+
 Task CodeAnalysis `
     -Description 'Run Code Analysis on core libraries (SLOW).' `
     -Depends _CI-InitializeVariables `
@@ -114,7 +131,7 @@ Task CodeAnalysis `
 }
 
 Task GendarmeAnalysis `
-    -Description 'Build core libraries for Mono.Gendarme (SLOW).' `
+    -Description 'Build core libraries for Mono.Gendarme.' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {

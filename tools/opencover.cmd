@@ -33,7 +33,7 @@
   -filter:"+[Narvalo*]* -[Xunit*]*" ^
   -output:%ReportFile% ^
   -target:%XUnit% ^
-  -targetargs:"%RepositoryRoot%\work\bin\Release+Closed\Narvalo.Facts.dll -nologo -noshadow"
+  -targetargs:"%RepositoryRoot%\work\bin\Debug+Closed\Narvalo.Facts.dll -nologo -noshadow"
 
 @if %ERRORLEVEL% neq 0 (
     @set Message=*** OpenCover.exe failed ***
