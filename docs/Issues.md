@@ -1,16 +1,5 @@
-Issues
-======
-
-When fixed, issues not directly related to testable codes are described
-in the ChangeLog file.
-
-Other closed issues are explicitely described and tested in one of the test
-libraries. NB: To spot them, you should look for the `Issue` attribute.
-
-All issues are either Bug, Enhancement or Improvement.
-
-When an issue is closed, move it to the ChangeLog. Furthermore, if it is a bug,
-add the necessary tests to be sure it does not pass through again.
+Issues & Roadmap
+================
 
 Design
 ------
@@ -128,7 +117,6 @@ MSBuild and `PSakefile`:
   it does not seem to be understood by MSBuild. Setting `CodeAnalysisLogFile` or
   `CodeAnalysisSucceededFile` disables incremental building. Currently, Code Analysis hooks
   are disabled in `Narvalo.Common.targets`.
-- Integrate Gendarme and OpenCover.
 - Complete common settings for F# projects.
 - Enable T4-regeneration outside VS since, currently it does not work when building from the command-line.
 - Make sure a build fails when SecAnnotate does too.

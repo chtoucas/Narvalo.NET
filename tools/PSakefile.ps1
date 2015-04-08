@@ -112,6 +112,8 @@ Task Coverage `
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
+
+    Invoke-OpenCover 'Debug+Closed'
 }
 
 Task CodeAnalysis `
@@ -145,6 +147,8 @@ Task GendarmeAnalysis `
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
+
+    Invoke-Gendarme 'Release+Closed'
 }
 
 Task CodeContractsAnalysis `
@@ -687,6 +691,79 @@ function Invoke-NuGetAgent {
     } catch {
         Exit-Gracefully -ExitCode 1 "'nuget-agent.exe' failed: $_"
     }
+}
+
+# TODO: Quick and dirty function!
+function Invoke-Gendarme {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string] $Configuration,
+
+        [Parameter(Mandatory = $false, Position = 1)]
+        [int] $Limit = 100,
+
+        [Parameter(Mandatory = $false, Position = 2)]
+        [string] $RuleSet = 'narvalo-strict'
+    )
+
+    # TODO: Make it survive NuGet updates.
+    $cmd = Get-LocalPath 'packages\Mono.Gendarme.2.11.0.20121120\tools\gendarme.exe' -Resolve
+
+    $configFile = Get-LocalPath 'etc\gendarme.xml' -Resolve
+    $ignoreFile = Get-LocalPath 'etc\gendarme.ignore' -Resolve
+    $logFile    = Get-LocalPath 'work\log\gendarme.log'
+
+    . $cmd `
+      --v `
+      --console `
+      --limit $limit `
+      --config $configFile `
+      --set $ruleSet `
+      --severity all `
+      --confidence all `
+      --ignore "$ignoreFile" `
+      --log "$logFile" `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Core.dll") `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Common.dll")
+}
+
+# TODO: Quick and dirty function!
+function Invoke-OpenCover {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string] $Configuration
+    )
+
+    # TODO: Make it survive NuGet updates.
+    $openCover = Get-LocalPath 'packages\OpenCover.4.5.3723\OpenCover.Console.exe' -Resolve
+    $reportGenerator = Get-LocalPath 'packages\ReportGenerator.2.1.4.0\ReportGenerator.exe' -Resolve
+    $xunit = Get-LocalPath 'packages\xunit.runner.console.2.0.0\tools\xunit.console.exe' -Resolve
+
+    $coverageFile = Get-LocalPath 'work\log\opencover.xml'
+    $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
+    $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
+
+    $reportDirectory = Get-LocalPath 'work\log\opencover'
+    $reportFilters = '+Narvalo.Core;+Narvalo.Common;+Narvalo.Web'
+
+    $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
+
+    # Be careful with arguments containing spaces.
+    . $openCover `
+      -register:user `
+      "-filter:$coverageFilter" `
+      "-excludebyattribute:$coverageExcludeByAttribute" `
+      -output:$coverageFile `
+      -target:$xunit  `
+      "-targetargs:$testAssembly -nologo -noshadow"
+
+    . $reportGenerator `
+      -verbosity:Info `
+      -filters:$reportFilters `
+      -reports:$coverageFile `
+      -targetdir:$reportDirectory
 }
 
 # ------------------------------------------------------------------------------

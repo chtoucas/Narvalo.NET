@@ -46,7 +46,7 @@ namespace Narvalo.Edu.Monads.Samples
     /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    [global::System.Runtime.CompilerServices.CompilerGenerated]
+    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class MonadValue
     {
         private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
@@ -771,7 +771,7 @@ namespace Narvalo.Edu.Monads.Samples
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    [global::System.Runtime.CompilerServices.CompilerGenerated]
+    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class EnumerableMonadValueExtensions
     {
         #region Basic Monad functions (Prelude)

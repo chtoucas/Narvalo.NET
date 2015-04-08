@@ -13,14 +13,14 @@ namespace Narvalo.Fx
         #region IsError
 
         [Fact]
-        public static void IsError_IsFalse_ForVoidObject()
+        public static void IsError_ReturnsFalse_WithVoidObject()
         {
             // Act & Assert
             Assert.False(VoidOrError.Void.IsError);
         }
 
         [Fact]
-        public static void IsError_IsTrue_ForErrorObject()
+        public static void IsError_ReturnsTrue_WithErrorObject()
         {
             // Arrange
             VoidOrError voe = null;
@@ -43,17 +43,17 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Break
+        #region ThrowIfError()
 
         [Fact]
-        public static void ThrowIfError_DoesNotThrow_ForVoidObject()
+        public static void ThrowIfError_DoesNotThrow_WithVoidObject()
         {
             // Act
             VoidOrError.Void.ThrowIfError();
         }
 
         [Fact]
-        public static void ThrowIfError_ThrowsOriginalException_ForErrorObject()
+        public static void ThrowIfError_ThrowsOriginalException_WithErrorObject()
         {
             // Arrange
             VoidOrError voe = null;
@@ -61,9 +61,9 @@ namespace Narvalo.Fx
             // Act
             try
             {
-                throw new InvalidOperationException();
+                throw new SimpleException();
             }
-            catch (InvalidOperationException ex)
+            catch (SimpleException ex)
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
@@ -71,7 +71,41 @@ namespace Narvalo.Fx
             }
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => voe.ThrowIfError());
+            Assert.Throws<SimpleException>(() => voe.ThrowIfError());
+        }
+
+        #endregion
+
+        #region ToString()
+
+        [Fact]
+        public static void ToString_IsOverridden_WithVoidObject()
+        {
+            // Act
+            Assert.Equal("Void", VoidOrError.Void.ToString());
+        }
+
+        [Fact]
+        public static void ToString_ContainsExceptionMessage_WithErrorObject()
+        {
+            // Arrange
+            VoidOrError voe = null;
+            var message = "My exception message.";
+
+            // Act
+            try
+            {
+                throw new SimpleException(message);
+            }
+            catch (SimpleException ex)
+            {
+                var edi = ExceptionDispatchInfo.Capture(ex);
+
+                voe = VoidOrError.Error(edi);
+            }
+
+            // Assert
+            Assert.True(voe.ToString().Contains(message));
         }
 
         #endregion

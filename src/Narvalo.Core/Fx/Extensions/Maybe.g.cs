@@ -43,7 +43,7 @@ namespace Narvalo.Fx.Extensions
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    [global::System.Runtime.CompilerServices.CompilerGenerated]
+    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class EnumerableMaybeExtensions
     {
         #region Basic Monad functions (Prelude)

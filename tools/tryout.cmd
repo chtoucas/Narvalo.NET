@@ -36,6 +36,7 @@
 
 :Setup
 
+:: WARNING: Using %~dp0\.. does not work well with some tools (eg gendarme) as it contains a double backslash.
 @set RepositoryRoot=%~dp0\..
 
 @set ProjectFile=%~dp0\TryOut.proj

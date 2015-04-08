@@ -7,7 +7,7 @@ Narvalo.Core
 API should be stable.
 
 As of 2015-04-08:
-- OpenCover: **30%**
+- OpenCover: **26%**
 - FxCop: OK
 - Gendarme: OK
 - Code Contracts: OK but more to be added
@@ -20,7 +20,7 @@ Narvalo.Common
 Refactoring coming.
 
 As of 2015-04-08:
-- OpenCover: **5%**
+- OpenCover: **11%**
 - FxCop: **partial**, see GlobalSuppression.cs
 - Gendarme: **partial**, see gendarme.ignore
 - Code Contracts: OK but more to be added
@@ -33,7 +33,7 @@ Narvalo.Web
 Work in progress.
 
 As of 2015-04-08:
-- OpenCover: **15%**
+- OpenCover: **13%**
 - FxCop: OK
 - Gendarme: **KO**
 - Code Contracts: **KO**

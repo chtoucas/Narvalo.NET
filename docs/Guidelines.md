@@ -222,16 +222,13 @@ all static analysis.
 
 ### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
-- Name {Type}Facts a test class for the type {Type}.
-- Name {Member}_{ExpectedOutcome} a unit test for a member {Member}.
-- Name {Type}_{ExpectedOutcome} a unit test for the type {Type} not specific 
-  to a member of the type.
-- When testing for exceptions use: `_Throws{ExpectedException}` or `_DoesNotThrow`.
+- Name [TypeUnderTest]Facts a test class.
+- Name [UnitOfWork]_[ExpectedOutcomeOrBehaviour]_[Context] a unit test.
+- When testing for exceptions use: `_Throws[ExpectedException]` or `_DoesNotThrow`.
 - After a bugfix, create a unit test, decorate it with the `Issue` attribute 
   and add a detailed summary of the bug.
-- Add a justification for all skipped tests.
+- Always justify a skipped test.
 - Do not run a different set of tests depending on the build configuration.
-  If you have to, do not disable the test but skip it.     
 
 Example:
 ```csharp

@@ -44,8 +44,31 @@ namespace Narvalo.Fx
             Assert.True(new Unit().Equals(Unit.Single));
             Assert.True(Unit.Single.Equals(new Unit()));
             Assert.True(Unit.Single.Equals(Unit.Single));
+
             Assert.False(Unit.Single.Equals(new Object()));
             Assert.False(new Object().Equals(Unit.Single));
+        }
+
+        #endregion
+
+        #region GetHashCode()
+
+        [Fact]
+        public static void GetHashCode_IsOverriden()
+        {
+            // Act & Assert
+            Assert.Equal(0, Unit.Single.GetHashCode());
+        }
+
+        #endregion
+
+        #region ToString()
+
+        [Fact]
+        public static void ToString_IsOverriden()
+        {
+            // Act & Assert
+            Assert.Equal("()", Unit.Single.ToString());
         }
 
         #endregion
