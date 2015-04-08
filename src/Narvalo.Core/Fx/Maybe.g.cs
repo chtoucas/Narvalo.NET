@@ -46,6 +46,7 @@ namespace Narvalo.Fx
     /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
+    // Removed the next attribute otherwise it won't be included in test coverage.
     //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Maybe
     {
@@ -643,7 +644,6 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -666,7 +666,6 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             @this.Bind(_ => { action.Invoke(_); return @this; })
                 .Then(Maybe.Unit)

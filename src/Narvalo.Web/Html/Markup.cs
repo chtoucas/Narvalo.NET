@@ -174,7 +174,7 @@ namespace Narvalo.Web.Html
                 tag.MergeAttribute("title", (tag.Attributes["alt"] ?? String.Empty).ToString());
             }
 
-            return tag.ToString(TagRenderMode.SelfClosing);
+            return tag.ToString(TagRenderMode.SelfClosing).AssumeNotNull();
         }
 
         internal static string LinkInternal(
@@ -201,7 +201,7 @@ namespace Narvalo.Web.Html
 
             tag.MergeAttributes(attributes, replaceExisting: true);
 
-            return tag.ToString(TagRenderMode.SelfClosing);
+            return tag.ToString(TagRenderMode.SelfClosing).AssumeNotNull();
         }
 
         internal static string ScriptInternal(string path, string scriptType, IDictionary<string, object> attributes)

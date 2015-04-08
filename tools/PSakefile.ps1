@@ -97,8 +97,8 @@ Task FullClean `
     Remove-LocalItem 'work' -Recurse
 }
 
-Task Coverage `
-    -Description 'Build core libraries for OpenCover.' `
+Task OpenCover `
+    -Description 'Run OpenCover against Narvalo.Core (EXTREMELY SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Cover `
 {
@@ -133,11 +133,10 @@ Task CodeAnalysis `
 }
 
 Task GendarmeAnalysis `
-    -Description 'Build core libraries for Mono.Gendarme.' `
+    -Description 'Run Mono.Gendarme against Narvalo.Core & Narvalo.Common (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
-    # Currently only prepare the assemblies for Gendarme.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
         # For static analysis, we hide internals, otherwise we might not truly
@@ -166,7 +165,7 @@ Task CodeContractsAnalysis `
 }
 
 Task SecurityAnalysis `
-    -Description 'Run SecAnnotate on core libraries (SLOW).' `
+    -Description 'Run SecAnnotate against core libraries (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
@@ -746,7 +745,8 @@ function Invoke-OpenCover {
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
     $reportDirectory = Get-LocalPath 'work\log\opencover'
-    $reportFilters = '+Narvalo.Core;+Narvalo.Common;+Narvalo.Web'
+    #$reportFilters = '+Narvalo.Core;+Narvalo.Common;+Narvalo.Web'
+    $reportFilters = '+Narvalo.Core'
 
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
@@ -755,8 +755,8 @@ function Invoke-OpenCover {
       -register:user `
       "-filter:$coverageFilter" `
       "-excludebyattribute:$coverageExcludeByAttribute" `
-      -output:$coverageFile `
-      -target:$xunit  `
+      "-output:$coverageFile" `
+      "-target:$xunit"  `
       "-targetargs:$testAssembly -nologo -noshadow"
 
     . $reportGenerator `

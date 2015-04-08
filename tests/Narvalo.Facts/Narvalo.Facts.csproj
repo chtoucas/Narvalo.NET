@@ -95,6 +95,7 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
     <Compile Include="TestCommon\AssertExt.cs" />

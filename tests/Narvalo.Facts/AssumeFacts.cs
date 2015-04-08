@@ -24,5 +24,19 @@ namespace Narvalo
         }
 
         #endregion
+
+        #region Invariant()
+
+        [Fact]
+        public static void Invariant_DoesNothing()
+        {
+            // Arrange
+            var obj = new Object();
+
+            // Act
+            Assume.Invariant(obj);
+        }
+
+        #endregion
     }
 }

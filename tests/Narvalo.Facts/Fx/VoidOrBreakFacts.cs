@@ -11,14 +11,14 @@ namespace Narvalo.Fx
         #region IsBreak
 
         [Fact]
-        public static void IsBreak_ReturnsFalse_WithVoidObject()
+        public static void IsBreak_ReturnsFalse_WhenVoid()
         {
             // Act & Assert
             Assert.False(VoidOrBreak.Void.IsBreak);
         }
 
         [Fact]
-        public static void IsBreak_ReturnsTrue_WithBreakObject()
+        public static void IsBreak_ReturnsTrue_WhenBreak()
         {
             // Act & Assert
             Assert.True(VoidOrBreak.Break("reason").IsBreak);
@@ -29,14 +29,14 @@ namespace Narvalo.Fx
         #region Reason
 
         [Fact]
-        public static void Reason_ThrowsInvalidOperationException_WithVoidObject()
+        public static void Reason_ThrowsInvalidOperationException_WhenVoid()
         {
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => VoidOrBreak.Void.Reason);
         }
 
         [Fact]
-        public static void Reason_ReturnsOriginalReason_WithBreakObject()
+        public static void Reason_ReturnsOriginalReason_WhenBreak()
         {
             // Arrange
             var reason = "reason";
@@ -53,14 +53,14 @@ namespace Narvalo.Fx
         #region Break()
 
         [Fact]
-        public static void Break_ThrowsArgumentNullException_ForNullReason()
+        public static void Break_ThrowsArgumentNullException_ForNullMessage()
         {
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => VoidOrBreak.Break(null));
         }
 
         [Fact]
-        public static void Break_ThrowsArgumentException_ForEmptyReason()
+        public static void Break_ThrowsArgumentException_ForEmptyMessage()
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(() => VoidOrBreak.Break(String.Empty));
@@ -71,19 +71,19 @@ namespace Narvalo.Fx
         #region ToString()
 
         [Fact]
-        public static void ToString_IsOverridden_WithVoidObject()
+        public static void ToString_ReturnsVoid_WhenVoid()
         {
             // Act & Assert
             Assert.Equal("Void", VoidOrBreak.Void.ToString());
         }
 
         [Fact]
-        public static void ToString_ContainsBreakingReason_WithBreakObject()
+        public static void ToString_ResultContainsReason_WhenBreak()
         {
             // Arrange
             var reason = "My reason to break.";
 
-            // Assert
+            // Act & Assert
             Assert.True(VoidOrBreak.Break(reason).ToString().Contains(reason));
         }
 

@@ -5,49 +5,10 @@ namespace Narvalo
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-
-    using Narvalo.Internal;
+    using System.Reflection;
 
     public static class Predicate
     {
-        /// <summary>
-        /// Returns a value indicating whether the specified type parameter is an enumeration.
-        /// </summary>
-        /// <typeparam name="T">The type to test.</typeparam>
-        /// <returns><c>true</c> if the specified type parameter is an enumeration; 
-        /// otherwise <c>false</c>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
-            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
-        public static bool IsEnum<T>() where T : struct
-        {
-            return typeof(T).IsEnum;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified type parameter is a flags enumeration.
-        /// </summary>
-        /// <typeparam name="T">The type to test.</typeparam>
-        /// <returns><c>true</c> if the specified type parameter is a flags enumeration; 
-        /// otherwise <c>false</c>.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
-            Justification = "[Intentionally] The rule does not apply here.")]
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
-            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
-        public static bool IsFlagsEnum<T>() where T : struct
-        {
-            var type = typeof(T);
-
-            return type.IsEnum && type.HasFlagsAttribute();
-        }
-
         /// <summary>
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
         /// </summary>
@@ -61,24 +22,7 @@ namespace Narvalo
             Justification = "[Intentionally] Method marked as MonoTODO.")]
         public static bool IsFlagsEnum(Type type)
         {
-            return type != null && type.IsEnum && type.HasFlagsAttribute();
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified type parameter is a value type.
-        /// </summary>
-        /// <typeparam name="T">The type to test.</typeparam>
-        /// <returns><c>true</c> if the specified type parameter is a value type; 
-        /// otherwise <c>false</c>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
-            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
-        public static bool IsValueType<T>()
-        {
-            return typeof(T).IsValueType;
+            return type != null && type.IsEnum && type.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace Narvalo.Fx
         #region LeftOrNone
 
         [Fact]
-        public static void LeftOrNone_ReturnsNone_ForEmptySwitch()
+        public static void LeftOrNone_ReturnsNone_WhenEmptySwitch()
         {
             // Arrange
             var sw = Switch<string, string>.Empty;
@@ -24,7 +24,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void LeftOrNone_ReturnsNone_ForRightSwitch()
+        public static void LeftOrNone_ReturnsNone_WhenRightSwitch()
         {
             // Arrange
             var sw = Switch.Right<string, string>("leftValue");
@@ -37,7 +37,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void LeftOrNone_ReturnsSome_ForLeftSwitch()
+        public static void LeftOrNone_ReturnsSome_WhenLeftSwitch()
         {
             // Arrange
             var leftValue = "leftValue";
@@ -57,7 +57,7 @@ namespace Narvalo.Fx
         #region RightOrNone
 
         [Fact]
-        public static void RightOrNone_ReturnsNone_ForEmptySwitch()
+        public static void RightOrNone_ReturnsNone_WhenEmptySwitch()
         {
             // Arrange
             var sw = Switch<string, string>.Empty;
@@ -70,7 +70,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void RightOrNone_ReturnsNone_ForLeftSwitch()
+        public static void RightOrNone_ReturnsNone_WhenLeftSwitch()
         {
             // Arrange
             var sw = Switch.Left<string, string>("rightValue");
@@ -83,7 +83,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void RightOrNone_ReturnsSome_ForRightSwitch()
+        public static void RightOrNone_ReturnsSome_WhenRightSwitch()
         {
             // Arrange
             var rightValue = "rightValue";

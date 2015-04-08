@@ -11,7 +11,7 @@ namespace Narvalo.Fx
         #region LeftOrNone
 
         [Fact]
-        public static void LeftOrNone_ReturnsNone_ForRightEither()
+        public static void LeftOrNone_ReturnsNone_WhenRightEither()
         {
             // Arrange
             var either = Either.Right<string, string>("leftValue");
@@ -24,7 +24,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void LeftOrNone_ReturnsSome_ForLeftEither()
+        public static void LeftOrNone_ReturnsSome_WhenLeftEither()
         {
             // Arrange
             var leftValue = "leftValue";
@@ -44,7 +44,7 @@ namespace Narvalo.Fx
         #region RightOrNone
 
         [Fact]
-        public static void RightOrNone_ReturnsNone_ForLeftEither()
+        public static void RightOrNone_ReturnsNone_WhenLeftEither()
         {
             // Arrange
             var either = Either.Left<string, string>("rightValue");
@@ -57,7 +57,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void RightOrNone_ReturnsSome_ForRightEither()
+        public static void RightOrNone_ReturnsSome_WhenRightEither()
         {
             // Arrange
             var rightValue = "rightValue";

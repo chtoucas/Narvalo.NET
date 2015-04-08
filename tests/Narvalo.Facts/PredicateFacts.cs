@@ -45,38 +45,6 @@ namespace Narvalo
 
     public static partial class PredicateFacts
     {
-        #region IsEnum()
-
-        [Fact]
-        public static void IsEnum_ReturnsTrue_ForEnum()
-        {
-            // Act & Assert
-            Assert.True(Predicate.IsEnum<MyEnum_>());
-        }
-
-        [Fact]
-        public static void IsEnum_ReturnsTrue_ForFlagsEnum()
-        {
-            // Act & Assert
-            Assert.True(Predicate.IsEnum<MyFlagsEnum_>());
-        }
-
-        [Fact]
-        public static void IsEnum_ReturnsFalse_ForSimpleType()
-        {
-            // Act & Assert
-            Assert.False(Predicate.IsEnum<int>());
-        }
-
-        [Fact]
-        public static void IsEnum_ReturnsFalse_ForNonEnumerationStruct()
-        {
-            // Act & Assert
-            Assert.False(Predicate.IsEnum<MyStruct_>());
-        }
-
-        #endregion
-
         #region IsFlagsEnum()
 
         [Fact]
@@ -90,13 +58,6 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnum()
-        {
-            // Act & Assert
-            Assert.True(Predicate.IsFlagsEnum<MyFlagsEnum_>());
-        }
-
-        [Fact]
         public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumParameter()
         {
             // Arrange
@@ -104,13 +65,6 @@ namespace Narvalo
 
             // Act & Assert
             Assert.True(Predicate.IsFlagsEnum(type));
-        }
-
-        [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnum()
-        {
-            // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum<MyEnum_>());
         }
 
         [Fact]
@@ -124,13 +78,6 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForSimpleType()
-        {
-            // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum<int>());
-        }
-
-        [Fact]
         public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeParameter()
         {
             // Arrange
@@ -138,13 +85,6 @@ namespace Narvalo
 
             // Act & Assert
             Assert.False(Predicate.IsFlagsEnum(type));
-        }
-
-        [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStruct()
-        {
-            // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum<MyStruct_>());
         }
 
         [Fact]

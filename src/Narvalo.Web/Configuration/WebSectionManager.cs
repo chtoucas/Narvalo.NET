@@ -50,7 +50,7 @@ namespace Narvalo.Web.Configuration
         public static Maybe<T> MayGetSection<T>(string sectionName) where T : ConfigurationSection
         {
             Require.NotNullOrEmpty(sectionName, "sectionName");
-            Contract.Ensures(Contract.Result<T>() != null);
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
@@ -61,7 +61,7 @@ namespace Narvalo.Web.Configuration
         {
             Require.NotNullOrEmpty(sectionName, "sectionName");
             Require.NotNullOrEmpty(virtualPath, "virtualPath");
-            Contract.Ensures(Contract.Result<T>() != null);
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
 

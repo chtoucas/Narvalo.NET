@@ -13,7 +13,7 @@ namespace Narvalo.Fx
         #region Explicit Cast
 
         [Fact]
-        public static void ExplicitCastToExceptionDispatchInfo_Throws_WhenCastingSuccessObject()
+        public static void ExplicitCastToExceptionDispatchInfo_ThrowsInvalidCastException_WhenCastingSuccessObject()
         {
             // Arrange
             var output = Output.Success(1);
@@ -23,7 +23,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void ExplicitCastToValue_Throws_WhenCastingFailureObject()
+        public static void ExplicitCastToValue_ThrowsInvalidCastException_WhenCastingFailureObject()
         {
             // Arrange
             Output<string> output = null;

@@ -22,7 +22,7 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                Contract.Ensures(Contract.Result<AssetSection>() != null);
+                Contract.Ensures(Contract.Result<Maybe<AssetSection>>() != null);
 
                 return s_AssetSection.Value;
             }
@@ -59,7 +59,7 @@ namespace Narvalo.Web.Configuration
 
         private static Maybe<AssetSection> InitializeAssetSection_()
         {
-            Contract.Ensures(Contract.Result<AssetSection>() != null);
+            Contract.Ensures(Contract.Result<Maybe<AssetSection>>() != null);
 
             return WebSectionManager.MayGetSection<AssetSection>(Narvalo.Web.Configuration.AssetSection.SectionName);
         }

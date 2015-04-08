@@ -43,6 +43,7 @@ namespace Narvalo.Fx.Extensions
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
+    // Removed the next attribute otherwise it won't be included in test coverage.
     //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class EnumerableMaybeExtensions
     {

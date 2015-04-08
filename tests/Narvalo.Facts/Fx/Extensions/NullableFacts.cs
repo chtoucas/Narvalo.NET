@@ -49,7 +49,7 @@ namespace Narvalo.Fx.Extensions
         #region Select()
 
         [Fact]
-        public static void Select_ReturnsNull_ForNullObject()
+        public static void Select_ReturnsNull_WhenNull()
         {
             // Arrange
             int? source = null;
@@ -87,7 +87,7 @@ namespace Narvalo.Fx.Extensions
         #region SelectMany()
 
         [Fact]
-        public static void SelectMany_ReturnsNull_ForNullObject()
+        public static void SelectMany_ReturnsNull_WhenNull()
         {
             // Arrange
             int? source = null;
@@ -107,7 +107,7 @@ namespace Narvalo.Fx.Extensions
         }
 
         [Fact]
-        public static void SelectMany_ReturnsNull_ForNullObjectAndNullMiddle()
+        public static void SelectMany_ReturnsNull_ForNullMiddle_WhenNull()
         {
             // Arrange
             int? source = null;

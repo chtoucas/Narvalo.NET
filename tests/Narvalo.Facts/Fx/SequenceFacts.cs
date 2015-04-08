@@ -8,8 +8,5 @@ namespace Narvalo.Fx
 
     public static class SequenceFacts
     {
-        #region Single()
-
-        #endregion
     }
 }

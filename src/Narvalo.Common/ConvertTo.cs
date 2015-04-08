@@ -4,8 +4,8 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
 
-    using Narvalo.Internal;
     using Narvalo.Properties;
 
     public static class ConvertTo
@@ -16,7 +16,7 @@ namespace Narvalo
         {
             var type = typeof(TEnum);
 
-            if (type.HasFlagsAttribute())
+            if (type.GetCustomAttribute<FlagsAttribute>(inherit: false) != null)
             {
                 // Does not work consistently for Flags enums:
                 // http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx

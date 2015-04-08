@@ -8,37 +8,59 @@ namespace Narvalo.Fx
     using Narvalo.TestCommon;
     using Xunit;
 
-    public static class VoidOrErrorFacts
+    public static partial class VoidOrErrorFacts
     {
+        #region Void
+
+        [Fact]
+        public static void Void_IsNotNull()
+        {
+            // Act & Assert
+            Assert.True(VoidOrError.Void != null);
+        }
+
+        #endregion
+
         #region IsError
 
         [Fact]
-        public static void IsError_ReturnsFalse_WithVoidObject()
+        public static void IsError_ReturnsFalse_WhenVoid()
         {
             // Act & Assert
             Assert.False(VoidOrError.Void.IsError);
         }
 
         [Fact]
-        public static void IsError_ReturnsTrue_WithErrorObject()
+        public static void IsError_ReturnsTrue_WhenError()
         {
             // Arrange
-            VoidOrError voe = null;
+            var edi = CreateEdi_();
+            var voe = VoidOrError.Error(edi);
 
+            // Act & Assert
+            Assert.True(voe.IsError);
+        }
+
+        #endregion
+
+        #region Error()
+
+        [Fact]
+        public static void Error_ThrowsArgumentNullException_ForNullInput()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => VoidOrError.Error(null));
+        }
+
+        [Fact]
+        public static void Error_ResultIsNotNull()
+        {
             // Act
-            try
-            {
-                throw new SimpleException();
-            }
-            catch (SimpleException ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                voe = VoidOrError.Error(edi);
-            }
+            var edi = CreateEdi_();
+            var voe = VoidOrError.Error(edi); 
 
             // Assert
-            Assert.True(voe.IsError);
+            Assert.True(voe != null);
         }
 
         #endregion
@@ -46,31 +68,20 @@ namespace Narvalo.Fx
         #region ThrowIfError()
 
         [Fact]
-        public static void ThrowIfError_DoesNotThrow_WithVoidObject()
+        public static void ThrowIfError_DoesNotThrow_WhenVoid()
         {
             // Act
             VoidOrError.Void.ThrowIfError();
         }
 
         [Fact]
-        public static void ThrowIfError_ThrowsOriginalException_WithErrorObject()
+        public static void ThrowIfError_ThrowsOriginalException_WhenError()
         {
             // Arrange
-            VoidOrError voe = null;
+            var edi = CreateEdiFrom_(new SimpleException());
+            var voe = VoidOrError.Error(edi); 
 
-            // Act
-            try
-            {
-                throw new SimpleException();
-            }
-            catch (SimpleException ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                voe = VoidOrError.Error(edi);
-            }
-
-            // Assert
+            // Act & Assert
             Assert.Throws<SimpleException>(() => voe.ThrowIfError());
         }
 
@@ -79,35 +90,59 @@ namespace Narvalo.Fx
         #region ToString()
 
         [Fact]
-        public static void ToString_IsOverridden_WithVoidObject()
+        public static void ToString_ReturnsVoid_WhenVoid()
         {
-            // Act
+            // Act & Assert
             Assert.Equal("Void", VoidOrError.Void.ToString());
         }
 
         [Fact]
-        public static void ToString_ContainsExceptionMessage_WithErrorObject()
+        public static void ToString_ResultIsNotNull_WhenError()
         {
             // Arrange
-            VoidOrError voe = null;
+            var edi = CreateEdi_();
+            var voe = VoidOrError.Error(edi); 
+
+            // Act a Assert
+            Assert.True(voe.ToString() != null);
+        }
+
+        [Fact]
+        public static void ToString_ResultContainsExceptionMessage_WhenError()
+        {
+            // Arrange
             var message = "My exception message.";
+            var edi = CreateEdiFrom_(new SimpleException(message));
+            var voe = VoidOrError.Error(edi);
 
-            // Act
-            try
-            {
-                throw new SimpleException(message);
-            }
-            catch (SimpleException ex)
-            {
-                var edi = ExceptionDispatchInfo.Capture(ex);
-
-                voe = VoidOrError.Error(edi);
-            }
-
-            // Assert
+            // Act & Assert
             Assert.True(voe.ToString().Contains(message));
         }
 
         #endregion
+    }
+
+    public static partial class VoidOrErrorFacts
+    {
+        private static ExceptionDispatchInfo CreateEdi_()
+        {
+            return CreateEdiFrom_(new SimpleException());
+        }
+
+        private static ExceptionDispatchInfo CreateEdiFrom_(Exception exception)
+        {
+            ExceptionDispatchInfo edi;
+
+            try
+            {
+                throw exception;
+            }
+            catch (SimpleException ex)
+            {
+                edi = ExceptionDispatchInfo.Capture(ex);
+            }
+
+            return edi;
+        }
     }
 }

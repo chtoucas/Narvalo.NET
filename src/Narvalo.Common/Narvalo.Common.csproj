@@ -98,7 +98,6 @@
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
-    <Compile Include="Internal\ReflectionExtensions.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />

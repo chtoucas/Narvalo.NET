@@ -8,69 +8,67 @@ namespace Narvalo.Fx
 
     public static class UnitFacts
     {
-        #region op_Equality()
-
         [Fact]
-        public static void Equality_AlwaysReturnsTrue()
+        public static void Equality_Tests()
         {
+            // Arrange
+            var u1 = new Unit();
+            var u2 = new Unit();
+
             // Act & Assert
-            Assert.True(new Unit() == Unit.Single);
-            Assert.True(Unit.Single == new Unit());
-            Assert.True(new Unit() == new Unit());
+            Assert.True(u1 == Unit.Single);
+            Assert.True(Unit.Single == u1);
+            Assert.True(u1 == u2);
         }
 
-        #endregion
-
-        #region op_Inequality()
-
         [Fact]
-        public static void Inequality_AlwaysReturnsFalse()
+        public static void Inequality_Tests()
         {
+            // Arrange
+            var u1 = new Unit();
+            var u2 = new Unit();
+
             // Act & Assert
-            Assert.False(new Unit() != Unit.Single);
-            Assert.False(Unit.Single != new Unit());
-            Assert.False(new Unit() != new Unit());
+            Assert.False(u1 != Unit.Single);
+            Assert.False(Unit.Single != u1);
+            Assert.False(u1 != u2);
         }
 
-        #endregion
-
-        #region Equals()
-
         [Fact]
-        public static void Equals()
+        public static void Equals_Tests()
         {
+            // Arrange
+            var u1 = new Unit();
+            var u2 = new Unit();
+
             // Act & Assert
-            Assert.True(new Unit().Equals(new Unit()));
-            Assert.True(new Unit().Equals(Unit.Single));
-            Assert.True(Unit.Single.Equals(new Unit()));
+            Assert.True(u1.Equals(u1));
+            Assert.True(u1.Equals(u2));
+            Assert.True(u1.Equals(Unit.Single));
+            Assert.True(Unit.Single.Equals(u1));
+            Assert.True(Unit.Single.Equals(u2));
             Assert.True(Unit.Single.Equals(Unit.Single));
 
-            Assert.False(Unit.Single.Equals(new Object()));
+            Assert.False(u1.Equals(null));
+            Assert.False(u1.Equals(new Object()));
+            Assert.False(new Object().Equals(u1));
             Assert.False(new Object().Equals(Unit.Single));
         }
 
-        #endregion
-
-        #region GetHashCode()
-
         [Fact]
-        public static void GetHashCode_IsOverriden()
+        public static void GetHashCode_Tests()
         {
             // Act & Assert
+            Assert.Equal(0, new Unit().GetHashCode());
             Assert.Equal(0, Unit.Single.GetHashCode());
         }
 
-        #endregion
-
-        #region ToString()
-
         [Fact]
-        public static void ToString_IsOverriden()
+        public static void ToString_Tests()
         {
             // Act & Assert
+            Assert.Equal("()", new Unit().ToString());
             Assert.Equal("()", Unit.Single.ToString());
         }
-
-        #endregion
     }
 }

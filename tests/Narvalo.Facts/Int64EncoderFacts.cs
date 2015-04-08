@@ -15,7 +15,7 @@ namespace Narvalo
 
     public static partial class Int64EncoderFacts
     {
-        public static IEnumerable<object[]> Base58Data
+        public static IEnumerable<object[]> Base58TestData
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Narvalo
         /// Test data borrowed from the Encode-Base58 Perl module.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements")]
-        public static IEnumerable<object[]> FlickrBase58Data
+        public static IEnumerable<object[]> FlickrBase58TestData
         {
             get
             {
@@ -578,7 +578,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("Base58Data")]
+        [MemberData("Base58TestData")]
         [CLSCompliant(false)]
         public static void FromBase58String_ReturnsExpectedString(string value, long expectedValue)
         {
@@ -598,10 +598,10 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("FlickrBase58Data")]
+        [MemberData("FlickrBase58TestData")]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
-        public static void FromFlickrBase58String_ReturnsExpectedString(string value, long expectedValue)
+        public static void FromFlickrBase58String_TestSuite(string value, long expectedValue)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
@@ -619,9 +619,9 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("Base58Data")]
+        [MemberData("Base58TestData")]
         [CLSCompliant(false)]
-        public static void ToBase58String_ReturnsExpectedString(string expectedValue, long value)
+        public static void ToBase58String_TestSuite(string expectedValue, long value)
         {
             // Act & Assert
             Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
@@ -639,7 +639,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("FlickrBase58Data")]
+        [MemberData("FlickrBase58TestData")]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void ToFlickrBase58String_ReturnsExpectedString(string expectedValue, long value)

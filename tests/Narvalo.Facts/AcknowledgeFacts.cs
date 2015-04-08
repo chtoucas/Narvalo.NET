@@ -50,6 +50,31 @@ namespace Narvalo
         }
 
         #endregion
+
+        #region NotNullOrEmpty()
+
+        [Fact]
+        public static void NotNullOrEmpty_DoesNothing()
+        {
+            // Act
+            Acknowledge.NotNullOrEmpty(null);
+            Acknowledge.NotNullOrEmpty(String.Empty);
+            Acknowledge.NotNullOrEmpty("value");
+        }
+
+        #endregion
+
+        #region Object()
+
+        [Fact]
+        public static void Object_DoesNothing()
+        {
+            // Act
+            Acknowledge.Object((string)null);
+            Acknowledge.Object("value");
+        }
+
+        #endregion
     }
 
     public static partial class AcknowledgeFacts

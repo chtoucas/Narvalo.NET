@@ -98,7 +98,7 @@ Infrastructure
 
 ### CA, SA...
 
-- Remove the local CA & SA overrides.
+- Remove the local overrides for CA & SA.
 - Make unnecessary to add StyleCop settings to each individual project.
 - Fix the double settings: `StyleCop.SourceAnalysis` and local props file.
 - Review StyleCop settings, StyleCop cache & ability to change settings used.
