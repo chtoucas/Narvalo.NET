@@ -4,9 +4,9 @@
  <title>CommonMark</title>
  <style type="text/css">
   body {
-   font-size: 12px;
+   font-size: 14px;
    font-family: sans-serif;
-   width: 70em;
+   width: 65em;
    margin: 1em auto;
   }
 
@@ -38,14 +38,14 @@
  <textarea id="source"></textarea>
  <p id="preview"></p>
 
- <script src="./jquery-2.1.1.min.js"></script>
+ <script src="./jquery-2.1.3.min.js"></script>
  <script src="./commonmark.js"></script>
  <script>
   $(function () {
    var $source = $("#source");
    var $preview = $("#preview");
 
-   var parser = new commonmark.DocParser();
+   var parser = new commonmark.Parser();
    var renderer = new commonmark.HtmlRenderer();
 
    var parseAndRender = function () {
@@ -53,7 +53,7 @@
 
     if (undefined === ast) { return; }
 
-    $preview.html(renderer.renderBlock(ast));
+    $preview.html(renderer.render(ast));
    };
 
    // Make tab insert a tab in the text box
