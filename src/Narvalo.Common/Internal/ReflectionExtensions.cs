@@ -3,9 +3,12 @@
 namespace Narvalo.Internal
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] This class is only used internally.")]
     internal static class ReflectionExtensions
     {
         [Pure]

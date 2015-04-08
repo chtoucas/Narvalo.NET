@@ -20,6 +20,8 @@ namespace Narvalo
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
+            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
         public static bool IsEnum<T>() where T : struct
         {
             return typeof(T).IsEnum;
@@ -32,11 +34,13 @@ namespace Narvalo
         /// <returns><c>true</c> if the specified type parameter is a flags enumeration; 
         /// otherwise <c>false</c>.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
-            Justification = "[Intentionally] Simply put, the rule does not apply here.")]
+            Justification = "[Intentionally] The rule does not apply here.")]
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
+            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
         public static bool IsFlagsEnum<T>() where T : struct
         {
             var type = typeof(T);
@@ -52,7 +56,7 @@ namespace Narvalo
         /// otherwise <c>false</c>.</returns>
         [Pure]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
-            Justification = "[Intentionally] Simply put, the rule does not apply here.")]
+            Justification = "[Intentionally] The rule does not apply here.")]
         [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
             Justification = "[Intentionally] Method marked as MonoTODO.")]
         public static bool IsFlagsEnum(Type type)
@@ -70,6 +74,8 @@ namespace Narvalo
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design", "ConsiderConvertingMethodToPropertyRule",
+            Justification = "[Intentionally] Making this a property would make the API even more complicated.")]
         public static bool IsValueType<T>()
         {
             return typeof(T).IsValueType;

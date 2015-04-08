@@ -130,7 +130,7 @@ namespace Narvalo
         }
 
         [SuppressMessage("Gendarme.Rules.Smells", "AvoidCodeDuplicatedInSameClassRule",
-            Justification = "[Intentionally] The codes are only look-alike.")]
+            Justification = "[Intentionally] The codes are superficially look-alike.")]
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
