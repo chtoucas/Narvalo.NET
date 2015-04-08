@@ -6,6 +6,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Internal;
+    using Narvalo.Properties;
 
     public static class ConvertTo
     {
@@ -19,7 +20,7 @@ namespace Narvalo
             {
                 // Does not work consistently for Flags enums:
                 // http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
-                throw new ArgumentException();
+                throw new ArgumentException(Strings_Common.ConvertTo_TypeIsNotFlagsEnum);
             }
 
             if (System.Enum.IsDefined(type, value))

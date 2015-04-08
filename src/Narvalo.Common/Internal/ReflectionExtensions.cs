@@ -9,7 +9,7 @@ namespace Narvalo.Internal
     internal static class ReflectionExtensions
     {
         [Pure]
-        public static bool HasFlagsAttribute(this Type @this)
+        public static bool HasFlagsAttribute(this MemberInfo @this)
         {
             Contract.Requires(@this != null);
 

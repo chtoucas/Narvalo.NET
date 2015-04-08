@@ -126,6 +126,9 @@
   <data name="Configuration_MissingSection_Format" xml:space="preserve">
     <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration !</value>
   </data>
+  <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
+    <value>Cette méthode n'accepte que les enumérations de bits indicateurs.</value>
+  </data>
   <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
     <value>Caractère illégal '{0}' trouvé à la position '{1}'.</value>
   </data>

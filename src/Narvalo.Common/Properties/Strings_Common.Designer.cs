@@ -88,6 +88,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This method only accepts flags enum..
+        /// </summary>
+        internal static string ConvertTo_TypeIsNotFlagsEnum {
+            get {
+                return ResourceManager.GetString("ConvertTo_TypeIsNotFlagsEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
         /// </summary>
         internal static string Int64Encoder_IllegalCharacter_Format {

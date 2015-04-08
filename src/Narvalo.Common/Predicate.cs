@@ -3,11 +3,12 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
 
-    public static class Is
+    public static class Predicate
     {
         /// <summary>
         /// Returns a value indicating whether the specified type parameter is an enumeration.
@@ -15,7 +16,11 @@ namespace Narvalo
         /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is an enumeration; 
         /// otherwise <c>false</c>.</returns>
-        public static bool Enum<T>() where T : struct
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static bool IsEnum<T>() where T : struct
         {
             return typeof(T).IsEnum;
         }
@@ -26,7 +31,13 @@ namespace Narvalo
         /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is a flags enumeration; 
         /// otherwise <c>false</c>.</returns>
-        public static bool FlagsEnum<T>() where T : struct
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] Simply put, the rule does not apply here.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static bool IsFlagsEnum<T>() where T : struct
         {
             var type = typeof(T);
 
@@ -40,7 +51,11 @@ namespace Narvalo
         /// <returns><c>true</c> if the specified <paramref name="type"/> is a flags enumeration; 
         /// otherwise <c>false</c>.</returns>
         [Pure]
-        public static bool FlagsEnum(Type type)
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] Simply put, the rule does not apply here.")]
+        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
+            Justification = "[Intentionally] Method marked as MonoTODO.")]
+        public static bool IsFlagsEnum(Type type)
         {
             return type != null && type.IsEnum && type.HasFlagsAttribute();
         }
@@ -51,7 +66,11 @@ namespace Narvalo
         /// <typeparam name="T">The type to test.</typeparam>
         /// <returns><c>true</c> if the specified type parameter is a value type; 
         /// otherwise <c>false</c>.</returns>
-        public static bool ValueType<T>()
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        public static bool IsValueType<T>()
         {
             return typeof(T).IsValueType;
         }
@@ -63,7 +82,7 @@ namespace Narvalo
         /// <returns><c>true</c> if the specified value consists only of white-space characters; 
         /// otherwise <c>false</c>.</returns>
         [Pure]
-        public static bool WhiteSpace(string value)
+        public static bool IsWhiteSpace(string value)
         {
             if (value == null)
             {

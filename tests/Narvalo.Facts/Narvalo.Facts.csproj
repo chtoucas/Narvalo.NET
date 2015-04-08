@@ -95,6 +95,7 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
     <Compile Include="TestCommon\AssertExt.cs" />
     <Compile Include="TestCommon\DisposableAction.cs" />
@@ -116,7 +117,7 @@
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
-    <Compile Include="IsFacts.cs" />
+    <Compile Include="PredicateFacts.cs" />
     <Compile Include="Web\Html\MarkupFacts.cs" />
     <Compile Include="Web\UI\AssetManagerFacts.cs" />
     <Compile Include="Web\UI\AssetProviderBaseFacts.cs" />

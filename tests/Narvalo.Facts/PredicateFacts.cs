@@ -6,7 +6,7 @@ namespace Narvalo
 
     using Xunit;
 
-    public static partial class IsFacts
+    public static partial class PredicateFacts
     {
         private const string WHITESPACE_ONLY_STRING = "     ";
 
@@ -43,150 +43,150 @@ namespace Narvalo
         }
     }
 
-    public static partial class IsFacts
+    public static partial class PredicateFacts
     {
-        #region Enum()
+        #region IsEnum()
 
         [Fact]
-        public static void Enum_ReturnsTrue_ForEnum()
+        public static void IsEnum_ReturnsTrue_ForEnum()
         {
             // Act & Assert
-            Assert.True(Is.Enum<MyEnum_>());
+            Assert.True(Predicate.IsEnum<MyEnum_>());
         }
 
         [Fact]
-        public static void Enum_ReturnsTrue_ForFlagsEnum()
+        public static void IsEnum_ReturnsTrue_ForFlagsEnum()
         {
             // Act & Assert
-            Assert.True(Is.Enum<MyFlagsEnum_>());
+            Assert.True(Predicate.IsEnum<MyFlagsEnum_>());
         }
 
         [Fact]
-        public static void Enum_ReturnsFalse_ForSimpleType()
+        public static void IsEnum_ReturnsFalse_ForSimpleType()
         {
             // Act & Assert
-            Assert.False(Is.Enum<int>());
+            Assert.False(Predicate.IsEnum<int>());
         }
 
         [Fact]
-        public static void Enum_ReturnsFalse_ForNonEnumerationStruct()
+        public static void IsEnum_ReturnsFalse_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.False(Is.Enum<MyStruct_>());
+            Assert.False(Predicate.IsEnum<MyStruct_>());
         }
 
         #endregion
 
-        #region FlagsEnum()
+        #region IsFlagsEnum()
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForNullParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNullParameter()
         {
             // Arrange
             Type type = null;
 
             // Act & Assert
-            Assert.False(Is.FlagsEnum(type));
+            Assert.False(Predicate.IsFlagsEnum(type));
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsTrue_ForFlagsEnum()
+        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnum()
         {
             // Act & Assert
-            Assert.True(Is.FlagsEnum<MyFlagsEnum_>());
+            Assert.True(Predicate.IsFlagsEnum<MyFlagsEnum_>());
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsTrue_ForFlagsEnumParameter()
+        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumParameter()
         {
             // Arrange
             var type = typeof(MyFlagsEnum_);
 
             // Act & Assert
-            Assert.True(Is.FlagsEnum(type));
+            Assert.True(Predicate.IsFlagsEnum(type));
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForNonFlagsEnum()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnum()
         {
             // Act & Assert
-            Assert.False(Is.FlagsEnum<MyEnum_>());
+            Assert.False(Predicate.IsFlagsEnum<MyEnum_>());
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForNonFlagsEnumParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumParameter()
         {
             // Arrange
             var type = typeof(MyEnum_);
 
             // Act & Assert
-            Assert.False(Is.FlagsEnum(type));
+            Assert.False(Predicate.IsFlagsEnum(type));
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForSimpleType()
+        public static void IsFlagsEnum_ReturnsFalse_ForSimpleType()
         {
             // Act & Assert
-            Assert.False(Is.FlagsEnum<int>());
+            Assert.False(Predicate.IsFlagsEnum<int>());
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForSimpleTypeParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeParameter()
         {
             // Arrange
             var type = typeof(int);
 
             // Act & Assert
-            Assert.False(Is.FlagsEnum(type));
+            Assert.False(Predicate.IsFlagsEnum(type));
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForNonEnumerationStruct()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.False(Is.FlagsEnum<MyStruct_>());
+            Assert.False(Predicate.IsFlagsEnum<MyStruct_>());
         }
 
         [Fact]
-        public static void FlagsEnum_ReturnsFalse_ForNonEnumerationStructParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructParameter()
         {
             // Arrange
             var type = typeof(MyStruct_);
 
             // Act & Assert
-            Assert.False(Is.FlagsEnum(type));
+            Assert.False(Predicate.IsFlagsEnum(type));
         }
 
         #endregion
 
-        #region WhiteSpace()
+        #region IsWhiteSpace()
 
         [Fact]
-        public static void WhiteSpace_ReturnsTrue_ForEmptyString()
+        public static void IsWhiteSpace_ReturnsTrue_ForEmptyString()
         {
             // Act & Assert
-            Assert.True(Is.WhiteSpace(String.Empty));
+            Assert.True(Predicate.IsWhiteSpace(String.Empty));
         }
 
         [Fact]
-        public static void WhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
+        public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.True(Is.WhiteSpace(WHITESPACE_ONLY_STRING));
+            Assert.True(Predicate.IsWhiteSpace(WHITESPACE_ONLY_STRING));
         }
 
         [Fact]
-        public static void WhiteSpace_ReturnsFalse_ForNullString()
+        public static void IsWhiteSpace_ReturnsFalse_ForNullString()
         {
             // Act & Assert
-            Assert.False(Is.WhiteSpace(null));
+            Assert.False(Predicate.IsWhiteSpace(null));
         }
 
         [Fact]
-        public static void WhiteSpace_ReturnsFalse_ForNonEmptyOrWhiteSpaceString()
+        public static void IsWhiteSpace_ReturnsFalse_ForNonEmptyOrWhiteSpaceString()
         {
             // Act & Assert
-            Assert.False(Is.WhiteSpace("value"));
+            Assert.False(Predicate.IsWhiteSpace("value"));
         }
 
         #endregion
