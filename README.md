@@ -6,6 +6,7 @@ Narvalo.NET
 - [Project Changelog](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Changelog.md)
 - [Issues and Roadmap](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Issues.md)
 - [Developer Guidelines](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Guidelines.md)
+- [DevOps](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/BuildAndRelease.md)
 - [Developer Tips](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Tips.md)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)

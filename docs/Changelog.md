@@ -38,6 +38,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Added more tests.
 - Clearly shows skipped tests. This includes debug or release only tests and white-box tests.
 - Use traits to mark slow or unsafe tests.
+- Integration of OpenCover.
 
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

@@ -10,7 +10,7 @@
 @set Gendarme=%RepositoryRoot%\packages\Mono.Gendarme.2.11.0.20121120\tools\gendarme.exe
 @set ConfigFile=%RepositoryRoot%\etc\gendarme.xml
 @set IgnoreFile=%RepositoryRoot%\etc\gendarme.ignore
-@set LogFile=%RepositoryRoot%\gendarme.log
+@set LogFile=%RepositoryRoot%\work\log\gendarme.log
 @set Limit=100
 @set RuleSet=narvalo-strict
 

@@ -4,30 +4,38 @@ Status
 Narvalo.Core
 ------------
 
-As of 2015/04.08:
-- OpenCover: 30%
-- FxCop: _complete_
-- Gendarme: _complete_
-- Code Contracts: _complete_ but more to be added
-- StyleCop: _complete_
-- Documentation: partial
+API should be stable.
+
+As of 2015-04-08:
+- OpenCover: **30%**
+- FxCop: OK
+- Gendarme: OK
+- Code Contracts: OK but more to be added
+- StyleCop: OK except for documentation rules
+- Documentation: **partial**
 
 Narvalo.Common
 --------------
 
-As of 2015/04.08:
-- OpenCover: ???
-- FxCop: partial, see GlobalSuppression.cs
-- Gendarme: partial, see gendarme.ignore
-- Code Contracts: ???
-- StyleCop: _complete_ except for documentation rules
-- Documentation: partial
+Refactoring coming.
+
+As of 2015-04-08:
+- OpenCover: **5%**
+- FxCop: **partial**, see GlobalSuppression.cs
+- Gendarme: **partial**, see gendarme.ignore
+- Code Contracts: OK but more to be added
+- StyleCop: OK except for documentation rules
+- Documentation: **partial**
 
 Narvalo.Web
 ------------
 
-Narvalo.Mvp
-------------
+Work in progress.
 
-Narvalo.Mvp.Web
----------------
+As of 2015-04-08:
+- OpenCover: **15%**
+- FxCop: OK
+- Gendarme: **KO**
+- Code Contracts: **KO**
+- StyleCop: OK except for documentation rules
+- Documentation: **partial**

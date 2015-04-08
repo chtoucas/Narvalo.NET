@@ -9,148 +9,140 @@ libraries. NB: To spot them, you should look for the `Issue` attribute.
 
 All issues are either Bug, Enhancement or Improvement.
 
-When an issue is closed, move it to the ChangeLog. Further more, if it is a bug,
+When an issue is closed, move it to the ChangeLog. Furthermore, if it is a bug,
 add the necessary tests to be sure it does not pass through again.
 
-Work in progress
-----------------
+Design
+------
 
-- Make optional the AssetSection and Optimization sections.
-- VirtualPath
-    http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
-    http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
-    http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
-- Use static readonly fields instead of const for some fields in Narvalo.Web.Semantic?
-- Comment Contract.Assume and AssumeNotNull
-- Find a better name for "Unsafe".
-- If the test project fails, the build does not.
-- SecurityTransparent attribute and non PCL libraries depending on a PCL library.
-- EditorBrowsableState
-- Format and boxing
-- IList<T>, IEnumerable<T> and so on in APIs. Document behaviour with regard to infinite sequences.
-- Verify that SkipDocumentation=true when building Code Contracts doc.
-- Unsafe alternates: complete SqlDataReader.
+- Comment `Contract.Assume` and `AssumeNotNull`.
+- Review all `Format` and boxing
+- Find a better name for `Unsafe`.
+- Add `EditorBrowsableState` to some classes?
+- Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour with regard to infinite sequences.
+- Review all `IEnumerable` extensions for null-checking and deferred execution.
+
+Narvalo.Core
+------------
+
 - Confirm that Maybe methods never returns null.
-- Refactorings:
- * Range
- * Currencies (Serialization & providers)
- * Benchmarks
-- Range T why force struct constraint? Require for "T?" where T is a struct?
-- Improvement: Monad.tt, review true argument check for extension methods.
-- Improvement: Review all IEnumerable extensions for null-checking and deferred execution.
-- Improvement: Check any use of `AssumeNotNull`
-- make.ps1 -r fails to push to the official NuGet server but works otherwise.
-- Maybe we can simplify semver for edge packages 
-  * http://semver.npmjs.com/
-  * http://www.infoq.com/news/2015/04/semver-calculator-npm
+- Monad.tt, review true argument check for extension methods.
 
-Not yet planned
----------------
+Narvalo.Common
+--------------
 
-### More automation and further improvements to the overall code quality.
+- Complete unsafe alternates for SqlDataReader.
+- Refactore:
+  * `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
+  * Currencies (Serialization & providers)
+  * Benchmarks
 
-Build Automation:
-- Enhancement: PSake CI target should build and test all possible configurations,
-  currently Debug|Release, AnyCPU, with or without visible internals.
-- Enhancement: Enable T4-regeneration outside VS since, for us, it won't work
-  when building from the command-line.
-- Enhancement: Start to use Git tags.
-- Enhancement: Create symbol packages (or use GitLink?).
-- Enhancement: %comspec% /k (@pause).
-- Improvement: Complete PSake / Gendarme and Versioning tasks.
-- Improvement: Add Gendarme and Versioning tasks to Narvalo.Build.
-- Review: What's going on when Package target is also defined.
-- Enhancement: Add more tasks to checkup.ps1
-  * Find projects not using Narvalo.Common.props
-  * Find uncommon project settings
-  * Find DependentUpon without SubType files
-  * Find hidden VS files
-  * Find files ignored by git: git status -u --ignored
-  * Repair StyleCop settings
-- Bug: Some assemblies raise a CA warning on string resources supposably not used.
-- Bug: Code Analysis problems. Whatever we use for CodeAnalysisSucceededFile,
-  it does not seem to be understood by MSBuild. Setting CodeAnalysisLogFile or
-  CodeAnalysisSucceededFile disables incremental building. Code Analysis hooks
-  in Narvalo.Common.targets are disabled.
-- Enhancement: Analyze logs.
-- Bug: F#. Finding previous version of packages seems incorrect and deleting fails sometimes?
-- Improvement: Complete Guidelines.
-  * Explain NuGet package versioning (retail or not). More details on the effect
-    of using Retail=true.
-  * Fully document any requirement. See:
-    [Visual Studio Downloads](http://www.visualstudio.com/downloads/download-visual-studio-vs)
-  * Document compiler conditional symbols in use.
-- Improvement: Review and fill assembly and NuGet spec.
-- Sign F# assemblies.
-- Enhancement: More supported platforms (64bit) and target frameworks.
-- Enhancement: Create Narvalo.FxCop.
-- Improvement: Complete Narvalo.StyleCop.CSharp.
-- Enhancement: Zip artefacts when done building.
+Narvalo.Web
+-----------
 
-Code Quality:
-- Improvement: Remove the local CA & SA overrides.
-- Improvement: Make unnecessary to add StyleCop settings to each project.
-  Fix the double settings (StyleCop.SourceAnalysis and local props file)
-  Review StyleCop settings, StyleCop cache & ability to change settings used.
-- Create custom StyleCop/FxCop rules:
-  * private readonly static must start with s_
-  * private const must be uppercase
-  * private fields must start with underscore
-  * do not create a Maybe<T> where T is struct
-- Enhancement: Add Code Coverage + Report Generator.
-- Enhancement: Explore SpecFlow.
+- Strengthen handling of paths
+  * http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
+  * http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
+  * http://stackoverflow.com/questions/1268738/asp-net-mvc-find-absolute-path-to-the-app-data-folder-from-controller
+- Make `AssetSection` and `Optimization` sections optional.
+- Use static readonly fields instead of const for some fields in Narvalo.Web.Semantic?
+- Add an XML schema for the Narvalo.Web config.
 
-### Better tested and documented Narvalo.Core assembly.
+Narvalo.Facts
+-------------
 
-- Enhancement: Write a T4 template for Monad tests.
-- Improvement: Add more code contracts and large code coverage.
+- Explore SpecFlow.
+- Write a T4 template for Monad tests.
 
-### Better tested and documented Narvalo.Common assembly.
+Narvalo.Build
+-------------
 
-- Improvement: Add more code contracts and large code coverage.
+- Add Gendarme and Versioning tasks to Narvalo.Build.
 
-### Better tested and documented Narvalo.Web assembly.
+Narvalo.StyleCop.CSharp
+-----------------------
 
-- Enhancement: Add an XML schema for the Narvalo config.
-- Improvement: Add more code contracts and large code coverage.
+- `private readonly static` must start with `s_`.
+- `private const` must be uppercase.
+- `private` fields must start with underscore.
 
-### Documentation & Literate Programming.
+Narvalo.FxCop
+-------------
 
-- Enhancement: Build C# documentation.
-- Enhancement: Use CommonMark instead of Markdown Deep.
-  NB: PostSharp, Roslyn, MEF, Serilog, Autofac. Or no, simply XSLTize the xml.
+- Do not create a `Maybe<T>` where `T` is struct.
 
-### Strengthen core assemblies.
+Narvalo.Mvp
+-----------
 
-- Enhancement: Benchmark across builds.
-- Enhancement: Check reports from performed analysis.
-
-### Secure core assemblies.
-
-- Check libraries with SecAnnotate (AllowPartiallyTrustedCallers).
-  Do not run SecAnnotate on test libraries? See permcalc.
-- Improvement: Make sure a build fails when SecAnnotate does too.
-- Enhancement: Implements security attributes.
-
-### Narvalo.Mvp (en vrac)
-
-- Review: ThrowIfNoPresenterBound, Load event, PresenterBinder.Release.
-- Enhancement: Tests. We can start by porting those from WebFormsMvp.
-- Enhancement: Documentation and userguide.
-- Improvement: Using custom presenter types per platform prevents
-  the reuse of presenters across different platforms. Maybe is it a necessary evil?
-- Enhancement: Add support for WPF.
-- Enhancement: Add support for Application Controller, Navigator,
-  EventAggregator (not the same as cross-presenter communication).
-- Enhancement: Incorporate ideas from MVCSharp (Task) and maybe
-  GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
-- Improvement: For Narvalo.Mvp.Windows.Forms, cross-presenter
-  communication is not functional. Things to work on before it might prove
-  to be useful:
+- Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
+- Review the use of custom presenter types per platform prevents the reuse of 
+  presenters across different platforms. Maybe is it a necessary evil?
+- Add support for Application Controller, Navigator, EventAggregator (not the same 
+  as cross-presenter communication).
+- Incorporate ideas from MVCSharp (Task) and maybe GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
+- Add support for WPF.
+- For Narvalo.Mvp.Windows.Forms, cross-presenter communication is not functional. 
+  Things to work on before it might prove to be useful:
   * Right now, only controls contained in a MvpForm share the same presenter binder.
-    We need something similar to what is done with ASP.NET (PageHost) but the situation
+    We need something similar to what is done with ASP.NET (`PageHost`) but the situation
     is a bit more complicated due to the different execution model. Controls
-    are fully loaded before we reach the CreateControl or Load events in the form
+    are fully loaded before we reach the `CreateControl` or `Load` events in the form
     container where we normally perform the binding.
   * The message coordinator must support unsubscription (automatic or manual).
 
+Infrastructure
+--------------
+
+### Continuous Integration
+
+- Enable Continuous Integration with AppVeyor. 
+- Analyze logs and reports across builds.
+- Build C# documentation.
+- Build and test all possible configurations.
+
+### Packages
+
+- Create symbol packages (or use GitLink?).
+- Maybe we can simplify semantic versioning for edge packages:
+  * http://semver.npmjs.com/
+  * http://www.infoq.com/news/2015/04/semver-calculator-npm
+
+### CA, SA...
+
+- Remove the local CA & SA overrides.
+- Make unnecessary to add StyleCop settings to each individual project.
+- Fix the double settings: `StyleCop.SourceAnalysis` and local props file.
+- Review StyleCop settings, StyleCop cache & ability to change settings used.
+
+### Security
+
+- **Bug:** `SecurityTransparent` attribute and non PCL libraries depending 
+  on a PCL library do not play well together.
+- Check libraries with SecAnnotate. Do not run SecAnnotate on test libraries? See permcalc.
+
+### Scripts
+
+MSBuild and `PSakefile`:
+- **Bug:** If a test project fails, the build does not.
+- **Bug:** Whatever we use for `CodeAnalysisSucceededFile`,
+  it does not seem to be understood by MSBuild. Setting `CodeAnalysisLogFile` or
+  `CodeAnalysisSucceededFile` disables incremental building. Currently, Code Analysis hooks
+  are disabled in `Narvalo.Common.targets`.
+- Integrate Gendarme and OpenCover.
+- Complete common settings for F# projects.
+- Enable T4-regeneration outside VS since, currently it does not work when building from the command-line.
+- Make sure a build fails when SecAnnotate does too.
+- What's going on when the `Package` target is also defined?
+- Verify that `SkipDocumentation` is true when building Code Contracts documentation.
+
+`publish-*.fsx`
+- **Bug:** Fails to push to the official NuGet server but works otherwise.
+- **Bug:** Finding previous version of packages seems incorrect and deleting fails sometimes?
+
+`checkup.ps1`:
+- Find projects not using `Narvalo.Common.props`.
+- Find uncommon project settings.
+- Find `DependentUpon` without `SubType` files.
+- Find hidden Visual Studio files.
+- Find files ignored by git: `git status -u --ignored`.
+- Repair StyleCop settings.
