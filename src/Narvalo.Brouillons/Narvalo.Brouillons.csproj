@@ -280,9 +280,6 @@
     <Compile Include="Web\UI\CacheBreakerPageParserFilter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\ControlBuilder%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\UI\HtmlControlPageParserFilterBase.cs">
       <SubType>Code</SubType>
     </Compile>

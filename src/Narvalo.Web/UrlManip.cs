@@ -25,11 +25,17 @@ namespace Narvalo.Web
 
             if (scheme == Uri.UriSchemeHttp)
             {
-                return uri.ToString().Substring(5);
+                var uriString = uri.ToString();
+                Contract.Assume(uriString.Length >= 5);
+
+                return uriString.Substring(5);
             }
             else if (scheme == Uri.UriSchemeHttps)
             {
-                return uri.ToString().Substring(6);
+                var uriString = uri.ToString();
+                Contract.Assume(uriString.Length >= 6);
+
+                return uriString.Substring(6);
             }
             else
             {
