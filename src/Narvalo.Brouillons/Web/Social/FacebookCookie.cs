@@ -11,7 +11,7 @@ namespace Narvalo.Web.Social
     using System.Web;
 
     using Narvalo.Fx;
-    using Narvalo.Fx.Extensions;
+    using Narvalo.Fx.Advanced;
 
     public struct FacebookCookie
     {

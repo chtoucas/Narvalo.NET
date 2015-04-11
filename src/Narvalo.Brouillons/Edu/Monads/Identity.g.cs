@@ -429,7 +429,7 @@ namespace Narvalo.Edu.Monads
 }
 
 // Extensions for core CLR types are put into a separate namespace.
-namespace Narvalo.Edu.Monads.Extensions
+namespace Narvalo.Edu.Monads.Advanced
 {
     using System;
     using System.Diagnostics.Contracts;

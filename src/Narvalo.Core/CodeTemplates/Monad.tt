@@ -382,7 +382,7 @@ namespace <#= Namespace #>
 }
 
 // Extensions for core CLR types are put into a separate namespace.
-namespace <#= Namespace #>.Extensions
+namespace <#= Namespace #>.Advanced
 {
     using System;
     using System.Diagnostics.Contracts;
@@ -1968,7 +1968,7 @@ namespace <#= LinqNamespace #>.Internal
      * Private Methods
      * ========================================================================================== */
 
-    protected void WriteHeader_()
+    private void WriteHeader_()
     {
         if (_headerWritten) {
             return;
@@ -2009,7 +2009,7 @@ using global::System.Diagnostics.CodeAnalysis;
         _headerWritten = true;
     } // End of WriteHeader_().
     
-    protected void WriteCompilerAttributes_()
+    private void WriteCompilerAttributes_()
     {
 #>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]

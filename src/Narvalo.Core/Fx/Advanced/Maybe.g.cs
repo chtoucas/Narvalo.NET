@@ -29,14 +29,14 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
     Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
 
-namespace Narvalo.Fx.Extensions
+namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
-    using Narvalo.Fx.Extensions.Internal;
+    using Narvalo.Fx.Advanced.Internal;
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class..
@@ -245,7 +245,7 @@ namespace Narvalo.Fx.Extensions
     } // End of the class EnumerableMaybeExtensions.
 }
 
-namespace Narvalo.Fx.Extensions.Internal
+namespace Narvalo.Fx.Advanced.Internal
 {
     using System;
     using System.Collections.Generic;

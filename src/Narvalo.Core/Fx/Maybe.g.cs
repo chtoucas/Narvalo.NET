@@ -677,7 +677,7 @@ namespace Narvalo.Fx
 }
 
 // Extensions for core CLR types are put into a separate namespace.
-namespace Narvalo.Fx.Extensions
+namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Diagnostics.Contracts;
