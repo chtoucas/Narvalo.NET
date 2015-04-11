@@ -2,23 +2,19 @@
 
 namespace Narvalo.Globalization
 {
-    using System;
     using System.Diagnostics.Contracts;
 
-    // TODO: Implements ICurrencyProvider.
     public sealed class CurrencyProvider
     {
-        private static CurrencyProvider s_Instance = new CurrencyProvider();
-
-        private Func<ICurrencyProvider> _factoryThunk; // = () => null;
+        private static readonly CurrencyProvider s_Instance = new CurrencyProvider();
 
         private ICurrencyProvider _current;
 
-        internal CurrencyProvider() : this(null) { }
+        public CurrencyProvider() : this(null) { }
 
-        internal CurrencyProvider(ICurrencyProvider provider)
+        public CurrencyProvider(ICurrencyProvider provider)
         {
-            InnerSetProvider(provider ?? new DefaultCurrencyProvider());
+            InnerSetProvider(provider ?? new InMemoryCurrencyProvider());
         }
 
         public static ICurrencyProvider Current
@@ -31,15 +27,13 @@ namespace Narvalo.Globalization
             }
         }
 
-        internal ICurrencyProvider InnerCurrent
+        public ICurrencyProvider InnerCurrent
         {
             get
             {
                 Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
 
-                // NB: From the way _factoryThunk is built, it should be clear
-                // that the result of its invocation is never null.
-                return _current ?? (_current = _factoryThunk().AssumeNotNull());
+                return _current;
             }
         }
 
@@ -50,11 +44,11 @@ namespace Narvalo.Globalization
             s_Instance.InnerSetProvider(provider);
         }
 
-        internal void InnerSetProvider(ICurrencyProvider provider)
+        public void InnerSetProvider(ICurrencyProvider provider)
         {
             Require.NotNull(provider, "provider");
 
-            _factoryThunk = () => provider;
+            _current = provider;
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
@@ -62,7 +56,7 @@ namespace Narvalo.Globalization
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_factoryThunk != null);
+            Contract.Invariant(_current != null);
         }
 
 #endif

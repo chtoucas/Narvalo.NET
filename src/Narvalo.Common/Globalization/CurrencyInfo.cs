@@ -2,7 +2,6 @@
 
 namespace Narvalo.Globalization
 {
-    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -160,7 +159,7 @@ namespace Narvalo.Globalization
         /// CurrencyInfo.GetCurrencies().Where(_ => _.Code == "EUR");
         /// </code>
         /// </example>
-        public static IEnumerable<CurrencyInfo> GetCurrencies()
+        public static CurrencyInfoCollection GetCurrencies()
         {
             return GetCurrencies(CurrencyTypes.CurrentCurrencies);
         }
@@ -173,7 +172,7 @@ namespace Narvalo.Globalization
         /// that filter the currencies to retrieve.</param>
         /// <returns>An enumeration that contains the currencies specified by 
         /// the <paramref name="types"/> parameter.</returns>
-        public static IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types)
+        public static CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
         {
             return CurrencyProvider.Current.GetCurrencies(types);
         }

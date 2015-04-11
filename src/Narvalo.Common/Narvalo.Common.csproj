@@ -84,14 +84,15 @@
     <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
     <Compile Include="Globalization\CurrencyException.cs" />
     <Compile Include="Globalization\CurrencyInfo.cs" />
+    <Compile Include="Globalization\CurrencyInfoCollection.cs" />
     <Compile Include="Globalization\CurrencyNotFoundException.cs" />
     <Compile Include="Globalization\CurrencyProvider.cs" />
     <Compile Include="Globalization\CurrencyTypes.cs" />
-    <Compile Include="Globalization\DefaultCurrencyProvider.cs" />
-    <Compile Include="Globalization\DefaultCurrencyProvider.g.cs">
-      <DependentUpon>DefaultCurrencyProvider.tt</DependentUpon>
+    <Compile Include="Globalization\InMemoryCurrencyProvider.cs" />
+    <Compile Include="Globalization\InMemoryCurrencyProvider.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>InMemoryCurrencyProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Globalization\ICurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -153,9 +154,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Globalization\DefaultCurrencyProvider.tt">
+    <None Include="CodeTemplates\Iso4217.tt" />
+    <None Include="Globalization\InMemoryCurrencyProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DefaultCurrencyProvider.g.cs</LastGenOutput>
+      <LastGenOutput>InMemoryCurrencyProvider.g.cs</LastGenOutput>
     </None>
     <None Include="Narvalo.Common.Version.props" />
     <None Include="Narvalo.Common.props">

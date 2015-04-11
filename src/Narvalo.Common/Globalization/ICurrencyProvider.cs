@@ -4,7 +4,6 @@ namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
-    // FIXME: Very bad design.
     public partial interface ICurrencyProvider
     {
         /// <summary>
@@ -21,7 +20,7 @@ namespace Narvalo.Globalization
         /// currencies to retrieve.</param>
         /// <returns>An enumeration that contains the currencies filtered by the <paramref name="types"/> 
         /// parameter.</returns>
-        IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
+        CurrencyInfoCollection GetCurrencies(CurrencyTypes types);
     }
 }
 
@@ -31,6 +30,7 @@ namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Collections.ObjectModel;
 
     [ContractClass(typeof(ICurrencyProviderContract))]
     public partial interface ICurrencyProvider { }
@@ -48,7 +48,7 @@ namespace Narvalo.Globalization
             }
         }
 
-        public abstract IEnumerable<CurrencyInfo> GetCurrencies(CurrencyTypes types);
+        public abstract CurrencyInfoCollection GetCurrencies(CurrencyTypes types);
     }
 }
 
