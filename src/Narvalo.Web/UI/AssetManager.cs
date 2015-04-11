@@ -21,14 +21,14 @@ namespace Narvalo.Web.UI
         // Exception thrown during initialization.
         private static Exception s_InitializationException;
 
-        private static AssetProviderBase s_Provider;
+        private static AssetProvider s_Provider;
         private static AssetProviderCollection s_Providers;
 
-        public static AssetProviderBase Provider
+        public static AssetProvider Provider
         {
             get
             {
-                Contract.Ensures(Contract.Result<AssetProviderBase>() != null);
+                Contract.Ensures(Contract.Result<AssetProvider>() != null);
 
                 Initialize_();
                 return s_Provider;
@@ -128,7 +128,7 @@ namespace Narvalo.Web.UI
             var tmpProviders = new AssetProviderCollection();
             if (section.Providers != null)
             {
-                ProvidersHelper.InstantiateProviders(section.Providers, tmpProviders, typeof(AssetProviderBase));
+                ProvidersHelper.InstantiateProviders(section.Providers, tmpProviders, typeof(AssetProvider));
                 tmpProviders.SetReadOnly();
             }
 
@@ -143,8 +143,11 @@ namespace Narvalo.Web.UI
             var tmpProvider = s_Providers[section.DefaultProvider];
             if (tmpProvider == null)
             {
+                // section.DefaultProvider is not null => propertyInfo != null.
                 var propertyInfo
-                    = section.ElementInformation.Properties[AssetSection.InternalDefaultProviderPropertyName];
+                    = section.ElementInformation
+                        .Properties[AssetSection.DefaultProviderPropertyName]
+                        .AssumeNotNull();
 
                 throw new ConfigurationErrorsException(
                     Strings_Web.AssetManager_DefaultProviderNotFound,
@@ -174,8 +177,15 @@ namespace Narvalo.Web.UI
                     {
                         try
                         {
-                            NarvaloWebConfigurationManager.AssetSection
-                                .Invoke(InitializeInternal, InitializeDefault_);
+                            var section = WebConfigurationManager.GetSection(AssetSection.SectionName) as AssetSection;
+                            if (section == null)
+                            {
+                                InitializeDefault_();
+                            }
+                            else
+                            {
+                                InitializeInternal(section);
+                            }
                         }
                         catch (Exception ex)
                         {

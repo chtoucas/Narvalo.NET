@@ -6,14 +6,13 @@ namespace Narvalo.Web.UI
     using System.Collections.Specialized;
     using System.Configuration.Provider;
 
+    using Narvalo.TestCommon;
     using Narvalo.Web.Properties;
     using Xunit;
 
-    public static partial class AssetProviderBaseFacts
+    public static partial class AssetProviderFacts
     {
-        private const string WHITESPACE_ONLY_STRING = "     ";
-
-        private sealed class AssetProvider_ : AssetProviderBase
+        private sealed class AssetProvider_ : AssetProvider
         {
             public override Uri GetFontUri(string relativePath)
             {
@@ -36,7 +35,7 @@ namespace Narvalo.Web.UI
             }
         }
 
-        private sealed class MyAssetProvider_ : AssetProviderBase
+        private sealed class MyAssetProvider_ : AssetProvider
         {
             internal const string MyDefaultName = "MyDefaultName";
             internal const string MyDefaultDescription = "MyDefaultDescription";
@@ -69,7 +68,7 @@ namespace Narvalo.Web.UI
         }
     }
 
-    public static partial class AssetProviderBaseFacts
+    public static partial class AssetProviderFacts
     {
         #region Description
 
@@ -122,7 +121,7 @@ namespace Narvalo.Web.UI
             // Arrange
             var provider = new MyAssetProvider_();
             var config = new NameValueCollection(1);
-            config.Add("description", WHITESPACE_ONLY_STRING);
+            config.Add("description", Constants.WhiteSpaceOnlyString);
 
             // Act
             provider.Initialize(null, config);
@@ -197,7 +196,7 @@ namespace Narvalo.Web.UI
             var provider = new MyAssetProvider_();
 
             // Act
-            provider.Initialize(WHITESPACE_ONLY_STRING, null);
+            provider.Initialize(Constants.WhiteSpaceOnlyString, null);
 
             // Assert
             Assert.Equal(MyAssetProvider_.MyDefaultName, provider.Name);
@@ -239,7 +238,7 @@ namespace Narvalo.Web.UI
 
 #if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
-    public static partial class AssetProviderBaseFacts
+    public static partial class AssetProviderFacts
     {
         #region Description
 
@@ -253,7 +252,7 @@ namespace Narvalo.Web.UI
             provider.Initialize(null, null);
 
             // Assert
-            Assert.Equal(Strings_Web.AssetProviderBase_Description, provider.Description);
+            Assert.Equal(Strings_Web.AssetProvider_Description, provider.Description);
         }
 
         #endregion
@@ -270,7 +269,7 @@ namespace Narvalo.Web.UI
             provider.Initialize(null, null);
 
             // Assert
-            Assert.Equal(AssetProviderBase.InternalDefaultName, provider.Name);
+            Assert.Equal(AssetProvider.DefaultDefaultName, provider.Name);
         }
 
         #endregion

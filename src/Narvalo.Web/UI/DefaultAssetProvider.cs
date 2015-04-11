@@ -11,15 +11,15 @@ namespace Narvalo.Web.UI
     /// <summary>
     /// Provides a default implementation for the asset provider model.
     /// </summary>
-    public sealed class DefaultAssetProvider : AssetProviderBase
+    public sealed class DefaultAssetProvider : AssetProvider
     {
-        internal const string InternalCustomDefaultName = "DefaultAssetProvider";
+        internal const string CustomDefaultName = "DefaultAssetProvider";
 
         // WARNING: If you change the name of this type, be sure to also update
         // AssetSection.InternalDefaultProviderPropertyValue.
         public DefaultAssetProvider()
         {
-            DefaultName = InternalCustomDefaultName;
+            DefaultName = CustomDefaultName;
             DefaultDescription = Strings_Web.DefaultAssetProvider_Description;
         }
 

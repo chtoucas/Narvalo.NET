@@ -9,12 +9,12 @@ namespace Narvalo.Web
     /// <summary>
     /// Represents an ASP.NET error page.
     /// </summary>
-    public abstract class ErrorPageBase : Page
+    public abstract class ErrorPage : Page
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorPageBase"/> class.
+        /// Initializes a new instance of the <see cref="ErrorPage"/> class.
         /// </summary>
-        protected ErrorPageBase()
+        protected ErrorPage()
         {
             Load += Page_Load;
         }

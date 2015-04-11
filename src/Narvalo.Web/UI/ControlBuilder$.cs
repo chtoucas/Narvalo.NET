@@ -3,6 +3,7 @@
 namespace Narvalo.Web.UI
 {
     using System;
+    using System.Collections;
     using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Web.UI;
@@ -33,7 +34,7 @@ namespace Narvalo.Web.UI
     [ContractVerification(false)]
     public static class ControlBuilderExtensions
     {
-        private const BindingFlags BINDING_ATTRIBUTE
+        private const BindingFlags BINDING_ATTR
             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder @this)
@@ -44,12 +45,50 @@ namespace Narvalo.Web.UI
             Type type = @this.GetType();
 
             while (type != null
-                   && (pi = type.GetProperty("DefaultPropertyBuilder", BINDING_ATTRIBUTE)) == null)
+                   && (pi = type.GetProperty("DefaultPropertyBuilder", BINDING_ATTR)) == null)
             {
                 type = type.BaseType;
             }
 
             return (ControlBuilder)pi.GetValue(@this, index: null);
+        }
+        public static ControlBuilder GetParentBuilder(this ControlBuilder @this)
+        {
+            Require.Object(@this);
+
+            return (ControlBuilder)@this
+                .GetType()
+                .GetProperty("ParentBuilder", BINDING_ATTR)
+                .GetValue(@this, null /* index */);
+        }
+
+        public static ControlBuilder GetRootBuilder(this ControlBuilder @this)
+        {
+            Require.Object(@this);
+
+            ControlBuilder result = null;
+
+            while (true)
+            {
+                var parentBuilder = @this.GetParentBuilder();
+                if (parentBuilder == null)
+                {
+                    break;
+                }
+                result = parentBuilder;
+            }
+
+            return result;
+        }
+
+        public static ICollection GetSimplePropertyEntries(this ControlBuilder @this)
+        {
+            Require.Object(@this);
+
+            return (ICollection)@this
+                .GetType()
+                .GetProperty("SimplePropertyEntries", BINDING_ATTR)
+                .GetValue(@this, null /* index */);
         }
     }
 }

@@ -66,23 +66,12 @@ namespace Narvalo.Web.UI
 
             // Assert
             Assert.Equal(1, providers.Count);
-            Assert.IsType<DefaultAssetProvider>(providers[DefaultAssetProvider.InternalCustomDefaultName]);
+            Assert.IsType<DefaultAssetProvider>(providers[DefaultAssetProvider.CustomDefaultName]);
         }
 
         #endregion
 
         #region InitializeInternal()
-
-        [Fact]
-        public static void InitializeInternal_ThrowsProviderException_ForNullDefaultProviderProperty()
-        {
-            // Arrange
-            var section = new AssetSection();
-            section.DefaultProvider = null;
-
-            // Act & Assert
-            Assert.Throws<ProviderException>(() => AssetManager.InitializeInternal(section));
-        }
 
         [Fact]
         public static void InitializeInternal_ThrowsConfigurationErrorsException_ForMissingDefaultProviderProperty()

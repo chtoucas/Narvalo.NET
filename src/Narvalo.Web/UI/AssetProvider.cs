@@ -13,14 +13,14 @@ namespace Narvalo.Web.UI
     /// <summary>
     /// Provides a base implementation for the asset provider model.
     /// </summary>
-    public abstract partial class AssetProviderBase : ProviderBase
+    public abstract partial class AssetProvider : ProviderBase
     {
-        internal const string InternalDefaultName = "AssetProvider";
+        internal const string DefaultDefaultName = "AssetProvider";
 
         private string _defaultDescription;
         private string _defaultName;
 
-        protected AssetProviderBase() { }
+        protected AssetProvider() { }
 
         /// <summary>
         /// Gets or sets a default description suitable for display in administrative
@@ -36,7 +36,7 @@ namespace Narvalo.Web.UI
                 Contract.Ensures(Contract.Result<string>() != null);
 
                 return String.IsNullOrWhiteSpace(_defaultDescription)
-                    ? Strings_Web.AssetProviderBase_Description
+                    ? Strings_Web.AssetProvider_Description
                     : _defaultDescription;
             }
 
@@ -57,7 +57,7 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return String.IsNullOrWhiteSpace(_defaultName) ? InternalDefaultName : _defaultName;
+                return String.IsNullOrWhiteSpace(_defaultName) ? DefaultDefaultName : _defaultName;
             }
 
             set
@@ -108,20 +108,20 @@ namespace Narvalo.Web.UI
                 if (!String.IsNullOrEmpty(key))
                 {
                     throw new ProviderException(
-                        Format.Resource(Strings_Web.AssetProviderBase_UnknownConfigurationKey_Format, key));
+                        Format.Resource(Strings_Web.AssetProvider_UnknownConfigurationKey_Format, key));
                 }
             }
 
-            // FIXME: Name is initialized by base.Initialize() but Name 
-            // could have been overridden in a derived class.
-            // Contract.Assume(Name != null);
+            // REVIEW: Name is initialized by base.Initialize() but Name 
+            // could also be overridden by a derived class.
+            //Contract.Assume(Name != null);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config",
             Justification = "[Intentionally] Internal parameter validation in debug builds only.")]
         internal static void InitializeCustomInternal([ValidatedNotNull]NameValueCollection config)
         {
-            Check.NotNull(config, "The base class 'AssetProviderBase' guarantees that 'config' is never null.");
+            Check.NotNull(config, "The base class 'AssetProvider' guarantees that 'config' is never null.");
         }
 
         protected virtual void InitializeCustom(NameValueCollection config)
@@ -139,11 +139,11 @@ namespace Narvalo.Web.UI
     using System.Configuration.Provider;
     using System.Diagnostics.Contracts;
 
-    [ContractClass(typeof(AssetProviderBaseContract))]
-    public abstract partial class AssetProviderBase : ProviderBase { }
+    [ContractClass(typeof(AssetProviderContract))]
+    public abstract partial class AssetProvider : ProviderBase { }
 
-    [ContractClassFor(typeof(AssetProviderBase))]
-    internal abstract class AssetProviderBaseContract : AssetProviderBase
+    [ContractClassFor(typeof(AssetProvider))]
+    internal abstract class AssetProviderContract : AssetProvider
     {
         public override Uri GetFontUri(string relativePath)
         {

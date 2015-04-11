@@ -4,37 +4,52 @@ namespace Narvalo.Web.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.Contracts;
 
-    public sealed class OptimizationSection : ConfigurationSection
+    public sealed partial class OptimizationSection : ConfigurationSection
     {
         public const string DefaultName = "optimization";
 
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
-        internal const string InternalEnableWhiteSpaceBustingPropertyName = "enableWhiteSpaceBusting";
+        internal const string EnableWhiteSpaceBustingPropertyName = "enableWhiteSpaceBusting";
 
-        private static ConfigurationProperty s_EnableWhiteSpaceBusting
+        private const bool ENABLE_WHITESPACE_BUSTING_DEFAUL_VALUE = false;
+
+        private static readonly ConfigurationPropertyCollection s_Properties;
+
+        private static readonly ConfigurationProperty s_EnableWhiteSpaceBusting
             = new ConfigurationProperty(
-                InternalEnableWhiteSpaceBustingPropertyName,
+                EnableWhiteSpaceBustingPropertyName,
                 typeof(Boolean),
-                true,
-                ConfigurationPropertyOptions.IsRequired);
-
-        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+                ENABLE_WHITESPACE_BUSTING_DEFAUL_VALUE,
+                ConfigurationPropertyOptions.None);
 
         private bool _enableWhiteSpaceBusting;
-        private bool _enableWhiteSpaceBustingSet = false;
+        private bool _enableWhiteSpaceBustingSet;
 
-        public OptimizationSection()
+        static OptimizationSection()
         {
-            _properties.Add(s_EnableWhiteSpaceBusting);
+            s_Properties = new ConfigurationPropertyCollection();
+            s_Properties.Add(s_EnableWhiteSpaceBusting);
         }
 
         public bool EnableWhiteSpaceBusting
         {
             get
             {
-                return _enableWhiteSpaceBustingSet ? _enableWhiteSpaceBusting : (bool)base[s_EnableWhiteSpaceBusting];
+                if (_enableWhiteSpaceBustingSet)
+                {
+                    return _enableWhiteSpaceBusting;
+                }
+                else
+                {
+                    // I think that ConfigurationSection (or more precisely ConfigurationElement)
+                    // guarantees that value is never null, but we never know.
+                    var value = base[s_EnableWhiteSpaceBusting];
+
+                    return value == null ? ENABLE_WHITESPACE_BUSTING_DEFAUL_VALUE : (bool)base[s_EnableWhiteSpaceBusting];
+                }
             }
 
             set
@@ -46,7 +61,31 @@ namespace Narvalo.Web.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get { return _properties; }
+            get
+            {
+                Contract.Ensures(Contract.Result<ConfigurationPropertyCollection>() != null);
+
+                return s_Properties;
+            }
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web.Configuration
+{
+    using System.Configuration;
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class OptimizationSection : ConfigurationSection
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_properties != null);
+        }
+    }
+}
+
+#endif

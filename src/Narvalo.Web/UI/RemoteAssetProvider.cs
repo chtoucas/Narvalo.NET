@@ -11,13 +11,13 @@ namespace Narvalo.Web.UI
     using Narvalo.Collections;
     using Narvalo.Web.Properties;
 
-    public sealed class RemoteAssetProvider : AssetProviderBase
+    public sealed class RemoteAssetProvider : AssetProvider
     {
         // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-        internal static readonly string InternalFontsPath = "fonts/";
-        internal static readonly string InternalImagesPath = "img/";
-        internal static readonly string InternalScriptsPath = "js/";
-        internal static readonly string InternalStylesPath = "css/";
+        internal static readonly string DefaultFontsPath = "fonts/";
+        internal static readonly string DefaultImagesPath = "img/";
+        internal static readonly string DefaultScriptsPath = "js/";
+        internal static readonly string DefaultStylesPath = "css/";
 
         private const string BASE_URI_KEY = "baseUri";
 
@@ -31,22 +31,22 @@ namespace Narvalo.Web.UI
 
         public override Uri GetFontUri(string relativePath)
         {
-            return MakeUri_(InternalFontsPath, relativePath);
+            return MakeUri_(DefaultFontsPath, relativePath);
         }
 
         public override Uri GetImageUri(string relativePath)
         {
-            return MakeUri_(InternalImagesPath, relativePath);
+            return MakeUri_(DefaultImagesPath, relativePath);
         }
 
         public override Uri GetScriptUri(string relativePath)
         {
-            return MakeUri_(InternalScriptsPath, relativePath);
+            return MakeUri_(DefaultScriptsPath, relativePath);
         }
 
         public override Uri GetStyleUri(string relativePath)
         {
-            return MakeUri_(InternalStylesPath, relativePath);
+            return MakeUri_(DefaultStylesPath, relativePath);
         }
 
         protected override void InitializeCustom(NameValueCollection config)
@@ -92,6 +92,8 @@ namespace Narvalo.Web.UI
 
         private static bool HasTrailingSlash(string path)
         {
+            Contract.Requires(path.Length > 0);
+
             return path[path.Length - 1] == '/';
         }
 

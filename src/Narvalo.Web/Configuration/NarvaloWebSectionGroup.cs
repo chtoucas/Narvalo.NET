@@ -9,21 +9,20 @@ namespace Narvalo.Web.Configuration
         public const string GroupName = "narvalo.web";
 
         private AssetSection _asset;
-        private bool _assetSet = false;
         private OptimizationSection _optimization;
-        private bool _optimizationSet = false;
 
         public AssetSection AssetSection
         {
             get
             {
-                return _assetSet ? _asset : (AssetSection)Sections[AssetSection.DefaultName];
+                return _asset ?? (AssetSection)Sections[AssetSection.DefaultName];
             }
 
             set
             {
+                Require.Property(value);
+
                 _asset = value;
-                _assetSet = true;
             }
         }
 
@@ -31,13 +30,14 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                return _optimizationSet ? _optimization : (OptimizationSection)Sections[OptimizationSection.DefaultName];
+                return _optimization ?? (OptimizationSection)Sections[OptimizationSection.DefaultName];
             }
 
             set
             {
+                Require.Property(value);
+
                 _optimization = value;
-                _optimizationSet = true;
             }
         }
     }

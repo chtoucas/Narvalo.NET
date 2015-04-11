@@ -4,12 +4,11 @@ namespace Narvalo
 {
     using System;
 
+    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class PredicateFacts
     {
-        private const string WHITESPACE_ONLY_STRING = "     ";
-
         private enum MyEnum_
         {
             None = 0,
@@ -48,7 +47,7 @@ namespace Narvalo
         #region IsFlagsEnum()
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForNullParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNullInput()
         {
             // Arrange
             Type type = null;
@@ -58,7 +57,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumParameter()
+        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
         {
             // Arrange
             var type = typeof(MyFlagsEnum_);
@@ -68,7 +67,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
         {
             // Arrange
             var type = typeof(MyEnum_);
@@ -78,17 +77,17 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeInput()
         {
             // Arrange
-            var type = typeof(int);
+            var type = typeof(Int32);
 
             // Act & Assert
             Assert.False(Predicate.IsFlagsEnum(type));
         }
 
         [Fact]
-        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructParameter()
+        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructInput()
         {
             // Arrange
             var type = typeof(MyStruct_);
@@ -112,7 +111,7 @@ namespace Narvalo
         public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.True(Predicate.IsWhiteSpace(WHITESPACE_ONLY_STRING));
+            Assert.True(Predicate.IsWhiteSpace(Constants.WhiteSpaceOnlyString));
         }
 
         [Fact]

@@ -94,13 +94,13 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorPageBase.cs">
+    <Compile Include="ErrorPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Html\Asset.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\Markup.cs" />
-    <Compile Include="HttpQueryBinderBase`1.cs" />
+    <Compile Include="HttpQueryBinder`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />
     <Compile Include="Configuration\NarvaloWebConfigurationManager.cs" />
     <Compile Include="Configuration\NarvaloWebSectionGroup.cs" />
@@ -116,6 +116,9 @@
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
+    <Compile Include="Internal\LiteralControlTransformer.cs" />
+    <Compile Include="Optimization\DefaultWhiteSpaceBusterProvider.cs" />
+    <Compile Include="Optimization\IWhiteSpaceBusterProvider.cs" />
     <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\UnsafeWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />
@@ -148,14 +151,15 @@
     <Compile Include="Semantic\SchemaOrgType.cs" />
     <Compile Include="Semantic\SchemaOrgVocabulary.cs" />
     <Compile Include="UI\AssetManager.cs" />
-    <Compile Include="UI\AssetProviderBase.cs" />
+    <Compile Include="UI\AssetProvider.cs" />
     <Compile Include="UI\AssetProviderCollection.cs" />
     <Compile Include="UI\DefaultAssetProvider.cs" />
+    <Compile Include="Internal\WhiteSpaceControlTransformer.cs" />
+    <Compile Include="Internal\HtmlControlTransformer`1.cs" />
     <Compile Include="UI\LocalAssetProvider.cs" />
     <Compile Include="UI\RemoteAssetProvider.cs" />
     <Compile Include="UI\ControlBuilder%24.cs" />
-    <Compile Include="UI\LiteralPageParserFilterBase.cs" />
-    <Compile Include="UI\PageParserFilterConstants.cs" />
+    <Compile Include="Internal\PageParserFilterConstants.cs" />
     <Compile Include="UI\UnrestrictedPageParserFilter.cs" />
     <Compile Include="UrlManip.cs" />
     <Compile Include="UrlHelper%24.cs" />

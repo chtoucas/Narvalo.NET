@@ -5,55 +5,55 @@ namespace Narvalo.Web.Configuration
     using System;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
-    public sealed class AssetSection : ConfigurationSection
+    public sealed partial class AssetSection : ConfigurationSection
     {
         public const string DefaultName = "assets";
 
         public static readonly string SectionName = NarvaloWebSectionGroup.GroupName + "/" + DefaultName;
 
-        internal const string InternalDefaultProviderPropertyName = "defaultProvider";
-        internal const string InternalDefaultProviderPropertyValue = "DefaultAssetProvider";
-        internal const string InternalProvidersPropertyName = "providers";
+        internal const string DefaultProviderPropertyName = "defaultProvider";
+        internal const string ProvidersPropertyName = "providers";
 
-        private static ConfigurationProperty s_DefaultProvider
+        private static readonly ConfigurationPropertyCollection s_Properties;
+
+        private static readonly ConfigurationProperty s_DefaultProvider
             = new ConfigurationProperty(
-                InternalDefaultProviderPropertyName,
+                DefaultProviderPropertyName,
                 typeof(String),
-                InternalDefaultProviderPropertyValue,
-               null,
+                "DefaultAssetProvider" /* defaultValue */,
+               null /* typeConverter */,
                new StringValidator(1),
                ConfigurationPropertyOptions.None);
 
-        private static ConfigurationProperty s_Providers
+        private static readonly ConfigurationProperty s_Providers
             = new ConfigurationProperty(
-                InternalProvidersPropertyName,
+                ProvidersPropertyName,
                 typeof(ProviderSettingsCollection));
 
-        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
-
         private string _defaultProvider;
-        private bool _defaultProviderSet = false;
         private ProviderSettingsCollection _providers;
-        private bool _providersSet = false;
 
-        public AssetSection()
+        static AssetSection()
         {
-            _properties.Add(s_DefaultProvider);
-            _properties.Add(s_Providers);
+            s_Properties = new ConfigurationPropertyCollection();
+            s_Properties.Add(s_DefaultProvider);
+            s_Properties.Add(s_Providers);
         }
 
         public string DefaultProvider
         {
             get
             {
-                return _defaultProviderSet ? _defaultProvider : (string)base[s_DefaultProvider];
+                return _defaultProvider ?? (string)base[s_DefaultProvider];
             }
 
             set
             {
+                Require.PropertyNotWhiteSpace(value);
+
                 _defaultProvider = value;
-                _defaultProviderSet = true;
             }
         }
 
@@ -63,19 +63,44 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                return _providersSet ? _providers : (ProviderSettingsCollection)base[s_Providers];
+                return _providers ?? (ProviderSettingsCollection)base[s_Providers];
             }
 
             set
             {
+                Require.Property(value);
+
                 _providers = value;
-                _providersSet = true;
             }
         }
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get { return _properties; }
+            get
+            {
+                Contract.Ensures(Contract.Result<ConfigurationPropertyCollection>() != null);
+
+                return s_Properties;
+            }
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    
+namespace Narvalo.Web.Configuration
+{
+    using System.Configuration;
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class AssetSection : ConfigurationSection
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_properties != null);
+        }
+    }
+}
+
+#endif

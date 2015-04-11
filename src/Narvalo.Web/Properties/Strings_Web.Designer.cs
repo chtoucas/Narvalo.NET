@@ -81,18 +81,18 @@ namespace Narvalo.Web.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Provider for static Web assets..
         /// </summary>
-        internal static string AssetProviderBase_Description {
+        internal static string AssetProvider_Description {
             get {
-                return ResourceManager.GetString("AssetProviderBase_Description", resourceCulture);
+                return ResourceManager.GetString("AssetProvider_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Found an unknown configuration key: {0}..
         /// </summary>
-        internal static string AssetProviderBase_UnknownConfigurationKey_Format {
+        internal static string AssetProvider_UnknownConfigurationKey_Format {
             get {
-                return ResourceManager.GetString("AssetProviderBase_UnknownConfigurationKey_Format", resourceCulture);
+                return ResourceManager.GetString("AssetProvider_UnknownConfigurationKey_Format", resourceCulture);
             }
         }
         

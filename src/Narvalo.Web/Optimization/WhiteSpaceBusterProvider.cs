@@ -2,89 +2,63 @@
 
 namespace Narvalo.Web.Optimization
 {
-    using System;
     using System.Diagnostics.Contracts;
 
     public sealed class WhiteSpaceBusterProvider
     {
-        private static readonly object s_Lock = new Object();
-        private static WhiteSpaceBusterProvider s_Instance = new WhiteSpaceBusterProvider();
+        private static readonly WhiteSpaceBusterProvider s_Instance = new WhiteSpaceBusterProvider();
 
-        private IWhiteSpaceBuster _pageBuster;
-        private IWhiteSpaceBuster _razorBuster;
+        private IWhiteSpaceBusterProvider _current;
 
-        public WhiteSpaceBusterProvider() { }
+        public WhiteSpaceBusterProvider() : this(null) { }
 
-        public static WhiteSpaceBusterProvider Current
+        public WhiteSpaceBusterProvider(IWhiteSpaceBusterProvider provider)
+        {
+            InnerSetProvider(provider ?? new DefaultWhiteSpaceBusterProvider());
+        }
+
+        public static IWhiteSpaceBusterProvider Current
         {
             get
             {
-                Contract.Ensures(Contract.Result<WhiteSpaceBusterProvider>() != null);
+                Contract.Ensures(Contract.Result<IWhiteSpaceBusterProvider>() != null);
 
-                return s_Instance;
+                return s_Instance.InnerCurrent;
             }
         }
 
-        public IWhiteSpaceBuster PageBuster
+        public IWhiteSpaceBusterProvider InnerCurrent
         {
             get
             {
-                Contract.Ensures(Contract.Result<IWhiteSpaceBuster>() != null);
+                Contract.Ensures(Contract.Result<IWhiteSpaceBusterProvider>() != null);
 
-                if (_pageBuster == null)
-                {
-                    lock (s_Lock)
-                    {
-                        if (_pageBuster == null)
-                        {
-                            _pageBuster = new DefaultWhiteSpaceBuster();
-                        }
-                    }
-                }
-
-                return _pageBuster;
-            }
-
-            set
-            {
-                Require.Property(value);
-
-                lock (s_Lock)
-                {
-                    _pageBuster = value;
-                }
+                return _current;
             }
         }
 
-        public IWhiteSpaceBuster RazorBuster
+        public static void SetProvider(IWhiteSpaceBusterProvider provider)
         {
-            get
-            {
-                Contract.Ensures(Contract.Result<IWhiteSpaceBuster>() != null);
+            Contract.Requires(provider != null);
 
-                if (_razorBuster == null)
-                {
-                    lock (s_Lock)
-                    {
-                        if (_razorBuster == null)
-                        {
-                            _razorBuster = new DefaultWhiteSpaceBuster();
-                        }
-                    }
-                }
-
-                return _razorBuster;
-            }
-
-            set
-            {
-                Require.Property(value);
-
-                lock (s_Lock)
-                {
-                    _razorBuster = value;
-                }
-            }
+            s_Instance.InnerSetProvider(provider);
         }
+
+        public void InnerSetProvider(IWhiteSpaceBusterProvider provider)
+        {
+            Require.NotNull(provider, "provider");
+
+            _current = provider;
+        }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_current != null);
+        }
+
+#endif
     }
 }

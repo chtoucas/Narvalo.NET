@@ -11,11 +11,11 @@ namespace Narvalo.Web
 
     using Narvalo.Fx;
 
-    public abstract partial class HttpQueryBinderBase<TQuery> : IHttpQueryBinder<TQuery>
+    public abstract partial class HttpQueryBinder<TQuery> : IHttpQueryBinder<TQuery>
     {
         private readonly List<HttpQueryBinderException> _errors = new List<HttpQueryBinderException>();
 
-        protected HttpQueryBinderBase() { }
+        protected HttpQueryBinder() { }
 
         public IEnumerable<HttpQueryBinderException> BindingErrors
         {

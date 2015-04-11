@@ -3,9 +3,10 @@
 namespace Narvalo.Web.Optimization
 {
     using System.Collections;
-    using System.Diagnostics.Contracts;
+    using System.Web.UI;
 
     using Narvalo.Web.Configuration;
+    using Narvalo.Web.Internal;
     using Narvalo.Web.UI;
 
     /// <summary>
@@ -17,29 +18,20 @@ namespace Narvalo.Web.Optimization
     /// contenu sans la moindre information contextuelle. On ne peut donc pas prendre
     /// de mesures trop extrèmes.
     /// </remarks>
-    public sealed class WhiteSpaceBusterPageParserFilter : LiteralPageParserFilterBase
+    public sealed class WhiteSpaceBusterPageParserFilter : UnrestrictedPageParserFilter
     {
         private const string DIRECTIVE_NAME = "WhiteSpaceBusting";
 
-        // Par défaut, le filtre n'est pas actif.
-        private bool _enabled = false;
-
-        private IWhiteSpaceBuster _buster;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="Narvalo.Web.Optimization.WhiteSpaceBusterPageParserFilter"/> class.
+        /// Initializes a new instance of the <see cref="WhiteSpaceBusterPageParserFilter"/> class.
         /// </summary>
         public WhiteSpaceBusterPageParserFilter() { }
 
         /// <summary>
         /// Retourne <code>true</code> si le filtre est actif pour le contrôle, <code>false</code> sinon.
         /// </summary>
-        protected override bool Enabled { get { return _enabled; } }
-
-        private static bool EnableWhiteSpaceBusting_
-        {
-            get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
-        }
+        // Par défaut, le filtre n'est pas actif.
+        public bool Enabled { get; private set; }
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)
         {
@@ -56,27 +48,28 @@ namespace Narvalo.Web.Optimization
                 attributes.Remove(DIRECTIVE_NAME);
             }
 
+            var section = NarvaloWebConfigurationManager.OptimizationSection;
+
             // Si le filtre est activé globalement (valeur par défaut), on vérifie la directive locale, sinon on 
             // considère que le filtre ne doit pas être utilisé quelque soit la directive locale.
-            _enabled = EnableWhiteSpaceBusting_ && enabled;
-
-            if (_enabled)
-            {
-                _buster = WhiteSpaceBusterProvider.Current.PageBuster;
-
-                Contract.Assert(_buster != null);
-            }
+            Enabled = section.EnableWhiteSpaceBusting && enabled;
 
             base.PreprocessDirective(directiveName, attributes);
         }
 
-        protected override string TransformLiteral(string literal)
+        public override void ParseComplete(ControlBuilder rootBuilder)
         {
-            // TransformLiteral() is called from ParseComplete() which happens 
-            // after PreprocessDirective() where _buster is initialized.
-            Contract.Assume(_buster != null);
+            Require.NotNull(rootBuilder, "rootBuilder");
 
-            return _buster.Bust(literal);
+            if (Enabled)
+            {
+                // FIXME
+                var buster = WhiteSpaceBusterProvider.Current.Buster;
+
+                new WhiteSpaceControlTransformer(buster).TransformRecursively(rootBuilder);
+            }
+
+            base.ParseComplete(rootBuilder);
         }
     }
 }

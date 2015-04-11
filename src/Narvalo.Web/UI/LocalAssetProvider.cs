@@ -11,7 +11,7 @@ namespace Narvalo.Web.UI
     using Narvalo.Fx;
     using Narvalo.Web.Properties;
 
-    public sealed class LocalAssetProvider : AssetProviderBase
+    public sealed class LocalAssetProvider : AssetProvider
     {
         private const string FONTS_PATH_KEY = "fontsPath";
         private const string IMAGES_PATH_KEY = "imagesPath";
@@ -33,6 +33,7 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_fontsPath != null);
+            Contract.Assume(_fontsPath.Length != 0);
 
             return MakeUri_(_fontsPath, relativePath);
         }
@@ -41,6 +42,7 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_imagesPath != null);
+            Contract.Assume(_imagesPath.Length != 0);
 
             return MakeUri_(_imagesPath, relativePath);
         }
@@ -49,6 +51,7 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_scriptsPath != null);
+            Contract.Assume(_scriptsPath.Length != 0);
 
             return MakeUri_(_scriptsPath, relativePath);
         }
@@ -57,6 +60,7 @@ namespace Narvalo.Web.UI
         {
             // Here we can be sure that _fontsPath is not null or empty; cf. Initialize().
             Contract.Assume(_stylesPath != null);
+            Contract.Assume(_stylesPath.Length != 0);
 
             return MakeUri_(_stylesPath, relativePath);
         }

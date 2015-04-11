@@ -19,16 +19,17 @@ namespace Narvalo.Web.Optimization
         /// </summary>
         public WhiteSpaceBusterMvcWebRazorHostFactory() { }
 
-        private static bool EnableWhiteSpaceBusting_
-        {
-            get { return NarvaloWebConfigurationManager.OptimizationSection.EnableWhiteSpaceBusting; }
-        }
-
         public override WebPageRazorHost CreateHost(string virtualPath, string physicalPath)
         {
             WebPageRazorHost host = base.CreateHost(virtualPath, physicalPath);
 
-            if (host.IsSpecialPage || !EnableWhiteSpaceBusting_)
+            if (host.IsSpecialPage)
+            {
+                return host;
+            }
+
+            var section = NarvaloWebConfigurationManager.OptimizationSection;
+            if (!section.EnableWhiteSpaceBusting)
             {
                 return host;
             }
@@ -36,7 +37,7 @@ namespace Narvalo.Web.Optimization
             return new WhiteSpaceBusterMvcWebPageRazorHost(
                 virtualPath,
                 physicalPath,
-                new RazorOptimizer(WhiteSpaceBusterProvider.Current.RazorBuster));
+                new RazorOptimizer(WhiteSpaceBusterProvider.Current.Buster));
         }
     }
 }

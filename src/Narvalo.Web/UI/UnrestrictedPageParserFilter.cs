@@ -5,6 +5,8 @@ namespace Narvalo.Web.UI
     using System;
     using System.Web.UI;
 
+    using Narvalo.Web.Internal;
+
     public abstract class UnrestrictedPageParserFilter : PageParserFilter
     {
         protected UnrestrictedPageParserFilter() { }

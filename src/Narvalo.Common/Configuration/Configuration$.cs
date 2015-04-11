@@ -6,6 +6,7 @@ namespace Narvalo.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Fx;
     using Narvalo.Properties;
 
     /// <summary>
@@ -20,7 +21,6 @@ namespace Narvalo.Configuration
         public static T GetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
         {
             Require.Object(@this);
-            Require.NotNullOrEmpty(sectionName, "sectionName");
             Contract.Ensures(Contract.Result<T>() != null);
 
             T section = @this.GetSection(sectionName) as T;
@@ -32,6 +32,16 @@ namespace Narvalo.Configuration
             }
 
             return section;
+        }
+
+        public static Maybe<T> MayGetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<T>() != null);
+
+            T section = @this.GetSection(sectionName) as T;
+
+            return Maybe.Of(section);
         }
     }
 }

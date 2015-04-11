@@ -2,34 +2,20 @@
 
 namespace Narvalo.Web.UI
 {
-    using System;
     using System.Collections;
     using System.Web.UI;
     using System.Web.UI.HtmlControls;
 
-    public abstract class HtmlControlPageParserFilterBase<TControl> : UnrestrictedPageParserFilter
-        where TControl : HtmlControl
+    public abstract class HtmlControlTransformer<TControl> where TControl : HtmlControl
     {
-        public HtmlControlPageParserFilterBase() : base() { }
-
-        protected abstract bool Enabled { get; }
+        protected HtmlControlTransformer() : base() { }
 
         protected abstract string TransformLiteral(string literal);
 
-        public override void ParseComplete(ControlBuilder rootBuilder)
+        public void TransformRecursively(ControlBuilder controlBuilder)
         {
-            Require.NotNull(rootBuilder, "rootBuilder");
+            Require.NotNull(controlBuilder, "controlBuilder");
 
-            if (Enabled)
-            {
-                TransformRecursively_(rootBuilder);
-            }
-
-            base.ParseComplete(rootBuilder);
-        }
-
-        private void TransformRecursively_(ControlBuilder controlBuilder)
-        {
             var isControl = controlBuilder.ControlType == typeof(TControl);
 
             ArrayList subBuilders = controlBuilder.SubBuilders;
@@ -50,7 +36,7 @@ namespace Narvalo.Web.UI
                     var controlSubBuilder = subBuilder as ControlBuilder;
                     if (controlSubBuilder != null)
                     {
-                        TransformRecursively_(controlSubBuilder);
+                        TransformRecursively(controlSubBuilder);
                     }
                 }
                 else
@@ -74,19 +60,19 @@ namespace Narvalo.Web.UI
             {
                 foreach (TemplatePropertyEntry entry in controlBuilder.TemplatePropertyEntries)
                 {
-                    TransformRecursively_(entry.Builder);
+                    TransformRecursively(entry.Builder);
                 }
 
                 foreach (ComplexPropertyEntry entry in controlBuilder.ComplexPropertyEntries)
                 {
-                    TransformRecursively_(entry.Builder);
+                    TransformRecursively(entry.Builder);
                 }
             }
 
             ControlBuilder defaultPropertyBuilder = controlBuilder.GetDefaultPropertyBuilder();
             if (defaultPropertyBuilder != null)
             {
-                TransformRecursively_(defaultPropertyBuilder);
+                TransformRecursively(defaultPropertyBuilder);
             }
         }
     }

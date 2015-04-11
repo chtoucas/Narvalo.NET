@@ -12,16 +12,16 @@ namespace Narvalo.Web.UI
         Justification = "[Intentionally] ProviderCollection existed before generics even did.")]
     public sealed class AssetProviderCollection : ProviderCollection
     {
-        public new AssetProviderBase this[string name]
+        public new AssetProvider this[string name]
         {
-            get { return (AssetProviderBase)base[name]; }
+            get { return (AssetProvider)base[name]; }
         }
 
         public override void Add(ProviderBase provider)
         {
             Require.NotNull(provider, "provider");
 
-            if (!(provider is AssetProviderBase))
+            if (!(provider is AssetProvider))
             {
                 throw new ArgumentException(Strings_Web.AssetProviderCollection_InvalidProvider, "provider");
             }
@@ -29,7 +29,7 @@ namespace Narvalo.Web.UI
             base.Add(provider);
         }
 
-        public void CopyTo(AssetProviderBase[] array, int index)
+        public void CopyTo(AssetProvider[] array, int index)
         {
             base.CopyTo(array, index);
         }
