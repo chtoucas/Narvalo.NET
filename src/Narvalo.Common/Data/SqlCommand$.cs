@@ -5,7 +5,6 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="SqlCommand"/>.
@@ -20,12 +19,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterUnsafe(parameterName, parameterType, value);
+            @this.Parameters.AssumeNotNull().AddParameterUnchecked(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterUnsafe(
+        public static void AddParameterUnchecked(
             this SqlCommand @this, 
             string parameterName,
             SqlDbType parameterType,
@@ -33,7 +32,7 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterUnsafe(parameterName, parameterType, value);
+            @this.Parameters.AssumeNotNull().AddParameterUnchecked(parameterName, parameterType, value);
         }
 
         public static void AddParameterOrNull<T>(
@@ -45,12 +44,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnsafe<T>(
+        public static void AddParameterOrNullUnchecked<T>(
             this SqlCommand @this, 
             string parameterName,
             SqlDbType parameterType,
@@ -59,7 +58,7 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value);
         }
 
         public static void AddParameterOrNull<T>(
@@ -70,12 +69,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value, value != null);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnsafe<T>(
+        public static void AddParameterOrNullUnchecked<T>(
             this SqlCommand @this,
             string parameterName,
             SqlDbType parameterType,
@@ -83,7 +82,7 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value, value != null);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
 
         public static void AddParameterOrNull<T>(
@@ -95,12 +94,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value, condition);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static void AddParameterOrNullUnsafe<T>(
+        public static void AddParameterOrNullUnchecked<T>(
             this SqlCommand @this,
             string parameterName,
             SqlDbType parameterType,
@@ -109,7 +108,7 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnsafe(parameterName, parameterType, value, condition);
+            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
         }
     }
 }

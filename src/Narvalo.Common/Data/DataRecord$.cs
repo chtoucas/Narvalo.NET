@@ -5,7 +5,6 @@ namespace Narvalo.Data
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="IDataRecord"/>.
@@ -18,12 +17,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetBooleanUnsafe(name);
+            return @this.GetBooleanUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static bool GetBooleanUnsafe(this IDataRecord @this, string name)
+        public static bool GetBooleanUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -34,12 +33,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetByteUnsafe(name);
+            return @this.GetByteUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static byte GetByteUnsafe(this IDataRecord @this, string name)
+        public static byte GetByteUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -50,12 +49,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetDateTimeUnsafe(name);
+            return @this.GetDateTimeUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static DateTime GetDateTimeUnsafe(this IDataRecord @this, string name)
+        public static DateTime GetDateTimeUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -66,12 +65,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetDecimalUnsafe(name);
+            return @this.GetDecimalUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static decimal GetDecimalUnsafe(this IDataRecord @this, string name)
+        public static decimal GetDecimalUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -82,12 +81,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetDoubleUnsafe(name);
+            return @this.GetDoubleUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static double GetDoubleUnsafe(this IDataRecord @this, string name)
+        public static double GetDoubleUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -98,12 +97,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetGuidUnsafe(name);
+            return @this.GetGuidUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Guid GetGuidUnsafe(this IDataRecord @this, string name)
+        public static Guid GetGuidUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -114,12 +113,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetInt16Unsafe(name);
+            return @this.GetInt16Unchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static short GetInt16Unsafe(this IDataRecord @this, string name)
+        public static short GetInt16Unchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -130,12 +129,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetInt32Unsafe(name);
+            return @this.GetInt32Unchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static int GetInt32Unsafe(this IDataRecord @this, string name)
+        public static int GetInt32Unchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -146,12 +145,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetInt64Unsafe(name);
+            return @this.GetInt64Unchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static long GetInt64Unsafe(this IDataRecord @this, string name)
+        public static long GetInt64Unchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -168,12 +167,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetStringUnsafe(name);
+            return @this.GetStringUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetStringUnsafe(this IDataRecord @this, string name)
+        public static string GetStringUnchecked(this IDataRecord @this, string name)
         {
             Acknowledge.Object(@this);
 

@@ -357,12 +357,12 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this.MayGetBytesUnsafe(ordinal);
+            return @this.MayGetBytesUnchecked(ordinal);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<byte[]> MayGetBytesUnsafe(this SqlDataReader @this, int ordinal)
+        public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -376,12 +376,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this.MayGetBytesUnsafe(name);
+            return @this.MayGetBytesUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<byte[]> MayGetBytesUnsafe(this SqlDataReader @this, string name)
+        public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
@@ -395,12 +395,12 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this.MayGetBinaryUnsafe(ordinal);
+            return @this.MayGetBinaryUnchecked(ordinal);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<byte[]> MayGetBinaryUnsafe(this SqlDataReader @this, int ordinal)
+        public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -414,12 +414,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
 
-            return @this.MayGetBinaryUnsafe(name);
+            return @this.MayGetBinaryUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<byte[]> MayGetBinaryUnsafe(this SqlDataReader @this, string name)
+        public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<byte[]>>() != null);
@@ -433,14 +433,14 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
-            return @this.MayGetCharsUnsafe(ordinal);
+            return @this.MayGetCharsUnchecked(ordinal);
         }
 
         [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
             Justification = "[Intentionally] Missing method from Mono with no adequate replacement.")]
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<char[]> MayGetCharsUnsafe(this SqlDataReader @this, int ordinal)
+        public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -454,12 +454,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
 
-            return @this.MayGetCharsUnsafe(name);
+            return @this.MayGetCharsUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<char[]> MayGetCharsUnsafe(this SqlDataReader @this, string name)
+        public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<char[]>>() != null);
@@ -472,12 +472,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            return @this.GetStringUnsafe(ordinal, defaultValue);
+            return @this.GetStringUnchecked(ordinal, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetStringUnsafe(this SqlDataReader @this, int ordinal, string defaultValue)
+        public static string GetStringUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -490,12 +490,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetStringUnsafe(name, defaultValue);
+            return @this.GetStringUnchecked(name, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetStringUnsafe(this SqlDataReader @this, string name, string defaultValue)
+        public static string GetStringUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
             Acknowledge.Object(@this);
 
@@ -508,12 +508,12 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this.MayGetStringUnsafe(ordinal);
+            return @this.MayGetStringUnchecked(ordinal);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<string> MayGetStringUnsafe(this SqlDataReader @this, int ordinal)
+        public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -527,12 +527,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this.MayGetStringUnsafe(name);
+            return @this.MayGetStringUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<string> MayGetStringUnsafe(this SqlDataReader @this, string name)
+        public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
@@ -545,12 +545,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            return @this.GetMoneyUnsafe(ordinal, defaultValue);
+            return @this.GetMoneyUnchecked(ordinal, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static decimal GetMoneyUnsafe(this SqlDataReader @this, int ordinal, decimal defaultValue)
+        public static decimal GetMoneyUnchecked(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -563,12 +563,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetMoneyUnsafe(name, defaultValue);
+            return @this.GetMoneyUnchecked(name, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static decimal GetMoneyUnsafe(this SqlDataReader @this, string name, decimal defaultValue)
+        public static decimal GetMoneyUnchecked(this SqlDataReader @this, string name, decimal defaultValue)
         {
             Acknowledge.Object(@this);
 
@@ -580,12 +580,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            return @this.GetNullableMoneyUnsafe(ordinal);
+            return @this.GetNullableMoneyUnchecked(ordinal);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static decimal? GetNullableMoneyUnsafe(this SqlDataReader @this, int ordinal)
+        public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -599,12 +599,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetNullableMoneyUnsafe(name);
+            return @this.GetNullableMoneyUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static decimal? GetNullableMoneyUnsafe(this SqlDataReader @this, string name)
+        public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
 
@@ -616,12 +616,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            return @this.GetXmlUnsafe(ordinal, defaultValue);
+            return @this.GetXmlUnchecked(ordinal, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetXmlUnsafe(this SqlDataReader @this, int ordinal, string defaultValue)
+        public static string GetXmlUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -634,12 +634,12 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            return @this.GetXmlUnsafe(name, defaultValue);
+            return @this.GetXmlUnchecked(name, defaultValue);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static string GetXmlUnsafe(this SqlDataReader @this, string name, string defaultValue)
+        public static string GetXmlUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
             Acknowledge.Object(@this);
 
@@ -652,12 +652,12 @@ namespace Narvalo.Data
             Contract.Requires(ordinal >= 0);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this.MayGetXmlUnsafe(ordinal);
+            return @this.MayGetXmlUnchecked(ordinal);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<string> MayGetXmlUnsafe(this SqlDataReader @this, int ordinal)
+        public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, int ordinal)
         {
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
@@ -671,12 +671,12 @@ namespace Narvalo.Data
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
-            return @this.MayGetXmlUnsafe(name);
+            return @this.MayGetXmlUnchecked(name);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
-        public static Maybe<string> MayGetXmlUnsafe(this SqlDataReader @this, string name)
+        public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, string name)
         {
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<string>>() != null);
