@@ -10,8 +10,8 @@ In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Cod
 from the .NET team with few differences:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
   In case of namespace conflict, use the 'global::' prefix.
-- Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`) 
-  and for object creation.
+- Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`),
+  for object creation and when used with `typeof`.
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
 
 We also enforce the following rules:
@@ -35,7 +35,6 @@ Naming:
 - Consider adding the "Base" suffix to all abstract classes.
 - Consider not adding an internal access modifier to members of an internal class.
 - Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
-- Consider adding an "Internal" prefix to the names of internal static fields and constants in a non-internal class.
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
   or use a verb. Examples: "Require", "ParseTo", StringManip"...
   If not, use "Helper" for concrete classes and "Utility" for static classes.
@@ -55,9 +54,10 @@ Design Recommendations
 ### Mandatory Rules
 
 - Do not write extension methods on core types.
-- Do not use reserved words:
+- Do not use reserved words unless if they are used in their intended sense:
   * `Current`
   * `Select` (LINQ operator)
+  * `Add`, collection initializer
 - All static members should be thread-safe.
 - Internal classes must be in a subdirectory named "Internal".
 

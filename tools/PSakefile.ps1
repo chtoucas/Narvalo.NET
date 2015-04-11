@@ -707,13 +707,15 @@ function Invoke-Gendarme {
     )
 
     # TODO: Make it survive NuGet updates.
-    $cmd = Get-LocalPath 'packages\Mono.Gendarme.2.11.0.20121120\tools\gendarme.exe' -Resolve
+    $gendarmeVersion = '2.11.0.20121120'
+
+    $gendarme = Get-LocalPath "packages\Mono.Gendarme.$gendarmeVersion\tools\gendarme.exe" -Resolve
 
     $configFile = Get-LocalPath 'etc\gendarme.xml' -Resolve
     $ignoreFile = Get-LocalPath 'etc\gendarme.ignore' -Resolve
     $logFile    = Get-LocalPath 'work\log\gendarme.log'
 
-    . $cmd `
+    . $gendarme `
       --v `
       --console `
       --limit $limit `
@@ -736,9 +738,13 @@ function Invoke-OpenCover {
     )
 
     # TODO: Make it survive NuGet updates.
-    $openCover = Get-LocalPath 'packages\OpenCover.4.5.3723\OpenCover.Console.exe' -Resolve
-    $reportGenerator = Get-LocalPath 'packages\ReportGenerator.2.1.4.0\ReportGenerator.exe' -Resolve
-    $xunit = Get-LocalPath 'packages\xunit.runner.console.2.0.0\tools\xunit.console.exe' -Resolve
+    $openCoverVersion = '4.5.3723'
+    $reportGeneratorVersion = '2.1.4.0'
+    $xunitVersion = '2.0.0'
+
+    $openCover = Get-LocalPath "packages\OpenCover.$openCoverVersion\OpenCover.Console.exe" -Resolve
+    $reportGenerator = Get-LocalPath "packages\ReportGenerator.$reportGeneratorVersion\ReportGenerator.exe" -Resolve
+    $xunit = Get-LocalPath "packages\xunit.runner.console.$xunitVersion\tools\xunit.console.exe" -Resolve
 
     $coverageFile = Get-LocalPath 'work\log\opencover.xml'
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
@@ -746,7 +752,8 @@ function Invoke-OpenCover {
 
     $reportDirectory = Get-LocalPath 'work\log\opencover'
     #$reportFilters = '+Narvalo.Core;+Narvalo.Common;+Narvalo.Web'
-    $reportFilters = '+Narvalo.Core'
+    #$reportFilters = '+Narvalo.Core'
+    $reportFilters = '+*'
 
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
@@ -761,6 +768,7 @@ function Invoke-OpenCover {
 
     . $reportGenerator `
       -verbosity:Info `
+      -reporttypes:Html `
       -filters:$reportFilters `
       -reports:$coverageFile `
       -targetdir:$reportDirectory

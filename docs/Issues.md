@@ -5,10 +5,10 @@ Design
 ------
 
 - Comment `Contract.Assume` and `AssumeNotNull`.
+- Statics and thread-safety.
 - Review all `Format` and boxing
-- Find a better name for `Unsafe`.
 - Add `EditorBrowsableState` to some classes?
-- Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour with regard to infinite sequences.
+- Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 
 Narvalo.Core
@@ -20,11 +20,13 @@ Narvalo.Core
 Narvalo.Common
 --------------
 
-- Complete unsafe alternates for SqlDataReader.
+- Complete unchecked alternates for SqlDataReader.
 - Refactore:
   * `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
   * Currencies (Serialization & providers)
   * Benchmarks
+- Fix Gendarme errors (after refactoring).
+- Fix all ContractVerification(false).
 
 Narvalo.Web
 -----------
@@ -36,6 +38,7 @@ Narvalo.Web
 - Make `AssetSection` and `Optimization` sections optional.
 - Use static readonly fields instead of const for some fields in Narvalo.Web.Semantic?
 - Add an XML schema for the Narvalo.Web config.
+- Fix all ContractVerification(false).
 
 Narvalo.Facts
 -------------
@@ -53,7 +56,8 @@ Narvalo.StyleCop.CSharp
 
 - `private readonly static` must start with `s_`.
 - `private const` must be uppercase.
-- `private` fields must start with underscore.
+- `private` fields must start with an underscore.
+- `private` methods must end with an underscore.
 
 Narvalo.FxCop
 -------------
@@ -134,3 +138,7 @@ MSBuild and `PSakefile`:
 - Find hidden Visual Studio files.
 - Find files ignored by git: `git status -u --ignored`.
 - Repair StyleCop settings.
+
+New script or T4 template to create tests from code contracts.
+
+New script to check for completeness of resources.

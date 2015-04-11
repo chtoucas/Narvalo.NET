@@ -37,14 +37,14 @@
 R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
 # Justification = [Intentionally] Exposing nested generics is the price to pay for monads.
 N: Narvalo.Fx
-N: Narvalo.Fx.Extensions
-N: Narvalo.Fx.Extensions.Internal
+N: Narvalo.Fx.Advanced
+N: Narvalo.Fx.Advanced.Internal
 
 R: Gendarme.Rules.Naming.UseCorrectCasingRule
 # Justification = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
 N: Narvalo.Fx
-N: Narvalo.Fx.Extensions
-N: Narvalo.Fx.Extensions.Internal
+N: Narvalo.Fx.Advanced
+N: Narvalo.Fx.Advanced.Internal
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
