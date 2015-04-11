@@ -12,7 +12,7 @@ namespace Narvalo.Web.UI
     public class CacheBreakerPageParserFilter : HtmlControlPageParserFilterBase<HtmlLink>
     {
         // Par défaut, le filtre n'est pas actif.
-        bool _enabled = false;
+        private bool _enabled = false;
 
         public CacheBreakerPageParserFilter() : base() { }
 

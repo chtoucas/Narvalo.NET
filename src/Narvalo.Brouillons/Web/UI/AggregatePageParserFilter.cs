@@ -17,10 +17,10 @@ namespace Narvalo.Web.UI
     /// </summary>
     public class AggregatePageParserFilter : AggregatePageParserFilterBase
     {
-        const BindingFlags BindingAttr_
-            = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private const BindingFlags BINDING_ATTR
+             = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
-        static readonly Type FilterType_ = typeof(PageParserFilter);
+        private static readonly Type s_FilterType = typeof(PageParserFilter);
 
         /// <summary>
         /// Initialise un objet de type <see cref="Narvalo.Web.UI.AggregatePageParserFilter"/>.
@@ -38,9 +38,9 @@ namespace Narvalo.Web.UI
                 throw new NotSupportedException("You forgot to create a ParserFiltersSection configuration.");
             }
 
-            MethodInfo initialize = FilterType_.GetMethod("InitializeInternal", BindingAttr_);
-            object parser = FilterType_.GetField("_parser", BindingAttr_).GetValue(this);
-            object virtualPath = FilterType_.GetField("_virtualPath", BindingAttr_).GetValue(this);
+            MethodInfo initialize = s_FilterType.GetMethod("InitializeInternal", BINDING_ATTR);
+            object parser = s_FilterType.GetField("_parser", BINDING_ATTR).GetValue(this);
+            object virtualPath = s_FilterType.GetField("_virtualPath", BINDING_ATTR).GetValue(this);
 
             var filters = new List<PageParserFilter>();
 

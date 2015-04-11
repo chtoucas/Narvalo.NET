@@ -18,9 +18,11 @@ namespace Narvalo.Web.UI
     /// </remarks>
     public abstract class AggregatePageParserFilterBase : PageParserFilter
     {
-        const int Sentinel_ = Int32.MaxValue;
+        public const int UnlimitedNumber = -1;
 
-        IEnumerable<PageParserFilter> _filters;
+        private const int SENTINEL = Int32.MaxValue;
+
+        private IEnumerable<PageParserFilter> _filters;
 
         /// <summary>
         /// Initialise un objet de type <see cref="Narvalo.Web.UI.AggregatePageParserFilterBase"/>.
@@ -53,7 +55,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                int num = Sentinel_;
+                int num = SENTINEL;
 
                 foreach (var filter in _filters)
                 {
@@ -68,7 +70,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                int num = Sentinel_;
+                int num = SENTINEL;
 
                 foreach (var filter in _filters)
                 {
@@ -83,7 +85,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                int num = Sentinel_;
+                int num = SENTINEL;
 
                 foreach (var filter in _filters)
                 {
@@ -235,14 +237,14 @@ namespace Narvalo.Web.UI
             _filters = InitializeFilters();
         }
 
-        static int Min_(int num1, int num2)
+        private static int Min_(int num1, int num2)
         {
-            return Math.Min(num1, num2 < 0 ? Sentinel_ : num2);
+            return Math.Min(num1, num2 < 0 ? SENTINEL : num2);
         }
 
-        static int UnlimitedNumberIfSentinel_(int value)
+        private static int UnlimitedNumberIfSentinel_(int value)
         {
-            return value == Sentinel_ ? PageParserFilterConstants.UnlimitedNumber : value;
+            return value == SENTINEL ? UnlimitedNumber : value;
         }
     }
 }
