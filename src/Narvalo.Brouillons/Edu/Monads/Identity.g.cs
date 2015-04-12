@@ -46,8 +46,6 @@ namespace Narvalo.Edu.Monads
     /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    // Removed the next attribute otherwise it won't be included in test coverage.
-    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Identity
     {
         private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
@@ -531,8 +529,6 @@ namespace Narvalo.Edu.Monads
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    // Removed the next attribute otherwise it won't be included in test coverage.
-    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class EnumerableIdentityExtensions
     {
         #region Basic Monad functions (Prelude)

@@ -46,8 +46,6 @@ namespace Narvalo.Fx
     /// </remarks>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    // Removed the next attribute otherwise it won't be included in test coverage.
-    //[global::System.Runtime.CompilerServices.CompilerGenerated]
     public static partial class Maybe
     {
         private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
