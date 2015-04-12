@@ -4,30 +4,8 @@ namespace Narvalo
 {
     using System;
 
+    using Narvalo.TestCommon;
     using Xunit;
-
-    public static partial class ConvertToFacts
-    {
-        private enum MyEnum_
-        {
-            None = 0,
-            ActualValue = 1,
-            AliasValue = ActualValue,
-        }
-
-        [Flags]
-        private enum MyFlagsEnum_
-        {
-            None = 0,
-            ActualValue1 = 1 << 0,
-            ActualValue2 = 1 << 1,
-            ActualValue3 = 1 << 2,
-            CompositeValue1 = ActualValue1 | ActualValue2,
-            CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
-        }
-
-        private struct MyStruct_ { }
-    }
 
     public static partial class ConvertToFacts
     {
@@ -44,21 +22,21 @@ namespace Narvalo
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<MyStruct_>(1));
+            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyStruct>(1));
         }
 
         [Fact]
         public static void Enum_ThrowsArgumentException_ForFlagsEnum()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<MyFlagsEnum_>(1));
+            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.FlagsEnum>(1));
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
-            var result = ConvertTo.Enum<MyEnum_>(2);
+            var result = ConvertTo.Enum<My.SimpleEnum>(2);
 
             // Assert
             Assert.False(result.HasValue);
@@ -68,11 +46,11 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForActualValue()
         {
             // Act
-            var result = ConvertTo.Enum<MyEnum_>(1);
+            var result = ConvertTo.Enum<My.SimpleEnum>(1);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         #endregion

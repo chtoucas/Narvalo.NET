@@ -9,41 +9,6 @@ namespace Narvalo
 
     public static partial class PredicateFacts
     {
-        private enum MyEnum_
-        {
-            None = 0,
-            ActualValue = 1,
-            AliasValue = ActualValue,
-        }
-
-        [Flags]
-        private enum MyFlagsEnum_
-        {
-            None = 0,
-            ActualValue1 = 1 << 0,
-            ActualValue2 = 1 << 1,
-            ActualValue3 = 1 << 2,
-            CompositeValue1 = ActualValue1 | ActualValue2,
-            CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
-        }
-
-        private struct MyStruct_ { }
-
-        private sealed class MyValue_
-        {
-            private readonly int _value;
-
-            public MyValue_(int value)
-            {
-                _value = value;
-            }
-
-            public int Value { get { return _value; } }
-        }
-    }
-
-    public static partial class PredicateFacts
-    {
         #region IsFlagsEnum()
 
         [Fact]
@@ -60,7 +25,7 @@ namespace Narvalo
         public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
         {
             // Arrange
-            var type = typeof(MyFlagsEnum_);
+            var type = typeof(My.FlagsEnum);
 
             // Act & Assert
             Assert.True(Predicate.IsFlagsEnum(type));
@@ -70,7 +35,7 @@ namespace Narvalo
         public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
         {
             // Arrange
-            var type = typeof(MyEnum_);
+            var type = typeof(My.SimpleEnum);
 
             // Act & Assert
             Assert.False(Predicate.IsFlagsEnum(type));
@@ -90,7 +55,7 @@ namespace Narvalo
         public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructInput()
         {
             // Arrange
-            var type = typeof(MyStruct_);
+            var type = typeof(My.EmptyStruct);
 
             // Act & Assert
             Assert.False(Predicate.IsFlagsEnum(type));

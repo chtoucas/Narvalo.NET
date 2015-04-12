@@ -4,30 +4,8 @@ namespace Narvalo
 {
     using System;
 
+    using Narvalo.TestCommon;
     using Xunit;
-
-    public static partial class ParseToFacts
-    {
-        private enum MyEnum_
-        {
-            None = 0,
-            ActualValue = 1,
-            AliasValue = ActualValue,
-        }
-
-        [Flags]
-        private enum MyFlagsEnum_
-        {
-            None = 0,
-            ActualValue1 = 1 << 0,
-            ActualValue2 = 1 << 1,
-            ActualValue3 = 1 << 2,
-            CompositeValue1 = ActualValue1 | ActualValue2,
-            CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
-        }
-
-        private struct MyStruct_ { }
-    }
 
     public static partial class ParseToFacts
     {
@@ -196,14 +174,14 @@ namespace Narvalo
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ParseTo.Enum<MyStruct_>("Whatever"));
+            Assert.Throws<ArgumentException>(() => ParseTo.Enum<My.EmptyStruct>("Whatever"));
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("InvalidValue");
+            var result = ParseTo.Enum<My.SimpleEnum>("InvalidValue");
 
             // Assert
             Assert.False(result.HasValue);
@@ -213,7 +191,7 @@ namespace Narvalo
         public static void Enum_ReturnsNull_ForInvalidValueAndBadCase()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("InvalidValue", ignoreCase: false);
+            var result = ParseTo.Enum<My.SimpleEnum>("InvalidValue", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -223,40 +201,40 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForActualValue()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>("ActualValue");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>("ActualValue");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForActualValueWithWhiteSpaces()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" ActualValue ");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" ActualValue ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForActualValueAndIgnoreCase()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>("actualvalue");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>("actualvalue");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForActualValueAndBadCase()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("actualvalue", ignoreCase: false);
+            var result = ParseTo.Enum<My.SimpleEnum>("actualvalue", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -266,18 +244,18 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForActualValueWithWhiteSpacesAndIgnoreCase()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" actualvalue ");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" actualvalue ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForActualValueWithWhiteSpacesAndBadCase()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" actualvalue ", ignoreCase: false);
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" actualvalue ", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -287,40 +265,40 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForAliasValue()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("AliasValue");
+            var result = ParseTo.Enum<My.SimpleEnum>("AliasValue");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.AliasValue, result.Value);
+            Assert.Equal(My.SimpleEnum.AliasValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForAliasValueWithWhiteSpaces()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" AliasValue ");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" AliasValue ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForAliasValueAndIgnoreCase()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("aliasvalue");
+            var result = ParseTo.Enum<My.SimpleEnum>("aliasvalue");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.AliasValue, result.Value);
+            Assert.Equal(My.SimpleEnum.AliasValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForAliasValueAndBadCase()
         {
             // Act
-            var result = ParseTo.Enum<MyEnum_>("aliasvalue", ignoreCase: false);
+            var result = ParseTo.Enum<My.SimpleEnum>("aliasvalue", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -330,18 +308,18 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForAliasValueWithWhiteSpacesAndIgnoreCase()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" aliasvalue ");
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" aliasvalue ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyEnum_.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForAliasValueWithWhiteSpacesAndBadCase()
         {
             // Act
-            MyEnum_? result = ParseTo.Enum<MyEnum_>(" aliasvalue ", ignoreCase: false);
+            My.SimpleEnum? result = ParseTo.Enum<My.SimpleEnum>(" aliasvalue ", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -351,29 +329,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForNamedCompositeValue()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("CompositeValue1");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("CompositeValue1");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForNamedCompositeValueAndIgnoreCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("compositeValue1");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("compositeValue1");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForNamedCompositeValueAndBadCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("compositeValue1", ignoreCase: false);
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("compositeValue1", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -383,29 +361,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForCompositeValue()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("ActualValue1,ActualValue2");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("ActualValue1,ActualValue2");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForCompositeValueAndIgnoreCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("actualValue1,actualValue2");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("actualValue1,actualValue2");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForCompositeValueAndBadCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>("actualValue1,actualValue2", ignoreCase: false);
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("actualValue1,actualValue2", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -415,29 +393,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForCompositeValueWithWhiteSpaces()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>(" ActualValue1,  ActualValue2 ");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" ActualValue1,  ActualValue2 ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForCompositeValueWithWhiteSpacesAndIgnoreCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>(" actualValue1,  actualValue2 ");
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" actualValue1,  actualValue2 ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(MyFlagsEnum_.CompositeValue1, result.Value);
+            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForCompositeValueWithWhiteSpacesAndBadCase()
         {
             // Act
-            MyFlagsEnum_? result = ParseTo.Enum<MyFlagsEnum_>(" actualValue1,  actualValue2 ", ignoreCase: false);
+            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" actualValue1,  actualValue2 ", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);

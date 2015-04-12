@@ -3,37 +3,17 @@
 namespace Narvalo
 {
     using System;
-    using System.Globalization;
 
+    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class EnforceFacts
     {
-        private static readonly MyValue_ s_ValueBelow = new MyValue_(0);
-        private static readonly MyValue_ s_MinValue = new MyValue_(1);
-        private static readonly MyValue_ s_ValueInRange = new MyValue_(2);
-        private static readonly MyValue_ s_MaxValue = new MyValue_(3);
-        private static readonly MyValue_ s_ValueAbove = new MyValue_(4);
-
-        private struct MyValue_ : IComparable<MyValue_>
-        {
-            private readonly int _value;
-
-            public MyValue_(int value)
-            {
-                _value = value;
-            }
-
-            public int CompareTo(MyValue_ other)
-            {
-                return _value.CompareTo(other._value);
-            }
-
-            public override string ToString()
-            {
-                return _value.ToString(CultureInfo.CurrentCulture);
-            }
-        }
+        private static readonly My.ComparableStruct s_ValueBelow = new My.ComparableStruct(0);
+        private static readonly My.ComparableStruct s_MinValue = new My.ComparableStruct(1);
+        private static readonly My.ComparableStruct s_ValueInRange = new My.ComparableStruct(2);
+        private static readonly My.ComparableStruct s_MaxValue = new My.ComparableStruct(3);
+        private static readonly My.ComparableStruct s_ValueAbove = new My.ComparableStruct(4);
     }
 
     public static partial class EnforceFacts
