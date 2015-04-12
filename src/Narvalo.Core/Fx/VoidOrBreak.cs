@@ -3,6 +3,7 @@
 namespace Narvalo.Fx
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
@@ -11,17 +12,19 @@ namespace Narvalo.Fx
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrError"/>
+    [DebuggerDisplay(@"""Void""")]
     public class VoidOrBreak
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrBreak s_Void = new VoidOrBreak();
 
         private readonly bool _isBreak;
 
         private VoidOrBreak() { }
 
-        private VoidOrBreak(bool arboted)
+        private VoidOrBreak(bool isBreak)
         {
-            _isBreak = arboted;
+            _isBreak = isBreak;
         }
 
         public static VoidOrBreak Void
@@ -59,6 +62,8 @@ namespace Narvalo.Fx
             return "Void";
         }
 
+        [DebuggerDisplay(@"""Break""")]
+        [DebuggerTypeProxy(typeof(Break_.DebugView))]
         private sealed class Break_ : VoidOrBreak
         {
             private readonly string _reason;
@@ -98,6 +103,24 @@ namespace Narvalo.Fx
             }
 
 #endif
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="VoidOrBreak.Break_"/>.
+            /// </summary>
+            private sealed class DebugView
+            {
+                private readonly Break_ _inner;
+
+                public DebugView(Break_ inner)
+                {
+                    _inner = inner;
+                }
+
+                public string Reason
+                {
+                    get { return _inner.Reason; }
+                }
+            }
         }
     }
 }

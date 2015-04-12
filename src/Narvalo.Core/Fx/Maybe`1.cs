@@ -5,6 +5,7 @@ namespace Narvalo.Fx
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
@@ -143,6 +144,8 @@ namespace Narvalo.Fx
      * ]]>
      * </content>
      */
+    [DebuggerDisplay("IsSome={IsSome}")]
+    [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
@@ -192,6 +195,7 @@ namespace Narvalo.Fx
         /// Any access to this property must be protected by checking before that <see cref="IsSome"/> 
         /// is <see langword="true"/>.
         /// </remarks>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal T Value
         {
             get
@@ -505,6 +509,7 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
         internal static Maybe<T> η(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -514,6 +519,7 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
             Require.NotNull(square, "square");
@@ -528,6 +534,7 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Maybe<T> s_None = new Maybe<T>();
 
         /// <summary>
@@ -703,5 +710,42 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    }
+
+    /// <content>
+    /// Provides a debugger view of <see cref="Maybe{T}"/>.
+    /// </content>
+    public partial class Maybe<T>
+    {
+        /// <summary>
+        /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
+        /// </summary>
+        private sealed class DebugView
+        {
+            private readonly Maybe<T> _inner;
+
+            public DebugView(Maybe<T> inner)
+            {
+                _inner = inner;
+            }
+
+            public bool IsSome
+            {
+                get { return _inner.IsSome; }
+            }
+
+            public T Value
+            {
+                get
+                {
+                    if (!IsSome)
+                    {
+                        return default(T);
+                    }
+
+                    return _inner.Value;
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Narvalo.Fx
 {
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
@@ -9,8 +10,10 @@ namespace Narvalo.Fx
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>
+    [DebuggerDisplay(@"""Void""")]
     public class VoidOrError
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrError s_Void = new VoidOrError();
 
         private readonly bool _isError;
@@ -51,6 +54,8 @@ namespace Narvalo.Fx
             return "Void";
         }
 
+        [DebuggerDisplay(@"""Error""")]
+        [DebuggerTypeProxy(typeof(Error_.DebugView))]
         private sealed class Error_ : VoidOrError
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
@@ -84,6 +89,24 @@ namespace Narvalo.Fx
             }
 
 #endif
+
+            /// <summary>
+            /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
+            /// </summary>
+            private sealed class DebugView
+            {
+                private readonly Error_ _inner;
+
+                public DebugView(Error_ inner)
+                {
+                    _inner = inner;
+                }
+
+                public ExceptionDispatchInfo ExceptionInfo
+                {
+                    get { return _inner._exceptionInfo; }
+                }
+            }
         }
     }
 }
