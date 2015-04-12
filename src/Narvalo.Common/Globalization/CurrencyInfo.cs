@@ -11,7 +11,7 @@ namespace Narvalo.Globalization
     /// Provides information about a localized currency.
     /// </summary>
     /// <remarks>
-    /// <para>You can define your own set of currencies by creating a <see cref="ICurrencyProvider"/>.</para>
+    /// <para>You can define your own set of currencies by creating a <see cref="ICurrencyInfoProvider"/>.</para>
     /// <para>Different currencies may have the same <see cref="CurrencyInfo.Code"/>
     /// and <see cref="CurrencyInfo.NumericCode"/> but be associated to different 
     /// regions/countries. There is no 1-1 correspondance between currencies
@@ -174,7 +174,7 @@ namespace Narvalo.Globalization
         /// the <paramref name="types"/> parameter.</returns>
         public static CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
         {
-            return CurrencyProvider.Current.GetCurrencies(types);
+            return CurrencyInfoProvider.Current.GetCurrencies(types);
         }
 
         public override string ToString()

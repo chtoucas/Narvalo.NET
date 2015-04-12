@@ -4,14 +4,8 @@ namespace Narvalo.Globalization
 {
     using System.Collections.Generic;
 
-    public partial interface ICurrencyProvider
+    public partial interface ICurrencyInfoProvider
     {
-        /// <summary>
-        /// Gets the set of available currency codes.
-        /// </summary>
-        /// <value>The set of available currency codes.</value>
-        HashSet<string> CurrencyCodes { get; }
-
         /// <summary>
         /// Obtains the list of supported currencies filtered by the specified
         /// <see cref="CurrencyTypes"/> parameter.
@@ -32,23 +26,18 @@ namespace Narvalo.Globalization
     using System.Diagnostics.Contracts;
     using System.Collections.ObjectModel;
 
-    [ContractClass(typeof(ICurrencyProviderContract))]
-    public partial interface ICurrencyProvider { }
+    [ContractClass(typeof(ICurrencyInfoProviderContract))]
+    public partial interface ICurrencyInfoProvider { }
 
-    [ContractClassFor(typeof(ICurrencyProvider))]
-    internal abstract class ICurrencyProviderContract : ICurrencyProvider
+    [ContractClassFor(typeof(ICurrencyInfoProvider))]
+    internal abstract class ICurrencyInfoProviderContract : ICurrencyInfoProvider
     {
-        HashSet<string> ICurrencyProvider.CurrencyCodes
+        public override CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
         {
-            get
-            {
-                Contract.Ensures(Contract.Result<HashSet<string>>() != null);
+                Contract.Ensures(Contract.Result<CurrencyInfoCollection>() != null);
 
-                return default(HashSet<string>);
-            }
+                return default(CurrencyInfoCollection);
         }
-
-        public abstract CurrencyInfoCollection GetCurrencies(CurrencyTypes types);
     }
 }
 

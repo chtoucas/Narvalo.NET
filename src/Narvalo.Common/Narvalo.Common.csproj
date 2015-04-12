@@ -72,6 +72,7 @@
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Currency.cs" />
+    <Compile Include="Globalization\CurrencyInfoProvider.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -82,20 +83,27 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
-    <Compile Include="Globalization\CurrencyException.cs" />
+    <Compile Include="CurrencyException.cs" />
     <Compile Include="Globalization\CurrencyInfo.cs" />
     <Compile Include="Globalization\CurrencyInfoCollection.cs" />
-    <Compile Include="Globalization\CurrencyNotFoundException.cs" />
-    <Compile Include="Globalization\CurrencyProvider.cs" />
+    <Compile Include="CurrencyNotFoundException.cs" />
+    <Compile Include="CurrencyProvider.cs" />
     <Compile Include="Globalization\CurrencyTypes.cs" />
-    <Compile Include="Globalization\InMemoryCurrencyProvider.cs" />
-    <Compile Include="Globalization\InMemoryCurrencyProvider.g.cs">
+    <Compile Include="Globalization\InMemoryCurrencyInfoProvider.cs" />
+    <Compile Include="Globalization\InMemoryCurrencyInfoProvider.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InMemoryCurrencyInfoProvider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Globalization\ICurrencyInfoProvider.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ICurrencyProvider.cs" />
+    <Compile Include="InMemoryCurrencyProvider.cs" />
+    <Compile Include="InMemoryCurrencyProvider.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InMemoryCurrencyProvider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Globalization\ICurrencyProvider.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
@@ -155,7 +163,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Iso4217.tt" />
-    <None Include="Globalization\InMemoryCurrencyProvider.tt">
+    <None Include="Globalization\InMemoryCurrencyInfoProvider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>
+    </None>
+    <None Include="InMemoryCurrencyProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InMemoryCurrencyProvider.g.cs</LastGenOutput>
     </None>

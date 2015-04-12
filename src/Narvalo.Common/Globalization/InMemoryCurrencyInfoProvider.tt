@@ -1,23 +1,8 @@
 ﻿<#@ include file="..\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currentSource = @"..\Resources\ISO4217\20150101\A1.xml";
-var legacySource = @"..\Resources\ISO4217\20150101\A3.xml";
-
-var currentCurrencies = ParseCurrent(currentSource);
-var legacyCurrencies = ParseLegacy(legacySource);
-
-var codeSet = new HashSet<string>();
-
-foreach (var currency in currentCurrencies)
-{
-    codeSet.Add(currency.Code);
-}
-
-foreach (var currency in legacyCurrencies)
-{
-    codeSet.Add(currency.Code);
-}
+var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\20150101\A3.xml");
 
 #>
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
@@ -37,19 +22,13 @@ namespace Narvalo.Globalization
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed partial class InMemoryCurrencyProvider
+    public sealed partial class InMemoryCurrencyInfoProvider
     {
         private static readonly Lazy<CurrencyInfoCollection> s_CurrentCurrencies
             = new Lazy<CurrencyInfoCollection>(InitializeCurrentCurrencies_);
         
         private static readonly Lazy<CurrencyInfoCollection> s_LegacyCurrencies
             = new Lazy<CurrencyInfoCollection>(InitializeLegacyCurrencies_);
-
-        private static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
-<# foreach (var code in codeSet.OrderBy(_ => _)) { #>
-            "<#= code #>",
-<# } #>
-        };
 
         /// <summary>
         /// Gets the list of currently active currencies.
@@ -62,6 +41,8 @@ namespace Narvalo.Globalization
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
             Justification = "[GeneratedCode] Lazy initialization of an (in-memory) list of currencies.")]
         [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
+            Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongMethodsRule",
             Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
         private static CurrencyInfoCollection InitializeCurrentCurrencies_()
         {
@@ -92,6 +73,8 @@ namespace Narvalo.Globalization
         /// </remarks>
         /// <value>The list of discontinued currencies.</value>
         [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
+            Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
+        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongMethodsRule",
             Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
         private static CurrencyInfoCollection InitializeLegacyCurrencies_()
         {
