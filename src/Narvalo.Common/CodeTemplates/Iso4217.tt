@@ -21,7 +21,7 @@
         ValidationFlags = XmlSchemaValidationFlags.None,
         ValidationType = ValidationType.None,
     };
-
+    
     protected class Currency
     {
         public string Code { get; set; }
@@ -33,7 +33,7 @@
     }
 
     protected bool Debug { get; set; }
-    
+
     protected List<Currency> ParseCurrent(string path)
     {
         var source = Host.ResolvePath(path);
@@ -99,7 +99,7 @@
 
         return result;
     }
-
+    
     protected List<Currency> ParseLegacy(string path)
     {
         var source = Host.ResolvePath(path);

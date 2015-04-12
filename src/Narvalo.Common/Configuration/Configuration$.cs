@@ -34,6 +34,8 @@ namespace Narvalo.Configuration
             return section;
         }
 
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
+            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Maybe<T> MayGetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
         {
             Require.Object(@this);

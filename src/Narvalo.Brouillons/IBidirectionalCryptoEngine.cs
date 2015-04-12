@@ -17,11 +17,11 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
-    [ContractClass(typeof(ContractForIBidirectionalCryptoEngine))]
+    [ContractClass(typeof(IBidirectionalCryptoEngineContract))]
     public partial interface IBidirectionalCryptoEngine { }
 
     [ContractClassFor(typeof(IBidirectionalCryptoEngine))]
-    internal abstract class ContractForIBidirectionalCryptoEngine : IBidirectionalCryptoEngine
+    internal abstract class IBidirectionalCryptoEngineContract : IBidirectionalCryptoEngine
     {
         string IBidirectionalCryptoEngine.Encrypt(string value)
         {

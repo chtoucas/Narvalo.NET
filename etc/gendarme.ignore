@@ -70,29 +70,29 @@ N: Narvalo.Configuration
 # Narvalo.Common (Defects to be reviewed or fixed)
 # ==============================================================================
 
-R: Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule
+#R: Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule
 #  ------------------------------------------------------------
-M: System.Collections.Generic.IEnumerable`1<Narvalo.Globalization.CurrencyInfo> Narvalo.Globalization.CurrencyInfo::GetCurrencies()
+#M: System.Collections.Generic.IEnumerable`1<Narvalo.Globalization.CurrencyInfo> Narvalo.Globalization.CurrencyInfo::GetCurrencies()
 
 R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 #  ---------------------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkRunner
-T: Narvalo.Globalization.CurrencyInfo
+#T: Narvalo.Globalization.CurrencyInfo
 T: Narvalo.IO.ConcurrentFileFinder
 T: Narvalo.IO.FileFinder
 
-R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
+#R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
 #  ---------------------------------------------------------
-T: Narvalo.Globalization.CurrencyProvider
+#T: Narvalo.Globalization.CurrencyProvider
 
 R: Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule
 #  -------------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkProcessor
 
-R: Gendarme.Rules.Smells.AvoidLargeClassesRule
+#R: Gendarme.Rules.Smells.AvoidLargeClassesRule
 #  -------------------------------------------
-T: Narvalo.Currency
+#T: Narvalo.Currency
 
-R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
+#R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
 #  -------------------------------------------
-T: Narvalo.Globalization.CurrencyProvider
+#T: Narvalo.Globalization.CurrencyProvider
