@@ -159,5 +159,16 @@
 
         return result;
     }
-
+    
+    protected string InferName() 
+    {
+        return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
+    }
+    
+    protected string InferNamespace() 
+    {
+        return System.Runtime.Remoting.Messaging.CallContext
+            .LogicalGetData("NamespaceHint")
+            .ToString();
+    }
 #>

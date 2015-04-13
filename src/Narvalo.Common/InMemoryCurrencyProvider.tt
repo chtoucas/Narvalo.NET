@@ -23,11 +23,11 @@ foreach (var currency in currentCurrencies.Concat(legacyCurrencies))
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo
+namespace <#= InferNamespace() #>
 {
     using System.Collections.Generic;
 
-    public sealed partial class InMemoryCurrencyProvider
+    public sealed partial class <#= InferName() #>
     {
         private static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
 <# foreach (var code in codeSet.OrderBy(_ => _)) { #>

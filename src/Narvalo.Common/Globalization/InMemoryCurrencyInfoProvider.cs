@@ -9,6 +9,7 @@ namespace Narvalo.Globalization
         Justification = "[Ignore] The type's name starts with 'In' not 'I'.")]
     public sealed partial class InMemoryCurrencyInfoProvider : ICurrencyInfoProvider
     {
+        [SuppressMessage("Gendarme.Rules.Performance", "AvoidRepetitiveCallsToPropertiesRule")]
         public CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
         {
             switch (types)

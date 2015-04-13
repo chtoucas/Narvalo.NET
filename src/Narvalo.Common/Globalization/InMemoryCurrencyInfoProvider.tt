@@ -16,13 +16,13 @@ var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\20150101\A3.xml");
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Globalization
+namespace <#= InferNamespace() #>
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed partial class InMemoryCurrencyInfoProvider
+    public sealed partial class <#= InferName() #>
     {
         private static readonly Lazy<CurrencyInfoCollection> s_CurrentCurrencies
             = new Lazy<CurrencyInfoCollection>(InitializeCurrentCurrencies_);
