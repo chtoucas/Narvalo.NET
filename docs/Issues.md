@@ -7,7 +7,7 @@ Design
 - Comment `Contract.Assume` and `AssumeNotNull`.
 - Statics and thread-safety.
 - Review all `Format` and boxing
-- Add `EditorBrowsableState` to some classes? `DebuggerDisplay`? `DebuggerTypeProxy`?
+- Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 

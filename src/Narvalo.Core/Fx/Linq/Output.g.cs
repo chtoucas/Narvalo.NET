@@ -29,72 +29,56 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
     Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
 
-namespace Narvalo.Fx.Advanced
+namespace Narvalo.Fx.Linq
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
-    using Narvalo.Fx.Advanced.Internal;
+    using Narvalo.Fx.Linq.Internal;
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class..
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class..
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
-    public static partial class EnumerableMaybeExtensions
+    public static partial class EnumerableOutputExtensions
     {
         #region Basic Monad functions (Prelude)
 
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
+        public static Output<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Output<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
 
         #endregion
-
-        #region Generalisations of list functions (Prelude)
-
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<TSource> Sum<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-        {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
-
-            return @this.SumCore();
-        }
-
-        #endregion
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableOutputExtensions.
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    public static partial class EnumerableMaybeExtensions
+    public static partial class EnumerableOutputExtensions
     {
         #region Basic Monad functions (Prelude)
 
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Output<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> funM)
+            Func<TSource, Output<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -109,7 +93,7 @@ namespace Narvalo.Fx.Advanced
         /// </remarks>
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
+            Func<TSource, Output<bool>> predicateM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
@@ -121,14 +105,13 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        public static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -136,15 +119,15 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -152,14 +135,13 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -168,36 +150,33 @@ namespace Narvalo.Fx.Advanced
 
         #region Aggregate Operators
         
-        public static Maybe<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static Output<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
         
-        public static Maybe<TSource> Reduce<TSource>(
+        public static Output<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM);
         }
         
-        public static Maybe<TSource> ReduceBack<TSource>(
+        public static Output<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -209,16 +188,15 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static Maybe<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
-            Func<Maybe<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
+            Func<Output<TAccumulate>, bool> predicate)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -226,24 +204,23 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static Maybe<TSource> Reduce<TSource>(
+        public static Output<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM,
-            Func<Maybe<TSource>, bool> predicate)
+            Func<TSource, TSource, Output<TSource>> accumulatorM,
+            Func<Output<TSource>, bool> predicate)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
 
         #endregion
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableOutputExtensions.
 }
 
-namespace Narvalo.Fx.Advanced.Internal
+namespace Narvalo.Fx.Linq.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -255,61 +232,50 @@ namespace Narvalo.Fx.Advanced.Internal
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </summary>
-    internal static partial class EnumerableMaybeExtensions
+    internal static partial class EnumerableOutputExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
+        internal static Output<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<Output<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
-            var seed = Maybe.Of(Enumerable.Empty<TSource>());
-            Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
+            var seed = Output.Success(Enumerable.Empty<TSource>());
+            Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
             return @this.Aggregate(seed, fun).AssumeNotNull();
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Maybe<IEnumerable<TSource>> CollectCore_<TSource>(
-            Maybe<TSource> m, 
+        private static Output<IEnumerable<TSource>> CollectCore_<TSource>(
+            Output<TSource> m, 
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);
 
-            return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
+            return m.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
         }
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> SumCore<TSource>(
-            this IEnumerable<Maybe<TSource>> @this)
-        {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
-
-            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n)).AssumeNotNull();
-        }
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableOutputExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    internal static partial class EnumerableMaybeExtensions
+    internal static partial class EnumerableOutputExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Output<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<TResult>> funM)
+            Func<TSource, Output<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).AssumeNotNull().Collect();
         }
@@ -318,7 +284,7 @@ namespace Narvalo.Fx.Advanced.Internal
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
+            Func<TSource, Output<bool>> predicateM)
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
@@ -349,14 +315,13 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        internal static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             var m = @this.Select(funM).AssumeNotNull().Collect();
 
@@ -372,18 +337,18 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static Output<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Maybe<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
-            Func<TFirst, TSecond, Maybe<TResult>> resultSelector
+            Func<TFirst, TSecond, Output<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
@@ -393,19 +358,23 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Output<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Of(seed);
+            Output<TAccumulate> result = Output.Success(seed);
 
             foreach (TSource item in @this)
             {
+                if (result == null) 
+                {
+                    return null;
+                }
+
                 result = result.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -414,27 +383,25 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static Output<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceCore<TSource>(
+        internal static Output<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -443,10 +410,15 @@ namespace Narvalo.Fx.Advanced.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Of(iter.Current);
+                Output<TSource> result = Output.Success(iter.Current);
 
                 while (iter.MoveNext())
                 {
+                    if (result == null) 
+                    {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -456,36 +428,39 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceBackCore<TSource>(
+        internal static Output<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM)
+            Func<TSource, TSource, Output<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Output<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Maybe<TAccumulate>> accumulatorM,
-            Func<Maybe<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
+            Func<Output<TAccumulate>, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Of(seed);
+            Output<TAccumulate> result = Output.Success(seed);
 
             using (var iter = @this.GetEnumerator())
             {
                 while (predicate.Invoke(result) && iter.MoveNext())
                 {
+                    if (result == null)
+                    {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -495,15 +470,14 @@ namespace Narvalo.Fx.Advanced.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<TSource> ReduceCore<TSource>(
+        internal static Output<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Maybe<TSource>> accumulatorM,
-            Func<Maybe<TSource>, bool> predicate)
+            Func<TSource, TSource, Output<TSource>> accumulatorM,
+            Func<Output<TSource>, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -512,15 +486,20 @@ namespace Narvalo.Fx.Advanced.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Of(iter.Current);
+                Output<TSource> result = Output.Success(iter.Current);
 
                 while (predicate.Invoke(result) && iter.MoveNext())
                 {
+                    if (result == null)
+                    {
+                        return null;
+                    }
+
                     result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
                 return result;
             }
         }
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableOutputExtensions.
 }

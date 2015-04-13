@@ -12,7 +12,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Fixed uncorrect and inefficient initialization of `AssetManager`.
 
 #### Breaking changes
-- Renamed Narvalo.Fx.Extensions to Narvalo.Fx.Advanced.
+- Split the Narvalo.Fx.Extensions namespace into Narvalo.Fx.Advanced and Narvalo.Fx.Linq.
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.

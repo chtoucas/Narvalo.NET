@@ -28,6 +28,7 @@
     private string _name;
     private string _namespace;
     private string _linqNamespace;
+    private string _advancedNamespace;
     
     private bool _isNullable = true;
     private bool _preferLinqDialect = true;
@@ -68,6 +69,34 @@
             }
 
             _namespace = value;
+        }
+    }
+    
+    // Gets or sets the name of the 'Advanced' namespace.
+    // If no namespace was given, it will be deduced from Namespace.
+    // Extensions for core CLR types are put into a separate namespace.
+    protected string AdvancedNamespace
+    {
+        get
+        {
+            if (_advancedNamespace == null) {
+                _advancedNamespace = Namespace + ".Advanced";
+            }
+
+            return _advancedNamespace;
+        }
+
+        set
+        {
+            if (_advancedNamespace != null) {
+                throw new InvalidOperationException("You can set the name of the 'Advanced' namespace only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The 'Advanced' namespace can not be null or blank.");
+            }
+
+            _advancedNamespace = value;
         }
     }
     
@@ -381,8 +410,7 @@ namespace <#= Namespace #>
 <#+ EmitExtensions(); #>
 }
 
-// Extensions for core CLR types are put into a separate namespace.
-namespace <#= Namespace #>.Advanced
+namespace <#= AdvancedNamespace #>
 {
     using System;
     using System.Diagnostics.Contracts;
@@ -2011,9 +2039,6 @@ using global::System.Diagnostics.CodeAnalysis;
     
     private void WriteCompilerAttributes_()
     {
-        // Initially we also had the CompilerGenerated attribute.
-        // We removed it since types with such an attribute are often excluded from test coverage.
-        //[global::System.Runtime.CompilerServices.CompilerGenerated]
 #>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]

@@ -654,8 +654,7 @@ namespace Narvalo.Edu.Monads.Samples
     } // End of the class MonadPlus.
 }
 
-// Extensions for core CLR types are put into a separate namespace.
-namespace Narvalo.Edu.Monads.Samples.Advanced
+namespace Narvalo.Edu.Monads.Samples
 {
     using System;
     using System.Diagnostics.Contracts;

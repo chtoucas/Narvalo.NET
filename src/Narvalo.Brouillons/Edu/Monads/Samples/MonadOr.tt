@@ -1,5 +1,9 @@
 ﻿<#@ include file="..\..\..\..\Narvalo.Core\CodeTemplates\Monad.tt" #>
-<# InitializeOr(); #>
+<# 
+    InitializeOr(); 
+
+    AdvancedNamespace = Namespace;
+#>
 <# EmitMonad(); #>
 
 <# EmitLinq(); #>

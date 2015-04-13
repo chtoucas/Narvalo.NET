@@ -26,25 +26,12 @@
 # An ignore-file can be generated automatically (using gd2i) from an XML
 # defect list produced by Gendarme.
 
-
 # ==============================================================================
 # Global suppressions.
 # ==============================================================================
 
 # Narvalo.Core assembly
 # ---------------------
-
-R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
-# Justification = [Intentionally] Exposing nested generics is the price to pay for monads.
-N: Narvalo.Fx
-N: Narvalo.Fx.Advanced
-N: Narvalo.Fx.Advanced.Internal
-
-R: Gendarme.Rules.Naming.UseCorrectCasingRule
-# Justification = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
-N: Narvalo.Fx
-N: Narvalo.Fx.Advanced
-N: Narvalo.Fx.Advanced.Internal
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
@@ -53,6 +40,24 @@ A: Narvalo.Core
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
 A: Narvalo.Core
+
+R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
+# Justification = [Intentionally] Exposing nested generics is a price to pay for monads.
+N: Narvalo.Fx
+N: Narvalo.Fx.Advanced
+N: Narvalo.Fx.Linq
+N: Narvalo.Fx.Linq.Internal
+
+R: Gendarme.Rules.Naming.UseCorrectCasingRule
+# Justification = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
+N: Narvalo.Fx
+N: Narvalo.Fx.Advanced
+N: Narvalo.Fx.Linq
+N: Narvalo.Fx.Linq.Internal
+
+R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
+# Justification = [Intentionally] Hopefully more will be added.
+N: Narvalo.Fx.Linq
 
 # Narvalo.Common assembly
 # -----------------------
@@ -70,29 +75,12 @@ N: Narvalo.Configuration
 # Narvalo.Common (Defects to be reviewed or fixed)
 # ==============================================================================
 
-#R: Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule
-#  ------------------------------------------------------------
-#M: System.Collections.Generic.IEnumerable`1<Narvalo.Globalization.CurrencyInfo> Narvalo.Globalization.CurrencyInfo::GetCurrencies()
-
 R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 #  ---------------------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkRunner
-#T: Narvalo.Globalization.CurrencyInfo
 T: Narvalo.IO.ConcurrentFileFinder
 T: Narvalo.IO.FileFinder
-
-#R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
-#  ---------------------------------------------------------
-#T: Narvalo.Globalization.CurrencyProvider
 
 R: Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule
 #  -------------------------------------------------------
 T: Narvalo.Diagnostics.Benchmarking.BenchmarkProcessor
-
-#R: Gendarme.Rules.Smells.AvoidLargeClassesRule
-#  -------------------------------------------
-#T: Narvalo.Currency
-
-#R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
-#  -------------------------------------------
-#T: Narvalo.Globalization.CurrencyProvider

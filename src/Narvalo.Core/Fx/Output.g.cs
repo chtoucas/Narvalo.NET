@@ -427,7 +427,6 @@ namespace Narvalo.Fx
     } // End of the class Output.
 }
 
-// Extensions for core CLR types are put into a separate namespace.
 namespace Narvalo.Fx.Advanced
 {
     using System;

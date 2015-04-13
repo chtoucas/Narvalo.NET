@@ -200,7 +200,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Promise.Condition(IsSome, "Proves that any call to this internal property is guarded upstream.");
+                Promise.Condition(IsSome, "Prove that any call to this internal property is guarded upstream.");
                 Contract.Ensures(Contract.Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.
@@ -734,6 +734,8 @@ namespace Narvalo.Fx
                 get { return _inner.IsSome; }
             }
 
+            [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+                Justification = "[Ignore] Debugger-only code.")]
             public T Value
             {
                 get

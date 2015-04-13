@@ -674,7 +674,6 @@ namespace Narvalo.Fx
     } // End of the class Maybe.
 }
 
-// Extensions for core CLR types are put into a separate namespace.
 namespace Narvalo.Fx.Advanced
 {
     using System;

@@ -426,8 +426,7 @@ namespace Narvalo.Edu.Monads
     } // End of the class Identity.
 }
 
-// Extensions for core CLR types are put into a separate namespace.
-namespace Narvalo.Edu.Monads.Advanced
+namespace Narvalo.Edu.Monads
 {
     using System;
     using System.Diagnostics.Contracts;

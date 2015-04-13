@@ -2,6 +2,7 @@
 <# 
     InitializeOr();
 
+    AdvancedNamespace = Namespace;
     UnderlyingTypeConstraint = "struct";
     IsNullable = false;
 #>

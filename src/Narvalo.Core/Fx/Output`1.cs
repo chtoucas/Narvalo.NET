@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
@@ -253,6 +254,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
         internal static Output<T> η(T value)
         {
             return new Success_(value);
@@ -264,6 +266,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
             Justification = "[Ignore] Weird. This method does have plenty of callers inside the assembly.")]
+        [DebuggerHidden]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
@@ -275,6 +278,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
         internal static Output<T> μ(Output<Output<T>> square)
         {
             Require.NotNull(square, "square");

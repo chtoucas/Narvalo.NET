@@ -4,6 +4,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
@@ -116,6 +117,8 @@ namespace Narvalo.Fx
                     _inner = inner;
                 }
 
+                [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
+                    Justification = "[Ignore] Debugger-only code.")]
                 public string Reason
                 {
                     get { return _inner.Reason; }
