@@ -12,6 +12,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Fixed uncorrect and inefficient initialization of `AssetManager`.
 
 #### Breaking changes
+- Moved all money-related classes to the namespace Narvalo.Moneta.
 - Split the Narvalo.Fx.Extensions namespace into Narvalo.Fx.Advanced and Narvalo.Fx.Linq.
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
@@ -22,6 +23,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Refactored the asset providers in an attempt to make them more robust and configurable.
 - Refactored the HTML helpers into "purely" static methods.
 - Renamed "unsafe" methods to "unchecked" methods.
+- Renamed `Predicate` to `Predicates`.
 
 ### Enhancements
 - Added localized resources for the french language.
