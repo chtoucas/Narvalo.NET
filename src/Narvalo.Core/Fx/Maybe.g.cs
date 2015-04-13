@@ -287,8 +287,8 @@ namespace Narvalo.Fx
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
         public static Maybe<TSource> When<TSource>(
-            this Maybe<TSource> @this, 
-            bool predicate, 
+            this Maybe<TSource> @this,
+            bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
@@ -316,7 +316,7 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -376,7 +376,7 @@ namespace Narvalo.Fx
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -399,7 +399,7 @@ namespace Narvalo.Fx
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
