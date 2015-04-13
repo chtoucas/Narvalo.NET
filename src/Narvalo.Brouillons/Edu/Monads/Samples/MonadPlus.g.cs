@@ -652,14 +652,6 @@ namespace Narvalo.Edu.Monads.Samples
 
         #endregion
     } // End of the class MonadPlus.
-}
-
-namespace Narvalo.Edu.Monads.Samples
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    using global::Narvalo;
 
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
@@ -721,7 +713,6 @@ namespace Narvalo.Edu.Monads.Samples
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Edu.Monads.Samples;
     using Narvalo.Edu.Monads.Samples.Internal;
 
     /// <summary>
@@ -763,6 +754,16 @@ namespace Narvalo.Edu.Monads.Samples
 
         #endregion
     } // End of the class EnumerableMonadPlusExtensions.
+}
+
+namespace Narvalo.Edu.Monads.Samples
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
+    using Narvalo.Edu.Monads.Samples;
+    using Narvalo.Edu.Monads.Samples.Internal;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -939,6 +940,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
     using global::Narvalo;
     using Narvalo.Edu.Monads.Samples;
+   
 
     /// <summary>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.

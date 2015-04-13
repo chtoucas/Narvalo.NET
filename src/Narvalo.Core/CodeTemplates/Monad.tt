@@ -408,15 +408,7 @@ namespace <#= Namespace #>
 <#+ EmitCoreClass(); #>
 <#+ WriteNewLine_(); #>
 <#+ EmitExtensions(); #>
-}
-
-namespace <#= AdvancedNamespace #>
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    using global::Narvalo;
-
+<#+ WriteNewLine_(); #>
 <#+ EmitKleisliExtensions(); #>
 }
 <#+
@@ -445,21 +437,30 @@ namespace <#= Namespace #>
     {
         WriteHeader_();
 #>
-namespace <#= LinqNamespace #>
+namespace <#= Namespace #>
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
+    using <#= Namespace #>.Internal;
+
+<#+ EmitEnumerableMonadExtensions(); #>
+}
+
+namespace <#= AdvancedNamespace #>
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     using <#= Namespace #>;
-    using <#= LinqNamespace #>.Internal;
+    using <#= Namespace #>.Internal;
 
-<#+ EmitEnumerableMonadExtensions(); #>
-<#+ WriteNewLine_(); #>
 <#+ EmitEnumerableExtensions(); #>
 }
 
-namespace <#= LinqNamespace #>.Internal
+namespace <#= Namespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -469,6 +470,9 @@ namespace <#= LinqNamespace #>.Internal
 
     using global::Narvalo;
     using <#= Namespace #>;
+<#+ if (Namespace != AdvancedNamespace) { #>   
+    using <#= AdvancedNamespace #>;
+<#+ } #>   
 
 <#+ EmitEnumerableMonadInternalExtensions(); #>
 <#+ WriteNewLine_(); #>

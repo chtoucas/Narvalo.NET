@@ -14,7 +14,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 #### Breaking changes
 - Moved all money-related classes to the newly created Narvalo.Finance namespace.
 - Moved the `IsMetaCurrency` property from `CurrencyInfo` to `Currency`.
-- Split the Narvalo.Fx.Extensions namespace into Narvalo.Fx.Advanced and Narvalo.Fx.Linq.
+- Renamed the Narvalo.Fx.Extensions namespace to Narvalo.Fx.Advanced.
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
 - Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
   Protocol-relative URL appears to be the accepted name, not protocol-less URL.

@@ -424,14 +424,6 @@ namespace Narvalo.Edu.Monads
 
         #endregion
     } // End of the class Identity.
-}
-
-namespace Narvalo.Edu.Monads
-{
-    using System;
-    using System.Diagnostics.Contracts;
-
-    using global::Narvalo;
 
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
@@ -520,7 +512,6 @@ namespace Narvalo.Edu.Monads
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Edu.Monads;
     using Narvalo.Edu.Monads.Internal;
 
     /// <summary>
@@ -546,6 +537,16 @@ namespace Narvalo.Edu.Monads
 
         #endregion
     } // End of the class EnumerableIdentityExtensions.
+}
+
+namespace Narvalo.Edu.Monads
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
+    using Narvalo.Edu.Monads;
+    using Narvalo.Edu.Monads.Internal;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -715,6 +716,7 @@ namespace Narvalo.Edu.Monads.Internal
 
     using global::Narvalo;
     using Narvalo.Edu.Monads;
+   
 
     /// <summary>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.

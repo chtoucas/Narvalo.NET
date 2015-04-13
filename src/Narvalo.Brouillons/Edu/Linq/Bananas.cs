@@ -6,7 +6,6 @@ namespace Narvalo.Edu.Linq
     using System.Collections.Generic;
 
     using Narvalo.Fx;
-    using Narvalo.Fx.Linq;
 
     // LINQ from scratch.
     public static class Bananas
