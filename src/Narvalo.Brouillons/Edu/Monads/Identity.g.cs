@@ -103,7 +103,7 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T>, Identity<TResult>>>() != null);
 
-            return m => 
+            return m =>
             {
                 Require.NotNull(m, "m");
                 return m.Select(fun);
@@ -122,7 +122,7 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
 
-            return (m1, m2) => 
+            return (m1, m2) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, fun);
@@ -141,7 +141,7 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
 
-            return (m1, m2, m3) => 
+            return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, fun);
@@ -161,7 +161,7 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => 
+            return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, fun);
@@ -181,7 +181,7 @@ namespace Narvalo.Edu.Monads
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => 
+            return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -251,15 +251,15 @@ namespace Narvalo.Edu.Monads
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
         public static Identity<TSource> When<TSource>(
-            this Identity<TSource> @this, 
-            bool predicate, 
+            this Identity<TSource> @this,
+            bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Identity<TSource>>() != null);
 
-            if (predicate) 
+            if (predicate)
             {
                 action.Invoke();
             }
@@ -280,7 +280,7 @@ namespace Narvalo.Edu.Monads
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Identity<TSource>>() != null);
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -337,7 +337,7 @@ namespace Narvalo.Edu.Monads
             Func<T1, Identity<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -359,7 +359,7 @@ namespace Narvalo.Edu.Monads
             Func<T1, Identity<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
@@ -738,7 +738,7 @@ namespace Narvalo.Edu.Monads.Internal
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static Identity<IEnumerable<TSource>> CollectCore_<TSource>(
-            Identity<TSource> m, 
+            Identity<TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);

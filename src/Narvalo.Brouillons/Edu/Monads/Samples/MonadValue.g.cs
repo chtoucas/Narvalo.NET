@@ -114,7 +114,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T>, MonadValue<TResult>>>() != null);
 
-            return m => 
+            return m =>
             {
                 return m.Select(fun);
             };
@@ -135,7 +135,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>>() != null);
 
-            return (m1, m2) => 
+            return (m1, m2) =>
             {
                 return m1.Zip(m2, fun);
             };
@@ -157,7 +157,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>>() != null);
 
-            return (m1, m2, m3) => 
+            return (m1, m2, m3) =>
             {
                 return m1.Zip(m2, m3, fun);
             };
@@ -181,7 +181,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => 
+            return (m1, m2, m3, m4) =>
             {
                 return m1.Zip(m2, m3, m4, fun);
             };
@@ -206,7 +206,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => 
+            return (m1, m2, m3, m4, m5) =>
             {
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
@@ -285,15 +285,15 @@ namespace Narvalo.Edu.Monads.Samples
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
         public static MonadValue<TSource> When<TSource>(
-            this MonadValue<TSource> @this, 
-            bool predicate, 
+            this MonadValue<TSource> @this,
+            bool predicate,
             Action action)
             where TSource : struct
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
 
-            if (predicate) 
+            if (predicate)
             {
                 action.Invoke();
             }
@@ -314,7 +314,7 @@ namespace Narvalo.Edu.Monads.Samples
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -377,7 +377,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<T1, MonadValue<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -403,7 +403,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<T1, MonadValue<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
@@ -473,7 +473,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(resultSelector != null);
 
             return @this.GroupJoin(
-                inner, 
+                inner,
                 outerKeySelector,
                 innerKeySelector, 
                 resultSelector, 

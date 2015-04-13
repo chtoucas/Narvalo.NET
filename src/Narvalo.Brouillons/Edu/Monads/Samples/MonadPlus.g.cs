@@ -111,7 +111,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadPlus<T>, MonadPlus<TResult>>>() != null);
 
-            return m => 
+            return m =>
             {
                 Require.NotNull(m, "m");
                 return m.Select(fun);
@@ -130,7 +130,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>>() != null);
 
-            return (m1, m2) => 
+            return (m1, m2) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, fun);
@@ -149,7 +149,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>>() != null);
 
-            return (m1, m2, m3) => 
+            return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, fun);
@@ -169,7 +169,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => 
+            return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, fun);
@@ -189,7 +189,7 @@ namespace Narvalo.Edu.Monads.Samples
         {
             Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => 
+            return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -281,15 +281,15 @@ namespace Narvalo.Edu.Monads.Samples
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
         public static MonadPlus<TSource> When<TSource>(
-            this MonadPlus<TSource> @this, 
-            bool predicate, 
+            this MonadPlus<TSource> @this,
+            bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
-            if (predicate) 
+            if (predicate)
             {
                 action.Invoke();
             }
@@ -310,7 +310,7 @@ namespace Narvalo.Edu.Monads.Samples
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -367,7 +367,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<T1, MonadPlus<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -389,7 +389,7 @@ namespace Narvalo.Edu.Monads.Samples
             Func<T1, MonadPlus<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
@@ -453,7 +453,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(resultSelector != null);
 
             return @this.GroupJoin(
-                inner, 
+                inner,
                 outerKeySelector,
                 innerKeySelector, 
                 resultSelector, 
@@ -962,7 +962,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static MonadPlus<IEnumerable<TSource>> CollectCore_<TSource>(
-            MonadPlus<TSource> m, 
+            MonadPlus<TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);

@@ -173,10 +173,10 @@
     }
 
     #region Postconditions.
-    
+
     // Gets or sets a value indicating whether Monad<T>.Bind() ensures a non-null return value. Default to false.
     protected bool BindEnsuresSome { get; set; }
-    
+
     // Gets or sets a value indicating whether Monad<T>.η() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Return() being just the public alias of Monad<T>.η(), this also applies
     // to the Monad<T>.Return() method.
@@ -198,15 +198,15 @@
     // Gets a value indicating whether Monad<T>.Filter() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Filter() uses Monad<T>.Bind().
     protected bool FilterEnsuresSome { get { return BindEnsuresSome; } }
-    
+
     // Gets a value indicating whether Monad<T>.Coalesce() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Coalesce() uses Monad<T>.Bind().
     protected bool CoalesceEnsuresSome { get { return BindEnsuresSome; } }
-    
+
     // Gets a value indicating whether Monad<T>.Then() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Then() uses Monad<T>.Coalesce().
     protected bool ThenEnsuresSome { get { return CoalesceEnsuresSome; } }
-    
+
     // Gets a value indicating whether Monad<T>.Join() ensures a non-null return value. Default to false.
     // NB: Monad<T>.Join() uses Monad<T>.Map().
     protected bool JoinEnsuresSome { get { return MapEnsuresSome; } }
@@ -214,7 +214,7 @@
     // Gets a value indicating whether Monad<T>.GroupJoin() ensures a non-null return value. Default to false.
     // NB: Monad<T>.GroupJoin() uses Monad<T>.Map().
     protected bool GroupJoinEnsuresSome { get { return MapEnsuresSome; } }
-    
+
     #endregion
 
     #region Type constraints.
@@ -236,7 +236,7 @@
 
     // Gets a value indicating whether the underlying type T satisfies a generic type constraint. Default to false.
     protected bool HasUnderlyingTypeConstraint { get { return _hasUnderlyingTypeConstraint; } }
-    
+
     #endregion
 
     // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
@@ -247,7 +247,7 @@
 
     // Gets a value indicating whether the monad has a Filter method. Default to true.
     protected bool HasFilter { get { return HasZero; } }
-    
+
     // Gets a value indicating whether the monad has Join and GroupJoin methods. Default to true.
     protected bool HasJoin { get { return HasZero; } }
 
@@ -265,7 +265,7 @@
             if (!HasZero) {
                 throw new InvalidOperationException("The monad is not a MonadZero.");
             }
-            
+
             return _zeroName; 
         }  
 
@@ -274,7 +274,7 @@
             if (String.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentException("The name of the Zero property can not be null or blank.");
             }
-            
+
             _zeroName = value;
         } 
     }
@@ -296,7 +296,7 @@
             if (String.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentException("The name of the Plus method can not be null or blank.");
             }
-            
+
             _plusName = value;
         } 
     }
@@ -337,7 +337,7 @@
             if (String.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentException("The name of the Return method can not be null or blank.");
             }
-            
+
             _returnName = value; 
         }
     }
@@ -356,7 +356,7 @@
 
         _initialized = true;
     }
-    
+
     // Initializes a MonadPlus.
     public void InitializePlus()
     {
@@ -576,7 +576,7 @@ namespace <#= Namespace #>.Internal
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
 
-            return m => 
+            return m =>
             {
 <#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m"); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
@@ -596,7 +596,7 @@ namespace <#= Namespace #>.Internal
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
 
-            return (m1, m2) => 
+            return (m1, m2) =>
             {
 <#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
@@ -616,7 +616,7 @@ namespace <#= Namespace #>.Internal
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
 
-            return (m1, m2, m3) => 
+            return (m1, m2, m3) =>
             {
 <#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
@@ -637,7 +637,7 @@ namespace <#= Namespace #>.Internal
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => 
+            return (m1, m2, m3, m4) =>
             {
 <#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
@@ -658,7 +658,7 @@ namespace <#= Namespace #>.Internal
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => 
+            return (m1, m2, m3, m4, m5) =>
             {
 <#+ if (IsNullable) { PushIndent(INDENT); WriteNotNull_("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -814,8 +814,8 @@ namespace <#= Namespace #>.Internal
         /// <para>Haskell use a different signature. The method should return a <see cref="<#= UnitFullName #>"/>.</para>
         /// </remarks>
         public static <#= Name #><TSource> When<TSource>(
-            this <#= Name #><TSource> @this, 
-            bool predicate, 
+            this <#= Name #><TSource> @this,
+            bool predicate,
             Action action)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
@@ -825,7 +825,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            if (predicate) 
+            if (predicate)
             {
                 action.Invoke();
             }
@@ -849,7 +849,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -918,7 +918,7 @@ namespace <#= Namespace #>.Internal
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -944,7 +944,7 @@ namespace <#= Namespace #>.Internal
             Func<T1, <#= Name #><TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
@@ -1054,7 +1054,7 @@ namespace <#= Namespace #>.Internal
 <#+ } #>
 
             return @this.GroupJoin(
-                inner, 
+                inner,
                 outerKeySelector,
                 innerKeySelector, 
                 resultSelector, 
@@ -1458,7 +1458,7 @@ namespace <#= Namespace #>.Internal
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static <#= Name #><IEnumerable<TSource>> CollectCore_<TSource>(
-            <#= Name #><TSource> m, 
+            <#= Name #><TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);

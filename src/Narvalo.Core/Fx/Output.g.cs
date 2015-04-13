@@ -104,7 +104,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Func<Output<T>, Output<TResult>>>() != null);
 
-            return m => 
+            return m =>
             {
                 Require.NotNull(m, "m");
                 return m.Select(fun);
@@ -123,7 +123,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<TResult>>>() != null);
 
-            return (m1, m2) => 
+            return (m1, m2) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, fun);
@@ -142,7 +142,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>>() != null);
 
-            return (m1, m2, m3) => 
+            return (m1, m2, m3) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, fun);
@@ -162,7 +162,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>>() != null);
             
-            return (m1, m2, m3, m4) => 
+            return (m1, m2, m3, m4) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, fun);
@@ -182,7 +182,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>>() != null);
        
-            return (m1, m2, m3, m4, m5) => 
+            return (m1, m2, m3, m4, m5) =>
             {
                 Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, m5, fun);
@@ -252,15 +252,15 @@ namespace Narvalo.Fx
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
         public static Output<TSource> When<TSource>(
-            this Output<TSource> @this, 
-            bool predicate, 
+            this Output<TSource> @this,
+            bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
-            if (predicate) 
+            if (predicate)
             {
                 action.Invoke();
             }
@@ -281,7 +281,7 @@ namespace Narvalo.Fx
             Require.NotNull(action, "action");
             Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
-            if (!predicate) 
+            if (!predicate)
             {
                 action.Invoke();
             }
@@ -338,7 +338,7 @@ namespace Narvalo.Fx
             Func<T1, Output<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
 
             return @this.Bind(g);
@@ -360,7 +360,7 @@ namespace Narvalo.Fx
             Func<T1, Output<TResult>> g
                 = t1 => second.Zip(
                     third,
-                    fourth, 
+                    fourth,
                     fifth,
                     (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
 
@@ -714,7 +714,7 @@ namespace Narvalo.Fx.Internal
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static Output<IEnumerable<TSource>> CollectCore_<TSource>(
-            Output<TSource> m, 
+            Output<TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);

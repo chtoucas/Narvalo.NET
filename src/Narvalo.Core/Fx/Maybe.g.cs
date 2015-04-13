@@ -466,7 +466,7 @@ namespace Narvalo.Fx
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.GroupJoin(
-                inner, 
+                inner,
                 outerKeySelector,
                 innerKeySelector, 
                 resultSelector, 
@@ -985,7 +985,7 @@ namespace Narvalo.Fx.Internal
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static Maybe<IEnumerable<TSource>> CollectCore_<TSource>(
-            Maybe<TSource> m, 
+            Maybe<TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);
