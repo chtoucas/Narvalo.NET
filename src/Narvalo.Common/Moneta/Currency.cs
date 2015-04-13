@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Moneta
 {
     using System;
     using System.Collections.Concurrent;
@@ -8,7 +8,6 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    using Narvalo.Globalization;
     using Narvalo.Internal;
 
     /// <summary>
@@ -27,6 +26,8 @@ namespace Narvalo
     [Serializable]
     public sealed partial class Currency : IEquatable<Currency>
     {
+        private const char META_CURRENCY_MARK = 'X';
+
         // We cache all requested currencies.
         private static readonly ConcurrentDictionary<string, Currency> s_Cache
              = new ConcurrentDictionary<string, Currency>();
@@ -57,6 +58,25 @@ namespace Narvalo
 
                 return _code;
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the currency is a meta-currency.
+        /// </summary>
+        /// <remarks>
+        /// <para>Meta-currencies include supranational currencies (but notice that EUR 
+        /// is not part of them...), precious metals, the test currency, the "no" 
+        /// currency and currencies used in international finance.</para>
+        /// <para>Meta-currencies are not attached to a specific country.
+        /// Their numeric codes are in the range 900-999 and their codes are in the
+        /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes 
+        /// as defined by the ISO 3166 standard, ie they will never clash with 
+        /// those of a real country.</para>
+        /// </remarks>
+        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
+        public bool IsMetaCurrency
+        {
+            get { return Code[0] == META_CURRENCY_MARK; }
         }
 
         /// <summary>
@@ -142,189 +162,6 @@ namespace Narvalo
             }
 
             return new Currency(code);
-        }
-    }
-
-    /// <content>
-    /// Provides user-friendly access to some of the most common currencies.
-    /// </content>
-    public partial class Currency
-    {
-        // We aggressively cache the most common currencies.
-        private static Currency s_Dollar = Of("USD");
-        private static Currency s_Euro = Of("EUR");
-        private static Currency s_Pound = Of("GBP");
-        private static Currency s_SwissFranc = Of("CHF");
-        private static Currency s_Yen = Of("JPY");
-
-        /// <summary>
-        /// Gets the "Special Drawing Right" currency.
-        /// </summary>
-        /// <remarks>This is the currency used by the invariant culture.</remarks>
-        /// <value>The "Special Drawing Right" currency.</value>
-        public static Currency Invariant
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XDR");
-            }
-        }
-
-        /// <summary>
-        /// Gets the pseudo-currency for transactions where no currency is involved.
-        /// </summary>
-        /// <value>The pseudo-currency for transactions where no currency is involved.</value>
-        public static Currency None
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XXX");
-            }
-        }
-
-        /// <summary>
-        /// Gets the currency specifically reserved for testing purposes.
-        /// </summary>
-        /// <value>The currency specifically reserved for testing purposes.</value>
-        public static Currency Test
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XTS");
-            }
-        }
-
-        /// <summary>
-        /// Gets the (British) Pound Sterling currency.
-        /// </summary>
-        /// <value>The (British) Pound Sterling currency.</value>
-        public static Currency Pound
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return s_Pound;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Euro currency.
-        /// </summary>
-        /// <value>The Euro currency.</value>
-        public static Currency Euro
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Euro;
-            }
-        }
-
-        /// <summary>
-        /// Gets the United States Dollar currency.
-        /// </summary>
-        /// <value>The United States Dollar currency.</value>
-        public static Currency Dollar
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return s_Dollar;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Swiss Franc currency.
-        /// </summary>
-        /// <value>The Swiss Franc currency.</value>
-        public static Currency SwissFranc
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_SwissFranc;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Japanese Yen currency.
-        /// </summary>
-        /// <value>The Japanese Yen currency.</value>
-        public static Currency Yen
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return s_Yen;
-            }
-        }
-
-        /// <summary>
-        /// Gets the pseudo-currency for gold.
-        /// </summary>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
-        /// <value>The pseudo-currency for gold.</value>
-        public static Currency Gold
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-                return Of("XAU");
-            }
-        }
-
-        /// <summary>
-        /// Gets the pseudo-currency for palladium.
-        /// </summary>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
-        /// <value>The pseudo-currency for palladium.</value>
-        public static Currency Palladium
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XPD");
-            }
-        }
-
-        /// <summary>
-        /// Gets the pseudo-currency for platinum.
-        /// </summary>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
-        /// <value>The pseudo-currency for platinum.</value>
-        public static Currency Platinum
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XPT");
-            }
-        }
-
-        /// <summary>
-        /// Gets the pseudo-currency for silver.
-        /// </summary>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
-        /// <value>The pseudo-currency for silver.</value>
-        public static Currency Silver
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
-                return Of("XAG");
-            }
         }
     }
 

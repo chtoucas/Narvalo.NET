@@ -7,14 +7,14 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
-    public static class Predicate
+    public static class Predicates
     {
         /// <summary>
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
         /// </summary>
         /// <param name="type">The type to test.</param>
-        /// <returns><c>true</c> if the specified <paramref name="type"/> is a flags enumeration; 
-        /// otherwise <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration; 
+        /// otherwise <see langword="false"/>.</returns>
         [Pure]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
             Justification = "[Intentionally] The rule does not apply here.")]
@@ -29,8 +29,8 @@ namespace Narvalo
         /// Returns a value indicating whether the specified value consists only of white-space characters.
         /// </summary>
         /// <param name="value">The string to test.</param>
-        /// <returns><c>true</c> if the specified value consists only of white-space characters; 
-        /// otherwise <c>false</c>.</returns>
+        /// <returns><see langword="true"/> if the specified value consists only of white-space characters; 
+        /// otherwise <see langword="false"/>.</returns>
         [Pure]
         public static bool IsWhiteSpace(string value)
         {

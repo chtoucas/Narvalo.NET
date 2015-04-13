@@ -119,7 +119,7 @@
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringManipFacts.cs" />
-    <Compile Include="PredicateFacts.cs" />
+    <Compile Include="PredicatesFacts.cs" />
     <Compile Include="TestCommon\Stubs.cs" />
     <Compile Include="Web\Configuration\AssetSectionFacts.cs" />
     <Compile Include="Web\Configuration\NarvaloWebConfigurationManagerFacts.cs" />

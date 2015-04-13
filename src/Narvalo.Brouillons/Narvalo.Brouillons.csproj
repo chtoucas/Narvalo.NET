@@ -147,13 +147,13 @@
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Globalization\CurrencyInfo%24.cs" />
+    <Compile Include="Moneta\CurrencyInfo%24.cs" />
     <Compile Include="Globalization\Locale.cs" />
     <Compile Include="Globalization\Region.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
-    <Compile Include="Globalization\SnvCurrencyLegacyXmlReader.cs" />
-    <Compile Include="Globalization\SnvCurrencyXmlReader.cs" />
-    <Compile Include="Globalization\SnvCurrencyXmlReaderBase.cs" />
+    <Compile Include="Moneta\SnvCurrencyLegacyXmlReader.cs" />
+    <Compile Include="Moneta\SnvCurrencyXmlReader.cs" />
+    <Compile Include="Moneta\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="ImageUtility.cs" />
     <Compile Include="RandomString.cs" />
     <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />

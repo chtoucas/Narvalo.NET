@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Globalization
+namespace Narvalo.Moneta
 {
     using System;
     using System.Diagnostics;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Schema;
-
-    using Narvalo.Fx;
 
     public abstract class SnvCurrencyXmlReaderBase
     {

@@ -7,7 +7,7 @@ namespace Narvalo
     using Narvalo.TestCommon;
     using Xunit;
 
-    public static partial class PredicateFacts
+    public static partial class PredicatesFacts
     {
         #region IsFlagsEnum()
 
@@ -18,7 +18,7 @@ namespace Narvalo
             Type type = null;
 
             // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum(type));
+            Assert.False(Predicates.IsFlagsEnum(type));
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Narvalo
             var type = typeof(My.FlagsEnum);
 
             // Act & Assert
-            Assert.True(Predicate.IsFlagsEnum(type));
+            Assert.True(Predicates.IsFlagsEnum(type));
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Narvalo
             var type = typeof(My.SimpleEnum);
 
             // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum(type));
+            Assert.False(Predicates.IsFlagsEnum(type));
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Narvalo
             var type = typeof(Int32);
 
             // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum(type));
+            Assert.False(Predicates.IsFlagsEnum(type));
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Narvalo
             var type = typeof(My.EmptyStruct);
 
             // Act & Assert
-            Assert.False(Predicate.IsFlagsEnum(type));
+            Assert.False(Predicates.IsFlagsEnum(type));
         }
 
         #endregion
@@ -69,28 +69,28 @@ namespace Narvalo
         public static void IsWhiteSpace_ReturnsTrue_ForEmptyString()
         {
             // Act & Assert
-            Assert.True(Predicate.IsWhiteSpace(String.Empty));
+            Assert.True(Predicates.IsWhiteSpace(String.Empty));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.True(Predicate.IsWhiteSpace(Constants.WhiteSpaceOnlyString));
+            Assert.True(Predicates.IsWhiteSpace(Constants.WhiteSpaceOnlyString));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsFalse_ForNullString()
         {
             // Act & Assert
-            Assert.False(Predicate.IsWhiteSpace(null));
+            Assert.False(Predicates.IsWhiteSpace(null));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsFalse_ForNonEmptyOrWhiteSpaceString()
         {
             // Act & Assert
-            Assert.False(Predicate.IsWhiteSpace("value"));
+            Assert.False(Predicates.IsWhiteSpace("value"));
         }
 
         #endregion

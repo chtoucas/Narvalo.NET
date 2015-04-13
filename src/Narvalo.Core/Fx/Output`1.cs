@@ -41,7 +41,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><c>true</c> if the output is successful; otherwise <c>false</c>.</value>
+        /// <value><see langword="true"/> if the output is successful; otherwise <see langword="false"/>.</value>
         public bool IsSuccess { get { return _isSuccess; } }
 
         #region Explicit casting operators

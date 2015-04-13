@@ -1,6 +1,6 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Globalization
+namespace Narvalo.Moneta
 {
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -19,8 +19,6 @@ namespace Narvalo.Globalization
     /// </remarks>
     public sealed class CurrencyInfo
     {
-        private const char META_CURRENCY_MARK = 'X';
-
         private readonly string _code;
         private readonly short _numericCode;
 
@@ -60,7 +58,22 @@ namespace Narvalo.Globalization
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
+
                 return _code;
+            }
+        }
+
+        /// <summary>
+        /// Gets the currency unit of the currency.
+        /// </summary>
+        /// <value>The currency unit of the currency.</value>
+        public Currency Currency
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return Currency.Of(Code);
             }
         }
 
@@ -89,34 +102,15 @@ namespace Narvalo.Globalization
         /// <summary>
         /// Gets a value indicating whether the currency has a numeric code.
         /// </summary>
-        /// <value><c>true</c> if the currency has a numeric code; otherwise <c>false</c>.</value>
+        /// <value><see langword="true"/> if the currency has a numeric code; otherwise <see langword="false"/>.</value>
         public bool HasNumericCode { get { return NumericCode == 0; } }
 
         /// <summary>
         /// Gets or sets a value indicating whether the currency represents a fund.
         /// </summary>
-        /// <value><c>true</c> if the currency represents a fund; otherwise <c>false</c>.
-        /// The default is <c>false</c>.</value>
+        /// <value><see langword="true"/> if the currency represents a fund; otherwise <see langword="false"/>.
+        /// The default is <see langword="false"/>.</value>
         public bool IsFund { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating whether the currency is a meta-currency.
-        /// </summary>
-        /// <remarks>
-        /// <para>Meta-currencies include supranational currencies (but notice that EUR 
-        /// is not part of them...), precious metals, the test currency, the "no" 
-        /// currency and currencies used in international finance.</para>
-        /// <para>Meta-currencies are not attached to a specific country.
-        /// Their numeric codes are in the range 900-999 and their codes are in the
-        /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes 
-        /// as defined by the ISO 3166 standard, ie they will never clash with 
-        /// those of a real country.</para>
-        /// </remarks>
-        /// <value><c>true</c> if the currency is a meta-currency; otherwise <c>false</c>.</value>
-        public bool IsMetaCurrency
-        {
-            get { return Code[0] == META_CURRENCY_MARK; }
-        }
 
         /// <summary>
         /// Gets or sets the number of minor units.
@@ -146,8 +140,8 @@ namespace Narvalo.Globalization
         /// <summary>
         /// Gets or sets a value indicating whether the currency is no longer in use.
         /// </summary>
-        /// <value><c>true</c> if the currency is no longer in use; otherwise <c>false</c>.
-        /// The default is <c>false</c>.</value>
+        /// <value><see langword="true"/> if the currency is no longer in use; otherwise <see langword="false"/>.
+        /// The default is <see langword="false"/>.</value>
         public bool Superseded { get; set; }
 
         /// <summary>

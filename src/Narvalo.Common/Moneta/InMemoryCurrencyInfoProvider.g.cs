@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Globalization
+namespace Narvalo.Moneta
 {
     using System;
     using System.Collections.Generic;

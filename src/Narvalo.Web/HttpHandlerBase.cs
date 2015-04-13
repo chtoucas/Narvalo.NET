@@ -25,9 +25,9 @@ namespace Narvalo.Web
 
         /// <summary>
         /// Gets or sets a value indicating whether another request can use the <see cref="IHttpHandler"/> instance.
-        /// The default is <c>false</c>.
+        /// The default is <see langword="false"/>.
         /// </summary>
-        /// <value><c>true</c> if the <see cref="IHttpHandler"/> instance is reusable; otherwise, <c>false</c>.</value>
+        /// <value><see langword="true"/> if the <see cref="IHttpHandler"/> instance is reusable; otherwise, <see langword="false"/>.</value>
         public bool IsReusable
         {
             get { return _isReusable; }
@@ -38,9 +38,9 @@ namespace Narvalo.Web
 
         /// <summary>
         /// Gets or sets a value indicating whether IIS 7.0 custom errors are disabled.
-        /// The default is <c>true</c>.
+        /// The default is <see langword="true"/>.
         /// </summary>
-        /// <value><c>true</c> to disable IIS custom errors; otherwise, <c>false</c>.</value>
+        /// <value><see langword="true"/> to disable IIS custom errors; otherwise, <see langword="false"/>.</value>
         public bool TrySkipIisCustomErrors
         {
             get { return _trySkipIIsCustomErrors; }

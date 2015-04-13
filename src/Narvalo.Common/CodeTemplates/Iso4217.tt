@@ -30,6 +30,9 @@
         public bool IsFund { get; set; }
         public short? MinorUnits { get; set; }
         public short NumericCode { get; set; }
+
+        public bool IsLegacy { get; set; }
+        public bool IsMetaCurrency { get { return Code[0] == 'X'; } }
     }
 
     protected bool Debug { get; set; }
@@ -152,6 +155,7 @@
                     EnglishName = englishName,
                     EnglishRegionName = englishRegionName,
                     IsFund = isFund,
+                    IsLegacy = true,
                     NumericCode = numericCode,
                 });
             }

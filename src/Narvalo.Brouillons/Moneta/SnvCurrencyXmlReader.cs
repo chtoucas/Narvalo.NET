@@ -1,5 +1,6 @@
-﻿
-namespace Narvalo.Globalization
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Moneta
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace Narvalo.Globalization
 
     using Narvalo.Xml;
 
-    public sealed class SnvCurrencyLegacyXmlReader : SnvCurrencyXmlReaderBase
+    public sealed class SnvCurrencyXmlReader : SnvCurrencyXmlReaderBase
     {
         private DateTime? _publicationDate;
 
-        public SnvCurrencyLegacyXmlReader(string source) : base(source) { }
+        public SnvCurrencyXmlReader(string source) : base(source) { }
 
         public DateTime PublicationDate
         {
@@ -30,15 +31,15 @@ namespace Narvalo.Globalization
 
         public IEnumerable<CurrencyInfo> Read()
         {
-            XElement root = ReadContent();
+            var root = ReadContent();
 
             _publicationDate = root
                 .AttributeOrThrow("Pblshd", ExceptionThunk("XXX"))
                 .Value(ProcessPublicationDate);
 
-            List<XElement> currencyElements = root
-                .ElementOrThrow("HstrcCcyTbl", ExceptionThunk("XXX"))
-                .Elements("HstrcCcyNtry")
+            var currencyElements = root
+                .ElementOrThrow("CcyTbl", ExceptionThunk("XXX"))
+                .Elements("CcyNtry")
                 .ToList();
 
             if (currencyElements.Count == 0)
@@ -55,19 +56,20 @@ namespace Narvalo.Globalization
                 string englishName = englishNameElement.Value(ProcessCurrencyName);
 
                 // Alphabetic Code
-                string code = currencyElement
-                    .ElementOrThrow("Ccy", ExceptionThunk("XXX"))
-                    .Value(ProcessAlphabeticCode);
+                XElement codeElement = currencyElement.Element("Ccy");
+                if (codeElement == null)
+                {
+                    Debug.WriteLine("Found a country without universal currency: " + englishName);
+
+                    continue;
+                }
+
+                var code = codeElement.Value(ProcessAlphabeticCode);
 
                 // Numeric Code
                 short numericCode = currencyElement
-                    .ElementOrNone("CcyNbr")
-                    .MapValue(ProcessNumericCode)
-                    .ValueOrElse(0);
-                if (numericCode == 0)
-                {
-                    Debug.WriteLine("Found a currency without a numeric code: " + englishName);
-                }
+                    .ElementOrThrow("CcyNbr", ExceptionThunk("XXX"))
+                    .Value(ProcessNumericCode);
 
                 // Fund?
                 bool isFund = englishNameElement
@@ -80,11 +82,16 @@ namespace Narvalo.Globalization
                     .ElementOrThrow("CtryNm", ExceptionThunk("XXX"))
                     .Value(ProcessRegionName);
 
+                // Minor Units
+                short? minorUnits = currencyElement
+                    .ElementOrThrow("CcyMnrUnts", ExceptionThunk("XXX"))
+                    .Value(ProcessMinorUnits);
+
                 yield return new CurrencyInfo(code, numericCode) {
                     EnglishName = englishName,
                     EnglishRegionName = englishRegionName,
                     IsFund = isFund,
-                    Superseded = true,
+                    MinorUnits = minorUnits,
                 };
             }
         }

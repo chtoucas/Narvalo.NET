@@ -185,7 +185,7 @@ namespace Narvalo.Fx
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><c>true</c> if the object does hold a value; otherwise <c>false</c>.</value>
+        /// <value><see langword="true"/> if the object does hold a value; otherwise <see langword="false"/>.</value>
         public bool IsSome { get { return _isSome; } }
 
         /// <summary>

@@ -1,52 +1,52 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Moneta
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     [SuppressMessage("Gendarme.Rules.Naming", "AvoidTypeInterfaceInconsistencyRule")]
-    public sealed class CurrencyProvider
+    public sealed class CurrencyInfoProvider
     {
-        private static readonly CurrencyProvider s_Instance = new CurrencyProvider();
+        private static readonly CurrencyInfoProvider s_Instance = new CurrencyInfoProvider();
 
-        private ICurrencyProvider _current;
+        private ICurrencyInfoProvider _current;
 
-        public CurrencyProvider() : this(null) { }
+        public CurrencyInfoProvider() : this(null) { }
 
-        public CurrencyProvider(ICurrencyProvider provider)
+        public CurrencyInfoProvider(ICurrencyInfoProvider provider)
         {
-            InnerSetProvider(provider ?? new InMemoryCurrencyProvider());
+            InnerSetProvider(provider ?? new InMemoryCurrencyInfoProvider());
         }
 
-        public static ICurrencyProvider Current
+        public static ICurrencyInfoProvider Current
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+                Contract.Ensures(Contract.Result<ICurrencyInfoProvider>() != null);
 
                 return s_Instance.InnerCurrent;
             }
         }
 
-        public ICurrencyProvider InnerCurrent
+        public ICurrencyInfoProvider InnerCurrent
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+                Contract.Ensures(Contract.Result<ICurrencyInfoProvider>() != null);
 
                 return _current;
             }
         }
 
-        public static void SetProvider(ICurrencyProvider provider)
+        public static void SetProvider(ICurrencyInfoProvider provider)
         {
             Contract.Requires(provider != null);
 
             s_Instance.InnerSetProvider(provider);
         }
 
-        public void InnerSetProvider(ICurrencyProvider provider)
+        public void InnerSetProvider(ICurrencyInfoProvider provider)
         {
             Require.NotNull(provider, "provider");
 
