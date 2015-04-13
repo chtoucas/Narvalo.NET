@@ -439,7 +439,6 @@ namespace <#= Namespace #>
 #>
 namespace <#= Namespace #>
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
@@ -464,7 +463,6 @@ namespace <#= Namespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -1377,7 +1375,7 @@ namespace <#= Namespace #>.Internal
     {
 #>
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class..
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
 <#+ WriteCompilerAttributes_(); #>
     public static partial class Enumerable<#= Name #>Extensions

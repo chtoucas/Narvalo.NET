@@ -508,14 +508,13 @@ namespace Narvalo.Edu.Monads
 
 namespace Narvalo.Edu.Monads
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Edu.Monads.Internal;
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class..
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -710,7 +709,6 @@ namespace Narvalo.Edu.Monads.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
 

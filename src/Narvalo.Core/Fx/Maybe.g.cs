@@ -730,14 +730,13 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Internal;
 
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class..
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
@@ -955,7 +954,6 @@ namespace Narvalo.Fx.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
