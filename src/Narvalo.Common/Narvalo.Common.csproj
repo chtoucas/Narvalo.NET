@@ -71,26 +71,26 @@
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="ConvertTo.cs" />
-    <Compile Include="Moneta\Currencies\Currencies.g.cs">
+    <Compile Include="Finance\Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Currencies.tt</DependentUpon>
     </Compile>
-    <Compile Include="Moneta\Money.cs" />
-    <Compile Include="Moneta\UnitedStatesDollar.cs" />
-    <Compile Include="Moneta\PoundSterling.cs" />
-    <Compile Include="Moneta\Silver.cs" />
-    <Compile Include="Moneta\Platinum.cs" />
-    <Compile Include="Moneta\Palladium.cs" />
-    <Compile Include="Moneta\Gold.cs" />
-    <Compile Include="Moneta\TestCurrency.cs" />
-    <Compile Include="Moneta\NoCurrency.cs" />
-    <Compile Include="Moneta\InvariantCurrency.cs" />
-    <Compile Include="Moneta\Yen.cs" />
-    <Compile Include="Moneta\SwissFranc.cs" />
-    <Compile Include="Moneta\Euro.cs" />
-    <Compile Include="Moneta\Currency.cs" />
-    <Compile Include="Moneta\CurrencyInfoProvider.cs" />
+    <Compile Include="Finance\Money.cs" />
+    <Compile Include="Finance\UnitedStatesDollar.cs" />
+    <Compile Include="Finance\PoundSterling.cs" />
+    <Compile Include="Finance\Silver.cs" />
+    <Compile Include="Finance\Platinum.cs" />
+    <Compile Include="Finance\Palladium.cs" />
+    <Compile Include="Finance\Gold.cs" />
+    <Compile Include="Finance\TestCurrency.cs" />
+    <Compile Include="Finance\NoCurrency.cs" />
+    <Compile Include="Finance\InvariantCurrency.cs" />
+    <Compile Include="Finance\Yen.cs" />
+    <Compile Include="Finance\SwissFranc.cs" />
+    <Compile Include="Finance\Euro.cs" />
+    <Compile Include="Finance\Currency.cs" />
+    <Compile Include="Finance\CurrencyInfoProvider.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -101,23 +101,23 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
-    <Compile Include="Moneta\CurrencyException.cs" />
-    <Compile Include="Moneta\CurrencyInfo.cs" />
-    <Compile Include="Moneta\CurrencyInfoCollection.cs" />
-    <Compile Include="Moneta\CurrencyNotFoundException.cs" />
-    <Compile Include="Moneta\CurrencyProvider.cs" />
-    <Compile Include="Moneta\CurrencyTypes.cs" />
-    <Compile Include="Moneta\InMemoryCurrencyInfoProvider.cs" />
-    <Compile Include="Moneta\InMemoryCurrencyInfoProvider.g.cs">
+    <Compile Include="Finance\CurrencyException.cs" />
+    <Compile Include="Finance\CurrencyInfo.cs" />
+    <Compile Include="Finance\CurrencyInfoCollection.cs" />
+    <Compile Include="Finance\CurrencyNotFoundException.cs" />
+    <Compile Include="Finance\CurrencyProvider.cs" />
+    <Compile Include="Finance\CurrencyTypes.cs" />
+    <Compile Include="Finance\InMemoryCurrencyInfoProvider.cs" />
+    <Compile Include="Finance\InMemoryCurrencyInfoProvider.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InMemoryCurrencyInfoProvider.tt</DependentUpon>
     </Compile>
-    <Compile Include="Moneta\ICurrencyInfoProvider.cs" />
+    <Compile Include="Finance\ICurrencyInfoProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Moneta\ICurrencyProvider.cs" />
-    <Compile Include="Moneta\InMemoryCurrencyProvider.cs" />
-    <Compile Include="Moneta\InMemoryCurrencyProvider.g.cs">
+    <Compile Include="Finance\ICurrencyProvider.cs" />
+    <Compile Include="Finance\InMemoryCurrencyProvider.cs" />
+    <Compile Include="Finance\InMemoryCurrencyProvider.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InMemoryCurrencyProvider.tt</DependentUpon>
@@ -181,15 +181,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeTemplates\Iso4217.tt" />
-    <None Include="Moneta\Currencies\Currencies.tt">
+    <None Include="Finance\Currencies\Currencies.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Currencies.g.cs</LastGenOutput>
     </None>
-    <None Include="Moneta\InMemoryCurrencyInfoProvider.tt">
+    <None Include="Finance\InMemoryCurrencyInfoProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>
     </None>
-    <None Include="Moneta\InMemoryCurrencyProvider.tt">
+    <None Include="Finance\InMemoryCurrencyProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InMemoryCurrencyProvider.g.cs</LastGenOutput>
     </None>

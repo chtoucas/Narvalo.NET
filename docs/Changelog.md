@@ -12,7 +12,7 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Fixed uncorrect and inefficient initialization of `AssetManager`.
 
 #### Breaking changes
-- Moved all money-related classes to the newly created Narvalo.Moneta namespace.
+- Moved all money-related classes to the newly created Narvalo.Finance namespace.
 - Moved the `IsMetaCurrency` property from `CurrencyInfo` to `Currency`.
 - Split the Narvalo.Fx.Extensions namespace into Narvalo.Fx.Advanced and Narvalo.Fx.Linq.
 - Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
