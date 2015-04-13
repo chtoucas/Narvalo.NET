@@ -126,11 +126,7 @@ namespace Narvalo.Moneta
             Require.NotNull(cultureInfo, "cultureInfo");
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            var code = new RegionInfo(cultureInfo.LCID).ISOCurrencySymbol.AssumeNotNull();
-
-            Contract.Assume(code.Length == 3);
-
-            return Of(code);
+            return OfRegion(new RegionInfo(cultureInfo.LCID));
         }
 
         /// <summary>
@@ -143,7 +139,26 @@ namespace Narvalo.Moneta
         {
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return OfCulture(CultureInfo.CurrentCulture);
+            return OfRegion(new RegionInfo(CultureInfo.CurrentCulture.LCID));
+        }
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Currency" /> class associated with the specified region.
+        /// </summary>
+        /// <param name="regionInfo">A region info.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="regionInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified region.</exception>
+        /// <returns>The currency for the specified region info.</returns>
+        public static Currency OfRegion(RegionInfo regionInfo)
+        {
+            Require.NotNull(regionInfo, "regionInfo");
+            Contract.Ensures(Contract.Result<Currency>() != null);
+
+            var code = regionInfo.ISOCurrencySymbol.AssumeNotNull();
+
+            Contract.Assume(code.Length == 3);
+
+            return Of(code);
         }
 
         /// <summary>
