@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class TestCurrency
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XTS");
+        internal const string Code = "XTS";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the currency specifically reserved for testing purposes.

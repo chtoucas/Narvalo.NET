@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class NoCurrency
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XXX");
+        internal const string Code = "XXX";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the pseudo-currency for transactions where no currency is involved.

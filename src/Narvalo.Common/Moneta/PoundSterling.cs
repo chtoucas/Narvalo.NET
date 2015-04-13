@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class PoundSterling
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XPD");
+        internal const string Code = "GBP";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the (British) "Pound Sterling" currency.

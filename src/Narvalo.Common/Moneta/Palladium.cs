@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class Palladium
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XPD");
+        internal const string Code = "XPD";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the pseudo-currency for palladium.

@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class UnitedStatesDollar
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XPD");
+        internal const string Code = "USD";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the "United States Dollar" currency.

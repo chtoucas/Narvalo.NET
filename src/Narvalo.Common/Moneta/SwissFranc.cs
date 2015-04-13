@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class SwissFranc
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("CHF");
+        internal const string Code = "CHF";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the "Swiss Franc" currency.

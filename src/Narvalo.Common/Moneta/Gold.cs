@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class Gold
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XAU");
+        internal const string Code = "XAU";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the pseudo-currency for gold.

@@ -93,6 +93,23 @@ namespace Narvalo.Moneta
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
+            // Fast-track for the most commonly used currencies.
+            switch (code)
+            {
+                case Euro.Code:
+                    return Euro.Currency;
+                case PoundSterling.Code:
+                    return PoundSterling.Currency;
+                case SwissFranc.Code:
+                    return SwissFranc.Currency;
+                case UnitedStatesDollar.Code:
+                    return UnitedStatesDollar.Currency;
+                case Yen.Code:
+                    return Yen.Currency;
+                case NoCurrency.Code:
+                    return NoCurrency.Currency;
+            }
+
             return s_Cache.GetOrAdd(code, GetCurrency_).AssumeNotNull();
         }
 

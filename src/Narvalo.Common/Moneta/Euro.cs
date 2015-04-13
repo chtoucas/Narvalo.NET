@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class Euro
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("EUR");
+        internal const string Code = "EUR";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the "Euro" currency.

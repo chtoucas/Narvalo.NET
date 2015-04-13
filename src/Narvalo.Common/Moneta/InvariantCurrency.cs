@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class InvariantCurrency
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("XDR");
+        public const string Code = "XDR";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the "Special Drawing Right" currency.

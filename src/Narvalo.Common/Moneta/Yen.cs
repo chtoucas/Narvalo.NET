@@ -9,7 +9,9 @@ namespace Narvalo.Moneta
     /// </summary>
     public static class Yen
     {
-        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of("JPY");
+        internal const string Code = "JPY";
+
+        private static readonly Currency s_Currency = Narvalo.Moneta.Currency.Of(Code);
 
         /// <summary>
         /// Gets the Japanese Yen currency.
