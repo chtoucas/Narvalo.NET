@@ -147,7 +147,20 @@
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Expando.cs" />
+    <Compile Include="Finance\Bban.cs" />
+    <Compile Include="Finance\Bic.cs" />
     <Compile Include="Finance\CurrencyInfo%24.cs" />
+    <Compile Include="Finance\Iban.cs" />
+    <Compile Include="Finance\Legacy\CurrencyInfo.cs" />
+    <Compile Include="Finance\Legacy\CurrencyInfoCollection.cs" />
+    <Compile Include="Finance\Legacy\CurrencyInfoProvider.cs" />
+    <Compile Include="Finance\Legacy\ICurrencyInfoProvider.cs" />
+    <Compile Include="Finance\Legacy\InMemoryCurrencyInfoProvider.cs" />
+    <Compile Include="Finance\Legacy\InMemoryCurrencyInfoProvider.g.cs">
+      <DependentUpon>InMemoryCurrencyInfoProvider.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Globalization\Locale.cs" />
     <Compile Include="Globalization\Region.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
@@ -327,6 +340,10 @@
     <None Include="Edu\Monads\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
+    <None Include="Finance\Legacy\InMemoryCurrencyInfoProvider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>
     </None>
     <None Include="Narvalo.Brouillons.props">
       <SubType>Designer</SubType>

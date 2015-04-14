@@ -9,9 +9,9 @@ namespace Narvalo.Finance
     /// </summary>
     public static class SwissFranc
     {
-        internal const string Code = "CHF";
+        internal const string CurrencyCode = "CHF";
 
-        private static readonly Currency s_Currency = new Currency(Code);
+        private static readonly Currency s_Currency = new Currency(CurrencyCode);
 
         /// <summary>
         /// Gets the "Swiss Franc" currency.

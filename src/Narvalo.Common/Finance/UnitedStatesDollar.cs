@@ -9,9 +9,9 @@ namespace Narvalo.Finance
     /// </summary>
     public static class UnitedStatesDollar
     {
-        internal const string Code = "USD";
+        internal const string CurrencyCode = "USD";
 
-        private static readonly Currency s_Currency = new Currency(Code);
+        private static readonly Currency s_Currency = new Currency(CurrencyCode);
 
         /// <summary>
         /// Gets the "United States Dollar" currency.

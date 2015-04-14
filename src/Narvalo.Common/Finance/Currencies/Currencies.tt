@@ -1,10 +1,7 @@
 ﻿<#@ include file="..\..\CodeTemplates\Iso4217.tt" #>
-<#@ import namespace="System.Globalization" #>
 <#
 
-var currentCurrencies = ParseCurrent(@"..\..\Resources\ISO4217\20150101\A1.xml");
-var legacyCurrencies = ParseLegacy(@"..\..\Resources\ISO4217\20150101\A3.xml");
-var currencies = currentCurrencies.Concat(legacyCurrencies);
+var currencies = ParseCurrent(@"..\..\Resources\ISO4217\20150101\A1.xml");
 
 var codeSet = new HashSet<string>();
 
@@ -25,7 +22,7 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
     Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
-    Justification = "[GeneratedCode] Closing curly bracket rule is disabled for T4 templates.")]
+    Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
 
 namespace <#= InferNamespace() #>
 {
@@ -46,9 +43,21 @@ namespace <#= InferNamespace() #>
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
-    public static class <#= currency.Code #>
+    public sealed class <#= currency.Code #> : Currency
     {
         private static readonly Currency s_Currency = new Currency("<#= currency.Code #>");
+
+        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("<#= currency.Code #>", <#= currency.NumericCode #>) {
+            EnglishName = @"<#= currency.EnglishName #>",
+<# if (currency.IsFund) { #>
+            IsFund = true,
+<# } #>
+<# if (currency.MinorUnits.HasValue) { #>
+            MinorUnits = <#= currency.MinorUnits.Value.ToString() #>
+<# } #>
+        };
+
+        private <#= currency.Code #>() : base("<#= currency.Code #>") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".
@@ -60,6 +69,19 @@ namespace <#= InferNamespace() #>
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
                 return s_Currency;
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".</value>
+        public static CurrencyInfo CurrencyInfo
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
+                return s_CurrencyInfo;
             }
         }
     }

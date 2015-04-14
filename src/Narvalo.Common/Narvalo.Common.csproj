@@ -76,21 +76,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Currencies.tt</DependentUpon>
     </Compile>
+    <Compile Include="Finance\CurrencyInfo.cs" />
+    <Compile Include="Finance\Gold.cs" />
+    <Compile Include="Finance\ICurrencyProvider.cs" />
+    <Compile Include="Finance\Money`1.cs" />
     <Compile Include="Finance\Money.cs" />
+    <Compile Include="Finance\Palladium.cs" />
+    <Compile Include="Finance\Platinum.cs" />
+    <Compile Include="Finance\Silver.cs" />
     <Compile Include="Finance\UnitedStatesDollar.cs" />
     <Compile Include="Finance\PoundSterling.cs" />
-    <Compile Include="Finance\Silver.cs" />
-    <Compile Include="Finance\Platinum.cs" />
-    <Compile Include="Finance\Palladium.cs" />
-    <Compile Include="Finance\Gold.cs" />
     <Compile Include="Finance\TestCurrency.cs" />
     <Compile Include="Finance\NoCurrency.cs" />
-    <Compile Include="Finance\InvariantCurrency.cs" />
     <Compile Include="Finance\Yen.cs" />
     <Compile Include="Finance\SwissFranc.cs" />
     <Compile Include="Finance\Euro.cs" />
     <Compile Include="Finance\Currency.cs" />
-    <Compile Include="Finance\CurrencyInfoProvider.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -102,20 +103,10 @@
     <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
     <Compile Include="Finance\CurrencyException.cs" />
-    <Compile Include="Finance\CurrencyInfo.cs" />
-    <Compile Include="Finance\CurrencyInfoCollection.cs" />
     <Compile Include="Finance\CurrencyNotFoundException.cs" />
     <Compile Include="Finance\CurrencyProvider.cs" />
     <Compile Include="Finance\CurrencyTypes.cs" />
-    <Compile Include="Finance\InMemoryCurrencyInfoProvider.cs" />
-    <Compile Include="Finance\InMemoryCurrencyInfoProvider.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InMemoryCurrencyInfoProvider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\ICurrencyInfoProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Finance\ICurrencyProvider.cs" />
     <Compile Include="Finance\InMemoryCurrencyProvider.cs" />
     <Compile Include="Finance\InMemoryCurrencyProvider.g.cs">
       <AutoGen>True</AutoGen>
@@ -184,10 +175,6 @@
     <None Include="Finance\Currencies\Currencies.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Currencies.g.cs</LastGenOutput>
-    </None>
-    <None Include="Finance\InMemoryCurrencyInfoProvider.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>
     </None>
     <None Include="Finance\InMemoryCurrencyProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

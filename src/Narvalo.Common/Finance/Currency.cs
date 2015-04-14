@@ -24,10 +24,8 @@ namespace Narvalo.Finance
     /// If you needed so, you may use to the <see cref="CurrencyInfo"/> class.</para>
     /// </remarks>
     [Serializable]
-    public sealed partial class Currency : IEquatable<Currency>
+    public partial class Currency : IEquatable<Currency>
     {
-        private const char META_CURRENCY_MARK = 'X';
-
         // We cache all requested currencies.
         private static readonly ConcurrentDictionary<string, Currency> s_Cache
              = new ConcurrentDictionary<string, Currency>();
@@ -40,8 +38,7 @@ namespace Narvalo.Finance
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
         internal Currency(string code)
         {
-            Contract.Requires(code != null);
-            Contract.Requires(code.Length == 3);
+            ContractFor.CurrencyCode(code);
 
             _code = code;
         }
@@ -61,25 +58,6 @@ namespace Narvalo.Finance
         }
 
         /// <summary>
-        /// Gets a value indicating whether the currency is a meta-currency.
-        /// </summary>
-        /// <remarks>
-        /// <para>Meta-currencies include supranational currencies (but notice that EUR 
-        /// is not part of them...), precious metals, the test currency, the "no" 
-        /// currency and currencies used in international finance.</para>
-        /// <para>Meta-currencies are not attached to a specific country.
-        /// Their numeric codes are in the range 900-999 and their codes are in the
-        /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes 
-        /// as defined by the ISO 3166 standard, ie they will never clash with 
-        /// those of a real country.</para>
-        /// </remarks>
-        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public bool IsMetaCurrency
-        {
-            get { return Code[0] == META_CURRENCY_MARK; }
-        }
-
-        /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
@@ -89,24 +67,24 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            Require.NotNullOrWhiteSpace(code, "code");
+            //Require.NotNullOrWhiteSpace(code, "code");
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             // Fast-track for the most commonly used currencies.
             switch (code)
             {
-                case Euro.Code:
+                case Euro.CurrencyCode:
                     return Euro.Currency;
-                case PoundSterling.Code:
+                case PoundSterling.CurrencyCode:
                     return PoundSterling.Currency;
-                case SwissFranc.Code:
+                case SwissFranc.CurrencyCode:
                     return SwissFranc.Currency;
-                case UnitedStatesDollar.Code:
+                case UnitedStatesDollar.CurrencyCode:
                     return UnitedStatesDollar.Currency;
-                case Yen.Code:
+                case Yen.CurrencyCode:
                     return Yen.Currency;
-                case NoCurrency.Code:
+                case NoCurrency.CurrencyCode:
                     return NoCurrency.Currency;
             }
 
@@ -170,6 +148,11 @@ namespace Narvalo.Finance
             Contract.Ensures(Contract.Result<string>() != null);
 
             return _code;
+        }
+
+        internal static TCurrency OfInternal<TCurrency>() where TCurrency : Currency
+        {
+            return Activator.CreateInstance(typeof(TCurrency), nonPublic: true) as TCurrency;
         }
 
         /// <summary>

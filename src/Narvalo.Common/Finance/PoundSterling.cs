@@ -9,9 +9,9 @@ namespace Narvalo.Finance
     /// </summary>
     public static class PoundSterling
     {
-        internal const string Code = "GBP";
+        internal const string CurrencyCode = "GBP";
 
-        private static readonly Currency s_Currency = new Currency(Code);
+        private static readonly Currency s_Currency = new Currency(CurrencyCode);
 
         /// <summary>
         /// Gets the (British) "Pound Sterling" currency.

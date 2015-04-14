@@ -9,9 +9,9 @@ namespace Narvalo.Finance
     /// </summary>
     public static class NoCurrency
     {
-        internal const string Code = "XXX";
+        internal const string CurrencyCode = "XXX";
 
-        private static readonly Currency s_Currency = new Currency(Code);
+        private static readonly Currency s_Currency = new Currency(CurrencyCode);
 
         /// <summary>
         /// Gets the pseudo-currency for transactions where no currency is involved.

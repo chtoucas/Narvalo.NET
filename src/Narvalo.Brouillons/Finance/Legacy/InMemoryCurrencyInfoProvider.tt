@@ -1,8 +1,8 @@
-﻿<#@ include file="..\CodeTemplates\Iso4217.tt" #>
+﻿<#@ include file="..\..\..\Narvalo.Common\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
-var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\20150101\A3.xml");
+var currentCurrencies = ParseCurrent(@"..\..\..\Narvalo.Common\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\..\..\Narvalo.Common\Resources\ISO4217\20150101\A3.xml");
 
 #>
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.

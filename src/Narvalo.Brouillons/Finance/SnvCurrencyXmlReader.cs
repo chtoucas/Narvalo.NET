@@ -9,6 +9,7 @@ namespace Narvalo.Finance
     using System.Xml.Linq;
 
     using Narvalo.Xml;
+    using Narvalo.Finance.Legacy;
 
     public sealed class SnvCurrencyXmlReader : SnvCurrencyXmlReaderBase
     {
@@ -89,7 +90,7 @@ namespace Narvalo.Finance
 
                 yield return new CurrencyInfo(code, numericCode) {
                     EnglishName = englishName,
-                    EnglishRegionName = englishRegionName,
+                    //EnglishRegionName = englishRegionName,
                     IsFund = isFund,
                     MinorUnits = minorUnits,
                 };

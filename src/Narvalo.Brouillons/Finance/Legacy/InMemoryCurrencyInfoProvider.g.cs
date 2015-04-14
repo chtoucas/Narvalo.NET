@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Finance
+namespace Narvalo.Finance.Legacy
 {
     using System;
     using System.Collections.Generic;

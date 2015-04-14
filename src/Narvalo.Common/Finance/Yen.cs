@@ -9,9 +9,9 @@ namespace Narvalo.Finance
     /// </summary>
     public static class Yen
     {
-        internal const string Code = "JPY";
+        internal const string CurrencyCode = "JPY";
 
-        private static readonly Currency s_Currency = new Currency(Code);
+        private static readonly Currency s_Currency = new Currency(CurrencyCode);
 
         /// <summary>
         /// Gets the Japanese Yen currency.

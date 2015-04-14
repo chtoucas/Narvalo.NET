@@ -1,8 +1,9 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance
+namespace Narvalo.Finance.Legacy
 {
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     using Narvalo.Internal;
 
@@ -10,7 +11,7 @@ namespace Narvalo.Finance
     /// Provides information about a localized currency.
     /// </summary>
     /// <remarks>
-    /// <para>You can define your own set of currencies by using a custom <see cref="ICurrencyProvider"/>.</para>
+    /// <para>You can define your own set of currencies by creating a <see cref="ICurrencyInfoProvider"/>.</para>
     /// <para>Different currencies may have the same <see cref="CurrencyInfo.Code"/>
     /// and <see cref="CurrencyInfo.NumericCode"/> but be associated to different 
     /// regions/countries. There is no 1-1 correspondance between currencies
@@ -18,8 +19,6 @@ namespace Narvalo.Finance
     /// </remarks>
     public sealed class CurrencyInfo
     {
-        private const char META_CURRENCY_MARK = 'X';
-
         private readonly string _code;
         private readonly short _numericCode;
 
@@ -31,8 +30,8 @@ namespace Narvalo.Finance
         /// <param name="numericCode">A numeric identifier defined in ISO 4217.</param>
         public CurrencyInfo(string code, short numericCode)
         {
-            Require.NotNullOrWhiteSpace(code, "code");
-            ContractFor.CurrencyCode(code);
+            //Require.NotNullOrWhiteSpace(code, "code");
+            //ContractFor.CurrencyCode(code);
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");
@@ -88,6 +87,19 @@ namespace Narvalo.Finance
         public string EnglishName { get; set; }
 
         /// <summary>
+        /// Gets or sets the full name of the country/region in English.
+        /// </summary>
+        /// <remarks>
+        /// <para>This name is not guaranteed to match the value of 
+        /// <see cref="RegionInfo.EnglishName"/>.</para>
+        /// <para>Most meta-currencies do not belong to a region but they still
+        /// get a pseudo region name. Besides that, most of these currencies use
+        /// a region name that starts with "ZZ" to make it clear.</para>
+        /// </remarks>
+        /// <value>The full name of the country/region in English.</value>
+        public string EnglishRegionName { get; set; }
+
+        /// <summary>
         /// Gets a value indicating whether the currency has a numeric code.
         /// </summary>
         /// <value><see langword="true"/> if the currency has a numeric code; otherwise <see langword="false"/>.</value>
@@ -99,25 +111,6 @@ namespace Narvalo.Finance
         /// <value><see langword="true"/> if the currency represents a fund; otherwise <see langword="false"/>.
         /// The default is <see langword="false"/>.</value>
         public bool IsFund { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating whether the currency is a meta-currency.
-        /// </summary>
-        /// <remarks>
-        /// <para>Meta-currencies include supranational currencies (but notice that EUR 
-        /// is not part of them...), precious metals, the test currency, the "no" 
-        /// currency and currencies used in international finance.</para>
-        /// <para>Meta-currencies are not attached to a specific country.
-        /// Their numeric codes are in the range 900-999 and their codes are in the
-        /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes 
-        /// as defined by the ISO 3166 standard, ie they will never clash with 
-        /// those of a real country.</para>
-        /// </remarks>
-        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public bool IsMetaCurrency
-        {
-            get { return Code[0] == META_CURRENCY_MARK; }
-        }
 
         /// <summary>
         /// Gets or sets the number of minor units.
@@ -144,11 +137,45 @@ namespace Narvalo.Finance
         /// <value>The numeric code of the currency; zero if the currency has no numeric code.</value>
         public short NumericCode { get { return _numericCode; } }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the currency is no longer in use.
+        /// </summary>
+        /// <value><see langword="true"/> if the currency is no longer in use; otherwise <see langword="false"/>.
+        /// The default is <see langword="false"/>.</value>
+        public bool Superseded { get; set; }
+
+        /// <summary>
+        /// Obtains the list of currently active currencies.
+        /// </summary>
+        /// <example>
+        /// Obtains the list of currency/country using the euro:
+        /// <code>
+        /// CurrencyInfo.GetCurrencies().Where(_ => _.Code == "EUR");
+        /// </code>
+        /// </example>
+        public static CurrencyInfoCollection GetCurrencies()
+        {
+            return GetCurrencies(CurrencyTypes.CurrentCurrencies);
+        }
+
+        /// <summary>
+        /// Obtains the list of supported currencies filtered by the specified
+        /// <see cref="CurrencyTypes"/> parameter.
+        /// </summary>
+        /// <param name="types">A bitwise combination of the enumeration values 
+        /// that filter the currencies to retrieve.</param>
+        /// <returns>An enumeration that contains the currencies specified by 
+        /// the <paramref name="types"/> parameter.</returns>
+        public static CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
+        {
+            return CurrencyInfoProvider.Current.GetCurrencies(types);
+        }
+
         public override string ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return Format.CurrentCulture("{0} ({1})", EnglishName, Code);
+            return Format.CurrentCulture("{0} ({1})", EnglishName, EnglishRegionName);
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

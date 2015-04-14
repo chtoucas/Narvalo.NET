@@ -132,4 +132,7 @@
   <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
     <value>Caractère illégal '{0}' trouvé à la position '{1}'.</value>
   </data>
+  <data name="Money_ArgIsNotMoney" xml:space="preserve">
+    <value>L'argument doit être de type Money.</value>
+  </data>
 </root>

@@ -104,5 +104,14 @@ namespace Narvalo.Properties {
                 return ResourceManager.GetString("Int64Encoder_IllegalCharacter_Format", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified argument must be of Money type..
+        /// </summary>
+        internal static string Money_ArgIsNotMoney {
+            get {
+                return ResourceManager.GetString("Money_ArgIsNotMoney", resourceCulture);
+            }
+        }
     }
 }

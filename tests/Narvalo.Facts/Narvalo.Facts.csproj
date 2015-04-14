@@ -95,6 +95,8 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="Finance\EuroFacts.cs" />
+    <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
