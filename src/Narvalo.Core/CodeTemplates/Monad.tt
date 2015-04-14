@@ -27,7 +27,6 @@
     
     private string _name;
     private string _namespace;
-    private string _linqNamespace;
     private string _advancedNamespace;
     
     private bool _isNullable = true;
@@ -74,7 +73,6 @@
     
     // Gets or sets the name of the 'Advanced' namespace.
     // If no namespace was given, it will be deduced from Namespace.
-    // Extensions for core CLR types are put into a separate namespace.
     protected string AdvancedNamespace
     {
         get
@@ -97,33 +95,6 @@
             }
 
             _advancedNamespace = value;
-        }
-    }
-    
-    // Gets or sets the name of the LINQ namespace.
-    // If no namespace was given, it will be infered from the template location.
-    protected string LinqNamespace
-    {
-        get
-        {
-            if (_linqNamespace == null) {
-                _linqNamespace = InferNamespace_();
-            }
-
-            return _linqNamespace;
-        }
-
-        set
-        {
-            if (_linqNamespace != null) {
-                throw new InvalidOperationException("You can set the name of the LINQ namespace only once.");
-            }
-
-            if (String.IsNullOrWhiteSpace(value)) {
-                throw new ArgumentException("The LINQ namespace can not be null or blank.");
-            }
-
-            _linqNamespace = value;
         }
     }
     
@@ -326,7 +297,7 @@
     {
         get { return PreferLinqDialect ? "Select" : "Map"; }
     }
-    
+
     // Gets or sets the name of the Return method. Default to "Return".
     protected string ReturnName
     {

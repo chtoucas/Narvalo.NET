@@ -319,7 +319,7 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.ToString" />
-        public override String ToString()
+        public override string ToString()
         {
             Contract.Ensures(Contract.Result<string>() != null);
 

@@ -101,7 +101,6 @@
     <Compile Include="Fx\Stubs.cs" />
     <Compile Include="Fx\Stubs`1.cs" />
     <Compile Include="Fx\Unit.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
     <Compile Include="Fx\Advanced\Predicate`1%24.cs" />
     <Compile Include="NamespaceDoc.cs" />
