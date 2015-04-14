@@ -16,9 +16,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Require.cs">
-      <Link>Internal\Require.cs</Link>
-    </Compile>
     <Compile Include="GhostScriptApiFactory.cs" />
     <Compile Include="GhostScriptCriticalStateException.cs" />
     <Compile Include="GhostScriptException.cs" />
@@ -78,6 +75,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

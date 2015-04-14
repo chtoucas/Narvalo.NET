@@ -146,6 +146,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts - FSharp", "Scripts
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Prose", "Prose\Prose.fsproj", "{1BE9CFBA-91A6-49DE-8DD1-C6B110E80C3F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Finance", "Narvalo.Finance", "{2994CA0D-4E19-4B15-A1D4-81899A4BF4C8}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\NuGet\Narvalo.Finance\Narvalo.Finance.nuproj = ..\src\NuGet\Narvalo.Finance\Narvalo.Finance.nuproj
+		..\src\Narvalo.Finance\Narvalo.Finance.Version.props = ..\src\Narvalo.Finance\Narvalo.Finance.Version.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,5 +185,6 @@ Global
 		{6FA5FD98-E7A3-449B-B624-92B6F6BAFE77} = {2F6EB97B-14A3-45FD-A665-A8C60D8744C2}
 		{FCB688F3-8203-49B5-B2F0-40B6E28315A9} = {6D2B84B0-FD5E-4E14-A5B6-43BC56DF08E9}
 		{689BB57E-CEC1-496E-9294-ADE97481280A} = {FCB688F3-8203-49B5-B2F0-40B6E28315A9}
+		{2994CA0D-4E19-4B15-A1D4-81899A4BF4C8} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
 	EndGlobalSection
 EndGlobal

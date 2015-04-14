@@ -8,7 +8,8 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
-    using Narvalo.Internal;
+    using Narvalo.Finance.Currencies;
+    using Narvalo.Finance.Internal;
 
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.
@@ -16,12 +17,12 @@ namespace Narvalo.Finance
     /// <remarks>
     /// <para>Recognized currencies are defined in ISO 4217.</para>
     /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
-    /// Therefore, you can not directly construct a currency. You must instead use one of the
+    /// You can not directly construct a currency. You must instead use one of the
     /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 
     /// or <see cref="Currency.OfCurrentCulture"/>.</para>
     /// <para>This class follows value type semantics when it comes to equality.</para>
     /// <para>This class does not offer extended information about the currency.
-    /// If you needed so, you may use to the <see cref="CurrencyInfo"/> class.</para>
+    /// If you needed so, you should use to the <see cref="CurrencyInfo"/> class instead.</para>
     /// </remarks>
     [Serializable]
     public partial class Currency : IEquatable<Currency>
@@ -70,23 +71,6 @@ namespace Narvalo.Finance
             //Require.NotNullOrWhiteSpace(code, "code");
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
-
-            // Fast-track for the most commonly used currencies.
-            switch (code)
-            {
-                case Euro.CurrencyCode:
-                    return Euro.Currency;
-                case PoundSterling.CurrencyCode:
-                    return PoundSterling.Currency;
-                case SwissFranc.CurrencyCode:
-                    return SwissFranc.Currency;
-                case UnitedStatesDollar.CurrencyCode:
-                    return UnitedStatesDollar.Currency;
-                case Yen.CurrencyCode:
-                    return Yen.Currency;
-                case NoCurrency.CurrencyCode:
-                    return NoCurrency.Currency;
-            }
 
             return s_Cache.GetOrAdd(code, GetCurrency_).AssumeNotNull();
         }
@@ -147,7 +131,7 @@ namespace Narvalo.Finance
         {
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return _code;
+            return Code;
         }
 
         internal static TCurrency OfInternal<TCurrency>() where TCurrency : Currency
@@ -177,6 +161,174 @@ namespace Narvalo.Finance
             }
 
             return new Currency(code);
+        }
+    }
+    
+    /// <content>
+    /// Provides aliases for the most commonly used currencies.
+    /// </content>
+    public partial class Currency
+    {
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class 
+        /// for the pseudo-currency for transactions where no currency is involved.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class 
+        /// for the pseudo-currency for transactions where no currency is involved.</value>
+        public static Currency None
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XXX.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class 
+        /// for the currency specifically reserved for testing purposes.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class 
+        /// for the currency specifically reserved for testing purposes.</value>
+        public static Currency Test
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XTS.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
+        public static Currency Euro
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return EUR.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "(British) "Pound Sterling".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the (British) "Pound Sterling".</value>
+        public static Currency PoundSterling
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return GBP.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
+        public static Currency SwissFranc
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return CHF.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "United States Dollar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "United States Dollar".</value>
+        public static Currency UnitedStatesDollar
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return USD.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Japanese Yen".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Japanese Yen".</value>
+        public static Currency Yen
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return JPY.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.</value>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
+        public static Currency Gold
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XAU.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.</value>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
+        public static Currency Palladium
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XPD.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.</value>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
+        public static Currency Platinum
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XPT.Currency;
+            }
+        }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.</value>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
+        public static Currency Silver
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return XAG.Currency;
+            }
         }
     }
 

@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
-    <value>La chaîne '{0}' ne représente pas un URI absolu bien formé.</value>
-  </data>
-  <data name="BenchmarkMetric_Metric_Format" xml:space="preserve">
-    <value>{0}: {1:N0} cps ; ({2:N0} itérations en {3:N0} unités de temps ; {4:N0} unités de temps par itération)</value>
-  </data>
-  <data name="Configuration_MissingSection_Format" xml:space="preserve">
-    <value>La section &lt;{0}&gt; n'existe pas dans votre fichier de configuration !</value>
-  </data>
-  <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
-    <value>Cette méthode n'accepte que les enumérations de bits indicateurs.</value>
-  </data>
-  <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
-    <value>Caractère illégal '{0}' trouvé à la position '{1}'.</value>
+  <data name="Money_ArgIsNotMoney" xml:space="preserve">
+    <value>L'argument doit être de type Money.</value>
   </data>
 </root>

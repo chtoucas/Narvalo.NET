@@ -26,7 +26,7 @@ namespace Narvalo.Finance
         {
             // Arrange
             var amount1 = new Money<EUR>(1m);
-            var amount2 = new Money(1m, Euro.Currency);
+            var amount2 = new Money(1m, Currency.Euro);
 
             // Act & Assert
             Assert.True(amount1.Equals(amount2));
@@ -37,7 +37,7 @@ namespace Narvalo.Finance
         public static void Test3()
         {
             // Arrange
-            var money = new Money(1m, Euro.Currency);
+            var money = new Money(1m, Currency.Euro);
 
             // Act
             Money money1 = new Money<EUR>(1m);

@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
 
-    using Narvalo.Properties;
+    using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
     [Serializable]
@@ -144,7 +144,7 @@ namespace Narvalo.Finance
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings_Common.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
             }
 
             return CompareTo((Money)obj);

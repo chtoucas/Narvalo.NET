@@ -6,24 +6,24 @@ namespace Narvalo.Finance
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class CurrencyException : Exception
+    public class FinanceException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyException"/>
+        /// Initializes a new instance of the <see cref="FinanceException"/>
         /// class with its message string set to a system-supplied message.
         /// </summary>
-        public CurrencyException() { }
+        public FinanceException() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyException"/>
+        /// Initializes a new instance of the <see cref="FinanceException"/>
         /// class with the specified error message.
         /// </summary>
         /// <param name="message">The error message to display with this exception.</param>
-        public CurrencyException(string message)
+        public FinanceException(string message)
             : base(message) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CurrencyException"/>
+        /// Initializes a new instance of the <see cref="FinanceException"/>
         /// class with a specified error message and a reference to the inner exception
         /// that is the cause of this exception.
         /// </summary>
@@ -31,10 +31,10 @@ namespace Narvalo.Finance
         /// <param name="innerException">The exception that is the cause of the current exception. 
         /// If the innerException parameter is not a null reference, the current exception is raised 
         /// in a catch block that handles the inner exception.</param>
-        public CurrencyException(string message, Exception innerException) :
+        public FinanceException(string message, Exception innerException) :
             base(message, innerException) { }
 
-        protected CurrencyException(SerializationInfo info, StreamingContext context)
+        protected FinanceException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
     }
 }

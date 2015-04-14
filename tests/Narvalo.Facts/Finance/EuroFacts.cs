@@ -14,14 +14,14 @@ namespace Narvalo.Finance
         {
             // Act & Assert
             Assert.True(EUR.Currency.Equals(Currency.Of("EUR")));
-            Assert.True(EUR.Currency.Equals(Euro.Currency));
+            Assert.True(EUR.Currency.Equals(Currency.Euro));
 
-            Assert.True(Euro.Currency.Equals(Currency.Of("EUR")));
-            Assert.True(Euro.Currency.Equals(EUR.Currency));
+            Assert.True(Currency.Euro.Equals(Currency.Of("EUR")));
+            Assert.True(Currency.Euro.Equals(EUR.Currency));
 
             Assert.True(EUR.Currency == Currency.Of("EUR"));
-            Assert.True(EUR.Currency == Euro.Currency);
-            Assert.True(Euro.Currency == Currency.Of("EUR"));
+            Assert.True(EUR.Currency == Currency.Euro);
+            Assert.True(Currency.Euro == Currency.Of("EUR"));
         }
 
         #endregion

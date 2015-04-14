@@ -6,7 +6,7 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Properties;
+    using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
     [Serializable]
@@ -22,6 +22,7 @@ namespace Narvalo.Finance
 
         // FIXME: Would be better to add the constraint TCurrency : new() and
         // private static readonly TCurrency s_Currency = new TCurrency();
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly TCurrency s_Currency = Currency.OfInternal<TCurrency>();
 
         private readonly decimal _amount;
@@ -54,6 +55,7 @@ namespace Narvalo.Finance
         }
 
         // REVIEW: Prefer explicit to implicit?
+        // REVIEW: What if s_Currency throw an exception?
         public static implicit operator Money(Money<TCurrency> value)
         {
             return new Money(value.Amount, s_Currency);
@@ -229,7 +231,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Common.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
             }
 
             return Amount.CompareTo(other.Amount);
@@ -252,7 +254,7 @@ namespace Narvalo.Finance
                 return CompareTo((Money)obj);
             }
 
-            throw new ArgumentException(Strings_Common.Money_ArgIsNotMoney);
+            throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
         }
     }
 
@@ -295,7 +297,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Common.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
             }
 
             return new Money<TCurrency>(Amount + other.Amount);
@@ -346,7 +348,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Common.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
             }
 
             return new Money<TCurrency>(Amount - other.Amount);

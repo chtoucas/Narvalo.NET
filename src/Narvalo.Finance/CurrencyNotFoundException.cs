@@ -10,7 +10,7 @@ namespace Narvalo.Finance
     /// a currency that is not available.
     /// </summary>
     [Serializable]
-    public class CurrencyNotFoundException : CurrencyException
+    public class CurrencyNotFoundException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>

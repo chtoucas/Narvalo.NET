@@ -132,7 +132,4 @@
   <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
     <value>This method only accepts flags enum.</value>
   </data>
-  <data name="Money_ArgIsNotMoney" xml:space="preserve">
-    <value>The specified argument must be of Money type.</value>
-  </data>
 </root>

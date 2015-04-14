@@ -71,27 +71,6 @@
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
     <Compile Include="ConvertTo.cs" />
-    <Compile Include="Finance\Currencies\Currencies.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Currencies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\CurrencyInfo.cs" />
-    <Compile Include="Finance\Gold.cs" />
-    <Compile Include="Finance\ICurrencyProvider.cs" />
-    <Compile Include="Finance\Money`1.cs" />
-    <Compile Include="Finance\Money.cs" />
-    <Compile Include="Finance\Palladium.cs" />
-    <Compile Include="Finance\Platinum.cs" />
-    <Compile Include="Finance\Silver.cs" />
-    <Compile Include="Finance\UnitedStatesDollar.cs" />
-    <Compile Include="Finance\PoundSterling.cs" />
-    <Compile Include="Finance\TestCurrency.cs" />
-    <Compile Include="Finance\NoCurrency.cs" />
-    <Compile Include="Finance\Yen.cs" />
-    <Compile Include="Finance\SwissFranc.cs" />
-    <Compile Include="Finance\Euro.cs" />
-    <Compile Include="Finance\Currency.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
@@ -102,19 +81,8 @@
     <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
     <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
-    <Compile Include="Finance\CurrencyException.cs" />
-    <Compile Include="Finance\CurrencyNotFoundException.cs" />
-    <Compile Include="Finance\CurrencyProvider.cs" />
-    <Compile Include="Finance\CurrencyTypes.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Finance\InMemoryCurrencyProvider.cs" />
-    <Compile Include="Finance\InMemoryCurrencyProvider.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InMemoryCurrencyProvider.tt</DependentUpon>
-    </Compile>
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\PathUtility.cs" />
@@ -171,15 +139,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Iso4217.tt" />
-    <None Include="Finance\Currencies\Currencies.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Currencies.g.cs</LastGenOutput>
-    </None>
-    <None Include="Finance\InMemoryCurrencyProvider.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InMemoryCurrencyProvider.g.cs</LastGenOutput>
-    </None>
     <None Include="Narvalo.Common.Version.props" />
     <None Include="Narvalo.Common.props">
       <SubType>Designer</SubType>
@@ -188,11 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
-    <Content Include="Resources\ISO4217\20150101\A1.xml" />
-    <Content Include="Resources\ISO4217\20150101\A3.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />

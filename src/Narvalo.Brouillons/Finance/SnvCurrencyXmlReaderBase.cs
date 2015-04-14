@@ -112,9 +112,9 @@ namespace Narvalo.Finance
             return retval;
         }
 
-        protected Func<CurrencyException> ExceptionThunk(string message)
+        protected Func<FinanceException> ExceptionThunk(string message)
         {
-            return () => new CurrencyException(message);
+            return () => new FinanceException(message);
         }
     }
 }

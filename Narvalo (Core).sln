@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Docu
 		docs\Tips.md = docs\Tips.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Finance", "src\Narvalo.Finance\Narvalo.Finance.csproj", "{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -114,6 +116,12 @@ Global
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +137,6 @@ Global
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51} = {9C0D3D2C-E3FE-4E83-9C89-144A10CE3402}
 		{B5A714CA-D2A2-4AB7-9C70-A5B60EA4C661} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 		{4A73807D-3ECA-438A-9108-5A99E193BFBE} = {9C0D3D2C-E3FE-4E83-9C89-144A10CE3402}
+		{ED75E8BF-ACA1-4B53-88F1-C3BD2CA16D54} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 	EndGlobalSection
 EndGlobal

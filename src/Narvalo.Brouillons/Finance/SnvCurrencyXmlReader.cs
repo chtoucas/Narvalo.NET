@@ -23,7 +23,7 @@ namespace Narvalo.Finance
             {
                 if (!_publicationDate.HasValue)
                 {
-                    throw new CurrencyException("XXX");
+                    throw new FinanceException("XXX");
                 }
 
                 return _publicationDate.Value;
@@ -45,7 +45,7 @@ namespace Narvalo.Finance
 
             if (currencyElements.Count == 0)
             {
-                throw new CurrencyException("XXX");
+                throw new FinanceException("XXX");
             }
 
             foreach (var currencyElement in currencyElements)

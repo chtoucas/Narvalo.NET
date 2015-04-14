@@ -4,7 +4,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Internal;
+    using Narvalo.Finance.Internal;
 
     /// <summary>
     /// Provides information about a localized currency.

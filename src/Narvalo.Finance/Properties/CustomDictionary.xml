@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <!-- ### Brands and Organizations ### -->
+      <!-- Association Suisse de Normalisation-->
+      <Word>Snv</Word>
+
+      <!-- ### Finance ### -->
+      <Word>Bban</Word>
+      <Word>Bic</Word>
+      <Word>Iban</Word>
+    </Recognized>
+  </Words>
+</Dictionary>

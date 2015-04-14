@@ -147,10 +147,9 @@
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Expando.cs" />
-    <Compile Include="Finance\Bban.cs" />
-    <Compile Include="Finance\Bic.cs" />
     <Compile Include="Finance\CurrencyInfo%24.cs" />
-    <Compile Include="Finance\Iban.cs" />
+    <Compile Include="Finance\CurrencyTypes.cs" />
+    <Compile Include="Finance\FinanceException.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfo.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfoCollection.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfoProvider.cs" />
@@ -368,6 +367,10 @@
     <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Finance\Narvalo.Finance.csproj">
+      <Project>{ed75e8bf-aca1-4b53-88f1-c3bd2ca16d54}</Project>
+      <Name>Narvalo.Finance</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
