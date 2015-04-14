@@ -2,7 +2,7 @@
 
 namespace Narvalo.Fx
 {
-    using Narvalo.Diagnostics.Benchmarking;
+    using Narvalo.BenchmarkCommon;
     using Narvalo.Internal;
 
     public static class MaybeBenchmarks

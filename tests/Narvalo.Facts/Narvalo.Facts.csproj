@@ -91,7 +91,6 @@
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFacts.cs" />
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />

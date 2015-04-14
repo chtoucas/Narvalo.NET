@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
@@ -20,10 +21,8 @@ namespace Narvalo.Finance
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);
 
-        // FIXME: Would be better to add the constraint TCurrency : new() and
-        // private static readonly TCurrency s_Currency = new TCurrency();
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly TCurrency s_Currency = Currency.OfInternal<TCurrency>();
+        private static readonly TCurrency s_Currency = CurrencyActivator<TCurrency>.CreateInstance();
 
         private readonly decimal _amount;
 

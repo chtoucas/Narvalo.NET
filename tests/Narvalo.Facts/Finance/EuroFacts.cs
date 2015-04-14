@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance
 {
+    using System;
+
     using Narvalo.Finance.Currencies;
     using Xunit;
 
@@ -22,6 +24,11 @@ namespace Narvalo.Finance
             Assert.True(EUR.Currency == Currency.Of("EUR"));
             Assert.True(EUR.Currency == Currency.Euro);
             Assert.True(Currency.Euro == Currency.Of("EUR"));
+
+            Assert.True(Object.ReferenceEquals(EUR.Currency, Currency.Euro));
+            Assert.True(Object.ReferenceEquals(Currency.Of("EUR"), Currency.Of("EUR")));
+            Assert.False(Object.ReferenceEquals(EUR.Currency, Currency.Of("EUR")));
+            Assert.False(Object.ReferenceEquals(Currency.Euro, Currency.Of("EUR")));
         }
 
         #endregion

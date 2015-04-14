@@ -69,22 +69,6 @@
     <Compile Include="Configuration\NameValueConfigurationElement.cs" />
     <Compile Include="Configuration\ObjectConfigurationElement`1.cs" />
     <Compile Include="Configuration\ValueConfigurationElement.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparativeAttribute.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparison.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparisonAttribute.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkComparisonProcessor.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkException.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollection.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatter.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricCollectionFormatterBase.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFormatter.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetricFormatterBase.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchMetricConsoleFormatter.cs" />
-    <Compile Include="Diagnostics\Benchmarking\IBenchmarkMetricCollectionFormatter.cs" />
-    <Compile Include="Diagnostics\Benchmarking\IBenchmarkMetricFormatter.cs" />
-    <Compile Include="Edu\Comparisons\Int64EncoderComparison.cs" />
-    <Compile Include="Edu\Comparisons\RemoveDiacriticsComparison.cs" />
-    <Compile Include="Edu\Comparisons\ReverseComparison.cs" />
     <Compile Include="Edu\Fx\Fibonacci.cs" />
     <Compile Include="Edu\Fx\Iteration.cs" />
     <Compile Include="Edu\Fx\Iteration`2.cs" />
@@ -168,31 +152,31 @@
     <Compile Include="Finance\SnvCurrencyXmlReaderBase.cs" />
     <Compile Include="ImageUtility.cs" />
     <Compile Include="RandomString.cs" />
-    <Compile Include="Runtime\Reliability\AggregateGuardException.cs" />
-    <Compile Include="Runtime\Reliability\BlackholeGuard.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreaker.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerState.cs" />
-    <Compile Include="Runtime\Reliability\CircuitBreakerStateChangedEventArgs.cs" />
-    <Compile Include="Runtime\Reliability\ConcurrencyThrottle.cs" />
-    <Compile Include="Runtime\Reliability\FlowRateBarrier.cs" />
-    <Compile Include="Runtime\Reliability\FlowRateRegulator.cs" />
-    <Compile Include="Runtime\Reliability\Guard%24.cs" />
-    <Compile Include="Runtime\Reliability\GuardChain.cs" />
-    <Compile Include="Runtime\Reliability\GuardChainBuilder.cs" />
-    <Compile Include="Runtime\Reliability\GuardException.cs" />
-    <Compile Include="Runtime\Reliability\GuardStatus.cs" />
-    <Compile Include="Runtime\Reliability\GuardType.cs" />
-    <Compile Include="Runtime\Reliability\IBarrier.cs" />
-    <Compile Include="Runtime\Reliability\IMonitorableGuard.cs" />
-    <Compile Include="Runtime\Reliability\IReliabilityMonitor.cs" />
-    <Compile Include="Runtime\Reliability\ISentinel.cs" />
-    <Compile Include="Runtime\Reliability\IThrottle.cs" />
-    <Compile Include="Runtime\Reliability\NoopSentinel.cs" />
-    <Compile Include="Runtime\Reliability\ReliabilityWrapper.cs" />
-    <Compile Include="Runtime\Reliability\RequestCounter.cs" />
-    <Compile Include="Runtime\Reliability\RetryGuard.cs" />
-    <Compile Include="Runtime\Reliability\RetryPolicy.cs" />
-    <Compile Include="Runtime\Reliability\ThrottleException.cs" />
+    <Compile Include="Reliability\AggregateGuardException.cs" />
+    <Compile Include="Reliability\BlackholeGuard.cs" />
+    <Compile Include="Reliability\CircuitBreaker.cs" />
+    <Compile Include="Reliability\CircuitBreakerState.cs" />
+    <Compile Include="Reliability\CircuitBreakerStateChangedEventArgs.cs" />
+    <Compile Include="Reliability\ConcurrencyThrottle.cs" />
+    <Compile Include="Reliability\FlowRateBarrier.cs" />
+    <Compile Include="Reliability\FlowRateRegulator.cs" />
+    <Compile Include="Reliability\Guard%24.cs" />
+    <Compile Include="Reliability\GuardChain.cs" />
+    <Compile Include="Reliability\GuardChainBuilder.cs" />
+    <Compile Include="Reliability\GuardException.cs" />
+    <Compile Include="Reliability\GuardStatus.cs" />
+    <Compile Include="Reliability\GuardType.cs" />
+    <Compile Include="Reliability\IBarrier.cs" />
+    <Compile Include="Reliability\IMonitorableGuard.cs" />
+    <Compile Include="Reliability\IReliabilityMonitor.cs" />
+    <Compile Include="Reliability\ISentinel.cs" />
+    <Compile Include="Reliability\IThrottle.cs" />
+    <Compile Include="Reliability\NoopSentinel.cs" />
+    <Compile Include="Reliability\ReliabilityWrapper.cs" />
+    <Compile Include="Reliability\RequestCounter.cs" />
+    <Compile Include="Reliability\RetryGuard.cs" />
+    <Compile Include="Reliability\RetryPolicy.cs" />
+    <Compile Include="Reliability\ThrottleException.cs" />
     <Compile Include="DesCryptoEngine.cs" />
     <Compile Include="IBidirectionalCryptoEngine.cs" />
     <Compile Include="Internal\TryConverter`1.cs" />
@@ -360,6 +344,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\tests\Narvalo.Benchmarks\Narvalo.Benchmarks.csproj">
+      <Project>{4f37224c-58cc-4c55-80e6-14fd54a57ebe}</Project>
+      <Name>Narvalo.Benchmarks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Common\Narvalo.Common.csproj">
       <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
       <Name>Narvalo.Common</Name>

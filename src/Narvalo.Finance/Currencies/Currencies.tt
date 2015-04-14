@@ -37,6 +37,10 @@ namespace <#= InferNamespace() #>
         }
 
         codeSet.Add(currency.Code);
+
+        // WARNING: If you change the name of the property "s_Currency",
+        // you MUST also change the value of INSTANCE_CURRENCY_FIELD in 
+        // Internal.CurrencyActivator<TCurrency>.
 #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
@@ -45,7 +49,7 @@ namespace <#= InferNamespace() #>
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
-        private static readonly Currency s_Currency = new Currency("<#= currency.Code #>");
+        private static readonly <#= currency.Code #> s_Currency = new <#= currency.Code #>();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("<#= currency.Code #>", <#= currency.NumericCode #>) {
             EnglishName = @"<#= currency.EnglishName #>",
@@ -63,7 +67,7 @@ namespace <#= InferNamespace() #>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".</value>
-        public static Currency Currency
+        public static <#= currency.Code #> Currency
         { 
             get 
             {

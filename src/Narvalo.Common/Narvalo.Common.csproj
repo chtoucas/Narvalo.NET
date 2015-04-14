@@ -73,14 +73,6 @@
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
-    <Compile Include="Diagnostics\Benchmarking\Benchmark.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkAttribute.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkMetric.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkProcessor.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkRunner.cs" />
-    <Compile Include="Diagnostics\Benchmarking\BenchmarkTimer.cs" />
-    <Compile Include="Diagnostics\Benchmarking\IBenchmarkTimer.cs" />
-    <Compile Include="Diagnostics\Benchmarking\NamespaceDoc.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
@@ -148,7 +140,9 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Diagnostics\" />
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

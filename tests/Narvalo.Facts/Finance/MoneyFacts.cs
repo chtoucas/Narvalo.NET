@@ -42,6 +42,11 @@ namespace Narvalo.Finance
             // Act
             Money money1 = new Money<EUR>(1m);
             Money<EUR> money2 = (Money<EUR>)money;
+            Money money3 = new Money<EUR>(1m);
+
+            Assert.True(money1.Currency == EUR.Currency);
+            Assert.True(Object.ReferenceEquals(money1.Currency, EUR.Currency));
+            Assert.True(Object.ReferenceEquals(money1.Currency, money3.Currency));
 
             Assert.Throws<InvalidCastException>(() => (Money<CHF>)money);
         }

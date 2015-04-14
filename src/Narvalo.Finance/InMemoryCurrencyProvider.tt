@@ -1,7 +1,9 @@
 ﻿<#@ include file=".\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currencies = ParseCurrent(@".\Resources\ISO4217\20150101\A1.xml");
+var currentCurrencies = ParseCurrent(@".\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@".\Resources\ISO4217\20150101\A3.xml");
+var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();
 

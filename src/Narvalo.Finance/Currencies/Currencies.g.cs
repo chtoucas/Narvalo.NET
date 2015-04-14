@@ -27,7 +27,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AED");
+        private static readonly AED s_Currency = new AED();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AED", 784) {
             EnglishName = @"UAE Dirham",
@@ -40,7 +40,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "UAE Dirham".</value>
-        public static Currency Currency
+        public static AED Currency
         { 
             get 
             {
@@ -70,7 +70,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AFN");
+        private static readonly AFN s_Currency = new AFN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AFN", 971) {
             EnglishName = @"Afghani",
@@ -83,7 +83,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
-        public static Currency Currency
+        public static AFN Currency
         { 
             get 
             {
@@ -113,7 +113,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ALL");
+        private static readonly ALL s_Currency = new ALL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ALL", 8) {
             EnglishName = @"Lek",
@@ -126,7 +126,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lek".</value>
-        public static Currency Currency
+        public static ALL Currency
         { 
             get 
             {
@@ -156,7 +156,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AMD");
+        private static readonly AMD s_Currency = new AMD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AMD", 51) {
             EnglishName = @"Armenian Dram",
@@ -169,7 +169,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Armenian Dram".</value>
-        public static Currency Currency
+        public static AMD Currency
         { 
             get 
             {
@@ -199,7 +199,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ANG");
+        private static readonly ANG s_Currency = new ANG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ANG", 532) {
             EnglishName = @"Netherlands Antillean Guilder",
@@ -212,7 +212,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".</value>
-        public static Currency Currency
+        public static ANG Currency
         { 
             get 
             {
@@ -242,7 +242,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AOA");
+        private static readonly AOA s_Currency = new AOA();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AOA", 973) {
             EnglishName = @"Kwanza",
@@ -255,7 +255,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
-        public static Currency Currency
+        public static AOA Currency
         { 
             get 
             {
@@ -285,7 +285,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ARS");
+        private static readonly ARS s_Currency = new ARS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ARS", 32) {
             EnglishName = @"Argentine Peso",
@@ -298,7 +298,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Argentine Peso".</value>
-        public static Currency Currency
+        public static ARS Currency
         { 
             get 
             {
@@ -328,7 +328,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AUD");
+        private static readonly AUD s_Currency = new AUD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AUD", 36) {
             EnglishName = @"Australian Dollar",
@@ -341,7 +341,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Australian Dollar".</value>
-        public static Currency Currency
+        public static AUD Currency
         { 
             get 
             {
@@ -371,7 +371,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AWG");
+        private static readonly AWG s_Currency = new AWG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AWG", 533) {
             EnglishName = @"Aruban Florin",
@@ -384,7 +384,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Aruban Florin".</value>
-        public static Currency Currency
+        public static AWG Currency
         { 
             get 
             {
@@ -414,7 +414,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("AZN");
+        private static readonly AZN s_Currency = new AZN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AZN", 944) {
             EnglishName = @"Azerbaijanian Manat",
@@ -427,7 +427,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
-        public static Currency Currency
+        public static AZN Currency
         { 
             get 
             {
@@ -457,7 +457,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BAM");
+        private static readonly BAM s_Currency = new BAM();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BAM", 977) {
             EnglishName = @"Convertible Mark",
@@ -470,7 +470,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Mark".</value>
-        public static Currency Currency
+        public static BAM Currency
         { 
             get 
             {
@@ -500,7 +500,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BBD");
+        private static readonly BBD s_Currency = new BBD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BBD", 52) {
             EnglishName = @"Barbados Dollar",
@@ -513,7 +513,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".</value>
-        public static Currency Currency
+        public static BBD Currency
         { 
             get 
             {
@@ -543,7 +543,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BDT");
+        private static readonly BDT s_Currency = new BDT();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BDT", 50) {
             EnglishName = @"Taka",
@@ -556,7 +556,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Taka".</value>
-        public static Currency Currency
+        public static BDT Currency
         { 
             get 
             {
@@ -586,7 +586,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BGN");
+        private static readonly BGN s_Currency = new BGN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BGN", 975) {
             EnglishName = @"Bulgarian Lev",
@@ -599,7 +599,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".</value>
-        public static Currency Currency
+        public static BGN Currency
         { 
             get 
             {
@@ -629,7 +629,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BHD");
+        private static readonly BHD s_Currency = new BHD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BHD", 48) {
             EnglishName = @"Bahraini Dinar",
@@ -642,7 +642,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".</value>
-        public static Currency Currency
+        public static BHD Currency
         { 
             get 
             {
@@ -672,7 +672,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BIF");
+        private static readonly BIF s_Currency = new BIF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BIF", 108) {
             EnglishName = @"Burundi Franc",
@@ -685,7 +685,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Burundi Franc".</value>
-        public static Currency Currency
+        public static BIF Currency
         { 
             get 
             {
@@ -715,7 +715,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BMD");
+        private static readonly BMD s_Currency = new BMD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BMD", 60) {
             EnglishName = @"Bermudian Dollar",
@@ -728,7 +728,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".</value>
-        public static Currency Currency
+        public static BMD Currency
         { 
             get 
             {
@@ -758,7 +758,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BND");
+        private static readonly BND s_Currency = new BND();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BND", 96) {
             EnglishName = @"Brunei Dollar",
@@ -771,7 +771,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".</value>
-        public static Currency Currency
+        public static BND Currency
         { 
             get 
             {
@@ -801,7 +801,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BOB");
+        private static readonly BOB s_Currency = new BOB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BOB", 68) {
             EnglishName = @"Boliviano",
@@ -814,7 +814,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Boliviano".</value>
-        public static Currency Currency
+        public static BOB Currency
         { 
             get 
             {
@@ -844,7 +844,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BOV");
+        private static readonly BOV s_Currency = new BOV();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BOV", 984) {
             EnglishName = @"Mvdol",
@@ -858,7 +858,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mvdol".</value>
-        public static Currency Currency
+        public static BOV Currency
         { 
             get 
             {
@@ -888,7 +888,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BRL");
+        private static readonly BRL s_Currency = new BRL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BRL", 986) {
             EnglishName = @"Brazilian Real",
@@ -901,7 +901,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brazilian Real".</value>
-        public static Currency Currency
+        public static BRL Currency
         { 
             get 
             {
@@ -931,7 +931,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BSD");
+        private static readonly BSD s_Currency = new BSD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BSD", 44) {
             EnglishName = @"Bahamian Dollar",
@@ -944,7 +944,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".</value>
-        public static Currency Currency
+        public static BSD Currency
         { 
             get 
             {
@@ -974,7 +974,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BTN");
+        private static readonly BTN s_Currency = new BTN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BTN", 64) {
             EnglishName = @"Ngultrum",
@@ -987,7 +987,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ngultrum".</value>
-        public static Currency Currency
+        public static BTN Currency
         { 
             get 
             {
@@ -1017,7 +1017,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BWP");
+        private static readonly BWP s_Currency = new BWP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BWP", 72) {
             EnglishName = @"Pula",
@@ -1030,7 +1030,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pula".</value>
-        public static Currency Currency
+        public static BWP Currency
         { 
             get 
             {
@@ -1060,7 +1060,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BYR");
+        private static readonly BYR s_Currency = new BYR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BYR", 974) {
             EnglishName = @"Belarussian Ruble",
@@ -1073,7 +1073,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
-        public static Currency Currency
+        public static BYR Currency
         { 
             get 
             {
@@ -1103,7 +1103,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("BZD");
+        private static readonly BZD s_Currency = new BZD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BZD", 84) {
             EnglishName = @"Belize Dollar",
@@ -1116,7 +1116,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belize Dollar".</value>
-        public static Currency Currency
+        public static BZD Currency
         { 
             get 
             {
@@ -1146,7 +1146,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CAD");
+        private static readonly CAD s_Currency = new CAD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CAD", 124) {
             EnglishName = @"Canadian Dollar",
@@ -1159,7 +1159,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".</value>
-        public static Currency Currency
+        public static CAD Currency
         { 
             get 
             {
@@ -1189,7 +1189,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CDF");
+        private static readonly CDF s_Currency = new CDF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CDF", 976) {
             EnglishName = @"Congolese Franc",
@@ -1202,7 +1202,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Congolese Franc".</value>
-        public static Currency Currency
+        public static CDF Currency
         { 
             get 
             {
@@ -1232,7 +1232,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CHE");
+        private static readonly CHE s_Currency = new CHE();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHE", 947) {
             EnglishName = @"WIR Euro",
@@ -1246,7 +1246,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Euro".</value>
-        public static Currency Currency
+        public static CHE Currency
         { 
             get 
             {
@@ -1276,7 +1276,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CHF");
+        private static readonly CHF s_Currency = new CHF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHF", 756) {
             EnglishName = @"Swiss Franc",
@@ -1289,7 +1289,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
-        public static Currency Currency
+        public static CHF Currency
         { 
             get 
             {
@@ -1319,7 +1319,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CHW");
+        private static readonly CHW s_Currency = new CHW();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHW", 948) {
             EnglishName = @"WIR Franc",
@@ -1333,7 +1333,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc".</value>
-        public static Currency Currency
+        public static CHW Currency
         { 
             get 
             {
@@ -1363,7 +1363,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CLF");
+        private static readonly CLF s_Currency = new CLF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CLF", 990) {
             EnglishName = @"Unidad de Fomento",
@@ -1377,7 +1377,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".</value>
-        public static Currency Currency
+        public static CLF Currency
         { 
             get 
             {
@@ -1407,7 +1407,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CLP");
+        private static readonly CLP s_Currency = new CLP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CLP", 152) {
             EnglishName = @"Chilean Peso",
@@ -1420,7 +1420,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Chilean Peso".</value>
-        public static Currency Currency
+        public static CLP Currency
         { 
             get 
             {
@@ -1450,7 +1450,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CNY");
+        private static readonly CNY s_Currency = new CNY();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CNY", 156) {
             EnglishName = @"Yuan Renminbi",
@@ -1463,7 +1463,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".</value>
-        public static Currency Currency
+        public static CNY Currency
         { 
             get 
             {
@@ -1493,7 +1493,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("COP");
+        private static readonly COP s_Currency = new COP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("COP", 170) {
             EnglishName = @"Colombian Peso",
@@ -1506,7 +1506,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Colombian Peso".</value>
-        public static Currency Currency
+        public static COP Currency
         { 
             get 
             {
@@ -1536,7 +1536,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
     {
-        private static readonly Currency s_Currency = new Currency("COU");
+        private static readonly COU s_Currency = new COU();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("COU", 970) {
             EnglishName = @"Unidad de Valor Real",
@@ -1550,7 +1550,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".</value>
-        public static Currency Currency
+        public static COU Currency
         { 
             get 
             {
@@ -1580,7 +1580,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CRC");
+        private static readonly CRC s_Currency = new CRC();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CRC", 188) {
             EnglishName = @"Costa Rican Colon",
@@ -1593,7 +1593,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".</value>
-        public static Currency Currency
+        public static CRC Currency
         { 
             get 
             {
@@ -1623,7 +1623,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CUC");
+        private static readonly CUC s_Currency = new CUC();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CUC", 931) {
             EnglishName = @"Peso Convertible",
@@ -1636,7 +1636,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Convertible".</value>
-        public static Currency Currency
+        public static CUC Currency
         { 
             get 
             {
@@ -1666,7 +1666,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CUP");
+        private static readonly CUP s_Currency = new CUP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CUP", 192) {
             EnglishName = @"Cuban Peso",
@@ -1679,7 +1679,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cuban Peso".</value>
-        public static Currency Currency
+        public static CUP Currency
         { 
             get 
             {
@@ -1709,7 +1709,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CVE");
+        private static readonly CVE s_Currency = new CVE();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CVE", 132) {
             EnglishName = @"Cabo Verde Escudo",
@@ -1722,7 +1722,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".</value>
-        public static Currency Currency
+        public static CVE Currency
         { 
             get 
             {
@@ -1752,7 +1752,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("CZK");
+        private static readonly CZK s_Currency = new CZK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CZK", 203) {
             EnglishName = @"Czech Koruna",
@@ -1765,7 +1765,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Czech Koruna".</value>
-        public static Currency Currency
+        public static CZK Currency
         { 
             get 
             {
@@ -1795,7 +1795,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("DJF");
+        private static readonly DJF s_Currency = new DJF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DJF", 262) {
             EnglishName = @"Djibouti Franc",
@@ -1808,7 +1808,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".</value>
-        public static Currency Currency
+        public static DJF Currency
         { 
             get 
             {
@@ -1838,7 +1838,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("DKK");
+        private static readonly DKK s_Currency = new DKK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DKK", 208) {
             EnglishName = @"Danish Krone",
@@ -1851,7 +1851,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Danish Krone".</value>
-        public static Currency Currency
+        public static DKK Currency
         { 
             get 
             {
@@ -1881,7 +1881,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("DOP");
+        private static readonly DOP s_Currency = new DOP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DOP", 214) {
             EnglishName = @"Dominican Peso",
@@ -1894,7 +1894,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dominican Peso".</value>
-        public static Currency Currency
+        public static DOP Currency
         { 
             get 
             {
@@ -1924,7 +1924,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("DZD");
+        private static readonly DZD s_Currency = new DZD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DZD", 12) {
             EnglishName = @"Algerian Dinar",
@@ -1937,7 +1937,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".</value>
-        public static Currency Currency
+        public static DZD Currency
         { 
             get 
             {
@@ -1967,7 +1967,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("EGP");
+        private static readonly EGP s_Currency = new EGP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("EGP", 818) {
             EnglishName = @"Egyptian Pound",
@@ -1980,7 +1980,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".</value>
-        public static Currency Currency
+        public static EGP Currency
         { 
             get 
             {
@@ -2010,7 +2010,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ERN");
+        private static readonly ERN s_Currency = new ERN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ERN", 232) {
             EnglishName = @"Nakfa",
@@ -2023,7 +2023,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nakfa".</value>
-        public static Currency Currency
+        public static ERN Currency
         { 
             get 
             {
@@ -2053,7 +2053,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ETB");
+        private static readonly ETB s_Currency = new ETB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ETB", 230) {
             EnglishName = @"Ethiopian Birr",
@@ -2066,7 +2066,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".</value>
-        public static Currency Currency
+        public static ETB Currency
         { 
             get 
             {
@@ -2096,7 +2096,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("EUR");
+        private static readonly EUR s_Currency = new EUR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("EUR", 978) {
             EnglishName = @"Euro",
@@ -2109,7 +2109,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
-        public static Currency Currency
+        public static EUR Currency
         { 
             get 
             {
@@ -2139,7 +2139,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("FJD");
+        private static readonly FJD s_Currency = new FJD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("FJD", 242) {
             EnglishName = @"Fiji Dollar",
@@ -2152,7 +2152,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".</value>
-        public static Currency Currency
+        public static FJD Currency
         { 
             get 
             {
@@ -2182,7 +2182,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("FKP");
+        private static readonly FKP s_Currency = new FKP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("FKP", 238) {
             EnglishName = @"Falkland Islands Pound",
@@ -2195,7 +2195,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".</value>
-        public static Currency Currency
+        public static FKP Currency
         { 
             get 
             {
@@ -2225,7 +2225,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GBP");
+        private static readonly GBP s_Currency = new GBP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GBP", 826) {
             EnglishName = @"Pound Sterling",
@@ -2238,7 +2238,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound Sterling".</value>
-        public static Currency Currency
+        public static GBP Currency
         { 
             get 
             {
@@ -2268,7 +2268,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GEL");
+        private static readonly GEL s_Currency = new GEL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GEL", 981) {
             EnglishName = @"Lari",
@@ -2281,7 +2281,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lari".</value>
-        public static Currency Currency
+        public static GEL Currency
         { 
             get 
             {
@@ -2311,7 +2311,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GHS");
+        private static readonly GHS s_Currency = new GHS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GHS", 936) {
             EnglishName = @"Ghana Cedi",
@@ -2324,7 +2324,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
-        public static Currency Currency
+        public static GHS Currency
         { 
             get 
             {
@@ -2354,7 +2354,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GIP");
+        private static readonly GIP s_Currency = new GIP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GIP", 292) {
             EnglishName = @"Gibraltar Pound",
@@ -2367,7 +2367,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".</value>
-        public static Currency Currency
+        public static GIP Currency
         { 
             get 
             {
@@ -2397,7 +2397,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GMD");
+        private static readonly GMD s_Currency = new GMD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GMD", 270) {
             EnglishName = @"Dalasi",
@@ -2410,7 +2410,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dalasi".</value>
-        public static Currency Currency
+        public static GMD Currency
         { 
             get 
             {
@@ -2440,7 +2440,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GNF");
+        private static readonly GNF s_Currency = new GNF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GNF", 324) {
             EnglishName = @"Guinea Franc",
@@ -2453,7 +2453,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Franc".</value>
-        public static Currency Currency
+        public static GNF Currency
         { 
             get 
             {
@@ -2483,7 +2483,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GTQ");
+        private static readonly GTQ s_Currency = new GTQ();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GTQ", 320) {
             EnglishName = @"Quetzal",
@@ -2496,7 +2496,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Quetzal".</value>
-        public static Currency Currency
+        public static GTQ Currency
         { 
             get 
             {
@@ -2526,7 +2526,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("GYD");
+        private static readonly GYD s_Currency = new GYD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GYD", 328) {
             EnglishName = @"Guyana Dollar",
@@ -2539,7 +2539,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".</value>
-        public static Currency Currency
+        public static GYD Currency
         { 
             get 
             {
@@ -2569,7 +2569,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("HKD");
+        private static readonly HKD s_Currency = new HKD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HKD", 344) {
             EnglishName = @"Hong Kong Dollar",
@@ -2582,7 +2582,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".</value>
-        public static Currency Currency
+        public static HKD Currency
         { 
             get 
             {
@@ -2612,7 +2612,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("HNL");
+        private static readonly HNL s_Currency = new HNL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HNL", 340) {
             EnglishName = @"Lempira",
@@ -2625,7 +2625,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lempira".</value>
-        public static Currency Currency
+        public static HNL Currency
         { 
             get 
             {
@@ -2655,7 +2655,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("HRK");
+        private static readonly HRK s_Currency = new HRK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HRK", 191) {
             EnglishName = @"Croatian Kuna",
@@ -2668,7 +2668,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".</value>
-        public static Currency Currency
+        public static HRK Currency
         { 
             get 
             {
@@ -2698,7 +2698,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("HTG");
+        private static readonly HTG s_Currency = new HTG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HTG", 332) {
             EnglishName = @"Gourde",
@@ -2711,7 +2711,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gourde".</value>
-        public static Currency Currency
+        public static HTG Currency
         { 
             get 
             {
@@ -2741,7 +2741,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("HUF");
+        private static readonly HUF s_Currency = new HUF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HUF", 348) {
             EnglishName = @"Forint",
@@ -2754,7 +2754,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Forint".</value>
-        public static Currency Currency
+        public static HUF Currency
         { 
             get 
             {
@@ -2784,7 +2784,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("IDR");
+        private static readonly IDR s_Currency = new IDR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IDR", 360) {
             EnglishName = @"Rupiah",
@@ -2797,7 +2797,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rupiah".</value>
-        public static Currency Currency
+        public static IDR Currency
         { 
             get 
             {
@@ -2827,7 +2827,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ILS");
+        private static readonly ILS s_Currency = new ILS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ILS", 376) {
             EnglishName = @"New Israeli Sheqel",
@@ -2840,7 +2840,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".</value>
-        public static Currency Currency
+        public static ILS Currency
         { 
             get 
             {
@@ -2870,7 +2870,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("INR");
+        private static readonly INR s_Currency = new INR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("INR", 356) {
             EnglishName = @"Indian Rupee",
@@ -2883,7 +2883,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Indian Rupee".</value>
-        public static Currency Currency
+        public static INR Currency
         { 
             get 
             {
@@ -2913,7 +2913,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("IQD");
+        private static readonly IQD s_Currency = new IQD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IQD", 368) {
             EnglishName = @"Iraqi Dinar",
@@ -2926,7 +2926,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".</value>
-        public static Currency Currency
+        public static IQD Currency
         { 
             get 
             {
@@ -2956,7 +2956,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("IRR");
+        private static readonly IRR s_Currency = new IRR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IRR", 364) {
             EnglishName = @"Iranian Rial",
@@ -2969,7 +2969,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iranian Rial".</value>
-        public static Currency Currency
+        public static IRR Currency
         { 
             get 
             {
@@ -2999,7 +2999,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ISK");
+        private static readonly ISK s_Currency = new ISK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ISK", 352) {
             EnglishName = @"Iceland Krona",
@@ -3012,7 +3012,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iceland Krona".</value>
-        public static Currency Currency
+        public static ISK Currency
         { 
             get 
             {
@@ -3042,7 +3042,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("JMD");
+        private static readonly JMD s_Currency = new JMD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JMD", 388) {
             EnglishName = @"Jamaican Dollar",
@@ -3055,7 +3055,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".</value>
-        public static Currency Currency
+        public static JMD Currency
         { 
             get 
             {
@@ -3085,7 +3085,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("JOD");
+        private static readonly JOD s_Currency = new JOD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JOD", 400) {
             EnglishName = @"Jordanian Dinar",
@@ -3098,7 +3098,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".</value>
-        public static Currency Currency
+        public static JOD Currency
         { 
             get 
             {
@@ -3128,7 +3128,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
     {
-        private static readonly Currency s_Currency = new Currency("JPY");
+        private static readonly JPY s_Currency = new JPY();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JPY", 392) {
             EnglishName = @"Yen",
@@ -3141,7 +3141,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yen".</value>
-        public static Currency Currency
+        public static JPY Currency
         { 
             get 
             {
@@ -3171,7 +3171,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KES");
+        private static readonly KES s_Currency = new KES();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KES", 404) {
             EnglishName = @"Kenyan Shilling",
@@ -3184,7 +3184,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".</value>
-        public static Currency Currency
+        public static KES Currency
         { 
             get 
             {
@@ -3214,7 +3214,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KGS");
+        private static readonly KGS s_Currency = new KGS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KGS", 417) {
             EnglishName = @"Som",
@@ -3227,7 +3227,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Som".</value>
-        public static Currency Currency
+        public static KGS Currency
         { 
             get 
             {
@@ -3257,7 +3257,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KHR");
+        private static readonly KHR s_Currency = new KHR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KHR", 116) {
             EnglishName = @"Riel",
@@ -3270,7 +3270,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Riel".</value>
-        public static Currency Currency
+        public static KHR Currency
         { 
             get 
             {
@@ -3300,7 +3300,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KMF");
+        private static readonly KMF s_Currency = new KMF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KMF", 174) {
             EnglishName = @"Comoro Franc",
@@ -3313,7 +3313,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Comoro Franc".</value>
-        public static Currency Currency
+        public static KMF Currency
         { 
             get 
             {
@@ -3343,7 +3343,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KPW");
+        private static readonly KPW s_Currency = new KPW();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KPW", 408) {
             EnglishName = @"North Korean Won",
@@ -3356,7 +3356,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "North Korean Won".</value>
-        public static Currency Currency
+        public static KPW Currency
         { 
             get 
             {
@@ -3386,7 +3386,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KRW");
+        private static readonly KRW s_Currency = new KRW();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KRW", 410) {
             EnglishName = @"Won",
@@ -3399,7 +3399,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Won".</value>
-        public static Currency Currency
+        public static KRW Currency
         { 
             get 
             {
@@ -3429,7 +3429,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KWD");
+        private static readonly KWD s_Currency = new KWD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KWD", 414) {
             EnglishName = @"Kuwaiti Dinar",
@@ -3442,7 +3442,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".</value>
-        public static Currency Currency
+        public static KWD Currency
         { 
             get 
             {
@@ -3472,7 +3472,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KYD");
+        private static readonly KYD s_Currency = new KYD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KYD", 136) {
             EnglishName = @"Cayman Islands Dollar",
@@ -3485,7 +3485,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".</value>
-        public static Currency Currency
+        public static KYD Currency
         { 
             get 
             {
@@ -3515,7 +3515,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
     {
-        private static readonly Currency s_Currency = new Currency("KZT");
+        private static readonly KZT s_Currency = new KZT();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KZT", 398) {
             EnglishName = @"Tenge",
@@ -3528,7 +3528,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tenge".</value>
-        public static Currency Currency
+        public static KZT Currency
         { 
             get 
             {
@@ -3558,7 +3558,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LAK");
+        private static readonly LAK s_Currency = new LAK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LAK", 418) {
             EnglishName = @"Kip",
@@ -3571,7 +3571,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip".</value>
-        public static Currency Currency
+        public static LAK Currency
         { 
             get 
             {
@@ -3601,7 +3601,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LBP");
+        private static readonly LBP s_Currency = new LBP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LBP", 422) {
             EnglishName = @"Lebanese Pound",
@@ -3614,7 +3614,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".</value>
-        public static Currency Currency
+        public static LBP Currency
         { 
             get 
             {
@@ -3644,7 +3644,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LKR");
+        private static readonly LKR s_Currency = new LKR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LKR", 144) {
             EnglishName = @"Sri Lanka Rupee",
@@ -3657,7 +3657,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".</value>
-        public static Currency Currency
+        public static LKR Currency
         { 
             get 
             {
@@ -3687,7 +3687,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LRD");
+        private static readonly LRD s_Currency = new LRD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LRD", 430) {
             EnglishName = @"Liberian Dollar",
@@ -3700,7 +3700,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".</value>
-        public static Currency Currency
+        public static LRD Currency
         { 
             get 
             {
@@ -3730,7 +3730,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LSL");
+        private static readonly LSL s_Currency = new LSL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LSL", 426) {
             EnglishName = @"Loti",
@@ -3743,7 +3743,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Loti".</value>
-        public static Currency Currency
+        public static LSL Currency
         { 
             get 
             {
@@ -3773,7 +3773,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("LYD");
+        private static readonly LYD s_Currency = new LYD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LYD", 434) {
             EnglishName = @"Libyan Dinar",
@@ -3786,7 +3786,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".</value>
-        public static Currency Currency
+        public static LYD Currency
         { 
             get 
             {
@@ -3816,7 +3816,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MAD");
+        private static readonly MAD s_Currency = new MAD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MAD", 504) {
             EnglishName = @"Moroccan Dirham",
@@ -3829,7 +3829,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".</value>
-        public static Currency Currency
+        public static MAD Currency
         { 
             get 
             {
@@ -3859,7 +3859,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MDL");
+        private static readonly MDL s_Currency = new MDL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MDL", 498) {
             EnglishName = @"Moldovan Leu",
@@ -3872,7 +3872,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".</value>
-        public static Currency Currency
+        public static MDL Currency
         { 
             get 
             {
@@ -3902,7 +3902,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MGA");
+        private static readonly MGA s_Currency = new MGA();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MGA", 969) {
             EnglishName = @"Malagasy Ariary",
@@ -3915,7 +3915,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".</value>
-        public static Currency Currency
+        public static MGA Currency
         { 
             get 
             {
@@ -3945,7 +3945,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MKD");
+        private static readonly MKD s_Currency = new MKD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MKD", 807) {
             EnglishName = @"Denar",
@@ -3958,7 +3958,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Denar".</value>
-        public static Currency Currency
+        public static MKD Currency
         { 
             get 
             {
@@ -3988,7 +3988,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MMK");
+        private static readonly MMK s_Currency = new MMK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MMK", 104) {
             EnglishName = @"Kyat",
@@ -4001,7 +4001,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kyat".</value>
-        public static Currency Currency
+        public static MMK Currency
         { 
             get 
             {
@@ -4031,7 +4031,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MNT");
+        private static readonly MNT s_Currency = new MNT();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MNT", 496) {
             EnglishName = @"Tugrik",
@@ -4044,7 +4044,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tugrik".</value>
-        public static Currency Currency
+        public static MNT Currency
         { 
             get 
             {
@@ -4074,7 +4074,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MOP");
+        private static readonly MOP s_Currency = new MOP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MOP", 446) {
             EnglishName = @"Pataca",
@@ -4087,7 +4087,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pataca".</value>
-        public static Currency Currency
+        public static MOP Currency
         { 
             get 
             {
@@ -4117,7 +4117,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MRO");
+        private static readonly MRO s_Currency = new MRO();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MRO", 478) {
             EnglishName = @"Ouguiya",
@@ -4130,7 +4130,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ouguiya".</value>
-        public static Currency Currency
+        public static MRO Currency
         { 
             get 
             {
@@ -4160,7 +4160,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MUR");
+        private static readonly MUR s_Currency = new MUR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MUR", 480) {
             EnglishName = @"Mauritius Rupee",
@@ -4173,7 +4173,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".</value>
-        public static Currency Currency
+        public static MUR Currency
         { 
             get 
             {
@@ -4203,7 +4203,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MVR");
+        private static readonly MVR s_Currency = new MVR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MVR", 462) {
             EnglishName = @"Rufiyaa",
@@ -4216,7 +4216,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rufiyaa".</value>
-        public static Currency Currency
+        public static MVR Currency
         { 
             get 
             {
@@ -4246,7 +4246,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MWK");
+        private static readonly MWK s_Currency = new MWK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MWK", 454) {
             EnglishName = @"Kwacha",
@@ -4259,7 +4259,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwacha".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwacha".</value>
-        public static Currency Currency
+        public static MWK Currency
         { 
             get 
             {
@@ -4289,7 +4289,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MXN");
+        private static readonly MXN s_Currency = new MXN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MXN", 484) {
             EnglishName = @"Mexican Peso",
@@ -4302,7 +4302,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
-        public static Currency Currency
+        public static MXN Currency
         { 
             get 
             {
@@ -4332,7 +4332,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MXV");
+        private static readonly MXV s_Currency = new MXV();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MXV", 979) {
             EnglishName = @"Mexican Unidad de Inversion (UDI)",
@@ -4346,7 +4346,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".</value>
-        public static Currency Currency
+        public static MXV Currency
         { 
             get 
             {
@@ -4376,7 +4376,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MYR");
+        private static readonly MYR s_Currency = new MYR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MYR", 458) {
             EnglishName = @"Malaysian Ringgit",
@@ -4389,7 +4389,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".</value>
-        public static Currency Currency
+        public static MYR Currency
         { 
             get 
             {
@@ -4419,7 +4419,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("MZN");
+        private static readonly MZN s_Currency = new MZN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MZN", 943) {
             EnglishName = @"Mozambique Metical",
@@ -4432,7 +4432,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
-        public static Currency Currency
+        public static MZN Currency
         { 
             get 
             {
@@ -4462,7 +4462,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NAD");
+        private static readonly NAD s_Currency = new NAD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NAD", 516) {
             EnglishName = @"Namibia Dollar",
@@ -4475,7 +4475,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".</value>
-        public static Currency Currency
+        public static NAD Currency
         { 
             get 
             {
@@ -4505,7 +4505,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NGN");
+        private static readonly NGN s_Currency = new NGN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NGN", 566) {
             EnglishName = @"Naira",
@@ -4518,7 +4518,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Naira".</value>
-        public static Currency Currency
+        public static NGN Currency
         { 
             get 
             {
@@ -4548,7 +4548,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NIO");
+        private static readonly NIO s_Currency = new NIO();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NIO", 558) {
             EnglishName = @"Cordoba Oro",
@@ -4561,7 +4561,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".</value>
-        public static Currency Currency
+        public static NIO Currency
         { 
             get 
             {
@@ -4591,7 +4591,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NOK");
+        private static readonly NOK s_Currency = new NOK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NOK", 578) {
             EnglishName = @"Norwegian Krone",
@@ -4604,7 +4604,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".</value>
-        public static Currency Currency
+        public static NOK Currency
         { 
             get 
             {
@@ -4634,7 +4634,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NPR");
+        private static readonly NPR s_Currency = new NPR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NPR", 524) {
             EnglishName = @"Nepalese Rupee",
@@ -4647,7 +4647,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".</value>
-        public static Currency Currency
+        public static NPR Currency
         { 
             get 
             {
@@ -4677,7 +4677,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("NZD");
+        private static readonly NZD s_Currency = new NZD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NZD", 554) {
             EnglishName = @"New Zealand Dollar",
@@ -4690,7 +4690,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".</value>
-        public static Currency Currency
+        public static NZD Currency
         { 
             get 
             {
@@ -4720,7 +4720,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("OMR");
+        private static readonly OMR s_Currency = new OMR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("OMR", 512) {
             EnglishName = @"Rial Omani",
@@ -4733,7 +4733,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rial Omani".</value>
-        public static Currency Currency
+        public static OMR Currency
         { 
             get 
             {
@@ -4763,7 +4763,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PAB");
+        private static readonly PAB s_Currency = new PAB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PAB", 590) {
             EnglishName = @"Balboa",
@@ -4776,7 +4776,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Balboa".</value>
-        public static Currency Currency
+        public static PAB Currency
         { 
             get 
             {
@@ -4806,7 +4806,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PEN");
+        private static readonly PEN s_Currency = new PEN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PEN", 604) {
             EnglishName = @"Nuevo Sol",
@@ -4819,7 +4819,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".</value>
-        public static Currency Currency
+        public static PEN Currency
         { 
             get 
             {
@@ -4849,7 +4849,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PGK");
+        private static readonly PGK s_Currency = new PGK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PGK", 598) {
             EnglishName = @"Kina",
@@ -4862,7 +4862,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kina".</value>
-        public static Currency Currency
+        public static PGK Currency
         { 
             get 
             {
@@ -4892,7 +4892,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PHP");
+        private static readonly PHP s_Currency = new PHP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PHP", 608) {
             EnglishName = @"Philippine Peso",
@@ -4905,7 +4905,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Philippine Peso".</value>
-        public static Currency Currency
+        public static PHP Currency
         { 
             get 
             {
@@ -4935,7 +4935,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PKR");
+        private static readonly PKR s_Currency = new PKR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PKR", 586) {
             EnglishName = @"Pakistan Rupee",
@@ -4948,7 +4948,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".</value>
-        public static Currency Currency
+        public static PKR Currency
         { 
             get 
             {
@@ -4978,7 +4978,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PLN");
+        private static readonly PLN s_Currency = new PLN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PLN", 985) {
             EnglishName = @"Zloty",
@@ -4991,7 +4991,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
-        public static Currency Currency
+        public static PLN Currency
         { 
             get 
             {
@@ -5021,7 +5021,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("PYG");
+        private static readonly PYG s_Currency = new PYG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PYG", 600) {
             EnglishName = @"Guarani",
@@ -5034,7 +5034,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guarani".</value>
-        public static Currency Currency
+        public static PYG Currency
         { 
             get 
             {
@@ -5064,7 +5064,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("QAR");
+        private static readonly QAR s_Currency = new QAR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("QAR", 634) {
             EnglishName = @"Qatari Rial",
@@ -5077,7 +5077,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Qatari Rial".</value>
-        public static Currency Currency
+        public static QAR Currency
         { 
             get 
             {
@@ -5107,7 +5107,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
     {
-        private static readonly Currency s_Currency = new Currency("RON");
+        private static readonly RON s_Currency = new RON();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RON", 946) {
             EnglishName = @"New Romanian Leu",
@@ -5120,7 +5120,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".</value>
-        public static Currency Currency
+        public static RON Currency
         { 
             get 
             {
@@ -5150,7 +5150,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("RSD");
+        private static readonly RSD s_Currency = new RSD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RSD", 941) {
             EnglishName = @"Serbian Dinar",
@@ -5163,7 +5163,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
-        public static Currency Currency
+        public static RSD Currency
         { 
             get 
             {
@@ -5193,7 +5193,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("RUB");
+        private static readonly RUB s_Currency = new RUB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RUB", 643) {
             EnglishName = @"Russian Ruble",
@@ -5206,7 +5206,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
-        public static Currency Currency
+        public static RUB Currency
         { 
             get 
             {
@@ -5236,7 +5236,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("RWF");
+        private static readonly RWF s_Currency = new RWF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RWF", 646) {
             EnglishName = @"Rwanda Franc",
@@ -5249,7 +5249,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".</value>
-        public static Currency Currency
+        public static RWF Currency
         { 
             get 
             {
@@ -5279,7 +5279,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SAR");
+        private static readonly SAR s_Currency = new SAR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SAR", 682) {
             EnglishName = @"Saudi Riyal",
@@ -5292,7 +5292,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".</value>
-        public static Currency Currency
+        public static SAR Currency
         { 
             get 
             {
@@ -5322,7 +5322,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SBD");
+        private static readonly SBD s_Currency = new SBD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SBD", 90) {
             EnglishName = @"Solomon Islands Dollar",
@@ -5335,7 +5335,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".</value>
-        public static Currency Currency
+        public static SBD Currency
         { 
             get 
             {
@@ -5365,7 +5365,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SCR");
+        private static readonly SCR s_Currency = new SCR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SCR", 690) {
             EnglishName = @"Seychelles Rupee",
@@ -5378,7 +5378,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".</value>
-        public static Currency Currency
+        public static SCR Currency
         { 
             get 
             {
@@ -5408,7 +5408,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SDG");
+        private static readonly SDG s_Currency = new SDG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SDG", 938) {
             EnglishName = @"Sudanese Pound",
@@ -5421,7 +5421,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
-        public static Currency Currency
+        public static SDG Currency
         { 
             get 
             {
@@ -5451,7 +5451,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SEK");
+        private static readonly SEK s_Currency = new SEK();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SEK", 752) {
             EnglishName = @"Swedish Krona",
@@ -5464,7 +5464,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swedish Krona".</value>
-        public static Currency Currency
+        public static SEK Currency
         { 
             get 
             {
@@ -5494,7 +5494,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SGD");
+        private static readonly SGD s_Currency = new SGD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SGD", 702) {
             EnglishName = @"Singapore Dollar",
@@ -5507,7 +5507,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".</value>
-        public static Currency Currency
+        public static SGD Currency
         { 
             get 
             {
@@ -5537,7 +5537,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SHP");
+        private static readonly SHP s_Currency = new SHP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SHP", 654) {
             EnglishName = @"Saint Helena Pound",
@@ -5550,7 +5550,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".</value>
-        public static Currency Currency
+        public static SHP Currency
         { 
             get 
             {
@@ -5580,7 +5580,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SLL");
+        private static readonly SLL s_Currency = new SLL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SLL", 694) {
             EnglishName = @"Leone",
@@ -5593,7 +5593,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Leone".</value>
-        public static Currency Currency
+        public static SLL Currency
         { 
             get 
             {
@@ -5623,7 +5623,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SOS");
+        private static readonly SOS s_Currency = new SOS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SOS", 706) {
             EnglishName = @"Somali Shilling",
@@ -5636,7 +5636,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somali Shilling".</value>
-        public static Currency Currency
+        public static SOS Currency
         { 
             get 
             {
@@ -5666,7 +5666,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SRD");
+        private static readonly SRD s_Currency = new SRD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SRD", 968) {
             EnglishName = @"Surinam Dollar",
@@ -5679,7 +5679,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".</value>
-        public static Currency Currency
+        public static SRD Currency
         { 
             get 
             {
@@ -5709,7 +5709,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SSP");
+        private static readonly SSP s_Currency = new SSP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SSP", 728) {
             EnglishName = @"South Sudanese Pound",
@@ -5722,7 +5722,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".</value>
-        public static Currency Currency
+        public static SSP Currency
         { 
             get 
             {
@@ -5752,7 +5752,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("STD");
+        private static readonly STD s_Currency = new STD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("STD", 678) {
             EnglishName = @"Dobra",
@@ -5765,7 +5765,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dobra".</value>
-        public static Currency Currency
+        public static STD Currency
         { 
             get 
             {
@@ -5795,7 +5795,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SVC");
+        private static readonly SVC s_Currency = new SVC();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SVC", 222) {
             EnglishName = @"El Salvador Colon",
@@ -5808,7 +5808,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".</value>
-        public static Currency Currency
+        public static SVC Currency
         { 
             get 
             {
@@ -5838,7 +5838,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SYP");
+        private static readonly SYP s_Currency = new SYP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SYP", 760) {
             EnglishName = @"Syrian Pound",
@@ -5851,7 +5851,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syrian Pound".</value>
-        public static Currency Currency
+        public static SYP Currency
         { 
             get 
             {
@@ -5881,7 +5881,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("SZL");
+        private static readonly SZL s_Currency = new SZL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SZL", 748) {
             EnglishName = @"Lilangeni",
@@ -5894,7 +5894,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lilangeni".</value>
-        public static Currency Currency
+        public static SZL Currency
         { 
             get 
             {
@@ -5924,7 +5924,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("THB");
+        private static readonly THB s_Currency = new THB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("THB", 764) {
             EnglishName = @"Baht",
@@ -5937,7 +5937,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Baht".</value>
-        public static Currency Currency
+        public static THB Currency
         { 
             get 
             {
@@ -5967,7 +5967,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TJS");
+        private static readonly TJS s_Currency = new TJS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TJS", 972) {
             EnglishName = @"Somoni",
@@ -5980,7 +5980,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somoni".</value>
-        public static Currency Currency
+        public static TJS Currency
         { 
             get 
             {
@@ -6010,7 +6010,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TMT");
+        private static readonly TMT s_Currency = new TMT();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TMT", 934) {
             EnglishName = @"Turkmenistan New Manat",
@@ -6023,7 +6023,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".</value>
-        public static Currency Currency
+        public static TMT Currency
         { 
             get 
             {
@@ -6053,7 +6053,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TND");
+        private static readonly TND s_Currency = new TND();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TND", 788) {
             EnglishName = @"Tunisian Dinar",
@@ -6066,7 +6066,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".</value>
-        public static Currency Currency
+        public static TND Currency
         { 
             get 
             {
@@ -6096,7 +6096,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TOP");
+        private static readonly TOP s_Currency = new TOP();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TOP", 776) {
             EnglishName = @"Pa’anga",
@@ -6109,7 +6109,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pa’anga".</value>
-        public static Currency Currency
+        public static TOP Currency
         { 
             get 
             {
@@ -6139,7 +6139,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TRY");
+        private static readonly TRY s_Currency = new TRY();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TRY", 949) {
             EnglishName = @"Turkish Lira",
@@ -6152,7 +6152,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkish Lira".</value>
-        public static Currency Currency
+        public static TRY Currency
         { 
             get 
             {
@@ -6182,7 +6182,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TTD");
+        private static readonly TTD s_Currency = new TTD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TTD", 780) {
             EnglishName = @"Trinidad and Tobago Dollar",
@@ -6195,7 +6195,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".</value>
-        public static Currency Currency
+        public static TTD Currency
         { 
             get 
             {
@@ -6225,7 +6225,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TWD");
+        private static readonly TWD s_Currency = new TWD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TWD", 901) {
             EnglishName = @"New Taiwan Dollar",
@@ -6238,7 +6238,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".</value>
-        public static Currency Currency
+        public static TWD Currency
         { 
             get 
             {
@@ -6268,7 +6268,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("TZS");
+        private static readonly TZS s_Currency = new TZS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TZS", 834) {
             EnglishName = @"Tanzanian Shilling",
@@ -6281,7 +6281,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".</value>
-        public static Currency Currency
+        public static TZS Currency
         { 
             get 
             {
@@ -6311,7 +6311,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
     {
-        private static readonly Currency s_Currency = new Currency("UAH");
+        private static readonly UAH s_Currency = new UAH();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UAH", 980) {
             EnglishName = @"Hryvnia",
@@ -6324,7 +6324,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hryvnia".</value>
-        public static Currency Currency
+        public static UAH Currency
         { 
             get 
             {
@@ -6354,7 +6354,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
     {
-        private static readonly Currency s_Currency = new Currency("UGX");
+        private static readonly UGX s_Currency = new UGX();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UGX", 800) {
             EnglishName = @"Uganda Shilling",
@@ -6367,7 +6367,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
-        public static Currency Currency
+        public static UGX Currency
         { 
             get 
             {
@@ -6397,7 +6397,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("USD");
+        private static readonly USD s_Currency = new USD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("USD", 840) {
             EnglishName = @"US Dollar",
@@ -6410,7 +6410,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar".</value>
-        public static Currency Currency
+        public static USD Currency
         { 
             get 
             {
@@ -6440,7 +6440,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
     {
-        private static readonly Currency s_Currency = new Currency("USN");
+        private static readonly USN s_Currency = new USN();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("USN", 997) {
             EnglishName = @"US Dollar (Next day)",
@@ -6454,7 +6454,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".</value>
-        public static Currency Currency
+        public static USN Currency
         { 
             get 
             {
@@ -6484,7 +6484,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
     {
-        private static readonly Currency s_Currency = new Currency("UYI");
+        private static readonly UYI s_Currency = new UYI();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UYI", 940) {
             EnglishName = @"Uruguay Peso en Unidades Indexadas (URUIURUI)",
@@ -6498,7 +6498,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".</value>
-        public static Currency Currency
+        public static UYI Currency
         { 
             get 
             {
@@ -6528,7 +6528,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
     {
-        private static readonly Currency s_Currency = new Currency("UYU");
+        private static readonly UYU s_Currency = new UYU();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UYU", 858) {
             EnglishName = @"Peso Uruguayo",
@@ -6541,7 +6541,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".</value>
-        public static Currency Currency
+        public static UYU Currency
         { 
             get 
             {
@@ -6571,7 +6571,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("UZS");
+        private static readonly UZS s_Currency = new UZS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UZS", 860) {
             EnglishName = @"Uzbekistan Sum",
@@ -6584,7 +6584,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".</value>
-        public static Currency Currency
+        public static UZS Currency
         { 
             get 
             {
@@ -6614,7 +6614,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("VEF");
+        private static readonly VEF s_Currency = new VEF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VEF", 937) {
             EnglishName = @"Bolivar",
@@ -6627,7 +6627,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
-        public static Currency Currency
+        public static VEF Currency
         { 
             get 
             {
@@ -6657,7 +6657,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
     {
-        private static readonly Currency s_Currency = new Currency("VND");
+        private static readonly VND s_Currency = new VND();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VND", 704) {
             EnglishName = @"Dong",
@@ -6670,7 +6670,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dong".</value>
-        public static Currency Currency
+        public static VND Currency
         { 
             get 
             {
@@ -6700,7 +6700,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
     {
-        private static readonly Currency s_Currency = new Currency("VUV");
+        private static readonly VUV s_Currency = new VUV();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VUV", 548) {
             EnglishName = @"Vatu",
@@ -6713,7 +6713,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Vatu".</value>
-        public static Currency Currency
+        public static VUV Currency
         { 
             get 
             {
@@ -6743,7 +6743,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
     {
-        private static readonly Currency s_Currency = new Currency("WST");
+        private static readonly WST s_Currency = new WST();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("WST", 882) {
             EnglishName = @"Tala",
@@ -6756,7 +6756,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tala".</value>
-        public static Currency Currency
+        public static WST Currency
         { 
             get 
             {
@@ -6786,7 +6786,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XAF");
+        private static readonly XAF s_Currency = new XAF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAF", 950) {
             EnglishName = @"CFA Franc BEAC",
@@ -6799,7 +6799,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".</value>
-        public static Currency Currency
+        public static XAF Currency
         { 
             get 
             {
@@ -6829,7 +6829,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XAG");
+        private static readonly XAG s_Currency = new XAG();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAG", 961) {
             EnglishName = @"Silver",
@@ -6841,7 +6841,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Silver".</value>
-        public static Currency Currency
+        public static XAG Currency
         { 
             get 
             {
@@ -6871,7 +6871,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XAU");
+        private static readonly XAU s_Currency = new XAU();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAU", 959) {
             EnglishName = @"Gold",
@@ -6883,7 +6883,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold".</value>
-        public static Currency Currency
+        public static XAU Currency
         { 
             get 
             {
@@ -6913,7 +6913,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XBA");
+        private static readonly XBA s_Currency = new XBA();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBA", 955) {
             EnglishName = @"Bond Markets Unit European Composite Unit (EURCO)",
@@ -6925,7 +6925,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".</value>
-        public static Currency Currency
+        public static XBA Currency
         { 
             get 
             {
@@ -6955,7 +6955,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XBB");
+        private static readonly XBB s_Currency = new XBB();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBB", 956) {
             EnglishName = @"Bond Markets Unit European Monetary Unit (E.M.U.-6)",
@@ -6967,7 +6967,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".</value>
-        public static Currency Currency
+        public static XBB Currency
         { 
             get 
             {
@@ -6997,7 +6997,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XBC");
+        private static readonly XBC s_Currency = new XBC();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBC", 957) {
             EnglishName = @"Bond Markets Unit European Unit of Account 9 (E.U.A.-9)",
@@ -7009,7 +7009,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".</value>
-        public static Currency Currency
+        public static XBC Currency
         { 
             get 
             {
@@ -7039,7 +7039,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XBD");
+        private static readonly XBD s_Currency = new XBD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBD", 958) {
             EnglishName = @"Bond Markets Unit European Unit of Account 17 (E.U.A.-17)",
@@ -7051,7 +7051,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".</value>
-        public static Currency Currency
+        public static XBD Currency
         { 
             get 
             {
@@ -7081,7 +7081,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XCD");
+        private static readonly XCD s_Currency = new XCD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XCD", 951) {
             EnglishName = @"East Caribbean Dollar",
@@ -7094,7 +7094,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".</value>
-        public static Currency Currency
+        public static XCD Currency
         { 
             get 
             {
@@ -7124,7 +7124,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XDR");
+        private static readonly XDR s_Currency = new XDR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XDR", 960) {
             EnglishName = @"SDR (Special Drawing Right)",
@@ -7136,7 +7136,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".</value>
-        public static Currency Currency
+        public static XDR Currency
         { 
             get 
             {
@@ -7166,7 +7166,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XOF");
+        private static readonly XOF s_Currency = new XOF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XOF", 952) {
             EnglishName = @"CFA Franc BCEAO",
@@ -7179,7 +7179,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".</value>
-        public static Currency Currency
+        public static XOF Currency
         { 
             get 
             {
@@ -7209,7 +7209,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XPD");
+        private static readonly XPD s_Currency = new XPD();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPD", 964) {
             EnglishName = @"Palladium",
@@ -7221,7 +7221,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Palladium".</value>
-        public static Currency Currency
+        public static XPD Currency
         { 
             get 
             {
@@ -7251,7 +7251,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XPF");
+        private static readonly XPF s_Currency = new XPF();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPF", 953) {
             EnglishName = @"CFP Franc",
@@ -7264,7 +7264,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFP Franc".</value>
-        public static Currency Currency
+        public static XPF Currency
         { 
             get 
             {
@@ -7294,7 +7294,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XPT");
+        private static readonly XPT s_Currency = new XPT();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPT", 962) {
             EnglishName = @"Platinum",
@@ -7306,7 +7306,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Platinum".</value>
-        public static Currency Currency
+        public static XPT Currency
         { 
             get 
             {
@@ -7336,7 +7336,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XSU");
+        private static readonly XSU s_Currency = new XSU();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XSU", 994) {
             EnglishName = @"Sucre",
@@ -7348,7 +7348,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
-        public static Currency Currency
+        public static XSU Currency
         { 
             get 
             {
@@ -7378,7 +7378,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XTS");
+        private static readonly XTS s_Currency = new XTS();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XTS", 963) {
             EnglishName = @"Codes specifically reserved for testing purposes",
@@ -7390,7 +7390,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".</value>
-        public static Currency Currency
+        public static XTS Currency
         { 
             get 
             {
@@ -7420,7 +7420,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XUA");
+        private static readonly XUA s_Currency = new XUA();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XUA", 965) {
             EnglishName = @"ADB Unit of Account",
@@ -7432,7 +7432,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".</value>
-        public static Currency Currency
+        public static XUA Currency
         { 
             get 
             {
@@ -7462,7 +7462,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
     {
-        private static readonly Currency s_Currency = new Currency("XXX");
+        private static readonly XXX s_Currency = new XXX();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XXX", 999) {
             EnglishName = @"The codes assigned for transactions where no currency is involved",
@@ -7474,7 +7474,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".</value>
-        public static Currency Currency
+        public static XXX Currency
         { 
             get 
             {
@@ -7504,7 +7504,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
     {
-        private static readonly Currency s_Currency = new Currency("YER");
+        private static readonly YER s_Currency = new YER();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("YER", 886) {
             EnglishName = @"Yemeni Rial",
@@ -7517,7 +7517,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".</value>
-        public static Currency Currency
+        public static YER Currency
         { 
             get 
             {
@@ -7547,7 +7547,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ZAR");
+        private static readonly ZAR s_Currency = new ZAR();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZAR", 710) {
             EnglishName = @"Rand",
@@ -7560,7 +7560,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rand".</value>
-        public static Currency Currency
+        public static ZAR Currency
         { 
             get 
             {
@@ -7590,7 +7590,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ZMW");
+        private static readonly ZMW s_Currency = new ZMW();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZMW", 967) {
             EnglishName = @"Zambian Kwacha",
@@ -7603,7 +7603,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
-        public static Currency Currency
+        public static ZMW Currency
         { 
             get 
             {
@@ -7633,7 +7633,7 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
     {
-        private static readonly Currency s_Currency = new Currency("ZWL");
+        private static readonly ZWL s_Currency = new ZWL();
 
         private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZWL", 932) {
             EnglishName = @"Zimbabwe Dollar",
@@ -7646,7 +7646,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
-        public static Currency Currency
+        public static ZWL Currency
         { 
             get 
             {

@@ -72,7 +72,7 @@ namespace Narvalo.Finance
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return s_Cache.GetOrAdd(code, GetCurrency_).AssumeNotNull();
+            return s_Cache.GetOrAdd(code, CreateCurrency_).AssumeNotNull();
         }
 
         /// <summary>
@@ -134,11 +134,6 @@ namespace Narvalo.Finance
             return Code;
         }
 
-        internal static TCurrency OfInternal<TCurrency>() where TCurrency : Currency
-        {
-            return Activator.CreateInstance(typeof(TCurrency), nonPublic: true) as TCurrency;
-        }
-
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
@@ -149,7 +144,7 @@ namespace Narvalo.Finance
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
-        private static Currency GetCurrency_(string code)
+        private static Currency CreateCurrency_(string code)
         {
             Contract.Requires(code != null);
             Contract.Requires(code.Length == 3);
@@ -163,7 +158,7 @@ namespace Narvalo.Finance
             return new Currency(code);
         }
     }
-    
+
     /// <content>
     /// Provides aliases for the most commonly used currencies.
     /// </content>

@@ -3,14 +3,21 @@
 namespace Narvalo
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
-    using Narvalo.Diagnostics.Benchmarking;
+    using Narvalo.BenchmarkCommon;
+    using Narvalo.Comparisons;
 
     public static class Program
     {
         public static void Main(string[] args)
+        {
+            Compare();
+        }
+
+        public static void Benchmark()
         {
             var processor = new BenchmarkProcessor {
                 DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,
@@ -32,6 +39,24 @@ namespace Narvalo
                 {
                     Console.WriteLine("- " + metric.ToString());
                 }
+            }
+        }
+
+        public static void Compare()
+        {
+            var processor = new BenchmarkComparisonProcessor {
+                DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,
+            };
+
+            //IEnumerable<BenchmarkMetricCollection> metrics
+            //    = processor.Process(
+            //        typeof(RemoveDiacriticsComparison),
+            //        RemoveDiacriticsComparison.GenerateTestData());
+            BenchmarkMetricCollection metrics = processor.Process(typeof(EmptyCtorComparison));
+
+            foreach (var item in metrics)
+            {
+                Console.WriteLine(item.ToString());
             }
         }
 

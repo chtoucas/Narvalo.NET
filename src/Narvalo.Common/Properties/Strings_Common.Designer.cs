@@ -70,15 +70,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: {1:N0} cps; ({2:N0} iterations in {3:N0} ticks; {4:N0} ticks per iteration).
-        /// </summary>
-        internal static string BenchmarkMetric_Metric_Format {
-            get {
-                return ResourceManager.GetString("BenchmarkMetric_Metric_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
         /// </summary>
         internal static string Configuration_MissingSection_Format {
