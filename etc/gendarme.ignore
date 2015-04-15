@@ -77,10 +77,13 @@ N: Narvalo.Configuration
 
 R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 #  ---------------------------------------------------------------
-T: Narvalo.Diagnostics.Benchmarking.BenchmarkRunner
 T: Narvalo.IO.ConcurrentFileFinder
 T: Narvalo.IO.FileFinder
 
-R: Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule
-#  -------------------------------------------------------
-T: Narvalo.Diagnostics.Benchmarking.BenchmarkProcessor
+# ==============================================================================
+# Narvalo.Finance (Defects to be reviewed or fixed)
+# ==============================================================================
+
+# ==============================================================================
+# Narvalo.Web (Defects to be reviewed or fixed)
+# ==============================================================================

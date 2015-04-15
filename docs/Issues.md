@@ -28,6 +28,12 @@ Narvalo.Common
 - Fix Gendarme errors (after refactoring).
 - Fix all ContractVerification(false).
 
+Narvalo.Finance
+---------------
+
+- Handle overflows.
+- BigMoney and BigMoney<TCurrency>.
+
 Narvalo.Web
 -----------
 

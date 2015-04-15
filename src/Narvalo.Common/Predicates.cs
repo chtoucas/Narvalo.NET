@@ -22,7 +22,7 @@ namespace Narvalo
             Justification = "[Intentionally] Method marked as MonoTODO.")]
         public static bool IsFlagsEnum(Type type)
         {
-            return type != null && type.IsEnum && type.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
+            return type != null && type.GetTypeInfo().IsEnum && type.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
 
         /// <summary>

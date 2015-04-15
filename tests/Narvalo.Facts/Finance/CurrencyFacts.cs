@@ -7,7 +7,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Currencies;
     using Xunit;
 
-    public static class EuroFacts
+    public static class CurrencyFacts
     {
         #region op_Equality()
 

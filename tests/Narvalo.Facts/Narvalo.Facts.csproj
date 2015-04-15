@@ -15,6 +15,8 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>f492fc7b</NuGetPackageImportStamp>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FakeItEasy, Version=1.25.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
@@ -94,7 +96,7 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
-    <Compile Include="Finance\EuroFacts.cs" />
+    <Compile Include="Finance\CurrencyFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
@@ -156,6 +158,10 @@
     <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
       <Project>{ed75e8bf-aca1-4b53-88f1-c3bd2ca16d54}</Project>
       <Name>Narvalo.Finance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Reliability\Narvalo.Reliability.csproj">
+      <Project>{853a6068-e459-4e5c-b478-21fb801f01fe}</Project>
+      <Name>Narvalo.Reliability</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
