@@ -31,7 +31,7 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
-            return Format.CurrentCulture("{0} {1:F2}", Currency.ToString(), Amount);
+            return Format.CurrentCulture("{0} {1:F2}", Currency.Code, Amount);
         }
 
         private static void ThrowIfCurrencyMismatch_(Money left, Money right)
@@ -62,7 +62,7 @@ namespace Narvalo.Finance
 
         public bool Equals(Money other)
         {
-            return Amount.Equals(other.Amount) && Currency.Equals(other.Currency);
+            return Amount == other.Amount && Currency.Equals(other.Currency);
         }
 
         public override bool Equals(object obj)

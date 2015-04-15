@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Internal;
@@ -37,6 +38,8 @@ namespace Narvalo.Finance
         {
             get
             {
+                Contract.Ensures(Contract.Result<TCurrency>() != null);
+
                 return s_Zero;
             }
         }
@@ -108,7 +111,7 @@ namespace Narvalo.Finance
 
         public bool Equals(Money other)
         {
-            return Amount.Equals(other.Amount) && CheckCurrency_(other);
+            return Amount == other.Amount && CheckCurrency_(other);
         }
 
         public override bool Equals(object obj)
@@ -132,7 +135,7 @@ namespace Narvalo.Finance
             {
                 int hash = 17;
                 hash = (23 * hash) + Amount.GetHashCode();
-                hash = (23 * hash) + typeof(TCurrency).GetHashCode();
+                hash = (23 * hash) + s_Currency.GetHashCode();
                 return hash;
             }
         }
@@ -146,7 +149,7 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
-            return Format.CurrentCulture("{0} {1:F2}", s_Currency.ToString(), Amount);
+            return Format.CurrentCulture("{0} {1:F2}", s_Currency.Code, Amount);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

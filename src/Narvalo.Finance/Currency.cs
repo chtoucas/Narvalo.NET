@@ -357,7 +357,7 @@ namespace Narvalo.Finance
                 return false;
             }
 
-            return this._code == other._code;
+            return Code == other.Code;
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
@@ -377,7 +377,7 @@ namespace Narvalo.Finance
                 return true;
             }
 
-            if (this.GetType() != obj.GetType())
+            if (GetType() != obj.GetType())
             {
                 // "obj" and "this" are not of the same type.
                 return false;
@@ -389,7 +389,8 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
         {
-            return _code.GetHashCode();
+            // REVIEW: Maybe we could cache the hashcode?
+            return Code.GetHashCode();
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
