@@ -14,18 +14,14 @@ Narvalo.NET
 #### General Purpose Libraries
 - **Narvalo.Cerbere**
   (_beta_,
-  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere),
-  soon [package](https://www.nuget.org/packages/Narvalo.Cerbere/)),
+  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere)),
   this library provides argument validation methods and Code Contracts helpers.
-  This is a portable class library targeting _Profile259_.
 - **Narvalo.Fx**
   (_alpha_,
-  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx),
-  soon [package](https://www.nuget.org/packages/Narvalo.Fx/)),
+  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx)),
   this library features implementations of some of the usual suspects from functional
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
   (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
-  This is a portable class library targeting _Profile259_.
 - **Narvalo.Common**
   (_alpha_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
