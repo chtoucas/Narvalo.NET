@@ -1,7 +1,11 @@
+# WARNING: Do not forget !src/Narvalo.Meta/ below.
+
 work/
 ApiPortabilityAnalysis*
 StyleCopViolations.xml
 TryOut.proj
+
+
 
 # Follow the sample ignore file from GitHub
 #   https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
@@ -34,6 +38,7 @@ build/
 *_p.c
 *.ilk
 *.meta
+!src/Narvalo.Meta/
 *.obj
 *.pch
 *.pdb
