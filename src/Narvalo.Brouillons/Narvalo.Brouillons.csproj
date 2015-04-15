@@ -335,6 +335,10 @@
       <Project>{ed75e8bf-aca1-4b53-88f1-c3bd2ca16d54}</Project>
       <Name>Narvalo.Finance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Fx\Narvalo.Fx.csproj">
+      <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
+      <Name>Narvalo.Fx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Web\Narvalo.Web.csproj">
       <Project>{56e3969f-5066-4702-a670-4c35fbd97201}</Project>
       <Name>Narvalo.Web</Name>

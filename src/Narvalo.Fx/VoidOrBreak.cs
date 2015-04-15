@@ -7,7 +7,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Properties;
+    using Narvalo.Fx.Properties;
 
     /// <seealso cref="Output{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
@@ -44,7 +44,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                throw new InvalidOperationException(Strings_Core.VoidOrBreak_BreakHasNoReason);
+                throw new InvalidOperationException(Strings_Fx.VoidOrBreak_BreakHasNoReason);
             }
         }
 

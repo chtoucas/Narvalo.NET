@@ -1,4 +1,0 @@
-﻿<#@ include file="..\CodeTemplates\Monad.Maybe.tt" #>
-<# EmitMonad(); #>
-
-<# EmitLinq(); #>

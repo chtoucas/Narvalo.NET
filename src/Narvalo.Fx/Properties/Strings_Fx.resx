@@ -117,43 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Require_ArgumentNullOrEmpty_Format" xml:space="preserve">
-    <value>La valeur de '{0}' est null ou vide.</value>
+  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
+    <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
   </data>
-  <data name="Require_ArgumentNullOrWhiteSpace_Format" xml:space="preserve">
-    <value>La valeur de '{0}' est null, vide ou ne contient que des espaces blancs.</value>
+  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
+    <value>A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property.</value>
   </data>
-  <data name="Require_ArgumentNull_Format" xml:space="preserve">
-    <value>La valeur de '{0}' est null.</value>
+  <data name="Output_CannotCastFailureToValue" xml:space="preserve">
+    <value>Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T.</value>
   </data>
-  <data name="Require_InvalidRange_Format" xml:space="preserve">
-    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
-  </data>
-  <data name="Require_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
-  </data>
-  <data name="Require_NotGreaterThan_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
-  </data>
-  <data name="Require_NotInRange_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
-  </data>
-  <data name="Require_NotLessThanOrEqualTo_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
-  </data>
-  <data name="Require_NotLessThan_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
-  </data>
-  <data name="Require_ObjectNull" xml:space="preserve">
-    <value>L'objet passé en paramètre est null.</value>
-  </data>
-  <data name="Require_PropertyNull" xml:space="preserve">
-    <value>La valeur de la propriété est null.</value>
-  </data>
-  <data name="Require_PropertyNullOrEmpty" xml:space="preserve">
-    <value>La valeur de la propriété est null ou vide.</value>
-  </data>
-  <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
-    <value>La valeur de la propriété est null, vide ou ne contient que des espaces blancs.</value>
+  <data name="Output_CannotCastSuccessToException" xml:space="preserve">
+    <value>Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state.</value>
   </data>
 </root>

@@ -28,6 +28,11 @@ Narvalo.Common
 - Fix Gendarme errors (after refactoring).
 - Fix all ContractVerification(false).
 
+Narvalo.Reliability
+-------------------
+
+- Very much a work in progress.
+
 Narvalo.Finance
 ---------------
 
@@ -91,6 +96,11 @@ Narvalo.Mvp
 
 Infrastructure
 --------------
+
+Update necessary following the new organization:
+- MSBuild
+- PSake
+- NuGet
 
 ### Continuous Integration
 

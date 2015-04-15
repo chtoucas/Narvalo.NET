@@ -65,45 +65,8 @@
     <Compile Include="Assume.cs" />
     <Compile Include="Acknowledge.cs" />
     <Compile Include="Check.cs" />
-    <Compile Include="Fx\Enumerable`1%24.cs" />
-    <Compile Include="Fx\Enumerator`1%24.cs" />
-    <Compile Include="Fx\Advanced\Enumerable`1%24.Maybe.cs" />
-    <Compile Include="Fx\Advanced\Enumerable`1%24.Output.cs" />
-    <Compile Include="Fx\Func.cs" />
-    <Compile Include="Fx\Advanced\Func`%24.Nullable.cs" />
-    <Compile Include="Fx\Advanced\Func`%24.cs" />
-    <Compile Include="Fx\Advanced\NamespaceDoc.cs" />
     <Compile Include="Format.cs" />
-    <Compile Include="Fx\Advanced\Action`%24.cs" />
-    <Compile Include="Fx\Either.cs" />
-    <Compile Include="Fx\Either`2.cs" />
-    <Compile Include="Fx\Advanced\Func`.Output%24.cs" />
-    <Compile Include="Fx\Output.cs" />
-    <Compile Include="Fx\Output.g.cs">
-      <DependentUpon>Output.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Output`1.cs" />
-    <Compile Include="Fx\Recursion.cs" />
-    <Compile Include="Fx\Switch.cs" />
-    <Compile Include="Fx\Switch`2%24.cs" />
-    <Compile Include="Fx\Switch`2.cs" />
-    <Compile Include="Fx\Maybe.cs" />
-    <Compile Include="Fx\Maybe.g.cs">
-      <DependentUpon>Maybe.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Maybe`1.cs" />
-    <Compile Include="Fx\NamespaceDoc.cs" />
-    <Compile Include="Fx\Advanced\Nullable`1%24.cs" />
-    <Compile Include="Fx\Sequence.cs" />
-    <Compile Include="Fx\Stubs.cs" />
-    <Compile Include="Fx\Stubs`1.cs" />
-    <Compile Include="Fx\Unit.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
-    <Compile Include="Fx\Advanced\Predicate`1%24.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Promise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,23 +82,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Core.resx</DependentUpon>
     </Compile>
-    <Compile Include="Fx\Stubs`2.cs" />
-    <Compile Include="Fx\VoidOrBreak.cs" />
-    <Compile Include="Fx\VoidOrError.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Monad.Maybe.tt" />
-    <None Include="CodeTemplates\Monad.Output.tt" />
-    <None Include="CodeTemplates\Monad.tt" />
-    <None Include="Fx\Maybe.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Maybe.g.cs</LastGenOutput>
-    </None>
-    <None Include="Fx\Output.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Output.g.cs</LastGenOutput>
-    </None>
     <None Include="Narvalo.Core.props">
       <SubType>Designer</SubType>
     </None>

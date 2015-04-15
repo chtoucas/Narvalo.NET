@@ -9,7 +9,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Properties;
+    using Narvalo.Fx.Properties;
 
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
@@ -243,7 +243,7 @@ namespace Narvalo.Fx
 
             if (!value.IsSome)
             {
-                throw new InvalidCastException(Strings_Core.Maybe_CannotCastNoneToValue);
+                throw new InvalidCastException(Strings_Fx.Maybe_CannotCastNoneToValue);
             }
 
             return value.Value;

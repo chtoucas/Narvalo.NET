@@ -62,33 +62,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T..
-        /// </summary>
-        internal static string Maybe_CannotCastNoneToValue {
-            get {
-                return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T..
-        /// </summary>
-        internal static string Output_CannotCastFailureToValue {
-            get {
-                return ResourceManager.GetString("Output_CannotCastFailureToValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state..
-        /// </summary>
-        internal static string Output_CannotCastSuccessToException {
-            get {
-                return ResourceManager.GetString("Output_CannotCastSuccessToException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null..
         /// </summary>
         internal static string Require_ArgumentNull_Format {
@@ -202,15 +175,6 @@ namespace Narvalo.Properties {
         internal static string Require_PropertyNullOrWhiteSpace {
             get {
                 return ResourceManager.GetString("Require_PropertyNullOrWhiteSpace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
-        /// </summary>
-        internal static string VoidOrBreak_BreakHasNoReason {
-            get {
-                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
             }
         }
     }

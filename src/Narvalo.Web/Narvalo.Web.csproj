@@ -188,6 +188,10 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Fx\Narvalo.Fx.csproj">
+      <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
+      <Name>Narvalo.Fx</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">

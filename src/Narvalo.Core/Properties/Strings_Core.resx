@@ -138,9 +138,6 @@
   <data name="Require_PropertyNullOrEmpty" xml:space="preserve">
     <value>The property value is null or empty.</value>
   </data>
-  <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
-    <value>Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T.</value>
-  </data>
   <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>The value of '{0}' is null.</value>
   </data>
@@ -152,15 +149,6 @@
   </data>
   <data name="Require_ArgumentNullOrWhiteSpace_Format" xml:space="preserve">
     <value>The value of '{0}' is null or empty, or contains only white-space characters.</value>
-  </data>
-  <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
-    <value>A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property.</value>
-  </data>
-  <data name="Output_CannotCastFailureToValue" xml:space="preserve">
-    <value>Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T.</value>
-  </data>
-  <data name="Output_CannotCastSuccessToException" xml:space="preserve">
-    <value>Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state.</value>
   </data>
   <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
     <value>The property value is null or empty, or contains only white-space characters.</value>
