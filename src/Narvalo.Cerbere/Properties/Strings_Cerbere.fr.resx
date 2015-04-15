@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Enforce_InvalidRange_Format" xml:space="preserve">
+    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
+  </data>
+  <data name="Enforce_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
+  </data>
+  <data name="Enforce_NotGreaterThan_Format" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
+  </data>
+  <data name="Enforce_NotInRange_Format" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
+  </data>
+  <data name="Enforce_NotLessThanOrEqualTo_Format" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
+  </data>
+  <data name="Enforce_NotLessThan_Format" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
+  </data>
   <data name="Require_ArgumentNullOrEmpty_Format" xml:space="preserve">
     <value>La valeur de '{0}' est null ou vide.</value>
   </data>
@@ -125,24 +143,6 @@
   </data>
   <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>La valeur de '{0}' est null.</value>
-  </data>
-  <data name="Require_InvalidRange_Format" xml:space="preserve">
-    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
-  </data>
-  <data name="Require_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
-  </data>
-  <data name="Require_NotGreaterThan_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
-  </data>
-  <data name="Require_NotInRange_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
-  </data>
-  <data name="Require_NotLessThanOrEqualTo_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
-  </data>
-  <data name="Require_NotLessThan_Format" xml:space="preserve">
-    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
   </data>
   <data name="Require_ObjectNull" xml:space="preserve">
     <value>L'objet passé en paramètre est null.</value>

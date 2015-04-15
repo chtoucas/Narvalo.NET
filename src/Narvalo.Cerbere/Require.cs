@@ -37,7 +37,7 @@ namespace Narvalo
         {
             if (@this == null)
             {
-                throw new ArgumentNullException("this", Strings_Guards.Require_ObjectNull);
+                throw new ArgumentNullException("this", Strings_Cerbere.Require_ObjectNull);
             }
 
             Contract.EndContractBlock();
@@ -55,7 +55,7 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value", Strings_Guards.Require_PropertyNull);
+                throw new ArgumentNullException("value", Strings_Cerbere.Require_PropertyNull);
             }
 
             Contract.EndContractBlock();
@@ -75,7 +75,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(Strings_Guards.Require_PropertyNullOrEmpty, "value");
+                throw new ArgumentException(Strings_Cerbere.Require_PropertyNullOrEmpty, "value");
             }
 
             Contract.EndContractBlock();
@@ -97,7 +97,7 @@ namespace Narvalo
 
             if (String.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(Strings_Guards.Require_PropertyNullOrWhiteSpace, "value");
+                throw new ArgumentException(Strings_Cerbere.Require_PropertyNullOrWhiteSpace, "value");
             }
 
             Contract.EndContractBlock();
@@ -119,7 +119,7 @@ namespace Narvalo
             {
                 throw new ArgumentNullException(
                     parameterName,
-                    Format.Resource(Strings_Guards.Require_ArgumentNull_Format, parameterName));
+                    Format.Resource(Strings_Cerbere.Require_ArgumentNull_Format, parameterName));
             }
 
             Contract.EndContractBlock();
@@ -142,7 +142,7 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(
-                    Format.Resource(Strings_Guards.Require_ArgumentNullOrEmpty_Format, parameterName),
+                    Format.Resource(Strings_Cerbere.Require_ArgumentNullOrEmpty_Format, parameterName),
                     parameterName);
             }
 
@@ -168,7 +168,7 @@ namespace Narvalo
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(
-                    Format.Resource(Strings_Guards.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
+                    Format.Resource(Strings_Cerbere.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
                     parameterName);
             }
 
@@ -198,7 +198,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    Format.Resource(Strings_Cerbere.Enforce_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -227,7 +227,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    Format.Resource(Strings_Cerbere.Enforce_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -251,7 +251,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotGreaterThan_Format, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -275,7 +275,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotGreaterThan_Format, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotGreaterThan_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -299,7 +299,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -323,7 +323,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
 
             Contract.EndContractBlock();
@@ -347,7 +347,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotLessThan_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -371,7 +371,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotLessThan_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotLessThan_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -395,7 +395,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -419,7 +419,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Guards.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.Enforce_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
 
             Contract.EndContractBlock();
@@ -436,7 +436,7 @@ namespace Narvalo
             {
                 throw new ArgumentException(
                     Format.Resource(
-                        Strings_Guards.Require_InvalidRange_Format,
+                        Strings_Cerbere.Enforce_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),
                     "minInclusive");
@@ -456,7 +456,7 @@ namespace Narvalo
             {
                 throw new ArgumentException(
                     Format.Resource(
-                        Strings_Guards.Require_InvalidRange_Format,
+                        Strings_Cerbere.Enforce_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),
                     "minInclusive");

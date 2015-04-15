@@ -23,14 +23,14 @@ namespace Narvalo.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Guards {
+    internal class Strings_Cerbere {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Guards() {
+        internal Strings_Cerbere() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Narvalo.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Guards", typeof(Strings_Guards).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Cerbere", typeof(Strings_Cerbere).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,6 +58,60 @@ namespace Narvalo.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
+        /// </summary>
+        internal static string Enforce_InvalidRange_Format {
+            get {
+                return ResourceManager.GetString("Enforce_InvalidRange_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
+        /// </summary>
+        internal static string Enforce_NotGreaterThan_Format {
+            get {
+                return ResourceManager.GetString("Enforce_NotGreaterThan_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
+        /// </summary>
+        internal static string Enforce_NotGreaterThanOrEqualTo_Format {
+            get {
+                return ResourceManager.GetString("Enforce_NotGreaterThanOrEqualTo_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
+        /// </summary>
+        internal static string Enforce_NotInRange_Format {
+            get {
+                return ResourceManager.GetString("Enforce_NotInRange_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
+        /// </summary>
+        internal static string Enforce_NotLessThan_Format {
+            get {
+                return ResourceManager.GetString("Enforce_NotLessThan_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
+        /// </summary>
+        internal static string Enforce_NotLessThanOrEqualTo_Format {
+            get {
+                return ResourceManager.GetString("Enforce_NotLessThanOrEqualTo_Format", resourceCulture);
             }
         }
         
@@ -85,60 +139,6 @@ namespace Narvalo.Properties {
         internal static string Require_ArgumentNullOrWhiteSpace_Format {
             get {
                 return ResourceManager.GetString("Require_ArgumentNullOrWhiteSpace_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
-        /// </summary>
-        internal static string Require_InvalidRange_Format {
-            get {
-                return ResourceManager.GetString("Require_InvalidRange_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
-        /// </summary>
-        internal static string Require_NotGreaterThan_Format {
-            get {
-                return ResourceManager.GetString("Require_NotGreaterThan_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string Require_NotGreaterThanOrEqualTo_Format {
-            get {
-                return ResourceManager.GetString("Require_NotGreaterThanOrEqualTo_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
-        /// </summary>
-        internal static string Require_NotInRange_Format {
-            get {
-                return ResourceManager.GetString("Require_NotInRange_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
-        /// </summary>
-        internal static string Require_NotLessThan_Format {
-            get {
-                return ResourceManager.GetString("Require_NotLessThan_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string Require_NotLessThanOrEqualTo_Format {
-            get {
-                return ResourceManager.GetString("Require_NotLessThanOrEqualTo_Format", resourceCulture);
             }
         }
         

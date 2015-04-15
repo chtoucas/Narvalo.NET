@@ -101,6 +101,7 @@ Update necessary following the new organization:
 - MSBuild
 - PSake
 - NuGet
+- Retire Narvalo.Core
 
 ### Continuous Integration
 

@@ -14,7 +14,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="CodeTemplates\Monad.Maybe.tt" />
     <None Include="CodeTemplates\Monad.Output.tt" />
     <None Include="CodeTemplates\Monad.tt" />

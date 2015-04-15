@@ -35,12 +35,12 @@
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
-A: Narvalo.Guards
+A: Narvalo.Cerbere
 A: Narvalo.Fx
 
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
-A: Narvalo.Guards
+A: Narvalo.Cerbere
 A: Narvalo.Fx
 
 # Narvalo.Fx
@@ -64,12 +64,6 @@ N: Narvalo.Fx.Internal
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
 # Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Collections
-
-# Narvalo.Classic
-# ---------------
-
-R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
-# Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Configuration
 
 # ==============================================================================

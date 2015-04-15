@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
-    <AssemblyName>Narvalo.Guards</AssemblyName>
+    <AssemblyName>Narvalo.Cerbere</AssemblyName>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -67,19 +67,20 @@
     <Compile Include="Format.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="Predicates.cs" />
     <Compile Include="Promise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enforce.cs" />
-    <Compile Include="Properties\Strings_Guards.fr.Designer.cs">
+    <Compile Include="Properties\Strings_Cerbere.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings_Guards.fr.resx</DependentUpon>
+      <DependentUpon>Strings_Cerbere.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Require.cs" />
-    <Compile Include="Properties\Strings_Guards.Designer.cs">
+    <Compile Include="Properties\Strings_Cerbere.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings_Guards.resx</DependentUpon>
+      <DependentUpon>Strings_Cerbere.resx</DependentUpon>
     </Compile>
     <Compile Include="ValidatedNotNullAttribute.cs" />
   </ItemGroup>
@@ -93,13 +94,13 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Strings_Guards.fr.resx">
+    <EmbeddedResource Include="Properties\Strings_Cerbere.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings_Guards.fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Cerbere.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Strings_Guards.resx">
+    <EmbeddedResource Include="Properties\Strings_Cerbere.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings_Guards.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings_Cerbere.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

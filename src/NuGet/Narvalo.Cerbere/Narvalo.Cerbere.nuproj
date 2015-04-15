@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
+
+  <PropertyGroup>
+    <NuId>Narvalo.Cerbere</NuId>
+    <NuTitle>Narvalo.Cerbere</NuTitle>
+    <NuDescription>
+      This package provides argument validation methods and Code Contracts helpers.
+
+      This is a portable class library targeting Profile259. The behaviour is 100% identical across all supported platforms; this is achieved without making use of the bait and switch PCL trick.
+
+      This library fully passes FxCop, Gendarme and Code Contracts static analysis.
+
+      A code contracts reference assembly is also included if you need it.
+    </NuDescription>
+    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
+    <NuTags>Require, Assert, Guard, Check, Validate, CodeContracts, Contracts</NuTags>
+    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
+
+    <NuReferences>
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Cerbere.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
+    <NuFiles>
+      <![CDATA[
+<file src="Narvalo.Cerbere.dll" target="lib\$(Profile259)\" />
+<file src="Narvalo.Cerbere.pdb" target="lib\$(Profile259)\" />
+<file src="Narvalo.Cerbere.xml" target="lib\$(Profile259)\" />
+<file src="CodeContracts\Narvalo.Cerbere.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Cerbere.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+<file src="fr\Narvalo.Cerbere.resources.dll" target="lib\$(Profile259)\fr\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+</Project>

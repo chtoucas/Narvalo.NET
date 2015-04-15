@@ -3,11 +3,11 @@
   <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
 
   <PropertyGroup>
-    <NuId>Narvalo.Core</NuId>
-    <NuTitle>Narvalo.Core</NuTitle>
+    <NuId>Narvalo.Fx</NuId>
+    <NuTitle>Narvalo.Fx</NuTitle>
     <NuDescription>
       <![CDATA[
-      This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions. It also provides a few Code Contracts helpers.
+      This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
 
       This is a portable class library targeting Profile259. The behaviour is 100% identical across all supported platforms; this is achieved without making use of the bait and switch PCL trick.
 
@@ -17,25 +17,25 @@
       ]]>
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>Maybe, Option, Error, Either, Require, Linq, Monad, Functional, CodeContracts, Contracts</NuTags>
+    <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[
       <references>
-        <reference file="Narvalo.Core.dll" />
+        <reference file="Narvalo.Fx.dll" />
       </references>
       ]]>
     </NuReferences>
 
     <NuFiles>
       <![CDATA[
-<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
-<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
-<file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
-<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
-<file src="fr\Narvalo.Core.resources.dll" target="lib\$(Profile259)\fr\" />
+<file src="Narvalo.Fx.dll" target="lib\$(Profile259)\" />
+<file src="Narvalo.Fx.pdb" target="lib\$(Profile259)\" />
+<file src="Narvalo.Fx.xml" target="lib\$(Profile259)\" />
+<file src="CodeContracts\Narvalo.Fx.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Fx.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+<file src="fr\Narvalo.Fx.resources.dll" target="lib\$(Profile259)\fr\" />
       ]]>
     </NuFiles>
   </PropertyGroup>
