@@ -31,6 +31,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Output.g.cs</LastGenOutput>
     </None>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advanced\Action`%24.cs" />

@@ -98,7 +98,7 @@ Task FullClean `
 }
 
 Task OpenCover `
-    -Description 'Run OpenCover against Narvalo.Core (EXTREMELY SLOW).' `
+    -Description 'Run OpenCover against core libraries (EXTREMELY SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Cover `
 {
@@ -133,7 +133,7 @@ Task CodeAnalysis `
 }
 
 Task GendarmeAnalysis `
-    -Description 'Run Mono.Gendarme against Narvalo.Core & Narvalo.Common (SLOW).' `
+    -Description 'Run Mono.Gendarme against core libraries (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
@@ -725,7 +725,8 @@ function Invoke-Gendarme {
       --confidence all `
       --ignore "$ignoreFile" `
       --log "$logFile" `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Core.dll") `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Cerbere.dll") `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Fx.dll") `
       (Get-LocalPath "work\bin\$Configuration\Narvalo.Common.dll")
 }
 
@@ -751,8 +752,7 @@ function Invoke-OpenCover {
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
     $reportDirectory = Get-LocalPath 'work\log\opencover'
-    #$reportFilters = '+Narvalo.Core;+Narvalo.Common;+Narvalo.Web'
-    #$reportFilters = '+Narvalo.Core'
+    #$reportFilters = '+Narvalo.Cerbere;+Narvalo.Fx;+Narvalo.Common;+Narvalo.Web'
     $reportFilters = '+*'
 
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve

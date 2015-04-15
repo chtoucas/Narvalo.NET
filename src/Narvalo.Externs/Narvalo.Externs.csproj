@@ -69,9 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Require.cs">
-      <Link>Internal\Require.cs</Link>
-    </Compile>
     <Compile Include="Autofac\AutofacPresenterFactory.cs" />
     <Compile Include="Autofac\AutofacRouteHandler`1.cs" />
     <Compile Include="Autofac\ContainerBuilder%24.cs" />
@@ -91,6 +88,10 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
       <Name>Narvalo.Mvp</Name>
